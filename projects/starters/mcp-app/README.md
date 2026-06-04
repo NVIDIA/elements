@@ -16,9 +16,9 @@ After building the app, configure a local MCP client with the compiled stdio ent
 ```json
 {
   "mcpServers": {
-    "elements-mcp-app": {
+    "elements-demo-mcp-app": {
       "command": "node",
-      "args": ["/path/to/mcp-app/dist/main.js"]
+      "args": ["/path/to/mcp-app/dist/index.js"]
     }
   }
 }

@@ -156,7 +156,7 @@ yargsInstance.command(
   'Start the MCP server',
   () => {},
   async () => {
-    const { startMcpServer } = await import('./mcp/mcp.js');
+    const { startMcpServer } = await import('./mcp/index.js');
     await startMcpServer();
   }
 );

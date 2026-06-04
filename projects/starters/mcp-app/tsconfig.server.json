@@ -9,10 +9,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
+    "rootDir": "src",
     "outDir": "dist",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true
   },
-  "include": ["main.ts", "server.ts"]
+  "include": ["src/index.ts"]
 }

@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en" nve-theme="" nve-transition="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elements Token Explorer</title>
+    <style>
+      :root[nve-theme=''] {
+        color-scheme: light dark;
+      }
+
+      body:not(:has(nve-page)) {
+        padding: var(--nve-ref-space-sm);
+      }
+    </style>
+  </head>
+
+  <body>
+    <script type="module">
+      import '@nvidia-elements/themes/index.css';
+      import '@nvidia-elements/themes/dark.css';
+      import '@nvidia-elements/themes/high-contrast.css';
+      import '@nvidia-elements/styles/typography.css';
+      import '@nvidia-elements/styles/layout.css';
+      import '@nvidia-elements/core/bundles/index.js';
+      import { App, applyDocumentTheme } from '@modelcontextprotocol/ext-apps';
+
+      function applyHostContext(context) {
+        if (!context?.theme) return;
+        applyDocumentTheme(context.theme);
+        document.documentElement.setAttribute('nve-theme', context.theme);
+      }
+
+      const tokensListStyle = /* css */ `
+        :host {
+          display: block;
+        }
+
+        .tokens-shell {
+          display: grid;
+          gap: var(--nve-ref-space-sm);
+        }
+
+        .tokens-toolbar {
+          align-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--nve-ref-space-sm);
+        }
+
+        .tokens-count,
+        .token-section-count {
+          color: var(--nve-sys-text-muted-color);
+          font-size: var(--nve-ref-font-size-100);
+          font-weight: var(--nve-ref-font-weight-bold);
+          line-height: var(--nve-ref-line-height-sm);
+        }
+
+        .tokens-search {
+          flex: 1 1 240px;
+          min-width: 200px;
+        }
+
+        .theme-toggle {
+          display: flex;
+          flex: 0 0 auto;
+          flex-wrap: wrap;
+          gap: var(--nve-ref-space-xs);
+        }
+
+        .tokens-groups {
+          display: grid;
+          gap: var(--nve-ref-space-lg);
+          margin-top: var(--nve-ref-space-md);
+          max-height: 480px;
+          overflow-y: auto;
+          padding-right: var(--nve-ref-size-100);
+          scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+          scrollbar-width: var(--nve-sys-scrollbar-width);
+        }
+
+        .token-title-row {
+          align-items: center;
+          display: flex;
+          gap: var(--nve-ref-space-xs);
+        }
+
+        .token-heading {
+          color: var(--nve-sys-text-emphasis-color);
+          font-size: var(--nve-ref-font-size-400);
+          font-weight: var(--nve-ref-font-weight-bold);
+          line-height: var(--nve-ref-line-height-sm);
+          margin: 0;
+        }
+
+        .token-table {
+          --scroll-height: none;
+          width: 100%;
+        }
+
+        .token-preview-cell {
+          --justify-content: center;
+        }
+
+        .token-description {
+          color: var(--nve-sys-text-muted-color);
+          display: block;
+          font-size: var(--nve-ref-font-size-100);
+          line-height: var(--nve-ref-line-height-sm);
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+
+        .token-preview {
+          border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+          border-radius: var(--nve-ref-border-radius-sm);
+          display: block;
+          min-height: var(--nve-ref-size-800);
+          overflow: hidden;
+          width: min(100%, 96px);
+        }
+
+        .color-preview {
+          background-image:
+            linear-gradient(45deg, color-mix(in oklab, CanvasText 12%, transparent) 25%, transparent 25%),
+            linear-gradient(-45deg, color-mix(in oklab, CanvasText 12%, transparent) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, color-mix(in oklab, CanvasText 12%, transparent) 75%),
+            linear-gradient(-45deg, transparent 75%, color-mix(in oklab, CanvasText 12%, transparent) 75%);
+          background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+          background-size: 12px 12px;
+        }
+
+        .color-swatch {
+          display: block;
+          min-height: var(--nve-ref-size-800);
+        }
+
+        .ruler-preview {
+          align-items: center;
+          background: var(--nve-sys-layer-container-accent-background);
+          display: flex;
+          padding: var(--nve-ref-size-100);
+        }
+
+        .ruler-fill {
+          background: var(--nve-sys-support-color);
+          border-radius: var(--nve-ref-border-radius-xs);
+          display: block;
+          height: var(--nve-ref-size-200);
+        }
+
+        .type-preview {
+          align-items: center;
+          background: var(--nve-sys-layer-container-accent-background);
+          color: var(--nve-sys-text-color);
+          display: flex;
+          min-height: var(--nve-ref-size-1000);
+          padding: var(--nve-ref-size-100) var(--nve-ref-size-200);
+        }
+
+        .radius-preview {
+          align-items: center;
+          background: var(--nve-sys-layer-container-accent-background);
+          display: flex;
+          justify-content: center;
+          min-height: var(--nve-ref-size-1000);
+          padding: var(--nve-ref-size-100);
+        }
+
+        .radius-shape {
+          background: var(--nve-sys-layer-container-accent-background);
+          border: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+          display: block;
+          height: var(--nve-ref-size-800);
+          width: 80px;
+        }
+
+        .shadow-preview {
+          align-items: center;
+          background: var(--nve-sys-layer-canvas-accent-background);
+          display: flex;
+          justify-content: center;
+          min-height: var(--nve-ref-size-1000);
+          padding: var(--nve-ref-size-100);
+        }
+
+        .shadow-shape {
+          background: var(--nve-sys-layer-container-background);
+          border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+          border-radius: var(--nve-ref-border-radius-sm);
+          display: block;
+          height: var(--nve-ref-size-800);
+          width: 80px;
+        }
+
+        .token-empty,
+        .token-error {
+          color: var(--nve-sys-text-muted-color);
+          padding-block: var(--nve-ref-size-400);
+        }
+      `;
+
+      const tokensListStyleSheet = new CSSStyleSheet();
+      tokensListStyleSheet.replaceSync(tokensListStyle);
+
+      const colorValuePrefixes = ['#', 'rgb', 'hsl', 'oklch'];
+      const colorValueNames = new Set([
+        'canvas',
+        'canvastext',
+        'buttonface',
+        'buttontext',
+        'fieldtext',
+        'graytext',
+        'linktext'
+      ]);
+      const tokenCategoryMatchers = [
+        { category: 'shadow', nameKeywords: ['shadow'] },
+        { category: 'radius', nameKeywords: ['radius', 'border-width'] },
+        { category: 'typography', nameKeywords: ['font'] },
+        { category: 'spacing', nameKeywords: ['space', 'size', 'height', 'width', 'gap', 'padding', 'offset', 'margin'] },
+        {
+          category: 'color',
+          nameKeywords: ['color', 'background', 'accent', 'status', 'support', 'visualization'],
+          valueChecks: [
+            value => colorValuePrefixes.some(prefix => value.startsWith(prefix)),
+            value => colorValueNames.has(value)
+          ]
+        }
+      ];
+
+      class ElementsTokensList extends HTMLElement {
+        constructor() {
+          super();
+          this.renderRoot = this.attachShadow({ mode: 'open' });
+          this.renderRoot.adoptedStyleSheets = [tokensListStyleSheet];
+          this.state = { tokens: [], errorMessage: '', loaded: false, loading: false, query: '', theme: '' };
+          this.count = null;
+          this.groups = null;
+          this.searchInput = null;
+          this.copiedToast = null;
+          this.themeButtons = new Map();
+        }
+
+        connectedCallback() {
+          this.#renderShell();
+          this.#setTheme(document.documentElement.getAttribute('nve-theme') || 'light');
+          this.#requestTokens();
+        }
+
+        get tokens() {
+          return this.state.tokens;
+        }
+
+        set tokens(value) {
+          const tokens = Array.isArray(value)
+            ? value
+              .filter(token => token && typeof token.name === 'string' && typeof token.value === 'string')
+              .map(token => ({
+                name: token.name.startsWith('--') ? token.name : '--' + token.name,
+                value: token.value,
+                description: typeof token.description === 'string' ? token.description : ''
+              }))
+            : [];
+          this.#setTokens(tokens);
+        }
+
+        get errorMessage() {
+          return this.state.errorMessage;
+        }
+
+        set errorMessage(value) {
+          this.state.errorMessage = typeof value === 'string' ? value : '';
+          this.state.loaded = false;
+          this.state.loading = false;
+          this.#renderCurrentState();
+        }
+
+        get query() {
+          return this.state.query;
+        }
+
+        set query(value) {
+          this.#setQuery(value);
+        }
+
+        #tokenReference(name) {
+          return 'var(' + name + ')';
+        }
+
+        #setQuery(query, render = true) {
+          const value = typeof query === 'string' ? query.trim() : '';
+          this.state.query = value.toLowerCase();
+          if (this.searchInput && this.searchInput.value !== value) {
+            this.searchInput.value = value;
+          }
+          if (render && this.state.loaded) {
+            this.#renderTokens();
+          }
+        }
+
+        #classifyToken(token) {
+          const name = token.name.toLowerCase();
+          const value = token.value.toLowerCase();
+          const match = tokenCategoryMatchers.find(({ nameKeywords, valueChecks = [] }) => {
+            return nameKeywords.some(keyword => name.includes(keyword)) || valueChecks.some(check => check(value));
+          });
+
+          return match?.category ?? 'other';
+        }
+
+        #categoryLabel(category) {
+          switch (category) {
+            case 'color':
+              return 'Colors';
+            case 'spacing':
+              return 'Spacing and size';
+            case 'typography':
+              return 'Typography';
+            case 'radius':
+              return 'Radii and borders';
+            case 'shadow':
+              return 'Shadows';
+            case 'other':
+              return 'Other';
+            default:
+              return 'Tokens';
+          }
+        }
+
+        #renderShell() {
+          const root = document.createElement('main');
+          root.className = 'tokens-shell';
+
+          const toolbar = document.createElement('section');
+          toolbar.className = 'tokens-toolbar';
+
+          this.count = document.createElement('span');
+          this.count.className = 'tokens-count';
+
+          const searchControl = document.createElement('nve-search');
+          searchControl.className = 'tokens-search';
+          searchControl.setAttribute('rounded', '');
+          const search = document.createElement('input');
+          search.type = 'search';
+          search.placeholder = 'Search tokens';
+          search.setAttribute('aria-label', 'Search tokens');
+          search.autocomplete = 'off';
+          this.searchInput = search;
+          search.addEventListener('input', () => {
+            this.#setQuery(search.value);
+          });
+          searchControl.append(search);
+
+          const themeToggle = document.createElement('section');
+          themeToggle.className = 'theme-toggle';
+          themeToggle.setAttribute('role', 'group');
+          themeToggle.setAttribute('aria-label', 'Theme');
+          [
+            ['light', 'Light'],
+            ['dark', 'Dark'],
+            ['high-contrast', 'High contrast']
+          ].forEach(([theme, label]) => {
+            const button = document.createElement('nve-button');
+            button.setAttribute('type', 'button');
+            button.setAttribute('size', 'sm');
+            button.textContent = label;
+            button.addEventListener('click', () => this.#setTheme(theme));
+            this.themeButtons.set(theme, button);
+            themeToggle.append(button);
+          });
+
+          toolbar.append(this.count, searchControl, themeToggle);
+
+          this.groups = document.createElement('section');
+          this.groups.className = 'tokens-groups';
+
+          this.copiedToast = document.createElement('nve-toast');
+          this.copiedToast.setAttribute('hidden', '');
+          this.copiedToast.setAttribute('status', 'success');
+          this.copiedToast.setAttribute('position', 'top');
+          this.copiedToast.setAttribute('close-timeout', '1500');
+          this.copiedToast.textContent = 'Copied';
+
+          root.append(toolbar, this.groups, this.copiedToast);
+          this.renderRoot.replaceChildren(root);
+          this.#renderCurrentState();
+        }
+
+        #renderCurrentState() {
+          if (!this.count || !this.groups) return;
+          if (this.state.errorMessage) {
+            this.#renderError(this.state.errorMessage);
+            return;
+          }
+          if (this.state.loaded) {
+            this.#renderTokens();
+            return;
+          }
+          this.#renderLoading();
+        }
+
+        #setTheme(theme) {
+          this.state.theme = theme;
+          document.documentElement.setAttribute('nve-theme', theme);
+          this.themeButtons.forEach((button, key) => {
+            button.toggleAttribute('pressed', key === theme);
+          });
+        }
+
+        #renderLoading() {
+          this.count.textContent = 'Loading';
+          this.groups.className = 'tokens-groups token-empty';
+          this.groups.textContent = 'Loading tokens';
+        }
+
+        #renderError(message) {
+          this.count.textContent = 'Unavailable';
+          this.groups.className = 'tokens-groups token-error';
+          this.groups.textContent = message;
+        }
+
+        #renderTokens() {
+          const filtered = this.state.query
+            ? this.state.tokens.filter(token => {
+              const query = this.state.query;
+              return (
+                token.name.toLowerCase().includes(query) ||
+                token.value.toLowerCase().includes(query) ||
+                token.description.toLowerCase().includes(query)
+              );
+            })
+            : this.state.tokens;
+
+          this.count.textContent = filtered.length + ' of ' + this.state.tokens.length;
+          this.groups.className = 'tokens-groups';
+          this.groups.replaceChildren();
+
+          if (!filtered.length) {
+            this.groups.classList.add('token-empty');
+            this.groups.textContent = 'No tokens found';
+            return;
+          }
+
+          const categories = ['color', 'spacing', 'typography', 'radius', 'shadow', 'other'];
+          categories.forEach(category => {
+            const tokens = filtered.filter(token => this.#classifyToken(token) === category);
+            if (!tokens.length) return;
+            this.groups.append(this.#createTokenSection(category, tokens));
+          });
+        }
+
+        #createTokenSection(category, tokens) {
+          const section = document.createElement('section');
+          section.className = 'token-section token-section-' + category;
+
+          const titleRow = document.createElement('div');
+          titleRow.className = 'token-title-row';
+          const heading = document.createElement('h2');
+          heading.className = 'token-heading';
+          heading.textContent = this.#categoryLabel(category);
+          const count = document.createElement('span');
+          count.className = 'token-section-count';
+          count.textContent = String(tokens.length);
+          titleRow.append(heading, count);
+
+          const grid = document.createElement('nve-grid');
+          grid.className = 'token-table token-table-' + category;
+          grid.setAttribute('container', 'flat');
+
+          const header = document.createElement('nve-grid-header');
+          [
+            ['Preview', '124px', 'center'],
+            ['Token', '280px', 'start'],
+            ['Guidance', '', 'start']
+          ].forEach(([label, width, align]) => {
+            const column = document.createElement('nve-grid-column');
+            column.textContent = label;
+            if (width) column.setAttribute('width', width);
+            column.setAttribute('column-align', align);
+            header.append(column);
+          });
+
+          grid.append(header);
+          tokens.forEach(token => grid.append(this.#createTokenRow(token, category)));
+
+          section.append(titleRow, grid);
+          return section;
+        }
+
+        #createTokenRow(token, category) {
+          const row = document.createElement('nve-grid-row');
+          row.className = 'token-row token-row-' + category;
+
+          const previewCell = document.createElement('nve-grid-cell');
+          previewCell.className = 'token-preview-cell';
+          previewCell.append(this.#createPreview(token, category));
+
+          const tokenCell = document.createElement('nve-grid-cell');
+          const copyButton = document.createElement('nve-button');
+          copyButton.className = 'token-copy-button-' + category;
+          copyButton.setAttribute('container', 'flat');
+          copyButton.setAttribute('aria-label', 'Copy ' + this.#tokenReference(token.name));
+          copyButton.title = 'Copy ' + this.#tokenReference(token.name);
+          copyButton.textContent = token.name;
+          copyButton.addEventListener('click', () => {
+            void this.#copySource(this.#tokenReference(token.name), copyButton);
+          });
+          tokenCell.append(copyButton);
+
+          const guidanceCell = document.createElement('nve-grid-cell');
+          const description = document.createElement('span');
+          description.className = 'token-description';
+          description.textContent = token.description || token.value;
+          guidanceCell.append(description);
+
+          row.append(previewCell, tokenCell, guidanceCell);
+          return row;
+        }
+
+        #createPreview(token, category) {
+          if (category === 'color') return this.#createColorPreview(token);
+          if (category === 'spacing') return this.#createRulerPreview(token);
+          if (category === 'typography') return this.#createTypePreview(token);
+          if (category === 'radius') return this.#createRadiusPreview(token);
+          if (category === 'shadow') return this.#createShadowPreview(token);
+          return this.#createOtherPreview(token);
+        }
+
+        #createColorPreview(token) {
+          const preview = document.createElement('span');
+          preview.className = 'token-preview color-preview';
+          const swatch = document.createElement('span');
+          swatch.className = 'color-swatch';
+          swatch.style.background = this.#tokenReference(token.name);
+          preview.append(swatch);
+          return preview;
+        }
+
+        #createRulerPreview(token) {
+          const preview = document.createElement('span');
+          preview.className = 'token-preview ruler-preview';
+          const fill = document.createElement('span');
+          fill.className = 'ruler-fill';
+          fill.style.width = 'clamp(2px, ' + this.#tokenReference(token.name) + ', 180px)';
+          preview.append(fill);
+          return preview;
+        }
+
+        #createTypePreview(token) {
+          const preview = document.createElement('span');
+          preview.className = 'token-preview type-preview';
+          const specimen = document.createElement('span');
+          specimen.textContent = 'Ag';
+          specimen.style.fontFamily = 'var(--nve-ref-font-family)';
+          if (token.name.includes('font-size')) {
+            specimen.style.fontSize = this.#tokenReference(token.name);
+          } else if (token.name.includes('font-weight')) {
+            specimen.style.fontWeight = this.#tokenReference(token.name);
+            specimen.style.fontSize = 'var(--nve-ref-font-size-600)';
+          } else if (token.name.includes('font-family')) {
+            specimen.style.fontFamily = this.#tokenReference(token.name);
+            specimen.style.fontSize = 'var(--nve-ref-font-size-600)';
+          }
+          preview.append(specimen);
+          return preview;
+        }
+
+        #createRadiusPreview(token) {
+          const preview = document.createElement('span');
+          preview.className = 'token-preview radius-preview';
+          const shape = document.createElement('span');
+          shape.className = 'radius-shape';
+          if (token.name.includes('border-width')) {
+            shape.style.borderWidth = this.#tokenReference(token.name);
+          } else {
+            shape.style.borderRadius = this.#tokenReference(token.name);
+          }
+          preview.append(shape);
+          return preview;
+        }
+
+        #createShadowPreview(token) {
+          const preview = document.createElement('span');
+          preview.className = 'token-preview shadow-preview';
+          const shape = document.createElement('span');
+          shape.className = 'shadow-shape';
+          shape.style.boxShadow = this.#tokenReference(token.name);
+          preview.append(shape);
+          return preview;
+        }
+
+        #createOtherPreview(token) {
+          const preview = document.createElement('span');
+          preview.className = 'token-preview type-preview token-other-preview';
+          preview.textContent = token.value;
+          return preview;
+        }
+
+        async #copySource(source, button) {
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(source);
+            } else {
+              this.#copyWithTextArea(source);
+            }
+          } catch (_err) {
+            this.#copyWithTextArea(source);
+          }
+          button.dataset.copied = 'true';
+          this.#showCopiedToast(button, source);
+          window.setTimeout(() => {
+            button.dataset.copied = 'false';
+          }, 1200);
+        }
+
+        #showCopiedToast(button, source) {
+          if (!this.copiedToast) return;
+          this.copiedToast.textContent = 'Copied ' + source;
+          if (this.copiedToast.matches(':popover-open')) {
+            this.copiedToast.hidePopover();
+          }
+          this.copiedToast.showPopover({ source: button });
+        }
+
+        #copyWithTextArea(source) {
+          const textarea = document.createElement('textarea');
+          textarea.value = source;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.append(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          textarea.remove();
+        }
+
+        #setTokens(tokens) {
+          this.state.tokens = tokens;
+          this.state.errorMessage = '';
+          this.state.loaded = true;
+          this.state.loading = false;
+          this.#renderCurrentState();
+        }
+
+        #requestTokens() {
+          if (this.state.loaded || this.state.loading) return;
+          this.state.loading = true;
+          this.dispatchEvent(new CustomEvent('tokens-request', { bubbles: true, composed: true }));
+        }
+      }
+
+      customElements.define('nve-mcp-api-tokens-list', ElementsTokensList);
+
+      const app = new App({ name: 'Elements Token Explorer', version: '1.0.0' }, {});
+
+      app.addEventListener('hostcontextchanged', context => {
+        applyHostContext(context);
+      });
+
+      const tokenList = document.createElement('nve-mcp-api-tokens-list');
+
+      function getStructuredResult(payload) {
+        if (!payload) return undefined;
+        if (payload.structuredContent && payload.structuredContent.result !== undefined)
+          return payload.structuredContent.result;
+        if (payload.result && payload.result.structuredContent) return payload.result.structuredContent.result;
+        if (payload.result !== undefined) return payload.result;
+        return undefined;
+      }
+
+      function getTokens(payload) {
+        const result = getStructuredResult(payload);
+        if (!Array.isArray(result)) return [];
+        return result
+          .filter(token => token && typeof token.name === 'string' && typeof token.value === 'string')
+          .map(token => ({
+            name: token.name.startsWith('--') ? token.name : '--' + token.name,
+            value: token.value,
+            description: typeof token.description === 'string' ? token.description : ''
+          }));
+      }
+
+      function hasTokenResult(payload) {
+        return Array.isArray(getStructuredResult(payload));
+      }
+
+      let tokensLoaded = false;
+      let tokensLoading = false;
+      let pendingToolResult = null;
+      let isAppConnected = false;
+
+      function setTokensFromPayload(payload) {
+        if (!hasTokenResult(payload)) return false;
+        tokensLoaded = true;
+        tokensLoading = false;
+        tokenList.tokens = getTokens(payload);
+        return true;
+      }
+
+      async function loadTokens({ force = false, silent = false } = {}) {
+        if ((!force && tokensLoaded) || tokensLoading) return;
+        tokensLoading = true;
+        try {
+          const res = await app.callServerTool({
+            name: 'api_tokens_list',
+            arguments: { format: 'json' }
+          });
+          if (!setTokensFromPayload(res)) {
+            tokensLoading = false;
+            if (!silent) {
+              tokenList.errorMessage = 'Failed to load tokens: no tokens returned';
+            }
+          }
+        } catch (err) {
+          tokensLoading = false;
+          if (!silent) {
+            tokenList.errorMessage = 'Failed to load tokens: ' + (err && err.message ? err.message : 'unknown error');
+          }
+        }
+      }
+
+      function handleToolResult(params) {
+        if (setTokensFromPayload(params)) {
+          if (tokenList.query) {
+            void loadTokens({ force: true, silent: true });
+          }
+          return;
+        }
+        void loadTokens();
+      }
+
+      tokenList.addEventListener('tokens-request', () => {
+        void loadTokens();
+      });
+
+      app.addEventListener('toolresult', params => {
+        if (!isAppConnected) {
+          pendingToolResult = params;
+          return;
+        }
+        handleToolResult(params);
+      });
+
+      app.addEventListener('toolinput', params => {
+        const args = params && params.arguments;
+        if (args && typeof args.query === 'string') {
+          tokenList.query = args.query;
+        }
+      });
+
+      await app.connect();
+      applyHostContext(app.getHostContext());
+
+      isAppConnected = true;
+      if (pendingToolResult) {
+        handleToolResult(pendingToolResult);
+      }
+      document.body.replaceChildren(tokenList);
+    </script>
+  </body>
+</html>

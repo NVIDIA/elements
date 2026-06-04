@@ -108,11 +108,6 @@ For Claude Code, use:
     <nve-grid-cell>Combines package mapping, lint setup, deprecated API replacement, and validation into one ordered workflow.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">playground</code></nve-grid-cell>
-    <nve-grid-cell>Creating shareable Elements playground prototypes.</nve-grid-cell>
-    <nve-grid-cell>Uses a scratchpad-first flow so agents can iterate against validation instead of rewriting a template from memory.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">about</code></nve-grid-cell>
     <nve-grid-cell>Explaining Elements to developers who are new to the system.</nve-grid-cell>
     <nve-grid-cell>Provides concise product context, benefits, getting started guidance, and resource links.</nve-grid-cell>

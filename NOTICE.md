@@ -23,6 +23,9 @@ This product includes the following bundled third-party software:
 - @inquirer/prompts v8.5.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
+- @modelcontextprotocol/ext-apps v1.7.3 [MIT] (used by: @nvidia-elements/cli)
+  Copyright: Olivier Chafik
+
 - @modelcontextprotocol/sdk v1.29.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Anthropic, PBC (https://anthropic.com)
 
@@ -302,6 +305,7 @@ The following bundled components are provided under the MIT license:
 @html-eslint/eslint-plugin v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @inquirer/prompts v8.5.0 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@modelcontextprotocol/ext-apps v1.7.3 - Copyright Olivier Chafik
 @modelcontextprotocol/sdk v1.29.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.5.17 - Copyright Nasca Iacob <sy@another-d-mention.ro> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)

@@ -247,6 +247,14 @@ export function createGitInitProcess(extractedDir: string) {
   return execFile('git', ['init', extractedDir]);
 }
 
+export function getDependencyInstallFailureMessage(extractedDir: string, npmClient: NPMClient | null) {
+  if (npmClient) {
+    return `⚠️ Error installing dependencies, in the "${extractedDir}" directory run "${npmClient} install"`;
+  }
+
+  return `⚠️ Error installing dependencies, install npm or pnpm, then run a package-manager install in the "${extractedDir}" directory`;
+}
+
 /* istanbul ignore next -- @preserve */
 function isGitRepository(directoryPath: string) {
   // Check if .git directory exists directly in the given path
@@ -270,28 +278,14 @@ function isGitRepository(directoryPath: string) {
 
 /* istanbul ignore next -- @preserve */
 async function setupStarterNPM(extractedDir: string) {
-  const npmClient = await getNPMClient();
   try {
     await installFromRegistry(extractedDir);
-  } catch {
-    try {
-      await loginRegistry(extractedDir);
-      await installFromRegistry(extractedDir);
-    } catch (e) {
-      const stderr = (e as { stderr?: Buffer })?.stderr?.toString?.().trim();
-      console.error(stderr || e);
-      console.error(
-        `⚠️ Error installing dependencies, in the "${extractedDir}" directory run "${npmClient} login" then "${npmClient} install"`
-      );
-    }
+  } catch (e) {
+    const npmClient = await getNPMClient();
+    const stderr = (e as { stderr?: Buffer })?.stderr?.toString?.().trim();
+    console.error(stderr || e);
+    console.error(getDependencyInstallFailureMessage(extractedDir, npmClient));
   }
-}
-
-/* istanbul ignore next -- @preserve */
-async function loginRegistry(extractedDir: string) {
-  const npmClient = await getRequiredNPMClient();
-  console.log('🔒 Logging in to registry...');
-  execPackageManagerSync(npmClient, ['login'], extractedDir);
 }
 
 /* istanbul ignore next -- @preserve */

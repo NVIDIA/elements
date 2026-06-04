@@ -118,13 +118,13 @@ describe('MCP server', () => {
   });
 
   it('should set ELEMENTS_ENV to "mcp"', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     expect(process.env.ELEMENTS_ENV).toBe('mcp');
   });
 
   it('should only register tools with MCP support', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     expect(mockRegisterTool).toHaveBeenCalledTimes(3);
     expect(mockRegisterTool).toHaveBeenCalledWith('mcp_tool', expect.any(Object), expect.any(Function));
@@ -133,14 +133,14 @@ describe('MCP server', () => {
   });
 
   it('should not register CLI-only tools', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const registeredNames = mockRegisterTool.mock.calls.map(call => call[0]);
     expect(registeredNames).not.toContain('cli_tool');
   });
 
   it('should register tools with correct config', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const allToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'all_tool');
     expect(allToolCall[1]).toEqual(
@@ -152,7 +152,7 @@ describe('MCP server', () => {
   });
 
   it('should handle tools without inputSchema', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     // mcpTool has no inputSchema — should still register without error
     const mcpToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'mcp_tool');
@@ -160,7 +160,7 @@ describe('MCP server', () => {
   });
 
   it('should register prompts', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     expect(mockRegisterPrompt).toHaveBeenCalledTimes(1);
     expect(mockRegisterPrompt).toHaveBeenCalledWith(
@@ -174,7 +174,7 @@ describe('MCP server', () => {
   });
 
   it('should invoke prompt handler with params', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const handler = mockRegisterPrompt.mock.calls[0][2];
     const result = await handler({ arg: 'value' });
@@ -183,13 +183,13 @@ describe('MCP server', () => {
   });
 
   it('should connect to stdio transport', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     expect(mockConnect).toHaveBeenCalledTimes(1);
   });
 
   it('should return string result as text content', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
     const result = await handler({});
@@ -200,7 +200,7 @@ describe('MCP server', () => {
   });
 
   it('should return JSON for error responses', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
     const errorResult = { status: 'error', message: 'failed' };
@@ -210,7 +210,7 @@ describe('MCP server', () => {
   });
 
   it('should return JSON for non-string results', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
     const objResult = { status: 'complete', result: { key: 'value' } };
@@ -220,7 +220,7 @@ describe('MCP server', () => {
   });
 
   it('should advertise the io.modelcontextprotocol/ui extension capability', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     expect(mockRegisterCapabilities).toHaveBeenCalledWith({
       extensions: { 'io.modelcontextprotocol/ui': { mimeTypes: ['text/html;profile=mcp-app'] } }
@@ -228,7 +228,7 @@ describe('MCP server', () => {
   });
 
   it('should register the MCP UI resources', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     [
       {
@@ -262,23 +262,8 @@ describe('MCP server', () => {
     });
   });
 
-  it('should restrict MCP UI messages to the expected parent origin', async () => {
-    const { startMcpServer } = await import('./mcp.js');
-    await startMcpServer();
-    const resourceCall = mockRegisterResource.mock.calls.find(call => call[0] === 'nve-mcp-examples-render');
-    const [, , , handler] = resourceCall!;
-    const result = handler();
-    const html = result.contents[0].text;
-
-    expect(html).toContain('window.parent.postMessage(msg, expectedOrigin)');
-    expect(html).toContain('#getExpectedParentOrigin()');
-    expect(html).toContain('#isAllowedParentOrigin(origin)');
-    expect(html).toContain("origin !== 'null'");
-    expect(html).not.toContain("window.parent.postMessage(msg, '*')");
-  });
-
   it('should keep the example preview element decoupled from the MCP UI client', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const resourceCall = mockRegisterResource.mock.calls.find(call => call[0] === 'nve-mcp-examples-render');
     const [, , , handler] = resourceCall!;
@@ -288,21 +273,26 @@ describe('MCP server', () => {
       html.indexOf('class ElementsExamplePreview'),
       html.indexOf("customElements.define('nve-mcp-examples-render'")
     );
-    const clientScript = html.slice(html.indexOf('const client = new Client'));
+    const clientScript = html.slice(html.indexOf('const app = new App'));
 
     expect(elementScript).not.toContain('callServerTool');
     expect(elementScript).not.toContain('handleToolInput');
     expect(elementScript).not.toContain('handleToolResult');
     expect(elementScript).not.toContain('structuredContent');
     expect(elementScript).not.toMatch(/this\.client\s*=/);
-    expect(clientScript).toContain('client.callServerTool');
+    expect(clientScript).toContain("app.addEventListener('toolinput'");
+    expect(clientScript).toContain("app.addEventListener('toolresult'");
+    expect(clientScript).toContain("app.addEventListener('hostcontextchanged'");
+    expect(clientScript).toContain('await app.connect()');
+    expect(clientScript).toContain('applyHostContext(app.getHostContext())');
+    expect(clientScript).toContain('app.callServerTool');
     expect(clientScript).toContain("name: 'examples_get'");
     expect(clientScript).toContain('lintMessages');
     expect(clientScript).not.toContain('preview.template = pendingTemplate');
   });
 
   it('should keep the icons list element decoupled from the MCP UI client', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const resourceCall = mockRegisterResource.mock.calls.find(call => call[0] === 'nve-mcp-api-icons-list');
     const [, , , handler] = resourceCall!;
@@ -312,19 +302,23 @@ describe('MCP server', () => {
       html.indexOf('class ElementsIconsList'),
       html.indexOf("customElements.define('nve-mcp-api-icons-list'")
     );
-    const clientScript = html.slice(html.indexOf('const client = new Client'));
+    const clientScript = html.slice(html.indexOf('const app = new App'));
 
     expect(elementScript).toContain("new CustomEvent('icons-request'");
     expect(elementScript).not.toContain('callServerTool');
     expect(elementScript).not.toContain('handleToolResult');
     expect(elementScript).not.toContain('structuredContent');
     expect(elementScript).not.toMatch(/this\.client\s*=/);
-    expect(clientScript).toContain('client.callServerTool');
+    expect(clientScript).toContain("app.addEventListener('toolresult'");
+    expect(clientScript).toContain("app.addEventListener('hostcontextchanged'");
+    expect(clientScript).toContain('await app.connect()');
+    expect(clientScript).toContain('applyHostContext(app.getHostContext())');
+    expect(clientScript).toContain('app.callServerTool');
     expect(clientScript).toContain("iconList.addEventListener('icons-request'");
   });
 
   it('should keep the tokens list element decoupled from the MCP UI client', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const resourceCall = mockRegisterResource.mock.calls.find(call => call[0] === 'nve-mcp-api-tokens-list');
     const [, , , handler] = resourceCall!;
@@ -334,7 +328,7 @@ describe('MCP server', () => {
       html.indexOf('class ElementsTokensList'),
       html.indexOf("customElements.define('nve-mcp-api-tokens-list'")
     );
-    const clientScript = html.slice(html.indexOf('const client = new Client'));
+    const clientScript = html.slice(html.indexOf('const app = new App'));
 
     expect(elementScript).toContain("new CustomEvent('tokens-request'");
     expect(elementScript).not.toContain('callServerTool');
@@ -342,19 +336,24 @@ describe('MCP server', () => {
     expect(elementScript).not.toContain('handleToolResult');
     expect(elementScript).not.toContain('structuredContent');
     expect(elementScript).not.toMatch(/this\.client\s*=/);
-    expect(clientScript).toContain('client.callServerTool');
+    expect(clientScript).toContain("app.addEventListener('toolinput'");
+    expect(clientScript).toContain("app.addEventListener('toolresult'");
+    expect(clientScript).toContain("app.addEventListener('hostcontextchanged'");
+    expect(clientScript).toContain('await app.connect()');
+    expect(clientScript).toContain('applyHostContext(app.getHostContext())');
+    expect(clientScript).toContain('app.callServerTool');
     expect(clientScript).toContain("tokenList.addEventListener('tokens-request'");
   });
 
   it('should attach _meta.ui to tools that declare MCP UI metadata', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const uiToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'mcp_ui_tool');
     expect(uiToolCall![1]._meta).toEqual({ ui: { resourceUri: 'ui://elements/example-preview' } });
   });
 
   it('should leave _meta undefined for tools without MCP UI metadata', async () => {
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const mcpToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'mcp_tool');
     expect(mcpToolCall![1]._meta).toBeUndefined();
@@ -365,7 +364,7 @@ describe('MCP server', () => {
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    const { startMcpServer } = await import('./mcp.js');
+    const { startMcpServer } = await import('./index.js');
     await startMcpServer();
 
     expect(errorSpy).toHaveBeenCalledWith(expect.any(Error));

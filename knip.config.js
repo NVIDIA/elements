@@ -21,6 +21,8 @@ export default {
     '@internals/patterns',
     '@internals/testing',
     '@lit-labs/ssr-client',
+    '@modelcontextprotocol/ext-apps',
+    '@nvidia-elements/code',
     '@nvidia-elements/forms',
     '@nvidia-elements/lint',
     '@nvidia-elements/markdown',

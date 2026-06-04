@@ -12,6 +12,9 @@
       "files": [
         "../site/dist/**",
         "../starters/dist/**",
+        "../cli/dist/**",
+        "../cli/install.cmd",
+        "../cli/install.sh",
         "../internals/metadata/static/**",
         "index.js",
         "robots.txt"
@@ -26,6 +29,10 @@
         },
         {
           "script": "../starters:build",
+          "cascade": false
+        },
+        {
+          "script": "../cli:build",
           "cascade": false
         },
         {

@@ -4,7 +4,6 @@ import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';
 import { App, applyDocumentTheme, type McpUiHostContext } from '@modelcontextprotocol/ext-apps';
-import './mcp-app.css';
 
 interface HelloToolResult {
   content?: {
@@ -22,7 +21,7 @@ const ERROR_GREETING = 'The MCP tool returned an error.';
 
 const app = new App(
   {
-    name: 'elements-mcp-app',
+    name: 'elements-demo-mcp-app',
     version: '0.0.0'
   },
   {}
