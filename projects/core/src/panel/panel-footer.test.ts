@@ -7,6 +7,8 @@ import { createFixture, removeFixture, elementIsStable } from '@internals/testin
 import { PanelFooter } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags -- deprecated panel contract test intentionally exercises panel tags. */
+
 describe(PanelFooter.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: PanelFooter;

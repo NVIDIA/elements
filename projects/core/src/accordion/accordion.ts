@@ -32,9 +32,6 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @slot - default content slot
  * @slot prefix - slot for prefix content
  * @slot suffix - slot for suffix content
- * @slot title - (deprecated)
- * @slot subtitle - (deprecated)
- * @slot actions - (deprecated)
  * @cssprop --cursor
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
@@ -53,14 +50,7 @@ export class AccordionHeader extends LitElement {
     return html`
       <div internal-host>
         <slot name="prefix"></slot>
-        <div id="titles">
-          <slot name="title"></slot>
-          <slot name="subtitle"></slot>
-        </div>
         <slot></slot>
-        <div id="actions">
-          <slot name="actions"></slot>
-        </div>
         <slot name="suffix"></slot>
       </div>
     `;
@@ -168,11 +158,6 @@ export class Accordion extends LitElement implements ContainerElement {
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
-  get #hasAction(): boolean {
-    return !!(this?.querySelectorAll ? Array.from(this?.querySelectorAll<HTMLSlotElement>('[slot="actions"]')) : [])
-      .length;
-  }
-
   get #header() {
     return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name=header]')?.assignedElements()[0];
   }
@@ -185,7 +170,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
   render() {
     return html`
-      <div internal-host class=${this.#hasAction ? 'has-action' : ''}>
+      <div internal-host>
         <div id="header"
           @click=${(e: Event) => this.#toggle(e.target as HTMLElement)}
           .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
@@ -199,7 +184,7 @@ export class Accordion extends LitElement implements ContainerElement {
               id="internal-trigger"
               container="inline"
               icon-name="caret"
-              direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
+              direction=${this.expanded ? 'up' : 'down'}
               ?disabled=${this.disabled}
               ?pressed=${this.expanded}
               .expanded=${this.expanded}

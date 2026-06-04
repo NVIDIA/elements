@@ -134,6 +134,31 @@ describe('type-popover.controller', () => {
     expect(element.matches(':popover-open')).toBe(false);
   });
 
+  it('should not let an old close timeout close a reopened popover', async () => {
+    element.closeTimeout = 50;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    expect(element.matches(':popover-open')).toBe(true);
+
+    await new Promise(resolve => setTimeout(resolve, 25));
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    await close;
+
+    const reopen = untilEvent(element, 'open');
+    element.showPopover();
+    await reopen;
+
+    await new Promise(resolve => setTimeout(resolve, 35));
+    expect(element.matches(':popover-open')).toBe(true);
+
+    await new Promise(resolve => setTimeout(resolve, 25));
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
   it('should render inert backdrop if popover is type modal', async () => {
     element.modal = true;
     await elementIsStable(element);

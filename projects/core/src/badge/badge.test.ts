@@ -6,7 +6,7 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Badge } from '@nvidia-elements/core/badge';
 import { Icon } from '@nvidia-elements/core/icon';
-import type { TaskStatus, TrendStatus } from '@nvidia-elements/core/internal';
+import type { TaskStatus } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/badge/define.js';
 
 describe(Badge.metadata.tag, () => {
@@ -166,18 +166,6 @@ describe(Badge.metadata.tag, () => {
       expect(typeof element.i18n.down).toBe('string');
       expect(typeof element.i18n.neutral).toBe('string');
     });
-
-    it('should update aria-label with custom i18n', async () => {
-      element.textContent = '+5%';
-      element.status = 'trend-up';
-      element.i18n = {
-        ...element.i18n,
-        trend: 'trending',
-        up: 'increasing'
-      };
-      await elementIsStable(element);
-      expect(element._internals.ariaLabel).toBe('+5% trending increasing');
-    });
   });
 
   describe('status property', () => {
@@ -290,13 +278,6 @@ describe(Badge.metadata.tag, () => {
       await elementIsStable(element);
       expect(element._internals.ariaLabel).toBe('Updated content');
     });
-
-    it('should provide meaningful aria-label for trend badges', async () => {
-      element.textContent = '+25%';
-      element.status = 'trend-up';
-      await elementIsStable(element);
-      expect(element._internals.ariaLabel).toBe('+25% trend up');
-    });
   });
 
   describe('edge cases', () => {
@@ -325,51 +306,6 @@ describe(Badge.metadata.tag, () => {
       const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
       expect(icon).toBeTruthy();
       expect(icon.name).toBe('');
-    });
-  });
-
-  describe('@deprecated trend status', () => {
-    it('should provide trend icon when using a trend status', async () => {
-      element.status = 'trend-up';
-      await elementIsStable(element);
-      expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('trend-up');
-
-      element.status = 'trend-down';
-      await elementIsStable(element);
-      expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('trend-down');
-
-      element.status = 'trend-neutral';
-      await elementIsStable(element);
-      expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('minus');
-    });
-
-    it('should set trend specific label when status is a trend', async () => {
-      element.textContent = '+10%';
-      element.status = 'trend-up';
-      await elementIsStable(element);
-      expect(element._internals.ariaLabel).toBe('+10% trend up');
-    });
-
-    it('should work with all trend status values', async () => {
-      const trendStatuses = ['trend-up', 'trend-down', 'trend-neutral'] as const;
-
-      for (const status of trendStatuses) {
-        element.status = status as TrendStatus;
-        await elementIsStable(element);
-        expect(element.getAttribute('status')).toBe(status);
-
-        // Should render trend icon in suffix slot
-        const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
-        expect(icon).toBeTruthy();
-        expect(icon.name).toBeDefined();
-      }
-    });
-
-    it('should handle trend status with empty content', async () => {
-      element.textContent = '';
-      element.status = 'trend-up';
-      await elementIsStable(element);
-      expect(element._internals.ariaLabel).toBe(' trend up');
     });
   });
 });

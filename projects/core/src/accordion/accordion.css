@@ -36,12 +36,6 @@
   padding: var(--header-padding);
 }
 
-[internal-host].has-action #header {
-  flex-direction: row-reverse;
-  justify-content: start;
-  gap: var(--nve-ref-space-xxs);
-}
-
 #content {
   display: block;
   height: 0;

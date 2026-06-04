@@ -4,7 +4,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
-import type { Interaction, Inverse, FlatInteraction, Size } from '@nvidia-elements/core/internal';
+import type { Interaction, Size } from '@nvidia-elements/core/internal';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './button.css?inline';
 
@@ -53,7 +53,7 @@ export class Button extends ButtonFormControlMixin(LitElement) {
   /**
    * The Interaction type provides a way to show the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.
    */
-  @property({ type: String, reflect: true }) interaction: Interaction | FlatInteraction | Inverse;
+  @property({ type: String, reflect: true }) interaction: Interaction;
 
   render() {
     return html`

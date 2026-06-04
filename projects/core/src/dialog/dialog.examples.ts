@@ -440,7 +440,7 @@ export const MaxHeight = {
   </nve-dialog-footer>
 </nve-dialog>
   `
-}
+};
 
 /**
  * @summary Legacy DOM Creation

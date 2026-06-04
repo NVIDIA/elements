@@ -28,10 +28,6 @@ import tabsStyleSheet from './tabs.css?inline';
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for content
  * @cssprop --font-size
- * @cssprop --border-width
- * @cssprop --border-height
- * @cssprop --border-top
- * @cssprop --border-background
  * @cssprop --width
  * @cssprop --padding
  * @cssprop --font-size

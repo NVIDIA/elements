@@ -421,22 +421,6 @@ export const ShadowRoot = {
   `
 };
 
-/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
-
-/**
- * @summary Legacy behavior-trigger pattern for automatic notification lifecycle management. Deprecated approach with manual trigger attribute, prefer modern popovertarget API for cleaner notification triggering.
- * @tags test-case
- */
-export const LegacyBehaviorTrigger = {
-  render: () => html`
-<nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
-  <h3 nve-text="label">notification</h3>
-  <p nve-text="body">some text content in a notification</p>
-</nve-notification>
-<nve-button id="notification-btn">show</nve-button>
-`
-};
-
 /**
  * @summary Notification layering with modal dialogs for proper stacking context. Ensures notifications appear above dialogs without interfering with modal interactions, crucial for complex UI layering scenarios.
  * @tags test-case

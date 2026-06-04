@@ -4,7 +4,6 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
@@ -22,7 +21,6 @@ import styles from './progress-ring.css?inline';
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/progress-ring
  * @slot - Content to display in the ring center. Defaults to a status icon.
- * @slot status-icon - (deprecated) Use the default slot instead.
  * @cssprop --background-color
  * @cssprop --ring-color
  * @cssprop --ring-background-opacity
@@ -67,14 +65,6 @@ export class ProgressRing extends LitElement {
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  @queryAssignedElements({ slot: 'status-icon' })
-  private _deprecatedStatusIconSlot!: Element[];
-
-  /**
-   * Tracks presence of content presence in deprecated status-icon slot.
-   */
-  #hasStatusIconContent = false;
-
   render() {
     return html`
       <div internal-host ?indeterminate=${this.value === undefined}>
@@ -86,12 +76,11 @@ export class ProgressRing extends LitElement {
         </svg>
         <slot>
           ${
-            this.status !== 'accent' && !this.#hasStatusIconContent
+            this.status !== 'accent'
               ? html`<nve-icon part="icon" .name=${this.status ? statusIcons[this.status] : undefined} .status=${this.status as SupportStatus} aria-hidden="true"></nve-icon>`
               : ''
           }
         </slot>
-        <slot name="status-icon" @slotchange=${this.#updateStatusIcon}></slot>
       </div>
     `;
   }
@@ -111,10 +100,5 @@ export class ProgressRing extends LitElement {
       (this.status && i18nRecord[this.status] && i18nRecord[this.status] !== 'neutral'
         ? i18nRecord[this.status]!
         : this.i18n.information) ?? null;
-  }
-
-  #updateStatusIcon() {
-    this.#hasStatusIconContent = this._deprecatedStatusIconSlot.length > 0;
-    this.requestUpdate();
   }
 }

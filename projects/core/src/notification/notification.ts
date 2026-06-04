@@ -124,6 +124,10 @@ export class Notification extends LitElement {
 
   protected typeNativePopoverController: TypeNativePopoverController<Notification>;
 
+  #closeTimeout?: ReturnType<typeof setTimeout>;
+
+  #hiddenAttributeObserver?: MutationObserver;
+
   get #popoverContent() {
     return html`
     <slot name="icon"><nve-icon .name=${statusIcons[this.status]} .ariaLabel=${(this.status ? (this.i18n as Record<string, string>)[this.status] : undefined) ?? this.i18n.information} part="status-icon"></nve-icon></slot>
@@ -154,7 +158,17 @@ export class Notification extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    this.#hiddenAttributeObserver = new MutationObserver(() => this.#syncInlineCloseTimeout());
+    this.#hiddenAttributeObserver.observe(this, { attributeFilter: ['hidden'] });
     this._internals.role = 'alert';
+    this.#syncInlineCloseTimeout();
+  }
+
+  disconnectedCallback() {
+    this.#clearCloseTimeout();
+    this.#hiddenAttributeObserver?.disconnect();
+    this.#hiddenAttributeObserver = undefined;
+    super.disconnectedCallback();
   }
 
   async firstUpdated(props: PropertyValues<this>) {
@@ -165,14 +179,21 @@ export class Notification extends LitElement {
     } else {
       this.setAttribute('nve-popover', '');
     }
+
+    this.#syncInlineCloseTimeout();
   }
 
   updated(props: PropertyValues<this>) {
     super.updated(props);
-    this.#setupCloseTimeout();
+
+    if (props.has('closeTimeout') || props.has('container') || props.has('inline')) {
+      this.#syncInlineCloseTimeout();
+    }
   }
 
   hidePopover(): void {
+    this.#clearCloseTimeout();
+
     if (this.popoverInline) {
       this.dispatchEvent(new CustomEvent('close', { bubbles: true, composed: true }));
     } else {
@@ -185,9 +206,18 @@ export class Notification extends LitElement {
    * But when the notification is in inline mode the
    * controller does not run so this sets it up directly.
    */
-  #setupCloseTimeout() {
+  #syncInlineCloseTimeout() {
+    this.#clearCloseTimeout();
+
     if (this.popoverInline && this.closeTimeout && !this.hidden) {
-      setTimeout(() => this.hidePopover(), this.closeTimeout);
+      this.#closeTimeout = setTimeout(() => this.hidePopover(), this.closeTimeout);
+    }
+  }
+
+  #clearCloseTimeout() {
+    if (this.#closeTimeout !== undefined) {
+      clearTimeout(this.#closeTimeout);
+      this.#closeTimeout = undefined;
     }
   }
 }

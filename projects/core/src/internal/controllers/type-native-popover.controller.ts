@@ -93,11 +93,12 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
       }
 
       if (e.newState === 'open' && this.host.closeTimeout) {
-        setTimeout(() => this.host.hidePopover(), this.host.closeTimeout);
+        this.#setCloseTimeout();
       }
 
       if (e.newState === 'closed') {
         this.#clearInterestTimeout();
+        this.#clearCloseTimeout();
       }
 
       this.host.inert = this.host.matches(':not(:popover-open)');
@@ -162,6 +163,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   }
 
   #interestTimeout: ReturnType<typeof setTimeout> | null = null;
+  #closeTimeout: ReturnType<typeof setTimeout> | null = null;
   #observers: MutationObserver[] = [];
   #previousLegacyTrigger: HTMLButtonElement | null = null;
 
@@ -173,6 +175,21 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
     this.#clearInterestTimeout();
+    this.#clearCloseTimeout();
+  }
+
+  #setCloseTimeout() {
+    this.#clearCloseTimeout();
+    if (this.host.closeTimeout) {
+      this.#closeTimeout = setTimeout(() => this.host.hidePopover(), this.host.closeTimeout);
+    }
+  }
+
+  #clearCloseTimeout() {
+    if (this.#closeTimeout) {
+      clearTimeout(this.#closeTimeout);
+      this.#closeTimeout = null;
+    }
   }
 
   #clearInterestTimeout() {

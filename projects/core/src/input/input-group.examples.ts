@@ -61,3 +61,31 @@ export const FilterGroupRange = {
 </div>
     `
 }
+
+/**
+ * @summary Input group with children that grow to fill available space.
+ * @tags test-case
+ */
+export const ResponsiveWidth = {
+  render: () => html`
+<div nve-layout="row align:vertical-center" style="width: 700px">
+  <nve-input-group style="--width: 100%">
+    <label>domain</label>
+    <nve-select style="width: 130px">
+      <select aria-label="protocol">
+        <option>https://</option>
+        <option>http://</option>
+      </select>
+    </nve-select>
+    <nve-input nve-layout="full">
+      <input placeholder="example.com" type="url" aria-label="host" />
+      <nve-button container="flat" readonly="">.com</nve-button>
+    </nve-input>
+    <nve-input style="width: 130px">
+      <input placeholder="Enter port" type="number" aria-label="port" />
+    </nve-input>
+    <nve-control-message>host: 123456</nve-control-message>
+  </nve-input-group>
+</div>
+`
+};

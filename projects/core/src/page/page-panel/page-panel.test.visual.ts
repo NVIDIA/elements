@@ -20,6 +20,7 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/page/define.js';
+    import '@nvidia-elements/core/icon-button/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
   <style>
@@ -36,12 +37,14 @@ function template(theme: '' | 'dark' = '') {
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
       <nve-page-panel-footer>•︎•︎•︎•︎•︎•︎</nve-page-panel-footer>
     </nve-page-panel>
-    <nve-page-panel closable>
+    <nve-page-panel id="panel-closable">
+      <nve-icon-button commandfor="panel-closable" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
       <nve-page-panel-header>•︎•︎•︎•︎•︎•︎</nve-page-panel-header>
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
       <nve-page-panel-footer>•︎•︎•︎•︎•︎•︎</nve-page-panel-footer>
     </nve-page-panel>
-    <nve-page-panel expandable>
+    <nve-page-panel id="panel-expandable">
+      <nve-icon-button commandfor="panel-expandable" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="up" aria-label="close"></nve-icon-button>
       <nve-page-panel-header>•︎•︎•︎•︎•︎•︎</nve-page-panel-header>
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
       <nve-page-panel-footer>•︎•︎•︎•︎•︎•︎</nve-page-panel-footer>

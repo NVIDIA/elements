@@ -14,8 +14,8 @@ describe(Toggletip.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <button id="btn">button</button>
-      <nve-toggletip trigger="btn" anchor="btn" closable>hello</nve-toggletip>
+      <button popovertarget="toggletip">button</button>
+      <nve-toggletip id="toggletip" closable>hello</nve-toggletip>
     `);
     element = fixture.querySelector(Toggletip.metadata.tag);
     await elementIsStable(element);

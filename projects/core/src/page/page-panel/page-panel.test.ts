@@ -6,7 +6,6 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { PagePanel } from '@nvidia-elements/core/page';
 import '@nvidia-elements/core/page/define.js';
-import { IconButton } from '@nvidia-elements/core/icon-button';
 
 describe(PagePanel.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -58,62 +57,32 @@ describe(PagePanel.metadata.tag, () => {
     expect(element.getAttribute('size')).toBe('sm');
   });
 
-  it('should show close button if closable', async () => {
-    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
-    element.closable = true;
+  it('should provide an actions slot', async () => {
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeDefined();
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('cancel');
+    expect(element.shadowRoot.querySelector('slot[name=actions]')).toBeTruthy();
   });
 
-  it('should show expand button if expandable', async () => {
-    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
-    element.expandable = true;
+  it('should not render an internal action button', async () => {
+    element.setAttribute('closable', '');
+    element.setAttribute('expandable', '');
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeDefined();
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('double-chevron');
+    expect(element.shadowRoot.querySelector('nve-icon-button')).toBe(null);
   });
 
-  it('should change the expand icon direction left when panel assigned to the left slot', async () => {
-    element.expandable = true;
-    element.slot = 'left';
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeDefined();
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('double-chevron');
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).direction).toBe('left');
-  });
-
-  it('should change the expand icon direction right when panel assigned to the right slot', async () => {
-    element.expandable = true;
-    element.slot = 'right';
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeDefined();
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('double-chevron');
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).direction).toBe('right');
-  });
-
-  it('should change the expand icon direction down when panel assigned to the bottom slot', async () => {
-    element.expandable = true;
-    element.slot = 'bottom';
-    await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag)).toBeDefined();
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('double-chevron');
-    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).direction).toBe('down');
-  });
-
-  it('should emit close event when close button clicked', async () => {
-    element.closable = true;
-    await elementIsStable(element);
+  it('should emit close event when close command is received', async () => {
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
+    element.dispatchEvent(new CommandEvent('command', { command: '--close' }));
     expect(await event).toBeDefined();
   });
 
-  it('should emit close event when expandable button clicked', async () => {
-    element.expandable = true;
+  it('should toggle hidden state when command is received', async () => {
+    element.hidden = true;
+    element.dispatchEvent(new CommandEvent('command', { command: '--open' }));
     await elementIsStable(element);
-    const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
-    expect(await event).toBeDefined();
+    expect(element.hidden).toBe(false);
+
+    element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+    await elementIsStable(element);
+    expect(element.hidden).toBe(true);
   });
 });

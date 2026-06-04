@@ -89,7 +89,7 @@ describe(ProgressRing.metadata.tag, () => {
   it('should assign slotted content to the default slot, distinct from the internal status icon', async () => {
     removeFixture(fixture);
     fixture = await createFixture(html`
-      <nve-progress-ring status="accent">
+      <nve-progress-ring status="warning">
         <nve-icon name="pause" status="accent"></nve-icon>
       </nve-progress-ring>
     `);
@@ -127,22 +127,7 @@ describe(ProgressRing.metadata.tag, () => {
     expect(ring.getAttribute('stroke-dasharray')).toBe('22px 44px');
   });
 
-  it('should suppress the internal icon and show slotted content when the deprecated status-icon slot is used', async () => {
-    removeFixture(fixture);
-    /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value, @nvidia-elements/lint/no-deprecated-slots */
-    fixture = await createFixture(html`
-      <nve-progress-ring status="warning">
-        <nve-icon name="pause" slot="status-icon"></nve-icon>
-      </nve-progress-ring>
-    `);
-    /* eslint-enable @nvidia-elements/lint/no-unexpected-slot-value, @nvidia-elements/lint/no-deprecated-slots */
-    element = fixture.querySelector(ProgressRing.metadata.tag);
-    await elementIsStable(element);
-
-    expect(element.shadowRoot.querySelector(Icon.metadata.tag)).toBeNull();
-
-    const statusIconSlot = element.shadowRoot.querySelector('slot[name="status-icon"]') as HTMLSlotElement;
-    expect(statusIconSlot.assignedElements()).toHaveLength(1);
-    expect(statusIconSlot.assignedElements()[0]).toBe(fixture.querySelector(Icon.metadata.tag));
+  it('should not render deprecated status-icon slot', async () => {
+    expect(element.shadowRoot.querySelector('slot[name="status-icon"]')).toBeNull();
   });
 });

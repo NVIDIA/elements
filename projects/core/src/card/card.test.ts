@@ -15,17 +15,15 @@ describe(Card.metadata.tag, () => {
   let cardContent: CardContent;
   let cardFooter: CardFooter;
 
-  /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
-  /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-card>
         <nve-card-footer></nve-card-footer>
         <p nve-text="body">content</p>
         <nve-card-header>
-          <h3 nve-text="heading" slot="subtitle">subtitle</h3>
-          <button slot="header-action">header action</button>
-          <h2 nve-text="heading" slot="title">title</h2>
+          <h2 nve-text="heading">title</h2>
+          <h3 nve-text="heading">subtitle</h3>
+          <button>header action</button>
         </nve-card-header>
         <nve-card-content></nve-card-content>
       </nve-card>
@@ -79,14 +77,22 @@ describe(Card.metadata.tag, () => {
     expect(card.getAttribute('container')).toBe('flat');
   });
 
-  it('should have card header preserve the title/subtitle/default/action DOM order via slots', async () => {
+  it('should have card header preserve default slotted DOM order', async () => {
     await elementIsStable(cardHeader);
 
     const [titleElement, subtitleElement, actionElement] = getFlattenedDOMTree(cardHeader).filter(e =>
-      e.hasAttribute('slot')
+      ['H2', 'H3', 'BUTTON'].includes(e.tagName)
     );
-    expect(titleElement).toBe(cardHeader.querySelector('[slot="title"]'));
-    expect(subtitleElement).toBe(cardHeader.querySelector('[slot="subtitle"]'));
-    expect(actionElement).toBe(cardHeader.querySelector('[slot="header-action"]'));
+    expect(titleElement).toBe(cardHeader.querySelector('h2'));
+    expect(subtitleElement).toBe(cardHeader.querySelector('h3'));
+    expect(actionElement).toBe(cardHeader.querySelector('button'));
+  });
+
+  it('should not render deprecated card header slots', async () => {
+    await elementIsStable(cardHeader);
+
+    expect(cardHeader.shadowRoot.querySelector('slot[name="title"]')).toBeNull();
+    expect(cardHeader.shadowRoot.querySelector('slot[name="subtitle"]')).toBeNull();
+    expect(cardHeader.shadowRoot.querySelector('slot[name="header-action"]')).toBeNull();
   });
 });

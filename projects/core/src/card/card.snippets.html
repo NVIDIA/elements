@@ -1,8 +1,10 @@
 <template name="Card" prefix="card" description="Basic Card with header and footer" type="pattern">
   <nve-card>
     <nve-card-header>
-      <div slot="title">${1:Title}</div>
-      <div slot="subtitle">${2:Sub Title}</div>
+      <div>
+        <h2>${1:Title}</h2>
+        <p>${2:Sub Title}</p>
+      </div>
     </nve-card-header>
     <nve-card-content>
       ${3:

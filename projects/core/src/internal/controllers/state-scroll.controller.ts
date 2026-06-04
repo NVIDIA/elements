@@ -24,7 +24,9 @@ export type Scroll = ReactiveElement & {
 };
 
 export class StateScrollController<T extends Scroll> implements ReactiveController {
-  get #target() {
+  #activeTarget?: HTMLElement;
+
+  get #target(): HTMLElement {
     const target = this.host.stateScrollConfig?.target;
     return target ? target : this.host;
   }
@@ -40,26 +42,49 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   async hostConnected() {
     await this.host.updateComplete;
     attachInternals(this.host);
+    this.#syncTarget();
+  }
 
-    this.#startScroll();
-    this.#target.addEventListener('scrollend', this.#onScrollEnd);
+  hostUpdated() {
+    this.#syncTarget();
   }
 
   hostDisconnected() {
-    this.#target.removeEventListener('scrollend', this.#onScrollEnd);
+    this.#removeTargetListeners();
+  }
+
+  #syncTarget() {
+    const target = this.#target;
+    if (this.#activeTarget === target) return;
+
+    this.#removeTargetListeners();
+    this.#activeTarget = target;
+    this.#activeTarget.addEventListener('scrollend', this.#onScrollEnd);
+    this.#startScroll();
   }
 
   #onScrollEnd = () => {
     this.host._internals!.states.delete('scrolling');
 
-    if (endOfScrollBox(this.#target, this.#offset)) {
-      this.host.dispatchEvent(new CustomEvent('scrollboxend'));
+    if (this.#activeTarget && endOfScrollBox(this.#activeTarget, this.#offset)) {
+      this.host.dispatchEvent(new CustomEvent('scrollboxend', { bubbles: true, composed: true }));
     }
 
     this.#startScroll();
   };
 
+  #onScroll = () => {
+    this.host._internals!.states.add('scrolling');
+  };
+
   #startScroll() {
-    this.#target.addEventListener('scroll', () => this.host._internals!.states.add('scrolling'), { once: true });
+    this.#activeTarget?.removeEventListener('scroll', this.#onScroll);
+    this.#activeTarget?.addEventListener('scroll', this.#onScroll, { once: true });
+  }
+
+  #removeTargetListeners() {
+    this.#activeTarget?.removeEventListener('scroll', this.#onScroll);
+    this.#activeTarget?.removeEventListener('scrollend', this.#onScrollEnd);
+    this.#activeTarget = undefined;
   }
 }

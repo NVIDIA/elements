@@ -249,15 +249,13 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
   let fixture: HTMLElement;
   let element: Accordion;
 
-  /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
-  /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
   beforeEach(async () => {
     fixture = await createFixture(html`
     <nve-accordion-group>
       <nve-accordion>
         <nve-accordion-header>
           heading
-          <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+          <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
         </nve-accordion-header>
         <nve-accordion-content>content</nve-accordion-content>
       </nve-accordion>
@@ -271,16 +269,45 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
     removeFixture(fixture);
   });
 
-  it('should align caret icon button to left side if an action is provided by consumer', () => {
-    expect(element.shadowRoot.querySelector('.has-action')).toBeTruthy();
+  it('should not align caret icon button to left side if an action is provided by consumer', () => {
+    expect(element.shadowRoot.querySelector('.has-suffix')).toBeNull();
   });
 
-  it('should keep the action caret pointing down when expanded', async () => {
+  it('should not align caret icon button to left side for suffix content outside the assigned header', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+    <nve-accordion>
+      <nve-accordion-header>heading</nve-accordion-header>
+      <nve-accordion-content>
+        content
+        <nve-accordion-header>
+          nested heading
+          <span slot="suffix">nested suffix</span>
+        </nve-accordion-header>
+      </nve-accordion-content>
+    </nve-accordion>
+    `);
+    element = fixture.querySelector<Accordion>(Accordion.metadata.tag);
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelector('.has-suffix')).toBeNull();
+  });
+
+  it('should point the action caret up when expanded', async () => {
     element.expanded = true;
     await elementIsStable(element);
 
     const iconButton = element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
-    expect(iconButton.direction).toBe('down');
+    expect(iconButton.direction).toBe('up');
+  });
+
+  it('should not render deprecated header slots', async () => {
+    const header = fixture.querySelector<AccordionHeader>(AccordionHeader.metadata.tag);
+    await elementIsStable(header);
+
+    expect(header.shadowRoot.querySelector('slot[name="title"]')).toBeNull();
+    expect(header.shadowRoot.querySelector('slot[name="subtitle"]')).toBeNull();
+    expect(header.shadowRoot.querySelector('slot[name="actions"]')).toBeNull();
   });
 });
 

@@ -7,6 +7,8 @@ import { ssrRunner } from '@internals/vite';
 import { Panel } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags -- deprecated panel contract test intentionally exercises panel tags. */
+
 describe(Panel.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
     const result = await ssrRunner.render(html`

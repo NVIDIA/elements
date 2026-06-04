@@ -50,7 +50,8 @@ function template(theme: '' | 'dark' = '') {
       </nve-button-group>
     </nve-toolbar>
 
-    <nve-page-panel slot="left" size="sm" expandable>
+    <nve-page-panel id="panel-left" slot="left" size="sm">
+      <nve-icon-button commandfor="panel-left" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="left" aria-label="close"></nve-icon-button>
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
     </nve-page-panel>
 
@@ -58,11 +59,13 @@ function template(theme: '' | 'dark' = '') {
       <h1 nve-text="heading">•︎•︎•︎•︎•︎•︎</h1>
     </main>
 
-    <nve-page-panel slot="bottom" size="sm" closable>
+    <nve-page-panel id="panel-bottom" slot="bottom" size="sm">
+      <nve-icon-button commandfor="panel-bottom" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
     </nve-page-panel>
 
-    <nve-page-panel slot="right" size="sm" expandable>
+    <nve-page-panel id="panel-right" slot="right" size="sm">
+      <nve-icon-button commandfor="panel-right" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="right" aria-label="close"></nve-icon-button>
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
     </nve-page-panel>
 

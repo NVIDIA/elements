@@ -24,20 +24,12 @@
 }
 
 :host([vertical]) ::slotted(nve-tabs-item) {
-  --border-width: var(--nve-ref-border-width-lg);
-  --border-height: 24px;
-  --border-top: calc(50% - 12px);
   --border-inset: 0 8px 0 8px;
   --width: calc(100% - 8px);
 }
 
 :host([vertical]) ::slotted(nve-tabs-item:state(selected)) {
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
-}
-
-:host([borderless]) ::slotted(nve-tabs-item) {
-  --border-width: 0;
-  --border-height: 0;
 }
 
 ::slotted(nve-tabs-item) {

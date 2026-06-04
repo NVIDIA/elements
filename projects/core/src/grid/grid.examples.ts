@@ -1286,7 +1286,7 @@ export const PanelGrid = {
     </nve-page>
     `;
   }
-}
+};
 
 /**
  * @summary Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
@@ -1401,4 +1401,4 @@ export const SortVisibility = {
     <nve-grid-cell>cell 1-4</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>`
-}
+};

@@ -8,6 +8,8 @@ import { runAxe } from '@internals/testing/axe';
 import { Panel } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags -- deprecated panel contract test intentionally exercises panel tags. */
+
 describe(Panel.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Panel;

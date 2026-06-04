@@ -83,6 +83,10 @@ export class Icon extends LitElement {
     return isServer && globalThis._NVE_SSR_ICON_REGISTRY ? globalThis._NVE_SSR_ICON_REGISTRY[this.name!] : this.svg;
   }
 
+  #iconRegistryEventName?: string;
+
+  #onIconRegistryUpdate = (event: Event) => this.#asyncRender(event as CustomEvent<IconSVG>);
+
   render() {
     return html`
       <div internal-host aria-hidden="true"><slot>${unsafeSVG(this.#iconString)}</slot></div>
@@ -93,18 +97,12 @@ export class Icon extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'img';
-    globalThis?.document?.addEventListener(
-      `${Icon.metadata.tag}-${this.name}`,
-      this.#asyncRender.bind(this) as unknown as EventListener
-    );
+    this.#addIconRegistryListener();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    globalThis?.document?.removeEventListener(
-      `${Icon.metadata.tag}-${this.name}`,
-      this.#asyncRender.bind(this) as unknown as EventListener
-    );
+    this.#removeIconRegistryListener();
   }
 
   static async add(icons: { [key: string]: IconSVG }) {
@@ -134,7 +132,23 @@ export class Icon extends LitElement {
 
   async updated(props: PropertyValues<this>) {
     super.updated(props);
+    if (props.has('name')) {
+      this.#removeIconRegistryListener();
+      this.#addIconRegistryListener();
+    }
     await this.#render();
+  }
+
+  #addIconRegistryListener() {
+    if (!this.isConnected || !this.name || this.#iconRegistryEventName) return;
+    this.#iconRegistryEventName = `${Icon.metadata.tag}-${this.name}`;
+    globalThis.document?.addEventListener(this.#iconRegistryEventName, this.#onIconRegistryUpdate);
+  }
+
+  #removeIconRegistryListener() {
+    if (!this.#iconRegistryEventName) return;
+    globalThis.document?.removeEventListener(this.#iconRegistryEventName, this.#onIconRegistryUpdate);
+    this.#iconRegistryEventName = undefined;
   }
 
   async #asyncRender(event: CustomEvent<IconSVG>) {

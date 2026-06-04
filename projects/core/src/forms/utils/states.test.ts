@@ -250,7 +250,7 @@ describe('setupControlValidationStates', () => {
 describe('setupControlStates', () => {
   let fixture: HTMLElement;
   let control: Control;
-  let input: HTMLInputElement & { readonly: boolean };
+  let input: HTMLInputElement & { readOnly: boolean };
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -262,7 +262,7 @@ describe('setupControlStates', () => {
     `);
     control = fixture.querySelector(Control.metadata.tag);
     setupControlStates(control);
-    input = fixture.querySelector<HTMLInputElement & { readonly: boolean }>('input');
+    input = fixture.querySelector<HTMLInputElement & { readOnly: boolean }>('input');
     await elementIsStable(control);
   });
 

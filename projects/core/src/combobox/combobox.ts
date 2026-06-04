@@ -65,13 +65,6 @@ export class Combobox extends Control implements ContainerElement {
    */
   @property({ type: String, reflect: true }) container: 'flat';
 
-  /**
-   * @deprecated Use `tagLayout = 'hidden'` or `tag-layout="hidden"` instead.
-   *
-   * Disable rendering of inline tags for many-item select
-   */
-  @property({ type: Boolean, reflect: true }) notags: boolean;
-
   /** Manage inline tag rendering for many-item select */
   @property({ type: String, reflect: true, attribute: 'tag-layout' }) tagLayout: 'hidden' | 'wrap';
 
@@ -188,7 +181,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   get #tagLayoutIsHidden() {
-    return this.notags || this.tagLayout === 'hidden';
+    return this.tagLayout === 'hidden';
   }
 
   get #largeOptionsList() {

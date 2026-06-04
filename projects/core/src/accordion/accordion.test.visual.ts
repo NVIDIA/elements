@@ -16,9 +16,6 @@ describe('accordion visual', () => {
   });
 });
 
-/* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
-/* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
-
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
@@ -81,8 +78,10 @@ function template(theme: '' | 'dark' = '') {
 
   <nve-accordion>
     <nve-accordion-header>
-      <div slot="title">•︎•︎•︎</div>
-      <div slot="subtitle">•︎•︎•︎</div>
+      <div>
+        <div>•︎•︎•︎</div>
+        <div>•︎•︎•︎</div>
+      </div>
       <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
       <nve-icon-button container="flat" icon-name="delete" size="sm" slot="suffix"></nve-icon-button>
     </nve-accordion-header>

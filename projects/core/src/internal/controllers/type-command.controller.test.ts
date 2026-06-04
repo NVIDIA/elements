@@ -182,7 +182,7 @@ describe('type-command.controller', () => {
       );
       element = fixture.querySelector<TypeCommandControllerTestElement>('type-command-controller-test-element');
       target = fixture.querySelector<HTMLElement>('#target');
-      (element as TypeCommandControllerTestElement & { readonly: boolean }).readonly = true;
+      (element as TypeCommandControllerTestElement & { readOnly: boolean }).readOnly = true;
       await elementIsStable(element);
 
       let fired = false;

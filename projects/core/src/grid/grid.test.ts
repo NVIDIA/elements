@@ -3,7 +3,7 @@
 
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
@@ -177,5 +177,21 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
     await element.scrollTo({ top: 20 });
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('[part="_scrollbox"]').scrollTop).toBe(20);
+  });
+
+  it('should dispatch scrollboxend when the scrollbox reaches the end', async () => {
+    const scrollbox = element.shadowRoot.querySelector<HTMLElement>('[part="_scrollbox"]')!;
+    Object.defineProperties(scrollbox, {
+      clientHeight: { configurable: true, value: 50 },
+      scrollHeight: { configurable: true, value: 100 },
+      scrollTop: { configurable: true, value: 50 }
+    });
+
+    const event = untilEvent(element, 'scrollboxend');
+    scrollbox.dispatchEvent(new Event('scrollend'));
+    const scrollboxEndEvent = await event;
+
+    expect(scrollboxEndEvent.bubbles).toBe(true);
+    expect(scrollboxEndEvent.composed).toBe(true);
   });
 });

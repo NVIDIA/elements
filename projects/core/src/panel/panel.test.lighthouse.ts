@@ -4,6 +4,8 @@
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags -- deprecated panel contract test intentionally exercises panel tags. */
+
 describe('panel lighthouse report', () => {
   test('panel should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-panel', /* html */`

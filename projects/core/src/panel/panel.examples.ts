@@ -8,7 +8,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
-/* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
+/* eslint-disable @nvidia-elements/lint/no-restricted-attributes, @nvidia-elements/lint/no-deprecated-tags -- panel examples intentionally cover deprecated panel tags. */
 
 export default {
   title: 'Elements/Panel',

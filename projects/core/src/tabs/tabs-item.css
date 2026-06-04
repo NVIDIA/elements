@@ -2,10 +2,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 :host {
-  --border-background: var(--indicator-background);
-  --border-height: var(--indicator-height);
-  --border-width: 100%;
-  --border-top: auto;
   --width: 100%;
   --padding: 0 var(--nve-ref-size-200);
   --font-size: var(--nve-ref-font-size-100);
@@ -48,20 +44,6 @@
 :host(:state(selected)) {
   --color: var(--nve-sys-text-emphasis-color);
   --font-weight: var(--nve-ref-font-weight-semibold);
-}
-
-/* @deprecated use the --indicator-background variable instead */
-:host(:state(selected))::after {
-  width: var(--border-width);
-  height: var(--border-height);
-  border-radius: var(--border-radius);
-  background: var(--border-background);
-  top: var(--border-top);
-  content: '';
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
 }
 
 :host(:state(selected)) ::slotted(nve-icon) {

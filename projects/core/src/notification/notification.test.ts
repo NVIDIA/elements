@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { Notification, NotificationGroup } from '@nvidia-elements/core/notification';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -160,6 +160,44 @@ describe(`${Notification.metadata.tag} - inline`, () => {
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
+
+  it('should setup close timeout when container changes to inline mode', async () => {
+    let closeCount = 0;
+    element.addEventListener('close', () => closeCount++);
+
+    vi.useFakeTimers();
+    try {
+      element.closeTimeout = 10;
+      await elementIsStable(element);
+
+      element.container = 'flat';
+      await elementIsStable(element);
+
+      vi.advanceTimersByTime(10);
+      expect(closeCount).toBe(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('should setup close timeout when inline property changes', async () => {
+    let closeCount = 0;
+    element.addEventListener('close', () => closeCount++);
+
+    vi.useFakeTimers();
+    try {
+      element.closeTimeout = 10;
+      await elementIsStable(element);
+
+      element.inline = true;
+      await elementIsStable(element);
+
+      vi.advanceTimersByTime(10);
+      expect(closeCount).toBe(1);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
 
 describe(`${Notification.metadata.tag} - inline group`, () => {
@@ -186,6 +224,33 @@ describe(`${Notification.metadata.tag} - inline group`, () => {
     element.appendChild(notification);
     await elementIsStable(notification);
     expect(await close).toBeDefined();
+  });
+
+  it('should not duplicate close timeout when inline notification updates while visible', async () => {
+    const notification = document.createElement('nve-notification') as Notification;
+    let closeCount = 0;
+
+    notification.addEventListener('close', () => closeCount++);
+    element.appendChild(notification);
+    await elementIsStable(notification);
+
+    vi.useFakeTimers();
+    try {
+      notification.closeTimeout = 10;
+      await elementIsStable(notification);
+
+      notification.status = 'success';
+      await elementIsStable(notification);
+
+      notification.closable = true;
+      await elementIsStable(notification);
+
+      vi.advanceTimersByTime(10);
+
+      expect(closeCount).toBe(1);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
 

@@ -5,7 +5,7 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@nvidia-elements/core/icon';
-import type { TaskStatus, SupportStatus, TrendStatus, Color, Prominence } from '@nvidia-elements/core/internal';
+import type { TaskStatus, SupportStatus, Color, Prominence } from '@nvidia-elements/core/internal';
 import {
   useStyles,
   statusIcons,
@@ -47,7 +47,7 @@ export class Badge extends LitElement {
   /**
    * Visual treatment to represent a ongoing task, support status.
    */
-  @property({ type: String, reflect: true }) status: TaskStatus | SupportStatus | TrendStatus;
+  @property({ type: String, reflect: true }) status: TaskStatus | SupportStatus;
 
   /**
    * Highlights content to draw attention and convey simple messages.
@@ -90,11 +90,9 @@ export class Badge extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix-icon">${this.status && !this.status?.includes('trend') ? html`<nve-icon part="_icon" .name=${statusIcons[this.status] ?? ''} .size=${this.#size} aria-hidden="true"></nve-icon>` : nothing}</slot>
+        <slot name="prefix-icon">${this.status ? html`<nve-icon part="_icon" .name=${statusIcons[this.status] ?? ''} .size=${this.#size} aria-hidden="true"></nve-icon>` : nothing}</slot>
         <slot @slotchange=${this.#slotChange}></slot>
-        <slot name="suffix-icon">
-          ${this.status?.includes('trend') ? html`<nve-icon part="_icon" .name=${statusIcons[this.status]} aria-hidden="true"></nve-icon>` : nothing}
-        </slot>
+        <slot name="suffix-icon"></slot>
       </div>
     `;
   }
@@ -116,10 +114,7 @@ export class Badge extends LitElement {
   }
 
   #assignAriaLabel() {
-    const trend = this.status?.includes('trend')
-      ? ` ${this.i18n.trend} ${(this.i18n as Record<string, string>)[this.status!.split('-')[1]!]}`
-      : '';
-    this._internals.ariaLabel = this.textContent + trend;
+    this._internals.ariaLabel = this.textContent;
   }
 
   #assignDefaultIcon() {

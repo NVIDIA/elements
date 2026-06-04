@@ -39,11 +39,4 @@ nve-tabs-item {
   &[selected] {
     anchor-name: --selected;
   }
-
-  /* if the item does not have custom styles disable the item specific indicator */
-  @container style(--border-background: var(--indicator-background)) {
-    &::after {
-      visibility: hidden !important;
-    }
-  }
 }

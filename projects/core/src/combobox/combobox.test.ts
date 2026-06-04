@@ -795,18 +795,6 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
   });
 
-  it('should support deprecated notags alias', async () => {
-    element.notags = true;
-    select.multiple = true;
-    select.options[0].selected = true;
-    select.options[1].selected = true;
-    select.options[2].selected = true;
-
-    await elementIsStable(element);
-
-    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
-  });
-
   it('should clear and reset text input and select when reset() is called', async () => {
     const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
     expect(tags().length).toBe(2);
@@ -1389,50 +1377,6 @@ describe(`${Combobox.metadata.tag}: container property`, () => {
 
     expect(element.container).toBe('flat');
     expect(element.getAttribute('container')).toBe('flat');
-  });
-});
-
-describe(`${Combobox.metadata.tag}: notags property reflection`, () => {
-  let fixture: HTMLElement;
-  let element: Combobox;
-
-  beforeEach(async () => {
-    fixture = await createFixture(html`
-      <nve-combobox>
-        <label>combobox</label>
-        <input type="search" />
-        <select multiple>
-          <option value="1">Option 1</option>
-        </select>
-      </nve-combobox>
-    `);
-    element = fixture.querySelector(Combobox.metadata.tag);
-    await elementIsStable(element);
-  });
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
-  it('should have notags as false by default', async () => {
-    expect(element.notags).toBeFalsy();
-    expect(element.hasAttribute('notags')).toBe(false);
-  });
-
-  it('should reflect notags attribute when set via attribute', async () => {
-    element.setAttribute('notags', '');
-    await elementIsStable(element);
-
-    expect(element.notags).toBe(true);
-    expect(element.hasAttribute('notags')).toBe(true);
-  });
-
-  it('should reflect notags attribute when set via property', async () => {
-    element.notags = true;
-    await elementIsStable(element);
-
-    expect(element.notags).toBe(true);
-    expect(element.hasAttribute('notags')).toBe(true);
   });
 });
 

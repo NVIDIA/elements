@@ -45,7 +45,6 @@ slot[name='messages'] {
   display: flex;
   flex-flow: column wrap;
   gap: var(--nve-ref-space-sm) var(--nve-ref-space-md);
-  width: fit-content;
 }
 
 :host([layout*='-inline']) .input-slot {

@@ -84,6 +84,23 @@ describe(CopyButton.metadata.tag, () => {
     expect(element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag)).toBeFalsy();
   });
 
+  it('should not render deprecated popover trigger attributes', async () => {
+    emulateMouseEnter(element);
+    await elementIsStable(element);
+
+    const tooltip = element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag);
+    expect(tooltip.hasAttribute('trigger')).toBe(false);
+
+    const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    element.click();
+    await elementIsStable(element);
+
+    const toast = element.shadowRoot.querySelector<Toast>(Toast.metadata.tag);
+    expect(toast.hasAttribute('trigger')).toBe(false);
+
+    mockClipboard.mockRestore();
+  });
+
   it('should handle clipboard API errors', async () => {
     // Mock the Clipboard API to throw an error
     const originalClipboard = navigator.clipboard;

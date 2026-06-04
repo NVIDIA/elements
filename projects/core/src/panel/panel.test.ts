@@ -10,6 +10,8 @@ import { getFlattenedDOMTree } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags -- deprecated panel contract test intentionally exercises panel tags. */
+
 describe(Panel.metadata.tag, () => {
   let fixture: HTMLElement;
   let panel: Panel;

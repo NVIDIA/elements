@@ -213,6 +213,7 @@ export const CrossShadowRootAnchorPosition = {
  * @tags test-case
  * @deprecated
  */
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes -- legacy behavior-trigger example intentionally covers deprecated popover attributes. */
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-toggletip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</nve-toggletip>

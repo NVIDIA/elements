@@ -52,7 +52,7 @@ slot[name='actions'] {
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted(nve-button[interaction='flat']) {
+::slotted(nve-button[container='flat']) {
   --color: inherit;
 }
 

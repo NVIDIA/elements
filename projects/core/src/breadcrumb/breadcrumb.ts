@@ -33,11 +33,6 @@ import type { Button } from '@nvidia-elements/core/button';
  * @cssprop --icon-width
  * @cssprop --icon-height
  * @cssprop --text-decoration
- * @cssprop --breadcrumb-height - deprecated
- * @cssprop --item-text-size - deprecated
- * @cssprop --item-color - deprecated
- * @cssprop --item-active-color - deprecated
- * @cssprop --item-active-font-weight - deprecated
  * @slot - default slot for `nve-button` and anchor elements
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/navigation_role
  */

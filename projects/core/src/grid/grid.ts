@@ -6,6 +6,8 @@ import { property } from 'lit/decorators/property.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import {
   keyNavigationGrid,
+  stateScroll,
+  type StateScrollConfig,
   useStyles,
   attachInternals,
   appendRootNodeStyle,
@@ -39,6 +41,7 @@ import globalStyles from './grid.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
 @audit()
+@stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements ContainerElement {
   /**
@@ -66,6 +69,12 @@ export class Grid extends LitElement implements ContainerElement {
       columns: this.#columns,
       rows: [this.#header!, ...this.#rows],
       cells: [...this.#columns, ...this.#cells]
+    };
+  }
+
+  get stateScrollConfig(): StateScrollConfig {
+    return {
+      target: this.shadowRoot?.querySelector<HTMLElement>('[part="_scrollbox"]') ?? undefined
     };
   }
 

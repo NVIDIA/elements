@@ -88,9 +88,6 @@ export const ICON_IMPORTS = {\n${sortIconKeys(Object.keys(icons))
 
 export type IconName = keyof typeof ICON_IMPORTS;
 
-/** @deprecated */
-export type IconNames = IconName;
-
 export const ICON_NAMES = Object.keys(ICON_IMPORTS) as IconName[];
 `,
       { encoding: 'utf-8' },

@@ -56,14 +56,3 @@ nve-icon {
   inset: 0;
   position: absolute;
 }
-
-/* deprecated */
-:host([interaction*='flat']) [interaction-state] {
-  --nve-sys-interaction-state-ratio: 0 !important;
-}
-
-/* deprecated */
-:host([interaction*='flat']:state(pressed)) {
-  --color: var(--nve-sys-text-emphasis-color) !important;
-  --background: none !important;
-}

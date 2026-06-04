@@ -69,8 +69,10 @@ describe('state-scroll.controller', () => {
     const event = untilEvent(element, 'scrollboxend');
     element.scrollTop = 50;
     element.dispatchEvent(new Event('scrollend'));
-    await event;
-    expect(await event).toBeTruthy();
+    const scrollboxEndEvent = await event;
+    expect(scrollboxEndEvent).toBeTruthy();
+    expect(scrollboxEndEvent.bubbles).toBe(true);
+    expect(scrollboxEndEvent.composed).toBe(true);
   });
 
   it('should account for scroll offset', async () => {
@@ -83,14 +85,23 @@ describe('state-scroll.controller', () => {
   });
 
   it('should add scrolling state on scroll for custom target', async () => {
-    element.stateScrollConfig.target = element.shadowRoot.querySelector<HTMLElement>('div');
-    const event = untilEvent(element, 'scroll');
-    element.scrollLeft = 10;
+    const target = element.shadowRoot.querySelector<HTMLElement>('div')!;
+    element.stateScrollConfig.target = target;
+    element.requestUpdate();
+    await elementIsStable(element);
+
     element.dispatchEvent(new Event('scroll', { bubbles: true }));
+    expect(element.matches(':state(scrolling)')).toBe(false);
+
+    const event = untilEvent(target, 'scroll');
+    target.dispatchEvent(new Event('scroll', { bubbles: true }));
     await event;
     expect(element.matches(':state(scrolling)')).toBe(true);
 
     element.stateScrollConfig.target = undefined;
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const eventElement = untilEvent(element, 'scroll');
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scroll', { bubbles: true }));

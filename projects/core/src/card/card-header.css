@@ -26,17 +26,6 @@
   width: 100%;
 }
 
-::slotted([slot='title']) {
-  font-size: var(--nve-ref-font-size-200);
-  font-weight: var(--nve-ref-font-weight-bold);
-}
-
-::slotted([slot='subtitle']) {
-  margin: 0;
-  font-size: var(--nve-ref-font-size-100);
-  font-weight: var(--nve-ref-font-weight-regular);
-}
-
 ::slotted(nve-tabs) {
   margin-block-end: calc(-1 * var(--padding));
 }

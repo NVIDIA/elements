@@ -268,7 +268,7 @@ export const ItemTooltip = {
     <nve-menu-item popovertarget="menu-tooltip" id="menu-item-2">
       item 2
       <nve-icon id="menu-anchor" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon>
-      <nve-tooltip anchor="menu-anchor" open-delay="2000" id="menu-tooltip">This is a warning tooltip</nve-tooltip>
+      <nve-tooltip anchor="menu-anchor" id="menu-tooltip" style="interest-delay-start: 2s">This is a warning tooltip</nve-tooltip>
     </nve-menu-item>
     <nve-menu-item>item 3</nve-menu-item>
   </nve-menu>

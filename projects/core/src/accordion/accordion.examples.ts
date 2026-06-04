@@ -19,7 +19,7 @@ export const Default = {
 <nve-accordion-group behavior-expand>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Workspace Settings</h2>
+      <h2 nve-text="heading xs medium">Workspace Settings</h2>
     </nve-accordion-header>
     <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
@@ -193,26 +193,6 @@ export const NestedOpenEvent = {
         </nve-accordion-content>
       </nve-accordion>
     </nve-accordion-group>
-  `
-};
-
-/**
- * @summary Legacy slot patterns (title, subtitle, actions) for backward compatibility. Deprecated in favor of prefix/suffix slots for more flexible content layout, but maintained to support existing implementations during migration.
- * @tags test-case
-*/
-export const DeprecatedSlots = {
-  /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
-  /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
-  render: () => html`
-    <nve-accordion behavior-expand>
-      <nve-accordion-header>
-        <div slot="title">Project Details</div>
-        <div slot="subtitle">Last modified today</div>
-        <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
-        <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
-      </nve-accordion-header>
-      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
-    </nve-accordion>
   `
 };
 

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size } from '@nvidia-elements/core/internal';
 import {
@@ -9,11 +9,9 @@ import {
   attachInternals,
   audit,
   I18nController,
-  scopedRegistry,
   TypeExpandableController,
   useStyles
 } from '@nvidia-elements/core/internal';
-import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './page-panel.css?inline';
 import globalStyles from './page-panel.global.css?inline';
 
@@ -39,30 +37,15 @@ import globalStyles from './page-panel.global.css?inline';
  * @cssprop --max-width
  * @cssprop --max-height
  * @cssprop --animation-duration - Duration of panel open/close animations
-
- * @csspart icon-button - The close/collapse icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role
  *
  */
 @audit()
-@scopedRegistry()
 export class PagePanel extends LitElement {
   /**
    * Sets the max size of the panel.
    */
   @property({ type: String, reflect: true }) size?: Size;
-
-  /**
-   * Determines if a closable button should render within page panel.
-   * @deprecated use the `actions` slot instead
-   */
-  @property({ type: Boolean }) closable: boolean;
-
-  /**
-   * Determines if a expandable button should render within page panel.
-   * @deprecated use the `actions` slot instead
-   */
-  @property({ type: Boolean }) expandable: boolean;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
@@ -79,34 +62,9 @@ export class PagePanel extends LitElement {
     parents: ['nve-page']
   };
 
-  static elementDefinitions = {
-    [IconButton.metadata.tag]: IconButton
-  };
-
-  #typeExpandableController = new TypeExpandableController(this, { useHidden: true });
-
-  get #position() {
-    const position: Record<string, string> = {
-      left: 'left',
-      right: 'right',
-      bottom: 'bottom'
-    };
-
-    return position[this.slot] || '';
-  }
-
-  get #closableIconName() {
-    return this.expandable ? 'double-chevron' : 'cancel';
-  }
-
-  get #closableIconDirection() {
-    const directions: Record<string, string> = {
-      left: 'left',
-      right: 'right',
-      bottom: 'down'
-    };
-
-    return directions[this.#position] || 'up';
+  constructor() {
+    super();
+    new TypeExpandableController(this, { useHidden: true });
   }
 
   /** @private */
@@ -117,9 +75,7 @@ export class PagePanel extends LitElement {
     <div internal-host>
       <div part="_header">
         <slot name="header"></slot>
-        <slot name="actions">
-          ${this.closable || this.expandable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${() => this.#typeExpandableController.close()} .iconName=${this.#closableIconName} .direction=${this.#closableIconDirection} aria-label=${this.i18n.close} container="inline" role="button"></nve-icon-button>` : nothing}
-        </slot>
+        <slot name="actions"></slot>
       </div>
       <div class="content">
         <slot></slot>

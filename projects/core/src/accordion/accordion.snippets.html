@@ -1,7 +1,7 @@
 <template name="Accordion" prefix="accordion" description="Basic accordion with title and content slot." type="pattern">
   <nve-accordion behavior-expand container="${1:flat}">
     <nve-accordion-header>
-      <div slot="title">${2:Title}</div>
+      <div>${2:Title}</div>
     </nve-accordion-header>
 
     <nve-accordion-content> ${3:Content} </nve-accordion-content>
@@ -16,10 +16,10 @@
   type="pattern">
   <nve-accordion behavior-expand container="${1:flat}">
     <nve-accordion-header>
-      <div slot="title">${2:Title}</div>
+      <div>${2:Title}</div>
 
-      <nve-icon-button container="flat" icon-name="${3:add}" size="sm" slot="actions"></nve-icon-button>
-      <nve-icon-button container="flat" icon-name="${4:delete}" size="sm" slot="actions"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="${3:add}" size="sm" slot="suffix"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="${4:delete}" size="sm" slot="suffix"></nve-icon-button>
     </nve-accordion-header>
 
     <nve-accordion-content> ${5:Content} </nve-accordion-content>
@@ -35,7 +35,7 @@
   <nve-accordion-group behavior-expand-single container="${1:flat}">
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">${2:Title}</div>
+        <div>${2:Title}</div>
       </nve-accordion-header>
 
       <nve-accordion-content> ${3:Content} </nve-accordion-content>
@@ -43,7 +43,7 @@
 
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">${4:Title}</div>
+        <div>${4:Title}</div>
       </nve-accordion-header>
 
       <nve-accordion-content> ${5:Content} </nve-accordion-content>
@@ -51,7 +51,7 @@
 
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">${6:Title}</div>
+        <div>${6:Title}</div>
       </nve-accordion-header>
 
       <nve-accordion-content> ${7:Content} </nve-accordion-content>

@@ -30,7 +30,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @cssprop --padding
  * @cssprop --border-bottom
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
- * @deprecated use `nve-page-panel` with `nve-page` instead
+ * @deprecated use `nve-page-panel-header` with `nve-page-panel` instead
  */
 export class PanelHeader extends LitElement {
   static styles = useStyles([panelHeaderStyleSheet]);
@@ -68,6 +68,7 @@ export class PanelHeader extends LitElement {
  * @slot - This is a default/unnamed slot for panel content
  * @cssprop --padding
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @deprecated use `nve-page-panel-content` with `nve-page-panel` instead
  */
 export class PanelContent extends LitElement {
   static styles = useStyles([panelContentStyleSheet]);
@@ -94,6 +95,7 @@ export class PanelContent extends LitElement {
  * @cssprop --border-top
  * @cssprop --gap
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @deprecated use `nve-page-panel-footer` with `nve-page-panel` instead
  */
 export class PanelFooter extends LitElement {
   static styles = useStyles([panelFooterStyleSheet]);
@@ -134,6 +136,7 @@ export class PanelFooter extends LitElement {
  * @cssprop --panel-button-border-radius - Border radius of the panel expand/collapse button
  * @csspart icon-button - The expand/collapse icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @deprecated use `nve-page-panel` with `nve-page` instead
  */
 
 @scopedRegistry()

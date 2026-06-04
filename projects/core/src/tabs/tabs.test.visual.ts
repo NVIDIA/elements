@@ -70,8 +70,8 @@ function template(theme: '' | 'dark' = '') {
     </nve-tabs-item>
   </nve-tabs>
 
-  <nve-tabs>
-    <nve-tabs-item selected style="--border-background: var(--nve-ref-color-brand-green-900);">
+  <nve-tabs style="--indicator-background: var(--nve-ref-color-brand-green-900);">
+    <nve-tabs-item selected>
       <a href="#">•︎•︎•︎•︎•︎•︎</a>
     </nve-tabs-item>
     <nve-tabs-item>

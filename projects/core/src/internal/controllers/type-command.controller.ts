@@ -20,10 +20,6 @@ export type Command = ReactiveElement &
     commandfor: string | null;
     commandForElement: HTMLElement | null;
     readOnly: boolean;
-    /**
-     * @deprecated Use `readOnly`. The `readonly` attribute remains supported.
-     */
-    readonly?: boolean;
     disabled: boolean;
   };
 
@@ -61,12 +57,8 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
     this.host.removeEventListener('click', this.#triggerCommand);
   }
 
-  get #isReadOnly() {
-    return this.host.readOnly || this.host.readonly === true;
-  }
-
   #updateListener() {
-    if (this.#trigger === 'manual' || this.#isReadOnly || this.host.disabled) {
+    if (this.#trigger === 'manual' || this.host.readOnly || this.host.disabled) {
       this.host.removeEventListener('click', this.#triggerCommand);
     } else {
       this.host.addEventListener('click', this.#triggerCommand);
@@ -82,7 +74,7 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
   };
 
   dispatchCommand() {
-    if (this.#isReadOnly || this.host.disabled || !this.host.command) {
+    if (this.host.readOnly || this.host.disabled || !this.host.command) {
       return false;
     }
 

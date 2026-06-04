@@ -68,10 +68,10 @@ describe(Toast.metadata.tag, () => {
     expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('close');
   });
 
-  it('should hide status icon if muted', async () => {
-    element.status = 'muted';
+  it('should reflect muted prominence', async () => {
+    element.prominence = 'muted';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector(Icon.metadata.tag)).toBe(null);
+    expect(element.getAttribute('prominence')).toBe('muted');
   });
 
   it('should emit open event when showPopover is called', async () => {

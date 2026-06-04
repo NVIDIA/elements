@@ -14,35 +14,9 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--nve-ref-space-xs);
+}
 
-  ::slotted([slot='title']) {
-    margin: 0;
-    font-size: var(--nve-ref-font-size-200);
-    font-weight: var(--nve-ref-font-weight-medium);
-  }
-
-  ::slotted([slot='subtitle']) {
-    margin: 0;
-    font-size: var(--nve-ref-font-size-100);
-    font-weight: var(--nve-ref-font-weight-regular);
-    color: var(--nve-sys-text-muted-color);
-  }
-
-  ::part(icon-button) {
-    --width: var(--nve-ref-size-400);
-    --height: var(--nve-ref-size-400);
-  }
-
-  #titles {
-    display: flex;
-    flex-direction: column;
-    gap: var(--nve-ref-space-xxxs);
-  }
-
-  #actions {
-    display: flex;
-    flex-direction: row;
-    gap: var(--nve-ref-space-xs);
-    margin-inline-start: auto;
-  }
+slot:not([name]) {
+  display: block;
+  flex: 1;
 }

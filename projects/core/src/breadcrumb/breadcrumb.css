@@ -10,10 +10,10 @@
 }
 
 [internal-host] {
-  --_font-size: var(--item-text-size, var(--font-size));
+  --_font-size: var(--font-size);
   --_font-weight: var(--font-weight);
-  --_color: var(--item-color, var(--color));
-  --_height: var(--breadcrumb-height, var(--height));
+  --_color: var(--color);
+  --_height: var(--height);
 }
 
 ol,
@@ -72,10 +72,10 @@ nve-icon[separator] {
 }
 
 ::slotted(*:last-child) {
-  color: var(--item-active-color, var(--nve-sys-text-emphasis-color));
-  font-weight: var(--item-active-font-weight, var(--nve-ref-font-weight-semibold));
-  --font-weight: var(--item-active-font-weight, var(--nve-ref-font-weight-semibold));
-  --color: var(--item-active-color, var(--nve-sys-text-emphasis-color));
+  color: var(--nve-sys-text-emphasis-color);
+  font-weight: var(--nve-ref-font-weight-semibold);
+  --font-weight: var(--nve-ref-font-weight-semibold);
+  --color: var(--nve-sys-text-emphasis-color);
 }
 
 [hidden-slot] {

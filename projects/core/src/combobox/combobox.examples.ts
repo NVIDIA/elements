@@ -838,11 +838,10 @@ const schema = {
 class ComboboxDemo extends LitElement {
   @state() private value = [{ name: '', value: '' }];
 
-  /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
     return html`
-      <nve-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon> </nve-icon>filters</nve-button>
-      <nve-dropdown id="one" hidden trigger="filter-btn" anchor="filter-btn" @open=${e => e.target.hidden = false} @close=${e => e.target.hidden = true} style="--min-width: 400px; --min-height: 500px;">
+      <nve-button id="filter-btn" popovertarget="one" ?pressed=${!!this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon>filters</nve-button>
+      <nve-dropdown id="one" anchor="filter-btn" style="--min-width: 400px; --min-height: 500px;">
         <progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></progressive-filter-demo>
       </nve-dropdown>
       <pre style="margin-top: 300px">${JSON.stringify(this.value.filter(v => v.name.length), null, 2)}</pre>

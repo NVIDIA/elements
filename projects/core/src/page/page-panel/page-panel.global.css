@@ -5,10 +5,6 @@ nve-page-panel:has(nve-page-panel-header) {
   &::part(_header) {
     border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
   }
-
-  &::part(icon-button) {
-    position: relative;
-  }
 }
 
 nve-page-panel-header:has(nve-tabs) {

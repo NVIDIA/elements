@@ -68,19 +68,6 @@ nve-icon,
   --state-color-base: var(--status-color);
 }
 
-/* trend status */
-:host([status='trend-down']) {
-  --state-color-base: var(--nve-sys-visualization-trend-negative-emphasis-color);
-}
-
-:host([status='trend-up']) {
-  --state-color-base: var(--nve-sys-visualization-trend-positive-emphasis-color);
-}
-
-:host([status='trend-neutral']) {
-  --state-color-base: var(--nve-sys-status-pending-color);
-}
-
 :host([container='flat']) {
   --background: var(--nve-sys-background-color);
   --border-radius: var(--nve-ref-border-radius-sm);

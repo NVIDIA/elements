@@ -201,11 +201,6 @@ export interface NveElement {
    */
   readOnly?: boolean;
 
-  /**
-   * @deprecated Use `readOnly`. The `readonly` attribute remains supported.
-   */
-  readonly?: boolean;
-
   /** Defines the value associated with the element's name when submitting the form data. The server receives this value in params when the form submits through this button. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value) */
   value?: string;
 
@@ -384,15 +379,6 @@ export interface NveElement {
  */
 export type SlotName = 'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon';
 
-/** @deprecated Determines the flat container element interaction. */
-export type FlatInteraction = 'flat' | 'flat-emphasize' | `${'flat'}-${Interaction}`;
-
-/** @deprecated Determines if an element renders with an inverse contrast. */
-export type Inverse = 'inverse';
-
-/** @deprecated Determines the trend status of an element. Should convey the trend of a metric. */
-export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
-
 /** The Interaction type provides a way to show the intent of an interactive element. This can help users quickly understand what each interaction does and reduce the potential for confusion or errors.
  * - `emphasis` Shows the interaction targets emphasis or highlighting primary actions.
  * - `destructive` Shows the interaction targets destructive actions such as deleting or removing.
@@ -426,9 +412,6 @@ export const statusIcons: { [key: string]: IconName } = {
   stopping: 'stop-sign',
   pending: 'circle-dash',
   starting: 'circle-dot',
-  'trend-up': 'trend-up',
-  'trend-down': 'trend-down',
-  'trend-neutral': 'minus',
   ignored: 'circle-angled-line'
 } as const;
 
