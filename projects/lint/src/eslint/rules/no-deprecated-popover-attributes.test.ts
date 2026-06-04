@@ -8,6 +8,11 @@ import htmlParser from '@html-eslint/parser';
 import noDeprecatedPopoverAttributes from './no-deprecated-popover-attributes.js';
 
 const rule = noDeprecatedPopoverAttributes as unknown as JSRuleDefinition;
+const POPOVER_API_REPLACEMENT = 'native HTML popover API';
+const createDeprecatedPopoverAttributeError = (attribute: string, replacement = POPOVER_API_REPLACEMENT) => ({
+  messageId: 'unexpected-deprecated-popover-attribute',
+  data: { attribute, replacement }
+});
 
 describe('noDeprecatedPopoverAttributes', () => {
   let tester: RuleTester;
@@ -34,7 +39,7 @@ describe('noDeprecatedPopoverAttributes', () => {
     expect(noDeprecatedPopoverAttributes.meta.schema).toBeDefined();
     expect(noDeprecatedPopoverAttributes.meta.messages).toBeDefined();
     expect(noDeprecatedPopoverAttributes.meta.messages['unexpected-deprecated-popover-attribute']).toBe(
-      'Unexpected use of deprecated popover attribute {{attribute}}. Use native HTML popover API instead.'
+      'Unexpected use of deprecated popover attribute {{attribute}}. Use {{replacement}} instead.'
     );
   });
 
@@ -51,51 +56,63 @@ describe('noDeprecatedPopoverAttributes', () => {
       invalid: [
         {
           code: '<nve-dialog trigger></nve-dialog>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
         },
         {
           code: '<nve-dialog behavior-trigger></nve-dialog>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'behavior-trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
         },
         {
           code: '<nve-tooltip trigger></nve-tooltip>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
         },
         {
           code: '<nve-tooltip behavior-trigger></nve-tooltip>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'behavior-trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
+        },
+        {
+          code: '<nve-tooltip open-delay="500"></nve-tooltip>',
+          errors: [createDeprecatedPopoverAttributeError('open-delay', '`interest-delay-start` CSS property')]
+        },
+        {
+          code: '<nve-toggletip trigger></nve-toggletip>',
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
+        },
+        {
+          code: '<nve-toggletip behavior-trigger></nve-toggletip>',
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
         },
         {
           code: '<nve-toast trigger></nve-toast>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
         },
         {
           code: '<nve-toast behavior-trigger></nve-toast>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'behavior-trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
         },
         {
           code: '<nve-drawer trigger></nve-drawer>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
         },
         {
           code: '<nve-drawer behavior-trigger></nve-drawer>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'behavior-trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
         },
         {
           code: '<nve-dropdown trigger></nve-dropdown>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
         },
         {
           code: '<nve-dropdown behavior-trigger></nve-dropdown>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'behavior-trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
         },
         {
           code: '<nve-notification trigger></nve-notification>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('trigger')]
         },
         {
           code: '<nve-notification behavior-trigger></nve-notification>',
-          errors: [{ messageId: 'unexpected-deprecated-popover-attribute', data: { attribute: 'behavior-trigger' } }]
+          errors: [createDeprecatedPopoverAttributeError('behavior-trigger')]
         }
       ]
     });

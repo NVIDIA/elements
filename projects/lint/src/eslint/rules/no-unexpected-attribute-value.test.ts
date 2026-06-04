@@ -59,6 +59,19 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
+  it('should defer deprecated enum values to the deprecation rule', () => {
+    tester.run('should defer deprecated enum values to the deprecation rule', rule, {
+      valid: [
+        `<nve-badge status="trend-up">Badge</nve-badge>`,
+        `<nve-button interaction="flat">Button</nve-button>`,
+        `<nve-button interaction="inverse">Button</nve-button>`,
+        `<nve-icon-button interaction="flat-emphasize" icon-name="menu"></nve-icon-button>`,
+        `<nve-toast status="muted">Toast</nve-toast>`
+      ],
+      invalid: []
+    });
+  });
+
   it('should allow non-enum attribute values', () => {
     tester.run('should allow non-enum attribute values', rule, {
       valid: [

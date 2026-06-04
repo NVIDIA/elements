@@ -11,6 +11,7 @@ import noDeprecatedPopoverAttributes from '../rules/no-deprecated-popover-attrib
 import noUnexpectedGlobalAttributeValue from '../rules/no-unexpected-global-attribute-value.js';
 import noUnexpectedStyleCustomization from '../rules/no-unexpected-style-customization.js';
 import noDeprecatedGlobalAttributeValue from '../rules/no-deprecated-global-attribute-value.js';
+import noDeprecatedCssVariable from '../rules/no-deprecated-css-variable.js';
 import noDeprecatedGlobalAttributes from '../rules/no-deprecated-global-attributes.js';
 import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 import noSlottedPopovers from '../rules/no-slotted-popovers.js';
@@ -19,6 +20,7 @@ import noMissingSlottedElements from '../rules/no-missing-slotted-elements.js';
 import noMissingControlLabel from '../rules/no-missing-control-label.js';
 import noMissingIconName from '../rules/no-missing-icon-name.js';
 import noMissingPopoverTrigger from '../rules/no-missing-popover-trigger.js';
+import noMisprefixedTags from '../rules/no-misprefixed-tags.js';
 import noUnexpectedSlotValue from '../rules/no-unexpected-slot-value.js';
 import noUnknownTags from '../rules/no-unknown-tags.js';
 import noUnexpectedAttributeValue from '../rules/no-unexpected-attribute-value.js';
@@ -64,6 +66,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-deprecated-attributes': noDeprecatedAttributes,
         'no-deprecated-icon-names': noDeprecatedIconNames,
         'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes,
+        'no-deprecated-css-variable': noDeprecatedCssVariable,
         'no-deprecated-global-attribute-value': noDeprecatedGlobalAttributeValue,
         'no-deprecated-global-attributes': noDeprecatedGlobalAttributes,
         'no-deprecated-slots': noDeprecatedSlots,
@@ -71,6 +74,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-missing-control-label': noMissingControlLabel,
         'no-missing-icon-name': noMissingIconName,
         'no-missing-popover-trigger': noMissingPopoverTrigger,
+        'no-misprefixed-tags': noMisprefixedTags,
         'no-restricted-attributes': noRestrictedAttributes,
         'no-restricted-page-sizing': noRestrictedPageSizing,
         'no-slotted-popovers': noSlottedPopovers,
@@ -96,6 +100,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
     '@nvidia-elements/lint/no-deprecated-popover-attributes': ['error'],
+    '@nvidia-elements/lint/no-deprecated-css-variable': ['error'],
     '@nvidia-elements/lint/no-deprecated-global-attribute-value': ['error'],
     '@nvidia-elements/lint/no-deprecated-global-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-slots': ['error'],
@@ -103,6 +108,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-missing-control-label': ['error'],
     '@nvidia-elements/lint/no-missing-icon-name': ['error'],
     '@nvidia-elements/lint/no-missing-popover-trigger': ['error'],
+    '@nvidia-elements/lint/no-misprefixed-tags': ['error'],
     '@nvidia-elements/lint/no-restricted-attributes': ['error'],
     '@nvidia-elements/lint/no-restricted-page-sizing': ['error'],
     '@nvidia-elements/lint/no-slotted-popovers': ['error'],

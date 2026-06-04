@@ -9,7 +9,7 @@ import noDeprecatedSlots from './no-deprecated-slots.js';
 
 const rule = noDeprecatedSlots as unknown as JSRuleDefinition;
 
-describe('noDeprecatedAttributes', () => {
+describe('noDeprecatedSlots', () => {
   let tester: RuleTester;
 
   beforeEach(() => {
@@ -45,7 +45,15 @@ describe('noDeprecatedAttributes', () => {
           <div slot="prefix">prefix</div>
           <div>content</div>
           <div slot="suffix">suffix</div>
-        </nve-accordion-header>`
+        </nve-accordion-header>`,
+        `<nve-card-header>
+          <h2>title</h2>
+          <p>subtitle</p>
+          <button>action</button>
+        </nve-card-header>`,
+        `<nve-progress-ring>
+          <nve-icon name="pause"></nve-icon>
+        </nve-progress-ring>`
       ],
       invalid: []
     });
@@ -67,6 +75,26 @@ describe('noDeprecatedAttributes', () => {
             { messageId: 'unexpected-deprecated-slots', data: { slot: 'subtitle' } },
             { messageId: 'unexpected-deprecated-slots', data: { slot: 'actions' } }
           ]
+        },
+        {
+          code: `
+          <nve-card-header>
+            <div slot="title">title</div>
+            <div slot="subtitle">subtitle</div>
+            <button slot="header-action">actions</button>
+          </nve-card-header>`,
+          errors: [
+            { messageId: 'unexpected-deprecated-slots', data: { slot: 'title' } },
+            { messageId: 'unexpected-deprecated-slots', data: { slot: 'subtitle' } },
+            { messageId: 'unexpected-deprecated-slots', data: { slot: 'header-action' } }
+          ]
+        },
+        {
+          code: `
+          <nve-progress-ring>
+            <nve-icon name="pause" slot="status-icon"></nve-icon>
+          </nve-progress-ring>`,
+          errors: [{ messageId: 'unexpected-deprecated-slots', data: { slot: 'status-icon' } }]
         }
       ]
     });

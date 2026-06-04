@@ -6,8 +6,6 @@ import { globalAttributes } from './metadata.js';
 export const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
 
 const ATTRIBUTE_EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
-const DEPRECATED_NVE_TEXT_VALUES = new Set(['eyebrow']);
-const DEPRECATED_NVE_LAYOUT_VALUES = new Set(['grow']);
 
 const VALID_NVE_TEXT_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-text')?.values?.map(value => value.name) ?? []),
@@ -24,12 +22,10 @@ const VALID_NVE_DISPLAY_VALUES = new Set([
   ...ATTRIBUTE_EXCEPTIONS
 ]);
 
-export const DISTILLED_NVE_TEXT_VALUES = new Set(
-  [...VALID_NVE_TEXT_VALUES].filter(v => !isComplexAttributeValue(v) && !DEPRECATED_NVE_TEXT_VALUES.has(v))
-);
+export const DISTILLED_NVE_TEXT_VALUES = new Set([...VALID_NVE_TEXT_VALUES].filter(v => !isComplexAttributeValue(v)));
 
 export const DISTILLED_NVE_LAYOUT_VALUES = new Set(
-  [...VALID_NVE_LAYOUT_VALUES].filter(v => !isComplexAttributeValue(v) && !DEPRECATED_NVE_LAYOUT_VALUES.has(v))
+  [...VALID_NVE_LAYOUT_VALUES].filter(v => !isComplexAttributeValue(v))
 );
 
 export const DISTILLED_NVE_DISPLAY_VALUES = new Set(
@@ -68,7 +64,8 @@ export function recommendedNveTextValue(attributeValue: string): string | null {
     [/^heading-1$/, 'heading'],
     [/^heading:1$/, 'heading'],
     [/^heading-2$/, 'heading'],
-    [/^heading:2$/, 'heading']
+    [/^heading:2$/, 'heading'],
+    [/^eyebrow$/, 'label sm']
   ];
 
   const result: string[] = repairAttributeValueSegments(values, repairs);
@@ -94,6 +91,7 @@ export function recommendedNveLayoutValue(attributeValue: string, invalidSymbols
     [/^default$/, 'column'],
     [/^stack$/, 'column'],
     [/^col$/, 'column'],
+    [/^grow$/, 'full'],
     [/^inline$/, 'row'],
     [/^center$/, 'align:center'],
     [/^wrap$/, 'align:wrap'],
@@ -161,7 +159,7 @@ function getAttributeValueSegments(value: string) {
 }
 
 function repairAttributeValueSegments(values: string[], repairs: [RegExp, string][]) {
-  return values.map(value => repairStringValue(value, repairs));
+  return values.flatMap(value => repairStringValue(value, repairs).split(/\s+/).filter(Boolean));
 }
 
 function repairStringValue(value: string, repairs: [RegExp, string][]) {

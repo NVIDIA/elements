@@ -9,14 +9,7 @@ import type { HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
-export const DEPRECATED_ATTRIBUTE_VALUES: Record<string, Record<string, string>> = {
-  'nve-text': {
-    eyebrow: 'label sm'
-  },
-  'nve-layout': {
-    grow: 'full'
-  }
-};
+export const DEPRECATED_ATTRIBUTE_VALUES: Record<string, Record<string, string>> = {};
 
 function rewriteValue(value: string, deprecations: Record<string, string>): string | null {
   const tokens = value.split(/\s+/).filter(Boolean);

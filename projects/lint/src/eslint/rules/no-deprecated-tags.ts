@@ -11,6 +11,10 @@ const DEPRECATED_TAGS: Record<string, string> = {
   'nve-app-header': 'nve-page-header',
   'nve-alert-banner': 'nve-alert-group',
   'nve-json-view': 'nve-monaco-editor',
+  'nve-panel': 'nve-page-panel',
+  'nve-panel-content': 'nve-page-panel-content',
+  'nve-panel-footer': 'nve-page-panel-footer',
+  'nve-panel-header': 'nve-page-panel-header',
   // v0
   'mlv-accordion': 'nve-accordion',
   'mlv-accordion-content': 'nve-accordion-content',

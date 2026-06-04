@@ -1,19 +1,14 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
 import htmlParser from '@html-eslint/parser';
-import noDeprecatedAttributeValue, { DEPRECATED_ATTRIBUTE_VALUES } from './no-deprecated-global-attribute-value.js';
+import { DEPRECATED_ATTRIBUTE_VALUES } from './no-deprecated-global-attribute-value.js';
 import noDeprecatedGlobalAttributeValue from './no-deprecated-global-attribute-value.js';
 
 const rule = noDeprecatedGlobalAttributeValue as unknown as JSRuleDefinition;
-
-const MIGRATE_PROMPT_DEPRECATIONS: { attribute: string; before: string; after: string }[] = [
-  { attribute: 'nve-text', before: 'eyebrow', after: 'label sm' },
-  { attribute: 'nve-layout', before: 'grow', after: 'full' }
-];
 
 describe('noDeprecatedGlobalAttributeValue', () => {
   let tester: RuleTester;
@@ -29,28 +24,32 @@ describe('noDeprecatedGlobalAttributeValue', () => {
     });
   });
 
+  afterEach(() => {
+    delete DEPRECATED_ATTRIBUTE_VALUES['nve-text'];
+  });
+
   it('should define rule metadata', () => {
-    expect(noDeprecatedAttributeValue.meta).toBeDefined();
-    expect(noDeprecatedAttributeValue.meta.type).toBe('problem');
-    expect(noDeprecatedAttributeValue.meta.fixable).toBe('code');
-    expect(noDeprecatedAttributeValue.meta.hasSuggestions).toBe(true);
-    expect(noDeprecatedAttributeValue.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedAttributeValue.meta.docs.url).toContain('/docs/lint/');
+    expect(noDeprecatedGlobalAttributeValue.meta).toBeDefined();
+    expect(noDeprecatedGlobalAttributeValue.meta.type).toBe('problem');
+    expect(noDeprecatedGlobalAttributeValue.meta.fixable).toBe('code');
+    expect(noDeprecatedGlobalAttributeValue.meta.hasSuggestions).toBe(true);
+    expect(noDeprecatedGlobalAttributeValue.meta.docs.recommended).toBe(true);
+    expect(noDeprecatedGlobalAttributeValue.meta.docs.url).toContain('/docs/lint/');
   });
 
-  it('should cover every deprecation documented in the migrate prompt', () => {
-    MIGRATE_PROMPT_DEPRECATIONS.forEach(({ attribute, before, after }) => {
-      expect(DEPRECATED_ATTRIBUTE_VALUES[attribute]?.[before]).toBe(after);
-    });
+  it('should not retain removed utility value deprecations', () => {
+    expect(DEPRECATED_ATTRIBUTE_VALUES).toEqual({});
   });
 
-  it('should allow non-deprecated values', () => {
-    tester.run('non-deprecated values', rule, {
+  it('should not own removed utility values', () => {
+    tester.run('removed utility values', rule, {
       valid: [
         '<div nve-text="body"></div>',
         '<div nve-text="label sm"></div>',
+        '<div nve-text="eyebrow"></div>',
         '<div nve-layout="row"></div>',
         '<div nve-layout="full"></div>',
+        '<div nve-layout="grow"></div>',
         '<div></div>'
       ],
       invalid: []
@@ -58,6 +57,10 @@ describe('noDeprecatedGlobalAttributeValue', () => {
   });
 
   it('should ignore template binding expressions', () => {
+    DEPRECATED_ATTRIBUTE_VALUES['nve-text'] = {
+      eyebrow: 'label sm'
+    };
+
     tester.run('template binding expressions', rule, {
       valid: [
         '<div nve-text="${value}"></div>',
@@ -68,45 +71,49 @@ describe('noDeprecatedGlobalAttributeValue', () => {
     });
   });
 
-  it('should report and auto-fix every migrate-prompt deprecation', () => {
-    tester.run('migrate prompt deprecations', rule, {
-      valid: [],
-      invalid: MIGRATE_PROMPT_DEPRECATIONS.map(({ attribute, before, after }) => ({
-        code: `<div ${attribute}="${before}"></div>`,
-        output: `<div ${attribute}="${after}"></div>`,
-        errors: [
-          {
-            messageId: 'unexpected-deprecated-global-attribute-value',
-            data: { attribute, value: before, alternative: after },
-            suggestions: [
-              {
-                messageId: 'suggest-replace-deprecated-global-attribute-value',
-                data: { value: before, alternative: after },
-                output: `<div ${attribute}="${after}"></div>`
-              }
-            ]
-          }
-        ]
-      }))
-    });
-  });
+  it('should report and fix deprecated utility values when configured', () => {
+    DEPRECATED_ATTRIBUTE_VALUES['nve-text'] = {
+      default: 'body',
+      eyebrow: 'label sm',
+      subtitle: 'body sm'
+    };
 
-  it('should rewrite deprecated tokens within a multi-token value', () => {
-    tester.run('multi-token replacement', rule, {
-      valid: [],
+    tester.run('deprecated utility values', rule, {
+      valid: ['<div></div>', '<div nve-layout="row"></div>', '<p nve-text="body"></p>', '<p nve-text></p>'],
       invalid: [
         {
-          code: '<div nve-layout="grow column"></div>',
-          output: '<div nve-layout="full column"></div>',
+          code: '<p nve-text="default"></p>',
+          output: '<p nve-text="body"></p>',
           errors: [
             {
               messageId: 'unexpected-deprecated-global-attribute-value',
-              data: { attribute: 'nve-layout', value: 'grow column', alternative: 'full column' },
+              data: { attribute: 'nve-text', value: 'default', alternative: 'body' },
               suggestions: [
                 {
                   messageId: 'suggest-replace-deprecated-global-attribute-value',
-                  data: { value: 'grow column', alternative: 'full column' },
-                  output: '<div nve-layout="full column"></div>'
+                  data: { value: 'default', alternative: 'body' },
+                  output: '<p nve-text="body"></p>'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          code: '<p nve-text="eyebrow muted default subtitle"></p>',
+          output: '<p nve-text="label sm muted body"></p>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-global-attribute-value',
+              data: {
+                attribute: 'nve-text',
+                value: 'eyebrow muted default subtitle',
+                alternative: 'label sm muted body'
+              },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-deprecated-global-attribute-value',
+                  data: { value: 'eyebrow muted default subtitle', alternative: 'label sm muted body' },
+                  output: '<p nve-text="label sm muted body"></p>'
                 }
               ]
             }

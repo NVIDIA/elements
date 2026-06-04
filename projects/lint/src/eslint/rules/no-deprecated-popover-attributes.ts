@@ -7,13 +7,37 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
-const DEPRECATED_POPOVER_ATTRIBUTES = {
-  'nve-dialog': ['trigger', 'behavior-trigger'],
-  'nve-tooltip': ['trigger', 'behavior-trigger'],
-  'nve-toast': ['trigger', 'behavior-trigger'],
-  'nve-drawer': ['trigger', 'behavior-trigger'],
-  'nve-dropdown': ['trigger', 'behavior-trigger'],
-  'nve-notification': ['trigger', 'behavior-trigger']
+const POPOVER_API_REPLACEMENT = 'native HTML popover API';
+const DEPRECATED_POPOVER_ATTRIBUTES: Record<string, Record<string, string>> = {
+  'nve-dialog': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT
+  },
+  'nve-tooltip': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT,
+    'open-delay': '`interest-delay-start` CSS property'
+  },
+  'nve-toggletip': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT
+  },
+  'nve-toast': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT
+  },
+  'nve-drawer': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT
+  },
+  'nve-dropdown': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT
+  },
+  'nve-notification': {
+    trigger: POPOVER_API_REPLACEMENT,
+    'behavior-trigger': POPOVER_API_REPLACEMENT
+  }
 } as const;
 
 const rule = {
@@ -28,7 +52,7 @@ const rule = {
     schema: [],
     messages: {
       ['unexpected-deprecated-popover-attribute']:
-        'Unexpected use of deprecated popover attribute {{attribute}}. Use native HTML popover API instead.'
+        'Unexpected use of deprecated popover attribute {{attribute}}. Use {{replacement}} instead.'
     }
   },
   create(context: Rule.RuleContext) {
@@ -36,13 +60,14 @@ const rule = {
       Tag(node: HtmlTagNode) {
         Object.entries(DEPRECATED_POPOVER_ATTRIBUTES).forEach(([tag, attributes]) => {
           if (node.name === tag) {
-            attributes.forEach(attribute => {
+            Object.entries(attributes).forEach(([attribute, replacement]) => {
               const attr = findAttr(node, attribute);
               if (attr) {
                 context.report({
                   node: attr,
                   data: {
-                    attribute
+                    attribute,
+                    replacement
                   },
                   messageId: 'unexpected-deprecated-popover-attribute'
                 });

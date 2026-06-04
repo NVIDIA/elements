@@ -10,7 +10,7 @@ declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 interface DeprecatedAttributeConfig {
   replacement?: string;
-  values?: string[];
+  values?: readonly string[] | Record<string, string | undefined>;
 }
 
 interface DeprecatedAttributeReport {
@@ -19,30 +19,72 @@ interface DeprecatedAttributeReport {
   config: DeprecatedAttributeConfig;
 }
 
+function isDeprecatedAttributeValueMap(
+  values: DeprecatedAttributeConfig['values']
+): values is Record<string, string | undefined> {
+  return !!values && !Array.isArray(values);
+}
+
+const DEPRECATED_BUTTON_INTERACTION_VALUES = {
+  emphasize: 'interaction="emphasis"',
+  inverse: undefined,
+  flat: 'container="flat"',
+  'flat-destructive': 'container="flat" interaction="destructive"',
+  'flat-emphasis': 'container="flat" interaction="emphasis"',
+  'flat-emphasize': 'container="flat" interaction="emphasis"'
+} as const;
+
 const DEPRECATED_ATTRIBUTES: Record<string, Record<string, DeprecatedAttributeConfig>> = {
   'nve-badge': {
     status: { values: ['trend-up', 'trend-down', 'trend-neutral'] }
   },
+  'nve-button': {
+    interaction: { values: DEPRECATED_BUTTON_INTERACTION_VALUES }
+  },
   'nve-combobox': {
     notags: { replacement: 'tag-layout="hidden"' }
+  },
+  'nve-icon-button': {
+    interaction: { values: DEPRECATED_BUTTON_INTERACTION_VALUES }
+  },
+  'nve-toast': {
+    status: { values: { muted: 'prominence="muted"' } }
   }
 };
 
 function attributeValueIsDeprecated(config: DeprecatedAttributeConfig, value?: string) {
-  return !config.values || (!!value && config.values.includes(value));
+  if (!config.values) return true;
+  if (!value) return false;
+  return Array.isArray(config.values) ? config.values.includes(value) : Object.hasOwn(config.values, value);
+}
+
+export function attributeValueIsDeprecatedForTag(tagName: string, attribute: string, value?: string) {
+  const config = DEPRECATED_ATTRIBUTES[tagName]?.[attribute];
+  return !!config && attributeValueIsDeprecated(config, value);
+}
+
+function getDeprecatedAttributeReplacement(config: DeprecatedAttributeConfig, value?: string) {
+  const values = config.values;
+  if (!isDeprecatedAttributeValueMap(values) || !value || !Object.hasOwn(values, value)) {
+    return config.replacement;
+  }
+  return values[value];
 }
 
 function reportDeprecatedAttribute(context: Rule.RuleContext, { attr, attribute, config }: DeprecatedAttributeReport) {
-  const replacement = config.replacement;
-  const messageId = config.replacement
-    ? 'unexpected-deprecated-attribute-replacement'
+  const value = attr.value?.value;
+  const replacement = getDeprecatedAttributeReplacement(config, value);
+  const messageId = replacement
+    ? config.values
+      ? 'unexpected-deprecated-attribute-value-replacement'
+      : 'unexpected-deprecated-attribute-replacement'
     : 'unexpected-deprecated-attribute';
   const report: Rule.ReportDescriptor = {
     node: attr,
     data: {
       attribute,
-      replacement: config.replacement ?? '',
-      value: attr.value?.value ?? ''
+      replacement: replacement ?? '',
+      value: value ?? ''
     },
     messageId
   };
@@ -67,7 +109,9 @@ const rule = {
       ['unexpected-deprecated-attribute']:
         'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"',
       ['unexpected-deprecated-attribute-replacement']:
-        'Unexpected use of deprecated attribute "{{attribute}}". Use {{replacement}} instead.'
+        'Unexpected use of deprecated attribute "{{attribute}}". Use {{replacement}} instead.',
+      ['unexpected-deprecated-attribute-value-replacement']:
+        'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}". Use {{replacement}} instead.'
     }
   },
   create(context: Rule.RuleContext) {

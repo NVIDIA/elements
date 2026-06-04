@@ -122,6 +122,38 @@ describe('noUnexpectedAttributeValue', () => {
           ]
         },
         {
+          code: '<p nve-text="eyebrow"></p>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value-alternative',
+              data: { attribute: 'nve-text', value: 'eyebrow', alternative: 'label sm' },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-attribute-value',
+                  data: { value: 'eyebrow', alternative: 'label sm' },
+                  output: '<p nve-text="label sm"></p>'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          code: '<p nve-text="eyebrow muted"></p>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value-alternative',
+              data: { attribute: 'nve-text', value: 'eyebrow muted', alternative: 'label sm muted' },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-attribute-value',
+                  data: { value: 'eyebrow muted', alternative: 'label sm muted' },
+                  output: '<p nve-text="label sm muted"></p>'
+                }
+              ]
+            }
+          ]
+        },
+        {
           code: '<p nve-text="unknown"></p>',
           errors: [
             {
@@ -248,6 +280,38 @@ describe('noUnexpectedAttributeValue', () => {
                   messageId: 'suggest-replace-attribute-value',
                   data: { value: 'col gap:sm', alternative: 'column gap:sm' },
                   output: '<div nve-layout="column gap:sm"></div>'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          code: '<div nve-layout="grow"></div>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value-alternative',
+              data: { attribute: 'nve-layout', value: 'grow', alternative: 'full' },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-attribute-value',
+                  data: { value: 'grow', alternative: 'full' },
+                  output: '<div nve-layout="full"></div>'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          code: '<div nve-layout="grow column"></div>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value-alternative',
+              data: { attribute: 'nve-layout', value: 'grow column', alternative: 'full column' },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-attribute-value',
+                  data: { value: 'grow column', alternative: 'full column' },
+                  output: '<div nve-layout="full column"></div>'
                 }
               ]
             }
