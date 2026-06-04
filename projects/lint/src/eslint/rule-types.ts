@@ -10,6 +10,9 @@ export interface HtmlTagNode {
   attributes?: HtmlAttribute[];
   value?: string;
   openStart: { range: [number, number] };
+  openEnd?: { range: [number, number] };
+  close?: { range: [number, number]; value: string } | null;
+  selfClosing?: boolean;
   loc?: { start: { line: number; column: number }; end: { line: number; column: number } };
   range?: [number, number];
   [key: string]: unknown;

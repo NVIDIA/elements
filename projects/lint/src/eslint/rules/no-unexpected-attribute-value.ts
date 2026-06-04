@@ -6,6 +6,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { getElementAttribute, getRecommendedValue } from '../internals/element-attributes.js';
 import { isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
+import { attributeValueIsDeprecatedForTag } from './no-deprecated-attributes.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
@@ -50,7 +51,12 @@ const rule = {
             const value = attr.value?.value ?? '';
             const attrInfo = getElementAttribute(tagName, attributeName);
 
-            if (attrInfo?.isEnum && !attrInfo.deprecated && !attrInfo.values.includes(value)) {
+            if (
+              attrInfo?.isEnum &&
+              !attrInfo.deprecated &&
+              !attributeValueIsDeprecatedForTag(tagName, attributeName, value) &&
+              !attrInfo.values.includes(value)
+            ) {
               const validValues = [...attrInfo.values].sort((a, b) => a.localeCompare(b));
               const alternative = getRecommendedValue(value, validValues);
               const suggest = alternative

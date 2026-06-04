@@ -56,6 +56,39 @@ describe('noDeprecatedTags', () => {
           errors: [
             { messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-json-view', replacement: 'nve-monaco-editor' } }
           ]
+        },
+        {
+          code: '<nve-panel></nve-panel>',
+          errors: [
+            { messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-panel', replacement: 'nve-page-panel' } }
+          ]
+        },
+        {
+          code: '<nve-panel-header></nve-panel-header>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-tag',
+              data: { tag: 'nve-panel-header', replacement: 'nve-page-panel-header' }
+            }
+          ]
+        },
+        {
+          code: '<nve-panel-content></nve-panel-content>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-tag',
+              data: { tag: 'nve-panel-content', replacement: 'nve-page-panel-content' }
+            }
+          ]
+        },
+        {
+          code: '<nve-panel-footer></nve-panel-footer>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-tag',
+              data: { tag: 'nve-panel-footer', replacement: 'nve-page-panel-footer' }
+            }
+          ]
         }
       ]
     });

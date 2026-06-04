@@ -66,7 +66,7 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-attributes` | Disallow use of deprecated attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-global-attribute-value` | Disallow use of deprecated attribute values for nve-* utility attributes. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-imports` | Disallow use of deprecated CSS import paths. | CSS | `error` |
-| `@nvidia-elements/lint/no-deprecated-css-variable` | Disallow use of deprecated --mlv-* CSS theme variables. | CSS | `error` |
+| `@nvidia-elements/lint/no-deprecated-css-variable` | Disallow use of deprecated CSS custom properties. | CSS/HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-global-attributes` | Disallow use of deprecated global utility attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-icon-names` | Disallow use of deprecated icon names. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-packages` | Disallow usage of deprecated packages. | JSON | `error` |
@@ -80,6 +80,7 @@ export default [
 | `@nvidia-elements/lint/no-missing-icon-name` | Require icon elements to have an icon name attribute. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-popover-trigger` | Require popover elements to have a corresponding trigger element. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
+| `@nvidia-elements/lint/no-misprefixed-tags` | Disallow misprefixed Elements tags that resolve to a known nve-* element. | HTML | `error` |
 | `@nvidia-elements/lint/no-nested-container-types` | Require nested container components to use flat container mode. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of invalid API attributes or utility attributes on custom HTML element tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-page-sizing` | Disallow custom height or width styles on nve-page. | HTML | `error` |
