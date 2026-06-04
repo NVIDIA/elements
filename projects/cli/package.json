@@ -31,10 +31,11 @@
     "package.json",
     "dist/**/manifest.json",
     "dist/**/*.d.ts",
+    "dist/**/*.html",
     "dist/**/*.js"
   ],
   "scripts": {
-    "dev": "pnpm run nve:install && npx @modelcontextprotocol/inspector@0.21.2 node ./dist/index.js mcp",
+    "dev": "pnpm run nve:install && npx @modelcontextprotocol/inspector@0.22.0 node ./dist/index.js mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",
@@ -48,7 +49,8 @@
   },
   "dependencies": {
     "@inquirer/prompts": "8.5.0",
-    "@modelcontextprotocol/sdk": "1.29.0",
+    "@modelcontextprotocol/sdk": "catalog:",
+    "@modelcontextprotocol/ext-apps": "catalog:",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/lint": "workspace:^",
     "adm-zip": "0.5.17",
@@ -72,6 +74,7 @@
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
+    "vite-plugin-singlefile": "2.3.0",
     "vitest": "catalog:"
   },
   "wireit": {
@@ -135,8 +138,14 @@
       "output": [
         "dist/**/*.js",
         "dist/**/*.d.ts",
+        "dist/**/*.html",
         "dist/manifest.json"
       ],
+      "env": {
+        "CI": {
+          "external": true
+        }
+      },
       "dependencies": [
         "../internals/vite:ci",
         "../lint:build",
@@ -191,6 +200,7 @@
       "command": "vitest run",
       "files": [
         "dist/**/*.js",
+        "dist/**/*.html",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"
@@ -213,6 +223,7 @@
       "command": "vitest run --coverage",
       "files": [
         "dist/**/*.js",
+        "dist/**/*.html",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"

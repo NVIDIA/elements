@@ -28,8 +28,8 @@ An MCP App using Elements has three pieces:
 import { registerAppResource, registerAppTool, RESOURCE_MIME_TYPE } from '@modelcontextprotocol/ext-apps/server';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 
-const server = new McpServer({ name: 'elements-mcp-app', version: '0.0.0' });
-const resourceUri = 'ui://hello/mcp-app.html';
+const server = new McpServer({ name: 'elements-demo-mcp-app', version: '0.0.0' });
+const resourceUri = 'ui://greeting.html';
 
 registerAppTool(
   server,
@@ -80,7 +80,7 @@ import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';
 import { App, applyDocumentTheme } from '@modelcontextprotocol/ext-apps';
 
-const app = new App({ name: 'elements-mcp-app', version: '0.0.0' }, {});
+const app = new App({ name: 'elements-demo-mcp-app', version: '0.0.0' }, {});
 const greeting = document.querySelector<HTMLElement>('#greeting');
 
 app.ontoolresult = result => {

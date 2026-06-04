@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "ci": "wireit",
-    "dev": "npm run build && npx @modelcontextprotocol/inspector@0.21.2 node ./dist/main.js",
+    "dev": "npx @modelcontextprotocol/inspector@0.22.0 node ./dist/index.js",
     "build": "wireit",
     "lint": "wireit",
     "lint:fix": "wireit"
   },
   "dependencies": {
-    "@modelcontextprotocol/ext-apps": "1.1.2",
-    "@modelcontextprotocol/sdk": "1.29.0",
+    "@modelcontextprotocol/ext-apps": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
@@ -40,9 +40,6 @@
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src/**",
-        "mcp-app.html",
-        "main.ts",
-        "server.ts",
         "package.json",
         "tsconfig.json",
         "tsconfig.server.json",
@@ -70,8 +67,6 @@
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**",
-        "main.ts",
-        "server.ts",
         "vite.config.ts",
         "eslint.config.js"
       ],

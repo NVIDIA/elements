@@ -7,6 +7,7 @@ import {
   startersData,
   createGitInitProcess,
   createStarterPaths,
+  getDependencyInstallFailureMessage,
   removeWireitScripts,
   startStarter
 } from './starters.js';
@@ -178,6 +179,20 @@ describe('createStarterPaths', () => {
       archivePath: '/tmp/starter output; echo bad/typescript.zip',
       extractedPath: '/tmp/starter output; echo bad/typescript'
     });
+  });
+});
+
+describe('getDependencyInstallFailureMessage', () => {
+  it('should include the package-manager install command when npm client is available', () => {
+    expect(getDependencyInstallFailureMessage('/tmp/starter', 'pnpm')).toBe(
+      '⚠️ Error installing dependencies, in the "/tmp/starter" directory run "pnpm install"'
+    );
+  });
+
+  it('should omit null from the install hint when npm client is unavailable', () => {
+    expect(getDependencyInstallFailureMessage('/tmp/starter', null)).toBe(
+      '⚠️ Error installing dependencies, install npm or pnpm, then run a package-manager install in the "/tmp/starter" directory'
+    );
   });
 });
 

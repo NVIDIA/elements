@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A minimal MCP App using NVIDIA Elements." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <style>
+      @import '@nvidia-elements/themes/index.css';
+      @import '@nvidia-elements/themes/dark.css';
+      @import '@nvidia-elements/themes/high-contrast.css';
+      @import '@nvidia-elements/styles/layout.css';
+      @import '@nvidia-elements/styles/typography.css';
+    </style>
   </head>
   <body>
     <nve-page document-scroll>
@@ -20,6 +27,6 @@
         <nve-button id="refresh-greeting" type="button">Refresh greeting</nve-button>
       </main>
     </nve-page>
-    <script type="module" src="/src/mcp-app.ts"></script>
+    <script type="module" src="./greeting.ts"></script>
   </body>
 </html>

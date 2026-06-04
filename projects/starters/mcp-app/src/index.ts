@@ -1,20 +1,21 @@
 import { registerAppResource, registerAppTool, RESOURCE_MIME_TYPE } from '@modelcontextprotocol/ext-apps/server';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import type { CallToolResult, ReadResourceResult } from '@modelcontextprotocol/sdk/types.js';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 
-const APP_RESOURCE_URI = 'ui://hello/mcp-app.html';
-const APP_HTML_PATH = join(dirname(fileURLToPath(import.meta.url)), 'mcp-app.html');
+const APP_RESOURCE_URI = 'ui://greeting.html';
+const APP_HTML_PATH = join(dirname(fileURLToPath(import.meta.url)), 'src/ui/greeting.html');
 const GREETING_PREFIX = 'Hello from an Elements MCP App.';
 
 let callCount = 0;
 
-export function createServer(): McpServer {
+function createServer(): McpServer {
   const server = new McpServer({
-    name: 'elements-mcp-app',
+    name: 'elements-demo-mcp-app',
     version: '0.0.0'
   });
 
@@ -63,3 +64,8 @@ function createGreeting(greeting?: string) {
 
   return `${GREETING_PREFIX} Server call ${callCount} at ${new Date().toLocaleTimeString()}.`;
 }
+
+const server = createServer();
+const transport = new StdioServerTransport();
+
+await server.connect(transport);

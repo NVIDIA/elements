@@ -10,7 +10,7 @@ export default defineConfig(() => {
       outDir: 'dist',
       emptyOutDir: true,
       rollupOptions: {
-        input: resolve(import.meta.dirname, 'mcp-app.html')
+        input: resolve(import.meta.dirname, 'src/ui/greeting.html')
       }
     }
   };
