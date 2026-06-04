@@ -148,7 +148,6 @@ The layout system provides consistent features across all layout types:
 Control the space between elements using t-shirt sizing values that maintain visual consistency:
 
 - `gap:none`
-- `gap:xxxs`
 - `gap:xxs`
 - `gap:xs`
 - `gap:sm`
@@ -156,11 +155,6 @@ Control the space between elements using t-shirt sizing values that maintain vis
 - `gap:lg`
 - `gap:xl`
 - `gap:xxl`
-- `gap:xxxl`
-
-### Gap xxxs
-
-{% example '@nvidia-elements/styles/layout.examples.json', 'GapXxxs' %}
 
 ### Gap xxs
 
@@ -190,10 +184,6 @@ Control the space between elements using t-shirt sizing values that maintain vis
 
 {% example '@nvidia-elements/styles/layout.examples.json', 'GapXxl' %}
 
-### Gap xxxl
-
-{% example '@nvidia-elements/styles/layout.examples.json', 'GapXxxl' %}
-
 ### No Gap
 
 {% example '@nvidia-elements/styles/layout.examples.json', 'GapNone' %}
@@ -203,7 +193,6 @@ Control the space between elements using t-shirt sizing values that maintain vis
 Add internal spacing to containers using the same t-shirt sizing system:
 
 - `pad:none`
-- `pad:xxxs`
 - `pad:xxs`
 - `pad:xs`
 - `pad:sm`
@@ -211,7 +200,6 @@ Add internal spacing to containers using the same t-shirt sizing system:
 - `pad:lg`
 - `pad:xl`
 - `pad:xxl`
-- `pad:xxxl`
 
 By default padding applies to all 4 sides of container, to specify padding on a single side use:
 
@@ -253,10 +241,6 @@ Or use the short hand to just pad the x and y axes.
 
 {% example '@nvidia-elements/styles/layout.examples.json', 'PadY' %}
 
-### Padding xxxs
-
-{% example '@nvidia-elements/styles/layout.examples.json', 'PadXxxs' %}
-
 ### Padding xxs
 
 {% example '@nvidia-elements/styles/layout.examples.json', 'PadXxs' %}
@@ -284,10 +268,6 @@ Or use the short hand to just pad the x and y axes.
 ### Padding xxl
 
 {% example '@nvidia-elements/styles/layout.examples.json', 'PadXxl' %}
-
-### Padding xxxl
-
-{% example '@nvidia-elements/styles/layout.examples.json', 'PadXxxl' %}
 
 ### No Padding
 
@@ -318,7 +298,7 @@ You can compose layout attributes to create sophisticated designs:
 
 ```html
 <!-- Centered hero section with vertical layout -->
-<section nve-layout="column gap:lg pad:xxxl align:center full">
+<section nve-layout="column gap:lg pad:xxl align:center full">
   <nve-logo size="xl"></nve-logo>
   <h1 nve-text="heading xl">Build Faster</h1>
   <p nve-text="lg muted">Create stunning layouts without writing CSS</p>

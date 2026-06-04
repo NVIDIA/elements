@@ -56,7 +56,13 @@ const AUTHOR_SCHEMA = {
   description: AUTHOR_CREDENTIALS,
   sameAs: ['https://github.com/NVIDIA/elements'],
   parentOrganization: { '@type': 'Organization', name: 'NVIDIA', url: ORGANIZATION_URL },
-  knowsAbout: ['Web Components', 'Design Systems', 'UI Component Libraries', 'AI/ML Interface Tooling']
+  knowsAbout: [
+    'Web Components',
+    'Design Systems',
+    'UI Foundations',
+    'UI Component Libraries',
+    'AI/ML Interface Tooling'
+  ]
 };
 
 interface JsonLdListItem {

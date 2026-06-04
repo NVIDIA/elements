@@ -37,6 +37,17 @@ This document is not intended to define the best practices and API design of hig
 - Plugin/Application: code that consumes or uses the elements
 - Consumers: developers/designers that use the UI elements within their products
 
+## Deprecation and removal
+
+Breaking removals are eligible for a major release only after the deprecation cycle is complete.
+
+- Add `@deprecated` JSDoc to the old API with the replacement and removal target.
+- Add lint coverage that flags consumer use of the deprecated API.
+- Add runtime diagnostics when the deprecated behavior is detectable at runtime.
+- Document the migration path and replacement API before removal.
+- Keep the old and new APIs side-by-side until downstream consumers have had a full deprecation window.
+- Remove the deprecated API only when release notes can point to the deprecation, lint rule, runtime diagnostic, and replacement.
+
 ## Philosophy
 
 Web standards over frameworks
@@ -63,7 +74,7 @@ Consistent element APIs provide consistent developer experience. The recommendat
 </nve-alert>
 
 <script type="module">
-  import '@nvidia-elements/core/include/alert.js';
+  import '@nvidia-elements/core/alert/define.js';
   const alert = document.querySelector('nve-alert');
   alert.closable = true;
   alert.addEventListener('close', (e) => console.log(e))

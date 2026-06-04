@@ -15,7 +15,7 @@ Events communicate user intent to the host application. Examples include `close`
 
 <script type="module">
   const alert = document.querySelector('nve-alert');
-  alert.addEventListenter('close', event => console.log(event));
+  alert.addEventListener('close', event => console.log(event));
 </script>
 ```
 

@@ -822,7 +822,7 @@ export const StandardHeaderViewerPage = {
               <h1 nve-text="heading xs semibold">Page Title</h1>
             </section>
 
-            <section nve-layout="row align:center align:vertical-center gap:xxxs">
+            <section nve-layout="row align:center align:vertical-center gap:xxs">
               <nve-select container="flat" style="--border-bottom: 0">
                 <select aria-label="zoom level">
                   <option value="1">100%</option>

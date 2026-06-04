@@ -138,7 +138,6 @@
       "output": [
         "dist/**/*.js",
         "dist/**/*.d.ts",
-        "dist/**/*.html",
         "dist/manifest.json"
       ],
       "env": {

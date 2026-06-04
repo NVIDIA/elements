@@ -38,10 +38,10 @@ The following set of viewport `breakpoint-values` defines:
 
 The at-symbol-based `@breakpoint-size|...` API adds the breakpoint size before the layout modifier.
 
-Conditional gap sizing example: `nve-layout="row @sm|gap:xxxs @md|gap:md @lg|gap:xxxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
+Conditional gap sizing example: `nve-layout="row @sm|gap:xs @md|gap:md @lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
 
 ```html
-<section nve-layout="row @sm|gap:xxs @md|gap:md @lg|gap:xl @xl|gap:xxxl">
+<section nve-layout="row @sm|gap:xxs @md|gap:md @lg|gap:xl @xl|gap:xl">
   <nve-card></nve-card>
   <nve-card></nve-card>
   <nve-card></nve-card>

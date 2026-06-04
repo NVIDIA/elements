@@ -32,7 +32,7 @@ export async function getVersionHealth(packageData: PackageData, currentVersions
     ...packageData.dependencies,
     ...packageData.peerDependencies
   })
-    .filter(([key]) => key.includes('@nvidia-elements/') || key.includes('@nvidia-elements/'))
+    .filter(([key]) => key.includes('@nvidia-elements/'))
     .reduce<Record<string, string>>((acc, [key, value]) => {
       return { ...acc, [key]: value as string };
     }, {});

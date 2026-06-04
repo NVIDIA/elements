@@ -40,3 +40,13 @@ Ensure the MCP is properly configured and working as expected.
   }
 }
 ```
+
+### Codex
+
+`.codex/config.toml`
+
+```toml
+[mcp_servers.elements]
+command = "nve"
+args = ["mcp"]
+```
