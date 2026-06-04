@@ -311,14 +311,6 @@ export const GapNone = {
   `
 }
 
-export const GapXxxs = {
-  render: () => html`
-    <section nve-layout="row gap:xxxs">
-      ${new Array(5).fill(html`<nve-card></nve-card>`)}
-    </section>
-  `
-}
-
 export const GapXxs = {
   render: () => html`
     <section nve-layout="row gap:xxs">
@@ -375,25 +367,9 @@ export const GapXxl = {
   `
 }
 
-export const GapXxxl = {
-  render: () => html`
-    <section nve-layout="row gap:xxxl">
-      ${new Array(5).fill(html`<nve-card></nve-card>`)}
-    </section>
-  `
-}
-
 export const PadNone = {
   render: () => html`
     <section nve-layout="row gap:sm align:stretch pad:none">
-      ${new Array(3).fill(html`<nve-card></nve-card>`)}
-    </section>
-  `
-}
-
-export const PadXxxs = {
-  render: () => html`
-    <section nve-layout="row gap:sm align:stretch pad:xxxs">
       ${new Array(3).fill(html`<nve-card></nve-card>`)}
     </section>
   `
@@ -450,14 +426,6 @@ export const PadXl = {
 export const PadXxl = {
   render: () => html`
     <section nve-layout="row gap:sm align:stretch pad:xxl">
-      ${new Array(3).fill(html`<nve-card></nve-card>`)}
-    </section>
-  `
-}
-
-export const PadXxxl = {
-  render: () => html`
-    <section nve-layout="row gap:sm align:stretch pad:xxxl">
       ${new Array(3).fill(html`<nve-card></nve-card>`)}
     </section>
   `
