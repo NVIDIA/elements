@@ -58,16 +58,16 @@ import  { Dialog } from '@nvidia-elements/core/dialog';
 
 ## Side Effects & Registration
 
-Elements should not automatically register themselves to the customElementsRegistry.
-Rather you should isolate side effects like registration to a single file.
+Elements should not automatically register themselves to the `customElementsRegistry`. Export the class from `index.ts` and isolate registration in `define.ts`.
 
 ```typescript
-// example define.js
-import '@nvidia-elements/core/icon/define.js';
-import '@nvidia-elements/core/button/define.js';
-import { Dialog } from './dialog.js';
+// dialog/define.ts
+import { define } from '@nvidia-elements/core/internal';
+import { Dialog, DialogHeader, DialogFooter } from '@nvidia-elements/core/dialog';
 
-customElements.get('nve-dialog') || customElements.define('nve-dialog', MlvDialog);
+define(Dialog);
+define(DialogHeader);
+define(DialogFooter);
 ```
 
 If an element depends on other elements then you should include those elements in the registration file as well to ensure the build constructs a proper dependency tree.
@@ -81,7 +81,19 @@ Isolated registration allows the consumer to control when to load an element. Th
 
 <nve-alert status="warning">Warning: isolated side-effects are critical for certain micro-frontend use cases.</nve-alert>
 
-The `package.json` should have the `sideEffects` entry set to `false` and list any element registrations to the explicit sideEffects entry. This enables tools like Webpack and Rollup to properly define dependency graphs and tree-shake.
+The `package.json` should use a `sideEffects` array that lists registration and bundle outputs. Do not set `sideEffects` to `false` when `define.js` files ship side effects.
+
+```json
+{
+  "sideEffects": [
+    "./dist/bundles/*.js",
+    "./**/define.js",
+    "./**/server.js"
+  ]
+}
+```
+
+This enables tools like Webpack and Rollup to preserve explicit registration entrypoints while still tree-shaking side-effect-free component modules.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn about <a href="docs/integrations/lit-library/">Lit Library integration</a></nve-alert>
 

@@ -64,7 +64,7 @@ class MyElement extends LitElement {
         <p nve-text="heading">heading</p>
         <p nve-text="body">body</p>
         <p nve-text="label">label</p>
-        <p nve-text="eyebrow">eyebrow</p>
+        <p nve-text="label sm">label sm</p>
       </div>
     `;
   }

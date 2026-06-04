@@ -47,8 +47,8 @@ Avoid exposing slot APIs as part of the public API. Rather than requiring the co
 
 ```typescript
 class Modal {
-  redner() {
-  	return `
+  render() {
+    return `
     <slot name="header"></slot>
     <slot></slot>
     <slot name="footer"></slot>
@@ -87,7 +87,7 @@ Composition based APIs also provide flexibility for the host application to choo
   	<nve-tree-item>item</nve-tree-item>
     <nve-tree-item>item</nve-tree-item>
     <nve-tree-item>item</nve-tree-item>
-  </nve-tree-node>
+  </nve-tree-item>
 </nve-tree>
 ```
 

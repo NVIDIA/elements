@@ -42,6 +42,14 @@ The Elements Design System is now hosted and developed in a public GitHub reposi
 | `@nve-labs/media`    | `@nvidia-elements/media`    |
 | `@nve-labs/lint`     | `@nvidia-elements/lint`     |
 
+## Stability and Versioning
+
+Teams have run Elements in production since 2022, and NVIDIA already released it internally as `1.x`. The move to open source changes the package scope to `@nvidia-elements/*`, but it does not reset the maturity of the system.
+
+NVIDIA published the initial public open source packages as `0.x` while the project completed its public release migration. Treat these `0.x` versions as transitional open source preview releases, not proof that Elements itself is experimental or newly developed.
+
+Elements moved from public `0.x` prerelease versions to `2.0.0` for the stable open source release. This means there is no public `1.0.0` release under the `@nvidia-elements/*` scope. The missing public `1.0.0` is intentional: `1.x` represents the prior internal production generation, and `2.0.0` represents the next stable generation under the public `@nvidia-elements/*` scope.
+
 ## Migration Steps
 
 ### 1. Update Registry Configuration
@@ -62,8 +70,6 @@ In your `package.json`, replace the old scope names with the new ones:
 +   "@nvidia-elements/styles": "^0.0.3"
   }
 ```
-
-The `0.x` versions of the new packages contain the same non-deprecated components as the latest internal releases. Version numbers reset as part of the migration to public npm. A stable 1.0 release follows later.
 
 ### 3. Update Source Imports
 
@@ -121,9 +127,9 @@ Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-tr
 
 {% endbefore-after %}
 
-### Combobox No Tags <nve-badge status="warning">deprecated</nve-badge>
+### Combobox No Tags <nve-badge status="danger">removed</nve-badge>
 
-Elements deprecates the `notags` attribute. Use `tag-layout="hidden"` instead so all tag layout modes use the same attribute.
+Elements removed the `notags` attribute. Use `tag-layout="hidden"` instead so all tag layout modes use the same attribute.
 
 {% before-after %}
 
@@ -137,7 +143,7 @@ Elements deprecates the `notags` attribute. Use `tag-layout="hidden"` instead so
 
 {% endbefore-after %}
 
-### Layout Full <nve-badge status="warning">deprecated</nve-badge>
+### Layout Full <nve-badge status="danger">removed</nve-badge>
 
 The `grow` property now uses `full` instead to avoid confusion with flexbox grow behavior.
 
@@ -153,7 +159,7 @@ The `grow` property now uses `full` instead to avoid confusion with flexbox grow
 
 {% endbefore-after %}
 
-### Typography "eyebrow" <nve-badge status="warning">deprecated</nve-badge>
+### Typography "eyebrow" <nve-badge status="danger">removed</nve-badge>
 
 The typography `eyebrow` utility no longer exists, to align with the standardized semantic names and size options available.
 

@@ -62,7 +62,7 @@ Elements should provide reasonable defaults for better developer experience for 
 </nve-alert>
 ```
 
-The alert can internally provide the default icon style for the status in the system. But as above with the button, the alert element runs the risk of absorbing parts of the icon API. To mitigate this, leveraging default slots can provide a hook for customizations.
+The alert can internally provide the default icon style for the status in the system. But as above with the button, the alert element runs the risk of absorbing parts of the icon API. To mitigate this, use a documented named slot as the customization hook.
 
 ```html
 <!-- nve-alert template -->
@@ -80,7 +80,7 @@ The alert can internally provide the default icon style for the status in the sy
 </nve-alert>
 ```
 
-Slots can provide default content if the consumer supplies no content. Here the template sets an internal icon with a status icon that matches the status of the alert. If the consumer wants to customize the icon, they can do so by projecting their own icon into the icon slot, overriding the default. This enables full control of the custom icon the consumer provides without the alert needing to expose the icon through a series of API inherited attributes/properties. As with all API choices there are tradeoffs.
+Slots can provide default content if the consumer supplies no content. Here the template sets an internal icon with a status icon that matches the status of the alert. If the consumer wants to customize the icon, they can project their own icon into the `icon` slot and override the default. This makes `icon` an explicit public slot API, while avoiding a series of icon-specific inherited attributes or properties on the alert.
 
 ## Semantic Obfuscation - anti-pattern
 

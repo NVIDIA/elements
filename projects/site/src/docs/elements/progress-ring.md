@@ -40,7 +40,7 @@ When used with text, please set `size="xs"`.
 
 ## Custom Icon Slotting
 
-The `status-icon` slot within `nve-progress-ring` creates a custom loading indicator.
+Use the default slot within `nve-progress-ring` to create a custom loading indicator.
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'SlottedIcon' %}
 

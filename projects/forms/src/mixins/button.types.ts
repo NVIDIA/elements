@@ -31,12 +31,6 @@ export interface ButtonFormControlMixinInstance {
   readOnly: boolean;
 
   /**
-   * Use `readOnly`. The `readonly` attribute remains supported.
-   * @deprecated Use `readOnly`. The `readonly` attribute remains supported.
-   */
-  readonly: boolean;
-
-  /**
    * Like input form, sets a button to submit a form outside its parent form.
    * Returns a reference to the form element if available.
    * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form

@@ -33,8 +33,8 @@ const TITLE_QUALIFIERS = [
     route: '/docs/elements/',
     qualifiers: ['Component Guide', 'Component API Reference', 'Web Component API Reference Guide']
   },
-  { route: '/docs/foundations/layout/', qualifiers: ['System Guide for Web Components'] },
-  { route: '/docs/foundations/', qualifiers: ['Design Foundation Guide', 'Design Foundation Guide for UI'] },
+  { route: '/docs/foundations/layout/', qualifiers: ['Layout Foundations Guide for Web Components'] },
+  { route: '/docs/foundations/', qualifiers: ['Design Foundations Guide', 'Design Foundations Guide for UI'] },
   { route: '/docs/integrations/', qualifiers: ['Web Component Guide', 'Web Component Integration Guide'] },
   { route: '/docs/labs/', qualifiers: ['Guide for Web Components', 'Experimental UI Guide'] },
   { route: '/docs/lint/', qualifiers: ['Static Analysis Guide for Web Components'] },
@@ -139,6 +139,7 @@ function resolveSectionTitle(data, title) {
   if (url === '/examples/') return 'Example Gallery';
   if (url.startsWith('/docs/internal/guidelines/')) return `${title} Guidelines`;
   if (url.startsWith('/docs/integrations/')) return `${title} Integration`;
+  if (url === '/docs/foundations/') return 'Design Foundations';
   if (url.startsWith('/docs/foundations/themes/')) return resolveThemeTitle(url, title);
   if (url.startsWith('/docs/labs/layout/responsive/patterns/')) return 'Responsive Layout Patterns';
   if (url.startsWith('/docs/labs/') && !url.startsWith('/docs/labs/layout/')) return `${title} Lab`;
@@ -159,6 +160,7 @@ function getTitleQualifiers(data, url, title) {
   if (url === '/examples/' || url === '/starters/') return ['for Web Components'];
   if (url === '/docs/changelog/') return ['and Release Notes'];
   if (url === '/docs/metrics/') return ['and Reports'];
+  if (url === '/docs/foundations/') return ['Guide for Web Components'];
   if (url === '/docs/foundations/themes/') return ['Guide for Web Components'];
   if (url.startsWith('/docs/foundations/themes/')) return ['for Web Components'];
   if (url.includes('/examples/')) return ['and Code Samples', 'and Code Samples for Web Components'];
@@ -244,14 +246,14 @@ function getDescriptionContexts(data) {
   if (url.startsWith('/docs/foundations/layout/')) {
     return [
       'Includes practical layout guidance.',
-      'Apply layout utilities, responsive rules, spacing, alignment, and grid patterns for production NVIDIA Elements interfaces.'
+      'Layout foundations — utilities, responsive rules, spacing, alignment, and grid patterns — for production NVIDIA Elements interfaces.'
     ];
   }
 
   if (url.startsWith('/docs/foundations/')) {
     return [
       'Includes practical design guidance.',
-      'Use design foundations for typography, iconography, visualization, layout, and theming across NVIDIA Elements interfaces.'
+      'Design foundations — typography, iconography, color, layout, motion, and theming — that form the consistent visual system beneath every NVIDIA Elements interface.'
     ];
   }
 
@@ -406,7 +408,13 @@ function getAuthor() {
     description: AUTHOR_CREDENTIALS,
     sameAs: [REPOSITORY_URL],
     parentOrganization: { '@type': 'Organization', name: 'NVIDIA', url: ORGANIZATION_URL },
-    knowsAbout: ['Web Components', 'Design Systems', 'UI Component Libraries', 'AI/ML Interface Tooling']
+    knowsAbout: [
+      'Web Components',
+      'Design Systems',
+      'UI Foundations',
+      'UI Component Libraries',
+      'AI/ML Interface Tooling'
+    ]
   };
 }
 

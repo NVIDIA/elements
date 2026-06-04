@@ -175,7 +175,8 @@ export const renderDocsNav = data => /* html */ `
   </nve-tree-node>
   
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') ? 'expanded' : ''}>
-    <a href="docs/foundations/typography/">Foundations</a>
+    <a href="docs/foundations/">Foundations</a>
+    <nve-tree-node ${data.page.url.endsWith('/docs/foundations/') ? 'highlighted selected' : ''}><a href="docs/foundations/">Overview</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted selected' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted selected' : ''}><a href="docs/foundations/iconography/">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
@@ -276,7 +277,6 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted selected' : ''}><a href="docs/elements/page-header/">Page Header</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/page-loader/') ? 'highlighted selected' : ''}><a href="docs/elements/page-loader/">Page Loader</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/pagination/') ? 'highlighted selected' : ''}><a href="docs/elements/pagination/">Pagination</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/panel/') ? 'highlighted selected' : ''}><a href="docs/elements/panel/">Panel</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/progressive-filter-chip/') ? 'highlighted selected' : ''}><a href="docs/elements/progressive-filter-chip/">Progressive Filter Chip</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/progress-bar/') ? 'highlighted selected' : ''}><a href="docs/elements/progress-bar/">Progress Bar</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/progress-ring/') ? 'highlighted selected' : ''}><a href="docs/elements/progress-ring/">Progress Ring</a></nve-tree-node>

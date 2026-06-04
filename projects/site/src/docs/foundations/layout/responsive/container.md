@@ -39,11 +39,11 @@ The following set of container `breakpoint-values` defines:
 
 The ampersand-based `&breakpoint-size|...` API adds the breakpoint size before the layout modifier.
 
-Conditional gap sizing example: `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
+Conditional gap sizing example: `nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
 
 ```html
 <div> <!-- This parent div element is the containing element - its width will be queried -->
-  <section nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xl &xl|gap:xxxl">
+  <section nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xl &xl|gap:xxl">
     <nve-card></nve-card>
     <nve-card></nve-card>
     <nve-card></nve-card>

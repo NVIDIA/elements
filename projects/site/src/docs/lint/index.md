@@ -102,8 +102,8 @@ export default [
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-css-variable</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of deprecated --mlv-* CSS theme variables.</nve-grid-cell>
-    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated CSS custom properties.</nve-grid-cell>
+    <nve-grid-cell>CSS/HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
@@ -181,6 +181,12 @@ export default [
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-slotted-elements</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of missing slotted elements.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-misprefixed-tags</code></nve-grid-cell>
+    <nve-grid-cell>Disallow misprefixed (nv-*) Elements tags that resolve to a known (nve-*) element.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>

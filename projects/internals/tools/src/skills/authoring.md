@@ -23,6 +23,7 @@ Best practices and guidelines for creating UI with NVIDIA Elements.
 
 ### API Gotchas
 
+- Do NOT use the `nv-*` prefix; this is a common API mistake. All Elements APIs use the `nve-*` prefix. If you encounter an existing `nv-*` prefix, verify the correct API via the Elements MCP or Elements CLI.
 - Use `nve-grid` for tabular data, lists, and keyboard-navigable collections. Do NOT use it for page layout, use `nve-page` and `nve-layout` instead.
 - Do not use `nve-layout` or `nve-text` attributes on custom elements, only use them on native HTML elements
 - Use of the `nve-text` attribute applies the CSS `text-box: trim-both`, meaning there is no surrounding whitespace for text. Layouts likely need to use `nve-layout="gap:*"` to add whitespace between text elements

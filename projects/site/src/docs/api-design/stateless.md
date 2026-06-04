@@ -25,7 +25,7 @@ Instead of defining an `open` or `show` state, the element provides a `close` ev
 This is important as it provides a much more flexible API and prevents "escape hatch" APIs. If the modal controls the visibility state, and the application needs to check logic before closing, yet another API would need to intercept before the close event (example: `onBeforeClose`). Consider how an Angular app would use a stateless example.
 
 ```html
-<nve-button (click)="showModal = true">open modal</nve-modal>
+<nve-button (click)="showModal = true">open modal</nve-button>
 
 <nve-modal *ngIf="showModal" (close)="closeModal($event.detail)">
   Some Content

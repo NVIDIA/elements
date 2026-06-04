@@ -60,7 +60,9 @@ export default {
     ],
     messages: {
       'missing-bundle-registration':
-        "Component `{{component}}` has a define.ts but is not imported in bundle.ts. Add `import '{{prefix}}/{{component}}/define.js';`."
+        "Component `{{component}}` has a define.ts but is not imported in bundle.ts. Add `import '{{prefix}}/{{component}}/define.js';`.",
+      'missing-bundle-export':
+        "Component `{{component}}` is registered in bundle.ts but is not exported. Add `export * from '{{prefix}}/{{component}}';`."
     }
   },
   create(context) {
@@ -73,8 +75,10 @@ export default {
     const prefix = options.importPrefix || getPackageName(dirname(filename)) || DEFAULT_IMPORT_PREFIX;
     const exclude = new Set(options.exclude || []);
     const importedComponents = new Set();
+    const exportedComponents = new Set();
     const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const importPattern = new RegExp(`^${escapedPrefix}/([^/]+)/define\\.js$`);
+    const exportPattern = new RegExp(`^${escapedPrefix}/([^/]+)$`);
 
     return {
       ImportDeclaration(node) {
@@ -86,6 +90,17 @@ export default {
         const match = source.match(importPattern);
         if (match?.[1]) {
           importedComponents.add(match[1]);
+        }
+      },
+      ExportAllDeclaration(node) {
+        const source = node.source.value;
+        if (typeof source !== 'string') {
+          return;
+        }
+
+        const match = source.match(exportPattern);
+        if (match?.[1]) {
+          exportedComponents.add(match[1]);
         }
       },
       'Program:exit'(node) {
@@ -102,6 +117,19 @@ export default {
           context.report({
             node,
             messageId: 'missing-bundle-registration',
+            data: {
+              component,
+              prefix
+            }
+          });
+        }
+
+        for (const component of [...importedComponents]
+          .filter(component => !exportedComponents.has(component))
+          .sort()) {
+          context.report({
+            node,
+            messageId: 'missing-bundle-export',
             data: {
               component,
               prefix
