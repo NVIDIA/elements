@@ -24,9 +24,7 @@
       margin: 0;
     }
 
-    &[nve-layout~='full'],
-    &[nve-layout~='grow'] {
-      /** @deprecated - grow is deprecated in favor of full, to distance confusion of flexbox grow behavior */
+    &[nve-layout~='full'] {
       height: 100%;
       width: 100%;
       /* https://defensivecss.dev/tip/flexbox-min-content-size/ */
@@ -163,14 +161,14 @@
     }
 
     /* Fixed Width Layout Gap Spacing */
-    @each $gap-size in none, xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+    @each $gap-size in none, xxs, xs, sm, md, lg, xl, xxl {
       &[nve-layout~='gap:$(gap-size)'] {
         gap: var(--nve-ref-space-$(gap-size));
       }
     }
 
     /* Fixed Width Container Padding */
-    @each $size in none, xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+    @each $size in none, xxs, xs, sm, md, lg, xl, xxl {
       &[nve-layout~='pad:$(size)'] {
         padding: var(--nve-ref-space-$(size));
       }

@@ -14,7 +14,7 @@ export default {
 
 export const GapResponsive = {
   render: () => html`
-    <section nve-layout="row align:center &sm|gap:xs &md|gap:xl &lg|gap:xxl &xl|gap:xxxl">
+    <section nve-layout="row align:center &sm|gap:xs &md|gap:xl &lg|gap:xxl &xl|gap:xxl">
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
@@ -24,7 +24,7 @@ export const GapResponsive = {
 
 export const PadResponsive = {
   render: () => html`
-    <section nve-layout="row &sm|pad:xs &md|pad:lg &xl|pad:xxxl">
+    <section nve-layout="row &sm|pad:xs &md|pad:lg &xl|pad:xxl">
       <nve-card nve-layout="full"></nve-card>
     </section>
   `
@@ -112,7 +112,7 @@ export const ResponsiveGridItems = {
 // Responsive Layout - Viewport (@media query based)
 export const ViewportGapResponsive = {
   render: () => html`
-    <section nve-layout="row align:center @sm|gap:xs @md|gap:lg @lg|gap:xl @xl|gap:xxxl">
+    <section nve-layout="row align:center @sm|gap:xs @md|gap:lg @lg|gap:xl @xl|gap:xxl">
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
@@ -122,7 +122,7 @@ export const ViewportGapResponsive = {
 
 export const ViewportPadResponsive = {
   render: () => html`
-    <section nve-layout="row @sm|pad:xs @md|pad:lg @lg|pad:lg @xl|pad:xxxl">
+    <section nve-layout="row @sm|pad:xs @md|pad:lg @lg|pad:lg @xl|pad:xxl">
       <nve-card nve-layout="full"></nve-card>
     </section>
   `
