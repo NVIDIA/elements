@@ -1,3 +1,7 @@
+## <small>0.3.1 (2026-06-06)</small>
+
+* fix(cli): build approval for mcp-app ([ae62914](https://github.com/NVIDIA/elements/commit/ae62914))
+
 ## 0.3.0 (2026-06-04)
 
 * chore(ci): improve workflow default permissions ([878bafb](https://github.com/NVIDIA/elements/commit/878bafb))
