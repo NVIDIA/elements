@@ -1,3 +1,20 @@
+## <small>0.2.4 (2026-06-06)</small>
+
+* chore(ci): update dependencies ([02fa6b5](https://github.com/NVIDIA/elements/commit/02fa6b5))
+* chore(docs): cleanup starter links ([0195089](https://github.com/NVIDIA/elements/commit/0195089))
+* chore(docs): update deprecations ([1e49a3b](https://github.com/NVIDIA/elements/commit/1e49a3b))
+* chore(release): @nvidia-elements/cli-v0.3.0 [skip ci] ([94a0a99](https://github.com/NVIDIA/elements/commit/94a0a99))
+* chore(release): @nvidia-elements/cli-v0.3.1 [skip ci] ([a867d59](https://github.com/NVIDIA/elements/commit/a867d59))
+* chore(release): @nvidia-elements/monaco-v0.0.12 [skip ci] ([e72e4f9](https://github.com/NVIDIA/elements/commit/e72e4f9))
+* chore(release): @nvidia-elements/styles-v0.0.10 [skip ci] ([39a66fc](https://github.com/NVIDIA/elements/commit/39a66fc))
+* chore(starters): enable lit library starter ([06d0f39](https://github.com/NVIDIA/elements/commit/06d0f39))
+* fix(cli): build approval for mcp-app ([ae62914](https://github.com/NVIDIA/elements/commit/ae62914))
+* fix(core): remove deprecations ([50b89f8](https://github.com/NVIDIA/elements/commit/50b89f8))
+* fix(styles): deprecation removals ([98f2c2c](https://github.com/NVIDIA/elements/commit/98f2c2c))
+* feat(cli): enable lit-library starter support ([9333b0a](https://github.com/NVIDIA/elements/commit/9333b0a))
+* feat(lint): deprecation rules ([8cf8337](https://github.com/NVIDIA/elements/commit/8cf8337))
+* feat(starters): mcp-app support ([3548972](https://github.com/NVIDIA/elements/commit/3548972))
+
 ## <small>0.2.3 (2026-06-03)</small>
 
 * chore(ci): update lighthouse ([f1fb184](https://github.com/NVIDIA/elements/commit/f1fb184))
