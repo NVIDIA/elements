@@ -47,6 +47,7 @@ Ensure the MCP is properly configured and working as expected.
 
 ```toml
 [mcp_servers.elements]
+description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
 command = "nve"
 args = ["mcp"]
 ```

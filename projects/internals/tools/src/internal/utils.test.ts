@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ProjectElement } from '@internals/metadata';
-import { getElementImports, getAvailableElementTags, wrapText } from './utils.js';
+import { getElementImports, getAvailableElementTags, isDebug, wrapText } from './utils.js';
 
 describe('getElementImports', () => {
   const elements: ProjectElement[] = [
@@ -123,5 +123,34 @@ describe('wrapText', () => {
     const text = 'superlongwordthatexceedswidth short';
     const result = wrapText(text, 10);
     expect(result).toContain('superlongwordthatexceedswidth');
+  });
+
+  it('should handle a single word longer than width with nothing trailing', () => {
+    const text = 'superlongwordthatexceedswidth';
+    expect(wrapText(text, 10)).toBe('superlongwordthatexceedswidth');
+  });
+});
+
+describe('isDebug', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it('should return true when debug is enabled outside of the mcp environment', () => {
+    vi.stubEnv('ELEMENTS_DEBUG', 'true');
+    vi.stubEnv('ELEMENTS_ENV', 'cli');
+    expect(isDebug()).toBe(true);
+  });
+
+  it('should return false when debug is not enabled', () => {
+    vi.stubEnv('ELEMENTS_DEBUG', 'false');
+    vi.stubEnv('ELEMENTS_ENV', 'cli');
+    expect(isDebug()).toBe(false);
+  });
+
+  it('should return false in the mcp environment even when debug is enabled', () => {
+    vi.stubEnv('ELEMENTS_DEBUG', 'true');
+    vi.stubEnv('ELEMENTS_ENV', 'mcp');
+    expect(isDebug()).toBe(false);
   });
 });

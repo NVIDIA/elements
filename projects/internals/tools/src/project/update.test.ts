@@ -399,7 +399,170 @@ describe('updateProject', () => {
 
     expect(result.dependencies.status).toBe('success');
     expect(writeFileSync).toHaveBeenCalledWith(`${cwd}/package.json`, expect.stringContaining('"2.0.0"'));
-    expect(execFileSync).toHaveBeenCalledWith('pnpm', ['update', '@nvidia-elements/*', '@nvidia-elements/*'], { cwd });
+    expect(execFileSync).toHaveBeenCalledWith('pnpm', ['update', '@nvidia-elements/*'], { cwd });
+  });
+
+  it('should treat pnpm ignored builds as non-fatal', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+    vi.mocked(execFileSync).mockImplementation(() => {
+      const error = new Error('Command failed') as Error & { stderr: Buffer };
+      error.stderr = Buffer.from('ERR_PNPM_IGNORED_BUILDS Ignored build scripts: esbuild');
+      throw error;
+    });
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('success');
+    expect(result.dependencies.message).toContain('@nvidia-elements/core: 1.0.0 → 2.0.0');
+  });
+
+  it('should report success when all packages are already up to date', async () => {
+    const { writeFileSync } = await import('node:fs');
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '2.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('success');
+    expect(result.dependencies.message).toContain('All packages are already up to date');
+    expect(writeFileSync).not.toHaveBeenCalled();
+    expect(execFileSync).not.toHaveBeenCalled();
+  });
+
+  it('should report danger with command output when the install fails', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+    vi.mocked(execFileSync).mockImplementation(() => {
+      const error = new Error('Command failed') as Error & { stderr: Buffer };
+      error.stderr = Buffer.from('ENOTFOUND registry.npmjs.org');
+      throw error;
+    });
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('danger');
+    expect(result.dependencies.message).toContain('Failed to update to the latest version');
+    expect(result.dependencies.message).toContain('ENOTFOUND registry.npmjs.org');
+  });
+
+  it('should stringify non-object errors from the install command', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+    vi.mocked(execFileSync).mockImplementation(() => {
+      const failure: unknown = 'string failure';
+      throw failure;
+    });
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('danger');
+    expect(result.dependencies.message).toContain('string failure');
+  });
+
+  it('should fall back to the error message when no command output is present', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+    vi.mocked(execFileSync).mockImplementation(() => {
+      throw new Error('npm exploded');
+    });
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('danger');
+    expect(result.dependencies.message).toContain('npm exploded');
+  });
+
+  it('should fall back to a generic message when the error has no details', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+    vi.mocked(execFileSync).mockImplementation(() => {
+      const failure: unknown = {};
+      throw failure;
+    });
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('danger');
+    expect(result.dependencies.message).toContain('Command failed');
   });
 
   it('should not write package.json when no package manager exists', async () => {

@@ -115,6 +115,17 @@ Install to Cursor with the MCP configuration below.
 }
 ```
 
+### Codex
+
+Install to Codex with the MCP configuration below.
+
+```toml
+[mcp_servers.elements]
+description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
+command = "nve"
+args = ["mcp"]
+```
+
 ### Prompts
 
 | Prompt | Description | Example Prompt |

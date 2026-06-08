@@ -7,7 +7,9 @@ import {
   startersData,
   createGitInitProcess,
   createStarterPaths,
+  execPackageManager,
   getDependencyInstallFailureMessage,
+  getRequiredNPMClient,
   removeWireitScripts,
   startStarter
 } from './starters.js';
@@ -251,5 +253,70 @@ describe('createGitInitProcess', () => {
     createGitInitProcess(extractedPath);
 
     expect(execFile).toHaveBeenCalledWith('git', ['init', extractedPath]);
+  });
+});
+
+describe('execPackageManager', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should invoke pnpm without shell interpretation', async () => {
+    const { execFile } = await import('node:child_process');
+
+    execPackageManager('pnpm', ['install'], '/tmp/starter');
+
+    expect(execFile).toHaveBeenCalledWith('pnpm', ['install'], { cwd: '/tmp/starter' });
+  });
+
+  it('should invoke npm without shell interpretation', async () => {
+    const { execFile } = await import('node:child_process');
+
+    execPackageManager('npm', ['install'], '/tmp/starter');
+
+    expect(execFile).toHaveBeenCalledWith('npm', ['install'], { cwd: '/tmp/starter' });
+  });
+});
+
+describe('getRequiredNPMClient', () => {
+  it('should return the detected package manager when one is available', async () => {
+    expect(await getRequiredNPMClient()).toBe('pnpm');
+  });
+
+  it('should throw when no supported package manager is found', async () => {
+    vi.resetModules();
+    vi.doMock('../internal/node.js', () => ({
+      getNPMClient: vi.fn().mockResolvedValue(null),
+      isCommandAvailable: vi.fn(),
+      getPackageJson: vi.fn()
+    }));
+
+    const { getRequiredNPMClient: getRequiredNPMClientMocked } = await import('./starters.js');
+    await expect(getRequiredNPMClientMocked()).rejects.toThrow('No supported package manager found.');
+
+    vi.doUnmock('../internal/node.js');
+    vi.resetModules();
+  });
+});
+
+describe('startStarter with npm', () => {
+  it('should start the dev server using npm when pnpm is unavailable', async () => {
+    vi.resetModules();
+    vi.doMock('../internal/node.js', () => ({
+      getNPMClient: vi.fn().mockResolvedValue('npm'),
+      isCommandAvailable: vi.fn(),
+      getPackageJson: vi.fn()
+    }));
+
+    const { execFileSync } = await import('node:child_process');
+    const { startStarter: startStarterMocked } = await import('./starters.js');
+    const extractedPath = '/tmp/npm-starter';
+
+    await startStarterMocked(extractedPath);
+
+    expect(execFileSync).toHaveBeenCalledWith('npm', ['run', 'dev'], { cwd: extractedPath, stdio: 'inherit' });
+
+    vi.doUnmock('../internal/node.js');
+    vi.resetModules();
   });
 });

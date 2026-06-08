@@ -4,7 +4,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
   findPublicAPIChangelog,
+  getAvailablePackages,
   getPackage,
+  getVersions,
   hasChangelogEntries,
   limitChangelogVersions,
   scopeOrder
@@ -197,5 +199,48 @@ describe('getPackage', () => {
     const result = await getPackage('@nvidia-elements/core');
     expect(result).toContain('# @nvidia-elements/core v1.0.0');
     expect(result).toContain('No readme pkg');
+  });
+
+  it('should throw with no available packages when metadata is missing', async () => {
+    const { ProjectsService } = await import('@internals/metadata');
+    vi.mocked(ProjectsService.getData).mockResolvedValueOnce(undefined as never);
+
+    await expect(getPackage('@nvidia-elements/core')).rejects.toThrow('No package found for "@nvidia-elements/core"');
+  });
+});
+
+describe('getVersions', () => {
+  it('should resolve the latest published versions for available packages', async () => {
+    const result = await getVersions();
+    expect(result).toEqual({
+      '@nvidia-elements/core': '2.0.0',
+      '@nvidia-elements/themes': '1.5.0'
+    });
+  });
+
+  it('should default to an empty package list when metadata is missing', async () => {
+    const { ProjectsService } = await import('@internals/metadata');
+    vi.mocked(ProjectsService.getData).mockResolvedValueOnce(undefined as never);
+
+    const result = await getVersions();
+    expect(result).toBeDefined();
+  });
+});
+
+describe('getAvailablePackages', () => {
+  it('should format available packages as markdown sections', async () => {
+    const result = await getAvailablePackages();
+    expect(result).toContain('## @nvidia-elements/core v2.0.0');
+    expect(result).toContain('Core elements');
+    expect(result).toContain('## @nvidia-elements/themes v1.5.0');
+    expect(result).toContain('Theme tokens');
+  });
+
+  it('should return an empty string when metadata is missing', async () => {
+    const { ProjectsService } = await import('@internals/metadata');
+    vi.mocked(ProjectsService.getData).mockResolvedValueOnce(undefined as never);
+
+    const result = await getAvailablePackages();
+    expect(result).toBe('');
   });
 });

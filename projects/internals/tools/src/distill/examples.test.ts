@@ -128,6 +128,10 @@ describe('isContextExample', () => {
       })
     ).toBe(false);
   });
+
+  it('should treat an example with no id, tags, or element as a default', () => {
+    expect(isContextExample({})).toBe(true);
+  });
 });
 
 describe('rankExample', () => {
@@ -145,6 +149,10 @@ describe('rankExample', () => {
 
   it('should rank other examples last', () => {
     expect(rankExample({ id: 'button-default' })).toBe(3);
+  });
+
+  it('should default to the lowest rank when the id is missing', () => {
+    expect(rankExample({})).toBe(3);
   });
 
   it('should strip elements- prefix before ranking', () => {
@@ -266,5 +274,19 @@ describe('distillExamples', () => {
     const result = distillExamples(examples);
     expect(result).toHaveLength(1);
     expect(result[0].summary).toBe('Has summary');
+  });
+
+  it('should default every shaped field when examples omit them', () => {
+    const result = distillExamples([{}, {}]);
+
+    expect(result).toHaveLength(2);
+    expect(result[0]).toEqual({ id: '', name: '', summary: '', element: '', template: '' });
+  });
+
+  it('should fall back to the description when the summary is missing', () => {
+    const result = distillExamples([{ id: 'widget', element: 'nve-widget', description: 'Reusable widget' }]);
+
+    expect(result).toHaveLength(1);
+    expect(result[0].summary).toBe('Reusable widget');
   });
 });

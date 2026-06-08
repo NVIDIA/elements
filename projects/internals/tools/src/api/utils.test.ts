@@ -8,8 +8,13 @@ import {
   getContextAPIs,
   getContextTokens,
   getPublishedPackageNames,
+  searchContextAPIs,
   type PartialAPIResult
 } from './utils.js';
+
+vi.mock('@internals/metadata', () => ({
+  ApiService: { search: vi.fn() }
+}));
 
 describe('getPublishedPackageNames', () => {
   const projects = [
@@ -612,5 +617,89 @@ describe('attributeMetadataToMarkdown', () => {
     const markdown = attributeMetadataToMarkdown(attribute);
 
     expect(markdown.includes('| `disabled` | `string` |`true` |')).toBe(true);
+  });
+
+  it('should use the built-in example for nve-layout', () => {
+    const attribute: Attribute = {
+      name: 'nve-layout',
+      description: 'Layout utility attribute',
+      example: '',
+      markdown: '',
+      values: [{ name: 'row' }, { name: 'column' }]
+    };
+
+    const markdown = attributeMetadataToMarkdown(attribute);
+
+    expect(markdown).toContain('## nve-layout');
+    expect(markdown).toContain('nve-layout="row gap:sm"');
+    expect(markdown).toContain('nve-layout="grid gap:sm span-items:6"');
+  });
+
+  it('should use the built-in example for nve-text', () => {
+    const attribute: Attribute = {
+      name: 'nve-text',
+      description: 'Typography utility attribute',
+      example: '',
+      markdown: '',
+      values: [{ name: 'heading' }, { name: 'body' }]
+    };
+
+    const markdown = attributeMetadataToMarkdown(attribute);
+
+    expect(markdown).toContain('## nve-text');
+    expect(markdown).toContain('nve-text="heading"');
+    expect(markdown).toContain('nve-text="monospace"');
+  });
+});
+
+describe('searchContextAPIs', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should attach markdown to attribute results that have values', async () => {
+    const { ApiService } = await import('@internals/metadata');
+    vi.mocked(ApiService.search).mockResolvedValue([
+      { name: 'nve-layout', description: 'Layout utility', values: [{ name: 'row' }], markdown: '' }
+    ] as never);
+
+    const results = (await searchContextAPIs('layout')) as Attribute[];
+
+    expect(results).toHaveLength(1);
+    expect(results[0].markdown).toContain('## nve-layout');
+  });
+
+  it('should leave element results without a markdown field untouched', async () => {
+    const { ApiService } = await import('@internals/metadata');
+    vi.mocked(ApiService.search).mockResolvedValue([
+      { name: 'nve-button', manifest: { metadata: { markdown: 'x' } } }
+    ] as never);
+
+    const results = (await searchContextAPIs('button')) as Element[];
+
+    expect(results).toHaveLength(1);
+    expect((results[0] as Attribute).markdown).toBeUndefined();
+  });
+
+  it('should limit results to the configured limit', async () => {
+    const { ApiService } = await import('@internals/metadata');
+    vi.mocked(ApiService.search).mockResolvedValue(
+      Array.from({ length: 5 }, (_, index) => ({ name: `nve-item-${index}` })) as never
+    );
+
+    const results = await searchContextAPIs('item', { limit: 2 });
+
+    expect(results).toHaveLength(2);
+  });
+
+  it('should return every result when no limit is provided', async () => {
+    const { ApiService } = await import('@internals/metadata');
+    vi.mocked(ApiService.search).mockResolvedValue(
+      Array.from({ length: 5 }, (_, index) => ({ name: `nve-item-${index}` })) as never
+    );
+
+    const results = await searchContextAPIs('item', {});
+
+    expect(results).toHaveLength(5);
   });
 });
