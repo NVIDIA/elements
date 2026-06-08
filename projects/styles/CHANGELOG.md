@@ -1,3 +1,48 @@
+## 2.0.0 (2026-06-08)
+
+* chore(ci): release scope fix ([102f9a3](https://github.com/NVIDIA/elements/commit/102f9a3))
+* chore(release): @nvidia-elements/forms-v2.0.0 [skip ci] ([59f3a66](https://github.com/NVIDIA/elements/commit/59f3a66))
+* chore(release): @nvidia-elements/themes-v2.0.0 [skip ci] ([9ffdbd2](https://github.com/NVIDIA/elements/commit/9ffdbd2))
+* feat(cli)!: promote to stable public release ([ab93fca](https://github.com/NVIDIA/elements/commit/ab93fca))
+* feat(code)!: promote to stable public release ([eb00327](https://github.com/NVIDIA/elements/commit/eb00327))
+* feat(core)!: promote to stable public release ([cb2859d](https://github.com/NVIDIA/elements/commit/cb2859d))
+* feat(forms)!: promote to stable public release ([dc67f62](https://github.com/NVIDIA/elements/commit/dc67f62))
+* feat(lint)!: promote to stable public release ([583e44f](https://github.com/NVIDIA/elements/commit/583e44f))
+* feat(markdown)!: promote to stable public release ([aa807eb](https://github.com/NVIDIA/elements/commit/aa807eb))
+* feat(monaco)!: promote to stable public release ([78c8007](https://github.com/NVIDIA/elements/commit/78c8007))
+* feat(styles)!: promote to stable public release ([f07f114](https://github.com/NVIDIA/elements/commit/f07f114))
+* feat(themes)!: promote to stable public release ([9c7352f](https://github.com/NVIDIA/elements/commit/9c7352f))
+
+### BREAKING CHANGE
+
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+* Promotes to the stable public 2.0 release line.
+
+Signed-off-by: Cory Rylan <crylan@nvidia.com>
+
 ## <small>0.0.10 (2026-06-06)</small>
 
 * chore(ci): add labeler and stale workflows ([31730e8](https://github.com/NVIDIA/elements/commit/31730e8))
