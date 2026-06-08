@@ -171,6 +171,9 @@ describe('setup-mcp', () => {
 
       const written = vi.mocked(writeFileSync).mock.calls[0][1] as string;
       expect(written).toContain('[mcp_servers.elements]');
+      expect(written).toContain(
+        'description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"'
+      );
       expect(written).toContain('command = "nve"');
       expect(written).toContain('args = ["mcp"]');
     });

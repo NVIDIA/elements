@@ -81,9 +81,10 @@ After adding the configuration in the root of your project, restart Codex for th
 
 <br />
 
-```shell
+```toml
 # .codex/config.toml
 [mcp_servers.elements]
+description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
 command = "nve"
 args = ["mcp"]
 ```

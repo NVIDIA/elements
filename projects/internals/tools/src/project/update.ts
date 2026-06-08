@@ -89,17 +89,35 @@ function updateProjectDependencies(options: ProjectDependencyUpdateOptions): Rep
 
   try {
     writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    execFileSync(packageManager, ['update', '@nvidia-elements/*', '@nvidia-elements/*'], { cwd });
+    execFileSync(packageManager, ['update', '@nvidia-elements/*'], { cwd });
   } catch (e) {
+    const output = getExecFileSyncOutput(e);
+    if (packageManager === 'pnpm' && output.includes('ERR_PNPM_IGNORED_BUILDS')) {
+      return null;
+    }
+
     return {
       dependencies: {
-        message: `Failed to update to the latest version. \n${e}`,
+        message: `Failed to update to the latest version. \n${output}`,
         status: 'danger'
       }
     };
   }
 
   return null;
+}
+
+function getExecFileSyncOutput(error: unknown) {
+  if (typeof error !== 'object' || error === null) {
+    return `${error}`;
+  }
+
+  const execError = error as { stdout?: Buffer | string; stderr?: Buffer | string; message?: string };
+  const stdout = execError.stdout?.toString() ?? '';
+  const stderr = execError.stderr?.toString() ?? '';
+  const output = `${stdout}\n${stderr}`.trim();
+
+  return output || execError.message || 'Command failed';
 }
 
 function createMissingPackageJsonReport(packageJsonPath: string): Report {

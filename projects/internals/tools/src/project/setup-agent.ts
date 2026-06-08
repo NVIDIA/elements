@@ -65,7 +65,7 @@ export function writeMcpTomlConfig(configPath: string): string {
 
   const sectionRegex = new RegExp(`\\[mcp_servers\\.elements\\][\\s\\S]*?(?=\\n\\[|$)`);
   const content = existing.replace(sectionRegex, '').trimEnd();
-  const block = `\n\n[mcp_servers.elements]\ncommand = "nve"\nargs = ["mcp"]\n`;
+  const block = `\n\n[mcp_servers.elements]\ndescription = "${DESCRIPTION}"\ncommand = "nve"\nargs = ["mcp"]\n`;
   const updated = (content + block).trimStart();
   const dir = configPath.substring(0, configPath.lastIndexOf('/'));
 

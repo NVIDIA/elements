@@ -277,26 +277,39 @@ function isGitRepository(directoryPath: string) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function setupStarterNPM(extractedDir: string) {
-  try {
-    await installFromRegistry(extractedDir);
-  } catch (e) {
-    const npmClient = await getNPMClient();
-    const stderr = (e as { stderr?: Buffer })?.stderr?.toString?.().trim();
-    console.error(stderr || e);
-    console.error(getDependencyInstallFailureMessage(extractedDir, npmClient));
+async function setupStarterNPM(cwd: string) {
+  console.log('📦 Installing dependencies...');
+  const npmClient = await getRequiredNPMClient();
+  const { code, stdout, stderr } = await runPackageManagerInstall(npmClient, cwd);
+
+  if (code === 0) {
+    return;
   }
+
+  const output = `${stdout}\n${stderr}`;
+  if (output.includes('ERR_PNPM_IGNORED_BUILDS')) {
+    console.log('⚠️ Some dependency build scripts were skipped. Run "pnpm approve-builds" if needed.');
+    return;
+  }
+
+  const message = output.trim() || `${npmClient} install exited with code ${code}`;
+  throw new Error(message);
 }
 
 /* istanbul ignore next -- @preserve */
-async function installFromRegistry(extractedDir: string) {
-  const npmClient = await getRequiredNPMClient();
-  console.log('📦 Installing dependencies...');
-  await new Promise<void>((resolve, reject) => {
-    const child = execPackageManager(npmClient, ['install'], extractedDir);
-    child.on('close', code =>
-      code === 0 ? resolve() : reject(new Error(`${npmClient} install exited with code ${code}`))
-    );
+function runPackageManagerInstall(npmClient: NPMClient, cwd: string) {
+  return new Promise<{ code: number; stdout: string; stderr: string }>((resolve, reject) => {
+    const child = execPackageManager(npmClient, ['install'], cwd);
+    let stdout = '';
+    let stderr = '';
+
+    child.stdout?.on('data', (data: Buffer) => {
+      stdout += data.toString();
+    });
+    child.stderr?.on('data', (data: Buffer) => {
+      stderr += data.toString();
+    });
+    child.on('close', code => resolve({ code: code ?? 1, stdout, stderr }));
     child.on('error', reject);
   });
 }
@@ -319,13 +332,13 @@ export async function startStarter(extractedPath: string) {
   }
 }
 
-async function getRequiredNPMClient() {
+export async function getRequiredNPMClient() {
   const npmClient = await getNPMClient();
   if (npmClient === 'npm' || npmClient === 'pnpm') return npmClient;
   throw new Error('No supported package manager found.');
 }
 
-function execPackageManager(npmClient: NPMClient, args: string[], cwd: string) {
+export function execPackageManager(npmClient: NPMClient, args: string[], cwd: string) {
   return npmClient === 'pnpm' ? execFile('pnpm', args, { cwd }) : execFile('npm', args, { cwd });
 }
 

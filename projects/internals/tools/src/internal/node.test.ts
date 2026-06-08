@@ -162,5 +162,68 @@ describe('internal/node', () => {
 
       expect(result).toEqual([]);
     });
+
+    it('should ignore PATH entries that are not regular files', async () => {
+      const { existsSync, statSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => false } as ReturnType<typeof statSync>);
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: '/a' });
+
+      expect(result).toEqual([]);
+    });
+
+    it('should expand the command with explicit PATHEXT extensions on win32', async () => {
+      const { existsSync, statSync, realpathSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => true } as ReturnType<typeof statSync>);
+      vi.mocked(realpathSync).mockImplementation(path => path.toString());
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: 'C:/bin', platform: 'win32', pathExt: '.EXE;.CMD' });
+
+      expect(result.some(commandPath => commandPath.toLowerCase().endsWith('nve.exe'))).toBe(true);
+      expect(result.some(commandPath => commandPath.toLowerCase().endsWith('nve.cmd'))).toBe(true);
+    });
+
+    it('should fall back to the PATHEXT environment variable on win32', async () => {
+      const { existsSync, statSync, realpathSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => true } as ReturnType<typeof statSync>);
+      vi.mocked(realpathSync).mockImplementation(path => path.toString());
+      vi.stubEnv('PATHEXT', '.BAT');
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: 'C:/bin', platform: 'win32' });
+
+      expect(result.some(commandPath => commandPath.toLowerCase().endsWith('nve.bat'))).toBe(true);
+      vi.unstubAllEnvs();
+    });
+
+    it('should treat any matching file as executable on win32 without an access check', async () => {
+      const { accessSync, existsSync, statSync, realpathSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => true } as ReturnType<typeof statSync>);
+      vi.mocked(realpathSync).mockImplementation(path => path.toString());
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: 'C:/bin', platform: 'win32', pathExt: '.EXE' });
+
+      expect(result.length).toBeGreaterThan(0);
+      expect(accessSync).not.toHaveBeenCalled();
+    });
+
+    it('should default to process PATH and platform when options are omitted', async () => {
+      const { existsSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(false);
+      vi.stubEnv('PATH', '/usr/bin:/bin');
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('definitely-not-a-real-command');
+
+      expect(result).toEqual([]);
+      vi.unstubAllEnvs();
+    });
   });
 });
