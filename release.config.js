@@ -21,6 +21,10 @@ export default {
     [
       '@semantic-release/commit-analyzer',
       {
+        parserOpts: {
+          headerPattern: /^(\w+)(?:\(([^)]*)\))?(!)?: (.*)$/,
+          headerCorrespondence: ['type', 'scope', 'breaking', 'subject']
+        },
         releaseRules: [
           // Catch-all first: suppress default rules (false acts as baseline)
           { breaking: true, release: false },
