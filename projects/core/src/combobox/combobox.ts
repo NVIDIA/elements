@@ -201,7 +201,7 @@ export class Combobox extends Control implements ContainerElement {
     const hasNoResults = visibleOptions.filter(o => !o.disabled).length === 0;
     const showCreateItem = this.#showCreateItem;
     return html`
-    <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${this.#onDropdownOpen} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
+    <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${this.#openDropdown} @close=${this.#closeDropdown} hidden .anchor=${this.#input as HTMLElement} position="bottom">
       <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${visibleOptions.map(
           o => html`
@@ -371,8 +371,14 @@ export class Combobox extends Control implements ContainerElement {
     }
   }
 
-  #onDropdownOpen(e: Event) {
-    (e.target as HTMLElement).hidden = false;
+  #openDropdown() {
+    this.#dropdown!.hidden = false;
+  }
+
+  #closeDropdown() {
+    this.#dropdown!.hidden = true;
+    this._internals.states.delete('dirty');
+    this.#validateSingleSelectValue();
   }
 
   #setupAutoCompleteKeyEvents() {
@@ -513,12 +519,6 @@ export class Combobox extends Control implements ContainerElement {
       this.#dropdown!.showPopover({ source: this.#input as HTMLElement });
       this.#dropdown!.tabIndex = -1;
     }
-  }
-
-  #closeListBox() {
-    this.#dropdown!.hidePopover();
-    this._internals.states.delete('dirty');
-    this.#validateSingleSelectValue();
   }
 
   #validateSingleSelectValue() {

@@ -13,7 +13,8 @@ import {
   I18nController,
   onChildListMutation,
   getElementUpdate,
-  scopedRegistry
+  scopedRegistry,
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -21,6 +22,7 @@ import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
 import { Tag } from '@nvidia-elements/core/tag';
 import styles from './select.css?inline';
+import globalStyles from './select.global.css?inline';
 
 /**
  * @element nve-select
@@ -156,7 +158,7 @@ export class Select extends Control {
     return this.#select?.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
-      <nve-dropdown part="dropdown" @close=${this.#closeDropdown} @open=${this.#openDropdown} hidden  .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement}  position="bottom">
+      <nve-dropdown part="dropdown" @close=${this.#closeDropdown} @open=${this.#openDropdown} hidden .anchor=${this.#input as HTMLElement} position="bottom">
         ${this.#menu}
       </nve-dropdown>`
       : this.#menu;
@@ -187,6 +189,11 @@ export class Select extends Control {
         this.#observers.push(getElementUpdate(o, 'selected', () => this.requestUpdate()));
       }
     });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
   }
 
   disconnectedCallback() {
