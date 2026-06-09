@@ -6,8 +6,7 @@ import { clickOutsideElementBounds, generateId, getAttributeListChanges } from '
 import { attachInternals } from '../utils/a11y.js';
 import { focusElement } from '../utils/focus.js';
 import { getHostAnchor, getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
-import type { PopoverType } from '../types/index.js';
-import type { InterestEvent } from './type-interest.controller.js';
+import type { InterestEvent, PopoverType } from '../types/index.js';
 
 export interface NativePopover extends ReactiveElement {
   anchor?: HTMLElement | string;
