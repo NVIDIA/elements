@@ -113,6 +113,10 @@ export type TaskStatus =
  */
 export type PopoverType = 'auto' | 'manual' | 'hint' | 'inline';
 
+export type InterestEvent = Event & {
+  source: HTMLElement;
+};
+
 /** Controls how the popover aligns along the edge of its anchor element.
  * - `start` - Aligns the popover to the beginning edge of the anchor for left or top alignment.
  * - `end` - Aligns the popover to the ending edge of the anchor for right or bottom alignment.
