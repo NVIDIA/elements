@@ -33,18 +33,18 @@ body[nve-text],
 @supports not (text-box: trim-both cap alphabetic) {
   /* https://seek-oss.github.io/capsize/ (firefox) */
   [nve-text] {
-    --__capsize-offset: -0.1818em;
+    --_capsize-offset: -0.1818em;
   }
 
   :is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'])::before {
     content: '';
-    margin-bottom: var(--__capsize-offset);
+    margin-block-end: var(--_capsize-offset);
     display: table;
   }
 
   :is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'])[nve-text]::after {
     content: '';
-    margin-top: var(--__capsize-offset);
+    margin-block-start: var(--_capsize-offset);
     display: table;
   }
 
@@ -55,7 +55,7 @@ body[nve-text],
 
   [nve-text~='truncate'] {
     &::after {
-      --__capsize-offset: 0;
+      --_capsize-offset: 0;
     }
   }
 }
@@ -132,7 +132,8 @@ body[nve-text],
 
 [nve-text~='list'] {
   margin: 0 !important;
-  padding: 0 0 0 var(--nve-ref-size-400) !important;
+  padding-block: 0 !important;
+  padding-inline: var(--nve-ref-size-400) 0 !important;
   list-style-position: outside !important;
 
   li {
@@ -155,7 +156,8 @@ ul[nve-text~='nav'] li {
   padding: 0;
   list-style: none !important;
   color: var(--nve-sys-text-muted-color) !important;
-  margin: 0 0 var(--nve-ref-space-sm) 0 !important;
+  margin-block: 0 var(--nve-ref-space-sm) !important;
+  margin-inline: 0 !important;
 
   > a {
     text-decoration: none !important;
@@ -173,7 +175,8 @@ ul[nve-text~='nav'] li {
 
 ul[nve-text~='nav'] ul li {
   font-size: var(--nve-ref-font-size-100);
-  margin: 0 0 var(--nve-ref-space-sm) var(--nve-ref-space-lg) !important;
+  margin-block: 0 var(--nve-ref-space-sm) !important;
+  margin-inline: var(--nve-ref-space-lg) 0 !important;
 }
 
 [nve-text~='link'] {

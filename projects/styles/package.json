@@ -60,6 +60,7 @@
     "dev": "wireit",
     "build": "wireit",
     "lint": "wireit",
+    "test": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit"
   },
@@ -73,6 +74,7 @@
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@vitest/browser": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
     "cssnano": "8.0.0",
     "eslint": "catalog:",
     "lit": "catalog:",
@@ -93,6 +95,8 @@
         "lint",
         "build",
         "publint",
+        "test",
+        "test:lighthouse",
         "test:visual"
       ]
     },
@@ -115,6 +119,7 @@
       "command": "NODE_ENV=production vite build && node ./build/metadata.js",
       "files": [
         "src/**",
+        "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "package.json",
@@ -154,6 +159,23 @@
         "NODE_ENV": "production"
       }
     },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "src/**",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "dist/data.html.json",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
     "test:visual": {
       "command": "vitest run --config=vitest.visual.ts",
       "clean": false,
@@ -177,7 +199,8 @@
     },
     "lint": {
       "dependencies": [
-        "lint:eslint"
+        "lint:eslint",
+        "lint:style"
       ]
     },
     "lint:eslint": {
@@ -191,6 +214,15 @@
       "dependencies": [
         "../lint:build"
       ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=./stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "../../stylelint.config.mjs",
+        "stylelint.config.mjs"
+      ],
+      "output": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",

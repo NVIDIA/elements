@@ -32,11 +32,20 @@
       min-height: 0;
     }
 
+    &[nve-layout~='full:width'] {
+      width: 100%;
+      min-width: 0;
+    }
+
+    &[nve-layout~='full:height'] {
+      height: 100%;
+      min-height: 0;
+    }
+
     /* Horizontal Layout */
     &[nve-layout~='row'] {
       flex-direction: row;
-      justify-items: flex-start;
-      align-items: flex-start;
+      place-items: flex-start;
 
       &[nve-layout~='align:left'] {
         justify-content: flex-start;
@@ -130,9 +139,8 @@
 
     /* Centered */
     &[nve-layout~='align:center'] {
-      align-items: center;
-      align-content: center;
-      justify-content: center;
+      place-items: center;
+      place-content: center;
     }
 
     /* Full Stretch */
@@ -147,17 +155,17 @@
     /* Spacing */
     &[nve-layout~='align:space-around'] {
       justify-content: space-around;
-      gap: none;
+      gap: var(--nve-ref-space-none);
     }
 
     &[nve-layout~='align:space-between'] {
       justify-content: space-between;
-      gap: none;
+      gap: var(--nve-ref-space-none);
     }
 
     &[nve-layout~='align:space-evenly'] {
       justify-content: space-evenly;
-      gap: none;
+      gap: var(--nve-ref-space-none);
     }
 
     /* Fixed Width Layout Gap Spacing */
@@ -173,20 +181,18 @@
         padding: var(--nve-ref-space-$(size));
       }
 
-      @each $side in top, left, right, bottom {
+      @each $side, $logical-side in (top, left, right, bottom), (block-start, inline-start, inline-end, block-end) {
         &[nve-layout~='pad-$(side):$(size)'] {
-          padding-$(side): var(--nve-ref-space-$(size));
+          padding-$(logical-side): var(--nve-ref-space-$(size));
         }
       }
 
       &[nve-layout~='pad-x:$(size)'] {
-        padding-left: var(--nve-ref-space-$(size));
-        padding-right: var(--nve-ref-space-$(size));
+        padding-inline: var(--nve-ref-space-$(size));
       }
 
       &[nve-layout~='pad-y:$(size)'] {
-        padding-top: var(--nve-ref-space-$(size));
-        padding-bottom: var(--nve-ref-space-$(size));
+        padding-block: var(--nve-ref-space-$(size));
       }
     }
 
@@ -252,18 +258,14 @@
       }
 
       &[nve-layout~='align:stretch'] {
-        align-items: stretch;
-        align-content: stretch;
-        justify-items: stretch;
-        justify-content: stretch;
+        place-items: stretch;
+        place-content: stretch;
         @mixin auto-columns;
       }
 
       &[nve-layout~='align:center'] {
-        align-items: center;
-        align-content: center;
-        justify-items: center;
-        justify-content: center;
+        place-items: center;
+        place-content: center;
         @mixin auto-columns;
       }
     }

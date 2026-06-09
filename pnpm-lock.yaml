@@ -1914,6 +1914,9 @@ importers:
       '@vitest/browser':
         specifier: 'catalog:'
         version: 4.1.7(vite@8.0.14(@types/node@25.7.0)(esbuild@0.28.0)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.15))(terser@5.47.1)(yaml@2.8.3))(vitest@4.1.7)
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.1.7(vitest@4.1.7)
       cssnano:
         specifier: 8.0.0
         version: 8.0.0(postcss@8.5.15)

@@ -34,12 +34,14 @@
     }
   }
 
+  /* stylelint-disable-next-line keyframes-name-pattern -- underscore prefix marks internal keyframes */
   @keyframes _nve-fade-in {
     from {
       opacity: 0;
     }
   }
 
+  /* stylelint-disable-next-line keyframes-name-pattern -- underscore prefix marks internal keyframes */
   @keyframes _nve-fade-out {
     to {
       opacity: 0;
