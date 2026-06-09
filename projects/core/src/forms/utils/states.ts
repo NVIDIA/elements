@@ -12,6 +12,9 @@ import { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
 
 export const inputQuery = 'input, select, selectmenu, textarea, [nve-control]';
+export interface ControlStateCleanup {
+  disconnect: () => void;
+}
 
 /**
  * Adds validation states to custom element
@@ -20,6 +23,8 @@ export const inputQuery = 'input, select, selectmenu, textarea, [nve-control]';
  */
 // eslint-disable-next-line max-lines-per-function
 export function setupControlValidationStates(control: Control, messages: ControlMessage[]) {
+  const cleanups: ControlStateCleanup[] = [];
+
   if (
     !control.input.form?.noValidate &&
     !control.input.formNoValidate &&
@@ -47,16 +52,16 @@ export function setupControlValidationStates(control: Control, messages: Control
       hideAllValidationMessages(messages);
     };
 
-    control.input.addEventListener('blur', () => {
+    const onBlur = () => {
       control.input.checkValidity();
       updateValidityState();
-    });
+    };
 
-    control.input.addEventListener('input', () => {
+    const onInput = () => {
       updateValidityState();
-    });
+    };
 
-    control.input.addEventListener('invalid', () => {
+    const onInvalid = () => {
       if (messages.find(m => m.error)) {
         hideAllValidationMessages(messages);
         showActiveValidationMessages(control, messages);
@@ -65,13 +70,21 @@ export function setupControlValidationStates(control: Control, messages: Control
       control.status = 'error';
       control._internals.states.delete('valid');
       control._internals.states.add('invalid');
-    });
+    };
 
-    control.addEventListener('reset', () => resetValidityState());
-    control.input.form?.addEventListener('reset', () => resetValidityState());
+    cleanups.push(
+      addCleanupListener(control.input, 'blur', onBlur),
+      addCleanupListener(control.input, 'input', onInput),
+      addCleanupListener(control.input, 'invalid', onInvalid),
+      addCleanupListener(control, 'reset', resetValidityState)
+    );
+
+    if (control.input.form) {
+      cleanups.push(addCleanupListener(control.input.form, 'reset', resetValidityState));
+    }
   }
 
-  control.shadowRoot!.addEventListener('slotchange', () => {
+  const onSlotChange = () => {
     const current = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
     control._internals.states.delete('valid');
     control._internals.states.delete('invalid');
@@ -80,7 +93,10 @@ export function setupControlValidationStates(control: Control, messages: Control
     } else {
       control._internals.states.add('valid');
     }
-  });
+  };
+  cleanups.push(addCleanupListener(control.shadowRoot!, 'slotchange', onSlotChange));
+
+  return cleanups;
 }
 
 /**
@@ -92,31 +108,12 @@ export function setupControlValidationStates(control: Control, messages: Control
  * :state(dirty) user modified the form control
  */
 export function setupControlStates(control: Control) {
-  const observers: MutationObserver[] = [];
+  const observers: ControlStateCleanup[] = [];
   const states = control._internals.states;
   control.input.checked ? states.add('checked') : states.delete('checked');
   control.input.indeterminate ? states.add('indeterminate') : states.delete('indeterminate');
-  control.input.addEventListener('focus', () => control._internals.states.add('focus'));
-  control.input.addEventListener('input', () => control._internals.states.add('dirty'));
-  control.input.addEventListener('blur', () => {
-    control._internals.states.add('touched');
-    control._internals.states.delete('focus');
-  });
 
-  control.input.getRootNode().addEventListener('change', (e: Event) => {
-    if ((e.target as HTMLInputElement).name === control.input?.name) {
-      control.input.checked ? states.add('checked') : states.delete('checked');
-    }
-  });
-
-  control.input.form?.addEventListener('reset', () => {
-    control._internals.states.delete('touched');
-    control._internals.states.delete('dirty');
-    control._internals.states.delete('error');
-    control._internals.states.delete('success');
-    control.requestUpdate();
-  });
-
+  observers.push(...addControlInteractionListeners(control));
   observers.push(
     getElementUpdate(control.input, 'readonly', value =>
       (value === '' ? true : value) ? states.add('readonly') : states.delete('readonly')
@@ -132,6 +129,44 @@ export function setupControlStates(control: Control) {
     )
   );
   return observers;
+}
+
+function addControlInteractionListeners(control: Control): ControlStateCleanup[] {
+  const cleanups: ControlStateCleanup[] = [];
+  const states = control._internals.states;
+  const onFocus = () => control._internals.states.add('focus');
+  const onInput = () => control._internals.states.add('dirty');
+  const onBlur = () => {
+    control._internals.states.add('touched');
+    control._internals.states.delete('focus');
+  };
+
+  const onRootChange = (e: Event) => {
+    if ((e.target as HTMLInputElement).name === control.input?.name) {
+      control.input.checked ? states.add('checked') : states.delete('checked');
+    }
+  };
+
+  const onFormReset = () => {
+    control._internals.states.delete('touched');
+    control._internals.states.delete('dirty');
+    control._internals.states.delete('error');
+    control._internals.states.delete('success');
+    control.requestUpdate();
+  };
+
+  cleanups.push(
+    addCleanupListener(control.input, 'focus', onFocus),
+    addCleanupListener(control.input, 'input', onInput),
+    addCleanupListener(control.input, 'blur', onBlur),
+    addCleanupListener(control.input.getRootNode(), 'change', onRootChange)
+  );
+
+  if (control.input.form) {
+    cleanups.push(addCleanupListener(control.input.form, 'reset', onFormReset));
+  }
+
+  return cleanups;
 }
 
 /**
@@ -158,7 +193,7 @@ function toggleControlGroupDisabledState(controlGroup: ControlGroup) {
  */
 export function setupControlStatusStates(control: Control | ControlGroup, messages: ControlMessage[]) {
   updateControlStatusState(control, messages.find(m => !m.hidden)!);
-  const observers: MutationObserver[] = [];
+  const observers: ControlStateCleanup[] = [];
   observers.push(
     getAttributeListChanges(control, ['hidden', 'status'], mutation => {
       const target = mutation.target as ControlMessage;
@@ -168,7 +203,7 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
     })
   );
 
-  control.shadowRoot!.addEventListener('slotchange', () => {
+  const onSlotChange = () => {
     const current = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
     const message = current.find(m => m.status && !m.hidden);
     control._internals.states.delete('error');
@@ -176,9 +211,17 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
     if (message) {
       control._internals.states.add(message.status!);
     }
-  });
+  };
+  observers.push(addCleanupListener(control.shadowRoot!, 'slotchange', onSlotChange));
 
   return observers;
+}
+
+function addCleanupListener(target: EventTarget, type: string, listener: EventListener): ControlStateCleanup {
+  target.addEventListener(type, listener);
+  return {
+    disconnect: () => target.removeEventListener(type, listener)
+  };
 }
 
 export function updateControlStatusState(control: Control | ControlGroup, message: ControlMessage) {

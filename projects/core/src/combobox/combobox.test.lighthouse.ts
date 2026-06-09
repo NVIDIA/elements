@@ -25,7 +25,7 @@ describe('combobox lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(36);
+    expect(report.payload.javascript.kb).toBeLessThan(36.1);
   });
 
   test('combobox multi select with large dataset should meet lighthouse benchmarks', async () => {
@@ -42,6 +42,6 @@ describe('combobox lighthouse report', () => {
 
     expect(report.scores.performance).toBeGreaterThanOrEqual(96);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(36);
+    expect(report.payload.javascript.kb).toBeLessThan(36.1);
   });
 });

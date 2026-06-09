@@ -51,9 +51,15 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
 
   async hostConnected() {
     await this.host.updateComplete;
+    if (!this.host.isConnected) return;
     this.#initializeTabIndex();
-    this.host.addEventListener('pointerup', (e: PointerEvent) => this.#clickItem(e));
-    this.host.addEventListener('keydown', (e: KeyboardEvent) => this.#focusItem(e));
+    this.host.addEventListener('pointerup', this.#onPointerUp);
+    this.host.addEventListener('keydown', this.#onKeyDown);
+  }
+
+  hostDisconnected() {
+    this.host.removeEventListener('pointerup', this.#onPointerUp);
+    this.host.removeEventListener('keydown', this.#onKeyDown);
   }
 
   #initializeTabIndex() {
@@ -114,6 +120,10 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     };
     activeItem.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, composed: true, detail }));
   }
+
+  #onPointerUp = (e: PointerEvent) => this.#clickItem(e);
+
+  #onKeyDown = (e: KeyboardEvent) => this.#focusItem(e);
 }
 
 interface KeyListConfig {

@@ -12,7 +12,12 @@ import {
   associateControlGroup
 } from '@nvidia-elements/core/internal';
 import type { ControlMessage } from '../control-message/control-message.js';
-import { setupControlStatusStates, setupControlGroupStates, inputQuery } from '../utils/states.js';
+import {
+  setupControlStatusStates,
+  setupControlGroupStates,
+  inputQuery,
+  type ControlStateCleanup
+} from '../utils/states.js';
 import { setupControlLayoutStates } from '../utils/layout.js';
 import styles from './control-group.css?inline';
 
@@ -53,7 +58,7 @@ export class ControlGroup extends LitElement {
     return this.querySelectorAll ? Array.from(this.querySelectorAll<ControlMessage>('nve-control-message')) : [];
   }
 
-  #observers: (MutationObserver | ResizeObserver)[] = [];
+  #observers: (MutationObserver | ResizeObserver | ControlStateCleanup)[] = [];
 
   static styles = useStyles([styles]);
 

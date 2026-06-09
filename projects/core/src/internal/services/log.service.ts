@@ -27,6 +27,6 @@ export class LogService {
   }
 
   static #dispatch(type: 'warn' | 'error', value: string, ...args: unknown[]) {
-    globalThis.document.dispatchEvent(new CustomEvent('NVE_ELEMENTS_LOG', { detail: { type, value, args } }));
+    globalThis.document?.dispatchEvent(new CustomEvent('NVE_ELEMENTS_LOG', { detail: { type, value, args } }));
   }
 }

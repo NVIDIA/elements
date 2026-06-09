@@ -21,11 +21,19 @@ import {
   setupControlValidationStates,
   setupControlStates,
   setupControlStatusStates,
-  inputQuery
+  inputQuery,
+  type ControlStateCleanup
 } from '../utils/states.js';
 import { setupControlLayoutStates } from '../utils/layout.js';
 import globalStyles from './control.global.css?inline';
 import styles from './control.css?inline';
+
+interface ResettableControl {
+  getAttribute: Element['getAttribute'];
+  value: string;
+}
+
+type ControlInput = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | ResettableControl;
 
 /**
  * @element nve-control
@@ -118,7 +126,7 @@ export class Control extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #observers: (MutationObserver | ResizeObserver)[] = [];
+  #observers: (MutationObserver | ResizeObserver | ControlStateCleanup)[] = [];
 
   protected _associateDatalist = true;
 
@@ -181,15 +189,42 @@ export class Control extends LitElement {
 
   /** Resets control value to initial attribute value and clears any active validation rules. */
   reset() {
-    this.input.value = this.input.getAttribute('value') ?? '';
+    this.#resetInputValue(this.input as ControlInput);
     this.requestUpdate();
     this.dispatchEvent(new CustomEvent('reset', { bubbles: true, composed: true }));
   }
 
-  #setupInput() {
-    setupControlValidationStates(this, this.#messages);
+  #resetInputValue(input: ControlInput) {
+    if (input instanceof HTMLSelectElement) {
+      this.#resetSelectValue(input);
+      return;
+    }
 
+    if (this.#isCheckedInput(input)) {
+      input.checked = input.defaultChecked;
+      input.indeterminate = false;
+      return;
+    }
+
+    input.value =
+      input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement
+        ? input.defaultValue
+        : (input.getAttribute('value') ?? '');
+  }
+
+  #resetSelectValue(input: HTMLSelectElement) {
+    const hasDefaultSelection = Array.from(input.options).some(option => option.defaultSelected);
+    Array.from(input.options).forEach(option => (option.selected = option.defaultSelected));
+    if (!input.multiple && !hasDefaultSelection) input.selectedIndex = 0;
+  }
+
+  #isCheckedInput(input: ControlInput): input is HTMLInputElement {
+    return input instanceof HTMLInputElement && (input.type === 'checkbox' || input.type === 'radio');
+  }
+
+  #setupInput() {
     this.#observers.push(
+      ...setupControlValidationStates(this, this.#messages),
       ...setupControlStates(this),
       ...setupControlStatusStates(this, this.#messages),
       setupControlLayoutStates(this),

@@ -271,6 +271,19 @@ describe('getPropertyChanges', () => {
     expect(option.selected).toBe(false);
   });
 
+  it('should stop calling callback after cleanup', () => {
+    const input = document.createElement('input');
+    const spy = vi.fn();
+    const cleanup = getPropertyChanges(input, 'value', spy);
+
+    input.value = 'before cleanup';
+    cleanup?.();
+    input.value = 'after cleanup';
+
+    expect(spy).toHaveBeenCalledOnce();
+    expect(input.value).toBe('after cleanup');
+  });
+
   it('should not throw when the property has no prototype descriptor', () => {
     const div = document.createElement('div');
 
@@ -318,6 +331,22 @@ describe('getElementUpdate', () => {
 
     element.id = 'foo';
     expect(await update).toBe('foo');
+  });
+
+  it('should stop triggering property updates after disconnect', () => {
+    const input = document.createElement('input');
+    const spy = vi.fn();
+    const observer = getElementUpdate(input, 'value', spy);
+
+    spy.mockClear();
+    input.value = 'before disconnect';
+    expect(spy).toHaveBeenCalledOnce();
+
+    spy.mockClear();
+    observer.disconnect();
+    input.value = 'after disconnect';
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });
 

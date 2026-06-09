@@ -168,9 +168,6 @@ export class Select extends Control {
     super.firstUpdated(props);
     await this.updateComplete;
     this.#setupCustomSelectUI();
-    this.#setupOverflowListener();
-    this.#syncSelectValueStates();
-    this.#syncOptionSelectedStates();
   }
 
   #syncSelectValueStates() {
@@ -181,12 +178,37 @@ export class Select extends Control {
     );
   }
 
-  #trackedOptions = new Set();
+  #optionObservers = new Map<HTMLOptionElement, MutationObserver>();
+
+  #setupObservers() {
+    this.#disconnectObservers();
+    this.#setupOverflowListener();
+    this.#syncSelectValueStates();
+    this.#syncOptionSelectedStates();
+  }
+
+  #disconnectObservers() {
+    this.#observers.forEach(observer => observer.disconnect());
+    this.#observers = [];
+    this.#optionObservers.clear();
+  }
+
   #syncOptionSelectedStates() {
+    const options = new Set(this.#options);
+
+    this.#optionObservers.forEach((observer, option) => {
+      if (!options.has(option)) {
+        observer.disconnect();
+        this.#optionObservers.delete(option);
+        this.#observers = this.#observers.filter(o => o !== observer);
+      }
+    });
+
     this.#options.forEach(o => {
-      if (!this.#trackedOptions.has(o)) {
-        this.#trackedOptions.add(o);
-        this.#observers.push(getElementUpdate(o, 'selected', () => this.requestUpdate()));
+      if (!this.#optionObservers.has(o)) {
+        const observer = getElementUpdate(o, 'selected', () => this.requestUpdate());
+        this.#optionObservers.set(o, observer);
+        this.#observers.push(observer);
       }
     });
   }
@@ -194,11 +216,16 @@ export class Select extends Control {
   connectedCallback() {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
+    void this.updateComplete.then(() => {
+      if (this.isConnected) {
+        this.#setupObservers();
+      }
+    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.#observers.forEach(observer => observer.disconnect());
+    this.#disconnectObservers();
   }
 
   async updated(props: PropertyValues<this>) {
@@ -206,10 +233,15 @@ export class Select extends Control {
     if (this.#select?.size && this.#select?.size !== 0) {
       this._internals.states.add('size');
       this.style.setProperty('--size', `${this.#select?.size + 0.75}`);
+    } else {
+      this._internals.states.delete('size');
+      this.style.removeProperty('--size');
     }
 
     if (this.#select?.multiple && this.#select?.size === 0) {
       this._internals.states.add('multiple');
+    } else {
+      this._internals.states.delete('multiple');
     }
   }
 

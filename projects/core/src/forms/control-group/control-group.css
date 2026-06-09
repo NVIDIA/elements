@@ -5,7 +5,7 @@
   --color: var(--nve-sys-interaction-field-color);
   --opacity: 1;
   --label-color: var(--nve-sys-interaction-field-color);
-  --label-text-transform: capitalize;
+  --label-text-transform: none;
   --label-font-weight: var(--nve-ref-font-weight-medium);
   --label-font-size: var(--nve-ref-font-size-100);
   --_label-width: var(--label-width, 180px);

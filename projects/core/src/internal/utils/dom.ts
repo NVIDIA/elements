@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { GlobalStateService } from '../services/global.service.js';
+import { LogService } from '../services/log.service.js';
 import type { ElementDefinition } from '../types/index.js';
 import { isFocusable } from './focus.js';
 
@@ -91,6 +92,15 @@ export function getPropertyChanges(element: HTMLElement, key: string, callback: 
       callback(val);
     }
   });
+
+  return () => {
+    if (own) {
+      Object.defineProperty(element, key, own);
+      return;
+    }
+
+    Reflect.deleteProperty(element, key);
+  };
 }
 
 /* used for cases of needing to know a property update outside of lit, example a native input value prop change */
@@ -101,8 +111,16 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
     callback((element as unknown as Record<string, unknown>)[key]);
   }
 
-  getPropertyChanges(element, key, callback);
-  return getAttributeChanges(element, key, val => callback(val));
+  const cleanupPropertyChanges = getPropertyChanges(element, key, callback);
+  const observer = getAttributeChanges(element, key, val => callback(val));
+  const disconnect = observer.disconnect.bind(observer);
+
+  observer.disconnect = () => {
+    cleanupPropertyChanges?.();
+    disconnect();
+  };
+
+  return observer;
 }
 
 export function clickOutsideElementBounds(event: PointerEvent | MouseEvent, element: HTMLElement) {
@@ -243,11 +261,21 @@ export function endOfScrollBox(element: HTMLElement, offset = 0) {
 }
 
 export async function openEyeDropper(): Promise<string> {
-  return await new (
-    globalThis as unknown as { EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> } }
-  ).EyeDropper()
-    .open()
-    .then((color: { sRGBHex: string }) => color.sRGBHex);
+  const EyeDropperConstructor = (
+    globalThis as unknown as { EyeDropper?: new () => { open: () => Promise<{ sRGBHex: string }> } }
+  ).EyeDropper;
+
+  if (!EyeDropperConstructor) {
+    LogService.warn('EyeDropper API is unavailable');
+    return '';
+  }
+
+  try {
+    return (await new EyeDropperConstructor().open()).sRGBHex;
+  } catch (e) {
+    LogService.warn(`EyeDropper selection failed: ${(e as Error).message}`);
+    return '';
+  }
 }
 
 /**

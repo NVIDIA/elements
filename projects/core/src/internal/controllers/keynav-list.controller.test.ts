@@ -5,7 +5,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { elementIsStable, createFixture, removeFixture, emulateClick } from '@internals/testing';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { keyNavigationList } from '@nvidia-elements/core/internal';
 
 @customElement('keynav-list-test-element')
@@ -68,6 +68,22 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
+  });
+
+  it('should not duplicate listeners after reconnect', async () => {
+    const listener = vi.fn();
+    element.addEventListener('nve-key-change', listener);
+
+    element.remove();
+    fixture.appendChild(element);
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].focus();
+
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
+    );
+
+    expect(listener).toHaveBeenCalledOnce();
   });
 
   it('should support horizontal arrow key navigation', async () => {

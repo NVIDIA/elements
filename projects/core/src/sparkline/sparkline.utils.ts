@@ -121,10 +121,8 @@ export function toLinePath(points: Point[], interpolation: Interpolation, viewWi
       return toSmoothOpenPath(points);
     case 'linear':
       return toLinearOpenPath(points);
-    default: {
-      const exhaustiveCheck: never = interpolation;
-      throw new Error(`Unhandled interpolation: ${exhaustiveCheck}`);
-    }
+    default:
+      return toLinearOpenPath(points);
   }
 }
 
@@ -142,10 +140,9 @@ export function toAreaPath(points: Point[], interpolation: Interpolation, viewHe
     case 'linear':
       openPath = toLinearOpenPath(points);
       break;
-    default: {
-      const exhaustiveCheck: never = interpolation;
-      throw new Error(`Unhandled interpolation: ${exhaustiveCheck}`);
-    }
+    default:
+      openPath = toLinearOpenPath(points);
+      break;
   }
 
   const last = points[points.length - 1]!;

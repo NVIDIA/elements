@@ -95,7 +95,7 @@ export class FormatRelativeTime extends LitElement {
       const value = Math.round(absDiff / UNIT_DIVISORS[unit]);
       if (value < max) return { value: sign * value, unit };
     }
-    throw new Error('format-relative-time: no relative time threshold matched');
+    return { value: sign * Math.round(absDiff / UNIT_DIVISORS.year), unit: 'year' };
   }
 
   #computeExplicitUnit(diffMs: number, unit: TimeUnitOption): number {

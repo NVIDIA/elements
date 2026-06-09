@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { Control, ControlMessage } from '@nvidia-elements/core/forms';
 import '@nvidia-elements/core/forms/define.js';
@@ -166,6 +166,33 @@ describe(Control.metadata.tag, () => {
     await elementIsStable(element);
     expect(getComputedStyle(message).display).toBe('block');
     expect(validationMessage.hidden).toBe(true);
+  });
+
+  it('should not duplicate form reset listeners after reconnect', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <form>
+        <nve-control>
+          <label>label</label>
+          <input type="text" required />
+          <nve-control-message>message</nve-control-message>
+        </nve-control>
+      </form>
+    `);
+    const form = fixture.querySelector('form');
+    element = fixture.querySelector(Control.metadata.tag);
+    await elementIsStable(element);
+
+    element.remove();
+    form.appendChild(element);
+    await elementIsStable(element);
+    element.shadowRoot!.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    form.dispatchEvent(new Event('reset'));
+
+    expect(requestUpdate).toHaveBeenCalledTimes(2);
   });
 });
 

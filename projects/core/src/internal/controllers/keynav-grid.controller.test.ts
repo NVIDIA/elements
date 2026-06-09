@@ -152,6 +152,20 @@ describe('grid-key-navigation.controller', () => {
     expect(element.keynavGridConfig.cells[2].tabIndex).toBe(0);
   });
 
+  it('should not duplicate listeners after reconnect', async () => {
+    const listener = vi.fn();
+    element.addEventListener('nve-key-change', listener);
+
+    element.remove();
+    fixture.appendChild(element);
+    await elementIsStable(element);
+    element.keynavGridConfig.cells[0].focus();
+
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight' }));
+
+    expect(listener).toHaveBeenCalledOnce();
+  });
+
   it('should support arrow key navigation', async () => {
     element.keynavGridConfig.cells[0].dispatchEvent(
       new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
