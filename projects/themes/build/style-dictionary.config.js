@@ -1,6 +1,8 @@
 import StyleDictionary from 'style-dictionary';
 import { formattedVariables } from 'style-dictionary/utils';
 import { globSync } from 'glob';
+import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 
 const buildPath = 'dist/';
 const sourcePath = 'src/';
@@ -68,38 +70,40 @@ StyleDictionary.registerTransform({
   name: 'custom/validate',
   type: 'value',
   transitive: true,
-  transform: obj => {
-    const { value, type, name, original, filePath } = obj;
-    const isHighContrast = filePath.includes('high-contrast');
-    const isReferenceToken = name.includes('nve-ref');
-    const isVisualizationToken = name?.includes('nve-sys-visualization');
-    const isColorToken = type === 'color';
-    const isRawValue = !original.value.startsWith('{');
-    const isPxValue = original.value.endsWith('px');
-    const isSizeToken = name?.includes('nve-ref-size');
-    const isSpaceToken = name?.includes('nve-ref-space');
-    const isBorderToken = name?.includes('nve-ref-border');
-    const isOutlineToken = name?.includes('nve-ref-outline');
-
-    if (isColorToken && isRawValue && !isReferenceToken && !isVisualizationToken && !isHighContrast) {
-      console.error(
-        '\x1b[31m',
-        `Token ${name} is a invalid color. Color must implement a reference to a {ref.*} token to prevent cross theme color divergence`
-      );
-      throw new Error();
-    }
-
-    if (isPxValue && isRawValue && !isSizeToken && !isSpaceToken && !isBorderToken && !isOutlineToken) {
-      console.error(
-        '\x1b[31m',
-        `Token ${name} is a invalid size/space value. Value must implement a reference to a {ref.space-*} or {ref.size-*} token to prevent cross theme layout divergence`
-      );
-      throw new Error();
-    }
-
-    return value;
-  }
+  transform: validateTokenValue
 });
+
+export function validateTokenValue(obj) {
+  const { value, type, name, original, filePath } = obj;
+  const isHighContrast = filePath.includes('high-contrast');
+  const isReferenceToken = name.includes('nve-ref');
+  const isVisualizationToken = name?.includes('nve-sys-visualization');
+  const isColorToken = type === 'color';
+  const isRawValue = !original.value.startsWith('{');
+  const isPxValue = original.value.endsWith('px');
+  const isSizeToken = name?.includes('nve-ref-size');
+  const isSpaceToken = name?.includes('nve-ref-space');
+  const isBorderToken = name?.includes('nve-ref-border');
+  const isOutlineToken = name?.includes('nve-ref-outline');
+
+  if (isColorToken && isRawValue && !isReferenceToken && !isVisualizationToken && !isHighContrast) {
+    throw new Error(
+      `Token ${name} is an invalid color. Color must use a {ref.*} token reference to prevent cross-theme color divergence`
+    );
+  }
+
+  if (isPxValue && isRawValue && !isSizeToken && !isSpaceToken && !isBorderToken && !isOutlineToken) {
+    throw new Error(
+      `Token ${name} is an invalid size or space value. Value must use a {ref.space-*} or {ref.size-*} token reference to prevent cross-theme layout divergence`
+    );
+  }
+
+  return value;
+}
+
+export function getThemeSelector(theme) {
+  return theme !== 'index' ? `[nve-theme~='${theme}']` : `:root, [nve-theme~='light']`;
+}
 
 StyleDictionary.registerFormat({
   name: 'custom/css',
@@ -107,7 +111,7 @@ StyleDictionary.registerFormat({
     const experimental = dictionary.allTokens.find(t => t.name.includes('experimental'))
       ? '/*!\n * @experimental\n */'
       : '';
-    const selector = options.theme !== 'index' ? `[nve-theme*='${options.theme}']` : `:root, [nve-theme~='light']`;
+    const selector = getThemeSelector(options.theme);
     const config = dictionary.allTokens.filter(t => t.name.includes('config') && !t.name.includes('experimental'));
     const configString = `:root{${config.map(t => `--${t.name}: ${t.value}`).join(';\n')}}`;
     const formatted = formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })
@@ -195,7 +199,7 @@ StyleDictionary.registerFormat({
   }
 });
 
-async function buildTokens() {
+export async function buildTokens() {
   const themes = globSync(`${sourcePath}*.json`).filter(path => !path.includes('index'));
 
   const sd = new StyleDictionary({
@@ -328,4 +332,6 @@ function getTheme(path) {
   return path.replace('dist/', '').replace(`src/`, '').split('.')[0];
 }
 
-buildTokens();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  await buildTokens();
+}
