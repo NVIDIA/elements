@@ -69,102 +69,30 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     };
   }
 
-  // eslint-disable-next-line max-lines-per-function
   async hostConnected() {
     attachInternals(this.host);
     this.host.popover = this.host.popoverType ?? null;
     await this.host.updateComplete;
+    if (!this.host.isConnected) return;
+
     this.host.setAttribute('nve-popover', '');
     this.#updateLegacyTriggers();
     this.#setupLegacyTriggers(); // eslint-disable-line @typescript-eslint/no-floating-promises
     this.#setupModalLightDismiss();
     this.host.inert = this.host.matches(':not(:popover-open)') && !!this.#nativeTriggers.length;
 
-    this.host.addEventListener('beforetoggle', e => {
-      if (e.newState === 'open') {
-        this.host._internals!.states.add('transition-start');
-      }
-    });
-
-    this.host.addEventListener('toggle', (e: ToggleEvent) => {
-      if (this.host.behaviorTrigger) {
-        this.host.hidden = e.newState === 'closed';
-      }
-
-      if (e.newState === 'open' && this.host.closeTimeout) {
-        this.#setCloseTimeout();
-      }
-
-      if (e.newState === 'closed') {
-        this.#clearInterestTimeout();
-        this.#clearCloseTimeout();
-      }
-
-      this.host.inert = this.host.matches(':not(:popover-open)');
-
-      if (this.host.modal) {
-        this.#toggleFocus(e.newState === 'open', e.target as HTMLElement);
-      }
-
-      this.host.dispatchEvent(
-        new CustomEvent(e.newState === 'open' && e.oldState !== 'open' ? 'open' : 'close', {
-          bubbles: true,
-          composed: true,
-          detail: { trigger: e.source }
-        })
-      );
-    });
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_declarative_popovers
-    this.host.addEventListener('command', ((e: CommandEvent) => {
-      if (e.command === 'toggle-popover') {
-        this.host.togglePopover({ source: e.source as HTMLElement });
-      }
-
-      if (e.command === 'hide-popover') {
-        this.host.hidePopover();
-        this.#clearInterestTimeout();
-      }
-
-      if (e.command === 'show-popover') {
-        this.host.showPopover({ source: e.source as HTMLElement });
-      }
-    }) as EventListener);
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using_interest_invokers
-    this.host.addEventListener('interest', ((e: InterestEvent) => {
-      const isCustomElement = e.source?.localName.includes('-');
-      if (isCustomElement) {
-        const interestDelayStart = this.host.openDelay ?? this.#parseInterestDelay();
-        if (interestDelayStart) {
-          this.#interestTimeout = setTimeout(() => {
-            if (this.host.isConnected) {
-              this.host.showPopover({ source: e.source as HTMLElement });
-            }
-          }, interestDelayStart);
-        } else {
-          this.host.showPopover({ source: e.source as HTMLElement });
-        }
-      }
-    }) as EventListener);
-
-    this.host.addEventListener('loseinterest', ((e: InterestEvent) => {
-      const isCustomElement = e.source?.localName.includes('-');
-      if (isCustomElement) {
-        this.host.hidePopover();
-      }
-
-      if (this.#interestTimeout) {
-        clearTimeout(this.#interestTimeout);
-        this.#interestTimeout = null;
-      }
-    }) as EventListener);
+    this.host.addEventListener('beforetoggle', this.#onBeforeToggle);
+    this.host.addEventListener('toggle', this.#onToggle as EventListener);
+    this.host.addEventListener('command', this.#onCommand as EventListener);
+    this.host.addEventListener('interest', this.#onInterest as EventListener);
+    this.host.addEventListener('loseinterest', this.#onLoseInterest as EventListener);
   }
 
   #interestTimeout: ReturnType<typeof setTimeout> | null = null;
   #closeTimeout: ReturnType<typeof setTimeout> | null = null;
   #observers: MutationObserver[] = [];
   #previousLegacyTrigger: HTMLButtonElement | null = null;
+  #hintTrigger: HTMLButtonElement | null = null;
 
   async hostUpdated() {
     this.host.popover = this.host.popoverType ?? null;
@@ -173,6 +101,15 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
+    this.#observers.length = 0;
+    this.host.removeEventListener('beforetoggle', this.#onBeforeToggle);
+    this.host.removeEventListener('toggle', this.#onToggle as EventListener);
+    this.host.removeEventListener('command', this.#onCommand as EventListener);
+    this.host.removeEventListener('interest', this.#onInterest as EventListener);
+    this.host.removeEventListener('loseinterest', this.#onLoseInterest as EventListener);
+    this.host.removeEventListener('pointerdown', this.#onPointerDown);
+    this.host.removeEventListener('pointerup', this.#onPointerUp);
+    this.#removeHintTrigger();
     this.#clearInterestTimeout();
     this.#clearCloseTimeout();
   }
@@ -211,24 +148,10 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #pointerdownWithinModal = false;
 
   #setupModalLightDismiss() {
-    this.host.addEventListener('pointerdown', e => {
-      if (this.host.modal && this.host.matches(':popover-open')) {
-        this.#pointerdownWithinModal = clickOutsideElementBounds(e, this.host);
-      }
-    });
-
-    this.host.addEventListener('pointerup', e => {
-      if (
-        this.#pointerdownWithinModal &&
-        this.host.popoverDismissible &&
-        this.host.modal &&
-        this.host.matches(':popover-open') &&
-        !hasOpenPopover(this.host) &&
-        clickOutsideElementBounds(e, this.host)
-      ) {
-        this.host.hidePopover();
-      }
-    });
+    this.host.removeEventListener('pointerdown', this.#onPointerDown);
+    this.host.removeEventListener('pointerup', this.#onPointerUp);
+    this.host.addEventListener('pointerdown', this.#onPointerDown);
+    this.host.addEventListener('pointerup', this.#onPointerUp);
   }
 
   get #legacyHostTrigger(): HTMLElement | null {
@@ -272,25 +195,41 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #updateLegacyTriggers() {
     const trigger = this.#legacyHostTrigger as HTMLButtonElement;
 
-    // Clean up previous trigger if it changed
     if (this.#previousLegacyTrigger && this.#previousLegacyTrigger !== trigger) {
-      this.#previousLegacyTrigger.popoverTargetElement = null;
-      this.#previousLegacyTrigger.removeAttribute('popovertarget');
+      this.#clearLegacyTrigger(this.#previousLegacyTrigger);
     }
 
-    // if not a hint type setup native popovertarget
-    if (trigger) {
-      if (this.host.popoverType === 'hint') {
-        trigger.addEventListener('mouseenter', () => this.host.showPopover({ source: trigger as HTMLElement }));
-        trigger.addEventListener('mouseleave', () => this.host.hidePopover());
-        trigger.addEventListener('focusout', () => this.host.hidePopover());
-      } else {
-        this.host.id = this.host.id ? this.host.id : generateId();
-        trigger.popoverTargetElement = this.host;
-        trigger.setAttribute('popovertarget', this.host.id);
-      }
-      this.#previousLegacyTrigger = trigger;
+    if (this.#hintTrigger && this.#hintTrigger !== trigger) {
+      this.#removeHintTrigger();
     }
+
+    if (!trigger) {
+      this.#previousLegacyTrigger = null;
+      return;
+    }
+
+    if (this.host.popoverType === 'hint') {
+      this.#setupHintTrigger(trigger);
+    } else {
+      this.#setupPopoverTargetTrigger(trigger);
+    }
+    this.#previousLegacyTrigger = trigger;
+  }
+
+  #setupHintTrigger(trigger: HTMLButtonElement) {
+    if (this.#hintTrigger === trigger) return;
+
+    trigger.addEventListener('mouseenter', this.#onHintMouseEnter);
+    trigger.addEventListener('mouseleave', this.#onHintMouseLeave);
+    trigger.addEventListener('focusout', this.#onHintMouseLeave);
+    this.#hintTrigger = trigger;
+  }
+
+  #setupPopoverTargetTrigger(trigger: HTMLButtonElement) {
+    this.#removeHintTrigger();
+    this.host.id = this.host.id ? this.host.id : generateId();
+    trigger.popoverTargetElement = this.host;
+    trigger.setAttribute('popovertarget', this.host.id);
   }
 
   #toggleFocus(open: boolean, target: HTMLElement) {
@@ -303,4 +242,121 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
       focusElement(target);
     }
   }
+
+  #clearLegacyTrigger(trigger: HTMLButtonElement) {
+    trigger.popoverTargetElement = null;
+    trigger.removeAttribute('popovertarget');
+    if (this.#hintTrigger === trigger) {
+      this.#removeHintTrigger();
+    }
+  }
+
+  #removeHintTrigger() {
+    this.#hintTrigger?.removeEventListener('mouseenter', this.#onHintMouseEnter);
+    this.#hintTrigger?.removeEventListener('mouseleave', this.#onHintMouseLeave);
+    this.#hintTrigger?.removeEventListener('focusout', this.#onHintMouseLeave);
+    this.#hintTrigger = null;
+  }
+
+  #onBeforeToggle = (e: ToggleEvent) => {
+    if (e.newState === 'open') {
+      this.host._internals!.states.add('transition-start');
+    }
+  };
+
+  #onToggle = (e: ToggleEvent) => {
+    if (this.host.behaviorTrigger) {
+      this.host.hidden = e.newState === 'closed';
+    }
+
+    if (e.newState === 'open' && this.host.closeTimeout) {
+      this.#setCloseTimeout();
+    }
+
+    if (e.newState === 'closed') {
+      this.#clearInterestTimeout();
+      this.#clearCloseTimeout();
+    }
+
+    this.host.inert = this.host.matches(':not(:popover-open)');
+
+    if (this.host.modal) {
+      this.#toggleFocus(e.newState === 'open', e.target as HTMLElement);
+    }
+
+    this.host.dispatchEvent(
+      new CustomEvent(e.newState === 'open' && e.oldState !== 'open' ? 'open' : 'close', {
+        bubbles: true,
+        composed: true,
+        detail: { trigger: e.source }
+      })
+    );
+  };
+
+  #onCommand = (e: CommandEvent) => {
+    if (e.command === 'toggle-popover') {
+      this.host.togglePopover({ source: e.source as HTMLElement });
+    }
+
+    if (e.command === 'hide-popover') {
+      this.host.hidePopover();
+      this.#clearInterestTimeout();
+    }
+
+    if (e.command === 'show-popover') {
+      this.host.showPopover({ source: e.source as HTMLElement });
+    }
+  };
+
+  #onInterest = (e: InterestEvent) => {
+    const isCustomElement = e.source?.localName.includes('-');
+    if (isCustomElement) {
+      const interestDelayStart = this.host.openDelay ?? this.#parseInterestDelay();
+      if (interestDelayStart) {
+        this.#interestTimeout = setTimeout(() => {
+          if (this.host.isConnected) {
+            this.host.showPopover({ source: e.source as HTMLElement });
+          }
+        }, interestDelayStart);
+      } else {
+        this.host.showPopover({ source: e.source as HTMLElement });
+      }
+    }
+  };
+
+  #onLoseInterest = (e: InterestEvent) => {
+    const isCustomElement = e.source?.localName.includes('-');
+    if (isCustomElement) {
+      this.host.hidePopover();
+    }
+
+    this.#clearInterestTimeout();
+  };
+
+  #onPointerDown = (e: PointerEvent) => {
+    if (this.host.modal && this.host.matches(':popover-open')) {
+      this.#pointerdownWithinModal = clickOutsideElementBounds(e, this.host);
+    }
+  };
+
+  #onPointerUp = (e: PointerEvent) => {
+    if (
+      this.#pointerdownWithinModal &&
+      this.host.popoverDismissible &&
+      this.host.modal &&
+      this.host.matches(':popover-open') &&
+      !hasOpenPopover(this.host) &&
+      clickOutsideElementBounds(e, this.host)
+    ) {
+      this.host.hidePopover();
+    }
+  };
+
+  #onHintMouseEnter = (e: MouseEvent) => {
+    this.host.showPopover({ source: e.currentTarget as HTMLElement });
+  };
+
+  #onHintMouseLeave = () => {
+    this.host.hidePopover();
+  };
 }

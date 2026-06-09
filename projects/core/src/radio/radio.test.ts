@@ -38,6 +38,17 @@ describe(Radio.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.matches(':state(checked)')).toBe(true);
   });
+
+  it('should reset checked state to the native default', async () => {
+    const input = fixture.querySelector('input');
+    input.defaultChecked = true;
+    input.checked = false;
+
+    element.reset();
+    await elementIsStable(element);
+
+    expect(input.checked).toBe(true);
+  });
 });
 
 describe(`${Radio.metadata.tag} - radio group`, () => {

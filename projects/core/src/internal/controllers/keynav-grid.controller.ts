@@ -44,6 +44,7 @@ export function keyNavigationGrid<T extends ReactiveElement & KeynavGridElement>
 
 export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridElement> implements ReactiveController {
   #observers: MutationObserver[] = [];
+  #grid?: HTMLElement;
 
   get #config() {
     return {
@@ -72,10 +73,13 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
 
   async hostConnected() {
     await this.host.updateComplete;
+    if (!this.host.isConnected) return;
+
+    this.#grid = this.#config.grid;
     initializeKeyListItems(this.#hostCells);
-    this.#config.grid.addEventListener('keyup', (e: KeyboardEvent) => this.#updateCellActivation(e));
-    this.#config.grid.addEventListener('keydown', (e: KeyboardEvent) => this.#keynavCell(e));
-    this.#config.grid.addEventListener('mouseup', (e: MouseEvent) => this.#clickCell(e));
+    this.#grid.addEventListener('keyup', this.#onKeyUp);
+    this.#grid.addEventListener('keydown', this.#onKeyDown);
+    this.#grid.addEventListener('mouseup', this.#onMouseUp);
     this.#observers.push(
       onChildListMutation(
         this.host,
@@ -86,6 +90,11 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
 
   hostDisconnected() {
     this.#observers.forEach(o => o?.disconnect());
+    this.#observers.length = 0;
+    this.#grid?.removeEventListener('keyup', this.#onKeyUp);
+    this.#grid?.removeEventListener('keydown', this.#onKeyDown);
+    this.#grid?.removeEventListener('mouseup', this.#onMouseUp);
+    this.#grid = undefined;
   }
 
   #clickCell(e: MouseEvent) {
@@ -148,6 +157,12 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
       getFlattenedFocusableItems(activeCell as HTMLElement)[0]?.focus();
     }
   }
+
+  #onKeyUp = (e: KeyboardEvent) => this.#updateCellActivation(e);
+
+  #onKeyDown = (e: KeyboardEvent) => this.#keynavCell(e);
+
+  #onMouseUp = (e: MouseEvent) => this.#clickCell(e);
 }
 
 function getGridDelta(code: KeynavCode | string, dir: string): { dx: number; dy: number } | null {

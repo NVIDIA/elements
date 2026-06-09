@@ -14,6 +14,7 @@ describe('LogService', () => {
 
   afterEach(() => {
     window.NVE_ELEMENTS.state.env = 'production';
+    vi.unstubAllGlobals();
     vi.restoreAllMocks();
   });
 

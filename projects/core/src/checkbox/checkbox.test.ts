@@ -89,6 +89,17 @@ describe(`${Checkbox.metadata.tag} - control base behavior`, () => {
     expect((e as Event).composed).toBe(true);
   });
 
+  it('should reset checked state to the native default', async () => {
+    const input = fixture.querySelector('input');
+    input.defaultChecked = true;
+    input.checked = false;
+
+    element.reset();
+    await elementIsStable(element);
+
+    expect(input.checked).toBe(true);
+  });
+
   it('should disconnect observers when removed from DOM', async () => {
     const input = fixture.querySelector('input');
     expect(element.matches(':state(checked)')).toBe(false);

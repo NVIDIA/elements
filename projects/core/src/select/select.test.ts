@@ -267,6 +267,47 @@ describe(Select.metadata.tag, () => {
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(3);
   });
 
+  it('should update tags when a dynamically added option selected state changes after reconnect', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(1);
+
+    element.remove();
+    fixture.appendChild(element);
+    await elementIsStable(element);
+
+    const option = document.createElement('option');
+    option.value = '4';
+    option.textContent = 'Option 4';
+    select.appendChild(option);
+
+    await elementIsStable(element);
+    option.selected = true;
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
+  });
+
+  it('should stop observing removed option selected state changes', async () => {
+    select.multiple = true;
+    await elementIsStable(element);
+
+    const option = document.createElement('option');
+    option.value = '4';
+    option.textContent = 'Option 4';
+    select.appendChild(option);
+    await elementIsStable(element);
+
+    option.remove();
+    await elementIsStable(element);
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    option.selected = true;
+
+    expect(requestUpdate).not.toHaveBeenCalled();
+  });
+
   it('should update tags when using multiple select and options change', async () => {
     select.multiple = true;
     select.options[0].selected = true;
@@ -370,6 +411,18 @@ describe(Select.metadata.tag, () => {
     expect(element.matches(':state(multiple)')).toBe(true);
   });
 
+  it('should remove host :state(multiple) state when multiple is cleared', async () => {
+    select.multiple = true;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.matches(':state(multiple)')).toBe(true);
+
+    select.multiple = false;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.matches(':state(multiple)')).toBe(false);
+  });
+
   it('should hide tags and display label when multiple is used and tags overflow container', async () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(false);
     select.multiple = true;
@@ -402,6 +455,29 @@ describe(Select.metadata.tag, () => {
     select.size = 2;
     await elementIsStable(element);
     expect(element.matches(':state(size)')).toBe(true);
+  });
+
+  it('should remove host :state(size) state when size is cleared', async () => {
+    select.size = 2;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.matches(':state(size)')).toBe(true);
+
+    select.size = 0;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.matches(':state(size)')).toBe(false);
+    expect(element.style.getPropertyValue('--size')).toBe('');
+  });
+
+  it('should reset selected option to the native default', async () => {
+    select.options[1].defaultSelected = true;
+    select.value = '3';
+
+    element.reset();
+    await elementIsStable(element);
+
+    expect(select.value).toBe('2');
   });
 
   it('should apply disabled styles to tags when disabled with multiple selection', async () => {

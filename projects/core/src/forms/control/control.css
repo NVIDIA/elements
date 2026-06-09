@@ -6,7 +6,7 @@
   --accent-color: var(--nve-sys-accent-secondary-background);
   --color: var(--nve-sys-interaction-field-color);
   --label-color: var(--nve-sys-interaction-field-color);
-  --label-text-transform: capitalize;
+  --label-text-transform: none;
   --label-font-weight: var(--nve-ref-font-weight-medium);
   --label-font-size: var(--nve-ref-font-size-100);
   --control-width: 100%;
@@ -16,10 +16,6 @@
   --opacity: 1;
   --filter: none;
   contain: content;
-}
-
-:host([nve-control='inline']) {
-  --control-height: auto;
 }
 
 ::slotted(*) {
@@ -36,10 +32,6 @@
   display: inline-block !important;
   line-height: 1em !important;
   align-self: center !important;
-}
-
-::slotted(label::first-letter) {
-  text-transform: capitalize;
 }
 
 :host(:state(disabled)),
@@ -194,6 +186,9 @@ slot[name='messages'] {
 
 /** inline controls */
 :host([nve-control='inline']) {
+  --control-height: auto;
+  width: fit-content;
+
   [internal-host] {
     grid-template-areas: 'input input input';
 

@@ -4,7 +4,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@internals/testing';
 import type { PopoverAlign, PopoverPosition } from '@nvidia-elements/core/internal';
 import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
@@ -113,6 +113,21 @@ describe('type-popover.controller', () => {
     element.hidePopover();
     expect((await close).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not duplicate open events after reconnect', async () => {
+    const listener = vi.fn();
+    element.addEventListener('open', listener);
+
+    element.remove();
+    fixture.appendChild(element);
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+
+    element.dispatchEvent(new ToggleEvent('toggle', { oldState: 'closed', newState: 'open' }));
+    await elementIsStable(element);
+
+    expect(listener).toHaveBeenCalledOnce();
   });
 
   it('should open popover when trigger is activated', async () => {
@@ -633,6 +648,35 @@ describe('type-popover.controller - legacy popovertarget hint', () => {
 
     await new Promise(r => setTimeout(() => r(null), 10));
     expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should not duplicate legacy hint trigger listeners after updates', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-button id="hint-trigger">anchor</nve-button>
+      <type-native-popover-controller-test-element
+        .trigger=${'hint-trigger'}
+        .openDelay=${0}
+        .popoverType=${'hint'}
+        hidden>
+      </type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    button = fixture.querySelector(Button.metadata.tag);
+    await elementIsStable(element);
+    await elementIsStable(button);
+
+    const showPopover = vi.spyOn(element, 'showPopover');
+    element.requestUpdate();
+    await elementIsStable(element);
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    button.dispatchEvent(new MouseEvent('mouseenter'));
+
+    expect(showPopover).toHaveBeenCalledOnce();
   });
 
   it('should find shadow root active triggers', async () => {

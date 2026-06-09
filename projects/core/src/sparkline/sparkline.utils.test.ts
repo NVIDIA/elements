@@ -121,6 +121,11 @@ describe('sparkline.utils', () => {
       expect(toLinePath(points, 'smooth', 120)).toContain('C ');
     });
 
+    it('uses linear line path fallback for invalid interpolation', () => {
+      const invalidInterpolation = 'invalid' as unknown as Parameters<typeof toLinePath>[1];
+      expect(toLinePath(points, invalidInterpolation, 120)).toBe(toLinePath(points, 'linear', 120));
+    });
+
     it('returns an empty line path for empty points', () => {
       expect(toLinePath([], 'linear', 120)).toBe('');
     });
@@ -147,6 +152,11 @@ describe('sparkline.utils', () => {
       expect(smoothArea).toContain('C ');
       expect(smoothArea).toContain('100.00');
       expect(smoothArea.endsWith('Z')).toBe(true);
+    });
+
+    it('uses linear area path fallback for invalid interpolation', () => {
+      const invalidInterpolation = 'invalid' as unknown as Parameters<typeof toAreaPath>[1];
+      expect(toAreaPath(points, invalidInterpolation)).toBe(toAreaPath(points, 'linear'));
     });
 
     it('returns an empty area path for empty points', () => {

@@ -408,5 +408,19 @@ describe(FormatRelativeTime.metadata.tag, () => {
       const time = element.shadowRoot!.querySelector('time');
       expect(time!.textContent!.trim()).toBe('2023-07-27T12:00:00.000Z');
     });
+
+    it('should fall back to raw string for relative values outside Intl range', async () => {
+      vi.useRealTimers();
+      const now = vi.spyOn(Date, 'now').mockReturnValue(Number.NEGATIVE_INFINITY);
+
+      element.date = '2023-07-27T12:00:00.000Z';
+      element.requestUpdate();
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time!.textContent!.trim()).toBe('2023-07-27T12:00:00.000Z');
+
+      now.mockRestore();
+    });
   });
 });
