@@ -1,3 +1,5 @@
+import { getSiteHref } from '../utils/site-url.js';
+
 /**
  * Transform that generates a list of anchor links for all heading tags in the content.
  * Creates a side navigation menu from h2 and h3 tags that have IDs.
@@ -25,15 +27,15 @@ export async function anchorGeneratorTransform(content) {
       !this.page.url.includes('integrations') && !this.page.url.includes('changelog') && headings.length > 2
         ? /* html */ `
     <ul id="anchor-generator" nve-text="list nav" slot="right">${headings
-      .map(
-        h =>
-          `<li>
-        <a href="${this.page.url.replace('/docs', 'docs')}#${h.id}" nve-text="link truncate ${h.subHeading ? 'sm' : ''}"
+      .map(h => {
+        const href = getSiteHref(`${this.page.url}#${h.id}`);
+        return `<li>
+        <a href="${href}" nve-text="link truncate ${h.subHeading ? 'sm' : ''}"
         ${h.subHeading ? 'nve-layout="pad-left:md"' : ''}>
           ${h.textContent}
         </a>
-      </li>`
-      )
+      </li>`;
+      })
       .join('')}
     </ul>`
         : '';

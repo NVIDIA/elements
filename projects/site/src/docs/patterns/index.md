@@ -21,7 +21,7 @@
 Patterns are an essential component of creating a cohesive and consistent user experience. Patterns are pre-defined combinations of existing components that teams reuse across different parts of the platform to streamline development and ensure consistency in the UI. By grouping components into patterns, teams can create a more organized and maintainable UI, as well as provide a unified look and feel for all users.
 
 <section class="pattern-links" nve-layout="grid gap:md span-items:12 &md|span-items:6 &xl|span-items:4 pad-top:lg">
-  <a href="docs/patterns/authentication/">
+  <a href="/docs/patterns/authentication/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -34,7 +34,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/browse/">
+  <a href="/docs/patterns/browse/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -47,7 +47,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/chat/">
+  <a href="/docs/patterns/chat/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -60,7 +60,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/editor/">
+  <a href="/docs/patterns/editor/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -73,7 +73,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/dashboard/">
+  <a href="/docs/patterns/dashboard/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -86,7 +86,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/empty-states/">
+  <a href="/docs/patterns/empty-states/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -99,7 +99,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/heatmap/">
+  <a href="/docs/patterns/heatmap/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -112,7 +112,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/keyboard-shortcut/">
+  <a href="/docs/patterns/keyboard-shortcut/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -125,7 +125,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/logging/">
+  <a href="/docs/patterns/logging/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -138,7 +138,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/media/">
+  <a href="/docs/patterns/media/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -151,7 +151,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/navigation/">
+  <a href="/docs/patterns/navigation/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -164,7 +164,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/onboarding/">
+  <a href="/docs/patterns/onboarding/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -177,7 +177,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/panel/">
+  <a href="/docs/patterns/panel/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -190,7 +190,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/responsive/">
+  <a href="/docs/patterns/responsive/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -203,7 +203,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/search/">
+  <a href="/docs/patterns/search/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -216,7 +216,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/subheader/">
+  <a href="/docs/patterns/subheader/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:xs align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -229,7 +229,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
-  <a href="docs/patterns/trend/">
+  <a href="/docs/patterns/trend/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">

@@ -39,7 +39,7 @@ The following set of container `breakpoint-values` defines:
 
 The ampersand-based `&breakpoint-size|...` API adds the breakpoint size before the layout modifier.
 
-Conditional gap sizing example: `nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
+Conditional gap sizing example: `nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](/docs/foundations/layout/#gap-spacing)/[padding](/docs/foundations/layout/#padding) system values.
 
 ```html
 <div> <!-- This parent div element is the containing element - its width will be queried -->
@@ -63,7 +63,7 @@ Conditional gap sizing example: `nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:
 
 ## Responsive Gap Sizing
 
-The following container query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](docs/foundations/layout/#layout-gap-spacing) values:
+The following container query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](/docs/foundations/layout/#gap-spacing) values:
 
 - `&xs|gap:...`
 - `&sm|gap:...`
@@ -76,7 +76,7 @@ The following container query breakpoints are available for gap, replace `...` w
 
 ## Responsive Padding
 
-The following container query breakpoints are available for padding, replace `...` with one of the 9 [padding](docs/foundations/layout/#layout-padding) values:
+The following container query breakpoints are available for padding, replace `...` with one of the 9 [padding](/docs/foundations/layout/#padding) values:
 
 - `&xs|pad:...`
 - `&sm|pad:...`

@@ -14,7 +14,7 @@ This document describes the runtime logs and warnings from the Element libraries
 
 This warning appears when the application bundles or imports many versions of Elements or its dependencies within the same runtime. This can create unexpected compatibility issues and bug at runtime. To resolve, ensure dependencies are up to date and list their dependencies or peer dependencies if they internally depend on Elements.
 
-<nve-alert status="accent">Read more about [library packaging best practices](docs/api-design/packaging/).</nve-alert>
+<nve-alert status="accent">Read more about [library packaging best practices](/docs/api-design/packaging/).</nve-alert>
 
 ## Excessive Instance Limit
 
@@ -24,8 +24,8 @@ To resolve this warning:
 
 - Consider reusing existing elements instead of creating new ones
 - Use virtualization or pagination of elements
-- [Data Grid Performance Documentation](docs/elements/data-grid/performance/)
-- [Dynamic Tree Documentation](docs/elements/tree/#dynamic-tree)
+- [Data Grid Performance Documentation](/docs/elements/data-grid/performance/)
+- [Dynamic Tree Documentation](/docs/elements/tree/#dynamic-tree)
 
 ## Invalid Parent
 

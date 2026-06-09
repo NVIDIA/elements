@@ -59,9 +59,9 @@ The main focus is to enable you to deliver value to your users.
 
 2. **Design Review**: The initial MVP design passes review and is ready for implementation.
 
-3. **Implementation**: Provide a API proposal spec on the component adhering to the [coding and API guidelines](./docs/api-design/)
+3. **Implementation**: Provide a API proposal spec on the component adhering to the [coding and API guidelines](/docs/api-design/)
 
-4. **Code and Design Quality**: New components should maintain a high standard of code quality and adhere to the [coding and API guidelines](./docs/api-design/)
+4. **Code and Design Quality**: New components should maintain a high standard of code quality and adhere to the [coding and API guidelines](/docs/api-design/)
 
 5. **Unit Testing**: As with other contributions, all new components should have appropriate unit tests to verify their functionality and performance.
 

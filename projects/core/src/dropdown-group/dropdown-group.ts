@@ -26,7 +26,6 @@ import globalStyles from './dropdown-group.global.css?inline';
  * @cssprop --nve-dropdown-group-transition
  * @cssprop --arrow-transform - Transform applied to the popover arrow
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
- * @stable false
  */
 @audit()
 export class DropdownGroup extends LitElement {

@@ -12,13 +12,13 @@ Elements provides a set of popover type components built on the native browser [
 
 ## Available Elements
 
-- [tooltip](./docs/elements/tooltip/): contextual text only hints
-- [toggletip](./docs/elements/toggletip/): contextual interactive hints
-- [dropdown](./docs/elements/dropdown/): interactive navigation or form content
-- [dialog](./docs/elements/dialog/): large interactive content, interrupts user flow
-- [toast](./docs/elements/toast/): contextual notification
-- [notification](./docs/elements/notification/): async non contextual notification
-- [drawer](./docs/elements/drawer/): interactive navigation or extra contextual content
+- [tooltip](/docs/elements/tooltip/): contextual text only hints
+- [toggletip](/docs/elements/toggletip/): contextual interactive hints
+- [dropdown](/docs/elements/dropdown/): interactive navigation or form content
+- [dialog](/docs/elements/dialog/): large interactive content, interrupts user flow
+- [toast](/docs/elements/toast/): contextual notification
+- [notification](/docs/elements/notification/): async non contextual notification
+- [drawer](/docs/elements/drawer/): interactive navigation or extra contextual content
 
 ## Installation
 

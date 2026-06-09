@@ -15,7 +15,7 @@
 
 # {{title}}
 
-You can create fluid page layouts through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
+You can create fluid page layouts through the [abstracted CSS flexbox and grid APIs](/docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
 But you can extend the layout system with true responsive capabilities using two different approaches, **Container Queries** and **Viewport Queries**.
 
@@ -82,7 +82,7 @@ Container queries respond to the **width of the parent container**, making them 
 - **Newer technology**: Limited support in older browsers
 - **Learning curve**: Different mental model than traditional responsive design
 
-[Learn more about the Container Query based system →](docs/labs/layout/responsive/container/)
+[Learn more about the Container Query based system →](/docs/labs/layout/responsive/container/)
 
 ## Viewport Queries (`@` prefix)
 
@@ -117,7 +117,7 @@ Viewport queries respond to the **browser window width**, providing traditional 
 - **Context-blind**: Same breakpoint triggers regardless of element placement
 - **Fewer breakpoints**: Standard breakpoints (sm: 576px to xxl: 1440px)
 
-[Learn more about Viewport Query based system →](docs/labs/layout/responsive/viewport/)
+[Learn more about Viewport Query based system →](/docs/labs/layout/responsive/viewport/)
 
 ## When to Use Which System
 

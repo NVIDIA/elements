@@ -14,7 +14,7 @@ import styles from './toggletip-footer.css?inline';
  * @cssprop --border-top
  * @cssprop --padding
  * @cssprop --gap
- *
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
 @audit()
 export class ToggletipFooter extends LitElement {

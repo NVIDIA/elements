@@ -38,7 +38,7 @@ The following set of viewport `breakpoint-values` defines:
 
 The at-symbol-based `@breakpoint-size|...` API adds the breakpoint size before the layout modifier.
 
-Conditional gap sizing example: `nve-layout="row @sm|gap:xs @md|gap:md @lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
+Conditional gap sizing example: `nve-layout="row @sm|gap:xs @md|gap:md @lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](/docs/foundations/layout/#layout-gap-spacing)/[padding](/docs/foundations/layout/#layout-padding) system values.
 
 ```html
 <section nve-layout="row @sm|gap:xxs @md|gap:md @lg|gap:xl @xl|gap:xl">
@@ -53,14 +53,14 @@ Conditional gap sizing example: `nve-layout="row @sm|gap:xs @md|gap:md @lg|gap:x
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/labs/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
+      Viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="/docs/labs/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
     </div>
   </nve-alert>
 </nve-alert-group>
 
 ## Responsive Gap Sizing
 
-The following media query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](docs/foundations/layout/#layout-gap-spacing) values:
+The following media query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](/docs/foundations/layout/#layout-gap-spacing) values:
 
 - `@sm|gap:...`
 - `@md|gap:...`
@@ -72,7 +72,7 @@ The following media query breakpoints are available for gap, replace `...` with 
 
 ## Responsive Padding
 
-The following media query breakpoints are available for padding, replace `...` with one of the 9 [padding](docs/foundations/layout/#layout-padding) values:
+The following media query breakpoints are available for padding, replace `...` with one of the 9 [padding](/docs/foundations/layout/#layout-padding) values:
 
 - `@sm|pad:...`
 - `@md|pad:...`

@@ -245,6 +245,6 @@ Use alignment to control vertical rhythm:
 
 ## Next Steps
 
-- Explore [horizontal layouts](docs/foundations/layout/horizontal/) for side-by-side arrangements
-- Learn about [grid layouts](docs/foundations/layout/grid/) for multi-dimensional designs
-- Understand [gap](docs/foundations/layout/#gap-spacing) and [padding](docs/foundations/layout/#padding) spacing options
+- Explore [horizontal layouts](/docs/foundations/layout/horizontal/) for side-by-side arrangements
+- Learn about [grid layouts](/docs/foundations/layout/grid/) for multi-dimensional designs
+- Understand [gap](/docs/foundations/layout/#gap-spacing) and [padding](/docs/foundations/layout/#padding) spacing options

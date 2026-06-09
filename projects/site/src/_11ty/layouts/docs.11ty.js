@@ -88,15 +88,15 @@ export async function render(data) {
 
               <nve-tabs id="doc-tabs">
                 <nve-tabs-item ${'/' + baseTabUrl === data.page.url ? 'selected' : ''}>
-                  <a href="${baseTabUrl}">Overview</a>
+                  <a href="/${baseTabUrl}">Overview</a>
                 </nve-tabs-item>
                 <nve-tabs-item ${'/' + baseTabUrl + 'api/' === data.page.url ? 'selected' : ''}>
-                  <a href="${baseTabUrl + 'api/'}">API</a>
+                  <a href="/${baseTabUrl + 'api/'}">API</a>
                 </nve-tabs-item>${
                   data.hideExamplesTab
                     ? ''
                     : `<nve-tabs-item ${'/' + baseTabUrl + 'examples/' === data.page.url ? 'selected' : ''}>
-                  <a href="${baseTabUrl + 'examples/'}">Examples</a>
+                  <a href="/${baseTabUrl + 'examples/'}">Examples</a>
                 </nve-tabs-item>`
                 }
               </nve-tabs>

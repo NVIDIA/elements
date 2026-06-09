@@ -95,7 +95,7 @@ The `package.json` should use a `sideEffects` array that lists registration and 
 
 This enables tools like Webpack and Rollup to preserve explicit registration entrypoints while still tree-shaking side-effect-free component modules.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn about <a href="docs/integrations/lit-library/">Lit Library integration</a></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn about <a href="/docs/integrations/lit-library/">Lit Library integration</a></nve-alert>
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry">scoped element registry</a></nve-alert>
 

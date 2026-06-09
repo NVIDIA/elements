@@ -60,9 +60,9 @@ npm install @nvidia-elements/styles @nvidia-elements/themes
 
 The `nve-layout` attribute provides a unified API for three layout modes:
 
-- **[Horizontal Layout](docs/foundations/layout/horizontal/)** (`row`): Flexbox-based horizontal arrangements
-- **[Vertical Layout](docs/foundations/layout/vertical/)** (`column`): Flexbox-based vertical stacking
-- **[Grid Layout](docs/foundations/layout/grid/)** (`grid`): CSS Grid-based multi-dimensional layouts
+- **[Horizontal Layout](/docs/foundations/layout/horizontal/)** (`row`): Flexbox-based horizontal arrangements
+- **[Vertical Layout](/docs/foundations/layout/vertical/)** (`column`): Flexbox-based vertical stacking
+- **[Grid Layout](/docs/foundations/layout/grid/)** (`grid`): CSS Grid-based multi-dimensional layouts
 
 Each layout mode supports spacing, alignment, and responsive behavior through a consistent syntax.
 
@@ -99,9 +99,9 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
   </nve-alert>
 </nve-alert-group>
 
-Apply the `nve-layout` attribute to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/elements/docs/elements/forms/#form-layouts).
+Apply the `nve-layout` attribute to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/docs/elements/forms/#form-layouts).
 
-For more details, see the documentation on the [internal-host pattern](/elements/docs/api-design/styles/#internal-host) and [slots](/elements/docs/api-design/slots/) which the library uses in development, as well as [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on the Shadow DOM.
+For more details, see the documentation on the [internal-host pattern](/docs/api-design/styles/#removed-host) and [slots](/docs/api-design/slots/) which the library uses in development, as well as [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on the Shadow DOM.
 
 ```html
 <!-- ✓ Correct: Apply to native HTML elements -->
@@ -355,6 +355,6 @@ You can compose layout attributes to create sophisticated designs:
 
 ## Next Steps
 
-- Explore [Horizontal Layouts](docs/foundations/layout/horizontal/) for side-by-side arrangements
-- Learn about [Vertical Layouts](docs/foundations/layout/vertical/) for stacked content
-- Understand [Grid Layouts](docs/foundations/layout/grid/) for multi-dimensional designs
+- Explore [Horizontal Layouts](/docs/foundations/layout/horizontal/) for side-by-side arrangements
+- Learn about [Vertical Layouts](/docs/foundations/layout/vertical/) for stacked content
+- Understand [Grid Layouts](/docs/foundations/layout/grid/) for multi-dimensional designs

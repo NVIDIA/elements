@@ -348,6 +348,6 @@ Study these complete examples:
 - [TypeScript Guidelines](typescript.md) - Type safety patterns
 - [Examples Guidelines](examples.md) - Example naming and structure
 - [Testing Guidelines](testing.md) - Testing strategy overview
-- [API Design - Properties & Attributes](../api-design/properties-attributes.md) - Property design
-- [API Design - Styles](../api-design/styles.md) - CSS custom properties
-- [API Design - Registration](../api-design/registration.md) - Naming conventions
+- [API Design - Properties & Attributes](/docs/api-design/properties-attributes/) - Property design
+- [API Design - Styles](/docs/api-design/styles/) - CSS custom properties
+- [API Design - Registration](/docs/api-design/registration/) - Naming conventions

@@ -331,5 +331,5 @@ You can mix both approaches for the most flexibility. Items with explicit `span`
 
 ## Next Steps
 
-- Explore [horizontal](docs/foundations/layout/horizontal/) and [vertical](docs/foundations/layout/vertical/) layouts for simpler needs
-- Learn about [gap spacing](docs/foundations/layout/#gap-spacing) and [padding](docs/foundations/layout/#padding) options
+- Explore [horizontal](/docs/foundations/layout/horizontal/) and [vertical](/docs/foundations/layout/vertical/) layouts for simpler needs
+- Learn about [gap spacing](/docs/foundations/layout/#gap-spacing) and [padding](/docs/foundations/layout/#padding) options

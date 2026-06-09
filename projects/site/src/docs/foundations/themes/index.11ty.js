@@ -85,7 +85,7 @@ ${getThemeDemo('high-contrast')}
 ## Brand
 
 The \`brand\` theme is a set of themes that are designed to be used with the \`@nvidia-elements/brand\` package.
-[Learn more](docs/labs/brand/).
+[Learn more](/docs/labs/brand/).
 
 \`\`\`css
 \`\`\`

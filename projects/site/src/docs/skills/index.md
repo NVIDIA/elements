@@ -190,8 +190,8 @@ For most projects, use all four layers narrowly: install the local `elements` sk
 
 ## References
 
-- [Elements CLI](docs/cli/)
-- [Elements MCP](docs/mcp/)
+- [Elements CLI](/docs/cli/)
+- [Elements MCP](/docs/mcp/)
 - [MCP Tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools)
 - [MCP Prompts](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts)
 - [MCP Resources](https://modelcontextprotocol.io/specification/2025-06-18/server/resources)

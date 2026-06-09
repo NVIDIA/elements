@@ -80,7 +80,7 @@ export function renderInstallShortcode(starter) {
   const starterInstructions = `
 ## Create a New Project
 
-Use the [Elements CLI](docs/cli/) to quickly bootstrap a new${starter ? ` ${starter} ` : ' '}project with the necessary dependencies:
+Use the [Elements CLI](/docs/cli/) to quickly bootstrap a new${starter ? ` ${starter} ` : ' '}project with the necessary dependencies:
 
 \`\`\`shell
 nve project.create ${starter ? `--type=${starter}` : ''}

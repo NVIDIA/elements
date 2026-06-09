@@ -24,7 +24,7 @@ Apply the following attribute to the root HTML element:
 <html nve-transition="auto">
 ```
 
-Use the [nve-page](./docs/elements/page/) element to enable the transition animations for page content.
+Use the [nve-page](/docs/elements/page/) element to enable the transition animations for page content.
 
 ```javascript
 import '@nvidia-elements/core/page/define.js';
@@ -39,4 +39,4 @@ import '@nvidia-elements/core/page/define.js';
 ```
 
 This enables the View Transition API and provides a basic [speculation ruleset](https://developer.chrome.com/docs/web-platform/prerender-pages#speculation-rules-api) that pre-renders and enables smooth page transitions via user navigation. To see how view transitions work in action
-browse the [starter demo apps](./starters/mpa/) and note the smooth animation transition between UI frameworks.
+browse the [starter demo apps](/starters/mpa/) and note the smooth animation transition between UI frameworks.

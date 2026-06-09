@@ -19,10 +19,10 @@ export function render(data) {
         <nve-page>
           <nve-page-header slot="header">
             <nve-logo slot="prefix" color="brand-green" size="sm" aria-label="NVIDIA Elements">NV</nve-logo>
-            <a slot="prefix" href=".">Elements</a>
-            <nve-button container="flat"><a href=".">Catalog</a></nve-button>
+            <a slot="prefix" href="/">Elements</a>
+            <nve-button container="flat"><a href="/">Catalog</a></nve-button>
             ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
-            <nve-button container="flat"><a href="starters/">Starters</a></nve-button>
+            <nve-button container="flat"><a href="/docs/integrations/">Starters</a></nve-button>
             <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
             <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
           </nve-page-header>

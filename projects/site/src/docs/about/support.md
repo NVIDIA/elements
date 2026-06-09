@@ -21,35 +21,35 @@
 
 ## Frameworks
 
-Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](./docs/about/installation/) page.
+Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](/docs/about/installation/) page.
 
 <section nve-layout="row gap:sm align:wrap">
   <nve-button>
-    <a href="./docs/integrations/typescript/">{% svg-logo 'typescript' '18' %} TypeScript</a>
+    <a href="/docs/integrations/typescript/">{% svg-logo 'typescript' '18' %} TypeScript</a>
   </nve-button>
   <nve-button>
-    {% svg-logo 'lit' '20' %} Lit</a>
+    <a href="/docs/integrations/lit/">{% svg-logo 'lit' '20' %} Lit</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/angular/">{% svg-logo 'angular' '20' %} Angular</a>
+    <a href="/docs/integrations/angular/">{% svg-logo 'angular' '20' %} Angular</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/vue/">{% svg-logo 'vue' '20' %} Vue</a>
+    <a href="/docs/integrations/vue/">{% svg-logo 'vue' '20' %} Vue</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/preact/">{% svg-logo 'preact' '20' %} Preact</a>
+    <a href="/docs/integrations/preact/">{% svg-logo 'preact' '20' %} Preact</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/nextjs/">{% svg-logo 'nextjs' '20' %} NextJS</a>
+    <a href="/docs/integrations/nextjs/">{% svg-logo 'nextjs' '20' %} NextJS</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/react/">{% svg-logo 'react' '20' %} React</a>
+    <a href="/docs/integrations/react/">{% svg-logo 'react' '20' %} React</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/solidjs/">{% svg-logo 'solidjs' '18' %} SolidJS</a>
+    <a href="/docs/integrations/solidjs/">{% svg-logo 'solidjs' '18' %} SolidJS</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/about/installation/">{% svg-logo 'javascript' '18' %} JavaScript</a>
+    <a href="/docs/about/installation/">{% svg-logo 'javascript' '18' %} JavaScript</a>
   </nve-button>
 </section>
 
@@ -71,7 +71,7 @@ import '@nvidia-elements/core/polyfills';
 
 ## Versioning
 
-The Elements package follows [semantic versioning](https://semver.org/) and is now in its stable 1.x release cycle. You can find changes in the [Changelog](./docs/changelog/). A debug utility is available
+The Elements package follows [semantic versioning](https://semver.org/) and is now in its stable 1.x release cycle. You can find changes in the [Changelog](/docs/changelog/). A debug utility is available
 on the global window object to help identify the active versions in use at runtime. This log lists all the registered elements and active versions.
 
 - API <strong>Breaking</strong> changes are at most once per <strong>three months</strong>.

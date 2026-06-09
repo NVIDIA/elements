@@ -17,12 +17,13 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "next": "16.2.6",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "next": "16.2.6"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "eslint": "catalog:",

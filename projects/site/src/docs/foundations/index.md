@@ -21,7 +21,7 @@
 Foundations are the shared visual system behind every NVIDIA Elements interface. Typography, iconography, color, themes, layout, motion, and internationalization combine into a single, consistent design language so teams and AI Agents across AI/ML infrastructure, robotics, and autonomous vehicles build tools efficiently without rebuilding the basics. Each foundation stays framework-agnostic and composes with the component library, CLI, and MCP tooling.
 
 <section class="foundation-links" nve-layout="grid gap:md span-items:12 &md|span-items:6 &xl|span-items:4 pad-top:lg">
-  <a href="docs/foundations/typography/">
+  <a href="/docs/foundations/typography/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -34,7 +34,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/iconography/">
+  <a href="/docs/foundations/iconography/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -47,7 +47,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/themes/">
+  <a href="/docs/foundations/themes/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -60,7 +60,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/layout/">
+  <a href="/docs/foundations/layout/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -73,7 +73,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/popovers/">
+  <a href="/docs/foundations/popovers/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -86,7 +86,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/i18n/">
+  <a href="/docs/foundations/i18n/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -99,7 +99,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/visualization/">
+  <a href="/docs/foundations/visualization/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
@@ -112,7 +112,7 @@ Foundations are the shared visual system behind every NVIDIA Elements interface.
       </div>
     </nve-card>
   </a>
-  <a href="docs/foundations/view-transitions/">
+  <a href="/docs/foundations/view-transitions/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">

@@ -189,7 +189,7 @@ export function badgeStatus(status, container = '', content = '') {
 
   return /* html */ `
   <nve-badge ${container ? `container="${container}"` : ''} status="${statuses[status]}">
-    <a href="docs/changelog/">${status ? status : 'unknown'}: &nbsp;${content}</a>
+    <a href="/docs/changelog/">${status ? status : 'unknown'}: &nbsp;${content}</a>
   </nve-badge>
   `;
 }
@@ -224,7 +224,7 @@ export function badgeCoverage(value, container = '', content = '') {
 
   return /* html */ `
     <nve-badge ${container ? `container="${container}"` : ''} status="${status}">
-      <a href="docs/metrics/">${content}${formattedValue}</a>
+      <a href="/docs/metrics/">${content}${formattedValue}</a>
     </nve-badge>
   `;
 }
@@ -250,7 +250,7 @@ export function badgeBundle(value, container = '', content = '') {
 
   return /* html */ `
     <nve-badge ${container ? `container="${container}"` : ''} status="${status}">
-      <a href="docs/metrics/">${content}${value}${value ? 'kb' : ''}</a>
+      <a href="/docs/metrics/">${content}${value}${value ? 'kb' : ''}</a>
     </nve-badge>
   `;
 }
@@ -345,7 +345,7 @@ export function elementStatus(tag) {
 
       <div nve-layout="column gap:xs">
         <nve-alert status="${elementMetadata.unitTests ? 'finished' : 'pending'}">Robust unit test coverages</nve-alert>
-        <nve-alert status="${elementMetadata.apiReview ? 'finished' : 'pending'}">Passed <a href="docs/api-design/">API Review</a></nve-alert>
+        <nve-alert status="${elementMetadata.apiReview ? 'finished' : 'pending'}">Passed <a href="/docs/api-design/">API Review</a></nve-alert>
         <nve-alert status="${elementMetadata.vqa ? 'finished' : 'pending'}">Passed Designer VQA Review</nve-alert>
         <nve-alert status="${elementMetadata.package ? 'finished' : 'pending'}">Included in library package</nve-alert>
       </div>

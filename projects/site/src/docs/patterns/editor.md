@@ -8,8 +8,8 @@
 
 # {{ title }}
 
-Code editor layouts using the [Monaco Input](./docs/monaco/input/) component
-with [Page](./docs/elements/page/) layouts for building IDE-style interfaces
+Code editor layouts using the [Monaco Input](/docs/monaco/input/) component
+with [Page](/docs/elements/page/) layouts for building IDE-style interfaces
 in AV and Robotics applications.
 
 ## File Browser

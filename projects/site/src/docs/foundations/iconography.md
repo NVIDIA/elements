@@ -10,7 +10,7 @@
 
 The Iconography system builds on exposing an SVG based icon library to a the `<nve-icon>` element.
 
-[Icon Element Documentation](./docs/elements/icon/)
+[Icon Element Documentation](/docs/elements/icon/)
 
 <icon-demo></icon-demo>
 <nve-notification-group position="bottom" alignment="end"></nve-notification-group>

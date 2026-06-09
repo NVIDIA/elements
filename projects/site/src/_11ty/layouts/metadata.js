@@ -1,9 +1,9 @@
-import { join } from 'node:path';
 import { siteData } from '../../index.11tydata.js';
+import { BASE_URL, DEPLOYED_SITE_URL } from '../utils/site-url.js';
 
-export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
+export { BASE_URL };
 
-const SITE_URL = 'https://nvidia.github.io/elements';
+const SITE_URL = DEPLOYED_SITE_URL;
 const ORGANIZATION_URL = 'https://www.nvidia.com/';
 const REPOSITORY_URL = 'https://github.com/NVIDIA/elements';
 const SOFTWARE_URL = `${SITE_URL}/`;
@@ -135,6 +135,7 @@ function resolveSectionTitle(data, title) {
   const url = data.page?.url ?? '';
   if (url === '/starters/') return 'Starter Templates';
   if (url === '/docs/changelog/') return 'Package Changelog';
+  if (url === '/docs/elements/') return 'NVIDIA Elements Components';
   if (url === '/docs/metrics/') return 'Site Quality Metrics';
   if (url === '/examples/') return 'Example Gallery';
   if (url.startsWith('/docs/internal/guidelines/')) return `${title} Guidelines`;
@@ -157,6 +158,7 @@ function getRouteTitleQualifiers(url, title) {
 
 function getTitleQualifiers(data, url, title) {
   if (url === '/') return [];
+  if (url === '/docs/elements/') return ['Catalog'];
   if (url === '/examples/' || url === '/starters/') return ['for Web Components'];
   if (url === '/docs/changelog/') return ['and Release Notes'];
   if (url === '/docs/metrics/') return ['and Reports'];
@@ -425,7 +427,14 @@ function getArticle(data, meta) {
   const dates = getContentDates(data);
   const article = {
     '@id': meta.canonicalUrl,
-    '@type': isApiReference ? 'APIReference' : isDocs ? 'TechArticle' : 'WebPage',
+    '@type':
+      meta.url === '/docs/elements/'
+        ? 'CollectionPage'
+        : isApiReference
+          ? 'APIReference'
+          : isDocs
+            ? 'TechArticle'
+            : 'WebPage',
     headline: meta.title,
     description: meta.description,
     url: meta.canonicalUrl,
