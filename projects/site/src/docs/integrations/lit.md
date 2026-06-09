@@ -33,7 +33,7 @@ Properties and events then work via the standard lit template syntax.
 
 ## CSS Utilities
 
-Elements provides [layout](./docs/foundations/layout/) and [typography](./docs/foundations/typography/) utilities to make it easy to style your UI.
+Elements provides [layout](/docs/foundations/layout/) and [typography](/docs/foundations/typography/) utilities to make it easy to style your UI.
 
 These utilities are global CSS attributes that apply to any element. <br />
 To use these utilities within a Lit element, you need to import the styles, so they

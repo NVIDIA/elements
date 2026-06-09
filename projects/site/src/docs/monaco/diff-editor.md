@@ -11,7 +11,7 @@
   <nve-alert style="--align-items: start">
     <div nve-layout="column pad:xs gap:xs" nve-text="relaxed">
       <div><code>nve-monaco-diff-editor</code> is only intended for advanced use cases. Elements provides no API stability guarantees for the direct access to the <a href="https://microsoft.github.io/monaco-editor/docs.html">Monaco Editor API</a> provided here, as the API changes at the pace of this third-party dependency.</div>
-      <div>Start with <a href="docs/monaco/diff-input/"><code>nve-monaco-diff-input</code></a> for most use cases.</div>
+      <div>Start with <a href="/docs/monaco/diff-input/"><code>nve-monaco-diff-input</code></a> for most use cases.</div>
     </div>
   </nve-alert>
 </nve-alert-group>

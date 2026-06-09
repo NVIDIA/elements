@@ -13,12 +13,8 @@ export const data = {
 };
 
 const lighthouseResults = Object.values(tests.projects).flatMap(project => project.lighthouse.testResults);
-const ssrResults = Object.values(tests.projects)
-  .flatMap(project => project.ssr.testResults)
-  .flatMap(results => results.assertionResults);
-const axeResults = Object.values(tests.projects)
-  .flatMap(project => project.axe.testResults)
-  .flatMap(results => results.assertionResults);
+const ssrResults = Object.values(tests.projects).flatMap(project => project.ssr.testResults);
+const axeResults = Object.values(tests.projects).flatMap(project => project.axe.testResults);
 const coverageResults = Object.values(tests.projects)
   .flatMap(project => project.coverage.testResults)
   .flatMap(results => results);
@@ -39,12 +35,12 @@ export function render() {
   </div>
   <div nve-layout="column gap:xs">
     <nve-tabs style="height: 32px">
-      <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
-      <nve-tabs-item selected><a href="docs/metrics/api-status/">API Status</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
+      <nve-tabs-item><a href="/docs/metrics/">Metrics</a></nve-tabs-item>
+      <nve-tabs-item selected><a href="/docs/metrics/api-status/">API Status</a></nve-tabs-item>
+      <nve-tabs-item><a href="/docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
+      <nve-tabs-item><a href="/docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
+      <nve-tabs-item><a href="/docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
+      <nve-tabs-item><a href="/docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
   </div>
@@ -80,19 +76,11 @@ export function render() {
     </nve-grid-header>
     ${elements
       .map(element => {
-        const lighthouse = lighthouseResults.find(
-          report => report.name === element.name || report.name.includes(element.name.split('-')[1])
-        );
-        const ssr = ssrResults.find(
-          result => result.fullName === element.name || result.fullName.includes(element.name.split('-')[1])
-        );
-        const axe = axeResults.find(
-          result => result.fullName === element.name || result.fullName.includes(element.name.split('-')[1])
-        );
+        const lighthouse = getLighthouseResult(lighthouseResults, element.name);
+        const ssr = getAssertionResult(ssrResults, element.name, element.manifest?.path, '.test.ssr.ts');
+        const axe = getAssertionResult(axeResults, element.name, element.manifest?.path, '.test.axe.ts');
         const coverageTotal =
-          coverageResults.find(
-            result => result.file === element.name || result.file?.includes(element.name.split('-')[1])
-          )?.branches.pct ?? 0;
+          getCoverageResult(coverageResults, element.name, element.manifest?.path)?.branches.pct ?? 0;
         return /* html */ `<nve-grid-row>
         <nve-grid-cell>${element.name.replace('nve-', '')}</nve-grid-cell>
         <nve-grid-cell>${badgeStatus(element?.manifest?.metadata?.status ?? '', 'flat', ESM_ELEMENTS_VERSION)}</nve-grid-cell>
@@ -150,4 +138,43 @@ function getBehaviorCategoryIcon(category) {
     ['container']: '📦',
     ['button']: '🆗'
   }[category];
+}
+
+export function getAssertionResult(results, elementName, manifestPath = '', testSuffix = '.test.ts') {
+  return (
+    results
+      .flatMap(result => result.assertionResults ?? [])
+      .find(result => {
+        return result.fullName === elementName || result.fullName?.startsWith(`${elementName} `);
+      }) ??
+    results.find(result => result.name?.endsWith(`/src/${getTestPath(manifestPath, testSuffix)}`))
+      ?.assertionResults?.[0]
+  );
+}
+
+export function getCoverageResult(results, elementName, manifestPath = '') {
+  const elementPath = elementName.replace(/^nve-/, '');
+  return (
+    results.find(result => result.file === getSourcePath(manifestPath)) ??
+    results.find(result => result.file?.endsWith(`${elementPath}/${elementPath}.ts`)) ??
+    results.find(result => result.file?.endsWith(`${elementPath}/define.ts`))
+  );
+}
+
+export function getLighthouseResult(results, elementName) {
+  const parentElementName = getParentElementName(elementName);
+  return results.find(result => result.name === elementName || result.name === parentElementName);
+}
+
+function getParentElementName(elementName) {
+  const [, rootName, childName] = elementName.split('-');
+  return childName ? `nve-${rootName}` : elementName;
+}
+
+function getSourcePath(manifestPath) {
+  return manifestPath.replace(/^\/src\//, '').replace(/\.js$/, '.ts');
+}
+
+function getTestPath(manifestPath, testSuffix) {
+  return getSourcePath(manifestPath).replace(/\.ts$/, testSuffix);
 }

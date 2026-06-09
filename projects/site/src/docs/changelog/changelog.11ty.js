@@ -30,7 +30,7 @@ export function render(data) {
 # Changelog - ${data.changelog.title}
 
 <nve-breadcrumb>
-  <nve-button container="inline"><a href="docs/changelog/" target="_self">Changelogs</a></nve-button>
+  <nve-button container="inline"><a href="/docs/changelog/" target="_self">Changelogs</a></nve-button>
   <span>${data.changelog.title}</span>
 </nve-breadcrumb>
 

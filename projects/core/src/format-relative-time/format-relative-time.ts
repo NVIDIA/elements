@@ -35,6 +35,7 @@ const THRESHOLDS: { unit: TimeUnitOption; max: number }[] = [
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/format-relative-time
  * @slot - Date string to format (such as 2023-07-28T04:20:17.434Z). Serves as fallback before hydration.
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
  */
 @typeSSR()
 export class FormatRelativeTime extends LitElement {

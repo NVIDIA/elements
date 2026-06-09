@@ -10,7 +10,7 @@
 
 {% integration 'mcp-app' %}
 
-Elements components are standard [Web Components](docs/integrations/custom-elements/). They run anywhere the host can render HTML and load JavaScript modules. This includes browser apps, framework apps, static HTML pages, and iframe-based MCP UI surfaces.
+Elements components are standard [Web Components](/docs/integrations/custom-elements/). They run anywhere the host can render HTML and load JavaScript modules. This includes browser apps, framework apps, static HTML pages, and iframe-based MCP UI surfaces.
 
 [MCP Apps](https://apps.extensions.modelcontextprotocol.io/api/) render tool UI inside an isolated iframe. The host controls the container, fetches a `ui://` HTML resource from the MCP server, and passes tool input and results to the view through the MCP Apps message channel. Because Elements registers native custom elements such as `nve-page`, `nve-alert`, and `nve-button`, the app view does not need a React, Vue, or Svelte adapter to render.
 

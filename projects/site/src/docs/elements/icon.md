@@ -14,7 +14,7 @@
 
 The Iconography system exposes an SVG based icon library to the `nve-icon` element.
 
-See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
+See the searchable [Interactive Icon Catalog](/docs/foundations/iconography/)
 
 <all-icons></all-icons>
 

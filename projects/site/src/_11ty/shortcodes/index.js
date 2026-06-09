@@ -31,9 +31,9 @@ ${examples.find(s => s.name === 'Default' && s.element === tag)?.template}
   \`\`\`
 
   <div nve-layout="row gap:xxs">
-    <a href="docs/cli/" nve-text="body sm muted">CLI</a>
+    <a href="/docs/cli/" nve-text="body sm muted">CLI</a>
     <span nve-text="body sm muted">/</span>
-    <a href="docs/mcp/" nve-text="body sm muted">MCP</a>
+    <a href="/docs/mcp/" nve-text="body sm muted">MCP</a>
   </div>
 </div>
 

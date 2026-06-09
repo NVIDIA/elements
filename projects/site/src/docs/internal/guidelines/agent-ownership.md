@@ -16,7 +16,7 @@ Using an agent to explore an idea, prototype UI, inspect an API, or generate boi
 
 The agent can help in the workflow. Accountability stays attached to the engineer from intent through review.
 
-<section id="ownership-accountability-rail" nve-layout="grid gap:xl span-items:12 @lg|span-items:6 align:vertical-center">
+<section id="ownership-accountability-rail" nve-layout="grid gap:xl span-items:12 &lg|span-items:6 align:vertical-center">
   <svg width="100%" height="560" viewBox="0 0 520 560">
     <defs>
       <marker id="ownership-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">

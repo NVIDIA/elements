@@ -14,7 +14,7 @@ import styles from './toggletip-header.css?inline';
  * @cssprop --border-bottom
  * @cssprop --padding
  * @cssprop --border-radius
- *
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
 @audit()
 export class ToggletipHeader extends LitElement {

@@ -43,11 +43,24 @@ const {
   SOCIAL_IMAGE_URL,
   SOCIAL_IMAGE_ALT
 } = await import('./metadata.js');
-const { renderBaseHead } = await import('./common.js');
+const { renderBaseHead, renderDocsNav } = await import('./common.js');
 
 const SOFTWARE_DESCRIPTION =
   'NVIDIA Elements is a framework-agnostic Design System and UI Agent Harness for AI/ML Infrastructure, Robotics, and Autonomous Vehicles';
 const ORGANIZATION_URL = 'https://www.nvidia.com/';
+const MIN_PRIORITY_DESCRIPTION_LENGTH = 150;
+const PRIORITY_DOC_ROUTES = [
+  '/',
+  '/docs/elements/',
+  '/docs/cli/',
+  '/docs/mcp/',
+  '/docs/skills/',
+  '/docs/integrations/',
+  '/docs/foundations/',
+  '/docs/patterns/',
+  '/docs/markdown/',
+  '/docs/monaco/input/'
+];
 const AUTHOR_SCHEMA = {
   '@id': AUTHOR_ID,
   '@type': 'Organization',
@@ -179,6 +192,20 @@ function getFrontMatter(content: string) {
   return content.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
 }
 
+function getDistRouteUrl(route: string) {
+  const path = route === '/' ? 'index.html' : `${route.replace(/^\/|\/$/g, '')}/index.html`;
+
+  return new URL(`../../../dist/${path}`, import.meta.url);
+}
+
+function getTitle(html: string) {
+  return html.match(/<title(?:\s[^>]*)?>([^<]+)<\/title>/)?.[1] ?? '';
+}
+
+function getDescription(html: string) {
+  return html.match(/<meta\s+name="description"\s+content="([^"]+)"/)?.[1] ?? '';
+}
+
 async function getMarkdownFiles(dir: URL): Promise<URL[]> {
   const entries = await readdir(dir, { withFileTypes: true });
   const nestedFiles = await Promise.all(
@@ -213,6 +240,10 @@ describe('resolvePageMeta', () => {
       {
         data: { page: { url: '/docs/elements/dot/' }, title: 'Dot' },
         title: 'Dot Web Component API Reference Guide | NVIDIA Elements'
+      },
+      {
+        data: { page: { url: '/docs/elements/' }, title: 'Components' },
+        title: 'NVIDIA Elements Components Catalog | NVIDIA Elements'
       },
       {
         data: { page: { url: '/docs/elements/dot/api/' }, title: 'Dot', isApiTab: true },
@@ -304,6 +335,28 @@ describe('renderBaseHead', () => {
     expect(html).toContain(`<meta name="twitter:image" content="${SOCIAL_IMAGE_URL}">`);
     expect(html).toContain(`<meta name="twitter:image:alt" content="${SOCIAL_IMAGE_ALT}">`);
     expect(html).toContain(`<meta name="author" content="${AUTHOR_NAME}">`);
+  });
+
+  it('should expose agent context files for html discovery', () => {
+    const html = renderBaseHead({
+      page: { url: '/' },
+      collections: { all: [] },
+      title: 'Test Page',
+      description: 'Test description.'
+    });
+
+    expect(html).toContain(
+      '<link rel="alternate" type="text/plain" title="llms.txt" href="https://nvidia.github.io/elements/llms.txt">'
+    );
+  });
+});
+
+describe('renderDocsNav', () => {
+  it('should link the elements section label to the component catalog', () => {
+    const html = renderDocsNav({ page: { url: '/docs/elements/' } });
+
+    expect(html).toContain('<a href="/docs/elements/">Elements</a>');
+    expect(html).not.toContain('<a href="/docs/elements/accordion/">Elements</a>');
   });
 });
 
@@ -428,6 +481,19 @@ describe('renderJsonLd', () => {
     expect(findNode(graph, 'SoftwareSourceCode')).toBeUndefined();
   });
 
+  it('should emit CollectionPage for the component catalog', () => {
+    const graph = getGraph(createData(), createMeta('/docs/elements/'));
+    const article = findNode(graph, 'CollectionPage');
+
+    expect(article).toMatchObject({
+      headline: 'Test Page | NVIDIA Elements',
+      url: 'https://nvidia.github.io/elements/docs/elements/',
+      mainEntityOfPage: 'https://nvidia.github.io/elements/docs/elements/',
+      about: { '@id': SOFTWARE_ID }
+    });
+    expect(findNode(graph, 'APIReference')).toBeUndefined();
+  });
+
   it('should emit valid JSON-LD', () => {
     const graph = getGraph(createData({ content: '```shell\nnve project.setup\n```' }), createMeta('/docs/cli/'));
 
@@ -531,6 +597,37 @@ describe('renderJsonLd', () => {
 });
 
 describe('docs metadata policy', () => {
+  it('should emit unique titles for priority docs routes', async () => {
+    const titles = await Promise.all(
+      PRIORITY_DOC_ROUTES.map(async route => {
+        const html = await readFile(getDistRouteUrl(route), 'utf8');
+
+        return [route, getTitle(html)] as const;
+      })
+    );
+    const duplicates = titles.filter(([, title], index) => titles.findIndex(([, value]) => value === title) !== index);
+
+    expect(titles.every(([, title]) => title.endsWith(' | NVIDIA Elements'))).toBe(true);
+    expect(duplicates).toEqual([]);
+  });
+
+  it('should emit substantial descriptions for priority docs routes', async () => {
+    const shortDescriptions = (
+      await Promise.all(
+        PRIORITY_DOC_ROUTES.map(async route => {
+          const html = await readFile(getDistRouteUrl(route), 'utf8');
+          const description = getDescription(html);
+
+          if (description.length >= MIN_PRIORITY_DESCRIPTION_LENGTH) return null;
+
+          return `${route}: ${description.length}`;
+        })
+      )
+    ).filter(isString);
+
+    expect(shortDescriptions).toEqual([]);
+  });
+
   it('should require explicit descriptions on published non-component docs pages', async () => {
     const docsDirectory = new URL('../../docs/', import.meta.url);
     const files = await getMarkdownFiles(docsDirectory);

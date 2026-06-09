@@ -70,6 +70,10 @@
         "ELEMENTS_SITE_URL": {
           "external": true,
           "default": "https://nvidia.github.io"
+        },
+        "LOCAL_PREVIEW": {
+          "external": true,
+          "default": "false"
         }
       }
     },
@@ -197,17 +201,17 @@
       ]
     },
     "test": {
-      "command": "vitest run src/_11ty/layouts/metadata.test.ts src/_11ty/shortcodes/api.test.ts",
+      "command": "vitest run src/_11ty/layouts/metadata.test.ts src/_11ty/layouts/links.test.ts src/_11ty/transforms/site-urls.test.ts src/_11ty/shortcodes/api.test.ts src/_11ty/plugins/llms-txt.test.ts src/_11ty/plugins/sitemap-xml.test.ts src/docs/metrics/api-status.test.ts",
       "files": [
-        "src/docs/**/*.md",
-        "src/_11ty/layouts/common.js",
-        "src/_11ty/layouts/metadata.js",
-        "src/_11ty/layouts/metadata.test.ts",
-        "src/_11ty/shortcodes/api.js",
-        "src/_11ty/shortcodes/api.test.ts",
+        "src/**/*.js",
+        "src/**/*.md",
+        "src/**/*.ts",
         "vitest.config.ts"
       ],
-      "output": []
+      "output": [],
+      "dependencies": [
+        "build"
+      ]
     },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
@@ -233,42 +237,43 @@
     }
   },
   "dependencies": {
+    "3d-force-graph": "1.79.0",
     "chart.js": "4.5.1",
-    "lit": "catalog:",
-    "3d-force-graph": "1.79.0"
+    "lit": "catalog:"
   },
   "devDependencies": {
     "@11ty/eleventy": "catalog:",
     "@11ty/eleventy-plugin-vite": "catalog:",
     "@eslint/js": "catalog:",
-    "@lit-labs/eleventy-plugin-lit": "catalog:",
-    "@lit-labs/ssr-client": "catalog:",
     "@internals/eslint": "workspace:*",
     "@internals/metadata": "workspace:*",
-    "@internals/tools": "workspace:*",
     "@internals/patterns": "workspace:*",
+    "@internals/tools": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@lit-labs/eleventy-plugin-lit": "catalog:",
+    "@lit-labs/ssr-client": "catalog:",
     "@nvidia-elements/code": "workspace:*",
+    "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/media": "workspace:*",
-    "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@vitest/coverage-istanbul": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
-    "stylelint": "catalog:",
-    "stylelint-config-standard": "catalog:",
     "html-minifier-next": "5.2.2",
     "lighthouse": "catalog:",
     "lightningcss": "1.30.2",
     "markdown-it": "catalog:",
     "markdown-it-link-attributes": "catalog:",
     "pagefind": "1.3.0",
+    "parse5": "7.1.2",
     "playwright": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"

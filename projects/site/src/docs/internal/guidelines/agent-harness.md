@@ -20,8 +20,8 @@
 
 An **agent harness** is the complete system that wraps a raw LLM model and makes it useful for sustained, autonomous work. The model itself only generates text—the harness provides everything else: tools, memory, context, constraints, and feedback loops. Every lint rule, type constraint, and structural test that runs outside the model is a guarantee that doesn't depend on non-deterministic token prediction. The more the harness enforces in a deterministic way, the narrower the space where the model can produce inconsistent results and the more predictable output quality becomes.
 
-<section nve-layout="grid span-items:6 align:vertical-center">
-  <svg width="500" height="500" viewBox="-280 -280 560 560">
+<section nve-layout="grid span-items:12 &lg|span-items:6 align:vertical-center">
+  <svg viewBox="-280 -280 560 560" style="width: 100%; height: 100%; max-width: 500px;">
     <circle data-layer="domain" stroke="var(--nve-ref-color-yellow-amber-1100)" r="260" fill="none" stroke-width="2.5" style="cursor:pointer;transition:all 0.25s ease"></circle>
     <circle data-layer="project" stroke="var(--nve-ref-color-blue-cobalt-1000)" r="190" fill="none" stroke-width="1" style="cursor:pointer;transition:all 0.25s ease"></circle>
     <circle data-layer="execution" stroke="var(--nve-ref-color-purple-violet-1000)" r="125" fill="none" stroke-width="1" style="cursor:pointer;transition:all 0.25s ease"></circle>

@@ -9,7 +9,7 @@
 
 ## Installation
 
-Learn more about native [Popover APIs](docs/foundations/popovers/).
+Learn more about native [Popover APIs](/docs/foundations/popovers/).
 
 {% install 'nve-toggletip' %}
 

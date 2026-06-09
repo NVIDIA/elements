@@ -26,9 +26,7 @@ import globalStyles from './chat-message.global.css?inline';
  * @cssprop --line-height
  * @cssprop --overflow
  * @cssprop --top-offset - Vertical offset for aligning message with avatar
-
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
- * @stable false
  */
 export class ChatMessage extends LitElement {
   static styles = useStyles([styles, colorStateStyles]);

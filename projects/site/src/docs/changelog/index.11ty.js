@@ -23,7 +23,7 @@ export function render() {
 ${changelogs
   .map(
     changelog => /* html */ `
-<a href="docs/changelog${changelog.permalink}" style="text-decoration: none;">
+<a href="/docs/changelog${changelog.permalink}" style="text-decoration: none;">
 <nve-card style="height: 100%;">
   <nve-card-header>
     <div nve-layout="row gap:sm align:space-between align:vertical-center">

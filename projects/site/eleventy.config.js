@@ -1,6 +1,6 @@
 // @ts-check
 
-import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
+import { EleventyRenderPlugin, HtmlBasePlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
 
@@ -19,6 +19,7 @@ import { llmsTxtPlugin } from './src/_11ty/plugins/llms-txt.js';
 import { sitemapPlugin } from './src/_11ty/plugins/sitemap-xml.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
+import { siteUrlsTransform } from './src/_11ty/transforms/site-urls.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { envReplaceTransform } from './src/_11ty/transforms/env-replace.js';
 import {
@@ -42,6 +43,7 @@ import { svgLogoShortcode, svgLogosShortcode } from './src/_11ty/shortcodes/svg-
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
 import { ApiService } from '@internals/metadata';
+import { ELEMENTS_SITE_ORIGIN } from './src/_11ty/utils/site-url.js';
 
 const apis = await ApiService.getData();
 
@@ -88,6 +90,8 @@ const entrypoints = [
  * Sets up plugins, transforms, collections, and build options
  */
 export default function (eleventyConfig) {
+  eleventyConfig.pathPrefix = BASE_URL;
+
   // Add core 11ty plugins
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(IdAttributePlugin, { checkDuplicates: false });
@@ -154,18 +158,6 @@ export default function (eleventyConfig) {
     }
   });
 
-  // Configure server options for development
-  eleventyConfig.setServerOptions({
-    onRequest: {
-      '/': () => ({
-        status: 307,
-        headers: {
-          Location: BASE_URL
-        }
-      })
-    }
-  });
-
   // Add search plugin for documentation search functionality
   if (process.env.ELEVENTY_RUN_MODE === 'build') {
     eleventyConfig.addPlugin(searchPlugin, {
@@ -209,6 +201,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform('env-replace', envReplaceTransform);
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
+  eleventyConfig.addPlugin(HtmlBasePlugin, {
+    baseHref: process.env.ELEVENTY_RUN_MODE === 'build' ? ELEMENTS_SITE_ORIGIN : '/'
+  });
+  eleventyConfig.addTransform('site-urls', siteUrlsTransform);
 
   if (process.env.ELEVENTY_RUN_MODE === 'build') {
     eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
@@ -228,14 +224,16 @@ export default function (eleventyConfig) {
    */
   eleventyConfig.addCollection('componentDocs', function (collection) {
     // https://github.com/11ty/eleventy/issues/3838 each rebuild of any md file triggers all rebuilds of collection
-    return collection.getFilteredByGlob([
-      'src/docs/elements/*.md',
-      'src/docs/elements/data-grid/index.md',
-      'src/docs/code/*.md',
-      'src/docs/monaco/*.md',
-      'src/docs/media/*.md',
-      'src/docs/markdown/index.md'
-    ]);
+    return collection
+      .getFilteredByGlob([
+        'src/docs/elements/*.md',
+        'src/docs/elements/data-grid/index.md',
+        'src/docs/code/*.md',
+        'src/docs/monaco/*.md',
+        'src/docs/media/*.md',
+        'src/docs/markdown/index.md'
+      ])
+      .filter(page => page.data.tag);
   });
 
   // prevent rebuild of api, examples tabs, and example pages on each run
@@ -263,6 +261,7 @@ export default function (eleventyConfig) {
       input: 'src',
       output: 'dist',
       layouts: '_11ty/layouts'
-    }
+    },
+    pathPrefix: BASE_URL
   };
 }

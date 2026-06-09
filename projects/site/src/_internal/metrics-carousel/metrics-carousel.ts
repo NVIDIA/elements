@@ -198,55 +198,55 @@ export class MetricsCarousel extends LitElement {
 
     return [
       {
-        href: '/elements/docs/metrics/',
+        href: '/docs/metrics/',
         title: 'Available Components',
         label: 'Browse our component offerings',
         metricCount: totalElements
       },
       {
-        href: '/elements/docs/metrics/',
+        href: '/docs/metrics/',
         title: 'Total Web Components',
         label: 'Browse our component offerings',
         metricCount: totalElements
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: 'Total Automated Tests',
         label: 'View automated test results',
         metricCount: totalAutomatedTests
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: 'Unit Tests',
         label: 'View our unit test suite',
         metricCount: totalUnitTests
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: '% Test Coverage',
         label: 'View our test coverage',
         metricCount: `${Math.round(elementsTestCoverage)}%`
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: 'Axe Tests',
         label: 'View Axe accessibility test results',
         metricCount: totalAxeTests
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: 'Lighthouse Test Suites',
         label: 'View Lighthouse test results',
         metricCount: totalLighthouseTests
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: 'Visual Regression Tests',
         label: 'View visual test results',
         metricCount: totalVisualTests
       },
       {
-        href: '/elements/docs/metrics/testing-and-performance/',
+        href: '/docs/metrics/testing-and-performance/',
         title: 'SSR Tests',
         label: 'View SSR test results',
         metricCount: totalSsrTests

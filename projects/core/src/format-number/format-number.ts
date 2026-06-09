@@ -38,6 +38,7 @@ const NUMBER_KEYS: [keyof FormatNumber, string][] = [
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/format-number
  * @slot - Numeric string to format (such as 1234567 or 1234.56). Serves as fallback before hydration.
+ * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data
  */
 @typeSSR()
 export class FormatNumber extends LitElement {

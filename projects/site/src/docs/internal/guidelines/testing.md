@@ -38,11 +38,11 @@ pnpm run test:ssr
 
 ### Unit Tests (`.test.ts`)
 
-- [Unit Tests (`.test.ts`)](docs/internal/testing/unit/): Standard behavior tests.
-- [Accessibility Tests (`.test.axe.ts`)](docs/internal/testing/accessibility/): best practices tests using axe-core.
-- [Lighthouse Performance Tests (`.test.lighthouse.ts`)](docs/internal/testing/lighthouse/): performance audits and best practices via Lighthouse
-- [Visual Regression Tests (`.test.visual.ts`)](docs/internal/testing/ssr/): Visual regression tests using Playwright screenshots.
-- [SSR Tests (`.test.ssr.ts`)](docs/internal/testing/ssr/): Server-side rendering compatibility tests.
+- [Unit Tests (`.test.ts`)](/docs/internal/guidelines/testing-unit/): Standard behavior tests.
+- [Accessibility Tests (`.test.axe.ts`)](/docs/internal/guidelines/testing-accessibility/): best practices tests using axe-core.
+- [Lighthouse Performance Tests (`.test.lighthouse.ts`)](/docs/internal/guidelines/testing-lighthouse/): performance audits and best practices via Lighthouse
+- [Visual Regression Tests (`.test.visual.ts`)](/docs/internal/guidelines/testing-visual/): Visual regression tests using Playwright screenshots.
+- [SSR Tests (`.test.ssr.ts`)](/docs/internal/guidelines/testing-ssr/): Server-side rendering compatibility tests.
 
 ## Test Configuration
 

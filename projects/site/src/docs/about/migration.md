@@ -89,7 +89,7 @@ Replace import paths throughout your source code:
 
 ## Deprecations & Removals
 
-The following are the active deprecations. Each next major release removes the prior deprecations. Read more about the <a nve-text="link mkd" href="docs/about/support/#versioning">versioning and deprecation cycle policy</a>.
+The following are the active deprecations. Each next major release removes the prior deprecations. Read more about the <a nve-text="link mkd" href="/docs/about/support/#versioning">versioning and deprecation cycle policy</a>.
 
 ### Logo <nve-badge status="danger">removed</nve-badge>
 

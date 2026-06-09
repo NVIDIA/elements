@@ -5,113 +5,113 @@ export const data = {
 
 const integrations = [
   {
-    href: 'docs/integrations/angular/',
+    href: '/docs/integrations/angular/',
     icon: 'angular.svg',
     title: 'Angular',
     description: 'Use Elements with Angular templates and events.'
   },
   {
-    href: 'docs/integrations/bundles/',
+    href: '/docs/integrations/bundles/',
     icon: 'javascript.svg',
     title: 'Bundles',
     description: 'Load prebuilt Elements bundles in static pages.'
   },
   {
-    href: 'docs/integrations/cdn/',
+    href: '/docs/integrations/cdn/',
     nveIcon: 'globe-alt-stroke',
     title: 'CDN',
     description: 'Load Elements from CDN-hosted npm packages.'
   },
   {
-    href: 'docs/integrations/custom-elements/',
+    href: '/docs/integrations/custom-elements/',
     nveIcon: 'code',
     title: 'Custom Elements',
     description: 'Use Elements package metadata with Web Component tooling.'
   },
   {
-    href: 'docs/integrations/go/',
+    href: '/docs/integrations/go/',
     icon: 'go.svg',
     iconSize: '48px',
     title: 'Golang',
     description: 'Use Elements with Go-backed web applications.'
   },
   {
-    href: 'docs/integrations/hugo/',
+    href: '/docs/integrations/hugo/',
     icon: 'hugo.svg',
     iconSize: '28px',
     title: 'Hugo',
     description: 'Use Elements in Hugo static sites.'
   },
   {
-    href: 'docs/integrations/importmaps/',
+    href: '/docs/integrations/importmaps/',
     icon: 'javascript.svg',
     title: 'Import Maps',
     description: 'Load Elements from browser-native import maps.'
   },
   {
-    href: 'docs/integrations/lit/',
+    href: '/docs/integrations/lit/',
     icon: 'lit.svg',
     title: 'Lit',
     description: 'Use Elements alongside Lit components and SSR.'
   },
   {
-    href: 'docs/integrations/lit-library/',
+    href: '/docs/integrations/lit-library/',
     icon: 'lit.svg',
     title: 'Lit Library',
     description: 'Build a distributable Custom Element library with Lit and Elements.'
   },
   {
-    href: 'docs/integrations/mcp-apps/',
+    href: '/docs/integrations/mcp-apps/',
     nveIcon: 'connected-blocks',
     title: 'MCP Apps',
     description: 'Use Elements in iframe-based MCP UI hosts.'
   },
   {
-    href: 'docs/integrations/nextjs/',
+    href: '/docs/integrations/nextjs/',
     icon: 'nextjs.svg',
     iconSize: '28px',
     title: 'NextJS',
     description: 'Use Elements with NextJS and React.'
   },
   {
-    href: 'docs/integrations/nuxt/',
+    href: '/docs/integrations/nuxt/',
     icon: 'nuxt.svg',
     iconSize: '38px',
     title: 'Nuxt',
     description: 'Use Elements with Nuxt applications.'
   },
   {
-    href: 'docs/integrations/preact/',
+    href: '/docs/integrations/preact/',
     icon: 'preact.svg',
     title: 'Preact',
     description: 'Use Elements with Preact JSX and custom events.'
   },
   {
-    href: 'docs/integrations/react/',
+    href: '/docs/integrations/react/',
     icon: 'react.svg',
     title: 'React',
     description: 'Use Elements with React and native custom events.'
   },
   {
-    href: 'docs/integrations/solidjs/',
+    href: '/docs/integrations/solidjs/',
     icon: 'solidjs.svg',
     title: 'SolidJS',
     description: 'Use Elements with SolidJS and Vite.'
   },
   {
-    href: 'docs/integrations/svelte/',
+    href: '/docs/integrations/svelte/',
     icon: 'svelte.svg',
     title: 'Svelte',
     description: 'Use Elements with Svelte and Vite.'
   },
   {
-    href: 'docs/integrations/typescript/',
+    href: '/docs/integrations/typescript/',
     icon: 'typescript.svg',
     title: 'TypeScript',
     description: 'Use Elements with TypeScript and Vite.'
   },
   {
-    href: 'docs/integrations/vue/',
+    href: '/docs/integrations/vue/',
     icon: 'vue.svg',
     title: 'Vue',
     description: 'Use Elements with Vue and Vite.'

@@ -36,11 +36,11 @@ See the links below for specific integration patterns for the following framewor
 
 <section nve-layout="row align:left gap:md">
   <nve-button>
-    <a href="./docs/integrations/lit/#forms">{% svg-logo 'lit' '20' %} Lit Integration</a>
+    <a href="/docs/integrations/lit/#forms">{% svg-logo 'lit' '20' %} Lit Integration</a>
   </nve-button>
 
   <nve-button>
-    <a href="./docs/integrations/angular/#forms">{% svg-logo 'angular' '20' %} Angular Integration</a>
+    <a href="/docs/integrations/angular/#forms">{% svg-logo 'angular' '20' %} Angular Integration</a>
   </nve-button>
 </section>
 

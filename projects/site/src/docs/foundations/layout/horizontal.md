@@ -211,6 +211,6 @@ Horizontal layouts support alignment along both axes:
 
 ## Next Steps
 
-- Explore [vertical layouts](docs/foundations/layout/vertical/) for stacked content
-- Learn about [grid layouts](docs/foundations/layout/grid/) for two-dimensional control
-- Understand [gap](docs/foundations/layout/#gap-spacing) and [padding](docs/foundations/layout/#padding) spacing options
+- Explore [vertical layouts](/docs/foundations/layout/vertical/) for stacked content
+- Learn about [grid layouts](/docs/foundations/layout/grid/) for two-dimensional control
+- Understand [gap](/docs/foundations/layout/#gap-spacing) and [padding](/docs/foundations/layout/#padding) spacing options
