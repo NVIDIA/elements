@@ -1959,6 +1959,9 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.1.7(vitest@4.1.7)
       cssnano:
         specifier: 7.1.7
         version: 7.1.7(postcss@8.5.15)

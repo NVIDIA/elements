@@ -33,6 +33,7 @@
     "build": "wireit",
     "dev": "wireit",
     "lint": "wireit",
+    "test": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit"
   },
@@ -45,6 +46,7 @@
   ],
   "devDependencies": {
     "@internals/vite": "workspace:*",
+    "@vitest/coverage-istanbul": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
     "cssnano": "7.1.7",
@@ -79,6 +81,7 @@
       "dependencies": [
         "build",
         "publint",
+        "test",
         "test:visual"
       ]
     },
@@ -114,6 +117,7 @@
         "!src/**/*.test.visual.ts",
         "build/style-dictionary.config.js",
         "build/style-dictionary.minify.js",
+        "build/fonts.js",
         "package.json",
         "vite.config.ts"
       ],
@@ -140,6 +144,20 @@
     "lint": {
       "dependencies": [
         "lint:style"
+      ]
+    },
+    "test": {
+      "command": "vitest run --config=vitest.config.ts",
+      "files": [
+        "build/**/*.js",
+        "dist/**/*.css",
+        "src/**/*.test.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
       ]
     },
     "lint:style": {
