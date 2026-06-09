@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { validateSchema } from '../internal/schema.js';
-import type { FormControl, ValidatorResult } from '../internal/types.js';
+import type { FormControl, FormControlInstance, ValidatorResult } from '../internal/types.js';
 
 /**
  * Given a json schema, check the value against the schema
@@ -19,16 +19,13 @@ import type { FormControl, ValidatorResult } from '../internal/types.js';
  *   - Array
  *   - Enum
  */
-export function valueSchemaValidator(value: unknown, element: FormControl): ValidatorResult {
-  const metadata = (element as any).constructor.metadata; // eslint-disable-line @typescript-eslint/no-explicit-any
+export function valueSchemaValidator(value: unknown, element: FormControlInstance): ValidatorResult {
+  const metadata = (element.constructor as FormControl).metadata;
   return validateSchema(metadata.valueSchema, value);
 }
 
-export function requiredValidator(value: unknown, element: FormControl): ValidatorResult {
-  if (
-    (element as unknown as { required: boolean }).required &&
-    (value === undefined || value === null || value === '')
-  ) {
+export function requiredValidator(value: unknown, element: FormControlInstance): ValidatorResult {
+  if (element.required && (value === undefined || value === null || value === '')) {
     return { validity: { valueMissing: true, valid: false }, message: 'This field is required' };
   }
   return { validity: { valid: true }, message: '' };

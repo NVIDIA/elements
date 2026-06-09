@@ -56,7 +56,7 @@ export interface FormControlMetadata {
   strict?: boolean;
 }
 
-interface FormControlInstance extends HTMLElement {
+export interface FormControlInstance extends HTMLElement {
   value: FormControlValue | undefined;
   defaultValue: string;
   form: HTMLFormElement | null;
@@ -102,4 +102,4 @@ export interface ValidatorResult {
   message?: string;
 }
 
-export type Validator = (value: unknown, element: FormControl) => ValidatorResult;
+export type Validator = (value: unknown, element: FormControlInstance) => ValidatorResult;

@@ -24,6 +24,8 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
 
   hostUpdated() {
     if (this.host.readOnly) {
+      this.host._internals!.ariaSelected = null;
+      toggleState(this.host._internals!, 'selected', false);
       this.#syncAnchorCurrentAttribute();
       return;
     }
@@ -35,9 +37,8 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
       return;
     }
 
-    if (this.host.selected !== null && this.host.selected !== undefined) {
-      this.host._internals!.ariaSelected = `${this.host.selected}`;
-    }
+    this.host._internals!.ariaSelected =
+      this.host.selected === null || this.host.selected === undefined ? null : `${this.host.selected}`;
 
     toggleState(this.host._internals!, 'selected', Boolean(this.host.selected));
   }
@@ -51,7 +52,7 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
 
     if (anchor && isCurrent) {
       this.#anchorCurrentTarget?.removeAttribute('aria-current');
-      anchor.setAttribute('aria-current', 'page');
+      anchor.setAttribute('aria-current', this.host.current ?? 'page');
       this.#anchorCurrentTarget = anchor;
       return;
     }

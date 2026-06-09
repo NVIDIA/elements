@@ -16,9 +16,8 @@ export class StatePressedController<T extends Pressed> implements ReactiveContro
   }
 
   hostUpdated() {
-    if (this.host.pressed !== null && this.host.pressed !== undefined) {
-      this.host._internals!.ariaPressed = `${this.host.pressed}`;
-    }
+    this.host._internals!.ariaPressed =
+      this.host.pressed === null || this.host.pressed === undefined ? null : `${this.host.pressed}`;
 
     toggleState(this.host._internals!, 'pressed', Boolean(this.host.pressed));
   }

@@ -61,6 +61,17 @@ describe('CheckboxFormControlMixin', () => {
     expect(new FormData(form).get('accepted')).toBe(null);
   });
 
+  it('should exclude disabled checked values from form data', () => {
+    element.checked = true;
+    expect(new FormData(form).get('accepted')).toBe('on');
+
+    element.disabled = true;
+    expect(new FormData(form).get('accepted')).toBe(null);
+
+    element.disabled = false;
+    expect(new FormData(form).get('accepted')).toBe('on');
+  });
+
   it('should support custom submitted values', () => {
     element.value = 'yes';
     element.checked = true;

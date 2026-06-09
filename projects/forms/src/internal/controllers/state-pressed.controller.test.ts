@@ -67,6 +67,9 @@ describe('StatePressedController', () => {
   });
 
   it('should leave aria-pressed unset for absent values', () => {
+    element.pressed = true;
+    element.sync();
+
     element.pressed = undefined;
     element.sync();
 

@@ -5,11 +5,11 @@ import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
 
-import { TypeNativeButtonController } from './type-native-button.controller.js';
+import { TypeSubmitController } from './type-submit.controller.js';
 import type { ButtonType } from '../../mixins/button.types.js';
 import type { ReactiveController } from './types.js';
 
-class NativeButtonBehaviorControllerTestElement extends HTMLElement {
+class TypeSubmitControllerTestElement extends HTMLElement {
   disabled = false;
   name?: string;
   readOnly = false;
@@ -17,14 +17,14 @@ class NativeButtonBehaviorControllerTestElement extends HTMLElement {
   #type?: ButtonType;
   #controllers = new Set<ReactiveController>();
 
-  _nativeButtonBehaviorController = new TypeNativeButtonController(this);
+  _typeSubmitController = new TypeSubmitController(this);
 
   get form() {
     return this.closest('form');
   }
 
   get type() {
-    return this.#type ?? this._nativeButtonBehaviorController.defaultType;
+    return this.#type ?? this._typeSubmitController.defaultType;
   }
 
   set type(value: ButtonType | undefined) {
@@ -48,11 +48,11 @@ class NativeButtonBehaviorControllerTestElement extends HTMLElement {
   }
 }
 
-if (!customElements.get('native-button-behavior-controller-test-element')) {
-  customElements.define('native-button-behavior-controller-test-element', NativeButtonBehaviorControllerTestElement);
+if (!customElements.get('forms-type-submit-controller-test-element')) {
+  customElements.define('forms-type-submit-controller-test-element', TypeSubmitControllerTestElement);
 }
 
-describe('NativeButtonBehaviorController', () => {
+describe('type-submit.controller', () => {
   let fixture: HTMLElement;
 
   afterEach(() => {
@@ -61,10 +61,10 @@ describe('NativeButtonBehaviorController', () => {
 
   it('should default to submit when associated with a form and no type is set', async () => {
     fixture = await createFixture(
-      html`<form><native-button-behavior-controller-test-element></native-button-behavior-controller-test-element></form>`
+      html`<form><forms-type-submit-controller-test-element></forms-type-submit-controller-test-element></form>`
     );
-    const element = fixture.querySelector<NativeButtonBehaviorControllerTestElement>(
-      'native-button-behavior-controller-test-element'
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
     )!;
 
     element.sync();
@@ -74,10 +74,10 @@ describe('NativeButtonBehaviorController', () => {
 
   it('should trigger clicks from enter and space keyup events', async () => {
     fixture = await createFixture(
-      html`<native-button-behavior-controller-test-element></native-button-behavior-controller-test-element>`
+      html`<forms-type-submit-controller-test-element></forms-type-submit-controller-test-element>`
     );
-    const element = fixture.querySelector<NativeButtonBehaviorControllerTestElement>(
-      'native-button-behavior-controller-test-element'
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
     )!;
     const click = vi.spyOn(element, 'click').mockImplementation(() => undefined);
 
@@ -91,11 +91,11 @@ describe('NativeButtonBehaviorController', () => {
 
   it('should submit with hidden native submitter data', async () => {
     fixture = await createFixture(
-      html`<form><native-button-behavior-controller-test-element></native-button-behavior-controller-test-element></form>`
+      html`<form><forms-type-submit-controller-test-element></forms-type-submit-controller-test-element></form>`
     );
     const form = fixture.querySelector<HTMLFormElement>('form')!;
-    const element = fixture.querySelector<NativeButtonBehaviorControllerTestElement>(
-      'native-button-behavior-controller-test-element'
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
     )!;
     const requestSubmit = vi.spyOn(form, 'requestSubmit').mockImplementation(() => undefined);
 
@@ -116,11 +116,11 @@ describe('NativeButtonBehaviorController', () => {
 
   it('should reset the associated form when type is reset', async () => {
     fixture = await createFixture(
-      html`<form><native-button-behavior-controller-test-element></native-button-behavior-controller-test-element></form>`
+      html`<form><forms-type-submit-controller-test-element></forms-type-submit-controller-test-element></form>`
     );
     const form = fixture.querySelector<HTMLFormElement>('form')!;
-    const element = fixture.querySelector<NativeButtonBehaviorControllerTestElement>(
-      'native-button-behavior-controller-test-element'
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
     )!;
     const reset = vi.spyOn(form, 'reset').mockImplementation(() => undefined);
 
@@ -133,10 +133,10 @@ describe('NativeButtonBehaviorController', () => {
 
   it('should remove listeners when disabled, readonly, or disconnected', async () => {
     fixture = await createFixture(
-      html`<native-button-behavior-controller-test-element></native-button-behavior-controller-test-element>`
+      html`<forms-type-submit-controller-test-element></forms-type-submit-controller-test-element>`
     );
-    const element = fixture.querySelector<NativeButtonBehaviorControllerTestElement>(
-      'native-button-behavior-controller-test-element'
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
     )!;
     const click = vi.spyOn(element, 'click').mockImplementation(() => undefined);
 

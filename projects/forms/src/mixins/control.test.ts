@@ -36,6 +36,7 @@ describe('FormControlMixin', () => {
 
   afterEach(() => {
     removeFixture(fixture);
+    vi.restoreAllMocks();
   });
 
   it('should define element', () => {
@@ -253,10 +254,14 @@ describe('FormControlMixin', () => {
     expect((element.form!.elements as unknown as Record<string, HTMLInputElement>)['test']!.value).toBe('test');
   });
 
-  it('should throw an error if value is set to a non-string value', () => {
-    expect(() => {
-      element.valueAsNumber = 10;
-    }).toThrowError('(ui-test-element): cannot set number value on non-number type');
+  it('should warn and no-op when valueAsNumber is set on a non-number value', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    element.value = 'test';
+    element.valueAsNumber = 10;
+
+    expect(element.value).toBe('test');
+    expect(warn).toHaveBeenCalledWith('(ui-test-element): cannot set number value on non-number type');
   });
 
   it('should dispatch input event when value changes', async () => {

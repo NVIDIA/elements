@@ -67,6 +67,9 @@ describe('StateExpandedController', () => {
   });
 
   it('should leave aria-expanded unset for absent values', () => {
+    element.expanded = true;
+    element.sync();
+
     element.expanded = null;
     element.sync();
 

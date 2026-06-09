@@ -5,7 +5,7 @@ import { onKeys, stopEvent } from '../utils.js';
 import type { ButtonType } from '../../mixins/button.types.js';
 import type { ReactiveController, ReactiveElement } from './types.js';
 
-type NativeButtonBehaviorHost = ReactiveElement & {
+type SubmitHost = ReactiveElement & {
   disabled: boolean;
   form: HTMLFormElement | null | string;
   name?: string;
@@ -14,7 +14,7 @@ type NativeButtonBehaviorHost = ReactiveElement & {
   value?: string;
 };
 
-export class TypeNativeButtonController<T extends NativeButtonBehaviorHost> implements ReactiveController {
+export class TypeSubmitController<T extends SubmitHost> implements ReactiveController {
   #defaultType: ButtonType | undefined;
   #submitter: HTMLButtonElement | undefined;
   #submitterForm: HTMLFormElement | undefined;
@@ -29,15 +29,15 @@ export class TypeNativeButtonController<T extends NativeButtonBehaviorHost> impl
 
   hostUpdated() {
     this.#setButtonType();
-    this.#removeNativeButtonBehavior();
+    this.#removeSubmitBehavior();
     if (!this.host.readOnly && !this.host.disabled) {
-      this.host.addEventListener('click', this.#onNativeButtonClick);
-      this.host.addEventListener('keyup', this.#onNativeButtonKeyup);
+      this.host.addEventListener('click', this.#onSubmitClick);
+      this.host.addEventListener('keyup', this.#onSubmitKeyup);
     }
   }
 
   hostDisconnected() {
-    this.#removeNativeButtonBehavior();
+    this.#removeSubmitBehavior();
     this.#removeSubmitter();
   }
 
@@ -47,16 +47,16 @@ export class TypeNativeButtonController<T extends NativeButtonBehaviorHost> impl
     }
   }
 
-  #removeNativeButtonBehavior() {
-    this.host.removeEventListener('click', this.#onNativeButtonClick);
-    this.host.removeEventListener('keyup', this.#onNativeButtonKeyup);
+  #removeSubmitBehavior() {
+    this.host.removeEventListener('click', this.#onSubmitClick);
+    this.host.removeEventListener('keyup', this.#onSubmitKeyup);
   }
 
-  #onNativeButtonKeyup = (event: KeyboardEvent) => {
+  #onSubmitKeyup = (event: KeyboardEvent) => {
     onKeys(['Enter', 'Space'], event, () => this.host.click());
   };
 
-  #onNativeButtonClick = (event: Event) => {
+  #onSubmitClick = (event: Event) => {
     if (this.host.disabled) {
       stopEvent(event);
       return;

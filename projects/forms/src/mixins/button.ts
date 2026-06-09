@@ -5,7 +5,7 @@ import { TypeAnchorController } from '../internal/controllers/type-anchor.contro
 import { TypeButtonController } from '../internal/controllers/type-button.controller.js';
 import { TypeCommandController } from '../internal/controllers/type-command.controller.js';
 import { TypeInterestInvokerController } from '../internal/controllers/type-interest-invoker.controller.js';
-import { TypeNativeButtonController } from '../internal/controllers/type-native-button.controller.js';
+import { TypeSubmitController } from '../internal/controllers/type-submit.controller.js';
 import { TypePopoverTriggerController } from '../internal/controllers/type-popover-trigger.controller.js';
 import { StateActiveController } from '../internal/controllers/state-active.controller.js';
 import { StateCurrentController } from '../internal/controllers/state-current.controller.js';
@@ -188,7 +188,7 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     }
 
     get type(): ButtonType {
-      return (this.#type ?? this._typeNativeButtonController?.defaultType) as ButtonType;
+      return (this.#type ?? this._typeSubmitController?.defaultType) as ButtonType;
     }
 
     set type(value: ButtonType | unknown) {
@@ -295,7 +295,7 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     protected _controllers?: Set<ReactiveController>;
     protected _typeAnchorController = new TypeAnchorController(this);
     protected _typeButtonController = new TypeButtonController(this);
-    protected _typeNativeButtonController = new TypeNativeButtonController(this);
+    protected _typeSubmitController = new TypeSubmitController(this);
     protected _typeCommandController = new TypeCommandController(this);
     protected _typeInterestInvokerController = new TypeInterestInvokerController(this);
     protected _typePopoverTriggerController = new TypePopoverTriggerController(this);
