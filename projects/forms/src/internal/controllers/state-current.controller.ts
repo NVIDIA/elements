@@ -24,6 +24,8 @@ export class StateCurrentController<T extends Current> implements ReactiveContro
 
   hostUpdated() {
     if (this.host.readOnly) {
+      this.host._internals!.ariaCurrent = null;
+      toggleState(this.host._internals!, 'current', false);
       this.#syncAnchorCurrentAttribute();
       return;
     }
@@ -35,9 +37,8 @@ export class StateCurrentController<T extends Current> implements ReactiveContro
       return;
     }
 
-    if (this.host.current !== null && this.host.current !== undefined) {
-      this.host._internals!.ariaCurrent = `${this.host.current}`;
-    }
+    this.host._internals!.ariaCurrent =
+      this.host.current === null || this.host.current === undefined ? null : `${this.host.current}`;
 
     toggleState(this.host._internals!, 'current', Boolean(this.host.current));
   }
@@ -51,7 +52,7 @@ export class StateCurrentController<T extends Current> implements ReactiveContro
 
     if (anchor && isCurrent) {
       this.#anchorCurrentTarget?.removeAttribute('aria-current');
-      anchor.setAttribute('aria-current', 'page');
+      anchor.setAttribute('aria-current', this.host.current ?? 'page');
       this.#anchorCurrentTarget = anchor;
       return;
     }

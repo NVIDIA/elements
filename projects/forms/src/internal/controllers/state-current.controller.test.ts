@@ -64,6 +64,7 @@ describe('StateCurrentController', () => {
     element.current = null;
     element.sync();
 
+    expect(element._internals!.ariaCurrent).toBe(null);
     expect(element.matches(':state(current)')).toBe(false);
   });
 
@@ -84,6 +85,17 @@ describe('StateCurrentController', () => {
 
     expect(anchor.hasAttribute('aria-current')).toBe(false);
     expect(element.matches(':state(current)')).toBe(false);
+  });
+
+  it('should preserve current value on anchor aria-current', () => {
+    const anchor = document.createElement('a');
+    element.append(anchor);
+    element._internals!.states.add('anchor');
+
+    element.current = 'step';
+    element.sync();
+
+    expect(anchor.getAttribute('aria-current')).toBe('step');
   });
 
   it('should remove anchor aria-current while readonly', () => {

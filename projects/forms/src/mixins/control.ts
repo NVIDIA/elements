@@ -1,7 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { FormControl, FormControlMetadata, FormControlValue, ValidatorResult } from '../internal/types.js';
+import type {
+  FormControl,
+  FormControlInstance,
+  FormControlMetadata,
+  FormControlValue,
+  ValidatorResult
+} from '../internal/types.js';
 import { FormControlError } from '../internal/errors.js';
 import { parseValueSchema } from '../internal/schema.js';
 import { attachInternals, isObjectLiteral, toggleState } from '../internal/utils.js';
@@ -438,7 +444,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       if (typeof this._value === 'number' && typeof value === 'number') {
         this.value = value as T;
       } else {
-        throw new FormControlError(this.localName, 'cannot set number value on non-number type');
+        console.warn(new FormControlError(this.localName, 'cannot set number value on non-number type').message);
       }
     }
 
@@ -631,7 +637,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       }
 
       for (const validator of this._validators) {
-        const result = validator(this.value, this as unknown as FormControl);
+        const result = validator(this.value, this as FormControlInstance);
         if (!result.validity.valid) {
           return result;
         }

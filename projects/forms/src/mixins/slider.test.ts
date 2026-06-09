@@ -20,6 +20,25 @@ class SliderTestElement extends SliderFormControlMixin<typeof HTMLElement>(HTMLE
 
 customElements.define('ui-slider-test-element', SliderTestElement);
 
+class CustomSliderDefaultsTestElement extends SliderFormControlMixin<typeof HTMLElement>(HTMLElement) {
+  static readonly metadata = {
+    version: '0.0.0',
+    tag: 'ui-custom-slider-defaults-test-element',
+    valueSchema: {
+      type: 'number' as const
+    }
+  };
+
+  static readonly sliderDefaults = {
+    max: 20,
+    min: 10,
+    step: 2,
+    value: 14
+  };
+}
+
+customElements.define('ui-custom-slider-defaults-test-element', CustomSliderDefaultsTestElement);
+
 describe('SliderFormControlMixin', () => {
   let fixture: HTMLElement;
   let element: SliderTestElement;
@@ -48,6 +67,33 @@ describe('SliderFormControlMixin', () => {
     expect(element.min).toBe(0);
     expect(element.max).toBe(100);
     expect(element.step).toBe(1);
+  });
+
+  it('should support custom slider defaults', async () => {
+    const customFixture = await createFixture(html`
+      <form>
+        <ui-custom-slider-defaults-test-element name="level"></ui-custom-slider-defaults-test-element>
+      </form>
+    `);
+    const customElement = customFixture.querySelector<CustomSliderDefaultsTestElement>(
+      'ui-custom-slider-defaults-test-element'
+    )!;
+    const customForm = customFixture.querySelector<HTMLFormElement>('form')!;
+
+    expect(customElement.min).toBe(10);
+    expect(customElement.max).toBe(20);
+    expect(customElement.step).toBe(2);
+    expect(customElement.value).toBe(14);
+    expect(getInternals(customElement).ariaValueMin).toBe('10');
+    expect(getInternals(customElement).ariaValueMax).toBe('20');
+    expect(getInternals(customElement).ariaValueNow).toBe('14');
+    expect(new FormData(customForm).get('level')).toBe('14');
+
+    customElement.valueAsNumber = 18;
+    customElement.formResetCallback();
+    expect(customElement.valueAsNumber).toBe(14);
+
+    removeFixture(customFixture);
   });
 
   it('should submit numeric form data', () => {

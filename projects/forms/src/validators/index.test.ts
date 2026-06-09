@@ -3,21 +3,34 @@
 
 import { describe, it, expect } from 'vitest';
 import { requiredValidator, valueSchemaValidator } from './index.js';
-import type { FormControl } from '../internal/types.js';
+import type { FormControlInstance } from '../internal/types.js';
 
 describe('requiredValidator', () => {
   it('should return valid when value exists', () => {
-    const result = requiredValidator('test', { required: true } as unknown as FormControl & { required: boolean });
+    const result = requiredValidator('test', { required: true } as FormControlInstance);
     expect(result.validity.valueMissing).toBe(undefined);
     expect(result.message).toBe('');
     expect(result.validity.valid).toBe(true);
   });
 
-  it('should return invalid when value is empty', () => {
-    const result = requiredValidator('', { required: true } as unknown as FormControl & { required: boolean });
-    expect(result.validity.valueMissing).toBe(true);
-    expect(result.message).toBe('This field is required');
-    expect(result.validity.valid).toBe(false);
+  it('should return invalid when required values are empty', () => {
+    [undefined, null, ''].forEach(value => {
+      const result = requiredValidator(value, { required: true } as FormControlInstance);
+
+      expect(result.validity.valueMissing).toBe(true);
+      expect(result.message).toBe('This field is required');
+      expect(result.validity.valid).toBe(false);
+    });
+  });
+
+  it('should return valid when empty values are not required', () => {
+    [undefined, null, ''].forEach(value => {
+      const result = requiredValidator(value, { required: false } as FormControlInstance);
+
+      expect(result.validity.valueMissing).toBe(undefined);
+      expect(result.message).toBe('');
+      expect(result.validity.valid).toBe(true);
+    });
   });
 });
 
@@ -29,7 +42,7 @@ describe('valueSchemaValidator', () => {
       };
     }
 
-    const result = valueSchemaValidator('test', new Test() as unknown as FormControl);
+    const result = valueSchemaValidator('test', new Test() as FormControlInstance);
     expect(result.validity.valid).toBe(true);
     expect(result.message).toBe('');
   });
@@ -41,7 +54,7 @@ describe('valueSchemaValidator', () => {
       };
     }
 
-    const result = valueSchemaValidator('test', new Test() as unknown as FormControl);
+    const result = valueSchemaValidator('test', new Test() as FormControlInstance);
     expect(result.validity.valid).toBe(false);
     expect(result.message).toBe('expected type number, received type string');
   });

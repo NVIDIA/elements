@@ -16,9 +16,8 @@ export class StateExpandedController<T extends Expanded> implements ReactiveCont
   }
 
   hostUpdated() {
-    if (this.host.expanded !== null && this.host.expanded !== undefined) {
-      this.host._internals!.ariaExpanded = `${this.host.expanded}`;
-    }
+    this.host._internals!.ariaExpanded =
+      this.host.expanded === null || this.host.expanded === undefined ? null : `${this.host.expanded}`;
 
     toggleState(this.host._internals!, 'expanded', Boolean(this.host.expanded));
   }

@@ -66,6 +66,11 @@ describe('StateSelectedController', () => {
 
     expect(element._internals!.ariaSelected).toBe('false');
     expect(element.matches(':state(selected)')).toBe(false);
+
+    element.selected = null;
+    element.sync();
+
+    expect(element._internals!.ariaSelected).toBe(null);
   });
 
   it('should move selected state to anchor aria-current for anchor hosts', () => {
@@ -85,6 +90,18 @@ describe('StateSelectedController', () => {
 
     expect(anchor.hasAttribute('aria-current')).toBe(false);
     expect(element.matches(':state(selected)')).toBe(false);
+  });
+
+  it('should preserve current value on selected anchor aria-current', () => {
+    const anchor = document.createElement('a');
+    element.append(anchor);
+    element._internals!.states.add('anchor');
+
+    element.current = 'step';
+    element.selected = true;
+    element.sync();
+
+    expect(anchor.getAttribute('aria-current')).toBe('step');
   });
 
   it('should remove anchor aria-current while readonly', () => {
