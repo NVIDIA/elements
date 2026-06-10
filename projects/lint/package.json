@@ -72,7 +72,7 @@
     "minisearch": "catalog:publish"
   },
   "peerDependencies": {
-    "@nvidia-elements/themes": "workspace:>=0.0.0 <1.0.0",
+    "@nvidia-elements/themes": "workspace:^",
     "eslint": "catalog:publish"
   },
   "devDependencies": {
