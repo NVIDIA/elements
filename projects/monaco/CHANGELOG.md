@@ -1,3 +1,20 @@
+## <small>2.0.1 (2026-06-10)</small>
+
+* chore(media): update peer dependency version ([082a5f2](https://github.com/NVIDIA/elements/commit/082a5f2))
+* chore(release): @nvidia-elements/cli-v2.0.0 [skip ci] ([7b84169](https://github.com/NVIDIA/elements/commit/7b84169))
+* chore(release): @nvidia-elements/code-v2.0.0 [skip ci] ([beb620d](https://github.com/NVIDIA/elements/commit/beb620d))
+* chore(release): @nvidia-elements/core-v2.0.1 [skip ci] ([63a9663](https://github.com/NVIDIA/elements/commit/63a9663))
+* chore(release): @nvidia-elements/markdown-v2.0.0 [skip ci] ([686ff96](https://github.com/NVIDIA/elements/commit/686ff96))
+* chore(release): @nvidia-elements/styles-v2.0.1 [skip ci] ([d04d043](https://github.com/NVIDIA/elements/commit/d04d043))
+* fix(cli): handle pnpm build approvals ([ef8dc26](https://github.com/NVIDIA/elements/commit/ef8dc26))
+* fix(code): update peer dependency version ([67fa50a](https://github.com/NVIDIA/elements/commit/67fa50a))
+* fix(core): select multiple pointer event ([8412f62](https://github.com/NVIDIA/elements/commit/8412f62))
+* fix(core): update peer dependency version ([93ca66e](https://github.com/NVIDIA/elements/commit/93ca66e))
+* fix(lint): update peer dependency version ([582d326](https://github.com/NVIDIA/elements/commit/582d326))
+* fix(markdown): update peer dependency version ([fe76f18](https://github.com/NVIDIA/elements/commit/fe76f18))
+* fix(monaco): update peer dependency version ([bc41db8](https://github.com/NVIDIA/elements/commit/bc41db8))
+* fix(styles): update peer dependency version ([44ef1da](https://github.com/NVIDIA/elements/commit/44ef1da))
+
 ## 2.0.0 (2026-06-08)
 
 * chore(ci): release scope fix ([102f9a3](https://github.com/NVIDIA/elements/commit/102f9a3))
