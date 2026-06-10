@@ -1,3 +1,13 @@
+## <small>2.0.2 (2026-06-10)</small>
+
+* fix(styles): use logical direction styles ([2edd48c](https://github.com/NVIDIA/elements/commit/2edd48c))
+* chore(release): @nvidia-elements/cli-v2.0.1 [skip ci] ([b3f6d3b](https://github.com/NVIDIA/elements/commit/b3f6d3b))
+* chore(release): @nvidia-elements/code-v2.0.1 [skip ci] ([005d158](https://github.com/NVIDIA/elements/commit/005d158))
+* chore(release): @nvidia-elements/lint-v2.0.1 [skip ci] ([fcf4355](https://github.com/NVIDIA/elements/commit/fcf4355))
+* chore(release): @nvidia-elements/markdown-v2.0.1 [skip ci] ([931f033](https://github.com/NVIDIA/elements/commit/931f033))
+* chore(release): @nvidia-elements/monaco-v2.0.1 [skip ci] ([fb21243](https://github.com/NVIDIA/elements/commit/fb21243))
+* chore(themes): add additional tests for css variable completions ([cbf14f8](https://github.com/NVIDIA/elements/commit/cbf14f8))
+
 ## <small>2.0.1 (2026-06-10)</small>
 
 * chore(media): update peer dependency version ([082a5f2](https://github.com/NVIDIA/elements/commit/082a5f2))
