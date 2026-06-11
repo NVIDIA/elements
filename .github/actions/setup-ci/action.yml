@@ -13,6 +13,10 @@ runs:
         node-version-file: './.nvmrc'
         registry-url: 'https://registry.npmjs.org'
         cache: 'pnpm'
+    - uses: actions/setup-go@v6
+      with:
+        go-version: '1.26.x'
+        cache: false
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile

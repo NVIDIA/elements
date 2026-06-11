@@ -67,7 +67,15 @@ const integrations = {
     starterDemo: null,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go.zip`,
     starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/go`,
-    documentation: 'https://go.dev',
+    documentation: 'https://go.dev/doc/',
+    playgroundURL: null
+  },
+  'go-htmx': {
+    logo: 'htmx',
+    starterDemo: null,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go-htmx.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/go-htmx`,
+    documentation: 'https://htmx.org/docs/',
     playgroundURL: null
   },
   hugo: {

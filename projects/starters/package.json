@@ -25,6 +25,18 @@
         "./importmaps/dist/**/*.js",
         "./eleventy/dist/**/*.js",
         "./eleventy-ssr/dist/**/*.js",
+        "./go/*.go",
+        "./go/.gitignore",
+        "./go/AGENTS.md",
+        "./go/package.json",
+        "./go/README.md",
+        "./go/src/**",
+        "./go-htmx/*.go",
+        "./go-htmx/.gitignore",
+        "./go-htmx/AGENTS.md",
+        "./go-htmx/package.json",
+        "./go-htmx/README.md",
+        "./go-htmx/src/**",
         "./lit-library/dist/**/*.js",
         "./mcp-app/dist/**",
         "./mpa/dist/**/*.js",
@@ -63,6 +75,14 @@
         },
         {
           "script": "./eleventy-ssr:build",
+          "cascade": false
+        },
+        {
+          "script": "./go:build",
+          "cascade": false
+        },
+        {
+          "script": "./go-htmx:build",
           "cascade": false
         },
         {

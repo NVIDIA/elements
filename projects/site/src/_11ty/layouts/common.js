@@ -151,6 +151,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/cdn/') ? 'highlighted selected' : ''}><a href="/docs/integrations/cdn/">CDN</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/custom-elements/') ? 'highlighted selected' : ''}><a href="/docs/integrations/custom-elements/">Custom Elements</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="/docs/integrations/go/">Golang</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/go-htmx/') ? 'highlighted selected' : ''}><a href="/docs/integrations/go-htmx/">HTMX + Go</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted selected' : ''}><a href="/docs/integrations/hugo/">Hugo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted selected' : ''}><a href="/docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted selected' : ''}><a href="/docs/integrations/lit/">Lit</a></nve-tree-node>

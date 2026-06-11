@@ -4,45 +4,44 @@
     <title>Elements + Go</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple starter using Elements and TypeScript." />
+    <meta name="description" content="A simple starter using Elements and Go." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="https://esm.sh/@nvidia-elements/styles/dist/bundles/index.css" />
-    <link rel="stylesheet" type="text/css" href="https://esm.sh/@nvidia-elements/themes/dist/bundles/index.css" />
-    <link rel="stylesheet" type="text/css" href="https://esm.sh/@nvidia-elements/themes/dist/fonts/inter.css" />
-    <link rel="stylesheet" type="text/css" href="https://esm.sh/@nvidia-elements/monaco/dist/bundles/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/styles/dist/bundles/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/fonts/inter.css" />
     <script type="module">
-      import "https://esm.sh/@nvidia-elements/core/dist/bundles/index.js"
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core/dist/bundles/index.min.js';
     </script>
   </head>
   <body nve-text="body">
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <a slot="prefix" href="https://NVIDIA.github.io/elements/">Elements</a>
-        <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/docs/integrations/angular/" target="_blank">Catalog</a></nve-button>
-        <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button>
-        <nve-button container="flat"><a href="https://github.com/NVIDIA/elements/" target="_blank">GitHub</a></nve-button>
+        <a slot="prefix" href="https://nvidia.github.io/elements/">Elements</a>
+        <nve-button container="flat"><a href="https://nvidia.github.io/elements/docs/integrations/go/" target="_blank" rel="noopener noreferrer">Documentation</a></nve-button>
+        <nve-button container="flat"><a href="https://nvidia.github.io/elements/starters/">Starters</a></nve-button>
+        <nve-button container="flat"><a href="https://github.com/NVIDIA/elements/" target="_blank" rel="noopener noreferrer">GitHub</a></nve-button>
       </nve-page-header>
       <nve-page-panel slot="left" size="sm">
         <nve-page-panel-content>
           <nve-menu>
-            <nve-menu-item><a target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/go/">Documentation</a></nve-menu-item>
-            <nve-menu-item><a target="_blank" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/go">Source</a></nve-menu-item>
-            <nve-menu-item><a download href="https://NVIDIA.github.io/elements/starters/download/go.zip">Download</a></nve-menu-item>
+            <nve-menu-item><a target="_blank" rel="noopener noreferrer" href="https://nvidia.github.io/elements/docs/integrations/go/">Documentation</a></nve-menu-item>
+            <nve-menu-item><a target="_blank" rel="noopener noreferrer" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/go">Source</a></nve-menu-item>
+            <nve-menu-item><a download href="https://nvidia.github.io/elements/starters/download/go.zip">Download</a></nve-menu-item>
           </nve-menu>
         </nve-page-panel-content>
       </nve-page-panel>
       <main nve-layout="column gap:lg pad:lg">
         <div nve-layout="row gap:sm align:vertical-center">
-          <img src="https://NVIDIA.github.io/elements/static/images/integrations/go.svg" width="36px" height="36px" alt="go logo">
-          <h1 nve-text="heading xl">{{.Data.Title}}</h1>
+          <img src="https://nvidia.github.io/elements/static/images/integrations/go.svg" width="36px" height="36px" alt="go logo" />
+          <h1 nve-text="heading xl">{{.Title}}</h1>
         </div>
-        <p nve-text="body">{{.Data.Description}}</p>
-        <p nve-text="body sm muted">Last updated: {{.Data.Date}}</p>
+        <p nve-text="body">{{.Description}}</p>
+        <p nve-text="body sm muted">Last updated: {{.Date}}</p>
         <div nve-layout="row gap:xs">
-          <a nve-text="body sm" target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/go/">Documentation</a>
-          <a nve-text="body sm" target="_blank" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/go">Source</a>
-          <a nve-text="body sm" download href="https://NVIDIA.github.io/elements/starters/download/go.zip">Download</a>
+          <a nve-text="body sm" target="_blank" rel="noopener noreferrer" href="https://nvidia.github.io/elements/docs/integrations/go/">Documentation</a>
+          <a nve-text="body sm" target="_blank" rel="noopener noreferrer" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/go">Source</a>
+          <a nve-text="body sm" download href="https://nvidia.github.io/elements/starters/download/go.zip">Download</a>
         </div>
       </main>
     </nve-page>

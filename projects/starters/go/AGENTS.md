@@ -10,7 +10,7 @@ This file only covers how this starter wires Elements into Go templates. For com
 
 ## Static Assets
 
-- Treat the current CDN comments in `src/index.html` as placeholders until a real Elements CDN path exists.
+- Use pre-built browser-loadable bundles when keeping the starter free of frontend build tooling.
 - If serving local bundles instead, add explicit static file handling in `main.go` and point CSS and module imports at that route.
 - Keep theme attributes on the root HTML template, not in Go handler code.
 

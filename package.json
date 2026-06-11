@@ -86,6 +86,8 @@
         "./projects/starters/bundles:ci",
         "./projects/starters/eleventy:ci",
         "./projects/starters/eleventy-ssr:ci",
+        "./projects/starters/go:ci",
+        "./projects/starters/go-htmx:ci",
         "./projects/starters/hugo:ci",
         "./projects/starters/importmaps:ci",
         "./projects/starters/lit-library:ci",

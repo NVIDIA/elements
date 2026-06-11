@@ -6,6 +6,7 @@ packages:
   - projects/starters/eleventy
   - projects/starters/eleventy-ssr
   - projects/starters/go
+  - projects/starters/go-htmx
   - projects/starters/hugo
   - projects/starters/importmaps
   - projects/starters/lit-library

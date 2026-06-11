@@ -1484,6 +1484,8 @@ importers:
 
   projects/starters/go: {}
 
+  projects/starters/go-htmx: {}
+
   projects/starters/hugo:
     dependencies:
       '@nvidia-elements/code':

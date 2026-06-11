@@ -31,9 +31,17 @@ const integrations = [
   {
     href: '/docs/integrations/go/',
     icon: 'go.svg',
-    iconSize: '48px',
+    iconSize: '48',
     title: 'Golang',
     description: 'Use Elements with Go-backed web applications.'
+  },
+  {
+    href: '/docs/integrations/go-htmx/',
+    icon: 'htmx.svg',
+    iconHeight: '32',
+    iconWidth: '48',
+    title: 'HTMX + Go',
+    description: 'Use Elements with HTMX and Go template fragments.'
   },
   {
     href: '/docs/integrations/hugo/',
@@ -118,10 +126,10 @@ const integrations = [
   }
 ];
 
-const renderLogo = ({ icon, iconSize = '36px', nveIcon, title, color = 'gray-denim' }) => {
+const renderLogo = ({ icon, iconHeight, iconSize = '36px', iconWidth, nveIcon, title, color = 'gray-denim' }) => {
   if (icon) {
     return /* html */ `<nve-logo color="${color}" size="lg">
-          <img src="/static/images/integrations/${icon}" width="${iconSize}" height="${iconSize}" alt="${title.toLowerCase()} logo" />
+          <img src="/static/images/integrations/${icon}" width="${iconWidth ?? iconSize}" height="${iconHeight ?? iconSize}" alt="${title.toLowerCase()} logo" />
         </nve-logo>`;
   }
 

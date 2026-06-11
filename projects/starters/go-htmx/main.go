@@ -14,7 +14,11 @@ import (
 type PageData struct {
 	Title       string
 	Description string
-	Date        string
+	Time        TimeData
+}
+
+type TimeData struct {
+	Timestamp string
 }
 
 func main() {
@@ -27,16 +31,23 @@ func main() {
 		}
 
 		renderTemplate(w, "src/index.html", PageData{
-			Title:       "Go",
-			Description: "A simple starter using Elements and Go.",
-			Date:        time.Now().Format("02-01-2006 15:04:05"),
-		})
+			Title:       "HTMX + Go",
+			Description: "A simple starter using Elements, HTMX fragment updates, and Go templates.",
+			Time:        currentTime(),
+		}, "src/time.html")
+	})
+	http.HandleFunc("/fragment/time", func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "src/time.html", currentTime())
 	})
 
 	fmt.Printf("Server is running at http://localhost:%s\n", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatalf("server failed: %v", err)
 	}
+}
+
+func currentTime() TimeData {
+	return TimeData{Timestamp: time.Now().Format("2006-01-02 15:04:05 MST")}
 }
 
 func envOrDefault(name string, defaultValue string) string {

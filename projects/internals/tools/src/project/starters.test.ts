@@ -5,11 +5,13 @@ import type * as childProcess from 'node:child_process';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   startersData,
+  createStarterCDNUrl,
   createGitInitProcess,
   createStarterPaths,
   execPackageManager,
   getDependencyInstallFailureMessage,
   getRequiredNPMClient,
+  stampStarterCDNVersions,
   removeWireitScripts,
   startStarter
 } from './starters.js';
@@ -48,6 +50,7 @@ describe('startersData', () => {
     expect(startersData.nextjs.cli).toBe(true);
     expect(startersData.solidjs.cli).toBe(true);
     expect(startersData.go.cli).toBe(true);
+    expect(startersData['go-htmx'].cli).toBe(true);
     expect(startersData.hugo.cli).toBe(true);
     expect(startersData.eleventy.cli).toBe(true);
     expect(startersData.bundles.cli).toBe(true);
@@ -66,6 +69,7 @@ describe('startersData', () => {
     expect(startersData.nextjs.zip).toContain('nextjs.zip');
     expect(startersData.solidjs.zip).toContain('solidjs.zip');
     expect(startersData.go.zip).toContain('go.zip');
+    expect(startersData['go-htmx'].zip).toContain('go-htmx.zip');
     expect(startersData.eleventy.zip).toContain('eleventy.zip');
     expect(startersData.importmaps.zip).toContain('importmaps.zip');
     expect(startersData.bundles.zip).toContain('bundles.zip');
@@ -195,6 +199,96 @@ describe('getDependencyInstallFailureMessage', () => {
     expect(getDependencyInstallFailureMessage('/tmp/starter', null)).toBe(
       '⚠️ Error installing dependencies, install npm or pnpm, then run a package-manager install in the "/tmp/starter" directory'
     );
+  });
+});
+
+describe('starter CDN URLs', () => {
+  type StarterCDNPackageName = Parameters<typeof createStarterCDNUrl>[0];
+  type StarterCDNAsset = { packageName: StarterCDNPackageName; filePath: string };
+
+  const versions: Record<StarterCDNPackageName, string> = {
+    '@nvidia-elements/core': '1.2.3',
+    '@nvidia-elements/styles': '4.5.6',
+    '@nvidia-elements/themes': '7.8.9'
+  };
+
+  const coreAsset: StarterCDNAsset = { packageName: '@nvidia-elements/core', filePath: 'dist/bundles/index.min.js' };
+  const stylesAsset: StarterCDNAsset = { packageName: '@nvidia-elements/styles', filePath: 'dist/bundles/index.css' };
+  const themesAsset: StarterCDNAsset = { packageName: '@nvidia-elements/themes', filePath: 'dist/bundles/index.css' };
+  const themeFontsAsset: StarterCDNAsset = { packageName: '@nvidia-elements/themes', filePath: 'dist/fonts/inter.css' };
+  const starterCDNAssets = [stylesAsset, themesAsset, themeFontsAsset, coreAsset];
+
+  function createVersionedStarterCDNUrl(asset: StarterCDNAsset, version = versions[asset.packageName]) {
+    return createStarterCDNUrl(asset.packageName, version, asset.filePath);
+  }
+
+  function createUnversionedStarterCDNUrl(asset: StarterCDNAsset) {
+    return createVersionedStarterCDNUrl(asset).replace(
+      `${asset.packageName}@${versions[asset.packageName]}`,
+      asset.packageName
+    );
+  }
+
+  it('should create versioned CDN URLs', () => {
+    const url = createVersionedStarterCDNUrl(coreAsset);
+
+    expect(new URL(url).protocol).toBe('https:');
+    expect(url).toContain(`${coreAsset.packageName}@${versions[coreAsset.packageName]}/${coreAsset.filePath}`);
+  });
+
+  it('should stamp unversioned Elements CDN URLs with package versions', () => {
+    const content = `
+      <link rel="stylesheet" href="${createUnversionedStarterCDNUrl(stylesAsset)}" />
+      <link rel="stylesheet" href="${createUnversionedStarterCDNUrl(themesAsset)}" />
+      <link rel="stylesheet" href="${createUnversionedStarterCDNUrl(themeFontsAsset)}" />
+      <script type="module">
+        import '${createUnversionedStarterCDNUrl(coreAsset)}';
+      </script>
+    `;
+
+    const result = stampStarterCDNVersions(content, versions);
+
+    for (const asset of starterCDNAssets) {
+      expect(result).toContain(createVersionedStarterCDNUrl(asset));
+    }
+  });
+
+  it('should replace existing Elements CDN versions', () => {
+    const content = `
+      <link rel="stylesheet" href="${createVersionedStarterCDNUrl(stylesAsset, '0.0.1')}" />
+      <link rel="stylesheet" href="${createVersionedStarterCDNUrl(themesAsset, '0.0.1')}" />
+      <link rel="stylesheet" href="${createVersionedStarterCDNUrl(themeFontsAsset, '0.0.1')}" />
+      <script type="module">
+        import '${createVersionedStarterCDNUrl(coreAsset, '0.0.1')}';
+      </script>
+    `;
+
+    const result = stampStarterCDNVersions(content, versions);
+
+    for (const asset of starterCDNAssets) {
+      expect(result).toContain(createVersionedStarterCDNUrl(asset));
+    }
+    expect(result).not.toContain('@0.0.1/');
+  });
+
+  it('should leave unrelated CDN URLs unchanged', () => {
+    const unrelatedElementsPackageUrl = createVersionedStarterCDNUrl(coreAsset).replace(
+      `${coreAsset.packageName}@${versions[coreAsset.packageName]}/${coreAsset.filePath}`,
+      '@nvidia-elements/monaco/dist/bundles/index.css'
+    );
+    const htmxUrl = createVersionedStarterCDNUrl(coreAsset).replace(
+      `${coreAsset.packageName}@${versions[coreAsset.packageName]}/${coreAsset.filePath}`,
+      'htmx.org@2.0.10/dist/htmx.min.js'
+    );
+    const content = `
+      <link rel="stylesheet" href="${unrelatedElementsPackageUrl}" />
+      <script src="${htmxUrl}"></script>
+    `;
+
+    const result = stampStarterCDNVersions(content, versions);
+
+    expect(result).toContain(unrelatedElementsPackageUrl);
+    expect(result).toContain(htmxUrl);
   });
 });
 

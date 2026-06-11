@@ -16,6 +16,11 @@ const starters = Object.keys(startersData).filter(
   starter => startersData[starter as keyof typeof startersData]?.cli
 ) as Starter[];
 
+function starterShouldSetupDependencies(type: Starter): boolean {
+  const starterData = startersData[type];
+  return !('setupDependencies' in starterData) || starterData.setupDependencies;
+}
+
 @service()
 export class ProjectService {
   @tool({
@@ -56,9 +61,12 @@ export class ProjectService {
 
     const createReport = await createStarter(type, dir);
     const agentReport = await setupAgent(projectDir, 'all');
-    const setupProjectReport = await setupProject(projectDir);
-    const updateReport = await updateProject(projectDir);
-    const reports = [createReport, agentReport, setupProjectReport, updateReport];
+    const reports = [createReport, agentReport];
+    if (starterShouldSetupDependencies(type)) {
+      const setupProjectReport = setupProject(projectDir);
+      const updateProjectReport = await updateProject(projectDir);
+      reports.push(setupProjectReport, updateProjectReport);
+    }
 
     const failedReport = reports.find(report => Object.values(report).some(value => value.status === 'danger'));
     if (failedReport) {
@@ -69,12 +77,7 @@ export class ProjectService {
       await startStarter(projectDir);
     }
 
-    return {
-      ...createReport,
-      ...agentReport,
-      ...setupProjectReport,
-      ...updateReport
-    };
+    return Object.assign({}, ...reports);
   }
 
   @tool({

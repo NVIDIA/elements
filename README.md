@@ -33,11 +33,14 @@ Examples of projects include:
 
 To set up repository dependencies and run the full build, run the following commands at the **root** of the repository:
 
+The CI pipeline also builds Go starters. Install [Go 1.26.x](https://go.dev/doc/install) before running the full local CI pipeline.
+
 ```shell
 # install required dependencies
 brew install git-lfs
 git lfs install
 git lfs pull
+go version
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install

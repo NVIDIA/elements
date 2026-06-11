@@ -1,8 +1,8 @@
 {
-  "name": "go-starter",
+  "name": "go-htmx-starter",
   "version": "0.0.0",
   "private": true,
-  "description": "Go starter",
+  "description": "HTMX + Go starter",
   "scripts": {
     "ci": "wireit",
     "dev": "go run main.go",

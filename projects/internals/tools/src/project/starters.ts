@@ -4,9 +4,10 @@
 import { basename, dirname, join, parse, resolve } from 'node:path';
 import { execFile, execFileSync } from 'node:child_process';
 import { cwd } from 'node:process';
+import { fileURLToPath } from 'node:url';
 
-import { writeFile } from 'fs/promises';
-import { existsSync, unlinkSync, writeFileSync, cpSync, createWriteStream, rmSync } from 'fs';
+import { readFile, writeFile } from 'fs/promises';
+import { existsSync, unlinkSync, writeFileSync, cpSync, createWriteStream, rmSync, readFileSync } from 'fs';
 import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
 import { getCatalogsFromWorkspaceManifest } from '@pnpm/catalogs.config';
 import { createExportableManifest } from '@pnpm/exportable-manifest';
@@ -18,12 +19,51 @@ import type { Report } from '../internal/types.js';
 import { writeAllAgentConfigs } from './setup-agent.js';
 
 const ELEMENTS_PAGES_BASE_URL = 'https://nvidia.github.io/elements';
+const ELEMENTS_CDN_BASE_URL = 'https://cdn.jsdelivr.net/npm';
+function findWorkspaceRoot(startDir: string) {
+  let dir = startDir;
+  while (dir !== dirname(dir)) {
+    if (existsSync(join(dir, 'pnpm-workspace.yaml'))) {
+      return dir;
+    }
+    dir = dirname(dir);
+  }
+  throw new Error(`Unable to find pnpm-workspace.yaml from ${startDir}`);
+}
+
+let repoWorkspaceDir: string | undefined;
+function getRepoWorkspaceDir() {
+  repoWorkspaceDir ??= findWorkspaceRoot(dirname(fileURLToPath(import.meta.url)));
+  return repoWorkspaceDir;
+}
+
+type StarterCDNPackageName = '@nvidia-elements/core' | '@nvidia-elements/styles' | '@nvidia-elements/themes';
+
+const starterCDNPackagePaths: Record<StarterCDNPackageName, string> = {
+  '@nvidia-elements/core': 'projects/core/package.json',
+  '@nvidia-elements/styles': 'projects/styles/package.json',
+  '@nvidia-elements/themes': 'projects/themes/package.json'
+};
+
+const starterCDNAssets: { packageName: StarterCDNPackageName; filePath: string }[] = [
+  { packageName: '@nvidia-elements/core', filePath: 'dist/bundles/index.min.js' },
+  { packageName: '@nvidia-elements/styles', filePath: 'dist/bundles/index.css' },
+  { packageName: '@nvidia-elements/themes', filePath: 'dist/bundles/index.css' },
+  { packageName: '@nvidia-elements/themes', filePath: 'dist/fonts/inter.css' }
+];
+
+const cdnStampTargets = new Map<string, string>([
+  ['go', 'src/index.html'],
+  ['go-htmx', 'src/index.html']
+]);
 
 export type Starter =
   | 'angular'
   | 'bundles'
   | 'eleventy'
   | 'go'
+  | 'go-htmx'
+  | 'hugo'
   | 'importmaps'
   | 'lit-library'
   | 'lit'
@@ -54,7 +94,13 @@ export const startersData = {
   },
   go: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go.zip`,
-    cli: true
+    cli: true,
+    setupDependencies: false
+  },
+  'go-htmx': {
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go-htmx.zip`,
+    cli: true,
+    setupDependencies: false
   },
   hugo: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/hugo.zip`,
@@ -113,7 +159,8 @@ export const startersData = {
 /* istanbul ignore next -- @preserve */
 export async function archiveStarter(projectDir: string, outDir: string) {
   const dist = join(outDir, projectDir);
-  await copyProject(projectDir);
+  await copyProject(projectDir, dist);
+  await stampStarterCDNVersionFiles(projectDir, dist);
   writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(join(dist, 'package.json'), JSON.stringify(packageJSON, undefined, 2));
@@ -135,18 +182,65 @@ async function zipProject(outDir: string) {
 }
 
 /* istanbul ignore next -- @preserve */
-function copyProject(projectDir: string) {
-  const ignoreDirs = new Set(['dist', 'node_modules', '.wireit', '.eslintcache']);
-  cpSync(projectDir, join('dist', projectDir), {
+function copyProject(projectDir: string, dist: string) {
+  const ignoreDirs = new Set(['dist', 'node_modules', '.wireit', '.eslintcache', 'bin']);
+  cpSync(projectDir, dist, {
     recursive: true,
     filter: src => !ignoreDirs.has(basename(src))
   });
 }
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getPackageVersion(repoRoot: string, packageName: StarterCDNPackageName): string {
+  const packageJsonPath = join(repoRoot, starterCDNPackagePaths[packageName]);
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as { version?: unknown };
+  if (typeof packageJson.version !== 'string' || !packageJson.version) {
+    throw new Error(`No version found for ${packageName} in ${packageJsonPath}`);
+  }
+  return packageJson.version;
+}
+
+function getStarterCDNPackageVersions(repoRoot: string): Record<StarterCDNPackageName, string> {
+  return {
+    '@nvidia-elements/core': getPackageVersion(repoRoot, '@nvidia-elements/core'),
+    '@nvidia-elements/styles': getPackageVersion(repoRoot, '@nvidia-elements/styles'),
+    '@nvidia-elements/themes': getPackageVersion(repoRoot, '@nvidia-elements/themes')
+  };
+}
+
+export function createStarterCDNUrl(packageName: StarterCDNPackageName, version: string, filePath: string) {
+  return `${ELEMENTS_CDN_BASE_URL}/${packageName}@${version}/${filePath}`;
+}
+
+export function stampStarterCDNVersions(content: string, versions: Record<StarterCDNPackageName, string>) {
+  return starterCDNAssets.reduce((updatedContent, asset) => {
+    const versionedUrl = createStarterCDNUrl(asset.packageName, versions[asset.packageName], asset.filePath);
+    const urlPattern = new RegExp(
+      `${escapeRegExp(ELEMENTS_CDN_BASE_URL)}/${escapeRegExp(asset.packageName)}(?:@[^/"']+)?/${escapeRegExp(asset.filePath)}`,
+      'g'
+    );
+    return updatedContent.replace(urlPattern, versionedUrl);
+  }, content);
+}
+
+async function stampStarterCDNVersionFiles(projectDir: string, dist: string) {
+  const stampTarget = cdnStampTargets.get(projectDir);
+  if (!stampTarget) {
+    return;
+  }
+
+  const indexPath = join(dist, stampTarget);
+  const versions = getStarterCDNPackageVersions(getRepoWorkspaceDir());
+  const content = await readFile(indexPath, 'utf8');
+  await writeFile(indexPath, stampStarterCDNVersions(content, versions));
+}
+
 /* istanbul ignore next -- @preserve */
 async function exportPackageFromWorkspace(projectDir: string) {
-  const REPO_WORKSPACE_DIR = '../../';
-  const workspace = await readWorkspaceManifest(REPO_WORKSPACE_DIR);
+  const workspace = await readWorkspaceManifest(getRepoWorkspaceDir());
   const catalogs = getCatalogsFromWorkspaceManifest(workspace);
   const manifest = await readProjectManifestOnly(projectDir);
   let exportable = await createExportableManifest(projectDir, manifest, { catalogs });

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" nve-theme="dark" nve-transition="auto">
+  <head>
+    <title>Elements + HTMX + Go</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple starter using Elements, HTMX, and Go." />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/styles/dist/bundles/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/fonts/inter.css" />
+    <script type="module">
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core/dist/bundles/index.min.js';
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"></script>
+  </head>
+  <body nve-text="body">
+    <nve-page>
+      <nve-page-header slot="header">
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+        <a slot="prefix" href="https://nvidia.github.io/elements/">Elements</a>
+        <nve-button container="flat"
+          ><a href="https://nvidia.github.io/elements/docs/integrations/go-htmx/" target="_blank" rel="noopener noreferrer"
+            >Documentation</a
+          ></nve-button
+        >
+        <nve-button container="flat"><a href="https://nvidia.github.io/elements/starters/">Starters</a></nve-button>
+        <nve-button container="flat"
+          ><a href="https://github.com/NVIDIA/elements/" target="_blank" rel="noopener noreferrer">GitHub</a></nve-button
+        >
+      </nve-page-header>
+      <nve-page-panel slot="left" size="sm">
+        <nve-page-panel-content>
+          <nve-menu>
+            <nve-menu-item
+              ><a target="_blank" rel="noopener noreferrer" href="https://nvidia.github.io/elements/docs/integrations/go-htmx/"
+                >Documentation</a
+              ></nve-menu-item
+            >
+            <nve-menu-item
+              ><a target="_blank" rel="noopener noreferrer" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/go-htmx"
+                >Source</a
+              ></nve-menu-item
+            >
+            <nve-menu-item
+              ><a download href="https://nvidia.github.io/elements/starters/download/go-htmx.zip"
+                >Download</a
+              ></nve-menu-item
+            >
+          </nve-menu>
+        </nve-page-panel-content>
+      </nve-page-panel>
+      <main nve-layout="column gap:lg pad:lg">
+        <div nve-layout="row gap:sm align:vertical-center">
+          <img
+            src="https://nvidia.github.io/elements/static/images/integrations/htmx.svg"
+            width="42px"
+            height="28px"
+            alt="htmx logo" />
+          <h1 nve-text="heading xl">{{.Title}}</h1>
+        </div>
+        <p nve-text="body">{{.Description}}</p>
+        <section nve-layout="column gap:sm">
+          <h2 nve-text="heading md">Server time</h2>
+          {{template "time.html" .Time}}
+          <nve-button hx-get="/fragment/time" hx-target="#server-time" hx-swap="outerHTML">Refresh</nve-button>
+        </section>
+        <div nve-layout="row gap:xs">
+          <a nve-text="body sm" target="_blank" rel="noopener noreferrer" href="https://nvidia.github.io/elements/docs/integrations/go-htmx/"
+            >Documentation</a
+          >
+          <a
+            nve-text="body sm"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/NVIDIA/elements/tree/main/projects/starters/go-htmx"
+            >Source</a
+          >
+          <a nve-text="body sm" download href="https://nvidia.github.io/elements/starters/download/go-htmx.zip"
+            >Download</a
+          >
+        </div>
+      </main>
+    </nve-page>
+  </body>
+</html>

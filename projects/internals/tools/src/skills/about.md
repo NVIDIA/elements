@@ -1,6 +1,6 @@
 ## NVIDIA Elements Design System
 
-Give a high level overview of the NVIDIA Elements Design System.
+Give a high-level overview of the NVIDIA Elements Design System.
 
 **Structure the content as:**
 
@@ -21,11 +21,11 @@ Give a high level overview of the NVIDIA Elements Design System.
 
 ```bash
 # create a new project
-nve project.create # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
+nve project.create # angular, bundles, eleventy, go, go-htmx, hugo, nextjs, nuxt, react, solidjs, svelte, typescript, vue
 ```
 
 ### Resources for Users
 
 - [Documentation](https://NVIDIA.github.io/elements/)
-- [Gitlab Repo](https://github.com/NVIDIA/elements)
+- [GitHub Repo](https://github.com/NVIDIA/elements)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)

@@ -30,6 +30,7 @@ projects/starters/bundles/src/index.html
 projects/starters/eleventy/src/_layouts/index.11ty.js
 projects/starters/eleventy/src/index.11ty.js
 projects/starters/go/src/index.html
+projects/starters/go-htmx/src/index.html
 projects/starters/hugo/**/*
 projects/starters/importmaps/src/index.html
 projects/starters/mpa/src/**/*.html

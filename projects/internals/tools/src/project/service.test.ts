@@ -15,8 +15,8 @@ vi.mock('./setup-agent.js', () => ({
 vi.mock('./starters.js', () => ({
   startersData: {
     typescript: { cli: true, zip: 'typescript.zip' },
-    react: { cli: true, zip: 'react.zip' },
-    importmaps: { cli: false, zip: 'importmaps.zip' }
+    go: { cli: true, zip: 'go.zip', setupDependencies: false },
+    lit: { cli: false, zip: null }
   },
   createStarter: vi.fn(),
   startStarter: vi.fn()
@@ -58,6 +58,25 @@ describe('ProjectService', () => {
       expect(setupAgent).toHaveBeenCalled();
       expect(setupProject).toHaveBeenCalled();
       expect(updateProject).toHaveBeenCalled();
+    });
+
+    it('should skip dependency setup for starters that opt out of project setup', async () => {
+      const { createStarter } = await import('./starters.js');
+      const { setupAgent } = await import('./setup-agent.js');
+      const { setupProject } = await import('./setup.js');
+      const { updateProject } = await import('./update.js');
+      vi.mocked(createStarter).mockResolvedValue({ create: { message: 'created', status: 'success' } });
+      vi.mocked(setupAgent).mockResolvedValue({ agent: { message: 'configured', status: 'success' } });
+
+      const { ProjectService } = await import('./service.js');
+      const result = await ProjectService.create({ type: 'go', cwd: '/test', start: false });
+
+      expect(result).toHaveProperty('create');
+      expect(result).toHaveProperty('agent');
+      expect(createStarter).toHaveBeenCalledWith('go', '/test');
+      expect(setupAgent).toHaveBeenCalled();
+      expect(setupProject).not.toHaveBeenCalled();
+      expect(updateProject).not.toHaveBeenCalled();
     });
 
     it('should return failed report when a step fails', async () => {
