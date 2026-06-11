@@ -98,7 +98,6 @@ function buildBinaryVersionPlugin(): Plugin {
       }
 
       writeFileSync('dist/index.js', content);
-      writeFileSync('dist/manifest.json', JSON.stringify({ sha: hash }));
     }
   };
 }

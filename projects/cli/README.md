@@ -30,6 +30,14 @@ The best way to get started is to run the install script.
 curl -fsSL https://nvidia.github.io/elements/install.sh | bash
 ```
 
+On Windows, run the PowerShell installer.
+
+```powershell
+irm https://nvidia.github.io/elements/install.ps1 | iex
+```
+
+For agents and CI, invoke the canonical path directly: `$HOME/.nve/bin/nve` on macOS and Linux, or `$env:LOCALAPPDATA\nve\bin\nve.exe` on Windows.
+
 Alternatively you can install with [Node.js](https://nodejs.org/) and npm.
 
 ```shell
@@ -142,9 +150,16 @@ Skills provide persistent context to AI agents for building UI with Elements.
 
 | Skill | Description |
 | ----- | ----------- |
-| `elements` | Build UI with NVIDIA Elements (NVE). Provides authoring guidelines, workflow steps, and API best practices for creating, editing, or reviewing HTML templates that use nve-* components. |
-| `authoring` | Authoring workflow guidance for creating, editing, or reviewing HTML templates that use nve-* components. |
-| `migration` | Migration guidance for moving projects from deprecated Elements APIs to current packages and tools. |
+| `about` | Instructions for providing a brief introduction for using the Elements Design System. |
+| `authoring` | Best practices and workflow guidance for authoring UI with NVIDIA Elements. |
+| `doctor` | Instructions for ensuring the Elements Design System is setup correctly. |
+| `artifact` | Use when creating throwaway UI artifacts, prototypes, demos, Claude Artifacts, Codex, or GPT Sites pages, or other standalone HTML interfaces that should use the NVIDIA Elements CDN template. |
+| `integration` | Best practices and workflow guidance for creating or setting up NVIDIA Elements projects. |
+| `migration` | Instructions for migrating a project from deprecated Elements APIs using lint tooling and CLI health checks. |
+| `search` | Best practices for providing Elements API Documentation. |
+| `elements` | Default skill for UI-related work or NVIDIA Elements (`nve-*`), including HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts. |
+
+Run `nve skills.list` or call MCP `skills_list` for the authoritative list. Deployments with the playground service enabled can also expose a `playground` skill for creating Elements Playground prototypes.
 
 ### Tools
 

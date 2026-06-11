@@ -1,142 +1,133 @@
 #!/bin/sh
-# Elements CLI Installer — macOS & Linux
+# Elements CLI Installer - macOS and Linux
 # Usage: curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash
 set -eu
 
-BASE_URL="https://NVIDIA.github.io/elements/cli"
-INSTALL_DIR="$HOME/.local/bin"
-BIN_NAME="nve"
+BASE_URL="${NVE_BASE_URL:-https://NVIDIA.github.io/elements/cli}"
+TMP_FILE=""
 
-# --- Colors ---
-if [ -t 1 ]; then
-  RED='\033[0;31m'
-  GREEN='\033[0;32m'
-  YELLOW='\033[0;33m'
-  CYAN='\033[0;36m'
-  BOLD='\033[1m'
-  RESET='\033[0m'
-else
-  RED='' GREEN='' YELLOW='' CYAN='' BOLD='' RESET=''
-fi
+printf '\033[36mNVIDIA Elements CLI Installer\033[0m\n'
 
-info()  { printf "${CYAN}%s${RESET}\n" "$*"; }
-warn()  { printf "${YELLOW}%s${RESET}\n" "$*"; }
-error() { printf "${RED}error: %s${RESET}\n" "$*" >&2; exit 1; }
-ok()    { printf "${GREEN}%s${RESET}\n" "$*"; }
+cleanup() {
+  if [ -n "${TMP_FILE:-}" ]; then
+    rm -f "$TMP_FILE"
+  fi
+}
+trap cleanup EXIT
 
-# --- OS / Arch detection ---
-OS="$(uname -s)"
-ARCH="$(uname -m)"
+error() {
+  printf "error: %s\n" "$*" >&2
+  exit 1
+}
 
-case "$OS" in
-  Darwin)
-    case "$ARCH" in
-      arm64)  BINARY="nve-macos-arm64" ;;
-      x86_64) BINARY="nve-macos-x64" ;;
-      *)      error "Unsupported macOS architecture: $ARCH. Supported: arm64, x86_64." ;;
-    esac
-    ;;
-  Linux)
-    case "$ARCH" in
-      x86_64)  BINARY="nve-linux-x64" ;;
-      aarch64) BINARY="nve-linux-arm64" ;;
-      *)       error "Unsupported Linux architecture: $ARCH. Supported: x86_64, aarch64." ;;
-    esac
-    ;;
-  *)
-    error "Unsupported operating system: $OS. Use install.cmd for Windows."
-    ;;
-esac
+download_file() {
+  url="$1"
+  output="${2:-}"
 
-DOWNLOAD_URL="$BASE_URL/$BINARY"
-
-# --- Download helper ---
-download() {
   if command -v curl >/dev/null 2>&1; then
-    curl -fsSL "$1"
+    if [ -n "$output" ]; then
+      curl -fsSL -o "$output" "$url"
+    else
+      curl -fsSL "$url"
+    fi
   elif command -v wget >/dev/null 2>&1; then
-    wget -qO- "$1"
+    if [ -n "$output" ]; then
+      wget -qO "$output" "$url"
+    else
+      wget -qO- "$url"
+    fi
   else
-    error "Neither curl nor wget found. Please install one and try again."
+    error "Neither curl nor wget found. Install one and try again."
   fi
 }
 
-# --- Install ---
-info "Installing Elements CLI ($BINARY)..."
+run_with_spinner() {
+  message="$1"
+  success_message="$2"
+  shift 2
 
-mkdir -p "$INSTALL_DIR"
-
-info "Downloading..."
-download "$DOWNLOAD_URL" > "$INSTALL_DIR/$BIN_NAME"
-chmod +x "$INSTALL_DIR/$BIN_NAME"
-
-# macOS requires ad-hoc code signature for binaries to execute
-if [ "$OS" = "Darwin" ] && command -v codesign >/dev/null 2>&1; then
-  codesign --sign - --force "$INSTALL_DIR/$BIN_NAME" 2>/dev/null || warn "Ad-hoc code signing failed — binary may not run."
-fi
-
-info "Binary installed to $INSTALL_DIR/$BIN_NAME"
-
-# --- PATH setup ---
-add_to_path() {
-  EXPORT_LINE="export PATH=\"$INSTALL_DIR:\$PATH\""
-
-  case "$1" in
-    */fish/config.fish)
-      EXPORT_LINE="fish_add_path $INSTALL_DIR"
-      ;;
-  esac
-
-  if [ -f "$1" ] && grep -qF "$INSTALL_DIR" "$1" 2>/dev/null; then
-    return 0
+  if [ ! -t 2 ] || [ -n "${CI:-}" ]; then
+    printf "%s\n" "$message"
+    "$@"
+    return $?
   fi
 
-  printf '\n# Elements CLI\n%s\n' "$EXPORT_LINE" >> "$1"
-  info "Added $INSTALL_DIR to PATH in $1"
+  "$@" &
+  pid="$!"
+  frame_index=0
+
+  while kill -0 "$pid" 2>/dev/null; do
+    case "$frame_index" in
+      0) frame="|" ;;
+      1) frame="/" ;;
+      2) frame="-" ;;
+      *) frame="\\" ;;
+    esac
+    printf "\r%s %s" "$frame" "$message" >&2
+    frame_index=$(((frame_index + 1) % 4))
+    sleep 0.1
+  done
+
+  set +e
+  wait "$pid"
+  status="$?"
+  set -e
+
+  if [ "$status" -eq 0 ]; then
+    printf "\r\033[K%s\n" "$success_message" >&2
+  else
+    printf "\r\033[KFailed. %s\n" "$message" >&2
+  fi
+
+  return "$status"
 }
 
-IN_PATH=0
-case ":${PATH}:" in
-  *":$INSTALL_DIR:"*) IN_PATH=1 ;;
+get_manifest_field() {
+  field="$1"
+  compact_manifest="$(printf '%s' "$MANIFEST_JSON" | tr -d '\n\r\t ')"
+  printf '%s' "$compact_manifest" | sed -n "s/.*\"$PLATFORM_KEY\"[^{]*{[^}]*\"$field\":\"\([^\"]*\)\".*/\1/p"
+}
+
+get_sha256() {
+  file="$1"
+
+  if command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 "$file" | sed 's/ .*//'
+  elif command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$file" | sed 's/ .*//'
+  else
+    error "Neither shasum nor sha256sum found. Install one and try again."
+  fi
+}
+
+case "$(uname -s)" in
+  Darwin) OS="macos" ;;
+  Linux) OS="linux" ;;
+  *) error "Unsupported operating system: $(uname -s). Use install.ps1 for Windows." ;;
 esac
 
-if [ "$IN_PATH" -eq 0 ]; then
-  SHELL_NAME="$(basename "$SHELL" 2>/dev/null || echo "sh")"
-  case "$SHELL_NAME" in
-    bash)
-      if [ -f "$HOME/.bashrc" ]; then
-        add_to_path "$HOME/.bashrc"
-      elif [ -f "$HOME/.bash_profile" ]; then
-        add_to_path "$HOME/.bash_profile"
-      else
-        add_to_path "$HOME/.bashrc"
-      fi
-      ;;
-    zsh)
-      add_to_path "$HOME/.zshrc"
-      ;;
-    fish)
-      mkdir -p "$HOME/.config/fish"
-      add_to_path "$HOME/.config/fish/config.fish"
-      ;;
-    *)
-      warn "Could not detect shell. Add $INSTALL_DIR to your PATH manually."
-      ;;
-  esac
-  export PATH="$INSTALL_DIR:$PATH"
+case "$(uname -m)" in
+  arm64 | aarch64) ARCH="arm64" ;;
+  x86_64 | amd64) ARCH="x64" ;;
+  *) error "Unsupported architecture: $(uname -m)." ;;
+esac
+
+PLATFORM_KEY="$OS-$ARCH"
+MANIFEST_JSON="$(download_file "$BASE_URL/manifest.json")"
+BINARY="$(get_manifest_field "filename")"
+CHECKSUM="$(get_manifest_field "checksum")"
+
+if [ -z "$BINARY" ] || [ -z "$CHECKSUM" ]; then
+  error "Platform $PLATFORM_KEY not found in CLI manifest."
 fi
 
-# --- Verify ---
-printf "${GREEN}${BOLD}Elements CLI installed successfully!${RESET}\n"
+TMP_FILE="$(mktemp "${TMPDIR:-/tmp}/nve.XXXXXX")"
+run_with_spinner "Downloading Elements CLI..." "Downloaded Elements CLI." download_file "$BASE_URL/$BINARY" "$TMP_FILE"
 
-printf "\n  Run ${CYAN}nve${RESET} to get started.\n"
-
-if [ "$IN_PATH" -eq 0 ]; then
-  SHELL_RC=".bashrc"
-  case "$(basename "$SHELL" 2>/dev/null)" in
-    zsh)  SHELL_RC=".zshrc" ;;
-    fish) SHELL_RC=".config/fish/config.fish" ;;
-  esac
-  printf "  Restart your shell or run ${CYAN}source ~/%s${RESET} to update PATH.\n" "$SHELL_RC"
+ACTUAL_CHECKSUM="$(get_sha256 "$TMP_FILE")"
+if [ "$ACTUAL_CHECKSUM" != "$CHECKSUM" ]; then
+  error "Checksum verification failed for $BINARY."
 fi
-printf "\n"
+
+chmod +x "$TMP_FILE"
+"$TMP_FILE" install "$TMP_FILE"

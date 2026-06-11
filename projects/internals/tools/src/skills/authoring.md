@@ -1,6 +1,13 @@
-## Authoring Guidelines
+## Authoring Guidelines & Frontend Tasks
 
 **NEVER write nve-\* HTML from assumption—look up every API first.**
+
+Elements owns the visual system. The agent owns only composition.
+
+For UI artifacts using Elements:
+
+- Use Elements defaults for color, borders, surfaces, elevation, typography, and states.
+- Do not add gradients, custom palettes, custom card borders, shadows, background imagery, or decorative treatments unless the user explicitly requests custom art direction.
 
 ### Authoring UI Workflow
 

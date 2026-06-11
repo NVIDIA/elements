@@ -13,7 +13,7 @@
         "../site/dist/**",
         "../starters/dist/**",
         "../cli/dist/**",
-        "../cli/install.cmd",
+        "../cli/install.ps1",
         "../cli/install.sh",
         "../internals/metadata/static/**",
         "index.js",

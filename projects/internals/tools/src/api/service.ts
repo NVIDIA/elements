@@ -145,9 +145,16 @@ export class ApiService {
           type: 'string',
           description:
             'HTML template string containing Elements components (e.g., nve-*, nve-button, nve-input). Can be a full document or fragment.'
+        },
+        type: {
+          type: 'string',
+          description: 'The type of template to validate. Use "artifact" for standalone HTML files.',
+          enum: ['html', 'artifact'],
+          default: 'html'
         }
       },
-      required: ['template']
+      required: ['template'],
+      additionalProperties: false
     },
     outputSchema: {
       oneOf: [
@@ -161,9 +168,15 @@ export class ApiService {
       ]
     }
   })
-  static async templateValidate({ template }: { template: string }): Promise<TemplateLintMessage[]> {
+  static async templateValidate({
+    template,
+    type
+  }: {
+    template: string;
+    type: 'html' | 'artifact';
+  }): Promise<TemplateLintMessage[]> {
     const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
-    return await lintTemplate(template, { strict: false });
+    return await lintTemplate(template, { strict: type === 'artifact' });
   }
 
   @tool({

@@ -1,15 +1,15 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { execSync, spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { describe, it, expect } from 'vitest';
 import { VERSION } from './index.js';
 
 describe('index', () => {
-  const output = execSync('node dist/index.js').toString();
+  const output = execFileSync(process.execPath, ['dist/index.js']).toString();
 
   function runWithoutRequiredArgs(command: string) {
-    const result = spawnSync('node', ['dist/index.js', command], {
+    const result = spawnSync(process.execPath, ['dist/index.js', command], {
       timeout: 3000,
       encoding: 'utf-8',
       input: '' // close stdin so prompts don't hang
@@ -71,6 +71,10 @@ describe('index', () => {
     expect(output).toContain('nve api.tokens.list [format]');
   });
 
+  it('should not show hidden install command', () => {
+    expect(output).not.toContain('nve install');
+  });
+
   describe('interactive fallback for missing required args', () => {
     it('should not exit with validation error for project.create without <type>', () => {
       const result = runWithoutRequiredArgs('project.create');
@@ -93,7 +97,7 @@ describe('index', () => {
 
   describe('fail handler', () => {
     it('should exit with code 1 for invalid positional choice values', () => {
-      const result = spawnSync('node', ['dist/index.js', 'project.create', 'not-a-valid-type'], {
+      const result = spawnSync(process.execPath, ['dist/index.js', 'project.create', 'not-a-valid-type'], {
         timeout: 5000,
         encoding: 'utf-8',
         input: ''
@@ -106,7 +110,7 @@ describe('index', () => {
 
   describe('comma-separated array argument parsing', () => {
     it('should split a comma-separated string into individual values for array-type args', () => {
-      const result = spawnSync('node', ['dist/index.js', 'api.get', 'nve-foo,nve-bar'], {
+      const result = spawnSync(process.execPath, ['dist/index.js', 'api.get', 'nve-foo,nve-bar'], {
         timeout: 10000,
         encoding: 'utf-8',
         input: ''
@@ -120,7 +124,7 @@ describe('index', () => {
 
   describe('tool errors', () => {
     it('should exit with error when exact api lookup has no matches', () => {
-      const result = spawnSync('node', ['dist/index.js', 'api.get', 'nve-badges'], {
+      const result = spawnSync(process.execPath, ['dist/index.js', 'api.get', 'nve-badges'], {
         timeout: 10000,
         encoding: 'utf-8',
         input: ''
@@ -134,7 +138,7 @@ describe('index', () => {
 
     it('should print structured error results when they are available', () => {
       const result = spawnSync(
-        'node',
+        process.execPath,
         ['dist/index.js', 'playground.create', '<nve-button nve-layout="column">hello</nve-button>'],
         {
           timeout: 10000,

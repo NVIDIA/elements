@@ -17,6 +17,12 @@ const integrations = [
     description: 'Load prebuilt Elements bundles in static pages.'
   },
   {
+    href: 'docs/integrations/cdn/',
+    nveIcon: 'globe-alt-stroke',
+    title: 'CDN',
+    description: 'Load Elements from CDN-hosted npm packages.'
+  },
+  {
     href: 'docs/integrations/custom-elements/',
     nveIcon: 'code',
     title: 'Custom Elements',

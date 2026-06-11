@@ -10,6 +10,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { performance } from 'perf_hooks';
 import { type ManagedToolMethod, tools, ToolSupport, type Schema, isDebug, MAX_CONTEXT_TOKENS } from '@internals/tools';
+import { installNve } from './install.js';
 import { banner, colors, getArgValue, progressBar, renderResult, runAsyncTool } from './utils.js';
 import { notifyIfUpdateAvailable } from './update.js';
 
@@ -49,6 +50,21 @@ async function exitWithToolError(result: unknown, message: string | undefined): 
   console.error(result === undefined ? colors.error(message ?? 'unknown error') : await renderResult(result));
   process.exit(1);
 }
+
+yargsInstance.command(
+  'install [source]',
+  false,
+  builder => builder.positional('source', { type: 'string' }),
+  async argv => {
+    try {
+      await installNve({ source: typeof argv.source === 'string' ? argv.source : process.execPath });
+      process.exit(0);
+    } catch (e) {
+      console.error(colors.error(e instanceof Error ? e.message : String(e)));
+      process.exit(1);
+    }
+  }
+);
 
 yargsInstance.command(
   '$0',

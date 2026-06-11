@@ -84,7 +84,7 @@ describe('cli/utils', () => {
       Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
     });
 
-    it('should use windows command on win32', async () => {
+    it('should use windows powershell command on win32', async () => {
       const { execSync } = await import('node:child_process');
       vi.mocked(execSync).mockReturnValue('');
       const originalPlatform = process.platform;
@@ -92,7 +92,7 @@ describe('cli/utils', () => {
 
       await performUpgrade();
 
-      expect(execSync).toHaveBeenCalledWith(upgradeCommands['windows-cmd'], { stdio: 'inherit' });
+      expect(execSync).toHaveBeenCalledWith(upgradeCommands['windows-powershell'], { stdio: 'inherit' });
       Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
     });
   });
@@ -177,7 +177,7 @@ describe('cli/utils', () => {
       Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
     });
 
-    it('should use cmd with /c on win32', async () => {
+    it('should use cmd with powershell installer command on win32', async () => {
       const { spawn } = await import('node:child_process');
       vi.mocked(spawn).mockReturnValue(createMockChild('') as ReturnType<typeof spawn>);
       const originalPlatform = process.platform;
@@ -185,7 +185,7 @@ describe('cli/utils', () => {
 
       await performUpgrade(vi.fn());
 
-      expect(spawn).toHaveBeenCalledWith('cmd', ['/c', upgradeCommands['windows-cmd']], { stdio: 'pipe' });
+      expect(spawn).toHaveBeenCalledWith('cmd', ['/c', upgradeCommands['windows-powershell']], { stdio: 'pipe' });
       Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
     });
   });

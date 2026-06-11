@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 import { preview, build } from 'vite';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
+const DEFAULT_PORT = 4176;
 
 process.env.NODE_ENV = 'production';
 
@@ -26,7 +27,7 @@ export class VitePlaywrightRunner {
   }
 
   get port() {
-    return this.#server?.httpServer?.address()?.port ?? 4176;
+    return this.#serverPort ?? this.#storedPort ?? DEFAULT_PORT;
   }
 
   get #root() {
@@ -35,6 +36,24 @@ export class VitePlaywrightRunner {
 
   get #dist() {
     return `.${this.#runnerID}/dist`;
+  }
+
+  get #portFile() {
+    return `.${this.#runnerID}/port`;
+  }
+
+  get #serverPort() {
+    const address = this.#server?.httpServer?.address();
+    return typeof address === 'object' ? address?.port : undefined;
+  }
+
+  get #storedPort() {
+    try {
+      const port = Number(fs.readFileSync(this.#portFile, 'utf-8').trim());
+      return Number.isInteger(port) && port > 0 && port <= 65535 ? port : undefined;
+    } catch {
+      return undefined;
+    }
   }
 
   constructor(config = {}) {
@@ -80,7 +99,11 @@ export class VitePlaywrightRunner {
       this.#page = await (await this.#browser.newContext({ viewport: { width: 1180, height: 820 } })).newPage();
       this.#page.on('crash', data => console.error('playwright-runner: browser crashed', data));
       console.log('playwright-runner: creating server');
-      this.#server = await preview({ root: this.#root, preview: { port: this.port, open: false } });
+      this.#server = await preview({
+        root: this.#root,
+        preview: { port: this.#storedPort ?? DEFAULT_PORT, open: false }
+      });
+      fs.writeFileSync(this.#portFile, String(this.port));
       console.log(`playwright-runner: server running at port ${this.port}`);
     }
   }

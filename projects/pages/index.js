@@ -11,7 +11,7 @@ cpSync('../internals/metadata/static/examples.json', './dist/metadata/examples.j
 cpSync('../internals/metadata/static/projects.json', './dist/metadata/projects.json');
 
 cpSync('../cli/install.sh', './dist/install.sh');
-cpSync('../cli/install.cmd', './dist/install.cmd');
+cpSync('../cli/install.ps1', './dist/install.ps1');
 if (existsSync('../cli/dist')) {
   mkdirSync('./dist/cli', { recursive: true });
   for (const bin of ['nve-macos-arm64', 'nve-linux-x64', 'nve-linux-arm64', 'nve-windows-x64']) {
@@ -20,7 +20,7 @@ if (existsSync('../cli/dist')) {
     if (existsSync(src)) {
       cpSync(src, `./dist/cli/${bin}`);
     } else if (existsSync(srcExe)) {
-      cpSync(srcExe, `./dist/cli/${bin}`);
+      cpSync(srcExe, `./dist/cli/${bin}.exe`);
     }
   }
   if (existsSync('../cli/dist/manifest.json')) {

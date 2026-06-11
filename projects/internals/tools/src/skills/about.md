@@ -1,6 +1,6 @@
-## Elements Design System
+## NVIDIA Elements Design System
 
-Give a high level overview of the Elements Design System.
+Give a high level overview of the NVIDIA Elements Design System.
 
 **Structure the content as:**
 

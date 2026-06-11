@@ -190,6 +190,7 @@ export function isObjectLiteral(item: unknown) {
 }
 
 let markedConfigured = false;
+const frontmatterPattern = /^(---\n[\s\S]*?\n---)(?:\n+|$)/;
 
 function configureMarkedTerminal() {
   if (markedConfigured) return;
@@ -212,6 +213,20 @@ function configureMarkedTerminal() {
   );
 }
 
+async function renderMarkdownResult(result: string): Promise<string> {
+  configureMarkedTerminal();
+  const frontmatterMatch = frontmatterPattern.exec(result);
+
+  if (!frontmatterMatch) {
+    return await marked.parse(result);
+  }
+
+  const frontmatter = frontmatterMatch[1]!;
+  const markdown = result.slice(frontmatterMatch[0].length);
+
+  return markdown ? `${frontmatter}\n\n${await marked.parse(markdown)}` : `${frontmatter}\n`;
+}
+
 export async function renderResult(result: unknown) {
   let formattedResult = '';
   if (isReport(result)) {
@@ -222,8 +237,7 @@ export async function renderResult(result: unknown) {
   } else if (typeof result === 'string' && result.trim().startsWith('http') && !result.includes('\n')) {
     formattedResult = colors.complete(wrapUrl(result));
   } else if (typeof result === 'string') {
-    configureMarkedTerminal();
-    formattedResult = await marked.parse(result);
+    formattedResult = await renderMarkdownResult(result);
   } else {
     formattedResult = result as string;
   }

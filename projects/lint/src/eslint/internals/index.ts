@@ -29,9 +29,9 @@ interface TemplateLintOptions {
 }
 
 const strictTemplateRules: Partial<Linter.RulesRecord> = {
+  '@nvidia-elements/lint/no-unexpected-style-customization': ['warn'],
   '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { distilled: true }],
   '@nvidia-elements/lint/no-tailwind-classes': ['error', { strict: true }],
-  '@nvidia-elements/lint/no-unexpected-style-customization': ['error'],
   '@nvidia-elements/lint/no-missing-gap-space': ['error'],
   '@nvidia-elements/lint/no-missing-slotted-elements': ['error', { 'nve-card': { required: ['nve-card-content'] } }]
 };

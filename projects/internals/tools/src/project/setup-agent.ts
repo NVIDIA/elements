@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import { getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
 import { claudeProjectSettings } from './starters.js';
-import { skills } from '../skills/index.js';
+import { formatSkillMarkdown, skills } from '../skills/index.js';
 
 type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
 
@@ -119,14 +119,7 @@ export function writeElementsSkill(skillDir: string): string {
   mkdirSync(skillDir, { recursive: true });
 
   const skillPath = join(skillDir, 'SKILL.md');
-  const content = `---
-name: ${skill.name}
-title: ${skill.title}
-description: ${skill.description}
----
-${skill.context}`;
-
-  writeFileSync(skillPath, content);
+  writeFileSync(skillPath, formatSkillMarkdown(skill));
   return skillPath;
 }
 

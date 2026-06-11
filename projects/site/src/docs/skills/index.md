@@ -49,7 +49,7 @@ Place the selected skill content in the directory format supported by your agent
 ---
 name: elements
 title: Elements Design System (nve)
-description: Build UI with NVIDIA Elements (NVE). Use when creating, editing, or reviewing HTML templates that use nve-* components.
+description: Use this skill by default for any UI-related work or with NVIDIA Elements (nve-*), including creating, editing, reviewing, or debugging HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts.
 ---
 
 # Building UI with NVIDIA Elements
@@ -71,46 +71,53 @@ For Claude Code, use:
 
 ## Available Skills
 
+The default `nve skills.list` command and MCP `skills_list` tool expose these bundled skills.
+
 <nve-grid>
   <nve-grid-header>
     <nve-grid-column width="170px">Skill</nve-grid-column>
-    <nve-grid-column width="300px">Use</nve-grid-column>
-    <nve-grid-column>Benefit</nve-grid-column>
+    <nve-grid-column width="300px">Title</nve-grid-column>
+    <nve-grid-column>Description</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">elements</code></nve-grid-cell>
-    <nve-grid-cell>General Elements UI authoring, editing, and review.</nve-grid-cell>
-    <nve-grid-cell>Gives the agent a broad Elements workflow, tool map, authoring rules, playground guidance, and project integration guidance.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">about</code></nve-grid-cell>
+    <nve-grid-cell>Elements Design System Introduction</nve-grid-cell>
+    <nve-grid-cell>Instructions for providing a brief introduction for using the Elements Design System.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">authoring</code></nve-grid-cell>
-    <nve-grid-cell>Creating or changing HTML templates with <code nve-text="code">nve-*</code> APIs.</nve-grid-cell>
-    <nve-grid-cell>Forces lookup-first authoring: search examples, inspect APIs, generate imports, then validate the template.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">search</code></nve-grid-cell>
-    <nve-grid-cell>Finding components, examples, icons, and tokens.</nve-grid-cell>
-    <nve-grid-cell>Points the agent at the right CLI and MCP lookup tools before it guesses component names or attributes.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">integration</code></nve-grid-cell>
-    <nve-grid-cell>Creating starters or adding Elements to an existing project.</nve-grid-cell>
-    <nve-grid-cell>Defines the setup sequence: create or update the project, install packages, configure MCP, import CSS, register components, and validate.</nve-grid-cell>
+    <nve-grid-cell>NVIDIA Elements Authoring Guidelines</nve-grid-cell>
+    <nve-grid-cell>Best practices and workflow guidance for authoring UI with NVIDIA Elements.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">doctor</code></nve-grid-cell>
-    <nve-grid-cell>Checking project and MCP setup.</nve-grid-cell>
-    <nve-grid-cell>Guides the agent toward `nve project.validate` and MCP configuration checks before changing source code.</nve-grid-cell>
+    <nve-grid-cell>Elements Design System Doctor / Setup Check</nve-grid-cell>
+    <nve-grid-cell>Instructions for ensuring the Elements Design System is setup correctly.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">artifact</code></nve-grid-cell>
+    <nve-grid-cell>NVIDIA Artifact Template</nve-grid-cell>
+    <nve-grid-cell>Use when creating throwaway UI artifacts, prototypes, demos, Claude Artifacts, Codex, or GPT Sites pages, or other standalone HTML interfaces that should use the NVIDIA Elements CDN template.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">integration</code></nve-grid-cell>
+    <nve-grid-cell>NVIDIA Elements Project Integration</nve-grid-cell>
+    <nve-grid-cell>Best practices and workflow guidance for creating or setting up NVIDIA Elements projects.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">migration</code></nve-grid-cell>
-    <nve-grid-cell>Migrating from deprecated Elements APIs or internal package names.</nve-grid-cell>
-    <nve-grid-cell>Combines package mapping, lint setup, deprecated API replacement, and validation into one ordered workflow.</nve-grid-cell>
+    <nve-grid-cell>Migrate from Deprecated Elements APIs</nve-grid-cell>
+    <nve-grid-cell>Instructions for migrating a project from deprecated Elements APIs using lint tooling and CLI health checks.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">about</code></nve-grid-cell>
-    <nve-grid-cell>Explaining Elements to developers who are new to the system.</nve-grid-cell>
-    <nve-grid-cell>Provides concise product context, benefits, getting started guidance, and resource links.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">search</code></nve-grid-cell>
+    <nve-grid-cell>Searching and Providing Elements API Documentation</nve-grid-cell>
+    <nve-grid-cell>Best practices for providing Elements API Documentation.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">elements</code></nve-grid-cell>
+    <nve-grid-cell>Elements Design System (nve)</nve-grid-cell>
+    <nve-grid-cell>Default skill for UI-related work or NVIDIA Elements (<code nve-text="code">nve-*</code>), including HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts.</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>
 

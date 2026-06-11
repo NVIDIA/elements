@@ -13,12 +13,12 @@ export function renderInstallCLIShortcode() {
   return /* html */ `
 ## Install CLI
 
-Install the Elements CLI to your system. This will add the \`nve\` command to your path and provide several helpful commands for working with Elements.
+Install the Elements CLI to your system. This creates a canonical executable path and adds the \`nve\` command to your path when possible.
 
 <div id="install-cli-tab-group">
   <nve-tabs id="install-cli-tabs">
-    <nve-tabs-item selected value="install-cli-macos">MacOS / Linux</nve-tabs-item>
-    <nve-tabs-item value="install-cli-windows">Windows CMD</nve-tabs-item>
+    <nve-tabs-item selected value="install-cli-macos">macOS / Linux</nve-tabs-item>
+    <nve-tabs-item value="install-cli-windows">Windows PowerShell</nve-tabs-item>
     <nve-tabs-item value="install-cli-nodejs">NodeJS</nve-tabs-item>
   </nve-tabs>
   <nve-divider></nve-divider>
@@ -34,8 +34,8 @@ curl -fsSL ${ELEMENTS_PAGES_BASE_URL}/install.sh | bash
 
 <div id="install-cli-windows" hidden style="height: 65px">
 
-\`\`\`shell
-curl -fsSL ${ELEMENTS_PAGES_BASE_URL}/install.cmd -o install.cmd && install.cmd && del install.cmd
+\`\`\`powershell
+irm ${ELEMENTS_PAGES_BASE_URL}/install.ps1 | iex
 \`\`\`
 
 </div>

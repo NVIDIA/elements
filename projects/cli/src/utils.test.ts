@@ -540,6 +540,23 @@ describe('utils', () => {
       expect(result).toBe('parsed markdown');
     });
 
+    it('should preserve leading frontmatter when rendering markdown', async () => {
+      const markdown = `---
+name: "authoring"
+description: "Authoring guidance"
+---
+
+# Authoring`;
+      const result = await renderResult(markdown);
+      expect(marked.parse).toHaveBeenCalledWith('# Authoring');
+      expect(result).toBe(`---
+name: "authoring"
+description: "Authoring guidance"
+---
+
+parsed markdown`);
+    });
+
     it('should render other values directly', async () => {
       const result = await renderResult(42);
       expect(result).toBe(42);

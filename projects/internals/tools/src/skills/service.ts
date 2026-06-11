@@ -4,6 +4,7 @@
 import { service, tool } from '../internal/tools.js';
 import { markdownDescription } from '../internal/utils.js';
 import { skills, type Skill } from './registry.js';
+import { formatSkillMarkdown } from './markdown.js';
 
 type OutputFormat = 'markdown' | 'json';
 
@@ -101,6 +102,6 @@ export class SkillsService {
       throw new Error(`Unknown skill "${name}".\n\nAvailable skills: ${skillNames}`);
     }
 
-    return format === 'json' ? skill : skill.context;
+    return format === 'json' ? skill : formatSkillMarkdown(skill);
   }
 }

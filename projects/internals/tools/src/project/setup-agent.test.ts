@@ -39,6 +39,16 @@ vi.mock('./starters.js', () => ({
 }));
 
 vi.mock('../skills/index.js', () => ({
+  formatSkillMarkdown: vi.fn(
+    (skill: { name: string; title: string; description: string; context: string }) => `---
+name: "${skill.name}"
+title: "${skill.title}"
+description: "${skill.description}"
+---
+
+${skill.context}
+`
+  ),
   skills: [
     {
       name: 'elements',
@@ -382,9 +392,9 @@ describe('setup-mcp', () => {
       expect(skillPath).toContain('SKILL.md');
 
       const content = vi.mocked(writeFileSync).mock.calls[0][1] as string;
-      expect(content).toContain('name: elements');
-      expect(content).toContain('title: Elements Design System (nve)');
-      expect(content).toContain('description: Build UI with NVIDIA Elements');
+      expect(content).toContain('name: "elements"');
+      expect(content).toContain('title: "Elements Design System (nve)"');
+      expect(content).toContain('description: "Build UI with NVIDIA Elements"');
       expect(content).toContain('## Elements Context');
     });
 

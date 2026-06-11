@@ -11,7 +11,7 @@ export class CliService {
   @tool({
     summary: 'Upgrade the Elements CLI (nve) to the latest version.',
     description:
-      'Downloads and installs the latest version of the nve CLI. On macOS/Linux this runs the install script, on Windows it runs the install command.',
+      'Downloads and installs the latest version of the nve CLI. On macOS/Linux this runs the shell bootstrapper, on Windows it runs the PowerShell bootstrapper.',
     support: ToolSupport.MCP,
     annotations: {
       destructiveHint: true,

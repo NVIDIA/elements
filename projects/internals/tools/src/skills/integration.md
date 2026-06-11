@@ -1,4 +1,4 @@
-## Creating Elements Starter Project
+## Creating Starter Project
 
 Best practices and guidelines for creating an Elements Starter Project.
 

@@ -60,6 +60,15 @@ A visual indicator that communicates a status description of an associated compo
 ...
 ```
 
+### Skills
+
+Use skills to give AI agents persistent Elements workflow context. The CLI and MCP server expose the same default skill set.
+
+```shell
+nve skills.list
+nve skills.get elements
+```
+
 ## Commands
 
 <nve-grid>
@@ -110,6 +119,14 @@ A visual indicator that communicates a status description of an associated compo
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve examples.list [format]</code></nve-grid-cell>
     <nve-grid-cell>Get list of available Elements (nve-*) patterns and examples.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve skills.list [format]</code></nve-grid-cell>
+    <nve-grid-cell>Get available bundled Elements agent skills and context.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve skills.get &lt;name&gt; [format]</code></nve-grid-cell>
+    <nve-grid-cell>Get a bundled Elements agent skill by name.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve playground.validate &lt;template&gt;</code></nve-grid-cell>

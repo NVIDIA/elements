@@ -39,6 +39,7 @@ CSS
 css
 HTML
 html
+jsDelivr
 DOM
 dom
 Artifactory

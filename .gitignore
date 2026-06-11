@@ -23,6 +23,7 @@ __screenshots__
 vite.*.ts.timestamp*
 .11ty-vite
 .gitlab/scripts/
+port
 
 # Vale
 config/vale/bin

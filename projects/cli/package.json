@@ -42,10 +42,8 @@
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
-    "nve:install": "pnpm run build && mkdir -p $HOME/.local/bin && cp dist/nve-macos-arm64 $HOME/.local/bin/nve && codesign --sign - --force $HOME/.local/bin/nve",
-    "nve:uninstall": "rm -f $HOME/.local/bin/nve",
-    "nve:install:node": "test -n \"$CI\" || pnpm link --global",
-    "nve:uninstall:node": "pnpm uninstall --global @nvidia-elements/cli"
+    "cli:install": "pnpm run build && NVE_BASE_URL=\"file://$PWD/dist\" ./install.sh",
+    "cli:uninstall": "root=\"${NVE_HOME:-$HOME/.nve}\" && rm -f \"$root/bin/nve\" \"$root/manifest.json\" \"$HOME/.local/bin/nve\" && (rmdir \"$root/bin\" \"$root\" 2>/dev/null || true)"
   },
   "dependencies": {
     "@inquirer/prompts": "8.5.0",
@@ -97,9 +95,12 @@
       "output": []
     },
     "build": {
-      "command": "bun build --compile --minify dist/index.js --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64 && (command -v codesign >/dev/null && codesign --sign - --force dist/nve-macos-arm64 || true) && bun build --compile --minify dist/index.js --target=bun-darwin-x64 --outfile dist/nve-macos-x64 && (command -v codesign >/dev/null && codesign --sign - --force dist/nve-macos-x64 || true) && bun build --compile --minify --target=bun-linux-x64 dist/index.js --outfile dist/nve-linux-x64 && bun build --compile --minify --target=bun-linux-arm64 dist/index.js --outfile dist/nve-linux-arm64 && bun build --compile --minify --target=bun-windows-x64-modern dist/index.js --outfile dist/nve-windows-x64",
+      "command": "bun build --compile --minify dist/index.js --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64 && (command -v codesign >/dev/null && codesign --sign - --force dist/nve-macos-arm64 || true) && bun build --compile --minify dist/index.js --target=bun-darwin-x64 --outfile dist/nve-macos-x64 && (command -v codesign >/dev/null && codesign --sign - --force dist/nve-macos-x64 || true) && bun build --compile --minify --target=bun-linux-x64 dist/index.js --outfile dist/nve-linux-x64 && bun build --compile --minify --target=bun-linux-arm64 dist/index.js --outfile dist/nve-linux-arm64 && bun build --compile --minify --target=bun-windows-x64-modern dist/index.js --outfile dist/nve-windows-x64 && node scripts/write-install-manifest.mjs",
       "files": [
         "../internals/tools/dist/**/*.js",
+        "install.ps1",
+        "install.sh",
+        "scripts/**",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
@@ -107,6 +108,7 @@
         "tsconfig.lib.json"
       ],
       "output": [
+        "dist/manifest.json",
         "dist/nve-macos-arm64",
         "dist/nve-linux-arm64",
         "dist/nve-macos-x64",
@@ -137,8 +139,7 @@
       ],
       "output": [
         "dist/**/*.js",
-        "dist/**/*.d.ts",
-        "dist/manifest.json"
+        "dist/**/*.d.ts"
       ],
       "env": {
         "CI": {
@@ -200,6 +201,8 @@
       "files": [
         "dist/**/*.js",
         "dist/**/*.html",
+        "install.ps1",
+        "install.sh",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"
@@ -223,6 +226,8 @@
       "files": [
         "dist/**/*.js",
         "dist/**/*.html",
+        "install.ps1",
+        "install.sh",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"

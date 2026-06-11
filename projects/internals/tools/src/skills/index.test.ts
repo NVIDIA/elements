@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { prompts, skills, type Prompt, type Skill } from './index.js';
+import { formatSkillMarkdown, prompts, skills, type Prompt, type Skill } from './index.js';
 
 describe('prompts', () => {
   it('should export an array of prompts', () => {
@@ -74,6 +74,16 @@ describe('prompts', () => {
       expect(result?.messages[0].content.text).toContain('MCP');
     });
 
+    it('should have "artifact" prompt with the standalone HTML template', () => {
+      const artifactPrompt = prompts.find(p => p.name === 'artifact');
+      expect(artifactPrompt).toBeDefined();
+      expect(artifactPrompt?.title).toBe('NVIDIA Artifact Template');
+
+      const result = artifactPrompt?.handler({});
+      expect(result?.messages[0].content.text).toContain('<title>NVIDIA Elements Artifact</title>');
+      expect(result?.messages[0].content.text).toContain('@nvidia-elements/core/dist/bundles/index.min.js');
+    });
+
     it('should have "search" prompt for API documentation', () => {
       const searchPrompt = prompts.find(p => p.name === 'search');
       expect(searchPrompt).toBeDefined();
@@ -137,8 +147,32 @@ describe('skillEntries', () => {
     expect(uniqueNames.size).toBe(names.length);
   });
 
-  it('should include authoring and elements entries', () => {
+  it('should include authoring, artifact, and elements entries', () => {
     expect(skills.some(skill => skill.name === 'authoring')).toBe(true);
+    expect(skills.some(skill => skill.name === 'artifact')).toBe(true);
     expect(skills.some(skill => skill.name === 'elements')).toBe(true);
+  });
+
+  it('should default elements skill guidance to UI and artifact work', () => {
+    const elementsSkill = skills.find(skill => skill.name === 'elements');
+    expect(elementsSkill?.description).toContain('any UI-related work');
+    expect(elementsSkill?.description).toContain('standalone UI artifacts');
+    expect(elementsSkill?.context).toContain('prefer the canonical absolute executable path');
+    expect(elementsSkill?.context).toContain('$HOME/.nve/bin/nve');
+    expect(elementsSkill?.context).toContain('## Creating an Artifact');
+    expect(elementsSkill?.context).toContain('@nvidia-elements/core/dist/bundles/index.min.js');
+  });
+
+  it('should format skills as installable markdown files', () => {
+    const elementsSkill = skills.find(skill => skill.name === 'elements');
+    expect(elementsSkill).toBeDefined();
+    if (!elementsSkill) return;
+
+    const markdown = formatSkillMarkdown(elementsSkill);
+
+    expect(markdown).toMatch(/^---\nname: "elements"\ntitle: "Elements Design System \(nve\)"/);
+    expect(markdown).toContain('description: "Use this skill by default');
+    expect(markdown).toContain('# Building UI with NVIDIA Elements');
+    expect(markdown.endsWith('\n')).toBe(true);
   });
 });

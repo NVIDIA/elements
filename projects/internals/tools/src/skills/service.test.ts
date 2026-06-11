@@ -26,6 +26,14 @@ describe('SkillsService', () => {
 
   it('should get a skill context as markdown by default', async () => {
     const result = await SkillsService.get({ name: 'authoring' });
+    expect(result).toContain(
+      `---
+name: "authoring"
+title: "NVIDIA Elements Authoring Guidelines"
+description: "Best practices and workflow guidance for authoring UI with NVIDIA Elements."
+---`
+    );
+    expect(result).toMatch(/^---\nname: "authoring"/);
     expect(result).toContain('## Authoring Guidelines');
     expect((SkillsService.get as ToolMethod<unknown>).metadata.name).toBe('get');
     expect((SkillsService.get as ToolMethod<unknown>).metadata.command).toBe('get');
@@ -36,6 +44,13 @@ describe('SkillsService', () => {
     const result = (await SkillsService.get({ name: 'elements', format: 'json' })) as Skill;
     expect(result.name).toBe('elements');
     expect(result.context).toContain('Building UI with NVIDIA Elements');
+  });
+
+  it('should get the artifact skill context', async () => {
+    const result = await SkillsService.get({ name: 'artifact' });
+    expect(result).toContain('name: "artifact"');
+    expect(result).toContain('<title>NVIDIA Elements Artifact</title>');
+    expect(result).toContain('@nvidia-elements/core/dist/bundles/index.min.js');
   });
 
   it('should match skill names case-insensitively', async () => {

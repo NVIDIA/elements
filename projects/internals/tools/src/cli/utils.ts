@@ -10,7 +10,7 @@ export type ProgressCallback = (message: string) => void;
 
 export const upgradeCommands = {
   'macos/linux': `curl -fsSL ${__ELEMENTS_PAGES_BASE_URL__}/install.sh | bash`,
-  'windows-cmd': `curl -fsSL ${__ELEMENTS_PAGES_BASE_URL__}/install.cmd -o install.cmd && install.cmd && del install.cmd`,
+  'windows-powershell': `powershell -NoProfile -ExecutionPolicy Bypass -Command "$script = Join-Path $env:TEMP 'nve-install.ps1'; Invoke-WebRequest -UseBasicParsing '${__ELEMENTS_PAGES_BASE_URL__}/install.ps1' -OutFile $script; & $script; Remove-Item $script -ErrorAction SilentlyContinue"`,
   nodejs: 'npm install -g @nvidia-elements/cli'
 };
 
@@ -21,7 +21,7 @@ export const upgradeCommands = {
  * script sees a real TTY and preserves colors (used by CLI).
  */
 export async function performUpgrade(onProgress?: ProgressCallback): Promise<Report> {
-  const command = process.platform === 'win32' ? upgradeCommands['windows-cmd'] : upgradeCommands['macos/linux'];
+  const command = process.platform === 'win32' ? upgradeCommands['windows-powershell'] : upgradeCommands['macos/linux'];
 
   if (onProgress) {
     return runAsync(command, onProgress);
