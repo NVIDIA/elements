@@ -1,3 +1,15 @@
+## 2.1.0 (2026-06-13)
+
+* chore(core): remove unused controllers ([59d8349](https://github.com/NVIDIA/elements/commit/59d8349))
+* chore(release): @nvidia-elements/code-v2.0.1 [skip ci] ([005d158](https://github.com/NVIDIA/elements/commit/005d158))
+* chore(release): @nvidia-elements/forms-v2.0.1 [skip ci] ([adb732e](https://github.com/NVIDIA/elements/commit/adb732e))
+* chore(release): @nvidia-elements/markdown-v2.0.1 [skip ci] ([931f033](https://github.com/NVIDIA/elements/commit/931f033))
+* chore(release): @nvidia-elements/styles-v2.0.2 [skip ci] ([98a4325](https://github.com/NVIDIA/elements/commit/98a4325))
+* chore(themes): add additional tests for css variable completions ([cbf14f8](https://github.com/NVIDIA/elements/commit/cbf14f8))
+* feat(cli): improve installer script ([0379d0e](https://github.com/NVIDIA/elements/commit/0379d0e))
+* fix(forms): improve aria attribute management ([daab45f](https://github.com/NVIDIA/elements/commit/daab45f))
+* fix(styles): use logical direction styles ([2edd48c](https://github.com/NVIDIA/elements/commit/2edd48c))
+
 ## <small>2.0.1 (2026-06-10)</small>
 
 * chore(media): update peer dependency version ([082a5f2](https://github.com/NVIDIA/elements/commit/082a5f2))
