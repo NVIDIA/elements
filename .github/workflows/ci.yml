@@ -104,7 +104,7 @@ jobs:
           # semantic-release pushes with — otherwise the default GITHUB_TOKEN's
           # http.extraheader overrides @semantic-release/git's push auth.
           token: ${{secrets.RELEASE_TOKEN}}
-      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
         with:
           version: 11.0.8
           run_install: false
