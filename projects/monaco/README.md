@@ -1,5 +1,7 @@
 # @nvidia-elements/monaco
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 Integration with VS Code's Monaco editor for code editing, syntax highlighting, and diff visualization.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/monaco/)

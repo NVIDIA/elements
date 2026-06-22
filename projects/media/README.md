@@ -1,5 +1,7 @@
 # @nvidia-elements/media
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 Media playback UI components for Elements.
 
 - [Documentation](https://NVIDIA.github.io/elements/)

@@ -1,5 +1,7 @@
 # @nvidia-elements/code
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 Syntax-highlighted code block components supporting many programming languages.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/code/)

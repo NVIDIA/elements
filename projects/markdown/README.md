@@ -1,5 +1,7 @@
 # @nvidia-elements/markdown
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 A Web Component for rendering markdown content with full styling support.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/markdown/)

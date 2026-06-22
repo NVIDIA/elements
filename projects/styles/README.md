@@ -1,5 +1,7 @@
 # @nvidia-elements/styles
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.
 
 - [Documentation](https://NVIDIA.github.io/elements/)

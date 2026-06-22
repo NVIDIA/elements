@@ -1,5 +1,7 @@
 # @nvidia-elements/themes
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/foundations/themes/)

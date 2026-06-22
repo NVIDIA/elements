@@ -1,6 +1,6 @@
 # NVIDIA Elements
 
-The Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
 
 - **Agent-ready tooling:** CLI and MCP expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.
 - **Framework agnostic:** Web Components run in React, Angular, Vue, Svelte, Lit, plain HTML, server-rendered templates, and mixed stacks.
