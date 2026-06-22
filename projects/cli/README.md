@@ -1,5 +1,7 @@
 # @nvidia-elements/cli
 
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
+
 The **@nvidia-elements/cli** is a dual-mode command-line tool for the Elements Design System. It provides interactive CLI commands and a Model Context Protocol (MCP) server for AI assistant integration.
 
 ## Purpose

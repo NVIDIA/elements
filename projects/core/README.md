@@ -1,6 +1,6 @@
 # @nvidia-elements/core
 
-The design language for AI/ML factories. Provides a set of accessible, theme-ready UI elements.
+NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)

@@ -1,13 +1,13 @@
 ---
 {
-  title: 'NVIDIA Elements Design System for AI UI',
+  title: 'NVIDIA Design System for AI UI',
   description: 'NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AI infrastructure, robotics, and autonomous vehicle UI.',
   layout: 'docs.11ty.js'
 }
 ---
 
 <div nve-layout="column gap:lg pad-top:lg">
-  <h1 nve-text="display sm">Elements</h1>
+  <h1 nve-text="display sm">NVIDIA Elements</h1>
   <h2 nve-text="heading">The Design Language and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles</h2>
 </div>
 <nve-divider></nve-divider>
@@ -26,7 +26,7 @@
   </div>
   <div nve-layout="column gap:sm">
     <p nve-text="label semibold">Stable API Contracts</p>
-    <p nve-text="body sm muted"><a href="docs/mcp/#skills" nve-text="link no-visit">Skills</a> and <a href="docs/lint/" nve-text="link no-visit">lint</a> guide authoring best practices, common UI patterns and automated static analysis.</p>
+    <p nve-text="body sm muted"><a href="docs/mcp/#skills" nve-text="link no-visit">Skills</a> and <a href="docs/lint/" nve-text="link no-visit">lint</a> guide authoring best practices, common Design System UI patterns and automated static analysis.</p>
   </div>
 </section>
 <nve-divider></nve-divider>
