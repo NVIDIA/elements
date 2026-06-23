@@ -20,8 +20,31 @@ function escapeAttr(value) {
     .replace(/'/g, '&#39;');
 }
 
-function getCanonicalUrl(example) {
-  const path = example.elementName ? `/docs/elements/${example.elementName}/examples/` : '/examples/';
+function getPatternName(example) {
+  return example.entrypoint?.match(/^@internals\/patterns\/([^/]+)\.examples\.json$/)?.[1] ?? null;
+}
+
+export function getCanonicalPath(example) {
+  const patternName = getPatternName(example);
+
+  if (patternName) return `/docs/patterns/${patternName}/`;
+  if (example.elementName) return `/docs/elements/${example.elementName}/examples/`;
+
+  return '/examples/';
+}
+
+export function getDocumentationPath(example) {
+  const patternName = getPatternName(example);
+
+  if (patternName) return `/docs/patterns/${patternName}/`;
+  if (example.elementName) return `/docs/elements/${example.elementName}/`;
+
+  return '/examples/';
+}
+
+export function getCanonicalUrl(example) {
+  const path = getCanonicalPath(example);
+
   return `${SITE_ORIGIN}${PATH_PREFIX}${path}`;
 }
 
@@ -67,7 +90,7 @@ export async function render(data) {
   <body data-pagefind-ignore="all">
     <div id="iframe-links" nve-layout="row gap:sm align:right" hidden>
       <a href="${await PlaygroundService.create({ template: data.example.template, name: data.example.id })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
-      <a href="/docs/elements/${data.example.elementName}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
+      <a href="${getDocumentationPath(data.example)}" target="_blank" nve-text="link body sm">documentation &#8599;</a>
     </div>
     <div id="example-container" data-element="${data.example.id}">
       ${data.example.template}
