@@ -21,7 +21,7 @@
 
 ## Frameworks
 
-Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](/docs/about/installation/) page.
+Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](/docs/integrations/installation/) page.
 
 <section nve-layout="row gap:sm align:wrap">
   <nve-button>
@@ -49,7 +49,7 @@ Elements [supports a wide variety](https://custom-elements-everywhere.com) of Ja
     <a href="/docs/integrations/solidjs/">{% svg-logo 'solidjs' '18' %} SolidJS</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/about/installation/">{% svg-logo 'javascript' '18' %} JavaScript</a>
+    <a href="/docs/integrations/installation/">{% svg-logo 'javascript' '18' %} JavaScript</a>
   </nve-button>
 </section>
 

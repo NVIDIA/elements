@@ -13,7 +13,7 @@ This guide facilitates and streamlines your contribution process and helps ensur
 The team may not accept all contributions or may need more time before implementation. Take into account that a design system component or pattern requires a significant amount of time. Each use case, many apps, frameworks, API design, and guidelines applicable to all must be carefully considered.
 The main focus is to enable you to deliver value to your users.
 
-<img src="static/images/contributions.drawio.svg" alt="Flowchart for evaluating a potential Elements contribution against existing features, similar patterns, and whether to use, request, or build custom functionality." style="padding: 12px 0 0 0" />
+<img src="/static/images/contributions.drawio.svg" alt="Flowchart for evaluating a potential Elements contribution against existing features, similar patterns, and whether to use, request, or build custom functionality." style="padding: 12px 0 0 0" />
 
 ## Types of Contributions
 
@@ -37,7 +37,7 @@ The main focus is to enable you to deliver value to your users.
 
 ## Bug Reporting
 
-1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it. Use the [Elements Playground]({{ELEMENTS_PLAYGROUND_BASE_URL}}/ui/elements-playground) to provide a minimal reproducible example if possible.
+1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it. Use the [Elements Playground]({{ELEMENTS_PLAYGROUND_BASE_URL}}/ui/elements-playground/browse.html) to provide a minimal reproducible example if possible.
 
 ## Feature Requests
 

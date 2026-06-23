@@ -3,10 +3,15 @@ import { relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-const RELATIVE_INTERNAL_LINK_PATTERN = /(?:href=["']|]\()(?:\.\/)?(?:docs|examples|starters)\//;
-const BASE_PREFIXED_INTERNAL_LINK_PATTERN = /(?:href=["']|]\()\/elements\/(?:docs|examples|starters)\//;
-const JS_RELATIVE_INTERNAL_LINK_PATTERN = /\bhref:\s*['"](?:\.\/)?(?:docs|examples|starters)\//;
-const JS_BASE_PREFIXED_INTERNAL_LINK_PATTERN = /\bhref:\s*['"]\/elements\/(?:docs|examples|starters)\//;
+const AUTHORED_SITE_SEGMENTS = '(?:docs|examples|starters|static)';
+const RELATIVE_INTERNAL_LINK_PATTERN = new RegExp(`(?:href=["']|src=["']|]\\()(?:\\.\\/)?${AUTHORED_SITE_SEGMENTS}\\/`);
+const BASE_PREFIXED_INTERNAL_LINK_PATTERN = new RegExp(
+  `(?:href=["']|src=["']|]\\()\\/elements\\/${AUTHORED_SITE_SEGMENTS}\\/`
+);
+const JS_RELATIVE_INTERNAL_LINK_PATTERN = new RegExp(`\\b(?:href|src):\\s*['"](?:\\.\\/)?${AUTHORED_SITE_SEGMENTS}\\/`);
+const JS_BASE_PREFIXED_INTERNAL_LINK_PATTERN = new RegExp(
+  `\\b(?:href|src):\\s*['"]\\/elements\\/${AUTHORED_SITE_SEGMENTS}\\/`
+);
 
 async function getAuthoredFiles(dir: URL): Promise<URL[]> {
   const entries = await readdir(dir, { withFileTypes: true });

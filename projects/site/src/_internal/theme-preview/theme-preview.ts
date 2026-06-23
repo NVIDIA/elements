@@ -215,7 +215,7 @@ export class ThemePreview extends LitElement {
             <div class="bento-box-column">
               <nve-card>
                 <img
-                  src="static/images/test-image-1.svg"
+                  src="/static/images/test-image-1.svg"
                   alt="example visualization for media card demo"
                   loading="lazy"
                   style="width: calc(var(--nve-ref-scale-size) * 160px + var(--nve-ref-scale-text) * 160px); object-fit: cover; aspect-ratio: 16 / 9;" />

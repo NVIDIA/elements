@@ -584,7 +584,7 @@ export const MediaListView = {
         { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km' },
       ].map(d => html`
       <nve-card style="height: 100%; width: 100%;">
-        <img src="static/images/test-image-1.svg" alt="route preview for ${d.route}" loading="lazy" style="width: 100%; object-fit: cover; max-height: 200px;" />
+        <img src="/static/images/test-image-1.svg" alt="route preview for ${d.route}" loading="lazy" style="width: 100%; object-fit: cover; max-height: 200px;" />
         <nve-card-header>
           <h3 nve-text="heading sm">${d.route}</h3>
         </nve-card-header>

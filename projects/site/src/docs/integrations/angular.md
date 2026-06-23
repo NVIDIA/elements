@@ -47,7 +47,7 @@ Properties and events then work via the standard Angular template syntax.
 
 Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
 
-<nve-alert>To integrate custom form control types into Elements checkout the <a nve-text="link" href="/docs/elements/forms/controls/#custom-controls" onClick="location.reload()">custom control</a> documentation.</nve-alert>
+<nve-alert>To integrate custom form control types into Elements checkout the <a nve-text="link" href="/docs/elements/control/#custom-controls" onClick="location.reload()">custom control</a> documentation.</nve-alert>
 
 ```html
 <form [formGroup]="form" (ngSubmit)="submit()">
