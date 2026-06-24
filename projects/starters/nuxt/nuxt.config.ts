@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Elements + Nuxt',
+      meta: [{ name: 'description', content: 'A simple starter using Elements and Nuxt.' }],
       htmlAttrs: {
         lang: 'en',
         'nve-theme': 'dark',

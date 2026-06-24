@@ -1,5 +1,5 @@
 import { siteData } from '../../index.11tydata.js';
-import { BASE_URL, DEPLOYED_SITE_URL } from '../utils/site-url.js';
+import { BASE_URL, DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 
 export { BASE_URL };
 
@@ -19,13 +19,15 @@ const SOFTWARE_DESCRIPTION =
   'NVIDIA Elements is a framework-agnostic Design System and UI Agent Harness for AI/ML Infrastructure, Robotics, and Autonomous Vehicles';
 const SITE_TITLE_SUFFIX = ' | NVIDIA Elements';
 const MIN_TITLE_LENGTH = 50;
+const MAX_TITLE_LENGTH = 60;
 const MIN_DESCRIPTION_LENGTH = 150;
+const MAX_DESCRIPTION_LENGTH = 160;
 const DEFAULT_TITLE_QUALIFIER = 'Documentation and API Reference';
 const CODE_SAMPLE_ROUTES = ['/docs/cli/', '/docs/code/', '/docs/integrations/', '/docs/lint/', '/docs/mcp/'];
 
 const TITLE_QUALIFIERS = [
   { route: '/docs/about/', qualifiers: ['Project Guide and Resources'] },
-  { route: '/docs/api-design/', qualifiers: ['API Guide for Web Components'] },
+  { route: '/docs/api-design/', qualifiers: ['API Guide'] },
   { route: '/docs/changelog/', qualifiers: ['Release Notes', 'Release Notes and Package Changelog'] },
   { route: '/docs/cli/', qualifiers: ['Command Line Interface Guide for Web Components'] },
   { route: '/docs/code/', qualifiers: ['Package Guide', 'Package Documentation and Examples'] },
@@ -36,7 +38,8 @@ const TITLE_QUALIFIERS = [
   { route: '/docs/foundations/layout/', qualifiers: ['Layout Foundations Guide for Web Components'] },
   { route: '/docs/foundations/', qualifiers: ['Design Foundations Guide', 'Design Foundations Guide for UI'] },
   { route: '/docs/integrations/', qualifiers: ['Web Component Guide', 'Web Component Integration Guide'] },
-  { route: '/docs/labs/', qualifiers: ['Guide for Web Components', 'Experimental UI Guide'] },
+  { route: '/docs/internal/guidelines/', qualifiers: ['Reference', 'Engineering Guide'] },
+  { route: '/docs/labs/', qualifiers: ['Lab Guide', 'Experimental UI Guide'] },
   { route: '/docs/lint/', qualifiers: ['Static Analysis Guide for Web Components'] },
   { route: '/docs/markdown/', qualifiers: ['Package Guide', 'Package Documentation and Examples'] },
   { route: '/docs/mcp/', qualifiers: ['Model Context Protocol Guide'] },
@@ -138,7 +141,7 @@ function resolveSectionTitle(data, title) {
   if (url === '/docs/elements/') return 'NVIDIA Elements Components';
   if (url === '/docs/metrics/') return 'Site Quality Metrics';
   if (url === '/examples/') return 'Example Gallery';
-  if (url.startsWith('/docs/internal/guidelines/')) return `${title} Guidelines`;
+  if (url.startsWith('/docs/internal/guidelines/')) return title.endsWith('Guidelines') ? title : `${title} Guidelines`;
   if (url.startsWith('/docs/integrations/')) return `${title} Integration`;
   if (url === '/docs/foundations/') return 'Design Foundations';
   if (url.startsWith('/docs/foundations/themes/')) return resolveThemeTitle(url, title);
@@ -171,18 +174,22 @@ function getTitleQualifiers(data, url, title) {
 }
 
 function expandShortTitle(data, title) {
-  if (appendSiteName(title).length >= MIN_TITLE_LENGTH) return title;
+  const baseLength = appendSiteName(title).length;
+  if (baseLength >= MIN_TITLE_LENGTH && baseLength <= MAX_TITLE_LENGTH) return title;
 
   const url = data.page?.url ?? '';
   const qualifiers = getTitleQualifiers(data, url, title);
   if (!qualifiers.length) return title;
 
-  const qualifier =
-    qualifiers.find(qualifier => appendSiteName(appendTitleQualifier(title, qualifier)).length >= MIN_TITLE_LENGTH) ??
-    qualifiers.at(-1) ??
-    DEFAULT_TITLE_QUALIFIER;
+  const candidates = qualifiers.map(qualifier => appendTitleQualifier(title, qualifier));
+  const titleInRange = candidates.find(candidate => {
+    const length = appendSiteName(candidate).length;
 
-  return appendTitleQualifier(title, qualifier);
+    return length >= MIN_TITLE_LENGTH && length <= MAX_TITLE_LENGTH;
+  });
+  if (titleInRange) return titleInRange;
+
+  return candidates.find(candidate => appendSiteName(candidate).length <= MAX_TITLE_LENGTH) ?? title;
 }
 
 function resolvePageTitle(data, title) {
@@ -213,6 +220,8 @@ function getDescriptionContexts(data) {
   if (data.tag || data.component?.data?.tag) {
     return [
       'Includes API and usage guidance.',
+      'Includes examples, API details, and production UI guidance.',
+      'Includes examples, API details, accessibility, and production UI guidance.',
       'Includes examples, API details, accessibility guidance, and production UI workflow patterns.',
       'Use it with examples, API details, accessibility guidance, and production UI patterns in app views.',
       'Use it with NVIDIA Elements Web Components, examples, accessibility guidance, API details, and production UI workflows.'
@@ -270,6 +279,7 @@ function getDescriptionContexts(data) {
   if (url.startsWith('/docs/api-design/')) {
     return [
       'Includes API design guidance.',
+      'Apply API design rules for Web Components, accessibility, composition, styling, events, packaging, and long-term maintainability at scale.',
       'Apply API design rules for Web Components, accessibility, composition, styling, events, packaging, and long-term maintainability.'
     ];
   }
@@ -318,17 +328,33 @@ function getDescriptionContexts(data) {
 }
 
 function expandShortDescription(data, description) {
-  if (description.length >= MIN_DESCRIPTION_LENGTH) return description;
+  if (description.length >= MIN_DESCRIPTION_LENGTH) return clampDescription(description);
 
   const contexts = getDescriptionContexts(data);
-  const context = contexts
-    .filter(candidate => `${description} ${candidate}`.length >= MIN_DESCRIPTION_LENGTH)
+  const candidates = contexts.map(context => `${description} ${context}`);
+  const descriptionInRange = candidates
+    .filter(candidate => candidate.length >= MIN_DESCRIPTION_LENGTH && candidate.length <= MAX_DESCRIPTION_LENGTH)
     .sort((a, b) => a.length - b.length)[0];
-  const expandedDescription = `${description} ${context ?? contexts.at(-1)}`;
+  if (descriptionInRange) return descriptionInRange;
 
-  return expandedDescription.length >= MIN_DESCRIPTION_LENGTH
-    ? expandedDescription
-    : `${expandedDescription} This guidance supports production NVIDIA Elements teams.`;
+  const expandedDescription =
+    candidates.filter(candidate => candidate.length >= MIN_DESCRIPTION_LENGTH).sort((a, b) => a.length - b.length)[0] ??
+    candidates.sort((a, b) => b.length - a.length)[0] ??
+    `${description} This guidance supports production NVIDIA Elements teams.`;
+
+  return clampDescription(expandedDescription);
+}
+
+function clampDescription(description) {
+  if (description.length <= MAX_DESCRIPTION_LENGTH) return description;
+
+  const trimmed = description.slice(0, MAX_DESCRIPTION_LENGTH).trimEnd();
+  const lastSpace = trimmed.lastIndexOf(' ');
+  const sentence = (lastSpace === -1 ? trimmed : trimmed.slice(0, lastSpace))
+    .replace(/[,:;—-]+$/u, '')
+    .replace(/[.?!]$/u, '');
+
+  return sentence.length < MAX_DESCRIPTION_LENGTH ? `${sentence}.` : sentence;
 }
 
 function hasGeneratedPage(data, generatedUrls, url) {
@@ -364,7 +390,7 @@ export function resolvePageMeta(data) {
 
   description = expandShortDescription(data, description);
 
-  const canonicalUrl = `${SITE_URL}${url}`;
+  const canonicalUrl = getSiteUrl(url);
   const ogImage = SOCIAL_IMAGE_URL;
   const ogImageAlt = SOCIAL_IMAGE_ALT;
   return { title, description, canonicalUrl, ogImage, ogImageAlt, url };
@@ -483,7 +509,7 @@ function getBreadcrumb(data, meta) {
     return null;
   }
 
-  const itemListElement = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` }];
+  const itemListElement = [{ '@type': 'ListItem', position: 1, name: 'Home', item: getSiteUrl('/') }];
   let cumulative = '';
   segments.forEach((seg, i) => {
     cumulative += `/${seg}`;
@@ -494,7 +520,7 @@ function getBreadcrumb(data, meta) {
       '@type': 'ListItem',
       position: itemListElement.length + 1,
       name: titleCaseSegment(seg),
-      item: `${SITE_URL}${item}`
+      item: getSiteUrl(item)
     });
   });
 

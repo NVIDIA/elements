@@ -37,15 +37,15 @@ The main focus is to enable you to deliver value to your users.
 
 ## Bug Reporting
 
-1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it. Use the [Elements Playground]({{ELEMENTS_PLAYGROUND_BASE_URL}}/ui/elements-playground/browse.html) to provide a minimal reproducible example if possible.
+1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=default), providing as much detail as you can about the problem and how to reproduce it.
 
 ## Feature Requests
 
-1. **Proposing a Feature**: If you believe a new feature would benefit the design system, please create a new issue using File an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=feature)
+1. **Proposing a Feature**: If you believe a new feature would benefit the design system, create an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=feature).
 
 ## Bug Fixes
 
-1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it.
+1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=default), providing as much detail as you can about the problem and how to reproduce it.
 
 2. **Resolve the Bug**: Once you have a solution for the bug, please ensure that your code is clear, concise, and adheres to the coding guidelines.
 
@@ -65,4 +65,4 @@ The main focus is to enable you to deliver value to your users.
 
 5. **Unit Testing**: As with other contributions, all new components should have appropriate unit tests to verify their functionality and performance.
 
-File an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=feature).
+File an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=feature).

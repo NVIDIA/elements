@@ -49,6 +49,8 @@ const SOFTWARE_DESCRIPTION =
   'NVIDIA Elements is a framework-agnostic Design System and UI Agent Harness for AI/ML Infrastructure, Robotics, and Autonomous Vehicles';
 const ORGANIZATION_URL = 'https://www.nvidia.com/';
 const MIN_PRIORITY_DESCRIPTION_LENGTH = 150;
+const MAX_TITLE_LENGTH = 60;
+const MAX_DESCRIPTION_LENGTH = 160;
 const PRIORITY_DOC_ROUTES = [
   '/',
   '/docs/elements/',
@@ -235,6 +237,16 @@ describe('resolvePageMeta', () => {
     });
   });
 
+  it('should resolve canonical urls through the deployed site url', () => {
+    const meta = resolvePageMeta({
+      page: { url: '/elements/docs/api-design/composition/' },
+      title: 'Composition',
+      description: 'Composition guidance for NVIDIA Elements Web Components.'
+    });
+
+    expect(meta.canonicalUrl).toBe('https://nvidia.github.io/elements/docs/api-design/composition/');
+  });
+
   it('should expand short routed titles with page context', () => {
     [
       {
@@ -251,7 +263,7 @@ describe('resolvePageMeta', () => {
       },
       {
         data: { page: { url: '/docs/elements/dot/examples/' }, title: 'Dot', isExamplesTab: true },
-        title: 'Dot Examples and Code Samples for Web Components | NVIDIA Elements'
+        title: 'Dot Examples and Code Samples | NVIDIA Elements'
       },
       {
         data: { page: { url: '/docs/integrations/go/' }, title: 'Go' },
@@ -259,7 +271,7 @@ describe('resolvePageMeta', () => {
       },
       {
         data: { page: { url: '/docs/api-design/slots/' }, title: 'Slots' },
-        title: 'Slots API Guide for Web Components | NVIDIA Elements'
+        title: 'Slots API Guide | NVIDIA Elements'
       },
       {
         data: { page: { url: '/docs/foundations/themes/' }, title: 'Themes' },
@@ -277,7 +289,7 @@ describe('resolvePageMeta', () => {
       const meta = resolvePageMeta(data);
 
       expect(meta.title).toBe(title);
-      expect(meta.title.length).toBeGreaterThanOrEqual(50);
+      expect(meta.title.length).toBeLessThanOrEqual(MAX_TITLE_LENGTH);
     });
   });
 
@@ -285,7 +297,7 @@ describe('resolvePageMeta', () => {
     [
       {
         data: { page: { url: '/docs/elements/card/' }, title: 'Card', tag: 'nve-card' },
-        text: 'production UI workflow patterns'
+        text: 'production UI guidance'
       },
       {
         data: { page: { url: '/docs/api-design/styles/' }, title: 'Styles', description: 'CSS styling rules.' },
@@ -299,13 +311,14 @@ describe('resolvePageMeta', () => {
       const meta = resolvePageMeta(data);
 
       expect(meta.description.length).toBeGreaterThanOrEqual(150);
+      expect(meta.description.length).toBeLessThanOrEqual(MAX_DESCRIPTION_LENGTH);
       expect(meta.description).toContain(text);
     });
   });
 
-  it('should preserve sufficiently long descriptions', () => {
+  it('should preserve sufficiently long descriptions within seo range', () => {
     const description =
-      'A complete NVIDIA Elements guide for Web Component integration, API design, accessibility, examples, and production interface implementation across applications.';
+      'A complete NVIDIA Elements guide for Web Component integration, API design, accessibility, examples, and production interface implementation across apps.';
     const meta = resolvePageMeta({
       page: { url: '/docs/integrations/react/' },
       title: 'React',
@@ -313,6 +326,28 @@ describe('resolvePageMeta', () => {
     });
 
     expect(meta.description).toBe(description);
+  });
+
+  it('should clamp overlong descriptions', () => {
+    const meta = resolvePageMeta({
+      page: { url: '/docs/integrations/react/' },
+      title: 'React',
+      description:
+        'A complete NVIDIA Elements guide for Web Component integration, API design, accessibility, examples, and production interface implementation across applications.'
+    });
+
+    expect(meta.description.length).toBeLessThanOrEqual(MAX_DESCRIPTION_LENGTH);
+  });
+
+  it('should clamp overlong descriptions to the available word boundary', () => {
+    const prefix = 'metadata '.repeat(14).trimEnd();
+    const meta = resolvePageMeta({
+      page: { url: '/docs/integrations/react/' },
+      title: 'React',
+      description: `${prefix} unbrokenmetadatadescriptionsegmentthatwouldotherwisebecutmidword`
+    });
+
+    expect(meta.description).toBe(`${prefix}.`);
   });
 });
 
@@ -593,6 +628,31 @@ describe('renderJsonLd', () => {
     expect(breadcrumb.itemListElement.map(item => item.name)).toEqual(['Home', 'Docs', 'API Design', 'Composition']);
     expect(breadcrumb.itemListElement.map(item => item.position)).toEqual([1, 2, 3, 4]);
     expect(breadcrumb.itemListElement.every(item => item.item)).toBe(true);
+  });
+
+  it('should resolve breadcrumb urls through the deployed site url', () => {
+    const meta = resolvePageMeta({
+      page: { url: '/elements/docs/api-design/composition/' },
+      title: 'Composition',
+      description: 'Composition guidance for NVIDIA Elements Web Components.'
+    });
+    const html = renderJsonLd(
+      {
+        page: { url: meta.url },
+        collections: {
+          all: [{ url: '/' }, { url: '/elements/docs/api-design/' }, { url: meta.url }]
+        }
+      },
+      meta
+    );
+
+    const breadcrumb = getBreadcrumbJsonLd(html);
+
+    expect(breadcrumb.itemListElement.map(item => item.item)).toEqual([
+      'https://nvidia.github.io/elements/',
+      'https://nvidia.github.io/elements/docs/api-design/',
+      meta.canonicalUrl
+    ]);
   });
 });
 

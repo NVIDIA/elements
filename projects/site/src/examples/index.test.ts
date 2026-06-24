@@ -5,8 +5,13 @@ interface Example {
   entrypoint?: string;
 }
 
-async function importExamplePage() {
+interface ImportOptions {
+  elementsPagesBaseUrl?: string;
+}
+
+async function importExamplePage({ elementsPagesBaseUrl = 'https://nvidia.github.io/elements/' }: ImportOptions = {}) {
   vi.resetModules();
+  vi.stubEnv('ELEMENTS_PAGES_BASE_URL', elementsPagesBaseUrl);
   vi.stubEnv('ELEMENTS_SITE_URL', 'https://nvidia.github.io');
   vi.stubEnv('PAGES_BASE_URL', '/elements/');
   vi.doMock('../index.11tydata.js', () => ({
@@ -52,5 +57,17 @@ describe('example page urls', () => {
 
     expect(getCanonicalPath(example)).toBe('/docs/elements/button/examples/');
     expect(getDocumentationPath(example)).toBe('/docs/elements/button/');
+  });
+
+  it('should resolve canonical urls from the deployed site url', async () => {
+    const { getCanonicalUrl } = await importExamplePage({
+      elementsPagesBaseUrl: 'https://docs.example.com/elements/'
+    });
+    const example: Example = {
+      elementName: 'button',
+      entrypoint: '@nvidia-elements/core/button/button.examples.json'
+    };
+
+    expect(getCanonicalUrl(example)).toBe('https://docs.example.com/elements/docs/elements/button/examples/');
   });
 });

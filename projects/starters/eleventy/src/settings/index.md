@@ -1,6 +1,7 @@
 ---
 {
   title: 'settings',
+  description: 'Settings page content for the Elements Eleventy starter.',
   layout: 'index.11ty.js'
 }
 ---

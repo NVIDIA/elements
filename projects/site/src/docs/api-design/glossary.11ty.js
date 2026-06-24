@@ -6,6 +6,8 @@ const apis = await ApiService.getData();
 
 export const data = {
   title: 'Glossary',
+  description:
+    'Shared API terms for NVIDIA Elements component metadata, properties, events, slots, CSS hooks, and accessibility patterns.',
   layout: 'docs.11ty.js'
 };
 

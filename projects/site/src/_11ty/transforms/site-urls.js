@@ -7,7 +7,8 @@ import {
   DEPLOYED_SITE_URL,
   ELEMENTS_SITE_ORIGIN,
   getSitePath as getBaseFreeSitePath,
-  getSiteHref
+  getSiteHref,
+  getSiteUrl
 } from '../utils/site-url.js';
 
 const URL_ATTRIBUTES = new Set(['href', 'src']);
@@ -44,6 +45,20 @@ function getRootRelativeSitePath(value) {
   return null;
 }
 
+function removeDeployedSitePath(url) {
+  const sitePath = `${url.pathname}${url.search}${url.hash}`;
+  const baseFreeSitePath = getBaseFreeSitePath(sitePath);
+
+  if (baseFreeSitePath !== sitePath) return baseFreeSitePath;
+  if (!DEPLOYED_SITE_PATH) return sitePath;
+  if (url.pathname === DEPLOYED_SITE_PATH) return `/${url.search}${url.hash}`;
+  if (url.pathname.startsWith(`${DEPLOYED_SITE_PATH}/`)) {
+    return `${url.pathname.slice(DEPLOYED_SITE_PATH.length)}${url.search}${url.hash}`;
+  }
+
+  return sitePath;
+}
+
 function getSitePathCandidate(value) {
   const url = value.trim();
 
@@ -56,7 +71,7 @@ function getSitePathCandidate(value) {
     const parsedUrl = new URL(url);
     if (!isSameSiteUrl(parsedUrl)) return null;
 
-    return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+    return removeDeployedSitePath(parsedUrl);
   }
 
   if (url.startsWith('/')) return url;
@@ -77,6 +92,24 @@ function getAttribute(node, name) {
   if (!Array.isArray(node.attrs)) return undefined;
 
   return node.attrs.find(attribute => attribute.name === name);
+}
+
+function hasRel(node, value) {
+  return getAttribute(node, 'rel')?.value.trim().toLowerCase().split(/\s+/).includes(value) ?? false;
+}
+
+function resolveCanonicalUrl(value) {
+  const sitePath = getSitePathCandidate(value);
+
+  return sitePath ? getSiteUrl(sitePath) : value;
+}
+
+function resolveAttributeUrl(node, attribute) {
+  if (node.nodeName === 'link' && attribute.name === 'href' && hasRel(node, 'canonical')) {
+    return resolveCanonicalUrl(attribute.value);
+  }
+
+  return resolveSiteUrl(attribute.value);
 }
 
 function isModuleScript(node) {
@@ -110,7 +143,7 @@ function transformAttributes(node) {
   return node.attrs
     .filter(attribute => URL_ATTRIBUTES.has(attribute.name))
     .map(attribute => {
-      const value = resolveSiteUrl(attribute.value);
+      const value = resolveAttributeUrl(node, attribute);
       const changed = value !== attribute.value;
       attribute.value = value;
 

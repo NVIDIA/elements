@@ -1,5 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createLlmsTxtContent } from './llms-txt.js';
+
+async function importLlmsTxt() {
+  vi.resetModules();
+  vi.stubEnv('ELEMENTS_PAGES_BASE_URL', 'https://docs.example.com/elements/');
+  vi.stubEnv('ELEMENTS_SITE_URL', 'https://docs.example.com');
+  vi.stubEnv('PAGES_BASE_URL', '/elements/');
+
+  return import('./llms-txt.js');
+}
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
 
 describe('createLlmsTxtContent', () => {
   it('should start with the NVIDIA Elements heading', () => {
@@ -38,5 +51,13 @@ describe('createLlmsTxtContent', () => {
     expect(content).toContain('NVIDIA Elements design system');
     expect(content).toContain('[APIs](https://nvidia.github.io/elements/context/api/index.md)');
     expect(content).toContain('[Tokens](https://nvidia.github.io/elements/context/api/tokens/index.md)');
+  });
+
+  it('should resolve context document urls to fully qualified deployed urls', async () => {
+    const { getContextUrl } = await importLlmsTxt();
+
+    expect(getContextUrl('./.11ty-vite/public/context/api/button', '.html')).toBe(
+      'https://docs.example.com/elements/context/api/button.html'
+    );
   });
 });

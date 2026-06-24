@@ -1,5 +1,6 @@
 export const data = {
-  title: 'Eleventy + Elements',
+  title: 'Eleventy + NVIDIA Elements',
+  description: 'A simple starter using Elements and Eleventy.',
   layout: 'index.11ty.js'
 };
 

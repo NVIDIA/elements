@@ -5,11 +5,9 @@
 import { PlaygroundService } from '@internals/tools/playground';
 import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 import { siteData } from '../index.11tydata.js';
-import { ELEMENTS_SITE_URL } from '../_11ty/utils/env.js';
+import { getSiteUrl } from '../_11ty/utils/site-url.js';
 
 const { BASE_URL, examples } = siteData;
-const SITE_ORIGIN = ELEMENTS_SITE_URL.replace(/\/$/, '');
-const PATH_PREFIX = BASE_URL.replace(/\/$/, '');
 
 function escapeAttr(value) {
   return String(value ?? '')
@@ -43,9 +41,7 @@ export function getDocumentationPath(example) {
 }
 
 export function getCanonicalUrl(example) {
-  const path = getCanonicalPath(example);
-
-  return `${SITE_ORIGIN}${PATH_PREFIX}${path}`;
+  return getSiteUrl(getCanonicalPath(example));
 }
 
 export const data = {

@@ -1,15 +1,19 @@
 const BASE_URL = `${process.env.PAGES_BASE_URL}starters/eleventy/`;
 
 export function render(data) {
+  const title = data.title ?? 'Eleventy Starter';
+  const description = data.description ?? 'A simple starter using Elements and Eleventy.';
+
   return /* html */ `
     <!DOCTYPE html>
       <html lang="en" nve-theme="dark" nve-transition="auto">
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="${description}">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <base href="${BASE_URL}" />
-          <title>Eleventy Starter</title>
+          <title>${title}</title>
           <link rel="stylesheet" href="/_layouts/index.css" />
           <script type="module" src="/_layouts/index.ts"></script>
         </head>

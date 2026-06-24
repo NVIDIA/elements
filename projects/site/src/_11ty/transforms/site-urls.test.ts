@@ -104,6 +104,24 @@ describe('siteUrlsTransform', () => {
     expect(result).toContain('src="/elements/preview/static/images/integrations/angular.svg"');
   });
 
+  it('should keep canonical urls fully qualified when building for local preview', async () => {
+    const { siteUrlsTransform } = await importTransform('build', {
+      localPreview: true,
+      pagesBaseUrl: '/elements/preview/'
+    });
+    const html = `
+<link rel="canonical" href="https://nvidia.github.io/elements/docs/integrations/custom-elements/">
+<a href="https://nvidia.github.io/elements/docs/integrations/custom-elements/">Custom Elements</a>
+`;
+
+    const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
+
+    expect(result).toContain(
+      'rel="canonical" href="https://nvidia.github.io/elements/docs/integrations/custom-elements/"'
+    );
+    expect(result).toContain('href="/elements/preview/docs/integrations/custom-elements/"');
+  });
+
   it('should preserve source module urls when building production output', async () => {
     const { siteUrlsTransform } = await importTransform('build');
     const html = `

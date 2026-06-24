@@ -3,10 +3,11 @@ import markdownIt from 'markdown-it';
 import { ApiService } from '@internals/tools/api';
 import { ExamplesService } from '@internals/tools/examples';
 import { skills } from '@internals/tools/skills';
-import { DEPLOYED_SITE_URL } from '../utils/site-url.js';
+import { DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 import { siteUrlsTransform } from '../transforms/site-urls.js';
 
 const BASE = DEPLOYED_SITE_URL;
+const PUBLIC_OUTPUT_PATH = './.11ty-vite/public';
 
 const md = markdownIt({ html: true, linkify: true, breaks: false });
 const relativeMarkdownUrlPattern = /\b(href|src)="((?!(?:[a-z][a-z\d+.-]*:|\/\/))[^"]+?)\.md(?=")/gi;
@@ -29,20 +30,24 @@ function getMarkdownMeta(markdown) {
   const description = descriptionIndex >= 0 ? tokens[descriptionIndex + 1]?.content : undefined;
 
   return {
-    title: title || 'Elements context',
+    title: title || 'NVIDIA Elements context',
     description: description || 'NVIDIA Elements context fragment for AI and LLM tools.'
   };
 }
 
+export function getContextUrl(path, extension) {
+  return getSiteUrl(`${path.replace(PUBLIC_OUTPUT_PATH, '')}${extension}`);
+}
+
 async function writeDoc(path, markdown, transformHtml = html => html) {
   const meta = getMarkdownMeta(markdown);
-  const htmlUrl = `${path.replace('./.11ty-vite/public', BASE)}.html`;
+  const htmlUrl = getContextUrl(path, '.html');
   const nav = path.endsWith('context/index')
     ? ''
-    : `<nav class="crumbs"><a href="${BASE}/context/index.html">← All context</a></nav>`;
+    : `<nav class="crumbs"><a href="${getSiteUrl('/context/index.html')}">← All context</a></nav>`;
   const renderedMarkdown = md.render(markdown).replace(relativeMarkdownUrlPattern, '$1="$2.html');
   const html = await transformHtml(
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta name="description" content="${escapeAttr(meta.description)}"><link rel="canonical" href="${htmlUrl}"><link rel="alternate" type="text/markdown" title="Markdown version" href="${path.replace('./.11ty-vite/public', BASE)}.md" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeAttr(meta.title)} | NVIDIA Elements context</title><style>${CSS}</style></head><body>${nav}<main>${renderedMarkdown}</main></body></html>`
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta name="description" content="${escapeAttr(meta.description)}"><link rel="canonical" href="${htmlUrl}"><link rel="alternate" type="text/markdown" title="Markdown version" href="${getContextUrl(path, '.md')}" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeAttr(meta.title)} | NVIDIA Elements context</title><style>${CSS}</style></head><body>${nav}<main>${renderedMarkdown}</main></body></html>`
   );
   await fsp.writeFile(`${path}.md`, markdown, 'utf-8');
   await fsp.writeFile(`${path}.html`, html, 'utf-8');

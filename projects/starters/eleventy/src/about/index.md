@@ -1,6 +1,7 @@
 ---
 {
   title: 'about',
+  description: 'About page content for the Elements Eleventy starter.',
   layout: 'index.11ty.js'
 }
 ---

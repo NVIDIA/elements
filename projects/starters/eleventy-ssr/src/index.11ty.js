@@ -31,7 +31,8 @@ const examples = (await ExamplesService.getData())
   .filter(example => example !== null);
 
 export const data = {
-  title: 'Eleventy + Elements + Lit SSR'
+  title: 'Eleventy + NVIDIA Elements + Lit SSR',
+  description: 'A simple starter using Elements, Eleventy, and Lit SSR.'
 };
 
 export function render(data) {
@@ -41,6 +42,7 @@ export function render(data) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="${data.description}">
     <base href="${process.env.PAGES_BASE_URL}" />
     <title>${data.title}</title>
     <style>
