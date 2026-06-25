@@ -1,3 +1,5 @@
 [ -n "$CI" ] && exit 0
 
-pnpm exec lint-staged
+HOOK_DIR=$(cd "$(dirname "$0")" && pwd)
+. "$HOOK_DIR/mise.sh"
+run_mise pnpm exec lint-staged

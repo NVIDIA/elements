@@ -16,9 +16,9 @@ NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Aut
 
 ## Organization
 
-The repository is organized as a top-level **overall** repository and, inside that, libraries are broken up into individual **project** directories.
+The repository uses a top-level **repository** with individual **project** directories.
 
-Project directories have their own `package.json` and commands. But all setup for the CI and development needs to happen at the root **repository** level.
+Project directories have their own `package.json` and commands. Run CI and development setup at the root **repository** level.
 
 Examples of projects include:
 
@@ -36,34 +36,20 @@ To set up repository dependencies and run the full build, run the following comm
 The CI pipeline also builds Go starters. Install [Go 1.26.x](https://go.dev/doc/install) before running the full local CI pipeline.
 
 ```shell
-# install required dependencies
-brew install git-lfs
-git lfs install
-git lfs pull
-go version
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install
-npm install -g corepack@0.34.7
-corepack enable
-corepack prepare --activate
-pnpm i --frozen-lockfile --prefer-offline
-```
-
-```shell
-# run ci pipeline locally (lint, build, test)
-pnpm run ci
+# install dependencies https://mise.en.dev/getting-started.html
+curl https://mise.run | sh
+~/.local/bin/mise run setup
 ```
 
 #### Troubleshooting
 
-If you are coming from development from a different repository, you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Once `nvm` is installed you can switch to the repository defined node and pnpm versions by re-running the [setup/install step](#setup) above.
+If you are coming from development from a different repository, you may need to refresh the repository toolchain with mise. Run `mise run install` at the root of the project to install the Node.js, pnpm, Vale, Go, Git LFS, and package versions from `mise.toml` and `pnpm-lock.yaml`.
 
-If you actively switch between different repositories, run `nvm use && corepack prepare --activate` in the root of the project to ensure use of the correct node/pnpm version.
+If you actively switch between different repositories, run commands through `mise exec --` or activate mise in your shell so it switches tools automatically.
 
 ### Building
 
-Both the top-level repository and each project have a set of standardized npm scripts. To build and test all projects, run `pnpm run ci` at the root of the repository.
+Both the top-level repository and each project have a set of standardized npm scripts. To build and test all projects, run `mise exec -- pnpm run ci` at the root of the repository.
 
 #### Top-Level Repository
 
@@ -84,11 +70,11 @@ Common project scripts include:
 
 The available scripts vary by project. Check the project's `package.json` before running project-specific commands.
 
-To learn in detail how the repo is built and run see our [build system documentation](https://github.com/NVIDIA/elements/blob/main/projects/internals/BUILD.md).
+For details about the repository build and runtime flow, see the [build system documentation](https://github.com/NVIDIA/elements/blob/main/projects/internals/BUILD.md).
 
 ## Workflow
 
-Before creating a branch or pull request be sure to make a [new issue or feature request](https://github.com/NVIDIA/elements/issues/new) first for the team to evaluate. This will help ensure that your work aligns with the goals of the project and that you are not duplicating effort.
+Before creating a branch or pull request, make a [new issue or feature request](https://github.com/NVIDIA/elements/issues/new) first so the team can check alignment and avoid duplicate work.
 
 ### Create a Branch
 
@@ -98,11 +84,11 @@ Use a descriptive branch name with the `topic/` prefix. Example `topic/bug-fix`.
 git checkout -b topic/bug-fix
 ```
 
-Once your branch is created, make your source code changes. Once your changes are complete run `pnpm run ci` in the root of the repo to run all the builds and tests. If all tests pass, you are ready to create a PR.
+After creating your branch, make your source code changes. After you complete them, run `mise exec -- pnpm run ci` in the root of the repo to run all the builds and tests. If all tests pass, you are ready to create a PR.
 
 ### Commit Messages
 
-The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formatting issues in commits.
+The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the release on merge. [Commit Lint](https://commitlint.js.org/) enforces commit formatting.
 
 ```shell
 git commit -a -s -m "fix(core): disable multi-select"
@@ -136,7 +122,7 @@ git commit -a -s -m "fix(core): disable multi-select"
 | `styles`    | `/projects/styles`             |
 | `themes`    | `/projects/themes`             |
 
-Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
+Keep commit names focused on your changes. The release process uses the commit message to determine the next release and generated changelog notes.
 
 ### Opening a Pull Request
 
@@ -156,7 +142,7 @@ Open a new [Pull Request](https://github.com/NVIDIA/elements/pulls) in GitHub. R
 git commit -a --amend --no-edit
 ```
 
-This will add the changes to your existing commit. Then push the updated commit back to the remote branch for review.
+This adds the changes to your existing commit. Then push the updated commit back to the remote branch for review.
 
 ```shell
 git push --force origin topic/bug-fix
@@ -164,7 +150,7 @@ git push --force origin topic/bug-fix
 
 #### Rebasing Commit
 
-Sometimes changes are merged to main before your PR is approved. To update your local branch to contain the latest changes from main you will need to rebase.
+If main changes before PR approval, rebase your local branch to include the latest changes from main.
 
 ```shell
 git checkout main # Switch to main branch
@@ -181,4 +167,4 @@ When creating a new project, ex: `./projects/code`, make sure to add the project
 
 ### Release
 
-Once your Pull Request is approved, you can merge it into `main` via the GitHub UI. This will trigger a [new release](https://github.com/NVIDIA/elements/releases) of the package automatically. The version number will be bumped based on the type of commit (see above). The [changelog](https://NVIDIA.github.io/elements/docs/changelog/) will also be updated with the changes from the commits in the PR.
+After approval, merge your Pull Request into `main` through the GitHub UI. GitHub Actions triggers a [new release](https://github.com/NVIDIA/elements/releases) automatically. Semantic Release calculates the version from the commit type. The [changelog](https://NVIDIA.github.io/elements/docs/changelog/) also includes the commits from the PR.

@@ -2,7 +2,7 @@
   "name": "go-starter",
   "version": "0.0.0",
   "private": true,
-  "description": "Go starter",
+  "description": "NVIDIA Elements Go starter",
   "scripts": {
     "ci": "wireit",
     "dev": "go run main.go",

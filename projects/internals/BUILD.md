@@ -55,7 +55,7 @@ The [`.github/workflows/ci.yml`](https://github.com/NVIDIA/elements/blob/main/.g
 
   Standardized way to store API keys/secrets.
 
-- [Dependabot](https://docs.github.com/en/code-security/dependabot)
+- [Dependency Updates](https://docs.github.com/en/code-security/dependabot)
 
   Automated dependency updates and security vulnerability alerts.
 
@@ -69,7 +69,7 @@ The [`.github/workflows/ci.yml`](https://github.com/NVIDIA/elements/blob/main/.g
 
 - [Immutable Releases](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/preventing-changes-to-your-releases)
 
-  Prevent published releases from being modified or deleted, ensuring downstream consumers always get the exact artifacts that were reviewed and tested.
+  Prevent anyone from modifying or deleting published releases, so downstream consumers always install the exact artifacts reviewers approved and tested.
 
 - [Code Quality Check](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/allow-github-code-quality-in-enterprise)
 
@@ -93,15 +93,15 @@ The [`.github/workflows/ci.yml`](https://github.com/NVIDIA/elements/blob/main/.g
 
 - [Dependency Monitoring and Alerts](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configuring-dependabot-alerts)
 
-  Receive alerts when dependencies have known security vulnerabilities so they can be patched or upgraded promptly.
+  Receive alerts when dependencies have known security vulnerabilities so maintainers can patch or upgrade them promptly.
 
-- [Dependabot Auto-Updates for Actions](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/keeping-your-actions-up-to-date-with-dependabot)
+- [Action Dependency Updates](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/keeping-your-actions-up-to-date-with-dependabot)
 
   Keep GitHub Actions workflow dependencies up to date automatically, reducing exposure to vulnerabilities in third-party actions.
 
 - [Disable Public Issues](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/disabling-issues)
 
-  Disable the public issue tracker when bug reports and feature requests should be routed through a different channel.
+  Disable the public issue tracker when project maintainers route bug reports and feature requests through a different channel.
 
 - [Private Security Disclosures](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/privately-reporting-a-security-vulnerability)
 
@@ -113,15 +113,15 @@ The [`.github/workflows/ci.yml`](https://github.com/NVIDIA/elements/blob/main/.g
 
 - [Trusted Publishers](https://docs.npmjs.com/trusted-publishers)
 
-  Link the GitHub repository directly to npm so packages can be published via OIDC tokens without storing long-lived npm credentials.
+  Link the GitHub repository directly to npm so GitHub Actions can publish packages through OIDC tokens without storing long-lived npm credentials.
 
 ## Build
 
 The following are the repo wide tools that apply to all source code and projects.
 
-- [NodeJS/Corepack](https://nodejs.org/api/corepack.html)
+- [mise](https://mise.en.dev/)
 
-  Corepack is a tool to help with managing versions of your package managers. It identifies the package manager configured for the repo, transparently installs it if needed, and runs it without requiring explicit user interactions. This ensures that everyone uses exactly the same package manager version without them having to manually synchronize it each time someone makes an update.
+  mise installs and activates the repository toolchain from `mise.toml`, including Node.js, pnpm, Vale, Go, and Git LFS. CI uses the same manifest through the shared setup action.
 
 - [pnpm Package Manager](https://pnpm.io/)
 
@@ -155,7 +155,7 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [Vale](https://vale.sh/)
 
-  Prose linter for documentation and JSDoc comments. Enforces consistent technical writing using the Google developer documentation style guide and write-good rules. Configuration is in `.vale.ini` with custom vocabulary and rules in `config/vale/styles/`. Vale runs against `*.md` and `*.ts` files in `projects/` source directories. The Vale binary is auto-installed via `config/vale/install.mjs` during `pnpm install`.
+  Prose linter for documentation and JSDoc comments. Enforces consistent technical writing using the Google developer documentation style guide and write-good rules. Configuration is in `.vale.ini` with custom vocabulary and rules in `config/vale/styles/`. Vale runs against `*.md` and `*.ts` files in `projects/` source directories. mise installs the Vale binary for local development and CI.
 
 ## Testing
 

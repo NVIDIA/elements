@@ -14,12 +14,7 @@ fi
 
 FAILED=0
 
-setup_hook_node_env "$PROJECT_ROOT"
-
-if ! command -v pnpm >/dev/null 2>&1; then
-  echo "pnpm not found after loading the project Node environment." >&2
-  exit 2
-fi
+setup_hook_node_env "$PROJECT_ROOT" || exit 2
 
 mark_failed() {
   FAILED=1
@@ -28,7 +23,7 @@ mark_failed() {
 run_prettier() {
   local output exit_code
 
-  output=$(cd "$PROJECT_ROOT" && pnpm exec prettier --write --ignore-unknown --no-error-on-unmatched-pattern "$FILE_PATH" 2>&1) || exit_code=$?
+  output=$(hook_mise_exec "$PROJECT_ROOT" pnpm exec prettier --write --ignore-unknown --no-error-on-unmatched-pattern "$FILE_PATH" 2>&1) || exit_code=$?
 
   if [[ ${exit_code:-0} -ne 0 && -n "$output" ]]; then
     echo "$output" >&2
@@ -66,7 +61,7 @@ run_eslint() {
 
   local soft_rules="no-unused-vars|@typescript-eslint/no-unused-vars"
 
-  json_output=$(cd "$project_dir" && pnpm exec eslint -c ./eslint.config.js --no-warn-ignored --cache --cache-location .eslintcache/ --format json "$rel_path" 2>/dev/null) || true
+  json_output=$(hook_mise_exec "$project_dir" pnpm exec eslint -c ./eslint.config.js --no-warn-ignored --cache --cache-location .eslintcache/ --format json "$rel_path" 2>/dev/null) || true
 
   hard_errors=$(echo "$json_output" | jq -r --arg soft "$soft_rules" '
     [.[].messages[] | select(.severity == 2) | select(.ruleId | test($soft) | not)] | length
@@ -80,7 +75,7 @@ run_eslint() {
     return 0
   fi
 
-  readable=$(cd "$project_dir" && pnpm exec eslint -c ./eslint.config.js --no-warn-ignored --color --cache --cache-location .eslintcache/ "$rel_path" 2>&1) || true
+  readable=$(hook_mise_exec "$project_dir" pnpm exec eslint -c ./eslint.config.js --no-warn-ignored --color --cache --cache-location .eslintcache/ "$rel_path" 2>&1) || true
 
   if [[ "$hard_errors" != "0" ]]; then
     echo "$readable" >&2
@@ -106,7 +101,7 @@ run_vale() {
 
   local output exit_code
 
-  output=$(cd "$PROJECT_ROOT" && config/vale/bin/vale --config .vale.ini "$FILE_PATH" 2>&1) || exit_code=$?
+  output=$(hook_mise_exec "$PROJECT_ROOT" vale --config .vale.ini "$FILE_PATH" 2>&1) || exit_code=$?
 
   if [[ ${exit_code:-0} -ne 0 && -n "$output" ]]; then
     echo "$output" >&2
@@ -143,7 +138,7 @@ run_stylelint() {
 
   rel_path=$(hook_relative_path "$project_dir" "$FILE_PATH")
 
-  output=$(cd "$project_dir" && pnpm exec stylelint --config="$repo_root/stylelint.config.mjs" --color "$rel_path" 2>&1) || exit_code=$?
+  output=$(hook_mise_exec "$project_dir" pnpm exec stylelint --config="$repo_root/stylelint.config.mjs" --color "$rel_path" 2>&1) || exit_code=$?
 
   if [[ ${exit_code:-0} -ne 0 && -n "$output" ]]; then
     echo "$output" >&2

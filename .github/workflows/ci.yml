@@ -104,16 +104,9 @@ jobs:
           # semantic-release pushes with — otherwise the default GITHUB_TOKEN's
           # http.extraheader overrides @semantic-release/git's push auth.
           token: ${{secrets.RELEASE_TOKEN}}
-      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d
+      - uses: ./.github/actions/setup-ci
         with:
-          version: 11.0.8
-          run_install: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: './.nvmrc'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
+          install-playwright: 'false'
       - name: Download build artifacts
         uses: actions/download-artifact@v8
         with:

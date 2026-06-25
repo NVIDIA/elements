@@ -5,13 +5,13 @@
   "type": "module",
   "description": "",
   "engines": {
-    "node": "26.1.0"
+    "node": "26.4.0"
   },
-  "packageManager": "pnpm@11.0.8",
+  "packageManager": "pnpm@11.9.0",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.0.8",
+      "version": "11.9.0",
       "onFail": "download"
     }
   },
@@ -19,6 +19,7 @@
     "ci": "wireit",
     "ci:all": "PAGES_BASE_URL=/elements/ pnpm run ci && PAGES_BASE_URL=/elements/ node ./projects/internals/ci/cache-validate.js ci",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
+    "ci:validate": "wireit",
     "lighthouse": "wireit",
     "clean": "git clean -dfX",
     "format": "wireit",
@@ -29,7 +30,7 @@
     "commitlint": "commitlint --edit",
     "lint:knip": "wireit",
     "lint:vale": "wireit",
-    "lint:vale:sync": "config/vale/bin/vale sync"
+    "lint:vale:sync": "vale sync"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
@@ -56,13 +57,11 @@
     "proper-lockfile": "4.1.2",
     "semantic-release": "25.0.3",
     "semantic-release-replace-plugin": "1.2.7",
-    "tar": "7.5.11",
-    "unzipper": "0.12.3",
     "wireit": "0.14.12"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "**/*.{ts,md}": "pnpm run lint:vale"
+    "**/*.{ts,md}": "vale --config .vale.ini"
   },
   "wireit": {
     "ci": {
@@ -70,6 +69,7 @@
       "dependencies": [
         "lint:knip",
         "notice",
+        "ci:validate",
         "./projects/code:ci",
         "./projects/cli:ci",
         "./projects/create:ci",
@@ -108,6 +108,16 @@
         "./projects/internals/tools:ci"
       ],
       "files": []
+    },
+    "ci:validate": {
+      "command": "node ./projects/internals/ci/ci-validate.js",
+      "files": [
+        "./.nvmrc",
+        "./mise.toml",
+        "./package.json",
+        "./projects/internals/ci/ci-validate.js"
+      ],
+      "output": []
     },
     "lighthouse": {
       "command": "node ./projects/internals/ci/metrics.lighthouse.js",
@@ -265,7 +275,7 @@
       ]
     },
     "lint:vale": {
-      "command": "config/vale/bin/vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
+      "command": "vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
     },
     "lint:knip": {
       "command": "knip --cache --config knip.config.js",
@@ -328,7 +338,7 @@
       "command": "pnpm exec playwright install --with-deps --only-shell chromium"
     },
     "prepare": {
-      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs ; node config/vale/install.mjs)"
+      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs ; vale sync)"
     }
   }
 }

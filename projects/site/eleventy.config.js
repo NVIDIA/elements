@@ -130,7 +130,7 @@ export default function (eleventyConfig) {
       },
       base: BASE_URL,
       build: {
-        rollupOptions: {
+        rolldownOptions: {
           external: ['open', '@nvidia-elements/lint', '@nvidia-elements/lint/eslint/internals'] // todo: remove when tools have conditional exports
         },
         target: 'esnext',

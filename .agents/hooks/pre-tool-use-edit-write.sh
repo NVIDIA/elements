@@ -20,6 +20,8 @@ PROTECTED_FILES=(
   "package.json"
   "pnpm-lock.yaml"
   ".nvmrc"
+  "mise.toml"
+  "mise.lock"
   ".husky"
   "config"
 )

@@ -15,7 +15,7 @@ const VITEST_CONFIGS = ['vitest*.ts'];
 /** @type {import('knip').KnipConfig} */
 export default {
   exclude: ['catalog'],
-  ignoreBinaries: ['codesign', 'config/vale/bin/vale'],
+  ignoreBinaries: ['codesign', 'vale'],
   ignoreDependencies: [
     '@eslint/js',
     '@internals/patterns',
@@ -43,6 +43,7 @@ export default {
     'highlight.js',
     'lit',
     'lit-html',
+    'lint-staged',
     'markdown-it',
     'minisearch',
     'monaco-editor',
@@ -62,8 +63,8 @@ export default {
   // Keep this map explicit so package additions and entrypoint changes are reviewed.
   workspaces: {
     '.': {
-      entry: ['stylelint.config.mjs', 'config/**/*.mjs', 'projects/internals/ci/**/*.js'],
-      project: ['*.{js,mjs}', 'config/**/*.mjs', 'projects/internals/ci/**/*.js']
+      entry: ['stylelint.config.mjs', '.husky/*', 'projects/internals/ci/**/*.js'],
+      project: ['*.{js,mjs}', '.husky/*', 'projects/internals/ci/**/*.js']
     },
     'projects/cli': {
       entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...TEST_ENTRIES, ...VITE_CONFIGS, ...VITEST_CONFIGS],

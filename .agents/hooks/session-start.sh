@@ -10,25 +10,18 @@ PROJECT_ROOT=$(resolve_project_root "$INPUT" "$HOOK_DIR") || {
   exit 0
 }
 
-NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  source "$NVM_DIR/nvm.sh"
-fi
-
 cd "$PROJECT_ROOT"
 
-if command -v nvm >/dev/null 2>&1; then
-  nvm install 2>&1 >/dev/null
-fi
+setup_hook_mise_env || exit 0
 
-setup_hook_node_env "$PROJECT_ROOT"
-
-INSTALL_OUTPUT=$(pnpm i --frozen-lockfile --prefer-offline 2>&1) || {
-  echo "pnpm install failed:" >&2
+INSTALL_OUTPUT=$(hook_mise_run "$PROJECT_ROOT" install 2>&1) || {
+  echo "mise install task failed:" >&2
   echo "$INSTALL_OUTPUT" >&2
   exit 0
 }
 
-NODE_V=$(node --version)
-PNPM_V=$(pnpm --version)
-echo "Environment ready: node $NODE_V, pnpm $PNPM_V. Dependencies installed."
+NODE_V=$(hook_mise_exec "$PROJECT_ROOT" node --version)
+PNPM_V=$(hook_mise_exec "$PROJECT_ROOT" pnpm --version)
+VALE_V=$(hook_mise_exec "$PROJECT_ROOT" vale --version)
+VALE_V=${VALE_V%%$'\n'*}
+echo "Environment ready: node $NODE_V, pnpm $PNPM_V, $VALE_V. Dependencies installed."

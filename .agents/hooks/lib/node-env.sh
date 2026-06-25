@@ -1,41 +1,66 @@
 #!/usr/bin/env bash
 
-get_hook_pnpm_spec() {
-  local project_root package_manager
-
-  project_root="$1"
-  package_manager=""
-
-  if [[ -f "$project_root/package.json" ]] && command -v node >/dev/null 2>&1; then
-    package_manager=$(node -e "const { readFileSync } = require('node:fs'); const { packageManager } = JSON.parse(readFileSync(process.argv[1], 'utf8')); if (typeof packageManager === 'string' && packageManager.startsWith('pnpm@')) process.stdout.write(packageManager);" "$project_root/package.json")
+resolve_hook_mise_bin() {
+  if [[ -n "${MISE_BIN:-}" && -x "$MISE_BIN" ]]; then
+    printf '%s\n' "$MISE_BIN"
+    return 0
   fi
 
-  printf '%s\n' "${package_manager:-pnpm@latest}"
+  if command -v mise >/dev/null 2>&1; then
+    command -v mise
+    return 0
+  fi
+
+  if [[ -x "$HOME/.local/bin/mise" ]]; then
+    printf '%s\n' "$HOME/.local/bin/mise"
+    return 0
+  fi
+
+  return 1
+}
+
+setup_hook_mise_env() {
+  MISE_BIN=$(resolve_hook_mise_bin) || {
+    echo "mise not found. Install mise, then run 'mise trust' at the project root." >&2
+    return 1
+  }
+
+  export MISE_BIN
+  export PATH="$(dirname -- "$MISE_BIN"):$PATH"
 }
 
 setup_hook_node_env() {
-  local project_root node_version nvm_dir pnpm_spec
+  local project_root
 
   project_root="$1"
-  nvm_dir="${NVM_DIR:-$HOME/.nvm}"
+  setup_hook_mise_env || return 1
 
-  if [[ -s "$nvm_dir/nvm.sh" ]]; then
-    source "$nvm_dir/nvm.sh"
+  (
+    cd "$project_root"
+    "$MISE_BIN" exec -- node --version >/dev/null
+    "$MISE_BIN" exec -- pnpm --version >/dev/null
+  ) || {
+    echo "mise project tools are unavailable. Run 'mise trust' and 'mise install' at the project root." >&2
+    return 1
+  }
+}
 
-    if [[ -f "$project_root/.nvmrc" ]]; then
-      node_version=$(<"$project_root/.nvmrc")
-      nvm use --silent "$node_version" >/dev/null 2>&1 || true
-    else
-      nvm use --silent >/dev/null 2>&1 || true
-    fi
-  fi
+hook_mise_exec() {
+  local working_dir="$1"
+  shift
 
-  if ! command -v pnpm >/dev/null 2>&1 && command -v corepack >/dev/null 2>&1; then
-    pnpm_spec=$(get_hook_pnpm_spec "$project_root")
-    (
-      cd "$project_root"
-      corepack enable
-      corepack prepare "$pnpm_spec" --activate
-    )
-  fi
+  (
+    cd "$working_dir"
+    "$MISE_BIN" exec -- "$@"
+  )
+}
+
+hook_mise_run() {
+  local working_dir="$1"
+  shift
+
+  (
+    cd "$working_dir"
+    "$MISE_BIN" run "$@"
+  )
 }

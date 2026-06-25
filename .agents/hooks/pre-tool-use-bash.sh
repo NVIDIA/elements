@@ -7,8 +7,9 @@ source "$HOOK_DIR/lib/project-root.sh"
 COMMAND=$(hook_command_from_input "$INPUT" || true)
 GIT_PREFIX='(^|[;&|][[:space:]]*)git([[:space:]]+(-C[[:space:]]+[^[:space:];&|]+|--no-pager|-c[[:space:]]+[^[:space:];&|]+|--work-tree(=|[[:space:]]+)[^[:space:];&|]+))*[[:space:]]+'
 
-if [[ -z "${NVE_AGENT:-}" && -n "${CURSOR_AGENT+x}" && -z "${CURSOR_SANDBOX+x}" ]]; then
-  export NVE_AGENT="cursor-cloud-agent"
+HOOK_OS=$(uname -s 2>/dev/null || true)
+if [[ -z "${NVE_AGENT:-}" && "$HOOK_OS" != "Darwin" ]]; then
+  export NVE_AGENT="isolated"
 fi
 
 # Exit early if not a git command
@@ -37,7 +38,7 @@ block() {
 }
 
 handle_blocked_operation() {
-  if [[ "${NVE_AGENT:-}" == *cloud* ]]; then
+  if [[ "${NVE_AGENT:-}" == "isolated" ]]; then
     warn "$1"
   fi
 
@@ -52,6 +53,7 @@ echo "$COMMAND" | grep -qF "checkout -- ."   && handle_blocked_operation "git ch
 echo "$COMMAND" | grep -qF "branch -D"       && handle_blocked_operation "git branch -D force-deletes a branch without merge checks"
 
 echo "$COMMAND" | grep -qE "${GIT_PREFIX}(add|stage)([[:space:]]|$)" && handle_blocked_operation "git add/stage modifies the index"
+echo "$COMMAND" | grep -qE "${GIT_PREFIX}commit([[:space:]][^;&|]*)?[[:space:]](--all|-[^-[:space:];&|]*a[^[:space:];&|]*)([[:space:]]|$)" && handle_blocked_operation "git commit -a stages tracked changes before committing"
 echo "$COMMAND" | grep -qE "${GIT_PREFIX}restore([[:space:]][^;&|]*)?[[:space:]]--staged([[:space:]]|$)" && handle_blocked_operation "git restore --staged removes files from the index"
 echo "$COMMAND" | grep -qE "${GIT_PREFIX}reset([[:space:]]|$)" && handle_blocked_operation "git reset modifies the index or moves HEAD"
 echo "$COMMAND" | grep -qE "${GIT_PREFIX}rm([[:space:]][^;&|]*)?[[:space:]]--cached([[:space:]]|$)" && handle_blocked_operation "git rm --cached removes files from the index"

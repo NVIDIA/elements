@@ -34,6 +34,8 @@ ${examples.find(s => s.name === 'Default' && s.element === tag)?.template}
     <a href="/docs/cli/" nve-text="body sm muted">CLI</a>
     <span nve-text="body sm muted">/</span>
     <a href="/docs/mcp/" nve-text="body sm muted">MCP</a>
+    <span nve-text="body sm muted">/</span>
+    <a href="/docs/integrations/cdn/" nve-text="body sm muted">CDN</a>
   </div>
 </div>
 

@@ -24,33 +24,24 @@ Elements is a design language for AI/ML factories built as a monorepo containing
 
 ## Environment Requirements
 
-- **nvm**: Node Version Manager for managing Node.js versions
-- **Node.js**: 26.1.0 (enforced via `.nvmrc` and `package.json` engines)
-- **pnpm**: 11.0.8 (managed via Corepack 0.34.7)
+- **mise**: Toolchain manager for local development and CI (`mise.toml`)
+- **Node.js**: 26.4.0 (managed via mise and validated against `.nvmrc` and `package.json` engines)
+- **pnpm**: 11.9.0 (managed via mise and validated against `package.json`)
+- **Go**: 1.26.4 (managed via mise for the Go starter)
 - **Git LFS**: Required for visual test screenshots and videos (`.gitattributes` defines tracked files)
 - **Playwright**: Browser-based testing uses Chromium (installed via prepare script)
-- **Vale**: Prose linter for documentation and JSDoc (installed via prepare script)
+- **Vale**: Prose linter for documentation and JSDoc (managed via mise)
 
 ## Common Commands
 
 ### Repository Setup
 
 ```shell
-# Install git-lfs if not already installed
-brew install git-lfs
-git lfs install
-git lfs pull
-
-# Install nvm if not already installed
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-. ~/.nvm/nvm.sh
-
-# Install dependencies
-nvm install
-npm install -g corepack@0.34.7
-corepack enable
-corepack prepare --activate
-pnpm i --frozen-lockfile --prefer-offline
+# Install required tools and run CI
+curl https://mise.run | sh
+# If mise is not on PATH yet, use ~/.local/bin/mise for the setup commands.
+mise trust
+mise run setup
 ```
 
 ### Building and Testing
@@ -79,32 +70,32 @@ Each project has a `DEVELOPMENT.md` file with the authoritative list of availabl
 
 ```shell
 # Development watch mode
-pnpm run dev
+mise exec -- pnpm run dev
 
 # Build project
-pnpm run build
+mise exec -- pnpm run build
 
 # Run unit tests
-pnpm run test
+mise exec -- pnpm run test
 
 # Run single test suite
-pnpm run test -- src/badge/badge.test.ts
+mise exec -- pnpm run test -- src/badge/badge.test.ts
 
 # Run accessibility tests
-pnpm run test:axe
+mise exec -- pnpm run test:axe
 
 # Run lighthouse performance tests
-pnpm run test:lighthouse
+mise exec -- pnpm run test:lighthouse
 
 # Run visual regression tests
-pnpm run test:visual
+mise exec -- pnpm run test:visual
 
 # Run SSR tests
-pnpm run test:ssr
+mise exec -- pnpm run test:ssr
 
 # Lint project
-pnpm run lint
-pnpm run lint:fix
+mise exec -- pnpm run lint
+mise exec -- pnpm run lint:fix
 ```
 
 ## Architecture
@@ -258,7 +249,7 @@ Key files:
 - `.vale.ini`: Root configuration defining style guides, disabled rules, and file-type settings
 - `config/vale/styles/Elements/`: Custom rules (branding, terminology)
 - `config/vale/styles/config/vocabularies/Elements/accept.txt`: Accepted vocabulary (project terms, component names, tech jargon)
-- `config/vale/install.mjs`: Cross-platform binary installer
+- `mise.toml`: Toolchain versions for Vale, Node.js, pnpm, Go, and Git LFS
 
 When adding new technical terms, component names, or abbreviations that Vale flags as misspelled, add them to `accept.txt`. Run `pnpm run lint:vale` to verify changes pass. Vale also runs as a pre-commit hook on markdown files via lint-staged.
 

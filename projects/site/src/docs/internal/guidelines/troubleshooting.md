@@ -226,7 +226,7 @@ pnpm run build
 - **Solution:** Pull LFS files
 
 ```shell
-git lfs install
+git lfs install --skip-repo
 git lfs pull
 ```
 
@@ -236,35 +236,28 @@ git lfs pull
 
 - **Symptom:** Build or tests fail with Node compatibility errors
 - **Cause:** Wrong Node.js version
-- **Solution:** Use Node Version Manager
+- **Solution:** Install the repository toolchain with mise
 
 ```shell
-# Install correct version from .nvmrc
-nvm install
-nvm use
+# Install tool versions from mise.toml
+mise install
 
 # Verify version
-node --version  # Should show 26.1.0
+mise exec -- node --version  # Should show 26.4.0
 ```
 
 ### pnpm Version Issues
 
 - **Symptom:** Install fails or lockfile changes unexpectedly
 - **Cause:** Wrong pnpm version
-- **Solution:** Use Corepack
+- **Solution:** Install the repository toolchain with mise
 
 ```shell
-# Install Corepack globally
-npm install -g corepack@0.34.7
-
-# Enable Corepack
-corepack enable
-
-# Prepare pnpm version from package.json
-corepack prepare --activate
+# Install tool versions from mise.toml
+mise install
 
 # Verify version
-pnpm --version
+mise exec -- pnpm --version
 ```
 
 ### Port Conflicts in Dev Mode

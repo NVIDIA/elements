@@ -1,0 +1,30 @@
+[settings]
+lockfile = true
+npm.package_manager = "pnpm"
+
+[tools]
+node = "26.4.0"
+pnpm = "11.9.0"
+vale = "3.15.1"
+go = "1.26.4"
+git-lfs = "3.7.1"
+
+[tasks.clean]
+run = [
+  "git clean -dfX"
+]
+
+[tasks.install]
+run = [
+  "mise install",
+  "mise exec -- git lfs install --skip-repo",
+  "mise exec -- git lfs pull",
+  "mise exec -- pnpm i --frozen-lockfile --prefer-offline",
+]
+
+[tasks.setup]
+run = [
+  "mise run clean",
+  "mise run install",
+  "pnpm run ci",
+]

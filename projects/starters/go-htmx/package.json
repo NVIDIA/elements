@@ -2,7 +2,7 @@
   "name": "go-htmx-starter",
   "version": "0.0.0",
   "private": true,
-  "description": "HTMX + Go starter",
+  "description": "NVIDIA Elements HTMX + Go starter",
   "scripts": {
     "ci": "wireit",
     "dev": "go run main.go",

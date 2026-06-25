@@ -24,12 +24,7 @@ if [[ -z "$CHANGED" ]]; then
   exit 0
 fi
 
-setup_hook_node_env "$PROJECT_ROOT"
-
-if ! command -v pnpm >/dev/null 2>&1; then
-  echo "pnpm not found after loading the project Node environment." >&2
-  exit 2
-fi
+setup_hook_node_env "$PROJECT_ROOT" || exit 2
 
 PROJECTS=(code cli core forms lint markdown media monaco)
 FAILED=()
@@ -41,11 +36,11 @@ for proj in "${PROJECTS[@]}"; do
 
   TASKS=(build test)
   for task in "${TASKS[@]}"; do
-    if ! node -e "process.exit(JSON.parse(require('fs').readFileSync('projects/$proj/package.json','utf8')).scripts?.['$task'] ? 0 : 1)" 2>/dev/null; then
+    if ! hook_mise_exec "$PROJECT_ROOT" node -e "process.exit(JSON.parse(require('fs').readFileSync('projects/$proj/package.json','utf8')).scripts?.['$task'] ? 0 : 1)" 2>/dev/null; then
       continue
     fi
 
-    OUTPUT=$(cd "projects/$proj" && pnpm run "$task" 2>&1) || {
+    OUTPUT=$(hook_mise_exec "$PROJECT_ROOT/projects/$proj" pnpm run "$task" 2>&1) || {
       echo "$OUTPUT" >&2
       FAILED+=("projects/$proj:$task")
     }

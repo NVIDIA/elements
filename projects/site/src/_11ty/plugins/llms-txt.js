@@ -1,4 +1,5 @@
 import { promises as fsp } from 'node:fs';
+import nodePath from 'node:path';
 import markdownIt from 'markdown-it';
 import { ApiService } from '@internals/tools/api';
 import { ExamplesService } from '@internals/tools/examples';
@@ -7,7 +8,7 @@ import { DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 import { siteUrlsTransform } from '../transforms/site-urls.js';
 
 const BASE = DEPLOYED_SITE_URL;
-const PUBLIC_OUTPUT_PATH = './.11ty-vite/public';
+const DEFAULT_PUBLIC_OUTPUT_PATH = './.11ty-vite/public';
 
 const md = markdownIt({ html: true, linkify: true, breaks: false });
 const relativeMarkdownUrlPattern = /\b(href|src)="((?!(?:[a-z][a-z\d+.-]*:|\/\/))[^"]+?)\.md(?=")/gi;
@@ -35,22 +36,26 @@ function getMarkdownMeta(markdown) {
   };
 }
 
-export function getContextUrl(path, extension) {
-  return getSiteUrl(`${path.replace(PUBLIC_OUTPUT_PATH, '')}${extension}`);
+export function getPublicOutputPath(directories = {}) {
+  return nodePath.join(directories.output ?? 'dist', 'public');
 }
 
-async function writeDoc(path, markdown, transformHtml = html => html) {
+export function getContextUrl(filePath, extension, publicOutputPath = DEFAULT_PUBLIC_OUTPUT_PATH) {
+  return getSiteUrl(`/${nodePath.relative(publicOutputPath, filePath).split(nodePath.sep).join('/')}${extension}`);
+}
+
+async function writeDoc(filePath, markdown, { publicOutputPath, transformHtml = html => html }) {
   const meta = getMarkdownMeta(markdown);
-  const htmlUrl = getContextUrl(path, '.html');
-  const nav = path.endsWith('context/index')
+  const htmlUrl = getContextUrl(filePath, '.html', publicOutputPath);
+  const nav = filePath.endsWith('context/index')
     ? ''
     : `<nav class="crumbs"><a href="${getSiteUrl('/context/index.html')}">← All context</a></nav>`;
   const renderedMarkdown = md.render(markdown).replace(relativeMarkdownUrlPattern, '$1="$2.html');
   const html = await transformHtml(
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta name="description" content="${escapeAttr(meta.description)}"><link rel="canonical" href="${htmlUrl}"><link rel="alternate" type="text/markdown" title="Markdown version" href="${getContextUrl(path, '.md')}" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeAttr(meta.title)} | NVIDIA Elements context</title><style>${CSS}</style></head><body>${nav}<main>${renderedMarkdown}</main></body></html>`
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta name="description" content="${escapeAttr(meta.description)}"><link rel="canonical" href="${htmlUrl}"><link rel="alternate" type="text/markdown" title="Markdown version" href="${getContextUrl(filePath, '.md', publicOutputPath)}" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeAttr(meta.title)} | NVIDIA Elements context</title><style>${CSS}</style></head><body>${nav}<main>${renderedMarkdown}</main></body></html>`
   );
-  await fsp.writeFile(`${path}.md`, markdown, 'utf-8');
-  await fsp.writeFile(`${path}.html`, html, 'utf-8');
+  await fsp.writeFile(`${filePath}.md`, markdown, 'utf-8');
+  await fsp.writeFile(`${filePath}.html`, html, 'utf-8');
 }
 
 // https://llmstxt.org
@@ -64,6 +69,7 @@ Use NVIDIA Elements for agentic UI, AI infrastructure dashboards, robotics conso
 - [CLI](${base}/context/cli.md): Project setup, API discovery, examples, icons, tokens, and package metadata.
 - [MCP](${base}/context/cli.md): Model Context Protocol integration for AI assistants.
 - [Skills](${base}/context/skills/index.md): Agent skills and context fragments for Elements workflows.
+- [CDN](${base}/context/integrations/cdn.md): CDN integration for demos and agent generated artifacts.
 - [APIs](${base}/context/api/index.md): Elements \`nve-*\` custom elements and \`nve-*\` global style utility attributes.
 - [Examples](${base}/context/examples/index.md): UI patterns and example templates.
 - [Icons](${base}/context/api/icons/index.md): Icon names for \`nve-icon\` and \`nve-icon-button\`.
@@ -73,86 +79,98 @@ For the complete archive, use [llms-full.txt](${base}/llms-full.txt).
 `;
 }
 
-export function llmsTxtPlugin(eleventyConfig) {
-  eleventyConfig.on('eleventy.after', async () => {
-    const transformContextHtml = html => siteUrlsTransform.call({ page: { url: '/' } }, html, 'context/index.html');
-    const writeContextDoc = (path, markdown) => writeDoc(path, markdown, transformContextHtml);
+async function writeLlmsTxtFiles(publicOutputPath) {
+  const transformContextHtml = html => siteUrlsTransform.call({ page: { url: '/' } }, html, 'context/index.html');
+  const writeContextDoc = (filePath, markdown) =>
+    writeDoc(filePath, markdown, { publicOutputPath, transformHtml: transformContextHtml });
 
-    await fsp.mkdir('./.11ty-vite/public/context/skills/', { recursive: true });
-    await fsp.mkdir('./.11ty-vite/public/context/api/', { recursive: true });
-    await fsp.mkdir('./.11ty-vite/public/context/api/icons/', { recursive: true });
-    await fsp.mkdir('./.11ty-vite/public/context/api/tokens/', { recursive: true });
-    await fsp.mkdir('./.11ty-vite/public/context/examples/', { recursive: true });
+  await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'skills'), { recursive: true });
+  await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'api'), { recursive: true });
+  await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'api', 'icons'), { recursive: true });
+  await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'api', 'tokens'), { recursive: true });
+  await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'examples'), { recursive: true });
+  await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'integrations'), { recursive: true });
 
-    const skillsContent = `# Skills\n\nList of all available skills and context fragments.\n\n${skills.map(s => `- [${s.name}](${BASE}/context/skills/${s.name}.md): ${s.description}`).join('\n')}`;
-    await writeContextDoc('./.11ty-vite/public/context/skills/index', skillsContent);
+  const skillsContent = `# Skills\n\nList of all available skills and context fragments.\n\n${skills.map(s => `- [${s.name}](${BASE}/context/skills/${s.name}.md): ${s.description}`).join('\n')}`;
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'skills', 'index'), skillsContent);
 
-    const skillMarkdown = [];
-    for (const { name, context } of skills) {
-      skillMarkdown.push(context);
-      await writeContextDoc(`./.11ty-vite/public/context/skills/${name}`, context);
-    }
+  const skillMarkdown = [];
+  for (const { name, context } of skills) {
+    skillMarkdown.push(context);
+    await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'skills', name), context);
+  }
 
-    const cliReadme = await fsp.readFile('../cli/README.md', 'utf-8');
-    const lintReadme = await fsp.readFile('../lint/README.md', 'utf-8');
-    await writeContextDoc('./.11ty-vite/public/context/cli', cliReadme);
-    await writeContextDoc('./.11ty-vite/public/context/lint', lintReadme);
+  const cliReadme = await fsp.readFile('../cli/README.md', 'utf-8');
+  const lintReadme = await fsp.readFile('../lint/README.md', 'utf-8');
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'cli'), cliReadme);
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'lint'), lintReadme);
 
-    const { elements, attributes } = await ApiService.list({ format: 'json' });
-    const apis = [...elements, ...attributes];
-    const apiMarkdown = await Promise.all(
-      apis.map(async e => {
-        const api = String(await ApiService.get({ names: e.name, format: 'markdown' }));
-        await writeContextDoc(`./.11ty-vite/public/context/api/${e.name.replace(/^nve-/, '')}`, api);
-        return api;
-      })
-    );
+  const cdnReadme = await fsp.readFile('./src/docs/integrations/cdn.md', 'utf-8');
+  await writeContextDoc(
+    nodePath.join(publicOutputPath, 'context', 'integrations', 'cdn'),
+    `# CDN\n\n${cdnReadme.split('# {{ title }}')[1].trim()}`
+  );
 
-    const apiContent = `## APIs\n\nAvailable APIs: \`nve-*\` custom elements and \`nve-*\` global style utility attributes.\n
+  const { elements, attributes } = await ApiService.list({ format: 'json' });
+  const apis = [...elements, ...attributes];
+  const apiMarkdown = await Promise.all(
+    apis.map(async e => {
+      const api = String(await ApiService.get({ names: e.name, format: 'markdown' }));
+      await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'api', e.name.replace(/^nve-/, '')), api);
+      return api;
+    })
+  );
+
+  const apiContent = `## APIs\n\nAvailable APIs: \`nve-*\` custom elements and \`nve-*\` global style utility attributes.\n
 ${elements.map(e => `- [${e.name.replace(/^nve-/, '')}](${BASE}/context/api/${e.name.replace(/^nve-/, '')}.md): ${e.description}`).join('\n')}
 ${attributes.map(e => `- [${e.name.replace(/^nve-/, '')} (attribute utility)](${BASE}/context/api/${e.name.replace(/^nve-/, '')}.md): ${e.description}`).join('\n')}`;
 
-    await writeContextDoc(`./.11ty-vite/public/context/api/index`, apiContent);
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'api', 'index'), apiContent);
 
-    const icons = await ApiService.iconsList({ format: 'markdown' });
-    const iconsContent = `## Icons\n\nList of all available icon names for nve-icon and nve-icon-button.\n\n${icons}`;
-    await writeContextDoc(`./.11ty-vite/public/context/api/icons/index`, iconsContent);
+  const icons = await ApiService.iconsList({ format: 'markdown' });
+  const iconsContent = `## Icons\n\nList of all available icon names for nve-icon and nve-icon-button.\n\n${icons}`;
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'api', 'icons', 'index'), iconsContent);
 
-    const tokens = await ApiService.tokensList({ format: 'markdown' });
-    const tokensContent = `## Tokens\n\nList of all available semantic CSS custom properties / design tokens for theming.\n\n${tokens}`;
-    await writeContextDoc(`./.11ty-vite/public/context/api/tokens/index`, tokensContent);
+  const tokens = await ApiService.tokensList({ format: 'markdown' });
+  const tokensContent = `## Tokens\n\nList of all available semantic CSS custom properties / design tokens for theming.\n\n${tokens}`;
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'api', 'tokens', 'index'), tokensContent);
 
-    const examples = await ExamplesService.list({ format: 'json' });
-    const exampleMarkdown = await Promise.all(
-      examples.map(async ({ id }) => {
-        const example = String(await ExamplesService.get({ id, format: 'markdown' }));
-        await writeContextDoc(`./.11ty-vite/public/context/examples/${id}`, example);
-        return example;
-      })
-    );
+  const examples = await ExamplesService.list({ format: 'json' });
+  const exampleMarkdown = await Promise.all(
+    examples.map(async ({ id }) => {
+      const example = String(await ExamplesService.get({ id, format: 'markdown' }));
+      await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'examples', id), example);
+      return example;
+    })
+  );
 
-    const examplesContent = `# Examples\n\nList of all available UI patterns and example templates.\n\n${examples.map(({ id, summary }) => `- [${id.replace('patterns-', '').replace('elements-', '')}](${BASE}/context/examples/${id}.md): ${summary}`).join('\n')}`;
-    await writeContextDoc(`./.11ty-vite/public/context/examples/index`, examplesContent);
+  const examplesContent = `# Examples\n\nList of all available UI patterns and example templates.\n\n${examples.map(({ id, summary }) => `- [${id.replace('patterns-', '').replace('elements-', '')}](${BASE}/context/examples/${id}.md): ${summary}`).join('\n')}`;
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'examples', 'index'), examplesContent);
 
-    const content = createLlmsTxtContent();
+  const content = createLlmsTxtContent();
 
-    await writeContextDoc('./.11ty-vite/public/context/index', content);
-    await fsp.writeFile('./.11ty-vite/public/llms.txt', content, 'utf-8');
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'index'), content);
+  await fsp.writeFile(nodePath.join(publicOutputPath, 'llms.txt'), content, 'utf-8');
 
-    const fullContent = [
-      content,
-      cliReadme,
-      lintReadme,
-      skillsContent,
-      ...skillMarkdown,
-      apiContent,
-      ...apiMarkdown,
-      iconsContent,
-      tokensContent,
-      examplesContent,
-      ...exampleMarkdown
-    ].join('\n\n');
-    await fsp.writeFile('./.11ty-vite/public/llms-full.txt', fullContent, 'utf-8');
-    await fsp.writeFile('./.11ty-vite/public/context/full.md', fullContent, 'utf-8');
+  const fullContent = [
+    content,
+    cliReadme,
+    lintReadme,
+    skillsContent,
+    ...skillMarkdown,
+    apiContent,
+    ...apiMarkdown,
+    iconsContent,
+    tokensContent,
+    examplesContent,
+    ...exampleMarkdown
+  ].join('\n\n');
+  await fsp.writeFile(nodePath.join(publicOutputPath, 'llms-full.txt'), fullContent, 'utf-8');
+  await fsp.writeFile(nodePath.join(publicOutputPath, 'context', 'full.md'), fullContent, 'utf-8');
+}
+
+export function llmsTxtPlugin(eleventyConfig) {
+  eleventyConfig.on('eleventy.before', async ({ directories } = {}) => {
+    await writeLlmsTxtFiles(getPublicOutputPath(directories));
   });
 }

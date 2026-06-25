@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createLlmsTxtContent } from './llms-txt.js';
+import { createLlmsTxtContent, getPublicOutputPath, llmsTxtPlugin } from './llms-txt.js';
 
 async function importLlmsTxt() {
   vi.resetModules();
@@ -28,6 +28,7 @@ describe('createLlmsTxtContent', () => {
     expect(content).toContain('[CLI](https://nvidia.github.io/elements/context/cli.md)');
     expect(content).toContain('[MCP](https://nvidia.github.io/elements/context/cli.md)');
     expect(content).toContain('[Skills](https://nvidia.github.io/elements/context/skills/index.md)');
+    expect(content).toContain('[CDN](https://nvidia.github.io/elements/context/integrations/cdn.md)');
     expect(content).toContain('[APIs](https://nvidia.github.io/elements/context/api/index.md)');
     expect(content).toContain('[Examples](https://nvidia.github.io/elements/context/examples/index.md)');
     expect(content).toContain('[Icons](https://nvidia.github.io/elements/context/api/icons/index.md)');
@@ -59,5 +60,25 @@ describe('createLlmsTxtContent', () => {
     expect(getContextUrl('./.11ty-vite/public/context/api/button', '.html')).toBe(
       'https://docs.example.com/elements/context/api/button.html'
     );
+  });
+
+  it('should resolve context document urls from the Eleventy output public directory', async () => {
+    const { getContextUrl } = await importLlmsTxt();
+
+    expect(getContextUrl('dist/public/context/api/button', '.html', 'dist/public')).toBe(
+      'https://docs.example.com/elements/context/api/button.html'
+    );
+  });
+
+  it('should generate public files before Vite moves the Eleventy output', () => {
+    const on = vi.fn();
+
+    llmsTxtPlugin({ on });
+
+    expect(on).toHaveBeenCalledWith('eleventy.before', expect.any(Function));
+  });
+
+  it('should use the Eleventy output public directory', () => {
+    expect(getPublicOutputPath({ output: 'dist' })).toBe('dist/public');
   });
 });
