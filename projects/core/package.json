@@ -421,6 +421,18 @@
       "types": "./dist/forms/define.d.ts",
       "default": "./dist/forms/define.js"
     },
+    "./gauge": {
+      "types": "./dist/gauge/index.d.ts",
+      "default": "./dist/gauge/index.js"
+    },
+    "./gauge/index.js": {
+      "types": "./dist/gauge/index.d.ts",
+      "default": "./dist/gauge/index.js"
+    },
+    "./gauge/define.js": {
+      "types": "./dist/gauge/define.d.ts",
+      "default": "./dist/gauge/define.js"
+    },
     "./grid": {
       "types": "./dist/grid/index.d.ts",
       "default": "./dist/grid/index.js"

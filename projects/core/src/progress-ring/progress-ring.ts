@@ -95,10 +95,9 @@ export class ProgressRing extends LitElement {
     super.updated(props);
     this._internals.ariaValueNow = `${this.value === undefined ? '' : this.value}`;
     this._internals.ariaValueMax = `${this.max}`;
-    const i18nRecord = this.i18n as Record<string, string | undefined>;
-    this._internals.ariaLabel =
-      (this.status && i18nRecord[this.status] && i18nRecord[this.status] !== 'neutral'
-        ? i18nRecord[this.status]!
-        : this.i18n.information) ?? null;
+    const { status } = this;
+    const statusLabel =
+      status !== undefined && status !== 'neutral' && status !== 'accent' ? this.i18n[status] : undefined;
+    this._internals.ariaLabel = statusLabel ?? this.i18n.information ?? null;
   }
 }

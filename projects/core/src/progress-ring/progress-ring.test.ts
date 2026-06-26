@@ -45,6 +45,35 @@ describe(ProgressRing.metadata.tag, () => {
     expect(element._internals.ariaLabel).toBe('success');
   });
 
+  it.each([
+    ['neutral', 'information'],
+    ['accent', 'information'],
+    ['warning', 'warning'],
+    ['success', 'success'],
+    ['danger', 'danger']
+  ] as const)('should set the %s status aria label', async (status, label) => {
+    element.status = status;
+    await elementIsStable(element);
+
+    expect(element._internals.ariaLabel).toBe(label);
+  });
+
+  it('should use custom i18n strings for the status aria label', async () => {
+    element.i18n = { success: 'complete' };
+    element.status = 'success';
+    await elementIsStable(element);
+
+    expect(element._internals.ariaLabel).toBe('complete');
+  });
+
+  it('should not use custom neutral i18n strings for the neutral aria label', async () => {
+    element.i18n = { neutral: 'custom neutral', information: 'custom information' };
+    element.status = 'neutral';
+    await elementIsStable(element);
+
+    expect(element._internals.ariaLabel).toBe('custom information');
+  });
+
   it('should default to neutral status', () => {
     expect(element.status).toBe('neutral');
   });

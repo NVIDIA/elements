@@ -1,0 +1,242 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --color: var(--nve-sys-text-emphasis-color);
+  --background: var(--nve-sys-interaction-background);
+  --needle-background: var(--nve-sys-interaction-color);
+  --accent-color: var(--nve-sys-interaction-color);
+  --thumb-background: var(--accent-color);
+  --track-background: var(--accent-color);
+  --track-width: 8px;
+  --font-size: var(--nve-ref-font-size-400);
+  --font-weight: var(--nve-ref-font-weight-regular);
+  --gap: var(--nve-ref-space-xs);
+  --width: 128px;
+  --height: calc(var(--width) * 0.8627);
+  --_animation-duration: var(--nve-ref-animation-duration-250);
+  --_needle-size: calc(var(--track-width) / 3);
+
+  display: inline-block;
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  font-weight: var(--font-weight);
+  container-type: inline-size;
+  contain: layout;
+  text-box: trim-both cap alphabetic;
+}
+
+.fill-dot-start,
+.fill-dot-end {
+  r: calc(var(--track-width) / 2.4);
+}
+
+:host([size='sm']) {
+  --font-size: var(--nve-ref-font-size-300);
+  --width: 96px;
+  --_needle-size: calc(var(--track-width) / 2.25);
+
+  .fill-dot-start,
+  .fill-dot-end {
+    r: calc(var(--track-width) / 1.8);
+  }
+}
+
+:host([size='lg']) {
+  --font-size: var(--nve-ref-font-size-500);
+  --width: 160px;
+  --_needle-size: calc(var(--track-width) / 3.75);
+
+  .fill-dot-start,
+  .fill-dot-end {
+    r: calc(var(--track-width) / 3);
+  }
+}
+
+[internal-host] {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 100%;
+}
+
+:host([shape='half']) {
+  --height: calc(var(--width) * 0.5313);
+}
+
+:host([shape='half']) [internal-host] {
+  place-items: end center;
+}
+
+svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+path {
+  fill: none;
+  stroke: white;
+  stroke-width: var(--track-width);
+  vector-effect: non-scaling-stroke;
+}
+
+path.background {
+  stroke-linecap: round;
+}
+
+path.gauge {
+  animation: gauge-progress-in var(--_animation-duration) var(--nve-ref-animation-easing-100);
+  stroke-linecap: butt;
+  stroke-dasharray: var(--_dash-progress) var(--_dash-gap);
+  transition: stroke-dasharray var(--_animation-duration) var(--nve-ref-animation-easing-100);
+  will-change: stroke-dasharray;
+}
+
+.background-surface,
+.fill-surface {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.background-surface {
+  background: var(--background);
+}
+
+.fill-surface {
+  background: var(--track-background);
+}
+
+.fill-dot-start {
+  fill: var(--track-background);
+}
+
+.fill-dot-end {
+  animation: gauge-dot-in var(--_animation-duration) var(--nve-ref-animation-easing-100);
+  fill: var(--thumb-background);
+  transform: rotate(var(--_dot-angle));
+  transform-box: view-box;
+  transform-origin: var(--_dot-origin);
+  transition: transform var(--_animation-duration) var(--nve-ref-animation-easing-100);
+  will-change: transform;
+}
+
+.fill-layer[hidden],
+.fill-dot-start[hidden],
+.fill-dot-end[hidden],
+.needle[hidden] {
+  display: none;
+}
+
+.needle {
+  animation: gauge-needle-in var(--_animation-duration) var(--nve-ref-animation-easing-100);
+  transform: rotate(var(--_needle-angle));
+  transform-box: view-box;
+  transform-origin: var(--_needle-origin);
+  transition: transform var(--_animation-duration) var(--nve-ref-animation-easing-100);
+  will-change: transform;
+}
+
+.needle-line {
+  stroke: var(--needle-background);
+  stroke-linecap: round;
+  stroke-width: var(--_needle-size);
+}
+
+.needle-hub {
+  fill: var(--needle-background);
+  r: var(--_needle-size);
+}
+
+slot {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--gap);
+  color: var(--color);
+  font-size: var(--font-size);
+  font-weight: var(--nve-ref-font-weight-medium);
+  padding-block-start: calc(var(--track-width) * 2);
+  text-box: trim-both cap alphabetic;
+  line-height: 1;
+  width: 50%;
+  font-variant-numeric: tabular-nums;
+}
+
+:host([shape='half']) slot {
+  transform: translateY(1cqh);
+}
+
+:host([thumb='needle']) slot {
+  transform: translateY(1cqh);
+  justify-content: end;
+}
+
+:host([shape='half'][thumb='needle']) slot {
+  transform: translateY(2cqh);
+}
+
+::slotted(*) {
+  color: var(--color);
+  font-size: var(--font-size);
+}
+
+:host([status='success']) {
+  --accent-color: var(--nve-sys-support-success-emphasis-color);
+  --background: var(--nve-sys-support-success-muted-color);
+}
+
+:host([status='warning']) {
+  --accent-color: var(--nve-sys-support-warning-emphasis-color);
+  --background: var(--nve-sys-support-warning-muted-color);
+}
+
+:host([status='danger']) {
+  --accent-color: var(--nve-sys-support-danger-emphasis-color);
+  --background: var(--nve-sys-support-danger-muted-color);
+}
+
+:host([status='accent']) {
+  --accent-color: var(--nve-sys-accent-secondary-background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    --_animation-duration: 0s;
+  }
+}
+
+@keyframes gauge-progress-in {
+  from {
+    stroke-dasharray: 0 var(--_dash-gap);
+  }
+
+  to {
+    stroke-dasharray: var(--_dash-progress) var(--_dash-gap);
+  }
+}
+
+@keyframes gauge-dot-in {
+  from {
+    transform: rotate(var(--_dot-start-angle));
+  }
+
+  to {
+    transform: rotate(var(--_dot-angle));
+  }
+}
+
+@keyframes gauge-needle-in {
+  from {
+    transform: rotate(var(--_needle-start-angle));
+  }
+
+  to {
+    transform: rotate(var(--_needle-angle));
+  }
+}

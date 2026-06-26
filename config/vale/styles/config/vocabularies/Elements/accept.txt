@@ -239,6 +239,7 @@ nve-dropdown
 nve-dropdown-group
 nve-dropzone
 nve-file
+nve-gauge
 nve-grid
 nve-icon
 nve-icon-button
@@ -358,3 +359,5 @@ spark line
 spark lines
 Alternatively
 misprefixed
+indicate
+utilization

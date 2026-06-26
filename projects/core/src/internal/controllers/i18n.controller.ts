@@ -31,9 +31,9 @@ export class I18nController<T extends I18n> implements ReactiveController {
     globalThis.document.removeEventListener('NVE_ELEMENTS_I18N_UPDATE', this.#update);
   }
 
-  hostUpdated() {
+  hostUpdate() {
     if (this.host.i18n.__set === undefined) {
-      // if the host lacks a set, an override exists
+      // if the host lacks a set, an override exists; merging before render keeps it in the same update cycle
       this.#overrides = this.host.i18n;
       this.#update();
     }
