@@ -1,0 +1,11 @@
+{
+  "verifiedAt": "2026-06-26T20:20:00Z",
+  "node": "26.1.0",
+  "pnpm": "11.0.8",
+  "checks": {
+    "install": "pnpm install --frozen-lockfile",
+    "format": "pnpm run format",
+    "unitTest": "projects/core badge.test.ts (27 passed)"
+  },
+  "purpose": "Cloud agent environment smoke test — safe to delete after verification"
+}
