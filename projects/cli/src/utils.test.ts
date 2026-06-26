@@ -4,9 +4,13 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { marked } from 'marked';
 import ora, { type Ora } from 'ora';
+import type { ManagedToolMethod } from '@internals/tools';
 import {
   banner,
   colors,
+  exitCodeForResult,
+  exitWithCompleteToolResult,
+  exitWithToolError,
   getSpinnerProgressMessage,
   runAsyncTool,
   getArgValue,
@@ -140,6 +144,16 @@ describe('utils', () => {
       expect(ora).not.toHaveBeenCalled();
     });
 
+    it('should run function without spinner when interactive progress is disabled', async () => {
+      const args = {};
+      const result = await runAsyncTool(args, mockFn, { interactiveProgress: false });
+
+      expect(result).toBe('test result');
+      expect(mockFn).toHaveBeenCalledWith(args);
+      expect(args).not.toHaveProperty('onProgress');
+      expect(ora).not.toHaveBeenCalled();
+    });
+
     it('should run function with spinner in interactive mode', async () => {
       const args = {};
       const result = await runAsyncTool(args, mockFn);
@@ -162,6 +176,7 @@ describe('utils', () => {
 
       await expect(runAsyncTool(args, mockFn)).rejects.toThrow('Test error');
       expect(mockFn).toHaveBeenCalledWith(args);
+      expect(mockSpinner.stop).toHaveBeenCalled();
     });
 
     it('should append console and progress output to the spinner text', async () => {
@@ -459,6 +474,119 @@ describe('utils', () => {
     });
   });
 
+  describe('exitCodeForResult', () => {
+    it('should return 1 for danger reports', () => {
+      expect(
+        exitCodeForResult({
+          failedCheck: { status: 'danger', message: 'Failed' }
+        })
+      ).toBe(1);
+    });
+
+    it('should return 0 for non-danger reports and non-report results', () => {
+      expect(
+        exitCodeForResult({
+          warningCheck: { status: 'warning', message: 'Warning' }
+        })
+      ).toBe(0);
+      expect(exitCodeForResult('done')).toBe(0);
+    });
+  });
+
+  describe('exitWithToolError', () => {
+    it('should print fallback error messages and exit with code 1', async () => {
+      const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await expect(exitWithToolError(undefined, 'failed')).rejects.toThrow('process.exit called');
+
+      expect(error).toHaveBeenCalledWith(colors.error('failed'));
+      expect(process.exit).toHaveBeenCalledWith(1);
+    });
+
+    it('should render structured error results and exit with code 1', async () => {
+      const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      await expect(exitWithToolError({ message: 'failed' }, undefined)).rejects.toThrow('process.exit called');
+
+      expect(error).toHaveBeenCalledWith(JSON.stringify({ message: 'failed' }, null, 2));
+      expect(process.exit).toHaveBeenCalledWith(1);
+    });
+  });
+
+  describe('exitWithCompleteToolResult', () => {
+    let originalElementsDebug: string | undefined;
+    let originalElementsEnv: string | undefined;
+
+    beforeEach(() => {
+      originalElementsDebug = process.env.ELEMENTS_DEBUG;
+      originalElementsEnv = process.env.ELEMENTS_ENV;
+      delete process.env.ELEMENTS_DEBUG;
+      delete process.env.ELEMENTS_ENV;
+      vi.mocked(marked.parse).mockImplementation(input => Promise.resolve(input));
+    });
+
+    afterEach(() => {
+      if (originalElementsDebug === undefined) {
+        delete process.env.ELEMENTS_DEBUG;
+      } else {
+        process.env.ELEMENTS_DEBUG = originalElementsDebug;
+      }
+
+      if (originalElementsEnv === undefined) {
+        delete process.env.ELEMENTS_ENV;
+      } else {
+        process.env.ELEMENTS_ENV = originalElementsEnv;
+      }
+    });
+
+    it('should print successful results, notify updates, and exit with code 0', async () => {
+      const notifyUpdate = vi.fn().mockResolvedValue(undefined);
+
+      await expect(exitWithCompleteToolResult({ result: { ok: true }, notifyUpdate })).rejects.toThrow(
+        'process.exit called'
+      );
+
+      expect(console.log).toHaveBeenCalledWith(JSON.stringify({ ok: true }, null, 2));
+      expect(notifyUpdate).toHaveBeenCalled();
+      expect(process.exit).toHaveBeenCalledWith(0);
+    });
+
+    it('should print danger reports without notifying updates and exit with code 1', async () => {
+      const notifyUpdate = vi.fn().mockResolvedValue(undefined);
+
+      await expect(
+        exitWithCompleteToolResult({
+          result: { failedCheck: { status: 'danger', message: 'Failed' } },
+          notifyUpdate
+        })
+      ).rejects.toThrow('process.exit called');
+
+      expect(console.log).toHaveBeenCalledWith('❌ (**failed check**): Failed');
+      expect(notifyUpdate).not.toHaveBeenCalled();
+      expect(process.exit).toHaveBeenCalledWith(1);
+    });
+
+    it('should print debug metadata when debug output is enabled', async () => {
+      process.env.ELEMENTS_DEBUG = 'true';
+      process.env.ELEMENTS_ENV = 'cli';
+      const tool = { metadata: { command: 'api.list' } } as ManagedToolMethod<unknown>;
+
+      await expect(
+        exitWithCompleteToolResult({
+          result: { ok: true },
+          tool,
+          start: 1000,
+          end: 1500
+        })
+      ).rejects.toThrow('process.exit called');
+
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('[debug]\n[command]: api.list'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('[execution time]: 0.50 seconds'));
+      expect(console.log).toHaveBeenCalledWith(expect.stringContaining('[token usage]:'));
+      expect(process.exit).toHaveBeenCalledWith(0);
+    });
+  });
+
   describe('renderReport', () => {
     beforeEach(() => {
       vi.mocked(marked.parse).mockImplementation(input => Promise.resolve(input));
@@ -476,12 +604,15 @@ describe('utils', () => {
       expect(process.exit).not.toHaveBeenCalled();
     });
 
-    it('should exit on failure', async () => {
+    it('should return formatted report and not exit on failure', async () => {
       const report = {
         failedTest: { status: 'danger' as const, message: 'Test failed' }
       };
 
-      await expect(() => renderReport(report)).rejects.toThrow('process.exit called');
+      const result = await renderReport(report);
+
+      expect(result).toBe('❌ (**failed test**): Test failed');
+      expect(process.exit).not.toHaveBeenCalled();
     });
 
     it('should format camelCase keys to readable labels', async () => {

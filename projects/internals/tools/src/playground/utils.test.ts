@@ -547,7 +547,7 @@ describe('createImportMap with different frameworks', () => {
   it('should include all NVE packages for all frameworks', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['@nvidia-elements/core']).toContain('/@nvidia-elements/core@latest');
+    expect(importmap.imports['@nvidia-elements/core']).toBe('https://esm.sh/@nvidia-elements/core@latest');
     expect(importmap.imports['@nvidia-elements/styles']).toContain('/@nvidia-elements/styles@latest');
     expect(importmap.imports['@nvidia-elements/themes']).toContain('/@nvidia-elements/themes@latest');
     expect(importmap.imports['@nvidia-elements/monaco']).toContain('/@nvidia-elements/monaco@latest');

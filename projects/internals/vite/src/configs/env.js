@@ -1,0 +1,37 @@
+const DEFAULT_ELEMENTS_PAGES_BASE_URL = 'https://nvidia.github.io/elements';
+const DEFAULT_ELEMENTS_REPO_BASE_URL = 'https://github.com/NVIDIA/elements';
+const DEFAULT_ELEMENTS_REGISTRY_URL = 'https://registry.npmjs.org';
+const DEFAULT_ELEMENTS_CDN_BASE_URL = 'https://cdn.jsdelivr.net/npm';
+const DEFAULT_ELEMENTS_ESM_CDN_BASE_URL = 'https://esm.sh';
+const DEFAULT_ELEMENTS_SITE_URL = 'https://nvidia.github.io';
+
+function getEnvValue(name, fallback = '') {
+  return process.env[name]?.trim() || fallback;
+}
+
+export function getElementsEnvValues() {
+  return {
+    ELEMENTS_REPO_BASE_URL: getEnvValue('ELEMENTS_REPO_BASE_URL', DEFAULT_ELEMENTS_REPO_BASE_URL),
+    ELEMENTS_PAGES_BASE_URL: getEnvValue('ELEMENTS_PAGES_BASE_URL', DEFAULT_ELEMENTS_PAGES_BASE_URL),
+    ELEMENTS_REGISTRY_URL: getEnvValue('ELEMENTS_REGISTRY_URL', DEFAULT_ELEMENTS_REGISTRY_URL),
+    ELEMENTS_CDN_BASE_URL: getEnvValue('ELEMENTS_CDN_BASE_URL', DEFAULT_ELEMENTS_CDN_BASE_URL),
+    ELEMENTS_ESM_CDN_BASE_URL: getEnvValue('ELEMENTS_ESM_CDN_BASE_URL', DEFAULT_ELEMENTS_ESM_CDN_BASE_URL),
+    ELEMENTS_SITE_URL: getEnvValue('ELEMENTS_SITE_URL', DEFAULT_ELEMENTS_SITE_URL),
+    ELEMENTS_PLAYGROUND_BASE_URL: getEnvValue('ELEMENTS_PLAYGROUND_BASE_URL'),
+    ELEMENTS_ASSETS_CDN_BASE_URL: getEnvValue('ELEMENTS_ASSETS_CDN_BASE_URL')
+  };
+}
+
+export function getElementsEnv() {
+  const env = getElementsEnvValues();
+  return {
+    __ELEMENTS_REPO_BASE_URL__: JSON.stringify(env.ELEMENTS_REPO_BASE_URL),
+    __ELEMENTS_PAGES_BASE_URL__: JSON.stringify(env.ELEMENTS_PAGES_BASE_URL),
+    __ELEMENTS_REGISTRY_URL__: JSON.stringify(env.ELEMENTS_REGISTRY_URL),
+    __ELEMENTS_CDN_BASE_URL__: JSON.stringify(env.ELEMENTS_CDN_BASE_URL),
+    __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(env.ELEMENTS_ESM_CDN_BASE_URL),
+    __ELEMENTS_SITE_URL__: JSON.stringify(env.ELEMENTS_SITE_URL),
+    __ELEMENTS_PLAYGROUND_BASE_URL__: JSON.stringify(env.ELEMENTS_PLAYGROUND_BASE_URL),
+    __ELEMENTS_ASSETS_CDN_BASE_URL__: JSON.stringify(env.ELEMENTS_ASSETS_CDN_BASE_URL)
+  };
+}

@@ -38,7 +38,7 @@ describe('update-check', () => {
       const result = await fetchLatestSha();
       expect(result).toBe('abc123def456');
       expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/cli/manifest.json'),
+        'https://nvidia.github.io/elements/cli/manifest.json',
         expect.objectContaining({ signal: expect.any(AbortSignal) })
       );
     });
@@ -49,6 +49,18 @@ describe('update-check', () => {
         vi.fn().mockResolvedValue({
           ok: false,
           status: 404
+        })
+      );
+
+      await expect(fetchLatestSha()).rejects.toThrow('Failed to fetch latest build info');
+    });
+
+    it('should throw error when manifest is missing sha', async () => {
+      vi.stubGlobal(
+        'fetch',
+        vi.fn().mockResolvedValue({
+          ok: true,
+          json: () => Promise.resolve({ version: '2.1.0' })
         })
       );
 
@@ -90,6 +102,32 @@ describe('update-check', () => {
 
       const result = await isUpdateAvailable('abc123');
       expect(result).toBe(true);
+    });
+
+    it('should return true when fetched sha differs even if version matches', async () => {
+      vi.stubGlobal(
+        'fetch',
+        vi.fn().mockResolvedValue({
+          ok: true,
+          json: () => Promise.resolve({ sha: 'def456', version: '2.1.0' })
+        })
+      );
+
+      const result = await isUpdateAvailable('abc123');
+      expect(result).toBe(true);
+    });
+
+    it('should return false when fetched sha matches current even if version differs', async () => {
+      vi.stubGlobal(
+        'fetch',
+        vi.fn().mockResolvedValue({
+          ok: true,
+          json: () => Promise.resolve({ sha: 'abc123', version: '2.1.0' })
+        })
+      );
+
+      const result = await isUpdateAvailable('abc123');
+      expect(result).toBe(false);
     });
 
     it('should return false when fetched sha matches current', async () => {

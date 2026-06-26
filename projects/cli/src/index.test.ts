@@ -37,6 +37,11 @@ describe('index', () => {
     expect(output).toContain('nve examples.get <id> [format]');
   });
 
+  it('should provide api.get with variadic names', () => {
+    expect(output).toContain('nve api.get [--format] <names..>');
+    expect(output).not.toContain('nve api.get <names> [format]');
+  });
+
   it('should provide skills.list', () => {
     expect(output).toContain('nve skills.list [format]');
   });
@@ -119,6 +124,56 @@ describe('index', () => {
       expect(combined).not.toContain('"nve-foo,nve-bar"');
       expect(combined).toContain('nve-foo');
       expect(combined).toContain('nve-bar');
+    });
+
+    it('should pass space-separated API names as one array argument', () => {
+      const result = spawnSync(process.execPath, ['dist/index.js', 'api.get', 'nve-card', 'nve-input'], {
+        timeout: 10000,
+        encoding: 'utf-8',
+        input: '',
+        env: { ...process.env, CI: 'true' }
+      });
+
+      expect(result.status).toBe(0);
+      expect(result.stderr).toBe('');
+      expect(result.stdout).toContain('nve-card');
+      expect(result.stdout).toContain('nve-input');
+    });
+
+    it('should accept an explicit format option after space-separated API names', () => {
+      const result = spawnSync(
+        process.execPath,
+        ['dist/index.js', 'api.get', 'nve-card', 'nve-input', '--format', 'json'],
+        {
+          timeout: 10000,
+          encoding: 'utf-8',
+          input: '',
+          env: { ...process.env, CI: 'true' }
+        }
+      );
+
+      expect(result.status).toBe(0);
+      expect(result.stderr).toBe('');
+      expect(JSON.parse(result.stdout)).toEqual([
+        expect.objectContaining({ name: 'nve-card' }),
+        expect.objectContaining({ name: 'nve-input' })
+      ]);
+    });
+
+    it('should reject array arguments that exceed the schema limit', () => {
+      const result = spawnSync(
+        process.execPath,
+        ['dist/index.js', 'api.get', 'nve-card', 'nve-input', 'nve-button', 'nve-badge', 'nve-alert', 'nve-link'],
+        {
+          timeout: 10000,
+          encoding: 'utf-8',
+          input: '',
+          env: { ...process.env, CI: 'true' }
+        }
+      );
+
+      expect(result.status).toBe(1);
+      expect(result.stderr).toContain('api.get accepts at most 5 names.');
     });
   });
 

@@ -4,6 +4,7 @@ const DRY_RUN = process.env.DRY_RUN === 'true';
 const PLACEHOLDER_VERSION = '"0.0.0"';
 const packageFilePath = `${process.cwd()}/package.json`;
 const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
+const mcpServerFilePath = packageFile.mcpName ? `${process.cwd()}/server.json` : undefined;
 const [_org, scope] = packageFile.name.split('/');
 
 /**
@@ -78,7 +79,25 @@ export default {
             from: PLACEHOLDER_VERSION,
             to: '"${nextRelease.version}"',
             allowEmptyPaths: true
-          }
+          },
+          ...(mcpServerFilePath
+            ? [
+                {
+                  files: [mcpServerFilePath],
+                  from: `"version": "${packageFile.version}"`,
+                  to: '"version": "${nextRelease.version}"',
+                  results: [
+                    {
+                      file: mcpServerFilePath,
+                      hasChanged: true,
+                      numMatches: 2,
+                      numReplacements: 2
+                    }
+                  ],
+                  countMatches: true
+                }
+              ]
+            : [])
         ]
       }
     ],
@@ -91,7 +110,13 @@ export default {
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md', 'package.json', 'projects/**/package.json', 'projects/**/CHANGELOG.md'],
+        assets: [
+          'CHANGELOG.md',
+          'package.json',
+          'projects/**/package.json',
+          'projects/**/CHANGELOG.md',
+          ...(mcpServerFilePath ? ['server.json'] : [])
+        ],
         message: `chore(release): ${packageFile.name}` + '-v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }
     ],

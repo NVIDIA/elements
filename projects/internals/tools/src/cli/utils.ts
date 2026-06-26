@@ -9,7 +9,7 @@ declare const __ELEMENTS_PAGES_BASE_URL__: string;
 export type ProgressCallback = (message: string) => void;
 
 export const upgradeCommands = {
-  'macos/linux': `curl -fsSL ${__ELEMENTS_PAGES_BASE_URL__}/install.sh | bash`,
+  'macos/linux': `bash -o pipefail -c 'curl -fsSL ${__ELEMENTS_PAGES_BASE_URL__}/install.sh | bash'`,
   'windows-powershell': `powershell -NoProfile -ExecutionPolicy Bypass -Command "$script = Join-Path $env:TEMP 'nve-install.ps1'; Invoke-WebRequest -UseBasicParsing '${__ELEMENTS_PAGES_BASE_URL__}/install.ps1' -OutFile $script; & $script; Remove-Item $script -ErrorAction SilentlyContinue"`,
   nodejs: 'npm install -g @nvidia-elements/cli'
 };

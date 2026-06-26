@@ -40,6 +40,15 @@ describe('cli/utils', () => {
     vi.restoreAllMocks();
   });
 
+  it('should fail the macos/linux pipeline when the installer download fails', () => {
+    expect(upgradeCommands['macos/linux']).toContain('pipefail');
+  });
+
+  it('should default upgrade commands to the public pages host', () => {
+    expect(upgradeCommands['macos/linux']).toContain('https://nvidia.github.io/elements/install.sh');
+    expect(upgradeCommands['windows-powershell']).toContain('https://nvidia.github.io/elements/install.ps1');
+  });
+
   describe('performUpgrade (sync path, no onProgress)', () => {
     it('should return success report when upgrade succeeds', async () => {
       const { execSync } = await import('node:child_process');

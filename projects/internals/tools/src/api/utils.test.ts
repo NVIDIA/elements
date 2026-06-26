@@ -151,17 +151,20 @@ describe('getLatestPublishedVersions', () => {
     await expect(getLatestPublishedVersions(projects)).rejects.toThrow(/Could not fetch latest versions from/);
   });
 
-  it('should return fallback version and warn when fetch fails and ELEMENTS_ENV is not mcp', async () => {
-    vi.stubEnv('ELEMENTS_ENV', 'dev');
-    vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const { getLatestPublishedVersions } = await import('./utils.js');
+  it.each(['cli', 'dev'])(
+    'should return a fallback version and warn when fetch fails in the %s environment',
+    async environment => {
+      vi.stubEnv('ELEMENTS_ENV', environment);
+      vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      const { getLatestPublishedVersions } = await import('./utils.js');
 
-    const result = await getLatestPublishedVersions(projects);
+      const result = await getLatestPublishedVersions(projects);
 
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Could not fetch latest versions from'));
-    expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
-  });
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Could not fetch latest versions from'));
+      expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
+    }
+  );
 
   it('should fetch versions from the npm registry', async () => {
     vi.stubEnv('ELEMENTS_ENV', 'dev');
@@ -492,7 +495,7 @@ describe('attributeMetadataToMarkdown', () => {
       values: [
         { name: 'info' },
         { name: 'warning' },
-        { name: 'error|danger' }, // should be filtered
+        { name: 'error|danger' }, // filter this value
         { name: 'success' }
       ]
     };
@@ -511,9 +514,9 @@ describe('attributeMetadataToMarkdown', () => {
       markdown: '',
       values: [
         { name: 'active' },
-        { name: '@deprecated' }, // should be filtered
+        { name: '@deprecated' }, // filter this value
         { name: 'inactive' },
-        { name: 'user@email' } // should be filtered
+        { name: 'user@email' } // filter this value
       ]
     };
 
@@ -533,7 +536,7 @@ describe('attributeMetadataToMarkdown', () => {
       values: [
         { name: 'left' },
         { name: 'center' },
-        { name: 'left&right' }, // should be filtered
+        { name: 'left&right' }, // filter this value
         { name: 'right' }
       ]
     };

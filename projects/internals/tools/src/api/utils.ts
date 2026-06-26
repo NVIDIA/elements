@@ -15,6 +15,8 @@ import {
 
 export type { PartialAPIResult } from '../distill/apis.js';
 
+declare const __ELEMENTS_REGISTRY_URL__: string;
+
 export function getContextAPIs(
   format: 'markdown' | 'json',
   metadata: {
@@ -166,7 +168,7 @@ export interface ElementVersions {
   '@nvidia-elements/monaco': string;
 }
 
-const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
+const NPM_REGISTRY_URL = __ELEMENTS_REGISTRY_URL__;
 
 /* istanbul ignore next -- @preserve */
 let versions: ElementVersions | null = null;

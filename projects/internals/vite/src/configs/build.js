@@ -12,6 +12,7 @@ import { bundle } from '../plugins/bundle.js';
 import { initial } from '../plugins/initial.js';
 import { examplesToJSON } from '../plugins/examples.js';
 import { writeIfChanged } from '../plugins/write-if-changed.js';
+import { getElementsEnv } from './env.js';
 
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -26,14 +27,7 @@ const packageFile = JSON.parse(packageFilePath);
  */
 export const libraryBuildConfig = {
   plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem(), snippets()],
-  define: {
-    __ELEMENTS_PLAYGROUND_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PLAYGROUND_BASE_URL || ''),
-    __ELEMENTS_REPO_BASE_URL__: JSON.stringify(process.env.ELEMENTS_REPO_BASE_URL || ''),
-    __ELEMENTS_PAGES_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PAGES_BASE_URL || ''),
-    __ELEMENTS_REGISTRY_URL__: JSON.stringify(process.env.ELEMENTS_REGISTRY_URL || ''),
-    __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ESM_CDN_BASE_URL || ''),
-    __ELEMENTS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_BASE_URL || '')
-  },
+  define: getElementsEnv(),
   build: {
     reportCompressedSize: false,
     cssMinify: prod ? 'esbuild' : false,

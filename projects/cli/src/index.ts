@@ -9,9 +9,9 @@ process.env.ELEMENTS_ENV = 'cli';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { performance } from 'perf_hooks';
-import { type ManagedToolMethod, tools, ToolSupport, type Schema, isDebug, MAX_CONTEXT_TOKENS } from '@internals/tools';
+import { type ManagedToolMethod, tools, ToolSupport, type Schema } from '@internals/tools';
 import { installNve } from './install.js';
-import { banner, colors, getArgValue, progressBar, renderResult, runAsyncTool } from './utils.js';
+import { banner, colors, exitWithCompleteToolResult, exitWithToolError, getArgValue, runAsyncTool } from './utils.js';
 import { notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
@@ -46,11 +46,6 @@ yargsInstance.middleware(argv => {
   }
 });
 
-async function exitWithToolError(result: unknown, message: string | undefined): Promise<never> {
-  console.error(result === undefined ? colors.error(message ?? 'unknown error') : await renderResult(result));
-  process.exit(1);
-}
-
 yargsInstance.command(
   'install [source]',
   false,
@@ -73,10 +68,10 @@ yargsInstance.command(
   async () => {
     if (process.argv.includes('--upgrade')) {
       const upgradeTool = tools.find(tool => tool.metadata.command === 'cli.upgrade') as ManagedToolMethod<unknown>;
-      const { result, status, message } = await runAsyncTool({}, upgradeTool);
+      console.log(colors.info('Upgrading Elements CLI...'));
+      const { result, status, message } = await runAsyncTool({}, upgradeTool, { interactiveProgress: false });
       if (status === 'complete') {
-        await renderResult(result);
-        process.exit(0);
+        await exitWithCompleteToolResult({ result });
       } else {
         await exitWithToolError(result, message);
       }
@@ -100,9 +95,12 @@ tools
     const optionalArgs = Object.keys(properties ?? {}).filter(
       key => !required?.includes(key) || properties?.[key]?.default
     );
+    const hasVariadicArg = requiredArgs.some(key => properties?.[key]?.type === 'array');
+    const positionalArgs = requiredArgs.map(key => (properties?.[key]?.type === 'array' ? `<${key}..>` : `<${key}>`));
+    const optionArgs = optionalArgs.map(key => `[${hasVariadicArg ? '--' : ''}${key}]`);
+    const commandArgs = hasVariadicArg ? [...optionArgs, ...positionalArgs] : [...positionalArgs, ...optionArgs];
 
-    const command =
-      `${tool.metadata.command} ${[...requiredArgs.map(key => `<${key}>`), ...optionalArgs.map(key => `[${key}]`)].join(' ')}`.trim();
+    const command = `${tool.metadata.command} ${commandArgs.join(' ')}`.trim();
 
     yargsInstance.command(
       command,
@@ -113,7 +111,8 @@ tools
 
         const argOptions = (prop: Schema) => ({
           describe: prop.description,
-          type: prop.type as 'string' | 'number' | 'boolean',
+          type: (prop.type === 'array' ? 'string' : prop.type) as 'string' | 'number' | 'boolean',
+          ...(prop.type === 'array' ? { array: true } : {}),
           choices: prop.enum ?? undefined,
           default: prop.default
         });
@@ -128,17 +127,13 @@ tools
         const end = performance.now();
 
         if (status === 'complete') {
-          let formattedResult = await renderResult(result);
-          if (isDebug()) {
-            const tokens = formattedResult.length / 4;
-            const pct = (tokens / MAX_CONTEXT_TOKENS) * 100;
-            formattedResult += `[debug]\n[command]: ${tool.metadata.command}`;
-            formattedResult += `\n[execution time]: ${((end - start) / 1000).toFixed(2)} seconds`;
-            formattedResult += `\n[token usage]: ${progressBar(pct)} ${tokens.toLocaleString()} / ${MAX_CONTEXT_TOKENS.toLocaleString()} (${(100 - pct).toFixed(1)}% remaining)`;
-          }
-          console.log(formattedResult);
-          await notifyIfUpdateAvailable(BUILD_SHA);
-          process.exit(0);
+          await exitWithCompleteToolResult({
+            result,
+            tool,
+            start,
+            end,
+            notifyUpdate: () => notifyIfUpdateAvailable(BUILD_SHA)
+          });
         } else {
           await exitWithToolError(result, message);
         }
@@ -155,13 +150,31 @@ tools
               const propertySchema = properties?.[argName] ?? {};
               const v = await getArgValue(argName, propertySchema);
               argv[argName] = v;
-            } else if (properties?.[argName]?.type === 'array' && typeof argv[argName] === 'string') {
-              argv[argName] = (argv[argName] as string)
-                .split(',')
-                .map(s => s.trim())
-                .filter(Boolean);
             }
           }
+
+          Object.entries(properties ?? {})
+            .filter(([, property]) => property.type === 'array')
+            .forEach(([argName, property]) => {
+              if (argv[argName] === undefined) return;
+              const values = (Array.isArray(argv[argName]) ? argv[argName] : [argv[argName]])
+                .flatMap(value => (typeof value === 'string' ? value.split(',') : []))
+                .map(value => value.trim())
+                .filter(Boolean);
+              if (property.minItems !== undefined && values.length < property.minItems) {
+                console.error(
+                  colors.error(`${tool.metadata.command} accepts at least ${property.minItems} ${argName}.`)
+                );
+                process.exit(1);
+              }
+              if (property.maxItems !== undefined && values.length > property.maxItems) {
+                console.error(
+                  colors.error(`${tool.metadata.command} accepts at most ${property.maxItems} ${argName}.`)
+                );
+                process.exit(1);
+              }
+              argv[argName] = values;
+            });
         }
       ]
     );

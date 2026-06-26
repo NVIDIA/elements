@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { select, input, confirm, editor } from '@inquirer/prompts';
-import { type ManagedToolMethod, type Report } from '@internals/tools';
+import { isDebug, MAX_CONTEXT_TOKENS, type ManagedToolMethod, type Report } from '@internals/tools';
 import ora, { type Ora } from 'ora';
 import { marked } from 'marked';
 import { markedTerminal } from 'marked-terminal';
@@ -10,6 +10,10 @@ import { markedTerminal } from 'marked-terminal';
 export const banner = `"░██████████ ░██                                                     ░██               \\n░██         ░██                                                     ░██               \\n░██         ░██  ░███████  ░█████████████   ░███████  ░████████  ░████████  ░███████  \\n░█████████  ░██ ░██    ░██ ░██   ░██   ░██ ░██    ░██ ░██    ░██    ░██    ░██        \\n░██         ░██ ░█████████ ░██   ░██   ░██ ░█████████ ░██    ░██    ░██     ░███████  \\n░██         ░██ ░██        ░██   ░██   ░██ ░██        ░██    ░██    ░██           ░██ \\n░██████████ ░██  ░███████  ░██   ░██   ░██  ░███████  ░██    ░██     ░████  ░███████"`;
 
 type ArgInputType = 'string' | 'number' | 'boolean' | 'object' | 'array';
+
+interface RunAsyncToolOptions {
+  interactiveProgress?: boolean;
+}
 
 export const colors = {
   info: (value: string) => `\x1b[34m${value}\x1b[0m`,
@@ -40,8 +44,12 @@ export function getSpinnerProgressMessage() {
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
-export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToolMethod<unknown>) {
-  const isInteractive = !args.start && !args.log && !process.env.CI;
+export async function runAsyncTool(
+  args: Record<string, unknown>,
+  fn: ManagedToolMethod<unknown>,
+  options: RunAsyncToolOptions = {}
+) {
+  const isInteractive = (options.interactiveProgress ?? true) && !args.start && !args.log && !process.env.CI;
   let spinner: Ora | undefined;
 
   const startTime = Date.now();
@@ -58,13 +66,14 @@ export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToo
     };
   }
 
-  const value = await fn(args);
-
-  if (isInteractive) {
-    spinner?.stop();
-    console.log = originalConsole;
+  try {
+    return await fn(args);
+  } finally {
+    if (isInteractive) {
+      spinner?.stop();
+      console.log = originalConsole;
+    }
   }
-  return value;
 }
 
 interface PropertySchema {
@@ -133,7 +142,7 @@ export const statusIcons = {
   undefined: ''
 };
 
-export function isReport(result: unknown) {
+export function isReport(result: unknown): result is Report {
   if (!isObjectLiteral(result)) return false;
   return Object.entries(result as Record<string, unknown>).every(([, value]) => {
     const entry = value as Record<string, unknown>;
@@ -143,6 +152,46 @@ export function isReport(result: unknown) {
 
 export function reportHasFailures(result: Report) {
   return Object.values(result).some(value => value.status === 'danger');
+}
+
+export async function exitWithToolError(result: unknown, message: string | undefined): Promise<never> {
+  console.error(result === undefined ? colors.error(message ?? 'unknown error') : await renderResult(result));
+  process.exit(1);
+}
+
+export function exitCodeForResult(result: unknown) {
+  return isReport(result) && reportHasFailures(result) ? 1 : 0;
+}
+
+interface CompleteToolResultOptions {
+  result: unknown;
+  tool?: ManagedToolMethod<unknown>;
+  start?: number;
+  end?: number;
+  notifyUpdate?: () => Promise<void>;
+}
+
+export async function exitWithCompleteToolResult({
+  result,
+  tool,
+  start,
+  end,
+  notifyUpdate
+}: CompleteToolResultOptions): Promise<never> {
+  let formattedResult = await renderResult(result);
+  if (tool && start !== undefined && end !== undefined && isDebug()) {
+    const tokens = formattedResult.length / 4;
+    const pct = (tokens / MAX_CONTEXT_TOKENS) * 100;
+    formattedResult += `[debug]\n[command]: ${tool.metadata.command}`;
+    formattedResult += `\n[execution time]: ${((end - start) / 1000).toFixed(2)} seconds`;
+    formattedResult += `\n[token usage]: ${progressBar(pct)} ${tokens.toLocaleString()} / ${MAX_CONTEXT_TOKENS.toLocaleString()} (${(100 - pct).toFixed(1)}% remaining)`;
+  }
+  console.log(formattedResult);
+  const exitCode = exitCodeForResult(result);
+  if (exitCode === 0) {
+    await notifyUpdate?.();
+  }
+  process.exit(exitCode);
 }
 
 export async function renderReport(result: Report) {
@@ -155,10 +204,6 @@ export async function renderReport(result: Report) {
   });
 
   const results = (await Promise.all(reports.map(report => marked.parse(report)))).map(r => r.trim()).join('\n');
-
-  if (reportHasFailures(result)) {
-    process.exit(1);
-  }
 
   return results;
 }
