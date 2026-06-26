@@ -26,6 +26,7 @@ Node.js scripts that parse the monorepo and generate static JSON metadata files:
 - **`lighthouse.ts`** - Collects performance metrics (bundled via Git LFS)
 - **`wireit.ts`** - Generates build dependency graph visualization data
 - **`releases.ts`** - Parses git history to extract package release information
+- **`adoption.ts`** - Refreshes public npm, jsDelivr, and GitHub adoption metrics
 
 ### 2. Services (`src/services/`)
 
@@ -37,6 +38,7 @@ Runtime services that provide cached access to generated metadata with fallback 
 - **`TestsService`** - Exposes test coverage and results
 - **`ReleasesService`** - Returns release history
 - **`WireitService`** - Exposes build graph data
+- **`AdoptionService`** - Returns the public adoption metrics snapshot
 
 Services use a **dual-loading pattern**: first attempting to load from local `static/*.json` files, then falling back to fetching from public CDN if unavailable.
 
@@ -83,3 +85,6 @@ The metadata scripts generate common metadata about projects in the repo. This i
 - `pnpm run generate:examples`: runs the examples metadata script gathering all the source examples from the packages.
 - `pnpm run generate:wireit`: runs the wireit script that gathers all metadata details about the CI build and wireit dependencies.
 
+## Manual/scheduled tasks
+
+- `pnpm run generate:adoption`: refreshes the public adoption metrics snapshot from npm, jsDelivr, and GitHub public APIs. This task is not part of normal CI because it uses live public network data.

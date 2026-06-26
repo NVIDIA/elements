@@ -4,12 +4,13 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "node --experimental-strip-types ./src/metadata.ts",
+    "dev": "node ./src/metadata.ts",
     "ci": "wireit",
     "build": "wireit",
     "generate:api": "wireit",
     "generate:tests": "wireit",
     "generate:examples": "wireit",
+    "generate:adoption": "wireit",
     "generate:lighthouse": "wireit",
     "generate:wireit": "wireit",
     "generate:releases": "wireit",
@@ -27,6 +28,10 @@
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./services/adoption.service.js": {
+      "types": "./dist/services/adoption.service.d.ts",
+      "default": "./dist/src/services/adoption.service.js"
     },
     "./services/api.service.js": {
       "types": "./dist/services/api.service.d.ts",
@@ -65,6 +70,7 @@
       "files": [
         "src/**",
         "!src/**/*.test.ts",
+        "static/adoption.json",
         "static/lighthouse.json",
         "static/releases.json",
         "static/tests.json",
@@ -85,7 +91,7 @@
       ]
     },
     "generate:api": {
-      "command": "node --experimental-strip-types ./src/tasks/api.ts",
+      "command": "node ./src/tasks/api.ts",
       "files": [
         "./src/tasks/api.ts",
         "./src/tasks/api.utils.ts",
@@ -143,7 +149,7 @@
       ]
     },
     "generate:projects": {
-      "command": "node --experimental-strip-types ./src/tasks/projects.ts",
+      "command": "node ./src/tasks/projects.ts",
       "files": [
         "./src/tasks/projects.ts",
         "./src/tasks/projects.utils.ts",
@@ -177,7 +183,7 @@
       ]
     },
     "generate:tests": {
-      "command": "node --experimental-strip-types ./src/tasks/tests.ts",
+      "command": "node ./src/tasks/tests.ts",
       "files": [
         "./src/tasks/tests.ts",
         "./src/tasks/tests.utils.ts",
@@ -272,7 +278,7 @@
       ]
     },
     "generate:examples": {
-      "command": "node --experimental-strip-types ./src/tasks/examples.ts",
+      "command": "node ./src/tasks/examples.ts",
       "clean": false,
       "files": [
         "./src/tasks/examples.ts",
@@ -321,8 +327,20 @@
         }
       ]
     },
+    "generate:adoption": {
+      "command": "node ./src/tasks/adoption.ts",
+      "clean": false,
+      "files": [
+        "src/tasks/adoption.ts",
+        "src/tasks/adoption.utils.ts",
+        "../../*/package.json"
+      ],
+      "output": [
+        "static/adoption.json"
+      ]
+    },
     "generate:lighthouse": {
-      "command": "node --experimental-strip-types ./src/tasks/lighthouse.ts",
+      "command": "node ./src/tasks/lighthouse.ts",
       "clean": false,
       "files": [
         "src/tasks/lighthouse.ts",
@@ -336,7 +354,7 @@
       ]
     },
     "generate:wireit": {
-      "command": "node --experimental-strip-types ./src/tasks/wireit.ts",
+      "command": "node ./src/tasks/wireit.ts",
       "clean": false,
       "files": [
         "src/tasks/wireit.ts",
@@ -348,7 +366,7 @@
       "dependencies": []
     },
     "generate:releases": {
-      "command": "node --experimental-strip-types ./src/tasks/releases.ts",
+      "command": "node ./src/tasks/releases.ts",
       "clean": false,
       "files": [
         "src/tasks/releases.ts",

@@ -21,6 +21,7 @@ export default mergeConfig(libraryNodeTestConfig, {
         'src/services/tests.service.ts',
         'src/tasks/metadata.ts',
         'src/tasks/metadata.utils.ts',
+        'src/tasks/adoption.ts',
         'src/tasks/lighthouse.ts',
         'src/tasks/tests.ts',
         'src/tasks/releases.ts',

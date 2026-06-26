@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export { ExamplesService } from './services/examples.service.js';
+export * from './services/adoption.service.js';
 export * from './services/api.service.js';
 export * from './services/tests.service.js';
 export * from './services/wireit.service.js';

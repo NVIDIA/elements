@@ -446,6 +446,146 @@ export interface WireitGraph {
   links: WireitGraphLink[];
 }
 
+/**
+ * @summary Public source used for adoption metadata.
+ */
+export type AdoptionSource = 'npm-downloads' | 'npm-registry' | 'jsdelivr' | 'github';
+
+/**
+ * @summary Availability state for a package in public adoption metadata.
+ */
+export type AdoptionPackageStatus = 'published' | 'partial' | 'unavailable';
+
+/**
+ * @summary Source failure captured during adoption metadata generation.
+ */
+export interface AdoptionSourceError {
+  source: AdoptionSource;
+  status: number | null;
+  message: string;
+}
+
+/**
+ * @summary Daily public count for downloads, requests, or interest signals.
+ */
+export interface AdoptionDailyCount {
+  date: string;
+  count: number;
+}
+
+/**
+ * @summary Public npm downloads over the snapshot window.
+ */
+export interface AdoptionNpmDownloads {
+  start: string;
+  end: string;
+  total: number;
+  daily: AdoptionDailyCount[];
+}
+
+/**
+ * @summary Published npm version timestamp.
+ */
+export interface AdoptionPublishDate {
+  version: string;
+  date: string;
+}
+
+/**
+ * @summary jsDelivr requests for one package version.
+ */
+export interface AdoptionCdnVersion {
+  version: string;
+  total: number;
+  share: number;
+  daily: AdoptionDailyCount[];
+}
+
+/**
+ * @summary Top jsDelivr package version for the snapshot window.
+ */
+export interface AdoptionTopCdnVersion {
+  version: string;
+  total: number;
+  share: number;
+}
+
+/**
+ * @summary Public jsDelivr request metadata over the snapshot window.
+ */
+export interface AdoptionCdnStats {
+  rank: number | null;
+  typeRank: number | null;
+  total: number;
+  daily: AdoptionDailyCount[];
+  versions: AdoptionCdnVersion[];
+  topVersion: AdoptionTopCdnVersion | null;
+  latestVersionShare: number;
+}
+
+/**
+ * @summary Public adoption metadata for one Elements package.
+ */
+export interface AdoptionPackage {
+  name: string;
+  workspaceVersion: string;
+  status: AdoptionPackageStatus;
+  latestVersion: string | null;
+  publishedAt: string | null;
+  versionCount: number;
+  publishDates: AdoptionPublishDate[];
+  npm: AdoptionNpmDownloads;
+  cdn: AdoptionCdnStats;
+  errors: AdoptionSourceError[];
+}
+
+/**
+ * @summary Monthly public GitHub star growth.
+ */
+export interface AdoptionGitHubStargazerMonth {
+  month: string;
+  stars: number;
+  cumulativeStars: number;
+}
+
+/**
+ * @summary Public GitHub interest metadata.
+ */
+export interface AdoptionGitHubMetrics {
+  repository: string;
+  stars: number;
+  forks: number;
+  subscribers: number;
+  contributors: number;
+  releases: number;
+  stargazers: AdoptionGitHubStargazerMonth[];
+  errors: AdoptionSourceError[];
+}
+
+/**
+ * @summary Public adoption metadata.
+ */
+export interface AdoptionSummary {
+  created: string;
+  period: string;
+  sources: {
+    npmDownloads: string;
+    npmRegistry: string;
+    jsdelivr: string;
+    github: string;
+  };
+  totals: {
+    packages: number;
+    publishedPackages: number;
+    partialPackages: number;
+    unavailablePackages: number;
+    npmDownloads: number;
+    cdnRequests: number;
+  };
+  packages: AdoptionPackage[];
+  github: AdoptionGitHubMetrics;
+}
+
 export interface ArtifactoryInstance {
   instance: string;
   downloads: number;

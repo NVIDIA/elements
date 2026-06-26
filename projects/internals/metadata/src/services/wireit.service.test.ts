@@ -6,6 +6,10 @@ import { WireitService } from './wireit.service.js';
 
 describe('WireitService', () => {
   it('should return the wireit graph data', async () => {
-    expect(WireitService.getData).toBeTruthy();
+    const graph = await WireitService.getData();
+
+    expect(graph.nodes.length).toBeGreaterThan(0);
+    expect(graph.links.length).toBeGreaterThan(0);
+    expect(await WireitService.getData()).toBe(graph);
   });
 });

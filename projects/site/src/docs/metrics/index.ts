@@ -5,6 +5,7 @@ import { compareVersions } from 'compare-versions';
 import { Chart } from 'chart.js/auto';
 import { getThemeTokens } from '@nvidia-elements/core';
 import { ReleasesService, TestsService, ApiService } from '@internals/metadata';
+import { getWeeklyReleaseMilestones, getWeeklyReleaseTypeDistribution } from './release-data.js';
 
 const tokens = getThemeTokens();
 const releaseMetrics = await ReleasesService.getData();
@@ -42,78 +43,13 @@ const versionMilestones = sortedReleaseVersions.map((version, idx) => ({
   cumulativeTotal: sortedReleaseVersions.slice(0, idx + 1).reduce((sum, v) => sum + componentsByVersion[v].length, 0)
 }));
 
-const sortedReleases = [...releaseMetrics.data].reverse();
-
-const releasesByMonth = sortedReleases.reduce(
-  (acc, release) => {
-    const date = new Date(release.date);
-    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-
-    if (!acc[monthKey]) {
-      acc[monthKey] = {
-        monthKey,
-        date,
-        count: 0,
-        releases: []
-      };
-    }
-
-    acc[monthKey].count++;
-    acc[monthKey].releases.push(release);
-    return acc;
-  },
-  {} as Record<string, { monthKey: string; date: Date; count: number; releases: typeof sortedReleases }>
-);
-
-const monthlyData = Object.values(releasesByMonth).sort((a, b) => a.date.getTime() - b.date.getTime());
-
-let cumulativeTotal = 0;
-const monthlyMilestones = monthlyData.map(month => {
-  cumulativeTotal += month.count;
-  return {
-    monthKey: month.monthKey,
-    date: month.date,
-    releasesThisMonth: month.count,
-    cumulativeTotal,
-    formattedDate: new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(month.date),
-    releases: month.releases
-  };
-});
-
-// Release Type Distribution Data
-type ReleaseWithType = { name: string; version: string; date: string; type: 'fix' | 'feat' | 'breaking' | 'chore' };
-
-const releaseTypesByMonth = sortedReleases.reduce(
-  (acc, release) => {
-    const date = new Date(release.date);
-    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-
-    if (!acc[monthKey]) {
-      acc[monthKey] = {
-        monthKey,
-        date,
-        fix: 0,
-        feat: 0,
-        breaking: 0,
-        chore: 0
-      };
-    }
-
-    const releaseWithType = release as unknown as ReleaseWithType;
-    if (releaseWithType.type) {
-      acc[monthKey][releaseWithType.type]++;
-    }
-    return acc;
-  },
-  {} as Record<string, { monthKey: string; date: Date; fix: number; feat: number; breaking: number; chore: number }>
-);
-
-const monthlyTypeData = Object.values(releaseTypesByMonth).sort((a, b) => a.date.getTime() - b.date.getTime());
+const weeklyReleaseMilestones = getWeeklyReleaseMilestones(releaseMetrics.data);
+const weeklyTypeData = getWeeklyReleaseTypeDistribution(releaseMetrics.data);
 
 const releaseTypeDatasets = [
   {
     label: 'Features (minor)',
-    data: monthlyTypeData.map(m => m.feat),
+    data: weeklyTypeData.map(week => week.feat),
     borderColor: tokens['--nve-sys-visualization-categorical-grass'],
     backgroundColor: tokens['--nve-sys-visualization-categorical-grass'],
     borderWidth: 1,
@@ -124,7 +60,7 @@ const releaseTypeDatasets = [
   },
   {
     label: 'Fixes (patch)',
-    data: monthlyTypeData.map(m => m.fix),
+    data: weeklyTypeData.map(week => week.fix),
     borderColor: tokens['--nve-sys-visualization-categorical-amber'],
     backgroundColor: tokens['--nve-sys-visualization-categorical-amber'],
     borderWidth: 1,
@@ -135,7 +71,7 @@ const releaseTypeDatasets = [
   },
   {
     label: 'Breaking Changes (major)',
-    data: monthlyTypeData.map(m => m.breaking),
+    data: weeklyTypeData.map(week => week.breaking),
     borderColor: tokens['--nve-sys-visualization-categorical-red'],
     backgroundColor: tokens['--nve-sys-visualization-categorical-red'],
     borderWidth: 1,
@@ -146,7 +82,7 @@ const releaseTypeDatasets = [
   },
   {
     label: 'Total',
-    data: monthlyTypeData.map(m => m.feat + m.fix + m.breaking),
+    data: weeklyTypeData.map(week => week.feat + week.fix + week.breaking),
     borderColor: tokens['--nve-sys-visualization-categorical-cyan'],
     backgroundColor: tokens['--nve-sys-visualization-categorical-cyan'],
     borderWidth: 1,
@@ -307,11 +243,11 @@ new Chart(globalThis.document.getElementById('elements-growth-chart') as HTMLCan
 new Chart(globalThis.document.getElementById('total-releases-chart') as HTMLCanvasElement, {
   type: 'line',
   data: {
-    labels: monthlyMilestones.map(m => m.formattedDate),
+    labels: weeklyReleaseMilestones.map(m => m.formattedDate),
     datasets: [
       {
         label: 'Total Releases',
-        data: monthlyMilestones.map(m => m.cumulativeTotal),
+        data: weeklyReleaseMilestones.map(m => m.cumulativeTotal),
         borderColor: tokens['--nve-sys-visualization-categorical-grass'],
         borderWidth: 2,
         fill: true,
@@ -362,20 +298,20 @@ new Chart(globalThis.document.getElementById('total-releases-chart') as HTMLCanv
         callbacks: {
           title: function (context) {
             const idx = context[0].dataIndex;
-            const milestone = monthlyMilestones[idx];
+            const milestone = weeklyReleaseMilestones[idx];
             return milestone.formattedDate;
           },
           label: function (context) {
             const idx = context.dataIndex;
-            const milestone = monthlyMilestones[idx];
+            const milestone = weeklyReleaseMilestones[idx];
             return [
               `Cumulative Total: ${milestone.cumulativeTotal}`,
-              `Releases This Month: ${milestone.releasesThisMonth}`
+              `Releases This Week: ${milestone.releasesThisWeek}`
             ];
           },
           afterLabel: function (context) {
             const idx = context.dataIndex;
-            const milestone = monthlyMilestones[idx];
+            const milestone = weeklyReleaseMilestones[idx];
             const releaseNames = milestone.releases.slice(0, 5).map(r => `  • ${r.name}`);
             if (milestone.releases.length > 5) {
               releaseNames.push(`  ... and ${milestone.releases.length - 5} more`);
@@ -391,9 +327,7 @@ new Chart(globalThis.document.getElementById('total-releases-chart') as HTMLCanv
 new Chart(globalThis.document.getElementById('release-type-distribution-chart') as HTMLCanvasElement, {
   type: 'line',
   data: {
-    labels: monthlyTypeData.map(m =>
-      new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(m.date)
-    ),
+    labels: weeklyTypeData.map(week => week.formattedDate),
     datasets: releaseTypeDatasets
   },
   options: {
@@ -417,7 +351,7 @@ new Chart(globalThis.document.getElementById('release-type-distribution-chart') 
       y: {
         title: {
           display: true,
-          text: 'Releases per Month',
+          text: 'Releases per Week',
           color: tokens['--nve-sys-text-emphasis-color'],
           font: { size: 11 }
         },
@@ -447,13 +381,12 @@ new Chart(globalThis.document.getElementById('release-type-distribution-chart') 
         callbacks: {
           title: function (context) {
             const idx = context[0].dataIndex;
-            const month = monthlyTypeData[idx];
-            return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(month.date);
+            return weeklyTypeData[idx].formattedDate;
           },
           afterTitle: function (context) {
             const idx = context[0].dataIndex;
-            const month = monthlyTypeData[idx];
-            const total = month.feat + month.fix + month.breaking + month.chore;
+            const week = weeklyTypeData[idx];
+            const total = week.feat + week.fix + week.breaking + week.chore;
             return `Total: ${total} releases`;
           },
           label: function (context) {

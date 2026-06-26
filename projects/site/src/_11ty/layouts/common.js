@@ -133,7 +133,7 @@ export const renderBaseHead = data => {
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">
-  <nve-tree-node ${data.page.url === '/' || data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/integrations/installation/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/skills/') || data.page.url.includes('/docs/lint/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url === '/' || data.page.url.includes('/docs/integrations/installation/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/skills/') || data.page.url.includes('/docs/lint/') ? 'expanded' : ''}>
     <a href="/">Getting Started</a>
     <nve-tree-node ${data.page.url === '/' ? 'highlighted selected' : ''}><a href="/">Getting Started</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="/docs/integrations/installation/">Installation</a></nve-tree-node>
