@@ -15,7 +15,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(130.5);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(132);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(120);
@@ -62,6 +62,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/password/define.js';
         import '@nvidia-elements/core/preferences-input/define.js';
         import '@nvidia-elements/core/progress-bar/define.js';
+        import '@nvidia-elements/core/progress-gauge/define.js';
         import '@nvidia-elements/core/progress-ring/define.js';
         import '@nvidia-elements/core/progressive-filter-chip/define.js';
         import '@nvidia-elements/core/radio/define.js';

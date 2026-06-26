@@ -605,6 +605,18 @@
       "types": "./dist/progress-bar/define.d.ts",
       "default": "./dist/progress-bar/define.js"
     },
+    "./progress-gauge": {
+      "types": "./dist/progress-gauge/index.d.ts",
+      "default": "./dist/progress-gauge/index.js"
+    },
+    "./progress-gauge/index.js": {
+      "types": "./dist/progress-gauge/index.d.ts",
+      "default": "./dist/progress-gauge/index.js"
+    },
+    "./progress-gauge/define.js": {
+      "types": "./dist/progress-gauge/define.d.ts",
+      "default": "./dist/progress-gauge/define.js"
+    },
     "./progress-ring": {
       "types": "./dist/progress-ring/index.d.ts",
       "default": "./dist/progress-ring/index.js"
