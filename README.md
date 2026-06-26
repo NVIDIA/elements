@@ -1,5 +1,7 @@
 # NVIDIA Elements
 
+<!-- cloud-agent env test: remove after verification -->
+
 NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
 
 - **Agent-ready tooling:** CLI and MCP expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.
