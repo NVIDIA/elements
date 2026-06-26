@@ -184,27 +184,42 @@ export function checkSemanticDependencies(packageJson: PackageData): ReportCheck
 }
 
 export async function checkDependencies(packageJson: PackageData, currentVersions: ElementVersions) {
-  const versions = await getVersionHealth(packageJson, currentVersions);
   const dependencies = Object.keys(packageJson.dependencies ?? {});
   const devDependencies = Object.keys(packageJson.devDependencies ?? {});
   const peerDependencies = Object.keys(packageJson.peerDependencies ?? {});
   const elementPackages = Object.keys(currentVersions);
   const allDependencies = [...dependencies, ...devDependencies, ...peerDependencies];
-  let status: 'success' | 'danger' | 'warning' = 'success';
-  let message = '@nvidia-elements packages are up to date';
 
   if (!allDependencies.some(dependency => elementPackages.includes(dependency))) {
-    status = 'warning';
-    message = 'No @nvidia-elements packages found in the project';
+    return {
+      versions: {},
+      status: 'warning' as const,
+      message: 'No @nvidia-elements packages found in the project'
+    };
   }
 
+  const unavailablePackages = Object.entries(currentVersions)
+    .filter(([packageName, version]) => allDependencies.includes(packageName) && version === '0.0.0')
+    .map(([packageName]) => packageName);
+  if (unavailablePackages.length > 0) {
+    return {
+      versions: {},
+      status: 'danger' as const,
+      message: `Could not verify latest versions for ${unavailablePackages.join(', ')}`
+    };
+  }
+
+  const versions = await getVersionHealth(packageJson, currentVersions);
   if (
     Object.values(versions).some(version => version.status === 'danger') ||
     Object.values(versions).some(version => version.status === 'warning')
   ) {
-    status = 'warning'; // warning for either to ensure this does not trigger a CI runtime failure as this checks the latest version remotely
-    message = '@nvidia-elements packages are out of date';
+    return {
+      versions,
+      status: 'warning' as const,
+      message: '@nvidia-elements packages are out of date'
+    };
   }
 
-  return { versions, status, message };
+  return { versions, status: 'success' as const, message: '@nvidia-elements packages are up to date' };
 }

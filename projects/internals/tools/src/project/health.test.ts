@@ -106,7 +106,7 @@ describe('getVersionStatus', () => {
   });
 
   it('should handle versions with missing minor or patch parts', () => {
-    // When minor is undefined, the comparison will fail and return 'success'
+    // A missing minor part makes the comparison fail and return 'success'
     expect(getVersionStatus('1', '1.10.0')).toEqual('success');
     expect(getVersionStatus('1.5', '1.10.0')).toEqual('success');
     expect(getVersionStatus('1.0.0', '1')).toEqual('success');
@@ -315,6 +315,23 @@ describe('checkDependencies', () => {
     expect(result.versions['@nvidia-elements/core'].status).toBe('danger');
   });
 
+  it('should return danger when the latest version cannot be verified', async () => {
+    const result = await checkDependencies(
+      {
+        devDependencies: {},
+        dependencies: { '@nvidia-elements/core': '1.0.0' },
+        peerDependencies: {}
+      },
+      { '@nvidia-elements/core': '0.0.0' } as ElementVersions
+    );
+
+    expect(result).toEqual({
+      versions: {},
+      status: 'danger',
+      message: 'Could not verify latest versions for @nvidia-elements/core'
+    });
+  });
+
   it('should return warning when packages are out of date (warning status)', async () => {
     const result = await checkDependencies(
       {
@@ -386,7 +403,7 @@ describe('checkDependencies', () => {
 describe('checkPublint (indirect testing)', () => {
   it('should handle publint checks with various status types', async () => {
     // This test verifies the behavior of checkPublint indirectly
-    // by testing the status mapping logic that would be used
+    // by testing the status mapping logic that checkPublint would use
     const statusOptions = {
       suggestion: 'warning',
       warning: 'warning',
@@ -399,7 +416,7 @@ describe('checkPublint (indirect testing)', () => {
   });
 
   it('should handle empty publint checks', async () => {
-    // This test verifies the behavior when no checks are returned
+    // This test verifies the behavior when publint returns no checks
     // The function should return a success message
     const emptyChecks: unknown[] = [];
     const results: Record<string, unknown> = {};

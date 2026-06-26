@@ -7,8 +7,10 @@ import type { Element } from '@internals/metadata';
 import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
+declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
+
 const ELEMENTS_PLAYGROUND_BASE_URL = process.env.ELEMENTS_PLAYGROUND_BASE_URL ?? '';
-const ELEMENTS_ESM_CDN_BASE_URL = process.env.ELEMENTS_ESM_CDN_BASE_URL ?? '';
+const ELEMENTS_ESM_CDN_BASE_URL = __ELEMENTS_ESM_CDN_BASE_URL__;
 
 interface PlaygroundOptions {
   type?: PlaygroundType;

@@ -35,7 +35,7 @@
     "dist/**/*.js"
   ],
   "scripts": {
-    "dev": "pnpm run nve:install && npx @modelcontextprotocol/inspector@0.22.0 node ./dist/index.js mcp",
+    "dev": "pnpm run cli:install && npx @modelcontextprotocol/inspector@0.22.0 node ./dist/index.js mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",

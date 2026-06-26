@@ -21,7 +21,11 @@ export async function fetchLatestSha(): Promise<string> {
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}`);
     }
-    return ((await res.json()) as { sha: string }).sha;
+    const { sha } = (await res.json()) as { sha?: string };
+    if (typeof sha !== 'string') {
+      throw new Error('Missing sha');
+    }
+    return sha;
   } catch {
     throw new Error('Failed to fetch latest build info');
   }
@@ -50,8 +54,7 @@ export async function isUpdateAvailable(currentSha: string): Promise<boolean> {
 }
 
 /**
- * Shows update notification if a newer build is available.
- * Call after command execution with the promise from checkForUpdates().
+ * Shows update notification if the hosted CLI build differs.
  */
 export async function notifyIfUpdateAvailable(buildSha: string): Promise<void> {
   if (process.env.CI || !process.stdout.isTTY) {

@@ -8,6 +8,7 @@ import { dts } from '../plugins/dts.js';
 import { jsonDynamicImports } from '../plugins/json-dynamic-imports.js';
 import { transpileDecorators } from '../plugins/decorators.js';
 import { markdown } from '../plugins/markdown.js';
+import { getElementsEnv } from './env.js';
 
 const NODE_BUILT_IN_MODULES = builtinModules.filter(m => !m.startsWith('_'));
 NODE_BUILT_IN_MODULES.push(...NODE_BUILT_IN_MODULES.map(m => `node:${m}`));
@@ -27,14 +28,7 @@ export const libraryNodeBuildConfig = {
     exclude: NODE_BUILT_IN_MODULES
   },
   plugins: [tsc(), dts(), transpileDecorators(), markdown()],
-  define: {
-    __ELEMENTS_PLAYGROUND_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PLAYGROUND_BASE_URL || ''),
-    __ELEMENTS_REPO_BASE_URL__: JSON.stringify(process.env.ELEMENTS_REPO_BASE_URL || ''),
-    __ELEMENTS_PAGES_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PAGES_BASE_URL || ''),
-    __ELEMENTS_REGISTRY_URL__: JSON.stringify(process.env.ELEMENTS_REGISTRY_URL || ''),
-    __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ESM_CDN_BASE_URL || ''),
-    __ELEMENTS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_BASE_URL || '')
-  },
+  define: getElementsEnv(),
   build: {
     reportCompressedSize: false,
     watch: mode === 'watch' ? {} : undefined,

@@ -328,15 +328,25 @@ describe('installNve', () => {
     expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
   });
 
-  it('should overwrite the global Elements skill when accepted', async () => {
+  it('should overwrite the global Elements skill without prompting when it already exists', async () => {
     const context = await createInstallerContext();
     const source = await writeFakeNve(join(context.root, 'source-nve'));
     const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
+    let prompted = false;
     await mkdir(dirname(skillPath), { recursive: true });
     await writeFile(skillPath, 'stale skill');
 
-    await installNve({ env: createUnixEnv(context), log: () => {}, prompt: async () => 'y', source });
+    await installNve({
+      env: createUnixEnv(context),
+      log: () => {},
+      prompt: async () => {
+        prompted = true;
+        return 'N';
+      },
+      source
+    });
 
+    expect(prompted).toBe(false);
     expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
   });
 
@@ -391,6 +401,28 @@ describe('installNve', () => {
 
     expect(prompted).toBe(false);
     expect(existsSync(join(context.home, '.agents/skills/elements/SKILL.md'))).toBe(false);
+  });
+
+  it('should update an existing global Elements skill in CI without prompting', async () => {
+    const context = await createInstallerContext();
+    const source = await writeFakeNve(join(context.root, 'source-nve'));
+    const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
+    let prompted = false;
+    await mkdir(dirname(skillPath), { recursive: true });
+    await writeFile(skillPath, 'stale skill');
+
+    await installNve({
+      env: { ...createUnixEnv(context), CI: 'true' },
+      log: () => {},
+      prompt: async () => {
+        prompted = true;
+        return 'yes';
+      },
+      source
+    });
+
+    expect(prompted).toBe(false);
+    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
   });
 
   it('should keep the CLI install when global skill installation fails', async () => {
@@ -724,6 +756,30 @@ describe('write-install-manifest', () => {
 
     expect(source).toContain("{ key: 'windows-x64', filename: 'nve-windows-x64.exe', source: 'nve-windows-x64.exe' }");
   });
+
+  it('should use the embedded build sha and version', async () => {
+    const context = await createInstallerContext();
+    const dist = join(context.root, 'dist');
+    await mkdir(dist, { recursive: true });
+    await writeFile(join(dist, 'index.js'), 'var VERSION = "2.1.0";\nvar BUILD_SHA = "abc123def456";\n');
+    await Promise.all(
+      ['nve-macos-arm64', 'nve-macos-x64', 'nve-linux-x64', 'nve-linux-arm64', 'nve-windows-x64.exe'].map(
+        async filename => writeFile(join(dist, filename), filename)
+      )
+    );
+
+    const result = spawnSync(process.execPath, [writeInstallManifest], { cwd: context.root, encoding: 'utf-8' });
+    const manifest = JSON.parse(await readFile(join(dist, 'manifest.json'), 'utf-8')) as {
+      sha: string;
+      version: string;
+      platforms: { 'macos-arm64': { checksum: string } };
+    };
+
+    expect(result.status).toBe(0);
+    expect(manifest.sha).toBe('abc123def456');
+    expect(manifest.version).toBe('2.1.0');
+    expect(manifest.platforms['macos-arm64'].checksum).toBe(getContentChecksum('nve-macos-arm64'));
+  });
 });
 
 async function createInstallerContext(): Promise<InstallerContext> {
@@ -952,6 +1008,10 @@ function getCurrentPlatformKey(): string {
 
 function getFileChecksum(path: string): string {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
+}
+
+function getContentChecksum(value: string): string {
+  return createHash('sha256').update(value).digest('hex');
 }
 
 function countOccurrences(value: string, search: string): number {

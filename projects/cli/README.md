@@ -52,7 +52,7 @@ npm install -g @nvidia-elements/cli
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `nve`                                                            | Show About and help output.                                                            |
 | `nve api.list [format]`                                          | Get a list of all available Elements (`nve-*`) APIs and components.                    |
-| `nve api.get <names> [format]`                                   | Get documentation for known components or attributes by name (`nve-*`).                |
+| `nve api.get <names..> [--format <format>]`                      | Get documentation for one to five known components or attributes (`nve-*`).            |
 | `nve api.template.validate <template>`                           | Check HTML templates using Elements APIs and components (`nve-*`).                     |
 | `nve api.imports.get <template>`                                 | Get ESM imports for an HTML template using Elements APIs (`nve-*`).                    |
 | `nve api.tokens.list [format] [query]`                           | Get available semantic CSS custom properties and design tokens for theming.            |

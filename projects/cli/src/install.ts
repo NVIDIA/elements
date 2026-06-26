@@ -389,19 +389,20 @@ function getManifestPlatform(platform: NodeJS.Platform): string {
 }
 
 async function installGlobalElementsSkill(context: InstallContext): Promise<void> {
-  if (!(await shouldInstallGlobalElementsSkill(context))) {
-    return;
-  }
-
   const skillPath = getGlobalElementsSkillPath(context.env, context.platform);
   if (!skillPath) {
     context.warn('Could not install Elements agent skill. HOME is not set.');
     return;
   }
 
+  const hasExistingSkill = existsSync(skillPath);
+  if (!hasExistingSkill && !(await shouldInstallGlobalElementsSkill(context))) {
+    return;
+  }
+
   try {
     await writeGlobalElementsSkill(skillPath);
-    context.log(`Installed agent skill at ${skillPath}`);
+    context.log(`${hasExistingSkill ? 'Updated' : 'Installed'} agent skill at ${skillPath}`);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     context.warn(`Could not install Elements agent skill at ${skillPath}. ${message}`);

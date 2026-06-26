@@ -12,6 +12,7 @@ const MCP_UI_SOURCE_DIR = resolve(import.meta.dirname, 'src/mcp/ui');
 const MCP_UI_OUTPUT_DIR = resolve(import.meta.dirname, 'dist/mcp/ui');
 const MCP_UI_ENTRYPOINTS = ['api-icons-list.html', 'api-tokens-list.html', 'examples-render.html'];
 const MCP_UI_INLINE_MODULE_ID = 'virtual:mcp-ui-inline';
+const PACKAGE_JSON_PATH = resolve(import.meta.dirname, 'package.json');
 
 export default defineConfig(async ({ command }) => {
   if (command === 'build') await buildMcpUiResources();
@@ -142,5 +143,14 @@ async function getNextReleaseVersion() {
     }
   );
 
-  return releaseResult ? releaseResult.nextRelease.version : '0.0.0';
+  return releaseResult?.nextRelease?.version ?? getPackageVersion();
+}
+
+function getPackageVersion() {
+  const packageJson: unknown = JSON.parse(readFileSync(PACKAGE_JSON_PATH, 'utf-8'));
+  if (!packageJson || typeof packageJson !== 'object' || !('version' in packageJson)) {
+    return '0.0.0';
+  }
+
+  return typeof packageJson.version === 'string' ? packageJson.version : '0.0.0';
 }

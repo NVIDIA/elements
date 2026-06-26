@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const platformBinaries = [
@@ -14,9 +14,9 @@ const platformBinaries = [
 ];
 
 const manifestPath = resolve('dist/manifest.json');
-const existingManifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf-8')) : {};
-const indexContent = readFileSync(resolve('dist/index.js'));
-const sha = existingManifest.sha || createHash('sha256').update(indexContent).digest('hex').slice(0, 12);
+const indexContent = readFileSync(resolve('dist/index.js'), 'utf-8');
+const sha = getBundledConstant(indexContent, 'BUILD_SHA');
+const version = getBundledConstant(indexContent, 'VERSION');
 const platforms = Object.fromEntries(
   platformBinaries.map(({ key, filename, source }) => {
     const content = readFileSync(resolve('dist', source));
@@ -24,4 +24,12 @@ const platforms = Object.fromEntries(
   })
 );
 
-writeFileSync(manifestPath, `${JSON.stringify({ sha, platforms }, null, 2)}\n`);
+writeFileSync(manifestPath, `${JSON.stringify({ sha, version, platforms }, null, 2)}\n`);
+
+function getBundledConstant(content, name) {
+  const value = content.match(new RegExp(`(?:var|const|let)\\s+${name}\\s*=\\s*["']([^"']+)["']`))?.[1];
+  if (!value) {
+    throw new Error(`Missing bundled ${name} constant`);
+  }
+  return value;
+}

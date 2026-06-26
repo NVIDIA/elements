@@ -89,8 +89,8 @@ nve skills.get elements
     <nve-grid-cell>Search and retrieve a list of Elements (nve-*) components and APIs using keywords or natural language.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve api.get &lt;names&gt; [format]</code></nve-grid-cell>
-    <nve-grid-cell>Get documentation known components or attributes by name (nve-*).</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve api.get &lt;names..&gt; [--format &lt;format&gt;]</code></nve-grid-cell>
+    <nve-grid-cell>Get documentation for one to five known components or attributes (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve api.template.validate &lt;template&gt;</code></nve-grid-cell>

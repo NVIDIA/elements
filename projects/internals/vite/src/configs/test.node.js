@@ -1,6 +1,7 @@
 import process from 'process';
 import { transpileDecorators } from '../plugins/decorators.js';
 import { markdown } from '../plugins/markdown.js';
+import { getElementsEnv } from './env.js';
 
 const watch = process.argv.findIndex(i => i === '--watch') !== -1;
 const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
@@ -14,14 +15,7 @@ export const libraryNodeTestConfig = {
       allow: [process.cwd(), '/']
     }
   },
-  define: {
-    __ELEMENTS_PLAYGROUND_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PLAYGROUND_BASE_URL || ''),
-    __ELEMENTS_REPO_BASE_URL__: JSON.stringify(process.env.ELEMENTS_REPO_BASE_URL || ''),
-    __ELEMENTS_PAGES_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PAGES_BASE_URL || ''),
-    __ELEMENTS_REGISTRY_URL__: JSON.stringify(process.env.ELEMENTS_REGISTRY_URL || ''),
-    __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ESM_CDN_BASE_URL || ''),
-    __ELEMENTS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_BASE_URL || '')
-  },
+  define: getElementsEnv(),
   test: {
     retry: 1,
     isolate: coverage,
