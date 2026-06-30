@@ -273,3 +273,12 @@ When adding new technical terms, component names, or abbreviations that Vale fla
 - `projects/*/DEVELOPMENT.md` - When working within a specific project; lists all available pnpm scripts for that project
 - `/projects/internals/BUILD.md` - When modifying build configuration, Wireit scripts, or CI/CD pipeline
 - `/projects/internals/RELEASE.md` - When creating new projects or modifying release process; covers semantic release setup, CI artifacts, commit scopes, initial tags
+
+## Cloud Agent Specific Instructions
+
+These notes are for cloud agents running in the prebuilt VM (dependencies already installed by the startup update script). They capture non-obvious caveats, not full setup steps.
+
+### Toolchain access
+
+- **mise** manages the toolchain, and the VM image already includes it. `~/.local/bin` sits on `PATH` and `mise activate` runs from `~/.bashrc`, so `node` (26.4.0), `pnpm` (11.9.0), `go`, `vale`, and `git-lfs` resolve directly. If a fresh shell ever lacks them, prefix commands with `mise exec --` (for example, `mise exec -- pnpm ...`) or run `mise run <task>`.
+- Run all repo commands through mise to guarantee the pinned versions, exactly as the root `AGENTS.md` examples show.

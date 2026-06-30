@@ -1,7 +1,25 @@
-# Eleventy + Elements
+# NVIDIA Elements + Eleventy Starter
 
-Starter for using 11ty and Elements. This known issue currently affects watch/serve mode: https://github.com/11ty/eleventy/issues/2975
+An interactive Eleventy starter for the [NVIDIA Elements design system](https://nvidia.github.io/elements/).
 
-This demo shows how to use Eleventy, a static site generator to create many static HTML pages with common templates such as navigation or page headers. This setup is ideal for documentation sites, blogs, or even multi-page applications.
+This starter uses JavaScript templates, Markdown content, and the Eleventy Vite plugin to generate a static site with shared navigation and page layouts.
 
-Eleventy while NodeJS based, supports many different [templating language](https://www.11ty.dev/docs/languages/) options. This starter uses standard [ESM JavaScript](https://www.11ty.dev/docs/languages/javascript/) with [Markdown rendering support](https://www.11ty.dev/docs/languages/markdown/).
+## Getting started
+
+```shell
+pnpm install
+pnpm run dev
+```
+
+Open `http://localhost:8082/elements/starters/eleventy/` to view the site.
+
+## Tasks
+
+| Command           | Description                                |
+| ----------------- | ------------------------------------------ |
+| `pnpm run dev`    | Start the local development server         |
+| `pnpm run build`  | Generate the production site in `dist/`    |
+| `pnpm run preview` | Preview the production build               |
+| `pnpm run lint`   | Lint the JavaScript and TypeScript source   |
+
+See the [Eleventy documentation](https://www.11ty.dev/docs/) for information about templates, data, and configuration.

@@ -1,8 +1,10 @@
-# Multi Page App (MPA) Starter
+# NVIDIA Elements + Multi-Page App Starter
 
-[Built with Vite](https://vitejs.dev/)
+An interactive multi-page app starter for the [NVIDIA Elements design system](https://nvidia.github.io/elements/).
 
-This demo app shows how to build a standard mult-page application.
+[Built with Vite](https://vite.dev/)
+
+This demo shows how HTML entry points can share Elements styles and component registrations.
 
 ## Getting Started
 
@@ -13,3 +15,12 @@ npm i
 ```shell
 npm run dev
 ```
+
+## Tasks
+
+| Command           | Description                         |
+| ----------------- | ----------------------------------- |
+| `npm run dev`     | Start the local development server  |
+| `npm run build`   | Create a production build           |
+| `npm run preview` | Preview the production build        |
+| `npm run lint`    | Lint the TypeScript source          |

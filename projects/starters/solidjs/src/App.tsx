@@ -12,7 +12,7 @@ const App: Component = () => {
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <a slot="prefix" href="https://NVIDIA.github.io/elements/">Elements</a>
-        <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/docs/integrations/angular/" target="_blank">Catalog</a></nve-button>
+        <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/docs/integrations/solidjs/" target="_blank">Catalog</a></nve-button>
         <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button>
         <nve-button container="flat"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button>
       </nve-page-header>

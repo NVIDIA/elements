@@ -1,6 +1,6 @@
-# Nuxt Minimal Starter
+# NVIDIA Elements + Nuxt Starter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+An interactive Nuxt starter for the [NVIDIA Elements design system](https://nvidia.github.io/elements/).
 
 ## Setup
 

@@ -1,4 +1,4 @@
-# NVIDIA Elements MCP App Starter
+# NVIDIA Elements + MCP App Starter
 
 A minimal MCP App using NVIDIA Elements, TypeScript, and Vite.
 
@@ -6,6 +6,7 @@ A minimal MCP App using NVIDIA Elements, TypeScript, and Vite.
 
 ```shell
 npm i
+npm run build
 npm run dev
 ```
 
@@ -28,6 +29,6 @@ After building the app, configure a local MCP client with the compiled stdio ent
 
 | Command         | Description                                      |
 | --------------- | ------------------------------------------------ |
-| `npm run build` | Build the single-file app resource and server JS |
-| `npm run dev`   | Build, then open the MCP Inspector               |
-| `npm run lint`  | Run eslint                                       |
+| `npm run build` | Build the single-file app resource and server JavaScript |
+| `npm run dev`   | Open the MCP Inspector with the built server             |
+| `npm run lint`  | Lint the TypeScript source                               |
