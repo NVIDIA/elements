@@ -77,8 +77,8 @@
     "glob": "catalog:",
     "rollup-plugin-html-literals": "catalog:",
     "typescript": "catalog:",
+    "unplugin-dts": "1.0.3",
     "vite": "catalog:",
-    "vite-plugin-dts": "catalog:",
     "vitest": "catalog:"
   },
   "wireit": {

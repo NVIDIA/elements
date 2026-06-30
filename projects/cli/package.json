@@ -72,7 +72,7 @@
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-singlefile": "2.3.0",
+    "vite-plugin-singlefile": "2.3.3",
     "vitest": "catalog:"
   },
   "wireit": {

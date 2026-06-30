@@ -43,6 +43,7 @@ packages:
 overrides:
   '@lit-labs/ssr-dom-shim': 1.6.0
   'archiver>glob': 'catalog:'
+  'dts-bundle-generator>typescript': 'catalog:'
   devalue: 5.8.1
   eslint: 'catalog:'
   fast-uri: 3.1.2
@@ -62,11 +63,11 @@ catalogs:
     highlight.js: ^11.11.1
     lit: ^3.3.3
     lit-html: ^3.3.3
-    markdown-it: ^14.2.0
+    markdown-it: ^14.3.0
     minisearch: 7.2.0
 
 catalog:
-  esbuild: 0.28.0
+  esbuild: 0.28.1
   '@11ty/eleventy': 3.1.6
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 8.0.0
@@ -87,21 +88,21 @@ catalog:
   '@types/node': 25.6.2
   '@types/react': 19.2.14
   '@types/react-dom': 19.2.3
-  '@vitest/browser': 4.1.9
-  '@vitest/browser-playwright': 4.1.9
-  '@vitest/coverage-istanbul': 4.1.9
+  '@vitest/browser': 4.1.10
+  '@vitest/browser-playwright': 4.1.10
+  '@vitest/coverage-istanbul': 4.1.10
   axe-core: 4.11.0
-  eslint: 10.4.0
+  eslint: 10.6.0
   glob: 13.0.6
   highlight.js: 11.11.1
   lighthouse: 13.0.3
   lit: 3.3.3
   lit-element: 4.2.2
   lit-html: 3.3.3
-  markdown-it: 14.2.0
+  markdown-it: 14.3.0
   markdown-it-link-attributes: 4.0.1
   minisearch: 7.2.0
-  playwright: 1.61.0
+  playwright: 1.61.1
   postcss: 8.5.15
   publint: 0.3.21
   react: 19.2.5
@@ -110,25 +111,16 @@ catalog:
   stylelint: 17.12.0
   stylelint-config-standard: 40.0.0
   ts-morph: 26.0.0
-  '@typescript/native-preview': 7.0.0-dev.20260527.2
   typescript: 6.0.3
+  typescript-7: npm:typescript@7.0.2
   typescript-eslint: 8.60.0
-  vite: 8.0.16
-  vite-plugin-dts: 5.0.2
-  vitest: 4.1.9
+  vite: 8.1.4
+  vitest: 4.1.10
   zod: 4.4.3
 
 minimumReleaseAge: 1140
 
 minimumReleaseAgeExclude:
-  - '@typescript/native-preview'
-  - '@typescript/native-preview-linux-x64'
-  - '@typescript/native-preview-win32-x64'
-  - '@typescript/native-preview-win32-arm64'
-  - '@typescript/native-preview-darwin-arm64'
-  - '@typescript/native-preview-linux-arm64'
-  - '@typescript/native-preview-linux-arm'
-  - '@typescript/native-preview-darwin-x64'
   - playwright
   - playwright-core
   - publint

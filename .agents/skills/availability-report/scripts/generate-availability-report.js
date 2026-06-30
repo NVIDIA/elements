@@ -22,9 +22,13 @@ const DOCS_URLS = [
   'https://nvidia.github.io/elements/',
   'https://nvidia.github.io/elements/docs/integrations/installation/',
   'https://nvidia.github.io/elements/docs/integrations/',
+  'https://nvidia.github.io/elements/docs/elements/',
   'https://nvidia.github.io/elements/docs/elements/button/',
   'https://nvidia.github.io/elements/docs/patterns/',
-  'https://nvidia.github.io/elements/docs/patterns/dashboard/'
+  'https://nvidia.github.io/elements/docs/patterns/dashboard/',
+  'https://nvidia.github.io/elements/docs/integrations/',
+  'https://nvidia.github.io/elements/docs/integrations/typescript/',
+  'https://nvidia.github.io/elements/starters/typescript/'
 ];
 
 const COMMAND_TIMEOUT_MS = 120_000;

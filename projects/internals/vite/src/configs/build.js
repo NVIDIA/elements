@@ -4,7 +4,6 @@ import { resolve } from 'path';
 import { globSync } from 'glob';
 import minifyHTML from 'rollup-plugin-html-literals';
 
-import { tsc } from '../plugins/tsc.js';
 import { cem } from '../plugins/cem.js';
 import { snippets } from '../plugins/snippets.js';
 import { dts } from '../plugins/dts.js';
@@ -26,7 +25,7 @@ const packageFile = JSON.parse(packageFilePath);
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem(), snippets()],
+  plugins: [initial(), dts(), bundle(), examplesToJSON(packageFile), cem(), snippets()],
   define: getElementsEnv(),
   build: {
     reportCompressedSize: false,
