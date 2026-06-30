@@ -33,15 +33,13 @@
     "rollup-plugin-html-literals": "catalog:",
     "rollup-plugin-visualizer": "7.0.1",
     "ts-morph": "catalog:",
-    "@typescript/native-preview": "catalog:",
-    "vite-plugin-dts": "catalog:",
+    "typescript-7": "catalog:",
     "vite-plugin-virtual-html": "1.2.7"
   },
   "peerDependencies": {
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
-    "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
@@ -52,8 +50,5 @@
         "!src/playwright/locks"
       ]
     }
-  },
-  "devDependencies": {
-    "esbuild": "catalog:"
   }
 }

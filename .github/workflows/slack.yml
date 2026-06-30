@@ -17,14 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SLACK_PAYLOAD: |
-        text: "New Release ${{ github.event.release.tag_name }}"
+        text: "New Elements Release ${{ github.event.release.tag_name }}"
         blocks:
           - type: section
             text:
               type: mrkdwn
               text: |
                 *New Release* :rocket:
-
                 <${{ github.event.release.html_url }}|${{ github.event.release.tag_name }}>
                 <https://nvidia.github.io/elements/docs/changelog/|Changelog>
                 <https://nvidia.github.io/elements/|Documentation>

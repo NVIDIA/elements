@@ -46,7 +46,7 @@ This product includes the following bundled third-party software:
 - lit-html v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/monaco)
   Copyright: Google LLC
 
-- markdown-it v14.2.0 [MIT] (used by: @nvidia-elements/markdown)
+- markdown-it v14.3.0 [MIT] (used by: @nvidia-elements/markdown)
   Copyright: Unknown
 
 - marked v18.0.3 [MIT] (used by: @nvidia-elements/cli)
@@ -311,7 +311,7 @@ The following bundled components are provided under the MIT license:
 @modelcontextprotocol/sdk v1.29.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.5.17 - Copyright Nasca Iacob <sy@another-d-mention.ro> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-markdown-it v14.2.0 - Copyright Unknown
+markdown-it v14.3.0 - Copyright Unknown
 marked v18.0.3 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro

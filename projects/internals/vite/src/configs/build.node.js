@@ -3,7 +3,6 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { globSync } from 'glob';
 
-import { tsc } from '../plugins/tsc.js';
 import { dts } from '../plugins/dts.js';
 import { jsonDynamicImports } from '../plugins/json-dynamic-imports.js';
 import { transpileDecorators } from '../plugins/decorators.js';
@@ -27,7 +26,7 @@ export const libraryNodeBuildConfig = {
   optimizeDeps: {
     exclude: NODE_BUILT_IN_MODULES
   },
-  plugins: [tsc(), dts(), transpileDecorators(), markdown()],
+  plugins: [dts(), transpileDecorators(), markdown()],
   define: getElementsEnv(),
   build: {
     reportCompressedSize: false,

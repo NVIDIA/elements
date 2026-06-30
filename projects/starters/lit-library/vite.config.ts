@@ -3,7 +3,7 @@ import { resolve as resolvePath } from 'node:path';
 import process from 'node:process';
 import { defineConfig } from 'vite';
 import minifyHTML from 'rollup-plugin-html-literals';
-import dts from 'vite-plugin-dts';
+import dts from 'unplugin-dts/vite';
 import { globSync } from 'glob';
 
 const getAbsolutePath = (file: string) => resolvePath(process.cwd(), file);

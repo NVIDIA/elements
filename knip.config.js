@@ -38,7 +38,6 @@ export default {
     'archiver',
     'axe-core',
     'bun',
-    'esbuild',
     'glob',
     'highlight.js',
     'lit',
