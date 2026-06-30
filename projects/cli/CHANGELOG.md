@@ -1,3 +1,21 @@
+## <small>2.1.1 (2026-06-30)</small>
+
+* fix(cli): version and updater checks ([e6979e0](https://github.com/NVIDIA/elements/commit/e6979e0))
+* fix(core): memory leaks from connected callback states ([f49c0bd](https://github.com/NVIDIA/elements/commit/f49c0bd))
+* fix(docs): iframe example paths ([eddbd96](https://github.com/NVIDIA/elements/commit/eddbd96))
+* chore(ci): add slack release hook ([4a8fd85](https://github.com/NVIDIA/elements/commit/4a8fd85))
+* chore(ci): update installations via mise ([054992e](https://github.com/NVIDIA/elements/commit/054992e))
+* chore(deps): bump vite from 8.0.14 to 8.0.16 ([dfdea58](https://github.com/NVIDIA/elements/commit/dfdea58))
+* chore(deps): update ([cc12511](https://github.com/NVIDIA/elements/commit/cc12511))
+* chore(docs): add adoption metrics generation and service ([29e3795](https://github.com/NVIDIA/elements/commit/29e3795))
+* chore(docs): cleanup readme ([7f92252](https://github.com/NVIDIA/elements/commit/7f92252))
+* chore(docs): fix base url paths ([f97acb6](https://github.com/NVIDIA/elements/commit/f97acb6))
+* chore(docs): fix url asset paths ([1cda122](https://github.com/NVIDIA/elements/commit/1cda122))
+* chore(docs): improved site metadata and tests ([c58c856](https://github.com/NVIDIA/elements/commit/c58c856))
+* chore(release): @nvidia-elements/core-v2.0.2 [skip ci] ([d01f774](https://github.com/NVIDIA/elements/commit/d01f774))
+* chore(starters): cleanup starter readme and templates ([e2e225c](https://github.com/NVIDIA/elements/commit/e2e225c))
+* feat(starters): add htmx+go and fix go starter ([d2ecd86](https://github.com/NVIDIA/elements/commit/d2ecd86))
+
 ## 2.1.0 (2026-06-13)
 
 * chore(core): remove unused controllers ([59d8349](https://github.com/NVIDIA/elements/commit/59d8349))
