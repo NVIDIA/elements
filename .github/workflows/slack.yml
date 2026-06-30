@@ -1,0 +1,45 @@
+name: Release Slack Notification
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    name: Notify Slack (${{ matrix.destination }})
+    strategy:
+      fail-fast: false
+      matrix:
+        destination: [primary, ci]
+    runs-on: ubuntu-latest
+    env:
+      SLACK_PAYLOAD: |
+        text: "New Release ${{ github.event.release.tag_name }}"
+        blocks:
+          - type: section
+            text:
+              type: mrkdwn
+              text: |
+                *New Release* :rocket:
+
+                <${{ github.event.release.html_url }}|${{ github.event.release.tag_name }}>
+                <https://nvidia.github.io/elements/docs/changelog/|Changelog>
+                <https://nvidia.github.io/elements/|Documentation>
+    steps:
+      - name: Notify primary Slack channel
+        if: matrix.destination == 'primary'
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: ${{ env.SLACK_PAYLOAD }}
+      - name: Notify CI Slack channel
+        if: matrix.destination == 'ci'
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL_CI }}
+          webhook-type: incoming-webhook
+          payload: ${{ env.SLACK_PAYLOAD }}
