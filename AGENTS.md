@@ -273,3 +273,25 @@ When adding new technical terms, component names, or abbreviations that Vale fla
 - `projects/*/DEVELOPMENT.md` - When working within a specific project; lists all available pnpm scripts for that project
 - `/projects/internals/BUILD.md` - When modifying build configuration, Wireit scripts, or CI/CD pipeline
 - `/projects/internals/RELEASE.md` - When creating new projects or modifying release process; covers semantic release setup, CI artifacts, commit scopes, initial tags
+
+## Cursor Cloud specific instructions
+
+These notes are for cloud agents running in the prebuilt VM (dependencies already installed by the startup update script). They capture non-obvious caveats, not full setup steps.
+
+### Toolchain access
+
+- **mise** manages the toolchain, and the VM image already includes it. `~/.local/bin` sits on `PATH` and `mise activate` runs from `~/.bashrc`, so `node` (26.4.0), `pnpm` (11.9.0), `go`, `vale`, and `git-lfs` resolve directly. If a fresh shell ever lacks them, prefix commands with `mise exec --` (for example, `mise exec -- pnpm ...`) or run `mise run <task>`.
+- Run all repo commands through mise to guarantee the pinned versions, exactly as the root `AGENTS.md` examples show.
+
+### Network restrictions (important gotcha)
+
+- Outbound network access has restrictions. The firewall blocks `nodejs.org`, so `mise install` cannot fetch Node from the official mirror. The setup pre-seeds Node 26.4.0 into the mise install dir from the npm package `node-linux-x64@26.4.0` (the npm registry stays reachable). If the Node toolchain ever goes missing, reinstall it from that npm package rather than expecting `mise install` to download Node.
+- Reachable hosts include `registry.npmjs.org`, `github.com`, `*.githubusercontent.com`, `dl.google.com`, and `cdn.playwright.dev` (Playwright Chromium downloads work). `git lfs pull` may fail or stall; LFS assets only matter for visual-regression baselines, not for running the site or unit tests.
+
+### Running the docs site (primary app)
+
+- The documentation site (`projects/site`, Eleventy) is the main runnable application and renders every component. Start it with `cd projects/site && pnpm run dev`; Wireit first builds the `themes` → `styles` → `forms` → `core` dependencies, then serves at **http://localhost:8082/elements/**. Component pages live under `/elements/docs/elements/<name>/` (for example, `.../switch/`, `.../accordion/`).
+
+### Testing caveat
+
+- Unit tests run in **browser mode** (Vitest + Playwright Chromium). Wireit caches `pnpm run test` results by input files, so a cached run reports "skipped" without actually executing. To force a real run of a single suite, run Vitest directly, for example `cd projects/core && pnpm exec vitest run src/badge/badge.test.ts`.
