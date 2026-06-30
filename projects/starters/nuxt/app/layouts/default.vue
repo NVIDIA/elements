@@ -1,10 +1,10 @@
 <template>
   <nve-page>
     <nve-page-header slot="header">
-      <nve-logo slot="prefix" size="sm"></nve-logo>
+      <nve-logo slot="prefix" size="sm">NV</nve-logo>
       <a slot="prefix" href="https://NVIDIA.github.io/elements/">Elements</a>
       <nve-button container="flat"
-        ><a href="https://NVIDIA.github.io/elements/docs/integrations/angular/" target="_blank"
+        ><a href="https://NVIDIA.github.io/elements/docs/integrations/nuxt/" target="_blank"
           >Catalog</a
         ></nve-button
       >

@@ -1,26 +1,25 @@
-# Hugo + Elements Starter
+# NVIDIA Elements + Hugo Starter
 
-This starter shows a minimal example of a Hugo static site generator using Elements. Hugo is using its templating system with static JS/CSS bundles provided by the Elements package.
+An interactive Hugo starter for the [NVIDIA Elements design system](https://nvidia.github.io/elements/).
 
-## Getting Started
+This starter uses Hugo templates with the prebuilt JavaScript and CSS bundles from the Elements packages.
 
-Ensure [Hugo](https://gohugo.io/) are installed in your development environment.
+## Getting started
 
-```bash
-# run dev server locally
-hugo server
+Install the package dependencies to use the starter's pinned Hugo binary:
 
-# build site
-hugo
+```shell
+npm install
+npm run dev
 ```
 
-## Advance Usage
+Open the URL printed by the Hugo development server.
 
-This demo demonstrates a minimal Hugo static site with Elements integration using static bundles. The tradeoff with this approach is it requires less build tooling but at the cost of performance due to loading the entire package rather than optimized/tree-shaken builds. For more advanced usage with TypeScript or to have better production performance, consider using tools like [Vite](https://vite.dev/) alongside Hugo. Explore the TypeScript starter for a example resource of how to get started.
+## Tasks
 
-## Documentation
+| Command         | Description                              |
+| --------------- | ---------------------------------------- |
+| `npm run dev`   | Start the local Hugo development server  |
+| `npm run build` | Generate the production site in `dist/`  |
 
-For more information on using Elements with Hugo, see:
-- [Elements Documentation](https://NVIDIA.github.io/elements/)
-- [Hugo Documentation](https://gohugo.io/documentation/)
-- [Hugo Integration Guide](https://NVIDIA.github.io/elements/docs/integrations/hugo/)
+For more information, see the [Elements Hugo integration guide](https://nvidia.github.io/elements/docs/integrations/hugo/) and the [Hugo documentation](https://gohugo.io/documentation/).

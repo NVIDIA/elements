@@ -1,7 +1,7 @@
 ---
 {
   title: 'Nuxt',
-  description: 'Use NVIDIA Elements in a Nuxt app: register the components, configure SSR, and bind to events in Vue single-file components.',
+  description: 'Use NVIDIA Elements in a Nuxt app: register components, configure SSR, bind native form controls with v-model, and handle custom events.',
   layout: 'docs.11ty.js'
 }
 ---
@@ -94,6 +94,39 @@ Properties and events then work via the standard Vue template syntax.
 <nve-alert-group status="success">
   <nve-alert :closable="true" @close="closeAlert">hello there!</nve-alert>
 </nve-alert-group>
+```
+
+## Form controls
+
+Place `v-model` on the nested native `<input>`, not on the `nve-input`, `nve-range`, or `nve-switch` wrapper. The native control owns the value or checked state that Vue updates.
+
+```typescript
+import { ref } from 'vue';
+import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/range/define.js';
+import '@nvidia-elements/core/switch/define.js';
+
+const name = ref('');
+const volume = ref(50);
+const notifications = ref(false);
+```
+
+```html
+<nve-input>
+  <label>Name</label>
+  <input v-model="name" type="text" />
+</nve-input>
+
+<nve-range>
+  <label>Volume</label>
+  <input v-model.number="volume" type="range" min="0" max="100" />
+</nve-range>
+
+<nve-switch>
+  <label>Notifications</label>
+  <input v-model="notifications" type="checkbox" />
+</nve-switch>
 ```
 
 ## Layouts

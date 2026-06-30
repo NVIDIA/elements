@@ -1,8 +1,10 @@
-# Lit Library + Elements
+# NVIDIA Elements + Lit Library Starter
 
-[Built with Vite](https://vitejs.dev/)
+An interactive Lit Library starter for the [NVIDIA Elements design system](https://nvidia.github.io/elements/).
 
-To create reusable UI components that build on top of Elements, use [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your components to work in a large variety of frameworks and environments. We recommend reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the Lit team. The rest of this guide focuses on Elements integration and best practices.
+[Built with Vite](https://vite.dev/)
+
+Use [Lit](https://lit.dev) to author reusable custom elements (Web Components) that build on Elements and work across frameworks and environments. Follow the Lit team's [publishing best practices](https://lit.dev/docs/tools/publishing/). This guide focuses on Elements integration.
 
 ## Getting Started
 
@@ -16,6 +18,6 @@ pnpm run dev
 
 | Command          | Description                                            |
 | ---------------- | ------------------------------------------------------ |
-| `pnpm run build` | Build library source                                   |
-| `pnpm run test`  | Run library tests                                      |
-| `pnpm run ci`    | Build and run all library CI requirements (build/test) |
+| `pnpm run build` | Build the library source |
+| `pnpm run test`  | Run the library tests   |
+| `pnpm run lint`  | Lint the library source |

@@ -1,12 +1,22 @@
-# Go + Elements Starter
+# NVIDIA Elements + Go Starter
+
+An interactive Go starter for the [NVIDIA Elements design system](https://nvidia.github.io/elements/).
 
 This starter shows a minimal Go web server using Elements. The server uses `html/template` and pre-built Elements bundles.
 
-## Commands / npm scripts
+## Getting started
 
-- `dev`: `go run main.go`
-- `build`: `go build -o bin main.go`
-- `preview`: `go build -o bin main.go && ./bin`
+```shell
+go run main.go
+```
+
+Open `http://localhost:8080/` to view the application.
+
+## Commands
+
+- `npm run dev`: Run the local server.
+- `npm run build`: Build the server binary in `bin`.
+- `npm run preview`: Build and run the server binary.
 
 ## Static Assets
 
