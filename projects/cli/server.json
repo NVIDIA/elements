@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.nvidia/elements",
+  "name": "io.github.NVIDIA/elements",
   "title": "NVIDIA Elements",
   "description": "NVIDIA Elements UI design system and agent tools for AI/ML, robotics, and autonomous vehicles.",
   "websiteUrl": "https://nvidia.github.io/elements/docs/mcp/",

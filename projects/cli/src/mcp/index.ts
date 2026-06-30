@@ -102,7 +102,7 @@ export async function startMcpServer() {
   process.env.ELEMENTS_ENV = 'mcp';
 
   const server = new McpServer({
-    name: 'io.github.nvidia/elements',
+    name: 'io.github.NVIDIA/elements',
     version: VERSION,
     description:
       'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples. Use the "elements" skill for more guidance if available.'
