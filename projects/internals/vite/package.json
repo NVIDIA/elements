@@ -33,7 +33,7 @@
     "rollup-plugin-html-literals": "catalog:",
     "rollup-plugin-visualizer": "7.0.1",
     "ts-morph": "catalog:",
-    "@typescript/native-preview": "catalog:",
+    "typescript-7": "catalog:",
     "vite-plugin-dts": "catalog:",
     "vite-plugin-virtual-html": "1.2.7"
   },
