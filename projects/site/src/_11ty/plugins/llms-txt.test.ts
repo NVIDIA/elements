@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createLlmsTxtContent, getPublicOutputPath, llmsTxtPlugin } from './llms-txt.js';
+import { createLlmsTxtContent, llmsTxtPlugin } from './llms-txt.js';
+import { getPublicOutputPath } from '../utils/public-output.js';
 
 async function importLlmsTxt() {
   vi.resetModules();

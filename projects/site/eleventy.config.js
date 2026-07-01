@@ -15,6 +15,7 @@ import {
   ELEMENTS_ASSETS_CDN_BASE_URL
 } from './src/_11ty/utils/env.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
+import { agentSkillsPlugin } from './src/_11ty/plugins/agent-skills.js';
 import { llmsTxtPlugin } from './src/_11ty/plugins/llms-txt.js';
 import { sitemapPlugin } from './src/_11ty/plugins/sitemap-xml.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
@@ -168,6 +169,7 @@ export default function (eleventyConfig) {
   // https://llmstxt.org
   if (process.env.ELEVENTY_RUN_MODE === 'build') {
     eleventyConfig.addPlugin(llmsTxtPlugin);
+    eleventyConfig.addPlugin(agentSkillsPlugin);
   }
 
   // https://www.sitemaps.org

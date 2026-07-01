@@ -6,6 +6,7 @@ import { ExamplesService } from '@internals/tools/examples';
 import { skills } from '@internals/tools/skills';
 import { DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 import { siteUrlsTransform } from '../transforms/site-urls.js';
+import { getPublicOutputPath } from '../utils/public-output.js';
 
 const BASE = DEPLOYED_SITE_URL;
 const DEFAULT_PUBLIC_OUTPUT_PATH = './.11ty-vite/public';
@@ -34,10 +35,6 @@ function getMarkdownMeta(markdown) {
     title: title || 'NVIDIA Elements context',
     description: description || 'NVIDIA Elements context fragment for AI and LLM tools.'
   };
-}
-
-export function getPublicOutputPath(directories = {}) {
-  return nodePath.join(directories.output ?? 'dist', 'public');
 }
 
 export function getContextUrl(filePath, extension, publicOutputPath = DEFAULT_PUBLIC_OUTPUT_PATH) {

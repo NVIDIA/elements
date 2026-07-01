@@ -201,7 +201,7 @@
       ]
     },
     "test": {
-      "command": "vitest run src/_11ty/layouts/metadata.test.ts src/_11ty/layouts/links.test.ts src/_11ty/transforms/site-urls.test.ts src/_11ty/shortcodes/api.test.ts src/_11ty/shortcodes/example.test.ts src/_11ty/plugins/llms-txt.test.ts src/_11ty/plugins/sitemap-xml.test.ts src/_11ty/utils/env.test.ts src/docs/metrics/api-status.test.ts src/examples/index.test.ts src/docs/metrics/adoption-data.test.ts src/docs/metrics/release-data.test.ts",
+      "command": "vitest run",
       "files": [
         "src/**/*.js",
         "src/**/*.md",

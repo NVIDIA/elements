@@ -163,6 +163,14 @@ Skills provide persistent context to AI agents for building UI with Elements.
 
 Run `nve skills.list` or call MCP `skills_list` for the authoritative list. Deployments with the playground service enabled can also expose a `playground` skill for creating Elements Playground prototypes.
 
+The Agent Skills well-known endpoint publishes the `elements` skill from the same registry for skill-only installation with the open `skills` CLI:
+
+```shell
+npx skills add https://nvidia.github.io/elements
+```
+
+This hosted route does not install the Elements CLI or configure the MCP server. Use `nve project.setup` for complete project setup, and continue to use the CLI or MCP tools for deterministic API lookup and template validation. Other registry skills, including a conditional `playground` skill, remain available through `nve` rather than the hosted endpoint.
+
 ### Tools
 
 | Tool | Description |

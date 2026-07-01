@@ -29,11 +29,16 @@ describe('SkillsService', () => {
     expect(result).toContain(
       `---
 name: "authoring"
-title: "NVIDIA Elements Authoring Guidelines"
 description: "Best practices and workflow guidance for authoring UI with NVIDIA Elements."
+license: "Apache-2.0"
+metadata:
+  title: "NVIDIA Elements Authoring Guidelines"
 ---`
     );
     expect(result).toMatch(/^---\nname: "authoring"/);
+    expect(result).not.toMatch(/^title:/m);
+    expect(result.endsWith('\n')).toBe(true);
+    expect(result.endsWith('\n\n')).toBe(false);
     expect(result).toContain('## Authoring Guidelines');
     expect((SkillsService.get as ToolMethod<unknown>).metadata.name).toBe('get');
     expect((SkillsService.get as ToolMethod<unknown>).metadata.command).toBe('get');
@@ -43,6 +48,7 @@ description: "Best practices and workflow guidance for authoring UI with NVIDIA 
   it('should get a skill context as json', async () => {
     const result = (await SkillsService.get({ name: 'elements', format: 'json' })) as Skill;
     expect(result.name).toBe('elements');
+    expect(result.title).toBe('NVIDIA Elements Design System (nve)');
     expect(result.context).toContain('Building UI with NVIDIA Elements');
   });
 

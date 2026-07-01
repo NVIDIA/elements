@@ -16,7 +16,7 @@ The Model Context Protocol standardizes tools, prompts, and resources. Elements 
 
 {% install-cli %}
 
-## Add Skills To A Project
+## Add Skills to an Existing Project
 
 The recommended path is the project setup command. Run it from the project root:
 
@@ -34,6 +34,22 @@ The setup command configures Elements for common agent clients and editor toolin
 
 New starter projects created with `nve project.create` receive the same agent setup during project creation.
 
+## Install Skills Only
+
+Elements publishes the `elements` skill through an Agent Skills well-known endpoint. The hosted file comes from the same registry as `nve skills.list`. Inspect or install it with the open [skills](https://www.skills.sh/) CLI:
+
+```shell
+npx skills add https://nvidia.github.io/elements
+```
+
+Target Codex and Claude Code explicitly when you don't want automatic agent detection:
+
+```shell
+npx skills add https://nvidia.github.io/elements --agent codex --agent claude-code
+```
+
+This route installs skill files only. It does not install the Elements CLI, configure the MCP server, add editor data, or add package dependencies. Continue to use CLI or MCP API lookup and template validation for deterministic, current project data.
+
 ## Manual Skill Setup
 
 Use the CLI when you need to inspect or install a skill by hand:
@@ -47,9 +63,11 @@ Place the selected skill content in the directory format supported by your agent
 
 ```html
 ---
-name: elements
-title: Elements Design System (nve)
-description: Use this skill by default for any UI-related work or with NVIDIA Elements (nve-*), including creating, editing, reviewing, or debugging HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts.
+name: "elements"
+description: "Use this skill by default for any UI-related work or with NVIDIA Elements (nve-*), including creating, editing, reviewing, or debugging HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts."
+license: "Apache-2.0"
+metadata:
+  title: "Elements Design System (nve)"
 ---
 
 # Building UI with NVIDIA Elements
@@ -121,7 +139,7 @@ The default `nve skills.list` command and MCP `skills_list` tool expose these bu
   </nve-grid-row>
 </nve-grid>
 
-The `playground` skill is available when the CLI or MCP server has the Elements playground service enabled.
+The `playground` skill is available when the CLI, MCP server, or hosted build has the Elements playground service enabled.
 
 ## Use Skills With MCP
 

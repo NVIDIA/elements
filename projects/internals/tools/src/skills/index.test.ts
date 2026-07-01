@@ -147,6 +147,15 @@ describe('skillEntries', () => {
     expect(uniqueNames.size).toBe(names.length);
   });
 
+  it('should have valid Agent Skills names and descriptions', () => {
+    skills.forEach(skill => {
+      expect(skill.name).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+      expect(skill.name.length).toBeLessThanOrEqual(64);
+      expect(skill.description.length).toBeGreaterThanOrEqual(1);
+      expect(skill.description.length).toBeLessThanOrEqual(1024);
+    });
+  });
+
   it('should include authoring, artifact, and elements entries', () => {
     expect(skills.some(skill => skill.name === 'authoring')).toBe(true);
     expect(skills.some(skill => skill.name === 'artifact')).toBe(true);
@@ -170,9 +179,21 @@ describe('skillEntries', () => {
 
     const markdown = formatSkillMarkdown(elementsSkill);
 
-    expect(markdown).toMatch(/^---\nname: "elements"\ntitle: "Elements Design System \(nve\)"/);
-    expect(markdown).toContain('description: "Use this skill by default');
+    expect(markdown).toMatch(/^---\nname: "elements"\ndescription: "Use this skill by default/);
+    expect(markdown).toContain('\nlicense: "Apache-2.0"\n');
+    expect(markdown).toContain('\nmetadata:\n  title: "NVIDIA Elements Design System \(nve\)"\n');
+    expect(markdown).not.toMatch(/^title:/m);
     expect(markdown).toContain('# Building UI with NVIDIA Elements');
     expect(markdown.endsWith('\n')).toBe(true);
+    expect(markdown.endsWith('\n\n')).toBe(false);
+  });
+
+  it('should terminate every formatted skill with one newline', () => {
+    skills.forEach(skill => {
+      const markdown = formatSkillMarkdown(skill);
+
+      expect(markdown.endsWith('\n')).toBe(true);
+      expect(markdown.endsWith('\n\n')).toBe(false);
+    });
   });
 });

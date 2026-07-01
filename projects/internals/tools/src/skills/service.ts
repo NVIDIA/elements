@@ -4,7 +4,7 @@
 import { service, tool } from '../internal/tools.js';
 import { markdownDescription } from '../internal/utils.js';
 import { skills, type Skill } from './registry.js';
-import { formatSkillMarkdown } from './markdown.js';
+import { formatSkillMarkdown } from './utils.js';
 
 type OutputFormat = 'markdown' | 'json';
 

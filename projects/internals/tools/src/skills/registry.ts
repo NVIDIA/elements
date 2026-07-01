@@ -206,7 +206,7 @@ const migrateProjectPrompt: Prompt = {
 
 const elementsSkill: Skill = {
   name: 'elements',
-  title: 'Elements Design System (nve)',
+  title: 'NVIDIA Elements Design System (nve)',
   description:
     'Use this skill by default for any UI-related work or with NVIDIA Elements (nve-*), including creating, editing, reviewing, or debugging HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts.',
   context: `
