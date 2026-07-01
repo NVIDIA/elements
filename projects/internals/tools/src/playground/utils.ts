@@ -4,6 +4,7 @@
 import { gzipSync } from 'fflate';
 import format from 'html-format';
 import type { Element } from '@internals/metadata';
+import { ToolError } from '../internal/tools.js';
 import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
@@ -11,6 +12,7 @@ declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
 
 const ELEMENTS_PLAYGROUND_BASE_URL = process.env.ELEMENTS_PLAYGROUND_BASE_URL ?? '';
 const ELEMENTS_ESM_CDN_BASE_URL = __ELEMENTS_ESM_CDN_BASE_URL__;
+export const MAX_PLAYGROUND_URL_LENGTH = 32_768;
 
 interface PlaygroundOptions {
   type?: PlaygroundType;
@@ -147,12 +149,22 @@ export function createVueFiles(content: string, elements: Element[], options: Pl
 }
 
 function createURL(files: string, options: PlaygroundOptions) {
+  if (ELEMENTS_PLAYGROUND_BASE_URL.length === 0) {
+    return '';
+  }
+
   const defaultOptions = { openFile: 'index.html', ...options };
-  return ELEMENTS_PLAYGROUND_BASE_URL.length > 0
-    ? encodeURI(
-        `${ELEMENTS_PLAYGROUND_BASE_URL}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
-      )
-    : '';
+  const url = encodeURI(
+    `${ELEMENTS_PLAYGROUND_BASE_URL}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
+  );
+
+  if (url.length > MAX_PLAYGROUND_URL_LENGTH) {
+    throw new ToolError(
+      `Playground content produces a URL that exceeds the ${MAX_PLAYGROUND_URL_LENGTH}-character limit.`
+    );
+  }
+
+  return url;
 }
 
 function createLayoutStyles() {
@@ -195,8 +207,15 @@ nve-logo.large {
 function serialize(data: Record<string, { content: string }>, compress = true) {
   const encoded = new TextEncoder().encode(JSON.stringify(data));
   const array = compress ? gzipSync(encoded) : encoded;
-  const base64 = globalThis.btoa(String.fromCharCode(...array));
-  return encodeURIComponent(base64);
+  // Limit each function call to 32,768 arguments, safely below engine limits.
+  const chunkSize = 0x8000;
+  let binary = '';
+
+  for (let offset = 0; offset < array.length; offset += chunkSize) {
+    binary += String.fromCharCode(...array.subarray(offset, offset + chunkSize));
+  }
+
+  return encodeURIComponent(globalThis.btoa(binary));
 }
 
 function createIndexHTML(content: string, options: PlaygroundOptions) {

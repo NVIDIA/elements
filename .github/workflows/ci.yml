@@ -67,6 +67,7 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: projects/pages/dist
+          include-hidden-files: true
 
   lighthouse:
     runs-on: ubuntu-latest

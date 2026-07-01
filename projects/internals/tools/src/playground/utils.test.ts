@@ -3,6 +3,7 @@
 
 import { describe, it, expect } from 'vitest';
 import type { ProjectElement } from '@internals/metadata';
+import { ToolError } from '../internal/tools.js';
 import {
   createPlaygroundURL,
   createAngularFiles,
@@ -12,6 +13,7 @@ import {
   createVueFiles,
   createDefaultFiles,
   formatTemplate,
+  MAX_PLAYGROUND_URL_LENGTH,
   playgroundTypes
 } from './utils.js';
 
@@ -24,6 +26,20 @@ function expectURL(result: string, expected: string) {
   } else {
     expect(result).toBe('');
   }
+}
+
+function createDeterministicPseudorandomBytes(length: number) {
+  const bytes = new Uint8Array(length);
+  let state = 0x12345678;
+
+  for (let index = 0; index < bytes.length; index += 1) {
+    state ^= state << 13;
+    state ^= state >>> 17;
+    state ^= state << 5;
+    bytes[index] = state;
+  }
+
+  return bytes;
 }
 
 describe('createPlaygroundURL', () => {
@@ -558,16 +574,38 @@ describe('createImportMap with different frameworks', () => {
 
 describe('serialize function behavior', () => {
   it('should compress and encode data by default', () => {
-    // The serialize function is called internally, so we test its effect
     const result = createPlaygroundURL('<nve-button></nve-button>', [], {});
 
     if (hasPlaygroundBaseURL) {
-      // Should contain encoded files data
       expect(result).toContain('&files=');
       expect(result.length).toBeGreaterThan(100); // Should be reasonably long due to compression
     } else {
       expect(result).toBe('');
     }
+  });
+
+  it('should reject playground URLs that exceed the supported V8 argument-count limit', () => {
+    const bytes = createDeterministicPseudorandomBytes(200_000);
+    const attributeValue = Buffer.from(bytes).toString('base64').replace(/[+/=]/g, 'A');
+    const template = `<div data-value="${attributeValue}">content</div>`;
+
+    if (!hasPlaygroundBaseURL) {
+      expect(createPlaygroundURL(template, [])).toBe('');
+      return;
+    }
+
+    let thrown: unknown;
+    try {
+      createPlaygroundURL(template, []);
+    } catch (error) {
+      thrown = error;
+    }
+
+    expect(thrown).toBeInstanceOf(ToolError);
+    expect(thrown).toHaveProperty(
+      'message',
+      `Playground content produces a URL that exceeds the ${MAX_PLAYGROUND_URL_LENGTH}-character limit.`
+    );
   });
 });
 

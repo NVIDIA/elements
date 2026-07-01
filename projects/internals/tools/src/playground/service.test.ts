@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
 import { PlaygroundService } from './service.js';
-import { createPlaygroundURL } from './utils.js';
+import { createPlaygroundURL, MAX_PLAYGROUND_URL_LENGTH } from './utils.js';
 
 // when ELEMENTS_PLAYGROUND_BASE_URL is not configured, createPlaygroundURL returns ''
 const hasPlaygroundBaseURL = createPlaygroundURL('test', []).length > 0;
@@ -146,6 +146,30 @@ describe('PlaygroundService', () => {
       expect(result.result?.[0]?.message).toContain(
         'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
       );
+    });
+
+    it('should handle content that would exceed the supported playground URL length', async () => {
+      process.env.ELEMENTS_ENV = 'browser';
+      const tools = loadTools(PlaygroundService);
+      const createTool = tools.find(tool => tool.metadata.name === 'create');
+
+      const result = (await createTool?.({
+        template: '<nve-button>valid</nve-button>',
+        name: 'x'.repeat(MAX_PLAYGROUND_URL_LENGTH),
+        start: false
+      })) as ToolOutput<string>;
+
+      if (!hasPlaygroundBaseURL) {
+        expect(result.status).toBe('complete');
+        expect(result.result).toBe('');
+        return;
+      }
+
+      expect(result.status).toBe('error');
+      expect(result.message).toBe(
+        `Playground content produces a URL that exceeds the ${MAX_PLAYGROUND_URL_LENGTH}-character limit.`
+      );
+      expect(result.result).toBeUndefined();
     });
 
     it('should skip validation and return URL when not in mcp or cli environment', async () => {
