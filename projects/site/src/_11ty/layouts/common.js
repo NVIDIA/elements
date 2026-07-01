@@ -284,6 +284,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/pagination/') ? 'highlighted selected' : ''}><a href="/docs/elements/pagination/">Pagination</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/progressive-filter-chip/') ? 'highlighted selected' : ''}><a href="/docs/elements/progressive-filter-chip/">Progressive Filter Chip</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/progress-bar/') ? 'highlighted selected' : ''}><a href="/docs/elements/progress-bar/">Progress Bar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-gauge/') ? 'highlighted selected' : ''}><a href="/docs/elements/progress-gauge/">Progress Gauge</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/progress-ring/') ? 'highlighted selected' : ''}><a href="/docs/elements/progress-ring/">Progress Ring</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/password/') ? 'highlighted selected' : ''}><a href="/docs/elements/password/">Password</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/preferences-input/') ? 'highlighted selected' : ''}><a href="/docs/elements/preferences-input/">Preferences Input</a></nve-tree-node>
