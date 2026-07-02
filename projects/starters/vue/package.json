@@ -15,18 +15,18 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.5.32"
+    "vue": "3.5.39"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
     "@tsconfig/node20": "20.1.9",
     "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "6.0.6",
+    "@vitejs/plugin-vue": "6.0.7",
     "@vue/tsconfig": "0.9.1",
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "3.2.7"
+    "vue-tsc": "3.3.5"
   },
   "wireit": {
     "ci": {

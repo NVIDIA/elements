@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 
 const require = createRequire(import.meta.url);
-const tsgoPath = resolve(dirname(require.resolve('@typescript/native-preview/package.json')), 'bin/tsgo.js');
+const tscPath = resolve(dirname(require.resolve('typescript-7/package.json')), 'bin/tsc');
 
 /**
  * Runs TSC type check on intial build
@@ -17,7 +17,7 @@ export function tsc() {
         execFileSync(
           process.execPath,
           [
-            tsgoPath,
+            tscPath,
             '--project',
             resolve(process.cwd(), './tsconfig.lib.json'),
             '--noEmit',
