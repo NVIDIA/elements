@@ -25,6 +25,11 @@ describe('index', () => {
     expect(output).toContain('nve <cmd> [args]');
   });
 
+  it('should hide the banner when output is not interactive', () => {
+    expect(output).not.toContain('░██████████');
+    expect(output).toContain('@nvidia-elements/cli');
+  });
+
   it('should provide api.list', () => {
     expect(output).toContain('nve api.list [format]');
   });
@@ -163,7 +168,7 @@ describe('index', () => {
     it('should reject array arguments that exceed the schema limit', () => {
       const result = spawnSync(
         process.execPath,
-        ['dist/index.js', 'api.get', 'nve-card', 'nve-input', 'nve-button', 'nve-badge', 'nve-alert', 'nve-link'],
+        ['dist/index.js', 'api.get', 'nve-card', 'nve-input', 'nve-button', 'nve-badge'],
         {
           timeout: 10000,
           encoding: 'utf-8',
@@ -173,7 +178,7 @@ describe('index', () => {
       );
 
       expect(result.status).toBe(1);
-      expect(result.stderr).toContain('api.get accepts at most 5 names.');
+      expect(result.stderr).toContain('api.get accepts at most 3 names.');
     });
   });
 
