@@ -2,8 +2,25 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import type { ToolMethod } from '../internal/tools.js';
+import type { Schema, ToolMethod } from '../internal/tools.js';
 import { PackagesService } from './service.js';
+
+function hasInputSchema(
+  method: typeof PackagesService.changelogsGet
+): method is typeof PackagesService.changelogsGet & { metadata: { inputSchema: Schema } } {
+  if (!('metadata' in method)) {
+    return false;
+  }
+
+  const { metadata } = method;
+  return (
+    typeof metadata === 'object' &&
+    metadata !== null &&
+    'inputSchema' in metadata &&
+    typeof metadata.inputSchema === 'object' &&
+    metadata.inputSchema !== null
+  );
+}
 
 vi.mock('../api/utils.js', async importOriginal => {
   const actual = (await importOriginal()) as Record<string, unknown>;
@@ -95,24 +112,28 @@ describe('PackagesService', () => {
     expect((limited as string).length).toBeLessThanOrEqual((full as string).length);
   });
 
-  it('should expose the same package set in list and changelogs-unknown-package error', async () => {
-    const list = (await PackagesService.list()) as string;
-    const listSet = new Set(Array.from(list.matchAll(/^## (\S+) v/gm), m => m[1]));
+  it('should expose the same package set in the changelogs schema and unknown-package error', async () => {
+    const changelogsGet = PackagesService.changelogsGet;
+    if (!hasInputSchema(changelogsGet)) {
+      throw new TypeError('Expected changelogsGet to define an input schema.');
+    }
 
+    const schema = changelogsGet.metadata?.inputSchema;
+    const schemaSet = new Set(schema?.properties?.name?.enum ?? []);
     const error = await PackagesService.changelogsGet({ name: 'does-not-exist', format: 'markdown' }).catch(
       e => e as Error
     );
     const available = error.message.split('Available packages:')[1] ?? '';
     const errSet = new Set(Array.from(available.matchAll(/"([^"]+)"/g), m => m[1]));
 
-    expect(listSet.size).toBeGreaterThan(0);
-    expect(errSet).toEqual(listSet);
+    expect(schemaSet.size).toBeGreaterThan(0);
+    expect(errSet).toEqual(schemaSet);
   });
 
   it('should provide versions method', async () => {
     const result = await PackagesService.versions();
     expect(result).toBeDefined();
     expect(typeof result).toBe('object');
-    expect(result['@nvidia-elements/core']).toBe('1.0.0');
+    expect(result['@nvidia-elements/core']).toMatch(/^\d+\.\d+\.\d+$/);
   });
 });

@@ -57,7 +57,7 @@ describe('ApiService', () => {
       expect((ApiService.get as ToolMethod<unknown>).metadata.name).toBe('get');
       expect((ApiService.get as ToolMethod<unknown>).metadata.command).toBe('get');
       expect((ApiService.get as ToolMethod<unknown>).metadata.description).toContain(
-        'Get documentation known components or attributes by name (nve-*). Limit: 5'
+        'Get documentation known components or attributes by name (nve-*). Limit: 3'
       );
       expect((ApiService.get as ToolMethod<unknown>).metadata.inputSchema?.properties?.names).toBeDefined();
       expect((ApiService.get as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('names');
