@@ -21,13 +21,13 @@ import globalStyles from './page-panel.global.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/page/
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
- * @event open
- * @event close
+ * @event open - Dispatched after an invoker command removes `hidden` and opens the panel.
+ * @event close - Dispatched after an invoker command sets `hidden` and closes the panel.
  * @slot - default content slot
  * @slot actions - slot for action / dismiss buttons
- * @command --open - use to open the panel
- * @command --close - use to close the panel
- * @command --toggle - use to toggle the panel
+ * @command --open - Removes `hidden` and dispatches `open`.
+ * @command --close - Sets `hidden` and dispatches `close`.
+ * @command --toggle - Toggles `hidden` and dispatches `open` or `close`.
  * @cssprop --background
  * @cssprop --border
  * @cssprop --color

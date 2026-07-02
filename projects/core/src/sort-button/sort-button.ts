@@ -20,7 +20,7 @@ const nextSort = {
  * @documentation https://nvidia.github.io/elements/docs/elements/sort-button/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/sort-button
- * @event sort - Dispatched on sort button click, returns the current sort value and the next sort value.
+ * @event sort - Dispatched on activation with `detail: { value, next }`, where `value` is the current sort and `next` follows the cycle `none` → `ascending` → `descending` → `none`.
  * @cssprop --width
  * @cssprop --height
  * @cssprop --border-radius
