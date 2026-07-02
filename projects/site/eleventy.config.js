@@ -56,9 +56,7 @@ const apis = await ApiService.getData();
  * This helps minimize Rollup's memory footprint by limiting the dependency graph.
  */
 const ssrEntrypoints = new Set([
-  '@nvidia-elements/core/button',
   '@nvidia-elements/core/card',
-  '@nvidia-elements/core/icon-button',
   '@nvidia-elements/core/logo',
   '@nvidia-elements/core/page',
   '@nvidia-elements/core/page-header',

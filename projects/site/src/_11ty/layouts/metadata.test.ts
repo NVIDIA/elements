@@ -205,7 +205,7 @@ function getTitle(html: string) {
 }
 
 function getDescription(html: string) {
-  return html.match(/<meta\s+name="description"\s+content="([^"]+)"/)?.[1] ?? '';
+  return html.match(/<meta\s+name=(?:"description"|description)\s+content="([^"]+)"/)?.[1] ?? '';
 }
 
 async function getMarkdownFiles(dir: URL): Promise<URL[]> {
@@ -657,6 +657,12 @@ describe('renderJsonLd', () => {
 });
 
 describe('docs metadata policy', () => {
+  it('should read descriptions from minified meta tags', () => {
+    const description = 'A minified description.';
+
+    expect(getDescription(`<meta name=description content="${description}">`)).toBe(description);
+  });
+
   it('should emit unique titles for priority docs routes', async () => {
     const titles = await Promise.all(
       PRIORITY_DOC_ROUTES.map(async route => {
