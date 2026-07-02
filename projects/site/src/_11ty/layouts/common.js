@@ -43,7 +43,7 @@ export const renderBaseHead = data => {
   <meta name="twitter:description" content="${escapeAttr(meta.description)}">
   <meta name="twitter:image" content="${meta.ogImage}">
   <meta name="twitter:image:alt" content="${escapeAttr(meta.ogImageAlt)}">
-  <link rel="icon" href="/favicon.svg">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/1728152">
   <meta name="google-site-verification" content="pqQ1zOnKkqdZ2Lm0H8qIQx3q1x6Q7ghbumSrwzF_KSY" />
   <meta name="msvalidate.01" content="590EBF38676B077801C72048F4D8B5CB" />
   ${renderJsonLd(data, meta)}

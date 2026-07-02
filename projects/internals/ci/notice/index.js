@@ -7,6 +7,7 @@ import { renderProjectNotice, renderRootNotice } from './template.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '../../../../');
 const PROJECTS_DIR = path.join(REPO_ROOT, 'projects');
+const DOCUMENTATION_LOGOS_NOTICE = 'projects/site/public/static/images/integrations/NOTICE.md';
 
 const NOTICE_CONFIG_FIELDS = new Set(['bundled', 'assets']);
 const BUNDLED_FIELDS = new Set(['name', 'version', 'license', 'author']);
@@ -212,4 +213,8 @@ for (const { projectDir, deps, assets } of resolved) {
 
 const rootEntries = aggregateForRoot(resolved);
 const rootPath = path.join(REPO_ROOT, 'NOTICE.md');
-writeFileIfChanged(rootPath, await formatMarkdown(rootPath, renderRootNotice(rootEntries)));
+const documentationLogosNoticePath = path.join(REPO_ROOT, DOCUMENTATION_LOGOS_NOTICE);
+if (!existsSync(documentationLogosNoticePath)) {
+  throw new Error(`Could not locate documentation logos notice at "${documentationLogosNoticePath}".`);
+}
+writeFileIfChanged(rootPath, await formatMarkdown(rootPath, renderRootNotice(rootEntries, DOCUMENTATION_LOGOS_NOTICE)));
