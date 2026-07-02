@@ -44,12 +44,20 @@ export function getSpinnerProgressMessage() {
   return messages[Math.floor(Math.random() * messages.length)];
 }
 
+export function isInteractiveTerminal(stream: NodeJS.WriteStream) {
+  return Boolean(stream.isTTY) && !process.env.CI;
+}
+
+function shouldShowInteractiveProgress(args: Record<string, unknown>, options: RunAsyncToolOptions) {
+  return (options.interactiveProgress ?? true) && isInteractiveTerminal(process.stderr) && !args.start && !args.log;
+}
+
 export async function runAsyncTool(
   args: Record<string, unknown>,
   fn: ManagedToolMethod<unknown>,
   options: RunAsyncToolOptions = {}
 ) {
-  const isInteractive = (options.interactiveProgress ?? true) && !args.start && !args.log && !process.env.CI;
+  const isInteractive = shouldShowInteractiveProgress(args, options);
   let spinner: Ora | undefined;
 
   const startTime = Date.now();

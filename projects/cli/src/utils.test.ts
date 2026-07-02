@@ -38,16 +38,24 @@ vi.mock('@inquirer/prompts', () => ({
 }));
 
 describe('utils', () => {
+  const stderrIsTTYDescriptor = Object.getOwnPropertyDescriptor(process.stderr, 'isTTY');
+
   beforeEach(() => {
     vi.clearAllMocks();
     vi.spyOn(console, 'log').mockImplementation(() => {});
     vi.spyOn(process, 'exit').mockImplementation(() => {
       throw new Error('process.exit called');
     });
+    Object.defineProperty(process.stderr, 'isTTY', { value: true, configurable: true });
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+    if (stderrIsTTYDescriptor) {
+      Object.defineProperty(process.stderr, 'isTTY', stderrIsTTYDescriptor);
+    } else {
+      delete process.stderr.isTTY;
+    }
   });
 
   describe('constants', () => {
@@ -93,7 +101,7 @@ describe('utils', () => {
 
     it('should return different messages on multiple calls', () => {
       const messages = new Set();
-      // Call multiple times to increase chance of getting different messages
+      // Call repeatedly to increase the chance of getting different messages
       for (let i = 0; i < 10; i++) {
         messages.add(getSpinnerProgressMessage());
       }
@@ -124,6 +132,16 @@ describe('utils', () => {
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(ora).not.toHaveBeenCalled();
       delete process.env.CI;
+    });
+
+    it('should run function without spinner when stderr is not a TTY', async () => {
+      Object.defineProperty(process.stderr, 'isTTY', { value: false, configurable: true });
+      const args = {};
+      const result = await runAsyncTool(args, mockFn);
+
+      expect(result).toBe('test result');
+      expect(mockFn).toHaveBeenCalledWith(args);
+      expect(ora).not.toHaveBeenCalled();
     });
 
     it('should run function without spinner when start flag is true', async () => {

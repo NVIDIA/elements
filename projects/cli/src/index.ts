@@ -11,7 +11,15 @@ import { hideBin } from 'yargs/helpers';
 import { performance } from 'perf_hooks';
 import { type ManagedToolMethod, tools, ToolSupport, type Schema } from '@internals/tools';
 import { installNve } from './install.js';
-import { banner, colors, exitWithCompleteToolResult, exitWithToolError, getArgValue, runAsyncTool } from './utils.js';
+import {
+  banner,
+  colors,
+  exitWithCompleteToolResult,
+  exitWithToolError,
+  getArgValue,
+  isInteractiveTerminal,
+  runAsyncTool
+} from './utils.js';
 import { notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
@@ -76,7 +84,9 @@ yargsInstance.command(
         await exitWithToolError(result, message);
       }
     } else {
-      const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
+      const greeting = isInteractiveTerminal(process.stdout)
+        ? colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`)
+        : '';
       console.log(
         `${greeting}${colors.complete(`@nvidia-elements/cli (${BUILD_SHA})`)}\n\n${await yargsInstance.getHelp()}`
       );
