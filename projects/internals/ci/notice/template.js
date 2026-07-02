@@ -120,11 +120,12 @@ ${licenseSections}
 ${footer}`;
 }
 
-export function renderRootNotice(entries) {
+export function renderRootNotice(entries, documentationLogosNotice) {
   const sorted = entries.slice().sort((a, b) => byNameCI(a.dep, b.dep));
+  const documentationLogos = `For notices about third-party logos used in the documentation, see the [Third-Party Logos Notice](${documentationLogosNotice}).`;
 
   if (sorted.length === 0) {
-    return `${HEADER}\n${EMPTY_BODY}`;
+    return `${HEADER}\n${documentationLogos}\n\n${EMPTY_BODY}`;
   }
 
   const summary = sorted.map(e => renderSummaryDep(e.dep, e.usedBy)).join('\n\n');
@@ -133,6 +134,8 @@ export function renderRootNotice(entries) {
   const footer = renderFooter(sorted.map(e => e.dep.license));
 
   return `${HEADER}
+${documentationLogos}
+
 ${DEPS_INTRO_ROOT}
 
 ${summary}

@@ -3,6 +3,8 @@ NOTICE
 Elements - NVIDIA Elements Design System
 Copyright 2024-2026 NVIDIA Corporation
 
+For notices about third-party logos used in the documentation, see the [Third-Party Logos Notice](projects/site/public/static/images/integrations/NOTICE.md).
+
 This product includes the following bundled third-party software:
 
 - @eslint/css v1.2.0 [Apache-2.0] (used by: @nvidia-elements/lint)
