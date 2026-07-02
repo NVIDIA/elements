@@ -33,6 +33,7 @@ import noRestrictedPageSizing from '../rules/no-restricted-page-sizing.js';
 import noNestedContainerTypes from '../rules/no-nested-container-types.js';
 import noUnstyledTypography from '../rules/no-unstyled-typography.js';
 import noTailwindClasses from '../rules/no-tailwind-classes.js';
+import preferAriaLabelInCompactContainers from '../rules/prefer-aria-label-in-compact-containers.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -90,7 +91,8 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-unknown-css-variable': noUnknownCssVariable,
         'no-nested-container-types': noNestedContainerTypes,
         'no-unstyled-typography': noUnstyledTypography,
-        'no-tailwind-classes': noTailwindClasses
+        'no-tailwind-classes': noTailwindClasses,
+        'prefer-aria-label-in-compact-containers': preferAriaLabelInCompactContainers
       }
     }
   },
@@ -123,6 +125,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-nested-container-types': ['error'],
     '@nvidia-elements/lint/no-unstyled-typography': ['error'],
     '@nvidia-elements/lint/no-tailwind-classes': ['error'],
+    '@nvidia-elements/lint/prefer-aria-label-in-compact-containers': ['error'],
     '@nvidia-elements/lint/no-unexpected-style-customization': ['off'],
     '@nvidia-elements/lint/no-missing-gap-space': ['off']
   }

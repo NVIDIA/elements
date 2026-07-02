@@ -286,4 +286,10 @@ export default [
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/prefer-aria-label-in-compact-containers</code></nve-grid-cell>
+    <nve-grid-cell>Prefer aria-label on form controls inside toolbars and page headers.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
 </nve-grid>

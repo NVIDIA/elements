@@ -99,6 +99,7 @@ export default [
 | `@nvidia-elements/lint/no-unknown-css-variable` | Disallow use of unknown --nve-* CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-unknown-tags` | Disallow use of unknown nve-* tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-unstyled-typography` | Require typography elements to have nve-text styling applied. | HTML | `error` |
+| `@nvidia-elements/lint/prefer-aria-label-in-compact-containers` | Prefer aria-label on form controls inside toolbars and page headers. | HTML | `error` |
 
 ## Links
 

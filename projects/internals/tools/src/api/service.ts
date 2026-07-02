@@ -8,7 +8,7 @@ import { service, tool } from '../internal/tools.js';
 import { getElementImports, markdownDescription } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
 
-const MAX_RESULT_LIMIT = 5;
+const MAX_RESULT_LIMIT = 3;
 
 const listToolHelpfulTip =
   'Tip: Use the list tool to get a summary list of all available components and attribute APIs.';

@@ -8,7 +8,7 @@ import { getContextExamples, renderExampleMarkdown, searchContextExamples } from
 import { markdownDescription } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
 
-const MAX_RESULT_LIMIT = 5;
+const MAX_RESULT_LIMIT = 3;
 
 @service()
 export class ExamplesService {
