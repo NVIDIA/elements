@@ -39,6 +39,16 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     expect(customElements.get(PreferencesInput.metadata.tag)).toBeDefined();
   });
 
+  it('should capitalize the color scheme label', () => {
+    const label = element.shadowRoot.querySelector('label');
+
+    if (!(label instanceof HTMLLabelElement)) {
+      throw new Error('Expected a color scheme label');
+    }
+
+    expect(getComputedStyle(label).textTransform).toBe('capitalize');
+  });
+
   /**
    * Test form properties
    */
