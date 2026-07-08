@@ -1,3 +1,9 @@
+## <small>2.0.4 (2026-07-08)</small>
+
+* chore(release): @nvidia-elements/forms-v2.0.2 [skip ci] ([35e1073](https://github.com/NVIDIA/elements/commit/35e1073))
+* fix(core): coordinate interest and popover interactions ([6f40256](https://github.com/NVIDIA/elements/commit/6f40256))
+* fix(forms): coordinate interest and popover interactions ([168f218](https://github.com/NVIDIA/elements/commit/168f218))
+
 ## <small>2.0.3 (2026-07-08)</small>
 
 * fix(cli): correct case sensitive identifiers ([6c8cd2b](https://github.com/NVIDIA/elements/commit/6c8cd2b))
