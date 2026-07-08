@@ -8,6 +8,7 @@ type InterestEvent = Event & { source: HTMLElement };
 
 type InterestInvokerHost = ReactiveElement & {
   interestForElement: HTMLElement | null;
+  popoverTargetElement: HTMLElement | null;
 };
 
 export class TypeInterestInvokerController<T extends InterestInvokerHost> implements ReactiveController {
@@ -29,12 +30,20 @@ export class TypeInterestInvokerController<T extends InterestInvokerHost> implem
     this.host.removeEventListener('blur', this.#onLoseInterest);
   }
 
-  #onInterest = () => {
+  #onInterest = (event: Event) => {
+    if (event.type === 'focus' && !this.host.matches(':focus-visible')) {
+      return;
+    }
+
+    if (this.host.popoverTargetElement?.matches(':popover-open')) {
+      return;
+    }
+
     this.#updateInterestForElement();
     if (this.host.interestForElement) {
-      const event = new Event('interest', { cancelable: true }) as InterestEvent;
-      event.source = this.host;
-      this.host.interestForElement.dispatchEvent(event);
+      const interest = new Event('interest', { cancelable: true }) as InterestEvent;
+      interest.source = this.host;
+      this.host.interestForElement.dispatchEvent(interest);
     }
   };
 

@@ -11,6 +11,7 @@ import type { ReactiveController } from './types.js';
 
 class PopoverTriggerControllerTestElement extends HTMLElement {
   disabled = false;
+  interestForElement: HTMLElement | null = null;
   popoverTargetAction?: PopoverTargetAction;
   popoverTargetElement: HTMLElement | null = null;
   popovertarget?: string;
@@ -64,6 +65,102 @@ describe('PopoverTriggerController', () => {
     expect(togglePopover).toHaveBeenCalledWith({ source: element });
   });
 
+  it('should not invoke a popover from a canceled click', async () => {
+    fixture = await createFixture(html`
+      <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
+      <div id="popover" popover>popover</div>
+    `);
+    const element = fixture.querySelector<PopoverTriggerControllerTestElement>(
+      'popover-trigger-controller-test-element'
+    )!;
+    const popover = fixture.querySelector<HTMLElement>('[popover]')!;
+    const togglePopover = vi.spyOn(popover, 'togglePopover').mockImplementation(() => false);
+    fixture.addEventListener('click', event => event.preventDefault(), { capture: true });
+    element.popoverTargetElement = popover;
+
+    element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+
+    expect(togglePopover).not.toHaveBeenCalled();
+  });
+
+  it('should follow a changed popover target id', async () => {
+    fixture = await createFixture(html`
+      <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
+      <div id="tooltip"></div>
+      <div id="first" popover>first</div>
+      <div id="second" popover>second</div>
+    `);
+    const element = fixture.querySelector<PopoverTriggerControllerTestElement>(
+      'popover-trigger-controller-test-element'
+    )!;
+    const tooltip = fixture.querySelector<HTMLElement>('#tooltip')!;
+    const first = fixture.querySelector<HTMLElement>('#first')!;
+    const second = fixture.querySelector<HTMLElement>('#second')!;
+    const loseInterest = vi.fn();
+    tooltip.addEventListener('loseinterest', loseInterest);
+
+    element.interestForElement = tooltip;
+    element.popoverTargetAction = 'show';
+    element.popovertarget = 'first';
+    await emulateClick(element);
+    first.hidePopover();
+
+    loseInterest.mockClear();
+    element.popovertarget = 'second';
+    await emulateClick(element);
+
+    expect(element.popoverTargetElement).toBe(second);
+    expect(first.matches(':popover-open')).toBe(false);
+    expect(second.matches(':popover-open')).toBe(true);
+    expect(loseInterest).toHaveBeenCalledOnce();
+  });
+
+  it('should preserve tooltip interest when opening is canceled', async () => {
+    fixture = await createFixture(html`
+      <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
+      <div id="tooltip"></div>
+      <div id="popover" popover>popover</div>
+    `);
+    const element = fixture.querySelector<PopoverTriggerControllerTestElement>(
+      'popover-trigger-controller-test-element'
+    )!;
+    const tooltip = fixture.querySelector<HTMLElement>('#tooltip')!;
+    const popover = fixture.querySelector<HTMLElement>('[popover]')!;
+    const loseInterest = vi.fn();
+    tooltip.addEventListener('loseinterest', loseInterest);
+    popover.addEventListener('beforetoggle', event => event.preventDefault());
+    element.interestForElement = tooltip;
+    element.popoverTargetElement = popover;
+
+    await emulateClick(element);
+
+    expect(popover.matches(':popover-open')).toBe(false);
+    expect(loseInterest).not.toHaveBeenCalled();
+  });
+
+  it('should preserve tooltip interest when toggling a popover closed', async () => {
+    fixture = await createFixture(html`
+      <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
+      <div id="tooltip"></div>
+      <div id="popover" popover>popover</div>
+    `);
+    const element = fixture.querySelector<PopoverTriggerControllerTestElement>(
+      'popover-trigger-controller-test-element'
+    )!;
+    const tooltip = fixture.querySelector<HTMLElement>('#tooltip')!;
+    const popover = fixture.querySelector<HTMLElement>('[popover]')!;
+    const loseInterest = vi.fn();
+    tooltip.addEventListener('loseinterest', loseInterest);
+    element.interestForElement = tooltip;
+    element.popoverTargetElement = popover;
+    popover.showPopover();
+
+    await emulateClick(element);
+
+    expect(popover.matches(':popover-open')).toBe(false);
+    expect(loseInterest).not.toHaveBeenCalled();
+  });
+
   it('should support direct popover target properties and show or hide actions', async () => {
     fixture = await createFixture(html`
       <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
@@ -107,7 +204,7 @@ describe('PopoverTriggerController', () => {
     expect(togglePopover).not.toHaveBeenCalled();
   });
 
-  it('should pass anchored popover sources', async () => {
+  it('should pass the anchor as the popover source when the target has an anchor', async () => {
     fixture = await createFixture(html`
       <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
       <div id="anchor"></div>
@@ -126,6 +223,39 @@ describe('PopoverTriggerController', () => {
     await emulateClick(element);
 
     expect(showPopover).toHaveBeenCalledWith({ source: anchor });
+  });
+
+  it('should hand over tooltip interest after an anchored target popover opens from the trigger', async () => {
+    fixture = await createFixture(html`
+      <popover-trigger-controller-test-element interestfor="tooltip" popovertarget="popover"></popover-trigger-controller-test-element>
+      <div id="tooltip"></div>
+      <div id="anchor"></div>
+      <div id="popover" popover>popover</div>
+    `);
+    const element = fixture.querySelector<PopoverTriggerControllerTestElement>(
+      'popover-trigger-controller-test-element'
+    )!;
+    const tooltip = fixture.querySelector<HTMLElement>('#tooltip')!;
+    const anchor = fixture.querySelector<HTMLElement>('#anchor')!;
+    const popover = fixture.querySelector<HTMLElement>('[popover]')!;
+    let interestSource: HTMLElement | undefined;
+    let popoverSource: HTMLElement | null | undefined;
+    tooltip.addEventListener('loseinterest', event => {
+      interestSource = (event as Event & { source: HTMLElement }).source;
+    });
+    popover.addEventListener('beforetoggle', event => {
+      popoverSource = (event as ToggleEvent).source;
+    });
+
+    Object.defineProperty(popover, 'anchor', { configurable: true, value: 'anchor' });
+    element.interestForElement = tooltip;
+    element.popovertarget = 'popover';
+    await emulateClick(element);
+
+    expect(element.popoverTargetElement).toBe(popover);
+    expect(popover.matches(':popover-open')).toBe(true);
+    expect(popoverSource).toBe(anchor);
+    expect(interestSource).toBe(element);
   });
 
   it('should remove click behavior on disconnect', async () => {
