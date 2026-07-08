@@ -34,6 +34,10 @@ Learn more about native [Popover APIs](/docs/foundations/popovers/).
 
 {% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Events' '{ "inline": false, "height": "280px" }' %}
 
+## Interactive Popover
+
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'PopoverInterest' '{ "inline": false, "height": "260px" }' %}
+
 ## Open Delay
 
 {% api 'nve-tooltip', 'property' 'openDelay' %}

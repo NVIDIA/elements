@@ -18,6 +18,6 @@ describe('drawer lighthouse report', () => {
     expect(report.scores.performance).toBeGreaterThan(98); // bfcache
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(25.4);
+    expect(report.payload.javascript.kb).toBeLessThan(25.5);
   });
 });

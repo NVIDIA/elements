@@ -14,6 +14,7 @@ import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/dialog/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
 import type { Badge } from '@nvidia-elements/core/badge';
 
 export default {
@@ -393,6 +394,17 @@ export const NestedDynamic = {
   </section>
 </nve-dialog>
 <nve-tooltip id="tooltip">test</nve-tooltip>
+  `
+};
+
+/**
+ * @summary Button combining interestfor and popovertarget for coordinated tooltip and dropdown behavior.
+ */
+export const PopoverInterest = {
+  render: () => html`
+<nve-button interestfor="tooltip" popovertarget="dropdown">Button</nve-button>
+<nve-tooltip id="tooltip">tooltip</nve-tooltip>
+<nve-dropdown id="dropdown">dropdown content</nve-dropdown>
   `
 };
 
