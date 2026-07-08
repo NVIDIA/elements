@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture, untilEvent } from '@internals/testing';
 
 import { TypeInterestInvokerController } from './type-interest-invoker.controller.js';
@@ -12,6 +12,7 @@ type InterestTestEvent = Event & { source: HTMLElement };
 
 class InterestInvokerControllerTestElement extends HTMLElement {
   interestForElement: HTMLElement | null = null;
+  popoverTargetElement: HTMLElement | null = null;
   #controllers = new Set<ReactiveController>();
 
   constructor() {
@@ -41,6 +42,7 @@ describe('InterestInvokerController', () => {
 
   afterEach(() => {
     removeFixture(fixture);
+    vi.restoreAllMocks();
   });
 
   it('should dispatch interest and loseinterest events from pointer hover', async () => {
@@ -62,7 +64,7 @@ describe('InterestInvokerController', () => {
     expect((await loseinterest).source).toBe(element);
   });
 
-  it('should dispatch interest and loseinterest events from focus and blur', async () => {
+  it('should dispatch interest and loseinterest events from focus-visible focus and blur', async () => {
     fixture = await createFixture(html`
       <interest-invoker-controller-test-element interestfor="target"></interest-invoker-controller-test-element>
       <div id="target"></div>
@@ -73,12 +75,54 @@ describe('InterestInvokerController', () => {
     const target = fixture.querySelector<HTMLElement>('#target')!;
     const interest = untilEvent<InterestTestEvent>(target, 'interest');
     const loseinterest = untilEvent<InterestTestEvent>(target, 'loseinterest');
+    const focusVisibleMatch = vi.spyOn(element, 'matches').mockReturnValue(true);
 
     element.dispatchEvent(new FocusEvent('focus'));
     element.dispatchEvent(new FocusEvent('blur'));
 
     expect((await interest).source).toBe(element);
     expect((await loseinterest).source).toBe(element);
+    expect(focusVisibleMatch).toHaveBeenCalledWith(':focus-visible');
+  });
+
+  it('should not dispatch interest from focus that is not focus-visible', async () => {
+    fixture = await createFixture(html`
+      <interest-invoker-controller-test-element interestfor="target"></interest-invoker-controller-test-element>
+      <div id="target"></div>
+    `);
+    const element = fixture.querySelector<InterestInvokerControllerTestElement>(
+      'interest-invoker-controller-test-element'
+    )!;
+    const target = fixture.querySelector<HTMLElement>('#target')!;
+    const interest = vi.fn();
+    target.addEventListener('interest', interest);
+    const focusVisibleMatch = vi.spyOn(element, 'matches').mockReturnValue(false);
+
+    element.dispatchEvent(new FocusEvent('focus'));
+
+    expect(interest).not.toHaveBeenCalled();
+    expect(focusVisibleMatch).toHaveBeenCalledWith(':focus-visible');
+  });
+
+  it('should not dispatch interest while its popover target is open', async () => {
+    fixture = await createFixture(html`
+      <interest-invoker-controller-test-element interestfor="tooltip"></interest-invoker-controller-test-element>
+      <div id="tooltip"></div>
+      <div id="popover" popover>popover</div>
+    `);
+    const element = fixture.querySelector<InterestInvokerControllerTestElement>(
+      'interest-invoker-controller-test-element'
+    )!;
+    const tooltip = fixture.querySelector<HTMLElement>('#tooltip')!;
+    const popover = fixture.querySelector<HTMLElement>('[popover]')!;
+    const interest = vi.fn();
+    tooltip.addEventListener('interest', interest);
+    element.popoverTargetElement = popover;
+    popover.showPopover();
+
+    element.dispatchEvent(new MouseEvent('mouseenter'));
+
+    expect(interest).not.toHaveBeenCalled();
   });
 
   it('should support direct interestForElement references', async () => {

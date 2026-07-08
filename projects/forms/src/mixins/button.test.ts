@@ -843,6 +843,32 @@ describe('ButtonFormControlMixin', () => {
       expect(popover.matches(':popover-open')).toBe(true);
     });
 
+    it('should follow a changed popover target', async () => {
+      fixture = await createFixture(html`
+        <button-form-control-mixin-test-element
+          popovertarget="first"
+          popovertargetaction="show"
+        ></button-form-control-mixin-test-element>
+        <div popover id="first">first</div>
+        <div popover id="second">second</div>
+      `);
+      button = fixture.querySelector<ButtonFormControlMixinTestElement>('button-form-control-mixin-test-element')!;
+      const first = fixture.querySelector<HTMLElement>('#first')!;
+      const second = fixture.querySelector<HTMLElement>('#second')!;
+      await elementIsStable(button);
+
+      emulateClick(button);
+      first.hidePopover();
+
+      button.popovertarget = 'second';
+      await elementIsStable(button);
+      emulateClick(button);
+
+      expect(button.popoverTargetElement).toBe(second);
+      expect(first.matches(':popover-open')).toBe(false);
+      expect(second.matches(':popover-open')).toBe(true);
+    });
+
     it('should support popover target properties and show or hide actions', async () => {
       fixture = await createFixture(html`
         <button-form-control-mixin-test-element></button-form-control-mixin-test-element>
@@ -926,7 +952,7 @@ describe('ButtonFormControlMixin', () => {
       expect(button.interestForElement).toBe(null);
     });
 
-    it('should dispatch interest and loseinterest events from focus and blur', async () => {
+    it('should dispatch interest and loseinterest events from focus-visible focus and blur', async () => {
       fixture = await createFixture(html`
         <button-form-control-mixin-test-element interestfor="target"></button-form-control-mixin-test-element>
         <div id="target"></div>
@@ -936,12 +962,14 @@ describe('ButtonFormControlMixin', () => {
       await elementIsStable(button);
       const interest = untilEvent<InterestTestEvent>(target, 'interest');
       const loseinterest = untilEvent<InterestTestEvent>(target, 'loseinterest');
+      const focusVisibleMatch = vi.spyOn(button, 'matches').mockReturnValue(true);
 
       button.dispatchEvent(new FocusEvent('focus'));
       button.dispatchEvent(new FocusEvent('blur'));
 
       expect((await interest).source).toBe(button);
       expect((await loseinterest).source).toBe(button);
+      expect(focusVisibleMatch).toHaveBeenCalledWith(':focus-visible');
     });
 
     it('should support direct interestForElement references', async () => {
