@@ -1,3 +1,27 @@
+## <small>2.0.3 (2026-07-08)</small>
+
+* fix(cli): correct case sensitive identifiers ([6c8cd2b](https://github.com/NVIDIA/elements/commit/6c8cd2b))
+* fix(cli): correct metadata description length limit ([1682f8d](https://github.com/NVIDIA/elements/commit/1682f8d))
+* fix(cli): improve skills validation ([fe42614](https://github.com/NVIDIA/elements/commit/fe42614))
+* fix(cli): version and updater checks ([e6979e0](https://github.com/NVIDIA/elements/commit/e6979e0))
+* fix(core): restore preferences input label capitalization ([45f9dd1](https://github.com/NVIDIA/elements/commit/45f9dd1))
+* fix(docs): iframe example paths ([eddbd96](https://github.com/NVIDIA/elements/commit/eddbd96))
+* fix(internals): add url length validation for url generation ([1bc197e](https://github.com/NVIDIA/elements/commit/1bc197e))
+* chore(ci): add slack release hook ([4a8fd85](https://github.com/NVIDIA/elements/commit/4a8fd85))
+* chore(ci): update installations via mise ([054992e](https://github.com/NVIDIA/elements/commit/054992e))
+* chore(docs): add adoption metrics generation and service ([29e3795](https://github.com/NVIDIA/elements/commit/29e3795))
+* chore(docs): fix base url paths ([f97acb6](https://github.com/NVIDIA/elements/commit/f97acb6))
+* chore(docs): fix url asset paths ([1cda122](https://github.com/NVIDIA/elements/commit/1cda122))
+* chore(docs): improved site metadata and tests ([c58c856](https://github.com/NVIDIA/elements/commit/c58c856))
+* chore(docs): update minification config ([0ff44a6](https://github.com/NVIDIA/elements/commit/0ff44a6))
+* chore(docs): update notice file ([21da17a](https://github.com/NVIDIA/elements/commit/21da17a))
+* chore(release): @nvidia-elements/cli-v2.1.1 [skip ci] ([4a0c00c](https://github.com/NVIDIA/elements/commit/4a0c00c))
+* chore(release): @nvidia-elements/cli-v2.1.2 [skip ci] ([089acec](https://github.com/NVIDIA/elements/commit/089acec))
+* chore(release): @nvidia-elements/cli-v2.1.3 [skip ci] ([a9a0571](https://github.com/NVIDIA/elements/commit/a9a0571))
+* chore(release): @nvidia-elements/cli-v2.1.4 [skip ci] ([5433ff2](https://github.com/NVIDIA/elements/commit/5433ff2))
+* chore(starters): cleanup starter readme and templates ([e2e225c](https://github.com/NVIDIA/elements/commit/e2e225c))
+* feat(starters): add htmx+go and fix go starter ([d2ecd86](https://github.com/NVIDIA/elements/commit/d2ecd86))
+
 ## <small>2.0.2 (2026-06-23)</small>
 
 * fix(core): memory leaks from connected callback states ([f49c0bd](https://github.com/NVIDIA/elements/commit/f49c0bd))
