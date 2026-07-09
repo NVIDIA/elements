@@ -14,7 +14,7 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           fetch-depth: 0
           lfs: true
@@ -34,7 +34,7 @@ jobs:
         run: node ./projects/internals/ci/ci-summary.js >> "$GITHUB_STEP_SUMMARY"
       - name: Upload build artifacts
         if: github.event_name == 'push'
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: build-artifacts
           retention-days: 1
@@ -62,17 +62,34 @@ jobs:
             projects/monaco/dist
             projects/monaco/package.json
             projects/pages/dist
+      - name: Prepare IndexNow artifacts
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
+          INDEXNOW_KEY: ${{secrets.INDEXNOW_KEY}}
+        run: >-
+          node ./projects/internals/ci/indexnow.js prepare
+          --site-dir projects/pages/dist
+          --site-url "$ELEMENTS_PAGES_BASE_URL"
       - name: Upload pages artifact
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: projects/pages/dist
           include-hidden-files: true
+      - name: Upload IndexNow state
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: indexnow-state
+          retention-days: 1
+          path: projects/pages/dist/indexnow-manifest.json
+          overwrite: true
 
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           fetch-depth: 0
           lfs: true
@@ -94,7 +111,7 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           fetch-depth: 0
           lfs: true
@@ -107,7 +124,7 @@ jobs:
         with:
           install-playwright: 'false'
       - name: Download build artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: build-artifacts
           path: projects
@@ -120,7 +137,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: WIREIT_PARALLEL=1 WIREIT_LOGGER=metrics pnpm run release
       - name: Upload MCP server manifest
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: mcp-server
           retention-days: 1
@@ -134,7 +151,7 @@ jobs:
     concurrency: mcp-registry-publish
     steps:
       - name: Download MCP server manifest
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: mcp-server
           path: projects/cli
@@ -170,6 +187,8 @@ jobs:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
+      actions: read
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -177,6 +196,74 @@ jobs:
       url: ${{steps.deployment.outputs.page_url}}
     concurrency: pages
     steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          sparse-checkout: |
+            .nvmrc
+            mise.toml
+            projects/internals/ci/indexnow.js
+            projects/internals/ci/package.json
+          sparse-checkout-cone-mode: false
+      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+        with:
+          version: 2026.6.14
+          install: true
+          cache: true
+      - name: Download IndexNow state
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: indexnow-state
+          path: indexnow/current
+      - name: Determine changed URLs
+        env:
+          ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
+        run: >-
+          node ./projects/internals/ci/indexnow.js diff
+          --current-file indexnow/current/indexnow-manifest.json
+          --site-url "$ELEMENTS_PAGES_BASE_URL"
+          --output-file indexnow/payload.json
+      - name: Upload IndexNow payload
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: indexnow-payload
+          retention-days: 30
+          path: indexnow/payload.json
+          overwrite: true
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
+
+  notify-indexnow:
+    needs: deploy-pages
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          sparse-checkout: |
+            .nvmrc
+            mise.toml
+            projects/internals/ci/indexnow.js
+            projects/internals/ci/package.json
+          sparse-checkout-cone-mode: false
+      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+        with:
+          version: 2026.6.14
+          install: true
+          cache: true
+      - name: Download IndexNow payload
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: indexnow-payload
+          path: indexnow
+      - name: Notify IndexNow
+        env:
+          ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
+          INDEXNOW_KEY: ${{secrets.INDEXNOW_KEY}}
+        run: >-
+          node ./projects/internals/ci/indexnow.js submit
+          --payload-file indexnow/payload.json
+          --site-url "$ELEMENTS_PAGES_BASE_URL"

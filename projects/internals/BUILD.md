@@ -199,6 +199,10 @@ The following GitHub settings optimize code quality and stability within the rep
 
   Scheduled workflows run nightly builds of the documentation as well as full runs of [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) against each of the 50+ components in the Elements library.
 
+- [IndexNow](https://www.indexnow.org/)
+
+The Pages deployment workflow notifies IndexNow after it publishes documentation updates. Before merging changes that enable this workflow, add an `INDEXNOW_KEY` repository Actions secret containing 8 to 128 letters, numbers, or dashes. The workflow publishes the verification file under the Pages project path, submits only changed sitemap URLs, and retains each notification payload for 30 days so maintainers can rerun a failed notification job.
+
 ## Release
 
 [Semantic Release](https://github.com/semantic-release/semantic-release) is an open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to be available within minutes of it merging and passing the CI automated tests. To integrate into GitHub, complete the following:
