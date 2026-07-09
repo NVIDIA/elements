@@ -11,6 +11,7 @@
   },
   "exports": {
     ".": "./src/index.js",
+    "./plugins/*.js": "./src/plugins/*.js",
     "./runners/*.js": "./src/runners/*.js",
     "./setup/*.js": "./src/setup/*.js",
     "./configs/*.js": "./src/configs/*.js"

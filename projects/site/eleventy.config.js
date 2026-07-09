@@ -2,6 +2,7 @@
 
 import { EleventyRenderPlugin, HtmlBasePlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
+import { transpileDecorators } from '@internals/vite/plugins/decorators.js';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
 
 import { BASE_URL } from './src/_11ty/layouts/metadata.js';
@@ -144,6 +145,7 @@ export default function (eleventyConfig) {
             : undefined
       },
       plugins: [
+        transpileDecorators({ experimentalDecorators: true }),
         {
           name: 'remove-sourcemaps',
           transform(code) {
