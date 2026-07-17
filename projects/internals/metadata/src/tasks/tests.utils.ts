@@ -6,6 +6,8 @@ import { readFileSync } from 'node:fs';
 import type { ProjectTestSummary, CoverageResult } from '../types.js';
 import type { ProjectsTestSummary } from '../utils/reports.js';
 
+type CoverageMetricName = keyof CoverageResult;
+
 export function normalizePath(path: string): string {
   const projectsIndex = path.indexOf('/projects');
   if (projectsIndex !== -1) {
@@ -56,6 +58,37 @@ export function normalizeTestResults<T extends Record<string, unknown>>(testResu
   });
 }
 
+export function getCoverageResults(coverage: Record<string, CoverageResult>): ({ file: string } & CoverageResult)[] {
+  return Object.entries(coverage)
+    .filter(([file]) => file !== 'total' && (!file.includes('/src/') || existsSync(file)))
+    .map(([file, fileCoverage]: [string, CoverageResult]) => ({
+      file: file.includes('/src/') ? file.split('/src/')[1]! : file,
+      ...fileCoverage
+    }));
+}
+
+export function getCoverageTotal(coverageResults: CoverageResult[]): CoverageResult {
+  return {
+    lines: getCoverageMetricTotal(coverageResults, 'lines'),
+    statements: getCoverageMetricTotal(coverageResults, 'statements'),
+    branches: getCoverageMetricTotal(coverageResults, 'branches'),
+    functions: getCoverageMetricTotal(coverageResults, 'functions')
+  };
+}
+
+function getCoverageMetricTotal(coverageResults: CoverageResult[], metricName: CoverageMetricName) {
+  const total = coverageResults.reduce((count, result) => count + result[metricName].total, 0);
+  const covered = coverageResults.reduce((count, result) => count + result[metricName].covered, 0);
+  const skipped = coverageResults.reduce((count, result) => count + result[metricName].skipped, 0);
+
+  return {
+    total,
+    covered,
+    skipped,
+    pct: total === 0 ? 100 : Number(((covered / total) * 100).toFixed(2))
+  };
+}
+
 export async function generateTestSummary(): Promise<ProjectsTestSummary> {
   return {
     created: new Date().toISOString(),
@@ -68,6 +101,7 @@ export async function generateTestSummary(): Promise<ProjectsTestSummary> {
       '@nvidia-elements/lint': await getTestReport('@nvidia-elements/lint', '../../../../lint'),
       '@nvidia-elements/forms': await getTestReport('@nvidia-elements/forms', '../../../../forms'),
       '@nvidia-elements/markdown': await getTestReport('@nvidia-elements/markdown', '../../../../markdown'),
+      '@nvidia-elements/media': await getTestReport('@nvidia-elements/media', '../../../../media'),
       '@nvidia-elements/monaco': await getTestReport('@nvidia-elements/monaco', '../../../../monaco'),
       '@internals/metadata': await getTestReport('@internals/metadata', '../../../../internals/metadata'),
       '@internals/patterns': await getTestReport('@internals/patterns', '../../../../internals/patterns'),
@@ -188,11 +222,8 @@ async function getTestReport(name: string, basePath: string): Promise<ProjectTes
 
   if (existsSync(coveragePath)) {
     const coverage = JSON.parse(readFileSync(coveragePath, 'utf8')) as Record<string, CoverageResult>;
-    report.coverage.total = coverage.total!;
-    report.coverage.testResults = Object.entries(coverage).map(([file, fileCoverage]: [string, CoverageResult]) => ({
-      file: file.includes('/src/') ? file.split('/src/')[1]! : file,
-      ...fileCoverage
-    }));
+    report.coverage.testResults = getCoverageResults(coverage);
+    report.coverage.total = getCoverageTotal(report.coverage.testResults);
   }
 
   return report;

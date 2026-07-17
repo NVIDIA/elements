@@ -93,6 +93,8 @@ const BREADCRUMB_TERMS = {
   hugo: 'Hugo',
   angular: 'Angular',
   monaco: 'Monaco',
+  media: 'Media',
+  fullscreen: 'Full-screen',
   jsdoc: 'JSDoc',
   json: 'JSON',
   html: 'HTML',
