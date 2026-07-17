@@ -11,15 +11,25 @@ type CommandBehaviorHost = ReactiveElement & {
   readOnly: boolean;
 };
 
+type TypeCommandControllerOptions = {
+  events?: readonly string[];
+};
+
 export class TypeCommandController<T extends CommandBehaviorHost> implements ReactiveController {
-  constructor(private host: T) {
+  readonly #events: readonly string[];
+
+  constructor(
+    private host: T,
+    { events = ['click'] }: TypeCommandControllerOptions = {}
+  ) {
+    this.#events = [...new Set(events)];
     this.host.addController(this);
   }
 
   hostUpdated() {
     this.#removeCommandBehavior();
     if (!this.host.readOnly && !this.host.disabled) {
-      this.host.addEventListener('click', this.#onCommandClick);
+      this.#events.forEach(eventType => this.host.addEventListener(eventType, this.#onCommand));
     }
   }
 
@@ -28,10 +38,10 @@ export class TypeCommandController<T extends CommandBehaviorHost> implements Rea
   }
 
   #removeCommandBehavior() {
-    this.host.removeEventListener('click', this.#onCommandClick);
+    this.#events.forEach(eventType => this.host.removeEventListener(eventType, this.#onCommand));
   }
 
-  #onCommandClick = (event: Event) => {
+  #onCommand = (event: Event) => {
     if (!event.defaultPrevented) {
       this.#dispatchCommand();
     }

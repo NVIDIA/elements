@@ -73,6 +73,14 @@
     "./validators/index.js": {
       "types": "./dist/validators/index.d.ts",
       "default": "./dist/validators/index.js"
+    },
+    "./internal": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
+    },
+    "./internal/index.js": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
     }
   },
   "sideEffects": [],

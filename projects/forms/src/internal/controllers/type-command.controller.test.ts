@@ -11,6 +11,8 @@ import type { ReactiveController } from './types.js';
 type CommandTestEvent = Event & { command: string; source: HTMLElement };
 
 class CommandBehaviorControllerTestElement extends HTMLElement {
+  static events: readonly string[] | undefined;
+
   command?: string;
   commandfor: string | null = null;
   commandForElement: HTMLElement | null = null;
@@ -20,7 +22,12 @@ class CommandBehaviorControllerTestElement extends HTMLElement {
 
   constructor() {
     super();
-    new TypeCommandController(this);
+    const events = (this.constructor as typeof CommandBehaviorControllerTestElement).events;
+    if (events) {
+      new TypeCommandController(this, { events });
+    } else {
+      new TypeCommandController(this);
+    }
   }
 
   addController(controller: ReactiveController) {
@@ -40,8 +47,19 @@ class CommandBehaviorControllerTestElement extends HTMLElement {
   }
 }
 
+class MultiEventCommandBehaviorControllerTestElement extends CommandBehaviorControllerTestElement {
+  static override events = ['change', 'click'];
+}
+
 if (!customElements.get('command-behavior-controller-test-element')) {
   customElements.define('command-behavior-controller-test-element', CommandBehaviorControllerTestElement);
+}
+
+if (!customElements.get('multi-event-command-behavior-controller-test-element')) {
+  customElements.define(
+    'multi-event-command-behavior-controller-test-element',
+    MultiEventCommandBehaviorControllerTestElement
+  );
 }
 
 describe('CommandBehaviorController', () => {
@@ -71,6 +89,30 @@ describe('CommandBehaviorController', () => {
 
     expect(event.command).toBe('--test');
     expect(event.source).toBe(element);
+  });
+
+  it('should dispatch command events for every configured event', async () => {
+    fixture = await createFixture(
+      html`<multi-event-command-behavior-controller-test-element></multi-event-command-behavior-controller-test-element><div
+          id="target"
+        ></div>`
+    );
+    const element = fixture.querySelector<MultiEventCommandBehaviorControllerTestElement>(
+      'multi-event-command-behavior-controller-test-element'
+    )!;
+    const target = fixture.querySelector<HTMLElement>('#target')!;
+    const command = vi.fn();
+
+    target.addEventListener('command', command);
+    element.command = '--test';
+    element.commandForElement = target;
+    element.sync();
+
+    element.dispatchEvent(new Event('change'));
+    await emulateClick(element);
+    element.dispatchEvent(new Event('input'));
+
+    expect(command).toHaveBeenCalledTimes(2);
   });
 
   it('should resolve command targets by commandfor id', async () => {
