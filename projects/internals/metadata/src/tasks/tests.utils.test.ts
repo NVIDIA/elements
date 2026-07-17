@@ -1,9 +1,31 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { beforeAll, describe, expect, it } from 'vitest';
-import { generateTestSummary, normalizePath, normalizeTestResults } from './tests.utils.js';
+import { existsSync, mkdirSync, unlinkSync, writeFileSync } from 'node:fs';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import {
+  generateTestSummary,
+  getCoverageResults,
+  getCoverageTotal,
+  normalizePath,
+  normalizeTestResults
+} from './tests.utils.js';
+import type { CoverageResult } from '../types.js';
 import type { ProjectsTestSummary } from '../utils/reports.js';
+
+const completeCoverage: CoverageResult = {
+  lines: { total: 1, covered: 1, skipped: 0, pct: 100 },
+  statements: { total: 2, covered: 2, skipped: 0, pct: 100 },
+  branches: { total: 3, covered: 3, skipped: 0, pct: 100 },
+  functions: { total: 4, covered: 4, skipped: 0, pct: 100 }
+};
+
+const partialCoverage: CoverageResult = {
+  lines: { total: 2, covered: 1, skipped: 0, pct: 50 },
+  statements: { total: 4, covered: 2, skipped: 0, pct: 50 },
+  branches: { total: 6, covered: 3, skipped: 0, pct: 50 },
+  functions: { total: 8, covered: 4, skipped: 0, pct: 50 }
+};
 
 describe('normalizePath', () => {
   it('should normalize absolute path to start at /projects', () => {
@@ -199,11 +221,77 @@ describe('normalizeTestResults', () => {
   });
 });
 
+describe('getCoverageResults', () => {
+  it('should remove stale coverage entries for deleted source files', () => {
+    const existingPath = new URL('./tests.utils.ts', import.meta.url).pathname;
+    const deletedPath = existingPath.replace('tests.utils.ts', 'deleted-source.ts');
+    const coverage = {
+      total: completeCoverage,
+      [existingPath]: completeCoverage,
+      [deletedPath]: partialCoverage
+    };
+
+    expect(getCoverageResults(coverage)).toEqual([
+      {
+        file: 'tasks/tests.utils.ts',
+        ...completeCoverage
+      }
+    ]);
+  });
+
+  it('should preserve coverage entries outside source directories', () => {
+    const coverage = {
+      total: completeCoverage,
+      'generated.css': partialCoverage
+    };
+
+    expect(getCoverageResults(coverage)).toEqual([
+      {
+        file: 'generated.css',
+        ...partialCoverage
+      }
+    ]);
+  });
+});
+
+describe('getCoverageTotal', () => {
+  it('should calculate totals from filtered coverage entries', () => {
+    expect(getCoverageTotal([completeCoverage, partialCoverage])).toEqual({
+      lines: { total: 3, covered: 2, skipped: 0, pct: 66.67 },
+      statements: { total: 6, covered: 4, skipped: 0, pct: 66.67 },
+      branches: { total: 9, covered: 6, skipped: 0, pct: 66.67 },
+      functions: { total: 12, covered: 8, skipped: 0, pct: 66.67 }
+    });
+  });
+
+  it('should report complete percentages when there are no coverage entries', () => {
+    expect(getCoverageTotal([])).toEqual({
+      lines: { total: 0, covered: 0, skipped: 0, pct: 100 },
+      statements: { total: 0, covered: 0, skipped: 0, pct: 100 },
+      branches: { total: 0, covered: 0, skipped: 0, pct: 100 },
+      functions: { total: 0, covered: 0, skipped: 0, pct: 100 }
+    });
+  });
+});
+
 describe('generateTestSummary', () => {
   let summary: ProjectsTestSummary;
+  const ssrSummaryPath = new URL('../../coverage/ssr/summary.json', import.meta.url);
+  let removeSsrSummary = false;
 
   beforeAll(async () => {
+    if (!existsSync(ssrSummaryPath)) {
+      mkdirSync(new URL('.', ssrSummaryPath), { recursive: true });
+      writeFileSync(ssrSummaryPath, JSON.stringify({ testResults: [] }));
+      removeSsrSummary = true;
+    }
     summary = await generateTestSummary();
+  });
+
+  afterAll(() => {
+    if (removeSsrSummary) {
+      unlinkSync(ssrSummaryPath);
+    }
   });
 
   it('should return the metadata json', () => {
@@ -235,6 +323,7 @@ describe('generateTestSummary', () => {
       '@nvidia-elements/lint',
       '@nvidia-elements/forms',
       '@nvidia-elements/markdown',
+      '@nvidia-elements/media',
       '@nvidia-elements/monaco',
       '@internals/metadata',
       '@internals/patterns',

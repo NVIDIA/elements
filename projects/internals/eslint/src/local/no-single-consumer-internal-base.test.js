@@ -36,8 +36,8 @@ test('defines rule metadata', () => {
 test('valid: internal abstract base with two implementation consumers', () => {
   const filename = createFile('src/internal/media-toggle-button.ts', 'export abstract class MediaToggleButton {}');
   createFile(
-    'src/media-play-button/media-play-button.ts',
-    "import { MediaToggleButton } from '../internal/media-toggle-button.js';\nexport class MediaPlayButton extends MediaToggleButton {}"
+    'src/media-pause-button/media-pause-button.ts',
+    "import { MediaToggleButton } from '../internal/media-toggle-button.js';\nexport class MediaPauseButton extends MediaToggleButton {}"
   );
   createFile(
     'src/media-mute-button/media-mute-button.ts',
@@ -59,8 +59,8 @@ test('valid: internal abstract base with two implementation consumers', () => {
 test('valid: counts named alias and namespace import subclasses', () => {
   const filename = createFile('src/internal/media-button.ts', 'export abstract class MediaButton {}');
   createFile(
-    'src/media-play-button/media-play-button.ts',
-    "import { MediaButton as InternalMediaButton } from '../internal/media-button.js';\nexport class MediaPlayButton extends InternalMediaButton {}"
+    'src/media-pause-button/media-pause-button.ts',
+    "import { MediaButton as InternalMediaButton } from '../internal/media-button.js';\nexport class MediaPauseButton extends InternalMediaButton {}"
   );
   createFile(
     'src/media-mute-button/media-mute-button.ts',
@@ -82,8 +82,8 @@ test('valid: counts named alias and namespace import subclasses', () => {
 test('valid: counts default import subclasses for default-exported bases', () => {
   const filename = createFile('src/internal/media-button.ts', 'export default abstract class MediaButton {}');
   createFile(
-    'src/media-play-button/media-play-button.ts',
-    "import InternalMediaButton from '../internal/media-button.js';\nexport class MediaPlayButton extends InternalMediaButton {}"
+    'src/media-pause-button/media-pause-button.ts',
+    "import InternalMediaButton from '../internal/media-button.js';\nexport class MediaPauseButton extends InternalMediaButton {}"
   );
   createFile(
     'src/media-mute-button/media-mute-button.ts',
@@ -175,8 +175,8 @@ test('valid: ignores non-internal and non-base internal classes', () => {
 test('invalid: internal abstract base with one importing consumer', () => {
   const filename = createFile('src/internal/media-button.ts', 'export abstract class MediaButton {}');
   createFile(
-    'src/media-play-button/media-play-button.ts',
-    "import { MediaButton } from '../internal/media-button.js';\nexport class MediaPlayButton extends MediaButton {}"
+    'src/media-pause-button/media-pause-button.ts',
+    "import { MediaButton } from '../internal/media-button.js';\nexport class MediaPauseButton extends MediaButton {}"
   );
 
   tester.run('no-single-consumer-internal-base', noSingleConsumerInternalBase, {
@@ -204,8 +204,8 @@ test('invalid: ignores imports that do not subclass the base', () => {
     "import type { MediaButton } from './media-button.js';\nexport type MediaButtonLike = MediaButton;"
   );
   createFile(
-    'src/media-play-button/media-play-button.ts',
-    "import { MediaButton } from '../internal/media-button.js';\nexport class MediaPlayButton extends MediaButton {}"
+    'src/media-pause-button/media-pause-button.ts',
+    "import { MediaButton } from '../internal/media-button.js';\nexport class MediaPauseButton extends MediaButton {}"
   );
 
   tester.run('no-single-consumer-internal-base', noSingleConsumerInternalBase, {
@@ -229,7 +229,7 @@ test('invalid: ignores imports that do not subclass the base', () => {
 test('invalid: internal abstract base with only a same-file subclass', () => {
   const code = `
     export abstract class MediaButton {}
-    export class MediaPlayButton extends MediaButton {}
+    export class MediaPauseButton extends MediaButton {}
   `;
   const filename = createFile('src/internal/media-button.ts', code);
 
