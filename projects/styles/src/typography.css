@@ -344,3 +344,8 @@ ul[nve-text~='nav'] ul li {
 [nve-text~='monospace'] {
   font-family: monospace !important;
 }
+
+[nve-text~='grow'] {
+  text-fit: grow;
+  width: 100%;
+}

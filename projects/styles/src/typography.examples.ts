@@ -65,6 +65,19 @@ export const Size = {
 }
 
 /**
+ * @summary Grow text to fill the available width via the CSS `text-fit` property.
+ */
+export const Grow = {
+  render: () => html`
+<div nve-layout="column gap:xl" >
+  <p nve-text="body grow" style="width: 400px;">grow text</p>
+  <p nve-text="body grow" style="width: 300px;">grow text</p>
+  <p nve-text="body grow" style="width: 200px;">grow text</p>
+</div>
+  `
+}
+
+/**
  * @summary Color variations for text to convey importance levels and ensure proper contrast in light and dark themes.
  * @tags test-case
  */

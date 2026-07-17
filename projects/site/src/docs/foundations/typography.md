@@ -93,6 +93,10 @@ See the links below for specific integration patterns for the following framewor
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'Size' %}
 
+## Grow
+
+{% example '@nvidia-elements/styles/typography.examples.json' 'Grow' %}
+
 ## Line height
 
 Use different attributes with `nve-text` like `loose`, `relaxed`, `moderate`, `snug`, and `tight` to give an element a relative line-height based on its current font-size.
