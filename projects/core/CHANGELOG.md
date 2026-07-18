@@ -1,3 +1,16 @@
+## 2.1.0 (2026-07-18)
+
+* chore(ci): improve test coverage ([4ef2eb3](https://github.com/NVIDIA/elements/commit/4ef2eb3))
+* chore(ci): update lighthouse ([4bffdb2](https://github.com/NVIDIA/elements/commit/4bffdb2))
+* chore(ci): update stylelint to version ([522e1c4](https://github.com/NVIDIA/elements/commit/522e1c4))
+* chore(ci): upgrade built to ts7 rc ([77117a1](https://github.com/NVIDIA/elements/commit/77117a1))
+* chore(release): @nvidia-elements/forms-v2.0.3 [skip ci] ([5285c80](https://github.com/NVIDIA/elements/commit/5285c80))
+* chore(release): @nvidia-elements/styles-v2.1.0 [skip ci] ([25eb987](https://github.com/NVIDIA/elements/commit/25eb987))
+* feat(core): gauge ([70e115d](https://github.com/NVIDIA/elements/commit/70e115d))
+* feat(styles): add grow option for nve-text ([0b895ff](https://github.com/NVIDIA/elements/commit/0b895ff))
+* fix(docs): enhance decorator transpilation ([a08584b](https://github.com/NVIDIA/elements/commit/a08584b))
+* fix(forms): export controller ([1808462](https://github.com/NVIDIA/elements/commit/1808462))
+
 ## <small>2.0.4 (2026-07-08)</small>
 
 * chore(release): @nvidia-elements/forms-v2.0.2 [skip ci] ([35e1073](https://github.com/NVIDIA/elements/commit/35e1073))
