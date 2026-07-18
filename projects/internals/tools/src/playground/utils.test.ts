@@ -569,6 +569,8 @@ describe('createImportMap with different frameworks', () => {
     expect(importmap.imports['@nvidia-elements/monaco']).toContain('/@nvidia-elements/monaco@latest');
     expect(importmap.imports['@nvidia-elements/code']).toContain('/@nvidia-elements/code@latest');
     expect(importmap.imports['@nvidia-elements/forms']).toContain('/@nvidia-elements/forms@latest');
+    expect(importmap.imports['@nvidia-elements/media']).toBe('https://esm.sh/@nvidia-elements/media@latest');
+    expect(importmap.imports['@nvidia-elements/media/']).toBe('https://esm.sh/@nvidia-elements/media@latest/');
   });
 });
 

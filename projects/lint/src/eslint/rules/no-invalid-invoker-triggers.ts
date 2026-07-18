@@ -24,7 +24,14 @@ const BUTTON_TYPE_ELEMENTS = [
   'nve-tabs-item',
   'nve-tag',
   'nve-steps-item',
-  'nve-copy-button'
+  'nve-copy-button',
+  'nve-media-fullscreen-button',
+  'nve-media-mute-button',
+  'nve-media-pause-button',
+  'nve-media-playback-rate-select',
+  'nve-media-seek-button',
+  'nve-media-time-range',
+  'nve-media-volume-range'
 ] as const;
 
 const rule = {

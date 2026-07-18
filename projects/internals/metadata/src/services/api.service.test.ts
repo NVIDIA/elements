@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import MiniSearch from 'minisearch';
+import { describe, expect, it, vi } from 'vitest';
 import { ApiService } from './api.service.js';
 
 describe('ApiService', () => {
@@ -41,7 +42,12 @@ describe('ApiService', () => {
   });
 
   it('should prioritize exact matches over fuzzy matches', async () => {
+    const searchSpy = vi.spyOn(MiniSearch.prototype, 'search').mockReturnValue([
+      { id: 'nve-button-group', terms: ['button'], queryTerms: ['button'], score: 2, match: {} },
+      { id: 'nve-button', terms: ['button'], queryTerms: ['button'], score: 1, match: {} }
+    ]);
     const results = await ApiService.search('nve-button');
+    searchSpy.mockRestore();
 
     expect(results[0]?.name).toBe('nve-button');
   });

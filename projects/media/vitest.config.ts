@@ -12,10 +12,10 @@ const config = mergeConfig(libraryTestConfig, {
     setupFiles: [],
     coverage: {
       thresholds: {
-        lines: 80,
-        branches: 80,
-        functions: 80,
-        statements: 80
+        lines: 90,
+        branches: 90,
+        functions: 90,
+        statements: 90
       }
     }
   }

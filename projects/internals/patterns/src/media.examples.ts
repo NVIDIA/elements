@@ -27,69 +27,6 @@ export default {
 };
 
 /**
- * @summary Playback transport controls with start, rewind, play, fast forward, and end buttons in a flat button group. Use as the core navigation component in media players, simulation reviewers, or timeline-based interfaces.
- * @tags pattern
- */
-export const PlaybackControl = {
-  render: () => html`
-<nve-button-group aria-label="playback controls" container="flat">
-  <nve-icon-button aria-label="go to start" icon-name="start" size="sm"></nve-icon-button>
-  <nve-icon-button aria-label="rewind" icon-name="rewind" size="sm"></nve-icon-button>
-  <nve-icon-button aria-label="play" icon-name="play" size="sm"></nve-icon-button>
-  <nve-icon-button aria-label="fast forward" icon-name="fast-forward" size="sm"></nve-icon-button>
-  <nve-icon-button aria-label="go to end" icon-name="start" direction="down" size="sm"></nve-icon-button>
-</nve-button-group>
-  `
-};
-
-/**
- * @summary Playback speed control using a rounded button group with preset speed options for audio and video playback. Use when toolbar space allows discrete speed buttons and users need to see all options at once.
- * @tags pattern
- */
-export const PlaybackSpeedControl = {
-  render: () => html`
-<nve-button-group aria-label="playback speed" container="rounded">
-  <nve-button size="sm">0.5x</nve-button>
-  <nve-button size="sm" pressed>1x</nve-button>
-  <nve-button size="sm">2x</nve-button>
-  <nve-button size="sm">4x</nve-button>
-</nve-button-group>
-  `
-};
-
-/**
- * @summary Compact playback speed control using a flat select dropdown for audio and video playback. Use when toolbar space is tight and a dropdown works better than a button group for speed selection.
- * @tags pattern
- */
-export const PlaybackSpeedMenuControl = {
-  render: () => html`
-<nve-select container="flat" style="--width: 70px">
-  <select aria-label="playback speed">
-    <option value="0.5">0.5x</option>
-    <option value="1">1x</option>
-    <option value="1.5">1.5x</option>
-    <option value="2">2x</option>
-  </select>
-</nve-select>
-  `
-};
-
-/**
- * @summary Volume control with mute toggle and range slider for audio playback. Use in media players, video reviewers, or any interface where users need fine-grained audio level control.
- * @tags pattern
- */
-export const VolumeControl = {
-  render: () => html`
-<div aria-label="volume controls" role="group" nve-layout="row gap:xs align:vertical-center">
-  <nve-icon-button aria-label="mute volume" icon-name="volume" size="sm" container="flat"></nve-icon-button>
-  <nve-range>
-    <input aria-label="volume" type="range" min="0" max="100" value="80" />
-  </nve-range>
-</div>
-  `
-};
-
-/**
  * @summary Zoom level control with zoom-out, range slider, and zoom-in buttons for video and canvas content. Use in media viewers, map interfaces, or image editors where users need precise zoom control.
  * @tags pattern
  */
@@ -106,70 +43,6 @@ export const ZoomControl = {
 };
 
 /**
- * @summary Time scrubber with current position, range slider, and total duration for audio and video playback. Use in media players where users need to seek to a specific timestamp or scan through recorded content.
- * @tags pattern
- */
-export const TimeScrubberControl = {
-  render: () => html`
-<div aria-label="time scrubber controls" role="group" nve-layout="row gap:sm align:vertical-center">
-  <time datetime="00:14:23" nve-text="body sm muted">00:14:23</time>
-  <nve-range>
-    <input aria-label="playback time" type="range" min="0" max="6300" value="890" />
-  </nve-range>
-  <time datetime="01:45:00" nve-text="body sm muted">01:45:00</time>
-</div>
-  `
-};
-
-/**
- * @summary Standard video player with playback controls, timeline scrubber, and volume controls. Use for reviewing recorded sensor data, simulation playback, or training video content.
- * @tags pattern
- */
-export const VideoPlayerCard = {
-  render: () => html`
-<nve-card style="max-width: 520px">
-  <video style="aspect-ratio: 16 / 9; background: var(--nve-ref-color-alpha-black-700)"></video>
-  <nve-card-content>
-    <div nve-layout="column gap:sm full">
-      <div role="group" aria-label="time scrubber controls" nve-layout="row gap:sm align:vertical-center full">
-        <time datetime="00:14:23" nve-text="body sm muted">00:14:23</time>
-        <nve-range>
-          <input type="range" min="0" max="6300" value="890" aria-label="playback time" />
-        </nve-range>
-        <time datetime="01:45:00" nve-text="body sm muted">01:45:00</time>
-      </div>
-      <nve-toolbar aria-label="video control options" container="inset">
-        <nve-button-group container="flat" aria-label="playback controls">
-          <nve-icon-button aria-label="go to start" icon-name="start" size="sm"></nve-icon-button>
-          <nve-icon-button aria-label="rewind" icon-name="rewind" size="sm"></nve-icon-button>
-          <nve-icon-button aria-label="play" icon-name="play" size="sm"></nve-icon-button>
-          <nve-icon-button aria-label="fast forward" icon-name="fast-forward" size="sm"></nve-icon-button>
-          <nve-icon-button aria-label="go to end" icon-name="start" direction="down" size="sm"></nve-icon-button>
-        </nve-button-group>
-        <nve-divider orientation="vertical"></nve-divider>
-        <div role="group" aria-label="volume controls" nve-layout="row gap:xs align:vertical-center">
-          <nve-icon-button aria-label="mute volume" icon-name="volume" size="sm" container="flat"></nve-icon-button>
-          <nve-range>
-            <input type="range" min="0" max="100" value="50" aria-label="Volume" />
-          </nve-range>
-        </div>
-        <nve-select container="flat" style="--width: 70px">
-          <select aria-label="playback speed">
-            <option value="0.5">0.5x</option>
-            <option value="1">1x</option>
-            <option value="1.5">1.5x</option>
-            <option value="2">2x</option>
-          </select>
-        </nve-select>
-        <nve-icon-button aria-label="fullscreen" icon-name="maximize" size="sm" container="flat"></nve-icon-button>
-      </nve-toolbar>
-    </div>
-  </nve-card-content>
-</nve-card>
-  `
-};
-
-/**
  * @summary Compact audio player controls with playback controls, and timestamp display. Ideal for reviewing audio logs, voice commands, or alert sounds.
  * @tags pattern
  */
@@ -182,40 +55,28 @@ export const AudioPlayerCard = {
         <span nve-text="body bold">event-recording-042.mp4</span>
         <time datetime="2026-01-08 14:23:56" nve-text="body sm muted">2026-01-08 14:23:56</time>
       </div>
-      <nve-icon-button aria-label="download audio" popovertarget="download-audio" icon-name="download" size="sm" container="flat"></nve-icon-button>
-      <nve-tooltip id="download-audio">Download Audio</nve-tooltip>
+      <nve-icon-button aria-label="download audio" icon-name="download" size="sm" container="flat"></nve-icon-button>
     </div>
   </nve-card-header>
   <nve-card-content>
     <div role="group" aria-label="time scrubber controls" nve-layout="row gap:sm align:vertical-center full pad-y:md">
       <time datetime="00:03.2" nve-text="body sm muted">00:03.2</time>
-      <nve-range>
-        <input aria-label="playback time" type="range" min="0" max="920" value="320" />
-      </nve-range>
+      <nve-media-time-range min="0" max="920" value="320"></nve-media-time-range>
       <time datetime="00:09.2" nve-text="body sm muted">00:09.2</time>
     </div>
   </nve-card-content>
   <nve-card-footer>
     <nve-toolbar container="inset">
-      <nve-button-group aria-label="playback controls" container="flat">
-        <nve-icon-button aria-label="go to start" icon-name="start" size="sm"></nve-icon-button>
-        <nve-icon-button aria-label="play" icon-name="play" size="sm"></nve-icon-button>
-        <nve-icon-button aria-label="go to end" icon-name="start" direction="down" size="sm"></nve-icon-button>
-      </nve-button-group>
-      <nve-divider orientation="vertical"></nve-divider>
-      <div role="group" aria-label="volume controls" nve-layout="row gap:xs align:vertical-center">
-        <nve-icon-button aria-label="mute volume" icon-name="volume" size="sm" container="flat"></nve-icon-button>
-        <nve-range>
-          <input type="range" min="0" max="100" value="50" aria-label="Volume" />
-        </nve-range>
+      <nve-media-seek-button action="start"></nve-media-seek-button>
+      <nve-media-seek-button action="backward" value="3"></nve-media-seek-button>
+      <nve-media-pause-button name="paused" checked></nve-media-pause-button>
+      <nve-media-seek-button action="forward" value="3"></nve-media-seek-button>
+      <nve-media-seek-button action="end"></nve-media-seek-button>
+      <div role="group" aria-label="volume controls" nve-layout="row gap:sm align:vertical-center" style="margin-left: auto">
+        <nve-media-mute-button name="muted"></nve-media-mute-button>
+        <nve-media-volume-range name="volume" value="0.5"></nve-media-volume-range>
+        <nve-media-playback-rate-select name="playbackRate"></nve-media-playback-rate-select>
       </div>
-      <nve-divider orientation="vertical"></nve-divider>
-      <nve-button-group aria-label="playback speed" container="rounded">
-        <nve-button size="sm">0.5x</nve-button>
-        <nve-button size="sm" pressed>1x</nve-button>
-        <nve-button size="sm">2x</nve-button>
-        <nve-button size="sm">4x</nve-button>
-      </nve-button-group>
     </nve-toolbar>
   </nve-card-footer>
 </nve-card>
@@ -280,41 +141,30 @@ export const PageLayoutVideo = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <video style="width: 100%; height: 100%; background: var(--nve-ref-color-alpha-black-700)"></video>
+  <nve-media-controller id="page-controller" style="width: 100%; height: 100%">
+    <video src="/static/video/particle.mp4" playsinline></video>
+  </nve-media-controller>
 
   <nve-page-panel slot="bottom" style="max-height: 100px">
     <nve-page-panel-content>
       <div nve-layout="column gap:sm full">
         <div role="group" aria-label="time scrubber controls" nve-layout="row gap:sm align:vertical-center full">
           <time datetime="00:14:23" nve-text="body sm muted">00:14:23</time>
-          <nve-range>
-            <input type="range" min="0" max="6300" value="890" aria-label="playback time" />
-          </nve-range>
+          <nve-media-time-range commandfor="page-controller" min="0" max="6300" value="890"></nve-media-time-range>
           <time datetime="01:45:00" nve-text="body sm muted">01:45:00</time>
         </div>
         <nve-toolbar aria-label="video control options" container="inset">
           <nve-button-group container="flat" aria-label="playback controls">
-            <nve-icon-button aria-label="go to start" icon-name="start" size="sm"></nve-icon-button>
-            <nve-icon-button aria-label="rewind" icon-name="rewind" size="sm"></nve-icon-button>
-            <nve-icon-button aria-label="play" icon-name="play" size="sm"></nve-icon-button>
-            <nve-icon-button aria-label="fast forward" icon-name="fast-forward" size="sm"></nve-icon-button>
-            <nve-icon-button aria-label="go to end" icon-name="start" direction="down" size="sm"></nve-icon-button>
+            <nve-media-seek-button commandfor="page-controller" action="start"></nve-media-seek-button>
+            <nve-media-seek-button commandfor="page-controller" action="backward" value="3"></nve-media-seek-button>
+            <nve-media-pause-button commandfor="page-controller" name="paused" checked></nve-media-pause-button>
+            <nve-media-seek-button commandfor="page-controller" action="forward" value="3"></nve-media-seek-button>
+            <nve-media-seek-button commandfor="page-controller" action="end"></nve-media-seek-button>
           </nve-button-group>
-          <div aria-label="volume controls" role="group" slot="suffix" nve-layout="row gap:xs align:vertical-center">
-            <nve-icon-button aria-label="mute volume" icon-name="volume" size="sm" container="flat"></nve-icon-button>
-            <nve-range style="width: 100px;">
-              <input type="range" min="0" max="100" value="50" aria-label="volume" />
-            </nve-range>
-          </div>
-          <nve-select slot="suffix" container="flat" style="--width: 70px;">
-            <select aria-label="playback speed">
-              <option value="0.5">0.5x</option>
-              <option value="1">1x</option>
-              <option value="1.5">1.5x</option>
-              <option value="2">2x</option>
-            </select>
-          </nve-select>
-          <nve-icon-button aria-label="fullscreen" slot="suffix" icon-name="maximize" size="sm" container="flat"></nve-icon-button>
+          <nve-media-mute-button commandfor="page-controller" name="muted" slot="suffix"></nve-media-mute-button>
+          <nve-media-volume-range commandfor="page-controller" name="volume" value="0.5" slot="suffix" style="width: 130px"></nve-media-volume-range>
+          <nve-media-playback-rate-select commandfor="page-controller" name="playbackRate" slot="suffix"></nve-media-playback-rate-select>
+          <nve-media-fullscreen-button commandfor="page-controller" slot="suffix"></nve-media-fullscreen-button>
         </nve-toolbar>
       </div>
     </nve-page-panel-content>

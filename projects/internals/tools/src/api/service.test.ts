@@ -67,6 +67,17 @@ describe('ApiService', () => {
       const result = await ApiService.get({ names: 'nve-button', format: 'markdown' });
       expect(typeof result).toBe('string');
       expect(result as string).toContain('nve-button');
+      expect(result as string).toContain('| readOnly (readonly) |');
+    });
+
+    it('should return projected mixin api for directly mixed components', async () => {
+      const result = await ApiService.get({ names: 'nve-media-mute-button', format: 'markdown' });
+      expect(typeof result).toBe('string');
+      expect(result as string).toContain('| pressed |');
+      expect(result as string).toContain('| checked |');
+      expect(result as string).toContain('| readOnly (readonly) |');
+      expect(result as string).toContain('| commandForElement (commandfor) |');
+      expect(result as string).not.toContain('| commandForElement (commandForElement) |');
     });
 
     it('should return json for a single string name', async () => {
@@ -74,6 +85,25 @@ describe('ApiService', () => {
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
       expect(result[0].name).toBe('nve-button');
+
+      const button = result[0] as Element;
+      const readOnly = button.manifest?.members.find(member => member.name === 'readOnly');
+
+      expect(readOnly?.attribute).toBe('readonly');
+    });
+
+    it('should return json with projected mixin attributes for directly mixed components', async () => {
+      const result = (await ApiService.get({ names: 'nve-media-mute-button', format: 'json' })) as (
+        | Element
+        | Attribute
+      )[];
+      const muteButton = result[0] as Element;
+      const checked = muteButton.manifest?.members.find(member => member.name === 'checked');
+      const commandForElement = muteButton.manifest?.members.find(member => member.name === 'commandForElement');
+
+      expect(checked?.attribute).toBe('checked');
+      expect(commandForElement?.attribute).toBe('commandfor');
+      expect(muteButton.manifest?.attributes?.some(attribute => attribute.name === 'commandForElement')).toBe(false);
     });
 
     it('should return markdown for an array with one name', async () => {

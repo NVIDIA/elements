@@ -1,4 +1,13 @@
-import { mergeConfig } from 'vite';
+import { resolve } from 'path';
+import { UserConfig, defineConfig, mergeConfig } from 'vite';
 import { libraryBuildConfig } from '@internals/vite';
 
-export default mergeConfig(libraryBuildConfig, {});
+export default defineConfig(() => {
+  const config: UserConfig = {
+    resolve: {
+      alias: { '@nvidia-elements/media': resolve(import.meta.dirname, './src') }
+    }
+  };
+
+  return mergeConfig(libraryBuildConfig, config);
+});

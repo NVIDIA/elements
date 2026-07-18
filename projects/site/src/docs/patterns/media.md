@@ -10,33 +10,9 @@
 
 Media patterns for video playback, sensor visualization, and robot monitoring in AV/Robotics applications.
 
-## Playback Control
-
-{% example '@internals/patterns/media.examples.json' 'PlaybackControl' %}
-
-## Playback Speed Control
-
-{% example '@internals/patterns/media.examples.json' 'PlaybackSpeedControl' %}
-
-## Playback Speed Menu Control
-
-{% example '@internals/patterns/media.examples.json' 'PlaybackSpeedMenuControl' %}
-
-## Volume Control
-
-{% example '@internals/patterns/media.examples.json' 'VolumeControl' %}
-
-## Zoom Control
-
-{% example '@internals/patterns/media.examples.json' 'ZoomControl' %}
-
-## Time Scrubber Control
-
-{% example '@internals/patterns/media.examples.json' 'TimeScrubberControl' %}
-
 ## Video Player Card
 
-{% example '@internals/patterns/media.examples.json' 'VideoPlayerCard' %}
+{% example '@nvidia-elements/media/controller/controller.examples.json', 'Card' %}
 
 ## Audio Player Card
 
@@ -45,3 +21,7 @@ Media patterns for video playback, sensor visualization, and robot monitoring in
 ## Page Video Layout
 
 {% example '@internals/patterns/media.examples.json' 'PageLayoutVideo' '{ "inline": false, "height": "680px" }' %}
+
+## Zoom Control
+
+{% example '@internals/patterns/media.examples.json' 'ZoomControl' %}
