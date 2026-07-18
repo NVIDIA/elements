@@ -1,0 +1,95 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --background: var(--nve-sys-support-accent-color);
+  --track-background: var(--nve-sys-interaction-background);
+  --track-height: var(--nve-ref-size-150);
+  --track-border-radius: var(--nve-ref-border-radius-md);
+  --thumb-background: var(--nve-sys-text-muted-color);
+  --thumb-border: 0;
+  --thumb-height: var(--nve-ref-size-400);
+  --thumb-width: var(--nve-ref-size-400);
+  --height: var(--nve-ref-size-800);
+  --width: 100%;
+  --cursor: pointer;
+  --track-progress: 0;
+  display: inline-flex;
+  inline-size: var(--width);
+  block-size: var(--height);
+}
+
+[internal-host] {
+  display: inline-flex;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  position: relative;
+}
+
+[internal-host]::before,
+[internal-host]::after {
+  content: '';
+  position: absolute;
+  inset-inline: calc(var(--thumb-width) / 2);
+  block-size: var(--track-height);
+  border-radius: var(--track-border-radius);
+  pointer-events: none;
+}
+
+[internal-host]::before {
+  background: var(--track-background);
+}
+
+[internal-host]::after {
+  inset-inline-end: auto;
+  inline-size: calc(var(--track-progress) * (100% - var(--thumb-width)));
+  background: var(--background);
+}
+
+input {
+  accent-color: var(--background);
+  appearance: none;
+  background: transparent;
+  box-sizing: border-box;
+  cursor: var(--cursor);
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+input::-webkit-slider-runnable-track {
+  block-size: var(--track-height);
+  background: transparent;
+}
+
+input::-moz-range-track {
+  block-size: var(--track-height);
+  background: transparent;
+}
+
+input::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--thumb-background);
+  border: var(--thumb-border);
+  border-radius: var(--nve-ref-border-radius-full);
+  block-size: var(--thumb-height);
+  inline-size: var(--thumb-width);
+  margin-block-start: calc((var(--track-height) - var(--thumb-height)) / 2);
+}
+
+input::-moz-range-thumb {
+  background: var(--thumb-background);
+  border: var(--thumb-border);
+  border-radius: var(--nve-ref-border-radius-full);
+  block-size: var(--thumb-height);
+  inline-size: var(--thumb-width);
+}
+
+:host([disabled]),
+:host([readonly]) {
+  --background: var(--nve-sys-interaction-disabled-background);
+  --cursor: not-allowed;
+}

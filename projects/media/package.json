@@ -14,6 +14,11 @@
   },
   "customElements": "dist/custom-elements.json",
   "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    },
     "snippets": [
       {
         "language": "html",
@@ -31,6 +36,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./data.html.json": "./dist/data.html.json",
     "./*.examples.json": "./dist/*.examples.json",
     ".": {
       "types": "./dist/index.d.ts",
@@ -39,6 +45,102 @@
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./controller": {
+      "types": "./dist/controller/index.d.ts",
+      "default": "./dist/controller/index.js"
+    },
+    "./controller/define.js": {
+      "types": "./dist/controller/define.d.ts",
+      "default": "./dist/controller/define.js"
+    },
+    "./controller/index.js": {
+      "types": "./dist/controller/index.d.ts",
+      "default": "./dist/controller/index.js"
+    },
+    "./fullscreen-button": {
+      "types": "./dist/fullscreen-button/index.d.ts",
+      "default": "./dist/fullscreen-button/index.js"
+    },
+    "./fullscreen-button/define.js": {
+      "types": "./dist/fullscreen-button/define.d.ts",
+      "default": "./dist/fullscreen-button/define.js"
+    },
+    "./fullscreen-button/index.js": {
+      "types": "./dist/fullscreen-button/index.d.ts",
+      "default": "./dist/fullscreen-button/index.js"
+    },
+    "./mute-button": {
+      "types": "./dist/mute-button/index.d.ts",
+      "default": "./dist/mute-button/index.js"
+    },
+    "./mute-button/define.js": {
+      "types": "./dist/mute-button/define.d.ts",
+      "default": "./dist/mute-button/define.js"
+    },
+    "./mute-button/index.js": {
+      "types": "./dist/mute-button/index.d.ts",
+      "default": "./dist/mute-button/index.js"
+    },
+    "./pause-button": {
+      "types": "./dist/pause-button/index.d.ts",
+      "default": "./dist/pause-button/index.js"
+    },
+    "./pause-button/define.js": {
+      "types": "./dist/pause-button/define.d.ts",
+      "default": "./dist/pause-button/define.js"
+    },
+    "./pause-button/index.js": {
+      "types": "./dist/pause-button/index.d.ts",
+      "default": "./dist/pause-button/index.js"
+    },
+    "./playback-rate-select": {
+      "types": "./dist/playback-rate-select/index.d.ts",
+      "default": "./dist/playback-rate-select/index.js"
+    },
+    "./playback-rate-select/define.js": {
+      "types": "./dist/playback-rate-select/define.d.ts",
+      "default": "./dist/playback-rate-select/define.js"
+    },
+    "./playback-rate-select/index.js": {
+      "types": "./dist/playback-rate-select/index.d.ts",
+      "default": "./dist/playback-rate-select/index.js"
+    },
+    "./seek-button": {
+      "types": "./dist/seek-button/index.d.ts",
+      "default": "./dist/seek-button/index.js"
+    },
+    "./seek-button/define.js": {
+      "types": "./dist/seek-button/define.d.ts",
+      "default": "./dist/seek-button/define.js"
+    },
+    "./seek-button/index.js": {
+      "types": "./dist/seek-button/index.d.ts",
+      "default": "./dist/seek-button/index.js"
+    },
+    "./time-range": {
+      "types": "./dist/time-range/index.d.ts",
+      "default": "./dist/time-range/index.js"
+    },
+    "./time-range/define.js": {
+      "types": "./dist/time-range/define.d.ts",
+      "default": "./dist/time-range/define.js"
+    },
+    "./time-range/index.js": {
+      "types": "./dist/time-range/index.d.ts",
+      "default": "./dist/time-range/index.js"
+    },
+    "./volume-range": {
+      "types": "./dist/volume-range/index.d.ts",
+      "default": "./dist/volume-range/index.js"
+    },
+    "./volume-range/define.js": {
+      "types": "./dist/volume-range/define.d.ts",
+      "default": "./dist/volume-range/define.js"
+    },
+    "./volume-range/index.js": {
+      "types": "./dist/volume-range/index.d.ts",
+      "default": "./dist/volume-range/index.js"
     }
   },
   "sideEffects": [
@@ -53,10 +155,13 @@
     "test": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
+    "test:ssr": "wireit",
+    "test:visual": "wireit",
     "test:watch": "wireit",
     "test:lighthouse": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/forms": "workspace:^",
     "lit": "catalog:publish"
   },
   "peerDependencies": {
@@ -85,14 +190,21 @@
   "wireit": {
     "dev": {
       "command": "NODE_ENV=development vite build --watch",
-      "service": true
+      "service": true,
+      "dependencies": [
+        "../core:build",
+        "../internals/vite:ci"
+      ]
     },
     "ci": {
       "dependencies": [
         "build",
         "lint",
         "publint",
-        "test:coverage"
+        "test:axe",
+        "test:ssr",
+        "test:coverage",
+        "test:visual"
       ]
     },
     "publint": {
@@ -110,6 +222,8 @@
       "files": [
         "../../core/dist/**/*.js",
         "!../../core/dist/**/*.examples.js",
+        "../forms/dist/**/*.js",
+        "!../forms/dist/**/*.examples.js",
         "src/**",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -128,6 +242,10 @@
         "../internals/vite:ci",
         {
           "script": "../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../forms:build",
           "cascade": false
         }
       ]
@@ -204,6 +322,27 @@
         "NODE_ENV": "production"
       }
     },
+    "test:visual": {
+      "command": "vitest run --config=vitest.visual.ts",
+      "clean": false,
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.visual.ts",
+        "vitest.visual.html",
+        "vitest.visual.ts"
+      ],
+      "output": [
+        ".visual/*.png",
+        "coverage/visual/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
     "test:axe": {
       "command": "vitest run --config=vitest.axe.ts",
       "files": [
@@ -220,6 +359,33 @@
         "../internals/vite:ci",
         {
           "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:ssr": {
+      "command": "vitest run --config=vitest.ssr.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vitest.ssr.ts",
+        "../themes/dist/**/*.css"
+      ],
+      "output": [
+        "coverage/ssr/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
           "cascade": false
         }
       ],

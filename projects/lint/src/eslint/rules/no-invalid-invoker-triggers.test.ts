@@ -10,7 +10,7 @@ import noInvalidInvokerTriggers from './no-invalid-invoker-triggers.js';
 const rule = noInvalidInvokerTriggers as unknown as JSRuleDefinition;
 
 const validElements =
-  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button';
+  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-mute-button, nve-media-pause-button, nve-media-playback-rate-select, nve-media-seek-button, nve-media-time-range, nve-media-volume-range';
 
 describe('noInvalidInvokerTriggers', () => {
   let tester: RuleTester;
@@ -50,7 +50,8 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-tabs-item popovertarget="my-popover">Tab</nve-tabs-item>',
         '<nve-tag popovertarget="my-popover">Tag</nve-tag>',
         '<nve-steps-item popovertarget="my-popover">Step</nve-steps-item>',
-        '<nve-copy-button popovertarget="my-popover"></nve-copy-button>'
+        '<nve-copy-button popovertarget="my-popover"></nve-copy-button>',
+        '<nve-media-fullscreen-button popovertarget="my-popover"></nve-media-fullscreen-button>'
       ],
       invalid: []
     });
@@ -61,7 +62,14 @@ describe('noInvalidInvokerTriggers', () => {
       valid: [
         '<nve-button commandfor="my-panel">Toggle</nve-button>',
         '<nve-icon-button commandfor="my-panel"></nve-icon-button>',
-        '<nve-tag commandfor="my-panel">Tag</nve-tag>'
+        '<nve-tag commandfor="my-panel">Tag</nve-tag>',
+        '<nve-media-pause-button commandfor="my-player"></nve-media-pause-button>',
+        '<nve-media-playback-rate-select commandfor="my-player"></nve-media-playback-rate-select>',
+        '<nve-media-mute-button commandfor="my-player"></nve-media-mute-button>',
+        '<nve-media-seek-button commandfor="my-player"></nve-media-seek-button>',
+        '<nve-media-time-range commandfor="my-player"></nve-media-time-range>',
+        '<nve-media-volume-range commandfor="my-player"></nve-media-volume-range>',
+        '<nve-media-fullscreen-button commandfor="my-player"></nve-media-fullscreen-button>'
       ],
       invalid: []
     });

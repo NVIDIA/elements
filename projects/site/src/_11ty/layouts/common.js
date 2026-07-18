@@ -333,6 +333,18 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted selected' : ''}><a href="/docs/patterns/trend/">Trend</a></nve-tree-node>
   </nve-tree-node>
 
+  <nve-tree-node ${data.page.url.includes('/docs/media/') ? 'expanded' : ''}>
+    <a href="/docs/media/controller/">Media</a>
+    <nve-tree-node ${data.page.url.includes('/docs/media/controller/') ? 'highlighted selected' : ''}><a href="/docs/media/controller/">Controller</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/pause-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pause-button/">Pause Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'highlighted selected' : ''}><a href="/docs/media/playback-rate-select/">Playback Rate Select</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'highlighted selected' : ''}><a href="/docs/media/mute-button/">Mute Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'highlighted selected' : ''}><a href="/docs/media/seek-button/">Seek Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'highlighted selected' : ''}><a href="/docs/media/time-range/">Time Range</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'highlighted selected' : ''}><a href="/docs/media/volume-range/">Volume Range</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'highlighted selected' : ''}><a href="/docs/media/fullscreen-button/">Full-screen Button</a></nve-tree-node>
+  </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
     <a href="/docs/code/codeblock/">Code</a>
     <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>

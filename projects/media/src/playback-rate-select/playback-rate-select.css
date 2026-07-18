@@ -1,0 +1,118 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
+  --background: transparent;
+  --color: var(--nve-sys-text-muted-color);
+  --border: 0;
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --height: var(--nve-ref-size-800);
+  --padding: 0 var(--nve-ref-size-200);
+  --picker-background: var(--nve-sys-layer-overlay-background);
+  --picker-border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --width: 32px;
+  --cursor: pointer;
+  display: block;
+  width: var(--width);
+}
+
+[internal-host] {
+  --_picker-border-radius: var(--nve-ref-border-radius-md);
+  --_picker-box-shadow: var(--nve-ref-shadow-400);
+  --_picker-color: var(--nve-sys-layer-overlay-color);
+  --_picker-min-width: 170px;
+  --_picker-padding: var(--nve-ref-size-200);
+  --_option-border-radius: var(--nve-ref-border-radius-xs);
+  --_option-font-size: var(--nve-ref-font-size-100);
+  --_option-font-weight: var(--nve-ref-font-weight-medium);
+  --_option-min-height: var(--nve-ref-size-800);
+  --_option-padding: var(--nve-ref-size-200);
+  background: var(--background);
+  border-radius: var(--border-radius);
+  width: var(--width);
+}
+
+select {
+  background-color: transparent;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  block-size: var(--height);
+  line-height: var(--height) !important;
+  box-shadow: none;
+  color: var(--color);
+  cursor: var(--cursor);
+  font: inherit;
+  inline-size: 100%;
+  margin: 0;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  padding: var(--padding);
+}
+
+:host(:hover:not([disabled], [readonly])) {
+  --color: var(--nve-sys-interaction-hover-color);
+}
+
+@supports (appearance: base-select) {
+  select,
+  select::picker(select) {
+    appearance: base-select;
+  }
+
+  select::picker(select) {
+    background: var(--picker-background);
+    border: var(--picker-border);
+    border-radius: var(--_picker-border-radius);
+    box-shadow: var(--_picker-box-shadow);
+    color: var(--_picker-color);
+    margin-block-start: var(--nve-ref-space-xxs);
+    min-inline-size: var(--_picker-min-width);
+    padding: var(--_picker-padding);
+  }
+
+  select::picker-icon {
+    color: var(--color);
+  }
+
+  select:open {
+    color: var(--nve-sys-interaction-selected-color);
+  }
+
+  select::picker-icon {
+    display: none;
+  }
+}
+
+option {
+  background: transparent;
+  border-radius: var(--_option-border-radius);
+  color: var(--_picker-color);
+  cursor: var(--cursor);
+  font-size: var(--_option-font-size);
+  font-weight: var(--_option-font-weight);
+  min-block-size: var(--_option-min-height);
+  padding: var(--_option-padding);
+  text-transform: initial;
+}
+
+option:hover,
+option:checked {
+  color: var(--nve-sys-interaction-selected-color);
+}
+
+option::checkmark {
+  display: none;
+}
+
+:host([disabled]),
+:host([readonly]) {
+  --background: var(--nve-sys-interaction-disabled-background);
+  --color: var(--nve-sys-interaction-disabled-color);
+  --cursor: not-allowed;
+}
+
+:host(:hover:not([disabled], [readonly], [pressed])) {
+  --color: var(--nve-sys-interaction-hover-color);
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+}
