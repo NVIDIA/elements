@@ -1,0 +1,53 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --buffer-background: color-mix(in oklab, var(--background) 10%, transparent);
+}
+
+[internal-host]::before {
+  z-index: 0;
+}
+
+.buffered-range {
+  background: var(--buffer-background);
+  block-size: var(--track-height);
+  border-radius: var(--track-border-radius);
+  inset-block-start: calc((100% - var(--track-height)) / 2);
+  inset-inline-start: calc(var(--thumb-width) / 2 + var(--buffered-range-start) * (100% - var(--thumb-width)));
+  inline-size: calc(var(--buffered-range-size) * (100% - var(--thumb-width)));
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+[internal-host]::after {
+  z-index: 2;
+}
+
+input {
+  z-index: 3;
+}
+
+:host([disabled]),
+:host([readonly]) {
+  --buffer-background: var(--nve-sys-interaction-disabled-background);
+}
+
+input::-webkit-slider-thumb {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+input::-moz-range-thumb {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+:host(:hover:not([disabled]):not([readonly])) input::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+:host(:hover:not([disabled]):not([readonly])) input::-moz-range-thumb {
+  opacity: 1;
+}

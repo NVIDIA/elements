@@ -220,7 +220,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/design-md/') ? 'highlighted selected' : ''}><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}>
     <a href="/docs/elements/">Elements</a>
     <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/alert/') ? 'highlighted selected' : ''}><a href="/docs/elements/alert/">Alert</a></nve-tree-node>
@@ -289,6 +289,14 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'highlighted selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/controller/') ? 'highlighted selected' : ''}><a href="/docs/media/controller/">Media Controller</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/pause-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pause-button/">Media Pause Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'highlighted selected' : ''}><a href="/docs/media/playback-rate-select/">Media Playback Rate Select</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'highlighted selected' : ''}><a href="/docs/media/mute-button/">Media Mute Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'highlighted selected' : ''}><a href="/docs/media/seek-button/">Media Seek Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'highlighted selected' : ''}><a href="/docs/media/time-range/">Media Time Range</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'highlighted selected' : ''}><a href="/docs/media/volume-range/">Media Volume Range</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'highlighted selected' : ''}><a href="/docs/media/fullscreen-button/">Media Full-screen Button</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'highlighted selected' : ''}><a href="/docs/elements/menu/">Menu</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'highlighted selected' : ''}><a href="/docs/elements/month/">Month</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/input/">Monaco Input</a></nve-tree-node>

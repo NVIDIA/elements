@@ -160,6 +160,7 @@ export default {
       entry: [
         ...PACKAGE_FILES,
         ...SOURCE_INDEX,
+        ...EXAMPLE_ENTRIES,
         ...TEST_ENTRIES,
         ...TEST_VARIANT_ENTRIES,
         ...VITE_CONFIGS,
