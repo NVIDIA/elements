@@ -159,6 +159,7 @@ const config = {
         reflect: { name: false },
         command: { name: true },
         entrypoint: { name: true },
+        documentation: { name: true },
         tags: { name: true },
         aria: { name: true },
         experimental: { name: true },

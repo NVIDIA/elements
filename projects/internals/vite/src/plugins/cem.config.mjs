@@ -41,7 +41,8 @@ function metadataPlugin() {
         'since',
         'axe',
         'entrypoint',
-        'example'
+        'example',
+        'documentation'
       ];
 
       switch (node.kind) {

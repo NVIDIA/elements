@@ -5,6 +5,31 @@ import { generateVsCodeCustomElementData } from 'custom-element-vs-code-integrat
 
 const resolve = rel => path.join(process.cwd(), rel);
 
+function normalizeURL(value) {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+const referenceNameByMetadataName = {
+  aria: 'WAI-ARIA Reference',
+  documentation: 'Documentation'
+};
+
+function generateVsCodeCustomElementDataReference(manifestMetadataName, manifestMetadataValue) {
+  const name = referenceNameByMetadataName[manifestMetadataName];
+  const url = normalizeURL(manifestMetadataValue);
+
+  return name && url ? { name, url } : null;
+}
+
 /**
  * Generates a Custom Elements Manifest on initial build
  */
@@ -41,10 +66,10 @@ export function cem() {
               const declaration = vsCodeManifest.modules
                 .flatMap(module => module.declarations)
                 .find(d => d.tagName === tag);
-              const references = Object.keys(declaration.metadata ?? {})
-                .map(name => ({ name, url: declaration.metadata[name] }))
-                .filter(ref => ref.url?.includes && ref.url.includes('http'));
-              return references;
+              return Object.entries(declaration?.metadata ?? {}).flatMap(([name, value]) => {
+                const reference = generateVsCodeCustomElementDataReference(name, value);
+                return reference ? [reference] : [];
+              });
             }
           });
         }
