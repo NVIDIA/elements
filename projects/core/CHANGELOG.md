@@ -1,3 +1,15 @@
+## <small>2.1.2 (2026-07-20)</small>
+
+* chore(ci): indexnow doc updates ([669552f](https://github.com/NVIDIA/elements/commit/669552f))
+* chore(ci): update metrics ([96ebb4b](https://github.com/NVIDIA/elements/commit/96ebb4b))
+* chore(release): @nvidia-elements/code-v2.0.2 [skip ci] ([f69e036](https://github.com/NVIDIA/elements/commit/f69e036))
+* chore(release): @nvidia-elements/markdown-v2.0.2 [skip ci] ([953ef48](https://github.com/NVIDIA/elements/commit/953ef48))
+* chore(release): @nvidia-elements/monaco-v2.0.2 [skip ci] ([12820b1](https://github.com/NVIDIA/elements/commit/12820b1))
+* fix(cli): mute interactions on non tty sessions ([ba3230a](https://github.com/NVIDIA/elements/commit/ba3230a))
+* fix(core): api documentation ([a02b9e2](https://github.com/NVIDIA/elements/commit/a02b9e2))
+* fix(core): page header text wrap issue ([03c481f](https://github.com/NVIDIA/elements/commit/03c481f))
+* feat(lint): add prefer-aria-label-in-compact-containers rule ([130279f](https://github.com/NVIDIA/elements/commit/130279f))
+
 ## <small>2.1.1 (2026-07-20)</small>
 
 * chore(docs): add custom data reference tests ([af48603](https://github.com/NVIDIA/elements/commit/af48603))
