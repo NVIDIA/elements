@@ -89,16 +89,10 @@ export interface ButtonFormControlMixinInstance {
   /**
    * Establishes a relationship between a popover and its invoker button.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetElement
-   */
-  popoverTargetElement: HTMLElement | null;
-
-  /**
-   * The id reference of the element that receives the popover.
-   * https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#popovertarget
    * @attr popovertarget
    * @reflect
    */
-  popovertarget: string;
+  popoverTargetElement: HTMLElement | null;
 
   /**
    * The popover target action to perform on the popover target element.

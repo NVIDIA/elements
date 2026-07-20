@@ -17,6 +17,7 @@ import { StateSelectedController } from '../internal/controllers/state-selected.
 import type { ReactiveController } from '../internal/controllers/types.js';
 import {
   attachInternals,
+  getFlattenedDOMTree,
   getStringValue,
   hasAttributeValue,
   isFormElement,
@@ -51,6 +52,14 @@ interface StringStateOptions {
   reflect?: boolean;
 }
 
+const ELEMENT_TARGET_PROPERTIES = {
+  commandfor: 'commandForElement',
+  interestfor: 'interestForElement',
+  popovertarget: 'popoverTargetElement'
+} as const;
+type ElementTargetAttribute = keyof typeof ELEMENT_TARGET_PROPERTIES;
+type ElementTargetProperty = (typeof ELEMENT_TARGET_PROPERTIES)[ElementTargetAttribute];
+
 type ButtonFormControlConstructor<TBase extends Constructor> = new (
   ...args: ConstructorParameters<TBase>
 ) => InstanceType<TBase> & ButtonFormControlMixinInstance;
@@ -70,20 +79,19 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     static formAssociated = true;
 
     #command: string | undefined;
-    #commandForElement: HTMLElement | null = null;
-    #commandfor: string | null = null;
     #current: CurrentState | undefined;
     #disabled = false;
+    #elementTargets: Record<ElementTargetProperty, HTMLElement | null> = {
+      commandForElement: null,
+      interestForElement: null,
+      popoverTargetElement: null
+    };
     #expanded: boolean | undefined;
     #form: string | HTMLFormElement | null = null;
     #hasConnected = false;
-    #interestForElement: HTMLElement | null = null;
-    #interestfor: string | null = null;
     #name: string | undefined;
     #pendingAttributeReflections = new Map<string, string | null>();
     #popoverTargetAction: PopoverTargetAction | undefined;
-    #popoverTargetElement: HTMLElement | null = null;
-    #popovertarget: string | undefined;
     #pressed: boolean | undefined;
     #readOnly = false;
     #selected: boolean | undefined;
@@ -220,26 +228,17 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     }
 
     get popoverTargetElement(): HTMLElement | null {
-      return this.#popoverTargetElement;
+      return this.#getElementTarget('popovertarget');
     }
 
     set popoverTargetElement(value: HTMLElement | null) {
-      const oldValue = this.#popoverTargetElement;
-      this.#popoverTargetElement = value;
-      this.#requestHostUpdate('popoverTargetElement', oldValue);
-      this.#queueBehaviorSync();
-    }
-
-    get popovertarget(): string {
-      return this.#popovertarget as string;
-    }
-
-    set popovertarget(value: string | unknown) {
-      this.#setStringState({ property: 'popovertarget', value });
+      this.#setElementTarget('popovertarget', value);
     }
 
     get popoverTargetAction(): PopoverTargetAction {
-      return this.#popoverTargetAction as PopoverTargetAction;
+      return this.#popoverTargetAction === 'show' || this.#popoverTargetAction === 'hide'
+        ? this.#popoverTargetAction
+        : 'toggle';
     }
 
     set popoverTargetAction(value: PopoverTargetAction | unknown) {
@@ -247,22 +246,11 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     }
 
     get commandForElement(): HTMLElement | null {
-      return this.#commandForElement;
+      return this.#getElementTarget('commandfor');
     }
 
     set commandForElement(value: HTMLElement | null) {
-      const oldValue = this.#commandForElement;
-      this.#commandForElement = value;
-      this.#requestHostUpdate('commandForElement', oldValue);
-      this.#queueBehaviorSync();
-    }
-
-    get commandfor(): string | null {
-      return this.#commandfor;
-    }
-
-    set commandfor(value: string | null | unknown) {
-      this.#setStringState({ property: 'commandfor', value });
+      this.#setElementTarget('commandfor', value);
     }
 
     get command(): string {
@@ -274,22 +262,11 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     }
 
     get interestForElement(): HTMLElement | null {
-      return this.#interestForElement;
+      return this.#getElementTarget('interestfor');
     }
 
     set interestForElement(value: HTMLElement | null) {
-      const oldValue = this.#interestForElement;
-      this.#interestForElement = value;
-      this.#requestHostUpdate('interestForElement', oldValue);
-      this.#queueBehaviorSync();
-    }
-
-    get interestfor(): string | null {
-      return this.#interestfor;
-    }
-
-    set interestfor(value: string | null | unknown) {
-      this.#setStringState({ property: 'interestfor', value });
+      this.#setElementTarget('interestfor', value);
     }
 
     protected _controllers?: Set<ReactiveController>;
@@ -345,6 +322,7 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
       }
 
       this.#handleBooleanAttributeChange(name, newValue);
+      this.#handleElementTargetAttributeChange(name, oldValue);
       this.#handleStringAttributeChange(name, oldValue, newValue);
     }
 
@@ -376,6 +354,10 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     }
 
     #handleStringAttributeChange(name: string, oldValue: string | null, newValue: string | null) {
+      if (name === 'commandfor' || name === 'interestfor' || name === 'popovertarget') {
+        return;
+      }
+
       if (name === 'form') {
         if (!(isFormElement(this.#form) && newValue === null)) {
           this.#form = newValue;
@@ -385,9 +367,44 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
 
       if (name === 'popovertargetaction') {
         this.#setStringState({ property: 'popoverTargetAction', value: newValue, reflect: false });
+        return;
       }
 
       this.#setStringState({ property: name, value: newValue, reflect: false });
+    }
+
+    #handleElementTargetAttributeChange(name: string, oldValue: string | null) {
+      const property = ELEMENT_TARGET_PROPERTIES[name as ElementTargetAttribute];
+      if (!property) {
+        return;
+      }
+
+      const oldTarget = this.#elementTargets[property] ?? this.#getElementById(oldValue);
+      this.#elementTargets[property] = null;
+      this.#requestHostUpdate(property, oldTarget);
+      this.#queueBehaviorSync();
+    }
+
+    #getElementTarget(attribute: ElementTargetAttribute) {
+      return (
+        this.#elementTargets[ELEMENT_TARGET_PROPERTIES[attribute]] ?? this.#getElementById(this.getAttribute(attribute))
+      );
+    }
+
+    #getElementById(id: string | null) {
+      return id ? (getFlattenedDOMTree(this.getRootNode()).find(element => element.id === id) ?? null) : null;
+    }
+
+    #setElementTarget(attribute: ElementTargetAttribute, value: HTMLElement | null) {
+      const property = ELEMENT_TARGET_PROPERTIES[attribute];
+      const oldValue = this[property];
+      if (oldValue === value && hasAttributeValue(this, attribute, value ? '' : null)) {
+        return;
+      }
+      setAttributeValue(this, attribute, value ? '' : null);
+      this.#elementTargets[property] = value;
+      this.#requestHostUpdate(property, oldValue);
+      this.#queueBehaviorSync();
     }
 
     #setBooleanState({ property, value, reflect, attribute = property }: BooleanStateOptions) {
@@ -446,12 +463,9 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     #getStringValue(property: string) {
       return {
         command: this.#command,
-        commandfor: this.#commandfor,
         current: this.#current,
-        interestfor: this.#interestfor,
         name: this.#name,
         popoverTargetAction: this.#popoverTargetAction,
-        popovertarget: this.#popovertarget,
         type: this.#type,
         value: this.#value
       }[property];
@@ -460,12 +474,9 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     #setStringValue(property: string, value: string | null) {
       const setters: Record<string, () => void> = {
         command: () => (this.#command = value ?? undefined),
-        commandfor: () => (this.#commandfor = value),
         current: () => (this.#current = value as CurrentState),
-        interestfor: () => (this.#interestfor = value),
         name: () => (this.#name = value ?? undefined),
         popoverTargetAction: () => (this.#popoverTargetAction = value as PopoverTargetAction),
-        popovertarget: () => (this.#popovertarget = value ?? undefined),
         type: () => (this.#type = value as ButtonType),
         value: () => (this.#value = value ?? undefined)
       };

@@ -12,6 +12,8 @@ type InterestInvokerHost = ReactiveElement & {
 };
 
 export class TypeInterestInvokerController<T extends InterestInvokerHost> implements ReactiveController {
+  #inferredInterestForElement: HTMLElement | null = null;
+
   constructor(private host: T) {
     this.host.addController(this);
   }
@@ -39,36 +41,66 @@ export class TypeInterestInvokerController<T extends InterestInvokerHost> implem
       return;
     }
 
-    this.#updateInterestForElement();
-    if (this.host.interestForElement) {
-      const interest = new Event('interest', { cancelable: true }) as InterestEvent;
-      interest.source = this.host;
-      this.host.interestForElement.dispatchEvent(interest);
-    }
+    this.#dispatchInterestEvent('interest');
   };
 
-  #onLoseInterest = () => {
-    this.#updateInterestForElement();
-    if (this.host.interestForElement) {
-      const event = new Event('loseinterest', { cancelable: true }) as InterestEvent;
-      event.source = this.host;
-      this.host.interestForElement.dispatchEvent(event);
-    }
-  };
+  #onLoseInterest = () => this.#dispatchInterestEvent('loseinterest');
 
-  #updateInterestForElement() {
+  #dispatchInterestEvent(type: 'interest' | 'loseinterest') {
+    const target = this.#getInterestForElement();
+    if (!target) {
+      return;
+    }
+
+    const event = new Event(type, { cancelable: true }) as InterestEvent;
+    event.source = this.host;
+    target.dispatchEvent(event);
+  }
+
+  #getInterestForElement() {
+    const explicitTarget = this.#getExplicitInterestForElement();
+    if (explicitTarget !== undefined) {
+      return explicitTarget;
+    }
+
+    const inferredTarget = this.#getHintPopoverTarget();
+    const previousTarget = this.#inferredInterestForElement;
+    this.#inferredInterestForElement = inferredTarget;
+    if (inferredTarget && this.host.interestForElement !== inferredTarget) {
+      this.host.interestForElement = inferredTarget;
+    } else if (!inferredTarget && previousTarget && this.host.interestForElement === previousTarget) {
+      this.host.interestForElement = null;
+    }
+    return inferredTarget;
+  }
+
+  #getExplicitInterestForElement(): HTMLElement | null | undefined {
     const interestForIdRef = this.host.getAttribute('interestfor');
-    if (interestForIdRef && !this.host.interestForElement) {
-      this.host.interestForElement =
-        getFlattenedDOMTree(this.host.getRootNode()).find(element => element.id === interestForIdRef) ?? null;
+    if (interestForIdRef) {
+      this.#inferredInterestForElement = null;
+      return this.#getElementById(interestForIdRef);
     }
 
-    const popoverTargetIdRef = this.host.getAttribute('popovertarget');
-    if (popoverTargetIdRef && !interestForIdRef) {
-      const target = getFlattenedDOMTree(this.host.getRootNode()).find(element => element.id === popoverTargetIdRef);
-      if (target && target.popover === 'hint') {
-        this.host.interestForElement = target;
-      }
+    const interestForElement = this.host.interestForElement;
+    if (!interestForElement || interestForElement === this.#inferredInterestForElement) {
+      return undefined;
     }
+
+    this.#inferredInterestForElement = null;
+    return interestForElement;
+  }
+
+  #getHintPopoverTarget() {
+    const popoverTarget = this.host.popoverTargetElement;
+    if (popoverTarget instanceof HTMLElement && popoverTarget.popover === 'hint') {
+      return popoverTarget;
+    }
+
+    const target = this.#getElementById(this.host.getAttribute('popovertarget'));
+    return target instanceof HTMLElement && target.popover === 'hint' ? target : null;
+  }
+
+  #getElementById(id: string | null) {
+    return id ? (getFlattenedDOMTree(this.host.getRootNode()).find(element => element.id === id) ?? null) : null;
   }
 }

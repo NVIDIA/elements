@@ -14,7 +14,6 @@ class PopoverTriggerControllerTestElement extends HTMLElement {
   interestForElement: HTMLElement | null = null;
   popoverTargetAction?: PopoverTargetAction;
   popoverTargetElement: HTMLElement | null = null;
-  popovertarget?: string;
   #controllers = new Set<ReactiveController>();
 
   constructor() {
@@ -58,7 +57,7 @@ describe('PopoverTriggerController', () => {
     const popover = fixture.querySelector<HTMLElement>('[popover]')!;
     const togglePopover = vi.spyOn(popover, 'togglePopover').mockImplementation(() => false);
 
-    element.popovertarget = 'popover';
+    element.setAttribute('popovertarget', 'popover');
     await emulateClick(element);
 
     expect(element.popoverTargetElement).toBe(popover);
@@ -101,12 +100,12 @@ describe('PopoverTriggerController', () => {
 
     element.interestForElement = tooltip;
     element.popoverTargetAction = 'show';
-    element.popovertarget = 'first';
+    element.setAttribute('popovertarget', 'first');
     await emulateClick(element);
     first.hidePopover();
 
     loseInterest.mockClear();
-    element.popovertarget = 'second';
+    element.setAttribute('popovertarget', 'second');
     await emulateClick(element);
 
     expect(element.popoverTargetElement).toBe(second);
@@ -249,7 +248,7 @@ describe('PopoverTriggerController', () => {
 
     Object.defineProperty(popover, 'anchor', { configurable: true, value: 'anchor' });
     element.interestForElement = tooltip;
-    element.popovertarget = 'popover';
+    element.setAttribute('popovertarget', 'popover');
     await emulateClick(element);
 
     expect(element.popoverTargetElement).toBe(popover);
