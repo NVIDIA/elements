@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/markdown",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "release": {
     "extends": "../../release.config.js"
   },
