@@ -123,7 +123,7 @@ describe('noMissingPopoverTrigger', () => {
   });
 
   it('should report popover elements with template syntax content but no trigger', () => {
-    // Template syntax in content does not affect trigger requirement
+    // Content template syntax still requires a trigger
     tester.run('template syntax content requires trigger', rule, {
       valid: [],
       invalid: [
@@ -171,24 +171,30 @@ describe('noMissingPopoverTrigger', () => {
         // Template literal in popovertarget - popover should pass because trigger could match
         `<nve-button popovertarget="\${targetId}">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
-        // Angular binding in popovertarget
-        `<nve-button [popovertarget]="targetId">Open</nve-button>
+        // Angular property binding for popovertarget
+        `<nve-button [popoverTargetElement]="target">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
-        // Lit binding in popovertarget
-        `<nve-button .popovertarget="\${targetId}">Open</nve-button>
+        // Lit property binding for popovertarget
+        `<nve-button .popoverTargetElement="\${target}">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
         // Template literal in commandfor
         `<nve-button commandfor="\${targetId}">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
-        // Angular binding in commandfor
-        `<nve-button [commandfor]="targetId">Open</nve-button>
+        // Angular property binding for commandfor
+        `<nve-button [commandForElement]="target">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
-        // Lit binding in commandfor
-        `<nve-button .commandfor="\${targetId}">Open</nve-button>
+        // Lit property binding for commandfor
+        `<nve-button .commandForElement="\${target}">Open</nve-button>
+         <nve-dropdown id="dropdown">Content</nve-dropdown>`,
+        // Lit property binding for interestfor
+        `<nve-button .interestForElement="\${target}">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
         // JSX expression in popovertarget
-        `<nve-button popovertarget="{targetId}">Open</nve-button>
+        `<nve-button popovertarget={targetId}>Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`,
+        // JSX property binding for an HTMLElement ref
+        `<nve-button popoverTargetElement={popoverRef.current}>Open</nve-button>
+         <nve-dropdown ref={popoverRef} id="dropdown">Content</nve-dropdown>`,
         // Vue/Handlebars in popovertarget
         `<nve-button popovertarget="{{targetId}}">Open</nve-button>
          <nve-dropdown id="dropdown">Content</nve-dropdown>`
