@@ -122,6 +122,38 @@ describe('ButtonFormControlMixin core usage', () => {
         expect(button._internals.ariaExpanded).toBe('true');
       });
 
+      it('should expose native invoker property and attribute pairings', async () => {
+        const button = await createButton(usage);
+        const commandTarget = getElement<HTMLElement>(fixture, '#target');
+        const interestTarget = document.createElement('div');
+        interestTarget.id = 'interest-target';
+        const popoverTarget = document.createElement('div');
+        popoverTarget.id = 'popover-target';
+        popoverTarget.popover = 'auto';
+        fixture.append(interestTarget, popoverTarget);
+
+        button.setAttribute('interestfor', interestTarget.id);
+        button.setAttribute('popovertarget', popoverTarget.id);
+        button.setAttribute('popovertargetaction', 'show');
+        await elementIsStable(button);
+
+        expect(button.commandForElement).toBe(commandTarget);
+        expect(button.interestForElement).toBe(interestTarget);
+        expect(button.popoverTargetElement).toBe(popoverTarget);
+        expect(button.popoverTargetAction).toBe('show');
+
+        button.commandForElement = commandTarget;
+        button.interestForElement = interestTarget;
+        button.popoverTargetElement = popoverTarget;
+        button.popoverTargetAction = 'hide';
+        await elementIsStable(button);
+
+        expect(button.getAttribute('commandfor')).toBe('');
+        expect(button.getAttribute('interestfor')).toBe('');
+        expect(button.getAttribute('popovertarget')).toBe('');
+        expect(button.getAttribute('popovertargetaction')).toBe('hide');
+      });
+
       it('should dispatch commands and suppress interaction while unavailable', async () => {
         const button = await createButton(usage);
         const target = getElement<HTMLElement>(fixture, '#target');
