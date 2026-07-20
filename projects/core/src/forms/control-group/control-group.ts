@@ -24,6 +24,7 @@ import styles from './control-group.css?inline';
 /**
  * @element nve-control-group
  * @description Groups many related form controls under a shared label and validation context for semantically linked inputs.
+ * @documentation https://nvidia.github.io/elements/docs/elements/control/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/forms
  * @slot - Control input elements

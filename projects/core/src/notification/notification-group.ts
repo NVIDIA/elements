@@ -10,6 +10,7 @@ import styles from './notification-group.css?inline';
 /**
  * @element nve-notification-group
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
+ * @documentation https://nvidia.github.io/elements/docs/elements/notification/
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/notification
  * @slot - default slot for `nve-notification`

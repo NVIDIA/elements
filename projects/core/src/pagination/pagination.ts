@@ -24,6 +24,7 @@ import styles from './pagination.css?inline';
 /**
  * @element nve-pagination
  * @description Pagination is a control that enables users to navigate through pages of content.
+ * @documentation https://nvidia.github.io/elements/docs/elements/pagination/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/pagination
  * @event input - Dispatched when the value (page) has changed

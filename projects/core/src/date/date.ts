@@ -13,6 +13,7 @@ import styles from './date.css?inline';
 /**
  * @element nve-date
  * @description A date picker is a control that enables users to choose a date value.
+ * @documentation https://nvidia.github.io/elements/docs/elements/date/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/date
  * @cssprop --padding

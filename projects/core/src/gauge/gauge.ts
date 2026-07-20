@@ -52,6 +52,7 @@ const thumbStyle = (thumb: 'dot' | 'needle', progressAngle: number, geometry: Ga
 /**
  * @element nve-gauge
  * @description Use a gauge to show system resource usage.
+ * @documentation https://nvidia.github.io/elements/docs/elements/gauge/
  * @since 2.0.4
  * @entrypoint \@nvidia-elements/core/gauge
  * @slot - Content to display in the gauge center.

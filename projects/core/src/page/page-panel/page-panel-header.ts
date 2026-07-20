@@ -8,6 +8,7 @@ import styles from './page-panel-header.css?inline';
 /**
  * @element nve-page-panel-header
  * @description Displays the title and contextual controls at the top of a page panel to identify its purpose.
+ * @documentation https://nvidia.github.io/elements/docs/elements/page/
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
  * @slot - default slot for the page panel header

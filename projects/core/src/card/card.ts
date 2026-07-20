@@ -13,6 +13,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
 /**
  * @element nve-card
  * @description A container for content representing a single entity.
+ * @documentation https://nvidia.github.io/elements/docs/elements/card/
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - use `<nve-card-header>`,`<nve-card-content>`,`<nve-card-footer>` for card content layout
@@ -51,6 +52,7 @@ export class Card extends LitElement implements ContainerElement {
 /**
  * @element nve-card-header
  * @description Displays the title and optional actions at the top of a card, establishing the card's identity and purpose.
+ * @documentation https://nvidia.github.io/elements/docs/elements/card/
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - default slot
@@ -86,6 +88,7 @@ export class CardHeader extends LitElement {
 /**
  * @element nve-card-content
  * @description Contains the primary body content of a card, providing a structured region for the main information or media.
+ * @documentation https://nvidia.github.io/elements/docs/elements/card/
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card content
@@ -112,6 +115,7 @@ export class CardContent extends LitElement {
 /**
  * @element nve-card-footer
  * @description Provides a designated area at the bottom of a card for actions, metadata, or supplementary information.
+ * @documentation https://nvidia.github.io/elements/docs/elements/card/
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card footer content

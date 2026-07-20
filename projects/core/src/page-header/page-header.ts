@@ -8,6 +8,7 @@ import styles from './page-header.css?inline';
 /**
  * @element nve-page-header
  * @description An element that appears across the top of all pages containing the application name and primary navigation.
+ * @documentation https://nvidia.github.io/elements/docs/elements/page-header/
  * @entrypoint \@nvidia-elements/core/page-header
  * @since 1.15.0
  * @slot - The default content slot

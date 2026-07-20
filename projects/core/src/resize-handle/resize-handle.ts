@@ -12,6 +12,7 @@ import styles from './resize-handle.css?inline';
 /**
  * @element nve-resize-handle
  * @description A resize-handle slider is a control that enables users to resize views or panels vertically or horizontally.
+ * @documentation https://nvidia.github.io/elements/docs/elements/resize-handle/
  * @since 1.27.0
  * @entrypoint \@nvidia-elements/core/resize-handle
  * @event toggle - Dispatched when the resize handle is double clicked.

@@ -22,6 +22,7 @@ import styles from './badge.css?inline';
 /**
  * @element nve-badge
  * @description A visual indicator that communicates a status description of an associated component. Status badges use short text, color, built in icons for quick recognition and render near the relevant content.
+ * @documentation https://nvidia.github.io/elements/docs/elements/badge/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/badge
  * @slot - default slot for content

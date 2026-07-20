@@ -10,6 +10,7 @@ import styles from './format-datetime.css?inline';
  * @element nve-format-datetime
  * @description Formats a date/time value as localized text using the Intl.DateTimeFormat API. Renders inside a semantic time element.
  * Granular options (weekday, year, month, day, hour, minute, second) mirror the Intl.DateTimeFormat API. 'numeric' omits zero-padding, '2-digit' zero-pads.
+ * @documentation https://nvidia.github.io/elements/docs/elements/format-datetime/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/format-datetime
  * @slot - Date string to format (such as 2023-07-28T04:20:17.434Z). Serves as fallback before hydration.

@@ -26,6 +26,7 @@ import globalStyles from './grid.global.css?inline';
 /**
  * @element nve-grid
  * @description A versatile table/datagrid component with built-in keyboard navigation for displaying and interacting with structured data. Use it for anything from simple read-only tables to fully interactive, spreadsheet experiences.
+ * @documentation https://nvidia.github.io/elements/docs/elements/data-grid/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content

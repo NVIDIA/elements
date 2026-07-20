@@ -38,6 +38,7 @@ export type TabsGroupAlignment = 'top' | 'start' | 'end';
 /**
  * @element nve-tabs-group
  * @description Coordinates tabs with matching panel content using Invoker Commands and slot-matched panels.
+ * @documentation https://nvidia.github.io/elements/docs/elements/tabs/
  * @since 1.67.0
  * @entrypoint \@nvidia-elements/core/tabs
  * @command --toggle - Select the matching tab and reveal the panel whose slot matches the invoker value.

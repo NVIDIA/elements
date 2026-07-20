@@ -17,6 +17,7 @@ const nextSort = {
 /**
  * @element nve-sort-button
  * @description A sort button is a control that enables users to sort a list of items in ascending or descending order.
+ * @documentation https://nvidia.github.io/elements/docs/elements/sort-button/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/sort-button
  * @event sort - Dispatched on sort button click, returns the current sort value and the next sort value.

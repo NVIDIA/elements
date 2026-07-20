@@ -8,6 +8,7 @@ import styles from './drawer-header.css?inline';
 /**
  * @element nve-drawer-header
  * @description Displays the title and optional close control at the top of a drawer to identify its purpose.
+ * @documentation https://nvidia.github.io/elements/docs/elements/drawer/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
  * @slot - default slot for the drawer header

@@ -35,6 +35,7 @@ const NUMBER_KEYS: [keyof FormatNumber, string][] = [
  * @element nve-format-number
  * @description A localized number formatter for currencies, percentages, units, and compact notation, backed by Intl.NumberFormat.
  * Provide a `currency` attribute when `formatStyle` is `currency`, and a `unit` attribute when `formatStyle` is `unit`.
+ * @documentation https://nvidia.github.io/elements/docs/elements/format-number/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/format-number
  * @slot - Numeric string to format (such as 1234567 or 1234.56). Serves as fallback before hydration.

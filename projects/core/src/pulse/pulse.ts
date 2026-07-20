@@ -11,6 +11,7 @@ import styles from './pulse.css?inline';
 /**
  * @element nve-pulse
  * @description Pulse component signals attention for a particular area of a UI. This helps with tutorial/getting started guides for new users.
+ * @documentation https://nvidia.github.io/elements/docs/elements/pulse/
  * @since 1.16.3
  * @entrypoint \@nvidia-elements/core/pulse
  * @cssprop --background

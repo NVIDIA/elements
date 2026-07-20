@@ -11,6 +11,7 @@ import { html, nothing, isServer } from 'lit';
 /**
  * @element nve-range
  * @description A range slider is a control that enables users to choose a value from a continuous range of values.
+ * @documentation https://nvidia.github.io/elements/docs/elements/range/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/range
  * @cssprop --background
