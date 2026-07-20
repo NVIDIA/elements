@@ -37,6 +37,7 @@
     "build": "wireit",
     "build:icons": "wireit",
     "test": "wireit",
+    "test:types": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
     "test:ssr": "wireit",
@@ -991,6 +992,7 @@
         "lint",
         "build",
         "publint",
+        "test:types",
         "test:axe",
         "test:ssr",
         "test:coverage",
@@ -1021,6 +1023,7 @@
       "command": "NODE_ENV=production ELEMENTS_BUILD=true vite build",
       "clean": "if-file-deleted",
       "files": [
+        "../forms/src/mixins/**/*.ts",
         "../styles/dist/**/*.css",
         "../themes/dist/**/*.css",
         "../forms/dist/**/*.js",
@@ -1097,6 +1100,22 @@
       "env": {
         "NODE_ENV": "production"
       }
+    },
+    "test:types": {
+      "command": "tsc --project tsconfig.types.json",
+      "files": [
+        ".stub/vue.d.ts",
+        "dist/custom-elements-jsx.d.ts",
+        "dist/custom-elements-vue.d.ts",
+        "tsconfig.types.json"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
     },
     "test:coverage": {
       "command": "vitest run --coverage",

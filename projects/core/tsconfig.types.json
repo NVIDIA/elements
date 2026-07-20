@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "skipLibCheck": false,
+    "strict": true,
+    "target": "ES2022",
+    "types": []
+  },
+  "files": [".stub/vue.d.ts", "dist/custom-elements-jsx.d.ts", "dist/custom-elements-vue.d.ts"]
+}

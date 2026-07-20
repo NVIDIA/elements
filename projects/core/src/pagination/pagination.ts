@@ -56,7 +56,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   /**
    * The array of custom step-size.
    */
-  @property({ type: Array }) stepSizes = [10, 20, 50, 100];
+  @property({ type: Array }) stepSizes: number[] = [10, 20, 50, 100];
 
   /**
    * The total number of items.
