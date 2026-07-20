@@ -1,3 +1,9 @@
+## <small>2.1.3 (2026-07-20)</small>
+
+* fix(core): align root tree nodes ([6008461](https://github.com/NVIDIA/elements/commit/6008461))
+* chore(release): @nvidia-elements/cli-v2.1.5 [skip ci] ([7e217b8](https://github.com/NVIDIA/elements/commit/7e217b8))
+* chore(release): @nvidia-elements/lint-v2.1.0 [skip ci] ([e668854](https://github.com/NVIDIA/elements/commit/e668854))
+
 ## <small>2.1.2 (2026-07-20)</small>
 
 * chore(ci): indexnow doc updates ([669552f](https://github.com/NVIDIA/elements/commit/669552f))
