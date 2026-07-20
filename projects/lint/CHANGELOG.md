@@ -1,3 +1,10 @@
+## <small>2.1.1 (2026-07-20)</small>
+
+* fix(core): align root tree nodes ([6008461](https://github.com/NVIDIA/elements/commit/6008461))
+* fix(lint): support framework event bindings ([4a1e72d](https://github.com/NVIDIA/elements/commit/4a1e72d))
+* chore(release): @nvidia-elements/cli-v2.1.5 [skip ci] ([7e217b8](https://github.com/NVIDIA/elements/commit/7e217b8))
+* chore(release): @nvidia-elements/core-v2.1.3 [skip ci] ([b6c09ba](https://github.com/NVIDIA/elements/commit/b6c09ba))
+
 ## 2.1.0 (2026-07-20)
 
 * chore(ci): add slack release hook ([4a8fd85](https://github.com/NVIDIA/elements/commit/4a8fd85))
