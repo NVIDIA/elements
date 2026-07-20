@@ -21,8 +21,7 @@ const DATA_BINDING_PATTERNS = [
  * Check if an attribute value contains data binding syntax.
  */
 function hasDataBinding(value: string | undefined): boolean {
-  if (!value) return false;
-  return DATA_BINDING_PATTERNS.some(pattern => pattern.test(value));
+  return !!value && DATA_BINDING_PATTERNS.some(pattern => pattern.test(value));
 }
 
 /**
@@ -31,7 +30,8 @@ function hasDataBinding(value: string | undefined): boolean {
  */
 function findAttrWithBinding(
   node: HtmlNode,
-  attrName: string
+  attrName: string,
+  propertyName = attrName
 ): { attr: ReturnType<typeof findAttr>; hasBinding: boolean } {
   // Check for standard attribute
   const standard = findAttr(node, attrName);
@@ -39,22 +39,16 @@ function findAttrWithBinding(
     return { attr: standard, hasBinding: hasDataBinding(standard.value?.value) };
   }
 
-  // Check for Angular property binding: [attrName]
-  const angularAttr = findAttr(node, `[${attrName}]`);
-  if (angularAttr) {
-    return { attr: angularAttr, hasBinding: true };
+  const jsxProperty = findAttr(node, propertyName);
+  if (jsxProperty && hasDataBinding(jsxProperty.value?.value)) {
+    return { attr: jsxProperty, hasBinding: true };
   }
 
-  // Check for Lit property binding: .attrName
-  const litAttr = findAttr(node, `.${attrName}`);
-  if (litAttr) {
-    return { attr: litAttr, hasBinding: true };
-  }
-
-  // Check for Lit boolean-attribute binding: ?attrName
-  const litBoolAttr = findAttr(node, `?${attrName}`);
-  if (litBoolAttr) {
-    return { attr: litBoolAttr, hasBinding: true };
+  for (const name of [`[${propertyName}]`, `.${propertyName}`, `?${attrName}`]) {
+    const attr = findAttr(node, name);
+    if (attr) {
+      return { attr, hasBinding: true };
+    }
   }
 
   return { attr: undefined, hasBinding: false };
@@ -77,7 +71,11 @@ const POPOVER_ELEMENTS = [
 /**
  * Attributes that reference a popover target.
  */
-const TRIGGER_ATTRIBUTES = ['popovertarget', 'commandfor', 'interestfor'] as const;
+const TRIGGER_APIS = [
+  ['popovertarget', 'popoverTargetElement'],
+  ['commandfor', 'commandForElement'],
+  ['interestfor', 'interestForElement']
+] as const;
 
 interface PopoverNode {
   node: HtmlNode;
@@ -114,8 +112,8 @@ const rule = {
     let hasDynamicTrigger = false;
 
     function collectTriggerInfo(node: HtmlNode) {
-      for (const attr of TRIGGER_ATTRIBUTES) {
-        const { attr: found, hasBinding } = findAttrWithBinding(node, attr);
+      for (const [attribute, property] of TRIGGER_APIS) {
+        const { attr: found, hasBinding } = findAttrWithBinding(node, attribute, property);
         if (!found) continue;
         if (hasBinding) {
           hasDynamicTrigger = true;
