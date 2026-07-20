@@ -38,7 +38,7 @@ describe(Menu.metadata.tag, () => {
 
   it('should navigate between items with ArrowDown key', async () => {
     await elementIsStable(element);
-    const items = element.items;
+    const items = element.querySelectorAll('nve-menu-item');
     items[0].focus();
     expect(items[0].matches(':focus')).toBe(true);
 
@@ -49,7 +49,7 @@ describe(Menu.metadata.tag, () => {
 
   it('should navigate between items with ArrowUp key', async () => {
     await elementIsStable(element);
-    const items = element.items;
+    const items = element.querySelectorAll('nve-menu-item');
     items[1].focus();
     expect(items[1].matches(':focus')).toBe(true);
 
@@ -60,7 +60,7 @@ describe(Menu.metadata.tag, () => {
 
   it('should skip disabled items during keyboard navigation', async () => {
     await elementIsStable(element);
-    const items = element.items;
+    const items = element.querySelectorAll('nve-menu-item');
     items[1].disabled = true;
     await elementIsStable(element);
 

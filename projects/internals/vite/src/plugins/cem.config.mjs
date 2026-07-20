@@ -350,6 +350,46 @@ function getTypeText(type, location) {
   return type.getText(location);
 }
 
+function isElementReferencePropertyType(type, seen = new Set()) {
+  const nonNullableTypes = type.getUnionTypes().filter(unionType => !unionType.isNull() && !unionType.isUndefined());
+
+  if (nonNullableTypes.length > 1) {
+    return nonNullableTypes.every(unionType => isElementReferencePropertyType(unionType, new Set(seen)));
+  }
+
+  const nonNullableType = nonNullableTypes[0] ?? type;
+  const symbolName = nonNullableType.getSymbol()?.getName() ?? nonNullableType.getAliasSymbol()?.getName();
+  if (symbolName === 'Element') {
+    return true;
+  }
+
+  const typeKey = nonNullableType.getText();
+  if (seen.has(typeKey)) {
+    return false;
+  }
+
+  seen.add(typeKey);
+  return nonNullableType.getBaseTypes().some(baseType => isElementReferencePropertyType(baseType, new Set(seen)));
+}
+
+// CEM attribute types normally follow the property's converted type. Element-reference attributes instead accept an
+// element id, so their attribute-facing type is string while the JavaScript property remains Element | null.
+function getCemAttributeTypeText(propertyType, propertyTypeText) {
+  return isElementReferencePropertyType(propertyType) ? 'string' : propertyTypeText;
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function typeTextReferencesName(typeText, name) {
+  return new RegExp(`(?<![\\w$])${escapeRegExp(name)}(?![\\w$])`).test(typeText);
+}
+
+function replaceTypeName(typeText, name, replacement) {
+  return typeText.replace(new RegExp(`(?<![\\w$])${escapeRegExp(name)}(?![\\w$])`, 'g'), replacement);
+}
+
 function createMixinApiEntry(property, location, mixinName) {
   const declarations = property.getDeclarations();
   const declaration = declarations.find(item => typeof item.getJsDocs === 'function');
@@ -368,11 +408,16 @@ function createMixinApiEntry(property, location, mixinName) {
   }
 
   const attribute = attributeTag?.getCommentText()?.trim();
+  const propertyType = property.getTypeAtLocation(location);
+  const typeText = getTypeText(propertyType, location);
+  const requiresMixinTypeSpecialization = location
+    .getTypeParameters()
+    .some(typeParameter => typeTextReferencesName(typeText, typeParameter.getName()));
   const member = {
     kind: declarations.some(item => item.getKindName?.() === 'MethodSignature') ? 'method' : 'field',
     name: property.getName(),
     type: {
-      text: getTypeText(property.getTypeAtLocation(location), location)
+      text: typeText
     },
     description,
     inheritedFrom: {
@@ -391,11 +436,12 @@ function createMixinApiEntry(property, location, mixinName) {
 
   return {
     member,
+    requiresMixinTypeSpecialization,
     attribute: attribute
       ? {
           name: attribute,
           fieldName: member.name,
-          type: { ...member.type },
+          type: { text: getCemAttributeTypeText(propertyType, typeText) },
           description,
           inheritedFrom: member.inheritedFrom
         }
@@ -498,15 +544,76 @@ function addUniqueMember(declaration, member) {
   }
 }
 
-function addUniqueAttribute(declaration, attribute) {
+function isTypescriptElementReferencePropertyType(type, ts, seen = new Set()) {
+  const nonNullableTypes = type.isUnion()
+    ? type.types.filter(item => !(item.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)))
+    : [];
+
+  if (nonNullableTypes.length > 1) {
+    return nonNullableTypes.every(item => isTypescriptElementReferencePropertyType(item, ts, new Set(seen)));
+  }
+
+  const nonNullableType = nonNullableTypes[0] ?? type;
+  const symbolName = nonNullableType.getSymbol?.()?.getName() ?? nonNullableType.aliasSymbol?.getName();
+  if (symbolName === 'Element') {
+    return true;
+  }
+
+  if (seen.has(nonNullableType)) {
+    return false;
+  }
+
+  seen.add(nonNullableType);
+  return (nonNullableType.getBaseTypes?.() ?? []).some(baseType =>
+    isTypescriptElementReferencePropertyType(baseType, ts, new Set(seen))
+  );
+}
+
+// Mixin APIs are analyzed generically. Resolve type parameters against each concrete component before projection, then
+// preserve the distinction between element-valued JavaScript properties and their string-valued attributes.
+function resolveConcreteMixinAttributeType(modulePath, declarationName, memberName) {
+  const sourcePath = resolve(modulePath.replace(/^\//, '').replace(/\.js$/, '.ts'));
+  const sourceFile = runtimeEnvironment.program?.getSourceFile(sourcePath);
+  const ts = runtimeEnvironment.ts;
+  const typeChecker = runtimeEnvironment.typeChecker;
+  const classDeclaration = sourceFile?.statements.find(
+    statement => ts.isClassDeclaration(statement) && statement.name?.text === declarationName
+  );
+  const classType = classDeclaration && typeChecker.getTypeAtLocation(classDeclaration);
+  const property = classType && typeChecker.getPropertyOfType(classType, memberName);
+
+  if (!classDeclaration || !property) {
+    return null;
+  }
+
+  const type = typeChecker.getTypeOfSymbolAtLocation(property, classDeclaration);
+  const typeText = typeChecker.typeToString(type, classDeclaration, ts.TypeFormatFlags.NoTruncation);
+  return isTypescriptElementReferencePropertyType(type, ts) ? 'string' : typeText;
+}
+
+function addProjectedMixinAttribute(declaration, attribute, { modulePath, requiresMixinTypeSpecialization }) {
   if (!attribute) {
     return;
   }
 
   declaration.attributes ??= [];
-  if (!declaration.attributes.some(item => item.name === attribute.name || item.fieldName === attribute.fieldName)) {
-    declaration.attributes.push(structuredClone(attribute));
+  if (declaration.attributes.some(item => item.name === attribute.name || item.fieldName === attribute.fieldName)) {
+    return;
   }
+
+  const projectedAttribute = structuredClone(attribute);
+  if (requiresMixinTypeSpecialization) {
+    const concreteType = resolveConcreteMixinAttributeType(modulePath, declaration.name, attribute.fieldName);
+    if (!concreteType) {
+      throw new Error(
+        `Unable to specialize generic mixin attribute "${attribute.name}" from property "${attribute.fieldName}" on ${declaration.name} (${modulePath}).`
+      );
+    }
+
+    projectedAttribute.type = { ...projectedAttribute.type, text: concreteType };
+  }
+
+  declaration.attributes.push(projectedAttribute);
 }
 
 function mixinApiProjectionPlugin() {
@@ -516,17 +623,21 @@ function mixinApiProjectionPlugin() {
       const mixinApiRegistry = getMixinApiRegistry();
       const declarationRegistry = getDeclarationRegistry(customElementsManifest);
 
-      customElementsManifest.modules
-        .flatMap(module => module.declarations ?? [])
-        .filter(declaration => declaration.kind === 'class')
-        .forEach(declaration => {
-          getDeclarationMixins(declaration, declarationRegistry).forEach(mixin => {
-            mixinApiRegistry.get(mixin.name)?.forEach(({ member, attribute }) => {
-              addUniqueMember(declaration, member);
-              addUniqueAttribute(declaration, attribute);
+      customElementsManifest.modules.forEach(module => {
+        module.declarations
+          ?.filter(declaration => declaration.kind === 'class')
+          .forEach(declaration => {
+            getDeclarationMixins(declaration, declarationRegistry).forEach(mixin => {
+              mixinApiRegistry.get(mixin.name)?.forEach(({ member, attribute, requiresMixinTypeSpecialization }) => {
+                addUniqueMember(declaration, member);
+                addProjectedMixinAttribute(declaration, attribute, {
+                  modulePath: module.path,
+                  requiresMixinTypeSpecialization
+                });
+              });
             });
           });
-        });
+      });
     }
   };
 }
@@ -597,11 +708,147 @@ function dynamicSlotsPlugin() {
   };
 }
 
+// Framework declarations are standalone package entrypoints. Inline source interfaces reachable from published types.
+function getPublishedFrameworkTypeTexts(customElementsManifest) {
+  return customElementsManifest.modules
+    .flatMap(module => module.declarations ?? [])
+    .filter(declaration => declaration.tagName)
+    .flatMap(declaration => [...(declaration.attributes ?? []), ...(declaration.members ?? [])])
+    .map(item => item.type?.text)
+    .filter(Boolean);
+}
+
+function collectReachableStandaloneInterfaceTypes(customElementsManifest) {
+  const sourceInterfaceTypes = new Map();
+  const sourceRoot = resolve('src');
+  runtimeEnvironment.program
+    ?.getSourceFiles()
+    .filter(sourceFile => sourceFile.fileName.startsWith(sourceRoot))
+    .forEach(sourceFile => {
+      sourceFile.statements
+        .filter(statement => runtimeEnvironment.ts.isInterfaceDeclaration(statement))
+        .forEach(statement => sourceInterfaceTypes.set(statement.name.text, getInlineInterfaceTypeText(statement)));
+    });
+
+  const standaloneInterfaceTypes = new Map();
+  const pendingTypeTexts = getPublishedFrameworkTypeTexts(customElementsManifest);
+
+  for (let index = 0; index < pendingTypeTexts.length; index += 1) {
+    const typeText = pendingTypeTexts[index];
+
+    sourceInterfaceTypes.forEach((interfaceType, name) => {
+      if (standaloneInterfaceTypes.has(name) || !typeTextReferencesName(typeText, name)) {
+        return;
+      }
+
+      standaloneInterfaceTypes.set(name, interfaceType);
+      pendingTypeTexts.push(interfaceType);
+    });
+  }
+
+  return standaloneInterfaceTypes;
+}
+
+function getInlineInterfaceTypeText(declaration) {
+  const ts = runtimeEnvironment.ts;
+  const typeChecker = runtimeEnvironment.typeChecker;
+  const type = typeChecker.getTypeAtLocation(declaration);
+  const properties = typeChecker.getPropertiesOfType(type).map(property => {
+    const isOptional = Boolean(property.flags & ts.SymbolFlags.Optional);
+    const name = /^[A-Z_$][\w$]*$/i.test(property.name) ? property.name : JSON.stringify(property.name);
+    let propertyType = typeChecker.typeToString(
+      typeChecker.getTypeOfSymbolAtLocation(property, declaration),
+      declaration,
+      ts.TypeFormatFlags.NoTruncation
+    );
+
+    if (isOptional) {
+      propertyType = propertyType.replace(/ \| undefined$/, '');
+    }
+
+    return `${name}${isOptional ? '?' : ''}: ${propertyType}`;
+  });
+
+  return `{ ${properties.join('; ')} }`;
+}
+
+function expandStandaloneTypeText(type, standaloneInterfaceTypes, resolvingInterfaceNames = new Set()) {
+  let standaloneType = type ?? 'string';
+
+  standaloneInterfaceTypes.forEach((interfaceType, name) => {
+    if (!typeTextReferencesName(standaloneType, name)) {
+      return;
+    }
+
+    const expandedInterfaceType = resolvingInterfaceNames.has(name)
+      ? 'unknown'
+      : expandStandaloneTypeText(interfaceType, standaloneInterfaceTypes, new Set(resolvingInterfaceNames).add(name));
+
+    standaloneType = replaceTypeName(standaloneType, name, expandedInterfaceType);
+  });
+
+  return standaloneType;
+}
+
+// JSX and Vue generators normally replace an attributed property with its attribute alias. Preserve both bindings when
+// the alias has a different name and type because the attribute cannot represent the JavaScript property value.
+function exposeDistinctFrameworkPropertyBindings(declaration) {
+  declaration.members?.forEach(member => {
+    const attribute = declaration.attributes?.find(
+      item => item.name === member.attribute && item.fieldName === member.name
+    );
+
+    if (attribute && attribute.name !== member.name && attribute.type?.text !== member.type?.text) {
+      delete member.attribute;
+    }
+  });
+}
+
+// Preserve the shared CEM types and select standalone types only for framework declaration generators.
+function createStandaloneTypesManifest(customElementsManifest) {
+  const standaloneTypesManifest = structuredClone(customElementsManifest);
+  const standaloneInterfaceTypes = collectReachableStandaloneInterfaceTypes(standaloneTypesManifest);
+
+  standaloneTypesManifest.modules
+    .flatMap(module => module.declarations ?? [])
+    .filter(declaration => declaration.tagName)
+    .forEach(declaration => {
+      exposeDistinctFrameworkPropertyBindings(declaration);
+
+      [...(declaration.attributes ?? []), ...(declaration.members ?? [])].forEach(item => {
+        item.standaloneType = { text: expandStandaloneTypeText(item.type?.text, standaloneInterfaceTypes) };
+      });
+    });
+
+  return standaloneTypesManifest;
+}
+
+const standaloneTypesManifestCache = new WeakMap();
+
+function getStandaloneTypesManifest(customElementsManifest) {
+  if (!standaloneTypesManifestCache.has(customElementsManifest)) {
+    standaloneTypesManifestCache.set(customElementsManifest, createStandaloneTypesManifest(customElementsManifest));
+  }
+
+  return standaloneTypesManifestCache.get(customElementsManifest);
+}
+
+function withStandaloneTypes(plugin) {
+  return {
+    ...plugin,
+    packageLinkPhase({ customElementsManifest }) {
+      plugin.packageLinkPhase({ customElementsManifest: getStandaloneTypesManifest(customElementsManifest) });
+    }
+  };
+}
+
 function jsxTypesPlugin() {
-  return customElementJsxPlugin({
-    outdir: resolve('dist'),
-    fileName: 'custom-elements-jsx.d.ts',
-    globalEvents: `
+  return withStandaloneTypes(
+    customElementJsxPlugin({
+      outdir: resolve('dist'),
+      fileName: 'custom-elements-jsx.d.ts',
+      typesSrc: 'standaloneType',
+      globalEvents: `
       onClick?: (event: MouseEvent) => void;
       onKeyDown?: (event: KeyboardEvent) => void;
       onKeyUp?: (event: KeyboardEvent) => void;
@@ -615,14 +862,18 @@ function jsxTypesPlugin() {
       onPointerUp?: (event: PointerEvent) => void;
       onPointerMove?: (event: PointerEvent) => void;
     `
-  });
+    })
+  );
 }
 
 function vueTypesPlugin() {
-  return customElementVuejsPlugin({
-    outdir: resolve('dist'),
-    fileName: 'custom-elements-vue.d.ts'
-  });
+  return withStandaloneTypes(
+    customElementVuejsPlugin({
+      outdir: resolve('dist'),
+      fileName: 'custom-elements-vue.d.ts',
+      typesSrc: 'standaloneType'
+    })
+  );
 }
 
 function cssPropsPlugin() {
@@ -1392,6 +1643,8 @@ export default {
     const { config } = ts.readConfigFile(configFile, ts.sys.readFile);
     const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd());
     const program = ts.createProgram(globs, options);
+    runtimeEnvironment.ts = ts;
+    runtimeEnvironment.program = program;
     runtimeEnvironment.typeChecker = program.getTypeChecker();
     return program.getSourceFiles().filter(sf => globs.find(glob => sf.fileName.includes(glob)));
   }

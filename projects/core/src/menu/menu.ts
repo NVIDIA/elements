@@ -55,7 +55,7 @@ export class Menu extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements() items!: MenuItem[];
+  @queryAssignedElements() private items!: MenuItem[];
 
   #scrollRAF: number | null = null;
 
