@@ -1,3 +1,12 @@
+## <small>2.1.1 (2026-07-20)</small>
+
+* chore(docs): add custom data reference tests ([af48603](https://github.com/NVIDIA/elements/commit/af48603))
+* chore(internals): generate custom data references ([3f2bd36](https://github.com/NVIDIA/elements/commit/3f2bd36))
+* fix(code): include custom data documentation references ([f4efebb](https://github.com/NVIDIA/elements/commit/f4efebb))
+* fix(core): include custom data documentation references ([bf9168c](https://github.com/NVIDIA/elements/commit/bf9168c))
+* fix(markdown): include custom data documentation references ([b887400](https://github.com/NVIDIA/elements/commit/b887400))
+* fix(monaco): include custom data documentation references ([75f42f5](https://github.com/NVIDIA/elements/commit/75f42f5))
+
 ## 2.1.0 (2026-07-18)
 
 * chore(ci): improve test coverage ([4ef2eb3](https://github.com/NVIDIA/elements/commit/4ef2eb3))
