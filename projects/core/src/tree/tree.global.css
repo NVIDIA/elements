@@ -26,3 +26,12 @@ nve-tree-node > nve-tree-node:state(is-expandable):state(selectable-multi) {
 nve-tree-node:has(nve-tree-node:state(is-expandable))::part(_nodes) {
   padding-inline-start: var(--nve-ref-size-400);
 }
+
+nve-tree:has(> nve-tree-node:state(is-expandable)) > nve-tree-node:not(:state(is-expandable))::part(_node) {
+  padding-inline-start: var(--nve-ref-size-400);
+}
+
+nve-tree:has(> nve-tree-node:state(is-expandable):state(selectable-multi))
+  > nve-tree-node:not(:state(is-expandable)):state(selectable-multi)::part(_node) {
+  padding-inline-start: var(--nve-ref-size-500);
+}
