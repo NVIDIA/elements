@@ -132,6 +132,23 @@ describe(TreeNode.metadata.tag, () => {
     );
   });
 
+  it('should align leaf root nodes with expandable root nodes', async () => {
+    const leafHeader = element.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    const expandableHeader = nestedNodeElement.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+
+    expect(leafHeader.getBoundingClientRect().x).toBe(expandableHeader.getBoundingClientRect().x);
+  });
+
+  it('should align multi-select leaf root nodes with expandable root nodes', async () => {
+    tree.selectable = 'multi';
+    await Promise.all([elementIsStable(tree), elementIsStable(element), elementIsStable(nestedNodeElement)]);
+
+    const leafHeader = element.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    const expandableHeader = nestedNodeElement.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+
+    expect(leafHeader.getBoundingClientRect().x).toBe(expandableHeader.getBoundingClientRect().x);
+  });
+
   it('should show icon button if expandable', async () => {
     expect(element.shadowRoot.querySelector('nve-icon-button')).toBeFalsy();
 
