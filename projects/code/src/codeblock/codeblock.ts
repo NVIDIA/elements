@@ -19,6 +19,7 @@ hljs.registerLanguage('shell', shell);
 /**
  * @element nve-codeblock
  * @description A container for content representing programming languages.
+ * @documentation https://nvidia.github.io/elements/docs/code/codeblock/
  * @since 0.1.0
  * @entrypoint \@nvidia-elements/code/codeblock
  * @slot - for declarative slotting of source code and not using the `code` property
