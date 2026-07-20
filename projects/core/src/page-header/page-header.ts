@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, appendRootNodeStyle } from '@nvidia-elements/core/internal';
 import styles from './page-header.css?inline';
+import globalStyles from './page-header.global.css?inline';
 
 /**
  * @element nve-page-header
@@ -46,6 +47,7 @@ export class PageHeader extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
     attachInternals(this);
     this._internals.role = 'navigation';
   }
