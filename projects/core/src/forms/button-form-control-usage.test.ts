@@ -99,7 +99,7 @@ describe('ButtonFormControlMixin core usage', () => {
         expect(button.tabIndex).toBe(-1);
 
         button.disabled = false;
-        button.readonly = true;
+        button.readOnly = true;
         await elementIsStable(button);
         expect(button.readOnly).toBe(true);
         expect(button.hasAttribute('readonly')).toBe(true);

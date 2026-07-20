@@ -159,6 +159,55 @@ describe('InterestInvokerController', () => {
     expect(element.interestForElement).toBe(target);
   });
 
+  it('should re-resolve inferred targets when popovertarget changes', async () => {
+    fixture = await createFixture(html`
+      <interest-invoker-controller-test-element popovertarget="first"></interest-invoker-controller-test-element>
+      <div id="first" popover="hint"></div>
+      <div id="second" popover="hint"></div>
+    `);
+    const element = fixture.querySelector<InterestInvokerControllerTestElement>(
+      'interest-invoker-controller-test-element'
+    )!;
+    const first = fixture.querySelector<HTMLElement>('#first')!;
+    const second = fixture.querySelector<HTMLElement>('#second')!;
+    const firstDispatch = vi.spyOn(first, 'dispatchEvent');
+    const secondDispatch = vi.spyOn(second, 'dispatchEvent');
+
+    element.dispatchEvent(new MouseEvent('mouseenter'));
+    element.setAttribute('popovertarget', 'second');
+    element.dispatchEvent(new MouseEvent('mouseenter'));
+    element.dispatchEvent(new MouseEvent('mouseleave'));
+
+    expect(firstDispatch.mock.calls.map(([event]) => event.type)).toEqual(['interest']);
+    expect(secondDispatch.mock.calls.map(([event]) => event.type)).toEqual(['interest', 'loseinterest']);
+    expect(element.interestForElement).toBe(second);
+  });
+
+  it('should preserve explicitly assigned interest targets when popovertarget changes', async () => {
+    fixture = await createFixture(html`
+      <interest-invoker-controller-test-element popovertarget="first"></interest-invoker-controller-test-element>
+      <div id="first" popover="hint"></div>
+      <div id="second" popover="hint"></div>
+      <div id="explicit"></div>
+    `);
+    const element = fixture.querySelector<InterestInvokerControllerTestElement>(
+      'interest-invoker-controller-test-element'
+    )!;
+    const first = fixture.querySelector<HTMLElement>('#first')!;
+    const explicit = fixture.querySelector<HTMLElement>('#explicit')!;
+
+    element.dispatchEvent(new MouseEvent('mouseenter'));
+    expect(element.interestForElement).toBe(first);
+
+    const explicitInterest = untilEvent<InterestTestEvent>(explicit, 'interest');
+    element.interestForElement = explicit;
+    element.setAttribute('popovertarget', 'second');
+    element.dispatchEvent(new MouseEvent('mouseenter'));
+
+    expect((await explicitInterest).source).toBe(element);
+    expect(element.interestForElement).toBe(explicit);
+  });
+
   it('should no-op for missing targets and after disconnect', async () => {
     fixture = await createFixture(
       html`<interest-invoker-controller-test-element interestfor="missing"></interest-invoker-controller-test-element>`

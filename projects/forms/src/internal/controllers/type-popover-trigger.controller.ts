@@ -13,7 +13,6 @@ type PopoverTriggerHost = ReactiveElement & {
   interestForElement: HTMLElement | null;
   popoverTargetAction?: PopoverTargetAction;
   popoverTargetElement: HTMLElement | null;
-  popovertarget?: string;
 };
 
 export class TypePopoverTriggerController<T extends PopoverTriggerHost> implements ReactiveController {
@@ -35,7 +34,7 @@ export class TypePopoverTriggerController<T extends PopoverTriggerHost> implemen
     const popoverTargetElement = this.host.popoverTargetElement;
     const controllerResolvedTarget = popoverTargetElement === this.#resolvedPopoverTarget;
 
-    if (!this.host.popovertarget) {
+    if (!this.host.getAttribute('popovertarget')) {
       this.#resolvedPopoverTarget = undefined;
       if (controllerResolvedTarget) {
         this.host.popoverTargetElement = null;
@@ -50,7 +49,9 @@ export class TypePopoverTriggerController<T extends PopoverTriggerHost> implemen
     }
 
     const resolvedPopoverTarget =
-      getFlattenedDOMTree(this.host.getRootNode()).find(element => element.id === this.host.popovertarget) ?? null;
+      getFlattenedDOMTree(this.host.getRootNode()).find(
+        element => element.id === this.host.getAttribute('popovertarget')
+      ) ?? null;
     if (resolvedPopoverTarget !== popoverTargetElement) {
       this.host.popoverTargetElement = resolvedPopoverTarget;
     }

@@ -552,24 +552,15 @@ describe('ButtonFormControlMixin', () => {
 
     it('should sync removable string attributes', async () => {
       submitButton.value = 'saved';
-      submitButton.popovertarget = 'popover';
-      submitButton.commandfor = 'command-target';
       submitButton.command = '--test';
-      submitButton.interestfor = 'interest-target';
       await elementIsStable(submitButton);
 
       submitButton.removeAttribute('value');
-      submitButton.removeAttribute('popovertarget');
-      submitButton.removeAttribute('commandfor');
       submitButton.removeAttribute('command');
-      submitButton.removeAttribute('interestfor');
       await elementIsStable(submitButton);
 
       expect(submitButton.value).toBeUndefined();
-      expect(submitButton.popovertarget).toBeUndefined();
-      expect(submitButton.commandfor).toBe(null);
       expect(submitButton.command).toBeUndefined();
-      expect(submitButton.interestfor).toBe(null);
     });
   });
 
@@ -751,6 +742,69 @@ describe('ButtonFormControlMixin', () => {
       expect((propertyCommand.mock.calls[0]?.[0] as CommandTestEvent).source).toBe(button);
     });
 
+    it('should reflect native target properties to their corresponding attributes', async () => {
+      fixture = await createFixture(html`
+        <button-form-control-mixin-test-element
+          commandfor="attribute-command"
+          interestfor="attribute-interest"
+          popovertarget="attribute-popover"
+          popovertargetaction="show"
+        ></button-form-control-mixin-test-element>
+        <div id="attribute-command"></div>
+        <div id="attribute-interest"></div>
+        <div id="attribute-popover" popover></div>
+        <div id="property-command"></div>
+        <div id="property-interest"></div>
+        <div id="property-popover" popover></div>
+      `);
+      button = fixture.querySelector<ButtonFormControlMixinTestElement>('button-form-control-mixin-test-element')!;
+      const attributeCommand = fixture.querySelector<HTMLElement>('#attribute-command')!;
+      const attributeInterest = fixture.querySelector<HTMLElement>('#attribute-interest')!;
+      const attributePopover = fixture.querySelector<HTMLElement>('#attribute-popover')!;
+      const propertyCommand = fixture.querySelector<HTMLElement>('#property-command')!;
+      const propertyInterest = fixture.querySelector<HTMLElement>('#property-interest')!;
+      const propertyPopover = fixture.querySelector<HTMLElement>('#property-popover')!;
+      await elementIsStable(button);
+
+      expect(button.commandForElement).toBe(attributeCommand);
+      expect(button.interestForElement).toBe(attributeInterest);
+      expect(button.popoverTargetElement).toBe(attributePopover);
+      expect(button.popoverTargetAction).toBe('show');
+
+      button.commandForElement = propertyCommand;
+      button.interestForElement = propertyInterest;
+      button.popoverTargetElement = propertyPopover;
+      button.popoverTargetAction = 'hide';
+      await elementIsStable(button);
+
+      expect(button.getAttribute('commandfor')).toBe('');
+      expect(button.getAttribute('interestfor')).toBe('');
+      expect(button.getAttribute('popovertarget')).toBe('');
+      expect(button.getAttribute('popovertargetaction')).toBe('hide');
+      expect(button.commandForElement).toBe(propertyCommand);
+      expect(button.interestForElement).toBe(propertyInterest);
+      expect(button.popoverTargetElement).toBe(propertyPopover);
+
+      button.setAttribute('commandfor', 'attribute-command');
+      button.setAttribute('interestfor', 'attribute-interest');
+      button.setAttribute('popovertarget', 'attribute-popover');
+      button.setAttribute('popovertargetaction', 'invalid');
+      await elementIsStable(button);
+
+      expect(button.commandForElement).toBe(attributeCommand);
+      expect(button.interestForElement).toBe(attributeInterest);
+      expect(button.popoverTargetElement).toBe(attributePopover);
+      expect(button.popoverTargetAction).toBe('toggle');
+
+      button.commandForElement = null;
+      button.interestForElement = null;
+      button.popoverTargetElement = null;
+
+      expect(button.hasAttribute('commandfor')).toBe(false);
+      expect(button.hasAttribute('interestfor')).toBe(false);
+      expect(button.hasAttribute('popovertarget')).toBe(false);
+    });
+
     it('should no-op command dispatch when clicks are default-prevented, disabled, readonly, or commandless', async () => {
       fixture = await createFixture(html`
         <button-form-control-mixin-test-element command="--test" commandfor="target"></button-form-control-mixin-test-element>
@@ -860,7 +914,7 @@ describe('ButtonFormControlMixin', () => {
       emulateClick(button);
       first.hidePopover();
 
-      button.popovertarget = 'second';
+      button.setAttribute('popovertarget', 'second');
       await elementIsStable(button);
       emulateClick(button);
 
