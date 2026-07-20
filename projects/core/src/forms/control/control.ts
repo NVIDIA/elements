@@ -38,6 +38,7 @@ type ControlInput = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement |
 /**
  * @element nve-control
  * @description Wraps a form input with its associated label and validation messages, managing layout and accessibility associations.
+ * @documentation https://nvidia.github.io/elements/docs/elements/control/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/forms
  * @slot - Control input element

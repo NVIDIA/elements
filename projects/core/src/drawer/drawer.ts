@@ -19,6 +19,7 @@ import styles from './drawer.css?inline';
 /**
  * @element nve-drawer
  * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigation, settings). Or use [Panel](./docs/elements/panel/) inline as its content couples with or closely relates to the content on the page (details, extra actions/options). [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+ * @documentation https://nvidia.github.io/elements/docs/elements/drawer/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
  * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)

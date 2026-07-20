@@ -10,6 +10,7 @@ import styles from './dot.css?inline';
 /**
  * @element nve-dot
  * @description A visual indicator that communicates a status or notification of an associated component.
+ * @documentation https://nvidia.github.io/elements/docs/elements/dot/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/dot
  * @slot - default text content no more than 2 characters in length

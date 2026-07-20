@@ -23,6 +23,7 @@ declare global {
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/icon
  * @description An icon is a graphic symbol designed to visually show the purpose of an interface element.
+ * @documentation https://nvidia.github.io/elements/docs/elements/icon/
  * @cssprop --color
  * @cssprop --width
  * @cssprop --height

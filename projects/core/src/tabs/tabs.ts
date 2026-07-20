@@ -24,6 +24,7 @@ import tabsStyleSheet from './tabs.css?inline';
 /**
  * @element nve-tabs-item
  * @description Represents an individual tab within a tablist, providing a selectable button for switching between content views.
+ * @documentation https://nvidia.github.io/elements/docs/elements/tabs/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for content
@@ -90,6 +91,7 @@ export class TabsItem extends ButtonFormControlMixin(LitElement) {
 /**
  * @element nve-tabs
  * @description Tabs provide a selection UX, typically used for swapping content shown on a page, or within a navigation context.
+ * @documentation https://nvidia.github.io/elements/docs/elements/tabs/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for tab-item

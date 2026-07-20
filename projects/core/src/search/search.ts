@@ -13,6 +13,7 @@ import styles from './search.css?inline';
 /**
  * @element nve-search
  * @description A search is a control that enables users to enter text to search.
+ * @documentation https://nvidia.github.io/elements/docs/elements/search/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/search
  * @cssprop --padding

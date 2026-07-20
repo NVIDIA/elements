@@ -23,6 +23,7 @@ import globalStyles from './toggletip.global.css?inline';
 /**
  * @element nve-toggletip
  * @description Generic toggletip element for rendering a variety of different interactive content. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+ * @documentation https://nvidia.github.io/elements/docs/elements/toggletip/
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip
  * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)

@@ -13,6 +13,7 @@ import styles from './time.css?inline';
 /**
  * @element nve-time
  * @description A time picker is a control that enables users to choose a time value.
+ * @documentation https://nvidia.github.io/elements/docs/elements/time/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/time
  * @cssprop --padding

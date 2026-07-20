@@ -17,6 +17,7 @@ import globalStyles from './dropdown-group.global.css?inline';
 /**
  * @element nve-dropdown-group
  * @description A Dropdown Group streamlines the management of linked dropdowns and supports nested dropdowns for a more organized and intuitive user experience
+ * @documentation https://nvidia.github.io/elements/docs/elements/dropdown-group/
  * @since 1.30.1
  * @entrypoint \@nvidia-elements/core/dropdown-group
  * @slot - default slot for dropdown content

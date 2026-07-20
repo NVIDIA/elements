@@ -9,6 +9,7 @@ import styles from './page.css?inline';
 /**
  * @element nve-page
  * @description Provide a consistent page structure across the applications, ensuring a seamless user experience.
+ * @documentation https://nvidia.github.io/elements/docs/elements/page/
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
  * @slot - The central content area of the page, where the primary focus of the user's attention should be.

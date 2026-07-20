@@ -14,6 +14,7 @@ import styles from './color.css?inline';
 /**
  * @element nve-color
  * @description A color picker is a control that enables users to choose a color value.
+ * @documentation https://nvidia.github.io/elements/docs/elements/color/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/color
  * @cssprop --cursor

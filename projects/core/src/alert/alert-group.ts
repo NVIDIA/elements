@@ -19,6 +19,7 @@ import styles from './alert-group.css?inline';
 /**
  * @element nve-alert-group
  * @description An alert group is an element that displays a group of related and important messages in a way that attracts the user's attention without interrupting the user's task.
+ * @documentation https://nvidia.github.io/elements/docs/elements/alert/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/alert
  * @cssprop --gap

@@ -11,6 +11,7 @@ import styles from './column.css?inline';
 /**
  * @element nve-grid-column
  * @description Defines a column header within a grid, specifying the column's label, width, and alignment for all cells beneath it.
+ * @documentation https://nvidia.github.io/elements/docs/elements/data-grid/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content

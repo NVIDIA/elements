@@ -27,6 +27,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
 /**
  * @element nve-accordion-header
  * @description Provides the clickable heading region of an accordion that toggles the visibility of associated content.
+ * @documentation https://nvidia.github.io/elements/docs/elements/accordion/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @slot - default content slot
@@ -69,6 +70,7 @@ export class AccordionHeader extends LitElement {
 /**
  * @element nve-accordion-content
  * @description Contains the collapsible body content that reveals or hides when the parent accordion expands or collapses.
+ * @documentation https://nvidia.github.io/elements/docs/elements/accordion/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @slot - This is a default/unnamed slot for accordion content
@@ -93,6 +95,7 @@ export class AccordionContent extends LitElement {
 /**
  * @element nve-accordion
  * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
+ * @documentation https://nvidia.github.io/elements/docs/elements/accordion/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @command --open - use to open the accordion
@@ -219,6 +222,7 @@ export class Accordion extends LitElement implements ContainerElement {
 /**
  * @element nve-accordion-group
  * @description Organizes many accordions into a cohesive group, enabling coordinated expand/collapse behavior such as single-item expansion.
+ * @documentation https://nvidia.github.io/elements/docs/elements/accordion/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @cssprop --padding

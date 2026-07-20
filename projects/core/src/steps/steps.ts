@@ -25,6 +25,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 /**
  * @element nve-steps-item
  * @description Represents an individual step within a multi-step workflow, displaying its status and enabling navigation within the parent steps component.
+ * @documentation https://nvidia.github.io/elements/docs/elements/steps/
  * @since 0.30.0
  * @entrypoint \@nvidia-elements/core/steps
  * @slot - default slot for step text
@@ -103,6 +104,7 @@ export class StepsItem extends ButtonFormControlMixin(LitElement) {
 /**
  * @element nve-steps
  * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence.
+ * @documentation https://nvidia.github.io/elements/docs/elements/steps/
  * @since 0.30.0
  * @entrypoint \@nvidia-elements/core/steps
  * @slot - default slot for steps-item

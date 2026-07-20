@@ -35,6 +35,7 @@ import styles from './sparkline.css?inline';
 /**
  * @element nve-sparkline
  * @description A sparkline is a compact, word-sized chart with typographic scale, for data-dense layouts (text, tables, cards, dashboards).
+ * @documentation https://nvidia.github.io/elements/docs/elements/sparkline/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/sparkline
  * @cssprop --height - Height (defaults to 1em and scales with parent font-size).

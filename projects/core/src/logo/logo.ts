@@ -10,6 +10,7 @@ import styles from './logo.css?inline';
 /**
  * @element nve-logo
  * @description A visual indicator for a brand or application.
+ * @documentation https://nvidia.github.io/elements/docs/elements/logo/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/logo
  * @slot - default slot for content

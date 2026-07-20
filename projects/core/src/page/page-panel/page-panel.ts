@@ -18,6 +18,7 @@ import globalStyles from './page-panel.global.css?inline';
 /**
  * @element nve-page-panel
  * @description Child panel for embedded panels within the page component. Typically used for left/right/bottom page slot positions.
+ * @documentation https://nvidia.github.io/elements/docs/elements/page/
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
  * @event open

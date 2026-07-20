@@ -8,6 +8,7 @@ import styles from './dialog-header.css?inline';
 /**
  * @element nve-dialog-header
  * @description Displays the title and contextual information at the top of a dialog to orient users to the dialog's purpose.
+ * @documentation https://nvidia.github.io/elements/docs/elements/dialog/
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dialog
  * @slot - default slot for the dialog header

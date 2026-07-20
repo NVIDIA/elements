@@ -12,6 +12,7 @@ import styles from './star-rating.css?inline';
 /**
  * @element nve-star-rating
  * @description A star rating component lets users rate something using stars, providing a quick visual representation of feedback
+ * @documentation https://nvidia.github.io/elements/docs/elements/star-rating/
  * @since 1.23.1
  * @entrypoint \@nvidia-elements/core/star-rating
  * @cssprop --star-size

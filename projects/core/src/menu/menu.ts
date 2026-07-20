@@ -18,6 +18,7 @@ import globalStyles from './menu.global.css?inline';
 /**
  * @element nve-menu
  * @description A menu offers a list of choices to the user, such as a set of actions or functions. Choosing an item in a menu typically opens a sub menu, or invokes a command.
+ * @documentation https://nvidia.github.io/elements/docs/elements/menu/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/menu
  * @slot - default slot for `nve-menu-item`

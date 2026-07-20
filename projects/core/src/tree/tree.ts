@@ -21,6 +21,7 @@ import globalStyles from './tree.global.css?inline';
 /**
  * @element nve-tree
  * @description A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children can expand or collapse to show or hide the children.
+ * @documentation https://nvidia.github.io/elements/docs/elements/tree/
  * @since 1.2.0
  * @entrypoint \@nvidia-elements/core/tree
  * @slot - tree nodes

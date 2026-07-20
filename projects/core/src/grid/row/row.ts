@@ -10,6 +10,7 @@ import styles from './row.css?inline';
 /**
  * @element nve-grid-row
  * @description Represents a horizontal row of data cells within a grid, supporting selection and interactive states.
+ * @documentation https://nvidia.github.io/elements/docs/elements/data-grid/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for `nve-grid-cell`

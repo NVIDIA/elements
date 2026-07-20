@@ -27,6 +27,7 @@ import globalStyles from './select.global.css?inline';
 /**
  * @element nve-select
  * @description A select is a control that enables users to select an option from a list of options.
+ * @documentation https://nvidia.github.io/elements/docs/elements/select/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/select
  * @cssprop --padding

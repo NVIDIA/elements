@@ -24,6 +24,7 @@ import styles from './alert.css?inline';
 /**
  * @element nve-alert
  * @description Alert is an element that displays a brief, important message in a way that attracts the user's attention without interrupting the user's task.
+ * @documentation https://nvidia.github.io/elements/docs/elements/alert/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/alert
  * @event close - Dispatched when the alert closes within an alert group.

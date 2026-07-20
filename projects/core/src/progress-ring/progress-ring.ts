@@ -18,6 +18,7 @@ import styles from './progress-ring.css?inline';
 /**
  * @element nve-progress-ring
  * @description The `progress-ring` component shows the status of a pending task. It also serves the basis of the page loading element.
+ * @documentation https://nvidia.github.io/elements/docs/elements/progress-ring/
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/progress-ring
  * @slot - Content to display in the ring center. Defaults to a status icon.

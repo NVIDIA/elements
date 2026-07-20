@@ -13,6 +13,7 @@ import styles from './month.css?inline';
 /**
  * @element nve-month
  * @description A month picker is a control that enables users to choose a month value.
+ * @documentation https://nvidia.github.io/elements/docs/elements/month/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/month
  * @cssprop --padding

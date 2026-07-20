@@ -20,6 +20,7 @@ import styles from './dropdown.css?inline';
 /**
  * @element nve-dropdown
  * @description Generic dropdown element for rendering a variety of different content such as interactive navigation or form controls. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+ * @documentation https://nvidia.github.io/elements/docs/elements/dropdown/
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dropdown
  * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)

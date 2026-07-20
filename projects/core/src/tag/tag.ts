@@ -19,6 +19,7 @@ import styles from './tag.css?inline';
 /**
  * @element nve-tag
  * @description A interactive element that represents a category or group of content. Typically used to filter or organize content for one to many relations.
+ * @documentation https://nvidia.github.io/elements/docs/elements/tag/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tag
  * @slot - default slot for content
