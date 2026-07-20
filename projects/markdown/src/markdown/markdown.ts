@@ -36,6 +36,7 @@ const CONFIG = {
  * @element nve-markdown
  * @cssprop --padding - The padding of the component
  * @description A Web Component that inputs markdown content and renders it as HTML formatted with Elements styles.
+ * @documentation https://nvidia.github.io/elements/docs/markdown/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/markdown/markdown
  * @slot - The slot can contain a template element with markdown content
