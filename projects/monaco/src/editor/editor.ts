@@ -11,6 +11,7 @@ import { BaseMonacoEditor } from '../internal/base/editor.js';
 /**
  * @element nve-monaco-editor
  * @description A low-level Monaco Editor wrapper that provides direct access to an editor instance and API.
+ * @documentation https://nvidia.github.io/elements/docs/monaco/editor/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/monaco/editor
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea

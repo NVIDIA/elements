@@ -13,6 +13,7 @@ import { BaseMonacoInput } from '../internal/base/input.js';
 /**
  * @element nve-monaco-input
  * @description An input control for editing JSON, YAML and code with syntax highlighting and validation.
+ * @documentation https://nvidia.github.io/elements/docs/monaco/input/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/monaco/input
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea

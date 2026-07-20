@@ -11,6 +11,7 @@ import { BaseMonacoEditor } from '../internal/base/editor.js';
 /**
  * @element nve-monaco-diff-editor
  * @description A low-level Monaco Editor wrapper that provides direct access to a diff editor instance and API.
+ * @documentation https://nvidia.github.io/elements/docs/monaco/diff-editor/
  * @since 1.1.0
  * @entrypoint \@nvidia-elements/monaco/diff-editor
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
