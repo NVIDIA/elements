@@ -52,6 +52,7 @@ function hasProblemsChanged(value: Problem[], oldValue: Problem[] | undefined) {
 /**
  * @element nve-monaco-problems
  * @description A Monaco Editor based tree view for presenting problems (i.e. diagnostics markers).
+ * @documentation https://nvidia.github.io/elements/docs/monaco/problems/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/monaco/problems
  * @cssprop --background
