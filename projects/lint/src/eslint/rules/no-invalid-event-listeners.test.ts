@@ -57,9 +57,49 @@ describe('noInvalidEventListeners', () => {
       valid: [
         '<button @click="handleClick">Click</button>',
         '<button (click)="handleClick()">Click</button>',
-        '<button v-on:click="handleClick">Click</button>'
+        '<button v-on:click="handleClick">Click</button>',
+        '<button onclick="${handleClick}">Click</button>',
+        '<button onclick="{{handleClick}}">Click</button>',
+        '<button onclick="{handleClick}">Click</button>',
+        // React synthetic event binding
+        '<button onClick={handleClick}>Click</button>',
+        // React custom element native event binding
+        `function SharedDropdown() {
+          return (
+            <nve-dropdown id="row-actions-dropdown" alignment="end" ontoggle={() => undefined}>
+              <nve-menu>
+                <nve-menu-item>action 1</nve-menu-item>
+                <nve-menu-item>action 2</nve-menu-item>
+                <nve-menu-item>action 3</nve-menu-item>
+              </nve-menu>
+            </nve-dropdown>
+          );
+        }`
       ],
       invalid: []
+    });
+  });
+
+  it('should defer errors for incomplete event handler bindings', () => {
+    tester.run('incomplete event handler bindings', rule, {
+      valid: [
+        '<button onClick=',
+        '<button onClick={',
+        '<button onClick={()',
+        '<button onClick="',
+        '<button onClick="${',
+        '<button onClick="{{'
+      ],
+      invalid: [
+        {
+          code: '<button onClick=handleClick',
+          errors: [{ messageId: 'no-inline-event-handler', data: { attribute: 'onClick' } }]
+        },
+        {
+          code: '<button onClick="handleClick',
+          errors: [{ messageId: 'no-inline-event-handler', data: { attribute: 'onClick' } }]
+        }
+      ]
     });
   });
 
