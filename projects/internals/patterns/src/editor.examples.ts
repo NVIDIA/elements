@@ -71,7 +71,7 @@ export const FileBrowser = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <main nve-layout="column full">
+  <main nve-layout="column full gap:none">
     <nve-toolbar container="full">
       <nve-tabs behavior-select>
         <nve-tabs-item selected>lidar_config.py</nve-tabs-item>
@@ -169,7 +169,7 @@ export const DiffView = {
     <nve-button slot="suffix">Merge</nve-button>
   </nve-toolbar>
 
-  <main nve-layout="column">
+  <main nve-layout="column gap:none">
     <nve-toolbar container="full" style="--background: var(--nve-sys-layer-canvas-accent-background)">
       <div slot="prefix" nve-layout="row gap:sm align:vertical-center">
         <nve-icon-button icon-name="branch" size="sm" container="flat"></nve-icon-button>
@@ -345,7 +345,7 @@ export const ReadOnly = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <main nve-layout="column" style="height: 100%">
+  <main nve-layout="column gap:none" style="height: 100%">
     <nve-toolbar container="full">
       <nve-tabs behavior-select>
         <nve-tabs-item selected>robot_config.yaml</nve-tabs-item>

@@ -30,6 +30,12 @@ export default [
     }
   },
   {
+    files: ['src/**/*.test.visual.ts'],
+    rules: {
+      '@nvidia-elements/lint/no-missing-gap-space': ['off']
+    }
+  },
+  {
     files: [
       'src/format-datetime/format-datetime.ts',
       'src/format-number/format-number.ts',

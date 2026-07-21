@@ -162,9 +162,9 @@ export default [
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-gap-space</code></nve-grid-cell>
-    <nve-grid-cell>Require gap spacing on row and column layouts.</nve-grid-cell>
+    <nve-grid-cell>Require gap spacing on row, column, and grid layouts.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">off</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-icon-name</code></nve-grid-cell>
