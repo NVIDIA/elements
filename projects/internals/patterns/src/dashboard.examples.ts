@@ -328,4 +328,154 @@ export const ProjectBoard = {
       </main>
     </nve-page>
   `
-}
+};
+
+/**
+ * @summary Multi-route dashboard with top-level navigation and URL-synchronized tab views. Use for resource management pages where nested routes preserve context and browser history while keeping overview, activity, and access tasks close together.
+ * @tags pattern
+ */
+export const AdminRoutes = {
+  render() {
+    return html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">OP</nve-logo>
+    <h2 slot="prefix" nve-text="heading">Operations Admin</h2>
+    <nve-button selected container="flat"><a href="/admin/dashboard">Dashboard</a></nve-button>
+    <nve-button container="flat"><a href="/admin/teams">Teams</a></nve-button>
+    <nve-button container="flat"><a href="/admin/billing">Billing</a></nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">MK</nve-icon-button>
+  </nve-page-header>
+  <main nve-layout="column gap:lg pad:lg" style="max-width: 1300px;">
+    <div nve-layout="column gap:sm">
+      <p nve-text="label sm muted">Dashboard / Services / Inference API</p>
+      <h1 nve-text="heading lg">Inference API</h1>
+    </div>
+    <nve-tabs-group id="admin-route-tabs">
+      <nve-tabs>
+        <nve-tabs-item
+          selected
+          command="--toggle"
+          commandfor="admin-route-tabs"
+          value="overview"
+        >Overview</nve-tabs-item>
+        <nve-tabs-item
+          command="--toggle"
+          commandfor="admin-route-tabs"
+          value="activity"
+        >Activity</nve-tabs-item>
+        <nve-tabs-item
+          command="--toggle"
+          commandfor="admin-route-tabs"
+          value="access"
+        >Access</nve-tabs-item>
+      </nve-tabs>
+      <section slot="overview" nve-layout="column gap:lg">
+        <div nve-layout="grid gap:lg span-items:4 align:vertical-stretch">
+          <nve-card>
+            <nve-card-header><h2 nve-text="label muted">Requests today</h2></nve-card-header>
+            <nve-card-content>
+              <div nve-layout="column gap:xs">
+                <p nve-text="heading lg">2.4M</p>
+                <p nve-text="body sm muted">12% above the daily average</p>
+              </div>
+            </nve-card-content>
+          </nve-card>
+          <nve-card>
+            <nve-card-header><h2 nve-text="label muted">Success rate</h2></nve-card-header>
+            <nve-card-content>
+              <div nve-layout="column gap:xs">
+                <p nve-text="heading lg">99.98%</p>
+                <p nve-text="body sm muted">Within the 99.9% target</p>
+              </div>
+            </nve-card-content>
+          </nve-card>
+          <nve-card>
+            <nve-card-header><h2 nve-text="label muted">P95 latency</h2></nve-card-header>
+            <nve-card-content>
+              <div nve-layout="column gap:xs">
+                <p nve-text="heading lg">182 ms</p>
+                <p nve-text="body sm muted">18 ms below the alert threshold</p>
+              </div>
+            </nve-card-content>
+          </nve-card>
+        </div>
+        <nve-card>
+          <nve-card-header>
+            <div nve-layout="column gap:xs">
+              <h2 nve-text="heading sm">Service details</h2>
+              <p nve-text="body sm muted">Current production configuration.</p>
+            </div>
+          </nve-card-header>
+          <nve-card-content>
+            <dl nve-layout="grid gap:sm">
+              <dt nve-layout="span:4" nve-text="body muted medium">Region</dt>
+              <dd nve-layout="span:8" nve-text="body">us-central-1</dd>
+              <dt nve-layout="span:4" nve-text="body muted medium">Model</dt>
+              <dd nve-layout="span:8" nve-text="body">Llama 3.3 70B Instruct</dd>
+              <dt nve-layout="span:4" nve-text="body muted medium">Deployment</dt>
+              <dd nve-layout="span:8" nve-text="body">inference-api-v42</dd>
+            </dl>
+          </nve-card-content>
+        </nve-card>
+      </section>
+      <section slot="activity" nve-layout="column gap:md">
+        <nve-grid>
+          <nve-grid-header>
+            <nve-grid-column width="25%">Event</nve-grid-column>
+            <nve-grid-column width="25%">Actor</nve-grid-column>
+            <nve-grid-column width="25%">Time</nve-grid-column>
+            <nve-grid-column width="25%">Status</nve-grid-column>
+          </nve-grid-header>
+          <nve-grid-row>
+            <nve-grid-cell>Deployed inference-api-v42</nve-grid-cell>
+            <nve-grid-cell>Maya Kim</nve-grid-cell>
+            <nve-grid-cell>18 minutes ago</nve-grid-cell>
+            <nve-grid-cell><nve-badge status="success" container="flat">Completed</nve-badge></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell>Updated autoscaling target</nve-grid-cell>
+            <nve-grid-cell>Jon Bell</nve-grid-cell>
+            <nve-grid-cell>2 hours ago</nve-grid-cell>
+            <nve-grid-cell><nve-badge status="finished" container="flat">Applied</nve-badge></nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell>Rotated service credentials</nve-grid-cell>
+            <nve-grid-cell>System</nve-grid-cell>
+            <nve-grid-cell>Yesterday</nve-grid-cell>
+            <nve-grid-cell><nve-badge status="finished" container="flat">Applied</nve-badge></nve-grid-cell>
+          </nve-grid-row>
+        </nve-grid>
+      </section>
+      <section slot="access" nve-layout="column gap:md">
+        <div nve-layout="grid gap:lg span-items:6 align:vertical-stretch">
+          <nve-card>
+            <nve-card-header>
+              <div nve-layout="row gap:sm align:space-between align:vertical-center">
+                <h3 nve-text="heading xs">Platform administrators</h3>
+                <nve-badge container="flat">Owner</nve-badge>
+              </div>
+            </nve-card-header>
+            <nve-card-content>
+              <p nve-text="body sm muted">12 members can deploy, configure, and manage access.</p>
+            </nve-card-content>
+          </nve-card>
+          <nve-card>
+            <nve-card-header>
+              <div nve-layout="row gap:sm align:space-between align:vertical-center">
+                <h3 nve-text="heading xs">ML operations</h3>
+                <nve-badge container="flat">Editor</nve-badge>
+              </div>
+            </nve-card-header>
+            <nve-card-content>
+              <p nve-text="body sm muted">28 members can deploy and update service configuration.</p>
+            </nve-card-content>
+          </nve-card>
+        </div>
+      </section>
+    </nve-tabs-group>
+  </main>
+</nve-page>
+    `
+  }
+};

@@ -4,6 +4,7 @@
 :host {
   --padding: var(--nve-ref-space-sm) 0 0 0;
   display: block;
+  width: 100%;
 }
 
 :host(:is([alignment='start'], [alignment='end'])) {
