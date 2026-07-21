@@ -1,3 +1,15 @@
+## <small>2.1.4 (2026-07-21)</small>
+
+* chore(ci): update lighthouse ([b5b71ca](https://github.com/NVIDIA/elements/commit/b5b71ca))
+* chore(release): @nvidia-elements/forms-v2.0.4 [skip ci] ([65b4f9e](https://github.com/NVIDIA/elements/commit/65b4f9e))
+* chore(release): @nvidia-elements/lint-v2.1.1 [skip ci] ([efb7a71](https://github.com/NVIDIA/elements/commit/efb7a71))
+* fix(cli): improve api metadata ([b2c13ab](https://github.com/NVIDIA/elements/commit/b2c13ab))
+* fix(core): collapsed tab group ([b7be2d9](https://github.com/NVIDIA/elements/commit/b7be2d9))
+* fix(core): ensure proper property and attribute reflection for button types ([af780c6](https://github.com/NVIDIA/elements/commit/af780c6))
+* fix(forms): proper property and attribute reflection for button mixin ([e6093dd](https://github.com/NVIDIA/elements/commit/e6093dd))
+* fix(lint): enhance data binding checks and update test cases for popover triggers ([56e4701](https://github.com/NVIDIA/elements/commit/56e4701))
+* fix(lint): support framework event bindings ([4a1e72d](https://github.com/NVIDIA/elements/commit/4a1e72d))
+
 ## <small>2.1.3 (2026-07-20)</small>
 
 * fix(core): align root tree nodes ([6008461](https://github.com/NVIDIA/elements/commit/6008461))
