@@ -117,6 +117,10 @@
   --border-bottom: 0;
 }
 
+slot {
+  min-height: inherit;
+}
+
 slot:not([name]) {
   gap: var(--gap);
   width: 100%;
