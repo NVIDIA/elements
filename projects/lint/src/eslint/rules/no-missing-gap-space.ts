@@ -5,14 +5,59 @@ import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
-import type { HtmlTagNode } from '../rule-types.js';
+import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
-/** Spacing alignment values that manage their own distribution and override gap */
-const SPACING_ALIGNMENTS = ['align:space-around', 'align:space-between', 'align:space-evenly'];
+const GAP_OPTIONAL_VALUES = new Set([
+  'full',
+  'align:center',
+  'align:horizontal-center',
+  'align:vertical-center',
+  'align:stretch',
+  'align:horizontal-stretch',
+  'align:vertical-stretch',
+  'align:left',
+  'align:right',
+  'align:space-around',
+  'align:space-between',
+  'align:space-evenly'
+]);
 
 /** Context limited gap sizes to suggest as fixes */
 const SUGGESTED_GAP_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
+
+function hasGapOptionalValue(values: string[]): boolean {
+  return values.some(value => GAP_OPTIONAL_VALUES.has(value));
+}
+
+function suggestedLayout(value: string, size: string): string {
+  return `${value} gap:${size}`;
+}
+
+function reportGapViolation({
+  context,
+  layoutAttr,
+  value
+}: {
+  context: Rule.RuleContext;
+  layoutAttr: HtmlAttribute;
+  value: string;
+}) {
+  context.report({
+    node: layoutAttr,
+    messageId: 'missing-gap-space',
+    data: { layout: value },
+    suggest: SUGGESTED_GAP_SIZES.map(size => ({
+      messageId: 'suggest-add-gap',
+      data: { size },
+      fix: (fixer: Rule.RuleFixer) =>
+        fixer.replaceText(
+          layoutAttr as unknown as Rule.Node,
+          `nve-layout=${layoutAttr.startWrapper?.value}${suggestedLayout(value, size)}${layoutAttr.endWrapper?.value}`
+        )
+    }))
+  });
+}
 
 const rule = {
   meta: {
@@ -36,36 +81,14 @@ const rule = {
         const layoutAttr = findAttr(node, 'nve-layout');
         if (!layoutAttr) return;
 
-        const value = layoutAttr.value?.value ?? '';
-
+        const value: string = layoutAttr.value?.value ?? '';
         if (VALUE_BINDINGS.some(binding => value.includes(binding))) return;
 
-        const segments = value.split(' ').filter((s: string) => s !== '');
-
-        const isRowOrColumn = segments.includes('row') || segments.includes('column');
-        if (!isRowOrColumn) return;
-
-        const hasGap = segments.some((s: string) => s.startsWith('gap:'));
-        if (hasGap) return;
-
-        const hasSpacingAlignment = segments.some((s: string) => SPACING_ALIGNMENTS.includes(s));
-        if (hasSpacingAlignment) return;
-
-        context.report({
-          node: layoutAttr,
-          messageId: 'missing-gap-space',
-          data: { layout: value },
-          suggest: SUGGESTED_GAP_SIZES.map(size => ({
-            messageId: 'suggest-add-gap',
-            data: { size },
-            fix: fixer => {
-              return fixer.replaceText(
-                layoutAttr,
-                `nve-layout=${layoutAttr.startWrapper.value}${value} gap:${size}${layoutAttr.endWrapper.value}`
-              );
-            }
-          }))
-        });
+        const values = value.split(/\s+/).filter(Boolean);
+        const isLayout = values.includes('row') || values.includes('column') || values.includes('grid');
+        const hasGap = values.some(segment => segment.startsWith('gap:'));
+        if (!isLayout || hasGap || hasGapOptionalValue(values)) return;
+        reportGapViolation({ context, layoutAttr, value });
       }
     });
   }

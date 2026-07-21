@@ -135,4 +135,14 @@ describe('lintPlaygroundTemplate', () => {
 
     expect(tailwindMessage?.severity).toBe('error');
   });
+
+  it('should apply missing gap checks to strict templates', async () => {
+    const missingGap = '<div nve-layout="row"><span>one</span><span>two</span></div>';
+    const explicitNoGap = '<div nve-layout="row gap:none"><span>one</span><span>two</span></div>';
+    const strictResult = await lintTemplate(missingGap, { strict: true });
+    const explicitNoGapResult = await lintTemplate(explicitNoGap, { strict: true });
+
+    expect(strictResult.find(message => message.id === 'missing-gap-space')?.severity).toBe('error');
+    expect(explicitNoGapResult.some(message => message.id === 'missing-gap-space')).toBe(false);
+  });
 });
