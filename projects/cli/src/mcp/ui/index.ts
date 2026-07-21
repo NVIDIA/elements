@@ -20,7 +20,7 @@ export const examplesRenderResource: UIResource = {
   mimeType: MCP_UI_MIME_TYPE,
   resourceUri: 'ui://elements/example-preview',
   description:
-    'Use this MCP app when an Elements example or template should be shown to the user. It renders validated nve-* HTML from examples_get or examples_render so users can inspect component layout, theme, and validation messages visually instead of reading markup only.',
+    'Use this MCP app when an NVIDIA Elements UI example or template should be shown to the user. It renders validated nve-* HTML from examples_get or examples_render so users can inspect component layout, theme, and validation messages visually instead of reading markup only.',
   getHtml: () => examplesRenderHtml
 };
 
