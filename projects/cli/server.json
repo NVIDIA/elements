@@ -9,13 +9,13 @@
     "source": "github",
     "subfolder": "projects/cli"
   },
-  "version": "2.1.5",
+  "version": "2.1.6",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@nvidia-elements/cli",
-      "version": "2.1.5",
+      "version": "2.1.6",
       "runtimeHint": "npx",
       "packageArguments": [
         {
