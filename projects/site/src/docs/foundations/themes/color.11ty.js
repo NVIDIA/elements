@@ -94,17 +94,17 @@ function getColorScale(color) {
     );
   }
   return /* html */ `
-  <div nve-layout="column pad-bottom:xl" docs-full-width>
+  <div nve-layout="pad-bottom:xl" docs-full-width>
     <h2 nve-text="body">${color.replace('ref-color-', '')}</h2>
-    <div nve-layout="row" style="width: 100%">
-      <div nve-layout="column" style="padding-top: 25px">${Array.from(Array(12).keys())
+    <div nve-layout="row full">
+      <div nve-layout="pad-top:xl">${Array.from(Array(12).keys())
         .map(
           i =>
             /* html */ `<p nve-text="body" nve-layout="column align:center pad:xs" style="height: 40px">${i + 1}00</p>`
         )
         .join('')}</div>
-      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div nve-theme="root light" style="width: 100%" colors="">${tokens.join('')}</div></div>
-      <div nve-layout="column" style="width: 100%"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div nve-theme="root dark" style="width: 100%" colors="">${tokens.join('')}</div></div>
+      <div nve-layout="column full"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">light</p><div nve-theme="root light" style="width: 100%" colors="">${tokens.join('')}</div></div>
+      <div nve-layout="column full"><p nve-text="body center" nve-layout="column align:center pad:xs" style="width: 100%">dark</p><div nve-theme="root dark" style="width: 100%" colors="">${tokens.join('')}</div></div>
     </div>
   </div>`;
 }

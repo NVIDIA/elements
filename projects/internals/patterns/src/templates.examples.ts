@@ -832,7 +832,7 @@ export const CodeEditor = {
       </nve-tree>
     </nve-page-panel-content>
   </nve-page-panel>
-  <main nve-layout="column full">
+  <main nve-layout="column full gap:none">
     <nve-toolbar container="full">
       <nve-tabs behavior-select>
         <nve-tabs-item selected>lidar_config.py</nve-tabs-item>

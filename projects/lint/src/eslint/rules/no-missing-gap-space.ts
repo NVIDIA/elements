@@ -43,6 +43,11 @@ function reportGapViolation({
   layoutAttr: HtmlAttribute;
   value: string;
 }) {
+  const [startWrapper, endWrapper] =
+    layoutAttr.startWrapper && layoutAttr.endWrapper
+      ? [layoutAttr.startWrapper.value, layoutAttr.endWrapper.value]
+      : ['"', '"'];
+
   context.report({
     node: layoutAttr,
     messageId: 'missing-gap-space',
@@ -53,7 +58,7 @@ function reportGapViolation({
       fix: (fixer: Rule.RuleFixer) =>
         fixer.replaceText(
           layoutAttr as unknown as Rule.Node,
-          `nve-layout=${layoutAttr.startWrapper?.value}${suggestedLayout(value, size)}${layoutAttr.endWrapper?.value}`
+          `nve-layout=${startWrapper}${suggestedLayout(value, size)}${endWrapper}`
         )
     }))
   });
@@ -64,7 +69,7 @@ const rule = {
     type: 'problem' as const,
     hasSuggestions: true,
     docs: {
-      description: 'Require gap spacing on row and column layouts.',
+      description: 'Require gap spacing on row, column, and grid layouts.',
       category: 'Best Practice',
       recommended: true,
       url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`

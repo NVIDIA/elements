@@ -471,7 +471,7 @@ export class DocsSearch extends LitElement {
 
   #renderSearchResult(result: SearchResult) {
     return html`
-      <a href="${this.baseUrl}${result.url}" nve-layout="column pad-top:xs">
+      <a href="${this.baseUrl}${result.url}" nve-layout="pad-top:xs">
         <div nve-layout="row gap:sm pad-top:xs pad-left:xs">
           <nve-icon name="${result.icon}" size="md" style="${result.style}"></nve-icon>
           <div nve-layout="column gap:xs">

@@ -17,10 +17,10 @@ describe('PlaygroundService', () => {
     const env = process.env.ELEMENTS_ENV;
     process.env.ELEMENTS_ENV = 'mcp';
     const result = await PlaygroundService.validate({
-      template: '<nve-button nve-layout="column">hello there</nve-button>'
+      template: '<nve-button nve-layout="column gap:sm">hello there</nve-button>'
     });
     expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toBe(2);
+    expect(result.length).toBe(1);
     expect(result[0].message).toContain(
       'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
     );
@@ -28,10 +28,7 @@ describe('PlaygroundService', () => {
     expect(result[0].line).toBe(1);
     expect(result[0].column).toBe(13);
     expect(result[0].endLine).toBe(1);
-    expect(result[0].endColumn).toBe(32);
-    expect(result[1].message).toBe(
-      'Layout "column" is missing gap spacing. Add a gap value such as "xs", "sm", "md", "lg", "xl"'
-    );
+    expect(result[0].endColumn).toBe(39);
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(
@@ -136,13 +133,13 @@ describe('PlaygroundService', () => {
       const createTool = tools.find(tool => tool.metadata.name === 'create');
 
       const result = (await createTool?.({
-        template: '<nve-button nve-layout="column">hello</nve-button>',
+        template: '<nve-button nve-layout="column gap:sm">hello</nve-button>',
         start: false
       })) as ToolOutput<{ message: string }[]>;
 
       expect(result.status).toBe('error');
       expect(result.message).toBe('Template validation failed');
-      expect(result.result).toHaveLength(2);
+      expect(result.result).toHaveLength(1);
       expect(result.result?.[0]?.message).toContain(
         'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
       );

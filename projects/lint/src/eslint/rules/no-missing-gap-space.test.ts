@@ -54,7 +54,7 @@ describe('noMissingGapSpace', () => {
     expect(noMissingGapSpace.meta.type).toBe('problem');
     expect(noMissingGapSpace.meta.hasSuggestions).toBe(true);
     expect(noMissingGapSpace.meta.docs).toBeDefined();
-    expect(noMissingGapSpace.meta.docs.description).toBe('Require gap spacing on row and column layouts.');
+    expect(noMissingGapSpace.meta.docs.description).toBe('Require gap spacing on row, column, and grid layouts.');
     expect(noMissingGapSpace.meta.docs.category).toBe('Best Practice');
     expect(noMissingGapSpace.meta.docs.recommended).toBe(true);
     expect(noMissingGapSpace.meta.docs.url).toContain('/docs/lint/');
@@ -93,7 +93,18 @@ describe('noMissingGapSpace', () => {
       valid: ['row', 'column', 'grid'].flatMap(layout =>
         GAP_OPTIONAL_VALUES.map(value => `<div nve-layout="${layout} ${value}"></div>`)
       ),
-      invalid: []
+      invalid: [
+        {
+          code: '<div nve-layout="grid"></div>',
+          errors: [
+            {
+              messageId: 'missing-gap-space',
+              data: { layout: 'grid' },
+              suggestions: gapSuggestions('grid')
+            }
+          ]
+        }
+      ]
     });
   });
 
@@ -122,6 +133,24 @@ describe('noMissingGapSpace', () => {
       invalid: [
         {
           code: '<div nve-layout="row"></div>',
+          errors: [
+            {
+              messageId: 'missing-gap-space',
+              data: { layout: 'row' },
+              suggestions: gapSuggestions('row')
+            }
+          ]
+        }
+      ]
+    });
+  });
+
+  it('should quote unquoted layout values in suggestions', () => {
+    tester.run('should quote unquoted layout values in suggestions', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<div nve-layout=row></div>',
           errors: [
             {
               messageId: 'missing-gap-space',
