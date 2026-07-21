@@ -114,25 +114,44 @@ function getAPIDescriptionMarkdown(api: PartialAPIResult) {
   return wrapText(description).trim();
 }
 
-function getAttributeExampleContext(attribute: Attribute) {
-  if (attribute.name === 'nve-layout') {
-    return /* html */ `
+const NVE_LAYOUT_EXAMPLE = /* html */ `
+<!-- import path layout styles -->
+<style>
+  @import "@nvidia-elements/styles/layout.css";
+</style>
+
+<!-- inline row layout -->
 <section nve-layout="row gap:sm">
   <div></div>
   <div></div>
   <div></div>
 </section>
+
+<!-- stacked column layout -->
 <section nve-layout="column gap:sm">
   <div></div>
   <div></div>
   <div></div>
 </section>
+
+<!-- 12 column grid layout with 6 column span -->
 <section nve-layout="grid gap:sm span-items:6">
   <div>columns 1-6</div>
   <div>columns 7-12</div>
+</section>
+
+<!-- 12 column grid layout with variable column span -->
+<section nve-layout="grid gap:sm">
+  <div nve-layout="span:4">columns 1-4</div>
+  <div nve-layout="span:8">columns 5-12</div>
 </section>`;
-  } else if (attribute.name === 'nve-text') {
-    return /* html */ `
+
+const NVE_TEXT_EXAMPLE = /* html */ `
+<!-- import path typography styles -->
+<style>
+  @import "@nvidia-elements/styles/typography.css";
+</style>
+
 <h1 nve-text="heading">heading</h1>
 <p nve-text="body">body</p>
 <p nve-text="label">label</p>
@@ -152,6 +171,12 @@ function getAttributeExampleContext(attribute: Attribute) {
 <p nve-text="start">start</p>
 <p nve-text="center">center</p>
 <p nve-text="end">end</p>`;
+
+function getAttributeExampleContext(attribute: Attribute) {
+  if (attribute.name === 'nve-layout') {
+    return NVE_LAYOUT_EXAMPLE;
+  } else if (attribute.name === 'nve-text') {
+    return NVE_TEXT_EXAMPLE;
   }
   return attribute.example ?? '';
 }

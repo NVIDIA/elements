@@ -1,7 +1,7 @@
 ---
 {
   title: 'Skills',
-  description: 'Use NVIDIA Elements skills to give AI agents persistent project context, workflow guidance, and access to Elements UI authoring practices.',
+  description: 'NVIDIA skills to give AI agents persistent project context, workflow guidance, and access to NVIDIA Elements UI authoring practices.',
   layout: 'docs.11ty.js'
 }
 ---
