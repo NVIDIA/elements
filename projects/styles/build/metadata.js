@@ -43,9 +43,11 @@ async function generateGlobalAttributes(files, attributes) {
   for (const [attribute, values] of Object.entries(utilityAttributes)) {
     let description = '';
     if (attribute === 'nve-layout') {
-      description = 'Layout utility for native HTML elements';
+      description =
+        'Layout utility for native HTML elements. Apply only to native HTML elements, not nve-* custom elements.';
     } else if (attribute === 'nve-text') {
-      description = 'Typography style utility for native HTML elements';
+      description =
+        'Typography style utility for native HTML elements. Apply only to native HTML elements, not nve-* custom elements.';
     } else if (attribute === 'nve-display') {
       description = 'Display utility for native HTML elements';
     }
