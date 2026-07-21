@@ -1,3 +1,9 @@
+## <small>2.1.5 (2026-07-21)</small>
+
+* fix(core): generate valid standalone framework declarations ([1544477](https://github.com/NVIDIA/elements/commit/1544477))
+* chore(release): @nvidia-elements/cli-v2.1.6 [skip ci] ([d6e9957](https://github.com/NVIDIA/elements/commit/d6e9957))
+* chore(release): @nvidia-elements/lint-v2.1.2 [skip ci] ([3b700cd](https://github.com/NVIDIA/elements/commit/3b700cd))
+
 ## <small>2.1.4 (2026-07-21)</small>
 
 * chore(ci): update lighthouse ([b5b71ca](https://github.com/NVIDIA/elements/commit/b5b71ca))
