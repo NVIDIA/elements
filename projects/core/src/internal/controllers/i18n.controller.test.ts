@@ -74,7 +74,21 @@ describe('i18n.controller', () => {
       files: 'files',
       dragAndDrop: 'drag & drop',
       browseFiles: 'browse files',
-      maxFileSize: 'max file size'
+      maxFileSize: 'max file size',
+      currentTime: 'current time',
+      enterFullscreen: 'enter full screen',
+      exitFullscreen: 'exit full screen',
+      muteMedia: 'mute media',
+      pauseMedia: 'pause media',
+      playMedia: 'play media',
+      playbackRate: 'playback rate',
+      playbackRateOption: '{rate}x',
+      seekBackward: 'seek backward {value} seconds',
+      seekForward: 'seek forward {value} seconds',
+      seekToEnd: 'seek to end',
+      seekToStart: 'seek to start',
+      unmuteMedia: 'unmute media',
+      volume: 'volume'
     });
   });
 
@@ -131,7 +145,21 @@ describe('i18n.controller', () => {
       files: 'files',
       dragAndDrop: 'drag & drop',
       browseFiles: 'browse files',
-      maxFileSize: 'max file size'
+      maxFileSize: 'max file size',
+      currentTime: 'current time',
+      enterFullscreen: 'enter full screen',
+      exitFullscreen: 'exit full screen',
+      muteMedia: 'mute media',
+      pauseMedia: 'pause media',
+      playMedia: 'play media',
+      playbackRate: 'playback rate',
+      playbackRateOption: '{rate}x',
+      seekBackward: 'seek backward {value} seconds',
+      seekForward: 'seek forward {value} seconds',
+      seekToEnd: 'seek to end',
+      seekToStart: 'seek to start',
+      unmuteMedia: 'unmute media',
+      volume: 'volume'
     });
   });
 });

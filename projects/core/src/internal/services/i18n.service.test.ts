@@ -48,14 +48,27 @@ describe('I18nService', () => {
       dragAndDrop: 'drag & drop',
       browseFiles: 'browse files',
       maxFileSize: 'max file size',
-      create: 'create'
+      create: 'create',
+      currentTime: 'current time',
+      enterFullscreen: 'enter full screen',
+      exitFullscreen: 'exit full screen',
+      muteMedia: 'mute media',
+      pauseMedia: 'pause media',
+      playMedia: 'play media',
+      playbackRate: 'playback rate',
+      playbackRateOption: '{rate}x',
+      seekBackward: 'seek backward {value} seconds',
+      seekForward: 'seek forward {value} seconds',
+      seekToEnd: 'seek to end',
+      seekToStart: 'seek to start',
+      unmuteMedia: 'unmute media',
+      volume: 'volume'
     });
   });
 
   it('should update i18n state', () => {
     const original = { ...I18nService.i18n };
-
-    I18nService.update({
+    const translations = {
       close: 'fermer',
       copy: 'copie',
       copied: 'copié',
@@ -93,47 +106,11 @@ describe('I18nService', () => {
       browseFiles: 'browse files',
       maxFileSize: 'max file size',
       create: 'créer'
-    });
+    };
 
-    expect(I18nService.i18n).toStrictEqual({
-      close: 'fermer',
-      copy: 'copie',
-      copied: 'copié',
-      expand: 'étendre',
-      select: 'choisir',
-      selected: 'choisir',
-      sort: 'classer',
-      show: 'montrer',
-      hide: 'cacher',
-      loading: 'bourrage',
-      previous: 'précédente',
-      next: 'suivante',
-      start: 'page de démarrage',
-      end: 'page de fin',
-      currentPage: 'page actuelle',
-      noResults: 'aucun résultat',
-      status: 'statut',
-      information: 'information',
-      warning: 'avertissement',
-      success: 'succès',
-      danger: 'danger',
-      trend: "s'orienter",
-      down: 'vers le bas',
-      up: 'en haut',
-      neutral: 'neutre',
-      of: 'de',
-      theme: 'thème',
-      scale: 'échelle',
-      reducedMotion: 'mouvement réduit',
-      colorScheme: 'schéma de couleur',
-      resize: 'redimensionner',
-      or: 'or',
-      files: 'files',
-      dragAndDrop: 'drag & drop',
-      browseFiles: 'browse files',
-      maxFileSize: 'max file size',
-      create: 'créer'
-    });
+    I18nService.update(translations);
+
+    expect(I18nService.i18n).toStrictEqual({ ...original, ...translations });
 
     I18nService.update(original);
   });
