@@ -40,6 +40,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./data.html.json": "./dist/data.html.json",
     "./*.examples.json": "./dist/*.examples.json",
     ".": {
       "types": "./dist/index.d.ts",
