@@ -5,6 +5,65 @@ import { generateVsCodeCustomElementData } from 'custom-element-vs-code-integrat
 
 const resolve = rel => path.join(process.cwd(), rel);
 
+function getCustomDataPaths(packageJson) {
+  const customDataPaths = packageJson.contributes?.html?.customData;
+  if (customDataPaths === undefined) return [];
+
+  if (
+    !Array.isArray(customDataPaths) ||
+    customDataPaths.length === 0 ||
+    customDataPaths.some(customDataPath => typeof customDataPath !== 'string')
+  ) {
+    throw new Error(
+      `${packageJson.name}: contributes.html.customData must be a non-empty array of package-relative paths.`
+    );
+  }
+
+  return customDataPaths;
+}
+
+function isPackageRelativePath(packagePath) {
+  return packagePath.startsWith('./') && !packagePath.split('/').includes('..');
+}
+
+function getPackagePath(packageDirectory, packagePath) {
+  if (!isPackageRelativePath(packagePath)) return undefined;
+
+  const resolvedPath = path.resolve(packageDirectory, packagePath);
+  const pathFromPackage = path.relative(packageDirectory, resolvedPath);
+  return pathFromPackage.startsWith('..') || pathFromPackage === '' ? undefined : resolvedPath;
+}
+
+function hasManifestTags(manifest) {
+  return (manifest.modules ?? []).some(module => (module.declarations ?? []).some(declaration => declaration.tagName));
+}
+
+export function getCustomDataOutputs(packageJson, manifest, packageDirectory) {
+  const customDataPaths = getCustomDataPaths(packageJson);
+  const hasComponents = hasManifestTags(manifest);
+  const customDataOutputs = customDataPaths.map(customDataPath => {
+    const outputPath = getPackagePath(packageDirectory, customDataPath);
+    if (!outputPath) {
+      throw new Error(
+        `${packageJson.name}: contributes.html.customData path "${customDataPath}" must be package-relative.`
+      );
+    }
+
+    return {
+      outdir: path.dirname(outputPath),
+      htmlFileName: path.basename(outputPath)
+    };
+  });
+
+  if (hasComponents && customDataOutputs.length === 0) {
+    throw new Error(
+      `${packageJson.name}: Custom Elements Manifest declares tags but contributes.html.customData is missing.`
+    );
+  }
+
+  return hasComponents ? customDataOutputs : [];
+}
+
 function normalizeURL(value) {
   if (typeof value !== 'string') {
     return null;
@@ -45,9 +104,10 @@ export function cem() {
           : new URL('cem.config.mjs', import.meta.url).toString().replace('file://', '');
 
         const manifest = await cli({ argv: ['analyze', '--config', configPath, '--outdir', './dist'] });
-        const hasComponents = manifest.modules.flatMap(module => module.declarations).find(d => d.tagName);
+        const packageJson = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf8'));
+        const customDataOutputs = getCustomDataOutputs(packageJson, manifest, process.cwd());
 
-        if (hasComponents) {
+        if (customDataOutputs.length > 0) {
           // deep clone
           const vsCodeManifest = structuredClone(manifest);
           vsCodeManifest.modules.forEach(module => {
@@ -58,19 +118,20 @@ export function cem() {
               });
           });
 
-          generateVsCodeCustomElementData(vsCodeManifest, {
-            outdir: resolve('./dist'),
-            htmlFileName: 'data.html.json',
-            cssFileName: null,
-            referencesTemplate: (_name, tag) => {
-              const declaration = vsCodeManifest.modules
-                .flatMap(module => module.declarations)
-                .find(d => d.tagName === tag);
-              return Object.entries(declaration?.metadata ?? {}).flatMap(([name, value]) => {
-                const reference = generateVsCodeCustomElementDataReference(name, value);
-                return reference ? [reference] : [];
-              });
-            }
+          customDataOutputs.forEach(output => {
+            generateVsCodeCustomElementData(vsCodeManifest, {
+              ...output,
+              cssFileName: null,
+              referencesTemplate: (_name, tag) => {
+                const declaration = vsCodeManifest.modules
+                  .flatMap(module => module.declarations)
+                  .find(d => d.tagName === tag);
+                return Object.entries(declaration?.metadata ?? {}).flatMap(([name, value]) => {
+                  const reference = generateVsCodeCustomElementDataReference(name, value);
+                  return reference ? [reference] : [];
+                });
+              }
+            });
           });
         }
       }
