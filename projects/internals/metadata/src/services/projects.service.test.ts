@@ -9,5 +9,6 @@ describe('ProjectsService', () => {
     const projects = await ProjectsService.getData();
     expect(projects).toBeDefined();
     expect(projects.data.length).toBeGreaterThan(0);
+    expect(await ProjectsService.getData()).toBe(projects);
   });
 });

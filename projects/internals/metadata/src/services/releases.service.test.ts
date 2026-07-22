@@ -12,5 +12,6 @@ describe('ReleasesService', () => {
     expect(releases.data).toBeDefined();
     expect(releases.data.length).toBeGreaterThan(1);
     expect(releases.data.some(release => release.name === '@nvidia-elements/core-v2.0.2')).toBe(true);
+    expect(await ReleasesService.getData()).toBe(releases);
   });
 });

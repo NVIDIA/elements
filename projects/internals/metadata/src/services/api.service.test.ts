@@ -39,4 +39,10 @@ describe('ApiService', () => {
     // Both searches should return the same top results since "nve" is a stop word
     expect(badgeResults[0]?.name).toBe(nveBadgeResults[0]?.name);
   });
+
+  it('should prioritize exact matches over fuzzy matches', async () => {
+    const results = await ApiService.search('nve-button');
+
+    expect(results[0]?.name).toBe('nve-button');
+  });
 });
