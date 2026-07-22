@@ -1,3 +1,9 @@
+## <small>2.1.6 (2026-07-22)</small>
+
+* fix(core): clipping descenders on toolbar typography ([7965c3c](https://github.com/NVIDIA/elements/commit/7965c3c))
+* fix(lint): update no-missing-gap-space rule to allow gap-optional values ([df74628](https://github.com/NVIDIA/elements/commit/df74628))
+* chore(ci): disable no-missing-gap-space rule for specific test files ([47ae4ff](https://github.com/NVIDIA/elements/commit/47ae4ff))
+
 ## <small>2.1.5 (2026-07-21)</small>
 
 * fix(core): generate valid standalone framework declarations ([1544477](https://github.com/NVIDIA/elements/commit/1544477))
