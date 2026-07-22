@@ -1,3 +1,13 @@
+## <small>2.1.3 (2026-07-22)</small>
+
+* chore(ci): disable no-missing-gap-space rule for specific test files ([47ae4ff](https://github.com/NVIDIA/elements/commit/47ae4ff))
+* chore(release): @nvidia-elements/cli-v2.1.6 [skip ci] ([d6e9957](https://github.com/NVIDIA/elements/commit/d6e9957))
+* chore(release): @nvidia-elements/core-v2.1.5 [skip ci] ([a704fbe](https://github.com/NVIDIA/elements/commit/a704fbe))
+* chore(release): @nvidia-elements/core-v2.1.6 [skip ci] ([4a3a305](https://github.com/NVIDIA/elements/commit/4a3a305))
+* fix(core): clipping descenders on toolbar typography ([7965c3c](https://github.com/NVIDIA/elements/commit/7965c3c))
+* fix(core): generate valid standalone framework declarations ([1544477](https://github.com/NVIDIA/elements/commit/1544477))
+* fix(lint): update no-missing-gap-space rule to allow gap-optional values ([df74628](https://github.com/NVIDIA/elements/commit/df74628))
+
 ## <small>2.1.2 (2026-07-21)</small>
 
 * chore(ci): update lighthouse ([b5b71ca](https://github.com/NVIDIA/elements/commit/b5b71ca))
