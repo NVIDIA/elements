@@ -1,5 +1,6 @@
 import json from '@eslint/json';
 import noUnpinnedDependencyRanges from '../local/no-unpinned-dependency-ranges.js';
+import requireHtmlCustomDataContract from '../local/require-html-custom-data-contract.js';
 
 const source = ['package.json'];
 const ignores = [
@@ -26,12 +27,14 @@ export const jsonConfig = [
       json,
       'local-json': {
         rules: {
-          'no-unpinned-dependency-ranges': noUnpinnedDependencyRanges
+          'no-unpinned-dependency-ranges': noUnpinnedDependencyRanges,
+          'require-html-custom-data-contract': requireHtmlCustomDataContract
         }
       }
     },
     rules: {
-      'local-json/no-unpinned-dependency-ranges': ['error']
+      'local-json/no-unpinned-dependency-ranges': ['error'],
+      'local-json/require-html-custom-data-contract': ['error']
     }
   }
 ];

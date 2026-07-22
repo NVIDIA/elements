@@ -7,7 +7,8 @@
     "playwright-lock": "./src/playwright/index.js"
   },
   "scripts": {
-    "ci": "wireit"
+    "ci": "wireit",
+    "test": "wireit"
   },
   "exports": {
     ".": "./src/index.js",
@@ -46,10 +47,20 @@
   },
   "wireit": {
     "ci": {
+      "dependencies": [
+        "test"
+      ],
       "files": [
         "src",
         "!src/playwright/locks"
       ]
+    },
+    "test": {
+      "command": "node --test 'src/**/*.test.js'",
+      "files": [
+        "src/**/*.js"
+      ],
+      "output": []
     }
   }
 }
