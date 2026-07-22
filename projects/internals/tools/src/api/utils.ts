@@ -205,7 +205,8 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
       names.map(async name => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 3000);
-        return fetch(`${NPM_REGISTRY_URL}/${name}/latest`, { signal: controller.signal })
+        const url = `${NPM_REGISTRY_URL}/${name}/latest`;
+        return fetch(url, { signal: controller.signal })
           .then(res => {
             if (!res.ok) {
               throw new Error(`Failed to fetch ${name} from ${NPM_REGISTRY_URL}: ${res.status} ${res.statusText}`);
@@ -213,7 +214,7 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
             return res.json();
           })
           .catch(() => {
-            const message = `Could not fetch latest versions from ${NPM_REGISTRY_URL}`;
+            const message = `Could not fetch latest version from ${url}`;
             if (process.env.ELEMENTS_ENV === 'mcp') {
               throw new Error(message);
             } else {

@@ -1,4 +1,5 @@
 import { siteData } from '../../index.11tydata.js';
+import { getContentDates } from '../utils/content-dates.js';
 import { BASE_URL, DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 
 export { BASE_URL };
@@ -414,21 +415,6 @@ function isApiReferencePage(data, meta) {
   );
 }
 
-function normalizeDate(value) {
-  if (value instanceof Date) return value.toISOString();
-  if (typeof value !== 'string') return null;
-
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date.toISOString();
-}
-
-function getContentDates(data) {
-  return {
-    datePublished: normalizeDate(data.datePublished ?? data.published ?? data.git?.created ?? data.git?.createdTime),
-    dateModified: normalizeDate(data.dateModified ?? data.modified ?? data.git?.modified ?? data.git?.modifiedTime)
-  };
-}
-
 function getAuthor() {
   return {
     '@id': AUTHOR_ID,
@@ -451,6 +437,7 @@ function getAuthor() {
 function getArticle(data, meta) {
   const isDocs = meta.url.startsWith('/docs/');
   const isApiReference = isApiReferencePage(data, meta);
+  const isUpdate = data.tags?.includes('updates');
   const element = findElementByTag(data.tag ?? data.component?.data?.tag);
   const dates = getContentDates(data);
   const article = {
@@ -460,9 +447,11 @@ function getArticle(data, meta) {
         ? 'CollectionPage'
         : isApiReference
           ? 'APIReference'
-          : isDocs
-            ? 'TechArticle'
-            : 'WebPage',
+          : isUpdate
+            ? 'BlogPosting'
+            : isDocs
+              ? 'TechArticle'
+              : 'WebPage',
     headline: meta.title,
     description: meta.description,
     url: meta.canonicalUrl,

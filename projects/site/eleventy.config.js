@@ -19,6 +19,7 @@ import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { agentSkillsPlugin } from './src/_11ty/plugins/agent-skills.js';
 import { llmsTxtPlugin } from './src/_11ty/plugins/llms-txt.js';
 import { sitemapPlugin } from './src/_11ty/plugins/sitemap-xml.js';
+import { updatesFeedPlugin } from './src/_11ty/plugins/updates-feed.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { siteUrlsTransform } from './src/_11ty/transforms/site-urls.js';
@@ -206,6 +207,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin, {
     baseHref: process.env.ELEVENTY_RUN_MODE === 'build' ? ELEMENTS_SITE_ORIGIN : '/'
   });
+  eleventyConfig.addPlugin(updatesFeedPlugin);
   eleventyConfig.addTransform('site-urls', siteUrlsTransform);
 
   if (process.env.ELEVENTY_RUN_MODE === 'build') {

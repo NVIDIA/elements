@@ -243,6 +243,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "catalog:",
+    "@11ty/eleventy-plugin-rss": "3.0.0",
     "@11ty/eleventy-plugin-vite": "catalog:",
     "@eslint/js": "catalog:",
     "@internals/eslint": "workspace:*",
