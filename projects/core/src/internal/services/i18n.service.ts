@@ -41,6 +41,20 @@ export interface I18nStrings {
   browseFiles: string;
   maxFileSize: string;
   create: string;
+  currentTime: string;
+  enterFullscreen: string;
+  exitFullscreen: string;
+  muteMedia: string;
+  pauseMedia: string;
+  playMedia: string;
+  playbackRate: string;
+  playbackRateOption: string;
+  seekBackward: string;
+  seekForward: string;
+  seekToEnd: string;
+  seekToStart: string;
+  unmuteMedia: string;
+  volume: string;
 }
 
 const i18nRegistry = {
@@ -80,7 +94,21 @@ const i18nRegistry = {
   dragAndDrop: 'drag & drop',
   browseFiles: 'browse files',
   maxFileSize: 'max file size',
-  create: 'create'
+  create: 'create',
+  currentTime: 'current time',
+  enterFullscreen: 'enter full screen',
+  exitFullscreen: 'exit full screen',
+  muteMedia: 'mute media',
+  pauseMedia: 'pause media',
+  playMedia: 'play media',
+  playbackRate: 'playback rate',
+  playbackRateOption: '{rate}x',
+  seekBackward: 'seek backward {value} seconds',
+  seekForward: 'seek forward {value} seconds',
+  seekToEnd: 'seek to end',
+  seekToStart: 'seek to start',
+  unmuteMedia: 'unmute media',
+  volume: 'volume'
 };
 
 export class I18nService_ {
