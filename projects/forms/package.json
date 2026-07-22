@@ -19,11 +19,6 @@
   "type": "module",
   "customElements": "dist/custom-elements.json",
   "contributes": {
-    "html": {
-      "customData": [
-        "./dist/data.html.json"
-      ]
-    },
     "snippets": [
       {
         "language": "html",
