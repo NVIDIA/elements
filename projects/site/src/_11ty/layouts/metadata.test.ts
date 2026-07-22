@@ -116,7 +116,10 @@ interface PageData {
     all: { url: string }[];
   };
   content?: string;
+  dateModified?: Date | string;
+  datePublished?: Date | string;
   tag?: string;
+  tags?: string[];
 }
 
 function createMeta(url: string, overrides: Partial<MetadataInput> = {}): MetadataInput {
@@ -384,6 +387,22 @@ describe('renderBaseHead', () => {
       '<link rel="alternate" type="text/plain" title="llms.txt" href="https://nvidia.github.io/elements/llms.txt">'
     );
   });
+
+  it('should expose RSS and Atom update feeds for html discovery', () => {
+    const html = renderBaseHead({
+      page: { url: '/' },
+      collections: { all: [] },
+      title: 'Test Page',
+      description: 'Test description.'
+    });
+
+    expect(html).toContain(
+      '<link rel="alternate" type="application/rss+xml" title="NVIDIA Elements updates (RSS)" href="https://nvidia.github.io/elements/feed.xml">'
+    );
+    expect(html).toContain(
+      '<link rel="alternate" type="application/atom+xml" title="NVIDIA Elements updates (Atom)" href="https://nvidia.github.io/elements/atom.xml">'
+    );
+  });
 });
 
 describe('renderDocsNav', () => {
@@ -568,6 +587,26 @@ describe('renderJsonLd', () => {
 
     expect(article).not.toHaveProperty('datePublished');
     expect(article).not.toHaveProperty('dateModified');
+  });
+
+  it('should emit update posts as dated BlogPosting schema', () => {
+    const graph = getGraph(
+      createData({
+        dateModified: '2026-07-24',
+        datePublished: '2026-07-22',
+        tags: ['whats-new', 'updates']
+      }),
+      createMeta('/docs/whats-new/06-2026/')
+    );
+    const article = findNode(graph, 'BlogPosting');
+
+    expect(article).toMatchObject({
+      dateModified: '2026-07-24T00:00:00.000Z',
+      datePublished: '2026-07-22T00:00:00.000Z',
+      headline: 'Test Page | NVIDIA Elements',
+      mainEntityOfPage: 'https://nvidia.github.io/elements/docs/whats-new/06-2026/'
+    });
+    expect(findNode(graph, 'TechArticle')).toBeUndefined();
   });
 
   it('should omit non-generated breadcrumb pages from structured data', () => {

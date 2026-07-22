@@ -18,8 +18,8 @@ export function render(data) {
       <body>
         <nve-page>
           <nve-page-header slot="header">
-            <nve-logo slot="prefix" color="brand-green" size="sm" aria-label="NVIDIA Elements">NV</nve-logo>
-            <a slot="prefix" href="/">Elements</a>
+            <nve-logo slot="prefix" color="brand-green" size="sm" aria-label="NVIDIA Elements Design System">NV</nve-logo>
+            <a slot="prefix" href="/">NVIDIA Elements</a>
             <nve-button container="flat"><a href="/">Catalog</a></nve-button>
             ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
             <nve-button container="flat"><a href="/docs/integrations/">Starters</a></nve-button>

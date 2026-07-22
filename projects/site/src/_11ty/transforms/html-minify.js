@@ -3,7 +3,17 @@
 
 import htmlMinify from 'html-minifier-next';
 
-export async function htmlMinifyTransform(content) {
+const IS_FULL_HTML_DOCUMENT = /<!doctype|<html[\s>]/i;
+
+function isHtmlOutput(outputPath, content) {
+  if (outputPath) return outputPath.endsWith('.html');
+
+  return IS_FULL_HTML_DOCUMENT.test(content);
+}
+
+export async function htmlMinifyTransform(content, outputPath) {
+  if (!isHtmlOutput(outputPath ?? this.page?.outputPath, content)) return content;
+
   let result = '';
   try {
     result = process.env.ELEVENTY_RUN_MODE !== 'watch' ? await minifyHTML(content) : content;

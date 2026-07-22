@@ -171,6 +171,7 @@ h3[nve-text*='mkd'] {
   display: flex;
   align-items: center;
   gap: var(--nve-ref-space-sm);
+  width: 100%;
 }
 
 h2#installation {

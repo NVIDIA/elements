@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isSitemapPageUrl } from './sitemap-xml.js';
+import { isSitemapPageUrl, renderSitemap } from './sitemap-xml.js';
 
 describe('isSitemapPageUrl', () => {
   it('should include crawlable html pages', () => {
@@ -20,5 +20,24 @@ describe('isSitemapPageUrl', () => {
     expect(isSitemapPageUrl('/docs/changelog/')).toBe(false);
     expect(isSitemapPageUrl('/docs/metrics/')).toBe(false);
     expect(isSitemapPageUrl('/examples/')).toBe(false);
+  });
+
+  it('should emit lastmod only from explicit modification metadata', () => {
+    const sitemap = renderSitemap([
+      {
+        content: '<script type="application/ld+json">{"dateModified":"2026-07-24T00:00:00.000Z"}</script>',
+        url: '/docs/whats-new/06-2026/'
+      },
+      {
+        content: '<code>{"dateModified":"2026-07-25T00:00:00.000Z"}</code>',
+        url: '/docs/about/support/'
+      }
+    ]);
+
+    expect(sitemap).toContain(
+      '<loc>https://nvidia.github.io/elements/docs/whats-new/06-2026/</loc>\n<lastmod>2026-07-24T00:00:00.000Z</lastmod>'
+    );
+    expect(sitemap).toContain('<loc>https://nvidia.github.io/elements/docs/about/support/</loc>');
+    expect(sitemap.match(/<lastmod>/g)).toHaveLength(1);
   });
 });

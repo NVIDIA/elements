@@ -2,7 +2,8 @@
 /* global process */
 
 import { ELEMENTS_PLAYGROUND_BASE_URL, ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
-import { DEPLOYED_SITE_URL } from '../utils/site-url.js';
+import { UPDATE_FEEDS } from '../plugins/updates-feed.js';
+import { DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 import {
   AUTHOR_CREDENTIALS,
   AUTHOR_NAME,
@@ -31,6 +32,8 @@ export const renderBaseHead = data => {
   <meta name="author" content="${escapeAttr(AUTHOR_NAME)}">
   <link rel="canonical" href="${meta.canonicalUrl}">
   <link rel="alternate" type="text/plain" title="llms.txt" href="${DEPLOYED_SITE_URL}/llms.txt">
+  ${UPDATE_FEEDS.map(({ label, outputPath, type }) => `<link rel="alternate" type="application/${type}+xml" title="NVIDIA Elements updates (${label})" href="${getSiteUrl(outputPath)}">`).join('\n  ')}
+  <link href="https://github.com/NVIDIA/elements" rel="me">
   <meta property="og:title" content="${escapeAttr(meta.title)}">
   <meta property="og:url" content="${meta.canonicalUrl}">
   <meta property="og:description" content="${escapeAttr(meta.description)}">
@@ -168,8 +171,9 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted selected' : ''}><a href="/docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
-    <a href="/docs/changelog/">About</a>
+  <nve-tree-node ${data.page.url.includes('/docs/whats-new/') || data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
+    <a href="/docs/whats-new/">About</a>
+    <nve-tree-node ${data.page.url.includes('/docs/whats-new/') ? 'highlighted selected' : ''}><a href="/docs/whats-new/">What’s New</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="/docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="/docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="/docs/about/support/">Support</a></nve-tree-node>
@@ -437,8 +441,8 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
 export function renderBasePageHeader(data) {
   return /* html */ `
 <nve-page-header slot="header">
-  <nve-logo slot="prefix" color="brand-green" size="sm">NV</nve-logo>
-  <a slot="prefix" href="/">Elements</a>
+  <nve-logo slot="prefix" color="brand-green" size="sm" aria-label="NVIDIA Elements Design System">NV</nve-logo>
+  <a slot="prefix" href="/">NVIDIA Elements</a>
   <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="/">Catalog</a></nve-button>
   ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat" class="header-btn"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
   <nve-button container="flat" class="header-btn"><a href="/docs/integrations/">Starters</a></nve-button>

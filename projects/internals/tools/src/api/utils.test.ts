@@ -132,6 +132,8 @@ describe('getContextAPIs', () => {
 
 describe('getLatestPublishedVersions', () => {
   const projects = [{ name: '@nvidia-elements/core', version: '1.0.0', description: '', readme: '', changelog: '' }];
+  const fetchErrorMessage =
+    'Could not fetch latest version from https://registry.npmjs.org/@nvidia-elements/core/latest';
 
   beforeEach(() => {
     vi.resetModules();
@@ -148,7 +150,7 @@ describe('getLatestPublishedVersions', () => {
     vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
     const { getLatestPublishedVersions } = await import('./utils.js');
 
-    await expect(getLatestPublishedVersions(projects)).rejects.toThrow(/Could not fetch latest versions from/);
+    await expect(getLatestPublishedVersions(projects)).rejects.toThrow(fetchErrorMessage);
   });
 
   it.each(['cli', 'dev'])(
@@ -161,7 +163,7 @@ describe('getLatestPublishedVersions', () => {
 
       const result = await getLatestPublishedVersions(projects);
 
-      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Could not fetch latest versions from'));
+      expect(warnSpy).toHaveBeenCalledWith(fetchErrorMessage);
       expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
     }
   );

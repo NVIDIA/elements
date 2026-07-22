@@ -13,6 +13,7 @@ async function importLlmsTxt() {
 
 afterEach(() => {
   vi.unstubAllEnvs();
+  vi.resetModules();
 });
 
 describe('createLlmsTxtContent', () => {
