@@ -29,7 +29,7 @@ import globalStyles from './grid.global.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/data-grid/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
- * @slot - default slot for content
+ * @slot - `nve-grid-header`, `nve-grid-row`, and `nve-grid-placeholder` elements.
  * @slot footer - slot for grid-footer or toolbar
  * @cssprop --background
  * @cssprop --color

@@ -14,7 +14,7 @@ import styles from './column.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/data-grid/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
- * @slot - default slot for content
+ * @slot - Column heading text or controls.
  * @slot actions - slot for column actions
  * @cssprop --color
  * @cssprop --padding

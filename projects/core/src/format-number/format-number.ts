@@ -110,7 +110,8 @@ export class FormatNumber extends LitElement {
   /**
    * Grouping separators: 'auto' | 'always' | 'min2' | 'true' | 'false'.
    */
-  @property({ type: String, attribute: 'use-grouping' }) useGrouping?: string;
+  @property({ type: String, attribute: 'use-grouping' })
+  useGrouping?: 'auto' | 'always' | 'min2' | 'true' | 'false' | boolean;
 
   /**
    * Pad fraction output to at least this many digits (0-20).

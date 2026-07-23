@@ -27,6 +27,7 @@ export class PagePanelFooter extends LitElement {
     version: '0.0.0'
   };
 
+  /** @private */
   @hostAttr() slot = 'footer';
 
   render() {

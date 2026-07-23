@@ -12,7 +12,7 @@ import styles from './skeleton.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/skeleton/
  * @since 1.44.0
  * @entrypoint \@nvidia-elements/core/skeleton
- * @slot - default content slot
+ * @slot - Loaded content that replaces the placeholder when provided.
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --min-height
@@ -32,7 +32,7 @@ export class Skeleton extends LitElement {
   /** Geometry of the placeholder — rounded corners or a full pill outline. */
   @property({ type: String, reflect: true }) shape: 'round' | 'pill';
 
-  /** Whether the skeleton hides its content */
+  /** Hides the skeleton host when `true` and sets `aria-busy` to the inverse visibility state. */
   @property({ type: Boolean, reflect: true }) hidden = false;
 
   /** @private */
