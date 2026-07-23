@@ -22,7 +22,7 @@ const statusIcons = {
  * @documentation https://nvidia.github.io/elements/docs/elements/control/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/forms
- * @slot - default slot for content
+ * @slot - Validation or supporting message text for the associated control.
  * @cssprop --color
  * @cssprop --font-weight
  * @cssprop --font-size
@@ -54,6 +54,7 @@ export class ControlMessage extends LitElement {
     [Icon.metadata.tag]: Icon
   };
 
+  /** @private */
   @hostAttr() slot = 'messages';
 
   render() {

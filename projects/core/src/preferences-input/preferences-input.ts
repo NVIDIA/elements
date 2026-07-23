@@ -13,6 +13,9 @@ import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 import { Switch } from '@nvidia-elements/core/switch';
 import styles from './preferences-input.css?inline';
 
+/* eslint-disable jsdoc/no-types */
+// Explicit JSDoc types because the CEM analyzer loses the inherited generic specialization.
+
 export type ColorScheme = 'auto' | 'light' | 'dark' | 'high-contrast';
 export type Scale = 'default' | 'compact' | 'relaxed';
 export type Variant = 'reduced-motion';
@@ -50,6 +53,8 @@ export interface PreferencesInputValue {
  * @documentation https://nvidia.github.io/elements/docs/elements/preferences-input/
  * @since 1.23.7
  * @entrypoint \@nvidia-elements/core/preferences-input
+ * @property {PreferencesInputValue} value - Contains the current color scheme, scale, and reduced motion preferences. Assign an object through JavaScript or provide its JSON serialization in the HTML `value` attribute.
+ * @attribute {string} value - JSON object parsed as `PreferencesInputValue`.
  * @event input - Dispatched when the value has changed
  * @event change - Dispatched when the value has changed
  * @cssprop --color

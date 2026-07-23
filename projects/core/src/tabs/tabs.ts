@@ -27,7 +27,7 @@ import tabsStyleSheet from './tabs.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/tabs/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tabs
- * @slot - default slot for content
+ * @slot - The label displayed for the tab.
  * @cssprop --font-size
  * @cssprop --width
  * @cssprop --padding

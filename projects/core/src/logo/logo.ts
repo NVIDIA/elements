@@ -13,7 +13,7 @@ import styles from './logo.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/logo/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/logo
- * @slot - default slot for content
+ * @slot - Text, an image, or other visual content representing the brand or application.
  * @cssprop --background
  * @cssprop --gap
  * @cssprop --color

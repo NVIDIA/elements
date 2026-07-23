@@ -30,7 +30,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/accordion/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
- * @slot - default content slot
+ * @slot - Heading text and supporting content that labels the accordion section.
  * @slot prefix - slot for prefix content
  * @slot suffix - slot for suffix content
  * @cssprop --cursor
@@ -57,6 +57,7 @@ export class AccordionHeader extends LitElement {
     `;
   }
 
+  /** @private */
   @hostAttr() slot = 'header';
 
   connectedCallback() {
@@ -101,14 +102,13 @@ export class AccordionContent extends LitElement {
  * @command --open - use to open the accordion
  * @command --close - use to close the accordion
  * @command --toggle - use to toggle the accordion
- * @slot - This is a default/unnamed slot for accordion content
+ * @slot - Content displayed in the collapsible region, typically an `nve-accordion-content` element.
  * @slot icon-button - icon elements to display for expand/collapse
  * @slot header - header element (Use `accordion-header` or custom content)
- * @slot content - content element (Use `accordion-content` or custom content)
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius
- * @cssprop --header-padding
+ * @cssprop --header-padding - Padding around the header content.
  * @cssprop --cursor
  * @cssprop --transition
  * @csspart icon-button - The toggle icon button element
@@ -244,7 +244,9 @@ export class AccordionGroup extends LitElement {
    */
   @property({ type: Boolean, attribute: 'behavior-expand-single' }) behaviorExpandSingle = false;
 
-  /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
+  /**
+   * Controls the container style applied to child accordions. `flat` removes the visual container, `inset` adds rounded containment, and omission uses the default divided presentation.
+   */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'inset'>;
 
   static readonly metadata = {

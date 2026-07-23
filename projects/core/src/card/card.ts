@@ -55,7 +55,7 @@ export class Card extends LitElement implements ContainerElement {
  * @documentation https://nvidia.github.io/elements/docs/elements/card/
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
- * @slot - default slot
+ * @slot - Card title, supporting text, and optional action controls.
  * @cssprop --padding
  * @cssprop --border-bottom
  * @cssprop --line-height
@@ -72,6 +72,7 @@ export class CardHeader extends LitElement {
     parents: ['nve-card']
   };
 
+  /** @private */
   @hostAttr() slot = 'header';
 
   render() {
@@ -133,6 +134,7 @@ export class CardFooter extends LitElement {
     parents: ['nve-card']
   };
 
+  /** @private */
   @hostAttr() slot = 'footer';
 
   render() {

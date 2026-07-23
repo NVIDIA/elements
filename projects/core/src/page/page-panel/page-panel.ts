@@ -23,7 +23,7 @@ import globalStyles from './page-panel.global.css?inline';
  * @since 1.15.0
  * @event open - Dispatched after an invoker command removes `hidden` and opens the panel.
  * @event close - Dispatched after an invoker command sets `hidden` and closes the panel.
- * @slot - default content slot
+ * @slot - `nve-page-panel-content` elements that provide the panel body.
  * @slot actions - slot for action / dismiss buttons
  * @command --open - Removes `hidden` and dispatches `open`.
  * @command --close - Sets `hidden` and dispatches `close`.

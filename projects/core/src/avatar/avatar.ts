@@ -14,7 +14,7 @@ import styles from './avatar.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/avatar/
  * @since 1.20.0
  * @entrypoint \@nvidia-elements/core/avatar
- * @slot - default slot for content
+ * @slot - Initials, an image, or other content that identifies the represented user or bot.
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius

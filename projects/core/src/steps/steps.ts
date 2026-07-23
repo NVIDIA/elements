@@ -51,7 +51,7 @@ export class StepsItem extends ButtonFormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true }) selected = false;
 
   /**
-   * Four visual treatments represent the `status` of tasks. When `status` has a value of `warning`, `success`, or `danger`, the component embeds appropriate icons.
+   * Controls the step status. `accent` has no default status icon, `danger` displays an alert icon, `success` displays a check icon, and `pending` displays a progress indicator. Omit the property to display the step number.
    */
   @property({ type: String, reflect: true }) status?: 'accent' | 'danger' | 'success' | 'pending';
 
