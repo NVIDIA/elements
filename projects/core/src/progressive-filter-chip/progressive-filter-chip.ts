@@ -27,7 +27,7 @@ import styles from './progressive-filter-chip.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/progressive-filter-chip/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/progressive-filter-chip
- * @slot - default slot for content
+ * @slot - `input`, `select`, `nve-button`, or other `[nve-control]` elements used to build the filter.
  * @event close - Dispatched when the filter chip closes.
  * @cssprop --gap
  * @cssprop --border-radius

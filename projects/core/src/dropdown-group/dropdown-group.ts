@@ -23,8 +23,6 @@ import globalStyles from './dropdown-group.global.css?inline';
  * @slot - default slot for dropdown content
  * @event open - Dispatched when a dropdown in the group opens
  * @event close - Dispatched when a dropdown in the group closes
- * @cssprop --nve-dropdown-group-spacing
- * @cssprop --nve-dropdown-group-transition
  * @cssprop --arrow-transform - Transform applied to the popover arrow
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
@@ -114,6 +112,7 @@ export class DropdownGroup extends LitElement {
     }
   }
 
+  /** Closes every descendant dropdown in the group. */
   close() {
     this.querySelectorAll('nve-dropdown').forEach(d => d.hidePopover());
   }

@@ -103,6 +103,7 @@ export class Toggletip extends LitElement {
    */
   @property({ type: Boolean }) arrow = true;
 
+  /** @private */
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */

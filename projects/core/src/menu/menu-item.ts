@@ -13,7 +13,7 @@ import styles from './menu-item.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/menu/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/menu
- * @slot - default slot for content
+ * @slot - Label and supporting content for the menu option.
  * @slot suffix - slot for suffix icon
  * @cssprop --background
  * @cssprop --border-radius
@@ -36,6 +36,7 @@ import styles from './menu-item.css?inline';
 export class MenuItem extends ButtonFormControlMixin(LitElement) {
   static styles = useStyles([styles]);
 
+  /** Applies danger styling to destructive or high-risk menu actions. */
   @property({ type: String, reflect: true }) status: 'danger';
 
   static readonly metadata = {

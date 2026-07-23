@@ -16,30 +16,35 @@ import styles from './dropzone.css?inline';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './dropzone.util';
 
+/* eslint-disable jsdoc/no-types */
+// Explicit JSDoc type because the CEM analyzer loses the inherited generic specialization.
+
 /**
  * @element nve-dropzone
  * @description A dropzone form control that enables users to drag and drop files onto it.
  * @documentation https://nvidia.github.io/elements/docs/elements/dropzone/
  * @since 1.29.0
  * @entrypoint \@nvidia-elements/core/dropzone
+ * @property {File[]} value - Files selected or dropped by the user. Assign files through the JavaScript property; the HTML `value` attribute is not supported.
  * @event change - Dispatched when the value has changed (files located in event.target)
- * @slot - use only when custom messaging requires it
+ * @slot - Custom messaging that replaces the default upload instructions.
  * @cssprop --background
  * @cssprop --border-color
  * @cssprop --border-radius
  * @cssprop --padding
  * @cssprop --min-height
  * @cssprop --color
- * @slot icon - default slot for icon
- * @slot content - default slot for content
+ * @slot icon - Custom icon that replaces the default upload icon.
  * @csspart icon - The upload icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */
 @scopedRegistry()
 export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitElement) {
+  /** Comma-separated file extensions or MIME types accepted by the dropzone. */
   @property()
   accept: string = `image/gif, image/jpeg, image/png, image/svg+xml`;
 
+  /** File size limit in bytes. */
   @property({ attribute: 'max-file-size', type: Number })
   maxFileSize: number = 2 * 1024 ** 2;
 
@@ -76,6 +81,7 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
     [Icon.metadata.tag]: Icon
   };
 
+  /** @protected */
   formResetCallback() {
     this.value = [];
     this.requestUpdate();

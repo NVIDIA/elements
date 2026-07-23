@@ -31,8 +31,8 @@ import styles from './pagination.css?inline';
  * @event change - Dispatched when the value (page) has changed
  * @event first-page - Dispatched when the first page is active
  * @event last-page - Dispatched when the last page is active
- * @slot - default slot for content
- * @slot suffix-label - slot for overriding the "n of total" label when total is an approximation
+ * @event step-change - Dispatched after the page size changes with the current page size in `detail`. The event bubbles and crosses shadow boundaries.
+ * @slot suffix-label - Overrides the "of total" label when the total is an approximation.
  * @cssprop --background
  * @cssprop --font-size
  * @cssprop --width
@@ -44,6 +44,7 @@ import styles from './pagination.css?inline';
  * @csspart select - The page size select element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  * @property {number} value - value the current page number
+ * @attribute {string} step-sizes - A JSON-serialized array of page-size options available in the selector.
  */
 @typeSSR()
 @keyNavigationList<Pagination>()
@@ -54,9 +55,9 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
    */
   @property({ type: Number }) step = 10;
   /**
-   * The array of custom step-size.
+   * Page-size options available in the selector.
    */
-  @property({ type: Array }) stepSizes: number[] = [10, 20, 50, 100];
+  @property({ type: Array, attribute: 'step-sizes' }) stepSizes: number[] = [10, 20, 50, 100];
 
   /**
    * The total number of items.

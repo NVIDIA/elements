@@ -15,7 +15,7 @@ import globalStyles from './chat-message.global.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/chat-message/
  * @since 1.25.0
  * @entrypoint \@nvidia-elements/core/chat-message
- * @slot - default slot for content
+ * @slot - The message body displayed between the prefix and suffix content.
  * @slot prefix - for avatar/img content
  * @slot suffix - for avatar/img content
  * @cssprop --background
@@ -37,10 +37,12 @@ export class ChatMessage extends LitElement {
     version: '0.0.0'
   };
 
+  /** Applies a transparent background and reduced horizontal padding for embedding the message in another container. */
   @property({ type: String, reflect: true }) container: 'flat';
 
   @property({ type: String, reflect: true }) color: Color;
 
+  /** Removes the border radius from the selected message corner to indicate the speaker direction. */
   @property({ type: String, reflect: true, attribute: 'arrow-position' }) arrowPosition:
     | 'top-start'
     | 'top-end'

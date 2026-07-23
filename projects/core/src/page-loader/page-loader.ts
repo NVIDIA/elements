@@ -14,7 +14,7 @@ import styles from './page-loader.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/page-loader/
  * @since 0.19.0
  * @entrypoint \@nvidia-elements/core/page-loader
- * @slot - default slot for content
+ * @slot - Loading status text displayed with the progress indicator.
  * @cssprop --gap
  * @cssprop --animation-duration - Duration of page loader open/close animations
  * @csspart progress-ring - The progress ring element
