@@ -36,6 +36,12 @@ export default [
     }
   },
   {
+    files: ['src/button/button.test.visual.ts'],
+    rules: {
+      '@nvidia-elements/lint/no-excessive-primary-actions': ['off']
+    }
+  },
+  {
     files: [
       'src/format-datetime/format-datetime.ts',
       'src/format-number/format-number.ts',

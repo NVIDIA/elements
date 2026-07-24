@@ -143,6 +143,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-excessive-primary-actions</code></nve-grid-cell>
+    <nve-grid-cell>Limit primary actions to two per page.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-invalid-event-listeners</code></nve-grid-cell>
     <nve-grid-cell>Disallow inline event handler attributes in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
