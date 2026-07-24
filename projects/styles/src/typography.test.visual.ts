@@ -21,6 +21,45 @@ describe('typography visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
+  test('text line height should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'text-line-height',
+      /* html */ `
+      <div nve-layout="column gap:xl" style="width: 240px">
+        <p nve-text="display xl">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="display sm">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="heading xl">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="heading">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="body">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="label">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+      </div>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('body text should support a 1.5 line-height override', async () => {
+    const report = await visualRunner.render(
+      'text-line-height-override',
+      /* html */ `
+      <style>
+        [data-line-height-override] [nve-text~='body'] {
+          line-height: 1.5 !important;
+        }
+      </style>
+      <div data-line-height-override nve-layout="column gap:xl" style="width: 240px">
+        <p nve-text="body xl tight">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="body lg tight">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="body tight">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+        <p nve-text="body sm tight">•︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎•︎•︎</p>
+      </div>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
   // disabled due to flakeyness in CI
   // test('text size should match visual baseline', async () => {
   //   const report = await visualRunner.render(
