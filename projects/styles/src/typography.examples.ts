@@ -270,3 +270,17 @@ export const DescriptionList = {
 </dl>
   `
 }
+
+/**
+ * @summary Code and keyboard shortcut styles for displaying inline code snippets and keyboard shortcuts.
+ * @tags test-case
+ */
+export const Code = {
+  render: () => html`
+<div nve-layout="column gap:lg">
+  <kbd nve-text="code">CMD + C</kbd>
+  <code nve-text="code">console.log('Hello, world!');</code>
+  <p nve-text="body">The <code nve-text="code">console.log()</code> function is used to print messages to the console.</p>
+</div>
+  `
+}

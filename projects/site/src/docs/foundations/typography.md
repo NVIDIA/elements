@@ -89,6 +89,10 @@ See the links below for specific integration patterns for the following framewor
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'Headings' %}
 
+## Code
+
+{% example '@nvidia-elements/styles/typography.examples.json' 'Code' %}
+
 ## Size
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'Size' %}
