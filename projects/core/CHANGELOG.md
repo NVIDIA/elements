@@ -1,3 +1,15 @@
+## 2.2.0 (2026-07-24)
+
+* chore(ci): enforce html custom data package contracts ([39ba85c](https://github.com/NVIDIA/elements/commit/39ba85c))
+* chore(ci): update lighthouse ([73584d2](https://github.com/NVIDIA/elements/commit/73584d2))
+* chore(release): @nvidia-elements/forms-v2.0.5 [skip ci] ([c0e8291](https://github.com/NVIDIA/elements/commit/c0e8291))
+* chore(release): @nvidia-elements/lint-v2.1.3 [skip ci] ([2c2320d](https://github.com/NVIDIA/elements/commit/2c2320d))
+* chore(release): @nvidia-elements/markdown-v2.0.3 [skip ci] ([287e6c3](https://github.com/NVIDIA/elements/commit/287e6c3))
+* feat(core): add media i18n values ([371692a](https://github.com/NVIDIA/elements/commit/371692a))
+* fix(forms): remove stale html custom data contribution ([c64f40d](https://github.com/NVIDIA/elements/commit/c64f40d))
+* fix(markdown): export html custom data ([090c9c3](https://github.com/NVIDIA/elements/commit/090c9c3))
+* fix(media): remove stale html custom data contribution ([baedd39](https://github.com/NVIDIA/elements/commit/baedd39))
+
 ## <small>2.1.6 (2026-07-22)</small>
 
 * fix(core): clipping descenders on toolbar typography ([7965c3c](https://github.com/NVIDIA/elements/commit/7965c3c))
