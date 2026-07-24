@@ -19,6 +19,17 @@ describe('lintPlaygroundTemplate', () => {
     expect(result).toEqual([]);
   });
 
+  it('should limit emphasis buttons per template', async () => {
+    const code = `
+      <nve-button interaction="emphasis">One</nve-button>
+      <nve-button interaction="emphasis">Two</nve-button>
+      <nve-button interaction="emphasis">Three</nve-button>
+    `;
+    const result = await lintTemplate(code, { strict: true });
+
+    expect(result.filter(message => message.id === 'excessive-primary-action')).toHaveLength(1);
+  });
+
   it('should detect restricted attributes on custom elements', async () => {
     const codeWithRestrictedAttribute = '<nve-button nve-layout="pad:md">Button</nve-button>';
     const result = await lintTemplate(codeWithRestrictedAttribute, { strict: true });

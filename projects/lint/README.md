@@ -75,6 +75,7 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-popover-attributes` | Disallow use of deprecated popover attributes. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-slots` | Disallow use of deprecated slot APIs. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements in HTML. | HTML | `error` |
+| `@nvidia-elements/lint/no-excessive-primary-actions` | Limit primary actions to two per page. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-event-listeners` | Disallow inline event handler attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-invoker-triggers` | Disallow use of invoker trigger attributes on non-button nve-* elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-control-label` | Require form controls to have an accessible label. | HTML | `error` |
