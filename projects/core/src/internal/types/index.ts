@@ -333,10 +333,10 @@ export interface NveElement {
   /** Determines the alignment of the popover relative to the provided anchor element. */
   alignment?: 'start' | 'end' | 'center';
 
-  /** Provides the element that the popover should position relative to. Anchor can accept a idref string within the same render root or a HTMLElement DOM reference. */
+  /** Provides the element that the popover should position relative to. Set the property to an element or its ID within the same render root. The HTML attribute accepts only the element ID. */
   anchor?: string | HTMLElement;
 
-  /** Defines what element triggers an `open` interaction event. A trigger can accept a idref string within the same render root or a HTMLElement DOM reference. */
+  /** Defines the element that triggers an `open` interaction event. Set the property to an element or its ID within the same render root. The HTML attribute accepts only the element ID. */
   trigger?: string | HTMLElement;
 
   /** Defines named content areas where users can insert custom markup into the element.
@@ -360,7 +360,7 @@ export interface NveElement {
   closeTimeout?: number;
 
   /**
-   * Sets the delay in milliseconds before the element emits a `open` event.
+   * Sets the delay in milliseconds before the element emits an `open` event.
    * - `0` - Keyboard focus interactions (always immediate for accessibility).
    * - `500` - Dense interfaces with many tooltips to reduce visual noise and prevent accidental triggers.
    */

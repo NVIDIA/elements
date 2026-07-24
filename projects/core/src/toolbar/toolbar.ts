@@ -22,7 +22,7 @@ import styles from './toolbar.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/toolbar/
  * @since 0.19.0
  * @entrypoint \@nvidia-elements/core/toolbar
- * @slot - default slot for content
+ * @slot - Primary buttons, inputs, and other toolbar controls.
  * @slot prefix - slot for prefix content
  * @slot suffix - slot for suffix content
  * @cssprop --background

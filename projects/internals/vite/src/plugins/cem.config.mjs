@@ -11,6 +11,100 @@ const pkg = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf-8'));
 const runtimeEnvironment = {};
 const baseInterface = getBaseInterface();
 
+function isOmittedTypeBranch(type) {
+  const value = type.trim();
+  return value === '' || value === 'undefined';
+}
+
+export function getDocumentedTypeValues(type) {
+  if (typeof type !== 'string') {
+    return [];
+  }
+
+  return type
+    .split('|')
+    .map(value => value.trim())
+    .filter(value => !isOmittedTypeBranch(value) && value !== "''" && value !== '""')
+    .map(value => value.replace(/^(['"])(.*)\1$/, '$2'));
+}
+
+function normalizeTypeValues(type) {
+  if (typeof type !== 'string') {
+    return new Set();
+  }
+
+  return new Set(
+    type
+      .split('|')
+      .map(value => value.trim())
+      .filter(value => !isOmittedTypeBranch(value))
+      .map(value => value.replace(/^(['"])(.*)\1$/, '$2'))
+  );
+}
+
+export function rewriteTypesText(entry, stringLiteralsByTypeAlias = new Map()) {
+  let text = entry.type?.text;
+  if (!text) {
+    return;
+  }
+
+  if (text.startsWith('Extract')) {
+    text = text
+      .replace('Extract<', '')
+      .replace(/>(?=\s*(?:\||$))/, '')
+      .split(',')[1]
+      .trim();
+    entry.type.text = text;
+  }
+
+  const types = text.split('|').map(value => value.trim());
+  const rewrittenTypes = new Set();
+  let performRewrite = false;
+  const sourceAliases = [];
+
+  for (const type of types) {
+    const stringLiterals = stringLiteralsByTypeAlias.get(type);
+    if (stringLiterals !== undefined) {
+      performRewrite = true;
+      sourceAliases.push(type);
+      for (const stringLiteral of stringLiterals) {
+        // NOTE: This has() check is necessary to retain TypeScript's first-declaration-wins ordering.
+        if (!rewrittenTypes.has(stringLiteral)) {
+          rewrittenTypes.add(stringLiteral);
+        }
+      }
+    } else {
+      rewrittenTypes.add(type);
+    }
+  }
+
+  if (performRewrite) {
+    entry.type.text = Array.from(rewrittenTypes).join(' | ');
+  }
+
+  entry.type._sourceAliases = sourceAliases;
+}
+
+export function typesMatch(entry, baseProperty) {
+  const entryTypes = normalizeTypeValues(entry.type?.text);
+  const baseTypes = normalizeTypeValues(baseProperty.type);
+
+  return (
+    entryTypes.size > 0 && entryTypes.size === baseTypes.size && [...entryTypes].every(type => baseTypes.has(type))
+  );
+}
+
+/** APIs whose local or inherited descriptions intentionally specialize the broad NveElement contract. */
+const standardDescriptionExclusions = {
+  value: declaration => declaration.tagName === 'nve-copy-button' || declaration.tagName === 'nve-preferences-input',
+  readOnly: (_declaration, entry) => entry.inheritedFrom?.name === 'ButtonFormControlMixin'
+};
+
+export function shouldUseStandardDescription(declaration, entry) {
+  const propertyName = entry.fieldName ?? entry.name;
+  return !standardDescriptionExclusions[propertyName]?.(declaration, entry);
+}
+
 /** todo: this should be more generalized and not coupled specifically to the elements core package */
 function getBaseInterface() {
   const baseInterfacePath = resolve('src/internal/types/index.ts');
@@ -350,32 +444,44 @@ function getTypeText(type, location) {
   return type.getText(location);
 }
 
-function isElementReferencePropertyType(type, seen = new Set()) {
-  const nonNullableTypes = type.getUnionTypes().filter(unionType => !unionType.isNull() && !unionType.isUndefined());
-
-  if (nonNullableTypes.length > 1) {
-    return nonNullableTypes.every(unionType => isElementReferencePropertyType(unionType, new Set(seen)));
-  }
-
-  const nonNullableType = nonNullableTypes[0] ?? type;
-  const symbolName = nonNullableType.getSymbol()?.getName() ?? nonNullableType.getAliasSymbol()?.getName();
-  if (symbolName === 'Element') {
-    return true;
-  }
-
-  const typeKey = nonNullableType.getText();
-  if (seen.has(typeKey)) {
-    return false;
-  }
-
-  seen.add(typeKey);
-  return nonNullableType.getBaseTypes().some(baseType => isElementReferencePropertyType(baseType, new Set(seen)));
+function isElementReferenceTypeBranch(type) {
+  return /^(?:[A-Za-z_$][\w$]*\.)?[A-Za-z_$][\w$]*Element$/.test(type);
 }
 
-// CEM attribute types normally follow the property's converted type. Element-reference attributes instead accept an
-// element id, so their attribute-facing type is string while the JavaScript property remains Element | null.
-function getCemAttributeTypeText(propertyType, propertyTypeText) {
-  return isElementReferencePropertyType(propertyType) ? 'string' : propertyTypeText;
+// CEM attribute types normally follow the property's converted type. Properties containing an element reference accept
+// an element or ID string in JavaScript, while their HTML attributes accept only the ID string.
+export function getAttributeFacingTypeText(propertyTypeText, attributeTypeText = propertyTypeText) {
+  const branches = propertyTypeText
+    .split('|')
+    .map(type => type.trim())
+    .filter(type => type !== 'null' && type !== 'undefined');
+  const hasElementReference = branches.some(isElementReferenceTypeBranch);
+
+  return hasElementReference && branches.every(type => type === 'string' || isElementReferenceTypeBranch(type))
+    ? 'string'
+    : attributeTypeText;
+}
+
+function getExplicitAttributeDoc(tag, sourceFile) {
+  if (!['attr', 'attribute'].includes(tag.tagName?.getText(sourceFile))) {
+    return undefined;
+  }
+
+  const match = tag
+    .getText(sourceFile)
+    .trim()
+    .match(/^@(?:attr|attribute)\s+(?:\{([^}]+)\}\s+)?(\S+)(?:\s+([\s\S]*))?$/);
+  if (!match) {
+    return undefined;
+  }
+
+  const [, type, name, descriptionText] = match;
+  const description = descriptionText?.replace(/^-\s*/, '').trim();
+  return {
+    name,
+    ...(type && { type: { text: type } }),
+    ...(description && { description })
+  };
 }
 
 function escapeRegExp(value) {
@@ -441,7 +547,7 @@ function createMixinApiEntry(property, location, mixinName) {
       ? {
           name: attribute,
           fieldName: member.name,
-          type: { text: getCemAttributeTypeText(propertyType, typeText) },
+          type: { text: getAttributeFacingTypeText(typeText) },
           description,
           inheritedFrom: member.inheritedFrom
         }
@@ -537,36 +643,28 @@ function getDeclarationMixins(declaration, declarationRegistry, seen = new Set()
   ];
 }
 
-function addUniqueMember(declaration, member) {
+export function addUniqueMember(declaration, member) {
   declaration.members ??= [];
-  if (!declaration.members.some(item => item.name === member.name)) {
-    declaration.members.push(structuredClone(member));
-  }
-}
+  const existingMember = declaration.members.find(item => item.name === member.name);
 
-function isTypescriptElementReferencePropertyType(type, ts, seen = new Set()) {
-  const nonNullableTypes = type.isUnion()
-    ? type.types.filter(item => !(item.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)))
-    : [];
+  if (existingMember) {
+    const inheritedTypeValues = member.type?.text
+      ?.split('|')
+      .map(type => type.trim())
+      .filter(type => type !== 'undefined');
+    const hasFiniteStringUnion =
+      inheritedTypeValues?.length > 1 && inheritedTypeValues.every(type => /^(['"]).*\1$/.test(type));
 
-  if (nonNullableTypes.length > 1) {
-    return nonNullableTypes.every(item => isTypescriptElementReferencePropertyType(item, ts, new Set(seen)));
-  }
-
-  const nonNullableType = nonNullableTypes[0] ?? type;
-  const symbolName = nonNullableType.getSymbol?.()?.getName() ?? nonNullableType.aliasSymbol?.getName();
-  if (symbolName === 'Element') {
-    return true;
-  }
-
-  if (seen.has(nonNullableType)) {
-    return false;
+    if (existingMember.type?.text === 'string' && hasFiniteStringUnion) {
+      existingMember.type = structuredClone(member.type);
+    }
+    if (!existingMember.description && member.description) {
+      existingMember.description = member.description;
+    }
+    return;
   }
 
-  seen.add(nonNullableType);
-  return (nonNullableType.getBaseTypes?.() ?? []).some(baseType =>
-    isTypescriptElementReferencePropertyType(baseType, ts, new Set(seen))
-  );
+  declaration.members.push(structuredClone(member));
 }
 
 // Mixin APIs are analyzed generically. Resolve type parameters against each concrete component before projection, then
@@ -588,11 +686,19 @@ function resolveConcreteMixinAttributeType(modulePath, declarationName, memberNa
 
   const type = typeChecker.getTypeOfSymbolAtLocation(property, classDeclaration);
   const typeText = typeChecker.typeToString(type, classDeclaration, ts.TypeFormatFlags.NoTruncation);
-  return isTypescriptElementReferencePropertyType(type, ts) ? 'string' : typeText;
+  return getAttributeFacingTypeText(typeText);
+}
+
+const projectedMixinAttributeExclusions = {
+  value: declaration => declaration.tagName === 'nve-dropzone'
+};
+
+export function shouldProjectMixinAttribute(declaration, attribute) {
+  return !projectedMixinAttributeExclusions[attribute.fieldName]?.(declaration);
 }
 
 function addProjectedMixinAttribute(declaration, attribute, { modulePath, requiresMixinTypeSpecialization }) {
-  if (!attribute) {
+  if (!attribute || !shouldProjectMixinAttribute(declaration, attribute)) {
     return;
   }
 
@@ -638,6 +744,47 @@ function mixinApiProjectionPlugin() {
             });
           });
       });
+    }
+  };
+}
+
+/** Keeps JavaScript element-reference properties distinct from their ID-reference HTML attributes. */
+export function attributeTypesPlugin() {
+  return {
+    name: 'attribute-types',
+    analyzePhase({ ts, node, moduleDoc }) {
+      if (node.kind !== ts.SyntaxKind.ClassDeclaration) {
+        return;
+      }
+
+      const sourceFile = node.getSourceFile();
+      const declaration = moduleDoc.declarations?.find(item => item.name === node.name?.getText(sourceFile));
+      node.jsDoc?.forEach(jsDoc => {
+        jsDoc.tags?.forEach(tag => {
+          const explicitAttribute = getExplicitAttributeDoc(tag, sourceFile);
+          const attribute = declaration?.attributes?.find(item => item.name === explicitAttribute?.name);
+          if (attribute) {
+            Object.assign(attribute, explicitAttribute);
+          }
+        });
+      });
+    },
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules
+        .flatMap(module => module.declarations ?? [])
+        .filter(declaration => declaration.tagName)
+        .forEach(declaration => {
+          declaration.attributes?.forEach(attribute => {
+            const member = declaration.members?.find(
+              item => item.name === attribute.fieldName || item.name === attribute.name
+            );
+            if (!member?.type?.text || !attribute.type?.text) {
+              return;
+            }
+
+            attribute.type.text = getAttributeFacingTypeText(member.type.text, attribute.type.text);
+          });
+        });
     }
   };
 }
@@ -790,18 +937,28 @@ function expandStandaloneTypeText(type, standaloneInterfaceTypes, resolvingInter
   return standaloneType;
 }
 
-// JSX and Vue generators normally replace an attributed property with its attribute alias. Preserve both bindings when
-// the alias has a different name and type because the attribute cannot represent the JavaScript property value.
-function exposeDistinctFrameworkPropertyBindings(declaration) {
+// Framework generators normally replace an attributed property with its attribute alias. Preserve differently named
+// bindings independently, and prefer the property for a shared name because frameworks assign it through the element.
+export function projectFrameworkPropertyBindings(declaration) {
+  const replacedAttributes = new Set();
+
   declaration.members?.forEach(member => {
     const attribute = declaration.attributes?.find(
-      item => item.name === member.attribute && item.fieldName === member.name
+      item => item.name === member.attribute && (item.fieldName === undefined || item.fieldName === member.name)
     );
 
-    if (attribute && attribute.name !== member.name && attribute.type?.text !== member.type?.text) {
-      delete member.attribute;
+    if (!attribute) {
+      return;
+    }
+
+    delete member.attribute;
+
+    if (attribute.name === member.name) {
+      replacedAttributes.add(attribute);
     }
   });
+
+  declaration.attributes = declaration.attributes?.filter(attribute => !replacedAttributes.has(attribute));
 }
 
 // Preserve the shared CEM types and select standalone types only for framework declaration generators.
@@ -813,7 +970,7 @@ function createStandaloneTypesManifest(customElementsManifest) {
     .flatMap(module => module.declarations ?? [])
     .filter(declaration => declaration.tagName)
     .forEach(declaration => {
-      exposeDistinctFrameworkPropertyBindings(declaration);
+      projectFrameworkPropertyBindings(declaration);
 
       [...(declaration.attributes ?? []), ...(declaration.members ?? [])].forEach(item => {
         item.standaloneType = { text: expandStandaloneTypeText(item.type?.text, standaloneInterfaceTypes) };
@@ -978,17 +1135,19 @@ function deduplicateByName(members) {
   return [...seen.values()];
 }
 
-function getMemberAttributeName(manifest, member) {
-  if (member.attribute) {
-    return member.attribute;
-  }
-
+function getMemberAttribute(manifest, member) {
   const normalizedMemberName = member.name.toLowerCase();
-  const attribute = manifest.attributes?.find(
+  return manifest.attributes?.find(
     attr =>
-      attr.fieldName === member.name || attr.name === member.name || attr.name.toLowerCase() === normalizedMemberName
+      attr.name === member.attribute ||
+      attr.fieldName === member.name ||
+      attr.name === member.name ||
+      attr.name.toLowerCase() === normalizedMemberName
   );
-  return attribute?.name;
+}
+
+function getMemberAttributeName(manifest, member) {
+  return member.attribute ?? getMemberAttribute(manifest, member)?.name;
 }
 
 function memberAttributesPlugin() {
@@ -1010,10 +1169,18 @@ function memberAttributesPlugin() {
   };
 }
 
-function elementMetadataToMarkdown(manifest) {
+function isPublicMember(member) {
+  return member.privacy == null || member.privacy === 'public';
+}
+
+function escapeMarkdownTableType(type) {
+  return type.replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
+}
+
+export function elementMetadataToMarkdown(manifest) {
   if (manifest.tagName) {
     const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
-    const members = deduplicateByName(manifest.members?.filter(i => !i.deprecated) ?? []);
+    const members = deduplicateByName(manifest.members?.filter(i => !i.deprecated && isPublicMember(i)) ?? []);
     return `
 ## ${manifest.tagName}
 ${manifest.description ? `\n${manifest.description}\n` : ''}${manifest.metadata.example ? `\n### Example\n\n\`\`\`html\n${manifest.metadata.example}\n\`\`\`\n` : ''}
@@ -1043,7 +1210,15 @@ ${
 | -------------------- | ----- | ----------- |
 ${members
   .map(i => {
-    let type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
+    const propertyType = i.type?.text;
+    const attributeType = getMemberAttribute(manifest, i)?.type?.text;
+    const formattedPropertyType = propertyType ? escapeMarkdownTableType(propertyType) : '';
+    const formattedAttributeType = attributeType ? escapeMarkdownTableType(attributeType) : '';
+    let type = formattedPropertyType ? `\`${formattedPropertyType}\`` : '';
+
+    if (propertyType && attributeType && propertyType !== attributeType) {
+      type = `property: \`${formattedPropertyType}\`; attribute: \`${formattedAttributeType}\``;
+    }
 
     if (manifest.tagName.startsWith('nve-icon') && i.name === 'name') {
       const values = i.type?.values
@@ -1143,53 +1318,6 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
     return node.jsDoc.map(doc => doc.comment || '').join('\n');
   }
 
-  function rewriteTypesText(entry) {
-    const text = entry.type?.text;
-    if (!text) {
-      return;
-    }
-
-    if (text.startsWith('Extract')) {
-      entry.type.text = text.replace('Extract<', '').replace('> | ', ' | ').split(',')[1].trim();
-    }
-
-    let types = text.split('|').map(value => value.trim());
-
-    const rewrittenTypes = new Set();
-    let performRewrite = false;
-    const sourceAliases = [];
-    for (const type of types) {
-      const stringLiterals = stringLiteralsByTypeAlias.get(type);
-      if (stringLiterals !== undefined) {
-        performRewrite = true;
-        sourceAliases.push(type);
-        for (const stringLiteral of stringLiterals) {
-          // NOTE: This has() check is necessary to retain TypeScript's first-declaration-wins ordering.
-          if (!rewrittenTypes.has(stringLiteral)) {
-            rewrittenTypes.add(stringLiteral);
-          }
-        }
-      } else {
-        rewrittenTypes.add(type);
-      }
-    }
-    if (performRewrite) {
-      entry.type.text = Array.from(rewrittenTypes).join(' | ');
-    }
-
-    entry.type._sourceAliases = sourceAliases;
-
-    const hasArbitraryType = entry.type.text
-      .split(' | ')
-      .map(value => value.trim())
-      .some(isArbitraryType);
-
-    entry.type.text = entry.type.text
-      .split(' | ')
-      .map(value => (!hasArbitraryType && (value === 'undefined' || value === '') ? '"default"' : value))
-      .join(' | ');
-  }
-
   function isArbitraryType(type) {
     const cleanType = type.trim();
     if (/^(['"]).*\1$/.test(cleanType)) {
@@ -1230,16 +1358,13 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
     }
 
     const rawTypes = entry.type.text.split('|').map(t => t.trim());
-    const types = rawTypes.map(t => t.replace(/^['"]|['"]$/g, ''));
+    const types = getDocumentedTypeValues(entry.type.text);
     let hasAnyDescriptions = false;
 
     // Check if this is a string literal union (contains quoted strings)
     const isStringLiteralUnion =
       rawTypes.some(type => /^['"].*['"]$/.test(type)) &&
-      rawTypes.every(type => {
-        const cleanType = type.replace(/^['"]|['"]$/g, '');
-        return /^['"].*['"]$/.test(type) || cleanType === 'undefined' || cleanType === 'default' || cleanType === '';
-      });
+      rawTypes.every(type => /^['"].*['"]$/.test(type) || isOmittedTypeBranch(type));
 
     // Initialize values array if it doesn't exist
     if (!entry.type.values) {
@@ -1297,19 +1422,17 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
           hasAnyDescriptions = true;
 
           // Add descriptions for values that match this type alias
-          types
-            .filter(type => !type.includes('undefined') && type !== 'default' && type !== '')
-            .forEach(type => {
-              const cleanType = type.replace(/^['"]|['"]$/g, '');
+          types.forEach(type => {
+            const cleanType = type.replace(/^['"]|['"]$/g, '');
 
-              // Only add if we have a description for this value and it's not already in the array
-              if (valueDescriptions[cleanType] && !entry.type.values.some(v => v.value === cleanType)) {
-                entry.type.values.push({
-                  value: cleanType,
-                  description: valueDescriptions[cleanType]
-                });
-              }
-            });
+            // Only add if we have a description for this value and it's not already in the array
+            if (valueDescriptions[cleanType] && !entry.type.values.some(v => v.value === cleanType)) {
+              entry.type.values.push({
+                value: cleanType,
+                description: valueDescriptions[cleanType]
+              });
+            }
+          });
         }
       }
 
@@ -1318,42 +1441,36 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
         const inlineDescriptions = parseValueDescriptions(entry.description);
         if (Object.keys(inlineDescriptions).length > 0) {
           hasAnyDescriptions = true;
-          types
-            .filter(type => !type.includes('undefined') && type !== 'default' && type !== '')
-            .forEach(type => {
-              const cleanType = type.replace(/^['"]|['"]$/g, '');
-              if (inlineDescriptions[cleanType] && !entry.type.values.some(v => v.value === cleanType)) {
-                entry.type.values.push({
-                  value: cleanType,
-                  description: inlineDescriptions[cleanType]
-                });
-              }
-            });
+          types.forEach(type => {
+            const cleanType = type.replace(/^['"]|['"]$/g, '');
+            if (inlineDescriptions[cleanType] && !entry.type.values.some(v => v.value === cleanType)) {
+              entry.type.values.push({
+                value: cleanType,
+                description: inlineDescriptions[cleanType]
+              });
+            }
+          });
         }
       }
 
       // Add all remaining values (with or without descriptions)
-      types
-        .filter(type => !type.includes('undefined') && type !== 'default' && type !== '')
-        .forEach(type => {
-          const cleanType = type.replace(/^['"]|['"]$/g, '');
-          if (!entry.type.values.some(v => v.value === cleanType)) {
-            entry.type.values.push({
-              value: cleanType,
-              description: ''
-            });
-          }
-        });
-    } else {
-      // For all other types (string, number, HTMLElement, etc.), add a single value
-      types
-        .filter(type => type !== '' && type !== 'undefined')
-        .forEach(type => {
+      types.forEach(type => {
+        const cleanType = type.replace(/^['"]|['"]$/g, '');
+        if (!entry.type.values.some(v => v.value === cleanType)) {
           entry.type.values.push({
-            value: type,
+            value: cleanType,
             description: ''
           });
+        }
+      });
+    } else {
+      // For all other types (string, number, HTMLElement, etc.), add a single value
+      types.forEach(type => {
+        entry.type.values.push({
+          value: type,
+          description: ''
         });
+      });
     }
 
     // Only modify description if we found actual descriptions
@@ -1515,30 +1632,38 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
           switch (declaration.kind) {
             case 'class':
               for (const member of declaration.members ?? []) {
-                // name is excluded due to icon overloading it for svg icon name
+                rewriteTypesText(member, stringLiteralsByTypeAlias);
+
                 if (
                   member.name !== 'name' &&
                   member.name !== 'direction' &&
+                  shouldUseStandardDescription(declaration, member) &&
                   baseInterface[member.name] &&
-                  baseInterface[member.name].docs.length
+                  baseInterface[member.name].docs.length &&
+                  typesMatch(member, baseInterface[member.name])
                 ) {
                   member.description = baseInterface[member.name].docs[0]?.description;
                 }
-                rewriteTypesText(member);
                 addValueDescriptions(member);
               }
 
               for (const attribute of declaration.attributes ?? []) {
-                if (baseInterface[attribute.name] && baseInterface[attribute.name].docs.length) {
+                rewriteTypesText(attribute, stringLiteralsByTypeAlias);
+
+                if (
+                  shouldUseStandardDescription(declaration, attribute) &&
+                  baseInterface[attribute.name] &&
+                  baseInterface[attribute.name].docs.length &&
+                  typesMatch(attribute, baseInterface[attribute.name])
+                ) {
                   attribute.description = baseInterface[attribute.name].docs[0]?.description;
                 }
-                rewriteTypesText(attribute);
                 addValueDescriptions(attribute);
               }
               break;
             case 'function':
               for (const parameter of declaration.parameters ?? []) {
-                rewriteTypesText(parameter);
+                rewriteTypesText(parameter, stringLiteralsByTypeAlias);
               }
               break;
           }
@@ -1548,14 +1673,22 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
   };
 }
 
-/** filter subset of all default members to exclude private and non documented APIs/properties */
-function publicPropertiesPlugin() {
+/** Filters members by kind, privacy, name, readonly, and static status, plus attributes linked to non-public members. */
+export function publicPropertiesPlugin() {
   return {
     name: 'public-properties-plugin',
     packageLinkPhase({ customElementsManifest }) {
       for (const module of customElementsManifest.modules) {
         for (const declaration of module.declarations) {
           if (declaration.tagName) {
+            const nonPublicMemberNames = new Set(
+              declaration.members
+                ?.filter(member => member.privacy != null && member.privacy !== 'public')
+                .map(member => member.name)
+            );
+            declaration.attributes = declaration.attributes?.filter(
+              attribute => !attribute.fieldName || !nonPublicMemberNames.has(attribute.fieldName)
+            );
             declaration.members =
               declaration.members?.filter(
                 m =>
@@ -1628,6 +1761,7 @@ export default {
     commandPlugin(),
     mixinApiProjectionPlugin(),
     rewriteExportedStringLiteralTypeAliasesPlugin(),
+    attributeTypesPlugin(),
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
     dynamicSlotsPlugin(),

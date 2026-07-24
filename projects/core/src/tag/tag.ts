@@ -22,7 +22,7 @@ import styles from './tag.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/tag/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tag
- * @slot - default slot for content
+ * @slot - Text or other content that identifies the category or group.
  * @cssprop --background
  * @cssprop --color
  * @cssprop --gap

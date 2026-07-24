@@ -112,13 +112,13 @@ export class TreeNode extends LitElement {
    */
   @queryAssignedElements({ slot: 'nodes' }) readonly nodes!: TreeNode[];
 
-  /* @private */
+  /** @private */
   @state() indeterminate = false;
 
-  /* @private */
+  /** @private */
   @state() behaviorExpand = false;
 
-  /* @private */
+  /** @private */
   @state() behaviorSelect = false;
 
   #typeExpandableController = new TypeExpandableController(this);

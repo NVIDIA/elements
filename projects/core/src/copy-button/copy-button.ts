@@ -17,7 +17,7 @@ import styles from './copy-button.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/copy-button/
  * @since 1.1.4
  * @entrypoint \@nvidia-elements/core/copy-button
- * @slot - default
+ * @slot - Text label displayed before the copy icon.
  * @slot icon - slot for custom icon
  * @cssprop --color
  * @cssprop --background

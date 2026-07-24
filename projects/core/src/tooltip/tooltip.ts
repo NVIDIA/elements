@@ -25,7 +25,7 @@ import styles from './tooltip.css?inline';
  * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the tooltip opens.
  * @event close - Dispatched when the tooltip closes.
- * @slot - default content slot
+ * @slot - Noninteractive text or other descriptive content shown in the tooltip.
  * @cssprop --border-radius
  * @cssprop --background
  * @cssprop --color
@@ -89,6 +89,7 @@ export class Tooltip extends LitElement {
    */
   @property({ type: Number, attribute: 'open-delay' }) openDelay: number;
 
+  /** @private */
   @query('.arrow') popoverArrow: HTMLElement;
 
   /** @private */

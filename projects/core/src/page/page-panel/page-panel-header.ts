@@ -26,6 +26,7 @@ export class PagePanelHeader extends LitElement {
     version: '0.0.0'
   };
 
+  /** @private */
   @hostAttr() slot = 'header';
 
   render() {

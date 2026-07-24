@@ -23,7 +23,7 @@ export interface ButtonFormControlMixinInstance {
   expanded: boolean;
 
   /**
-   * Like input readonly, sets a button semantically as visual treatment only.
+   * Indicates whether the element is a noninteractive visual treatment instead of a button.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly
    * @attr readonly
    * @reflect
@@ -31,8 +31,8 @@ export interface ButtonFormControlMixinInstance {
   readOnly: boolean;
 
   /**
-   * Like input form, sets a button to submit a form outside its parent form.
-   * Returns a reference to the form element if available.
+   * Associates the button with a form. Set the property to a form element or its ID. The HTML attribute accepts only
+   * the form ID. Reading the property returns the associated form element or `null`.
    * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form
    * @attr form
    */

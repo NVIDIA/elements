@@ -25,7 +25,7 @@ import styles from './badge.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/badge/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/badge
- * @slot - default slot for content
+ * @slot - Short text that communicates the badge status.
  * @slot prefix-icon - slot for prefix icon
  * @slot suffix-icon - slot for suffix icon
  * @cssprop --background

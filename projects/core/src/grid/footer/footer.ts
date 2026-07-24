@@ -10,7 +10,7 @@ import styles from './footer.css?inline';
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @description Grid footer displays contextual information or user actions such as pagination.
- * @slot - default slot for content
+ * @slot - Grid summary, pagination, or other footer controls.
  * @cssprop --background
  * @cssprop --color
  * @cssprop --padding
@@ -30,6 +30,7 @@ export class GridFooter extends LitElement {
   /** @private */
   _internals: ElementInternals;
 
+  /** @private */
   @hostAttr() slot = 'footer';
 
   render() {
