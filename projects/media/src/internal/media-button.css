@@ -1,0 +1,226 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
+  --background: transparent;
+  --color: var(--nve-sys-text-muted-color);
+  --padding: 0;
+  --border: 0;
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --font-weight: var(--nve-ref-font-weight-semibold);
+  --font-size: var(--nve-ref-font-size-100);
+  --text-decoration: none;
+  --text-align: center;
+  --cursor: pointer;
+  --gap: var(--nve-ref-space-xs);
+  --height: var(--nve-ref-size-800);
+  --width: var(--nve-ref-size-800);
+  --min-width: var(--width);
+  --text-transform: initial;
+  --line-height: 1.1em;
+  --_icon-color: var(--color);
+  display: inline-flex;
+  position: relative;
+  user-select: none;
+  white-space: nowrap;
+  width: var(--width);
+  min-width: var(--min-width);
+}
+
+[internal-host] {
+  color: var(--color);
+  background: var(--background);
+  padding: var(--padding);
+  height: var(--height);
+  width: 100%;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  text-decoration: var(--text-decoration);
+  text-align: var(--text-align);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  cursor: var(--cursor);
+  gap: var(--gap);
+  text-transform: var(--text-transform);
+  display: inline-flex;
+  place-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: var(--line-height);
+  overflow: hidden;
+}
+
+:host([readonly]) {
+  --text-decoration: none;
+  --cursor: cursor;
+}
+
+:host(:state(disabled)) {
+  --color: var(--nve-sys-interaction-disabled-color);
+  --background: var(--nve-sys-interaction-disabled-background);
+  --cursor: not-allowed;
+}
+
+:host(:state(disabled)) ::slotted(a) {
+  cursor: not-allowed;
+}
+
+:host(:state(pressed)) {
+  --color: var(--nve-sys-interaction-selected-color);
+}
+
+:host(:hover:not([disabled], [readonly], [pressed])) {
+  --color: var(--nve-sys-interaction-hover-color);
+}
+
+:host([selected]) [interaction-state],
+:host(:state(selected)) [interaction-state],
+:host([pressed]) [interaction-state],
+:host(:state(pressed)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+}
+
+:host([container*='inline']) {
+  --background: transparent;
+  --text-transform: initial;
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --_icon-color: var(--color);
+}
+
+@container style(--nve-sys-color-scheme: dark) {
+  :host {
+    --nve-sys-interaction-state-ratio-selected: 16% !important;
+    --nve-sys-interaction-state-ratio-hover: 12% !important;
+  }
+}
+
+:host([container*='inline']) {
+  --padding: 0;
+  --height: fit-content;
+  --line-height: 0.8;
+
+  [internal-host] {
+    overflow: initial;
+  }
+}
+
+:host([container*='inline']:hover) {
+  --background: transparent;
+  --text-decoration: underline;
+}
+
+:host([container*='inline']:hover) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
+}
+
+:host([container*='inline']:state(active)) {
+  --background: transparent;
+  --text-decoration: underline;
+}
+
+:host(:state(disabled)),
+:host([container*='inline']:state(disabled)) {
+  --color: var(--nve-sys-interaction-disabled-color);
+  --background: transparent;
+  --text-decoration: none !important;
+}
+
+:host(:state(disabled)) [interaction-state],
+:host([container*='inline']:state(disabled)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
+}
+
+:host([container*='inline']:state(selected)) {
+  --color: var(--nve-sys-interaction-selected-color);
+  --background: transparent;
+}
+
+:host(:state(selected)) {
+  --color: var(--nve-sys-interaction-selected-color);
+}
+
+:host([container*='inline']:state(selected)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
+}
+
+:host([container*='inline'][readonly]:not(:state(anchor))) {
+  --text-decoration: none;
+  --cursor: cursor;
+}
+
+@keyframes inline-underline {
+  from {
+    transform: translateX(-50%) scaleX(0);
+  }
+
+  to {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+:host([container*='inline']) [internal-host]::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+
+  /* private API for inline underline border-bottom to customize underline downstream */
+  bottom: calc(var(--_border-bottom-offset, -2) * var(--nve-ref-border-width-md));
+  width: var(--_border-bottom-width, 100%);
+  height: var(--nve-ref-border-width-md);
+  background-color: currentColor;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  border-radius: var(--nve-ref-border-radius-full);
+}
+
+:host([container*='inline']:hover) [internal-host]::after,
+:host([container*='inline']:focus) [internal-host]::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+:host([container*='inline']:state(disabled)) [internal-host]::after {
+  display: none;
+}
+
+:host([container*='inline']) {
+  --text-decoration: none;
+}
+
+:host([container*='inline']:hover) {
+  --text-decoration: none;
+}
+
+/* override base button inline style */
+:host([container*='inline']) {
+  --height: var(--nve-ref-size-800);
+  --line-height: 0;
+}
+
+:host([size='sm']) {
+  --padding: 0;
+  --height: var(--nve-ref-size-700);
+  --width: var(--nve-ref-size-700);
+}
+
+:host([size='lg']) {
+  --width: var(--nve-ref-size-1000);
+  --height: var(--nve-ref-size-1000);
+  --padding: 0;
+}
+
+[internal-host] {
+  font-size: var(--font-size);
+}
+
+/* disable pseudo element on base button */
+[internal-host]::after {
+  display: none !important;
+}
+
+nve-icon {
+  --color: var(--_icon-color);
+  pointer-events: none;
+}

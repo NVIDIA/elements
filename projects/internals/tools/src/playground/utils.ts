@@ -289,6 +289,8 @@ function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vu
     '@nvidia-elements/code/': `${CDN_MODULES_URL}/@nvidia-elements/code@latest/`,
     '@nvidia-elements/forms': `${CDN_MODULES_URL}/@nvidia-elements/forms@latest`,
     '@nvidia-elements/forms/': `${CDN_MODULES_URL}/@nvidia-elements/forms@latest/`,
+    '@nvidia-elements/media': `${CDN_MODULES_URL}/@nvidia-elements/media@latest`,
+    '@nvidia-elements/media/': `${CDN_MODULES_URL}/@nvidia-elements/media@latest/`,
     ...(frameworkImportMap[framework]?.(CDN_MODULES_URL) ?? {})
   };
 

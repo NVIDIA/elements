@@ -109,6 +109,8 @@
         "../../forms/dist/custom-elements.json",
         "../../markdown/package.json",
         "../../markdown/dist/custom-elements.json",
+        "../../media/package.json",
+        "../../media/dist/custom-elements.json",
         "../../monaco/package.json",
         "../../monaco/dist/custom-elements.json",
         "../../patterns/package.json",
@@ -143,6 +145,10 @@
           "cascade": false
         },
         {
+          "script": "../../media:build",
+          "cascade": false
+        },
+        {
           "script": "../../monaco:build",
           "cascade": false
         }
@@ -171,6 +177,9 @@
         "../../markdown/package.json",
         "../../markdown/README.md",
         "../../markdown/CHANGELOG.md",
+        "../../media/package.json",
+        "../../media/README.md",
+        "../../media/CHANGELOG.md",
         "../../monaco/package.json",
         "../../monaco/README.md",
         "../../monaco/CHANGELOG.md",
@@ -212,6 +221,11 @@
         "../../markdown/coverage/unit/summary.json",
         "../../markdown/coverage/visual/summary.json",
         "../../markdown/coverage/ssr/summary.json",
+        "../../media/coverage/unit/coverage-summary.json",
+        "../../media/coverage/unit/summary.json",
+        "../../media/coverage/axe/summary.json",
+        "../../media/coverage/visual/summary.json",
+        "../../media/coverage/ssr/summary.json",
         "../../monaco/coverage/unit/coverage-summary.json",
         "../../monaco/coverage/unit/summary.json",
         "../../monaco/coverage/visual/summary.json",
@@ -260,6 +274,22 @@
           "cascade": false
         },
         {
+          "script": "../../media:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../../media:test:axe",
+          "cascade": false
+        },
+        {
+          "script": "../../media:test:ssr",
+          "cascade": false
+        },
+        {
+          "script": "../../media:test:visual",
+          "cascade": false
+        },
+        {
           "script": "../../monaco:test:coverage",
           "cascade": false
         },
@@ -291,7 +321,8 @@
         "../../monaco/dist/**/*.examples.json",
         "../../code/dist/**/*.examples.json",
         "../../forms/dist/**/*.examples.json",
-        "../../markdown/dist/**/*.examples.json"
+        "../../markdown/dist/**/*.examples.json",
+        "../../media/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"
@@ -319,6 +350,10 @@
         },
         {
           "script": "../../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../../media:build",
           "cascade": false
         },
         {

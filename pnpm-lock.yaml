@@ -1226,6 +1226,9 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:^
         version: link:../core
+      '@nvidia-elements/forms':
+        specifier: workspace:^
+        version: link:../forms
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
