@@ -33,6 +33,7 @@ afterEach(() => {
   vi.unstubAllEnvs();
   vi.doUnmock('../index.11tydata.js');
   vi.doUnmock('@internals/tools/playground');
+  vi.resetModules();
 });
 
 describe('example page urls', () => {
