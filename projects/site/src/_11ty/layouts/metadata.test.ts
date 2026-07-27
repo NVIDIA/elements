@@ -397,10 +397,10 @@ describe('renderBaseHead', () => {
     });
 
     expect(html).toContain(
-      '<link rel="alternate" type="application/rss+xml" title="NVIDIA Elements updates (RSS)" href="https://nvidia.github.io/elements/feed.xml">'
+      '<link rel="alternate" type="application/rss+xml" title="NVIDIA Elements Updates (RSS)" href="https://nvidia.github.io/elements/feed.xml">'
     );
     expect(html).toContain(
-      '<link rel="alternate" type="application/atom+xml" title="NVIDIA Elements updates (Atom)" href="https://nvidia.github.io/elements/atom.xml">'
+      '<link rel="alternate" type="application/atom+xml" title="NVIDIA Elements Updates (Atom)" href="https://nvidia.github.io/elements/atom.xml">'
     );
   });
 });
