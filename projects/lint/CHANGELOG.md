@@ -1,3 +1,18 @@
+## 2.2.0 (2026-07-27)
+
+* feat(core): add media i18n values ([371692a](https://github.com/NVIDIA/elements/commit/371692a))
+* feat(lint): add rule to limit excessive primary actions ([e67fa69](https://github.com/NVIDIA/elements/commit/e67fa69))
+* chore(ci): enforce html custom data package contracts ([39ba85c](https://github.com/NVIDIA/elements/commit/39ba85c))
+* chore(ci): update lighthouse ([73584d2](https://github.com/NVIDIA/elements/commit/73584d2))
+* chore(docs): feed title ([e7f3717](https://github.com/NVIDIA/elements/commit/e7f3717))
+* chore(docs): whats new page and skill ([9c6f1b2](https://github.com/NVIDIA/elements/commit/9c6f1b2))
+* chore(release): @nvidia-elements/core-v2.2.0 [skip ci] ([6cf3292](https://github.com/NVIDIA/elements/commit/6cf3292))
+* chore(release): @nvidia-elements/forms-v2.0.5 [skip ci] ([c0e8291](https://github.com/NVIDIA/elements/commit/c0e8291))
+* chore(release): @nvidia-elements/markdown-v2.0.3 [skip ci] ([287e6c3](https://github.com/NVIDIA/elements/commit/287e6c3))
+* fix(forms): remove stale html custom data contribution ([c64f40d](https://github.com/NVIDIA/elements/commit/c64f40d))
+* fix(markdown): export html custom data ([090c9c3](https://github.com/NVIDIA/elements/commit/090c9c3))
+* fix(media): remove stale html custom data contribution ([baedd39](https://github.com/NVIDIA/elements/commit/baedd39))
+
 ## <small>2.1.3 (2026-07-22)</small>
 
 * chore(ci): disable no-missing-gap-space rule for specific test files ([47ae4ff](https://github.com/NVIDIA/elements/commit/47ae4ff))
