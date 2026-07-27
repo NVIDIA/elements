@@ -33,7 +33,7 @@ export const UPDATE_FEED_METADATA = {
   language: 'en',
   subtitle:
     'What’s new in the NVIDIA Elements Design System, including product updates, release highlights, and announcements.',
-  title: 'NVIDIA Elements updates'
+  title: 'NVIDIA Elements Updates'
 };
 
 export const RSS_FEED_TEMPLATE = `<?xml version="1.0" encoding="utf-8"?>

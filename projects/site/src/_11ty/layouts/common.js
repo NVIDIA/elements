@@ -32,7 +32,7 @@ export const renderBaseHead = data => {
   <meta name="author" content="${escapeAttr(AUTHOR_NAME)}">
   <link rel="canonical" href="${meta.canonicalUrl}">
   <link rel="alternate" type="text/plain" title="llms.txt" href="${DEPLOYED_SITE_URL}/llms.txt">
-  ${UPDATE_FEEDS.map(({ label, outputPath, type }) => `<link rel="alternate" type="application/${type}+xml" title="NVIDIA Elements updates (${label})" href="${getSiteUrl(outputPath)}">`).join('\n  ')}
+  ${UPDATE_FEEDS.map(({ label, outputPath, type }) => `<link rel="alternate" type="application/${type}+xml" title="NVIDIA Elements Updates (${label})" href="${getSiteUrl(outputPath)}">`).join('\n  ')}
   <link href="https://github.com/NVIDIA/elements" rel="me">
   <meta property="og:title" content="${escapeAttr(meta.title)}">
   <meta property="og:url" content="${meta.canonicalUrl}">
