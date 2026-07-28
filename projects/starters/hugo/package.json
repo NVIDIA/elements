@@ -14,12 +14,6 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/code": "workspace:*"
   },
-  "devDependencies": {
-    "hugo-bin": "0.149.2"
-  },
-  "hugo-bin": {
-    "version": "0.152.2"
-  },
   "wireit": {
     "ci": {
       "dependencies": [
@@ -27,7 +21,7 @@
       ]
     },
     "build": {
-      "command": "hugo --baseURL \"${PAGES_BASE_URL:-/}\"",
+      "command": "mise exec -- hugo --baseURL \"${PAGES_BASE_URL:-/}\"",
       "files": [
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
@@ -37,7 +31,8 @@
         "content/**",
         "layouts/**",
         "static/**",
-        "hugo.toml"
+        "hugo.toml",
+        "../../../mise.toml"
       ],
       "output": [
         "dist/**"
@@ -68,7 +63,7 @@
       }
     },
     "dev": {
-      "command": "hugo server",
+      "command": "mise exec -- hugo server",
       "service": true
     }
   }

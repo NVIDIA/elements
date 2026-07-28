@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 
 const read = path => readFileSync(path, 'utf-8');
-const requiredTools = ['node', 'pnpm', 'vale', 'go', 'git-lfs'];
+const requiredTools = ['node', 'pnpm', 'vale', 'go', 'git-lfs', 'hugo'];
 const packageJson = JSON.parse(read('package.json'));
 const toolsTable = read('mise.toml').match(/^\[tools]\n([\s\S]*?)(?=^\[|(?![\s\S]))/m)?.[1] ?? '';
 const tools = Object.fromEntries(

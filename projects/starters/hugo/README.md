@@ -6,7 +6,7 @@ This starter uses Hugo templates with the prebuilt JavaScript and CSS bundles fr
 
 ## Getting started
 
-Install the package dependencies to use the starter's pinned Hugo binary:
+Install Hugo before installing the package dependencies. At the Elements repository root, `mise install` installs the pinned version from `mise.toml`. If you downloaded this starter, follow the [Hugo installation guide](https://gohugo.io/installation/).
 
 ```shell
 npm install
