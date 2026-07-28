@@ -35,7 +35,7 @@
     "dist/**/*.js"
   ],
   "scripts": {
-    "dev": "pnpm run cli:install && npx @modelcontextprotocol/inspector@0.22.0 node ./dist/index.js mcp",
+    "dev": "pnpm run cli:install && npx @modelcontextprotocol/inspector@2.0.0 node ./dist/index.js mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",
@@ -47,8 +47,8 @@
   },
   "dependencies": {
     "@inquirer/prompts": "8.5.0",
-    "@modelcontextprotocol/sdk": "catalog:",
     "@modelcontextprotocol/ext-apps": "catalog:",
+    "@modelcontextprotocol/server": "2.0.0",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/lint": "workspace:^",
     "adm-zip": "0.5.17",

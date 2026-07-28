@@ -17,7 +17,7 @@
 The package has two entry points:
 
 - **`./dist/index.js`** (`nve` command) - Interactive CLI using Yargs with Inquirer for prompts
-- **`./dist/mcp/index.js`** (`nve mcp` command) - MCP server using @modelcontextprotocol/sdk
+- **`./dist/mcp/index.js`** (`nve mcp` command) - MCP server using `@modelcontextprotocol/server`
 
 ### Tool System
 
@@ -60,7 +60,7 @@ tools.forEach(tool => {
 #### MCP Mode (`src/mcp/index.ts`)
 
 - Sets `process.env.ELEMENTS_ENV = 'mcp'`
-- Creates MCP server instance with stdio transport
+- Serves an MCP server factory over stdio
 - **Tool registration** - Registers all tools with MCP server using Zod schemas
 - **Prompt registration** - Registers 6 built-in prompts (about, doctor, search, playground, new-project, migrate)
 - **Structured output** - Returns results with status, message, and structured content
@@ -69,13 +69,14 @@ Example MCP tool registration:
 
 ```typescript
 // Convert JSON Schema to Zod and register with MCP
-server.setRequestHandler(ListToolsRequestSchema, async () => ({
-  tools: tools.map(tool => ({
-    name: tool.toolName,
+server.registerTool(
+  tool.toolName,
+  {
     description: tool.description,
-    inputSchema: zodToJsonSchema(jsonSchemaToZod(tool.inputSchema))
-  }))
-}));
+    inputSchema: jsonSchemaToZod(tool.inputSchema)
+  },
+  async params => tool(params)
+);
 ```
 
 ## Data Flow

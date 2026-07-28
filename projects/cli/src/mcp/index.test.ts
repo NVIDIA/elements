@@ -8,15 +8,15 @@ const {
   mockRegisterPrompt,
   mockRegisterResource,
   mockRegisterCapabilities,
-  mockConnect,
+  mockServeStdio,
+  mockNotify,
   mcpTool,
   cliTool,
   allTool,
   uiTool,
-  mockPrompt,
-  mockZodSchema
+  mockPrompt
 } = vi.hoisted(() => {
-  const zodSchema = { shape: {}, optional: () => zodSchema };
+  const stdioHandle = { close: vi.fn().mockResolvedValue(undefined) };
 
   const createMockTool = (overrides: Record<string, unknown>) => {
     const fn = vi.fn().mockResolvedValue({ status: 'complete', result: 'test' });
@@ -40,8 +40,11 @@ const {
     mockRegisterPrompt: vi.fn(),
     mockRegisterResource: vi.fn(),
     mockRegisterCapabilities: vi.fn(),
-    mockConnect: vi.fn().mockResolvedValue(undefined),
-    mockZodSchema: zodSchema,
+    mockServeStdio: vi.fn((factory: () => unknown) => {
+      factory();
+      return stdioHandle;
+    }),
+    mockNotify: vi.fn().mockResolvedValue(undefined),
     mcpTool: createMockTool({
       support: 1,
       toolName: 'mcp_tool',
@@ -83,28 +86,37 @@ const {
   };
 });
 
-vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => ({
+vi.mock('@modelcontextprotocol/server', () => ({
   McpServer: vi.fn(function () {
     return {
       registerTool: mockRegisterTool,
       registerPrompt: mockRegisterPrompt,
       registerResource: mockRegisterResource,
-      server: { registerCapabilities: mockRegisterCapabilities },
-      connect: mockConnect
+      server: { registerCapabilities: mockRegisterCapabilities }
     };
   })
 }));
 
-vi.mock('@modelcontextprotocol/sdk/server/stdio.js', () => ({
-  StdioServerTransport: vi.fn()
+vi.mock('@modelcontextprotocol/server/stdio', () => ({
+  serveStdio: mockServeStdio
 }));
 
-vi.mock('@internals/tools', () => ({
-  tools: [mcpTool, cliTool, allTool, uiTool],
-  prompts: [mockPrompt],
-  jsonSchemaToZod: vi.fn(() => mockZodSchema),
-  ToolSupport: { None: 0, MCP: 1, CLI: 2, All: 3 }
-}));
+vi.mock('@internals/tools', async () => {
+  const { default: z } = await import('zod');
+  return {
+    tools: [mcpTool, cliTool, allTool, uiTool],
+    prompts: [mockPrompt],
+    jsonSchemaToZod: vi.fn(() => z.object({})),
+    ToolSupport: { None: 0, MCP: 1, CLI: 2, All: 3 }
+  };
+});
+
+const createRequestContext = () => ({
+  mcpReq: {
+    _meta: {},
+    notify: mockNotify
+  }
+});
 
 describe('MCP server', () => {
   beforeEach(() => {
@@ -151,12 +163,12 @@ describe('MCP server', () => {
     );
   });
 
-  it('should handle tools without inputSchema', async () => {
+  it('should register tools without inputSchema using an empty Zod object', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     // mcpTool has no inputSchema — should still register without error
     const mcpToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'mcp_tool');
-    expect(mcpToolCall[1].inputSchema).toEqual({});
+    expect(mcpToolCall[1].inputSchema.shape).toEqual({});
   });
 
   it('should register prompts', async () => {
@@ -182,17 +194,19 @@ describe('MCP server', () => {
     expect(result).toEqual({ messages: [] });
   });
 
-  it('should connect to stdio transport', async () => {
+  it('should serve an MCP server factory over stdio', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    expect(mockConnect).toHaveBeenCalledTimes(1);
+    expect(mockServeStdio).toHaveBeenCalledWith(expect.any(Function), {
+      onerror: expect.any(Function)
+    });
   });
 
   it('should return string result as text content', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
-    const result = await handler({});
+    const result = await handler({}, createRequestContext());
     expect(result).toEqual({
       structuredContent: { status: 'complete', result: 'test' },
       content: [{ type: 'text', text: 'test' }]
@@ -205,7 +219,7 @@ describe('MCP server', () => {
     const handler = mockRegisterTool.mock.calls[0][2];
     const errorResult = { status: 'error', message: 'failed' };
     mcpTool.mockResolvedValueOnce(errorResult);
-    const result = await handler({});
+    const result = await handler({}, createRequestContext());
     expect(result.content[0].text).toBe(JSON.stringify(errorResult));
   });
 
@@ -215,8 +229,35 @@ describe('MCP server', () => {
     const handler = mockRegisterTool.mock.calls[0][2];
     const objResult = { status: 'complete', result: { key: 'value' } };
     mcpTool.mockResolvedValueOnce(objResult);
-    const result = await handler({});
+    const result = await handler({}, createRequestContext());
     expect(result.content[0].text).toBe(JSON.stringify(objResult));
+  });
+
+  it('should report progress through the v2 request context', async () => {
+    const { startMcpServer } = await import('./index.js');
+    await startMcpServer();
+    const handler = mockRegisterTool.mock.calls[0][2];
+    const params: Record<string, unknown> = {};
+    await handler(params, {
+      mcpReq: {
+        _meta: { progressToken: 'progress-token' },
+        notify: mockNotify
+      }
+    });
+
+    if (typeof params.onProgress !== 'function') {
+      throw new TypeError('Expected an onProgress callback');
+    }
+    params.onProgress('Loading metadata');
+
+    expect(mockNotify).toHaveBeenCalledWith({
+      method: 'notifications/progress',
+      params: {
+        progressToken: 'progress-token',
+        progress: 1,
+        message: 'Loading metadata'
+      }
+    });
   });
 
   it('should advertise the io.modelcontextprotocol/ui extension capability', async () => {
@@ -359,15 +400,17 @@ describe('MCP server', () => {
     expect(mcpToolCall![1]._meta).toBeUndefined();
   });
 
-  it('should exit on connection error', async () => {
-    mockConnect.mockRejectedValueOnce(new Error('Connection failed'));
+  it('should exit on stdio error', async () => {
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
+    const options = mockServeStdio.mock.calls[0][1];
+    const error = new Error('Connection failed');
+    options.onerror(error);
 
-    expect(errorSpy).toHaveBeenCalledWith(expect.any(Error));
+    expect(errorSpy).toHaveBeenCalledWith(error);
     expect(exitSpy).toHaveBeenCalledWith(1);
   });
 });
