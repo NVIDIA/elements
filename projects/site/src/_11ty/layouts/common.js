@@ -22,6 +22,9 @@ export const renderBaseHead = data => {
   const meta = resolvePageMeta(data);
   const ogType = meta.url === '/' ? 'website' : 'article';
   const robots = data.noindex ? 'noindex,follow' : 'all';
+  const markdownAlternate = data.alternateMarkdown
+    ? `<link rel="alternate" type="text/markdown" title="Markdown version" href="${getSiteUrl(data.alternateMarkdown)}">`
+    : '';
   return /* html */ `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +36,7 @@ export const renderBaseHead = data => {
   <link rel="canonical" href="${meta.canonicalUrl}">
   <link rel="alternate" type="text/plain" title="llms.txt" href="${DEPLOYED_SITE_URL}/llms.txt">
   ${UPDATE_FEEDS.map(({ label, outputPath, type }) => `<link rel="alternate" type="application/${type}+xml" title="NVIDIA Elements Updates (${label})" href="${getSiteUrl(outputPath)}">`).join('\n  ')}
+  ${markdownAlternate}
   <link href="https://github.com/NVIDIA/elements" rel="me">
   <meta property="og:title" content="${escapeAttr(meta.title)}">
   <meta property="og:url" content="${meta.canonicalUrl}">
@@ -183,7 +187,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="/docs/about/migration/">Migration</a></nve-tree-node>
   </nve-tree-node>
   
-  <nve-tree-node ${data.page.url.includes('/docs/foundations/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/foundations/') || data.page.url.includes('/docs/design-md/') ? 'expanded' : ''}>
     <a href="/docs/foundations/">Foundations</a>
     <nve-tree-node ${data.page.url.endsWith('/docs/foundations/') ? 'highlighted selected' : ''}><a href="/docs/foundations/">Overview</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted selected' : ''}><a href="/docs/foundations/typography/">Typography</a></nve-tree-node>
@@ -212,6 +216,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'highlighted selected' : ''}><a href="/docs/foundations/i18n/">i18n</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/visualization/' ? 'highlighted selected' : ''}><a href="/docs/foundations/visualization/">Visualization</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/view-transitions/' ? 'highlighted selected' : ''}><a href="/docs/foundations/view-transitions/">View Transitions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/design-md/') ? 'highlighted selected' : ''}><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/elements/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}>

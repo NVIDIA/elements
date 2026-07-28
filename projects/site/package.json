@@ -97,6 +97,7 @@
         "../media/dist/**/*.examples.json",
         "../monaco/dist/**/*.js",
         "../monaco/dist/**/*.examples.json",
+        "../internals/design/dist/DESIGN.md",
         "../internals/metadata/static/**",
         "../internals/patterns/dist/**/*.js",
         "../internals/patterns/dist/**/*.examples.json",
@@ -104,6 +105,10 @@
         "../internals/tools/dist/**/*.examples.json"
       ],
       "dependencies": [
+        {
+          "script": "../internals/design:build",
+          "cascade": false
+        },
         {
           "script": "../core:build",
           "cascade": false

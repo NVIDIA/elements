@@ -33,6 +33,7 @@ packages:
   - projects/forms
   - projects/styles
   - projects/themes
+  - projects/internals/design
   - projects/internals/eslint
   - projects/internals/metadata
   - projects/internals/patterns
@@ -126,6 +127,7 @@ minimumReleaseAgeExclude:
   - publint
   - typescript
   - vite
+  - '@google/design.md@0.4.0'
 
 allowBuilds:
   '@modelcontextprotocol/ext-apps': true
