@@ -1,3 +1,32 @@
+## <small>2.1.7 (2026-07-28)</small>
+
+* chore(ci): disable no-missing-gap-space rule for specific test files ([47ae4ff](https://github.com/NVIDIA/elements/commit/47ae4ff))
+* chore(ci): enforce html custom data package contracts ([39ba85c](https://github.com/NVIDIA/elements/commit/39ba85c))
+* chore(ci): update hugo starter to use mise defined binary ([29211a7](https://github.com/NVIDIA/elements/commit/29211a7))
+* chore(ci): update lighthouse ([73584d2](https://github.com/NVIDIA/elements/commit/73584d2))
+* chore(docs): feed title ([e7f3717](https://github.com/NVIDIA/elements/commit/e7f3717))
+* chore(docs): whats new page and skill ([9c6f1b2](https://github.com/NVIDIA/elements/commit/9c6f1b2))
+* chore(release): @nvidia-elements/core-v2.1.5 [skip ci] ([a704fbe](https://github.com/NVIDIA/elements/commit/a704fbe))
+* chore(release): @nvidia-elements/core-v2.1.6 [skip ci] ([4a3a305](https://github.com/NVIDIA/elements/commit/4a3a305))
+* chore(release): @nvidia-elements/core-v2.2.0 [skip ci] ([6cf3292](https://github.com/NVIDIA/elements/commit/6cf3292))
+* chore(release): @nvidia-elements/core-v2.2.1 [skip ci] ([730a2ec](https://github.com/NVIDIA/elements/commit/730a2ec))
+* chore(release): @nvidia-elements/forms-v2.0.5 [skip ci] ([c0e8291](https://github.com/NVIDIA/elements/commit/c0e8291))
+* chore(release): @nvidia-elements/lint-v2.1.3 [skip ci] ([2c2320d](https://github.com/NVIDIA/elements/commit/2c2320d))
+* chore(release): @nvidia-elements/lint-v2.2.0 [skip ci] ([0a6b54e](https://github.com/NVIDIA/elements/commit/0a6b54e))
+* chore(release): @nvidia-elements/markdown-v2.0.3 [skip ci] ([287e6c3](https://github.com/NVIDIA/elements/commit/287e6c3))
+* chore(release): @nvidia-elements/styles-v2.1.1 [skip ci] ([d6ce1a6](https://github.com/NVIDIA/elements/commit/d6ce1a6))
+* fix(cli): update mcp deps ([a7d5f7c](https://github.com/NVIDIA/elements/commit/a7d5f7c))
+* fix(core): clipping descenders on toolbar typography ([7965c3c](https://github.com/NVIDIA/elements/commit/7965c3c))
+* fix(core): generate valid standalone framework declarations ([1544477](https://github.com/NVIDIA/elements/commit/1544477))
+* fix(core): improve api custom elements schema ([6b299e3](https://github.com/NVIDIA/elements/commit/6b299e3))
+* fix(forms): remove stale html custom data contribution ([c64f40d](https://github.com/NVIDIA/elements/commit/c64f40d))
+* fix(lint): update no-missing-gap-space rule to allow gap-optional values ([df74628](https://github.com/NVIDIA/elements/commit/df74628))
+* fix(markdown): export html custom data ([090c9c3](https://github.com/NVIDIA/elements/commit/090c9c3))
+* fix(media): remove stale html custom data contribution ([baedd39](https://github.com/NVIDIA/elements/commit/baedd39))
+* fix(styles): default line heights ([d13ea94](https://github.com/NVIDIA/elements/commit/d13ea94))
+* feat(core): add media i18n values ([371692a](https://github.com/NVIDIA/elements/commit/371692a))
+* feat(lint): add rule to limit excessive primary actions ([e67fa69](https://github.com/NVIDIA/elements/commit/e67fa69))
+
 ## <small>2.1.6 (2026-07-21)</small>
 
 * chore(ci): update lighthouse ([b5b71ca](https://github.com/NVIDIA/elements/commit/b5b71ca))
