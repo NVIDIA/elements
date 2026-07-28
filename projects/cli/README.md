@@ -197,3 +197,4 @@ This hosted route does not install the Elements CLI or configure the MCP server.
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitHub Repo](https://github.com/NVIDIA/elements)
 - [npm](https://www.npmjs.com/package/@nvidia-elements/cli)
+- [MCP Registry](https://registry.modelcontextprotocol.io/?q=io.github.NVIDIA%2Felements)
