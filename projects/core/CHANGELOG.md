@@ -1,3 +1,15 @@
+## <small>2.2.1 (2026-07-28)</small>
+
+* fix(cli): update mcp deps ([a7d5f7c](https://github.com/NVIDIA/elements/commit/a7d5f7c))
+* fix(core): improve api custom elements schema ([6b299e3](https://github.com/NVIDIA/elements/commit/6b299e3))
+* fix(styles): default line heights ([d13ea94](https://github.com/NVIDIA/elements/commit/d13ea94))
+* chore(ci): update hugo starter to use mise defined binary ([29211a7](https://github.com/NVIDIA/elements/commit/29211a7))
+* chore(docs): feed title ([e7f3717](https://github.com/NVIDIA/elements/commit/e7f3717))
+* chore(docs): whats new page and skill ([9c6f1b2](https://github.com/NVIDIA/elements/commit/9c6f1b2))
+* chore(release): @nvidia-elements/lint-v2.2.0 [skip ci] ([0a6b54e](https://github.com/NVIDIA/elements/commit/0a6b54e))
+* chore(release): @nvidia-elements/styles-v2.1.1 [skip ci] ([d6ce1a6](https://github.com/NVIDIA/elements/commit/d6ce1a6))
+* feat(lint): add rule to limit excessive primary actions ([e67fa69](https://github.com/NVIDIA/elements/commit/e67fa69))
+
 ## 2.2.0 (2026-07-24)
 
 * chore(ci): enforce html custom data package contracts ([39ba85c](https://github.com/NVIDIA/elements/commit/39ba85c))
