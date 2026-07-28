@@ -4,7 +4,6 @@ import { getSiteUrl } from '../utils/site-url.js';
 
 const EXCLUDED_PREFIXES = ['/docs/changelog/', '/docs/metrics/', '/examples/', '/404'];
 const UTILITY_FILE_URLS = ['/llms.txt', '/llms-full.txt'];
-const INDEXABLE_FILE_URLS = ['/DESIGN.md'];
 const ROBOTS_NOINDEX = /<meta\s+[^>]*name=["']robots["'][^>]*content=["'][^"']*\bnoindex\b/i;
 const JSON_LD_SCRIPT =
   /<script\b[^>]*\btype=(?:"application\/ld\+json"|'application\/ld\+json'|application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/gi;
@@ -12,7 +11,6 @@ const JSON_LD_SCRIPT =
 export function isSitemapPageUrl(url) {
   if (!url) return false;
   if (UTILITY_FILE_URLS.includes(url)) return false;
-  if (INDEXABLE_FILE_URLS.includes(url)) return true;
   if (!url.endsWith('/') && !url.endsWith('.html')) return false;
   if (EXCLUDED_PREFIXES.some(prefix => url.startsWith(prefix))) return false;
   return true;
@@ -38,10 +36,7 @@ function getResultModifiedDate(result) {
 }
 
 export function renderSitemap(results = []) {
-  const pages = new Map([
-    ...INDEXABLE_FILE_URLS.map(url => [url, { url }]),
-    ...results.filter(isPublishableResult).map(result => [result.url, result])
-  ]);
+  const pages = new Map(results.filter(isPublishableResult).map(result => [result.url, result]));
   const entries = [...pages.values()]
     .sort((left, right) => left.url.localeCompare(right.url))
     .map(result => {

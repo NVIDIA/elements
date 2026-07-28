@@ -8,7 +8,7 @@
 
 # {{title}}
 
-<h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code, Cursor, and Codex direct access to component APIs, design tokens, skills, template validation, project scaffolding, and interactive MCP Apps views so your AI assistant can build with Elements effectively</h2>
+<h2 nve-text="heading sm muted">The NVIDIA Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code, Cursor, and Codex direct access to component APIs, design tokens, skills, template validation, project scaffolding, and interactive MCP Apps views so your AI assistant can build with Elements effectively</h2>
 
 {% install-cli %}
 
@@ -81,7 +81,7 @@ After adding the configuration in the root of your project, restart Codex for th
 
 <br />
 
-```toml
+```shell
 # .codex/config.toml
 [mcp_servers.elements]
 description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
@@ -328,3 +328,7 @@ npm config set registry {{ELEMENTS_REGISTRY_URL}} && npm login --auth-type=legac
 ### Unsupported Engine
 
 An `Unsupported engine` warning means your Node.js version is out of date. The CLI requires Node.js v20 or later. Update Node.js and try again.
+
+## Links
+
+- [MCP Registry](https://registry.modelcontextprotocol.io/?q=io.github.NVIDIA%2Felements)

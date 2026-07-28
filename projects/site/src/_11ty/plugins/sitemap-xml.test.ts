@@ -8,12 +8,12 @@ describe('isSitemapPageUrl', () => {
     expect(isSitemapPageUrl('/docs/cli/')).toBe(true);
     expect(isSitemapPageUrl('/docs/elements/')).toBe(true);
     expect(isSitemapPageUrl('/docs/foundations/')).toBe(true);
-    expect(isSitemapPageUrl('/DESIGN.md')).toBe(true);
   });
 
   it('should exclude agent utility files from sitemap pages', () => {
     expect(isSitemapPageUrl('/llms.txt')).toBe(false);
     expect(isSitemapPageUrl('/llms-full.txt')).toBe(false);
+    expect(isSitemapPageUrl('/DESIGN.md')).toBe(false);
   });
 
   it('should exclude non-indexable site sections', () => {
@@ -39,7 +39,7 @@ describe('isSitemapPageUrl', () => {
       '<loc>https://nvidia.github.io/elements/docs/whats-new/06-2026/</loc>\n<lastmod>2026-07-24T00:00:00.000Z</lastmod>'
     );
     expect(sitemap).toContain('<loc>https://nvidia.github.io/elements/docs/about/support/</loc>');
-    expect(sitemap).toContain('<loc>https://nvidia.github.io/elements/DESIGN.md</loc>');
+    expect(sitemap).not.toContain('<loc>https://nvidia.github.io/elements/DESIGN.md</loc>');
     expect(sitemap.match(/<lastmod>/g)).toHaveLength(1);
   });
 });
