@@ -13,6 +13,7 @@ NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Aut
 - [Contribution Guidelines](https://NVIDIA.github.io/elements/docs/about/contributions/)
 - [Feature request](https://github.com/NVIDIA/elements/issues/new?issuable_template=feature)
 - [Bug report](https://github.com/NVIDIA/elements/issues/new?issuable_template=default)
+- [Official NVIDIA Elements DESIGN.md](https://NVIDIA.github.io/elements/docs/design-md/)
 
 ## Organization
 

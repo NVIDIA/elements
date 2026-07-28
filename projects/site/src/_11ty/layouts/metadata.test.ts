@@ -55,6 +55,7 @@ const PRIORITY_DOC_ROUTES = [
   '/',
   '/docs/elements/',
   '/docs/cli/',
+  '/docs/design-md/',
   '/docs/mcp/',
   '/docs/skills/',
   '/docs/integrations/',
@@ -388,6 +389,20 @@ describe('renderBaseHead', () => {
     );
   });
 
+  it('should expose a page-specific Markdown alternate', () => {
+    const html = renderBaseHead({
+      page: { url: '/docs/design-md/' },
+      collections: { all: [] },
+      title: 'NVIDIA DESIGN.md for AI Agents',
+      description: 'Official design system file.',
+      alternateMarkdown: '/DESIGN.md'
+    });
+
+    expect(html).toContain(
+      '<link rel="alternate" type="text/markdown" title="Markdown version" href="https://nvidia.github.io/elements/DESIGN.md">'
+    );
+  });
+
   it('should expose RSS and Atom update feeds for html discovery', () => {
     const html = renderBaseHead({
       page: { url: '/' },
@@ -406,6 +421,14 @@ describe('renderBaseHead', () => {
 });
 
 describe('renderDocsNav', () => {
+  it('should expose DESIGN.md in getting started navigation', () => {
+    const html = renderDocsNav({ page: { url: '/docs/design-md/' } });
+
+    expect(html).toContain(
+      '<nve-tree-node highlighted selected><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>'
+    );
+  });
+
   it('should link the elements section label to the component catalog', () => {
     const html = renderDocsNav({ page: { url: '/docs/elements/' } });
 

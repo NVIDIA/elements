@@ -17,6 +17,7 @@ import {
 } from './src/_11ty/utils/env.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { agentSkillsPlugin } from './src/_11ty/plugins/agent-skills.js';
+import { designMdPlugin } from './src/_11ty/plugins/design-md.js';
 import { llmsTxtPlugin } from './src/_11ty/plugins/llms-txt.js';
 import { sitemapPlugin } from './src/_11ty/plugins/sitemap-xml.js';
 import { updatesFeedPlugin } from './src/_11ty/plugins/updates-feed.js';
@@ -171,6 +172,7 @@ export default function (eleventyConfig) {
   if (process.env.ELEVENTY_RUN_MODE === 'build') {
     eleventyConfig.addPlugin(llmsTxtPlugin);
     eleventyConfig.addPlugin(agentSkillsPlugin);
+    eleventyConfig.addPlugin(designMdPlugin);
   }
 
   // https://www.sitemaps.org

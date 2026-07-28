@@ -6,6 +6,11 @@
 }
 ---
 
+<style>
+  #docs-main #doc-content {
+    max-width: 1154px;
+  }
+</style>
 <div nve-layout="column gap:lg pad-top:lg">
   <h1 nve-text="display sm">NVIDIA Elements</h1>
   <h2 nve-text="heading">The Design Language and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles</h2>
@@ -100,6 +105,9 @@ import '@nvidia-elements/core/button/define.js';
   </nve-button>
   <nve-button>
     <a href="https://www.npmjs.com/package/@nvidia-elements/core" target="_blank"><nve-icon name="archive"></nve-icon> npm</a>
+  </nve-button>
+  <nve-button style="--text-transform: initial">
+    <a href="/docs/design-md/"><nve-icon name="document"></nve-icon> DESIGN.md</a>
   </nve-button>
   <nve-button>
     <a href="/docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>

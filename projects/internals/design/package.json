@@ -1,0 +1,106 @@
+{
+  "name": "@internals/design",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Build-time analysis and generated design artifacts for NVIDIA Elements.",
+  "type": "module",
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit",
+    "sync:root": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit",
+    "test": "wireit",
+    "test:spec": "wireit"
+  },
+  "exports": {
+    "./DESIGN.md": "./dist/DESIGN.md"
+  },
+  "devDependencies": {
+    "@google/design.md": "0.4.0",
+    "@internals/eslint": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "eslint": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "test"
+      ]
+    },
+    "build": {
+      "command": "node ./scripts/write-design-md.js dist/DESIGN.md",
+      "files": [
+        "src/design-md.js",
+        "scripts/write-design-md.js",
+        "../../themes/dist/index.json",
+        "package.json"
+      ],
+      "output": [
+        "dist/DESIGN.md"
+      ],
+      "dependencies": [
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
+      ]
+    },
+    "sync:root": {
+      "command": "node ./scripts/write-design-md.js ../../../DESIGN.md",
+      "files": [
+        "src/design-md.js",
+        "../../themes/dist/index.json"
+      ],
+      "output": [
+        "./dist/DESIGN.md"
+      ],
+      "dependencies": [
+        "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.js",
+        "src/**/*.ts",
+        "scripts/**/*.js",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../eslint:ci"
+      ]
+    },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "dist/DESIGN.md",
+        "src/**/*.test.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "test:spec"
+      ]
+    },
+    "test:spec": {
+      "command": "designmd lint dist/DESIGN.md",
+      "files": [
+        "dist/DESIGN.md"
+      ],
+      "output": [],
+      "dependencies": [
+        "build"
+      ]
+    }
+  }
+}
