@@ -1,3 +1,9 @@
+## <small>2.1.8 (2026-07-28)</small>
+
+* chore(docs): add design md file ([5c63566](https://github.com/NVIDIA/elements/commit/5c63566))
+* chore(docs): fix sitemap ([7c9f059](https://github.com/NVIDIA/elements/commit/7c9f059))
+* fix(cli): update mcp sdk ([0640e11](https://github.com/NVIDIA/elements/commit/0640e11))
+
 ## <small>2.1.7 (2026-07-28)</small>
 
 * chore(ci): disable no-missing-gap-space rule for specific test files ([47ae4ff](https://github.com/NVIDIA/elements/commit/47ae4ff))
