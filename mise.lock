@@ -64,6 +64,45 @@ url = "https://dl.google.com/go/go1.26.4.darwin-amd64.tar.gz"
 checksum = "sha256:3ca8fb4630b07c419cbdd51f754e31363cfcfb83b3a5354d9e895c90be2cc345"
 url = "https://dl.google.com/go/go1.26.4.windows-amd64.zip"
 
+[[tools.hugo]]
+version = "0.152.2"
+backend = "aqua:gohugoio/hugo"
+
+[tools.hugo."platforms.linux-arm64"]
+checksum = "sha256:76b6f2d229cba2e81555cfe08cf2a32294b6ce68f254cae6b981b062868c50ae"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248278"
+
+[tools.hugo."platforms.linux-arm64-musl"]
+checksum = "sha256:76b6f2d229cba2e81555cfe08cf2a32294b6ce68f254cae6b981b062868c50ae"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248278"
+
+[tools.hugo."platforms.linux-x64"]
+checksum = "sha256:52b6eda6c00f4449d96f0cbfd7300e834c26179c4fe68e0510ef566db52dba04"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248283"
+
+[tools.hugo."platforms.linux-x64-musl"]
+checksum = "sha256:52b6eda6c00f4449d96f0cbfd7300e834c26179c4fe68e0510ef566db52dba04"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248283"
+
+[tools.hugo."platforms.macos-arm64"]
+checksum = "sha256:c24fcf32faef4bf0e584bf3600061789c856110b75e34b3dbcac238c9ece6028"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_darwin-universal.tar.gz"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248279"
+
+[tools.hugo."platforms.macos-x64"]
+checksum = "sha256:c24fcf32faef4bf0e584bf3600061789c856110b75e34b3dbcac238c9ece6028"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_darwin-universal.tar.gz"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248279"
+
+[tools.hugo."platforms.windows-x64"]
+checksum = "sha256:f7af56db1437e8d2df1b2db95f9cf83106b243110f45ff3a4a570ef8086c7920"
+url = "https://github.com/gohugoio/hugo/releases/download/v0.152.2/hugo_0.152.2_windows-amd64.zip"
+url_api = "https://api.github.com/repos/gohugoio/hugo/releases/assets/308248305"
+
 [[tools.node]]
 version = "26.4.0"
 backend = "core:node"

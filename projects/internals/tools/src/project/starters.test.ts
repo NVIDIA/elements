@@ -118,6 +118,45 @@ describe('removeWireitScripts', () => {
     expect(result.wireit).toBeUndefined();
   });
 
+  it('should remove mise from exported wireit scripts', () => {
+    const packageJson = {
+      scripts: {
+        build: 'wireit',
+        dev: 'wireit'
+      },
+      wireit: {
+        build: {
+          command: 'mise exec -- hugo'
+        },
+        dev: {
+          command: 'mise exec -- hugo server'
+        }
+      }
+    };
+    const result = removeWireitScripts(packageJson);
+
+    expect(result.scripts.build).toBe('hugo');
+    expect(result.scripts.dev).toBe('hugo server');
+    expect(result.wireit).toBeUndefined();
+  });
+
+  it('should remove exported wireit scripts without commands', () => {
+    const packageJson = {
+      scripts: {
+        ci: 'wireit'
+      },
+      wireit: {
+        ci: {
+          dependencies: ['build']
+        }
+      }
+    };
+    const result = removeWireitScripts(packageJson);
+
+    expect(result.scripts.ci).toBeUndefined();
+    expect(result.wireit).toBeUndefined();
+  });
+
   it('should handle package.json with mixed wireit and regular scripts', () => {
     const packageJson = {
       scripts: {

@@ -8,6 +8,7 @@ pnpm = "11.9.0"
 vale = "3.15.1"
 go = "1.26.4"
 git-lfs = "3.7.1"
+hugo = "0.152.2"
 
 [tasks.clean]
 run = [

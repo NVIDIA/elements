@@ -121,7 +121,7 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [mise](https://mise.en.dev/)
 
-  mise installs and activates the repository toolchain from `mise.toml`, including Node.js, pnpm, Vale, Go, and Git LFS. CI uses the same manifest through the shared setup action.
+  mise installs and activates the repository toolchain from `mise.toml`, including Node.js, pnpm, Vale, Go, Git LFS, and Hugo. CI uses the same manifest through the shared setup action.
 
 - [pnpm Package Manager](https://pnpm.io/)
 

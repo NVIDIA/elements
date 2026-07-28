@@ -245,19 +245,29 @@ async function exportPackageFromWorkspace(projectDir: string) {
   const manifest = await readProjectManifestOnly(projectDir);
   let exportable = await createExportableManifest(projectDir, manifest, { catalogs });
   exportable = removeWireitScripts(
-    exportable as unknown as { scripts: Record<string, string>; wireit?: Record<string, { command: string }> }
+    exportable as unknown as {
+      scripts: Record<string, string>;
+      wireit?: Record<string, { command?: string }>;
+    }
   );
   return exportable;
 }
 
 export function removeWireitScripts(exportable: {
   scripts: Record<string, string>;
-  wireit?: Record<string, { command: string }>;
+  wireit?: Record<string, { command?: string }>;
 }) {
   Object.keys(exportable.scripts)
     .filter(key => exportable.scripts[key] === 'wireit' && exportable.wireit?.[key])
     .forEach(key => {
-      exportable.scripts[key] = exportable.wireit![key]!.command;
+      const command = exportable.wireit![key]!.command;
+      if (!command) {
+        exportable.scripts = Object.fromEntries(
+          Object.entries(exportable.scripts).filter(([script]) => script !== key)
+        );
+        return;
+      }
+      exportable.scripts[key] = command.replace(/^mise exec -- /, '');
 
       const scriptValue = exportable.scripts[key];
       if (scriptValue && scriptValue.match(/playwright-lock '(.*?)'/g)) {

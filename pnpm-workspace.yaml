@@ -133,7 +133,6 @@ allowBuilds:
   '@parcel/watcher': true
   bun: true
   esbuild: true
-  hugo-bin: true
   lmdb: true
   msgpackr-extract: true
   rs-module-lexer: true
