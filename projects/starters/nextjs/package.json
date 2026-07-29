@@ -17,7 +17,7 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "next": "16.2.6",
+    "next": "16.2.12",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
@@ -56,14 +56,14 @@
       ]
     },
     "build": {
-      "command": "next build --webpack",
+      "command": "next build",
       "files": [
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src/**",
         "package.json",
-        "next.config.mjs",
+        "next.config.ts",
         "tsconfig.json"
       ],
       "output": [

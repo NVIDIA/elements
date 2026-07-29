@@ -9,6 +9,7 @@ ESLint
 Wireit
 pnpm
 Vite
+Rolldown
 Vitest
 WCAG
 ARIA
@@ -30,8 +31,10 @@ Chromium
 Playwright
 OWASP
 CDN
+CPUs
 polyfill
 polyfills
+profiler
 entrypoint
 entrypoints
 postcss
@@ -72,15 +75,19 @@ popover
 popovers
 shortcode
 shortcodes
+passthrough
 server-driven
 single-column
 multi-column
 Heatmap
 heatmap
 heatmaps
+hotspot
 datalist
 debounce
 debounced
+deduplicating
+deduplication
 dropdown
 dropdowns
 checkbox
@@ -124,8 +131,10 @@ dev
 async
 Rollup
 Webpack
+Turbopack
 subheader
 tsconfig
+typecheck
 tsx
 TSX
 jsx
@@ -147,6 +156,7 @@ svg
 SVG
 scrollable
 parallelization
+sharding
 minimizable
 datagrid
 ESBuild
@@ -174,6 +184,7 @@ inlined
 Inlined
 globals
 gitignored
+untracked
 exportparts
 downleveling
 downlevel

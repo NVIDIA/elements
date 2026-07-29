@@ -106,15 +106,16 @@ export default function (eleventyConfig) {
 
   // Configure front matter parsing and file copying
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
-  eleventyConfig.addPassthroughCopy('src/**/*.ts');
-  eleventyConfig.addPassthroughCopy('src/**/*.css');
+  eleventyConfig.addPassthroughCopy('src/**/*.{ts,css}');
 
   // Expose locally built bundles so iframe previews can load them on localhost
   // instead of fetching from the CDN. Allows testing local component changes in
   // the editable canvas without a publish cycle. See canvas-editable.ts #bundleUrls.
-  eleventyConfig.addPassthroughCopy({ '../core/dist/bundles': 'local-bundles/elements' });
-  eleventyConfig.addPassthroughCopy({ '../themes/dist/bundles': 'local-bundles/themes' });
-  eleventyConfig.addPassthroughCopy({ '../styles/dist/bundles': 'local-bundles/styles' });
+  if (process.env.ELEVENTY_RUN_MODE !== 'build') {
+    eleventyConfig.addPassthroughCopy({ '../core/dist/bundles': 'local-bundles/elements' });
+    eleventyConfig.addPassthroughCopy({ '../themes/dist/bundles': 'local-bundles/themes' });
+    eleventyConfig.addPassthroughCopy({ '../styles/dist/bundles': 'local-bundles/styles' });
+  }
 
   // Configure Lit SSR plugin for web components
   eleventyConfig.addPlugin(litPlugin, {

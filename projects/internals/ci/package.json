@@ -3,11 +3,28 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "coverage": "wireit"
+    "ci": "wireit",
+    "coverage": "wireit",
+    "test": "wireit"
   },
   "wireit": {
+    "ci": {
+      "dependencies": [
+        "test"
+      ]
+    },
     "coverage": {
       "command": "node ./coverage.js",
+      "packageLocks": []
+    },
+    "test": {
+      "command": "node --test './*.test.js'",
+      "files": [
+        "ci-profile.js",
+        "ci-profile.test.js",
+        "package.json"
+      ],
+      "output": [],
       "packageLocks": []
     }
   }

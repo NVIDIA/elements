@@ -76,6 +76,12 @@ describe('getElementImports', () => {
     expect(imports).toHaveLength(1);
     expect(imports[0]).toBe(`import '@nvidia-elements/core/button/define.js';`);
   });
+
+  it('should only match complete element tag names', () => {
+    const imports = getElementImports('<nve-button-group></nve-button-group>', elements);
+
+    expect(imports).toHaveLength(0);
+  });
 });
 
 describe('getAvailableElementTags', () => {

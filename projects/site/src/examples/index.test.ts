@@ -3,14 +3,20 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 interface Example {
   elementName?: string;
   entrypoint?: string;
+  id?: string;
 }
 
 interface ImportOptions {
   elementsPagesBaseUrl?: string;
+  runMode?: 'build' | 'serve';
 }
 
-async function importExamplePage({ elementsPagesBaseUrl = 'https://nvidia.github.io/elements/' }: ImportOptions = {}) {
+async function importExamplePage({
+  elementsPagesBaseUrl = 'https://nvidia.github.io/elements/',
+  runMode = 'build'
+}: ImportOptions = {}) {
   vi.resetModules();
+  vi.stubEnv('ELEVENTY_RUN_MODE', runMode);
   vi.stubEnv('ELEMENTS_PAGES_BASE_URL', elementsPagesBaseUrl);
   vi.stubEnv('ELEMENTS_SITE_URL', 'https://nvidia.github.io');
   vi.stubEnv('PAGES_BASE_URL', '/elements/');
@@ -70,5 +76,27 @@ describe('example page urls', () => {
     };
 
     expect(getCanonicalUrl(example)).toBe('https://docs.example.com/elements/docs/elements/button/examples/');
+  });
+});
+
+describe('example page rendering', () => {
+  const example: Example = {
+    id: 'Default',
+    entrypoint: '@nvidia-elements/core/button/button.examples.json'
+  };
+
+  it('should omit the serve data module from production builds', async () => {
+    const { renderServeExampleScript } = await importExamplePage();
+
+    expect(renderServeExampleScript(example)).toBe('');
+  });
+
+  it('should load example data in serve mode', async () => {
+    const { renderServeExampleScript } = await importExamplePage({ runMode: 'serve' });
+    const script = renderServeExampleScript(example);
+
+    expect(script).toContain(`import examples from '${example.entrypoint}'`);
+    expect(script).toContain(`s.id === '${example.id}'`);
+    expect(script).toContain('container.setHTMLUnsafe(example.template)');
   });
 });
