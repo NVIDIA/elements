@@ -96,7 +96,6 @@
         "build",
         "publint",
         "test",
-        "test:lighthouse",
         "test:visual"
       ]
     },

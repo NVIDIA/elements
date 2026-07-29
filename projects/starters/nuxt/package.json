@@ -6,6 +6,7 @@
     "build": "wireit",
     "ci": "wireit",
     "lint": "wireit",
+    "typecheck": "wireit",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
@@ -14,15 +15,15 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "nuxt": "4.4.8",
-    "vue": "3.5.39",
-    "vue-router": "5.1.0"
+    "nuxt": "4.5.1",
+    "vue": "3.5.40",
+    "vue-router": "5.2.0"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
     "typescript": "catalog:",
-    "vue-tsc": "3.3.5"
+    "vue-tsc": "3.3.8"
   },
   "wireit": {
     "ci": {
@@ -32,7 +33,7 @@
       ]
     },
     "build": {
-      "command": "nuxi typecheck && nuxt build",
+      "command": "nuxt build",
       "files": [
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
@@ -48,6 +49,24 @@
         ".output/public/**",
         ".output/server/**"
       ],
+      "dependencies": [
+        "typecheck"
+      ]
+    },
+    "typecheck": {
+      "command": "nuxi typecheck",
+      "files": [
+        "../../core/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "app/**",
+        "src/**",
+        "env.d.ts",
+        "package.json",
+        "tsconfig.json",
+        "nuxt.config.ts"
+      ],
+      "output": [],
       "dependencies": [
         {
           "script": "../../core:build",

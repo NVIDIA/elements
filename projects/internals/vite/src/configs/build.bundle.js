@@ -37,8 +37,9 @@ export const libraryBundleConfig = {
       plugins: [
         dtsBundle(),
         minifyHTML(),
-        // only run on CI where visualization is displayed, temporarily flip flag to test local
+        // Bundle visualization is expensive, so packages must explicitly opt in.
         process.env.CI === 'true' &&
+          process.env.ELEMENTS_BUNDLE_VISUALIZER === 'true' &&
           visualizer({
             filename: 'coverage/size/index.html',
             gzipSize: true,

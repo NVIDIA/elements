@@ -28,9 +28,10 @@ export function getAvailableElementTags(elements: Element[]) {
 }
 
 export function getElementImports(html: string, elements: Element[], lazy = false) {
+  const elementTags = new Set(Array.from(html.matchAll(/<([a-z][\w.-]*-[\w.-]+)/g), match => match[1]));
   const IMPORTS = [
     ...elements
-      .filter(element => html?.includes(`<${element.name}`))
+      .filter(element => elementTags.has(element.name))
       .filter(element => element.manifest?.deprecated !== 'true' && element.manifest?.metadata.entrypoint)
       .map(element => {
         const path = `${element.manifest!.metadata.entrypoint}/define.js`;
@@ -38,7 +39,7 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
       })
   ];
 
-  const ELEMENTS_CODE_IMPORTS = html.includes('nve-codeblock')
+  const ELEMENTS_CODE_IMPORTS = elementTags.has('nve-codeblock')
     ? [
         `import '@nvidia-elements/code/codeblock/languages/html.js';`,
         `import '@nvidia-elements/code/codeblock/languages/css.js';`,

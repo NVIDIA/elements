@@ -1063,7 +1063,10 @@
           "script": "../forms:build",
           "cascade": false
         }
-      ]
+      ],
+      "env": {
+        "ELEMENTS_BUNDLE_VISUALIZER": "true"
+      }
     },
     "build:icons": {
       "command": "node ./build/icons.js",
