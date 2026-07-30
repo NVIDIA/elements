@@ -4,11 +4,15 @@
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.",
+  "description": "Core CSS foundation for the NVIDIA Elements design system, providing layout utilities, typography styles, and view transitions.",
   "keywords": [
+    "nvidia",
+    "design-system",
     "css",
+    "css-utilities",
     "layout",
-    "typography"
+    "typography",
+    "view-transitions"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "customElements": "dist/custom-elements.json",
