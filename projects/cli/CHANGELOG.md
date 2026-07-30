@@ -1,3 +1,16 @@
+## <small>2.1.9 (2026-07-30)</small>
+
+* chore(ci): enhance ci performance profiling and add new scripts ([ef0a912](https://github.com/NVIDIA/elements/commit/ef0a912))
+* chore(ci): update metadata and test coverage report ([216a7a9](https://github.com/NVIDIA/elements/commit/216a7a9))
+* chore(release): @nvidia-elements/core-v2.2.2 [skip ci] ([f9f1e27](https://github.com/NVIDIA/elements/commit/f9f1e27))
+* chore(release): @nvidia-elements/lint-v2.3.0 [skip ci] ([35bb729](https://github.com/NVIDIA/elements/commit/35bb729))
+* chore(release): @nvidia-elements/styles-v2.1.2 [skip ci] ([71fab6c](https://github.com/NVIDIA/elements/commit/71fab6c))
+* fix(cli): workspace dependency ([5ecbd96](https://github.com/NVIDIA/elements/commit/5ecbd96))
+* fix(core): drawer positioning ([f66cab0](https://github.com/NVIDIA/elements/commit/f66cab0))
+* fix(core): update select size handling and improve layout ([6af535d](https://github.com/NVIDIA/elements/commit/6af535d))
+* fix(styles): add width rule for row layout with space-between alignment ([61113ad](https://github.com/NVIDIA/elements/commit/61113ad))
+* feat(lint): add rule to restrict container="full" usage ([a634e39](https://github.com/NVIDIA/elements/commit/a634e39))
+
 ## <small>2.1.8 (2026-07-28)</small>
 
 * chore(docs): add design md file ([5c63566](https://github.com/NVIDIA/elements/commit/5c63566))
