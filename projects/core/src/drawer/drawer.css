@@ -107,17 +107,17 @@ nve-icon-button {
 }
 
 :host([position='left']) {
-  inset: auto auto auto 0;
+  inset: auto auto auto 0 !important;
 }
 
 :host([position='right']) {
-  inset: auto 0 auto auto;
+  inset: auto 0 auto auto !important;
 }
 
 :host([position='top']) {
-  inset: 0 auto auto;
+  inset: 0 auto auto !important;
 }
 
 :host([position='bottom']) {
-  inset: auto auto 0;
+  inset: auto auto 0 !important;
 }
