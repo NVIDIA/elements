@@ -76,7 +76,8 @@ const rule = {
           return;
         }
 
-        if (containerValue === 'flat') {
+        // The dedicated full-container rule validates container="full" placement.
+        if (containerValue === 'flat' || containerValue === 'full') {
           return;
         }
 

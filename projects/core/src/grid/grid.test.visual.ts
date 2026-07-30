@@ -11,6 +11,7 @@ function head(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/checkbox/define.js';
     import '@nvidia-elements/core/radio/define.js';
     import '@nvidia-elements/core/icon-button/define.js';
+    import '@nvidia-elements/core/page/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
   <style>
@@ -411,27 +412,29 @@ function columnAlignEnd(theme: '' | 'dark' = '') {
 function containerFull(theme: '' | 'dark' = '') {
   return /* html */ `
   ${head(theme)}
-  <nve-grid container="full">
-    <nve-grid-header>
-      ${Array(5)
-        .fill('')
-        .map(() => `<nve-grid-column>•︎•︎•︎•︎•︎•︎</nve-grid-column> `)
-        .join('')}
-    </nve-grid-header>
-    ${Array(6)
-      .fill('')
-      .map(
-        () => `
-      <nve-grid-row>
+  <nve-page document-scroll>
+    <nve-grid container="full">
+      <nve-grid-header>
         ${Array(5)
           .fill('')
-          .map(() => `<nve-grid-cell>•︎•︎•︎•︎•︎•︎</nve-grid-cell> `)
+          .map(() => `<nve-grid-column>•︎•︎•︎•︎•︎•︎</nve-grid-column> `)
           .join('')}
-      </nve-grid-row>
-    `
-      )
-      .join('')}
-  </nve-grid>`;
+      </nve-grid-header>
+      ${Array(6)
+        .fill('')
+        .map(
+          () => `
+        <nve-grid-row>
+          ${Array(5)
+            .fill('')
+            .map(() => `<nve-grid-cell>•︎•︎•︎•︎•︎•︎</nve-grid-cell> `)
+            .join('')}
+        </nve-grid-row>
+      `
+        )
+        .join('')}
+    </nve-grid>
+  </nve-page>`;
 }
 
 function containerFlat(theme: '' | 'dark' = '') {

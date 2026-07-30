@@ -5,6 +5,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/page/define.js';
 
 export default {
   title: 'Elements/Alert',
@@ -20,6 +21,7 @@ export const Default = {
 
 /**
  * @summary Alert status variants for semantic messaging. Use accent for informational updates, warning for cautionary messages requiring attention, success for confirmations, and danger for errors or critical issues that may block user progress.
+ * @tags test-case
  */
 export const SupportStatus = {
   render: () => html`
@@ -35,6 +37,7 @@ export const SupportStatus = {
 
 /**
  * @summary Extended status variants for workflow and process state communication. Use these specialized states (scheduled, queued, running, failed, etc.) in dashboards, build pipelines, or task management interfaces where users need detailed visibility into process lifecycle stages.
+ * @tags test-case
  */
 export const Status = {
   render: () => html`
@@ -196,27 +199,27 @@ export const Actions = {
  */
 export const Prominence = {
   render: () => html`
-    <div nve-layout="column gap:md">
-      <nve-alert-group prominence="emphasis" container="full">
+    <nve-page document-scroll>
+      <nve-alert-group slot="header" prominence="emphasis" container="full">
         <nve-alert closable><span slot="prefix">Standard</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="accent" prominence="emphasis" container="full">
+      <nve-alert-group slot="header" status="accent" prominence="emphasis" container="full">
         <nve-alert closable><span slot="prefix">Accent</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="warning" prominence="emphasis" container="full">
+      <nve-alert-group slot="header" status="warning" prominence="emphasis" container="full">
         <nve-alert closable><span slot="prefix">Warning</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="success" prominence="emphasis" container="full">
+      <nve-alert-group slot="header" status="success" prominence="emphasis" container="full">
         <nve-alert closable><span slot="prefix">Success</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
       </nve-alert-group>
 
-      <nve-alert-group status="danger" prominence="emphasis" container="full">
+      <nve-alert-group slot="header" status="danger" prominence="emphasis" container="full">
         <nve-alert closable><span slot="prefix">Danger</span> banner message <a href="#" nve-text="link" slot="actions">view details</a></nve-alert>
       </nve-alert-group>
-    </div>
+    </nve-page>
   `
 }
 

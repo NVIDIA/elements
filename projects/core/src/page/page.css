@@ -4,6 +4,7 @@
 :host {
   --background: var(--nve-sys-layer-canvas-background);
   --color: var(--nve-sys-layer-canvas-color);
+  --gap: var(--nve-ref-space-md);
   --padding: 0;
   display: block;
   height: 100vh;
@@ -151,7 +152,7 @@ slot {
 }
 
 slot:not([name]) {
-  gap: var(--nve-ref-space-md);
+  gap: var(--gap);
   padding: var(--padding);
   display: flex;
   flex-direction: column;

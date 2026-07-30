@@ -30,6 +30,7 @@ import noInvalidEventListeners from '../rules/no-invalid-event-listeners.js';
 import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
 import noMissingGapSpace from '../rules/no-missing-gap-space.js';
 import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
+import noRestrictedContainerFull from '../rules/no-restricted-container-full.js';
 import noRestrictedPageSizing from '../rules/no-restricted-page-sizing.js';
 import noNestedContainerTypes from '../rules/no-nested-container-types.js';
 import noUnstyledTypography from '../rules/no-unstyled-typography.js';
@@ -79,6 +80,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-missing-popover-trigger': noMissingPopoverTrigger,
         'no-misprefixed-tags': noMisprefixedTags,
         'no-restricted-attributes': noRestrictedAttributes,
+        'no-restricted-container-full': noRestrictedContainerFull,
         'no-restricted-page-sizing': noRestrictedPageSizing,
         'no-slotted-popovers': noSlottedPopovers,
         'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue,
@@ -115,6 +117,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-missing-popover-trigger': ['error'],
     '@nvidia-elements/lint/no-misprefixed-tags': ['error'],
     '@nvidia-elements/lint/no-restricted-attributes': ['error'],
+    '@nvidia-elements/lint/no-restricted-container-full': ['error'],
     '@nvidia-elements/lint/no-restricted-page-sizing': ['error'],
     '@nvidia-elements/lint/no-slotted-popovers': ['error'],
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],

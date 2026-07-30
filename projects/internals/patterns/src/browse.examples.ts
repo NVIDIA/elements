@@ -27,7 +27,7 @@ export default {
  */
 export const ContentRow = {
   render: () => html`
-  <nve-card role="listitem" container="full">
+  <nve-card role="listitem" container="flat">
     <nve-card-content>
       <div nve-layout="grid align:vertical-center align:space-between gap:md">
         <div nve-layout="span:4 row gap:md align:vertical-center">

@@ -1084,6 +1084,7 @@ export const Placeholder = {
 
 /**
  * @summary Full-width grid container for max space use, providing edge-to-edge data display for comprehensive information presentation.
+ * @tags test-case
  */
 export const Full = {
   render: () => html`
@@ -1102,6 +1103,7 @@ export const Full = {
 
 /**
  * @summary Flat container styling for minimal visual weight, providing subtle grid presentation that integrates seamlessly with surrounding content.
+ * @tags test-case
  */
 export const Flat = {
   render: () => html`

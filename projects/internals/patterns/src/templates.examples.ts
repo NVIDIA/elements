@@ -274,16 +274,16 @@ export const ListView = {
         <nve-grid-column>Status</nve-grid-column>
       </nve-grid-header>
       ${[
-        { id: 'av-2841', route: 'Highway 101', vehicle: 'av-prototype-042', duration: '4h 18m', distance: '247 km', status: 'running', label: 'Recording' },
-        { id: 'av-2840', route: 'Urban downtown loop', vehicle: 'av-prototype-039', duration: '2h 04m', distance: '58 km', status: 'success', label: 'Complete' },
-        { id: 'av-2839', route: 'Sunnyvale residential', vehicle: 'av-prototype-042', duration: '1h 47m', distance: '42 km', status: 'success', label: 'Complete' },
-        { id: 'av-2838', route: 'Foothill expressway', vehicle: 'av-prototype-041', duration: '3h 32m', distance: '189 km', status: 'warning', label: 'Flagged' },
-        { id: 'av-2837', route: 'Construction reroute', vehicle: 'av-prototype-039', duration: '0h 52m', distance: '14 km', status: 'success', label: 'Complete' },
-        { id: 'av-2836', route: 'Heavy rain night drive', vehicle: 'av-prototype-042', duration: '2h 15m', distance: '76 km', status: 'warning', label: 'Flagged' },
-        { id: 'av-2835', route: 'Tunnel and bridge mix', vehicle: 'av-prototype-040', duration: '1h 33m', distance: '64 km', status: 'success', label: 'Complete' },
-        { id: 'av-2834', route: 'Parking lot maneuvers', vehicle: 'av-prototype-039', duration: '0h 47m', distance: '6 km', status: 'success', label: 'Complete' },
-        { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km', status: 'success', label: 'Complete' },
-      ].map(d => html`
+      { id: 'av-2841', route: 'Highway 101', vehicle: 'av-prototype-042', duration: '4h 18m', distance: '247 km', status: 'running', label: 'Recording' },
+      { id: 'av-2840', route: 'Urban downtown loop', vehicle: 'av-prototype-039', duration: '2h 04m', distance: '58 km', status: 'success', label: 'Complete' },
+      { id: 'av-2839', route: 'Sunnyvale residential', vehicle: 'av-prototype-042', duration: '1h 47m', distance: '42 km', status: 'success', label: 'Complete' },
+      { id: 'av-2838', route: 'Foothill expressway', vehicle: 'av-prototype-041', duration: '3h 32m', distance: '189 km', status: 'warning', label: 'Flagged' },
+      { id: 'av-2837', route: 'Construction reroute', vehicle: 'av-prototype-039', duration: '0h 52m', distance: '14 km', status: 'success', label: 'Complete' },
+      { id: 'av-2836', route: 'Heavy rain night drive', vehicle: 'av-prototype-042', duration: '2h 15m', distance: '76 km', status: 'warning', label: 'Flagged' },
+      { id: 'av-2835', route: 'Tunnel and bridge mix', vehicle: 'av-prototype-040', duration: '1h 33m', distance: '64 km', status: 'success', label: 'Complete' },
+      { id: 'av-2834', route: 'Parking lot maneuvers', vehicle: 'av-prototype-039', duration: '0h 47m', distance: '6 km', status: 'success', label: 'Complete' },
+      { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km', status: 'success', label: 'Complete' },
+    ].map(d => html`
         <nve-grid-row>
           <nve-grid-cell>${d.id}</nve-grid-cell>
           <nve-grid-cell>${d.route}</nve-grid-cell>
@@ -450,16 +450,16 @@ export const SplitView = {
         <nve-grid-column width="max-content" aria-label="details"></nve-grid-column>
       </nve-grid-header>
       ${[
-        { id: 'av-2841', route: 'Highway 101', vehicle: 'av-prototype-042', duration: '4h 18m', distance: '247 km', status: 'running', label: 'Recording' },
-        { id: 'av-2840', route: 'Urban downtown loop', vehicle: 'av-prototype-039', duration: '2h 04m', distance: '58 km', status: 'success', label: 'Complete' },
-        { id: 'av-2839', route: 'Sunnyvale residential', vehicle: 'av-prototype-042', duration: '1h 47m', distance: '42 km', status: 'success', label: 'Complete' },
-        { id: 'av-2838', route: 'Foothill expressway', vehicle: 'av-prototype-041', duration: '3h 32m', distance: '189 km', status: 'warning', label: 'Flagged' },
-        { id: 'av-2837', route: 'Construction reroute', vehicle: 'av-prototype-039', duration: '0h 52m', distance: '14 km', status: 'success', label: 'Complete' },
-        { id: 'av-2836', route: 'Heavy rain night drive', vehicle: 'av-prototype-042', duration: '2h 15m', distance: '76 km', status: 'warning', label: 'Flagged' },
-        { id: 'av-2835', route: 'Tunnel and bridge mix', vehicle: 'av-prototype-040', duration: '1h 33m', distance: '64 km', status: 'success', label: 'Complete' },
-        { id: 'av-2834', route: 'Parking lot maneuvers', vehicle: 'av-prototype-039', duration: '0h 47m', distance: '6 km', status: 'success', label: 'Complete' },
-        { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km', status: 'success', label: 'Complete' },
-      ].map((d, i) => html`
+      { id: 'av-2841', route: 'Highway 101', vehicle: 'av-prototype-042', duration: '4h 18m', distance: '247 km', status: 'running', label: 'Recording' },
+      { id: 'av-2840', route: 'Urban downtown loop', vehicle: 'av-prototype-039', duration: '2h 04m', distance: '58 km', status: 'success', label: 'Complete' },
+      { id: 'av-2839', route: 'Sunnyvale residential', vehicle: 'av-prototype-042', duration: '1h 47m', distance: '42 km', status: 'success', label: 'Complete' },
+      { id: 'av-2838', route: 'Foothill expressway', vehicle: 'av-prototype-041', duration: '3h 32m', distance: '189 km', status: 'warning', label: 'Flagged' },
+      { id: 'av-2837', route: 'Construction reroute', vehicle: 'av-prototype-039', duration: '0h 52m', distance: '14 km', status: 'success', label: 'Complete' },
+      { id: 'av-2836', route: 'Heavy rain night drive', vehicle: 'av-prototype-042', duration: '2h 15m', distance: '76 km', status: 'warning', label: 'Flagged' },
+      { id: 'av-2835', route: 'Tunnel and bridge mix', vehicle: 'av-prototype-040', duration: '1h 33m', distance: '64 km', status: 'success', label: 'Complete' },
+      { id: 'av-2834', route: 'Parking lot maneuvers', vehicle: 'av-prototype-039', duration: '0h 47m', distance: '6 km', status: 'success', label: 'Complete' },
+      { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km', status: 'success', label: 'Complete' },
+    ].map((d, i) => html`
         <nve-grid-row ?selected=${i === 0}>
           <nve-grid-cell>${d.id}</nve-grid-cell>
           <nve-grid-cell>${d.route}</nve-grid-cell>
@@ -574,15 +574,15 @@ export const MediaListView = {
     </nve-button-group>
     <section nve-layout="grid span-items:3 gap:md">
       ${[
-        { id: 'av-2840', route: 'Urban downtown loop', vehicle: 'av-prototype-039', duration: '2h 04m', distance: '58 km' },
-        { id: 'av-2839', route: 'Sunnyvale residential', vehicle: 'av-prototype-042', duration: '1h 47m', distance: '42 km' },
-        { id: 'av-2838', route: 'Foothill expressway', vehicle: 'av-prototype-041', duration: '3h 32m', distance: '189 km' },
-        { id: 'av-2837', route: 'Construction reroute', vehicle: 'av-prototype-039', duration: '0h 52m', distance: '14 km' },
-        { id: 'av-2836', route: 'Heavy rain night drive', vehicle: 'av-prototype-042', duration: '2h 15m', distance: '76 km' },
-        { id: 'av-2835', route: 'Tunnel and bridge mix', vehicle: 'av-prototype-040', duration: '1h 33m', distance: '64 km' },
-        { id: 'av-2834', route: 'Parking lot maneuvers', vehicle: 'av-prototype-039', duration: '0h 47m', distance: '6 km' },
-        { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km' },
-      ].map(d => html`
+      { id: 'av-2840', route: 'Urban downtown loop', vehicle: 'av-prototype-039', duration: '2h 04m', distance: '58 km' },
+      { id: 'av-2839', route: 'Sunnyvale residential', vehicle: 'av-prototype-042', duration: '1h 47m', distance: '42 km' },
+      { id: 'av-2838', route: 'Foothill expressway', vehicle: 'av-prototype-041', duration: '3h 32m', distance: '189 km' },
+      { id: 'av-2837', route: 'Construction reroute', vehicle: 'av-prototype-039', duration: '0h 52m', distance: '14 km' },
+      { id: 'av-2836', route: 'Heavy rain night drive', vehicle: 'av-prototype-042', duration: '2h 15m', distance: '76 km' },
+      { id: 'av-2835', route: 'Tunnel and bridge mix', vehicle: 'av-prototype-040', duration: '1h 33m', distance: '64 km' },
+      { id: 'av-2834', route: 'Parking lot maneuvers', vehicle: 'av-prototype-039', duration: '0h 47m', distance: '6 km' },
+      { id: 'av-2833', route: 'Mountain pass', vehicle: 'av-prototype-041', duration: '5h 06m', distance: '312 km' },
+    ].map(d => html`
       <nve-card style="height: 100%; width: 100%;">
         <img src="/static/images/test-image-1.svg" alt="route preview for ${d.route}" loading="lazy" style="width: 100%; object-fit: cover; max-height: 200px;" />
         <nve-card-header>
@@ -792,7 +792,7 @@ export const Auth = {
  */
 export const CodeEditor = {
   render: () => html`
-<nve-page>
+<nve-page style="--gap: 0">
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Config Editor</h2>
@@ -832,12 +832,11 @@ export const CodeEditor = {
       </nve-tree>
     </nve-page-panel-content>
   </nve-page-panel>
-  <main nve-layout="column full gap:none">
-    <nve-toolbar container="full">
-      <nve-tabs behavior-select>
-        <nve-tabs-item selected>lidar_config.py</nve-tabs-item>
-      </nve-tabs>
-    </nve-toolbar>
+  <nve-toolbar container="full">
+    <nve-tabs behavior-select>
+      <nve-tabs-item selected>lidar_config.py</nve-tabs-item>
+    </nve-tabs>
+  </nve-toolbar>
     <nve-monaco-input
       language="python"
       line-numbers="on"
@@ -868,7 +867,6 @@ class LidarConfig:
     pitch_offset: float = -0.5  # slight downward tilt
     yaw_offset: float = 0.0
 "></nve-monaco-input>
-  </main>
   <nve-page-panel slot="bottom" size="sm" closable>
     <nve-page-panel-header>
       <nve-tabs behavior-select>
