@@ -10,6 +10,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/progressive-filter-chip/define.js';
 import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/page/define.js';
 
 export default {
   title: 'Elements/Toolbar',
@@ -60,11 +61,13 @@ export const ContainerInset = {
  */
 export const ContainerFull = {
   render: () => html`
-    <nve-toolbar container="full">
-      <nve-button><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
-    </nve-toolbar>
+    <nve-page document-scroll>
+      <nve-toolbar slot="subheader" container="full">
+        <nve-button><nve-icon name="add"></nve-icon> create</nve-button>
+        <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
+        <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      </nve-toolbar>
+    </nve-page>
   `
 };
 

@@ -36,6 +36,12 @@ export default [
     }
   },
   {
+    files: ['src/alert/alert-group.test.visual.ts'],
+    rules: {
+      '@nvidia-elements/lint/no-restricted-container-full': ['off']
+    }
+  },
+  {
     files: ['src/button/button.test.visual.ts'],
     rules: {
       '@nvidia-elements/lint/no-excessive-primary-actions': ['off']

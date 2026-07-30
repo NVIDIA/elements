@@ -209,6 +209,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-restricted-container-full</code></nve-grid-cell>
+    <nve-grid-cell>Restrict container="full" to direct children of nve-page.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-restricted-page-sizing</code></nve-grid-cell>
     <nve-grid-cell>Disallow custom height or width styles on nve-page.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>

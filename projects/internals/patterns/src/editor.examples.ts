@@ -28,7 +28,7 @@ export default {
  */
 export const FileBrowser = {
   render: () => html`
-<nve-page>
+<nve-page style="--gap: 0">
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Config Editor</h2>
@@ -70,14 +70,12 @@ export const FileBrowser = {
       </nve-tree>
     </nve-page-panel-content>
   </nve-page-panel>
-
-  <main nve-layout="column full gap:none">
-    <nve-toolbar container="full">
-      <nve-tabs behavior-select>
-        <nve-tabs-item selected>lidar_config.py</nve-tabs-item>
-      </nve-tabs>
-    </nve-toolbar>
-    <nve-monaco-input
+  <nve-toolbar container="full">
+    <nve-tabs behavior-select>
+      <nve-tabs-item selected>lidar_config.py</nve-tabs-item>
+    </nve-tabs>
+  </nve-toolbar>
+  <nve-monaco-input
       language="python"
       line-numbers="on"
       folding
@@ -117,8 +115,6 @@ class LidarProcessingConfig:
     clustering_eps: float = 0.5
     min_cluster_size: int = 10
 "></nve-monaco-input>
-  </main>
-
   <nve-page-panel slot="bottom" size="sm" closable>
     <nve-page-panel-header>
       <nve-tabs behavior-select>
@@ -169,25 +165,25 @@ export const DiffView = {
     <nve-button slot="suffix">Merge</nve-button>
   </nve-toolbar>
 
-  <main nve-layout="column gap:none">
-    <nve-toolbar container="full" style="--background: var(--nve-sys-layer-canvas-accent-background)">
-      <div slot="prefix" nve-layout="row gap:sm align:vertical-center">
-        <nve-icon-button icon-name="branch" size="sm" container="flat"></nve-icon-button>
-        <span nve-text="body sm">release/v2.3.0</span>
-      </div>
-      <nve-icon-button icon-name="arrow" direction="right" size="sm" container="flat"></nve-icon-button>
-      <div nve-layout="row gap:sm align:vertical-center">
-        <nve-icon-button icon-name="branch" size="sm" container="flat"></nve-icon-button>
-        <span nve-text="body sm">feature/lidar-calibration</span>
-      </div>
-    </nve-toolbar>
-    <nve-monaco-diff-input
-      language="yaml"
-      line-numbers="on"
-      side-by-side
-      readonly
-      style="flex: 1; --min-height: 100%; --border-radius: 0;"
-      original="# Sensor Parameters - v2.3.0
+  <nve-toolbar slot="subheader" container="flat" style="--background: var(--nve-sys-layer-canvas-accent-background)">
+    <div slot="prefix" nve-layout="row gap:sm align:vertical-center">
+      <nve-icon-button icon-name="branch" size="sm" container="flat"></nve-icon-button>
+      <span nve-text="body sm">release/v2.3.0</span>
+    </div>
+    <nve-icon-button icon-name="arrow" direction="right" size="sm" container="flat"></nve-icon-button>
+    <div nve-layout="row gap:sm align:vertical-center">
+      <nve-icon-button icon-name="branch" size="sm" container="flat"></nve-icon-button>
+      <span nve-text="body sm">feature/lidar-calibration</span>
+    </div>
+  </nve-toolbar>
+
+  <nve-monaco-diff-input
+    language="yaml"
+    line-numbers="on"
+    side-by-side
+    readonly
+    style="flex: 1; --min-height: 100%; --border-radius: 0;"
+    original="# Sensor Parameters - v2.3.0
 # Last updated: 2025-12-15
 
 lidar:
@@ -267,8 +263,7 @@ radar:
     range_max: 300.0  # increased range
     enabled: true
 "
-    ></nve-monaco-diff-input>
-  </main>
+  ></nve-monaco-diff-input>
 
   <nve-toolbar slot="subfooter">
     <nve-icon-button icon-name="information-circle-stroke" size="sm" container="flat"></nve-icon-button>
@@ -346,7 +341,7 @@ export const ReadOnly = {
   </nve-page-panel>
 
   <main nve-layout="column gap:none" style="height: 100%">
-    <nve-toolbar container="full">
+    <nve-toolbar container="flat">
       <nve-tabs behavior-select>
         <nve-tabs-item selected>robot_config.yaml</nve-tabs-item>
       </nve-tabs>

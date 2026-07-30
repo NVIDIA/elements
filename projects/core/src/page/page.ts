@@ -29,6 +29,7 @@ import styles from './page.css?inline';
  * @cssprop --border-radius
  * @cssprop --box-shadow
  * @cssprop --min-height
+ * @cssprop --gap - Vertical gap spacing between main content items
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/
  * @responsive false
  *

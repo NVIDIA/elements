@@ -136,7 +136,7 @@ export const AlertGroup = {
   render: () => html`
 <nve-toggletip id="toggletip-alert-group">
   <nve-toggletip-header>
-    <nve-alert-group status="danger" container="full" prominence="emphasis">
+    <nve-alert-group status="danger" prominence="emphasis">
       <nve-alert>Workflow Failed</nve-alert>
     </nve-alert-group>
   </nve-toggletip-header>

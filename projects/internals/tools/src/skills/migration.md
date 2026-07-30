@@ -324,21 +324,25 @@ Replace `nve-alert-banner` with `nve-alert-group` using `prominence="emphasis"` 
 Before:
 
 ```html
-<nve-alert-banner>
-  <nve-alert closable>
-    <span slot="prefix">Standard</span> banner message
-  </nve-alert>
-</nve-alert-banner>
+<nve-page>
+  <nve-alert-banner slot="header">
+    <nve-alert closable>
+      <span slot="prefix">Standard</span> banner message
+    </nve-alert>
+  </nve-alert-banner>
+</nve-page>
 ```
 
 After:
 
 ```html
-<nve-alert-group prominence="emphasis" container="full">
-  <nve-alert closable>
-    <span slot="prefix">Standard</span> banner message
-  </nve-alert>
-</nve-alert-group>
+<nve-page>
+  <nve-alert-group slot="header" prominence="emphasis" container="full">
+    <nve-alert closable>
+      <span slot="prefix">Standard</span> banner message
+    </nve-alert>
+  </nve-alert-group>
+</nve-page>
 ```
 
 ### JSON Viewer

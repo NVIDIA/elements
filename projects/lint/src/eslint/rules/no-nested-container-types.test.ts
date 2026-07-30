@@ -201,6 +201,16 @@ describe('noNestedContainerTypes', () => {
     });
   });
 
+  it('should delegate container="full" placement to the dedicated rule', () => {
+    tester.run('full container placement', rule, {
+      valid: [
+        `<nve-card><nve-grid container="full"></nve-grid></nve-card>`,
+        `<nve-dialog><nve-grid container="full"></nve-grid></nve-dialog>`
+      ],
+      invalid: []
+    });
+  });
+
   it('should detect nested containers through intermediate elements', () => {
     tester.run('deeply nested containers', rule, {
       valid: [],

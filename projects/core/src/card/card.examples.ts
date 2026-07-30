@@ -8,6 +8,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/page/define.js';
 
 export default {
   title: 'Elements/Card',
@@ -148,19 +149,23 @@ export const WithTabs = {
 
 /**
  * @summary Card with full container styling that extends to the edges, suitable for full-width layouts or when you want the card to blend with its container.
+ * @tags test-case
  */
 export const ContainerFull = {
   render: () => html`
-  <nve-card container="full">
-    <nve-card-content>
-      <p nve-text="body">container full</p>
-    </nve-card-content>
-  </nve-card>
+  <nve-page document-scroll>
+    <nve-card container="full">
+      <nve-card-content>
+        <p nve-text="body">container full</p>
+      </nve-card-content>
+    </nve-card>
+  </nve-page>
   `
 }
 
 /**
  * @summary Card with flat container styling that removes the default card elevation, ideal for subtle content containers or when you want a more minimal appearance.
+ * @tags test-case
  */
 export const ContainerFlat = {
   render: () => html`
@@ -198,6 +203,7 @@ export const Audit = {
 
 /**
  * @summary Card with overflow content, where the card body scrolls when content exceeds the card height.
+ * @tags test-case
  */
 export const OverflowContent = {
   render: () => html`

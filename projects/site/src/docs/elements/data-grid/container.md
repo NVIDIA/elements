@@ -10,9 +10,11 @@
 ---
 
 ```html
-<nve-grid container="full">
-  ...
-</nve-grid>
+<nve-page>
+  <nve-grid container="full">
+    ...
+  </nve-grid>
+</nve-page>
 ```
 
 ## Full
