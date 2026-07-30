@@ -137,6 +137,19 @@ describe(Drawer.metadata.tag, () => {
     expect(element.getAttribute('position')).toBe('right');
   });
 
+  it.each(['right', 'bottom'] as const)('should position at the viewport %s edge', async position => {
+    element.position = position;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+
+    const edge = position === 'right' ? 'right' : 'bottom';
+    const viewportEdge = position === 'right' ? window.innerWidth : window.innerHeight;
+    expect(element.getBoundingClientRect()[edge]).toBe(viewportEdge);
+  });
+
   it('should reflect modal attribute to DOM', async () => {
     expect(element.hasAttribute('modal')).toBe(false);
     element.modal = true;
