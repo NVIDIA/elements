@@ -233,7 +233,7 @@ export class Select extends Control {
     super.updated(props);
     if (this.#select?.size && this.#select?.size !== 0) {
       this._internals.states.add('size');
-      this.style.setProperty('--size', `${this.#select?.size + 0.75}`);
+      this.style.setProperty('--size', `${this.#select.size}`);
     } else {
       this._internals.states.delete('size');
       this.style.removeProperty('--size');

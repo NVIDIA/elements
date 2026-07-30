@@ -700,7 +700,39 @@ describe(`${Select.metadata.tag}: size`, () => {
   });
 
   it('should set --size property', () => {
-    expect(getComputedStyle(element).getPropertyValue('--size')).toBe('3.75'); // size (3) + 0.75 buffer
+    expect(getComputedStyle(element).getPropertyValue('--size')).toBe('3');
+  });
+
+  it('should show all rows without overflow', async () => {
+    const select = fixture.querySelector('select') as HTMLSelectElement;
+    for (let optionNumber = 6; optionNumber <= 10; optionNumber++) {
+      const option = document.createElement('option');
+      option.value = `${optionNumber}`;
+      option.textContent = `Option ${optionNumber}`;
+      select.append(option);
+    }
+    select.size = 10;
+    await elementIsStable(element);
+
+    const input = element.shadowRoot.querySelector<HTMLElement>('[input]') as HTMLElement;
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag) as NodeListOf<MenuItem>;
+    const inputBottom =
+      input.getBoundingClientRect().bottom - Number.parseFloat(getComputedStyle(input).borderBottomWidth);
+    const lastItemBottom = items[items.length - 1].getBoundingClientRect().bottom;
+
+    expect(input.scrollTop).toBe(0);
+    expect(lastItemBottom).toBeCloseTo(inputBottom, 5);
+  });
+
+  it('should not leave blank space after the visible rows', () => {
+    const input = element.shadowRoot.querySelector<HTMLElement>('[input]');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const inputBottom =
+      input.getBoundingClientRect().bottom - Number.parseFloat(getComputedStyle(input).borderBottomWidth);
+    const lastVisibleItemBottom = items[2].getBoundingClientRect().bottom;
+
+    expect(input.scrollTop).toBe(0);
+    expect(lastVisibleItemBottom).toBeCloseTo(inputBottom, 5);
   });
 
   it('should not render tags when using multiple with size', async () => {
