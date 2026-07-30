@@ -4,12 +4,15 @@
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "Command-line interface for Elements development and tooling, providing interactive prompts, project scaffolding, and integration with AI assistants via Model Context Protocol.",
+  "description": "Command-line interface for NVIDIA Elements development and tooling, providing interactive prompts, project scaffolding, and integration with AI assistants via Model Context Protocol.",
   "keywords": [
+    "nvidia",
+    "web-components",
+    "design-system",
     "cli",
+    "project-scaffolding",
     "mcp",
-    "elements",
-    "web-components"
+    "model-context-protocol"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "type": "module",
@@ -48,7 +51,7 @@
   "dependencies": {
     "@inquirer/prompts": "8.5.0",
     "@modelcontextprotocol/ext-apps": "catalog:",
-    "@modelcontextprotocol/server": "2.0.0",
+    "@modelcontextprotocol/server": "catalog:",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/lint": "workspace:^",
     "adm-zip": "0.5.17",

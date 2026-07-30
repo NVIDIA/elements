@@ -86,6 +86,7 @@ catalog:
   '@lit/reactive-element': 2.1.2
   '@modelcontextprotocol/ext-apps': 1.7.5
   '@modelcontextprotocol/sdk': 1.30.0
+  '@modelcontextprotocol/server': 2.0.0
   '@types/node': 25.6.2
   '@types/react': 19.2.14
   '@types/react-dom': 19.2.3

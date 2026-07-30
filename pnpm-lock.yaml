@@ -256,6 +256,9 @@ catalogs:
     '@modelcontextprotocol/sdk':
       specifier: 1.30.0
       version: 1.30.0
+    '@modelcontextprotocol/server':
+      specifier: 2.0.0
+      version: 2.0.0
     '@types/node':
       specifier: 25.6.2
       version: 25.6.2
@@ -478,7 +481,7 @@ importers:
         specifier: 'catalog:'
         version: 1.7.5(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.3)
       '@modelcontextprotocol/server':
-        specifier: 2.0.0
+        specifier: 'catalog:'
         version: 2.0.0
       '@nvidia-elements/code':
         specifier: workspace:*
