@@ -54,7 +54,7 @@
     "lit": "catalog:",
     "postcss": "catalog:",
     "publint": "catalog:",
-    "style-dictionary": "4.3.0",
+    "style-dictionary": "5.4.4",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
