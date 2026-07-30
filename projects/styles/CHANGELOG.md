@@ -1,3 +1,22 @@
+## <small>2.1.2 (2026-07-30)</small>
+
+* fix(cli): update mcp deps ([a7d5f7c](https://github.com/NVIDIA/elements/commit/a7d5f7c))
+* fix(cli): update mcp sdk ([0640e11](https://github.com/NVIDIA/elements/commit/0640e11))
+* fix(cli): workspace dependency ([5ecbd96](https://github.com/NVIDIA/elements/commit/5ecbd96))
+* fix(core): drawer positioning ([f66cab0](https://github.com/NVIDIA/elements/commit/f66cab0))
+* fix(core): improve api custom elements schema ([6b299e3](https://github.com/NVIDIA/elements/commit/6b299e3))
+* fix(core): update select size handling and improve layout ([6af535d](https://github.com/NVIDIA/elements/commit/6af535d))
+* fix(styles): add width rule for row layout with space-between alignment ([61113ad](https://github.com/NVIDIA/elements/commit/61113ad))
+* feat(lint): add rule to restrict container="full" usage ([a634e39](https://github.com/NVIDIA/elements/commit/a634e39))
+* chore(ci): enhance ci performance profiling and add new scripts ([ef0a912](https://github.com/NVIDIA/elements/commit/ef0a912))
+* chore(ci): update metadata and test coverage report ([216a7a9](https://github.com/NVIDIA/elements/commit/216a7a9))
+* chore(docs): add design md file ([5c63566](https://github.com/NVIDIA/elements/commit/5c63566))
+* chore(docs): fix sitemap ([7c9f059](https://github.com/NVIDIA/elements/commit/7c9f059))
+* chore(release): @nvidia-elements/cli-v2.1.7 [skip ci] ([3fcca0d](https://github.com/NVIDIA/elements/commit/3fcca0d))
+* chore(release): @nvidia-elements/cli-v2.1.8 [skip ci] ([1521595](https://github.com/NVIDIA/elements/commit/1521595))
+* chore(release): @nvidia-elements/core-v2.2.1 [skip ci] ([730a2ec](https://github.com/NVIDIA/elements/commit/730a2ec))
+* chore(release): @nvidia-elements/core-v2.2.2 [skip ci] ([f9f1e27](https://github.com/NVIDIA/elements/commit/f9f1e27))
+
 ## <small>2.1.1 (2026-07-28)</small>
 
 * fix(cli): improve api metadata ([b2c13ab](https://github.com/NVIDIA/elements/commit/b2c13ab))
