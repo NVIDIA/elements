@@ -163,6 +163,10 @@
       gap: var(--nve-ref-space-none);
     }
 
+    &[nve-layout~='row'][nve-layout~='align:space-between'] {
+      width: 100%;
+    }
+
     &[nve-layout~='align:space-evenly'] {
       justify-content: space-evenly;
       gap: var(--nve-ref-space-none);
