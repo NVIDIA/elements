@@ -17,22 +17,22 @@
 </div>
 <nve-divider></nve-divider>
 <section nve-layout="grid gap:xl span-items:12 &md|span-items:6 &xl|span-items:3">
-  <div nve-layout="column gap:sm">
-    <p nve-text="label semibold">Built for AI Infrastructure</p>
-    <p nve-text="body sm muted">Operational UI for AI/ML workloads, autonomous vehicle tools, and robotics consoles.</p>
-  </div>
-  <div nve-layout="column gap:sm">
-    <p nve-text="label semibold">Framework Agnostic</p>
+  <section nve-layout="column gap:sm">
+    <h3 nve-text="label semibold">Built for AI Infrastructure</h3>
+    <p nve-text="body sm muted">Operational UI Foundations for AI/ML workloads, autonomous vehicle tools, and robotics consoles.</p>
+  </section>
+  <section nve-layout="column gap:sm">
+    <h3 nve-text="label semibold">Framework Agnostic</h3>
     <p nve-text="body sm muted">Web Components run in React, Angular, Vue, Svelte, Lit, plain HTML, server-rendered templates, and mixed stacks.</p>
-  </div>
-  <div nve-layout="column gap:sm">
-    <p nve-text="label semibold">Agent-Ready Tooling</p>
+  </section>
+  <section nve-layout="column gap:sm">
+    <h3 nve-text="label semibold">Agent-Ready Tooling</h3>
     <p nve-text="body sm muted"><a href="/docs/cli/" nve-text="link no-visit">CLI</a> and <a href="/docs/mcp/" nve-text="link no-visit">MCP</a> expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.</p>
-  </div>
-  <div nve-layout="column gap:sm">
-    <p nve-text="label semibold">Stable API Contracts</p>
+  </section>
+  <section nve-layout="column gap:sm">
+    <h3 nve-text="label semibold">Stable API Contracts</h3>
     <p nve-text="body sm muted"><a href="/docs/mcp/#skills" nve-text="link no-visit">Skills</a> and <a href="/docs/lint/" nve-text="link no-visit">lint</a> guide authoring best practices, common Design System UI patterns and automated static analysis.</p>
-  </div>
+  </section>
 </section>
 <nve-divider></nve-divider>
 
