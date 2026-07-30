@@ -6,9 +6,13 @@
   },
   "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
   "keywords": [
+    "nvidia",
     "web-components",
-    "syntax-highlight",
-    "code-blocks"
+    "custom-elements",
+    "code-blocks",
+    "syntax-highlighting",
+    "highlight.js",
+    "lit"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
