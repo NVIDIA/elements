@@ -1,3 +1,13 @@
+## <small>2.2.2 (2026-07-30)</small>
+
+* fix(cli): update mcp sdk ([0640e11](https://github.com/NVIDIA/elements/commit/0640e11))
+* fix(core): drawer positioning ([f66cab0](https://github.com/NVIDIA/elements/commit/f66cab0))
+* fix(core): update select size handling and improve layout ([6af535d](https://github.com/NVIDIA/elements/commit/6af535d))
+* chore(docs): add design md file ([5c63566](https://github.com/NVIDIA/elements/commit/5c63566))
+* chore(docs): fix sitemap ([7c9f059](https://github.com/NVIDIA/elements/commit/7c9f059))
+* chore(release): @nvidia-elements/cli-v2.1.7 [skip ci] ([3fcca0d](https://github.com/NVIDIA/elements/commit/3fcca0d))
+* chore(release): @nvidia-elements/cli-v2.1.8 [skip ci] ([1521595](https://github.com/NVIDIA/elements/commit/1521595))
+
 ## <small>2.2.1 (2026-07-28)</small>
 
 * fix(cli): update mcp deps ([a7d5f7c](https://github.com/NVIDIA/elements/commit/a7d5f7c))
