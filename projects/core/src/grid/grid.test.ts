@@ -58,6 +58,11 @@ describe(Grid.metadata.tag, () => {
     expect(element.matches(':state(scrolling)')).toBe(false);
   });
 
+  it('should default to no scroll target before rendering', () => {
+    const detachedElement = document.createElement(Grid.metadata.tag) as Grid;
+    expect(detachedElement.stateScrollConfig.target).toBeUndefined();
+  });
+
   it('should enable keynav control from keynav controller', async () => {
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);

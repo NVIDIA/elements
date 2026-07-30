@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "description": "Media playback UI components for Elements",
   "keywords": [
+    "nvidia",
+    "web-components",
+    "custom-elements",
     "media",
-    "playback",
-    "web-components"
+    "media-playback",
+    "ui-components",
+    "design-system"
   ],
   "type": "module",
   "repository": {

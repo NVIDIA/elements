@@ -6,9 +6,13 @@
   },
   "description": "Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.",
   "keywords": [
+    "nvidia",
+    "design-system",
     "themes",
     "design-tokens",
-    "css-variables"
+    "css-variables",
+    "dark-theme",
+    "high-contrast"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "customElements": "dist/custom-elements.json",

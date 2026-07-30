@@ -6,8 +6,13 @@
   },
   "description": "A suite of markdown components and utilities.",
   "keywords": [
+    "nvidia",
+    "web-components",
+    "custom-elements",
     "markdown",
-    "web-components"
+    "markdown-renderer",
+    "markdown-it",
+    "lit"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {

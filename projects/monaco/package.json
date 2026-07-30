@@ -6,9 +6,13 @@
   },
   "description": "Provides integration with VS Code's Monaco editor for code editing, syntax highlighting, and diff visualization.",
   "keywords": [
+    "nvidia",
+    "web-components",
+    "custom-elements",
     "monaco",
     "code-editor",
-    "web-components"
+    "diff-editor",
+    "syntax-highlighting"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
