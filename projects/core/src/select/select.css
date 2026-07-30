@@ -10,16 +10,21 @@
   --border-radius: var(--nve-ref-border-radius-sm);
   --border: var(--nve-ref-border-width-md) solid transparent;
   --border-bottom: var(--border);
+  --gap: var(--nve-ref-space-xxs);
   --cursor: pointer;
   --font-weight: normal;
   --text-align: start;
   --scroll-height: 50vh;
-  --_input-background: var(--background);
-  --_icon-color: var(--color);
   --width: 100%;
   --control-width: var(--width);
   --max-width: 100%;
   --min-width: fit-content;
+  --_input-background: var(--background);
+  --_icon-color: var(--color);
+  --_gap: var(--gap);
+  --size: 1;
+  --_row-height: calc(var(--height) * var(--size) + var(--gap) * (var(--size) - 1));
+  --_height: calc(var(--_row-height) + var(--nve-ref-border-width-md) * 2);
   contain: initial;
   width: var(--width);
   max-width: var(--max-width);
@@ -35,7 +40,11 @@
 }
 
 [input] {
-  height: var(--height);
+  scroll-behavior: smooth;
+  scrollbar-color: color-mix(in oklab, var(--nve-sys-scrollbar-thumb-color) 100%, currentColor 20%)
+    var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+  height: var(--_height);
   background: var(--background);
   border: var(--border);
   border-bottom: var(--border-bottom);
@@ -64,7 +73,7 @@
   cursor: var(--cursor) !important;
   font-weight: var(--font-weight) !important;
   text-align: var(--text-align) !important;
-  height: var(--height) !important;
+  height: var(--_height) !important;
   width: 100% !important;
   border: 0 !important;
   background: none !important;
@@ -94,7 +103,7 @@
 :host(:state(multiple)) .tags {
   width: fit-content;
   display: flex;
-  gap: var(--nve-ref-space-xxs);
+  gap: var(--gap);
 }
 
 :host(:state(multiple)) .tags-label {
@@ -128,10 +137,6 @@
 
 :host(:state(multiple)) ::slotted(select[multiple]) {
   opacity: 0 !important;
-}
-
-:host(:state(size)) {
-  --height: calc(var(--nve-ref-size-800) * var(--size));
 }
 
 :host(:state(size)) [input] {
@@ -184,6 +189,7 @@ nve-dropdown {
 
 nve-menu {
   --max-height: var(--scroll-height);
+  --gap: var(--_gap);
 }
 
 nve-menu-item {
