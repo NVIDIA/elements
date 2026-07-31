@@ -30,7 +30,7 @@ Splitting improves observability and caching. It does not reduce cold wall time 
 
 ### Add controlled parallelism
 
-Look for one-worker test suites, disabled file parallelism, sequential linting, and independent generated targets.
+Look for one-worker test suites, file parallelism set to off, sequential linting, and independent generated targets.
 
 Prefer process-level shards when tools share browser state or globals. Give every shard separate ports, browser profiles, coverage directories, screenshots, JUnit/JSON output, and temporary files. Merge reports deterministically and verify identical totals and thresholds.
 

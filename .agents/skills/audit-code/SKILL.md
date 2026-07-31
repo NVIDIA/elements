@@ -1,9 +1,9 @@
 ---
-name: code-review
-description: Comprehensive code review process for Elements monorepo changes. Provides structured feedback on type safety, testing, documentation, and adherence to project guidelines. Use this skill whenever the user asks you to review code, check staged changes, look at a diff, give feedback before committing, review a PR or merge request, or evaluate code quality. Trigger on phrases like "review my changes," "check my code," "give me feedback," "look at my staged files," "review this PR," or "before I commit."
+name: audit-code
+description: Comprehensive code review process for Elements monorepo changes. Provides structured feedback on type safety, testing, documentation, and adherence to project guidelines. Use this skill whenever the user asks you to review code, check staged changes, look at a diff, give feedback before committing, review a PR or merge request, or assess code quality. Trigger on phrases like "review these changes," "check this code," "give feedback," "look at the staged files," "review this PR," or "before committing."
 ---
 
-# Code Review
+# Audit Code
 
 You are a senior code reviewer for the Elements Design System monorepo. Your role is to provide thorough, constructive feedback on staged changes.
 
@@ -18,14 +18,14 @@ You are a senior code reviewer for the Elements Design System monorepo. Your rol
 
 Before reviewing, identify the change type:
 
-- **Feature**: New functionality or components
+- **Feature**: New behavior or components
 - **Bug Fix**: Corrections to existing behavior
 - **Refactor**: Code improvements without behavior changes
 - **Documentation**: Updates to docs, comments, or examples
 
 ## Guideline Context
 
-Review the relevant guideline for the files being changed (not all guidelines). Match by file type:
+Review the relevant guideline for each changed file type (not all guidelines):
 
 - `*.test.ts` / `*.test.*.ts` → read `projects/site/src/docs/internal/guidelines/testing-unit.md` (or the matching test type)
 - `*.examples.ts` → read `projects/site/src/docs/internal/guidelines/examples.md`
@@ -71,4 +71,4 @@ Provide feedback in this structure:
 
 - README, CHANGELOG, or API doc updates needed
 
-Remember: Focus on code quality, maintainability, and adherence to established patterns. Be constructive and provide specific examples when suggesting improvements.
+Remember: focus on code quality, maintainability, and adherence to established patterns. Be constructive and provide specific examples when suggesting improvements.

@@ -231,7 +231,7 @@ async function checkNpmPackages(packageNames) {
   let tempDir;
 
   try {
-    tempDir = await mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-availability-report-'));
+    tempDir = await mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-agent-availability-report-'));
   } catch (error) {
     // Temporary project creation depends on the host filesystem.
     const reason = `temporary test project could not be created: ${compactText(error)}.`;
@@ -429,7 +429,8 @@ function parseArgs(args) {
 }
 
 function printHelp() {
-  process.stdout.write(`Usage: node .agents/skills/availability-report/scripts/generate-availability-report.js [options]
+  process.stdout
+    .write(`Usage: node .agents/skills/agent-availability-report/scripts/generate-availability-report.js [options]
 
 Options:
   --json                  Print the structured check result instead of the formatted report.
@@ -471,7 +472,7 @@ async function main() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch(error => {
-    process.stderr.write(`Unexpected availability-report failure: ${compactText(error)}.\n`);
+    process.stderr.write(`Unexpected agent-availability-report failure: ${compactText(error)}.\n`);
     process.exitCode = 1;
   });
 }

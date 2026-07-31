@@ -1,9 +1,9 @@
 ---
-name: examples
+name: authoring-examples
 description: Guidelines for writing example template files (*.examples.ts) including naming conventions, @summary JSDoc comments, and stateless HTML patterns. Use this skill whenever the user creates, modifies, or reviews *.examples.ts files, asks about example naming rules (PascalCase, 3-word max, no component prefix), needs to write or improve @summary JSDoc comments, encounters example-naming ESLint errors, or wants to add stateless or interactive examples to a component's example file.
 ---
 
-# Examples (`*.examples.ts`)
+# Authoring Examples (`*.examples.ts`)
 
 You MUST review @projects/site/src/docs/internal/guidelines/examples.md before making any changes to example files.
 
@@ -16,7 +16,7 @@ You MUST review @projects/site/src/docs/internal/guidelines/examples.md before m
 
 ## Key Principles
 
-1. **PascalCase Naming**: Use PascalCase for example names (e.g., `Default`, `StatusFlat`, `FormSubmit`)
+1. **PascalCase Naming**: Use PascalCase for example names (for example, `Default`, `StatusFlat`, `FormSubmit`)
 2. **Concise Names**: Keep example names to 1-3 words maximum, describing **what** the example shows
 3. **Required @summary**: Every example must include a `@summary` JSDoc comment explaining what, why, when, and how
 4. **Stateless Templates**: Examples should be stateless HTML templates demonstrating UI patterns
