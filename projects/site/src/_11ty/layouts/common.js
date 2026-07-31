@@ -77,7 +77,8 @@ export const renderBaseHead = data => {
     /* hide non-ssr elements until defined */
     nve-tree:not(:defined),
     nve-grid:not(:defined),
-    nvd-canvas:not(:defined) {
+    nvd-canvas:not(:defined),
+    nve-button:not(:defined) {
       visibility: hidden !important;
     }
 
@@ -219,7 +220,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/design-md/') ? 'highlighted selected' : ''}><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/elements/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}>
     <a href="/docs/elements/">Elements</a>
     <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/alert/') ? 'highlighted selected' : ''}><a href="/docs/elements/alert/">Alert</a></nve-tree-node>
@@ -231,6 +232,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'highlighted selected' : ''}><a href="/docs/elements/card/">Card</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/chat-message/') ? 'highlighted selected' : ''}><a href="/docs/elements/chat-message/">Chat Message</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'highlighted selected' : ''}><a href="/docs/elements/checkbox/">Checkbox</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted selected' : ''}><a href="/docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted selected' : ''}><a href="/docs/elements/combobox/">Combobox</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'highlighted selected' : ''}><a href="/docs/elements/copy-button/">Copy Button</a></nve-tree-node>
@@ -285,8 +287,15 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'highlighted selected' : ''}><a href="/docs/elements/input/">Input</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/input-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/input-group/">Input Group</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'highlighted selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'highlighted selected' : ''}><a href="/docs/elements/menu/">Menu</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'highlighted selected' : ''}><a href="/docs/elements/month/">Month</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/input/">Monaco Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-input/">Monaco Diff Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/editor/">Monaco Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-editor/">Monaco Diff Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted selected' : ''}><a href="/docs/monaco/problems/">Monaco Problems</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/notification/') ? 'highlighted selected' : ''}><a href="/docs/elements/notification/">Notification</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/page/') ? 'highlighted selected' : ''}><a href="/docs/elements/page/">Page</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted selected' : ''}><a href="/docs/elements/page-header/">Page Header</a></nve-tree-node>
@@ -340,26 +349,6 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/search/') ? 'highlighted selected' : ''}><a href="/docs/patterns/search/">Search</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'highlighted selected' : ''}><a href="/docs/patterns/subheader/">Subheader</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted selected' : ''}><a href="/docs/patterns/trend/">Trend</a></nve-tree-node>
-  </nve-tree-node>
-
-  <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
-    <a href="/docs/code/codeblock/">Code</a>
-    <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
-  </nve-tree-node>
-
-  <nve-tree-node ${data.page.url.includes('/docs/monaco/') ? 'expanded' : ''}>
-    <a href="/docs/monaco/input/">Monaco</a>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/input/">Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-input/">Diff Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/editor/">Editor</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-editor/">Diff Editor</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted selected' : ''}><a href="/docs/monaco/problems/">Problems</a></nve-tree-node>
-  </nve-tree-node>
-
-  <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
-    <a href="/docs/markdown/">Markdown</a>
-    <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted selected' : ''}><a href="/docs/markdown/styles/">CSS Utility</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}>

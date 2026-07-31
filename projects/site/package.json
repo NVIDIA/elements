@@ -167,7 +167,15 @@
       "env": {
         "PAGES_BASE_URL": {
           "external": true,
-          "default": "/elements/preview/"
+          "default": "/"
+        },
+        "ELEMENTS_SITE_URL": {
+          "external": true,
+          "default": "http://localhost:4173/"
+        },
+        "LOCAL_PREVIEW": {
+          "external": true,
+          "default": "false"
         }
       }
     },

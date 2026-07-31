@@ -205,10 +205,6 @@ p[nve-text~='mkd']:has(*:not(code, a, pre)) {
   text-box: initial !important;
 }
 
-code:has(nve-codeblock) {
-  display: contents;
-}
-
 pre {
   display: block;
   margin: 0;
@@ -216,14 +212,19 @@ pre {
   width: 100%;
 }
 
-code > nve-codeblock {
-  --padding: var(--nve-ref-space-lg);
-  min-height: 65px;
+.markdown-codeblock {
+  anchor-scope: --codeblock;
   width: 100%;
-  anchor-name: --codeblock;
+
+  nve-codeblock {
+    --padding: var(--nve-ref-space-lg);
+    anchor-name: --codeblock;
+    min-height: 65px;
+    width: 100%;
+  }
 }
 
-nve-copy-button.markdown-copy-button {
+.markdown-copy-button {
   position: absolute;
   position-anchor: --codeblock;
   bottom: calc(anchor(bottom) + var(--nve-ref-space-md));
@@ -232,15 +233,9 @@ nve-copy-button.markdown-copy-button {
   transition: opacity 0.15s ease-in-out;
 }
 
-code:has(nve-codeblock:hover) nve-copy-button.markdown-copy-button,
-nve-copy-button.markdown-copy-button:hover {
+.markdown-codeblock:has(nve-codeblock:hover) .markdown-copy-button,
+.markdown-copy-button:hover {
   opacity: 1;
-}
-
-pre:has(nve-codeblock),
-code:has(nve-codeblock) {
-  display: contents;
-  anchor-scope: --codeblock;
 }
 
 /* Canvas Styles */

@@ -18,7 +18,7 @@ import styles from './drawer.css?inline';
 
 /**
  * @element nve-drawer
- * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigation, settings). Or use [Panel](./docs/elements/panel/) inline as its content couples with or closely relates to the content on the page (details, extra actions/options). [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+ * @description A drawer displays content separate from the rest of the page, such as notifications, navigation, and settings.
  * @documentation https://nvidia.github.io/elements/docs/elements/drawer/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
