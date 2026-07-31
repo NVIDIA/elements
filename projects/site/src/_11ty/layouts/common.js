@@ -345,6 +345,7 @@ export const renderDocsNav = data => /* html */ `
   <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
     <a href="/docs/code/codeblock/">Code</a>
     <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/code/iframe/') ? 'highlighted selected' : ''}><a href="/docs/code/iframe/">Iframe</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/monaco/') ? 'expanded' : ''}>
