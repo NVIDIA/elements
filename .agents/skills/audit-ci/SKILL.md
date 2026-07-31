@@ -1,9 +1,9 @@
 ---
-name: profile-ci
+name: audit-ci
 description: Run and analyze Elements cold CI performance profiles and propose evidence-backed build, test, lint, and dependency-graph improvements. Use whenever asked to profile or benchmark pnpm run ci, rerun ci:profile, create a CI performance audit, compare CI timings, find bottlenecks or the completion path, investigate a CI performance regression, or recommend measured CI/build optimizations.
 ---
 
-# Profile CI
+# Audit CI
 
 Produce a repeatable cold-CI profile, explain what controls wall-clock completion, and turn the evidence into prioritized, testable recommendations.
 

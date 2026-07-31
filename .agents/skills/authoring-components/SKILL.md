@@ -1,9 +1,9 @@
 ---
-name: component-creation
+name: authoring-components
 description: Guide for creating new Elements components with all required files, base classes, metadata patterns, and test boilerplate. Use this skill whenever the user wants to create, scaffold, or set up a new component from scratch, needs to understand the required 10-file structure, asks about base classes and mixins (LitElement vs ButtonFormControlMixin), define.ts vs index.ts patterns, static metadata, component registration, or sub-component parent relationships. Also trigger when the user mentions creating test boilerplate for all 5 test types.
 ---
 
-# Component Creation
+# Authoring Components
 
 You MUST review the component creation guideline before creating or modifying components.
 
