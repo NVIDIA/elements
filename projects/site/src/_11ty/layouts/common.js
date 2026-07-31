@@ -272,6 +272,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropzone/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropzone/">Dropzone</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'highlighted selected' : ''}><a href="/docs/elements/file/">File</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/format-bytes/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-bytes/">Format Bytes</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-datetime/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-datetime/">Format Datetime</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-number/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-number/">Format Number</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-relative-time/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-relative-time/">Format Relative Time</a></nve-tree-node>
