@@ -1,15 +1,15 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { expect, test, describe } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
 
-describe('format-relative-time lighthouse report', () => {
-  test('format-relative-time should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-format-relative-time', /* html */`
-      <nve-format-relative-time date="2023-07-27T12:00:00.000Z"></nve-format-relative-time>
+describe('format-bytes lighthouse report', () => {
+  test('format-bytes should meet lighthouse benchmarks', async () => {
+    const report = await lighthouseRunner.getReport('nve-format-bytes', /* html */ `
+      <nve-format-bytes locale="en-US">1048576</nve-format-bytes>
       <script type="module">
-        import '@nvidia-elements/core/format-relative-time/define.js';
+        import '@nvidia-elements/core/format-bytes/define.js';
       </script>
     `);
 

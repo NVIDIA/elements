@@ -15,7 +15,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(133.6);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(134.5);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(120);
@@ -45,6 +45,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/drawer/define.js';
         import '@nvidia-elements/core/dropdown/define.js';
         import '@nvidia-elements/core/file/define.js';
+        import '@nvidia-elements/core/format-bytes/define.js';
         import '@nvidia-elements/core/forms/define.js';
         import '@nvidia-elements/core/gauge/define.js';
         import '@nvidia-elements/core/grid/define.js';

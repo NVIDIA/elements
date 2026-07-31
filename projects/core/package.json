@@ -378,6 +378,18 @@
       "types": "./dist/file/define.d.ts",
       "default": "./dist/file/define.js"
     },
+    "./format-bytes": {
+      "types": "./dist/format-bytes/index.d.ts",
+      "default": "./dist/format-bytes/index.js"
+    },
+    "./format-bytes/index.js": {
+      "types": "./dist/format-bytes/index.d.ts",
+      "default": "./dist/format-bytes/index.js"
+    },
+    "./format-bytes/define.js": {
+      "types": "./dist/format-bytes/define.d.ts",
+      "default": "./dist/format-bytes/define.js"
+    },
     "./format-datetime": {
       "types": "./dist/format-datetime/index.d.ts",
       "default": "./dist/format-datetime/index.js"
