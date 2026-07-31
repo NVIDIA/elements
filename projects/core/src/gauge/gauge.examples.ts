@@ -14,10 +14,7 @@ export default {
  */
 export const Default = {
   render: () => html`
-    <div nve-layout="row gap:sm">
-      <nve-gauge value="50">50%</nve-gauge>
-      <nve-gauge status="accent" value="66">66%</nve-gauge>
-    </div>
+    <nve-gauge status="accent" value="66">66%</nve-gauge>
 `};
 
 /**

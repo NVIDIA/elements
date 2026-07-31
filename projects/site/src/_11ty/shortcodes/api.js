@@ -56,17 +56,17 @@ export function renderAPINameTable(apiValue) {
       .render(apiValue.descriptionText ?? apiValue.description ?? '')
       .trim()
       .replaceAll('<p>', '<p nve-text="body relaxed">')}
-    <nve-grid container="flat">
-      <nve-grid-header>
-        <nve-grid-column width="200px">${apiValue.name.charAt(0).toUpperCase() + apiValue.name.slice(1)}</nve-grid-column>
-        <nve-grid-column>Description</nve-grid-column>
+    <nve-grid role="grid" container="flat">
+      <nve-grid-header role="row">
+        <nve-grid-column role="columnheader" width="200px">${apiValue.name.charAt(0).toUpperCase() + apiValue.name.slice(1)}</nve-grid-column>
+        <nve-grid-column role="columnheader">Description</nve-grid-column>
       </nve-grid-header>
       ${values
         .filter(i => !i.deprecated)
         .map(
-          i => /* html */ `<nve-grid-row>
-        <nve-grid-cell><span nve-text="code nowrap">${escapeHtml(i.value)}</span></nve-grid-cell>
-        <nve-grid-cell>${i.description ?? ''}</nve-grid-cell>
+          i => /* html */ `<nve-grid-row role="row">
+        <nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(i.value)}</span></nve-grid-cell>
+        <nve-grid-cell role="gridcell">${i.description ?? ''}</nve-grid-cell>
       </nve-grid-row>`
         )
         .join('')}
@@ -95,12 +95,12 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
   const noItems = items.length === 0;
   return /* html */ `
   <div class="api-table" nve-layout="column gap:sm full">
-    <nve-grid container="${options.container}" style="min-height: 100px">
-      <nve-grid-header>
-        <nve-grid-column width="200px">${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>
-        ${type === 'property' ? '<nve-grid-column width="200px">Attribute</nve-grid-column>' : ''}
-        <nve-grid-column>Description</nve-grid-column>
-        ${type === 'property' ? '<nve-grid-column>Values</nve-grid-column>' : ''}
+    <nve-grid role="grid" container="${options.container}" style="min-height: 100px">
+      <nve-grid-header role="row">
+        <nve-grid-column role="columnheader" width="200px">${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>
+        ${type === 'property' ? '<nve-grid-column role="columnheader" width="200px">Attribute</nve-grid-column>' : ''}
+        <nve-grid-column role="columnheader">Description</nve-grid-column>
+        ${type === 'property' ? '<nve-grid-column role="columnheader">Values</nve-grid-column>' : ''}
       </nve-grid-header>
       ${items
         .map(i => {
@@ -112,15 +112,15 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
                 .replaceAll('<p', `<p nve-text="body relaxed sm${i.deprecated ? ' muted' : ''}"`)
                 .replaceAll('<code', '<code nve-text="code nowrap"')
             : '';
-          return /* html */ `<nve-grid-row>
-        <nve-grid-cell><span nve-text="code nowrap">${escapeHtml(i.name === '' ? 'default' : i.name)}</span></nve-grid-cell>
-        ${type === 'property' ? /* html */ `<nve-grid-cell><span nve-text="code nowrap">${escapeHtml(getMemberAttributeName(element.manifest, i) ?? 'none')}</span></nve-grid-cell>` : ''}
-        <nve-grid-cell>
+          return /* html */ `<nve-grid-row role="row">
+        <nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(i.name === '' ? 'default' : i.name)}</span></nve-grid-cell>
+        ${type === 'property' ? /* html */ `<nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(getMemberAttributeName(element.manifest, i) ?? 'none')}</span></nve-grid-cell>` : ''}
+        <nve-grid-cell role="gridcell">
           <div nve-layout="column gap:xs">${i.deprecated ? '<nve-badge status="warning" container="flat">deprecated</nve-badge>' : ''}${description}</div>
         </nve-grid-cell>
         ${
           type === 'property'
-            ? /* html */ `<nve-grid-cell>
+            ? /* html */ `<nve-grid-cell role="gridcell">
           <div nve-layout="${i.type?.values?.some(v => v.description) ? 'column gap:xs' : 'row gap:xxs align:wrap'}">
           ${(i.type?.values ?? [])
             .map(

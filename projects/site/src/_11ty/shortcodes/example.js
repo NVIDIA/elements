@@ -80,6 +80,7 @@ export async function exampleShortcode(
     ? /* html */ `
 <div class="example-shortcode" nve-layout="column gap:sm">
 ${config.summary ? summary : ''}
+<pre class="visually-hidden" aria-hidden="true"><code>${md.utils?.escapeHtml(templateContent)}</code></pre>
 <nvd-canvas id="${canvasId}" data-pagefind-ignore="all" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
   <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
 </nvd-canvas>

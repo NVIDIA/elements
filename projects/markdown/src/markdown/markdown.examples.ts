@@ -17,7 +17,7 @@ export const Default = {
   render: () => html`
 <nve-markdown>
   <template>
-    # Default
+    ## Markdown
 
     This is a default markdown component in its initial state.
 

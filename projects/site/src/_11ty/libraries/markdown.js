@@ -7,9 +7,12 @@ const markdown = markdownIt({
   linkify: true,
   highlight: function (str, lang) {
     lang = lang === 'javascript' ? 'typescript' : lang; // alias javascript to typescript
-    return /* html */ `<nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>
-    <nve-copy-button class="markdown-copy-button" role="button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
-
+    return /* html */ `
+    <div class="markdown-codeblock">
+      <pre class="visually-hidden" aria-hidden="true"><code>${markdown.utils.escapeHtml(str)}</code></pre>
+      <nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>
+      <nve-copy-button class="markdown-copy-button" role="button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
+    </div>
     <script type="module">
       document.querySelectorAll('.markdown-copy-button').forEach(button => {
         const codeblock = button.previousElementSibling;
@@ -18,6 +21,25 @@ const markdown = markdownIt({
     </script>`;
   }
 });
+
+markdown.renderer.rules.fence = function (tokens, idx, options, env, slf) {
+  const token = tokens[idx];
+  const info = token.info ? markdown.utils.unescapeAll(token.info).trim() : '';
+  let langName = '';
+  let highlighted;
+
+  if (info) {
+    langName = info.split(/\s+/g)[0];
+  }
+
+  if (options.highlight) {
+    highlighted = options.highlight(token.content, langName) || markdown.utils.escapeHtml(token.content);
+  } else {
+    highlighted = markdown.utils.escapeHtml(token.content);
+  }
+
+  return highlighted + '\n';
+};
 
 const formats = {
   h1: 'display emphasis',
