@@ -18,7 +18,8 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(124.0);
+    // Includes iframe; allow a small margin above the measured 125.16 KB.
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(125.5);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
@@ -62,6 +63,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/grid/define.js';
         import '@nvidia-elements/core/icon/define.js';
         import '@nvidia-elements/core/icon-button/define.js';
+        import '@nvidia-elements/core/iframe/define.js';
         import '@nvidia-elements/core/input/define.js';
         import '@nvidia-elements/core/logo/define.js';
         import '@nvidia-elements/core/menu/define.js';
@@ -109,7 +111,7 @@ describe('lighthouse report', () => {
     expect(report.scores.bestPractices).toBe(100);
     // Allow a small margin above measured local and CI payloads.
     expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(
-      104.3
+      108.0
     );
   });
 });
