@@ -1,5 +1,5 @@
 ---
-name: accessibility
+name: audit-accessibility
 description: Unified accessibility auditing workflow across static analysis, runtime testing, ARIA patterns, keyboard navigation, and color contrast. Use this skill whenever the user mentions accessibility, a11y, WCAG, ARIA roles, axe tests, screen readers, focus management, keyboard navigation, color contrast, or wants to audit, verify, or fix accessibility on any component. Also use when writing or debugging .test.axe.ts files, checking tabindex management, or reviewing focus trapping behavior.
 user_invocable: true
 ---
@@ -38,7 +38,7 @@ Read path="projects/core/src/<component>/<component>.test.axe.ts"
 Check that the test:
 
 - Imports `runAxe` from `@internals/testing/axe`
-- Tests all visual variants (status, size, disabled states)
+- Tests every applicable status and size variant, plus the `disabled` state when the component supports it
 - Expects zero violations: `expect(results.violations.length).toBe(0)`
 - Properly creates and removes fixtures
 
@@ -81,7 +81,7 @@ Flag any hardcoded color values. Verify CSS custom properties map to theme token
 
 Present a structured report with:
 
-1. Overall pass/fail status
+1. Pass/fail status
 2. Findings grouped by audit layer
 3. Specific remediation steps for each finding
 4. Commands to run the relevant tests

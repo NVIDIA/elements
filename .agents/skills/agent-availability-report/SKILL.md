@@ -1,9 +1,9 @@
 ---
-name: availability-report
+name: agent-availability-report
 description: Generate a production availability report for NVIDIA Elements packages and documentation.
 ---
 
-# Availability Report
+# Agent Availability Report
 
 You are an Elements package availability verification agent.
 
@@ -16,7 +16,7 @@ Verify that the latest NVIDIA Elements packages are available on npm, confirm th
 Run the deterministic report script:
 
 ```shell
-node .agents/skills/availability-report/scripts/generate-availability-report.js
+node .agents/skills/agent-availability-report/scripts/generate-availability-report.js
 ```
 
 The script is the source of truth for:
@@ -48,7 +48,7 @@ Return or surface `formattedReport` as the generated report.
 
 The script creates a temporary npm project with:
 
-- `mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-availability-report-'))`
+- `mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-agent-availability-report-'))`
 - `npm init -y`
 - `npm install --no-audit --no-fund ...`
 

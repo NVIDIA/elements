@@ -1,5 +1,5 @@
 ---
-name: documentation
+name: authoring-documentation
 description: Guidelines for writing documentation files including 11ty templates, Eleventy shortcodes, JSDoc annotations, and markdown content. Use this skill whenever the user works with documentation markdown files, Vale prose linting errors, Eleventy shortcodes (dodont, example), frontmatter, JSDoc annotations that must pass Vale, or the documentation site. Also trigger when the user mentions Vale errors, adding terms to the vocabulary, suppressing Vale rules, or writing and fixing prose in .md or .ts files.
 ---
 
@@ -35,7 +35,7 @@ You MUST review @projects/site/src/docs/internal/guidelines/documentation.md bef
 ### Rule Sets by File Type
 
 - `*.md`:Vale, Google, write-good, Elements (full rule set)
-- `*.ts`:Vale, write-good, Elements (no Google rules; spelling disabled to reduce noise on code identifiers)
+- `*.ts`:Vale, write-good, Elements (no Google rules or spelling checks to reduce noise on code identifiers)
 - `*.examples.ts`:same as `*.ts` plus three summary rules: `SummaryStyle`, `SummaryActionable`, `SummaryGerund`
 
 ### Common Errors and Fixes
