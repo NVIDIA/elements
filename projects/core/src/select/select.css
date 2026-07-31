@@ -23,8 +23,7 @@
   --_icon-color: var(--color);
   --_gap: var(--gap);
   --size: 1;
-  --_row-height: calc(var(--height) * var(--size) + var(--gap) * (var(--size) - 1));
-  --_height: calc(var(--_row-height) + var(--nve-ref-border-width-md) * 2);
+  --_height: var(--height);
   contain: initial;
   width: var(--width);
   max-width: var(--max-width);
@@ -137,6 +136,11 @@
 
 :host(:state(multiple)) ::slotted(select[multiple]) {
   opacity: 0 !important;
+}
+
+:host(:state(size)) {
+  --_row-height: calc(var(--height) * var(--size) + var(--gap) * (var(--size) - 1));
+  --_height: calc(var(--_row-height) + var(--nve-ref-border-width-md) * 2);
 }
 
 :host(:state(size)) [input] {
