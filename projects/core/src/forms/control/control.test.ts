@@ -269,27 +269,77 @@ describe(`${Control.metadata.tag}: fit-text input`, () => {
     removeFixture(fixture);
   });
 
-  it('should set control width to input text character width', async () => {
+  it('should set input width to text content width', async () => {
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    const fitTextWidth = input.getBoundingClientRect().width;
+
+    element.fitText = false;
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--control-width')).toBe(`4ch`);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    expect(fitTextWidth).toBeLessThan(input.getBoundingClientRect().width);
   });
 
-  it('should update control width to input text character width', async () => {
-    await elementIsStable(element);
+  it('should update input width to text content width', async () => {
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    const initialWidth = input.getBoundingClientRect().width;
+
     input.value = '123456789012345678901234567890';
     input.dispatchEvent(new Event('input'));
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--control-width')).toBe(`30ch`);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    expect(input.getBoundingClientRect().width).toBeGreaterThan(initialWidth);
   });
 
-  it('should update control width to input text character width with icon offset', async () => {
-    await elementIsStable(element);
+  it('should update input width to native date content width', async () => {
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    const textWidth = input.getBoundingClientRect().width;
+
     input.type = 'date';
     input.value = '';
     input.dispatchEvent(new Event('input'));
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--control-width')).toBe(`4ch`);
-    expect(input.style.maxWidth).toBe(`2ch`);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    expect(input.getBoundingClientRect().width).toBeGreaterThan(textWidth);
+  });
+});
+
+describe(`${Control.metadata.tag}: fit-text select`, () => {
+  let fixture: HTMLElement;
+  let element: Control;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-control fit-text>
+        <label>label</label>
+        <select>
+          <option value="short">Short</option>
+          <option value="long">A much longer option</option>
+        </select>
+      </nve-control>
+    `);
+    element = fixture.querySelector(Control.metadata.tag);
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should update select width to selected content width', async () => {
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    const initialWidth = select.getBoundingClientRect().width;
+
+    select.value = 'long';
+    select.dispatchEvent(new Event('change'));
+    await elementIsStable(element);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    expect(select.getBoundingClientRect().width).toBeGreaterThan(initialWidth);
   });
 });
 
@@ -319,44 +369,5 @@ describe(`${Control.metadata.tag}: fit-content input`, () => {
     await new Promise(r => requestAnimationFrame(r));
     expect(Math.floor(input.getBoundingClientRect().width) > 100).toBe(true);
     expect(Math.floor(input.getBoundingClientRect().width) < 250).toBe(true);
-  });
-});
-
-describe(`${Control.metadata.tag}: fit-text select`, () => {
-  let fixture: HTMLElement;
-  let element: Control;
-  let input: HTMLSelectElement;
-
-  beforeEach(async () => {
-    fixture = await createFixture(html`
-      <nve-control fit-text>
-        <label>label</label>
-        <select>
-          <option value="1">Option 1</option>
-          <option value="2">Option 12345678</option>
-        </select>
-        <nve-control-message>message</nve-control-message>
-      </nve-control>
-    `);
-    element = fixture.querySelector(Control.metadata.tag);
-    input = fixture.querySelector('select');
-    await elementIsStable(element);
-  });
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
-  it('should set control width to input text character width', async () => {
-    await elementIsStable(element);
-    expect(element.style.getPropertyValue('--control-width')).toBe(`12ch`);
-  });
-
-  it('should update control width to input text character width', async () => {
-    await elementIsStable(element);
-    input.value = '2';
-    input.dispatchEvent(new Event('change'));
-    await elementIsStable(element);
-    expect(element.style.getPropertyValue('--control-width')).toBe(`19ch`);
   });
 });
