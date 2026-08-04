@@ -171,10 +171,6 @@ export class Control extends LitElement {
     super.disconnectedCallback();
     this.shadowRoot!.removeEventListener('slotchange', this.#onRootSlotchange);
     this.shadowRoot!.removeEventListener('slotchange', this.#onInputSlotchange);
-    if (this.fitText && this.input) {
-      this.input.removeEventListener('input', this.#onFitTextUpdate);
-      this.input.removeEventListener('change', this.#onFitTextUpdate);
-    }
     this.#observers.forEach(observer => observer.disconnect());
     this.#observers.length = 0;
   }
@@ -184,7 +180,6 @@ export class Control extends LitElement {
 
     if (this.input && this.#observers.length === 0) {
       this.#setupInput();
-      this.#setupFitText();
     }
   };
 
@@ -241,31 +236,6 @@ export class Control extends LitElement {
     this.#updateStyleStates();
     this.#updateAssociations();
   };
-
-  #setupFitText() {
-    if (this.fitText) {
-      this.#getCharacterWidth();
-      this.input.addEventListener('input', this.#onFitTextUpdate);
-      this.input.addEventListener('change', this.#onFitTextUpdate);
-    }
-  }
-
-  #onFitTextUpdate = () => {
-    this.#getCharacterWidth();
-  };
-
-  #getCharacterWidth() {
-    if (this.input.tagName === 'INPUT') {
-      const offset = this.input.type !== 'text' ? 4 : 0;
-      this.style.setProperty('--control-width', `${this.input.value.length + offset}ch`);
-      this.input.style.setProperty('max-width', `${this.input.value.length + 2}ch`, 'important');
-    } else if (this.input.tagName === 'SELECT') {
-      this.style.setProperty(
-        '--control-width',
-        `${(this.input as unknown as HTMLSelectElement).options[(this.input as unknown as HTMLSelectElement).selectedIndex]!.textContent!.length + 4}ch`
-      );
-    }
-  }
 
   #polyfillShowPicker() {
     if (!this.input.showPicker) {

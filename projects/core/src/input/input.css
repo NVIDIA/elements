@@ -22,10 +22,6 @@
   min-width: var(--min-width);
 }
 
-:host([fit-text]) {
-  --max-width: fit-content;
-}
-
 [input] {
   height: var(--height);
   background: var(--background);

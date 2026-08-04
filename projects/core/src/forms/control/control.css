@@ -53,6 +53,16 @@
   --width: fit-content;
 }
 
+:host([fit-text]) {
+  --max-width: fit-content;
+  --width: fit-content;
+
+  ::slotted(input),
+  ::slotted(select) {
+    field-sizing: content;
+  }
+}
+
 :host([nve-control]) ::slotted(input:focus),
 :host([nve-control]) ::slotted(select:focus),
 :host([nve-control]) ::slotted(textarea:focus),
