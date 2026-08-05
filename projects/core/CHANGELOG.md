@@ -1,3 +1,19 @@
+## <small>2.2.3 (2026-08-05)</small>
+
+* fix(cli): workspace dependency ([5ecbd96](https://github.com/NVIDIA/elements/commit/5ecbd96))
+* fix(core): size height calculation ([204aa52](https://github.com/NVIDIA/elements/commit/204aa52))
+* fix(core): update fit-text input to native field sizing ([cadc33c](https://github.com/NVIDIA/elements/commit/cadc33c))
+* fix(styles): add width rule for row layout with space-between alignment ([61113ad](https://github.com/NVIDIA/elements/commit/61113ad))
+* chore(ci): add github dependabot skill ([4cb37a7](https://github.com/NVIDIA/elements/commit/4cb37a7))
+* chore(ci): enhance ci performance profiling and add new scripts ([ef0a912](https://github.com/NVIDIA/elements/commit/ef0a912))
+* chore(ci): update dependencies ([4601239](https://github.com/NVIDIA/elements/commit/4601239))
+* chore(ci): update metadata and test coverage report ([216a7a9](https://github.com/NVIDIA/elements/commit/216a7a9))
+* chore(docs): july update ([59d3f83](https://github.com/NVIDIA/elements/commit/59d3f83))
+* chore(release): @nvidia-elements/cli-v2.1.9 [skip ci] ([651abf3](https://github.com/NVIDIA/elements/commit/651abf3))
+* chore(release): @nvidia-elements/lint-v2.3.0 [skip ci] ([35bb729](https://github.com/NVIDIA/elements/commit/35bb729))
+* chore(release): @nvidia-elements/styles-v2.1.2 [skip ci] ([71fab6c](https://github.com/NVIDIA/elements/commit/71fab6c))
+* feat(lint): add rule to restrict container="full" usage ([a634e39](https://github.com/NVIDIA/elements/commit/a634e39))
+
 ## <small>2.2.2 (2026-07-30)</small>
 
 * fix(cli): update mcp sdk ([0640e11](https://github.com/NVIDIA/elements/commit/0640e11))
