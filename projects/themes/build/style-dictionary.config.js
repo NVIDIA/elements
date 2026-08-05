@@ -213,7 +213,7 @@ export async function buildTokens() {
     }
   });
   await sd.hasInitialized;
-  sd.buildAllPlatforms();
+  await sd.buildAllPlatforms();
 
   await Promise.all(
     themes.map(async path => {
@@ -229,7 +229,7 @@ export async function buildTokens() {
         }
       });
       await sdTheme.hasInitialized;
-      sdTheme.buildAllPlatforms();
+      await sdTheme.buildAllPlatforms();
     })
   );
 }

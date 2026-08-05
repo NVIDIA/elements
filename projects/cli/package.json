@@ -54,7 +54,7 @@
     "@modelcontextprotocol/server": "catalog:",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/lint": "workspace:^",
-    "adm-zip": "0.5.17",
+    "adm-zip": "0.6.0",
     "archiver": "8.0.0",
     "marked": "18.0.3",
     "marked-terminal": "7.3.0",
