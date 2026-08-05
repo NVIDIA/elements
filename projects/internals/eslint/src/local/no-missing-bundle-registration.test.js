@@ -21,6 +21,7 @@ async function createBundleFixture(components) {
   const directory = await mkdtemp(join(tmpdir(), 'nve-bundle-rule-'));
   const sourceDirectory = join(directory, 'src');
   await mkdir(sourceDirectory, { recursive: true });
+  await writeFile(join(directory, 'package.json'), JSON.stringify({ name: '@nvidia-elements/core' }));
 
   await Promise.all(
     components.map(async component => {
@@ -54,6 +55,29 @@ test('valid: allows registered components with matching bundle exports', async (
       }
     ],
     invalid: []
+  });
+});
+
+test('invalid: reports component definitions missing from the bundle', async () => {
+  const filename = await createBundleFixture(['button']);
+
+  tester.run('no-missing-bundle-registration', noMissingBundleRegistration, {
+    valid: [],
+    invalid: [
+      {
+        filename,
+        code: '',
+        errors: [
+          {
+            messageId: 'missing-bundle-registration',
+            data: {
+              component: 'button',
+              prefix: '@nvidia-elements/core'
+            }
+          }
+        ]
+      }
+    ]
   });
 });
 

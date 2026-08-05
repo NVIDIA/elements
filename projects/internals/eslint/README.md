@@ -109,3 +109,4 @@ Applied to `package.json` files.
 ### Build and bundle rules
 
 - **`no-missing-bundle-registration`**. A component that ships a `define.ts` must also appear in `src/bundle.ts` so the CDN bundle registers it.
+- **`no-missing-bundle-test`**. Every component registered by `src/bundle.ts` must also appear in the Lighthouse direct-import benchmark. The required `lighthouseTestFile` option names the project's combined Lighthouse test file.

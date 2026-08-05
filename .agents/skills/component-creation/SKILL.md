@@ -35,8 +35,11 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
    - `component-name.test.lighthouse.ts`:lighthouse tests
    - `define.ts`:registration using `define()` helper with `HTMLElementTagNameMap`
    - `index.ts`:side-effect-free export
-4. **Update bundle**: add `import '@nvidia-elements/core/<component-name>/define.js'` to `projects/core/src/bundle.ts` in alphabetical order so the bundle registers the component.
-5. **Verify**: confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
+4. **Update shared entry points**:
+   - Add only `import '@nvidia-elements/core/<component-name>/define.js'` to `projects/core/src/bundle.ts` in alphabetical order. Keep this registration bundle import-only. Export the public API from the component `index.ts` and expose its entry point through the package `exports` map.
+   - Add the definition import to the `js-modules` list in `projects/core/src/index.test.lighthouse.ts` so the combined direct-import benchmark measures the component.
+5. **Measure payloads**: run `mise exec -- pnpm run test:lighthouse` from `projects/core`. Increase a bundle-size limit only when the measured payload exceeds the current limit.
+6. **Verify**: confirm all files follow the templates in the component creation guide, then run `mise exec -- pnpm run lint` and `mise exec -- pnpm run test` from `projects/core`.
 
 ## References
 

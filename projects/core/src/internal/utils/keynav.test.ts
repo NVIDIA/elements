@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { createFixture, removeFixture } from '@internals/testing';
 import { createLightDismiss, onKeys } from '@nvidia-elements/core/internal';
 
 describe('onKeys', () => {
@@ -27,15 +28,21 @@ describe('onKeys', () => {
 });
 
 describe('createLightDismiss', () => {
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture();
+  });
+
   function createMockElement(bounds: { left: number; right: number; top: number; bottom: number }) {
     const element = document.createElement('div');
     element.getBoundingClientRect = () => ({ ...bounds, width: 0, height: 0, x: 0, y: 0, toJSON: () => ({}) });
-    document.body.appendChild(element);
+    fixture.appendChild(element);
     return element;
   }
 
   afterEach(() => {
-    document.body.innerHTML = '';
+    removeFixture(fixture);
   });
 
   it('should call fn on pointerup outside element bounds', () => {

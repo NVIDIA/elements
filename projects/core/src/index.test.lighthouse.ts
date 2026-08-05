@@ -26,7 +26,7 @@ describe('lighthouse report', () => {
       <script type="module">
         import '@nvidia-elements/core/accordion/define.js';
         import '@nvidia-elements/core/alert/define.js';
-                import '@nvidia-elements/core/avatar/define.js';
+        import '@nvidia-elements/core/avatar/define.js';
         import '@nvidia-elements/core/badge/define.js';
         import '@nvidia-elements/core/breadcrumb/define.js';
         import '@nvidia-elements/core/button/define.js';
@@ -44,8 +44,13 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/dot/define.js';
         import '@nvidia-elements/core/drawer/define.js';
         import '@nvidia-elements/core/dropdown/define.js';
+        import '@nvidia-elements/core/dropdown-group/define.js';
+        import '@nvidia-elements/core/dropzone/define.js';
         import '@nvidia-elements/core/file/define.js';
         import '@nvidia-elements/core/format-bytes/define.js';
+        import '@nvidia-elements/core/format-datetime/define.js';
+        import '@nvidia-elements/core/format-number/define.js';
+        import '@nvidia-elements/core/format-relative-time/define.js';
         import '@nvidia-elements/core/forms/define.js';
         import '@nvidia-elements/core/gauge/define.js';
         import '@nvidia-elements/core/grid/define.js';
@@ -66,6 +71,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/progress-bar/define.js';
         import '@nvidia-elements/core/progress-ring/define.js';
         import '@nvidia-elements/core/progressive-filter-chip/define.js';
+        import '@nvidia-elements/core/pulse/define.js';
         import '@nvidia-elements/core/radio/define.js';
         import '@nvidia-elements/core/range/define.js';
         import '@nvidia-elements/core/resize-handle/define.js';
@@ -74,6 +80,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/skeleton/define.js';
         import '@nvidia-elements/core/sort-button/define.js';
         import '@nvidia-elements/core/sparkline/define.js';
+        import '@nvidia-elements/core/star-rating/define.js';
         import '@nvidia-elements/core/steps/define.js';
         import '@nvidia-elements/core/switch/define.js';
         import '@nvidia-elements/core/tabs/define.js';
@@ -92,6 +99,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(82);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(86.3);
   });
 });

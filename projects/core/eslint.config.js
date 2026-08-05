@@ -17,6 +17,18 @@ export default [
   ...litConfig,
   ...cssConfig,
   ...jsonConfig,
+  {
+    files: ['src/bundle.ts'],
+    rules: {
+      'local/no-missing-bundle-registration': ['error'],
+      'local/no-missing-bundle-test': [
+        'error',
+        {
+          lighthouseTestFile: 'index.test.lighthouse.ts'
+        }
+      ]
+    }
+  },
   // Disable no-missing-popover-trigger globally, only enable for examples
   {
     rules: {
