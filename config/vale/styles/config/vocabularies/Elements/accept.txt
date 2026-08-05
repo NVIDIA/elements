@@ -255,7 +255,6 @@ nve-grid
 nve-icon
 nve-icon-button
 nve-input
-nve-json-viewer
 nve-logo
 nve-menu
 nve-month

@@ -235,7 +235,14 @@ const previewOverrides = {
   'nve-monaco-diff-input': renderMonacoMock('nve-monaco-diff-input'),
   'nve-monaco-editor': renderMonacoMock('nve-monaco-editor'),
   'nve-monaco-input': renderMonacoMock('nve-monaco-input'),
-  'nve-monaco-problems': renderMonacoMock('nve-monaco-problems')
+  'nve-monaco-problems': renderMonacoMock('nve-monaco-problems'),
+  'nve-media-fullscreen-button': /* html */ `<nve-media-fullscreen-button></nve-media-fullscreen-button>`,
+  'nve-media-mute-button': /* html */ `<nve-media-mute-button></nve-media-mute-button>`,
+  'nve-media-pause-button': /* html */ `<nve-media-pause-button></nve-media-pause-button>`,
+  'nve-media-playback-rate-select': /* html */ `<nve-media-playback-rate-select></nve-media-playback-rate-select>`,
+  'nve-media-seek-button': /* html */ `<nve-media-seek-button></nve-media-seek-button>`,
+  'nve-media-time-range': /* html */ `<nve-media-time-range min="0" max="60" value="16" buffered-ranges='[{"start":0,"end":22},{"start":31,"end":48}]'></nve-media-time-range>`,
+  'nve-media-volume-range': /* html */ `<nve-media-volume-range value="0.5"></nve-media-volume-range>`
 };
 
 const getPreviewTemplate = tag => {

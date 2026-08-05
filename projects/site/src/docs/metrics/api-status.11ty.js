@@ -31,7 +31,7 @@ const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeS
   new Date(tests.created)
 );
 const elements = siteData.elements
-  .filter(element => !element.name.includes('internal') && !element.name.includes('json-viewer'))
+  .filter(element => !element.name.includes('internal'))
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export function render() {

@@ -16,6 +16,7 @@ import requireElementDefinitions from '../local/require-element-definitions.js';
 import requireTestCompleteness from '../local/require-test-completeness.js';
 import requireComposedEvents from '../local/require-composed-events.js';
 import noMissingBundleRegistration from '../local/no-missing-bundle-registration.js';
+import noMissingBundleTest from '../local/no-missing-bundle-test.js';
 import noHostManagedAriaAttributes from '../local/no-host-managed-aria-attributes.js';
 import noSingleConsumerInternalBase from '../local/no-single-consumer-internal-base.js';
 
@@ -67,6 +68,7 @@ export const litConfig = [
           'require-test-completeness': requireTestCompleteness,
           'require-composed-events': requireComposedEvents,
           'no-missing-bundle-registration': noMissingBundleRegistration,
+          'no-missing-bundle-test': noMissingBundleTest,
           'no-host-managed-aria-attributes': noHostManagedAriaAttributes,
           'no-single-consumer-internal-base': noSingleConsumerInternalBase
         }
@@ -140,17 +142,10 @@ export const litConfig = [
       'local/require-composed-events': ['error'],
       'local/no-host-managed-aria-attributes': ['error'],
       'local/no-single-consumer-internal-base': ['error'],
-      'local/no-missing-bundle-registration': [
-        'error',
-        {
-          exclude: ['json-viewer']
-        }
-      ],
       'local/require-test-completeness': [
         'error',
         {
           exclude: [
-            'json-viewer',
             'panel',
             'dropdown-group',
             'progressive-filter-chip',

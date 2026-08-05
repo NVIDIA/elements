@@ -20,7 +20,7 @@ run = [
   "mise install",
   "mise exec -- git lfs install --skip-repo",
   "mise exec -- git lfs pull",
-  "mise exec -- pnpm i --frozen-lockfile --prefer-offline",
+  "mise exec -- pnpm i --frozen-lockfile --prefer-offline --config.confirmModulesPurge=false",
 ]
 
 [tasks.setup]

@@ -1,12 +1,38 @@
-/**
- * Shared helpers for the listener/observer/timer cleanup rules.
- * Extracted so walker and class-scope logic stay consistent across rules.
- */
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 
-/**
- * Recursive AST walker that visits every node under `node`. Safe against the
- * `.parent` back-pointer (skipped) and descends into arrays of child nodes.
- */
+export const DEFAULT_IMPORT_PREFIX = '@nvidia-elements/core';
+
+export function getPackageName(startDirectory) {
+  let directory = startDirectory;
+
+  while (true) {
+    const packageJsonPath = join(directory, 'package.json');
+    if (existsSync(packageJsonPath)) {
+      try {
+        const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+        return typeof packageJson.name === 'string' ? packageJson.name : undefined;
+      } catch {
+        return undefined;
+      }
+    }
+
+    const parentDirectory = dirname(directory);
+    if (parentDirectory === directory) return undefined;
+    directory = parentDirectory;
+  }
+}
+
+export function getBundleImportPattern(prefix) {
+  const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`^${escapedPrefix}/([^/]+)/define\\.js$`);
+}
+
+export function getBundleExportPattern(prefix) {
+  const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`^${escapedPrefix}/([^/]+)$`);
+}
+
 export function walk(node, visit) {
   if (!node || typeof node !== 'object') {
     return;
@@ -27,12 +53,10 @@ export function walk(node, visit) {
   }
 }
 
-/** Collapse internal whitespace so `this.shadowRoot` matches across formatting. */
 export function normalize(text) {
   return text.replace(/\s+/g, ' ').trim();
 }
 
-/** Walk up `.parent` looking for the enclosing class. Returns `null` for module-level nodes. */
 export function findEnclosingClass(node) {
   let current = node.parent;
   while (current) {

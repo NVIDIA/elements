@@ -1,30 +1,6 @@
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-
-const DEFAULT_IMPORT_PREFIX = '@nvidia-elements/core';
-
-function getPackageName(startDirectory) {
-  let directory = startDirectory;
-
-  while (true) {
-    const packageJsonPath = join(directory, 'package.json');
-    if (existsSync(packageJsonPath)) {
-      try {
-        const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
-        return typeof packageJson.name === 'string' ? packageJson.name : undefined;
-      } catch {
-        return undefined;
-      }
-    }
-
-    const parentDirectory = dirname(directory);
-    if (parentDirectory === directory) {
-      return undefined;
-    }
-
-    directory = parentDirectory;
-  }
-}
+import { DEFAULT_IMPORT_PREFIX, getBundleExportPattern, getBundleImportPattern, getPackageName } from './utils.js';
 
 /**
  * ESLint rule that ensures public components with a `define.ts` entry are
@@ -76,9 +52,8 @@ export default {
     const exclude = new Set(options.exclude || []);
     const importedComponents = new Set();
     const exportedComponents = new Set();
-    const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const importPattern = new RegExp(`^${escapedPrefix}/([^/]+)/define\\.js$`);
-    const exportPattern = new RegExp(`^${escapedPrefix}/([^/]+)$`);
+    const importPattern = getBundleImportPattern(prefix);
+    const exportPattern = getBundleExportPattern(prefix);
 
     return {
       ImportDeclaration(node) {

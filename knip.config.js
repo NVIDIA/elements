@@ -32,7 +32,6 @@ export default {
     '@semantic-release/github',
     '@semantic-release/npm',
     '@semantic-release/release-notes-generator',
-    '@typescript-eslint/parser',
     '@typescript/lib-dom',
     'adm-zip',
     'archiver',
