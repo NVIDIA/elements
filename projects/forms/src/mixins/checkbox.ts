@@ -39,7 +39,7 @@ export interface CheckboxFormControlMixinInstance extends FormControlMixinInstan
   /**
    * Toggles the checked state.
    */
-  toggle(): void;
+  toggle(event?: Event): void;
 }
 
 export type CheckboxFormControlMixinReturn<TBase extends Constructor> = (new (
@@ -196,8 +196,8 @@ export function CheckboxFormControlMixin<TBase extends Constructor>(
       this.checkValidity();
     }
 
-    toggle() {
-      if (this.disabled || this.readOnly) {
+    toggle(event?: Event) {
+      if (this.disabled || this.readOnly || event?.defaultPrevented) {
         return;
       }
 

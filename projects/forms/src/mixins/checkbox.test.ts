@@ -206,6 +206,15 @@ describe('CheckboxFormControlMixin', () => {
     expect(element.checked).toBe(false);
   });
 
+  it('should not toggle when the event default is prevented', () => {
+    const event = new Event('click', { cancelable: true });
+    event.preventDefault();
+
+    element.toggle(event);
+
+    expect(element.checked).toBe(false);
+  });
+
   it('should request updates for checkbox state changes', () => {
     vi.spyOn(element, 'requestUpdate');
 
