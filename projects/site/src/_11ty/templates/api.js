@@ -58,7 +58,7 @@ export function elementSummary(tag) {
   const element = elements.find(d => d.name === tag);
   const testReports = Object.values(tests.projects);
   const unitTestResults = testReports.flatMap(report => report.coverage.testResults);
-  const coverageTotal = getElementCoverageTotal(tag, unitTestResults);
+  const coverageTotal = getCoverageResult(unitTestResults, tag, element?.manifest?.path)?.branches.pct;
   const lighthouseResults = testReports
     .flatMap(report => report.lighthouse)
     .flatMap(result => result.testResults)
@@ -92,16 +92,17 @@ export function elementSummary(tag) {
   </section>`;
 }
 
-function getElementCoverageTotal(tag, unitTestResults) {
-  const elementName = tag.replace('nve-', '');
-  const implementationPath = `${elementName}/${elementName}.ts`;
-  const exactResult = unitTestResults.find(result => result.file === implementationPath);
-  const fileNameResult = unitTestResults.find(result => result.file?.endsWith(`/${elementName}.ts`));
-  const broadResult = unitTestResults.find(
-    result => result.file?.includes(elementName) && !result.file.endsWith('/define.ts')
+export function getCoverageResult(results, elementName, manifestPath = '') {
+  const elementPath = elementName.replace(/^nve-/, '');
+  return (
+    results.find(result => result.file === getSourcePath(manifestPath)) ??
+    results.find(result => result.file?.endsWith(`${elementPath}/${elementPath}.ts`)) ??
+    results.find(result => result.file?.endsWith(`${elementPath}/define.ts`))
   );
+}
 
-  return (exactResult ?? fileNameResult ?? broadResult)?.branches.pct;
+function getSourcePath(manifestPath) {
+  return manifestPath.replace(/^\/src\//, '').replace(/\.js$/, '.ts');
 }
 
 /**

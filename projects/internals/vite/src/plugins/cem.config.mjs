@@ -169,6 +169,7 @@ function metadataPlugin() {
           });
 
           if (classDeclaration.metadata && classDeclaration.tagName) {
+            const sourceMetadata = classDeclaration.metadata;
             classDeclaration.metadata = {
               unitTests: true,
               apiReview: true,
@@ -180,11 +181,11 @@ function metadataPlugin() {
               aria: false,
               entrypoint: '',
               example: '',
-              package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
-              ...classDeclaration.metadata
+              package: isEntrypointExported(sourceMetadata.entrypoint, pkg),
+              ...sourceMetadata
             };
 
-            classDeclaration.metadata.entrypoint = classDeclaration.metadata.entrypoint.replace('\\', '');
+            classDeclaration.metadata.entrypoint = classDeclaration.metadata.entrypoint.replaceAll('\\', '');
             classDeclaration.metadata.status = getElementStability(classDeclaration.metadata);
             classDeclaration.metadata.behavior = getBehaviorCategory(classDeclaration);
             classDeclaration.metadata.aria = getSpecUrl(classDeclaration);
@@ -194,6 +195,22 @@ function metadataPlugin() {
       }
     }
   };
+}
+
+export function isEntrypointExported(entrypoint, packageJson) {
+  if (typeof entrypoint !== 'string' || typeof packageJson?.name !== 'string') {
+    return false;
+  }
+
+  const normalizedEntrypoint = entrypoint.replaceAll('\\', '');
+  const exportPath =
+    normalizedEntrypoint === packageJson.name
+      ? '.'
+      : normalizedEntrypoint.startsWith(`${packageJson.name}/`)
+        ? `.${normalizedEntrypoint.slice(packageJson.name.length)}`
+        : '';
+
+  return exportPath !== '' && Object.hasOwn(packageJson.exports ?? {}, exportPath);
 }
 
 function getExample(classDeclaration, path) {

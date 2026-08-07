@@ -156,6 +156,7 @@
         "release:lint",
         "release:labs-forms",
         "release:markdown",
+        "release:media",
         "release:monaco",
         "release:styles"
       ]
