@@ -1,3 +1,14 @@
+## 2.3.0 (2026-08-07)
+
+* fix(cli): update dependencies ([ff596a1](https://github.com/NVIDIA/elements/commit/ff596a1))
+* fix(forms): respect event default prevention ([5618862](https://github.com/NVIDIA/elements/commit/5618862))
+* chore(ci): lint rules and skill for component registration and testing ([6c7fea0](https://github.com/NVIDIA/elements/commit/6c7fea0))
+* chore(ci): update metadata ([b7120bf](https://github.com/NVIDIA/elements/commit/b7120bf))
+* chore(docs): add component preview to card list ([c7e16a5](https://github.com/NVIDIA/elements/commit/c7e16a5))
+* chore(release): @nvidia-elements/forms-v2.0.6 [skip ci] ([c977b1a](https://github.com/NVIDIA/elements/commit/c977b1a))
+* feat(core): format-bytes ([bfd2e5e](https://github.com/NVIDIA/elements/commit/bfd2e5e))
+* feat(media): init ([859c8f9](https://github.com/NVIDIA/elements/commit/859c8f9))
+
 ## <small>2.2.3 (2026-08-05)</small>
 
 * fix(cli): workspace dependency ([5ecbd96](https://github.com/NVIDIA/elements/commit/5ecbd96))
