@@ -12,6 +12,7 @@ import {
   elementMetadataToMarkdown,
   getAttributeFacingTypeText,
   getDocumentedTypeValues,
+  isEntrypointExported,
   omitVueBooleanAttributeAliases,
   projectFrameworkPropertyBindings,
   publicPropertiesPlugin,
@@ -84,6 +85,19 @@ test('does not generate Custom Data for sparse manifests', () => {
       []
     );
   }
+});
+
+test('matches namespaced component entrypoints to package exports', () => {
+  const packageJson = {
+    name: '@nvidia-elements/media',
+    exports: {
+      './pause-button': './dist/pause-button/index.js'
+    }
+  };
+
+  assert.equal(isEntrypointExported('\\@nvidia-elements/media/pause-button', packageJson), true);
+  assert.equal(isEntrypointExported('\\\\@nvidia-elements/media/pause-button', packageJson), true);
+  assert.equal(isEntrypointExported('@nvidia-elements/media/mute-button', packageJson), false);
 });
 
 test('rejects traversal and absolute Custom Data paths before checking manifest tags', () => {

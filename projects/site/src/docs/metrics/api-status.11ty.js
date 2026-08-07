@@ -1,8 +1,17 @@
 // @ts-check
 
-import { badgeStatus, badgeCoverage, badgeBundle, badgeLighthouse, badgeAxe } from '../../_11ty/templates/api.js';
+import {
+  badgeStatus,
+  badgeCoverage,
+  badgeBundle,
+  badgeLighthouse,
+  badgeAxe,
+  getCoverageResult
+} from '../../_11ty/templates/api.js';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 import { siteData } from '../../index.11tydata.js';
+
+export { getCoverageResult };
 
 const { tests } = siteData;
 
@@ -149,15 +158,6 @@ export function getAssertionResult(results, elementName, manifestPath = '', test
       }) ??
     results.find(result => result.name?.endsWith(`/src/${getTestPath(manifestPath, testSuffix)}`))
       ?.assertionResults?.[0]
-  );
-}
-
-export function getCoverageResult(results, elementName, manifestPath = '') {
-  const elementPath = elementName.replace(/^nve-/, '');
-  return (
-    results.find(result => result.file === getSourcePath(manifestPath)) ??
-    results.find(result => result.file?.endsWith(`${elementPath}/${elementPath}.ts`)) ??
-    results.find(result => result.file?.endsWith(`${elementPath}/define.ts`))
   );
 }
 
