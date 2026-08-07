@@ -1,9 +1,9 @@
 ---
-name: testing
+name: authoring-tests
 description: Write and run automated tests for Elements components including unit, accessibility, visual, SSR, and lighthouse tests. Use this skill whenever the user wants to write, create, update, or debug test files (.test.ts, .test.axe.ts, .test.visual.ts, .test.ssr.ts, .test.lighthouse.ts). Also trigger when the user asks about createFixture, removeFixture, elementIsStable, emulateClick, untilEvent, runAxe, visual baselines, theme testing, or test structure patterns like describe block naming.
 ---
 
-# Testing Guidelines
+# Authoring Tests
 
 You MUST review @projects/site/src/docs/internal/guidelines/testing.md before making any testing changes.
 

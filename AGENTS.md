@@ -198,7 +198,7 @@ Releases happen automatically after CI passes on merge to `main`. No manual vers
 
 ### Branch Naming
 
-Branches must use `topic/` prefix for merge requests:
+Branches should use `topic/` prefix for merge requests unless instructed otherwise:
 
 ```shell
 git checkout -b topic/fix-button-accessibility

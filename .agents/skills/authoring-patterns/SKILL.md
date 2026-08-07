@@ -1,9 +1,9 @@
 ---
-name: pattern-creation
+name: authoring-patterns
 description: Convert validated playground templates or HTML compositions into reusable pattern files (*.examples.ts) in the pattern library. Use this skill whenever the user wants to save, persist, store, or catalog a template, prototype, composition, or playground result as a reusable pattern. Trigger on phrases like "save as pattern," "create pattern," "add to pattern library," "persist this template," "convert to examples.ts," or when the user has validated HTML and wants it stored in projects/internals/patterns/src/.
 ---
 
-# Pattern Creation
+# Authoring Patterns
 
 Persist a validated HTML template as a reusable pattern file in the Elements pattern library at `projects/internals/patterns/src/`.
 
@@ -59,7 +59,7 @@ Analyze the template and determine where and how to file it.
 - Describes WHAT the pattern shows, not HOW it works
 - Avoid component names in the title (use `LoginForm` not `InputPasswordLoginForm`)
 
-**File name:**
+**Filename:**
 
 - kebab-case with `.examples.ts` suffix
 - Should reflect the pattern's theme or category
@@ -122,7 +122,7 @@ Build the TypeScript file content.
 **Determine render style:**
 
 - If the template contains `<script>` tags: use the `render()` method form
-- If the template uses only declarative HTML: use the `render: () => html\`...\`` arrow function form
+- If the template uses only declarative HTML: use the `render` arrow-function form
 
 **New file template:**
 
@@ -181,7 +181,7 @@ export const ExportName = {
 
 1. Write the file to `projects/internals/patterns/src/<file-name>.examples.ts`
 2. Confirm to the user with:
-   - File path
+   - Path
    - Export name
    - Category
    - Components used (list of `nve-*` tags)
