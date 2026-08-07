@@ -1,3 +1,21 @@
+## <small>2.1.10 (2026-08-07)</small>
+
+* chore(ci): add github dependabot skill ([4cb37a7](https://github.com/NVIDIA/elements/commit/4cb37a7))
+* chore(ci): lint rules and skill for component registration and testing ([6c7fea0](https://github.com/NVIDIA/elements/commit/6c7fea0))
+* chore(ci): update dependencies ([4601239](https://github.com/NVIDIA/elements/commit/4601239))
+* chore(ci): update metadata ([b7120bf](https://github.com/NVIDIA/elements/commit/b7120bf))
+* chore(docs): add component preview to card list ([c7e16a5](https://github.com/NVIDIA/elements/commit/c7e16a5))
+* chore(docs): july update ([59d3f83](https://github.com/NVIDIA/elements/commit/59d3f83))
+* chore(release): @nvidia-elements/core-v2.2.3 [skip ci] ([0b24dcc](https://github.com/NVIDIA/elements/commit/0b24dcc))
+* chore(release): @nvidia-elements/core-v2.3.0 [skip ci] ([e657e21](https://github.com/NVIDIA/elements/commit/e657e21))
+* chore(release): @nvidia-elements/forms-v2.0.6 [skip ci] ([c977b1a](https://github.com/NVIDIA/elements/commit/c977b1a))
+* fix(cli): update dependencies ([ff596a1](https://github.com/NVIDIA/elements/commit/ff596a1))
+* fix(core): size height calculation ([204aa52](https://github.com/NVIDIA/elements/commit/204aa52))
+* fix(core): update fit-text input to native field sizing ([cadc33c](https://github.com/NVIDIA/elements/commit/cadc33c))
+* fix(forms): respect event default prevention ([5618862](https://github.com/NVIDIA/elements/commit/5618862))
+* feat(core): format-bytes ([bfd2e5e](https://github.com/NVIDIA/elements/commit/bfd2e5e))
+* feat(media): init ([859c8f9](https://github.com/NVIDIA/elements/commit/859c8f9))
+
 ## <small>2.1.9 (2026-07-30)</small>
 
 * chore(ci): enhance ci performance profiling and add new scripts ([ef0a912](https://github.com/NVIDIA/elements/commit/ef0a912))
