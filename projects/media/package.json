@@ -1,6 +1,9 @@
 {
   "name": "@nvidia-elements/media",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "release": {
+    "extends": "../../release.config.js"
+  },
   "description": "Media playback UI components for Elements",
   "keywords": [
     "nvidia",
