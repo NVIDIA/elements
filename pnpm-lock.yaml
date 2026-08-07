@@ -478,8 +478,8 @@ importers:
   projects/cli:
     dependencies:
       '@inquirer/prompts':
-        specifier: 8.5.0
-        version: 8.5.0(@types/node@25.6.2)
+        specifier: 8.5.2
+        version: 8.5.2(@types/node@25.6.2)
       '@modelcontextprotocol/ext-apps':
         specifier: 'catalog:'
         version: 1.7.5(@modelcontextprotocol/sdk@1.30.0(zod@4.4.3))(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(zod@4.4.3)
@@ -499,17 +499,17 @@ importers:
         specifier: 8.0.0
         version: 8.0.0
       marked:
-        specifier: 18.0.3
-        version: 18.0.3
+        specifier: 18.0.9
+        version: 18.0.9
       marked-terminal:
         specifier: 7.3.0
-        version: 7.3.0(marked@18.0.3)
+        version: 7.3.0(marked@18.0.9)
       open:
         specifier: 11.0.0
         version: 11.0.0
       ora:
-        specifier: 9.4.0
-        version: 9.4.0
+        specifier: 9.4.1
+        version: 9.4.1
       publint:
         specifier: 'catalog:'
         version: 0.3.21
@@ -3471,15 +3471,6 @@ packages:
   '@inquirer/password@5.1.1':
     resolution: {integrity: sha512-3XBfF7DAsp5qeDsvN5Rd1HmbNokVvEQoUM0QLrRcybC9nX96w3Pbmu7qUsb3IT3J3jBvs2+mTXaKHOUsgHMLzg==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^20.17.0'}
-    peerDependencies:
-      '@types/node': '>=18'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-
-  '@inquirer/prompts@8.5.0':
-    resolution: {integrity: sha512-pLjXOnY4y3R1mgyHP3pXD/8eXejp+L/dde/0N2NLKgKfMstqhNZrpvs7Wkzbl9FYFQh10LRQ7QZwq+cz9rrhyw==}
-    engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
     peerDependencies:
       '@types/node': '>=18'
     peerDependenciesMeta:
@@ -9824,8 +9815,8 @@ packages:
     engines: {node: '>= 18'}
     hasBin: true
 
-  marked@18.0.3:
-    resolution: {integrity: sha512-7VT90JOkDeaRWpfjOReRGPEKn0ecdARBkDGL+tT1wZY0efPPqkUxLUSmzy/C7TIylQYJC9STISEsCHrqb/7VIA==}
+  marked@18.0.9:
+    resolution: {integrity: sha512-/Sa4qiiHZxf0/FQdBBowr9q4r10krCwMvpK48FUBdXdUXScDxiQGR9zCPrFgRVR5LU3iySOiIjy09ZQvADir1w==}
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -10504,10 +10495,6 @@ packages:
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
-
-  ora@9.4.0:
-    resolution: {integrity: sha512-84cglkRILFxdtA8hAvLNdMrtBpPNBTrQ9/ulg0FA7xLMnD6mifv+enAIeRmvtv+WgdCE+LPGOfQmtJRrVaIVhQ==}
-    engines: {node: '>=20'}
 
   ora@9.4.1:
     resolution: {integrity: sha512-6VlU9MLXbjVQD04AZCMX28hVtA5bUoadvUqO76MUCVA0ilwJbMiHsITRPfyVm6p/BC0Av/BXMujx39WCe1LEqw==}
@@ -12209,10 +12196,6 @@ packages:
   string-width@7.2.0:
     resolution: {integrity: sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ==}
     engines: {node: '>=18'}
-
-  string-width@8.2.0:
-    resolution: {integrity: sha512-6hJPQ8N0V0P3SNmP6h2J99RLuzrWz2gvT7VnK5tKvrNqJoyS9W4/Fb8mo31UiPvy00z7DQXkP2hnKBVav76thw==}
-    engines: {node: '>=20'}
 
   string-width@8.2.1:
     resolution: {integrity: sha512-IIaP0g3iy9Cyy18w3M9YcaDudujEAVHKt3a3QJg1+sr/oX96TbaGUubG0hJyCjCBThFH+tFpcIyoUHUn1ogaLA==}
@@ -15217,7 +15200,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.9.3
 
-  '@inquirer/prompts@8.5.0(@types/node@25.6.2)':
+  '@inquirer/prompts@8.5.2(@types/node@25.6.2)':
     dependencies:
       '@inquirer/checkbox': 5.2.1(@types/node@25.6.2)
       '@inquirer/confirm': 6.1.1(@types/node@25.6.2)
@@ -22251,14 +22234,14 @@ snapshots:
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked-terminal@7.3.0(marked@18.0.3):
+  marked-terminal@7.3.0(marked@18.0.9):
     dependencies:
       ansi-escapes: 7.3.0
       ansi-regex: 6.2.2
       chalk: 5.6.2
       cli-highlight: 2.1.11
       cli-table3: 0.6.5
-      marked: 18.0.3
+      marked: 18.0.9
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
@@ -22266,7 +22249,7 @@ snapshots:
 
   marked@15.0.12: {}
 
-  marked@18.0.3: {}
+  marked@18.0.9: {}
 
   marky@1.3.0: {}
 
@@ -23286,17 +23269,6 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
-
-  ora@9.4.0:
-    dependencies:
-      chalk: 5.6.2
-      cli-cursor: 5.0.0
-      cli-spinners: 3.4.0
-      is-interactive: 2.0.0
-      is-unicode-supported: 2.1.0
-      log-symbols: 7.0.1
-      stdin-discarder: 0.3.2
-      string-width: 8.2.0
 
   ora@9.4.1:
     dependencies:
@@ -25252,11 +25224,6 @@ snapshots:
   string-width@7.2.0:
     dependencies:
       emoji-regex: 10.6.0
-      get-east-asian-width: 1.5.0
-      strip-ansi: 7.2.0
-
-  string-width@8.2.0:
-    dependencies:
       get-east-asian-width: 1.5.0
       strip-ansi: 7.2.0
 
