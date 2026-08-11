@@ -40,7 +40,7 @@ This product includes the following bundled third-party software:
 - highlight.js v11.11.1 [BSD-3-Clause] (used by: @nvidia-elements/code)
   Copyright: Josh Goebel <hello@joshgoebel.com>
 
-- lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco)
+- lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco, @nvidia-elements/plot, @nvidia-elements/scene)
   Copyright: Google LLC
 
 - lit-html v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/monaco)

@@ -81,6 +81,8 @@
         "./projects/media:ci",
         "./projects/monaco:ci",
         "./projects/pages:ci",
+        "./projects/plot:ci",
+        "./projects/scene:ci",
         "./projects/site:ci",
         "./projects/starters:ci",
         "./projects/starters/angular:ci",

@@ -1,0 +1,347 @@
+{
+  "name": "@nvidia-elements/plot",
+  "version": "0.0.0",
+  "private": true,
+  "release": {
+    "extends": "../../release.config.js"
+  },
+  "description": "",
+  "keywords": [
+    "nvidia",
+    "web-components",
+    "custom-elements",
+    "ui-components",
+    "design-system"
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
+  "customElements": "dist/custom-elements.json",
+  "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./dist/data.snippets.json"
+      }
+    ]
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "NOTICE.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./data.html.json": "./dist/data.html.json",
+    "./*.examples.json": "./dist/*.examples.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./plot": {
+      "types": "./dist/plot/index.d.ts",
+      "default": "./dist/plot/index.js"
+    },
+    "./plot/define.js": {
+      "types": "./dist/plot/define.d.ts",
+      "default": "./dist/plot/define.js"
+    }
+  },
+  "sideEffects": [
+    "./**/define.js"
+  ],
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "lint": "wireit",
+    "test": "wireit",
+    "test:axe": "wireit",
+    "test:coverage": "wireit",
+    "test:ssr": "wireit",
+    "test:visual": "wireit",
+    "test:watch": "wireit",
+    "test:lighthouse": "wireit"
+  },
+  "dependencies": {
+    "lit": "catalog:publish"
+  },
+  "peerDependencies": {
+    "@nvidia-elements/core": "workspace:^",
+    "@nvidia-elements/themes": "workspace:^"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@nvidia-elements/styles": "workspace:*",
+    "@internals/testing": "workspace:*",
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
+    "@vitest/browser": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "axe-core": "catalog:",
+    "eslint": "catalog:",
+    "lit": "catalog:",
+    "publint": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "dev": {
+      "command": "NODE_ENV=development vite build --watch",
+      "service": true,
+      "dependencies": [
+        "../core:build",
+        "../internals/vite:ci"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint",
+        "publint",
+        "test:axe",
+        "test:ssr",
+        "test:coverage",
+        "test:visual"
+      ]
+    },
+    "publint": {
+      "command": "publint",
+      "dependencies": [
+        "build"
+      ],
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
+        "!src/**/__screenshots__/**",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../core:build",
+          "cascade": false
+        }
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "src/**",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/__screenshots__/**",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/testing:build",
+        "../internals/vite:ci",
+        "../core:build"
+      ]
+    },
+    "test:coverage": {
+      "command": "vitest run --coverage",
+      "files": [
+        "src/**",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/__screenshots__/**",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "../internals/testing:build",
+        "../internals/vite:ci",
+        "../core:build"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:lighthouse": {
+      "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
+      "files": [
+        "src/index.test.lighthouse.ts",
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:visual": {
+      "command": "vitest run --config=vitest.visual.ts",
+      "clean": false,
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.visual.ts",
+        "vitest.visual.html",
+        "vitest.visual.ts"
+      ],
+      "output": [
+        ".visual/*.png",
+        "coverage/visual/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:axe": {
+      "command": "vitest run --config=vitest.axe.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.axe.ts",
+        "tsconfig.json",
+        "vitest.axe.ts"
+      ],
+      "output": [
+        "coverage/axe/**"
+      ],
+      "dependencies": [
+        "../internals/testing:build",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:ssr": {
+      "command": "vitest run --config=vitest.ssr.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vitest.ssr.ts",
+        "../themes/dist/**/*.css"
+      ],
+      "output": [
+        "coverage/ssr/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "lint": {
+      "dependencies": [
+        "lint:eslint",
+        "lint:style"
+      ]
+    },
+    "lint:eslint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci",
+        "../lint:build"
+      ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=../../stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "../../stylelint.config.mjs"
+      ],
+      "output": []
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../internals/eslint:ci",
+        "../lint:build"
+      ]
+    }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
+}

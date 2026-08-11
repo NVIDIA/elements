@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true,
+    "module": "es2022",
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "typeRoots": ["./node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/",
+    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@nvidia-elements/scene": ["./src/index.js"],
+      "@nvidia-elements/scene/*": ["./src/*"],
+      "@nvidia-elements/scene/*.js": ["./src/*.js"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

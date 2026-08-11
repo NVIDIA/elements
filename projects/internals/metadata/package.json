@@ -114,7 +114,11 @@
         "../../monaco/package.json",
         "../../monaco/dist/custom-elements.json",
         "../../patterns/package.json",
-        "../../patterns/dist/custom-elements.json"
+        "../../patterns/dist/custom-elements.json",
+        "../../plot/dist/custom-elements.json",
+        "../../plot/package.json",
+        "../../scene/dist/custom-elements.json",
+        "../../scene/package.json"
       ],
       "output": [
         "static/api.json"
@@ -150,6 +154,14 @@
         },
         {
           "script": "../../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../../plot:build",
+          "cascade": false
+        },
+        {
+          "script": "../../scene:build",
           "cascade": false
         }
       ]
