@@ -97,6 +97,10 @@
         "../media/dist/**/*.examples.json",
         "../monaco/dist/**/*.js",
         "../monaco/dist/**/*.examples.json",
+        "../plot/dist/**/*.js",
+        "../plot/dist/**/*.examples.json",
+        "../scene/dist/**/*.js",
+        "../scene/dist/**/*.examples.json",
         "../internals/design/dist/DESIGN.md",
         "../internals/metadata/static/**",
         "../internals/patterns/dist/**/*.js",
@@ -139,6 +143,14 @@
         },
         {
           "script": "../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../plot:build",
+          "cascade": false
+        },
+        {
+          "script": "../scene:build",
           "cascade": false
         },
         {
@@ -273,6 +285,8 @@
     "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/media": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
+    "@nvidia-elements/plot": "workspace:*",
+    "@nvidia-elements/scene": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@vitest/coverage-istanbul": "catalog:",

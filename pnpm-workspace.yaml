@@ -31,6 +31,8 @@ packages:
   - projects/create
   - projects/core
   - projects/forms
+  - projects/plot
+  - projects/scene
   - projects/styles
   - projects/themes
   - projects/internals/design
