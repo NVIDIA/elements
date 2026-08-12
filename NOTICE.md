@@ -22,7 +22,7 @@ This product includes the following bundled third-party software:
 - @html-eslint/parser v0.61.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @inquirer/prompts v8.5.0 [MIT] (used by: @nvidia-elements/cli)
+- @inquirer/prompts v8.5.2 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
 - @modelcontextprotocol/ext-apps v1.7.5 [MIT] (used by: @nvidia-elements/cli)
@@ -49,7 +49,7 @@ This product includes the following bundled third-party software:
 - markdown-it v14.3.0 [MIT] (used by: @nvidia-elements/markdown)
   Copyright: Unknown
 
-- marked v18.0.3 [MIT] (used by: @nvidia-elements/cli)
+- marked v18.0.9 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Christopher Jeffrey
 
 - marked-terminal v7.3.0 [MIT] (used by: @nvidia-elements/cli)
@@ -64,7 +64,7 @@ This product includes the following bundled third-party software:
 - open v11.0.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- ora v9.4.0 [MIT] (used by: @nvidia-elements/cli)
+- ora v9.4.1 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
 - publint v0.3.21 [MIT] (used by: @nvidia-elements/cli)
@@ -306,18 +306,18 @@ The following bundled components are provided under the MIT license:
 @eslint/js v10.0.1 - Copyright Unknown
 @html-eslint/eslint-plugin v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@inquirer/prompts v8.5.0 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@inquirer/prompts v8.5.2 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
 markdown-it v14.3.0 - Copyright Unknown
-marked v18.0.3 - Copyright Christopher Jeffrey
+marked v18.0.9 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.55.1 - Copyright Microsoft Corporation
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-ora v9.4.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.21 - Copyright Bjorn Lu
 yargs v18.0.0 - Copyright Unknown
 zod v4.4.3 - Copyright Colin McDonnell <zod@colinhacks.com>
