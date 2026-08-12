@@ -443,7 +443,7 @@ describe.each<InputTestConfig>([
       expect(element.validationMessage).toBe('');
     });
 
-    it.skip('should validate JSON against schema', async () => {
+    it('should validate JSON against schema', async () => {
       element.language = 'json';
       element.schema = {
         type: 'object',
