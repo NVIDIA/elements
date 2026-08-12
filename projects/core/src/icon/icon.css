@@ -13,11 +13,11 @@
   --_width: calc(var(--width) * var(--nve-ref-scale-size, 1));
   --_height: calc(var(--height) * var(--nve-ref-scale-size, 1));
   color: var(--color);
-  width: var(--_width);
-  height: var(--_height);
-  place-self: center;
+  width: var(--width);
+  height: var(--height);
   display: flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 svg {
@@ -49,7 +49,7 @@ svg {
   --height: var(--nve-ref-size-600);
 }
 
-/* icons scaled down by 20% to match misalignment export bug in figma icon */
+/* optical spacing */
 :host([name='arrow']),
 :host([name='arrow-angle']),
 :host([name='cancel']),

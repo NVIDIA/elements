@@ -15,6 +15,65 @@ describe('icon visual', () => {
     const report = await visualRunner.render('icon.dark', template('dark'), { network: true });
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  // icon.css intentionally scales down these icons
+  const ICONS_WITH_OPTICAL_SPACING = ['arrow', 'arrow-angle', 'cancel', 'caret', 'chevron', 'double-chevron'];
+
+  test('icon by default should not have any ghost empty space between its intrinsic dimensions and svg viewbox', async () => {
+    const report = await visualRunner.render(
+      'icon.no-ghost-space',
+      /* html */ `
+      <script type="module">
+        import '@nvidia-elements/core/icon/define.js';
+        document.documentElement.setAttribute('nve-theme', 'light');
+      </script>
+
+      <style>
+        nve-icon {
+          --width: var(--nve-ref-size-1000);
+          --height: var(--nve-ref-size-1000);
+          --color: blue;
+          outline: 1px solid blue;
+        }
+      </style>
+
+      <div nve-layout="row gap:sm align:wrap" style="max-width: 1024px;">
+        ${ICON_NAMES.filter(i => !ICONS_WITH_OPTICAL_SPACING.includes(i))
+          .map(i => `<nve-icon name="${i}"></nve-icon>`)
+          .join('')}
+      </div>
+    `,
+      { network: true }
+    );
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('subset of curated icons should have explicit optical spacing between rendered svg and its intrinsic dimensions', async () => {
+    const report = await visualRunner.render(
+      'icon.explicit-optical-spacing',
+      /* html */ `
+      <script type="module">
+        import '@nvidia-elements/core/icon/define.js';
+        document.documentElement.setAttribute('nve-theme', 'light');
+      </script>
+  
+      <style>
+        nve-icon {
+          --width: var(--nve-ref-size-1000);
+          --height: var(--nve-ref-size-1000);
+          --color: blue;
+          outline: 1px solid blue;
+        }
+      </style>
+  
+      <div nve-layout="row gap:sm align:wrap" style="max-width: 1024px;">
+        ${ICONS_WITH_OPTICAL_SPACING.map(i => `<nve-icon name="${i}"></nve-icon>`).join('')}
+      </div>
+    `,
+      { network: true }
+    );
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 function template(theme: '' | 'dark' = '') {
