@@ -1,3 +1,11 @@
+## <small>2.3.1 (2026-08-12)</small>
+
+* fix(core): update icon build script ([ad3d51c](https://github.com/NVIDIA/elements/commit/ad3d51c))
+* chore(ci): agent ci skills and nightly build ([58a64b2](https://github.com/NVIDIA/elements/commit/58a64b2))
+* chore(ci): fix missing release config ([3fd90ca](https://github.com/NVIDIA/elements/commit/3fd90ca))
+* chore(ci): update notice files ([5c83add](https://github.com/NVIDIA/elements/commit/5c83add))
+* chore(release): @nvidia-elements/cli-v2.1.10 [skip ci] ([ba58c2e](https://github.com/NVIDIA/elements/commit/ba58c2e))
+
 ## 2.3.0 (2026-08-07)
 
 * fix(cli): update dependencies ([ff596a1](https://github.com/NVIDIA/elements/commit/ff596a1))
