@@ -30,6 +30,10 @@ pnpm run ci:reset
 # Build a single project
 cd projects/core && pnpm run build
 
+# Force that project's Wireit scripts to rerun
+mise exec -- git clean -dfX -- .wireit
+mise exec -- pnpm run build
+
 # Dev mode with watch
 cd projects/core && pnpm run dev
 ```
@@ -43,7 +47,7 @@ Wireit configs live in each project's `package.json` under the `wireit` key. Eac
 - `files`:input file globs for cache invalidation
 - `output`:output file globs that get cached
 
-Wireit skips tasks whose inputs have not changed since the last run. To force a rebuild, delete `.wireit/` in the project directory.
+Wireit skips tasks whose inputs have not changed since the last run. `WIREIT_CACHE=none` turns off output caching but does not bypass this incremental freshness check. To force a rerun, run `mise exec -- git clean -dfX -- .wireit` from the target project directory before invoking the project script.
 
 ### Dependency Patterns
 
@@ -66,7 +70,7 @@ Cross-package dependencies use the `<package>:<script>` format:
 
 | Symptom                                    | Fix                                                                   |
 | ------------------------------------------ | --------------------------------------------------------------------- |
-| Stale cache causing wrong output           | Delete `.wireit/` in the affected project, then rebuild               |
+| Stale cache causing wrong output           | Clean `.wireit/` in the affected project, then rebuild                |
 | "Cannot find module" after package changes | Run `pnpm i --frozen-lockfile` to re-link workspaces                  |
 | TypeScript errors after dependency update  | Rebuild dependencies first: `cd projects/themes && pnpm run build`    |
 | CI passes locally but fails in pipeline    | Check Node version (`node -v` should match `.nvmrc`) and pnpm version |

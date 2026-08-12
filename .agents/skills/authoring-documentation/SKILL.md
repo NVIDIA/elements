@@ -28,7 +28,7 @@ You MUST review @projects/site/src/docs/internal/guidelines/documentation.md bef
 
 ### How Vale Runs
 
-- **Pre-commit** (via lint-staged):automatically lints staged `*.ts` and `*.md` files
+- **Pre-commit** (via lint-staged): automatically lints staged non-test `*.ts` and `*.md` files
 - **CI**:runs as part of `pnpm run ci`
 - **Manual**:`pnpm run lint:vale` from the repo root (pass specific files as args to narrow scope)
 

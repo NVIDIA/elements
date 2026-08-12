@@ -138,7 +138,7 @@ There are suppressions left that do not occur anymore. Consider re-running the c
 
 This is success, not failure. It means your fix worked and the stale entry is still on disk. Resolve it by pruning. Do **not** revert your fix, do not re-run `--suppress-rule` to make the message go away, and do not add `--pass-on-unpruned-suppressions`, which only hides the condition and leaves the ratchet slipping backwards.
 
-**Done when**: the rule's suppression count strictly decreases, no stale suppressions remain, the file's public API is byte-identical, `pnpm run lint` passes with no new inline disables, and `pnpm run test` and `pnpm run test:types` pass.
+**Done when**: the rule's suppression count strictly decreases, no stale suppressions remain, the file's public API is byte-identical, and every applicable project verification script passes with no new inline disables.
 
 <!-- vale Vale.Spelling = YES -->
 
@@ -159,7 +159,7 @@ Do not invent bugs. If the script finds no quarantined test, it moves to another
 ### Procedure
 
 1. **Confirm the failure first.** Un-skip the test and run it. It must fail.
-2. If it passes immediately, the bug is already fixed. That is still a valid pull request: remove the `.skip` and say so. Stop there.
+2. If it passes immediately, the bug is already fixed. That is still a valid pull request: remove the `.skip`, say so, and stop editing. Because this changes only test maintenance, use a `chore` commit and do not trigger an empty package release.
 3. If you cannot make it fail, the quarantine is not reproducible. Re-apply the skip, stop, and report what you tried.
 4. Otherwise make the smallest change that turns the test green.
 5. Do not refactor surrounding code, do not fix adjacent issues, do not tidy imports.
@@ -167,26 +167,36 @@ Do not invent bugs. If the script finds no quarantined test, it moves to another
 
 The script ranks quarantined **visual** tests last because you cannot update visual baselines. If the script selects one and the fix needs a new baseline, stop, and report it for a human.
 
-**Done when**: the test fails before the fix and passes after, you do not change its assertions, you change no other test, and the full project CI passes.
+**Done when**: the test either fails before the production fix and passes after, or passes immediately and needs only removal of `.skip`. In both cases, do not change its assertions or any other test, and require the full project CI to pass.
 
 ## Verification
 
-After the final change, run lint first. For Mode A, run it from every selector-provided `packages[].workingDirectory`; for other tasks, run it from the target project directory:
+After the final change, inspect the target project's `package.json` and run lint first when the script exists. For Mode A, run it from every selector-provided `packages[].workingDirectory`; for other tasks, run it from the target project directory:
 
 ```shell
-mise exec -- pnpm run lint
+mise exec -- pnpm run --if-present lint
 ```
 
-Then run tests and type checks from the project containing the hand-fixed source file for Mode A, or from the target project directory for other tasks:
+Then run every command below. For Mode A, run the complete command set from every selector-provided `packages[].workingDirectory`; for other tasks, run it from the target project directory. `--if-present` skips only scripts that the project does not define:
 
 ```shell
-mise exec -- pnpm run test
-mise exec -- pnpm run test:types
+mise exec -- pnpm run --if-present test
+mise exec -- pnpm run --if-present test:types
+mise exec -- pnpm run --if-present test:axe
+mise exec -- pnpm run --if-present test:ssr
+mise exec -- pnpm run --if-present test:lighthouse
+mise exec -- pnpm run --if-present test:visual
 ```
 
-For component changes also run `mise exec -- pnpm run test:axe` and `mise exec -- pnpm run test:ssr`. Do not update visual baselines. If a visual test fails, your change changed behavior: stop.
+Record absent scripts as not available rather than as failures. Do not update visual baselines. If a visual test fails, your change changed behavior: stop.
 
 Then self-review with the [audit-code skill](/.agents/skills/audit-code/SKILL.md) and fix anything it flags.
+
+Finally, run complete CI against the final working tree from the repository root:
+
+```shell
+mise exec -- pnpm run ci
+```
 
 ## Statelessness
 
@@ -217,7 +227,7 @@ Always use the `upkeep/` prefix. The next run lists unmerged `upkeep/*` branches
 
 Commit messages must follow `commitlint.config.js`:
 
-- type is `fix` for the bug task, `chore` for everything else
+- type is `fix` when the bug task changes production behavior; use `chore` for every other task, including an already-fixed bug where the only change removes `.skip`
 - include a scope. Use the project directory name under `projects/`, except use `internals` for anything under `projects/internals/` and `docs` for `projects/site`. `commitlint.config.js` holds the authoritative list; if your target does not map to one of its values, use `internals`.
 - subject is lower case, no trailing period, 100 characters max
 - include a `Signed-off-by:` trailer
@@ -233,12 +243,14 @@ raising line coverage from 84% to 96%. No behavior change.
 Signed-off-by: Elements Upkeep Agent <upkeep@example.com>
 ```
 
-Open the pull request as a **draft**, labeled `upkeep`, with a body that states:
+Open the pull request as a **draft**, labeled `upkeep`, with a concise body that states:
 
 1. the selected task and why, quoting the script's `rationale`
 2. the before and after measurement, with numbers
 3. an explicit statement that no public API changed
 4. anything you deliberately left alone
+
+Keep the body to those facts unless a reviewer needs more context. Before finishing, verify the draft state, label, and body against the pull request's current state. Remove transient setup failures and other statements that later became false.
 
 ## Stop Conditions
 

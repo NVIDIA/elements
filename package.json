@@ -61,8 +61,8 @@
     "wireit": "0.14.12"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "**/*.{ts,md}": "vale --config .vale.ini"
+    "!{projects/internals/metadata/static/**,projects/site/public/static/**}": "prettier --write --ignore-unknown",
+    "**/!(*.test|*.test.*).{ts,md}": "vale --config .vale.ini"
   },
   "wireit": {
     "ci": {
