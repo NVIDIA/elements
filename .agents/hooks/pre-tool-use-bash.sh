@@ -8,7 +8,7 @@ COMMAND=$(hook_command_from_input "$INPUT" || true)
 GIT_PREFIX='(^|[;&|][[:space:]]*)git([[:space:]]+(-C[[:space:]]+[^[:space:];&|]+|--no-pager|-c[[:space:]]+[^[:space:];&|]+|--work-tree(=|[[:space:]]+)[^[:space:];&|]+))*[[:space:]]+'
 
 HOOK_OS=$(uname -s 2>/dev/null || true)
-if [[ -z "${NVE_AGENT:-}" && "$HOOK_OS" != "Darwin" ]]; then
+if [[ "$HOOK_OS" != "Darwin" && ( -z "${NVE_AGENT:-}" || "${NVE_AGENT:-}" == "cursor" ) ]]; then
   export NVE_AGENT="isolated"
 fi
 

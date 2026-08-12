@@ -131,6 +131,13 @@ The following are the repo wide tools that apply to all source code and projects
 
   Wireit provides a way to unify node based build tooling across the repo, enabling build caching and dependency based build systems like Bazel.
 
+  Wireit tracks incremental freshness separately from output caching. `WIREIT_CACHE=none` turns off the output cache but can still leave a script fresh. To force a project script to run, clear that project's Wireit state before invoking the script:
+
+  ```shell
+  mise exec -- git clean -dfX -- .wireit
+  mise exec -- pnpm run build
+  ```
+
 - [Semantic Release](https://github.com/semantic-release/semantic-release)
 
   An open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the tool guarantees releases remain unromantic and unsentimental.
