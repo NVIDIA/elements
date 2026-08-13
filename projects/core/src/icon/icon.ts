@@ -27,6 +27,7 @@ declare global {
  * @cssprop --color
  * @cssprop --width
  * @cssprop --height
+ * @attr appearance - Selects the outline or solid form of a named icon.
  * @slot - Custom SVG content to override the named icon
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
@@ -45,6 +46,12 @@ export class Icon extends LitElement {
    * Sets the direction of the icon. Only supported by expand-panel/collapse-panel (horizontal axis) and arrow/caret/chevron icons (4-directions)
    */
   @property({ type: String, reflect: true }) direction?: 'up' | 'down' | 'left' | 'right';
+
+  /**
+   * Selects the outline or solid form of the named icon. Solid icons use an optional `-solid` asset and fall back to
+   * the outline form when that asset is unavailable.
+   */
+  @property({ type: String }) appearance?: 'outline' | 'solid';
 
   /**
    * The name of the icon SVG sprite to render.
@@ -80,11 +87,25 @@ export class Icon extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
+  get #resolvedIconName() {
+    if (!this.name || this.name.endsWith('.svg') || this.appearance !== 'solid' || this.name.endsWith('-solid')) {
+      return this.name;
+    }
+
+    const solidName = `${this.name}-solid`;
+    return Icon._iconsRegistry[solidName] ? solidName : this.name;
+  }
+
   get #iconString() {
-    return isServer && globalThis._NVE_SSR_ICON_REGISTRY ? globalThis._NVE_SSR_ICON_REGISTRY[this.name!] : this.svg;
+    const iconName = this.#resolvedIconName;
+    return isServer && globalThis._NVE_SSR_ICON_REGISTRY && iconName
+      ? globalThis._NVE_SSR_ICON_REGISTRY[iconName]
+      : this.svg;
   }
 
   #iconRegistryEventName?: string;
+
+  #renderRequest = 0;
 
   #onIconRegistryUpdate = (event: Event) => this.#asyncRender(event as CustomEvent<IconSVG>);
 
@@ -133,7 +154,7 @@ export class Icon extends LitElement {
 
   async updated(props: PropertyValues<this>) {
     super.updated(props);
-    if (props.has('name')) {
+    if (props.has('name') || props.has('appearance')) {
       this.#removeIconRegistryListener();
       this.#addIconRegistryListener();
     }
@@ -141,8 +162,9 @@ export class Icon extends LitElement {
   }
 
   #addIconRegistryListener() {
-    if (!this.isConnected || !this.name || this.#iconRegistryEventName) return;
-    this.#iconRegistryEventName = `${Icon.metadata.tag}-${this.name}`;
+    const iconName = this.#resolvedIconName;
+    if (!this.isConnected || !iconName || this.#iconRegistryEventName) return;
+    this.#iconRegistryEventName = `${Icon.metadata.tag}-${iconName}`;
     globalThis.document?.addEventListener(this.#iconRegistryEventName, this.#onIconRegistryUpdate);
   }
 
@@ -159,11 +181,14 @@ export class Icon extends LitElement {
   }
 
   async #render() {
-    if (!this.name) return;
-    const svg = await (this.name.endsWith('.svg')
-      ? fetch(this.name).then(res => res.text())
-      : (Icon._iconsRegistry[this.name]?.svg() ?? Promise.resolve('')));
-    Icon._iconsRegistry[this.name] = { svg: () => svg, ...Icon._iconsRegistry[this.name] };
+    const renderRequest = ++this.#renderRequest;
+    const iconName = this.#resolvedIconName;
+    if (!iconName) return;
+    const svg = await (iconName.endsWith('.svg')
+      ? fetch(iconName).then(res => res.text())
+      : (Icon._iconsRegistry[iconName]?.svg() ?? Promise.resolve('')));
+    if (renderRequest !== this.#renderRequest) return;
+    Icon._iconsRegistry[iconName] = { svg: () => svg, ...Icon._iconsRegistry[iconName] };
     this.svg = svg;
   }
 }
