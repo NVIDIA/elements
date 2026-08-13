@@ -426,6 +426,18 @@
       "types": "./dist/format-relative-time/define.d.ts",
       "default": "./dist/format-relative-time/define.js"
     },
+    "./format-truncate": {
+      "types": "./dist/format-truncate/index.d.ts",
+      "default": "./dist/format-truncate/index.js"
+    },
+    "./format-truncate/index.js": {
+      "types": "./dist/format-truncate/index.d.ts",
+      "default": "./dist/format-truncate/index.js"
+    },
+    "./format-truncate/define.js": {
+      "types": "./dist/format-truncate/define.d.ts",
+      "default": "./dist/format-truncate/define.js"
+    },
     "./forms": {
       "types": "./dist/forms/index.d.ts",
       "default": "./dist/forms/index.js"
