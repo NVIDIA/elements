@@ -5,6 +5,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { CodeBlock } from '@nvidia-elements/code/codeblock';
+import '@nvidia-elements/code/codeblock/languages/bash.js';
 import '@nvidia-elements/code/codeblock/languages/css.js';
 import '@nvidia-elements/code/codeblock/languages/go.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
@@ -150,6 +151,14 @@ function getTime(): number {
     expect(element.innerHTML.includes(slot)).toBeTruthy();
     expect(element.shadowRoot!.querySelector('.hljs-title')).toBeTruthy();
     expect(element.shadowRoot!.querySelector('nve-icon-button')).toBeFalsy();
+  });
+
+  it('should highlight bash source once the bash language is registered', async () => {
+    element.language = 'bash';
+    element.code = 'echo "hello" # greet';
+    await elementIsStable(element);
+    expect(element.shadowRoot!.querySelector('code')!.className).toBe('bash');
+    expect(element.shadowRoot!.querySelector('.hljs-string')).toBeTruthy();
   });
 
   it('should not assign a language classname if no language was set or provided', async () => {
