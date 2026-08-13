@@ -17,7 +17,8 @@ describe('alert visual', () => {
       <nve-alert status="warning">•︎•︎•︎</nve-alert>
       <nve-alert status="success">•︎•︎•︎</nve-alert>
       <nve-alert status="danger">•︎•︎•︎</nve-alert>
-    `
+    `,
+      { waitFor: waitForAlertIcons }
     );
 
     expect(report.maxDiffPercentage).toBeLessThan(1);
@@ -36,9 +37,19 @@ describe('alert visual', () => {
       <nve-alert status="warning">•︎•︎•︎</nve-alert>
       <nve-alert status="success">•︎•︎•︎</nve-alert>
       <nve-alert status="danger">•︎•︎•︎</nve-alert>
-    `
+    `,
+      { waitFor: waitForAlertIcons }
     );
 
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
+
+async function waitForAlertIcons(waitForFunction: (...args: unknown[]) => Promise<unknown>) {
+  await waitForFunction(() =>
+    Array.from(document.querySelectorAll('nve-alert')).every(alert => {
+      const icon = alert.shadowRoot?.querySelector('nve-icon');
+      return icon?.shadowRoot?.querySelector('svg');
+    })
+  );
+}

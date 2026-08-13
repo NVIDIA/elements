@@ -1,0 +1,4836 @@
+{
+  "schemaVersion": 3,
+  "generatedAt": "2026-08-13T20:36:33.966Z",
+  "purpose": "Trace source-to-output SVG conversion for the first visual migration phase. This manifest does not encode sizing metadata, naming preferences, aliases, deprecations, or filled/solid variant policy.",
+  "sourceIconPackage": "lucide-static v1.21.0 package/icons",
+  "counts": {
+    "entries": 269,
+    "outputs": 267
+  },
+  "entries": [
+    {
+      "iconName": "academic-cap",
+      "selectedSourceName": "graduation-cap",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/graduation-cap.svg",
+        "sha256": "774a5fc354203b8c664a2922ea4cd7ee0016480bd4e3b468c53eb5b3bd5dced8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "academic-cap.svg",
+          "sha256": "f8d0d5eadf359817ff522345d905699e057612c44de51e45d9c8bcd84e1c6fdd",
+          "className": "lucide-graduation-cap",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["academic-cap"]
+        }
+      }
+    },
+    {
+      "iconName": "add",
+      "selectedSourceName": "plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/plus.svg",
+        "sha256": "0cf7d536b5cbcbbb7f1e602a3734a9e46c984817a2257bc4ca72557b0855c7ff"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "add.svg",
+          "sha256": "ffa82a99d384a40c1296da2c545fe9e34e6e1f6b237801be3a676994ac26eb71",
+          "className": "lucide-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["add"]
+        }
+      }
+    },
+    {
+      "iconName": "add-asset",
+      "selectedSourceName": "file-plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/file-plus.svg",
+        "sha256": "34b7da8eede895a67c01379ad5fbd5bbc00c6bab744f499b830d8b1488d41ddb"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "add-asset.svg",
+          "sha256": "1f3a22b275efd285b50c86205c41377982e7f051baa8c6e76502a72c66e7994d",
+          "className": "lucide-file-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["add-asset"]
+        }
+      }
+    },
+    {
+      "iconName": "add-comment",
+      "selectedSourceName": "message-circle-plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/message-circle-plus.svg",
+        "sha256": "0b35cfdc1da5c203acc728d932de6c8d1d6c17659048df8526b658485ee8fd90"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "add-comment.svg",
+          "sha256": "3a841829a136fe2f9b9229beec39b0762208d66f342805921fbd5d946cc7d9fd",
+          "className": "lucide-message-circle-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["add-comment"]
+        }
+      }
+    },
+    {
+      "iconName": "add-grid",
+      "selectedSourceName": "grid-2x2-plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/grid-2x2-plus.svg",
+        "sha256": "c0e9cfaec35d3acc21c71296783bdfae266b10e2c7a1297b59ca2db222bfff5d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "add-grid.svg",
+          "sha256": "08ece542f055e95f18af44ddba9bf9ba84a33840a1f439c4862dbe52e9fea00a",
+          "className": "lucide-grid-2x2-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["add-grid"]
+        }
+      }
+    },
+    {
+      "iconName": "add-user",
+      "selectedSourceName": "user-plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/user-plus.svg",
+        "sha256": "0bb4d8e3fb24151d429a73d967330d3e31fe33d1ce4c7dcf14a8f740f4d9a813"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "add-user.svg",
+          "sha256": "de4efada651293471f6ecb0fc17d215b428b3b616aa2b7a5562b5d5358a6f666",
+          "className": "lucide-user-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["add-user"]
+        }
+      }
+    },
+    {
+      "iconName": "ancestors",
+      "selectedSourceName": "list-tree",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-tree.svg",
+        "sha256": "dc6f0fd27725907186b57c5ac2ac2a56300abdb4e3c9bc3d0cc1111d6e1d15a1"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "ancestors.svg",
+          "sha256": "d84481ba795fd00c169d0284a3d07cfbc6d3cb506658d6127843a9ac4e971697",
+          "className": "lucide-list-tree",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["ancestors"]
+        }
+      }
+    },
+    {
+      "iconName": "archive",
+      "selectedSourceName": "archive",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/archive.svg",
+        "sha256": "f6e5309bbd1f6acf79730ca7629a1a34de409065c1011ab0c11e08ab6b22e6aa"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "archive.svg",
+          "sha256": "21db1c9cacdcb2781edd5d1b93aa5e345c4d525fc70e65dcd40e94585cdfb17a",
+          "className": "lucide-archive",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["archive"]
+        }
+      }
+    },
+    {
+      "iconName": "arrow",
+      "selectedSourceName": "arrow-up",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/arrow-up.svg",
+        "sha256": "5440c6a7cfcd7204c17328c20c285917f4cac15778880b1377ea4ade2c7244c4"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "arrow.svg",
+          "sha256": "19ca8d9732ba17a5965079bdac90b579b785d13bc8f9b025c31c814a74faa283",
+          "className": "lucide-arrow-up",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["arrow"]
+        }
+      }
+    },
+    {
+      "iconName": "arrow-angle",
+      "selectedSourceName": "arrow-up-right",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/arrow-up-right.svg",
+        "sha256": "7afcef9ad8cbb178e409168d19d9e0d9e0edb5da870c014bff95a2782e7b7ec0"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "arrow-angle.svg",
+          "sha256": "cecd8d66b9c3f884a0bb4f3d85e330de75d9fbc305d977ae4c711e348562bdd0",
+          "className": "lucide-arrow-up-right",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["arrow-angle"]
+        }
+      }
+    },
+    {
+      "iconName": "arrow-both",
+      "selectedSourceName": "move-vertical",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/move-vertical.svg",
+        "sha256": "a156c92b9ac0fca16a1e8daeef38878fc1b65d2010a5339d50b85dd295479e0f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "arrow-both.svg",
+          "sha256": "8908e9112f9fca9891d4db882cb982b0788f31961ab2313a5c0c6499fd3b34f2",
+          "className": "lucide-move-vertical",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["arrow-both"]
+        }
+      }
+    },
+    {
+      "iconName": "arrow-cycle",
+      "selectedSourceName": "iteration-ccw",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/iteration-ccw.svg",
+        "sha256": "7826d965ef153a1496e78f7f4d07448b03f37d761cd797e0702a2cec96bbe038"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "arrow-cycle.svg",
+          "sha256": "454e38321675e3402300d5ab1988db2ab450df118196109b79ef31781d8a091c",
+          "className": "lucide-iteration-ccw",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["arrow-cycle"]
+        }
+      }
+    },
+    {
+      "iconName": "arrow-path-rounded-square",
+      "selectedSourceName": "rotate-cw-square",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/rotate-cw-square.svg",
+        "sha256": "89a0c4797e9d6fdc4eb953359fcca324074b85054ab74e674c4b90bc109adf3f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "arrow-path-rounded-square.svg",
+          "sha256": "d62f1d7188b3cc0e4281ce4de8e9eaafb1b541647c0339699a4b52335f253c66",
+          "className": "lucide-rotate-cw-square",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["arrow-path-rounded-square"]
+        }
+      }
+    },
+    {
+      "iconName": "arrow-stop",
+      "selectedSourceName": "arrow-up-to-line",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/arrow-up-to-line.svg",
+        "sha256": "4e0fbaecde69e4ff5660b37ef905cbe1235752f4f59fd4dff40f5487300804f6"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "arrow-stop.svg",
+          "sha256": "a60ce6111306af02396e2ff6687a3adf7a604853169c9477355250edcd93eaa4",
+          "className": "lucide-arrow-up-to-line",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["arrow-stop"]
+        }
+      }
+    },
+    {
+      "iconName": "at-symbol",
+      "selectedSourceName": "at-sign",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/at-sign.svg",
+        "sha256": "26b62398ff871a61f0b7b5f35cf83b48a575cdeff67c6c2779fc931ba8de362a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "at-symbol.svg",
+          "sha256": "7cac97fbbde45fdfee6ea647db9e6fa440ce8a44eaa6dbb33804959ec0ac54e7",
+          "className": "lucide-at-sign",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["at-symbol"]
+        }
+      }
+    },
+    {
+      "iconName": "backspace",
+      "selectedSourceName": "delete",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/delete.svg",
+        "sha256": "3cb2f8212d4bb7cce42383c6af7a84c69a737941d07967e6f6236e01e55dcc13"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "backspace.svg",
+          "sha256": "ba219c8b436f60ae57750cdfc0aa902e46f7a40771614972fc3bb9d613bd7232",
+          "className": "lucide-delete",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["backspace"]
+        }
+      }
+    },
+    {
+      "iconName": "bar-pill-stack",
+      "selectedSourceName": "list-start",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-start.svg",
+        "sha256": "a0756a95e8fc706d3110d4e9c5745b977f6ddaf32b900719878dc72a02cf404d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bar-pill-stack.svg",
+          "sha256": "295f0d2ce6cc7389a77d3afcd6a7b3af680e45b493edc314c5b787fcedbb21dd",
+          "className": "lucide-list-start",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bar-pill-stack"]
+        }
+      }
+    },
+    {
+      "iconName": "bars-3",
+      "selectedSourceName": "menu",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/menu.svg",
+        "sha256": "64e0b70a185cfea934a991f7ea2fb9a71c6ef03c62699359b136c9dfca6f611d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bars-3.svg",
+          "sha256": "da4e79f46a91d97a9ea851173c6deeb072f253bf3b174dc8e0cabcc39780a66a",
+          "className": "lucide-menu",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bars-3"]
+        }
+      }
+    },
+    {
+      "iconName": "bars-3-bottom-left",
+      "selectedSourceName": "text-align-start",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/text-align-start.svg",
+        "sha256": "d892ec5c94e798578f7acd7b952db9243af1547f748f69a04c5fceb545c00cb6"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bars-3-bottom-left.svg",
+          "sha256": "699e1e6ec1b8dcd7418636909b402a7619a97c9f9aeb0bf2a58426f82c79e449",
+          "className": "lucide-text-align-start",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bars-3-bottom-left"]
+        }
+      }
+    },
+    {
+      "iconName": "bars-3-bottom-right",
+      "selectedSourceName": "text-align-end",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/text-align-end.svg",
+        "sha256": "9c6736b72bcc78b3408c5b455d7d4f22d03d5ba8e9990400f2f9b9440b900399"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bars-3-bottom-right.svg",
+          "sha256": "9f6b25cbacb3f0e2ace2b61f482a1c15780298deeeed6cc3af44d15048e0a1a4",
+          "className": "lucide-text-align-end",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bars-3-bottom-right"]
+        }
+      }
+    },
+    {
+      "iconName": "bars-3-center-left",
+      "selectedSourceName": "text-align-start",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/text-align-start.svg",
+        "sha256": "d892ec5c94e798578f7acd7b952db9243af1547f748f69a04c5fceb545c00cb6"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bars-3-center-left.svg",
+          "sha256": "699e1e6ec1b8dcd7418636909b402a7619a97c9f9aeb0bf2a58426f82c79e449",
+          "className": "lucide-text-align-start",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bars-3-center-left"]
+        }
+      }
+    },
+    {
+      "iconName": "bars-4",
+      "selectedSourceName": "tally-4",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/tally-4.svg",
+        "sha256": "4d6703608412a509b876acee1e8520ac1050dbf6eed215ce9b248378a34cc446"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bars-4.svg",
+          "sha256": "75af74c4bb9cdf4b379a4574dce68c55357318e1565f5a37484edd8d200c2527",
+          "className": "lucide-tally-4",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bars-4"],
+          "adjustment": "Rotated the source artwork so the default bars-4 icon matches the horizontal bars semantics."
+        }
+      }
+    },
+    {
+      "iconName": "beaker",
+      "selectedSourceName": "flask-conical",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/flask-conical.svg",
+        "sha256": "3376c04300d44f526559bca30713f084fbbc9313bdf591b1db4a6f2a1626570c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "beaker.svg",
+          "sha256": "702aabc10b4f4eadfdd584b545891addcaf159ff7ba4f738c8143122279362c7",
+          "className": "lucide-flask-conical",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["beaker"]
+        }
+      }
+    },
+    {
+      "iconName": "bell",
+      "selectedSourceName": "bell",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/bell.svg",
+        "sha256": "68a8ce5c396658147e0edebdcbb9d1aac34aded7468b69314dd199ded4e1bd22"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bell-stroke.svg",
+          "sha256": "a57b2e4bb3e20c5af9fa310d011ae141656e9668d717687f02f5ed59d764699a",
+          "className": "lucide-bell",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bell-stroke"]
+        },
+        "legacyDefault": {
+          "file": "bell.svg",
+          "sha256": "a529c93feef8689eb141cc070b87098c652e3afbbc5d5a439774e16ebd6edccf",
+          "generatedFrom": "legacy-filled-default-adjusted",
+          "adjustment": "Replaced mask-based filled default with a direct currentColor silhouette so theme color is stable.",
+          "publicNames": ["bell"]
+        }
+      }
+    },
+    {
+      "iconName": "bell-slash",
+      "selectedSourceName": "bell-off",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/bell-off.svg",
+        "sha256": "49bf38959c79b4b7657069bf0abf177723cf32420f640f194c7d2655cd43e1b9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bell-slash.svg",
+          "sha256": "3d36ef835a8801bf9d921c1aca7fbc28dd87751e1dfce63163fc6f21322bcfe6",
+          "className": "lucide-bell-off",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bell-slash"]
+        }
+      }
+    },
+    {
+      "iconName": "bold",
+      "selectedSourceName": "bold",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/bold.svg",
+        "sha256": "be03a1914abc629ce460bc1c42a822c1917b3f3f2d151a91f7b1761733ba75ec"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bold.svg",
+          "sha256": "e7602556c0161ccefdee4d2c02b965cae01bf32d865a641209562df42c8ef3c6",
+          "className": "lucide-bold",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bold"]
+        }
+      }
+    },
+    {
+      "iconName": "book",
+      "selectedSourceName": "book-open",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/book-open.svg",
+        "sha256": "df1f3e1121890ca679dd79d15864027e13c1a02b2a2839acd5076b6509c365bb"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "book.svg",
+          "sha256": "3929a286379f38604af1be25b342d4b5bfc61b35ca09912c812fc6987fa8da08",
+          "className": "lucide-book-open",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["book"]
+        }
+      }
+    },
+    {
+      "iconName": "bookmark",
+      "selectedSourceName": "bookmark",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/bookmark.svg",
+        "sha256": "459d8c13435fc642420911ac86a9f0af874e6f6ca89f9c60c6b81516b06f9a8e"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bookmark-stroke.svg",
+          "sha256": "bcfadbab19733d373f12b2acd1d2c38823da912b575d8652745d519f1b38c435",
+          "className": "lucide-bookmark",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bookmark-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "bounding-box",
+      "selectedSourceName": "vector-square",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/vector-square.svg",
+        "sha256": "0b0a6160be41bdc5e7b157f36da85df49feebb0226e5104bba12beb023c64410"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bounding-box.svg",
+          "sha256": "62a0d7219cb71551e3c1c16f98afb9b0d750f7c6c572bc33017e654376c3c2b8",
+          "className": "lucide-vector-square",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bounding-box"]
+        }
+      }
+    },
+    {
+      "iconName": "branch",
+      "selectedSourceName": "git-branch",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-branch.svg",
+        "sha256": "40d806de7240fa2d72e7c36e9c76c0a7c716144ebcfce78a79c736ec11481ad2"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "branch.svg",
+          "sha256": "328f427123071a287c2faf877daa5c12c345f6e50615b2eab1107682ad9f2382",
+          "className": "lucide-git-branch",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["branch"]
+        }
+      }
+    },
+    {
+      "iconName": "briefcase",
+      "selectedSourceName": "briefcase-business",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/briefcase-business.svg",
+        "sha256": "0f09d113453e5f5a424d10a8481f78bf769724a49b366101b570ee9a9aace18f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "briefcase.svg",
+          "sha256": "190ceb904ba71757f3bc8c9dd85a92fa22f646ec9e20dbc3e736403fd7054cd9",
+          "className": "lucide-briefcase-business",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["briefcase"]
+        }
+      }
+    },
+    {
+      "iconName": "broadcast",
+      "selectedSourceName": "radio-tower",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/radio-tower.svg",
+        "sha256": "b1f44c19941125bbef87300f57dc7d5e62d41b5ebb7d1bfa359c91571a2630fd"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "broadcast.svg",
+          "sha256": "db3586306028d2dda098f98e641e57d87a2c483bed5b02bbf2b58a556eebd3aa",
+          "className": "lucide-radio-tower",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["broadcast"]
+        }
+      }
+    },
+    {
+      "iconName": "browser",
+      "selectedSourceName": "app-window",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/app-window.svg",
+        "sha256": "c1d1f43519d43595717dc33d3b023078f9f2eb19b8a4555efd760348e7934375"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "browser.svg",
+          "sha256": "a128f861e22c8e7490bcf3698f391c68dc568cb80ef3e30ad0223a20a99b9b6c",
+          "className": "lucide-app-window",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["browser"]
+        }
+      }
+    },
+    {
+      "iconName": "bug",
+      "selectedSourceName": "bug",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/bug.svg",
+        "sha256": "e2f1fdbb5d02699768c65888699b6f8403479ad1f30fd323f29678994a78f028"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "bug.svg",
+          "sha256": "ef1c52210dc0841e8fce6349c4e6e42a288c960604aaec92ddddb04dd67fbbbd",
+          "className": "lucide-bug",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["bug"]
+        }
+      }
+    },
+    {
+      "iconName": "calendar",
+      "selectedSourceName": "calendar-days",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/calendar-days.svg",
+        "sha256": "819cff41c6b2156c8861033986c65b473ea98ffea74c372cf317d25ae77c153a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "calendar.svg",
+          "sha256": "cd5f7c022f5787e8bf4cc3091c44e879ae87a9aa422a4dcc0b6e6746f41d0a49",
+          "className": "lucide-calendar-days",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["calendar"]
+        }
+      }
+    },
+    {
+      "iconName": "camera",
+      "selectedSourceName": "camera",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/camera.svg",
+        "sha256": "bd4cbcef2e8394cb5830860e60794ca83a5d907abaf187e4de087383d32ccb7a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "camera.svg",
+          "sha256": "3ad8bb7fcfcc002222790f97c855c9bb7225ccf9f277adc24353781da07fc3a9",
+          "className": "lucide-camera",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["camera"]
+        }
+      }
+    },
+    {
+      "iconName": "cancel",
+      "selectedSourceName": "x",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/x.svg",
+        "sha256": "eaf47548e7b7883c4afda54bdf969ca2a2daf0d6f7e9abe01cd549cb363e16da"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cancel.svg",
+          "sha256": "0503bea49e1007d4e2fcf7f1f6324f8049e1f8c5567752c6e3925f98b9cca267",
+          "className": "lucide-x",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cancel"]
+        }
+      }
+    },
+    {
+      "iconName": "caret",
+      "selectedSourceName": "caret",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/caret.svg",
+        "sha256": "3f1be032113c8c58c2ebc6856e6e3ea6124389d328e8dcbb363afbedaaad256a"
+      },
+      "outputs": {}
+    },
+    {
+      "iconName": "carets-closed-square",
+      "selectedSourceName": "code-square",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/code-square.svg",
+        "sha256": "596bd57f0b94dbe21c34c2e6b5a0e67a1ae319c8e38c30a8cc0e2b73921eeb57"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "carets-closed-square.svg",
+          "sha256": "2e7a02a91dfaea5a00d5854de0c4c12c67bf3ac4e31e38011a2bab8211e079a6",
+          "className": "lucide-code-square",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["carets-closed-square"]
+        }
+      }
+    },
+    {
+      "iconName": "carousel",
+      "selectedSourceName": "gallery-horizontal",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/gallery-horizontal.svg",
+        "sha256": "476a41ba33506b4c6628e5c896c44d828a3e90592b24b705e6bbdfb53c64de06"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "carousel.svg",
+          "sha256": "bc2f8a6f5c600f41b8b46564eca1c0ed99c988efbca1bb6a341536362f13c489",
+          "className": "lucide-gallery-horizontal",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["carousel"]
+        }
+      }
+    },
+    {
+      "iconName": "category-list",
+      "selectedSourceName": "list-sort-descending",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-sort-descending.svg",
+        "sha256": "f8ec9502908da273288ea55285deb3801b6c337e57cba569b8ddd59b76c39dcd"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "category-list.svg",
+          "sha256": "f09602796fed801ea8cd4a7de874c5e7d69b07e5cb9b3f983a9355312f68c739",
+          "className": "lucide-list-sort-descending",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["category-list"]
+        }
+      }
+    },
+    {
+      "iconName": "chart-bar",
+      "selectedSourceName": "bar-chart",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/bar-chart.svg",
+        "sha256": "6dfd797e012e4ca33c3d6e35c2e8b911b29b339c17f73cdbaf0046f229eaca7d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "chart-bar.svg",
+          "sha256": "d4105afd5f9e7357c2a682bc55c80286c42362ff81838e905b3e7b6082381a33",
+          "className": "lucide-bar-chart",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["chart-bar"]
+        }
+      }
+    },
+    {
+      "iconName": "chat-bubble",
+      "selectedSourceName": "message-square-text",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/message-square-text.svg",
+        "sha256": "bbc37deeab010eb4d7ec9d4a4b53680ab02ef1e1322e0cf9285ce5e32a5b0fab"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "chat-bubble.svg",
+          "sha256": "fe9db7adfec18948fd9f1a04f00923c0de82f4abfef272b44695a6cfdb707c6a",
+          "className": "lucide-message-square-text",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["chat-bubble"]
+        }
+      }
+    },
+    {
+      "iconName": "chat-bubbles",
+      "selectedSourceName": "messages-square",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/messages-square.svg",
+        "sha256": "97fb0122647cfbbee214b11d38eacc0d447ac27ad746171b5dd1e12088b97802"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "chat-bubbles.svg",
+          "sha256": "e47bf8dab0b78e0c830dc99da839a884f5934d21aa6345cf10dcf8513d371e4c",
+          "className": "lucide-messages-square",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["chat-bubbles"]
+        }
+      }
+    },
+    {
+      "iconName": "check",
+      "selectedSourceName": "check",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/check.svg",
+        "sha256": "b0ad433be3b1e8ee79efc0f5442cfc4b7d6f2b3d75b02a4f0dcc8cc9412434f4"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "check.svg",
+          "sha256": "f6a31e9569ab983f978b14d42a1e12a6111cdf816d1caf87ab3f7c8d1e6714ae",
+          "className": "lucide-check",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["check"]
+        }
+      }
+    },
+    {
+      "iconName": "check-badge",
+      "selectedSourceName": "badge-check",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/badge-check.svg",
+        "sha256": "4dd7afe6491327419bafc55f49a67297f2d05f341fd1144e81135a2f28fa5ad5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "check-badge.svg",
+          "sha256": "17689e60416dcfb8e49dedcb73080ff6c83d51345c0a9ac73b017c9031d477e4",
+          "className": "lucide-badge-check",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["check-badge"]
+        }
+      }
+    },
+    {
+      "iconName": "checklist",
+      "selectedSourceName": "clipboard-list",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/clipboard-list.svg",
+        "sha256": "7d4eb6a8c6f7fe5b0f338a64d9245d66bbb4e1dabed3ee0fb25a015800c5701d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "checklist.svg",
+          "sha256": "86571fd9ccffa8537136f35ae3a2b72087e8611f7ddbf6e3f999585141294361",
+          "className": "lucide-clipboard-list",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["checklist"]
+        }
+      }
+    },
+    {
+      "iconName": "checkmark-circle",
+      "selectedSourceName": "circle-check",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/checkmark-circle.svg",
+        "sha256": "87440184a0c7b0a616af5627b6e30490777c6fc3274c13bd0ad79a2c34473939"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "checkmark-circle.svg",
+          "sha256": "87440184a0c7b0a616af5627b6e30490777c6fc3274c13bd0ad79a2c34473939",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["checkmark-circle"],
+          "adjustment": "Uses the existing filled status/default shape for component status rendering."
+        }
+      }
+    },
+    {
+      "iconName": "chevron",
+      "selectedSourceName": "chevron-up",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/chevron-up.svg",
+        "sha256": "fc77043db9ac83120980c87262d8ae34f2dd11ed22561074f43f1037ab4036be"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "chevron.svg",
+          "sha256": "414d83bab5e4982da03f6a33f34fcfba5f3997347baf22a5868c700162f84918",
+          "className": "lucide-chevron-up",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["chevron"]
+        }
+      }
+    },
+    {
+      "iconName": "chip",
+      "selectedSourceName": "cpu",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/cpu.svg",
+        "sha256": "6fa30c706891de7fd35fa447a1a7ad09e897d55ebb9dbc2cc2222d4b9e4f9128"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "chip.svg",
+          "sha256": "6294d1c470ba1d14fe7239efa7b95a39335bf1ddecc948c4f588e6ea0bdddb96",
+          "className": "lucide-cpu",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["chip"]
+        }
+      }
+    },
+    {
+      "iconName": "circle",
+      "selectedSourceName": "circle",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle.svg",
+        "sha256": "0fa4af0d7995c73072a0762d51121561b3c847d8a0f83fee30e8ba69de27ff02"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle.svg",
+          "sha256": "1ec0eb3aac8f3c910011e3b9ebcedb5830bdb1429cb0e23a2a94431ee66a3f09",
+          "className": "lucide-circle",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-angled-line",
+      "selectedSourceName": "circle-slash",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-slash.svg",
+        "sha256": "5c845ac7f3ac1b004746edc9908171b9f1fe70713d8e2bf3ca3b37f8e39bbde4"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-angled-line.svg",
+          "sha256": "1f7ae6394a206d25efa797f825a5e81b9031f053f1f9a54308f0395fc9a4e145",
+          "className": "lucide-circle-slash",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-angled-line"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-dash",
+      "selectedSourceName": "circle-dashed",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-dashed.svg",
+        "sha256": "a60d959bd72dfe9a4f24bc99ef982a7bc7baae330a33542a5b9b0828ad3dc102"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-dash.svg",
+          "sha256": "feedf99a624207b1c02dbf1947fb5fd92df10d8e9a400c2ec2c8bba3ef8dc702",
+          "className": "lucide-circle-dashed",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-dash"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-dot",
+      "selectedSourceName": "circle-dot",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-dot.svg",
+        "sha256": "125ef0ded4bc4958a8f738c39f03b40f9dc7de4d978c26e3bec3c81c0ad58804"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-dot.svg",
+          "sha256": "23f746bcb238343b029db34254e32da5430e4f693df7e9acd21f074f0ab7db6d",
+          "className": "lucide-circle-dot",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-dot"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-dot-arrows",
+      "selectedSourceName": "refresh-ccw-dot",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/refresh-ccw-dot.svg",
+        "sha256": "d32e7b080bd75f4d97dcc037fb1bc41868fa6c25ff8a960b50c42eb09711556f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-dot-arrows.svg",
+          "sha256": "1d261c79c0c82d2c2df1f13a25a24e94576d9567f469772e699439c3bb326aa4",
+          "className": "lucide-refresh-ccw-dot",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-dot-arrows"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-half",
+      "selectedSourceName": "contrast",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/contrast.svg",
+        "sha256": "db7590ab6deff52dab23dbd2bde05ef33e7ba1ba1d292c26dfe559e3de022893"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-half.svg",
+          "sha256": "5146d79b8c0aa589ad7692c6ca257f24a393817337788235f2908dc27d0aa9bc",
+          "className": "lucide-contrast",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-half"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-rule",
+      "selectedSourceName": "git-commit-horizontal",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-commit-horizontal.svg",
+        "sha256": "0a3d495600fecab7453cb6ad2524ed0b5e8ff44d121180eba59ebf24086ebbc3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-rule.svg",
+          "sha256": "5b9489be8dc95b94d898934cbe5021b0e148d808e3b5a659e3419b9755a2f4ee",
+          "className": "lucide-git-commit-horizontal",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-rule"]
+        }
+      }
+    },
+    {
+      "iconName": "circle-tick",
+      "selectedSourceName": "loader",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/loader.svg",
+        "sha256": "a7bee5c715e9d0f53038fedc2861032c233e50cc01fd2bd785964a0f70f25d71"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "circle-tick.svg",
+          "sha256": "9604dd954b5b0c527ad2b92ad1011dfe3620c5337f411602fb2e8f956a95eaea",
+          "className": "lucide-loader",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["circle-tick"]
+        }
+      }
+    },
+    {
+      "iconName": "clipboard",
+      "selectedSourceName": "clipboard",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/clipboard.svg",
+        "sha256": "9fed355a3bfcdfd16c7136dca18fb117ffa980e54ade9399076779898c83c914"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "clipboard.svg",
+          "sha256": "17b6cf42a87dc3eeb9a978ee9c91e65c7bc4aebda39e268f912d2a6cfcb19635",
+          "className": "lucide-clipboard",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["clipboard"]
+        }
+      }
+    },
+    {
+      "iconName": "clock",
+      "selectedSourceName": "clock",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/clock.svg",
+        "sha256": "ae36a0f2623f4e301354474321699fee2c5c3fa30fa9c8ff51d0aa0f5ffb9eb0"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "clock.svg",
+          "sha256": "40d3394a0e37d6e1ac84a04dcc8a47249491af4979141d1bd31c3bc5678a02c8",
+          "className": "lucide-clock",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["clock"]
+        }
+      }
+    },
+    {
+      "iconName": "clock-circle-arrow",
+      "selectedSourceName": "history",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/history.svg",
+        "sha256": "ad32a59783fb32e4dc39471d9af329536eb581928c917452dc8b0679cdb4c23d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "clock-circle-arrow.svg",
+          "sha256": "3011094e63e3326e2b428ba654eff6a8b1c46b428dcd19f7240b25175f37f2c1",
+          "className": "lucide-history",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["clock-circle-arrow"]
+        }
+      }
+    },
+    {
+      "iconName": "cloud",
+      "selectedSourceName": "cloud",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/cloud.svg",
+        "sha256": "6c796be245ca34de934eb046175ba9e2ee7c9621ba63ae9b3427af4855b7d8b5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cloud.svg",
+          "sha256": "8fc1b5090d398f168d017d607829e7c12690d51f4ce163cbe5b905ecd7d790ea",
+          "className": "lucide-cloud",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cloud"]
+        }
+      }
+    },
+    {
+      "iconName": "cloud-download",
+      "selectedSourceName": "cloud-download",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/cloud-download.svg",
+        "sha256": "48cdc544c683248b3d58b90052f3909b105bf8de6c3574619f9ed80a51cd65d8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cloud-download.svg",
+          "sha256": "391cae9672c2d3086e66f45d83d43e7a03bc0ced2e762995f623d3ce09934e42",
+          "className": "lucide-cloud-download",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cloud-download"]
+        }
+      }
+    },
+    {
+      "iconName": "cloud-upload",
+      "selectedSourceName": "cloud-upload",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/cloud-upload.svg",
+        "sha256": "01eddc9da50fdc98463420ee636d64db3216c588618f311adf1d11c24ce66965"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cloud-upload.svg",
+          "sha256": "1abeb418126e1c3e68dbf6f0d80d6f0b6b83b5ab54a0284eb3ee1f872423801a",
+          "className": "lucide-cloud-upload",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cloud-upload"]
+        }
+      }
+    },
+    {
+      "iconName": "code",
+      "selectedSourceName": "code-xml",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/code-xml.svg",
+        "sha256": "3fd922b8724df1bed6b1b8a2c2fef57c2056e35e19096905a75821e9fe8ec41d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "code.svg",
+          "sha256": "0cc6f3280136c79dbeb4ea8b4a32666c34ddb8677e392bc33bbbb2ac29a786c7",
+          "className": "lucide-code-xml",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["code"]
+        }
+      }
+    },
+    {
+      "iconName": "collapse-all",
+      "selectedSourceName": "list-chevrons-down-up",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-chevrons-down-up.svg",
+        "sha256": "2043edace6a3e414f8e11a60419f9f611ed9dbb4b1d966c35aa7cd90dfb1507d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "collapse-all.svg",
+          "sha256": "d94fb745610374534a646ce88fc0eaa40de7be2da955a387f0d12bd70ceba9f1",
+          "className": "lucide-list-chevrons-down-up",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["collapse-all"]
+        }
+      }
+    },
+    {
+      "iconName": "collapse-details",
+      "selectedSourceName": "minimize-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/minimize-2.svg",
+        "sha256": "da2ca2a3ed031e09d7a7ed4d2dfc3a6bb6cdc4502854ea537443cc82dc83b569"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "collapse-details.svg",
+          "sha256": "6cb61e056ca40b6f78af621b5c5eea79e7bfe10b16735ab5dc4ee8398fe87198",
+          "className": "lucide-minimize-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["collapse-details"]
+        }
+      }
+    },
+    {
+      "iconName": "color-palette",
+      "selectedSourceName": "palette",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/palette.svg",
+        "sha256": "4f950274bca4b99c4c3110c22a640f3de275c14104240fbb8c7a79eacac23fa7"
+      },
+      "outputs": {}
+    },
+    {
+      "iconName": "columns",
+      "selectedSourceName": "columns-3",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/columns-3.svg",
+        "sha256": "a3a77a95372e433f9b9c545545ac77447abc677a1644829495706f6231e150a9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "columns.svg",
+          "sha256": "ac4b46953e28666d4cb68a92615b4eaf911ef6cb6706c60e4ffbcb2649ac9070",
+          "className": "lucide-columns-3",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["columns"]
+        }
+      }
+    },
+    {
+      "iconName": "compare",
+      "selectedSourceName": "git-compare-arrows",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-compare-arrows.svg",
+        "sha256": "2be2a20553dea8c0bd4024ea30d58357934be86338bbd1350993dffee8c93183"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "compare.svg",
+          "sha256": "4b23ce582d68fb57d627374a510aea263e6112140f64549596ca8402fa6acc68",
+          "className": "lucide-git-compare-arrows",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["compare"]
+        }
+      }
+    },
+    {
+      "iconName": "computer",
+      "selectedSourceName": "monitor",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/monitor.svg",
+        "sha256": "55076e1f385550bbce6eccd879225c23886c6381ee7d5e629a9c82515b64b98c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "computer.svg",
+          "sha256": "5d04bb0f4b182a62631c7a106af67af43331eca4b11415fd23faa735db8cdb48",
+          "className": "lucide-monitor",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["computer"]
+        }
+      }
+    },
+    {
+      "iconName": "connect-node",
+      "selectedSourceName": "connect-node",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/connect-node.svg",
+        "sha256": "5d4be738283fdd50946cc3ee61cb1bb78f7180ba34a9304f4b3b70811c3402e9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "connect-node.svg",
+          "sha256": "8a21d16e5402807feaf77198251634b0233534658e80a590d2ba905fc7084ce2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["connect-node"]
+        }
+      }
+    },
+    {
+      "iconName": "connected-blocks",
+      "selectedSourceName": "workflow",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/workflow.svg",
+        "sha256": "725e7ba4ebdabe2903ea18b709e62583ebd9faacc37fd733b64b9a33e1972e9e"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "connected-blocks.svg",
+          "sha256": "27ddbcfcf4288fc5828b43c574bc65494eaebd1dbf4ff332a12da4cb21f3e576",
+          "className": "lucide-workflow",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["connected-blocks"]
+        }
+      }
+    },
+    {
+      "iconName": "copy",
+      "selectedSourceName": "copy",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/copy.svg",
+        "sha256": "21ea3827c68ba3467e536ad6df24c07dcc78be0cb499f12893354b7b16d79be2"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "copy.svg",
+          "sha256": "acaf5528a161c034a37adf5026b3bc1e77af4f8e6f699b589b82980fc910ddb5",
+          "className": "lucide-copy",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["copy"]
+        }
+      }
+    },
+    {
+      "iconName": "cross-hairs",
+      "selectedSourceName": "crosshair",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/crosshair.svg",
+        "sha256": "1f81a6f5f85c248040f344ac68870aa706a7cb0de78192c80936025cf270b35e"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cross-hairs.svg",
+          "sha256": "3e2cbcf309edd47f0e28286f62f6aeef3c18bd2e1ad3d45764819f317099c372",
+          "className": "lucide-crosshair",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cross-hairs"]
+        }
+      }
+    },
+    {
+      "iconName": "cursor-rays",
+      "selectedSourceName": "mouse-pointer-click",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/mouse-pointer-click.svg",
+        "sha256": "9300a268e07dba83adb47013a9181c233a392caf572b694a99cb531ec51d0c2f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cursor-rays.svg",
+          "sha256": "f547d6ee03bfe6362702d46258ca8ed5c036016db87d4b31784f82a9cba59c09",
+          "className": "lucide-mouse-pointer-click",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cursor-rays"]
+        }
+      }
+    },
+    {
+      "iconName": "cursor-ripples",
+      "selectedSourceName": "target",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/target.svg",
+        "sha256": "715a257e9f4c2a988ab37d6827bf4a9f6dc1b2ae94f962504805420622547b4d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "cursor-ripples.svg",
+          "sha256": "70d48aa4394595070b164f75758ece8a7186ee2c1e9271f6dfc9784da9fd5ca7",
+          "className": "lucide-target",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["cursor-ripples"]
+        }
+      }
+    },
+    {
+      "iconName": "data-management",
+      "selectedSourceName": "database",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/database.svg",
+        "sha256": "7ec80f586afbb582feb9aae69a9efb5b008ab4b8033999987a1577cd2065b4ed"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "data-management.svg",
+          "sha256": "6352b1fd703af05d3cb7b45bcd80a0d63e6d98fca0352d88d39366414b7e0729",
+          "className": "lucide-database",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["data-management"]
+        }
+      }
+    },
+    {
+      "iconName": "delete",
+      "selectedSourceName": "trash-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/trash-2.svg",
+        "sha256": "e92522a3f8621708a1dafd4ba849981af1dbd21079dbc79ea8d6383530b790d2"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "delete.svg",
+          "sha256": "b64c6b6ee59111e60ac6891bd1e26b05727e4e66e17836fc4fff88da5f338443",
+          "className": "lucide-trash-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["delete"]
+        }
+      }
+    },
+    {
+      "iconName": "delete-node",
+      "selectedSourceName": "delete-node",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/delete-node.svg",
+        "sha256": "0eff56c0064ad843f44ed3f0b1ad7d55460adaef4ea4b77e7caaef09aaafa1ce"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "delete-node.svg",
+          "sha256": "9e699c0ba0760c1b0091cfb6dcca2ddbb65b607a1aaff2602a4a3599aa677d10",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["delete-node"]
+        }
+      }
+    },
+    {
+      "iconName": "doc-checkmark",
+      "selectedSourceName": "file-check-corner",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/file-check-corner.svg",
+        "sha256": "b59ab0d9a86b679362ece6d86f4c4e25ec6c88763c32541f2bb7331b03156346"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "doc-checkmark.svg",
+          "sha256": "4320855341cb40d62fd0c5071a48f304b75183217d6a1c7823fb1c09bf858a48",
+          "className": "lucide-file-check-corner",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["doc-checkmark"]
+        }
+      }
+    },
+    {
+      "iconName": "dock-bottom",
+      "selectedSourceName": "panel-bottom",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/panel-bottom.svg",
+        "sha256": "fef116c939c5d8161b2ed7af1e35ced0383326e23df878c2f0055f01c5de33d0"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "dock-bottom.svg",
+          "sha256": "70df0a921f3cc3bee18a09dd6543da4cec5b1293bf986a379c985e5528728a9e",
+          "className": "lucide-panel-bottom",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["dock-bottom"]
+        }
+      }
+    },
+    {
+      "iconName": "dock-none",
+      "selectedSourceName": "dock-none",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/dock-none.svg",
+        "sha256": "fe6036e34226ce79e38884d359259ad598585f2b725b84b73d5b3ef6a38b055b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "dock-none.svg",
+          "sha256": "3afe8965c8d547b18884cd3cb334b422e1cc663712defebe75c674a98496b19f",
+          "className": "lucide-dock-none",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["dock-none"]
+        }
+      }
+    },
+    {
+      "iconName": "dock-side",
+      "selectedSourceName": "panel-left",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/panel-left.svg",
+        "sha256": "4ca7acc604b5d7e4debfa90753b335f63bc14be5b020ea73ec7af57010c2ab66"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "dock-side.svg",
+          "sha256": "388a0fede917c4a00b82f8153d2768faf87b7ae84473eff50ece731068e3fd33",
+          "className": "lucide-panel-left",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["dock-side"]
+        }
+      }
+    },
+    {
+      "iconName": "document",
+      "selectedSourceName": "file-text",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/file-text.svg",
+        "sha256": "83486a1148349b65cfa4e075c82bb7512d6b5e0f340c0f52b1d42f2060e5cdd7"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "document.svg",
+          "sha256": "603a8111447e4e245e68e6ae3f66ed4312804cc094beb3bdeef2645aa6e2a4d8",
+          "className": "lucide-file-text",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["document"]
+        }
+      }
+    },
+    {
+      "iconName": "document-clipboard",
+      "selectedSourceName": "clipboard",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/clipboard.svg",
+        "sha256": "9fed355a3bfcdfd16c7136dca18fb117ffa980e54ade9399076779898c83c914"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "document-clipboard.svg",
+          "sha256": "17b6cf42a87dc3eeb9a978ee9c91e65c7bc4aebda39e268f912d2a6cfcb19635",
+          "className": "lucide-clipboard",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["document-clipboard"]
+        }
+      }
+    },
+    {
+      "iconName": "dot",
+      "selectedSourceName": "circle-small",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/dot.svg",
+        "sha256": "6fb734f0c917ebec7b3940e2d4c11b7616c7dc0503ce1503d99e1bd38069a7ae"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "dot.svg",
+          "sha256": "6fb734f0c917ebec7b3940e2d4c11b7616c7dc0503ce1503d99e1bd38069a7ae",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["dot"],
+          "adjustment": "Uses the existing filled default shape for component rendering."
+        }
+      }
+    },
+    {
+      "iconName": "dot-stroke",
+      "selectedSourceName": "circle",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle.svg",
+        "sha256": "0fa4af0d7995c73072a0762d51121561b3c847d8a0f83fee30e8ba69de27ff02"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "dot-stroke.svg",
+          "sha256": "1ec0eb3aac8f3c910011e3b9ebcedb5830bdb1429cb0e23a2a94431ee66a3f09",
+          "className": "lucide-circle",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["dot-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "double-chevron",
+      "selectedSourceName": "chevrons-up",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/chevrons-up.svg",
+        "sha256": "422e74604688ae7305d0f8c3b6b3d9d3e7b04cb13e4c67c30d752c15772a8046"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "double-chevron.svg",
+          "sha256": "c7f411fd5c065c18a7582ed425847365e99a6a9f8e077cef5ba10fb23238b041",
+          "className": "lucide-chevrons-up",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["double-chevron"]
+        }
+      }
+    },
+    {
+      "iconName": "download",
+      "selectedSourceName": "download",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/download.svg",
+        "sha256": "4e5b399b76583de8c4ef0417bdb9f7e81039907cbe7518208cdd3ae419e58285"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "download.svg",
+          "sha256": "8d7b4c34247e6348e8c03e9fb352088fcfaf49a80cb887847c487556b029c7cf",
+          "className": "lucide-download",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["download"]
+        }
+      }
+    },
+    {
+      "iconName": "drag",
+      "selectedSourceName": "grip-vertical",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/grip-vertical.svg",
+        "sha256": "73cfd2e32558377d115cac7fcc082759923c3eb8a6cf93735ef14f56c816442b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "drag.svg",
+          "sha256": "32cfc12f5774f8fd65d0034cb1b59025b09e25db0af52372a630e6406e8580ac",
+          "className": "lucide-grip-vertical",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["drag"]
+        }
+      }
+    },
+    {
+      "iconName": "dropper",
+      "selectedSourceName": "pipette",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/pipette.svg",
+        "sha256": "7fc65f598943a19631e9881142e5ea6a0060912ec7085eae653ede3ded336519"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "dropper.svg",
+          "sha256": "2e26832f0a520d782d665ae39594def2359745f0cc306b8cc4c50ad387438444",
+          "className": "lucide-pipette",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["dropper"]
+        }
+      }
+    },
+    {
+      "iconName": "duplicate",
+      "selectedSourceName": "copy-plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/copy-plus.svg",
+        "sha256": "de8f68b3e27542625d02c48fe5a33cab574b228edf9dedbb5985031c8b5c96ee"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "duplicate.svg",
+          "sha256": "6f225552dd6788bd8061bb909c85442092619f580967b5fde0cf6141f784d953",
+          "className": "lucide-copy-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["duplicate"]
+        }
+      }
+    },
+    {
+      "iconName": "edit",
+      "selectedSourceName": "edit-3",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/edit-3.svg",
+        "sha256": "6672bdc536f9cc6c6087e589ef7e9b801626600b1c2acd44398498e45431b900"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "edit.svg",
+          "sha256": "b045659f303d483648db7e2734e65b304f8e24971981104785742cd01c85f914",
+          "className": "lucide-edit-3",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["edit"]
+        }
+      }
+    },
+    {
+      "iconName": "ellipses",
+      "selectedSourceName": "rectangle-ellipsis",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/rectangle-ellipsis.svg",
+        "sha256": "45a2946ca64a8277b2089d2293921c3140167ff17d37c4b4bab3e6d0142507b8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "ellipses.svg",
+          "sha256": "15ec51aa043947471a7d998359b92bf9deb72e1a2bfc7b62cc59442f09a75281",
+          "className": "lucide-rectangle-ellipsis",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["ellipses"]
+        }
+      }
+    },
+    {
+      "iconName": "envelope",
+      "selectedSourceName": "mail",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/mail.svg",
+        "sha256": "3cc15d64998ecd073d08b017382e24cbc9da5afda568c28e561a7e3d9e13ec16"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "envelope.svg",
+          "sha256": "851e0e51a60b29550e06da20e75f9fcde89bacbd4639a074c314198b9e11e80a",
+          "className": "lucide-mail",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["envelope"]
+        }
+      }
+    },
+    {
+      "iconName": "exclamation-circle",
+      "selectedSourceName": "circle-alert",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/exclamation-circle.svg",
+        "sha256": "98b83b245865358729bb1cb5bbd0e501e22815f9a42bd711f89fe8e5dc9e707c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "exclamation-circle.svg",
+          "sha256": "98b83b245865358729bb1cb5bbd0e501e22815f9a42bd711f89fe8e5dc9e707c",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["exclamation-circle"],
+          "adjustment": "Uses the existing filled status/default shape for component status rendering."
+        }
+      }
+    },
+    {
+      "iconName": "exclamation-mark",
+      "selectedSourceName": "exclamation-mark",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/exclamation-mark.svg",
+        "sha256": "887e501e4d1951d5c466baed66fdf0738adb8be4512b3acfef4954fc2ff53eb8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "exclamation-mark.svg",
+          "sha256": "4008fcab44eba249cf59f4475e9ef9aeed40be4af46fafdf16318437597b6c87",
+          "className": "lucide-exclamation-mark",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["exclamation-mark"]
+        }
+      }
+    },
+    {
+      "iconName": "exclamation-triangle",
+      "selectedSourceName": "triangle-alert",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/exclamation-triangle.svg",
+        "sha256": "20ec221b62a9cc10b05edeeadf2b71a687a941e1e137868cb9baa73c89dfa63f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "exclamation-triangle.svg",
+          "sha256": "20ec221b62a9cc10b05edeeadf2b71a687a941e1e137868cb9baa73c89dfa63f",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["exclamation-triangle"],
+          "adjustment": "Uses the existing filled status/default shape for component status rendering."
+        }
+      }
+    },
+    {
+      "iconName": "expand-all",
+      "selectedSourceName": "list-chevrons-up-down",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-chevrons-up-down.svg",
+        "sha256": "eb7bacbdf892d0f8e4693359f5df384500d94f1b6156e088be03ee59e90aa275"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "expand-all.svg",
+          "sha256": "c27e8e96917ca4380eedade6990f122bf6ee06ec0f82dac6fc3f16d18d0c470c",
+          "className": "lucide-list-chevrons-up-down",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["expand-all"]
+        }
+      }
+    },
+    {
+      "iconName": "expand-details",
+      "selectedSourceName": "maximize-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/maximize-2.svg",
+        "sha256": "68ceb7a0a3e1db3041a30edec595ce78dff3ef7b4279c35b04deda7166e79292"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "expand-details.svg",
+          "sha256": "af4252fed78f163b51484bd9f29989a3ed7956c1364421a34a9046532018c4db",
+          "className": "lucide-maximize-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["expand-details"]
+        }
+      }
+    },
+    {
+      "iconName": "expression",
+      "selectedSourceName": "variable",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/variable.svg",
+        "sha256": "8c9fb3e7e5401d0c0f74c754cb35e3769a81140870280e455dfe6d65e505aa0c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "expression.svg",
+          "sha256": "f7ea4a13c72cfc118f347469de7e55426a6a798727f4557435bb57c5e3847a1d",
+          "className": "lucide-variable",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["expression"]
+        }
+      }
+    },
+    {
+      "iconName": "eye",
+      "selectedSourceName": "eye",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/eye.svg",
+        "sha256": "61d64f8167ee09a50c38a573814716d92883b98db644de6494d21cb3d5c74aba"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "eye.svg",
+          "sha256": "5fdab95b85cc65effdc8685bc2a7a44787dbc0e3f712e6f0998d7ae925c8deb5",
+          "className": "lucide-eye",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["eye"]
+        }
+      }
+    },
+    {
+      "iconName": "eye-hidden",
+      "selectedSourceName": "eye-off",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/eye-off.svg",
+        "sha256": "9f2212b783380d277e56e1136d13803eee58a17b936404f46c8b8056074518a9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "eye-hidden.svg",
+          "sha256": "eee7e66862009c7706fc42199fda9d8af08c52b1fc23fcef93c2261059c8e0d5",
+          "className": "lucide-eye-off",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["eye-hidden"]
+        }
+      }
+    },
+    {
+      "iconName": "face-frown",
+      "selectedSourceName": "frown",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/frown.svg",
+        "sha256": "27018e8f64966cb08acf792b1556009f80aac289b9b16833b89754c822435a53"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "face-frown.svg",
+          "sha256": "b035c4df06657defeff313de98e65b46cb994966f8ecd6b0f2a77f80d5c8f68f",
+          "className": "lucide-frown",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["face-frown"]
+        }
+      }
+    },
+    {
+      "iconName": "face-smile",
+      "selectedSourceName": "smile",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/smile.svg",
+        "sha256": "cb948ca5ef863b6c1c92f19614655834c8c95b95dbb7f10d13505416d96a9f8e"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "face-smile.svg",
+          "sha256": "e72a3d12d6b73985ed49843a51a13ddadc4cf8b8dfb7165b3ed6ddb1536da42c",
+          "className": "lucide-smile",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["face-smile"]
+        }
+      }
+    },
+    {
+      "iconName": "fast-forward",
+      "selectedSourceName": "fast-forward",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/fast-forward.svg",
+        "sha256": "32272616730f6d0c00969287a0129e2698f0ce5fd9b4f51eddc9eb04bf100d0b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "fast-forward.svg",
+          "sha256": "32272616730f6d0c00969287a0129e2698f0ce5fd9b4f51eddc9eb04bf100d0b",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["fast-forward"],
+          "adjustment": "Uses the existing filled default shape for component rendering."
+        }
+      }
+    },
+    {
+      "iconName": "fast-forward-10",
+      "selectedSourceName": "fast-forward-10",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/fast-forward-10.svg",
+        "sha256": "e466d38e0b429834c3d073d444559bf93de7ce43f9c3adfc1dd075317a2d0227"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "fast-forward-10.svg",
+          "sha256": "42e879658140cfc0c2a17827c4e9f65105fdf3d70f03f552223c6ff9a7865d64",
+          "className": "lucide-fast-forward-10",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["fast-forward-10"]
+        }
+      }
+    },
+    {
+      "iconName": "film",
+      "selectedSourceName": "film",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/film.svg",
+        "sha256": "09a6c56c3808f7cba4cce7787e2a46995465f124cd6889fc5841c722442b4ffc"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "film.svg",
+          "sha256": "a6a076ad4e24fcb0b2c492c9de10b664a70dd6efc22549dfe1172e4b965dd3cb",
+          "className": "lucide-film",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["film"]
+        }
+      }
+    },
+    {
+      "iconName": "filter",
+      "selectedSourceName": "funnel",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/funnel.svg",
+        "sha256": "afce45fa869aa2437c6b5c2032c85055122c35033294d20b364e706f2474df76"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "filter-stroke.svg",
+          "sha256": "9bc94c7dd86433d8f403ae2458bdb7814f45a135a9cc3f2f34c0a7557b28bded",
+          "className": "lucide-funnel",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["filter-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "flag",
+      "selectedSourceName": "flag",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/flag.svg",
+        "sha256": "4577048c9adec0242e25e0501b5a3d33e5cecf13af05df17a44a363cdfbd02f3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "flag-stroke.svg",
+          "sha256": "6cca9cc9f853d46a211d6a1ba3f96bddce10143d19ef759d16ce8c620d7fb1ea",
+          "className": "lucide-flag",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["flag-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "fold",
+      "selectedSourceName": "unfold-vertical",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/unfold-vertical.svg",
+        "sha256": "644c04c1818f2c2071c3d78518d72277e0539398aa595cc2d38e7e8c894f6ced"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "fold.svg",
+          "sha256": "19ba3076cc94d37b1cd1595c013996c79af4aa359e03227605fde1080d61e248",
+          "className": "lucide-unfold-vertical",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["fold"]
+        }
+      }
+    },
+    {
+      "iconName": "folder",
+      "selectedSourceName": "folder",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/folder.svg",
+        "sha256": "8a91f77a3ee1d6388a95aff279633e91ffa14d87ae345dcc4314be5eaad51cd0"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "folder.svg",
+          "sha256": "e4a86972fc2d74b52bee012aaf99546573126d1db6338d4b6decee911c4ead70",
+          "className": "lucide-folder",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["folder"]
+        }
+      }
+    },
+    {
+      "iconName": "fork",
+      "selectedSourceName": "git-fork",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-fork.svg",
+        "sha256": "0ac994bc5da2294b56a0bffa5dee0f7529846b4806f739a30f812a0d013f68ba"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "fork.svg",
+          "sha256": "29a6962b01d7c9155d0fb8415f903815311a9782bbf4c61b0f8d45f4a4babf1d",
+          "className": "lucide-git-fork",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["fork"]
+        }
+      }
+    },
+    {
+      "iconName": "gear",
+      "selectedSourceName": "settings",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/settings.svg",
+        "sha256": "adf0eca0c40b1cbc840d3c2196c1c5fbece5a5d91e68bac6a1ed8df17ea5b68d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "gear.svg",
+          "sha256": "7b1b412387c751446738ec63712bf108732144e22db6f48cfbb429e436a8ef9a",
+          "className": "lucide-settings",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["gear"]
+        }
+      }
+    },
+    {
+      "iconName": "globe",
+      "selectedSourceName": "globe-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/globe-2.svg",
+        "sha256": "c6813c000bb8d28d94d84671b65d363ab4431962a2f5a6b94871e09c70da9367"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "globe.svg",
+          "sha256": "bb9f780a051ad0c2c493065d7974227198f7c1a413c7abe1c3cb245c9f2ef310",
+          "className": "lucide-globe-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["globe"]
+        }
+      }
+    },
+    {
+      "iconName": "globe-alt-stroke",
+      "selectedSourceName": "globe",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/globe.svg",
+        "sha256": "edb7d9bb40a8c043de03976b4908e7274cc9b78d7d959f762d22c021e99dca7a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "globe-alt-stroke.svg",
+          "sha256": "88e830c31ace96a7e2020cca76e8fecab618beb5bd84e6f6ca7c3189021a39d6",
+          "className": "lucide-globe",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["globe-alt-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "group",
+      "selectedSourceName": "users",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/users.svg",
+        "sha256": "e3247c5327d1956862a8f43a6f153e15145eaa8bd336f52de06ec0761812a683"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "group.svg",
+          "sha256": "d1bcd932de3fcde366755e07ee6acc70910714de337114e9e392133836933e9e",
+          "className": "lucide-users",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["group"]
+        }
+      }
+    },
+    {
+      "iconName": "group-boxes",
+      "selectedSourceName": "group",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/group.svg",
+        "sha256": "34cb7fa75037ba780db28c13638fa0e02f96b7846e0723147eb1f64b9e13c452"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "group-boxes.svg",
+          "sha256": "56f940de9967e8edc177b2b9039916369fef24424bd8d65dae49fd0f1cb8e81e",
+          "className": "lucide-group",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["group-boxes"]
+        }
+      }
+    },
+    {
+      "iconName": "hand",
+      "selectedSourceName": "hand",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/hand.svg",
+        "sha256": "422d431445bd9cb3b06b5196afa6cbd6e0c720fd9e5600d8414596c87f4262f7"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "hand.svg",
+          "sha256": "4c44d85bc2989a28500b8409381c59ac138b1150b508a0dcedee9baf8eb50857",
+          "className": "lucide-hand",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["hand"]
+        }
+      }
+    },
+    {
+      "iconName": "hash",
+      "selectedSourceName": "hash",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/hash.svg",
+        "sha256": "50a0ce44910c65657ff5b539515969c09b5d267c8f795eb694a6be3b2bab192e"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "hash.svg",
+          "sha256": "4dd9936bafdd2ecff16a67054ab61915b6a0aa513f1bf4d3b2434d26839044c5",
+          "className": "lucide-hash",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["hash"]
+        }
+      }
+    },
+    {
+      "iconName": "heading",
+      "selectedSourceName": "heading",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/heading.svg",
+        "sha256": "9748191e900e28e2de680d06fd1f46d81433c719df4bc63826c74d1da5850518"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "heading.svg",
+          "sha256": "d30f73bec078c0b4965683f9b6d09e3a82f3b7a8c7325dc924f44cc040e4fb10",
+          "className": "lucide-heading",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["heading"]
+        }
+      }
+    },
+    {
+      "iconName": "home",
+      "selectedSourceName": "home",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/home.svg",
+        "sha256": "8dd66ef019676e375fa65073847c0b9fca5bac0e77a6cff409074887ea880728"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "home.svg",
+          "sha256": "87d8415bdbf8875a25003fe17ac368d3cbef1f9933adb79bc7bd81ad53d74f45",
+          "className": "lucide-home",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["home"]
+        }
+      }
+    },
+    {
+      "iconName": "horizontal-rule",
+      "selectedSourceName": "minus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/minus.svg",
+        "sha256": "1229f1e3dc55481950fc4356f29464e72a4aa79f67f9b0fea851665e3996a486"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "horizontal-rule.svg",
+          "sha256": "c94224fa365e4b9049d0f13fcdde74c03e49b90f3b9b837889303ffbd586eaa7",
+          "className": "lucide-minus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["horizontal-rule"]
+        }
+      }
+    },
+    {
+      "iconName": "hourglass",
+      "selectedSourceName": "hourglass",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/hourglass.svg",
+        "sha256": "8b4a22d251f67c142dfc49dd92c7297985d805e278be94f026966db8ac816cd9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "hourglass.svg",
+          "sha256": "f3ffa9d35203ef10c4d276b94f70596c083e7c5fe80399ef9b85b1e857d134a9",
+          "className": "lucide-hourglass",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["hourglass"]
+        }
+      }
+    },
+    {
+      "iconName": "hourglass-end",
+      "selectedSourceName": "hourglass-end",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/hourglass-end.svg",
+        "sha256": "df92630862679603594b7f480a204a52224dc0fef4ffafecf47de16e6da6cbd5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "hourglass-end.svg",
+          "sha256": "19e92628020211152ea334b53edc1484aaccd4c38b4518d40628f9ac2a84d8b9",
+          "className": "lucide-hourglass-end",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["hourglass-end"]
+        }
+      }
+    },
+    {
+      "iconName": "hourglass-mid",
+      "selectedSourceName": "hourglass-mid",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/hourglass-mid.svg",
+        "sha256": "416d521b187067275dbcac666e6351a76df843542a67cddb1289a0aa5909ba7f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "hourglass-mid.svg",
+          "sha256": "4af4ebe6eb2b3d96c7453a99a465d3c60352893f6ec4dc504ae1df46ec6abf42",
+          "className": "lucide-hourglass-mid",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["hourglass-mid"]
+        }
+      }
+    },
+    {
+      "iconName": "hourglass-start",
+      "selectedSourceName": "hourglass-start",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/hourglass-start.svg",
+        "sha256": "edfe3825f8dbcf39efb1cc65881183d8764721a06c9d7c327192e6dfd842e01f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "hourglass-start.svg",
+          "sha256": "f982984fea38687cdb751200430f2a362f72eb2b5f34173dab9ba610e0f3808e",
+          "className": "lucide-hourglass-start",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["hourglass-start"]
+        }
+      }
+    },
+    {
+      "iconName": "identification",
+      "selectedSourceName": "id-card",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/id-card.svg",
+        "sha256": "ba5ca6258a56bb4676fcfd156b3c1fda53a3bf174d0fa59ee52461e016aafd8b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "identification.svg",
+          "sha256": "35afba5eca975b916627d3142cc2d0c7097b9e74051c946c39045eef6e26bc4b",
+          "className": "lucide-id-card",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["identification"]
+        }
+      }
+    },
+    {
+      "iconName": "image",
+      "selectedSourceName": "image",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/image.svg",
+        "sha256": "a45f7fdcf6ea69117c44d6d0cb4afa57211e7b91d63a37b5987d41e6f8123843"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "image.svg",
+          "sha256": "8519d27dbfd36649a0086a02f8dfc338a22c09b658736707c2d5d64373c5cc85",
+          "className": "lucide-image",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["image"]
+        }
+      }
+    },
+    {
+      "iconName": "inbox",
+      "selectedSourceName": "inbox",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/inbox.svg",
+        "sha256": "fe67f9f1f42b071ff59d4a6c63bba0ecbafa39cd602013e9abc2f7263591b844"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "inbox.svg",
+          "sha256": "440d2f946c80caa0e384946af731ca4b561f4b1a76e548a31df3dfecffcf8ef8",
+          "className": "lucide-inbox",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["inbox"]
+        }
+      }
+    },
+    {
+      "iconName": "infinity",
+      "selectedSourceName": "infinity",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/infinity.svg",
+        "sha256": "25c3a1a63b41841698cf68eba4f2ba0f3fd7f35ebfc637b7b4deaeed8684d671"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "infinity.svg",
+          "sha256": "f62a6f0c56940d04dce03aa5a209bf40bdb406d95ffc822dda3dbba1ad34704c",
+          "className": "lucide-infinity",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["infinity"]
+        }
+      }
+    },
+    {
+      "iconName": "information-circle-stroke",
+      "selectedSourceName": "info",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/info.svg",
+        "sha256": "3b82425dc8532f009fa6076089d2b9127b7c877c242308e9dfd6f19d1ca46f3a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "information-circle-stroke.svg",
+          "sha256": "886379a4e7929e1ba1e374a156268e32317b54cd4224ed15b8b07fd5fff3ecf8",
+          "className": "lucide-info",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["information-circle-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "inspect",
+      "selectedSourceName": "square-mouse-pointer",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/square-mouse-pointer.svg",
+        "sha256": "b0679c9af08c31c6809cb1aad676e888306303ac4aa198977544f96743b9086e"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "inspect.svg",
+          "sha256": "9f5aabe277264cf7336e1b697638c95e4fce0766a1d54cb33f90c67a9e5460c9",
+          "className": "lucide-square-mouse-pointer",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["inspect"]
+        }
+      }
+    },
+    {
+      "iconName": "italic",
+      "selectedSourceName": "italic",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/italic.svg",
+        "sha256": "8f0778d6f1375d311e115418197ab76abd359a49f094eaca0c796f115fc13fd3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "italic.svg",
+          "sha256": "040f3a1ddc0142db51c151a46418783dc2b650c00261139c9fce35cc2cce5f93",
+          "className": "lucide-italic",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["italic"]
+        }
+      }
+    },
+    {
+      "iconName": "key",
+      "selectedSourceName": "key-round",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/key-round.svg",
+        "sha256": "de57d6ff86d2cae20259249afbd30f96363a32aa83af03f70e4d5868c6e2493f"
+      },
+      "outputs": {}
+    },
+    {
+      "iconName": "keyboard",
+      "selectedSourceName": "keyboard",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/keyboard.svg",
+        "sha256": "c77255c12092a1eb975ad69318252db5d16452e087bae12e7da20abe19fffe9d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "keyboard.svg",
+          "sha256": "1be8a2876b091e7f9ac7d08eed2c47e1027caa08847abe2c1d45a21a8028328f",
+          "className": "lucide-keyboard",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["keyboard"]
+        }
+      }
+    },
+    {
+      "iconName": "laptop-phone",
+      "selectedSourceName": "monitor-smartphone",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/monitor-smartphone.svg",
+        "sha256": "8b49b2b25df19eaf350ab25643bcead90ce4f9da2ca7233fd76d051e571d3f80"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "laptop-phone.svg",
+          "sha256": "a99862b9f7fd2e9ded377c3267ac892521433b2704c14307930d269496cfe075",
+          "className": "lucide-monitor-smartphone",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["laptop-phone"]
+        }
+      }
+    },
+    {
+      "iconName": "layers",
+      "selectedSourceName": "layers",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/layers.svg",
+        "sha256": "8fa51ecc75bfc148a9a0753fc3b57896023439bfbc97d3c1e837d7e35c3a337c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "layers.svg",
+          "sha256": "1152b4ac40088faa764e435df71a40913662c7f3fa733a55b4865acbf4b13dc6",
+          "className": "lucide-layers",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["layers"]
+        }
+      }
+    },
+    {
+      "iconName": "lifebuoy",
+      "selectedSourceName": "life-buoy",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/life-buoy.svg",
+        "sha256": "3034b0023c313b9b4b323422287d42afd6c1dc09cc1c9492cf93e10e97b06440"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "lifebuoy.svg",
+          "sha256": "f8cb5f4a823fc468a75740e73b6a16d918b81b6b69f75c2c17970565bd11edbc",
+          "className": "lucide-life-buoy",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["lifebuoy"]
+        }
+      }
+    },
+    {
+      "iconName": "lightbulb",
+      "selectedSourceName": "lightbulb",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/lightbulb.svg",
+        "sha256": "b4a0ccfa448b2d85c168deb6bafb0065e63b9552b0ad7ccaf382438905c6bba3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "lightbulb.svg",
+          "sha256": "a8568ee028ac38cc49e853e9527b001cf3004e1e72ca7953217811cac37b8a41",
+          "className": "lucide-lightbulb",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["lightbulb"]
+        }
+      }
+    },
+    {
+      "iconName": "lightning-bolt",
+      "selectedSourceName": "zap",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/zap.svg",
+        "sha256": "12b1a3c95b289a099cb06edf2d96b6b5a631b5c1156b576876e7728271a0e4d8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "lightning-bolt.svg",
+          "sha256": "d2f3be56c755e8fb86ce04b67ae08b40395386b9b56990a6e53b369fdef1fd57",
+          "className": "lucide-zap",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["lightning-bolt"]
+        }
+      }
+    },
+    {
+      "iconName": "link",
+      "selectedSourceName": "link",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/link.svg",
+        "sha256": "4a427dacd69f1e7448f0f9840bf5e0bfacb78b10c7b8754ac72021cc3922e99a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "link.svg",
+          "sha256": "20fa37a8bd7989d025d88acb03dee0d0379c4c3041fb7d049a4f8c909a5168bf",
+          "className": "lucide-link",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["link"]
+        }
+      }
+    },
+    {
+      "iconName": "list-ordered",
+      "selectedSourceName": "list-ordered",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-ordered.svg",
+        "sha256": "7e2ff85def18954f1e918ae4a1e289c3178731ab23026688ffc18f1b330db494"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "list-ordered.svg",
+          "sha256": "e5cc6bb11fca1d8d48cec63dae16782ff997d93d57b0cc0f0481d98c891214a7",
+          "className": "lucide-list-ordered",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["list-ordered"]
+        }
+      }
+    },
+    {
+      "iconName": "list-unordered",
+      "selectedSourceName": "list",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list.svg",
+        "sha256": "51643860a59bed8dd29c87571e1729ee87b7bb79d5f888cab1202f065bc52af2"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "list-unordered.svg",
+          "sha256": "06ab1e67755c8e04f14672daaea49a9b60b900b833ea68b825af2d9e846de9e2",
+          "className": "lucide-list",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["list-unordered"]
+        }
+      }
+    },
+    {
+      "iconName": "lock",
+      "selectedSourceName": "lock",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/lock.svg",
+        "sha256": "7dc1651226188e1e76de6d76f426d55ab9a24ce11462b0d4e97acc0909920afe"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "lock.svg",
+          "sha256": "a68e720e351096d3150e8fd59ae6422d5ec07d1ee36d614d0a7e40edfa9d2220",
+          "className": "lucide-lock",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["lock"]
+        }
+      }
+    },
+    {
+      "iconName": "login",
+      "selectedSourceName": "log-in",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/log-in.svg",
+        "sha256": "4638f04ec46b729336d02af5925a76f48d628ae85406d1dd125c0700982e09b5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "login.svg",
+          "sha256": "be4c553ff75070959d73f890ec5e349cb41a2f5c44c9a3b9c3523d327ec27203",
+          "className": "lucide-log-in",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["login"]
+        }
+      }
+    },
+    {
+      "iconName": "logout",
+      "selectedSourceName": "log-out",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/log-out.svg",
+        "sha256": "ebe39257aff408d9f2bb0beb2d2a6b5d870d4ffd5339c5d252348d6207cf6cea"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "logout.svg",
+          "sha256": "ff84cf737d89b3c078d5a085ccbbb64a246966aaced744073cb44a40c0e097f8",
+          "className": "lucide-log-out",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["logout"]
+        }
+      }
+    },
+    {
+      "iconName": "looping",
+      "selectedSourceName": "repeat",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/repeat.svg",
+        "sha256": "7e2d2b188f753057c81d6c4418e75141d109beae400a75ea83bc96b4e9ede510"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "looping.svg",
+          "sha256": "1f30ef7aba00dd72e09ee97d25daf63415d0d5a3977da740d8d7a4d43f892bd7",
+          "className": "lucide-repeat",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["looping"]
+        }
+      }
+    },
+    {
+      "iconName": "looping-off",
+      "selectedSourceName": "repeat-off",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/repeat-off.svg",
+        "sha256": "296414af12b6ae0dca96d749fa39037f90e623d77136eb37002bb0b491b22ed9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "looping-off.svg",
+          "sha256": "df33355cdf1ae026df507dfe1e3c87663ec3714180ce9dc1ab52088ed099a5b9",
+          "className": "lucide-repeat-off",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["looping-off"]
+        }
+      }
+    },
+    {
+      "iconName": "map",
+      "selectedSourceName": "map",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/map.svg",
+        "sha256": "e6ffd8267d8bcfd0653ff758a50af6d9f223b9b265b9268b6ad09274805ab963"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "map.svg",
+          "sha256": "5b20810f1cd5af0b59eca816ef3f74769b1659a85ba8bfc5f422558466df989c",
+          "className": "lucide-map",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["map"]
+        }
+      }
+    },
+    {
+      "iconName": "map-drives",
+      "selectedSourceName": "map-drives",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/map-drives.svg",
+        "sha256": "823109291901d0da47cb6b484aaf1e9ca75aceabb059dd10c5a99f6aed733d1b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "map-drives.svg",
+          "sha256": "addf21f8f09da47a935d69ed3468f26979779987f04d7aa72057c01fa3e3d669",
+          "className": "lucide-map-drives",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["map-drives"]
+        }
+      }
+    },
+    {
+      "iconName": "map-pin",
+      "selectedSourceName": "map-pin",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/map-pin.svg",
+        "sha256": "66279b0f805fe6a10e905b84a7d4a4623bbcef112ba598fc29a0d57c02fac29c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "map-pin.svg",
+          "sha256": "332a08f3b1ba86270588f2782135173569c8cda4ba57295ee91cb2fab6e28527",
+          "className": "lucide-map-pin",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["map-pin"]
+        }
+      }
+    },
+    {
+      "iconName": "markdown",
+      "selectedSourceName": "markdown",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/markdown.svg",
+        "sha256": "b32fcc4dfe99f60768237993ce3e71391f119163a5012c184c561805f36d2a08"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "markdown.svg",
+          "sha256": "4fe1a6a3ba4388c9d7c457c9f25a7e7df9074e0c597b91851d0fbb29a347c3dd",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["markdown"],
+          "adjustment": "Replaced with the reviewed custom source for this Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "maximize",
+      "selectedSourceName": "maximize",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/maximize.svg",
+        "sha256": "9735684e3db2e8ff1bbbf173b5cebcc3e6a7b49cc1e91a98cd495f3446100c8c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "maximize.svg",
+          "sha256": "f4788124ec794d934b32d90cd6281d8b51a267d09c859e81777a821599e222f7",
+          "className": "lucide-maximize",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["maximize"]
+        }
+      }
+    },
+    {
+      "iconName": "megaphone",
+      "selectedSourceName": "megaphone",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/megaphone.svg",
+        "sha256": "f2ff17bfd0fbe8b7c5310ac00466a18690676a3dfe9fc60d25981a99b0f2224d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "megaphone.svg",
+          "sha256": "110564e511f9946f6665048809fb1efc2db8256025ef4da8b4def5d39c701afb",
+          "className": "lucide-megaphone",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["megaphone"]
+        }
+      }
+    },
+    {
+      "iconName": "menu",
+      "selectedSourceName": "menu",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/menu.svg",
+        "sha256": "64e0b70a185cfea934a991f7ea2fb9a71c6ef03c62699359b136c9dfca6f611d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "menu.svg",
+          "sha256": "da4e79f46a91d97a9ea851173c6deeb072f253bf3b174dc8e0cabcc39780a66a",
+          "className": "lucide-menu",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["menu"]
+        }
+      }
+    },
+    {
+      "iconName": "merge",
+      "selectedSourceName": "git-merge",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-merge.svg",
+        "sha256": "b991e8ec3a288f93aa5fd74e4981b611bd77e5ccd34f244b29ba087a321e44d1"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "merge.svg",
+          "sha256": "58bb54f9b65899fd70f83e84ef4ec41d30c9fb27f33f7effd96f28a3083e9c33",
+          "className": "lucide-git-merge",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["merge"]
+        }
+      }
+    },
+    {
+      "iconName": "meter",
+      "selectedSourceName": "circle-gauge",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-gauge.svg",
+        "sha256": "1fb50f723b52b9ef68423ba9d9fcfa39b2de95e050ec1055e51939f6debaaaa8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "meter.svg",
+          "sha256": "33cce5fb818fb091b814a3915c8e2ea4efadd32f11529824eae2daa96f6c10b1",
+          "className": "lucide-circle-gauge",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["meter"]
+        }
+      }
+    },
+    {
+      "iconName": "minimize",
+      "selectedSourceName": "minimize",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/minimize.svg",
+        "sha256": "5dc23a3241850e91b45228c4393c56fff966936cd646c96db06b600cb5671bf1"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "minimize.svg",
+          "sha256": "f35d7d1c965e8526d575128e8bb3b231125f8f7d584a6922cc935071beb7067c",
+          "className": "lucide-minimize",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["minimize"]
+        }
+      }
+    },
+    {
+      "iconName": "minus",
+      "selectedSourceName": "minus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/minus.svg",
+        "sha256": "1229f1e3dc55481950fc4356f29464e72a4aa79f67f9b0fea851665e3996a486"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "minus.svg",
+          "sha256": "c94224fa365e4b9049d0f13fcdde74c03e49b90f3b9b837889303ffbd586eaa7",
+          "className": "lucide-minus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["minus"]
+        }
+      }
+    },
+    {
+      "iconName": "minus-circle",
+      "selectedSourceName": "circle-minus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-minus.svg",
+        "sha256": "57ad0103eebdcf362086ecfeb8126c7d3a8ba94359d8a2691d4209a545e848b5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "minus-circle.svg",
+          "sha256": "7d805d86a5d40701f6516608682b5bc201486ac1de7f48ae1bb951a7e5e84e7c",
+          "className": "lucide-circle-minus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["minus-circle"]
+        }
+      }
+    },
+    {
+      "iconName": "moon",
+      "selectedSourceName": "moon",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/moon.svg",
+        "sha256": "067c3a9d8e0a5dbd0fd1566bc3fe853072c98e6fc24443df7b54b9cadbda314c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "moon.svg",
+          "sha256": "0d212649c703564f1728ef390ce61dd99d49ccd00e351ff558e7d92f162e4e85",
+          "className": "lucide-moon",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["moon"]
+        }
+      }
+    },
+    {
+      "iconName": "more-actions",
+      "selectedSourceName": "more-horizontal",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/more-horizontal.svg",
+        "sha256": "bf9359e3f8e09b97a589c2f78e98ccc4ffdac8375bd3264b5f37e56e51c6da37"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "more-actions.svg",
+          "sha256": "b17c2ef8757a1ecc5d352157074c7ef94d5395f557cb77e26b82632689ddd0c2",
+          "className": "lucide-more-horizontal",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["more-actions"]
+        }
+      }
+    },
+    {
+      "iconName": "multiselect",
+      "selectedSourceName": "list-dropdown",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/list-dropdown.svg",
+        "sha256": "3dbace8e3de4372c9701f7d2a38b20fea352e20dcdb3dfa3554e947d9e285662"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "multiselect.svg",
+          "sha256": "9da496c5b603d22849e0a6efe8243bdfa3c6219d867a88fe0b876ebbb1118c74",
+          "className": "lucide-list-dropdown",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["multiselect"]
+        }
+      }
+    },
+    {
+      "iconName": "music-note",
+      "selectedSourceName": "music",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/music.svg",
+        "sha256": "0ec071aafd5e063e9a2a87e5d5153b073bad047406d1f43153bf89b13e08dba8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "music-note.svg",
+          "sha256": "f6b72274bf131d39ea80026fd4efb8b0b01e6278114a30880e3b1ada615aaeac",
+          "className": "lucide-music",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["music-note"]
+        }
+      }
+    },
+    {
+      "iconName": "newspaper",
+      "selectedSourceName": "newspaper",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/newspaper.svg",
+        "sha256": "9bec425e5de2d7e0f8ca0e4e9854f5acb18c9c2c3de0139b3afd91b9d30a4cb5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "newspaper.svg",
+          "sha256": "73fcc2e3b47a6f7144ea0c051a00057d43f0316ccfad30cac234f6c02454fc7e",
+          "className": "lucide-newspaper",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["newspaper"]
+        }
+      }
+    },
+    {
+      "iconName": "not-allowed",
+      "selectedSourceName": "ban",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/ban.svg",
+        "sha256": "2acbca019de2516daf600723d63c72f3391bd046bf04a9c281acf845b07a2198"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "not-allowed.svg",
+          "sha256": "405b7e1745717d4a37170278bd2235a39620e15e1ef0643a21e107c53b468cdc",
+          "className": "lucide-ban",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["not-allowed"]
+        }
+      }
+    },
+    {
+      "iconName": "numbers",
+      "selectedSourceName": "numbers",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/numbers.svg",
+        "sha256": "61168f86fa69b661d9c69ab1d6d0fd0f9b18cbc3b50e20381d8fc1c17a2f4d7b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "numbers.svg",
+          "sha256": "58e89794a2a8b67722988323a0719ce36c8a9090d68378330c934c6c49ffcc85",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["numbers"],
+          "adjustment": "Replaced with the reviewed custom source for this Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "office-building",
+      "selectedSourceName": "building-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/building-2.svg",
+        "sha256": "2f683f906109acfe61663656d44383d3687f02a2d3043e9224964a6036e23267"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "office-building.svg",
+          "sha256": "d73b986349cef21bf4eb99a715f64db4f0bfc8d89125865374a082da40a3847a",
+          "className": "lucide-building-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["office-building"]
+        }
+      }
+    },
+    {
+      "iconName": "outline",
+      "selectedSourceName": "grid-2-x-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/grid-2-x-2.svg",
+        "sha256": "31e03346076ff3321d9765321d2ad7567b5aa6b36c8cef3aa0651299c8b78601"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "outline.svg",
+          "sha256": "e0e6e1b4ffa6255d9e366217805f525dbc1fa20803f632196e291a16d6a8036a",
+          "className": "lucide-grid-2-x-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["outline"]
+        }
+      }
+    },
+    {
+      "iconName": "paper-airplane",
+      "selectedSourceName": "send-horizontal",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/send-horizontal.svg",
+        "sha256": "ae7387427f0d02eb7353382906f3b148367f6bb53ba7b84d2a6556534c538b83"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "paper-airplane.svg",
+          "sha256": "d2e56c1b51eb5f1708a41c629e77249c43147acb01ee1895cd132721675a4944",
+          "className": "lucide-send-horizontal",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["paper-airplane"]
+        }
+      }
+    },
+    {
+      "iconName": "paper-clip",
+      "selectedSourceName": "paperclip",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/paperclip.svg",
+        "sha256": "02569fa7d2642cda830b864d5089a820f97e493b975e33f988bfdffa04a26a55"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "paper-clip.svg",
+          "sha256": "4d5187c031fd3b02187dc19c6983b640cfe0041909c5e42477b201acfe452c93",
+          "className": "lucide-paperclip",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["paper-clip"]
+        }
+      }
+    },
+    {
+      "iconName": "pause",
+      "selectedSourceName": "pause",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/pause.svg",
+        "sha256": "f38dfe639736131185dc463c9f2c2b9ebc06dfe1c40f8338e38e963f5d27a7f7"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pause.svg",
+          "sha256": "f38dfe639736131185dc463c9f2c2b9ebc06dfe1c40f8338e38e963f5d27a7f7",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["pause"],
+          "adjustment": "Uses the existing filled default media-control shape rather than the stroke source."
+        }
+      }
+    },
+    {
+      "iconName": "pencil-square",
+      "selectedSourceName": "square-pen",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/square-pen.svg",
+        "sha256": "e5e353b0889ab48bf3ba395bb008173c0c76b442cd7ddcdd2af64e7e34f05b78"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pencil-square.svg",
+          "sha256": "ca44c499b71ec222474a1dcac5eade00da7e40e1deb75e5c6ebca1fd5c56f295",
+          "className": "lucide-square-pen",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pencil-square"]
+        }
+      }
+    },
+    {
+      "iconName": "person",
+      "selectedSourceName": "user",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/user.svg",
+        "sha256": "6f8ee152e4725bd2a5765d0581160cad6c9d291309be7cfbcf089bf5d7d227f5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "person.svg",
+          "sha256": "f1c4f808fa782fc40c9c6f676f654fca11694c0a5cc671408ccb25e615daa9ab",
+          "className": "lucide-user",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["person"]
+        }
+      }
+    },
+    {
+      "iconName": "person-2",
+      "selectedSourceName": "users-round",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/users-round.svg",
+        "sha256": "eb8ba1bd6ea2d4ebf0dd18ee2c60581dd7eb2f4dff97b564b0c0c66fab58ff38"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "person-2.svg",
+          "sha256": "2acf6cd5d0fce95ba4d78299b464926c35f6e811170d36c39c55ab7a783c254d",
+          "className": "lucide-users-round",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["person-2"]
+        }
+      }
+    },
+    {
+      "iconName": "person-3",
+      "selectedSourceName": "person-3",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/person-3.svg",
+        "sha256": "822b3bb37720fc9a74f8d9a20bfc5d32a32fc804052c80793264dced8feda108"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "person-3.svg",
+          "sha256": "d39e2e85df806e3269461059346d2eaf8867712780c10258cab4e2a7be4068ba",
+          "className": "lucide-person-3",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["person-3"]
+        }
+      }
+    },
+    {
+      "iconName": "person-circle",
+      "selectedSourceName": "circle-user-round",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-user-round.svg",
+        "sha256": "7a0436527739b5be11e58ed652936c996f0c56366c72d00b17ce820ba96fde11"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "person-circle.svg",
+          "sha256": "ef09c2a4fad1412b89a86833411e0068650f49096df02d471015c90177dcc366",
+          "className": "lucide-circle-user-round",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["person-circle"]
+        }
+      }
+    },
+    {
+      "iconName": "phone",
+      "selectedSourceName": "smartphone",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/smartphone.svg",
+        "sha256": "28fdb0558665dae1aaada3e48988c783c6833fbbb61ba8df6fd54fb339cbaf9a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "phone.svg",
+          "sha256": "e41fa81c963fd99133639fe63d4a889550078e25295586ef08fd5a303c1d58ca",
+          "className": "lucide-smartphone",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["phone"]
+        }
+      }
+    },
+    {
+      "iconName": "picture-in-picture",
+      "selectedSourceName": "picture-in-picture",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/picture-in-picture.svg",
+        "sha256": "8f9cea8c4c8250cd85c9b146a63a0c7978ca3b9d95d678ada33076f708d289e0"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "picture-in-picture.svg",
+          "sha256": "5ef997c1ea2900b3f2c5dc9edeafa4afbeb82c20dc82c71b70f293d6eada4cbf",
+          "className": "lucide-picture-in-picture",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["picture-in-picture"]
+        }
+      }
+    },
+    {
+      "iconName": "pie-chart",
+      "selectedSourceName": "chart-pie",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/chart-pie.svg",
+        "sha256": "59ee55e6fb5f2291c7653570d8080fdc0ec4bf0a143a16511cfefdb7c26862fa"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pie-chart.svg",
+          "sha256": "e609c17f5acfcf747a093e70174f8726a7c227bfea79f6a51c5bb950510a1758",
+          "className": "lucide-chart-pie",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pie-chart"]
+        }
+      }
+    },
+    {
+      "iconName": "pin",
+      "selectedSourceName": "pin",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/pin.svg",
+        "sha256": "568437b35160677cae2b94a720cd03fc552747b7176153fca9eae96244b46f65"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pin.svg",
+          "sha256": "4320d2bd608bc87ba9d771febf3bb013895b406346403c73295671219c595f68",
+          "className": "lucide-pin",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pin"]
+        }
+      }
+    },
+    {
+      "iconName": "pizza-slice",
+      "selectedSourceName": "pizza",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/pizza.svg",
+        "sha256": "81227a251544dc8af771a5a999acde08eeba3948a47c7a540622e7a6d60b7a6b"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pizza-slice.svg",
+          "sha256": "f6874bc4e85b6c605cbabcf8be5dc3a60593614062bd74837f464a17abc84089",
+          "className": "lucide-pizza",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pizza-slice"]
+        }
+      }
+    },
+    {
+      "iconName": "placeholder",
+      "selectedSourceName": "circle-dashed",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-dashed.svg",
+        "sha256": "a60d959bd72dfe9a4f24bc99ef982a7bc7baae330a33542a5b9b0828ad3dc102"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "placeholder.svg",
+          "sha256": "feedf99a624207b1c02dbf1947fb5fd92df10d8e9a400c2ec2c8bba3ef8dc702",
+          "className": "lucide-circle-dashed",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["placeholder"]
+        }
+      }
+    },
+    {
+      "iconName": "play",
+      "selectedSourceName": "play",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/play.svg",
+        "sha256": "e13d24f08a22551a21be2da28f0f9dc144d1320046f8608846fd128ed61e9f64"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "play.svg",
+          "sha256": "e13d24f08a22551a21be2da28f0f9dc144d1320046f8608846fd128ed61e9f64",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["play"],
+          "adjustment": "Uses the existing filled default media-control shape rather than the stroke source."
+        }
+      }
+    },
+    {
+      "iconName": "plug",
+      "selectedSourceName": "plug",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/plug.svg",
+        "sha256": "ead797460198dc2c914088aa26a3d169787eda86f48ce28cb329d03b6919b557"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "plug.svg",
+          "sha256": "288c2888ec751b5297a3f7cccaed50eae0137184618dea19fe4c8b428432774e",
+          "className": "lucide-plug",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["plug"]
+        }
+      }
+    },
+    {
+      "iconName": "plus-circle",
+      "selectedSourceName": "circle-plus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-plus.svg",
+        "sha256": "7442d4d017057aad347798f75e38c9079040f072311af581ac7c0cb017fdc3b5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "plus-circle.svg",
+          "sha256": "d127502945ec47944be5c0ae346f59168640122e9141f67ceb40df28ced8a328",
+          "className": "lucide-circle-plus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["plus-circle"]
+        }
+      }
+    },
+    {
+      "iconName": "plus-minus",
+      "selectedSourceName": "diff",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/diff.svg",
+        "sha256": "29eefd73c76ce881c5788df32f06a9687a989c858c668dc87e20e74ebf037e90"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "plus-minus.svg",
+          "sha256": "360cfbd949911e7b9c0b2e96bad35053bf9b3cb6736cf61475151a606102c7df",
+          "className": "lucide-diff",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["plus-minus"]
+        }
+      }
+    },
+    {
+      "iconName": "pointer",
+      "selectedSourceName": "mouse-pointer-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/mouse-pointer-2.svg",
+        "sha256": "b070a956350b23b00487a104a5326ffcedcfd6d60521ab2dea1c82d44e5a9fb2"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pointer.svg",
+          "sha256": "f43368f29dd3bfc5b441b563162e3ba42136c643163f6479fe74430af3826cf2",
+          "className": "lucide-mouse-pointer-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pointer"]
+        }
+      }
+    },
+    {
+      "iconName": "pointer-stroke",
+      "selectedSourceName": "mouse-pointer-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/mouse-pointer-2.svg",
+        "sha256": "b070a956350b23b00487a104a5326ffcedcfd6d60521ab2dea1c82d44e5a9fb2"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pointer-stroke.svg",
+          "sha256": "f43368f29dd3bfc5b441b563162e3ba42136c643163f6479fe74430af3826cf2",
+          "className": "lucide-mouse-pointer-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pointer-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "priority-high",
+      "selectedSourceName": "priority-high",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/priority-high.svg",
+        "sha256": "2e20a5b75d095c0708acc8671540c6efc04090ed57ca3982eb75e0da293773b1"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "priority-high.svg",
+          "sha256": "90990327996ecf36667889f5fc779df972eba2543cf8aa2c7c9057db0f337325",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["priority-high"],
+          "adjustment": "Replaced with the reviewed custom source for this Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "priority-low",
+      "selectedSourceName": "priority-low",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/priority-low.svg",
+        "sha256": "274ccdc4c9eea3e4ac14c8934e0fe52423a07dc3b82aeda13f0d5a5c61637f5f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "priority-low.svg",
+          "sha256": "a0d6e0b51d49b50fc1e75200fe989657030b82cd2df60529b0ff30a652ab6847",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["priority-low"],
+          "adjustment": "Replaced with the reviewed custom source for this Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "priority-medium",
+      "selectedSourceName": "priority-medium",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/priority-medium.svg",
+        "sha256": "cf087bb43a52e4def11b259f390457a063da12589a9ff9841ece54c4d16e7ce3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "priority-medium.svg",
+          "sha256": "173d348d4389fefaca4a45f684918546cb708c721e201796df9700d593bcf6df",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["priority-medium"],
+          "adjustment": "Replaced with the reviewed custom source for this Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "projector",
+      "selectedSourceName": "projector",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/projector.svg",
+        "sha256": "82712ec8514fd67a0699657e2c45d2e4ae68877362327efe7b7bbc25e3477914"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "projector.svg",
+          "sha256": "154b2d328b6bf98009c4c559fb03fcb9827d39343137d7012e20b1fc6fdcb613",
+          "className": "lucide-projector",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["projector"]
+        }
+      }
+    },
+    {
+      "iconName": "pull-close",
+      "selectedSourceName": "git-pull-request-closed",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-pull-request-closed.svg",
+        "sha256": "7d077516400808912fb903576f5d4961faed35dee38f339a45ca6efa8d242a20"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pull-close.svg",
+          "sha256": "36db1c64343f0cf328cedeecf5f9a8435f3697433e835e8d6fdea621c4934020",
+          "className": "lucide-git-pull-request-closed",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pull-close"]
+        }
+      }
+    },
+    {
+      "iconName": "pull-draft",
+      "selectedSourceName": "git-pull-request-draft",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-pull-request-draft.svg",
+        "sha256": "9bf600fac058d1b925fc49561e4f83986e8462efaf8c81053acdac3e16058ce9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pull-draft.svg",
+          "sha256": "35f66424c980ab1586f47b4dcee0f65f1ecf024b54b9e3acd9ced973c8aa2248",
+          "className": "lucide-git-pull-request-draft",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pull-draft"]
+        }
+      }
+    },
+    {
+      "iconName": "pull-open",
+      "selectedSourceName": "git-pull-request-arrow",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/git-pull-request-arrow.svg",
+        "sha256": "6e410cd0900f7d38bf019752e6171665d24708815c93880c0fb7599ddba3c2a9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pull-open.svg",
+          "sha256": "15da3276e3271a2f21573600d9d5acb4ebfc3bc6adadf408358dc653df8368f9",
+          "className": "lucide-git-pull-request-arrow",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pull-open"]
+        }
+      }
+    },
+    {
+      "iconName": "pulse",
+      "selectedSourceName": "activity",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/activity.svg",
+        "sha256": "47d2958088baf62e3419d6efb1d586aa99aca9d1c7303bd75a068e01f73207c1"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "pulse.svg",
+          "sha256": "f46c761e91cb5f743998be7556cb60d734838307cd33b1021b3ae4c533d0fbdf",
+          "className": "lucide-activity",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["pulse"]
+        }
+      }
+    },
+    {
+      "iconName": "puzzle-piece",
+      "selectedSourceName": "puzzle",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/puzzle.svg",
+        "sha256": "5e05247ef728f8bf34217ae501bac76efdf8064de7535ddf8da8bdf7547953b3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "puzzle-piece.svg",
+          "sha256": "25bc6fb6bb473b55e1f96cb793431dc9fd567a51cf7d54ba98728152f87feb2f",
+          "className": "lucide-puzzle",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["puzzle-piece"]
+        }
+      }
+    },
+    {
+      "iconName": "question-mark-circle",
+      "selectedSourceName": "circle-question-mark",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/question-mark-circle.svg",
+        "sha256": "1bc8751278bccc96d23a248fc76be6395430287d6fb97f1d5a243ddda7983416"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "question-mark-circle.svg",
+          "sha256": "1bc8751278bccc96d23a248fc76be6395430287d6fb97f1d5a243ddda7983416",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["question-mark-circle"],
+          "adjustment": "Uses the existing filled status/default shape for component status rendering."
+        }
+      }
+    },
+    {
+      "iconName": "question-mark-circle-stroke",
+      "selectedSourceName": "circle-question-mark",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/circle-question-mark.svg",
+        "sha256": "0a658f9d1451a37517420e109705d603fabc182f1218006ce7ceea06a567a189"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "question-mark-circle-stroke.svg",
+          "sha256": "ef1c302b57ba608aef20e36b1350cc94ee91777b1fa0e440b62f5ff58a781e58",
+          "className": "lucide-circle-question-mark",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["question-mark-circle-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "rectangle-group",
+      "selectedSourceName": "layout-panel-top",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/layout-panel-top.svg",
+        "sha256": "0eef338e0e640ade779cbaf1cc9cb76ef9ec6aed3255e815671fcb806816a9e3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "rectangle-group.svg",
+          "sha256": "7a03077184b8ad7b63f04bb2e704589367f030de46c7c57bdb3c081cd032b36b",
+          "className": "lucide-layout-panel-top",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["rectangle-group"]
+        }
+      }
+    },
+    {
+      "iconName": "rectangle-stack-horizontal",
+      "selectedSourceName": "gallery-horizontal-end",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/gallery-horizontal-end.svg",
+        "sha256": "88d23bb88496c98f42c568c59da630a58430c666243ffdbbdb38f1427544f9f0"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "rectangle-stack-horizontal.svg",
+          "sha256": "0e05bbc45139957e4ca2938c4121461f4202854011536e6b965ac4fa75bb096f",
+          "className": "lucide-gallery-horizontal-end",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["rectangle-stack-horizontal"]
+        }
+      }
+    },
+    {
+      "iconName": "rectangle-stack-vertical",
+      "selectedSourceName": "gallery-vertical-end",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/gallery-vertical-end.svg",
+        "sha256": "b256b7a7ee08e0172ed3af1bf608d63ebb84a602430fee4279424b60c3659009"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "rectangle-stack-vertical.svg",
+          "sha256": "4a5d57f69a221b3745dd0cd330b6b09b07b6f3286654b557328e07deb881a4fc",
+          "className": "lucide-gallery-vertical-end",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["rectangle-stack-vertical"]
+        }
+      }
+    },
+    {
+      "iconName": "redo",
+      "selectedSourceName": "redo",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/redo.svg",
+        "sha256": "88431227b9b0e6a5ec55430d1b462d3e1817c5049960135675adb883d4fdb6b6"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "redo.svg",
+          "sha256": "bd331fed5411694e02a962657c6db55d162e493a95fd48e75e804a481267d835",
+          "className": "lucide-redo",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["redo"]
+        }
+      }
+    },
+    {
+      "iconName": "refresh",
+      "selectedSourceName": "refresh-cw",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/refresh-cw.svg",
+        "sha256": "c658b814f534565a32f79d6d5d2803f2ad259764c5c36ac742c08dd4f6ed2946"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "refresh.svg",
+          "sha256": "096b705e633a4cc9113a90a57d3c776f47b9d42caa1f2918557b443b086adf22",
+          "className": "lucide-refresh-cw",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["refresh"]
+        }
+      }
+    },
+    {
+      "iconName": "reply",
+      "selectedSourceName": "reply",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/reply.svg",
+        "sha256": "1921d2d1b484f7a60bc8ce60fb1093618437c183432b86e44d8a9cebf74a43a5"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "reply.svg",
+          "sha256": "173932b90a1363506315158e5315a3a3200d567348f1c1f5f2d096adc6ab718d",
+          "className": "lucide-reply",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["reply"]
+        }
+      }
+    },
+    {
+      "iconName": "rewind",
+      "selectedSourceName": "rewind",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/rewind.svg",
+        "sha256": "c7a3f03d2aa7d0e7742deabd3d3a758b31f8b4a2b8daafb940ef39c190fc5958"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "rewind.svg",
+          "sha256": "c7a3f03d2aa7d0e7742deabd3d3a758b31f8b4a2b8daafb940ef39c190fc5958",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["rewind"],
+          "adjustment": "Uses the existing filled default shape for component rendering."
+        }
+      }
+    },
+    {
+      "iconName": "rewind-10",
+      "selectedSourceName": "rewind-10",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/rewind-10.svg",
+        "sha256": "fd9926b88cf86862d09e3b4760b4190b9cf24d492d10316089aa7e46437aa18a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "rewind-10.svg",
+          "sha256": "b2a43c17c49b9f679d9f513bf76b8ad8a0604ebedb2e55a5ed10549a88294c1a",
+          "className": "lucide-rewind-10",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["rewind-10"]
+        }
+      }
+    },
+    {
+      "iconName": "rocketship",
+      "selectedSourceName": "rocket",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/rocket.svg",
+        "sha256": "d9d4ffd658b07006ac3b0c9d891559799f7acf48ae95db54fb9670cc1f91f576"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "rocketship.svg",
+          "sha256": "d782a36ac50d540ef3a1c55794ae310e912f69ca64c6269e2fb574b838b38058",
+          "className": "lucide-rocket",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["rocketship"]
+        }
+      }
+    },
+    {
+      "iconName": "running",
+      "selectedSourceName": "running",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/running.svg",
+        "sha256": "0788fc579a0fe39e1acb4fcfbfafe3adcd3a8bbb6186d8bd746469e87b4407c9"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "running.svg",
+          "sha256": "7928916cfcd372def0fc4a2f43ca53ee42f78399c43c750fa5d6abc460af3a4b",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["running"],
+          "adjustment": "Replaced with the reviewed custom source for this Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "scale",
+      "selectedSourceName": "scale",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/scale.svg",
+        "sha256": "c907217f885b15a521d651330495f909741b4281244120ddec00c961824f7c40"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "scale.svg",
+          "sha256": "a38df5f04e22ffd00fd7d71db20a2c44002df8d89cb61bf2f8d4dcb8e76eff59",
+          "className": "lucide-scale",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["scale"]
+        }
+      }
+    },
+    {
+      "iconName": "scissors",
+      "selectedSourceName": "scissors",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/scissors.svg",
+        "sha256": "a94cdee5f7b76074182e20dbeaae56960cf1908c449a1c86498e9788c818e2e3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "scissors.svg",
+          "sha256": "bb2a1a5e99e8e29965414edacc189aa0103d9b12e75f6509faa1111c841dc0d2",
+          "className": "lucide-scissors",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["scissors"]
+        }
+      }
+    },
+    {
+      "iconName": "search",
+      "selectedSourceName": "search",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/search.svg",
+        "sha256": "0175c77e97da7eee4a30e3b2231b41f871ba4407e5c9be70abf6ef1d48cfc0fe"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "search.svg",
+          "sha256": "83860e14dce417b2d91c33c7fb2674f4ba501239c31f002529e8a1ad350d6f75",
+          "className": "lucide-search",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["search"]
+        }
+      }
+    },
+    {
+      "iconName": "sensor",
+      "selectedSourceName": "rss",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/rss.svg",
+        "sha256": "7d51933a8ed808c1fabc8caf08eaa64dbf2a9279880417ea1804f7c8e386e13a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "sensor.svg",
+          "sha256": "4791a1dbf353d5f4ad58878a9851da3748b26023799bf61bb008cafa3456e53a",
+          "className": "lucide-rss",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["sensor"]
+        }
+      }
+    },
+    {
+      "iconName": "server",
+      "selectedSourceName": "hard-drive",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/hard-drive.svg",
+        "sha256": "f839ea504f391eb65af12f99660a2b65d52339333245d2a92552833eedc3e125"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "server.svg",
+          "sha256": "8865829dd548b4d4ee27a5631a2d1d5b9402cc841194d379435916fbcedd7d31",
+          "className": "lucide-hard-drive",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["server"]
+        }
+      }
+    },
+    {
+      "iconName": "server-stack",
+      "selectedSourceName": "server",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/server.svg",
+        "sha256": "4aaaab24e62fc4f4ac42a2d4af8f9e9657a8a6d265e81d1d551350ba544c42c7"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "server-stack.svg",
+          "sha256": "68c90f7a85c5d3f5c5cffbb0ee601baa96094b09ffcc4c958a99f39ee8678d95",
+          "className": "lucide-server",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["server-stack"]
+        }
+      }
+    },
+    {
+      "iconName": "shapes",
+      "selectedSourceName": "shapes",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/shapes.svg",
+        "sha256": "74d65e2cb7cc0c9fc6ba5e3bcc7fa1b78e12660a5cc3896cb54ae5e2d1fe314f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "shapes.svg",
+          "sha256": "642387d7c409bd433b0739a3d93d89656b20b13b1d2f3026407fe195a4b2cfb7",
+          "className": "lucide-shapes",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["shapes"]
+        }
+      }
+    },
+    {
+      "iconName": "share",
+      "selectedSourceName": "share-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/share-2.svg",
+        "sha256": "e9de0c91bf11fb4acea3b9162183739e08787204511b3e5d247933c95a82be72"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "share.svg",
+          "sha256": "129a898a520eda35dee9dbc177139b3b52606869cac668fe223e8e443921d33a",
+          "className": "lucide-share-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["share"]
+        }
+      }
+    },
+    {
+      "iconName": "signal",
+      "selectedSourceName": "radio",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/radio.svg",
+        "sha256": "46868b22e08684c776ac513dfe2e3d973e123594c607304c0bf30932baf0b1cb"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "signal.svg",
+          "sha256": "7c147a63e83f551ee680bd3acd72bd45224e6fbe13a99b82c3c762daffb32895",
+          "className": "lucide-radio",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["signal"]
+        }
+      }
+    },
+    {
+      "iconName": "signal-slash",
+      "selectedSourceName": "radio-off",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/radio-off.svg",
+        "sha256": "bd3f1a329835d1a550e395875b24642b9bb6902c616f1a81bc9ce4f29c2abf23"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "signal-slash.svg",
+          "sha256": "92b1589e7a95da32ae2624e5cbdd4f33306ad5bc1eb960ddf8727f608f03d962",
+          "className": "lucide-radio-off",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["signal-slash"]
+        }
+      }
+    },
+    {
+      "iconName": "signpost",
+      "selectedSourceName": "milestone",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/milestone.svg",
+        "sha256": "bca764556d742823a18f7931cd5486ae7086e7f38623c9081f40ea1bff3e17e7"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "signpost.svg",
+          "sha256": "d98df4e91a94abb2a6a649ea410ca44f4278b9e5d20c1892e805fd1a62bda1cd",
+          "className": "lucide-milestone",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["signpost"]
+        }
+      }
+    },
+    {
+      "iconName": "sort-ascending",
+      "selectedSourceName": "sort-asc",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/sort-asc.svg",
+        "sha256": "2aee1cf7004f0694570c457bd73456cea7cb4302b15810d6756c4549337d5997"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "sort-ascending.svg",
+          "sha256": "a38db3d0e057a9ba9a766a4b2e8064efc1a07128a6bfbe5d5a4758b00166d3d4",
+          "className": "lucide-sort-asc",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["sort-ascending"]
+        }
+      }
+    },
+    {
+      "iconName": "sort-descending",
+      "selectedSourceName": "sort-desc",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/sort-desc.svg",
+        "sha256": "bb52edef98348ac8cc51e1ac887d753ca43ee8c679e3556f08636700bde48bf8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "sort-descending.svg",
+          "sha256": "076465d69e3ddf854909a454b9570456906102f1a0b9c7fd01b0c6314fd97a0c",
+          "className": "lucide-sort-desc",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["sort-descending"]
+        }
+      }
+    },
+    {
+      "iconName": "soundwave",
+      "selectedSourceName": "audio-lines",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons custom",
+        "file": "package/icons/audio-lines.svg",
+        "sha256": "db9695f4c93720bf2164a18cee2b1a8fc5b80d73709f21e930a3a2027e9d3e6c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "soundwave.svg",
+          "sha256": "4365b47f279a54a5f7f4bcf590966ed9d820e0ef1a9f570188ebf8a3c68d6771",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["soundwave"],
+          "adjustment": "Replaced with the reviewed audio-lines source for the soundwave Elements icon."
+        }
+      }
+    },
+    {
+      "iconName": "sparkles",
+      "selectedSourceName": "sparkles",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/sparkles.svg",
+        "sha256": "f86cd4cb62cec69d96e19c48e0ede8d2be4a7a0ce259aa9c1ca74a6bab6aba11"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "sparkles.svg",
+          "sha256": "be7b62a8d0c2b11624f10a40c4fb3931fce3a5ca40aff384d0a897f2931c60ea",
+          "className": "lucide-sparkles",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["sparkles"]
+        }
+      }
+    },
+    {
+      "iconName": "split-horizontal",
+      "selectedSourceName": "square-split-vertical",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/square-split-vertical.svg",
+        "sha256": "9077ad4f94ab0cc973df63c0794879262ff4088b1bb4279625cc5798e9d282a8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "split-horizontal.svg",
+          "sha256": "f052ea1e24229d0ed3e05e5f61026290b4b66110c77352c9a8c51435b0c0e277",
+          "className": "lucide-square-split-vertical",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["split-horizontal"]
+        }
+      }
+    },
+    {
+      "iconName": "split-none",
+      "selectedSourceName": "square",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/square.svg",
+        "sha256": "c34644922cad2787791ebd2ec4b3bf76e0995313bd51aef9d9a4919ea3320b35"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "split-none.svg",
+          "sha256": "dfde4e034f76be14e53f55ab43e0b33b1b46dda7edf805fb102d223c4b6e4f06",
+          "className": "lucide-square",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["split-none"]
+        }
+      }
+    },
+    {
+      "iconName": "split-vertical",
+      "selectedSourceName": "square-split-horizontal",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/square-split-horizontal.svg",
+        "sha256": "84310621d3d6323572699ccff99799929d21b77cf52e852ce01e27e5a2ed660f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "split-vertical.svg",
+          "sha256": "c66245f9c662e1277ca6b2d6d315748d3e77c2f1420d478f32e1d788bbf6cf83",
+          "className": "lucide-square-split-horizontal",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["split-vertical"]
+        }
+      }
+    },
+    {
+      "iconName": "star",
+      "selectedSourceName": "star",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/star.svg",
+        "sha256": "37675ef37f1094e06682bee7e97b1589d32920784d55d3e56329a72f771e887d"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "star-stroke.svg",
+          "sha256": "9b6012c02b03ea4ac2bfa541fe74753019d19a7c46c3e05ee41f3cbd9c9aeb0b",
+          "className": "lucide-star",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["star-stroke"]
+        }
+      }
+    },
+    {
+      "iconName": "star-half",
+      "selectedSourceName": "star-half",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/star-half.svg",
+        "sha256": "1e24618a4506fe853b2962d6cab7242f12b39443fd0af520c6182d07c513d6a8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "star-half.svg",
+          "sha256": "e74b46530f19fcfb79a52d106c3187569f416553504b9f7f740c39ae123efa9a",
+          "className": "lucide-star-half",
+          "generatedFrom": "reviewed-migration-adjusted",
+          "publicNames": ["star-half"],
+          "adjustment": "Uses a currentColor half fill with split clipped strokes so star-rating renders the filled half edge in the active color and the empty half edge in the inactive color."
+        }
+      }
+    },
+    {
+      "iconName": "start",
+      "selectedSourceName": "chevron-first",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/chevron-first.svg",
+        "sha256": "adaaf3a961438491f065aa54733da1650e26d2b8a8037ddb190b0ff4c988691f"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "start.svg",
+          "sha256": "5450f9c0be7e4448ed124549774d1f131398861667479b2bfe9c2a62ca9060e0",
+          "className": "lucide-chevron-first",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["start"]
+        }
+      }
+    },
+    {
+      "iconName": "status-offline",
+      "selectedSourceName": "radio-off",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/radio-off.svg",
+        "sha256": "bd3f1a329835d1a550e395875b24642b9bb6902c616f1a81bc9ce4f29c2abf23"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "status-offline.svg",
+          "sha256": "92b1589e7a95da32ae2624e5cbdd4f33306ad5bc1eb960ddf8727f608f03d962",
+          "className": "lucide-radio-off",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["status-offline"]
+        }
+      }
+    },
+    {
+      "iconName": "status-online",
+      "selectedSourceName": "radio",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/radio.svg",
+        "sha256": "46868b22e08684c776ac513dfe2e3d973e123594c607304c0bf30932baf0b1cb"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "status-online.svg",
+          "sha256": "7c147a63e83f551ee680bd3acd72bd45224e6fbe13a99b82c3c762daffb32895",
+          "className": "lucide-radio",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["status-online"]
+        }
+      }
+    },
+    {
+      "iconName": "stop",
+      "selectedSourceName": "square",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/stop.svg",
+        "sha256": "f102697a63292f0209fd6594850c2a5ed286ae38cd41eb2d44794772cf301d94"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "stop.svg",
+          "sha256": "69fffffacf12c7a215d3d10bd13d04a43c3f42b3857bcd212db4a1816695ef91",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["stop"],
+          "adjustment": "Uses the existing filled default shape for component rendering."
+        }
+      }
+    },
+    {
+      "iconName": "stop-sign",
+      "selectedSourceName": "octagon-minus",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/octagon-minus.svg",
+        "sha256": "feb913fe7ef4b05451301725a90d3d859de5e233e7946b0ffa78caa609ddd502"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "stop-sign.svg",
+          "sha256": "34efbcc6431021926eb50a8467f584ae62308ef5b318688691fc69ff17cd99db",
+          "className": "lucide-octagon-minus",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["stop-sign"]
+        }
+      }
+    },
+    {
+      "iconName": "stopwatch",
+      "selectedSourceName": "timer",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/timer.svg",
+        "sha256": "b0611b03de9c9b5832690c50ab64a184d53f2bf7c6e62c7725a06110c094ab30"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "stopwatch.svg",
+          "sha256": "be03a71f3d2bdd654433bdbe6e930e3c06b973184b645044460acf6dc7ed8edd",
+          "className": "lucide-timer",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["stopwatch"]
+        }
+      }
+    },
+    {
+      "iconName": "strikethrough",
+      "selectedSourceName": "strikethrough",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/strikethrough.svg",
+        "sha256": "3e037c606ab1184baf237d02d8ea12bd7bf1c14d188447dd8f7ce0c3a133f4ee"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "strikethrough.svg",
+          "sha256": "561b0b28da29656024e0fabd88a8e42aa52ff666b04463492bf598e0dd5fdf6c",
+          "className": "lucide-strikethrough",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["strikethrough"]
+        }
+      }
+    },
+    {
+      "iconName": "sun",
+      "selectedSourceName": "sun",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/sun.svg",
+        "sha256": "662538c04dc4f3fc8d69bcc8738f5c0257ad13e8b924ab98177f984be95f8185"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "sun.svg",
+          "sha256": "87c86cadf7e8ca865a6ad68ce6a62dfff40226d50929ad3219aa7f0eaa06b1b3",
+          "className": "lucide-sun",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["sun"]
+        }
+      }
+    },
+    {
+      "iconName": "swatch",
+      "selectedSourceName": "swatch-book",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/swatch-book.svg",
+        "sha256": "a311c62d3902f9831560f804a74bed0e8a8bee456c75b6de20dc6a107621feb7"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "swatch.svg",
+          "sha256": "6bbca080863a90c75314e71f27ec77b5a077ea00ab30b17adedc4793a81c3c7e",
+          "className": "lucide-swatch-book",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["swatch"]
+        }
+      }
+    },
+    {
+      "iconName": "switch",
+      "selectedSourceName": "arrow-up-down",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/arrow-up-down.svg",
+        "sha256": "88ba6c4fb92d2fb2f43631eb021bb2345821ce164e6bf09162682a0e876467ef"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "switch.svg",
+          "sha256": "d37b4cb2d7b7b0c990c473b97b07bd5ee8c38f5e8b9fb769e7b1cf11920972fe",
+          "className": "lucide-arrow-up-down",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["switch"]
+        }
+      }
+    },
+    {
+      "iconName": "switch-apps",
+      "selectedSourceName": "grip",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/grip.svg",
+        "sha256": "7c76600c37e3153799d11b726978a9d67ca41402257fe7d37e41a20a28570422"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "switch-apps.svg",
+          "sha256": "c6221571a34132574274701c184b19b545ad5b409637602619d7f6ce9898ddff",
+          "className": "lucide-grip",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["switch-apps"]
+        }
+      }
+    },
+    {
+      "iconName": "table",
+      "selectedSourceName": "table-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/table-2.svg",
+        "sha256": "b0bfd3737b91f751b516d13fd5f9b138ce6e02a64196a241fc8fc608f7ec7c06"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "table.svg",
+          "sha256": "2131a483ace6e370151dc482912570ba7eff2b53527872ffe707984478556460",
+          "className": "lucide-table-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["table"]
+        }
+      }
+    },
+    {
+      "iconName": "tag",
+      "selectedSourceName": "tag",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/tag.svg",
+        "sha256": "44c51e7b862edca303a9003e022bd92fa5c914eef07a875b8a9831c67d51de06"
+      },
+      "outputs": {}
+    },
+    {
+      "iconName": "task",
+      "selectedSourceName": "square-check",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/square-check.svg",
+        "sha256": "8951b2dc5e4cdb7c40ad119a0e3759051fd554da378d65d75af108b46939a253"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "task.svg",
+          "sha256": "d30d9d8746ff4ceda21d355e082ac02e9c579b56b402545431f1c8874cbf064a",
+          "className": "lucide-square-check",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["task"]
+        }
+      }
+    },
+    {
+      "iconName": "telescope",
+      "selectedSourceName": "telescope",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/telescope.svg",
+        "sha256": "ce108ac5c9eb53284edd29ec595391570811bb8bce5b4deaaa26829a62206fdf"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "telescope.svg",
+          "sha256": "19ad87aeb0274f65d8eb86eda53aa37b4b1f7e215504af17e5090c8bc6ffeacd",
+          "className": "lucide-telescope",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["telescope"]
+        }
+      }
+    },
+    {
+      "iconName": "template",
+      "selectedSourceName": "layout-template",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/layout-template.svg",
+        "sha256": "75a304400f07ef43f270c1b2677418cf65f15d627abaace17f7643d961046834"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "template.svg",
+          "sha256": "725360065a3823e3bf5c7ff7fc006054ad0467d02f5f04e0cdfd8c8e31b7e6d8",
+          "className": "lucide-layout-template",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["template"]
+        }
+      }
+    },
+    {
+      "iconName": "terminal",
+      "selectedSourceName": "terminal-square",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/terminal-square.svg",
+        "sha256": "d69b96214e25aa9f30132a03ebd40f2bcc39ac6a7085d6e46dac313e929384f3"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "terminal.svg",
+          "sha256": "830a49fe03a22815f94c42c26e428e7eebe8581777d4adc385e42d0880b9d591",
+          "className": "lucide-terminal-square",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["terminal"]
+        }
+      }
+    },
+    {
+      "iconName": "thumb",
+      "selectedSourceName": "thumbs-up",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/thumbs-up.svg",
+        "sha256": "6734ed0b44ac8a5a077246171ec58d1a33fbe050bdd7c4938fb7804b3d0f1955"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "thumb-stroke.svg",
+          "sha256": "f12e5cb4e5ef4711d09d8fb02313346b512390fb120b24f82d02b0280039477f",
+          "className": "lucide-thumbs-up",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["thumb-stroke"]
+        },
+        "legacyDefault": {
+          "file": "thumb.svg",
+          "sha256": "b41803e5502daffe5ae949e526b90d810d5e84b1d15abefdae550baf13857524",
+          "generatedFrom": "legacy-filled-default-adjusted",
+          "adjustment": "Replaced mask-based filled default with a direct currentColor silhouette so theme color is stable.",
+          "publicNames": ["thumb"]
+        }
+      }
+    },
+    {
+      "iconName": "traffic-cone",
+      "selectedSourceName": "traffic-cone",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/traffic-cone.svg",
+        "sha256": "68b92e8ca2a698138a868b381462fc6abdf65b6d710ffb2d4a7a3cd0e3155100"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "traffic-cone.svg",
+          "sha256": "5b6ae715cc89f4af394120e539de091ce7f44033465bdbe5fa34c44587deec01",
+          "className": "lucide-traffic-cone",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["traffic-cone"]
+        }
+      }
+    },
+    {
+      "iconName": "transparent-box",
+      "selectedSourceName": "transparent-box",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/transparent-box.svg",
+        "sha256": "d2db26d6152e2a36ce5af986ad752fce740aee31cb59060523145e91b0d20ada"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "transparent-box.svg",
+          "sha256": "ba140fbfdf9de3ab4fe48c2a6045f7bd70eba3a73386a1b79c8c24b3093abcb1",
+          "className": "lucide-transparent-box",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["transparent-box"]
+        }
+      }
+    },
+    {
+      "iconName": "trend-down",
+      "selectedSourceName": "trending-down",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/trending-down.svg",
+        "sha256": "d325355dc5f12ff9176214bf4ec236e8fb238ee31d4b3f1c812b2c72f9da1654"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "trend-down.svg",
+          "sha256": "7b0d763d69842106ddb11d331152815c27d0a2d039b92e2858406d11bb668844",
+          "className": "lucide-trending-down",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["trend-down"]
+        }
+      }
+    },
+    {
+      "iconName": "trend-up",
+      "selectedSourceName": "trending-up",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/trending-up.svg",
+        "sha256": "e966237070dae73f3d7295cb4b10a3de8b4734dc08494eef1916f7375e3b2ecc"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "trend-up.svg",
+          "sha256": "59f7ffecb9c41673bd11130165822fe1f4c079b83357e91a33e76629d781f8c0",
+          "className": "lucide-trending-up",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["trend-up"]
+        }
+      }
+    },
+    {
+      "iconName": "trophy",
+      "selectedSourceName": "trophy",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/trophy.svg",
+        "sha256": "a2a9e4b1c63d78cbee35aab0b3c7df7b5c42ef8cc254b797c712af572aa5fe48"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "trophy.svg",
+          "sha256": "de52f5fc352413b848175c7bc52f13a76792619882e8f0df5017f059842f7966",
+          "className": "lucide-trophy",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["trophy"]
+        }
+      }
+    },
+    {
+      "iconName": "truck",
+      "selectedSourceName": "truck",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/truck.svg",
+        "sha256": "231ab42af70fe5b8a955fe933c0e8590c955f2387afd3058169ae1c64872d20c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "truck.svg",
+          "sha256": "eb6457af603b577bfeb73ad33baa1fe4961da881aa749ca5384a24d76c8f6ff2",
+          "className": "lucide-truck",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["truck"]
+        }
+      }
+    },
+    {
+      "iconName": "typography",
+      "selectedSourceName": "type",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/type.svg",
+        "sha256": "5fb2d9ae39ea559434fd4adf2697dd745a01f22b4b7a55649053f3650887ffb8"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "typography.svg",
+          "sha256": "71a70de89bcbf4a6cfee158677dcdf8a1657df6f864abd63a8bd026bbe02d32a",
+          "className": "lucide-type",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["typography"]
+        }
+      }
+    },
+    {
+      "iconName": "undo",
+      "selectedSourceName": "undo",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/undo.svg",
+        "sha256": "5a894fa446ccf071c3644d22a2f5d058d01a3d653c73bdaf339c6d06c7405959"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "undo.svg",
+          "sha256": "3d74c49b1c687b006755fcabfc4f7e71ce3e04359cba8eb66e9aaf7aca09c86d",
+          "className": "lucide-undo",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["undo"]
+        }
+      }
+    },
+    {
+      "iconName": "unlock",
+      "selectedSourceName": "lock-open",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/lock-open.svg",
+        "sha256": "0d954b62c207cfa22f02afcbd8d0a730e19c276899091f83cdb5c561c68a50bc"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "unlock.svg",
+          "sha256": "b8b37335146a1af16526cc3b651e6cfa51ee79439359e9b300eeb4b4af43eb5c",
+          "className": "lucide-lock-open",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["unlock"]
+        }
+      }
+    },
+    {
+      "iconName": "upload",
+      "selectedSourceName": "upload",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/upload.svg",
+        "sha256": "6b21a33569bdac859fb2b1828f4f3f9a7088462a2b4676f5d8286739cd2992db"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "upload.svg",
+          "sha256": "07a23353cc91aac91b1dd2b4a8ca57253409142f30d02ed1bed629283480cdf5",
+          "className": "lucide-upload",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["upload"]
+        }
+      }
+    },
+    {
+      "iconName": "video-camera",
+      "selectedSourceName": "video",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/video.svg",
+        "sha256": "7a84ad077a7a247d657df20e24a53bb68664c82648408d8cafddb502d5ef0fce"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "video-camera.svg",
+          "sha256": "c1fac636435f12bb43b207d911cdbe0c6b1e9b6ead558f6191bc3c13ca18be02",
+          "className": "lucide-video",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["video-camera"]
+        }
+      }
+    },
+    {
+      "iconName": "view-as-grid",
+      "selectedSourceName": "grid-3x3",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/grid-3x3.svg",
+        "sha256": "94fdb2ac4bedde769f9d81bbffda1f6c226a6fdee8d5e9c529382204ca988940"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "view-as-grid.svg",
+          "sha256": "45692a30dc46e290d2279e5f4232aade66d20012f26669bd0d5544b9b4ced154",
+          "className": "lucide-grid-3x3",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["view-as-grid"]
+        }
+      }
+    },
+    {
+      "iconName": "volume",
+      "selectedSourceName": "volume-2",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/volume-2.svg",
+        "sha256": "7756053f26b55601f8d6120000d584cf8110db8d4e4982f455adcbc1738ebb3c"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "volume.svg",
+          "sha256": "783c8d06c719bc9f41021503cb592cee1599f559169c27bde0b8f28b62ade9b1",
+          "className": "lucide-volume-2",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["volume"]
+        }
+      }
+    },
+    {
+      "iconName": "volume-muted",
+      "selectedSourceName": "volume-x",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/volume-x.svg",
+        "sha256": "10fbe8f4cacb6d18816e7ba3dc0ba8f30b50dc4b974ea95321e8d54744a8f677"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "volume-muted.svg",
+          "sha256": "01dd1b373bb7f619ee5be62260a22e3431c5b006af7d3d2d13eb12942a445f07",
+          "className": "lucide-volume-x",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["volume-muted"]
+        }
+      }
+    },
+    {
+      "iconName": "wifi",
+      "selectedSourceName": "wifi",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/wifi.svg",
+        "sha256": "5c83222c6e407e94dac41e7d8ffc095a930f76acbabf3c006a9ef862177a27bc"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "wifi.svg",
+          "sha256": "d56b05f0b446576dc8b8c1d8d3461ec8dd35dd7bb074cc180dcb4f3440585c03",
+          "className": "lucide-wifi",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["wifi"]
+        }
+      }
+    },
+    {
+      "iconName": "wrench",
+      "selectedSourceName": "wrench",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/wrench.svg",
+        "sha256": "6c7292d67fe00033388e68272255563d91c90ec8a41c68ea785977d50103bd94"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "wrench.svg",
+          "sha256": "5180bc79131edd7226c4669d3f322a49599bd58ecd19b9cb2815b3e357d936c1",
+          "className": "lucide-wrench",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["wrench"]
+        }
+      }
+    },
+    {
+      "iconName": "x-circle",
+      "selectedSourceName": "circle-x",
+      "source": {
+        "package": "nve-elements-icons legacy filled source",
+        "file": "sources/nve-elements-icons/x-circle.svg",
+        "sha256": "eed36fb1e5c82b296f9c62dddd0d9977c8f6947172bee2f5b977a68d68f0b7b4"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "x-circle.svg",
+          "sha256": "eed36fb1e5c82b296f9c62dddd0d9977c8f6947172bee2f5b977a68d68f0b7b4",
+          "generatedFrom": "legacy-filled-default",
+          "publicNames": ["x-circle"],
+          "adjustment": "Uses the existing filled status/default shape for component status rendering."
+        }
+      }
+    },
+    {
+      "iconName": "zoom-in",
+      "selectedSourceName": "zoom-in",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/zoom-in.svg",
+        "sha256": "51edc315be599ea0277c47a8a3e725746d26230214e18880652f619683f8056a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "zoom-in.svg",
+          "sha256": "dede5d4ebc3bcc12c395f1d80f8e689c8c206a9ac18cbe84184eb358fc1d01ff",
+          "className": "lucide-zoom-in",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["zoom-in"]
+        }
+      }
+    },
+    {
+      "iconName": "zoom-out",
+      "selectedSourceName": "zoom-out",
+      "source": {
+        "package": "lucide-static v1.21.0 package/icons",
+        "file": "package/icons/zoom-out.svg",
+        "sha256": "8b18394c1505050c3423cc06276cf67537a3967797f0abb4ed7d9294de44ac0a"
+      },
+      "outputs": {
+        "stroke": {
+          "file": "zoom-out.svg",
+          "sha256": "98220120545bdccade6c6a5202de84ecc45a6c826f8671c3d001aa79f47e8d62",
+          "className": "lucide-zoom-out",
+          "generatedFrom": "reviewed-migration",
+          "publicNames": ["zoom-out"]
+        }
+      }
+    }
+  ]
+}

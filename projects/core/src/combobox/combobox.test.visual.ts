@@ -6,20 +6,27 @@ import { visualRunner } from '@internals/vite';
 
 describe('combobox visual', () => {
   test('combobox should match visual baseline', async () => {
-    const report = await visualRunner.render('combobox', template());
+    const report = await visualRunner.render('combobox', template(), { waitFor: waitForIcons });
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('combobox should match visual baseline dark theme', async () => {
-    const report = await visualRunner.render('combobox.dark', template('dark'));
+    const report = await visualRunner.render('combobox.dark', template('dark'), { waitFor: waitForIcons });
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
+
+async function waitForIcons(waitForFunction: (...args: unknown[]) => Promise<unknown>) {
+  await waitForFunction(() =>
+    Array.from(document.querySelectorAll('nve-icon')).every(icon => icon.shadowRoot?.querySelector('svg'))
+  );
+}
 
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/combobox/define.js';
+    import '@nvidia-elements/core/icon/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
 
