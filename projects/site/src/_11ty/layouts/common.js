@@ -277,6 +277,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-datetime/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-datetime/">Format Datetime</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-number/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-number/">Format Number</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-relative-time/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-relative-time/">Format Relative Time</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/format-truncate/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-truncate/">Format Truncate</a></nve-tree-node>
     <nve-tree-node expanded>
       <a href="/docs/elements/forms/">Forms</a>
       <nve-tree-node ${data.page.url === '/docs/elements/forms/' ? 'highlighted selected' : ''}><a href="/docs/elements/forms/">Getting Started</a></nve-tree-node>
