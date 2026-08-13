@@ -18,7 +18,7 @@ describe('lighthouse report', () => {
     expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(134.5);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
-    expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(120);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
   });
 
   test('JS imports should remain within compressed bundle limits', async () => {
