@@ -36,6 +36,13 @@ See the searchable [Interactive Icon Catalog](/docs/foundations/iconography/)
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Direction' %}
 
+## Appearance
+
+Set `appearance="solid"` to render the optional solid asset for a named icon. When no `-solid` asset is available,
+the icon renders its outline form. Omit the attribute, or set `appearance="outline"`, to render the outline form.
+
+{% api 'nve-icon', 'property', 'appearance' %}
+
 ## Themes
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Themes' %}
