@@ -1,0 +1,7 @@
+{
+  "src/controller/controller.ts": {
+    "@typescript-eslint/no-unnecessary-type-conversion": {
+      "count": 1
+    }
+  }
+}
