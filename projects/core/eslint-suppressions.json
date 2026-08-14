@@ -1,0 +1,12 @@
+{
+  "src/dialog/dialog.ts": {
+    "@typescript-eslint/no-unnecessary-type-conversion": {
+      "count": 1
+    }
+  },
+  "src/drawer/drawer.ts": {
+    "@typescript-eslint/no-unnecessary-type-conversion": {
+      "count": 1
+    }
+  }
+}

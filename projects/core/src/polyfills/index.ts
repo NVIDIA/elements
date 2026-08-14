@@ -24,7 +24,7 @@ import './custom-state-set.js';
  */
 if (!Element.prototype.toggleAttribute) {
   Element.prototype.toggleAttribute = function (name, force) {
-    const forceBool = force !== void 0 ? !!force : undefined;
+    const forceBool = force !== void 0 ? force : undefined;
 
     if (this.hasAttribute(name)) {
       if (forceBool) {
