@@ -31,6 +31,18 @@ The CLI also can provide API search results withing the terminal.
 nve api.search "badge"
 ```
 
+### API Validation
+
+Check paths or glob patterns, or pass one typed document through standard input. Supplied content defaults to HTML; use `--lang json` with `--filename` for JSON.
+
+```shell
+nve api.validate 'src/**/*.html' package.json --format json
+printf '%s' '<nve-button></nve-button>' | nve api.validate --stdin --format json
+printf '%s' '{}' | nve api.validate --stdin --lang json --filename package.json
+```
+
+Markdown is the default format. JSON returns `ok`, complete summary counts, and diagnostics with locations, severity, rule, suggestion, and whether a fix is available. Errors produce a nonzero exit code; warnings do not. The command always uses the recommended Elements rules. Use `--max-diagnostics` to limit returned findings, and use `--fix` only with path inputs. It respects `.gitignore`, skips `node_modules`, and by default reads at most 200 files, 5 MiB total, and returns 100 diagnostics. It also refuses paths outside the current directory.
+
 Search result output:
 
 ```html
@@ -93,8 +105,8 @@ nve skills.get elements
     <nve-grid-cell>Get documentation for one to five known components or attributes (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve api.template.validate &lt;template&gt;</code></nve-grid-cell>
-    <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*).</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve api.validate [paths..]</code></nve-grid-cell>
+    <nve-grid-cell>Check HTML and JSON files using Elements lint rules.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve api.imports.get &lt;template&gt;</code></nve-grid-cell>

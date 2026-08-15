@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { loadTools, service, tool, jsonSchemaToZod, ToolError, ToolSupport } from './tools.js';
-import type { ToolMethod, ToolOutput, Schema } from './tools.js';
+import type { ToolCli, ToolMethod, ToolOutput, Schema } from './tools.js';
 
 describe('metadata', () => {
   it('should be defined', () => {
@@ -39,6 +39,31 @@ describe('metadata', () => {
     const test = new Test();
     expect((test.method as ToolMethod<number>).metadata.inputSchema).toEqual(inputSchema);
     expect((test.method as ToolMethod<number>).metadata.outputSchema).toEqual(outputSchema);
+  });
+
+  it('should retain generic CLI adapter metadata', () => {
+    const cli: ToolCli = {
+      exclude: ['template'],
+      properties: { stdin: { type: 'boolean' } },
+      optionNames: { maxDiagnostics: 'max-diagnostics' },
+      positionals: { paths: { optional: true, variadic: true } },
+      transformInput: (args: Record<string, unknown>) => ({ ...args, normalized: true }),
+      formatOutput: (result, args) => `${String(args.format)}:${String(result)}`,
+      exitCode: result => (result === 'failure' ? 1 : 0)
+    };
+    class Test {
+      @tool({ summary: 'test', cli })
+      method() {
+        return new Promise(resolve => resolve('test'));
+      }
+    }
+    expect((new Test().method as ToolMethod<string>).metadata.cli).toEqual(cli);
+    expect((new Test().method as ToolMethod<string>).metadata.cli?.transformInput?.({})).toEqual({ normalized: true });
+    expect((new Test().method as ToolMethod<string>).metadata.cli?.properties).toEqual(cli.properties);
+    expect((new Test().method as ToolMethod<string>).metadata.cli?.formatOutput?.('test', { format: 'json' })).toBe(
+      'json:test'
+    );
+    expect((new Test().method as ToolMethod<string>).metadata.cli?.exitCode?.('failure')).toBe(1);
   });
 
   it('should generate correct command from method name', () => {
@@ -244,16 +269,16 @@ describe('loadTools', () => {
     @service()
     class ApiService {
       @tool({ summary: 'test' })
-      static templateValidate() {
+      static validate() {
         return new Promise(resolve => resolve('ok'));
       }
     }
 
     loadTools(ApiService);
 
-    expect(ApiService['tool_templateValidate'].metadata.command).toBe('api.template.validate');
-    expect(ApiService['tool_templateValidate'].metadata.toolName).toBe('api_template_validate');
-    expect(ApiService['tool_templateValidate'].metadata.title).toBe('API Template Validate');
+    expect(ApiService['tool_validate'].metadata.command).toBe('api.validate');
+    expect(ApiService['tool_validate'].metadata.toolName).toBe('api_validate');
+    expect(ApiService['tool_validate'].metadata.title).toBe('API Validate');
   });
 
   it('should filter out non-tool methods', () => {

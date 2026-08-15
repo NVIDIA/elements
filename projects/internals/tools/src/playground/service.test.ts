@@ -32,7 +32,7 @@ describe('PlaygroundService', () => {
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(
-      'Validates HTML templates specifically for playground examples. Includes all checks from the "api_template_validate" tool with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.'
+      'Validates HTML templates specifically for playground examples. Includes Elements API checks with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.'
     );
     expect(
       (PlaygroundService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template

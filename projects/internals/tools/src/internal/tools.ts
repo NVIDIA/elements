@@ -31,6 +31,24 @@ export interface ToolMetadata {
   toolName: string;
   support: ToolSupportFlags;
   app?: ToolApp;
+  cli?: ToolCli;
+}
+
+export interface ToolCli {
+  /** Fields from the shared input schema that are not CLI arguments. */
+  exclude?: string[];
+  /** CLI-only options. These never become part of the MCP input schema. */
+  properties?: Record<string, Schema>;
+  /** CLI spellings for shared schema fields, such as kebab-case options. */
+  optionNames?: Record<string, string>;
+  /** Positional argument details, including optional variadic paths. */
+  positionals?: Record<string, { optional?: boolean; variadic?: boolean }>;
+  /** Normalize parsed CLI arguments before invoking the shared tool. */
+  transformInput?: (args: Record<string, unknown>) => Record<string, unknown> | Promise<Record<string, unknown>>;
+  /** Render a completed tool result using the original parsed CLI arguments. */
+  formatOutput?: (result: unknown, args: Record<string, unknown>) => Promise<string> | string;
+  /** Map a structured completed result to a process exit code. */
+  exitCode?: (result: unknown) => number;
 }
 
 export interface ToolApp {
@@ -110,7 +128,8 @@ export function tool({
   inputSchema,
   outputSchema,
   support,
-  app
+  app,
+  cli
 }: {
   summary: string;
   description?: string;
@@ -119,6 +138,7 @@ export function tool({
   outputSchema?: Schema;
   support?: ToolSupportFlags;
   app?: ToolApp;
+  cli?: ToolCli;
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (originalMethod: ToolMethod<any>, _context: ClassMethodDecoratorContext) {
@@ -137,7 +157,8 @@ export function tool({
       name: originalMethod.name,
       title: originalMethod.name.replace(/([A-Z])/g, ' $1').trim(),
       command,
-      app
+      app,
+      cli
     };
     Object.assign(originalMethod, { metadata });
     return originalMethod;

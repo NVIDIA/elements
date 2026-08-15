@@ -37,8 +37,17 @@ This product includes the following bundled third-party software:
 - archiver v8.0.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Chris Talkington (http://christalkington.com/)
 
+- eslint v10.8.0 [MIT] (used by: @nvidia-elements/cli)
+  Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+
+- fast-glob v3.3.3 [MIT] (used by: @nvidia-elements/cli)
+  Copyright: Denis Malinochkin (https://mrmlnc.com)
+
 - highlight.js v11.11.1 [BSD-3-Clause] (used by: @nvidia-elements/code)
   Copyright: Josh Goebel <hello@joshgoebel.com>
+
+- ignore v7.0.6 [MIT] (used by: @nvidia-elements/cli)
+  Copyright: kael
 
 - lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco, @nvidia-elements/plot, @nvidia-elements/scene)
   Copyright: Google LLC
@@ -311,6 +320,9 @@ The following bundled components are provided under the MIT license:
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
+eslint v10.8.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
+ignore v7.0.6 - Copyright kael
 markdown-it v14.3.0 - Copyright Unknown
 marked v18.0.9 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik

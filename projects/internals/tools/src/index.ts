@@ -19,6 +19,7 @@ export {
   type Schema,
   type ToolSupportFlags,
   type ToolApp,
+  type ToolCli,
   type ToolMetadata,
   ToolSupport,
   ToolError,
@@ -39,6 +40,7 @@ if (process.env.ELEMENTS_PLAYGROUND_BASE_URL) {
 export const tools = services.flatMap(service => loadTools(service));
 
 export { MAX_CONTEXT_CHARS, MAX_CONTEXT_TOKENS, isDebug } from './internal/utils.js';
+export { formatValidationResult, readStdin, type ValidationResult } from './api/validate.js';
 
 // temporary exports
 export { getElementImports } from './internal/utils.js';
