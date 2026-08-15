@@ -41,6 +41,13 @@ describe('lintPlaygroundTemplate', () => {
     expect(result.some(msg => msg.message.includes('nve-layout'))).toBe(true);
   });
 
+  it('should report the exact message for unknown tags', async () => {
+    const lintMessages = await lintTemplate('<nve-invalid></nve-invalid>', { strict: true });
+
+    expect(lintMessages).toHaveLength(1);
+    expect(lintMessages[0]?.message).toBe('Unexpected use of unknown tag <nve-invalid>');
+  });
+
   it('should map ESLint severity correctly', async () => {
     const codeWithViolation = '<nve-button nve-layout="pad:md">Button</nve-button>';
     const result = await lintTemplate(codeWithViolation, { strict: true });

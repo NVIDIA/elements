@@ -1,18 +1,14 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Example } from '@internals/metadata';
+import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { ExamplesService } from './service.js';
 import { getContextExamples } from './utils.js';
 import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
-import { ApiService } from '../api/service.js';
 
 describe('ExampleService', () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   it('should provide list tool', async () => {
     const result = await ExamplesService.list();
     expect(result).toBeDefined();
@@ -144,49 +140,23 @@ describe('ExampleService', () => {
   });
 
   it('should reject render tool templates with lint messages', async () => {
-    vi.spyOn(ApiService, 'templateValidate').mockResolvedValue([
-      {
-        id: 'invalid-template',
-        severity: 'error',
-        message: 'Invalid template.',
-        suggestions: [],
-        line: 1,
-        column: 2,
-        endLine: 1,
-        endColumn: 3
-      }
-    ]);
-
     await expect(ExamplesService.render({ template: '<nve-invalid></nve-invalid>' })).rejects.toThrow(
       'Template validation failed.'
     );
   });
 
   it('should return a managed tool error when render validation fails', async () => {
-    vi.spyOn(ApiService, 'templateValidate').mockResolvedValue([
-      {
-        id: 'invalid-template',
-        severity: 'error',
-        message: 'Invalid template.',
-        suggestions: [],
-        line: 1,
-        column: 2,
-        endLine: 1,
-        endColumn: 3
-      }
-    ]);
     const tools = loadTools(ExamplesService);
     const renderTool = tools.find(tool => tool.metadata.name === 'render');
 
     const result = (await renderTool?.({ template: '<nve-invalid></nve-invalid>' })) as ToolOutput<{
       template: string;
-      lintMessages: { message: string }[];
+      lintMessages: TemplateLintMessage[];
     }>;
 
     expect(result.status).toBe('error');
     expect(result.message).toBe('Template validation failed.');
     expect(result.result?.template).toBe('<nve-invalid></nve-invalid>');
     expect(result.result?.lintMessages).toHaveLength(1);
-    expect(result.result?.lintMessages[0]?.message).toBe('Unexpected use of unknown tag <nve-invalid>');
   });
 });

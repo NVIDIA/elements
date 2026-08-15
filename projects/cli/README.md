@@ -9,6 +9,7 @@ The **@nvidia-elements/cli** is a dual-mode command-line tool for the Elements D
 This package serves two primary modes:
 
 1. **Interactive CLI (`nve` command)** - Command-line interface with interactive prompts for:
+
    - Component API discovery and search
    - Example template browsing and searching
    - Template linting and validation
@@ -48,35 +49,35 @@ npm install -g @nvidia-elements/cli
 
 ## Usage
 
-| Command                                                          | Description                                                                            |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `nve`                                                            | Show About and help output.                                                            |
-| `nve api.list [format]`                                          | Get a list of all available Elements (`nve-*`) APIs and components.                    |
-| `nve api.get <names..> [--format <format>]`                      | Get documentation for one to five known components or attributes (`nve-*`).            |
-| `nve api.template.validate <template>`                           | Check HTML templates using Elements APIs and components (`nve-*`).                     |
-| `nve api.imports.get <template>`                                 | Get ESM imports for an HTML template using Elements APIs (`nve-*`).                    |
-| `nve api.tokens.list [format] [query]`                           | Get available semantic CSS custom properties and design tokens for theming.            |
-| `nve api.icons.list [format]`                                    | Get available icon names for `nve-icon` and `nve-icon-button`.                         |
-| `nve examples.list [format]`                                     | Get available Elements (`nve-*`) starter templates, patterns, and examples.            |
-| `nve examples.get <id> [format]`                                 | Get the full template of a known example or pattern by ID.                             |
-| `nve project.create <type> [cwd] [start]`                        | Create a new starter project.                                                          |
-| `nve project.setup [cwd]`                                        | Set up or update a project to use Elements.                                            |
-| `nve project.validate <type> [cwd]`                              | Check project configuration and dependencies.                                          |
-| `nve packages.list`                                              | Get latest published versions of all Elements packages.                                |
-| `nve packages.get <name>`                                        | Get details for a specific Elements package.                                           |
-| `nve packages.changelogs.get <name> [format] [limit]`            | Retrieve changelog details by package name.                                            |
-| `nve skills.list [format]`                                       | Get available Elements agent skills and context.                                       |
-| `nve skills.get <name> [format]`                                 | Get a bundled Elements agent skill by name.                                            |
-| `nve mcp`                                                        | Start the MCP server.                                                                  |
+| Command                                               | Description                                                                 |
+| ----------------------------------------------------- | --------------------------------------------------------------------------- |
+| `nve`                                                 | Show About and help output.                                                 |
+| `nve api.list [format]`                               | Get a list of all available Elements (`nve-*`) APIs and components.         |
+| `nve api.get <names..> [--format <format>]`           | Get documentation for one to five known components or attributes (`nve-*`). |
+| `nve api.validate [paths..]`                          | Check HTML and JSON from explicit file paths, glob patterns, or standard input (`--stdin`) using Elements lint rules. |
+| `nve api.imports.get <template>`                      | Get ESM imports for an HTML template using Elements APIs (`nve-*`).         |
+| `nve api.tokens.list [format] [query]`                | Get available semantic CSS custom properties and design tokens for theming. |
+| `nve api.icons.list [format]`                         | Get available icon names for `nve-icon` and `nve-icon-button`.              |
+| `nve examples.list [format]`                          | Get available Elements (`nve-*`) starter templates, patterns, and examples. |
+| `nve examples.get <id> [format]`                      | Get the full template of a known example or pattern by ID.                  |
+| `nve project.create <type> [cwd] [start]`             | Create a new starter project.                                               |
+| `nve project.setup [cwd]`                             | Set up or update a project to use Elements.                                 |
+| `nve project.validate <type> [cwd]`                   | Check project configuration and dependencies.                               |
+| `nve packages.list`                                   | Get latest published versions of all Elements packages.                     |
+| `nve packages.get <name>`                             | Get details for a specific Elements package.                                |
+| `nve packages.changelogs.get <name> [format] [limit]` | Retrieve changelog details by package name.                                 |
+| `nve skills.list [format]`                            | Get available Elements agent skills and context.                            |
+| `nve skills.get <name> [format]`                      | Get a bundled Elements agent skill by name.                                 |
+| `nve mcp`                                             | Start the MCP server.                                                       |
 
 ### Global Options
 
-| Option      | Description                                      |
-| ----------- | ------------------------------------------------ |
-| `--help`    | Show help.                                       |
-| `--version` | Show version number.                             |
+| Option      | Description                                         |
+| ----------- | --------------------------------------------------- |
+| `--help`    | Show help.                                          |
+| `--version` | Show version number.                                |
 | `--upgrade` | Upgrade Elements CLI (`nve`) to the latest version. |
-| `--debug`   | Enable debug output for tools.                   |
+| `--debug`   | Enable debug output for tools.                      |
 
 ## MCP
 
@@ -138,28 +139,28 @@ args = ["mcp"]
 
 ### Prompts
 
-| Prompt | Description | Example Prompt |
-| ------ | ----------- | -------------- |
-| `/about` | A brief introduction to Elements | `/about` |
-| `/doctor` | Verify Elements setup and MCP configuration | `/doctor` |
-| `/search` | Context for searching Elements APIs | `/search` What works for notifying a user of a long running process? |
-| `/new-project` | Context for creating a new Elements project | `/new-project` Create a todo app |
-| `/migrate` | Context for migrating from deprecated Elements APIs | `/migrate` Migrate this project from deprecated Elements APIs |
+| Prompt         | Description                                         | Example Prompt                                                       |
+| -------------- | --------------------------------------------------- | -------------------------------------------------------------------- |
+| `/about`       | A brief introduction to Elements                    | `/about`                                                             |
+| `/doctor`      | Verify Elements setup and MCP configuration         | `/doctor`                                                            |
+| `/search`      | Context for searching Elements APIs                 | `/search` What works for notifying a user of a long running process? |
+| `/new-project` | Context for creating a new Elements project         | `/new-project` Create a todo app                                     |
+| `/migrate`     | Context for migrating from deprecated Elements APIs | `/migrate` Migrate this project from deprecated Elements APIs        |
 
 ### Skills
 
 Skills provide persistent context to AI agents for building UI with Elements.
 
-| Skill | Description |
-| ----- | ----------- |
-| `about` | Instructions for providing a brief introduction for using the Elements Design System. |
-| `authoring` | Best practices and workflow guidance for authoring UI with NVIDIA Elements. |
-| `doctor` | Instructions for ensuring the Elements Design System is setup correctly. |
-| `artifact` | Use when creating throwaway UI artifacts, prototypes, demos, Claude Artifacts, Codex, or GPT Sites pages, or other standalone HTML interfaces that should use the NVIDIA Elements CDN template. |
-| `integration` | Best practices and workflow guidance for creating or setting up NVIDIA Elements projects. |
-| `migration` | Instructions for migrating a project from deprecated Elements APIs using lint tooling and CLI health checks. |
-| `search` | Best practices for providing Elements API Documentation. |
-| `elements` | Default skill for UI-related work or NVIDIA Elements (`nve-*`), including HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts. |
+| Skill         | Description                                                                                                                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `about`       | Instructions for providing a brief introduction for using the Elements Design System.                                                                                                                         |
+| `authoring`   | Best practices and workflow guidance for authoring UI with NVIDIA Elements.                                                                                                                                   |
+| `doctor`      | Instructions for ensuring the Elements Design System is setup correctly.                                                                                                                                      |
+| `artifact`    | Use when creating throwaway UI artifacts, prototypes, demos, Claude Artifacts, Codex, or GPT Sites pages, or other standalone HTML interfaces that should use the NVIDIA Elements CDN template.               |
+| `integration` | Best practices and workflow guidance for creating or setting up NVIDIA Elements projects.                                                                                                                     |
+| `migration`   | Instructions for migrating a project from deprecated Elements APIs using lint tooling and CLI health checks.                                                                                                  |
+| `search`      | Best practices for providing Elements API Documentation.                                                                                                                                                      |
+| `elements`    | Default skill for UI-related work or NVIDIA Elements (`nve-*`), including HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts. |
 
 Run `nve skills.list` or call MCP `skills_list` for the authoritative list. Deployments with the playground service enabled can also expose a `playground` skill for creating Elements Playground prototypes.
 
@@ -173,23 +174,23 @@ This hosted route does not install the Elements CLI or configure the MCP server.
 
 ### Tools
 
-| Tool | Description |
-| ---- | ----------- |
-| `api_list` | Get list of all available Elements (nve-*) APIs and components. |
-| `api_get` | Get documentation known components or attributes by name (nve-*). |
-| `api_template_validate` | Validates HTML templates using Elements APIs and components (nve-*). |
-| `api_imports_get` | Get esm imports for a given HTML template using Elements APIs (nve-*). |
-| `api_tokens_list` | Get available semantic CSS custom properties / design tokens for theming. |
-| `packages_list` | Get latest published versions of all Elements packages. |
-| `packages_get` | Get details for a specific Elements package. |
-| `packages_changelogs_get` | Retrieve changelog details by package name. |
-| `examples_list` | Get list of available Elements (nve-*) patterns and examples. |
-| `examples_get` | Get the full template of a known example or pattern by id. |
-| `skills_list` | Get a list of available Elements agent skills and context fragments. |
-| `skills_get` | Get a bundled Elements agent skill or context fragment by name. |
-| `project_create` | Create a new starter project. |
-| `project_validate` | Check project for configuration issues and dependencies. |
-| `project_setup` | Setup or update a project to use Elements. |
+| Tool                      | Description                                                               |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `api_list`                | Get list of all available Elements (nve-\*) APIs and components.          |
+| `api_get`                 | Get documentation known components or attributes by name (nve-\*).        |
+| `api_validate`            | Checks HTML and JSON files or supplied content with Elements lint rules.  |
+| `api_imports_get`         | Get esm imports for a given HTML template using Elements APIs (nve-\*).   |
+| `api_tokens_list`         | Get available semantic CSS custom properties / design tokens for theming. |
+| `packages_list`           | Get latest published versions of all Elements packages.                   |
+| `packages_get`            | Get details for a specific Elements package.                              |
+| `packages_changelogs_get` | Retrieve changelog details by package name.                               |
+| `examples_list`           | Get list of available Elements (nve-\*) patterns and examples.            |
+| `examples_get`            | Get the full template of a known example or pattern by id.                |
+| `skills_list`             | Get a list of available Elements agent skills and context fragments.      |
+| `skills_get`              | Get a bundled Elements agent skill or context fragment by name.           |
+| `project_create`          | Create a new starter project.                                             |
+| `project_validate`        | Check project for configuration issues and dependencies.                  |
+| `project_setup`           | Setup or update a project to use Elements.                                |
 
 ## Links
 
