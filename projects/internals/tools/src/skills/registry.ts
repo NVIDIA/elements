@@ -41,7 +41,7 @@ nve api.get
 nve examples.list
 nve examples.get
 nve api.imports.get
-nve api.template.validate
+nve api.validate
 
 # MCP Tool
 api_list
@@ -49,7 +49,7 @@ api_get
 examples_list
 examples_get
 api_imports_get
-api_template_validate
+api_validate
 \`\`\`
 
 Use \`nve --help\` to see the available commands.

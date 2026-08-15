@@ -36,9 +36,9 @@ Find the validated HTML template to persist. Look for it in the conversation con
 
 Ensure the template is valid before proceeding.
 
-1. Call `api_template_validate` with the template HTML
+1. Call `api_validate` with `{ template, lang: 'html', format: 'json' }`
 2. If validation returns errors, report them to the user and fix each issue
-3. Re-validate until the result is clean (empty error array)
+3. Re-validate until `ok` is true and `summary.errors` is 0
 4. Do NOT proceed to Phase 3 until validation passes
 
 ### Phase 3: Generate Imports

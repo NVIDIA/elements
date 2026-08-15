@@ -130,7 +130,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
     '@nvidia-elements/lint/no-nested-container-types': ['error'],
     '@nvidia-elements/lint/no-unstyled-typography': ['error'],
-    '@nvidia-elements/lint/no-tailwind-classes': ['error'],
+    '@nvidia-elements/lint/no-tailwind-classes': ['warn', { strict: true }],
     '@nvidia-elements/lint/prefer-aria-label-in-compact-containers': ['error'],
     '@nvidia-elements/lint/no-missing-gap-space': ['error'],
     '@nvidia-elements/lint/no-unexpected-style-customization': ['off']

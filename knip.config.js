@@ -66,7 +66,10 @@ export default {
     },
     'projects/cli': {
       entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...TEST_ENTRIES, ...VITE_CONFIGS, ...VITEST_CONFIGS],
-      project: [...PROJECT_FILES, ...SOURCE_FILES]
+      project: [...PROJECT_FILES, ...SOURCE_FILES],
+      // The CLI bundle keeps these transitive imports external, so they remain runtime dependencies
+      // even though the CLI source imports them through @internals/tools.
+      ignoreDependencies: ['fast-glob', 'ignore']
     },
     'projects/code': {
       entry: [

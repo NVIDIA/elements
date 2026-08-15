@@ -30,7 +30,7 @@ Instructions for migrating a project from deprecated Elements APIs to the latest
    - Use `nve api.list` and `nve api.get` before inventing replacements for component APIs.
 5. Verify.
    - Re-run ESLint until it reports no deprecation violations.
-   - Use `nve api.template.validate` on migrated HTML templates.
+   - Use `nve api.validate 'src/**/*.html'` on migrated HTML templates.
    - Run `nve project.validate` again after package and source changes.
 
 ## CLI Command Reference
@@ -39,7 +39,7 @@ Instructions for migrating a project from deprecated Elements APIs to the latest
 - `nve project.setup`: Set up or update a project to use latest Elements packages.
 - `nve packages.list`: List current and latest package versions.
 - `nve packages.changelogs.get`: Read migration-relevant package changelogs.
-- `nve api.template.validate`: Check HTML templates against current Elements APIs.
+- `nve api.validate`: Check HTML and JSON files against current Elements rules.
 - `nve api.list`: List available Elements APIs.
 - `nve api.get`: Get documentation for a specific component API.
 
@@ -413,5 +413,5 @@ For directional icons, add an explicit `direction` attribute.
 - Removed components and APIs have replacements or no longer appear.
 - Migrate deprecated `nve-layout`, `nve-text`, popover trigger, logo, and icon patterns.
 - ESLint reports no Elements deprecation violations.
-- `nve api.template.validate` passes for migrated templates.
+- `nve api.validate` passes for migrated files.
 - `nve project.validate` reports a healthy project state.

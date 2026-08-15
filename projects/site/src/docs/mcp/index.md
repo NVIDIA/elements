@@ -195,6 +195,8 @@ Deployments with the playground service enabled can also expose a `playground` s
 
 ### Tools
 
+Call `api_validate` with `{ "paths": ["src/app.html"] }` or supplied content such as `{ "template": "<nve-button></nve-button>", "format": "json" }`; supplied content defaults to HTML. Set `lang` to `json` and provide `filename` for JSON content. JSON results contain `ok`, a complete summary, and diagnostics with locations, severity, rule, suggestion, and whether a fix is available.
+
 <nve-grid>
   <nve-grid-header>
     <nve-grid-column width="250px">Tool</nve-grid-column>
@@ -209,8 +211,8 @@ Deployments with the playground service enabled can also expose a `playground` s
     <nve-grid-cell>Get documentation known components or attributes by name (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">api_template_validate</code></nve-grid-cell>
-    <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*).</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_validate</code></nve-grid-cell>
+    <nve-grid-cell>Check HTML and JSON files or supplied content with Elements lint rules.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_imports_get</code></nve-grid-cell>

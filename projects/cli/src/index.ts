@@ -95,20 +95,85 @@ yargsInstance.command(
   }
 );
 
+function getYargsOptions(prop: Schema) {
+  const options: {
+    describe?: string;
+    type: 'string' | 'number' | 'boolean';
+    array?: boolean;
+    choices?: string[];
+    default?: unknown;
+  } = {
+    describe: prop.description,
+    type: prop.type === 'number' || prop.type === 'boolean' ? prop.type : 'string'
+  };
+  if (prop.type === 'array') options.array = true;
+  if (prop.enum) options.choices = prop.enum;
+  if (prop.default !== undefined) options.default = prop.default;
+  return options;
+}
+
+function getPositionalArgument(key: string, prop: Schema, positional?: { optional?: boolean; variadic?: boolean }) {
+  const optional = positional?.optional === true;
+  const variadic = positional?.variadic === true || prop.type === 'array';
+  return `${optional ? '[' : '<'}${key}${variadic ? '..' : ''}${optional ? ']' : '>'}`;
+}
+
+function getCommandArguments({
+  positionalArgs,
+  optionArgs,
+  hasVariadicArg,
+  hasCliPositionals
+}: {
+  positionalArgs: string[];
+  optionArgs: string[];
+  hasVariadicArg: boolean;
+  hasCliPositionals: boolean;
+}) {
+  if (hasCliPositionals) return positionalArgs;
+  return hasVariadicArg ? [...optionArgs, ...positionalArgs] : [...positionalArgs, ...optionArgs];
+}
+
+function normalizeOptionNames(args: Record<string, unknown>, optionNames?: Record<string, string>) {
+  if (!optionNames) return args;
+  const aliasNames = new Set(Object.values(optionNames));
+  const normalized = Object.fromEntries(Object.entries(args).filter(([key]) => !aliasNames.has(key)));
+  Object.entries(optionNames).forEach(([key, optionName]) => {
+    if (optionName in args) normalized[key] = args[optionName];
+  });
+  return normalized;
+}
+
 tools
   .filter(tool => tool.metadata.support & ToolSupport.CLI)
   // eslint-disable-next-line max-lines-per-function
   .forEach(tool => {
-    const { inputSchema, summary } = tool.metadata;
-    const { properties, required } = inputSchema ?? {};
-    const requiredArgs = Object.keys(properties ?? {}).filter(key => required?.includes(key));
-    const optionalArgs = Object.keys(properties ?? {}).filter(
-      key => !required?.includes(key) || properties?.[key]?.default
+    const { inputSchema, summary, cli } = tool.metadata;
+    const excluded = new Set(cli?.exclude ?? []);
+    const properties = {
+      ...Object.fromEntries(Object.entries(inputSchema?.properties ?? {}).filter(([key]) => !excluded.has(key))),
+      ...cli?.properties
+    };
+    const requiredArgs = Object.keys(properties).filter(key => inputSchema?.required?.includes(key));
+    const positionalKeys = [
+      ...requiredArgs,
+      ...Object.keys(cli?.positionals ?? {}).filter(key => !requiredArgs.includes(key))
+    ];
+    const optionalArgs = Object.keys(properties).filter(
+      key => !requiredArgs.includes(key) && !positionalKeys.includes(key)
     );
-    const hasVariadicArg = requiredArgs.some(key => properties?.[key]?.type === 'array');
-    const positionalArgs = requiredArgs.map(key => (properties?.[key]?.type === 'array' ? `<${key}..>` : `<${key}>`));
-    const optionArgs = optionalArgs.map(key => `[${hasVariadicArg ? '--' : ''}${key}]`);
-    const commandArgs = hasVariadicArg ? [...optionArgs, ...positionalArgs] : [...positionalArgs, ...optionArgs];
+    const hasVariadicArg = positionalKeys.some(
+      key => cli?.positionals?.[key]?.variadic || properties[key]?.type === 'array'
+    );
+    const positionalArgs = positionalKeys.map(key =>
+      getPositionalArgument(key, properties[key]!, cli?.positionals?.[key])
+    );
+    const optionArgs = optionalArgs.map(key => `[${hasVariadicArg ? '--' : ''}${cli?.optionNames?.[key] ?? key}]`);
+    const commandArgs = getCommandArguments({
+      positionalArgs,
+      optionArgs,
+      hasVariadicArg,
+      hasCliPositionals: cli?.positionals !== undefined
+    });
 
     const command = `${tool.metadata.command} ${commandArgs.join(' ')}`.trim();
 
@@ -117,23 +182,15 @@ tools
       summary,
       // builder to add arguments metadata
       async builder => {
-        if (!properties) return;
-
-        const argOptions = (prop: Schema) => ({
-          describe: prop.description,
-          type: (prop.type === 'array' ? 'string' : prop.type) as 'string' | 'number' | 'boolean',
-          ...(prop.type === 'array' ? { array: true } : {}),
-          choices: prop.enum ?? undefined,
-          default: prop.default
-        });
-
-        requiredArgs.forEach(key => builder.positional(key, argOptions(properties[key]!)));
-        optionalArgs.forEach(key => builder.option(key, argOptions(properties[key]!)));
+        positionalKeys.forEach(key => builder.positional(key, getYargsOptions(properties[key]!)));
+        optionalArgs.forEach(key => builder.option(cli?.optionNames?.[key] ?? key, getYargsOptions(properties[key]!)));
       },
       // main handler for the command
       async args => {
         const start = performance.now();
-        const { result, status, message } = await runAsyncTool(args, tool);
+        const parsedArgs = normalizeOptionNames(args as Record<string, unknown>, cli?.optionNames);
+        const input = cli?.transformInput ? await cli.transformInput(parsedArgs) : parsedArgs;
+        const { result, status, message } = await runAsyncTool(input, tool);
         const end = performance.now();
 
         if (status === 'complete') {
@@ -142,6 +199,8 @@ tools
             tool,
             start,
             end,
+            formattedResult: cli?.formatOutput ? await cli.formatOutput(result, parsedArgs) : undefined,
+            exitCode: cli?.exitCode?.(result),
             notifyUpdate: () => notifyIfUpdateAvailable(BUILD_SHA)
           });
         } else {
@@ -157,13 +216,13 @@ tools
             : requiredArgs;
           for (const argName of argNames) {
             if (!argv[argName]) {
-              const propertySchema = properties?.[argName] ?? {};
+              const propertySchema = properties[argName] ?? {};
               const v = await getArgValue(argName, propertySchema);
               argv[argName] = v;
             }
           }
 
-          Object.entries(properties ?? {})
+          Object.entries(properties)
             .filter(([, property]) => property.type === 'array')
             .forEach(([argName, property]) => {
               if (argv[argName] === undefined) return;
