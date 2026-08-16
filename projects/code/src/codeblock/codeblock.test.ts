@@ -13,6 +13,7 @@ import '@nvidia-elements/code/codeblock/languages/javascript';
 import '@nvidia-elements/code/codeblock/languages/json.js';
 import '@nvidia-elements/code/codeblock/languages/markdown.js';
 import '@nvidia-elements/code/codeblock/languages/python';
+import '@nvidia-elements/code/codeblock/languages/toml.js';
 import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import '@nvidia-elements/code/codeblock/languages/xml.js';
 import '@nvidia-elements/code/codeblock/languages/yaml.js';
@@ -158,6 +159,14 @@ function getTime(): number {
     element.code = 'echo "hello" # greet';
     await elementIsStable(element);
     expect(element.shadowRoot!.querySelector('code')!.className).toBe('bash');
+    expect(element.shadowRoot!.querySelector('.hljs-string')).toBeTruthy();
+  });
+
+  it('should highlight toml source once the toml language is registered', async () => {
+    element.language = 'toml';
+    element.code = 'name = "elements" # package';
+    await elementIsStable(element);
+    expect(element.shadowRoot!.querySelector('code')!.className).toBe('toml');
     expect(element.shadowRoot!.querySelector('.hljs-string')).toBeTruthy();
   });
 
