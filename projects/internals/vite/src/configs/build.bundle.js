@@ -25,7 +25,7 @@ export const libraryBundleConfig = {
       }
     },
     rolldownOptions: {
-      treeshake: false,
+      treeshake: true,
       output: {
         minify: true,
         codeSplitting: false,

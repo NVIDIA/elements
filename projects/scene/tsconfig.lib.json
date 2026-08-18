@@ -5,6 +5,7 @@
     "types": []
   },
   "exclude": [
+    "src/internal/testing.ts",
     "**/*.test.ts",
     "**/*.test.axe.ts",
     "**/*.test.ssr.ts",

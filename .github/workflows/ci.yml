@@ -65,6 +65,8 @@ jobs:
             projects/monaco/dist
             projects/monaco/package.json
             projects/pages/dist
+            projects/scene/dist
+            projects/scene/package.json
       - name: Prepare IndexNow artifacts
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         env:

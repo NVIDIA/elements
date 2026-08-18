@@ -135,6 +135,7 @@
         "./projects/markdown:test:lighthouse",
         "./projects/media:test:lighthouse",
         "./projects/monaco:test:lighthouse",
+        "./projects/scene:test:lighthouse",
         "./projects/site:test:lighthouse"
       ],
       "output": [
@@ -177,6 +178,13 @@
       "dependencies": [
         "release:themes",
         "release:labs-forms"
+      ]
+    },
+    "release:scene": {
+      "command": "cd projects/scene && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes",
+        "release:core"
       ]
     },
     "release:cli": {

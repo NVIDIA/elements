@@ -334,7 +334,8 @@
         "../../code/dist/**/*.examples.json",
         "../../forms/dist/**/*.examples.json",
         "../../markdown/dist/**/*.examples.json",
-        "../../media/dist/**/*.examples.json"
+        "../../media/dist/**/*.examples.json",
+        "../../scene/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"
@@ -366,6 +367,10 @@
         },
         {
           "script": "../../media:build",
+          "cascade": false
+        },
+        {
+          "script": "../../scene:build",
           "cascade": false
         },
         {

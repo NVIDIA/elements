@@ -26,6 +26,10 @@ export class VitePlaywrightRunner {
     return this.#page;
   }
 
+  get browserVersion() {
+    return this.#browser?.version();
+  }
+
   get port() {
     return this.#serverPort ?? this.#storedPort ?? DEFAULT_PORT;
   }

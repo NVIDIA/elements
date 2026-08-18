@@ -2,20 +2,24 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@internals/vite';
+import { webgpuLighthouseRunner } from '@internals/vite';
 
 describe('scene lighthouse report', () => {
   test('scene should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-scene', /* html */`
-      <nve-scene></nve-scene>
+    const report = await webgpuLighthouseRunner.getReport(
+      'nve-scene',
+      /* html */ `
+      <nve-scene aria-label="Scene"></nve-scene>
       <script type="module">
         import '@nvidia-elements/scene/scene/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(1);
+    // M9 adds the accessible overlay label lifecycle; texture capture remains deferred.
+    expect(report.payload.javascript.kb).toBeLessThan(35);
   });
 });

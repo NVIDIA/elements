@@ -238,7 +238,8 @@ export default function (eleventyConfig) {
         'src/docs/code/*.md',
         'src/docs/monaco/*.md',
         'src/docs/media/*.md',
-        'src/docs/markdown/index.md'
+        'src/docs/markdown/index.md',
+        'src/docs/scene/*.md'
       ])
       .filter(page => page.data.tag);
   });

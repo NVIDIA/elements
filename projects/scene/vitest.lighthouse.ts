@@ -1,7 +1,7 @@
 import { mergeConfig } from 'vitest/config';
-import { libraryLighthouseTestConfig } from '@internals/vite/configs/lighthouse.js';
+import { libraryWebGPULighthouseTestConfig } from '@internals/vite/configs/lighthouse.webgpu.js';
 
-export default mergeConfig(libraryLighthouseTestConfig, {
+export default mergeConfig(libraryWebGPULighthouseTestConfig, {
   test: {
     include: ['src/**/*.test.lighthouse.ts'],
     outputFile: {

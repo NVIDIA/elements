@@ -1,7 +1,7 @@
 import { mergeConfig } from 'vitest/config';
-import { libraryVisualTestConfig } from '@internals/vite/configs/visual.js';
+import { libraryWebGPUVisualTestConfig } from '@internals/vite/configs/visual.webgpu.js';
 
-export default mergeConfig(libraryVisualTestConfig, {
+export default mergeConfig(libraryWebGPUVisualTestConfig, {
   root: import.meta.dirname,
   test: {
     include: ['src/**/*.test.visual.ts'],

@@ -34,7 +34,8 @@ export default {
         'lint',
         'markdown',
         'media',
-        'monaco'
+        'monaco',
+        'scene'
       ]
     ]
   }

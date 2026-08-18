@@ -123,11 +123,11 @@ function reloadScript(example, canvasId) {
 <script type="module">
   import examples from '${example.entrypoint}' with { type: 'json' };
   const rawTemplate = examples?.items?.find(s => s.id === '${example.id}')?.template ?? '';
-  // remove any import statements that may be in the raw example template as these are replaced by vite
   const container = document.querySelector('#${canvasId}_content:not(:has(iframe))');
   if (container) {
     // parse the template to extract script tags since innerHTML does not execute scripts
-    const template = rawTemplate.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');
+    ${rewriteDevImports.toString()}
+    const template = rewriteDevImports(rawTemplate);
     const parser = new DOMParser();
     const doc = parser.parseFromString('<body>' + template + '</body>', 'text/html');
     const scripts = doc.querySelectorAll('script');
@@ -141,6 +141,13 @@ function reloadScript(example, canvasId) {
     });
   }
 </script>`.replace(/\n\n/g, '\n');
+}
+
+export function rewriteDevImports(template) {
+  return template.replace(
+    /(\bfrom\s+|\bimport\s+)(['"])((?![./])[^'"]+)\2/g,
+    (_match, prefix, quote, specifier) => `${prefix}${quote}/@id/${specifier}${quote}`
+  );
 }
 
 function findExample(ref, exampleName) {

@@ -220,7 +220,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/design-md/') ? 'highlighted selected' : ''}><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/scene/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
     <a href="/docs/elements/">Elements</a>
     <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/alert/') ? 'highlighted selected' : ''}><a href="/docs/elements/alert/">Alert</a></nve-tree-node>
@@ -327,6 +327,27 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/radio/') ? 'highlighted selected' : ''}><a href="/docs/elements/radio/">Radio</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/range/') ? 'highlighted selected' : ''}><a href="/docs/elements/range/">Range</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'highlighted selected' : ''}><a href="/docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/scene/') ? 'expanded' : ''}>
+      <a href="/docs/scene/">Scene</a>
+      <nve-tree-node ${data.page.url === '/docs/scene/' ? 'highlighted selected' : ''}><a href="/docs/scene/">Overview</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/arrows/') ? 'highlighted selected' : ''}><a href="/docs/scene/arrows/">Arrows</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/axes/') ? 'highlighted selected' : ''}><a href="/docs/scene/axes/">Axes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/camera/') ? 'highlighted selected' : ''}><a href="/docs/scene/camera/">Camera</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/cones/') ? 'highlighted selected' : ''}><a href="/docs/scene/cones/">Cones</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/cubes/') ? 'highlighted selected' : ''}><a href="/docs/scene/cubes/">Cubes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/cylinders/') ? 'highlighted selected' : ''}><a href="/docs/scene/cylinders/">Cylinders</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/frame/') ? 'highlighted selected' : ''}><a href="/docs/scene/frame/">Frame</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/gridlines/') ? 'highlighted selected' : ''}><a href="/docs/scene/gridlines/">Gridlines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/heightfield/') ? 'highlighted selected' : ''}><a href="/docs/scene/heightfield/">Heightfield</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/label/') ? 'highlighted selected' : ''}><a href="/docs/scene/label/">Label</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/lines/') ? 'highlighted selected' : ''}><a href="/docs/scene/lines/">Lines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/mesh/') ? 'highlighted selected' : ''}><a href="/docs/scene/mesh/">Mesh</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/model/') ? 'highlighted selected' : ''}><a href="/docs/scene/model/">Model</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/points/') ? 'highlighted selected' : ''}><a href="/docs/scene/points/">Points</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/pyramids/') ? 'highlighted selected' : ''}><a href="/docs/scene/pyramids/">Pyramids</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/spheres/') ? 'highlighted selected' : ''}><a href="/docs/scene/spheres/">Spheres</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/triangles/') ? 'highlighted selected' : ''}><a href="/docs/scene/triangles/">Triangles</a></nve-tree-node>
+    </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'highlighted selected' : ''}><a href="/docs/elements/search/">Search</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted selected' : ''}><a href="/docs/elements/select/">Select</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'highlighted selected' : ''}><a href="/docs/elements/skeleton/">Skeleton</a></nve-tree-node>

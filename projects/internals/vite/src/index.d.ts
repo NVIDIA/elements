@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { UserConfig } from 'vite';
+import type { Page } from 'playwright';
 
 export declare const libraryBuildConfig: UserConfig;
 export declare const libraryNodeBuildConfig: UserConfig;
@@ -11,7 +12,9 @@ export declare const libraryNodeTestConfig: UserConfig;
 export declare const libraryAxeTestConfig: UserConfig;
 export declare const libraryLitSSRTestConfig: UserConfig;
 export declare const libraryVisualTestConfig: UserConfig;
+export declare const libraryWebGPUVisualTestConfig: UserConfig;
 export declare const libraryLighthouseTestConfig: UserConfig;
+export declare const libraryWebGPULighthouseTestConfig: UserConfig;
 
 export declare const lighthouseRunner: {
   open(): Promise<void>;
@@ -29,6 +32,8 @@ export declare const lighthouseRunner: {
   }>;
 };
 
+export declare const webgpuLighthouseRunner: typeof lighthouseRunner;
+
 export declare const visualRunner: {
   open(): Promise<void>;
   close(): Promise<void>;
@@ -40,6 +45,50 @@ export declare const visualRunner: {
       waitFor?: (waitForFunction: (...args: unknown[]) => Promise<unknown>) => Promise<void>;
     }
   ): Promise<{ maxDiffPercentage: number }>;
+  inspect<Result>(
+    name: string,
+    content: string,
+    inspectPage: (page: Page) => Promise<Result>,
+    options?: { deviceScaleFactor?: number }
+  ): Promise<Result>;
+};
+
+export interface WebGPUVisualDiagnostics {
+  browserVersion: string;
+  chromiumArgs: string[];
+  adapterInfo: {
+    vendor: string;
+    architecture: string;
+    device: string;
+    description: string;
+    isFallbackAdapter?: boolean;
+  } | null;
+  software: boolean;
+  clearFrame: boolean;
+  clearPixel?: number[];
+  expectedPixel?: number[];
+  format?: string;
+  error?: string;
+}
+
+export declare const webgpuVisualRunner: {
+  open(): Promise<void>;
+  close(): Promise<void>;
+  render(
+    name: string,
+    content: string,
+    options?: {
+      network?: boolean;
+      waitFor?: (waitForFunction: (...args: unknown[]) => Promise<unknown>) => Promise<void>;
+    }
+  ): Promise<{ maxDiffPercentage: number }>;
+  inspect<Result>(
+    name: string,
+    content: string,
+    inspectPage: (page: Page) => Promise<Result>,
+    options?: { deviceScaleFactor?: number }
+  ): Promise<Result>;
+  runWebGPUSmoke(name: string): Promise<WebGPUVisualDiagnostics>;
 };
 
 export declare const ssrRunner: {
