@@ -127,22 +127,6 @@ describe('typography visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test.skip('text transforms should match visual baseline', async () => {
-    const report = await visualRunner.render(
-      'text-transforms',
-      /* html */ `
-      <div nve-layout="column gap:sm" style="height: 150px; width: 200px">
-        <p nve-text="body uppercase">uppercase</p>
-        <p nve-text="body lowercase">LOWERCASE</p>
-        <p nve-text="body capitalize">capitalize</p>
-        <p nve-text="body truncate" style="width: 350px;">dignissimos ducimus qui blanditiis praesentium</p>
-      </div>
-    `
-    );
-
-    expect(report.maxDiffPercentage).toBeLessThan(1);
-  });
-
   test('text links should match visual baseline', async () => {
     const report = await visualRunner.render(
       'text-links',
