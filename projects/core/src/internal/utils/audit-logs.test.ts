@@ -6,6 +6,7 @@ import {
   DOCS_LOG_URL,
   getCrossShadowRootAnchorWarning,
   getDuplicatePackageGlobalVersionWarning,
+  getDuplicatePackageVersionWarning,
   getExcessiveInstanceLimitWarning,
   getIdMatchNotFoundWarning,
   getInvalidParentWarning,
@@ -57,6 +58,14 @@ describe('getCrossShadowRootAnchorWarning', () => {
   it('should return warning message for cross shadow root anchoring', () => {
     expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
       `(deprecated) nve-tooltip provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`
+    );
+  });
+});
+
+describe('getDuplicatePackageVersionWarning', () => {
+  it('should return warning message for a duplicate localName package version', () => {
+    expect(getDuplicatePackageVersionWarning('nve-button', '1.2.3')).toBe(
+      `@nve: Element nve-button version 1.2.3 already defined, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`
     );
   });
 });
