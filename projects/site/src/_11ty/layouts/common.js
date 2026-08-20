@@ -236,8 +236,9 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted selected' : ''}><a href="/docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted selected' : ''}><a href="/docs/elements/combobox/">Combobox</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'highlighted selected' : ''}><a href="/docs/elements/copy-button/">Copy Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/') ? 'expanded' : ''} ${data.page.url.endsWith('/docs/elements/data-grid/') || data.page.url.endsWith('/docs/elements/data-grid/api/') ? 'highlighted' : ''}>
+    <nve-tree-node expanded>
       <a href="/docs/elements/data-grid/">Datagrid</a>
+      <nve-tree-node ${data.page.url === '/docs/elements/data-grid/' ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/">Getting Started</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/integrations/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/integrations/">Integrations</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-action/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/column-action/">Column Action</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-alignment/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/column-alignment/">Column Alignment</a></nve-tree-node>
@@ -276,8 +277,9 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-datetime/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-datetime/">Format Datetime</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-number/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-number/">Format Number</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-relative-time/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-relative-time/">Format Relative Time</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/forms/') || data.page.url.includes('/docs/elements/control/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/forms/' ? 'highlighted' : ''}>
+    <nve-tree-node expanded>
       <a href="/docs/elements/forms/">Forms</a>
+      <nve-tree-node ${data.page.url === '/docs/elements/forms/' ? 'highlighted selected' : ''}><a href="/docs/elements/forms/">Getting Started</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/forms/validation/') ? 'highlighted selected' : ''}><a href="/docs/elements/forms/validation/">Validation</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/forms/actions/') ? 'highlighted selected' : ''}><a href="/docs/elements/forms/actions/">Actions</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/control/') ? 'highlighted selected' : ''}><a href="/docs/elements/control/">Control</a></nve-tree-node>
@@ -290,21 +292,27 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'highlighted selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/controller/') ? 'highlighted selected' : ''}><a href="/docs/media/controller/">Media Controller</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/pause-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pause-button/">Media Pause Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'highlighted selected' : ''}><a href="/docs/media/playback-rate-select/">Media Playback Rate Select</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'highlighted selected' : ''}><a href="/docs/media/mute-button/">Media Mute Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'highlighted selected' : ''}><a href="/docs/media/seek-button/">Media Seek Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'highlighted selected' : ''}><a href="/docs/media/time-range/">Media Time Range</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'highlighted selected' : ''}><a href="/docs/media/volume-range/">Media Volume Range</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'highlighted selected' : ''}><a href="/docs/media/fullscreen-button/">Media Full-screen Button</a></nve-tree-node>
+    <nve-tree-node expanded>
+      <a href="/docs/media/controller/">Media</a>
+      <nve-tree-node ${data.page.url.includes('/docs/media/controller/') ? 'highlighted selected' : ''}><a href="/docs/media/controller/">Controller</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/pause-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pause-button/">Pause Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'highlighted selected' : ''}><a href="/docs/media/playback-rate-select/">Playback Rate Select</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'highlighted selected' : ''}><a href="/docs/media/mute-button/">Mute Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'highlighted selected' : ''}><a href="/docs/media/seek-button/">Seek Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'highlighted selected' : ''}><a href="/docs/media/time-range/">Time Range</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'highlighted selected' : ''}><a href="/docs/media/volume-range/">Volume Range</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'highlighted selected' : ''}><a href="/docs/media/fullscreen-button/">Full-screen Button</a></nve-tree-node>
+    </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'highlighted selected' : ''}><a href="/docs/elements/menu/">Menu</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'highlighted selected' : ''}><a href="/docs/elements/month/">Month</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/input/">Monaco Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-input/">Monaco Diff Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/editor/">Monaco Editor</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-editor/">Monaco Diff Editor</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted selected' : ''}><a href="/docs/monaco/problems/">Monaco Problems</a></nve-tree-node>
+    <nve-tree-node expanded>
+      <a href="/docs/monaco/input/">Monaco</a>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/input/">Input</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-input/">Diff Input</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/editor/">Monaco Editor</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-editor/">Diff Editor</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted selected' : ''}><a href="/docs/monaco/problems/">Problems</a></nve-tree-node>
+    </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/notification/') ? 'highlighted selected' : ''}><a href="/docs/elements/notification/">Notification</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/page/') ? 'highlighted selected' : ''}><a href="/docs/elements/page/">Page</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted selected' : ''}><a href="/docs/elements/page-header/">Page Header</a></nve-tree-node>
