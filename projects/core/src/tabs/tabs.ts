@@ -131,8 +131,10 @@ export class Tabs extends LitElement {
 
   /** @private */
   get keynavListConfig(): KeynavListConfig {
+    const items = this.items;
     return {
-      items: this.items,
+      items,
+      initialItem: items.find(item => item.selected),
       layout: this.vertical ? 'vertical' : 'horizontal'
     };
   }

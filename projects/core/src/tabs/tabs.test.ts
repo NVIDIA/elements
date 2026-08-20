@@ -229,3 +229,45 @@ describe(`${Tabs.metadata.tag} - multi tab selection`, () => {
     expect(tab2.selected).toBe(true);
   });
 });
+
+describe(`${Tabs.metadata.tag} - initial focus`, () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should initialize the selected tab as tabbable', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs>
+        <nve-tabs-item>Overview</nve-tabs-item>
+        <nve-tabs-item selected>Details</nve-tabs-item>
+        <nve-tabs-item>Settings</nve-tabs-item>
+      </nve-tabs>
+    `);
+    const tabs = fixture.querySelector<Tabs>(Tabs.metadata.tag);
+    const tabItems = fixture.querySelectorAll<TabsItem>(TabsItem.metadata.tag);
+    await elementIsStable(tabs);
+
+    expect(tabItems[0].tabIndex).toBe(-1);
+    expect(tabItems[1].tabIndex).toBe(0);
+    expect(tabItems[2].tabIndex).toBe(-1);
+  });
+
+  it('should initialize the first tab as tabbable when no tab is selected', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs>
+        <nve-tabs-item>Overview</nve-tabs-item>
+        <nve-tabs-item>Details</nve-tabs-item>
+        <nve-tabs-item>Settings</nve-tabs-item>
+      </nve-tabs>
+    `);
+    const tabs = fixture.querySelector<Tabs>(Tabs.metadata.tag);
+    const tabItems = fixture.querySelectorAll<TabsItem>(TabsItem.metadata.tag);
+    await elementIsStable(tabs);
+
+    expect(tabItems[0].tabIndex).toBe(0);
+    expect(tabItems[1].tabIndex).toBe(-1);
+    expect(tabItems[2].tabIndex).toBe(-1);
+  });
+});

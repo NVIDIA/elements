@@ -20,8 +20,8 @@ export const Default = {
   render: () => html`
 <nve-tabs-group id="tab-group-default">
   <nve-tabs>
-    <nve-tabs-item selected command="--toggle" commandfor="tab-group-default" value="overview">Overview</nve-tabs-item>
-    <nve-tabs-item command="--toggle" commandfor="tab-group-default" value="details">Details</nve-tabs-item>
+    <nve-tabs-item  command="--toggle" commandfor="tab-group-default" value="overview">Overview</nve-tabs-item>
+    <nve-tabs-item selected command="--toggle" commandfor="tab-group-default" value="details">Details</nve-tabs-item>
     <nve-tabs-item command="--toggle" commandfor="tab-group-default" value="settings">Settings</nve-tabs-item>
   </nve-tabs>
   <div slot="overview">

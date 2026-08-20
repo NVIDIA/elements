@@ -8,6 +8,7 @@ import { KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
 
 export interface KeynavListConfig {
   items: NodeListOf<HTMLElement> | HTMLElement[];
+  initialItem?: HTMLElement;
   layout?: 'both' | 'horizontal' | 'vertical';
   manageFocus?: boolean;
   manageTabindex?: boolean;
@@ -63,9 +64,12 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   }
 
   #initializeTabIndex() {
-    const { manageFocus, manageTabindex, items } = this.#config;
+    const { manageFocus, manageTabindex, items, initialItem } = this.#config;
     if (manageFocus && manageTabindex && !this.#keynavDisabled) {
       initializeKeyListItems(items);
+      if (initialItem && items.includes(initialItem)) {
+        setActiveKeyListItem(items, initialItem);
+      }
     }
   }
 
