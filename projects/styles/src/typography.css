@@ -37,36 +37,6 @@ body[nve-text],
   text-box: none !important;
 }
 
-@supports not (text-box: trim-both cap alphabetic) {
-  /* https://seek-oss.github.io/capsize/ (firefox, drop in v154) */
-  [nve-text] {
-    --_capsize-offset: -0.1818em;
-  }
-
-  :is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'])::before {
-    content: '';
-    margin-block-end: var(--_capsize-offset);
-    display: table;
-  }
-
-  :is([nve-text~='display'], [nve-text~='heading'], [nve-text~='body'], [nve-text~='label'])[nve-text]::after {
-    content: '';
-    margin-block-start: var(--_capsize-offset);
-    display: table;
-  }
-
-  [nve-text~='trim:none']::before,
-  [nve-text~='trim:none']::after {
-    content: none !important;
-  }
-
-  [nve-text~='truncate'] {
-    &::after {
-      --_capsize-offset: 0;
-    }
-  }
-}
-
 [nve-text~='display'] {
   --_font-size: var(--nve-ref-font-size-1000);
   --_line-height: var(--nve-ref-font-line-height-tight);
