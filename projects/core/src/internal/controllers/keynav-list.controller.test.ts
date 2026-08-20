@@ -15,11 +15,15 @@ class KeynavListControllerTestElement extends LitElement {
 
   @property({ type: Boolean }) loop = false;
 
+  @property({ type: Number, attribute: 'initial-item-index' }) initialItemIndex?: number;
+
   get keynavListConfig() {
+    const items = this.shadowRoot.querySelectorAll<HTMLElement>('button');
     return {
       layout: this.layout,
       loop: this.loop,
-      items: this.shadowRoot.querySelectorAll<HTMLElement>('button'),
+      items,
+      initialItem: this.initialItemIndex === undefined ? undefined : items[this.initialItemIndex],
       dir: this.dir
     };
   }
@@ -57,6 +61,17 @@ describe('keynav-list.controller', () => {
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+  });
+
+  it('should initialize the configured item if provided', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`<keynav-list-test-element initial-item-index="2"></keynav-list-test-element>`);
+    element = fixture.querySelector<KeynavListControllerTestElement>('keynav-list-test-element');
+    await elementIsStable(element);
+
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
   });
 
   it('should set activate a item on click', async () => {
