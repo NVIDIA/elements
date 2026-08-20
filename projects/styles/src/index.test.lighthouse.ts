@@ -23,7 +23,7 @@ describe('lighthouse report', () => {
   });
 
   test('typography.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['typography.css']!.kb).toBeLessThan(1.85);
+    expect(report.payload.css.requests['typography.css']!.kb).toBeLessThan(1.7);
   });
 
   test('view-transitions.css should remain within compressed bundle limits', async () => {
@@ -50,6 +50,6 @@ describe('lighthouse bundle report', () => {
   });
 
   test('bundles/index.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.2);
+    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.1);
   });
 });
