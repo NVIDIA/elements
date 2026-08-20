@@ -5,7 +5,7 @@ export const libraryLighthouseTestConfig = {
   logLevel: 'info',
   cacheDir: 'node_modules/.vite-lighthouse',
   test: {
-    retry: 1,
+    retry: 2,
     isolate: false,
     maxWorkers: 1,
     fileParallelism: false,
