@@ -45,7 +45,7 @@ export function getSpinnerProgressMessage() {
 }
 
 export function isInteractiveTerminal(stream: NodeJS.WriteStream) {
-  return Boolean(stream.isTTY) && !process.env.CI;
+  return stream.isTTY && !process.env.CI;
 }
 
 function shouldShowInteractiveProgress(args: Record<string, unknown>, options: RunAsyncToolOptions) {

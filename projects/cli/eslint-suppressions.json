@@ -1,7 +1,2 @@
 {
-  "src/utils.ts": {
-    "@typescript-eslint/no-unnecessary-type-conversion": {
-      "count": 1
-    }
-  }
 }
