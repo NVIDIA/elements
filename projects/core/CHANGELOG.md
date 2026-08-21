@@ -1,3 +1,8 @@
+## 2.4.0 (2026-08-21)
+
+* feat(core): swap reviewed icon svgs ([f5f232e](https://github.com/NVIDIA/elements/commit/f5f232e))
+* chore(forms): cover unset disabled aria in state controller ([e617567](https://github.com/NVIDIA/elements/commit/e617567))
+
 ## <small>2.3.2 (2026-08-21)</small>
 
 * fix(ci): stabilize monaco worker bundle lighthouse checks ([0f18d6c](https://github.com/NVIDIA/elements/commit/0f18d6c))
