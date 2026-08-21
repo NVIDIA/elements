@@ -4,7 +4,7 @@
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
+  "description": "NVIDIA Elements code authoring related components such as syntax-highlighted code blocks and an iframe isolation components.",
   "keywords": [
     "nvidia",
     "web-components",
@@ -169,6 +169,18 @@
     "./codeblock/languages/yaml.js": {
       "types": "./dist/codeblock/languages/yaml.d.ts",
       "default": "./dist/codeblock/languages/yaml.js"
+    },
+    "./iframe": {
+      "types": "./dist/iframe/index.d.ts",
+      "default": "./dist/iframe/index.js"
+    },
+    "./iframe/index.js": {
+      "types": "./dist/iframe/index.d.ts",
+      "default": "./dist/iframe/index.js"
+    },
+    "./iframe/define.js": {
+      "types": "./dist/iframe/define.d.ts",
+      "default": "./dist/iframe/define.js"
     }
   },
   "sideEffects": [
@@ -184,6 +196,7 @@
     "lint": "wireit",
     "test": "wireit",
     "test:axe": "wireit",
+    "test:ssr": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
     "test:lighthouse": "wireit"
@@ -233,6 +246,7 @@
         "lint",
         "publint",
         "test:axe",
+        "test:ssr",
         "test:coverage"
       ]
     },
@@ -358,6 +372,28 @@
       ],
       "dependencies": [
         "../internals/testing:build",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:ssr": {
+      "command": "vitest run --config=vitest.ssr.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vitest.ssr.ts"
+      ],
+      "output": [
+        "coverage/ssr/**"
+      ],
+      "dependencies": [
         "../internals/vite:ci",
         {
           "script": "build",
