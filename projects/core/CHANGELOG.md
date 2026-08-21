@@ -1,3 +1,20 @@
+## <small>2.3.2 (2026-08-21)</small>
+
+* fix(ci): stabilize monaco worker bundle lighthouse checks ([0f18d6c](https://github.com/NVIDIA/elements/commit/0f18d6c))
+* fix(core): add initial selected item focus handling for tabs ([9d617f4](https://github.com/NVIDIA/elements/commit/9d617f4))
+* chore(ci): setup scene and plot ([0b11cf8](https://github.com/NVIDIA/elements/commit/0b11cf8))
+* chore(ci): update skills ([cae20ef](https://github.com/NVIDIA/elements/commit/cae20ef))
+* chore(cli): remove unnecessary boolean conversion in isInteractiveTerminal ([993cd55](https://github.com/NVIDIA/elements/commit/993cd55))
+* chore(code): cover bash language registration in codeblock tests ([e4b7943](https://github.com/NVIDIA/elements/commit/e4b7943))
+* chore(code): cover toml language registration in codeblock tests ([1ae15fa](https://github.com/NVIDIA/elements/commit/1ae15fa))
+* chore(core): cover cdn bundle global state flag ([361b45e](https://github.com/NVIDIA/elements/commit/361b45e))
+* chore(core): cover duplicate package version audit log ([4d93214](https://github.com/NVIDIA/elements/commit/4d93214))
+* chore(docs): cleanup nav links ([702ba6c](https://github.com/NVIDIA/elements/commit/702ba6c))
+* chore(internals): adopt no-unnecessary-type-conversion lint rule ([b845d33](https://github.com/NVIDIA/elements/commit/b845d33))
+* chore(monaco): un-skip json schema validation test ([8ae0988](https://github.com/NVIDIA/elements/commit/8ae0988))
+* chore(styles): remove invalid overflow-wrap visual quarantine ([8d03d28](https://github.com/NVIDIA/elements/commit/8d03d28))
+* chore(styles): remove unreliable text-transforms visual ([681d052](https://github.com/NVIDIA/elements/commit/681d052))
+
 ## <small>2.3.1 (2026-08-12)</small>
 
 * fix(core): update icon build script ([ad3d51c](https://github.com/NVIDIA/elements/commit/ad3d51c))
