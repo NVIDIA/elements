@@ -27,9 +27,8 @@
   text-box: trim-both cap alphabetic;
 }
 
-.fill-dot-start,
 .fill-dot-end {
-  r: calc(var(--track-width) / 2.4);
+  r: calc(var(--track-width) / 3.2);
 }
 
 :host([size='sm']) {
@@ -37,9 +36,8 @@
   --width: 96px;
   --_needle-size: calc(var(--track-width) / 2.25);
 
-  .fill-dot-start,
   .fill-dot-end {
-    r: calc(var(--track-width) / 1.8);
+    r: calc(var(--track-width) / 2.4);
   }
 }
 
@@ -48,9 +46,8 @@
   --width: 160px;
   --_needle-size: calc(var(--track-width) / 3.75);
 
-  .fill-dot-start,
   .fill-dot-end {
-    r: calc(var(--track-width) / 3);
+    r: calc(var(--track-width) / 4);
   }
 }
 
@@ -89,11 +86,7 @@ path.background {
 }
 
 path.gauge {
-  animation: gauge-progress-in var(--_animation-duration) var(--nve-ref-animation-easing-100);
-  stroke-linecap: butt;
-  stroke-dasharray: var(--_dash-progress) var(--_dash-gap);
-  transition: stroke-dasharray var(--_animation-duration) var(--nve-ref-animation-easing-100);
-  will-change: stroke-dasharray;
+  stroke-linecap: round;
 }
 
 .background-surface,
@@ -110,22 +103,20 @@ path.gauge {
   background: var(--track-background);
 }
 
-.fill-dot-start {
-  fill: var(--track-background);
-}
-
 .fill-dot-end {
-  animation: gauge-dot-in var(--_animation-duration) var(--nve-ref-animation-easing-100);
   fill: var(--thumb-background);
   transform: rotate(var(--_dot-angle));
   transform-box: view-box;
   transform-origin: var(--_dot-origin);
+}
+
+:host([thumb='dot']) .fill-dot-end {
+  animation: gauge-dot-in var(--_animation-duration) var(--nve-ref-animation-easing-100);
   transition: transform var(--_animation-duration) var(--nve-ref-animation-easing-100);
   will-change: transform;
 }
 
 .fill-layer[hidden],
-.fill-dot-start[hidden],
 .fill-dot-end[hidden],
 .needle[hidden] {
   display: none;
@@ -208,16 +199,6 @@ slot {
 @media (prefers-reduced-motion: reduce) {
   :host {
     --_animation-duration: 0s;
-  }
-}
-
-@keyframes gauge-progress-in {
-  from {
-    stroke-dasharray: 0 var(--_dash-gap);
-  }
-
-  to {
-    stroke-dasharray: var(--_dash-progress) var(--_dash-gap);
   }
 }
 
