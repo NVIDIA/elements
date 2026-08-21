@@ -6,23 +6,28 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('lighthouse report', () => {
   test('JS Bundles should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport(`bundles/index.js`, /* html */`
+    const report = await lighthouseRunner.getReport(
+      `bundles/index.js`,
+      /* html */ `
       <script type="module">
       import '@nvidia-elements/core/bundles/index.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(134.5);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(136);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
   });
 
   test('JS imports should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport('js-modules', /* html */`
+    const report = await lighthouseRunner.getReport(
+      'js-modules',
+      /* html */ `
       <script type="module">
         import '@nvidia-elements/core/accordion/define.js';
         import '@nvidia-elements/core/alert/define.js';
@@ -51,6 +56,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/format-datetime/define.js';
         import '@nvidia-elements/core/format-number/define.js';
         import '@nvidia-elements/core/format-relative-time/define.js';
+        import '@nvidia-elements/core/format-truncate/define.js';
         import '@nvidia-elements/core/forms/define.js';
         import '@nvidia-elements/core/gauge/define.js';
         import '@nvidia-elements/core/grid/define.js';
@@ -94,11 +100,12 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/tree/define.js';
         import '@nvidia-elements/core/week/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(86.3);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(88);
   });
 });
