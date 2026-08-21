@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import type { HeightfieldGrid } from './heightfield-types.js';
+import type { HeightfieldGrid } from './types.js';
 import { drape, heightAt, normalAt, slopeAt } from './query.js';
 
 describe('heightfield queries', () => {

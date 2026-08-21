@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../errors.js';
+import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../errors.js';
 import {
   connectHeightfieldLayer,
   getHeightfieldLayerGrid,
@@ -12,7 +12,7 @@ import {
   setHeightfieldLayerColor,
   setHeightfieldLayerGrid,
   takeHeightfieldLayerRenderData
-} from './heightfield-layer-state.js';
+} from './layer-state.js';
 
 const grid = () => ({
   columns: 2,

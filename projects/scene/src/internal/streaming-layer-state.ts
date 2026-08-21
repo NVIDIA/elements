@@ -11,7 +11,7 @@ import {
   lineRecordIsValid,
   type LineTopology,
   type LineWidthUnit
-} from './line-data.js';
+} from './lines/data.js';
 import { VertexStreamBuffer, type VertexStreamIssue, type VertexStreamRenderData } from './vertex-stream.js';
 
 export type StreamingLayerKind = 'point' | 'line' | 'triangle';

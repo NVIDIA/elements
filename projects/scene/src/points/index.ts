@@ -2,4 +2,4 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export * from './points.js';
-export type { PointSizeUnit } from '../internal/point-data.js';
+export type { PointSizeUnit } from '../internal/points/data.js';

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { Mat4 } from '../../../internal/types.js';
+import type { Mat4 } from '../types.js';
 import { createMeshPipelines, type MeshPipelines } from './pipelines.js';
 import {
   createMeshGeometryResources,
@@ -18,10 +18,10 @@ import {
   processMeshGeometry,
   updateFlatGeometry,
   type ProcessedMeshGeometry
-} from '../../../internal/mesh/processing.js';
-import type { PickPipelinePair } from '../../pick/pipelines.js';
-import { PICK_UNIFORM_OFFSETS } from '../../pick/uniform-offsets.js';
-import type { MeshRenderItem } from '../../rendering/renderer.js';
+} from './processing.js';
+import type { PickPipelinePair } from '../pick/pipelines.js';
+import { PICK_UNIFORM_OFFSETS } from '../pick/uniform-offsets.js';
+import type { MeshRenderItem } from '../../scene/rendering/renderer.js';
 import type {
   SceneGPUBindGroup,
   SceneGPUBuffer,
@@ -30,7 +30,7 @@ import type {
   SceneGPURenderPass,
   SceneGPURenderPipeline,
   SceneGPUTexture
-} from '../../../internal/gpu/platform.js';
+} from '../gpu/platform.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_UNIFORM = 0x40;

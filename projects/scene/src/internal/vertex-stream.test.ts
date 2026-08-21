@@ -6,7 +6,7 @@ import { writeLineVertex, writePoint } from './layouts/helpers.js';
 import { LINE_VERTEX, POINT, TRI_VERTEX } from './layouts/built-ins.js';
 import { defineLayout } from './layouts/define-layout.js';
 import { TRIANGLES_COUNT } from '../errors.js';
-import { lineRecordIsValid } from './line-data.js';
+import { lineRecordIsValid } from './lines/data.js';
 import { VertexStreamBuffer, mergeUploadRanges } from './vertex-stream.js';
 
 describe('vertex stream buffer', () => {

@@ -4,7 +4,7 @@
 import { LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { notifyOwningModelPart } from '../internal/model-layer-state.js';
+import { notifyOwningModelPart } from '../internal/model/layer-state.js';
 import type { Quaternion, Vec3 } from '../internal/types.js';
 import styles from './part.css?inline';
 

@@ -30,7 +30,7 @@ import {
   resolveFrameForScene,
   setSceneNamedFrames,
   setSceneSampledTime
-} from '../internal/frame-state.js';
+} from '../internal/frame/state.js';
 import type { LabelTextureRenderItem } from './label/renderer.js';
 import { LabelSceneController, markLabelProbe } from './label/scene-controller.js';
 import type { registerSceneLabelNotifications } from '../internal/label/notifications.js';
@@ -45,18 +45,18 @@ import {
   getMarkerLayerVersion,
   isMarkerLayerRegistered,
   takeMarkerLayerRenderData
-} from '../internal/marker/layer-state.js';
+} from '../internal/markers/layer-state.js';
 
 import {
   getHeightfieldLayerVersion,
   isHeightfieldLayerRegistered,
   takeHeightfieldLayerRenderData
-} from '../internal/heightfield-layer-state.js';
+} from '../internal/heightfield/layer-state.js';
 import {
   getModelLayerVersion,
   isModelLayerRegistered,
   takeModelLayerRenderData
-} from '../internal/model-layer-state.js';
+} from '../internal/model/layer-state.js';
 import { getMeshLayerVersion, takeMeshLayerRenderData } from '../internal/mesh/layer-state.js';
 import {
   getStreamingLayerKind,
@@ -85,9 +85,9 @@ import {
   type TouchGesture,
   type UnhandledPointerInput
 } from '../internal/interactions/touch.controller.js';
-import { registerSceneMarkerInteractionController } from '../internal/marker/interaction.js';
-import { copyPickHit, requestScenePick, type PickHit } from './pick/routing.js';
-import { PickCoordinator, type PickCompletion } from './pick/coordinator.js';
+import { registerSceneMarkerInteractionController } from '../internal/markers/interaction.js';
+import { copyPickHit, requestScenePick, type PickHit } from '../internal/pick/routing.js';
+import { PickCoordinator, type PickCompletion } from '../internal/pick/coordinator.js';
 import {
   registerSceneRenderer,
   SceneRenderer,
@@ -117,7 +117,7 @@ interface ResolvedCameraBehavior {
   readonly contribution: CameraBehaviorContribution;
 }
 
-export type { PickHit } from './pick/routing.js';
+export type { PickHit } from '../internal/pick/routing.js';
 export type { SceneErrorDetail } from '../errors.js';
 export type { CameraState, SceneCameraChangeDetail } from '../internal/math/camera.js';
 

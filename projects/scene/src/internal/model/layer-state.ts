@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { MODEL_DUAL_SOURCE, PART_SHAPE } from '../errors.js';
-import { compileParts, type ModelPart, validateModelPart } from '../model/compile.js';
-import { parseCSSColor } from './color.js';
-import { DiagnosticEpisodes } from './diagnostic-episodes.js';
-import { createConstructedMeshRenderData, type MeshRenderData } from './mesh/layer-state.js';
-import { getLayerInstances } from './marker/layer-state.js';
-import type { Quaternion, RGBA, Vec3 } from './types.js';
+import { MODEL_DUAL_SOURCE, PART_SHAPE } from '../../errors.js';
+import { compileParts, type ModelPart, validateModelPart } from './compile.js';
+import { parseCSSColor } from '../color.js';
+import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
+import { getLayerInstances } from '../markers/layer-state.js';
+import type { Quaternion, RGBA, Vec3 } from '../types.js';
 
 interface ModelLayerState {
   compiled: ReturnType<typeof compileParts>;

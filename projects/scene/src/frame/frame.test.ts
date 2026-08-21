@@ -17,7 +17,7 @@ import {
 import { transformPointMat4 } from '../internal/math/mat4.js';
 import { Scene } from '../scene/scene.js';
 import { SceneFrame } from './frame.js';
-import type { TransformSample } from './transform-sample.js';
+import type { TransformSample } from '../internal/frame/types.js';
 import './define.js';
 
 /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value -- This package defines Scene Frame and Scene discovery content. */

@@ -7,9 +7,9 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import { sceneCameraController, type SceneCamera } from '../camera/camera.js';
 import { LINE_VERTEX, MARKER, POINT, TRI_VERTEX } from '../internal/layouts/built-ins.js';
 import { writeLineVertex, writeMarker, writePoint, writeTriVertex } from '../internal/layouts/helpers.js';
-import { takeHeightfieldLayerRenderData } from '../internal/heightfield-layer-state.js';
-import { takeModelLayerRenderData } from '../internal/model-layer-state.js';
-import { type ScenePickResult } from './pick/routing.js';
+import { takeHeightfieldLayerRenderData } from '../internal/heightfield/layer-state.js';
+import { takeModelLayerRenderData } from '../internal/model/layer-state.js';
+import { type ScenePickResult } from '../internal/pick/routing.js';
 import { SceneRenderer, type SceneRenderItem } from './rendering/renderer.js';
 import { SceneModel } from '../model/model.js';
 import { ScenePart } from '../model/part.js';

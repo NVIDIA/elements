@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { sharedDeviceManager } from './gpu/device-manager.js';
-import { getFrameStateSnapshot, getNamedSceneFrame } from './frame-state.js';
-import { FRAME_SAMPLE_MAX_COUNT, FRAME_SAMPLE_MAX_SPAN_MS } from './frame-transform-buffer.js';
+import { getFrameStateSnapshot, getNamedSceneFrame } from './frame/state.js';
+import { FRAME_SAMPLE_MAX_COUNT, FRAME_SAMPLE_MAX_SPAN_MS } from './frame/transform-buffer.js';
 import { restoreScenePlatform, scenePlatform, type ScenePlatform } from './gpu/platform.js';
 import { getSceneInstanceUploadCount, getSceneMeshUploadSnapshot } from '../scene/rendering/renderer.js';
 import type { LabelCaptureCapabilities } from '../scene/label/capture.js';
-import type { ScenePickDriver } from '../scene/pick/routing.js';
+import type { ScenePickDriver } from './pick/routing.js';
 
 interface SceneLabelTestingOptions {
   readonly captureCapabilities?: LabelCaptureCapabilities;

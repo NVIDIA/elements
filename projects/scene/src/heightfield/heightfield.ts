@@ -12,10 +12,10 @@ import {
   registerHeightfieldLayer,
   setHeightfieldLayerColor,
   setHeightfieldLayerGrid
-} from '../internal/heightfield-layer-state.js';
+} from '../internal/heightfield/layer-state.js';
+import { drape, heightAt, normalAt, slopeAt } from '../internal/heightfield/query.js';
 import type { RGBA, Vec3 } from '../internal/types.js';
-import type { HeightfieldGrid } from './heightfield-types.js';
-import { drape, heightAt, normalAt, slopeAt } from './query.js';
+import type { HeightfieldGrid } from '../internal/heightfield/types.js';
 import styles from './heightfield.css?inline';
 
 const DEFAULT_COLOR = '#808080';

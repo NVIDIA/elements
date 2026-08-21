@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { LABEL_CHILD_BOXLESS, LABEL_CHILD_COUNT, LABEL_FRAME_UNRESOLVED, LABEL_PARENT } from '../../errors.js';
-import { getFrameWorldMatrix, getNamedSceneFrame } from '../../internal/frame-state.js';
+import { getFrameWorldMatrix, getNamedSceneFrame } from '../../internal/frame/state.js';
 import { getLabelConfiguration, setLabelSceneState } from '../../internal/label/state.js';
 import { projectLabel } from './projection.js';
 import { scenePlatform } from '../../internal/gpu/platform.js';

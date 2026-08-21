@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { TransformSample } from '../frame/transform-sample.js';
-import { FrameTransformBuffer, type FrameTransformBufferSnapshot } from './frame-transform-buffer.js';
-import { identityMat4, multiplyMat4 } from './math/mat4.js';
-import { getLiveSceneTime } from './gpu/platform.js';
-import type { Mat4 } from './types.js';
+import type { TransformSample } from './types.js';
+import { FrameTransformBuffer, type FrameTransformBufferSnapshot } from './transform-buffer.js';
+import { identityMat4, multiplyMat4 } from '../math/mat4.js';
+import { getLiveSceneTime } from '../gpu/platform.js';
+import type { Mat4 } from '../types.js';
 
 interface FrameState {
   readonly transforms: FrameTransformBuffer;

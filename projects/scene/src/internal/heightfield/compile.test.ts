@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { compileHeightfield, recomputeHeightfield, validateHeightfieldGrid } from './compile.js';
-import type { HeightfieldGrid } from './heightfield-types.js';
+import type { HeightfieldGrid } from './types.js';
 
 describe('heightfield compilation', () => {
   it('writes exact row-major positions and the fixed CCW topology', () => {

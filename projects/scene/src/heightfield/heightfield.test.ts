@@ -9,7 +9,7 @@ import {
   getHeightfieldLayerTopologyVersion,
   getHeightfieldLayerVersion,
   takeHeightfieldLayerRenderData
-} from '../internal/heightfield-layer-state.js';
+} from '../internal/heightfield/layer-state.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { SceneHeightfield } from './heightfield.js';
 import './define.js';

@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { normalizeQuaternion } from '../internal/math/quaternion.js';
-import type { Quaternion, RGBA, Vec3 } from '../internal/types.js';
-import { createModelPrimitiveGeometry } from './primitives.js';
+import { normalizeQuaternion } from '../math/quaternion.js';
+import { createUnitPrimitiveGeometry, type PrimitiveGeometry, type UnitPrimitiveKind } from '../primitive-geometry.js';
+import type { Quaternion, RGBA, Vec3 } from '../types.js';
 
 /** One unit primitive and its model-local transform and vertex tint. */
 export interface ModelPart {
@@ -13,6 +13,10 @@ export interface ModelPart {
   scale?: Vec3;
   color?: RGBA;
 }
+
+/** The unit shapes that may compose a scene model. */
+type ModelPrimitive = UnitPrimitiveKind;
+type ModelPrimitiveGeometry = PrimitiveGeometry;
 
 interface CheckedPart {
   readonly color: Readonly<RGBA>;
@@ -34,6 +38,14 @@ const DEFAULT_COLOR = [1, 1, 1, 1] as const;
 const DEFAULT_POSITION = [0, 0, 0] as const;
 const DEFAULT_ORIENTATION = [0, 0, 0, 1] as const;
 const DEFAULT_SCALE = [1, 1, 1] as const;
+
+/**
+ * Returns the exact unit tessellation used by the corresponding marker layer.
+ * The geometry stores interleaved xyz position and xyz normal vertex data.
+ */
+export function createModelPrimitiveGeometry(shape: ModelPrimitive): ModelPrimitiveGeometry {
+  return createUnitPrimitiveGeometry(shape);
+}
 
 /**
  * Compiles transformed, vertex-colored unit primitives into one indexed mesh.

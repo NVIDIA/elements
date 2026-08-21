@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { markerFromPointPair } from './marker/data.js';
+import { markerFromPointPair } from './markers/data.js';
 import { createPrimitiveGeometry, type PrimitiveKind } from './primitive-geometry.js';
 
 describe('primitive geometry', () => {

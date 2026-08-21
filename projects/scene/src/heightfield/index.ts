@@ -2,4 +2,4 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export { SceneHeightfield } from './heightfield.js';
-export type { HeightfieldGrid } from './heightfield-types.js';
+export type { HeightfieldGrid } from '../internal/heightfield/types.js';

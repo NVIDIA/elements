@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { LINE_VERTEX } from './layouts/built-ins.js';
+import { LINE_VERTEX } from '../layouts/built-ins.js';
 
 const COLOR_OFFSET = fieldOffset('color');
 const DASH_OFFSET = fieldOffset('dash');

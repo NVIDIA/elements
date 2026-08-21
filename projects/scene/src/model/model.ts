@@ -3,15 +3,15 @@
 
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { MarkerLayerElement } from '../internal/marker/layer-element.js';
+import { MarkerLayerElement } from '../internal/markers/layer-element.js';
 import {
   connectModelLayer,
   disconnectModelLayer,
   registerModelLayer,
   setModelLayerParts
-} from '../internal/model-layer-state.js';
+} from '../internal/model/layer-state.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
-import type { ModelPart } from './compile.js';
+import type { ModelPart } from '../internal/model/compile.js';
 import styles from './model.css?inline';
 
 /**

@@ -2,4 +2,4 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export * from './frame.js';
-export * from './transform-sample.js';
+export * from '../internal/frame/types.js';

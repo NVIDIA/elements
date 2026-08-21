@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../errors.js';
-import { compileHeightfield, recomputeHeightfield } from '../heightfield/compile.js';
-import type { HeightfieldGrid } from '../heightfield/heightfield-types.js';
-import { DiagnosticEpisodes } from './diagnostic-episodes.js';
-import { createConstructedMeshRenderData, type MeshRenderData } from './mesh/layer-state.js';
-import type { RGBA } from './types.js';
+import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../errors.js';
+import { compileHeightfield, recomputeHeightfield } from './compile.js';
+import type { HeightfieldGrid } from './types.js';
+import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
+import type { RGBA } from '../types.js';
 
 interface HeightfieldState {
   childError: boolean;

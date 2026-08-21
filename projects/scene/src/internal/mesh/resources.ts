@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SceneGPUBuffer, SceneGPUDevice, SceneGPUQueue, SceneGPUTexture } from '../../../internal/gpu/platform.js';
+import type { SceneGPUBuffer, SceneGPUDevice, SceneGPUQueue, SceneGPUTexture } from '../gpu/platform.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_INDEX = 0x10;

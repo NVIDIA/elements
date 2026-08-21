@@ -3,7 +3,7 @@
 
 import { html, LitElement } from 'lit';
 import type { LayoutDescriptor } from './layouts/define-layout.js';
-import type { LineTopology, LineWidthUnit } from './line-data.js';
+import type { LineTopology, LineWidthUnit } from './lines/data.js';
 import {
   commitStreamingLayer,
   connectStreamingLayer,

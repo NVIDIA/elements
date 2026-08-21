@@ -4,7 +4,7 @@
 import { MESH_GEOMETRY, MESH_TEXTURE_WITHOUT_UVS } from '../../errors.js';
 import { parseCSSColor } from '../color.js';
 import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
-import { getLayerInstances, getLayerCount } from '../marker/layer-state.js';
+import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../types.js';
 import { validateMeshGeometry, type MeshGeometryInput } from './geometry.js';
 import { createTopologyKey } from './processing.js';

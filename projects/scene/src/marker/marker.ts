@@ -4,9 +4,9 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
-import { activateSceneMarker } from '../internal/marker/interaction.js';
-import { notifyOwningMarkerLayer } from '../internal/marker/layer-notifications.js';
-import { registerMarkerState, validateMarkerParent } from '../internal/marker/state.js';
+import { activateSceneMarker } from '../internal/markers/interaction.js';
+import { notifyOwningMarkerLayer } from '../internal/markers/layer-notifications.js';
+import { registerMarkerState, validateMarkerParent } from '../internal/markers/state.js';
 import type { Quaternion, Vec3 } from '../internal/types.js';
 import styles from './marker.css?inline';
 

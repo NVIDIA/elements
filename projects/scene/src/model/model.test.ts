@@ -5,10 +5,10 @@ import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { MODEL_DUAL_SOURCE, PART_SHAPE } from '../errors.js';
-import { takeMarkerLayerRenderData } from '../internal/marker/layer-state.js';
-import { getModelLayerTopologyVersion, takeModelLayerRenderData } from '../internal/model-layer-state.js';
+import { takeMarkerLayerRenderData } from '../internal/markers/layer-state.js';
+import { getModelLayerTopologyVersion, takeModelLayerRenderData } from '../internal/model/layer-state.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
-import { compileParts, type ModelPart } from './compile.js';
+import { compileParts, type ModelPart } from '../internal/model/compile.js';
 import { SceneModel } from './model.js';
 import './define.js';
 

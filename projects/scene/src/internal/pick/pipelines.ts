@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { MARKER_SHADER, OUTLINE_SHADER } from '../rendering/marker/pipelines.js';
-import { MESH_SHADER } from '../rendering/mesh/pipelines.js';
+import { MARKER_SHADER, OUTLINE_SHADER } from '../../internal/markers/pipelines.js';
+import { MESH_SHADER } from '../../internal/mesh/pipelines.js';
 import type { SceneGPUDevice, SceneGPURenderPipeline } from '../../internal/gpu/platform.js';
-import { LINE_PICK_SHADER, POINT_SHADER, TRIANGLE_SHADER } from '../rendering/stream-pipelines.js';
+import { LINE_PICK_SHADER, POINT_SHADER, TRIANGLE_SHADER } from '../../scene/rendering/stream-pipelines.js';
 
 interface PickPipelineDevice extends SceneGPUDevice {
   createRenderPipeline(descriptor: unknown): SceneGPURenderPipeline;

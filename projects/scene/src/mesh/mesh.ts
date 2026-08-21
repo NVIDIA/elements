@@ -3,7 +3,7 @@
 
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { MarkerLayerElement } from '../internal/marker/layer-element.js';
+import { MarkerLayerElement } from '../internal/markers/layer-element.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
 import {
   connectMeshLayer,

@@ -39,7 +39,7 @@ export {
 // types
 export type { FieldSpec, FieldType, LayoutDescriptor } from './internal/layouts/define-layout.js';
 export type { LineVertexFields, MarkerFields, PointFields, TriVertexFields } from './internal/layouts/helpers.js';
-export type { PickHit } from './scene/pick/types.js';
+export type { PickHit } from './internal/pick/routing.js';
 export type { SceneErrorDetail } from './errors.js';
 export type {
   CameraChangeSource,

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { HeightfieldGrid } from './heightfield-types.js';
+import type { HeightfieldGrid } from './types.js';
 
 const MAX_TYPED_ARRAY_LENGTH = 0xffff_ffff;
 const MAX_VERTEX_COUNT = Math.floor(MAX_TYPED_ARRAY_LENGTH / 4);

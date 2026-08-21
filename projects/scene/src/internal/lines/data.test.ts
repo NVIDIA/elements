@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { LINE_VERTEX } from './layouts/built-ins.js';
-import { writeLineVertex } from './layouts/helpers.js';
+import { LINE_VERTEX } from '../layouts/built-ins.js';
+import { writeLineVertex } from '../layouts/helpers.js';
 import {
   lineCountIsValid,
   lineHasTransparency,
@@ -11,7 +11,7 @@ import {
   lineSegmentCount,
   normalizeLineTopology,
   normalizeLineWidthUnit
-} from './line-data.js';
+} from './data.js';
 
 describe('line data', () => {
   it('should normalize public line options', () => {

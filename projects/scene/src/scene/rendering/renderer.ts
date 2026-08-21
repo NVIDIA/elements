@@ -3,22 +3,22 @@
 /* eslint-disable max-lines -- Renderer owns shared GPU resources in one module. */
 
 import { multiplyMat4 } from '../../internal/math/mat4.js';
-import { getMarkerLayerMarker, isMarkerLayerRegistered } from '../../internal/marker/layer-state.js';
-import { PickReadback, type PickReadbackDevice } from '../pick/readback.js';
-import type { PickPixel } from '../pick/readback.js';
-import type { ScenePickRequest, ScenePickResult } from '../pick/routing.js';
-import type { MarkerLayerRenderData } from '../../internal/marker/layer-state.js';
+import { getMarkerLayerMarker, isMarkerLayerRegistered } from '../../internal/markers/layer-state.js';
+import { PickReadback, type PickReadbackDevice } from '../../internal/pick/readback.js';
+import type { PickPixel } from '../../internal/pick/readback.js';
+import type { ScenePickRequest, ScenePickResult } from '../../internal/pick/routing.js';
+import type { MarkerLayerRenderData } from '../../internal/markers/layer-state.js';
 import type { MeshRenderData } from '../../internal/mesh/layer-state.js';
+import type { MeshRenderer, MeshRendererDevice } from '../../internal/mesh/renderer.js';
 import type { StreamingLayerRenderData as StreamLayerRenderData } from '../../internal/streaming-layer-state.js';
 import type { PrimitiveKind } from '../../internal/primitive-geometry.js';
-import { lineSegmentCount, type LineTopology, type LineWidthUnit } from '../../internal/line-data.js';
-import type { PointSizeUnit } from '../../internal/point-data.js';
+import { lineSegmentCount, type LineTopology, type LineWidthUnit } from '../../internal/lines/data.js';
+import type { PointSizeUnit } from '../../internal/points/data.js';
 import type { SharedDeviceLease } from '../../internal/gpu/device-manager.js';
 import type { LabelTextureRenderer, LabelTextureRenderFrame, LabelTextureRenderItem } from '../label/renderer.js';
-import type { MarkerGeometry, MarkerPipelines } from '../rendering/marker/pipelines.js';
-import type { MeshRenderer, MeshRendererDevice } from '../rendering/mesh/renderer.js';
-import { PICK_UNIFORM_OFFSETS } from '../pick/uniform-offsets.js';
-import type { PickPipelines } from '../pick/pipelines.js';
+import type { MarkerGeometry, MarkerPipelines } from '../../internal/markers/pipelines.js';
+import { PICK_UNIFORM_OFFSETS } from '../../internal/pick/uniform-offsets.js';
+import type { PickPipelines } from '../../internal/pick/pipelines.js';
 import type { StreamPipelines } from '../rendering/stream-pipelines.js';
 import {
   createOitCompositePipeline,
@@ -954,7 +954,7 @@ export class SceneRenderer {
       return;
     }
     const token = this.#streamToken;
-    this.#markerLoad = import('../rendering/marker/pipelines.js')
+    this.#markerLoad = import('../../internal/markers/pipelines.js')
       .then(({ createMarkerGeometry, createMarkerPipelines }) => {
         if (token === this.#streamToken && device === this.#geometryDevice) {
           this.#createMarkerGeometry = createMarkerGeometry;
@@ -976,7 +976,7 @@ export class SceneRenderer {
     const format = this.#renderFormat;
     if (!device || !format) return;
     const token = this.#meshToken;
-    this.#meshLoad = import('../rendering/mesh/renderer.js')
+    this.#meshLoad = import('../../internal/mesh/renderer.js')
       .then(({ MeshRenderer }) => {
         if (token !== this.#meshToken || device !== this.#geometryDevice) return;
         this.#meshRenderer = new MeshRenderer(device, format);
@@ -1196,7 +1196,7 @@ export class SceneRenderer {
       const device = this.#geometryDevice;
       const token = this.#pickToken;
       if (!device) return;
-      this.#pickLoad = import('../pick/pipelines.js')
+      this.#pickLoad = import('../../internal/pick/pipelines.js')
         .then(({ createPickPipelines }) => {
           if (token === this.#pickToken && device === this.#geometryDevice)
             this.#pickPipelines = createPickPipelines(device);

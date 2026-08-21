@@ -68,7 +68,7 @@ export function createOitCompositePipeline(device: TransparencyDevice, format: s
   });
 }
 
-export const COMPOSITE_SHADER = /* wgsl */ `
+const COMPOSITE_SHADER = /* wgsl */ `
 @group(0) @binding(0) var accumulationTexture: texture_2d<f32>;
 @group(0) @binding(1) var revealageTexture: texture_2d<f32>;
 

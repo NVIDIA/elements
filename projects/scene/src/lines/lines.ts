@@ -16,7 +16,7 @@ import {
   normalizeLineWidthUnit,
   type LineTopology,
   type LineWidthUnit
-} from '../internal/line-data.js';
+} from '../internal/lines/data.js';
 import styles from './lines.css?inline';
 
 const topologyConverter = { fromAttribute: normalizeLineTopology };

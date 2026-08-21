@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SceneGPUDevice, SceneGPURenderPipeline } from '../../../internal/gpu/platform.js';
-import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../layouts/wgsl.js';
-import { OIT_WGSL, oitTargetStates } from '../transparency.js';
+import type { SceneGPUDevice, SceneGPURenderPipeline } from '../gpu/platform.js';
+import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../../scene/rendering/layouts/wgsl.js';
+import { OIT_WGSL, oitTargetStates } from '../../scene/rendering/transparency.js';
 
 interface MeshDevice extends SceneGPUDevice {
   createRenderPipeline(descriptor: unknown): SceneGPURenderPipeline;

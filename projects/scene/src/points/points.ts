@@ -5,7 +5,7 @@ import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { StreamingLayerElement } from '../internal/streaming-layer-element.js';
 import { POINT } from '../internal/layouts/built-ins.js';
-import { normalizePointSizeUnit, type PointSizeUnit } from '../internal/point-data.js';
+import { normalizePointSizeUnit, type PointSizeUnit } from '../internal/points/data.js';
 import styles from './points.css?inline';
 
 const positiveFiniteNumberConverter = {

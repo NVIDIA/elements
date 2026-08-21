@@ -13,10 +13,10 @@ import {
   registerFrameState,
   setFrameTransform,
   touchFrameState
-} from '../internal/frame-state.js';
+} from '../internal/frame/state.js';
 import type { Quaternion, Vec3 } from '../internal/types.js';
 import styles from './frame.css?inline';
-import type { TransformSample } from './transform-sample.js';
+import type { TransformSample } from '../internal/frame/types.js';
 
 /**
  * @element nve-scene-frame

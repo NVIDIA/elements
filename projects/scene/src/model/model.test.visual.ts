@@ -188,7 +188,7 @@ function template(): string {
       import { SceneMesh } from '../../src/mesh/mesh.ts';
       import { SceneModel } from '../../src/model/model.ts';
       import { ScenePart } from '../../src/model/part.ts';
-      import { compileParts } from '../../src/model/compile.ts';
+      import { compileParts } from '../../src/internal/model/compile.ts';
       import { MARKER } from '../../src/internal/layouts/built-ins.ts';
       import { writeMarker } from '../../src/internal/layouts/helpers.ts';
 
