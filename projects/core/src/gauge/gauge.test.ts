@@ -11,6 +11,12 @@ describe(Gauge.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Gauge;
 
+  const renderedProgress = () => {
+    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
+    const background = element.shadowRoot.querySelector('.background') as SVGPathElement;
+    return gauge.getTotalLength() / background.getTotalLength();
+  };
+
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-gauge></nve-gauge>
@@ -99,6 +105,7 @@ describe(Gauge.metadata.tag, () => {
 
   it('should support css backgrounds for the track and thumb', async () => {
     element.value = 50;
+    element.thumb = 'dot';
     element.style.setProperty('--background', 'linear-gradient(90deg, red, blue)');
     element.style.setProperty('--track-background', 'transparent');
     element.style.setProperty('--thumb-background', 'rgb(1, 2, 3)');
@@ -159,10 +166,10 @@ describe(Gauge.metadata.tag, () => {
     element = fixture.querySelector(Gauge.metadata.tag);
     await elementIsStable(element);
 
-    const dot = element.shadowRoot.querySelector('.fill-dot-end:not([hidden])') as SVGCircleElement;
+    const fill = element.shadowRoot.querySelector('.fill-surface') as HTMLElement;
     const text = fixture.querySelector('span') as HTMLSpanElement;
 
-    expect(getComputedStyle(text).color).not.toBe(getComputedStyle(dot).fill);
+    expect(getComputedStyle(text).color).not.toBe(getComputedStyle(fill).backgroundColor);
   });
 
   it.each(['warning', 'success', 'danger'] as const)(
@@ -180,41 +187,38 @@ describe(Gauge.metadata.tag, () => {
   it('should render default state as determinate 0 progress', async () => {
     const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
 
-    expect(gauge.getAttribute('stroke-dasharray')).toBe('0 200');
+    expect(gauge.getTotalLength()).toBe(0);
   });
 
-  it('should hide fill dots when progress is 0', async () => {
+  it('should hide fill progress when progress is 0', async () => {
     const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    const dots = Array.from(element.shadowRoot.querySelectorAll('.fill-dot-start, .fill-dot-end')) as SVGElement[];
+    const fill = element.shadowRoot.querySelector('.fill-layer') as SVGElement;
 
     expect(gauge.hasAttribute('empty')).toBe(true);
-    expect(getComputedStyle(gauge).strokeLinecap).toBe('butt');
-    expect(dots.every(dot => dot.hasAttribute('hidden'))).toBe(true);
+    expect(getComputedStyle(gauge).strokeLinecap).toBe('round');
+    expect(fill.hasAttribute('hidden')).toBe(true);
 
     element.value = 1;
     await elementIsStable(element);
 
     expect(gauge.hasAttribute('empty')).toBe(false);
-    expect(getComputedStyle(gauge).strokeLinecap).toBe('butt');
-    expect(dots.every(dot => dot.hasAttribute('hidden'))).toBe(false);
+    expect(getComputedStyle(gauge).strokeLinecap).toBe('round');
+    expect(fill.hasAttribute('hidden')).toBe(false);
   });
 
-  it('should render the fill caps as circles', async () => {
+  it('should render fill progress with native round caps', async () => {
     element.value = 50;
     await elementIsStable(element);
 
-    const startDot = element.shadowRoot.querySelector('.fill-dot-start') as SVGCircleElement;
+    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
     const endDot = element.shadowRoot.querySelector('.fill-dot-end') as SVGCircleElement;
 
-    expect(startDot.tagName).toBe('circle');
-    expect(startDot.getAttribute('cx')).toBe('27.23');
-    expect(startDot.getAttribute('cy')).toBe('100.77');
-    expect(endDot.tagName).toBe('circle');
-    expect(endDot.getAttribute('cx')).toBe('116');
-    expect(endDot.getAttribute('cy')).toBe('64');
+    expect(getComputedStyle(gauge).strokeLinecap).toBe('round');
+    expect(endDot.hasAttribute('hidden')).toBe(false);
+    expect(parseFloat(getComputedStyle(endDot).r) * 2).toBeLessThan(parseFloat(getComputedStyle(gauge).strokeWidth));
   });
 
-  it('should animate progress on initial render and value changes', async () => {
+  it('should update progress and the end dot when value changes', async () => {
     removeFixture(fixture);
     fixture = await createFixture(html`
       <nve-gauge value="50"></nve-gauge>
@@ -224,63 +228,58 @@ describe(Gauge.metadata.tag, () => {
 
     const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
     const dot = element.shadowRoot.querySelector('.fill-dot-end') as SVGCircleElement;
+    const initialPath = gauge.getAttribute('d');
 
-    expect(gauge.style.getPropertyValue('--_progress')).toBe('50');
+    expect(renderedProgress()).toBeCloseTo(0.5, 2);
     expect(dot.style.getPropertyValue('--_dot-angle')).toBe('270deg');
-    expect(getComputedStyle(gauge).animationName).toBe('gauge-progress-in');
-    expect(getComputedStyle(gauge).transitionProperty).toBe('stroke-dasharray');
-    expect(getComputedStyle(dot).animationName).toBe('gauge-dot-in');
-    expect(getComputedStyle(dot).transitionProperty).toBe('transform');
+    expect(getComputedStyle(gauge).animationName).toBe('none');
+    expect(getComputedStyle(dot).animationName).toBe('none');
 
     element.value = 75;
     await elementIsStable(element);
 
-    expect(gauge.style.getPropertyValue('--_progress')).toBe('75');
-    expect(gauge.getAttribute('stroke-dasharray')).toBe('75 200');
+    expect(gauge.getAttribute('d')).not.toBe(initialPath);
+    expect(renderedProgress()).toBeCloseTo(0.75, 2);
     expect(dot.style.getPropertyValue('--_dot-angle')).toBe('337.5deg');
   });
 
-  it('should position the end dot at low values without wrapping', async () => {
+  it('should align the end dot with the fill path at low values', async () => {
     element.value = 12;
     await elementIsStable(element);
 
     const dot = element.shadowRoot.querySelector('.fill-dot-end') as SVGCircleElement;
     const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    gauge.style.animation = 'none';
-    const pathLength = gauge.getTotalLength();
-    const paintedPoint = gauge.getPointAtLength(pathLength * 0.11);
-    const wrappedPoint = gauge.getPointAtLength(pathLength * 0.99);
+    const fillEnd = gauge.getPointAtLength(gauge.getTotalLength());
+    const fillEndScreen = new DOMPoint(fillEnd.x, fillEnd.y).matrixTransform(gauge.getScreenCTM());
+    const dotCenterScreen = new DOMPoint(dot.cx.baseVal.value, dot.cy.baseVal.value).matrixTransform(
+      dot.getScreenCTM()
+    );
 
     expect(dot.tagName).toBe('circle');
     expect(dot.style.getPropertyValue('--_dot-angle')).toBe('167.4deg');
-    expect(parseFloat(gauge.style.getPropertyValue('--_dash-progress'))).toBeCloseTo((12 * 100) / 110.93, 1);
-    expect(gauge.isPointInStroke(new DOMPoint(paintedPoint.x, paintedPoint.y))).toBe(true);
-    expect(gauge.isPointInStroke(new DOMPoint(wrappedPoint.x, wrappedPoint.y))).toBe(false);
+    expect(renderedProgress()).toBeCloseTo(0.12, 2);
+    expect(fillEndScreen.x).toBeCloseTo(dotCenterScreen.x, 3);
+    expect(fillEndScreen.y).toBeCloseTo(dotCenterScreen.y, 3);
   });
 
   it.each([
-    { thumb: 'fill', fillHidden: false, startDotHidden: false, endDotHidden: false, needleHidden: true },
-    { thumb: 'dot', fillHidden: true, startDotHidden: true, endDotHidden: false, needleHidden: true },
-    { thumb: 'needle', fillHidden: true, startDotHidden: true, endDotHidden: true, needleHidden: false }
-  ] as const)(
-    'should render the $thumb thumb',
-    async ({ thumb, fillHidden, startDotHidden, endDotHidden, needleHidden }) => {
-      element.value = 50;
-      element.thumb = thumb;
-      await elementIsStable(element);
+    { thumb: 'fill', fillHidden: false, endDotHidden: false, needleHidden: true },
+    { thumb: 'dot', fillHidden: true, endDotHidden: false, needleHidden: true },
+    { thumb: 'needle', fillHidden: true, endDotHidden: true, needleHidden: false }
+  ] as const)('should render the $thumb thumb', async ({ thumb, fillHidden, endDotHidden, needleHidden }) => {
+    element.value = 50;
+    element.thumb = thumb;
+    await elementIsStable(element);
 
-      const fill = element.shadowRoot.querySelector('.fill-layer') as SVGElement;
-      const startDot = element.shadowRoot.querySelector('.fill-dot-start') as SVGElement;
-      const endDot = element.shadowRoot.querySelector('.fill-dot-end') as SVGElement;
-      const needle = element.shadowRoot.querySelector('.needle') as SVGElement;
+    const fill = element.shadowRoot.querySelector('.fill-layer') as SVGElement;
+    const endDot = element.shadowRoot.querySelector('.fill-dot-end') as SVGElement;
+    const needle = element.shadowRoot.querySelector('.needle') as SVGElement;
 
-      expect(element.getAttribute('thumb')).toBe(thumb);
-      expect(fill.hasAttribute('hidden')).toBe(fillHidden);
-      expect(startDot.hasAttribute('hidden')).toBe(startDotHidden);
-      expect(endDot.hasAttribute('hidden')).toBe(endDotHidden);
-      expect(needle.hasAttribute('hidden')).toBe(needleHidden);
-    }
-  );
+    expect(element.getAttribute('thumb')).toBe(thumb);
+    expect(fill.hasAttribute('hidden')).toBe(fillHidden);
+    expect(endDot.hasAttribute('hidden')).toBe(endDotHidden);
+    expect(needle.hasAttribute('hidden')).toBe(needleHidden);
+  });
 
   it('should rotate the needle thumb to the current value', async () => {
     element.thumb = 'needle';
@@ -323,10 +322,11 @@ describe(Gauge.metadata.tag, () => {
     const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
 
     expect(svg.getAttribute('viewBox')).toBe('8.53 8.53 110.93 95.7');
-    expect(gauge.getAttribute('d')).toBe('M 27.23 100.77 A 52 52 0 1 1 100.77 100.77');
     expect(background.getAttribute('d')).toBe('M 27.23 100.77 A 52 52 0 1 1 100.77 100.77');
+    expect(gauge.getAttribute('d')).not.toBe(background.getAttribute('d'));
+    expect(renderedProgress()).toBeCloseTo(0.5, 2);
     expect(getComputedStyle(background).strokeLinecap).toBe('round');
-    expect(getComputedStyle(gauge).strokeLinecap).toBe('butt');
+    expect(getComputedStyle(gauge).strokeLinecap).toBe('round');
     expect(parseFloat(getComputedStyle(element).height)).toBeCloseTo(110.4, 1);
   });
 
@@ -341,10 +341,11 @@ describe(Gauge.metadata.tag, () => {
 
     expect(element.getAttribute('shape')).toBe('half');
     expect(svg.getAttribute('viewBox')).toBe('8.53 8.53 110.93 58.93');
-    expect(gauge.getAttribute('d')).toBe('M 12 64 A 52 52 0 0 1 116 64');
     expect(background.getAttribute('d')).toBe('M 12 64 A 52 52 0 0 1 116 64');
+    expect(gauge.getAttribute('d')).not.toBe(background.getAttribute('d'));
+    expect(renderedProgress()).toBeCloseTo(0.5, 2);
     expect(getComputedStyle(background).strokeLinecap).toBe('round');
-    expect(getComputedStyle(gauge).strokeLinecap).toBe('butt');
+    expect(getComputedStyle(gauge).strokeLinecap).toBe('round');
     expect(parseFloat(getComputedStyle(element).height)).toBeCloseTo(68, 1);
   });
 
@@ -364,30 +365,27 @@ describe(Gauge.metadata.tag, () => {
     expect(assigned[0]).toBe(fixture.querySelector('span'));
   });
 
-  it('should set stroke-dasharray to 0 200 when value is 0', async () => {
+  it('should render zero-length progress when value is 0', async () => {
     element.value = 0;
     await elementIsStable(element);
 
-    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    expect(gauge.getAttribute('stroke-dasharray')).toBe('0 200');
+    expect(renderedProgress()).toBe(0);
   });
 
-  it('should default stroke-dasharray scaling when max is omitted', async () => {
+  it('should default progress scaling when max is omitted', async () => {
     element.value = 50;
     element.max = undefined;
     await elementIsStable(element);
 
-    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    expect(gauge.getAttribute('stroke-dasharray')).toBe('50 200');
+    expect(renderedProgress()).toBeCloseTo(0.5, 2);
   });
 
-  it('should scale stroke-dasharray with a custom max', async () => {
+  it('should scale progress with a custom max', async () => {
     element.value = 5;
     element.max = 20;
     await elementIsStable(element);
 
-    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    expect(gauge.getAttribute('stroke-dasharray')).toBe('25 200');
+    expect(renderedProgress()).toBeCloseTo(0.25, 2);
   });
 
   it('should clamp over-max values', async () => {
@@ -395,25 +393,23 @@ describe(Gauge.metadata.tag, () => {
     element.max = 100;
     await elementIsStable(element);
 
-    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    expect(gauge.getAttribute('stroke-dasharray')).toBe('100 200');
+    expect(renderedProgress()).toBeCloseTo(1, 2);
     expect(element._internals.ariaValueNow).toBe('100');
     expect(element._internals.ariaValueMax).toBe('100');
   });
 
   it.each([
-    { name: 'NaN value', value: Number.NaN, max: 100, dasharray: '0 200', ariaValueNow: '0', ariaValueMax: '100' },
-    { name: 'negative value', value: -1, max: 100, dasharray: '0 200', ariaValueNow: '0', ariaValueMax: '100' },
-    { name: 'NaN max', value: 50, max: Number.NaN, dasharray: '50 200', ariaValueNow: '50', ariaValueMax: '100' },
-    { name: 'zero max', value: 50, max: 0, dasharray: '50 200', ariaValueNow: '50', ariaValueMax: '100' },
-    { name: 'negative max', value: 50, max: -1, dasharray: '50 200', ariaValueNow: '50', ariaValueMax: '100' }
-  ])('should normalize $name', async ({ value, max, dasharray, ariaValueNow, ariaValueMax }) => {
+    { name: 'NaN value', value: Number.NaN, max: 100, progress: 0, ariaValueNow: '0', ariaValueMax: '100' },
+    { name: 'negative value', value: -1, max: 100, progress: 0, ariaValueNow: '0', ariaValueMax: '100' },
+    { name: 'NaN max', value: 50, max: Number.NaN, progress: 0.5, ariaValueNow: '50', ariaValueMax: '100' },
+    { name: 'zero max', value: 50, max: 0, progress: 0.5, ariaValueNow: '50', ariaValueMax: '100' },
+    { name: 'negative max', value: 50, max: -1, progress: 0.5, ariaValueNow: '50', ariaValueMax: '100' }
+  ])('should normalize $name', async ({ value, max, progress, ariaValueNow, ariaValueMax }) => {
     element.value = value;
     element.max = max;
     await elementIsStable(element);
 
-    const gauge = element.shadowRoot.querySelector('.gauge') as SVGPathElement;
-    expect(gauge.getAttribute('stroke-dasharray')).toBe(dasharray);
+    expect(renderedProgress()).toBeCloseTo(progress, 2);
     expect(element._internals.ariaValueNow).toBe(ariaValueNow);
     expect(element._internals.ariaValueMax).toBe(ariaValueMax);
   });

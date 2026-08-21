@@ -9,15 +9,11 @@ import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
 import { attachInternals, I18nController, useStyles } from '@nvidia-elements/core/internal';
 import styles from './gauge.css?inline';
 
-const GAUGE_DASH_GAP = 200;
-const GAUGE_DASH_SCALE = 100 / 110.93;
-
 const GAUGE_GEOMETRY = {
   default: {
     center: 64,
     path: 'M 27.23 100.77 A 52 52 0 1 1 100.77 100.77',
     radius: 52,
-    start: { x: 27.23, y: 100.77 },
     startAngle: 135,
     sweepAngle: 270,
     surfaceHeight: 128,
@@ -27,7 +23,6 @@ const GAUGE_GEOMETRY = {
     center: 64,
     path: 'M 12 64 A 52 52 0 0 1 116 64',
     radius: 52,
-    start: { x: 12, y: 64 },
     startAngle: 180,
     sweepAngle: 180,
     surfaceHeight: 64,
@@ -36,12 +31,6 @@ const GAUGE_GEOMETRY = {
 } as const;
 
 type GaugeGeometry = (typeof GAUGE_GEOMETRY)[keyof typeof GAUGE_GEOMETRY];
-
-const fillMaskStyle = (progress: number) => ({
-  '--_progress': progress,
-  '--_dash-progress': `${progress * GAUGE_DASH_SCALE}cqw`,
-  '--_dash-gap': `${GAUGE_DASH_GAP * GAUGE_DASH_SCALE}cqw`
-});
 
 const thumbStyle = (thumb: 'dot' | 'needle', progressAngle: number, geometry: GaugeGeometry) => ({
   [`--_${thumb}-angle`]: `${progressAngle}deg`,
@@ -117,6 +106,7 @@ export class Gauge extends LitElement {
     const progress = (value / max) * 100;
     const thumb = this.#normalizedThumb();
     const progressAngle = this.#angleAtProgress(geometry, progress);
+    const fillPath = this.#pathAtProgress(geometry, progress);
     const showFill = thumb === 'fill';
     const showDot = progress > 0 && (thumb === 'fill' || thumb === 'dot');
 
@@ -125,23 +115,19 @@ export class Gauge extends LitElement {
         <svg viewBox=${geometry.viewBox} role="presentation" aria-hidden="true">
           <defs>
             <mask id="background-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height=${geometry.surfaceHeight}>
-              <path pathLength="100" d=${geometry.path} class="background"></path>
+              <path d=${geometry.path} class="background"></path>
             </mask>
             <mask id="fill-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height=${geometry.surfaceHeight}>
-              <path pathLength="100" d=${geometry.path} class="gauge"
-                ?empty=${progress <= 0}
-                style=${styleMap(fillMaskStyle(progress))}
-                stroke-dasharray=${`${progress} ${GAUGE_DASH_GAP}`}>
-              </path>
+              <path d=${fillPath} class="gauge" ?empty=${progress <= 0}></path>
             </mask>
           </defs>
           <foreignObject width="128" height=${geometry.surfaceHeight} mask="url(#background-mask)">
             <div xmlns="http://www.w3.org/1999/xhtml" class="background-surface"></div>
           </foreignObject>
-          <foreignObject class="fill-layer" width="128" height=${geometry.surfaceHeight} mask="url(#fill-mask)" ?hidden=${!showFill}>
+          <foreignObject class="fill-layer" width="128" height=${geometry.surfaceHeight} mask="url(#fill-mask)"
+            ?hidden=${!showFill || progress <= 0}>
             <div xmlns="http://www.w3.org/1999/xhtml" class="fill-surface"></div>
           </foreignObject>
-          <circle class="fill-dot-start" cx=${geometry.start.x} cy=${geometry.start.y} ?hidden=${!(showFill && progress > 0)}></circle>
           <circle class="fill-dot-end" cx=${geometry.center + geometry.radius} cy=${geometry.center}
             ?hidden=${!showDot}
             style=${styleMap(thumbStyle('dot', progressAngle, geometry))}>
@@ -177,6 +163,22 @@ export class Gauge extends LitElement {
 
   #angleAtProgress(geometry: GaugeGeometry, progress: number) {
     return geometry.startAngle + geometry.sweepAngle * (progress / 100);
+  }
+
+  #pathAtProgress(geometry: GaugeGeometry, progress: number) {
+    const start = this.#pointAtAngle(geometry, geometry.startAngle);
+    const sweepAngle = geometry.sweepAngle * (progress / 100);
+    const end = this.#pointAtAngle(geometry, geometry.startAngle + sweepAngle);
+    const largeArcFlag = sweepAngle > 180 ? 1 : 0;
+    return `M ${start.x} ${start.y} A ${geometry.radius} ${geometry.radius} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`;
+  }
+
+  #pointAtAngle(geometry: GaugeGeometry, angle: number) {
+    const radians = (angle * Math.PI) / 180;
+    return {
+      x: geometry.center + geometry.radius * Math.cos(radians),
+      y: geometry.center + geometry.radius * Math.sin(radians)
+    };
   }
 
   #geometry() {
