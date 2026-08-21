@@ -11,7 +11,7 @@ import type { ReactiveController } from './types.js';
 class StateDisabledControllerTestElement extends HTMLElement {
   static formAssociated = true;
 
-  disabled = false;
+  disabled: boolean | null | undefined = false;
   readOnly = false;
   _internals?: ElementInternals;
   #controllers = new Set<ReactiveController>();
@@ -74,5 +74,23 @@ describe('StateDisabledController', () => {
 
     expect(element._internals!.ariaDisabled).toBe(null);
     expect(element.matches(':state(disabled)')).toBe(true);
+  });
+
+  it('should clear aria-disabled when disabled is unset', () => {
+    element.disabled = true;
+    element.sync();
+    expect(element._internals!.ariaDisabled).toBe('true');
+
+    element.disabled = undefined;
+    element.sync();
+
+    expect(element._internals!.ariaDisabled).toBe(null);
+    expect(element.matches(':state(disabled)')).toBe(false);
+
+    element.disabled = null;
+    element.sync();
+
+    expect(element._internals!.ariaDisabled).toBe(null);
+    expect(element.matches(':state(disabled)')).toBe(false);
   });
 });
