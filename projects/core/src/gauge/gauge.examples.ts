@@ -176,7 +176,7 @@ export const Size = {
       <nve-gauge size="md" value="50" aria-valuetext="12Hz">
         <span nve-text="grow">12Hz</span>
       </nve-gauge>
-      <nve-gauge size="lg" value="50" aria-valuetext="84%">
+      <nve-gauge size="lg" value="84" aria-valuetext="84%">
         <span nve-text="grow">84%</span>
       </nve-gauge>
     </div>

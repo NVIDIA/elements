@@ -35,7 +35,6 @@ function template(theme: '' | 'dark' = '') {
     <nve-gauge status="success" value="50"></nve-gauge>
     <nve-gauge status="warning" value="75"></nve-gauge>
     <nve-gauge status="danger" value="100"></nve-gauge>
-    <nve-gauge status="accent" value="0"></nve-gauge>
   </div>
 
   <div nve-layout="row gap:xs">
@@ -49,48 +48,34 @@ function template(theme: '' | 'dark' = '') {
       );
       --thumb-background: var(--color);
     ">
-      <span>82&deg;C</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
   </div>
 
-  <div nve-layout="row gap:xs">
+  <div nve-layout="row gap:xs align:bottom">
     <nve-gauge thumb="fill" value="66" status="accent">
-      <span>fill</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
     <nve-gauge thumb="dot" value="66" status="accent">
-      <span>dot</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
     <nve-gauge thumb="needle" value="66" status="accent">
-      <span>needle</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
-  </div>
-
-  <div nve-layout="row gap:xs">
-    <nve-gauge value="50" status="accent" size="sm"></nve-gauge>
-    <nve-gauge value="50" status="accent" size="md"></nve-gauge>
-    <nve-gauge value="50" status="accent" size="lg"></nve-gauge>
+    <nve-gauge shape="half" value="66" status="accent">
+      <span>•︎•︎•</span>
+    </nve-gauge>
   </div>
 
   <div nve-layout="row gap:xs">
     <nve-gauge value="50" status="accent" size="sm">
-      <span>30Hz</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
     <nve-gauge value="50" status="accent" size="md">
-      <span>12Hz</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
     <nve-gauge value="50" status="accent" size="lg">
-      <span>84%</span>
-    </nve-gauge>
-  </div>
-
-  <div nve-layout="row gap:xs">
-    <nve-gauge shape="half" value="25" status="accent"></nve-gauge>
-    <nve-gauge shape="half" value="50" status="success"></nve-gauge>
-    <nve-gauge shape="half" value="75" status="warning">
-      <span>75%</span>
-    </nve-gauge>
-    <nve-gauge shape="half" value="100" status="danger">
-      <span>100%</span>
+      <span>•︎•︎•</span>
     </nve-gauge>
   </div>
   `;
