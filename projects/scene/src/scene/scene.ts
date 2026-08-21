@@ -31,16 +31,19 @@ import {
   setSceneNamedFrames,
   setSceneSampledTime
 } from '../internal/frame/state.js';
+import { verifyLabelBrowserCopy } from '../internal/label/browser-probe.js';
+import {
+  copyLabelElementImage,
+  getLabelCaptureCapabilities,
+  type LabelCaptureCapabilities
+} from '../internal/label/capture.js';
+import { registerSceneLabelNotifications } from '../internal/label/notifications.js';
+import { LabelOcclusionTracker } from '../internal/label/occlusion.js';
+import { waitForLabelMutationPaint } from '../internal/label/overlay.js';
 import type { LabelTextureRenderItem } from '../internal/label/renderer.js';
 import { LabelSceneController, markLabelProbe } from '../internal/label/scene-controller.js';
-import type { registerSceneLabelNotifications } from '../internal/label/notifications.js';
-import type { projectLabel } from '../internal/label/projection.js';
-import type { copyLabelElementImage, getLabelCaptureCapabilities, LabelCaptureCapabilities } from '../internal/label/capture.js';
-import type { LabelOcclusionTracker } from '../internal/label/occlusion.js';
-import type { verifyLabelBrowserCopy } from '../internal/label/browser-probe.js';
-import type { waitForLabelMutationPaint } from '../internal/label/overlay.js';
-import type { LabelTextureController } from '../internal/label/texture.js';
-import type { consumeLabelDirty, getLabelConfiguration, setLabelSceneState } from '../internal/label/state.js';
+import { consumeLabelDirty, setLabelSceneState } from '../internal/label/state.js';
+import { LabelTextureController } from '../internal/label/texture.js';
 import {
   getMarkerLayerVersion,
   isMarkerLayerRegistered,
@@ -149,20 +152,6 @@ const MODEL_LAYER_SELECTOR = 'nve-scene-model';
 const RENDERABLE_LAYER_SELECTOR = `${MARKER_LAYER_SELECTOR},${STREAMING_LAYER_SELECTOR},${REFERENCE_LAYER_SELECTOR},${HEIGHTFIELD_LAYER_SELECTOR},${MESH_LAYER_SELECTOR},${MODEL_LAYER_SELECTOR}`;
 const LABEL_SELECTOR = 'nve-scene-label';
 
-type LabelTextureRuntime = {
-  readonly LabelOcclusionTracker: typeof LabelOcclusionTracker;
-  readonly LabelTextureController: typeof LabelTextureController;
-  readonly copyLabelElementImage: typeof copyLabelElementImage;
-  readonly getLabelCaptureCapabilities: typeof getLabelCaptureCapabilities;
-  readonly verifyLabelBrowserCopy: typeof verifyLabelBrowserCopy;
-  readonly waitForLabelMutationPaint: typeof waitForLabelMutationPaint;
-  readonly consumeLabelDirty: typeof consumeLabelDirty;
-  readonly getLabelConfiguration: typeof getLabelConfiguration;
-  readonly projectLabel: typeof projectLabel;
-  readonly registerSceneLabelNotifications: typeof registerSceneLabelNotifications;
-  readonly setLabelSceneState: typeof setLabelSceneState;
-};
-
 interface SceneLabelTestingOptions {
   readonly captureCapabilities?: LabelCaptureCapabilities;
   readonly copy?: (options: {
@@ -174,8 +163,6 @@ interface SceneLabelTestingOptions {
     pixelY: number
   ) => { readonly depth: number; readonly id: number } | undefined;
   readonly prefetchGeometryPixel?: (pixelX: number, pixelY: number) => void;
-  /** Rejects the lazy label-runtime load in an isolated Scene test. */
-  readonly loadRuntime?: () => Promise<void>;
 }
 
 const LABEL_TESTING = Symbol.for('nve.scene.label-testing');
@@ -228,8 +215,6 @@ export class Scene extends LitElement {
   #labelFallbackDiagnostics = new WeakMap<HTMLElement, Set<string>>();
   #labelOcclusion = new WeakMap<HTMLElement, LabelOcclusionTracker>();
   #labels: HTMLElement[] = [];
-  #labelRuntime?: LabelTextureRuntime;
-  #labelRuntimeLoad?: Promise<void>;
   #labelProbedDevice?: SceneGPUDevice;
   #layerVersions = new WeakMap<HTMLElement, number>();
   #heightfieldVersions = new WeakMap<HTMLElement, number>();
@@ -460,7 +445,7 @@ export class Scene extends LitElement {
     this.#loadLabelOverlayController();
     this.#syncLabelSlots();
     this.#startObservers();
-    if (this.#labels.some(label => label.parentElement === this)) this.#loadLabelTextureRuntime();
+    if (this.#labels.some(label => label.parentElement === this)) this.#prepareLabelCapture();
     this.#sampleBackground();
     this.#scheduleTick();
   }
@@ -473,7 +458,7 @@ export class Scene extends LitElement {
     this.#renderer.initialize(canvas, lease);
     this.#labelDevice = lease.device;
     this.#loadLabelOverlayController();
-    if (this.#labels.some(label => label.parentElement === this)) this.#loadLabelTextureRuntime(lease);
+    if (this.#labels.some(label => label.parentElement === this)) this.#prepareLabelCapture(lease);
     this.#resizeFromRect();
     this.#sampleBackground();
     this.#trackCameraBehaviorChanges();
@@ -482,69 +467,18 @@ export class Scene extends LitElement {
     this.#renderIfNeeded();
   }
 
-  // eslint-disable-next-line max-lines-per-function -- The lazy seam owns the complete optional label graph.
-  #loadLabelTextureRuntime(lease?: SharedDeviceLease): void {
+  #prepareLabelCapture(lease?: SharedDeviceLease): void {
+    this.#installLabelNotifications();
     const device = lease?.device ?? this.#labelDevice;
-    const start = () => {
-      if (!device) return;
-      this.#installLabelNotifications();
-      const testing = this.#getLabelTesting();
-      if (testing?.captureCapabilities) {
-        this.#labelCaptureCapabilities = testing.captureCapabilities;
-        this.#needsRender = true;
-      } else if (this.#labelProbedDevice !== device) {
-        this.#labelProbedDevice = device;
-        void this.#probeLabelCapture(device);
-      }
-    };
-    if (this.#labelRuntime) {
-      start();
-      return;
+    if (!device) return;
+    const testing = this.#getLabelTesting();
+    if (testing?.captureCapabilities) {
+      this.#labelCaptureCapabilities = testing.captureCapabilities;
+      this.#needsRender = true;
+    } else if (this.#labelProbedDevice !== device) {
+      this.#labelProbedDevice = device;
+      void this.#probeLabelCapture(device);
     }
-    const testingLoad = this.#getLabelTesting()?.loadRuntime?.() ?? Promise.resolve();
-    this.#labelRuntimeLoad ??= testingLoad
-      .then(() =>
-        Promise.all([
-          import('../internal/label/browser-probe.js'),
-          import('../internal/label/capture.js'),
-          import('../internal/label/occlusion.js'),
-          import('../internal/label/texture.js'),
-          import('../internal/label/overlay.js'),
-          import('../internal/label/state.js'),
-          import('../internal/label/projection.js'),
-          import('../internal/label/notifications.js')
-        ])
-      )
-      .then(([browserProbe, capture, occlusion, texture, overlay, state, projection, notifications]) => {
-        this.#labelRuntime = {
-          LabelOcclusionTracker: occlusion.LabelOcclusionTracker,
-          LabelTextureController: texture.LabelTextureController,
-          copyLabelElementImage: capture.copyLabelElementImage,
-          getLabelCaptureCapabilities: capture.getLabelCaptureCapabilities,
-          verifyLabelBrowserCopy: browserProbe.verifyLabelBrowserCopy,
-          waitForLabelMutationPaint: overlay.waitForLabelMutationPaint,
-          consumeLabelDirty: state.consumeLabelDirty,
-          getLabelConfiguration: state.getLabelConfiguration,
-          projectLabel: projection.projectLabel,
-          registerSceneLabelNotifications: notifications.registerSceneLabelNotifications,
-          setLabelSceneState: state.setLabelSceneState
-        };
-        this.#installLabelNotifications();
-        this.#syncLabelSlots();
-        this.#needsRender = true;
-      })
-      .then(
-        () => {
-          if (this.#labelDevice === device && this.isConnected) start();
-        },
-        () => {
-          this.#labelRuntimeLoad = undefined;
-          if (this.#labelDevice === device && this.isConnected) {
-            this.#labelCaptureCapabilities = { available: false };
-            this.#needsRender = true;
-          }
-        }
-      );
   }
 
   #loadLabelOverlayController(): void {
@@ -561,12 +495,12 @@ export class Scene extends LitElement {
   }
 
   #installLabelNotifications(): void {
-    if (this.#unsubscribeLabels || !this.#labelRuntime) return;
-    this.#unsubscribeLabels = this.#labelRuntime.registerSceneLabelNotifications(this, () => {
+    if (this.#unsubscribeLabels) return;
+    this.#unsubscribeLabels = registerSceneLabelNotifications(this, () => {
       this.#refreshLabels();
       this.#loadLabelOverlayController();
       this.#syncLabelSlots();
-      if (this.#labels.some(label => label.parentElement === this)) this.#loadLabelTextureRuntime();
+      if (this.#labels.some(label => label.parentElement === this)) this.#prepareLabelCapture();
       this.#needsRender = true;
     });
   }
@@ -976,7 +910,7 @@ export class Scene extends LitElement {
     }
 
     if (dirtyLabels && this.#labelDevice && this.#labels.some(label => label.parentElement === this)) {
-      this.#loadLabelTextureRuntime();
+      this.#prepareLabelCapture();
     }
     this.#needsRender = true;
   }
@@ -1008,7 +942,7 @@ export class Scene extends LitElement {
     this.#refreshLabels();
     this.#loadLabelOverlayController();
     this.#syncLabelSlots();
-    if (this.#labelDevice && this.#labels.some(label => label.parentElement === this)) this.#loadLabelTextureRuntime();
+    if (this.#labelDevice && this.#labels.some(label => label.parentElement === this)) this.#prepareLabelCapture();
     this.#needsRender = true;
   }
 
@@ -1501,8 +1435,7 @@ export class Scene extends LitElement {
   // eslint-disable-next-line max-statements -- The complete probe owns disposable DOM, GPU, and failure cleanup.
   async #probeLabelCapture(device: SceneGPUDevice): Promise<void> {
     const canvas = this.#canvas;
-    const runtime = this.#labelRuntime;
-    if (!canvas || !runtime) return;
+    if (!canvas) return;
     const token = this.#connectionToken;
     const source = globalThis.document.createElement('nve-scene-label');
     const child = globalThis.document.createElement('div');
@@ -1522,11 +1455,11 @@ export class Scene extends LitElement {
       canvas.append(slot);
       await waitForLabelProbePaint();
       let verifiedSignature: Extract<LabelCaptureCapabilities, { available: true }>['copySignature'];
-      const capabilities = await runtime.getLabelCaptureCapabilities({
+      const capabilities = await getLabelCaptureCapabilities({
         device,
         realm: globalThis,
         verifyCopy: async signature => {
-          const copied = await runtime.verifyLabelBrowserCopy({ device, signature, slot });
+          const copied = await verifyLabelBrowserCopy({ device, signature, slot });
           if (copied) verifiedSignature = signature;
           return copied;
         },
@@ -1569,13 +1502,9 @@ export class Scene extends LitElement {
 
   #verifyLabelMutationPaint(canvas: HTMLCanvasElement, child: HTMLElement): Promise<boolean> {
     const before = child.getBoundingClientRect().width;
-    return (
-      this.#labelRuntime
-        ?.waitForLabelMutationPaint(canvas, () => {
-          child.style.width = '3px';
-        })
-        .then(painted => painted && child.getBoundingClientRect().width > before) ?? Promise.resolve(false)
-    );
+    return waitForLabelMutationPaint(canvas, () => {
+      child.style.width = '3px';
+    }).then(painted => painted && child.getBoundingClientRect().width > before);
   }
 
   #verifyLabelFocusCapture(source: HTMLElement, control: HTMLInputElement): boolean {
@@ -1605,15 +1534,14 @@ export class Scene extends LitElement {
     await waitForLabelProbePaint();
     const after = slot.getBoundingClientRect();
     return (
-      (slot.style.transform === 'translate(1px, 1px)' &&
-        (after.x !== before.x || after.y !== before.y || (before.width === 0 && after.width === 0)) &&
-        this.#labelRuntime?.verifyLabelBrowserCopy({ device, signature, slot })) ??
-      false
+      slot.style.transform === 'translate(1px, 1px)' &&
+      (after.x !== before.x || after.y !== before.y || (before.width === 0 && after.width === 0)) &&
+      verifyLabelBrowserCopy({ device, signature, slot })
     );
   }
 
   #createTextureLabelItems(viewProjection: Float32Array): LabelTextureRenderItem[] {
-    if (!this.#labelCaptureCapabilities.available || !this.#labelDevice || !this.#labelRuntime) return [];
+    if (!this.#labelCaptureCapabilities.available || !this.#labelDevice) return [];
     const rect = this.getBoundingClientRect();
     return this.#labels.flatMap(label => this.#createTextureLabelItem(label, rect, viewProjection));
   }
@@ -1632,7 +1560,7 @@ export class Scene extends LitElement {
     }
     const controller = this.#getLabelTextureController(label, slot);
     controller.setFocused(label.matches(':focus-within'));
-    if (this.#labelRuntime?.consumeLabelDirty(label)) controller.markDirty();
+    if (consumeLabelDirty(label)) controller.markDirty();
     controller.setSize({
       height: Math.round(child.offsetHeight * scenePlatform.getDevicePixelRatio()),
       width: Math.round(child.offsetWidth * scenePlatform.getDevicePixelRatio())
@@ -1649,10 +1577,10 @@ export class Scene extends LitElement {
       return [];
     }
     const bounds = slot.getBoundingClientRect();
-    const tracker = this.#labelOcclusion.get(label) ?? new this.#labelRuntime!.LabelOcclusionTracker();
+    const tracker = this.#labelOcclusion.get(label) ?? new LabelOcclusionTracker();
     tracker.setTextureMode(true);
     this.#labelOcclusion.set(label, tracker);
-    this.#labelRuntime?.setLabelSceneState(label, {
+    setLabelSceneState(label, {
       occluded: tracker.occluded,
       stale: label.hasAttribute('stale')
     });
@@ -1669,7 +1597,7 @@ export class Scene extends LitElement {
         onOcclusionSamples: samples => {
           const occluded = tracker.recordOcclusionSamples(samples);
           slot.style.pointerEvents = tracker.pointerEnabled ? 'auto' : 'none';
-          this.#labelRuntime?.setLabelSceneState(label, {
+          setLabelSceneState(label, {
             occluded,
             stale: label.hasAttribute('stale')
           });
@@ -1687,9 +1615,7 @@ export class Scene extends LitElement {
       : undefined;
     if (!device || !signature || !device.createTexture)
       throw new DOMException('Label capture is unavailable.', 'NotSupportedError');
-    const runtime = this.#labelRuntime;
-    if (!runtime) throw new DOMException('Label capture is still loading.', 'InvalidStateError');
-    const controller = new runtime.LabelTextureController<SceneGPUTexture>({
+    const controller = new LabelTextureController<SceneGPUTexture>({
       copy: (texture, size) => {
         const testingCopy = this.#getLabelTesting()?.copy;
         if (testingCopy) {
@@ -1698,7 +1624,7 @@ export class Scene extends LitElement {
         }
         const copy = Reflect.get(device.queue, 'copyElementImageToTexture');
         if (typeof copy !== 'function') throw new DOMException('Label copy is unavailable.', 'NotSupportedError');
-        runtime.copyLabelElementImage(signature, {
+        copyLabelElementImage(signature, {
           copy: (...arguments_) => Reflect.apply(copy, device.queue, arguments_),
           destination: { texture },
           height: size.height,
@@ -1735,7 +1661,7 @@ export class Scene extends LitElement {
 
   #setLabelOverlayState(label: HTMLElement): void {
     this.#labelOcclusion.get(label)?.setTextureMode(false);
-    this.#labelRuntime?.setLabelSceneState(label, {
+    setLabelSceneState(label, {
       occluded: false,
       stale: label.hasAttribute('stale')
     });

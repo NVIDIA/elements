@@ -1547,7 +1547,7 @@ describe(Scene.metadata.tag, () => {
     expect(label.hasAttribute('occluded')).toBe(false);
   });
 
-  it('loads the optional label runtime when a direct label is appended after Scene readiness', async () => {
+  it('promotes a direct label appended after Scene readiness', async () => {
     const gpu = configureFakeWebGPU();
     const { element } = await createScene(html`<nve-scene aria-label="Late label"></nve-scene>`);
     gpu.resolveNextDevice();
@@ -1671,30 +1671,6 @@ describe(Scene.metadata.tag, () => {
     expect(element.shadowRoot?.querySelector('.overlay slot')).toBeNull();
   });
 
-  it('contains a lazy-runtime import failure in the overlay and retries after a later label mutation', async () => {
-    const gpu = configureFakeWebGPU();
-    const { element } = await createScene(html`<nve-scene aria-label="Retry label runtime"></nve-scene>`);
-    gpu.resolveNextDevice();
-    await element.ready;
-    const label = createLabel();
-    mockLabelBox(element, label.firstElementChild as HTMLElement);
-    const failedLoad = vi.fn(() => Promise.reject(new Error('optional label runtime unavailable')));
-    configureSceneLabelTesting(element, { loadRuntime: failedLoad });
-    element.append(label);
-
-    await vi.waitFor(() => expect(failedLoad).toHaveBeenCalledOnce());
-    expect(element.shadowRoot?.querySelector<HTMLSlotElement>('.overlay slot')?.assignedElements()).toEqual([label]);
-
-    const copies: HTMLSlotElement[] = [];
-    configureSceneLabelTesting(element, {
-      captureCapabilities: { available: true, copySignature: 'current-dictionaries' },
-      copy: ({ slot }) => copies.push(slot)
-    });
-    label.setAttribute('offset', '[1,0]');
-
-    await vi.waitFor(() => expect(copies.length).toBeGreaterThan(0));
-  });
-
   it('promotes a captured label only after its slot is an immediate canvas child', async () => {
     const gpu = configureFakeWebGPU();
     const { element } = await createScene(html`<nve-scene aria-label="Texture labels"></nve-scene>`);
@@ -1802,8 +1778,10 @@ describe(Scene.metadata.tag, () => {
     const overlay = element.shadowRoot?.querySelector('.overlay');
     expect(overlay?.querySelector('slot')?.assignedElements()).toEqual([label]);
     child.blur();
-    label.invalidate();
-    await waitForAnimationFrames(6);
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      label.invalidate();
+      await waitForAnimationFrames(2);
+    }
     const fallbackWarnings = warnings.filter(event => event.detail.code === 'label-texture-fallback');
     expect(fallbackWarnings).toHaveLength(1);
     expect(fallbackWarnings[0]?.detail.severity).toBe('warning');

@@ -20,7 +20,6 @@ interface SceneLabelTestingOptions {
     pixelY: number
   ) => { readonly depth: number; readonly id: number } | undefined;
   readonly prefetchGeometryPixel?: (pixelX: number, pixelY: number) => void;
-  readonly loadRuntime?: () => Promise<void>;
 }
 
 const LABEL_TESTING = Symbol.for('nve.scene.label-testing');
