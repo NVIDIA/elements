@@ -14,7 +14,7 @@ import type {
   SceneGPUCommandEncoder,
   SceneGPURenderPass,
   SceneGPUTexture
-} from '../../internal/gpu/platform.js';
+} from '../gpu/platform.js';
 
 describe(createLabelTexturePipeline.name, () => {
   it('should create a premultiplied, depth-tested sRGB label pipeline without depth writes', () => {

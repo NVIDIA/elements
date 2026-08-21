@@ -10,7 +10,7 @@ import {
   type LabelCaptureCopySignature,
   type LabelCaptureProbe
 } from './capture.js';
-import { resetLabelCaptureCapabilitiesForTesting } from '../../internal/testing.js';
+import { resetLabelCaptureCapabilitiesForTesting } from '../testing.js';
 
 describe('label capture capability cache', () => {
   afterEach(() => resetLabelCaptureCapabilitiesForTesting());

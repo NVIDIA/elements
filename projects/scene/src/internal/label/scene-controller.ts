@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { LABEL_CHILD_BOXLESS, LABEL_CHILD_COUNT, LABEL_FRAME_UNRESOLVED, LABEL_PARENT } from '../../errors.js';
-import { getFrameWorldMatrix, getNamedSceneFrame } from '../../internal/frame/state.js';
-import { getLabelConfiguration, setLabelSceneState } from '../../internal/label/state.js';
+import { getFrameWorldMatrix, getNamedSceneFrame } from '../frame/state.js';
+import { getLabelConfiguration, setLabelSceneState } from './state.js';
 import { projectLabel } from './projection.js';
-import { scenePlatform } from '../../internal/gpu/platform.js';
-import { transformPointMat4 } from '../../internal/math/mat4.js';
-import type { Mat4 } from '../../internal/types.js';
+import { scenePlatform } from '../gpu/platform.js';
+import { transformPointMat4 } from '../math/mat4.js';
+import type { Mat4 } from '../types.js';
 
 const LABEL_SELECTOR = 'nve-scene-label';
 const probeLabels = new WeakSet<HTMLElement>();

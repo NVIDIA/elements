@@ -61,7 +61,7 @@ function template(mode: 'occluded' | 'visible'): string {
   return /* html */ `
     <canvas width="32" height="32"></canvas><output></output>
     <script type="module">
-      import { LabelTextureRenderer } from '../../src/scene/label/renderer.ts';
+      import { LabelTextureRenderer } from '../../src/internal/label/renderer.ts';
       const canvas = document.querySelector('canvas');
       const output = document.querySelector('output');
       const adapter = await navigator.gpu.requestAdapter();

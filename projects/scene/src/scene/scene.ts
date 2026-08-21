@@ -31,15 +31,15 @@ import {
   setSceneNamedFrames,
   setSceneSampledTime
 } from '../internal/frame/state.js';
-import type { LabelTextureRenderItem } from './label/renderer.js';
-import { LabelSceneController, markLabelProbe } from './label/scene-controller.js';
+import type { LabelTextureRenderItem } from '../internal/label/renderer.js';
+import { LabelSceneController, markLabelProbe } from '../internal/label/scene-controller.js';
 import type { registerSceneLabelNotifications } from '../internal/label/notifications.js';
-import type { projectLabel } from './label/projection.js';
-import type { copyLabelElementImage, getLabelCaptureCapabilities, LabelCaptureCapabilities } from './label/capture.js';
-import type { LabelOcclusionTracker } from './label/occlusion.js';
-import type { verifyLabelBrowserCopy } from './label/browser-probe.js';
-import type { waitForLabelMutationPaint } from './label/overlay.js';
-import type { LabelTextureController } from './label/texture.js';
+import type { projectLabel } from '../internal/label/projection.js';
+import type { copyLabelElementImage, getLabelCaptureCapabilities, LabelCaptureCapabilities } from '../internal/label/capture.js';
+import type { LabelOcclusionTracker } from '../internal/label/occlusion.js';
+import type { verifyLabelBrowserCopy } from '../internal/label/browser-probe.js';
+import type { waitForLabelMutationPaint } from '../internal/label/overlay.js';
+import type { LabelTextureController } from '../internal/label/texture.js';
 import type { consumeLabelDirty, getLabelConfiguration, setLabelSceneState } from '../internal/label/state.js';
 import {
   getMarkerLayerVersion,
@@ -505,13 +505,13 @@ export class Scene extends LitElement {
     this.#labelRuntimeLoad ??= testingLoad
       .then(() =>
         Promise.all([
-          import('./label/browser-probe.js'),
-          import('./label/capture.js'),
-          import('./label/occlusion.js'),
-          import('./label/texture.js'),
-          import('./label/overlay.js'),
+          import('../internal/label/browser-probe.js'),
+          import('../internal/label/capture.js'),
+          import('../internal/label/occlusion.js'),
+          import('../internal/label/texture.js'),
+          import('../internal/label/overlay.js'),
           import('../internal/label/state.js'),
-          import('./label/projection.js'),
+          import('../internal/label/projection.js'),
           import('../internal/label/notifications.js')
         ])
       )

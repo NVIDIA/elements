@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { copyLabelElementImage, type LabelCaptureCopySignature } from './capture.js';
-import type { SceneGPUDevice } from '../../internal/gpu/platform.js';
+import type { SceneGPUDevice } from '../gpu/platform.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_MAP_READ = 0x01;

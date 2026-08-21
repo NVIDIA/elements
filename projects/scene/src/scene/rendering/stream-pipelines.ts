@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { LINE_WGSL, STREAM_WGSL } from './layouts/wgsl.js';
+import { LINE_WGSL, STREAM_WGSL } from '../../internal/layouts/wgsl.js';
 import type { SceneGPUDevice, SceneGPURenderPipeline } from '../../internal/gpu/platform.js';
 import { OIT_WGSL, oitTargetStates } from './transparency.js';
 

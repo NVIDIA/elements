@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { identityMat4 } from '../../internal/math/mat4.js';
+import { identityMat4 } from '../math/mat4.js';
 import { projectLabel } from './projection.js';
 
 describe('label projection', () => {

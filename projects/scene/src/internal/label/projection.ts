@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { SceneLabelAnchor } from '../../label/label.js';
-import type { Mat4, Vec3 } from '../../internal/types.js';
+import type { Mat4, Vec3 } from '../types.js';
 
 export interface LabelProjection {
   readonly depth: number;

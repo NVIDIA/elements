@@ -15,7 +15,7 @@ import type { PrimitiveKind } from '../../internal/primitive-geometry.js';
 import { lineSegmentCount, type LineTopology, type LineWidthUnit } from '../../internal/lines/data.js';
 import type { PointSizeUnit } from '../../internal/points/data.js';
 import type { SharedDeviceLease } from '../../internal/gpu/device-manager.js';
-import type { LabelTextureRenderer, LabelTextureRenderFrame, LabelTextureRenderItem } from '../label/renderer.js';
+import type { LabelTextureRenderer, LabelTextureRenderFrame, LabelTextureRenderItem } from '../../internal/label/renderer.js';
 import type { MarkerGeometry, MarkerPipelines } from '../../internal/markers/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../../internal/pick/uniform-offsets.js';
 import type { PickPipelines } from '../../internal/pick/pipelines.js';
@@ -994,7 +994,7 @@ export class SceneRenderer {
     const format = this.#renderFormat;
     if (!device || !format) return;
     const token = this.#labelToken;
-    this.#labelLoad = import('../label/renderer.js')
+    this.#labelLoad = import('../../internal/label/renderer.js')
       .then(({ LabelTextureRenderer, supportsLabelTextureRendering }) => {
         if (token === this.#labelToken && device === this.#geometryDevice && supportsLabelTextureRendering(device)) {
           this.#labelRenderer = new LabelTextureRenderer(device, format);

@@ -11,7 +11,7 @@ import type {
   SceneGPURenderPipeline,
   SceneGPUSampler,
   SceneGPUTexture
-} from '../../internal/gpu/platform.js';
+} from '../gpu/platform.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_COPY_SRC = 0x04;

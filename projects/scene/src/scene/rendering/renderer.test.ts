@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { LINE_VERTEX, MARKER, POINT, TRI_VERTEX } from '../../internal/layouts/built-ins.js';
 import { writeLineVertex, writeMarker, writePoint, writeTriVertex } from '../../internal/layouts/helpers.js';
 import { identityMat4 } from '../../internal/math/mat4.js';
-import type { LabelTextureRenderItem } from '../label/renderer.js';
+import type { LabelTextureRenderItem } from '../../internal/label/renderer.js';
 import { configureSceneTesting, resetSceneTesting, type SceneGPUDevice } from '../../internal/testing.js';
 import {
   SceneRenderer,

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../../scene/rendering/layouts/wgsl.js';
+import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../layouts/wgsl.js';
 import {
   createPrimitiveGeometry,
   type PrimitiveGeometry,

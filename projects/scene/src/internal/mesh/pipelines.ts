@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { SceneGPUDevice, SceneGPURenderPipeline } from '../gpu/platform.js';
-import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../../scene/rendering/layouts/wgsl.js';
+import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../layouts/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../../scene/rendering/transparency.js';
 
 interface MeshDevice extends SceneGPUDevice {
