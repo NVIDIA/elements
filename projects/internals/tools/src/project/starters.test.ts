@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type * as childProcess from 'node:child_process';
+import type * as internalNode from '../internal/node.js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   startersData,
@@ -15,11 +16,16 @@ import {
   removeWireitScripts,
   startStarter
 } from './starters.js';
-import { getNPMClient, isCommandAvailable, getPackageJson } from '../internal/node.js';
+import { getPackageJson } from '../internal/node.js';
 
 vi.mock('node:child_process', async importOriginal => {
   const actual = await importOriginal<typeof childProcess>();
   return { ...actual, execFile: vi.fn(), execFileSync: vi.fn() };
+});
+
+vi.mock('../internal/node.js', async importOriginal => {
+  const actual = await importOriginal<typeof internalNode>();
+  return { ...actual, getNPMClient: vi.fn().mockResolvedValue('pnpm') };
 });
 
 describe('startersData', () => {
@@ -328,22 +334,6 @@ describe('starter CDN URLs', () => {
 
     expect(result).toContain(unrelatedElementsPackageUrl);
     expect(result).toContain(htmxUrl);
-  });
-});
-
-describe('getNPMClient', () => {
-  it('should return the npm client', async () => {
-    expect(await getNPMClient()).toBe('pnpm');
-  });
-});
-
-describe('isCommandAvailable', () => {
-  it('should return true if the command is available', async () => {
-    expect(await isCommandAvailable('pnpm')).toBe(true);
-  });
-
-  it('should return false if the command is not available', async () => {
-    expect(await isCommandAvailable('not-a-command')).toBe(false);
   });
 });
 

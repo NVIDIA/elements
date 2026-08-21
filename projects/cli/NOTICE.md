@@ -20,6 +20,15 @@ This project includes the following bundled third-party software:
 - archiver v8.0.0 [MIT]
   Copyright: Chris Talkington (http://christalkington.com/)
 
+- eslint v10.6.0 [MIT]
+  Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+
+- fast-glob v3.3.3 [MIT]
+  Copyright: Denis Malinochkin (https://mrmlnc.com)
+
+- ignore v7.0.6 [MIT]
+  Copyright: kael
+
 - marked v18.0.9 [MIT]
   Copyright: Christopher Jeffrey
 
@@ -52,6 +61,9 @@ The following bundled components are provided under the MIT license:
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
+eslint v10.6.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
+ignore v7.0.6 - Copyright kael
 marked v18.0.9 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)

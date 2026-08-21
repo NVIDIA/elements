@@ -457,7 +457,7 @@ export const claudeProjectSettings = {
     allow: [
       'mcp__elements__api_list',
       'mcp__elements__api_get',
-      'mcp__elements__api_template_validate',
+      'mcp__elements__api_validate',
       'mcp__elements__api_imports_get',
       'mcp__elements__api_tokens_list',
       'mcp__elements__examples_list',

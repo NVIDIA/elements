@@ -160,7 +160,7 @@ Configure the MCP server once:
 Then use skills as context and MCP tools as the live data plane:
 
 - Use `skills_get` for workflow guidance.
-- Use `api_get`, `api_list`, and `api_template_validate` for current component contracts.
+- Use `api_get`, `api_list`, and `api_validate` for current component contracts.
 - Use `examples_list` and `examples_get` for known UI patterns.
 - Use `api_imports_get` to generate explicit `define.js` imports.
 - Use `project_setup` and `project_validate` for project health.

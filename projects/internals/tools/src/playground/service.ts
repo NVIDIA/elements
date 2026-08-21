@@ -27,7 +27,7 @@ export class PlaygroundService {
   @tool({
     summary: 'Validates HTML templates specifically for playground examples.',
     description:
-      'Validates HTML templates specifically for playground examples. Includes all checks from the "api_template_validate" tool with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.',
+      'Validates HTML templates specifically for playground examples. Includes Elements API checks with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.',
     inputSchema: {
       type: 'object',
       properties: {

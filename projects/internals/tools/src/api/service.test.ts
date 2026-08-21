@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Attribute, Element } from '@internals/metadata';
 import type { ToolMethod } from '../internal/tools.js';
 import { ApiService } from './service.js';
@@ -170,93 +170,65 @@ describe('ApiService', () => {
     });
   });
 
-  describe('templateValidate', () => {
-    const originalEnv = process.env.ELEMENTS_ENV;
-
-    beforeEach(() => {
-      delete process.env.ELEMENTS_ENV;
-    });
-
-    afterEach(() => {
-      if (originalEnv !== undefined) {
-        process.env.ELEMENTS_ENV = originalEnv;
-      } else {
-        delete process.env.ELEMENTS_ENV;
-      }
-    });
-
+  describe('validate', () => {
     it('should have correct metadata', () => {
-      expect((ApiService.templateValidate as ToolMethod<unknown>).metadata.name).toBe('templateValidate');
-      expect((ApiService.templateValidate as ToolMethod<unknown>).metadata.command).toBe('template.validate');
-      expect((ApiService.templateValidate as ToolMethod<unknown>).metadata.description).toContain(
-        'Validates HTML templates using Elements APIs'
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.paths).toBeDefined();
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template).toBeDefined();
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.stdin).toBeUndefined();
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.fix).toBeUndefined();
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.cli).toMatchObject({
+        exclude: ['template'],
+        properties: { stdin: { type: 'boolean' }, fix: { type: 'boolean' } },
+        positionals: { paths: { optional: true, variadic: true } }
+      });
+    });
+
+    it('should default the validation language to HTML in metadata', () => {
+      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.lang).toMatchObject({
+        type: 'string',
+        enum: ['html', 'json'],
+        default: 'html'
+      });
+    });
+
+    it('should return structured HTML diagnostics', async () => {
+      const result = await ApiService.validate({
+        template: '<nve-invalid></nve-invalid>',
+        lang: 'html',
+        format: 'json'
+      });
+      expect(typeof result).toBe('object');
+      expect((result as { ok: boolean }).ok).toBe(false);
+      expect((result as { diagnostics: unknown[] }).diagnostics).toHaveLength(1);
+    });
+
+    it('should default supplied content to HTML', async () => {
+      const result = await ApiService.validate({ template: '<nve-invalid></nve-invalid>', format: 'json' });
+      expect(result).toMatchObject({ ok: false, summary: { files: 1 } });
+      expect((result as { diagnostics: { rule: string }[] }).diagnostics[0]?.rule).toContain('@nvidia-elements/lint/');
+    });
+
+    it('should require a filename for JSON content', async () => {
+      await expect(ApiService.validate({ template: '{}', lang: 'json', format: 'json' })).rejects.toThrow(
+        'filename is required'
       );
-      expect(
-        (ApiService.templateValidate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template
-      ).toBeDefined();
-      expect((ApiService.templateValidate as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('template');
     });
 
-    it('should return warning for empty template', async () => {
-      process.env.ELEMENTS_ENV = 'mcp';
-      const result = await ApiService.templateValidate({ template: '' });
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe('empty-template');
-      expect(result[0].severity).toBe('warn');
-      expect(result[0].message).toContain('Template is empty');
+    it('should validate supplied JSON with an explicit language and filename', async () => {
+      const result = await ApiService.validate({
+        template: '{}',
+        lang: 'json',
+        filename: 'package.json',
+        format: 'json'
+      });
+      expect(result).toMatchObject({ ok: true, summary: { files: 1 } });
     });
 
-    it('should return warning for whitespace-only template', async () => {
-      process.env.ELEMENTS_ENV = 'mcp';
-      const result = await ApiService.templateValidate({ template: '   \n  ' });
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe('empty-template');
-    });
-
-    it('should return empty array when ELEMENTS_ENV is not set', async () => {
-      const result = await ApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
-      expect(Array.isArray(result)).toBe(true);
-      expect(result).toHaveLength(0);
-    });
-
-    it('should return empty array when ELEMENTS_ENV is not mcp or cli', async () => {
-      process.env.ELEMENTS_ENV = 'test';
-      const result = await ApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
-      expect(Array.isArray(result)).toBe(true);
-      expect(result).toHaveLength(0);
-    });
-
-    it('should call lintTemplate when ELEMENTS_ENV is mcp', async () => {
-      process.env.ELEMENTS_ENV = 'mcp';
-      const mockLintTemplate = vi.fn().mockResolvedValue([{ message: 'test error', severity: 2 }]);
-
-      vi.doMock('@nvidia-elements/lint/eslint/internals', () => ({
-        lintTemplate: mockLintTemplate
-      }));
-
-      // Re-import to get the mocked version
-      const { ApiService: MockedApiService } = await import('./service.js');
-      const result = await MockedApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
-
-      expect(Array.isArray(result)).toBe(true);
-      expect(mockLintTemplate).toHaveBeenCalledWith('<nve-button>Test</nve-button>', { strict: false });
-      vi.doUnmock('@nvidia-elements/lint/eslint/internals');
-    });
-
-    it('should call lintTemplate when ELEMENTS_ENV is cli', async () => {
-      process.env.ELEMENTS_ENV = 'cli';
-      const mockLintTemplate = vi.fn().mockResolvedValue([]);
-
-      vi.doMock('@nvidia-elements/lint/eslint/internals', () => ({
-        lintTemplate: mockLintTemplate
-      }));
-
-      const { ApiService: MockedApiService } = await import('./service.js');
-      const result = await MockedApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
-
-      expect(Array.isArray(result)).toBe(true);
-      expect(mockLintTemplate).toHaveBeenCalledWith('<nve-button>Test</nve-button>', { strict: false });
-      vi.doUnmock('@nvidia-elements/lint/eslint/internals');
+    it('should reject fixes for supplied content', async () => {
+      await expect(
+        ApiService.validate({ template: '<nve-button></nve-button>', lang: 'html', format: 'json', fix: true })
+      ).rejects.toThrow('--fix is available only');
     });
   });
 

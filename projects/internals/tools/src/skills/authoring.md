@@ -16,7 +16,7 @@ Best practices and guidelines for creating UI with NVIDIA Elements.
 1. **Search** patterns and compositions (commands: `nve examples.list`, `nve examples.get`)
 2. **Search** components and API documentation (commands: `nve api.list`, `nve api.get`)
 3. **Write** the HTML using `nve-*` components (command: `nve api.imports.get`)
-4. **Check** the template (command: `nve api.template.validate`)
+4. **Check** the template (command: `nve api.validate page.html` or `nve api.validate --stdin` for HTML)
 
 ### Best practices
 

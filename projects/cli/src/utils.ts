@@ -176,6 +176,8 @@ interface CompleteToolResultOptions {
   tool?: ManagedToolMethod<unknown>;
   start?: number;
   end?: number;
+  formattedResult?: string;
+  exitCode?: number;
   notifyUpdate?: () => Promise<void>;
 }
 
@@ -184,9 +186,11 @@ export async function exitWithCompleteToolResult({
   tool,
   start,
   end,
+  formattedResult: providedResult,
+  exitCode: providedExitCode,
   notifyUpdate
 }: CompleteToolResultOptions): Promise<never> {
-  let formattedResult = await renderResult(result);
+  let formattedResult = providedResult ?? (await renderResult(result));
   if (tool && start !== undefined && end !== undefined && isDebug()) {
     const tokens = formattedResult.length / 4;
     const pct = (tokens / MAX_CONTEXT_TOKENS) * 100;
@@ -195,7 +199,7 @@ export async function exitWithCompleteToolResult({
     formattedResult += `\n[token usage]: ${progressBar(pct)} ${tokens.toLocaleString()} / ${MAX_CONTEXT_TOKENS.toLocaleString()} (${(100 - pct).toFixed(1)}% remaining)`;
   }
   console.log(formattedResult);
-  const exitCode = exitCodeForResult(result);
+  const exitCode = providedExitCode ?? exitCodeForResult(result);
   if (exitCode === 0) {
     await notifyUpdate?.();
   }
