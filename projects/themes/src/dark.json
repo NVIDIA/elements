@@ -1501,6 +1501,11 @@
       }
     },
     "support": {
+      "color": {
+        "value": "{ref.color.neutral.800}",
+        "type": "color",
+        "description": "Use for default UI feedback text and icons"
+      },
       "accent": {
         "muted": {
           "color": {
