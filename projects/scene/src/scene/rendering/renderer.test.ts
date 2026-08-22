@@ -11,6 +11,7 @@ import {
   SceneRenderer,
   getSceneInstanceUploadCount,
   getSceneMeshUploadSnapshot,
+  getScenePickPerformanceSnapshot,
   registerSceneRenderer,
   parseComputedBackgroundColor,
   type LineRenderItem,
@@ -46,10 +47,22 @@ describe(SceneRenderer.name, () => {
     expect(new SceneRenderer().active).toBe(false);
     expect(getSceneInstanceUploadCount(scene)).toBe(0);
     expect(getSceneMeshUploadSnapshot(scene)).toEqual({ rebuilds: 0, uploads: 0 });
+    expect(getScenePickPerformanceSnapshot(scene)).toEqual({
+      latestPointLatencyMs: 0,
+      pickPasses: 0,
+      readbackBuffers: 0,
+      targetAllocations: 0
+    });
     const renderer = new SceneRenderer();
     registerSceneRenderer(scene, renderer);
     expect(getSceneInstanceUploadCount(scene)).toBe(0);
     expect(getSceneMeshUploadSnapshot(scene)).toEqual({ rebuilds: 0, uploads: 0 });
+    expect(getScenePickPerformanceSnapshot(scene)).toEqual({
+      latestPointLatencyMs: 0,
+      pickPasses: 0,
+      readbackBuffers: 0,
+      targetAllocations: 0
+    });
   });
 
   it('should stay active without geometry capabilities and skip deferred pipeline loading safely', () => {
@@ -70,6 +83,29 @@ describe(SceneRenderer.name, () => {
     expect(renderer.render([createMeshRenderItem()])).toBe(true);
     renderer.disconnect();
     expect(renderer.active).toBe(false);
+    resetSceneTesting();
+  });
+
+  it('should wake a parked scene once when a deferred pipeline becomes available', async () => {
+    const gpu = createAdvancedDevice();
+    const wakeScene = vi.fn();
+    configureSceneTesting({
+      getCanvasContext: () => ({
+        configure: () => undefined,
+        unconfigure: () => undefined,
+        getCurrentTexture: () => ({ createView: () => ({}) })
+      })
+    });
+    const renderer = new SceneRenderer(wakeScene);
+    renderer.initialize(document.createElement('canvas'), { device: gpu.device, format: 'bgra8unorm' });
+
+    renderer.render([createPointRenderItem({ count: 1 })]);
+    await vi.waitFor(() => expect(wakeScene).toHaveBeenCalledOnce());
+    expect(renderer.consumeRenderRequest()).toBe(true);
+    expect(renderer.consumeRenderRequest()).toBe(false);
+    expect(wakeScene).toHaveBeenCalledOnce();
+
+    renderer.disconnect();
     resetSceneTesting();
   });
 
@@ -157,6 +193,92 @@ describe(SceneRenderer.name, () => {
       expect.objectContaining({ 38: 1 })
     );
 
+    renderer.disconnect();
+    resetSceneTesting();
+  });
+
+  it('should reuse stream bind groups across unchanged frames, ranged commits, resize, and picking', async () => {
+    const gpu = createAdvancedDevice();
+    configureSceneTesting({
+      getCanvasContext: () => ({
+        configure: () => undefined,
+        unconfigure: () => undefined,
+        getCurrentTexture: () => ({ createView: () => ({}) })
+      })
+    });
+    const renderer = new SceneRenderer();
+    const canvas = document.createElement('canvas');
+    renderer.initialize(canvas, { device: gpu.device, format: 'bgra8unorm' });
+    renderer.resize(20, 10);
+    const point = createPointRenderItem({ count: 2 });
+
+    renderer.render([point]);
+    expect(gpu.createBindGroup).not.toHaveBeenCalled();
+    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
+    const loaded = { ...point, data: { ...point.data, uploadRanges: [] } };
+    renderer.render([loaded]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(2);
+
+    renderer.render([loaded]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(2);
+    const ranged = {
+      ...loaded,
+      data: { ...loaded.data, uploadRanges: [{ offset: 0, size: POINT.stride }] }
+    };
+    renderer.render([ranged]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(2);
+
+    gpu.mappedBytes[0] = 1;
+    new DataView(gpu.mappedBytes.buffer).setFloat32(256, 0.5, true);
+    const request = { canvas, clientX: 2, clientY: 3, pixelX: 2, pixelY: 3 };
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(4);
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(4);
+
+    const replacement = { ...createPointRenderItem({ count: 3 }), layer: point.layer };
+    renderer.render([replacement]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(6);
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(8);
+    renderer.resize(40, 20);
+    renderer.render([replacement]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(8);
+    expect(renderer.instanceUploadCount).toBe(4);
+    expect(new Set(gpu.uniformWriteSources).size).toBe(1);
+
+    renderer.disconnect();
+    resetSceneTesting();
+  });
+
+  it('should rebuild stream bind groups after device recovery and reuse them on the recovered device', async () => {
+    const first = createAdvancedDevice();
+    const recovered = createAdvancedDevice();
+    configureSceneTesting({
+      getCanvasContext: () => ({
+        configure: () => undefined,
+        unconfigure: () => undefined,
+        getCurrentTexture: () => ({ createView: () => ({}) })
+      })
+    });
+    const renderer = new SceneRenderer();
+    const canvas = document.createElement('canvas');
+    const point = createPointRenderItem({ count: 1 });
+    renderer.initialize(canvas, { device: first.device, format: 'bgra8unorm' });
+    renderer.resize(20, 10);
+    renderer.render([point]);
+    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
+    renderer.render([point]);
+    expect(first.createBindGroup).toHaveBeenCalledTimes(2);
+
+    renderer.initialize(canvas, { device: recovered.device, format: 'bgra8unorm' });
+    renderer.render([point]);
+    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
+    renderer.render([point]);
+    renderer.render([point]);
+
+    expect(first.createBindGroup).toHaveBeenCalledTimes(2);
+    expect(recovered.createBindGroup).toHaveBeenCalledTimes(2);
     renderer.disconnect();
     resetSceneTesting();
   });
@@ -478,6 +600,77 @@ describe(SceneRenderer.name, () => {
     resetSceneTesting();
   });
 
+  it('should cache mesh bind groups by pipeline, instance resources, and texture identity', async () => {
+    const gpu = createAdvancedDevice();
+    configureSceneTesting({
+      getCanvasContext: () => ({
+        configure: () => undefined,
+        unconfigure: () => undefined,
+        getCurrentTexture: () => ({ createView: () => ({}) })
+      })
+    });
+    const renderer = new SceneRenderer();
+    const canvas = document.createElement('canvas');
+    renderer.initialize(canvas, { device: gpu.device, format: 'bgra8unorm' });
+    renderer.resize(20, 10);
+    const sourceA = { height: 2, width: 2 } as ImageBitmap;
+    const sourceB = { height: 3, width: 3 } as ImageBitmap;
+    const uvs = new Float32Array([0, 0, 1, 0, 0, 1]);
+    const mesh = createMeshRenderItem({ texture: sourceA, uvs });
+
+    renderer.render([mesh]);
+    expect(gpu.createBindGroup).toHaveBeenCalledOnce();
+    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
+    renderer.render([mesh]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(7);
+    renderer.render([mesh]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(7);
+
+    gpu.mappedBytes[0] = 1;
+    new DataView(gpu.mappedBytes.buffer).setFloat32(256, 0.5, true);
+    const request = { canvas, clientX: 2, clientY: 3, pixelX: 2, pixelY: 3 };
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(10);
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(10);
+
+    const textureReplacement = { ...mesh, data: { ...mesh.data, texture: sourceB } };
+    renderer.render([textureReplacement]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(12);
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(13);
+
+    const bytes = new Uint8Array(MARKER.stride * 2);
+    writeMarker(bytes, 0, { color: [1, 1, 1, 1], position: [0, 0, 0] });
+    writeMarker(bytes, 1, { color: [1, 1, 1, 1], position: [1, 0, 0] });
+    const instances: MeshRenderItem['instances'] = {
+      bytes,
+      count: 2,
+      kind: 'cube',
+      ready: true,
+      transparent: false,
+      uploadRanges: [{ offset: 0, size: bytes.byteLength }],
+      version: 2
+    };
+    const instanceReplacement = createMeshRenderItem({
+      identityInstance: false,
+      instances,
+      layer: mesh.layer,
+      texture: sourceB,
+      uvs
+    });
+    renderer.render([instanceReplacement]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(17);
+    renderer.render([instanceReplacement]);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(17);
+    await renderer.pick(request);
+    expect(gpu.createBindGroup).toHaveBeenCalledTimes(19);
+    expect(new Set(gpu.uniformWriteSources).size).toBe(1);
+
+    renderer.disconnect();
+    resetSceneTesting();
+  });
+
   it('should load, upload, order, update, replace, and destroy marker resources', async () => {
     const gpu = createAdvancedDevice();
     const context = {
@@ -742,6 +935,47 @@ describe(SceneRenderer.name, () => {
       layer: target.layer
     });
     expect(gpu.draws.at(-1)).toEqual(expect.objectContaining({ vertexCount: 6 }));
+    renderer.disconnect();
+    resetSceneTesting();
+  });
+
+  it('should decode large instance IDs from compact layer ranges and expose pick counters', async () => {
+    const gpu = createAdvancedDevice();
+    configureSceneTesting({
+      getCanvasContext: () => ({
+        configure: () => undefined,
+        unconfigure: () => undefined,
+        getCurrentTexture: () => ({ createView: () => ({}) })
+      })
+    });
+    const renderer = new SceneRenderer();
+    const scene = document.createElement('div');
+    const canvas = document.createElement('canvas');
+    registerSceneRenderer(scene, renderer);
+    renderer.initialize(canvas, { device: gpu.device, format: 'bgra8unorm' });
+    renderer.resize(20, 10);
+    const first = createPointRenderItem({ count: 10_000 });
+    const second = createPointRenderItem({ count: 3 });
+    renderer.render([first, second]);
+    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
+    renderer.render([
+      { ...first, data: { ...first.data, uploadRanges: [] } },
+      { ...second, data: { ...second.data, uploadRanges: [] } }
+    ]);
+    new DataView(gpu.mappedBytes.buffer).setUint32(0, 10_003, true);
+    new DataView(gpu.mappedBytes.buffer).setFloat32(256, 0.5, true);
+
+    await expect(renderer.pick({ canvas, clientX: 2, clientY: 3, pixelX: 2, pixelY: 3 })).resolves.toMatchObject({
+      instanceIndex: 2,
+      layer: second.layer
+    });
+    renderer.recordLatestPointLatency(12.5);
+    expect(getScenePickPerformanceSnapshot(scene)).toEqual({
+      latestPointLatencyMs: 12.5,
+      pickPasses: 1,
+      readbackBuffers: 1,
+      targetAllocations: 2
+    });
     renderer.disconnect();
     resetSceneTesting();
   });
@@ -1256,6 +1490,7 @@ function createMeshRenderItem(
 function createAdvancedDevice(): {
   device: SceneGPUDevice;
   bufferDescriptors: Array<{ size: number; usage: number }>;
+  createBindGroup: ReturnType<typeof vi.fn>;
   destroyedBuffers: number[];
   destroyedTextures: number;
   draws: Array<{ indexCount?: number; instanceCount?: number; pipeline: object | undefined; vertexCount?: number }>;
@@ -1266,6 +1501,7 @@ function createAdvancedDevice(): {
   writes: ArrayBufferView[];
   mappedBytes: Uint8Array;
   copyTextureToBuffer: ReturnType<typeof vi.fn>;
+  uniformWriteSources: Float32Array[];
 } {
   let bufferID = 0;
   let destroyedTextures = 0;
@@ -1283,18 +1519,25 @@ function createAdvancedDevice(): {
   const passDescriptors: unknown[] = [];
   const submissions: unknown[][] = [];
   const writes: ArrayBufferView[] = [];
+  const uniformWriteSources: Float32Array[] = [];
   const mappedBytes = new Uint8Array(512);
+  const createBindGroup = vi.fn(() => ({}));
   const copyTextureToBuffer = vi.fn();
   const queue = {
     submit: (buffers: readonly unknown[]) => submissions.push([...buffers]),
     copyExternalImageToTexture: vi.fn(),
-    writeBuffer: (_buffer: object, _offset: number, values: ArrayBufferView) => writes.push(values),
+    writeBuffer: (_buffer: object, _offset: number, values: ArrayBufferView) => {
+      if (values instanceof Float32Array && values.length === 40) {
+        uniformWriteSources.push(values);
+        writes.push(new Float32Array(values));
+      } else writes.push(values);
+    },
     writeTexture: vi.fn()
   };
   const device: SceneGPUDevice = {
     lost: new Promise(() => undefined),
     queue,
-    createBindGroup: () => ({}),
+    createBindGroup,
     createBuffer: (descriptor: { size: number; usage: number }) => {
       bufferDescriptors.push(descriptor);
       const id = bufferID;
@@ -1346,6 +1589,7 @@ function createAdvancedDevice(): {
   };
   return {
     bufferDescriptors,
+    createBindGroup,
     device,
     destroyedBuffers,
     get destroyedTextures() {
@@ -1358,6 +1602,7 @@ function createAdvancedDevice(): {
     mappedBytes,
     passDescriptors,
     pipelineDescriptors,
-    copyTextureToBuffer
+    copyTextureToBuffer,
+    uniformWriteSources
   };
 }

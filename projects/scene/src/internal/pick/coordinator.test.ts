@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { PickCoordinator } from './coordinator.js';
 
 describe(PickCoordinator.name, () => {
@@ -51,7 +51,7 @@ describe(PickCoordinator.name, () => {
     expect(completed).toEqual(['click:click']);
   });
 
-  it('accepts only the newest hover completion', async () => {
+  it('runs one hover resolver at a time and keeps only the latest queued request', async () => {
     const resolvers = new Map<number, (value: string) => void>();
     const completed: number[] = [];
     const stale: number[] = [];
@@ -65,16 +65,19 @@ describe(PickCoordinator.name, () => {
     const first = hover();
     await Promise.resolve();
     const second = hover();
-    await Promise.resolve();
+    const third = hover();
+    await expect(second).resolves.toBeNull();
+    expect([...resolvers.keys()]).toEqual([1]);
     resolvers.get(1)?.('old');
     await expect(first).resolves.toBeNull();
-    resolvers.get(2)?.('new');
-    await expect(second).resolves.toBe('new');
-    expect(completed).toEqual([2]);
-    expect(stale).toEqual([1]);
+    await vi.waitFor(() => expect(resolvers.has(3)).toBe(true));
+    resolvers.get(3)?.('new');
+    await expect(third).resolves.toBe('new');
+    expect(completed).toEqual([3]);
+    expect(stale).toEqual([2, 1]);
   });
 
-  it('notifies stale-hover cleanup when an older hover rejects', async () => {
+  it('notifies stale-hover cleanup when an active hover rejects', async () => {
     const rejects = new Map<number, (reason: Error) => void>();
     const stale: number[] = [];
     const coordinator = new PickCoordinator<string>({ onStaleHover: request => stale.push(request.sequence) });
@@ -91,8 +94,46 @@ describe(PickCoordinator.name, () => {
     rejects.get(1)?.(new Error('superseded'));
     await expect(first).resolves.toBeNull();
     expect(stale).toEqual([1]);
+    await vi.waitFor(() => expect(rejects.has(2)).toBe(true));
     rejects.get(2)?.(new Error('current'));
     await expect(second).rejects.toThrow('current');
+  });
+
+  it('bounds a hover burst to one active resolver and measures the latest point latency', async () => {
+    let active = 0;
+    let maximumActive = 0;
+    let now = 10;
+    const latencies: Array<{ latency: number; sequence: number }> = [];
+    const resolvers = new Map<number, (value: string) => void>();
+    const coordinator = new PickCoordinator<string>({
+      now: () => now,
+      onHoverLatency: (latency, request) => latencies.push({ latency, sequence: request.sequence })
+    });
+    const hover = () =>
+      coordinator.request('hover', ({ sequence }) => {
+        active += 1;
+        maximumActive = Math.max(maximumActive, active);
+        return new Promise<string>(resolve =>
+          resolvers.set(sequence, value => {
+            active -= 1;
+            resolve(value);
+          })
+        );
+      }).result;
+
+    const burst = [hover()];
+    await Promise.resolve();
+    for (let index = 1; index < 20; index += 1) burst.push(hover());
+    now = 20;
+    resolvers.get(1)?.('old');
+    await vi.waitFor(() => expect(resolvers.has(20)).toBe(true));
+    now = 35;
+    resolvers.get(20)?.('latest');
+
+    await expect(Promise.all(burst)).resolves.toEqual([...Array.from({ length: 19 }, () => null), 'latest']);
+    expect(maximumActive).toBe(1);
+    expect([...resolvers.keys()]).toEqual([1, 20]);
+    expect(latencies).toEqual([{ latency: 25, sequence: 20 }]);
   });
 
   it('assigns monotonic sequences across hover and pointer requests', () => {

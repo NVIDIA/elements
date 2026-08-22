@@ -106,4 +106,27 @@ describe('streaming layer state', () => {
       uploadRanges: [{ offset: 0, size: 2 * LINE_VERTEX.stride }]
     });
   });
+
+  it('should classify cached line transparency according to the active topology', () => {
+    const layer = document.createElement('div');
+    layers.push(layer);
+    registerStreamingLayer(layer, { kind: 'line', layout: LINE_VERTEX, topology: 'segments' });
+    const source = new Uint8Array(4 * LINE_VERTEX.stride);
+    writeLineVertex(source, 0, { position: [0, 0, 0] });
+    writeLineVertex(source, 1, { color: [1, 1, 1, 0.5], position: [1, 0, 0] });
+    writeLineVertex(source, 2, { position: [2, 0, 0] });
+    writeLineVertex(source, 3, { position: [3, 0, 0] });
+    setStreamingLayerSource(layer, source);
+
+    expect(takeStreamingLayerRenderData(layer).transparent).toBe(false);
+    setStreamingLineTopology(layer, 'strip');
+    expect(takeStreamingLayerRenderData(layer).transparent).toBe(true);
+
+    writeLineVertex(source, 1, { position: [1, 0, 0] });
+    writeLineVertex(source, 3, { color: [1, 1, 1, 0.5], position: [3, 0, 0] });
+    setStreamingLayerSource(layer, source);
+    expect(takeStreamingLayerRenderData(layer).transparent).toBe(false);
+    setStreamingLineTopology(layer, 'loop');
+    expect(takeStreamingLayerRenderData(layer).transparent).toBe(true);
+  });
 });

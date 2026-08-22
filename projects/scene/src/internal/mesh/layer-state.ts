@@ -8,6 +8,7 @@ import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../types.js';
 import { validateMeshGeometry, type MeshGeometryInput } from './geometry.js';
 import { createTopologyKey } from './processing.js';
+import { notifyOwningScene } from '../label/notifications.js';
 
 export interface MeshRenderData {
   readonly bytes: Uint8Array | null;
@@ -193,10 +194,12 @@ export function setMeshColor(mesh: HTMLElement, source: string): void {
   const state = getState(mesh);
   if (!color) {
     state.color = [1, 1, 1, 1];
+    notifyOwningScene(mesh);
     return;
   }
   state.color = color;
   state.version += 1;
+  notifyOwningScene(mesh);
 }
 
 function validateMesh(mesh: HTMLElement): void {
@@ -229,6 +232,7 @@ function validateMesh(mesh: HTMLElement): void {
     message: 'Mesh texture ignored because UVs are absent.',
     severity: 'warning'
   });
+  notifyOwningScene(mesh);
 }
 
 function getState(mesh: HTMLElement): MeshState {

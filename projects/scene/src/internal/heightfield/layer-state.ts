@@ -7,6 +7,7 @@ import type { HeightfieldGrid } from './types.js';
 import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
 import type { RGBA } from '../types.js';
+import { notifyOwningScene } from '../label/notifications.js';
 
 interface HeightfieldState {
   childError: boolean;
@@ -63,10 +64,12 @@ export function setHeightfieldLayerGrid(layer: HTMLElement, value: unknown): voi
   if (value === null) {
     clearGrid(state);
     updateGridEpisode(layer, state);
+    notifyOwningScene(layer);
     return;
   }
   compileGrid(state, value);
   updateGridEpisode(layer, state);
+  notifyOwningScene(layer);
 }
 
 function clearGrid(state: HeightfieldState): void {
@@ -111,6 +114,7 @@ export function setHeightfieldLayerColor(layer: HTMLElement, color: RGBA): void 
   if (sameColor(state.color, color)) return;
   state.color = color;
   state.version += 1;
+  notifyOwningScene(layer);
 }
 
 export function getHeightfieldLayerVersion(layer: HTMLElement): number {
@@ -155,7 +159,10 @@ function getState(layer: HTMLElement): HeightfieldState {
 
 function validateChildren(layer: HTMLElement, state: HeightfieldState): void {
   const childError = layer.children.length > 0;
-  if (state.childError !== childError) state.version += 1;
+  if (state.childError !== childError) {
+    state.version += 1;
+    notifyOwningScene(layer);
+  }
   state.childError = childError;
   state.episodes.update({
     element: layer,

@@ -37,7 +37,7 @@ import {
   getLabelCaptureCapabilities,
   type LabelCaptureCapabilities
 } from '../internal/label/capture.js';
-import { registerSceneLabelNotifications } from '../internal/label/notifications.js';
+import { registerSceneLabelNotifications, registerSceneRenderNotifications } from '../internal/label/notifications.js';
 import { LabelOcclusionTracker } from '../internal/label/occlusion.js';
 import { waitForLabelMutationPaint } from '../internal/label/overlay.js';
 import type { LabelTextureRenderItem } from '../internal/label/renderer.js';
@@ -166,6 +166,17 @@ interface SceneLabelTestingOptions {
 }
 
 const LABEL_TESTING = Symbol.for('nve.scene.label-testing');
+const TICK_PERFORMANCE = Symbol.for('nve.scene.tick-performance');
+
+interface SceneTickPerformanceSnapshot {
+  readonly animationFrameRequests: number;
+  readonly backgroundSamples: number;
+  readonly cameraScans: number;
+  readonly frameScans: number;
+  readonly layerScans: number;
+  readonly parked: boolean;
+  readonly ticks: number;
+}
 
 /**
  * @element nve-scene
@@ -229,7 +240,7 @@ export class Scene extends LitElement {
   #hoverHit: PickHit | null = null;
   #markerInteractionCleanup?: () => void;
   #readyCycle: ReadyCycle = createReadyCycle();
-  #renderer = new SceneRenderer();
+  #renderer = new SceneRenderer(() => this.#scheduleTick());
   #resizeObserver?: ResizeObserver;
   #state: SceneState = 'disconnected';
   #syntheticPointerEvents = new WeakSet<Event>();
@@ -237,6 +248,15 @@ export class Scene extends LitElement {
   #staleAfter = 1_000;
   #streamRenderConfig = new WeakMap<HTMLElement, string>();
   #tickHandle?: number;
+  #tickPerformance = {
+    animationFrameRequests: 0,
+    backgroundSamples: 0,
+    cameraScans: 0,
+    frameScans: 0,
+    layerScans: 0,
+    parked: true,
+    ticks: 0
+  };
   #time: 'live' | number = 'live';
   #unsubscribeDevice?: () => void;
   #unsubscribeLabels?: () => void;
@@ -252,6 +272,7 @@ export class Scene extends LitElement {
   constructor() {
     super();
     registerSceneRenderer(this, this.#renderer);
+    registerSceneRenderNotifications(this, () => this.#requestRender());
     new KeynavController(this, {
       onCommand: command => this.#handleCameraKeynav(command),
       prepare: () => this.#resolveCameraState()
@@ -276,7 +297,7 @@ export class Scene extends LitElement {
     assertNonnegativeNumber(value, 'staleAfter');
     if (value !== this.#staleAfter) {
       this.#staleAfter = value;
-      this.#needsRender = true;
+      this.#requestRender();
     }
   }
 
@@ -289,7 +310,7 @@ export class Scene extends LitElement {
     assertSceneTime(value);
     if (value !== this.#time) {
       this.#time = value;
-      this.#needsRender = true;
+      this.#requestRender();
     }
   }
 
@@ -303,6 +324,10 @@ export class Scene extends LitElement {
     return this.#readyCycle.promise;
   }
 
+  get [TICK_PERFORMANCE](): SceneTickPerformanceSnapshot {
+    return { ...this.#tickPerformance };
+  }
+
   /** Resolves the rendered element beneath finite viewport coordinates without dispatching interaction events. */
   pick(clientX: number, clientY: number): Promise<PickHit | null> {
     assertFiniteCoordinate(clientX, 'clientX');
@@ -310,16 +335,21 @@ export class Scene extends LitElement {
     if (!this.isConnected) {
       return Promise.reject(new DOMException('The scene is not connected.', 'InvalidStateError'));
     }
+    return this.#createPickResolver(clientX, clientY)();
+  }
+
+  #createPickResolver(clientX: number, clientY: number): () => Promise<PickHit | null> {
     const epoch = this.#pickEpoch;
     const ready = this.ready;
-    return ready.then(() => {
-      this.#assertPickEpoch(epoch);
-      const canvas = this.#canvas;
-      if (!canvas) {
-        throw new DOMException('The scene canvas is unavailable.', 'InvalidStateError');
-      }
-      return this.#resolvePick({ canvas, clientX, clientY, epoch });
-    });
+    return () =>
+      ready.then(() => {
+        this.#assertPickEpoch(epoch);
+        const canvas = this.#canvas;
+        if (!canvas) {
+          throw new DOMException('The scene canvas is unavailable.', 'InvalidStateError');
+        }
+        return this.#resolvePick({ canvas, clientX, clientY, epoch });
+      });
   }
 
   override attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
@@ -341,6 +371,7 @@ export class Scene extends LitElement {
 
   protected override updated(): void {
     this.#validateStaleAfterAttribute();
+    this.#scheduleTick();
   }
 
   // eslint-disable-next-line max-statements -- Connection installs independent input, label, and rendering lifecycles.
@@ -409,7 +440,7 @@ export class Scene extends LitElement {
     this.#hasConnected = true;
     this.#pickCoordinator = this.#createPickCoordinator();
     this.#state = 'initializing';
-    this.#needsRender = true;
+    this.#requestRender();
     this.#unsubscribeDevice = sharedDeviceManager.subscribe(this.#deviceListener);
     this.requestUpdate();
   }
@@ -474,7 +505,7 @@ export class Scene extends LitElement {
     const testing = this.#getLabelTesting();
     if (testing?.captureCapabilities) {
       this.#labelCaptureCapabilities = testing.captureCapabilities;
-      this.#needsRender = true;
+      this.#requestRender();
     } else if (this.#labelProbedDevice !== device) {
       this.#labelProbedDevice = device;
       void this.#probeLabelCapture(device);
@@ -486,12 +517,12 @@ export class Scene extends LitElement {
     this.#labelOverlay = new LabelSceneController(
       this,
       () => this.renderRoot.querySelector<HTMLElement>('.overlay') ?? undefined,
-      () => (this.#needsRender = true)
+      () => this.#requestRender()
     );
     this.#labelOverlay.refresh();
     this.#labels = [...this.#labelOverlay.labels];
     this.#syncLabelSlots();
-    this.#needsRender = true;
+    this.#requestRender();
   }
 
   #installLabelNotifications(): void {
@@ -501,7 +532,7 @@ export class Scene extends LitElement {
       this.#loadLabelOverlayController();
       this.#syncLabelSlots();
       if (this.#labels.some(label => label.parentElement === this)) this.#prepareLabelCapture();
-      this.#needsRender = true;
+      this.#requestRender();
     });
   }
 
@@ -542,6 +573,7 @@ export class Scene extends LitElement {
       scenePlatform.cancelAnimationFrame(this.#tickHandle);
       this.#tickHandle = undefined;
     }
+    this.#tickPerformance.parked = true;
   }
 
   #bindCanvas(canvas: HTMLCanvasElement): void {
@@ -677,7 +709,7 @@ export class Scene extends LitElement {
     const label = event.composedPath().find(target => target instanceof HTMLElement && target.matches(LABEL_SELECTOR));
     if (label instanceof HTMLElement && label.parentElement === this) {
       this.#labelControllers.get(label)?.markDirty();
-      this.#needsRender = true;
+      this.#requestRender();
     }
   };
 
@@ -685,14 +717,14 @@ export class Scene extends LitElement {
     const label = this.#getOwningLabel(event.target as Node);
     if (!label) return;
     this.#labelControllers.get(label)?.markDirty();
-    this.#needsRender = true;
+    this.#requestRender();
   };
 
   #handleLabelSelection = (): void => {
     const label = this.#getOwningLabel(globalThis.document.activeElement ?? this);
     if (!label) return;
     this.#labelControllers.get(label)?.markDirty();
-    this.#needsRender = true;
+    this.#requestRender();
   };
 
   // eslint-disable-next-line max-statements, complexity -- Capture routing retains pointer ownership across target changes.
@@ -767,9 +799,8 @@ export class Scene extends LitElement {
   }
 
   #routeBlockedLabelPointer(event: PointerEvent): void {
-    const handle = this.#pickCoordinator.request(event.type as 'pointerdown' | 'pointerup' | 'click', () =>
-      this.pick(event.clientX, event.clientY)
-    );
+    const resolver = this.#createPickResolver(event.clientX, event.clientY);
+    const handle = this.#pickCoordinator.request(event.type as 'pointerdown' | 'pointerup' | 'click', resolver);
     this.#pendingPickEvents.set(handle.request.sequence, event);
     void handle.result.catch(() => this.#pendingPickEvents.delete(handle.request.sequence));
   }
@@ -780,11 +811,11 @@ export class Scene extends LitElement {
 
   #markAllLabelsDirty(): void {
     this.#labelControllers.forEach(controller => controller.markDirty());
-    this.#needsRender = true;
+    this.#requestRender();
   }
 
   #requestHover(event: PointerEvent): void {
-    const handle = this.#pickCoordinator.request('hover', () => this.pick(event.clientX, event.clientY));
+    const handle = this.#pickCoordinator.request('hover', this.#createPickResolver(event.clientX, event.clientY));
     this.#pendingPickEvents.set(handle.request.sequence, event);
     void handle.result.catch(() => this.#pendingPickEvents.delete(handle.request.sequence));
   }
@@ -843,8 +874,12 @@ export class Scene extends LitElement {
   #createPickCoordinator(): PickCoordinator {
     const epoch = this.#pickEpoch;
     return new PickCoordinator({
+      now: () => scenePlatform.now(),
       onComplete: completion => {
         if (epoch === this.#pickEpoch) this.#handlePickCompletion(completion);
+      },
+      onHoverLatency: latency => {
+        if (epoch === this.#pickEpoch) this.#renderer.recordLatestPointLatency(latency);
       },
       onStaleHover: request => {
         if (epoch === this.#pickEpoch) this.#pendingPickEvents.delete(request.sequence);
@@ -912,7 +947,7 @@ export class Scene extends LitElement {
     if (dirtyLabels && this.#labelDevice && this.#labels.some(label => label.parentElement === this)) {
       this.#prepareLabelCapture();
     }
-    this.#needsRender = true;
+    this.#requestRender();
   }
 
   #ownsNode(node: Node): boolean {
@@ -943,7 +978,7 @@ export class Scene extends LitElement {
     this.#loadLabelOverlayController();
     this.#syncLabelSlots();
     if (this.#labelDevice && this.#labels.some(label => label.parentElement === this)) this.#prepareLabelCapture();
-    this.#needsRender = true;
+    this.#requestRender();
   }
 
   #markMutationLabelsDirty(records: readonly MutationRecord[]): boolean {
@@ -969,15 +1004,15 @@ export class Scene extends LitElement {
     const entry = entries.find(candidate => candidate.target === this);
     if (entry) {
       const size = getDevicePixelSize(entry, scenePlatform.getDevicePixelRatio());
-      const changed = this.#renderer.resize(size.width, size.height);
-      this.#needsRender ||= changed;
+      this.#renderer.resize(size.width, size.height);
+      this.#requestRender();
     }
     if (entries.some(candidate => this.#labels.some(label => getLabelChild(label) === candidate.target))) {
       entries.forEach(candidate => {
         const label = this.#labels.find(current => getLabelChild(current) === candidate.target);
         if (label) this.#labelControllers.get(label)?.markDirty();
       });
-      this.#needsRender = true;
+      this.#requestRender();
     }
   }
 
@@ -989,6 +1024,7 @@ export class Scene extends LitElement {
   }
 
   #sampleBackground(): void {
+    this.#tickPerformance.backgroundSamples += 1;
     const background = scenePlatform.getComputedStyle(this).backgroundColor;
     const changed = this.#renderer.setBackgroundColor(background);
     this.#needsRender = this.#needsRender || changed;
@@ -996,13 +1032,22 @@ export class Scene extends LitElement {
 
   #scheduleTick(): void {
     if (this.#tickHandle === undefined && this.isConnected) {
+      this.#tickPerformance.animationFrameRequests += 1;
+      this.#tickPerformance.parked = false;
       this.#tickHandle = scenePlatform.requestAnimationFrame(() => this.#tick());
     }
   }
 
+  #requestRender(): void {
+    this.#needsRender = true;
+    this.#scheduleTick();
+  }
+
   #tick(): void {
     this.#tickHandle = undefined;
+    this.#tickPerformance.ticks += 1;
     if (!this.isConnected) {
+      this.#tickPerformance.parked = true;
       return;
     }
     this.#sampleBackground();
@@ -1013,7 +1058,15 @@ export class Scene extends LitElement {
     this.#syncOverlayLabels();
     this.#needsRender ||= this.#renderer.consumeRenderRequest();
     this.#renderIfNeeded();
-    this.#scheduleTick();
+    if (this.#shouldTickContinuously()) this.#scheduleTick();
+    else this.#tickPerformance.parked = true;
+  }
+
+  #shouldTickContinuously(): boolean {
+    return (
+      this.#time === 'live' &&
+      this.#frames.some(frame => isFrameStateRegistered(frame) && frameHasTimestampedSamples(frame))
+    );
   }
 
   #renderIfNeeded(): void {
@@ -1069,7 +1122,7 @@ export class Scene extends LitElement {
     this.#readyCycle.reject(new DOMException('The WebGPU device was lost.', 'AbortError'));
     this.#readyCycle = createReadyCycle();
     this.#state = 'failed';
-    this.#needsRender = true;
+    this.#requestRender();
     this.#dispatchError(DEVICE_LOST, info.message ?? 'The WebGPU device was lost.');
     this.requestUpdate();
   }
@@ -1156,6 +1209,7 @@ export class Scene extends LitElement {
   }
 
   #trackCameraBehaviorChanges(): void {
+    this.#tickPerformance.cameraScans += 1;
     const signature = getSceneCameras(this)
       .map(behavior => {
         const contribution = sceneCameraController.getContribution(behavior);
@@ -1350,7 +1404,7 @@ export class Scene extends LitElement {
     this.#syncUserCameraStateToBehaviors(state);
     this.#cameraState = copyCameraState(state);
     this.#pendingCameraChange = { source, state: copyCameraState(state) };
-    this.#needsRender = true;
+    this.#requestRender();
   }
 
   #syncUserCameraStateToBehaviors(state: CameraState): void {
@@ -1479,7 +1533,7 @@ export class Scene extends LitElement {
       slot.remove();
       source.remove();
     }
-    if (this.#isCurrentConnection(token) && this.#labelDevice === device) this.#needsRender = true;
+    if (this.#isCurrentConnection(token) && this.#labelDevice === device) this.#requestRender();
   }
 
   // eslint-disable-next-line max-params -- The probe verifies the exact host, slot, and boxed-child topology.
@@ -1601,6 +1655,7 @@ export class Scene extends LitElement {
             occluded,
             stale: label.hasAttribute('stale')
           });
+          if (tracker.needsSample) this.#requestRender();
         }
       }
     ];
@@ -1705,6 +1760,7 @@ export class Scene extends LitElement {
   }
 
   #trackFrameChanges(): void {
+    this.#tickPerformance.frameScans += 1;
     for (const frame of this.#frames) {
       if (!isFrameStateRegistered(frame)) continue;
       const version = getFrameVersion(frame);
@@ -1718,7 +1774,9 @@ export class Scene extends LitElement {
     }
   }
 
+  // eslint-disable-next-line max-statements -- One scan dispatches every supported internal layer kind.
   #trackLayerChanges(): void {
+    this.#tickPerformance.layerScans += 1;
     for (const layer of this.#layers) {
       if (layer.matches(HEIGHTFIELD_LAYER_SELECTOR)) {
         this.#trackHeightfieldLayerChange(layer);

@@ -7,12 +7,13 @@ import { LINE_VERTEX } from './layouts/built-ins.js';
 import { DiagnosticEpisodes } from './diagnostic-episodes.js';
 import {
   lineCountIsValid,
-  lineHasTransparency,
+  lineRecordHasTransparency,
   lineRecordIsValid,
   type LineTopology,
   type LineWidthUnit
 } from './lines/data.js';
 import { VertexStreamBuffer, type VertexStreamIssue, type VertexStreamRenderData } from './vertex-stream.js';
+import { notifyOwningScene } from './label/notifications.js';
 
 export type StreamingLayerKind = 'point' | 'line' | 'triangle';
 
@@ -57,6 +58,8 @@ export function registerStreamingLayer(layer: HTMLElement, options: StreamingLay
     allowChildren: options.allowChildren ?? false,
     buffer: new VertexStreamBuffer(options.layout, {
       requireCountMultipleOf: options.countDivisor,
+      transparentRecord:
+        options.kind === 'line' && options.layout === LINE_VERTEX ? lineRecordHasTransparency : undefined,
       validateRecord: options.kind === 'line' && options.layout === LINE_VERTEX ? lineRecordIsValid : undefined
     }),
     childError: false,
@@ -88,6 +91,7 @@ export function setStreamingLayerSource(layer: HTMLElement, source: ArrayBufferV
   const state = getState(layer);
   state.buffer.replace(source);
   updateDataDiagnostics(layer, state);
+  notifyOwningScene(layer);
 }
 
 export function getStreamingLayerCount(layer: HTMLElement): number | undefined {
@@ -98,12 +102,14 @@ export function setStreamingLayerCount(layer: HTMLElement, count: number | undef
   const state = getState(layer);
   state.buffer.setCount(count);
   updateDataDiagnostics(layer, state);
+  notifyOwningScene(layer);
 }
 
 export function commitStreamingLayer(layer: HTMLElement, start = 0, count?: number): void {
   const state = getState(layer);
   state.buffer.commit(start, count);
   updateDataDiagnostics(layer, state);
+  notifyOwningScene(layer);
 }
 
 export function getStreamingLineTopology(layer: HTMLElement): LineTopology {
@@ -114,6 +120,7 @@ export function setStreamingLineTopology(layer: HTMLElement, topology: LineTopol
   const state = getLineState(layer);
   state.topology = topology;
   updateDataDiagnostics(layer, state);
+  notifyOwningScene(layer);
 }
 
 export function getStreamingLineWidthUnit(layer: HTMLElement): LineWidthUnit {
@@ -123,6 +130,7 @@ export function getStreamingLineWidthUnit(layer: HTMLElement): LineWidthUnit {
 export function setStreamingLineWidthUnit(layer: HTMLElement, widthUnit: LineWidthUnit): void {
   const state = getLineState(layer);
   state.widthUnit = widthUnit;
+  notifyOwningScene(layer);
 }
 
 export function getStreamingLayerKind(layer: HTMLElement): StreamingLayerKind {
@@ -153,8 +161,11 @@ export function takeStreamingLayerRenderData(layer: HTMLElement): StreamingLayer
     ready,
     topology: state.topology,
     transparent:
-      ready && state.kind === 'line' && data.bytes
-        ? lineHasTransparency(data.bytes, data.count, state.topology)
+      ready && state.kind === 'line'
+        ? state.buffer.hasTransparency(
+            state.topology === 'loop' ? data.count : Math.max(0, data.count - 1),
+            state.topology === 'segments'
+          )
         : data.transparent,
     widthUnit: state.widthUnit
   };
@@ -173,6 +184,7 @@ function reconcileChildren(layer: HTMLElement, state: StreamingLayerState): void
     message: 'Streaming layers do not accept element children.',
     severity: 'error'
   });
+  notifyOwningScene(layer);
 }
 
 function updateDataDiagnostics(layer: HTMLElement, state: StreamingLayerState): void {

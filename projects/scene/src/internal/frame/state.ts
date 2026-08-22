@@ -6,6 +6,7 @@ import { FrameTransformBuffer, type FrameTransformBufferSnapshot } from './trans
 import { identityMat4, multiplyMat4 } from '../math/mat4.js';
 import { getLiveSceneTime } from '../gpu/platform.js';
 import type { Mat4 } from '../types.js';
+import { notifyOwningScene } from '../label/notifications.js';
 
 interface FrameState {
   readonly transforms: FrameTransformBuffer;
@@ -31,6 +32,7 @@ export function isFrameStateRegistered(frame: HTMLElement): boolean {
 
 export function touchFrameState(frame: HTMLElement): void {
   getFrameState(frame).version += 1;
+  notifyOwningScene(frame);
 }
 
 export function setFrameTransform(frame: HTMLElement, sample: TransformSample): void {
@@ -40,6 +42,7 @@ export function setFrameTransform(frame: HTMLElement, sample: TransformSample): 
     state.staleness = 0;
   }
   state.version += 1;
+  notifyOwningScene(frame);
 }
 
 export function clearFrameTransforms(frame: HTMLElement): void {
@@ -47,6 +50,7 @@ export function clearFrameTransforms(frame: HTMLElement): void {
   if (state.transforms.clear()) {
     state.staleness = Number.POSITIVE_INFINITY;
     state.version += 1;
+    notifyOwningScene(frame);
   }
 }
 

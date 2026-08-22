@@ -15,7 +15,11 @@ import type { PrimitiveKind } from '../../internal/primitive-geometry.js';
 import { lineSegmentCount, type LineTopology, type LineWidthUnit } from '../../internal/lines/data.js';
 import type { PointSizeUnit } from '../../internal/points/data.js';
 import type { SharedDeviceLease } from '../../internal/gpu/device-manager.js';
-import type { LabelTextureRenderer, LabelTextureRenderFrame, LabelTextureRenderItem } from '../../internal/label/renderer.js';
+import type {
+  LabelTextureRenderer,
+  LabelTextureRenderFrame,
+  LabelTextureRenderItem
+} from '../../internal/label/renderer.js';
 import type { MarkerGeometry, MarkerPipelines } from '../../internal/markers/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../../internal/pick/uniform-offsets.js';
 import type { PickPipelines } from '../../internal/pick/pipelines.js';
@@ -119,7 +123,10 @@ interface OitResources {
   readonly revealage: SceneGPUTexture;
 }
 
+type LayerBindGroups = readonly [SceneGPUBindGroup, SceneGPUBindGroup];
+
 interface LayerResources {
+  readonly bindGroups: WeakMap<SceneGPURenderPipeline, LayerBindGroups>;
   readonly instance: SceneGPUBuffer;
   readonly instanceBytes: number;
   readonly uniform: SceneGPUBuffer;
@@ -140,6 +147,27 @@ interface PickFrameSnapshot {
   readonly items: readonly SceneRenderItem[];
   readonly projection: Mat4;
   readonly width: number;
+}
+
+interface PickTarget {
+  readonly instanceIndex: number;
+  readonly layer: HTMLElement;
+  readonly marker?: HTMLElement;
+}
+
+interface PickTargetRange {
+  readonly endId: number;
+  readonly firstId: number;
+  readonly layer: HTMLElement;
+  readonly markerLayer: boolean;
+}
+
+export interface ScenePickPerformanceSnapshot {
+  readonly latestPointLatencyMs: number;
+  readonly pickPasses: number;
+  readonly readbackBuffers: number;
+  /** Number of compact layer-range records allocated for pick decoding. */
+  readonly targetAllocations: number;
 }
 
 interface CachedGeometryPixel extends CompletedGeometryPixel {
@@ -188,6 +216,17 @@ export function getSceneMeshUploadSnapshot(scene: HTMLElement): {
   };
 }
 
+export function getScenePickPerformanceSnapshot(scene: HTMLElement): ScenePickPerformanceSnapshot {
+  return (
+    renderersByScene.get(scene)?.pickPerformanceSnapshot ?? {
+      latestPointLatencyMs: 0,
+      pickPasses: 0,
+      readbackBuffers: 0,
+      targetAllocations: 0
+    }
+  );
+}
+
 export class SceneRenderer {
   #canvas?: HTMLCanvasElement;
   #clearColor: LinearColor = { r: 0, g: 0, b: 0, a: 0 };
@@ -203,8 +242,12 @@ export class SceneRenderer {
   #pickLoad?: Promise<void>;
   #pickPipelines?: PickPipelines;
   #pickFrameGeneration = 0;
+  #pickPassCount = 0;
+  #pickReadbackBufferCount = 0;
   #pickToken = 0;
+  #pickTargetAllocationCount = 0;
   #pickResourceGeneration = 0;
+  #latestPointLatencyMs = 0;
   #device?: SceneGPUDevice;
   #renderFormat?: string;
   #geometries = new Map<PrimitiveKind, GeometryResources>();
@@ -229,6 +272,12 @@ export class SceneRenderer {
   #streamLoad?: Promise<void>;
   #streamPipelines?: StreamPipelines;
   #streamToken = 0;
+  #uniformScratch = new Float32Array(40);
+  readonly #wakeScene: () => void;
+
+  constructor(wakeScene: () => void = () => undefined) {
+    this.#wakeScene = wakeScene;
+  }
 
   get active(): boolean {
     return this.#context !== undefined && this.#device !== undefined;
@@ -243,6 +292,19 @@ export class SceneRenderer {
   }
   get meshUploadCount(): number {
     return this.#meshRenderer?.uploadCount ?? 0;
+  }
+
+  get pickPerformanceSnapshot(): ScenePickPerformanceSnapshot {
+    return {
+      latestPointLatencyMs: this.#latestPointLatencyMs,
+      pickPasses: this.#pickPassCount,
+      readbackBuffers: this.#pickReadbackBufferCount,
+      targetAllocations: this.#pickTargetAllocationCount
+    };
+  }
+
+  recordLatestPointLatency(latency: number): void {
+    this.#latestPointLatencyMs = latency;
   }
 
   /**
@@ -291,10 +353,11 @@ export class SceneRenderer {
     if (!snapshot) {
       return null;
     }
-    const targets = createPickTargets(snapshot.items);
+    const targetRanges = createPickTargetRanges(snapshot.items);
+    this.#pickTargetAllocationCount += targetRanges.length;
     const inverseViewProjection = invertMat4(snapshot.projection);
     const textures = this.#getPickTextures(snapshot);
-    if (targets.length === 0 || !inverseViewProjection || !textures) return null;
+    if (targetRanges.length === 0 || !inverseViewProjection || !textures) return null;
     snapshot.device.pushErrorScope?.('validation');
     try {
       await this.#loadPickPipelines();
@@ -303,11 +366,13 @@ export class SceneRenderer {
       if (readyStatus !== 'current') return readyStatus === 'frame-changed' ? PICK_FRAME_CHANGED : null;
       const encoder = snapshot.device.createCommandEncoder();
       const pass = encoder.beginRenderPass(this.#createPickPassDescriptor(textures));
+      this.#pickPassCount += 1;
       this.#drawPickItems(pass, snapshot.items);
       pass.end();
-      const result = new PickReadback<ScenePickResult>(snapshot.device as PickReadbackDevice).copy({
+      const result = new PickReadback<PickTarget>(snapshot.device as PickReadbackDevice).copy({
         encoder,
-        frame: { inverseViewProjection, targets },
+        frame: { decodeTarget: id => decodePickTarget(targetRanges, id), inverseViewProjection },
+        onBufferCreate: () => (this.#pickReadbackBufferCount += 1),
         onPixel: sample =>
           this.#storeCompletedGeometryPixel({ pixelX: request.pixelX, pixelY: request.pixelY, sample, snapshot }),
         pixel: { x: request.pixelX, y: request.pixelY },
@@ -369,6 +434,12 @@ export class SceneRenderer {
     const requested = this.#renderRequested;
     this.#renderRequested = false;
     return requested;
+  }
+
+  #requestRender(): void {
+    if (this.#renderRequested) return;
+    this.#renderRequested = true;
+    this.#wakeScene();
   }
 
   // eslint-disable-next-line max-statements -- Device replacement explicitly retires every renderer-owned resource.
@@ -675,7 +746,8 @@ export class SceneRenderer {
   }
 
   #writeLayerUniforms(buffer: SceneGPUBuffer, item: SceneRenderItem, projection: Float32Array): void {
-    const uniforms = new Float32Array(40);
+    const uniforms = this.#uniformScratch;
+    uniforms.fill(0);
     uniforms.set(projection, 0);
     uniforms.set(item.frameMatrix, 16);
     if (!isMarkerRenderItem(item) && !isMeshRenderItem(item)) {
@@ -770,6 +842,7 @@ export class SceneRenderer {
     });
     const uniform = options.device.createBuffer({ size: 160, usage: BUFFER_COPY_DST | BUFFER_UNIFORM });
     const replacement = {
+      bindGroups: new WeakMap<SceneGPURenderPipeline, LayerBindGroups>(),
       instance,
       instanceBytes: options.bytes.byteLength,
       uniform
@@ -830,7 +903,7 @@ export class SceneRenderer {
     }
     return {
       geometry: isMarkerRenderItem(item) ? this.#geometries.get(item.data.kind) : undefined,
-      groups: createLayerBindGroups({ device, pipeline, uniform: resources.uniform, instance: resources.instance }),
+      groups: getLayerBindGroups({ device, pipeline, resources }),
       pipeline
     };
   }
@@ -870,11 +943,10 @@ export class SceneRenderer {
       return;
     }
     this.#bindLayer(pass, {
-      groups: createLayerBindGroups({
+      groups: getLayerBindGroups({
         device: this.#geometryDevice as GeometryDevice,
         pipeline,
-        uniform: resources.uniform,
-        instance: resources.instance
+        resources
       }),
       pipeline
     });
@@ -933,7 +1005,7 @@ export class SceneRenderer {
       .then(({ createStreamPipelines }) => {
         if (token === this.#streamToken && device === this.#geometryDevice) {
           this.#streamPipelines = createStreamPipelines(device, format);
-          this.#renderRequested = true;
+          this.#requestRender();
         }
       })
       .catch(error => console.error('Scene mesh pipeline initialization failed.', error))
@@ -959,7 +1031,7 @@ export class SceneRenderer {
         if (token === this.#streamToken && device === this.#geometryDevice) {
           this.#createMarkerGeometry = createMarkerGeometry;
           this.#markerPipelines = createMarkerPipelines(device, format);
-          this.#renderRequested = true;
+          this.#requestRender();
         }
       })
       .catch(() => undefined)
@@ -980,7 +1052,7 @@ export class SceneRenderer {
       .then(({ MeshRenderer }) => {
         if (token !== this.#meshToken || device !== this.#geometryDevice) return;
         this.#meshRenderer = new MeshRenderer(device, format);
-        this.#renderRequested = true;
+        this.#requestRender();
       })
       .catch(() => undefined)
       .finally(() => {
@@ -998,7 +1070,7 @@ export class SceneRenderer {
       .then(({ LabelTextureRenderer, supportsLabelTextureRendering }) => {
         if (token === this.#labelToken && device === this.#geometryDevice && supportsLabelTextureRendering(device)) {
           this.#labelRenderer = new LabelTextureRenderer(device, format);
-          this.#renderRequested = true;
+          this.#requestRender();
         }
       })
       .catch(() => undefined)
@@ -1146,11 +1218,10 @@ export class SceneRenderer {
     const offset = isMarkerRenderItem(item) ? PICK_UNIFORM_OFFSETS.marker : PICK_UNIFORM_OFFSETS.stream;
     this.#geometryDevice?.queue.writeBuffer(resources.uniform, offset, new Uint32Array([pickId]));
     this.#bindLayer(pass, {
-      groups: createLayerBindGroups({
+      groups: getLayerBindGroups({
         device: this.#geometryDevice as GeometryDevice,
         pipeline,
-        uniform: resources.uniform,
-        instance: resources.instance
+        resources
       }),
       pipeline
     });
@@ -1177,11 +1248,10 @@ export class SceneRenderer {
       return;
     }
     this.#bindLayer(pass, {
-      groups: createLayerBindGroups({
+      groups: getLayerBindGroups({
         device,
         pipeline,
-        uniform: resources.uniform,
-        instance: resources.instance
+        resources
       }),
       pipeline
     });
@@ -1260,22 +1330,25 @@ export function parseComputedBackgroundColor(source: string): LinearColor {
   };
 }
 
-function createLayerBindGroups(options: {
+function getLayerBindGroups(options: {
   device: GeometryDevice;
   pipeline: SceneGPURenderPipeline;
-  uniform: SceneGPUBuffer;
-  instance: SceneGPUBuffer;
-}): readonly [SceneGPUBindGroup, SceneGPUBindGroup] {
-  return [
+  resources: LayerResources;
+}): LayerBindGroups {
+  const cached = options.resources.bindGroups.get(options.pipeline);
+  if (cached) return cached;
+  const groups: LayerBindGroups = [
     options.device.createBindGroup({
       layout: options.pipeline.getBindGroupLayout(0),
-      entries: [{ binding: 0, resource: { buffer: options.uniform } }]
+      entries: [{ binding: 0, resource: { buffer: options.resources.uniform } }]
     }),
     options.device.createBindGroup({
       layout: options.pipeline.getBindGroupLayout(1),
-      entries: [{ binding: 0, resource: { buffer: options.instance } }]
+      entries: [{ binding: 0, resource: { buffer: options.resources.instance } }]
     })
   ];
+  options.resources.bindGroups.set(options.pipeline, groups);
+  return groups;
 }
 
 function supportsGeometryPass(pass: SceneGPURenderPass): pass is GeometryPass {
@@ -1307,19 +1380,32 @@ function isCubeMarkerRenderItem(item: SceneRenderItem): item is MarkerRenderItem
   return isMarkerRenderItem(item) && item.data.kind === 'cube';
 }
 
-function createPickTargets(items: readonly SceneRenderItem[]): ScenePickResult[] {
-  return orderPickItems(items).flatMap(item => {
+function createPickTargetRanges(items: readonly SceneRenderItem[]): PickTargetRange[] {
+  const ranges: PickTargetRange[] = [];
+  let firstId = 1;
+  for (const item of orderPickItems(items)) {
     const count = getPickItemCount(item);
-    return Array.from({ length: count }, (_, instanceIndex) => ({
-      instanceIndex,
+    if (count === 0) continue;
+    ranges.push({
+      endId: firstId + count,
+      firstId,
       layer: item.layer,
-      marker:
-        (isMarkerRenderItem(item) || isMeshRenderItem(item)) && isMarkerLayerRegistered(item.layer)
-          ? getMarkerLayerMarker(item.layer, instanceIndex)
-          : undefined,
-      worldPosition: [0, 0, 0] as const
-    }));
-  });
+      markerLayer: (isMarkerRenderItem(item) || isMeshRenderItem(item)) && isMarkerLayerRegistered(item.layer)
+    });
+    firstId += count;
+  }
+  return ranges;
+}
+
+function decodePickTarget(ranges: readonly PickTargetRange[], id: number): PickTarget | undefined {
+  const range = ranges.find(candidate => id >= candidate.firstId && id < candidate.endId);
+  if (!range) return undefined;
+  const instanceIndex = id - range.firstId;
+  return {
+    instanceIndex,
+    layer: range.layer,
+    marker: range.markerLayer ? getMarkerLayerMarker(range.layer, instanceIndex) : undefined
+  };
 }
 
 function orderPickItems(items: readonly SceneRenderItem[]): readonly SceneRenderItem[] {

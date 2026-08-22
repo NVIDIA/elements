@@ -9,6 +9,7 @@ import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
 import { MarkerInstanceBuffer, type UploadRange } from '../instance-buffer.js';
 import { registerMarkerLayerNotifications } from './layer-notifications.js';
 import { compileMarker } from './state.js';
+import { notifyOwningScene } from '../label/notifications.js';
 
 interface MarkerLayerState {
   readonly buffer: MarkerInstanceBuffer;
@@ -110,6 +111,7 @@ export function setLayerCount(layer: HTMLElement, value: number | undefined): vo
   if (value !== state.count) {
     state.count = value;
     state.version += 1;
+    notifyOwningScene(layer);
   }
 }
 
@@ -121,6 +123,7 @@ export function commitLayerInstances(layer: HTMLElement, start = 0, count?: numb
   state.buffer.commit(start, count);
   updateBufferIssues(layer, state);
   state.version += 1;
+  notifyOwningScene(layer);
 }
 
 export function getMarkerLayerVersion(layer: HTMLElement): number {
@@ -141,10 +144,10 @@ export function takeMarkerLayerRenderData(layer: HTMLElement): MarkerLayerRender
     bytes,
     count,
     kind: state.kind,
-    outlineTransparent: ready && state.kind === 'cube' && hasPartialAlpha(bytes, count, 47),
-    outlineVisible: ready && state.kind === 'cube' && hasVisibleAlpha(bytes, count, 47),
+    outlineTransparent: ready && state.kind === 'cube' && state.buffer.hasPartialOutlineAlpha(count),
+    outlineVisible: ready && state.kind === 'cube' && state.buffer.hasVisibleOutlineAlpha(count),
     ready,
-    transparent: ready && hasPartialAlpha(bytes, count, 43),
+    transparent: ready && state.buffer.hasPartialFaceAlpha(count),
     uploadRanges: ready ? state.buffer.takeUploadRanges() : [],
     version: state.version
   };
@@ -205,6 +208,7 @@ function reconcileMarkerLayer(layer: HTMLElement, state: MarkerLayerState, struc
   }
   state.pendingMarkers.clear();
   state.version += 1;
+  notifyOwningScene(layer);
 }
 
 function compileMarkerChildren(options: {
@@ -293,31 +297,6 @@ function updateIssue(options: {
 
 function getCapacity(state: MarkerLayerState): number {
   return state.streamedSource === null ? state.compiledMarkers.length : state.buffer.capacity;
-}
-
-function hasPartialAlpha(bytes: Uint8Array | null, count: number, alphaOffset: number): boolean {
-  if (!bytes) {
-    return false;
-  }
-  for (let index = 0; index < count; index += 1) {
-    const alpha = bytes[index * MARKER.stride + alphaOffset];
-    if (alpha !== undefined && alpha > 0 && alpha < 255) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function hasVisibleAlpha(bytes: Uint8Array | null, count: number, alphaOffset: number): boolean {
-  if (!bytes) {
-    return false;
-  }
-  for (let index = 0; index < count; index += 1) {
-    if ((bytes[index * MARKER.stride + alphaOffset] ?? 0) > 0) {
-      return true;
-    }
-  }
-  return false;
 }
 
 function sameElements(left: readonly HTMLElement[], right: readonly HTMLElement[]): boolean {

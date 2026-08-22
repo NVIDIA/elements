@@ -9,12 +9,18 @@ describe(LabelOcclusionTracker.name, () => {
     const tracker = new LabelOcclusionTracker();
     tracker.setTextureMode(true);
 
+    expect(tracker.needsSample).toBe(true);
     expect(tracker.recordOcclusionSamples(0)).toBe(false);
+    tracker.setTextureMode(true);
+    expect(tracker.needsSample).toBe(true);
     expect(tracker.pointerEnabled).toBe(true);
     expect(tracker.recordOcclusionSamples(0)).toBe(true);
+    expect(tracker.needsSample).toBe(false);
     expect(tracker.pointerEnabled).toBe(false);
     expect(tracker.recordOcclusionSamples(1)).toBe(true);
+    expect(tracker.needsSample).toBe(true);
     expect(tracker.recordOcclusionSamples(1)).toBe(false);
+    expect(tracker.needsSample).toBe(false);
   });
 
   it('removes occlusion and pointer blocking in overlay mode', () => {

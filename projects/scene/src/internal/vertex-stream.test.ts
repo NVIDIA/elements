@@ -128,4 +128,47 @@ describe('vertex stream buffer', () => {
     stream.commit(0, 0);
     expect(stream.getVersion()).toBe(version);
   });
+
+  it('should cache validity and transparency summaries across representative operations', () => {
+    const count = 1_024;
+    const source = new Uint8Array(POINT.stride * count);
+    for (let index = 0; index < count; index += 1) writePoint(source, index, { position: [index, 0, 0] });
+    const stream = new VertexStreamBuffer(POINT);
+
+    stream.replace(source);
+    expect(stream.getPerformanceSnapshot()).toEqual({
+      recordScans: count,
+      recordViewAllocations: 1,
+      summaryPrefixQueries: 0,
+      summaryRemainderScans: 0,
+      summaryStorageAllocations: 3
+    });
+    expect(stream.toRenderData({ consumeUploadRanges: false }).transparent).toBe(false);
+    expect(stream.toRenderData({ consumeUploadRanges: false }).transparent).toBe(false);
+    expect(stream.getPerformanceSnapshot()).toMatchObject({
+      recordScans: count,
+      summaryPrefixQueries: 2,
+      summaryRemainderScans: 0
+    });
+
+    stream.commit();
+    writePoint(source, count - 1, { color: [1, 1, 1, 0.5], position: [count - 1, 0, 0] });
+    stream.commit(count - 1, 1);
+    expect(stream.toRenderData({ consumeUploadRanges: false }).transparent).toBe(true);
+    expect(stream.getPerformanceSnapshot()).toMatchObject({
+      recordScans: count * 2 + 1,
+      recordViewAllocations: 1,
+      summaryRemainderScans: 0,
+      summaryStorageAllocations: 3
+    });
+
+    stream.count = count / 2;
+    expect(stream.toRenderData({ consumeUploadRanges: false }).transparent).toBe(false);
+    stream.replace(source);
+    expect(stream.getPerformanceSnapshot()).toMatchObject({
+      recordScans: count * 3 + 1,
+      recordViewAllocations: 2,
+      summaryStorageAllocations: 3
+    });
+  });
 });

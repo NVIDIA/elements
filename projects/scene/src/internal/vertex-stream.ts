@@ -3,6 +3,7 @@
 
 import { LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID, TRIANGLES_COUNT } from '../errors.js';
 import type { LayoutDescriptor } from './layouts/define-layout.js';
+import { RecordSummary } from './record-summary.js';
 
 interface UploadRange {
   readonly offset: number;
@@ -22,6 +23,24 @@ export interface VertexStreamRenderData {
   readonly version: number;
 }
 
+export interface VertexStreamPerformanceSnapshot {
+  readonly recordScans: number;
+  readonly recordViewAllocations: number;
+  readonly summaryPrefixQueries: number;
+  readonly summaryRemainderScans: number;
+  readonly summaryStorageAllocations: number;
+}
+
+interface VertexStreamStatus {
+  readonly issues: ReadonlySet<VertexStreamIssue>;
+  readonly ready: boolean;
+  readonly transparent: boolean;
+  readonly version: number;
+}
+
+const INVALID_RECORD = 1;
+const TRANSPARENT_RECORD = 2;
+
 /**
  * CPU-side staging for the point, line, and triangle wire layouts.
  *
@@ -32,22 +51,32 @@ export interface VertexStreamRenderData {
 export class VertexStreamBuffer {
   readonly layout: LayoutDescriptor;
   readonly requireCountMultipleOf: number | undefined;
-  readonly validateRecord: ((record: DataView) => boolean) | undefined;
+  readonly transparentRecord: ((records: DataView, byteOffset: number) => boolean) | undefined;
+  readonly validateRecord: ((records: DataView, byteOffset: number) => boolean) | undefined;
 
   #dirtyRanges: UploadRange[] = [];
-  #issuesByRecord = new Map<number, Set<VertexStreamIssue>>();
   #ownedBytes: Uint8Array | null = null;
+  #ownedView: DataView | null = null;
+  #recordScans = 0;
+  #recordViewAllocations = 0;
   #source: ArrayBufferView | null = null;
+  #status?: VertexStreamStatus;
   #structuralIssues = new Set<VertexStreamIssue>();
+  #summary = new RecordSummary(2);
   #count: number | undefined;
   #version = 0;
 
   constructor(
     layout: LayoutDescriptor,
-    options: { requireCountMultipleOf?: number; validateRecord?: (record: DataView) => boolean } = {}
+    options: {
+      requireCountMultipleOf?: number;
+      transparentRecord?: (records: DataView, byteOffset: number) => boolean;
+      validateRecord?: (records: DataView, byteOffset: number) => boolean;
+    } = {}
   ) {
     this.layout = layout;
     this.requireCountMultipleOf = options.requireCountMultipleOf;
+    this.transparentRecord = options.transparentRecord;
     this.validateRecord = options.validateRecord;
     if (
       options.requireCountMultipleOf !== undefined &&
@@ -78,25 +107,14 @@ export class VertexStreamBuffer {
   }
 
   get ready(): boolean {
-    return this.#readyWithoutCountIssue() && !this.hasCountIssue();
+    return this.#getStatus().ready;
   }
 
   get transparent(): boolean {
-    if (!this.ready || !this.#ownedBytes) {
-      return false;
-    }
-    const alphaOffset = this.layout.fields.color?.offset;
-    if (alphaOffset === undefined) {
-      return false;
-    }
-    for (let index = 0; index < this.effectiveCount; index += 1) {
-      if (this.#ownedBytes[index * this.layout.stride + alphaOffset + 3] !== 255) {
-        return true;
-      }
-    }
-    return false;
+    return this.#getStatus().transparent;
   }
 
+  // eslint-disable-next-line max-statements -- Replacement resets owned storage, validation, and cached summaries together.
   replace(source: ArrayBufferView | null): void {
     if (source !== null && !ArrayBuffer.isView(source)) {
       throw new TypeError('A streamed vertex source must be an ArrayBufferView or null.');
@@ -112,6 +130,9 @@ export class VertexStreamBuffer {
       return;
     }
     this.#ownedBytes = new Uint8Array(bytesOf(source));
+    this.#ownedView = new DataView(this.#ownedBytes.buffer, this.#ownedBytes.byteOffset, this.#ownedBytes.byteLength);
+    this.#recordViewAllocations += 1;
+    this.#summary.reset(this.capacity);
     this.#validateAllRecords();
     this.#resetCountIfOutOfBounds(this.capacity);
     this.#queueDirtyRange(0, this.#ownedBytes.byteLength);
@@ -141,21 +162,14 @@ export class VertexStreamBuffer {
     const size = resolvedCount * this.layout.stride;
     this.#ownedBytes.set(bytesOf(this.#source).subarray(offset, offset + size), offset);
     for (let index = start; index < start + resolvedCount; index += 1) {
-      this.#validateRecord(index);
+      this.#validateRecord(index, false);
     }
     this.#queueDirtyRange(offset, size);
     this.#version += 1;
   }
 
   getIssues(): ReadonlySet<VertexStreamIssue> {
-    const issues = new Set<VertexStreamIssue>(this.#structuralIssues);
-    for (const [index, recordIssues] of this.#issuesByRecord) {
-      if (index < this.effectiveCount) recordIssues.forEach(issue => issues.add(issue));
-    }
-    if (this.hasCountIssue()) {
-      issues.add(TRIANGLES_COUNT);
-    }
-    return issues;
+    return this.#getStatus().issues;
   }
 
   getUploadBytes(): Uint8Array | null {
@@ -175,43 +189,60 @@ export class VertexStreamBuffer {
     return this.#version;
   }
 
+  getPerformanceSnapshot(): VertexStreamPerformanceSnapshot {
+    const summary = this.#summary.getSnapshot();
+    return {
+      recordScans: this.#recordScans,
+      recordViewAllocations: this.#recordViewAllocations,
+      summaryPrefixQueries: summary.prefixQueries,
+      summaryRemainderScans: summary.remainderScans,
+      summaryStorageAllocations: summary.storageAllocations
+    };
+  }
+
+  hasTransparency(count: number, evenOnly = false): boolean {
+    return this.#summary.has(TRANSPARENT_RECORD, count, evenOnly);
+  }
+
   toRenderData(options: { consumeUploadRanges?: boolean } = {}): VertexStreamRenderData {
     const consumeUploadRanges = options.consumeUploadRanges ?? true;
+    const status = this.#getStatus();
     return {
-      bytes: this.getUploadBytes(),
+      bytes: status.ready ? this.#ownedBytes : null,
       capacity: this.capacity,
-      count: this.ready ? this.effectiveCount : 0,
-      issues: this.getIssues(),
-      ready: this.ready,
-      transparent: this.transparent,
+      count: status.ready ? this.effectiveCount : 0,
+      issues: status.issues,
+      ready: status.ready,
+      transparent: status.transparent,
       uploadRanges: consumeUploadRanges ? this.takeUploadRanges() : [],
       version: this.#version
     };
   }
 
-  #validateRecord(index: number): void {
-    if (!this.#ownedBytes) {
+  // eslint-disable-next-line complexity -- One record combines optional layout, custom validation, and transparency checks.
+  #validateRecord(index: number, initial: boolean): void {
+    if (!this.#ownedBytes || !this.#ownedView) {
       return;
     }
-    const record = new DataView(this.#ownedBytes.buffer, index * this.layout.stride, this.layout.stride);
-    const issues = new Set<VertexStreamIssue>();
+    this.#recordScans += 1;
+    const byteOffset = index * this.layout.stride;
+    let invalid = false;
     const position = this.layout.fields.position;
     if (position) {
       const width = position.type === 'f32x3' ? 3 : position.type === 'f32x2' ? 2 : 1;
       for (let component = 0; component < width; component += 1) {
-        if (!Number.isFinite(record.getFloat32(position.offset + component * 4, true))) {
-          issues.add(LAYOUT_VALUE_INVALID);
-        }
+        if (!Number.isFinite(this.#ownedView.getFloat32(byteOffset + position.offset + component * 4, true)))
+          invalid = true;
       }
     }
-    if (this.validateRecord && !this.validateRecord(record)) {
-      issues.add(LAYOUT_VALUE_INVALID);
-    }
-    if (issues.size === 0) {
-      this.#issuesByRecord.delete(index);
-    } else {
-      this.#issuesByRecord.set(index, issues);
-    }
+    if (this.validateRecord && !this.validateRecord(this.#ownedView, byteOffset)) invalid = true;
+    const alphaOffset = this.layout.fields.color?.offset;
+    const transparent = this.transparentRecord
+      ? this.transparentRecord(this.#ownedView, byteOffset)
+      : alphaOffset !== undefined && this.#ownedBytes[byteOffset + alphaOffset + 3] !== 255;
+    const flags = (invalid ? INVALID_RECORD : 0) | (transparent ? TRANSPARENT_RECORD : 0);
+    if (initial) this.#summary.setInitialFlags(index, flags);
+    else this.#summary.updateFlags(index, flags);
   }
 
   #queueDirtyRange(offset: number, size: number): void {
@@ -222,27 +253,18 @@ export class VertexStreamBuffer {
 
   #resetValidation(): void {
     this.#dirtyRanges = [];
-    this.#issuesByRecord.clear();
+    this.#ownedView = null;
+    this.#status = undefined;
     this.#structuralIssues.clear();
   }
 
   hasCountIssue(): boolean {
     return (
       this.requireCountMultipleOf !== undefined &&
-      this.#readyWithoutCountIssue() &&
+      this.#structuralIssues.size === 0 &&
+      !this.#summary.has(INVALID_RECORD, this.effectiveCount) &&
       this.effectiveCount % this.requireCountMultipleOf !== 0
     );
-  }
-
-  #readyWithoutCountIssue(): boolean {
-    return this.#structuralIssues.size === 0 && !this.#hasActiveRecordIssues();
-  }
-
-  #hasActiveRecordIssues(): boolean {
-    for (const index of this.#issuesByRecord.keys()) {
-      if (index < this.effectiveCount) return true;
-    }
-    return false;
   }
 
   #resetCountIfOutOfBounds(capacity: number): void {
@@ -254,6 +276,8 @@ export class VertexStreamBuffer {
 
   #clearOwnedSource(capacity: number): void {
     this.#ownedBytes = null;
+    this.#ownedView = null;
+    this.#summary.reset(0);
     this.#resetCountIfOutOfBounds(capacity);
   }
 
@@ -268,8 +292,29 @@ export class VertexStreamBuffer {
 
   #validateAllRecords(): void {
     for (let index = 0; index < this.capacity; index += 1) {
-      this.#validateRecord(index);
+      this.#validateRecord(index, true);
     }
+    this.#summary.finishInitialFlags();
+  }
+
+  #getStatus(): VertexStreamStatus {
+    if (this.#status?.version === this.#version) return this.#status;
+    const count = this.effectiveCount;
+    const invalid = this.#summary.has(INVALID_RECORD, count);
+    const readyWithoutCountIssue = this.#structuralIssues.size === 0 && !invalid;
+    const countIssue =
+      this.requireCountMultipleOf !== undefined && readyWithoutCountIssue && count % this.requireCountMultipleOf !== 0;
+    const issues = new Set<VertexStreamIssue>(this.#structuralIssues);
+    if (invalid) issues.add(LAYOUT_VALUE_INVALID);
+    if (countIssue) issues.add(TRIANGLES_COUNT);
+    const ready = readyWithoutCountIssue && !countIssue;
+    this.#status = {
+      issues,
+      ready,
+      transparent: ready && this.#summary.has(TRANSPARENT_RECORD, count),
+      version: this.#version
+    };
+    return this.#status;
   }
 }
 

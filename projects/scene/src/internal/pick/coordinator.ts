@@ -4,7 +4,9 @@
 import type { PickCompletion, PickHit, PickRequest, PickRequestKind } from './types.js';
 
 interface PickCoordinatorOptions<T = PickHit> {
+  readonly now?: () => number;
   readonly onComplete?: (completion: PickCompletion<T>) => void;
+  readonly onHoverLatency?: (latency: number, request: PickRequest) => void;
   readonly onStaleHover?: (request: PickRequest) => void;
 }
 
@@ -24,22 +26,35 @@ interface PendingOrdered<T> {
   settled: boolean;
 }
 
+interface PendingHover<T> {
+  readonly reject: (reason?: unknown) => void;
+  readonly requestedAt: number;
+  readonly request: PickRequest;
+  readonly resolve: (hit: T | null) => void;
+  readonly resolver: (request: PickRequest) => T | null | PromiseLike<T | null>;
+}
+
 /**
  * Coordinates asynchronous GPU readbacks without imposing GPU ordering. Down,
- * up, and click leave the coordinator in request order; hover accepts only the
- * newest completion.
+ * up, and click leave the coordinator in request order. Hover keeps at most one
+ * resolver in flight and one latest request queued.
  */
 export class PickCoordinator<T = PickHit> {
   #nextSequence = 0;
   #nextOrdered = 1;
   #nextOrderedToRelease = 1;
-  #latestHover = 0;
+  #activeHover?: PendingHover<T>;
+  #queuedHover?: PendingHover<T>;
   #ordered = new Map<number, PendingOrdered<T>>();
+  #now: () => number;
   #onComplete?: (completion: PickCompletion<T>) => void;
+  #onHoverLatency?: (latency: number, request: PickRequest) => void;
   #onStaleHover?: (request: PickRequest) => void;
 
   constructor(options: PickCoordinatorOptions<T> = {}) {
+    this.#now = options.now ?? (() => 0);
     this.#onComplete = options.onComplete;
+    this.#onHoverLatency = options.onHoverLatency;
     this.#onStaleHover = options.onStaleHover;
   }
 
@@ -60,26 +75,67 @@ export class PickCoordinator<T = PickHit> {
     request: PickRequest,
     resolver: (request: PickRequest) => T | null | PromiseLike<T | null>
   ): Promise<T | null> {
-    this.#latestHover = request.sequence;
-    return Promise.resolve()
-      .then(() => resolver(request))
+    let resolveResult!: (hit: T | null) => void;
+    let rejectResult!: (reason?: unknown) => void;
+    const result = new Promise<T | null>((resolve, reject) => {
+      resolveResult = resolve;
+      rejectResult = reject;
+    });
+    const pending: PendingHover<T> = {
+      reject: rejectResult,
+      requestedAt: this.#now(),
+      request,
+      resolve: resolveResult,
+      resolver
+    };
+    if (!this.#activeHover) {
+      this.#startHover(pending);
+    } else {
+      if (this.#queuedHover) this.#settleStaleHover(this.#queuedHover);
+      this.#queuedHover = pending;
+    }
+    return result;
+  }
+
+  #startHover(pending: PendingHover<T>): void {
+    this.#activeHover = pending;
+    void Promise.resolve()
+      .then(() => pending.resolver(pending.request))
       .then(
-        hit => {
-          if (request.sequence !== this.#latestHover) {
-            this.#onStaleHover?.(request);
-            return null;
-          }
-          this.#onComplete?.({ request, hit });
-          return hit;
-        },
-        error => {
-          if (request.sequence !== this.#latestHover) {
-            this.#onStaleHover?.(request);
-            return null;
-          }
-          throw error;
-        }
+        hit => this.#settleActiveHover(pending, { hit }),
+        error => this.#settleActiveHover(pending, { error })
       );
+  }
+
+  #settleActiveHover(pending: PendingHover<T>, outcome: { readonly error?: unknown; readonly hit?: T | null }): void {
+    try {
+      if (this.#queuedHover) {
+        this.#settleStaleHover(pending);
+      } else if ('error' in outcome) {
+        pending.reject(outcome.error);
+      } else {
+        const hit = outcome.hit ?? null;
+        this.#onHoverLatency?.(Math.max(0, this.#now() - pending.requestedAt), pending.request);
+        this.#onComplete?.({ request: pending.request, hit });
+        pending.resolve(hit);
+      }
+    } catch (error) {
+      pending.reject(error);
+    } finally {
+      if (this.#activeHover === pending) this.#activeHover = undefined;
+      const queued = this.#queuedHover;
+      this.#queuedHover = undefined;
+      if (queued) this.#startHover(queued);
+    }
+  }
+
+  #settleStaleHover(pending: PendingHover<T>): void {
+    try {
+      this.#onStaleHover?.(pending.request);
+      pending.resolve(null);
+    } catch (error) {
+      pending.reject(error);
+    }
   }
 
   #requestOrdered(

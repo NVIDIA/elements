@@ -9,7 +9,7 @@ import { LINE_VERTEX, MARKER, POINT, TRI_VERTEX } from '../internal/layouts/buil
 import { writeLineVertex, writeMarker, writePoint, writeTriVertex } from '../internal/layouts/helpers.js';
 import { takeHeightfieldLayerRenderData } from '../internal/heightfield/layer-state.js';
 import { takeModelLayerRenderData } from '../internal/model/layer-state.js';
-import { type ScenePickResult } from '../internal/pick/routing.js';
+import { type ScenePickRequest, type ScenePickResult } from '../internal/pick/routing.js';
 import { SceneRenderer, type SceneRenderItem } from './rendering/renderer.js';
 import { SceneModel } from '../model/model.js';
 import { ScenePart } from '../model/part.js';
@@ -18,7 +18,9 @@ import {
   configureSceneTesting,
   getNamedSceneFrameForTesting,
   getSceneMeshUploadSnapshotForTesting,
+  getScenePickPerformanceSnapshotForTesting,
   getSceneTestingSnapshot,
+  getSceneTickPerformanceSnapshotForTesting,
   resetSceneTesting,
   setScenePickDriverForTesting,
   type SceneGPUCanvasContext,
@@ -90,6 +92,149 @@ describe(Scene.metadata.tag, () => {
     const idleSubmissions = gpu.devices[0]?.submissions.length;
     await waitForAnimationFrames(3);
     expect(gpu.devices[0]?.submissions).toHaveLength(idleSubmissions ?? 0);
+  });
+
+  it('should park a connected static scene without repeating polling work', async () => {
+    const animation = new ManualAnimationFrames();
+    const gpu = configureFakeWebGPU({
+      cancelAnimationFrame: handle => animation.cancel(handle),
+      requestAnimationFrame: callback => animation.request(callback)
+    });
+    const { element } = await createScene(html`<nve-scene aria-label="Static scene"></nve-scene>`);
+    gpu.resolveNextDevice();
+    await element.ready;
+    await drainSceneTicks(animation, element);
+
+    const idle = getSceneTickPerformanceSnapshotForTesting(element);
+    expect(idle).toMatchObject({ parked: true });
+    expect(idle.animationFrameRequests).toBeGreaterThan(0);
+    expect(idle.backgroundSamples).toBeGreaterThan(0);
+    expect(idle.cameraScans).toBeGreaterThan(0);
+    expect(idle.frameScans).toBeGreaterThan(0);
+    expect(idle.layerScans).toBeGreaterThan(0);
+    expect(animation.pendingCount).toBe(0);
+
+    await Promise.resolve();
+    expect(getSceneTickPerformanceSnapshotForTesting(element)).toEqual(idle);
+  });
+
+  it('should keep live timestamp frames ticking and park again when time is scrubbed', async () => {
+    const animation = new ManualAnimationFrames();
+    const gpu = configureFakeWebGPU({
+      cancelAnimationFrame: handle => animation.cancel(handle),
+      requestAnimationFrame: callback => animation.request(callback)
+    });
+    const { element } = await createScene(html`
+      <nve-scene aria-label="Live scene"><nve-scene-frame name="robot"></nve-scene-frame></nve-scene>
+    `);
+    const frame = element.querySelector<HTMLElement>('nve-scene-frame');
+    if (!frame) throw new Error('Expected frame.');
+    Reflect.get(frame, 'setTransform').call(frame, {
+      stamp: 1,
+      position: [0, 0, 0],
+      orientation: [0, 0, 0, 1]
+    });
+    gpu.resolveNextDevice();
+    await element.ready;
+
+    animation.flush();
+    const first = getSceneTickPerformanceSnapshotForTesting(element);
+    expect(first.parked).toBe(false);
+    expect(animation.pendingCount).toBe(1);
+    animation.flush();
+    expect(getSceneTickPerformanceSnapshotForTesting(element).ticks).toBe(first.ticks + 1);
+    expect(animation.pendingCount).toBe(1);
+
+    element.time = 1;
+    animation.flush();
+    await drainSceneTicks(animation, element);
+    expect(getSceneTickPerformanceSnapshotForTesting(element).parked).toBe(true);
+  });
+
+  it('should coalesce independent state, observer, label, resize, and pointer wakes', async () => {
+    const animation = new ManualAnimationFrames();
+    let resizeCallback: ResizeObserverCallback | undefined;
+    const resizeObserver = createManualResizeObserver();
+    const gpu = configureFakeWebGPU({
+      cancelAnimationFrame: handle => animation.cancel(handle),
+      createResizeObserver: callback => {
+        resizeCallback = callback;
+        return resizeObserver;
+      },
+      requestAnimationFrame: callback => animation.request(callback)
+    });
+    const { element } = await createScene(html`
+      <nve-scene aria-label="Wake paths">
+        <nve-scene-camera behavior="orbit"></nve-scene-camera>
+        <nve-scene-frame name="robot"></nve-scene-frame>
+        <nve-scene-points></nve-scene-points>
+        <nve-scene-label><button type="button">Status</button></nve-scene-label>
+      </nve-scene>
+    `);
+    configureSceneLabelTesting(element, { captureCapabilities: { available: false } });
+    const camera = element.querySelector<SceneCamera>('nve-scene-camera');
+    const frame = element.querySelector<HTMLElement>('nve-scene-frame');
+    const points = element.querySelector<HTMLElement>('nve-scene-points');
+    const labelChild = element.querySelector<HTMLButtonElement>('nve-scene-label button');
+    if (!camera || !frame || !points || !labelChild || !resizeCallback) throw new Error('Expected wake fixtures.');
+    const notifyResize = resizeCallback;
+    setStreamBytes(points, 1, 'instances');
+    gpu.resolveNextDevice();
+    await element.ready;
+    await drainSceneTicks(animation, element);
+
+    const expectWake = async (action: () => void | Promise<void>): Promise<void> => {
+      const before = getSceneTickPerformanceSnapshotForTesting(element);
+      await action();
+      await vi.waitFor(() => expect(animation.pendingCount).toBe(1));
+      animation.flush();
+      await drainSceneTicks(animation, element);
+      const after = getSceneTickPerformanceSnapshotForTesting(element);
+      expect(after.animationFrameRequests).toBeGreaterThan(before.animationFrameRequests);
+      expect(after.ticks).toBeGreaterThan(before.ticks);
+      expect(after.parked).toBe(true);
+      expect(animation.pendingCount).toBe(0);
+    };
+
+    await expectWake(() => {
+      element.time = 5;
+    });
+    await expectWake(() => {
+      Reflect.get(points, 'commit').call(points);
+    });
+    await expectWake(async () => {
+      Reflect.set(points, 'size', 7);
+      await Reflect.get(points, 'updateComplete');
+    });
+    await expectWake(() => {
+      camera.setAttribute('distance', '18');
+    });
+    await expectWake(async () => {
+      camera.distance = 19;
+      await camera.updateComplete;
+    });
+    await expectWake(() => {
+      Reflect.get(frame, 'setTransform').call(frame, { position: [1, 2, 3], orientation: [0, 0, 0, 1] });
+    });
+    await expectWake(() => {
+      labelChild.textContent = 'Updated';
+    });
+    await expectWake(() => {
+      const entry = {
+        borderBoxSize: [],
+        contentBoxSize: [],
+        contentRect: new DOMRectReadOnly(0, 0, 20, 10),
+        target: element
+      };
+      Reflect.apply(notifyResize, undefined, [[entry], resizeObserver]);
+    });
+    const canvas = element.shadowRoot?.querySelector('canvas');
+    if (!canvas) throw new Error('Expected canvas.');
+    await expectWake(() => {
+      canvas.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: 1, clientY: 1, pointerId: 1 }));
+      canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, clientX: 4, clientY: 1, pointerId: 1 }));
+      canvas.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, clientX: 4, clientY: 1, pointerId: 1 }));
+    });
   });
 
   it('should preserve authored role and tabindex values', async () => {
@@ -548,9 +693,14 @@ describe(Scene.metadata.tag, () => {
     gpu.resolveNextDevice();
     const initialReady = element.ready;
     await initialReady;
+    await vi.waitFor(() => expect(getSceneTickPerformanceSnapshotForTesting(element).parked).toBe(true));
+    const initialTickRequests = getSceneTickPerformanceSnapshotForTesting(element).animationFrameRequests;
 
     gpu.devices[0]?.lose({ message: 'first loss', reason: 'unknown' });
     await vi.waitFor(() => expect(getSceneTestingSnapshot().requestDeviceCount).toBe(2));
+    expect(getSceneTickPerformanceSnapshotForTesting(element).animationFrameRequests).toBeGreaterThan(
+      initialTickRequests
+    );
     const recoveryReady = element.ready;
     expect(recoveryReady).not.toBe(initialReady);
     await element.updateComplete;
@@ -558,6 +708,7 @@ describe(Scene.metadata.tag, () => {
 
     gpu.resolveNextDevice();
     await recoveryReady;
+    await vi.waitFor(() => expect(getSceneTickPerformanceSnapshotForTesting(element).parked).toBe(true));
     expect(errorCodes).toEqual(['device-lost']);
 
     gpu.devices[1]?.lose({ message: 'second loss', reason: 'unknown' });
@@ -692,8 +843,9 @@ describe(Scene.metadata.tag, () => {
     expect(captures).toEqual([element, marker]);
   });
 
-  it('should discard stale hover results and expose buffer authored hover events', async () => {
-    const gpu = configureFakeWebGPU();
+  it('should bound a synthetic hover burst to one active resolver and the latest queued point', async () => {
+    let now = 10;
+    const gpu = configureFakeWebGPU({ now: () => now });
     const { element } = await createScene(
       html`<nve-scene aria-label="Pick scene"><nve-scene-cubes></nve-scene-cubes></nve-scene>`
     );
@@ -701,8 +853,22 @@ describe(Scene.metadata.tag, () => {
     const canvas = element.shadowRoot?.querySelector('canvas');
     if (!layer || !canvas) throw new Error('Expected a layer and canvas.');
     vi.spyOn(canvas, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 100, 100));
-    const pending: Array<(hit: ScenePickResult | null) => void> = [];
-    setScenePickDriverForTesting(element, () => new Promise(resolve => pending.push(resolve)));
+    let active = 0;
+    let maximumActive = 0;
+    const pending: Array<{ request: ScenePickRequest; resolve: (hit: ScenePickResult | null) => void }> = [];
+    setScenePickDriverForTesting(element, request => {
+      active += 1;
+      maximumActive = Math.max(maximumActive, active);
+      return new Promise(resolve =>
+        pending.push({
+          request,
+          resolve: hit => {
+            active -= 1;
+            resolve(hit);
+          }
+        })
+      );
+    });
     gpu.resolveNextDevice();
     await element.ready;
     const events: string[] = [];
@@ -711,12 +877,20 @@ describe(Scene.metadata.tag, () => {
 
     canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true, clientX: 10, clientY: 10 }));
     canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true, clientX: 20, clientY: 20 }));
+    canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true, clientX: 30, clientY: 30 }));
+    canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true, clientX: 40, clientY: 40 }));
+    await vi.waitFor(() => expect(pending).toHaveLength(1));
+    expect(pending[0]?.request.clientX).toBe(10);
+    now = 20;
+    pending[0]?.resolve({ layer, instanceIndex: 2, worldPosition: [0, 0, 0] });
     await vi.waitFor(() => expect(pending).toHaveLength(2));
-    pending.shift()?.({ layer, instanceIndex: 2, worldPosition: [0, 0, 0] });
-    await Promise.resolve();
     expect(events).toEqual([]);
-    pending.shift()?.({ layer, instanceIndex: 2, worldPosition: [0, 0, 0] });
+    expect(pending[1]?.request.clientX).toBe(40);
+    now = 35;
+    pending[1]?.resolve({ layer, instanceIndex: 2, worldPosition: [0, 0, 0] });
     await vi.waitFor(() => expect(events).toEqual(['enter']));
+    expect(maximumActive).toBe(1);
+    expect(getScenePickPerformanceSnapshotForTesting(element).latestPointLatencyMs).toBe(25);
   });
 
   it('should discard stale hover source events and cross buffer instances in one layer', async () => {
@@ -742,9 +916,9 @@ describe(Scene.metadata.tag, () => {
 
     canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true, clientX: 1, clientY: 1 }));
     canvas.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true, clientX: 2, clientY: 2 }));
-    await vi.waitFor(() => expect(pending).toHaveLength(2));
+    await vi.waitFor(() => expect(pending).toHaveLength(1));
     pending[0]?.({ layer, instanceIndex: 0, worldPosition: [0, 0, 0] });
-    await Promise.resolve();
+    await vi.waitFor(() => expect(pending).toHaveLength(2));
     expect(events).toEqual([]);
     pending[1]?.({ layer, instanceIndex: 0, worldPosition: [0, 0, 0] });
     await vi.waitFor(() => expect(events).toEqual(['enter:0']));
@@ -2014,8 +2188,11 @@ function configureFakeWebGPU(
   options: {
     createMutationObserver?: ScenePlatform['createMutationObserver'];
     createResizeObserver?: ScenePlatform['createResizeObserver'];
+    cancelAnimationFrame?: ScenePlatform['cancelAnimationFrame'];
     devicePixelRatio?: number;
     failCanvasContextAt?: number;
+    now?: ScenePlatform['now'];
+    requestAnimationFrame?: ScenePlatform['requestAnimationFrame'];
   } = {}
 ): {
   readonly contexts: SceneGPUCanvasContext[];
@@ -2038,7 +2215,10 @@ function configureFakeWebGPU(
     },
     createMutationObserver: options.createMutationObserver ?? (callback => new MutationObserver(callback)),
     createResizeObserver: options.createResizeObserver ?? (callback => new ResizeObserver(callback)),
-    getDevicePixelRatio: () => options.devicePixelRatio ?? 1
+    cancelAnimationFrame: options.cancelAnimationFrame ?? (handle => globalThis.cancelAnimationFrame(handle)),
+    getDevicePixelRatio: () => options.devicePixelRatio ?? 1,
+    requestAnimationFrame: options.requestAnimationFrame ?? (callback => globalThis.requestAnimationFrame(callback)),
+    ...(options.now ? { now: options.now } : {})
   });
 
   return {
@@ -2239,4 +2419,43 @@ async function waitForAnimationFrames(count: number): Promise<void> {
   for (let frame = 0; frame < count; frame += 1) {
     await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
   }
+}
+
+class ManualAnimationFrames {
+  #callbacks = new Map<number, FrameRequestCallback>();
+  #nextHandle = 1;
+
+  get pendingCount(): number {
+    return this.#callbacks.size;
+  }
+
+  request(callback: FrameRequestCallback): number {
+    const handle = this.#nextHandle;
+    this.#nextHandle += 1;
+    this.#callbacks.set(handle, callback);
+    return handle;
+  }
+
+  cancel(handle: number): void {
+    this.#callbacks.delete(handle);
+  }
+
+  flush(): void {
+    const callbacks = [...this.#callbacks.values()];
+    this.#callbacks.clear();
+    callbacks.forEach(callback => callback(performance.now()));
+  }
+}
+
+async function drainSceneTicks(animation: ManualAnimationFrames, scene: Scene): Promise<void> {
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    await Promise.resolve();
+    await scene.updateComplete;
+    if (animation.pendingCount === 0) {
+      await Promise.resolve();
+      if (animation.pendingCount === 0) return;
+    }
+    animation.flush();
+  }
+  throw new Error('Scene did not park within the expected number of animation frames.');
 }

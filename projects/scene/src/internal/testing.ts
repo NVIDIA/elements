@@ -5,7 +5,12 @@ import { sharedDeviceManager } from './gpu/device-manager.js';
 import { getFrameStateSnapshot, getNamedSceneFrame } from './frame/state.js';
 import { FRAME_SAMPLE_MAX_COUNT, FRAME_SAMPLE_MAX_SPAN_MS } from './frame/transform-buffer.js';
 import { restoreScenePlatform, scenePlatform, type ScenePlatform } from './gpu/platform.js';
-import { getSceneInstanceUploadCount, getSceneMeshUploadSnapshot } from '../scene/rendering/renderer.js';
+import {
+  getSceneInstanceUploadCount,
+  getSceneMeshUploadSnapshot,
+  getScenePickPerformanceSnapshot,
+  type ScenePickPerformanceSnapshot
+} from '../scene/rendering/renderer.js';
 import type { LabelCaptureCapabilities } from './label/capture.js';
 import type { ScenePickDriver } from './pick/routing.js';
 
@@ -25,6 +30,17 @@ interface SceneLabelTestingOptions {
 const LABEL_TESTING = Symbol.for('nve.scene.label-testing');
 const LABEL_CAPTURE_RESET = Symbol.for('nve.scene.label-capture.reset');
 const PICK_DRIVER_SET = Symbol.for('nve.scene.pick-driver.set');
+const TICK_PERFORMANCE = Symbol.for('nve.scene.tick-performance');
+
+export interface SceneTickPerformanceSnapshot {
+  readonly animationFrameRequests: number;
+  readonly backgroundSamples: number;
+  readonly cameraScans: number;
+  readonly frameScans: number;
+  readonly layerScans: number;
+  readonly parked: boolean;
+  readonly ticks: number;
+}
 
 export { FRAME_SAMPLE_MAX_COUNT, FRAME_SAMPLE_MAX_SPAN_MS };
 
@@ -71,6 +87,25 @@ export function getSceneMeshUploadSnapshotForTesting(scene: HTMLElement): {
   uploads: number;
 } {
   return getSceneMeshUploadSnapshot(scene);
+}
+
+export function getScenePickPerformanceSnapshotForTesting(scene: HTMLElement): ScenePickPerformanceSnapshot {
+  return getScenePickPerformanceSnapshot(scene);
+}
+
+export function getSceneTickPerformanceSnapshotForTesting(scene: HTMLElement): SceneTickPerformanceSnapshot {
+  const snapshot = Reflect.get(scene, TICK_PERFORMANCE) as SceneTickPerformanceSnapshot | undefined;
+  return (
+    snapshot ?? {
+      animationFrameRequests: 0,
+      backgroundSamples: 0,
+      cameraScans: 0,
+      frameScans: 0,
+      layerScans: 0,
+      parked: true,
+      ticks: 0
+    }
+  );
 }
 
 /** Installs an isolated label-capture seam used only by Scene tests. */

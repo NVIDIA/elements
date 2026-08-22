@@ -33,7 +33,7 @@ describe(PickReadback.name, () => {
 
     const result = readback.copy({
       encoder,
-      frame: { inverseViewProjection: identityMat4(), targets: [{ value: 'first' }] },
+      frame: { decodeTarget: id => (id === 1 ? { value: 'first' } : undefined), inverseViewProjection: identityMat4() },
       pixel: { x: 3, y: 4 },
       size: { height: 10, width: 10 },
       textures: { depth: texture, id: texture }
@@ -70,7 +70,7 @@ describe(PickReadback.name, () => {
     await expect(
       readback.copy({
         encoder,
-        frame: { inverseViewProjection: identityMat4(), targets: [] },
+        frame: { decodeTarget: () => undefined, inverseViewProjection: identityMat4() },
         pixel: { x: 0, y: 0 },
         size: { height: 1, width: 1 },
         textures: { depth: { createView: () => ({}) }, id: { createView: () => ({}) } }
@@ -105,7 +105,10 @@ describe(PickReadback.name, () => {
     await expect(
       readback.copy({
         encoder,
-        frame: { inverseViewProjection: identityMat4(), targets: [{ value: 'hit' }] },
+        frame: {
+          decodeTarget: targetId => (targetId === 1 ? { value: 'hit' } : undefined),
+          inverseViewProjection: identityMat4()
+        },
         pixel: { x: 0, y: 0 },
         size: { height: 1, width: 1 },
         textures: { depth: texture, id: texture }
@@ -127,7 +130,10 @@ describe(PickReadback.name, () => {
       device.createBuffer.mockReturnValueOnce(buffer);
       const pending = readback.copy({
         encoder,
-        frame: { inverseViewProjection: identityMat4(), targets: [{ value: 'hit' }] },
+        frame: {
+          decodeTarget: targetId => (targetId === 1 ? { value: 'hit' } : undefined),
+          inverseViewProjection: identityMat4()
+        },
         pixel: { x: 0, y: 0 },
         size: { height: 1, width: 1 },
         textures: { depth: texture, id: texture }
@@ -159,7 +165,7 @@ describe(PickReadback.name, () => {
     await expect(
       readback.copy({
         encoder,
-        frame: { inverseViewProjection: identityMat4(), targets: [] },
+        frame: { decodeTarget: () => undefined, inverseViewProjection: identityMat4() },
         pixel: { x: 0, y: 0 },
         size: { height: 1, width: 1 },
         textures: { depth: { createView: () => ({}) }, id: { createView: () => ({}) } }

@@ -15,6 +15,7 @@ import {
   setStreamingLayerSource,
   type StreamingLayerKind
 } from './streaming-layer-state.js';
+import { notifyOwningScene } from './label/notifications.js';
 
 /** Shared Lit host for streamed point, line, and triangle layers. */
 export abstract class StreamingLayerElement extends LitElement {
@@ -57,6 +58,10 @@ export abstract class StreamingLayerElement extends LitElement {
   /** Internal renderer seam; it drains pending upload ranges. */
   render() {
     return html`<slot></slot>`;
+  }
+
+  protected override updated(): void {
+    notifyOwningScene(this);
   }
 
   override connectedCallback(): void {

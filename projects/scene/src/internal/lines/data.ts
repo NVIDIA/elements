@@ -32,16 +32,29 @@ export function lineCountIsValid(count: number, topology: LineTopology): boolean
   return true;
 }
 
-export function lineRecordIsValid(record: DataView): boolean {
-  const width = record.getFloat32(WIDTH_OFFSET, true);
-  const dash = record.getFloat32(DASH_OFFSET, true);
-  const gap = record.getFloat32(GAP_OFFSET, true);
-  const normal = [
-    record.getFloat32(NORMAL_OFFSET, true),
-    record.getFloat32(NORMAL_OFFSET + 4, true),
-    record.getFloat32(NORMAL_OFFSET + 8, true)
-  ];
-  return valuesAreFinite([width, dash, gap, ...normal]) && styleIsValid(width, dash, gap) && normalIsValid(normal);
+export function lineRecordIsValid(records: DataView, byteOffset = 0): boolean {
+  const width = records.getFloat32(byteOffset + WIDTH_OFFSET, true);
+  const dash = records.getFloat32(byteOffset + DASH_OFFSET, true);
+  const gap = records.getFloat32(byteOffset + GAP_OFFSET, true);
+  const normalX = records.getFloat32(byteOffset + NORMAL_OFFSET, true);
+  const normalY = records.getFloat32(byteOffset + NORMAL_OFFSET + 4, true);
+  const normalZ = records.getFloat32(byteOffset + NORMAL_OFFSET + 8, true);
+  return (
+    Number.isFinite(width) &&
+    Number.isFinite(dash) &&
+    Number.isFinite(gap) &&
+    Number.isFinite(normalX) &&
+    Number.isFinite(normalY) &&
+    Number.isFinite(normalZ) &&
+    styleIsValid(width, dash, gap) &&
+    Math.hypot(normalX, normalY, normalZ) > 0
+  );
+}
+
+export function lineRecordHasTransparency(records: DataView, byteOffset = 0): boolean {
+  return (
+    records.getFloat32(byteOffset + WIDTH_OFFSET, true) > 0 && records.getUint8(byteOffset + COLOR_OFFSET + 3) !== 255
+  );
 }
 
 export function lineHasTransparency(bytes: Uint8Array, count: number, topology: LineTopology): boolean {
@@ -50,21 +63,13 @@ export function lineHasTransparency(bytes: Uint8Array, count: number, topology: 
   const limit = topology === 'loop' ? count : Math.max(0, count - 1);
   for (let index = 0; index < limit; index += step) {
     const offset = index * LINE_VERTEX.stride;
-    if (view.getFloat32(offset + WIDTH_OFFSET, true) > 0 && bytes[offset + COLOR_OFFSET + 3] !== 255) return true;
+    if (lineRecordHasTransparency(view, offset)) return true;
   }
   return false;
 }
 
-function valuesAreFinite(values: readonly number[]): boolean {
-  return values.every(Number.isFinite);
-}
-
 function styleIsValid(width: number, dash: number, gap: number): boolean {
   return width >= 0 && dash >= 0 && gap >= 0 && (gap === 0 || dash > 0);
-}
-
-function normalIsValid(normal: readonly number[]): boolean {
-  return Math.hypot(...normal) > 0;
 }
 
 function fieldOffset(name: string): number {

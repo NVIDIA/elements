@@ -71,4 +71,54 @@ describe('marker instance buffer', () => {
     expect(() => buffer.commit(0, 2)).toThrow(RangeError);
     expect(() => buffer.commit(0.5)).toThrow(RangeError);
   });
+
+  it('should cache marker validation and alpha summaries across representative operations', () => {
+    const count = 1_024;
+    const source = new Uint8Array(MARKER.stride * count);
+    for (let index = 0; index < count; index += 1) writeMarker(source, index, { position: [index, 0, 0] });
+    const buffer = new MarkerInstanceBuffer();
+
+    buffer.replace(source);
+    expect(buffer.getPerformanceSnapshot()).toEqual({
+      recordScans: count,
+      recordViewAllocations: 1,
+      summaryPrefixQueries: 0,
+      summaryRemainderScans: 0,
+      summaryStorageAllocations: 3
+    });
+    expect(buffer.ready).toBe(true);
+    expect(buffer.hasPartialFaceAlpha(count)).toBe(false);
+    expect(buffer.hasPartialOutlineAlpha(count)).toBe(false);
+    expect(buffer.hasVisibleOutlineAlpha(count)).toBe(false);
+    expect(buffer.getPerformanceSnapshot()).toMatchObject({
+      recordScans: count,
+      summaryPrefixQueries: 4,
+      summaryRemainderScans: 0
+    });
+
+    writeMarker(source, count - 1, {
+      color: [1, 1, 1, 0.5],
+      outlineColor: [1, 1, 1, 0.5],
+      position: [count - 1, 0, 0]
+    });
+    buffer.commit(count - 1, 1);
+    expect(buffer.hasPartialFaceAlpha(count)).toBe(true);
+    expect(buffer.hasPartialOutlineAlpha(count)).toBe(true);
+    expect(buffer.hasVisibleOutlineAlpha(count)).toBe(true);
+    expect(buffer.hasPartialFaceAlpha(count / 2)).toBe(false);
+    expect(buffer.getPerformanceSnapshot()).toMatchObject({
+      recordScans: count + 1,
+      recordViewAllocations: 1,
+      summaryRemainderScans: 0,
+      summaryStorageAllocations: 3
+    });
+
+    buffer.commit();
+    buffer.replace(source);
+    expect(buffer.getPerformanceSnapshot()).toMatchObject({
+      recordScans: count * 3 + 1,
+      recordViewAllocations: 2,
+      summaryStorageAllocations: 3
+    });
+  });
 });

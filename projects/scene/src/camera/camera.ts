@@ -2,13 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { useStyles } from '@nvidia-elements/core/internal';
-import { LitElement } from 'lit';
+import { LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { CAMERA_FRAME_UNRESOLVED, CAMERA_RANGE, CAMERA_SLOT_CONFLICT } from '../errors.js';
 import type { CameraField } from '../internal/camera/state.js';
 import { DiagnosticEpisodes } from '../internal/diagnostic-episodes.js';
 import { DEFAULT_CAMERA_STATE, type CameraProjection, type CameraTarget } from '../internal/math/camera.js';
 import type { Vec3 } from '../internal/types.js';
+import { notifyOwningScene } from '../internal/label/notifications.js';
 import styles from './camera.css?inline';
 
 export type SceneCameraBehavior = 'orbit' | 'follow' | 'top';
@@ -166,6 +167,10 @@ export class SceneCamera extends LitElement {
 
   /** Disables this declarative camera behavior by attribute presence. */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  protected override updated(changedProperties: PropertyValues<this>): void {
+    if (changedProperties.size > 0) notifyOwningScene(this);
+  }
 }
 
 /** Scene's internal lifecycle contract for camera elements. */

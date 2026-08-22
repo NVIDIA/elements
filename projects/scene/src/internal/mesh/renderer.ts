@@ -14,11 +14,7 @@ import {
   type MeshGeometryUpload,
   type MeshTextureResource
 } from './resources.js';
-import {
-  processMeshGeometry,
-  updateFlatGeometry,
-  type ProcessedMeshGeometry
-} from './processing.js';
+import { processMeshGeometry, updateFlatGeometry, type ProcessedMeshGeometry } from './processing.js';
 import type { PickPipelinePair } from '../pick/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../pick/uniform-offsets.js';
 import type { MeshRenderItem } from '../../scene/rendering/renderer.js';
@@ -68,7 +64,10 @@ interface GeometryPass extends SceneGPURenderPass {
   setVertexBuffer(slot: number, buffer: SceneGPUBuffer): void;
 }
 
+type LayerBindGroups = readonly [SceneGPUBindGroup, SceneGPUBindGroup];
+
 interface LayerResources {
+  readonly bindGroups: WeakMap<SceneGPURenderPipeline, LayerBindGroups>;
   readonly instance: SceneGPUBuffer;
   readonly instanceBytes: number;
   readonly uniform: SceneGPUBuffer;
@@ -79,6 +78,12 @@ interface MeshLayerResources {
   processed: ProcessedMeshGeometry;
   source: MeshGeometrySource;
   texture?: MeshTextureResource;
+  readonly textureBindGroups: WeakMap<SceneGPURenderPipeline, TextureBindGroup>;
+}
+
+interface TextureBindGroup {
+  readonly bindGroup: SceneGPUBindGroup;
+  readonly texture: SceneGPUTexture;
 }
 
 interface MeshGeometrySource {
@@ -97,6 +102,7 @@ export class MeshRenderer {
   #pipelines: MeshPipelines;
   #rebuildCount = 0;
   #sampler: object;
+  #uniformScratch = new Float32Array(40);
   #uploadCount = 0;
   #whiteTexture: SceneGPUTexture;
 
@@ -130,7 +136,8 @@ export class MeshRenderer {
       resources = {
         geometry: createMeshGeometryResources(this.#device, meshUpload(processed)),
         processed,
-        source: meshSource(item)
+        source: meshSource(item),
+        textureBindGroups: new WeakMap<SceneGPURenderPipeline, TextureBindGroup>()
       };
       this.#layers.set(item.layer, resources);
       this.#rebuildCount += 1;
@@ -170,7 +177,7 @@ export class MeshRenderer {
     if (uploaded) this.#uploadCount += 1;
   }
 
-  // eslint-disable-next-line complexity, max-statements -- A mesh draw binds three groups and four planar buffers.
+  // eslint-disable-next-line complexity -- Mesh drawing has optional resources, instances, and indexed geometry.
   draw(pass: GeometryPass, item: MeshRenderItem, transparent: boolean): void {
     if (!isReadyMesh(item)) return;
     const resources = this.#layers.get(item.layer);
@@ -179,16 +186,7 @@ export class MeshRenderer {
     const texture = resources?.texture?.texture ?? this.#whiteTexture;
     const count = item.data.identityInstance ? 1 : (item.instances?.count ?? 0);
     if (!resources || !layer || count === 0) return;
-    pass.setPipeline(pipeline);
-    pass.setBindGroup(0, this.#createBindGroup(pipeline, 0, [{ binding: 0, resource: { buffer: layer.uniform } }]));
-    pass.setBindGroup(1, this.#createBindGroup(pipeline, 1, [{ binding: 0, resource: { buffer: layer.instance } }]));
-    pass.setBindGroup(
-      2,
-      this.#createBindGroup(pipeline, 2, [
-        { binding: 0, resource: this.#sampler },
-        { binding: 1, resource: texture.createView() }
-      ])
-    );
+    this.#bindMesh(pass, { layer, pipeline, resources, texture });
     pass.setVertexBuffer(0, resources.geometry.positions);
     pass.setVertexBuffer(1, resources.geometry.normals);
     pass.setVertexBuffer(2, resources.geometry.uvs);
@@ -200,7 +198,7 @@ export class MeshRenderer {
   }
 
   /** Draws the prepared mesh through the matching ID pipeline. */
-  // eslint-disable-next-line complexity, max-statements -- The ID pass uses the same three groups and planar buffers as color.
+  // eslint-disable-next-line complexity, max-statements -- Pick drawing also writes the per-layer ID uniform.
   drawPick(options: {
     readonly item: MeshRenderItem;
     readonly pass: GeometryPass;
@@ -217,16 +215,7 @@ export class MeshRenderer {
     const count = item.data.identityInstance ? 1 : (item.instances?.count ?? 0);
     if (!resources || !layer || count === 0) return;
     this.#device.queue.writeBuffer(layer.uniform, PICK_UNIFORM_OFFSETS.mesh, new Uint32Array([pickId]));
-    pass.setPipeline(pipeline);
-    pass.setBindGroup(0, this.#createBindGroup(pipeline, 0, [{ binding: 0, resource: { buffer: layer.uniform } }]));
-    pass.setBindGroup(1, this.#createBindGroup(pipeline, 1, [{ binding: 0, resource: { buffer: layer.instance } }]));
-    pass.setBindGroup(
-      2,
-      this.#createBindGroup(pipeline, 2, [
-        { binding: 0, resource: this.#sampler },
-        { binding: 1, resource: texture.createView() }
-      ])
-    );
+    this.#bindMesh(pass, { layer, pipeline, resources, texture });
     pass.setVertexBuffer(0, resources.geometry.positions);
     pass.setVertexBuffer(1, resources.geometry.normals);
     pass.setVertexBuffer(2, resources.geometry.uvs);
@@ -282,7 +271,12 @@ export class MeshRenderer {
     if (previous) destroyLayerResources(previous);
     const instance = this.#device.createBuffer({ size: bytes.byteLength, usage: BUFFER_COPY_DST | BUFFER_STORAGE });
     const uniform = this.#device.createBuffer({ size: 160, usage: BUFFER_COPY_DST | BUFFER_UNIFORM });
-    const resources = { instance, instanceBytes: bytes.byteLength, uniform };
+    const resources = {
+      bindGroups: new WeakMap<SceneGPURenderPipeline, LayerBindGroups>(),
+      instance,
+      instanceBytes: bytes.byteLength,
+      uniform
+    };
     this.#instanceLayers.set(layer, resources);
     this.#writeInstances({ buffer: instance, bytes, offset: 0, size: bytes.byteLength });
     return resources;
@@ -297,11 +291,55 @@ export class MeshRenderer {
   }
 
   #writeUniforms(buffer: SceneGPUBuffer, item: MeshRenderItem, projection: Mat4): void {
-    const uniforms = new Float32Array(40);
+    const uniforms = this.#uniformScratch;
+    uniforms.fill(0);
     uniforms.set(projection);
     uniforms.set(item.frameMatrix, 16);
     uniforms.set(item.data.color, 32);
     this.#device.queue.writeBuffer(buffer, 0, uniforms);
+  }
+
+  #bindMesh(
+    pass: GeometryPass,
+    options: {
+      readonly layer: LayerResources;
+      readonly pipeline: SceneGPURenderPipeline;
+      readonly resources: MeshLayerResources;
+      readonly texture: SceneGPUTexture;
+    }
+  ): void {
+    const { layer, pipeline, resources, texture } = options;
+    const groups = this.#getLayerBindGroups(layer, pipeline);
+    pass.setPipeline(pipeline);
+    pass.setBindGroup(0, groups[0]);
+    pass.setBindGroup(1, groups[1]);
+    pass.setBindGroup(2, this.#getTextureBindGroup(resources, pipeline, texture));
+  }
+
+  #getLayerBindGroups(layer: LayerResources, pipeline: SceneGPURenderPipeline): LayerBindGroups {
+    const cached = layer.bindGroups.get(pipeline);
+    if (cached) return cached;
+    const groups: LayerBindGroups = [
+      this.#createBindGroup(pipeline, 0, [{ binding: 0, resource: { buffer: layer.uniform } }]),
+      this.#createBindGroup(pipeline, 1, [{ binding: 0, resource: { buffer: layer.instance } }])
+    ];
+    layer.bindGroups.set(pipeline, groups);
+    return groups;
+  }
+
+  #getTextureBindGroup(
+    resources: MeshLayerResources,
+    pipeline: SceneGPURenderPipeline,
+    texture: SceneGPUTexture
+  ): SceneGPUBindGroup {
+    const cached = resources.textureBindGroups.get(pipeline);
+    if (cached?.texture === texture) return cached.bindGroup;
+    const bindGroup = this.#createBindGroup(pipeline, 2, [
+      { binding: 0, resource: this.#sampler },
+      { binding: 1, resource: texture.createView() }
+    ]);
+    resources.textureBindGroups.set(pipeline, { bindGroup, texture });
+    return bindGroup;
   }
 
   #createBindGroup(pipeline: SceneGPURenderPipeline, index: number, entries: unknown[]): SceneGPUBindGroup {

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 const callbacks = new WeakMap<HTMLElement, (label: HTMLElement) => void>();
+const renderCallbacks = new WeakMap<HTMLElement, () => void>();
 
 /** Registers the owning Scene callback for label state changes. */
 export function registerSceneLabelNotifications(
@@ -18,4 +19,16 @@ export function notifyOwningSceneLabel(label: HTMLElement): void {
   if (scene) {
     callbacks.get(scene)?.(label);
   }
+}
+
+/** Registers a private wake callback for state owned by a Scene descendant. */
+export function registerSceneRenderNotifications(scene: HTMLElement, callback: () => void): () => void {
+  renderCallbacks.set(scene, callback);
+  return () => renderCallbacks.delete(scene);
+}
+
+/** Wakes the closest owning Scene after an internal state version changes. */
+export function notifyOwningScene(element: HTMLElement): void {
+  const scene = element.closest<HTMLElement>('nve-scene');
+  if (scene) renderCallbacks.get(scene)?.();
 }

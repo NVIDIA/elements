@@ -20,8 +20,13 @@ export class LabelOcclusionTracker {
     return !this.occluded;
   }
 
+  get needsSample(): boolean {
+    return this.#textureMode && this.#consecutiveZero < 2 && this.#consecutiveVisible < 2;
+  }
+
   /** Overlay mode has no depth gating and must not keep the reflected state. */
   setTextureMode(textureMode: boolean): void {
+    if (textureMode === this.#textureMode) return;
     this.#textureMode = textureMode;
     this.#consecutiveVisible = 0;
     this.#consecutiveZero = 0;

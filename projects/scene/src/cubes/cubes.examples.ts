@@ -154,7 +154,11 @@ export const Performance = {
         <select id="performance-count">
           <option value="100">100</option>
           <option value="1000">1,000</option>
-          <option value="10000" selected>10,000</option>
+          <option value="10000">10,000</option>
+          <option value="100000" selected>100,000</option>
+          <option value="250000">250,000</option>
+          <option value="500000">500,000</option>
+          <option value="1000000">1,000,000</option>
         </select>
       </nve-select>
     </section>

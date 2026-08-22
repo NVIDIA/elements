@@ -8,6 +8,7 @@ import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
 import { getLayerInstances } from '../markers/layer-state.js';
 import type { Quaternion, RGBA, Vec3 } from '../types.js';
+import { notifyOwningScene } from '../label/notifications.js';
 
 interface ModelLayerState {
   compiled: ReturnType<typeof compileParts>;
@@ -66,6 +67,7 @@ export function setModelLayerParts(layer: HTMLElement, parts: ModelPart[] | null
     replaceCompiled(state, compiled);
   } else recompileDeclarative(layer, state);
   updateDualSource(layer, state);
+  notifyOwningScene(layer);
 }
 
 export function getModelLayerVersion(layer: HTMLElement): number {
@@ -104,6 +106,7 @@ export function takeModelLayerRenderData(layer: HTMLElement): MeshRenderData {
 function recompileDeclarative(layer: HTMLElement, state: ModelLayerState): void {
   if (state.parts !== null) {
     updateDualSource(layer, state);
+    notifyOwningScene(layer);
     return;
   }
   const candidates = [...layer.children].filter(isPartElement).map(part => ({ part, value: readPart(part) }));
@@ -118,6 +121,7 @@ function recompileDeclarative(layer: HTMLElement, state: ModelLayerState): void 
     replaceCompiled(state, compileParts([]));
   }
   updateDualSource(layer, state);
+  notifyOwningScene(layer);
 }
 
 function getLatestValidPart(

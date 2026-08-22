@@ -11,8 +11,8 @@ import type { Mat4, Vec3 } from '../../internal/types.js';
 
 /** A renderer-owned target snapshot retained until its asynchronous map completes. */
 interface PickFrame<T> {
+  readonly decodeTarget: (id: number) => T | undefined;
   readonly inverseViewProjection: Mat4;
-  readonly targets: readonly T[];
 }
 
 export interface PickPixel {
@@ -55,6 +55,8 @@ export class PickReadback<T> {
     readonly pixel: { readonly x: number; readonly y: number };
     readonly size: { readonly height: number; readonly width: number };
     readonly textures: { readonly depth: SceneGPUTexture; readonly id: SceneGPUTexture };
+    /** Reports each map-read buffer allocation. */
+    readonly onBufferCreate?: () => void;
     /** Receives the completed raw ID/depth sample before target decoding. */
     readonly onPixel?: (pixel: PickPixel) => void;
   }): Promise<PickPixelResult<T> | null> {
@@ -62,6 +64,7 @@ export class PickReadback<T> {
     const copy = encoder.copyTextureToBuffer;
     if (!copy) return Promise.resolve(null);
     const buffer = this.#device.createBuffer({ size: READBACK_BYTES, usage: BUFFER_COPY_DST | BUFFER_MAP_READ });
+    options.onBufferCreate?.();
     copy.call(
       encoder,
       { texture: textures.id, origin: { x: pixel.x, y: pixel.y } },
@@ -94,7 +97,7 @@ export class PickReadback<T> {
       const bytes = new Uint8Array(buffer.getMappedRange());
       const sample = decodePickPixel(bytes);
       onPixel?.(sample);
-      const target = sample.id === 0 ? undefined : frame.targets[sample.id - 1];
+      const target = sample.id === 0 ? undefined : frame.decodeTarget(sample.id);
       if (target === undefined || !Number.isFinite(sample.depth)) return null;
       return {
         target,

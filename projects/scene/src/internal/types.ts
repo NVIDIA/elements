@@ -4,6 +4,9 @@
 /** A mutable three-component numeric vector. */
 export type Vec3 = [number, number, number];
 
+/** A mutable four-component numeric vector. */
+export type Vec4 = [number, number, number, number];
+
 /** A mutable quaternion in xyzw component order. */
 export type Quaternion = [number, number, number, number];
 
