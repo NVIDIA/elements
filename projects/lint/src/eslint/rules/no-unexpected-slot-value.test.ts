@@ -199,4 +199,46 @@ describe('noUnexpectedSlotValue', () => {
       invalid: []
     });
   });
+
+  it('should report unexpected slot values without suggestions when no alternative exists', () => {
+    tester.run('unexpected slot with no alternative', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<nve-divider><div slot="invalid"></div></nve-divider>',
+          errors: [
+            {
+              messageId: 'unexpected-slot-value',
+              data: { slotName: 'invalid', tagName: 'div', parentTagName: 'nve-divider' },
+              suggestions: []
+            }
+          ]
+        }
+      ]
+    });
+  });
+
+  it('should recommend replacing unquoted unexpected slot values', () => {
+    tester.run('unquoted unexpected slot values', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<nve-badge><nve-icon slot=icon></nve-icon></nve-badge>',
+          errors: [
+            {
+              messageId: 'unexpected-slot-value',
+              data: { slotName: 'icon', tagName: 'nve-icon', parentTagName: 'nve-badge' },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-slot-value',
+                  data: { slotName: 'icon', alternative: 'prefix-icon' },
+                  output: '<nve-badge><nve-icon slot="prefix-icon"></nve-icon></nve-badge>'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+  });
 });
