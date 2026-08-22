@@ -161,6 +161,47 @@ describe(Icon.metadata.tag, () => {
     expect((customElements.get(Icon.metadata.tag) as typeof Icon)._icons['test-svg']).toBeDefined();
   });
 
+  it('should render the solid icon appearance when available', async () => {
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
+      'test-appearance': { svg: () => '<svg id="test-appearance"><path d=""/></svg>' },
+      'test-appearance-solid': { svg: () => '<svg id="test-appearance-solid"><path d=""/></svg>' }
+    });
+
+    removeFixture(fixture);
+    // eslint-disable-next-line @nvidia-elements/lint/no-unexpected-attribute-value
+    fixture = await createFixture(html`<nve-icon name="test-appearance" appearance="solid"></nve-icon>`);
+    const el = fixture.querySelector<Icon>(Icon.metadata.tag);
+    await elementIsStable(el);
+
+    expect(el.appearance).toBe('solid');
+    expect(el.shadowRoot.innerHTML).toContain('test-appearance-solid');
+  });
+
+  it('should fall back to the outline icon when a solid appearance is unavailable', async () => {
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
+      'test-outline-only': { svg: () => '<svg id="test-outline-only"><path d=""/></svg>' }
+    });
+
+    removeFixture(fixture);
+    // eslint-disable-next-line @nvidia-elements/lint/no-unexpected-attribute-value
+    fixture = await createFixture(html`<nve-icon name="test-outline-only" appearance="solid"></nve-icon>`);
+    const el = fixture.querySelector<Icon>(Icon.metadata.tag);
+    await elementIsStable(el);
+
+    expect(el.shadowRoot.innerHTML).toContain('test-outline-only');
+    expect(el.shadowRoot.innerHTML).not.toContain('test-outline-only-solid');
+  });
+
+  it('should not reflect the default outline appearance', async () => {
+    expect(element.appearance).toBeUndefined();
+    expect(element.hasAttribute('appearance')).toBe(false);
+
+    element.appearance = 'outline';
+    await elementIsStable(element);
+
+    expect(element.hasAttribute('appearance')).toBe(false);
+  });
+
   it('should requestUpdate when new icon is registered', async () => {
     const spy = vi.spyOn(element, 'requestUpdate');
     element.name = 'test-svg-request-update' as IconName;
@@ -185,6 +226,30 @@ describe(Icon.metadata.tag, () => {
     element.name = 'test.svg' as IconName;
     await elementIsStable(element);
     expect(window.fetch).toHaveBeenCalled();
+    window.fetch = original;
+  });
+
+  it('should ignore stale SVG loads after the icon name changes', async () => {
+    const first = Promise.withResolvers<string>();
+    const second = Promise.withResolvers<string>();
+    const original = window.fetch;
+    window.fetch = vi.fn().mockImplementation((name: string) =>
+      Promise.resolve({ text: () => (name === 'first.svg' ? first.promise : second.promise) })
+    );
+
+    element.name = 'first.svg' as IconName;
+    await element.updateComplete;
+    element.name = 'second.svg' as IconName;
+    await element.updateComplete;
+
+    second.resolve('<svg id="second"><path d=""/></svg>');
+    await elementIsStable(element);
+    first.resolve('<svg id="first"><path d=""/></svg>');
+    await new Promise(resolve => setTimeout(resolve));
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.innerHTML).toContain('id="second"');
+    expect(element.shadowRoot.innerHTML).not.toContain('id="first"');
     window.fetch = original;
   });
 
