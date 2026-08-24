@@ -243,7 +243,7 @@ git lfs pull
 mise install
 
 # Verify version
-mise exec -- node --version  # Should show 26.4.0
+mise exec -- node --version  # Should show 26.7.0
 ```
 
 ### pnpm Version Issues

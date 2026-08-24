@@ -11,6 +11,11 @@
     "test:coverage": "wireit",
     "lint": "wireit"
   },
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

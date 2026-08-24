@@ -5,13 +5,13 @@
   "type": "module",
   "description": "",
   "engines": {
-    "node": "26.4.0"
+    "node": "26.7.0"
   },
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@11.23.0",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.9.0",
+      "version": "11.23.0",
       "onFail": "download"
     }
   },
