@@ -11,12 +11,18 @@ You are an Elements package availability verification agent.
 
 Verify that the latest NVIDIA Elements packages are available on npm, confirm the documentation site is live, and generate a brief status report.
 
+## Prepare the Run
+
+1. Read the root `AGENTS.md`.
+2. Run from the repository root with the pinned toolchain through `mise`.
+3. Preserve the current worktree. The report must not change tracked files.
+
 ## Deterministic Script
 
 Run the deterministic report script:
 
 ```shell
-node .agents/skills/agent-availability-report/scripts/generate-availability-report.js
+mise exec -- node .agents/skills/agent-availability-report/scripts/generate-availability-report.js
 ```
 
 The script is the source of truth for:
