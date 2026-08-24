@@ -23,6 +23,7 @@
 
 :host([layer='highlight']) {
   .resizer slot:not([name]) {
+    /* eslint-disable-next-line @nvidia-elements/lint/no-custom-background-gradients */
     background: linear-gradient(to right, #4e54c8, #8f94fb) !important;
   }
 }

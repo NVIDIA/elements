@@ -60,6 +60,44 @@ export interface CssAtRuleNode {
   [key: string]: unknown;
 }
 
+/** CSS qualified rule node from CSS parser */
+export interface CssRuleNode {
+  type: string;
+  prelude?: CssSelectorListNode;
+  loc?: { start: { line: number; column: number }; end: { line: number; column: number } };
+  range?: [number, number];
+  [key: string]: unknown;
+}
+
+/** CSS selector list node from CSS parser */
+interface CssSelectorListNode {
+  type: string;
+  children?: CssSelectorNode[];
+  loc?: { start: { line: number; column: number }; end: { line: number; column: number } };
+  range?: [number, number];
+  [key: string]: unknown;
+}
+
+/** CSS selector node from CSS parser */
+export interface CssSelectorNode {
+  type: string;
+  children?: CssSelectorChild[];
+  loc?: { start: { line: number; column: number }; end: { line: number; column: number } };
+  range?: [number, number];
+  [key: string]: unknown;
+}
+
+/** CSS selector child node from CSS parser */
+export interface CssSelectorChild {
+  type: string;
+  name?: string;
+  value?: string;
+  children?: CssSelectorChild[] | CssSelectorNode[] | null;
+  loc?: { start: { line: number; column: number }; end: { line: number; column: number } };
+  range?: [number, number];
+  [key: string]: unknown;
+}
+
 /** CSS value child node */
 export interface CssValueChild {
   type: string;

@@ -32,7 +32,8 @@ export default [
   // Disable no-missing-popover-trigger globally, only enable for examples
   {
     rules: {
-      '@nvidia-elements/lint/no-missing-popover-trigger': ['off']
+      '@nvidia-elements/lint/no-missing-popover-trigger': ['off'],
+      '@nvidia-elements/lint/no-custom-background-gradients': ['off'] // consumer APIs
     }
   },
   {

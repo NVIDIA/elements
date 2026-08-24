@@ -8,6 +8,8 @@ import noUnexpectedCssValue from '../rules/no-unexpected-css-value.js';
 import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
 import noDeprecatedCssVariable from '../rules/no-deprecated-css-variable.js';
 import noDeprecatedCssImports from '../rules/no-deprecated-css-imports.js';
+import noCustomBackgroundGradients from '../rules/no-custom-background-gradients.js';
+import noDisplayOverride from '../rules/no-display-override.js';
 
 const source = ['src/**/*.css'];
 const ignores = [
@@ -42,7 +44,9 @@ export const elementsCssConfig: Linter.Config = {
         'no-unexpected-css-value': noUnexpectedCssValue,
         'no-unknown-css-variable': noUnknownCssVariable,
         'no-deprecated-css-variable': noDeprecatedCssVariable,
-        'no-deprecated-css-imports': noDeprecatedCssImports
+        'no-deprecated-css-imports': noDeprecatedCssImports,
+        'no-custom-background-gradients': noCustomBackgroundGradients,
+        'no-display-override': noDisplayOverride
       }
     }
   },
@@ -51,6 +55,8 @@ export const elementsCssConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unexpected-css-value': ['error'],
     '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
     '@nvidia-elements/lint/no-deprecated-css-variable': ['error'],
-    '@nvidia-elements/lint/no-deprecated-css-imports': ['error']
+    '@nvidia-elements/lint/no-deprecated-css-imports': ['error'],
+    '@nvidia-elements/lint/no-display-override': ['error'],
+    '@nvidia-elements/lint/no-custom-background-gradients': ['error']
   }
 };
