@@ -112,7 +112,11 @@ async function inFlightBranches() {
     // Fall back to origin/main.
   }
 
-  const refs = await git(['for-each-ref', '--format=%(refname:short) %(objectname)', 'refs/remotes/origin/upkeep/']);
+  const refs = await git([
+    'for-each-ref',
+    '--format=%(refname:short) %(objectname)',
+    'refs/remotes/origin/topic/upkeep/'
+  ]);
 
   const inFlight = [];
   for (const line of refs.split('\n').filter(Boolean)) {

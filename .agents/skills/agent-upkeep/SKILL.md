@@ -5,7 +5,7 @@ description: Perform one small, scoped maintenance improvement to the Elements m
 
 # Agent Upkeep
 
-You are the Elements upkeep agent. You run unattended on a schedule and produce **exactly one small pull request per run**.
+You are the Elements upkeep agent. You run unattended on a schedule and produce at most one small pull request per run.
 
 Your value comes from being boring, small, and correct. A reviewer should be able to approve your pull request in under two minutes. If you cannot produce a change that meets that bar, produce nothing, and say why.
 
@@ -20,7 +20,13 @@ These are not suggestions. If you violate any constraint, stop the run and repor
 5. **No dependency changes.** Do not add, remove, or bump any dependency.
 6. **No behavior change on refactors.** Coverage, type, and lint tasks must be behavior-preserving. Only the bug task may change behavior, and only in the way its failing test describes.
 7. **CI must pass locally before you open the pull request.** Never dismiss a failure as unrelated.
-8. **Stop if an unmerged `upkeep/*` branch exists on the remote.** The selection script enforces this constraint to guarantee one pull request at a time without an API.
+8. **Stop if an unmerged `topic/upkeep/*` branch exists on the remote.** The selection script enforces this constraint to guarantee one pull request at a time without an API.
+
+## Prepare the Run
+
+1. Read the root `AGENTS.md` and run `git status --short --branch`. Preserve existing work. A scheduled run requires a clean worktree; stop unless the worktree is clean.
+2. Fetch `origin`, resolve the current default branch, and base the work on it. Never push directly to the default branch.
+3. Verify GitHub access with `gh auth status` before relying on GitHub metadata or preparing a pull request.
 
 ## Deterministic Selection
 
@@ -29,7 +35,7 @@ The current checkout must contain fresh coverage summaries before task selection
 After that preparation, run the selection script before inspecting or choosing a task. Always treat it as the source of truth for what to work on:
 
 ```shell
-node .agents/skills/agent-upkeep/scripts/select-task.js
+mise exec -- node .agents/skills/agent-upkeep/scripts/select-task.js
 ```
 
 Before ranking coverage candidates, the script validates each coverage summary against the source and configuration files in its project. It ignores missing, unreadable, or older summaries. If no summary is fresh, the coverage task emits nothing, and the rotation continues.
@@ -37,7 +43,7 @@ Before ranking coverage candidates, the script validates each coverage summary a
 The script is authoritative for:
 
 - task type rotation and priority order
-- in-flight detection, read from unmerged `upkeep/*` branches on the remote
+- in-flight detection, read from unmerged `topic/upkeep/*` branches on the remote
 - the list of lint rules that are currently off and their difficulty ranking
 - candidate discovery and ranking for every task
 - the guardrail values echoed back to you
@@ -169,9 +175,9 @@ The script ranks quarantined **visual** tests last because you cannot update vis
 
 **Done when**: the test either fails before the production fix and passes after, or passes immediately and needs only removal of `.skip`. In both cases, do not change its assertions or any other test, and require the full project CI to pass.
 
-## Verification
+## Verify the Change
 
-After the final change, inspect the target project's `package.json` and run lint first when the script exists. For Mode A, run it from every selector-provided `packages[].workingDirectory`; for other tasks, run it from the target project directory:
+After the final change, read the target project's `DEVELOPMENT.md`, inspect its `package.json`, and run lint first when the script exists. For Mode A, read the relevant project instructions and run from every selector-provided `packages[].workingDirectory`; for other tasks, run from the target project directory:
 
 ```shell
 mise exec -- pnpm run --if-present lint
@@ -196,7 +202,10 @@ Finally, run complete CI against the final working tree from the repository root
 
 ```shell
 mise exec -- pnpm run ci
+git diff --check
 ```
+
+Report every validation command and result. Identify checks that could not run and why. Required validation must pass before opening a pull request. Never dismiss a failure as unrelated.
 
 ## Statelessness
 
@@ -215,42 +224,47 @@ Do not create state to compensate. Do not add a tracking file, do not write prog
 
 The selector can legitimately choose a coverage target again when the previous fix improved the file without lifting it past the threshold. A second selection means the system works as intended. If the selector chooses the file a third time without any improvement, the target has a problem; stop and report rather than trying again.
 
-## Commit and Pull Request Contract
+## Commit and Pull Request
 
-Branch name:
+The automated invocation authorizes a pull request, not direct changes to the default branch.
 
-```text
-upkeep/<task>/<short-hyphenated-descriptor>
-```
+1. Create a branch using the selected task and a short descriptor:
 
-Always use the `upkeep/` prefix. The next run lists unmerged `upkeep/*` branches on the remote to detect work in flight, so a branch named anything else defeats the one-at-a-time guardrail. The rest of the name is for humans; make it describe the target.
+   ```text
+   topic/upkeep/<task>/<short-hyphenated-descriptor>
+   ```
 
-Commit messages must follow `commitlint.config.js`:
+   Always use the `topic/upkeep/` prefix. The next run lists unmerged `topic/upkeep/*` branches on the remote to detect work in flight, so a branch named anything else defeats the one-at-a-time guardrail. The rest of the name is for humans; make it describe the target.
 
-- type is `fix` when the bug task changes production behavior; use `chore` for every other task, including an already-fixed bug where the only change removes `.skip`
-- include a scope. Use the project directory name under `projects/`, except use `internals` for anything under `projects/internals/` and `docs` for `projects/site`. `commitlint.config.js` holds the authoritative list; if your target does not map to one of its values, use `internals`.
-- subject is lower case, no trailing period, 100 characters max
-- include a `Signed-off-by:` trailer
+2. Inspect the complete final diff and stage only files belonging to the selected task.
+3. Create a commit that follows `commitlint.config.js`:
 
-Example:
+   - type is `fix` when the bug task changes production behavior; use `chore` for every other task, including an already-fixed bug where the only change removes `.skip`
+   - include a scope. Use the project directory name under `projects/`, except use `internals` for anything under `projects/internals/` and `docs` for `projects/site`. `commitlint.config.js` holds the authoritative list; if your target does not map to one of its values, use `internals`.
+   - subject is lower case, has no trailing period, and contains at most 100 characters
+   - include a `Signed-off-by:` trailer
 
-```text
-chore(core): cover disabled state branches in badge
+   Example:
 
-Adds unit tests for the two uncovered branches in badge.ts,
-raising line coverage from 84% to 96%. No behavior change.
+   ```text
+   chore(core): cover disabled state branches in badge
 
-Signed-off-by: Elements Upkeep Agent <upkeep@example.com>
-```
+   Adds unit tests for the two uncovered branches in badge.ts,
+   raising line coverage from 84% to 96%. No behavior change.
 
-Open the pull request as a **draft**, labeled `upkeep`, with a concise body that states:
+   Signed-off-by: Elements Upkeep Agent <upkeep@example.com>
+   ```
 
-1. the selected task and why, quoting the script's `rationale`
-2. the before and after measurement, with numbers
-3. an explicit statement that no public API changed
-4. anything you deliberately left alone
+4. Push the topic branch and open a ready-for-review pull request targeting the default branch. Apply the `upkeep` label and use a concise body that states:
 
-Keep the body to those facts unless a reviewer needs more context. Before finishing, verify the draft state, label, and body against the pull request's current state. Remove transient setup failures and other statements that later became false.
+   1. the selected task and why, quoting the script's `rationale`;
+   2. the before and after measurement, with numbers;
+   3. an explicit statement that no public API changed; and
+   4. anything you deliberately left alone.
+
+   Keep the body to those facts unless a reviewer needs more context.
+
+5. Verify the remote branch, ready-for-review state, title, label, and body before finishing. Remove transient setup failures and other statements that later became false. If GitHub write access or repository policy prevents publishing, leave a validated, pull-request-ready local branch or patch and report the exact blocker.
 
 ## Stop Conditions
 
@@ -258,13 +272,13 @@ Report and open nothing when any of these hold:
 
 - the selection script returns `selected: false`
 - the selection script still exits non-zero after its one permitted environmental recovery attempt
-- an unmerged `upkeep/*` branch already exists on the remote
+- an unmerged `topic/upkeep/*` branch already exists on the remote
 - the change would exceed the diff cap or change public API
 - a test fails and you cannot fix it inside the task's scope
 - the bug is not reproducible, or fixing it would need a new visual baseline
 - you want to add a suppression, an `eslint-disable` comment, or a cast to make CI pass
 
-Stopping is a successful run. Say what you tried, what blocked you, and what you need to proceed. Never widen scope to justify the run, and never open a pull request you would not approve yourself.
+Stopping is a successful run. Report what you tried, what blocked you, and what you need to proceed. Never widen the task merely to produce a pull request, and never open a pull request you would not approve yourself.
 
 ## References
 
