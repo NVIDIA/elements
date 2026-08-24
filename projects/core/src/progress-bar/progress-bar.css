@@ -77,7 +77,7 @@ progress.indeterminate {
   --indeterminate-gradient-reverse: linear-gradient(to left, var(--accent-color-faded) 10%, var(--accent-color));
   will-change: transform;
   background-image: var(--indeterminate-gradient);
-  animation: indeterminate-animation 2.4s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation: indeterminate-animation calc(var(--nve-ref-animation-duration-400) * 3) infinite cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 progress[value].indeterminate::-webkit-progress-value {
