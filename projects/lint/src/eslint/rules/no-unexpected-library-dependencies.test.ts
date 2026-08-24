@@ -36,7 +36,18 @@ describe('noUnexpectedLibraryDependencies', () => {
 
   it('should allow owned dependencies', () => {
     tester.run('should allow owned dependencies', rule, {
-      valid: [`{ "name": "@nvidia-elements/core" }`, `{ "name": "@nvidia-elements/lint" }`],
+      valid: [
+        { filename: 'package.json', code: `{ "name": "@nvidia-elements/core" }` },
+        { filename: 'package.json', code: `{ "name": "@nvidia-elements/lint" }` },
+        {
+          filename: 'package.json',
+          code: `{ "name": "@nvidia-elements/core", "exports": ["./index.js"] }`
+        },
+        {
+          filename: 'README.md',
+          code: `{ "exports": ["./index.js"], "dependencies": { "@nvidia-elements/core": "0.0.0" } }`
+        }
+      ],
       invalid: []
     });
   });
@@ -44,10 +55,22 @@ describe('noUnexpectedLibraryDependencies', () => {
   it('should allow application dependencies', () => {
     tester.run('should allow application dependencies', rule, {
       valid: [
-        `{ "dependencies": { "@nvidia-elements/core": "0.0.0" } }`,
-        `{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "0.0.0" } }`,
-        `{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "workspace:*" } }`,
-        `{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "catalog:" } }`
+        {
+          filename: 'package.json',
+          code: `{ "dependencies": { "@nvidia-elements/core": "0.0.0" } }`
+        },
+        {
+          filename: 'package.json',
+          code: `{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "0.0.0" } }`
+        },
+        {
+          filename: 'package.json',
+          code: `{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "workspace:*" } }`
+        },
+        {
+          filename: 'package.json',
+          code: `{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "catalog:" } }`
+        }
       ],
       invalid: []
     });
@@ -56,9 +79,18 @@ describe('noUnexpectedLibraryDependencies', () => {
   it('should allow library peer dependencies', () => {
     tester.run('should allow library peer dependencies', rule, {
       valid: [
-        `{ "name": "my-library", "exports": ["./index.js"], "peerDependencies": { "@nvidia-elements/core": "^0.0.0" } }`,
-        `{ "name": "my-library", "exports": ["./index.js"], "peerDependencies": { "@nvidia-elements/core": "workspace:*" } }`,
-        `{ "name": "my-library", "exports": ["./index.js"], "peerDependencies": { "@nvidia-elements/core": "catalog:" } }`
+        {
+          filename: 'package.json',
+          code: `{ "name": "my-library", "exports": ["./index.js"], "peerDependencies": { "@nvidia-elements/core": "^0.0.0" } }`
+        },
+        {
+          filename: 'package.json',
+          code: `{ "name": "my-library", "exports": ["./index.js"], "peerDependencies": { "@nvidia-elements/core": "workspace:*" } }`
+        },
+        {
+          filename: 'package.json',
+          code: `{ "name": "my-library", "exports": ["./index.js"], "peerDependencies": { "@nvidia-elements/core": "catalog:" } }`
+        }
       ],
       invalid: []
     });
