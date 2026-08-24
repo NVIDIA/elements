@@ -46,6 +46,11 @@
       "default": "./dist/src/services/tests.service.js"
     }
   },
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
   "wireit": {
     "ci": {
       "dependencies": [

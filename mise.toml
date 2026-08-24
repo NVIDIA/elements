@@ -3,8 +3,8 @@ lockfile = true
 npm.package_manager = "pnpm"
 
 [tools]
-node = "26.4.0"
-pnpm = "11.9.0"
+node = "26.7.0"
+pnpm = "11.23.0"
 vale = "3.15.1"
 go = "1.26.4"
 git-lfs = "3.7.1"

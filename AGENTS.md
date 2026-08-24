@@ -25,8 +25,8 @@ Elements is a design language for AI/ML factories built as a monorepo containing
 ## Environment Requirements
 
 - **mise**: Toolchain manager for local development and CI (`mise.toml`)
-- **Node.js**: 26.4.0 (managed via mise and validated against `.nvmrc` and `package.json` engines)
-- **pnpm**: 11.9.0 (managed via mise and validated against `package.json`)
+- **Node.js**: 26.7.0 (managed via mise and validated against `.nvmrc` and `package.json` engines)
+- **pnpm**: 11.23.0 (managed via mise and validated against `package.json`)
 - **Go**: 1.26.4 (managed via mise for the Go starter)
 - **Git LFS**: Required for visual test screenshots and videos (`.gitattributes` defines tracked files)
 - **Playwright**: Browser-based testing uses Chromium (installed via prepare script)
@@ -280,5 +280,5 @@ These notes are for cloud agents running in the prebuilt VM (dependencies alread
 
 ### Toolchain access
 
-- **mise** manages the toolchain, and the VM image already includes it. `~/.local/bin` sits on `PATH` and `mise activate` runs from `~/.bashrc`, so `node` (26.4.0), `pnpm` (11.9.0), `go`, `vale`, and `git-lfs` resolve directly. If a fresh shell ever lacks them, prefix commands with `mise exec --` (for example, `mise exec -- pnpm ...`) or run `mise run <task>`.
+- **mise** manages the toolchain, and the VM image already includes it. `~/.local/bin` sits on `PATH` and `mise activate` runs from `~/.bashrc`, so `node` (26.7.0), `pnpm` (11.23.0), `go`, `vale`, and `git-lfs` resolve directly. If a fresh shell ever lacks them, prefix commands with `mise exec --` (for example, `mise exec -- pnpm ...`) or run `mise run <task>`.
 - Run all repo commands through mise to guarantee the pinned versions, exactly as the root `AGENTS.md` examples show.

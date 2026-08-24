@@ -32,7 +32,7 @@ This project includes the following bundled third-party software:
 - ora v9.4.1 [MIT]
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.21 [MIT]
+- publint v0.3.23 [MIT]
   Copyright: Bjorn Lu
 
 - yargs v18.0.0 [MIT]
@@ -56,7 +56,7 @@ marked v18.0.9 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-publint v0.3.21 - Copyright Bjorn Lu
+publint v0.3.23 - Copyright Bjorn Lu
 yargs v18.0.0 - Copyright Unknown
 zod v4.4.3 - Copyright Colin McDonnell <zod@colinhacks.com>
 
