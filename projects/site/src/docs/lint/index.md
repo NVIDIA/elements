@@ -50,7 +50,7 @@ eslint -c ./eslint.config.js --color
 
 ## Severity
 
-You can adjust rules individually for lint severity. By default all rules use `error`.
+You can adjust rules individually for lint severity. The rules table lists the default severity for each rule.
 
 ```javascript
 import { elementsHtmlConfig, elementsCssConfig } from '@nvidia-elements/lint/eslint';
@@ -61,6 +61,7 @@ export default [
   {
     ...elementsCssConfig,
     rules: {
+      ...elementsCssConfig.rules,
       '@nvidia-elements/lint/no-unexpected-css-value': 'warn'
     }
   }
@@ -80,6 +81,12 @@ export default [
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-complex-popovers</code></nve-grid-cell>
     <nve-grid-cell>Disallow excessive DOM complexity inside popover elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-custom-background-gradients</code></nve-grid-cell>
+    <nve-grid-cell>Disallow custom gradients in CSS backgrounds.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
@@ -140,6 +147,12 @@ export default [
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-tags</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated elements in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-display-override</code></nve-grid-cell>
+    <nve-grid-cell>Disallow display overrides on Elements components.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>

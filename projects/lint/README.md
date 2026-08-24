@@ -65,6 +65,7 @@ export default [
 | Rule | Description | Language | Severity |
 | ---- | ----------- | -------- | -------- |
 | `@nvidia-elements/lint/no-complex-popovers` | Disallow excessive DOM complexity inside popover elements. | HTML | `error` |
+| `@nvidia-elements/lint/no-custom-background-gradients` | Disallow custom gradients in CSS backgrounds. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-attributes` | Disallow use of deprecated attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-global-attribute-value` | Disallow use of deprecated attribute values for nve-* utility attributes. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-imports` | Disallow use of deprecated CSS import paths. | CSS | `error` |
@@ -75,6 +76,7 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-popover-attributes` | Disallow use of deprecated popover attributes. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-slots` | Disallow use of deprecated slot APIs. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements in HTML. | HTML | `error` |
+| `@nvidia-elements/lint/no-display-override` | Disallow display overrides on Elements components. | CSS | `error` |
 | `@nvidia-elements/lint/no-excessive-primary-actions` | Limit primary actions to two per page. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-event-listeners` | Disallow inline event handler attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-invoker-triggers` | Disallow use of invoker trigger attributes on non-button nve-* elements. | HTML | `error` |
