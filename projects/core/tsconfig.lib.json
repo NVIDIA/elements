@@ -7,6 +7,7 @@
   },
   "exclude": [
     "**/*.test.ts",
+    "**/*.test.bench.ts",
     "**/*.test.axe.ts",
     "**/*.test.ssr.ts",
     "**/*.test.visual.ts",

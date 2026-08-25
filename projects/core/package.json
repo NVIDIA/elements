@@ -41,6 +41,7 @@
     "build": "wireit",
     "build:icons": "wireit",
     "test": "wireit",
+    "test:bench": "wireit",
     "test:types": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
@@ -1059,6 +1060,7 @@
         "public/**",
         "src/**",
         "!src/**/*.test.ts",
+        "!src/**/*.test.bench.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
@@ -1119,6 +1121,26 @@
         "tsconfig.json",
         "!src/**/__screenshots__/**",
         "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/testing:build",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:bench": {
+      "command": "vitest bench --run --config=vitest.bench.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.bench.ts",
+        "vitest.bench.ts"
       ],
       "output": [],
       "dependencies": [
