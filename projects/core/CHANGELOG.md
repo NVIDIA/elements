@@ -1,3 +1,17 @@
+## <small>2.4.1 (2026-08-25)</small>
+
+* fix(core): missing animation timing for progress-bar ([05150d4](https://github.com/NVIDIA/elements/commit/05150d4))
+* fix(styles): native text-box support ([d562bb2](https://github.com/NVIDIA/elements/commit/d562bb2))
+* fix(themes): update default status contrast ([52af067](https://github.com/NVIDIA/elements/commit/52af067))
+* feat(lint): add css rules ([c876f89](https://github.com/NVIDIA/elements/commit/c876f89))
+* chore(ci): introduce agent skill for dependency upgrades ([1b8d80a](https://github.com/NVIDIA/elements/commit/1b8d80a))
+* chore(ci): update node and pnpm versions ([30681a9](https://github.com/NVIDIA/elements/commit/30681a9))
+* chore(core): update visual snapshots ([ba2ecf5](https://github.com/NVIDIA/elements/commit/ba2ecf5))
+* chore(lint): cover remaining slot-value rule branches ([eb8eb7a](https://github.com/NVIDIA/elements/commit/eb8eb7a))
+* chore(lint): cover valid package.json paths in library-dependencies rule ([b740405](https://github.com/NVIDIA/elements/commit/b740405))
+* chore(release): @nvidia-elements/styles-v2.1.3 [skip ci] ([e5f00e3](https://github.com/NVIDIA/elements/commit/e5f00e3))
+* chore(release): @nvidia-elements/themes-v2.0.1 [skip ci] ([acd6d9f](https://github.com/NVIDIA/elements/commit/acd6d9f))
+
 ## 2.4.0 (2026-08-21)
 
 * feat(core): swap reviewed icon svgs ([f5f232e](https://github.com/NVIDIA/elements/commit/f5f232e))
