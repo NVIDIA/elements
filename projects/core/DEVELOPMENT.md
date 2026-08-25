@@ -7,6 +7,7 @@
 | `pnpm run lint`            | Lint source files                         |
 | `pnpm run lint:fix`        | Auto-fix lint issues                      |
 | `pnpm run test`            | Run unit tests                            |
+| `pnpm run test:bench`      | Run browser benchmarks                    |
 | `pnpm run test:watch`      | Run unit tests in watch mode              |
 | `pnpm run test:axe`        | Run accessibility tests                   |
 | `pnpm run test:coverage`   | Run unit tests with coverage              |
