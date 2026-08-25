@@ -1,3 +1,8 @@
+## <small>2.5.1 (2026-08-25)</small>
+
+* chore(docs): update icon notice ([6647b0b](https://github.com/NVIDIA/elements/commit/6647b0b))
+* fix(core): gauge fill alignment ([2bef645](https://github.com/NVIDIA/elements/commit/2bef645))
+
 ## 2.5.0 (2026-08-25)
 
 * feat(core): add format-truncate ([d6c0f2e](https://github.com/NVIDIA/elements/commit/d6c0f2e))
