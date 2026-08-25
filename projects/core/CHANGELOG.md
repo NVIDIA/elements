@@ -1,3 +1,10 @@
+## 2.5.0 (2026-08-25)
+
+* feat(core): add format-truncate ([d6c0f2e](https://github.com/NVIDIA/elements/commit/d6c0f2e))
+* chore(forms): cover select default value before connect ([724ee3f](https://github.com/NVIDIA/elements/commit/724ee3f))
+* chore(release): @nvidia-elements/lint-v2.4.0 [skip ci] ([963c501](https://github.com/NVIDIA/elements/commit/963c501))
+* chore(starters): update @tsconfig/node20 to 20.1.10 ([8c23a01](https://github.com/NVIDIA/elements/commit/8c23a01))
+
 ## <small>2.4.1 (2026-08-25)</small>
 
 * fix(core): missing animation timing for progress-bar ([05150d4](https://github.com/NVIDIA/elements/commit/05150d4))
