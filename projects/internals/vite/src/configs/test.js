@@ -128,6 +128,7 @@ export const libraryTestConfig = {
         '**/.wireit/**',
         '**/.pnpm/**',
         '**/*.test.ts',
+        '**/*.test.bench.ts',
         '**/*.css.js',
         '**/*.css',
         '**/*.d.ts',

@@ -65,6 +65,7 @@ export const libraryNodeTestConfig = {
         '**/.wireit/**',
         '**/.pnpm/**',
         '**/*.test.ts',
+        '**/*.test.bench.ts',
         '**/*.d.ts',
         '**/*.cjs',
         '**/*.mjs',

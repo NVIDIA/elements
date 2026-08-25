@@ -84,6 +84,42 @@ To run the tests run `pnpm run test`
 vitest run --config=vitest.ts
 ```
 
+### Bench
+
+Browser benchmark files use the `.test.bench.ts` suffix.
+
+```typescript
+// vitest.bench.ts
+import { resolve } from 'node:path';
+import { mergeConfig } from 'vitest/config';
+import { libraryBenchConfig } from '@internals/vite/configs/bench.js';
+
+export default mergeConfig(libraryBenchConfig, {
+  root: import.meta.dirname,
+  resolve: {
+    alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './src') }
+  }
+});
+```
+
+```typescript
+// calculate-layout.test.bench.ts
+import { bench, describe } from 'vitest';
+import { calculateLayout } from './calculate-layout.js';
+
+const items = Array.from({ length: 1_000 }, (_, index) => ({ height: index % 10, width: index % 10 }));
+
+describe('calculateLayout', () => {
+  bench('lays out 1,000 items', () => calculateLayout(items), { throws: true });
+});
+```
+
+To run the benchmarks run `pnpm run test:bench`.
+
+```shell
+vitest bench --run --config=vitest.bench.ts
+```
+
 ### Axe
 
 ```typescript

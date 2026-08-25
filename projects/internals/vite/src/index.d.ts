@@ -7,6 +7,7 @@ export declare const libraryBuildConfig: UserConfig;
 export declare const libraryNodeBuildConfig: UserConfig;
 export declare const libraryBundleConfig: UserConfig;
 export declare const libraryTestConfig: UserConfig;
+export declare const libraryBenchConfig: UserConfig;
 export declare const libraryNodeTestConfig: UserConfig;
 export declare const libraryAxeTestConfig: UserConfig;
 export declare const libraryLitSSRTestConfig: UserConfig;

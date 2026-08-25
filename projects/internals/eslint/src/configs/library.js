@@ -4,6 +4,7 @@ const source = ['src/**/*.ts', 'src/**/*.js', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
   'src/test/*.ts',
   '**/*.test.ts',
+  '**/*.test.bench.ts',
   '**/*.test.visual.ts',
   '**/*.test.lighthouse.ts',
   '**/*.test.axe.ts',
