@@ -152,6 +152,16 @@ describe('SelectFormControlMixin', () => {
     expect(element.value).toBe('normal');
   });
 
+  it('should default form state from available options before connect', () => {
+    const disconnected = document.createElement('ui-select-test-element') as SelectTestElement;
+    disconnected.formResetCallback();
+    expect(disconnected.value).toBe('slow');
+
+    const bare = document.createElement('ui-bare-select-test-element') as BareSelectTestElement;
+    bare.formStateRestoreCallback(null);
+    expect(bare.value).toBe('');
+  });
+
   it('should validate required values', () => {
     element.required = true;
     element.value = 'missing';
