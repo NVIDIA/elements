@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
-    "@tsconfig/node20": "20.1.9",
+    "@tsconfig/node20": "20.1.10",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "6.0.7",
     "@vue/tsconfig": "0.9.1",
