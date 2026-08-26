@@ -109,7 +109,7 @@ export class Dialog extends LitElement {
 
   /** @private */
   get popoverDismissible() {
-    return !!this.closable;
+    return this.closable ?? false;
   }
 
   protected typeNativePopoverController = new TypeNativePopoverController<Dialog>(this);
