@@ -18,7 +18,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(107);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(108);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
@@ -106,6 +106,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(88.1);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(89.5);
   });
 });

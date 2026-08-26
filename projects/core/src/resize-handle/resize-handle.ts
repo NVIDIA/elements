@@ -5,8 +5,13 @@ import { html, LitElement, type PropertyValues } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators/property.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
-import { useStyles, typeTouch } from '@nvidia-elements/core/internal';
-import { I18nController, type NveTouchEvent } from '@nvidia-elements/core/internal';
+import {
+  GestureController,
+  I18nController,
+  useStyles,
+  type Gesture,
+  type UnhandledPointerInput
+} from '@nvidia-elements/core/internal';
 import styles from './resize-handle.css?inline';
 
 /**
@@ -24,7 +29,6 @@ import styles from './resize-handle.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
  *
  */
-@typeTouch<ResizeHandle>()
 export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(LitElement) {
   /**
    * Determines the orientation direction of the resize handle.
@@ -60,7 +64,11 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     }
   };
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  readonly #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  readonly #gestureController: GestureController;
+
+  #dragPointerId?: number;
 
   /**
    * Updates internal string values for internationalization.
@@ -82,18 +90,28 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     super();
     this.value = this.value ?? 50;
     this.#offset = this.valueAsNumber;
+    this.#gestureController = new GestureController(this, {
+      getCapabilities: () => ({ drag: true, pan: false, pinch: false, wheel: false })
+    });
   }
 
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'none';
+    this.addEventListener('nve-gesture', this.#handleGesture as EventListener);
+    this.addEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('nve-gesture', this.#handleGesture as EventListener);
+    this.removeEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
+    this.#cancelDrag();
+    super.disconnectedCallback();
   }
 
   firstUpdated(props: PropertyValues) {
     super.firstUpdated(props);
-    this.addEventListener('nve-touch-start', () => this.#touchStart());
-    this.addEventListener('nve-touch-end', () => this.#touchEnd());
-    this.addEventListener('nve-touch-move', ((e: NveTouchEvent) => this.#touchMove(e)) as EventListener);
+    this.#gestureController.target = this;
     this.addEventListener('dblclick', () => {
       if (!this.dispatchEvent(new CustomEvent('toggle', { cancelable: true, bubbles: true, composed: true }))) {
         return;
@@ -108,22 +126,52 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     this.#setChange(value);
   }
 
-  #touchStart() {
+  #handlePointerInput = (event: CustomEvent<UnhandledPointerInput>): void => {
+    if (
+      event.detail.kind === 'pointerdown' &&
+      event.detail.event.button === 0 &&
+      event.detail.event.isPrimary &&
+      this.#dragPointerId === undefined
+    ) {
+      this.#dragStart(event.detail.event.pointerId);
+    }
+    if (event.detail.event.pointerId !== this.#dragPointerId) return;
+    if (event.detail.kind === 'pointerup') this.#dragEnd();
+    if (event.detail.kind === 'pointercancel') this.#cancelDrag();
+  };
+
+  #handleGesture = (event: CustomEvent<Gesture<undefined>>): void => {
+    if (event.detail.kind === 'drag' && event.detail.event.pointerId === this.#dragPointerId) {
+      this.#dragMove(event.detail);
+    }
+  };
+
+  #dragStart(pointerId: number) {
+    this.#dragPointerId = pointerId;
     this.#range.step = '1';
     this._internals.states.add('active');
     this.#offset = this.valueAsNumber;
   }
 
-  #touchMove(e: NveTouchEvent) {
-    const offset = (this.orientation === 'vertical' ? e.offsetX : -e.offsetY) * (this.dir === 'rtl' ? -1 : 1);
-    this.#offset = this.#offset + offset;
+  #dragMove(gesture: Extract<Gesture<undefined>, { kind: 'drag' }>) {
+    const offset =
+      (this.orientation === 'vertical' ? gesture.movementX : -gesture.movementY) * (this.dir === 'rtl' ? -1 : 1);
+    this.#offset = Math.max(this.min, Math.min(this.max, this.#offset + offset));
     this.#setInput(this.#offset);
   }
 
-  #touchEnd() {
+  #dragEnd() {
     this.#offset = this.valueAsNumber;
     this.#range.step = `${this.step}`;
+    this.#dragPointerId = undefined;
+    this._internals.states.delete('active');
     this.#setChange(this.#offset);
+  }
+
+  #cancelDrag() {
+    if (this.#dragPointerId === undefined) return;
+    this.#dragPointerId = undefined;
+    this.#range.step = `${this.step}`;
     this._internals.states.delete('active');
   }
 
