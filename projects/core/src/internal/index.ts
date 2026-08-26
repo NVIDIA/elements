@@ -5,9 +5,11 @@
  * @internal private common utilities for Elements
  */
 export * from './controllers/audit.controller.js';
+export * from './controllers/gesture.controller.js';
 export * from './controllers/i18n.controller.js';
 export * from './controllers/keynav-grid.controller.js';
 export * from './controllers/keynav-list.controller.js';
+export * from './controllers/keynav-spatial.controller.js';
 export * from './controllers/state-expanded.controller.js';
 export * from './controllers/state-highlighted.controller.js';
 export * from './controllers/state-scroll.controller.js';
@@ -18,7 +20,6 @@ export * from './controllers/type-expandable.controller.js';
 export * from './controllers/type-selectable.controller.js';
 export * from './controllers/type-native-popover.controller.js';
 export * from './controllers/type-ssr.controller.js';
-export * from './controllers/type-touch.controller.js';
 export * from './decorators/host-attr.js';
 export * from './decorators/scoped-registry.js';
 export * from './styles/index.js';
