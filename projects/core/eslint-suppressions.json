@@ -1,7 +1,1 @@
-{
-  "src/drawer/drawer.ts": {
-    "@typescript-eslint/no-unnecessary-type-conversion": {
-      "count": 1
-    }
-  }
-}
+{}

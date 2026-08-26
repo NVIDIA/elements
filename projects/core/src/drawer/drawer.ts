@@ -104,7 +104,7 @@ export class Drawer extends LitElement {
 
   /** @private */
   get popoverDismissible() {
-    return !!this.closable;
+    return this.closable ?? false;
   }
 
   protected typeNativePopoverController = new TypeNativePopoverController<Drawer>(this);
