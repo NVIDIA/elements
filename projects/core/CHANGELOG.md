@@ -1,3 +1,14 @@
+## <small>2.5.2 (2026-08-26)</small>
+
+* fix(code): bundle treeshaking ([cf6beb7](https://github.com/NVIDIA/elements/commit/cf6beb7))
+* fix(core): bundle treeshaking ([e3e80be](https://github.com/NVIDIA/elements/commit/e3e80be))
+* fix(starters): update angular to 22.1.3 ([273d4e9](https://github.com/NVIDIA/elements/commit/273d4e9))
+* chore(ci): enable bundle tree shaking ([4786255](https://github.com/NVIDIA/elements/commit/4786255))
+* chore(core): remove unnecessary boolean conversion in dialog ([a4f4f6c](https://github.com/NVIDIA/elements/commit/a4f4f6c))
+* chore(docs): enhance import rewriting logic and add unit tests ([6910812](https://github.com/NVIDIA/elements/commit/6910812))
+* chore(release): @nvidia-elements/cli-v2.2.0 [skip ci] ([f472bf0](https://github.com/NVIDIA/elements/commit/f472bf0))
+* feat(cli): improve validation commands ([0a9586b](https://github.com/NVIDIA/elements/commit/0a9586b))
+
 ## <small>2.5.1 (2026-08-25)</small>
 
 * chore(docs): update icon notice ([6647b0b](https://github.com/NVIDIA/elements/commit/6647b0b))
