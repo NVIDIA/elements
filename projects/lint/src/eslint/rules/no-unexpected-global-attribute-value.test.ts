@@ -63,7 +63,8 @@ describe('noUnexpectedAttributeValue', () => {
         '<span nve-text="${heading}"></span>',
         '<span nve-text=${heading}></span>',
         '<span nve-text={{heading}}></span>',
-        '<span nve-text={%heading%}></span>'
+        '<span nve-text={%heading%}></span>',
+        '<p nve-text></p>'
       ],
       invalid: []
     });
@@ -187,7 +188,8 @@ describe('noUnexpectedAttributeValue', () => {
         '<div nve-layout="${layout}"></div>',
         '<div nve-layout=${layout}></div>',
         '<div nve-layout={{layout}}></div>',
-        '<div nve-layout={%layout%}></div>'
+        '<div nve-layout={%layout%}></div>',
+        '<div nve-layout></div>'
       ],
       invalid: []
     });
@@ -393,6 +395,20 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
+  it('should allow valid use of nve-display attribute values', () => {
+    tester.run('should allow valid use of nve-display attribute values', rule, {
+      valid: [
+        '<div nve-display="hide"></div>',
+        '<div nve-display="${display}"></div>',
+        '<div nve-display=${display}></div>',
+        '<div nve-display={{display}}></div>',
+        '<div nve-display={%display%}></div>',
+        '<div nve-display></div>'
+      ],
+      invalid: []
+    });
+  });
+
   it('should not allow invalid use of nve-display attribute values', () => {
     tester.run('should not allow invalid use of nve-display attribute values', rule, {
       valid: [],
@@ -403,6 +419,22 @@ describe('noUnexpectedAttributeValue', () => {
             {
               messageId: 'unexpected-attribute-value',
               data: { attribute: 'nve-display', value: 'row', validValues: displayValidValues }
+            }
+          ]
+        },
+        {
+          code: '<div nve-display="hidden"></div>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value',
+              data: { attribute: 'nve-display', value: 'hidden', validValues: displayValidValues },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-attribute-value',
+                  data: { value: 'hidden', alternative: 'hide' },
+                  output: '<div nve-layout="hide"></div>'
+                }
+              ]
             }
           ]
         }
