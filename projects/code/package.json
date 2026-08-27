@@ -172,6 +172,8 @@
     }
   },
   "sideEffects": [
+    "./src/**/define.ts",
+    "./src/codeblock/languages/*.ts",
     "./**/define.js",
     "./dist/bundles/*.js",
     "./dist/codeblock/languages/*.js"
@@ -285,6 +287,7 @@
     "test": {
       "command": "vitest run",
       "files": [
+        "dist/**/*.js",
         "src/**",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -299,12 +302,16 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../core:build"
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:coverage": {
       "command": "vitest run --coverage",
       "files": [
+        "dist/**/*.js",
         "src/**",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -319,7 +326,10 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../core:build"
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:watch": {
