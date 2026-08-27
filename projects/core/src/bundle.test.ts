@@ -2,9 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { Badge } from '@nvidia-elements/core/badge';
-import { Button } from '@nvidia-elements/core/button';
-import '@nvidia-elements/core/bundle.js';
+// eslint-disable-next-line no-restricted-imports -- Verify the emitted bundle rather than the source entrypoint.
+import '../dist/bundles/index.js';
 
 describe('cdn bundle', () => {
   it('should mark the global state as the bundled build', () => {
@@ -12,7 +11,8 @@ describe('cdn bundle', () => {
   });
 
   it('should register bundled custom elements', () => {
-    expect(customElements.get(Badge.metadata.tag)).toBe(Badge);
-    expect(customElements.get(Button.metadata.tag)).toBe(Button);
+    for (const tag of ['nve-badge', 'nve-button', 'nve-card-content', 'nve-page', 'nve-tabs-item']) {
+      expect(customElements.get(tag)).toBeDefined();
+    }
   });
 });
