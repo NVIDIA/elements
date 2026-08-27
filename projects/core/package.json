@@ -63,6 +63,7 @@
     "./dist/polyfills/custom-state-set.js",
     "./dist/test/index.js",
     "./dist/bundles/*.js",
+    "./src/**/define.ts",
     "./**/define.js",
     "./**/server.js"
   ],

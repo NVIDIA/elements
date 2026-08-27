@@ -18,7 +18,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(106.14);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(107);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
