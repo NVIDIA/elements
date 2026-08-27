@@ -21,7 +21,7 @@
     "@nvidia-elements/lint": "workspace:*",
     "@tsconfig/node20": "20.1.10",
     "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "6.0.7",
+    "@vitejs/plugin-vue": "6.0.8",
     "@vue/tsconfig": "0.9.1",
     "eslint": "catalog:",
     "typescript": "catalog:",
