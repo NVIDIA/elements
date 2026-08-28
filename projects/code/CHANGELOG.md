@@ -1,3 +1,12 @@
+## <small>2.0.4 (2026-08-28)</small>
+
+* chore(core): remove unnecessary boolean conversion in drawer ([c5b667c](https://github.com/NVIDIA/elements/commit/c5b667c))
+* chore(lint): cover display suggestion and empty global attributes ([4adb1a9](https://github.com/NVIDIA/elements/commit/4adb1a9))
+* chore(release): @nvidia-elements/core-v2.5.3 [skip ci] ([32f6670](https://github.com/NVIDIA/elements/commit/32f6670))
+* chore(starters): update @vitejs/plugin-vue to 6.0.8 ([0ef5277](https://github.com/NVIDIA/elements/commit/0ef5277))
+* fix(code): bundle side effects ([13f6528](https://github.com/NVIDIA/elements/commit/13f6528))
+* fix(core): bundle side effects ([d29d5e6](https://github.com/NVIDIA/elements/commit/d29d5e6))
+
 ## <small>2.0.3 (2026-08-26)</small>
 
 * chore(ci): add github dependabot skill ([4cb37a7](https://github.com/NVIDIA/elements/commit/4cb37a7))
