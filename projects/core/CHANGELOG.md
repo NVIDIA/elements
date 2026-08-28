@@ -1,3 +1,12 @@
+## <small>2.5.3 (2026-08-28)</small>
+
+* fix(code): bundle side effects ([13f6528](https://github.com/NVIDIA/elements/commit/13f6528))
+* fix(core): bundle side effects ([d29d5e6](https://github.com/NVIDIA/elements/commit/d29d5e6))
+* chore(core): remove unnecessary boolean conversion in drawer ([c5b667c](https://github.com/NVIDIA/elements/commit/c5b667c))
+* chore(lint): cover display suggestion and empty global attributes ([4adb1a9](https://github.com/NVIDIA/elements/commit/4adb1a9))
+* chore(release): @nvidia-elements/code-v2.0.3 [skip ci] ([e3c6f87](https://github.com/NVIDIA/elements/commit/e3c6f87))
+* chore(starters): update @vitejs/plugin-vue to 6.0.8 ([0ef5277](https://github.com/NVIDIA/elements/commit/0ef5277))
+
 ## <small>2.5.2 (2026-08-26)</small>
 
 * fix(code): bundle treeshaking ([cf6beb7](https://github.com/NVIDIA/elements/commit/cf6beb7))
