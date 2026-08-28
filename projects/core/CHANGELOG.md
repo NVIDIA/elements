@@ -1,3 +1,12 @@
+## 2.6.0 (2026-08-28)
+
+* chore(core): cover source cdn bundle entry in unit tests ([eefd842](https://github.com/NVIDIA/elements/commit/eefd842))
+* chore(core): remove redundant icon appearance attr ([2606d8b](https://github.com/NVIDIA/elements/commit/2606d8b))
+* chore(core): update import bundle budget ([fd53ccf](https://github.com/NVIDIA/elements/commit/fd53ccf))
+* chore(release): @nvidia-elements/code-v2.0.4 [skip ci] ([ab0bd2a](https://github.com/NVIDIA/elements/commit/ab0bd2a))
+* feat(core): add icon appearances ([d20ccf3](https://github.com/NVIDIA/elements/commit/d20ccf3))
+* fix(starters): update @angular/* to 22.1.4 ([3370f7d](https://github.com/NVIDIA/elements/commit/3370f7d))
+
 ## <small>2.5.3 (2026-08-28)</small>
 
 * fix(code): bundle side effects ([13f6528](https://github.com/NVIDIA/elements/commit/13f6528))
