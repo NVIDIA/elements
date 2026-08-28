@@ -27,7 +27,6 @@ declare global {
  * @cssprop --color
  * @cssprop --width
  * @cssprop --height
- * @attr appearance - Selects the outline or solid form of a named icon.
  * @slot - Custom SVG content to override the named icon
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
