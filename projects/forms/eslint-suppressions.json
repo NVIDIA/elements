@@ -1,9 +1,4 @@
 {
-  "src/mixins/button.ts": {
-    "@typescript-eslint/no-unnecessary-type-conversion": {
-      "count": 1
-    }
-  },
   "src/mixins/checkbox.ts": {
     "@typescript-eslint/no-unnecessary-type-conversion": {
       "count": 3
