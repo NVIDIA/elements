@@ -138,7 +138,7 @@ export function ButtonFormControlMixin<TBase extends Constructor>(
     }
 
     get readOnly(): boolean {
-      return this.#readOnly || Boolean(this._typeAnchorController?.readOnly);
+      return this.#readOnly || (this._typeAnchorController?.readOnly ?? false);
     }
 
     set readOnly(value: boolean | unknown) {
