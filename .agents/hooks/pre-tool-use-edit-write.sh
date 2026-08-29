@@ -14,13 +14,10 @@ fi
 
 # Protected slow-layer infrastructure files
 PROTECTED_FILES=(
-  "pnpm-workspace.yaml"
   "commitlint.config.js"
   "release.config.cjs"
-  "package.json"
   "pnpm-lock.yaml"
   ".nvmrc"
-  "mise.toml"
   "mise.lock"
   ".husky"
   "config"

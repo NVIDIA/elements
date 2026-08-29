@@ -162,7 +162,7 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [Vale](https://vale.sh/)
 
-  Prose linter for documentation and JSDoc comments. Enforces consistent technical writing using the Google developer documentation style guide and write-good rules. Configuration is in `.vale.ini` with custom vocabulary and rules in `config/vale/styles/`. Vale runs against `*.md` and `*.ts` files in `projects/` source directories. mise installs the Vale binary for local development and CI.
+  Prose linter for documentation and JSDoc comments. Enforces consistent technical writing using the Google developer documentation style guide and write-good rules. Configuration is in `.vale.ini` with custom vocabulary and rules in `config/vale/styles/`. Vale runs against non-test `*.md` and `*.ts` files in configured project source directories and `.agents/`. Pre-commit and CI use the same target filter. mise installs the Vale binary for local development and CI.
 
 ## Testing
 

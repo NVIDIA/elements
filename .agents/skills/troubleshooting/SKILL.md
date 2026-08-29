@@ -41,7 +41,7 @@ Read the [troubleshooting guide](projects/site/src/docs/internal/guidelines/trou
 
 4. **If the issue persists**, compare against a working reference component (badge, button, or card) to spot structural differences.
 
-## Additional References
+## References
 
 - [Troubleshooting Guide](/projects/site/src/docs/internal/guidelines/troubleshooting.md) - Common issues and solutions
 - [Testing Guidelines](/projects/site/src/docs/internal/guidelines/testing.md) - Test patterns
