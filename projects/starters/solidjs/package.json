@@ -24,7 +24,7 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "solid-js": "1.9.12"
+    "solid-js": "1.9.15"
   },
   "wireit": {
     "ci": {
