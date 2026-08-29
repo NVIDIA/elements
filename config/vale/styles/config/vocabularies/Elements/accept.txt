@@ -376,6 +376,7 @@ additional
 microbenchmark
 sufficient
 shader
+shaders
 application
 readback
 rasterization

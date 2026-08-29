@@ -62,7 +62,9 @@
   },
   "lint-staged": {
     "!{projects/internals/metadata/static/**,projects/site/public/static/**}": "prettier --write --ignore-unknown",
-    "**/!(*.test|*.test.*).{ts,md}": "vale --config .vale.ini"
+    ".agents/**/!(*.test|*.test.*).{ts,md}": "vale --config .vale.ini --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
+    "{projects/*/src,projects/*/*/src}/**/!(*.test|*.test.*).{ts,md}": "vale --config .vale.ini --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
+    "{projects/*,projects/*/*}/README.md": "vale --config .vale.ini --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
   },
   "wireit": {
     "ci": {
@@ -286,10 +288,11 @@
       ]
     },
     "lint:vale": {
-      "command": "vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
+      "command": "vale --config .vale.ini .agents projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
       "files": [
         "./.vale.ini",
         "./config/vale/**/*",
+        "./.agents/**/*.{md,ts}",
         "./projects/*/src/**/*.{md,ts}",
         "./projects/*/README.md",
         "./projects/*/*/src/**/*.{md,ts}",
