@@ -164,6 +164,7 @@ const config = {
         tags: { name: true },
         aria: { name: true },
         experimental: { name: true },
+        hotPath: { name: false },
         alpha: { name: true },
         beta: { name: true },
         stable: { name: true },

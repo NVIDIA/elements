@@ -29,7 +29,15 @@ import { browserTypescriptConfig, libraryConfig, litConfig, jsonConfig } from '@
 export default [...browserTypescriptConfig, ...libraryConfig, ...litConfig, ...jsonConfig];
 ```
 
-Plugin namespaces (`local-typescript`, `local-html`, `local-css`, `local-json`) register the custom rules inside those configs. Projects do not opt in per rule.
+Performance rules use a separate config. Spread `performanceConfig` to enable every performance rule for production TypeScript:
+
+```js
+import { browserTypescriptConfig, performanceConfig } from '@internals/eslint';
+
+export default [...browserTypescriptConfig, ...performanceConfig];
+```
+
+Plugin namespaces (`local-typescript`, `local-performance`, `local-html`, `local-css`, `local-json`) register the custom rules inside those configs.
 
 ## Authoring a new rule
 
@@ -110,3 +118,18 @@ Applied to `package.json` files.
 
 - **`no-missing-bundle-registration`**. A component that ships a `define.ts` must also appear in `src/bundle.ts` so the CDN bundle registers it.
 - **`no-missing-bundle-test`**. Every component registered by `src/bundle.ts` must also appear in the Lighthouse direct-import benchmark. The required `lighthouseTestFile` option names the project's combined Lighthouse test file.
+
+### Performance rules
+
+The `performanceConfig` enables these rules as errors for production TypeScript files.
+
+- **`prefer-direct-typed-array-iteration`**. Avoids `Array.from(typedArray)` copies before operations such as `some`, `find`, and `forEach` that do not transform the array.
+- **`require-animation-frame-cleanup`**. Requires a class that stores an animation frame handle to cancel that handle.
+- **`require-observer-disconnect`**. Requires observers stored on class fields to call `disconnect()`. The rule recognizes standard observer constructors and the repository's observer factory names.
+- **`no-inline-gpu-upload-allocation`**. Flags typed arrays and other buffer sources constructed directly in WebGPU `writeBuffer` and `writeTexture` calls.
+- **`no-hot-path-collection-allocation`**. Flags collection-producing array operations, collection constructors, `Array.from`, and array spread inside explicit or recognized renderer hot paths.
+- **`no-hot-path-buffer-allocation`**. Flags typed arrays, `ArrayBuffer`, and `DataView` construction inside explicit or recognized renderer hot paths.
+- **`no-gpu-upload-in-loop`**. Flags direct WebGPU queue uploads inside loops and collection callbacks so callers batch work before crossing the browser boundary.
+- **`require-gpu-resource-cleanup`**. Requires owning classes to destroy buffers, textures, and query sets retained on class fields.
+
+Add `@hotPath` to a function or method to opt it into hot-path allocation checks. The rules also treat methods beginning with `draw`, `prepare`, or `render` on classes whose names end in `Renderer` as hot paths.

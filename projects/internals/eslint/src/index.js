@@ -4,5 +4,6 @@ export { jsonConfig } from './configs/json.js';
 export { libraryConfig } from './configs/library.js';
 export { appConfig } from './configs/app.js';
 export { litConfig } from './configs/lit.js';
+export { performanceConfig } from './configs/performance.js';
 export { browserTypescriptConfig, nodeTypescriptConfig } from './configs/typescript.js';
 export { cssConfig } from './configs/css.js';
