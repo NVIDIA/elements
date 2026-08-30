@@ -59,7 +59,7 @@
     "eslint": "catalog:",
     "fast-glob": "catalog:",
     "ignore": "7.0.6",
-    "marked": "18.0.9",
+    "marked": "18.0.11",
     "marked-terminal": "7.3.0",
     "open": "11.0.0",
     "ora": "9.4.1",
