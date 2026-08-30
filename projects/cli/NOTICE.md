@@ -29,7 +29,7 @@ This project includes the following bundled third-party software:
 - ignore v7.0.6 [MIT]
   Copyright: kael
 
-- marked v18.0.9 [MIT]
+- marked v18.0.11 [MIT]
   Copyright: Christopher Jeffrey
 
 - marked-terminal v7.3.0 [MIT]
@@ -64,7 +64,7 @@ archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
 eslint v10.8.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 ignore v7.0.6 - Copyright kael
-marked v18.0.9 - Copyright Christopher Jeffrey
+marked v18.0.11 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
