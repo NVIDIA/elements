@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { UserConfig } from 'vite';
+import type { Page } from 'playwright';
 
 export declare const libraryBuildConfig: UserConfig;
 export declare const libraryNodeBuildConfig: UserConfig;
@@ -41,7 +42,34 @@ export declare const visualRunner: {
       waitFor?: (waitForFunction: (...args: unknown[]) => Promise<unknown>) => Promise<void>;
     }
   ): Promise<{ maxDiffPercentage: number }>;
+  inspect<Result>(
+    name: string,
+    content: string,
+    inspectPage: (page: Page) => Result | Promise<Result>,
+    options?: { deviceScaleFactor?: number }
+  ): Promise<Result>;
+  runWebGPUSmoke(name: string): Promise<WebGPUVisualDiagnostics>;
 };
+
+export interface WebGPUVisualDiagnostics {
+  browserVersion: string;
+  chromiumArgs: string[];
+  secureContext: boolean;
+  adapterInfo: {
+    vendor: string;
+    architecture: string;
+    device: string;
+    description: string;
+    isFallbackAdapter?: boolean;
+  } | null;
+  software: boolean;
+  workCompleted: boolean;
+  clearFrame: boolean;
+  clearPixel?: number[];
+  expectedPixel?: number[];
+  format?: string;
+  error?: string;
+}
 
 export declare const ssrRunner: {
   render(content: unknown): Promise<string>;

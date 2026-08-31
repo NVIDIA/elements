@@ -2,10 +2,25 @@ import lighthouse from 'lighthouse';
 import fs from 'fs';
 import { resolve } from 'path';
 import { VitePlaywrightRunner, buildPage } from './playwright.js';
+import { withSoftwareWebGPUChromiumArgs } from './webgpu.js';
 
 const output = process.env.CI ? ['json'] : ['json', 'html'];
 const RUNNER_ID = 'lighthouse';
 const LIGHTHOUSE_FLAGS = { logLevel: 'error', output };
+const CHROMIUM_ARGS = withSoftwareWebGPUChromiumArgs([
+  '--headless',
+  '--remote-debugging-port=9222',
+  '--disable-dev-shm-usage',
+  '--disable-extensions',
+  '--disable-background-networking',
+  '--disable-default-apps',
+  '--disable-sync',
+  '--disable-translate',
+  '--metrics-recording-only',
+  '--mute-audio',
+  '--no-first-run',
+  '--safebrowsing-disable-auto-update'
+]);
 const LIGHTHOUSE_CONFIG = {
   // https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js
   extends: 'lighthouse:default',
@@ -22,24 +37,11 @@ const LIGHTHOUSE_CONFIG = {
 };
 
 export class LighthouseRunner {
-  #runner = new VitePlaywrightRunner({
-    runnerID: RUNNER_ID,
-    chromiumArgs: [
-      '--headless',
-      '--remote-debugging-port=9222',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--disable-extensions',
-      '--disable-background-networking',
-      '--disable-default-apps',
-      '--disable-sync',
-      '--disable-translate',
-      '--metrics-recording-only',
-      '--mute-audio',
-      '--no-first-run',
-      '--safebrowsing-disable-auto-update'
-    ]
-  });
+  #runner;
+
+  constructor({ chromiumArgs = CHROMIUM_ARGS } = {}) {
+    this.#runner = new VitePlaywrightRunner({ runnerID: RUNNER_ID, chromiumArgs });
+  }
 
   async open() {
     await this.#runner.open();
