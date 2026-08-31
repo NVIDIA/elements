@@ -243,6 +243,63 @@ describe('truncateText', () => {
         availableWidth: 4
       })
     ).toBe('…hij');
+    expect(
+      renderTruncatedText('abcdefghij', {
+        position: 'center',
+        bias: 'start',
+        preserve: 6,
+        availableWidth: 4
+      })
+    ).toBe('abc…');
+  });
+
+  it('should return empty or original text when truncation cannot run', () => {
+    expect(renderTruncatedText('', { availableWidth: 10 })).toBe('');
+    expect(renderTruncatedText('abcdefghij', { availableWidth: Number.NaN })).toBe('abcdefghij');
+  });
+
+  it('should return only an ellipsis when the ellipsis itself is too wide', () => {
+    expect(
+      renderTruncatedText('abcdefghij', {
+        availableWidth: 1,
+        measureText: value => (value === '…' ? 2 : Array.from(value).length)
+      })
+    ).toBe('…');
+  });
+
+  it('should return only an ellipsis when no additional units fit', () => {
+    expect(renderTruncatedText('abcdefghij', { position: 'start', availableWidth: 1 })).toBe('…');
+  });
+
+  it('should treat a path of separators as a single unit', () => {
+    expect(
+      renderTruncatedText('///', {
+        position: 'center',
+        strategy: 'path',
+        availableWidth: 2
+      })
+    ).toBe('…');
+  });
+
+  it('should treat whitespace-only word text as a single unit', () => {
+    expect(
+      renderTruncatedText('   ', {
+        position: 'center',
+        strategy: 'word',
+        availableWidth: 2
+      })
+    ).toBe('…');
+  });
+
+  it('should treat a non-finite preserve count as one unit', () => {
+    expect(
+      renderTruncatedText('abcdefghij', {
+        position: 'center',
+        bias: 'end',
+        preserve: Number.NaN,
+        availableWidth: 6
+      })
+    ).toBe('abcd…j');
   });
 });
 
