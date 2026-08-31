@@ -351,6 +351,10 @@ body:has(#doc-tabs) #docs-main {
   }
 }
 
+body:has([id*='what-s-new-in-nvidia-elements']) #anchor-generator {
+  display: none !important;
+}
+
 #doc-content table {
   width: 100%;
   margin: 0;
