@@ -64,6 +64,18 @@ const PRIORITY_DOC_ROUTES = [
   '/docs/markdown/',
   '/docs/monaco/input/'
 ];
+const INDEXED_DESCRIPTION_ROUTES = [
+  '/docs/patterns/authentication/',
+  '/docs/elements/pagination/',
+  '/docs/labs/layout/responsive/',
+  '/docs/elements/menu/',
+  '/docs/patterns/heatmap/',
+  '/docs/elements/preferences-input/',
+  '/docs/foundations/themes/layers/',
+  '/docs/elements/resize-handle/',
+  '/docs/labs/layout/responsive/viewport/',
+  '/docs/elements/panel/'
+];
 const AUTHOR_SCHEMA = {
   '@id': AUTHOR_ID,
   '@type': 'Organization',
@@ -754,6 +766,25 @@ describe('docs metadata policy', () => {
     ).filter(isString);
 
     expect(shortDescriptions).toEqual([]);
+  });
+
+  it('should emit search descriptions in range for indexed docs routes', async () => {
+    const invalidDescriptions = (
+      await Promise.all(
+        INDEXED_DESCRIPTION_ROUTES.map(async route => {
+          const html = await readFile(getDistRouteUrl(route), 'utf8');
+          const description = getDescription(html);
+
+          if (description.length >= MIN_PRIORITY_DESCRIPTION_LENGTH && description.length <= MAX_DESCRIPTION_LENGTH) {
+            return null;
+          }
+
+          return `${route}: ${description.length}`;
+        })
+      )
+    ).filter(isString);
+
+    expect(invalidDescriptions).toEqual([]);
   });
 
   it('should require explicit descriptions on published non-component docs pages', async () => {

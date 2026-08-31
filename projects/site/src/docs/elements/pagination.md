@@ -1,6 +1,7 @@
 ---
 {
   title: 'Pagination',
+  description: 'Use the NVIDIA Elements pagination component to navigate large data sets with page controls, step sizes, skip actions, form integration, and accessible labels.',
   layout: 'docs.11ty.js',
   tag: 'nve-pagination'
 }

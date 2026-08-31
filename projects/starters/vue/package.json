@@ -45,6 +45,7 @@
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
+        "index.html",
         "src/**",
         "public/**",
         "vite.config.ts",

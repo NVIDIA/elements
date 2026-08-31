@@ -1,7 +1,7 @@
 ---
 {
   title: 'Layers',
-  description: 'Stacking layers in NVIDIA Elements: predictable elevation order for popovers, dialogs, and overlays.',
+  description: 'Understand NVIDIA Elements stacking layers and elevation tokens for predictable canvas, container, overlay, popover, tooltip, dialog, and notification order.',
   layout: 'docs.11ty.js'
 }
 ---

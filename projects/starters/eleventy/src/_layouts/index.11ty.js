@@ -2,7 +2,9 @@ const BASE_URL = `${process.env.PAGES_BASE_URL}starters/eleventy/`;
 
 export function render(data) {
   const title = data.title ?? 'Eleventy Starter';
-  const description = data.description ?? 'A simple starter using Elements and Eleventy.';
+  const description =
+    data.description ??
+    'Explore the NVIDIA Elements Eleventy starter with Vite bundling, reusable layouts, Markdown rendering, component registration, and static-site deployment.';
 
   return /* html */ `
     <!DOCTYPE html>

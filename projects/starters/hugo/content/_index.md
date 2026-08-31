@@ -1,6 +1,6 @@
 ---
 title: "Hugo"
-description: "A simple starter using Elements and Hugo static site generator."
+description: "Explore the NVIDIA Elements Hugo starter with reusable layouts, Markdown render hooks, static component bundles, design-system styles, and content-driven pages."
 date: 2025-11-18
 layout: "page"
 ---

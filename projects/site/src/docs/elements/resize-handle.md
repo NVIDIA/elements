@@ -1,6 +1,7 @@
 ---
 {
   title: 'Resize Handle',
+  description: 'Use the NVIDIA Elements resize handle to build accessible horizontal and vertical split panes with pointer sizing, keyboard control, and form integration.',
   layout: 'docs.11ty.js',
   tag: 'nve-resize-handle'
 }

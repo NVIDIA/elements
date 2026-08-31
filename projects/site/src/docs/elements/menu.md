@@ -1,6 +1,7 @@
 ---
 {
   title: 'Menu',
+  description: 'Use NVIDIA Elements menus for accessible navigation and actions with keyboard controls, selected states, links, icons, scrolling, and nested dropdown patterns.',
   layout: 'docs.11ty.js',
   tag: 'nve-menu',
   associatedElements: ['nve-menu-item']
