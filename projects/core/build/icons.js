@@ -130,11 +130,17 @@ function sortIconKeys(keys) {
 }
 
 function repairSVGColors(svg) {
-  return svg
+  const masks = [];
+  const unmaskedSVG = svg.replaceAll(/<mask\b[\s\S]*?<\/mask>/g, mask => {
+    masks.push(mask);
+    return `__NVE_ICON_MASK_${masks.length - 1}__`;
+  });
+  const repairedSVG = unmaskedSVG
     .replaceAll('fill="black"', 'fill="currentColor"')
     .replaceAll('stroke="black"', 'fill="currentColor"')
     .replaceAll(/fill="#([^"]+)"/g, 'fill="currentColor"')
     .replaceAll(/stroke="#([^"]+)"/g, 'fill="currentColor"');
+  return repairedSVG.replaceAll(/__NVE_ICON_MASK_(\d+)__/g, (_, index) => masks[Number(index)]);
 }
 
 function repairSVGClasses(svg) {
