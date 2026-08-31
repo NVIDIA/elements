@@ -8,7 +8,7 @@
 
 # {{ title }}
 
-Examples are stateless HTML templates demonstrating UI patterns for the Elements design system. Well defined examples are critical for providing a portable documentation format for the CLI, MCP and documentation site. This document provides guidance on creating well-written example templates. (`*.examples.ts`).
+Examples are stateless HTML templates demonstrating UI patterns for the Elements design system. Well defined examples are critical for providing a portable documentation format for the CLI, MCP, and documentation site. This document provides guidance on creating well-written example templates. (`*.examples.ts`).
 
 ## Core Principles
 
@@ -102,7 +102,7 @@ export const Default = {
 };
 ```
 
-<nve-alert status="warning">Limit summaries to a max of 400 characters. This restriction ensures the documentation stays portable across all platforms including docs, CLI and MCPs.</nve-alert>
+<nve-alert status="warning">Limit summaries to a max of 400 characters. This restriction ensures the documentation stays portable across all platforms including docs, CLI, and MCPs.</nve-alert>
 
 ### Stateless Examples by Default
 

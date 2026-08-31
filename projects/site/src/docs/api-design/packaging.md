@@ -49,7 +49,7 @@ Build outputs should target the latest ES2020+. Build outputs should not compile
 
 ## Entrypoints
 
-Each element should provide a standalone entrypoint for consumption. This enables consumers to choose which elements to load/import, improving performance and API stability.
+Each element should provide a standalone entrypoint for consumption. This enables consumers to choose the elements to load or import. This improves performance and API stability.
 
 ```typescript
 import  { Button } from '@nvidia-elements/core/button';

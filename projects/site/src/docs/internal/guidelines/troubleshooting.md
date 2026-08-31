@@ -323,7 +323,7 @@ expect(element.value).toBe('test');
 
 ### Build Time Regression
 
-**Symptom:** CI builds take much longer than expected
+**Symptom** CI builds take much longer than expected
 **Causes & Solutions:**
 
 1. **Wireit cache not working**

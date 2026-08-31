@@ -24,7 +24,7 @@
 
 # {{title}}
 
-The Elements layout system provides a declarative approach to creating layouts using CSS flexbox and grid. This system enables complex, adaptive layouts with minimal markup and custom CSS.
+The Elements layout system provides a declarative approach to creating layouts using CSS flexbox and grid. This system supports complex and adaptive layouts while requiring minimal markup and custom CSS.
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">

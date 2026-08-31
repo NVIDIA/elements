@@ -233,9 +233,11 @@ describe(Icon.metadata.tag, () => {
     const first = Promise.withResolvers<string>();
     const second = Promise.withResolvers<string>();
     const original = window.fetch;
-    window.fetch = vi.fn().mockImplementation((name: string) =>
-      Promise.resolve({ text: () => (name === 'first.svg' ? first.promise : second.promise) })
-    );
+    window.fetch = vi
+      .fn()
+      .mockImplementation((name: string) =>
+        Promise.resolve({ text: () => (name === 'first.svg' ? first.promise : second.promise) })
+      );
 
     element.name = 'first.svg' as IconName;
     await element.updateComplete;

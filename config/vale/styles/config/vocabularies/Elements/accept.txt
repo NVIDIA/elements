@@ -371,3 +371,11 @@ Alternatively
 misprefixed
 indicate
 utilization
+Lucide
+additional
+microbenchmark
+sufficient
+shader
+application
+readback
+rasterization
