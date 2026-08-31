@@ -6,6 +6,8 @@ import { preview, build } from 'vite';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
 const DEFAULT_PORT = 4176;
+export const VIEWPORT_WIDTH = 1180;
+export const VIEWPORT_HEIGHT = 820;
 
 process.env.NODE_ENV = 'production';
 
@@ -24,6 +26,10 @@ export class VitePlaywrightRunner {
 
   get page() {
     return this.#page;
+  }
+
+  get browserVersion() {
+    return this.#browser?.version();
   }
 
   get port() {
@@ -96,7 +102,9 @@ export class VitePlaywrightRunner {
         throw error;
       });
       console.log('playwright-runner: creating context');
-      this.#page = await (await this.#browser.newContext({ viewport: { width: 1180, height: 820 } })).newPage();
+      this.#page = await (
+        await this.#browser.newContext({ viewport: { width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT } })
+      ).newPage();
       this.#page.on('crash', data => console.error('playwright-runner: browser crashed', data));
       console.log('playwright-runner: creating server');
       this.#server = await preview({
@@ -137,8 +145,7 @@ export async function buildPage(testName, runnerID, render) {
   if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
 
   let scriptIdx = 0;
-  const scriptRe = /<script\s+type=["']module["']>([\s\S]*?)<\/script>/g;
-  html = html.replace(scriptRe, (_match, content) => {
+  html = replaceInlineModuleScripts(html, content => {
     const name = `_entry${scriptIdx++}.js`;
     fs.writeFileSync(path.join(tmpDir, name), content.trim());
     return `<script type="module" src="./${name}"></script>`;
@@ -176,4 +183,57 @@ export async function buildPage(testName, runnerID, render) {
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
+}
+
+/** Replaces inline module scripts with a forward-only scan of the HTML. */
+export function replaceInlineModuleScripts(html, replaceScript) {
+  const parts = [];
+  let copiedUntil = 0;
+  let searchFrom = 0;
+
+  while (searchFrom < html.length) {
+    const scriptStart = html.indexOf('<script', searchFrom);
+    if (scriptStart === -1) break;
+
+    const contentStart = getInlineModuleScriptContentStart(html, scriptStart);
+    if (contentStart === undefined) {
+      searchFrom = scriptStart + '<script'.length;
+      continue;
+    }
+
+    const scriptEnd = html.indexOf('</script>', contentStart);
+    if (scriptEnd === -1) break;
+
+    parts.push(html.slice(copiedUntil, scriptStart));
+    parts.push(replaceScript(html.slice(contentStart, scriptEnd)));
+    copiedUntil = scriptEnd + '</script>'.length;
+    searchFrom = copiedUntil;
+  }
+
+  parts.push(html.slice(copiedUntil));
+  return parts.join('');
+}
+
+function getInlineModuleScriptContentStart(html, scriptStart) {
+  let cursor = scriptStart + '<script'.length;
+  if (!isWhitespace(html[cursor])) return undefined;
+
+  while (isWhitespace(html[cursor])) cursor += 1;
+  if (!html.startsWith('type=', cursor)) return undefined;
+  cursor += 'type='.length;
+
+  const quote = html[cursor];
+  if (quote !== '"' && quote !== "'") return undefined;
+
+  const moduleStart = cursor + 1;
+  const moduleEnd = moduleStart + 'module'.length;
+  if (!html.startsWith('module', moduleStart) || html[moduleEnd] !== quote || html[moduleEnd + 1] !== '>') {
+    return undefined;
+  }
+
+  return moduleEnd + 2;
+}
+
+function isWhitespace(character) {
+  return character !== undefined && character.trim() === '';
 }
