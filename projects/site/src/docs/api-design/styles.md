@@ -406,7 +406,7 @@ The `nve-icon-button` internal to `nve-week` has its own internal `nve-icon` whi
 
 ## Responsive
 
-Elements should be responsive to support a wide variety of use cases. While not all apps are responsive, elements should be responsive to their parent element. This ensures that the element properly renders in any context, regardless if the element is in a datagrid, dashboard or article content. Leverage APIs like ResizeObserver and in the future Container Queries to achieve this.
+Elements should be responsive to support a wide variety of use cases. While not all apps are responsive, elements should be responsive to their parent element. This ensures that the element properly renders in any context, regardless if the element is in a datagrid, dashboard, or article content. Leverage APIs like ResizeObserver and in the future Container Queries to achieve this.
 
 ## Performance &amp; Imports
 

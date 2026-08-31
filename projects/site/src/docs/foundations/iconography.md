@@ -8,7 +8,7 @@
 
 # {{ title }}
 
-The Iconography system builds on exposing an SVG-based icon library to the `<nve-icon>` element. The Elements icon SVG set is built on [Lucide](https://github.com/lucide-icons/lucide).
+The Iconography system builds on exposing an SVG-based icon library to the `<nve-icon>` element. Elements bases its icon SVG set on [Lucide](https://github.com/lucide-icons/lucide).
 
 [Icon Element Documentation](/docs/elements/icon/)
 

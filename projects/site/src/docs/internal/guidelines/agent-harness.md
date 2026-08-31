@@ -10,7 +10,7 @@
 
 ## Terminology
 
-**Prompt Engineering** - is the craft of writing instructions that steer a model toward a desired output within a single inference call. It focuses on wording, structure, and few-shot examples inside the prompt itself, independent of what tools or files surround it. A well-written prompt compensates for what the model cannot infer on its own, while a poorly written one wastes the surrounding context no matter how well curated.
+**Prompt Engineering** - is the craft of writing instructions that steer a model toward a desired output within a single inference call. It focuses only on wording, structure, and few-shot examples inside the prompt itself. A well-written prompt compensates for what the model cannot infer on its own, while a poorly written one wastes the surrounding context no matter how well curated.
 
 **Context Engineering** - is the practice of curating what the model sees at inference time to produce better results. It spans both the project and domain layers - deciding what goes in `AGENTS.md`, which MCPs to enable, how to structure skills, and what to keep out of context to avoid noise. Good context engineering is additive and incremental. Start minimal. Add constraints when the agent fails, not preemptively.
 

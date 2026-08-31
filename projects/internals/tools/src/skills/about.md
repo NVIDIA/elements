@@ -13,7 +13,7 @@ Give a high-level overview of the NVIDIA Elements Design System.
 
 **Target audience:** developers new to Elements, especially those working on AI/Robotics applications who need a robust, accessible design system.
 
-**Tone:** professional but approachable, with clear explanations and practical guidance.
+**Tone:** professional but approachable, and provide clear, practical guidance.
 
 **Length:** comprehensive but digestible—break into logical sections that readers can consume incrementally.
 

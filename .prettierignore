@@ -10,6 +10,7 @@ coverage
 *.examples.ts
 *.test.lighthouse.ts
 CHANGELOG.md
+NOTICE.md
 README.md
 pnpm-lock.yaml
 vite.*.ts.timestamp*

@@ -31,7 +31,7 @@
   </section>
   <section nve-layout="column gap:sm">
     <h3 nve-text="label semibold">Stable API Contracts</h3>
-    <p nve-text="body sm muted"><a href="/docs/mcp/#skills" nve-text="link no-visit">Skills</a> and <a href="/docs/lint/" nve-text="link no-visit">lint</a> guide authoring best practices, common Design System UI patterns and automated static analysis.</p>
+    <p nve-text="body sm muted"><a href="/docs/mcp/#skills" nve-text="link no-visit">Skills</a> and <a href="/docs/lint/" nve-text="link no-visit">lint</a> guide authoring best practices, common Design System UI patterns, and automated static analysis.</p>
   </section>
 </section>
 <nve-divider></nve-divider>

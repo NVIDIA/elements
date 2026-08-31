@@ -17,7 +17,7 @@
 
 You can create fluid page layouts through the [abstracted CSS flexbox and grid APIs](/docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
-But you can extend the layout system with true responsive capabilities using two different approaches, **Container Queries** and **Viewport Queries**.
+But you can extend the layout system with true responsive capabilities through **Container Queries** or **Viewport Queries**.
 
 ## Installation
 

@@ -159,7 +159,7 @@ export class Gauge extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    // settle the value, otherwise reattaching paints the frame the animation was cancelled on
+    // settle the value, otherwise reattaching paints the frame where the animation stopped
     if (this.#progressAnimation) {
       this.#stopProgressAnimation();
       this.#paintedProgress = this.#targetProgress();
