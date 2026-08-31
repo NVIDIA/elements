@@ -59,19 +59,21 @@ For each potentially user-facing `feat`, `fix`, or `perf` change:
 3. Check public APIs, component behavior, examples, documentation, and tests to determine the user-visible effect.
 4. State only claims supported by that evidence.
 
+Before drafting, make a coverage list of the user-facing changes. For each one, record the user outcome, relevant docs link, whether a short code example would help, and whether to give it a standalone highlight or group it with a closely related change. Do not omit a material feature only because its conventional-commit subject is terse or a larger release includes it.
+
 Changelogs in this monorepo can repeat the same commit across package releases and can mention changes outside the named package. Summarize each unique change once. Do not attribute a change to a package solely because it appears in that package’s changelog; use its scope and changed files.
 
 Give less attention to release automation, CI, dependency bumps, refactors, generated metadata, and test-only work unless it changes installation, compatibility, documentation, performance, or another user workflow. Call out breaking changes and required migration steps first.
 
 ## Write the docs page
 
-If the packet contains releases, create the file at `page.filePath` from the packet. The reporting period determines the file path and `updateMonth`; the collector run date supplies the initial publication and modification dates. Do not choose other values.
+If the packet contains releases, create the file at `page.filePath` from the packet. The reporting period determines the path and `updateMonth`; the collector run date supplies the initial publication and modification dates. Do not choose other values.
 
 Before writing, check whether the target already exists. Stop and report the existing page instead of overwriting it unless the user explicitly asks to revise that month. A scheduled rerun must not create a duplicate monthly page.
 
 Use this structure:
 
-```markdown
+````markdown
 ---
 {
   title: '<page.title from the evidence packet>',
@@ -89,19 +91,27 @@ Use this structure:
 
 ## Highlights
 
-- **<Benefit-led heading>.** <Plain-language explanation with a relevant docs link when available.>
-- **<Benefit-led heading>.** <Combine closely related commits into one coherent change.>
+### <Benefit-led heading>
+
+<Plain-language explanation with a relevant docs link when available. Combine closely related commits into one coherent change.>
+
+```html
+<!-- A short, copyable example when the feature has a useful direct API. -->
+```
 
 ## Released packages
 
 - `<full package name>` <exact version or compact version range>
-```
+
+````
 
 Apply these rules:
 
 - Write for Elements users, not repository maintainers.
 - Explain outcomes and benefits instead of repeating conventional commit subjects.
-- Include two to five highlights and keep the introductory summary concise.
+- Unless the user requests a brief announcement, target a two-to-three-minute read: roughly 350–600 prose words plus short examples and the released-package list. Use two to five thematic highlight sections with enough context to explain why each change matters.
+- Include a compact, copyable example for a new component, command, or public API when direct usage helps readers adopt it. Base examples on the changed docs, examples, or source; use fenced `html`, `shell`, or `js` blocks. Do not add an example for a migration, bug fix, or internal change when it would not help a user act.
+- Make sure every material user-facing feature from the coverage list appears in a highlight or a related group. Keep the page focused by grouping related improvements rather than silently dropping them.
 - Use descriptive link text. Link a new or materially changed component to its docs page when one exists.
 - Include each released package once with exact versions. Use a range only when the reporting period includes every version in that range.
 - Let the shared What’s New layout render the page title, RSS subscription link, and release-links footer. Do not duplicate them in the Markdown content.
