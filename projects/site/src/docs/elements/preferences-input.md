@@ -1,6 +1,7 @@
 ---
 {
   title: 'Preferences Input',
+  description: 'Use the NVIDIA Elements preferences input to manage color scheme, interface scale, contrast, and reduced motion settings in forms, menus, and settings panels.',
   layout: 'docs.11ty.js',
   tag: 'nve-preferences-input'
 }

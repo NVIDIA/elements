@@ -40,7 +40,7 @@
         "../../themes/dist/bundles/index.css",
         "../../themes/dist/fonts/inter.css",
         "../../styles/dist/bundles/index.css",
-        "index.html",
+        "src/index.html",
         "vite.config.ts",
         "package.json"
       ],

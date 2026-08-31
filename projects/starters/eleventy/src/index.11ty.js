@@ -1,6 +1,7 @@
 export const data = {
   title: 'Eleventy + NVIDIA Elements',
-  description: 'A simple starter using Elements and Eleventy.',
+  description:
+    'Explore the NVIDIA Elements Eleventy starter with Vite bundling, reusable layouts, Markdown rendering, component registration, and static-site deployment.',
   layout: 'index.11ty.js'
 };
 

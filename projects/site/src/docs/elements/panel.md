@@ -1,6 +1,7 @@
 ---
 {
   title: 'Panels',
+  description: 'Use NVIDIA Elements panels to present collapsible or closable supporting content with headers, actions, details, and placement beside the primary view.',
   layout: 'docs.11ty.js',
   tag: 'nve-panel',
   associatedElements: ['nve-panel-header', 'nve-panel-content', 'nve-panel-footer']
