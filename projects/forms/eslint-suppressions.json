@@ -3,10 +3,5 @@
     "@typescript-eslint/no-unnecessary-type-conversion": {
       "count": 3
     }
-  },
-  "src/mixins/select.ts": {
-    "@typescript-eslint/no-unnecessary-type-conversion": {
-      "count": 1
-    }
   }
 }
