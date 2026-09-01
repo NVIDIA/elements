@@ -90,7 +90,7 @@ export function SelectFormControlMixin<TBase extends Constructor>(
     }
 
     override set disabled(value: boolean) {
-      super.disabled = Boolean(value);
+      super.disabled = value ?? false;
       this.updateSelectState();
     }
 
