@@ -1,3 +1,16 @@
+## <small>2.6.1 (2026-09-01)</small>
+
+* fix(cli): update marked to 18.0.11 ([cb9a5e3](https://github.com/NVIDIA/elements/commit/cb9a5e3))
+* fix(core): improve viewport height bounds for nve-page ([7c3b839](https://github.com/NVIDIA/elements/commit/7c3b839))
+* fix(starters): update solid-js to 1.9.15 ([1753732](https://github.com/NVIDIA/elements/commit/1753732))
+* chore(ci): fix broken vale script ([221d453](https://github.com/NVIDIA/elements/commit/221d453))
+* chore(core): cover remaining truncateText edge cases ([dba4a11](https://github.com/NVIDIA/elements/commit/dba4a11))
+* chore(docs): update what's new skill and august update ([7ee3b01](https://github.com/NVIDIA/elements/commit/7ee3b01))
+* chore(forms): drop unnecessary boolean conversion in select mixin ([870061c](https://github.com/NVIDIA/elements/commit/870061c))
+* chore(forms): remove unnecessary boolean conversion in button mixin ([f01bfa4](https://github.com/NVIDIA/elements/commit/f01bfa4))
+* chore(release): @nvidia-elements/cli-v2.2.1 [skip ci] ([78b18c1](https://github.com/NVIDIA/elements/commit/78b18c1))
+* chore(starters): update vite-plugin-solid to 2.11.14 ([41c1f68](https://github.com/NVIDIA/elements/commit/41c1f68))
+
 ## 2.6.0 (2026-08-28)
 
 * chore(core): cover source cdn bundle entry in unit tests ([eefd842](https://github.com/NVIDIA/elements/commit/eefd842))
