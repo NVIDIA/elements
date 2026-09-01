@@ -1,3 +1,10 @@
+## <small>2.7.1 (2026-09-01)</small>
+
+* fix(cli): update dependencies and migration skill ([932ffce](https://github.com/NVIDIA/elements/commit/932ffce))
+* fix(core): support solid icon variants and icon registry aliases ([e455331](https://github.com/NVIDIA/elements/commit/e455331)), closes [PR#264](https://github.com/PR/issues/264)
+* chore(docs): icon demo filter for solid appearance ([332646b](https://github.com/NVIDIA/elements/commit/332646b))
+* feat(lint): add additional icon alias deprecations ([a574e85](https://github.com/NVIDIA/elements/commit/a574e85))
+
 ## 2.7.0 (2026-09-01)
 
 * feat(core): add internal gesture and key navigation controllers ([3b46234](https://github.com/NVIDIA/elements/commit/3b46234))
