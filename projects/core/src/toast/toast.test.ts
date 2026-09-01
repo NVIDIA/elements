@@ -120,7 +120,7 @@ describe(Toast.metadata.tag, () => {
     await elementIsStable(element);
     const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
     expect(icon).toBeTruthy();
-    expect(icon.name).toBe('information-circle-stroke');
+    expect(icon.name).toBe('information-circle');
   });
 
   it('should include detail in open event', async () => {

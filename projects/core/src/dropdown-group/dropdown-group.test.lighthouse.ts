@@ -6,7 +6,9 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('dropdown-group lighthouse report', () => {
   test('dropdown-group should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-dropdown-group', /* html */`
+    const report = await lighthouseRunner.getReport(
+      'nve-dropdown-group',
+      /* html */ `
       <button popovertarget="menu-1">menu</button>
       <nve-dropdown-group>
         <nve-dropdown id="menu-1">
@@ -24,11 +26,12 @@ describe('dropdown-group lighthouse report', () => {
         import '@nvidia-elements/core/dropdown-group/define.js';
         import '@nvidia-elements/core/dropdown/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(25.5);
+    expect(report.payload.javascript.kb).toBeLessThan(25.76);
   });
 });

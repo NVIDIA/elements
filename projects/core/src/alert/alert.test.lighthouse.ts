@@ -6,21 +6,26 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('alert lighthouse report', () => {
   test('alert should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-alert', /* html */`
+    const report = await lighthouseRunner.getReport(
+      'nve-alert',
+      /* html */ `
       <nve-alert>alert</nve-alert>
       <script type="module">
         import '@nvidia-elements/core/alert/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(23.8);
+    expect(report.payload.javascript.kb).toBeLessThan(23.96);
   });
 
   test('alert-group should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-alert-group', /* html */`
+    const report = await lighthouseRunner.getReport(
+      'nve-alert-group',
+      /* html */ `
       <nve-alert-group>
         <nve-alert>default</nve-alert>
         <nve-alert>default</nve-alert>
@@ -28,11 +33,12 @@ describe('alert lighthouse report', () => {
       <script type="module">
         import '@nvidia-elements/core/alert/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(23.8);
+    expect(report.payload.javascript.kb).toBeLessThan(23.97);
   });
 });

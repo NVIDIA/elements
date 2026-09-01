@@ -44,7 +44,7 @@ function template(theme: '' | 'dark' = '') {
   </div>
 
   <div nve-layout="row gap:sm">
-    <nve-icon-button icon-name="filter-stroke"></nve-icon-button>
+    <nve-icon-button icon-name="filter"></nve-icon-button>
     <nve-icon-button pressed icon-name="filter"></nve-icon-button>
   </div>
 

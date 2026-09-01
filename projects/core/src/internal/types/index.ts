@@ -399,10 +399,10 @@ export interface DataElement<T extends unknown[] | Record<string, unknown>> {
 }
 
 export const statusIcons: { [key: string]: IconName } = {
-  '': 'information-circle-stroke',
-  undefined: 'information-circle-stroke',
-  default: 'information-circle-stroke',
-  accent: 'information-circle-stroke',
+  '': 'information-circle',
+  undefined: 'information-circle',
+  default: 'information-circle',
+  accent: 'information-circle',
   warning: 'exclamation-triangle',
   success: 'checkmark-circle',
   danger: 'exclamation-circle',

@@ -47,7 +47,7 @@ export const Vertical = {
   render: () => html`
     <div nve-layout="row gap:sm align:vertical-center" style="height: 50px">
       <nve-divider orientation="vertical"></nve-divider>
-      <nve-icon-button icon-name="information-circle-stroke"></nve-icon-button>
+      <nve-icon-button icon-name="information-circle"></nve-icon-button>
       <nve-icon-button icon-name="more-actions"></nve-icon-button>
     </div>
   `

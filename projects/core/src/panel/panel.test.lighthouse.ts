@@ -8,7 +8,9 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('panel lighthouse report', () => {
   test('panel should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-panel', /* html */`
+    const report = await lighthouseRunner.getReport(
+      'nve-panel',
+      /* html */ `
       <nve-panel behavior-expand expanded style="width:280px; height:100vh">
         <nve-panel-header>
           <div slot="title">Title</div>
@@ -22,11 +24,12 @@ describe('panel lighthouse report', () => {
       <script type="module">
         import '@nvidia-elements/core/panel/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(22);
+    expect(report.payload.javascript.kb).toBeLessThan(22.1);
   });
 });

@@ -30,6 +30,28 @@ describe(Icon.metadata.tag, () => {
     expect(customElements.get(Icon.metadata.tag)).toBeDefined();
   });
 
+  it('should register deprecated icon aliases from the define entrypoint', async () => {
+    expect(customElements.get(Icon.metadata.tag)).toBe(Icon);
+    vi.resetModules();
+    const alias = vi.spyOn(Icon, 'alias');
+
+    await import('./define.js?deprecated-alias-test');
+
+    expect(alias).toHaveBeenCalledWith({
+      'thumb-stroke': 'thumb',
+      'bell-stroke': 'bell',
+      'bookmark-stroke': 'bookmark',
+      'dot-stroke': 'dot',
+      'filter-stroke': 'filter',
+      'flag-stroke': 'flag',
+      'globe-alt-stroke': 'globe-alt',
+      'information-circle-stroke': 'information-circle',
+      'pointer-stroke': 'pointer',
+      'question-mark-circle-stroke': 'question-mark-circle'
+    });
+    expect(Icon._icons['thumb-stroke']).toBe(Icon._icons.thumb);
+  });
+
   it('should provide a aria role of img', async () => {
     await elementIsStable(element);
     expect(element._internals.role).toBe('img');
@@ -93,7 +115,7 @@ describe(Icon.metadata.tag, () => {
       hidden: 'eye-hidden',
       'important-badge': 'exclamation-circle',
       'inbox-1': 'carousel-vertical',
-      information: 'information-circle-stroke',
+      information: 'information-circle',
       interaction: 'cursor-rays',
       'light-mode': 'sun',
       mail: 'envelope',
