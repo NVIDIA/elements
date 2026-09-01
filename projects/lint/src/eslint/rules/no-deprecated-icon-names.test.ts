@@ -63,6 +63,15 @@ describe('noDeprecatedIconNames', () => {
               data: { deprecated: 'warning', alternative: 'exclamation-triangle' }
             }
           ]
+        },
+        {
+          code: '<nve-icon name="thumb-up-stroke"></nve-icon>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-icon-attribute',
+              data: { deprecated: 'thumb-up-stroke', alternative: 'thumb' }
+            }
+          ]
         }
       ]
     });
