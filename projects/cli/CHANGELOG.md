@@ -1,3 +1,23 @@
+## <small>2.2.2 (2026-09-01)</small>
+
+* chore(ci): fix broken vale script ([221d453](https://github.com/NVIDIA/elements/commit/221d453))
+* chore(core): add basic bench tests ([809ac39](https://github.com/NVIDIA/elements/commit/809ac39))
+* chore(docs): icon demo filter for solid appearance ([332646b](https://github.com/NVIDIA/elements/commit/332646b))
+* chore(docs): update what's new skill and august update ([7ee3b01](https://github.com/NVIDIA/elements/commit/7ee3b01))
+* chore(forms): drop unnecessary boolean conversion in select mixin ([870061c](https://github.com/NVIDIA/elements/commit/870061c))
+* chore(internal): add support for bench testing ([50f9dda](https://github.com/NVIDIA/elements/commit/50f9dda))
+* chore(internals): enable chromium gpu access for test runners ([186198a](https://github.com/NVIDIA/elements/commit/186198a))
+* chore(release): @nvidia-elements/core-v2.6.1 [skip ci] ([d7a1077](https://github.com/NVIDIA/elements/commit/d7a1077))
+* chore(release): @nvidia-elements/core-v2.7.0 [skip ci] ([a4066ed](https://github.com/NVIDIA/elements/commit/a4066ed))
+* chore(release): @nvidia-elements/core-v2.7.1 [skip ci] ([ea7c07a](https://github.com/NVIDIA/elements/commit/ea7c07a))
+* chore(release): @nvidia-elements/lint-v2.5.0 [skip ci] ([3f7089b](https://github.com/NVIDIA/elements/commit/3f7089b))
+* chore(starters): update vite-plugin-solid to 2.11.14 ([41c1f68](https://github.com/NVIDIA/elements/commit/41c1f68))
+* fix(cli): update dependencies and migration skill ([932ffce](https://github.com/NVIDIA/elements/commit/932ffce))
+* fix(core): improve viewport height bounds for nve-page ([7c3b839](https://github.com/NVIDIA/elements/commit/7c3b839))
+* fix(core): support solid icon variants and icon registry aliases ([e455331](https://github.com/NVIDIA/elements/commit/e455331)), closes [PR#264](https://github.com/PR/issues/264)
+* feat(core): add internal gesture and key navigation controllers ([3b46234](https://github.com/NVIDIA/elements/commit/3b46234))
+* feat(lint): add additional icon alias deprecations ([a574e85](https://github.com/NVIDIA/elements/commit/a574e85))
+
 ## <small>2.2.1 (2026-08-31)</small>
 
 * fix(cli): update marked to 18.0.11 ([cb9a5e3](https://github.com/NVIDIA/elements/commit/cb9a5e3))
