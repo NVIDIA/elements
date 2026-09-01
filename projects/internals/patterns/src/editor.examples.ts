@@ -266,7 +266,7 @@ radar:
   ></nve-monaco-diff-input>
 
   <nve-toolbar slot="subfooter">
-    <nve-icon-button icon-name="information-circle-stroke" size="sm" container="flat"></nve-icon-button>
+    <nve-icon-button icon-name="information-circle" size="sm" container="flat"></nve-icon-button>
     <span nve-text="body sm muted">Comparing release/v2.3.0 to feature/lidar-calibration</span>
     <span slot="suffix" nve-text="body sm nowrap">12 additions, 4 modifications</span>
   </nve-toolbar>
@@ -416,7 +416,7 @@ safety:
   </main>
 
   <nve-toolbar slot="subfooter">
-    <nve-icon-button icon-name="information-circle-stroke" size="sm" container="flat"></nve-icon-button>
+    <nve-icon-button icon-name="information-circle" size="sm" container="flat"></nve-icon-button>
     <span nve-text="body sm muted">Deployed config snapshot, editing disabled</span>
   </nve-toolbar>
 </nve-page>

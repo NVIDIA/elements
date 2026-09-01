@@ -22,7 +22,7 @@ This product includes the following bundled third-party software:
 - @html-eslint/parser v0.61.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @inquirer/prompts v8.5.2 [MIT] (used by: @nvidia-elements/cli)
+- @inquirer/prompts v8.7.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
 - @modelcontextprotocol/ext-apps v1.7.5 [MIT] (used by: @nvidia-elements/cli)
@@ -46,7 +46,7 @@ This product includes the following bundled third-party software:
 - highlight.js v11.11.1 [BSD-3-Clause] (used by: @nvidia-elements/code)
   Copyright: Josh Goebel <hello@joshgoebel.com>
 
-- ignore v7.0.6 [MIT] (used by: @nvidia-elements/cli)
+- ignore v7.0.8 [MIT] (used by: @nvidia-elements/cli)
   Copyright: kael
 
 - lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco, @nvidia-elements/plot, @nvidia-elements/scene)
@@ -70,7 +70,7 @@ This product includes the following bundled third-party software:
 - monaco-editor v0.55.1 [MIT] (used by: @nvidia-elements/monaco)
   Copyright: Microsoft Corporation
 
-- open v11.0.0 [MIT] (used by: @nvidia-elements/cli)
+- open v11.0.2 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
 - ora v9.4.1 [MIT] (used by: @nvidia-elements/cli)
@@ -79,7 +79,7 @@ This product includes the following bundled third-party software:
 - publint v0.3.23 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Bjorn Lu
 
-- yargs v18.0.0 [MIT] (used by: @nvidia-elements/cli)
+- yargs v18.1.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Unknown
 
 - zod v4.4.3 [MIT] (used by: @nvidia-elements/cli)
@@ -315,23 +315,23 @@ The following bundled components are provided under the MIT license:
 @eslint/js v10.0.1 - Copyright Unknown
 @html-eslint/eslint-plugin v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@inquirer/prompts v8.5.2 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@inquirer/prompts v8.7.0 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
 eslint v10.8.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
-ignore v7.0.6 - Copyright kael
+ignore v7.0.8 - Copyright kael
 markdown-it v14.3.0 - Copyright Unknown
 marked v18.0.11 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.55.1 - Copyright Microsoft Corporation
-open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+open v11.0.2 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.23 - Copyright Bjorn Lu
-yargs v18.0.0 - Copyright Unknown
+yargs v18.1.0 - Copyright Unknown
 zod v4.4.3 - Copyright Colin McDonnell <zod@colinhacks.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

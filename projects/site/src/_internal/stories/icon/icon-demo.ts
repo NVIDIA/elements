@@ -9,7 +9,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import layout from '@nvidia-elements/styles/layout.css?inline';
 import typography from '@nvidia-elements/styles/typography.css?inline';
 
-import { ICON_NAMES } from '@nvidia-elements/core/icon';
+import { ICON_NAMES, ICON_NAMES_SOLID } from '@nvidia-elements/core/icon';
 import type { IconName } from '@nvidia-elements/core/icon';
 import type { Size as IconSize } from '@nvidia-elements/core/internal';
 
@@ -29,6 +29,8 @@ export class IconDemo extends LitElement {
   @state() private iconSearchKey = '';
 
   render() {
+    const iconNames = this.values.solid ? ICON_NAMES_SOLID : ICON_NAMES;
+
     return html`
     <style>
       :host {
@@ -65,22 +67,28 @@ export class IconDemo extends LitElement {
                 <option value="right">right</option>
               </select>
             </nve-select>
-            <nve-checkbox style="min-width: 200px">
+            <nve-checkbox>
+              <label>solid icons</label>
+              <input type="checkbox" .checked=${this.values.solid} name="solid" />
+            </nve-checkbox>
+            <nve-checkbox>
               <label>bounding box</label>
               <input type="checkbox" .checked=${this.values.outline} name="outline" />
             </nve-checkbox>
           </form>          
 
           <div nve-layout="grid gap:md span-items:2">
-            ${ICON_NAMES.filter(iconName => iconName.includes(this.iconSearchKey)).map(
-              iconName => html`
+            ${iconNames
+              .filter(iconName => iconName.includes(this.iconSearchKey))
+              .map(
+                iconName => html`
               <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
                 <div nve-layout="column align:center gap:md">
-                  <nve-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
+                  <nve-icon ?outline=${this.values.outline} .appearance=${this.values.solid ? 'solid' : undefined} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
                   <h3 nve-text="label sm light muted">${iconName}</h3>
                 </div>
               </nve-button>`
-            )}
+              )}
           </div>
         </div>
       </nve-card-content>
@@ -88,7 +96,7 @@ export class IconDemo extends LitElement {
   `;
   }
 
-  @state() values = { size: 'xl', outline: false, direction: '' };
+  @state() values = { size: 'xl', outline: false, solid: false, direction: '' };
 
   get #form() {
     return this.shadowRoot.querySelector('form');
@@ -104,15 +112,23 @@ export class IconDemo extends LitElement {
   }
 
   #input() {
-    this.values = Object.fromEntries(new FormData(this.#form)) as unknown as {
-      size: string;
-      outline: boolean;
-      direction: string;
+    const form = this.#form;
+    if (!form) return;
+
+    const formData = new FormData(form);
+    const size = formData.get('size');
+    const direction = formData.get('direction');
+    this.values = {
+      size: typeof size === 'string' ? size : '',
+      outline: formData.has('outline'),
+      solid: formData.has('solid'),
+      direction: typeof direction === 'string' ? direction : ''
     };
   }
 
   async #copyIcon(iconName: string) {
-    const iconCode = `<nve-icon name="${iconName}"></nve-icon>`;
+    const appearance = this.values.solid ? ' appearance="solid"' : '';
+    const iconCode = `<nve-icon name="${iconName}"${appearance}></nve-icon>`;
     await navigator.clipboard.writeText(iconCode);
 
     const notification = globalThis.document.createElement('nve-notification');

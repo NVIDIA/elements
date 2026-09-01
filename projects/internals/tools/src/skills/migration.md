@@ -349,7 +349,15 @@ After:
 
 The JSON viewer is an internal API. Avoid using it even if public exports expose it. Use `nve-codeblock` or `nve-monaco-input` for JSON content rendering.
 
-## Icon Migration
+## Icon Migration 2.0 (Set for removal in 3.0)
+
+Rename old icon names to current icon names.
+
+| Before            | After   |
+| ----------------- | ------- |
+| `thumb-up-stroke` | `thumb` |
+
+## Icon Migration 1.0 (Removed in 2.0)
 
 Rename old icon names to current icon names.
 

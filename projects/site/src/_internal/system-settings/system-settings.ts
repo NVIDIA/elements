@@ -60,7 +60,7 @@ export class SystemSettings extends LitElement {
         <nve-divider></nve-divider>
         <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
           <label>Layer Background</label>
-          <nve-icon-button slot="label" popovertarget="demo-layer-tooltip" size="sm" container="flat" icon-name="information-circle-stroke" style="--height: 12px"></nve-icon-button>
+          <nve-icon-button slot="label" popovertarget="demo-layer-tooltip" size="sm" container="flat" icon-name="information-circle" style="--height: 12px"></nve-icon-button>
           <select size="3" @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ layer: e.target.value })}>
             <option ?selected=${this.#globals.layer === ''} value="">Canvas</option>
             <option ?selected=${this.#globals.layer === 'container'} value="container">Container</option>
