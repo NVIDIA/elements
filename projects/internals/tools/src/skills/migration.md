@@ -353,47 +353,57 @@ The JSON viewer is an internal API. Avoid using it even if public exports expose
 
 Rename old icon names to current icon names.
 
-| Before            | After   |
-| ----------------- | ------- |
-| `thumb-up-stroke` | `thumb` |
+| Before                        | After                  |
+| ----------------------------- | ---------------------- |
+| `thumb-up-stroke`             | `thumb`                |
+| `thumb-stroke`                | `thumb`                |
+| `bell-stroke`                 | `bell`                 |
+| `bookmark-stroke`             | `bookmark`             |
+| `dot-stroke`                  | `dot`                  |
+| `filter-stroke`               | `filter`               |
+| `flag-stroke`                 | `flag`                 |
+| `globe-alt-stroke`            | `globe-alt`            |
+| `information-circle-stroke`   | `information-circle`   |
+| `pointer-stroke`              | `pointer`              |
+| `question-mark-circle-stroke` | `question-mark-circle` |
 
 ## Icon Migration 1.0 (Removed in 2.0)
 
 Rename old icon names to current icon names.
 
-| Before               | After                       |
-| -------------------- | --------------------------- |
-| `chevron-right`      | `chevron`                   |
-| `chevron-down`       | `chevron`                   |
-| `chevron-left`       | `chevron`                   |
-| `additional-actions` | `more-actions`              |
-| `analytics`          | `pie-chart`                 |
-| `annotation`         | `transparent-box`           |
-| `app-switcher`       | `switch-apps`               |
-| `assist`             | `chat-bubble`               |
-| `checkmark`          | `check`                     |
-| `date`               | `calendar`                  |
-| `docs`               | `book`                      |
-| `expand-full-screen` | `maximize`                  |
-| `expand-panel`       | `arrow-stop`                |
-| `collapse-panel`     | `arrow-stop`                |
-| `failed`             | `x-circle`                  |
-| `favorite-filled`    | `star`                      |
-| `favorite-outline`   | `star-stroke`               |
-| `information`        | `information-circle-stroke` |
-| `maintenance`        | `wrench`                    |
-| `navigate-to`        | `arrow`                     |
-| `open-external-link` | `arrow-angle`               |
-| `location`           | `map-pin`                   |
-| `pinned-1`           | `pin`                       |
-| `project`            | `folder`                    |
-| `settings`           | `gear`                      |
-| `user`               | `person`                    |
-| `video-pause`        | `pause`                     |
-| `video-play`         | `play`                      |
-| `video-stop`         | `stop`                      |
-| `visible`            | `eye`                       |
-| `warning`            | `exclamation-triangle`      |
+| Before               | After                  |
+| -------------------- | ---------------------- |
+| `chevron-right`      | `chevron`              |
+| `chevron-down`       | `chevron`              |
+| `chevron-left`       | `chevron`              |
+| `additional-actions` | `more-actions`         |
+| `analytics`          | `pie-chart`            |
+| `annotation`         | `transparent-box`      |
+| `app-switcher`       | `switch-apps`          |
+| `assist`             | `chat-bubble`          |
+| `checkmark`          | `check`                |
+| `date`               | `calendar`             |
+| `docs`               | `book`                 |
+| `expand-full-screen` | `maximize`             |
+| `expand-panel`       | `arrow-stop`           |
+| `collapse-panel`     | `arrow-stop`           |
+| `failed`             | `x-circle`             |
+| `favorite-filled`    | `star`                 |
+| `favorite-outline`   | `star-stroke`          |
+| `information`        | `information-circle`   |
+| `maintenance`        | `wrench`               |
+| `navigate-to`        | `arrow`                |
+| `open-external-link` | `arrow-angle`          |
+| `location`           | `map-pin`              |
+| `pinned-1`           | `pin`                  |
+| `project`            | `folder`               |
+| `settings`           | `gear`                 |
+| `user`               | `person`               |
+| `video-pause`        | `pause`                |
+| `video-play`         | `play`                 |
+| `video-stop`         | `stop`                 |
+| `visible`            | `eye`                  |
+| `warning`            | `exclamation-triangle` |
 
 For directional icons, add an explicit `direction` attribute.
 
