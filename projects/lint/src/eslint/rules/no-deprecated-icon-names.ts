@@ -25,7 +25,7 @@ const DEPRECATED_ICONS = {
   failed: 'x-circle',
   'favorite-filled': 'star',
   'favorite-outline': 'star-stroke',
-  information: 'information-circle-stroke',
+  information: 'information-circle',
   maintenance: 'wrench',
   'navigate-to': 'arrow',
   'open-external-link': 'arrow-angle',
@@ -33,12 +33,23 @@ const DEPRECATED_ICONS = {
   'pinned-1': 'pin',
   project: 'folder',
   settings: 'gear',
+  'thumb-up-stroke': 'thumb',
   user: 'person',
   'video-pause': 'pause',
   'video-play': 'play',
   'video-stop': 'stop',
   visible: 'eye',
-  warning: 'exclamation-triangle'
+  warning: 'exclamation-triangle',
+  'thumb-stroke': 'thumb',
+  'bell-stroke': 'bell',
+  'bookmark-stroke': 'bookmark',
+  'dot-stroke': 'dot',
+  'filter-stroke': 'filter',
+  'flag-stroke': 'flag',
+  'globe-alt-stroke': 'globe-alt',
+  'information-circle-stroke': 'information-circle',
+  'pointer-stroke': 'pointer',
+  'question-mark-circle-stroke': 'question-mark-circle'
 };
 
 const rule = {
