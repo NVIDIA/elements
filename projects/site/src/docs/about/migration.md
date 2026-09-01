@@ -322,39 +322,39 @@ The following icons now use new names:
 
 <!-- vale write-good.TooWordy = NO -->
 
-| before             | after                     |
-| ------------------ | ------------------------- |
-| chevron-right      | chevron                   |
-| chevron-down       | chevron                   |
-| chevron-left       | chevron                   |
-| additional-actions | more-actions              |
-| analytics          | pie-chart                 |
-| annotation         | transparent-box           |
-| app-switcher       | switch-apps               |
-| assist             | chat-bubble               |
-| checkmark          | check                     |
-| date               | calendar                  |
-| docs               | book                      |
-| expand-full-screen | maximize                  |
-| expand-panel       | arrow-stop                |
-| collapse-panel     | arrow-stop                |
-| failed             | x-circle                  |
-| favorite-filled    | star                      |
-| favorite-outline   | star-stroke               |
-| information        | information-circle-stroke |
-| maintenance        | wrench                    |
-| navigate-to        | arrow                     |
-| open-external-link | arrow-angle               |
-| location           | map-pin                   |
-| pinned-1           | pin                       |
-| project            | folder                    |
-| settings           | gear                      |
-| user               | person                    |
-| video-pause        | pause                     |
-| video-play         | play                      |
-| video-stop         | stop                      |
-| visible            | eye                       |
-| warning            | exclamation-triangle      |
+| before             | after                |
+| ------------------ | -------------------- |
+| chevron-right      | chevron              |
+| chevron-down       | chevron              |
+| chevron-left       | chevron              |
+| additional-actions | more-actions         |
+| analytics          | pie-chart            |
+| annotation         | transparent-box      |
+| app-switcher       | switch-apps          |
+| assist             | chat-bubble          |
+| checkmark          | check                |
+| date               | calendar             |
+| docs               | book                 |
+| expand-full-screen | maximize             |
+| expand-panel       | arrow-stop           |
+| collapse-panel     | arrow-stop           |
+| failed             | x-circle             |
+| favorite-filled    | star                 |
+| favorite-outline   | star-stroke          |
+| information        | information-circle   |
+| maintenance        | wrench               |
+| navigate-to        | arrow                |
+| open-external-link | arrow-angle          |
+| location           | map-pin              |
+| pinned-1           | pin                  |
+| project            | folder               |
+| settings           | gear                 |
+| user               | person               |
+| video-pause        | pause                |
+| video-play         | play                 |
+| video-stop         | stop                 |
+| visible            | eye                  |
+| warning            | exclamation-triangle |
 
 <!-- vale write-good.TooWordy = YES -->
 
