@@ -7,7 +7,7 @@
   --gap: var(--nve-ref-space-md);
   --padding: 0;
   display: block;
-  height: 100vh;
+  height: 100dvh;
   width: stretch;
   overflow: hidden;
 }
