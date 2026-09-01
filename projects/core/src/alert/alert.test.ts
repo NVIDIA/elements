@@ -46,7 +46,7 @@ describe(Alert.metadata.tag, () => {
   });
 
   it('should show status icon if status is proivided', async () => {
-    expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('information-circle-stroke');
+    expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('information-circle');
     alert.status = 'success';
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag)).toBeDefined();
@@ -57,7 +57,7 @@ describe(Alert.metadata.tag, () => {
     alert.status = 'unsupported' as Alert['status'];
     await elementIsStable(alert);
 
-    expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('information-circle-stroke');
+    expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('information-circle');
   });
 
   it('should set an aria-label for the icon status', async () => {

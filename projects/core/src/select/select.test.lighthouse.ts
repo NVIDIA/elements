@@ -6,7 +6,9 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('select lighthouse report', () => {
   test('select should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-select', /* html */`
+    const report = await lighthouseRunner.getReport(
+      'nve-select',
+      /* html */ `
       <nve-select>
         <label>label</label>
         <select>
@@ -18,11 +20,12 @@ describe('select lighthouse report', () => {
       <script type="module">
         import '@nvidia-elements/core/select/define.js';
       </script>
-    `);
+    `
+    );
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(35.2);
+    expect(report.payload.javascript.kb).toBeLessThan(35.31);
   });
 });

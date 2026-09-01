@@ -58,11 +58,12 @@ export const ICON_IMPORTS = {
   'beaker': iconImport(() => import('./icons/beaker.svg?raw')),
   'bell': iconImport(() => import('./icons/bell.svg?raw')),
   'bell-slash': iconImport(() => import('./icons/bell-slash.svg?raw')),
-  'bell-stroke': iconImport(() => import('./icons/bell-stroke.svg?raw')),
+  'bell-solid': iconImport(() => import('./icons/bell-solid.svg?raw')),
   'bold': iconImport(() => import('./icons/bold.svg?raw')),
   'book': iconImport(() => import('./icons/book.svg?raw')),
+  'book-solid': iconImport(() => import('./icons/book-solid.svg?raw')),
   'bookmark': iconImport(() => import('./icons/bookmark.svg?raw')),
-  'bookmark-stroke': iconImport(() => import('./icons/bookmark-stroke.svg?raw')),
+  'bookmark-solid': iconImport(() => import('./icons/bookmark-solid.svg?raw')),
   'bounding-box': iconImport(() => import('./icons/bounding-box.svg?raw')),
   'briefcase': iconImport(() => import('./icons/briefcase.svg?raw')),
   'broadcast': iconImport(() => import('./icons/broadcast.svg?raw')),
@@ -75,14 +76,18 @@ export const ICON_IMPORTS = {
   'category-list': iconImport(() => import('./icons/category-list.svg?raw')),
   'chart-bar': iconImport(() => import('./icons/chart-bar.svg?raw')),
   'chat-bubble': iconImport(() => import('./icons/chat-bubble.svg?raw')),
+  'chat-bubble-solid': iconImport(() => import('./icons/chat-bubble-solid.svg?raw')),
   'chat-bubbles': iconImport(() => import('./icons/chat-bubbles.svg?raw')),
   'check': iconImport(() => import('./icons/check.svg?raw')),
   'check-badge': iconImport(() => import('./icons/check-badge.svg?raw')),
+  'check-badge-solid': iconImport(() => import('./icons/check-badge-solid.svg?raw')),
   'checklist': iconImport(() => import('./icons/checklist.svg?raw')),
   'checkmark-circle': iconImport(() => import('./icons/checkmark-circle.svg?raw')),
+  'checkmark-circle-solid': iconImport(() => import('./icons/checkmark-circle-solid.svg?raw')),
   'chip': iconImport(() => import('./icons/chip.svg?raw')),
   'circle': iconImport(() => import('./icons/circle.svg?raw')),
   'circle-angled-line': iconImport(() => import('./icons/circle-angled-line.svg?raw')),
+  'circle-angled-line-solid': iconImport(() => import('./icons/circle-angled-line-solid.svg?raw')),
   'circle-dash': iconImport(() => import('./icons/circle-dash.svg?raw')),
   'circle-dot': iconImport(() => import('./icons/circle-dot.svg?raw')),
   'circle-dot-arrows': iconImport(() => import('./icons/circle-dot-arrows.svg?raw')),
@@ -109,6 +114,7 @@ export const ICON_IMPORTS = {
   'cursor-ripples': iconImport(() => import('./icons/cursor-ripples.svg?raw')),
   'data-management': iconImport(() => import('./icons/data-management.svg?raw')),
   'delete-node': iconImport(() => import('./icons/delete-node.svg?raw')),
+  'delete-solid': iconImport(() => import('./icons/delete-solid.svg?raw')),
   'doc-checkmark': iconImport(() => import('./icons/doc-checkmark.svg?raw')),
   'dock-bottom': iconImport(() => import('./icons/dock-bottom.svg?raw')),
   'dock-none': iconImport(() => import('./icons/dock-none.svg?raw')),
@@ -116,7 +122,7 @@ export const ICON_IMPORTS = {
   'document': iconImport(() => import('./icons/document.svg?raw')),
   'document-clipboard': iconImport(() => import('./icons/document-clipboard.svg?raw')),
   'dot': iconImport(() => import('./icons/dot.svg?raw')),
-  'dot-stroke': iconImport(() => import('./icons/dot-stroke.svg?raw')),
+  'dot-solid': iconImport(() => import('./icons/dot-solid.svg?raw')),
   'drag': iconImport(() => import('./icons/drag.svg?raw')),
   'dropper': iconImport(() => import('./icons/dropper.svg?raw')),
   'duplicate': iconImport(() => import('./icons/duplicate.svg?raw')),
@@ -124,8 +130,10 @@ export const ICON_IMPORTS = {
   'ellipses': iconImport(() => import('./icons/ellipses.svg?raw')),
   'envelope': iconImport(() => import('./icons/envelope.svg?raw')),
   'exclamation-circle': iconImport(() => import('./icons/exclamation-circle.svg?raw')),
+  'exclamation-circle-solid': iconImport(() => import('./icons/exclamation-circle-solid.svg?raw')),
   'exclamation-mark': iconImport(() => import('./icons/exclamation-mark.svg?raw')),
   'exclamation-triangle': iconImport(() => import('./icons/exclamation-triangle.svg?raw')),
+  'exclamation-triangle-solid': iconImport(() => import('./icons/exclamation-triangle-solid.svg?raw')),
   'expand-all': iconImport(() => import('./icons/expand-all.svg?raw')),
   'expand-details': iconImport(() => import('./icons/expand-details.svg?raw')),
   'expression': iconImport(() => import('./icons/expression.svg?raw')),
@@ -133,24 +141,27 @@ export const ICON_IMPORTS = {
   'eye-hidden': iconImport(() => import('./icons/eye-hidden.svg?raw')),
   'face-frown': iconImport(() => import('./icons/face-frown.svg?raw')),
   'face-smile': iconImport(() => import('./icons/face-smile.svg?raw')),
+  'face-smile-solid': iconImport(() => import('./icons/face-smile-solid.svg?raw')),
   'fast-forward': iconImport(() => import('./icons/fast-forward.svg?raw')),
   'fast-forward-10': iconImport(() => import('./icons/fast-forward-10.svg?raw')),
   'film': iconImport(() => import('./icons/film.svg?raw')),
   'filter': iconImport(() => import('./icons/filter.svg?raw')),
-  'filter-stroke': iconImport(() => import('./icons/filter-stroke.svg?raw')),
+  'filter-solid': iconImport(() => import('./icons/filter-solid.svg?raw')),
   'flag': iconImport(() => import('./icons/flag.svg?raw')),
-  'flag-stroke': iconImport(() => import('./icons/flag-stroke.svg?raw')),
+  'flag-solid': iconImport(() => import('./icons/flag-solid.svg?raw')),
   'fold': iconImport(() => import('./icons/fold.svg?raw')),
   'folder': iconImport(() => import('./icons/folder.svg?raw')),
   'fork': iconImport(() => import('./icons/fork.svg?raw')),
+  'gear-solid': iconImport(() => import('./icons/gear-solid.svg?raw')),
   'globe': iconImport(() => import('./icons/globe.svg?raw')),
-  'globe-alt-stroke': iconImport(() => import('./icons/globe-alt-stroke.svg?raw')),
+  'globe-alt': iconImport(() => import('./icons/globe-alt.svg?raw')),
   'group': iconImport(() => import('./icons/group.svg?raw')),
   'group-boxes': iconImport(() => import('./icons/group-boxes.svg?raw')),
   'hand': iconImport(() => import('./icons/hand.svg?raw')),
   'hash': iconImport(() => import('./icons/hash.svg?raw')),
   'heading': iconImport(() => import('./icons/heading.svg?raw')),
   'home': iconImport(() => import('./icons/home.svg?raw')),
+  'home-solid': iconImport(() => import('./icons/home-solid.svg?raw')),
   'horizontal-rule': iconImport(() => import('./icons/horizontal-rule.svg?raw')),
   'hourglass': iconImport(() => import('./icons/hourglass.svg?raw')),
   'hourglass-end': iconImport(() => import('./icons/hourglass-end.svg?raw')),
@@ -160,7 +171,8 @@ export const ICON_IMPORTS = {
   'image': iconImport(() => import('./icons/image.svg?raw')),
   'inbox': iconImport(() => import('./icons/inbox.svg?raw')),
   'infinity': iconImport(() => import('./icons/infinity.svg?raw')),
-  'information-circle-stroke': iconImport(() => import('./icons/information-circle-stroke.svg?raw')),
+  'information-circle': iconImport(() => import('./icons/information-circle.svg?raw')),
+  'information-circle-solid': iconImport(() => import('./icons/information-circle-solid.svg?raw')),
   'inspect': iconImport(() => import('./icons/inspect.svg?raw')),
   'italic': iconImport(() => import('./icons/italic.svg?raw')),
   'key': iconImport(() => import('./icons/key.svg?raw')),
@@ -170,10 +182,12 @@ export const ICON_IMPORTS = {
   'lifebuoy': iconImport(() => import('./icons/lifebuoy.svg?raw')),
   'lightbulb': iconImport(() => import('./icons/lightbulb.svg?raw')),
   'lightning-bolt': iconImport(() => import('./icons/lightning-bolt.svg?raw')),
+  'lightning-bolt-solid': iconImport(() => import('./icons/lightning-bolt-solid.svg?raw')),
   'link': iconImport(() => import('./icons/link.svg?raw')),
   'list-ordered': iconImport(() => import('./icons/list-ordered.svg?raw')),
   'list-unordered': iconImport(() => import('./icons/list-unordered.svg?raw')),
   'lock': iconImport(() => import('./icons/lock.svg?raw')),
+  'lock-solid': iconImport(() => import('./icons/lock-solid.svg?raw')),
   'login': iconImport(() => import('./icons/login.svg?raw')),
   'looping': iconImport(() => import('./icons/looping.svg?raw')),
   'looping-off': iconImport(() => import('./icons/looping-off.svg?raw')),
@@ -188,6 +202,7 @@ export const ICON_IMPORTS = {
   'minimize': iconImport(() => import('./icons/minimize.svg?raw')),
   'minus': iconImport(() => import('./icons/minus.svg?raw')),
   'minus-circle': iconImport(() => import('./icons/minus-circle.svg?raw')),
+  'minus-circle-solid': iconImport(() => import('./icons/minus-circle-solid.svg?raw')),
   'moon': iconImport(() => import('./icons/moon.svg?raw')),
   'multiselect': iconImport(() => import('./icons/multiselect.svg?raw')),
   'music-note': iconImport(() => import('./icons/music-note.svg?raw')),
@@ -203,17 +218,20 @@ export const ICON_IMPORTS = {
   'person-2': iconImport(() => import('./icons/person-2.svg?raw')),
   'person-3': iconImport(() => import('./icons/person-3.svg?raw')),
   'person-circle': iconImport(() => import('./icons/person-circle.svg?raw')),
+  'person-solid': iconImport(() => import('./icons/person-solid.svg?raw')),
   'phone': iconImport(() => import('./icons/phone.svg?raw')),
   'picture-in-picture': iconImport(() => import('./icons/picture-in-picture.svg?raw')),
   'pie-chart': iconImport(() => import('./icons/pie-chart.svg?raw')),
   'pin': iconImport(() => import('./icons/pin.svg?raw')),
+  'pin-solid': iconImport(() => import('./icons/pin-solid.svg?raw')),
   'pizza-slice': iconImport(() => import('./icons/pizza-slice.svg?raw')),
   'play': iconImport(() => import('./icons/play.svg?raw')),
   'plug': iconImport(() => import('./icons/plug.svg?raw')),
   'plus-circle': iconImport(() => import('./icons/plus-circle.svg?raw')),
+  'plus-circle-solid': iconImport(() => import('./icons/plus-circle-solid.svg?raw')),
   'plus-minus': iconImport(() => import('./icons/plus-minus.svg?raw')),
   'pointer': iconImport(() => import('./icons/pointer.svg?raw')),
-  'pointer-stroke': iconImport(() => import('./icons/pointer-stroke.svg?raw')),
+  'pointer-solid': iconImport(() => import('./icons/pointer-solid.svg?raw')),
   'priority-high': iconImport(() => import('./icons/priority-high.svg?raw')),
   'priority-low': iconImport(() => import('./icons/priority-low.svg?raw')),
   'priority-medium': iconImport(() => import('./icons/priority-medium.svg?raw')),
@@ -224,7 +242,7 @@ export const ICON_IMPORTS = {
   'pulse': iconImport(() => import('./icons/pulse.svg?raw')),
   'puzzle-piece': iconImport(() => import('./icons/puzzle-piece.svg?raw')),
   'question-mark-circle': iconImport(() => import('./icons/question-mark-circle.svg?raw')),
-  'question-mark-circle-stroke': iconImport(() => import('./icons/question-mark-circle-stroke.svg?raw')),
+  'question-mark-circle-solid': iconImport(() => import('./icons/question-mark-circle-solid.svg?raw')),
   'rectangle-group': iconImport(() => import('./icons/rectangle-group.svg?raw')),
   'rectangle-stack-horizontal': iconImport(() => import('./icons/rectangle-stack-horizontal.svg?raw')),
   'rectangle-stack-vertical': iconImport(() => import('./icons/rectangle-stack-vertical.svg?raw')),
@@ -247,6 +265,7 @@ export const ICON_IMPORTS = {
   'sort-ascending': iconImport(() => import('./icons/sort-ascending.svg?raw')),
   'sort-descending': iconImport(() => import('./icons/sort-descending.svg?raw')),
   'soundwave': iconImport(() => import('./icons/soundwave.svg?raw')),
+  'sparkles-solid': iconImport(() => import('./icons/sparkles-solid.svg?raw')),
   'split-horizontal': iconImport(() => import('./icons/split-horizontal.svg?raw')),
   'split-none': iconImport(() => import('./icons/split-none.svg?raw')),
   'star': iconImport(() => import('./icons/star.svg?raw')),
@@ -270,7 +289,7 @@ export const ICON_IMPORTS = {
   'template': iconImport(() => import('./icons/template.svg?raw')),
   'terminal': iconImport(() => import('./icons/terminal.svg?raw')),
   'thumb': iconImport(() => import('./icons/thumb.svg?raw')),
-  'thumb-stroke': iconImport(() => import('./icons/thumb-stroke.svg?raw')),
+  'thumb-solid': iconImport(() => import('./icons/thumb-solid.svg?raw')),
   'traffic-cone': iconImport(() => import('./icons/traffic-cone.svg?raw')),
   'transparent-box': iconImport(() => import('./icons/transparent-box.svg?raw')),
   'trend-down': iconImport(() => import('./icons/trend-down.svg?raw')),
@@ -280,18 +299,326 @@ export const ICON_IMPORTS = {
   'typography': iconImport(() => import('./icons/typography.svg?raw')),
   'undo': iconImport(() => import('./icons/undo.svg?raw')),
   'unlock': iconImport(() => import('./icons/unlock.svg?raw')),
+  'unlock-solid': iconImport(() => import('./icons/unlock-solid.svg?raw')),
   'upload': iconImport(() => import('./icons/upload.svg?raw')),
   'video-camera': iconImport(() => import('./icons/video-camera.svg?raw')),
   'view-as-grid': iconImport(() => import('./icons/view-as-grid.svg?raw')),
   'volume': iconImport(() => import('./icons/volume.svg?raw')),
   'volume-muted': iconImport(() => import('./icons/volume-muted.svg?raw')),
+  'volume-solid': iconImport(() => import('./icons/volume-solid.svg?raw')),
   'wifi': iconImport(() => import('./icons/wifi.svg?raw')),
   'wrench': iconImport(() => import('./icons/wrench.svg?raw')),
+  'wrench-solid': iconImport(() => import('./icons/wrench-solid.svg?raw')),
   'x-circle': iconImport(() => import('./icons/x-circle.svg?raw')),
+  'x-circle-solid': iconImport(() => import('./icons/x-circle-solid.svg?raw')),
   'zoom-in': iconImport(() => import('./icons/zoom-in.svg?raw')),
   'zoom-out': iconImport(() => import('./icons/zoom-out.svg?raw')),
 };
 
-export type IconName = keyof typeof ICON_IMPORTS;
+export type IconName =
+  | 'placeholder'
+  | 'caret'
+  | 'person'
+  | 'menu'
+  | 'cancel'
+  | 'gear'
+  | 'chevron'
+  | 'logout'
+  | 'copy'
+  | 'more-actions'
+  | 'add'
+  | 'arrow'
+  | 'delete'
+  | 'download'
+  | 'search'
+  | 'split-vertical'
+  | 'sparkles'
+  | 'branch'
+  | 'refresh'
+  | 'double-chevron'
+  | 'academic-cap'
+  | 'add-asset'
+  | 'add-comment'
+  | 'add-grid'
+  | 'add-user'
+  | 'ancestors'
+  | 'archive'
+  | 'arrow-angle'
+  | 'arrow-both'
+  | 'arrow-cycle'
+  | 'arrow-path-rounded-square'
+  | 'arrow-stop'
+  | 'at-symbol'
+  | 'backspace'
+  | 'bar-pill-stack'
+  | 'bars-3'
+  | 'bars-3-bottom-left'
+  | 'bars-3-bottom-right'
+  | 'bars-3-center-left'
+  | 'bars-4'
+  | 'beaker'
+  | 'bell'
+  | 'bell-slash'
+  | 'bold'
+  | 'book'
+  | 'bookmark'
+  | 'bounding-box'
+  | 'briefcase'
+  | 'broadcast'
+  | 'browser'
+  | 'bug'
+  | 'calendar'
+  | 'camera'
+  | 'carets-closed-square'
+  | 'carousel'
+  | 'category-list'
+  | 'chart-bar'
+  | 'chat-bubble'
+  | 'chat-bubbles'
+  | 'check'
+  | 'check-badge'
+  | 'checklist'
+  | 'checkmark-circle'
+  | 'chip'
+  | 'circle'
+  | 'circle-angled-line'
+  | 'circle-dash'
+  | 'circle-dot'
+  | 'circle-dot-arrows'
+  | 'circle-half'
+  | 'circle-rule'
+  | 'circle-tick'
+  | 'clipboard'
+  | 'clock'
+  | 'clock-circle-arrow'
+  | 'cloud'
+  | 'cloud-download'
+  | 'cloud-upload'
+  | 'code'
+  | 'collapse-all'
+  | 'collapse-details'
+  | 'color-palette'
+  | 'columns'
+  | 'compare'
+  | 'computer'
+  | 'connect-node'
+  | 'connected-blocks'
+  | 'cross-hairs'
+  | 'cursor-rays'
+  | 'cursor-ripples'
+  | 'data-management'
+  | 'delete-node'
+  | 'doc-checkmark'
+  | 'dock-bottom'
+  | 'dock-none'
+  | 'dock-side'
+  | 'document'
+  | 'document-clipboard'
+  | 'dot'
+  | 'drag'
+  | 'dropper'
+  | 'duplicate'
+  | 'edit'
+  | 'ellipses'
+  | 'envelope'
+  | 'exclamation-circle'
+  | 'exclamation-mark'
+  | 'exclamation-triangle'
+  | 'expand-all'
+  | 'expand-details'
+  | 'expression'
+  | 'eye'
+  | 'eye-hidden'
+  | 'face-frown'
+  | 'face-smile'
+  | 'fast-forward'
+  | 'fast-forward-10'
+  | 'film'
+  | 'filter'
+  | 'flag'
+  | 'fold'
+  | 'folder'
+  | 'fork'
+  | 'globe'
+  | 'globe-alt'
+  | 'group'
+  | 'group-boxes'
+  | 'hand'
+  | 'hash'
+  | 'heading'
+  | 'home'
+  | 'horizontal-rule'
+  | 'hourglass'
+  | 'hourglass-end'
+  | 'hourglass-mid'
+  | 'hourglass-start'
+  | 'identification'
+  | 'image'
+  | 'inbox'
+  | 'infinity'
+  | 'information-circle'
+  | 'inspect'
+  | 'italic'
+  | 'key'
+  | 'keyboard'
+  | 'laptop-phone'
+  | 'layers'
+  | 'lifebuoy'
+  | 'lightbulb'
+  | 'lightning-bolt'
+  | 'link'
+  | 'list-ordered'
+  | 'list-unordered'
+  | 'lock'
+  | 'login'
+  | 'looping'
+  | 'looping-off'
+  | 'map'
+  | 'map-drives'
+  | 'map-pin'
+  | 'markdown'
+  | 'maximize'
+  | 'megaphone'
+  | 'merge'
+  | 'meter'
+  | 'minimize'
+  | 'minus'
+  | 'minus-circle'
+  | 'moon'
+  | 'multiselect'
+  | 'music-note'
+  | 'newspaper'
+  | 'not-allowed'
+  | 'numbers'
+  | 'office-building'
+  | 'outline'
+  | 'paper-airplane'
+  | 'paper-clip'
+  | 'pause'
+  | 'pencil-square'
+  | 'person-2'
+  | 'person-3'
+  | 'person-circle'
+  | 'phone'
+  | 'picture-in-picture'
+  | 'pie-chart'
+  | 'pin'
+  | 'pizza-slice'
+  | 'play'
+  | 'plug'
+  | 'plus-circle'
+  | 'plus-minus'
+  | 'pointer'
+  | 'priority-high'
+  | 'priority-low'
+  | 'priority-medium'
+  | 'projector'
+  | 'pull-close'
+  | 'pull-draft'
+  | 'pull-open'
+  | 'pulse'
+  | 'puzzle-piece'
+  | 'question-mark-circle'
+  | 'rectangle-group'
+  | 'rectangle-stack-horizontal'
+  | 'rectangle-stack-vertical'
+  | 'redo'
+  | 'reply'
+  | 'rewind'
+  | 'rewind-10'
+  | 'rocketship'
+  | 'running'
+  | 'scale'
+  | 'scissors'
+  | 'sensor'
+  | 'server'
+  | 'server-stack'
+  | 'shapes'
+  | 'share'
+  | 'signal'
+  | 'signal-slash'
+  | 'signpost'
+  | 'sort-ascending'
+  | 'sort-descending'
+  | 'soundwave'
+  | 'split-horizontal'
+  | 'split-none'
+  | 'star'
+  | 'star-half'
+  | 'star-stroke'
+  | 'start'
+  | 'status-offline'
+  | 'status-online'
+  | 'stop'
+  | 'stop-sign'
+  | 'stopwatch'
+  | 'strikethrough'
+  | 'sun'
+  | 'swatch'
+  | 'switch'
+  | 'switch-apps'
+  | 'table'
+  | 'tag'
+  | 'task'
+  | 'telescope'
+  | 'template'
+  | 'terminal'
+  | 'thumb'
+  | 'traffic-cone'
+  | 'transparent-box'
+  | 'trend-down'
+  | 'trend-up'
+  | 'trophy'
+  | 'truck'
+  | 'typography'
+  | 'undo'
+  | 'unlock'
+  | 'upload'
+  | 'video-camera'
+  | 'view-as-grid'
+  | 'volume'
+  | 'volume-muted'
+  | 'wifi'
+  | 'wrench'
+  | 'x-circle'
+  | 'zoom-in'
+  | 'zoom-out';
 
-export const ICON_NAMES = Object.keys(ICON_IMPORTS) as IconName[];
+export type IconNameSolid =
+  | 'bell'
+  | 'book'
+  | 'bookmark'
+  | 'chat-bubble'
+  | 'check-badge'
+  | 'checkmark-circle'
+  | 'circle-angled-line'
+  | 'delete'
+  | 'dot'
+  | 'exclamation-circle'
+  | 'exclamation-triangle'
+  | 'face-smile'
+  | 'filter'
+  | 'flag'
+  | 'gear'
+  | 'home'
+  | 'information-circle'
+  | 'lightning-bolt'
+  | 'lock'
+  | 'minus-circle'
+  | 'person'
+  | 'pin'
+  | 'plus-circle'
+  | 'pointer'
+  | 'question-mark-circle'
+  | 'sparkles'
+  | 'thumb'
+  | 'unlock'
+  | 'volume'
+  | 'wrench'
+  | 'x-circle';
+
+export const ICON_NAMES_SOLID = Object.keys(ICON_IMPORTS)
+  .filter((name): name is IconNameSolid => name.endsWith('-solid'))
+  .map(name => name.slice(0, -'-solid'.length)) as readonly IconNameSolid[];
+
+export const ICON_NAMES = Object.keys(ICON_IMPORTS).filter((name): name is IconName => !name.endsWith('-solid'));

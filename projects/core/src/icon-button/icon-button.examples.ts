@@ -60,7 +60,7 @@ export const FlatInteractions = {
  */
 export const Pressed = {
   render: () => html`
-    <nve-icon-button pressed icon-name="filter-stroke"></nve-icon-button>
+    <nve-icon-button pressed icon-name="filter"></nve-icon-button>
     <nve-icon-button icon-name="filter"></nve-icon-button>
   `
 }

@@ -32,10 +32,10 @@ const frequentIcons = [
 ];
 
 let icons = readIconFiles();
+validateIconSVGs(icons);
 icons = await repairViewBoxScales(icons);
 icons = Object.entries(icons)
   .map(([name, svg]) => [name, repairSVGColors(svg)])
-  .map(([name, svg]) => [name, repairSVGClasses(svg)])
   .map(([name, svg]) => [name, optimizeSVG(svg)])
   .reduce((prev, [name, svg]) => ({ ...prev, [name]: svg }), {});
 
@@ -53,6 +53,70 @@ function readIconFiles() {
       fs.readFileSync(path.join(inputPath, file), { encoding: 'utf-8' })
     ])
     .reduce((prev, [name, svg]) => ({ ...prev, [name]: svg }), {});
+}
+
+function validateIconSVGs(icons) {
+  const ariaHiddenIcons = [];
+  const invalidColorIcons = [];
+  const invalidLucideClassIcons = [];
+  const missingLucideClassIcons = [];
+  const lucideFilledIcons = [];
+
+  for (const [name, svg] of Object.entries(icons)) {
+    const file = `${name}.svg`;
+    const svgTag = svg.match(/<svg\b[^>]*>/)?.[0] ?? '';
+    const svgClasses = [...svgTag.matchAll(/\sclass\s*=\s*(["'])([^"']*)\1/g)].flatMap(([, , value]) =>
+      value.trim().split(/\s+/)
+    );
+    const classes = [...svg.matchAll(/\sclass\s*=\s*(["'])([^"']*)\1/g)].flatMap(([, , value]) =>
+      value.trim().split(/\s+/)
+    );
+    const lucideIconClasses = classes.filter(
+      className => /^lucide-.+/.test(className) && className !== 'lucide-filled'
+    );
+    const svgWithoutMasks = svg.replaceAll(/<mask\b[\s\S]*?<\/mask>/g, '');
+    const colors = [...svgWithoutMasks.matchAll(/\s(?:fill|stroke)\s*=\s*(["'])([^"']*)\1/g)].map(([, , value]) =>
+      value.trim()
+    );
+
+    if (/\baria-hidden\s*=/.test(svg)) ariaHiddenIcons.push(file);
+    if (
+      !colors.some(color => color.includes('currentColor')) ||
+      colors.some(color => color !== 'none' && !color.includes('currentColor'))
+    )
+      invalidColorIcons.push(file);
+    if (lucideIconClasses.length === 0) missingLucideClassIcons.push(file);
+    else if (
+      svgClasses.length !== 1 ||
+      lucideIconClasses.length !== 1 ||
+      svgClasses[0] !== lucideIconClasses[0] ||
+      lucideIconClasses[0].endsWith('-icon')
+    )
+      invalidLucideClassIcons.push(file);
+    if (classes.includes('lucide-filled')) lucideFilledIcons.push(file);
+  }
+
+  const errors = [
+    ariaHiddenIcons.length > 0
+      ? `Icon SVG source must not contain aria-hidden. Remove it from:\n${ariaHiddenIcons.map(file => `- ${file}`).join('\n')}`
+      : '',
+    invalidColorIcons.length > 0
+      ? `Icon SVG source colors must use currentColor. Update:\n${invalidColorIcons.map(file => `- ${file}`).join('\n')}`
+      : '',
+    missingLucideClassIcons.length > 0
+      ? `Icon SVG source must contain a lucide-* class. Add one to:\n${missingLucideClassIcons.map(file => `- ${file}`).join('\n')}`
+      : '',
+    invalidLucideClassIcons.length > 0
+      ? `Icon SVG source must contain only one lucide-* class on the svg element. Update:\n${invalidLucideClassIcons.map(file => `- ${file}`).join('\n')}`
+      : '',
+    lucideFilledIcons.length > 0
+      ? `Icon SVG source must not contain lucide-filled but the svg lucide-* class name. Remove it from:\n${lucideFilledIcons.map(file => `- ${file}`).join('\n')}`
+      : ''
+  ].filter(Boolean);
+
+  if (errors.length > 0) {
+    throw new Error(errors.join('\n\n'));
+  }
 }
 
 function writeIconFiles(icons) {
@@ -87,9 +151,23 @@ export const ICON_IMPORTS = {\n${sortIconKeys(Object.keys(icons))
         .map(i => `  '${i}': iconImport(() => import('./icons/${i}.svg?raw')),`)
         .join('\n')}\n};
 
-export type IconName = keyof typeof ICON_IMPORTS;
+export type IconName =
+${sortIconKeys(Object.keys(icons))
+  .filter(i => !i.endsWith('-outline') && !i.endsWith('-filled') && !i.endsWith('-solid'))
+  .map(i => `  | '${i}'`)
+  .join('\n')};
 
-export const ICON_NAMES = Object.keys(ICON_IMPORTS) as IconName[];
+export type IconNameSolid =
+${sortIconKeys(Object.keys(icons))
+  .filter(i => i.endsWith('-solid'))
+  .map(i => `  | '${i.slice(0, -'-solid'.length)}'`)
+  .join('\n')};
+
+export const ICON_NAMES_SOLID = Object.keys(ICON_IMPORTS)
+  .filter((name): name is IconNameSolid => name.endsWith('-solid'))
+  .map(name => name.slice(0, -'-solid'.length)) as readonly IconNameSolid[];
+
+export const ICON_NAMES = Object.keys(ICON_IMPORTS).filter((name): name is IconName => !name.endsWith('-solid'));
 `,
       { encoding: 'utf-8' },
       r
@@ -130,21 +208,12 @@ function sortIconKeys(keys) {
 }
 
 function repairSVGColors(svg) {
-  return svg
-    .replaceAll('fill="black"', 'fill="currentColor"')
-    .replaceAll('stroke="black"', 'fill="currentColor"')
-    .replaceAll(/fill="#([^"]+)"/g, 'fill="currentColor"')
-    .replaceAll(/stroke="#([^"]+)"/g, 'fill="currentColor"');
-}
-
-function repairSVGClasses(svg) {
-  return svg.replaceAll(/class=(["'])([^"']*\blucide\b[^"']*)\1/g, (attribute, quote, value) => {
-    const classes = value.trim().split(/\s+/);
-    const iconClass =
-      classes.find(className => className.startsWith('lucide-') && !className.endsWith('-icon')) ??
-      classes.find(className => className.startsWith('lucide-') && className.endsWith('-icon'));
-    return iconClass ? `class=${quote}${iconClass.replace(/-icon$/, '')}${quote}` : attribute;
+  const masks = [];
+  const unmaskedSVG = svg.replaceAll(/<mask\b[\s\S]*?<\/mask>/g, mask => {
+    masks.push(mask);
+    return `__NVE_ICON_MASK_${masks.length - 1}__`;
   });
+  return unmaskedSVG.replaceAll(/__NVE_ICON_MASK_(\d+)__/g, (_, index) => masks[Number(index)]);
 }
 
 function optimizeSVG(svg) {
@@ -307,7 +376,8 @@ async function repairViewBoxScales(svgs) {
         const svg = div.querySelector('svg');
         const geometryBounds = getGeometryBounds(svg);
         const sourceViewBox = getSourceViewBox(svg, geometryBounds);
-        const paintedBounds = hasVisibleStroke(svg) ? await getPaintedBounds(svg, sourceViewBox) : null;
+        const requiresPaintedBounds = hasVisibleStroke(svg) || svg.querySelector('mask') !== null;
+        const paintedBounds = requiresPaintedBounds ? await getPaintedBounds(svg, sourceViewBox) : null;
         const targetViewBox = fitBoundsToAspectRatio(paintedBounds ?? geometryBounds, sourceViewBox);
         // Keep intrinsic SVG bounds tight without changing the source canvas ratio. Intentional optical spacing
         // belongs in the icon's presentation styles.

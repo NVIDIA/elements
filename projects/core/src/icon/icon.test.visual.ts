@@ -3,17 +3,17 @@
 
 import { expect, test, describe } from 'vitest';
 import { visualRunner } from '@internals/vite';
-import { ICON_NAMES } from '@nvidia-elements/core/icon';
+import { ICON_NAMES, ICON_NAMES_SOLID } from '@nvidia-elements/core/icon';
 
 describe('icon visual', () => {
   test('icon should match visual baseline', async () => {
     const report = await visualRunner.render('icon', template(), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
+    expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 
   test('icon should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('icon.dark', template('dark'), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
+    expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 
   // icon.css intentionally scales down these icons
@@ -37,15 +37,18 @@ describe('icon visual', () => {
         }
       </style>
 
-      <div nve-layout="row gap:sm align:wrap" style="max-width: 1024px;">
+      <div nve-layout="row gap:sm align:wrap" style="max-width: 1000px;">
         ${ICON_NAMES.filter(i => !ICONS_WITH_OPTICAL_SPACING.includes(i))
           .map(i => `<nve-icon name="${i}"></nve-icon>`)
+          .join('')}
+        ${ICON_NAMES_SOLID.filter(i => !ICONS_WITH_OPTICAL_SPACING.includes(i))
+          .map(i => `<nve-icon name="${i}" appearance="solid"></nve-icon>`)
           .join('')}
       </div>
     `,
       { network: true }
     );
-    expect(report.maxDiffPercentage).toBeLessThan(1);
+    expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 
   test('subset of curated icons should have explicit optical spacing between rendered svg and its intrinsic dimensions', async () => {
@@ -72,7 +75,34 @@ describe('icon visual', () => {
     `,
       { network: true }
     );
-    expect(report.maxDiffPercentage).toBeLessThan(1);
+    expect(report.maxDiffPercentage).toBeLessThan(0.1);
+  });
+
+  test('solid icon should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'icon.solid',
+      /* html */ `
+      <script type="module">
+        import '@nvidia-elements/core/icon/define.js';
+        document.documentElement.setAttribute('nve-theme', 'light');
+      </script>
+  
+      <style>
+        nve-icon {
+          --width: var(--nve-ref-size-1000);
+          --height: var(--nve-ref-size-1000);
+          --color: blue;
+          outline: 1px solid blue;
+        }
+      </style>
+
+      <div nve-layout="row gap:sm align:wrap" style="max-width: 1024px;">
+        ${ICON_NAMES_SOLID.map(i => `<nve-icon name="${i}" appearance="solid"></nve-icon>`).join('')}
+      </div>
+    `,
+      { network: true }
+    );
+    expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 });
 
@@ -122,6 +152,10 @@ function template(theme: '' | 'dark' = '') {
 
   <div nve-layout="row gap:xs align:wrap" style="max-width: 600px;">
     ${ICON_NAMES.map(i => `<nve-icon name="${i}"></nve-icon>`).join('')}
+  </div>
+
+  <div nve-layout="row gap:xs align:wrap" style="max-width: 600px;">
+    ${ICON_NAMES_SOLID.map(i => `<nve-icon name="${i}" appearance="solid"></nve-icon>`).join('')}
   </div>
   `;
 }

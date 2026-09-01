@@ -447,7 +447,7 @@ export const SlotSubfooter = {
   </nve-toolbar>
 
   <nve-toolbar slot="subfooter">
-    <nve-icon-button icon-name="information-circle-stroke"></nve-icon-button>
+    <nve-icon-button icon-name="information-circle"></nve-icon-button>
     <span nve-text="body sm muted">last updated 12 mins ago</span>
   </nve-toolbar>
 </nve-page>
@@ -904,7 +904,7 @@ export const KitchenSink = {
   </nve-toolbar>
 
   <nve-toolbar slot="subfooter">
-    <nve-icon-button icon-name="information-circle-stroke"></nve-icon-button>
+    <nve-icon-button icon-name="information-circle"></nve-icon-button>
     <span nve-text="body sm muted">last updated 12 mins ago</span>
   </nve-toolbar>
 
@@ -1255,7 +1255,7 @@ export const LayoutEditor = {
   </nve-page-panel>
 
   <nve-toolbar slot="footer">
-    <nve-icon-button icon-name="information-circle-stroke"></nve-icon-button>
+    <nve-icon-button icon-name="information-circle"></nve-icon-button>
     <span nve-text="body sm muted">last updated 12 mins ago</span>
   </nve-toolbar>
 </nve-page>

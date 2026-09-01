@@ -9,8 +9,8 @@ import { type ValidityStateError } from '../utils/types.js';
 import styles from './control-message.css?inline';
 
 const statusIcons = {
-  undefined: 'information-circle-stroke',
-  disabled: 'information-circle-stroke',
+  undefined: 'information-circle',
+  disabled: 'information-circle',
   warning: 'exclamation-triangle',
   success: 'checkmark-circle',
   error: 'exclamation-circle'

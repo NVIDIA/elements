@@ -148,7 +148,7 @@ export const Hint = {
   render: () => html`
 <div nve-layout="row gap:xs align:vertical-center">
   <h2 nve-text="heading sm">Preview</h2>
-  <nve-icon-button container="flat" icon-name="information-circle-stroke" interestfor="hint"></nve-icon-button>
+  <nve-icon-button container="flat" icon-name="information-circle" interestfor="hint"></nve-icon-button>
   <nve-tooltip id="hint" position="right">Preview in progress CI tasks for the active host</nve-tooltip>
 </div>
   `

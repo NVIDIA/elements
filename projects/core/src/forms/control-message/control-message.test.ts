@@ -34,7 +34,7 @@ describe(ControlMessage.metadata.tag, () => {
 
   it('should assign correct icon based on control validation state', async () => {
     const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
-    expect(icon.name).toBe('information-circle-stroke');
+    expect(icon.name).toBe('information-circle');
 
     element.status = 'success';
     await elementIsStable(element);
@@ -46,7 +46,7 @@ describe(ControlMessage.metadata.tag, () => {
 
     element.status = 'disabled';
     await elementIsStable(element);
-    expect(icon.name).toBe('information-circle-stroke');
+    expect(icon.name).toBe('information-circle');
 
     element.status = 'warning';
     await elementIsStable(element);
@@ -69,7 +69,7 @@ describe(ControlMessage.metadata.tag, () => {
 
   it('should support a slot for the icon', async () => {
     const icon = document.createElement(Icon.metadata.tag) as Icon;
-    icon.name = 'information-circle-stroke';
+    icon.name = 'information-circle';
     icon.slot = 'icon';
     element.appendChild(icon);
     await elementIsStable(element);
