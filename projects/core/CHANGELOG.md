@@ -1,3 +1,10 @@
+## 2.7.0 (2026-09-01)
+
+* feat(core): add internal gesture and key navigation controllers ([3b46234](https://github.com/NVIDIA/elements/commit/3b46234))
+* chore(core): add basic bench tests ([809ac39](https://github.com/NVIDIA/elements/commit/809ac39))
+* chore(internal): add support for bench testing ([50f9dda](https://github.com/NVIDIA/elements/commit/50f9dda))
+* chore(internals): enable chromium gpu access for test runners ([186198a](https://github.com/NVIDIA/elements/commit/186198a))
+
 ## <small>2.6.1 (2026-09-01)</small>
 
 * fix(cli): update marked to 18.0.11 ([cb9a5e3](https://github.com/NVIDIA/elements/commit/cb9a5e3))
