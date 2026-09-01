@@ -40,5 +40,6 @@ projects/starters/react/src/App.tsx
 projects/starters/solidjs/src/App.tsx
 projects/starters/typescript/src/index.html
 projects/starters/vue/src/**/*
+projects/starters/nextjs/next-env.d.ts
 projects/starters/nuxt/.nuxt/**/*
 projects/starters/nuxt/app/**/*
