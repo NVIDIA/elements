@@ -70,7 +70,7 @@ catalogs:
     minisearch: 7.2.0
 
 catalog:
-  esbuild: 0.28.1
+  esbuild: 0.28.2
   '@11ty/eleventy': 3.1.6
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 8.0.0
