@@ -85,6 +85,18 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
   });
 
+  it('should activate an item when a non-focusable descendant is clicked', async () => {
+    const item = element.keynavListConfig.items[2]!;
+    const nonFocusableLabel = document.createElement('span');
+    item.append(nonFocusableLabel);
+    nonFocusableLabel.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    await elementIsStable(element);
+
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(item.tabIndex).toBe(0);
+    expect(item.matches(':focus')).toBe(true);
+  });
+
   it('should not duplicate listeners after reconnect', async () => {
     const listener = vi.fn();
     element.addEventListener('nve-key-change', listener);
@@ -521,5 +533,16 @@ describe('nested interactive keynav-list.controller', () => {
     expect(element.keynavListConfig.items[1].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[3].tabIndex).toBe(-1);
+  });
+
+  it('should not activate a node when a nested interactive element is clicked', async () => {
+    const button = element.keynavListConfig.items[1]!.querySelector('button')!;
+    button.focus();
+    button.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    await elementIsStable(element);
+
+    expect(button.matches(':focus')).toBe(true);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
   });
 });

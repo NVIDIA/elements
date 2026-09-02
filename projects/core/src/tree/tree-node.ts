@@ -167,7 +167,7 @@ export class TreeNode extends LitElement {
               : nothing
           }
           <div tabindex="0" part="_node-header">
-            <slot tabindex="0" class="node-title" @click=${this.#nodeHeaderClick}></slot>
+            <slot class="node-title" @click=${this.#nodeHeaderClick}></slot>
             <slot name="content" part="_content"></slot>
           </div>
         </div>
@@ -180,12 +180,14 @@ export class TreeNode extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'treeitem';
+    this.addEventListener('keydown', this.#onKeydown);
     this.addEventListener('keyup', this.#onKeyup);
     this.#nodeUpdate();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.removeEventListener('keydown', this.#onKeydown);
     this.removeEventListener('keyup', this.#onKeyup);
   }
 
@@ -208,6 +210,15 @@ export class TreeNode extends LitElement {
     this.#isExpandable ? this._internals.states.add('is-expandable') : this._internals.states.delete('is-expandable');
   }
 
+  #onKeydown = (e: KeyboardEvent) => {
+    const isSelectionKey = this.selectable && e.code === 'Space';
+    const isExpansionKey = this.#isExpandable && (e.code === 'ArrowLeft' || e.code === 'ArrowRight');
+
+    if (e.target === this && (isSelectionKey || isExpansionKey)) {
+      e.preventDefault();
+    }
+  };
+
   #onKeyup = (e: KeyboardEvent) => {
     if (this.#isExpandable && e.code === 'ArrowLeft' && e.target === this) {
       this.close();
@@ -218,7 +229,6 @@ export class TreeNode extends LitElement {
     }
 
     if (e.code === 'Space' && e.target === this && this.selectable) {
-      e.preventDefault();
       this.#toggleSelection();
     }
   };

@@ -280,6 +280,29 @@ describe(`${Tree.metadata.tag} - collapsed nodes`, () => {
     expect(nodes[11].matches(':focus')).toBe(false);
   });
 
+  it('should move focus with ArrowDown after a node label is clicked', async () => {
+    const currentNode = element.nodes[1]!;
+    const currentHeader = currentNode.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    const currentLabel = currentNode.shadowRoot!.querySelector<HTMLElement>('.node-title')!;
+    const nextHeader = element.nodes[2]!.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    let eventDetail: Record<string, unknown> | undefined;
+
+    element.addEventListener('nve-key-change', ((e: CustomEvent) => {
+      eventDetail = e.detail;
+    }) as EventListener);
+
+    currentLabel.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    expect(currentHeader.matches(':focus')).toBe(true);
+    expect(element.nodes[0]!.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!.tabIndex).toBe(-1);
+    expect(currentHeader.tabIndex).toBe(0);
+
+    currentHeader.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true }));
+    await elementIsStable(element);
+
+    expect(nextHeader.matches(':focus')).toBe(true);
+    expect(eventDetail).toMatchObject({ activeItem: nextHeader, code: 'ArrowDown' });
+  });
+
   it('should keynav from a single level node to a expanded multi level node', async () => {
     await elementIsStable(element);
     nodes[1].focus();
