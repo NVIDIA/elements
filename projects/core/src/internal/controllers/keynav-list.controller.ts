@@ -3,7 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { focusElement, initializeKeyListItems, setActiveKeyListItem } from '../utils/focus.js';
+import { focusElement, initializeKeyListItems, isFocusable, setActiveKeyListItem } from '../utils/focus.js';
 import { KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
 
 export interface KeynavListConfig {
@@ -74,7 +74,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   }
 
   #clickItem(e: PointerEvent) {
-    const item = this.#getActiveItem(e, this.#config.items);
+    const item = this.#getPointerActiveItem(e, this.#config.items);
     if (item) {
       this.#setActiveItem(e, item);
     }
@@ -83,7 +83,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   #focusItem(e: KeyboardEvent) {
     if (validKeyNavigationCode(e) && !this.#keynavDisabled) {
       const { loop, layout, dir, items } = this.#config;
-      const activeItem = this.#getActiveItem(e, items);
+      const activeItem = this.#getKeyboardActiveItem(e, items);
       if (activeItem) {
         const { next, previous } = getNextKeyListItem(activeItem, Array.from(items), {
           loop,
@@ -99,9 +99,22 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     }
   }
 
-  #getActiveItem(e: Event, items: HTMLElement[]) {
-    const focusedElement = e.composedPath()[0] as HTMLElement;
-    return items.find(i => i === focusedElement) ? focusedElement : null;
+  #getKeyboardActiveItem(e: KeyboardEvent, items: HTMLElement[]) {
+    const target = e.composedPath()[0];
+    return target instanceof HTMLElement && items.includes(target) ? target : null;
+  }
+
+  #getPointerActiveItem(e: PointerEvent, items: HTMLElement[]) {
+    const path = e.composedPath();
+    const itemIndex = path.findIndex(item => item instanceof HTMLElement && items.includes(item));
+    const item = path[itemIndex];
+
+    if (!(item instanceof HTMLElement)) return null;
+
+    const hasFocusableDescendant = path
+      .slice(0, itemIndex)
+      .some(descendant => descendant instanceof Element && isFocusable(descendant));
+    return hasFocusableDescendant ? null : item;
   }
 
   #setActiveItem(e: KeyboardEvent | PointerEvent, activeItem: HTMLElement, previousItem?: HTMLElement) {

@@ -312,6 +312,76 @@ describe(TreeNode.metadata.tag, () => {
     expect(element.selected).toBe(false);
   });
 
+  it('should focus the node header when its label is clicked', () => {
+    const nodeHeader = element.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    const nodeTitle = element.shadowRoot!.querySelector<HTMLElement>('.node-title')!;
+
+    expect(nodeTitle.tabIndex).toBe(-1);
+
+    nodeTitle.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+
+    expect(nodeHeader.matches(':focus')).toBe(true);
+  });
+
+  it('should preserve focus on an interactive node label descendant', async () => {
+    const anchor = document.createElement('a');
+    anchor.href = '#';
+    element.appendChild(anchor);
+    await elementIsStable(element);
+
+    const nodeHeader = element.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    anchor.focus();
+    anchor.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+
+    expect(anchor.matches(':focus')).toBe(true);
+    expect(nodeHeader.matches(':focus')).toBe(false);
+  });
+
+  it('should prevent Space from scrolling while toggling tree selection', async () => {
+    element.selectable = 'single';
+    element.behaviorSelect = true;
+    await elementIsStable(element);
+
+    const nodeHeader = element.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    const keydown = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, code: 'Space', composed: true });
+    const keydownHandler = vi.fn();
+    tree.addEventListener('keydown', keydownHandler);
+
+    nodeHeader.dispatchEvent(keydown);
+    nodeHeader.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, code: 'Space', composed: true }));
+    await elementIsStable(element);
+
+    expect(keydown.defaultPrevented).toBe(true);
+    expect(keydownHandler).toHaveBeenCalledOnce();
+    expect(element.selected).toBe(true);
+  });
+
+  it('should prevent expansion arrow keys from scrolling with application-managed expansion', async () => {
+    element.expandable = true;
+    await elementIsStable(element);
+
+    const nodeHeader = element.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    const keydownHandler = vi.fn();
+    const openHandler = vi.fn();
+    const closeHandler = vi.fn();
+    tree.addEventListener('keydown', keydownHandler);
+    element.addEventListener('open', openHandler);
+    element.addEventListener('close', closeHandler);
+
+    for (const code of ['ArrowLeft', 'ArrowRight']) {
+      const keydown = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, code, composed: true });
+      nodeHeader.dispatchEvent(keydown);
+      nodeHeader.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, code, composed: true }));
+
+      expect(keydown.defaultPrevented).toBe(true);
+    }
+
+    expect(keydownHandler).toHaveBeenCalledTimes(2);
+    expect(closeHandler).toHaveBeenCalledOnce();
+    expect(openHandler).toHaveBeenCalledOnce();
+    expect(element.expanded).toBe(false);
+  });
+
   it('should expand node if node header is clicked with behavior-expand and no interactive elements', async () => {
     expect(nestedNodeElement.expanded).toBe(false);
 
