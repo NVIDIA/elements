@@ -54,6 +54,25 @@ describe('noDeprecatedCssImports', () => {
     });
   });
 
+  it('should ignore non-import at-rules', () => {
+    tester.run('should ignore non-import at-rules', rule, {
+      valid: [
+        '@media screen { body { color: red; } }',
+        '@charset "utf-8";',
+        '@layer theme;',
+        '@keyframes fade { from { opacity: 0; } to { opacity: 1; } }'
+      ],
+      invalid: []
+    });
+  });
+
+  it('should ignore import at-rules that have no prelude', () => {
+    tester.run('should ignore import at-rules that have no prelude', rule, {
+      valid: ['@import;', '@import ;'],
+      invalid: []
+    });
+  });
+
   it('should cover CSS entrypoints documented in the migration guide', () => {
     expect(deprecatedImports['@maglev/elements/index.css']).toContain(
       `@import '@nvidia-elements/styles/view-transitions.css';`
