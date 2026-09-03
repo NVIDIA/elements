@@ -16,7 +16,7 @@ describe('noUnexpectedSlotValue', () => {
     expect(hasSlot('nve-badge', '')).toBe(true);
     expect(hasSlot('nve-tabs-group', 'overview')).toBe(true);
     expect(hasSlot('nve-tabs-group', 'details')).toBe(true);
-    expect(hasSlot('nve-select', 'prefix')).toBe(true);
+    expect(hasSlot('nve-select', 'option-1')).toBe(true);
     expect(hasSlot('nve-select', '')).toBe(true);
   });
 });
@@ -26,5 +26,9 @@ describe('getRecommendedSlotName', () => {
     expect(getRecommendedSlotName('content', 'nve-card')).toBe('');
     expect(getRecommendedSlotName('default', 'nve-card')).toBe('');
     expect(getRecommendedSlotName('icon', 'nve-badge')).toBe('prefix-icon');
+  });
+
+  it('should recommend the unnamed slot when it is not listed first', () => {
+    expect(getRecommendedSlotName('default', 'nve-alert')).toBe('');
   });
 });
