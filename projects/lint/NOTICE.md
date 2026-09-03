@@ -5,19 +5,19 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- @eslint/css v1.2.0 [Apache-2.0]
+- @eslint/css v2.0.0 [Apache-2.0]
   Copyright: Nicholas C. Zakas
 
 - @eslint/js v10.0.1 [MIT]
   Copyright: Unknown
 
-- @eslint/json v1.2.0 [Apache-2.0]
+- @eslint/json v2.1.0 [Apache-2.0]
   Copyright: Nicholas C. Zakas
 
-- @html-eslint/eslint-plugin v0.61.0 [MIT]
+- @html-eslint/eslint-plugin v0.65.0 [MIT]
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @html-eslint/parser v0.61.0 [MIT]
+- @html-eslint/parser v0.65.0 [MIT]
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
 - minisearch v7.2.0 [MIT]
@@ -29,8 +29,8 @@ Apache-2.0
 
 The following bundled components are provided under the Apache-2.0 license:
 
-@eslint/css v1.2.0 - Copyright Nicholas C. Zakas
-@eslint/json v1.2.0 - Copyright Nicholas C. Zakas
+@eslint/css v2.0.0 - Copyright Nicholas C. Zakas
+@eslint/json v2.1.0 - Copyright Nicholas C. Zakas
 
                                  Apache License
                            Version 2.0, January 2004
@@ -216,8 +216,8 @@ MIT
 The following bundled components are provided under the MIT license:
 
 @eslint/js v10.0.1 - Copyright Unknown
-@html-eslint/eslint-plugin v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@html-eslint/parser v0.61.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/eslint-plugin v0.65.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/parser v0.65.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 minisearch v7.2.0 - Copyright Luca Ongaro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

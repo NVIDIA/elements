@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import type { BenchOptions } from 'vitest';
-import { bench, describe } from 'vitest';
+import type { BenchFnOptions, BenchRunOptions } from 'vitest';
+import { describe, test } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import type { TreeNode } from '@nvidia-elements/core/tree';
 import { Tree } from '@nvidia-elements/core/tree';
@@ -24,15 +24,21 @@ function createRootTemplate(rootIndex: number) {
 }
 
 const rootTemplates = Array.from({ length: rootCount }, (_, rootIndex) => createRootTemplate(rootIndex));
+const runOptions = {
+  iterations: 10,
+  throws: true,
+  time: 500,
+  warmupIterations: 5,
+  warmupTime: 100
+} satisfies BenchRunOptions;
 
 describe(Tree.metadata.tag, () => {
   let element: Tree;
   let fixture: HTMLElement;
   let selectedNode: TreeNode;
 
-  const options: BenchOptions = {
-    throws: true,
-    async setup() {
+  const options: BenchFnOptions = {
+    async beforeAll() {
       fixture = await createFixture(html`
         <nve-tree behavior-expand behavior-select selectable="multi">
           ${rootTemplates}
@@ -43,33 +49,29 @@ describe(Tree.metadata.tag, () => {
       await Promise.all(element.nodes.map(node => elementIsStable(node)));
       selectedNode = element.nodes[element.nodes.length - 1]!;
     },
-    teardown() {
+    afterAll() {
       removeFixture(fixture);
     }
   };
 
   describe('behavior synchronization', () => {
-    bench(
-      'synchronizes behavior across 1,000 nodes',
-      async () => {
+    test('synchronizes behavior across 1,000 nodes', async ({ bench }) => {
+      await bench('synchronizes behavior across 1,000 nodes', options, async () => {
         element.behaviorExpand = !element.behaviorExpand;
         await elementIsStable(element);
         await Promise.all(element.nodes.map(node => elementIsStable(node)));
-      },
-      options
-    );
+      }).run(runOptions);
+    });
   });
 
   describe('selection synchronization', () => {
-    bench(
-      'synchronizes selection across 1,000 nodes',
-      async () => {
+    test('synchronizes selection across 1,000 nodes', async ({ bench }) => {
+      await bench('synchronizes selection across 1,000 nodes', options, async () => {
         selectedNode.selected = !selectedNode.selected;
         element.requestUpdate();
         await elementIsStable(element);
         await Promise.all(element.nodes.map(node => elementIsStable(node)));
-      },
-      options
-    );
+      }).run(runOptions);
+    });
   });
 });

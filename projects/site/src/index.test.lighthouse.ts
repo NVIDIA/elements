@@ -51,7 +51,11 @@ async function getLighthouseScores(path: string) {
   customConfig.settings!.screenEmulation!.width = viewport.width;
   customConfig.settings!.screenEmulation!.height = viewport.height;
   customConfig.settings!.skipAudits = ['aria-prohibited-attr', 'aria-required-parent', 'aria-allowed-attr']; // axe does not support ElementInternals AOM yet https://github.com/dequelabs/axe-core/issues/4259
-  const result = await lighthouse(path, { output: ['json', 'html'], logLevel: 'error', port: 9222 }, customConfig) as RunnerResult;
+  const result = (await lighthouse(
+    path,
+    { output: ['json', 'html'], logLevel: 'error', port: 9222 },
+    customConfig
+  )) as RunnerResult;
 
   if (WRITE_REPORT && !existsSync(`.lighthouse`)) {
     mkdirSync(`.lighthouse`);
@@ -63,8 +67,10 @@ async function getLighthouseScores(path: string) {
     accessibility: (result.lhr.categories.accessibility.score ?? 0) * 100,
     seo: (result.lhr.categories.seo.score ?? 0) * 100,
     bestPractices: (result.lhr.categories['best-practices']?.score ?? 0) * 100,
-    payload: getPayload((result.lhr.audits['network-requests'] as unknown as { details: { items: LighthouseRequest[] } }).details.items)
-  }
+    payload: getPayload(
+      (result.lhr.audits['network-requests'] as unknown as { details: { items: LighthouseRequest[] } }).details.items
+    )
+  };
 }
 
 /**
@@ -72,7 +78,7 @@ async function getLighthouseScores(path: string) {
  * We run against key common layout page types to help catch issues that would most
  * likely be present on other pages.
  */
-describe.sequential('lighthouse', () => {
+describe('lighthouse', { concurrent: false }, () => {
   let server: PreviewServer;
   let page: Page;
   let base: string;

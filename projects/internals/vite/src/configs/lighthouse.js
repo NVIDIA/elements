@@ -4,6 +4,9 @@ import { hideExpectedTestConsoleMessage } from './console.js';
 export const libraryLighthouseTestConfig = {
   logLevel: 'info',
   cacheDir: 'node_modules/.vite-lighthouse',
+  optimizeDeps: {
+    include: ['vitest > expect-type']
+  },
   test: {
     retry: 2,
     isolate: false,

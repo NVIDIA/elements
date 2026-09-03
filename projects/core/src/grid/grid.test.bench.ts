@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import type { BenchOptions } from 'vitest';
-import { bench, describe } from 'vitest';
+import type { BenchFnOptions, BenchRunOptions } from 'vitest';
+import { describe, test } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Grid } from '@nvidia-elements/core/grid';
 import { getFlattenedDOMTree, getNextKeyGridItem, KeynavCode } from '@nvidia-elements/core/internal';
@@ -27,6 +27,13 @@ function createRowTemplate(rowIndex: number) {
 
 const columnTemplates = Array.from({ length: columnCount }, (_, columnIndex) => createColumnTemplate(columnIndex));
 const rowTemplates = Array.from({ length: rowCount }, (_, rowIndex) => createRowTemplate(rowIndex));
+const runOptions = {
+  iterations: 10,
+  throws: true,
+  time: 500,
+  warmupIterations: 5,
+  warmupTime: 100
+} satisfies BenchRunOptions;
 
 describe(Grid.metadata.tag, () => {
   let cells: HTMLElement[];
@@ -34,9 +41,8 @@ describe(Grid.metadata.tag, () => {
   let fixture: HTMLElement;
   let rows: HTMLElement[];
 
-  const options: BenchOptions = {
-    throws: true,
-    async setup() {
+  const options: BenchFnOptions = {
+    async beforeAll() {
       fixture = await createFixture(html`
         <nve-grid>
           <nve-grid-header>${columnTemplates}</nve-grid-header>
@@ -49,32 +55,28 @@ describe(Grid.metadata.tag, () => {
       cells.forEach(cell => (cell.tabIndex = -1));
       cells[Math.floor(cells.length / 2)]!.tabIndex = 0;
     },
-    teardown() {
+    afterAll() {
       removeFixture(fixture);
     }
   };
 
   describe('keyboard navigation', () => {
-    bench(
-      'finds the next cell in a 100 by 20 grid',
-      () => {
+    test('finds the next cell in a 100 by 20 grid', async ({ bench }) => {
+      await bench('finds the next cell in a 100 by 20 grid', options, () => {
         getNextKeyGridItem(cells, rows, {
           code: KeynavCode.ArrowDown,
           ctrlKey: false,
           dir: 'ltr'
         });
-      },
-      options
-    );
+      }).run(runOptions);
+    });
   });
 
   describe('flattened dom traversal', () => {
-    bench(
-      'flattens a 100 by 20 grid',
-      () => {
+    test('flattens a 100 by 20 grid', async ({ bench }) => {
+      await bench('flattens a 100 by 20 grid', options, () => {
         getFlattenedDOMTree(element);
-      },
-      options
-    );
+      }).run(runOptions);
+    });
   });
 });

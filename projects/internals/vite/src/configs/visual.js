@@ -5,6 +5,9 @@ import { hideExpectedTestConsoleMessage } from './console.js';
 export const libraryVisualTestConfig = {
   logLevel: 'info',
   cacheDir: 'node_modules/.vite-visual',
+  optimizeDeps: {
+    include: ['vitest > expect-type']
+  },
   server: {
     fs: {
       strict: false,
