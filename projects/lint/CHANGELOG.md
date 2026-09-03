@@ -1,3 +1,10 @@
+## <small>2.5.2 (2026-09-03)</small>
+
+* fix(lint): suggest removing slot="default" when unnamed slot is not first ([84372f1](https://github.com/NVIDIA/elements/commit/84372f1))
+* chore(docs): improve starter and doc metadata descriptions ([35fde16](https://github.com/NVIDIA/elements/commit/35fde16))
+* chore(internals): add performance eslint rules for typescript ([82864ac](https://github.com/NVIDIA/elements/commit/82864ac))
+* chore(lint): cover select slot exception and drop dead branch ([7d6e430](https://github.com/NVIDIA/elements/commit/7d6e430))
+
 ## <small>2.5.1 (2026-09-03)</small>
 
 * fix(core): restore tree keyboard navigation ([e024c11](https://github.com/NVIDIA/elements/commit/e024c11))
