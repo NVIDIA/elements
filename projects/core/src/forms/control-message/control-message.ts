@@ -23,6 +23,7 @@ const statusIcons = {
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/forms
  * @slot - Validation or supporting message text for the associated control.
+ * @slot icon - override the icon with a custom icon
  * @cssprop --color
  * @cssprop --font-weight
  * @cssprop --font-size
