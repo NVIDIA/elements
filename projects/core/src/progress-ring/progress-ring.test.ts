@@ -134,7 +134,7 @@ describe(ProgressRing.metadata.tag, () => {
   it('should set stroke-dasharray to 0px 44px when value is 0', async () => {
     element.value = 0;
     await elementIsStable(element);
-    const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
+    const ring = element.shadowRoot.querySelector('.progress-ring-circle') as SVGCircleElement;
     expect(ring.getAttribute('stroke-dasharray')).toBe('0px 44px');
   });
 
@@ -142,7 +142,7 @@ describe(ProgressRing.metadata.tag, () => {
     element.value = 150;
     element.max = 100;
     await elementIsStable(element);
-    const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
+    const ring = element.shadowRoot.querySelector('.progress-ring-circle') as SVGCircleElement;
     const dashValue = parseFloat(ring.getAttribute('stroke-dasharray'));
     expect(dashValue).toBeGreaterThan(44);
   });
@@ -152,7 +152,7 @@ describe(ProgressRing.metadata.tag, () => {
     element.max = undefined;
     await elementIsStable(element);
 
-    const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
+    const ring = element.shadowRoot.querySelector('.progress-ring-circle') as SVGCircleElement;
     expect(ring.getAttribute('stroke-dasharray')).toBe('22px 44px');
   });
 

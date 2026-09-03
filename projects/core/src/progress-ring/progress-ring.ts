@@ -71,7 +71,7 @@ export class ProgressRing extends LitElement {
       <div internal-host ?indeterminate=${this.value === undefined}>
         <svg viewBox="0 0 16 16" role="presentation">
           <circle cx="8px" cy="8px" r="6.5px" class="background"></circle>
-          <circle cx="8px" cy="8px" r="6.5px" class="ring"
+          <circle cx="8px" cy="8px" r="6.5px" class="progress-ring-circle"
             stroke-dasharray=${`${((this.value ?? 0) / (this.max ?? 100)) * 44}px 44px`}>
           </circle>
         </svg>

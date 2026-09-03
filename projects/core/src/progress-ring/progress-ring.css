@@ -65,7 +65,7 @@ circle.background {
   stroke: none;
 }
 
-circle.ring {
+circle.progress-ring-circle {
   fill: none;
   stroke: var(--ring-color);
   stroke-width: var(--ring-width);
@@ -116,7 +116,7 @@ circle.ring {
   display: none;
 }
 
-[internal-host][indeterminate] circle.ring {
+[internal-host][indeterminate] circle.progress-ring-circle {
   animation: var(--animation-duration) linear 0s infinite normal none running spin-infinite;
 }
 
