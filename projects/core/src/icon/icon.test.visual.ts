@@ -17,7 +17,18 @@ describe('icon visual', () => {
   });
 
   // icon.css intentionally scales down these icons
-  const ICONS_WITH_OPTICAL_SPACING = ['arrow', 'arrow-angle', 'cancel', 'caret', 'chevron', 'double-chevron'];
+  const ICONS_WITH_OPTICAL_SPACING = [
+    'arrow',
+    'arrow-angle',
+    'cancel',
+    'caret',
+    'chevron',
+    'double-chevron',
+    'split-horizontal',
+    'split-none',
+    'split-vertical',
+    'stop'
+  ];
 
   test('icon by default should not have any ghost empty space between its intrinsic dimensions and svg viewbox', async () => {
     const report = await visualRunner.render(
