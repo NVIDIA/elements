@@ -1,3 +1,20 @@
+## <small>2.7.3 (2026-09-03)</small>
+
+* fix(core): control message metadata ([1abec58](https://github.com/NVIDIA/elements/commit/1abec58))
+* fix(core): format bytes ([385fd83](https://github.com/NVIDIA/elements/commit/385fd83))
+* fix(core): pointer solid icon ([bf3ff31](https://github.com/NVIDIA/elements/commit/bf3ff31))
+* fix(core): update icons with aspect ratios ([2021d95](https://github.com/NVIDIA/elements/commit/2021d95))
+* fix(lint): allow external svg icon sources ([c55f4df](https://github.com/NVIDIA/elements/commit/c55f4df))
+* fix(lint): suggest removing slot="default" when unnamed slot is not first ([84372f1](https://github.com/NVIDIA/elements/commit/84372f1))
+* fix(starters): update nuxt to 4.5.2 ([0862866](https://github.com/NVIDIA/elements/commit/0862866))
+* chore(core): fix minor lint errors for semantic class names ([72d69e7](https://github.com/NVIDIA/elements/commit/72d69e7))
+* chore(docs): improve starter and doc metadata descriptions ([35fde16](https://github.com/NVIDIA/elements/commit/35fde16))
+* chore(internals): add performance eslint rules for typescript ([82864ac](https://github.com/NVIDIA/elements/commit/82864ac))
+* chore(internals): add performance optimization skill ([b1c93f7](https://github.com/NVIDIA/elements/commit/b1c93f7))
+* chore(lint): cover select slot exception and drop dead branch ([7d6e430](https://github.com/NVIDIA/elements/commit/7d6e430))
+* chore(release): @nvidia-elements/lint-v2.5.1 [skip ci] ([76be6e6](https://github.com/NVIDIA/elements/commit/76be6e6))
+* chore(release): @nvidia-elements/lint-v2.5.2 [skip ci] ([ab0a431](https://github.com/NVIDIA/elements/commit/ab0a431))
+
 ## <small>2.7.2 (2026-09-03)</small>
 
 * fix(core): restore tree keyboard navigation ([e024c11](https://github.com/NVIDIA/elements/commit/e024c11))
