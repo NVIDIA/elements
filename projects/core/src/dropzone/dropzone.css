@@ -31,7 +31,7 @@
   user-select: none;
 }
 
-.border {
+.dropzone-border {
   border-radius: var(--border-radius);
   color: var(--border-color);
   position: absolute;
@@ -54,17 +54,17 @@ slot[name='icon']::slotted(*) {
   color: var(--nve-sys-text-emphasis-color);
 }
 
-.text-center {
+.dropzone-text-center {
   text-align: center;
   line-height: var(--nve-ref-font-line-height-relaxed);
   font-size: var(--nve-ref-font-size-200);
 }
 
-.text-center::first-letter {
+.dropzone-text-center::first-letter {
   text-transform: capitalize;
 }
 
-.text-bold {
+.dropzone-text-bold {
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 

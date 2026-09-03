@@ -178,13 +178,13 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
         @dragover=${this.#handleDragOver}
         @dragleave=${this.#handleDragLeave}
         @drop=${this.#handleDrop}>
-        <svg class="border" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <svg class="dropzone-border" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <rect width="100%" height="100%" fill="none" rx="4" ry="4" stroke="currentColor" stroke-width="2" stroke-dasharray="6,6" stroke-dashoffset="0" stroke-linecap="square" />
         </svg>
         <slot name="icon"><nve-icon part="icon" class="icon" name="upload"></nve-icon></slot>
         <slot @slotchange=${this.#removeEmptyNodes}>
-          <div class="text-center">
-            <div class="text-bold">${this.i18n.dragAndDrop} ${this.i18n.files} ${this.i18n.or} <span class="text-emphasized">${this.i18n.browseFiles}</span></div>
+          <div class="dropzone-text-center">
+            <div class="dropzone-text-bold">${this.i18n.dragAndDrop} ${this.i18n.files} ${this.i18n.or} <span class="text-emphasized">${this.i18n.browseFiles}</span></div>
             <div class="text-muted">${this.#formatFileTypeSpecifiers(this.accept)} &mdash; ${this.i18n.maxFileSize} ${formatFileSize(this.maxFileSize)}</div>
           </div>
         </slot>
