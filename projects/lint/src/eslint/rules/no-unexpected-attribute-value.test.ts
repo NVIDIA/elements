@@ -96,6 +96,17 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
+  it('should allow external SVG sources for icons', () => {
+    tester.run('should allow external SVG sources for icons', rule, {
+      valid: [
+        `<nve-icon name="my-image.svg"></nve-icon>`,
+        `<nve-icon name="./my-image.svg"></nve-icon>`,
+        `<nve-icon name="/static/images/my-image.svg"></nve-icon>`
+      ],
+      invalid: []
+    });
+  });
+
   it('should allow template bindings in attribute values', () => {
     tester.run('should allow template bindings', rule, {
       valid: [

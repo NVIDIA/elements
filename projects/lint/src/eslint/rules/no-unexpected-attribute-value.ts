@@ -11,6 +11,10 @@ import { attributeValueIsDeprecatedForTag } from './no-deprecated-attributes.js'
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
 
+function isExternalIconSource(tagName: string, attributeName: string, value: string) {
+  return tagName === 'nve-icon' && attributeName === 'name' && value.endsWith('.svg');
+}
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -44,7 +48,8 @@ const rule = {
             attr =>
               attr.type === 'Attribute' &&
               attr.key?.value &&
-              !VALUE_BINDINGS.some(binding => attr.value?.value?.includes(binding))
+              !VALUE_BINDINGS.some(binding => attr.value?.value?.includes(binding)) &&
+              !isExternalIconSource(tagName, attr.key.value, attr.value?.value ?? '')
           )
           .forEach((attr: HtmlAttribute) => {
             const attributeName = attr.key!.value;
