@@ -38,6 +38,7 @@ export const libraryAxeTestConfig = {
     target: 'esnext'
   },
   optimizeDeps: {
+    include: ['vitest > expect-type'],
     noDiscovery: true
   },
   server: {
@@ -49,6 +50,8 @@ export const libraryAxeTestConfig = {
   plugins: [axePlugin()],
   test: {
     retry: 2,
+    isolate: false,
+    fileParallelism: true,
     maxWorkers: process.env.CI ? 1 : undefined,
     maxConcurrency: process.env.CI ? 1 : undefined, // Limit concurrent tests to avoid browser overload
     server: {
@@ -73,9 +76,7 @@ export const libraryAxeTestConfig = {
     onConsoleLog: hideExpectedTestConsoleMessage,
     setupFiles: ['@internals/vite/setup/axe.js'], // todo: this should be project specific
     browser: {
-      isolate: false,
       enabled: true,
-      fileParallelism: true,
       provider: playwright({
         launch: {
           args: [

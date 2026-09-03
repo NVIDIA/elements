@@ -32,6 +32,7 @@ export const libraryTestConfig = {
     }
   },
   optimizeDeps: {
+    include: ['vitest > expect-type'],
     noDiscovery: true
   },
   server: {
@@ -42,6 +43,7 @@ export const libraryTestConfig = {
   },
   test: {
     retry: 2,
+    fileParallelism: !process.env.CI, // Disable file parallelism in CI to reduce browser instances
     maxWorkers: process.env.CI ? 1 : undefined,
     maxConcurrency: process.env.CI ? 1 : undefined, // Limit concurrent tests to avoid browser overload
     isolate: coverage,
@@ -72,7 +74,6 @@ export const libraryTestConfig = {
     onConsoleLog: hideExpectedTestConsoleMessage,
     setupFiles: ['@internals/vite/setup/library.js'], // todo: this should be project specific
     browser: {
-      fileParallelism: !process.env.CI, // Disable file parallelism in CI to reduce browser instances
       enabled: true,
       provider: playwright({
         launch: {

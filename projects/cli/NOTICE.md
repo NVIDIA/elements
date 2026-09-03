@@ -20,7 +20,7 @@ This project includes the following bundled third-party software:
 - archiver v8.0.0 [MIT]
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.8.0 [MIT]
+- eslint v10.9.1 [MIT]
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
 - fast-glob v3.3.3 [MIT]
@@ -41,13 +41,13 @@ This project includes the following bundled third-party software:
 - ora v9.4.1 [MIT]
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.23 [MIT]
+- publint v0.3.24 [MIT]
   Copyright: Bjorn Lu
 
 - yargs v18.1.0 [MIT]
   Copyright: Unknown
 
-- zod v4.4.3 [MIT]
+- zod v4.5.4 [MIT]
   Copyright: Colin McDonnell <zod@colinhacks.com>
 
 ==============================================================================
@@ -61,16 +61,16 @@ The following bundled components are provided under the MIT license:
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-eslint v10.8.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+eslint v10.9.1 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 ignore v7.0.8 - Copyright kael
 marked v18.0.11 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 open v11.0.2 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-publint v0.3.23 - Copyright Bjorn Lu
+publint v0.3.24 - Copyright Bjorn Lu
 yargs v18.1.0 - Copyright Unknown
-zod v4.4.3 - Copyright Colin McDonnell <zod@colinhacks.com>
+zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

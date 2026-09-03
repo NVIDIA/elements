@@ -104,13 +104,21 @@ export default mergeConfig(libraryBenchConfig, {
 
 ```typescript
 // calculate-layout.test.bench.ts
-import { bench, describe } from 'vitest';
+import { describe, test } from 'vitest';
 import { calculateLayout } from './calculate-layout.js';
 
 const items = Array.from({ length: 1_000 }, (_, index) => ({ height: index % 10, width: index % 10 }));
 
 describe('calculateLayout', () => {
-  bench('lays out 1,000 items', () => calculateLayout(items), { throws: true });
+  test('lays out 1,000 items', async ({ bench }) => {
+    await bench('lays out 1,000 items', () => calculateLayout(items)).run({
+      iterations: 10,
+      throws: true,
+      time: 500,
+      warmupIterations: 5,
+      warmupTime: 100
+    });
+  });
 });
 ```
 
