@@ -12,7 +12,7 @@ describe(FormatBytes.metadata.tag, () => {
     const result = await ssrRunner.render(html`<nve-format-bytes locale="en-US" value="1048576"></nve-format-bytes>`);
     expect(result.includes('shadowroot="open"')).toBe(true);
     expect(result.includes('<data internal-host value="1048576">')).toBe(true);
-    expect(result.includes('1.05 mb')).toBe(true);
+    expect(result.includes('1.05 MB')).toBe(true);
     expect(result.includes('nve-format-bytes')).toBe(true);
   });
 });
