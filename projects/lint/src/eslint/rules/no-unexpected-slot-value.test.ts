@@ -113,6 +113,23 @@ describe('noUnexpectedSlotValue', () => {
               ]
             }
           ]
+        },
+        {
+          // nve-alert lists named slots before its unnamed slot
+          code: '<nve-alert><div slot="default"></div></nve-alert>',
+          errors: [
+            {
+              messageId: 'unexpected-slot-value',
+              data: { slotName: 'default', tagName: 'div', parentTagName: 'nve-alert' },
+              suggestions: [
+                {
+                  messageId: 'suggest-remove-slot-value',
+                  data: { slotName: 'default', alternative: '' },
+                  output: '<nve-alert><div ></div></nve-alert>'
+                }
+              ]
+            }
+          ]
         }
       ]
     });
