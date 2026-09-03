@@ -40,7 +40,7 @@ describe(FormatBytes.metadata.tag, () => {
 
   it('should render semantic data with the raw byte count', () => {
     expect(renderedData(element)?.getAttribute('value')).toBe('1048576');
-    expect(renderedText(element)).toBe('1.05 mb');
+    expect(renderedText(element)).toBe('1.05 MB');
   });
 
   it('should use value over slot content', async () => {
@@ -48,7 +48,7 @@ describe(FormatBytes.metadata.tag, () => {
     await elementIsStable(element);
 
     expect(renderedData(element)?.getAttribute('value')).toBe('1024');
-    expect(renderedText(element)).toBe('1.02 kb');
+    expect(renderedText(element)).toBe('1.02 kB');
   });
 
   it('should use slot content when value attribute is removed', async () => {
@@ -59,7 +59,7 @@ describe(FormatBytes.metadata.tag, () => {
     await elementIsStable(element);
 
     expect(renderedData(element)?.getAttribute('value')).toBe('1048576');
-    expect(renderedText(element)).toBe('1.05 mb');
+    expect(renderedText(element)).toBe('1.05 MB');
   });
 
   it('should render empty output without a value', async () => {
@@ -74,15 +74,17 @@ describe(FormatBytes.metadata.tag, () => {
     element.textContent = '1073741824';
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1.07 gb');
+    expect(renderedText(element)).toBe('1.07 GB');
   });
 
   it.each([
-    ['999', '999 b'],
-    ['1000', '1 kb'],
-    ['1024', '1.02 kb'],
-    ['1048576', '1.05 mb'],
-    ['1073741824', '1.07 gb']
+    ['999', '999 B'],
+    ['1000', '1 kB'],
+    ['1024', '1.02 kB'],
+    ['1048576', '1.05 MB'],
+    ['1073741824', '1.07 GB'],
+    ['1000000000000', '1 TB'],
+    ['1000000000000000', '1 PB']
   ])('should automatically format decimal bytes %s as %s', async (value, expected) => {
     element.textContent = value;
     await elementIsStable(element);
@@ -91,10 +93,12 @@ describe(FormatBytes.metadata.tag, () => {
   });
 
   it.each([
-    ['1023', '1,023 b'],
-    ['1024', '1 kib'],
-    ['1048576', '1 mib'],
-    ['1073741824', '1 gib']
+    ['1023', '1,023 B'],
+    ['1024', '1 KiB'],
+    ['1048576', '1 MiB'],
+    ['1073741824', '1 GiB'],
+    ['1099511627776', '1 TiB'],
+    ['1125899906842624', '1 PiB']
   ])('should automatically format binary bytes %s as %s', async (value, expected) => {
     element.display = 'binary';
     element.textContent = value;
@@ -104,9 +108,9 @@ describe(FormatBytes.metadata.tag, () => {
   });
 
   it.each<[FormatBytesUnit, string]>([
-    ['kb', '1,048.58 kb'],
-    ['mb', '1.05 mb'],
-    ['gb', '0 gb']
+    ['kb', '1,048.58 kB'],
+    ['mb', '1.05 MB'],
+    ['gb', '0 GB']
   ])('should force the %s unit', async (unit, expected) => {
     element.unit = unit;
     await elementIsStable(element);
@@ -119,7 +123,7 @@ describe(FormatBytes.metadata.tag, () => {
     element.unit = 'kb';
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1,024 kib');
+    expect(renderedText(element)).toBe('1,024 KiB');
   });
 
   it.each([
@@ -157,7 +161,7 @@ describe(FormatBytes.metadata.tag, () => {
     element.maximumFractionDigits = 0;
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1 mb');
+    expect(renderedText(element)).toBe('1 MB');
   });
 
   it('should format with fixed fraction digits', async () => {
@@ -166,7 +170,7 @@ describe(FormatBytes.metadata.tag, () => {
     element.maximumFractionDigits = 3;
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1.235 mb');
+    expect(renderedText(element)).toBe('1.235 MB');
   });
 
   it('should expand the effective default maximum for minimum fraction digits', async () => {
@@ -174,14 +178,14 @@ describe(FormatBytes.metadata.tag, () => {
     element.minimumFractionDigits = 3;
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1.235 mb');
+    expect(renderedText(element)).toBe('1.235 MB');
   });
 
   it('should use the configured locale', async () => {
     element.locale = 'de-DE';
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1,05 mb');
+    expect(renderedText(element)).toBe('1,05 MB');
   });
 
   it('should use the document locale by default', async () => {
@@ -190,7 +194,7 @@ describe(FormatBytes.metadata.tag, () => {
     element.requestUpdate();
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1,05 mb');
+    expect(renderedText(element)).toBe('1,05 MB');
   });
 
   it('should use the runtime locale when the document language is empty', async () => {
@@ -200,24 +204,24 @@ describe(FormatBytes.metadata.tag, () => {
     await elementIsStable(element);
 
     const expectedNumber = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(1.05);
-    expect(renderedText(element)).toBe(`${expectedNumber} mb`);
+    expect(renderedText(element)).toBe(`${expectedNumber} MB`);
   });
 
   it('should preserve zero and negative values', async () => {
     element.value = 0;
     await elementIsStable(element);
-    expect(renderedText(element)).toBe('0 b');
+    expect(renderedText(element)).toBe('0 B');
 
     element.value = -1000;
     await elementIsStable(element);
-    expect(renderedText(element)).toBe('-1 kb');
+    expect(renderedText(element)).toBe('-1 kB');
   });
 
   it('should cap automatic conversion at petabytes', async () => {
     element.value = 1e18;
     await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('1,000 pb');
+    expect(renderedText(element)).toBe('1,000 PB');
   });
 
   it.each([

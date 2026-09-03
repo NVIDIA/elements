@@ -21,21 +21,21 @@ const DISPLAYS: readonly FormatBytesDisplay[] = ['decimal', 'binary'];
 const UNIT_DISPLAYS: readonly FormatBytesUnitDisplay[] = ['short', 'long'];
 
 const DECIMAL_LABELS: Record<FormatBytesUnit, UnitLabels> = {
-  b: { short: 'b', singular: 'byte', plural: 'bytes' },
-  kb: { short: 'kb', singular: 'kilobyte', plural: 'kilobytes' },
-  mb: { short: 'mb', singular: 'megabyte', plural: 'megabytes' },
-  gb: { short: 'gb', singular: 'gigabyte', plural: 'gigabytes' },
-  tb: { short: 'tb', singular: 'terabyte', plural: 'terabytes' },
-  pb: { short: 'pb', singular: 'petabyte', plural: 'petabytes' }
+  b: { short: 'B', singular: 'byte', plural: 'bytes' },
+  kb: { short: 'kB', singular: 'kilobyte', plural: 'kilobytes' },
+  mb: { short: 'MB', singular: 'megabyte', plural: 'megabytes' },
+  gb: { short: 'GB', singular: 'gigabyte', plural: 'gigabytes' },
+  tb: { short: 'TB', singular: 'terabyte', plural: 'terabytes' },
+  pb: { short: 'PB', singular: 'petabyte', plural: 'petabytes' }
 };
 
 const BINARY_LABELS: Record<FormatBytesUnit, UnitLabels> = {
-  b: { short: 'b', singular: 'byte', plural: 'bytes' },
-  kb: { short: 'kib', singular: 'kibibyte', plural: 'kibibytes' },
-  mb: { short: 'mib', singular: 'mebibyte', plural: 'mebibytes' },
-  gb: { short: 'gib', singular: 'gibibyte', plural: 'gibibytes' },
-  tb: { short: 'tib', singular: 'tebibyte', plural: 'tebibytes' },
-  pb: { short: 'pib', singular: 'pebibyte', plural: 'pebibytes' }
+  b: { short: 'B', singular: 'byte', plural: 'bytes' },
+  kb: { short: 'KiB', singular: 'kibibyte', plural: 'kibibytes' },
+  mb: { short: 'MiB', singular: 'mebibyte', plural: 'mebibytes' },
+  gb: { short: 'GiB', singular: 'gibibyte', plural: 'gibibytes' },
+  tb: { short: 'TiB', singular: 'tebibyte', plural: 'tebibytes' },
+  pb: { short: 'PiB', singular: 'pebibyte', plural: 'pebibytes' }
 };
 
 function isDisplay(value: unknown): value is FormatBytesDisplay {
@@ -86,7 +86,7 @@ export class FormatBytes extends LitElement {
   @property({ type: String }) unit?: FormatBytesUnit;
 
   /**
-   * Unit label length: 'short' renders labels such as 'mb'; 'long' renders labels such as 'megabytes'.
+   * Unit label length: 'short' renders labels such as 'MB'; 'long' renders labels such as 'megabytes'.
    */
   @property({ type: String, attribute: 'unit-display' }) unitDisplay: FormatBytesUnitDisplay = 'short';
 
