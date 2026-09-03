@@ -1,3 +1,11 @@
+## <small>2.7.2 (2026-09-03)</small>
+
+* fix(core): restore tree keyboard navigation ([e024c11](https://github.com/NVIDIA/elements/commit/e024c11))
+* chore(lint): cover remaining branches in deprecated css import rule ([eae65bb](https://github.com/NVIDIA/elements/commit/eae65bb))
+* chore(monaco): update esbuild to 0.28.2 ([aca8979](https://github.com/NVIDIA/elements/commit/aca8979))
+* chore(release): @nvidia-elements/cli-v2.2.2 [skip ci] ([9bb4c3f](https://github.com/NVIDIA/elements/commit/9bb4c3f))
+* chore(release): @nvidia-elements/lint-v2.5.0 [skip ci] ([3f7089b](https://github.com/NVIDIA/elements/commit/3f7089b))
+
 ## <small>2.7.1 (2026-09-01)</small>
 
 * fix(cli): update dependencies and migration skill ([932ffce](https://github.com/NVIDIA/elements/commit/932ffce))
