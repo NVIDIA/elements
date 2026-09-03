@@ -1,3 +1,13 @@
+## <small>2.5.1 (2026-09-03)</small>
+
+* fix(core): restore tree keyboard navigation ([e024c11](https://github.com/NVIDIA/elements/commit/e024c11))
+* fix(lint): allow external svg icon sources ([c55f4df](https://github.com/NVIDIA/elements/commit/c55f4df))
+* fix(starters): update nuxt to 4.5.2 ([0862866](https://github.com/NVIDIA/elements/commit/0862866))
+* chore(lint): cover remaining branches in deprecated css import rule ([eae65bb](https://github.com/NVIDIA/elements/commit/eae65bb))
+* chore(monaco): update esbuild to 0.28.2 ([aca8979](https://github.com/NVIDIA/elements/commit/aca8979))
+* chore(release): @nvidia-elements/cli-v2.2.2 [skip ci] ([9bb4c3f](https://github.com/NVIDIA/elements/commit/9bb4c3f))
+* chore(release): @nvidia-elements/core-v2.7.2 [skip ci] ([fc9b7f0](https://github.com/NVIDIA/elements/commit/fc9b7f0))
+
 ## 2.5.0 (2026-09-01)
 
 * chore(ci): enable bundle tree shaking ([4786255](https://github.com/NVIDIA/elements/commit/4786255))
