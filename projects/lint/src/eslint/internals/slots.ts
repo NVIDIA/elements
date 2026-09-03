@@ -25,12 +25,7 @@ export function isKnownElement(tagName: string) {
 export function getRecommendedSlotName(slot: string, tagName: string) {
   const element = elements.find(el => el.name === tagName);
   const slots = element?.manifest?.slots?.map(s => s.name)?.filter(s => s !== undefined) ?? [];
-  const hasUnnamedSlot = slots.find(s => s === '');
   let recommendedSlot = slots[0];
-
-  if (tagName === 'default' && hasUnnamedSlot) {
-    recommendedSlot = '';
-  }
 
   const potentialMatch = slots.find(s => s.includes(slot));
   if (potentialMatch) {
