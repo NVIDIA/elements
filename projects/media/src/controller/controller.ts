@@ -310,7 +310,7 @@ export class MediaController extends LitElement {
 }
 
 function isSupportedMediaElement(element: Element): element is HTMLMediaElement {
-  return Boolean(globalThis.HTMLMediaElement && element instanceof globalThis.HTMLMediaElement);
+  return typeof HTMLMediaElement !== 'undefined' && element instanceof HTMLMediaElement;
 }
 
 function getMediaState(media: HTMLMediaElement | null) {
