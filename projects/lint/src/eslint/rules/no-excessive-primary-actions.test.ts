@@ -80,6 +80,51 @@ describe('noExcessivePrimaryActions', () => {
     });
   });
 
+  it('should ignore emphasis buttons inside popover elements', () => {
+    tester.run('popover emphasis buttons', rule, {
+      valid: [
+        `<nve-button interaction="emphasis">Page action one</nve-button>
+         <nve-dialog>
+           <nve-dialog-footer>
+             <nve-button interaction="emphasis">Dialog action one</nve-button>
+           </nve-dialog-footer>
+         </nve-dialog>
+         <nve-dialog>
+           <nve-dialog-footer>
+             <nve-button interaction="emphasis">Dialog action two</nve-button>
+           </nve-dialog-footer>
+         </nve-dialog>
+         <nve-button interaction="emphasis">Page action two</nve-button>`,
+        `<nve-drawer><nve-button interaction="emphasis">Drawer action</nve-button></nve-drawer>
+         <nve-dropdown><nve-button interaction="emphasis">Dropdown action</nve-button></nve-dropdown>
+         <nve-notification><nve-button interaction="emphasis">Notification action</nve-button></nve-notification>
+         <nve-notification-group><nve-button interaction="emphasis">Group action</nve-button></nve-notification-group>
+         <nve-page-loader><nve-button interaction="emphasis">Loader action</nve-button></nve-page-loader>
+         <nve-toast><nve-button interaction="emphasis">Toast action</nve-button></nve-toast>
+         <nve-toggletip><nve-button interaction="emphasis">Toggletip action</nve-button></nve-toggletip>
+         <nve-tooltip><nve-button interaction="emphasis">Tooltip action</nve-button></nve-tooltip>`
+      ],
+      invalid: []
+    });
+  });
+
+  it('should continue counting emphasis buttons outside popover elements', () => {
+    tester.run('page emphasis buttons around popovers', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: `<nve-button interaction="emphasis">Page action one</nve-button>
+                 <nve-dialog>
+                   <nve-button interaction="emphasis">Dialog action</nve-button>
+                 </nve-dialog>
+                 <nve-button interaction="emphasis">Page action two</nve-button>
+                 <nve-button interaction="emphasis">Page action three</nve-button>`,
+          errors: [error]
+        }
+      ]
+    });
+  });
+
   it('should count separate tagged templates independently', () => {
     const javascriptTester = new RuleTester({
       languageOptions: {
