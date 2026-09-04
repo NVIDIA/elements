@@ -4,3 +4,25 @@
 :host {
   display: block;
 }
+
+[internal-host] {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.fallback {
+  position: absolute;
+  inset: 0;
+}
+
+.fallback[hidden] {
+  display: none;
+}

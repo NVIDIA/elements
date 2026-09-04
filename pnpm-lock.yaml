@@ -1506,6 +1506,9 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
+      '@nvidia-elements/media':
+        specifier: workspace:*
+        version: link:../media
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
@@ -1521,6 +1524,9 @@ importers:
       eslint:
         specifier: 10.10.0
         version: 10.10.0(jiti@2.7.0)(supports-color@10.2.2)
+      playwright:
+        specifier: 'catalog:'
+        version: 1.62.1
       publint:
         specifier: 'catalog:'
         version: 0.3.24

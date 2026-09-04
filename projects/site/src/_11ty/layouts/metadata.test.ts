@@ -444,6 +444,7 @@ describe('renderDocsNav', () => {
   it('should link the elements section label to the component catalog', () => {
     const html = renderDocsNav({ page: { url: '/docs/elements/' } });
 
+    expect(html).toContain('<nve-tree-node expanded highlighted selected>');
     expect(html).toContain('<a href="/docs/elements/">Elements</a>');
     expect(html).not.toContain('<a href="/docs/elements/accordion/">Elements</a>');
   });

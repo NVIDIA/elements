@@ -185,6 +185,13 @@
         "release:labs-forms"
       ]
     },
+    "release:scene": {
+      "command": "cd projects/scene && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes",
+        "release:core"
+      ]
+    },
     "release:cli": {
       "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
