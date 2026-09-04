@@ -5,6 +5,9 @@
     "types": []
   },
   "exclude": [
+    "src/internal/testing.ts",
+    "**/*.test.bench.ts",
+    "**/*.test.webgpu.ts",
     "**/*.test.ts",
     "**/*.test.axe.ts",
     "**/*.test.ssr.ts",

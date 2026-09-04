@@ -244,12 +244,17 @@ nvd-canvas {
 }
 
 nvd-canvas:has(nve-page),
-nvd-canvas:has(iframe[src*='page']) {
+nvd-canvas:has(iframe[src*='page']),
+nvd-canvas:has(iframe[src*='scene']) {
   --padding: 0;
 
   nve-page {
     height: 580px !important;
   }
+}
+
+nvd-canvas:has(nve-scene) {
+  --padding: 0;
 }
 
 [nve-layer='container'] nvd-canvas {

@@ -1504,6 +1504,9 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
+      '@nvidia-elements/media':
+        specifier: workspace:*
+        version: link:../media
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles

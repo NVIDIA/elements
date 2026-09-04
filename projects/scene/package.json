@@ -1,11 +1,10 @@
 {
   "name": "@nvidia-elements/scene",
   "version": "0.0.0",
-  "private": true,
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "",
+  "description": "WebGPU Web Components for declarative robotics and autonomous-vehicle scenes.",
   "keywords": [
     "nvidia",
     "web-components",
@@ -52,6 +51,134 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./axes": {
+      "types": "./dist/axes/index.d.ts",
+      "default": "./dist/axes/index.js"
+    },
+    "./axes/define.js": {
+      "types": "./dist/axes/define.d.ts",
+      "default": "./dist/axes/define.js"
+    },
+    "./camera": {
+      "types": "./dist/camera/index.d.ts",
+      "default": "./dist/camera/index.js"
+    },
+    "./camera/define.js": {
+      "types": "./dist/camera/define.d.ts",
+      "default": "./dist/camera/define.js"
+    },
+    "./cones": {
+      "types": "./dist/cones/index.d.ts",
+      "default": "./dist/cones/index.js"
+    },
+    "./cones/define.js": {
+      "types": "./dist/cones/define.d.ts",
+      "default": "./dist/cones/define.js"
+    },
+    "./cubes": {
+      "types": "./dist/cubes/index.d.ts",
+      "default": "./dist/cubes/index.js"
+    },
+    "./cubes/define.js": {
+      "types": "./dist/cubes/define.d.ts",
+      "default": "./dist/cubes/define.js"
+    },
+    "./cylinders": {
+      "types": "./dist/cylinders/index.d.ts",
+      "default": "./dist/cylinders/index.js"
+    },
+    "./cylinders/define.js": {
+      "types": "./dist/cylinders/define.d.ts",
+      "default": "./dist/cylinders/define.js"
+    },
+    "./frame": {
+      "types": "./dist/frame/index.d.ts",
+      "default": "./dist/frame/index.js"
+    },
+    "./frame/define.js": {
+      "types": "./dist/frame/define.d.ts",
+      "default": "./dist/frame/define.js"
+    },
+    "./gridlines": {
+      "types": "./dist/gridlines/index.d.ts",
+      "default": "./dist/gridlines/index.js"
+    },
+    "./gridlines/define.js": {
+      "types": "./dist/gridlines/define.d.ts",
+      "default": "./dist/gridlines/define.js"
+    },
+    "./heightfield": {
+      "types": "./dist/heightfield/index.d.ts",
+      "default": "./dist/heightfield/index.js"
+    },
+    "./heightfield/define.js": {
+      "types": "./dist/heightfield/define.d.ts",
+      "default": "./dist/heightfield/define.js"
+    },
+    "./label": {
+      "types": "./dist/label/index.d.ts",
+      "default": "./dist/label/index.js"
+    },
+    "./label/define.js": {
+      "types": "./dist/label/define.d.ts",
+      "default": "./dist/label/define.js"
+    },
+    "./lines": {
+      "types": "./dist/lines/index.d.ts",
+      "default": "./dist/lines/index.js"
+    },
+    "./lines/define.js": {
+      "types": "./dist/lines/define.d.ts",
+      "default": "./dist/lines/define.js"
+    },
+    "./marker": {
+      "types": "./dist/marker/index.d.ts",
+      "default": "./dist/marker/index.js"
+    },
+    "./marker/define.js": {
+      "types": "./dist/marker/define.d.ts",
+      "default": "./dist/marker/define.js"
+    },
+    "./mesh": {
+      "types": "./dist/mesh/index.d.ts",
+      "default": "./dist/mesh/index.js"
+    },
+    "./mesh/define.js": {
+      "types": "./dist/mesh/define.d.ts",
+      "default": "./dist/mesh/define.js"
+    },
+    "./model": {
+      "types": "./dist/model/index.d.ts",
+      "default": "./dist/model/index.js"
+    },
+    "./model/define.js": {
+      "types": "./dist/model/define.d.ts",
+      "default": "./dist/model/define.js"
+    },
+    "./points": {
+      "types": "./dist/points/index.d.ts",
+      "default": "./dist/points/index.js"
+    },
+    "./points/define.js": {
+      "types": "./dist/points/define.d.ts",
+      "default": "./dist/points/define.js"
+    },
+    "./polygon": {
+      "types": "./dist/polygon/index.d.ts",
+      "default": "./dist/polygon/index.js"
+    },
+    "./polygon/define.js": {
+      "types": "./dist/polygon/define.d.ts",
+      "default": "./dist/polygon/define.js"
+    },
+    "./pyramids": {
+      "types": "./dist/pyramids/index.d.ts",
+      "default": "./dist/pyramids/index.js"
+    },
+    "./pyramids/define.js": {
+      "types": "./dist/pyramids/define.d.ts",
+      "default": "./dist/pyramids/define.js"
+    },
     "./scene": {
       "types": "./dist/scene/index.d.ts",
       "default": "./dist/scene/index.js"
@@ -59,9 +186,30 @@
     "./scene/define.js": {
       "types": "./dist/scene/define.d.ts",
       "default": "./dist/scene/define.js"
+    },
+    "./spheres": {
+      "types": "./dist/spheres/index.d.ts",
+      "default": "./dist/spheres/index.js"
+    },
+    "./spheres/define.js": {
+      "types": "./dist/spheres/define.d.ts",
+      "default": "./dist/spheres/define.js"
+    },
+    "./triangles": {
+      "types": "./dist/triangles/index.d.ts",
+      "default": "./dist/triangles/index.js"
+    },
+    "./triangles/define.js": {
+      "types": "./dist/triangles/define.d.ts",
+      "default": "./dist/triangles/define.js"
+    },
+    "./bundles/*": {
+      "default": "./dist/bundles/*"
     }
   },
   "sideEffects": [
+    "./src/**/define.ts",
+    "./dist/bundles/*.js",
     "./**/define.js"
   ],
   "scripts": {
@@ -77,7 +225,12 @@
     "test:ssr": "wireit",
     "test:visual": "wireit",
     "test:watch": "wireit",
-    "test:lighthouse": "wireit"
+    "test:lighthouse": "wireit",
+    "test:bench": "wireit",
+    "test:webgpu": "wireit",
+    "webgpu:measure": "wireit",
+    "webgpu:diagnostic": "wireit",
+    "webgpu:lifecycle": "wireit"
   },
   "dependencies": {
     "lit": "catalog:publish"
@@ -93,11 +246,13 @@
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
     "lit": "catalog:",
+    "playwright": "catalog:",
     "publint": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
@@ -122,6 +277,7 @@
         "test:axe",
         "test:ssr",
         "test:coverage",
+        "test:webgpu",
         "test:visual"
       ]
     },
@@ -140,14 +296,17 @@
       "files": [
         "src/**",
         "!src/**/*.test.ts",
+        "!src/**/*.test.webgpu.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
         "!src/**/__screenshots__/**",
         "package.json",
+        "custom-elements-manifest.config.mjs",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "vite.bundle.ts"
       ],
       "output": [
         "dist/**"
@@ -175,6 +334,7 @@
       "command": "vitest run",
       "files": [
         "src/**",
+        "!src/**/*.test.webgpu.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.ssr.ts",
@@ -191,10 +351,63 @@
         "../core:build"
       ]
     },
+    "test:bench": {
+      "command": "vitest bench --run --config=vitest.bench.ts",
+      "files": [
+        "src/**/*.ts",
+        "!src/**/*.test.webgpu.ts",
+        "tsconfig.json",
+        "vitest.bench.ts"
+      ],
+      "dependencies": [
+        "../internals/vite:ci"
+      ]
+    },
+    "test:webgpu": {
+      "command": "playwright-lock 'WEBGPU_TEST_MODE=check vitest run --config=vitest.webgpu.ts'",
+      "clean": false,
+      "files": [
+        "dist/**/*.js",
+        "performance/**",
+        "src/**/*.test.webgpu.ts",
+        "package.json",
+        "vitest.webgpu.ts"
+      ],
+      "output": [
+        ".webgpu/*-check-*",
+        "coverage/webgpu/**"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
+    "webgpu:measure": {
+      "command": "WEBGPU_TEST_MODE=measure vitest run --config=vitest.webgpu.ts",
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
+    "webgpu:diagnostic": {
+      "command": "WEBGPU_TEST_MODE=diagnostic vitest run --config=vitest.webgpu.ts",
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
+    "webgpu:lifecycle": {
+      "command": "WEBGPU_TEST_MODE=lifecycle vitest run --config=vitest.webgpu.ts",
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
     "test:coverage": {
       "command": "vitest run --coverage",
       "files": [
         "src/**",
+        "!src/**/*.test.webgpu.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.ssr.ts",

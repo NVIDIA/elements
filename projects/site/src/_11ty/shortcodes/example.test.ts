@@ -94,4 +94,23 @@ describe('exampleShortcode', () => {
       import '/@id/@nvidia-elements/core/chat-message/define.js';
     </script>`);
   });
+
+  it('should preserve imported example bindings when rewriting development module imports', async () => {
+    const { rewriteDevImports } = await importShortcode();
+    const template = `<script type="module">
+      import { PointBuffer } from '@nvidia-elements/scene';
+      import 'lit';
+      import './local.js';
+      const points = new PointBuffer({ capacity: 1 });
+      points.add({ position: [0, 0, 0] });
+    </script>`;
+
+    expect(rewriteDevImports(template)).toBe(`<script type="module">
+      import { PointBuffer } from '/@id/@nvidia-elements/scene';
+      import '/@id/lit';
+      import './local.js';
+      const points = new PointBuffer({ capacity: 1 });
+      points.add({ position: [0, 0, 0] });
+    </script>`);
+  });
 });

@@ -112,6 +112,7 @@ export async function render(data) {
                 ${elementDescription(data.tag)}
 
                 ${
+                  !data.hideDefaultExample &&
                   !(data.page.url.includes('/data-grid/') && !data.page.url.endsWith('/data-grid/'))
                     ? await exampleShortcode(data.tag, 'Default', {
                         summary: false,

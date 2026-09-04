@@ -4,3 +4,40 @@
 :host {
   display: block;
 }
+
+[internal-host] {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.overlay,
+.fallback {
+  position: absolute;
+  inset: 0;
+}
+
+.overlay {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.overlay slot,
+canvas > slot {
+  position: absolute;
+  display: block;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  transform-origin: 0 0;
+}
+
+.fallback[hidden] {
+  display: none;
+}
