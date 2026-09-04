@@ -4,10 +4,29 @@
 import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import { elements } from '../internals/metadata.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const MAX_EMPHASIS_BUTTONS = 2;
+const POPOVER_ELEMENTS: ReadonlySet<string> = new Set(
+  elements
+    .filter(element => element.manifest?.metadata?.behavior === 'popover')
+    .map(element => element.name.toLowerCase())
+);
+
+function hasPopoverAncestor(node: HtmlTagNode): boolean {
+  let current = node.parent;
+
+  while (current) {
+    if (current.name && POPOVER_ELEMENTS.has(current.name.toLowerCase())) {
+      return true;
+    }
+    current = current.parent;
+  }
+
+  return false;
+}
 
 const rule = {
   meta: {
@@ -32,7 +51,7 @@ const rule = {
         emphasisButtonCount = 0;
       },
       Tag(node: HtmlTagNode) {
-        if (node.name.toLowerCase() !== 'nve-button') {
+        if (node.name.toLowerCase() !== 'nve-button' || hasPopoverAncestor(node)) {
           return;
         }
 
