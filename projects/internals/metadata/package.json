@@ -366,6 +366,10 @@
           "cascade": false
         },
         {
+          "script": "../../markdown:build",
+          "cascade": false
+        },
+        {
           "script": "../../monaco:build",
           "cascade": false
         },

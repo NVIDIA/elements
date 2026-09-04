@@ -128,6 +128,8 @@ export const libraryTestConfig = {
         '**/.lighthouse/**',
         '**/.wireit/**',
         '**/.pnpm/**',
+        '**/*.test.bench.ts',
+        '**/*.test.webgpu.ts',
         '**/*.test.ts',
         '**/*.test.bench.ts',
         '**/*.css.js',

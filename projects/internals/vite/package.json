@@ -12,6 +12,10 @@
   },
   "exports": {
     ".": "./src/index.js",
+    "./webgpu": {
+      "types": "./src/webgpu/index.d.ts",
+      "default": "./src/webgpu/index.js"
+    },
     "./plugins/*.js": "./src/plugins/*.js",
     "./runners/*.js": "./src/runners/*.js",
     "./setup/*.js": "./src/setup/*.js",
@@ -42,6 +46,7 @@
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
+    "playwright": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },

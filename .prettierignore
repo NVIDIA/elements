@@ -5,6 +5,7 @@ public
 coverage
 .wireit
 .lighthouse
+.webgpu
 .next
 .output
 *.examples.ts
