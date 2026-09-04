@@ -2,7 +2,7 @@ import lighthouse from 'lighthouse';
 import fs from 'fs';
 import { resolve } from 'path';
 import { VitePlaywrightRunner, buildPage } from './playwright.js';
-import { withSoftwareWebGPUChromiumArgs } from './webgpu.js';
+import { withSoftwareWebGPUChromiumArgs } from './utils.js';
 
 const output = process.env.CI ? ['json'] : ['json', 'html'];
 const RUNNER_ID = 'lighthouse';

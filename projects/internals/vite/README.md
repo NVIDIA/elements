@@ -128,6 +128,36 @@ To run the benchmarks run `pnpm run test:bench`.
 vitest bench --run --config=vitest.bench.ts
 ```
 
+### WebGPU
+
+WebGPU rendering test files use the `.test.webgpu.ts` suffix. Vitest runs these files in Node.js so the shared runner can
+measure a clean Playwright page without adding the Vitest browser client to frame, trace, or memory results.
+
+```typescript
+// vitest.webgpu.ts
+import { mergeConfig } from 'vitest/config';
+import { libraryWebGPUTestConfig } from '@internals/vite/webgpu';
+
+export default mergeConfig(libraryWebGPUTestConfig, {
+  root: import.meta.dirname
+});
+```
+
+Use `WebGPUTestRunner` and the related test utilities from `@internals/vite/webgpu`. The runner starts an isolated Vite
+server and Chromium instance, loads a package-owned workload page, and optionally installs an external WebGPU call
+observer. The workload page must expose a `ready` promise and its operations through
+`globalThis.__webgpuTestWorkload`.
+
+Set `WEBGPU_TEST_MODE` to `check`, `measure`, `diagnostic`, or `lifecycle`. Check mode uses deterministic software WebGPU.
+The other modes use a native adapter and reject software fallbacks. Use `WEBGPU_TEST_EXECUTABLE_PATH` to select a native
+Chrome or Chromium executable and `WEBGPU_TEST_HEADLESS=1` when the host exposes native WebGPU in headless mode.
+`WebGPUTestRunner.load()` rejects a fallback adapter in native mode and waits up to 30 seconds for the workload `ready`
+promise by default. Pass `readyTimeout` to adjust that readiness deadline.
+
+Keep workload construction, profiles, budgets, and product lifecycle operations in the consuming project. Reuse the
+shared runner for browser lifecycle, adapter validation, WebGPU observation, traces, memory snapshots, environment data,
+statistics, and report artifacts.
+
 ### Axe
 
 ```typescript

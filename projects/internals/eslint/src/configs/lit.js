@@ -25,6 +25,7 @@ const tests = [
   'src/test/*.ts',
   '**/*.test.ts',
   '**/*.test.bench.ts',
+  '**/*.test.webgpu.ts',
   '**/*.test.visual.ts',
   '**/*.test.lighthouse.ts',
   '**/*.test.axe.ts',
