@@ -1,30 +1,13 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import * as url from 'url';
+import { LIGHTHOUSE_PROJECTS } from './lighthouse-projects.js';
 
 // OpenMetrics/Prometheus https://docs.gitlab.com/ee/ci/testing/metrics_reports.html
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const resolve = rel => path.resolve(__dirname, rel);
 const DIST_DIR = resolve('../../../.metrics');
-
-const elementsLighthouse = JSON.parse(readFileSync(resolve('../../core/.lighthouse/dist/report.json')));
-const themesLighthouse = JSON.parse(readFileSync(resolve('../../themes/.lighthouse/dist/report.json')));
-const stylesLighthouse = JSON.parse(readFileSync(resolve('../../styles/.lighthouse/dist/report.json')));
-const monacoLighthouse = JSON.parse(readFileSync(resolve('../../monaco/.lighthouse/dist/report.json')));
-const labsCodeLighthouse = JSON.parse(readFileSync(resolve('../../code/.lighthouse/dist/report.json')));
-const labsFormsLighthouse = JSON.parse(readFileSync(resolve('../../forms/.lighthouse/dist/report.json')));
-const labsMarkdownLighthouse = JSON.parse(readFileSync(resolve('../../markdown/.lighthouse/dist/report.json')));
-const labsMediaLighthouse = JSON.parse(readFileSync(resolve('../../media/.lighthouse/dist/report.json')));
-
-const elementsMetrics = getMetrics('@nvidia-elements/core', elementsLighthouse);
-const themesMetrics = getMetrics('@nvidia-elements/themes', themesLighthouse);
-const stylesMetrics = getMetrics('@nvidia-elements/styles', stylesLighthouse);
-const monacoMetrics = getMetrics('@nvidia-elements/monaco', monacoLighthouse);
-const labsCodeMetrics = getMetrics('@nvidia-elements/code', labsCodeLighthouse);
-const labsFormsMetrics = getMetrics('@nvidia-elements/forms', labsFormsLighthouse);
-const labsMarkdownMetrics = getMetrics('@nvidia-elements/markdown', labsMarkdownLighthouse);
-const labsMediaMetrics = getMetrics('@nvidia-elements/media', labsMediaLighthouse);
 
 function getMetrics(scope, lighthouseReport) {
   const report = Object.keys(lighthouseReport).flatMap(testName => {
@@ -64,18 +47,16 @@ function getMetrics(scope, lighthouseReport) {
   return report.join('\n');
 }
 
+const projectMetrics = LIGHTHOUSE_PROJECTS.filter(project => project.metrics).map(({ name, dir }) => {
+  const report = JSON.parse(readFileSync(resolve(`../../${dir}/.lighthouse/dist/report.json`)));
+  return getMetrics(name, report);
+});
+
 const metrics = `
 # HELP bundle_size Total JavaScript bundle size in kb
 # TYPE bundle_size gauge
 # UNIT bundle_size kb
-${elementsMetrics}
-${themesMetrics}
-${stylesMetrics}
-${monacoMetrics}
-${labsCodeMetrics}
-${labsFormsMetrics}
-${labsMarkdownMetrics}
-${labsMediaMetrics}`;
+${projectMetrics.join('\n')}`;
 
 if (!existsSync(DIST_DIR)) {
   mkdirSync(DIST_DIR);

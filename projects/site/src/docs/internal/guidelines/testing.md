@@ -27,6 +27,9 @@ pnpm run test:axe
 # Performance tests
 pnpm run test:lighthouse
 
+# WebGPU rendering tests
+pnpm run test:webgpu
+
 # Visual regression tests
 pnpm run test:visual
 
@@ -43,6 +46,8 @@ pnpm run test:ssr
 - [Lighthouse Performance Tests (`.test.lighthouse.ts`)](/docs/internal/guidelines/testing-lighthouse/): performance audits and best practices via Lighthouse
 - [Visual Regression Tests (`.test.visual.ts`)](/docs/internal/guidelines/testing-visual/): Visual regression tests using Playwright screenshots.
 - [SSR Tests (`.test.ssr.ts`)](/docs/internal/guidelines/testing-ssr/): Server-side rendering compatibility tests.
+- **WebGPU rendering tests (`.test.webgpu.ts`)**: External rendering, resource, timing, diagnostic, and lifecycle tests
+  orchestrated by Vitest against a clean Playwright page.
 
 ## Test Configuration
 
@@ -53,6 +58,7 @@ Each test type has its own Vitest configuration:
 - **Unit tests**: `vitest.config.ts` using `libraryTestConfig`
 - **Axe tests**: `vitest.axe.ts` using `libraryAxeTestConfig`
 - **Lighthouse tests**: `vitest.lighthouse.ts` using `libraryLighthouseConfig`
+- **WebGPU tests**: `vitest.webgpu.ts` using `libraryWebGPUTestConfig`
 - **Visual tests**: `vitest.visual.ts` using `libraryVisualTestConfig`
 - **SSR tests**: `vitest.ssr.ts` using `libraryLitSSRTestConfig`
 

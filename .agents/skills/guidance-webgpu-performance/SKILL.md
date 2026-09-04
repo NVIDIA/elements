@@ -1,6 +1,6 @@
 ---
 name: guidance-webgpu-performance
-description: Diagnose and improve browser WebGPU rendering performance, including frame pacing, draw and state-submission overhead, buffer uploads, shaders, and JavaScript work on the render critical path. Use for slow or stuttering GPU-backed interfaces, rendering regressions, CPU/GPU bottleneck analysis, or renderer performance changes; do not use for general page-load or build performance without a rendering symptom.
+description: Diagnose and improve browser WebGPU rendering performance, including frame pacing, draw and state-submission overhead, buffer uploads, shaders, and JavaScript work on the render critical path. Use for slow or stuttering GPU-backed interfaces, rendering regressions, CPU/GPU bottleneck analysis, renderer performance changes, or WebGPU resource, timing, diagnostic, and lifecycle test suites; do not use for general page-load, build performance, or CPU-only benchmark work.
 ---
 
 # Optimize WebGPU Performance
@@ -13,6 +13,7 @@ Find the limiting resource before changing the renderer. Produce a reproducible 
 2. Inspect the render loop, update path, buffer and texture ownership, shader code, and resource lifecycle involved in the representative workload.
 3. Before adding or changing a benchmark, inspect the affected package's `package.json`, local Vitest benchmark configuration, existing `*.test.bench.ts` files, and any shared configuration they import. Do not assume another project's harness applies unchanged.
 4. Read [the performance diagnostic playbook](references/performance-diagnostics.md) when classifying a bottleneck, selecting instrumentation, or proposing an optimization.
+5. Read [the reusable WebGPU test suite guide](references/webgpu-test-suite.md) when adding or reviewing a `*.test.webgpu.ts` suite, choosing a test mode, or deciding whether a performance task belongs in CI.
 
 ## Establish the performance question
 
@@ -61,6 +62,19 @@ mise exec -- pnpm run test:bench -- --compare=benchmark.json
 ```
 
 Keep baseline and candidate environment, workload, benchmark options, and worktree state comparable. Use browser instrumentation for any claim about GPU execution or end-to-end rendering.
+
+## Use repository WebGPU test tooling
+
+Use the shared Node-hosted Vitest configuration and Playwright runner when an investigation must exercise the production WebGPU renderer without adding the Vitest browser client to the measured page. Import the configuration, runner,
+utilities, and types from `@internals/vite/webgpu`; do not use the root package export or runner deep imports in new consumers.
+
+Keep these evidence classes separate:
+
+- `check` mode uses headless software WebGPU for deterministic API-call, resource, upload, interaction, and cleanup invariants. Only this mode belongs in ordinary hosted CI, and it must not contain timing budgets.
+- `measure`, `diagnostic`, and `lifecycle` modes require a native adapter and belong on a controlled local or dedicated GPU runner. Reject software fallback before interpreting results.
+- `test:bench` remains a CPU/browser microbenchmark workflow. Use it for local baseline/candidate comparisons, but keep it out of required PR CI unless the repository adopts controlled runners and an explicit baseline policy.
+
+The consuming package owns its workload page, representative profiles, assertions, budgets, production-boundary rules, and scripts. The shared tooling owns browser and server lifecycle, adapter selection, external WebGPU observation, environment capture, DevTools traces, memory snapshots, statistics helpers, and artifact writing. See the [reusable suite guide](references/webgpu-test-suite.md) for the workload contract, observer limitations, Wireit setup, and validation rules.
 
 ## Select evidence-backed changes
 
