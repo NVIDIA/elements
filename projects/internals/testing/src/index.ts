@@ -21,6 +21,14 @@ export async function createFixture(template?: TemplateResult): Promise<HTMLElem
 }
 
 /**
+ * Returns a required test value or fails with context when fixture setup is incomplete.
+ */
+export function required<Value>(value: Value | null | undefined, message: string): Value {
+  if (value === null || value === undefined) throw new Error(message);
+  return value;
+}
+
+/**
  * Removes test fixture DOM element.
  */
 export function removeFixture(fixture: HTMLElement) {

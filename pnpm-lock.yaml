@@ -1111,6 +1111,9 @@ importers:
       pixelmatch:
         specifier: 6.0.0
         version: 6.0.0
+      playwright:
+        specifier: 'catalog:'
+        version: 1.62.1
       pngjs:
         specifier: 7.0.0
         version: 7.0.0
