@@ -22,7 +22,7 @@ This product includes the following bundled third-party software:
 - @html-eslint/parser v0.65.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @inquirer/prompts v8.7.0 [MIT] (used by: @nvidia-elements/cli)
+- @inquirer/prompts v8.7.1 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
 - @modelcontextprotocol/ext-apps v1.7.5 [MIT] (used by: @nvidia-elements/cli)
@@ -315,7 +315,7 @@ The following bundled components are provided under the MIT license:
 @eslint/js v10.0.1 - Copyright Unknown
 @html-eslint/eslint-plugin v0.65.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.65.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@inquirer/prompts v8.7.0 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@inquirer/prompts v8.7.1 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
