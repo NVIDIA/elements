@@ -138,6 +138,8 @@
         "./projects/markdown:test:lighthouse",
         "./projects/media:test:lighthouse",
         "./projects/monaco:test:lighthouse",
+        "./projects/plot:test:lighthouse",
+        "./projects/scene:test:lighthouse",
         "./projects/site:test:lighthouse"
       ],
       "output": [
@@ -147,6 +149,7 @@
         "NODE_ENV": "production"
       },
       "files": [
+        "./projects/internals/ci/lighthouse-projects.js",
         "./projects/internals/ci/metrics.lighthouse.js"
       ]
     },
@@ -250,6 +253,7 @@
         "!**/.next/**",
         "!**/.nuxt/**",
         "!**/.output/**",
+        "!**/.webgpu/**",
         "!**/__screenshots__/**",
         "!**/coverage/**",
         "!**/.vitest/**",
@@ -286,6 +290,7 @@
         "./projects/markdown:lint:fix",
         "./projects/media:lint:fix",
         "./projects/monaco:lint:fix",
+        "./projects/scene:lint:fix",
         "./projects/site:lint:fix"
       ]
     },
@@ -333,6 +338,7 @@
         "!**/.wireit/**",
         "!**/.next/**",
         "!**/.output/**",
+        "!**/.webgpu/**",
         "!**/__screenshots__/**",
         "!**/coverage/**",
         "!projects/starters/**",

@@ -22,6 +22,9 @@
       "files": [
         "ci-profile.js",
         "ci-profile.test.js",
+        "lighthouse-projects.js",
+        "lighthouse-summary.js",
+        "metrics.lighthouse.js",
         "package.json"
       ],
       "output": [],

@@ -1795,7 +1795,8 @@ export default {
     resolve('src/**/*.test.axe.ts'),
     resolve('src/**/*.test.ssr.ts'),
     resolve('src/**/*.test.lighthouse.ts'),
-    resolve('src/**/*.test.visual.ts')
+    resolve('src/**/*.test.visual.ts'),
+    resolve('src/**/*.test.webgpu.ts')
   ],
   litelement: true,
   plugins: [

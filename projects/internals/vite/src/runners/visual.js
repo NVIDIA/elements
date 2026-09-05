@@ -2,7 +2,7 @@ import fs from 'fs';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { VitePlaywrightRunner, buildPage, VIEWPORT_WIDTH, VIEWPORT_HEIGHT } from './playwright.js';
-import { withSoftwareWebGPUChromiumArgs } from './webgpu.js';
+import { withSoftwareWebGPUChromiumArgs } from './utils.js';
 
 const RUNNER_ID = 'visual';
 const CHROMIUM_ARGS = withSoftwareWebGPUChromiumArgs([

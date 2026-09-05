@@ -1,22 +1,11 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import * as url from 'url';
+import { LIGHTHOUSE_PROJECTS } from './lighthouse-projects.js';
 // must not use node_modules dependencies, CI skips installation during this reporting call
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const PROJECTS_ROOT = path.resolve(__dirname, '../..');
-
-const PROJECTS = [
-  { name: '@nvidia-elements/core', dir: 'core' },
-  { name: '@nvidia-elements/code', dir: 'code' },
-  { name: '@nvidia-elements/styles', dir: 'styles' },
-  { name: '@nvidia-elements/themes', dir: 'themes' },
-  { name: '@nvidia-elements/forms', dir: 'forms' },
-  { name: '@nvidia-elements/markdown', dir: 'markdown' },
-  { name: '@nvidia-elements/media', dir: 'media' },
-  { name: '@nvidia-elements/monaco', dir: 'monaco' },
-  { name: 'site', dir: 'site' }
-];
 
 function tryRead(filePath) {
   try {
@@ -26,7 +15,7 @@ function tryRead(filePath) {
   }
 }
 
-const rows = PROJECTS.map(({ name, dir }) => {
+const rows = LIGHTHOUSE_PROJECTS.map(({ name, dir }) => {
   const tests = tryRead(path.join(PROJECTS_ROOT, dir, 'coverage/lighthouse/summary.json'));
   return { name, tests };
 });
