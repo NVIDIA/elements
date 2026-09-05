@@ -13,6 +13,10 @@ import migrationContext from './migration.md?inline';
 
 declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
 
+const hasPlaygroundBaseUrl = Boolean(
+  __ELEMENTS_PLAYGROUND_BASE_URL__ || process.env.ELEMENTS_PLAYGROUND_BASE_URL?.trim()
+);
+
 export interface Skill {
   name: string;
   title: string;
@@ -227,7 +231,7 @@ All UI output â€” including standalone artifacts, demos, and single-file HTML â€
 ${toolsContext}
 ${authoringContext}
 ${artifactContext}
-${__ELEMENTS_PLAYGROUND_BASE_URL__ ? playgroundContext : ''}
+${hasPlaygroundBaseUrl ? playgroundContext : ''}
 ${integrationContext}`
 };
 
@@ -240,7 +244,7 @@ export const prompts: Prompt[] = [
   migrateProjectPrompt
 ];
 
-if (__ELEMENTS_PLAYGROUND_BASE_URL__) {
+if (hasPlaygroundBaseUrl) {
   prompts.push(playgroundPrompt);
 }
 
@@ -288,7 +292,7 @@ export const skills: Skill[] = [
     description: searchPrompt.description,
     context: searchContext
   },
-  ...(__ELEMENTS_PLAYGROUND_BASE_URL__
+  ...(hasPlaygroundBaseUrl
     ? [
         {
           name: 'playground',
