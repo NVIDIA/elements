@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": ["es2022", "dom"],
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "skipLibCheck": false,
+    "strict": true,
+    "target": "es2022",
+    "types": []
+  },
+  "files": ["dist/custom-elements-jsx.d.ts", "dist/custom-elements-vue.d.ts", "test/vue.d.ts"]
+}

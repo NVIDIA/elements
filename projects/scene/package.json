@@ -218,9 +218,11 @@
     "build": "wireit",
     "build:watch": "wireit",
     "lint": "wireit",
+    "lint:fix": "wireit",
     "lint:style": "wireit",
     "test": "wireit",
     "test:axe": "wireit",
+    "test:artifacts": "wireit",
     "test:coverage": "wireit",
     "test:ssr": "wireit",
     "test:visual": "wireit",
@@ -228,6 +230,8 @@
     "test:lighthouse": "wireit",
     "test:bench": "wireit",
     "test:webgpu": "wireit",
+    "typecheck": "wireit",
+    "typecheck:artifacts": "wireit",
     "webgpu:measure": "wireit",
     "webgpu:diagnostic": "wireit",
     "webgpu:lifecycle": "wireit"
@@ -274,11 +278,13 @@
         "build",
         "lint",
         "publint",
+        "test:artifacts",
         "test:axe",
         "test:ssr",
         "test:coverage",
         "test:webgpu",
-        "test:visual"
+        "test:visual",
+        "typecheck"
       ]
     },
     "publint": {
@@ -295,11 +301,13 @@
       "command": "NODE_ENV=production vite build",
       "files": [
         "src/**",
+        "!src/**/*.test.bench.ts",
         "!src/**/*.test.ts",
         "!src/**/*.test.webgpu.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
+        "!src/**/*.test.visual.ts",
         "!src/**/__screenshots__/**",
         "package.json",
         "custom-elements-manifest.config.mjs",
@@ -355,12 +363,31 @@
       "command": "vitest bench --run --config=vitest.bench.ts",
       "files": [
         "src/**/*.ts",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "!src/**/*.test.visual.ts",
         "!src/**/*.test.webgpu.ts",
+        "!src/**/__screenshots__/**",
         "tsconfig.json",
         "vitest.bench.ts"
       ],
       "dependencies": [
         "../internals/vite:ci"
+      ]
+    },
+    "test:artifacts": {
+      "command": "node --test test/artifacts.test.js",
+      "files": [
+        "dist/custom-elements.json",
+        "package.json",
+        "test/artifacts.test.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "typecheck:artifacts"
       ]
     },
     "test:webgpu": {
@@ -519,6 +546,31 @@
       "env": {
         "NODE_ENV": "production"
       }
+    },
+    "typecheck": {
+      "command": "tsc --noEmit -p tsconfig.json",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/testing:build",
+        "../internals/vite:ci",
+        "../core:build"
+      ]
+    },
+    "typecheck:artifacts": {
+      "command": "tsc --noEmit -p tsconfig.artifacts.json",
+      "files": [
+        "dist/**/*.d.ts",
+        "test/vue.d.ts",
+        "tsconfig.artifacts.json"
+      ],
+      "output": [],
+      "dependencies": [
+        "build"
+      ]
     },
     "lint": {
       "dependencies": [

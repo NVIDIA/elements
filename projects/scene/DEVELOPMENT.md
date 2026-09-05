@@ -11,12 +11,14 @@
 | `pnpm run test`              | Run unit tests                              |
 | `pnpm run test:watch`        | Run unit tests in watch mode                |
 | `pnpm run test:axe`          | Run accessibility tests                     |
+| `pnpm run test:artifacts`    | Validate generated package artifacts        |
 | `pnpm run test:bench`        | Run local benchmarks once                   |
 | `pnpm run test:coverage`     | Run unit tests with coverage                |
 | `pnpm run test:ssr`          | Run server-side rendering tests             |
 | `pnpm run test:visual`       | Run visual regression tests                 |
 | `pnpm run test:lighthouse`   | Run Lighthouse performance tests            |
 | `pnpm run test:webgpu`       | Check external WebGPU call/resource budgets |
+| `pnpm run typecheck`         | Validate TypeScript source and tests        |
 | `pnpm run webgpu:measure`    | Run three native timing passes per profile  |
 | `pnpm run webgpu:diagnostic` | Capture an external DevTools trace          |
 | `pnpm run webgpu:lifecycle`  | Check lifecycle memory and cleanup          |
