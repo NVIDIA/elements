@@ -49,7 +49,7 @@
     "cli:uninstall": "root=\"${NVE_HOME:-$HOME/.nve}\" && rm -f \"$root/bin/nve\" \"$root/manifest.json\" \"$HOME/.local/bin/nve\" && (rmdir \"$root/bin\" \"$root\" 2>/dev/null || true)"
   },
   "dependencies": {
-    "@inquirer/prompts": "8.7.0",
+    "@inquirer/prompts": "8.7.1",
     "@modelcontextprotocol/ext-apps": "catalog:",
     "@modelcontextprotocol/server": "catalog:",
     "@nvidia-elements/code": "workspace:*",

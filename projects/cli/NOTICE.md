@@ -5,7 +5,7 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- @inquirer/prompts v8.7.0 [MIT]
+- @inquirer/prompts v8.7.1 [MIT]
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
 - @modelcontextprotocol/ext-apps v1.7.5 [MIT]
@@ -56,7 +56,7 @@ MIT
 
 The following bundled components are provided under the MIT license:
 
-@inquirer/prompts v8.7.0 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@inquirer/prompts v8.7.1 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
