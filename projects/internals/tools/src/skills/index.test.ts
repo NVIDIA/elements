@@ -1,8 +1,24 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { formatSkillMarkdown, prompts, skills, type Prompt, type Skill } from './index.js';
+
+const originalPlaygroundBaseUrl = process.env.ELEMENTS_PLAYGROUND_BASE_URL;
+
+async function loadSkillsModule() {
+  vi.resetModules();
+  return import('./index.js');
+}
+
+function restorePlaygroundBaseUrl() {
+  if (originalPlaygroundBaseUrl === undefined) {
+    delete process.env.ELEMENTS_PLAYGROUND_BASE_URL;
+  } else {
+    process.env.ELEMENTS_PLAYGROUND_BASE_URL = originalPlaygroundBaseUrl;
+  }
+  vi.resetModules();
+}
 
 describe('prompts', () => {
   it('should export an array of prompts', () => {
@@ -92,17 +108,6 @@ describe('prompts', () => {
       const result = searchPrompt?.handler({});
       expect(result?.messages[0].content.text).toContain('nve api.');
     });
-
-    it.skipIf(!prompts.some(p => p.name === 'playground'))(
-      'should have "playground" prompt with authoring guidelines',
-      () => {
-        const playgroundPrompt = prompts.find(p => p.name === 'playground');
-        expect(playgroundPrompt).toBeDefined();
-
-        const result = playgroundPrompt?.handler({});
-        expect(result?.messages[0].content.text).toContain('playground');
-      }
-    );
 
     it('should have "create-project" prompt for starter projects', () => {
       const createProjectPrompt = prompts.find(p => p.name === 'create-project');
@@ -195,5 +200,40 @@ describe('skillEntries', () => {
       expect(markdown.endsWith('\n')).toBe(true);
       expect(markdown.endsWith('\n\n')).toBe(false);
     });
+  });
+});
+
+describe('playground registration', () => {
+  afterEach(() => {
+    restorePlaygroundBaseUrl();
+  });
+
+  it('should omit playground prompt and skill without a playground url', async () => {
+    delete process.env.ELEMENTS_PLAYGROUND_BASE_URL;
+    const { prompts: loadedPrompts, skills: loadedSkills } = await loadSkillsModule();
+    const elementsSkill = loadedSkills.find(skill => skill.name === 'elements');
+
+    expect(loadedPrompts.some(prompt => prompt.name === 'playground')).toBe(false);
+    expect(loadedSkills.some(skill => skill.name === 'playground')).toBe(false);
+    expect(elementsSkill?.context).not.toContain('Playground UI Workflow');
+  });
+
+  it('should include playground prompt, skill, and elements guidance with a playground url', async () => {
+    process.env.ELEMENTS_PLAYGROUND_BASE_URL = 'https://playground.example.com';
+    const { prompts: loadedPrompts, skills: loadedSkills } = await loadSkillsModule();
+    const playgroundPrompt = loadedPrompts.find(prompt => prompt.name === 'playground');
+    const playgroundSkill = loadedSkills.find(skill => skill.name === 'playground');
+    const elementsSkill = loadedSkills.find(skill => skill.name === 'elements');
+
+    expect(playgroundPrompt).toBeDefined();
+    expect(playgroundPrompt?.title).toBe('How to create an Elements Playground');
+
+    const result = playgroundPrompt?.handler({});
+    expect(result?.messages[0].content.text).toContain('Playground UI Workflow');
+    expect(result?.messages[0].content.text).toContain('nve playground.create');
+
+    expect(playgroundSkill).toBeDefined();
+    expect(playgroundSkill?.context).toContain('Playground UI Workflow');
+    expect(elementsSkill?.context).toContain('Playground UI Workflow');
   });
 });
