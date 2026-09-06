@@ -64,6 +64,29 @@ describe('PopoverTriggerController', () => {
     expect(togglePopover).toHaveBeenCalledWith({ source: element });
   });
 
+  it('should clear a controller-resolved popover target when the popovertarget attribute is removed', async () => {
+    fixture = await createFixture(html`
+      <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
+      <div id="popover" popover>popover</div>
+    `);
+    const element = fixture.querySelector<PopoverTriggerControllerTestElement>(
+      'popover-trigger-controller-test-element'
+    )!;
+    const popover = fixture.querySelector<HTMLElement>('[popover]')!;
+    const togglePopover = vi.spyOn(popover, 'togglePopover').mockImplementation(() => false);
+
+    element.setAttribute('popovertarget', 'popover');
+    await emulateClick(element);
+    expect(element.popoverTargetElement).toBe(popover);
+
+    togglePopover.mockClear();
+    element.removeAttribute('popovertarget');
+    await emulateClick(element);
+
+    expect(element.popoverTargetElement).toBeNull();
+    expect(togglePopover).not.toHaveBeenCalled();
+  });
+
   it('should not invoke a popover from a canceled click', async () => {
     fixture = await createFixture(html`
       <popover-trigger-controller-test-element></popover-trigger-controller-test-element>
