@@ -60,6 +60,7 @@ export async function render(data) {
       <head>
         ${renderBaseHead(data)}
         <style>${process.env.ELEVENTY_RUN_MODE === 'build' ? styles : ''}</style>
+        ${data.pageStyles ? `<style>${data.pageStyles}</style>` : ''}
         <script type="module">
           ${process.env.ELEVENTY_RUN_MODE !== 'build' ? `import '/_11ty/layouts/docs.css';` : ''}
           import '/_11ty/layouts/docs.ts';

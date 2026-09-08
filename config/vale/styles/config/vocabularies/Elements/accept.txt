@@ -58,8 +58,10 @@ Preact
 Svelte
 SolidJS
 Figma
+Claude
 GitLab
 Gitlab
+Hugo
 semver
 namespace
 namespaces
