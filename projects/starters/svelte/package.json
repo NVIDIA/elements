@@ -12,17 +12,21 @@
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
-    "@sveltejs/vite-plugin-svelte": "7.1.2",
+    "@sveltejs/vite-plugin-svelte": "7.3.0",
     "@tsconfig/svelte": "5.0.8",
     "eslint": "catalog:",
-    "svelte": "5.55.7",
-    "svelte-check": "4.4.8",
+    "svelte": "5.57.0",
+    "svelte-check": "4.7.6",
     "typescript": "catalog:",
     "vite": "catalog:"
   },

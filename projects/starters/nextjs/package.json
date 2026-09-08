@@ -14,10 +14,14 @@
   "dependencies": {
     "@lit-labs/nextjs": "0.2.4",
     "@lit-labs/ssr-react": "catalog:",
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "next": "16.2.12",
+    "next": "16.3.4",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

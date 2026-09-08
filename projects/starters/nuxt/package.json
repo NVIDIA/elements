@@ -12,18 +12,22 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "nuxt": "4.5.2",
-    "vue": "3.5.40",
-    "vue-router": "5.2.0"
+    "vue": "3.5.42",
+    "vue-router": "5.3.1"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
     "typescript": "catalog:",
-    "vue-tsc": "3.3.8"
+    "vue-tsc": "3.3.11"
   },
   "wireit": {
     "ci": {

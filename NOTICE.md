@@ -37,7 +37,7 @@ This product includes the following bundled third-party software:
 - archiver v8.0.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.9.1 [MIT] (used by: @nvidia-elements/cli)
+- eslint v10.10.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
 - fast-glob v3.3.3 [MIT] (used by: @nvidia-elements/cli)
@@ -320,7 +320,7 @@ The following bundled components are provided under the MIT license:
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-eslint v10.9.1 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+eslint v10.10.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 ignore v7.0.8 - Copyright kael
 markdown-it v15.0.1 - Copyright Unknown

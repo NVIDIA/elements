@@ -13,7 +13,11 @@
   "dependencies": {
     "@modelcontextprotocol/ext-apps": "catalog:",
     "@modelcontextprotocol/sdk": "catalog:",
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "zod": "catalog:"

@@ -84,7 +84,11 @@
     }
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@angular/common": "22.1.5",
@@ -97,12 +101,12 @@
     "tslib": "2.8.1"
   },
   "devDependencies": {
-    "@angular/build": "22.1.5",
-    "@angular/cli": "22.1.5",
+    "@angular/build": "22.1.7",
+    "@angular/cli": "22.1.7",
     "@angular/compiler-cli": "22.1.5",
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
-    "jsdom": "28.1.0",
+    "jsdom": "30.0.1",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

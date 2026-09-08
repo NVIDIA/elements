@@ -7,12 +7,16 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
-    "preview": "wireit"
+    "preview": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit"
   },
   "dependencies": {
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*"
   },
@@ -22,13 +26,16 @@
     "@lit-labs/eleventy-plugin-lit": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
     "@internals/metadata": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
+    "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   },
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "dev": {
@@ -102,6 +109,23 @@
       "files": [],
       "output": [],
       "dependencies": []
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../lint:build"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../lint:build"
+      ]
     }
   }
 }
