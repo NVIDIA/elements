@@ -19,7 +19,8 @@ Ensure the MCP is properly configured and working as expected.
   "mcpServers": {
     "elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
-      "command": "nve mcp"
+      "command": "nve",
+      "args": ["mcp"]
     }
   }
 }

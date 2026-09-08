@@ -1,107 +1,66 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { service, tool } from '../internal/tools.js';
-import { markdownDescription } from '../internal/utils.js';
-import { skills, type Skill } from './registry.js';
-import { formatSkillMarkdown } from './utils.js';
+import nodePath from 'node:path';
+import { service, tool, ToolSupport } from '../internal/tools.js';
+import { elementsSkill } from './registry.js';
+import { writeSkillDirectory } from './utils.js';
 
-type OutputFormat = 'markdown' | 'json';
+interface SkillInstallOptions {
+  global?: boolean;
+}
 
-export type SkillListItem = Pick<Skill, 'name' | 'title' | 'description'>;
+interface SkillInstallEnvironment extends SkillInstallOptions {
+  cwd?: string;
+  env?: NodeJS.ProcessEnv;
+  platform?: NodeJS.Platform;
+}
 
-const skillNames = skills.map(skill => `\`${skill.name}\``).join(', ');
+export function getSkillInstallDirectories({
+  global = false,
+  cwd = process.cwd(),
+  env = process.env,
+  platform = process.platform
+}: SkillInstallEnvironment = {}): string[] {
+  if (!global) {
+    return [
+      nodePath.resolve(cwd, '.agents', 'skills', elementsSkill.name),
+      nodePath.resolve(cwd, '.claude', 'skills', elementsSkill.name)
+    ];
+  }
+
+  const home = platform === 'win32' ? env.USERPROFILE : env.HOME;
+  if (!home) {
+    throw new Error('Could not install Elements agent skill. HOME is not set.');
+  }
+  const path = platform === 'win32' ? nodePath.win32 : nodePath;
+  return [path.join(home, '.agents', 'skills', elementsSkill.name)];
+}
 
 @service()
 export class SkillsService {
   @tool({
-    summary: 'Get a list of available Elements agent skills and context.',
+    summary: 'Install the Elements agent skill.',
     description:
-      'Get a list of bundled Elements agent skills and context that can be used even when skills are not installed on disk.',
+      'Install the Elements agent skill in the current project, or use --global to install it for the current user.',
+    support: ToolSupport.CLI,
     inputSchema: {
       type: 'object',
       properties: {
-        format: {
-          type: 'string',
-          description: markdownDescription,
-          enum: ['markdown', 'json'],
-          default: 'markdown'
+        global: {
+          type: 'boolean',
+          description: 'Install the skill for the current user instead of the current project.',
+          default: false
         }
       },
       additionalProperties: false
     },
-    outputSchema: {
-      oneOf: [
-        { type: 'string' },
-        {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              name: { type: 'string' },
-              title: { type: 'string' },
-              description: { type: 'string' }
-            },
-            additionalProperties: false,
-            required: ['name', 'title', 'description']
-          }
-        }
-      ],
-      additionalProperties: false
-    }
+    outputSchema: { type: 'string' },
+    cli: { positionals: {} }
   })
-  static async list({ format = 'markdown' }: { format?: OutputFormat } = {}): Promise<SkillListItem[] | string> {
-    return format === 'json'
-      ? skills.map(({ name, title, description }) => ({ name, title, description }))
-      : skills.map(skill => `\`${skill.name}\`: ${skill.description}`).join('\n\n');
-  }
-
-  @tool({
-    summary: 'Get a bundled Elements agent skill by name.',
-    description:
-      'Get a bundled Elements agent skill by name. Use this when a skill is not installed on disk or the agent needs focused Elements workflow guidance.',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-          description: `The skill name to retrieve. Available names: ${skillNames}`
-        },
-        format: {
-          type: 'string',
-          description: markdownDescription,
-          enum: ['markdown', 'json'],
-          default: 'markdown'
-        }
-      },
-      required: ['name'],
-      additionalProperties: false
-    },
-    outputSchema: {
-      oneOf: [
-        { type: 'string' },
-        {
-          type: 'object',
-          properties: {
-            name: { type: 'string' },
-            title: { type: 'string' },
-            description: { type: 'string' },
-            context: { type: 'string' }
-          },
-          additionalProperties: false,
-          required: ['name', 'title', 'description', 'context']
-        }
-      ],
-      additionalProperties: false
-    }
-  })
-  static async get({ name, format = 'markdown' }: { name: string; format?: OutputFormat }): Promise<Skill | string> {
-    const skill = skills.find(s => s.name.toLowerCase() === name.toLowerCase());
-
-    if (!skill) {
-      throw new Error(`Unknown skill "${name}".\n\nAvailable skills: ${skillNames}`);
-    }
-
-    return format === 'json' ? skill : formatSkillMarkdown(skill);
+  static async install(options: SkillInstallOptions = {}): Promise<string> {
+    const directories = getSkillInstallDirectories(options);
+    await Promise.all(directories.map(directory => writeSkillDirectory(directory, elementsSkill)));
+    return `Installed Elements agent skill:\n${directories.map(directory => `- ${directory}`).join('\n')}`;
   }
 }

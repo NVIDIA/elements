@@ -63,7 +63,7 @@ application performance.
 ```typescript
 // Load via typescript imports to make available in HTML templates
 import '@nvidia-elements/core/button/define.js';
-...
+// Import additional component definitions as needed.
 ```
 
 ```html

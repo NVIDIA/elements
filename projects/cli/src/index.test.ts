@@ -238,12 +238,10 @@ syncBuiltinESMExports();
     expect(output).not.toContain('nve api.get <names> [format]');
   });
 
-  it('should provide skills.list', () => {
-    expect(output).toContain('nve skills.list [format]');
-  });
-
-  it('should provide skills.get', () => {
-    expect(output).toContain('nve skills.get <name> [format]');
+  it('should provide skills.install with a global option', () => {
+    const help = execFileSync(process.execPath, ['dist/index.js', 'skills.install', '--help']).toString();
+    expect(output).toContain('nve skills.install');
+    expect(help).toContain('--global');
   });
 
   it('should conditionally provide playground.validate when url is available', () => {

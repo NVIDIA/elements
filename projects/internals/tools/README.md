@@ -10,7 +10,7 @@ This package provides:
 - **Playground creation** and validation utilities
 - **Project management** tools for scaffolding and health checks
 - **Example template** management and search
-- **Agent skill** and context-fragment access
+- **Agent skill** installation and distribution
 - **Changelog and version** information services
 - **Design token** access and formatting
 
@@ -28,7 +28,7 @@ Main service modules organized by functionality:
 projects/internals/tools/src/
 ├── api/              # Component API documentation service
 ├── examples/         # Example templates and patterns service
-├── skills/           # Agent skills and context fragments service
+├── skills/           # Agent skill registry, installation, and distribution
 ├── playground/       # Playground creation and validation service
 ├── project/          # Project creation, update, and health checks
 ├── changelogs/       # Release notes and changelog service
@@ -51,9 +51,9 @@ projects/internals/tools/src/
 - Pulls from `@internals/metadata`
 
 #### **SkillsService** (`/skills/service.ts`)
-- `list()` - Get available bundled agent skills and context fragments
-- `get()` - Get a skill or context fragment by name
-- Uses bundled markdown so CLI/MCP users can access guidance even when skills are not installed on disk
+- `install()` - Install the complete Elements skill directory in a project or for the current user
+- Available as a CLI command; the MCP server does not expose skill management tools
+- Uses `.agents/skills/elements/` as the source for `SKILL.md` and all reference files
 
 #### **PlaygroundService** (`/playground/service.ts`)
 - `validate()` - Lint and check HTML templates for playground compliance
@@ -112,7 +112,7 @@ interface ToolOutput<T> {
 }
 ```
 
-##***REMOVED*** Utilities
+## Internal Utilities
 
 The `/internal` directory provides core infrastructure:
 
@@ -121,7 +121,7 @@ The `/internal` directory provides core infrastructure:
 - **`validate.ts`** - HTML template sanitization and validation using `sanitize-html`
 - **`utils.ts`** - Utility functions (element imports, text wrapping, available tags)
 - **`search.ts`** - Fuzzy matching and search algorithms
-- **`prompts.ts`** - MCP prompts for AI agents (about, search, playground, new-project)
+- **`prompts.ts`** - MCP prompt registration helpers
 
 ## Package Exports
 

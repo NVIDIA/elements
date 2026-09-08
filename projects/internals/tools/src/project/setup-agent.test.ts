@@ -16,7 +16,8 @@ vi.mock('node:fs', () => ({
   existsSync: vi.fn(),
   readFileSync: vi.fn(),
   writeFileSync: vi.fn(),
-  mkdirSync: vi.fn()
+  mkdirSync: vi.fn(),
+  rmSync: vi.fn()
 }));
 
 vi.mock('../internal/node.js', () => ({
@@ -27,37 +28,10 @@ vi.mock('./starters.js', () => ({
   claudeProjectSettings: {
     $schema: 'https://json.schemastore.org/claude-code-settings.json',
     permissions: {
-      allow: [
-        'mcp__elements__api_list',
-        'mcp__elements__api_get',
-        'mcp__elements__skills_list',
-        'mcp__elements__skills_get'
-      ]
+      allow: ['mcp__elements__api_list', 'mcp__elements__api_get']
     },
     enabledMcpjsonServers: ['elements']
   }
-}));
-
-vi.mock('../skills/index.js', () => ({
-  formatSkillMarkdown: vi.fn(
-    (skill: { name: string; title: string; description: string; context: string }) => `---
-name: "${skill.name}"
-title: "${skill.title}"
-description: "${skill.description}"
----
-
-${skill.context}
-`
-  ),
-  skills: [
-    {
-      name: 'elements',
-      title: 'Elements Design System (nve)',
-      description: 'Build UI with NVIDIA Elements',
-      kind: 'skill',
-      context: '## Elements Context'
-    }
-  ]
 }));
 
 describe('setup-mcp', () => {
@@ -365,8 +339,8 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.permissions.allow).toContain('mcp__elements__api_list');
-      expect(written.permissions.allow).toContain('mcp__elements__skills_list');
-      expect(written.permissions.allow).toContain('mcp__elements__skills_get');
+      expect(written.permissions.allow).not.toContain('mcp__elements__skills_list');
+      expect(written.permissions.allow).not.toContain('mcp__elements__skills_get');
     });
 
     it('should return the settings file path', async () => {
@@ -388,14 +362,17 @@ describe('setup-mcp', () => {
       expect(mkdirSync).toHaveBeenCalled();
       expect(writeFileSync).toHaveBeenCalled();
 
-      const skillPath = vi.mocked(writeFileSync).mock.calls[0][0] as string;
+      const skillPath = vi.mocked(writeFileSync).mock.calls.find(call => String(call[0]).endsWith('SKILL.md'))?.[0];
       expect(skillPath).toContain('SKILL.md');
 
-      const content = vi.mocked(writeFileSync).mock.calls[0][1] as string;
+      const content = vi.mocked(writeFileSync).mock.calls.find(call => String(call[0]).endsWith('SKILL.md'))?.[1];
       expect(content).toContain('name: "elements"');
-      expect(content).toContain('title: "Elements Design System (nve)"');
-      expect(content).toContain('description: "Build UI with NVIDIA Elements"');
-      expect(content).toContain('## Elements Context');
+      expect(content).toContain('title: "NVIDIA Elements Design System (nve)"');
+      expect(content).toContain('description: "Use this skill by default');
+      expect(content).toContain('# Building UI with NVIDIA Elements');
+      expect(vi.mocked(writeFileSync).mock.calls.some(call => String(call[0]).includes('references/artifact.md'))).toBe(
+        true
+      );
     });
 
     it('should create skill directory recursively', async () => {
@@ -533,8 +510,8 @@ describe('setup-mcp', () => {
       let callCount = 0;
       vi.mocked(mkdirSync).mockImplementation(() => {
         callCount++;
-        // cursor: writeElementsSkill(mkdir1) + writeMcpJsonConfig(mkdir2) = 2 calls
-        if (callCount <= 2) {
+        // cursor: skill directory, five skill files, and MCP config
+        if (callCount <= 7) {
           return undefined; // cursor succeeds
         }
         throw new Error('Permission denied'); // claude-code fails

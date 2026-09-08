@@ -20,7 +20,7 @@ This package serves two primary modes:
    - Bundled agent skill access
 
 2. **MCP Server (`nve mcp` command)** - Model Context Protocol server that:
-   - Exposes all CLI tools to AI assistants (Claude, Cursor, etc.)
+   - Exposes MCP-supported tools to AI assistants (Claude, Cursor, etc.)
    - Provides context-specific prompts for common tasks
    - Enables AI-assisted development with Elements components
    - Integrates Elements knowledge directly into AI workflows
@@ -66,8 +66,7 @@ npm install -g @nvidia-elements/cli
 | `nve packages.list`                                   | Get latest published versions of all Elements packages.                     |
 | `nve packages.get <name>`                             | Get details for a specific Elements package.                                |
 | `nve packages.changelogs.get <name> [format] [limit]` | Retrieve changelog details by package name.                                 |
-| `nve skills.list [format]`                            | Get available Elements agent skills and context.                            |
-| `nve skills.get <name> [format]`                      | Get a bundled Elements agent skill by name.                                 |
+| `nve skills.install [--global]`                       | Install the Elements agent skill in the project or for the current user.    |
 | `nve mcp`                                             | Start the MCP server.                                                       |
 
 ### Global Options
@@ -139,40 +138,32 @@ args = ["mcp"]
 
 ### Prompts
 
-| Prompt         | Description                                         | Example Prompt                                                       |
-| -------------- | --------------------------------------------------- | -------------------------------------------------------------------- |
-| `/about`       | A brief introduction to Elements                    | `/about`                                                             |
-| `/doctor`      | Verify Elements setup and MCP configuration         | `/doctor`                                                            |
-| `/search`      | Context for searching Elements APIs                 | `/search` What works for notifying a user of a long running process? |
-| `/new-project` | Context for creating a new Elements project         | `/new-project` Create a todo app                                     |
-| `/migrate`     | Context for migrating from deprecated Elements APIs | `/migrate` Migrate this project from deprecated Elements APIs        |
+| Prompt           | Description                                         | Example Prompt                                                        |
+| ---------------- | --------------------------------------------------- | --------------------------------------------------------------------- |
+| `/artifact`      | Create a standalone Elements UI artifact            | `/artifact` Create an example login form                              |
+| `/doctor`        | Verify Elements setup and MCP configuration         | `/doctor`                                                             |
+| `/create-project` | Create a new Elements starter project              | `/create-project` Create a todo app                                   |
+| `/migrate`       | Migrate from deprecated Elements APIs               | `/migrate` Migrate this project from deprecated Elements APIs         |
 
-### Skills
+## NVIDIA Elements Skill
 
-Skills provide persistent context to AI agents for building UI with Elements.
-
-| Skill         | Description                                                                                                                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `about`       | Instructions for providing a brief introduction for using the Elements Design System.                                                                                                                         |
-| `authoring`   | Best practices and workflow guidance for authoring UI with NVIDIA Elements.                                                                                                                                   |
-| `doctor`      | Instructions for ensuring the Elements Design System is setup correctly.                                                                                                                                      |
-| `artifact`    | Use when creating throwaway UI artifacts, prototypes, demos, Claude Artifacts, Codex, or GPT Sites pages, or other standalone HTML interfaces that should use the NVIDIA Elements CDN template.               |
-| `integration` | Best practices and workflow guidance for creating or setting up NVIDIA Elements projects.                                                                                                                     |
-| `migration`   | Instructions for migrating a project from deprecated Elements APIs using lint tooling and CLI health checks.                                                                                                  |
-| `search`      | Best practices for providing Elements API Documentation.                                                                                                                                                      |
-| `elements`    | Default skill for UI-related work or NVIDIA Elements (`nve-*`), including HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts. |
-
-Run `nve skills.list` or call MCP `skills_list` for the authoritative list. Deployments with the playground service enabled can also expose a `playground` skill for creating Elements Playground prototypes.
-
-The Agent Skills well-known endpoint publishes the `elements` skill from the same registry for skill-only installation with the open `skills` CLI:
+Elements provides one `elements` skill with reference files for artifact creation, setup checks, project integration, and migration. Install the complete directory in the current project:
 
 ```shell
-npx skills add https://nvidia.github.io/elements
+nve skills.install
 ```
 
-This hosted route does not install the Elements CLI or configure the MCP server. Use `nve project.setup` for complete project setup, and continue to use the CLI or MCP tools for deterministic API lookup and template validation. Other registry skills, including a conditional `playground` skill, remain available through `nve` rather than the hosted endpoint.
+This writes `.agents/skills/elements/` and `.claude/skills/elements/`. Add `--global` to install it for the current user at `~/.agents/skills/elements/` instead. The command replaces existing `elements` directories at the selected destinations so stale references do not remain.
 
-### Tools
+Alternatively, install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```
+
+This route does not install the Elements CLI or configure the MCP server. Use `nve project.setup` for complete project setup, and continue to use the CLI or MCP tools for deterministic API lookup and template validation.
+
+## MCP Tools
 
 | Tool                      | Description                                                               |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -186,8 +177,6 @@ This hosted route does not install the Elements CLI or configure the MCP server.
 | `packages_changelogs_get` | Retrieve changelog details by package name.                               |
 | `examples_list`           | Get list of available Elements (nve-\*) patterns and examples.            |
 | `examples_get`            | Get the full template of a known example or pattern by id.                |
-| `skills_list`             | Get a list of available Elements agent skills and context fragments.      |
-| `skills_get`              | Get a bundled Elements agent skill or context fragment by name.           |
 | `project_create`          | Create a new starter project.                                             |
 | `project_validate`        | Check project for configuration issues and dependencies.                  |
 | `project_setup`           | Setup or update a project to use Elements.                                |

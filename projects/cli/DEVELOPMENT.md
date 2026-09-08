@@ -26,7 +26,7 @@ The CLI **dynamically loads tools from `@internals/tools`** at runtime rather th
 - **Decorator-based discovery** - Tools marked with `@tool()` decorator are auto-discovered
 - **Schema-driven** - JSON Schema definitions drive argument parsing and validation
 - **Consistent interface** - All tools return `{status, message, result}` structure
-- **Dual-mode operation** - Same tools work in both CLI and MCP modes
+- **Mode-specific registration** - Each entry point registers only tools that declare support for that mode
 
 ### Implementation Details
 
@@ -41,8 +41,8 @@ The CLI **dynamically loads tools from `@internals/tools`** at runtime rather th
 Example tool registration:
 
 ```typescript
-// Dynamically registers all tools as Yargs commands
-tools.forEach(tool => {
+// Dynamically registers CLI-supported tools as Yargs commands
+tools.filter(tool => tool.metadata.support & ToolSupport.CLI).forEach(tool => {
   yargs.command(
     tool.command,
     tool.description,
@@ -61,8 +61,8 @@ tools.forEach(tool => {
 
 - Sets `process.env.ELEMENTS_ENV = 'mcp'`
 - Serves an MCP server factory over stdio
-- **Tool registration** - Registers all tools with MCP server using Zod schemas
-- **Prompt registration** - Registers 6 built-in prompts (about, doctor, search, playground, new-project, migrate)
+- **Tool registration** - Registers MCP-supported tools with the MCP server using Zod schemas
+- **Prompt registration** - Registers four reference-backed prompts (artifact, doctor, create-project, migrate)
 - **Structured output** - Returns results with status, message, and structured content
 
 Example MCP tool registration:

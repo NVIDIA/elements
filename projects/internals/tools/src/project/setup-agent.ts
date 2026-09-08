@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import { getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
 import { claudeProjectSettings } from './starters.js';
-import { formatSkillMarkdown, skills } from '../skills/index.js';
+import { elementsSkill, writeSkillDirectorySync } from '../skills/index.js';
 
 type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
 
@@ -111,16 +111,8 @@ export function writeClaudeSettings(cwd: string): string {
 }
 
 export function writeElementsSkill(skillDir: string): string {
-  const skill = skills.find(s => s.name === 'elements');
-  if (!skill) {
-    throw new Error('Elements skill not found');
-  }
-
-  mkdirSync(skillDir, { recursive: true });
-
-  const skillPath = join(skillDir, 'SKILL.md');
-  writeFileSync(skillPath, formatSkillMarkdown(skill));
-  return skillPath;
+  writeSkillDirectorySync(skillDir, elementsSkill);
+  return join(skillDir, 'SKILL.md');
 }
 
 const VSCODE_HTML_CUSTOM_DATA = [

@@ -108,6 +108,7 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../../../.agents/skills/elements/**",
         "../metadata/static/api.json",
         "../metadata/static/projects.json",
         "../metadata/static/examples.json",
