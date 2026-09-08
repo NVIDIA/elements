@@ -12,7 +12,7 @@
   }
 </style>
 <div nve-layout="column gap:lg pad-top:lg">
-  <h1 nve-text="display sm">NVIDIA Elements</h1>
+  <h1 nve-text="display sm semibold">NVIDIA Elements</h1>
   <h2 nve-text="heading">The Design Language and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles</h2>
 </div>
 <nve-divider></nve-divider>

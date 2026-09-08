@@ -42,7 +42,7 @@ markdown.renderer.rules.fence = function (tokens, idx, options, env, slf) {
 };
 
 const formats = {
-  h1: 'display emphasis',
+  h1: 'display emphasis semibold',
   h2: 'heading xl emphasis',
   h3: 'heading lg emphasis',
   h4: 'heading',
