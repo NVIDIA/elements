@@ -45,6 +45,14 @@ This package is a thin wrapper that delegates to `@nvidia-elements/cli` for proj
 
 Run the command with any supported starter template type. For a full list of available templates, see the [@nvidia-elements/cli documentation](https://NVIDIA.github.io/elements/).
 
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```
+
 ## Resources
 
 - https://docs.npmjs.com/cli/v9/commands/npm-init

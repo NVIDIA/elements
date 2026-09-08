@@ -65,12 +65,19 @@ Use NVIDIA Elements for agentic UI, AI infrastructure dashboards, robotics conso
 
 - [CLI](${base}/context/cli.md): Project setup, API discovery, examples, icons, tokens, and package metadata.
 - [MCP](${base}/context/cli.md): Model Context Protocol integration for AI assistants.
-- [Skills](${base}/context/skills/index.md): Agent skills and context fragments for Elements workflows.
+- [Skills](${base}/context/skills/index.md): The Elements agent skill and its workflow references.
 - [CDN](${base}/context/integrations/cdn.md): CDN integration for demos and agent generated artifacts.
 - [APIs](${base}/context/api/index.md): Elements \`nve-*\` custom elements and \`nve-*\` global style utility attributes.
 - [Examples](${base}/context/examples/index.md): UI patterns and example templates.
 - [Icons](${base}/context/api/icons/index.md): Icon names for \`nve-icon\` and \`nve-icon-button\`.
 - [Tokens](${base}/context/api/tokens/index.md): Semantic CSS custom properties and design tokens.
+- [DESIGN.md](https://nvidia.github.io/elements/DESIGN.md): Optional design context.
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+\`\`\`shell
+npx skills add https://github.com/nvidia/elements --skill elements
+\`\`\`
 
 For the complete archive, use [llms-full.txt](${base}/llms-full.txt).
 `;
@@ -88,13 +95,24 @@ async function writeLlmsTxtFiles(publicOutputPath) {
   await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'examples'), { recursive: true });
   await fsp.mkdir(nodePath.join(publicOutputPath, 'context', 'integrations'), { recursive: true });
 
-  const skillsContent = `# Skills\n\nList of all available skills and context fragments.\n\n${skills.map(s => `- [${s.name}](${BASE}/context/skills/${s.name}.md): ${s.description}`).join('\n')}`;
+  const skillsContent = `# Skills\n\nList of all available skills.\n\n${skills.map(s => `- [${s.name}](${BASE}/context/skills/${s.name}/SKILL.md): ${s.description}`).join('\n')}`;
   await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'skills', 'index'), skillsContent);
 
   const skillMarkdown = [];
-  for (const { name, context } of skills) {
-    skillMarkdown.push(context);
-    await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'skills', name), context);
+  for (const { name, files } of skills) {
+    for (const [relativePath, markdown] of Object.entries(files)) {
+      if (!relativePath.endsWith('.md')) continue;
+      const outputPath = nodePath.join(
+        publicOutputPath,
+        'context',
+        'skills',
+        name,
+        relativePath.slice(0, -'.md'.length)
+      );
+      await fsp.mkdir(nodePath.dirname(outputPath), { recursive: true });
+      skillMarkdown.push(markdown);
+      await writeContextDoc(outputPath, markdown);
+    }
   }
 
   const cliReadme = await fsp.readFile('../cli/README.md', 'utf-8');

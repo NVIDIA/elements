@@ -18,6 +18,7 @@
     "build": {
       "command": "node ./index.js",
       "files": [
+        "../internals/tools/dist/.agents/**",
         "../internals/tools/dist/**/project/**",
         "../internals/tools/dist/**/skills/**",
         "./angular/dist/**/*.js",

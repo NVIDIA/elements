@@ -47,3 +47,11 @@ element.source = '# Updated Content\n\nNew markdown content here.';
 - **Two Input Modes**: Clear separation between markdown (source) and HTML (template)
 - **Performance Optimized**: Lazy-loaded markdown parser for better initial load times
 - **Design System Integration**: Styled with NVE design tokens and CSS custom properties
+
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```

@@ -107,6 +107,14 @@ export default [
 | `@nvidia-elements/lint/no-unstyled-typography` | Require typography elements to have nve-text styling applied. | HTML | `error` |
 | `@nvidia-elements/lint/prefer-aria-label-in-compact-containers` | Prefer aria-label on form controls inside toolbars and page headers. | HTML | `error` |
 
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```
+
 ## Links
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/lint/)

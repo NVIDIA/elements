@@ -117,9 +117,9 @@ args = ["mcp"]
     <nve-grid-column>Example Prompt</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">/about</code></nve-grid-cell>
-    <nve-grid-cell>A brief introduction to Elements</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code"><strong>/about</strong></code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">/artifact</code></nve-grid-cell>
+    <nve-grid-cell>Create a standalone Elements UI artifact</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code"><strong>/artifact</strong> Create an example login form</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">/doctor</code></nve-grid-cell>
@@ -127,19 +127,9 @@ args = ["mcp"]
     <nve-grid-cell><code nve-text="code"><strong>/doctor</strong></code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">/playground</code></nve-grid-cell>
-    <nve-grid-cell>Context for creating playground prototypes</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code"><strong>/playground</strong> Create an example login form</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">/search</code></nve-grid-cell>
-    <nve-grid-cell>Context for searching Elements APIs</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code"><strong>/search</strong> What notifies a user of a long running process?</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">/new-project</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">/create-project</code></nve-grid-cell>
     <nve-grid-cell>Context for creating a new Elements project.</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code"><strong>/new-project</strong> Create an Angular todo app</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code"><strong>/create-project</strong> Create an Angular todo app</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">/migrate</code></nve-grid-cell>
@@ -150,48 +140,13 @@ args = ["mcp"]
 
 ### Skills
 
-Skills provide persistent context to AI agents for building UI with Elements. Unlike prompts (invoked on demand) or tools (callable functions), skills give agents background knowledge about Elements components, workflows, and best practices. Call `skills_list` for the current list and `skills_get` for the full context of a specific skill.
+Elements provides one `elements` skill for persistent authoring context. Install its complete directory, including task-specific reference files, from the project root:
 
-<nve-grid>
-  <nve-grid-header>
-    <nve-grid-column width="170px">Skill</nve-grid-column>
-    <nve-grid-column>Description</nve-grid-column>
-  </nve-grid-header>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">about</code></nve-grid-cell>
-    <nve-grid-cell>Instructions for providing a brief introduction for using the Elements Design System.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">authoring</code></nve-grid-cell>
-    <nve-grid-cell>Best practices and workflow guidance for authoring UI with NVIDIA Elements.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">doctor</code></nve-grid-cell>
-    <nve-grid-cell>Instructions for ensuring the Elements Design System is setup correctly.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">artifact</code></nve-grid-cell>
-    <nve-grid-cell>Use when creating throwaway UI artifacts, prototypes, demos, Claude Artifacts, Codex, or GPT Sites pages, or other standalone HTML interfaces that should use the NVIDIA Elements CDN template.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">integration</code></nve-grid-cell>
-    <nve-grid-cell>Best practices and workflow guidance for creating or setting up NVIDIA Elements projects.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">migration</code></nve-grid-cell>
-    <nve-grid-cell>Instructions for migrating a project from deprecated Elements APIs using lint tooling and CLI health checks.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">search</code></nve-grid-cell>
-    <nve-grid-cell>Best practices for providing Elements API Documentation.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">elements</code></nve-grid-cell>
-    <nve-grid-cell>Default skill for UI-related work or NVIDIA Elements (<code nve-text="code">nve-*</code>), including HTML, CSS, layout, theming, components, applications, prototypes, Claude Artifacts, Codex Sites pages, and standalone UI artifacts.</nve-grid-cell>
-  </nve-grid-row>
-</nve-grid>
+```shell
+nve skills.install
+```
 
-Deployments with the playground service enabled can also expose a `playground` skill for creating Elements Playground prototypes.
+Use `nve skills.install --global` to install the skill for the current user. The MCP server does not expose skill listing or retrieval tools. Its four prompts load the matching artifact, doctor, integration, and migration references from the same skill source.
 
 ### Tools
 
@@ -249,14 +204,6 @@ Call `api_validate` with `{ "paths": ["src/app.html"] }` or supplied content suc
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_render</code></nve-grid-cell>
     <nve-grid-cell>Render a custom Elements HTML template inline in the MCP Apps preview view.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">skills_list</code></nve-grid-cell>
-    <nve-grid-cell>Get a list of available Elements agent skills and context fragments.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">skills_get</code></nve-grid-cell>
-    <nve-grid-cell>Get a bundled Elements agent skill or context fragment by name.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_validate</code></nve-grid-cell>

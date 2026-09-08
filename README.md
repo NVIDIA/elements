@@ -7,6 +7,14 @@ NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Aut
 - **Built for AI infrastructure:** Operational UI for AI/ML workloads, autonomous vehicle tools, and robotics consoles.
 - **Stable API contracts:** Skills and lint guide authoring best practices, common UI patterns, and automated static analysis.
 
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```
+
 ## Requests and Contributions
 
 - [NVIDIA Elements Documentation](https://NVIDIA.github.io/elements/)

@@ -20,3 +20,11 @@ npm install @nvidia-elements/media
 ```typescript
 import '@nvidia-elements/media';
 ```
+
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```

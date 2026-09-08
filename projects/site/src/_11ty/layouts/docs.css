@@ -379,6 +379,12 @@ hr {
   border-bottom: 1px solid var(--nve-ref-border-color);
 }
 
+blockquote {
+  border-inline-start: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-muted);
+  padding: var(--nve-ref-space-md);
+  margin: 0;
+}
+
 .api-shortcode,
 .example-shortcode {
   width: 100%;
