@@ -28,7 +28,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="lock"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Authentication</h2>
+          <h2 nve-text="label medium emphasis">Authentication</h2>
           <p nve-text="body sm muted">Login, authentication, and verification patterns.</p>
         </div>
       </div>
@@ -41,7 +41,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="browser"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Browse</h2>
+          <h2 nve-text="label medium emphasis">Browse</h2>
           <p nve-text="body sm muted">Browse collections or lists of content</p>
         </div>
       </div>
@@ -54,7 +54,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="chat-bubble"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Chat</h2>
+          <h2 nve-text="label medium emphasis">Chat</h2>
           <p nve-text="body sm muted">Chat and AI conversation patterns</p>
         </div>
       </div>
@@ -67,7 +67,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="carets-closed-square"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Editor</h2>
+          <h2 nve-text="label medium emphasis">Editor</h2>
           <p nve-text="body sm muted">Code and Content Editing Patterns</p>
         </div>
       </div>
@@ -80,7 +80,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="rectangle-group"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Dashboard</h2>
+          <h2 nve-text="label medium emphasis">Dashboard</h2>
           <p nve-text="body sm muted">Common dashboard layouts and patterns.</p>
         </div>
       </div>
@@ -93,7 +93,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="question-mark-circle-stroke"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Empty States</h2>
+          <h2 nve-text="label medium emphasis">Empty States</h2>
           <p nve-text="body sm muted">Patterns and messaging for unavailable or missing data</p>
         </div>
       </div>
@@ -106,7 +106,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="table"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Heatmap</h2>
+          <h2 nve-text="label medium emphasis">Heatmap</h2>
           <p nve-text="body sm muted">Heatmap patterns and implementation examples</p>
         </div>
       </div>
@@ -119,7 +119,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="keyboard"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Keyboard Shortcuts</h2>
+          <h2 nve-text="label medium emphasis">Keyboard Shortcuts</h2>
           <p nve-text="body sm muted">Common keyboard shortcut patterns</p>
         </div>
       </div>
@@ -132,7 +132,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="terminal"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Logging</h2>
+          <h2 nve-text="label medium emphasis">Logging</h2>
           <p nve-text="body sm muted">Common logging and timeline lists</p>
         </div>
       </div>
@@ -145,7 +145,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="video-camera"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Media</h2>
+          <h2 nve-text="label medium emphasis">Media</h2>
           <p nve-text="body sm muted">Media content patterns and layouts</p>
         </div>
       </div>
@@ -158,7 +158,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="map"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Navigation</h2>
+          <h2 nve-text="label medium emphasis">Navigation</h2>
           <p nve-text="body sm muted">Common navigation patterns and structure</p>
         </div>
       </div>
@@ -171,7 +171,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="shapes"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Onboarding</h2>
+          <h2 nve-text="label medium emphasis">Onboarding</h2>
           <p nve-text="body sm muted">Guided UX steps and processes</p>
         </div>
       </div>
@@ -184,7 +184,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="dock-side"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Panel</h2>
+          <h2 nve-text="label medium emphasis">Panel</h2>
           <p nve-text="body sm muted">In view context details and actions</p>
         </div>
       </div>
@@ -197,7 +197,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="transparent-box"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Responsive</h2>
+          <h2 nve-text="label medium emphasis">Responsive</h2>
           <p nve-text="body sm muted">Adaptive overflow with container queries</p>
         </div>
       </div>
@@ -210,7 +210,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="search"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Search</h2>
+          <h2 nve-text="label medium emphasis">Search</h2>
           <p nve-text="body sm muted">Search and progressive filtering</p>
         </div>
       </div>
@@ -223,7 +223,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="heading"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Subheader</h2>
+          <h2 nve-text="label medium emphasis">Subheader</h2>
           <p nve-text="body sm muted">Common subheader navigation and actions</p>
         </div>
       </div>
@@ -236,7 +236,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
           <nve-icon name="trend-up"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Trend</h2>
+          <h2 nve-text="label medium emphasis">Trend</h2>
           <p nve-text="body sm muted">Simple data trend representations</p>
         </div>
       </div>

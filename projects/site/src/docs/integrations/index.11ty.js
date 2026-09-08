@@ -18,11 +18,11 @@ const renderLogo = ({ icon, iconHeight, iconSize = '36px', iconWidth, nveIcon, t
 };
 
 const renderIntegration = integration => /* html */ `<a href="${integration.href}">
-    <nve-card>
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         ${renderLogo(integration)}
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">${integration.title}</h2>
+          <h2 nve-text="label medium emphasis">${integration.title}</h2>
           <p nve-text="body sm muted">${integration.description}</p>
         </div>
       </div>
