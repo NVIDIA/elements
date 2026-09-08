@@ -41,9 +41,10 @@ describe('agentSkillsPlugin', () => {
     const index = JSON.parse(await fsp.readFile(nodePath.join(outputPath, 'index.json'), 'utf8'));
     expect(index).toEqual({
       $schema: AGENT_SKILLS_DISCOVERY_SCHEMA,
-      skills: [expect.objectContaining({ name: 'elements' })]
+      skills: [expect.objectContaining({ name: 'elements', type: 'archive', url: 'elements.zip' })]
     });
-    await expect(fsp.stat(nodePath.join(outputPath, 'about'))).rejects.toMatchObject({ code: 'ENOENT' });
+    const archive = await fsp.readFile(nodePath.join(outputPath, 'elements.zip'));
+    expect(archive.includes(Buffer.from('references/artifact.md'))).toBe(true);
   });
 });
 
@@ -52,10 +53,8 @@ describe('production site build', () => {
     const outputPath = 'dist/.well-known/agent-skills';
     const index = JSON.parse(await fsp.readFile(nodePath.join(outputPath, 'index.json'), 'utf8'));
 
-    expect(index.skills).toEqual([expect.objectContaining({ name: 'elements' })]);
-    await expect(fsp.readFile(nodePath.join(outputPath, 'elements', 'SKILL.md'), 'utf8')).resolves.toContain(
-      'name: "elements"'
-    );
-    await expect(fsp.stat(nodePath.join(outputPath, 'about'))).rejects.toMatchObject({ code: 'ENOENT' });
+    expect(index.skills).toEqual([expect.objectContaining({ name: 'elements', type: 'archive', url: 'elements.zip' })]);
+    const archive = await fsp.readFile(nodePath.join(outputPath, 'elements.zip'));
+    expect(archive.includes(Buffer.from('references/migration.md'))).toBe(true);
   });
 });

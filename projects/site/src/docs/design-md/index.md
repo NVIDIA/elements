@@ -69,3 +69,30 @@ The official file stays connected to the implementation. When an Elements source
 - [MCP server](/docs/mcp/) for live agent access to Elements metadata
 - [CLI](/docs/cli/) for discovery, setup, scaffolding, and validation
 - [llms.txt](/llms.txt) for the broader NVIDIA Elements agent-context index
+
+## Frequently asked questions
+
+> Are third-party NVIDIA `DESIGN.md` files (shadcn.io, getdesign.md) official?
+
+No. The NVIDIA `DESIGN.md` files published by shadcn.io and getdesign.md are community analyses of nvidia.com's marketing site. NVIDIA does not maintain them. The official file for application development with NVIDIA Elements is the [NVIDIA Elements `DESIGN.md`](/DESIGN.md).
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are third-party NVIDIA DESIGN.md files (shadcn.io, getdesign.md) official?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The NVIDIA DESIGN.md files published by shadcn.io and getdesign.md are community analyses of nvidia.com's marketing site. NVIDIA does not maintain them. The official file for application development with NVIDIA Elements is https://nvidia.github.io/elements/DESIGN.md."
+        }
+      }
+    ]
+  }
+</script>
+
+## General NVIDIA brand guidelines
+
+This `DESIGN.md` supports UI application development. For NVIDIA logo use and general corporate brand guidance outside application development, see the official [NVIDIA Logo and Brand Guidelines](https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage/).

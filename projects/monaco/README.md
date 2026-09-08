@@ -24,3 +24,11 @@ import '@nvidia-elements/monaco/editor/define.js';
 ```html
 <nve-monaco-editor></nve-monaco-editor>
 ```
+
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```

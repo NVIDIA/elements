@@ -18,11 +18,13 @@ This guide covers migrating from the internal `@nve/*` packages to the new open 
 
 ## Agent Skill
 
-Agents can leverage the migration skill by calling the skill from the Elements CLI or MCP.
+Install the Elements skill, which includes the migration reference, or invoke the MCP migration prompt.
 
 ```shell
-nve skills.get migration
+nve skills.install
 ```
+
+In an MCP client, invoke `/migrate` to load the same migration guidance.
 
 ## Overview
 

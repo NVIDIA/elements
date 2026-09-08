@@ -29,3 +29,11 @@ npm install @nvidia-elements/themes
 | `@nvidia-elements/themes/reduced-motion.css` | Reduced motion theme |
 | `@nvidia-elements/themes/compact.css`        | Compact theme        |
 | `@nvidia-elements/themes/dark.css`           | Dark theme           |
+
+## NVIDIA Elements Skill
+
+Install the Elements agent skill with the open [skills](https://www.skills.sh/nvidia/elements/elements) CLI:
+
+```shell
+npx skills add https://github.com/nvidia/elements --skill elements
+```
