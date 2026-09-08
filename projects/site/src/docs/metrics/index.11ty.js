@@ -112,7 +112,7 @@ export function render() {
     <div nve-layout="grid gap:md span-items:12 &lg|span-items:6 &xl|span-items:4">
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">${releases.data.length.toLocaleString()} Total Cumulative Releases</h3>
+          <h3 nve-text="heading xs emphasis medium">${releases.data.length.toLocaleString()} Total Cumulative Releases</h3>
           <p nve-text="body muted sm">Weekly cumulative automated releases across all packages</p>
         </nve-card-header>
         <nve-card-content>
@@ -121,7 +121,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">${elementTotal.toLocaleString()}</span> Total Cumulative Elements</h3>
+          <h3 nve-text="heading xs emphasis medium"><span nve-text="emphasis">${elementTotal.toLocaleString()}</span> Total Cumulative Elements</h3>
           <p nve-text="body muted sm">Total number of elements available over the library's version history</p>
         </nve-card-header>
         <nve-card-content style="--padding: var(--nve-ref-size-400);">
@@ -130,7 +130,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">Release Distribution</h3>
+          <h3 nve-text="heading xs emphasis medium">Release Distribution</h3>
           <p nve-text="body muted sm">Weekly distribution of semantic release types across all packages</p>
         </nve-card-header>
         <nve-card-content>
@@ -139,7 +139,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">Package Downloads Trend</h3>
+          <h3 nve-text="heading xs emphasis medium">Package Downloads Trend</h3>
           <p nve-text="body muted sm">Stacked daily npm download requests by package over the last month.</p>
         </nve-card-header>
         <nve-card-content>
@@ -148,7 +148,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">Component Complexity Score</h3>
+          <h3 nve-text="heading xs emphasis medium">Component Complexity Score</h3>
           <p nve-text="body muted sm">Bundle size (KB) vs complexity (branches), colored by test coverage.</p>
         </nve-card-header>
         <nve-card-content style="flex-direction: column;">
@@ -167,7 +167,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">${totalTests.toLocaleString()}</span> Tests and Type Distribution</h3>
+          <h3 nve-text="heading xs emphasis medium"><span nve-text="emphasis">${totalTests.toLocaleString()}</span> Tests and Type Distribution</h3>
           <p nve-text="body muted sm">Distribution of test types across all projects.</p>
         </nve-card-header>
         <nve-card-content>
@@ -176,7 +176,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">Release to Adoption Overlay</h3>
+          <h3 nve-text="heading xs emphasis medium">Release to Adoption Overlay</h3>
           <p nve-text="body muted sm">npm and CDN activity with npm publish markers in the same window.</p>
         </nve-card-header>
         <nve-card-content>
@@ -185,7 +185,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">CDN Version Adoption</h3>
+          <h3 nve-text="heading xs emphasis medium">CDN Version Adoption</h3>
           <p nve-text="body muted sm">Latest, leading non-latest, and other jsDelivr request share by package.</p>
         </nve-card-header>
         <nve-card-content>
@@ -194,7 +194,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">npm vs CDN Channel Mix</h3>
+          <h3 nve-text="heading xs emphasis medium">npm vs CDN Channel Mix</h3>
           <p nve-text="body muted sm">Build-time package downloads compared with browser CDN requests.</p>
         </nve-card-header>
         <nve-card-content>
@@ -203,7 +203,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">GitHub Interest Momentum</h3>
+          <h3 nve-text="heading xs emphasis medium">GitHub Interest Momentum</h3>
           <p nve-text="body muted sm">Public stargazer growth from GitHub API timestamps.</p>
         </nve-card-header>
         <nve-card-content>
