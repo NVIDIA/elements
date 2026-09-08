@@ -12,10 +12,14 @@
     "lint:fix": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.5.39"
+    "vue": "3.5.42"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
@@ -26,7 +30,7 @@
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "3.3.7"
+    "vue-tsc": "3.3.11"
   },
   "wireit": {
     "ci": {

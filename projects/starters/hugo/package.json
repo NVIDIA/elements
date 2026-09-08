@@ -6,18 +6,28 @@
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
-    "build": "wireit"
+    "build": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*",
-    "@nvidia-elements/code": "workspace:*"
+    "@nvidia-elements/themes": "workspace:*"
+  },
+  "devDependencies": {
+    "@nvidia-elements/lint": "workspace:*",
+    "eslint": "catalog:"
   },
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "build": {
@@ -65,6 +75,23 @@
     "dev": {
       "command": "mise exec -- hugo server",
       "service": true
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.mjs --color --cache --cache-location .eslintcache/",
+      "files": [
+        "eslint.config.mjs",
+        "package.json"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../lint:build"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.mjs --fix",
+      "dependencies": [
+        "../../lint:build"
+      ]
     }
   }
 }
