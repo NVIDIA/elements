@@ -79,13 +79,11 @@ section[slot='subheader'] {
 #sidenav-panel {
   nve-tree > nve-tree-node:not(:has(> a)),
   nve-tree > nve-tree-node:has(> a) {
-    --color: var(--nve-sys-text-muted-color);
-    --font-size: 11px;
+    --color: var(--nve-sys-text-emphasis-color);
+    --font-size: var(--nve-ref-font-size-200);
     --border-radius: var(--nve-ref-border-radius-xs);
-    font-weight: var(--nve-ref-font-weight-regular);
+    --font-weight: var(--nve-ref-font-weight-medium);
     margin-block-end: var(--nve-ref-space-sm);
-    text-transform: uppercase;
-    letter-spacing: 1.76px;
     cursor: pointer;
   }
 
