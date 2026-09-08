@@ -27,7 +27,7 @@ ${changelogs
 <nve-card style="height: 100%;">
   <nve-card-header>
     <div nve-layout="row gap:sm align:space-between align:vertical-center">
-      <h3 nve-text="heading sm">${changelog.title}</h3>
+      <h3 nve-text="heading sm emphasis medium">${changelog.title}</h3>
       <nve-badge status="success" container="flat">${changelog.version}</nve-badge>
     </div>
   </nve-card-header>

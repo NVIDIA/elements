@@ -43,7 +43,7 @@ ${entries
 <a href="${entry.url}" style="display: flex; text-decoration: none;">
   <nve-card class="update-card">
     <nve-card-header>
-      <h2 nve-text="heading">Monthly update - <time datetime="${getUpdateMonth(entry).toISOString().slice(0, 7)}">${formatUpdateMonth(entry)}</time></h2>
+      <h2 nve-text="heading sm emphasis medium">Monthly update - <time datetime="${getUpdateMonth(entry).toISOString().slice(0, 7)}">${formatUpdateMonth(entry)}</time></h2>
     </nve-card-header>
     <nve-card-content>
       <p nve-text="body">${entry.data.description}</p>
