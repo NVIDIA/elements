@@ -1,0 +1,71 @@
+#docs-main:has(.getting-started-page) #doc-content {
+  max-width: 1154px;
+}
+
+.getting-started-page {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:has(nve-card) * {
+    cursor: pointer;
+  }
+
+  nve-card {
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+    --border-radius: var(--nve-ref-border-radius-md);
+    --box-shadow: none;
+  }
+
+  nve-logo {
+    --width: var(--nve-ref-size-900);
+    --height: var(--nve-ref-size-900);
+  }
+
+  nve-icon[name='arrow'] {
+    --color: var(--nve-sys-text-emphasis-color);
+    --height: var(--nve-ref-size-400);
+    --width: var(--nve-ref-size-400);
+    opacity: 0;
+    position: absolute;
+    inset-block-start: var(--nve-ref-size-300);
+    inset-inline-end: var(--nve-ref-size-300);
+    transition: opacity var(--nve-ref-animation-duration-150);
+  }
+
+  nve-card:has(nve-icon[name='arrow']) {
+    position: relative;
+    transition:
+      box-shadow var(--nve-ref-animation-duration-150),
+      transform var(--nve-ref-animation-duration-150);
+
+    nve-card-content {
+      --padding: var(--nve-ref-space-lg);
+      min-height: calc(var(--nve-ref-size-900) * 3);
+    }
+
+    svg {
+      width: var(--nve-ref-size-900);
+      height: var(--nve-ref-size-900);
+      transform: scale(var(--getting-started-logo-scale, 1));
+      transform-origin: center;
+    }
+
+    svg#go-svg {
+      --getting-started-logo-scale: 1.65;
+    }
+  }
+
+  a:where(:hover, :focus-visible) {
+    nve-card {
+      --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-emphasis);
+      --box-shadow: var(--nve-ref-shadow-100);
+      transform: translateY(calc(-1 * var(--nve-ref-size-50)));
+    }
+
+    nve-icon[name='arrow'] {
+      opacity: 1;
+    }
+  }
+}
