@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { PassThrough } from 'node:stream';
 import { afterEach, describe, expect, it } from 'vitest';
-import { formatSkillMarkdown, skills } from '@internals/tools/skills';
+import { elementsSkill, getSkillMarkdown } from '@internals/tools/skills';
 import { getInstallPaths, installInternals, installNve } from './install.js';
 
 interface InstallerContext {
@@ -315,7 +315,10 @@ describe('installNve', () => {
 
     const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
     expect(promptQuestion).toBe('Install Elements agent skill globally? (Y/n) ');
-    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
+    expect(await readFile(skillPath, 'utf-8')).toBe(getSkillMarkdown(elementsSkill));
+    await expect(
+      readFile(join(context.home, '.agents/skills/elements/references/artifact.md'), 'utf-8')
+    ).resolves.toContain('Creating an Artifact');
   });
 
   it('should install the global Elements skill when the prompt uses the default answer', async () => {
@@ -325,16 +328,17 @@ describe('installNve', () => {
     await installNve({ env: createUnixEnv(context), log: () => {}, prompt: async () => '', source });
 
     const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
-    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
+    expect(await readFile(skillPath, 'utf-8')).toBe(getSkillMarkdown(elementsSkill));
   });
 
-  it('should overwrite the global Elements skill without prompting when it already exists', async () => {
+  it('should update the global Elements skill without prompting and preserve user files', async () => {
     const context = await createInstallerContext();
     const source = await writeFakeNve(join(context.root, 'source-nve'));
     const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
     let prompted = false;
     await mkdir(dirname(skillPath), { recursive: true });
     await writeFile(skillPath, 'stale skill');
+    await writeFile(join(dirname(skillPath), 'user.md'), 'user content');
 
     await installNve({
       env: createUnixEnv(context),
@@ -347,7 +351,8 @@ describe('installNve', () => {
     });
 
     expect(prompted).toBe(false);
-    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
+    expect(await readFile(skillPath, 'utf-8')).toBe(getSkillMarkdown(elementsSkill));
+    expect(await readFile(join(dirname(skillPath), 'user.md'), 'utf-8')).toBe('user content');
   });
 
   it('should skip global skill installation when declined', async () => {
@@ -366,7 +371,7 @@ describe('installNve', () => {
     await installNve({ env: createUnixEnv(context), log: () => {}, prompt: skipPrompt, source });
 
     const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
-    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
+    expect(await readFile(skillPath, 'utf-8')).toBe(getSkillMarkdown(elementsSkill));
   });
 
   it('should install the global Elements skill when the prompt rejects', async () => {
@@ -381,7 +386,7 @@ describe('installNve', () => {
     });
 
     const skillPath = join(context.home, '.agents/skills/elements/SKILL.md');
-    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
+    expect(await readFile(skillPath, 'utf-8')).toBe(getSkillMarkdown(elementsSkill));
   });
 
   it('should skip the global skill prompt in CI', async () => {
@@ -422,7 +427,7 @@ describe('installNve', () => {
     });
 
     expect(prompted).toBe(false);
-    expect(await readFile(skillPath, 'utf-8')).toBe(getExpectedElementsSkillMarkdown());
+    expect(await readFile(skillPath, 'utf-8')).toBe(getSkillMarkdown(elementsSkill));
   });
 
   it('should keep the CLI install when global skill installation fails', async () => {
@@ -802,14 +807,6 @@ function createUnixEnv({ fakeBin, home }: InstallerContext): NodeJS.ProcessEnv {
 
 async function skipPrompt(): Promise<undefined> {
   return undefined;
-}
-
-function getExpectedElementsSkillMarkdown(): string {
-  const skill = skills.find(s => s.name === 'elements');
-  if (!skill) {
-    throw new Error('Elements skill not found');
-  }
-  return formatSkillMarkdown(skill);
 }
 
 async function writeFakeNve(path: string): Promise<string> {

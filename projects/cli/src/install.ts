@@ -7,7 +7,7 @@ import { accessSync, constants, createReadStream, createWriteStream, existsSync,
 import { basename, dirname, join, resolve, win32 } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import type { Readable, Writable } from 'node:stream';
-import { formatSkillMarkdown, skills } from '@internals/tools/skills';
+import { elementsSkill, writeSkillDirectory } from '@internals/tools/skills';
 import { colors } from './utils.js';
 
 interface InstallPaths {
@@ -389,23 +389,23 @@ function getManifestPlatform(platform: NodeJS.Platform): string {
 }
 
 async function installGlobalElementsSkill(context: InstallContext): Promise<void> {
-  const skillPath = getGlobalElementsSkillPath(context.env, context.platform);
-  if (!skillPath) {
+  const skillDirectory = getGlobalElementsSkillDirectory(context.env, context.platform);
+  if (!skillDirectory) {
     context.warn('Could not install Elements agent skill. HOME is not set.');
     return;
   }
 
-  const hasExistingSkill = existsSync(skillPath);
+  const hasExistingSkill = existsSync(skillDirectory);
   if (!hasExistingSkill && !(await shouldInstallGlobalElementsSkill(context))) {
     return;
   }
 
   try {
-    await writeGlobalElementsSkill(skillPath);
-    context.log(`${hasExistingSkill ? 'Updated' : 'Installed'} agent skill at ${skillPath}`);
+    await writeSkillDirectory(skillDirectory, elementsSkill);
+    context.log(`${hasExistingSkill ? 'Updated' : 'Installed'} agent skill at ${skillDirectory}`);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
-    context.warn(`Could not install Elements agent skill at ${skillPath}. ${message}`);
+    context.warn(`Could not install Elements agent skill at ${skillDirectory}. ${message}`);
   }
 }
 
@@ -426,24 +426,14 @@ async function shouldInstallGlobalElementsSkill({ env, prompt }: InstallContext)
   }
 }
 
-function getGlobalElementsSkillPath(env: NodeJS.ProcessEnv, platform: NodeJS.Platform): string | undefined {
+function getGlobalElementsSkillDirectory(env: NodeJS.ProcessEnv, platform: NodeJS.Platform): string | undefined {
   const home = platform === 'win32' ? env.USERPROFILE : env.HOME;
   if (!home) {
     return undefined;
   }
 
   const path = platform === 'win32' ? win32 : { join };
-  return path.join(home, '.agents', 'skills', 'elements', 'SKILL.md');
-}
-
-async function writeGlobalElementsSkill(skillPath: string): Promise<void> {
-  const skill = skills.find(s => s.name === 'elements');
-  if (!skill) {
-    throw new Error('Elements skill not found');
-  }
-
-  await mkdir(dirname(skillPath), { recursive: true });
-  await writeFile(skillPath, formatSkillMarkdown(skill));
+  return path.join(home, '.agents', 'skills', 'elements');
 }
 
 async function promptFromTerminal(question: string, platform: NodeJS.Platform): Promise<string | undefined> {

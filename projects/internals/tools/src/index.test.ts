@@ -40,10 +40,8 @@ describe('tools', () => {
     await expect(getToolNames()).resolves.toContain('playground_create');
   });
 
-  it('should include skills tools', async () => {
+  it('should include only the CLI skill installation tool', async () => {
     const tools = await getTools();
-
-    expect(tools.some(tool => tool.metadata.command === 'skills.list')).toBe(true);
-    expect(tools.some(tool => tool.metadata.command === 'skills.get')).toBe(true);
+    expect(tools.some(tool => tool.metadata.command === 'skills.install')).toBe(true);
   });
 });

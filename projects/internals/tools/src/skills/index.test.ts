@@ -1,239 +1,79 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { formatSkillMarkdown, prompts, skills, type Prompt, type Skill } from './index.js';
-
-const originalPlaygroundBaseUrl = process.env.ELEMENTS_PLAYGROUND_BASE_URL;
-
-async function loadSkillsModule() {
-  vi.resetModules();
-  return import('./index.js');
-}
-
-function restorePlaygroundBaseUrl() {
-  if (originalPlaygroundBaseUrl === undefined) {
-    delete process.env.ELEMENTS_PLAYGROUND_BASE_URL;
-  } else {
-    process.env.ELEMENTS_PLAYGROUND_BASE_URL = originalPlaygroundBaseUrl;
-  }
-  vi.resetModules();
-}
+import { describe, expect, it } from 'vitest';
+import { prompts, skills, type Prompt, type Skill } from './index.js';
 
 describe('prompts', () => {
-  it('should export an array of prompts', () => {
-    expect(Array.isArray(prompts)).toBe(true);
-    expect(prompts.length).toBeGreaterThan(0);
+  it('should expose one prompt for each skill reference', () => {
+    expect(prompts.map(prompt => prompt.name)).toEqual(['artifact', 'doctor', 'create-project', 'migrate']);
   });
 
   it('should have required properties for each prompt', () => {
     prompts.forEach((prompt: Prompt) => {
-      expect(prompt.name).toBeDefined();
-      expect(typeof prompt.name).toBe('string');
       expect(prompt.name.length).toBeGreaterThan(0);
-
-      expect(prompt.title).toBeDefined();
-      expect(typeof prompt.title).toBe('string');
       expect(prompt.title.length).toBeGreaterThan(0);
-
-      expect(prompt.description).toBeDefined();
-      expect(typeof prompt.description).toBe('string');
       expect(prompt.description.length).toBeGreaterThan(0);
-
-      expect(prompt.handler).toBeDefined();
       expect(typeof prompt.handler).toBe('function');
     });
   });
 
-  it('should have unique prompt names', () => {
-    const names = prompts.map(p => p.name);
-    const uniqueNames = new Set(names);
-    expect(uniqueNames.size).toBe(names.length);
-  });
-
-  it('should return valid message structure from handlers', () => {
+  it('should return valid message structures from handlers', () => {
     prompts.forEach((prompt: Prompt) => {
       const result = prompt.handler({});
-
-      expect(result).toBeDefined();
-      expect(result.messages).toBeDefined();
-      expect(Array.isArray(result.messages)).toBe(true);
-      expect(result.messages.length).toBeGreaterThan(0);
-
-      result.messages.forEach(message => {
-        expect(message.role).toBeDefined();
-        expect(['user', 'assistant']).toContain(message.role);
-        expect(message.content).toBeDefined();
-        expect(message.content.type).toBe('text');
-        expect(typeof message.content.text).toBe('string');
-        expect(message.content.text.length).toBeGreaterThan(0);
-      });
+      expect(result.messages).toHaveLength(1);
+      expect(result.messages[0]?.role).toBe('user');
+      expect(result.messages[0]?.content.type).toBe('text');
+      expect(result.messages[0]?.content.text.endsWith('\n---')).toBe(true);
     });
   });
 
-  describe('individual prompts', () => {
-    it('should have "about" prompt with introduction content', () => {
-      const aboutPrompt = prompts.find(p => p.name === 'about');
-      expect(aboutPrompt).toBeDefined();
-      expect(aboutPrompt?.title).toContain('Elements');
-
-      const result = aboutPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('Elements Design System');
-    });
-
-    it('should have "doctor" prompt for setup checking', () => {
-      const doctorPrompt = prompts.find(p => p.name === 'doctor');
-      expect(doctorPrompt).toBeDefined();
-      expect(doctorPrompt?.description).toContain('setup');
-
-      const result = doctorPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('MCP');
-    });
-
-    it('should have "artifact" prompt with the standalone HTML template', () => {
-      const artifactPrompt = prompts.find(p => p.name === 'artifact');
-      expect(artifactPrompt).toBeDefined();
-      expect(artifactPrompt?.title).toBe('NVIDIA Artifact Template');
-
-      const result = artifactPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('<title>NVIDIA Elements Artifact</title>');
-      expect(result?.messages[0].content.text).toContain('@nvidia-elements/core/dist/bundles/index.min.js');
-    });
-
-    it('should have "search" prompt for API documentation', () => {
-      const searchPrompt = prompts.find(p => p.name === 'search');
-      expect(searchPrompt).toBeDefined();
-      expect(searchPrompt?.description).toContain('API');
-
-      const result = searchPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('nve api.');
-    });
-
-    it('should have "create-project" prompt for starter projects', () => {
-      const createProjectPrompt = prompts.find(p => p.name === 'create-project');
-      expect(createProjectPrompt).toBeDefined();
-      expect(createProjectPrompt?.description).toContain('Starter');
-
-      const result = createProjectPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('nve project.create');
-    });
+  it.each([
+    ['artifact', 'references/artifact.md'],
+    ['doctor', 'references/doctor.md'],
+    ['create-project', 'references/integration.md'],
+    ['migrate', 'references/migration.md']
+  ])('should map the %s prompt to %s', (promptName, resourcePath) => {
+    const skill = skills[0];
+    const prompt = prompts.find(entry => entry.name === promptName);
+    expect(prompt?.handler({}).messages[0]?.content.text).toBe(`${skill?.files[resourcePath]?.trimEnd()}\n---`);
   });
 });
 
-describe('skillEntries', () => {
-  it('should export an array of skill entries', () => {
-    expect(Array.isArray(skills)).toBe(true);
-    expect(skills.length).toBeGreaterThan(0);
+describe('skill entries', () => {
+  it('should export the singular Elements skill', () => {
+    expect(skills).toHaveLength(1);
+    expect(skills[0]?.name).toBe('elements');
   });
 
-  it('should have required properties for each skill entry', () => {
+  it('should have required metadata and files', () => {
     skills.forEach((skill: Skill) => {
-      expect(skill.name).toBeDefined();
-      expect(typeof skill.name).toBe('string');
       expect(skill.name.length).toBeGreaterThan(0);
-
-      expect(skill.title).toBeDefined();
-      expect(typeof skill.title).toBe('string');
       expect(skill.title.length).toBeGreaterThan(0);
-
-      expect(skill.description).toBeDefined();
-      expect(typeof skill.description).toBe('string');
       expect(skill.description.length).toBeGreaterThan(0);
-
-      expect(skill.context).toBeDefined();
-      expect(typeof skill.context).toBe('string');
-      expect(skill.context.length).toBeGreaterThan(0);
+      expect(Object.keys(skill.files)).toEqual([
+        'SKILL.md',
+        'references/artifact.md',
+        'references/doctor.md',
+        'references/integration.md',
+        'references/migration.md'
+      ]);
     });
   });
 
-  it('should have unique skill entry names', () => {
-    const names = skills.map(skill => skill.name);
-    const uniqueNames = new Set(names);
-    expect(uniqueNames.size).toBe(names.length);
+  it('should keep registry metadata aligned with SKILL.md frontmatter', () => {
+    const skill = skills[0];
+    const markdown = skill?.files['SKILL.md'];
+    expect(markdown).toContain(`name: "${skill?.name}"`);
+    expect(markdown).toContain(`description: "${skill?.description}"`);
+    expect(markdown).toContain(`title: "${skill?.title}"`);
   });
 
-  it('should have valid Agent Skills names and descriptions', () => {
-    skills.forEach(skill => {
-      expect(skill.name).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-      expect(skill.name.length).toBeLessThanOrEqual(64);
-      expect(skill.description.length).toBeGreaterThanOrEqual(1);
-      expect(skill.description.length).toBeLessThanOrEqual(1024);
-    });
-  });
-
-  it('should include authoring, artifact, and elements entries', () => {
-    expect(skills.some(skill => skill.name === 'authoring')).toBe(true);
-    expect(skills.some(skill => skill.name === 'artifact')).toBe(true);
-    expect(skills.some(skill => skill.name === 'elements')).toBe(true);
-  });
-
-  it('should default elements skill guidance to UI and artifact work', () => {
-    const elementsSkill = skills.find(skill => skill.name === 'elements');
-    expect(elementsSkill?.description).toContain('any UI-related work');
-    expect(elementsSkill?.description).toContain('standalone UI artifacts');
-    expect(elementsSkill?.context).toContain('prefer the canonical absolute executable path');
-    expect(elementsSkill?.context).toContain('$HOME/.nve/bin/nve');
-    expect(elementsSkill?.context).toContain('## Creating an Artifact');
-    expect(elementsSkill?.context).toContain('@nvidia-elements/core/dist/bundles/index.min.js');
-  });
-
-  it('should format skills as installable markdown files', () => {
-    const elementsSkill = skills.find(skill => skill.name === 'elements');
-    expect(elementsSkill).toBeDefined();
-    if (!elementsSkill) return;
-
-    const markdown = formatSkillMarkdown(elementsSkill);
-
-    expect(markdown).toMatch(/^---\nname: "elements"\ndescription: "Use this skill by default/);
-    expect(markdown).toContain('\nlicense: "Apache-2.0"\n');
-    expect(markdown).toContain('\nmetadata:\n  title: "NVIDIA Elements Design System \(nve\)"\n');
-    expect(markdown).not.toMatch(/^title:/m);
-    expect(markdown).toContain('# Building UI with NVIDIA Elements');
-    expect(markdown.endsWith('\n')).toBe(true);
-    expect(markdown.endsWith('\n\n')).toBe(false);
-  });
-
-  it('should terminate every formatted skill with one newline', () => {
-    skills.forEach(skill => {
-      const markdown = formatSkillMarkdown(skill);
-
-      expect(markdown.endsWith('\n')).toBe(true);
-      expect(markdown.endsWith('\n\n')).toBe(false);
-    });
-  });
-});
-
-describe('playground registration', () => {
-  afterEach(() => {
-    restorePlaygroundBaseUrl();
-  });
-
-  it('should omit playground prompt and skill without a playground url', async () => {
-    delete process.env.ELEMENTS_PLAYGROUND_BASE_URL;
-    const { prompts: loadedPrompts, skills: loadedSkills } = await loadSkillsModule();
-    const elementsSkill = loadedSkills.find(skill => skill.name === 'elements');
-
-    expect(loadedPrompts.some(prompt => prompt.name === 'playground')).toBe(false);
-    expect(loadedSkills.some(skill => skill.name === 'playground')).toBe(false);
-    expect(elementsSkill?.context).not.toContain('Playground UI Workflow');
-  });
-
-  it('should include playground prompt, skill, and elements guidance with a playground url', async () => {
-    process.env.ELEMENTS_PLAYGROUND_BASE_URL = 'https://playground.example.com';
-    const { prompts: loadedPrompts, skills: loadedSkills } = await loadSkillsModule();
-    const playgroundPrompt = loadedPrompts.find(prompt => prompt.name === 'playground');
-    const playgroundSkill = loadedSkills.find(skill => skill.name === 'playground');
-    const elementsSkill = loadedSkills.find(skill => skill.name === 'elements');
-
-    expect(playgroundPrompt).toBeDefined();
-    expect(playgroundPrompt?.title).toBe('How to create an Elements Playground');
-
-    const result = playgroundPrompt?.handler({});
-    expect(result?.messages[0].content.text).toContain('Playground UI Workflow');
-    expect(result?.messages[0].content.text).toContain('nve playground.create');
-
-    expect(playgroundSkill).toBeDefined();
-    expect(playgroundSkill?.context).toContain('Playground UI Workflow');
-    expect(elementsSkill?.context).toContain('Playground UI Workflow');
+  it('should retain progressive disclosure references', () => {
+    const markdown = skills[0]?.files['SKILL.md'];
+    expect(markdown).toContain('(./references/artifact.md)');
+    expect(markdown).toContain('(./references/doctor.md)');
+    expect(markdown).toContain('(./references/integration.md)');
+    expect(markdown).toContain('(./references/migration.md)');
   });
 });
