@@ -53,7 +53,7 @@ body {
 
 /* Sticky Subheader Styles */
 section[slot='subheader'] {
-  background: var(--nve-ref-color-neutral-100);
+  background: var(--nve-sys-layer-canvas-background);
   border-bottom: 1px solid var(--nve-ref-border-color);
 
   /* Override nve-layout values with animated values */
