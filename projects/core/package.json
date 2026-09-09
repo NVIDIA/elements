@@ -1010,7 +1010,7 @@
     "publint": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
-    "svgo": "4.0.2",
+    "svgo": "4.1.0",
     "ts-lit-plugin": "2.0.2",
     "typescript": "catalog:",
     "vite": "catalog:",
