@@ -10,6 +10,8 @@
 
 <h2 nve-text="heading sm muted">The @nvidia-elements/lint package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements</h2>
 
+The HTML configuration checks HTML in `src/**/*.html`, supported JavaScript and TypeScript templates, and Markdown files under `src/**/*.md`. Markdown linting includes rendered markup and HTML examples in fenced code blocks.
+
 {% install-artifactory %}
 
 ```shell

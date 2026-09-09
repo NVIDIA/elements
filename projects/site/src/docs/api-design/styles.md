@@ -261,7 +261,7 @@ CSS Custom Properties defined on the host should use Design Tokens that appropri
 
 {% enddodont %}
 
-<nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: leveraging design tokens with defined intent drastically reduces the amount of CSS bundled and maintained within the system.</nve-alert>
+<nve-alert><nve-icon slot="icon" name="flag"></nve-icon> Performance: leveraging design tokens with defined intent drastically reduces the amount of CSS bundled and maintained within the system.</nve-alert>
 
 ## Element Style APIs
 
@@ -270,6 +270,8 @@ For custom states and behaviors, styles can hook into the public API of a reflec
 - types status: `error` | `success` | `warning`
 - states `expanded` | `selected` | `disabled`
 - behaviors `closable` | `draggable`
+
+<!-- eslint-disable @nvidia-elements/lint/no-unknown-css-variable, @nvidia-elements/lint/no-unstyled-typography -->
 
 ```html
 <nve-accordion-panel expanded>
@@ -289,21 +291,23 @@ nve-accordion-panel[expanded] {
 </style>
 ```
 
+<!-- eslint-enable @nvidia-elements/lint/no-unknown-css-variable, @nvidia-elements/lint/no-unstyled-typography -->
+
 ## Margins & Whitespace
 
 Elements should not have any external margins or whitespace outside the bounds of the host element. Margins on a host element make assumptions about the layout that is external to their responsibility. A design token/layout system allows designers and developers to layout elements/utilities consistently and with explicit intent and constraint.
 
-<nve-badge><nve-icon slot="icon">🏁</nve-icon> Performance: avoiding margins enables &nbsp;<a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></nve-badge>
-<nve-badge><nve-icon slot="icon">🎓</nve-icon> Learn: &nbsp;<a href="https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202">leading trim</a></nve-badge>
-<nve-badge><nve-icon slot="icon">🎓</nve-icon> Learn about &nbsp;<a href="https://seek-oss.github.io/capsize/">Capsize CSS</a></nve-badge>
+<nve-alert><nve-icon slot="icon" name="flag"></nve-icon> Performance: avoiding margins enables &nbsp;<a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: &nbsp;<a href="https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202">leading trim</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn about &nbsp;<a href="https://seek-oss.github.io/capsize/">Capsize CSS</a></nve-alert>
 
 ## Logical Properties
 
 Use CSS Logical Properties when applying styles to text content that may invert with reading style. By using logical properties the styles follow the reading direction of the element. i18n support requires this
 when the user preferences in the browser reverse the reading order.
 
-<nve-badge><nve-icon slot="icon">🎓</nve-icon> Learn about &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></nve-badge>
-<nve-badge><nve-icon slot="icon">🎓</nve-icon> Case Study: &nbsp;<a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">example of inverted form controls </a></nve-badge>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn about &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Case Study: &nbsp;<a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">example of inverted form controls </a></nve-alert>
 
 ## CSS Parts
 
@@ -329,7 +333,7 @@ You can more safely expose elements that are part of the library's public API si
 
 ```html
 <!-- nve-dialog internal template -->
-<nve-icon-button part="icon-button"></nve-icon-button>
+<nve-icon-button part="icon-button" icon-name="placeholder"></nve-icon-button>
 
 <!-- consumer css -->
 <style>
@@ -344,8 +348,8 @@ You can more safely expose elements that are part of the library's public API si
 When naming a part use the name of the custom element without the `nve-` prefix for API consistency. If a component has many internal part references of the same type use both the generalize element name as well as a semantic name. This allows generalized selectors for theming as well as precise selections when needed.
 
 ```html
-<nve-icon-button part="icon-button previous-icon-button"></nve-icon-button>
-<nve-icon-button part="icon-button next-icon-button"></nve-icon-button>
+<nve-icon-button part="icon-button previous-icon-button" icon-name="placeholder"></nve-icon-button>
+<nve-icon-button part="icon-button next-icon-button" icon-name="placeholder"></nve-icon-button>
 ```
 
 ```css

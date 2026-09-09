@@ -60,7 +60,7 @@ This warning appears when invalid elements are slotted into a component. Example
 
 ```html
 <nve-tree>
-  <nve-tree-node></nve-tree-node>
+  <nve-tree-node>Node</nve-tree-node>
 </nve-tree>
 
 <nve-grid-row>
@@ -73,7 +73,7 @@ This warning appears when invalid elements are slotted into a component. Example
 ```html
 <nve-tree>
   <div>
-    <nve-tree-node></nve-tree-node>
+    <nve-tree-node>Node</nve-tree-node>
   </div>
 </nve-tree>
 
@@ -102,10 +102,14 @@ This warning appears when a component tries to reference an element by ID that d
 
 <nve-alert status="danger">Invalid</nve-alert>
 
+<!-- eslint-disable @nvidia-elements/lint/no-missing-popover-trigger -->
+
 ```html
 <nve-button popovertarget="my-popover">show tooltip</nve-button>
 <nve-tooltip id="incorrect-id">tooltip</nve-tooltip>
 ```
+
+<!-- eslint-enable @nvidia-elements/lint/no-missing-popover-trigger -->
 
 To resolve this warning:
 

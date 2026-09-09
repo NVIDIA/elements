@@ -45,7 +45,7 @@ Build outputs should target the latest ES2020+. Build outputs should not compile
 
 <nve-alert status="warning">Warning: avoid alternate build targets as it increases complexity and is unnecessary with modern build tools and browsers.</nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="https://justinfagnani.com/2019/11/01/how-to-publish-web-components-to-npm/">publishing Web Components</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: <a href="https://justinfagnani.com/2019/11/01/how-to-publish-web-components-to-npm/">publishing Web Components</a></nve-alert>
 
 ## Entrypoints
 
@@ -95,8 +95,8 @@ The `package.json` should use a `sideEffects` array that lists registration and 
 
 This enables tools like Webpack and Rollup to preserve explicit registration entrypoints while still tree-shaking side-effect-free component modules.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn about <a href="/docs/integrations/lit-library/">Lit Library integration</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn about <a href="/docs/integrations/lit-library/">Lit Library integration</a></nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry">scoped element registry</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: <a href="https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry">scoped element registry</a></nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="https://www.youtube.com/watch?v=QmDToR6mLhk">case study</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: <a href="https://www.youtube.com/watch?v=QmDToR6mLhk">case study</a></nve-alert>

@@ -13,7 +13,7 @@
 <nve-grid>
   <nve-grid-header>
     <nve-grid-column>
-      Column 1 <nve-icon-button slot="actions"></nve-icon-button>
+      Column 1 <nve-icon-button slot="actions" icon-name="more-actions" aria-label="Column actions"></nve-icon-button>
     </nve-grid-column>
     <nve-grid-column>Column 2</nve-grid-column>
     <nve-grid-column>Column 3</nve-grid-column>

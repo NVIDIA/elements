@@ -9,18 +9,18 @@
 ---
 
 ```html
-<section nve-layout="row gap:md align:stretch">
-  <nve-panel expanded closable>
-    ...
-  </nve-panel>
-
-  <div nve-layout="column gap:md">
-    <nve-button>display settings</nve-button>
-    <nve-grid>
-      ...
-    </nve-grid>
+<div nve-layout="column gap:md full">
+  <nve-dropdown closable id="column-settings-dropdown">
+    settings...
+  </nve-dropdown>
+  <div nve-layout="row gap:sm align:vertical-center">
+    <p nve-text="body muted">1,145 results found</p>
+    <nve-button popovertarget="column-settings-dropdown">
+      Display Settings
+    </nve-button>
   </div>
-</section>
+  <nve-grid>...</nve-grid>
+</div>
 ```
 
 {% example '@nvidia-elements/core/grid/grid.examples.json' 'DisplaySettings' %}

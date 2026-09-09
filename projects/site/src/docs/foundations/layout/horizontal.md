@@ -66,7 +66,7 @@ Set `nve-layout="row"` on a container element to create a horizontal layout:
 
 ```html
 <!-- Simple horizontal layout -->
-<nav nve-layout="row">
+<nav nve-layout="row gap:sm">
   <a href="/">Home</a>
   <a href="/about">About</a>
   <a href="/contact">Contact</a>
@@ -79,9 +79,9 @@ Set `nve-layout="row"` on a container element to create a horizontal layout:
 </div>
 
 <!-- With alignment -->
-<header nve-layout="row align:vertical-center align:space-between">
-  <nve-logo></nve-logo>
-  <h1>Menu items</h1>
+<header nve-layout="row gap:sm align:vertical-center align:space-between">
+  <nve-logo>NV</nve-logo>
+  <h1 nve-text="heading">Menu items</h1>
 </header>
 ```
 
@@ -126,7 +126,7 @@ Horizontal layouts support alignment along both axes:
 ## Horizontal Layout Examples
 
 ```html
-<section nve-layout="row align:...">
+<section nve-layout="row gap:sm align:center">
 ```
 
 ### Align Left

@@ -201,6 +201,7 @@
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.js",
+        "src/**/*.md",
         "src/**/*.ts",
         "eslint.config.js"
       ],

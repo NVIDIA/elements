@@ -20,7 +20,7 @@ Slots provide flexibility for content controlled by the host application that a 
 
 ```html
 <nve-alert status="success">
-  <p>Hello <strong>There</strong>!</p>
+  <p nve-text="body">Hello <strong>There</strong>!</p>
 </nve-alert>
 ```
 
@@ -31,12 +31,12 @@ Slots enable an easy way for component composition and decoupling from precise u
 ```html
 <nve-card>
   <nve-card-header>
-    <h3>Plugin</h3>
+    <h3 nve-text="heading">Plugin</h3>
     <a href="#">Learn More</a>
   </nve-card-header>
-  <nve-card-body>
-    <p>Cool new plugin features!</p>
-  </nve-card-body>
+  <nve-card-content>
+    <p nve-text="body">Cool new plugin features!</p>
+  </nve-card-content>
   <nve-card-footer>
     <nve-button>Enable</nve-button>
   </nve-card-footer>
@@ -73,21 +73,21 @@ Composition based APIs also provide flexibility for the host application to choo
 
 ```html
 <nve-tree>
-  <nve-tree-item>item</nve-tree-item>
-  <nve-tree-item>item</nve-tree-item>
-  <nve-tree-item>item</nve-tree-item>
+  <nve-tree-node>item</nve-tree-node>
+  <nve-tree-node>item</nve-tree-node>
+  <nve-tree-node>item</nve-tree-node>
 </nve-tree>
 ```
 
 ```html
 <nve-tree>
-  <nve-tree-item>item</nve-tree-item>
-  <nve-tree-item>item</nve-tree-item>
-  <nve-tree-item expanded>
-  	<nve-tree-item>item</nve-tree-item>
-    <nve-tree-item>item</nve-tree-item>
-    <nve-tree-item>item</nve-tree-item>
-  </nve-tree-item>
+  <nve-tree-node>item</nve-tree-node>
+  <nve-tree-node>item</nve-tree-node>
+  <nve-tree-node expanded>
+	<nve-tree-node>item</nve-tree-node>
+    <nve-tree-node>item</nve-tree-node>
+    <nve-tree-node>item</nve-tree-node>
+  </nve-tree-node>
 </nve-tree>
 ```
 
@@ -96,14 +96,14 @@ By leveraging composition the host application has full render control in their 
 ```html
 <!-- Angular -->
 <nve-tree>
-  <nve-tree-item *ngFor="let item of items">{{item.id}}</nve-tree-item>
+  <nve-tree-node *ngFor="let item of items">{{item.id}}</nve-tree-node>
 </nve-tree>
 ```
 
 ```tsx
 // JSX
 <nve-tree>
-  {items.map(item => <nve-tree-item>{item.id}</nve-tree-item>)}
+  {items.map(item => <nve-tree-node>{item.id}</nve-tree-node>)}
 </nve-tree>
 ```
 
@@ -113,7 +113,7 @@ This enables full control of conditional rendering of tree nodes as well as more
 <!-- Angular, only create nodes if the item meets a certain condition -->
 <nve-tree>
   <ng-container *ngFor="let item of items">
-    <nve-tree-item *ngIf="item.active">{{item.id}}</nve-tree-item>
+    <nve-tree-node *ngIf="item.active">{{item.id}}</nve-tree-node>
   </ng-container>
 </nve-tree>
 ```

@@ -16,7 +16,7 @@ Elements should default to using composition when possible. This approach is to 
 
 ```html
 <nve-button>
-  button <nve-icon name="info"></nve-icon>
+  button <nve-icon name="information-circle"></nve-icon>
 </nve-button>
 ```
 
@@ -36,7 +36,7 @@ Going further this runs into layout conflicts. If the icon needs to change posit
 
 ```html
 <nve-button>
-  <nve-icon name="info"></nve-icon> button
+  <nve-icon name="information-circle"></nve-icon> button
 </nve-button>
 ```
 
@@ -64,6 +64,8 @@ Elements should provide reasonable defaults for better developer experience for 
 
 The alert can internally provide the default icon style for the status in the system. But as above with the button, the alert element runs the risk of absorbing parts of the icon API. To mitigate this, use a documented named slot as the customization hook.
 
+<!-- eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value -->
+
 ```html
 <!-- nve-alert template -->
 <div>
@@ -80,11 +82,15 @@ The alert can internally provide the default icon style for the status in the sy
 </nve-alert>
 ```
 
+<!-- eslint-enable @nvidia-elements/lint/no-unexpected-attribute-value -->
+
 Slots can provide default content if the consumer supplies no content. Here the template sets an internal icon with a status icon that matches the status of the alert. If the consumer wants to customize the icon, they can project their own icon into the `icon` slot and override the default. This makes `icon` an explicit public slot API, while avoiding a series of icon-specific inherited attributes or properties on the alert.
 
 ## Semantic Obfuscation - anti-pattern
 
 When building composition based APIs the developer should push the semantics of the HTML up into the light DOM or the control of the consumer. In this example the card element embeds the h1 heading. This creates an incorrect DOM structure as only one given h1 can exist within the page. This also applies as the page structure should work down from h1-h6.
+
+<!-- eslint-disable @nvidia-elements/lint/no-unexpected-slot-value -->
 
 {% dodont %}
 
@@ -100,15 +106,15 @@ When building composition based APIs the developer should push the semantics of 
 
 <!-- consumer API -->
 <nve-card status="warning">
-  <h2 slot="header">Card Header</h2>
-  <p>card content</p>
+  <h2 slot="header" nve-text="heading">Card Header</h2>
+  <p nve-text="body">card content</p>
 </nve-card>
 ```
 
 ```html
 <!-- nve-card template -->
 <div>
-  <h1><slot name="header"></slot></h1>
+  <h1 nve-text="heading"><slot name="header"></slot></h1>
   <div>
   	<slot></slot>
   </div>
@@ -118,11 +124,13 @@ When building composition based APIs the developer should push the semantics of 
 <!-- consumer API -->
 <nve-card status="warning">
   <div slot="header">Card Header</div>
-  <p>card content</p>
+  <p nve-text="body">card content</p>
 </nve-card>
 ```
 
 {% enddodont %}
+
+<!-- eslint-enable @nvidia-elements/lint/no-unexpected-slot-value -->
 
 While composition based APIs may be more verbose at times, they lower the API surface area to learn in the system and help ensure there is a singular way to use the element. Once a consumer learns an element API, that API usage remains predictable and reliable throughout the system.
 

@@ -30,7 +30,7 @@ Properties (`@property`) in Lit enable setting the property on the element via J
 ```
 
 <nve-alert>
-  <nve-icon slot="icon">🎓</nve-icon> 
+  <nve-icon slot="icon" name="academic-cap"></nve-icon>
   <p nve-text="body">Learn: by default when you set a property, Lit does not update the corresponding attribute in the DOM for performance. If the attribute serves as a style hook example, <code nve-text="code">:host([disabled])</code> then you can add the <code nve-text="code">reflect</code> option to the property decorator.</p>
 </nve-alert>
 
@@ -56,7 +56,7 @@ Properties/Attributes should avoid enabling “impossible states”. Conflicting
 
 {% enddodont %}
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn:&nbsp;<a href="https://kentcdodds.com/blog/make-impossible-states-impossible" nve-text="link">make impossible states impossible</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn:&nbsp;<a href="https://kentcdodds.com/blog/make-impossible-states-impossible" nve-text="link">make impossible states impossible</a></nve-alert>
 
 ## Boolean Types
 
@@ -81,20 +81,20 @@ Boolean property/attribute type behave the same as native HTML element boolean t
 While Lit keeps both properties and attributes in sync, do not use complex types like `object` and `array` on the API. Since HTML cannot represent JavaScript objects, Lit must JSON parse attributes and reflect them anytime there is a change to ensure the JavaScript property and HTML attribute are in sync. This can be expensive to parse when using an object or array and cause unexpected behaviors such as lost object references for the user.
 
 <nve-alert status="success">
-  Use <code>string | number | boolean</code>
+  Use <code nve-text="code">string | number | boolean</code>
 </nve-alert>
 
 <nve-alert status="danger">
-  Avoid <code>object | array</code>
+  Avoid <code nve-text="code">object | array</code>
 </nve-alert>
 
 Complex types cause compatibility and usability issues as it can require the developer to use JavaScript to render content. This can make it difficult for user-generated content like CMS systems or SSR (Server Side Rendering) to easily render static HTML.
 
 <nve-alert status="warning">
-  Warning: avoid using <code>@property</code> on built in properties/attributes on the <code>HTMLElement</code> as the decorator overrides the getter/setter and can cause unexpected behavior.&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-property-names.js" nve-text="link">read more</a>
+  Warning: avoid using <code nve-text="code">@property</code> on built in properties/attributes on the <code nve-text="code">HTMLElement</code> as the decorator overrides the getter/setter and can cause unexpected behavior.&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-property-names.js" nve-text="link">read more</a>
 </nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon>
 Learn about <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" nve-text="link">Web Fundamentals Attributes vs Properties</a>.
 </nve-alert>
 
@@ -147,6 +147,6 @@ export class Sparkline extends LitElement implements DataElement<number[]> {
 
 <nve-alert status="warning">
   <p nve-text="relaxed">
-    Warning: only use <code>DataElement</code> for data structures that have no reasonable declarative HTML representation. If primitive attributes, slots, or child elements can represent the content, prefer those approaches.
+    Warning: only use <code nve-text="code">DataElement</code> for data structures that have no reasonable declarative HTML representation. If primitive attributes, slots, or child elements can represent the content, prefer those approaches.
   </p>
 </nve-alert>

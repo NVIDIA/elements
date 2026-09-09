@@ -36,6 +36,8 @@
 
 ## Lit {% svg-logo 'lit' '28' %}
 
+<!-- eslint-disable @nvidia-elements/lint/no-unexpected-slot-value -->
+
 ```typescript
 class RowSortDemo extends LitElement {
   @state() sort: 'none' | 'ascending' | 'descending' = 'none';
@@ -62,3 +64,5 @@ class RowSortDemo extends LitElement {
   }
 }
 ```
+
+<!-- eslint-enable @nvidia-elements/lint/no-unexpected-slot-value -->
