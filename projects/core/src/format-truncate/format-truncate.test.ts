@@ -117,6 +117,52 @@ describe(FormatTruncate.metadata.tag, () => {
     expect(element.hasAttribute('title')).toBe(false);
   });
 
+  it('should recompute after a connected move', async () => {
+    const source = document.createElement('div');
+    source.style.width = '40px';
+    const destination = document.createElement('div');
+    destination.style.width = '400px';
+    fixture.append(source, destination);
+
+    element.textContent = 'abcdefghij';
+    source.append(element);
+    await elementIsStable(element);
+
+    expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toContain('…');
+    expect(element.title).toBe('abcdefghij');
+
+    destination.moveBefore(element, null);
+    element.connectedMoveCallback();
+    await elementIsStable(element);
+
+    expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toBe('abcdefghij');
+    expect(element.hasAttribute('title')).toBe(false);
+  });
+
+  it('should treat an empty host as empty text', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`<nve-format-truncate></nve-format-truncate>`);
+    element = getTruncate(fixture);
+    await elementIsStable(element);
+
+    expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toBe('');
+    expect(element.hasAttribute('title')).toBe(false);
+  });
+
+  it('should ignore named slot children when reading default text', async () => {
+    const host = document.createElement(FormatTruncate.metadata.tag) as FormatTruncate;
+    const named = document.createElement('span');
+    named.setAttribute('slot', 'unused');
+    named.textContent = 'ignored';
+    host.append(named, 'visible');
+    fixture.append(host);
+    element = host;
+    await elementIsStable(element);
+
+    expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toBe('visible');
+    expect(element.hasAttribute('title')).toBe(false);
+  });
+
   it('should truncate using its flex item width', async () => {
     const container = document.createElement('div');
     container.style.display = 'flex';
