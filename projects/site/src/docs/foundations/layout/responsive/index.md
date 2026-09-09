@@ -61,7 +61,7 @@ Container queries respond to the **width of the parent container**, making them 
 ```html
 <!-- Responds to the container's width, not the browser width -->
 <div>
-  <section nve-layout="column &md|row &lg|gap:xl">
+  <section nve-layout="column gap:sm &md|row &lg|gap:xl">
     <nve-card></nve-card>
     <nve-card nve-display="&lg|hide"></nve-card>
   </section>
@@ -98,7 +98,7 @@ Viewport queries respond to the **browser window width**, providing traditional 
 
 ```html
 <!-- Responds to the browser viewport width -->
-<section nve-layout="column @md|row @lg|gap:xl">
+<section nve-layout="column gap:sm @md|row @lg|gap:xl">
   <nve-card></nve-card>
   <nve-card nve-display="@lg|hide"></nve-card>
 </section>
@@ -164,8 +164,8 @@ You can use both systems together for the most flexibility:
           <h3 nve-text="heading lg">Responsive Card Example</h3>
         </nve-card-header>
         <nve-card-content>
-          <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-          <p>This card demonstrates combining container and viewport queries.</p>
+          <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
+          <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
         </nve-card-content>
       </nve-card>
 
@@ -174,8 +174,8 @@ You can use both systems together for the most flexibility:
           <h3 nve-text="heading lg">Responsive Card Example</h3>
         </nve-card-header>
         <nve-card-content>
-          <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-          <p>This card demonstrates combining container and viewport queries.</p>
+          <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
+          <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
         </nve-card-content>
       </nve-card>
 

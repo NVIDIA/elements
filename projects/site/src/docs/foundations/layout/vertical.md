@@ -66,26 +66,28 @@ Set `nve-layout="column"` on a container element to create a vertical layout:
 
 ```html
 <!-- Simple vertical layout -->
-<aside nve-layout="column">
-  <h2>Title</h2>
-  <p>Content goes here...</p>
+<aside nve-layout="column gap:sm">
+  <h2 nve-text="heading">Title</h2>
+  <p nve-text="body">Content goes here...</p>
   <footer>Published today</footer>
-</article>
+</aside>
 
-!-- With gap spacing -->
+<!-- With gap spacing -->
 <form nve-layout="column gap:md">
-  <nve-input label="Email">
+  <nve-input>
+    <label>Email</label>
     <input type="text" placeholder="Email..."/>
   </nve-input>
-  <nve-input label="Password" type="password">
-    <input type="text" placeholder="Password..."/>
-  </nve-input>
+  <nve-password>
+    <label>Password</label>
+    <input type="password" placeholder="Password..."/>
+  </nve-password>
   <nve-button>Sign In</nve-button>
 </form>
 
 <!-- With alignment -->
 <section nve-layout="column align:center gap:xl">
-  <nve-logo size="lg"></nve-logo>
+  <nve-logo size="lg">NV</nve-logo>
   <h1 nve-text="display lg">Welcome</h1>
   <p nve-text="heading sm">Get started with our platform</p>
 </section>
@@ -129,7 +131,7 @@ Vertical layouts support alignment along both axes:
 ## Vertical Layout Examples
 
 ```html
-<section nve-layout="column align:...">
+<section nve-layout="column gap:sm align:center">
 ```
 
 ### Align Top

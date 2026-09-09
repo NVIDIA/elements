@@ -23,9 +23,9 @@ This document is not intended to define the best practices and API design of hig
   <nve-alert status="danger">Don't: a practice to avoid</nve-alert>
   <nve-alert status="accent">Tip: helpful details on rationale for a given guideline</nve-alert>
   <nve-alert status="warning">details on the risks of not following a guideline</nve-alert>
-  <nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: detail about how a guideline impacts performance</nve-alert>
-  <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: resource to learn more about a guideline topic</nve-alert>
-  <nve-alert><nve-icon slot="icon">🚧</nve-icon> WIP: details on any work in progress guidance</nve-alert>
+  <nve-alert><nve-icon slot="icon" name="flag"></nve-icon> Performance: detail about how a guideline impacts performance</nve-alert>
+  <nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: resource to learn more about a guideline topic</nve-alert>
+  <nve-alert><nve-icon slot="icon" name="traffic-cone"></nve-icon> WIP: details on any work in progress guidance</nve-alert>
 </div>
 
 ## Terminology
@@ -70,7 +70,7 @@ Consistent element APIs provide consistent developer experience. The recommendat
 ```html
 <!-- HTML/JavaScript -->
 <nve-alert status="success">
-  <p>hello there!</p>
+  <p nve-text="body">hello there!</p>
 </nve-alert>
 
 <script type="module">
@@ -82,22 +82,22 @@ Consistent element APIs provide consistent developer experience. The recommendat
 
 <!-- Angular -->
 <nve-alert status="success" [closable]="boolProp" (close)="handle($event)">
-  <p>hello there!</p>
+  <p nve-text="body">hello there!</p>
 </nve-alert>
 
 <!-- Lit -->
 <nve-alert status="success" ?closable=${boolProp} @close=${e => this.handle(e)}>
-  <p>hello there!</p>
+  <p nve-text="body">hello there!</p>
 </nve-alert>
 
 <!-- Vue -->
 <nve-alert status="success" :closable="boolProp" @close="handle">
-  <p>hello there!</p>
+  <p nve-text="body">hello there!</p>
 </nve-alert>
 
 <!-- React/Preact -->
 <nve-alert status="success" closable={this.state.boolProp} onClose={this.handle}>
-  <p>hello there!</p>
+  <p nve-text="body">hello there!</p>
 </nve-alert>
 ```
 

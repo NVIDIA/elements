@@ -50,14 +50,14 @@ export class AppComponent {
 
 Because the application manages the state, the developer now has the flexibility to intercept and run extra checks before closing the modal. While this is a subtle difference when compared to the stateful version, it provides a more flexible element and keeps the public API surface small.
 
-<nve-alert status=”accent”>Tip: a guiding principle for element API design is to ask, “Can you prototype/demo any visual state of the element with using only HTML?”</nve-alert>
+<nve-alert status="accent">Tip: a guiding principle for element API design is to ask, “Can you prototype/demo any visual state of the element using only HTML?”</nve-alert>
 
 ## Synchronizing State
 
 Stateless elements also prevent the state from becoming out of sync. If the modal retains an internal visibility state, this opens up the potential for bugs where the element is out of sync with the application state. View the demos below to learn more detail about the risks of stateful leaf elements.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn:&nbsp;<a href="https://stackblitz.com/edit/angular-ivy-cjr3hj?file=src%2Fapp%2Fapp.component.html">stateless vs stateful demo in Angular</a></nve-alert>
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn:&nbsp;<a href="https://stackblitz.com/edit/http-server-kojqdg?file=src%2FApp.tsx">stateless vs stateful demo in React</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn:&nbsp;<a href="https://stackblitz.com/edit/angular-ivy-cjr3hj?file=src%2Fapp%2Fapp.component.html">stateless vs stateful demo in Angular</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn:&nbsp;<a href="https://stackblitz.com/edit/http-server-kojqdg?file=src%2FApp.tsx">stateless vs stateful demo in React</a></nve-alert>
 
 ## Stateful Events - anti-pattern
 
@@ -67,6 +67,6 @@ Do not emit/reflect events in response to setting state on the element. This is 
 
 Always derive internal state from incoming properties and not user actions. Example, setting a expanded property on an element can cause the element to set css classes and aria-\* attributes to visually and semantically represent the expanded state.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: web.dev&nbsp;<a href="https://web.dev/custom-elements-best-practices/#events">Custom Element Event Best Practices</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: web.dev&nbsp;<a href="https://web.dev/custom-elements-best-practices/#events">Custom Element Event Best Practices</a></nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Case Study:&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/tag/tag.element.ts#L74">a tag element setting child badge component to align visual status</a></nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Case Study:&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/tag/tag.element.ts#L74">a tag element setting child badge component to align visual status</a></nve-alert>

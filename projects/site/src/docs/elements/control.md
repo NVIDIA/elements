@@ -13,7 +13,7 @@
 import '@nvidia-elements/core/forms/define.js';
 ```
 
-The `<nve-control>` element is the base control that the `<nve-*` form controls extend. It works for generic input type as well as custom or third party form controls.
+The `nve-control` element is the base control that the `nve-*` form controls extend. It works for generic input types as well as custom or third-party form controls.
 
 ## Responsive
 
@@ -70,7 +70,7 @@ Many of the form controls wrap the native HTML form element or `<input>` element
 But Elements includes [Form Associated Elements](https://web.dev/more-capable-form-controls) which emit `change` / `input`
 events and work with native HTML `<form>` validation and [FormData](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects) submission.
 
-On these elements, subscribe to event changes and set the `value` directly on the custom `<nve-*` elements rather than on an `<input>`:
+On these elements, subscribe to the `change` and `input` events and set the `value` directly on the custom `nve-*` elements rather than on an `input`:
 
 ```html
 <nve-resize-handle min="0" max="100" step="10" value="50"></nve-resize-handle>

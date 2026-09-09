@@ -78,7 +78,7 @@ class DynamicAnchorPositionDemo extends LitElement {
   render() {
     return html`
       <div ${ref(this.#anchor)} id="anchor"></div>
-      <nve-tooltip anchor="anchor">tooltip</nve-tooltip>
+      <nve-tooltip anchor="anchor" hidden>tooltip</nve-tooltip>
     `;
   }
 

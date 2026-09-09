@@ -23,7 +23,7 @@
       <nve-grid-cell>Cell 1-2</nve-grid-cell>
       <nve-grid-cell>Cell 1-3</nve-grid-cell>
       <nve-grid-cell>
-        <nve-icon-button container="flat" icon-name="additional-actions" aria-label="view item 1"></nve-icon-button>
+        <nve-icon-button container="flat" icon-name="more-actions" aria-label="view item 1"></nve-icon-button>
       </nve-grid-cell>
     </nve-grid-row>
   </nve-grid>

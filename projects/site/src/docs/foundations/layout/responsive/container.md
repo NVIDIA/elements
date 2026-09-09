@@ -43,7 +43,7 @@ Conditional gap sizing example: `nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:
 
 ```html
 <div> <!-- This parent div element is the containing element - its width will be queried -->
-  <section nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xl &xl|gap:xxl">
+  <section nve-layout="row gap:sm &sm|gap:xxs &md|gap:md &lg|gap:xl &xl|gap:xxl">
     <nve-card></nve-card>
     <nve-card></nve-card>
     <nve-card></nve-card>
@@ -56,7 +56,7 @@ Conditional gap sizing example: `nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      The extra <code>div</code> wrapper explicitly defines the container element for queries. This design keeps the utility minimal—elements with <code>&</code> syntax automatically use their parent as the container without requiring manual container specification.
+      The extra <code nve-text="code">div</code> wrapper explicitly defines the container element for queries. This design keeps the utility minimal—elements with <code nve-text="code">&</code> syntax automatically use their parent as the container without requiring manual container specification.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -141,10 +141,10 @@ Or:
 
 ```html
 <section nve-layout="grid gap:md">
-  <nve-card nve-layout="span-items:12 &sm|span:4 &md|span:6 &lg|span:8"></nve-card>
-  <nve-card nve-layout="span-items:12 &sm|span:8 &md|span:6 &lg|span:4"></nve-card>
-  <nve-card nve-layout="span-items:12 &sm|span:8 &md|span:6 &lg|span:4"></nve-card>
-  <nve-card nve-layout="span-items:12 &sm|span:4 &md|span:6 &lg|span:8"></nve-card>
+  <div nve-layout="span:12 &sm|span:4 &md|span:6 &lg|span:8"><nve-card></nve-card></div>
+  <div nve-layout="span:12 &sm|span:8 &md|span:6 &lg|span:4"><nve-card></nve-card></div>
+  <div nve-layout="span:12 &sm|span:8 &md|span:6 &lg|span:4"><nve-card></nve-card></div>
+  <div nve-layout="span:12 &sm|span:4 &md|span:6 &lg|span:8"><nve-card></nve-card></div>
 </section>
 ```
 
@@ -163,7 +163,7 @@ Since hiding elements only affects the display of the element itself and not the
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how the parent arranges children.
+      Element visibility (hiding) uses the separate <code nve-text="code">nve-display</code> attribute rather than <code nve-text="code">nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how the parent arranges children.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -203,7 +203,7 @@ Example combining both:
 
 ```html
 <div>
-  <section nve-layout="row &md|gap:lg">
+  <section nve-layout="row gap:sm &md|gap:lg">
     <div>Always visible</div>
     <div nve-display="&sm|hide">Hidden when container ≥ 320px</div>
   </section>

@@ -254,7 +254,7 @@ You can mix both approaches for the most flexibility. Items with explicit `span`
 <main nve-layout="grid gap:lg">
   <!-- Header spans full width -->
   <header nve-layout="span:12">
-    <h1>Dashboard</h1>
+    <h1 nve-text="heading">Dashboard</h1>
   </header>
 
   <!-- Metrics cards in quarters -->
@@ -274,28 +274,34 @@ You can mix both approaches for the most flexibility. Items with explicit `span`
 ```html
 <form nve-layout="grid gap:md">
   <!-- Full width fields -->
-  <nve-input nve-layout="span:12" label="Email">
+  <nve-input nve-layout="span:12">
+    <label>Email</label>
     <input type="email" placeholder="Email" />
   </nve-input>
 
   <!-- Half width fields -->
-  <nve-input nve-layout="span:6" label="First Name">
+  <nve-input nve-layout="span:6">
+    <label>First Name</label>
     <input type="text" placeholder="First Name" />
   </nve-input>
-  <nve-input nve-layout="span:6" label="Last Name">
+  <nve-input nve-layout="span:6">
+    <label>Last Name</label>
     <input type="text" placeholder="Last Name" />
   </nve-input>
 
   <!-- Third width fields -->
-  <nve-input nve-layout="span:4" label="City">
+  <nve-input nve-layout="span:4">
+    <label>City</label>
     <input type="text" placeholder="City" />
   </nve-input>
-  <nve-select nve-layout="span:4" label="State">
+  <nve-select nve-layout="span:4">
+    <label>State</label>
     <select>
       <option value selected disabled hidden>Select State</option>
     </select>
   </nve-select>
-  <nve-input nve-layout="span:4" label="Zip">
+  <nve-input nve-layout="span:4">
+    <label>Zip</label>
     <input type="text" placeholder="Zip" />
   </nve-input>
 </form>

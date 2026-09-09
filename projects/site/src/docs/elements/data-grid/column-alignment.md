@@ -11,8 +11,8 @@
 ```html
 <nve-grid>
   <nve-grid-header>
-    <nve-grid-column column-align="left">Column 1</nve-grid-column>
-    <nve-grid-column column-align="right">Column 2</nve-grid-column>
+    <nve-grid-column column-align="start">Column 1</nve-grid-column>
+    <nve-grid-column column-align="end">Column 2</nve-grid-column>
     <nve-grid-column column-align="center">Column 3</nve-grid-column>
     <nve-grid-column>Column 4</nve-grid-column>
   </nve-grid-header>

@@ -31,6 +31,6 @@ Tag names should avoid using verbs or actions within the name. The properties an
 
 {% enddodont %}
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: elements should follow common and established names for existing UI patterns. See &nbsp;<a href="https://open-ui.org" nve-text="link">openui.org</a>&nbsp; for more details on upcoming specs.</nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: elements should follow common and established names for existing UI patterns. See &nbsp;<a href="https://open-ui.org" nve-text="link">openui.org</a>&nbsp; for more details on upcoming specs.</nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: learn common component names from the Open UI &nbsp;<a href="https://open-ui.org/research/component-matrix" nve-text="link">component name matrix</a>.</nve-alert>
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: learn common component names from the Open UI &nbsp;<a href="https://open-ui.org/research/component-matrix" nve-text="link">component name matrix</a>.</nve-alert>

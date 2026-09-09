@@ -76,8 +76,8 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
 
 <!-- Centered vertical layout with padding -->
 <section nve-layout="column gap:md pad:lg align:center">
-  <h2>Welcome</h2>
-  <p>Create beautiful layouts with ease</p>
+  <h2 nve-text="heading">Welcome</h2>
+  <p nve-text="body">Create beautiful layouts with ease</p>
   <nve-button>Get Started</nve-button>
 </section>
 
@@ -94,7 +94,7 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Elements components use Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code>nve-card</code> components have built-in layout for <code>nve-card-header</code>, <code>nve-card-content</code>, and <code>nve-card-footer</code>. Applying <code>nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
+      Elements components use Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code nve-text="code">nve-card</code> components have built-in layout for <code nve-text="code">nve-card-header</code>, <code nve-text="code">nve-card-content</code>, and <code nve-text="code">nve-card-footer</code>. Applying <code nve-text="code">nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -102,6 +102,8 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
 Apply the `nve-layout` attribute to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/docs/elements/forms/#form-layouts).
 
 For more details, see the documentation on the [internal-host pattern](/docs/api-design/styles/#removed-host) and [slots](/docs/api-design/slots/) which the library uses in development, as well as [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on the Shadow DOM.
+
+<!-- eslint-disable @nvidia-elements/lint/no-restricted-attributes -->
 
 ```html
 <!-- ✓ Correct: Apply to native HTML elements -->
@@ -115,6 +117,8 @@ For more details, see the documentation on the [internal-host pattern](/docs/api
   Content...
 </nve-card>
 ```
+
+<!-- eslint-enable @nvidia-elements/lint/no-restricted-attributes -->
 
 ## When to Use Each Layout Type
 
@@ -214,7 +218,7 @@ Or use the short hand to just pad the x and y axes.
 - `pad-y:md`
 
 ```html
-<section nve-layout="row pad-left:md">
+<section nve-layout="row gap:none pad-left:md">
 ```
 
 ### Padding Top
@@ -299,11 +303,11 @@ You can compose layout attributes to create sophisticated designs:
 ```html
 <!-- Centered hero section with vertical layout -->
 <section nve-layout="column gap:lg pad:xxl align:center full">
-  <nve-logo size="xl"></nve-logo>
+  <nve-logo size="lg">NV</nve-logo>
   <h1 nve-text="heading xl">Build Faster</h1>
   <p nve-text="lg muted">Create stunning layouts without writing CSS</p>
   <div nve-layout="row gap:sm">
-    <nve-button variant="primary">Start Building</nve-button>
+    <nve-button interaction="emphasis">Start Building</nve-button>
     <nve-button>Learn More</nve-button>
   </div>
 </section>
@@ -311,19 +315,19 @@ You can compose layout attributes to create sophisticated designs:
 <!-- Complex dashboard layout using semantic HTML -->
 <div nve-layout="row gap:md pad:lg align:horizontal-stretch full">
   <aside style="width: 250px">
-    <nve-panel expanded>
-      <nve-panel-header>
-        <div slot="title">Navigation menu</div>
-      </nve-panel-header>
-      <nve-panel-content>
+    <nve-page-panel expanded>
+      <nve-page-panel-header>
+        <div>Navigation menu</div>
+      </nve-page-panel-header>
+      <nve-page-panel-content>
         User profile
-      </nve-panel-content>
-    </nve-panel>
+      </nve-page-panel-content>
+    </nve-page-panel>
   </aside>
 
   <main nve-layout="column gap:lg pad:xl">
     <header nve-layout="row gap:md align:vertical-center align:space-between">
-      <h1>Dashboard</h1>
+      <h1 nve-text="heading">Dashboard</h1>
       <nve-button>Settings</nve-button>
     </header>
 

@@ -41,7 +41,7 @@ The at-symbol-based `@breakpoint-size|...` API adds the breakpoint size before t
 Conditional gap sizing example: `nve-layout="row @sm|gap:xs @md|gap:md @lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](/docs/foundations/layout/#layout-gap-spacing)/[padding](/docs/foundations/layout/#layout-padding) system values.
 
 ```html
-<section nve-layout="row @sm|gap:xxs @md|gap:md @lg|gap:xl @xl|gap:xl">
+<section nve-layout="row gap:sm @sm|gap:xxs @md|gap:md @lg|gap:xl @xl|gap:xl">
   <nve-card></nve-card>
   <nve-card></nve-card>
   <nve-card></nve-card>
@@ -134,10 +134,10 @@ Or:
 
 ```html
 <section nve-layout="grid gap:md">
-  <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
-  <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
-  <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
-  <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
+  <div nve-layout="span:12 @sm|span:4 @md|span:6 @lg|span:8"><nve-card></nve-card></div>
+  <div nve-layout="span:12 @sm|span:8 @md|span:6 @lg|span:4"><nve-card></nve-card></div>
+  <div nve-layout="span:12 @sm|span:8 @md|span:6 @lg|span:4"><nve-card></nve-card></div>
+  <div nve-layout="span:12 @sm|span:4 @md|span:6 @lg|span:8"><nve-card></nve-card></div>
 </section>
 ```
 
@@ -156,7 +156,7 @@ Since hiding elements only affects the display of the element itself and not the
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how the parent arranges children.
+      Element visibility (hiding) uses the separate <code nve-text="code">nve-display</code> attribute rather than <code nve-text="code">nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how the parent arranges children.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -193,7 +193,7 @@ The viewport query responsive system allows elements to adapt based on the brows
 Example combining both:
 
 ```html
-<section nve-layout="row @md|gap:lg">
+<section nve-layout="row gap:sm @md|gap:lg">
   <div>Always visible</div>
   <div nve-display="@md|hide">Hidden when viewport ≥ 768px</div>
 </section>
