@@ -37,7 +37,7 @@ import noUnstyledTypography from '../rules/no-unstyled-typography.js';
 import noTailwindClasses from '../rules/no-tailwind-classes.js';
 import preferAriaLabelInCompactContainers from '../rules/prefer-aria-label-in-compact-containers.js';
 
-const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
+const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.md', 'src/**/*.ts', 'src/**/*.tsx'];
 
 const ignores = [
   'node_modules/',
