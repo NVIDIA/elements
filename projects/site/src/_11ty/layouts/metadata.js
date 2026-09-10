@@ -13,7 +13,8 @@ export const SOCIAL_IMAGE_ALT = 'NVIDIA Elements design system preview.';
 export const AUTHOR_ID = `${SITE_URL}/#author`;
 export const AUTHOR_NAME = 'NVIDIA Elements Team';
 export const AUTHOR_URL = SOFTWARE_URL;
-export const AUTHOR_CREDENTIALS = 'NVIDIA design system engineers for Web Components and AI/ML interface tooling.';
+export const AUTHOR_CREDENTIALS =
+  'NVIDIA Engineers building user interface tooling for AI/ML Factories, Robotics, and Autonomous Vehicles.';
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const SOFTWARE_ID = `${SITE_URL}/#software`;
 const SOFTWARE_DESCRIPTION =

@@ -17,6 +17,16 @@
   visibility: hidden;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 #iframe-links {
   position: fixed;
   inset: auto 1rem 1rem auto;

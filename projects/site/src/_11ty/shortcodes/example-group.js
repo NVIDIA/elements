@@ -15,7 +15,10 @@ export async function exampleGroupShortcode(content, ...examplePaths) {
   ${(
     await Promise.all(
       exampleList.map(async example => {
-        return await exampleShortcode(example.entrypoint, example.name, { summary: false });
+        return await exampleShortcode(example.entrypoint, example.name, {
+          summary: false,
+          pageUrl: this?.page?.url
+        });
       })
     )
   ).join('')}

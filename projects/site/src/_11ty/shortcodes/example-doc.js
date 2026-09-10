@@ -29,7 +29,7 @@ export async function exampleDocShortcode(entrypoint, exampleName, config = {}) 
       ${await exampleTagsShortcode(example.entrypoint, example.name)}
     </div>
     <div nve-layout="grid gap:sm ${largeLayout ? 'span-items:12' : 'span-items:12 &xl|span-items:6'}">
-      ${example.entrypoint ? await exampleShortcode(example.entrypoint, example.name, { summary: false, inline: !isPopover, height: isPopover ? '400px' : undefined, ...config }) : ''}
+      ${example.entrypoint ? await exampleShortcode(example.entrypoint, example.name, { summary: false, inline: !isPopover, height: isPopover ? '400px' : undefined, ...config, pageUrl: config.pageUrl ?? this?.page?.url }) : ''}
       <div nve-layout="column gap:sm">${content}</div>
     </div>
   </div>

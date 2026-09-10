@@ -66,7 +66,7 @@ export async function render(data) {
         </script>
       </head>
       <body nve-text="body trim:none" data-pagefind-meta="section:${section}">
-        <div class="visually-hidden" aria-hidden="true">${ELEMENTS_PAGES_BASE_URL}/llms.txt is available optimized for AI and LLM tools.</div>
+        <div class="visually-hidden" aria-hidden="true">${ELEMENTS_PAGES_BASE_URL}/llms.txt is available and optimized for AI and LLM tools.</div>
         <nve-page style="anchor-name: --page-anchor;">
           ${renderBasePageHeader(data)}
           <nve-page-panel slot="left-aside" id="sidenav-panel" style="width: 250px;">
@@ -115,7 +115,8 @@ export async function render(data) {
                   !(data.page.url.includes('/data-grid/') && !data.page.url.endsWith('/data-grid/'))
                     ? await exampleShortcode(data.tag, 'Default', {
                         summary: false,
-                        inline: data.tag !== 'nve-page-loader'
+                        inline: data.tag !== 'nve-page-loader',
+                        pageUrl: data.page.url
                       })
                     : ''
                 }

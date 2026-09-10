@@ -13,11 +13,22 @@ const patternExample = {
   permalink: '@internals/patterns/chat-pattern-chat-popover-chat/'
 };
 
+const structuredDataExample = {
+  ...patternExample,
+  id: 'pattern-chat-structured-data',
+  name: 'StructuredData',
+  template: '<nve-dialog size="sm"></nve-dialog><script type="module">console.log("ready");</SCRIPT>',
+  summary: 'Chat dialog using size="sm".',
+  tags: ['pattern', 'template'],
+  deprecated: true,
+  permalink: '@internals/patterns/chat-pattern-chat-structured-data/'
+};
+
 async function importShortcode() {
   vi.resetModules();
   vi.doMock('../../index.11tydata.js', () => ({
     siteData: {
-      examples: [patternExample]
+      examples: [patternExample, structuredDataExample]
     }
   }));
   vi.doMock('@internals/tools/playground', () => ({
@@ -30,6 +41,7 @@ async function importShortcode() {
 }
 
 afterEach(() => {
+  vi.unstubAllEnvs();
   vi.doUnmock('../../index.11tydata.js');
   vi.doUnmock('@internals/tools/playground');
 });
@@ -44,6 +56,62 @@ describe('exampleShortcode', () => {
 
     expect(html).toContain('src="/examples/@internals/patterns/chat-pattern-chat-popover-chat/index.html"');
     expect(html).not.toContain('/docs/patterns/chat/examples/');
+  });
+
+  it('should render valid and safely encoded SoftwareSourceCode metadata', async () => {
+    vi.stubEnv('ELEMENTS_SITE_URL', 'https://nvidia.github.io');
+    vi.stubEnv('ELEMENTS_REPO_BASE_URL', 'https://github.com/NVIDIA/elements');
+    vi.stubEnv('PAGES_BASE_URL', '/elements/');
+    const { exampleShortcode } = await importShortcode();
+
+    const html = await exampleShortcode.call(
+      { page: { url: '/docs/patterns/chat/' } },
+      '@internals/patterns/chat.examples.json',
+      'StructuredData'
+    );
+    const script = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    const structuredData: unknown = JSON.parse(script?.[1] ?? '{}');
+    const canonicalPageUrl = 'https://nvidia.github.io/elements/docs/patterns/chat/';
+    const canonicalExampleUrl = `${canonicalPageUrl}#internals-patterns-chat-examples-json_pattern-chat-structured-data`;
+
+    expect(script?.[1]).toContain('<\\/SCRIPT>');
+    expect(structuredData).toMatchObject({
+      '@context': 'https://schema.org',
+      '@id': canonicalExampleUrl,
+      '@type': 'SoftwareSourceCode',
+      identifier: structuredDataExample.id,
+      name: 'NVIDIA Elements | nve-patterns | StructuredData',
+      description: structuredDataExample.summary,
+      url: canonicalExampleUrl,
+      isPartOf: { '@id': canonicalPageUrl },
+      about: { '@type': 'Thing', name: 'nve-patterns' },
+      author: {
+        '@id': 'https://nvidia.github.io/elements/#author',
+        '@type': 'Organization',
+        name: 'NVIDIA Elements Team',
+        url: 'https://nvidia.github.io/elements/'
+      },
+      publisher: { '@type': 'Organization', name: 'NVIDIA', url: 'https://www.nvidia.com/' },
+      codeRepository: 'https://github.com/NVIDIA/elements',
+      license: 'https://github.com/NVIDIA/elements/blob/main/LICENSE',
+      programmingLanguage: {
+        '@type': 'ComputerLanguage',
+        name: 'HTML',
+        url: 'https://html.spec.whatwg.org/'
+      },
+      runtimePlatform: 'Web browser',
+      codeSampleType: 'template',
+      encodingFormat: 'text/html',
+      keywords: ['nve-patterns', 'pattern', 'template'],
+      targetProduct: {
+        '@id': 'https://nvidia.github.io/elements/#software',
+        '@type': 'SoftwareApplication',
+        name: 'NVIDIA Elements',
+        url: 'https://nvidia.github.io/elements/'
+      },
+      creativeWorkStatus: 'Deprecated',
+      text: structuredDataExample.template
+    });
   });
 
   it('should preserve imported example bindings when rewriting development module imports', async () => {
