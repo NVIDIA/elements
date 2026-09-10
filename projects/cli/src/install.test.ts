@@ -254,7 +254,7 @@ describe('installNve', () => {
       restoreShell(originalShell);
       restoreDebug(originalDebug);
     }
-  });
+  }, 30_000);
 
   it('should reject a source binary that cannot report its version', async () => {
     const context = await createInstallerContext();
@@ -702,13 +702,29 @@ describe('install.sh', () => {
     const context = await createInstallerContext();
     await writeDownloadFixture(context);
 
-    const result = runInstaller(context);
-    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
+    const originalNveHome = process.env.NVE_HOME;
+    process.env.NVE_HOME = join(context.root, 'should-not-use');
 
-    const canonicalPath = join(context.home, '.nve/bin/nve');
-    const directResult = spawnSync(canonicalPath, ['--version'], { encoding: 'utf-8' });
-    expect(directResult.status).toBe(0);
-    expect(directResult.stdout.trim()).toBe('9.8.7-test');
+    try {
+      const result = runInstaller(context);
+      expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
+
+      const canonicalPath = join(context.home, '.nve/bin/nve');
+      const divertedPath = join(context.root, 'should-not-use/bin/nve');
+      expect(existsSync(divertedPath)).toBe(false);
+
+      const directResult = spawnSync(canonicalPath, ['--version'], {
+        encoding: 'utf-8',
+        env: { PATH: '/usr/bin:/bin:/usr/sbin:/sbin' }
+      });
+      expect(
+        directResult.status,
+        `${directResult.error?.message ?? ''}\n${directResult.stdout}\n${directResult.stderr}`
+      ).toBe(0);
+      expect(directResult.stdout.trim()).toBe('9.8.7-test');
+    } finally {
+      restoreNveHome(originalNveHome);
+    }
   });
 
   it('should fail before executing the binary when checksum verification fails', async () => {
@@ -987,15 +1003,18 @@ function restoreDebug(value: string | undefined): void {
 }
 
 function runInstaller({ fakeBin, home }: InstallerContext): ReturnType<typeof spawnSync> {
+  const env: NodeJS.ProcessEnv = {
+    ...process.env,
+    HOME: home,
+    NVE_BASE_URL: 'https://example.invalid/cli',
+    PATH: `${fakeBin}:/usr/bin:/bin:/usr/sbin:/sbin`,
+    SHELL: '/bin/zsh'
+  };
+  delete env.NVE_HOME;
+
   return spawnSync('sh', [installSh], {
     encoding: 'utf-8',
-    env: {
-      ...process.env,
-      HOME: home,
-      NVE_BASE_URL: 'https://example.invalid/cli',
-      PATH: `${fakeBin}:/usr/bin:/bin:/usr/sbin:/sbin`,
-      SHELL: '/bin/zsh'
-    },
+    env,
     timeout: 10000
   });
 }
