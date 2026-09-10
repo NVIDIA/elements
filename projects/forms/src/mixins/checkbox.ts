@@ -98,7 +98,7 @@ export function CheckboxFormControlMixin<TBase extends Constructor>(
     }
 
     set checked(value: boolean) {
-      this.#setChecked(Boolean(value));
+      this.#setChecked(value ?? false);
       this.#reflectingChecked = true;
       this.toggleAttribute('checked', this.#checked);
       this.#reflectingChecked = false;
@@ -109,7 +109,7 @@ export function CheckboxFormControlMixin<TBase extends Constructor>(
     }
 
     override set disabled(value: boolean) {
-      super.disabled = Boolean(value);
+      super.disabled = value ?? false;
       if (constructedCheckboxes.has(this)) {
         this.updateCheckedState();
       }
@@ -120,7 +120,7 @@ export function CheckboxFormControlMixin<TBase extends Constructor>(
     }
 
     set indeterminate(value: boolean) {
-      this.#setIndeterminate(Boolean(value));
+      this.#setIndeterminate(value ?? false);
       this.toggleAttribute('indeterminate', this.#indeterminate);
     }
 
