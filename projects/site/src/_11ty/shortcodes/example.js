@@ -1,10 +1,13 @@
 import markdownIt from 'markdown-it';
-import { PlaygroundService } from '@internals/tools/playground';
 import markdown from '../libraries/markdown.js';
 import { siteData } from '../../index.11tydata.js';
+import { ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
+import { getSiteUrl } from '../utils/site-url.js';
 
 const md = markdownIt();
 const { examples } = siteData;
+const NVIDIA_URL = 'https://www.nvidia.com/';
+const REPOSITORY_URL = ELEMENTS_REPO_BASE_URL.replace(/\/+$/, '');
 
 /**
  * Shortcode for embedding component examples
@@ -42,16 +45,6 @@ export async function exampleShortcode(
 
   const canvasId = `${ref.replaceAll('/', '-').replaceAll('.', '-').replaceAll('@', '')}_${example.id}`;
 
-  const playgroundURL = await PlaygroundService.create({
-    template: example?.template ?? '',
-    name: example.id
-  });
-
-  const playgroundButton =
-    example && playgroundURL?.length > 0
-      ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
-      : '';
-
   const editButton =
     example && config.editAction
       ? `<nve-button container="flat" slot="suffix"><a href="?edit=true&example=${example.id
@@ -68,9 +61,12 @@ export async function exampleShortcode(
   const inlineTemplate = /* html */ `<div id="${canvasId}_content">${templateContent}</div>${reload}`;
   const iframeTemplate = /* html */ `<iframe loading="lazy" src="/examples/${example?.permalink}index.html" style="height: 100%; width: 100%; border: none;"></iframe>`;
   const template = config.inline ? inlineTemplate : iframeTemplate;
-  const summary = markdown
-    .render(example.description || example.summary || '')
-    .replace('nve-text', 'class="example-shortcode-summary" nve-text');
+  const summary = example.description || example.summary || '';
+  const formattedSummary = config.summary
+    ? markdown.render(summary).replace('nve-text', 'class="example-shortcode-summary" nve-text')
+    : '';
+  const pageUrl = typeof config.pageUrl === 'string' ? config.pageUrl : this?.page?.url;
+  const structuredData = getExampleStructuredData(example, templateContent, summary, canvasId, pageUrl);
 
   // static canvas is used to ensure what is rendered is local sourced and not from the remote esm.sh
   // replace all double newlines with single newlines to prevent markdown from processing HTML content
@@ -79,15 +75,77 @@ export async function exampleShortcode(
   return example
     ? /* html */ `
 <div class="example-shortcode" nve-layout="column gap:sm">
-${config.summary ? summary : ''}
+<script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
+${formattedSummary}
 <pre class="visually-hidden" aria-hidden="true"><code>${md.utils?.escapeHtml(templateContent)}</code></pre>
 <nvd-canvas id="${canvasId}" data-pagefind-ignore="all" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
-  <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
+  <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}
 </nvd-canvas>
 </div>`
         .trim()
         .replace(/\n\n/g, '\n')
     : '';
+}
+
+function getExampleStructuredData(example, templateContent, summary, canvasId, pageUrl) {
+  const siteUrl = getSiteUrl('/');
+  const canonicalPageUrl = pageUrl ? getSiteUrl(pageUrl) : null;
+  const canonicalExampleUrl = canonicalPageUrl ? `${canonicalPageUrl}#${canvasId}` : null;
+  const subjectName = example.example || example.element || 'NVIDIA Elements';
+  const keywords = [...new Set([subjectName, ...(example.tags ?? [])].filter(Boolean))];
+
+  return {
+    '@context': 'https://schema.org',
+    ...(canonicalExampleUrl ? { '@id': canonicalExampleUrl } : {}),
+    '@type': 'SoftwareSourceCode',
+    identifier: example.id,
+    name: `NVIDIA Elements | ${subjectName} | ${example.name}`,
+    ...(summary ? { description: summary } : {}),
+    ...(canonicalExampleUrl
+      ? {
+          url: canonicalExampleUrl,
+          isPartOf: { '@id': canonicalPageUrl }
+        }
+      : {}),
+    about: {
+      '@type': 'Thing',
+      name: subjectName
+    },
+    author: {
+      '@id': `${siteUrl}#author`,
+      '@type': 'Organization',
+      name: 'NVIDIA Elements Team',
+      url: siteUrl
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'NVIDIA',
+      url: NVIDIA_URL
+    },
+    codeRepository: REPOSITORY_URL,
+    license: `${REPOSITORY_URL}/blob/main/LICENSE`,
+    programmingLanguage: {
+      '@type': 'ComputerLanguage',
+      name: 'HTML',
+      url: 'https://html.spec.whatwg.org/'
+    },
+    runtimePlatform: 'Web browser',
+    codeSampleType: example.tags?.includes('template') ? 'template' : 'code snippet',
+    encodingFormat: 'text/html',
+    keywords,
+    targetProduct: {
+      '@id': `${siteUrl}#software`,
+      '@type': 'SoftwareApplication',
+      name: 'NVIDIA Elements',
+      url: siteUrl
+    },
+    ...(example.deprecated ? { creativeWorkStatus: 'Deprecated' } : {}),
+    text: templateContent
+  };
+}
+
+function jsonLdEncode(value) {
+  return JSON.stringify(value).replace(/<\//gi, '<\\/');
 }
 
 export async function exampleTagsShortcode(ref, exampleName) {

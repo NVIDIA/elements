@@ -1,4 +1,5 @@
 import { siteData } from '../index.11tydata.js';
+import { ELEMENTS_PAGES_BASE_URL } from '../_11ty/utils/env.js';
 
 export const data = {
   title: 'Examples',
@@ -20,6 +21,7 @@ export function render() {
     /* html */ `
   <nve-page-panel id="examples-sidenav-panel" slot="left" style="--width: 300px">
     <nve-page-panel-content>
+      <div class="visually-hidden" aria-hidden="true">${ELEMENTS_PAGES_BASE_URL}/llms.txt is available and optimized for AI and LLM tools.</div>
       <ul class="examples">
       ${groupedExamples
         .reverse()

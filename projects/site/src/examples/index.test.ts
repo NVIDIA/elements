@@ -66,6 +66,26 @@ describe('example page urls', () => {
     expect(getDocumentationPath(example)).toBe('/docs/elements/button/');
   });
 
+  it.each([
+    ['media-controller', '/docs/media/controller/'],
+    ['code-codeblock', '/docs/code/codeblock/'],
+    ['monaco-editor', '/docs/monaco/editor/'],
+    ['plot', '/docs/plot/'],
+    ['plot-chart', '/docs/plot/chart/'],
+    ['scene', '/docs/scene/'],
+    ['scene-viewer', '/docs/scene/viewer/']
+  ])('should point %s examples at their specialized documentation', async (elementName, expectedPath) => {
+    const { getDocumentationPath } = await importExamplePage();
+
+    expect(getDocumentationPath({ elementName })).toBe(expectedPath);
+  });
+
+  it('should fall back to the examples index when the element name is missing', async () => {
+    const { getDocumentationPath } = await importExamplePage();
+
+    expect(getDocumentationPath({})).toBe('/examples/');
+  });
+
   it('should resolve canonical urls from the deployed site url', async () => {
     const { getCanonicalUrl } = await importExamplePage({
       elementsPagesBaseUrl: 'https://docs.example.com/elements/'
