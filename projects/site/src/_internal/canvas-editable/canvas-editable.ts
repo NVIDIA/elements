@@ -214,9 +214,9 @@ export class CanvasEditable extends LitElement {
     }
 
     return {
-      elements: `${__ELEMENTS_CDN_BASE_URL__}/@nvidia-elements/core/${this.packageVersions.elements}/dist/bundles/index.js`,
-      themes: `${__ELEMENTS_CDN_BASE_URL__}/@nvidia-elements/themes/${this.packageVersions.themes}/dist/bundles/index.css`,
-      styles: `${__ELEMENTS_CDN_BASE_URL__}/@nvidia-elements/styles/${this.packageVersions.styles}/dist/bundles/index.css`
+      elements: `${__ELEMENTS_CDN_BASE_URL__}/@nvidia-elements/core@${this.packageVersions.elements}/dist/bundles/index.js`,
+      themes: `${__ELEMENTS_CDN_BASE_URL__}/@nvidia-elements/themes@${this.packageVersions.themes}/dist/bundles/index.css`,
+      styles: `${__ELEMENTS_CDN_BASE_URL__}/@nvidia-elements/styles@${this.packageVersions.styles}/dist/bundles/index.css`
     };
   }
 
