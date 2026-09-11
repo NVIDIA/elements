@@ -31,7 +31,6 @@ export default {
     '@semantic-release/commit-analyzer',
     '@semantic-release/github',
     '@semantic-release/npm',
-    '@semantic-release/release-notes-generator',
     '@typescript/lib-dom',
     'adm-zip',
     'archiver',

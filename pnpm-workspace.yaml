@@ -46,6 +46,9 @@ packages:
 overrides:
   '@lit-labs/ssr-dom-shim': 1.6.0
   'archiver>glob': 'catalog:'
+  # semantic-release 25 / release-notes-generator 14 still ship writer@8.
+  # commitlint pulls conventionalcommits@10, which only renders with writer@9.
+  conventional-changelog-conventionalcommits: 9.3.1
   'dts-bundle-generator>typescript': 'catalog:'
   'lighthouse>axe-core': 4.11.3
   devalue: 5.8.1

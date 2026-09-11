@@ -22,6 +22,7 @@
       "files": [
         "ci-profile.js",
         "ci-profile.test.js",
+        "release-notes.test.js",
         "package.json"
       ],
       "output": [],
