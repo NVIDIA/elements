@@ -1,3 +1,24 @@
+## [2.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.5.2...@nvidia-elements/lint-v2.6.0) (2026-09-11)
+
+### Features
+
+* **lint:** support markdown linting ([652e751](https://github.com/NVIDIA/elements/commit/652e7517bb9c0f17a2e4cc1a4760206f414b24d2))
+
+### Bug Fixes
+
+* **ci:** pin conventionalcommits preset for release notes ([6c93057](https://github.com/NVIDIA/elements/commit/6c93057adec0a1d8fb22335a84af1bb4b9be41ae))
+* **core:** control message metadata ([1abec58](https://github.com/NVIDIA/elements/commit/1abec58e758c1cf02ba4e9587066bafe677f896a))
+* **core:** format bytes ([385fd83](https://github.com/NVIDIA/elements/commit/385fd83e9a7874aa2daecb400770a752b835b1fb))
+* **core:** pointer solid icon ([bf3ff31](https://github.com/NVIDIA/elements/commit/bf3ff31efa313a54130d0aca68176bf5b34dca88))
+* **core:** update icons with aspect ratios ([2021d95](https://github.com/NVIDIA/elements/commit/2021d9596a8e525a3351f6ce0c4d32604ac196ae))
+* **docs:** align card presentation ([f811f0a](https://github.com/NVIDIA/elements/commit/f811f0a685ffcb95c68c6bd2bb48129cf8349561))
+* **docs:** align card title typography ([056404a](https://github.com/NVIDIA/elements/commit/056404a2a6717e325106cd78bda82983e2f76d90))
+* **docs:** make page title weights consistent ([07bc98b](https://github.com/NVIDIA/elements/commit/07bc98b12a646f4050d2cc873d7ed3a00b8304f7))
+* **docs:** refine navigation group titles ([2e3c3e0](https://github.com/NVIDIA/elements/commit/2e3c3e089e07c0b2f261a58bd966bf2f772333a9))
+* **docs:** update responsive pattern icon ([6126e1c](https://github.com/NVIDIA/elements/commit/6126e1c2bc9fff2a222ce81c88f51de47149cad7))
+* **docs:** use canvas background for component headers ([5547c47](https://github.com/NVIDIA/elements/commit/5547c473f0f20dffe29ac8de8a24513126c56f99))
+* **lint:** no-excessive-primary-actions rule to handle popover elements ([398c0df](https://github.com/NVIDIA/elements/commit/398c0df6a2987e8ece663d8c2994d1626a1b2596))
+
 ## <small>2.5.2 (2026-09-03)</small>
 
 * fix(lint): suggest removing slot="default" when unnamed slot is not first ([84372f1](https://github.com/NVIDIA/elements/commit/84372f1))
