@@ -17,5 +17,7 @@ import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import '@nvidia-elements/code/codeblock/languages/xml.js';
 import '@nvidia-elements/code/codeblock/languages/yaml.js';
 import '@nvidia-elements/code/codeblock/define.js';
+import '@nvidia-elements/code/iframe/define.js';
 
 export * from '@nvidia-elements/code/codeblock';
+export * from '@nvidia-elements/code/iframe';

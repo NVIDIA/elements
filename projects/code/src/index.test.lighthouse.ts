@@ -21,10 +21,11 @@ describe('lighthouse report', () => {
       import('@nvidia-elements/code/codeblock/languages/xml.js');
       import('@nvidia-elements/code/codeblock/languages/yaml.js');
       import('@nvidia-elements/code/codeblock/define.js');
+      import('@nvidia-elements/code/iframe/define.js');
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(45);
+    expect(report.payload.javascript.kb).toBeLessThan(46);
     expect(report.payload.javascript.requests['define.js']!.kb).toBeLessThan(11);
     expect(report.payload.javascript.requests['core.js']!.kb).toBeLessThan(9);
     expect(report.payload.javascript.requests['bash.js']!.kb).toBeLessThan(3);

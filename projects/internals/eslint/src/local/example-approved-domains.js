@@ -1,6 +1,6 @@
 import { findHtmlTemplate, getTemplateText, hasTag } from './example-helpers.js';
 
-const APPROVED_DOMAINS = ['nvidia.com', 'github.com'];
+const APPROVED_DOMAINS = ['nvidia.com', 'github.com', 'cdn.jsdelivr.net'];
 const URL_ATTRIBUTES = ['href', 'src', 'srcset'];
 const URL_ATTRIBUTE_PATTERN = new RegExp(`\\b(${URL_ATTRIBUTES.join('|')})\\s*=\\s*("([^"]*)"|'([^']*)')`, 'gi');
 
