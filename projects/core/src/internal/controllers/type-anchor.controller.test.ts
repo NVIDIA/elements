@@ -21,6 +21,13 @@ class TypeAnchorTestElement extends LitElement {
   }
 }
 
+@customElement('type-anchor-slot-test-element')
+class TypeAnchorSlotTestElement extends TypeAnchorTestElement {
+  render() {
+    return html`<slot></slot><slot name="anchor"></slot>`;
+  }
+}
+
 describe('type-anchor.controller', () => {
   let fixture: HTMLElement;
   let element: TypeAnchorTestElement;
@@ -121,5 +128,38 @@ describe('type-anchor.controller wrapped element', () => {
     expect(anchor.style.textDecoration).toBe('none');
     expect(element.style.cursor).toBe('pointer');
     expect(element.matches(':state(anchor)')).toBe(true);
+  });
+});
+
+describe('type-anchor.controller named anchor slot', () => {
+  let fixture: HTMLElement;
+  let element: TypeAnchorSlotTestElement;
+  let anchor: HTMLAnchorElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <type-anchor-slot-test-element>
+        <a href="#">anchor</a>
+      </type-anchor-slot-test-element>
+    `);
+
+    element = fixture.querySelector<TypeAnchorSlotTestElement>('type-anchor-slot-test-element');
+    anchor = fixture.querySelector<HTMLAnchorElement>('a');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should move a slotted anchor into the named anchor slot', () => {
+    expect(anchor.slot).toBe('anchor');
+    expect(element.shadowRoot.querySelector<HTMLSlotElement>('slot[name=anchor]').assignedElements()[0]).toBe(anchor);
+  });
+
+  it('should remove empty text nodes from the default slot after reassignment', () => {
+    expect(
+      [...element.childNodes].filter(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim() === '')
+    ).toHaveLength(0);
   });
 });
