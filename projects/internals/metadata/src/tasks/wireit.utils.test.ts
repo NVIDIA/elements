@@ -1,12 +1,44 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { afterAll, describe, expect, it, vi } from 'vitest';
 import { generateGraphData } from './wireit.utils.js';
 import type { WireitGraph } from '../types.js';
 
+const fixtureRoot = join(import.meta.dirname, '__wireit-graph-fixtures__');
+const fixturePackageDir = join(fixtureRoot, 'labs-pkg');
+const missingPackageDep = '../../../../../../../../upkeep-missing-wireit-pkg:build';
+
+function installFixtures() {
+  rmSync(fixtureRoot, { recursive: true, force: true });
+  mkdirSync(join(fixturePackageDir, 'nested', 'deeper'), { recursive: true });
+  writeFileSync(join(fixturePackageDir, 'nested', 'package.json'), '{ not json');
+  writeFileSync(
+    join(fixturePackageDir, 'package.json'),
+    JSON.stringify({
+      name: 'labs/upkeep-wireit-fixture',
+      wireit: {
+        build: {
+          dependencies: ['./nested/deeper:build', 123, missingPackageDep]
+        }
+      }
+    })
+  );
+}
+
+const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+installFixtures();
+
 describe('generateGraphData', () => {
+  afterAll(() => {
+    consoleErrorSpy.mockRestore();
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  });
+
   const result: WireitGraph = generateGraphData();
+  const errorMessages = consoleErrorSpy.mock.calls.map(([message]) => String(message));
 
   it('should return an object with nodes and links arrays', () => {
     expect(result).toBeDefined();
@@ -349,5 +381,37 @@ describe('generateGraphData', () => {
         expect(linksToIt.length).toBeGreaterThan(0);
       }
     }
+  });
+
+  it('should categorize a package whose name includes labs/', () => {
+    const fixtureNode = result.nodes.find(n => n.packageName === 'labs/upkeep-wireit-fixture');
+
+    expect(fixtureNode).toBeDefined();
+    expect(fixtureNode?.category).toBe('labs');
+    expect(fixtureNode?.label).toBe('labs/upkeep-wireit-fixture:build');
+  });
+
+  it('should walk up nested paths to the nearest package.json', () => {
+    const fixtureNode = result.nodes.find(n => n.packageName === 'labs/upkeep-wireit-fixture');
+
+    expect(fixtureNode?.dependencies).toBe(1);
+    expect(result.links.filter(l => l.source === fixtureNode?.id)).toHaveLength(0);
+  });
+
+  it('should omit wireit dependencies that do not resolve to a package.json', () => {
+    const missingId = result.nodes.find(n => n.id.includes('upkeep-missing-wireit-pkg'));
+
+    expect(missingId).toBeUndefined();
+  });
+
+  it('should keep generating a graph when a package.json file is invalid', () => {
+    expect(errorMessages.some(message => message.startsWith('Error reading') && message.includes('package.json'))).toBe(
+      true
+    );
+    expect(result.nodes.length).toBeGreaterThan(0);
+  });
+
+  it('should keep generating a graph when a wireit dependency cannot be parsed', () => {
+    expect(errorMessages.some(message => message.startsWith('error parsing dependency'))).toBe(true);
   });
 });
