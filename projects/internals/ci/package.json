@@ -26,6 +26,8 @@
         "lighthouse-summary.js",
         "metrics.lighthouse.js",
         "release-notes.test.js",
+        "wait-npm-packages.js",
+        "wait-npm-packages.test.js",
         "package.json"
       ],
       "output": [],

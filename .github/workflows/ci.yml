@@ -157,6 +157,12 @@ jobs:
       id-token: write
     concurrency: mcp-registry-publish
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          sparse-checkout: |
+            projects/internals/ci/package.json
+            projects/internals/ci/wait-npm-packages.js
+          sparse-checkout-cone-mode: false
       - name: Download MCP server manifest
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
@@ -179,6 +185,9 @@ jobs:
               ;;
           esac
           echo "publish=$publish" >> "$GITHUB_OUTPUT"
+      - name: Wait for npm packages
+        if: steps.registry.outputs.publish == 'true'
+        run: node ./projects/internals/ci/wait-npm-packages.js projects/cli/server.json
       - name: Publish to MCP Registry
         if: steps.registry.outputs.publish == 'true'
         run: |
