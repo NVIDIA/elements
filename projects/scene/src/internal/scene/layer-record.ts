@@ -27,6 +27,9 @@ import { getFrameWorldMatrixPrecise } from '../frame/state.js';
 import { getSceneFeatureIdVersion, takeSceneFeatureIdSnapshot } from '../feature-ids.js';
 import { getPickItemCount } from '../rendering/render-items.js';
 import { getLabelLayerVersion, isLabelLayerRegistered, takeLabelLayerRenderData } from '../labels/layer-state.js';
+import type { LabelScaleUnit } from '../labels/data.js';
+import type { LineTopology, LineWidthUnit } from '../lines/data.js';
+import type { PointSizeUnit } from '../points/data.js';
 import {
   getSceneLayerSpec,
   type MeshSceneLayerKind,
@@ -82,11 +85,6 @@ export type SceneLayerRecord =
   | LabelLayerRecord
   | MeshLayerRecord
   | HeightfieldLayerRecord;
-
-type LineTopology = 'loop' | 'segments' | 'strip';
-type LineWidthUnit = 'pixel' | 'world';
-type PointSizeUnit = 'pixel' | 'world';
-type LabelScaleUnit = 'pixel' | 'world';
 
 /** Resolves one supported layer to a closed pending or registered record. */
 // eslint-disable-next-line complexity -- Each supported custom-element tag has one explicit resolution branch.
@@ -159,37 +157,16 @@ export function createSceneLayerRenderItem(record: SceneLayerRecord): SceneRende
     });
   if (record.kind === 'heightfield')
     return meshItem({ data: takeHeightfieldLayerRenderData(layer), frameMatrix, interactive, layer });
-  if (record.kind === 'mesh')
-    return withFeatureIds(
-      meshItem({
-        data: takeMeshLayerRenderData(layer),
-        frameMatrix,
-        instances: optionalMarkers(layer),
-        interactive,
-        layer
-      })
-    );
-  if (record.kind === 'model')
-    return withFeatureIds(
-      meshItem({
-        data: takeModelLayerRenderData(layer),
-        frameMatrix,
-        instances: optionalMarkers(layer),
-        interactive,
-        layer
-      })
-    );
-  if (record.kind === 'polygon')
-    return withFeatureIds(
-      meshItem({
-        data: takePolygonLayerRenderData(layer),
-        frameMatrix,
-        instances: optionalMarkers(layer),
-        interactive,
-        layer
-      })
-    );
-  return isStreamRecord(record) ? createStreamLayerRenderItem(record, frameMatrix, interactive) : undefined;
+  if (isStreamRecord(record)) return createStreamLayerRenderItem(record, frameMatrix, interactive);
+  return withFeatureIds(
+    meshItem({
+      data: takeMeshRecordRenderData(record),
+      frameMatrix,
+      instances: optionalMarkers(layer),
+      interactive,
+      layer
+    })
+  );
 }
 
 function createStreamLayerRenderItem(
@@ -231,11 +208,9 @@ function pending(layer: HTMLElement, kind: SceneLayerKind): PendingLayerRecord {
 }
 
 function isRegisteredMeshKind(layer: HTMLElement, kind: MeshLayerRecord['kind']): boolean {
-  return kind === 'mesh'
-    ? isMeshLayerRegistered(layer)
-    : kind === 'model'
-      ? isModelLayerRegistered(layer)
-      : isPolygonLayerRegistered(layer);
+  if (kind === 'mesh') return isMeshLayerRegistered(layer);
+  if (kind === 'model') return isModelLayerRegistered(layer);
+  return isPolygonLayerRegistered(layer);
 }
 
 function trackVersion(record: MarkerLayerRecord | HeightfieldLayerRecord | LabelLayerRecord, version: number): boolean {
@@ -280,11 +255,15 @@ function isStreamRecord(
 }
 
 function getMeshVersion(record: MeshLayerRecord): number {
-  return record.kind === 'mesh'
-    ? getMeshLayerVersion(record.layer)
-    : record.kind === 'model'
-      ? getModelLayerVersion(record.layer)
-      : getPolygonLayerVersion(record.layer);
+  if (record.kind === 'mesh') return getMeshLayerVersion(record.layer);
+  if (record.kind === 'model') return getModelLayerVersion(record.layer);
+  return getPolygonLayerVersion(record.layer);
+}
+
+function takeMeshRecordRenderData(record: MeshLayerRecord) {
+  if (record.kind === 'mesh') return takeMeshLayerRenderData(record.layer);
+  if (record.kind === 'model') return takeModelLayerRenderData(record.layer);
+  return takePolygonLayerRenderData(record.layer);
 }
 
 function optionalMarkers(layer: HTMLElement) {

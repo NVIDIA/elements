@@ -586,6 +586,10 @@ export const InteractionsList = {
     <p id="buffer-pick-position" nve-text="body muted" nve-layout="pad-top:md">No position selected</p>
     <script type="module">
       import { MarkerBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/cubes/define.js';
 
       const scene = document.querySelector('#buffer-pick-scene');
       const markerLayer = scene.querySelector('#buffer-pick-markers');
@@ -688,6 +692,10 @@ export const FeatureIdentity = {
     </p>
     <script type="module">
       import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/lines/define.js';
 
       const lineLayer = document.querySelector('#inspection-lines');
       const status = document.querySelector('#line-inspection-status');

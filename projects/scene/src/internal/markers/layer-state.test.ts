@@ -9,8 +9,9 @@ import { MARKER } from '../layouts/built-ins.js';
 import { readMarker, writeMarker } from '../layouts/helpers.js';
 import type { Quaternion, Vec3 } from '../types.js';
 import type { SceneErrorDetail } from '../../scene/scene.js';
-import { createMarkerSource } from '../../record-sources.js';
+import { createMarkerSource } from '../external-record-sources.js';
 import { MarkerBuffer, type MarkerSource } from './buffer.js';
+import type { ExternalMarkerSource } from '../packed-record-source.js';
 import {
   connectMarkerLayer,
   disconnectMarkerLayer,
@@ -351,7 +352,7 @@ describe('marker layer state', () => {
 });
 
 interface TestLayer extends HTMLElement {
-  source: MarkerSource | null;
+  source: MarkerSource | ExternalMarkerSource | null;
   countLimit: number | undefined;
   publish(options?: { activeCount?: number; count?: number; start?: number }): void;
 }
@@ -380,7 +381,7 @@ function createRecords(count: number): Uint8Array {
   return records;
 }
 
-function asMarkerSource(bytes: Uint8Array): MarkerSource {
+function asMarkerSource(bytes: Uint8Array): ExternalMarkerSource {
   const source = createMarkerSource({ bytes, count: bytes.byteLength / MARKER.stride });
   return source;
 }

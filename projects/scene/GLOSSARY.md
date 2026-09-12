@@ -26,7 +26,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Active prefix** — The contiguous range of records from index zero through `count - 1` that a packed record source currently exposes. A buffer can reserve more capacity than this range without rendering the unused records.
 
-**Adapter** — In WebGPU, the browser's representation of a physical or software GPU that can create a GPU device. In Scene's data API, an external source adapter also means the typed wrapper created around application-owned packed bytes, such as the value returned by `createPointSource()`.
+**Adapter** — In WebGPU, the browser's representation of a physical or software GPU that can create a GPU device.
 
 **Alignment** — A constraint that requires a byte offset or allocation size to fall on a particular boundary. GPU formats, buffer copies, and mapped readback rows impose alignment rules that Scene's layouts and resource code must honor.
 
@@ -65,8 +65,6 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 **Binding** — A numbered shader input location within a bind group. WGSL annotations such as `@group(0) @binding(1)` connect shader declarations to resources supplied by JavaScript.
 
 **Bounding volume** — A simple shape that encloses more detailed geometry and makes visibility or intersection tests cheaper. Scene uses marker bounds and bounding spheres during GPU visibility compaction.
-
-**Borrowed bytes** — Application-owned packed storage wrapped by an external source adapter. Scene reads and captures the bytes when the layer publishes but doesn't take ownership of the original allocation.
 
 **Buffer** — A linear allocation of bytes. JavaScript typed arrays are CPU buffers; WebGPU buffers store data that shader stages, draw commands, or readback code use on the GPU.
 
@@ -166,8 +164,6 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Elevation grid** — See **height field**.
 
-**External source** — A typed descriptor over packed bytes owned by another producer. It preserves layout identity so equal byte lengths can't make Scene confuse marker, point, line, label, and triangle records.
-
 ## F
 
 **Face** — A surface of a solid. In triangle rendering, a face normally means one triangle or a group of triangles that represents a larger planar surface.
@@ -176,7 +172,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Feature ID** — An application-owned unsigned 32-bit identity associated with a logical pick target. Unlike a transient buffer index, it can remain stable when records move or an application reuses storage slots.
 
-**Field offset** — The byte position of a field inside one packed record. A layout descriptor publishes offsets so external producers can write canonical bytes correctly.
+**Field offset** — The byte position of a field inside one packed record. A layout descriptor publishes offsets so producers can write canonical bytes correctly.
 
 **Field of view (FOV)** — The angular extent visible through a perspective camera. Scene configures the vertical field of view in radians; the aspect ratio determines the horizontal extent.
 
@@ -408,7 +404,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Record layout** — The declared byte shape of a packed record: its name, stride, fields, types, and offsets. Scene exports canonical descriptors such as `MARKER`, `POINT`, `LINE_VERTEX`, `TRIANGLE_VERTEX`, and `LABEL`.
 
-**Record source** — A typed provider of packed records assigned to a compatible layer. Scene accepts its versioned record buffers and explicit external source adapters but rejects untyped array-buffer views.
+**Record source** — A typed provider of packed records assigned to a compatible layer. Scene record buffers preserve layout identity so equal byte lengths can't confuse marker, point, line, label, and triangle records.
 
 **Render pass** — A group of draw calls that share configured color and depth attachments. Scene normally encodes an opaque pass, an optional OIT pass, and an OIT composite pass; picking uses separate attachments and passes.
 
@@ -586,4 +582,4 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Z-fighting** — Flickering or unstable visibility when surfaces produce nearly equal depth values. Separating surfaces, moving the near plane outward, or applying a suitable depth bias can reduce it.
 
-**Zero copy** — A data path that avoids an otherwise unnecessary memory copy. External source adapters borrow producer bytes, but publishing still captures owned render state so later producer mutation can't change a submitted snapshot implicitly.
+**Zero copy** — A data path that avoids an otherwise unnecessary memory copy. Direct access to a record buffer's mutable bytes avoids intermediate record writes, but publishing still captures owned render state.

@@ -7,14 +7,12 @@ import { writeLineVertex, writePoint } from './layouts/helpers.js';
 import { LineVertexBuffer } from './lines/buffer.js';
 import { PointBuffer } from './points/buffer.js';
 import { TriangleVertexBuffer } from './triangles/buffer.js';
-import {
-  createLineVertexSource,
-  createPointSource,
-  createTriangleVertexSource,
-  type ExternalLineVertexSource,
-  type ExternalPointSource,
-  type ExternalTriangleVertexSource
-} from '../record-sources.js';
+import { createLineVertexSource, createPointSource, createTriangleVertexSource } from './external-record-sources.js';
+import type {
+  ExternalLineVertexSource,
+  ExternalPointSource,
+  ExternalTriangleVertexSource
+} from './packed-record-source.js';
 import {
   connectStreamingLayer,
   disconnectStreamingLayer,

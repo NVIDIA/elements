@@ -60,7 +60,7 @@ export abstract class MarkerLayerElement extends LitElement implements SceneInte
 
   /** Replaces the streamed marker records or selects declarative marker children when null. */
   get source(): MarkerSource | null {
-    return getLayerInstances(this);
+    return getLayerInstances(this) as MarkerSource | null;
   }
 
   set source(value: MarkerSource | null) {

@@ -3,7 +3,7 @@
 
 const DISTANCE_INFINITY = 1e20;
 
-export interface GlyphSDFRasterizerOptions {
+interface GlyphSDFRasterizerOptions {
   readonly buffer: number;
   readonly cutoff: number;
   readonly fontFamily: string;
@@ -11,7 +11,7 @@ export interface GlyphSDFRasterizerOptions {
   readonly radius: number;
 }
 
-export interface RasterizedGlyphSDF {
+interface RasterizedGlyphSDF {
   readonly advance: number;
   readonly data: Uint8ClampedArray;
   readonly height: number;
@@ -27,20 +27,16 @@ interface DistanceTransformWorkspace {
   readonly sites: Uint32Array;
 }
 
-interface DistanceFieldOptions {
-  readonly alpha: Uint8ClampedArray;
+interface SignedDistanceFieldOptions {
   readonly cutoff: number;
   readonly height: number;
   readonly radius: number;
   readonly width: number;
-  readonly workspace: DistanceTransformWorkspace;
 }
 
-export interface SignedDistanceFieldOptions {
-  readonly cutoff: number;
-  readonly height: number;
-  readonly radius: number;
-  readonly width: number;
+interface DistanceFieldOptions extends SignedDistanceFieldOptions {
+  readonly alpha: Uint8ClampedArray;
+  readonly workspace: DistanceTransformWorkspace;
 }
 
 interface DistanceGridOptions {

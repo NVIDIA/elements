@@ -1,33 +1,23 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './internal/layouts/built-ins.js';
-import { MarkerInstanceBuffer } from './internal/instance-buffer.js';
+import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './layouts/built-ins.js';
+import { MarkerInstanceBuffer } from './instance-buffer.js';
 import {
   registerExternalPackedRecordSource,
+  type ExternalLabelSource,
+  type ExternalLineVertexSource,
+  type ExternalMarkerSource,
   type ExternalPackedRecordSource,
+  type ExternalPointSource,
+  type ExternalTriangleVertexSource,
   type PackedRecordKind,
   type PackedRecordState
-} from './internal/packed-record-source.js';
-import { VertexStreamBuffer } from './internal/vertex-stream.js';
-import type { LayoutDescriptor } from './internal/layouts/define-layout.js';
-import { labelRecordIsValid } from './internal/labels/data.js';
-import { registerLabelSourceTexts } from './internal/labels/source.js';
-
-interface ExternalSource<Kind extends string> {
-  readonly bytes: Uint8Array;
-  readonly capacity: number;
-  readonly count: number;
-  readonly kind: Kind;
-}
-
-export type ExternalMarkerSource = ExternalSource<'marker'>;
-export type ExternalPointSource = ExternalSource<'point'>;
-export type ExternalLineVertexSource = ExternalSource<'line-vertex'>;
-export type ExternalTriangleVertexSource = ExternalSource<'triangle-vertex'>;
-export interface ExternalLabelSource extends ExternalSource<'label'> {
-  readonly texts: readonly string[];
-}
+} from './packed-record-source.js';
+import { VertexStreamBuffer } from './vertex-stream.js';
+import type { LayoutDescriptor } from './layouts/define-layout.js';
+import { labelRecordIsValid } from './labels/data.js';
+import { registerLabelSourceTexts } from './labels/source.js';
 
 export interface ExternalRecordSourceOptions {
   readonly bytes: Uint8Array;
@@ -114,10 +104,7 @@ function createSource<Kind extends PackedRecordKind>(
   return Object.freeze(source);
 }
 
-function readSourceOptions(options: ExternalRecordSourceOptions): {
-  readonly bytes: Uint8Array;
-  readonly count: number;
-} {
+function readSourceOptions(options: ExternalRecordSourceOptions): ExternalRecordSourceOptions {
   if (typeof options !== 'object' || options === null) {
     throw new TypeError('Packed source options must be an object.');
   }

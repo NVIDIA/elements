@@ -21,6 +21,10 @@ export const Default = {
     </nve-scene>
     <script type="module">
       import { TriangleVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/triangles/define.js';
 
       const vertices = new TriangleVertexBuffer({ capacity: 3 });
       vertices.set(0, { position: [-0.75, -0.5, 0.05], color: [0, 1, 1, 1] });
@@ -43,6 +47,10 @@ export const Path = {
     </nve-scene>
     <script type="module">
       import { TriangleVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/triangles/define.js';
 
       const corridor = document.querySelector('#driving-corridor');
       const sections = [

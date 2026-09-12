@@ -14,8 +14,8 @@ describe('lighthouse report', () => {
       </script>
     `
     );
-    // Publication, typed source, and explicit pick APIs establish a 65.89 KB measured baseline.
-    // Keep roughly 3% headroom for compression variation.
-    expect(report.payload.javascript.kb).toBeLessThan(70);
+    // The data-only root entrypoint establishes a 6.63 KB measured baseline.
+    // Keep roughly 5% headroom for compression variation.
+    expect(report.payload.javascript.kb).toBeLessThan(7);
   });
 });

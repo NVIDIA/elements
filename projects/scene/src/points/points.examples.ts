@@ -91,6 +91,10 @@ export const SizeUnits = {
     </nve-scene>
     <script type="module">
       import { PointBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/points/define.js';
 
       const pixelPoints = new PointBuffer({ capacity: 1 });
       const worldPoints = new PointBuffer({ capacity: 1 });
@@ -149,7 +153,13 @@ export const Lidar = {
       </nve-card>
     </div>
     <script type="module">
-      import { POINT, PointBuffer, createPointSource } from '@nvidia-elements/scene';
+      import { POINT, PointBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/core/button/define.js';
+      import '@nvidia-elements/core/button-group/define.js';
+      import '@nvidia-elements/core/card/define.js';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/points/define.js';
 
       const scene = document.querySelector('#lidar-scene');
       const cameras = {
@@ -375,7 +385,9 @@ export const Lidar = {
           color: turbo(Math.pow(clamp(Math.max(0, positions[offset + 2]) / 12), 0.72))
         });
       }
-      const intensityBytes = heightPoints.mutableBytes.slice();
+      const intensityPoints = new PointBuffer({ capacity: point });
+      const intensityBytes = intensityPoints.mutableBytes;
+      intensityBytes.set(heightPoints.mutableBytes);
       for (let index = 0; index < point; index += 1) {
         const color = Math.round((0.08 + intensities[index] * 0.92) * 255);
         const offset = index * POINT.stride + 12;
@@ -383,7 +395,7 @@ export const Lidar = {
         intensityBytes[offset + 1] = color;
         intensityBytes[offset + 2] = color;
       }
-      const intensityPoints = createPointSource({ bytes: intensityBytes, count: point });
+      intensityPoints.setCount(point);
 
       const applyCamera = view => {
         for (const camera of Object.values(cameras)) camera.disabled = true;
@@ -413,42 +425,6 @@ export const Lidar = {
         resolution = Number(button.dataset.resolution);
         updateCount();
       });
-    </script>
-  `
-};
-
-/**
- * @summary Borrow a nonzero-offset producer view with an explicit point format and publish only the record that changes.
- */
-export const ExternalProducer = {
-  render: () => html`
-    <nve-scene aria-label="External point producer" style="min-height: 320px">
-      <nve-scene-camera behavior="orbit" distance="4"></nve-scene-camera>
-      <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-points id="external-points" size="12"></nve-scene-points>
-    </nve-scene>
-    <script type="module">
-      import { POINT, createPointSource } from '@nvidia-elements/scene';
-
-      const allocation = new Uint8Array(8 + POINT.stride * 2);
-      const bytes = allocation.subarray(8);
-      const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-      const positionOffset = POINT.fields.position.offset;
-      const colorOffset = POINT.fields.color.offset;
-      for (let index = 0; index < 2; index += 1) {
-        const recordOffset = index * POINT.stride;
-        view.setFloat32(recordOffset + positionOffset, index - 0.5, true);
-        view.setFloat32(recordOffset + positionOffset + 8, 0.5, true);
-        bytes.fill(255, recordOffset + colorOffset, recordOffset + colorOffset + 4);
-      }
-
-      const source = createPointSource({ bytes, count: 2 });
-      const layer = document.querySelector('#external-points');
-      if (source) {
-        layer.source = source;
-        view.setFloat32(POINT.stride + positionOffset + 8, 1.25, true);
-        layer.publish({ count: 1, start: 1 });
-      }
     </script>
   `
 };

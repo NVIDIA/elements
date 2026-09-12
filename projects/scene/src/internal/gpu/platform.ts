@@ -96,7 +96,7 @@ export interface SceneGPUComputePipelineDescriptor {
   readonly [property: string]: unknown;
 }
 
-export interface SceneGPUQuerySetDescriptor {
+interface SceneGPUQuerySetDescriptor {
   readonly count: number;
   readonly type: 'occlusion' | 'timestamp';
 }

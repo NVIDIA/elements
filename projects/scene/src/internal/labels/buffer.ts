@@ -14,7 +14,6 @@ import { getFieldOffset } from '../layouts/define-layout.js';
 import { registerLabelSourceTexts } from './source.js';
 import type { RGBA, Vec3 } from '../types.js';
 import type { MutableVector3, RecordBufferOptions, SceneColor } from '../packed-record-buffer.js';
-import type { ExternalLabelSource } from '../../record-sources.js';
 
 const POSITION_OFFSET = getFieldOffset(LABEL, 'position');
 const SCALE_OFFSET = getFieldOffset(LABEL, 'scale');
@@ -38,7 +37,7 @@ export interface Label {
   set text(value: string);
 }
 
-export type LabelSource = LabelBuffer | ExternalLabelSource;
+export type LabelSource = LabelBuffer;
 
 /** Fixed-capacity, mutable storage for packed label records and their text. */
 export class LabelBuffer extends PackedRecordBuffer<'label', LabelInit, Label> {

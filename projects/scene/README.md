@@ -12,10 +12,11 @@ The application owns transport, timing, buffering, interpolation, replay, and th
 pnpm add @nvidia-elements/scene
 ```
 
-Import the root entrypoint for types, canonical packed wire-format descriptors, buffer classes, and element classes without registering any custom elements.
+Import the root entrypoint for shared types, canonical packed wire-format descriptors, and buffer classes. Import element classes from their standalone entrypoints.
 
 ```ts
-import { MarkerBuffer, type Scene } from '@nvidia-elements/scene';
+import { MarkerBuffer } from '@nvidia-elements/scene';
+import type { Scene } from '@nvidia-elements/scene/scene';
 ```
 
 Import one `define.js` entrypoint when an app uses a specific element. It registers that element and its required Scene dependencies.

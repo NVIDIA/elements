@@ -29,6 +29,10 @@ export const Default = {
     </nve-scene>
     <script type="module">
       import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/lines/define.js';
 
       const setVertices = (id, records) => {
         const vertices = new LineVertexBuffer({ capacity: records.length });
@@ -84,6 +88,10 @@ export const SegmentStyles = {
     </nve-scene>
     <script type="module">
       import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/lines/define.js';
 
       const cyan = [0, 1, 1, 1];
       const magenta = [1, 0, 1, 1];
@@ -115,6 +123,10 @@ export const WidthUnits = {
     </nve-scene>
     <script type="module">
       import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/lines/define.js';
 
       const cyan = [0, 1, 1, 1];
       const yellow = [1, 1, 0, 1];
@@ -149,6 +161,10 @@ export const StreamingTrail = {
     </nve-scene>
     <script type="module">
       import { LINE_VERTEX, LineVertexBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/lines/define.js';
 
       const scene = document.querySelector('#streaming-trail-scene');
       const trail = scene.querySelector('#streaming-trail');

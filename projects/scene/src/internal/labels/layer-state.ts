@@ -16,8 +16,10 @@ import { VertexStreamBuffer, type VertexStreamIssue } from '../vertex-stream.js'
 import { hasVisibleLabelText, labelRecordIsValid } from './data.js';
 import { getLabelSourceTexts } from './source.js';
 import type { LabelSource } from './buffer.js';
-import type { ScenePublishOptions } from '../packed-record-source.js';
+import type { ExternalLabelSource, ScenePublishOptions } from '../packed-record-source.js';
 import type { UploadRange } from '../upload-ranges.js';
+
+type LabelLayerSource = LabelSource | ExternalLabelSource;
 
 export interface LabelLayerRenderData {
   readonly bytes: Uint8Array | null;
@@ -41,7 +43,7 @@ interface LabelLayerState {
   readonly episodes: DiagnosticEpisodes;
   mutationObserver?: MutationObserver;
   publicationError: boolean;
-  source: LabelSource | null;
+  source: LabelLayerSource | null;
   sourceCount: number;
   texts: string[];
   textVersion: number;
@@ -75,11 +77,11 @@ export function disconnectLabelLayer(layer: HTMLElement): void {
   getState(layer).mutationObserver?.disconnect();
 }
 
-export function getLabelLayerSource(layer: HTMLElement): LabelSource | null {
+export function getLabelLayerSource(layer: HTMLElement): LabelLayerSource | null {
   return getState(layer).source;
 }
 
-export function setLabelLayerSource(layer: HTMLElement, source: LabelSource | null): void {
+export function setLabelLayerSource(layer: HTMLElement, source: LabelLayerSource | null): void {
   const state = getState(layer);
   assertMatchingSource(source);
   state.source = source;
@@ -131,7 +133,7 @@ export function publishLabelLayer(layer: HTMLElement, options?: ScenePublishOpti
 
 function applyPublication(
   state: LabelLayerState,
-  source: LabelSource,
+  source: LabelLayerSource,
   resolved: { readonly activeCount: number; readonly count: number; readonly start: number }
 ): void {
   state.buffer.commit(resolved.start, resolved.count);
@@ -182,7 +184,7 @@ export function isLabelLayerRegistered(layer: HTMLElement): boolean {
 
 function copyPublishedTexts(options: {
   readonly count: number;
-  readonly source: LabelSource;
+  readonly source: LabelLayerSource;
   readonly start: number;
   readonly state: LabelLayerState;
 }): boolean {
@@ -205,7 +207,7 @@ function copyPublishedTexts(options: {
   return changed;
 }
 
-function copySourceTexts(source: LabelSource): string[] {
+function copySourceTexts(source: LabelLayerSource): string[] {
   const texts = getLabelSourceTexts(source);
   if (!texts || texts.length !== source.capacity) throw new TypeError('Label source text is unavailable.');
   return [...texts];
@@ -241,7 +243,7 @@ function updateDiagnostics(layer: HTMLElement, state: LabelLayerState): void {
   }
 }
 
-function assertMatchingSource(source: LabelSource | null): void {
+function assertMatchingSource(source: LabelLayerSource | null): void {
   if (source === null) return;
   if (!isPackedRecordSource(source) || getPackedRecordKind(source) !== 'label' || !getLabelSourceTexts(source)) {
     throw new TypeError('Label layers require a label record source.');

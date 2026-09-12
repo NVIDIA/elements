@@ -23,6 +23,10 @@ export const Default = {
     </nve-scene>
     <script type="module">
       import { LabelBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/labels/define.js';
 
       const labels = new LabelBuffer({ capacity: 3 });
       labels.add({ text: 'origin', position: [0, 0, 0.1], scale: 18, color: 'white' });
@@ -46,6 +50,10 @@ export const ScaleUnits = {
     </nve-scene>
     <script type="module">
       import { LabelBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/labels/define.js';
 
       const pixel = new LabelBuffer({ capacity: 1 });
       const world = new LabelBuffer({ capacity: 1 });

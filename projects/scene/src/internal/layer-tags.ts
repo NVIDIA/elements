@@ -1,21 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-export type SceneLayerKind =
-  | 'label'
-  | 'marker'
-  | 'point'
-  | 'line'
-  | 'triangle'
-  | 'mesh'
-  | 'model'
-  | 'polygon'
-  | 'heightfield';
-
 export type StreamSceneLayerKind = 'point' | 'line' | 'triangle';
 export type MeshSceneLayerKind = 'mesh' | 'model' | 'polygon';
 
-export type SceneLayerSpec =
+type SceneLayerSpec =
   | { readonly family: 'label'; readonly kind: 'label'; readonly markerInstances: false; readonly tag: string }
   | { readonly family: 'marker'; readonly kind: 'marker'; readonly markerInstances: true; readonly tag: string }
   | {
@@ -36,6 +25,8 @@ export type SceneLayerSpec =
       readonly markerInstances: false;
       readonly tag: string;
     };
+
+export type SceneLayerKind = SceneLayerSpec['kind'];
 
 export const SCENE_MARKER_TAG = 'nve-scene-marker';
 export const SCENE_MODEL_TAG = 'nve-scene-model';

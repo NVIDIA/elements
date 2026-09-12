@@ -89,34 +89,6 @@ cubes.publish({ count: 1, start: 0 });
 
 This isolation also applies after device recovery. Scene rebuilds each layer from its last published capture, not from later unpublished producer mutations.
 
-## External packed sources
-
-Use an explicit adapter when another producer owns canonical packed bytes. The adapter borrows the exact `Uint8Array` view with its offset and length. It doesn't copy or own the allocation.
-
-```js
-import { POINT, createPointSource } from '@nvidia-elements/scene';
-
-const allocation = new Uint8Array(16 + POINT.stride * 4);
-const bytes = allocation.subarray(16);
-const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-view.setFloat32(POINT.fields.position.offset, 2, true);
-view.setFloat32(POINT.fields.position.offset + 4, 1, true);
-view.setFloat32(POINT.fields.position.offset + 8, 0.5, true);
-
-const source = createPointSource({ bytes, count: 1 });
-points.source = source;
-view.setFloat32(POINT.fields.position.offset + 8, 0.75, true);
-points.publish({ count: 1, start: 0 });
-```
-
-Scene also exports `createMarkerSource()`, `createLineVertexSource()`, and `createTriangleVertexSource()`. The functions throw when storage, alignment, count, or active record values are invalid, so a successfully returned source is always safe to assign.
-
-An adapter's `count` is immutable. Create another descriptor over the same view to select a new producer count without allocating new records. Repeated changes at the same count need only `layer.publish()`. Scene rejects shared memory because it doesn't define a synchronization protocol for concurrent writes. A detached or transferred allocation becomes invalid on the next capture.
-
-Layer source properties accept matching record buffers or typed external source adapters. They reject array-buffer views without a source type so equal byte lengths can't silently reinterpret one canonical format as another.
-
-{% example 'nve-scene-points' 'ExternalProducer' %}
-
 ## Direct byte writes
 
 Use `mutableBytes` only when a producer needs bulk or in-place writes that record handles can't express efficiently. The view follows the exported canonical layout descriptors, including each field offset, record stride, numeric type, and little-endian encoding.
@@ -133,7 +105,7 @@ points.setCount(1);
 pointLayer.source = points;
 ```
 
-Accessing `mutableBytes` permanently disables prepared-source caching for that buffer because later byte writes can't advance its observable `version`. This preserves zero-copy producer access and correct publication semantics. Prefer `set()`, `add()`, and record handles for infrequently changing sources that feed more than one layer or scene. Those APIs advance `version`, allowing every consumer of one unchanged generation to reuse its prepared snapshot.
+Accessing `mutableBytes` permanently disables prepared-source caching for that buffer because later byte writes can't advance its observable `version`. This preserves direct producer access and correct publication semantics. Prefer `set()`, `add()`, and record handles for infrequently changing sources that feed more than one layer or scene. Those APIs advance `version`, allowing every consumer of one unchanged generation to reuse its prepared snapshot.
 
 ## Bounded updates
 

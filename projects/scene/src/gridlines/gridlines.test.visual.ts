@@ -113,7 +113,7 @@ function depthTemplate(): string {
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneGridlines } from '../../src/gridlines/gridlines.ts';
       import { SceneTriangles } from '../../src/triangles/triangles.ts';
-      import { createTriangleVertexSource } from '../../src/record-sources.ts';
+      import { createTriangleVertexSource } from '../../src/internal/external-record-sources.ts';
       import { TRIANGLE_VERTEX } from '../../src/internal/layouts/built-ins.ts';
       import { writeTriangleVertex } from '../../src/internal/layouts/helpers.ts';
       define(Scene); define(SceneCamera); define(SceneGridlines); define(SceneTriangles);

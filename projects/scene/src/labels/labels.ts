@@ -82,7 +82,7 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
 
   /** Replaces the label records or renders nothing when null. */
   get source(): LabelSource | null {
-    return getLabelLayerSource(this);
+    return getLabelLayerSource(this) as LabelSource | null;
   }
 
   set source(value: LabelSource | null) {

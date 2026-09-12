@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../errors.js';
+import { sameRGBA } from '../color.js';
 import { validateHeightfieldGrid } from './compile.js';
 import { getHeightfieldTopology, hasSameHeightfieldTopology, type HeightfieldTopology } from './topology.js';
 import type { HeightfieldGrid } from './types.js';
@@ -99,7 +100,7 @@ function updateGridEpisode(layer: HTMLElement, state: HeightfieldState): void {
 
 export function setHeightfieldLayerColor(layer: HTMLElement, color: RGBA): void {
   const state = getState(layer);
-  if (sameColor(state.color, color)) return;
+  if (sameRGBA(state.color, color)) return;
   state.color = color;
   state.version += 1;
   notifyOwningScene(layer);
@@ -187,8 +188,4 @@ function snapshotGrid(value: unknown): HeightfieldGrid {
     ...(colors === undefined ? {} : { colors: colors as Uint8Array }),
     ...(origin === undefined ? {} : { origin: origin as readonly [number, number] })
   };
-}
-
-function sameColor(left: RGBA, right: RGBA): boolean {
-  return left[0] === right[0] && left[1] === right[1] && left[2] === right[2] && left[3] === right[3];
 }

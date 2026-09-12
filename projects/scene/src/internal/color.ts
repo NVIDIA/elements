@@ -44,6 +44,10 @@ export function createCSSColorConverter(fallback: CSSColor) {
   };
 }
 
+export function sameRGBA(left: RGBA, right: RGBA): boolean {
+  return left[0] === right[0] && left[1] === right[1] && left[2] === right[2] && left[3] === right[3];
+}
+
 export function srgbToLinear(channel: number): number {
   if (!Number.isFinite(channel)) {
     throw new RangeError('Color channels must be finite.');

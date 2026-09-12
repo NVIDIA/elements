@@ -5,14 +5,13 @@ import {
   LABEL,
   LINE_VERTEX,
   LabelBuffer,
+  LineVertexBuffer,
   MARKER,
   MarkerBuffer,
   POINT,
   PointBuffer,
   TRIANGLE_VERTEX,
-  createLineVertexSource,
-  createPointSource,
-  createTriangleVertexSource
+  TriangleVertexBuffer
 } from '../dist/index.js';
 import '../dist/camera/define.js';
 import '../dist/cubes/define.js';
@@ -206,7 +205,7 @@ if (profile.mode === 'shader-coverage') {
   directMarkers.source = directSource;
   directMarkers.interactive = true;
   lines.topology = 'loop';
-  lines.source = createLineBytes(4, 128);
+  lines.source = createLineVertexBuffer(4, 128);
   points.interactive = true;
   markers.interactive = true;
   scene.append(directMarkers);
@@ -217,25 +216,25 @@ if (profile.mode === 'partitioned-storage') {
 }
 
 const pointSources = [
-  createPointBytes(profile.pointCount, profile.translucent ? 128 : 255, 0x1a2b3c4d),
-  createPointBytes(profile.pointCount, profile.translucent ? 128 : 255, 0x5e6f7788)
+  createPointBuffer(profile.pointCount, profile.translucent ? 128 : 255, 0x1a2b3c4d),
+  createPointBuffer(profile.pointCount, profile.translucent ? 128 : 255, 0x5e6f7788)
 ];
 const opaquePointSources = profile.translucent
-  ? [createPointBytes(profile.pointCount, 255, 0x1a2b3c4d), createPointBytes(profile.pointCount, 255, 0x5e6f7788)]
+  ? [createPointBuffer(profile.pointCount, 255, 0x1a2b3c4d), createPointBuffer(profile.pointCount, 255, 0x5e6f7788)]
   : pointSources;
 const translucentPointSources = profile.translucent
   ? pointSources
-  : [createPointBytes(profile.pointCount, 128, 0x1a2b3c4d), createPointBytes(profile.pointCount, 128, 0x5e6f7788)];
-const markerSource = createMarkerSource(profile.markerCount, profile.translucent ? 128 : 255);
+  : [createPointBuffer(profile.pointCount, 128, 0x1a2b3c4d), createPointBuffer(profile.pointCount, 128, 0x5e6f7788)];
+const markerSource = createMarkerBuffer(profile.markerCount, profile.translucent ? 128 : 255);
 const triangleSources = {
-  opaque: createTriangleBytes(TRIANGLE_VERTEX_COUNT, 255),
-  translucent: createTriangleBytes(TRIANGLE_VERTEX_COUNT, 128)
+  opaque: createTriangleVertexBuffer(TRIANGLE_VERTEX_COUNT, 255),
+  translucent: createTriangleVertexBuffer(TRIANGLE_VERTEX_COUNT, 128)
 };
 const lineSources = {
-  opaque: createLineBytes(LINE_VERTEX_COUNT, 255),
-  translucent: createLineBytes(LINE_VERTEX_COUNT, 128)
+  opaque: createLineVertexBuffer(LINE_VERTEX_COUNT, 255),
+  translucent: createLineVertexBuffer(LINE_VERTEX_COUNT, 128)
 };
-const meshMarkerSource = profileLayers.mesh ? createMarkerSource(2, 255) : null;
+const meshMarkerSource = profileLayers.mesh ? createMarkerBuffer(2, 255) : null;
 if (profileLayers.mesh && meshMarkerSource) profileLayers.mesh.source = meshMarkerSource;
 
 let activePointSources = profile.translucent ? translucentPointSources : opaquePointSources;
@@ -502,7 +501,8 @@ function triggerPartitionedStorageUpdate() {
   const source = lineSources.opaque;
   const count = 2;
   const start = (profileOperationRevision * count) % (LINE_VERTEX_COUNT - count);
-  const view = new DataView(source.bytes.buffer, source.bytes.byteOffset, source.bytes.byteLength);
+  const bytes = source.mutableBytes;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const positionOffset = LINE_VERTEX.fields.position.offset;
   const offset = start * LINE_VERTEX.stride + positionOffset;
   noteProfileOperation('partitioned-storage-update');
@@ -714,7 +714,7 @@ async function triggerAutomaticPointer() {
 
 async function fanoutProbe(count = 12_345) {
   const observer = requireObserver();
-  const source = createVersionedPointSource(count);
+  const source = createVersionedPointBuffer(count);
   observer.reset();
   const probes = [createProbeScene(source), createProbeScene(source)];
   probes.forEach(probe => document.body.append(probe.scene));
@@ -745,7 +745,7 @@ async function featureIdentityProbe() {
 
 async function uniformTrafficProbe(count) {
   const observer = requireObserver();
-  const probe = createProbeScene(createPointBytes(count, 255, count));
+  const probe = createProbeScene(createPointBuffer(count, 255, count));
   document.body.append(probe.scene);
   await probe.scene.ready;
   await waitFrames(8);
@@ -897,7 +897,7 @@ function createLabelBuffer(count) {
 
 async function shaderCoverageProbe() {
   const observer = requireObserver();
-  const probe = createProbeScene(createPointBytes(1, 255, 0x13579bdf));
+  const probe = createProbeScene(createPointBuffer(1, 255, 0x13579bdf));
   const markers = document.createElement('nve-scene-cubes');
   const compactMarkers = document.createElement('nve-scene-cubes');
   const triangles = document.createElement('nve-scene-triangles');
@@ -908,10 +908,10 @@ async function shaderCoverageProbe() {
   directSource.add({ color: [1, 1, 1, 0.5], outlineColor: [0, 0, 0, 0.5] });
   markers.source = directSource;
   markers.interactive = true;
-  compactMarkers.source = createMarkerSource(SHADER_COVERAGE_COMPACT_MARKER_COUNT, 255);
-  triangles.source = createTriangleBytes(3, 255);
+  compactMarkers.source = createMarkerBuffer(SHADER_COVERAGE_COMPACT_MARKER_COUNT, 255);
+  triangles.source = createTriangleVertexBuffer(3, 255);
   lines.topology = 'loop';
-  lines.source = createLineBytes(4, 128);
+  lines.source = createLineVertexBuffer(4, 128);
   mesh.interactive = true;
   mesh.geometry = {
     colors: new Float32Array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]),
@@ -1042,9 +1042,10 @@ function createMeshGridGeometry(alpha) {
   return { colors, indices, positions, uvs };
 }
 
-function createPointBytes(count, alpha, seed) {
-  const bytes = new Uint8Array(count * POINT.stride);
-  const view = new DataView(bytes.buffer);
+function createPointBuffer(count, alpha, seed) {
+  const source = new PointBuffer({ capacity: count });
+  const bytes = source.mutableBytes;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   let state = seed >>> 0;
   for (let index = 0; index < count; index += 1) {
     state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
@@ -1059,15 +1060,15 @@ function createPointBytes(count, alpha, seed) {
     view.setFloat32(offset + 8, z, true);
     bytes.set([118, 185, 0, alpha], offset + POINT.fields.color.offset);
   }
-  const source = createPointSource({ bytes, count });
-  if (!source) throw new Error('Expected valid point workload data.');
+  source.setCount(count);
   return source;
 }
 
-function createVersionedPointSource(count) {
+function createVersionedPointBuffer(count) {
   const source = new PointBuffer({ capacity: count });
-  const generated = createPointBytes(count, 255, 0x12345678);
-  const view = new DataView(generated.bytes.buffer, generated.bytes.byteOffset, generated.bytes.byteLength);
+  const generated = createPointBuffer(count, 255, 0x12345678);
+  const bytes = generated.mutableBytes;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   for (let index = 0; index < count; index += 1) {
     const offset = index * POINT.stride;
     source.set(index, {
@@ -1078,7 +1079,7 @@ function createVersionedPointSource(count) {
   return source;
 }
 
-function createMarkerSource(count, alpha) {
+function createMarkerBuffer(count, alpha) {
   const source = new MarkerBuffer({ capacity: count });
   const bytes = source.mutableBytes;
   const view = new DataView(bytes.buffer);
@@ -1105,9 +1106,10 @@ function setMarkerAlpha(source, alpha) {
   }
 }
 
-function createTriangleBytes(count, alpha) {
-  const bytes = new Uint8Array(count * TRIANGLE_VERTEX.stride);
-  const view = new DataView(bytes.buffer);
+function createTriangleVertexBuffer(count, alpha) {
+  const source = new TriangleVertexBuffer({ capacity: count });
+  const bytes = source.mutableBytes;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   for (let index = 0; index < count; index += 1) {
     const triangle = Math.floor(index / 3);
     const vertex = index % 3;
@@ -1119,14 +1121,14 @@ function createTriangleBytes(count, alpha) {
     view.setFloat32(offset + 8, -5, true);
     bytes.set([255, 140, 40, alpha], offset + TRIANGLE_VERTEX.fields.color.offset);
   }
-  const source = createTriangleVertexSource({ bytes, count });
-  if (!source) throw new Error('Expected valid triangle workload data.');
+  source.setCount(count);
   return source;
 }
 
-function createLineBytes(count, alpha) {
-  const bytes = new Uint8Array(count * LINE_VERTEX.stride);
-  const view = new DataView(bytes.buffer);
+function createLineVertexBuffer(count, alpha) {
+  const source = new LineVertexBuffer({ capacity: count });
+  const bytes = source.mutableBytes;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   for (let index = 0; index < count; index += 1) {
     const offset = index * LINE_VERTEX.stride;
     const pair = Math.floor(index / 2);
@@ -1137,8 +1139,7 @@ function createLineBytes(count, alpha) {
     view.setFloat32(offset + LINE_VERTEX.fields.normal.offset + 8, 1, true);
     view.setFloat32(offset + LINE_VERTEX.fields.width.offset, 1, true);
   }
-  const source = createLineVertexSource({ bytes, count });
-  if (!source) throw new Error('Expected valid line workload data.');
+  source.setCount(count);
   return source;
 }
 

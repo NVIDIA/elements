@@ -13,7 +13,7 @@ import {
   setStreamingLayerSource
 } from '../internal/streaming-layer-state.js';
 import { AXES_VERTEX_COUNT, createAxesVertices, type SceneAxesDirection } from './utils.js';
-import { createLineVertexSource } from '../record-sources.js';
+import { createLineVertexSource } from '../internal/external-record-sources.js';
 import styles from '../internal/host.css?inline';
 
 const DEFAULT_LENGTH = 1;

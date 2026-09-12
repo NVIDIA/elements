@@ -24,11 +24,14 @@ import {
   isPackedRecordSource,
   resolvePublishOptions,
   type AnyPackedRecordSource,
+  type ExternalMarkerSource,
   type ScenePublishOptions
 } from '../packed-record-source.js';
 import { replacePreparedMarkerSource } from '../prepared-record-source.js';
 import type { MarkerBounds } from './bounds.js';
 import { SCENE_MARKER_TAG, SCENE_MODEL_TAG, SCENE_PART_TAG } from '../layer-tags.js';
+
+type MarkerLayerSource = MarkerSource | ExternalMarkerSource;
 
 interface MarkerLayerState {
   buffer: MarkerInstanceBuffer;
@@ -45,7 +48,7 @@ interface MarkerLayerState {
   pendingMarkers: Set<HTMLElement>;
   publicationError: boolean;
   reconcileQueued: boolean;
-  streamedSource: MarkerSource | null;
+  streamedSource: MarkerLayerSource | null;
   streamedCount: number;
   version: number;
 }
@@ -111,11 +114,11 @@ export function disconnectMarkerLayer(layer: HTMLElement): void {
   state.notifyCleanup = undefined;
 }
 
-export function getLayerInstances(layer: HTMLElement): MarkerSource | null {
+export function getLayerInstances(layer: HTMLElement): MarkerLayerSource | null {
   return getLayerState(layer).streamedSource;
 }
 
-export function setLayerInstances(layer: HTMLElement, value: MarkerSource | null): void {
+export function setLayerInstances(layer: HTMLElement, value: MarkerLayerSource | null): void {
   if (value !== null && !isMarkerSource(value)) {
     throw new TypeError('Layer instances must be a marker buffer, marker source, or null.');
   }
@@ -123,9 +126,9 @@ export function setLayerInstances(layer: HTMLElement, value: MarkerSource | null
   state.streamedSource = value;
   state.publicationError = false;
   replaceStreamedBuffer(state, value);
-  const replacementCount = value === null ? state.compiledMarkers.length : sourceCount(value);
+  const replacementCount = value === null ? state.compiledMarkers.length : value.count;
   state.streamedCount = value === null ? 0 : replacementCount;
-  const replacementCapacity = value === null ? state.compiledMarkers.length : sourceCapacity(value);
+  const replacementCapacity = value === null ? state.compiledMarkers.length : value.capacity;
   if (state.count !== undefined && state.count > replacementCapacity) {
     state.count = undefined;
   }
@@ -153,12 +156,11 @@ export function publishLayerInstances(layer: HTMLElement, options?: ScenePublish
   const state = getLayerState(layer);
   const source = state.streamedSource;
   if (source === null) return;
-  const capacity = sourceCapacity(source);
   const resolved = resolvePublishOptions({
-    capacity,
+    capacity: source.capacity,
     currentActiveCount: state.streamedCount,
     requested: options,
-    sourceActiveCount: isPackedRecordSource(source) ? source.count : state.streamedCount
+    sourceActiveCount: source.count
   });
   state.publicationError = !markerPublicationIsValid(source, resolved.activeCount);
   if (!state.publicationError) {
@@ -169,9 +171,9 @@ export function publishLayerInstances(layer: HTMLElement, options?: ScenePublish
   notifyOwningScene(layer);
 }
 
-function markerPublicationIsValid(source: MarkerSource, activeCount: number): boolean {
+function markerPublicationIsValid(source: MarkerLayerSource, activeCount: number): boolean {
   try {
-    return markerSourceRecordsAreValid(sourceBytes(source), activeCount);
+    return markerSourceRecordsAreValid(getPackedRecordBytes(source), activeCount);
   } catch {
     return false;
   }
@@ -423,24 +425,12 @@ function getPublishedCount(state: MarkerLayerState): number {
   return state.streamedSource === null ? state.compiledMarkers.length : state.streamedCount;
 }
 
-function replaceStreamedBuffer(state: MarkerLayerState, source: MarkerSource | null): void {
+function replaceStreamedBuffer(state: MarkerLayerState, source: MarkerLayerSource | null): void {
   if (source === null) {
     state.buffer.replace(null);
     return;
   }
   replacePreparedMarkerSource(state.buffer, source);
-}
-
-function sourceCount(source: MarkerSource): number {
-  return source.count;
-}
-
-function sourceCapacity(source: MarkerSource): number {
-  return source.capacity;
-}
-
-function sourceBytes(source: MarkerSource): Uint8Array {
-  return getPackedRecordBytes(source);
 }
 
 function isMarkerSource(value: unknown): value is AnyPackedRecordSource<'marker'> {

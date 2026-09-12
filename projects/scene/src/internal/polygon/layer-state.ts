@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { POLYGON_GEOMETRY } from '../../errors.js';
+import { sameRGBA } from '../color.js';
 import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
 import { notifyOwningScene } from '../scene/notifications.js';
 import { getLayerCount, getLayerInstances } from '../markers/layer-state.js';
@@ -62,11 +63,10 @@ export function setPolygonLayerGeometry(layer: HTMLElement, value: unknown): voi
 
 export function setPolygonLayerColor(layer: HTMLElement, color: RGBA): void {
   const state = getState(layer);
-  if (!sameColor(state.color, color)) {
-    state.color = color;
-    state.version += 1;
-    notifyOwningScene(layer);
-  }
+  if (sameRGBA(state.color, color)) return;
+  state.color = color;
+  state.version += 1;
+  notifyOwningScene(layer);
 }
 
 export function getPolygonLayerVersion(layer: HTMLElement): number {
@@ -113,10 +113,6 @@ function sameTopology(previous: CompiledPolygon | null, next: CompiledPolygon | 
   if (previous === null || next === null || previous.positions.length !== next.positions.length) return false;
   if (previous.indices.length !== next.indices.length) return false;
   return previous.indices.every((index, offset) => index === next.indices[offset]);
-}
-
-function sameColor(left: RGBA, right: RGBA): boolean {
-  return left.every((channel, index) => channel === right[index]);
 }
 
 function getState(layer: HTMLElement): PolygonState {

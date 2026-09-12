@@ -2,19 +2,35 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { ScenePolygon as ScenePolygonFromPath } from '@nvidia-elements/scene/polygon';
-import type { PolygonGeometry as PolygonGeometryFromPath } from '@nvidia-elements/scene/polygon';
+import { SceneAxes } from '@nvidia-elements/scene/axes';
+import { SceneCamera } from '@nvidia-elements/scene/camera';
+import { SceneCones } from '@nvidia-elements/scene/cones';
+import { SceneCubes } from '@nvidia-elements/scene/cubes';
+import { SceneCylinders } from '@nvidia-elements/scene/cylinders';
+import { SceneFrame } from '@nvidia-elements/scene/frame';
+import { SceneGridlines } from '@nvidia-elements/scene/gridlines';
+import { SceneHeightfield } from '@nvidia-elements/scene/heightfield';
+import { SceneLabels } from '@nvidia-elements/scene/labels';
+import { SceneLines } from '@nvidia-elements/scene/lines';
+import { SceneMarker } from '@nvidia-elements/scene/marker';
+import { SceneMesh, type SceneMeshGeometry, type SceneTextureCaptureResult } from '@nvidia-elements/scene/mesh';
+import { SceneModel, ScenePart } from '@nvidia-elements/scene/model';
+import { ScenePoints } from '@nvidia-elements/scene/points';
+import {
+  ScenePolygon,
+  type PolygonGeometry,
+  type PolygonPoint,
+  type PolygonRing
+} from '@nvidia-elements/scene/polygon';
+import { ScenePyramids } from '@nvidia-elements/scene/pyramids';
+import { Scene, type SceneClientPoint, type SceneEventMap, type SceneRay } from '@nvidia-elements/scene/scene';
+import { SceneSpheres } from '@nvidia-elements/scene/spheres';
+import { SceneTriangles } from '@nvidia-elements/scene/triangles';
 import * as scenePackage from './index.js';
 import type {
-  ExternalLineVertexSource,
-  ExternalLabelSource,
-  ExternalMarkerSource,
-  ExternalPointSource,
-  ExternalTriangleVertexSource,
   SceneCameraChangeDetail,
   SceneCameraState,
   SceneErrorDetail,
-  SceneEventMap,
   ScenePose,
   FieldSpec,
   FieldType,
@@ -24,20 +40,13 @@ import type {
   MarkerSource,
   Mat4,
   PointSource,
-  PolygonGeometry,
-  PolygonPoint,
-  PolygonRing,
   Quaternion,
   RGBA,
-  SceneClientPoint,
   SceneFeatureIdMap,
   SceneFeatureIds,
-  SceneMeshGeometry,
   ScenePickHit,
   ScenePickTarget,
   ScenePublishOptions,
-  SceneRay,
-  SceneTextureCaptureResult,
   TriangleVertexSource,
   Vec3
 } from './index.js';
@@ -48,40 +57,17 @@ import {
   MARKER,
   MarkerBuffer,
   POINT,
-  Scene,
-  SceneAxes,
-  SceneCamera,
-  SceneCones,
-  SceneCubes,
-  SceneCylinders,
-  SceneFrame,
-  SceneGridlines,
-  SceneHeightfield,
-  SceneLabels,
-  SceneMarker,
-  SceneLines,
-  SceneMesh,
-  SceneModel,
-  ScenePart,
-  ScenePoints,
-  ScenePolygon,
-  ScenePyramids,
-  SceneSpheres,
-  SceneTriangles,
   TRIANGLE_VERTEX,
   LineVertexBuffer,
   PointBuffer,
   TriangleVertexBuffer,
-  createLineVertexSource,
-  createLabelSource,
-  createMarkerSource,
-  createPointSource,
-  createTriangleVertexSource,
   VERSION
 } from './index.js';
 
 type RootModule = typeof scenePackage;
+type HasPublicScene = 'Scene' extends keyof RootModule ? true : false;
 type HasPublicDefineLayout = 'defineLayout' extends keyof RootModule ? true : false;
+type HasPublicCreatePointSource = 'createPointSource' extends keyof RootModule ? true : false;
 type PointSourceIsMarkerSource = PointSource extends MarkerSource ? true : false;
 type RawMarkerSourceIsAccepted = Uint8Array extends MarkerSource ? true : false;
 type SceneCameraHasHeight = 'height' extends keyof SceneCamera ? true : false;
@@ -146,12 +132,44 @@ const internalMathRuntimeExports = [
   'transformPointMat4'
 ] as const;
 
+const internalRecordSourceRuntimeExports = [
+  'createLabelSource',
+  'createLineVertexSource',
+  'createMarkerSource',
+  'createPointSource',
+  'createTriangleVertexSource'
+] as const;
+
+const componentEntrypointRuntimeExports = [
+  'Scene',
+  'SceneAxes',
+  'SceneCamera',
+  'SceneCones',
+  'SceneCubes',
+  'SceneCylinders',
+  'SceneFrame',
+  'SceneGridlines',
+  'SceneHeightfield',
+  'SceneLabels',
+  'SceneLines',
+  'SceneMarker',
+  'SceneMesh',
+  'SceneModel',
+  'ScenePart',
+  'ScenePoints',
+  'ScenePolygon',
+  'ScenePyramids',
+  'SceneSpheres',
+  'SceneTriangles',
+  'compileParts'
+] as const;
+
 describe('@nvidia-elements/scene', () => {
   it('should export VERSION', () => {
     expect(VERSION).toBe('0.0.0');
   });
 
-  it('should export element classes without a registration side effect', () => {
+  it('should export element classes from standalone entrypoints without registration side effects', () => {
     expect(Scene.metadata.tag).toBe('nve-scene');
     expect(SceneAxes.metadata.tag).toBe('nve-scene-axes');
     expect(SceneCamera.metadata.tag).toBe('nve-scene-camera');
@@ -183,9 +201,7 @@ describe('@nvidia-elements/scene', () => {
     expect(SceneTriangles.layout).toBe(TRIANGLE_VERTEX);
   });
 
-  it('should expose the polygon package entrypoints', async () => {
-    expect(ScenePolygonFromPath).toBe(ScenePolygon);
-    expectTypeOf<PolygonGeometryFromPath>().toEqualTypeOf<PolygonGeometry>();
+  it('should expose the polygon registration entrypoint', async () => {
     await import('@nvidia-elements/scene/polygon/define.js');
     expect(customElements.get(ScenePolygon.metadata.tag)).toBe(ScenePolygon);
   });
@@ -259,13 +275,6 @@ describe('@nvidia-elements/scene', () => {
     expect(new PointBuffer({ capacity: 2 }).mutableBytes).toHaveLength(POINT.stride * 2);
     expect(new LineVertexBuffer({ capacity: 2 }).mutableBytes).toHaveLength(LINE_VERTEX.stride * 2);
     expect(new TriangleVertexBuffer({ capacity: 3 }).mutableBytes).toHaveLength(TRIANGLE_VERTEX.stride * 3);
-    expect(createMarkerSource({ bytes: new Uint8Array(MARKER.stride), count: 0 }).kind).toBe('marker');
-    expect(createLabelSource({ bytes: new Uint8Array(LABEL.stride), count: 0, texts: [''] }).kind).toBe('label');
-    expect(createPointSource({ bytes: new Uint8Array(POINT.stride), count: 0 }).kind).toBe('point');
-    expect(createLineVertexSource({ bytes: new Uint8Array(LINE_VERTEX.stride), count: 0 }).kind).toBe('line-vertex');
-    expect(createTriangleVertexSource({ bytes: new Uint8Array(TRIANGLE_VERTEX.stride), count: 0 }).kind).toBe(
-      'triangle-vertex'
-    );
     expect('commit' in markers).toBe(false);
     expect('commit' in SceneCubes.prototype).toBe(false);
     expect('height' in SceneCamera.prototype).toBe(false);
@@ -273,7 +282,7 @@ describe('@nvidia-elements/scene', () => {
     expect('texture' in SceneMesh.prototype).toBe(false);
   });
 
-  it('should preserve required layout helpers without exporting runtime math utilities', () => {
+  it('should keep the root entrypoint focused on shared data APIs', () => {
     for (const name of expectedLayoutRuntimeExports) {
       expect(scenePackage).toHaveProperty(name);
     }
@@ -284,7 +293,15 @@ describe('@nvidia-elements/scene', () => {
     for (const name of internalMathRuntimeExports) {
       expect(scenePackage).not.toHaveProperty(name);
     }
+    for (const name of internalRecordSourceRuntimeExports) {
+      expect(scenePackage).not.toHaveProperty(name);
+    }
+    for (const name of componentEntrypointRuntimeExports) {
+      expect(scenePackage).not.toHaveProperty(name);
+    }
 
+    expectTypeOf<HasPublicScene>().toEqualTypeOf<false>();
+    expectTypeOf<HasPublicCreatePointSource>().toEqualTypeOf<false>();
     expectTypeOf<HasPublicDefineLayout>().toEqualTypeOf<false>();
     expectTypeOf<MarkerBufferHasCommit>().toEqualTypeOf<false>();
     expectTypeOf<PointSourceIsMarkerSource>().toEqualTypeOf<false>();
@@ -300,7 +317,6 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<SceneHitHasInstanceIndex>().toEqualTypeOf<false>();
     expectTypeOf<SceneLabelsHasStale>().toEqualTypeOf<false>();
     expectTypeOf<SceneLabels['source']>().toEqualTypeOf<LabelSource | null>();
-    expectTypeOf<ExternalLabelSource>().toMatchTypeOf<LabelSource>();
     expectTypeOf<SceneLinesHasInstances>().toEqualTypeOf<false>();
     expectTypeOf<SceneLinesHasVertices>().toEqualTypeOf<false>();
     expectTypeOf<SceneMeshGeometryArrayKey>().toEqualTypeOf<never>();
@@ -332,10 +348,6 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<SceneCameraState['projection']['far']>().toEqualTypeOf<number>();
     expectTypeOf<ScenePose['position']>().toEqualTypeOf<Readonly<Vec3>>();
     expectTypeOf<ScenePose['orientation']>().toEqualTypeOf<Readonly<Quaternion>>();
-    expectTypeOf<ExternalMarkerSource['kind']>().toEqualTypeOf<'marker'>();
-    expectTypeOf<ExternalLineVertexSource['kind']>().toEqualTypeOf<'line-vertex'>();
-    expectTypeOf<ExternalPointSource['kind']>().toEqualTypeOf<'point'>();
-    expectTypeOf<ExternalTriangleVertexSource['kind']>().toEqualTypeOf<'triangle-vertex'>();
     expectTypeOf<ScenePublishOptions['activeCount']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<SceneMeshGeometry['positions']>().toEqualTypeOf<Float32Array>();
     expectTypeOf<SceneTextureCaptureResult['status']>().toEqualTypeOf<'applied' | 'failed' | 'superseded'>();

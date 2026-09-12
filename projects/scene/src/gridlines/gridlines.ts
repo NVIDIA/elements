@@ -14,7 +14,7 @@ import {
   setStreamingLayerSource
 } from '../internal/streaming-layer-state.js';
 import { LINE_VERTEX } from '../internal/layouts/built-ins.js';
-import { createLineVertexSource } from '../record-sources.js';
+import { createLineVertexSource } from '../internal/external-record-sources.js';
 import styles from '../internal/host.css?inline';
 
 const DEFAULT_SPACING = 1;

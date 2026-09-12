@@ -202,7 +202,7 @@ function template(): string {
       import { compileParts } from '../../src/internal/model/compile.ts';
       import { MARKER } from '../../src/internal/layouts/built-ins.ts';
       import { writeMarker } from '../../src/internal/layouts/helpers.ts';
-      import { createMarkerSource } from '../../src/record-sources.ts';
+      import { createMarkerSource } from '../../src/internal/external-record-sources.ts';
 
       define(Scene); define(SceneCamera); define(SceneMarker); define(SceneMesh); define(ScenePart); define(SceneModel);
       const parts = () => [

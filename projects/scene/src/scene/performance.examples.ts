@@ -50,6 +50,9 @@ export const RenderLoad = {
     </section>
     <script type="module">
       import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/cubes/define.js';
 
       const root = document.querySelector('#scene-render-load');
       const countControl = root.querySelector('#scene-render-load-count');
@@ -215,6 +218,9 @@ export const UpdateStrategy = {
     </section>
     <script type="module">
       import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/cubes/define.js';
 
       const root = document.querySelector('#scene-update-strategy');
       const modeControl = root.querySelector('#scene-update-strategy-mode');
@@ -675,7 +681,7 @@ export const ViewportScaling = {
 };
 
 /**
- * @summary Compare raw and versioned sources under controlled scene and instance counts. Use this diagnostic to measure the CPU and GPU memory saved when compatible layers share an immutable prepared snapshot.
+ * @summary Compare direct byte writes and versioned record writes under controlled scene and instance counts. Use this diagnostic to measure the memory saved when compatible layers share an immutable prepared snapshot.
  */
 export const MemoryPressure = {
   render: () => html`
@@ -701,7 +707,7 @@ export const MemoryPressure = {
           <label for="scene-memory-pressure-source">Source</label>
           <select id="scene-memory-pressure-source">
             <option value="versioned" selected>Versioned buffer</option>
-            <option value="external">External bytes</option>
+            <option value="direct">Direct byte writes</option>
           </select>
         </nve-select>
         <nve-button id="scene-memory-pressure-allocate" type="button">Allocate</nve-button>
@@ -711,7 +717,7 @@ export const MemoryPressure = {
       <output nve-text="code" aria-live="polite">No pressure workload allocated.</output>
     </section>
     <script type="module">
-      import { createMarkerSource, MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/scene/define.js';
@@ -764,7 +770,7 @@ export const MemoryPressure = {
             bytes[offset + colorOffset + 3] = 255;
           }
           markerBuffer.setCount(recordCount);
-          producer = createMarkerSource({ bytes, count: recordCount });
+          producer = markerBuffer;
         }
         const scenes = Array.from({ length: sceneCount }, (_, index) => {
           const scene = document.createElement('nve-scene');
@@ -781,13 +787,13 @@ export const MemoryPressure = {
           return scene;
         });
         scenesContainer.replaceChildren(...scenes);
-        const sourceBytes = bytes.byteLength;
+        const sourceBytes = recordCount * MARKER.stride;
         const sharedCopies = sourceMode === 'versioned' ? 1 : sceneCount;
         const sceneOwnedBytes = sourceBytes * sharedCopies;
         const gpuBytes = sourceBytes * sharedCopies;
         const pageBytes = await readPageMemory();
         output.value =
-          (sourceMode === 'versioned' ? 'versioned prepared source' : 'raw byte source') +
+          (sourceMode === 'versioned' ? 'versioned prepared source' : 'direct byte source') +
           ' · producer ' + (sourceBytes / 1048576).toFixed(2) + ' MiB · estimated Scene staging ' +
           (sceneOwnedBytes / 1048576).toFixed(2) + ' MiB · estimated GPU instances ' +
           (gpuBytes / 1048576).toFixed(2) + ' MiB · known total ' +

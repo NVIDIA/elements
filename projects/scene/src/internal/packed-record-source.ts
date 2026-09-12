@@ -34,6 +34,14 @@ export interface ExternalPackedRecordSource<Kind extends PackedRecordKind = Pack
   readonly kind: Kind;
 }
 
+export type ExternalMarkerSource = ExternalPackedRecordSource<'marker'>;
+export type ExternalPointSource = ExternalPackedRecordSource<'point'>;
+export type ExternalLineVertexSource = ExternalPackedRecordSource<'line-vertex'>;
+export type ExternalTriangleVertexSource = ExternalPackedRecordSource<'triangle-vertex'>;
+export interface ExternalLabelSource extends ExternalPackedRecordSource<'label'> {
+  readonly texts: readonly string[];
+}
+
 export type AnyPackedRecordSource<Kind extends PackedRecordKind = PackedRecordKind> =
   | ExternalPackedRecordSource<Kind>
   | PackedRecordSource<Kind>;

@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './internal/layouts/built-ins.js';
-import { writeLineVertex, writeMarker, writePoint, writeTriangleVertex } from './internal/layouts/helpers.js';
+import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './layouts/built-ins.js';
+import { writeLineVertex, writeMarker, writePoint, writeTriangleVertex } from './layouts/helpers.js';
 import {
   createLineVertexSource,
   createLabelSource,
   createMarkerSource,
   createPointSource,
   createTriangleVertexSource
-} from './record-sources.js';
+} from './external-record-sources.js';
 
 describe('external packed record sources', () => {
   it('borrows declared view bounds with an explicit kind and active count', () => {

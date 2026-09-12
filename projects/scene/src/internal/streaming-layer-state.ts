@@ -135,7 +135,7 @@ export function publishStreamingLayer(layer: HTMLElement, options?: ScenePublish
     capacity: source.capacity,
     currentActiveCount: state.streamedCount,
     requested: options,
-    sourceActiveCount: isPackedRecordSource(source) ? source.count : state.streamedCount
+    sourceActiveCount: source.count
   });
   const candidateReady = streamingPublicationIsValid(state, source, resolved.activeCount);
   const lineCountValid = state.kind !== 'line' || lineCountIsValid(resolved.activeCount, state.topology);

@@ -15,7 +15,7 @@ Scene is a curated, high-performance visualization foundation for operational ro
 
 ## Streaming marker instances
 
-The `source` property accepts a matching record buffer or typed external source adapter. Use `publish()` to capture later source changes. See [Record Buffers](/docs/scene/record-buffers/) for marker and vertex construction, mutation, and cache guidance.
+The `source` property accepts a matching record buffer. Use `publish()` to capture later source changes. See [Record Buffers](/docs/scene/record-buffers/) for marker and vertex construction, mutation, and cache guidance.
 
 {% example 'nve-scene-cubes' 'Streaming' %}
 

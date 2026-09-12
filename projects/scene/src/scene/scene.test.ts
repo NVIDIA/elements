@@ -20,7 +20,7 @@ import {
   createMarkerSource,
   createPointSource,
   createTriangleVertexSource
-} from '../record-sources.js';
+} from '../internal/external-record-sources.js';
 import {
   configureSceneTesting,
   getNamedSceneFrameForTesting,

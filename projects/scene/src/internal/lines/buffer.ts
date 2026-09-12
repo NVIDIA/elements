@@ -14,7 +14,6 @@ import { getFieldOffset } from '../layouts/define-layout.js';
 import { writeLineVertex } from '../layouts/helpers.js';
 import type { RGBA, Vec3 } from '../types.js';
 import type { MutableVector3, RecordBufferOptions, SceneColor } from '../packed-record-buffer.js';
-import type { ExternalLineVertexSource } from '../../record-sources.js';
 
 const POSITION_OFFSET = getFieldOffset(LINE_VERTEX, 'position');
 const COLOR_OFFSET = getFieldOffset(LINE_VERTEX, 'color');
@@ -50,7 +49,7 @@ export interface LineVertex {
   setStyle(style: LineVertexStyle): this;
 }
 
-export type LineVertexSource = LineVertexBuffer | ExternalLineVertexSource;
+export type LineVertexSource = LineVertexBuffer;
 
 /** Fixed-capacity, mutable storage for packed line vertex records. */
 export class LineVertexBuffer extends PackedRecordBuffer<'line-vertex', LineVertexInit, LineVertex> {
