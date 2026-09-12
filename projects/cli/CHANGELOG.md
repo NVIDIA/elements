@@ -1,3 +1,30 @@
+## [2.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.2...@nvidia-elements/cli-v2.2.3) (2026-09-12)
+
+### Features
+
+* **lint:** support markdown linting ([652e751](https://github.com/NVIDIA/elements/commit/652e7517bb9c0f17a2e4cc1a4760206f414b24d2))
+
+### Bug Fixes
+
+* **ci:** pin conventionalcommits preset for release notes ([6c93057](https://github.com/NVIDIA/elements/commit/6c93057adec0a1d8fb22335a84af1bb4b9be41ae))
+* **cli:** improve skill tool call and creation steps ([b30455c](https://github.com/NVIDIA/elements/commit/b30455cad0deab646ad20ccd18bdafda39056860))
+* **core:** control message metadata ([1abec58](https://github.com/NVIDIA/elements/commit/1abec58e758c1cf02ba4e9587066bafe677f896a))
+* **core:** format bytes ([385fd83](https://github.com/NVIDIA/elements/commit/385fd83e9a7874aa2daecb400770a752b835b1fb))
+* **core:** pointer solid icon ([bf3ff31](https://github.com/NVIDIA/elements/commit/bf3ff31efa313a54130d0aca68176bf5b34dca88))
+* **core:** restore tree keyboard navigation ([e024c11](https://github.com/NVIDIA/elements/commit/e024c114f69e8396a6f451273254c5ed24ce4dc5))
+* **core:** update icons with aspect ratios ([2021d95](https://github.com/NVIDIA/elements/commit/2021d9596a8e525a3351f6ce0c4d32604ac196ae))
+* **docs:** align card presentation ([f811f0a](https://github.com/NVIDIA/elements/commit/f811f0a685ffcb95c68c6bd2bb48129cf8349561))
+* **docs:** align card title typography ([056404a](https://github.com/NVIDIA/elements/commit/056404a2a6717e325106cd78bda82983e2f76d90))
+* **docs:** correct jsdelivr bundle urls ([c7432be](https://github.com/NVIDIA/elements/commit/c7432be0394225f3d9d7b2c193b7e491c751c9a9))
+* **docs:** make page title weights consistent ([07bc98b](https://github.com/NVIDIA/elements/commit/07bc98b12a646f4050d2cc873d7ed3a00b8304f7))
+* **docs:** refine navigation group titles ([2e3c3e0](https://github.com/NVIDIA/elements/commit/2e3c3e089e07c0b2f261a58bd966bf2f772333a9))
+* **docs:** update responsive pattern icon ([6126e1c](https://github.com/NVIDIA/elements/commit/6126e1c2bc9fff2a222ce81c88f51de47149cad7))
+* **docs:** use canvas background for component headers ([5547c47](https://github.com/NVIDIA/elements/commit/5547c473f0f20dffe29ac8de8a24513126c56f99))
+* **lint:** allow external svg icon sources ([c55f4df](https://github.com/NVIDIA/elements/commit/c55f4df9771a15f9a183d221f2af361dfe9ba04c))
+* **lint:** no-excessive-primary-actions rule to handle popover elements ([398c0df](https://github.com/NVIDIA/elements/commit/398c0df6a2987e8ece663d8c2994d1626a1b2596))
+* **lint:** suggest removing slot="default" when unnamed slot is not first ([84372f1](https://github.com/NVIDIA/elements/commit/84372f1d1173473bc6f89f89e870c0080c226f46))
+* **starters:** update nuxt to 4.5.2 ([0862866](https://github.com/NVIDIA/elements/commit/08628664a6e01d455c6c349902ee244026bd12f2))
+
 ## <small>2.2.2 (2026-09-01)</small>
 
 * chore(ci): fix broken vale script ([221d453](https://github.com/NVIDIA/elements/commit/221d453))
