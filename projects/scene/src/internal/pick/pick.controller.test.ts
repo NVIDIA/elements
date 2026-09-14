@@ -1,13 +1,41 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { ReactiveController } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ScenePicking } from './scene-controller.js';
+import { PickController } from './pick.controller.js';
 import type { ScenePickDriver, ScenePickHit, ScenePickResult } from './routing.js';
 
 const pickControllerHosts: HTMLElement[] = [];
 
-describe(ScenePicking.name, () => {
+class PickControllerTestHost extends HTMLElement {
+  readonly #controllers = new Set<ReactiveController>();
+  readonly ready = Promise.resolve();
+  readonly updateComplete = Promise.resolve(true);
+
+  addController(controller: ReactiveController): void {
+    this.#controllers.add(controller);
+  }
+
+  removeController(controller: ReactiveController): void {
+    this.#controllers.delete(controller);
+  }
+
+  requestUpdate(): void {}
+
+  connectedCallback(): void {
+    this.#controllers.forEach(controller => controller.hostConnected?.());
+  }
+
+  disconnectedCallback(): void {
+    this.#controllers.forEach(controller => controller.hostDisconnected?.());
+  }
+}
+
+const pickControllerHostTag = 'scene-pick-controller-test-host';
+if (!customElements.get(pickControllerHostTag)) customElements.define(pickControllerHostTag, PickControllerTestHost);
+
+describe(PickController.name, () => {
   afterEach(() => {
     pickControllerHosts.forEach(host => host.remove());
     pickControllerHosts.length = 0;
@@ -44,29 +72,30 @@ describe(ScenePicking.name, () => {
     const pending = first.picking.pick(10, 10);
     await Promise.resolve();
 
-    first.picking.disconnect(new DOMException('first disconnected', 'AbortError'));
+    first.host.remove();
     resolveFirst(createResult(firstLayer));
 
-    await expect(pending).rejects.toMatchObject({ name: 'AbortError', message: 'first disconnected' });
+    await expect(pending).rejects.toMatchObject({
+      name: 'AbortError',
+      message: 'The scene disconnected while picking.'
+    });
     await expect(second.picking.pick(10, 10)).resolves.toMatchObject({ layer: secondLayer });
   });
 
   it('routes an accepted blocked pointer through the same typed driver boundary', async () => {
-    const host = document.createElement('div');
+    const host = document.createElement(pickControllerHostTag) as PickControllerTestHost;
     const layer = Object.assign(document.createElement('div'), { interactive: true });
     vi.spyOn(layer, 'closest').mockImplementation(selector => (selector === 'nve-scene' ? host : null));
     host.append(layer);
-    document.body.append(host);
     pickControllerHosts.push(host);
     const canvas = canvasWithRect();
-    const picking = new ScenePicking({
+    const picking = new PickController({
       driver: () => Promise.resolve(createResult(layer)),
-      getCanvas: () => canvas,
-      getReady: () => Promise.resolve(),
       hasInteractiveTargets: () => true,
       host
     });
-    picking.connect();
+    document.body.append(host);
+    picking.bindCanvas(canvas);
     const received: string[] = [];
     layer.addEventListener('pointerdown', event => received.push(`down:${event.isTrusted}`));
     layer.addEventListener('nve-scene-click', () => received.push('scene-click'));
@@ -81,9 +110,42 @@ describe(ScenePicking.name, () => {
     await vi.waitFor(() => expect(received).toEqual(['down:false', 'scene-click']));
   });
 
+  it('routes host pointer input only while its reactive host is connected', async () => {
+    const driver = vi.fn(() => Promise.resolve(createResult(layer)));
+    const { canvas, host, layer, picking } = createInteractiveController(driver);
+    const clicks: PointerEvent[] = [];
+    layer.addEventListener('click', event => clicks.push(event));
+    const dispatchClick = (): void => {
+      host.dispatchEvent(
+        new CustomEvent('nve-pointer-input', {
+          detail: {
+            event: new PointerEvent('click', { clientX: 10, clientY: 10 }),
+            kind: 'click'
+          }
+        })
+      );
+    };
+
+    dispatchClick();
+    await vi.waitFor(() => expect(clicks).toHaveLength(1));
+
+    host.remove();
+    dispatchClick();
+    await Promise.resolve();
+    expect(clicks).toHaveLength(1);
+
+    document.body.append(host);
+    picking.bindCanvas(canvas);
+    dispatchClick();
+    await vi.waitFor(() => expect(clicks).toHaveLength(2));
+    expect(driver).toHaveBeenCalledTimes(2);
+  });
+
   it('keeps one hover resolver, drops stale completions, and emits leave before the next enter', async () => {
     const pending: Array<(result: ScenePickResult | null) => void> = [];
-    const { host, layer, picking } = createInteractiveController(() => new Promise(resolve => pending.push(resolve)));
+    const { canvas, host, layer, picking } = createInteractiveController(
+      () => new Promise(resolve => pending.push(resolve))
+    );
     const events: string[] = [];
     layer.addEventListener('nve-scene-pointerenter', () => events.push('enter'));
     layer.addEventListener('nve-scene-pointerleave', () => events.push('leave'));
@@ -102,7 +164,7 @@ describe(ScenePicking.name, () => {
     pending.shift()?.(createResult(layer));
     await vi.waitFor(() => expect(events).toEqual(['enter']));
 
-    picking.handlePointerExit(new PointerEvent('pointerout', { relatedTarget: document.body }));
+    canvas.dispatchEvent(new PointerEvent('pointerleave', { relatedTarget: document.body }));
     await vi.waitFor(() => expect(events).toEqual(['enter', 'leave']));
     expect(host.isConnected).toBe(true);
   });
@@ -274,7 +336,7 @@ describe(ScenePicking.name, () => {
 
   it('clears hover on canvas exit, ignores its late completion, and accepts fresh reentry', async () => {
     const pending: Array<(result: ScenePickResult | null) => void> = [];
-    const { layer, picking } = createInteractiveController(() => new Promise(resolve => pending.push(resolve)));
+    const { canvas, layer, picking } = createInteractiveController(() => new Promise(resolve => pending.push(resolve)));
     const events: string[] = [];
     layer.addEventListener('nve-scene-pointerenter', () => events.push('enter'));
     layer.addEventListener('nve-scene-pointerleave', () => events.push('leave'));
@@ -291,7 +353,7 @@ describe(ScenePicking.name, () => {
       kind: 'pointermove'
     });
     await vi.waitFor(() => expect(pending).toHaveLength(2));
-    picking.handlePointerExit(new PointerEvent('pointerleave'));
+    canvas.dispatchEvent(new PointerEvent('pointerleave'));
     expect(events).toEqual(['enter', 'leave']);
     pending[1]?.(createResult(layer));
     await Promise.resolve();
@@ -320,46 +382,50 @@ describe(ScenePicking.name, () => {
   });
 });
 
-function createController(driver: ScenePickDriver): { readonly host: HTMLElement; readonly picking: ScenePicking } {
-  const host = document.createElement('div');
+function createController(driver: ScenePickDriver): {
+  readonly canvas: HTMLCanvasElement;
+  readonly host: PickControllerTestHost;
+  readonly picking: PickController;
+} {
+  const host = document.createElement(pickControllerHostTag) as PickControllerTestHost;
   const canvas = document.createElement('canvas');
   canvas.width = 100;
   canvas.height = 100;
   vi.spyOn(canvas, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 100, 100));
-  document.body.append(host);
   pickControllerHosts.push(host);
-  return {
-    host,
-    picking: new ScenePicking({
-      driver,
-      getCanvas: () => canvas,
-      getReady: () => Promise.resolve(),
-      hasInteractiveTargets: () => false,
-      host
-    })
-  };
+  const picking = new PickController({
+    driver,
+    hasInteractiveTargets: () => false,
+    host
+  });
+  document.body.append(host);
+  picking.bindCanvas(canvas);
+  return { canvas, host, picking };
 }
 
 function createInteractiveController(
   driver: ScenePickDriver,
   hasInteractiveTargets: () => boolean = () => true
-): { readonly host: HTMLElement; readonly layer: HTMLElement; readonly picking: ScenePicking } {
-  const host = document.createElement('nve-scene');
+): {
+  readonly canvas: HTMLCanvasElement;
+  readonly host: PickControllerTestHost;
+  readonly layer: HTMLElement;
+  readonly picking: PickController;
+} {
+  const host = document.createElement(pickControllerHostTag) as PickControllerTestHost;
   const layer = Object.assign(document.createElement('div'), { interactive: true });
   vi.spyOn(layer, 'closest').mockImplementation(selector => (selector === 'nve-scene' ? host : null));
   host.append(layer);
-  document.body.append(host);
   pickControllerHosts.push(host);
   const canvas = canvasWithRect();
-  const picking = new ScenePicking({
+  const picking = new PickController({
     driver,
-    getCanvas: () => canvas,
-    getReady: () => Promise.resolve(),
     hasInteractiveTargets,
     host
   });
-  picking.connect();
-  return { host, layer, picking };
+  document.body.append(host);
+  picking.bindCanvas(canvas);
+  return { canvas, host, layer, picking };
 }
 
 function canvasWithRect(): HTMLCanvasElement {
@@ -370,7 +436,7 @@ function canvasWithRect(): HTMLCanvasElement {
   return canvas;
 }
 
-function requestHover(picking: ScenePicking, clientX: number): void {
+function requestHover(picking: PickController, clientX: number): void {
   picking.handleUnhandledPointer({
     event: new PointerEvent('pointermove', { clientX, clientY: 10 }),
     kind: 'pointermove'

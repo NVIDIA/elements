@@ -28,7 +28,7 @@ import {
   setLayerInteractive
 } from '../internal/interactive-layer-state.js';
 import type { SceneFeatureIds } from '../internal/feature-ids.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 const scaleUnitConverter = { fromAttribute: normalizeLabelScaleUnit };
 
@@ -43,8 +43,6 @@ const scaleUnitConverter = { fromAttribute: normalizeLabelScaleUnit };
  * @stable false
  */
 export class SceneLabels extends LitElement implements SceneInteractionTarget {
-  #scaleUnit: LabelScaleUnit = 'pixel';
-
   static styles = useStyles([styles]);
 
   static readonly layout = LABEL;
@@ -100,17 +98,7 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
 
   /** Unit used by each record's scale. Defaults to CSS pixels. */
   @property({ attribute: 'scale-unit', converter: scaleUnitConverter })
-  get scaleUnit(): LabelScaleUnit {
-    return this.#scaleUnit;
-  }
-
-  set scaleUnit(value: LabelScaleUnit) {
-    const previous = this.#scaleUnit;
-    const next = normalizeLabelScaleUnit(value);
-    if (next === previous) return;
-    this.#scaleUnit = next;
-    this.requestUpdate('scaleUnit', previous);
-  }
+  scaleUnit: LabelScaleUnit = 'pixel';
 
   /** Captures changed records and publishes the selected active source prefix to this layer. */
   publish(options?: ScenePublishOptions): void {

@@ -346,7 +346,7 @@ describe.runIf(mode === 'check')('Scene WebGPU resource budgets', () => {
         source.includes('nve_load_marker(input.instanceIndex)') &&
         source.includes('marker.color.r') &&
         source.includes('fragmentOit') &&
-        !source.includes('struct PickOutput')
+        !isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
@@ -356,66 +356,55 @@ describe.runIf(mode === 'check')('Scene WebGPU resource budgets', () => {
     expectShaderVariant(
       snapshot,
       'marker outline color',
-      source =>
-        source.includes('marker.outlineColor.r') &&
-        source.includes('fragmentOit') &&
-        !source.includes('struct PickOutput')
+      source => source.includes('marker.outlineColor.r') && source.includes('fragmentOit') && !isPickShader(source)
     );
-    expectShaderVariant(
-      snapshot,
-      'point color',
-      source => source.includes('fn pointOffset') && !source.includes('struct PickOutput')
-    );
+    expectShaderVariant(snapshot, 'point color', source => source.includes('fn pointOffset') && !isPickShader(source));
     expectShaderVariant(
       snapshot,
       'triangle color',
       source =>
-        source.includes('nve_load_stream_vertex(index)') &&
-        !source.includes('fn pointOffset') &&
-        !source.includes('struct PickOutput')
+        source.includes('nve_load_stream_vertex(index)') && !source.includes('fn pointOffset') && !isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'connected line color',
-      source => source.includes('struct LineOutput') && !source.includes('struct PickOutput')
+      source => source.includes('struct LineOutput') && !isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'textured mesh color',
-      source => source.includes('var textureSampler: sampler') && !source.includes('struct PickOutput')
+      source => source.includes('var textureSampler: sampler') && !isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'marker ID/depth',
-      source => source.includes('marker.color.r') && source.includes('struct PickOutput')
+      source => source.includes('marker.color.r') && isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'outline ID/depth',
-      source => source.includes('marker.outlineColor.r') && source.includes('struct PickOutput')
+      source => source.includes('marker.outlineColor.r') && isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'point ID/depth',
-      source => source.includes('fn pointOffset') && source.includes('struct PickOutput')
+      source => source.includes('fn pointOffset') && isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'triangle ID/depth',
       source =>
-        source.includes('nve_load_stream_vertex(index)') &&
-        !source.includes('fn pointOffset') &&
-        source.includes('struct PickOutput')
+        source.includes('nve_load_stream_vertex(index)') && !source.includes('fn pointOffset') && isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'connected line ID/depth',
-      source => source.includes('struct LineOutput') && source.includes('struct PickOutput')
+      source => source.includes('struct LineOutput') && isPickShader(source)
     );
     expectShaderVariant(
       snapshot,
       'textured mesh ID/depth',
-      source => source.includes('var textureSampler: sampler') && source.includes('struct PickOutput')
+      source => source.includes('var textureSampler: sampler') && isPickShader(source)
     );
     expect(session.errors).toEqual([]);
   });
@@ -808,6 +797,10 @@ function expectShaderVariant(
     .flatMap(pipeline => [pipeline.vertexEntryPoint, pipeline.fragmentEntryPoint]);
   expect(entries, `Expected ${name} pipeline creation`).toContain('vertexMain');
   expect(entries, `Expected ${name} pipeline creation`).toContain('fragmentMain');
+}
+
+function isPickShader(source: string): boolean {
+  return source.includes('fn nve_pick_output');
 }
 
 function featureIdentityGPUActivity(snapshot: WebGPUObserverSnapshot) {

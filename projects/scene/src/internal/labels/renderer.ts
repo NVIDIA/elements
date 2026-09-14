@@ -14,6 +14,7 @@ import {
   type SceneGPUTexture
 } from '../gpu/platform.js';
 import { writeMat4ToFloat32 } from '../math/mat4.js';
+import { PICK_OUTPUT_WGSL } from '../pick/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../rendering/transparency.js';
 import type { Matrix4 } from '../types.js';
 import type { LabelRenderItem } from '../rendering/render-items.js';
@@ -390,7 +391,7 @@ struct Output {
   @location(1) uv: vec2f,
   @interpolate(flat) @location(2) labelIndex: u32,
 }
-${pick ? 'struct PickOutput { @location(0) id: vec4u, @location(1) depth: f32 }' : OIT_WGSL}
+${pick ? PICK_OUTPUT_WGSL : OIT_WGSL}
 @group(0) @binding(0) var<uniform> scene: Scene;
 @group(0) @binding(1) var<storage, read> labelWords: array<u32>;
 @group(0) @binding(2) var<storage, read> glyphWords: array<u32>;
@@ -440,7 +441,7 @@ fn coverage(input: Output) -> f32 {
 }
 ${
   pick
-    ? '@fragment fn fragmentMain(input: Output) -> PickOutput { if (coverage(input) <= 0.5 || input.color.a <= 0.0) { discard; } let id = scene.pickId + input.labelIndex; return PickOutput(vec4u(id & 255u, (id >> 8u) & 255u, (id >> 16u) & 255u, id >> 24u), input.position.z); }'
+    ? '@fragment fn fragmentMain(input: Output) -> NvePickOutput { if (coverage(input) <= 0.5 || input.color.a <= 0.0) { discard; } let id = scene.pickId + input.labelIndex; return nve_pick_output(id, input.position.z); }'
     : '@fragment fn fragmentMain(input: Output) -> NveOitOutput { let alpha = input.color.a * coverage(input); if (alpha <= 0.0) { discard; } return nve_oit(vec4f(input.color.rgb * alpha / max(input.color.a, 0.00001), alpha), input.position.z); }'
 }
 `;

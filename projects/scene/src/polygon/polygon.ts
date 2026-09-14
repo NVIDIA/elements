@@ -3,7 +3,7 @@
 
 import { useStyles } from '@nvidia-elements/core/internal';
 import { property } from 'lit/decorators/property.js';
-import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color.js';
+import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/utils/color.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
 import {
@@ -12,7 +12,7 @@ import {
   setPolygonLayerGeometry
 } from '../internal/polygon/layer-state.js';
 import type { PolygonGeometry } from '../internal/polygon/types.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 const DEFAULT_COLOR = { rgba: [1, 1, 1, 1], source: '#ffffff' } satisfies CSSColor;
 
@@ -49,7 +49,7 @@ export class ScenePolygon extends MarkerLayerElement {
   }
 
   /** CSS base color multiplied by each marker tint. */
-  @property({ converter: colorConverter, reflect: true })
+  @property({ converter: colorConverter })
   get color(): string {
     return this.#color;
   }
@@ -66,18 +66,5 @@ export class ScenePolygon extends MarkerLayerElement {
   constructor() {
     super('cube');
     registerPolygonLayer(this, DEFAULT_COLOR.rgba);
-  }
-
-  override attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-    super.attributeChangedCallback(name, oldValue, newValue);
-    if (name === 'color') this.#normalizeColorAttribute();
-  }
-
-  protected override updated(): void {
-    this.#normalizeColorAttribute();
-  }
-
-  #normalizeColorAttribute(): void {
-    if (this.hasAttribute('color') && this.getAttribute('color') !== this.color) this.setAttribute('color', this.color);
   }
 }

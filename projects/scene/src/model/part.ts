@@ -8,7 +8,7 @@ import { notifyOwningModelPart } from '../internal/model/layer-state.js';
 import type { SceneColor } from '../internal/packed-record-buffer.js';
 import type { ScenePrimitiveKind } from '../internal/primitive-geometry.js';
 import type { Quaternion, Vec3 } from '../internal/types.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-part

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { FEATURE_ID_MAP_INVALID } from '../errors.js';
-import { DiagnosticEpisodes } from './diagnostic-episodes.js';
+import { diagnosticReporterService } from './services/diagnostic-reporter.service.js';
 import { notifyOwningScene } from './scene/notifications.js';
 
 /** Maps logical layer targets to stable, application-owned uint32 identities. */
@@ -39,7 +39,6 @@ export type SceneFeatureIdSnapshot =
     };
 
 interface FeatureIdLayerState {
-  readonly episodes: DiagnosticEpisodes;
   snapshot: SceneFeatureIdSnapshot | null;
   source: SceneFeatureIds | null;
   version: number;
@@ -49,7 +48,6 @@ const states = new WeakMap<HTMLElement, FeatureIdLayerState>();
 
 export function registerSceneFeatureIdLayer(layer: HTMLElement): void {
   states.set(layer, {
-    episodes: new DiagnosticEpisodes(),
     snapshot: null,
     source: null,
     version: 0
@@ -84,7 +82,7 @@ export function takeSceneFeatureIdSnapshot(
   if (!state) return undefined;
   const snapshot = state.snapshot;
   const insufficient = snapshot !== null && !snapshotCoversTargets(snapshot, targetCount);
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: insufficient,
     code: FEATURE_ID_MAP_INVALID,
     element: layer,

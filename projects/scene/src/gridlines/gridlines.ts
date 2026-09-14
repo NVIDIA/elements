@@ -4,7 +4,7 @@
 import { LitElement, nothing, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color.js';
+import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/utils/color.js';
 import { createGridVertices, gridVertexCount, MAX_GRID_COUNT } from './utils.js';
 import {
   connectStreamingLayer,
@@ -15,7 +15,8 @@ import {
 } from '../internal/streaming-layer-state.js';
 import { LINE_VERTEX } from '../internal/layouts/built-ins.js';
 import { createLineVertexSource } from '../internal/external-record-sources.js';
-import styles from '../internal/host.css?inline';
+import { createPositiveFiniteNumberConverter } from '../internal/utils/converters.js';
+import styles from '../internal/styles/host.css?inline';
 
 const DEFAULT_SPACING = 1;
 const DEFAULT_COUNT = 10;
@@ -24,12 +25,6 @@ const DEFAULT_COLOR = {
   source: '#a2a2a2'
 } satisfies CSSColor;
 const DEFAULT_WIDTH = 1;
-
-const positiveFiniteNumberConverter = (fallback: number) => ({
-  fromAttribute(value: string | null): number {
-    return normalizeNumber(value === null ? fallback : Number(value), fallback);
-  }
-});
 
 const countConverter = {
   fromAttribute(value: string | null): number {
@@ -61,7 +56,7 @@ export class SceneGridlines extends LitElement {
   #width = DEFAULT_WIDTH;
 
   /** World-unit distance between adjacent grid lines. */
-  @property({ converter: positiveFiniteNumberConverter(DEFAULT_SPACING), reflect: true })
+  @property({ converter: createPositiveFiniteNumberConverter(DEFAULT_SPACING) })
   get spacing(): number {
     return this.#spacing;
   }
@@ -76,7 +71,7 @@ export class SceneGridlines extends LitElement {
   }
 
   /** Number of cells from the origin to each grid edge. */
-  @property({ converter: countConverter, reflect: true })
+  @property({ converter: countConverter })
   get count(): number {
     return this.#count;
   }
@@ -91,7 +86,7 @@ export class SceneGridlines extends LitElement {
   }
 
   /** CSS color used for every reference-grid segment. */
-  @property({ converter: colorConverter, reflect: true })
+  @property({ converter: colorConverter })
   get color(): string {
     return this.#color;
   }
@@ -107,7 +102,7 @@ export class SceneGridlines extends LitElement {
   }
 
   /** Screen-space line width in CSS pixels. */
-  @property({ converter: positiveFiniteNumberConverter(DEFAULT_WIDTH), reflect: true })
+  @property({ converter: createPositiveFiniteNumberConverter(DEFAULT_WIDTH) })
   get width(): number {
     return this.#width;
   }
@@ -149,25 +144,10 @@ export class SceneGridlines extends LitElement {
     super.disconnectedCallback();
   }
 
-  override attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-    super.attributeChangedCallback(name, oldValue, newValue);
-    if (name === 'spacing') this.#normalizeReflectedAttribute('spacing', this.spacing);
-    else if (name === 'count') this.#normalizeReflectedAttribute('count', this.count);
-    else if (name === 'color') this.#normalizeReflectedAttribute('color', this.color);
-    else if (name === 'width') this.#normalizeReflectedAttribute('width', this.width);
-  }
-
   protected override willUpdate(changed: PropertyValues<this>): void {
     if (changed.has('spacing') || changed.has('count') || changed.has('color') || changed.has('width')) {
       this.#replaceVertices();
     }
-  }
-
-  protected override updated(): void {
-    this.#normalizeReflectedAttribute('spacing', this.spacing);
-    this.#normalizeReflectedAttribute('count', this.count);
-    this.#normalizeReflectedAttribute('color', this.color);
-    this.#normalizeReflectedAttribute('width', this.width);
   }
 
   #replaceVertices(): void {
@@ -181,11 +161,6 @@ export class SceneGridlines extends LitElement {
     const source = createLineVertexSource({ bytes, count });
     setStreamingLayerSource(this, source);
     setStreamingLayerCount(this, count);
-  }
-
-  #normalizeReflectedAttribute(name: 'spacing' | 'count' | 'color' | 'width', value: string | number): void {
-    const serialized = String(value);
-    if (this.getAttribute(name) !== serialized) this.setAttribute(name, serialized);
   }
 }
 

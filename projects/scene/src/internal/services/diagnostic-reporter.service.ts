@@ -1,12 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SceneErrorCode, SceneErrorDetail } from '../errors.js';
+import type { SceneErrorCode, SceneErrorDetail } from '../../errors.js';
 
-type DiagnosticEpisodeTransition = 'started' | 'cleared' | 'unchanged';
-
-export class DiagnosticEpisodes {
-  readonly #active = new Set<string>();
+class DiagnosticReporterService {
+  readonly #active = new WeakMap<Element, Set<string>>();
 
   update(options: {
     element: Element;
@@ -16,16 +14,18 @@ export class DiagnosticEpisodes {
     severity: SceneErrorDetail['severity'];
     /** Distinguishes simultaneous episodes that intentionally share one public diagnostic code. */
     episodeKey?: string;
-  }): DiagnosticEpisodeTransition {
+  }): void {
     const { active, code, element, episodeKey, message, severity } = options;
     const key = episodeKey ?? code;
+    const activeEpisodes = this.#active.get(element);
     if (!active) {
-      return this.#active.delete(key) ? 'cleared' : 'unchanged';
+      activeEpisodes?.delete(key);
+      if (activeEpisodes?.size === 0) this.#active.delete(element);
+      return;
     }
-    if (this.#active.has(key)) {
-      return 'unchanged';
-    }
-    this.#active.add(key);
+    if (activeEpisodes?.has(key)) return;
+    if (activeEpisodes) activeEpisodes.add(key);
+    else this.#active.set(element, new Set([key]));
     const detail: SceneErrorDetail = {
       code,
       element,
@@ -42,11 +42,7 @@ export class DiagnosticEpisodes {
         detail
       })
     );
-    return 'started';
-  }
-
-  /** Clears all active episodes without dispatching a fabricated recovery event. */
-  reset(): void {
-    this.#active.clear();
   }
 }
+
+export const diagnosticReporterService = new DiagnosticReporterService();

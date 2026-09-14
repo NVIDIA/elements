@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
@@ -16,7 +17,7 @@ import {
   replaceMeshGeometry
 } from '../internal/mesh/layer-state.js';
 import type { SceneTextureCaptureResult } from '../internal/mesh/layer-state.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /** Complete producer input captured by SceneMesh.geometry. */
 export interface SceneMeshGeometry {
@@ -110,7 +111,7 @@ export class SceneMesh extends MarkerLayerElement {
   }
 
   /** CSS base-color factor multiplied with mesh colors and texture samples. */
-  @property({ type: String, reflect: true }) color = '#ffffff';
+  @property({ type: String }) color = '#ffffff';
   #positions: Float32Array | null = null;
   #normals: Float32Array | null = null;
   #uvs: Float32Array | null = null;
@@ -174,8 +175,8 @@ export class SceneMesh extends MarkerLayerElement {
     super('cube');
     registerMeshLayer(this);
   }
-  protected override updated(): void {
-    setMeshColor(this, this.color);
+  protected override updated(changed: PropertyValues<this>): void {
+    if (changed.has('color')) setMeshColor(this, this.color);
   }
   override connectedCallback(): void {
     super.connectedCallback();

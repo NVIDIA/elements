@@ -18,11 +18,11 @@ canvas {
   block-size: 100%;
 }
 
-.fallback {
+slot {
   position: absolute;
   inset: 0;
 }
 
-.fallback[hidden] {
+slot[hidden] {
   display: none;
 }

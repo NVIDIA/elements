@@ -26,7 +26,7 @@ import { TriangleVertexBuffer } from './internal/triangles/buffer.js';
 import { replacePreparedMarkerSource, replacePreparedVertexSource } from './internal/prepared-record-source.js';
 import { compileMarker, registerMarkerState } from './internal/markers/state.js';
 import { compileParts } from './internal/model/compile.js';
-import { CameraRuntime } from './internal/camera/runtime.js';
+import { CameraController } from './internal/camera/camera.controller.js';
 import { SceneModel } from './model/model.js';
 import { ScenePart } from './model/part.js';
 import { SceneCamera } from './camera/camera.js';
@@ -499,10 +499,9 @@ describe('camera contribution comparison', () => {
       () => document.createElement(SceneCamera.metadata.tag) as SceneCamera
     );
     cameras.forEach(camera => host.append(camera));
-    const runtime = new CameraRuntime({
+    const runtime = new CameraController({
       host,
-      requestRender: () => undefined,
-      shouldIgnoreInput: () => false
+      requestRender: () => undefined
     });
     runtime.trackChanges();
     runtime.resolve();

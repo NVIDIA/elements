@@ -39,7 +39,7 @@ describe(SceneHeightfield.metadata.tag, () => {
     fixture = undefined;
   });
 
-  it('provides a reflected color and a property-only grid', async () => {
+  it('provides a normalized color and a property-only grid without reflection', async () => {
     fixture = await createFixture(html`<nve-scene-heightfield color="#123456"></nve-scene-heightfield>`);
     const heightfield = fixture.querySelector(SceneHeightfield.metadata.tag) as SceneHeightfield;
     await elementIsStable(heightfield);
@@ -54,7 +54,7 @@ describe(SceneHeightfield.metadata.tag, () => {
     heightfield.setAttribute('color', 'not-a-color');
     await elementIsStable(heightfield);
     expect(heightfield).toMatchObject({ color: '#808080' });
-    expect(heightfield.getAttribute('color')).toBe('#808080');
+    expect(heightfield.getAttribute('color')).toBe('not-a-color');
   });
 
   it('reports validation failures, is inert, recovers, and begins a new error episode', async () => {

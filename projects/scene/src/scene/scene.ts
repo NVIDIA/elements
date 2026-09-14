@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { attachInternals, useStyles, type UnhandledPointerInput } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
 import { html, LitElement } from 'lit';
 import { DEVICE_LOST, WEBGPU_UNAVAILABLE, type SceneErrorCode } from '../errors.js';
-import { DiagnosticEpisodes } from '../internal/diagnostic-episodes.js';
+import { diagnosticReporterService } from '../internal/services/diagnostic-reporter.service.js';
 import {
   sharedDeviceManager,
   type SharedDeviceLease,
@@ -14,14 +14,15 @@ import { scenePlatform, type SceneGPUDeviceLostInfo } from '../internal/gpu/plat
 import { registerSceneRenderNotifications } from '../internal/scene/notifications.js';
 import type { SceneCameraState } from '../internal/math/camera.js';
 import type { ScenePickHit } from '../internal/pick/routing.js';
-import { CameraRuntime } from '../internal/camera/runtime.js';
-import { ScenePicking } from '../internal/pick/scene-controller.js';
+import { CameraController } from '../internal/camera/camera.controller.js';
+import { PickController } from '../internal/pick/pick.controller.js';
 import { SceneRenderer } from '../internal/rendering/renderer.js';
 import { SceneContent } from '../internal/scene/content.js';
 import { createReadyCycle, type ReadyCycle } from '../internal/scene/ready-cycle.js';
 import styles from './scene.css?inline';
 import { invertPreciseMat4, multiplyMat4Vec4 } from '../internal/math/mat4.js';
 import type { Matrix4, Vec3 } from '../internal/types.js';
+import { getDevicePixelSize } from '../internal/device/index.js';
 
 export type { ScenePickHit, ScenePickTarget } from '../internal/pick/routing.js';
 export type { SceneErrorCode, SceneErrorDetail } from '../errors.js';
@@ -63,11 +64,6 @@ export interface SceneRay {
 export class Scene extends LitElement {
   static styles = useStyles([styles]);
 
-  static override readonly shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    slotAssignment: 'manual' as const
-  };
-
   static readonly metadata = {
     tag: 'nve-scene',
     version: '0.0.0'
@@ -76,15 +72,14 @@ export class Scene extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  readonly #diagnostics = new DiagnosticEpisodes();
   #canvas?: HTMLCanvasElement;
-  readonly #camera: CameraRuntime;
+  readonly #camera: CameraController;
   #connectionToken = 0;
   readonly #content: SceneContent;
   #hasConnected = false;
   #mutationObserver?: MutationObserver;
   #needsRender = true;
-  readonly #picking: ScenePicking;
+  readonly #picking: PickController;
   #readyCycle: ReadyCycle = createReadyCycle();
   readonly #renderer: SceneRenderer;
   #resizeObserver?: ResizeObserver;
@@ -105,17 +100,14 @@ export class Scene extends LitElement {
       error => this.#failWebGPU(error)
     );
     this.#content = new SceneContent(this);
-    this.#picking = new ScenePicking({
-      driver: this.#renderer.pick.bind(this.#renderer),
-      getCanvas: () => this.#canvas,
-      getReady: () => this.ready,
-      hasInteractiveTargets: () => this.#content.hasInteractiveTargets(),
-      host: this
-    });
-    this.#camera = new CameraRuntime({
+    this.#picking = new PickController({
       host: this,
-      requestRender: () => this.#requestRender(),
-      shouldIgnoreInput: () => false
+      driver: this.#renderer.pick.bind(this.#renderer),
+      hasInteractiveTargets: () => this.#content.hasInteractiveTargets()
+    });
+    this.#camera = new CameraController({
+      host: this,
+      requestRender: () => this.#requestRender()
     });
     registerSceneRenderNotifications(this, () => this.#requestRender());
   }
@@ -178,7 +170,7 @@ export class Scene extends LitElement {
     return html`
       <div internal-host>
         <canvas aria-hidden="true"></canvas>
-        <div class="fallback" ?hidden=${this.#state !== 'failed'}><slot name="fallback"></slot></div>
+        <slot name="fallback" ?hidden=${this.#state !== 'failed'}></slot>
       </div>
     `;
   }
@@ -189,11 +181,9 @@ export class Scene extends LitElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
     attachInternals(this);
     this._internals.role = 'region';
     if (!this.hasAttribute('tabindex')) this.tabIndex = 0;
-    this.#picking.connect();
     const resumedLease = this.#prepareConnection();
     void resumedLease?.catch(() => undefined);
     void this.#initialize(resumedLease);
@@ -201,12 +191,9 @@ export class Scene extends LitElement {
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.removeEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
     this.#connectionToken += 1;
-    this.#picking.disconnect(new DOMException('The scene disconnected while picking.', 'AbortError'));
     this.#stopObservers();
     this.#camera.unbindCanvas();
-    this.#unbindCanvas();
     this.#canvas = undefined;
     this.#unsubscribeDevice?.();
     this.#unsubscribeDevice = undefined;
@@ -214,10 +201,6 @@ export class Scene extends LitElement {
     this.#readyCycle.reject(new DOMException('The scene disconnected before it became ready.', 'AbortError'));
     this.#state = 'disconnected';
   }
-
-  #handlePointerInput = (event: CustomEvent<UnhandledPointerInput>): void => {
-    this.#picking.handleUnhandledPointer(event.detail);
-  };
 
   #prepareConnection(): Promise<SharedDeviceLease> | undefined {
     const resumedLease = this.#hasConnected ? sharedDeviceManager.resumeRecoveryAfterReconnect() : undefined;
@@ -246,7 +229,6 @@ export class Scene extends LitElement {
   #bindShadowDOM(): void {
     const canvas = this.renderRoot.querySelector('canvas');
     if (canvas instanceof HTMLCanvasElement) this.#bindCanvas(canvas);
-    this.#syncFallbackSlot();
     this.#content.refresh();
     this.#picking.reconcileInteractionAvailability();
     this.#startObservers();
@@ -256,22 +238,11 @@ export class Scene extends LitElement {
 
   #bindCanvas(canvas: HTMLCanvasElement): void {
     if (this.#canvas === canvas) return;
-    this.#unbindCanvas();
     this.#camera.unbindCanvas();
     this.#canvas = canvas;
-    canvas.addEventListener('pointerleave', this.#handleCanvasExit);
-    canvas.addEventListener('pointercancel', this.#handleCanvasExit);
+    this.#picking.bindCanvas(canvas);
     this.#camera.bindCanvas(canvas);
   }
-
-  #unbindCanvas(): void {
-    this.#canvas?.removeEventListener('pointerleave', this.#handleCanvasExit);
-    this.#canvas?.removeEventListener('pointercancel', this.#handleCanvasExit);
-  }
-
-  #handleCanvasExit = (event: PointerEvent): void => {
-    this.#picking.handlePointerExit(event);
-  };
 
   #initializeRenderer(lease: SharedDeviceLease): void {
     const canvas = this.#canvas ?? this.renderRoot.querySelector('canvas');
@@ -324,30 +295,14 @@ export class Scene extends LitElement {
       this.#syncStructuralMutations();
       return;
     }
-    if (owned.some(record => this.#isDirectNamedSlotMutation(record))) this.#syncFallbackSlot();
     this.#requestRender();
   }
 
-  #isDirectNamedSlotMutation(record: MutationRecord): boolean {
-    return (
-      record.type === 'attributes' &&
-      record.attributeName === 'slot' &&
-      record.target instanceof HTMLElement &&
-      record.target.parentElement === this
-    );
-  }
-
   #syncStructuralMutations(): void {
-    this.#syncFallbackSlot();
     this.#content.refresh();
     this.#picking.reconcileInteractionAvailability();
     this.#observeResize();
     this.#requestRender();
-  }
-
-  #syncFallbackSlot(): void {
-    const fallback = this.renderRoot.querySelector<HTMLSlotElement>('slot[name="fallback"]');
-    fallback?.assign(...[...this.children].filter(child => child.getAttribute('slot') === 'fallback'));
   }
 
   #handleResize(entries: ResizeObserverEntry[]): void {
@@ -467,11 +422,11 @@ export class Scene extends LitElement {
   }
 
   #dispatchError(code: SceneErrorCode, message: string): void {
-    this.#diagnostics.update({ active: true, code, element: this, message, severity: 'error' });
+    diagnosticReporterService.update({ active: true, code, element: this, message, severity: 'error' });
   }
 
   #clearError(code: SceneErrorCode): void {
-    this.#diagnostics.update({ active: false, code, element: this, message: '', severity: 'error' });
+    diagnosticReporterService.update({ active: false, code, element: this, message: '', severity: 'error' });
   }
 
   #isCurrentConnection(token: number): boolean {
@@ -516,24 +471,4 @@ function toNotSupportedError(error: unknown): DOMException {
   return error instanceof DOMException && error.name === 'NotSupportedError'
     ? error
     : new DOMException(getErrorMessage(error), 'NotSupportedError');
-}
-
-function getDevicePixelSize(entry: ResizeObserverEntry, devicePixelRatio: number): { width: number; height: number } {
-  const fallback = {
-    width: entry.contentRect.width * devicePixelRatio,
-    height: entry.contentRect.height * devicePixelRatio
-  };
-  const devicePixels = entry.devicePixelContentBoxSize?.[0];
-  return devicePixels && sizesApproximatelyEqual(devicePixels, fallback)
-    ? { width: devicePixels.inlineSize, height: devicePixels.blockSize }
-    : fallback;
-}
-
-function sizesApproximatelyEqual(
-  devicePixels: ResizeObserverSize,
-  fallback: { width: number; height: number }
-): boolean {
-  return (
-    Math.abs(devicePixels.inlineSize - fallback.width) <= 1 && Math.abs(devicePixels.blockSize - fallback.height) <= 1
-  );
 }

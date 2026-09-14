@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { LAYER_CHILD, LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID } from '../../errors.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import { LABEL } from '../layouts/built-ins.js';
 import {
   getPackedRecordBytes,
@@ -40,7 +40,6 @@ export interface LabelLayerRenderData {
 interface LabelLayerState {
   readonly buffer: VertexStreamBuffer;
   childError: boolean;
-  readonly episodes: DiagnosticEpisodes;
   mutationObserver?: MutationObserver;
   publicationError: boolean;
   source: LabelLayerSource | null;
@@ -56,7 +55,6 @@ export function registerLabelLayer(layer: HTMLElement): void {
   states.set(layer, {
     buffer: new VertexStreamBuffer(LABEL, { validateRecord: labelRecordIsValid }),
     childError: false,
-    episodes: new DiagnosticEpisodes(),
     publicationError: false,
     source: null,
     sourceCount: 0,
@@ -217,7 +215,7 @@ function reconcileChildren(layer: HTMLElement, state: LabelLayerState): void {
   const childError = layer.children.length > 0;
   if (childError !== state.childError) state.version += 1;
   state.childError = childError;
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: childError,
     code: LAYER_CHILD,
     element: layer,
@@ -230,7 +228,7 @@ function reconcileChildren(layer: HTMLElement, state: LabelLayerState): void {
 function updateDiagnostics(layer: HTMLElement, state: LabelLayerState): void {
   const issues = state.buffer.getIssues();
   for (const code of [LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID] as const) {
-    state.episodes.update({
+    diagnosticReporterService.update({
       active: issues.has(code as VertexStreamIssue) || (code === LAYOUT_VALUE_INVALID && state.publicationError),
       code,
       element: layer,

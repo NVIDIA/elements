@@ -4,11 +4,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { SceneCamera, sceneCameraController } from '../../camera/camera.js';
 import { Scene } from '../../scene/scene.js';
-import { CameraRuntime } from './runtime.js';
+import { CameraController } from './camera.controller.js';
 import '../../camera/define.js';
 import '../../scene/define.js';
 
-describe(CameraRuntime.name, () => {
+describe(CameraController.name, () => {
   const scenes: Scene[] = [];
 
   afterEach(() => {
@@ -106,17 +106,16 @@ describe(CameraRuntime.name, () => {
 
 function createRuntime(behavior: SceneCamera['behavior']): {
   camera: SceneCamera;
-  runtime: CameraRuntime;
+  runtime: CameraController;
   scene: Scene;
 } {
   const scene = document.createElement(Scene.metadata.tag) as Scene;
   const camera = document.createElement(SceneCamera.metadata.tag) as SceneCamera;
   camera.behavior = behavior;
   scene.append(camera);
-  const runtime = new CameraRuntime({
+  const runtime = new CameraController({
     host: scene,
-    requestRender: () => undefined,
-    shouldIgnoreInput: () => false
+    requestRender: () => undefined
   });
   return { camera, runtime, scene };
 }

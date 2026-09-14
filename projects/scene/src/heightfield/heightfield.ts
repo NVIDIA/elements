@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { LitElement, nothing, type PropertyValues } from 'lit';
+import { LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color.js';
+import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/utils/color.js';
 import {
   connectHeightfieldLayer,
   disconnectHeightfieldLayer,
@@ -31,7 +31,7 @@ import {
   registerInteractiveLayer,
   setLayerInteractive
 } from '../internal/interactive-layer-state.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 const DEFAULT_COLOR = {
   rgba: [128 / 255, 128 / 255, 128 / 255, 1],
@@ -85,7 +85,7 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
   }
 
   /** CSS base color multiplied by optional per-sample colors. */
-  @property({ converter: colorConverter, reflect: true })
+  @property({ converter: colorConverter })
   get color(): string {
     return this.#color;
   }
@@ -117,15 +117,6 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
   override disconnectedCallback(): void {
     disconnectHeightfieldLayer(this);
     super.disconnectedCallback();
-  }
-
-  override attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-    super.attributeChangedCallback(name, oldValue, newValue);
-    if (name === 'color') this.#normalizeColorAttribute();
-  }
-
-  protected override updated(changed: PropertyValues<this>): void {
-    if (changed.has('color')) this.#normalizeColorAttribute();
   }
 
   /** Return the bilinearly interpolated terrain elevation at frame-local xy. */
@@ -166,9 +157,5 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
   /** Copy xyz points and move in-bounds points to the rendered triangle surface plus lift. */
   drapeToSurface(points: Float32Array, lift?: number): Float32Array {
     return drapeToSurface(getHeightfieldLayerGrid(this), points, lift);
-  }
-
-  #normalizeColorAttribute(): void {
-    if (this.getAttribute('color') !== this.color) this.setAttribute('color', this.color);
   }
 }

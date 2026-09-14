@@ -3,6 +3,7 @@
 
 import type { SceneGPURenderPipelineDevice, SceneGPURenderPipeline } from '../gpu/platform.js';
 import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../layouts/wgsl.js';
+import { PICK_OUTPUT_WGSL } from '../pick/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../rendering/transparency.js';
 
 export interface MeshPipelines {
@@ -56,7 +57,7 @@ export function createMeshPipelines(device: SceneGPURenderPipelineDevice, format
 export function createMeshShader(options: { readonly pass: 'color' | 'pick' }): string {
   const pick = options.pass === 'pick';
   const fragment = pick
-    ? '@fragment fn fragmentMain(input: VertexOutput) -> PickOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); if (input.color.a * texel.a <= 0.0) { discard; } return PickOutput(vec4u(input.id & 255u, (input.id >> 8u) & 255u, (input.id >> 16u) & 255u, input.id >> 24u), input.position.z); }'
+    ? '@fragment fn fragmentMain(input: VertexOutput) -> NvePickOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); if (input.color.a * texel.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
     : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a < 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return vec4f(color.rgb * lighting * color.a, color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a <= 0.0 || color.a >= 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return nve_oit(vec4f(color.rgb * lighting * color.a, color.a), input.position.z); } @fragment fn fragmentUnlit(input: VertexOutput) -> @location(0) vec4f { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a < 1.0) { discard; } return vec4f(color.rgb * color.a, color.a); } @fragment fn fragmentUnlitOit(input: VertexOutput) -> NveOitOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a <= 0.0 || color.a >= 1.0) { discard; } return nve_oit(vec4f(color.rgb * color.a, color.a), input.position.z); }';
   return /* wgsl */ `
 struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, baseColor: vec4f, ${pick ? 'pickId: u32,' : ''} }
@@ -64,10 +65,10 @@ struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, baseColor: vec4f
 ${MARKER_WGSL}
 ${DEFAULT_LIGHTING_WGSL}
 ${OIT_WGSL}
+${pick ? PICK_OUTPUT_WGSL : ''}
 @group(2) @binding(0) var textureSampler: sampler;
 @group(2) @binding(1) var baseTexture: texture_2d<f32>;
 struct VertexInput { @location(0) position: vec3f, @location(1) normal: vec3f, @location(2) uv: vec2f, @location(3) color: vec4f, @builtin(vertex_index) vertexIndex: u32, @builtin(instance_index) instanceIndex: u32, }
-${pick ? 'struct PickOutput { @location(0) id: vec4u, @location(1) depth: f32 }' : ''}
 struct VertexOutput { @builtin(position) position: vec4f, @location(0) normal: vec3f, @location(1) color: vec4f, @location(2) uv: vec2f, ${pick ? '@interpolate(flat) @location(3) id: u32,' : ''} }
 fn rotateByQuaternion(q: vec4f, value: vec3f) -> vec3f { return value + 2.0 * cross(q.xyz, cross(q.xyz, value) + q.w * value); }
 fn safeScale(value: f32) -> f32 { if (abs(value) < 0.000001) { return 0.000001; } return value; }

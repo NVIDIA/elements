@@ -41,7 +41,7 @@ describe(SceneGridlines.metadata.tag, () => {
     ]);
   });
 
-  it('reflects attributes, regenerates vertices, and falls back from malformed values', async () => {
+  it('normalizes attributes and regenerates vertices without reflecting property changes', async () => {
     fixture = await createFixture(
       html`<nve-scene-gridlines spacing="0.5" count="2" color="rgb(255 128 0 / 50%)" width="4"></nve-scene-gridlines>`
     );
@@ -64,10 +64,10 @@ describe(SceneGridlines.metadata.tag, () => {
     grid.color = 'rebeccapurple';
     grid.width = 3;
     await elementIsStable(grid);
-    expect(grid.getAttribute('spacing')).toBe('2');
-    expect(grid.getAttribute('count')).toBe('1');
-    expect(grid.getAttribute('color')).toBe('rebeccapurple');
-    expect(grid.getAttribute('width')).toBe('3');
+    expect(grid.getAttribute('spacing')).toBe('0.5');
+    expect(grid.getAttribute('count')).toBe('2');
+    expect(grid.getAttribute('color')).toBe('rgb(255 128 0 / 50%)');
+    expect(grid.getAttribute('width')).toBe('4');
     expect(readLineVertex(takeStreamingLayerRenderData(grid).bytes!, 0).position).toEqual([-2, -2, 0]);
 
     grid.setAttribute('spacing', '-1');
@@ -81,10 +81,10 @@ describe(SceneGridlines.metadata.tag, () => {
     grid.spacing = Number.MAX_VALUE;
     await elementIsStable(grid);
     expect(grid).toMatchObject({ spacing: 1 });
-    expect(grid.getAttribute('spacing')).toBe('1');
+    expect(grid.getAttribute('spacing')).toBe('-1');
   });
 
-  it('reserializes malformed attributes after the matching defaults have settled', async () => {
+  it('leaves malformed attributes authored after the matching defaults have settled', async () => {
     fixture = await createFixture(html`<nve-scene-gridlines></nve-scene-gridlines>`);
     const grid = fixture.querySelector<SceneGridlines>(SceneGridlines.metadata.tag);
     if (!grid) throw new Error('Expected grid layer.');
@@ -96,10 +96,10 @@ describe(SceneGridlines.metadata.tag, () => {
     grid.setAttribute('width', 'NaN');
     await elementIsStable(grid);
 
-    expect(grid.getAttribute('spacing')).toBe('1');
-    expect(grid.getAttribute('count')).toBe('10');
-    expect(grid.getAttribute('color')).toBe('#a2a2a2');
-    expect(grid.getAttribute('width')).toBe('1');
+    expect(grid.getAttribute('spacing')).toBe('Infinity');
+    expect(grid.getAttribute('count')).toBe('0');
+    expect(grid.getAttribute('color')).toBe('var(--unsupported-color)');
+    expect(grid.getAttribute('width')).toBe('NaN');
   });
 
   it('becomes inert for element children and recovers after they are removed', async () => {

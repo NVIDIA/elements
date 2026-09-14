@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { MESH_GEOMETRY, MESH_TEXTURE_CAPTURE, MESH_TEXTURE_WITHOUT_UVS } from '../../errors.js';
-import { parseCSSColor } from '../color.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { parseCSSColor } from '../utils/color.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../types.js';
 import { validateMeshGeometry, type MeshGeometryInput } from './geometry.js';
@@ -116,7 +116,6 @@ interface MeshState {
   topologyVersion: number;
   topologyKey: string;
   geometryError: boolean;
-  episodes: DiagnosticEpisodes;
   observer?: MutationObserver;
   pendingGeometryUploads: MeshGeometryUploadRange[];
 }
@@ -158,7 +157,6 @@ export function registerMeshLayer(mesh: HTMLElement): void {
     topologyVersion: 0,
     topologyKey: createTopologyKey({ positions: null, indices: null, uvs: null }),
     geometryError: false,
-    episodes: new DiagnosticEpisodes(),
     pendingGeometryUploads: []
   });
 }
@@ -461,21 +459,21 @@ function validateMesh(mesh: HTMLElement): void {
 }
 
 function updateMeshDiagnostics(mesh: HTMLElement, state: MeshState): void {
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: mesh,
     code: MESH_GEOMETRY,
     active: state.geometryError,
     message: 'Mesh geometry arrays are invalid.',
     severity: 'error'
   });
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: mesh,
     code: MESH_TEXTURE_WITHOUT_UVS,
     active: !!state.texture && !state.uvs,
     message: 'Mesh texture ignored because UVs are absent.',
     severity: 'warning'
   });
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: state.textureError,
     code: MESH_TEXTURE_CAPTURE,
     element: mesh,

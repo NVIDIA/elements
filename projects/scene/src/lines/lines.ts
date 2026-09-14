@@ -18,7 +18,7 @@ import {
   type LineWidthUnit
 } from '../internal/lines/data.js';
 import type { LineVertexSource } from '../internal/lines/buffer.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 const topologyConverter = { fromAttribute: normalizeLineTopology };
 const widthUnitConverter = { fromAttribute: normalizeLineWidthUnit };

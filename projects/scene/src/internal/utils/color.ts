@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { RGBA } from './types.js';
+import type { RGBA } from '../types.js';
 
 let colorContext: CanvasRenderingContext2D | null | undefined;
 

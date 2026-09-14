@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../errors.js';
-import { sameRGBA } from '../color.js';
+import { sameRGBA } from '../utils/color.js';
 import { validateHeightfieldGrid } from './compile.js';
 import { getHeightfieldTopology, hasSameHeightfieldTopology, type HeightfieldTopology } from './topology.js';
 import type { HeightfieldGrid } from './types.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
 import type { RGBA } from '../types.js';
 import { notifyOwningScene } from '../scene/notifications.js';
@@ -14,7 +14,6 @@ import { notifyOwningScene } from '../scene/notifications.js';
 interface HeightfieldState {
   childError: boolean;
   color: RGBA;
-  episodes: DiagnosticEpisodes;
   grid: HeightfieldGrid | null;
   gridError: boolean;
   observer?: MutationObserver;
@@ -29,7 +28,6 @@ export function registerHeightfieldLayer(layer: HTMLElement, color: RGBA): void 
   states.set(layer, {
     childError: false,
     color,
-    episodes: new DiagnosticEpisodes(),
     grid: null,
     gridError: false,
     topology: null,
@@ -89,7 +87,7 @@ function compileGrid(state: HeightfieldState, value: unknown): void {
 }
 
 function updateGridEpisode(layer: HTMLElement, state: HeightfieldState): void {
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: layer,
     code: HEIGHTFIELD_GRID,
     active: state.gridError,
@@ -165,7 +163,7 @@ function validateChildren(layer: HTMLElement, state: HeightfieldState): void {
     notifyOwningScene(layer);
   }
   state.childError = childError;
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: layer,
     code: LAYER_CHILD,
     active: childError,

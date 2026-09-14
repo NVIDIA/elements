@@ -15,6 +15,7 @@ describe(PICK_UNIFORM_OFFSETS.constructor.name, () => {
 describe(createPickPipelines.name, () => {
   it('should create matching depth-tested ID pipelines for marker, stream, and mesh draws', () => {
     const descriptors: SceneGPURenderPipelineDescriptor[] = [];
+    const shaderSources: string[] = [];
     const pipeline = { getBindGroupLayout: () => ({}) };
     createPickPipelines({
       createCommandEncoder: () => ({ beginRenderPass: () => ({ end: () => undefined }), finish: () => ({}) }),
@@ -22,13 +23,21 @@ describe(createPickPipelines.name, () => {
         descriptors.push(descriptor);
         return pipeline;
       },
-      createShaderModule: () => ({}),
+      createShaderModule: descriptor => {
+        shaderSources.push(descriptor.code);
+        return {};
+      },
       destroy: () => undefined,
       lost: new Promise(() => undefined),
       queue: { submit: () => undefined }
     });
 
     expect(descriptors).toHaveLength(6);
+    expect(shaderSources).toHaveLength(6);
+    for (const source of shaderSources) {
+      expect(source.match(/fn nve_pick_output/g)).toHaveLength(1);
+      expect(source).toContain('return nve_pick_output(');
+    }
     for (const descriptor of descriptors) {
       expect(descriptor.depthStencil).toMatchObject({ depthWriteEnabled: true, format: 'depth24plus' });
       expect(descriptor.fragment).toMatchObject({ targets: [{ format: 'rgba8uint' }, { format: 'r32float' }] });

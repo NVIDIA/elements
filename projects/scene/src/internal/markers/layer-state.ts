@@ -11,7 +11,7 @@ import {
 import { MARKER } from '../layouts/built-ins.js';
 import { writeMarker, type MarkerFields } from '../layouts/helpers.js';
 import type { PrimitiveKind } from '../primitive-geometry.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from '../instance-buffer.js';
 import type { UploadRange } from '../upload-ranges.js';
 import { registerMarkerLayerNotifications } from './layer-notifications.js';
@@ -36,7 +36,6 @@ type MarkerLayerSource = MarkerSource | ExternalMarkerSource;
 interface MarkerLayerState {
   buffer: MarkerInstanceBuffer;
   readonly compiledFields: WeakMap<HTMLElement, MarkerFields>;
-  readonly episodes: DiagnosticEpisodes;
   readonly kind: PrimitiveKind;
   childError: boolean;
   compiledMarkers: readonly HTMLElement[];
@@ -79,7 +78,6 @@ export function registerMarkerLayer(layer: HTMLElement, kind: PrimitiveKind): vo
     compiledFields: new WeakMap(),
     compiledMarkers: [],
     count: undefined,
-    episodes: new DiagnosticEpisodes(),
     kind,
     markerBytes: null,
     markerChildren: [],
@@ -283,7 +281,7 @@ function queueMarkerReconcile(layer: HTMLElement, state: MarkerLayerState, marke
 function reconcileMarkerLayer(layer: HTMLElement, state: MarkerLayerState, structural: boolean): void {
   const markerChildren = [...layer.children].filter(isMarkerElement);
   state.childError = [...layer.children].some(child => !isAllowedLayerChild(layer, child));
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: layer,
     code: LAYER_CHILD,
     active: state.childError,
@@ -294,7 +292,7 @@ function reconcileMarkerLayer(layer: HTMLElement, state: MarkerLayerState, struc
     severity: 'error'
   });
   const streamed = state.streamedSource !== null;
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: layer,
     code: LAYER_DUAL_SOURCE,
     active: streamed && markerChildren.length > 0,
@@ -393,26 +391,18 @@ function updateBufferIssues(layer: HTMLElement, state: MarkerLayerState): void {
     active: issues.has(LAYOUT_STRIDE_MISMATCH),
     code: LAYOUT_STRIDE_MISMATCH,
     layer,
-    message: 'Instance bytes must align to the marker stride.',
-    state
+    message: 'Instance bytes must align to the marker stride.'
   });
   updateIssue({
     active: issues.has(LAYOUT_VALUE_INVALID) || state.publicationError,
     code: LAYOUT_VALUE_INVALID,
     layer,
-    message: 'Marker data must contain finite values and a nonzero quaternion.',
-    state
+    message: 'Marker data must contain finite values and a nonzero quaternion.'
   });
 }
 
-function updateIssue(options: {
-  active: boolean;
-  code: SceneErrorCode;
-  layer: HTMLElement;
-  message: string;
-  state: MarkerLayerState;
-}): void {
-  options.state.episodes.update({
+function updateIssue(options: { active: boolean; code: SceneErrorCode; layer: HTMLElement; message: string }): void {
+  diagnosticReporterService.update({
     active: options.active,
     code: options.code,
     element: options.layer,

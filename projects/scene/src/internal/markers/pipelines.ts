@@ -4,6 +4,7 @@
 import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../layouts/wgsl.js';
 import { createPrimitiveGeometry, type PrimitiveGeometry, type PrimitiveKind } from '../primitive-geometry.js';
 import type { SceneGPURenderPipelineDevice, SceneGPURenderPipeline, SceneGPUShaderModule } from '../gpu/platform.js';
+import { PICK_OUTPUT_WGSL } from '../pick/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../rendering/transparency.js';
 
 export interface MarkerPipelines {
@@ -105,7 +106,7 @@ export function createMarkerShader(options: { readonly compact?: boolean; readon
   const outputId = options.pass === 'pick' ? '@interpolate(flat) @location(3) id: u32, ' : '';
   const fragment =
     options.pass === 'pick'
-      ? 'struct PickOutput { @location(0) id: vec4u, @location(1) depth: f32 } @fragment fn fragmentMain(input: VertexOutput) -> PickOutput { if (input.color.a <= 0.0) { discard; } return PickOutput(vec4u(input.id & 255u, (input.id >> 8u) & 255u, (input.id >> 16u) & 255u, input.id >> 24u), input.position.z); }'
+      ? '@fragment fn fragmentMain(input: VertexOutput) -> NvePickOutput { if (input.color.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
       : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { if (input.color.a < 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return vec4f(input.color.rgb * lighting * input.color.a, input.color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { if (input.color.a <= 0.0 || input.color.a >= 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return nve_oit(vec4f(input.color.rgb * lighting * input.color.a, input.color.a), input.position.z); }';
   return /* wgsl */ `
 struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, ${pickFields}}
@@ -114,6 +115,7 @@ ${compactBinding}
 ${MARKER_WGSL}
 ${DEFAULT_LIGHTING_WGSL}
 ${OIT_WGSL}
+${options.pass === 'pick' ? PICK_OUTPUT_WGSL : ''}
 struct VertexInput { @location(0) position: vec3f, @location(1) normal: vec3f, @builtin(instance_index) instanceIndex: u32, }
 struct VertexOutput { @builtin(position) position: vec4f, @location(0) normal: vec3f, @location(1) color: vec4f, ${outputId}}
 fn rotateByQuaternion(q: vec4f, value: vec3f) -> vec3f { return value + 2.0 * cross(q.xyz, cross(q.xyz, value) + q.w * value); }
@@ -143,13 +145,14 @@ export function createOutlineShader(options: { readonly pass: ShaderPass }): str
   const outputId = options.pass === 'pick' ? '@interpolate(flat) @location(3) id: u32, ' : '';
   const fragment =
     options.pass === 'pick'
-      ? 'struct PickOutput { @location(0) id: vec4u, @location(1) depth: f32 } @fragment fn fragmentMain(input: VertexOutput) -> PickOutput { if (input.color.a <= 0.0) { discard; } return PickOutput(vec4u(input.id & 255u, (input.id >> 8u) & 255u, (input.id >> 16u) & 255u, input.id >> 24u), input.position.z); }'
+      ? '@fragment fn fragmentMain(input: VertexOutput) -> NvePickOutput { if (input.color.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
       : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { if (input.color.a < 1.0) { discard; } return vec4f(input.color.rgb * input.color.a, input.color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { if (input.color.a <= 0.0 || input.color.a >= 1.0) { discard; } return nve_oit(vec4f(input.color.rgb * input.color.a, input.color.a), input.position.z); }';
   return /* wgsl */ `
 struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, ${pickFields}}
 @group(0) @binding(0) var<uniform> scene: SceneUniforms;
 ${MARKER_WGSL}
 ${OIT_WGSL}
+${options.pass === 'pick' ? PICK_OUTPUT_WGSL : ''}
 struct VertexInput { @location(0) position: vec3f, @builtin(instance_index) instanceIndex: u32, }
 struct VertexOutput { @builtin(position) position: vec4f, @location(0) color: vec4f, ${outputId}}
 fn rotateByQuaternion(q: vec4f, value: vec3f) -> vec3f { return value + 2.0 * cross(q.xyz, cross(q.xyz, value) + q.w * value); }

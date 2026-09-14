@@ -81,7 +81,7 @@ describe(Scene.metadata.tag, () => {
     expect(element._internals.role).toBe('region');
     expect(element.tabIndex).toBe(0);
     expect(canvas?.getAttribute('aria-hidden')).toBe('true');
-    expect(element.shadowRoot?.querySelector('.fallback')?.hasAttribute('hidden')).toBe(true);
+    expect(element.shadowRoot?.querySelector('slot[name="fallback"]')?.hasAttribute('hidden')).toBe(true);
     expect(eventOrder).toEqual(['ready']);
 
     await waitForAnimationFrames(3);
@@ -755,14 +755,8 @@ describe(Scene.metadata.tag, () => {
     expect(innerAssigned).toEqual(['inner-fallback']);
   });
 
-  it('should resynchronize direct fallback slot attribute mutations', async () => {
-    const mutationCallbacks: MutationCallback[] = [];
-    const gpu = configureFakeWebGPU({
-      createMutationObserver: callback => {
-        mutationCallbacks.push(callback);
-        return createManualMutationObserver();
-      }
-    });
+  it('should automatically update fallback assignment after slot attribute mutations', async () => {
+    const gpu = configureFakeWebGPU();
     const { element } = await createScene(html`<nve-scene aria-label="Fallback mutation"></nve-scene>`);
     const fallback = appendSlottedParagraph(element, {
       id: 'fallback-mutation',
@@ -774,21 +768,12 @@ describe(Scene.metadata.tag, () => {
     await element.ready;
     const slot = element.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="fallback"]');
     if (!slot) throw new Error('Expected the fallback slot.');
-    expect(slot.assignedElements()).toEqual([]);
+    expect(slot.assignedElements()).toEqual([fallback]);
 
     fallback.removeAttribute('slot');
-    notifyMutation(mutationCallbacks[0], [
-      createMutationRecord({ attributeName: 'slot', target: fallback, type: 'attributes' })
-    ]);
     expect(slot.assignedElements()).toEqual([]);
 
     fallback.setAttribute('slot', 'fallback');
-    notifyMutation(mutationCallbacks[0], [
-      createMutationRecord({ attributeName: 'class', target: fallback, type: 'attributes' })
-    ]);
-    notifyMutation(mutationCallbacks[0], [
-      createMutationRecord({ attributeName: 'slot', target: fallback, type: 'attributes' })
-    ]);
     expect(slot.assignedElements()).toEqual([fallback]);
   });
 
@@ -811,7 +796,7 @@ describe(Scene.metadata.tag, () => {
     expect(errors).toHaveLength(1);
     expect(errors[0]).toMatchObject({ bubbles: true, composed: true, cancelable: false });
     expect(errors[0]?.detail).toMatchObject({ code: 'webgpu-unavailable', element, severity: 'error' });
-    expect(element.shadowRoot?.querySelector('.fallback')?.hasAttribute('hidden')).toBe(false);
+    expect(element.shadowRoot?.querySelector('slot[name="fallback"]')?.hasAttribute('hidden')).toBe(false);
     expect(element.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="fallback"]')?.assignedElements()[0]?.id).toBe(
       'fallback'
     );
@@ -874,7 +859,7 @@ describe(Scene.metadata.tag, () => {
     const recoveryReady = element.ready;
     expect(recoveryReady).not.toBe(initialReady);
     await element.updateComplete;
-    expect(element.shadowRoot?.querySelector('.fallback')?.hasAttribute('hidden')).toBe(false);
+    expect(element.shadowRoot?.querySelector('slot[name="fallback"]')?.hasAttribute('hidden')).toBe(false);
 
     gpu.resolveNextDevice();
     await recoveryReady;
@@ -946,7 +931,7 @@ describe(Scene.metadata.tag, () => {
     gpu.resolveNextDevice();
     await expect(recovery).rejects.toMatchObject({ name: 'NotSupportedError' });
     await element.updateComplete;
-    expect(element.shadowRoot?.querySelector('.fallback')?.hasAttribute('hidden')).toBe(false);
+    expect(element.shadowRoot?.querySelector('slot[name="fallback"]')?.hasAttribute('hidden')).toBe(false);
     expect(consoleError).toHaveBeenCalledWith(
       '[webgpu-unavailable] A WebGPU canvas context is unavailable.',
       expect.anything()

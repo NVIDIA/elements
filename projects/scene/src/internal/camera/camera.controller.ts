@@ -52,7 +52,7 @@ interface CameraBehaviorSnapshot {
 
 type CameraHost = HTMLElement & ReactiveControllerHost;
 
-export class CameraRuntime implements ReactiveController {
+export class CameraController implements ReactiveController {
   #behaviors: readonly ResolvedCameraBehavior[] = [];
   #behaviorSnapshot?: readonly CameraBehaviorSnapshot[];
   #resolutionSnapshot?: readonly CameraBehaviorSnapshot[];
@@ -65,19 +65,14 @@ export class CameraRuntime implements ReactiveController {
   #state = copyCameraState(DEFAULT_CAMERA_STATE);
   readonly #gestureController: GestureController<number>;
 
-  constructor(options: {
-    readonly host: CameraHost;
-    readonly requestRender: () => void;
-    readonly shouldIgnoreInput: (event: Event) => boolean;
-  }) {
+  constructor(options: { readonly host: CameraHost; readonly requestRender: () => void }) {
     this.#host = options.host;
     this.#requestRender = options.requestRender;
     new KeyNavigationSpatialController(options.host);
     this.#gestureController = new GestureController(options.host, {
       createPinchContext: () => this.#orbitState.offset.distance,
       getCapabilities: () => this.#getGestureCapabilities(),
-      prepare: () => this.resolve(),
-      shouldIgnore: options.shouldIgnoreInput
+      prepare: () => this.resolve()
     });
     options.host.addController(this);
   }

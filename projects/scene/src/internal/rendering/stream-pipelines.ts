@@ -3,6 +3,7 @@
 
 import { LINE_WGSL, STREAM_WGSL } from '../layouts/wgsl.js';
 import type { SceneGPURenderPipelineDevice, SceneGPURenderPipeline } from '../gpu/platform.js';
+import { PICK_OUTPUT_WGSL } from '../pick/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from './transparency.js';
 
 export interface StreamPipelines {
@@ -103,7 +104,7 @@ function streamUniforms(pick: boolean): string {
   return /* wgsl */ `
 struct Scene { ${SCENE_FIELDS}${pick ? ', pickId: u32' : ''} }
 @group(0) @binding(0) var<uniform> scene: Scene;
-${pick ? 'struct PickOutput { @location(0) id: vec4u, @location(1) depth: f32 }' : ''}
+${pick ? PICK_OUTPUT_WGSL : ''}
 struct Output { @builtin(position) position: vec4f, @location(0) color: vec4f ${pick ? ', @interpolate(flat) @location(1) id: u32' : ''} }
 ${COLOR_WGSL}
 ${OIT_WGSL}
@@ -112,7 +113,7 @@ ${OIT_WGSL}
 
 function streamFragment(pick: boolean): string {
   return pick
-    ? '@fragment fn fragmentMain(input: Output) -> PickOutput { if (input.color.a <= 0.0) { discard; } return PickOutput(vec4u(input.id & 255u, (input.id >> 8u) & 255u, (input.id >> 16u) & 255u, input.id >> 24u), input.position.z); }'
+    ? '@fragment fn fragmentMain(input: Output) -> NvePickOutput { if (input.color.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
     : '@fragment fn fragmentMain(input: Output) -> @location(0) vec4f { if (input.color.a < 1.0) { discard; } return input.color; } @fragment fn fragmentOit(input: Output) -> NveOitOutput { if (input.color.a <= 0.0 || input.color.a >= 1.0) { discard; } return nve_oit(input.color, input.position.z); }';
 }
 
@@ -160,8 +161,8 @@ function createLineShader(pick: boolean): string {
   const pickField = pick ? ', pickId: u32' : '';
   const fragment = pick
     ? /* wgsl */ `
-struct PickOutput { @location(0) id: vec4u, @location(1) depth: f32 }
-@fragment fn fragmentMain(input: LineOutput) -> PickOutput { if (!lineVisible(input)) { discard; } let id = scene.pickId + input.segmentIndex; return PickOutput(vec4u(id & 255u, (id >> 8u) & 255u, (id >> 16u) & 255u, id >> 24u), input.position.z); }
+${PICK_OUTPUT_WGSL}
+@fragment fn fragmentMain(input: LineOutput) -> NvePickOutput { if (!lineVisible(input)) { discard; } let id = scene.pickId + input.segmentIndex; return nve_pick_output(id, input.position.z); }
 `
     : /* wgsl */ `
 @fragment fn fragmentMain(input: LineOutput) -> @location(0) vec4f { if (!lineVisible(input) || input.color.a < 1.0) { discard; } return input.color; }

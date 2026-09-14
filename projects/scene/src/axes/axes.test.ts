@@ -33,7 +33,7 @@ describe(SceneAxes.metadata.tag, () => {
     });
   });
 
-  it('reflects valid attributes, falls back from malformed attributes, and regenerates length vertices', async () => {
+  it('normalizes numeric attributes and regenerates vertices without reflecting property changes', async () => {
     fixture = await createFixture(html`<nve-scene-axes length="2.5" width="4"></nve-scene-axes>`);
     const axes = fixture.querySelector<SceneAxes>(SceneAxes.metadata.tag);
     if (!axes) throw new Error('Expected axes layer.');
@@ -43,20 +43,20 @@ describe(SceneAxes.metadata.tag, () => {
     axes.length = 3;
     axes.width = 5;
     await elementIsStable(axes);
-    expect(axes.getAttribute('length')).toBe('3');
-    expect(axes.getAttribute('width')).toBe('5');
+    expect(axes.getAttribute('length')).toBe('2.5');
+    expect(axes.getAttribute('width')).toBe('4');
     expect(readLineVertex(takeStreamingLayerRenderData(axes).bytes!, 1).position).toEqual([3, 0, 0]);
 
     axes.setAttribute('length', 'not-a-number');
     axes.setAttribute('width', '-1');
     await elementIsStable(axes);
     expect(axes).toMatchObject({ length: 1, width: 2 });
-    expect(axes.getAttribute('length')).toBe('1');
-    expect(axes.getAttribute('width')).toBe('2');
+    expect(axes.getAttribute('length')).toBe('not-a-number');
+    expect(axes.getAttribute('width')).toBe('-1');
     expect(readLineVertex(takeStreamingLayerRenderData(axes).bytes!, 1).position).toEqual([1, 0, 0]);
   });
 
-  it('reflects and normalizes direction while regenerating signed axis vertices', async () => {
+  it('normalizes direction attributes and regenerates signed axis vertices without reflection', async () => {
     fixture = await createFixture(html`<nve-scene-axes direction="bidirectional" length="2"></nve-scene-axes>`);
     const axes = fixture.querySelector<SceneAxes>(SceneAxes.metadata.tag);
     if (!axes) throw new Error('Expected axes layer.');
@@ -69,16 +69,16 @@ describe(SceneAxes.metadata.tag, () => {
 
     axes.direction = 'positive';
     await elementIsStable(axes);
-    expect(axes.getAttribute('direction')).toBe('positive');
+    expect(axes.getAttribute('direction')).toBe('bidirectional');
     expect(readLineVertex(takeStreamingLayerRenderData(axes).bytes!, 0).position).toEqual([0, 0, 0]);
 
     axes.setAttribute('direction', 'unsupported');
     await elementIsStable(axes);
     expect(axes.direction).toBe('positive');
-    expect(axes.getAttribute('direction')).toBe('positive');
+    expect(axes.getAttribute('direction')).toBe('unsupported');
   });
 
-  it('reserializes malformed attributes when the matching default is already settled', async () => {
+  it('leaves malformed attributes authored when the matching default is already settled', async () => {
     fixture = await createFixture(html`<nve-scene-axes></nve-scene-axes>`);
     const axes = fixture.querySelector<SceneAxes>(SceneAxes.metadata.tag);
     if (!axes) throw new Error('Expected axes layer.');
@@ -90,9 +90,9 @@ describe(SceneAxes.metadata.tag, () => {
     await elementIsStable(axes);
 
     expect(axes).toMatchObject({ length: 1, width: 2 });
-    expect(axes.getAttribute('length')).toBe('1');
-    expect(axes.getAttribute('width')).toBe('2');
-    expect(axes.getAttribute('direction')).toBe('positive');
+    expect(axes.getAttribute('length')).toBe('not-a-number');
+    expect(axes.getAttribute('width')).toBe('0');
+    expect(axes.getAttribute('direction')).toBe('unsupported');
   });
 
   it('becomes inert for element children and recovers after they are removed', async () => {

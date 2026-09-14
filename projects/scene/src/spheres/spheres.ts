@@ -4,7 +4,7 @@
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-spheres

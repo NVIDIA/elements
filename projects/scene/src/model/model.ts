@@ -12,7 +12,7 @@ import {
 } from '../internal/model/layer-state.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
 import type { ModelPart } from '../internal/model/compile.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-model

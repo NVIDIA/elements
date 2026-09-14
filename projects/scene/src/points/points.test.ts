@@ -93,9 +93,6 @@ describe(ScenePoints.metadata.tag, () => {
     layer.setAttribute('size-unit', 'unknown');
     await elementIsStable(layer);
     expect(layer.sizeUnit).toBe('pixel');
-    layer.sizeUnit = 'invalid' as 'world';
-    await elementIsStable(layer);
-    expect(layer.sizeUnit).toBe('pixel');
     layer.removeAttribute('size-unit');
     await elementIsStable(layer);
     expect(layer.sizeUnit).toBe('pixel');

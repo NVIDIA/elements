@@ -45,9 +45,6 @@ describe(SceneLabels.metadata.tag, () => {
     const layer = required(fixture.querySelector<SceneLabels>(SceneLabels.metadata.tag), 'Expected labels fixture.');
     await elementIsStable(layer);
     expect(layer.scaleUnit).toBe('pixel');
-    layer.scaleUnit = 'invalid' as 'world';
-    await elementIsStable(layer);
-    expect(layer.scaleUnit).toBe('pixel');
   });
 
   it('rejects element children', async () => {

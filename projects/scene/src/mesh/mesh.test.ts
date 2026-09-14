@@ -466,6 +466,13 @@ describe(SceneMesh.metadata.tag, () => {
     connected.color = 'rgba(255, 0, 0, 0.5)';
     await elementIsStable(connected);
     expect(getMeshRenderData(connected).transparent).toBe(true);
+    expect(connected.getAttribute('color')).toBe('var(--missing-color)');
+    const colorVersion = getMeshLayerVersion(connected);
+    connected.geometry = { positions: triangle };
+    const geometryVersion = getMeshLayerVersion(connected);
+    expect(geometryVersion).toBeGreaterThan(colorVersion);
+    await elementIsStable(connected);
+    expect(getMeshLayerVersion(connected)).toBe(geometryVersion);
   });
 
   it('captures owned textures with newest-request-wins cleanup', async () => {

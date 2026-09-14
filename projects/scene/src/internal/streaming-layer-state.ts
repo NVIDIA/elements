@@ -4,7 +4,7 @@
 import { LAYER_CHILD, LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID, LINES_COUNT, TRIANGLES_COUNT } from '../errors.js';
 import type { LayoutDescriptor } from './layouts/define-layout.js';
 import { LINE_VERTEX } from './layouts/built-ins.js';
-import { DiagnosticEpisodes } from './diagnostic-episodes.js';
+import { diagnosticReporterService } from './services/diagnostic-reporter.service.js';
 import {
   lineCountIsValid,
   lineRecordHasTransparency,
@@ -51,7 +51,6 @@ export interface StreamingLayerRenderData extends VertexStreamRenderData {
 
 interface StreamingLayerState {
   buffer: VertexStreamBuffer;
-  readonly episodes: DiagnosticEpisodes;
   readonly kind: StreamingLayerKind;
   readonly allowChildren: boolean;
   readonly depthBias: boolean;
@@ -80,7 +79,6 @@ export function registerStreamingLayer(layer: HTMLElement, options: StreamingLay
     buffer: createVertexStreamBuffer(options),
     childError: false,
     depthBias: options.depthBias ?? false,
-    episodes: new DiagnosticEpisodes(),
     kind: options.kind,
     pickable: options.pickable ?? true,
     source: null,
@@ -258,7 +256,7 @@ export function isStreamingLayerRegistered(layer: HTMLElement): boolean {
 
 function reconcileChildren(layer: HTMLElement, state: StreamingLayerState): void {
   state.childError = !state.allowChildren && layer.children.length > 0;
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: state.childError,
     code: LAYER_CHILD,
     element: layer,
@@ -271,7 +269,7 @@ function reconcileChildren(layer: HTMLElement, state: StreamingLayerState): void
 function updateDataDiagnostics(layer: HTMLElement, state: StreamingLayerState): void {
   const issues = state.buffer.getIssues();
   for (const code of [LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID, TRIANGLES_COUNT] as const) {
-    state.episodes.update({
+    diagnosticReporterService.update({
       active: issues.has(code) || (code === LAYOUT_VALUE_INVALID && state.publicationError),
       code,
       element: layer,
@@ -284,7 +282,7 @@ function updateDataDiagnostics(layer: HTMLElement, state: StreamingLayerState): 
       severity: 'error'
     });
   }
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: !lineCountIsValidForState(state),
     code: LINES_COUNT,
     element: layer,

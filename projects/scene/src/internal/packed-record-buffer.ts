@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { parseCSSColor } from './color.js';
+import { parseCSSColor } from './utils/color.js';
 import {
   PACKED_RECORD_SOURCE,
   PACKED_RECORD_STATE,

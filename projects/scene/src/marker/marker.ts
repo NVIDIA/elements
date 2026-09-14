@@ -8,7 +8,7 @@ import { activateSceneMarker } from '../internal/markers/interaction.js';
 import { notifyOwningMarkerLayer } from '../internal/markers/layer-notifications.js';
 import { registerMarkerState, validateMarkerParent } from '../internal/markers/state.js';
 import type { Quaternion, Vec3 } from '../internal/types.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-marker

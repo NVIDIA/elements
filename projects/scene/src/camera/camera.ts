@@ -19,7 +19,7 @@ import {
   recordCameraInputAssignment,
   registerCameraInput
 } from '../internal/camera/input.js';
-import { DiagnosticEpisodes } from '../internal/diagnostic-episodes.js';
+import { diagnosticReporterService } from '../internal/services/diagnostic-reporter.service.js';
 import {
   DEFAULT_FAR,
   DEFAULT_NEAR,
@@ -30,7 +30,7 @@ import {
 import { normalizeQuaternion } from '../internal/math/quaternion.js';
 import type { Quaternion, ScenePose, Vec3 } from '../internal/types.js';
 import { notifyOwningScene } from '../internal/scene/notifications.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 export type SceneCameraBehavior = 'orbit' | 'follow' | 'top' | 'pose';
 export type SceneCameraFollowMode = 'position' | 'pose';
@@ -87,7 +87,6 @@ type CameraBehaviorContribution =
 interface CameraBehaviorState {
   configured: boolean;
   conflicted: boolean;
-  readonly diagnostics: DiagnosticEpisodes;
   frameResolved: boolean;
 }
 
@@ -468,7 +467,7 @@ export const sceneCameraController = {
   setConflict(camera: SceneCamera, active: boolean): void {
     const state = getCameraBehaviorState(camera);
     state.conflicted = active;
-    state.diagnostics.update({
+    diagnosticReporterService.update({
       active,
       code: CAMERA_SLOT_CONFLICT,
       element: camera,
@@ -480,7 +479,7 @@ export const sceneCameraController = {
   setFrameResolved(camera: SceneCamera, resolved: boolean): void {
     const state = getCameraBehaviorState(camera);
     state.frameResolved = resolved;
-    state.diagnostics.update({
+    diagnosticReporterService.update({
       active: !resolved,
       code: CAMERA_FRAME_UNRESOLVED,
       element: camera,
@@ -496,7 +495,6 @@ function getCameraBehaviorState(camera: SceneCamera): CameraBehaviorState {
     state = {
       configured: true,
       conflicted: false,
-      diagnostics: new DiagnosticEpisodes(),
       frameResolved: true
     };
     cameraBehaviorStates.set(camera, state);
@@ -661,12 +659,11 @@ function getTopAltitude(camera: SceneCamera): number {
 }
 
 function updateCompatibilityDiagnostics(camera: SceneCamera): void {
-  const state = getCameraBehaviorState(camera);
   for (const [name, behaviors] of Object.entries(SCENE_CAMERA_PROPERTY_BEHAVIORS)) {
     const propertyName = name as CameraPropertyName;
     const compatibleBehaviors = behaviors as readonly SceneCameraBehavior[];
     const active = isExplicit(camera, propertyName) && !compatibleBehaviors.includes(camera.behavior);
-    state.diagnostics.update({
+    diagnosticReporterService.update({
       active,
       code: CAMERA_PROPERTY_INACTIVE,
       element: camera,
@@ -735,7 +732,7 @@ function updateCameraBehaviorDiagnostic(
     readonly severity?: 'error' | 'warning';
   }
 ): void {
-  getCameraBehaviorState(camera).diagnostics.update({
+  diagnosticReporterService.update({
     active: options.active,
     code: options.code,
     element: camera,

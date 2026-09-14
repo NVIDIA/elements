@@ -5,7 +5,7 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import { StreamingLayerElement } from '../internal/streaming-layer-element.js';
 import { TRIANGLE_VERTEX } from '../internal/layouts/built-ins.js';
 import type { TriangleVertexSource } from '../internal/triangles/buffer.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-triangles

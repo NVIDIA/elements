@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { MARKER_PARENT, MARKER_VALUE } from '../../errors.js';
-import { parseCSSColor } from '../color.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { parseCSSColor } from '../utils/color.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import type { MarkerFields } from '../layouts/helpers.js';
 import { normalizeQuaternion } from '../math/quaternion.js';
 import type { Quaternion, Vec3 } from '../types.js';
@@ -11,7 +11,6 @@ import { isMarkerInstanceLayerTag } from '../layer-tags.js';
 
 interface MarkerState {
   color?: CachedColor;
-  readonly episodes: DiagnosticEpisodes;
   outlineColor?: CachedColor;
 }
 
@@ -23,13 +22,13 @@ interface CachedColor {
 const markerStates = new WeakMap<HTMLElement, MarkerState>();
 
 export function registerMarkerState(marker: HTMLElement): void {
-  markerStates.set(marker, { episodes: new DiagnosticEpisodes() });
+  markerStates.set(marker, {});
 }
 
 export function compileMarker(marker: HTMLElement): MarkerFields | null {
   const state = getMarkerState(marker);
   const validParent = isInstanceLayer(marker.parentElement);
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: marker,
     code: MARKER_PARENT,
     active: !validParent,
@@ -43,9 +42,9 @@ export function compileMarker(marker: HTMLElement): MarkerFields | null {
   const color = readColor(state, 'color', readString(marker, 'color', '#ffffff'));
   const outlineColor = readColor(state, 'outlineColor', readString(marker, 'outlineColor', 'transparent'));
   if (!color || !outlineColor) {
-    return rejectMarkerValue(marker, state, 'Scene marker colors must be supported CSS color values.');
+    return rejectMarkerValue(marker, 'Scene marker colors must be supported CSS color values.');
   }
-  return compileTransform({ marker, state, color, outlineColor });
+  return compileTransform({ marker, color, outlineColor });
 }
 
 function readColor(state: MarkerState, key: 'color' | 'outlineColor', source: string): MarkerFields['color'] | null {
@@ -57,8 +56,7 @@ function readColor(state: MarkerState, key: 'color' | 'outlineColor', source: st
 }
 
 export function validateMarkerParent(marker: HTMLElement): void {
-  const state = getMarkerState(marker);
-  state.episodes.update({
+  diagnosticReporterService.update({
     element: marker,
     code: MARKER_PARENT,
     active: !isInstanceLayer(marker.parentElement),
@@ -69,32 +67,27 @@ export function validateMarkerParent(marker: HTMLElement): void {
 
 function compileTransform(options: {
   marker: HTMLElement;
-  state: MarkerState;
   color: MarkerFields['color'];
   outlineColor: MarkerFields['outlineColor'];
 }): MarkerFields | null {
-  const { marker, state, color, outlineColor } = options;
+  const { marker, color, outlineColor } = options;
   const position = readVec3(marker, 'position', [0, 0, 0]);
   const orientation = readQuaternion(marker, 'orientation', [0, 0, 0, 1]);
   const scale = readVec3(marker, 'scale', [1, 1, 1]);
   if (!position || !orientation || !scale || Math.hypot(...orientation) === 0) {
-    return rejectMarkerValue(
-      marker,
-      state,
-      'Scene marker transforms must contain finite values and a nonzero quaternion.'
-    );
+    return rejectMarkerValue(marker, 'Scene marker transforms must contain finite values and a nonzero quaternion.');
   }
-  clearMarkerValue(marker, state);
+  clearMarkerValue(marker);
   return { position, orientation: normalizeQuaternion(orientation), scale, color, outlineColor };
 }
 
-function rejectMarkerValue(marker: HTMLElement, state: MarkerState, message: string): null {
-  state.episodes.update({ element: marker, code: MARKER_VALUE, active: true, message, severity: 'error' });
+function rejectMarkerValue(marker: HTMLElement, message: string): null {
+  diagnosticReporterService.update({ element: marker, code: MARKER_VALUE, active: true, message, severity: 'error' });
   return null;
 }
 
-function clearMarkerValue(marker: HTMLElement, state: MarkerState): void {
-  state.episodes.update({
+function clearMarkerValue(marker: HTMLElement): void {
+  diagnosticReporterService.update({
     element: marker,
     code: MARKER_VALUE,
     active: false,

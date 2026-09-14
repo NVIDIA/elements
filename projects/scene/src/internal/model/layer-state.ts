@@ -11,7 +11,7 @@ import {
   type ModelPart,
   type NormalizedModelPart
 } from './compile.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
 import { getLayerInstances } from '../markers/layer-state.js';
 import type { Quaternion, Vec3 } from '../types.js';
@@ -20,7 +20,6 @@ import { SCENE_MARKER_TAG, SCENE_PART_TAG } from '../layer-tags.js';
 
 interface ModelLayerState {
   compiled: ReturnType<typeof compileParts>;
-  episodes: DiagnosticEpisodes;
   geometryError: boolean;
   observer?: MutationObserver;
   parts: NormalizedModelPart[] | null;
@@ -34,7 +33,6 @@ const states = new WeakMap<HTMLElement, ModelLayerState>();
 export function registerModelLayer(layer: HTMLElement): void {
   states.set(layer, {
     compiled: compileParts([]),
-    episodes: new DiagnosticEpisodes(),
     geometryError: false,
     parts: null,
     topologyVersion: 0,
@@ -161,7 +159,7 @@ function replaceCompiled(state: ModelLayerState, compiled: ReturnType<typeof com
 }
 
 function updateDualSource(layer: HTMLElement, state: ModelLayerState): void {
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: state.parts !== null && [...layer.children].some(isPartElement),
     code: MODEL_DUAL_SOURCE,
     element: layer,
@@ -227,7 +225,7 @@ function updatePartAggregateError(part: HTMLElement, active: boolean): void {
 }
 
 function updatePartError(part: HTMLElement, state: PartErrorState): void {
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: state.invalid || state.aggregate,
     code: PART_SHAPE,
     element: part,
@@ -238,7 +236,6 @@ function updatePartError(part: HTMLElement, state: PartErrorState): void {
 
 interface PartErrorState {
   aggregate: boolean;
-  episodes: DiagnosticEpisodes;
   invalid: boolean;
 }
 
@@ -246,7 +243,7 @@ const partErrorStates = new WeakMap<HTMLElement, PartErrorState>();
 function getPartErrorState(part: HTMLElement): PartErrorState {
   let state = partErrorStates.get(part);
   if (!state) {
-    state = { aggregate: false, episodes: new DiagnosticEpisodes(), invalid: false };
+    state = { aggregate: false, invalid: false };
     partErrorStates.set(part, state);
   }
   return state;

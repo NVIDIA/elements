@@ -127,6 +127,9 @@ describe(ScenePolygon.metadata.tag, () => {
     expect(polygon.geometry?.outer).toHaveLength(4);
     expect(takeMarkerLayerRenderData(polygon)).toMatchObject({ count: 1, ready: true });
     expect(takePolygonLayerRenderData(polygon).identityInstance).toBe(false);
+    polygon.color = 'rebeccapurple';
+    await elementIsStable(polygon);
+    expect(polygon.getAttribute('color')).toBe('white');
   });
 
   it('should emit one recoverable diagnostic episode and render nothing for invalid geometry', async () => {

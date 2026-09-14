@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { POLYGON_GEOMETRY } from '../../errors.js';
-import { sameRGBA } from '../color.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { sameRGBA } from '../utils/color.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import { notifyOwningScene } from '../scene/notifications.js';
 import { getLayerCount, getLayerInstances } from '../markers/layer-state.js';
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/layer-state.js';
@@ -15,7 +15,6 @@ interface PolygonState {
   color: RGBA;
   compiled: CompiledPolygon | null;
   geometryError: boolean;
-  episodes: DiagnosticEpisodes;
   topologyVersion: number;
   version: number;
 }
@@ -27,7 +26,6 @@ export function registerPolygonLayer(layer: HTMLElement, color: RGBA): void {
     color,
     compiled: null,
     geometryError: false,
-    episodes: new DiagnosticEpisodes(),
     topologyVersion: 0,
     version: 0
   });
@@ -51,7 +49,7 @@ export function setPolygonLayerGeometry(layer: HTMLElement, value: unknown): voi
     }
   }
   if (!sameTopology(previous, state.compiled)) state.topologyVersion += 1;
-  state.episodes.update({
+  diagnosticReporterService.update({
     active: state.geometryError,
     code: POLYGON_GEOMETRY,
     element: layer,

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { FRAME_NAME_DUPLICATE } from '../../errors.js';
-import { DiagnosticEpisodes } from '../diagnostic-episodes.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
 import {
   getFrameName,
   getFrameVersion,
@@ -23,7 +23,6 @@ import {
 
 export class SceneContent {
   #duplicateFrames = new Set<HTMLElement>();
-  readonly #duplicateFrameEpisodes = new WeakMap<HTMLElement, DiagnosticEpisodes>();
   #frames: HTMLElement[] = [];
   #frameVersions = new WeakMap<HTMLElement, number>();
   readonly #host: HTMLElement;
@@ -32,14 +31,6 @@ export class SceneContent {
 
   constructor(host: HTMLElement) {
     this.#host = host;
-  }
-
-  get frames(): readonly HTMLElement[] {
-    return this.#frames;
-  }
-
-  get layers(): readonly HTMLElement[] {
-    return this.#layers;
   }
 
   ownsNode(node: Node): boolean {
@@ -126,12 +117,7 @@ export class SceneContent {
   }
 
   #updateDuplicateFrameEpisode(frame: HTMLElement, active: boolean): void {
-    let episodes = this.#duplicateFrameEpisodes.get(frame);
-    if (!episodes) {
-      episodes = new DiagnosticEpisodes();
-      this.#duplicateFrameEpisodes.set(frame, episodes);
-    }
-    episodes.update({
+    diagnosticReporterService.update({
       active,
       code: FRAME_NAME_DUPLICATE,
       element: frame,

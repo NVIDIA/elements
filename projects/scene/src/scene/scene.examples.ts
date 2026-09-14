@@ -133,7 +133,7 @@ export const Default = {
       import '@nvidia-elements/scene/axes/define.js';
 
       const labels = new LabelBuffer({ capacity: 1 });
-      labels.add({ text: 'simple rover', position: [0, 0, 2], scale: 18, color: 'white' });
+      labels.add({ text: 'label', position: [0, 0, 2], scale: 18, color: 'white' });
       document.querySelector('#basic-labels').source = labels;
 
       const terrain = document.querySelector('#basic-terrain');

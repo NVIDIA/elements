@@ -5,7 +5,7 @@ import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { FRAME_TRANSFORM } from '../errors.js';
-import { DiagnosticEpisodes } from '../internal/diagnostic-episodes.js';
+import { diagnosticReporterService } from '../internal/services/diagnostic-reporter.service.js';
 import {
   clearFrameTransform,
   getFramePose,
@@ -18,7 +18,7 @@ import {
 } from '../internal/frame/state.js';
 import type { Matrix4, Quaternion, ScenePose, Vec3 } from '../internal/types.js';
 import { transformPointMat4 } from '../internal/math/mat4.js';
-import styles from '../internal/host.css?inline';
+import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-frame
@@ -39,7 +39,6 @@ export class SceneFrame extends LitElement {
 
   #declarativeTransform = false;
   #explicitAuthority = false;
-  readonly #transformEpisodes = new DiagnosticEpisodes();
 
   /** Identifies the frame for scene-local lookup. */
   @property({ type: String }) name: string | null = null;
@@ -152,7 +151,7 @@ export class SceneFrame extends LitElement {
   }
 
   #dispatchTransformError(): void {
-    this.#transformEpisodes.update({
+    diagnosticReporterService.update({
       active: true,
       code: FRAME_TRANSFORM,
       element: this,
@@ -162,7 +161,7 @@ export class SceneFrame extends LitElement {
   }
 
   #clearTransformError(): void {
-    this.#transformEpisodes.update({
+    diagnosticReporterService.update({
       active: false,
       code: FRAME_TRANSFORM,
       element: this,

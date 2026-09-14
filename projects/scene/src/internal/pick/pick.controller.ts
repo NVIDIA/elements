@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { UnhandledPointerInput } from '@nvidia-elements/core/internal';
+import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import { PickCoordinator, type PickCompletion } from './coordinator.js';
 import { registerSceneMarkerInteractionController } from '../markers/interaction.js';
 import {
@@ -15,14 +16,15 @@ import {
 import { isInteractiveLayer } from '../interaction.js';
 import { isCurrentMarkerLayerMarker } from '../markers/layer-state.js';
 
-export class ScenePicking {
+type PickHost = HTMLElement & ReactiveControllerHost & { readonly ready: Promise<void> };
+
+export class PickController implements ReactiveController {
+  #canvas?: HTMLCanvasElement;
   #coordinator: PickCoordinator<ScenePickHit>;
   #epoch = 0;
-  readonly #getCanvas: () => HTMLCanvasElement | undefined;
   readonly #driver: ScenePickDriver;
   readonly #hasInteractiveTargets: () => boolean;
-  readonly #getReady: () => Promise<void>;
-  readonly #host: HTMLElement;
+  readonly #host: PickHost;
   #hoverHit: ScenePickHit | null = null;
   #invalidation = new DOMException('The scene is unavailable for picking.', 'AbortError');
   #markerInteractionCleanup?: () => void;
@@ -32,28 +34,27 @@ export class ScenePicking {
 
   constructor(options: {
     readonly driver: ScenePickDriver;
-    readonly getCanvas: () => HTMLCanvasElement | undefined;
-    readonly getReady: () => Promise<void>;
     readonly hasInteractiveTargets: () => boolean;
-    readonly host: HTMLElement;
+    readonly host: PickHost;
   }) {
     this.#driver = options.driver;
-    this.#getCanvas = options.getCanvas;
-    this.#getReady = options.getReady;
     this.#hasInteractiveTargets = options.hasInteractiveTargets;
     this.#host = options.host;
     this.#coordinator = this.#createCoordinator();
+    options.host.addController(this);
   }
 
-  connect(): void {
-    this.#coordinator = this.#createCoordinator();
+  hostConnected(): void {
+    this.#host.addEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
     this.#markerInteractionCleanup = registerSceneMarkerInteractionController(this.#host, {
       activateMarker: (marker, event) => this.#activateMarker(marker, event)
     });
   }
 
-  disconnect(reason: DOMException): void {
-    this.invalidate(reason);
+  hostDisconnected(): void {
+    this.#host.removeEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
+    this.#unbindCanvas();
+    this.invalidate(new DOMException('The scene disconnected while picking.', 'AbortError'));
     this.#markerInteractionCleanup?.();
     this.#markerInteractionCleanup = undefined;
   }
@@ -71,9 +72,17 @@ export class ScenePicking {
     return this.#createResolver(clientX, clientY, 'all')();
   }
 
+  bindCanvas(canvas: HTMLCanvasElement): void {
+    if (canvas === this.#canvas) return;
+    this.#unbindCanvas();
+    this.#canvas = canvas;
+    canvas.addEventListener('pointerleave', this.#handlePointerExit);
+    canvas.addEventListener('pointercancel', this.#handlePointerExit);
+  }
+
   handleUnhandledPointer(input: UnhandledPointerInput): void {
     if (input.kind === 'lostpointercapture' || input.kind === 'pointercancel') {
-      this.handlePointerExit(input.event);
+      this.#handlePointerExit(input.event);
       return;
     }
     if (!this.#hasInteractiveTargets()) {
@@ -99,13 +108,13 @@ export class ScenePicking {
   }
 
   /** Cancels stale hover readback and leaves the current hit when the pointer exits the canvas. */
-  handlePointerExit(event: PointerEvent): void {
+  #handlePointerExit = (event: PointerEvent): void => {
     if (isInsideScene(this.#host, event.relatedTarget)) return;
     this.#coordinator.cancelHover();
     const previous = this.#hoverHit;
     this.#hoverHit = null;
     if (previous) this.#dispatchHoverEvent('leave', event, previous);
-  }
+  };
 
   reconcileInteractionAvailability(): void {
     if (!this.#hasInteractiveTargets()) this.#resetAutomaticInteraction();
@@ -118,6 +127,16 @@ export class ScenePicking {
     this.#pendingEvents.clear();
     this.#hoverHit = null;
     this.#coordinator = this.#createCoordinator();
+  }
+
+  #handlePointerInput = (event: CustomEvent<UnhandledPointerInput>): void => {
+    this.handleUnhandledPointer(event.detail);
+  };
+
+  #unbindCanvas(): void {
+    this.#canvas?.removeEventListener('pointerleave', this.#handlePointerExit);
+    this.#canvas?.removeEventListener('pointercancel', this.#handlePointerExit);
+    this.#canvas = undefined;
   }
 
   #queuePointer(
@@ -141,11 +160,11 @@ export class ScenePicking {
 
   #createResolver(clientX: number, clientY: number, scope: PickScope): () => Promise<ScenePickHit | null> {
     const epoch = this.#epoch;
-    const ready = this.#getReady();
+    const ready = this.#host.ready;
     return () =>
       ready.then(() => {
         this.#assertEpoch(epoch);
-        const canvas = this.#getCanvas();
+        const canvas = this.#canvas;
         if (!canvas) throw new DOMException('The scene canvas is unavailable.', 'InvalidStateError');
         return this.#resolve({ canvas, clientX, clientY, epoch, scope });
       });
