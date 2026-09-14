@@ -44,7 +44,6 @@ describe('DeferredResourceTask', () => {
     const value = resource();
     loaded.resolve(value);
     await first;
-    expect(task.status).toBe('ready');
     expect(value.activate).toHaveBeenCalledOnce();
     expect(onReady).toHaveBeenCalledOnce();
   });
@@ -62,10 +61,11 @@ describe('DeferredResourceTask', () => {
     await old;
     expect(oldResource.activate).not.toHaveBeenCalled();
     expect(oldResource.dispose).toHaveBeenCalledOnce();
-    expect(task.status).toBe('loading');
+    expect(task.start({ isCurrent: () => true, load: () => newLoad.promise, onFailure, onReady: vi.fn() })).toBe(
+      current
+    );
     newLoad.resolve(resource());
     await current;
-    expect(task.status).toBe('ready');
     expect(onFailure).not.toHaveBeenCalled();
   });
 
@@ -88,9 +88,12 @@ describe('DeferredResourceTask', () => {
     failed.activate.mockImplementation(() => {
       throw new Error('activate');
     });
-    await task.start({ isCurrent: () => true, load: async () => failed, onFailure: failures, onReady: vi.fn() });
-    expect(task.status).toBe('failed');
+    const failedLoad = vi.fn(async () => failed);
+    const failedOptions = { isCurrent: () => true, load: failedLoad, onFailure: failures, onReady: vi.fn() };
+    await task.start(failedOptions);
+    await task.start(failedOptions);
     expect(failed.dispose).toHaveBeenCalledOnce();
+    expect(failedLoad).toHaveBeenCalledOnce();
     expect(failures).toHaveBeenCalledOnce();
   });
 
@@ -116,7 +119,6 @@ describe('DeferredResourceTask', () => {
       onFailure: vi.fn(),
       onReady: nextReady
     });
-    expect(invalidated.status).toBe('loading');
     expect(nextReady).not.toHaveBeenCalled();
     invalidated.reset();
     expect(activating.dispose).toHaveBeenCalledOnce();
@@ -150,6 +152,8 @@ describe('DeferredResourceTask', () => {
     await task.start({ isCurrent: () => true, load: async () => failing, onFailure: failures, onReady: vi.fn() });
     expect(failing.dispose).toHaveBeenCalledOnce();
     expect(failures).not.toHaveBeenCalled();
-    expect(task.status).toBe('idle');
+    const replacement = resource();
+    await task.start({ isCurrent: () => true, load: async () => replacement, onFailure: failures, onReady: vi.fn() });
+    expect(replacement.activate).toHaveBeenCalledOnce();
   });
 });

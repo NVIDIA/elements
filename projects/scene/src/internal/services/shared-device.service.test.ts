@@ -3,10 +3,10 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { configureSceneTesting, resetSceneTesting } from '../testing.js';
-import { sharedDeviceManager, type SharedDeviceListener } from './device-manager.js';
-import type { SceneGPUAdapter, SceneGPUDevice, SceneGPUDeviceLostInfo } from './platform.js';
+import type { SceneGPUAdapter, SceneGPUDevice, SceneGPUDeviceLostInfo } from '../gpu/platform.js';
+import { sharedDeviceService, type SharedDeviceListener } from './shared-device.service.js';
 
-describe('sharedDeviceManager', () => {
+describe('sharedDeviceService', () => {
   afterEach(() => {
     resetSceneTesting();
     vi.restoreAllMocks();
@@ -20,13 +20,13 @@ describe('sharedDeviceManager', () => {
         .mockRejectedValueOnce(new Error('request failed'))
         .mockResolvedValueOnce(device)
     };
-    configureManagerPlatform(adapter);
+    configureServicePlatform(adapter);
 
-    const first = sharedDeviceManager.acquire();
+    const first = sharedDeviceService.acquire();
     await expect(first).rejects.toThrow('request failed');
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ hasDevice: false, requestDeviceCount: 1 });
+    expect(adapter.requestDevice).toHaveBeenCalledOnce();
 
-    const second = sharedDeviceManager.acquire();
+    const second = sharedDeviceService.acquire();
     expect(second).not.toBe(first);
     await expect(second).resolves.toMatchObject({ device, format: 'bgra8unorm' });
     expect(adapter.requestDevice).toHaveBeenCalledTimes(2);
@@ -41,11 +41,11 @@ describe('sharedDeviceManager', () => {
         .mockReturnValueOnce(firstRequest.promise)
         .mockReturnValueOnce(secondRequest.promise)
     };
-    configureManagerPlatform(adapter);
+    configureServicePlatform(adapter);
 
-    const superseded = sharedDeviceManager.acquire();
-    sharedDeviceManager.reset();
-    const current = sharedDeviceManager.acquire();
+    const superseded = sharedDeviceService.acquire();
+    sharedDeviceService.reset();
+    const current = sharedDeviceService.acquire();
 
     const staleDevice = createFakeDevice();
     firstRequest.resolve(staleDevice);
@@ -55,7 +55,7 @@ describe('sharedDeviceManager', () => {
     const currentDevice = createFakeDevice();
     secondRequest.resolve(currentDevice);
     await expect(current).resolves.toMatchObject({ device: currentDevice, format: 'bgra8unorm' });
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ hasDevice: true });
+    expect(adapter.requestDevice).toHaveBeenCalledTimes(2);
   });
 
   it('ignores loss notifications from stale devices after a newer device is active', async () => {
@@ -67,13 +67,13 @@ describe('sharedDeviceManager', () => {
         .mockResolvedValueOnce(staleDevice)
         .mockResolvedValueOnce(currentDevice)
     };
-    configureManagerPlatform(adapter);
+    configureServicePlatform(adapter);
     const listener = createListener();
 
-    await sharedDeviceManager.acquire();
-    sharedDeviceManager.reset();
-    sharedDeviceManager.subscribe(listener);
-    await sharedDeviceManager.acquire();
+    await sharedDeviceService.acquire();
+    sharedDeviceService.reset();
+    sharedDeviceService.subscribe(listener);
+    await sharedDeviceService.acquire();
 
     staleDevice.lose({ message: 'stale loss', reason: 'unknown' });
     await Promise.resolve();
@@ -81,7 +81,8 @@ describe('sharedDeviceManager', () => {
     expect(listener.deviceLost).not.toHaveBeenCalled();
     expect(listener.deviceRecovered).not.toHaveBeenCalled();
     expect(listener.recoveryFailed).not.toHaveBeenCalled();
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ hasDevice: true });
+    await expect(sharedDeviceService.acquire()).resolves.toMatchObject({ device: currentDevice });
+    expect(adapter.requestDevice).toHaveBeenCalledTimes(2);
   });
 
   it('resumes blocked recovery for the listeners that were already subscribed when reconnect starts', async () => {
@@ -96,15 +97,15 @@ describe('sharedDeviceManager', () => {
         .mockResolvedValueOnce(secondDevice)
         .mockResolvedValueOnce(thirdDevice)
     };
-    configureManagerPlatform(adapter, { now: () => now });
+    configureServicePlatform(adapter, { now: () => now });
     const retainedA = createListener();
     const retainedB = createListener();
     const reconnecting = createListener();
-    sharedDeviceManager.subscribe(retainedA);
-    sharedDeviceManager.subscribe(retainedB);
-    const unsubscribeReconnecting = sharedDeviceManager.subscribe(reconnecting);
+    sharedDeviceService.subscribe(retainedA);
+    sharedDeviceService.subscribe(retainedB);
+    const unsubscribeReconnecting = sharedDeviceService.subscribe(reconnecting);
 
-    await sharedDeviceManager.acquire();
+    await sharedDeviceService.acquire();
     now = 1_500;
     firstDevice.lose({ message: 'first loss', reason: 'unknown' });
     await vi.waitFor(() => expect(retainedA.deviceRecovered).toHaveBeenCalledTimes(1));
@@ -115,16 +116,14 @@ describe('sharedDeviceManager', () => {
     now = 2_000;
     secondDevice.lose({ message: 'second loss', reason: 'unknown' });
     await vi.waitFor(() => expect(retainedA.deviceLost).toHaveBeenCalledTimes(2));
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ recoveryBlocked: true });
     expect(adapter.requestDevice).toHaveBeenCalledTimes(2);
 
     unsubscribeReconnecting();
     const lateSubscriber = createListener();
-    const recovery = sharedDeviceManager.resumeRecoveryAfterReconnect();
-    sharedDeviceManager.subscribe(lateSubscriber);
+    const recovery = sharedDeviceService.resumeRecoveryAfterReconnect();
+    sharedDeviceService.subscribe(lateSubscriber);
 
     await expect(recovery).resolves.toMatchObject({ device: thirdDevice, format: 'bgra8unorm' });
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ hasDevice: true, recoveryBlocked: false });
     expect(adapter.requestDevice).toHaveBeenCalledTimes(3);
     expect(retainedA.deviceRecovered).toHaveBeenCalledTimes(2);
     expect(retainedB.deviceRecovered).toHaveBeenCalledTimes(2);
@@ -144,24 +143,23 @@ describe('sharedDeviceManager', () => {
         .mockResolvedValueOnce(secondDevice)
         .mockResolvedValueOnce(thirdDevice)
     };
-    configureManagerPlatform(adapter, { now: () => now });
+    configureServicePlatform(adapter, { now: () => now });
     const listener = createListener();
-    sharedDeviceManager.subscribe(listener);
+    sharedDeviceService.subscribe(listener);
 
-    await sharedDeviceManager.acquire();
+    await sharedDeviceService.acquire();
     now = 1_500;
     firstDevice.lose({ message: 'first loss', reason: 'unknown' });
     await vi.waitFor(() => expect(listener.deviceRecovered).toHaveBeenCalledTimes(1));
     expect(adapter.requestDevice).toHaveBeenCalledTimes(2);
 
-    const healthyReconnect = await sharedDeviceManager.resumeRecoveryAfterReconnect();
+    const healthyReconnect = await sharedDeviceService.resumeRecoveryAfterReconnect();
     expect(healthyReconnect).toMatchObject({ device: secondDevice, format: 'bgra8unorm' });
     expect(listener.deviceRecovered).toHaveBeenCalledTimes(1);
 
     now = 2_000;
     secondDevice.lose({ message: 'second loss', reason: 'unknown' });
     await vi.waitFor(() => expect(adapter.requestDevice).toHaveBeenCalledTimes(3));
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ recoveryBlocked: false });
     await vi.waitFor(() => expect(listener.deviceRecovered).toHaveBeenCalledTimes(2));
     expect(listener.deviceRecovered).toHaveBeenLastCalledWith({ device: thirdDevice, format: 'bgra8unorm' });
     expect(listener.recoveryFailed).not.toHaveBeenCalled();
@@ -176,20 +174,20 @@ describe('sharedDeviceManager', () => {
         .mockResolvedValueOnce(firstDevice)
         .mockRejectedValueOnce(recoveryError)
     };
-    configureManagerPlatform(adapter, { now: () => 5_000 });
+    configureServicePlatform(adapter, { now: () => 5_000 });
     const listener = createListener();
-    sharedDeviceManager.subscribe(listener);
+    sharedDeviceService.subscribe(listener);
 
-    await sharedDeviceManager.acquire();
+    await sharedDeviceService.acquire();
     firstDevice.lose({ message: 'device lost', reason: 'unknown' });
 
     await vi.waitFor(() => expect(listener.recoveryFailed).toHaveBeenCalledWith(recoveryError));
     expect(listener.deviceRecovered).not.toHaveBeenCalled();
-    expect(sharedDeviceManager.getSnapshot()).toMatchObject({ hasDevice: false, recoveryBlocked: false });
+    expect(adapter.requestDevice).toHaveBeenCalledTimes(2);
   });
 });
 
-function configureManagerPlatform(adapter: SceneGPUAdapter, overrides: Partial<{ now: () => number }> = {}): void {
+function configureServicePlatform(adapter: SceneGPUAdapter, overrides: Partial<{ now: () => number }> = {}): void {
   configureSceneTesting({
     requestAdapter: async () => adapter,
     getPreferredCanvasFormat: () => 'bgra8unorm',

@@ -10,7 +10,6 @@ interface FrameState {
   localMatrix: PreciseMat4;
   pose: ScenePose | null;
   valid: boolean;
-  version: number;
 }
 
 const frameStates = new WeakMap<HTMLElement, FrameState>();
@@ -20,8 +19,7 @@ export function registerFrameState(frame: HTMLElement): void {
   frameStates.set(frame, {
     localMatrix: identityPreciseMat4(),
     pose: null,
-    valid: true,
-    version: 0
+    valid: true
   });
 }
 
@@ -29,8 +27,8 @@ export function isFrameStateRegistered(frame: HTMLElement): boolean {
   return frameStates.has(frame);
 }
 
-export function touchFrameState(frame: HTMLElement): void {
-  getFrameState(frame).version += 1;
+export function notifyFrameStateChange(frame: HTMLElement): void {
+  getFrameState(frame);
   notifyOwningScene(frame);
 }
 
@@ -40,7 +38,6 @@ export function setFrameTransform(frame: HTMLElement, transform: ScenePose): voi
   state.pose = normalized;
   state.localMatrix = composePreciseMat4(normalized.position, normalized.orientation);
   state.valid = true;
-  state.version += 1;
   notifyOwningScene(frame);
 }
 
@@ -50,7 +47,6 @@ export function clearFrameTransform(frame: HTMLElement): void {
     state.pose = null;
     state.localMatrix = identityPreciseMat4();
     state.valid = true;
-    state.version += 1;
     notifyOwningScene(frame);
   }
 }
@@ -59,7 +55,6 @@ export function invalidateFrameTransform(frame: HTMLElement): void {
   const state = getFrameState(frame);
   if (!state.valid) return;
   state.valid = false;
-  state.version += 1;
   notifyOwningScene(frame);
 }
 
@@ -81,10 +76,6 @@ export function isFrameChainValid(element: HTMLElement): boolean {
     current = current.parentElement;
   }
   return true;
-}
-
-export function getFrameVersion(frame: HTMLElement): number {
-  return getFrameState(frame).version;
 }
 
 export function getFrameWorldMatrix(frame: HTMLElement): Mat4 {

@@ -9,7 +9,6 @@ export class RecordSummary {
   readonly #channelCount: number;
   readonly #flagMask: number;
   #blockCount = 0;
-  #blockSums = new Uint16Array();
   #fenwick = new Uint32Array();
   #flags = new Uint8Array();
 
@@ -26,7 +25,6 @@ export class RecordSummary {
   clone(): RecordSummary {
     const clone = new RecordSummary(this.#bitCount);
     clone.#blockCount = this.#blockCount;
-    clone.#blockSums = this.#blockSums.slice();
     clone.#fenwick = this.#fenwick.slice();
     clone.#flags = this.#flags.slice();
     return clone;
@@ -41,12 +39,8 @@ export class RecordSummary {
       this.#flags = new Uint8Array(recordCount);
     } else this.#flags.fill(0);
     if (this.#blockCount !== blockCount) {
-      this.#blockSums = new Uint16Array(blockCount * this.#channelCount);
       this.#fenwick = new Uint32Array((blockCount + 1) * this.#channelCount);
-    } else {
-      this.#blockSums.fill(0);
-      this.#fenwick.fill(0);
-    }
+    } else this.#fenwick.fill(0);
     this.#blockCount = blockCount;
   }
 
@@ -55,44 +49,45 @@ export class RecordSummary {
   }
 
   finishInitialFlags(uniformFlags?: number): void {
-    this.#blockSums.fill(0);
     this.#fenwick.fill(0);
-    if (uniformFlags === undefined) this.#buildInitialBlockSums();
-    else this.#buildUniformBlockSums(uniformFlags);
+    if (uniformFlags === undefined) this.#buildInitialFenwickLeaves();
+    else this.#buildUniformFenwickLeaves(uniformFlags);
     this.#buildInitialFenwickTree();
   }
 
-  #buildUniformBlockSums(flags: number): void {
+  #buildUniformFenwickLeaves(flags: number): void {
     const resolvedFlags = flags & this.#flagMask;
     this.#flags.fill(resolvedFlags);
+    const stride = this.#blockCount + 1;
     let remaining = resolvedFlags;
     while (remaining !== 0) {
       const mask = remaining & -remaining;
       const bitIndex = 31 - Math.clz32(mask);
-      const allOffset = bitIndex * 2 * this.#blockCount;
-      const evenOffset = (bitIndex * 2 + 1) * this.#blockCount;
+      const allOffset = bitIndex * 2 * stride;
+      const evenOffset = (bitIndex * 2 + 1) * stride;
       for (let block = 0; block < this.#blockCount; block += 1) {
         const start = block * BLOCK_SIZE;
         const count = Math.min(BLOCK_SIZE, this.#flags.length - start);
-        this.#blockSums[allOffset + block] = count;
-        this.#blockSums[evenOffset + block] = Math.floor((count + (start % 2 === 0 ? 1 : 0)) / 2);
+        this.#fenwick[allOffset + block + 1] = count;
+        this.#fenwick[evenOffset + block + 1] = Math.floor((count + (start % 2 === 0 ? 1 : 0)) / 2);
       }
       remaining &= remaining - 1;
     }
   }
 
-  #buildInitialBlockSums(): void {
+  #buildInitialFenwickLeaves(): void {
+    const stride = this.#blockCount + 1;
     for (let index = 0; index < this.#flags.length; index += 1) {
-      const block = Math.floor(index / BLOCK_SIZE);
+      const block = Math.floor(index / BLOCK_SIZE) + 1;
       let remaining = (this.#flags[index] ?? 0) & this.#flagMask;
       while (remaining !== 0) {
         const mask = remaining & -remaining;
         const bitIndex = 31 - Math.clz32(mask);
-        const allIndex = bitIndex * 2 * this.#blockCount + block;
-        this.#blockSums[allIndex] = (this.#blockSums[allIndex] ?? 0) + 1;
+        const allIndex = bitIndex * 2 * stride + block;
+        this.#fenwick[allIndex] = (this.#fenwick[allIndex] ?? 0) + 1;
         if (index % 2 === 0) {
-          const evenIndex = (bitIndex * 2 + 1) * this.#blockCount + block;
-          this.#blockSums[evenIndex] = (this.#blockSums[evenIndex] ?? 0) + 1;
+          const evenIndex = (bitIndex * 2 + 1) * stride + block;
+          this.#fenwick[evenIndex] = (this.#fenwick[evenIndex] ?? 0) + 1;
         }
         remaining &= remaining - 1;
       }
@@ -103,10 +98,7 @@ export class RecordSummary {
     const stride = this.#blockCount + 1;
     for (let channel = 0; channel < this.#channelCount; channel += 1) {
       const treeOffset = channel * stride;
-      const blockOffset = channel * this.#blockCount;
       for (let block = 1; block <= this.#blockCount; block += 1) {
-        const value = this.#blockSums[blockOffset + block - 1] ?? 0;
-        this.#fenwick[treeOffset + block] = (this.#fenwick[treeOffset + block] ?? 0) + value;
         const parent = block + (block & -block);
         if (parent <= this.#blockCount) {
           this.#fenwick[treeOffset + parent] =
@@ -148,8 +140,6 @@ export class RecordSummary {
 
   #adjustChannel(channel: number, index: number, delta: number): void {
     const block = Math.floor(index / BLOCK_SIZE);
-    const blockIndex = channel * this.#blockCount + block;
-    this.#blockSums[blockIndex] = (this.#blockSums[blockIndex] ?? 0) + delta;
     const stride = this.#blockCount + 1;
     const treeOffset = channel * stride;
     for (let cursor = block + 1; cursor <= this.#blockCount; cursor += cursor & -cursor) {

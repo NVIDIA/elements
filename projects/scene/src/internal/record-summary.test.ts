@@ -43,6 +43,23 @@ describe('record summary', () => {
     expect(summary.has(2, 258, true)).toBe(false);
   });
 
+  it('should build and update prefix indexes spanning multiple complete blocks', () => {
+    const summary = new RecordSummary(3);
+    summary.reset(769);
+    summary.setInitialFlags(255, 1);
+    summary.setInitialFlags(512, 2);
+    summary.setInitialFlags(767, 4);
+    summary.finishInitialFlags();
+
+    expect(summary.has(1, 512)).toBe(true);
+    expect(summary.has(2, 512)).toBe(false);
+    expect(summary.has(2, 513, true)).toBe(true);
+    expect(summary.has(4, 768)).toBe(true);
+
+    expect(summary.updateFlags(767, 0)).toBe(true);
+    expect(summary.has(4, 768)).toBe(false);
+  });
+
   it('should reset reused storage and clone summaries independently', () => {
     const summary = new RecordSummary(2);
     summary.reset(258);

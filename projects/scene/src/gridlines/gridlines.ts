@@ -1,14 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { LitElement, nothing, type PropertyValues } from 'lit';
+import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/utils/color.js';
 import { createGridVertices, gridVertexCount, MAX_GRID_COUNT } from './utils.js';
 import {
-  connectStreamingLayer,
-  disconnectStreamingLayer,
+  reconcileStreamingLayerChildren,
   registerStreamingLayer,
   setStreamingLayerCount,
   setStreamingLayerSource
@@ -119,7 +118,6 @@ export class SceneGridlines extends LitElement {
   constructor() {
     super();
     registerStreamingLayer(this, {
-      allowChildren: false,
       depthBias: true,
       kind: 'line',
       layout: LINE_VERTEX,
@@ -131,17 +129,7 @@ export class SceneGridlines extends LitElement {
   }
 
   render() {
-    return nothing;
-  }
-
-  override connectedCallback(): void {
-    super.connectedCallback();
-    connectStreamingLayer(this);
-  }
-
-  override disconnectedCallback(): void {
-    disconnectStreamingLayer(this);
-    super.disconnectedCallback();
+    return html`<slot hidden @slotchange=${this.#handleSlotChange}></slot>`;
   }
 
   protected override willUpdate(changed: PropertyValues<this>): void {
@@ -161,6 +149,10 @@ export class SceneGridlines extends LitElement {
     const source = createLineVertexSource({ bytes, count });
     setStreamingLayerSource(this, source);
     setStreamingLayerCount(this, count);
+  }
+
+  #handleSlotChange(): void {
+    reconcileStreamingLayerChildren(this);
   }
 }
 

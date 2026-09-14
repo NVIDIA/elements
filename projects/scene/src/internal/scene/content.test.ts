@@ -38,7 +38,6 @@ describe(SceneContent.name, () => {
     expect(content.compileRenderItems()).toEqual([]);
     hidden.remove();
     content.refresh();
-    expect(content.trackChanges()).toBe(false);
   });
 
   it('tracks ownership for elements, text nodes, and unrelated nodes', () => {
@@ -54,16 +53,15 @@ describe(SceneContent.name, () => {
     expect(content.ownsNode(outside)).toBe(false);
   });
 
-  it('reports no changes when no registered frames or layers exist', () => {
+  it('resolves frames when no registered frames or layers exist', () => {
     const content = new SceneContent(document.createElement('nve-scene'));
 
     content.refresh();
 
-    expect(content.trackChanges()).toBe(false);
     content.resolveFrames();
   });
 
-  it('tracks registered marker and streaming layers until their versions settle', () => {
+  it('compiles registered marker and streaming layers', () => {
     const host = document.createElement('nve-scene');
     const cubes = document.createElement('nve-scene-cubes');
     const points = document.createElement('nve-scene-points');
@@ -73,8 +71,6 @@ describe(SceneContent.name, () => {
 
     content.refresh();
 
-    expect(content.trackChanges()).toBe(true);
-    expect(content.trackChanges()).toBe(false);
     expect(content.compileRenderItems().map(item => item.interactive)).toEqual([true, false]);
   });
 

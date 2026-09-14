@@ -24,7 +24,6 @@ import {
 import {
   configureSceneTesting,
   getNamedSceneFrameForTesting,
-  getSceneTestingSnapshot,
   resetSceneTesting,
   type SceneGPUCanvasContext,
   type SceneGPUDevice,
@@ -301,7 +300,7 @@ describe(Scene.metadata.tag, () => {
 
     gpu.resolveNextDevice();
     await reconnectedReady;
-    expect(getSceneTestingSnapshot().requestDeviceCount).toBe(1);
+    expect(gpu.requestDeviceCount).toBe(1);
   });
 
   it('should stop initialization when disconnected before the first render completes', async () => {
@@ -350,7 +349,7 @@ describe(Scene.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.ready).not.toBe(firstReady);
     await element.ready;
-    expect(getSceneTestingSnapshot()).toMatchObject({ requestDeviceCount: 1, hasDevice: true });
+    expect(gpu.requestDeviceCount).toBe(1);
   });
 
   it('should share one device while keeping per-scene contexts and clears', async () => {
@@ -373,7 +372,7 @@ describe(Scene.metadata.tag, () => {
     gpu.resolveNextDevice();
     await Promise.all(scenes.map(scene => scene.ready));
 
-    expect(getSceneTestingSnapshot().requestDeviceCount).toBe(1);
+    expect(gpu.requestDeviceCount).toBe(1);
     expect(gpu.contexts).toHaveLength(9);
     expect(scenes.slice(0, 2).map(scene => globalThis.getComputedStyle(scene).backgroundColor)).toEqual([
       'rgb(255, 0, 0)',
@@ -855,7 +854,7 @@ describe(Scene.metadata.tag, () => {
     await initialReady;
 
     gpu.devices[0]?.lose({ message: 'first loss', reason: 'unknown' });
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().requestDeviceCount).toBe(2));
+    await vi.waitFor(() => expect(gpu.requestDeviceCount).toBe(2));
     const recoveryReady = element.ready;
     expect(recoveryReady).not.toBe(initialReady);
     await element.updateComplete;
@@ -865,20 +864,22 @@ describe(Scene.metadata.tag, () => {
     await recoveryReady;
     expect(errorCodes).toEqual(['device-lost']);
 
+    const recoveredReady = element.ready;
     gpu.devices[1]?.lose({ message: 'second loss', reason: 'unknown' });
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().recoveryBlocked).toBe(true));
+    await vi.waitFor(() => expect(element.ready).not.toBe(recoveredReady));
+    expect(gpu.requestDeviceCount).toBe(2);
     const blockedReady = element.ready;
     element.remove();
     await expect(blockedReady).rejects.toMatchObject({ name: 'AbortError' });
     fixture.append(element);
     await elementIsStable(element);
     const reconnectReady = element.ready;
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().requestDeviceCount).toBe(3));
+    await vi.waitFor(() => expect(gpu.requestDeviceCount).toBe(3));
     gpu.resolveNextDevice();
     await reconnectReady;
 
     expect(errorCodes).toEqual(['device-lost', 'device-lost']);
-    expect(getSceneTestingSnapshot().recoveryBlocked).toBe(false);
+    expect(gpu.requestDeviceCount).toBe(3);
   });
 
   it('should recover a still-connected peer when another scene reconnects after a rapid second loss', async () => {
@@ -896,25 +897,27 @@ describe(Scene.metadata.tag, () => {
     await Promise.all([first.ready, second.ready]);
 
     gpu.devices[0]?.lose({ message: 'first loss', reason: 'unknown' });
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().requestDeviceCount).toBe(2));
+    await vi.waitFor(() => expect(gpu.requestDeviceCount).toBe(2));
     const firstRecovery = first.ready;
     const secondRecovery = second.ready;
     gpu.resolveNextDevice();
     await Promise.all([firstRecovery, secondRecovery]);
 
+    const recoveredSecondReady = second.ready;
     gpu.devices[1]?.lose({ message: 'second loss', reason: 'unknown' });
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().recoveryBlocked).toBe(true));
+    await vi.waitFor(() => expect(second.ready).not.toBe(recoveredSecondReady));
+    expect(gpu.requestDeviceCount).toBe(2);
     const secondBlockedReady = second.ready;
 
     first.remove();
     fixture.append(first);
     await elementIsStable(first);
     const reconnectReady = first.ready;
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().requestDeviceCount).toBe(3));
+    await vi.waitFor(() => expect(gpu.requestDeviceCount).toBe(3));
     gpu.resolveNextDevice();
     await Promise.all([reconnectReady, secondBlockedReady]);
 
-    expect(getSceneTestingSnapshot()).toMatchObject({ hasDevice: true, recoveryBlocked: false, requestDeviceCount: 3 });
+    expect(gpu.requestDeviceCount).toBe(3);
   });
 
   it('should fail the new readiness cycle and show fallback when renderer recovery initialization throws', async () => {
@@ -926,7 +929,7 @@ describe(Scene.metadata.tag, () => {
     await element.ready;
 
     gpu.devices[0]?.lose({ message: 'recovery loss', reason: 'unknown' });
-    await vi.waitFor(() => expect(getSceneTestingSnapshot().requestDeviceCount).toBe(2));
+    await vi.waitFor(() => expect(gpu.requestDeviceCount).toBe(2));
     const recovery = element.ready;
     gpu.resolveNextDevice();
     await expect(recovery).rejects.toMatchObject({ name: 'NotSupportedError' });
@@ -1957,14 +1960,19 @@ function configureFakeWebGPU(
 ): {
   readonly contexts: SceneGPUCanvasContext[];
   readonly devices: FakeDevice[];
+  readonly requestDeviceCount: number;
   resolveNextDevice(): void;
 } {
   const contexts: SceneGPUCanvasContext[] = [];
   const devices: FakeDevice[] = [];
   const pendingDevices: Array<(device: SceneGPUDevice) => void> = [];
+  let requestDeviceCount = 0;
   configureSceneTesting({
     requestAdapter: async () => ({
-      requestDevice: () => new Promise(resolve => pendingDevices.push(resolve))
+      requestDevice: () => {
+        requestDeviceCount += 1;
+        return new Promise(resolve => pendingDevices.push(resolve));
+      }
     }),
     getPreferredCanvasFormat: () => 'bgra8unorm',
     getCanvasContext: () => {
@@ -1985,6 +1993,9 @@ function configureFakeWebGPU(
   return {
     contexts,
     devices,
+    get requestDeviceCount() {
+      return requestDeviceCount;
+    },
     resolveNextDevice() {
       const resolve = pendingDevices.shift();
       if (!resolve) {

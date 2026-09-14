@@ -29,7 +29,6 @@ import { replacePreparedVertexSource } from './prepared-record-source.js';
 export type StreamingLayerKind = 'point' | 'line' | 'triangle';
 
 interface StreamingLayerOptions {
-  readonly allowChildren?: boolean;
   readonly kind: StreamingLayerKind;
   readonly layout: LayoutDescriptor;
   readonly countDivisor?: number;
@@ -52,13 +51,11 @@ export interface StreamingLayerRenderData extends VertexStreamRenderData {
 interface StreamingLayerState {
   buffer: VertexStreamBuffer;
   readonly kind: StreamingLayerKind;
-  readonly allowChildren: boolean;
   readonly depthBias: boolean;
   readonly pickable: boolean;
   topology: LineTopology;
   widthUnit: LineWidthUnit;
   childError: boolean;
-  mutationObserver?: MutationObserver;
   source: StreamingLayerSource | null;
   publicationError: boolean;
   streamedCount: number;
@@ -75,7 +72,6 @@ const RECORD_KINDS: Readonly<Record<StreamingLayerKind, PackedRecordKind>> = {
 
 export function registerStreamingLayer(layer: HTMLElement, options: StreamingLayerOptions): void {
   states.set(layer, {
-    allowChildren: options.allowChildren ?? false,
     buffer: createVertexStreamBuffer(options),
     childError: false,
     depthBias: options.depthBias ?? false,
@@ -89,15 +85,9 @@ export function registerStreamingLayer(layer: HTMLElement, options: StreamingLay
   });
 }
 
-export function connectStreamingLayer(layer: HTMLElement): void {
+export function reconcileStreamingLayerChildren(layer: HTMLElement): void {
   const state = getState(layer);
-  state.mutationObserver = new MutationObserver(() => reconcileChildren(layer, state));
-  state.mutationObserver.observe(layer, { childList: true });
   reconcileChildren(layer, state);
-}
-
-export function disconnectStreamingLayer(layer: HTMLElement): void {
-  getState(layer).mutationObserver?.disconnect();
 }
 
 export function getStreamingLayerSource(layer: HTMLElement): StreamingLayerSource | null {
@@ -255,7 +245,7 @@ export function isStreamingLayerRegistered(layer: HTMLElement): boolean {
 }
 
 function reconcileChildren(layer: HTMLElement, state: StreamingLayerState): void {
-  state.childError = !state.allowChildren && layer.children.length > 0;
+  state.childError = layer.children.length > 0;
   diagnosticReporterService.update({
     active: state.childError,
     code: LAYER_CHILD,

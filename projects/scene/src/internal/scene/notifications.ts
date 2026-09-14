@@ -1,10 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-const renderCallbacks = new WeakMap<HTMLElement, () => void>();
+const renderCallbacks = new WeakMap<HTMLElement, (source: HTMLElement) => void>();
 
 /** Registers a private wake callback for state owned by a Scene descendant. */
-export function registerSceneRenderNotifications(scene: HTMLElement, callback: () => void): () => void {
+export function registerSceneRenderNotifications(
+  scene: HTMLElement,
+  callback: (source: HTMLElement) => void
+): () => void {
   renderCallbacks.set(scene, callback);
   return () => renderCallbacks.delete(scene);
 }
@@ -12,7 +15,7 @@ export function registerSceneRenderNotifications(scene: HTMLElement, callback: (
 /** Wakes the closest owning Scene after an internal state version changes. */
 export function notifyOwningScene(element: HTMLElement): void {
   const scene = closestOwningScene(element);
-  if (scene) renderCallbacks.get(scene)?.();
+  if (scene) renderCallbacks.get(scene)?.(element);
 }
 
 function closestOwningScene(element: HTMLElement): HTMLElement | null {

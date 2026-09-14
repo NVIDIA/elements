@@ -102,14 +102,10 @@ export class PickRenderer {
   #pipelines?: PickPipelines;
   #projection?: Matrix4;
   #readback?: PickReadback<PickTarget>;
-  #renderedFrameGeneration = -1;
   #renderedPixelKey?: string | null;
-  #renderedScope?: PickScope;
   #resourceGeneration = 0;
   #scope: PickScope = 'all';
   #targetRanges?: readonly PickTargetRange[];
-  #targetRangesFrameGeneration = -1;
-  #targetRangesScope?: PickScope;
   #token = 0;
   readonly #draw: {
     drawPickItems(pass: SceneGPURenderPass, items: readonly SceneRenderItem[], pipelines: PickPipelines): void;
@@ -152,9 +148,7 @@ export class PickRenderer {
     this.#idTexture = undefined;
     this.#projection = undefined;
     this.#latestGeometryPixels.clear();
-    this.#renderedFrameGeneration = -1;
     this.#renderedPixelKey = undefined;
-    this.#renderedScope = undefined;
     this.#resourceGeneration += 1;
   }
 
@@ -171,12 +165,8 @@ export class PickRenderer {
     this.#items = items;
     this.#projection = projection;
     this.#scope = scope;
-    this.#renderedFrameGeneration = -1;
     this.#renderedPixelKey = undefined;
-    this.#renderedScope = undefined;
     this.#targetRanges = undefined;
-    this.#targetRangesFrameGeneration = -1;
-    this.#targetRangesScope = undefined;
   }
 
   getCompletedGeometryPixel(pixelX: number, pixelY: number): CompletedGeometryPixel | undefined {
@@ -232,7 +222,7 @@ export class PickRenderer {
     if (readyStatus !== 'current') return readyStatus === 'frame-changed' ? PICK_FRAME_CHANGED : null;
     const encoded = this.#encodePickFrame(request, prepared, pipelines);
     prepared.snapshot.device.queue.submit([encoded.encoder.finish()]);
-    this.#commitRenderedPickFrame(prepared.snapshot, encoded);
+    this.#commitRenderedPickFrame(encoded);
     const hit = await encoded.result;
     // The submitted command owns a coherent target table. Only replacement of its resources invalidates the result.
     if (!this.#resourcesAreCurrent(prepared.snapshot)) return null;
@@ -270,8 +260,7 @@ export class PickRenderer {
     const { encoder, pipelines, prepared, request } = options;
     const { snapshot, textures } = prepared;
     const pixelKey = geometryPixelKey(request.pixelX, request.pixelY);
-    const frameChanged =
-      this.#renderedFrameGeneration !== snapshot.frameGeneration || this.#renderedScope !== snapshot.scope;
+    const frameChanged = this.#renderedPixelKey === undefined;
     const required = frameChanged || (this.#renderedPixelKey !== null && this.#renderedPixelKey !== pixelKey);
     if (!required) return { pixelKey: undefined, required };
     const pass = encoder.beginRenderPass(this.#createPassDescriptor(textures));
@@ -288,11 +277,9 @@ export class PickRenderer {
       : undefined;
   }
 
-  #commitRenderedPickFrame(snapshot: PickFrameSnapshot, encoded: EncodedPickFrame): void {
+  #commitRenderedPickFrame(encoded: EncodedPickFrame): void {
     if (!encoded.rendered) return;
-    this.#renderedFrameGeneration = snapshot.frameGeneration;
     this.#renderedPixelKey = encoded.renderedPixelKey;
-    this.#renderedScope = snapshot.scope;
   }
 
   #createSnapshot(request: ScenePickRequest): PickFrameSnapshot | undefined {
@@ -351,16 +338,9 @@ export class PickRenderer {
   }
 
   #getTargetRanges(snapshot: PickFrameSnapshot): readonly PickTargetRange[] {
-    if (
-      this.#targetRanges &&
-      this.#targetRangesFrameGeneration === snapshot.frameGeneration &&
-      this.#targetRangesScope === snapshot.scope
-    )
-      return this.#targetRanges;
+    if (this.#targetRanges) return this.#targetRanges;
     const ranges = createPickTargetRanges(snapshot.items);
     this.#targetRanges = ranges;
-    this.#targetRangesFrameGeneration = snapshot.frameGeneration;
-    this.#targetRangesScope = snapshot.scope;
     return ranges;
   }
 

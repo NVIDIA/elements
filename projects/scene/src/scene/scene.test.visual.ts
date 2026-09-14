@@ -68,7 +68,7 @@ describe('scene visual', () => {
       [0, 0, 255, 255],
       [116, 184, 0, 255]
     ]);
-    expect(result.diagnostics).toMatchObject({ requestDeviceCount: 1, hasDevice: true });
+    expect(result.diagnostics).toEqual({ requestDeviceCount: 1 });
   });
 
   test('scene should match visual baseline', async () => {
@@ -349,12 +349,26 @@ function bootstrapTemplate(): string {
   return /* html */ `
     <script type="module">
       import { Scene } from '../../src/scene/scene.ts';
-      import { getSceneTestingSnapshot } from '../../src/internal/testing.ts';
+      import { configureSceneTesting } from '../../src/internal/testing.ts';
+
+      const requestAdapter = navigator.gpu.requestAdapter.bind(navigator.gpu);
+      let requestDeviceCount = 0;
+      configureSceneTesting({
+        requestAdapter: async () => {
+          const adapter = await requestAdapter();
+          return adapter && {
+            requestDevice: () => {
+              requestDeviceCount += 1;
+              return adapter.requestDevice();
+            }
+          };
+        }
+      });
 
       customElements.define(Scene.metadata.tag, Scene);
       const scenes = [...document.querySelectorAll(Scene.metadata.tag)];
       Promise.all(scenes.map(scene => scene.ready)).then(() => {
-        document.querySelector('#scene-diagnostics').textContent = JSON.stringify(getSceneTestingSnapshot());
+        document.querySelector('#scene-diagnostics').textContent = JSON.stringify({ requestDeviceCount });
         document.documentElement.dataset.sceneReady = 'true';
       });
     </script>

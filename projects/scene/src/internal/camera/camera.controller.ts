@@ -55,9 +55,7 @@ type CameraHost = HTMLElement & ReactiveControllerHost;
 export class CameraController implements ReactiveController {
   #behaviors: readonly ResolvedCameraBehavior[] = [];
   #behaviorSnapshot?: readonly CameraBehaviorSnapshot[];
-  #resolutionSnapshot?: readonly CameraBehaviorSnapshot[];
   #canvas?: HTMLCanvasElement;
-  #contributions: readonly CameraBehaviorContribution[] = [];
   readonly #host: CameraHost;
   #pendingChange?: { readonly source: SceneCameraChangeSource; readonly state: SceneCameraState };
   readonly #requestRender: () => void;
@@ -106,16 +104,13 @@ export class CameraController implements ReactiveController {
     const snapshot = this.#captureBehaviorSnapshot();
     const changed = snapshot !== previous;
     this.#behaviorSnapshot = snapshot;
-    this.#resolutionSnapshot = snapshot;
     return changed;
   }
 
   resolve(): void {
-    const snapshot = this.#getCurrentBehaviorSnapshot();
-    this.#resolutionSnapshot = undefined;
+    const snapshot = this.#captureBehaviorSnapshot();
     const contributions = this.#resolveBehaviorContributions(snapshot);
     this.#behaviors = contributions;
-    this.#contributions = contributions.map(entry => entry.contribution);
     this.#orbitState = resolveCameraState({
       prior: this.#orbitState,
       contributions: contributions
@@ -171,11 +166,6 @@ export class CameraController implements ReactiveController {
     const active = this.#assignOrbitTargetFields(resolvable.filter(entry => !conflicted.has(entry.behavior)));
     for (const { behavior } of snapshot) sceneCameraController.setConflict(behavior, conflicted.has(behavior));
     return active;
-  }
-
-  #getCurrentBehaviorSnapshot(): readonly CameraBehaviorSnapshot[] {
-    const snapshot = this.#resolutionSnapshot;
-    return snapshot && this.#isBehaviorSnapshotCurrent(snapshot) ? snapshot : this.#captureBehaviorSnapshot();
   }
 
   #captureBehaviorSnapshot(): readonly CameraBehaviorSnapshot[] {
@@ -321,22 +311,28 @@ export class CameraController implements ReactiveController {
 
   #getInteractiveOrbit(): Extract<CameraBehaviorContribution, { kind: 'orbit' }> | undefined {
     if (this.#getInteractiveTop()) return undefined;
-    return this.#contributions.find(
-      (contribution): contribution is Extract<CameraBehaviorContribution, { kind: 'orbit' }> =>
-        contribution.kind === 'orbit'
-    );
+    return this.#behaviors.find(
+      (
+        entry
+      ): entry is ResolvedCameraBehavior & {
+        contribution: Extract<CameraBehaviorContribution, { kind: 'orbit' }>;
+      } => entry.contribution.kind === 'orbit'
+    )?.contribution;
   }
 
   #getInteractiveTop(): Extract<CameraBehaviorContribution, { kind: 'top' }> | undefined {
-    return this.#contributions.find(
-      (contribution): contribution is Extract<CameraBehaviorContribution, { kind: 'top' }> =>
-        contribution.kind === 'top'
-    );
+    return this.#behaviors.find(
+      (
+        entry
+      ): entry is ResolvedCameraBehavior & {
+        contribution: Extract<CameraBehaviorContribution, { kind: 'top' }>;
+      } => entry.contribution.kind === 'top'
+    )?.contribution;
   }
 
   #hasTargetOwner(): boolean {
-    return this.#contributions.some(
-      contribution => contribution.kind === 'follow' && contribution.fields.includes('target.position')
+    return this.#behaviors.some(
+      ({ contribution }) => contribution.kind === 'follow' && contribution.fields.includes('target.position')
     );
   }
 

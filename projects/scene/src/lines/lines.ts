@@ -71,6 +71,6 @@ export class SceneLines extends StreamingLayerElement<LineVertexSource> {
   }
 
   constructor() {
-    super('line', LINE_VERTEX, { allowChildren: false, topology: 'strip', widthUnit: 'world' });
+    super('line', LINE_VERTEX, { topology: 'strip', widthUnit: 'world' });
   }
 }

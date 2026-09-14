@@ -6,10 +6,10 @@ import { html, LitElement } from 'lit';
 import { DEVICE_LOST, WEBGPU_UNAVAILABLE, type SceneErrorCode } from '../errors.js';
 import { diagnosticReporterService } from '../internal/services/diagnostic-reporter.service.js';
 import {
-  sharedDeviceManager,
+  sharedDeviceService,
   type SharedDeviceLease,
   type SharedDeviceListener
-} from '../internal/gpu/device-manager.js';
+} from '../internal/services/shared-device.service.js';
 import { scenePlatform, type SceneGPUDeviceLostInfo } from '../internal/gpu/platform.js';
 import { registerSceneRenderNotifications } from '../internal/scene/notifications.js';
 import type { SceneCameraState } from '../internal/math/camera.js';
@@ -109,7 +109,10 @@ export class Scene extends LitElement {
       host: this,
       requestRender: () => this.#requestRender()
     });
-    registerSceneRenderNotifications(this, () => this.#requestRender());
+    registerSceneRenderNotifications(this, source => {
+      this.#content.refreshLayer(source);
+      this.#requestRender();
+    });
   }
 
   /** Gets an independent snapshot of the resolved camera state. */
@@ -203,12 +206,12 @@ export class Scene extends LitElement {
   }
 
   #prepareConnection(): Promise<SharedDeviceLease> | undefined {
-    const resumedLease = this.#hasConnected ? sharedDeviceManager.resumeRecoveryAfterReconnect() : undefined;
+    const resumedLease = this.#hasConnected ? sharedDeviceService.resumeRecoveryAfterReconnect() : undefined;
     if (this.#hasConnected) this.#readyCycle = createReadyCycle();
     this.#hasConnected = true;
     this.#state = 'initializing';
     this.#requestRender();
-    this.#unsubscribeDevice = sharedDeviceManager.subscribe(this.#deviceListener);
+    this.#unsubscribeDevice = sharedDeviceService.subscribe(this.#deviceListener);
     this.requestUpdate();
     return resumedLease;
   }
@@ -219,7 +222,7 @@ export class Scene extends LitElement {
       await this.updateComplete;
       if (!this.#isCurrentConnection(token)) return;
       this.#bindShadowDOM();
-      const lease = await (resumedLease ?? sharedDeviceManager.acquire());
+      const lease = await (resumedLease ?? sharedDeviceService.acquire());
       if (this.#isCurrentConnection(token)) this.#initializeRenderer(lease);
     } catch (error) {
       if (this.#isCurrentConnection(token)) this.#failWebGPU(error);
@@ -350,8 +353,6 @@ export class Scene extends LitElement {
   #trackRuntimeChanges(): void {
     const cameraChanged = this.#camera.trackChanges();
     this.#needsRender = this.#needsRender || cameraChanged;
-    const contentChanged = this.#content.trackChanges();
-    this.#needsRender = this.#needsRender || contentChanged;
   }
 
   #renderIfNeeded(): void {

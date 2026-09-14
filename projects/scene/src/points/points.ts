@@ -37,6 +37,6 @@ export class ScenePoints extends StreamingLayerElement<PointSource> {
   sizeUnit: PointSizeUnit = 'pixel';
 
   constructor() {
-    super('point', POINT, { allowChildren: false });
+    super('point', POINT);
   }
 }

@@ -14,7 +14,7 @@ import {
   invalidateFrameTransform,
   registerFrameState,
   setFrameTransform,
-  touchFrameState
+  notifyFrameStateChange
 } from '../internal/frame/state.js';
 import type { Matrix4, Quaternion, ScenePose, Vec3 } from '../internal/types.js';
 import { transformPointMat4 } from '../internal/math/mat4.js';
@@ -110,7 +110,7 @@ export class SceneFrame extends LitElement {
 
   protected override updated(changedProperties: PropertyValues<this>): void {
     if (changedProperties.has('name')) {
-      touchFrameState(this);
+      notifyFrameStateChange(this);
     }
     if (changedProperties.has('position') || changedProperties.has('orientation')) {
       this.#applyDeclarativeTransform();

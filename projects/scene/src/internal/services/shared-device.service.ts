@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { scenePlatform, type SceneGPUDevice, type SceneGPUDeviceLostInfo } from './platform.js';
+import { scenePlatform, type SceneGPUDevice, type SceneGPUDeviceLostInfo } from '../gpu/platform.js';
 
 export interface SharedDeviceLease {
   readonly device: SceneGPUDevice;
@@ -16,14 +16,13 @@ export interface SharedDeviceListener {
 
 const RAPID_LOSS_WINDOW_MS = 10_000;
 
-class SharedDeviceManager {
+class SharedDeviceService {
   #device?: SceneGPUDevice;
   #format?: string;
   #request?: Promise<SharedDeviceLease>;
   #listeners = new Set<SharedDeviceListener>();
   #lastLoss?: number;
   #recoveryBlocked = false;
-  #requestDeviceCount = 0;
   #generation = 0;
 
   acquire(): Promise<SharedDeviceLease> {
@@ -53,14 +52,6 @@ class SharedDeviceManager {
     }
   }
 
-  getSnapshot(): { requestDeviceCount: number; hasDevice: boolean; recoveryBlocked: boolean } {
-    return {
-      requestDeviceCount: this.#requestDeviceCount,
-      hasDevice: this.#device !== undefined,
-      recoveryBlocked: this.#recoveryBlocked
-    };
-  }
-
   reset(): void {
     this.#generation += 1;
     this.#device?.destroy();
@@ -69,7 +60,6 @@ class SharedDeviceManager {
     this.#request = undefined;
     this.#lastLoss = undefined;
     this.#recoveryBlocked = false;
-    this.#requestDeviceCount = 0;
     this.#listeners.clear();
   }
 
@@ -81,7 +71,7 @@ class SharedDeviceManager {
         throw new DOMException('WebGPU is unavailable.', 'NotSupportedError');
       }
 
-      const device = await this.#createDevice(adapter);
+      const device = await adapter.requestDevice();
       const format = scenePlatform.getPreferredCanvasFormat();
       this.#storeDevice(generation, device, format);
       return { device, format };
@@ -91,11 +81,6 @@ class SharedDeviceManager {
       }
       throw error;
     }
-  }
-
-  async #createDevice(adapter: { requestDevice(): Promise<SceneGPUDevice> }): Promise<SceneGPUDevice> {
-    this.#requestDeviceCount += 1;
-    return adapter.requestDevice();
   }
 
   #storeDevice(generation: number, device: SceneGPUDevice, format: string): void {
@@ -158,4 +143,4 @@ class SharedDeviceManager {
   }
 }
 
-export const sharedDeviceManager = new SharedDeviceManager();
+export const sharedDeviceService = new SharedDeviceService();

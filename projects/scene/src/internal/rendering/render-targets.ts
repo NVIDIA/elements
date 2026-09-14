@@ -120,45 +120,6 @@ export class RenderTargets {
     };
   }
 
-  createOpaquePassDescriptor(options: {
-    readonly clearColor: LinearColor;
-    readonly colorView: SceneGPUTextureView;
-    readonly depthView: SceneGPUTextureView | null;
-    readonly occlusionQuerySet?: SceneGPUQuerySet;
-  }): SceneGPURenderPassDescriptor {
-    const descriptor: {
-      colorAttachments: readonly [
-        {
-          readonly clearValue: LinearColor;
-          readonly loadOp: 'clear';
-          readonly storeOp: 'store';
-          readonly view: SceneGPUTextureView;
-        }
-      ];
-      depthStencilAttachment?: SceneGPURenderPassDescriptor['depthStencilAttachment'];
-      occlusionQuerySet?: SceneGPUQuerySet;
-    } = {
-      colorAttachments: [
-        {
-          view: options.colorView,
-          clearValue: options.clearColor,
-          loadOp: 'clear',
-          storeOp: 'store'
-        }
-      ]
-    };
-    if (options.depthView) {
-      descriptor.depthStencilAttachment = {
-        view: options.depthView,
-        depthClearValue: 1,
-        depthLoadOp: 'clear',
-        depthStoreOp: 'store'
-      };
-    }
-    if (options.occlusionQuerySet) descriptor.occlusionQuerySet = options.occlusionQuerySet;
-    return descriptor;
-  }
-
   createOitPassDescriptor(oit: OitResources, depthView: SceneGPUTextureView | null): SceneGPURenderPassDescriptor {
     const descriptor: {
       colorAttachments: readonly [

@@ -6,11 +6,10 @@ import { property } from 'lit/decorators/property.js';
 import type { LayoutDescriptor } from './layouts/define-layout.js';
 import type { LineTopology, LineWidthUnit } from './lines/data.js';
 import {
-  connectStreamingLayer,
-  disconnectStreamingLayer,
   getStreamingLayerCount,
   getStreamingLayerSource,
   publishStreamingLayer,
+  reconcileStreamingLayerChildren,
   registerStreamingLayer,
   setStreamingLayerCount,
   setStreamingLayerSource,
@@ -43,12 +42,11 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
   protected constructor(
     kind: StreamingLayerKind | 'triangles',
     layout: LayoutDescriptor,
-    options: { allowChildren: boolean; topology?: LineTopology; widthUnit?: LineWidthUnit }
+    options: { topology?: LineTopology; widthUnit?: LineWidthUnit } = {}
   ) {
     super();
     registerFeatureIdentifiedLayer(this);
     registerStreamingLayer(this, {
-      allowChildren: options.allowChildren,
       countDivisor: kind === 'triangles' ? 3 : undefined,
       kind: kind === 'triangles' ? 'triangle' : kind,
       layout,
@@ -102,20 +100,14 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
 
   /** Internal renderer seam; it drains pending upload ranges. */
   render() {
-    return html`<slot></slot>`;
+    return html`<slot @slotchange=${this.#handleSlotChange}></slot>`;
   }
 
   protected override updated(): void {
     notifyOwningScene(this);
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-    connectStreamingLayer(this);
-  }
-
-  override disconnectedCallback(): void {
-    disconnectStreamingLayer(this);
-    super.disconnectedCallback();
+  #handleSlotChange(): void {
+    reconcileStreamingLayerChildren(this);
   }
 }

@@ -15,7 +15,6 @@ import {
   createSceneLayerRenderItem,
   isTechnicallyPickableLayer,
   resolveSceneLayer,
-  trackSceneLayerChanges,
   type SceneLayerKind
 } from './layer-record.js';
 
@@ -51,7 +50,7 @@ describe('resolveSceneLayer', () => {
     ['nve-scene-model', 'model', 'mesh'],
     ['nve-scene-polygon', 'polygon', 'mesh'],
     ['nve-scene-heightfield', 'heightfield', 'mesh']
-  ] as const)('resolves, tracks, and builds the registered %s family', (tag, kind, renderType) => {
+  ] as const)('resolves and builds the registered %s family', (tag, kind, renderType) => {
     const layer = document.createElement(tag);
     registerLayer(layer, kind);
     const record = resolveSceneLayer(layer);
@@ -59,8 +58,6 @@ describe('resolveSceneLayer', () => {
     expect(record).toEqual(expect.objectContaining({ kind, layer, status: 'registered' }));
     if (!record || record.status !== 'registered') throw new Error('The layer must resolve as registered.');
     expect(isTechnicallyPickableLayer(record)).toBe(true);
-    expect(trackSceneLayerChanges(record)).toBe(true);
-    expect(trackSceneLayerChanges(record)).toBe(false);
     expect(createSceneLayerRenderItem(record)).toEqual(expect.objectContaining({ layer, type: renderType }));
   });
 
@@ -72,15 +69,11 @@ describe('resolveSceneLayer', () => {
     const record = resolveSceneLayer(layer);
     if (!record || record.status !== 'registered') throw new Error('The point layer must resolve as registered.');
 
-    expect(trackSceneLayerChanges(record)).toBe(true);
-    expect(trackSceneLayerChanges(record)).toBe(false);
     const item = createSceneLayerRenderItem(record);
     expect(item?.type).toBe('point');
     expect(resolveSceneFeatureId(item?.featureIds, 0)).toBe(1842);
 
     setSceneFeatureIds(layer, 2710);
-    expect(trackSceneLayerChanges(record)).toBe(true);
-    expect(trackSceneLayerChanges(record)).toBe(false);
     expect(resolveSceneFeatureId(createSceneLayerRenderItem(record)?.featureIds, 0)).toBe(2710);
   });
 });

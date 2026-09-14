@@ -5,11 +5,10 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import {
-  connectLabelLayer,
-  disconnectLabelLayer,
   getLabelLayerCount,
   getLabelLayerSource,
   publishLabelLayer,
+  reconcileLabelLayerChildren,
   registerLabelLayer,
   setLabelLayerCount,
   setLabelLayerSource
@@ -106,20 +105,14 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`<slot @slotchange=${this.#handleSlotChange}></slot>`;
   }
 
   protected override updated(): void {
     notifyOwningScene(this);
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-    connectLabelLayer(this);
-  }
-
-  override disconnectedCallback(): void {
-    disconnectLabelLayer(this);
-    super.disconnectedCallback();
+  #handleSlotChange(): void {
+    reconcileLabelLayerChildren(this);
   }
 }

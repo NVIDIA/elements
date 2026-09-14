@@ -617,7 +617,6 @@ export class GeometryRenderer {
   #loadStreamPipelines(items: readonly SceneRenderItem[]): void {
     if (
       this.#streamPipelines ||
-      this.#streamTask.status === 'loading' ||
       !items.some(item => !isMarkerRenderItem(item) && !isMeshRenderItem(item) && !isLabelRenderItem(item))
     ) {
       return;
@@ -644,7 +643,7 @@ export class GeometryRenderer {
   }
 
   #loadMarkerPipelines(items: readonly SceneRenderItem[]): void {
-    if (this.#markerPipelines || this.#markerTask.status === 'loading' || !items.some(isMarkerRenderItem)) return;
+    if (this.#markerPipelines || !items.some(isMarkerRenderItem)) return;
     const device = this.#device;
     const format = this.#format;
     if (!device || !format) return;
@@ -673,7 +672,7 @@ export class GeometryRenderer {
   }
 
   #loadMeshPipelines(items: readonly SceneRenderItem[]): void {
-    if (this.#meshRenderer || this.#meshTask.status === 'loading' || !items.some(isMeshRenderItem)) return;
+    if (this.#meshRenderer || !items.some(isMeshRenderItem)) return;
     const device = this.#meshDevice();
     const format = this.#format;
     if (!device || !format) {
@@ -708,7 +707,7 @@ export class GeometryRenderer {
   }
 
   #loadLabelRenderer(items: readonly SceneRenderItem[]): void {
-    if (this.#labelRenderer || this.#labelTask.status === 'loading' || !items.some(isLabelRenderItem)) return;
+    if (this.#labelRenderer || !items.some(isLabelRenderItem)) return;
     const device = this.#device;
     const format = this.#format;
     if (!device || !format) return;

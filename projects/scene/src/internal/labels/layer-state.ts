@@ -40,7 +40,6 @@ export interface LabelLayerRenderData {
 interface LabelLayerState {
   readonly buffer: VertexStreamBuffer;
   childError: boolean;
-  mutationObserver?: MutationObserver;
   publicationError: boolean;
   source: LabelLayerSource | null;
   sourceCount: number;
@@ -64,15 +63,9 @@ export function registerLabelLayer(layer: HTMLElement): void {
   });
 }
 
-export function connectLabelLayer(layer: HTMLElement): void {
+export function reconcileLabelLayerChildren(layer: HTMLElement): void {
   const state = getState(layer);
-  state.mutationObserver = new MutationObserver(() => reconcileChildren(layer, state));
-  state.mutationObserver.observe(layer, { childList: true });
   reconcileChildren(layer, state);
-}
-
-export function disconnectLabelLayer(layer: HTMLElement): void {
-  getState(layer).mutationObserver?.disconnect();
 }
 
 export function getLabelLayerSource(layer: HTMLElement): LabelLayerSource | null {

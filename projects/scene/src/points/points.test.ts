@@ -58,7 +58,9 @@ describe(ScenePoints.metadata.tag, () => {
     expect(errors.at(-1)).toMatchObject({ code: LAYER_CHILD, severity: 'error', element: layer });
     layer.replaceChildren();
     await elementIsStable(layer);
+    layer.remove();
     layer.append(document.createElement('span'));
+    fixture.append(layer);
     await elementIsStable(layer);
     expect(errors.filter(error => error.code === LAYER_CHILD)).toHaveLength(2);
   });

@@ -1,13 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SharedDeviceLease } from '../gpu/device-manager.js';
+import type { SharedDeviceLease } from '../services/shared-device.service.js';
 import {
   getSrgbCanvasViewFormat,
   scenePlatform,
   type SceneGPUCanvasContext,
   type SceneGPUDevice,
-  type SceneGPUQuerySet,
   type SceneGPURenderPassDescriptor,
   type SceneGPUTextureView,
   type SceneGPURenderPass,
@@ -110,7 +109,7 @@ export class SceneRenderer {
   async pick(request: ScenePickRequest, scope: PickScope = 'all'): Promise<ScenePickResult | null> {
     const items = scope === 'interactive' ? this.#interactiveFrameItems : this.#frameItems;
     if (!hasPickTargets(items)) return null;
-    const [, picking] = await Promise.all([this.#loadGeometry(), this.#loadPicking(), this.#loadTargets()]);
+    const [, picking] = await Promise.all([this.#loadRenderingSubsystems(), this.#loadPicking()]);
     if (!picking) return null;
     picking.updateFrame({ frameGeneration: this.#frameGeneration, items, projection: this.#frameProjection, scope });
     return picking.pick(request);
@@ -173,7 +172,7 @@ export class SceneRenderer {
   render(items: readonly SceneRenderItem[] = [], viewProjection?: Matrix4): boolean {
     const frame = this.#prepareFrame(items, viewProjection);
     if (!frame) return false;
-    this.#encodeOpaquePass({ ...frame, usesOit: frame.oit !== undefined });
+    this.#encodeOpaquePass(frame);
     if (frame.oit) this.#encodeTransparentPass({ ...frame, oit: frame.oit });
     this.#submitFrame(frame);
     this.#hasSubmittedFrame = true;
@@ -213,10 +212,7 @@ export class SceneRenderer {
       if (isInteractiveItem(item)) this.#interactiveFrameItems.push(item);
     }
     this.#frameProjection = viewProjection;
-    if (items.length > 0) {
-      void this.#loadGeometry();
-      void this.#loadTargets();
-    }
+    if (items.length > 0) void this.#loadRenderingSubsystems();
     const projection = this.#geometry?.prepare(items, viewProjection) ?? viewProjection;
     this.#frameProjection = projection;
     this.#picking?.updateFrame({ frameGeneration: this.#frameGeneration, items, projection, scope: 'all' });
@@ -255,21 +251,13 @@ export class SceneRenderer {
     };
   }
 
-  #encodeOpaquePass(options: {
-    readonly colorView: SceneGPUTextureView;
-    readonly depthView: SceneGPUTextureView | null;
-    readonly encoder: ReturnType<SceneGPUDevice['createCommandEncoder']>;
-    readonly items: readonly SceneRenderItem[];
-    readonly usesOit: boolean;
-  }): void {
+  #encodeOpaquePass(options: PreparedFrame): void {
     const descriptorOptions = {
       clearColor: this.#clearColor,
       colorView: options.colorView,
       depthView: options.depthView
     };
-    const descriptor =
-      this.#targets?.createOpaquePassDescriptor(descriptorOptions) ?? createOpaquePassDescriptor(descriptorOptions);
-    const pass = options.encoder.beginRenderPass(descriptor);
+    const pass = options.encoder.beginRenderPass(createOpaquePassDescriptor(descriptorOptions));
     this.#geometry?.drawItems(pass, options.items, false);
     pass.end();
   }
@@ -296,11 +284,6 @@ export class SceneRenderer {
     );
     targets.drawComposite(compositePass, options.oit);
     compositePass.end();
-  }
-
-  #loadGeometry(): Promise<GeometryRenderer | undefined> {
-    if (this.#geometry) return Promise.resolve(this.#geometry);
-    return this.#loadRenderingSubsystems().then(() => this.#geometry);
   }
 
   #loadPicking(): Promise<PickRenderer | undefined> {
@@ -336,11 +319,6 @@ export class SceneRenderer {
         if (resources.token === this.#subsystemToken) this.#pickingLoad = undefined;
       });
     return this.#pickingLoad;
-  }
-
-  #loadTargets(): Promise<RenderTargets | undefined> {
-    if (this.#targets) return Promise.resolve(this.#targets);
-    return this.#loadRenderingSubsystems().then(() => this.#targets);
   }
 
   #loadRenderingSubsystems(): Promise<void> {
@@ -476,7 +454,6 @@ function createOpaquePassDescriptor(options: {
   readonly clearColor: LinearColor;
   readonly colorView: SceneGPUTextureView;
   readonly depthView: SceneGPUTextureView | null;
-  readonly occlusionQuerySet?: SceneGPUQuerySet;
 }): SceneGPURenderPassDescriptor {
   const descriptor: {
     colorAttachments: readonly [
@@ -488,7 +465,6 @@ function createOpaquePassDescriptor(options: {
       }
     ];
     depthStencilAttachment?: SceneGPURenderPassDescriptor['depthStencilAttachment'];
-    occlusionQuerySet?: SceneGPUQuerySet;
   } = {
     colorAttachments: [{ view: options.colorView, clearValue: options.clearColor, loadOp: 'clear', storeOp: 'store' }]
   };
@@ -500,7 +476,6 @@ function createOpaquePassDescriptor(options: {
       depthStoreOp: 'store'
     };
   }
-  if (options.occlusionQuerySet) descriptor.occlusionQuerySet = options.occlusionQuerySet;
   return descriptor;
 }
 

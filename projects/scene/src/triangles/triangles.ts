@@ -25,6 +25,6 @@ export class SceneTriangles extends StreamingLayerElement<TriangleVertexSource> 
   };
 
   constructor() {
-    super('triangles', TRIANGLE_VERTEX, { allowChildren: false });
+    super('triangles', TRIANGLE_VERTEX);
   }
 }

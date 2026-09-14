@@ -100,12 +100,20 @@ describe(PickController.name, () => {
     layer.addEventListener('pointerdown', event => received.push(`down:${event.isTrusted}`));
     layer.addEventListener('nve-scene-click', () => received.push('scene-click'));
 
-    picking.routeBlockedPointer(
-      new PointerEvent('pointerdown', { bubbles: true, cancelable: true, clientX: 10, clientY: 10, pointerId: 7 })
-    );
-    picking.routeBlockedPointer(
-      new PointerEvent('click', { bubbles: true, cancelable: true, clientX: 10, clientY: 10, pointerId: 7 })
-    );
+    picking.handleUnhandledPointer({
+      event: new PointerEvent('pointerdown', {
+        bubbles: true,
+        cancelable: true,
+        clientX: 10,
+        clientY: 10,
+        pointerId: 7
+      }),
+      kind: 'pointerdown'
+    });
+    picking.handleUnhandledPointer({
+      event: new PointerEvent('click', { bubbles: true, cancelable: true, clientX: 10, clientY: 10, pointerId: 7 }),
+      kind: 'click'
+    });
 
     await vi.waitFor(() => expect(received).toEqual(['down:false', 'scene-click']));
   });
@@ -184,7 +192,10 @@ describe(PickController.name, () => {
     const received: string[] = [];
     host.addEventListener('click', () => received.push('click'));
 
-    picking.routeBlockedPointer(new PointerEvent('click', { clientX: 10, clientY: 10 }));
+    picking.handleUnhandledPointer({
+      event: new PointerEvent('click', { clientX: 10, clientY: 10 }),
+      kind: 'click'
+    });
     await vi.waitFor(() => expect(resolvePending).toBeTypeOf('function'));
     interactive = false;
     picking.reconcileInteractionAvailability();
@@ -208,8 +219,14 @@ describe(PickController.name, () => {
     await expect(programmatic).resolves.toMatchObject({ element: layer, layer });
     expect(events).toEqual([]);
 
-    picking.routeBlockedPointer(new PointerEvent('pointerdown', { clientX: 10, clientY: 10, pointerId: 4 }));
-    picking.routeBlockedPointer(new PointerEvent('click', { clientX: 10, clientY: 10, pointerId: 4 }));
+    picking.handleUnhandledPointer({
+      event: new PointerEvent('pointerdown', { clientX: 10, clientY: 10, pointerId: 4 }),
+      kind: 'pointerdown'
+    });
+    picking.handleUnhandledPointer({
+      event: new PointerEvent('click', { clientX: 10, clientY: 10, pointerId: 4 }),
+      kind: 'click'
+    });
     await vi.waitFor(() => expect(pending).toHaveLength(2));
     pending.shift()?.(createResult(layer));
     pending.shift()?.(createResult(layer));
@@ -373,7 +390,10 @@ describe(PickController.name, () => {
     const { layer, picking } = createInteractiveController(() => new Promise(resolve => (resolvePick = resolve)));
     const click = vi.fn();
     layer.addEventListener('click', click);
-    picking.routeBlockedPointer(new PointerEvent('click', { clientX: 10, clientY: 10 }));
+    picking.handleUnhandledPointer({
+      event: new PointerEvent('click', { clientX: 10, clientY: 10 }),
+      kind: 'click'
+    });
     await vi.waitFor(() => expect(resolvePick).toBeTypeOf('function'));
     vi.spyOn(layer, 'closest').mockReturnValue(null);
     resolvePick(createResult(layer));

@@ -66,6 +66,37 @@ describe(SceneModel.metadata.tag, () => {
     expect(actual.indices).toEqual(expected.indices);
   });
 
+  it('reads declarative attributes while parser-created parts upgrade', async () => {
+    fixture = document.createElement('div');
+    const errors: CustomEvent<SceneErrorDetail>[] = [];
+    fixture.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent<SceneErrorDetail>));
+    document.body.append(fixture);
+    fixture.innerHTML = `<nve-scene-model>
+      <nve-scene-part
+        shape="cylinder"
+        position="[-0.7,-0.77,0.34]"
+        orientation="[0.7071,0,0,0.7071]"
+        scale="[0.68,0.68,0.24]"
+        color="#343946"
+      ></nve-scene-part>
+    </nve-scene-model>`;
+    const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
+    await elementIsStable(model);
+
+    expect(errors.filter(event => event.detail.code === PART_SHAPE)).toEqual([]);
+    expect(takeModelLayerRenderData(model).positions).toEqual(
+      compileParts([
+        {
+          shape: 'cylinder',
+          position: [-0.7, -0.77, 0.34],
+          orientation: [0.7071, 0, 0, 0.7071],
+          scale: [0.68, 0.68, 0.24],
+          color: '#343946'
+        }
+      ]).positions
+    );
+  });
+
   it('should restore default part vectors when their attributes are removed', async () => {
     fixture = await createFixture(html`<nve-scene-model><nve-scene-part></nve-scene-part></nve-scene-model>`);
     const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;

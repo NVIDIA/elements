@@ -55,6 +55,11 @@ describe(SceneLabels.metadata.tag, () => {
     layer.append(document.createElement('span'));
     await elementIsStable(layer);
     expect(errors.at(-1)).toMatchObject({ code: LAYER_CHILD, element: layer, severity: 'error' });
+    layer.replaceChildren();
+    await elementIsStable(layer);
+    layer.append(document.createElement('span'));
+    await elementIsStable(layer);
+    expect(errors.filter(error => error.code === LAYER_CHILD)).toHaveLength(2);
   });
 });
 

@@ -53,10 +53,6 @@ export class DeferredResourceTask {
   #pending?: Promise<void>;
   #status: DeferredResourceStatus = 'idle';
 
-  get status(): DeferredResourceStatus {
-    return this.#status;
-  }
-
   start(options: DeferredResourceOptions): Promise<void> {
     if (this.#status === 'loading' && this.#pending) return this.#pending;
     if (this.#status === 'ready' || this.#status === 'failed') return Promise.resolve();

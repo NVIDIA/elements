@@ -31,8 +31,6 @@ import { SceneModel } from './model/model.js';
 import { ScenePart } from './model/part.js';
 import { SceneCamera } from './camera/camera.js';
 import type { Scene } from './scene/scene.js';
-import { SceneContent } from './internal/scene/content.js';
-import { registerMarkerLayer } from './internal/markers/layer-state.js';
 import {
   registerSceneFeatureIdLayer,
   resolveSceneFeatureId,
@@ -431,25 +429,6 @@ describe('record publication contracts', () => {
       for (const buffer of buffers) replacePreparedMarkerSource(buffer, source);
     }).run(runOptions);
   });
-});
-
-describe('scene layer tracking', () => {
-  for (const layerCount of [10, 100, 1_000] as const) {
-    const host = document.createElement('nve-scene');
-    const layers = Array.from({ length: layerCount }, () => document.createElement('nve-scene-cubes'));
-    for (const layer of layers) {
-      registerMarkerLayer(layer, 'cube');
-      host.append(layer);
-    }
-    const content = new SceneContent(host);
-    content.refresh();
-    content.trackChanges();
-    test(`${layerCount} layers unchanged tracking`, async ({ bench }) => {
-      await bench(`${layerCount} layers unchanged tracking`, () => {
-        void content.trackChanges();
-      }).run(runOptions);
-    });
-  }
 });
 
 describe('feature identity', () => {

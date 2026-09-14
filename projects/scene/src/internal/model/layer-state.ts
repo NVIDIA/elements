@@ -172,9 +172,9 @@ function readPart(part: HTMLElement): NormalizedModelPart | null {
   try {
     const candidate: ModelPart = {
       color: readString(part, 'color', '#ffffff'),
-      position: readVector3(part, 'position'),
+      position: readVector3(part, 'position', [0, 0, 0]),
       orientation: readVector4(part, 'orientation'),
-      scale: readVector3(part, 'scale'),
+      scale: readVector3(part, 'scale', [1, 1, 1]),
       shape: readString(part, 'shape', 'cube') as ModelPart['shape']
     };
     const normalized = normalizeModelPart(candidate, 'part');
@@ -186,8 +186,8 @@ function readPart(part: HTMLElement): NormalizedModelPart | null {
   }
 }
 
-function readVector3(part: HTMLElement, name: string): Vec3 {
-  const values = readVector(part, name, [0, 0, 0]);
+function readVector3(part: HTMLElement, name: string, fallback: Readonly<Vec3>): Vec3 {
+  const values = readVector(part, name, fallback);
   const [x, y, z] = values;
   if (x === undefined || y === undefined || z === undefined) throw new RangeError(`${name} is invalid.`);
   return [x, y, z];
@@ -202,7 +202,9 @@ function readVector4(part: HTMLElement, name: string): Quaternion {
 }
 
 function readVector(part: HTMLElement, name: string, fallback: readonly number[]): readonly number[] {
-  const values = Reflect.get(part, name) ?? fallback;
+  const property = Reflect.get(part, name);
+  const attribute = part.getAttribute(name);
+  const values = property ?? (attribute === null ? fallback : (JSON.parse(attribute) ?? fallback));
   if (
     !Array.isArray(values) ||
     values.length !== fallback.length ||
@@ -255,7 +257,7 @@ function isPartElement(element: Element): element is HTMLElement {
 
 function readString(element: HTMLElement, name: string, fallback: string): string {
   const value = Reflect.get(element, name);
-  return typeof value === 'string' ? value : fallback;
+  return typeof value === 'string' ? value : (element.getAttribute(name) ?? fallback);
 }
 
 function getState(layer: HTMLElement): ModelLayerState {

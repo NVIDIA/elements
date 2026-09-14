@@ -14,10 +14,9 @@ import type {
   ExternalTriangleVertexSource
 } from './packed-record-source.js';
 import {
-  connectStreamingLayer,
-  disconnectStreamingLayer,
   getStreamingLayerVersion,
   publishStreamingLayer,
+  reconcileStreamingLayerChildren,
   registerStreamingLayer,
   setStreamingLayerCount,
   setStreamingLineTopology,
@@ -29,18 +28,14 @@ describe('streaming layer state', () => {
   const layers: HTMLElement[] = [];
 
   afterEach(() => {
-    for (const layer of layers) {
-      disconnectStreamingLayer(layer);
-      layer.remove();
-    }
+    for (const layer of layers) layer.remove();
     layers.length = 0;
   });
 
-  it('retains upload ranges while a child error is active and drains them after recovery', async () => {
+  it('retains upload ranges while a child error is active and drains them after recovery', () => {
     const layer = document.createElement('div');
     layers.push(layer);
-    registerStreamingLayer(layer, { allowChildren: false, kind: 'point', layout: POINT });
-    connectStreamingLayer(layer);
+    registerStreamingLayer(layer, { kind: 'point', layout: POINT });
 
     const source = new Uint8Array(POINT.stride);
     setStreamingLayerSource(layer, asPointSource(source));
@@ -49,14 +44,14 @@ describe('streaming layer state', () => {
 
     const invalidChild = document.createElement('span');
     layer.append(invalidChild);
-    await Promise.resolve();
+    reconcileStreamingLayerChildren(layer);
     const changed = new Uint8Array(source);
     changed[0] = 7;
     setStreamingLayerSource(layer, asPointSource(changed));
     expect(takeStreamingLayerRenderData(layer)).toMatchObject({ ready: false, uploadRanges: [] });
 
     invalidChild.remove();
-    await Promise.resolve();
+    reconcileStreamingLayerChildren(layer);
     const recovered = takeStreamingLayerRenderData(layer);
     expect(recovered.ready).toBe(true);
     expect(recovered.uploadRanges).toEqual([{ offset: 0, size: POINT.stride }]);
@@ -67,11 +62,11 @@ describe('streaming layer state', () => {
     const layer = document.createElement('div');
     layers.push(layer);
     registerStreamingLayer(layer, { kind: 'line', layout: POINT });
-    connectStreamingLayer(layer);
+    reconcileStreamingLayerChildren(layer);
     expect(() => takeStreamingLayerRenderData(layer)).not.toThrow();
     const other = document.createElement('div');
     expect(() => takeStreamingLayerRenderData(other)).toThrow(TypeError);
-    expect(() => disconnectStreamingLayer(other)).toThrow(TypeError);
+    expect(() => reconcileStreamingLayerChildren(other)).toThrow(TypeError);
   });
 
   it('should default to unbiased pickable strips and retain internal reference options', () => {

@@ -16,15 +16,15 @@ describe('prepared record sources', () => {
     const first = new MarkerInstanceBuffer();
     const second = new MarkerInstanceBuffer();
 
-    expect(replacePreparedMarkerSource(first, source)).toBe(true);
-    expect(replacePreparedMarkerSource(second, source)).toBe(false);
+    replacePreparedMarkerSource(first, source);
+    replacePreparedMarkerSource(second, source);
     expect(second.getUploadBytes()).toBe(first.getUploadBytes());
 
     source.at(0).position.x = 7;
     const updatedOwner = new MarkerInstanceBuffer();
     const updatedSibling = new MarkerInstanceBuffer();
-    expect(replacePreparedMarkerSource(updatedOwner, source)).toBe(true);
-    expect(replacePreparedMarkerSource(updatedSibling, source)).toBe(false);
+    replacePreparedMarkerSource(updatedOwner, source);
+    replacePreparedMarkerSource(updatedSibling, source);
     expect(updatedSibling.getUploadBytes()).toBe(updatedOwner.getUploadBytes());
     expect(updatedOwner.getUploadBytes()).not.toBe(first.getUploadBytes());
     expect(new DataView(updatedOwner.getUploadBytes()?.buffer ?? new ArrayBuffer()).getFloat32(0, true)).toBe(7);
@@ -90,8 +90,8 @@ describe('prepared record sources', () => {
     const owner = new VertexStreamBuffer(POINT);
     const sibling = new VertexStreamBuffer(POINT);
 
-    expect(replacePreparedVertexSource(owner, source, source.count)).toBe(true);
-    expect(replacePreparedVertexSource(sibling, source, source.count)).toBe(false);
+    replacePreparedVertexSource(owner, source, source.count);
+    replacePreparedVertexSource(sibling, source, source.count);
     const sharedBytes = owner.getUploadBytes();
     expect(sibling.getUploadBytes()).toBe(sharedBytes);
     owner.takeUploadRanges();

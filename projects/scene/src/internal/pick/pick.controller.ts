@@ -30,7 +30,6 @@ export class PickController implements ReactiveController {
   #markerInteractionCleanup?: () => void;
   #interactionGeneration = 0;
   #pendingEvents = new Map<number, PointerEvent>();
-  #syntheticEvents = new WeakSet<Event>();
 
   constructor(options: {
     readonly driver: ScenePickDriver;
@@ -57,10 +56,6 @@ export class PickController implements ReactiveController {
     this.invalidate(new DOMException('The scene disconnected while picking.', 'AbortError'));
     this.#markerInteractionCleanup?.();
     this.#markerInteractionCleanup = undefined;
-  }
-
-  isSyntheticEvent(event: Event): boolean {
-    return this.#syntheticEvents.has(event);
   }
 
   pick(clientX: number, clientY: number): Promise<ScenePickHit | null> {
@@ -96,15 +91,6 @@ export class PickController implements ReactiveController {
     const { event, kind } = input;
     event.stopImmediatePropagation();
     this.#queuePointer(kind, event, this.#createResolver(event.clientX, event.clientY, 'interactive'));
-  }
-
-  routeBlockedPointer(event: PointerEvent): void {
-    if (!this.#hasInteractiveTargets()) {
-      this.#resetAutomaticInteraction();
-      return;
-    }
-    const resolver = this.#createResolver(event.clientX, event.clientY, 'interactive');
-    this.#queuePointer(event.type as 'pointerdown' | 'pointerup' | 'click', event, resolver);
   }
 
   /** Cancels stale hover readback and leaves the current hit when the pointer exits the canvas. */
@@ -257,7 +243,6 @@ export class PickController implements ReactiveController {
   #dispatchResolvedPointer(event: PointerEvent, hit: ScenePickHit | null): void {
     const target = hit?.element ?? this.#host;
     const synthetic = createSyntheticPointerEvent(event.type, event, { bubbles: true, cancelable: true });
-    this.#syntheticEvents.add(synthetic);
     target.dispatchEvent(synthetic);
     if (event.type === 'click' && hit) {
       hit.element.dispatchEvent(createSceneInteractionEvent('nve-scene-click', hit));

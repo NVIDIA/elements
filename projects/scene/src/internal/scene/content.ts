@@ -3,13 +3,7 @@
 
 import { FRAME_NAME_DUPLICATE } from '../../errors.js';
 import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
-import {
-  getFrameName,
-  getFrameVersion,
-  isFrameChainValid,
-  isFrameStateRegistered,
-  setSceneNamedFrames
-} from '../frame/state.js';
+import { getFrameName, isFrameChainValid, isFrameStateRegistered, setSceneNamedFrames } from '../frame/state.js';
 import type { SceneRenderItem } from '../rendering/render-items.js';
 import { isInteractiveLayer } from '../interaction.js';
 import { SCENE_LAYER_SELECTOR } from '../layer-tags.js';
@@ -17,16 +11,13 @@ import {
   createSceneLayerRenderItem,
   isTechnicallyPickableLayer,
   resolveSceneLayer,
-  trackSceneLayerChanges,
   type SceneLayerRecord
 } from './layer-record.js';
 
 export class SceneContent {
   #duplicateFrames = new Set<HTMLElement>();
   #frames: HTMLElement[] = [];
-  #frameVersions = new WeakMap<HTMLElement, number>();
   readonly #host: HTMLElement;
-  #layers: HTMLElement[] = [];
   #layerRecords: SceneLayerRecord[] = [];
 
   constructor(host: HTMLElement) {
@@ -52,18 +43,22 @@ export class SceneContent {
     this.#frames = [...this.#host.querySelectorAll<HTMLElement>('nve-scene-frame')].filter(
       frame => frame.closest('nve-scene') === this.#host
     );
-    this.#layers = [...this.#host.querySelectorAll<HTMLElement>(SCENE_LAYER_SELECTOR)].filter(
+    const layers = [...this.#host.querySelectorAll<HTMLElement>(SCENE_LAYER_SELECTOR)].filter(
       layer => layer.closest('nve-scene') === this.#host
     );
-    this.#layerRecords = this.#layers.flatMap(layer => {
+    this.#layerRecords = layers.flatMap(layer => {
       const record = resolveSceneLayer(layer);
       return record ? [record] : [];
     });
   }
 
-  trackChanges(): boolean {
-    const framesChanged = this.#trackFrameChanges();
-    return this.#trackLayerChanges() || framesChanged;
+  refreshLayer(element: HTMLElement): void {
+    const layer = element.matches(SCENE_LAYER_SELECTOR) ? element : element.closest<HTMLElement>(SCENE_LAYER_SELECTOR);
+    if (!layer || layer.closest('nve-scene') !== this.#host) return;
+    const index = this.#layerRecords.findIndex(record => record.layer === layer);
+    if (index < 0) return;
+    const record = resolveSceneLayer(layer);
+    if (record) this.#layerRecords[index] = record;
   }
 
   resolveFrames(): void {
@@ -76,34 +71,6 @@ export class SceneContent {
       const item = createSceneLayerRenderItem(record);
       return item ? [item] : [];
     });
-  }
-
-  #trackFrameChanges(): boolean {
-    let changed = false;
-    for (const frame of this.#frames) {
-      if (!isFrameStateRegistered(frame)) continue;
-      const version = getFrameVersion(frame);
-      if (this.#frameVersions.get(frame) !== version) {
-        this.#frameVersions.set(frame, version);
-        changed = true;
-      }
-    }
-    return changed;
-  }
-
-  #trackLayerChanges(): boolean {
-    let changed = false;
-    for (let index = 0; index < this.#layerRecords.length; index += 1) {
-      const record = this.#layerRecords[index]!;
-      const next = resolveSceneLayer(record.layer);
-      if (!next) continue;
-      if (next.kind !== record.kind || next.status !== record.status) {
-        this.#layerRecords[index] = next;
-        changed = true;
-      }
-      changed = trackSceneLayerChanges(this.#layerRecords[index]!) || changed;
-    }
-    return changed;
   }
 
   #updateNamedFrames(): void {
