@@ -26,10 +26,9 @@ describe(SceneLines.metadata.tag, () => {
     layer.source = vertices;
     layer.countLimit = 3;
     const featureIds = { values: new Uint32Array([1842, 2710]), repeat: 2 };
-    layer.featureIds = featureIds;
+    vertices.featureIds = featureIds;
     expect(layer.source).toBe(vertices);
-    expect(layer.featureIds).toBe(featureIds);
-    expect(layer.hasAttribute('feature-ids')).toBe(false);
+    expect(vertices.featureIds).toMatchObject(featureIds);
     expect(() => layer.publish()).not.toThrow();
     layer.source = null;
     expect(layer.source).toBeNull();

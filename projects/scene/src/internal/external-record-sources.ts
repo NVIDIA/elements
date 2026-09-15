@@ -18,10 +18,18 @@ import { VertexStreamBuffer } from './vertex-stream.js';
 import type { LayoutDescriptor } from './layouts/define-layout.js';
 import { labelRecordIsValid } from './labels/data.js';
 import { registerLabelSourceTexts } from './labels/source.js';
+import {
+  getSceneFeatureIds,
+  publishSceneFeatureIds,
+  registerSceneFeatureIdSource,
+  setSceneFeatureIds,
+  type SceneFeatureIds
+} from './feature-ids.js';
 
 export interface ExternalRecordSourceOptions {
   readonly bytes: Uint8Array;
   readonly count: number;
+  readonly featureIds?: SceneFeatureIds | null;
 }
 
 export interface ExternalLabelSourceOptions extends ExternalRecordSourceOptions {
@@ -52,6 +60,9 @@ export function createLabelSource(options: ExternalLabelSourceOptions): External
     capacity,
     count: input.count,
     kind: 'label',
+    get featureIds() {
+      return getSceneFeatureIds(source);
+    },
     texts
   };
   const validation = new VertexStreamBuffer(LABEL, { validateRecord: labelRecordIsValid });
@@ -59,6 +70,7 @@ export function createLabelSource(options: ExternalLabelSourceOptions): External
   if (!validation.ready) throw new RangeError('Label source active records contain invalid values.');
   const state: PackedRecordState = { bytes: source.bytes, cacheable: false, version: 0 };
   registerExternalPackedRecordSource(source, state);
+  registerFeatureIds(source, capacity, options.featureIds);
   registerLabelSourceTexts(source, texts);
   return Object.freeze(source);
 }
@@ -97,11 +109,21 @@ function createSource<Kind extends PackedRecordKind>(
     bytes,
     capacity,
     count,
-    kind
+    kind,
+    get featureIds() {
+      return getSceneFeatureIds(source);
+    }
   };
   const state: PackedRecordState = { bytes, cacheable: false, version: 0 };
   registerExternalPackedRecordSource(source, state);
+  registerFeatureIds(source, capacity, options.featureIds);
   return Object.freeze(source);
+}
+
+function registerFeatureIds(source: object, capacity: number, featureIds: SceneFeatureIds | null | undefined): void {
+  registerSceneFeatureIdSource(source, capacity);
+  if (featureIds !== undefined) setSceneFeatureIds(source, featureIds);
+  publishSceneFeatureIds(source);
 }
 
 function readSourceOptions(options: ExternalRecordSourceOptions): ExternalRecordSourceOptions {

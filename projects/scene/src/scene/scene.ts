@@ -78,6 +78,7 @@ export class Scene extends LitElement {
   readonly #content: SceneContent;
   #hasConnected = false;
   #mutationObserver?: MutationObserver;
+  #needsIdentityRefresh = false;
   #needsRender = true;
   readonly #picking: PickController;
   #readyCycle: ReadyCycle = createReadyCycle();
@@ -109,9 +110,14 @@ export class Scene extends LitElement {
       host: this,
       requestRender: () => this.#requestRender()
     });
-    registerSceneRenderNotifications(this, source => {
+    registerSceneRenderNotifications(this, (source, kind) => {
       this.#content.refreshLayer(source);
-      this.#requestRender();
+      if (kind === 'identity') {
+        this.#needsIdentityRefresh = true;
+        this.#scheduleTick();
+      } else {
+        this.#requestRender();
+      }
     });
   }
 
@@ -298,6 +304,7 @@ export class Scene extends LitElement {
       this.#syncStructuralMutations();
       return;
     }
+    if (owned.every(record => record.type === 'attributes' && record.attributeName === 'feature-id')) return;
     this.#requestRender();
   }
 
@@ -348,6 +355,7 @@ export class Scene extends LitElement {
     const rendererRequested = this.#renderer.consumeRenderRequest();
     this.#needsRender = this.#needsRender || rendererRequested;
     this.#renderIfNeeded();
+    this.#refreshIdentityIfNeeded();
   }
 
   #trackRuntimeChanges(): void {
@@ -364,10 +372,22 @@ export class Scene extends LitElement {
       const items = this.#content.compileRenderItems();
       this.#picking.reconcileInteractionAvailability();
       if (this.#renderer.render(items, viewProjection)) {
+        this.#needsIdentityRefresh = false;
         this.#needsRender = false;
         this.#completeReadyCycle();
         this.#camera.dispatchPendingChange();
       }
+    } catch (error) {
+      this.#failWebGPU(error);
+    }
+  }
+
+  #refreshIdentityIfNeeded(): void {
+    if (!this.#needsIdentityRefresh || this.#needsRender || !this.#renderer.active) return;
+    try {
+      this.#renderer.updateFeatureIdentity(this.#content.compileRenderItems());
+      this.#picking.reconcileInteractionAvailability();
+      this.#needsIdentityRefresh = false;
     } catch (error) {
       this.#failWebGPU(error);
     }

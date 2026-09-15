@@ -32,8 +32,10 @@ import { ScenePart } from './model/part.js';
 import { SceneCamera } from './camera/camera.js';
 import type { Scene } from './scene/scene.js';
 import {
-  registerSceneFeatureIdLayer,
+  publishSceneFeatureIds,
+  registerSceneFeatureIdSource,
   resolveSceneFeatureId,
+  setSceneFeatureId,
   setSceneFeatureIds,
   takeSceneFeatureIdSnapshot
 } from './internal/feature-ids.js';
@@ -432,21 +434,67 @@ describe('record publication contracts', () => {
 });
 
 describe('feature identity', () => {
-  const layer = document.createElement('div');
+  const unidentifiedSource = {};
+  registerSceneFeatureIdSource(unidentifiedSource, FEATURE_ID_COUNT);
+  test('1M-capacity no-ID snapshot', async ({ bench }) => {
+    await bench('1M-capacity no-ID snapshot', () =>
+      takeSceneFeatureIdSnapshot(unidentifiedSource, FEATURE_ID_COUNT)
+    ).run(runOptions);
+  });
+
+  const identitySource = {};
   const source = new Uint32Array(FEATURE_ID_COUNT);
   for (let index = 0; index < source.length; index += 1) source[index] = index;
-  registerSceneFeatureIdLayer(layer);
+  registerSceneFeatureIdSource(identitySource, FEATURE_ID_COUNT);
 
   test('1M uint32 raw copy reference', async ({ bench }) => {
     await bench('1M uint32 raw copy reference', () => new Uint32Array(source).length).run(runOptions);
   });
 
   test('1M uint32 feature snapshot', async ({ bench }) => {
-    await bench('1M uint32 feature snapshot', () => setSceneFeatureIds(layer, source)).run(runOptions);
+    await bench('1M uint32 feature snapshot', () => setSceneFeatureIds(identitySource, source)).run(runOptions);
   });
 
-  setSceneFeatureIds(layer, source);
-  const snapshot = takeSceneFeatureIdSnapshot(layer, FEATURE_ID_COUNT);
+  const sparseSource = {};
+  registerSceneFeatureIdSource(sparseSource, FEATURE_ID_COUNT);
+  setSceneFeatureIds(sparseSource, 0);
+  let sparseGeneration = 0;
+  test('100 sparse feature edits in 1M capacity', async ({ bench }) => {
+    await bench('100 sparse feature edits in 1M capacity', () => {
+      sparseGeneration += 1;
+      for (let index = 0; index < 100; index += 1) {
+        setSceneFeatureId(sparseSource, index * 10_000, sparseGeneration & 1);
+      }
+    }).run(runOptions);
+  });
+
+  const singleEditSource = {};
+  registerSceneFeatureIdSource(singleEditSource, FEATURE_ID_COUNT);
+  setSceneFeatureIds(singleEditSource, 0);
+  setSceneFeatureId(singleEditSource, 0, 1);
+  let singleFeatureId = 0;
+  test('1 feature edit in 1M capacity', async ({ bench }) => {
+    await bench('1 feature edit in 1M capacity', () => {
+      singleFeatureId = singleFeatureId === 0 ? 1 : 0;
+      setSceneFeatureId(singleEditSource, FEATURE_ID_COUNT - 1, singleFeatureId);
+    }).run(runOptions);
+  });
+
+  const sharedSource = {};
+  registerSceneFeatureIdSource(sharedSource, FEATURE_ID_COUNT);
+  setSceneFeatureIds(sharedSource, source);
+  publishSceneFeatureIds(sharedSource);
+  test('1M feature snapshot shared across six consumers', async ({ bench }) => {
+    await bench('1M feature snapshot shared across six consumers', () => {
+      for (let consumer = 0; consumer < 6; consumer += 1) {
+        void takeSceneFeatureIdSnapshot(sharedSource, FEATURE_ID_COUNT);
+      }
+    }).run(runOptions);
+  });
+
+  setSceneFeatureIds(identitySource, source);
+  publishSceneFeatureIds(identitySource);
+  const snapshot = takeSceneFeatureIdSnapshot(identitySource, FEATURE_ID_COUNT);
   test('1M direct typed-array lookup reference', async ({ bench }) => {
     await bench('1M direct typed-array lookup reference', () => {
       let total = 0;

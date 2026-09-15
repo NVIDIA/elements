@@ -16,10 +16,14 @@ import {
   connectMarkerLayer,
   disconnectMarkerLayer,
   getMarkerLayerMarker,
+  getMarkerLayerVersion,
   isCurrentMarkerLayerMarker,
+  publishLayerInstances,
   registerMarkerLayer,
+  takeMarkerLayerFeatureIdSnapshot,
   takeMarkerLayerRenderData
 } from './layer-state.js';
+import { resolveSceneFeatureId } from '../feature-ids.js';
 import '@nvidia-elements/scene/cubes/define.js';
 
 describe('marker layer state', () => {
@@ -121,16 +125,29 @@ describe('marker layer state', () => {
     fixture.append(layer);
     await elementIsStable(layer);
     const first = takeMarkerLayerRenderData(layer);
+    const initialVersion = getMarkerLayerVersion(layer);
     expect(first.markers).toEqual(markers);
     expect(Object.isFrozen(first.markers)).toBe(true);
 
+    markers[10]!.setAttribute('aria-label', 'Pump');
+    await nextMutation();
+    expect(getMarkerLayerVersion(layer)).toBe(initialVersion);
+
+    Reflect.set(markers[20]!, 'featureId', 1842);
+    await nextMutation();
+    expect(getMarkerLayerVersion(layer)).toBe(initialVersion);
+    expect(takeMarkerLayerRenderData(layer).uploadRanges).toEqual([]);
+    expect(resolveSceneFeatureId(takeMarkerLayerFeatureIdSnapshot(layer, 100), 20)).toBe(1842);
+
     const colorReads = vi.spyOn(CanvasRenderingContext2D.prototype, 'getImageData');
+    Reflect.set(markers[50]!, 'featureId', 2710);
     markers[50]!.position = [2, 0, 0];
     await nextMutation();
     const second = takeMarkerLayerRenderData(layer);
 
     expect(colorReads).not.toHaveBeenCalled();
     expect(second.uploadRanges).toEqual([{ offset: MARKER.stride * 50, size: MARKER.stride }]);
+    expect(resolveSceneFeatureId(takeMarkerLayerFeatureIdSnapshot(layer, 100), 50)).toBe(2710);
     markers[0]!.hidden = true;
     expect(isCurrentMarkerLayerMarker(layer, markers[0]!)).toBe(false);
     layer.prepend(markers[99]!);
@@ -189,6 +206,22 @@ describe('marker layer state', () => {
     layer.publish({ count: 1, start: second.index });
     expect(takeMarkerLayerRenderData(layer)).toMatchObject({ count: 2, ready: true });
     expect(readMarker(takeMarkerLayerRenderData(layer).bytes ?? new Uint8Array(), 1).position).toEqual([2, 0, 1]);
+  });
+
+  it('publishes source identity edits without queuing marker uploads', async () => {
+    const layer = createLayer('nve-scene-cubes');
+    fixture.append(layer);
+    await elementIsStable(layer);
+    const markers = new MarkerBuffer({ capacity: 1 });
+    const marker = markers.add({ featureId: 1842 });
+    layer.source = markers;
+    takeMarkerLayerRenderData(layer);
+
+    marker.featureId = 2710;
+    publishLayerInstances(layer);
+
+    expect(takeMarkerLayerRenderData(layer).uploadRanges).toEqual([]);
+    expect(resolveSceneFeatureId(takeMarkerLayerFeatureIdSnapshot(layer, 1), 0)).toBe(2710);
   });
 
   it('publishes retained marker writes and preserves an authored visibility limit across shrink', async () => {
@@ -352,7 +385,7 @@ describe('marker layer state', () => {
 });
 
 interface TestLayer extends HTMLElement {
-  source: MarkerSource | ExternalMarkerSource | null;
+  source: MarkerSource | null;
   countLimit: number | undefined;
   publish(options?: { activeCount?: number; count?: number; start?: number }): void;
 }

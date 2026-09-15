@@ -3,6 +3,14 @@
 
 import { parseCSSColor } from './utils/color.js';
 import {
+  assertSceneFeatureId,
+  getSceneFeatureIds,
+  registerSceneFeatureIdSource,
+  setSceneFeatureId,
+  setSceneFeatureIds,
+  type SceneFeatureIds
+} from './feature-ids.js';
+import {
   PACKED_RECORD_SOURCE,
   PACKED_RECORD_STATE,
   type PackedRecordKind,
@@ -34,6 +42,13 @@ export interface MutableQuaternion {
   toArray(): Quaternion;
 }
 
+export interface RecordHandleOptions {
+  readonly featureIdSource: object;
+  readonly index: number;
+  readonly notifyMutation: () => void;
+  readonly view: DataView;
+}
+
 export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandle>
   implements VersionedPackedRecordSource<Kind>
 {
@@ -44,23 +59,25 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
   readonly #bytes: Uint8Array;
   #mutableStateEscaped = false;
   #count = 0;
-  readonly #createHandle: (view: DataView, index: number, notifyMutation: () => void) => RecordHandle;
+  readonly #createHandle: (options: RecordHandleOptions) => RecordHandle;
   readonly #defaultInit: () => Init;
   readonly #handles = new Map<number, RecordHandle>();
+  readonly #readFeatureId: ((init: Init) => number | undefined) | undefined;
   readonly #view: DataView;
   #version = 0;
   readonly #writeRecord: (bytes: Uint8Array, index: number, init: Init) => void;
 
   protected constructor(options: {
     capacity: number;
-    createHandle: (view: DataView, index: number, notifyMutation: () => void) => RecordHandle;
+    createHandle: (options: RecordHandleOptions) => RecordHandle;
     defaultInit: () => Init;
     initialize: (view: DataView, bytes: Uint8Array, capacity: number) => void;
     kind: Kind;
+    readFeatureId?: (init: Init) => number | undefined;
     stride: number;
     writeRecord: (bytes: Uint8Array, index: number, init: Init) => void;
   }) {
-    const { capacity, createHandle, defaultInit, initialize, kind, stride, writeRecord } = options;
+    const { capacity, createHandle, defaultInit, initialize, kind, readFeatureId, stride, writeRecord } = options;
     const byteLength = capacity * stride;
     if (!Number.isInteger(capacity) || capacity < 0 || !Number.isSafeInteger(byteLength)) {
       throw new RangeError('Record capacity must be a nonnegative integer with a safe byte length.');
@@ -69,10 +86,12 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     this.#bytes = new Uint8Array(byteLength);
     this.#createHandle = createHandle;
     this.#defaultInit = defaultInit;
+    this.#readFeatureId = readFeatureId;
     this.#view = new DataView(this.#bytes.buffer, this.#bytes.byteOffset, this.#bytes.byteLength);
     this[PACKED_RECORD_SOURCE] = kind;
     this.#writeRecord = writeRecord;
     initialize(this.#view, this.#bytes, capacity);
+    registerSceneFeatureIdSource(this, capacity);
   }
 
   /** Complete mutable byte allocation. Direct access disables prepared-source caching. */
@@ -91,6 +110,15 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     return this.#version;
   }
 
+  /** Stable application identities for this source's logical pick targets. */
+  get featureIds(): SceneFeatureIds | null {
+    return getSceneFeatureIds(this);
+  }
+
+  set featureIds(value: SceneFeatureIds | null) {
+    setSceneFeatureIds(this, value);
+  }
+
   /** Appends a record and returns its stable mutable handle. */
   add(init: Init = this.#defaultInit()): RecordHandle {
     const index = this.#count;
@@ -105,7 +133,12 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     if (existing) {
       return existing;
     }
-    const handle = this.#createHandle(this.#view, index, this.#notifyMutation);
+    const handle = this.#createHandle({
+      view: this.#view,
+      index,
+      notifyMutation: this.#notifyMutation,
+      featureIdSource: this
+    });
     this.#handles.set(index, handle);
     return handle;
   }
@@ -115,7 +148,10 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     if (!Number.isInteger(index) || index < 0 || index > this.#count || index >= this.capacity) {
       throw new RangeError('Record index must address an active record or append at the current count.');
     }
+    const featureId = this.#readFeatureId?.(init);
+    if (featureId !== undefined) assertSceneFeatureId(featureId);
     this.#writeRecord(this.#bytes, index, init);
+    if (this.#readFeatureId) setSceneFeatureId(this, index, featureId);
     if (index === this.#count) {
       this.#count += 1;
     }

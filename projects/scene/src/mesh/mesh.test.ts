@@ -4,7 +4,7 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import { MESH_GEOMETRY, MESH_TEXTURE_CAPTURE, MESH_TEXTURE_WITHOUT_UVS } from '../errors.js';
+import { FEATURE_ID_INACTIVE, MESH_GEOMETRY, MESH_TEXTURE_CAPTURE, MESH_TEXTURE_WITHOUT_UVS } from '../errors.js';
 import {
   getMeshLayerVersion,
   getMeshRenderData,
@@ -17,6 +17,8 @@ import { MarkerBuffer } from '../internal/markers/buffer.js';
 import { SceneMesh } from './mesh.js';
 import '@nvidia-elements/scene/mesh/define.js';
 import { restoreScenePlatform, scenePlatform } from '../internal/gpu/platform.js';
+import { createSceneLayerRenderItem, resolveSceneLayer } from '../internal/scene/layer-record.js';
+import { resolveSceneFeatureId } from '../internal/feature-ids.js';
 
 const triangle = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
 
@@ -77,6 +79,30 @@ describe(SceneMesh.metadata.tag, () => {
     expect(mesh.source).toBe(markers);
     expect(takeMarkerLayerRenderData(mesh)).toMatchObject({ count: 1, ready: true });
     expect(getMeshRenderData(mesh).identityInstance).toBe(false);
+  });
+
+  it('uses singular identity only for an uninstanced mesh and warns when instances take precedence', () => {
+    const mesh = new SceneMesh();
+    mesh.publishGeometry({ attribute: 'positions', source: triangle });
+    mesh.featureId = 0;
+    const record = resolveSceneLayer(mesh);
+    if (!record) throw new Error('Expected a registered mesh layer.');
+
+    expect(resolveSceneFeatureId(createSceneLayerRenderItem(record)?.featureIds, 0)).toBe(0);
+
+    const errors: string[] = [];
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    mesh.addEventListener('nve-scene-error', event => {
+      errors.push((event as CustomEvent<{ code: string }>).detail.code);
+    });
+    const markers = new MarkerBuffer({ capacity: 1 });
+    markers.add({ featureId: 1842 });
+    mesh.source = markers;
+    const instanced = createSceneLayerRenderItem(record);
+
+    expect(resolveSceneFeatureId(instanced?.featureIds, 0)).toBe(1842);
+    expect(errors).toEqual([FEATURE_ID_INACTIVE]);
+    expect(warning).toHaveBeenCalledOnce();
   });
 
   it('captures a complete geometry replacement without retaining producer arrays', () => {

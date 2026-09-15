@@ -17,6 +17,12 @@ import {
   replaceMeshGeometry
 } from '../internal/mesh/layer-state.js';
 import type { SceneTextureCaptureResult } from '../internal/mesh/layer-state.js';
+import {
+  getElementFeatureId,
+  registerElementFeatureId,
+  sceneFeatureIdConverter,
+  setElementFeatureId
+} from '../internal/element-feature-id.js';
 import styles from '../internal/styles/host.css?inline';
 
 /** Complete producer input captured by SceneMesh.geometry. */
@@ -69,6 +75,16 @@ export class SceneMesh extends MarkerLayerElement {
   static readonly metadata = { tag: 'nve-scene-mesh', version: '0.0.0' };
 
   #geometry: SceneMeshGeometry | null = null;
+
+  /** Stable application identity returned when picking the uninstanced mesh. */
+  @property({ attribute: 'feature-id', converter: sceneFeatureIdConverter })
+  get featureId(): number | undefined {
+    return getElementFeatureId(this);
+  }
+
+  set featureId(value: number | undefined) {
+    setElementFeatureId(this, value);
+  }
 
   /** Captures and replaces the complete geometry, or clears it when null. */
   @property({ attribute: false })
@@ -173,6 +189,7 @@ export class SceneMesh extends MarkerLayerElement {
 
   constructor() {
     super('cube');
+    registerElementFeatureId(this);
     registerMeshLayer(this);
   }
   protected override updated(changed: PropertyValues<this>): void {

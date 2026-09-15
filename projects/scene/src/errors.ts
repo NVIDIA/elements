@@ -11,6 +11,7 @@ export const LAYOUT_VALUE_INVALID = 'layout-value-invalid';
 export const LAYER_DUAL_SOURCE = 'layer-dual-source';
 export const LAYER_CHILD = 'layer-child';
 export const FEATURE_ID_MAP_INVALID = 'feature-id-map-invalid';
+export const FEATURE_ID_INACTIVE = 'feature-id-inactive';
 export const MARKER_PARENT = 'marker-parent';
 export const TRIANGLES_COUNT = 'triangles-count';
 export const LINES_COUNT = 'lines-count';
@@ -33,6 +34,7 @@ export type SceneErrorCode =
   | typeof CAMERA_SLOT_CONFLICT
   | typeof DEVICE_LOST
   | typeof FEATURE_ID_MAP_INVALID
+  | typeof FEATURE_ID_INACTIVE
   | typeof FRAME_NAME_DUPLICATE
   | typeof FRAME_TRANSFORM
   | typeof HEIGHTFIELD_GRID

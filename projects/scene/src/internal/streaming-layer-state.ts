@@ -19,12 +19,16 @@ import {
   getPackedRecordBytes,
   getPackedRecordKind,
   isPackedRecordSource,
-  resolvePublishOptions,
   type AnyPackedRecordSource,
   type PackedRecordKind,
   type ScenePublishOptions
 } from './packed-record-source.js';
 import { replacePreparedVertexSource } from './prepared-record-source.js';
+import {
+  publishPackedSourceGeneration,
+  resolvePackedSourcePublication,
+  type PackedSourcePublication
+} from './packed-source-publication.js';
 
 export type StreamingLayerKind = 'point' | 'line' | 'triangle';
 
@@ -59,6 +63,7 @@ interface StreamingLayerState {
   source: StreamingLayerSource | null;
   publicationError: boolean;
   streamedCount: number;
+  sourceVersion: number;
 }
 
 export type StreamingLayerSource = AnyPackedRecordSource;
@@ -80,6 +85,7 @@ export function registerStreamingLayer(layer: HTMLElement, options: StreamingLay
     source: null,
     publicationError: false,
     streamedCount: 0,
+    sourceVersion: -1,
     topology: options.topology ?? 'strip',
     widthUnit: options.widthUnit ?? 'world'
   });
@@ -100,6 +106,7 @@ export function setStreamingLayerSource(layer: HTMLElement, source: StreamingLay
   state.source = source;
   state.publicationError = false;
   replaceStreamedBuffer(state, source);
+  state.sourceVersion = publishPackedSourceGeneration(source);
   updateDataDiagnostics(layer, state);
   notifyOwningScene(layer);
 }
@@ -119,20 +126,39 @@ export function publishStreamingLayer(layer: HTMLElement, options?: ScenePublish
   const state = getState(layer);
   const source = state.source;
   if (source === null) return;
-  const resolved = resolvePublishOptions({
-    capacity: source.capacity,
+  const previousPublicationError = state.publicationError;
+  const publication = resolvePackedSourcePublication({
     currentActiveCount: state.streamedCount,
+    currentSourceVersion: state.sourceVersion,
     requested: options,
-    sourceActiveCount: source.count
+    source,
+    unavailableStateMessage: 'Packed vertex source state is unavailable.'
   });
-  const candidateReady = streamingPublicationIsValid(state, source, resolved.activeCount);
-  const lineCountValid = state.kind !== 'line' || lineCountIsValid(resolved.activeCount, state.topology);
+  const candidateReady = streamingPublicationIsValid(state, source, publication.resolved.activeCount);
+  const lineCountValid = state.kind !== 'line' || lineCountIsValid(publication.resolved.activeCount, state.topology);
   state.publicationError = !candidateReady || !lineCountValid;
+  let visualChanged = previousPublicationError !== state.publicationError;
   if (!state.publicationError) {
-    applyStreamingPublication(state, resolved);
+    visualChanged =
+      applySuccessfulStreamingPublication({
+        publication,
+        source,
+        state
+      }) || visualChanged;
   }
   updateDataDiagnostics(layer, state);
-  notifyOwningScene(layer);
+  notifyOwningScene(layer, visualChanged ? 'render' : 'identity');
+}
+
+function applySuccessfulStreamingPublication(options: {
+  publication: PackedSourcePublication;
+  source: StreamingLayerSource;
+  state: StreamingLayerState;
+}): boolean {
+  const { publication, source, state } = options;
+  applyStreamingPublication(state, publication.resolved, publication.geometryChanged);
+  state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
+  return publication.visualChanged;
 }
 
 function streamingPublicationIsValid(
@@ -149,9 +175,10 @@ function streamingPublicationIsValid(
 
 function applyStreamingPublication(
   state: StreamingLayerState,
-  resolved: ReturnType<typeof resolvePublishOptions>
+  resolved: PackedSourcePublication['resolved'],
+  geometryChanged: boolean
 ): void {
-  state.buffer.commit(resolved.start, resolved.count);
+  if (geometryChanged) state.buffer.commit(resolved.start, resolved.count);
   state.streamedCount = resolved.activeCount;
   state.buffer.setSourceCount(resolved.activeCount);
 }

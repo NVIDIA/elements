@@ -4,20 +4,25 @@
 import { isHeightfieldLayerRegistered, takeHeightfieldLayerRenderData } from '../heightfield/layer-state.js';
 import { isInteractiveLayer } from '../interaction.js';
 import { identityPreciseMat4 } from '../math/mat4.js';
-import { isMarkerLayerRegistered, takeMarkerLayerRenderData } from '../markers/layer-state.js';
+import {
+  isMarkerLayerRegistered,
+  takeMarkerLayerFeatureIdSnapshot,
+  takeMarkerLayerRenderData
+} from '../markers/layer-state.js';
 import { isMeshLayerRegistered, takeMeshLayerRenderData } from '../mesh/layer-state.js';
 import { isModelLayerRegistered, takeModelLayerRenderData } from '../model/layer-state.js';
 import { isPolygonLayerRegistered, takePolygonLayerRenderData } from '../polygon/layer-state.js';
 import type { MeshRenderItem, SceneRenderItem } from '../rendering/render-items.js';
 import {
   getStreamingLayerKind,
+  getStreamingLayerSource,
   isStreamingLayerRegistered,
   takeStreamingLayerRenderData
 } from '../streaming-layer-state.js';
 import { getFrameWorldMatrixPrecise } from '../frame/state.js';
 import { takeSceneFeatureIdSnapshot } from '../feature-ids.js';
 import { getPickItemCount } from '../rendering/render-items.js';
-import { isLabelLayerRegistered, takeLabelLayerRenderData } from '../labels/layer-state.js';
+import { getLabelLayerSource, isLabelLayerRegistered, takeLabelLayerRenderData } from '../labels/layer-state.js';
 import type { LabelScaleUnit } from '../labels/data.js';
 import type { PointSizeUnit } from '../points/data.js';
 import {
@@ -26,6 +31,8 @@ import {
   type SceneLayerKind,
   type StreamSceneLayerKind
 } from '../layer-tags.js';
+import { getElementFeatureId, updateElementFeatureIdInactive } from '../element-feature-id.js';
+import type { SceneFeatureIdSnapshot } from '../feature-ids.js';
 
 export type { SceneLayerKind } from '../layer-tags.js';
 
@@ -92,29 +99,27 @@ export function createSceneLayerRenderItem(record: SceneLayerRecord): SceneRende
   const { layer } = record;
   const frameMatrix = getOwningFrameMatrix(layer);
   const interactive = isInteractiveLayer(layer);
-  if (record.kind === 'marker')
-    return withFeatureIds({ data: takeMarkerLayerRenderData(layer), frameMatrix, interactive, layer, type: 'marker' });
-  if (record.kind === 'label')
-    return withFeatureIds({
+  if (record.kind === 'marker') {
+    const item = { data: takeMarkerLayerRenderData(layer), frameMatrix, interactive, layer, type: 'marker' } as const;
+    return withFeatureIds(item, takeMarkerLayerFeatureIdSnapshot(layer, getPickItemCount(item)));
+  }
+  if (record.kind === 'label') {
+    const item = {
       data: takeLabelLayerRenderData(layer),
       frameMatrix,
       interactive,
       layer,
       scaleUnit: labelScaleUnit(layer),
       type: 'label'
-    });
-  if (record.kind === 'heightfield')
-    return meshItem({ data: takeHeightfieldLayerRenderData(layer), frameMatrix, interactive, layer });
+    } as const;
+    return withFeatureIds(item, takeSceneFeatureIdSnapshot(getLabelLayerSource(layer), getPickItemCount(item), layer));
+  }
+  if (record.kind === 'heightfield') {
+    const item = meshItem({ data: takeHeightfieldLayerRenderData(layer), frameMatrix, interactive, layer });
+    return withFeatureIds(item, takeSceneFeatureIdSnapshot(layer, getPickItemCount(item)));
+  }
   if (isStreamRecord(record)) return createStreamLayerRenderItem(record, frameMatrix, interactive);
-  return withFeatureIds(
-    meshItem({
-      data: takeMeshRecordRenderData(record),
-      frameMatrix,
-      instances: optionalMarkers(layer),
-      interactive,
-      layer
-    })
-  );
+  return createMeshLayerRenderItem(record, frameMatrix, interactive);
 }
 
 function createStreamLayerRenderItem(
@@ -124,8 +129,9 @@ function createStreamLayerRenderItem(
 ): SceneRenderItem {
   const { layer } = record;
   const data = takeStreamingLayerRenderData(layer);
-  if (record.kind === 'point')
-    return withFeatureIds({
+  let item: SceneRenderItem;
+  if (record.kind === 'point') {
+    item = {
       data,
       frameMatrix,
       interactive,
@@ -133,9 +139,9 @@ function createStreamLayerRenderItem(
       size: layerNumber(layer, 'size', 3),
       sizeUnit: pointSizeUnit(layer),
       type: 'point'
-    });
-  if (record.kind === 'line')
-    return withFeatureIds({
+    };
+  } else if (record.kind === 'line') {
+    item = {
       data,
       frameMatrix,
       interactive,
@@ -143,8 +149,35 @@ function createStreamLayerRenderItem(
       topology: data.topology,
       type: 'line',
       widthUnit: data.widthUnit
-    });
-  return withFeatureIds({ data, frameMatrix, interactive, layer, type: 'triangle' });
+    };
+  } else {
+    item = { data, frameMatrix, interactive, layer, type: 'triangle' };
+  }
+  return withFeatureIds(
+    item,
+    takeSceneFeatureIdSnapshot(getStreamingLayerSource(layer), getPickItemCount(item), layer)
+  );
+}
+
+function createMeshLayerRenderItem(
+  record: MeshLayerRecord,
+  frameMatrix: Float64Array,
+  interactive: boolean
+): MeshRenderItem {
+  const { layer } = record;
+  const item = meshItem({
+    data: takeMeshRecordRenderData(record),
+    frameMatrix,
+    instances: optionalMarkers(layer),
+    interactive,
+    layer
+  });
+  const identityInstance = item.data.identityInstance;
+  updateElementFeatureIdInactive(layer, !identityInstance && getElementFeatureId(layer) !== undefined);
+  const featureIds = identityInstance
+    ? takeSceneFeatureIdSnapshot(layer, 1)
+    : takeMarkerLayerFeatureIdSnapshot(layer, getPickItemCount(item));
+  return withFeatureIds(item, featureIds);
 }
 
 export function isTechnicallyPickableLayer(record: SceneLayerRecord): boolean {
@@ -183,8 +216,10 @@ function meshItem(
   return { ...options, instances: options.instances, type: 'mesh' };
 }
 
-function withFeatureIds<Item extends SceneRenderItem>(item: Item): Item {
-  const featureIds = takeSceneFeatureIdSnapshot(item.layer, getPickItemCount(item));
+function withFeatureIds<Item extends SceneRenderItem>(
+  item: Item,
+  featureIds: SceneFeatureIdSnapshot | undefined
+): Item {
   return featureIds ? { ...item, featureIds } : item;
 }
 

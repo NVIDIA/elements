@@ -13,6 +13,7 @@ import { getFieldOffset } from '../layouts/define-layout.js';
 import { writeTriangleVertex } from '../layouts/helpers.js';
 import type { RGBA, Vec3 } from '../types.js';
 import type { MutableVector3, RecordBufferOptions, SceneColor } from '../packed-record-buffer.js';
+import type { ExternalTriangleVertexSource } from '../packed-record-source.js';
 
 const POSITION_OFFSET = getFieldOffset(TRIANGLE_VERTEX, 'position');
 const COLOR_OFFSET = getFieldOffset(TRIANGLE_VERTEX, 'color');
@@ -29,14 +30,14 @@ export interface TriangleVertex {
   set color(value: SceneColor);
 }
 
-export type TriangleVertexSource = TriangleVertexBuffer;
+export type TriangleVertexSource = TriangleVertexBuffer | ExternalTriangleVertexSource;
 
 /** Fixed-capacity, mutable storage for packed triangle vertex records. */
 export class TriangleVertexBuffer extends PackedRecordBuffer<'triangle-vertex', TriangleVertexInit, TriangleVertex> {
   constructor(options: RecordBufferOptions) {
     super({
       capacity: options.capacity,
-      createHandle: (view, index, notifyMutation) => new TriangleVertexRecord(view, index, notifyMutation),
+      createHandle: ({ index, notifyMutation, view }) => new TriangleVertexRecord(view, index, notifyMutation),
       defaultInit: () => ({}),
       initialize: initializeRecords,
       kind: 'triangle-vertex',

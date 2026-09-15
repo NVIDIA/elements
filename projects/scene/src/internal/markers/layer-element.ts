@@ -17,14 +17,7 @@ import type { PrimitiveKind } from '../primitive-geometry.js';
 import type { MarkerSource } from './buffer.js';
 import type { SceneInteractionTarget } from '../interaction.js';
 import type { ScenePublishOptions } from '../packed-record-source.js';
-import {
-  getLayerFeatureIds,
-  getLayerInteractive,
-  registerFeatureIdentifiedLayer,
-  setLayerFeatureIds,
-  setLayerInteractive
-} from '../interactive-layer-state.js';
-import type { SceneFeatureIds } from '../feature-ids.js';
+import { getLayerInteractive, registerInteractiveLayer, setLayerInteractive } from '../interactive-layer-state.js';
 
 /**
  * @event {ScenePickHit} nve-scene-click - Dispatched when pointer activation resolves to this layer.
@@ -34,18 +27,8 @@ import type { SceneFeatureIds } from '../feature-ids.js';
 export abstract class MarkerLayerElement extends LitElement implements SceneInteractionTarget {
   protected constructor(kind: PrimitiveKind) {
     super();
-    registerFeatureIdentifiedLayer(this);
+    registerInteractiveLayer(this);
     registerMarkerLayer(this, kind);
-  }
-
-  /** Stable uint32 identities for logical instances resolved by picking. */
-  @property({ attribute: false })
-  get featureIds(): SceneFeatureIds | null {
-    return getLayerFeatureIds(this);
-  }
-
-  set featureIds(value: SceneFeatureIds | null) {
-    setLayerFeatureIds(this, value);
   }
 
   /** Enables automatic pointer hit testing and routed interaction events for this layer. */

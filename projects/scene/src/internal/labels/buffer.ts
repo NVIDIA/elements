@@ -14,6 +14,8 @@ import { getFieldOffset } from '../layouts/define-layout.js';
 import { registerLabelSourceTexts } from './source.js';
 import type { RGBA, Vec3 } from '../types.js';
 import type { MutableVector3, RecordBufferOptions, SceneColor } from '../packed-record-buffer.js';
+import type { ExternalLabelSource } from '../packed-record-source.js';
+import { getSceneFeatureId, setSceneFeatureId } from '../feature-ids.js';
 
 const POSITION_OFFSET = getFieldOffset(LABEL, 'position');
 const SCALE_OFFSET = getFieldOffset(LABEL, 'scale');
@@ -24,6 +26,7 @@ export interface LabelInit {
   readonly position?: Readonly<Vec3>;
   readonly scale?: number;
   readonly text?: string;
+  readonly featureId?: number;
 }
 
 export interface Label {
@@ -35,9 +38,11 @@ export interface Label {
   set scale(value: number);
   get text(): string;
   set text(value: string);
+  get featureId(): number | undefined;
+  set featureId(value: number | undefined);
 }
 
-export type LabelSource = LabelBuffer;
+export type LabelSource = LabelBuffer | ExternalLabelSource;
 
 /** Fixed-capacity, mutable storage for packed label records and their text. */
 export class LabelBuffer extends PackedRecordBuffer<'label', LabelInit, Label> {
@@ -45,10 +50,12 @@ export class LabelBuffer extends PackedRecordBuffer<'label', LabelInit, Label> {
     const texts = createTextStorage(options);
     super({
       capacity: options.capacity,
-      createHandle: (view, index, notifyMutation) => new LabelRecord({ index, notifyMutation, texts, view }),
+      createHandle: ({ featureIdSource, index, notifyMutation, view }) =>
+        new LabelRecord({ featureIdSource, index, notifyMutation, texts, view }),
       defaultInit: () => ({}),
       initialize: initializeRecords,
       kind: 'label',
+      readFeatureId: init => init.featureId,
       stride: LABEL.stride,
       writeRecord: (bytes, index, init) => writeRecord({ bytes, index, init, texts })
     });
@@ -88,11 +95,19 @@ class LabelRecord implements Label {
   readonly position: MutableVector3;
 
   readonly #notifyMutation: () => void;
+  readonly #featureIdSource: object;
   readonly #texts: string[];
   readonly #view: DataView;
 
-  constructor(options: { index: number; notifyMutation: () => void; texts: string[]; view: DataView }) {
+  constructor(options: {
+    featureIdSource: object;
+    index: number;
+    notifyMutation: () => void;
+    texts: string[];
+    view: DataView;
+  }) {
     this.index = options.index;
+    this.#featureIdSource = options.featureIdSource;
     this.#notifyMutation = options.notifyMutation;
     this.#texts = options.texts;
     this.#view = options.view;
@@ -129,6 +144,14 @@ class LabelRecord implements Label {
     if (value === this.text) return;
     this.#texts[this.index] = value;
     this.#notifyMutation();
+  }
+
+  get featureId(): number | undefined {
+    return getSceneFeatureId(this.#featureIdSource, this.index);
+  }
+
+  set featureId(value: number | undefined) {
+    setSceneFeatureId(this.#featureIdSource, this.index, value);
   }
 }
 

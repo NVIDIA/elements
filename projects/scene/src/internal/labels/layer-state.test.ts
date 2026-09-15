@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { LABEL } from '../layouts/built-ins.js';
 import { LabelBuffer } from './buffer.js';
 import { publishLabelLayer, registerLabelLayer, setLabelLayerSource, takeLabelLayerRenderData } from './layer-state.js';
+import { resolveSceneFeatureId, takeSceneFeatureIdSnapshot } from '../feature-ids.js';
 
 describe('label layer state', () => {
   it('publishes numeric and text changes through independent versions', () => {
@@ -50,5 +51,20 @@ describe('label layer state', () => {
       pickable: false,
       transparent: false
     });
+  });
+
+  it('publishes identity edits without queuing label uploads', () => {
+    const layer = document.createElement('nve-scene-labels');
+    const labels = new LabelBuffer({ capacity: 1 });
+    const label = labels.add({ featureId: 1842, text: 'Pump' });
+    registerLabelLayer(layer);
+    setLabelLayerSource(layer, labels);
+    takeLabelLayerRenderData(layer);
+
+    label.featureId = 2710;
+    publishLabelLayer(layer);
+
+    expect(takeLabelLayerRenderData(layer).uploadRanges).toEqual([]);
+    expect(resolveSceneFeatureId(takeSceneFeatureIdSnapshot(labels, 1), 0)).toBe(2710);
   });
 });

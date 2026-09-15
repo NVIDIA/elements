@@ -181,6 +181,22 @@ export class SceneRenderer {
     return true;
   }
 
+  /** Replaces CPU-side pick identity without encoding or submitting a color frame. */
+  updateFeatureIdentity(items: readonly SceneRenderItem[]): void {
+    this.#frameGeneration += 1;
+    this.#frameItems = items;
+    this.#interactiveFrameItems.length = 0;
+    for (const item of items) {
+      if (isInteractiveItem(item)) this.#interactiveFrameItems.push(item);
+    }
+    this.#picking?.updateFrame({
+      frameGeneration: this.#frameGeneration,
+      items,
+      projection: this.#frameProjection,
+      scope: 'all'
+    });
+  }
+
   #prepareFrame(items: readonly SceneRenderItem[], viewProjection: Matrix4 | undefined): PreparedFrame | undefined {
     const context = this.#context;
     const device = this.#device;

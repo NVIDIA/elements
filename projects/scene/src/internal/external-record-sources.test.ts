@@ -17,10 +17,12 @@ describe('external packed record sources', () => {
     const allocation = new Uint8Array(POINT.stride * 3 + 7);
     const bytes = allocation.subarray(7, 7 + POINT.stride * 3);
     writePoint(bytes, 0, { position: [1, 2, 3] });
-    const source = createPointSource({ bytes, count: 1 });
+    const featureIds = new Uint32Array([0, 0xffffffff, 1842]);
+    const source = createPointSource({ bytes, count: 1, featureIds });
 
     expect(source).toMatchObject({ bytes, capacity: 3, count: 1, kind: 'point' });
     expect(source.bytes.buffer).toBe(allocation.buffer);
+    expect(source.featureIds).toEqual(featureIds);
     expect(Object.isFrozen(source)).toBe(true);
   });
 

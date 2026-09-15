@@ -12,6 +12,12 @@ import {
 } from '../internal/model/layer-state.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
 import type { ModelPart } from '../internal/model/compile.js';
+import {
+  getElementFeatureId,
+  registerElementFeatureId,
+  sceneFeatureIdConverter,
+  setElementFeatureId
+} from '../internal/element-feature-id.js';
 import styles from '../internal/styles/host.css?inline';
 
 /**
@@ -28,6 +34,16 @@ export class SceneModel extends MarkerLayerElement {
   static readonly metadata = { tag: 'nve-scene-model', version: '0.0.0' };
 
   #parts: readonly ModelPart[] | null = null;
+
+  /** Stable application identity returned when picking the uninstanced model. */
+  @property({ attribute: 'feature-id', converter: sceneFeatureIdConverter })
+  get featureId(): number | undefined {
+    return getElementFeatureId(this);
+  }
+
+  set featureId(value: number | undefined) {
+    setElementFeatureId(this, value);
+  }
 
   /**
    * Bulk primitive geometry. A non-null value takes precedence over part children.
@@ -49,6 +65,7 @@ export class SceneModel extends MarkerLayerElement {
 
   constructor() {
     super('cube');
+    registerElementFeatureId(this);
     registerModelLayer(this);
   }
 

@@ -7,6 +7,13 @@ import { readLineVertex } from '../layouts/helpers.js';
 import { LineVertexBuffer } from './buffer.js';
 
 describe('line vertex buffer', () => {
+  it('stores logical segment identities without changing vertex records', () => {
+    const vertices = new LineVertexBuffer({ capacity: 4 });
+    vertices.featureIds = new Uint32Array([1842, 2710]);
+
+    expect(vertices.featureIds).toEqual(new Uint32Array([1842, 2710]));
+  });
+
   it('should expose defaults and atomically validate styles', () => {
     const vertices = new LineVertexBuffer({ capacity: 2 });
     const vertex = vertices.add({ color: 'rgba(0, 160, 255, 0.22)', position: [1, 2, 3] });

@@ -799,7 +799,7 @@ describe(SceneRenderer.name, () => {
     resetSceneTesting();
   });
 
-  it('keeps feature identity out of steady color-render GPU work', async () => {
+  it('updates feature identity without encoding or submitting GPU work', async () => {
     const gpu = createAdvancedDevice();
     configureSceneTesting({
       getCanvasContext: () => ({
@@ -820,12 +820,20 @@ describe(SceneRenderer.name, () => {
     renderer.render([loaded]);
 
     resetObservedGPUActivity(gpu);
-    renderer.render([loaded]);
-    const baseline = observedGPUActivity(gpu);
-    resetObservedGPUActivity(gpu);
-    renderer.render([{ ...loaded, featureIds: featureIdSnapshot(1842) }]);
+    renderer.updateFeatureIdentity([{ ...loaded, featureIds: featureIdSnapshot(1842) }]);
 
-    expect(observedGPUActivity(gpu)).toEqual(baseline);
+    expect(observedGPUActivity(gpu)).toEqual({
+      bindGroups: 0,
+      buffers: 0,
+      draws: 0,
+      passes: 0,
+      pipelines: 0,
+      samplers: 0,
+      shaders: 0,
+      submissions: 0,
+      textures: 0,
+      writes: []
+    });
     renderer.disconnect();
     resetSceneTesting();
   });

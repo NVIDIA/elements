@@ -12,11 +12,13 @@ import {
   type RecordBufferOptions,
   type SceneColor
 } from '../packed-record-buffer.js';
+import { getSceneFeatureId, setSceneFeatureId } from '../feature-ids.js';
 import { MARKER } from '../layouts/built-ins.js';
 import { getFieldOffset } from '../layouts/define-layout.js';
 import { writeMarker } from '../layouts/helpers.js';
 import { normalizeQuaternion } from '../math/quaternion.js';
 import type { Quaternion, RGBA, Vec3 } from '../types.js';
+import type { ExternalMarkerSource } from '../packed-record-source.js';
 
 const POSITION_OFFSET = getFieldOffset(MARKER, 'position');
 const ORIENTATION_OFFSET = getFieldOffset(MARKER, 'orientation');
@@ -25,6 +27,7 @@ const COLOR_OFFSET = getFieldOffset(MARKER, 'color');
 const OUTLINE_COLOR_OFFSET = getFieldOffset(MARKER, 'outline-color');
 
 export interface MarkerInit {
+  readonly featureId?: number;
   readonly position?: Readonly<Vec3>;
   readonly orientation?: Readonly<Quaternion>;
   readonly scale?: Readonly<Vec3>;
@@ -41,19 +44,22 @@ export interface Marker {
   set color(value: SceneColor);
   get outlineColor(): RGBA;
   set outlineColor(value: SceneColor);
+  get featureId(): number | undefined;
+  set featureId(value: number | undefined);
 }
 
-export type MarkerSource = MarkerBuffer;
+export type MarkerSource = MarkerBuffer | ExternalMarkerSource;
 
 /** Fixed-capacity, mutable storage for packed marker records. */
 export class MarkerBuffer extends PackedRecordBuffer<'marker', MarkerInit, Marker> {
   constructor(options: RecordBufferOptions) {
     super({
       capacity: options.capacity,
-      createHandle: (view, index, notifyMutation) => new MarkerRecord(view, index, notifyMutation),
+      createHandle: handleOptions => new MarkerRecord(handleOptions),
       defaultInit: () => ({}),
       initialize: initializeRecords,
       kind: 'marker',
+      readFeatureId: init => init.featureId,
       stride: MARKER.stride,
       writeRecord
     });
@@ -77,10 +83,13 @@ class MarkerRecord implements Marker {
   readonly scale: MutableVector3;
 
   readonly #notifyMutation: () => void;
+  readonly #featureIdSource: object;
   readonly #view: DataView;
 
-  constructor(view: DataView, index: number, notifyMutation: () => void) {
+  constructor(options: { featureIdSource: object; index: number; notifyMutation: () => void; view: DataView }) {
+    const { featureIdSource, index, notifyMutation, view } = options;
     this.index = index;
+    this.#featureIdSource = featureIdSource;
     this.#notifyMutation = notifyMutation;
     this.#view = view;
     const recordOffset = index * MARKER.stride;
@@ -105,6 +114,14 @@ class MarkerRecord implements Marker {
   set outlineColor(value: SceneColor) {
     writePackedColor(this.#view, this.index * MARKER.stride + OUTLINE_COLOR_OFFSET, value);
     this.#notifyMutation();
+  }
+
+  get featureId(): number | undefined {
+    return getSceneFeatureId(this.#featureIdSource, this.index);
+  }
+
+  set featureId(value: number | undefined) {
+    setSceneFeatureId(this.#featureIdSource, this.index, value);
   }
 }
 

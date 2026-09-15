@@ -35,11 +35,17 @@ import type {
   FieldSpec,
   FieldType,
   LayoutDescriptor,
+  Label,
+  LabelInit,
   LabelSource,
   LineVertexSource,
   MarkerSource,
+  Marker,
+  MarkerInit,
   Mat4,
   PointSource,
+  Point,
+  PointInit,
   Quaternion,
   RGBA,
   SceneFeatureIdMap,
@@ -87,6 +93,22 @@ type SceneFrameHasSetTransform = 'setTransform' extends keyof SceneFrame ? true 
 type SceneFrameHasTransform = 'transform' extends keyof SceneFrame ? true : false;
 type SceneLinesHasInstances = 'instances' extends keyof SceneLines ? true : false;
 type SceneLinesHasVertices = 'vertices' extends keyof SceneLines ? true : false;
+type PublicFeatureIdLayer =
+  | SceneAxes
+  | SceneCones
+  | SceneCubes
+  | SceneCylinders
+  | SceneGridlines
+  | SceneLabels
+  | SceneLines
+  | SceneMesh
+  | SceneModel
+  | ScenePoints
+  | ScenePolygon
+  | ScenePyramids
+  | SceneSpheres
+  | SceneTriangles;
+type LayerWithFeatureIds<Layer> = Layer extends unknown ? ('featureIds' extends keyof Layer ? Layer : never) : never;
 type InstanceTarget = Extract<ScenePickTarget, { kind: 'instance' }>;
 type LabelTarget = Extract<ScenePickTarget, { kind: 'label' }>;
 type PointTarget = Extract<ScenePickTarget, { kind: 'point' }>;
@@ -319,6 +341,7 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<SceneLabels['source']>().toEqualTypeOf<LabelSource | null>();
     expectTypeOf<SceneLinesHasInstances>().toEqualTypeOf<false>();
     expectTypeOf<SceneLinesHasVertices>().toEqualTypeOf<false>();
+    expectTypeOf<LayerWithFeatureIds<PublicFeatureIdLayer>>().toEqualTypeOf<never>();
     expectTypeOf<SceneMeshGeometryArrayKey>().toEqualTypeOf<never>();
     expectTypeOf<SceneMeshHasSetGeometry>().toEqualTypeOf<false>();
     expectTypeOf<SceneMeshHasTexture>().toEqualTypeOf<false>();
@@ -327,11 +350,22 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<FieldSpec['type']>().toEqualTypeOf<FieldType>();
     expectTypeOf<LayoutDescriptor['fields']>().toEqualTypeOf<Readonly<Record<string, Readonly<FieldSpec>>>>();
     expectTypeOf<SceneLines['source']>().toEqualTypeOf<LineVertexSource | null>();
-    expectTypeOf<SceneLines['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
-    expectTypeOf<SceneCubes['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
-    expectTypeOf<SceneMesh['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
-    expectTypeOf<SceneModel['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
-    expectTypeOf<ScenePolygon['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
+    expectTypeOf<LineVertexBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
+    expectTypeOf<MarkerBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
+    expectTypeOf<LabelBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
+    expectTypeOf<PointBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
+    expectTypeOf<TriangleVertexBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
+    expectTypeOf<SceneMarker['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<SceneHeightfield['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<SceneMesh['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<SceneModel['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<ScenePolygon['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<MarkerInit['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<PointInit['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<LabelInit['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<Marker['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<Point['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<Label['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<ScenePoints['source']>().toEqualTypeOf<PointSource | null>();
     expectTypeOf<SceneTriangles['source']>().toEqualTypeOf<TriangleVertexSource | null>();
     expectTypeOf<ScenePolygon['geometry']>().toEqualTypeOf<PolygonGeometry | null>();
@@ -358,6 +392,7 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<ScenePickHit['clientY']>().toEqualTypeOf<number>();
     expectTypeOf<ScenePickHit['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<SceneFeatureIdMap['values']>().toEqualTypeOf<Uint32Array>();
+    expectTypeOf<SceneFeatureIdMap['validity']>().toEqualTypeOf<Uint8Array | undefined>();
     expectTypeOf<InstanceTarget['index']>().toEqualTypeOf<number>();
     expectTypeOf<LabelTarget['index']>().toEqualTypeOf<number>();
     expectTypeOf<PointTarget['index']>().toEqualTypeOf<number>();

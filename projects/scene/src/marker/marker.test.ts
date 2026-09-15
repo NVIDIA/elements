@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
+import { takeSceneFeatureIdSnapshot } from '../internal/feature-ids.js';
 import { configureSceneTesting, resetSceneTesting } from '../internal/testing.js';
 import { SceneMarker } from './marker.js';
 import '@nvidia-elements/scene/cubes/define.js';
@@ -20,7 +21,7 @@ describe(SceneMarker.metadata.tag, () => {
   it('should define declarative marker attributes', async () => {
     fixture = await createFixture(html`
       <nve-scene-cubes>
-        <nve-scene-marker position="[1,2,3]" orientation="[0,0,0,1]" scale="[2,2,2]" color="red" outline-color="blue"></nve-scene-marker>
+        <nve-scene-marker feature-id="4294967295" position="[1,2,3]" orientation="[0,0,0,1]" scale="[2,2,2]" color="red" outline-color="blue"></nve-scene-marker>
       </nve-scene-cubes>
     `);
     const marker = required(fixture.querySelector<SceneMarker>(SceneMarker.metadata.tag), 'Expected marker fixture.');
@@ -31,8 +32,32 @@ describe(SceneMarker.metadata.tag, () => {
       orientation: [0, 0, 0, 1],
       scale: [2, 2, 2],
       color: 'red',
-      outlineColor: 'blue'
+      outlineColor: 'blue',
+      featureId: 0xffffffff
     });
+  });
+
+  it('sets, clears, and diagnoses the feature-id attribute', async () => {
+    fixture = await createFixture(html`
+      <nve-scene-cubes><nve-scene-marker></nve-scene-marker></nve-scene-cubes>
+    `);
+    const marker = required(fixture.querySelector<SceneMarker>(SceneMarker.metadata.tag), 'Expected marker fixture.');
+    const warnings = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+
+    marker.setAttribute('feature-id', '0');
+    await elementIsStable(marker);
+    expect(marker.featureId).toBe(0);
+    expect(takeSceneFeatureIdSnapshot(marker, 1)).toEqual({ kind: 'scalar', value: 0 });
+    marker.removeAttribute('feature-id');
+    await elementIsStable(marker);
+    expect(marker.featureId).toBeUndefined();
+    marker.setAttribute('feature-id', '-1');
+    await elementIsStable(marker);
+    expect(marker.featureId).toBeUndefined();
+    expect(warnings).toHaveBeenCalledOnce();
+    expect(() => {
+      marker.featureId = 0x1_0000_0000;
+    }).toThrow(RangeError);
   });
 
   it('should give focusable markers a button role while preserving an authored role', async () => {

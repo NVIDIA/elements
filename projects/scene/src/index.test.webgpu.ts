@@ -325,11 +325,19 @@ describe.runIf(mode === 'check')('Scene WebGPU resource budgets', () => {
 
     expect(assigned).toEqual(baseline);
     expect(cleared).toEqual(baseline);
-    expect(assigned.storageWrites).toBe(0);
-    expect(assigned.createdBuffers).toBe(0);
-    expect(assigned.createdTextures).toBe(0);
-    expect(assigned.createdShaders).toBe(0);
-    expect(assigned.createdPipelines).toBe(0);
+    expect(assigned).toEqual({
+      createdBuffers: 0,
+      createdPipelines: 0,
+      createdShaders: 0,
+      createdTextures: 0,
+      destroys: 0,
+      draws: 0,
+      renderPasses: 0,
+      storageWrites: 0,
+      submits: 0,
+      textureCopies: 0,
+      writes: []
+    });
   });
 
   test('creates explicit color and ID shader variants through browser WebGPU', async () => {

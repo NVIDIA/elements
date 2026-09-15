@@ -728,18 +728,26 @@ async function fanoutProbe(count = 12_345) {
 
 async function featureIdentityProbe() {
   const observer = requireObserver();
+  const originalSource = points.source;
+  const source = createVersionedPointBuffer(profile.pointCount);
+  points.source = source;
+  await points.updateComplete;
+  await waitFrames(4);
   const featureIds = new Uint32Array(profile.pointCount);
   featureIds.fill(1842);
   const capture = async (mutate, element) => {
     observer.reset();
     mutate();
+    element.publish();
     await element.updateComplete;
     await waitFrames(4);
     return observer.snapshot();
   };
-  const baseline = await capture(() => (points.featureIds = 2710), points);
-  const assigned = await capture(() => (points.featureIds = featureIds), points);
-  const cleared = await capture(() => (points.featureIds = null), points);
+  const baseline = await capture(() => (source.featureIds = 2710), points);
+  const assigned = await capture(() => (source.featureIds = featureIds), points);
+  const cleared = await capture(() => (source.featureIds = null), points);
+  points.source = originalSource;
+  await points.updateComplete;
   return { assigned, baseline, cleared };
 }
 

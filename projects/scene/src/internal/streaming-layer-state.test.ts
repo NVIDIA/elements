@@ -23,6 +23,7 @@ import {
   setStreamingLayerSource,
   takeStreamingLayerRenderData
 } from './streaming-layer-state.js';
+import { resolveSceneFeatureId, takeSceneFeatureIdSnapshot } from './feature-ids.js';
 
 describe('streaming layer state', () => {
   const layers: HTMLElement[] = [];
@@ -214,6 +215,22 @@ describe('streaming layer state', () => {
     second.position.y = 3;
     publishStreamingLayer(layer, { count: 0, start: 2 });
     expect(takeStreamingLayerRenderData(layer).count).toBe(1);
+  });
+
+  it('publishes source identity edits without queuing vertex uploads', () => {
+    const layer = document.createElement('div');
+    layers.push(layer);
+    registerStreamingLayer(layer, { kind: 'point', layout: POINT });
+    const points = new PointBuffer({ capacity: 1 });
+    const point = points.add({ featureId: 1842 });
+    setStreamingLayerSource(layer, points);
+    takeStreamingLayerRenderData(layer);
+
+    point.featureId = 2710;
+    publishStreamingLayer(layer);
+
+    expect(takeStreamingLayerRenderData(layer).uploadRanges).toEqual([]);
+    expect(resolveSceneFeatureId(takeSceneFeatureIdSnapshot(points, 1), 0)).toBe(2710);
   });
 
   it('fails closed without throwing when an external source is detached before publication', () => {

@@ -7,6 +7,13 @@ import { readTriangleVertex } from '../layouts/helpers.js';
 import { TriangleVertexBuffer } from './buffer.js';
 
 describe('triangle vertex buffer', () => {
+  it('stores logical triangle identities without changing vertex records', () => {
+    const vertices = new TriangleVertexBuffer({ capacity: 6 });
+    vertices.featureIds = new Uint32Array([0, 0xffffffff]);
+
+    expect(vertices.featureIds).toEqual(new Uint32Array([0, 0xffffffff]));
+  });
+
   it('should initialize added vertices with default position and color', () => {
     const vertices = new TriangleVertexBuffer({ capacity: 1 });
     const vertex = vertices.add();

@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { SceneFeatureIds } from './feature-ids.js';
+
 export type PackedRecordKind = 'label' | 'line-vertex' | 'marker' | 'point' | 'triangle-vertex';
 
 /** Selects the changed records and complete active prefix captured by a layer publication. */
@@ -32,6 +34,7 @@ export interface ExternalPackedRecordSource<Kind extends PackedRecordKind = Pack
   readonly capacity: number;
   readonly count: number;
   readonly kind: Kind;
+  readonly featureIds: SceneFeatureIds | null;
 }
 
 export type ExternalMarkerSource = ExternalPackedRecordSource<'marker'>;

@@ -21,6 +21,23 @@ interface CachedColor {
 
 const markerStates = new WeakMap<HTMLElement, MarkerState>();
 
+const markerGeometryFields = [
+  { attribute: 'position', property: 'position' },
+  { attribute: 'orientation', property: 'orientation' },
+  { attribute: 'scale', property: 'scale' },
+  { attribute: 'color', property: 'color' },
+  { attribute: 'outline-color', property: 'outlineColor' },
+  { attribute: 'hidden' }
+] as const;
+
+export function markerPropertyChangesAffectGeometry(changes: ReadonlyMap<PropertyKey, unknown>): boolean {
+  return markerGeometryFields.some(field => 'property' in field && changes.has(field.property));
+}
+
+export function markerAttributeAffectsGeometry(attributeName: string | null): boolean {
+  return attributeName !== null && markerGeometryFields.some(field => field.attribute === attributeName);
+}
+
 export function registerMarkerState(marker: HTMLElement): void {
   markerStates.set(marker, {});
 }

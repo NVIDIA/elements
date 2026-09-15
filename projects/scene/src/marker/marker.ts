@@ -1,12 +1,22 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement } from 'lit';
+import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
 import { activateSceneMarker } from '../internal/markers/interaction.js';
 import { notifyOwningMarkerLayer } from '../internal/markers/layer-notifications.js';
-import { registerMarkerState, validateMarkerParent } from '../internal/markers/state.js';
+import {
+  markerPropertyChangesAffectGeometry,
+  registerMarkerState,
+  validateMarkerParent
+} from '../internal/markers/state.js';
+import {
+  getElementFeatureId,
+  registerElementFeatureId,
+  sceneFeatureIdConverter,
+  setElementFeatureId
+} from '../internal/element-feature-id.js';
 import type { Quaternion, Vec3 } from '../internal/types.js';
 import styles from '../internal/styles/host.css?inline';
 
@@ -50,11 +60,22 @@ export class SceneMarker extends LitElement {
   /** Defines the cube outline color using a CSS color value. */
   @property({ type: String, attribute: 'outline-color' }) outlineColor = 'transparent';
 
+  /** Stable application identity returned when picking this marker. */
+  @property({ attribute: 'feature-id', converter: sceneFeatureIdConverter })
+  get featureId(): number | undefined {
+    return getElementFeatureId(this);
+  }
+
+  set featureId(value: number | undefined) {
+    setElementFeatureId(this, value);
+  }
+
   #appliedDefaultRole = false;
 
   constructor() {
     super();
     registerMarkerState(this);
+    registerElementFeatureId(this);
   }
 
   render() {
@@ -81,9 +102,9 @@ export class SceneMarker extends LitElement {
     }
   }
 
-  protected override updated(): void {
+  protected override updated(changed: PropertyValues<this>): void {
     validateMarkerParent(this);
-    notifyOwningMarkerLayer(this);
+    if (markerPropertyChangesAffectGeometry(changed)) notifyOwningMarkerLayer(this);
     this.#syncAccessibility();
   }
 

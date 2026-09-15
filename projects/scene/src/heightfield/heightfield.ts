@@ -32,6 +32,12 @@ import {
   setLayerInteractive
 } from '../internal/interactive-layer-state.js';
 import styles from '../internal/styles/host.css?inline';
+import {
+  getElementFeatureId,
+  registerElementFeatureId,
+  sceneFeatureIdConverter,
+  setElementFeatureId
+} from '../internal/element-feature-id.js';
 
 const DEFAULT_COLOR = {
   rgba: [128 / 255, 128 / 255, 128 / 255, 1],
@@ -56,6 +62,16 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
 
   #color = DEFAULT_COLOR.source;
   #grid: HeightfieldGrid | null = null;
+
+  /** Stable application identity returned when picking this heightfield. */
+  @property({ attribute: 'feature-id', converter: sceneFeatureIdConverter })
+  get featureId(): number | undefined {
+    return getElementFeatureId(this);
+  }
+
+  set featureId(value: number | undefined) {
+    setElementFeatureId(this, value);
+  }
 
   /** Enables automatic pointer hit testing and routed interaction events for this layer. */
   @property({ type: Boolean })
@@ -102,6 +118,7 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
   constructor() {
     super();
     registerInteractiveLayer(this);
+    registerElementFeatureId(this);
     registerHeightfieldLayer(this, DEFAULT_COLOR.rgba);
   }
 

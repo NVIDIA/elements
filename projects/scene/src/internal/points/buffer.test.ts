@@ -37,6 +37,17 @@ describe('point buffer', () => {
     expect(() => points.at(1)).toThrow(RangeError);
   });
 
+  it('sets and clears identities through initializers and handles', () => {
+    const points = new PointBuffer({ capacity: 1 });
+    const point = points.add({ featureId: 1842 });
+
+    expect(point.featureId).toBe(1842);
+    point.featureId = 2710;
+    expect(point.featureId).toBe(2710);
+    point.featureId = undefined;
+    expect(point.featureId).toBeUndefined();
+  });
+
   it('should reject invalid capacities, colors, values, and overflow', () => {
     expect(() => new PointBuffer({ capacity: -1 })).toThrow(RangeError);
 

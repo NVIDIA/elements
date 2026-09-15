@@ -20,13 +20,10 @@ import type { LabelSource } from '../internal/labels/buffer.js';
 import type { SceneInteractionTarget } from '../internal/interaction.js';
 import type { ScenePublishOptions } from '../internal/packed-record-source.js';
 import {
-  getLayerFeatureIds,
   getLayerInteractive,
-  registerFeatureIdentifiedLayer,
-  setLayerFeatureIds,
+  registerInteractiveLayer,
   setLayerInteractive
 } from '../internal/interactive-layer-state.js';
-import type { SceneFeatureIds } from '../internal/feature-ids.js';
 import styles from '../internal/styles/host.css?inline';
 
 const scaleUnitConverter = { fromAttribute: normalizeLabelScaleUnit };
@@ -53,18 +50,8 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
 
   constructor() {
     super();
-    registerFeatureIdentifiedLayer(this);
+    registerInteractiveLayer(this);
     registerLabelLayer(this);
-  }
-
-  /** Stable uint32 identities for labels resolved by picking. */
-  @property({ attribute: false })
-  get featureIds(): SceneFeatureIds | null {
-    return getLayerFeatureIds(this);
-  }
-
-  set featureIds(value: SceneFeatureIds | null) {
-    setLayerFeatureIds(this, value);
   }
 
   /** Enables automatic pointer hit testing and routed interaction events for this layer. */

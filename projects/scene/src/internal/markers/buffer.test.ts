@@ -75,6 +75,22 @@ describe('marker buffer', () => {
     expect(() => markers.at(2)).toThrow(RangeError);
   });
 
+  it('stores mutable record identities outside packed marker bytes', () => {
+    const markers = new MarkerBuffer({ capacity: 2 });
+    const first = markers.add({ featureId: 0, position: [1, 2, 3] });
+    const version = markers.version;
+
+    expect(first.featureId).toBe(0);
+    first.featureId = 0xffffffff;
+    expect(first.featureId).toBe(0xffffffff);
+    expect(markers.version).toBe(version);
+
+    markers.set(0, { position: [4, 5, 6] });
+    expect(first.featureId).toBeUndefined();
+    expect(() => markers.set(0, { featureId: -1 })).toThrow(RangeError);
+    expect(readMarker(markers.mutableBytes, 0).position).toEqual([4, 5, 6]);
+  });
+
   it('should version owned writes and expose escaped mutations', () => {
     const markers = new MarkerBuffer({ capacity: 2 });
     expect(markers.version).toBe(0);

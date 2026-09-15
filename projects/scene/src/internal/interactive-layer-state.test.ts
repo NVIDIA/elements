@@ -2,14 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import {
-  getLayerFeatureIds,
-  getLayerInteractive,
-  registerFeatureIdentifiedLayer,
-  registerInteractiveLayer,
-  setLayerFeatureIds,
-  setLayerInteractive
-} from './interactive-layer-state.js';
+import { getLayerInteractive, registerInteractiveLayer, setLayerInteractive } from './interactive-layer-state.js';
 import { registerSceneRenderNotifications } from './scene/notifications.js';
 
 describe('interactive layer state', () => {
@@ -35,24 +28,6 @@ describe('interactive layer state', () => {
 
       setLayerInteractive(layer, true);
       expect(layer.requestUpdate).toHaveBeenCalledOnce();
-      expect(notify).toHaveBeenCalledOnce();
-    } finally {
-      remove();
-    }
-  });
-
-  it('registers and updates feature identities with the shared interaction state', () => {
-    const layer = createLayer();
-    registerFeatureIdentifiedLayer(layer);
-    const { notify, remove } = attachToScene(layer);
-
-    try {
-      expect(getLayerInteractive(layer)).toBe(false);
-      expect(getLayerFeatureIds(layer)).toBeNull();
-
-      setLayerFeatureIds(layer, 42);
-      expect(getLayerFeatureIds(layer)).toBe(42);
-      expect(layer.requestUpdate).toHaveBeenCalledWith('featureIds', null);
       expect(notify).toHaveBeenCalledOnce();
     } finally {
       remove();

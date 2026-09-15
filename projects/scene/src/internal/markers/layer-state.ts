@@ -15,23 +15,29 @@ import { diagnosticReporterService } from '../services/diagnostic-reporter.servi
 import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from '../instance-buffer.js';
 import type { UploadRange } from '../upload-ranges.js';
 import { registerMarkerLayerNotifications } from './layer-notifications.js';
-import { compileMarker } from './state.js';
+import { compileMarker, markerAttributeAffectsGeometry } from './state.js';
 import { notifyOwningScene } from '../scene/notifications.js';
 import type { MarkerSource } from './buffer.js';
 import {
   getPackedRecordBytes,
   getPackedRecordKind,
   isPackedRecordSource,
-  resolvePublishOptions,
   type AnyPackedRecordSource,
-  type ExternalMarkerSource,
   type ScenePublishOptions
 } from '../packed-record-source.js';
 import { replacePreparedMarkerSource } from '../prepared-record-source.js';
 import type { MarkerBounds } from './bounds.js';
 import { SCENE_MARKER_TAG, SCENE_MODEL_TAG, SCENE_PART_TAG } from '../layer-tags.js';
-
-type MarkerLayerSource = MarkerSource | ExternalMarkerSource;
+import {
+  takeSceneFeatureIdListSnapshot,
+  takeSceneFeatureIdSnapshot,
+  type SceneFeatureIdSnapshot
+} from '../feature-ids.js';
+import {
+  publishPackedSourceGeneration,
+  resolvePackedSourcePublication,
+  type PackedSourcePublication
+} from '../packed-source-publication.js';
 
 interface MarkerLayerState {
   buffer: MarkerInstanceBuffer;
@@ -47,8 +53,9 @@ interface MarkerLayerState {
   pendingMarkers: Set<HTMLElement>;
   publicationError: boolean;
   reconcileQueued: boolean;
-  streamedSource: MarkerLayerSource | null;
+  streamedSource: MarkerSource | null;
   streamedCount: number;
+  sourceVersion: number;
   version: number;
 }
 
@@ -86,6 +93,7 @@ export function registerMarkerLayer(layer: HTMLElement, kind: PrimitiveKind): vo
     reconcileQueued: false,
     streamedSource: null,
     streamedCount: 0,
+    sourceVersion: -1,
     version: 0
   });
 }
@@ -112,11 +120,11 @@ export function disconnectMarkerLayer(layer: HTMLElement): void {
   state.notifyCleanup = undefined;
 }
 
-export function getLayerInstances(layer: HTMLElement): MarkerLayerSource | null {
+export function getLayerInstances(layer: HTMLElement): MarkerSource | null {
   return getLayerState(layer).streamedSource;
 }
 
-export function setLayerInstances(layer: HTMLElement, value: MarkerLayerSource | null): void {
+export function setLayerInstances(layer: HTMLElement, value: MarkerSource | null): void {
   if (value !== null && !isMarkerSource(value)) {
     throw new TypeError('Layer instances must be a marker buffer, marker source, or null.');
   }
@@ -124,6 +132,7 @@ export function setLayerInstances(layer: HTMLElement, value: MarkerLayerSource |
   state.streamedSource = value;
   state.publicationError = false;
   replaceStreamedBuffer(state, value);
+  state.sourceVersion = publishPackedSourceGeneration(value);
   const replacementCount = value === null ? state.compiledMarkers.length : value.count;
   state.streamedCount = value === null ? 0 : replacementCount;
   const replacementCapacity = value === null ? state.compiledMarkers.length : value.capacity;
@@ -154,22 +163,41 @@ export function publishLayerInstances(layer: HTMLElement, options?: ScenePublish
   const state = getLayerState(layer);
   const source = state.streamedSource;
   if (source === null) return;
-  const resolved = resolvePublishOptions({
-    capacity: source.capacity,
+  const previousPublicationError = state.publicationError;
+  const publication = resolvePackedSourcePublication({
     currentActiveCount: state.streamedCount,
+    currentSourceVersion: state.sourceVersion,
     requested: options,
-    sourceActiveCount: source.count
+    source,
+    unavailableStateMessage: 'Packed marker source state is unavailable.'
   });
-  state.publicationError = !markerPublicationIsValid(source, resolved.activeCount);
+  state.publicationError = !markerPublicationIsValid(source, publication.resolved.activeCount);
+  let visualChanged = previousPublicationError !== state.publicationError;
   if (!state.publicationError) {
-    applyMarkerPublication(state, resolved);
+    visualChanged =
+      applySuccessfulMarkerPublication({
+        publication,
+        source,
+        state
+      }) || visualChanged;
   }
   updateBufferIssues(layer, state);
   state.version += 1;
-  notifyOwningScene(layer);
+  notifyOwningScene(layer, visualChanged ? 'render' : 'identity');
 }
 
-function markerPublicationIsValid(source: MarkerLayerSource, activeCount: number): boolean {
+function applySuccessfulMarkerPublication(options: {
+  publication: PackedSourcePublication;
+  source: MarkerSource;
+  state: MarkerLayerState;
+}): boolean {
+  const { publication, source, state } = options;
+  applyMarkerPublication(state, publication.resolved, publication.geometryChanged);
+  state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
+  return publication.visualChanged;
+}
+
+function markerPublicationIsValid(source: MarkerSource, activeCount: number): boolean {
   try {
     return markerSourceRecordsAreValid(getPackedRecordBytes(source), activeCount);
   } catch {
@@ -177,8 +205,12 @@ function markerPublicationIsValid(source: MarkerLayerSource, activeCount: number
   }
 }
 
-function applyMarkerPublication(state: MarkerLayerState, resolved: ReturnType<typeof resolvePublishOptions>): void {
-  state.buffer.commit(resolved.start, resolved.count);
+function applyMarkerPublication(
+  state: MarkerLayerState,
+  resolved: PackedSourcePublication['resolved'],
+  geometryChanged: boolean
+): void {
+  if (geometryChanged) state.buffer.commit(resolved.start, resolved.count);
   state.streamedCount = resolved.activeCount;
   state.buffer.setSourceCount(resolved.activeCount);
 }
@@ -214,6 +246,16 @@ export function takeMarkerLayerRenderData(layer: HTMLElement): MarkerLayerRender
     uploadRanges: ready ? state.buffer.takeUploadRanges() : [],
     version: state.version
   };
+}
+
+export function takeMarkerLayerFeatureIdSnapshot(
+  layer: HTMLElement,
+  targetCount: number
+): SceneFeatureIdSnapshot | undefined {
+  const state = getLayerState(layer);
+  return state.streamedSource === null
+    ? takeSceneFeatureIdListSnapshot(state.compiledMarkers, layer)
+    : takeSceneFeatureIdSnapshot(state.streamedSource, targetCount, layer);
 }
 
 function getDeclarativeMarkers(state: MarkerLayerState): readonly HTMLElement[] | undefined {
@@ -258,8 +300,16 @@ export function isCurrentMarkerLayerMarker(layer: HTMLElement, marker: HTMLEleme
 }
 
 function handleLayerMutations(layer: HTMLElement, state: MarkerLayerState, records: MutationRecord[]): void {
-  const structural = records.some(record => record.type === 'childList');
-  for (const record of records) {
+  const relevant = records.filter(record => {
+    if (record.type !== 'attributes') return true;
+    if (record.attributeName === 'feature-id') return false;
+    return record.target instanceof Element && record.target.localName === SCENE_MARKER_TAG
+      ? markerAttributeAffectsGeometry(record.attributeName)
+      : true;
+  });
+  if (relevant.length === 0) return;
+  const structural = relevant.some(record => record.type === 'childList');
+  for (const record of relevant) {
     if (record.type === 'attributes' && record.target instanceof HTMLElement) {
       state.pendingMarkers.add(record.target);
     }
@@ -337,16 +387,19 @@ function compileAllMarkerChildren(state: MarkerLayerState, markerChildren: reado
 
 function compileChangedMarkerChildren(state: MarkerLayerState): void {
   let validityChanged = false;
+  const geometryChanged = new Set<HTMLElement>();
   for (const marker of state.pendingMarkers) {
     if (!state.markerChildren.includes(marker)) continue;
     const wasValid = state.compiledFields.has(marker);
+    const previous = state.compiledFields.get(marker);
     const fields = compileMarker(marker);
     if (fields) state.compiledFields.set(marker, fields);
     else state.compiledFields.delete(marker);
     validityChanged ||= wasValid !== Boolean(fields);
+    if (fields && previous && !markerFieldsEqual(previous, fields)) geometryChanged.add(marker);
   }
   if (validityChanged) replaceCompiledMarkers(state, collectCompiledMarkers(state));
-  else commitChangedMarkers(state);
+  else commitChangedMarkers(state, geometryChanged);
 }
 
 function collectCompiledMarkers(state: MarkerLayerState): Array<{ marker: HTMLElement; fields: MarkerFields }> {
@@ -356,19 +409,36 @@ function collectCompiledMarkers(state: MarkerLayerState): Array<{ marker: HTMLEl
   });
 }
 
-function commitChangedMarkers(state: MarkerLayerState): void {
+function commitChangedMarkers(state: MarkerLayerState, geometryChanged: ReadonlySet<HTMLElement>): void {
   const markerBytes = state.markerBytes;
   if (!markerBytes) {
     return;
   }
   state.compiledMarkers.forEach((marker, index) => {
-    if (state.pendingMarkers.has(marker)) {
+    if (geometryChanged.has(marker)) {
       const fields = state.compiledFields.get(marker);
       if (!fields) return;
       writeMarker(markerBytes, index, fields);
       state.buffer.commit(index, 1);
     }
   });
+}
+
+function markerFieldsEqual(left: MarkerFields, right: MarkerFields): boolean {
+  return (
+    tuplesEqual(left.position, right.position) &&
+    tuplesEqual(left.orientation, right.orientation) &&
+    tuplesEqual(left.scale, right.scale) &&
+    tuplesEqual(left.color, right.color) &&
+    tuplesEqual(left.outlineColor, right.outlineColor)
+  );
+}
+
+function tuplesEqual(left: readonly number[] | undefined, right: readonly number[] | undefined): boolean {
+  return (
+    left === right ||
+    (left !== undefined && right !== undefined && left.every((value, index) => value === right[index]))
+  );
 }
 
 function replaceCompiledMarkers(
@@ -415,7 +485,7 @@ function getPublishedCount(state: MarkerLayerState): number {
   return state.streamedSource === null ? state.compiledMarkers.length : state.streamedCount;
 }
 
-function replaceStreamedBuffer(state: MarkerLayerState, source: MarkerLayerSource | null): void {
+function replaceStreamedBuffer(state: MarkerLayerState, source: MarkerSource | null): void {
   if (source === null) {
     state.buffer.replace(null);
     return;

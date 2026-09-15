@@ -24,14 +24,6 @@ describe(SceneCubes.metadata.tag, () => {
     expect(SceneCubes.layout).toBe(MARKER);
     expect(layer.source).toBeNull();
     expect(layer.interactive).toBe(false);
-    expect(layer.featureIds).toBeNull();
-
-    const featureIds = new Uint32Array([1842]);
-    layer.featureIds = featureIds;
-    await elementIsStable(layer);
-    expect(layer.featureIds).toBe(featureIds);
-    expect(layer.hasAttribute('featureids')).toBe(false);
-    expect(layer.hasAttribute('feature-ids')).toBe(false);
 
     layer.setAttribute('interactive', 'false');
     await elementIsStable(layer);
@@ -44,7 +36,8 @@ describe(SceneCubes.metadata.tag, () => {
 
     layer.replaceChildren();
     const records = new MarkerBuffer({ capacity: 1 });
-    records.add({ position: [1, 2, 3] });
+    const record = records.add({ featureId: 1842, position: [1, 2, 3] });
+    expect(record.featureId).toBe(1842);
     layer.source = records;
     layer.countLimit = 1;
     expect(layer.source).toBe(records);

@@ -19,14 +19,7 @@ import {
 import { notifyOwningScene } from './scene/notifications.js';
 import type { SceneInteractionTarget } from './interaction.js';
 import type { ScenePublishOptions } from './packed-record-source.js';
-import {
-  getLayerFeatureIds,
-  getLayerInteractive,
-  registerFeatureIdentifiedLayer,
-  setLayerFeatureIds,
-  setLayerInteractive
-} from './interactive-layer-state.js';
-import type { SceneFeatureIds } from './feature-ids.js';
+import { getLayerInteractive, registerInteractiveLayer, setLayerInteractive } from './interactive-layer-state.js';
 
 /**
  * Shared Lit host for streamed point, line, and triangle layers.
@@ -45,7 +38,7 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
     options: { topology?: LineTopology; widthUnit?: LineWidthUnit } = {}
   ) {
     super();
-    registerFeatureIdentifiedLayer(this);
+    registerInteractiveLayer(this);
     registerStreamingLayer(this, {
       countDivisor: kind === 'triangles' ? 3 : undefined,
       kind: kind === 'triangles' ? 'triangle' : kind,
@@ -53,16 +46,6 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
       topology: options.topology,
       widthUnit: options.widthUnit
     });
-  }
-
-  /** Stable uint32 identities for logical points, segments, or triangles resolved by picking. */
-  @property({ attribute: false })
-  get featureIds(): SceneFeatureIds | null {
-    return getLayerFeatureIds(this);
-  }
-
-  set featureIds(value: SceneFeatureIds | null) {
-    setLayerFeatureIds(this, value);
   }
 
   /** Enables automatic pointer hit testing and routed interaction events for this layer. */

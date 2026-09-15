@@ -631,6 +631,38 @@ export const InteractionsList = {
 };
 
 /**
+ * @summary Handle marker click and hover events alongside programmatic pick results that display world-space coordinates at the authoring level that owns the selected data. Use a popover to display the selected position.
+ */
+export const InteractionsPopover = {
+  render: () => html`
+    <nve-scene id="pick-scene-popover" aria-label="interactive scene">
+      <nve-scene-camera behavior="orbit"></nve-scene-camera>
+      <nve-scene-gridlines></nve-scene-gridlines>
+      <nve-scene-cubes interactive id="pick-markers-popover"></nve-scene-cubes>
+    </nve-scene>
+    <script type="module">
+      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/cubes/define.js';
+
+      const scene = document.querySelector('#pick-scene-popover');
+      const markerLayer = scene.querySelector('#pick-markers-popover');
+
+      const markers = new MarkerBuffer({ capacity: 2 });
+      markers.add({ featureId: 1, position: [0, 0, 0.5], color: 'yellow' });
+      markers.add({ featureId: 2, position: [2, 0, 0.5], color: 'cyan' });
+      markerLayer.source = markers;
+
+      scene.addEventListener('nve-scene-click', event => {
+        console.log(event.detail.featureId);
+      });
+    </script>
+  `
+};
+
+/**
  * @summary Project a world anchor into a DOM tooltip and move a frame by intersecting continuous pointer rays with an application-owned plane.
  */
 export const CoordinateHelpers = {
@@ -717,8 +749,8 @@ export const FeatureIdentity = {
         vertices.add({ position: segment.end });
       }
 
+      vertices.featureIds = new Uint32Array(segments.map(segment => segment.featureId));
       lineLayer.source = vertices;
-      lineLayer.featureIds = new Uint32Array(segments.map(segment => segment.featureId));
 
       lineLayer.addEventListener('nve-scene-click', event => {
         const { featureId } = event.detail;
