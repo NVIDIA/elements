@@ -76,10 +76,6 @@ export function setModelLayerParts(layer: HTMLElement, parts: readonly ModelPart
   notifyOwningScene(layer);
 }
 
-export function getModelLayerVersion(layer: HTMLElement): number {
-  return getState(layer).version;
-}
-
 export function getModelLayerTopologyVersion(layer: HTMLElement): number {
   return getState(layer).topologyVersion;
 }

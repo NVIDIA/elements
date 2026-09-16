@@ -20,8 +20,10 @@ import { getSceneFeatureId, setSceneFeatureId } from '../feature-ids.js';
 const POSITION_OFFSET = getFieldOffset(LABEL, 'position');
 const SCALE_OFFSET = getFieldOffset(LABEL, 'scale');
 const COLOR_OFFSET = getFieldOffset(LABEL, 'color');
+const USE_CURRENT_COLOR_OFFSET = getFieldOffset(LABEL, 'use-current-color');
 
 export interface LabelInit {
+  /** Defaults to the label layer's computed `currentColor`. */
   readonly color?: SceneColor;
   readonly position?: Readonly<Vec3>;
   readonly scale?: number;
@@ -32,7 +34,7 @@ export interface LabelInit {
 export interface Label {
   readonly index: number;
   readonly position: MutableVector3;
-  get color(): RGBA;
+  get color(): RGBA | 'currentColor';
   set color(value: SceneColor);
   get scale(): number;
   set scale(value: number);
@@ -86,7 +88,7 @@ function writeRecord(options: { bytes: Uint8Array; index: number; init: LabelIni
   const offset = index * LABEL.stride;
   position.forEach((value, component) => view.setFloat32(offset + POSITION_OFFSET + component * 4, value, true));
   view.setFloat32(offset + SCALE_OFFSET, scale, true);
-  writePackedColor(view, offset + COLOR_OFFSET, resolveSceneColor(init.color ?? [1, 1, 1, 1]));
+  writeLabelColor(view, offset, init.color);
   texts[index] = text;
 }
 
@@ -116,12 +118,15 @@ class LabelRecord implements Label {
     });
   }
 
-  get color(): RGBA {
+  get color(): RGBA | 'currentColor' {
+    if (this.#view.getUint32(this.index * LABEL.stride + USE_CURRENT_COLOR_OFFSET, true) !== 0) {
+      return 'currentColor';
+    }
     return readPackedColor(this.#view, this.index * LABEL.stride + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {
-    writePackedColor(this.#view, this.index * LABEL.stride + COLOR_OFFSET, value);
+    writeLabelColor(this.#view, this.index * LABEL.stride, value);
     this.#notifyMutation();
   }
 
@@ -160,7 +165,22 @@ function initializeRecords(view: DataView, bytes: Uint8Array, capacity: number):
     const offset = index * LABEL.stride;
     view.setFloat32(offset + SCALE_OFFSET, 16, true);
     bytes.fill(255, offset + COLOR_OFFSET, offset + COLOR_OFFSET + 4);
+    view.setUint32(offset + USE_CURRENT_COLOR_OFFSET, 1, true);
   }
+}
+
+function writeLabelColor(view: DataView, recordOffset: number, value: SceneColor | undefined): void {
+  if (value === undefined || isCurrentColor(value)) {
+    view.setUint32(recordOffset + USE_CURRENT_COLOR_OFFSET, 1, true);
+    return;
+  }
+  const color = resolveSceneColor(value);
+  writePackedColor(view, recordOffset + COLOR_OFFSET, color);
+  view.setUint32(recordOffset + USE_CURRENT_COLOR_OFFSET, 0, true);
+}
+
+function isCurrentColor(value: SceneColor): value is string {
+  return typeof value === 'string' && value.trim().toLowerCase() === 'currentcolor';
 }
 
 function assertScale(value: number): void {

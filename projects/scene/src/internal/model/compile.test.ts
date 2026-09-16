@@ -9,7 +9,7 @@ import {
   normalizeModelPart,
   type ModelPart
 } from './compile.js';
-import { createPrimitiveGeometry, type PrimitiveKind } from '../primitive-geometry.js';
+import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../primitive-geometry.js';
 
 describe(compileParts.name, () => {
   it('should compile an identity cube from its unit tessellation with opaque white colors', () => {
@@ -134,7 +134,7 @@ describe(compileParts.name, () => {
 });
 
 describe('model primitive tessellators', () => {
-  it.each<PrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
     'should retain the marker bytes for the %s tessellation',
     shape => {
       const marker = createPrimitiveGeometry(shape);

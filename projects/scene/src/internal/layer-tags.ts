@@ -34,6 +34,7 @@ export const SCENE_PART_TAG = 'nve-scene-part';
 
 const SCENE_LAYER_SPECS = [
   { family: 'label', kind: 'label', markerInstances: false, tag: 'nve-scene-labels' },
+  { family: 'marker', kind: 'marker', markerInstances: true, tag: 'nve-scene-arrows' },
   { family: 'marker', kind: 'marker', markerInstances: true, tag: 'nve-scene-cones' },
   { family: 'marker', kind: 'marker', markerInstances: true, tag: 'nve-scene-cubes' },
   { family: 'marker', kind: 'marker', markerInstances: true, tag: 'nve-scene-cylinders' },

@@ -29,9 +29,10 @@ export const LABEL = defineLayout(
   {
     position: { type: 'f32x3', offset: 0 },
     scale: { type: 'f32', offset: 12 },
-    color: { type: 'unorm8x4', offset: 16 }
+    color: { type: 'unorm8x4', offset: 16 },
+    'use-current-color': { type: 'u32', offset: 20 }
   },
-  { stride: 20 }
+  { stride: 24 }
 );
 
 export const LINE_VERTEX = defineLayout(

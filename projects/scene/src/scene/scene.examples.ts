@@ -6,6 +6,7 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/media/pause-button/define.js';
 import '@nvidia-elements/media/seek-button/define.js';
 import '@nvidia-elements/media/time-range/define.js';
+import '@nvidia-elements/scene/arrows/define.js';
 import '@nvidia-elements/scene/axes/define.js';
 import '@nvidia-elements/scene/camera/define.js';
 import '@nvidia-elements/scene/cones/define.js';
@@ -52,7 +53,7 @@ export const InstallSource = {
 };
 
 /**
- * @summary Combines reference geometry, opaque and outlined translucent primitives, streamed data, terrain, a mesh, a compound model, and a vector label. Use this scene as a compact starting point for exploring each major Scene component.
+ * @summary Combines reference geometry, a directional arrow, opaque and outlined translucent primitives, streamed data, terrain, a mesh, a compound model, and a vector label. Use this scene as a compact starting point for exploring each major Scene component.
  */
 export const Default = {
   render: () => html`
@@ -89,6 +90,14 @@ export const Default = {
         <nve-scene-marker position="[-3.6,0.2,0.5]" color="rgba(255,255,0,0.2)" outline-color="yellow"></nve-scene-marker>
         <nve-scene-marker position="[-4.4,-0.2,0.5]" color="rgba(255,0,255,0.2)" outline-color="magenta"></nve-scene-marker>
       </nve-scene-cubes>
+      <nve-scene-arrows>
+        <nve-scene-marker
+          position="[-1.8,-0.4,0]"
+          orientation="[-0.140789,0.281579,0,0.949153]"
+          scale="[0.1,0.1,1.870829]"
+          color="yellow"
+        ></nve-scene-marker>
+      </nve-scene-arrows>
 
       <nve-scene-polygon color="cyan" geometry='{"outer":[[-0.25,-1.2],[0.25,-1.2],[0.25,0],[0.8,0],[0,1.2],[-0.8,0],[-0.25,0]]}'>
         <nve-scene-marker position="[4.2,0,0.05]" scale="[0.4,0.4,1]"></nve-scene-marker>
@@ -114,6 +123,7 @@ export const Default = {
     <script type="module">
       import { LabelBuffer, LineVertexBuffer, PointBuffer, TriangleVertexBuffer } from '@nvidia-elements/scene';
       import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/arrows/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/spheres/define.js';
@@ -133,7 +143,7 @@ export const Default = {
       import '@nvidia-elements/scene/axes/define.js';
 
       const labels = new LabelBuffer({ capacity: 1 });
-      labels.add({ text: 'label', position: [0, 0, 2], scale: 18, color: 'white' });
+      labels.add({ text: 'label', position: [0, 0, 2], scale: 18 });
       document.querySelector('#basic-labels').source = labels;
 
       const terrain = document.querySelector('#basic-terrain');

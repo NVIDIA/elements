@@ -3,10 +3,10 @@
 
 // utilities
 export { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './internal/layouts/built-ins.js';
-export { LabelBuffer } from './internal/labels/buffer.js';
-export { LineVertexBuffer } from './internal/lines/buffer.js';
 export { MarkerBuffer } from './internal/markers/buffer.js';
+export { LabelBuffer } from './internal/labels/buffer.js';
 export { PointBuffer } from './internal/points/buffer.js';
+export { LineVertexBuffer } from './internal/lines/buffer.js';
 export { TriangleVertexBuffer } from './internal/triangles/buffer.js';
 
 // types

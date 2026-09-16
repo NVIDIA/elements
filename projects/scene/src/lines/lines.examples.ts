@@ -169,12 +169,14 @@ export const StreamingTrail = {
       const scene = document.querySelector('#streaming-trail-scene');
       const trail = scene.querySelector('#streaming-trail');
       const maxSamples = 96;
+      const initialSamples = 16;
+      const sampleInterval = 80;
       const vertices = new LineVertexBuffer({ capacity: maxSamples });
       const colorOffset = LINE_VERTEX.fields.color.offset;
       const aisleRoute = [[-5, -4], [4, -4], [4, 1], [-1, 1], [-1, 4], [-5, 4]];
       const magenta = [1, 0, 1, 1];
       let sampleCount = 0;
-      let previousSampleTime = -Infinity;
+      let previousSampleTime = (initialSamples - 1) * sampleInterval;
 
       trail.countLimit = 0;
       trail.source = vertices;
@@ -189,6 +191,13 @@ export const StreamingTrail = {
         return [startX + (endX - startX) * segmentProgress, startY + (endY - startY) * segmentProgress, 0.05];
       }
 
+      function updateAlphas() {
+        for (let index = 0; index < sampleCount; index += 1) {
+          const alpha = 0.1 + 0.9 * (sampleCount === 1 ? 1 : index / (sampleCount - 1));
+          vertices.mutableBytes[index * LINE_VERTEX.stride + colorOffset + 3] = Math.round(alpha * 255);
+        }
+      }
+
       function appendSample(position) {
         if (sampleCount === maxSamples) {
           vertices.mutableBytes.copyWithin(0, LINE_VERTEX.stride);
@@ -196,19 +205,31 @@ export const StreamingTrail = {
         }
         vertices.set(sampleCount, { position, color: magenta, width: 6 });
         sampleCount += 1;
-        for (let index = 0; index < sampleCount; index += 1) {
-          const alpha = 0.1 + 0.9 * (sampleCount === 1 ? 1 : index / (sampleCount - 1));
-          vertices.mutableBytes[index * LINE_VERTEX.stride + colorOffset + 3] = Math.round(alpha * 255);
-        }
+        updateAlphas();
         trail.publish({ activeCount: sampleCount, count: sampleCount, start: 0 });
         trail.countLimit = sampleCount;
       }
 
+      for (let index = 0; index < initialSamples; index += 1) {
+        vertices.set(index, {
+          position: positionAt(index * sampleInterval),
+          color: magenta,
+          width: 6
+        });
+      }
+      sampleCount = initialSamples;
+      updateAlphas();
+      trail.publish({ activeCount: sampleCount, count: sampleCount, start: 0 });
+      trail.countLimit = sampleCount;
+
+      let animationStartTime;
       requestAnimationFrame(function stream(time) {
         if (!scene.isConnected) return;
-        if (time - previousSampleTime >= 80) {
-          appendSample(positionAt(time));
-          previousSampleTime = time;
+        animationStartTime ??= time - initialSamples * sampleInterval;
+        const elapsed = time - animationStartTime;
+        if (elapsed - previousSampleTime >= sampleInterval) {
+          appendSample(positionAt(elapsed));
+          previousSampleTime = elapsed;
         }
         requestAnimationFrame(stream);
       });

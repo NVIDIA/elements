@@ -3,6 +3,7 @@
 
 import './declarations.d.ts';
 
+import '@nvidia-elements/scene/arrows/define.js';
 import '@nvidia-elements/scene/axes/define.js';
 import '@nvidia-elements/scene/camera/define.js';
 import '@nvidia-elements/scene/cones/define.js';
@@ -23,6 +24,7 @@ import '@nvidia-elements/scene/scene/define.js';
 import '@nvidia-elements/scene/spheres/define.js';
 import '@nvidia-elements/scene/triangles/define.js';
 
+export * from '@nvidia-elements/scene/arrows';
 export * from '@nvidia-elements/scene/axes';
 export * from '@nvidia-elements/scene/camera';
 export * from '@nvidia-elements/scene/cones';

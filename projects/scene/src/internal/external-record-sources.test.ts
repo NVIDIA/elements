@@ -60,6 +60,9 @@ describe('external packed record sources', () => {
     expect(() => Reflect.apply(createLabelSource, null, [{ bytes: labelBytes, count: 1, texts: [1] }])).toThrow(
       RangeError
     );
+    new DataView(labelBytes.buffer).setUint32(20, 2, true);
+    expect(() => createLabelSource({ bytes: labelBytes, count: 1, texts: ['invalid'] })).toThrow(RangeError);
+    new DataView(labelBytes.buffer).setUint32(20, 0, true);
     new DataView(labelBytes.buffer).setFloat32(12, 0, true);
     expect(() => createLabelSource({ bytes: labelBytes, count: 1, texts: ['invalid'] })).toThrow(RangeError);
     new DataView(pointBytes.buffer).setFloat32(0, Number.NaN, true);

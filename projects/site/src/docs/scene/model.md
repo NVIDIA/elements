@@ -12,10 +12,6 @@
 
 {% install 'nve-scene-model' %}
 
-## Buffer Source
-
-{% example 'nve-scene-model' 'BufferSource' %}
-
 ## Robot Arm Animated
 
 {% example 'nve-scene-model' 'RobotArmAnimated' %}

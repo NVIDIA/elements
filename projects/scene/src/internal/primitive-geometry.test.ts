@@ -6,6 +6,7 @@ import { createPrimitiveGeometry, type PrimitiveKind } from './primitive-geometr
 
 describe('primitive geometry', () => {
   it.each<[PrimitiveKind, number]>([
+    ['arrow', 192],
     ['cube', 12],
     ['sphere', 320],
     ['cylinder', 128],
@@ -19,6 +20,16 @@ describe('primitive geometry', () => {
     for (let offset = 3; offset < geometry.vertices.length; offset += 6) {
       expect(Math.hypot(...geometry.vertices.slice(offset, offset + 3))).toBeCloseTo(1, 5);
     }
+  });
+
+  it('should generate a closed, outward-facing unit arrow along positive z', () => {
+    const geometry = createPrimitiveGeometry('arrow');
+
+    expect(geometry.triangleCount).toBe(192);
+    expect(getBounds(geometry.vertices)).toEqual({ max: [1, 1, 1], min: [-1, -1, 0] });
+    expect(hasVertexAt(geometry.vertices, [1, 0, 0.8])).toBe(true);
+    expectOutwardWinding(geometry.vertices, geometry.indices);
+    expectClosedTopology(geometry.vertices, geometry.indices);
   });
 
   it('should generate a closed, flat-shaded, outward-facing unit pyramid', () => {
@@ -154,6 +165,34 @@ function expectOutwardWinding(vertices: Float32Array, indices: Uint32Array): voi
     const normal = vertices.subarray(first + 3, first + 6);
     expect(dot(cross(ab, ac), normal)).toBeGreaterThan(0);
   }
+}
+
+function expectClosedTopology(vertices: Float32Array, indices: Uint32Array): void {
+  const edgeCounts = new Map<string, number>();
+  for (let offset = 0; offset < indices.length; offset += 3) {
+    const triangle = [indices[offset]!, indices[offset + 1]!, indices[offset + 2]!];
+    for (let edge = 0; edge < 3; edge += 1) {
+      const start = vertexKey(vertices, triangle[edge]!);
+      const end = vertexKey(vertices, triangle[(edge + 1) % 3]!);
+      const key = start < end ? `${start}|${end}` : `${end}|${start}`;
+      edgeCounts.set(key, (edgeCounts.get(key) ?? 0) + 1);
+    }
+  }
+  expect([...edgeCounts].filter(([, count]) => count !== 2)).toEqual([]);
+}
+
+function vertexKey(vertices: Float32Array, index: number): string {
+  const offset = index * 6;
+  return [vertices[offset], vertices[offset + 1], vertices[offset + 2]]
+    .map(value => (Math.abs(value ?? 0) < 0.0000005 ? 0 : (value ?? 0)).toFixed(6))
+    .join(',');
+}
+
+function hasVertexAt(vertices: Float32Array, expected: [number, number, number]): boolean {
+  for (let offset = 0; offset < vertices.length; offset += 6) {
+    if (expected.every((value, index) => Math.abs(vertices[offset + index]! - value) < 0.000001)) return true;
+  }
+  return false;
 }
 
 function subtractVertex(values: Float32Array, left: number, right: number): [number, number, number] {

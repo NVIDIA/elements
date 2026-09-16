@@ -64,6 +64,20 @@ describe(SceneLabels.metadata.tag, () => {
 });
 
 describe(LabelBuffer.name, () => {
+  it('uses the label layer current color by default', () => {
+    const labels = new LabelBuffer({ capacity: 2 });
+    const defaultColor = labels.add({ text: 'default' });
+    const explicitCurrentColor = labels.add({ color: 'CURRENTcolor', text: 'explicit' });
+
+    expect(defaultColor.color).toBe('currentColor');
+    expect(explicitCurrentColor.color).toBe('currentColor');
+
+    defaultColor.color = 'cyan';
+    expect(defaultColor.color).toEqual([0, 1, 1, 1]);
+    defaultColor.color = 'currentColor';
+    expect(defaultColor.color).toBe('currentColor');
+  });
+
   it('stores mutable text, position, scale, and color records', () => {
     const labels = new LabelBuffer({ capacity: 1 });
     const label = labels.add({ text: 'robot', position: [1, 2, 3], scale: 20, color: 'cyan' });

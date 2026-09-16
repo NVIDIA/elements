@@ -96,16 +96,22 @@ describe(SceneRenderer.name, () => {
 
   it('lazily renders, updates, picks, and releases packed label resources', async () => {
     const gpu = createAdvancedDevice();
+    const emptyStyle = document.createElement('div').style;
+    const inheritedStyle = document.createElement('div').style;
+    inheritedStyle.color = 'rgb(128, 64, 32)';
+    const item = createLabelRenderItem(2, { interactive: true });
+    const labelLayer = item.layer;
+    document.createElement('div').append(labelLayer);
     configureSceneTesting({
       getCanvasContext: () => ({
         configure: () => undefined,
         unconfigure: () => undefined,
         getCurrentTexture: () => ({ createView: () => ({}) })
-      })
+      }),
+      getComputedStyle: element => (element === labelLayer ? emptyStyle : inheritedStyle)
     });
     const renderer = new SceneRenderer();
     const canvas = document.createElement('canvas');
-    const item = createLabelRenderItem(2, { interactive: true });
     renderer.initialize(canvas, { device: gpu.device, format: 'bgra8unorm' });
     renderer.resize(64, 64);
 
@@ -114,6 +120,13 @@ describe(SceneRenderer.name, () => {
     expect(renderer.render([item])).toBe(true);
     expect(gpu.createSampler).toHaveBeenCalledOnce();
     expect(gpu.draws.some(draw => draw.vertexCount === 60)).toBe(true);
+    const labelUniform = gpu.writes.find(
+      (write): write is Float32Array => write instanceof Float32Array && write.length === 44
+    );
+    expect(labelUniform?.[36]).toBeCloseTo(0.215861);
+    expect(labelUniform?.[37]).toBeCloseTo(0.051269);
+    expect(labelUniform?.[38]).toBeCloseTo(0.014444);
+    expect(labelUniform?.[39]).toBe(1);
 
     const loaded = { ...item, data: { ...item.data, uploadRanges: [] } };
     renderer.render([loaded]);
@@ -2970,7 +2983,7 @@ function createAdvancedDevice(options: { drawIndexedIndirect?: boolean; scissor?
     submit: (buffers: readonly unknown[]) => submissions.push([...buffers]),
     copyExternalImageToTexture: vi.fn(),
     writeBuffer: (_buffer: object, _offset: number, values: ArrayBufferView) => {
-      if (values instanceof Float32Array && (values.length === 40 || values.length === 48)) {
+      if (values instanceof Float32Array && (values.length === 40 || values.length === 44 || values.length === 48)) {
         uniformWriteSources.push(values);
         writes.push(new Float32Array(values));
       } else writes.push(values);

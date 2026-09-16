@@ -152,10 +152,6 @@ function replaceLabelSource(state: LabelLayerState, source: LabelSource | null):
   state.sourceVersion = publishPackedSourceGeneration(source);
 }
 
-export function getLabelLayerVersion(layer: HTMLElement): number {
-  return getState(layer).version;
-}
-
 export function takeLabelLayerRenderData(layer: HTMLElement): LabelLayerRenderData {
   const state = getState(layer);
   const data = state.buffer.toRenderData({ consumeUploadRanges: !state.childError && !state.publicationError });

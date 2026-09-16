@@ -39,6 +39,7 @@ describe('resolveSceneLayer', () => {
 
   it.each([
     ['nve-scene-labels', 'label', 'label'],
+    ['nve-scene-arrows', 'marker', 'marker'],
     ['nve-scene-cones', 'marker', 'marker'],
     ['nve-scene-cubes', 'marker', 'marker'],
     ['nve-scene-cylinders', 'marker', 'marker'],

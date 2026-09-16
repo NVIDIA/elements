@@ -42,7 +42,7 @@ export interface MutableQuaternion {
   toArray(): Quaternion;
 }
 
-export interface RecordHandleOptions {
+interface RecordHandleOptions {
   readonly featureIdSource: object;
   readonly index: number;
   readonly notifyMutation: () => void;

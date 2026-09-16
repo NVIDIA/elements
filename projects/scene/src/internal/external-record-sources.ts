@@ -26,13 +26,13 @@ import {
   type SceneFeatureIds
 } from './feature-ids.js';
 
-export interface ExternalRecordSourceOptions {
+interface ExternalRecordSourceOptions {
   readonly bytes: Uint8Array;
   readonly count: number;
   readonly featureIds?: SceneFeatureIds | null;
 }
 
-export interface ExternalLabelSourceOptions extends ExternalRecordSourceOptions {
+interface ExternalLabelSourceOptions extends ExternalRecordSourceOptions {
   readonly texts: readonly string[];
 }
 

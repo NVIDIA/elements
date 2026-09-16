@@ -29,7 +29,7 @@ export const Default = {
       import '@nvidia-elements/scene/labels/define.js';
 
       const labels = new LabelBuffer({ capacity: 3 });
-      labels.add({ text: 'origin', position: [0, 0, 0.1], scale: 18, color: 'white' });
+      labels.add({ text: 'origin', position: [0, 0, 0.1], scale: 18 });
       labels.add({ text: 'sensor', position: [-2, 1, 1], scale: 20, color: 'cyan' });
       labels.add({ text: 'target', position: [2, -1, 1.5], scale: 24, color: 'yellow' });
       document.querySelector('#example-labels').source = labels;

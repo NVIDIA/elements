@@ -383,6 +383,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url === '/docs/scene/' ? 'highlighted selected' : ''}><a href="/docs/scene/">Overview</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/record-buffers/') ? 'highlighted selected' : ''}><a href="/docs/scene/record-buffers/">Record Buffers</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/interaction/') ? 'highlighted selected' : ''}><a href="/docs/scene/interaction/">Interaction</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/arrows/') ? 'highlighted selected' : ''}><a href="/docs/scene/arrows/">Arrows</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/axes/') ? 'highlighted selected' : ''}><a href="/docs/scene/axes/">Axes</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/camera/') ? 'highlighted selected' : ''}><a href="/docs/scene/camera/">Camera</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/cones/') ? 'highlighted selected' : ''}><a href="/docs/scene/cones/">Cones</a></nve-tree-node>

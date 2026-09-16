@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { SceneArrows } from '@nvidia-elements/scene/arrows';
 import { SceneAxes } from '@nvidia-elements/scene/axes';
 import { SceneCamera } from '@nvidia-elements/scene/camera';
 import { SceneCones } from '@nvidia-elements/scene/cones';
@@ -94,6 +95,7 @@ type SceneFrameHasTransform = 'transform' extends keyof SceneFrame ? true : fals
 type SceneLinesHasInstances = 'instances' extends keyof SceneLines ? true : false;
 type SceneLinesHasVertices = 'vertices' extends keyof SceneLines ? true : false;
 type PublicFeatureIdLayer =
+  | SceneArrows
   | SceneAxes
   | SceneCones
   | SceneCubes
@@ -164,6 +166,7 @@ const internalRecordSourceRuntimeExports = [
 
 const componentEntrypointRuntimeExports = [
   'Scene',
+  'SceneArrows',
   'SceneAxes',
   'SceneCamera',
   'SceneCones',
@@ -193,6 +196,7 @@ describe('@nvidia-elements/scene', () => {
 
   it('should export element classes from standalone entrypoints without registration side effects', () => {
     expect(Scene.metadata.tag).toBe('nve-scene');
+    expect(SceneArrows.metadata.tag).toBe('nve-scene-arrows');
     expect(SceneAxes.metadata.tag).toBe('nve-scene-axes');
     expect(SceneCamera.metadata.tag).toBe('nve-scene-camera');
     expect(SceneFrame.metadata.tag).toBe('nve-scene-frame');
@@ -206,6 +210,7 @@ describe('@nvidia-elements/scene', () => {
     expect(ScenePolygon.metadata.tag).toBe('nve-scene-polygon');
     expect(ScenePyramids.metadata.tag).toBe('nve-scene-pyramids');
     for (const element of [
+      SceneArrows,
       SceneCones,
       SceneCubes,
       SceneCylinders,
@@ -237,10 +242,11 @@ describe('@nvidia-elements/scene', () => {
         fields: {
           color: { offset: 16, type: 'unorm8x4' },
           position: { offset: 0, type: 'f32x3' },
-          scale: { offset: 12, type: 'f32' }
+          scale: { offset: 12, type: 'f32' },
+          'use-current-color': { offset: 20, type: 'u32' }
         },
         name: 'nve.label',
-        stride: 20
+        stride: 24
       },
       LINE_VERTEX: {
         fields: {
@@ -363,6 +369,7 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<MarkerInit['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<PointInit['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<LabelInit['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<Label['color']>().toEqualTypeOf<RGBA | 'currentColor'>();
     expectTypeOf<Marker['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<Point['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<Label['featureId']>().toEqualTypeOf<number | undefined>();
@@ -412,6 +419,7 @@ describe('@nvidia-elements/scene', () => {
 
     for (const element of [
       Scene,
+      SceneArrows,
       SceneAxes,
       SceneCamera,
       SceneCones,

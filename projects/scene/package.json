@@ -51,6 +51,14 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./arrows": {
+      "types": "./dist/arrows/index.d.ts",
+      "default": "./dist/arrows/index.js"
+    },
+    "./arrows/define.js": {
+      "types": "./dist/arrows/define.d.ts",
+      "default": "./dist/arrows/define.js"
+    },
     "./axes": {
       "types": "./dist/axes/index.d.ts",
       "default": "./dist/axes/index.js"

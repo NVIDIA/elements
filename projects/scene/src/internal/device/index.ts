@@ -1,5 +1,7 @@
-
-export function getDevicePixelSize(entry: ResizeObserverEntry, devicePixelRatio: number): { width: number; height: number } {
+export function getDevicePixelSize(
+  entry: ResizeObserverEntry,
+  devicePixelRatio: number
+): { width: number; height: number } {
   const fallback = {
     width: entry.contentRect.width * devicePixelRatio,
     height: entry.contentRect.height * devicePixelRatio

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import {
+  scenePlatform,
   supportsSceneGPUDrawPass,
   type SceneGPUBindGroup,
   type SceneGPUBuffer,
@@ -21,13 +22,15 @@ import type { LabelRenderItem } from '../rendering/render-items.js';
 import { getLabelFontAtlas, LABEL_REFERENCE_LINE_HEIGHT, type LabelFontAtlas } from '../font/atlas.js';
 import { createLabelGlyphRun, LABEL_GLYPH_STRIDE, prepareLabelGlyphRun, type LabelGlyphRun } from './glyph-run.js';
 import { createPreparationContext, PREPARATION_CHUNK_SIZE } from '../preparation.js';
+import { parseCSSColor, srgbToLinear } from '../utils/color.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
 const BUFFER_UNIFORM = 0x40;
 const TEXTURE_COPY_DST = 0x02;
 const TEXTURE_BINDING = 0x04;
-const LABEL_UNIFORM_BYTE_LENGTH = 160;
+const LABEL_UNIFORM_BYTE_LENGTH = 176;
+const PICK_ID_BYTE_OFFSET = 160;
 
 interface LabelRendererDevice extends SceneGPURenderPipelineDevice {
   readonly queue: SceneGPUDevice['queue'] & {
@@ -47,6 +50,8 @@ interface LabelRendererDevice extends SceneGPURenderPipelineDevice {
 
 interface LabelLayerResources {
   bindGroups: WeakMap<SceneGPURenderPipeline, SceneGPUBindGroup>;
+  readonly currentColor: Float32Array;
+  currentColorSource: string | undefined;
   glyph: SceneGPUBuffer;
   glyphCapacity: number;
   glyphCount: number;
@@ -116,6 +121,7 @@ export class LabelRenderer {
     uniforms[33] = frame.viewportWidth;
     uniforms[34] = frame.viewportHeight;
     uniforms[35] = item.scaleUnit === 'world' ? 1 : 0;
+    writeLayerCurrentColor(uniforms, resources, item.layer);
     this.#device.queue.writeBuffer(resources.uniform, 0, uniforms);
   }
 
@@ -147,7 +153,7 @@ export class LabelRenderer {
     const resources = this.#layers.get(item.layer);
     if (!resources) return;
     this.#pickId[0] = pickId;
-    this.#device.queue.writeBuffer(resources.uniform, 144, this.#pickId);
+    this.#device.queue.writeBuffer(resources.uniform, PICK_ID_BYTE_OFFSET, this.#pickId);
     this.#draw(pass, item, this.#pickPipeline);
   }
 
@@ -212,6 +218,8 @@ export class LabelRenderer {
     const glyphCapacity = LABEL_GLYPH_STRIDE;
     const resources: LabelLayerResources = {
       bindGroups: new WeakMap(),
+      currentColor: new Float32Array([0, 0, 0, 1]),
+      currentColorSource: undefined,
       glyph: this.#device.createBuffer({ size: glyphCapacity, usage: BUFFER_COPY_DST | BUFFER_STORAGE }),
       glyphCapacity,
       glyphCount: 0,
@@ -381,6 +389,7 @@ struct Scene {
   viewportWidth: f32,
   viewportHeight: f32,
   worldUnit: f32,
+  currentColor: vec4f,
   pickId: u32,
 }
 struct Label { position: vec3f, scale: f32, color: vec4f }
@@ -398,11 +407,12 @@ ${pick ? PICK_OUTPUT_WGSL : OIT_WGSL}
 @group(0) @binding(3) var atlasSampler: sampler;
 @group(0) @binding(4) var atlasTexture: texture_2d<f32>;
 fn loadLabel(index: u32) -> Label {
-  let offset = index * 5u;
+  let offset = index * 6u;
   let packed = labelWords[offset + 4u];
   let encoded = vec4f(f32(packed & 255u), f32((packed >> 8u) & 255u), f32((packed >> 16u) & 255u), f32(packed >> 24u)) / 255.0;
   let linear = select(pow((encoded.rgb + vec3f(0.055)) / vec3f(1.055), vec3f(2.4)), encoded.rgb / vec3f(12.92), encoded.rgb <= vec3f(0.04045));
-  return Label(vec3f(bitcast<f32>(labelWords[offset]), bitcast<f32>(labelWords[offset + 1u]), bitcast<f32>(labelWords[offset + 2u])), bitcast<f32>(labelWords[offset + 3u]), vec4f(linear, encoded.a));
+  let color = select(vec4f(linear, encoded.a), scene.currentColor, labelWords[offset + 5u] != 0u);
+  return Label(vec3f(bitcast<f32>(labelWords[offset]), bitcast<f32>(labelWords[offset + 1u]), bitcast<f32>(labelWords[offset + 2u])), bitcast<f32>(labelWords[offset + 3u]), color);
 }
 fn loadGlyph(index: u32) -> Glyph {
   let offset = index * 9u;
@@ -462,6 +472,29 @@ function labelGlyphWorkIsBounded(texts: readonly string[], count: number): boole
     if (work > PREPARATION_CHUNK_SIZE) return false;
   }
   return true;
+}
+
+function writeLayerCurrentColor(uniforms: Float32Array, resources: LabelLayerResources, layer: HTMLElement): void {
+  const source = getInheritedColorSource(layer);
+  if (resources.currentColorSource !== source) {
+    const color = parseCSSColor(source) ?? [0, 0, 0, 1];
+    resources.currentColor[0] = srgbToLinear(color[0]);
+    resources.currentColor[1] = srgbToLinear(color[1]);
+    resources.currentColor[2] = srgbToLinear(color[2]);
+    resources.currentColor[3] = color[3];
+    resources.currentColorSource = source;
+  }
+  uniforms.set(resources.currentColor, 36);
+}
+
+function getInheritedColorSource(layer: HTMLElement): string {
+  let element: HTMLElement | null = layer;
+  while (element) {
+    const source = scenePlatform.getComputedStyle(element).color;
+    if (source) return source;
+    element = element.parentElement;
+  }
+  return '';
 }
 
 function destroyLayerResources(resources: LabelLayerResources): void {

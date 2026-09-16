@@ -7,6 +7,7 @@ import { getFieldOffset } from '../layouts/define-layout.js';
 export type LabelScaleUnit = 'pixel' | 'world';
 
 const SCALE_OFFSET = getFieldOffset(LABEL, 'scale');
+const USE_CURRENT_COLOR_OFFSET = getFieldOffset(LABEL, 'use-current-color');
 
 export function normalizeLabelScaleUnit(value: unknown): LabelScaleUnit {
   return value === 'world' ? 'world' : 'pixel';
@@ -14,7 +15,8 @@ export function normalizeLabelScaleUnit(value: unknown): LabelScaleUnit {
 
 export function labelRecordIsValid(records: DataView, byteOffset: number): boolean {
   const scale = records.getFloat32(byteOffset + SCALE_OFFSET, true);
-  return Number.isFinite(scale) && scale > 0;
+  const useCurrentColor = records.getUint32(byteOffset + USE_CURRENT_COLOR_OFFSET, true);
+  return Number.isFinite(scale) && scale > 0 && useCurrentColor <= 1;
 }
 
 export function hasVisibleLabelText(text: string): boolean {

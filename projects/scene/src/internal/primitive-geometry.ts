@@ -6,7 +6,7 @@ import type { Vec3 } from './types.js';
 export type ScenePrimitiveKind = 'cone' | 'cube' | 'cylinder' | 'pyramid' | 'sphere';
 
 /** @internal Renderer-facing shorthand. */
-export type PrimitiveKind = ScenePrimitiveKind;
+export type PrimitiveKind = ScenePrimitiveKind | 'arrow';
 
 export interface PrimitiveGeometry {
   readonly vertices: Float32Array;
@@ -117,8 +117,10 @@ const PYRAMID_BOTTOM_CORNERS: readonly Vec3[] = [
 ];
 
 /** Shared marker/model primitive tessellators. Their bytes are marker-compatible. */
-export function createPrimitiveGeometry(kind: ScenePrimitiveKind): PrimitiveGeometry {
+export function createPrimitiveGeometry(kind: PrimitiveKind): PrimitiveGeometry {
   switch (kind) {
+    case 'arrow':
+      return createArrowGeometry();
     case 'cone':
       return createConeGeometry({ radius: 0.5, bottom: -0.5, top: 0.5 });
     case 'cube':
@@ -134,6 +136,19 @@ export function createPrimitiveGeometry(kind: ScenePrimitiveKind): PrimitiveGeom
       throw new TypeError(`Unsupported primitive: ${exhaustiveCheck}`);
     }
   }
+}
+
+function createArrowGeometry(): PrimitiveGeometry {
+  const builder = new GeometryBuilder();
+  const shaftRadius = 0.5;
+  const shoulderRadius = 1;
+  const shoulderZ = 0.8;
+
+  appendCylinderSides(builder, { radius: shaftRadius, bottom: 0, top: shoulderZ });
+  appendCap(builder, { radius: shaftRadius, z: 0, normal: [0, 0, -1] });
+  appendAnnulus(builder, { innerRadius: shaftRadius, outerRadius: shoulderRadius, z: shoulderZ });
+  appendConeSides(builder, { radius: shoulderRadius, bottom: shoulderZ, top: 1 });
+  return builder.build();
 }
 
 function createPyramidGeometry(): PrimitiveGeometry {
@@ -185,6 +200,13 @@ function createSphereGeometry(): PrimitiveGeometry {
 
 function createCylinderGeometry(options: { radius: number; bottom: number; top: number }): PrimitiveGeometry {
   const builder = new GeometryBuilder();
+  appendCylinderSides(builder, options);
+  appendCap(builder, { radius: options.radius, z: options.bottom, normal: [0, 0, -1] });
+  appendCap(builder, { radius: options.radius, z: options.top, normal: [0, 0, 1] });
+  return builder.build();
+}
+
+function appendCylinderSides(builder: GeometryBuilder, options: { radius: number; bottom: number; top: number }): void {
   const sideStart = builder.vertexCount;
   for (let segment = 0; segment < RADIAL_SEGMENTS; segment += 1) {
     const angle = (segment / RADIAL_SEGMENTS) * Math.PI * 2;
@@ -198,13 +220,16 @@ function createCylinderGeometry(options: { radius: number; bottom: number; top: 
     builder.triangle(current, next, next + 1);
     builder.triangle(current, next + 1, current + 1);
   }
-  appendCap(builder, { radius: options.radius, z: options.bottom, normal: [0, 0, -1] });
-  appendCap(builder, { radius: options.radius, z: options.top, normal: [0, 0, 1] });
-  return builder.build();
 }
 
 function createConeGeometry(options: { radius: number; bottom: number; top: number }): PrimitiveGeometry {
   const builder = new GeometryBuilder();
+  appendConeSides(builder, options);
+  appendCap(builder, { radius: options.radius, z: options.bottom, normal: [0, 0, -1] });
+  return builder.build();
+}
+
+function appendConeSides(builder: GeometryBuilder, options: { radius: number; bottom: number; top: number }): void {
   const apex: Vec3 = [0, 0, options.top];
   for (let segment = 0; segment < RADIAL_SEGMENTS; segment += 1) {
     const angle = (segment / RADIAL_SEGMENTS) * Math.PI * 2;
@@ -218,8 +243,36 @@ function createConeGeometry(options: { radius: number; bottom: number; top: numb
     builder.vertex(apex, normal);
     builder.triangle(start, start + 1, start + 2);
   }
-  appendCap(builder, { radius: options.radius, z: options.bottom, normal: [0, 0, -1] });
-  return builder.build();
+}
+
+function appendAnnulus(
+  builder: GeometryBuilder,
+  options: { innerRadius: number; outerRadius: number; z: number }
+): void {
+  const innerStart = builder.vertexCount;
+  for (let segment = 0; segment < RADIAL_SEGMENTS; segment += 1) {
+    const angle = (segment / RADIAL_SEGMENTS) * Math.PI * 2;
+    builder.vertex(
+      [Math.cos(angle) * options.innerRadius, Math.sin(angle) * options.innerRadius, options.z],
+      [0, 0, -1]
+    );
+  }
+  const outerStart = builder.vertexCount;
+  for (let segment = 0; segment < RADIAL_SEGMENTS; segment += 1) {
+    const angle = (segment / RADIAL_SEGMENTS) * Math.PI * 2;
+    builder.vertex(
+      [Math.cos(angle) * options.outerRadius, Math.sin(angle) * options.outerRadius, options.z],
+      [0, 0, -1]
+    );
+  }
+  for (let segment = 0; segment < RADIAL_SEGMENTS; segment += 1) {
+    const inner = innerStart + segment;
+    const nextInner = innerStart + ((segment + 1) % RADIAL_SEGMENTS);
+    const outer = outerStart + segment;
+    const nextOuter = outerStart + ((segment + 1) % RADIAL_SEGMENTS);
+    builder.triangle(inner, nextOuter, outer);
+    builder.triangle(inner, nextInner, nextOuter);
+  }
 }
 
 function appendTriangleFace(
