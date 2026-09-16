@@ -4,6 +4,7 @@
 import { parse, parseFragment, serialize } from 'parse5';
 
 import {
+  BASE_URL,
   DEPLOYED_SITE_URL,
   ELEMENTS_SITE_ORIGIN,
   getSitePath as getBaseFreeSitePath,
@@ -105,6 +106,8 @@ function resolveCanonicalUrl(value) {
 }
 
 function resolveAttributeUrl(node, attribute) {
+  if (node.nodeName === 'base' && attribute.name === 'href') return BASE_URL;
+
   if (node.nodeName === 'link' && attribute.name === 'href' && hasRel(node, 'canonical')) {
     return resolveCanonicalUrl(attribute.value);
   }

@@ -401,7 +401,7 @@ export function resolvePageMeta(data) {
 }
 
 function jsonLdEncode(value) {
-  return JSON.stringify(value).replace(/<\//g, '<\\/');
+  return JSON.stringify(value).replaceAll('<', '\\u003c');
 }
 
 function isApiReferencePage(data, meta) {

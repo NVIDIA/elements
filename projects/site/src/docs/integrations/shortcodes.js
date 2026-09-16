@@ -34,7 +34,7 @@ curl -fsSL ${ELEMENTS_PAGES_BASE_URL}/install.sh | bash
 
 <div id="install-cli-windows" hidden style="height: 65px">
 
-\`\`\`powershell
+\`\`\`shell
 irm ${ELEMENTS_PAGES_BASE_URL}/install.ps1 | iex
 \`\`\`
 

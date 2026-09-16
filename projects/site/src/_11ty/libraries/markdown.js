@@ -1,26 +1,74 @@
 import markdownIt from 'markdown-it';
 import markdownItLink from 'markdown-it-link-attributes';
 
+const LANGUAGE_NAMES = {
+  bash: 'Shell',
+  css: 'CSS',
+  go: 'Go',
+  html: 'HTML',
+  javascript: 'JavaScript',
+  js: 'JavaScript',
+  json: 'JSON',
+  markdown: 'Markdown',
+  md: 'Markdown',
+  python: 'Python',
+  shell: 'Shell',
+  sh: 'Shell',
+  toml: 'TOML',
+  ts: 'TypeScript',
+  tsx: 'TypeScript',
+  typescript: 'TypeScript',
+  xml: 'XML',
+  yaml: 'YAML',
+  yml: 'YAML',
+  zsh: 'Shell'
+};
+
 const markdown = markdownIt({
   html: true,
   breaks: false,
   linkify: true,
   highlight: function (str, lang) {
-    lang = lang === 'javascript' ? 'typescript' : lang; // alias javascript to typescript
+    const structuredData = getCodeStructuredData(str, lang);
+    const codeblockLanguage = markdown.utils.escapeHtml(lang === 'javascript' ? 'typescript' : lang); // alias javascript to typescript
     return /* html */ `
     <div class="markdown-codeblock">
-      <pre class="visually-hidden" aria-hidden="true"><code>${markdown.utils.escapeHtml(str)}</code></pre>
-      <nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>
+      <script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
+      <nve-codeblock language="${codeblockLanguage}"><pre aria-hidden="true"><code>${markdown.utils.escapeHtml(str).trim()}</code></pre></nve-codeblock>
       <nve-copy-button class="markdown-copy-button" role="button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
     </div>
     <script type="module">
       document.querySelectorAll('.markdown-copy-button').forEach(button => {
         const codeblock = button.previousElementSibling;
-        button.value = codeblock.querySelector('template').content.textContent.trim();
+        button.value = codeblock.querySelector('pre code').textContent.trim();
       });
     </script>`;
   }
 });
+
+function getCodeStructuredData(code, language) {
+  const languageName = language ? (LANGUAGE_NAMES[language.toLowerCase()] ?? language) : null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareSourceCode',
+    ...(languageName
+      ? {
+          programmingLanguage: {
+            '@type': 'ComputerLanguage',
+            name: languageName
+          }
+        }
+      : {}),
+    codeSampleType: 'code snippet',
+    encodingFormat: 'text/plain',
+    text: code
+  };
+}
+
+function jsonLdEncode(value) {
+  return JSON.stringify(value).replaceAll('<', '\\u003c');
+}
 
 markdown.renderer.rules.fence = function (tokens, idx, options, env, slf) {
   const token = tokens[idx];

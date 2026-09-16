@@ -105,21 +105,23 @@ describe('lighthouse', { concurrent: false }, () => {
 
   test('landing page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/`);
-    expect(scores.performance).toBeGreaterThanOrEqual(85);
+    expect(scores.performance).toBeGreaterThanOrEqual(90);
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
-    expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
-    expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(561);
+    expect(scores.bestPractices).toBeGreaterThanOrEqual(96);
+    expect(scores.seo).toBeGreaterThanOrEqual(100);
+    expect(scores.payload.js).toBeLessThan(160);
+    expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
   });
 
   test('installation page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/integrations/installation/`);
-    expect(scores.performance).toBeGreaterThanOrEqual(85);
+    expect(scores.performance).toBeGreaterThanOrEqual(90);
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(190);
+    expect(scores.payload.js).toBeLessThan(160);
+    expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
 
@@ -129,7 +131,8 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(137);
+    expect(scores.payload.js).toBeLessThan(99);
+    expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBeLessThan(0.5);
   });
 
@@ -139,7 +142,8 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(95);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(211);
+    expect(scores.payload.js).toBeLessThan(167);
+    expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
 
@@ -149,7 +153,8 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(200);
+    expect(scores.payload.js).toBeLessThan(155);
+    expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
 
@@ -159,7 +164,8 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(200);
+    expect(scores.payload.js).toBeLessThan(155);
+    expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
 });

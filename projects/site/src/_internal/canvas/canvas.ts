@@ -15,7 +15,6 @@ import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import styles from './canvas.css?inline';
-import { decodeHtmlEntities } from './html.js';
 
 function convertToJsxElement(source: string): string {
   return source.replace(/<(\/?)([a-z]+(?:-[a-z]+)+)([^>]*)>/g, (...args: string[]) => {
@@ -45,9 +44,11 @@ export class Canvas extends LitElement {
 
   @state() private sourceType: 'html' | 'react' = 'html';
 
-  @state() private previewWidth: number;
+  @state() private previewWidth = 200;
 
-  @state() private maxPreviewWidth: number;
+  @state() private maxPreviewWidth = 1260;
+
+  #internals = this.attachInternals();
 
   static metadata = {
     tag: 'nvd-canvas',
@@ -61,6 +62,8 @@ export class Canvas extends LitElement {
     // Initialize state values from properties
     this.previewWidth = this.max;
     this.maxPreviewWidth = this.max;
+    this.#internals.role = 'region';
+    this.#internals.ariaLabel = 'example';
 
     // Initialize previewWidth based on parent container width if possible
     requestAnimationFrame(() => {
@@ -81,7 +84,7 @@ export class Canvas extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <div class="resizer" style="--preview-width: ${this.previewWidth}px">
+        <div role="figure" aria-label="example preview" class="resizer" style="--preview-width: ${this.previewWidth}px">
           <slot @slotchange=${() => this.#updateSource()}></slot>
           <nve-resize-handle 
             class="preview-resize-handle" 
@@ -95,26 +98,24 @@ export class Canvas extends LitElement {
         </div>
         <div class="code" .hidden=${!this.showSource}>
           ${this.source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
-          <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.formattedSource}></nve-copy-button>
+          <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.formattedSource} aria-label="copy"></nve-copy-button>
         </div>
         <div class="toolbar">
-          <nve-button class="source-button" container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+          <nve-button aria-label="example source" class="source-button" container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
           <slot name="suffix"></slot>
         </div>
       </div>
     `;
   }
 
-  get #template() {
-    return this.shadowRoot
-      ?.querySelector('slot')
-      ?.assignedNodes()
-      .find(node => (node as HTMLElement).tagName === 'TEMPLATE') as HTMLTemplateElement;
+  get #slottedSource(): string | undefined {
+    const elements = this.shadowRoot?.querySelector('slot')?.assignedElements();
+    const pre = elements?.find(element => element instanceof HTMLPreElement && element.querySelector('code'));
+    return pre?.querySelector('code')?.textContent ?? undefined;
   }
 
   #updateSource() {
-    const template = this.#template;
-    this.source = template ? decodeHtmlEntities(template.innerHTML) : this.source;
+    this.source = this.#slottedSource ?? this.source;
   }
 
   #handleSourceClick() {

@@ -225,7 +225,7 @@ function addHeadingAnchors() {
     const anchor = globalThis.document.createElement('a');
     anchor.className = 'heading-anchor';
     anchor.href = `${globalThis.window.parent.location.pathname}#${id}`;
-    anchor.setAttribute('aria-label', 'Copy link to this section');
+    anchor.setAttribute('aria-label', 'copy permalink');
     anchor.innerHTML = '<nve-icon-button container="inline" icon-name="link"></nve-icon-button>';
 
     // Add click handler

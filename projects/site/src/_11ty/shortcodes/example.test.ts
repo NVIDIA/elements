@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { transformWithOxc } from 'vite';
 
 const patternExample = {
   id: 'pattern-chat-popover-chat',
@@ -24,11 +25,18 @@ const structuredDataExample = {
   permalink: '@internals/patterns/chat-pattern-chat-structured-data/'
 };
 
+const quotedNameExample = {
+  ...patternExample,
+  id: 'pattern-chat-quoted-name',
+  name: 'Quoted "<Example>',
+  permalink: '@internals/patterns/chat-pattern-chat-quoted-name/'
+};
+
 async function importShortcode() {
   vi.resetModules();
   vi.doMock('../../index.11tydata.js', () => ({
     siteData: {
-      examples: [patternExample, structuredDataExample]
+      examples: [patternExample, structuredDataExample, quotedNameExample]
     }
   }));
   vi.doMock('@internals/tools/playground', () => ({
@@ -58,6 +66,25 @@ describe('exampleShortcode', () => {
     expect(html).not.toContain('/docs/patterns/chat/examples/');
   });
 
+  it('should slot its source <pre><code> block directly into the canvas', async () => {
+    const { exampleShortcode } = await importShortcode();
+
+    const html = await exampleShortcode('@internals/patterns/chat.examples.json', 'PopoverChat');
+
+    expect(html).toContain('<nvd-canvas id="internals-patterns-chat-examples-json_pattern-chat-popover-chat"');
+    expect(html).toContain('<pre aria-hidden="true"><code>&lt;nve-dialog&gt;&lt;/nve-dialog&gt;</code></pre><div');
+    expect(html).not.toContain('<template>');
+  });
+
+  it('should escape the example name in the canvas label', async () => {
+    const { exampleShortcode } = await importShortcode();
+
+    const html = await exampleShortcode('@internals/patterns/chat.examples.json', quotedNameExample.name);
+
+    expect(html).toContain('aria-label="example \'Quoted &quot;&lt;Example&gt;\'"');
+    expect(html).not.toContain('aria-label="example \'Quoted "<Example>\'"');
+  });
+
   it('should render valid and safely encoded SoftwareSourceCode metadata', async () => {
     vi.stubEnv('ELEMENTS_SITE_URL', 'https://nvidia.github.io');
     vi.stubEnv('ELEMENTS_REPO_BASE_URL', 'https://github.com/NVIDIA/elements');
@@ -74,7 +101,8 @@ describe('exampleShortcode', () => {
     const canonicalPageUrl = 'https://nvidia.github.io/elements/docs/patterns/chat/';
     const canonicalExampleUrl = `${canonicalPageUrl}#internals-patterns-chat-examples-json_pattern-chat-structured-data`;
 
-    expect(script?.[1]).toContain('<\\/SCRIPT>');
+    expect(script?.[1]).toContain('\\u003c/SCRIPT>');
+    expect(script?.[1]).not.toContain('<');
     expect(structuredData).toMatchObject({
       '@context': 'https://schema.org',
       '@id': canonicalExampleUrl,
@@ -112,6 +140,20 @@ describe('exampleShortcode', () => {
       creativeWorkStatus: 'Deprecated',
       text: structuredDataExample.template
     });
+  });
+
+  it('should render a reload module that remains valid when whitespace collapses', async () => {
+    vi.stubEnv('ELEVENTY_RUN_MODE', 'serve');
+    const { exampleShortcode } = await importShortcode();
+
+    const html = await exampleShortcode('@internals/patterns/chat.examples.json', 'PopoverChat');
+    const reloadModule = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)]
+      .map(match => match[1] ?? '')
+      .find(script => script.includes('import examples from'));
+    const collapsedModule = reloadModule?.replace(/\s+/g, ' ') ?? '';
+
+    expect(reloadModule).toBeDefined();
+    await expect(transformWithOxc(collapsedModule, 'reload.js', { lang: 'js' })).resolves.toBeDefined();
   });
 
   it('should preserve imported example bindings when rewriting development module imports', async () => {

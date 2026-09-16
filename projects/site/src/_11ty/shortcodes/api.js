@@ -56,7 +56,7 @@ export function renderAPINameTable(apiValue) {
       .render(apiValue.descriptionText ?? apiValue.description ?? '')
       .trim()
       .replaceAll('<p>', '<p nve-text="body relaxed">')}
-    <nve-grid role="grid" container="flat">
+    <nve-grid role="grid" container="flat" aria-label="api options for '${apiValue.name}'">
       <nve-grid-header role="row">
         <nve-grid-column role="columnheader" width="200px">${apiValue.name.charAt(0).toUpperCase() + apiValue.name.slice(1)}</nve-grid-column>
         <nve-grid-column role="columnheader">Description</nve-grid-column>
@@ -95,7 +95,7 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
   const noItems = items.length === 0;
   return /* html */ `
   <div class="api-table" nve-layout="column gap:sm full">
-    <nve-grid role="grid" container="${options.container}" style="min-height: 100px">
+    <nve-grid role="grid" aria-label="api ${type}" container="${options.container}" style="min-height: 100px">
       <nve-grid-header role="row">
         <nve-grid-column role="columnheader" width="200px">${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>
         ${type === 'property' ? '<nve-grid-column role="columnheader" width="200px">Attribute</nve-grid-column>' : ''}
