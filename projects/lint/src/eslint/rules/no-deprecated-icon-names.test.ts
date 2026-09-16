@@ -44,7 +44,7 @@ describe('noDeprecatedIconNames', () => {
         '<button name="test"></button>',
         '<ui-icon name="test"></ui-icon>',
         '<nve-icon name="person"></nve-icon>',
-        `<nve-icon name=${'person'}></nve-icon>`,
+        `<nve-icon name=person></nve-icon>`,
         '<nve-icon name></nve-icon>'
       ],
       invalid: []

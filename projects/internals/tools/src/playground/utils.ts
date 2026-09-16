@@ -90,7 +90,7 @@ export function createPlaygroundURL(source: string, elements: Element[], opts: P
 export function createDefaultFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   const files: Record<string, { content: string }> = {
     'index.html': { content: createIndexHTML(content, options) },
-    'index.ts': { content: `${getElementImports(content, elements).join('\n')}` },
+    'index.ts': { content: getElementImports(content, elements).join('\n') },
     'importmap.json': { content: createImportMap() }
   };
 

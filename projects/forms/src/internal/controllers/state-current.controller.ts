@@ -38,7 +38,7 @@ export class StateCurrentController<T extends Current> implements ReactiveContro
     }
 
     this.host._internals!.ariaCurrent =
-      this.host.current === null || this.host.current === undefined ? null : `${this.host.current}`;
+      this.host.current === null || this.host.current === undefined ? null : this.host.current;
 
     toggleState(this.host._internals!, 'current', Boolean(this.host.current));
   }
