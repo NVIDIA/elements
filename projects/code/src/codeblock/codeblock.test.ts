@@ -83,6 +83,24 @@ function getTime(): number {
     expect(element.shadowRoot!.querySelector('.hljs-title')).toBeTruthy();
   });
 
+  it('should render source code if slotted within a <pre><code> block', async () => {
+    element.language = 'typescript';
+    element.innerHTML = '<pre><code>const answer = 42;</code></pre>';
+    await elementIsStable(element);
+
+    expect(element.shadowRoot!.querySelector('pre.hljs > code')!.textContent).toBe('const answer = 42;');
+    expect(element.shadowRoot!.querySelector('.hljs-keyword')).toBeTruthy();
+  });
+
+  it('should decode escaped HTML source from a slotted <pre><code> block', async () => {
+    element.language = 'html';
+    element.innerHTML = '<pre><code>&lt;nve-button&gt;Save&lt;/nve-button&gt;</code></pre>';
+    await elementIsStable(element);
+
+    expect(element.shadowRoot!.querySelector('pre.hljs > code')!.textContent).toBe('<nve-button>Save</nve-button>');
+    expect(element.shadowRoot!.querySelector('.hljs-name')!.textContent).toBe('nve-button');
+  });
+
   it('should render HTML source code if slotted HTML content', async () => {
     element.language = 'typescript';
     const div = document.createElement('div');

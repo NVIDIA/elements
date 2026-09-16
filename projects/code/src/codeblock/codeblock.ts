@@ -22,7 +22,7 @@ hljs.registerLanguage('shell', shell);
  * @documentation https://nvidia.github.io/elements/docs/code/codeblock/
  * @since 0.1.0
  * @entrypoint \@nvidia-elements/code/codeblock
- * @slot - for declarative slotting of source code and not using the `code` property
+ * @slot - source code as text, a `<template>`, or a `<pre><code>` block
  * @slot actions - slot for action bar
  * @cssprop --background
  * @cssprop --padding
@@ -92,6 +92,9 @@ export class CodeBlock extends LitElement implements ContainerElement {
         let template = '';
         if (n instanceof HTMLTemplateElement) {
           template = n.content.textContent ?? '';
+        } else if (n instanceof HTMLPreElement) {
+          const code = n.querySelector('code');
+          template = code ? (code.textContent ?? '') : n.innerHTML;
         } else if (n instanceof HTMLElement) {
           template = n.innerHTML;
         } else {
@@ -107,8 +110,8 @@ export class CodeBlock extends LitElement implements ContainerElement {
 
   render() {
     return html`
-      <div internal-host>
-        <pre class="hljs"><code class=${this.language ?? ''}><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
+      <div internal-host role="none">
+        <pre class="hljs" role="none"><code class=${this.language ?? ''}><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
         <slot name="actions"></slot>
       </div>
     `;
