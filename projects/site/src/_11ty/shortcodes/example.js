@@ -31,7 +31,6 @@ export async function exampleShortcode(
 
   const defaultConfig = {
     inline: true,
-    height: '95%',
     resizable: true,
     summary: true,
     align: 'start',
@@ -77,9 +76,8 @@ export async function exampleShortcode(
 <div class="example-shortcode" nve-layout="column gap:sm">
 <script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
 ${formattedSummary}
-<pre class="visually-hidden" aria-hidden="true"><code>${md.utils?.escapeHtml(templateContent)}</code></pre>
-<nvd-canvas id="${canvasId}" data-pagefind-ignore="all" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
-  <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}
+<nvd-canvas id="${canvasId}" aria-label="example '${md.utils.escapeHtml(example.name)}'" data-pagefind-ignore="all" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
+  <pre aria-hidden="true"><code>${md.utils?.escapeHtml(templateContent)}</code></pre>${template}${editButton}
 </nvd-canvas>
 </div>`
         .trim()
@@ -145,7 +143,7 @@ function getExampleStructuredData(example, templateContent, summary, canvasId, p
 }
 
 function jsonLdEncode(value) {
-  return JSON.stringify(value).replace(/<\//gi, '<\\/');
+  return JSON.stringify(value).replaceAll('<', '\\u003c');
 }
 
 export async function exampleTagsShortcode(ref, exampleName) {
@@ -183,7 +181,7 @@ function reloadScript(example, canvasId) {
   const rawTemplate = examples?.items?.find(s => s.id === '${example.id}')?.template ?? '';
   const container = document.querySelector('#${canvasId}_content:not(:has(iframe))');
   if (container) {
-    // parse the template to extract script tags since innerHTML does not execute scripts
+    /* Parse the template to extract script tags since innerHTML does not execute scripts. */
     ${rewriteDevImports.toString()}
     const template = rewriteDevImports(rawTemplate);
     const parser = new DOMParser();

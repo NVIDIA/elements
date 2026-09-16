@@ -22,4 +22,32 @@ describe('htmlMinifyTransform', () => {
 
     await expect(htmlMinifyTransform.call({ page: {} }, xml, '/atom.xml')).resolves.toBe(xml);
   });
+
+  it('should preserve safely encoded JSON-LD contents', async () => {
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareSourceCode',
+      text: '<script type="module">console.log("ready");</script>'
+    };
+    const jsonLd = JSON.stringify(structuredData).replaceAll('<', '\\u003c');
+    const html = `<!doctype html><html><body><script type="application/ld+json">${jsonLd}</script></body></html>`;
+    const result = await htmlMinifyTransform.call({ page: {} }, html, '/index.html');
+    const script = result.match(/<script type=application\/ld\+json>([\s\S]*?)<\/script>/);
+
+    expect(script?.[1]).toContain('\\u003c/script>');
+    expect(JSON.parse(script?.[1] ?? '{}')).toEqual(structuredData);
+  });
+
+  it('should not replace ordinary text that resembles a protection marker', async () => {
+    const html = `<!doctype html><html><body>
+      <p>__TEMPLATE_0__ __JSON_LD_1__</p>
+      <template><span>Template content</span></template>
+      <script type="application/ld+json">{"@context":"https://schema.org"}</script>
+    </body></html>`;
+    const result = await htmlMinifyTransform.call({ page: {} }, html, '/index.html');
+
+    expect(result).toContain('__TEMPLATE_0__ __JSON_LD_1__');
+    expect(result).toContain('<template><span>Template content</span></template>');
+    expect(result).toContain('{"@context":"https://schema.org"}');
+  });
 });

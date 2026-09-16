@@ -217,9 +217,39 @@ pre {
   nve-codeblock {
     --padding: var(--nve-ref-space-lg);
     anchor-name: --codeblock;
-    min-height: 65px;
+    line-height: 1;
     width: 100%;
   }
+}
+
+.markdown-codeblock nve-codeblock:not(:defined) {
+  pre {
+    padding: var(--nve-ref-space-lg);
+    background: var(--nve-sys-layer-container-background);
+    border-radius: var(--nve-ref-border-radius-md);
+    font-family: var(--nve-ref-font-family-roboto-mono);
+    overflow: hidden;
+    width: 100%;
+    line-height: 1;
+    scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+    scrollbar-width: var(--nve-sys-scrollbar-width);
+    text-wrap-mode: nowrap;
+  }
+
+  code {
+    white-space: var(--white-space);
+    display: block;
+  }
+}
+
+nvd-canvas > pre {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .markdown-copy-button {
@@ -239,6 +269,7 @@ pre {
 /* Canvas Styles */
 nvd-canvas {
   min-height: 120px;
+  width: 100%;
 }
 
 nvd-canvas:has(nve-page),
@@ -254,6 +285,10 @@ nvd-canvas:has(iframe[src*='page']) {
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
   --nve-sys-interaction-field-background: var(--nve-sys-interaction-field-background-200);
   --background: var(--nve-sys-layer-container-background);
+}
+
+nve-grid:not(:defined) {
+  min-height: 220px;
 }
 
 /* Page Panel Styles */

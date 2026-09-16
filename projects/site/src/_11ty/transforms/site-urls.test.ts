@@ -39,6 +39,7 @@ describe('siteUrlsTransform', () => {
   it('should fully qualify same-site urls in build output', async () => {
     const { siteUrlsTransform } = await importTransform('build');
     const html = `
+<base href="/elements/">
 <a href="docs/cli/">CLI</a>
 <a href="./docs/mcp/#skills">MCP</a>
 <a href="/docs/metrics/">Metrics</a>
@@ -50,6 +51,7 @@ describe('siteUrlsTransform', () => {
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
 
+    expect(result).toContain('<base href="/elements/">');
     expect(result).toContain('href="https://nvidia.github.io/elements/docs/cli/"');
     expect(result).toContain('href="https://nvidia.github.io/elements/docs/mcp/#skills"');
     expect(result).toContain('href="https://nvidia.github.io/elements/docs/metrics/"');

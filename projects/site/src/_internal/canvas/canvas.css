@@ -88,6 +88,7 @@ nve-select::part(_caret) {
 }
 
 .resizer {
+  margin: 0;
   position: relative;
   min-height: 80px;
   background: var(--nve-ref-color-alpha-black-400);

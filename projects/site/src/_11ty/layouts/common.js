@@ -78,6 +78,7 @@ export const renderBaseHead = data => {
     nve-tree:not(:defined),
     nve-grid:not(:defined),
     nvd-canvas:not(:defined),
+    nve-badge:not(:defined),
     nve-button:not(:defined) {
       visibility: hidden !important;
     }
