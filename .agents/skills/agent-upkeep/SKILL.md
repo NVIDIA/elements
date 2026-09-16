@@ -14,8 +14,8 @@ Your value comes from being boring, small, and correct. A reviewer should be abl
 These are not suggestions. If you violate any constraint, stop the run and report instead of opening a pull request.
 
 1. **One task per run.** The selection script chooses the task type and target.
-2. **One source file, or one tightly coupled module.** A module means a single component directory such as `projects/core/src/badge/`. Mode A may also edit the shared ESLint config under `projects/internals/` and selector-provided generated suppression files in other projects, but all hand-fixed source changes must stay within one project.
-3. **Diff cap: 150 changed lines across at most 4 files**, excluding generated suppression files. If your change exceeds this cap, shrink the scope or stop.
+2. **One source file, or one tightly coupled module.** A module means a single component directory such as `projects/core/src/badge/`. Mode A may also edit the shared ESLint config under `projects/internals/`, apply `--fix` results for the adopted rule in any selector-provided package, and write selector-provided generated suppression files. Hand-fixed source changes (edits ESLint did not propose as a `fix`) must stay within one project.
+3. **Diff cap: 150 changed lines across at most 4 files**, excluding generated suppression files. Mode A also excludes `--fix` source files from the 4-file cap; those `--fix` lines still count toward the 150-line cap. If your change exceeds this cap, shrink the scope or stop.
 4. **No public API changes.** Do not add, rename, or remove exported symbols, custom element tags, properties, attributes, slots, events, CSS custom properties, or CSS parts. Do not edit `package.json` exports. If a fix requires an API change, stop and report instead.
 5. **No dependency changes.** Do not add, remove, or bump any dependency.
 6. **No behavior change on refactors.** Coverage, type, and lint tasks must be behavior-preserving. Only the bug task may change behavior, and only in the way its failing test describes.
@@ -95,20 +95,40 @@ The rule is `'off'` in `projects/internals/eslint/src/configs/typescript.js` und
    mise exec -- pnpm exec eslint --fix-dry-run --format json --suppressions-location <suppressionsFile> .
    ```
 
-   Inspect every proposed source change. Continue only when the autofixes and intended hand fix affect one source file or tightly coupled module in one project, and the diff stays within four files and 150 lines after excluding generated suppression files. Otherwise restore only changes from this attempt, preserve pre-existing work, skip the rule, and report why.
+   If `--fix-dry-run` crashes (for example, a TypeScript 6 type-aware crash in `normalizeSlashes`), retry that working directory as lint-only JSON:
 
-3. If the preview fits the constraints, capture the remaining violations from each supplied working directory. **Always pass `--fix`**, so ESLint repairs anything it can instead of freezing those violations into the suppression file:
+   ```shell
+   mise exec -- pnpm exec eslint --format json --suppressions-location <suppressionsFile> .
+   ```
+
+   If `--suppressions-location` errors because the file does not exist, write `{}` to that path for the preview, then delete the file if the suppress step never recreates it. Skip a working directory that has no ESLint config.
+
+   Collect proposed source changes from `output` when `--fix-dry-run` succeeds. When `--fix-dry-run` fails and you used lint-only JSON, collect only messages whose `ruleId` is the adopted rule and `fix` is present. Do not include other rules' `output`, messages, or edits in the API, control-flow, or 150-line checks.
+
+   Continue when every collected proposed source change is an autofix for the adopted rule, those edits do not change public API or control flow, the combined `--fix` plus hand-fix line count stays within 150 after excluding generated suppression files, and any remaining hand fix stays in one source file or tightly coupled module in one project. The `--fix` files may span selector-provided packages and do not count toward the 4-file cap. Otherwise restore only changes from this attempt, preserve pre-existing work, skip the rule, and report why.
+
+3. If the preview fits the constraints, capture the remaining violations from each supplied working directory.
+
+   When `--fix-dry-run` succeeded, **always pass `--fix`**, so ESLint repairs anything it can instead of freezing those violations into the suppression file:
 
    ```shell
    mise exec -- pnpm exec eslint --fix --suppressions-location <suppressionsFile> --suppress-rule <rule> .
    ```
 
-   Omitting `--fix` here is a real error, not a style preference. It permanently suppresses violations the tooling could have fixed for free, and each one then costs a future pull request.
+   Omitting `--fix` here is a real error, not a style preference, when `--fix-dry-run` succeeded. It permanently suppresses violations the tooling could have fixed for free, and each one then costs a future pull request.
 
-4. Fix the violations in **one** remaining file by hand, then prune (see below).
-5. Commit the config change, every generated suppression file, and the one fixed file together.
+   When `--fix-dry-run` failed, apply only the adopted-rule fixes collected from the lint-only JSON by editing those files yourself, then run `--suppress-rule` without `--fix`:
 
-Adopting a rule holds all **new** code to it immediately. This immediate enforcement makes mode A worth one pull request even when only one file gets cleaned.
+   ```shell
+   mise exec -- pnpm exec eslint --suppressions-location <suppressionsFile> --suppress-rule <rule> .
+   ```
+
+   Never suppress a fixable adopted-rule violation. If `--fix` later crashes on an unrelated type-aware rule after a successful dry-run, use this same lint-only apply and suppress path instead of keeping unrelated `--fix` output.
+
+4. Fix the violations in **one** remaining unfixable file by hand, then prune (see below). If `--fix` cleared every finding, skip the hand fix.
+5. Commit the config change, every generated suppression file, every `--fix` source file, and the optional one hand-fixed file together.
+
+Adopting a rule holds all **new** code to it immediately. Apply every mechanical `--fix` in the same pull request so the ratchet does not freeze fixable violations. That adoption is worth one pull request even when only one file still needs a hand fix.
 
 ### Mode B: burn down
 
@@ -177,13 +197,13 @@ The script ranks quarantined **visual** tests last because you cannot update vis
 
 ## Verify the Change
 
-After the final change, read the target project's `DEVELOPMENT.md`, inspect its `package.json`, and run lint first when the script exists. For Mode A, read the relevant project instructions and run from every selector-provided `packages[].workingDirectory`; for other tasks, run from the target project directory:
+After the final change, read the target project's `DEVELOPMENT.md`, inspect its `package.json`, and run lint first when the script exists. For Mode A, read the relevant project instructions and run from `projects/internals/eslint` plus each selector-provided working directory whose source, config, or resolved `--suppressions-location` file actually changed. Resolve that path from the package's selector `suppressionsFile` against its `workingDirectory`, whether the value is a custom file name or a relative path. Skip unchanged packages. For other tasks, run from the target project directory:
 
 ```shell
 mise exec -- pnpm run --if-present lint
 ```
 
-Then run every command below. For Mode A, run the complete command set from every selector-provided `packages[].workingDirectory`; for other tasks, run it from the target project directory. `--if-present` skips only scripts that the project does not define:
+Then run every command below. For Mode A, run the complete command set from the same changed working directories as lint; for other tasks, run it from the target project directory. `--if-present` skips only scripts that the project does not define:
 
 ```shell
 mise exec -- pnpm run --if-present test
