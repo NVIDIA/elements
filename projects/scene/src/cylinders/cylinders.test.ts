@@ -4,8 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
-import { SceneCylinders } from './cylinders.js';
+import { MARKER } from '@nvidia-elements/scene';
+import { CylinderBuffer, SceneCylinders } from './cylinders.js';
 import './define.js';
 
 describe(SceneCylinders.metadata.tag, () => {
@@ -13,9 +13,9 @@ describe(SceneCylinders.metadata.tag, () => {
 
   afterEach(() => fixture && removeFixture(fixture));
 
-  it('should expose declarative and streamed marker sources', async () => {
+  it('should resolve JSON and matching buffer sources', async () => {
     fixture = await createFixture(html`
-      <nve-scene-cylinders><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-cylinders>
+      <nve-scene-cylinders source='[{"position":[0,0,0]}]'></nve-scene-cylinders>
     `);
     const layer = required(
       fixture.querySelector<SceneCylinders>(SceneCylinders.metadata.tag),
@@ -25,10 +25,9 @@ describe(SceneCylinders.metadata.tag, () => {
 
     expect(customElements.get(SceneCylinders.metadata.tag)).toBe(SceneCylinders);
     expect(SceneCylinders.layout).toBe(MARKER);
-    expect(layer.source).toBeNull();
+    expect(layer.source).toBeInstanceOf(CylinderBuffer);
 
-    layer.replaceChildren();
-    const records = new MarkerBuffer({ capacity: 1 });
+    const records = new CylinderBuffer({ capacity: 1 });
     records.add({ position: [1, 2, 3] });
     layer.source = records;
     layer.countLimit = 1;

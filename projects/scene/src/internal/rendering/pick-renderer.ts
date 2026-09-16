@@ -51,7 +51,6 @@ interface PickTarget {
   readonly featureId?: number;
   readonly instanceIndex: number;
   readonly layer: HTMLElement;
-  readonly marker?: HTMLElement;
   readonly target: ScenePickTarget;
 }
 
@@ -60,7 +59,6 @@ interface PickTargetRange {
   readonly featureIds?: SceneFeatureIdSnapshot;
   readonly firstId: number;
   readonly layer: HTMLElement;
-  readonly markers?: readonly HTMLElement[];
   readonly targetAt: (index: number) => ScenePickTarget;
 }
 
@@ -433,11 +431,6 @@ function createPickTargetRanges(items: readonly SceneRenderItem[]): PickTargetRa
       featureIds: item.featureIds,
       firstId,
       layer: item.layer,
-      markers: isMarkerRenderItem(item)
-        ? item.data.markers
-        : isMeshRenderItem(item)
-          ? item.instances?.markers
-          : undefined,
       targetAt: createPickTargetDecoder(item)
     });
     firstId += count;
@@ -454,7 +447,6 @@ function decodePickTarget(ranges: readonly PickTargetRange[], id: number): PickT
     ...(featureId === undefined ? {} : { featureId }),
     instanceIndex,
     layer: range.layer,
-    marker: range.markers?.[instanceIndex],
     target: range.targetAt(instanceIndex)
   };
 }

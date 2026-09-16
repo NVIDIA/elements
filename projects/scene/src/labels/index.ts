@@ -2,4 +2,5 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export * from './labels.js';
+export * from '../internal/labels/buffer.js';
 export type { LabelScaleUnit } from '../internal/labels/data.js';

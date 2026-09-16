@@ -49,8 +49,7 @@ describe('camera visual contract', () => {
       'scene-camera-pose-frame',
       '<nve-scene-frame name="sensor" position="[2,3,4]"></nve-scene-frame><nve-scene-camera behavior="pose" frame="sensor" position="[1,0,0]"></nve-scene-camera>',
       {
-        content:
-          '<nve-scene-cubes><nve-scene-marker position="[3,3,10]" scale="[2,2,2]" color="magenta"></nve-scene-marker></nve-scene-cubes>'
+        content: `<nve-scene-cubes source='[{"position":[3,3,10],"size":[2,2,2],"color":"magenta"}]'></nve-scene-cubes>`
       }
     );
     expect(state.pose.position).toEqual([3, 3, 4]);
@@ -61,8 +60,7 @@ describe('camera visual contract', () => {
       'scene-camera-pose-clipping',
       '<nve-scene-camera behavior="pose" near="2" far="25"></nve-scene-camera>',
       {
-        content:
-          '<nve-scene-cubes><nve-scene-marker position="[-0.5,0,1]" scale="[0.4,0.4,0.4]" color="cyan"></nve-scene-marker><nve-scene-marker position="[0,0,5]" scale="[2,2,2]" color="magenta"></nve-scene-marker><nve-scene-marker position="[15,0,30]" scale="[12,12,12]" color="yellow"></nve-scene-marker></nve-scene-cubes>'
+        content: `<nve-scene-cubes source='[{"position":[-0.5,0,1],"size":[0.4,0.4,0.4],"color":"cyan"},{"position":[0,0,5],"size":[2,2,2],"color":"magenta"},{"position":[15,0,30],"size":[12,12,12],"color":"yellow"}]'></nve-scene-cubes>`
       }
     );
     expect(state.projection).toMatchObject({ near: 2, far: 25 });
@@ -73,8 +71,7 @@ describe('camera visual contract', () => {
       'scene-camera-pose-clipping-recovery',
       '<nve-scene-camera behavior="pose" near="20" far="10" data-recover="true"></nve-scene-camera>',
       {
-        content:
-          '<nve-scene-cubes><nve-scene-marker position="[0,0,5]" scale="[2,2,2]" color="magenta"></nve-scene-marker></nve-scene-cubes>'
+        content: `<nve-scene-cubes source='[{"position":[0,0,5],"size":[2,2,2],"color":"magenta"}]'></nve-scene-cubes>`
       }
     );
     expect(state.projection).toMatchObject({ near: 1, far: 10 });

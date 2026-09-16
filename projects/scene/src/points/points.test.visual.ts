@@ -9,7 +9,7 @@ describe('scene points visual runtime', () => {
     const pixel = await visualRunner.inspect(
       'scene-points-srgb-output',
       `<nve-scene aria-label="sRGB point" style="width:512px;height:512px;background:rgb(0 0 0)"><nve-scene-points id="points" size="128" size-unit="pixel"></nve-scene-points></nve-scene><script type="module">
-        import { PointBuffer } from '@nvidia-elements/scene';
+        import { PointBuffer } from '@nvidia-elements/scene/points';
         import '@nvidia-elements/scene/points/define.js';
         const points = new PointBuffer({ capacity: 1 });
         points.add({ position: [0, 0, 0], color: [116 / 255, 184 / 255, 0, 1] });
@@ -47,7 +47,7 @@ describe('scene points visual runtime', () => {
     const pixels = await visualRunner.inspect(
       'scene-points-layer',
       `<nve-scene aria-label="points" style="width: 512px;height:512px;background:rgb(0 0 0)"><nve-scene-points id="points" size="64"></nve-scene-points></nve-scene><script type="module">
-        import { PointBuffer } from '@nvidia-elements/scene';
+        import { PointBuffer } from '@nvidia-elements/scene/points';
         import '@nvidia-elements/scene/points/define.js';
         const points = new PointBuffer({ capacity: 2 });
         points.add({ position: [0, 0, 0], color: [1, 0, 0, 0.5] });
@@ -91,7 +91,7 @@ describe('scene points visual runtime', () => {
     const bounds = await visualRunner.inspect(
       'scene-point-size-units',
       `<nve-scene aria-label="point size units" style="width:512px;height:512px;background:rgb(0 0 0)"><nve-scene-camera behavior="top" target="[0,0,0]" altitude="4" frustum-height="4"></nve-scene-camera><nve-scene-points id="world" size="1" size-unit="world"></nve-scene-points><nve-scene-points id="pixel" size="64"></nve-scene-points></nve-scene><script type="module">
-        import { PointBuffer } from '@nvidia-elements/scene';
+        import { PointBuffer } from '@nvidia-elements/scene/points';
         import '@nvidia-elements/scene/camera/define.js';
         import '@nvidia-elements/scene/points/define.js';
         const setPoint = (id, position, color) => {

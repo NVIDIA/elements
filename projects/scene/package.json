@@ -139,14 +139,6 @@
       "types": "./dist/lines/define.d.ts",
       "default": "./dist/lines/define.js"
     },
-    "./marker": {
-      "types": "./dist/marker/index.d.ts",
-      "default": "./dist/marker/index.js"
-    },
-    "./marker/define.js": {
-      "types": "./dist/marker/define.d.ts",
-      "default": "./dist/marker/define.js"
-    },
     "./mesh": {
       "types": "./dist/mesh/index.d.ts",
       "default": "./dist/mesh/index.js"

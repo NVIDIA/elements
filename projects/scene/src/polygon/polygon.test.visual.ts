@@ -13,9 +13,7 @@ describe('scene polygon visual runtime', () => {
           <nve-scene-camera behavior="top" target="[0,0,0]" altitude="8" frustum-height="8"></nve-scene-camera>
           <nve-scene-polygon color="#76b900" geometry='{"outer":[[-3,-3],[3,-3],[3,3],[-3,3]],"holes":[[[-1,-1],[-1,1],[1,1],[1,-1]]]}'>
           </nve-scene-polygon>
-          <nve-scene-polygon color="white" geometry='{"outer":[[-0.3,-0.8],[0.3,-0.8],[0.3,0.2],[0.7,0.2],[0,0.9],[-0.7,0.2],[-0.3,0.2]]}'>
-            <nve-scene-marker position="[-2.2,0,0.02]" color="cyan"></nve-scene-marker>
-            <nve-scene-marker position="[2.2,0,0.02]" orientation="[0,0,0.707107,0.707107]" color="magenta"></nve-scene-marker>
+          <nve-scene-polygon color="white" geometry='{"outer":[[-0.3,-0.8],[0.3,-0.8],[0.3,0.2],[0.7,0.2],[0,0.9],[-0.7,0.2],[-0.3,0.2]]}' source='[{"position":[-2.2,0,0.02],"color":"cyan"},{"position":[2.2,0,0.02],"orientation":[0,0,0.707107,0.707107],"color":"magenta"}]'>
           </nve-scene-polygon>
         </nve-scene>
         <script type="module">
@@ -106,7 +104,7 @@ describe('scene polygon visual runtime', () => {
     expect(result.center).toBeNull();
     expect(result.centerPixel.slice(0, 3)).toEqual([0, 0, 0]);
     expect(result.fill).toMatchObject({ elementTag: 'nve-scene-polygon', layerTag: 'nve-scene-polygon' });
-    expect(result.instance).toMatchObject({ elementTag: 'nve-scene-marker', layerTag: 'nve-scene-polygon' });
+    expect(result.instance).toMatchObject({ elementTag: 'nve-scene-polygon', layerTag: 'nve-scene-polygon' });
     expect(result.instance?.index).toBe(0);
     expect(result.pixel?.[1]).toBeGreaterThan(170);
   });

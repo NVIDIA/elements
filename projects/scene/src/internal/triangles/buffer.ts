@@ -34,9 +34,9 @@ export type TriangleVertexSource = TriangleVertexBuffer | ExternalTriangleVertex
 
 /** Fixed-capacity, mutable storage for packed triangle vertex records. */
 export class TriangleVertexBuffer extends PackedRecordBuffer<'triangle-vertex', TriangleVertexInit, TriangleVertex> {
-  constructor(options: RecordBufferOptions) {
+  constructor(options: RecordBufferOptions<TriangleVertexInit>) {
     super({
-      capacity: options.capacity,
+      buffer: options,
       createHandle: ({ index, notifyMutation, view }) => new TriangleVertexRecord(view, index, notifyMutation),
       defaultInit: () => ({}),
       initialize: initializeRecords,

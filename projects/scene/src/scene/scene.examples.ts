@@ -32,7 +32,7 @@ export default {
 };
 
 /**
- * @summary Simple scene with a single cube marker and gridlines.
+ * @summary Simple scene with a single cube instance and gridlines.
  */
 export const InstallSource = {
   render: () => html`
@@ -43,10 +43,7 @@ export const InstallSource = {
     </script>
     <nve-scene aria-label="simple scene">
       <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-cubes>
-        <nve-scene-marker position="[-2.5,0,0.375]" scale="[0.75,0.75,0.75]" color="cyan"></nve-scene-marker>
-        <nve-scene-marker position="[0,0,0.5]" scale="[1,1,1]" color="magenta"></nve-scene-marker>
-        <nve-scene-marker position="[2.5,0,0.75]" scale="[1.5,1.5,1.5]" color="yellow"></nve-scene-marker>
+      <nve-scene-cubes source='[{"position":[-2.5,0,0.375],"size":[0.75,0.75,0.75],"color":"cyan"},{"position":[0,0,0.5],"size":[1,1,1],"color":"magenta"},{"position":[2.5,0,0.75],"size":[1.5,1.5,1.5],"color":"yellow"}]'>
       </nve-scene-cubes>
     </nve-scene>
   `
@@ -62,20 +59,15 @@ export const Default = {
       <nve-scene-gridlines count="14"></nve-scene-gridlines>
       <nve-scene-axes length="3"></nve-scene-axes>
 
-      <nve-scene-cubes>
-        <nve-scene-marker position="[-5,2.5,0.5]" color="cyan"></nve-scene-marker>
+      <nve-scene-cubes source='[{"position":[-5,2.5,0.5],"color":"cyan"}]'>
       </nve-scene-cubes>
-      <nve-scene-spheres>
-        <nve-scene-marker position="[-3,2.5,0.5]" color="magenta"></nve-scene-marker>
+      <nve-scene-spheres source='[{"position":[-3,2.5,0.5],"color":"magenta"}]'>
       </nve-scene-spheres>
-      <nve-scene-cylinders>
-        <nve-scene-marker position="[-1,2.5,0.75]" scale="[0.75,0.75,1.5]" color="yellow"></nve-scene-marker>
+      <nve-scene-cylinders source='[{"position":[-1,2.5,0.75],"size":[0.75,0.75,1.5],"color":"yellow"}]'>
       </nve-scene-cylinders>
-      <nve-scene-cones>
-        <nve-scene-marker position="[1,2.5,0.75]" scale="[0.75,0.75,1.5]" color="cyan"></nve-scene-marker>
+      <nve-scene-cones source='[{"position":[1,2.5,0.75],"size":[0.75,0.75,1.5],"color":"cyan"}]'>
       </nve-scene-cones>
-      <nve-scene-pyramids>
-        <nve-scene-marker position="[3,2.5,0.75]" scale="[0.75,0.75,1.5]" color="magenta"></nve-scene-marker>
+      <nve-scene-pyramids source='[{"position":[3,2.5,0.75],"size":[0.75,0.75,1.5],"color":"magenta"}]'>
       </nve-scene-pyramids>
       <nve-scene-frame position="[5,2.5,0]">
         <nve-scene-labels id="basic-labels"></nve-scene-labels>
@@ -85,35 +77,23 @@ export const Default = {
         </nve-scene-model>
       </nve-scene-frame>
 
-      <nve-scene-cubes>
-        <nve-scene-marker position="[-4,0,0.5]" color="rgba(0,255,255,0.2)" outline-color="cyan"></nve-scene-marker>
-        <nve-scene-marker position="[-3.6,0.2,0.5]" color="rgba(255,255,0,0.2)" outline-color="yellow"></nve-scene-marker>
-        <nve-scene-marker position="[-4.4,-0.2,0.5]" color="rgba(255,0,255,0.2)" outline-color="magenta"></nve-scene-marker>
+      <nve-scene-cubes source='[{"position":[-4,0,0.5],"color":"rgba(0,255,255,0.2)","outlineColor":"cyan"},{"position":[-3.6,0.2,0.5],"color":"rgba(255,255,0,0.2)","outlineColor":"yellow"},{"position":[-4.4,-0.2,0.5],"color":"rgba(255,0,255,0.2)","outlineColor":"magenta"}]'>
       </nve-scene-cubes>
-      <nve-scene-arrows>
-        <nve-scene-marker
-          position="[-1.8,-0.4,0]"
-          orientation="[-0.140789,0.281579,0,0.949153]"
-          scale="[0.1,0.1,1.870829]"
-          color="yellow"
-        ></nve-scene-marker>
-      </nve-scene-arrows>
+      <nve-scene-arrows
+        source='[{"origin":[-1.8,-0.4,0],"vector":[1,0.5,1.5],"shaftDiameter":0.1,"color":"yellow"}]'
+      ></nve-scene-arrows>
 
-      <nve-scene-polygon color="cyan" geometry='{"outer":[[-0.25,-1.2],[0.25,-1.2],[0.25,0],[0.8,0],[0,1.2],[-0.8,0],[-0.25,0]]}'>
-        <nve-scene-marker position="[4.2,0,0.05]" scale="[0.4,0.4,1]"></nve-scene-marker>
+      <nve-scene-polygon color="cyan" geometry='{"outer":[[-0.25,-1.2],[0.25,-1.2],[0.25,0],[0.8,0],[0,1.2],[-0.8,0],[-0.25,0]]}' source='[{"position":[4.2,0,0.05],"scale":[0.4,0.4,1]}]'>
       </nve-scene-polygon>
-      <nve-scene-polygon color="magenta" geometry='{"outer":[[-0.5,-1.2],[0.5,-1.2],[1.2,-0.5],[1.2,0.5],[0.5,1.2],[-0.5,1.2],[-1.2,0.5],[-1.2,-0.5]],"holes":[[[-0.35,-0.35],[-0.35,0.35],[0.35,0.35],[0.35,-0.35]]]}'>
-        <nve-scene-marker position="[5.3,0,0.05]" scale="[0.4,0.4,1]"></nve-scene-marker>
+      <nve-scene-polygon color="magenta" geometry='{"outer":[[-0.5,-1.2],[0.5,-1.2],[1.2,-0.5],[1.2,0.5],[0.5,1.2],[-0.5,1.2],[-1.2,0.5],[-1.2,-0.5]],"holes":[[[-0.35,-0.35],[-0.35,0.35],[0.35,0.35],[0.35,-0.35]]]}' source='[{"position":[5.3,0,0.05],"scale":[0.4,0.4,1]}]'>
       </nve-scene-polygon>
-      <nve-scene-polygon color="yellow" geometry='{"outer":[[-0.8,-1.2],[0.8,-1.2],[0.8,-0.6],[0.3,-0.6],[0.3,1.2],[-0.3,1.2],[-0.3,-0.6],[-0.8,-0.6]]}'>
-        <nve-scene-marker position="[6.4,0,0.05]" scale="[0.4,0.4,1]"></nve-scene-marker>
+      <nve-scene-polygon color="yellow" geometry='{"outer":[[-0.8,-1.2],[0.8,-1.2],[0.8,-0.6],[0.3,-0.6],[0.3,1.2],[-0.3,1.2],[-0.3,-0.6],[-0.8,-0.6]]}' source='[{"position":[6.4,0,0.05],"scale":[0.4,0.4,1]}]'>
       </nve-scene-polygon>
 
       <nve-scene-frame position="[-5,-3,0]">
         <nve-scene-heightfield id="basic-terrain" color="magenta"></nve-scene-heightfield>
       </nve-scene-frame>
-      <nve-scene-mesh id="basic-mesh" color="yellow">
-        <nve-scene-marker position="[-1.5,-3,0.6]"></nve-scene-marker>
+      <nve-scene-mesh id="basic-mesh" color="yellow" source='[{"position":[-1.5,-3,0.6]}]'>
       </nve-scene-mesh>
 
       <nve-scene-points id="basic-points" size="7"></nve-scene-points>
@@ -121,7 +101,10 @@ export const Default = {
       <nve-scene-triangles id="basic-triangle"></nve-scene-triangles>
     </nve-scene>
     <script type="module">
-      import { LabelBuffer, LineVertexBuffer, PointBuffer, TriangleVertexBuffer } from '@nvidia-elements/scene';
+      import { LabelBuffer } from '@nvidia-elements/scene/labels';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
+      import { TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/arrows/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -543,48 +526,59 @@ export const EpisodeReplay = {
 };
 
 /**
- * @summary Handle marker click and hover events alongside programmatic pick results that display world-space coordinates at the authoring level that owns the selected data.
+ * @summary Handle layer-level click and hover events while displaying the selected world-space position.
  */
 export const Interactions = {
   render: () => html`
     <nve-scene id="pick-scene" aria-label="interactive scene">
       <nve-scene-camera behavior="orbit"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-cubes interactive>
-        <nve-scene-marker id="pick-marker" aria-label="click cube to cycle colors" position="[0,0,0.5]" color="yellow"></nve-scene-marker>
-        <nve-scene-marker id="hover-marker" aria-label="hover over blue cube" position="[2,0,0.5]" color="cyan"></nve-scene-marker>
+      <nve-scene-cubes interactive source='[{"position":[0,0,0.5],"color":"yellow"},{"position":[2,0,0.5],"color":"cyan"}]'>
       </nve-scene-cubes>
     </nve-scene>
     <p id="pick-position" nve-text="body muted" nve-layout="pad-top:md">No position selected</p>
     <script type="module">
+      import '@nvidia-elements/scene/scene/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/cubes/define.js';
+
       const scene = document.querySelector('#pick-scene');
-      const marker = document.querySelector('#pick-marker');
-      const hoverMarker = document.querySelector('#hover-marker');
+      const markerLayer = scene.querySelector('nve-scene-cubes');
+      const marker = markerLayer.source.at(0);
+      const hoverMarker = markerLayer.source.at(1);
       const pickPosition = document.querySelector('#pick-position');
       const axes = ['x', 'y', 'z'];
       const markerColors = ['cyan', 'magenta', 'yellow'];
       let markerColorIndex = 0;
 
-      marker.addEventListener('click', () => {
-        marker.color = markerColors[markerColorIndex];
-        markerColorIndex = (markerColorIndex + 1) % markerColors.length;
+      scene.addEventListener('nve-scene-click', event => {
+        const { layer, target, worldPosition } = event.detail;
+        if (layer === markerLayer && target.kind === 'instance' && target.index === marker.index) {
+          marker.color = markerColors[markerColorIndex];
+          markerColorIndex = (markerColorIndex + 1) % markerColors.length;
+          markerLayer.publish({ count: 1, start: marker.index });
+        }
+        pickPosition.textContent = worldPosition.map((value, index) => axes[index] + ': ' + value.toFixed(2)).join(', ');
       });
 
-      hoverMarker.addEventListener('pointerenter', () => (hoverMarker.color = 'yellow'));
-      hoverMarker.addEventListener('pointerleave', () => (hoverMarker.color = 'cyan'));
+      scene.addEventListener('nve-scene-pointerenter', event => {
+        if (event.detail.layer !== markerLayer || event.detail.target.index !== hoverMarker.index) return;
+        hoverMarker.color = 'yellow';
+        markerLayer.publish({ count: 1, start: hoverMarker.index });
+      });
 
-      scene.addEventListener('click', async event => {
-        const hit = await scene.pick(event.clientX, event.clientY);
-        pickPosition.textContent = hit
-          ? hit.worldPosition.map((value, index) => axes[index] + ': ' + value.toFixed(2)).join(', ')
-          : 'No position selected';
+      scene.addEventListener('nve-scene-pointerleave', event => {
+        if (event.detail.layer !== markerLayer || event.detail.target.index !== hoverMarker.index) return;
+        hoverMarker.color = 'cyan';
+        markerLayer.publish({ count: 1, start: hoverMarker.index });
       });
     </script>
   `
 };
 
 /**
- * @summary Handle the same canonical click and hover events for declarative and buffer-backed markers through their scene. Use explicit target kinds to update frequently changing source data.
+ * @summary Handle the same canonical click and hover events for JSON-initialized and retained buffer records through their scene. Use explicit target kinds to update frequently changing source data.
  */
 export const InteractionsList = {
   render: () => html`
@@ -595,7 +589,7 @@ export const InteractionsList = {
     </nve-scene>
     <p id="buffer-pick-position" nve-text="body muted" nve-layout="pad-top:md">No position selected</p>
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
@@ -608,7 +602,7 @@ export const InteractionsList = {
       const markerColors = ['cyan', 'magenta', 'yellow'];
       let markerColorIndex = 0;
 
-      const markers = new MarkerBuffer({ capacity: 2 });
+      const markers = new CubeBuffer({ capacity: 2 });
       const clickMarker = markers.add({ position: [0, 0, 0.5], color: 'yellow' });
       const hoverMarker = markers.add({ position: [2, 0, 0.5], color: 'cyan' });
       markerLayer.source = markers;
@@ -641,7 +635,7 @@ export const InteractionsList = {
 };
 
 /**
- * @summary Handle marker click and hover events alongside programmatic pick results that display world-space coordinates at the authoring level that owns the selected data. Use a popover to display the selected position.
+ * @summary Handle instance click and hover events alongside programmatic pick results that display world-space coordinates at the authoring level that owns the selected data. Use a popover to display the selected position.
  */
 export const InteractionsPopover = {
   render: () => html`
@@ -651,7 +645,7 @@ export const InteractionsPopover = {
       <nve-scene-cubes interactive id="pick-markers-popover"></nve-scene-cubes>
     </nve-scene>
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
@@ -660,7 +654,7 @@ export const InteractionsPopover = {
       const scene = document.querySelector('#pick-scene-popover');
       const markerLayer = scene.querySelector('#pick-markers-popover');
 
-      const markers = new MarkerBuffer({ capacity: 2 });
+      const markers = new CubeBuffer({ capacity: 2 });
       markers.add({ featureId: 1, position: [0, 0, 0.5], color: 'yellow' });
       markers.add({ featureId: 2, position: [2, 0, 0.5], color: 'cyan' });
       markerLayer.source = markers;
@@ -673,7 +667,7 @@ export const InteractionsPopover = {
 };
 
 /**
- * @summary Project a world anchor into a DOM tooltip and move a frame by intersecting continuous pointer rays with an application-owned plane.
+ * @summary Move a frame by intersecting continuous pointer rays with an application-owned plane.
  */
 export const CoordinateHelpers = {
   render: () => html`
@@ -681,25 +675,12 @@ export const CoordinateHelpers = {
       <nve-scene-camera behavior="orbit" distance="6"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
       <nve-scene-frame id="coordinate-frame" position="[0,0,0]">
-        <nve-scene-spheres>
-          <nve-scene-marker position="[0,0,0.25]" scale="[0.25,0.25,0.25]" color="cyan"></nve-scene-marker>
-        </nve-scene-spheres>
+        <nve-scene-spheres source='[{"position":[0,0,0.25],"size":[0.25,0.25,0.25],"color":"cyan"}]'></nve-scene-spheres>
       </nve-scene-frame>
     </nve-scene>
-    <span id="coordinate-tooltip" style="position: fixed; pointer-events: none;">world anchor</span>
     <script type="module">
       const scene = document.querySelector('#coordinate-scene');
       const frame = scene.querySelector('#coordinate-frame');
-      const tooltip = document.querySelector('#coordinate-tooltip');
-
-      function placeTooltip() {
-        const world = frame.getWorldPoint([0, 0, 0.5]);
-        const client = world && scene.getClientPoint(world);
-        tooltip.hidden = client?.visibility !== 'visible';
-        if (client?.visibility === 'visible') {
-          tooltip.style.transform = 'translate(' + client.clientX + 'px, ' + client.clientY + 'px)';
-        }
-      }
 
       scene.addEventListener('pointermove', event => {
         const ray = scene.getRay(event.clientX, event.clientY);
@@ -710,11 +691,8 @@ export const CoordinateHelpers = {
           position: ray.origin.map((value, axis) => value + ray.direction[axis] * distance),
           orientation: [0, 0, 0, 1]
         });
-        placeTooltip();
       });
-      scene.addEventListener('nve-scene-camera-change', placeTooltip);
       await scene.ready;
-      placeTooltip();
     </script>
   `
 };
@@ -733,7 +711,7 @@ export const FeatureIdentity = {
       Select line.
     </p>
     <script type="module">
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';

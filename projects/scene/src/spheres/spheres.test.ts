@@ -4,8 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
-import { SceneSpheres } from './spheres.js';
+import { MARKER } from '@nvidia-elements/scene';
+import { SceneSpheres, SphereBuffer } from './spheres.js';
 import './define.js';
 
 describe(SceneSpheres.metadata.tag, () => {
@@ -13,19 +13,18 @@ describe(SceneSpheres.metadata.tag, () => {
 
   afterEach(() => fixture && removeFixture(fixture));
 
-  it('should expose declarative and streamed marker sources', async () => {
+  it('should resolve JSON and matching buffer sources', async () => {
     fixture = await createFixture(html`
-      <nve-scene-spheres><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-spheres>
+      <nve-scene-spheres source='[{"position":[0,0,0]}]'></nve-scene-spheres>
     `);
     const layer = required(fixture.querySelector<SceneSpheres>(SceneSpheres.metadata.tag), 'Expected spheres fixture.');
     await elementIsStable(layer);
 
     expect(customElements.get(SceneSpheres.metadata.tag)).toBe(SceneSpheres);
     expect(SceneSpheres.layout).toBe(MARKER);
-    expect(layer.source).toBeNull();
+    expect(layer.source).toBeInstanceOf(SphereBuffer);
 
-    layer.replaceChildren();
-    const records = new MarkerBuffer({ capacity: 1 });
+    const records = new SphereBuffer({ capacity: 1 });
     records.add({ position: [1, 2, 3] });
     layer.source = records;
     layer.countLimit = 1;

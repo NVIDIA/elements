@@ -10,7 +10,7 @@ describe('scene pyramids lighthouse report', () => {
       'nve-scene-pyramids',
       /* html */ `
         <nve-scene aria-label="Pyramids scene">
-          <nve-scene-pyramids><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-pyramids>
+          <nve-scene-pyramids source='[{"position":[0,0,0]}]'></nve-scene-pyramids>
         </nve-scene>
         <script type="module">import '@nvidia-elements/scene/pyramids/define.js';</script>
       `

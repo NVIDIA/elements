@@ -22,7 +22,7 @@ export const Default = {
       <nve-scene-labels id="example-labels"></nve-scene-labels>
     </nve-scene>
     <script type="module">
-      import { LabelBuffer } from '@nvidia-elements/scene';
+      import { LabelBuffer } from '@nvidia-elements/scene/labels';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -49,7 +49,7 @@ export const ScaleUnits = {
       <nve-scene-labels id="world-label" scale-unit="world"></nve-scene-labels>
     </nve-scene>
     <script type="module">
-      import { LabelBuffer } from '@nvidia-elements/scene';
+      import { LabelBuffer } from '@nvidia-elements/scene/labels';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';

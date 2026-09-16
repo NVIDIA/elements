@@ -59,7 +59,7 @@ export function updateElementFeatureIdInactive(element: HTMLElement, inactive: b
     active: inactive,
     code: FEATURE_ID_INACTIVE,
     element,
-    message: 'The feature ID is inactive while explicit marker instances define the pick targets.',
+    message: 'The feature ID is inactive while source records define the pick targets.',
     severity: 'warning'
   });
 }

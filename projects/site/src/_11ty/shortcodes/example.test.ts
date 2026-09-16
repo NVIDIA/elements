@@ -166,7 +166,7 @@ describe('exampleShortcode', () => {
   it('should preserve imported example bindings when rewriting development module imports', async () => {
     const { rewriteDevImports } = await importShortcode();
     const template = `<script type="module">
-      import { PointBuffer } from '@nvidia-elements/scene';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
       import 'lit';
       import './local.js';
       const points = new PointBuffer({ capacity: 1 });
@@ -174,7 +174,7 @@ describe('exampleShortcode', () => {
     </script>`;
 
     expect(rewriteDevImports(template)).toBe(`<script type="module">
-      import { PointBuffer } from '/@id/@nvidia-elements/scene';
+      import { PointBuffer } from '/@id/@nvidia-elements/scene/points';
       import '/@id/lit';
       import './local.js';
       const points = new PointBuffer({ capacity: 1 });

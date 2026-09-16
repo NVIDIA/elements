@@ -20,11 +20,11 @@ import type { PreparationContext } from './internal/preparation.js';
 import { mergeUploadRanges } from './internal/upload-ranges.js';
 import { VertexStreamBuffer } from './internal/vertex-stream.js';
 import { MarkerBuffer } from './internal/markers/buffer.js';
+import { CubeBuffer } from './internal/markers/semantic-buffer.js';
 import { LineVertexBuffer } from './internal/lines/buffer.js';
 import { PointBuffer } from './internal/points/buffer.js';
 import { TriangleVertexBuffer } from './internal/triangles/buffer.js';
 import { replacePreparedMarkerSource, replacePreparedVertexSource } from './internal/prepared-record-source.js';
-import { compileMarker, registerMarkerState } from './internal/markers/state.js';
 import { compileParts } from './internal/model/compile.js';
 import { CameraController } from './internal/camera/camera.controller.js';
 import { SceneModel } from './model/model.js';
@@ -40,6 +40,7 @@ import {
   takeSceneFeatureIdSnapshot
 } from './internal/feature-ids.js';
 import './camera/define.js';
+import './cubes/define.js';
 import './model/define.js';
 import './scene/define.js';
 
@@ -53,6 +54,40 @@ const runOptions = {
 const MARKER_COUNT = 10_000;
 const VERTEX_COUNT = 100_000;
 const FEATURE_ID_COUNT = 1_000_000;
+
+describe('semantic source initialization', () => {
+  const records = Array.from({ length: MARKER_COUNT }, (_, index) => ({
+    position: [index % 100, Math.floor(index / 100), 0] as const,
+    size: [1, 1, 1] as const
+  }));
+  const attributeValue = JSON.stringify(records.slice(0, 1_000));
+
+  test('10K seeded cube construction', async ({ bench }) => {
+    await bench('10K seeded cube construction', () => new CubeBuffer({ records })).run(runOptions);
+  });
+
+  test('10K incremental cube construction', async ({ bench }) => {
+    await bench('10K incremental cube construction', () => {
+      const source = new CubeBuffer({ capacity: records.length });
+      records.forEach(record => source.add(record));
+      return source;
+    }).run(runOptions);
+  });
+
+  test('1K JSON attribute initialization', async ({ bench }) => {
+    await bench('1K JSON attribute initialization', () => {
+      const layer = document.createElement('nve-scene-cubes');
+      layer.setAttribute('source', attributeValue);
+      return layer;
+    }).run(runOptions);
+  });
+
+  const retained = new CubeBuffer({ records });
+  test('one retained cube update', async ({ bench }) => {
+    let x = 0;
+    await bench('one retained cube update', () => retained.at(5_000).position.set((x += 1), 0, 0)).run(runOptions);
+  });
+});
 
 describe('marker instance buffer', () => {
   for (const count of [1_000, MARKER_COUNT, 100_000]) {
@@ -92,26 +127,6 @@ describe('marker instance buffer', () => {
       void buffer.hasPartialFaceAlpha(MARKER_COUNT);
       void buffer.hasPartialOutlineAlpha(MARKER_COUNT);
       void buffer.hasVisibleOutlineAlpha(MARKER_COUNT);
-    }).run(runOptions);
-  });
-});
-
-describe('declarative marker compilation', () => {
-  const markers = createDeclarativeMarkers(1_000);
-
-  test('1K total markers', async ({ bench }) => {
-    await bench('1K total markers', () => {
-      for (const marker of markers) void compileMarker(marker);
-    }).run(runOptions);
-  });
-
-  test('one dirty marker in a 1K layer', async ({ bench }) => {
-    const marker = markers[500]!;
-    let position = 0;
-    await bench('one dirty marker in a 1K layer', () => {
-      position += 1;
-      Reflect.set(marker, 'position', [position, 0, 0]);
-      void compileMarker(marker);
     }).run(runOptions);
   });
 });
@@ -584,18 +599,6 @@ function createMarkers(count: number, orientation: [number, number, number, numb
     writeMarker(source, index, { orientation, position: [index % 100, Math.floor(index / 100), 0] });
   }
   return source;
-}
-
-function createDeclarativeMarkers(count: number): readonly HTMLElement[] {
-  const layer = document.createElement('nve-scene-cubes');
-  const markers = Array.from({ length: count }, () => {
-    const marker = document.createElement('nve-scene-marker');
-    registerMarkerState(marker);
-    return marker;
-  });
-  layer.append(...markers);
-  for (const marker of markers) void compileMarker(marker);
-  return markers;
 }
 
 function createMarkerBuffer(count: number): MarkerBuffer {

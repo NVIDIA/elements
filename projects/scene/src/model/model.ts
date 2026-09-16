@@ -4,6 +4,7 @@
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
+import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/markers/buffer.js';
 import {
   connectModelLayer,
   disconnectModelLayer,
@@ -20,15 +21,17 @@ import {
 } from '../internal/element-feature-id.js';
 import styles from '../internal/styles/host.css?inline';
 
+export type ModelInstanceSource = MarkerSource;
+
 /**
  * @element nve-scene-model
- * @description One compound mesh composed from primitive parts and placed by marker instances.
- * @slot - Contains direct scene part and scene marker children.
+ * @description One compound mesh composed from primitive parts and placed by source records.
+ * @slot - Contains direct scene part children that define model geometry.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/model
  * @stable false
  */
-export class SceneModel extends MarkerLayerElement {
+export class SceneModel extends MarkerLayerElement<ModelInstanceSource, MarkerInit> {
   static styles = useStyles([styles]);
   static readonly layout = MARKER;
   static readonly metadata = { tag: 'nve-scene-model', version: '0.0.0' };
@@ -49,7 +52,7 @@ export class SceneModel extends MarkerLayerElement {
    * Bulk primitive geometry. A non-null value takes precedence over part children.
    * The setter snapshots assigned arrays and nested tuples immediately, so later in-place
    * edits take effect only after reassigning `parts` again, even with the same array.
-   * Part edits rebuild geometry; use markers or frames for per-frame movement.
+   * Part edits rebuild geometry; use source records or frames for per-frame movement.
    */
   @property({ attribute: false })
   get parts(): readonly ModelPart[] | null {
@@ -64,7 +67,7 @@ export class SceneModel extends MarkerLayerElement {
   }
 
   constructor() {
-    super('cube');
+    super('cube', { create: records => new MarkerBuffer({ records }), kind: 'marker' });
     registerElementFeatureId(this);
     registerModelLayer(this);
   }

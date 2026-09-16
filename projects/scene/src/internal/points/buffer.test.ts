@@ -7,6 +7,15 @@ import { readPoint } from '../layouts/helpers.js';
 import { PointBuffer } from './buffer.js';
 
 describe('point buffer', () => {
+  it('seeds records equivalently to incremental writes', () => {
+    const records = [{ color: 'cyan', featureId: 7, position: [1, 2, 3] }] as const;
+    const seeded = new PointBuffer({ records });
+    const incremental = new PointBuffer({ capacity: 1 });
+    incremental.add(records[0]);
+    expect(seeded).toMatchObject({ capacity: 1, count: 1 });
+    expect(seeded.mutableBytes).toEqual(incremental.mutableBytes);
+  });
+
   it('should allocate fixed capacity and support allocation-free writes', () => {
     const points = new PointBuffer({ capacity: 2 });
 

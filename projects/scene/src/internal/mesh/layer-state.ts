@@ -180,14 +180,14 @@ function createMeshRenderData(mesh: HTMLElement, consumeUploads: boolean): MeshR
   const state = getState(mesh);
   const markerSource = getLayerInstances(mesh);
   const markerCount = getLayerCount(mesh);
-  const hasMarkers = mesh.children.length > 0;
+  const hasChildren = mesh.children.length > 0;
   return createConstructedMeshRenderData({
     color: state.color,
     colors: state.colors,
     geometryError: state.geometryError || state.textureError,
     geometryUploadRanges: takeGeometryUploadRanges(state, consumeUploads),
     geometryVersions: { ...state.attributeVersions },
-    identityInstance: markerSource === null && !hasMarkers && markerCount === undefined,
+    identityInstance: markerSource === null && !hasChildren && markerCount === undefined,
     indices: state.indices,
     normals: state.normals,
     positions: state.positions,

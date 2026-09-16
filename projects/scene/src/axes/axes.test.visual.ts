@@ -136,8 +136,8 @@ describe('scene axes visual runtime', () => {
       })
     );
 
-    expect(result.axesHit).toEqual({ elementId: 'axes-cube-marker', layerId: 'axes-cube' });
-    expect(result.gridHit).toEqual({ elementId: 'grid-cube-marker', layerId: 'grid-cube' });
+    expect(result.axesHit).toEqual({ elementId: 'axes-cube', layerId: 'axes-cube' });
+    expect(result.gridHit).toEqual({ elementId: 'grid-cube', layerId: 'grid-cube' });
     expect(result.axesHiddenMiss).toBeNull();
     expect(result.gridRemovedMiss).toBeNull();
     expect(result.axesClickEvents).toBe(0);
@@ -157,8 +157,8 @@ function pickTemplate(): string {
   return sceneTemplate(/* html */ `
     <nve-scene-axes id="axes" length="2.5" width="4"></nve-scene-axes>
     <nve-scene-gridlines id="grid" spacing="0.5" count="4" width="4"></nve-scene-gridlines>
-    <nve-scene-cubes id="axes-cube"><nve-scene-marker id="axes-cube-marker" position="[2.154,0.6,-0.4]" scale="[1,1,1]" color="#ffffff"></nve-scene-marker></nve-scene-cubes>
-    <nve-scene-cubes id="grid-cube"><nve-scene-marker id="grid-cube-marker" position="[-1.346,1.1,-0.4]" scale="[1,1,1]" color="#ffffff"></nve-scene-marker></nve-scene-cubes>
+    <nve-scene-cubes id="axes-cube" source='[{"position":[2.154,0.6,-0.4],"size":[1,1,1],"color":"#ffffff"}]'></nve-scene-cubes>
+    <nve-scene-cubes id="grid-cube" source='[{"position":[-1.346,1.1,-0.4],"size":[1,1,1],"color":"#ffffff"}]'></nve-scene-cubes>
   `);
 }
 
@@ -175,8 +175,7 @@ function sceneTemplate(layers: string): string {
       import { SceneAxes } from '../../src/axes/axes.ts';
       import { SceneGridlines } from '../../src/gridlines/gridlines.ts';
       import { SceneCubes } from '../../src/cubes/cubes.ts';
-      import { SceneMarker } from '../../src/marker/marker.ts';
-      define(Scene); define(SceneCamera); define(SceneAxes); define(SceneGridlines); define(SceneCubes); define(SceneMarker);
+      define(Scene); define(SceneCamera); define(SceneAxes); define(SceneGridlines); define(SceneCubes);
     </script>
   `;
 }

@@ -14,8 +14,8 @@ describe('lighthouse report', () => {
       </script>
     `
     );
-    // The data-only root entrypoint establishes a 6.63 KB measured baseline.
+    // Seeded buffer construction establishes an 8.11 KB measured baseline.
     // Keep roughly 5% headroom for compression variation.
-    expect(report.payload.javascript.kb).toBeLessThan(7);
+    expect(report.payload.javascript.kb).toBeLessThan(8.6);
   });
 });

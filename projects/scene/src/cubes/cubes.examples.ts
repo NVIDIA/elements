@@ -13,24 +13,21 @@ export default {
 };
 
 /**
- * @summary Cube markers compare three uniform scales and CMY instance colors. Use this pattern to distinguish categories while communicating relative extents in scene data.
+ * @summary Cube instances compare three uniform scales and CMY instance colors. Use this pattern to distinguish categories while communicating relative extents in scene data.
  */
 export const Default = {
   render: () => html`
     <nve-scene aria-label="cubes scene">
       <nve-scene-camera behavior="orbit"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-cubes>
-        <nve-scene-marker position="[-2.5,0,0.375]" scale="[0.75,0.75,0.75]" color="cyan"></nve-scene-marker>
-        <nve-scene-marker position="[0,0,0.5]" scale="[1,1,1]" color="magenta"></nve-scene-marker>
-        <nve-scene-marker position="[2.5,0,0.75]" scale="[1.5,1.5,1.5]" color="yellow"></nve-scene-marker>
+      <nve-scene-cubes source='[{"position":[-2.5,0,0.375],"size":[0.75,0.75,0.75],"color":"cyan"},{"position":[0,0,0.5],"size":[1,1,1],"color":"magenta"},{"position":[2.5,0,0.75],"size":[1.5,1.5,1.5],"color":"yellow"}]'>
       </nve-scene-cubes>
     </nve-scene>
   `
 };
 
 /**
- * @summary Cube markers supplied by a packed buffer reproduce the declarative scene. Use a MarkerBuffer for large or frequently updated instance sets.
+ * @summary Cube instances supplied by a packed buffer reproduce the declarative scene. Use a CubeBuffer for large or frequently updated instance sets.
  */
 export const BufferSource = {
   render: () => html`
@@ -40,46 +37,44 @@ export const BufferSource = {
       <nve-scene-cubes id="buffered-cubes"></nve-scene-cubes>
     </nve-scene>
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/scene/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 3 });
-      markers.add({ position: [-2.5, 0, 0.375], scale: [0.75, 0.75, 0.75], color: 'cyan' });
-      markers.add({ position: [0, 0, 0.5], scale: [1, 1, 1], color: 'magenta' });
-      markers.add({ position: [2.5, 0, 0.75], scale: [1.5, 1.5, 1.5], color: 'yellow' });
+      const markers = new CubeBuffer({ capacity: 3 });
+      markers.add({ position: [-2.5, 0, 0.375], size: [0.75, 0.75, 0.75], color: 'cyan' });
+      markers.add({ position: [0, 0, 0.5], size: [1, 1, 1], color: 'magenta' });
+      markers.add({ position: [2.5, 0, 0.75], size: [1.5, 1.5, 1.5], color: 'yellow' });
       document.querySelector('#buffered-cubes').source = markers;
     </script>
   `
 };
 
 /**
- * @summary Overlapping translucent boxes use independent face and outline colors for readable volume boundaries. Use declarative markers and streamed records together when perception results mix authored and live regions.
+ * @summary Overlapping translucent boxes use independent face and outline colors for readable volume boundaries. Use static source records and streamed records together when perception results mix authored and live regions.
  */
 export const Volumes = {
   render: () => html`
     <nve-scene aria-label="overlapping perception volumes">
       <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="7" polar-angle="1.25" azimuth="-0.55"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-cubes>
-        <nve-scene-marker position="[-0.65,0,0.8]" scale="[2.5,1.7,1.6]" color="rgba(0,255,255,0.24)" outline-color="rgba(0,255,255,0.95)"></nve-scene-marker>
-        <nve-scene-marker position="[0.55,0.2,0.65]" scale="[2.2,2.1,1.3]" color="rgba(255,0,255,0.22)" outline-color="rgba(255,0,255,0.95)"></nve-scene-marker>
+      <nve-scene-cubes source='[{"position":[-0.65,0,0.8],"size":[2.5,1.7,1.6],"color":"rgba(0,255,255,0.24)","outlineColor":"rgba(0,255,255,0.95)"},{"position":[0.55,0.2,0.65],"size":[2.2,2.1,1.3],"color":"rgba(255,0,255,0.22)","outlineColor":"rgba(255,0,255,0.95)"}]'>
       </nve-scene-cubes>
       <nve-scene-cubes id="streamed-volumes"></nve-scene-cubes>
     </nve-scene>
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 1 });
+      const markers = new CubeBuffer({ capacity: 1 });
       markers.set(0, {
         position: [0, -0.75, 0.55],
-        scale: [1.5, 2.3, 1.1],
+        size: [1.5, 2.3, 1.1],
         color: 'rgb(255 255 0 / 20%)',
         outlineColor: 'rgb(255 255 0 / 95%)'
       });
@@ -100,14 +95,14 @@ export const Streaming = {
     </nve-scene>
     <script type="module">
       import { getThemeTokens } from '@nvidia-elements/core';
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
 
       const cubeLayer = document.querySelector('#streamed-cubes');
       const columns = 12;
       const rows = 8;
-      const markers = new MarkerBuffer({ capacity: columns * rows });
+      const markers = new CubeBuffer({ capacity: columns * rows });
       const cubeMarkers = Array.from({ length: markers.capacity }, () => markers.add());
       const tokens = getThemeTokens();
       const colorCanvas = document.createElement('canvas');
@@ -147,7 +142,7 @@ export const Streaming = {
           const height = 0.12 + sample * 1.1;
           const cube = cubeMarkers[row * columns + column];
           cube.position.set((column - (columns - 1) / 2) * 0.45, (row - (rows - 1) / 2) * 0.45, height / 2);
-          cube.scale.set(0.36, 0.36, height);
+          cube.size.set(0.36, 0.36, height);
           cube.color = colorAt(sample);
         }
       };
@@ -168,7 +163,7 @@ export const Streaming = {
 };
 
 /**
- * @summary Selectable loads of animated cubes use a Virdis lookup table while sharing one layer and reusable buffer. Use streaming when one observed marker element per instance would dominate the work.
+ * @summary Selectable loads of animated cubes use a Virdis lookup table while sharing one layer and reusable buffer. Use streaming when one DOM element per instance would dominate the work.
  */
 export const Performance = {
   render: () => html`
@@ -192,7 +187,8 @@ export const Performance = {
     </section>
     <script type="module">
       import { getThemeTokens } from '@nvidia-elements/core';
-      import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MARKER } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/core/select/define.js';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -289,7 +285,7 @@ export const Performance = {
         instanceCount = count;
         spacing = 5.5 / columns;
         width = spacing * 0.8;
-        markers = new MarkerBuffer({ capacity: instanceCount });
+        markers = new CubeBuffer({ capacity: instanceCount });
         records = markers.mutableBytes;
         view = new DataView(records.buffer);
 

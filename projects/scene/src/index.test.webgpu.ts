@@ -242,6 +242,7 @@ describe.runIf(mode === 'check')('Scene WebGPU resource budgets', () => {
   });
 
   afterAll(async () => {
+    if (!session) return;
     report = {
       boundary,
       checks,

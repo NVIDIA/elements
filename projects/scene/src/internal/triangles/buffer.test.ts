@@ -7,6 +7,15 @@ import { readTriangleVertex } from '../layouts/helpers.js';
 import { TriangleVertexBuffer } from './buffer.js';
 
 describe('triangle vertex buffer', () => {
+  it('seeds records equivalently to incremental writes', () => {
+    const records = [{ color: 'cyan', position: [1, 2, 3] }] as const;
+    const seeded = new TriangleVertexBuffer({ records });
+    const incremental = new TriangleVertexBuffer({ capacity: 1 });
+    incremental.add(records[0]);
+    expect(seeded).toMatchObject({ capacity: 1, count: 1 });
+    expect(seeded.mutableBytes).toEqual(incremental.mutableBytes);
+  });
+
   it('stores logical triangle identities without changing vertex records', () => {
     const vertices = new TriangleVertexBuffer({ capacity: 6 });
     vertices.featureIds = new Uint32Array([0, 0xffffffff]);

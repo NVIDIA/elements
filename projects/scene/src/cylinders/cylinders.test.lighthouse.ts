@@ -10,7 +10,7 @@ describe('scene cylinders lighthouse report', () => {
       'nve-scene-cylinders',
       /* html */ `
         <nve-scene aria-label="cylinders scene">
-          <nve-scene-cylinders><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-cylinders>
+          <nve-scene-cylinders source='[{"position":[0,0,0]}]'></nve-scene-cylinders>
         </nve-scene>
         <script type="module">import '@nvidia-elements/scene/cylinders/define.js';</script>
       `

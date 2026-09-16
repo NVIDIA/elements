@@ -16,17 +16,14 @@ export default {
  */
 export const Default = {
   render: () => html`
-    <nve-scene aria-label="Upward arrow, octagon, and upside-down T polygons" style="background: black">
+    <nve-scene aria-label="Upward arrow, octagon, and upside-down T polygons">
       <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-polygon color="cyan" geometry='{"outer":[[-0.25,-1.2],[0.25,-1.2],[0.25,0],[0.8,0],[0,1.2],[-0.8,0],[-0.25,0]]}'>
-        <nve-scene-marker position="[-2.2,0,0.01]" scale="[0.5,0.5,1]"></nve-scene-marker>
+      <nve-scene-polygon color="cyan" geometry='{"outer":[[-0.25,-1.2],[0.25,-1.2],[0.25,0],[0.8,0],[0,1.2],[-0.8,0],[-0.25,0]]}' source='[{"position":[-2.2,0,0.01],"scale":[0.5,0.5,1]}]'>
       </nve-scene-polygon>
-      <nve-scene-polygon color="magenta" geometry='{"outer":[[-1.2,0.5],[-1.2,-0.5],[-0.5,-1.2],[0.5,-1.2],[1.2,-0.5],[1.2,0.5],[0.5,1.2],[-0.5,1.2]],"holes":[[[-0.35,0.35],[0.35,0.35],[0.35,-0.35],[-0.35,-0.35]]]}'>
-        <nve-scene-marker position="[0,0,0.01]" scale="[0.5,0.5,1]"></nve-scene-marker>
+      <nve-scene-polygon color="magenta" geometry='{"outer":[[-1.2,0.5],[-1.2,-0.5],[-0.5,-1.2],[0.5,-1.2],[1.2,-0.5],[1.2,0.5],[0.5,1.2],[-0.5,1.2]],"holes":[[[-0.35,0.35],[0.35,0.35],[0.35,-0.35],[-0.35,-0.35]]]}' source='[{"position":[0,0,0.01],"scale":[0.5,0.5,1]}]'>
       </nve-scene-polygon>
-      <nve-scene-polygon color="yellow" geometry='{"outer":[[-0.8,-1.2],[0.8,-1.2],[0.8,-0.6],[0.3,-0.6],[0.3,1.2],[-0.3,1.2],[-0.3,-0.6],[-0.8,-0.6]]}'>
-        <nve-scene-marker position="[2.2,0,0.01]" scale="[0.5,0.5,1]"></nve-scene-marker>
+      <nve-scene-polygon color="yellow" geometry='{"outer":[[-0.8,-1.2],[0.8,-1.2],[0.8,-0.6],[0.3,-0.6],[0.3,1.2],[-0.3,1.2],[-0.3,-0.6],[-0.8,-0.6]]}' source='[{"position":[2.2,0,0.01],"scale":[0.5,0.5,1]}]'>
       </nve-scene-polygon>
     </nve-scene>
   `
@@ -37,7 +34,7 @@ export const Default = {
  */
 export const BufferSource = {
   render: () => html`
-    <nve-scene aria-label="three buffered arrow polygons" style="background: black">
+    <nve-scene aria-label="three buffered arrow polygons">
       <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
       <nve-scene-polygon id="buffered-polygons"></nve-scene-polygon>

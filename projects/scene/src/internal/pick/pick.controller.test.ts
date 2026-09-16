@@ -463,13 +463,12 @@ function requestHover(picking: PickController, clientX: number): void {
   });
 }
 
-function createResult(layer: HTMLElement, marker?: HTMLElement): ScenePickResult {
+function createResult(layer: HTMLElement): ScenePickResult {
   return {
     clientX: 10,
     clientY: 10,
     instanceIndex: 0,
     layer,
-    marker,
     target: { index: 0, kind: 'instance' },
     worldPosition: [0, 0, 0]
   };

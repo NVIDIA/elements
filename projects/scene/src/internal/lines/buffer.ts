@@ -54,9 +54,9 @@ export type LineVertexSource = LineVertexBuffer | ExternalLineVertexSource;
 
 /** Fixed-capacity, mutable storage for packed line vertex records. */
 export class LineVertexBuffer extends PackedRecordBuffer<'line-vertex', LineVertexInit, LineVertex> {
-  constructor(options: RecordBufferOptions) {
+  constructor(options: RecordBufferOptions<LineVertexInit>) {
     super({
-      capacity: options.capacity,
+      buffer: options,
       createHandle: ({ index, notifyMutation, view }) => new LineVertexRecord(view, index, notifyMutation),
       defaultInit: () => ({}),
       initialize: initializeRecords,

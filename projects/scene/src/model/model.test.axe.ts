@@ -12,9 +12,8 @@ describe(SceneModel.metadata.tag, () => {
   it('passes the accessibility baseline in a labelled scene composition', async () => {
     const fixture = await createFixture(html`
       <nve-scene aria-label="Model scene">
-        <nve-scene-model>
+        <nve-scene-model source="[{}]">
           <nve-scene-part shape="cube"></nve-scene-part>
-          <nve-scene-marker></nve-scene-marker>
         </nve-scene-model>
       </nve-scene>
     `);

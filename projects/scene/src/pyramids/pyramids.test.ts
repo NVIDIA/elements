@@ -4,8 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
-import { ScenePyramids } from './pyramids.js';
+import { MARKER } from '@nvidia-elements/scene';
+import { PyramidBuffer, ScenePyramids } from './pyramids.js';
 import './define.js';
 
 describe(ScenePyramids.metadata.tag, () => {
@@ -13,9 +13,9 @@ describe(ScenePyramids.metadata.tag, () => {
 
   afterEach(() => fixture && removeFixture(fixture));
 
-  it('should expose declarative and streamed marker sources', async () => {
+  it('should resolve JSON and matching buffer sources', async () => {
     fixture = await createFixture(html`
-      <nve-scene-pyramids><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-pyramids>
+      <nve-scene-pyramids source='[{"position":[0,0,0]}]'></nve-scene-pyramids>
     `);
     const layer = required(
       fixture.querySelector<ScenePyramids>(ScenePyramids.metadata.tag),
@@ -25,10 +25,9 @@ describe(ScenePyramids.metadata.tag, () => {
 
     expect(customElements.get(ScenePyramids.metadata.tag)).toBe(ScenePyramids);
     expect(ScenePyramids.layout).toBe(MARKER);
-    expect(layer.source).toBeNull();
+    expect(layer.source).toBeInstanceOf(PyramidBuffer);
 
-    layer.replaceChildren();
-    const records = new MarkerBuffer({ capacity: 1 });
+    const records = new PyramidBuffer({ capacity: 1 });
     records.add({ position: [1, 2, 3] });
     layer.source = records;
     layer.countLimit = 1;

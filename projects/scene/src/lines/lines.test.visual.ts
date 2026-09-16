@@ -12,7 +12,7 @@ describe('scene lines visual runtime', () => {
         window.__lineErrors = [];
         const originalError = console.error;
         console.error = (...values) => { window.__lineErrors.push(values.map(String).join(' ')); originalError(...values); };
-        import { LineVertexBuffer } from '@nvidia-elements/scene';
+        import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
         import '@nvidia-elements/scene/camera/define.js';
         import '@nvidia-elements/scene/lines/define.js';
 
@@ -130,7 +130,7 @@ describe('scene lines visual runtime', () => {
         window.__lineErrors = [];
         const originalError = console.error;
         console.error = (...values) => { window.__lineErrors.push(values.map(String).join(' ')); originalError(...values); };
-        import { LineVertexBuffer } from '@nvidia-elements/scene';
+        import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
         import '@nvidia-elements/scene/camera/define.js';
         import '@nvidia-elements/scene/lines/define.js';
         const vertices = new LineVertexBuffer({ capacity: 2 });

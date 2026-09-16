@@ -10,7 +10,7 @@ describe('scene arrows lighthouse report', () => {
       'nve-scene-arrows',
       /* html */ `
         <nve-scene aria-label="arrows scene">
-          <nve-scene-arrows><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-arrows>
+          <nve-scene-arrows source='[{"origin":[0,0,0]}]'></nve-scene-arrows>
         </nve-scene>
         <script type="module">import '@nvidia-elements/scene/arrows/define.js';</script>
       `

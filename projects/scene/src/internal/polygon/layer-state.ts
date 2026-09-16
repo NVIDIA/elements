@@ -89,12 +89,12 @@ export function takePolygonLayerRenderData(layer: HTMLElement): MeshRenderData {
   const compiled = state.compiled;
   const markerSource = getLayerInstances(layer);
   const markerCount = getLayerCount(layer);
-  const hasMarkers = layer.children.length > 0;
+  const hasChildren = layer.children.length > 0;
   return createConstructedMeshRenderData({
     color: state.color,
     colors: null,
     geometryError: state.geometryError,
-    identityInstance: markerSource === null && !hasMarkers && markerCount === undefined,
+    identityInstance: markerSource === null && !hasChildren && markerCount === undefined,
     indices: compiled?.indices ?? null,
     normals: compiled?.normals ?? null,
     positions: compiled?.positions ?? null,

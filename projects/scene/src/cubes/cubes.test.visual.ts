@@ -12,8 +12,7 @@ describe('scene cubes visual runtime', () => {
       /* html */ `
         <nve-scene aria-label="cubes scene" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
-          <nve-scene-frame position="[0,0,0]"><nve-scene-cubes>
-            <nve-scene-marker position="[0,0,0]" color="#76b900"></nve-scene-marker>
+          <nve-scene-frame position="[0,0,0]"><nve-scene-cubes source='[{"position":[0,0,0],"color":"#76b900"}]'>
           </nve-scene-cubes></nve-scene-frame>
         </nve-scene>
         <script type="module">
@@ -42,10 +41,10 @@ describe('scene cubes visual runtime', () => {
           const pixel = context
             ? [...context.getImageData(Math.floor(probe.width / 2), Math.floor(probe.height / 2), 1, 1).data]
             : null;
-          return { markerCount: document.querySelectorAll('nve-scene-cubes nve-scene-marker').length, pixel };
+          return { instanceCount: document.querySelector('nve-scene-cubes')?.source?.count, pixel };
         })
     );
-    expect(result.markerCount).toBe(1);
+    expect(result.instanceCount).toBe(1);
     expect(result.pixel?.[1]).toBeGreaterThan(result.pixel?.[0] ?? 255);
     expect(result.pixel?.[1]).toBeGreaterThan(150);
     expect(result.pixel?.[3]).toBe(255);
@@ -60,11 +59,11 @@ describe('scene cubes visual runtime', () => {
           <nve-scene-cubes id="compacted"></nve-scene-cubes>
         </nve-scene>
         <script type="module">
-          import { MarkerBuffer } from '@nvidia-elements/scene';
+          import { CubeBuffer } from '@nvidia-elements/scene/cubes';
           import '@nvidia-elements/scene/camera/define.js';
           import '@nvidia-elements/scene/cubes/define.js';
           const count = 25_000;
-          const markers = new MarkerBuffer({ capacity: count });
+          const markers = new CubeBuffer({ capacity: count });
           const view = new DataView(markers.mutableBytes.buffer, markers.mutableBytes.byteOffset, markers.mutableBytes.byteLength);
           for (let index = 0; index < count; index += 1) {
             const offset = index * 48;
@@ -222,26 +221,22 @@ describe('scene cubes visual runtime', () => {
         <nve-scene aria-label="First transparent cube scene" style="width: 512px; height: 512px; background: black">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
           <nve-scene-frame position="[-0.25,0,0]">
-            <nve-scene-cubes>
-              <nve-scene-marker scale="[1.4,1,1]" color="rgba(255,0,0,0.35)"></nve-scene-marker>
+            <nve-scene-cubes source='[{"size":[1.4,1,1],"color":"rgba(255,0,0,0.35)"}]'>
             </nve-scene-cubes>
           </nve-scene-frame>
           <nve-scene-frame position="[0.25,0,0]">
-            <nve-scene-cubes>
-              <nve-scene-marker scale="[1,1.4,1]" color="rgba(0,128,255,0.45)"></nve-scene-marker>
+            <nve-scene-cubes source='[{"size":[1,1.4,1],"color":"rgba(0,128,255,0.45)"}]'>
             </nve-scene-cubes>
           </nve-scene-frame>
         </nve-scene>
         <nve-scene aria-label="Reversed transparent cube scene" style="width: 512px; height: 512px; background: black">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
           <nve-scene-frame position="[0.25,0,0]">
-            <nve-scene-cubes>
-              <nve-scene-marker scale="[1,1.4,1]" color="rgba(0,128,255,0.45)"></nve-scene-marker>
+            <nve-scene-cubes source='[{"size":[1,1.4,1],"color":"rgba(0,128,255,0.45)"}]'>
             </nve-scene-cubes>
           </nve-scene-frame>
           <nve-scene-frame position="[-0.25,0,0]">
-            <nve-scene-cubes>
-              <nve-scene-marker scale="[1.4,1,1]" color="rgba(255,0,0,0.35)"></nve-scene-marker>
+            <nve-scene-cubes source='[{"size":[1.4,1,1],"color":"rgba(255,0,0,0.35)"}]'>
             </nve-scene-cubes>
           </nve-scene-frame>
         </nve-scene>
@@ -302,20 +297,15 @@ describe('scene cubes visual runtime', () => {
       /* html */ `
         <nve-scene aria-label="Outlined volumes" style="width: 512px; height: 512px; background: black">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
-          <nve-scene-cubes>
-            <nve-scene-marker
-              position="[-0.65,0,0]"
-              color="rgba(255,0,0,0.2)"
-              outline-color="rgba(0,255,255,1)"
-            ></nve-scene-marker>
+          <nve-scene-cubes source='[{"position":[-0.65,0,0],"color":"rgba(255,0,0,0.2)","outlineColor":"rgba(0,255,255,1)"}]'>
           </nve-scene-cubes>
           <nve-scene-cubes id="streamed-outline"></nve-scene-cubes>
         </nve-scene>
         <script type="module">
-          import { MarkerBuffer } from '@nvidia-elements/scene';
+          import { CubeBuffer } from '@nvidia-elements/scene/cubes';
           import '@nvidia-elements/scene/camera/define.js';
           import '@nvidia-elements/scene/cubes/define.js';
-          const markers = new MarkerBuffer({ capacity: 1 });
+          const markers = new CubeBuffer({ capacity: 1 });
           markers.add({
             position: [0.65, 0, 0],
             color: [1, 0, 0, 0.2],
@@ -364,7 +354,7 @@ describe('scene cubes visual runtime', () => {
         <nve-scene aria-label="Marker cube" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
           <nve-scene-frame position="[0,0,0]">
-            <nve-scene-cubes><nve-scene-marker color="#76b900"></nve-scene-marker></nve-scene-cubes>
+            <nve-scene-cubes source='[{"color":"#76b900"}]'></nve-scene-cubes>
           </nve-scene-frame>
         </nve-scene>
         <nve-scene aria-label="Buffer cube" style="width: 512px; height: 512px; background: rgb(0 0 0)">
@@ -372,11 +362,11 @@ describe('scene cubes visual runtime', () => {
           <nve-scene-frame position="[0,0,0]"><nve-scene-cubes id="buffer-cubes"></nve-scene-cubes></nve-scene-frame>
         </nve-scene>
         <script type="module">
-          import { MarkerBuffer } from '@nvidia-elements/scene';
+          import { CubeBuffer } from '@nvidia-elements/scene/cubes';
           import '@nvidia-elements/scene/camera/define.js';
           import '@nvidia-elements/scene/cubes/define.js';
           import '@nvidia-elements/scene/frame/define.js';
-          const markers = new MarkerBuffer({ capacity: 1 });
+          const markers = new CubeBuffer({ capacity: 1 });
           markers.add({ position: [0, 0, 0], color: '#76b900' });
           document.querySelector('#buffer-cubes').source = markers;
         </script>

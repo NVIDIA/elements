@@ -80,7 +80,7 @@ export const RobotSurvey = {
       import '@nvidia-elements/scene/spheres/define.js';
       import '@nvidia-elements/scene/lines/define.js';
       import { getThemeTokens } from '@nvidia-elements/core';
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
 
       const terrain = document.querySelector('#robot-survey-terrain');
       const route = document.querySelector('#robot-survey-route');
@@ -193,8 +193,7 @@ export const TerrainExplorer = {
     <nve-scene id="terrain-demo-scene" aria-label="Terrain" style="height: 360px">
       <nve-scene-heightfield id="terrain-demo" color="#ffffff" interactive></nve-scene-heightfield>
       <nve-scene-lines id="terrain-route" interactive width-unit="pixel"></nve-scene-lines>
-      <nve-scene-spheres id="terrain-pin" hidden>
-        <nve-scene-marker color="#fc0" scale="[0.8,0.8,0.8]"></nve-scene-marker>
+      <nve-scene-spheres id="terrain-pin" hidden source='[{"color":"#fc0","size":[0.8,0.8,0.8]}]'>
       </nve-scene-spheres>
       <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="52" polar-angle="0.92" azimuth="-0.75" projection="perspective" vertical-field-of-view="0.785398163" min-distance="15" max-distance="100"></nve-scene-camera>
     </nve-scene>
@@ -205,13 +204,13 @@ export const TerrainExplorer = {
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/heightfield/define.js';
       import '@nvidia-elements/scene/lines/define.js';
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
 
       const terrainElement = suffix => document.getElementById('terrain-' + suffix);
       const terrain = terrainElement('demo');
       const route = terrainElement('route');
       const pinLayer = terrainElement('pin');
-      const pin = pinLayer.querySelector('nve-scene-marker');
+      const pin = pinLayer.source.at(0);
       const readout = terrainElement('readout');
       const size = 41;
       const spacing = 1;
@@ -263,7 +262,8 @@ export const TerrainExplorer = {
         const [x, y] = event.detail.worldPosition;
         const height = terrain.heightAt(x, y);
         if (height === undefined) return;
-        pin.position = [x, y, height + 0.4].join(' ');
+        pin.position.set(x, y, height + 0.4);
+        pinLayer.publish();
         pinLayer.hidden = false;
         readout.value =
           height.toFixed(2) + ' m at (' + x.toFixed(1) + ', ' + y.toFixed(1) + ')';

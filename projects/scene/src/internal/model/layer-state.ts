@@ -16,7 +16,7 @@ import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/la
 import { getLayerInstances } from '../markers/layer-state.js';
 import type { Quaternion, Vec3 } from '../types.js';
 import { notifyOwningScene } from '../scene/notifications.js';
-import { SCENE_MARKER_TAG, SCENE_PART_TAG } from '../layer-tags.js';
+import { SCENE_PART_TAG } from '../layer-tags.js';
 
 interface ModelLayerState {
   compiled: ReturnType<typeof compileParts>;
@@ -86,15 +86,12 @@ export function isModelLayerRegistered(layer: HTMLElement): boolean {
 
 export function takeModelLayerRenderData(layer: HTMLElement): MeshRenderData {
   const state = getState(layer);
-  const noMarkers =
-    getLayerInstances(layer) === null && ![...layer.children].some(child => child.localName === SCENE_MARKER_TAG);
+  const identityInstance = getLayerInstances(layer) === null;
   return createConstructedMeshRenderData({
     color: [1, 1, 1, 1],
     colors: state.compiled.colors,
-    geometryError:
-      state.geometryError ||
-      [...layer.children].some(child => child.localName !== SCENE_MARKER_TAG && child.localName !== SCENE_PART_TAG),
-    identityInstance: noMarkers,
+    geometryError: state.geometryError || [...layer.children].some(child => child.localName !== SCENE_PART_TAG),
+    identityInstance,
     indices: state.compiled.indices,
     normals: state.compiled.normals,
     positions: state.compiled.positions,

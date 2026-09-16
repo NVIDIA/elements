@@ -28,7 +28,7 @@ export const Default = {
       <nve-scene-lines id="topology-segments" topology="segments" width-unit="pixel"></nve-scene-lines>
     </nve-scene>
     <script type="module">
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -87,7 +87,7 @@ export const SegmentStyles = {
       <nve-scene-lines id="styled-path" width-unit="pixel"></nve-scene-lines>
     </nve-scene>
     <script type="module">
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -122,7 +122,7 @@ export const WidthUnits = {
       <nve-scene-lines id="world-width"></nve-scene-lines>
     </nve-scene>
     <script type="module">
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -160,7 +160,8 @@ export const StreamingTrail = {
       <nve-scene-lines id="streaming-trail" width-unit="pixel"></nve-scene-lines>
     </nve-scene>
     <script type="module">
-      import { LINE_VERTEX, LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LINE_VERTEX } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';

@@ -115,11 +115,13 @@ describe(ScenePolygon.metadata.tag, () => {
     expect(takeMarkerLayerRenderData(polygon).uploadRanges).toEqual([{ offset: 0, size: ScenePolygon.layout.stride }]);
   });
 
-  it('should parse declarative geometry and marker children', async () => {
+  it('should parse declarative geometry and JSON instance sources', async () => {
     fixture = await createFixture(html`
-      <nve-scene-polygon color="white" geometry='{"outer":[[0,0],[2,0],[2,2],[0,2]]}'>
-        <nve-scene-marker position="[1,2,3]" color="magenta"></nve-scene-marker>
-      </nve-scene-polygon>
+      <nve-scene-polygon
+        color="white"
+        geometry='{"outer":[[0,0],[2,0],[2,2],[0,2]]}'
+        source='[{"position":[1,2,3],"color":"magenta"}]'
+      ></nve-scene-polygon>
     `);
     const polygon = fixture.querySelector(ScenePolygon.metadata.tag) as ScenePolygon;
     await elementIsStable(polygon);
@@ -181,7 +183,7 @@ describe(ScenePolygon.metadata.tag, () => {
     expect(takePolygonLayerRenderData(polygon).color).toEqual([1, 1, 1, 1]);
   });
 
-  it('should reject non-marker children and recover after their removal', async () => {
+  it('should reject element children and recover after their removal', async () => {
     fixture = await createFixture(
       html`<nve-scene-polygon geometry='{"outer":[[0,0],[2,0],[2,2],[0,2]]}'></nve-scene-polygon>`
     );

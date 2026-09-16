@@ -100,16 +100,13 @@ export function createPickHit(entry: PickTableEntry, worldPosition: Readonly<Vec
   if (!(entry.layer instanceof Element)) {
     throw new TypeError('Pick layer must be an Element.');
   }
-  if (entry.marker !== undefined && !(entry.marker instanceof Element)) {
-    throw new TypeError('Pick marker must be an Element.');
-  }
   if (worldPosition.length !== 3 || worldPosition.some(value => !Number.isFinite(value))) {
     throw new RangeError('Pick world position must contain three finite values.');
   }
 
   const position = Object.freeze([worldPosition[0], worldPosition[1], worldPosition[2]] as Vec3);
   return Object.freeze({
-    element: entry.marker ?? entry.layer,
+    element: entry.layer,
     layer: entry.layer,
     instanceIndex: entry.instanceIndex,
     worldPosition: position

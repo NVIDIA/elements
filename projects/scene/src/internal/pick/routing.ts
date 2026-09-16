@@ -13,7 +13,6 @@ export interface ScenePickResult {
   readonly clientY: number;
   readonly featureId?: number;
   readonly layer: HTMLElement;
-  readonly marker?: HTMLElement;
   readonly instanceIndex: number;
   readonly target: ScenePickTarget;
   readonly worldPosition: Readonly<Vec3>;
@@ -51,7 +50,6 @@ export function copyPickHit(result: ScenePickResult): ScenePickHit {
   const hit = createPickHit(
     {
       layer: result.layer,
-      marker: result.marker,
       instanceIndex: result.instanceIndex
     },
     result.worldPosition as Vec3

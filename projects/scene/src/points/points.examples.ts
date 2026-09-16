@@ -25,7 +25,7 @@ export const Default = {
       <nve-scene-points id="example-points" size="8"></nve-scene-points>
     </nve-scene>
     <script type="module">
-      import { PointBuffer } from '@nvidia-elements/scene';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -52,7 +52,7 @@ export const ScatterPlot = {
       <nve-scene-points id="scatter-points" size="8"></nve-scene-points>
     </nve-scene>
     <script type="module">
-      import { PointBuffer } from '@nvidia-elements/scene';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/axes/define.js';
@@ -90,7 +90,7 @@ export const SizeUnits = {
       <nve-scene-points id="world-size" size="0.4" size-unit="world"></nve-scene-points>
     </nve-scene>
     <script type="module">
-      import { PointBuffer } from '@nvidia-elements/scene';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -153,7 +153,8 @@ export const Lidar = {
       </nve-card>
     </div>
     <script type="module">
-      import { POINT, PointBuffer } from '@nvidia-elements/scene';
+      import { POINT } from '@nvidia-elements/scene';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
       import '@nvidia-elements/core/button/define.js';
       import '@nvidia-elements/core/button-group/define.js';
       import '@nvidia-elements/core/card/define.js';

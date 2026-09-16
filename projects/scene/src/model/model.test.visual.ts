@@ -195,7 +195,6 @@ function template(): string {
       import { define } from '@nvidia-elements/core/internal';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
-      import { SceneMarker } from '../../src/marker/marker.ts';
       import { SceneMesh } from '../../src/mesh/mesh.ts';
       import { SceneModel } from '../../src/model/model.ts';
       import { ScenePart } from '../../src/model/part.ts';
@@ -204,7 +203,7 @@ function template(): string {
       import { writeMarker } from '../../src/internal/layouts/helpers.ts';
       import { createMarkerSource } from '../../src/internal/external-record-sources.ts';
 
-      define(Scene); define(SceneCamera); define(SceneMarker); define(SceneMesh); define(ScenePart); define(SceneModel);
+      define(Scene); define(SceneCamera); define(SceneMesh); define(ScenePart); define(SceneModel);
       const parts = () => [
         { shape: 'cube', position: [0, 0, 0], scale: [2.8, 1.5, 0.5], color: [242 / 255, 158 / 255, 20 / 255, 1] },
         { shape: 'pyramid', position: [-0.75, -0.15, 0.7], scale: [0.7, 0.7, 0.55], color: [75 / 255, 86 / 255, 104 / 255, 1] },

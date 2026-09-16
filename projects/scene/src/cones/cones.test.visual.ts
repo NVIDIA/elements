@@ -11,8 +11,7 @@ describe('scene cones visual runtime', () => {
       /* html */ `
         <nve-scene aria-label="cones scene" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
-          <nve-scene-frame position="[0,0,0]"><nve-scene-cones>
-            <nve-scene-marker position="[0,0,0]" color="#76b900"></nve-scene-marker>
+          <nve-scene-frame position="[0,0,0]"><nve-scene-cones source='[{"position":[0,0,0],"color":"#76b900"}]'>
           </nve-scene-cones></nve-scene-frame>
         </nve-scene>
         <script type="module">

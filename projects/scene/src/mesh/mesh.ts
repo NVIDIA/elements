@@ -5,6 +5,7 @@ import type { PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
+import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/markers/buffer.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
 import {
   connectMeshLayer,
@@ -60,16 +61,16 @@ export type SceneMeshGeometryPublishOptions = SceneMeshGeometryPublishRange &
 export type SceneMeshGeometryAttribute = 'positions' | 'normals' | 'uvs' | 'colors' | 'indices';
 
 export type { SceneTextureCaptureResult };
+export type MeshInstanceSource = MarkerSource;
 
 /**
  * @element nve-scene-mesh
- * @description Raw triangle mesh with optional marker instancing.
+ * @description Raw triangle mesh with optional source-backed instancing.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/mesh
- * @slot - Contains direct nve-scene-marker children.
  * @stable false
  */
-export class SceneMesh extends MarkerLayerElement {
+export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit> {
   static styles = useStyles([styles]);
   static readonly layout = MARKER;
   static readonly metadata = { tag: 'nve-scene-mesh', version: '0.0.0' };
@@ -188,7 +189,7 @@ export class SceneMesh extends MarkerLayerElement {
   }
 
   constructor() {
-    super('cube');
+    super('cube', { create: records => new MarkerBuffer({ records }), kind: 'marker' });
     registerElementFeatureId(this);
     registerMeshLayer(this);
   }

@@ -11,8 +11,7 @@ describe('scene cylinders visual runtime', () => {
       /* html */ `
         <nve-scene aria-label="cylinders scene" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
-          <nve-scene-frame position="[0,0,0]"><nve-scene-cylinders>
-            <nve-scene-marker id="cylinder" position="[0,0,0]" color="#76b900"></nve-scene-marker>
+          <nve-scene-frame position="[0,0,0]"><nve-scene-cylinders id="cylinders" source='[{"position":[0,0,0],"color":"#76b900"}]'>
           </nve-scene-cylinders></nve-scene-frame>
         </nve-scene>
         <script type="module">
@@ -46,13 +45,13 @@ describe('scene cylinders visual runtime', () => {
           return {
             pick:
               hit?.target.kind === 'instance'
-                ? { index: hit.target.index, layerTag: hit.layer.localName, markerId: hit.element.id }
+                ? { elementId: hit.element.id, index: hit.target.index, layerTag: hit.layer.localName }
                 : null,
             pixel
           };
         })
     );
-    expect(result.pick).toEqual({ index: 0, layerTag: 'nve-scene-cylinders', markerId: 'cylinder' });
+    expect(result.pick).toEqual({ elementId: 'cylinders', index: 0, layerTag: 'nve-scene-cylinders' });
     expect(result.pixel?.[1]).toBeGreaterThan(result.pixel?.[0] ?? 255);
     expect(result.pixel?.[3]).toBe(255);
   });

@@ -19,6 +19,7 @@ import { writeMarker } from '../layouts/helpers.js';
 import { normalizeQuaternion } from '../math/quaternion.js';
 import type { Quaternion, RGBA, Vec3 } from '../types.js';
 import type { ExternalMarkerSource } from '../packed-record-source.js';
+import { registerSemanticMarkerSource } from './semantic-brand.js';
 
 const POSITION_OFFSET = getFieldOffset(MARKER, 'position');
 const ORIENTATION_OFFSET = getFieldOffset(MARKER, 'orientation');
@@ -52,9 +53,9 @@ export type MarkerSource = MarkerBuffer | ExternalMarkerSource;
 
 /** Fixed-capacity, mutable storage for packed marker records. */
 export class MarkerBuffer extends PackedRecordBuffer<'marker', MarkerInit, Marker> {
-  constructor(options: RecordBufferOptions) {
+  constructor(options: RecordBufferOptions<MarkerInit>) {
     super({
-      capacity: options.capacity,
+      buffer: options,
       createHandle: handleOptions => new MarkerRecord(handleOptions),
       defaultInit: () => ({}),
       initialize: initializeRecords,
@@ -63,6 +64,7 @@ export class MarkerBuffer extends PackedRecordBuffer<'marker', MarkerInit, Marke
       stride: MARKER.stride,
       writeRecord
     });
+    registerSemanticMarkerSource(this, 'marker');
   }
 }
 

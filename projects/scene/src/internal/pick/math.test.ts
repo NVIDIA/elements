@@ -73,13 +73,12 @@ describe('pick math', () => {
 
   it('creates a fresh deeply immutable hit and maps ID zero to a miss', () => {
     const layer = document.createElement('div');
-    const marker = document.createElement('span');
-    const table = new Map([[7, { layer, marker, instanceIndex: 3 }]]);
-    const first = createPickHit({ layer, marker, instanceIndex: 3 }, [1, 2, 3]);
+    const table = new Map([[7, { layer, instanceIndex: 3 }]]);
+    const first = createPickHit({ layer, instanceIndex: 3 }, [1, 2, 3]);
     const second = createPickHitFromId(7, table, [1, 2, 3]);
 
     expect(second).not.toBe(first);
-    expect(second).toMatchObject({ element: marker, layer, instanceIndex: 3, worldPosition: [1, 2, 3] });
+    expect(second).toMatchObject({ element: layer, layer, instanceIndex: 3, worldPosition: [1, 2, 3] });
     expect(Object.isFrozen(second)).toBe(true);
     expect(Object.isFrozen(second?.worldPosition)).toBe(true);
     expect(createPickHitFromId(0, table, [1, 2, 3])).toBeNull();
@@ -88,7 +87,6 @@ describe('pick math', () => {
     expect(() => createPickHitFromId(1.2, table, [1, 2, 3])).toThrow(RangeError);
     expect(() => createPickHit({ layer, instanceIndex: -1 }, [1, 2, 3])).toThrow(RangeError);
     expect(() => createPickHit({ layer: {} as HTMLElement, instanceIndex: 0 }, [1, 2, 3])).toThrow(TypeError);
-    expect(() => createPickHit({ layer, marker: {} as HTMLElement, instanceIndex: 0 }, [1, 2, 3])).toThrow(TypeError);
     expect(() => createPickHit({ layer, instanceIndex: 0 }, [1, Number.NaN, 3])).toThrow(RangeError);
   });
 });

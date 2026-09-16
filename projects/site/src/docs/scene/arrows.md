@@ -3,8 +3,7 @@
   title: 'Scene Arrows',
   description: 'Instanced arrow glyphs for vectors in a Scene.',
   layout: 'docs.11ty.js',
-  tag: 'nve-scene-arrows',
-  associatedElements: ['nve-scene-marker']
+  tag: 'nve-scene-arrows'
 }
 ---
 
@@ -14,7 +13,7 @@
 
 ## Buffer sources
 
-Use a `MarkerBuffer` for dense or frequently updated arrow sets. Add marker records directly with `position`, `orientation`, and `scale`; arrows point along their local positive z-axis.
+Use an `ArrowBuffer` for dense or frequently updated arrow sets. Records use `origin`, `vector`, and `shaftDiameter`. The fixed geometry uses 80% of the vector length for the shaft and 20% for the head, whose diameter is twice the shaft diameter.
 
 {% example 'nve-scene-arrows' 'BufferSource' %}
 

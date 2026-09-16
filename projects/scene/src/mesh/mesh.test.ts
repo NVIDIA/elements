@@ -559,10 +559,11 @@ describe(SceneMesh.metadata.tag, () => {
     const mesh = new SceneMesh();
     mesh.publishGeometry({ attribute: 'positions', source: triangle });
     expect(getMeshRenderData(mesh).identityInstance).toBe(true);
+    mesh.source = new MarkerBuffer({ capacity: 0 });
     mesh.countLimit = 0;
     expect(getMeshRenderData(mesh).identityInstance).toBe(false);
-    mesh.countLimit = undefined;
-    mesh.append(document.createElement('nve-scene-marker'));
+    mesh.source = null;
+    mesh.append(document.createElement('span'));
     expect(getMeshRenderData(mesh).identityInstance).toBe(false);
   });
 });

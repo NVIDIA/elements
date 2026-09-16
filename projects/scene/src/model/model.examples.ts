@@ -10,7 +10,6 @@ import '@nvidia-elements/scene/camera/define.js';
 import '@nvidia-elements/scene/frame/define.js';
 import '@nvidia-elements/scene/gridlines/define.js';
 import '@nvidia-elements/scene/lines/define.js';
-import '@nvidia-elements/scene/marker/define.js';
 import '@nvidia-elements/scene/model/define.js';
 
 export default {
@@ -143,7 +142,8 @@ export const RobotArmAnimated = {
     </nve-card>
   </div>
   <script type="module">
-    import { LINE_VERTEX, LineVertexBuffer } from '@nvidia-elements/scene';
+    import { LINE_VERTEX } from '@nvidia-elements/scene';
+    import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
     import '@nvidia-elements/core/range/define.js';
 
     await customElements.whenDefined('nve-scene');
@@ -350,31 +350,16 @@ export const Intersection = {
       <nve-scene-polygon id="intersection-crosswalks" color="rgb(219 230 242)" geometry='{"outer":[[-0.21,-0.4],[0.21,-0.4],[0.21,0.4],[-0.21,0.4]]}'></nve-scene-polygon>
       <nve-scene-polygon id="intersection-straight-arrows" color="rgb(219 230 242)" geometry='{"outer":[[-0.1,-1.05],[0.1,-1.05],[0.1,0.6],[0.32,0.6],[0,1.05],[-0.32,0.6],[-0.1,0.6]]}'></nve-scene-polygon>
       <nve-scene-polygon id="intersection-left-arrows" color="rgb(219 230 242)" geometry='{"outer":[[-0.1,-1],[0.1,-1],[0.1,0.45],[-0.75,0.45],[-0.75,0.65],[-1.2,0.35],[-0.75,0.05],[-0.75,0.25],[-0.1,0.25]]}'></nve-scene-polygon>
-      <nve-scene-model id="intersection-traffic-lights" aria-label="twelve traffic light instances">
+      <nve-scene-model id="intersection-traffic-lights" aria-label="twelve traffic light instances" source='[{"position":[-1.4,6.1,3.64],"orientation":[0,0,0,1],"scale":[0.85,0.85,0.85]},{"position":[1.4,6.1,3.64],"orientation":[0,0,0,1],"scale":[0.85,0.85,0.85]},{"position":[-7.2,-2.6,3.64],"orientation":[0,0,0.707107,0.707107],"scale":[0.85,0.85,0.85]},{"position":[-7.2,0,3.64],"orientation":[0,0,0.707107,0.707107],"scale":[0.85,0.85,0.85]},{"position":[-7.2,2.6,3.64],"orientation":[0,0,0.707107,0.707107],"scale":[0.85,0.85,0.85]},{"position":[7.2,-2.6,3.64],"orientation":[0,0,-0.707107,0.707107],"scale":[0.85,0.85,0.85]},{"position":[7.2,0,3.64],"orientation":[0,0,-0.707107,0.707107],"scale":[0.85,0.85,0.85]},{"position":[7.2,2.6,3.64],"orientation":[0,0,-0.707107,0.707107],"scale":[0.85,0.85,0.85]},{"position":[-4.5,-6.5,3.64],"orientation":[0,0,1,0],"scale":[0.85,0.85,0.85]},{"position":[-1.5,-6.5,3.64],"orientation":[0,0,1,0],"scale":[0.85,0.85,0.85]},{"position":[1.5,-6.5,3.64],"orientation":[0,0,1,0],"scale":[0.85,0.85,0.85]},{"position":[4.5,-6.5,3.64],"orientation":[0,0,1,0],"scale":[0.85,0.85,0.85]}]'>
         <nve-scene-part shape="cube" scale="[0.8,0.42,1.5]" color="#252a33"></nve-scene-part>
         <nve-scene-part shape="sphere" position="[0,-0.25,0.47]" scale="[0.4,0.2,0.4]" color="#ff453a"></nve-scene-part>
         <nve-scene-part shape="sphere" position="[0,-0.25,0]" scale="[0.4,0.2,0.4]" color="#4a3d12"></nve-scene-part>
         <nve-scene-part shape="sphere" position="[0,-0.25,-0.47]" scale="[0.4,0.2,0.4]" color="#153d24"></nve-scene-part>
-
-        <nve-scene-marker position="[-1.4,6.1,3.64]" orientation="[0,0,0,1]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[1.4,6.1,3.64]" orientation="[0,0,0,1]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-
-        <nve-scene-marker position="[-7.2,-2.6,3.64]" orientation="[0,0,0.707107,0.707107]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[-7.2,0,3.64]" orientation="[0,0,0.707107,0.707107]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[-7.2,2.6,3.64]" orientation="[0,0,0.707107,0.707107]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-
-        <nve-scene-marker position="[7.2,-2.6,3.64]" orientation="[0,0,-0.707107,0.707107]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[7.2,0,3.64]" orientation="[0,0,-0.707107,0.707107]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[7.2,2.6,3.64]" orientation="[0,0,-0.707107,0.707107]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-
-        <nve-scene-marker position="[-4.5,-6.5,3.64]" orientation="[0,0,1,0]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[-1.5,-6.5,3.64]" orientation="[0,0,1,0]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[1.5,-6.5,3.64]" orientation="[0,0,1,0]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
-        <nve-scene-marker position="[4.5,-6.5,3.64]" orientation="[0,0,1,0]" scale="[0.85,0.85,0.85]"></nve-scene-marker>
       </nve-scene-model>
     </nve-scene>
     <script type="module">
-      import { LineVertexBuffer, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/lines/define.js';
       import '@nvidia-elements/scene/polygon/define.js';
 
@@ -571,7 +556,15 @@ export const DataCenter = {
         min-distance="4"
         max-distance="16"
       ></nve-scene-camera>
-      <nve-scene-model aria-label="twelve instanced NVIDIA compute racks">
+      <nve-scene-model
+        aria-label="twelve instanced NVIDIA compute racks"
+        source=${JSON.stringify(
+          [-1.95, -1.17, -0.39, 0.39, 1.17, 1.95].flatMap(x => [
+            { position: [x, 1.35, 0] },
+            { position: [x, -1.35, 0] }
+          ])
+        )}
+      >
         <!-- 600 × 1,068 × 2,236 mm rack -->
         <nve-scene-part shape="cube" position="[0,0,1.118]" scale="[0.6,1.068,2.236]" color="#16191f"></nve-scene-part>
         <nve-scene-part shape="cube" position="[0,-0.546,1.12]" scale="[0.522,0.04,2.08]" color="#090b0e"></nve-scene-part>
@@ -628,13 +621,6 @@ export const DataCenter = {
           `
         )}
 
-        <!-- both rows share the same orientation -->
-        ${[-1.95, -1.17, -0.39, 0.39, 1.17, 1.95].map(
-          x => html`
-            <nve-scene-marker position="[${x},1.35,0]"></nve-scene-marker>
-            <nve-scene-marker position="[${x},-1.35,0]"></nve-scene-marker>
-          `
-        )}
       </nve-scene-model>
     </nve-scene>
   `

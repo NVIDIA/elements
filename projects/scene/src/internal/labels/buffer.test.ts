@@ -5,6 +5,16 @@ import { describe, expect, it } from 'vitest';
 import { LabelBuffer } from './buffer.js';
 
 describe('label buffer', () => {
+  it('seeds records equivalently to incremental writes', () => {
+    const records = [{ color: 'cyan', featureId: 7, position: [1, 2, 3], scale: 12, text: 'Pump' }] as const;
+    const seeded = new LabelBuffer({ records });
+    const incremental = new LabelBuffer({ capacity: 1 });
+    incremental.add(records[0]);
+    expect(seeded).toMatchObject({ capacity: 1, count: 1 });
+    expect(seeded.mutableBytes).toEqual(incremental.mutableBytes);
+    expect(seeded.at(0).text).toBe('Pump');
+  });
+
   it('sets and clears identities through initializers and handles', () => {
     const labels = new LabelBuffer({ capacity: 1 });
     const label = labels.add({ featureId: 1842, text: 'Pump' });

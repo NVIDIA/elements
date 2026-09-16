@@ -4,7 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { LINE_VERTEX, LineVertexBuffer } from '@nvidia-elements/scene';
+import { LINE_VERTEX } from '@nvidia-elements/scene';
+import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
 import { SceneLines } from './lines.js';
 import './define.js';
 describe(SceneLines.metadata.tag, () => {

@@ -4,17 +4,17 @@
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
+import { ConeBuffer, type Cone, type ConeInit, type ConeSource } from '../internal/markers/semantic-buffer.js';
 import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-cones
- * @description Renders fixed-geometry cones from declarative markers or streamed marker records.
+ * @description Renders fixed-geometry cones from semantic source records.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/cones
- * @slot - Contains direct nve-scene-marker children.
  * @stable false
  */
-export class SceneCones extends MarkerLayerElement {
+export class SceneCones extends MarkerLayerElement<ConeSource, ConeInit> {
   static styles = useStyles([styles]);
 
   static readonly layout = MARKER;
@@ -25,6 +25,9 @@ export class SceneCones extends MarkerLayerElement {
   };
 
   constructor() {
-    super('cone');
+    super('cone', { create: records => new ConeBuffer({ records }), kind: 'cone' });
   }
 }
+
+export { ConeBuffer };
+export type { Cone, ConeInit, ConeSource };

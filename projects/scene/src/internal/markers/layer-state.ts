@@ -1,23 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-  LAYER_CHILD,
-  LAYER_DUAL_SOURCE,
-  LAYOUT_STRIDE_MISMATCH,
-  LAYOUT_VALUE_INVALID,
-  type SceneErrorCode
-} from '../../errors.js';
-import { MARKER } from '../layouts/built-ins.js';
-import { writeMarker, type MarkerFields } from '../layouts/helpers.js';
-import type { PrimitiveKind } from '../primitive-geometry.js';
-import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
+import { LAYER_CHILD, LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID, type SceneErrorCode } from '../../errors.js';
+import { takeSceneFeatureIdSnapshot, type SceneFeatureIdSnapshot } from '../feature-ids.js';
 import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from '../instance-buffer.js';
-import type { UploadRange } from '../upload-ranges.js';
-import { registerMarkerLayerNotifications } from './layer-notifications.js';
-import { compileMarker, markerAttributeAffectsGeometry } from './state.js';
-import { notifyOwningScene } from '../scene/notifications.js';
-import type { MarkerSource } from './buffer.js';
+import { SCENE_MODEL_TAG, SCENE_PART_TAG } from '../layer-tags.js';
 import {
   getPackedRecordBytes,
   getPackedRecordKind,
@@ -25,36 +12,27 @@ import {
   type AnyPackedRecordSource,
   type ScenePublishOptions
 } from '../packed-record-source.js';
-import { replacePreparedMarkerSource } from '../prepared-record-source.js';
-import type { MarkerBounds } from './bounds.js';
-import { SCENE_MARKER_TAG, SCENE_MODEL_TAG, SCENE_PART_TAG } from '../layer-tags.js';
-import {
-  takeSceneFeatureIdListSnapshot,
-  takeSceneFeatureIdSnapshot,
-  type SceneFeatureIdSnapshot
-} from '../feature-ids.js';
 import {
   publishPackedSourceGeneration,
   resolvePackedSourcePublication,
   type PackedSourcePublication
 } from '../packed-source-publication.js';
+import { replacePreparedMarkerSource } from '../prepared-record-source.js';
+import type { PrimitiveKind } from '../primitive-geometry.js';
+import { notifyOwningScene } from '../scene/notifications.js';
+import { diagnosticReporterService } from '../services/diagnostic-reporter.service.js';
+import type { UploadRange } from '../upload-ranges.js';
+import type { MarkerBounds } from './bounds.js';
 
 interface MarkerLayerState {
-  buffer: MarkerInstanceBuffer;
-  readonly compiledFields: WeakMap<HTMLElement, MarkerFields>;
-  readonly kind: PrimitiveKind;
+  readonly buffer: MarkerInstanceBuffer;
   childError: boolean;
-  compiledMarkers: readonly HTMLElement[];
   count: number | undefined;
-  markerBytes: Uint8Array | null;
-  markerChildren: readonly HTMLElement[];
+  readonly kind: PrimitiveKind;
   mutationObserver?: MutationObserver;
-  notifyCleanup?: () => void;
-  pendingMarkers: Set<HTMLElement>;
   publicationError: boolean;
-  reconcileQueued: boolean;
-  streamedSource: MarkerSource | null;
-  streamedCount: number;
+  source: AnyPackedRecordSource<'marker'> | null;
+  sourceCount: number;
   sourceVersion: number;
   version: number;
 }
@@ -64,8 +42,6 @@ export interface MarkerLayerRenderData {
   readonly bytes: Uint8Array | null;
   readonly count: number;
   readonly kind: PrimitiveKind;
-  /** Element identities captured with declarative instance bytes. */
-  readonly markers?: readonly HTMLElement[];
   readonly opaque: boolean;
   readonly outlineOpaque: boolean;
   readonly outlineTransparent: boolean;
@@ -82,17 +58,11 @@ export function registerMarkerLayer(layer: HTMLElement, kind: PrimitiveKind): vo
   layerStates.set(layer, {
     buffer: new MarkerInstanceBuffer(),
     childError: false,
-    compiledFields: new WeakMap(),
-    compiledMarkers: [],
     count: undefined,
     kind,
-    markerBytes: null,
-    markerChildren: [],
-    pendingMarkers: new Set(),
     publicationError: false,
-    reconcileQueued: false,
-    streamedSource: null,
-    streamedCount: 0,
+    source: null,
+    sourceCount: 0,
     sourceVersion: -1,
     version: 0
   });
@@ -100,46 +70,36 @@ export function registerMarkerLayer(layer: HTMLElement, kind: PrimitiveKind): vo
 
 export function connectMarkerLayer(layer: HTMLElement): void {
   const state = getLayerState(layer);
-  const observer = new MutationObserver(records => handleLayerMutations(layer, state, records));
+  const observer = new MutationObserver(() => validateLayerChildren(layer, state));
   state.mutationObserver = observer;
-  observer.observe(layer, { attributes: true, childList: true, subtree: true });
-  state.notifyCleanup = registerMarkerLayerNotifications(layer, marker => queueMarkerReconcile(layer, state, marker));
-  // Native HTML parsing can connect the layer before its marker children upgrade.
-  queueMicrotask(() => {
-    if (state.mutationObserver === observer) {
-      reconcileMarkerLayer(layer, state, true);
-    }
-  });
+  observer.observe(layer, { childList: true });
+  validateLayerChildren(layer, state);
 }
 
 export function disconnectMarkerLayer(layer: HTMLElement): void {
   const state = getLayerState(layer);
   state.mutationObserver?.disconnect();
   state.mutationObserver = undefined;
-  state.notifyCleanup?.();
-  state.notifyCleanup = undefined;
 }
 
-export function getLayerInstances(layer: HTMLElement): MarkerSource | null {
-  return getLayerState(layer).streamedSource;
+export function getLayerInstances(layer: HTMLElement): AnyPackedRecordSource<'marker'> | null {
+  return getLayerState(layer).source;
 }
 
-export function setLayerInstances(layer: HTMLElement, value: MarkerSource | null): void {
+export function setLayerInstances(layer: HTMLElement, value: AnyPackedRecordSource<'marker'> | null): void {
   if (value !== null && !isMarkerSource(value)) {
-    throw new TypeError('Layer instances must be a marker buffer, marker source, or null.');
+    throw new TypeError('Layer instances must be a marker buffer, external marker source, or null.');
   }
   const state = getLayerState(layer);
-  state.streamedSource = value;
+  state.source = value;
   state.publicationError = false;
   replaceStreamedBuffer(state, value);
   state.sourceVersion = publishPackedSourceGeneration(value);
-  const replacementCount = value === null ? state.compiledMarkers.length : value.count;
-  state.streamedCount = value === null ? 0 : replacementCount;
-  const replacementCapacity = value === null ? state.compiledMarkers.length : value.capacity;
-  if (state.count !== undefined && state.count > replacementCapacity) {
-    state.count = undefined;
-  }
-  reconcileMarkerLayer(layer, state, true);
+  state.sourceCount = value?.count ?? 0;
+  if (state.count !== undefined && state.count > (value?.capacity ?? 0)) state.count = undefined;
+  state.version += 1;
+  updateBufferIssues(layer, state);
+  notifyOwningScene(layer);
 }
 
 export function getLayerCount(layer: HTMLElement): number | undefined {
@@ -148,99 +108,55 @@ export function getLayerCount(layer: HTMLElement): number | undefined {
 
 export function setLayerCount(layer: HTMLElement, value: number | undefined): void {
   const state = getLayerState(layer);
-  const capacity = state.buffer.capacity;
+  const capacity = state.source?.capacity ?? 0;
   if (value !== undefined && (!Number.isInteger(value) || value < 0 || value > capacity)) {
     throw new RangeError('Layer count must be a nonnegative integer within capacity.');
   }
-  if (value !== state.count) {
-    state.count = value;
-    state.version += 1;
-    notifyOwningScene(layer);
-  }
+  if (value === state.count) return;
+  state.count = value;
+  state.version += 1;
+  notifyOwningScene(layer);
 }
 
 export function publishLayerInstances(layer: HTMLElement, options?: ScenePublishOptions): void {
   const state = getLayerState(layer);
-  const source = state.streamedSource;
+  const source = state.source;
   if (source === null) return;
-  const previousPublicationError = state.publicationError;
   const publication = resolvePackedSourcePublication({
-    currentActiveCount: state.streamedCount,
+    currentActiveCount: state.sourceCount,
     currentSourceVersion: state.sourceVersion,
     requested: options,
     source,
     unavailableStateMessage: 'Packed marker source state is unavailable.'
   });
   state.publicationError = !markerPublicationIsValid(source, publication.resolved.activeCount);
-  let visualChanged = previousPublicationError !== state.publicationError;
-  if (!state.publicationError) {
-    visualChanged =
-      applySuccessfulMarkerPublication({
-        publication,
-        source,
-        state
-      }) || visualChanged;
-  }
+  const visualChanged = applyValidPublication(source, state, publication);
   updateBufferIssues(layer, state);
   state.version += 1;
   notifyOwningScene(layer, visualChanged ? 'render' : 'identity');
-}
-
-function applySuccessfulMarkerPublication(options: {
-  publication: PackedSourcePublication;
-  source: MarkerSource;
-  state: MarkerLayerState;
-}): boolean {
-  const { publication, source, state } = options;
-  applyMarkerPublication(state, publication.resolved, publication.geometryChanged);
-  state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
-  return publication.visualChanged;
-}
-
-function markerPublicationIsValid(source: MarkerSource, activeCount: number): boolean {
-  try {
-    return markerSourceRecordsAreValid(getPackedRecordBytes(source), activeCount);
-  } catch {
-    return false;
-  }
-}
-
-function applyMarkerPublication(
-  state: MarkerLayerState,
-  resolved: PackedSourcePublication['resolved'],
-  geometryChanged: boolean
-): void {
-  if (geometryChanged) state.buffer.commit(resolved.start, resolved.count);
-  state.streamedCount = resolved.activeCount;
-  state.buffer.setSourceCount(resolved.activeCount);
-}
-
-export function getMarkerLayerVersion(layer: HTMLElement): number {
-  return getLayerState(layer).version;
 }
 
 export function isMarkerLayerRegistered(layer: HTMLElement): boolean {
   return layerStates.has(layer);
 }
 
+// eslint-disable-next-line complexity -- The render snapshot keeps independent pass flags explicit.
 export function takeMarkerLayerRenderData(layer: HTMLElement): MarkerLayerRenderData {
   const state = getLayerState(layer);
   const bytes = state.buffer.getUploadBytes();
-  const ready = !state.childError && !state.publicationError && state.buffer.ready;
-  const publishedCount = getPublishedCount(state);
-  const count = ready ? Math.min(state.count ?? publishedCount, publishedCount) : 0;
-  const facePasses = getFacePasses(state.buffer, count, ready);
-  const outlinePasses = getOutlinePasses(state.buffer, count, ready && state.kind === 'cube');
+  const ready = !state.childError && !state.publicationError && state.source !== null && state.buffer.ready;
+  const count = ready ? Math.min(state.count ?? state.sourceCount, state.sourceCount) : 0;
+  const faces = getFacePasses(state.buffer, count, ready);
+  const outlines = getOutlinePasses(state.buffer, count, ready && state.kind === 'cube');
   return {
     bounds: ready ? state.buffer.getBounds(count) : null,
     bytes,
     count,
     kind: state.kind,
-    markers: getDeclarativeMarkers(state),
-    opaque: facePasses.opaque,
-    outlineOpaque: outlinePasses.opaque,
-    outlineTransparent: outlinePasses.transparent,
-    outlineVisible: markerOutlineIsVisible(state, count, ready),
+    opaque: faces.opaque,
+    outlineOpaque: outlines.opaque,
+    outlineTransparent: outlines.transparent,
+    outlineVisible: ready && state.kind === 'cube' && state.buffer.hasVisibleOutlineAlpha(count),
     ready,
     transparent: ready && state.buffer.hasPartialFaceAlpha(count),
     uploadRanges: ready ? state.buffer.takeUploadRanges() : [],
@@ -252,207 +168,47 @@ export function takeMarkerLayerFeatureIdSnapshot(
   layer: HTMLElement,
   targetCount: number
 ): SceneFeatureIdSnapshot | undefined {
-  const state = getLayerState(layer);
-  return state.streamedSource === null
-    ? takeSceneFeatureIdListSnapshot(state.compiledMarkers, layer)
-    : takeSceneFeatureIdSnapshot(state.streamedSource, targetCount, layer);
+  const source = getLayerState(layer).source;
+  return source === null ? undefined : takeSceneFeatureIdSnapshot(source, targetCount, layer);
 }
 
-function getDeclarativeMarkers(state: MarkerLayerState): readonly HTMLElement[] | undefined {
-  return state.streamedSource === null ? state.compiledMarkers : undefined;
+function applyValidPublication(
+  source: AnyPackedRecordSource<'marker'>,
+  state: MarkerLayerState,
+  publication: PackedSourcePublication
+): boolean {
+  if (state.publicationError) return false;
+  if (publication.geometryChanged) state.buffer.commit(publication.resolved.start, publication.resolved.count);
+  state.sourceCount = publication.resolved.activeCount;
+  state.buffer.setSourceCount(publication.resolved.activeCount);
+  state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
+  return publication.visualChanged;
 }
 
-function markerOutlineIsVisible(state: MarkerLayerState, count: number, ready: boolean): boolean {
-  return ready && state.kind === 'cube' && state.buffer.hasVisibleOutlineAlpha(count);
+function markerPublicationIsValid(source: AnyPackedRecordSource<'marker'>, activeCount: number): boolean {
+  try {
+    return markerSourceRecordsAreValid(getPackedRecordBytes(source), activeCount);
+  } catch {
+    return false;
+  }
 }
 
-interface RenderPasses {
-  readonly opaque: boolean;
-  readonly transparent: boolean;
-}
-
-function getFacePasses(buffer: MarkerInstanceBuffer, count: number, active: boolean): RenderPasses {
-  if (!active) return { opaque: false, transparent: false };
-  return { opaque: buffer.hasOpaqueFaceAlpha(count), transparent: buffer.hasPartialFaceAlpha(count) };
-}
-
-function getOutlinePasses(buffer: MarkerInstanceBuffer, count: number, active: boolean): RenderPasses {
-  if (!active) return { opaque: false, transparent: false };
-  return { opaque: buffer.hasOpaqueOutlineAlpha(count), transparent: buffer.hasPartialOutlineAlpha(count) };
-}
-
-/** Returns the element-authored marker at an instance index, when one exists. */
-export function getMarkerLayerMarker(layer: HTMLElement, instanceIndex: number): HTMLElement | undefined {
-  const state = getLayerState(layer);
-  return state.streamedSource === null ? state.compiledMarkers[instanceIndex] : undefined;
-}
-
-/** Returns whether a decoded declarative marker still belongs to its original layer. */
-export function isCurrentMarkerLayerMarker(layer: HTMLElement, marker: HTMLElement): boolean {
-  const state = layerStates.get(layer);
-  return (
-    state !== undefined &&
-    state.streamedSource === null &&
-    !marker.hidden &&
-    marker.parentElement === layer &&
-    state.compiledMarkers.includes(marker)
+function validateLayerChildren(layer: HTMLElement, state: MarkerLayerState): void {
+  state.childError = [...layer.children].some(
+    child => layer.localName !== SCENE_MODEL_TAG || child.localName !== SCENE_PART_TAG
   );
-}
-
-function handleLayerMutations(layer: HTMLElement, state: MarkerLayerState, records: MutationRecord[]): void {
-  const relevant = records.filter(record => {
-    if (record.type !== 'attributes') return true;
-    if (record.attributeName === 'feature-id') return false;
-    return record.target instanceof Element && record.target.localName === SCENE_MARKER_TAG
-      ? markerAttributeAffectsGeometry(record.attributeName)
-      : true;
-  });
-  if (relevant.length === 0) return;
-  const structural = relevant.some(record => record.type === 'childList');
-  for (const record of relevant) {
-    if (record.type === 'attributes' && record.target instanceof HTMLElement) {
-      state.pendingMarkers.add(record.target);
-    }
-  }
-  reconcileMarkerLayer(layer, state, structural);
-}
-
-function queueMarkerReconcile(layer: HTMLElement, state: MarkerLayerState, marker: HTMLElement): void {
-  state.pendingMarkers.add(marker);
-  if (!state.reconcileQueued) {
-    state.reconcileQueued = true;
-    queueMicrotask(() => {
-      state.reconcileQueued = false;
-      reconcileMarkerLayer(layer, state, false);
-    });
-  }
-}
-
-function reconcileMarkerLayer(layer: HTMLElement, state: MarkerLayerState, structural: boolean): void {
-  const markerChildren = [...layer.children].filter(isMarkerElement);
-  state.childError = [...layer.children].some(child => !isAllowedLayerChild(layer, child));
   diagnosticReporterService.update({
-    element: layer,
-    code: LAYER_CHILD,
     active: state.childError,
+    code: LAYER_CHILD,
+    element: layer,
     message:
       layer.localName === SCENE_MODEL_TAG
-        ? 'Scene models allow only direct scene part and scene marker children.'
-        : 'Instance layers allow only direct scene marker children.',
+        ? 'Scene models allow only direct scene part children.'
+        : 'Source-backed instance layers do not accept element children.',
     severity: 'error'
   });
-  const streamed = state.streamedSource !== null;
-  diagnosticReporterService.update({
-    element: layer,
-    code: LAYER_DUAL_SOURCE,
-    active: streamed && markerChildren.length > 0,
-    message: 'The streamed instance source takes precedence over marker children.',
-    severity: 'warning'
-  });
-  if (streamed) {
-    updateBufferIssues(layer, state);
-  } else {
-    compileMarkerChildren({ layer, markerChildren, state, structural });
-  }
-  state.pendingMarkers.clear();
   state.version += 1;
   notifyOwningScene(layer);
-}
-
-function compileMarkerChildren(options: {
-  layer: HTMLElement;
-  markerChildren: HTMLElement[];
-  state: MarkerLayerState;
-  structural: boolean;
-}): void {
-  const { layer, markerChildren, state, structural } = options;
-  const membershipChanged = structural || !sameElements(markerChildren, state.markerChildren);
-  if (membershipChanged || state.markerBytes === null) {
-    compileAllMarkerChildren(state, markerChildren);
-  } else {
-    compileChangedMarkerChildren(state);
-  }
-  state.markerChildren = Object.freeze([...markerChildren]);
-  updateBufferIssues(layer, state);
-}
-
-function compileAllMarkerChildren(state: MarkerLayerState, markerChildren: readonly HTMLElement[]): void {
-  const compiled = markerChildren
-    .map(marker => ({ marker, fields: compileMarker(marker) }))
-    .filter((entry): entry is { marker: HTMLElement; fields: MarkerFields } => entry.fields !== null);
-  for (const marker of markerChildren) state.compiledFields.delete(marker);
-  for (const { marker, fields } of compiled) state.compiledFields.set(marker, fields);
-  replaceCompiledMarkers(state, compiled);
-}
-
-function compileChangedMarkerChildren(state: MarkerLayerState): void {
-  let validityChanged = false;
-  const geometryChanged = new Set<HTMLElement>();
-  for (const marker of state.pendingMarkers) {
-    if (!state.markerChildren.includes(marker)) continue;
-    const wasValid = state.compiledFields.has(marker);
-    const previous = state.compiledFields.get(marker);
-    const fields = compileMarker(marker);
-    if (fields) state.compiledFields.set(marker, fields);
-    else state.compiledFields.delete(marker);
-    validityChanged ||= wasValid !== Boolean(fields);
-    if (fields && previous && !markerFieldsEqual(previous, fields)) geometryChanged.add(marker);
-  }
-  if (validityChanged) replaceCompiledMarkers(state, collectCompiledMarkers(state));
-  else commitChangedMarkers(state, geometryChanged);
-}
-
-function collectCompiledMarkers(state: MarkerLayerState): Array<{ marker: HTMLElement; fields: MarkerFields }> {
-  return state.markerChildren.flatMap(marker => {
-    const fields = state.compiledFields.get(marker);
-    return fields ? [{ marker, fields }] : [];
-  });
-}
-
-function commitChangedMarkers(state: MarkerLayerState, geometryChanged: ReadonlySet<HTMLElement>): void {
-  const markerBytes = state.markerBytes;
-  if (!markerBytes) {
-    return;
-  }
-  state.compiledMarkers.forEach((marker, index) => {
-    if (geometryChanged.has(marker)) {
-      const fields = state.compiledFields.get(marker);
-      if (!fields) return;
-      writeMarker(markerBytes, index, fields);
-      state.buffer.commit(index, 1);
-    }
-  });
-}
-
-function markerFieldsEqual(left: MarkerFields, right: MarkerFields): boolean {
-  return (
-    tuplesEqual(left.position, right.position) &&
-    tuplesEqual(left.orientation, right.orientation) &&
-    tuplesEqual(left.scale, right.scale) &&
-    tuplesEqual(left.color, right.color) &&
-    tuplesEqual(left.outlineColor, right.outlineColor)
-  );
-}
-
-function tuplesEqual(left: readonly number[] | undefined, right: readonly number[] | undefined): boolean {
-  return (
-    left === right ||
-    (left !== undefined && right !== undefined && left.every((value, index) => value === right[index]))
-  );
-}
-
-function replaceCompiledMarkers(
-  state: MarkerLayerState,
-  compiled: Array<{ marker: HTMLElement; fields: MarkerFields }>
-): void {
-  const bytes = new Uint8Array(compiled.length * MARKER.stride);
-  compiled.forEach((entry, index) => writeMarker(bytes, index, entry.fields));
-  state.markerBytes = bytes;
-  state.buffer.replace(bytes);
-  state.compiledMarkers = Object.freeze(compiled.map(entry => entry.marker));
-  if (state.count !== undefined && state.count > compiled.length) {
-    state.count = undefined;
-  }
 }
 
 function updateBufferIssues(layer: HTMLElement, state: MarkerLayerState): void {
@@ -481,38 +237,34 @@ function updateIssue(options: { active: boolean; code: SceneErrorCode; layer: HT
   });
 }
 
-function getPublishedCount(state: MarkerLayerState): number {
-  return state.streamedSource === null ? state.compiledMarkers.length : state.streamedCount;
+interface RenderPasses {
+  readonly opaque: boolean;
+  readonly transparent: boolean;
 }
 
-function replaceStreamedBuffer(state: MarkerLayerState, source: MarkerSource | null): void {
-  if (source === null) {
-    state.buffer.replace(null);
-    return;
-  }
-  replacePreparedMarkerSource(state.buffer, source);
+function getFacePasses(buffer: MarkerInstanceBuffer, count: number, active: boolean): RenderPasses {
+  return active
+    ? { opaque: buffer.hasOpaqueFaceAlpha(count), transparent: buffer.hasPartialFaceAlpha(count) }
+    : { opaque: false, transparent: false };
+}
+
+function getOutlinePasses(buffer: MarkerInstanceBuffer, count: number, active: boolean): RenderPasses {
+  return active
+    ? { opaque: buffer.hasOpaqueOutlineAlpha(count), transparent: buffer.hasPartialOutlineAlpha(count) }
+    : { opaque: false, transparent: false };
+}
+
+function replaceStreamedBuffer(state: MarkerLayerState, source: AnyPackedRecordSource<'marker'> | null): void {
+  if (source === null) state.buffer.replace(null);
+  else replacePreparedMarkerSource(state.buffer, source);
 }
 
 function isMarkerSource(value: unknown): value is AnyPackedRecordSource<'marker'> {
   return isPackedRecordSource(value) && getPackedRecordKind(value) === 'marker';
 }
 
-function sameElements(left: readonly HTMLElement[], right: readonly HTMLElement[]): boolean {
-  return left.length === right.length && left.every((element, index) => element === right[index]);
-}
-
-function isMarkerElement(element: Element): element is HTMLElement {
-  return element.localName === SCENE_MARKER_TAG;
-}
-
-function isAllowedLayerChild(layer: HTMLElement, child: Element): boolean {
-  return isMarkerElement(child) || (layer.localName === SCENE_MODEL_TAG && child.localName === SCENE_PART_TAG);
-}
-
 function getLayerState(layer: HTMLElement): MarkerLayerState {
   const state = layerStates.get(layer);
-  if (!state) {
-    throw new TypeError('Element is not a registered marker layer.');
-  }
+  if (!state) throw new TypeError('Element is not a registered marker layer.');
   return state;
 }

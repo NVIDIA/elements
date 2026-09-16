@@ -51,8 +51,7 @@ describe('scene frame visual runtime', () => {
         <nve-scene aria-label="Invalid frame recovery" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="top" altitude="10" frustum-height="10"></nve-scene-camera>
           <nve-scene-frame id="moving-frame" position="[3,0,0]">
-            <nve-scene-cubes>
-              <nve-scene-marker scale="[2,2,2]" color="rgb(118 185 0)"></nve-scene-marker>
+            <nve-scene-cubes source='[{"size":[2,2,2],"color":"rgb(118 185 0)"}]'>
             </nve-scene-cubes>
           </nve-scene-frame>
         </nve-scene>
@@ -60,7 +59,6 @@ describe('scene frame visual runtime', () => {
           import '@nvidia-elements/scene/frame/define.js';
           import '@nvidia-elements/scene/camera/define.js';
           import '@nvidia-elements/scene/cubes/define.js';
-          import '@nvidia-elements/scene/marker/define.js';
         </script>
       `,
       page =>

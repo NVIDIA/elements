@@ -5,14 +5,12 @@ export const WEBGPU_UNAVAILABLE = 'webgpu-unavailable';
 export const DEVICE_LOST = 'device-lost';
 export const FRAME_NAME_DUPLICATE = 'frame-name-duplicate';
 export const FRAME_TRANSFORM = 'frame-transform';
-export const MARKER_VALUE = 'marker-value';
 export const LAYOUT_STRIDE_MISMATCH = 'layout-stride-mismatch';
 export const LAYOUT_VALUE_INVALID = 'layout-value-invalid';
-export const LAYER_DUAL_SOURCE = 'layer-dual-source';
 export const LAYER_CHILD = 'layer-child';
+export const LAYER_SOURCE_INVALID = 'layer-source-invalid';
 export const FEATURE_ID_MAP_INVALID = 'feature-id-map-invalid';
 export const FEATURE_ID_INACTIVE = 'feature-id-inactive';
-export const MARKER_PARENT = 'marker-parent';
 export const TRIANGLES_COUNT = 'triangles-count';
 export const LINES_COUNT = 'lines-count';
 export const MESH_GEOMETRY = 'mesh-geometry';
@@ -39,12 +37,10 @@ export type SceneErrorCode =
   | typeof FRAME_TRANSFORM
   | typeof HEIGHTFIELD_GRID
   | typeof LAYER_CHILD
-  | typeof LAYER_DUAL_SOURCE
+  | typeof LAYER_SOURCE_INVALID
   | typeof LAYOUT_STRIDE_MISMATCH
   | typeof LAYOUT_VALUE_INVALID
   | typeof LINES_COUNT
-  | typeof MARKER_PARENT
-  | typeof MARKER_VALUE
   | typeof MESH_GEOMETRY
   | typeof MESH_TEXTURE_CAPTURE
   | typeof MESH_TEXTURE_WITHOUT_UVS

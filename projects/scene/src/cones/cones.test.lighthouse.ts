@@ -10,7 +10,7 @@ describe('scene cones lighthouse report', () => {
       'nve-scene-cones',
       /* html */ `
         <nve-scene aria-label="cones scene">
-          <nve-scene-cones><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-cones>
+          <nve-scene-cones source='[{"position":[0,0,0]}]'></nve-scene-cones>
         </nve-scene>
         <script type="module">import '@nvidia-elements/scene/cones/define.js';</script>
       `

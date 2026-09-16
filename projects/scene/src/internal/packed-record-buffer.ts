@@ -21,8 +21,19 @@ import type { Quaternion, RGBA, Vec3 } from './types.js';
 
 export type SceneColor = string | Readonly<RGBA>;
 
-export interface RecordBufferOptions {
+export type RecordBufferOptions<Init> =
+  | {
+      readonly capacity: number;
+      readonly records?: readonly Init[];
+    }
+  | {
+      readonly capacity?: undefined;
+      readonly records: readonly Init[];
+    };
+
+interface ResolvedRecordBufferOptions<Init> {
   readonly capacity: number;
+  readonly records: readonly Init[];
 }
 
 export interface MutableVector3 {
@@ -68,7 +79,7 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
   readonly #writeRecord: (bytes: Uint8Array, index: number, init: Init) => void;
 
   protected constructor(options: {
-    capacity: number;
+    buffer: RecordBufferOptions<Init>;
     createHandle: (options: RecordHandleOptions) => RecordHandle;
     defaultInit: () => Init;
     initialize: (view: DataView, bytes: Uint8Array, capacity: number) => void;
@@ -77,11 +88,9 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     stride: number;
     writeRecord: (bytes: Uint8Array, index: number, init: Init) => void;
   }) {
-    const { capacity, createHandle, defaultInit, initialize, kind, readFeatureId, stride, writeRecord } = options;
+    const { capacity, records } = resolveRecordBufferOptions(options.buffer, options.stride);
+    const { createHandle, defaultInit, initialize, kind, readFeatureId, stride, writeRecord } = options;
     const byteLength = capacity * stride;
-    if (!Number.isInteger(capacity) || capacity < 0 || !Number.isSafeInteger(byteLength)) {
-      throw new RangeError('Record capacity must be a nonnegative integer with a safe byte length.');
-    }
     this.capacity = capacity;
     this.#bytes = new Uint8Array(byteLength);
     this.#createHandle = createHandle;
@@ -92,6 +101,8 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     this.#writeRecord = writeRecord;
     initialize(this.#view, this.#bytes, capacity);
     registerSceneFeatureIdSource(this, capacity);
+    this.#initializeRecords(records);
+    this.#count = records.length;
   }
 
   /** Complete mutable byte allocation. Direct access disables prepared-source caching. */
@@ -179,11 +190,50 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     this.#version += 1;
   };
 
+  #initializeRecords(records: readonly Init[]): void {
+    records.forEach((record, index) => {
+      const featureId = this.#readFeatureId?.(record);
+      if (featureId !== undefined) assertSceneFeatureId(featureId);
+      this.#writeRecord(this.#bytes, index, record);
+      if (this.#readFeatureId) setSceneFeatureId(this, index, featureId);
+    });
+  }
+
   #assertActiveIndex(index: number): void {
     if (!Number.isInteger(index) || index < 0 || index >= this.#count) {
       throw new RangeError('Record index must identify an active record.');
     }
   }
+}
+
+export function resolveRecordBufferOptions<Init>(
+  options: RecordBufferOptions<Init>,
+  stride: number
+): ResolvedRecordBufferOptions<Init> {
+  if (typeof options !== 'object' || options === null) {
+    throw new TypeError('Record buffer options must be an object.');
+  }
+  const initialRecords = readInitialRecords<Init>(options);
+  const requestedCapacity: unknown = Reflect.get(options, 'capacity');
+  const capacity = requestedCapacity === undefined ? initialRecords.length : requestedCapacity;
+  if (!validRecordCapacity(capacity, stride)) {
+    throw new RangeError('Record capacity must be a nonnegative integer with a safe byte length.');
+  }
+  if (capacity < initialRecords.length) {
+    throw new RangeError('Record capacity must be at least the number of initial records.');
+  }
+  return { capacity, records: initialRecords };
+}
+
+function readInitialRecords<Init>(options: RecordBufferOptions<Init>): readonly Init[] {
+  const records: unknown = Reflect.get(options, 'records');
+  if (records === undefined) return [];
+  if (!Array.isArray(records)) throw new TypeError('Record buffer records must be an array.');
+  return records as readonly Init[];
+}
+
+function validRecordCapacity(value: unknown, stride: number): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && Number.isSafeInteger(value * stride);
 }
 
 export class MutableVector3View implements MutableVector3 {

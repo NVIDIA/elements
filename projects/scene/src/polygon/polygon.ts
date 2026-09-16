@@ -6,6 +6,7 @@ import { property } from 'lit/decorators/property.js';
 import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/utils/color.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
+import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/markers/buffer.js';
 import {
   registerPolygonLayer,
   setPolygonLayerColor,
@@ -24,15 +25,16 @@ const DEFAULT_COLOR = { rgba: [1, 1, 1, 1], source: '#ffffff' } satisfies CSSCol
 
 const colorConverter = createCSSColorConverter(DEFAULT_COLOR);
 
+export type PolygonInstanceSource = MarkerSource;
+
 /**
  * @element nve-scene-polygon
- * @description An unlit, frame-local polygon surface with optional holes and marker instancing.
+ * @description An unlit, frame-local polygon surface with optional holes and source-backed instancing.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/polygon
- * @slot - Contains direct nve-scene-marker children.
  * @stable false
  */
-export class ScenePolygon extends MarkerLayerElement {
+export class ScenePolygon extends MarkerLayerElement<PolygonInstanceSource, MarkerInit> {
   static styles = useStyles([styles]);
   static readonly layout = MARKER;
   static readonly metadata = { tag: 'nve-scene-polygon', version: '0.0.0' };
@@ -64,7 +66,7 @@ export class ScenePolygon extends MarkerLayerElement {
     this.requestUpdate('geometry', previous);
   }
 
-  /** CSS base color multiplied by each marker tint. */
+  /** CSS base color multiplied by each instance tint. */
   @property({ converter: colorConverter })
   get color(): string {
     return this.#color;
@@ -80,7 +82,7 @@ export class ScenePolygon extends MarkerLayerElement {
   }
 
   constructor() {
-    super('cube');
+    super('cube', { create: records => new MarkerBuffer({ records }), kind: 'marker' });
     registerElementFeatureId(this);
     registerPolygonLayer(this, DEFAULT_COLOR.rgba);
   }

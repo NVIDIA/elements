@@ -3,7 +3,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { TRIANGLE_VERTEX, TriangleVertexBuffer } from '@nvidia-elements/scene';
+import { TRIANGLE_VERTEX } from '@nvidia-elements/scene';
+import { TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
 import { TRIANGLES_COUNT } from '../errors.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { takeStreamingLayerRenderData } from '../internal/streaming-layer-state.js';

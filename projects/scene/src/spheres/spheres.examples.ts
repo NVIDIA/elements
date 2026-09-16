@@ -11,24 +11,21 @@ export default {
 };
 
 /**
- * @summary Sphere markers compare three uniform scales and CMY instance colors. Use this pattern to distinguish categories while communicating relative radial extent in scene data.
+ * @summary Sphere instances compare three uniform scales and CMY instance colors. Use this pattern to distinguish categories while communicating relative radial extent in scene data.
  */
 export const Default = {
   render: () => html`
     <nve-scene aria-label="spheres scene">
       <nve-scene-camera behavior="orbit"></nve-scene-camera>
       <nve-scene-gridlines></nve-scene-gridlines>
-      <nve-scene-spheres>
-        <nve-scene-marker position="[-2.5,0,0.375]" scale="[0.75,0.75,0.75]" color="cyan"></nve-scene-marker>
-        <nve-scene-marker position="[0,0,0.5]" scale="[1,1,1]" color="magenta"></nve-scene-marker>
-        <nve-scene-marker position="[2.5,0,0.75]" scale="[1.5,1.5,1.5]" color="yellow"></nve-scene-marker>
+      <nve-scene-spheres source='[{"position":[-2.5,0,0.375],"size":[0.75,0.75,0.75],"color":"cyan"},{"position":[0,0,0.5],"size":[1,1,1],"color":"magenta"},{"position":[2.5,0,0.75],"size":[1.5,1.5,1.5],"color":"yellow"}]'>
       </nve-scene-spheres>
     </nve-scene>
   `
 };
 
 /**
- * @summary Sphere markers supplied by a packed buffer reproduce the declarative scene. Use a MarkerBuffer for large or frequently updated instance sets.
+ * @summary Sphere instances supplied by a packed buffer reproduce the declarative scene. Use a SphereBuffer for large or frequently updated instance sets.
  */
 export const BufferSource = {
   render: () => html`
@@ -38,16 +35,16 @@ export const BufferSource = {
       <nve-scene-spheres id="buffered-spheres"></nve-scene-spheres>
     </nve-scene>
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { SphereBuffer } from '@nvidia-elements/scene/spheres';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/spheres/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 3 });
-      markers.add({ position: [-2.5, 0, 0.375], scale: [0.75, 0.75, 0.75], color: 'cyan' });
-      markers.add({ position: [0, 0, 0.5], scale: [1, 1, 1], color: 'magenta' });
-      markers.add({ position: [2.5, 0, 0.75], scale: [1.5, 1.5, 1.5], color: 'yellow' });
+      const markers = new SphereBuffer({ capacity: 3 });
+      markers.add({ position: [-2.5, 0, 0.375], size: [0.75, 0.75, 0.75], color: 'cyan' });
+      markers.add({ position: [0, 0, 0.5], size: [1, 1, 1], color: 'magenta' });
+      markers.add({ position: [2.5, 0, 0.75], size: [1.5, 1.5, 1.5], color: 'yellow' });
       document.querySelector('#buffered-spheres').source = markers;
     </script>
   `

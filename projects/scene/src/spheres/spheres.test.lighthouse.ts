@@ -10,7 +10,7 @@ describe('scene spheres lighthouse report', () => {
       'nve-scene-spheres',
       /* html */ `
         <nve-scene aria-label="spheres scene">
-          <nve-scene-spheres><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-spheres>
+          <nve-scene-spheres source='[{"position":[0,0,0]}]'></nve-scene-spheres>
         </nve-scene>
         <script type="module">import '@nvidia-elements/scene/spheres/define.js';</script>
       `

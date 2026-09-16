@@ -11,7 +11,7 @@ import './define.js';
 describe(SceneCylinders.metadata.tag, () => {
   it('should pass axe as scene data', async () => {
     const fixture = await createFixture(html`
-      <nve-scene-cylinders><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-cylinders>
+      <nve-scene-cylinders source='[{"position":[0,0,0]}]'></nve-scene-cylinders>
     `);
     await elementIsStable(required(fixture.querySelector(SceneCylinders.metadata.tag), 'Expected cylinders fixture.'));
     const results = await runAxe([SceneCylinders.metadata.tag]);

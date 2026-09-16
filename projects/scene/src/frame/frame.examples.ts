@@ -22,25 +22,12 @@ export const Default = {
         <nve-scene-frame name="warehouse">
           <nve-scene-gridlines></nve-scene-gridlines>
           <nve-scene-frame name="forklift" position="[-0.75,0,0]">
-            <nve-scene-cubes>
-              <nve-scene-marker position="[-0.3,0,0.3]" scale="[1.2,0.9,0.5]" color="#76b900"></nve-scene-marker>
-              <nve-scene-marker position="[-0.55,0,0.72]" scale="[0.55,0.8,0.55]" color="#30343b"></nve-scene-marker>
-              <nve-scene-marker position="[0.35,-0.34,0.85]" scale="[0.12,0.12,1.5]" color="#aeb4be"></nve-scene-marker>
-              <nve-scene-marker position="[0.35,0.34,0.85]" scale="[0.12,0.12,1.5]" color="#aeb4be"></nve-scene-marker>
+            <nve-scene-cubes source='[{"position":[-0.3,0,0.3],"size":[1.2,0.9,0.5],"color":"#76b900"},{"position":[-0.55,0,0.72],"size":[0.55,0.8,0.55],"color":"#30343b"},{"position":[0.35,-0.34,0.85],"size":[0.12,0.12,1.5],"color":"#aeb4be"},{"position":[0.35,0.34,0.85],"size":[0.12,0.12,1.5],"color":"#aeb4be"}]'>
             </nve-scene-cubes>
-            <nve-scene-cylinders>
-              <nve-scene-marker position="[-0.65,-0.5,0.2]" orientation="[0.707107,0,0,0.707107]" scale="[0.4,0.4,0.18]" color="#20242a"></nve-scene-marker>
-              <nve-scene-marker position="[-0.65,0.5,0.2]" orientation="[0.707107,0,0,0.707107]" scale="[0.4,0.4,0.18]" color="#20242a"></nve-scene-marker>
-              <nve-scene-marker position="[0.15,-0.5,0.2]" orientation="[0.707107,0,0,0.707107]" scale="[0.4,0.4,0.18]" color="#20242a"></nve-scene-marker>
-              <nve-scene-marker position="[0.15,0.5,0.2]" orientation="[0.707107,0,0,0.707107]" scale="[0.4,0.4,0.18]" color="#20242a"></nve-scene-marker>
+            <nve-scene-cylinders source='[{"position":[-0.65,-0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"},{"position":[-0.65,0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"},{"position":[0.15,-0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"},{"position":[0.15,0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"}]'>
             </nve-scene-cylinders>
             <nve-scene-frame id="carriage" name="carriage" position="[0.4,0,0.25]">
-              <nve-scene-cubes>
-                <nve-scene-marker position="[0,0,0.2]" scale="[0.15,0.8,0.45]" color="#aeb4be"></nve-scene-marker>
-                <nve-scene-marker position="[0.5,-0.28,0]" scale="[1,0.1,0.08]" color="#aeb4be"></nve-scene-marker>
-                <nve-scene-marker position="[0.5,0.28,0]" scale="[1,0.1,0.08]" color="#aeb4be"></nve-scene-marker>
-                <nve-scene-marker position="[0.7,0,0.14]" scale="[0.8,0.75,0.18]" color="#d97736"></nve-scene-marker>
-                <nve-scene-marker position="[0.7,0,0.55]" scale="[0.7,0.65,0.65]" color="#e8eaed"></nve-scene-marker>
+              <nve-scene-cubes source='[{"position":[0,0,0.2],"size":[0.15,0.8,0.45],"color":"#aeb4be"},{"position":[0.5,-0.28,0],"size":[1,0.1,0.08],"color":"#aeb4be"},{"position":[0.5,0.28,0],"size":[1,0.1,0.08],"color":"#aeb4be"},{"position":[0.7,0,0.14],"size":[0.8,0.75,0.18],"color":"#d97736"},{"position":[0.7,0,0.55],"size":[0.7,0.65,0.65],"color":"#e8eaed"}]'>
               </nve-scene-cubes>
             </nve-scene-frame>
           </nve-scene-frame>

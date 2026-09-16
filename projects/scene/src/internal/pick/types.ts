@@ -6,7 +6,6 @@ import type { Vec3 } from '../../internal/types.js';
 /** A row in the ID table that stays alive while a readback maps. */
 export interface PickTableEntry {
   readonly layer: Element;
-  readonly marker?: Element;
   readonly instanceIndex: number;
 }
 

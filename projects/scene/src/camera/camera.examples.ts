@@ -245,7 +245,7 @@ export const BehaviorFollow = {
       </nve-scene-frame>
     </nve-scene>
     <script type="module">
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
 
       await Promise.all([
         customElements.whenDefined('nve-scene'),
@@ -314,7 +314,7 @@ export const BehaviorTop = {
       </nve-scene-frame>
     </nve-scene>
     <script type="module">
-      import { LineVertexBuffer } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/lines/define.js';

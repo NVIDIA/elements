@@ -280,7 +280,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 ## M
 
-**Marker** — Scene's per-instance placement record or its declarative `nve-scene-marker` counterpart. A marker isn't merely a visual pin; it can place and tint primitives, meshes, polygons, and compound models.
+**Marker record** — Scene's internal packed transform and tint encoding. Generic geometry exposes this encoding through `MarkerBuffer`; semantic primitive buffers encode their records into the same layout.
 
 **Material** — The data and shader behavior that determine how a surface looks. Scene exposes a deliberately small material model: base color, optional per-vertex or per-instance colors, optional mesh texture, opacity, and either built-in lighting or unlit rendering.
 
@@ -288,7 +288,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Mesh** — A collection of vertices and triangles representing a surface. `nve-scene-mesh` accepts custom positions and optional indices, normals, UV coordinates, colors, and a texture.
 
-**Model** — A compound reusable object built from one or more primitive parts. Scene compiles model parts into mesh geometry and then places copies with marker instances.
+**Model** — A compound reusable object built from one or more primitive parts. Scene compiles model parts into mesh geometry and then places copies with source records.
 
 **Model space** — Coordinates relative to an object's own origin before its instance and ancestor-frame transforms. Scene part positions, orientations, and scales are model-local.
 

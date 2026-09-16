@@ -38,9 +38,9 @@ export type PointSource = PointBuffer | ExternalPointSource;
 
 /** Fixed-capacity, mutable storage for packed point records. */
 export class PointBuffer extends PackedRecordBuffer<'point', PointInit, Point> {
-  constructor(options: RecordBufferOptions) {
+  constructor(options: RecordBufferOptions<PointInit>) {
     super({
-      capacity: options.capacity,
+      buffer: options,
       createHandle: handleOptions => new PointRecord(handleOptions),
       defaultInit: () => ({}),
       initialize: initializeRecords,

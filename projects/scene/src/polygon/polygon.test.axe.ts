@@ -11,8 +11,7 @@ import './define.js';
 describe(ScenePolygon.metadata.tag, () => {
   it('should pass axe as scene data', async () => {
     const fixture = await createFixture(html`
-      <nve-scene-polygon geometry='{"outer":[[0,0],[2,0],[2,2],[0,2]]}'>
-        <nve-scene-marker position="[0,0,0]"></nve-scene-marker>
+      <nve-scene-polygon geometry='{"outer":[[0,0],[2,0],[2,2],[0,2]]}' source='[{"position":[0,0,0]}]'>
       </nve-scene-polygon>
     `);
     await elementIsStable(required(fixture.querySelector(ScenePolygon.metadata.tag), 'Expected polygon fixture.'));

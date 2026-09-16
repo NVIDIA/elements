@@ -6,6 +6,7 @@ import {
   PackedRecordBuffer,
   assertFinite,
   readPackedColor,
+  resolveRecordBufferOptions,
   resolveSceneColor,
   writePackedColor
 } from '../packed-record-buffer.js';
@@ -48,10 +49,10 @@ export type LabelSource = LabelBuffer | ExternalLabelSource;
 
 /** Fixed-capacity, mutable storage for packed label records and their text. */
 export class LabelBuffer extends PackedRecordBuffer<'label', LabelInit, Label> {
-  constructor(options: RecordBufferOptions) {
+  constructor(options: RecordBufferOptions<LabelInit>) {
     const texts = createTextStorage(options);
     super({
-      capacity: options.capacity,
+      buffer: options,
       createHandle: ({ featureIdSource, index, notifyMutation, view }) =>
         new LabelRecord({ featureIdSource, index, notifyMutation, texts, view }),
       defaultInit: () => ({}),
@@ -65,14 +66,8 @@ export class LabelBuffer extends PackedRecordBuffer<'label', LabelInit, Label> {
   }
 }
 
-function createTextStorage(options: RecordBufferOptions): string[] {
-  if (typeof options !== 'object' || options === null) {
-    throw new TypeError('Record buffer options must be an object.');
-  }
-  const { capacity } = options;
-  if (!Number.isInteger(capacity) || capacity < 0) {
-    throw new RangeError('Record capacity must be a nonnegative integer with a safe byte length.');
-  }
+function createTextStorage(options: RecordBufferOptions<LabelInit>): string[] {
+  const { capacity } = resolveRecordBufferOptions(options, LABEL.stride);
   return Array.from<string>({ length: capacity }).fill('');
 }
 

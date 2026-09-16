@@ -49,7 +49,7 @@ positions[2] = 0.5;
 mesh.geometry = { indices, positions };
 ```
 
-Changing indices updates topology. Changing positions also refreshes generated normals when normals aren't supplied. Indexed flat geometry can require a full derived-attribute upload even for a partial source publication. The inherited `mesh.publish()` operation remains only for marker instances.
+Changing indices updates topology. Changing positions also refreshes generated normals when normals aren't supplied. Indexed flat geometry can require a full derived-attribute upload even for a partial source publication. The inherited `mesh.publish()` operation remains only for instance records.
 
 The producer can reuse its arrays after the assignment. Later edits don't change rendering or device recovery until the next `geometry` assignment or `publishGeometry()` call.
 
@@ -71,7 +71,7 @@ Invalid complete input reports `mesh-geometry` and makes the mesh inert. Scene n
 
 ## Instances and materials
 
-Mesh geometry has identity placement when it has no marker source, marker children, or explicit count. Add `nve-scene-marker` children for readable instances, or assign a `MarkerBuffer` and use the layer's `publish()` operation for frequent instance changes.
+Mesh geometry has identity placement when it has no source. Assign a `MarkerBuffer` for many placements and use the layer's `publish()` operation for retained changes. The JSON `source` attribute provides the same record shape for modest static instance sets.
 
 Material color, captured texture, and instance data remain independent from geometry replacement. Clearing UV coordinates doesn't clear a texture source, but Scene ignores that source and reports a warning until valid UV coordinates return.
 

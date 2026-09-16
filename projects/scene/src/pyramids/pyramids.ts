@@ -4,17 +4,22 @@
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/markers/layer-element.js';
 import { MARKER } from '../internal/layouts/built-ins.js';
+import {
+  PyramidBuffer,
+  type Pyramid,
+  type PyramidInit,
+  type PyramidSource
+} from '../internal/markers/semantic-buffer.js';
 import styles from '../internal/styles/host.css?inline';
 
 /**
  * @element nve-scene-pyramids
- * @description Renders fixed-geometry square pyramids from declarative markers or streamed marker records.
+ * @description Renders fixed-geometry square pyramids from semantic source records.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/pyramids
- * @slot - Contains direct nve-scene-marker children.
  * @stable false
  */
-export class ScenePyramids extends MarkerLayerElement {
+export class ScenePyramids extends MarkerLayerElement<PyramidSource, PyramidInit> {
   static styles = useStyles([styles]);
 
   static readonly layout = MARKER;
@@ -25,6 +30,9 @@ export class ScenePyramids extends MarkerLayerElement {
   };
 
   constructor() {
-    super('pyramid');
+    super('pyramid', { create: records => new PyramidBuffer({ records }), kind: 'pyramid' });
   }
 }
+
+export { PyramidBuffer };
+export type { Pyramid, PyramidInit, PyramidSource };

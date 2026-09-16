@@ -4,7 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { LABEL, LabelBuffer } from '@nvidia-elements/scene';
+import { LABEL } from '@nvidia-elements/scene';
+import { LabelBuffer } from '@nvidia-elements/scene/labels';
 import { LAYER_CHILD } from '../errors.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { SceneLabels } from './labels.js';

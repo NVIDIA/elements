@@ -4,7 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import { POINT, PointBuffer } from '@nvidia-elements/scene';
+import { POINT } from '@nvidia-elements/scene';
+import { PointBuffer } from '@nvidia-elements/scene/points';
 import { LAYER_CHILD } from '../errors.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { ScenePoints } from './points.js';

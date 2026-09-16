@@ -7,6 +7,15 @@ import { readLineVertex } from '../layouts/helpers.js';
 import { LineVertexBuffer } from './buffer.js';
 
 describe('line vertex buffer', () => {
+  it('seeds records equivalently to incremental writes', () => {
+    const records = [{ dash: 2, gap: 1, position: [1, 2, 3], width: 0.5 }] as const;
+    const seeded = new LineVertexBuffer({ records });
+    const incremental = new LineVertexBuffer({ capacity: 1 });
+    incremental.add(records[0]);
+    expect(seeded).toMatchObject({ capacity: 1, count: 1 });
+    expect(seeded.mutableBytes).toEqual(incremental.mutableBytes);
+  });
+
   it('stores logical segment identities without changing vertex records', () => {
     const vertices = new LineVertexBuffer({ capacity: 4 });
     vertices.featureIds = new Uint32Array([1842, 2710]);

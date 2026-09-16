@@ -11,7 +11,7 @@ import './define.js';
 describe(SceneArrows.metadata.tag, () => {
   it('should pass axe as scene data', async () => {
     const fixture = await createFixture(html`
-      <nve-scene-arrows><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-arrows>
+      <nve-scene-arrows source='[{"origin":[0,0,0]}]'></nve-scene-arrows>
     `);
     await elementIsStable(required(fixture.querySelector(SceneArrows.metadata.tag), 'Expected arrows fixture.'));
     const results = await runAxe([SceneArrows.metadata.tag]);

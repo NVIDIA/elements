@@ -34,16 +34,15 @@ import '@nvidia-elements/scene/labels/define.js';
 <nve-scene aria-label="visualization" style="height: 480px">
   <nve-scene-gridlines></nve-scene-gridlines>
   <nve-scene-axes></nve-scene-axes>
-  <nve-scene-cubes id="cubes">
-    <nve-scene-marker position="[0,0,0.5]" color="#76b900"></nve-scene-marker>
-  </nve-scene-cubes>
+  <nve-scene-cubes id="cubes"></nve-scene-cubes>
   <nve-scene-labels id="labels"></nve-scene-labels>
 </nve-scene>
 
 <script type="module">
-  import { LabelBuffer, MarkerBuffer } from '@nvidia-elements/scene';
+  import { LabelBuffer } from '@nvidia-elements/scene/labels';
+  import { CubeBuffer } from '@nvidia-elements/scene/cubes';
 
-  const markers = new MarkerBuffer({ capacity: 2 });
+  const markers = new CubeBuffer({ capacity: 2 });
   const labels = new LabelBuffer({ capacity: 1 });
   const cube = markers.add({ color: 'rgb(118 185 0)' });
   labels.add({ color: 'white', position: [0, 0, 1.4], scale: 18, text: 'origin cube' });

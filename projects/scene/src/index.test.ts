@@ -2,31 +2,31 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { SceneArrows } from '@nvidia-elements/scene/arrows';
+import { ArrowBuffer, SceneArrows, type ArrowSource } from '@nvidia-elements/scene/arrows';
 import { SceneAxes } from '@nvidia-elements/scene/axes';
 import { SceneCamera } from '@nvidia-elements/scene/camera';
-import { SceneCones } from '@nvidia-elements/scene/cones';
-import { SceneCubes } from '@nvidia-elements/scene/cubes';
-import { SceneCylinders } from '@nvidia-elements/scene/cylinders';
+import { ConeBuffer, SceneCones } from '@nvidia-elements/scene/cones';
+import { CubeBuffer, SceneCubes, type CubeSource } from '@nvidia-elements/scene/cubes';
+import { CylinderBuffer, SceneCylinders } from '@nvidia-elements/scene/cylinders';
 import { SceneFrame } from '@nvidia-elements/scene/frame';
 import { SceneGridlines } from '@nvidia-elements/scene/gridlines';
 import { SceneHeightfield } from '@nvidia-elements/scene/heightfield';
-import { SceneLabels } from '@nvidia-elements/scene/labels';
-import { SceneLines } from '@nvidia-elements/scene/lines';
-import { SceneMarker } from '@nvidia-elements/scene/marker';
+import { LabelBuffer, SceneLabels } from '@nvidia-elements/scene/labels';
+import { LineVertexBuffer, SceneLines } from '@nvidia-elements/scene/lines';
 import { SceneMesh, type SceneMeshGeometry, type SceneTextureCaptureResult } from '@nvidia-elements/scene/mesh';
-import { SceneModel, ScenePart } from '@nvidia-elements/scene/model';
-import { ScenePoints } from '@nvidia-elements/scene/points';
+import { SceneModel, ScenePart, type ModelInstanceSource } from '@nvidia-elements/scene/model';
+import { PointBuffer, ScenePoints } from '@nvidia-elements/scene/points';
 import {
   ScenePolygon,
+  type PolygonInstanceSource,
   type PolygonGeometry,
   type PolygonPoint,
   type PolygonRing
 } from '@nvidia-elements/scene/polygon';
-import { ScenePyramids } from '@nvidia-elements/scene/pyramids';
+import { PyramidBuffer, ScenePyramids } from '@nvidia-elements/scene/pyramids';
 import { Scene, type SceneClientPoint, type SceneEventMap, type SceneRay } from '@nvidia-elements/scene/scene';
-import { SceneSpheres } from '@nvidia-elements/scene/spheres';
-import { SceneTriangles } from '@nvidia-elements/scene/triangles';
+import { SceneSpheres, SphereBuffer } from '@nvidia-elements/scene/spheres';
+import { SceneTriangles, TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
 import * as scenePackage from './index.js';
 import type {
   SceneCameraChangeDetail,
@@ -57,19 +57,7 @@ import type {
   TriangleVertexSource,
   Vec3
 } from './index.js';
-import {
-  LINE_VERTEX,
-  LABEL,
-  LabelBuffer,
-  MARKER,
-  MarkerBuffer,
-  POINT,
-  TRIANGLE_VERTEX,
-  LineVertexBuffer,
-  PointBuffer,
-  TriangleVertexBuffer,
-  VERSION
-} from './index.js';
+import { LINE_VERTEX, LABEL, MARKER, MarkerBuffer, POINT, TRIANGLE_VERTEX, VERSION } from './index.js';
 
 type RootModule = typeof scenePackage;
 type HasPublicScene = 'Scene' extends keyof RootModule ? true : false;
@@ -165,6 +153,9 @@ const internalRecordSourceRuntimeExports = [
 ] as const;
 
 const componentEntrypointRuntimeExports = [
+  'LabelBuffer',
+  'LineVertexBuffer',
+  'PointBuffer',
   'Scene',
   'SceneArrows',
   'SceneAxes',
@@ -177,7 +168,6 @@ const componentEntrypointRuntimeExports = [
   'SceneHeightfield',
   'SceneLabels',
   'SceneLines',
-  'SceneMarker',
   'SceneMesh',
   'SceneModel',
   'ScenePart',
@@ -186,6 +176,7 @@ const componentEntrypointRuntimeExports = [
   'ScenePyramids',
   'SceneSpheres',
   'SceneTriangles',
+  'TriangleVertexBuffer',
   'compileParts'
 ] as const;
 
@@ -203,7 +194,6 @@ describe('@nvidia-elements/scene', () => {
     expect(SceneGridlines.metadata.tag).toBe('nve-scene-gridlines');
     expect(SceneHeightfield.metadata.tag).toBe('nve-scene-heightfield');
     expect(SceneLabels.metadata.tag).toBe('nve-scene-labels');
-    expect(SceneMarker.metadata.tag).toBe('nve-scene-marker');
     expect(SceneMesh.metadata.tag).toBe('nve-scene-mesh');
     expect(SceneModel.metadata.tag).toBe('nve-scene-model');
     expect(ScenePart.metadata.tag).toBe('nve-scene-part');
@@ -345,6 +335,8 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<SceneHitHasInstanceIndex>().toEqualTypeOf<false>();
     expectTypeOf<SceneLabelsHasStale>().toEqualTypeOf<false>();
     expectTypeOf<SceneLabels['source']>().toEqualTypeOf<LabelSource | null>();
+    expectTypeOf<SceneArrows['source']>().toEqualTypeOf<ArrowSource | null>();
+    expectTypeOf<SceneCubes['source']>().toEqualTypeOf<CubeSource | null>();
     expectTypeOf<SceneLinesHasInstances>().toEqualTypeOf<false>();
     expectTypeOf<SceneLinesHasVertices>().toEqualTypeOf<false>();
     expectTypeOf<LayerWithFeatureIds<PublicFeatureIdLayer>>().toEqualTypeOf<never>();
@@ -361,10 +353,11 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<LabelBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
     expectTypeOf<PointBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
     expectTypeOf<TriangleVertexBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
-    expectTypeOf<SceneMarker['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<SceneHeightfield['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<SceneMesh['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<SceneModel['source']>().toEqualTypeOf<ModelInstanceSource | null>();
     expectTypeOf<SceneModel['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<ScenePolygon['source']>().toEqualTypeOf<PolygonInstanceSource | null>();
     expectTypeOf<ScenePolygon['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<MarkerInit['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<PointInit['featureId']>().toEqualTypeOf<number | undefined>();
@@ -429,7 +422,6 @@ describe('@nvidia-elements/scene', () => {
       SceneGridlines,
       SceneHeightfield,
       SceneLabels,
-      SceneMarker,
       SceneMesh,
       SceneModel,
       ScenePart,
@@ -442,6 +434,9 @@ describe('@nvidia-elements/scene', () => {
     ]) {
       expect(Reflect.get(bundle, element.name)).toBe(element);
       expect(customElements.get(element.metadata.tag)).toBe(element);
+    }
+    for (const buffer of [ArrowBuffer, ConeBuffer, CubeBuffer, CylinderBuffer, PyramidBuffer, SphereBuffer]) {
+      expect(scenePackage).not.toHaveProperty(buffer.name);
     }
   });
 });

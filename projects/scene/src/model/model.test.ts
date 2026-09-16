@@ -10,6 +10,7 @@ import { getModelLayerTopologyVersion, takeModelLayerRenderData } from '../inter
 import type { Quaternion, RGBA, Vec3 } from '../internal/types.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { compileParts, type ModelPart } from '../internal/model/compile.js';
+import { MarkerBuffer } from '../internal/markers/buffer.js';
 import { SceneModel } from './model.js';
 import { ScenePart } from './part.js';
 import './define.js';
@@ -114,11 +115,10 @@ describe(SceneModel.metadata.tag, () => {
     expect(takeModelLayerRenderData(model).positions).toEqual(compileParts([{ shape: 'cube' }]).positions);
   });
 
-  it('warns once per dual-source episode while keeping marker children live', async () => {
-    fixture = await createFixture(
-      html`<nve-scene-model><nve-scene-part></nve-scene-part><nve-scene-marker></nve-scene-marker></nve-scene-model>`
-    );
+  it('warns once per geometry dual-source episode while keeping instance sources live', async () => {
+    fixture = await createFixture(html`<nve-scene-model><nve-scene-part></nve-scene-part></nve-scene-model>`);
     const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
+    model.source = new MarkerBuffer({ records: [{}] });
     const warnings: CustomEvent<SceneErrorDetail>[] = [];
     model.addEventListener('nve-scene-error', event => warnings.push(event as CustomEvent<SceneErrorDetail>));
     const parts: ModelPart[] = [{ shape: 'sphere' }];
@@ -230,6 +230,6 @@ describe(SceneModel.metadata.tag, () => {
     model.append(document.createElement('span'));
     await elementIsStable(model);
     expect(takeModelLayerRenderData(model).geometryError).toBe(true);
-    expect(errors.at(-1)?.detail.message).toBe('Scene models allow only direct scene part and scene marker children.');
+    expect(errors.at(-1)?.detail.message).toBe('Scene models allow only direct scene part children.');
   });
 });

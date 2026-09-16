@@ -28,7 +28,6 @@ type SceneLayerSpec =
 
 export type SceneLayerKind = SceneLayerSpec['kind'];
 
-export const SCENE_MARKER_TAG = 'nve-scene-marker';
 export const SCENE_MODEL_TAG = 'nve-scene-model';
 export const SCENE_PART_TAG = 'nve-scene-part';
 
@@ -57,8 +56,4 @@ export const SCENE_LAYER_SELECTOR = SCENE_LAYER_SPECS.map(spec => spec.tag).join
 
 export function getSceneLayerSpec(tag: string): SceneLayerSpec | undefined {
   return specsByTag.get(tag);
-}
-
-export function isMarkerInstanceLayerTag(tag: string): boolean {
-  return getSceneLayerSpec(tag)?.markerInstances === true;
 }

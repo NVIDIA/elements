@@ -3,5 +3,5 @@
 
 export { compileParts, type ModelPart } from '../internal/model/compile.js';
 export type { ScenePrimitiveKind } from '../internal/primitive-geometry.js';
-export { SceneModel } from './model.js';
+export { SceneModel, type ModelInstanceSource } from './model.js';
 export { ScenePart } from './part.js';

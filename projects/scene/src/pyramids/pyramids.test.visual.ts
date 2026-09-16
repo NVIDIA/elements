@@ -5,14 +5,13 @@ import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
 
 describe('scene pyramids visual runtime', () => {
-  test('should render flat square-pyramid faces and pick its marker through the real WebGPU profile', async () => {
+  test('should render flat square-pyramid faces and pick its instance through the real WebGPU profile', async () => {
     const result = await visualRunner.inspect(
       'scene-pyramids-flat-faces',
       /* html */ `
         <nve-scene aria-label="Square pyramid scene" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="orbit" target="[0,0,0]" heading="0" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="4.8"></nve-scene-camera>
-          <nve-scene-pyramids id="pyramids">
-            <nve-scene-marker id="pyramid" scale="[2.4,2.4,2.4]" color="#76b900"></nve-scene-marker>
+          <nve-scene-pyramids id="pyramids" source='[{"size":[2.4,2.4,2.4],"color":"#76b900"}]'>
           </nve-scene-pyramids>
         </nve-scene>
         <script type="module">
@@ -42,7 +41,7 @@ describe('scene pyramids visual runtime', () => {
                 ? {
                     index: hit.target.index,
                     layerTag: hit.layer.localName,
-                    markerId: hit.element.id
+                    elementId: hit.element.id
                   }
                 : null
           };
@@ -173,7 +172,7 @@ describe('scene pyramids visual runtime', () => {
     expect(result.pick).toEqual({
       index: 0,
       layerTag: 'nve-scene-pyramids',
-      markerId: 'pyramid'
+      elementId: 'pyramids'
     });
   });
 });

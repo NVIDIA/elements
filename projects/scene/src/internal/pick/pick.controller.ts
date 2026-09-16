@@ -4,7 +4,6 @@
 import type { UnhandledPointerInput } from '@nvidia-elements/core/internal';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import { PickCoordinator, type PickCompletion } from './coordinator.js';
-import { registerSceneMarkerInteractionController } from '../markers/interaction.js';
 import {
   copyPickHit,
   requestScenePick,
@@ -14,7 +13,6 @@ import {
   type ScenePickResult
 } from './routing.js';
 import { isInteractiveLayer } from '../interaction.js';
-import { isCurrentMarkerLayerMarker } from '../markers/layer-state.js';
 
 type PickHost = HTMLElement & ReactiveControllerHost & { readonly ready: Promise<void> };
 
@@ -27,7 +25,6 @@ export class PickController implements ReactiveController {
   readonly #host: PickHost;
   #hoverHit: ScenePickHit | null = null;
   #invalidation = new DOMException('The scene is unavailable for picking.', 'AbortError');
-  #markerInteractionCleanup?: () => void;
   #interactionGeneration = 0;
   #pendingEvents = new Map<number, PointerEvent>();
 
@@ -45,17 +42,12 @@ export class PickController implements ReactiveController {
 
   hostConnected(): void {
     this.#host.addEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
-    this.#markerInteractionCleanup = registerSceneMarkerInteractionController(this.#host, {
-      activateMarker: (marker, event) => this.#activateMarker(marker, event)
-    });
   }
 
   hostDisconnected(): void {
     this.#host.removeEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
     this.#unbindCanvas();
     this.invalidate(new DOMException('The scene disconnected while picking.', 'AbortError'));
-    this.#markerInteractionCleanup?.();
-    this.#markerInteractionCleanup = undefined;
   }
 
   pick(clientX: number, clientY: number): Promise<ScenePickHit | null> {
@@ -189,13 +181,8 @@ export class PickController implements ReactiveController {
   }
 
   #isCurrentInteractiveResult(result: ScenePickResult): boolean {
-    const { layer, marker } = result;
-    return (
-      isInteractiveLayer(layer) &&
-      layer.closest('nve-scene') === this.#host &&
-      layer.closest('[hidden]') === null &&
-      (marker === undefined || isCurrentMarkerLayerMarker(layer, marker))
-    );
+    const { layer } = result;
+    return isInteractiveLayer(layer) && layer.closest('nve-scene') === this.#host && layer.closest('[hidden]') === null;
   }
 
   #createCoordinator(): PickCoordinator<ScenePickHit> {
@@ -256,11 +243,6 @@ export class PickController implements ReactiveController {
       );
     }
     hit.element.dispatchEvent(createSceneInteractionEvent(`nve-scene-pointer${kind}`, hit));
-  }
-
-  #activateMarker(marker: HTMLElement, event: KeyboardEvent): void {
-    if (!this.#host.isConnected || marker.closest('nve-scene') !== this.#host) return;
-    marker.dispatchEvent(createSyntheticPointerEvent('click', event, { bubbles: true, cancelable: true }));
   }
 }
 

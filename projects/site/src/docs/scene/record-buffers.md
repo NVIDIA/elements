@@ -1,25 +1,62 @@
 ---
 {
   title: 'Scene Record Buffers',
-  description: 'Create, publish, and share packed marker and vertex data efficiently.',
+  description: 'Create, publish, and share packed scene records efficiently.',
   layout: 'docs.11ty.js'
 }
 ---
 
 # Scene Record Buffers
 
-Scene record buffers provide fixed-capacity packed storage for marker instances and streamed vertices. A buffer's `capacity` is its fixed allocation size. Its `count` is the active contiguous prefix. Assign a buffer to the matching layer, then publish changes from that layer.
+Scene record buffers provide fixed-capacity packed storage for instances and streamed vertices. A buffer's `capacity` is its fixed allocation size. Its `count` is the active contiguous prefix. Assign a buffer to the matching layer, then publish changes from that layer.
 
 ## Buffer types
 
-| Buffer                 | Record data                                   | Compatible layer property                        |
-| ---------------------- | --------------------------------------------- | ------------------------------------------------ |
-| `MarkerBuffer`         | Transform, color, and outline color           | Marker-layer `source`, such as cubes or pyramids |
-| `PointBuffer`          | Position and color                            | `nve-scene-points.source`                        |
-| `LineVertexBuffer`     | Position, color, normal, width, dash, and gap | `nve-scene-lines.source`                         |
-| `TriangleVertexBuffer` | Position and color                            | `nve-scene-triangles.source`                     |
+| Buffer                                                        | Compatible layer property         |
+| ------------------------------------------------------------- | --------------------------------- |
+| `ArrowBuffer`                                                 | `nve-scene-arrows.source`         |
+| `CubeBuffer`, `SphereBuffer`, `CylinderBuffer`, `ConeBuffer`  | Matching primitive layer `source` |
+| `PyramidBuffer`                                               | `nve-scene-pyramids.source`       |
+| `MarkerBuffer`                                                | Mesh, model, and polygon `source` |
+| `PointBuffer`, `LineVertexBuffer`, and `TriangleVertexBuffer` | Matching streamed layer `source`  |
 
-Use a buffer only with its compatible layer. Point and triangle sources remain distinct even though their current strides match.
+Use a buffer only with its compatible layer. Primitive layers reject generic marker buffers and buffers for other primitives. External packed marker sources are an advanced integration escape hatch. Their producer must meet the target primitive's encoding invariants.
+
+## Initialize a buffer
+
+All public buffers accept a capacity, records, or both. Omitting `capacity` uses `records.length`. An explicit capacity can't be smaller than the seeded record count. Construction validates and packs all records before it returns the buffer. Unused capacity remains initialized but inactive.
+
+```js
+import { ArrowBuffer } from '@nvidia-elements/scene/arrows';
+
+const reserved = new ArrowBuffer({ capacity: 100 });
+const exact = new ArrowBuffer({ records: initialArrows });
+const seeded = new ArrowBuffer({ capacity: 100, records: initialArrows });
+```
+
+For centered primitives, `position` defaults to the origin, `orientation` defaults to the identity quaternion, and `size` defaults to `[1, 1, 1]`. `size` contains full local dimensions:
+
+| Primitive | X               | Y               | Z          |
+| --------- | --------------- | --------------- | ---------- |
+| Cube      | Width           | Depth           | Height     |
+| Sphere    | X diameter      | Y diameter      | Z diameter |
+| Cylinder  | X base diameter | Y base diameter | Height     |
+| Cone      | X base diameter | Y base diameter | Height     |
+| Pyramid   | Base width      | Base depth      | Height     |
+
+Arrow records use `origin`, `vector`, and `shaftDiameter`. An arrow points along its vector. Its shaft occupies 80% of the vector length. Its head occupies 20%, and the head diameter is twice the shaft diameter.
+
+## HTML source attributes
+
+The `source` attribute is a serialized initialization format for modest static data. It requires strict JSON with double-quoted keys and values. Scene validates the records once and creates the matching specialized buffer.
+
+```html
+<nve-scene-cylinders
+  source='[{"position":[0,0,1],"size":[1,1,2],"color":"cyan","featureId":42}]'
+></nve-scene-cylinders>
+```
+
+The JavaScript `source` property represents the resolved packed source. It accepts only the matching buffer or a compatible external packed source, not record arrays. Property assignments don't reflect to the attribute. Removing the attribute sets `source` to `null`.
 
 ## Write and publish records
 
@@ -37,7 +74,7 @@ Every record buffer provides the following operations:
 `publish()` separates source bookkeeping from a layer's captured rendering snapshot. It accepts `{ start, count, activeCount }`. `start` and `count` identify changed records, not bytes. `activeCount` selects the complete prefix for that layer.
 
 ```js
-import { PointBuffer } from '@nvidia-elements/scene';
+import { PointBuffer } from '@nvidia-elements/scene/points';
 
 const points = new PointBuffer({ capacity: 1000 });
 const first = points.add({ color: 'cyan', position: [0, 0, 1] });
@@ -55,15 +92,19 @@ Calling `publish()` without options uses a typed buffer's current `count`. It ne
 `add()` and `set()` at the current count append. Use `setCount()` to shrink or regrow the source prefix. Regrowth is valid only when the exposed records contain valid initialized values. It keeps the existing storage.
 
 ```js
-const markers = new MarkerBuffer({ capacity: 1000 });
-markers.add({ color: 'yellow', position: [0, 0, 0.5] });
-markers.add({ color: 'cyan', position: [1, 0, 0.5] });
-cubes.source = markers;
+const cubesSource = new CubeBuffer({
+  capacity: 1000,
+  records: [
+    { color: 'yellow', position: [0, 0, 0.5] },
+    { color: 'cyan', position: [1, 0, 0.5] }
+  ]
+});
+cubes.source = cubesSource;
 
-markers.setCount(0);
+cubesSource.setCount(0);
 cubes.publish({ count: 0 }); // Hide all records without uploading unchanged bytes.
 
-markers.setCount(2);
+cubesSource.setCount(2);
 cubes.publish({ count: 0, start: 2 }); // Capture the newly exposed interval.
 ```
 
@@ -76,15 +117,14 @@ Record handles identify storage slots rather than application entities. After an
 Each layer owns its published snapshot. Publishing one layer never changes another layer that shares the source.
 
 ```js
-const markers = new MarkerBuffer({ capacity: data.length });
-data.forEach((fields, index) => markers.set(index, fields));
+const markers = new MarkerBuffer({ records: data });
 
-cubes.source = markers;
-spheres.source = markers;
+meshA.source = markers;
+meshB.source = markers;
 
 markers.at(0).color = 'magenta';
-cubes.publish({ count: 1, start: 0 });
-// The sphere snapshot remains unchanged until spheres.publish().
+meshA.publish({ count: 1, start: 0 });
+// The second mesh snapshot remains unchanged until meshB.publish().
 ```
 
 This isolation also applies after device recovery. Scene rebuilds each layer from its last published capture, not from later unpublished producer mutations.

@@ -16,7 +16,7 @@ export default {
 };
 
 /**
- * @summary Matched cone scenes compare declarative and packed marker data. Use this comparison to assess API ergonomics for directional volumes.
+ * @summary Matched cone scenes compare declarative and packed source records. Use this comparison to assess API ergonomics for directional volumes.
  */
 export const ConeComparison = {
   render: () => html`
@@ -25,8 +25,7 @@ export const ConeComparison = {
         <h2 nve-text="heading sm">Declarative</h2>
         <nve-scene aria-label="Declarative cone scene" style="min-height: 320px">
           <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-cones>
-            <nve-scene-marker position="[0,0,0.75]" scale="[1,1,1.5]" color="rgba(118,185,0,0.85)"></nve-scene-marker>
+          <nve-scene-cones source='[{"position":[0,0,0.75],"size":[1,1,1.5],"color":"rgba(118,185,0,0.85)"}]'>
           </nve-scene-cones>
         </nve-scene>
       </section>
@@ -41,22 +40,22 @@ export const ConeComparison = {
     </div>
 
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { ConeBuffer } from '@nvidia-elements/scene/cones';
       import '@nvidia-elements/scene/cones/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/scene/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 1 });
+      const markers = new ConeBuffer({ capacity: 1 });
       const cone = markers.add({ color: 'rgba(118,185,0,0.85)' });
       cone.position.set(0, 0, 0.75);
-      cone.scale.set(1, 1, 1.5);
+      cone.size.set(1, 1, 1.5);
       document.querySelector('#imperative-cone').source = markers;
     </script>
   `
 };
 
 /**
- * @summary Matched cube scenes compare declarative and packed marker data. Use this comparison to assess API ergonomics for bounded perception volumes.
+ * @summary Matched cube scenes compare declarative and packed source records. Use this comparison to assess API ergonomics for bounded perception volumes.
  */
 export const CubeComparison = {
   render: () => html`
@@ -65,13 +64,7 @@ export const CubeComparison = {
         <h2 nve-text="heading sm">Declarative</h2>
         <nve-scene aria-label="Declarative cube scene" style="min-height: 320px">
           <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-cubes>
-            <nve-scene-marker
-              position="[0,0,0.75]"
-              scale="[1.5,1.2,1.5]"
-              color="rgba(118,185,0,0.24)"
-              outline-color="rgba(118,185,0,0.95)"
-            ></nve-scene-marker>
+          <nve-scene-cubes source='[{"position":[0,0,0.75],"size":[1.5,1.2,1.5],"color":"rgba(118,185,0,0.24)","outlineColor":"rgba(118,185,0,0.95)"}]'>
           </nve-scene-cubes>
         </nve-scene>
       </section>
@@ -86,25 +79,25 @@ export const CubeComparison = {
     </div>
 
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/scene/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 1 });
+      const markers = new CubeBuffer({ capacity: 1 });
       const cube = markers.add({
         color: 'rgba(118,185,0,0.24)',
         outlineColor: 'rgba(118,185,0,0.95)'
       });
       cube.position.set(0, 0, 0.75);
-      cube.scale.set(1.5, 1.2, 1.5);
+      cube.size.set(1.5, 1.2, 1.5);
       document.querySelector('#imperative-cube').source = markers;
     </script>
   `
 };
 
 /**
- * @summary Matched cylinder scenes compare declarative and packed marker data. Use this comparison to assess API ergonomics for columnar measurements.
+ * @summary Matched cylinder scenes compare declarative and packed source records. Use this comparison to assess API ergonomics for columnar measurements.
  */
 export const CylinderComparison = {
   render: () => html`
@@ -113,8 +106,7 @@ export const CylinderComparison = {
         <h2 nve-text="heading sm">Declarative</h2>
         <nve-scene aria-label="Declarative cylinder scene" style="min-height: 320px">
           <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-cylinders>
-            <nve-scene-marker position="[0,0,0.75]" scale="[1,1,1.5]" color="rgba(118,185,0,0.85)"></nve-scene-marker>
+          <nve-scene-cylinders source='[{"position":[0,0,0.75],"size":[1,1,1.5],"color":"rgba(118,185,0,0.85)"}]'>
           </nve-scene-cylinders>
         </nve-scene>
       </section>
@@ -129,22 +121,22 @@ export const CylinderComparison = {
     </div>
 
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { CylinderBuffer } from '@nvidia-elements/scene/cylinders';
       import '@nvidia-elements/scene/cylinders/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/scene/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 1 });
+      const markers = new CylinderBuffer({ capacity: 1 });
       const cylinder = markers.add({ color: 'rgba(118,185,0,0.85)' });
       cylinder.position.set(0, 0, 0.75);
-      cylinder.scale.set(1, 1, 1.5);
+      cylinder.size.set(1, 1, 1.5);
       document.querySelector('#imperative-cylinder').source = markers;
     </script>
   `
 };
 
 /**
- * @summary Matched mesh scenes share property-authored geometry while comparing declarative and packed marker instances. Use this comparison to assess instance ergonomics without implying that mesh topology is available as HTML attributes.
+ * @summary Matched mesh scenes share property-authored geometry while comparing static and packed instances. Use this comparison to assess instance ergonomics without implying that mesh topology is available as HTML attributes.
  */
 export const MeshComparison = {
   render: () => html`
@@ -153,8 +145,7 @@ export const MeshComparison = {
         <h2 nve-text="heading sm">Declarative instance</h2>
         <nve-scene aria-label="Declarative mesh instance scene" style="min-height: 320px">
           <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-mesh id="declarative-mesh">
-            <nve-scene-marker position="[0,0,0.6]" color="rgba(118,185,0,0.85)"></nve-scene-marker>
+          <nve-scene-mesh id="declarative-mesh" source='[{"position":[0,0,0.6],"color":"rgba(118,185,0,0.85)"}]'>
           </nve-scene-mesh>
         </nve-scene>
       </section>
@@ -193,7 +184,7 @@ export const MeshComparison = {
 };
 
 /**
- * @summary Matched pyramid scenes compare declarative and packed marker data. Use this comparison to assess API ergonomics for bounded directional markers.
+ * @summary Matched pyramid scenes compare declarative and packed source records. Use this comparison to assess API ergonomics for bounded directional markers.
  */
 export const PyramidComparison = {
   render: () => html`
@@ -202,8 +193,7 @@ export const PyramidComparison = {
         <h2 nve-text="heading sm">Declarative</h2>
         <nve-scene aria-label="Declarative pyramid scene" style="min-height: 320px">
           <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-pyramids>
-            <nve-scene-marker position="[0,0,0.75]" scale="[1,1,1.5]" color="rgba(118,185,0,0.85)"></nve-scene-marker>
+          <nve-scene-pyramids source='[{"position":[0,0,0.75],"size":[1,1,1.5],"color":"rgba(118,185,0,0.85)"}]'>
           </nve-scene-pyramids>
         </nve-scene>
       </section>
@@ -218,22 +208,22 @@ export const PyramidComparison = {
     </div>
 
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { PyramidBuffer } from '@nvidia-elements/scene/pyramids';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/pyramids/define.js';
       import '@nvidia-elements/scene/scene/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 1 });
+      const markers = new PyramidBuffer({ capacity: 1 });
       const pyramid = markers.add({ color: 'rgba(118,185,0,0.85)' });
       pyramid.position.set(0, 0, 0.75);
-      pyramid.scale.set(1, 1, 1.5);
+      pyramid.size.set(1, 1, 1.5);
       document.querySelector('#imperative-pyramid').source = markers;
     </script>
   `
 };
 
 /**
- * @summary Matched sphere scenes compare declarative and packed marker data. Use this comparison to assess API ergonomics for radial extents.
+ * @summary Matched sphere scenes compare declarative and packed source records. Use this comparison to assess API ergonomics for radial extents.
  */
 export const SphereComparison = {
   render: () => html`
@@ -242,8 +232,7 @@ export const SphereComparison = {
         <h2 nve-text="heading sm">Declarative</h2>
         <nve-scene aria-label="Declarative sphere scene" style="min-height: 320px">
           <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-spheres>
-            <nve-scene-marker position="[0,0,0.75]" scale="[1.5,1.5,1.5]" color="rgba(118,185,0,0.85)"></nve-scene-marker>
+          <nve-scene-spheres source='[{"position":[0,0,0.75],"size":[1.5,1.5,1.5],"color":"rgba(118,185,0,0.85)"}]'>
           </nve-scene-spheres>
         </nve-scene>
       </section>
@@ -258,15 +247,15 @@ export const SphereComparison = {
     </div>
 
     <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import { SphereBuffer } from '@nvidia-elements/scene/spheres';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/spheres/define.js';
 
-      const markers = new MarkerBuffer({ capacity: 1 });
+      const markers = new SphereBuffer({ capacity: 1 });
       const sphere = markers.add({ color: 'rgba(118,185,0,0.85)' });
       sphere.position.set(0, 0, 0.75);
-      sphere.scale.set(1.5, 1.5, 1.5);
+      sphere.size.set(1.5, 1.5, 1.5);
       document.querySelector('#imperative-sphere').source = markers;
     </script>
   `

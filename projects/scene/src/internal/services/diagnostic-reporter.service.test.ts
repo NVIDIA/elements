@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, test, vi } from 'vitest';
-import { LAYER_CHILD, MARKER_VALUE } from '../../errors.js';
+import { LAYER_CHILD, LAYER_SOURCE_INVALID } from '../../errors.js';
 import { diagnosticReporterService } from './diagnostic-reporter.service.js';
 
 describe('DiagnosticReporterService', () => {
@@ -14,7 +14,7 @@ describe('DiagnosticReporterService', () => {
     const update = (active: boolean) =>
       diagnosticReporterService.update({
         active,
-        code: MARKER_VALUE,
+        code: LAYER_SOURCE_INVALID,
         element,
         message: 'test message',
         severity: 'error'

@@ -1,10 +1,9 @@
 ---
 {
   title: 'Scene Cubes',
-  description: 'Cube marker instances for a Scene.',
+  description: 'Source-backed cube instances for a Scene.',
   layout: 'docs.11ty.js',
-  tag: 'nve-scene-cubes',
-  associatedElements: ['nve-scene-marker']
+  tag: 'nve-scene-cubes'
 }
 ---
 
@@ -22,7 +21,7 @@
 
 ## Volumes and Outlines
 
-Use `outline-color` independently from `color` to preserve box boundaries through overlapping translucent faces. `MarkerBuffer` records expose the same capability through the `outlineColor` property.
+Use `outlineColor` independently from `color` to preserve box boundaries through overlapping translucent faces. JSON source records and `CubeBuffer` records expose the same field.
 
 {% example 'nve-scene-cubes' 'Volumes' %}
 

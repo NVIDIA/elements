@@ -1,10 +1,9 @@
 ---
 {
   title: 'Scene Cones',
-  description: 'Cone marker instances for a Scene.',
+  description: 'Source-backed cone instances for a Scene.',
   layout: 'docs.11ty.js',
-  tag: 'nve-scene-cones',
-  associatedElements: ['nve-scene-marker']
+  tag: 'nve-scene-cones'
 }
 ---
 

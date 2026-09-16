@@ -11,7 +11,7 @@ import './define.js';
 describe(SceneCubes.metadata.tag, () => {
   it('should pass axe as scene data', async () => {
     const fixture = await createFixture(html`
-      <nve-scene-cubes><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-cubes>
+      <nve-scene-cubes source='[{"position":[0,0,0]}]'></nve-scene-cubes>
     `);
     await elementIsStable(required(fixture.querySelector(SceneCubes.metadata.tag), 'Expected cubes fixture.'));
     const results = await runAxe([SceneCubes.metadata.tag]);

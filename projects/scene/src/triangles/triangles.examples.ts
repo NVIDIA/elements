@@ -20,7 +20,7 @@ export const Default = {
       <nve-scene-triangles id="example-triangles"></nve-scene-triangles>
     </nve-scene>
     <script type="module">
-      import { TriangleVertexBuffer } from '@nvidia-elements/scene';
+      import { TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';
@@ -46,7 +46,7 @@ export const Path = {
       <nve-scene-triangles id="driving-corridor"></nve-scene-triangles>
     </nve-scene>
     <script type="module">
-      import { TriangleVertexBuffer } from '@nvidia-elements/scene';
+      import { TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/camera/define.js';

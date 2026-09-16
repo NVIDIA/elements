@@ -252,7 +252,7 @@ describe('scene visual', () => {
             globalThis as typeof globalThis & { getPickingValidationErrors(): string[] }
           ).getPickingValidationErrors(),
           ancestorClicks,
-          elementIds: { cube: 'cube-marker', mesh: 'mesh-marker' }
+          elementIds: { cube: 'cube', mesh: 'mesh' }
         };
 
         async function readPixels(source: HTMLCanvasElement, probes: readonly (readonly [number, number])[]) {
@@ -335,12 +335,11 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/scene/scene/define.js';
     import '@nvidia-elements/scene/camera/define.js';
     import '@nvidia-elements/scene/cubes/define.js';
-    import '@nvidia-elements/scene/marker/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
   <nve-scene aria-label="Scene" style="width: 512px; height: 512px; background: rgb(16 20 26)">
     <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="12" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="8"></nve-scene-camera>
-    <nve-scene-cubes><nve-scene-marker position="[0,0,0]" scale="[3,3,3]" color="rgb(118 185 0)"></nve-scene-marker></nve-scene-cubes>
+    <nve-scene-cubes source='[{"position":[0,0,0],"size":[3,3,3],"color":"rgb(118 185 0)"}]'></nve-scene-cubes>
   </nve-scene>
   `;
 }
@@ -385,7 +384,7 @@ function hiddenStreamTemplate(): string {
       <nve-scene-points id="hidden-point" size="128"></nve-scene-points>
     </nve-scene>
     <script type="module">
-      import { PointBuffer } from '@nvidia-elements/scene';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
       import '@nvidia-elements/scene/points/define.js';
       const points = new PointBuffer({ capacity: 1 });
       const point = points.add({ position: [0, 0, 0], color: [1, 0, 0, 1] });
@@ -403,22 +402,18 @@ function meshT2Template(): string {
   return /* html */ `
     <nve-scene aria-label="Textured deforming mesh" style="width: 512px; height: 512px; background: rgb(0 0 0)">
       <nve-scene-camera behavior="top" target="[0,0,0]" altitude="11" frustum-height="11"></nve-scene-camera>
-      <nve-scene-mesh id="mesh" color="rgb(255 255 255)">
-        <nve-scene-marker position="[0,-1,0]" color="rgb(255 255 255)"></nve-scene-marker>
-        <nve-scene-marker position="[0,0,0]" color="rgb(255 120 120)"></nve-scene-marker>
-        <nve-scene-marker position="[0,1,0]" color="rgb(120 180 255)"></nve-scene-marker>
+      <nve-scene-mesh id="mesh" color="rgb(255 255 255)" source='[{"position":[0,-1,0],"color":"rgb(255 255 255)"},{"position":[0,0,0],"color":"rgb(255 120 120)"},{"position":[0,1,0],"color":"rgb(120 180 255)"}]'>
       </nve-scene-mesh>
     </nve-scene>
     <script type="module">
       import { define } from '@nvidia-elements/core/internal';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { Scene } from '../../src/scene/scene.ts';
-      import { SceneMarker } from '../../src/marker/marker.ts';
       import { SceneMesh } from '../../src/mesh/mesh.ts';
       import { takeMeshLayerRenderData } from '../../src/internal/mesh/layer-state.ts';
       define(Scene);
       define(SceneCamera);
-      define(SceneMarker);
+
       define(SceneMesh);
       const mesh = document.querySelector('#mesh');
       globalThis.getMeshState = () => {
@@ -451,11 +446,9 @@ function pickingT2Template(): string {
   return /* html */ `
     <div id="ancestor">
       <nve-scene aria-label="Picking scene" style="width: 512px; height: 512px; background: rgb(0 0 0)">
-        <nve-scene-cubes id="cube">
-          <nve-scene-marker id="cube-marker" position="[-2.083,0.5374,-1]" scale="[2,2,1]" color="rgb(255 0 0)"></nve-scene-marker>
+        <nve-scene-cubes id="cube" source='[{"position":[-2.083,0.5374,-1],"size":[2,2,1],"color":"rgb(255 0 0)"}]'>
         </nve-scene-cubes>
-        <nve-scene-mesh id="mesh" color="rgb(0 255 0)">
-          <nve-scene-marker id="mesh-marker" position="[2.014,0.0354,0]" scale="[2,2,1]" color="rgb(255 255 255)"></nve-scene-marker>
+        <nve-scene-mesh id="mesh" color="rgb(0 255 0)" source='[{"position":[2.014,0.0354,0],"scale":[2,2,1],"color":"rgb(255 255 255)"}]'>
         </nve-scene-mesh>
       </nve-scene>
     </div>
@@ -470,10 +463,9 @@ function pickingT2Template(): string {
       import { define } from '@nvidia-elements/core/internal';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCubes } from '../../src/cubes/cubes.ts';
-      import { SceneMarker } from '../../src/marker/marker.ts';
       import { SceneMesh } from '../../src/mesh/mesh.ts';
       define(Scene);
-      define(SceneMarker);
+
       define(SceneCubes);
       define(SceneMesh);
       const mesh = document.querySelector('#mesh');
@@ -490,8 +482,8 @@ function cameraT2Template(): string {
     <nve-scene aria-label="Camera animation" style="width: 512px; height: 512px; background: rgb(0 0 0)">
       <nve-scene-camera behavior="follow" frame="robot"></nve-scene-camera>
       <nve-scene-camera behavior="orbit" distance="12"></nve-scene-camera>
-      <nve-scene-frame id="robot" name="robot"><nve-scene-cubes><nve-scene-marker scale="[2,2,2]" color="rgb(0 255 0)"></nve-scene-marker></nve-scene-cubes></nve-scene-frame>
-      <nve-scene-cubes><nve-scene-marker position="[6,0,0]" scale="[2,2,2]" color="rgb(255 0 0)"></nve-scene-marker></nve-scene-cubes>
+      <nve-scene-frame id="robot" name="robot"><nve-scene-cubes source='[{"size":[2,2,2],"color":"rgb(0 255 0)"}]'></nve-scene-cubes></nve-scene-frame>
+      <nve-scene-cubes source='[{"position":[6,0,0],"size":[2,2,2],"color":"rgb(255 0 0)"}]'></nve-scene-cubes>
     </nve-scene>
     <script type="module">
       import { define } from '@nvidia-elements/core/internal';
@@ -499,8 +491,7 @@ function cameraT2Template(): string {
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneFrame } from '../../src/frame/frame.ts';
       import { SceneCubes } from '../../src/cubes/cubes.ts';
-      import { SceneMarker } from '../../src/marker/marker.ts';
-      define(Scene); define(SceneCamera); define(SceneFrame); define(SceneCubes); define(SceneMarker);
+      define(Scene); define(SceneCamera); define(SceneFrame); define(SceneCubes);
       const robot = document.querySelector('#robot');
       robot.setPose({ position: [-2, 0, 0], orientation: [0, 0, 0, 1] });
       globalThis.updateFollow = () => {

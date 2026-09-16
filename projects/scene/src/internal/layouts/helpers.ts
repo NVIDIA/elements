@@ -6,7 +6,7 @@ import type { Quaternion, RGBA, Vec3 } from '../types.js';
 import { LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './built-ins.js';
 import type { LayoutDescriptor } from './define-layout.js';
 
-export interface MarkerFields {
+interface MarkerFields {
   position: Vec3;
   orientation?: Quaternion;
   scale?: Vec3;

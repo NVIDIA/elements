@@ -10,24 +10,15 @@
 
 Scene converts browser viewport coordinates into hits on rendered geometry. Use routed interaction events when a layer should respond continuously to pointer input. Use `scene.pick()` when application logic needs one explicit hit test without dispatching an interaction event.
 
-Add the `interactive` attribute to each layer that should receive automatic pointer hit testing. Layers aren't interactive by default. Keeping noninteractive layers out of the interaction pass avoids unnecessary picking work and prevents decorative geometry from receiving events. The event target depends on how the geometry enters the scene:
+Add the `interactive` attribute to each layer that should receive automatic pointer hit testing. Layers aren't interactive by default. Keeping noninteractive layers out of the interaction pass avoids unnecessary picking work and prevents decorative geometry from receiving events.
 
-| Geometry source                           | Canonical event target | Identify the result        |
-| ----------------------------------------- | ---------------------- | -------------------------- |
-| Declarative `nve-scene-marker` children   | The marker             | `event.detail.element`     |
-| Buffer-backed markers and streamed layers | The interactive layer  | `event.detail.target.kind` |
-
-## Declarative Interactions
-
-Declarative markers keep their native `click`, `pointerenter`, and `pointerleave` events. They also receive `nve-scene-click`, `nve-scene-pointerenter`, and `nve-scene-pointerleave` with a resolved spatial hit. Canonical events bubble through the layer and scene and cross shadow boundaries. The layer still needs the `interactive` attribute so Scene performs the hit test.
-
-Native enter and leave describe DOM boundaries. Canonical enter and leave describe the resolved scene target. An application that listens to both streams receives both compatible notifications.
+Scene dispatches `nve-scene-click`, `nve-scene-pointerenter`, and `nve-scene-pointerleave` on the owning layer. Instance records don't create DOM elements. Read `event.detail.target.index` for the submitted record index and `event.detail.featureId` for stable application identity.
 
 {% example 'nve-scene' 'Interactions' %}
 
-## Dynamic Interactions
+## Retained interactions
 
-Buffer-backed geometry doesn't create one DOM element for each record. Scene dispatches canonical interaction events on the owning layer. Read `event.detail.target` for explicit source-record semantics and `event.detail.worldPosition` for the captured world coordinate. When an interaction changes a bound record, call `layer.publish({ start, count })` to capture the changed range. See [Scene Record Buffers](/docs/scene/record-buffers/) for the complete publication contract.
+Read `event.detail.target` for explicit source-record semantics and `event.detail.worldPosition` for the captured world coordinate. When an interaction changes a bound record, call `layer.publish({ start, count })` to capture the changed range. See [Scene Record Buffers](/docs/scene/record-buffers/) for the complete publication contract.
 
 {% example 'nve-scene' 'InteractionsList' %}
 
@@ -43,12 +34,12 @@ if (hit) {
 }
 ```
 
-| Property        | Description                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------ |
-| `element`       | Declarative marker for marker children, or the owning layer for buffer-backed and layer geometry |
-| `layer`         | Layer that owns the rendered geometry                                                            |
-| `target`        | Discriminated source identity with an `index` for instances, points, segments, and triangles     |
-| `worldPosition` | Immutable `[x, y, z]` hit position in Scene world coordinates                                    |
+| Property        | Description                                                                                  |
+| --------------- | -------------------------------------------------------------------------------------------- |
+| `element`       | Layer that owns the rendered geometry                                                        |
+| `layer`         | Layer that owns the rendered geometry                                                        |
+| `target`        | Discriminated source identity with an `index` for instances, points, segments, and triangles |
+| `worldPosition` | Immutable `[x, y, z]` hit position in Scene world coordinates                                |
 
 Use the event coordinates directly. Scene accounts for the canvas position, size, and device pixel ratio when it resolves the hit.
 
@@ -73,9 +64,7 @@ function selectSource(hit: ScenePickHit) {
 }
 ```
 
-The hit, target, world position, and nested index tuples are immutable snapshots of submitted geometry. A later source, topology, marker membership, or marker ordering change doesn't reinterpret a pending result. Buffer-backed indices remain relative to that submitted application snapshot. Assign `featureIds` when application logic needs stable entity identity.
-
-For automatic events, Scene verifies a captured declarative marker before dispatch. Removing, hiding, invalidating, or moving the marker to another layer suppresses the obsolete event instead of sending it to the marker that later occupies the same index. Programmatic `scene.pick()` still resolves its submitted snapshot.
+The hit, target, world position, and nested index tuples are immutable snapshots of submitted geometry. A later source or topology change doesn't reinterpret a pending result. Instance indices remain relative to that submitted application snapshot. Assign feature IDs when application logic needs stable entity identity.
 
 When the pointer leaves or cancels over the Scene canvas, Scene dispatches one canonical leave event for the last hovered target and cancels pending hover work. A late readback can't restore the old hover. Pointer transitions to overlays or other content inside the same Scene don't create a false leave, and ordered down, up, and click work continues independently. Reentering the canvas starts a fresh hover query.
 
@@ -136,7 +125,7 @@ lines.addEventListener('nve-scene-click', event => {
 });
 ```
 
-Use unsigned 32-bit integers for IDs. A number assigns one ID to the entire layer. A `Uint32Array` maps one value to each logical target. Descriptors resolve target `i` from `values[offset + Math.floor(i / repeat) * stride]`, which supports per-vertex source IDs without expanding them into another array. Marker and instanced-mesh targets are instances; stream targets are points, line segments, or triangles. For connected lines, a segment uses its starting-vertex index.
+Use unsigned 32-bit integers for IDs. A number assigns one ID to the entire layer. A `Uint32Array` maps one value to each logical target. Descriptors resolve target `i` from `values[offset + Math.floor(i / repeat) * stride]`, which supports per-vertex source IDs without expanding them into another array. Primitive and instanced-mesh targets are instances; stream targets are points, line segments, or triangles. For connected lines, a segment uses its starting-vertex index.
 
 Scene copies the assigned array immediately. Mutate and reassign the producer array to publish a new identity generation. Applications remain responsible for reverse indexes and for updating existing colors when selection needs a visual treatment.
 

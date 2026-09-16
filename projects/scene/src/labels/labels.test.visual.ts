@@ -14,7 +14,7 @@ describe('scene labels visual runtime', () => {
 function template(theme: '' | 'dark'): string {
   return `<script type="module">
     document.documentElement.setAttribute('nve-theme', '${theme}');
-    import { LabelBuffer } from '@nvidia-elements/scene';
+    import { LabelBuffer } from '@nvidia-elements/scene/labels';
     import '@nvidia-elements/scene/camera/define.js';
     import '@nvidia-elements/scene/labels/define.js';
     const labels = new LabelBuffer({ capacity: 3 });

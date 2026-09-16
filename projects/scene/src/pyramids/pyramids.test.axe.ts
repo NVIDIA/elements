@@ -12,7 +12,7 @@ describe(ScenePyramids.metadata.tag, () => {
   it('should pass axe in a labeled scene composition', async () => {
     const fixture = await createFixture(html`
       <nve-scene aria-label="Pyramids scene">
-        <nve-scene-pyramids><nve-scene-marker position="[0,0,0]"></nve-scene-marker></nve-scene-pyramids>
+        <nve-scene-pyramids source='[{"position":[0,0,0]}]'></nve-scene-pyramids>
       </nve-scene>
     `);
     await elementIsStable(required(fixture.querySelector(ScenePyramids.metadata.tag), 'Expected pyramids fixture.'));

@@ -978,7 +978,7 @@ describe(SceneRenderer.name, () => {
     resetSceneTesting();
   });
 
-  it('preserves the rendered marker identity while asynchronous readback settles', async () => {
+  it('preserves the rendered feature identity while asynchronous readback settles', async () => {
     const gpu = createAdvancedDevice();
     const mapResolvers: Array<() => void> = [];
     const mapAsync = vi.fn(() => new Promise<void>(resolve => mapResolvers.push(resolve)));
@@ -996,8 +996,6 @@ describe(SceneRenderer.name, () => {
     });
     const renderer = new SceneRenderer();
     const canvas = document.createElement('canvas');
-    const firstMarker = document.createElement('nve-scene-marker');
-    const secondMarker = document.createElement('nve-scene-marker');
     renderer.initialize(canvas, { device: gpu.device, format: 'bgra8unorm' });
     renderer.resize(20, 10);
     const item = createRenderItem({
@@ -1006,10 +1004,7 @@ describe(SceneRenderer.name, () => {
       kind: 'cube',
       transparent: false
     });
-    const rendered = {
-      ...item,
-      data: { ...item.data, markers: Object.freeze([firstMarker, secondMarker]) }
-    };
+    const rendered = item;
     renderer.render([rendered]);
     await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
     renderer.render([{ ...rendered, data: { ...rendered.data, uploadRanges: [] } }]);
@@ -1021,13 +1016,13 @@ describe(SceneRenderer.name, () => {
     renderer.render([
       {
         ...rendered,
-        data: { ...rendered.data, markers: Object.freeze([secondMarker, firstMarker]), uploadRanges: [] },
+        data: { ...rendered.data, uploadRanges: [] },
         featureIds: featureIdSnapshot(2710, 1842)
       }
     ]);
     mapResolvers[0]?.();
 
-    await expect(pick).resolves.toMatchObject({ featureId: 1842, marker: firstMarker, instanceIndex: 0 });
+    await expect(pick).resolves.toMatchObject({ featureId: 1842, instanceIndex: 0, layer: rendered.layer });
     renderer.disconnect();
     resetSceneTesting();
   });
@@ -1130,7 +1125,6 @@ describe(SceneRenderer.name, () => {
     const hit = await renderer.pick({ canvas, clientX: 2, clientY: 3, pixelX: 2, pixelY: 3 });
 
     expect(hit).toMatchObject({ instanceIndex: 0, layer: mesh.layer });
-    expect(hit?.marker).toBeUndefined();
     expect(gpu.draws.at(-1)?.vertexCount).toBe(3);
     renderer.disconnect();
     resetSceneTesting();

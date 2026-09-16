@@ -49,7 +49,8 @@ export const RenderLoad = {
       <output nve-text="code">paused</output>
     </section>
     <script type="module">
-      import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MARKER } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
@@ -110,7 +111,7 @@ export const RenderLoad = {
         const alpha = Number(alphaControl.value);
         const columns = Math.ceil(Math.sqrt(count));
         const spacing = 80 / columns;
-        const markers = new MarkerBuffer({ capacity: count });
+        const markers = new CubeBuffer({ capacity: count });
         const bytes = markers.mutableBytes;
         const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
         for (let index = 0; index < count; index += 1) {
@@ -217,7 +218,8 @@ export const UpdateStrategy = {
       <output nve-text="code">paused</output>
     </section>
     <script type="module">
-      import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MARKER } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/scene/define.js';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
@@ -284,7 +286,7 @@ export const UpdateStrategy = {
       function rebuild() {
         stop();
         const count = Number(countControl.value);
-        buffers = [new MarkerBuffer({ capacity: count }), new MarkerBuffer({ capacity: count })];
+        buffers = [new CubeBuffer({ capacity: count }), new CubeBuffer({ capacity: count })];
         for (const buffer of buffers) {
           initialize(buffer.mutableBytes, count);
           buffer.setCount(count);
@@ -404,7 +406,11 @@ export const ViewportScaling = {
       <output nve-text="code">paused</output>
     </section>
     <script type="module">
-      import { LINE_VERTEX, MARKER, TRIANGLE_VERTEX, LineVertexBuffer, MarkerBuffer, TriangleVertexBuffer } from '@nvidia-elements/scene';
+      import { LINE_VERTEX, MARKER, TRIANGLE_VERTEX } from '@nvidia-elements/scene';
+      import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
+      import { TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
+      import { SphereBuffer } from '@nvidia-elements/scene/spheres';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/lines/define.js';
@@ -553,7 +559,8 @@ export const ViewportScaling = {
       function createBuffer(name) {
         if (name === 'lines') return new LineVertexBuffer({ capacity: workloads[name].count });
         if (name === 'triangles') return new TriangleVertexBuffer({ capacity: workloads[name].count });
-        return new MarkerBuffer({ capacity: workloads[name].count });
+        if (name === 'spheres') return new SphereBuffer({ capacity: workloads[name].count });
+        return new CubeBuffer({ capacity: workloads[name].count });
       }
 
       function fillWorkload(name, buffer, tick) {
@@ -717,7 +724,8 @@ export const MemoryPressure = {
       <output nve-text="code" aria-live="polite">No pressure workload allocated.</output>
     </section>
     <script type="module">
-      import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MARKER } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/scene/define.js';
@@ -746,7 +754,7 @@ export const MemoryPressure = {
         const sceneCount = Number(sceneControl.value);
         const recordCount = Number(countControl.value);
         const sourceMode = sourceControl.value;
-        const markerBuffer = new MarkerBuffer({ capacity: recordCount });
+        const markerBuffer = new CubeBuffer({ capacity: recordCount });
         if (sourceMode === 'versioned') {
           for (let index = 0; index < recordCount; index += 1) {
             markerBuffer.set(index, {
@@ -855,7 +863,8 @@ export const LifecycleChurn = {
       <output nve-text="code" aria-live="polite">ready</output>
     </section>
     <script type="module">
-      import { MARKER, MarkerBuffer } from '@nvidia-elements/scene';
+      import { MARKER } from '@nvidia-elements/scene';
+      import { CubeBuffer } from '@nvidia-elements/scene/cubes';
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/cubes/define.js';
       import '@nvidia-elements/scene/scene/define.js';
@@ -883,7 +892,7 @@ export const LifecycleChurn = {
       };
 
       function createSource(count) {
-        const markers = new MarkerBuffer({ capacity: count });
+        const markers = new CubeBuffer({ capacity: count });
         const bytes = markers.mutableBytes;
         const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
         const positionOffset = MARKER.fields.position.offset;

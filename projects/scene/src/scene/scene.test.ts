@@ -11,6 +11,7 @@ import { writeLineVertex, writeMarker, writePoint, writeTriangleVertex } from '.
 import { takeHeightfieldLayerRenderData } from '../internal/heightfield/layer-state.js';
 import { takeModelLayerRenderData } from '../internal/model/layer-state.js';
 import { takePolygonLayerRenderData } from '../internal/polygon/layer-state.js';
+import { MarkerBuffer } from '../internal/markers/buffer.js';
 import type { Vec3 } from '../internal/types.js';
 import { SceneRenderer, type SceneRenderItem } from '../internal/rendering/renderer.js';
 import { SceneModel } from '../model/model.js';
@@ -36,7 +37,6 @@ import '../camera/define.js';
 import '../frame/define.js';
 import '../heightfield/define.js';
 import '../lines/define.js';
-import '../marker/define.js';
 import '../mesh/define.js';
 import '../model/define.js';
 import '../points/define.js';
@@ -482,9 +482,7 @@ describe(Scene.metadata.tag, () => {
       <nve-scene aria-label="Mesh scene">
         <nve-scene-frame id="frame" position="[1,0,0]">
           <nve-scene-mesh id="identity"></nve-scene-mesh>
-          <nve-scene-mesh id="instanced">
-            <nve-scene-marker></nve-scene-marker>
-          </nve-scene-mesh>
+          <nve-scene-mesh id="instanced" source="[{}]"></nve-scene-mesh>
           <nve-scene-mesh id="invalid"></nve-scene-mesh>
         </nve-scene-frame>
       </nve-scene>
@@ -517,16 +515,18 @@ describe(Scene.metadata.tag, () => {
     expect(gpu.devices[0]?.draws.length).toBeGreaterThan(initialDraws);
   });
 
-  it('should collect polygons as unlit frame-owned meshes with identity and marker instances', async () => {
+  it('should collect polygons as unlit frame-owned meshes with identity and source-backed instances', async () => {
     const gpu = configureFakeWebGPU();
     const render = vi.spyOn(SceneRenderer.prototype, 'render');
     const { element } = await createScene(html`
       <nve-scene aria-label="Polygon scene">
         <nve-scene-frame id="polygon-frame" position="[2,3,4]">
           <nve-scene-polygon id="identity" geometry='{"outer":[[0,0],[2,0],[2,2],[0,2]]}'></nve-scene-polygon>
-          <nve-scene-polygon id="instanced" geometry='{"outer":[[0,0],[1,0],[0,1]]}'>
-            <nve-scene-marker position="[1,0,0]"></nve-scene-marker>
-          </nve-scene-polygon>
+          <nve-scene-polygon
+            id="instanced"
+            geometry='{"outer":[[0,0],[1,0],[0,1]]}'
+            source='[{"position":[1,0,0]}]'
+          ></nve-scene-polygon>
         </nve-scene-frame>
       </nve-scene>
     `);
@@ -655,8 +655,9 @@ describe(Scene.metadata.tag, () => {
     const identity = createModel('identity', 'cube');
     const instanced = createModel('instanced', 'sphere');
     const innerModel = createModel('inner-model', 'cone');
-    const marker = document.createElement('nve-scene-marker');
-    instanced.append(marker);
+    const markers = new MarkerBuffer({ records: [{}] });
+    const marker = markers.at(0);
+    instanced.source = markers;
     frame.append(identity, instanced);
     inner.append(innerModel);
     await Promise.all([elementIsStable(outer), elementIsStable(inner)]);
@@ -711,7 +712,8 @@ describe(Scene.metadata.tag, () => {
       false
     );
 
-    marker.setAttribute('position', '[3,0,0]');
+    marker.position.set(3, 0, 0);
+    instanced.publish({ count: 1, start: 0 });
     await waitForAnimationFrames(2);
 
     frame.hidden = false;

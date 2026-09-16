@@ -29,12 +29,11 @@ function canvasWithRect(rect: Partial<DOMRect> = {}): HTMLCanvasElement {
   return canvas;
 }
 
-function result(layer: HTMLElement, marker?: HTMLElement): ScenePickResult {
+function result(layer: HTMLElement): ScenePickResult {
   return {
     clientX: 60,
     clientY: 30,
     layer,
-    marker,
     instanceIndex: 2,
     target: { index: 2, kind: 'instance' },
     worldPosition: [1, 2, 3]
@@ -75,14 +74,13 @@ describe('pick routing', () => {
   it('passes the selected scope to its typed driver', async () => {
     const canvas = canvasWithRect();
     const layer = document.createElement('div');
-    const marker = document.createElement('span');
     const scopes: Array<PickScope | undefined> = [];
     const driver = vi.fn((request: ScenePickRequest, scope: PickScope) => {
       expect(request.pixelX).toBe(0);
       scopes.push(scope);
-      return Promise.resolve(scopes.length === 1 ? result(layer, marker) : null);
+      return Promise.resolve(scopes.length === 1 ? result(layer) : null);
     });
-    await expect(requestScenePick({ driver, canvas, clientX: 10, clientY: 5 })).resolves.toEqual(result(layer, marker));
+    await expect(requestScenePick({ driver, canvas, clientX: 10, clientY: 5 })).resolves.toEqual(result(layer));
     await expect(
       requestScenePick({ driver, canvas, clientX: 10, clientY: 5, scope: 'interactive' })
     ).resolves.toBeNull();
@@ -92,12 +90,11 @@ describe('pick routing', () => {
 
   it('copies a result into a fresh immutable public hit', () => {
     const layer = document.createElement('div');
-    const marker = document.createElement('span');
-    const hit = copyPickHit({ ...result(layer, marker), featureId: 1842 });
+    const hit = copyPickHit({ ...result(layer), featureId: 1842 });
     expect(hit).toEqual({
       clientX: 60,
       clientY: 30,
-      element: marker,
+      element: layer,
       featureId: 1842,
       layer,
       target: { index: 2, kind: 'instance' },

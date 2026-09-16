@@ -9,7 +9,7 @@ describe('scene triangles visual runtime', () => {
     const pixel = await visualRunner.inspect(
       'scene-triangles-layer',
       `<nve-scene aria-label="triangles" style="width:512px;height:512px;background:rgb(0 0 0)"><nve-scene-camera behavior="orbit" target="[0,0,0]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera><nve-scene-triangles id="triangles"></nve-scene-triangles></nve-scene><script type="module">
-        import { TriangleVertexBuffer } from '@nvidia-elements/scene';
+        import { TriangleVertexBuffer } from '@nvidia-elements/scene/triangles';
         import '@nvidia-elements/scene/camera/define.js';
         import '@nvidia-elements/scene/triangles/define.js';
         const vertices = new TriangleVertexBuffer({ capacity: 6 });

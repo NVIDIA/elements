@@ -13,15 +13,15 @@ Scene is a curated, high-performance visualization foundation for operational ro
 
 {% install 'nve-scene' %}
 
-## Streaming marker instances
+## Streaming instances
 
-The `source` property accepts a matching record buffer. Use `publish()` to capture later source changes. See [Record Buffers](/docs/scene/record-buffers/) for marker and vertex construction, mutation, and cache guidance.
+The `source` property accepts a matching record buffer. Use `publish()` to capture later source changes. See [Record Buffers](/docs/scene/record-buffers/) for instance and vertex construction, mutation, and cache guidance.
 
 {% example 'nve-scene-cubes' 'Streaming' %}
 
 ## Overlapping volumes
 
-Scene geometry uses weighted blended order-independent transparency so intersecting translucent layers do not depend on document order. Cube markers support separate face and outline colors for readable volume boundaries.
+Scene geometry uses weighted blended order-independent transparency so intersecting translucent layers do not depend on document order. Cube records support separate face and outline colors for readable volume boundaries.
 
 {% example 'nve-scene-cubes' 'Volumes' %}
 

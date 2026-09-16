@@ -95,6 +95,10 @@ export function getPackedRecordKind(source: AnyPackedRecordSource): PackedRecord
   return external?.kind ?? sourceKind(source);
 }
 
+export function isExternalPackedRecordSource(value: unknown): value is ExternalPackedRecordSource {
+  return typeof value === 'object' && value !== null && externalSources.has(value);
+}
+
 function sourceKind(source: AnyPackedRecordSource): PackedRecordKind {
   return Reflect.get(source, PACKED_RECORD_SOURCE) as PackedRecordKind;
 }

@@ -11,9 +11,7 @@ describe('scene arrows visual runtime', () => {
       /* html */ `
         <nve-scene aria-label="arrows scene" style="width: 512px; height: 512px; background: rgb(0 0 0)">
           <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="8" polar-angle="0.9" azimuth="-0.75" projection="orthographic" frustum-height="3.5"></nve-scene-camera>
-          <nve-scene-frame position="[0,0,0]"><nve-scene-arrows>
-            <nve-scene-marker position="[0,0,0]" scale="[0.2,0.2,2]" color="#76b900"></nve-scene-marker>
-          </nve-scene-arrows></nve-scene-frame>
+          <nve-scene-frame position="[0,0,0]"><nve-scene-arrows source='[{"origin":[0,0,0],"vector":[0,0,2],"shaftDiameter":0.2,"color":"#76b900"}]'></nve-scene-arrows></nve-scene-frame>
         </nve-scene>
         <script type="module">
           import '@nvidia-elements/scene/arrows/define.js';

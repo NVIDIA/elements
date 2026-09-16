@@ -1,18 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-  LABEL,
-  LINE_VERTEX,
-  LabelBuffer,
-  LineVertexBuffer,
-  MARKER,
-  MarkerBuffer,
-  POINT,
-  PointBuffer,
-  TRIANGLE_VERTEX,
-  TriangleVertexBuffer
-} from '../dist/index.js';
+import { LABEL, LINE_VERTEX, MARKER, MarkerBuffer, POINT, TRIANGLE_VERTEX } from '../dist/index.js';
+import { CubeBuffer } from '../dist/cubes/index.js';
+import { LabelBuffer } from '../dist/labels/index.js';
+import { LineVertexBuffer } from '../dist/lines/index.js';
+import { PointBuffer } from '../dist/points/index.js';
+import { TriangleVertexBuffer } from '../dist/triangles/index.js';
 import '../dist/camera/define.js';
 import '../dist/cubes/define.js';
 import '../dist/frame/define.js';
@@ -199,7 +193,7 @@ if (profile.mode === 'layer-tracking') {
 }
 if (profile.mode === 'shader-coverage') {
   const directMarkers = document.createElement('nve-scene-cubes');
-  const directSource = new MarkerBuffer({ capacity: 2 });
+  const directSource = new CubeBuffer({ capacity: 2 });
   directSource.add({ color: [1, 1, 1, 1], outlineColor: [0, 0, 0, 1] });
   directSource.add({ color: [1, 1, 1, 0.5], outlineColor: [0, 0, 0, 0.5] });
   directMarkers.source = directSource;
@@ -225,7 +219,7 @@ const opaquePointSources = profile.translucent
 const translucentPointSources = profile.translucent
   ? pointSources
   : [createPointBuffer(profile.pointCount, 128, 0x1a2b3c4d), createPointBuffer(profile.pointCount, 128, 0x5e6f7788)];
-const markerSource = createMarkerBuffer(profile.markerCount, profile.translucent ? 128 : 255);
+const markerSource = createCubeBuffer(profile.markerCount, profile.translucent ? 128 : 255);
 const triangleSources = {
   opaque: createTriangleVertexBuffer(TRIANGLE_VERTEX_COUNT, 255),
   translucent: createTriangleVertexBuffer(TRIANGLE_VERTEX_COUNT, 128)
@@ -234,7 +228,7 @@ const lineSources = {
   opaque: createLineVertexBuffer(LINE_VERTEX_COUNT, 255),
   translucent: createLineVertexBuffer(LINE_VERTEX_COUNT, 128)
 };
-const meshMarkerSource = profileLayers.mesh ? createMarkerBuffer(2, 255) : null;
+const meshMarkerSource = profileLayers.mesh ? createGenericMarkerBuffer(2, 255) : null;
 if (profileLayers.mesh && meshMarkerSource) profileLayers.mesh.source = meshMarkerSource;
 
 let activePointSources = profile.translucent ? translucentPointSources : opaquePointSources;
@@ -911,12 +905,12 @@ async function shaderCoverageProbe() {
   const triangles = document.createElement('nve-scene-triangles');
   const lines = document.createElement('nve-scene-lines');
   const mesh = document.createElement('nve-scene-mesh');
-  const directSource = new MarkerBuffer({ capacity: 2 });
+  const directSource = new CubeBuffer({ capacity: 2 });
   directSource.add({ color: [1, 1, 1, 1], outlineColor: [0, 0, 0, 1] });
   directSource.add({ color: [1, 1, 1, 0.5], outlineColor: [0, 0, 0, 0.5] });
   markers.source = directSource;
   markers.interactive = true;
-  compactMarkers.source = createMarkerBuffer(SHADER_COVERAGE_COMPACT_MARKER_COUNT, 255);
+  compactMarkers.source = createCubeBuffer(SHADER_COVERAGE_COMPACT_MARKER_COUNT, 255);
   triangles.source = createTriangleVertexBuffer(3, 255);
   lines.topology = 'loop';
   lines.source = createLineVertexBuffer(4, 128);
@@ -1087,8 +1081,15 @@ function createVersionedPointBuffer(count) {
   return source;
 }
 
-function createMarkerBuffer(count, alpha) {
-  const source = new MarkerBuffer({ capacity: count });
+function createCubeBuffer(count, alpha) {
+  return fillMarkerBuffer(new CubeBuffer({ capacity: count }), count, alpha);
+}
+
+function createGenericMarkerBuffer(count, alpha) {
+  return fillMarkerBuffer(new MarkerBuffer({ capacity: count }), count, alpha);
+}
+
+function fillMarkerBuffer(source, count, alpha) {
   const bytes = source.mutableBytes;
   const view = new DataView(bytes.buffer);
   for (let index = 0; index < count; index += 1) {

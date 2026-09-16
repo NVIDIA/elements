@@ -7,6 +7,19 @@ import { MARKER } from '../layouts/built-ins.js';
 import { MarkerBuffer } from './buffer.js';
 
 describe('marker buffer', () => {
+  it('seeds records with inferred or spare capacity', () => {
+    const records = [{ featureId: 7, position: [1, 2, 3] }] as const;
+    const inferred = new MarkerBuffer({ records });
+    const spare = new MarkerBuffer({ capacity: 2, records });
+    const incremental = new MarkerBuffer({ capacity: 1 });
+    incremental.add(records[0]);
+
+    expect(inferred).toMatchObject({ capacity: 1, count: 1 });
+    expect(spare).toMatchObject({ capacity: 2, count: 1 });
+    expect(inferred.mutableBytes).toEqual(incremental.mutableBytes);
+    expect(() => new MarkerBuffer({ capacity: 0, records })).toThrow(RangeError);
+  });
+
   it('should allocate fixed record capacity while tracking added records', () => {
     const markers = new MarkerBuffer({ capacity: 2 });
 
