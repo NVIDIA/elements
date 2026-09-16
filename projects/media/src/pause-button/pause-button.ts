@@ -17,7 +17,7 @@ import styles from './pause-button.css?inline';
  * @element nve-media-pause-button
  * @description Requests playback changes and submits paused media as a checkbox-style value.
  * @documentation https://nvidia.github.io/elements/docs/media/pause-button/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/pause-button
  * @slot - Optional custom icon content.
  * @cssprop --background

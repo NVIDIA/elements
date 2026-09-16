@@ -17,7 +17,7 @@ import styles from './mute-button.css?inline';
  * @element nve-media-mute-button
  * @description Requests muted changes and submits a checkbox-style value for muted media.
  * @documentation https://nvidia.github.io/elements/docs/media/mute-button/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/mute-button
  * @slot - Optional custom icon content.
  * @cssprop --background
