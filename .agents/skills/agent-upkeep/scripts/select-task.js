@@ -20,7 +20,8 @@ const GUARDRAILS = {
   maxChangedLines: 150,
   maxChangedFiles: 4,
   coverageThreshold: 90,
-  maxUncoveredLines: 40
+  maxUncoveredLines: 40,
+  modeAExcludeFixFromFileCap: true
 };
 
 const TASK_ROTATION = ['coverage', 'lint', 'bug'];
