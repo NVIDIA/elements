@@ -49,7 +49,7 @@ describe('noDeprecatedAttributes', () => {
       valid: [
         '<nve-badge></nve-badge>',
         '<nve-badge status="success"></nve-badge>',
-        `<nve-badge status=${'success'}></nve-badge>`,
+        `<nve-badge status=success></nve-badge>`,
         '<nve-button interaction="emphasis"></nve-button>',
         '<nve-button container="flat" interaction="destructive"></nve-button>',
         '<nve-combobox tag-layout="hidden"></nve-combobox>',

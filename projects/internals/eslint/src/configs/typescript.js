@@ -137,7 +137,7 @@ const config = {
     '@typescript-eslint/no-useless-default-assignment': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-extraneous-class': 'off',
-    '@typescript-eslint/no-unnecessary-template-expression': 'off',
+    '@typescript-eslint/no-unnecessary-template-expression': 'error',
     '@typescript-eslint/no-deprecated': 'off',
     '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
     '@typescript-eslint/no-unnecessary-type-conversion': 'error',

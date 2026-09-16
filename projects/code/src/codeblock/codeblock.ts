@@ -143,7 +143,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
     if (this.highlight) {
       const linesToHighlight = this.#getLinesToHighlight();
       const lines = this.formattedCode.split('\n').map((line, index) => {
-        let span = `${line}`;
+        let span = line;
         if (linesToHighlight.includes(index + 1)) {
           let wrapped = line;
           // fix for highlightjs multi-line comments
