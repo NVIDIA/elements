@@ -18,7 +18,7 @@ import styles from './volume-range.css?inline';
  * @element nve-media-volume-range
  * @description Sets native media volume and submits the current volume as a numeric form value.
  * @documentation https://nvidia.github.io/elements/docs/media/volume-range/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/volume-range
  * @cssprop --background
  * @cssprop --track-background

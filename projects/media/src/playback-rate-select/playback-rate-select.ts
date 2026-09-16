@@ -19,7 +19,7 @@ const defaultRates = [0.5, 1.0, 1.5, 2.0];
  * @element nve-media-playback-rate-select
  * @description Selects native media playback rate and submits the selected rate as a string form value.
  * @documentation https://nvidia.github.io/elements/docs/media/playback-rate-select/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/playback-rate-select
  * @cssprop --background
  * @cssprop --border

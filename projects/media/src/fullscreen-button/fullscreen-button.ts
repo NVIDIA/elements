@@ -17,7 +17,7 @@ import styles from './fullscreen-button.css?inline';
  * @element nve-media-fullscreen-button
  * @description Requests controller full-screen changes without adding form submission state.
  * @documentation https://nvidia.github.io/elements/docs/media/fullscreen-button/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/fullscreen-button
  * @slot - Optional custom icon content.
  * @cssprop --background

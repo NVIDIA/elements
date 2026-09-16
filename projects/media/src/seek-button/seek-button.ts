@@ -15,7 +15,7 @@ import styles from './seek-button.css?inline';
  * @element nve-media-seek-button
  * @description Sends absolute or relative seek commands without adding form submission state.
  * @documentation https://nvidia.github.io/elements/docs/media/seek-button/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/seek-button
  * @slot - Optional custom icon content.
  * @cssprop --background

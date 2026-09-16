@@ -19,7 +19,7 @@ import styles from './time-range.css?inline';
  * @element nve-media-time-range
  * @description Scrubs finite media time and submits the current time as a numeric form value.
  * @documentation https://nvidia.github.io/elements/docs/media/time-range/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/time-range
  * @cssprop --background
  * @cssprop --buffer-background

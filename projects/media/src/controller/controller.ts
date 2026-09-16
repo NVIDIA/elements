@@ -33,7 +33,7 @@ const mediaEventTypes = [
  * @element nve-media-controller
  * @description Wraps consumer-owned audio or video and applies media commands from external controls.
  * @documentation https://nvidia.github.io/elements/docs/media/controller/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/controller
  * @command --play - Play the slotted media element.
  * @command --pause - Pause the slotted media element.
