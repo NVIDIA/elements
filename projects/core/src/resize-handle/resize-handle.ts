@@ -10,7 +10,7 @@ import {
   I18nController,
   useStyles,
   type Gesture,
-  type UnhandledPointerInput
+  type GestureInput
 } from '@nvidia-elements/core/internal';
 import styles from './resize-handle.css?inline';
 
@@ -90,21 +90,19 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     super();
     this.value = this.value ?? 50;
     this.#offset = this.valueAsNumber;
-    this.#gestureController = new GestureController(this, {
-      getCapabilities: () => ({ drag: true, pan: false, pinch: false, wheel: false })
-    });
+    this.#gestureController = new GestureController(this, { touchAction: 'none' });
   }
 
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'none';
     this.addEventListener('nve-gesture', this.#handleGesture as EventListener);
-    this.addEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
+    this.addEventListener('nve-gesture-input', this.#handleGestureInput as EventListener);
   }
 
   disconnectedCallback() {
     this.removeEventListener('nve-gesture', this.#handleGesture as EventListener);
-    this.removeEventListener('nve-pointer-input', this.#handlePointerInput as EventListener);
+    this.removeEventListener('nve-gesture-input', this.#handleGestureInput as EventListener);
     this.#cancelDrag();
     super.disconnectedCallback();
   }
@@ -126,18 +124,15 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     this.#setChange(value);
   }
 
-  #handlePointerInput = (event: CustomEvent<UnhandledPointerInput>): void => {
-    if (
-      event.detail.kind === 'pointerdown' &&
-      event.detail.event.button === 0 &&
-      event.detail.event.isPrimary &&
-      this.#dragPointerId === undefined
-    ) {
-      this.#dragStart(event.detail.event.pointerId);
+  #handleGestureInput = (event: CustomEvent<GestureInput>): void => {
+    const input = event.detail;
+    if (input.kind === 'pointerdown') {
+      const canStartDrag = input.event.button === 0 && input.event.isPrimary && this.#dragPointerId === undefined;
+      if (canStartDrag && input.claim({ kind: 'drag' })) this.#dragStart(input.event.pointerId);
+    } else if (input.kind === 'pointerend' && input.event.pointerId === this.#dragPointerId) {
+      if (input.interrupted) this.#cancelDrag();
+      else this.#dragEnd();
     }
-    if (event.detail.event.pointerId !== this.#dragPointerId) return;
-    if (event.detail.kind === 'pointerup') this.#dragEnd();
-    if (event.detail.kind === 'pointercancel') this.#cancelDrag();
   };
 
   #handleGesture = (event: CustomEvent<Gesture<undefined>>): void => {

@@ -32,12 +32,16 @@ describe(ResizeHandle.metadata.tag, () => {
     expect(customElements.get(ResizeHandle.metadata.tag)).toBeDefined();
   });
 
-  it('should proivide fallback aria-label', async () => {
+  it('should prevent native touch panning on its gesture surface', () => {
+    expect(element.style.touchAction).toBe('none');
+  });
+
+  it('should provide fallback aria-label', async () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('input').ariaLabel).toBe('resize');
   });
 
-  it('should proivide custom aria-label', async () => {
+  it('should provide custom aria-label', async () => {
     element.ariaLabel = 'custom resize';
     element.requestUpdate();
     await elementIsStable(element);
@@ -135,18 +139,23 @@ describe(ResizeHandle.metadata.tag, () => {
     expect(setPointerCapture).toHaveBeenCalledWith(3);
   });
 
-  it('should ignore secondary and nonprimary pointerdown events', () => {
+  it('should neither capture nor activate for right, auxiliary, and nonprimary pointers', () => {
+    const setPointerCapture = vi.spyOn(element, 'setPointerCapture').mockImplementation(() => {});
     [
       { button: 1, isPrimary: true, pointerId: 1 },
-      { button: 0, isPrimary: false, pointerId: 2 }
+      { button: 2, isPrimary: true, pointerId: 2 },
+      { button: 0, isPrimary: false, pointerId: 3 }
     ].forEach(init => {
       element.dispatchEvent(pointerEvent('pointerdown', init));
       expect(input.step).toBe('10');
       expect(element.matches(':not(:state(active))')).toBe(true);
     });
+    expect(setPointerCapture).not.toHaveBeenCalled();
 
-    element.dispatchEvent(pointerEvent('pointerdown', { button: 0, isPrimary: true, pointerId: 3 }));
+    element.dispatchEvent(pointerEvent('pointerdown', { button: 0, isPrimary: true, pointerId: 4 }));
     expect(element.matches(':state(active)')).toBe(true);
+    expect(setPointerCapture).toHaveBeenCalledOnce();
+    expect(setPointerCapture).toHaveBeenCalledWith(4);
   });
 
   it('should ignore pointer input before its internal range is ready', async () => {
@@ -248,18 +257,41 @@ describe(ResizeHandle.metadata.tag, () => {
     expect(changeListener).toHaveBeenCalledOnce();
   });
 
-  it('should restore drag state after a matching pointercancel and support subsequent drags', async () => {
-    element.step = 5;
-    await elementIsStable(element);
+  it.each(['pointercancel', 'lostpointercapture'] as const)(
+    'should restore drag state after %s and support subsequent drags',
+    async type => {
+      element.step = 5;
+      await elementIsStable(element);
+      const changeListener = vi.fn();
+      element.addEventListener('change', changeListener);
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent(type, { pointerId: 1 }));
+
+      expect(element.valueAsNumber).toBe(60);
+      expect(input.step).toBe('5');
+      expect(element.matches(':not(:state(active))')).toBe(true);
+      expect(changeListener).not.toHaveBeenCalled();
+
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 2 }));
+      expect(element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 2 }))).toBe(
+        false
+      );
+      expect(element.valueAsNumber).toBe(70);
+    }
+  );
+
+  it('should dispatch a final change when released buttons end a drag', () => {
+    const changeListener = vi.fn();
+    element.addEventListener('change', changeListener);
     element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
-    element.dispatchEvent(pointerEvent('pointercancel', { pointerId: 1 }));
+    element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 1 }));
+    element.dispatchEvent(pointerEvent('pointermove', { buttons: 0, clientX: 10, clientY: 10, pointerId: 1 }));
 
-    expect(input.step).toBe('5');
-    expect(element.matches(':not(:state(active))')).toBe(true);
-
-    element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 2 }));
-    expect(element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 2 }))).toBe(false);
     expect(element.valueAsNumber).toBe(60);
+    expect(input.step).toBe('10');
+    expect(element.matches(':not(:state(active))')).toBe(true);
+    expect(changeListener).toHaveBeenCalledOnce();
   });
 
   it('should support snap to value on double click', async () => {
