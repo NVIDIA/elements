@@ -14,7 +14,7 @@ This project includes the following bundled third-party software:
 - @modelcontextprotocol/server v2.0.0 [MIT]
   Copyright: Anthropic, PBC (https://anthropic.com)
 
-- adm-zip v0.6.0 [MIT]
+- adm-zip v0.6.1 [MIT]
   Copyright: Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 
 - archiver v8.0.0 [MIT]
@@ -59,7 +59,7 @@ The following bundled components are provided under the MIT license:
 @inquirer/prompts v8.7.0 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
-adm-zip v0.6.0 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
+adm-zip v0.6.1 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
 eslint v10.10.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
