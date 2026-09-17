@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ProjectElement } from '@internals/metadata';
 import { ToolError } from '../internal/tools.js';
 import {
@@ -706,5 +706,71 @@ describe('framework file content details', () => {
     const files = createVueFiles('<nve-button></nve-button>', elements, {});
     expect(files['index.ts'].content).toContain('count: ref(0)');
     expect(files['index.ts'].content).toContain('setup()');
+  });
+});
+
+describe('createPlaygroundURL with playground base url', () => {
+  const originalPlaygroundBaseUrl = process.env.ELEMENTS_PLAYGROUND_BASE_URL;
+  const playgroundBaseUrl = 'https://playground.example.com';
+
+  async function loadUtils() {
+    process.env.ELEMENTS_PLAYGROUND_BASE_URL = playgroundBaseUrl;
+    vi.resetModules();
+    return import('./utils.js');
+  }
+
+  afterEach(() => {
+    if (originalPlaygroundBaseUrl === undefined) {
+      delete process.env.ELEMENTS_PLAYGROUND_BASE_URL;
+    } else {
+      process.env.ELEMENTS_PLAYGROUND_BASE_URL = originalPlaygroundBaseUrl;
+    }
+
+    vi.resetModules();
+  });
+
+  it('should include configured origin, name, theme, and referer', async () => {
+    const { createPlaygroundURL: createConfiguredPlaygroundURL } = await loadUtils();
+    const result = createConfiguredPlaygroundURL('<nve-button></nve-button>', [], {
+      name: 'demo',
+      theme: 'light',
+      referer: 'https://www.nvidia.com'
+    });
+
+    expect(result).toContain(
+      `${playgroundBaseUrl}/?version=1&layout=vertical-split&name=demo&theme=light&file=index.html&ref=https://www.nvidia.com&files=`
+    );
+  });
+
+  it('should omit optional query params when they are empty', async () => {
+    const { createPlaygroundURL: createConfiguredPlaygroundURL } = await loadUtils();
+    const result = createConfiguredPlaygroundURL('<nve-button></nve-button>', []);
+
+    expect(result).toContain(`${playgroundBaseUrl}/?version=1&layout=vertical-split&file=index.html&files=`);
+    expect(result.includes('&name=')).toBe(false);
+    expect(result.includes('&theme=')).toBe(false);
+    expect(result.includes('&ref=')).toBe(false);
+  });
+
+  it('should reject playground URLs that exceed the character limit', async () => {
+    const { createPlaygroundURL: createConfiguredPlaygroundURL, MAX_PLAYGROUND_URL_LENGTH: maxUrlLength } =
+      await loadUtils();
+    const { ToolError: ReloadedToolError } = await import('../internal/tools.js');
+    const bytes = createDeterministicPseudorandomBytes(200_000);
+    const attributeValue = Buffer.from(bytes).toString('base64').replace(/[+/=]/g, 'A');
+    const template = `<div data-value="${attributeValue}">content</div>`;
+
+    let thrown: unknown;
+    try {
+      createConfiguredPlaygroundURL(template, []);
+    } catch (error) {
+      thrown = error;
+    }
+
+    expect(thrown).toBeInstanceOf(ReloadedToolError);
+    expect(thrown).toHaveProperty(
+      'message',
+      `Playground content produces a URL that exceeds the ${maxUrlLength}-character limit.`
+    );
   });
 });
