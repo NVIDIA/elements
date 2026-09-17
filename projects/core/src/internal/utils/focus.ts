@@ -49,6 +49,16 @@ export function getActiveElement(root: Document | ShadowRoot = globalThis.docume
   }
 }
 
+/** Returns whether an element itself owns focus in its immediate document or shadow root. */
+export function isImmediateRootActiveElement(element: Element): boolean {
+  const root = element.getRootNode();
+  return hasActiveElement(root) && root.activeElement === element;
+}
+
+function hasActiveElement(root: Node): root is Node & { readonly activeElement: Element | null } {
+  return 'activeElement' in root;
+}
+
 export function focusElement(element: HTMLElement) {
   if (element && !isFocusable(element)) {
     element.setAttribute('tabindex', '-1');

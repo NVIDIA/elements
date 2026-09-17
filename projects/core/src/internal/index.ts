@@ -7,6 +7,7 @@
 export * from './controllers/audit.controller.js';
 export * from './controllers/gesture.controller.js';
 export * from './controllers/i18n.controller.js';
+export * from './controllers/key-state.controller.js';
 export * from './controllers/keynav-grid.controller.js';
 export * from './controllers/keynav-list.controller.js';
 export * from './controllers/keynav-spatial.controller.js';
@@ -37,4 +38,5 @@ export * from './utils/objects.js';
 export * from './utils/strings.js';
 export * from './utils/focus.js';
 export * from './utils/keynav.js';
+export * from './utils/numeric.js';
 export * from './utils/supports.js';

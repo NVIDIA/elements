@@ -36,12 +36,14 @@ describe('KeyNavigationSpatialController', () => {
   let fixture: HTMLElement;
   let host: KeyNavigationSpatialControllerTestHost;
   let events: CustomEvent<SpatialKeyCommand>[];
+  let enabled: boolean;
 
   beforeEach(async () => {
     fixture = await createFixture(html`<div></div>`);
     host = document.createElement(tag) as KeyNavigationSpatialControllerTestHost;
     events = [];
-    new KeyNavigationSpatialController(host);
+    enabled = true;
+    new KeyNavigationSpatialController(host, { isEnabled: () => enabled });
     host.addEventListener('nve-key', event => events.push(event as CustomEvent<SpatialKeyCommand>));
     fixture.append(host);
   });
@@ -102,6 +104,14 @@ describe('KeyNavigationSpatialController', () => {
     host.attachShadow({ mode: 'open' }).append(shadowChild);
 
     shadowChild.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, composed: true, key: 'ArrowRight' }));
+
+    expect(events).toEqual([]);
+  });
+
+  it('does not dispatch private key events while disabled', () => {
+    enabled = false;
+
+    host.dispatchEvent(new KeyboardEvent('keydown', { cancelable: true, key: '+' }));
 
     expect(events).toEqual([]);
   });

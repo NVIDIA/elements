@@ -7,6 +7,10 @@ type SpatialKeyHost = ReactiveControllerHost & HTMLElement;
 
 export type SpatialKeyHandling = 'handled' | 'ignored';
 
+export interface KeyNavigationSpatialControllerOptions {
+  readonly isEnabled?: () => boolean;
+}
+
 export type SpatialKeyCommand =
   | {
       readonly ctrlKey: boolean;
@@ -26,9 +30,11 @@ export type SpatialKeyCommand =
 /** Converts direct-host keyboard input into spatial direction and zoom commands. */
 export class KeyNavigationSpatialController implements ReactiveController {
   readonly #host: SpatialKeyHost;
+  readonly #isEnabled: () => boolean;
 
-  constructor(host: SpatialKeyHost) {
+  constructor(host: SpatialKeyHost, { isEnabled = () => true }: KeyNavigationSpatialControllerOptions = {}) {
     this.#host = host;
+    this.#isEnabled = isEnabled;
     host.addController(this);
   }
 
@@ -41,7 +47,7 @@ export class KeyNavigationSpatialController implements ReactiveController {
   }
 
   #handleKeydown = (event: KeyboardEvent): void => {
-    if (event.composedPath()[0] !== this.#host) return;
+    if (!this.#isEnabled() || event.composedPath()[0] !== this.#host) return;
     const command = getSpatialKeyCommand(event);
     if (!command) return;
     this.#host.dispatchEvent(

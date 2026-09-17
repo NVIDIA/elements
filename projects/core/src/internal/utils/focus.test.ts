@@ -10,6 +10,7 @@ import {
   getActiveElement,
   initializeKeyListItems,
   isFocusable,
+  isImmediateRootActiveElement,
   isSimpleFocusable,
   onListboxActivate,
   setActiveKeyListItem
@@ -216,6 +217,78 @@ describe('getActiveElement', () => {
     fixture = await createFixture(html`<div>no focusable</div>`);
     const result = getActiveElement();
     expect(result === document.body || result === null).toBe(true);
+  });
+});
+
+describe('isImmediateRootActiveElement', () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('returns true for an element focused in the document', async () => {
+    fixture = await createFixture(html`<button>focus me</button>`);
+    const button = fixture.querySelector('button')!;
+
+    button.focus();
+
+    expect(isImmediateRootActiveElement(button)).toBe(true);
+  });
+
+  it('returns false for an unfocused element', async () => {
+    fixture = await createFixture(html`<button>unfocused</button><button>focused</button>`);
+    const [unfocused, focused] = Array.from(fixture.querySelectorAll('button'));
+
+    focused.focus();
+
+    expect(isImmediateRootActiveElement(unfocused)).toBe(false);
+  });
+
+  it('returns true for an element focused directly in an enclosing shadow root', async () => {
+    fixture = await createFixture(html`<div></div>`);
+    const shadowHost = fixture.querySelector('div')!;
+    const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+    const button = document.createElement('button');
+    shadowRoot.append(button);
+
+    button.focus();
+
+    expect(isImmediateRootActiveElement(button)).toBe(true);
+  });
+
+  it('returns false for a containing element when a descendant owns focus', async () => {
+    fixture = await createFixture(html`<div><button>focus me</button></div>`);
+    const container = fixture.querySelector('div')!;
+    const button = fixture.querySelector('button')!;
+
+    button.focus();
+
+    expect(isImmediateRootActiveElement(container)).toBe(false);
+  });
+
+  it('does not treat focus in a descendant shadow tree as focus on its container', async () => {
+    fixture = await createFixture(html`<div></div>`);
+    const container = fixture.querySelector('div')!;
+    const descendantHost = document.createElement('div');
+    const shadowRoot = descendantHost.attachShadow({ mode: 'open' });
+    const button = document.createElement('button');
+    shadowRoot.append(button);
+    container.append(descendantHost);
+
+    button.focus();
+
+    expect(getActiveElement()).toBe(button);
+    expect(isImmediateRootActiveElement(container)).toBe(false);
+  });
+
+  it('returns false for an element in a detached document fragment', async () => {
+    fixture = await createFixture(html`<div></div>`);
+    const fragment = document.createDocumentFragment();
+    const button = document.createElement('button');
+    fragment.append(button);
+
+    expect(isImmediateRootActiveElement(button)).toBe(false);
   });
 });
 
