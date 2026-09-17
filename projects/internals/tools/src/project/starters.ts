@@ -57,6 +57,8 @@ const cdnStampTargets = new Map<string, string>([
   ['go-htmx', 'src/index.html']
 ]);
 
+const starterExportTransforms = new Map<string, (dist: string) => Promise<void>>([['angular', exportAngularConfig]]);
+
 export type Starter =
   | 'angular'
   | 'bundles'
@@ -160,10 +162,15 @@ export const startersData = {
 export async function archiveStarter(projectDir: string, outDir: string) {
   const dist = join(outDir, projectDir);
   await copyProject(projectDir, dist);
+  await starterExportTransforms.get(projectDir)?.(dist);
   await stampStarterCDNVersionFiles(projectDir, dist);
   writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(join(dist, 'package.json'), JSON.stringify(packageJSON, undefined, 2));
+  const workspaceManifest = await exportStarterWorkspaceManifest();
+  if (workspaceManifest) {
+    await writeFile(join(dist, 'pnpm-workspace.yaml'), workspaceManifest);
+  }
   await writeFile(join(dist, '.npmrc'), 'registry=https://registry.npmjs.org/');
   await zipProject(dist);
 }
@@ -188,6 +195,34 @@ function copyProject(projectDir: string, dist: string) {
     recursive: true,
     filter: src => !ignoreDirs.has(basename(src))
   });
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+export function normalizeAngularConfigForExport(content: string) {
+  const config = JSON.parse(content) as unknown;
+  let production = config;
+  let path = 'angular.json';
+  for (const key of ['projects', 'angular-starter', 'architect', 'build', 'configurations', 'production']) {
+    path += `.${key}`;
+    if (!isRecord(production) || !isRecord(production[key])) {
+      throw new Error(`Expected an object at ${path}`);
+    }
+    production = production[key];
+  }
+  if (!isRecord(production)) {
+    throw new Error(`Expected an object at ${path}`);
+  }
+  production.baseHref = '/';
+  return `${JSON.stringify(config, undefined, 2)}\n`;
+}
+
+async function exportAngularConfig(dist: string) {
+  const configPath = join(dist, 'angular.json');
+  const content = await readFile(configPath, 'utf8');
+  await writeFile(configPath, normalizeAngularConfigForExport(content));
 }
 
 function escapeRegExp(value: string) {
@@ -251,6 +286,21 @@ async function exportPackageFromWorkspace(projectDir: string) {
     }
   );
   return exportable;
+}
+
+async function exportStarterWorkspaceManifest() {
+  const workspace = (await readWorkspaceManifest(getRepoWorkspaceDir())) as
+    | { allowBuilds?: Record<string, boolean> }
+    | undefined;
+  return serializeStarterWorkspaceManifest(workspace?.allowBuilds);
+}
+
+export function serializeStarterWorkspaceManifest(allowBuilds: Record<string, boolean> | undefined) {
+  if (!allowBuilds || Object.keys(allowBuilds).length === 0) return '';
+  const entries = Object.entries(allowBuilds)
+    .sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0))
+    .map(([packageName, allowed]) => `  ${JSON.stringify(packageName)}: ${allowed}`);
+  return `allowBuilds:\n${entries.join('\n')}\n`;
 }
 
 export function removeWireitScripts(exportable: {

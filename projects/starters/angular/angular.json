@@ -25,6 +25,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/elements/starters/angular/",
               "budgets": [
                 {
                   "type": "initial",

@@ -12,6 +12,8 @@ import {
   execPackageManager,
   getDependencyInstallFailureMessage,
   getRequiredNPMClient,
+  normalizeAngularConfigForExport,
+  serializeStarterWorkspaceManifest,
   stampStarterCDNVersions,
   removeWireitScripts,
   startStarter
@@ -146,6 +148,31 @@ describe('removeWireitScripts', () => {
     expect(result.wireit).toBeUndefined();
   });
 
+  it('should export commands without Wireit environment helpers', () => {
+    const packageJson = {
+      scripts: {
+        preview: 'wireit'
+      },
+      wireit: {
+        preview: {
+          command: 'vite preview',
+          env: {
+            PAGES_BASE_URL: {
+              external: true,
+              default: '/elements/'
+            }
+          }
+        }
+      }
+    };
+
+    const result = removeWireitScripts(packageJson);
+
+    expect(result.scripts.preview).toBe('vite preview');
+    expect(JSON.stringify(result)).not.toContain('run-with-environment');
+    expect(result.wireit).toBeUndefined();
+  });
+
   it('should remove exported wireit scripts without commands', () => {
     const packageJson = {
       scripts: {
@@ -219,6 +246,63 @@ describe('removeWireitScripts', () => {
     const result = removeWireitScripts(packageJson);
     expect(result.scripts.test).toBe('vitest');
     expect(result.scripts.e2e).toBe('playwright test');
+  });
+});
+
+describe('serializeStarterWorkspaceManifest', () => {
+  it('should export reviewed build approvals in deterministic order', () => {
+    expect(
+      serializeStarterWorkspaceManifest({
+        esbuild: true,
+        '@parcel/watcher': true,
+        Zeta: true,
+        alpha: true,
+        untrusted: false
+      })
+    ).toBe(`allowBuilds:
+  "@parcel/watcher": true
+  "Zeta": true
+  "alpha": true
+  "esbuild": true
+  "untrusted": false
+`);
+  });
+
+  it('should omit an empty build policy', () => {
+    expect(serializeStarterWorkspaceManifest(undefined)).toBe('');
+    expect(serializeStarterWorkspaceManifest({})).toBe('');
+  });
+});
+
+describe('normalizeAngularConfigForExport', () => {
+  it('should reset the production base href for consumers', () => {
+    const config = {
+      projects: {
+        'angular-starter': {
+          architect: {
+            build: {
+              configurations: {
+                production: {
+                  baseHref: '/elements/starters/angular/',
+                  budgets: [{ type: 'initial' }]
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const result = JSON.parse(normalizeAngularConfigForExport(JSON.stringify(config)));
+
+    expect(result.projects['angular-starter'].architect.build.configurations.production).toEqual({
+      baseHref: '/',
+      budgets: [{ type: 'initial' }]
+    });
+  });
+
+  it('should reject an unexpected Angular configuration shape', () => {
+    expect(() => normalizeAngularConfigForExport('{}')).toThrow('angular.json.projects');
   });
 });
 

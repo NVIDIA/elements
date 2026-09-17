@@ -36,7 +36,7 @@
   },
   "wireit": {
     "preview": {
-      "command": "cd dist && pnpm exec vite preview --base=elements/starters/nextjs",
+      "command": "pnpm exec vite preview --outDir=dist --base=/elements/starters/nextjs/",
       "dependencies": [
         "build"
       ]
