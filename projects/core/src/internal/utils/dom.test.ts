@@ -7,6 +7,7 @@ import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import {
   getChildren,
+  getCustomElementRegistry,
   getAttributeChanges,
   getAttributeListChanges,
   appendRootNodeStyle,
@@ -54,6 +55,12 @@ class TestComponent extends LitElement {
       <button>five</button>
     `;
   }
+}
+
+function elementWithRoot(root: Node): Element {
+  const element = document.createElement('div');
+  vi.spyOn(element, 'getRootNode').mockReturnValue(root);
+  return element;
 }
 
 describe('getChildren', () => {
@@ -105,6 +112,85 @@ describe('getChildren', () => {
     expect(children.length).toBe(1);
     // The slot gets content from light DOM, not fallback content
     expect(children[0].textContent).toBe('two');
+  });
+});
+
+describe('getCustomElementRegistry', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it('returns the scoped registry provided by the immediate root', () => {
+    class ScopedCustomElementRegistry {}
+
+    const registry = new ScopedCustomElementRegistry() as unknown as CustomElementRegistry;
+    const root = { customElementRegistry: registry } as unknown as Node;
+    vi.stubGlobal('CustomElementRegistry', ScopedCustomElementRegistry);
+
+    expect(getCustomElementRegistry(elementWithRoot(root))).toBe(registry);
+  });
+
+  it('falls back to the global registry when the root does not provide one', () => {
+    const registry = {} as CustomElementRegistry;
+    vi.stubGlobal('customElements', registry);
+
+    expect(getCustomElementRegistry(elementWithRoot({} as Node))).toBe(registry);
+  });
+
+  it("falls back to the element document's registry", () => {
+    const iframe = document.createElement('iframe');
+    document.body.append(iframe);
+    try {
+      const iframeDocument = iframe.contentDocument;
+      const iframeRegistry = iframe.contentWindow?.customElements;
+      expect(iframeDocument).not.toBeNull();
+      expect(iframeRegistry).toBeDefined();
+      if (!iframeDocument || !iframeRegistry) return;
+
+      expect(getCustomElementRegistry(iframeDocument.createElement('div'))).toBe(iframeRegistry);
+    } finally {
+      iframe.remove();
+    }
+  });
+
+  it("recognizes a scoped registry from the element document's realm", () => {
+    const iframe = document.createElement('iframe');
+    document.body.append(iframe);
+    try {
+      const iframeDocument = iframe.contentDocument;
+      const Registry = iframe.contentWindow?.CustomElementRegistry;
+      expect(iframeDocument).not.toBeNull();
+      expect(Registry).toBeDefined();
+      if (!iframeDocument || !Registry) return;
+      const registry = Object.create(Registry.prototype) as CustomElementRegistry;
+      const element = iframeDocument.createElement('div');
+      vi.spyOn(element, 'getRootNode').mockReturnValue({ customElementRegistry: registry } as unknown as Node);
+
+      expect(getCustomElementRegistry(element)).toBe(registry);
+    } finally {
+      iframe.remove();
+    }
+  });
+
+  it.each([
+    ['null', null],
+    ['an unsupported value', {}]
+  ])('falls back to the global registry when the root provides %s', (_description, customElementRegistry) => {
+    class ScopedCustomElementRegistry {}
+
+    const registry = {} as CustomElementRegistry;
+    vi.stubGlobal('CustomElementRegistry', ScopedCustomElementRegistry);
+    vi.stubGlobal('customElements', registry);
+
+    expect(getCustomElementRegistry(elementWithRoot({ customElementRegistry } as unknown as Node))).toBe(registry);
+  });
+
+  it('returns undefined when no global registry is available', () => {
+    vi.stubGlobal('CustomElementRegistry', undefined);
+    vi.stubGlobal('customElements', undefined);
+
+    expect(getCustomElementRegistry(elementWithRoot({} as Node))).toBeUndefined();
   });
 });
 

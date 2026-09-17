@@ -1,0 +1,26 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --_scale: 1;
+  --color: var(--nve-ref-border-color-muted);
+  --line-width: 1px;
+
+  position: absolute;
+  inset: 0;
+  contain: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+svg {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+
+path {
+  fill: none;
+  stroke: var(--color);
+  stroke-width: calc(var(--line-width) / var(--_scale));
+}

@@ -349,6 +349,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/toolbar/') ? 'highlighted selected' : ''}><a href="/docs/elements/toolbar/">Toolbar</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/tooltip/') ? 'highlighted selected' : ''}><a href="/docs/elements/tooltip/">Tooltip</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/tree/') ? 'highlighted selected' : ''}><a href="/docs/elements/tree/">Tree</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/viewport/') ? 'highlighted selected' : ''}><a href="/docs/elements/viewport/">Viewport</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted selected' : ''}><a href="/docs/elements/week/">Week</a></nve-tree-node>
   </nve-tree-node>
 

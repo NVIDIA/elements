@@ -133,6 +133,22 @@ export function parseTokenNumber(value: string) {
   return parseInt(value.includes('calc') ? value.split('*')[1]!.replace('px)', '').trim() : value, 10) || 0;
 }
 
+export function getCustomElementRegistry(element: Element): CustomElementRegistry | undefined {
+  const root = element.getRootNode();
+  const CustomElementRegistryConstructor =
+    element.ownerDocument.defaultView?.CustomElementRegistry ?? globalThis.CustomElementRegistry;
+  if (
+    CustomElementRegistryConstructor &&
+    'customElementRegistry' in root &&
+    root.customElementRegistry instanceof CustomElementRegistryConstructor
+  ) {
+    return root.customElementRegistry;
+  }
+  const documentRegistry = element.ownerDocument.defaultView?.customElements;
+  if (documentRegistry) return documentRegistry;
+  return typeof customElements === 'undefined' ? undefined : customElements;
+}
+
 /** true if the browser supports scoped custom element registries */
 export const supportsScopedRegistry =
   globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype;

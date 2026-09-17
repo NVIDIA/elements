@@ -508,6 +508,35 @@ describe('GestureController', () => {
     });
   });
 
+  describe('wheel zoom factor', () => {
+    it('returns one for zero delta', () => {
+      expect(controller.getWheelZoomFactor(wheelZoomInput(0))).toBe(1);
+    });
+
+    it('applies the ordinary wheel rate', () => {
+      expect(controller.getWheelZoomFactor(wheelZoomInput(-50))).toBeCloseTo(2 ** 0.1);
+    });
+
+    it('applies the Ctrl-wheel rate', () => {
+      expect(controller.getWheelZoomFactor(wheelZoomInput(-50, { ctrlKey: true }))).toBeCloseTo(2);
+    });
+
+    it('produces reciprocal factors for equal opposite deltas', () => {
+      const zoomIn = controller.getWheelZoomFactor(wheelZoomInput(-50));
+      const zoomOut = controller.getWheelZoomFactor(wheelZoomInput(50));
+
+      expect(zoomIn * zoomOut).toBeCloseTo(1);
+    });
+
+    it('does not boost Meta-wheel input', () => {
+      expect(controller.getWheelZoomFactor(wheelZoomInput(-50, { metaKey: true }))).toBeCloseTo(2 ** 0.1);
+    });
+
+    it('applies the Ctrl-wheel rate when Ctrl and Meta are both pressed', () => {
+      expect(controller.getWheelZoomFactor(wheelZoomInput(-50, { ctrlKey: true, metaKey: true }))).toBeCloseTo(2);
+    });
+  });
+
   describe('pointer termination and ownership', () => {
     it.each([
       ['pointerup', 'up', false],
@@ -1013,4 +1042,8 @@ function pointerEvent(type: string, init: PointerEventInit): PointerEvent {
 
 function wheelEvent(init: WheelEventInit): WheelEvent {
   return new WheelEvent('wheel', { bubbles: true, cancelable: true, ...init });
+}
+
+function wheelZoomInput(deltaY: number, init: WheelEventInit = {}) {
+  return { deltaY, event: wheelEvent(init) };
 }
