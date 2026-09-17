@@ -15,6 +15,14 @@ const GESTURE_EVENT_TYPES = [
   'wheel'
 ] as const;
 
+const WHEEL_ZOOM_EXPONENT_PER_PIXEL = 0.002;
+
+/**
+ * Browsers expose trackpad pinch as Ctrl-modified wheel input, so Ctrl-wheel uses a higher zoom gain.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey
+ */
+const CTRL_WHEEL_ZOOM_GAIN = 10;
+
 const WHEEL_LINE_PIXELS = 16;
 
 interface PointerState {
@@ -247,6 +255,11 @@ export class GestureController<TPinchContext = undefined> implements ReactiveCon
     this.#host = host;
     this.#options = options;
     host.addController(this);
+  }
+
+  getWheelZoomFactor(input: Pick<WheelGesture, 'deltaY' | 'event'>): number {
+    const gain = input.event.ctrlKey ? CTRL_WHEEL_ZOOM_GAIN : 1;
+    return 2 ** (-input.deltaY * WHEEL_ZOOM_EXPONENT_PER_PIXEL * gain);
   }
 
   set target(target: HTMLElement | undefined) {

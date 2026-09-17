@@ -73,6 +73,7 @@ import '@nvidia-elements/core/toggletip/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/tree/define.js';
+import '@nvidia-elements/core/viewport/define.js';
 import '@nvidia-elements/core/week/define.js';
 
 export * from '@nvidia-elements/core/accordion';
@@ -144,6 +145,7 @@ export * from '@nvidia-elements/core/toggletip';
 export * from '@nvidia-elements/core/toolbar';
 export * from '@nvidia-elements/core/tooltip';
 export * from '@nvidia-elements/core/tree';
+export * from '@nvidia-elements/core/viewport';
 export * from '@nvidia-elements/core/week';
 
 globalThis.NVE_ELEMENTS.state.bundle = true;
