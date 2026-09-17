@@ -4,6 +4,8 @@ import { ApiService, ExamplesService } from '@internals/metadata';
 
 const ssrPackageNames = ['@nvidia-elements/code', '@nvidia-elements/core', '@nvidia-elements/media'];
 const hasSsrEntrypoint = entrypoint => ssrPackageNames.some(packageName => entrypoint?.startsWith(`${packageName}/`));
+const nodeEnvironment = globalThis.process?.env?.NODE_ENV ?? 'production';
+const pagesBaseUrl = globalThis.process?.env?.PAGES_BASE_URL ?? '/';
 
 const elements = (await ApiService.getData()).data.elements;
 const examples = (await ExamplesService.getData())
@@ -43,7 +45,7 @@ export function render(data) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${data.description}">
-    <base href="${process.env.PAGES_BASE_URL}" />
+    <base href="${pagesBaseUrl}" />
     <title>${data.title}</title>
     <style>
       @import '@nvidia-elements/themes/fonts/inter.css';
@@ -56,7 +58,7 @@ export function render(data) {
       @import '@nvidia-elements/styles/view-transitions.css';
     </style>
     <script type="module">
-      globalThis.process = { env: { NODE_ENV: '${globalThis.process?.env?.NODE_ENV}' } };
+      globalThis.process = { env: { NODE_ENV: '${nodeEnvironment}' } };
     </script>
     <script type="module">
       import '@lit-labs/ssr-client/lit-element-hydrate-support.js';
@@ -67,7 +69,7 @@ export function render(data) {
     </script>
   </head>
   <body nve-layout="column gap:lg pad:md">
-    <h1 nve-text="heading xl">${data.title}${globalThis.process?.env?.NODE_ENV ?? ''}</h1>
+    <h1 nve-text="heading xl">${data.title} (${nodeEnvironment})</h1>
     <section nve-layout="grid gap:lg align:vertical-stretch span-items:12 &md|span-items:6 &lg|span-items:4">
       ${examples
         .map(example => {

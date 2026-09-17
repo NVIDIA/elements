@@ -1,4 +1,4 @@
-const BASE_URL = `${process.env.PAGES_BASE_URL}starters/eleventy/`;
+import { BASE_URL } from '../../vite.config.js';
 
 export function render(data) {
   const title = data.title ?? 'Eleventy Starter';

@@ -2,8 +2,7 @@ import { EleventyRenderPlugin } from '@11ty/eleventy';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import markdownIt from 'markdown-it';
-
-const BASE_URL = `${process.env.PAGES_BASE_URL}starters/eleventy/`;
+import { BASE_URL, viteOptions } from './vite.config.js';
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -12,14 +11,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
   eleventyConfig.addPlugin(EleventyPluginVite, {
-    viteOptions: {
-      base: BASE_URL,
-      build: {
-        target: 'esnext',
-        sourcemap: false,
-        reportCompressedSize: false
-      }
-    }
+    viteOptions
   });
 
   eleventyConfig.setServerOptions({

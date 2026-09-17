@@ -34,6 +34,10 @@ const DOCS_URLS = [
 const COMMAND_TIMEOUT_MS = 120_000;
 const DOCS_TIMEOUT_MS = 30_000;
 const MAX_COMMAND_OUTPUT_LENGTH = 600;
+const PROGRESS_INTERVAL_MS = 30_000;
+const SKILL_INSTALL_ARGS = ['skills@1.7.0', 'add', 'https://github.com/nvidia/elements', '--skill', 'elements', '-y'];
+const SKILL_INSTALL_COMMAND = ['npx', ...SKILL_INSTALL_ARGS].join(' ');
+const SKILL_INSTALL_PATH = '.agents/skills/elements/SKILL.md';
 const STATUS_LABELS = {
   FAIL: '❌',
   PASS: '✅',
@@ -84,7 +88,30 @@ function createFailedNpmPackageChecks(packageNames, notes, reason) {
   };
 }
 
-async function runCommand(command, args, { cwd, timeoutMs = COMMAND_TIMEOUT_MS } = {}) {
+export function createProgressReporter({ clock = Date.now, stream = process.stderr } = {}) {
+  return message => stream.write(`${new Date(clock()).toISOString()} [agent-availability-report] ${message}\n`);
+}
+
+async function runCommand(
+  command,
+  args,
+  {
+    cwd,
+    progress,
+    progressIntervalMs = PROGRESS_INTERVAL_MS,
+    progressLabel = command,
+    timeoutMs = COMMAND_TIMEOUT_MS
+  } = {}
+) {
+  const startedAt = Date.now();
+  const progressTimer = progress
+    ? setInterval(
+        () => progress(`${progressLabel} still running (${Math.round((Date.now() - startedAt) / 1000)}s)`),
+        progressIntervalMs
+      )
+    : undefined;
+  progressTimer?.unref();
+
   try {
     const { stdout, stderr } = await execFileAsync(command, args, {
       cwd,
@@ -103,6 +130,8 @@ async function runCommand(command, args, { cwd, timeoutMs = COMMAND_TIMEOUT_MS }
       stderr: compactText(errorRecord.stderr),
       stdout: compactText(errorRecord.stdout)
     };
+  } finally {
+    if (progressTimer) clearInterval(progressTimer);
   }
 }
 
@@ -123,8 +152,12 @@ function parseVersionFromNpmView(output) {
   }
 }
 
-async function checkNpmMetadata(packageName, cwd) {
-  const command = await runCommand('npm', ['view', packageName, 'version', '--json'], { cwd });
+async function checkNpmMetadata(packageName, cwd, progress) {
+  const command = await runCommand('npm', ['view', packageName, 'version', '--json'], {
+    cwd,
+    progress,
+    progressLabel: `npm metadata for ${packageName}`
+  });
 
   return command.ok
     ? parseVersionFromNpmView(command.stdout)
@@ -168,7 +201,8 @@ async function checkDocsUrl(url) {
   }
 }
 
-async function checkDocsSites() {
+async function checkDocsSites(progress) {
+  progress(`docs: checking ${DOCS_URLS.length} URLs`);
   return Promise.all(DOCS_URLS.map(checkDocsUrl));
 }
 
@@ -205,14 +239,18 @@ console.log(JSON.stringify(Object.fromEntries(
 `;
 }
 
-async function checkPackageResolution(packageNames, tempDir, installCommand) {
+async function checkPackageResolution(packageNames, tempDir, installCommand, progress) {
   if (!installCommand.ok) {
     return createFailedPackageMap(packageNames, `npm install failed before resolve check: ${installCommand.reason}.`);
   }
 
   const resolveScriptPath = path.join(tempDir, 'resolve-check.mjs');
   await writeFile(resolveScriptPath, createResolveScript(packageNames));
-  const command = await runCommand('node', [resolveScriptPath], { cwd: tempDir });
+  const command = await runCommand('node', [resolveScriptPath], {
+    cwd: tempDir,
+    progress,
+    progressLabel: 'package resolution'
+  });
 
   if (!command.ok) {
     return createFailedPackageMap(packageNames, `resolve script failed: ${command.reason}.`);
@@ -226,7 +264,7 @@ async function checkPackageResolution(packageNames, tempDir, installCommand) {
   }
 }
 
-async function checkNpmPackages(packageNames) {
+async function checkNpmPackages(packageNames, progress) {
   const notes = [];
   let tempDir;
 
@@ -239,15 +277,29 @@ async function checkNpmPackages(packageNames) {
   }
 
   try {
-    const npmChecks = await createPackageMapAsync(packageNames, packageName => checkNpmMetadata(packageName, tempDir));
-    const initCommand = await runCommand('npm', ['init', '-y'], { cwd: tempDir });
+    progress(`packages: checking npm metadata for ${packageNames.length} packages`);
+    const npmChecks = await createPackageMapAsync(packageNames, packageName =>
+      checkNpmMetadata(packageName, tempDir, progress)
+    );
+    progress('packages: creating fresh npm project');
+    const initCommand = await runCommand('npm', ['init', '-y'], {
+      cwd: tempDir,
+      progress,
+      progressLabel: 'npm project initialization'
+    });
+    progress('packages: installing current releases');
     const installCommand = initCommand.ok
-      ? await runCommand('npm', ['install', '--no-audit', '--no-fund', ...packageNames], { cwd: tempDir })
+      ? await runCommand('npm', ['install', '--no-audit', '--no-fund', ...packageNames], {
+          cwd: tempDir,
+          progress,
+          progressLabel: 'package installation'
+        })
       : createFailure(`npm init failed: ${initCommand.reason}`);
     const installChecks = await createPackageMapAsync(packageNames, packageName =>
       readInstalledPackageVersion(packageName, tempDir, installCommand)
     );
-    const resolveChecks = await checkPackageResolution(packageNames, tempDir, installCommand);
+    progress('packages: checking package resolution');
+    const resolveChecks = await checkPackageResolution(packageNames, tempDir, installCommand, progress);
 
     return { installChecks, notes, npmChecks, resolveChecks };
   } catch (error) {
@@ -261,6 +313,78 @@ async function checkNpmPackages(packageNames) {
     } catch (error) {
       // Temporary project cleanup depends on the host filesystem.
       notes.push(`Temporary test project cleanup failed: ${compactText(error)}.`);
+    }
+  }
+}
+
+function createSkillInstallationReport(status, reasons = []) {
+  return {
+    command: SKILL_INSTALL_COMMAND,
+    installPath: SKILL_INSTALL_PATH,
+    reasons,
+    status
+  };
+}
+
+function isElementsSkill(content) {
+  const frontmatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '';
+  return /^name:\s*["']?elements["']?\s*$/m.test(frontmatter);
+}
+
+async function checkSkillInstallation(progress) {
+  const notes = [];
+  let tempDir;
+
+  try {
+    tempDir = await mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-agent-skill-availability-'));
+  } catch (error) {
+    return {
+      notes,
+      report: createSkillInstallationReport('FAIL', [
+        `temporary skill project could not be created: ${compactText(error)}.`
+      ])
+    };
+  }
+
+  try {
+    progress(`skill installation: running`);
+    const command = await runCommand('npx', SKILL_INSTALL_ARGS, {
+      cwd: tempDir,
+      progress,
+      progressLabel: 'skill installation'
+    });
+
+    if (!command.ok) {
+      return {
+        notes,
+        report: createSkillInstallationReport('FAIL', [`skill installation failed: ${command.reason}.`])
+      };
+    }
+
+    try {
+      const skill = await readFile(path.join(tempDir, SKILL_INSTALL_PATH), 'utf8');
+
+      return isElementsSkill(skill)
+        ? { notes, report: createSkillInstallationReport('PASS') }
+        : {
+            notes,
+            report: createSkillInstallationReport('FAIL', [
+              `installed ${SKILL_INSTALL_PATH} did not declare the elements skill.`
+            ])
+          };
+    } catch (error) {
+      return {
+        notes,
+        report: createSkillInstallationReport('FAIL', [
+          `installed ${SKILL_INSTALL_PATH} was not readable: ${compactText(error)}.`
+        ])
+      };
+    }
+  } finally {
+    try {
+      await rm(tempDir, { force: true, recursive: true });
+    } catch (error) {
+      notes.push(`Temporary skill project cleanup failed: ${compactText(error)}.`);
     }
   }
 }
@@ -305,8 +429,8 @@ function getCheck(checks, packageName, reason) {
   return checks[packageName] ?? createFailure(reason);
 }
 
-function getOverallStatus({ docs, packages }) {
-  const statuses = [...docs, ...packages].map(({ status }) => status);
+function getOverallStatus({ docs, packages, skillInstallation }) {
+  const statuses = [...docs, ...packages, skillInstallation].map(({ status }) => status);
 
   if (statuses.includes('FAIL')) {
     return 'FAIL';
@@ -315,23 +439,36 @@ function getOverallStatus({ docs, packages }) {
   return statuses.includes('WARN') ? 'WARN' : 'PASS';
 }
 
-async function runAvailabilityReport({ timestamp } = {}) {
+async function runAvailabilityReport({ progress = () => {}, timestamp } = {}) {
   const normalizedTimestamp = normalizeTimestamp(timestamp);
 
   if (!normalizedTimestamp.ok) {
+    progress(`input: FAIL (${normalizedTimestamp.reason})`);
     return {
       docs: [createDocsReport('timestamp', 'FAIL', [normalizedTimestamp.reason])],
       notes: [],
       overallStatus: 'FAIL',
       packages: [],
+      skillInstallation: createSkillInstallationReport('FAIL', ['availability checks were not run.']),
       timestamp: String(timestamp)
     };
   }
 
-  const [docs, { installChecks, notes, npmChecks, resolveChecks }] = await Promise.all([
-    checkDocsSites(),
-    checkNpmPackages(PACKAGES)
+  const [docs, packageChecks, skillCheck] = await Promise.all([
+    checkDocsSites(progress).then(result => {
+      progress('docs: checks complete');
+      return result;
+    }),
+    checkNpmPackages(PACKAGES, progress).then(result => {
+      progress('packages: checks complete');
+      return result;
+    }),
+    checkSkillInstallation(progress).then(result => {
+      progress(`skill installation: ${result.report.status}`);
+      return result;
+    })
   ]);
+  const { installChecks, npmChecks, resolveChecks } = packageChecks;
   const packages = PACKAGES.map(packageName =>
     createPackageReport({
       installCheck: getCheck(installChecks, packageName, 'install check returned no result.'),
@@ -340,11 +477,15 @@ async function runAvailabilityReport({ timestamp } = {}) {
       resolveCheck: getCheck(resolveChecks, packageName, 'resolve check returned no result.')
     })
   );
+  const notes = [...packageChecks.notes, ...skillCheck.notes];
+  const skillInstallation = skillCheck.report;
+
   return {
     docs,
     notes,
-    overallStatus: getOverallStatus({ docs, packages }),
+    overallStatus: getOverallStatus({ docs, packages, skillInstallation }),
     packages,
+    skillInstallation,
     timestamp: normalizedTimestamp.value
   };
 }
@@ -376,6 +517,13 @@ function formatPackageLines(packageReport) {
   ];
 }
 
+function formatSkillInstallationLines(skillInstallation) {
+  return [
+    `- ${STATUS_LABELS[skillInstallation.status]} \`${skillInstallation.command}\``,
+    ...(skillInstallation.reasons.length > 0 ? [`  Reason: ${skillInstallation.reasons.join(' ')}`] : [])
+  ];
+}
+
 function formatAvailabilityReport(report) {
   const notes = report.notes.length > 0 ? `**Notes:**${report.notes.map(note => `• ${note}`).join('\n')}` : '';
 
@@ -386,12 +534,15 @@ function formatAvailabilityReport(report) {
     '',
     '**Packages:**',
     ...report.packages.flatMap(formatPackageLines),
+    '',
+    '**Skills:**',
+    ...formatSkillInstallationLines(report.skillInstallation),
     notes
   ].join('\n');
 }
 
-export async function generateReport({ timestamp } = {}) {
-  const report = await runAvailabilityReport({ timestamp });
+export async function generateReport({ progress, timestamp } = {}) {
+  const report = await runAvailabilityReport({ progress, timestamp });
   return { formattedReport: formatAvailabilityReport(report), report };
 }
 
@@ -453,15 +604,25 @@ async function main() {
     return;
   }
 
-  const npmAvailability = await runCommand('npm', ['--version'], { timeoutMs: 30_000 });
+  const progress = createProgressReporter();
+  progress('run started');
+  progress('environment: checking npm availability');
+  const npmAvailability = await runCommand('npm', ['--version'], {
+    progress,
+    progressLabel: 'npm availability check',
+    timeoutMs: 30_000
+  });
 
   if (!npmAvailability.ok) {
+    progress(`environment: FAIL (${npmAvailability.reason})`);
     process.stderr.write(`Environment failure: npm is not available: ${npmAvailability.reason}.\n`);
     process.exitCode = 1;
     return;
   }
 
-  const { formattedReport, report } = await generateReport({ timestamp: options.timestamp });
+  progress(`environment: npm ${npmAvailability.stdout}`);
+  const { formattedReport, report } = await generateReport({ progress, timestamp: options.timestamp });
+  progress(`run finished with status ${report.overallStatus}\n\n---\n`);
 
   process.stdout.write(options.json ? `${JSON.stringify(report, null, 2)}\n` : `${formattedReport}\n`);
 

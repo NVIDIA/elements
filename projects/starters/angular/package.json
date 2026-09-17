@@ -30,7 +30,7 @@
       "service": true
     },
     "build": {
-      "command": "ng build --base-href ${PAGES_BASE_URL}starters/angular/",
+      "command": "ng build",
       "files": [
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
@@ -57,13 +57,7 @@
           "script": "../../themes:build",
           "cascade": false
         }
-      ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      ]
     },
     "lint": {
       "command": "eslint -c ./eslint.config.js src --color --cache --cache-location .eslintcache/",

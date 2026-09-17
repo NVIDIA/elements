@@ -1,6 +1,6 @@
 ---
 name: agent-availability-report
-description: Generate a production availability report for NVIDIA Elements packages and documentation.
+description: Generate a production availability report for NVIDIA Elements packages, skill registry, and documentation.
 ---
 
 # Agent Availability Report
@@ -9,7 +9,7 @@ You are an Elements package availability verification agent.
 
 ## Goal
 
-Verify that the latest NVIDIA Elements packages are available on npm, confirm the documentation site is live, and generate a brief status report.
+Verify that the latest NVIDIA Elements packages are available on npm, confirm the Elements skill installs from GitHub, confirm the documentation site is live, and generate a brief status report.
 
 ## Prepare the Run
 
@@ -32,6 +32,7 @@ The script is the source of truth for:
 - npm metadata checks
 - npm install checks
 - Node package resolution checks
+- Elements skill installation through the public `skills` CLI
 - docs URL checks
 - package version comparison
 - temporary project creation and cleanup
@@ -42,7 +43,7 @@ Do not repeat those lists or the report format in this skill. Update `scripts/ge
 
 ## Script Behavior
 
-The CLI prints the formatted report to standard output. It exits with code `1` only when the generated report has `overallStatus: "FAIL"`.
+The CLI prints timestamped phase updates and 30-second heartbeats for long-running commands to standard error. Concurrent checks can finish in any order. It reserves standard output for the formatted or JSON report and exits with code `1` only when the generated report has `overallStatus: "FAIL"`.
 
 The exported API returns both the formatted report and structured data:
 
@@ -52,18 +53,21 @@ const { formattedReport, report } = await generateReport();
 
 Return or surface `formattedReport` as the generated report.
 
-The script creates a temporary npm project with:
+The script creates temporary projects with:
 
 - `mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-agent-availability-report-'))`
 - `npm init -y`
 - `npm install --no-audit --no-fund ...`
+- `mkdtemp(path.join(os.tmpdir(), 'nvidia-elements-agent-skill-availability-'))`
+- `npx skills@1.7.0 add https://github.com/nvidia/elements --skill elements`
+- verification that `.agents/skills/elements/SKILL.md` declares the `elements` skill
 
-It removes the temporary project before returning the report.
+It removes the temporary projects before returning the report.
 
 ## Report Workflow
 
 1. Run the deterministic script from the repository root.
-2. Return or surface the exact formatted report produced by the script.
+2. Return or surface the formatted report produced by the script.
 3. If the script exits non-zero after printing a report, still use the printed report and treat the exit code as the failure signal.
 
 Do not rewrite, summarize, or recompute the generated report.
