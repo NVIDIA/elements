@@ -11,6 +11,8 @@
     "lint": "wireit",
     "lint:fix": "wireit",
     "test": "wireit",
+    "test:browser": "wireit",
+    "test:node": "wireit",
     "test:lighthouse": "wireit",
     "preview": "wireit"
   },
@@ -227,11 +229,30 @@
       ]
     },
     "test": {
-      "command": "vitest run",
+      "dependencies": [
+        "test:browser",
+        "test:node"
+      ]
+    },
+    "test:browser": {
+      "command": "vitest run --config=vite.browser.ts",
+      "files": [
+        "src/**/*.ts",
+        "vite.browser.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ]
+    },
+    "test:node": {
+      "command": "vitest run --config=vitest.config.ts",
       "files": [
         "src/**/*.js",
         "src/**/*.md",
         "src/**/*.ts",
+        "!src/**/*.browser.test.ts",
         "vitest.config.ts"
       ],
       "output": [],
@@ -290,6 +311,7 @@
     "@nvidia-elements/scene": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
