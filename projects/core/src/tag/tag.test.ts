@@ -82,4 +82,19 @@ describe(Tag.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.getAttribute('prominence')).toBe('emphasis');
   });
+
+  it('should provide a prefix slot', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('slot[name="prefix"]')).toBeTruthy();
+  });
+
+  it('should provide a suffix slot', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('slot[name="suffix"]')).toBeTruthy();
+  });
+
+  it('should provide a default slot', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('slot:not([name])')).toBeTruthy();
+  });
 });

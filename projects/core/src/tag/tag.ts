@@ -23,6 +23,8 @@ import styles from './tag.css?inline';
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tag
  * @slot - Text or other content that identifies the category or group.
+ * @slot prefix - Optional prefix content, such as a status nve-icon.
+ * @slot suffix - Optional suffix content, such as a nve-dot counter.
  * @cssprop --background
  * @cssprop --color
  * @cssprop --gap
@@ -71,7 +73,9 @@ export class Tag extends ButtonFormControlMixin(LitElement) {
   render() {
     return html`
       <div internal-host interaction-state focus-within>
+        <slot name="prefix"></slot>
         <slot></slot>
+        <slot name="suffix"></slot>
         ${this.closable ? html`<nve-icon part="icon" @click=${() => this.#typeClosableController.close()} container="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></nve-icon>` : ''}
       </div>
     `;

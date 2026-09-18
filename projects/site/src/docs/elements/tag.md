@@ -28,6 +28,10 @@
 
 {% example '@nvidia-elements/core/tag/tag.examples.json' 'Closable' %}
 
+## Slotted Color
+
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'SlottedColor' %}
+
 ## Readonly
 
 {% api 'nve-tag', 'property', 'readOnly' %}
