@@ -46,7 +46,7 @@ export const libraryNodeTestConfig = {
       extension: ['.ts'],
       provider: 'istanbul',
       reportsDirectory: './coverage/unit',
-      reporter: [['lcov', { file: 'coverage.dat' }], 'html', 'json-summary'],
+      reporter: [['lcov', { file: 'coverage.dat' }], 'html', 'json', 'json-summary'],
       thresholds: {
         lines: 90,
         branches: 90,

@@ -16,11 +16,16 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      code-quality: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           fetch-depth: 0
           lfs: true
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           # The CLI build runs semantic-release dry-run to bake the next binary version.
           # On main, checkout credentials must match the release token used by that dry-run.
           token: ${{ github.ref == 'refs/heads/main' && secrets.RELEASE_TOKEN || github.token }}
@@ -32,6 +37,16 @@ jobs:
           ELEMENTS_REPO_BASE_URL: ${{vars.ELEMENTS_REPO_BASE_URL}}
           GITHUB_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.RELEASE_TOKEN || github.token }}
         run: PAGES_BASE_URL="/elements/" pnpm run ci && PAGES_BASE_URL="/elements/" node ./projects/internals/ci/cache-validate.js ci
+      - name: Upload code coverage
+        if: >-
+          github.event_name == 'push' ||
+          (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+        uses: actions/upload-code-coverage@d8e329117199404bba6fc81efe8093dc7c015e34 # v1.4.2
+        with:
+          file: projects/internals/ci/coverage/cobertura.xml
+          language: TypeScript
+          label: code-coverage/vitest
+          fail-on-error: true
       - name: Write CI job summary
         if: always()
         run: node ./projects/internals/ci/ci-summary.js >> "$GITHUB_STEP_SUMMARY"

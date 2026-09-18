@@ -5,11 +5,10 @@ import { hideExpectedTestConsoleMessage } from './console.js';
 import { getElementsEnv } from './env.js';
 
 const watch = process.argv.findIndex(i => i === '--watch') !== -1;
-const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 
 const browser = {
   browser: 'chromium',
-  isolate: coverage
+  isolate: true
 };
 
 Object.defineProperty(browser, 'name', {
@@ -46,7 +45,7 @@ export const libraryTestConfig = {
     fileParallelism: !process.env.CI, // Disable file parallelism in CI to reduce browser instances
     maxWorkers: process.env.CI ? 1 : undefined,
     maxConcurrency: process.env.CI ? 1 : undefined, // Limit concurrent tests to avoid browser overload
-    isolate: coverage,
+    isolate: true,
     testTimeout: 60000,
     hookTimeout: 30000,
     server: {
@@ -106,7 +105,7 @@ export const libraryTestConfig = {
       extension: ['.ts'],
       provider: 'istanbul',
       reportsDirectory: './coverage/unit',
-      reporter: [['lcov', { file: 'coverage.dat' }], 'html', 'json-summary'],
+      reporter: [['lcov', { file: 'coverage.dat' }], 'html', 'json', 'json-summary'],
       thresholds: {
         lines: 90,
         branches: 90,

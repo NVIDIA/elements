@@ -236,6 +236,12 @@ catalogs:
     '@vitest/coverage-istanbul':
       specifier: 5.0.0
       version: 5.0.0
+    '@vitest/istanbul-lib-coverage':
+      specifier: 1.0.1
+      version: 1.0.1
+    '@vitest/istanbul-lib-report':
+      specifier: 1.0.1
+      version: 1.0.1
     adm-zip:
       specifier: 0.6.1
       version: 0.6.1
@@ -406,6 +412,12 @@ importers:
       '@semantic-release/release-notes-generator':
         specifier: 14.1.1
         version: 14.1.1(semantic-release@25.0.9(supports-color@10.2.2)(typescript@7.0.2))(supports-color@10.2.2)
+      '@vitest/istanbul-lib-coverage':
+        specifier: 'catalog:'
+        version: 1.0.1
+      '@vitest/istanbul-lib-report':
+        specifier: 'catalog:'
+        version: 1.0.1
       '@weiran.zsd/multi-eslint-rule-config':
         specifier: 0.0.6
         version: 0.0.6(eslint@10.10.0(jiti@2.7.0)(supports-color@10.2.2))
