@@ -1,3 +1,42 @@
+## [2.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v2.0.4...@nvidia-elements/code-v2.1.0) (2026-09-18)
+
+### Features
+
+* **code:** support code element slot content ([25486f5](https://github.com/NVIDIA/elements/commit/25486f52fa95ac2cb865a20748467d4d5729e673))
+* **core:** add icon appearances ([d20ccf3](https://github.com/NVIDIA/elements/commit/d20ccf3c621d91e61988435c2ffaeb039f913c17))
+* **core:** add internal gesture and key navigation controllers ([3b46234](https://github.com/NVIDIA/elements/commit/3b46234bab24edc46f906e76cbc7ed95a6197a26))
+* **lint:** add additional icon alias deprecations ([a574e85](https://github.com/NVIDIA/elements/commit/a574e85010a928714a88e8ae136095172cab0701))
+* **lint:** support markdown linting ([652e751](https://github.com/NVIDIA/elements/commit/652e7517bb9c0f17a2e4cc1a4760206f414b24d2))
+
+### Bug Fixes
+
+* **ci:** ignore test runner artifacts in knip cache ([7415260](https://github.com/NVIDIA/elements/commit/74152608703345d5507ba5f64e5f1535f98b36e3))
+* **ci:** pin conventionalcommits preset for release notes ([6c93057](https://github.com/NVIDIA/elements/commit/6c93057adec0a1d8fb22335a84af1bb4b9be41ae))
+* **cli:** improve skill tool call and creation steps ([b30455c](https://github.com/NVIDIA/elements/commit/b30455cad0deab646ad20ccd18bdafda39056860))
+* **cli:** update dependencies and migration skill ([932ffce](https://github.com/NVIDIA/elements/commit/932ffce3fc8ce5d5df1dd09cf5b856b261427fc6))
+* **cli:** update marked to 18.0.11 ([cb9a5e3](https://github.com/NVIDIA/elements/commit/cb9a5e3e521ecbd87aacb724da9c1f14119f7fc7))
+* **core:** control message metadata ([1abec58](https://github.com/NVIDIA/elements/commit/1abec58e758c1cf02ba4e9587066bafe677f896a))
+* **core:** format bytes ([385fd83](https://github.com/NVIDIA/elements/commit/385fd83e9a7874aa2daecb400770a752b835b1fb))
+* **core:** improve viewport height bounds for nve-page ([7c3b839](https://github.com/NVIDIA/elements/commit/7c3b839915c76c08090306534f4166cf36949635))
+* **core:** pointer solid icon ([bf3ff31](https://github.com/NVIDIA/elements/commit/bf3ff31efa313a54130d0aca68176bf5b34dca88))
+* **core:** restore tree keyboard navigation ([e024c11](https://github.com/NVIDIA/elements/commit/e024c114f69e8396a6f451273254c5ed24ce4dc5))
+* **core:** support solid icon variants and icon registry aliases ([e455331](https://github.com/NVIDIA/elements/commit/e455331f87033755667fd6c5d253c5dd2b58823c)), closes [PR#264](https://github.com/NVIDIA/PR/issues/264)
+* **core:** update icons with aspect ratios ([2021d95](https://github.com/NVIDIA/elements/commit/2021d9596a8e525a3351f6ce0c4d32604ac196ae))
+* **docs:** align card presentation ([f811f0a](https://github.com/NVIDIA/elements/commit/f811f0a685ffcb95c68c6bd2bb48129cf8349561))
+* **docs:** align card title typography ([056404a](https://github.com/NVIDIA/elements/commit/056404a2a6717e325106cd78bda82983e2f76d90))
+* **docs:** correct jsdelivr bundle urls ([c7432be](https://github.com/NVIDIA/elements/commit/c7432be0394225f3d9d7b2c193b7e491c751c9a9))
+* **docs:** make page title weights consistent ([07bc98b](https://github.com/NVIDIA/elements/commit/07bc98b12a646f4050d2cc873d7ed3a00b8304f7))
+* **docs:** refine navigation group titles ([2e3c3e0](https://github.com/NVIDIA/elements/commit/2e3c3e089e07c0b2f261a58bd966bf2f772333a9))
+* **docs:** update responsive pattern icon ([6126e1c](https://github.com/NVIDIA/elements/commit/6126e1c2bc9fff2a222ce81c88f51de47149cad7))
+* **docs:** use canvas background for component headers ([5547c47](https://github.com/NVIDIA/elements/commit/5547c473f0f20dffe29ac8de8a24513126c56f99))
+* **lint:** allow external svg icon sources ([c55f4df](https://github.com/NVIDIA/elements/commit/c55f4df9771a15f9a183d221f2af361dfe9ba04c))
+* **lint:** no-excessive-primary-actions rule to handle popover elements ([398c0df](https://github.com/NVIDIA/elements/commit/398c0df6a2987e8ece663d8c2994d1626a1b2596))
+* **lint:** suggest removing slot="default" when unnamed slot is not first ([84372f1](https://github.com/NVIDIA/elements/commit/84372f1d1173473bc6f89f89e870c0080c226f46))
+* **media:** since version release ([583f6bc](https://github.com/NVIDIA/elements/commit/583f6bcd5384e4d4c5ca953b2f9e74cfbb313750))
+* **starters:** update @angular/* to 22.1.4 ([3370f7d](https://github.com/NVIDIA/elements/commit/3370f7de561dd44723ca8a96b61fd18f65a99841))
+* **starters:** update nuxt to 4.5.2 ([0862866](https://github.com/NVIDIA/elements/commit/08628664a6e01d455c6c349902ee244026bd12f2))
+* **starters:** update solid-js to 1.9.15 ([1753732](https://github.com/NVIDIA/elements/commit/17537324b004ef58566b8da43b588d3010d9f022))
+
 ## <small>2.0.4 (2026-08-28)</small>
 
 * chore(core): remove unnecessary boolean conversion in drawer ([c5b667c](https://github.com/NVIDIA/elements/commit/c5b667c))
