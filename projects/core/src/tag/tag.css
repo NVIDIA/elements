@@ -21,6 +21,7 @@
 }
 
 [internal-host] {
+  --_color: var(--color);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   gap: var(--gap);
@@ -40,7 +41,7 @@
   white-space: nowrap;
 }
 
-slot {
+slot:not([name]) {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -49,6 +50,15 @@ slot {
 
 ::slotted([nve-text]) {
   color: inherit !important;
+}
+
+::slotted(nve-icon) {
+  --color: var(--_color);
+}
+
+::slotted(nve-dot) {
+  --color: var(--state-color-background);
+  --status-color: var(--_color);
 }
 
 nve-icon {

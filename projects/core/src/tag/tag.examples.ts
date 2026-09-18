@@ -53,6 +53,7 @@ export const Closable = {
 
 /**
  * @summary Read-only tags for displaying static labels and metadata, providing visual context without user interaction capabilities.
+ * @tags test-case
  */
 export const Readonly = {
   render: () => html`
@@ -75,6 +76,7 @@ export const Group = {
 
 /**
  * @summary Comprehensive color palette for tag backgrounds, enabling visual categorization and brand consistency across different content types.
+ * @tags test-case
  */
 export const Color = {
   render: () => html`
@@ -108,6 +110,7 @@ export const Color = {
 
 /**
  * @summary High prominence tags with emphasis styling for important categories and priority labels that require visual attention.
+ * @tags test-case
  */
 export const Prominence = {
   render: () => html`
@@ -137,6 +140,40 @@ export const Prominence = {
 </div>`
 };
 
+/**
+ * @summary Tag with icon, showing how the icon/dot color inherits the tag color.
+ * @tags test-case
+ */
+export const SlottedColor = {
+  render: () => html`
+<div nve-layout="row gap:xs align:wrap">
+  <nve-tag style="--max-width: 100px"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> very words long here <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag><nve-icon slot="prefix" name="person" size="sm"></nve-icon> default <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="red-cardinal"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> red-cardinal <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="gray-slate"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> gray-slate <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="gray-denim"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> gray-denim <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="blue-indigo"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> blue-indigo <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="blue-cobalt"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> blue-cobalt <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="blue-sky"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> blue-sky <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="teal-cyan"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> teal-cyan <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="green-mint"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> green-mint <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="teal-seafoam"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> teal-seafoam <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="green-grass"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> green-grass <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="yellow-amber"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> yellow-amber <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="orange-pumpkin"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> orange-pumpkin <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="red-tomato"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> red-tomato <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="pink-magenta"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> pink-magenta <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="purple-plum"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> purple-plum <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="purple-violet"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> purple-violet <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="purple-lavender"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> purple-lavender <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="pink-rose"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> pink-rose <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="green-jade"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> green-jade <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="lime-pear"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> lime-pear <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="yellow-nova"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> yellow-nova <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+  <nve-tag color="brand-green"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> brand-green <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+</div>
+  `
+};
 
 /**
  * @summary Single tag with constrained width, with text overflow behavior and content truncation in limited space.

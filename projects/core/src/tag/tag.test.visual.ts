@@ -20,6 +20,8 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/tag/define.js';
+    import '@nvidia-elements/core/dot/define.js';
+    import '@nvidia-elements/core/icon/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
 
@@ -98,6 +100,33 @@ function template(theme: '' | 'dark' = '') {
     <nve-tag prominence="emphasis" color="lime-pear">•︎•︎•︎•︎•︎•︎</nve-tag>
     <nve-tag prominence="emphasis" color="yellow-nova">•︎•︎•︎•︎•︎•︎</nve-tag>
     <nve-tag prominence="emphasis" color="brand-green">•︎•︎•︎•︎•︎•︎</nve-tag>
+  </div>
+
+  <div nve-layout="row gap:xs align:wrap">
+    <nve-tag style="--max-width: 100px"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="red-cardinal"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="gray-slate"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="gray-denim"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="blue-indigo"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="blue-cobalt"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="blue-sky"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="teal-cyan"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="green-mint"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="teal-seafoam"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="green-grass"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="yellow-amber"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="orange-pumpkin"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="red-tomato"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="pink-magenta"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="purple-plum"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="purple-violet"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="purple-lavender"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="pink-rose"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="green-jade"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="lime-pear"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="yellow-nova"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
+    <nve-tag color="brand-green"><nve-icon slot="prefix" name="person" size="sm"></nve-icon> •︎•︎•︎•︎•︎•︎ <nve-dot slot="suffix" size="sm">10</nve-dot></nve-tag>
   </div>
   `;
 }
