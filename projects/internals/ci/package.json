@@ -10,26 +10,48 @@
   "wireit": {
     "ci": {
       "dependencies": [
-        "test"
+        "test",
+        "coverage"
       ]
     },
     "coverage": {
       "command": "node ./coverage.js",
-      "packageLocks": []
+      "dependencies": [
+        "../../cli:test:coverage",
+        "../../code:test:coverage",
+        "../../core:test:coverage",
+        "../../forms:test:coverage",
+        "../../lint:test:coverage",
+        "../../markdown:test:coverage",
+        "../../media:test:coverage",
+        "../../monaco:test:coverage",
+        "../../plot:test:coverage",
+        "../../scene:test:coverage",
+        "../metadata:test:coverage",
+        "../tools:test:coverage"
+      ],
+      "files": [
+        "coverage.js",
+        "coverage-projects.js"
+      ],
+      "output": [
+        "coverage/cobertura.xml"
+      ]
     },
     "test": {
       "command": "node --test './*.test.js'",
       "files": [
         "ci-profile.js",
         "ci-profile.test.js",
+        "coverage-projects.js",
+        "coverage.js",
         "lighthouse-projects.js",
         "lighthouse-summary.js",
         "metrics.lighthouse.js",
         "release-notes.test.js",
         "package.json"
       ],
-      "output": [],
-      "packageLocks": []
+      "output": []
     }
   }
 }

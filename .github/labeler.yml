@@ -83,6 +83,16 @@
       - any-glob-to-any-file:
           - 'projects/pages/**'
 
+'scope(plot)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/plot/**'
+
+'scope(scene)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/scene/**'
+
 'scope(starters)':
   - changed-files:
       - any-glob-to-any-file:

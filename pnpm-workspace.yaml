@@ -100,6 +100,8 @@ catalog:
   '@vitest/browser': 5.0.0
   '@vitest/browser-playwright': 5.0.0
   '@vitest/coverage-istanbul': 5.0.0
+  '@vitest/istanbul-lib-coverage': 1.0.1
+  '@vitest/istanbul-lib-report': 1.0.1
   'adm-zip': 0.6.1
   axe-core: 4.11.0
   eslint: 10.10.0
