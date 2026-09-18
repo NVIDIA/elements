@@ -73,10 +73,24 @@ describe('validateSkillDescription', () => {
 });
 
 describe('validateSkillEntries', () => {
+  it('should validate the default registry', () => {
+    expect(() => validateSkillEntries()).not.toThrow();
+  });
+
   it('should reject duplicate skill names', () => {
     expect(() => validateSkillEntries([createSkill('duplicate'), createSkill('duplicate')])).toThrow(
       'Duplicate Agent Skill name "duplicate".'
     );
+  });
+
+  it('should reject an empty title', () => {
+    expect(() => validateSkillEntries([createSkill('untitled', { title: ' ' })])).toThrow(
+      'Invalid Agent Skill title for "untitled".'
+    );
+  });
+
+  it('should require files', () => {
+    expect(() => validateSkillEntries([createSkill('empty', { files: {} })])).toThrow('must include files');
   });
 
   it.each(['../outside.md', '/absolute.md', 'references\\windows.md', './SKILL.md'])(
@@ -89,14 +103,33 @@ describe('validateSkillEntries', () => {
     }
   );
 
+  it('should reject non-string file content', () => {
+    const skill = createSkill('binary');
+    const files = Object.assign(Object.create(null), skill.files, { 'notes.md': 1 }) as Skill['files'];
+    expect(() => validateSkillEntries([{ ...skill, files }])).toThrow(
+      'Invalid content for "notes.md" in Agent Skill "binary".'
+    );
+  });
+
   it('should require SKILL.md', () => {
     expect(() => validateSkillEntries([createSkill('missing', { files: { 'references/a.md': 'x' } })])).toThrow(
       'must include SKILL.md'
     );
   });
+
+  it('should require frontmatter to match the registry entry', () => {
+    expect(() => validateSkillEntries([createSkill('mismatch', { title: 'other title' })])).toThrow(
+      'Agent Skill "mismatch" frontmatter title does not match its registry entry.'
+    );
+  });
 });
 
 describe('createAgentSkillArtifacts', () => {
+  it('should create artifacts from the default registry', () => {
+    const artifacts = createAgentSkillArtifacts();
+    expect(artifacts.index.skills.map(skill => skill.name)).toEqual(skills.map(skill => skill.name).sort());
+  });
+
   it('should create deterministic single-file discovery entries', () => {
     const registry = [createSkill('zeta'), createSkill('alpha')];
     const artifacts = createAgentSkillArtifacts(registry);
@@ -141,6 +174,17 @@ describe('createAgentSkillArtifacts', () => {
 });
 
 describe('writeSkillDirectory', () => {
+  it('should require the directory name to match the skill name', async () => {
+    const root = await createTemporaryDirectory();
+    const skillDirectory = nodePath.join(root, 'wrong');
+    await expect(writeSkillDirectory(skillDirectory, createSkill('elements'))).rejects.toThrow(
+      'Agent Skill directory must end with "elements".'
+    );
+    expect(() => writeSkillDirectorySync(skillDirectory, createSkill('elements'))).toThrow(
+      'Agent Skill directory must end with "elements".'
+    );
+  });
+
   it('should update every bundled file and preserve user files', async () => {
     const root = await createTemporaryDirectory();
     const skill = createSkill('elements', {
@@ -184,7 +228,7 @@ describe('writeSkillDirectory', () => {
 describe('writeAgentSkillArtifacts', () => {
   it('should write the index and archive', async () => {
     const publicOutputPath = await createTemporaryDirectory();
-    await writeAgentSkillArtifacts(publicOutputPath, skills);
+    await writeAgentSkillArtifacts(publicOutputPath);
     const outputPath = nodePath.join(publicOutputPath, '.well-known', 'agent-skills');
     const index = JSON.parse(await fsp.readFile(nodePath.join(outputPath, 'index.json'), 'utf8'));
 
