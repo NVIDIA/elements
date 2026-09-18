@@ -462,7 +462,7 @@ export function renderBasePageHeader(data) {
   <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="/">Catalog</a></nve-button>
   ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat" class="header-btn"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
   <nve-button container="flat" class="header-btn"><a href="/docs/integrations/">Starters</a></nve-button>
-  <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
+  <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">GitHub</a></nve-button>
   <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
   <nve-icon-button class="header-menu-btn" role="button" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>
 </nve-page-header>

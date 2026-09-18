@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { css, html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
@@ -88,14 +88,19 @@ export class DocsSearch extends LitElement {
     nve-tag, nve-tag nve-dot {
       cursor: pointer;
     }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     `
   ];
 
   /** Max number of search results to display */
   static readonly MAX_RESULTS = 20;
-
-  /** Max size of the search cache */
-  static readonly CACHE_MAX_SIZE = 50;
 
   @property({ type: String, attribute: 'base-url' })
   baseUrl!: string;
@@ -114,9 +119,6 @@ export class DocsSearch extends LitElement {
   isSearching = false;
 
   @state()
-  noResults = false;
-
-  @state()
   private currentSearchTerm = '';
 
   @state()
@@ -126,7 +128,6 @@ export class DocsSearch extends LitElement {
   static readonly SEARCH_DEBOUNCE_MS = 400;
 
   #pagefind!: Pagefind;
-  #searchCache = new Map<string, PagefindSearchFragment[]>();
   #searchDebounceTimerId: ReturnType<typeof setTimeout> | undefined;
 
   async #handleChange(event: CustomEvent) {
@@ -159,7 +160,6 @@ export class DocsSearch extends LitElement {
     this.results = [];
     this.searchInput.value = '';
     this.isSearching = false;
-    this.noResults = false;
     this.currentSearchTerm = '';
     this.activeFilter = null;
     this.filter = null;
@@ -175,19 +175,6 @@ export class DocsSearch extends LitElement {
     this.dispatchEvent(new Event('search-focus', { bubbles: true, composed: true }));
   }
 
-  #handleBlur(event: Event) {
-    event.preventDefault();
-    if (this.searchInput.value === '') {
-      this.noResults = false;
-    }
-
-    this.dispatchEvent(new Event('search-blur', { bubbles: true, composed: true }));
-  }
-
-  /**
-   * Lit lifecycle method called after property updates complete.
-   * Syncs the 'filter' attribute (from URL/external) to the internal activeFilter state.
-   */
   override updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
 
@@ -219,16 +206,6 @@ export class DocsSearch extends LitElement {
     }
   }
 
-  #evictOldestCacheEntryIfFull() {
-    if (this.#searchCache.size < DocsSearch.CACHE_MAX_SIZE) {
-      return;
-    }
-    const firstCacheKey = this.#searchCache.keys().next().value;
-    if (firstCacheKey) {
-      this.#searchCache.delete(firstCacheKey);
-    }
-  }
-
   async #loadPagefind() {
     if (!this.#pagefind) {
       const url = `${this.baseUrl}/.pagefind/pagefind.js`;
@@ -246,157 +223,90 @@ export class DocsSearch extends LitElement {
     this.currentSearchTerm = term;
 
     if (this.#pagefind) {
-      // Check cache first for instant results on repeated searches
-      const cached = this.#searchCache.get(term);
-      if (cached) {
-        this.isSearching = false;
-        this.results = cached;
-        this.noResults = this.results.length === 0;
-        this.dispatchEvent(
-          new CustomEvent(this.noResults ? 'search-no-results' : 'search-results', {
-            detail: this.results,
-            bubbles: true,
-            composed: true
-          })
-        );
-        return;
-      }
-
       this.results = [];
-      this.noResults = false;
 
       const searchResult = await this.#pagefind.debouncedSearch(term);
 
       if (searchResult !== null) {
-        // Limit results to MAX_RESULTS and fetch data in parallel for better performance
         const limitedResults = searchResult.results.slice(0, DocsSearch.MAX_RESULTS);
         const queryResults = await Promise.all(limitedResults.map(result => result.data()));
-
         this.isSearching = false;
-
-        // Assign a new array reference to trigger Lit's reactive updates
         this.results = [...queryResults];
 
-        // Update cache with FIFO eviction when cache is full
-        this.#evictOldestCacheEntryIfFull();
-        this.#searchCache.set(term, this.results);
-
-        // Notify parent components of search outcome
-        if (this.results.length === 0) {
-          this.noResults = true;
-          this.dispatchEvent(new Event('search-no-results', { bubbles: true, composed: true }));
-        } else {
-          this.dispatchEvent(
-            new CustomEvent('search-results', {
-              detail: this.results,
-              bubbles: true,
-              composed: true
-            })
-          );
-        }
+        this.#dispatchSearchStatus();
       }
     }
   }
 
+  #dispatchSearchStatus() {
+    if (this.#filteredResults.length === 0) {
+      this.dispatchEvent(new Event('search-no-results', { bubbles: true, composed: true }));
+    } else {
+      this.dispatchEvent(
+        new CustomEvent('search-results', {
+          detail: this.results,
+          bubbles: true,
+          composed: true
+        })
+      );
+    }
+  }
+
+  get #filteredResults(): SearchResult[] {
+    const searchWords = this.currentSearchTerm
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(w => w.length > 0);
+
+    return this.results
+      .filter(result => (this.activeFilter ? result.meta?.section === this.activeFilter : true))
+      .flatMap(result => [this.#getSearchResult(result), ...this.#getHeadings(result)])
+      .sort((a, b) => {
+        const aAll = searchWords.every(w => a.title.toLowerCase().includes(w));
+        const bAll = searchWords.every(w => b.title.toLowerCase().includes(w));
+        return aAll === bAll ? 0 : aAll ? -1 : 1;
+      });
+  }
+
   render() {
-    const filteredResults = this.#getFilteredResults();
-
     return html`
-    <nve-search>
-      <input id="search-input" type="search" aria-label="search" placeholder="search" @input="${this.#handleChange}" @focus="${this.#handleFocus}" @blur="${this.#handleBlur}" />
+    <div nve-layout="column gap:sm">
+      <nve-search>
+        <input id="search-input" type="search" aria-label="search" placeholder="search" @input=${this.#handleChange} @focus=${this.#handleFocus} />
+        ${
+          this.isSearching
+            ? html`
+        <nve-button container="inline">
+          <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
+        </nve-button>`
+            : nothing
+        }
+        <nve-icon-button id="search-reset" aria-label="clear selection" icon-name="cancel" container="inline" @click="${this.#handleReset}"></nve-icon-button>
+      </nve-search>
       ${
-        this.isSearching
+        this.results.length > 0
           ? html`
-      <nve-button container="inline">
-        <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
-      </nve-button>
-      `
-          : html``
+      <div role="group" aria-label="Filter by section" nve-layout="row gap:xs align:center align:wrap">
+        ${FILTER_OPTIONS.map(({ value, label, countKey }) => {
+          const active = value === this.activeFilter;
+          return html`
+          <nve-tag ?pressed=${active} color=${ifDefined(active ? undefined : 'gray-denim')} @click=${() => this.#setFilter(value)}>
+            ${label} <nve-dot size="sm">${this.#getFilterCounts()[countKey]}</nve-dot>
+          </nve-tag>`;
+        })}
+      </div>`
+          : nothing
       }
-      <nve-icon-button id="search-reset" aria-label="clear selection" icon-name="cancel" container="inline" @click="${this.#handleReset}"></nve-icon-button>
-    </nve-search>
-    ${
-      this.results.length > 0
-        ? (() => {
-            // Get result counts for each filter category to display in chip labels
-            const resultCounts = this.#getFilterCounts();
-
-            // Helper to determine if a filter is currently active
-            const isFilterActive = (filterName: string | null) => this.activeFilter === filterName;
-
-            return html`
-              <div role="group" aria-label="Filter by section" nve-layout="row gap:xs pad:xs align:center align:wrap">
-                ${FILTER_OPTIONS.map(({ value, label, countKey }) => {
-                  const active = isFilterActive(value);
-                  return html`
-                    <nve-tag
-                      .pressed=${active}
-                      color=${ifDefined(active ? undefined : 'gray-denim')}
-                      @click=${() => this.#setFilter(value)}
-                    >
-                      <span nve-layout="row gap:xs align:center">${label} <nve-dot size="sm" status=${ifDefined(active ? 'accent' : undefined)}>${resultCounts[countKey]}</nve-dot></span>
-                    </nve-tag>
-                  `;
-                })}
-              </div>
-            `;
-          })()
-        : ''
-    }
-    ${(() => {
-      const searchWords = this.currentSearchTerm
-        .toLowerCase()
-        .split(/\s+/)
-        .filter(w => w.length > 0);
-      const allResults = filteredResults.flatMap(result => [
-        this.#getSearchResult(result),
-        ...this.#getHeadings(result)
-      ]);
-
-      // For multi-word searches, promote results whose title contains ALL words
-      if (searchWords.length > 1) {
-        allResults.sort((a, b) => {
-          const aAll = searchWords.every(w => a.title.toLowerCase().includes(w));
-          const bAll = searchWords.every(w => b.title.toLowerCase().includes(w));
-          return aAll === bAll ? 0 : aAll ? -1 : 1;
-        });
-      }
-
-      return allResults.map(r => this.#renderSearchResult(r));
-    })()}
-    ${
-      this.noResults || (this.results.length > 0 && filteredResults.length === 0)
-        ? (() => {
-            // Determine if we're showing "no results at all" vs "no results in this filter"
-            const hasUnfilteredResults = this.results.length > 0;
-            const isFilteredView = this.activeFilter !== null;
-
-            // Choose appropriate message
-            const alertMessage = isFilteredView ? `No results in "${this.activeFilter}"` : 'No Results Found';
-
-            return html`
-              <div nve-layout="column gap:sm pad-top:sm pad-left:xs">
-                <nve-alert>${alertMessage}</nve-alert>
-
-                ${
-                  // Show "Show all results" button if there are results in other filters
-                  isFilteredView && hasUnfilteredResults
-                    ? html`
-                      <nve-button
-                        container="flat"
-                        size="sm"
-                        @click=${() => this.#setFilter(null)}
-                      >
-                        Show all results
-                      </nve-button>
-                    `
-                    : ''
-                }
-              </div>
-            `;
-          })()
-        : html``
-    }
+      ${this.#filteredResults.map(
+        result => html`<a href="${this.baseUrl}${result.url}" nve-layout="row gap:sm">
+        <nve-icon name="${result.icon}" size="md" style="${result.style}"></nve-icon>
+        <div nve-layout="column gap:xs">
+          <p nve-text="body sm">${result.title}</p>
+          <p nve-text="body muted sm">${result.subtitle}</p>
+        </div>
+      </a>`
+      )}
+    </div>
   `;
   }
 
@@ -408,6 +318,7 @@ export class DocsSearch extends LitElement {
   #setFilter(filter: string | null) {
     this.activeFilter = filter;
     this.filter = filter;
+    this.#dispatchSearchStatus();
 
     // Notify parent components that the search state has changed
     this.dispatchEvent(
@@ -417,23 +328,6 @@ export class DocsSearch extends LitElement {
         composed: true
       })
     );
-  }
-
-  /**
-   * Filters search results based on the currently active section filter.
-   * @returns Filtered array of search results, or all results if no filter is active
-   */
-  #getFilteredResults(): PagefindSearchFragment[] {
-    // Show all results when no filter is active
-    if (!this.activeFilter) {
-      return this.results;
-    }
-
-    // Filter results by matching section metadata
-    return this.results.filter(result => {
-      const resultSection = result.meta?.section;
-      return resultSection === this.activeFilter;
-    });
   }
 
   /**
@@ -469,51 +363,24 @@ export class DocsSearch extends LitElement {
     };
   }
 
-  #renderSearchResult(result: SearchResult) {
-    return html`
-      <a href="${this.baseUrl}${result.url}" nve-layout="pad-top:xs">
-        <div nve-layout="row gap:sm pad-top:xs pad-left:xs">
-          <nve-icon name="${result.icon}" size="md" style="${result.style}"></nve-icon>
-          <div nve-layout="column gap:xs">
-            <p nve-text="heading xs">${result.title}</p>
-            <p nve-text="body muted sm">${result.subtitle}</p>
-            <!-- ${result.excerpt ? html`<p class="search-excerpt" nve-text="body sm muted" .innerHTML=${result.excerpt}></p>` : ''} -->
-          </div>
-        </div>
-      </a>
-    `;
-  }
-
   #getSearchResult(result: PagefindSearchFragment): SearchResult {
-    const isNveTag = result.meta?.tag?.includes('nve-');
-    const isApiPage = result.meta?.tab === 'api';
+    let icon: IconName = 'book';
+    let colorToken = 'yellow-amber';
 
-    // Determine icon based on page type
-    let icon: IconName;
-    let colorToken: string;
-
-    if (isApiPage && isNveTag) {
-      // API documentation pages for components
-      icon = 'code';
-      colorToken = 'purple-violet';
-    } else if (isNveTag) {
-      // Component overview pages
+    if (result.meta?.tag?.includes('nve-')) {
       icon = 'terminal';
       colorToken = 'blue-cobalt';
-    } else {
-      // General documentation pages
-      icon = 'book';
-      colorToken = 'yellow-amber';
+    } else if (result.meta?.tab === 'api') {
+      icon = 'code';
+      colorToken = 'purple-violet';
     }
-
-    const style = `--color: var(--nve-ref-color-${colorToken}-1000);`;
 
     return {
       url: `${result.raw_url ?? ''}${this.#getQueryParam()}`,
       title: result.meta?.title,
       subtitle: result.raw_url || '',
       icon: icon,
-      style: style,
+      style: `--color: var(--nve-ref-color-${colorToken}-1000);`,
       excerpt: result.excerpt
     };
   }

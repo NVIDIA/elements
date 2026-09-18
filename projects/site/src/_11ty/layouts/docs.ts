@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
+import type { PagePanelContent } from '@nvidia-elements/core/page';
 import type { Tree } from '@nvidia-elements/core/tree';
 import { FILTER_VALUES, type DocsSearch } from '../../_internal/search/search.js';
 import '../../_internal/canvas/canvas.js';
@@ -9,15 +10,11 @@ import '../../_internal/canvas/canvas.js';
 void import('../../_internal/search/search.js');
 
 // panel toggles
-let loadedSystemsPanel = false;
 const systemOptionsPanel = globalThis.document.querySelector<HTMLElement>('#system-options-panel')!;
 const systemOptionsPanelBtn = globalThis.document.querySelector<HTMLElement>('#system-options-panel-btn')!;
 systemOptionsPanel.addEventListener('close', () => (systemOptionsPanel.hidden = true));
 systemOptionsPanelBtn.addEventListener('click', async () => {
-  if (!loadedSystemsPanel) {
-    await import('../../_internal/system-settings/system-settings.js');
-    loadedSystemsPanel = true;
-  }
+  await import('../../_internal/system-settings/system-settings.js');
   systemOptionsPanel.hidden = !systemOptionsPanel.hidden;
 });
 
@@ -59,11 +56,9 @@ setTimeout(() => {
   scrollToHeading(headerId);
 }, 500);
 
-// preserve scroll position between page transitions
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const content = globalThis.document.querySelector<any>('#sidenav-panel nve-page-panel-content')!;
+const content = globalThis.document.querySelector<PagePanelContent>('#sidenav-panel nve-page-panel-content')!;
 globalThis.window.addEventListener('beforeunload', () => {
-  sessionStorage.setItem('sidenav-scroll-position', content.scrollTop);
+  sessionStorage.setItem('sidenav-scroll-position', content.scrollTop.toString());
 });
 
 const savedPosition = sessionStorage.getItem('sidenav-scroll-position');
@@ -81,11 +76,14 @@ const docsNav = globalThis.document.querySelector<Tree>('#docs-nav')!;
 let isSearching = false;
 let currentFilter: string | null = null;
 
-/**
- * Syncs the current search query and active filter to URL parameters.
- * Updates browser history without triggering navigation or adding new entries.
- */
-function syncSearchStateToUrl(query: string, filter: string | null) {
+// Listen for any search state change (query input, filter selection, or reset)
+// The search component emits a single 'search-change' event for all state transitions
+docsSearch.addEventListener('search-change', ((event: CustomEvent) => {
+  const { query, filter } = event.detail as { query: string; filter: string | null };
+
+  isSearching = query.length > 0;
+  currentFilter = filter;
+
   const currentUrl = new URL(globalThis.location.href);
   let urlHasChanged = false;
 
@@ -114,50 +112,15 @@ function syncSearchStateToUrl(query: string, filter: string | null) {
     const newUrl = currentUrl.pathname + currentUrl.search + currentUrl.hash;
     globalThis.history.replaceState(null, '', newUrl);
   }
-}
-
-// Listen for any search state change (query input, filter selection, or reset)
-// The search component emits a single 'search-change' event for all state transitions
-docsSearch.addEventListener('search-change', ((event: CustomEvent) => {
-  const { query, filter } = event.detail as { query: string; filter: string | null };
-
-  isSearching = query.length > 0;
-  currentFilter = filter;
-  syncSearchStateToUrl(query, filter);
 
   // Restore navigation when search is fully cleared (no query and no filter)
   if (!isSearching && filter === null) {
-    toggleSideNav(true);
+    docsNav.hidden = false;
   }
 }) as EventListener);
 
-// Listen for search results loaded
-// Hides the navigation tree and expands the side panel to accommodate results
-docsSearch.addEventListener('search-results', () => {
-  toggleSideNav(false);
-});
-
-// Listen for no results found
-// Restores the navigation tree since there are no results to display
-docsSearch.addEventListener('search-no-results', () => {
-  toggleSideNav(true);
-});
-
-// Listen for search input blur
-// Restores navigation if user is not actively searching
-docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
-
-const defaultWidth = `${handle.getAttribute('value')}px`;
-const toggleSideNav = (state: boolean) => {
-  if (state) {
-    // Showing nav - shrink panel to default width
-    panel.style.width = defaultWidth;
-  } else {
-    // Hiding nav for search - expand panel for search results
-    panel.style.width = `${handle.max}px`;
-  }
-  docsNav.hidden = !state;
-};
+docsSearch.addEventListener('search-results', () => (docsNav.hidden = true));
+docsSearch.addEventListener('search-no-results', () => (docsNav.hidden = false));
 
 // Initialize search from URL parameters (if present)
 // This allows for shareable search links with pre-filled queries and filters
@@ -196,60 +159,41 @@ if (searchQuery) {
     searchInputElement.focus();
 
     // Hide navigation and show search results
-    toggleSideNav(false);
+    docsNav.hidden = true;
     isSearching = true;
 
     void docsSearch.search(searchQuery);
   }
 } else if (currentFilter) {
-  // If there's only a filter (no query), just apply the filter
   await customElements.whenDefined('nvd-search');
   await docsSearch.updateComplete;
-
   docsSearch.filter = currentFilter;
 }
 
-// Add clickable anchor links to headings
 function addHeadingAnchors() {
-  // Find all h2 and h3 elements with mkd class
   const headings = globalThis.document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"]');
 
   headings.forEach(heading => {
-    // Skip if anchor already exists
     if (heading.querySelector('.heading-anchor')) return;
-
-    // Get or generate ID
     const id = heading.id;
-
-    // Create anchor element
     const anchor = globalThis.document.createElement('a');
     anchor.className = 'heading-anchor';
     anchor.href = `${globalThis.window.parent.location.pathname}#${id}`;
     anchor.setAttribute('aria-label', 'copy permalink');
     anchor.innerHTML = '<nve-icon-button container="inline" icon-name="link"></nve-icon-button>';
 
-    // Add click handler
     anchor.addEventListener('click', e => {
       e.preventDefault();
-
-      // Update URL hash without triggering default scroll
       globalThis.history.pushState(null, '', `${globalThis.window.location.pathname}#${id}`);
-
-      // Scroll to heading using controlled scroll
       scrollToHeading(id);
-
-      // Copy to clipboard
       if (globalThis.navigator.clipboard) {
         void globalThis.navigator.clipboard.writeText(
           `${globalThis.window.location.origin}${globalThis.window.location.pathname}#${id}`
         );
       }
     });
-
-    // Insert anchor as first child of heading
     heading.insertBefore(anchor, heading.firstChild);
   });
 }
 
-// Run on initial load
 addHeadingAnchors();
