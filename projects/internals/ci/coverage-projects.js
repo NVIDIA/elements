@@ -7,6 +7,7 @@ export const COVERAGE_PROJECTS = [
   { name: '@nvidia-elements/markdown', dir: 'markdown' },
   { name: '@nvidia-elements/media', dir: 'media' },
   { name: '@nvidia-elements/monaco', dir: 'monaco' },
+  { name: '@nvidia-elements/pi', dir: 'pi' },
   { name: '@nvidia-elements/plot', dir: 'plot' },
   { name: '@nvidia-elements/scene', dir: 'scene' },
   { name: '@internals/metadata', dir: 'internals/metadata' },

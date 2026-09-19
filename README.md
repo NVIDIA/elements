@@ -127,6 +127,7 @@ git commit -a -s -m "fix(core): disable multi-select"
 | `media`     | `/projects/media`              |
 | `monaco`    | `/projects/monaco`             |
 | `pages`     | `/projects/pages`              |
+| `pi`        | `/projects/pi`                 |
 | `starters`  | `/projects/starters`           |
 | `styles`    | `/projects/styles`             |
 | `themes`    | `/projects/themes`             |

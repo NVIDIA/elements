@@ -79,6 +79,8 @@ jobs:
             projects/media/package.json
             projects/monaco/dist
             projects/monaco/package.json
+            projects/pi/dist
+            projects/pi/package.json
             projects/pages/dist
             projects/plot/dist
             projects/plot/package.json

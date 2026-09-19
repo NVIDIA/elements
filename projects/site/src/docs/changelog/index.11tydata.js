@@ -14,6 +14,7 @@ const labsCli = projects.find(p => p.name === '@nvidia-elements/cli');
 const labsLint = projects.find(p => p.name === '@nvidia-elements/lint');
 const labsForms = projects.find(p => p.name === '@nvidia-elements/forms');
 const labsMarkdown = projects.find(p => p.name === '@nvidia-elements/markdown');
+const pi = projects.find(p => p.name === '@nvidia-elements/pi');
 
 // https://www.11ty.dev/docs/data-js/
 export default [
@@ -86,5 +87,12 @@ export default [
     version: labsMarkdown?.version,
     changelog: labsMarkdown?.changelog,
     description: labsMarkdown?.description
+  },
+  {
+    title: '@nvidia-elements/pi',
+    permalink: '/pi/',
+    version: pi?.version,
+    changelog: pi?.changelog,
+    description: pi?.description
   }
 ];
