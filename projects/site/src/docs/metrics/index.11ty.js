@@ -64,6 +64,11 @@ function getTopCdnVersion(packageData) {
     : 'None';
 }
 
+function renderOptionalCount(value, label) {
+  const formattedValue = value === null ? 'unavailable' : value.toLocaleString();
+  return `<span><span nve-text="emphasis">${formattedValue}</span> ${label}</span>`;
+}
+
 export function render() {
   return this.renderTemplate(
     /* html */ `
@@ -106,8 +111,8 @@ export function render() {
     <div nve-layout="row gap:md align:wrap align:vertical-center" nve-text="body sm">
       <span><span nve-text="emphasis">${formatNumber(adoption.totals.npmDownloads)}</span> npm downloads</span>
       <span><span nve-text="emphasis">${formatNumber(adoption.totals.cdnRequests)}</span> CDN requests</span>
-      <span><span nve-text="emphasis">${formatNumber(adoption.github.stars)}</span> stars</span>
-      <span><span nve-text="emphasis">${formatNumber(adoption.github.contributors)}</span> contributors</span>
+      ${renderOptionalCount(adoption.github.stars, 'stars')}
+      ${renderOptionalCount(adoption.github.contributors, 'contributors')}
     </div>
     <div nve-layout="grid gap:md span-items:12 &lg|span-items:6 &xl|span-items:4">
       <nve-card>
@@ -207,7 +212,11 @@ export function render() {
           <p nve-text="body muted sm">Public stargazer growth from GitHub API timestamps.</p>
         </nve-card-header>
         <nve-card-content>
-          <canvas id="adoption-github-interest-chart"></canvas>
+          ${
+            adoption.github.stargazers.length > 0
+              ? '<canvas id="adoption-github-interest-chart"></canvas>'
+              : '<p nve-text="body muted sm">GitHub star history is unavailable.</p>'
+          }
         </nve-card-content>
       </nve-card>
       <nve-grid>

@@ -24,11 +24,11 @@ export class AdoptionService {
     packages: [],
     github: {
       repository: '',
-      stars: 0,
-      forks: 0,
-      subscribers: 0,
-      contributors: 0,
-      releases: 0,
+      stars: null,
+      forks: null,
+      subscribers: null,
+      contributors: null,
+      releases: null,
       stargazers: [],
       errors: []
     }

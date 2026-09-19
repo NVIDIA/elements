@@ -117,16 +117,21 @@ export class VitePlaywrightRunner {
   }
 
   async close() {
-    const report = globSync(resolve(`${this.#root}/**/report.json`)).reduce((p, n) => {
-      const file = JSON.parse(fs.readFileSync(n));
-      return { ...p, [file.name]: file };
-    }, {});
+    const report = collectReports(this.#root);
 
     fs.writeFileSync(`${this.#dist}/report.json`, JSON.stringify(report, null, 2));
     await this.#page.close();
     await this.#browser.close();
     await this.#server.close();
   }
+}
+
+/** Collects individual runner reports without re-reading the aggregate report. */
+export function collectReports(root) {
+  return globSync(path.resolve(root, 'dist/*/report.json')).reduce((reports, reportPath) => {
+    const report = JSON.parse(fs.readFileSync(reportPath));
+    return { ...reports, [report.name]: report };
+  }, {});
 }
 
 /**

@@ -151,6 +151,12 @@ describe('adoption utilities', () => {
       forks: 4,
       subscribers: 3
     });
+    expect(parseGitHubRepository({ stargazers_count: 0, forks_count: 0, subscribers_count: 0 })).toEqual({
+      stars: 0,
+      forks: 0,
+      subscribers: 0
+    });
+    expect(parseGitHubRepository({})).toEqual({ stars: null, forks: null, subscribers: null });
     expect(
       parseGitHubPaginationTotal('<https://api.github.com/repositories/1/releases?per_page=1&page=68>; rel="last"', 1)
     ).toBe(68);
@@ -315,6 +321,25 @@ describe('adoption utilities', () => {
       errors: []
     });
     expect(metrics.stargazers).toHaveLength(2);
+  });
+
+  it('should distinguish unavailable GitHub metrics from real zero values', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => new Response('', { status: 503, statusText: 'Service Unavailable' }))
+    );
+
+    const metrics = await getGitHubMetrics();
+
+    expect(metrics).toMatchObject({
+      stars: null,
+      forks: null,
+      subscribers: null,
+      contributors: null,
+      releases: null,
+      stargazers: []
+    });
+    expect(metrics.errors).not.toHaveLength(0);
   });
 
   it('should create adoption totals without counting unavailable packages as published', () => {
