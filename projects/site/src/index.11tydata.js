@@ -211,6 +211,14 @@ const integrations = {
     documentation: 'https://nuxt.com/',
     playgroundURL: null
   },
+  pi: {
+    href: '/docs/integrations/pi/',
+    icon: 'pi.svg',
+    title: 'Pi',
+    logo: 'pi',
+    description: 'Give Pi agents native Elements tools and guidance.',
+    documentation: 'https://pi.dev'
+  },
   preact: {
     href: '/docs/integrations/preact/',
     icon: 'preact.svg',

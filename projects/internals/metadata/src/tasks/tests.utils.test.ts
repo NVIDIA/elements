@@ -325,6 +325,7 @@ describe('generateTestSummary', () => {
       '@nvidia-elements/markdown',
       '@nvidia-elements/media',
       '@nvidia-elements/monaco',
+      '@nvidia-elements/pi',
       '@internals/metadata',
       '@internals/patterns',
       '@internals/tools'

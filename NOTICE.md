@@ -31,22 +31,43 @@ This product includes the following bundled third-party software:
 - @modelcontextprotocol/server v2.0.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Anthropic, PBC (https://anthropic.com)
 
-- adm-zip v0.6.1 [MIT] (used by: @nvidia-elements/cli)
+- @pnpm/catalogs.config v0.1.0 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Unknown
+
+- @pnpm/exportable-manifest v7.0.3 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Unknown
+
+- @pnpm/read-project-manifest v6.0.6 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Unknown
+
+- @pnpm/workspace.read-manifest v2.2.0 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Unknown
+
+- adm-zip v0.6.1 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 
-- archiver v8.0.0 [MIT] (used by: @nvidia-elements/cli)
+- archiver v8.0.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.10.0 [MIT] (used by: @nvidia-elements/cli)
+- eslint v10.10.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
-- fast-glob v3.3.3 [MIT] (used by: @nvidia-elements/cli)
+- fast-glob v3.3.3 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Denis Malinochkin (https://mrmlnc.com)
+
+- fflate v0.8.3 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Arjun Barrett <arjunbarrett@gmail.com>
 
 - highlight.js v11.12.0 [BSD-3-Clause] (used by: @nvidia-elements/code)
   Copyright: Josh Goebel <hello@joshgoebel.com>
 
+- html-format v1.1.7 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Mohamed Akram
+
 - ignore v7.0.8 [MIT] (used by: @nvidia-elements/cli)
+  Copyright: kael
+
+- ignore v7.0.6 [MIT] (used by: @nvidia-elements/pi)
   Copyright: kael
 
 - lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco, @nvidia-elements/plot, @nvidia-elements/scene)
@@ -64,7 +85,7 @@ This product includes the following bundled third-party software:
 - marked-terminal v7.3.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Mikael Brevik
 
-- minisearch v7.2.0 [MIT] (used by: @nvidia-elements/lint)
+- minisearch v7.2.0 [MIT] (used by: @nvidia-elements/lint, @nvidia-elements/pi)
   Copyright: Luca Ongaro
 
 - monaco-editor v0.55.1 [MIT] (used by: @nvidia-elements/monaco)
@@ -73,16 +94,25 @@ This product includes the following bundled third-party software:
 - open v11.0.2 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
+- open v11.0.0 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+
 - ora v9.4.1 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.24 [MIT] (used by: @nvidia-elements/cli)
+- publint v0.3.24 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Bjorn Lu
+
+- sanitize-html v2.17.7 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: Apostrophe Technologies, Inc.
+
+- ts-morph v28.0.0 [MIT] (used by: @nvidia-elements/pi)
+  Copyright: David Sherret
 
 - yargs v18.1.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Unknown
 
-- zod v4.5.4 [MIT] (used by: @nvidia-elements/cli)
+- zod v4.5.4 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Colin McDonnell <zod@colinhacks.com>
 
 ==============================================================================
@@ -318,19 +348,29 @@ The following bundled components are provided under the MIT license:
 @inquirer/prompts v8.7.2 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
+@pnpm/catalogs.config v0.1.0 - Copyright Unknown
+@pnpm/exportable-manifest v7.0.3 - Copyright Unknown
+@pnpm/read-project-manifest v6.0.6 - Copyright Unknown
+@pnpm/workspace.read-manifest v2.2.0 - Copyright Unknown
 adm-zip v0.6.1 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
 eslint v10.10.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
+fflate v0.8.3 - Copyright Arjun Barrett <arjunbarrett@gmail.com>
+html-format v1.1.7 - Copyright Mohamed Akram
 ignore v7.0.8 - Copyright kael
+ignore v7.0.6 - Copyright kael
 markdown-it v15.0.1 - Copyright Unknown
 marked v18.0.11 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.55.1 - Copyright Microsoft Corporation
 open v11.0.2 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.24 - Copyright Bjorn Lu
+sanitize-html v2.17.7 - Copyright Apostrophe Technologies, Inc.
+ts-morph v28.0.0 - Copyright David Sherret
 yargs v18.1.0 - Copyright Unknown
 zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
 

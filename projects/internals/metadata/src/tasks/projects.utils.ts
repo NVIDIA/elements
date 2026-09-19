@@ -47,6 +47,7 @@ export function getProjects(): { created: string; data: Project[] } {
     '../../../../markdown',
     '../../../../media',
     '../../../../monaco',
+    '../../../../pi',
     '../../../../internals/metadata',
     '../../../../internals/patterns'
   ];
