@@ -134,7 +134,7 @@ const config = {
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-redundant-type-constituents': 'off',
     '@typescript-eslint/no-unnecessary-condition': 'off',
-    '@typescript-eslint/no-useless-default-assignment': 'off',
+    '@typescript-eslint/no-useless-default-assignment': 'error',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-extraneous-class': 'off',
     '@typescript-eslint/no-unnecessary-template-expression': 'error',
