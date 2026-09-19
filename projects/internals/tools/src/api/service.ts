@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { cwd as getCwd } from 'node:process';
 import { ApiService as MetadataApiService, type Attribute, type Element } from '@internals/metadata';
 import { getContextAPIs, getContextTokens, searchContextAPIs, type PartialAPIResult } from './utils.js';
 import {
@@ -253,6 +254,11 @@ export class ApiService {
           type: 'number',
           description: 'Maximum number of diagnostics returned. Summary counts remain complete.',
           default: 100
+        },
+        cwd: {
+          type: 'string',
+          description: 'Provide the current working directory.',
+          default: getCwd()
         }
       },
       additionalProperties: false
@@ -274,7 +280,8 @@ export class ApiService {
     filename,
     format = 'markdown',
     maxDiagnostics,
-    fix = false
+    fix = false,
+    cwd = getCwd()
   }: {
     paths?: string[];
     template?: string;
@@ -283,8 +290,9 @@ export class ApiService {
     format?: 'markdown' | 'json';
     maxDiagnostics?: number;
     fix?: boolean;
+    cwd?: string;
   }): Promise<ValidationResult | string> {
-    const result = await validateApiRequest({ paths, template, lang, filename, maxDiagnostics, fix });
+    const result = await validateApiRequest({ paths, template, lang, filename, maxDiagnostics, fix, cwd });
     return format === 'json' ? result : formatValidationResult(result);
   }
 
@@ -415,7 +423,8 @@ async function validateApiRequest({
   lang,
   filename,
   maxDiagnostics,
-  fix
+  fix,
+  cwd
 }: {
   paths?: string[];
   template?: string;
@@ -423,11 +432,12 @@ async function validateApiRequest({
   filename?: string;
   maxDiagnostics?: number;
   fix: boolean;
+  cwd: string;
 }): Promise<ValidationResult> {
-  const request = { paths, template, lang, filename, fix };
+  const request = { paths, template, lang, filename, fix, cwd };
   assertValidationRequest(request);
   const inputs = await getValidationInputs(request);
-  return validate(inputs, { maxDiagnostics, fix });
+  return validate(inputs, { cwd, maxDiagnostics, fix });
 }
 
 type ValidationRequest = {
@@ -436,6 +446,7 @@ type ValidationRequest = {
   lang?: ValidationLanguage;
   filename?: string;
   fix: boolean;
+  cwd: string;
 };
 
 function assertValidationRequest(request: ValidationRequest): void {
@@ -452,12 +463,12 @@ function assertTemplateLanguage({ template, lang, filename }: ValidationRequest)
   if (lang === 'json' && !filename) throw new Error('filename is required when checking JSON content.');
 }
 
-async function getValidationInputs({ paths, template, lang, filename }: ValidationRequest) {
-  if (paths?.length) return readValidationPaths(paths);
+async function getValidationInputs({ paths, template, lang, filename, cwd }: ValidationRequest) {
+  if (paths?.length) return readValidationPaths(paths, cwd);
   const inputLanguage = lang ?? 'html';
   return [
     {
-      filename: validateVirtualFilename(filename ?? `stdin.${inputLanguage}`),
+      filename: validateVirtualFilename(filename ?? `stdin.${inputLanguage}`, cwd),
       source: template!,
       lang: inputLanguage
     }

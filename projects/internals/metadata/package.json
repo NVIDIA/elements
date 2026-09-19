@@ -200,6 +200,9 @@
         "../../monaco/package.json",
         "../../monaco/README.md",
         "../../monaco/CHANGELOG.md",
+        "../../pi/package.json",
+        "../../pi/README.md",
+        "../../pi/CHANGELOG.md",
         "../../patterns/package.json",
         "../../patterns/README.md",
         "../../patterns/CHANGELOG.md"

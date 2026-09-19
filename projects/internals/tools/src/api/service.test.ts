@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { Attribute, Element } from '@internals/metadata';
 import type { ToolMethod } from '../internal/tools.js';
@@ -172,12 +175,16 @@ describe('ApiService', () => {
 
   describe('validate', () => {
     it('should have correct metadata', () => {
-      expect((ApiService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
-      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.paths).toBeDefined();
-      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template).toBeDefined();
-      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.stdin).toBeUndefined();
-      expect((ApiService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.fix).toBeUndefined();
-      expect((ApiService.validate as ToolMethod<unknown>).metadata.cli).toMatchObject({
+      const metadata = (ApiService.validate as ToolMethod<unknown>).metadata;
+      expect(metadata.command).toBe('validate');
+      expect(metadata.inputSchema?.properties).toMatchObject({
+        paths: expect.any(Object),
+        template: expect.any(Object),
+        cwd: expect.any(Object)
+      });
+      expect(metadata.inputSchema?.properties).not.toHaveProperty('stdin');
+      expect(metadata.inputSchema?.properties).not.toHaveProperty('fix');
+      expect(metadata.cli).toMatchObject({
         exclude: ['template'],
         properties: { stdin: { type: 'boolean' }, fix: { type: 'boolean' } },
         positionals: { paths: { optional: true, variadic: true } }
@@ -201,6 +208,17 @@ describe('ApiService', () => {
       expect(typeof result).toBe('object');
       expect((result as { ok: boolean }).ok).toBe(false);
       expect((result as { diagnostics: unknown[] }).diagnostics).toHaveLength(1);
+    });
+
+    it('should resolve path inputs from the provided working directory', async () => {
+      const directory = await mkdtemp(join(tmpdir(), 'elements-api-service-'));
+      try {
+        await writeFile(join(directory, 'page.html'), '<nve-button>Save</nve-button>');
+        const result = await ApiService.validate({ paths: ['page.html'], cwd: directory, format: 'json' });
+        expect(result).toMatchObject({ summary: { files: 1 } });
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
     });
 
     it('should default supplied content to HTML', async () => {
