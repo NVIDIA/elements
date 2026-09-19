@@ -54,7 +54,8 @@ const starterCDNAssets: { packageName: StarterCDNPackageName; filePath: string }
 
 const cdnStampTargets = new Map<string, string>([
   ['go', 'src/index.html'],
-  ['go-htmx', 'src/index.html']
+  ['go-htmx', 'src/index.html'],
+  ['sphinx', 'docs/_themes/nvidia_elements/layout.html']
 ]);
 
 const starterExportTransforms = new Map<string, (dist: string) => Promise<void>>([['angular', exportAngularConfig]]);
@@ -75,13 +76,24 @@ export type Starter =
   | 'preact'
   | 'react'
   | 'solidjs'
+  | 'sphinx'
   | 'svelte'
   | 'typescript'
   | 'vue';
 
 type NPMClient = 'npm' | 'pnpm';
 
-export const startersData = {
+type StarterToolchain = 'node' | 'external';
+
+interface StarterMetadata {
+  zip: string | null;
+  cli: boolean;
+  toolchain?: StarterToolchain;
+  setupDependencies?: boolean;
+  postCreate?: string[];
+}
+
+export const startersData: Record<Starter, StarterMetadata> = {
   angular: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/angular.zip`,
     cli: true
@@ -144,6 +156,13 @@ export const startersData = {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/solidjs.zip`,
     cli: true
   },
+  sphinx: {
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/sphinx.zip`,
+    cli: true,
+    toolchain: 'external',
+    setupDependencies: false,
+    postCreate: ['uv sync --locked', 'uv run sphinx-autobuild docs dist']
+  },
   svelte: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/svelte.zip`,
     cli: true
@@ -158,6 +177,10 @@ export const startersData = {
   }
 };
 
+export function starterUsesExternalToolchain(starter: string) {
+  return starter in startersData && startersData[starter as Starter].toolchain === 'external';
+}
+
 /* istanbul ignore next -- @preserve */
 export async function archiveStarter(projectDir: string, outDir: string) {
   const dist = join(outDir, projectDir);
@@ -165,13 +188,15 @@ export async function archiveStarter(projectDir: string, outDir: string) {
   await starterExportTransforms.get(projectDir)?.(dist);
   await stampStarterCDNVersionFiles(projectDir, dist);
   writeAllAgentConfigs(dist);
-  const packageJSON = await exportPackageFromWorkspace(projectDir);
-  await writeFile(join(dist, 'package.json'), JSON.stringify(packageJSON, undefined, 2));
-  const workspaceManifest = await exportStarterWorkspaceManifest();
-  if (workspaceManifest) {
-    await writeFile(join(dist, 'pnpm-workspace.yaml'), workspaceManifest);
+  if (!starterUsesExternalToolchain(projectDir)) {
+    const packageJSON = await exportPackageFromWorkspace(projectDir);
+    await writeFile(join(dist, 'package.json'), JSON.stringify(packageJSON, undefined, 2));
+    const workspaceManifest = await exportStarterWorkspaceManifest();
+    if (workspaceManifest) {
+      await writeFile(join(dist, 'pnpm-workspace.yaml'), workspaceManifest);
+    }
+    await writeFile(join(dist, '.npmrc'), 'registry=https://registry.npmjs.org/');
   }
-  await writeFile(join(dist, '.npmrc'), 'registry=https://registry.npmjs.org/');
   await zipProject(dist);
 }
 
@@ -190,10 +215,25 @@ async function zipProject(outDir: string) {
 
 /* istanbul ignore next -- @preserve */
 function copyProject(projectDir: string, dist: string) {
-  const ignoreDirs = new Set(['dist', 'node_modules', '.wireit', '.eslintcache', 'bin']);
+  const ignoredNames = new Set([
+    'dist',
+    'node_modules',
+    '.wireit',
+    '.eslintcache',
+    'bin',
+    '.venv',
+    '__pycache__',
+    '.pytest_cache',
+    '.mypy_cache'
+  ]);
+  if (starterUsesExternalToolchain(projectDir)) {
+    ignoredNames.add('package.json');
+    ignoredNames.add('.npmrc');
+    ignoredNames.add('pnpm-workspace.yaml');
+  }
   cpSync(projectDir, dist, {
     recursive: true,
-    filter: src => !ignoreDirs.has(basename(src))
+    filter: src => !ignoredNames.has(basename(src))
   });
 }
 
@@ -340,8 +380,10 @@ export async function createStarter(starter: Starter, outDir: string = resolve(c
     await downloadStarter(downloadPath, archivePath);
     await extractStarter(archivePath, extractedPath);
     await setupStarterGit(extractedPath);
-    await setupStarterNPM(extractedPath);
-    console.log('🎉 Starter created successfully');
+    if (!starterUsesExternalToolchain(starter)) {
+      await setupStarterNPM(extractedPath);
+    }
+    logStarterCreated(starter);
     return {
       create: {
         message: 'Starter created successfully',
@@ -355,6 +397,14 @@ export async function createStarter(starter: Starter, outDir: string = resolve(c
         status: 'danger'
       }
     };
+  }
+}
+
+function logStarterCreated(starter: Starter) {
+  console.log('🎉 Starter created successfully');
+  const postCreate = startersData[starter].postCreate;
+  if (postCreate?.length) {
+    console.log(`Next steps:\n  cd ${starter}\n  ${postCreate.join('\n  ')}`);
   }
 }
 

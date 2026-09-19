@@ -1,0 +1,9 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol nve-text="list">
+    <li><a href="{{ pathto(root_doc)|e }}">{{ shorttitle|e }}</a></li>
+    {%- for parent in parents %}
+    <li><a href="{{ parent.link|e }}">{{ parent.title|striptags|e }}</a></li>
+    {%- endfor %}
+    <li aria-current="page">{{ title|striptags|e }}</li>
+  </ol>
+</nav>
