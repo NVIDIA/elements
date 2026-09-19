@@ -14,6 +14,7 @@ import {
   getRequiredNPMClient,
   normalizeAngularConfigForExport,
   serializeStarterWorkspaceManifest,
+  starterUsesExternalToolchain,
   stampStarterCDNVersions,
   removeWireitScripts,
   startStarter
@@ -67,6 +68,9 @@ describe('startersData', () => {
     expect(startersData.lit.cli).toBe(false);
     expect(startersData['mcp-app'].cli).toBe(true);
     expect(startersData.preact.cli).toBe(false);
+    expect(startersData.sphinx.cli).toBe(true);
+    expect(startersData.sphinx.toolchain).toBe('external');
+    expect(startersData.sphinx.postCreate).toEqual(['uv sync --locked', 'uv run sphinx-autobuild docs dist']);
   });
 
   it('should have correct zip URLs for starters with downloads', () => {
@@ -83,11 +87,24 @@ describe('startersData', () => {
     expect(startersData.bundles.zip).toContain('bundles.zip');
     expect(startersData['mcp-app'].zip).toContain('mcp-app.zip');
     expect(startersData.hugo.zip).toContain('hugo.zip');
+    expect(startersData.sphinx.zip).toContain('sphinx.zip');
   });
 
   it('should have null zip for starters without downloads', () => {
     expect(startersData.lit.zip).toBeNull();
     expect(startersData.preact.zip).toBeNull();
+  });
+});
+
+describe('starter toolchains', () => {
+  it('should default existing starters to the Node toolchain', () => {
+    expect(starterUsesExternalToolchain('typescript')).toBe(false);
+    expect(starterUsesExternalToolchain('go')).toBe(false);
+    expect(starterUsesExternalToolchain('hugo')).toBe(false);
+  });
+
+  it('should identify external-toolchain starters', () => {
+    expect(starterUsesExternalToolchain('sphinx')).toBe(true);
   });
 });
 

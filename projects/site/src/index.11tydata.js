@@ -253,6 +253,18 @@ const integrations = {
     documentation: 'https://www.solidjs.com',
     playgroundURL: null
   },
+  sphinx: {
+    href: '/docs/integrations/sphinx/',
+    icon: 'sphinx.svg',
+    title: 'Sphinx',
+    description: 'Build MyST documentation with Elements and Sphinx.',
+    logo: 'sphinx',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/sphinx/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/sphinx.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/sphinx`,
+    documentation: 'https://www.sphinx-doc.org/en/master/',
+    playgroundURL: null
+  },
   svelte: {
     href: '/docs/integrations/svelte/',
     icon: 'svelte.svg',
