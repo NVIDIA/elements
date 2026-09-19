@@ -1,0 +1,76 @@
+{%- extends "basic/layout.html" %} {% block extrahead %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/fonts/inter.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/styles/dist/bundles/index.css" />
+<script>
+  (() => {
+    const savedTheme = localStorage.getItem('nve-docs-theme');
+    const systemTheme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const theme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : systemTheme;
+    const pygmentsDarkStylesheet = document.querySelector('#pygments_dark_css');
+    document.documentElement.setAttribute('nve-theme', theme);
+    if (pygmentsDarkStylesheet) pygmentsDarkStylesheet.media = theme === 'dark' ? 'all' : 'not all';
+  })();
+</script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@nvidia-elements/core/dist/bundles/index.min.js"></script>
+{% endblock %} {% block body_tag %}
+<body class="nve-docs">
+  {% endblock %} {% block header %}
+  <header class="site-header" role="banner">
+    <nve-icon-button
+      class="navigation-toggle"
+      role="button"
+      icon-name="menu"
+      container="flat"
+      size="sm"
+      aria-label="Open documentation navigation"
+      aria-controls="primary-navigation"
+      aria-expanded="false"></nve-icon-button>
+    <a class="brand" href="{{ pathto(root_doc)|e }}">
+      <nve-logo color="brand-green" size="sm" aria-label="NVIDIA">NV</nve-logo>
+      <span>{{ shorttitle|e }}</span>
+    </a>
+    <form class="site-search" action="{{ pathto('search') }}" method="get" role="search">
+      <label class="visually-hidden" for="site-search-input">{{ _('Search documentation') }}</label>
+      <input
+        id="site-search-input"
+        name="q"
+        type="search"
+        placeholder="{{ _('Search documentation') }}"
+        autocomplete="off" />
+    </form>
+    <nve-icon-button
+      class="theme-toggle"
+      role="button"
+      icon-name="moon"
+      container="flat"
+      size="sm"
+      aria-label="Use dark color scheme"></nve-icon-button>
+  </header>
+  {% endblock %} {% block relbar1 %}{% include "breadcrumbs.html" %}{% endblock %} {% block content %}
+  <div class="docs-shell">
+    <div class="navigation-backdrop" hidden></div>
+    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary documentation" hidden>
+      <div class="navigation-heading">Documentation</div>
+      {{ toctree(includehidden=theme_globaltoc_includehidden|tobool, collapse=theme_globaltoc_collapse|tobool,
+      maxdepth=theme_globaltoc_maxdepth|int) }}
+    </nav>
+    <main id="main-content" class="document" tabindex="-1">
+      <div class="body">{% block body %}{% endblock %}</div>
+      {% include "pagination.html" %}
+    </main>
+    {%- if display_toc %}
+    <aside class="local-navigation" aria-label="On this page">
+      <div class="navigation-heading">On this page</div>
+      {{ toc }}
+    </aside>
+    {%- endif %}
+  </div>
+  {% endblock %} {% block relbar2 %}{% endblock %} {% block footer %}
+  <footer class="site-footer">
+    <span>{{ copyright|e }}</span>
+    {%- if show_sphinx %}<span>Built with <a href="https://www.sphinx-doc.org/">Sphinx {{ sphinx_version|e }}</a>.</span
+    >{% endif %}
+  </footer>
+  {% endblock %}
+</body>

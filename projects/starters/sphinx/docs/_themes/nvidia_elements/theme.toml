@@ -1,0 +1,12 @@
+[theme]
+inherit = "basic"
+stylesheets = [
+  "elements.css",
+]
+sidebars = []
+pygments_style = { default = "sphinx", dark = "monokai" }
+
+[options]
+globaltoc_collapse = "false"
+globaltoc_includehidden = "true"
+globaltoc_maxdepth = "4"

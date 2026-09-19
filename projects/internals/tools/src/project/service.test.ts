@@ -16,6 +16,13 @@ vi.mock('./starters.js', () => ({
   startersData: {
     typescript: { cli: true, zip: 'typescript.zip' },
     go: { cli: true, zip: 'go.zip', setupDependencies: false },
+    sphinx: {
+      cli: true,
+      zip: 'sphinx.zip',
+      toolchain: 'external',
+      setupDependencies: false,
+      postCreate: ['uv sync --locked', 'uv run sphinx-autobuild docs dist']
+    },
     lit: { cli: false, zip: null }
   },
   createStarter: vi.fn(),
@@ -77,6 +84,25 @@ describe('ProjectService', () => {
       expect(setupAgent).toHaveBeenCalled();
       expect(setupProject).not.toHaveBeenCalled();
       expect(updateProject).not.toHaveBeenCalled();
+    });
+
+    it('should scaffold external starters without project setup or automatic start', async () => {
+      const { createStarter, startStarter } = await import('./starters.js');
+      const { setupAgent } = await import('./setup-agent.js');
+      const { setupProject } = await import('./setup.js');
+      const { updateProject } = await import('./update.js');
+      vi.mocked(createStarter).mockResolvedValue({ create: { message: 'created', status: 'success' } });
+      vi.mocked(setupAgent).mockResolvedValue({ agent: { message: 'configured', status: 'success' } });
+
+      const { ProjectService } = await import('./service.js');
+      const result = await ProjectService.create({ type: 'sphinx', cwd: '/test', start: true });
+
+      expect(result).toHaveProperty('create');
+      expect(result).not.toHaveProperty('agent');
+      expect(setupAgent).not.toHaveBeenCalled();
+      expect(setupProject).not.toHaveBeenCalled();
+      expect(updateProject).not.toHaveBeenCalled();
+      expect(startStarter).not.toHaveBeenCalled();
     });
 
     it('should return failed report when a step fails', async () => {
