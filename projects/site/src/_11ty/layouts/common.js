@@ -123,7 +123,10 @@ export const renderBaseHead = data => {
       white-space: nowrap;
     }
   </style>
-  <script>
+  ${
+    data.disableTheme
+      ? ''
+      : /* html */ `<script>
     if (JSON.parse(localStorage.getItem('elements-sb-globals') ?? '{}').classic === 'classic') {
       const link = document.createElement('link');
       link.id = 'classic-theme-stylesheet';
@@ -131,7 +134,8 @@ export const renderBaseHead = data => {
       link.href = new URL('static/themes/classic.css', document.baseURI).href;
       document.head.append(link);
     }
-  </script>
+  </script>`
+  }
   <script type="module">
     const sidenavPanel = globalThis.document.querySelector('#sidenav-panel');
     if (sidenavPanel && globalThis.window.innerWidth < 920) {
@@ -181,6 +185,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted selected' : ''}><a href="/docs/integrations/preact/">Preact</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/react/') ? 'highlighted selected' : ''}><a href="/docs/integrations/react/">React</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/solidjs/') ? 'highlighted selected' : ''}><a href="/docs/integrations/solidjs/">SolidJS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/sphinx/') ? 'highlighted selected' : ''}><a href="/docs/integrations/sphinx/">Sphinx</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/svelte/') ? 'highlighted selected' : ''}><a href="/docs/integrations/svelte/">Svelte</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'highlighted selected' : ''}><a href="/docs/integrations/typescript/">TypeScript</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted selected' : ''}><a href="/docs/integrations/vue/">Vue</a></nve-tree-node>

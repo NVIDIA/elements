@@ -9,6 +9,8 @@
 .vitest-attachments
 .angular
 node_modules
+.venv
+__pycache__
 dist
 .lighthouse
 **/.visual/dist
