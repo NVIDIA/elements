@@ -936,6 +936,18 @@
       "types": "./dist/tree/define.d.ts",
       "default": "./dist/tree/define.js"
     },
+    "./viewport": {
+      "types": "./dist/viewport/index.d.ts",
+      "default": "./dist/viewport/index.js"
+    },
+    "./viewport/index.js": {
+      "types": "./dist/viewport/index.d.ts",
+      "default": "./dist/viewport/index.js"
+    },
+    "./viewport/define.js": {
+      "types": "./dist/viewport/define.d.ts",
+      "default": "./dist/viewport/define.js"
+    },
     "./week": {
       "types": "./dist/week/index.d.ts",
       "default": "./dist/week/index.js"

@@ -9,9 +9,7 @@ export default {
 };
 
 class GestureDemoElement extends LitElement {
-  readonly #gestureController = new GestureController(this, {
-    getCapabilities: () => ({ drag: true, pan: false, pinch: false, wheel: false })
-  });
+  readonly #gestureController = new GestureController(this, {});
 
   static styles = css`
     :host {
@@ -42,7 +40,7 @@ if (!customElements.get('gesture-controller-demo-element')) {
 }
 
 /**
- * @summary Drag recognition delivered through gesture and unmatched pointer events. Use event details to move content and represent active pointer state.
+ * @summary Synchronously claimed pointer input produces drag gestures while preserving start and end input. Use this pattern when a control owns a pointer sequence.
  * @tags test-case
  */
 export const Drag = {
@@ -53,9 +51,9 @@ export const Drag = {
   let x = 0;
   let y = 0;
 
-  element.addEventListener('nve-pointer-input', ({ detail }) => {
-    if (detail.kind === 'pointerdown') element.dataset.active = '';
-    if (detail.kind === 'pointerup' || detail.kind === 'pointercancel') delete element.dataset.active;
+  element.addEventListener('nve-gesture-input', ({ detail }) => {
+    if (detail.kind === 'pointerdown' && detail.claim({ kind: 'drag' })) element.dataset.active = '';
+    if (detail.kind === 'pointerend') delete element.dataset.active;
   });
 
   element.addEventListener('nve-gesture', ({ detail }) => {
