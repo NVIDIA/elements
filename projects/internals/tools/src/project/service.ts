@@ -18,7 +18,26 @@ const starters = Object.keys(startersData).filter(
 
 function starterShouldSetupDependencies(type: Starter): boolean {
   const starterData = startersData[type];
-  return !('setupDependencies' in starterData) || starterData.setupDependencies;
+  return starterData.setupDependencies !== false;
+}
+
+function starterShouldStart(type: Starter): boolean {
+  return startersData[type].toolchain !== 'external';
+}
+
+function starterShouldConfigureAgents(type: Starter): boolean {
+  return startersData[type].toolchain !== 'external';
+}
+
+async function configureStarter(type: Starter, projectDir: string): Promise<Report[]> {
+  const reports: Report[] = [];
+  if (starterShouldConfigureAgents(type)) {
+    reports.push(await setupAgent(projectDir, 'all'));
+  }
+  if (starterShouldSetupDependencies(type)) {
+    reports.push(setupProject(projectDir), await updateProject(projectDir));
+  }
+  return reports;
 }
 
 @service()
@@ -60,20 +79,14 @@ export class ProjectService {
     const projectDir = resolve(join(cwd, type));
 
     const createReport = await createStarter(type, dir);
-    const agentReport = await setupAgent(projectDir, 'all');
-    const reports = [createReport, agentReport];
-    if (starterShouldSetupDependencies(type)) {
-      const setupProjectReport = setupProject(projectDir);
-      const updateProjectReport = await updateProject(projectDir);
-      reports.push(setupProjectReport, updateProjectReport);
-    }
+    const reports = [createReport, ...(await configureStarter(type, projectDir))];
 
     const failedReport = reports.find(report => Object.values(report).some(value => value.status === 'danger'));
     if (failedReport) {
       return failedReport;
     }
 
-    if (start) {
+    if (start && starterShouldStart(type)) {
       await startStarter(projectDir);
     }
 

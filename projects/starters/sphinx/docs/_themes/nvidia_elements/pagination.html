@@ -1,0 +1,15 @@
+{%- if prev or next %}
+<nav class="pagination" aria-label="Previous and next pages">
+  {%- if prev %}
+  <a class="pagination-link pagination-previous" href="{{ prev.link|e }}" rel="prev">
+    <span>Previous</span>
+    <strong>{{ prev.title|striptags|e }}</strong>
+  </a>
+  {%- else %}<span></span>{%- endif %} {%- if next %}
+  <a class="pagination-link pagination-next" href="{{ next.link|e }}" rel="next">
+    <span>Next</span>
+    <strong>{{ next.title|striptags|e }}</strong>
+  </a>
+  {%- endif %}
+</nav>
+{%- endif %}

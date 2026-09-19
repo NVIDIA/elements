@@ -1,0 +1,13 @@
+[project]
+name = "nvidia-elements-sphinx-starter"
+version = "0.0.0"
+description = "Sphinx documentation with an NVIDIA Elements theme"
+requires-python = ">=3.12"
+dependencies = [
+  "myst-parser>=5.1,<6",
+  "sphinx>=9.1,<10",
+  "sphinx-autobuild>=2025.8",
+]
+
+[tool.uv]
+package = false
