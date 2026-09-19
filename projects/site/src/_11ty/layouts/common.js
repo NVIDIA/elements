@@ -169,6 +169,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/mcp-apps/') ? 'highlighted selected' : ''}><a href="/docs/integrations/mcp-apps/">MCP Apps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted selected' : ''}><a href="/docs/integrations/nextjs/">NextJS</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nuxt/') ? 'highlighted selected' : ''}><a href="/docs/integrations/nuxt/">Nuxt</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/pi/') ? 'highlighted selected' : ''}><a href="/docs/integrations/pi/">Pi</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted selected' : ''}><a href="/docs/integrations/preact/">Preact</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/react/') ? 'highlighted selected' : ''}><a href="/docs/integrations/react/">React</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/solidjs/') ? 'highlighted selected' : ''}><a href="/docs/integrations/solidjs/">SolidJS</a></nve-tree-node>

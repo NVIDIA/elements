@@ -1,0 +1,222 @@
+{
+  "name": "@nvidia-elements/pi",
+  "version": "0.0.0",
+  "release": {
+    "extends": "../../release.config.js"
+  },
+  "description": "Native Pi extension for NVIDIA Elements tools, validation, API discovery, examples, and agent guidance.",
+  "keywords": [
+    "nvidia",
+    "elements",
+    "pi-package",
+    "coding-agent",
+    "design-system",
+    "web-components"
+  ],
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/pi"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "pi": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "skills": [
+      "./dist/skills"
+    ],
+    "prompts": [
+      "./dist/prompts"
+    ]
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "NOTICE.md",
+    "package.json",
+    "dist/**/*.js",
+    "dist/index.d.ts",
+    "dist/prompts/**/*",
+    "dist/skills/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "lint": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit",
+    "test:coverage": "wireit"
+  },
+  "dependencies": {
+    "@nvidia-elements/lint": "workspace:^",
+    "@pnpm/catalogs.config": "0.1.0",
+    "@pnpm/exportable-manifest": "7.0.3",
+    "@pnpm/read-project-manifest": "6.0.6",
+    "@pnpm/workspace.read-manifest": "2.2.0",
+    "adm-zip": "catalog:",
+    "archiver": "8.0.0",
+    "eslint": "catalog:",
+    "fast-glob": "catalog:",
+    "fflate": "0.8.3",
+    "html-format": "1.1.7",
+    "ignore": "7.0.6",
+    "minisearch": "7.2.0",
+    "open": "11.0.0",
+    "publint": "catalog:",
+    "sanitize-html": "2.17.7",
+    "ts-morph": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "catalog:",
+    "@earendil-works/pi-tui": "catalog:",
+    "@internals/eslint": "workspace:*",
+    "@internals/tools": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "publint": "catalog:",
+    "typebox": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "build",
+        "publint",
+        "test:coverage"
+      ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build && node src/scripts/write-resources.ts",
+      "files": [
+        "../internals/tools/dist/**/*.js",
+        "src/scripts/write-resources.ts",
+        "src/**",
+        "!src/**/*.test.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "../internals/tools:build",
+          "cascade": false
+        }
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci",
+        "../lint:build"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../internals/eslint:ci",
+        "../lint:build"
+      ]
+    },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "dist/**/*.js",
+        "dist/**/*.md",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:coverage": {
+      "command": "vitest run --coverage",
+      "files": [
+        "dist/**/*.js",
+        "dist/**/*.md",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
+}
