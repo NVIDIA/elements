@@ -553,11 +553,11 @@ export interface AdoptionGitHubStargazerMonth {
  */
 export interface AdoptionGitHubMetrics {
   repository: string;
-  stars: number;
-  forks: number;
-  subscribers: number;
-  contributors: number;
-  releases: number;
+  stars: number | null;
+  forks: number | null;
+  subscribers: number | null;
+  contributors: number | null;
+  releases: number | null;
   stargazers: AdoptionGitHubStargazerMonth[];
   errors: AdoptionSourceError[];
 }

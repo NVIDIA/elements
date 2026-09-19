@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { Chart } from 'chart.js/auto';
+import { Chart, type ChartConfiguration } from 'chart.js/auto';
 import { getThemeTokens } from '@nvidia-elements/core';
 import { AdoptionService } from '@internals/metadata';
 import {
@@ -384,7 +384,7 @@ new Chart(getCanvas('adoption-release-overlay-chart'), {
   }
 });
 
-new Chart(getCanvas('adoption-github-interest-chart'), {
+const githubInterestChartConfiguration: ChartConfiguration<'line'> = {
   type: 'line',
   data: {
     labels: adoption.github.stargazers.map(stargazer => stargazer.month),
@@ -442,4 +442,18 @@ new Chart(getCanvas('adoption-github-interest-chart'), {
       }
     }
   }
-});
+};
+
+const githubInterestCanvas = globalThis.document.getElementById('adoption-github-interest-chart');
+if (githubInterestCanvas instanceof HTMLCanvasElement) {
+  if ('IntersectionObserver' in globalThis) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      new Chart(githubInterestCanvas, githubInterestChartConfiguration);
+    });
+    observer.observe(githubInterestCanvas);
+  } else {
+    new Chart(githubInterestCanvas, githubInterestChartConfiguration);
+  }
+}

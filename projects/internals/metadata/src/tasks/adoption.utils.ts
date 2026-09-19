@@ -29,9 +29,9 @@ interface NpmRegistryMetadata {
 }
 
 interface GitHubRepositoryMetrics {
-  stars: number;
-  forks: number;
-  subscribers: number;
+  stars: number | null;
+  forks: number | null;
+  subscribers: number | null;
 }
 
 interface GitHubStargazersResult {
@@ -301,9 +301,9 @@ export function parseJsDelivrStats(data: unknown, latestVersion: string | null):
 
 export function parseGitHubRepository(data: unknown): GitHubRepositoryMetrics {
   return {
-    stars: getNumber(data, 'stargazers_count') ?? 0,
-    forks: getNumber(data, 'forks_count') ?? 0,
-    subscribers: getNumber(data, 'subscribers_count') ?? 0
+    stars: getNumber(data, 'stargazers_count'),
+    forks: getNumber(data, 'forks_count'),
+    subscribers: getNumber(data, 'subscribers_count')
   };
 }
 
@@ -432,22 +432,22 @@ export async function getGitHubMetrics(): Promise<AdoptionGitHubMetrics> {
   const errors = [repositoryResult, contributorsResult, releasesResult].flatMap(result =>
     result.ok ? [] : [result.error]
   );
-  const repositoryMetrics = repositoryResult.ok
-    ? parseGitHubRepository(repositoryResult.data)
-    : parseGitHubRepository({});
+  const repositoryMetrics = repositoryResult.ok ? parseGitHubRepository(repositoryResult.data) : null;
   const contributorsFallback =
     contributorsResult.ok && Array.isArray(contributorsResult.data) ? contributorsResult.data.length : 0;
   const releasesFallback = releasesResult.ok && Array.isArray(releasesResult.data) ? releasesResult.data.length : 0;
 
   return {
     repository,
-    stars: repositoryMetrics.stars,
-    forks: repositoryMetrics.forks,
-    subscribers: repositoryMetrics.subscribers,
+    stars: repositoryMetrics?.stars ?? null,
+    forks: repositoryMetrics?.forks ?? null,
+    subscribers: repositoryMetrics?.subscribers ?? null,
     contributors: contributorsResult.ok
       ? parseGitHubPaginationTotal(contributorsResult.headers.get('link'), contributorsFallback)
-      : 0,
-    releases: releasesResult.ok ? parseGitHubPaginationTotal(releasesResult.headers.get('link'), releasesFallback) : 0,
+      : null,
+    releases: releasesResult.ok
+      ? parseGitHubPaginationTotal(releasesResult.headers.get('link'), releasesFallback)
+      : null,
     stargazers: parseGitHubStargazers(stargazersResult.data),
     errors: [...errors, ...stargazersResult.errors]
   };
