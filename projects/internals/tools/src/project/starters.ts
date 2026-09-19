@@ -12,7 +12,6 @@ import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
 import { getCatalogsFromWorkspaceManifest } from '@pnpm/catalogs.config';
 import { createExportableManifest } from '@pnpm/exportable-manifest';
 import { readProjectManifestOnly } from '@pnpm/read-project-manifest';
-import { ZipArchive } from 'archiver';
 import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
@@ -177,6 +176,7 @@ export async function archiveStarter(projectDir: string, outDir: string) {
 
 /* istanbul ignore next -- @preserve */
 async function zipProject(outDir: string) {
+  const { ZipArchive } = await import('archiver');
   const output = createWriteStream(`${outDir}.zip`);
   output.on('error', err => console.error('Error writing to zip file:', err));
 

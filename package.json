@@ -86,6 +86,7 @@
         "./projects/media:ci",
         "./projects/monaco:ci",
         "./projects/pages:ci",
+        "./projects/pi:ci",
         "./projects/plot:ci",
         "./projects/scene:ci",
         "./projects/site:ci",
@@ -168,6 +169,7 @@
         "release:markdown",
         "release:media",
         "release:monaco",
+        "release:pi",
         "release:styles"
       ]
     },
@@ -229,6 +231,12 @@
         "release:labs-forms"
       ]
     },
+    "release:pi": {
+      "command": "cd projects/pi && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:lint"
+      ]
+    },
     "release:styles": {
       "command": "cd projects/styles && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
@@ -278,6 +286,7 @@
     "lint:fix": {
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
+        "./projects/pi:lint:fix",
         "./projects/code:lint:fix",
         "./projects/create:lint:fix",
         "./projects/core:lint:fix",

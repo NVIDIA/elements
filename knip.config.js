@@ -188,6 +188,22 @@ export default {
       entry: [...PROJECT_FILES],
       project: [...PROJECT_FILES]
     },
+    'projects/pi': {
+      entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...TEST_ENTRIES, ...VITE_CONFIGS, ...VITEST_CONFIGS],
+      project: [...PROJECT_FILES, ...SOURCE_FILES],
+      ignoreDependencies: [
+        '@pnpm/catalogs.config',
+        '@pnpm/exportable-manifest',
+        '@pnpm/read-project-manifest',
+        '@pnpm/workspace.read-manifest',
+        'fast-glob',
+        'fflate',
+        'html-format',
+        'ignore',
+        'sanitize-html',
+        'zod'
+      ]
+    },
     'projects/plot': {
       entry: [
         ...PACKAGE_FILES,

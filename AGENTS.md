@@ -117,6 +117,7 @@ The repository contains a top-level workspace with individual project directorie
 - `/projects/lint` - Elements lint configurations and custom rules
 - `/projects/monaco` - Monaco editor integration
 - `/projects/pages` - GitHub Pages deployment project
+- `/projects/pi` - Native Pi extension and Elements agent tools
 - `/projects/site` - Documentation site (11ty)
 - `/projects/internals` - Internal tooling (vite configs, eslint, patterns, metadata)
 
@@ -238,6 +239,7 @@ git commit -m "chore(docs): update component examples"
 - `media` - Media playback UI components (`/projects/media`)
 - `monaco` - Monaco editor integration (`/projects/monaco`)
 - `pages` - GitHub Pages deployment project (`/projects/pages`)
+- `pi` - Native Pi extension (`/projects/pi`)
 - `ci` - Build/CI tooling (`/projects/internals`)
 
 ### Prose Linting (Vale)
