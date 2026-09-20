@@ -679,6 +679,47 @@ describe('type-popover.controller - legacy popovertarget hint', () => {
     expect(showPopover).toHaveBeenCalledOnce();
   });
 
+  it('should close on mouseleave and rebind listeners when the hint trigger changes', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-button id="hint-one">one</nve-button>
+      <nve-button id="hint-two">two</nve-button>
+      <type-native-popover-controller-test-element
+        .trigger=${'hint-one'}
+        .popoverType=${'hint'}
+        hidden>
+      </type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const firstTrigger = fixture.querySelector<Button>('#hint-one');
+    const secondTrigger = fixture.querySelector<Button>('#hint-two');
+    await elementIsStable(element);
+    await elementIsStable(firstTrigger);
+    await elementIsStable(secondTrigger);
+
+    const open = untilEvent(element, 'open');
+    firstTrigger.dispatchEvent(new MouseEvent('mouseenter'));
+    expect((await open).target).toBe(element);
+
+    const close = untilEvent(element, 'close');
+    firstTrigger.dispatchEvent(new MouseEvent('mouseleave'));
+    expect((await close).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    element.trigger = 'hint-two';
+    await elementIsStable(element);
+
+    const reopen = untilEvent(element, 'open');
+    secondTrigger.dispatchEvent(new MouseEvent('mouseenter'));
+    expect((await reopen).target).toBe(element);
+
+    firstTrigger.dispatchEvent(new MouseEvent('mouseleave'));
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
   it('should find shadow root active triggers', async () => {
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(false);
@@ -769,6 +810,16 @@ describe('type-popover.controller - invoker command support', () => {
     const { source, command } = await event;
     expect(source).toBe(button);
     expect(command).toBe('toggle-popover');
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should show popover when show-popover command is dispatched', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const open = untilEvent(element, 'open');
+    element.dispatchEvent(new CommandEvent('command', { command: 'show-popover', source: button }));
+    expect((await open).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(true);
   });
 });
@@ -921,6 +972,39 @@ describe('type-popover.controller - interest invoker support', () => {
 
     await new Promise(r => setTimeout(r, 60));
     expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should show popover immediately when openDelay and interest delay are unset', async () => {
+    element.openDelay = undefined;
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const originalGetComputedStyle = window.getComputedStyle.bind(window);
+    const styleSpy = vi.spyOn(window, 'getComputedStyle').mockImplementation((elt, pseudo) => {
+      const style = originalGetComputedStyle(elt, pseudo);
+      if (elt !== element) {
+        return style;
+      }
+      return new Proxy(style, {
+        get(target, prop, receiver) {
+          if (prop === 'interestDelayStart') {
+            return '';
+          }
+          const value = Reflect.get(target, prop, receiver);
+          return typeof value === 'function' ? value.bind(target) : value;
+        }
+      });
+    });
+
+    try {
+      const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+      interestEvent.source = button;
+      element.dispatchEvent(interestEvent);
+      await elementIsStable(element);
+      expect(element.matches(':popover-open')).toBe(true);
+    } finally {
+      styleSpy.mockRestore();
+    }
   });
 });
 
@@ -1193,6 +1277,20 @@ describe('type-popover.controller - disconnected element handling', () => {
 
     expect(() => element.showPopover({ source: sourceButton })).not.toThrow();
     expect(element.isConnected).toBe(false);
+    removeFixture(fixture);
+  });
+
+  it('should skip remaining setup if disconnected before first update completes', async () => {
+    const fixture = await createFixture(html`<div></div>`);
+    const element = document.createElement(
+      'type-native-popover-controller-test-element'
+    ) as TypeNativePopoverControllerTestElement;
+    fixture.appendChild(element);
+    element.remove();
+    await element.updateComplete;
+
+    expect(element.isConnected).toBe(false);
+    expect(element.hasAttribute('nve-popover')).toBe(false);
     removeFixture(fixture);
   });
 });
