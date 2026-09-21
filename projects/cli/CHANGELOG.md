@@ -1,3 +1,16 @@
+## [2.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.3...@nvidia-elements/cli-v2.2.4) (2026-09-21)
+
+### Features
+
+* **code:** support code element slot content ([25486f5](https://github.com/NVIDIA/elements/commit/25486f52fa95ac2cb865a20748467d4d5729e673))
+* **core:** tag slots ([c4e0edd](https://github.com/NVIDIA/elements/commit/c4e0edd7b5bdd8c619ca969fd537352466fc759a))
+
+### Bug Fixes
+
+* **ci:** ignore test runner artifacts in knip cache ([7415260](https://github.com/NVIDIA/elements/commit/74152608703345d5507ba5f64e5f1535f98b36e3))
+* **cli:** update @inquirer/prompts to 8.7.2 ([b6984b5](https://github.com/NVIDIA/elements/commit/b6984b58a80a666b7a83aac1e109337e90c469d1))
+* **media:** since version release ([583f6bc](https://github.com/NVIDIA/elements/commit/583f6bcd5384e4d4c5ca953b2f9e74cfbb313750))
+
 ## [2.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.2...@nvidia-elements/cli-v2.2.3) (2026-09-12)
 
 ### Features
