@@ -399,4 +399,23 @@ describe('exampleShortcode', () => {
       import '/@id/@nvidia-elements/core';
     `);
   });
+
+  it('should preserve scene buffer bindings when rewriting development module imports', async () => {
+    const { rewriteDevImports } = await importShortcode();
+    const script = `
+      import { PointBuffer } from '@nvidia-elements/scene/points';
+      import 'lit';
+      import './local.js';
+      const points = new PointBuffer({ capacity: 1 });
+      points.add({ position: [0, 0, 0] });
+    `;
+
+    expect(rewriteDevImports({ type: 'module', textContent: script })).toBe(`
+      import { PointBuffer } from '/@id/@nvidia-elements/scene/points';
+      import '/@id/lit';
+      import './local.js';
+      const points = new PointBuffer({ capacity: 1 });
+      points.add({ position: [0, 0, 0] });
+    `);
+  });
 });

@@ -38,6 +38,7 @@ export const data = {
     else if (filePath.includes('/foundations/')) dir = 'foundations';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
     else if (filePath.includes('/media/')) dir = 'media';
+    else if (filePath.includes('/scene/')) dir = 'scene';
     else if (filePath.includes('/markdown/')) dir = '';
     else if (filePath.includes('/foundations/')) dir = 'foundations';
     else if (filePath.includes('/viewport/')) return `${data.component.url}examples/`;
