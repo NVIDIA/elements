@@ -14,8 +14,8 @@ Your value comes from being boring, small, and correct. A reviewer should be abl
 These are not suggestions. If you violate any constraint, stop the run and report instead of opening a pull request.
 
 1. **One task per run.** The selection script chooses the task type and target.
-2. **One source file, or one tightly coupled module.** A module means a single component directory such as `projects/core/src/badge/`. Mode A may also edit the shared ESLint config under `projects/internals/`, apply `--fix` results for the adopted rule in any selector-provided package, and write selector-provided generated suppression files. Hand-fixed source changes (edits ESLint did not propose as a `fix`) must stay within one project.
-3. **Diff cap: 150 changed lines across at most 4 files**, excluding generated suppression files. Mode A also excludes `--fix` source files from the 4-file cap; those `--fix` lines still count toward the 150-line cap. If your change exceeds this cap, shrink the scope or stop.
+2. **One source file, or one tightly coupled module.** A module means a single component directory such as `projects/core/src/badge/`. Mode A may also edit the shared ESLint config under `projects/internals/`, apply `--fix` results for the adopted rule in any selector-provided package when those edits fit the cap, and write selector-provided generated suppression files. A Mode A pull request may be config-only or suppressions-only, with no `--fix` source files. Hand-fixed source changes (edits ESLint did not propose as a `fix`) must stay within one project.
+3. **Diff cap: 150 changed lines across at most 4 files**, excluding generated suppression files. Mode A also excludes `--fix` source files from the 4-file cap; those `--fix` lines still count toward the 150-line cap. If Mode A `--fix` would exceed this cap, land a suppressions-only adoption instead of stopping. For every other task, shrink the scope or stop.
 4. **No public API changes.** Do not add, rename, or remove exported symbols, custom element tags, properties, attributes, slots, events, CSS custom properties, or CSS parts. Do not edit `package.json` exports. If a fix requires an API change, stop and report instead.
 5. **No dependency changes.** Do not add, remove, or bump any dependency.
 6. **No behavior change on refactors.** Coverage, type, and lint tasks must be behavior-preserving. Only the bug task may change behavior, and only in the way its failing test describes.
@@ -88,6 +88,8 @@ Facts about suppressions that govern both modes:
 
 The rule is `'off'` in `projects/internals/eslint/src/configs/typescript.js` under the `// todo: enable these rules incrementally` marker.
 
+Adopting the rule is the goal. The rule applies to new code immediately. Existing findings may land in committed suppression files. Prefer mechanical `--fix` when that work fits the diff cap. A **config-only** or **suppressions-only** pull request is a valid Mode A outcome. Do not skip the rule solely because `--fix` is large.
+
 1. Change that one rule from `'off'` to `'error'`. Change nothing else in the config.
 2. From each selector-provided `packages[].workingDirectory`, preview autofixes without writing files:
 
@@ -105,9 +107,17 @@ The rule is `'off'` in `projects/internals/eslint/src/configs/typescript.js` und
 
    Collect proposed source changes from `output` when `--fix-dry-run` succeeds. When `--fix-dry-run` fails and you used lint-only JSON, collect only messages whose `ruleId` is the adopted rule and `fix` is present. Do not include other rules' `output`, messages, or edits in the API, control-flow, or 150-line checks.
 
-   Continue when every collected proposed source change is an autofix for the adopted rule, those edits do not change public API or control flow, the combined `--fix` plus hand-fix line count stays within 150 after excluding generated suppression files, and any remaining hand fix stays in one source file or tightly coupled module in one project. The `--fix` files may span selector-provided packages and do not count toward the 4-file cap. Otherwise restore only changes from this attempt, preserve pre-existing work, skip the rule, and report why.
+   Classify the preview as one of these outcomes. Count only adopted-rule `--fix` edits toward the 150-line cap. Generated suppression files do not count. `--fix` files do not count toward the 4-file cap.
 
-3. If the preview fits the constraints, capture the remaining violations from each supplied working directory.
+   - **Config-only:** the adopted rule has zero findings in every supplied working directory.
+   - **Fix-and-suppress:** every collected proposed source change is an autofix for the adopted rule, those edits do not change public API or control flow, the combined `--fix` plus optional one hand-fix stays within 150 lines, and any remaining hand fix stays in one source file or tightly coupled module in one project.
+   - **Suppressions-only:** the adopted rule has findings, and `--fix` does not meet the Fix-and-suppress constraints. This includes `--fix` over the 150-line cap, `--fix` that would change public API or control flow, and `--fix` that would need a hand edit in more than one module.
+
+3. Apply the matching path.
+
+   **Config-only.** Commit the config change. Do not run `--suppress-rule`. Delete any `{}` stub you wrote for preview if no suppress step recreates it.
+
+   **Fix-and-suppress.** Capture remaining violations from each supplied working directory.
 
    When `--fix-dry-run` succeeded, **always pass `--fix`**, so ESLint repairs anything it can instead of freezing those violations into the suppression file:
 
@@ -115,7 +125,7 @@ The rule is `'off'` in `projects/internals/eslint/src/configs/typescript.js` und
    mise exec -- pnpm exec eslint --fix --suppressions-location <suppressionsFile> --suppress-rule <rule> .
    ```
 
-   Omitting `--fix` here is a real error, not a style preference, when `--fix-dry-run` succeeded. It permanently suppresses violations the tooling could have fixed for free, and each one then costs a future pull request.
+   Omitting `--fix` on this path is a real error when `--fix-dry-run` succeeded. It permanently suppresses violations the tooling could have fixed for free, and each one then costs a future pull request.
 
    When `--fix-dry-run` failed, apply only the adopted-rule fixes collected from the lint-only JSON by editing those files yourself, then run `--suppress-rule` without `--fix`:
 
@@ -123,12 +133,27 @@ The rule is `'off'` in `projects/internals/eslint/src/configs/typescript.js` und
    mise exec -- pnpm exec eslint --suppressions-location <suppressionsFile> --suppress-rule <rule> .
    ```
 
-   Never suppress a fixable adopted-rule violation. If `--fix` later crashes on an unrelated type-aware rule after a successful dry-run, use this same lint-only apply and suppress path instead of keeping unrelated `--fix` output.
+   On the Fix-and-suppress path, never suppress a fixable adopted-rule violation. If `--fix` later crashes on an unrelated type-aware rule after a successful dry-run, use this same lint-only apply and suppress path instead of keeping unrelated `--fix` output.
 
-4. Fix the violations in **one** remaining unfixable file by hand, then prune (see below). If `--fix` cleared every finding, skip the hand fix.
-5. Commit the config change, every generated suppression file, every `--fix` source file, and the optional one hand-fixed file together.
+   Then fix the violations in **one** remaining unfixable file by hand, then prune (see below). If `--fix` cleared every finding, skip the hand fix.
 
-Adopting a rule holds all **new** code to it immediately. Apply every mechanical `--fix` in the same pull request so the ratchet does not freeze fixable violations. That adoption is worth one pull request even when only one file still needs a hand fix.
+   **Suppressions-only.** From each supplied working directory that reported adopted-rule findings, run `--suppress-rule` without `--fix`:
+
+   ```shell
+   mise exec -- pnpm exec eslint --suppressions-location <suppressionsFile> --suppress-rule <rule> .
+   ```
+
+   Do not apply `--fix` source edits and do not hand-fix files in this pull request. Mode B burns those entries down. Delete any `{}` stub the suppress command never recreates.
+
+4. Commit only what the chosen path produced:
+
+   - Config-only: the config change
+   - Suppressions-only: the config change and every generated suppression file
+   - Fix-and-suppress: the config change, every generated suppression file, every `--fix` source file, and the optional one hand-fixed file
+
+Adopting a rule holds all **new** code to it immediately. Apply every mechanical `--fix` in the same pull request when that work fits the cap. When `--fix` does not fit, a suppressions-only adoption is still worth one pull request. Config-only adoption is worth one pull request when the repo is already clean.
+
+**Done when (Mode A)**: the rule is `'error'`, CI passes, you added no new inline disables, and remaining adopted-rule findings are either gone or recorded in committed `--suppress-rule` files.
 
 ### Mode B: burn down
 
@@ -164,7 +189,7 @@ There are suppressions left that do not occur anymore. Consider re-running the c
 
 This is success, not failure. It means your fix worked and the stale entry is still on disk. Resolve it by pruning. Do **not** revert your fix, do not re-run `--suppress-rule` to make the message go away, and do not add `--pass-on-unpruned-suppressions`, which only hides the condition and leaves the ratchet slipping backwards.
 
-**Done when**: the rule's suppression count strictly decreases, no stale suppressions remain, the file's public API is byte-identical, and every applicable project verification script passes with no new inline disables.
+**Done when (Mode B)**: the rule's suppression count strictly decreases, no stale suppressions remain, the file's public API is byte-identical, and every applicable project verification script passes with no new inline disables.
 
 <!-- vale Vale.Spelling = YES -->
 
@@ -293,10 +318,10 @@ Report and open nothing when any of these hold:
 - the selection script returns `selected: false`
 - the selection script still exits non-zero after its one permitted environmental recovery attempt
 - an unmerged `topic/upkeep/*` branch already exists on the remote
-- the change would exceed the diff cap or change public API
+- the change would exceed the diff cap or change public API, except Mode A suppressions-only adoption when `--fix` does not fit the cap
 - a test fails and you cannot fix it inside the task's scope
 - the bug is not reproducible, or fixing it would need a new visual baseline
-- you want to add a suppression, an `eslint-disable` comment, or a cast to make CI pass
+- you want to add an inline `eslint-disable` comment, a cast, or a hand-written suppression to make CI pass. Keep Mode A `--suppress-rule` files; they do not trigger this stop
 
 Stopping is a successful run. Report what you tried, what blocked you, and what you need to proceed. Never widen the task merely to produce a pull request, and never open a pull request you would not approve yourself.
 
