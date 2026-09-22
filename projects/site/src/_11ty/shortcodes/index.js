@@ -21,7 +21,7 @@ export async function installShortcode(tag) {
   import '${element?.manifest?.metadata?.entrypoint}/define.js';
 </script>
 
-${examples.find(s => s.name === 'Default' && s.element === tag)?.template ?? ''}
+${examples.find(s => (s.name === 'Default' || s.name === 'InstallSource') && s.element === tag)?.template ?? ''}
 \`\`\`
 
 <div nve-layout="column gap:xs" role="region" aria-label="AI Agent API access via CLI or MCP">
