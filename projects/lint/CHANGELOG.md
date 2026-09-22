@@ -1,3 +1,19 @@
+## [2.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.6.0...@nvidia-elements/lint-v2.6.1) (2026-09-22)
+
+### Features
+
+* **code:** support code element slot content ([25486f5](https://github.com/NVIDIA/elements/commit/25486f52fa95ac2cb865a20748467d4d5729e673))
+* **core:** tag slots ([c4e0edd](https://github.com/NVIDIA/elements/commit/c4e0edd7b5bdd8c619ca969fd537352466fc759a))
+
+### Bug Fixes
+
+* **ci:** ignore test runner artifacts in knip cache ([7415260](https://github.com/NVIDIA/elements/commit/74152608703345d5507ba5f64e5f1535f98b36e3))
+* **cli:** improve skill tool call and creation steps ([b30455c](https://github.com/NVIDIA/elements/commit/b30455cad0deab646ad20ccd18bdafda39056860))
+* **cli:** update @inquirer/prompts to 8.7.2 ([b6984b5](https://github.com/NVIDIA/elements/commit/b6984b58a80a666b7a83aac1e109337e90c469d1))
+* **docs:** correct jsdelivr bundle urls ([c7432be](https://github.com/NVIDIA/elements/commit/c7432be0394225f3d9d7b2c193b7e491c751c9a9))
+* **lint:** skip generated eleventy vite directories in eslint ([92e5d50](https://github.com/NVIDIA/elements/commit/92e5d506fe0a951c354641a1aad2b1a9dd75a212))
+* **media:** since version release ([583f6bc](https://github.com/NVIDIA/elements/commit/583f6bcd5384e4d4c5ca953b2f9e74cfbb313750))
+
 ## [2.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.5.2...@nvidia-elements/lint-v2.6.0) (2026-09-11)
 
 ### Features
