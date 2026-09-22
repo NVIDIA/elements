@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@internals/metadata": ["../internals/metadata/src/index.js"],
+      "@internals/metadata/*": ["../internals/metadata/src/*"],
+      "@internals/metadata/*.js": ["../internals/metadata/src/*.js"],
+      "@nvidia-elements/lint": ["./src/index.js"],
+      "@nvidia-elements/lint/*": ["./src/*"],
+      "@nvidia-elements/lint/*.js": ["./src/*.js"]
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "src/eslint/rules/no-custom-background-gradients.test.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/eslint/rules/no-deprecated-attributes.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/eslint/rules/no-deprecated-css-variable.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 2
+    }
+  },
+  "src/eslint/rules/no-deprecated-tags.test.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 2
+    }
+  },
+  "src/eslint/rules/no-display-override.test.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/eslint/rules/no-nested-container-types.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/eslint/rules/no-restricted-container-full.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/eslint/rules/no-unexpected-css-value.test.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 12
+    }
+  },
+  "src/eslint/rules/no-unexpected-css-variable.test.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 4
+    }
+  },
+  "src/eslint/rules/no-unexpected-slot-value.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/eslint/rules/no-unknown-css-variable.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  }
+}

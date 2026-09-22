@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@internals/metadata": ["../internals/metadata/src/index.js"],
+      "@internals/metadata/*": ["../internals/metadata/src/*"],
+      "@internals/metadata/*.js": ["../internals/metadata/src/*.js"],
+      "@internals/tools": ["../internals/tools/src/index.js"],
+      "@internals/tools/*": ["../internals/tools/src/*"],
+      "@internals/tools/*.js": ["../internals/tools/src/*.js"]
+    }
+  }
+}

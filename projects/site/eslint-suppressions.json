@@ -1,35 +1,35 @@
 {
-  "src/internal/controllers/state-current.controller.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 2
-    }
-  },
-  "src/internal/controllers/state-selected.controller.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 2
-    }
-  },
-  "src/internal/controllers/type-popover-trigger.controller.test.ts": {
+  "src/_internal/canvas-editable/canvas-editable.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
     }
   },
-  "src/internal/controllers/type-popover-trigger.controller.ts": {
+  "src/_internal/canvas/canvas.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
     }
   },
-  "src/internal/schema.ts": {
+  "src/_internal/stories/icon/all-icons.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/_internal/stories/icon/icon-demo.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/_internal/stories/theme/theme-generator.ts": {
+    "@typescript-eslint/no-unnecessary-type-assertion": {
+      "count": 1
+    }
+  },
+  "src/docs/metrics/index.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 2
     }
   },
-  "src/internal/utils.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
-  "src/mixins/control.ts": {
+  "src/docs/metrics/wireit.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 3
     }

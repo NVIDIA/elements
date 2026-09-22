@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@internals/tools": ["../internals/tools/src/index.js"],
+      "@internals/tools/*": ["../internals/tools/src/*"],
+      "@internals/tools/*.js": ["../internals/tools/src/*.js"]
+    }
+  }
+}

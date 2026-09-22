@@ -29,9 +29,9 @@ export class ApiService {
 
   static async getData(): Promise<ApiData> {
     if (ApiService.#api.created === '') {
-      ApiService.#api = (await import('../../static/api.json', { with: { type: 'json' } }))
-        .default as unknown as ApiData;
-      ApiService.#index = createApiIndex(ApiService.#api!.data);
+      const data: unknown = (await import('../../static/api.json', { with: { type: 'json' } })).default;
+      ApiService.#api = data as ApiData;
+      ApiService.#index = createApiIndex(ApiService.#api.data);
     }
     return ApiService.#api;
   }
