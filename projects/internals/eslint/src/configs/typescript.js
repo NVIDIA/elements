@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
@@ -39,6 +40,7 @@ const ignores = [
   '.wireit/',
   '.11ty-vite/'
 ];
+const project = existsSync('./tsconfig.eslint.json') ? './tsconfig.eslint.json' : './tsconfig.json';
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = {
@@ -119,7 +121,7 @@ const config = {
     'local-typescript/require-timer-cleanup': 'error',
 
     // todo: enable these rules incrementally as the codebase is cleaned up
-    '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/require-await': 'off',
@@ -186,7 +188,7 @@ export const browserTypescriptConfig = [
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: './tsconfig.json',
+        project,
         ecmaVersion: 'latest',
         sourceType: 'module'
       },
@@ -236,7 +238,7 @@ export const nodeTypescriptConfig = [
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: './tsconfig.json',
+        project,
         ecmaVersion: 'latest',
         sourceType: 'module'
       },

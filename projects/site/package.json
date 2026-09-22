@@ -205,7 +205,10 @@
         "src/**/*.js",
         "src/**/*.md",
         "src/**/*.ts",
-        "eslint.config.js"
+        "eslint.config.js",
+        "eslint-suppressions.json",
+        "tsconfig.json",
+        "tsconfig.eslint.json"
       ],
       "output": [],
       "dependencies": [

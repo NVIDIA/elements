@@ -437,7 +437,9 @@
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
-        "eslint.config.js"
+        "eslint.config.js",
+        "eslint-suppressions.json",
+        "tsconfig.json"
       ],
       "output": [],
       "dependencies": [
