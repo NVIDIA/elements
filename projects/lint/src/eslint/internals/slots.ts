@@ -1,7 +1,42 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { VALUE_BINDINGS } from './attributes.js';
 import { elements } from '../internals/metadata.js';
+import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
+
+export type SlotAssignment =
+  | { kind: 'default'; attribute?: HtmlAttribute }
+  | { kind: 'named'; attribute: HtmlAttribute; name: string }
+  | { kind: 'dynamic'; attribute: HtmlAttribute };
+
+function getAttributeName(attribute: HtmlAttribute): string {
+  return attribute.key?.value ?? attribute.name ?? '';
+}
+
+function isSlotBinding(attributeName: string): boolean {
+  return ['.slot', ':slot', '[slot]', '[attr.slot]'].includes(attributeName);
+}
+
+/** Resolve a child's slot assignment without guessing the value of a framework binding. */
+export function getSlotAssignment(node: HtmlTagNode): SlotAssignment {
+  const attribute = node.attributes?.find(candidate => {
+    const attributeName = getAttributeName(candidate).toLowerCase();
+    return attributeName === 'slot' || isSlotBinding(attributeName);
+  });
+
+  if (!attribute) {
+    return { kind: 'default' };
+  }
+
+  const attributeName = getAttributeName(attribute).toLowerCase();
+  const value = attribute.value?.value ?? '';
+  if (attributeName !== 'slot' || VALUE_BINDINGS.some(binding => value.includes(binding))) {
+    return { kind: 'dynamic', attribute };
+  }
+
+  return value ? { kind: 'named', attribute, name: value } : { kind: 'default', attribute };
+}
 
 export function hasSlot(tagName: string, slot: string) {
   const exceptions = ['nve-select'];

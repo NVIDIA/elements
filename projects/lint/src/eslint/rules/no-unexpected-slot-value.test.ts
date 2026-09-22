@@ -54,6 +54,30 @@ describe('noUnexpectedSlotValue', () => {
     });
   });
 
+  it('should report unexpected slots on direct page headers', () => {
+    tester.run('direct page-header slots', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<nve-page><nve-page-header slot="invalid"></nve-page-header></nve-page>',
+          errors: [
+            {
+              messageId: 'unexpected-slot-value',
+              data: { slotName: 'invalid', tagName: 'nve-page-header', parentTagName: 'nve-page' },
+              suggestions: [
+                {
+                  messageId: 'suggest-remove-slot-value',
+                  data: { slotName: 'invalid', alternative: '' },
+                  output: '<nve-page><nve-page-header ></nve-page-header></nve-page>'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    });
+  });
+
   it('should recommend replacing unexpected slot values', () => {
     tester.run('should recommend replacing unexpected slot values', rule, {
       valid: [],

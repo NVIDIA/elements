@@ -176,6 +176,18 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-invalid-page-header-slot</code></nve-grid-cell>
+    <nve-grid-cell>Require direct nve-page-header children of nve-page to use the header slot.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-invalid-slotted-elements</code></nve-grid-cell>
+    <nve-grid-cell>Disallow invalid direct slotted elements in Elements components.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-control-label</code></nve-grid-cell>
     <nve-grid-cell>Require form controls to have an accessible label.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
