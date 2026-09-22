@@ -10,20 +10,10 @@ import noDeprecatedCssVariable from '../rules/no-deprecated-css-variable.js';
 import noDeprecatedCssImports from '../rules/no-deprecated-css-imports.js';
 import noCustomBackgroundGradients from '../rules/no-custom-background-gradients.js';
 import noDisplayOverride from '../rules/no-display-override.js';
+import { elementsIgnorePatterns } from './ignores.js';
 
 const source = ['src/**/*.css'];
-const ignores = [
-  'node_modules/',
-  'coverage/',
-  'dist/',
-  'build/',
-  'src/vendor/',
-  '.visual/',
-  '.lighthouse/',
-  '.wireit/',
-  '.11ty-vite/',
-  'src/**/*.snippets.html'
-];
+const ignores = [...elementsIgnorePatterns, 'src/**/*.snippets.html'];
 
 export const elementsCssConfig: Linter.Config = {
   files: [...source],

@@ -36,21 +36,11 @@ import noNestedContainerTypes from '../rules/no-nested-container-types.js';
 import noUnstyledTypography from '../rules/no-unstyled-typography.js';
 import noTailwindClasses from '../rules/no-tailwind-classes.js';
 import preferAriaLabelInCompactContainers from '../rules/prefer-aria-label-in-compact-containers.js';
+import { elementsIgnorePatterns } from './ignores.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.md', 'src/**/*.ts', 'src/**/*.tsx'];
 
-const ignores = [
-  'node_modules/',
-  'coverage/',
-  'dist/',
-  'build/',
-  'src/vendor/',
-  '.visual/',
-  '.lighthouse/',
-  '.wireit/',
-  '.11ty-vite/',
-  'src/**/*.snippets.html'
-];
+const ignores = [...elementsIgnorePatterns, 'src/**/*.snippets.html'];
 
 export const elementsHtmlConfig: Linter.Config = {
   files: [...source],

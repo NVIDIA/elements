@@ -5,19 +5,10 @@ import type { Linter } from 'eslint';
 import json from '@eslint/json';
 import noUnexpectedLibraryDependencies from '../rules/no-unexpected-library-dependencies.js';
 import noDeprecatedPackages from '../rules/no-deprecated-packages.js';
+import { elementsIgnorePatterns } from './ignores.js';
 
 const source = ['package.json'];
-const ignores = [
-  'node_modules/',
-  'coverage/',
-  'dist/',
-  'build/',
-  'src/vendor/',
-  '.visual/',
-  '.lighthouse/',
-  '.wireit/',
-  '.11ty-vite/'
-];
+const ignores = [...elementsIgnorePatterns];
 
 export const elementsJsonConfig: Linter.Config = {
   files: [...source],
