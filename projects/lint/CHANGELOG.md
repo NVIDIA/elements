@@ -1,3 +1,9 @@
+## [2.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.6.1...@nvidia-elements/lint-v2.7.0) (2026-09-22)
+
+### Features
+
+* **lint:** improve slotted element checks ([0e1985d](https://github.com/NVIDIA/elements/commit/0e1985deb9edba09cbcbd9eec121e445d3559624))
+
 ## [2.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.6.0...@nvidia-elements/lint-v2.6.1) (2026-09-22)
 
 ### Features
