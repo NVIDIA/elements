@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Elements Lint',
+  title: 'NVIDIA Elements Lint',
   description: 'ESLint rules for NVIDIA Elements: catch missing slots, unknown attributes, deprecated tags, and other authoring mistakes at lint time.',
   layout: 'docs.11ty.js'
 }

@@ -12,6 +12,18 @@
 
 {% example '@nvidia-elements/core/page/page.examples.json', 'LayoutCardGrid', '{ "inline": false, "height": "640px" }' %}
 
+## Filterable Browse
+
+{% example '@internals/patterns/browse.examples.json', 'FilterableBrowse' %}
+
+## Tree-Scoped Browse
+
+{% example '@internals/patterns/browse.examples.json', 'TreeScopedBrowse' %}
+
+## Editable Grid
+
+{% example '@internals/patterns/browse.examples.json', 'EditableGrid' %}
+
 ## Content Row
 
 {% example '@internals/patterns/browse.examples.json', 'ContentRow' %}

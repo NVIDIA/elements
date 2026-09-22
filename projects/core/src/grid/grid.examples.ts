@@ -1290,6 +1290,8 @@ export const PanelGrid = {
   }
 };
 
+/* eslint-disable @nvidia-elements/lint/no-invalid-slotted-elements -- These anti-patterns intentionally show invalid grid children. */
+
 /**
  * @summary Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
  * @tags anti-pattern
@@ -1356,6 +1358,8 @@ export const InvalidColumnCount = {
   `
 };
 
+/* eslint-enable @nvidia-elements/lint/no-invalid-slotted-elements */
+
 /**
  * @summary Ensure column count matches the number of cells in the row to preserve keyboard navigation.
  * @tags test-case
@@ -1363,7 +1367,6 @@ export const InvalidColumnCount = {
 export const ValidColumnCount = {
   render: () => html`
 <nve-grid>
-  <div hidden></div>
   <nve-grid-header>
     ${Array(4).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
   </nve-grid-header>

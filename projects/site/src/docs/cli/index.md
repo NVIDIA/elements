@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Elements CLI',
+  title: 'NVIDIA Elements CLI',
   description: 'The NVIDIA Elements CLI: scaffold projects, generate component boilerplate, and pull in starter templates from the command line.',
   layout: 'docs.11ty.js'
 }
