@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DEPRECATED_TAGS: Record<string, string> = {
   // v1
   'nve-app-header': 'nve-page-header',
@@ -108,12 +108,17 @@ const DEPRECATED_TAGS: Record<string, string> = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-tags',
       description: 'Disallow use of deprecated elements in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-page-header></nve-page-header>',
+        invalid: '<nve-app-header></nve-app-header>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-tag']: 'Unexpected use of deprecated tag <{{tag}}>. Use <{{replacement}}> instead.'

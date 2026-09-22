@@ -89,6 +89,7 @@
         "../themes/dist/**/*.css",
         "../themes/dist/**/*.examples.json",
         "../themes/dist/**/*.json",
+        "../lint/dist/**/*.js",
         "../code/dist/**/*.js",
         "../code/dist/**/*.examples.json",
         "../forms/dist/**/*.js",
@@ -153,6 +154,10 @@
         },
         {
           "script": "../scene:build",
+          "cascade": false
+        },
+        {
+          "script": "../lint:build",
           "cascade": false
         },
         {

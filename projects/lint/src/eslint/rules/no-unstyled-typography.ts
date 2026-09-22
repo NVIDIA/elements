@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const TYPOGRAPHY_ELEMENTS: Record<string, string> = {
   h1: 'heading',
   h2: 'heading',
@@ -26,12 +26,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unstyled-typography',
       description: 'Require typography elements to have nve-text styling applied.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<h1 nve-text="heading lg">Title</h1>',
+        invalid: '<h1>Title</h1>'
+      }
+    }),
     schema: [],
     messages: {
       ['unstyled-typography']:

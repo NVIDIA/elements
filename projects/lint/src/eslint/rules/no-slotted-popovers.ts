@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { elements } from '../internals/metadata.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const POPOVER_ELEMENTS: ReadonlySet<string> = new Set(
   elements.filter(element => element.manifest?.metadata?.behavior === 'popover').map(element => element.name)
@@ -16,12 +15,17 @@ const POPOVER_ELEMENTS: ReadonlySet<string> = new Set(
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-slotted-popovers',
       description: 'Disallow the slot attribute on popover elements.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-tooltip></nve-tooltip>',
+        invalid: '<nve-tooltip slot="header"></nve-tooltip>'
+      }
+    }),
     schema: [],
     messages: {
       ['no-slotted-popover']:

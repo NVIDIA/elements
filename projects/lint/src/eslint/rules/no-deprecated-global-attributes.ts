@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DEPRECATED_GLOBAL_ATTRIBUTES = ['mlv-text', 'mlv-layout', 'mlv-theme'];
 
 const rule = {
@@ -14,12 +14,17 @@ const rule = {
     type: 'problem' as const,
     fixable: 'code' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-global-attributes',
       description: 'Disallow use of deprecated global utility attributes in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<html nve-theme="light"></html>',
+        invalid: '<html mlv-theme="light"></html>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-global-attribute']:

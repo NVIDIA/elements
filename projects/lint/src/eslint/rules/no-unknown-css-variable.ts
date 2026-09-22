@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { theme } from '@nvidia-elements/themes';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { CssDeclarationNode, HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 // internal/private theme variables
 const globals = new Set([
   '--nve-debug-outline-width',
@@ -41,12 +41,17 @@ function findUnknownVariablesInText(cssText: string): string[] {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unknown-css-variable',
       description: 'Disallow use of unknown --nve-* CSS theme variables.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'css',
+        valid: ':root { margin: var(--nve-ref-space-md); }',
+        invalid: ':root { margin: var(--nve-ref-space-300); }'
+      }
+    }),
     schema: [],
     messages: {
       ['unknown-css-var']: 'Unknown use of {{value}}. Use provided --nve-* theme variables instead.'

@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 import type { HtmlNode } from '../internals/utils.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DATA_BINDING_PATTERNS = [/\$\{[^}]*\}/, /\{\{[^}]*\}\}/, /^\{[^}]+\}$/];
 
 function hasDataBinding(value: string | undefined): boolean {
@@ -45,12 +45,17 @@ const ICON_ELEMENTS: Record<string, { attr: string; property: string; requiresCh
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-missing-icon-name',
       description: 'Require icon elements to have an icon name attribute.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-icon name="person"></nve-icon>',
+        invalid: '<nve-icon></nve-icon>'
+      }
+    }),
     schema: [],
     messages: {
       ['missing-icon-name']:

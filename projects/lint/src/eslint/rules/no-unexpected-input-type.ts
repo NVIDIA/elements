@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 import type { HtmlNode } from '../internals/utils.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Maps each nve-* component to the input types it accepts as slotted children.
  */
@@ -72,12 +72,17 @@ function findInputs(node: HtmlNode): HtmlNode[] {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unexpected-input-type',
       description: 'Disallow slotted <input> elements with a type that does not match the parent Elements component.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-input><input type="text" /></nve-input>',
+        invalid: '<nve-input><input type="date" /></nve-input>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-input-type']:

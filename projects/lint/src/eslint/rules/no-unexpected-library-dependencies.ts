@@ -2,19 +2,26 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 type Messages = 'unexpected-dependency-missing' | 'unexpected-dependency-pinned' | 'unexpected-dependency-type';
 
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unexpected-library-dependencies',
       description: 'Disallow incorrect dependency usage of @nvidia-elements packages in consuming libraries.',
+      category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'json',
+        valid: '{ "name": "my-app", "dependencies": { "@nvidia-elements/core": "0.0.0" } }',
+        invalid:
+          '{ "name": "my-library", "exports": ["./index.js"], "dependencies": { "@nvidia-elements/core": "^0.0.0" } }'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-dependency-missing']: 'No @nvidia-elements packages found in the project.',

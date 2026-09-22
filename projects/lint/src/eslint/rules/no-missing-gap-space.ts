@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const GAP_OPTIONAL_VALUES = new Set([
   'full',
   'align:center',
@@ -68,12 +68,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-missing-gap-space',
       description: 'Require gap spacing on row, column, and grid layouts.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<div nve-layout="row gap:sm"></div>',
+        invalid: '<div nve-layout="grid"></div>'
+      }
+    }),
     schema: [],
     messages: {
       ['missing-gap-space']: `Layout "{{layout}}" is missing gap spacing. Add a gap value such as "${SUGGESTED_GAP_SIZES.join('", "')}"`,

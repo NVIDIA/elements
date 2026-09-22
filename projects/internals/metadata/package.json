@@ -414,7 +414,11 @@
       "clean": false,
       "files": [
         "src/tasks/wireit.ts",
-        "src/tasks/wireit.utils.ts"
+        "src/tasks/wireit.utils.ts",
+        "../../../package.json",
+        "../../*/package.json",
+        "../*/package.json",
+        "../../starters/*/package.json"
       ],
       "output": [
         "static/wireit.json"

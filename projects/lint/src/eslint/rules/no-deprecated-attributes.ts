@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 interface DeprecatedAttributeConfig {
   replacement?: string;
@@ -98,12 +97,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     fixable: 'code' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-attributes',
       description: 'Disallow use of deprecated attributes in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-badge status="success"></nve-badge>',
+        invalid: '<nve-badge status="trend-up"></nve-badge>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-attribute']:

@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const POPOVER_API_REPLACEMENT = 'native HTML popover API';
 const DEPRECATED_POPOVER_ATTRIBUTES: Record<string, Record<string, string>> = {
   'nve-dialog': {
@@ -43,12 +43,17 @@ const DEPRECATED_POPOVER_ATTRIBUTES: Record<string, Record<string, string>> = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-popover-attributes',
       description: 'Disallow use of deprecated popover attributes.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-dialog id="dialog"></nve-dialog>',
+        invalid: '<nve-dialog trigger></nve-dialog>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-popover-attribute']:

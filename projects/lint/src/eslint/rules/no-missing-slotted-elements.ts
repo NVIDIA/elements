@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { hasMatchingChild, hasTemplateSyntax, hasUnslottedContent } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 interface RequiredSlotConfig {
   required?: string[];
@@ -85,12 +84,17 @@ const REQUIRED_SLOTTED_ELEMENTS: Record<string, RequiredSlotConfig> = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-missing-slotted-elements',
       description: 'Disallow use of missing slotted elements.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-input><label>Name</label><input type="text" /></nve-input>',
+        invalid: '<nve-input></nve-input>'
+      }
+    }),
     schema: [{ type: 'object' }],
     messages: {
       ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element {{selector}}',

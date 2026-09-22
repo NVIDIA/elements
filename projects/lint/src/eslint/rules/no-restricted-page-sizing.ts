@@ -2,22 +2,27 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const restrictedProperties = ['height', 'min-height', 'max-height', 'width', 'min-width', 'max-width'];
 
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-restricted-page-sizing',
       description: 'Disallow custom height or width styles on nve-page.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-page></nve-page>',
+        invalid: '<nve-page style="height: 100vh"></nve-page>'
+      }
+    }),
     schema: [],
     messages: {
       ['no-restricted-page-sizing']:

@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DEPRECATED_ICONS = {
   'chevron-right': 'chevron',
   'chevron-down': 'chevron',
@@ -55,12 +55,17 @@ const DEPRECATED_ICONS = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-icon-names',
       description: 'Disallow use of deprecated icon names.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-icon name="warning-fill"></nve-icon>',
+        invalid: '<nve-icon name="warning"></nve-icon>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-icon-attribute']:

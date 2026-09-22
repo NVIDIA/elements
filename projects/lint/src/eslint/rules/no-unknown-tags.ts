@@ -2,20 +2,25 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import type { HtmlTagNode } from '../rule-types.js';
 import { elements } from '../internals/metadata.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unknown-tags',
       description: 'Disallow use of unknown <nve-*> tags.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-button>Save</nve-button>',
+        invalid: '<nve-unknown-element>Content</nve-unknown-element>'
+      }
+    }),
     schema: [],
     messages: {
       ['unknown-tag']: 'Unexpected use of unknown tag <{{tag}}>'

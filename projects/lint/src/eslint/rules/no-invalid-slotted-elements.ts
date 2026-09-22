@@ -6,9 +6,8 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getAllowedSlottedElements } from '../internals/slotted-elements.js';
 import { getSlotAssignment } from '../internals/slots.js';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const STATIC_TAG_NAME = /^[a-z][a-z0-9.-]*$/;
 
@@ -43,12 +42,17 @@ function shouldIgnoreChild(context: Rule.RuleContext, contract: SlottedElementCo
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-invalid-slotted-elements',
       description: 'Disallow invalid direct slotted elements in Elements components.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-grid><nve-grid-row></nve-grid-row></nve-grid>',
+        invalid: '<nve-grid><table></table></nve-grid>'
+      }
+    }),
     schema: [],
     messages: {
       ['invalid-slotted-element']:

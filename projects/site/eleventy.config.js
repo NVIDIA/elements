@@ -48,6 +48,7 @@ import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
 import { ApiService } from '@internals/metadata';
 import { ELEMENTS_SITE_ORIGIN } from './src/_11ty/utils/site-url.js';
+import { lintRules } from './src/docs/lint/rules.js';
 
 const apis = await ApiService.getData();
 
@@ -103,6 +104,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData('ELEMENTS_REPO_BASE_URL', ELEMENTS_REPO_BASE_URL);
   eleventyConfig.addGlobalData('ELEMENTS_PLAYGROUND_BASE_URL', ELEMENTS_PLAYGROUND_BASE_URL);
   eleventyConfig.addGlobalData('ELEMENTS_REGISTRY_URL', ELEMENTS_REGISTRY_URL);
+  eleventyConfig.addGlobalData('lintRules', lintRules);
 
   // Configure front matter parsing and file copying
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });

@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import type { CssAtRuleNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const themeAndStyleImports = `@import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
 @import '@nvidia-elements/themes/high-contrast.css';
@@ -29,12 +29,17 @@ export const deprecatedImports: Record<string, string> = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-css-imports',
       description: 'Disallow use of deprecated CSS import paths.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'css',
+        valid: "@import '@nvidia-elements/themes/fonts/inter.css';",
+        invalid: "@import '@maglev/elements/index.css';"
+      }
+    }),
     fixable: 'code' as const,
     schema: [],
     messages: {

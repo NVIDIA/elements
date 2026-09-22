@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const INLINE_EVENT_HANDLER = /^on[a-z]+$/i;
 const DATA_BINDING_PATTERNS = [
   /\$\{[^}]*\}/, // ${...} - JavaScript template literals
@@ -51,12 +51,17 @@ function isIncompleteEventHandler(attribute: HtmlAttribute, sourceText: string):
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-invalid-event-listeners',
       description: 'Disallow inline event handler attributes in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<button id="save">Save</button>',
+        invalid: '<button onclick="save()">Save</button>'
+      }
+    }),
     schema: [],
     messages: {
       ['no-inline-event-handler']:
