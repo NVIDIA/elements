@@ -1,0 +1,174 @@
+{
+  "dataset": "lerobot/svla_so100_sorting",
+  "revision": "13870ca969084d8ce4d8a0391b06cead78e804ba",
+  "hardware": "TheRobotStudio/SO-ARM100",
+  "cadRevision": "5f6d2b876a53a4872e405b991dd925556c9e38a4",
+  "license": "Apache-2.0",
+  "episode": 0,
+  "frames": 962,
+  "fps": 30,
+  "task": "Put the red cube in the right box and the blue cube in the left box.",
+  "videoStart": 0,
+  "videoEnd": 32.06666666666667,
+  "recordingSha256": "afe8008266acfaca0dd3d5c84d27bbcc4638dd5572f4fe60fa68cd27a2cc6879",
+  "robotSha256": "be676441ba2d242e9e89a846d2ca4dbc1720d47d45e716301fa5725942089db2",
+  "triangles": 60682,
+  "sources": [
+    {
+      "url": "https://huggingface.co/datasets/lerobot/svla_so100_sorting/resolve/13870ca969084d8ce4d8a0391b06cead78e804ba/meta/info.json",
+      "sha256": "d2ec277ac414f6fdbe47680f431ea820018cb318ee4d9f4b350959a70a579d08",
+      "path": "dataset/meta/info.json"
+    },
+    {
+      "url": "https://huggingface.co/datasets/lerobot/svla_so100_sorting/resolve/13870ca969084d8ce4d8a0391b06cead78e804ba/data/chunk-000/file-000.parquet",
+      "sha256": "86b29331d35164b6dc46e9e5197d165f0a5741aeadb00ed12c341b137d094d73",
+      "path": "dataset/data/chunk-000/file-000.parquet"
+    },
+    {
+      "url": "https://huggingface.co/datasets/lerobot/svla_so100_sorting/resolve/13870ca969084d8ce4d8a0391b06cead78e804ba/meta/episodes/chunk-000/file-000.parquet",
+      "sha256": "6bcb61eaa0fc2ed363b94a3bd7966a718eaa54d402b9488c8f7cdcb9b323579f",
+      "path": "dataset/meta/episodes/chunk-000/file-000.parquet"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/so100.urdf",
+      "sha256": "f7050417ebbb79358f113ddd4bca2b457b2c6d5048193331db5a04a0066439ed",
+      "path": "hardware/so100.urdf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Base.stl",
+      "sha256": "bb8afb0303c0125f265a797625cfaf646ac214d5d2dc9c986348c415755e2a74",
+      "path": "hardware/assets/Base.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Base_Motor.stl",
+      "sha256": "aac4485d448eca418d2a93df3f78f449bd59b21ec1af2a579171819fd44ea576",
+      "path": "hardware/assets/Base_Motor.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Rotation_Pitch.stl",
+      "sha256": "4a1476f57d28d2c065bc0ede6a674cb3ebacf1193372916ef1e0ff32eeb92cf0",
+      "path": "hardware/assets/Rotation_Pitch.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Rotation_Pitch_Motor.stl",
+      "sha256": "f4fbcf18d8f2e91d12a767c1679430140dce0c81ea1478cc153bfce3a162db61",
+      "path": "hardware/assets/Rotation_Pitch_Motor.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Upper_Arm.stl",
+      "sha256": "d97ad37c90400fe39bb2d5ace8b4290f3d1262e13f1d4f166494421752d5f3b7",
+      "path": "hardware/assets/Upper_Arm.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Upper_Arm_Motor.stl",
+      "sha256": "bafdb2cb9e9a884e62b5fbf15b1f706a65771da82764dbe703df128d9f34d723",
+      "path": "hardware/assets/Upper_Arm_Motor.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Lower_Arm.stl",
+      "sha256": "a04511bc65cbb702b2d6023764de947888b06a09fbf272803f39c22724329a3e",
+      "path": "hardware/assets/Lower_Arm.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Lower_Arm_Motor.stl",
+      "sha256": "07368fa4c50dea70e8157accee71072120c0cb374f672c85aba1d081702bc476",
+      "path": "hardware/assets/Lower_Arm_Motor.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Wrist_Pitch_Roll.stl",
+      "sha256": "58e83ce1c8b24e1fa3a79672ea965ea4143986c81a21386dcd6da1cbcfdc94bb",
+      "path": "hardware/assets/Wrist_Pitch_Roll.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Wrist_Pitch_Roll_Motor.stl",
+      "sha256": "89ac3fb1d2536fa4f7c40e7449be4b934d7d776f9cd0453c842767f980ff6c18",
+      "path": "hardware/assets/Wrist_Pitch_Roll_Motor.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Fixed_Jaw.stl",
+      "sha256": "5528867073033eaa4c27a8087180954f3f0635bd69d517d5cace92f01dd266b2",
+      "path": "hardware/assets/Fixed_Jaw.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Fixed_Jaw_Motor.stl",
+      "sha256": "0321bfb902d5a119c4f2a934ab4be7e9ea8c93a02e1685f066f99c24a5ca3ecf",
+      "path": "hardware/assets/Fixed_Jaw_Motor.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/Simulation/SO100/assets/Moving_Jaw.stl",
+      "sha256": "6d9c923024c75e6f0a8d8300317c4d8a17dd49880260cbc60b7fe5e0c6dadfa8",
+      "path": "hardware/assets/Moving_Jaw.stl"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheRobotStudio/SO-ARM100/5f6d2b876a53a4872e405b991dd925556c9e38a4/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "path": "hardware/LICENSE"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "replay/episode-0.ndjson.gz",
+      "sha256": "ca0125c8bbbdb1ca07c963d0fc019c5f143813a081efce313e51ad3927f0dae5"
+    },
+    {
+      "path": "replay/robot.json",
+      "sha256": "be676441ba2d242e9e89a846d2ca4dbc1720d47d45e716301fa5725942089db2"
+    },
+    {
+      "path": "replay/assets/Base.stl",
+      "sha256": "bb8afb0303c0125f265a797625cfaf646ac214d5d2dc9c986348c415755e2a74"
+    },
+    {
+      "path": "replay/assets/Base_Motor.stl",
+      "sha256": "aac4485d448eca418d2a93df3f78f449bd59b21ec1af2a579171819fd44ea576"
+    },
+    {
+      "path": "replay/assets/Rotation_Pitch.stl",
+      "sha256": "4a1476f57d28d2c065bc0ede6a674cb3ebacf1193372916ef1e0ff32eeb92cf0"
+    },
+    {
+      "path": "replay/assets/Rotation_Pitch_Motor.stl",
+      "sha256": "f4fbcf18d8f2e91d12a767c1679430140dce0c81ea1478cc153bfce3a162db61"
+    },
+    {
+      "path": "replay/assets/Upper_Arm.stl",
+      "sha256": "d97ad37c90400fe39bb2d5ace8b4290f3d1262e13f1d4f166494421752d5f3b7"
+    },
+    {
+      "path": "replay/assets/Upper_Arm_Motor.stl",
+      "sha256": "bafdb2cb9e9a884e62b5fbf15b1f706a65771da82764dbe703df128d9f34d723"
+    },
+    {
+      "path": "replay/assets/Lower_Arm.stl",
+      "sha256": "a04511bc65cbb702b2d6023764de947888b06a09fbf272803f39c22724329a3e"
+    },
+    {
+      "path": "replay/assets/Lower_Arm_Motor.stl",
+      "sha256": "07368fa4c50dea70e8157accee71072120c0cb374f672c85aba1d081702bc476"
+    },
+    {
+      "path": "replay/assets/Wrist_Pitch_Roll.stl",
+      "sha256": "58e83ce1c8b24e1fa3a79672ea965ea4143986c81a21386dcd6da1cbcfdc94bb"
+    },
+    {
+      "path": "replay/assets/Wrist_Pitch_Roll_Motor.stl",
+      "sha256": "89ac3fb1d2536fa4f7c40e7449be4b934d7d776f9cd0453c842767f980ff6c18"
+    },
+    {
+      "path": "replay/assets/Fixed_Jaw.stl",
+      "sha256": "5528867073033eaa4c27a8087180954f3f0635bd69d517d5cace92f01dd266b2"
+    },
+    {
+      "path": "replay/assets/Fixed_Jaw_Motor.stl",
+      "sha256": "0321bfb902d5a119c4f2a934ab4be7e9ea8c93a02e1685f066f99c24a5ca3ecf"
+    },
+    {
+      "path": "replay/assets/Moving_Jaw.stl",
+      "sha256": "6d9c923024c75e6f0a8d8300317c4d8a17dd49880260cbc60b7fe5e0c6dadfa8"
+    },
+    {
+      "path": "replay/assets/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}

@@ -28,7 +28,8 @@ const nativeChromiumArgs = [
 
 export const WEBGPU_BUFFER_USAGE = Object.freeze({
   storage: 0x80,
-  uniform: 0x40
+  uniform: 0x40,
+  vertex: 0x20
 });
 
 export class WebGPUTestRunner {

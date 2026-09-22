@@ -1,0 +1,142 @@
+{
+  "links": [
+    {
+      "name": "base",
+      "visuals": [
+        {
+          "asset": "assets/Base.stl",
+          "motor": false
+        },
+        {
+          "asset": "assets/Base_Motor.stl",
+          "motor": true
+        }
+      ]
+    },
+    {
+      "name": "shoulder",
+      "visuals": [
+        {
+          "asset": "assets/Rotation_Pitch.stl",
+          "motor": false
+        },
+        {
+          "asset": "assets/Rotation_Pitch_Motor.stl",
+          "motor": true
+        }
+      ]
+    },
+    {
+      "name": "upper_arm",
+      "visuals": [
+        {
+          "asset": "assets/Upper_Arm.stl",
+          "motor": false
+        },
+        {
+          "asset": "assets/Upper_Arm_Motor.stl",
+          "motor": true
+        }
+      ]
+    },
+    {
+      "name": "lower_arm",
+      "visuals": [
+        {
+          "asset": "assets/Lower_Arm.stl",
+          "motor": false
+        },
+        {
+          "asset": "assets/Lower_Arm_Motor.stl",
+          "motor": true
+        }
+      ]
+    },
+    {
+      "name": "wrist",
+      "visuals": [
+        {
+          "asset": "assets/Wrist_Pitch_Roll.stl",
+          "motor": false
+        },
+        {
+          "asset": "assets/Wrist_Pitch_Roll_Motor.stl",
+          "motor": true
+        }
+      ]
+    },
+    {
+      "name": "gripper",
+      "visuals": [
+        {
+          "asset": "assets/Fixed_Jaw.stl",
+          "motor": false
+        },
+        {
+          "asset": "assets/Fixed_Jaw_Motor.stl",
+          "motor": true
+        }
+      ]
+    },
+    {
+      "name": "jaw",
+      "visuals": [
+        {
+          "asset": "assets/Moving_Jaw.stl",
+          "motor": false
+        }
+      ]
+    }
+  ],
+  "joints": [
+    {
+      "name": "shoulder_pan",
+      "parent": "base",
+      "child": "shoulder",
+      "position": [0.0, -0.0452, 0.0165],
+      "rpy": [1.57079, 0.0, 0.0],
+      "axis": [0.0, 1.0, 0.0]
+    },
+    {
+      "name": "shoulder_lift",
+      "parent": "shoulder",
+      "child": "upper_arm",
+      "position": [0.0, 0.1025, 0.0306],
+      "rpy": [-1.8, 0.0, 0.0],
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "elbow_flex",
+      "parent": "upper_arm",
+      "child": "lower_arm",
+      "position": [0.0, 0.11257, 0.028],
+      "rpy": [1.57079, 0.0, 0.0],
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "wrist_flex",
+      "parent": "lower_arm",
+      "child": "wrist",
+      "position": [0.0, 0.0052, 0.1349],
+      "rpy": [-1.0, 0.0, 0.0],
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "wrist_roll",
+      "parent": "wrist",
+      "child": "gripper",
+      "position": [0.0, -0.0601, 0.0],
+      "rpy": [0.0, 1.57079, 0.0],
+      "axis": [0.0, 1.0, 0.0]
+    },
+    {
+      "name": "gripper",
+      "parent": "gripper",
+      "child": "jaw",
+      "position": [-0.0202, -0.0244, 0.0],
+      "rpy": [0.0, 3.14158, 0.0],
+      "axis": [0.0, 0.0, 1.0]
+    }
+  ],
+  "jawTip": [-0.00115, -0.082, 9.99999999999994e-5]
+}
