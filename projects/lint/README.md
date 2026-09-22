@@ -82,6 +82,8 @@ export default [
 | `@nvidia-elements/lint/no-excessive-primary-actions` | Limit primary actions to two per page. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-event-listeners` | Disallow inline event handler attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-invoker-triggers` | Disallow use of invoker trigger attributes on non-button nve-* elements. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-page-header-slot` | Require direct nve-page-header children of nve-page to use the header slot. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-slotted-elements` | Disallow invalid direct slotted elements in Elements components. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-control-label` | Require form controls to have an accessible label. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-gap-space` | Require gap spacing on row, column, and grid layouts. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-icon-name` | Require icon elements to have an icon name attribute. | HTML | `error` |

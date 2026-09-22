@@ -10,6 +10,10 @@ import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
+function shouldIgnoreSlotValue(slotName: string, parentTagName: string): boolean {
+  return !isNVElement(parentTagName) || hasSlot(parentTagName, slotName);
+}
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -60,7 +64,7 @@ const rule = {
       const slotAttr = findAttr(node, 'slot');
       const slotName = slotAttr?.value?.value ?? '';
       const parentTagName = node.parent?.name;
-      if (!slotAttr || !parentTagName || !isNVElement(parentTagName) || hasSlot(parentTagName, slotName)) return;
+      if (!slotAttr || !parentTagName || shouldIgnoreSlotValue(slotName, parentTagName)) return;
       const alternative = getRecommendedSlotName(slotName, parentTagName);
       context.report({
         node: slotAttr,
