@@ -118,6 +118,10 @@
   pointer-events: none;
 }
 
+::slotted(nve-icon) {
+  cursor: var(--cursor);
+}
+
 ::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--padding));
 }

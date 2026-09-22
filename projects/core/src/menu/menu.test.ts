@@ -36,6 +36,35 @@ describe(Menu.metadata.tag, () => {
     expect(element._internals.role).toBe('menu');
   });
 
+  it('should leave density unset by default', () => {
+    expect(element.density).toBeUndefined();
+    expect(element.hasAttribute('density')).toBe(false);
+  });
+
+  it.each(['compact', 'default'] as const)('should reflect density %s to an attribute', async density => {
+    element.density = density;
+    await elementIsStable(element);
+
+    expect(element.getAttribute('density')).toBe(density);
+  });
+
+  it.each(['compact', 'default'] as const)('should update density from attribute %s', async density => {
+    element.setAttribute('density', density);
+    await elementIsStable(element);
+
+    expect(element.density).toBe(density);
+  });
+
+  it('should remove the density attribute when the property is cleared', async () => {
+    element.density = 'compact';
+    await elementIsStable(element);
+
+    element.density = undefined;
+    await elementIsStable(element);
+
+    expect(element.hasAttribute('density')).toBe(false);
+  });
+
   it('should navigate between items with ArrowDown key', async () => {
     await elementIsStable(element);
     const items = element.querySelectorAll('nve-menu-item');
@@ -68,6 +97,117 @@ describe(Menu.metadata.tag, () => {
     items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true }));
     await elementIsStable(element);
     expect(items[2].matches(':focus')).toBe(true);
+  });
+});
+
+describe(`${Menu.metadata.tag}: density and item slots`, () => {
+  let fixture: HTMLElement;
+  let element: Menu;
+  let prefixSlot: HTMLSlotElement;
+  let labelSlot: HTMLSlotElement;
+  let suffixSlot: HTMLSlotElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-menu>
+        <nve-menu-item>
+          <span slot="prefix">prefix</span>
+          <span>label</span>
+          <span slot="suffix">suffix</span>
+        </nve-menu-item>
+      </nve-menu>
+    `);
+    element = fixture.querySelector(Menu.metadata.tag);
+    await elementIsStable(element);
+    const item = element.querySelector('nve-menu-item');
+    await elementIsStable(item);
+    prefixSlot = item.shadowRoot.querySelector('slot[name="prefix"]');
+    labelSlot = item.shadowRoot.querySelector('slot:not([name])');
+    suffixSlot = item.shadowRoot.querySelector('slot[name="suffix"]');
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should display the prefix, label, and suffix when density is unset', () => {
+    expect(getComputedStyle(prefixSlot).display).not.toBe('none');
+    expect(getComputedStyle(labelSlot).display).not.toBe('none');
+    expect(getComputedStyle(suffixSlot).display).not.toBe('none');
+  });
+
+  it('should hide the label and suffix while keeping the prefix visible in compact density', async () => {
+    element.density = 'compact';
+    await elementIsStable(element);
+
+    expect(getComputedStyle(prefixSlot).display).not.toBe('none');
+    expect(getComputedStyle(labelSlot).display).toBe('none');
+    expect(getComputedStyle(suffixSlot).display).toBe('none');
+  });
+
+  it.each(['default', undefined] as const)(
+    'should restore the label and suffix when density becomes %s',
+    async density => {
+      element.density = 'compact';
+      await elementIsStable(element);
+      expect(getComputedStyle(labelSlot).display).toBe('none');
+      expect(getComputedStyle(suffixSlot).display).toBe('none');
+
+      element.density = density;
+      await elementIsStable(element);
+
+      expect(getComputedStyle(prefixSlot).display).not.toBe('none');
+      expect(getComputedStyle(labelSlot).display).not.toBe('none');
+      expect(getComputedStyle(suffixSlot).display).not.toBe('none');
+    }
+  );
+});
+
+describe(`${Menu.metadata.tag}: menu group slot`, () => {
+  let fixture: HTMLElement;
+  let element: Menu;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-menu-group>
+        <nve-menu>item</nve-menu>
+      </nve-menu-group>
+    `);
+    element = fixture.querySelector(Menu.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should clear an automatically assigned menu slot on disconnect', () => {
+    expect(element.slot).toBe('menu');
+    element.remove();
+    expect(element.slot).toBe('');
+
+    fixture.querySelector('nve-menu-group').append(element);
+    expect(element.slot).toBe('menu');
+    element.remove();
+    expect(element.slot).toBe('');
+  });
+
+  it('should preserve an authored menu slot on disconnect', () => {
+    element.remove();
+    const authoredGroup = document.createElement('nve-menu-group');
+    element = document.createElement(Menu.metadata.tag);
+    element.slot = 'menu';
+    authoredGroup.append(element);
+    fixture.append(authoredGroup);
+
+    element.remove();
+    expect(element.slot).toBe('menu');
+  });
+
+  it('should preserve a changed slot on disconnect', () => {
+    element.slot = 'other';
+    element.remove();
+    expect(element.slot).toBe('other');
   });
 });
 

@@ -9,3 +9,17 @@ nve-menu:has(nve-tooltip),
 nve-menu:has(nve-tooltip) nve-menu-item {
   content-visibility: initial;
 }
+
+nve-menu[density='compact'] {
+  --min-width: 0;
+
+  nve-menu-item {
+    --gap: 0;
+    width: fit-content;
+  }
+
+  nve-menu-item::part(_slot),
+  nve-menu-item::part(_suffix) {
+    display: none !important;
+  }
+}

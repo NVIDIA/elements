@@ -14,6 +14,7 @@ import styles from './menu-item.css?inline';
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/menu
  * @slot - Label and supporting content for the menu option.
+ * @slot prefix - slot for prefix icon
  * @slot suffix - slot for suffix icon
  * @cssprop --background
  * @cssprop --border-radius
@@ -50,8 +51,9 @@ export class MenuItem extends ButtonFormControlMixin(LitElement) {
   render() {
     return html`
       <div internal-host interaction-state focus-within part="_internal">
-        <slot></slot>
-        <slot name="suffix"></slot>
+        <slot name="prefix" part="_prefix"></slot>
+        <slot part="_slot"></slot>
+        <slot name="suffix" part="_suffix"></slot>
       </div>
     `;
   }

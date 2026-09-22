@@ -57,9 +57,14 @@ export type Prominence = 'emphasis' | 'muted';
  * - `inline` Element container reduces to fit within inline content such as a block of text.
  * - `inset` Element container optimizes for embedding or inset placement inside another containing element.
  * - `full` Element container optimizes for filling its container bounds.
- * - `condensed` Element container optimizes for small, summarized or contained spaces.
  */
-export type Container = 'inline' | 'flat' | 'inset' | 'full' | 'condensed';
+export type Container = 'inline' | 'flat' | 'inset' | 'full';
+
+/** Controls the visual density of an element to match its context and available space.
+ * - `compact` - Reduces visual weight and spacing for dense layouts or secondary elements with less visual prominence.
+ * - `default` - Standard size that works well in most contexts and provides balanced visibility.
+ */
+export type Density = 'compact' | 'default';
 
 /** Communicates the intent and semantic meaning of an element to help users understand the outcome of their actions.
  * - `accent` - Highlights important actions or draws attention to primary interactive elements.

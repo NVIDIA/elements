@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { define } from '@nvidia-elements/core/internal';
-import { Menu, MenuItem } from '@nvidia-elements/core/menu';
+import { Menu, MenuGroup, MenuItem } from '@nvidia-elements/core/menu';
 
 define(Menu);
+define(MenuGroup);
 define(MenuItem);
 
 declare global {
   interface HTMLElementTagNameMap {
     'nve-menu': Menu;
+    'nve-menu-group': MenuGroup;
     'nve-menu-item': MenuItem;
   }
 }
