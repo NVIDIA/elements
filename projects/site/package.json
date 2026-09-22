@@ -56,6 +56,7 @@
         "!src/**/*.test.js",
         "!src/**/*.test.lighthouse.ts",
         "public",
+        "../scene/demos/robot-playback/**",
         "!public/llms.txt",
         "./eleventy.config.js"
       ],

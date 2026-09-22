@@ -4,3 +4,33 @@
 :host {
   display: block;
 }
+
+[internal-host] {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+[data-interaction-source] {
+  position: absolute;
+  inset: 0 auto auto 0;
+  inline-size: 1px;
+  block-size: 1px;
+  pointer-events: none;
+}
+
+slot {
+  position: absolute;
+  inset: 0;
+}
+
+slot[hidden] {
+  display: none;
+}

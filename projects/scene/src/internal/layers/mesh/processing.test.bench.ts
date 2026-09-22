@@ -1,0 +1,69 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+import { describe, test, type BenchRunOptions } from 'vitest';
+import { registerMarkerLayer } from '../markers/layer-state.js';
+import { publishMeshGeometry, registerMeshLayer, replaceMeshGeometry, takeMeshLayerRenderData } from './layer-state.js';
+import { processMeshGeometry, updateFlatGeometry } from './processing.js';
+
+const options = { iterations: 10, throws: true, time: 750, warmupTime: 200 } satisfies BenchRunOptions;
+
+function grid(side: number) {
+  const positions = new Float32Array(side * side * 3);
+  const colors = new Float32Array(side * side * 4).fill(1);
+  const indices = new Uint32Array((side - 1) ** 2 * 6);
+  let corner = 0;
+  for (let y = 0; y < side; y += 1) {
+    for (let x = 0; x < side; x += 1) {
+      const vertex = y * side + x;
+      positions[vertex * 3] = x;
+      positions[vertex * 3 + 1] = y;
+      if (x < side - 1 && y < side - 1) {
+        indices.set([vertex, vertex + 1, vertex + side, vertex + 1, vertex + side + 1, vertex + side], corner);
+        corner += 6;
+      }
+    }
+  }
+  return { positions, indices, colors, normals: null, uvs: null };
+}
+
+describe('indexed flat mesh publication and processing', () => {
+  for (const side of [32, 128, 256]) {
+    const vertexCount = side * side;
+    const batch = side === 32 ? 64 : side === 128 ? 4 : 1;
+    for (const mode of ['one position', 'one percent positions', 'all positions', 'one color'] as const) {
+      test(`publishes ${mode} in ${vertexCount} vertices, batch ${batch}`, async ({ bench }) => {
+        const source = grid(side);
+        const layer = document.createElement('div');
+        registerMarkerLayer(layer, 'cube');
+        registerMeshLayer(layer);
+        replaceMeshGeometry(layer, source);
+        let processed = processMeshGeometry(takeMeshLayerRenderData(layer))!;
+        const attribute = mode === 'one color' ? 'colors' : 'positions';
+        const count =
+          mode === 'all positions' ? vertexCount : mode === 'one percent positions' ? Math.ceil(vertexCount / 100) : 1;
+        const start = mode === 'all positions' ? 0 : Math.floor(vertexCount / 2);
+        let iteration = 0;
+        await bench('publication and generated attributes', () => {
+          let checksum = 0;
+          for (let item = 0; item < batch; item += 1) {
+            iteration += 1;
+            source[attribute][start * (attribute === 'colors' ? 4 : 3) + 2] = iteration % 2 ? 0.25 : 0.75;
+            publishMeshGeometry(layer, { attribute, source: source[attribute], start, count });
+            processed = updateFlatGeometry(takeMeshLayerRenderData(layer), processed)!;
+            checksum += processed.positions.length + processed.normals[2]!;
+          }
+          return checksum;
+        }).run(options);
+      });
+    }
+    test(`builds indexed flat geometry for ${vertexCount} vertices, batch ${batch}`, async ({ bench }) => {
+      const source = grid(side);
+      await bench('initial processing', () => {
+        let checksum = 0;
+        for (let item = 0; item < batch; item += 1) checksum += processMeshGeometry(source)!.positions.length;
+        return checksum;
+      }).run(options);
+    });
+  }
+});
