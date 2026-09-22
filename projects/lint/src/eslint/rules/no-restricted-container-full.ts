@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const FULL_CONTAINER_TAGS: ReadonlySet<string> = new Set(['nve-alert-group', 'nve-card', 'nve-grid', 'nve-toolbar']);
 const FLAT_GRID_PARENTS: ReadonlySet<string> = new Set(['nve-card', 'nve-dialog']);
@@ -33,12 +32,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-restricted-container-full',
       description: 'Restrict container="full" to direct children of nve-page.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-page><nve-grid container="full"></nve-grid></nve-page>',
+        invalid: '<main><nve-grid container="full"></nve-grid></main>'
+      }
+    }),
     schema: [],
     messages: {
       ['no-restricted-container-full']:

@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { elements } from '../internals/metadata.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const MAX_EMPHASIS_BUTTONS = 2;
 const POPOVER_ELEMENTS: ReadonlySet<string> = new Set(
   elements
@@ -31,12 +31,18 @@ function hasPopoverAncestor(node: HtmlTagNode): boolean {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-excessive-primary-actions',
       description: 'Limit primary actions to two per page.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-page><nve-button interaction="emphasis">Save</nve-button></nve-page>',
+        invalid:
+          '<nve-page><nve-button interaction="emphasis">Save</nve-button><nve-button interaction="emphasis">Publish</nve-button><nve-button interaction="emphasis">Deploy</nve-button></nve-page>'
+      }
+    }),
     schema: [],
     messages: {
       ['excessive-primary-action']:

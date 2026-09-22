@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { hasTemplateSyntax, type HtmlNode } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const POPOVER_MAX_NODES: Record<string, number> = {
   'nve-drawer': 100,
   'nve-dialog': 50,
@@ -60,12 +60,17 @@ function findDisallowedElements(node: HtmlNode): string[] {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-complex-popovers',
       description: 'Disallow excessive DOM complexity inside popover elements.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-dialog><p>Short message</p></nve-dialog>',
+        invalid: '<nve-dialog><nve-card>Complex content</nve-card></nve-dialog>'
+      }
+    }),
     schema: [],
     messages: {
       ['complex-popover']:

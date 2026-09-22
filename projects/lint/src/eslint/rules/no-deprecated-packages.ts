@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 export const DEPRECATED_PACKAGES: Record<string, string> = {
   '@nve/elements': '@nvidia-elements/core',
   '@nve/styles': '@nvidia-elements/styles',
@@ -25,11 +25,17 @@ export const DEPRECATED_PACKAGES: Record<string, string> = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-packages',
       description: 'Disallow usage of deprecated packages.',
+      category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'json',
+        valid: '{ "dependencies": { "@nvidia-elements/core": "0.0.0" } }',
+        invalid: '{ "dependencies": { "@mlv/elements": "0.0.0" } }'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-package']: 'Use of deprecated package {{package}}, upgrade to {{alternative}} instead.'

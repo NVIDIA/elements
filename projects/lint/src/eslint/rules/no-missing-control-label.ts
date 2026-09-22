@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { hasMatchingChild, hasTemplateSyntax, type HtmlNode } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Form controls that require a label for accessibility.
  * Each control needs either:
@@ -159,12 +159,17 @@ function hasExternalLabelForAssociation(node: HtmlTagNode): boolean {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-missing-control-label',
       description: 'Require form controls to have an accessible label.',
       category: 'Accessibility',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-input><label>Name</label><input type="text" /></nve-input>',
+        invalid: '<nve-input><input type="text" /></nve-input>'
+      }
+    }),
     schema: [
       {
         type: 'object',

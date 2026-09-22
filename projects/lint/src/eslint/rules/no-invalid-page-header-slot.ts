@@ -4,9 +4,8 @@
 import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { getSlotAssignment, type SlotAssignment } from '../internals/slots.js';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 function fixSlotAssignment(
   fixer: Rule.RuleFixer,
@@ -27,12 +26,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     fixable: 'code' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-invalid-page-header-slot',
       description: 'Require direct nve-page-header children of nve-page to use slot="header".',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-page><nve-page-header slot="header"></nve-page-header></nve-page>',
+        invalid: '<nve-page><nve-page-header></nve-page-header></nve-page>'
+      }
+    }),
     schema: [],
     messages: {
       ['invalid-page-header-slot']: '<nve-page-header> must use slot="header" when it is a direct child of <nve-page>.'

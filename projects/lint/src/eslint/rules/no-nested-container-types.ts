@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const CONTAINER_RELATIONSHIPS: Record<string, string[]> = {
   'nve-card-content': ['nve-grid', 'nve-accordion', 'nve-accordion-group'],
   'nve-grid-cell': ['nve-badge', 'nve-icon-button'],
@@ -42,12 +42,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-nested-container-types',
       description: 'Disallow nesting container components without container="flat".',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-card-content><nve-grid container="flat"></nve-grid></nve-card-content>',
+        invalid: '<nve-card-content><nve-grid></nve-grid></nve-card-content>'
+      }
+    }),
     schema: [],
     messages: {
       'no-nested-container-types':

@@ -2,20 +2,24 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { selectorTargetsNveElement, selectorsForRule } from '../internals/css.js';
 import type { CssDeclarationNode, CssRuleNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-display-override',
       description: 'Disallow display overrides on Elements components.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'css',
+        valid: '.layout { display: grid; }',
+        invalid: 'nve-card { display: flex; }'
+      }
+    }),
     schema: [],
     messages: {
       ['display-override']:

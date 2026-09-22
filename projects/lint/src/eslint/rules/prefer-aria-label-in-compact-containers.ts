@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { elements } from '../internals/metadata.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const COMPACT_CONTAINERS: ReadonlySet<string> = new Set(['nve-page-header', 'nve-toolbar']);
 const FORM_CONTROLS: ReadonlySet<string> = new Set(
@@ -27,12 +26,17 @@ function findAncestor(node: HtmlTagNode | undefined, tags: ReadonlySet<string>):
 const rule: Rule.RuleModule & { meta: { docs: { category: string } } } = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'prefer-aria-label-in-compact-containers',
       description: 'Prefer aria-label on form controls inside toolbars and page headers.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-input><label>Name</label><input /></nve-input>',
+        invalid: '<nve-toolbar><nve-input><label>Search</label><input /></nve-input></nve-toolbar>'
+      }
+    }),
     schema: [],
     messages: {
       ['prefer-aria-label']:

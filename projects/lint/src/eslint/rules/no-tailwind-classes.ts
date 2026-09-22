@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
@@ -13,18 +14,21 @@ import {
 } from '../internals/tailwind.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
-
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-tailwind-classes',
       description:
         'Reports Tailwind classes that conflict with Elements styling. Strict mode reports any Tailwind-shaped class.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-card nve-layout="pad:md"></nve-card>',
+        invalid: '<nve-card class="p-4"></nve-card>'
+      }
+    }),
     schema: [
       {
         type: 'object',

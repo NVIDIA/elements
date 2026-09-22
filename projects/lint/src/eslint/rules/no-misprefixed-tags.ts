@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import type { HtmlTagNode } from '../rule-types.js';
 import { elements } from '../internals/metadata.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const CORRECT_PREFIX = 'nve';
 
@@ -65,12 +64,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     fixable: 'code' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-misprefixed-tags',
       description: 'Disallow misprefixed (nv-*) Elements tags that resolve to a known (nve-*) element.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-button>Save</nve-button>',
+        invalid: '<nv-button>Save</nv-button>'
+      }
+    }),
     schema: [],
     messages: {
       ['misprefixed-tag']: 'Unexpected tag prefix in <{{tag}}>. Did you mean <{{replacement}}>?'

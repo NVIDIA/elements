@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { lintRules } from '../../docs/lint/rules.js';
 import { isSitemapPageUrl, renderSitemap } from './sitemap-xml.js';
 
 describe('isSitemapPageUrl', () => {
@@ -41,5 +42,12 @@ describe('isSitemapPageUrl', () => {
     expect(sitemap).toContain('<loc>https://nvidia.github.io/elements/docs/about/support/</loc>');
     expect(sitemap).not.toContain('<loc>https://nvidia.github.io/elements/DESIGN.md</loc>');
     expect(sitemap.match(/<lastmod>/g)).toHaveLength(1);
+  });
+
+  it('should include every generated lint rule page', () => {
+    const sitemap = renderSitemap(lintRules.map(rule => ({ content: '', url: rule.path })));
+    const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+
+    expect(locations).toEqual(lintRules.map(rule => `https://nvidia.github.io/elements${rule.path}`));
   });
 });

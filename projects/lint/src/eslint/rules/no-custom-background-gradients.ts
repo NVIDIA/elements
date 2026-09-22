@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { CSSLanguage } from '@eslint/css';
 import type { CssDeclarationNode, CssValueChild } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const BACKGROUND_PROPERTIES = new Set(['background', 'background-image', '--background']);
 const GRADIENT_FUNCTIONS = new Set([
@@ -38,12 +37,17 @@ function customBackgroundValueChildren(value: string): CssValueChild[] {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-custom-background-gradients',
       description: 'Disallow custom gradients in CSS backgrounds.',
       category: 'Best Practice',
-      recommended: false,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      recommended: true,
+      examples: {
+        language: 'css',
+        valid: '.surface { background: var(--nve-sys-background); }',
+        invalid: '.surface { background: linear-gradient(#000, #fff); }'
+      }
+    }),
     schema: [],
     messages: {
       ['custom-background-gradient']:

@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { theme } from '@nvidia-elements/themes';
 import type { CssDeclarationNode, CssValueChild } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
   .map(([id, value]) => ({
@@ -307,12 +307,17 @@ function checkColorValue(context: Rule.RuleContext, node: CssDeclarationNode, pr
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unexpected-css-value',
       description: 'Disallow use of invalid CSS values.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'css',
+        valid: ':root { margin: var(--nve-ref-space-sm); }',
+        invalid: ':root { margin: 12px; }'
+      }
+    }),
     fixable: 'code' as const,
     schema: [],
     messages: {

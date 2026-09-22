@@ -2,13 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from '../internals/slots.js';
 import { hasTemplateSyntax, hasUnslottedContent, isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 function shouldIgnoreSlotValue(slotName: string, parentTagName: string): boolean {
   return !isNVElement(parentTagName) || hasSlot(parentTagName, slotName);
@@ -18,12 +17,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unexpected-slot-value',
       description: 'Disallow use of invalid slot values in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-page><div slot="left"></div></nve-page>',
+        invalid: '<nve-badge><nve-icon slot="icon"></nve-icon></nve-badge>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-slot-value']: 'Unexpected slot "{{slotName}}" on "{{tagName}}" for element "{{parentTagName}}"',

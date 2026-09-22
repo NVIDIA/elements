@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { getElementAttribute, getRecommendedValue } from '../internals/element-attributes.js';
 import { isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 import { attributeValueIsDeprecatedForTag } from './no-deprecated-attributes.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
 
 function isExternalIconSource(tagName: string, attributeName: string, value: string) {
@@ -19,12 +19,17 @@ const rule = {
   meta: {
     type: 'problem' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-unexpected-attribute-value',
       description: 'Disallow use of invalid attribute values for nve-* elements.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-badge status="accent">Badge</nve-badge>',
+        invalid: '<nve-badge status="invalid">Badge</nve-badge>'
+      }
+    }),
     schema: [],
     messages: {
       ['no-unexpected-attribute-value']:

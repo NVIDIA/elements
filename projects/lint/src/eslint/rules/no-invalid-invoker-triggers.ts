@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { isNVElement } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Invoker attributes that apply only to button-type elements.
  */
@@ -37,12 +37,17 @@ const BUTTON_TYPE_ELEMENTS = [
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-invalid-invoker-triggers',
       description: 'Disallow use of invoker trigger attributes on non-button nve-* elements.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-button popovertarget="menu">Open</nve-button>',
+        invalid: '<nve-badge popovertarget="menu">Open</nve-badge>'
+      }
+    }),
     schema: [],
     messages: {
       ['no-invalid-invoker-triggers']:

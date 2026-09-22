@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { type HtmlNode } from '../internals/utils.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Patterns that show data binding in attribute values.
  * When these are present, we can't statically determine the value.
@@ -88,12 +88,17 @@ interface PopoverNode {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-missing-popover-trigger',
       description: 'Require popover elements to have a corresponding trigger element.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<button popovertarget="menu">Open</button><nve-dropdown id="menu"></nve-dropdown>',
+        invalid: '<nve-dropdown id="menu"></nve-dropdown>'
+      }
+    }),
     schema: [],
     messages: {
       ['missing-popover-trigger']:

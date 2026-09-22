@@ -20,7 +20,7 @@ describe('noCustomBackgroundGradients', () => {
 
   it('should define rule metadata', () => {
     expect(noCustomBackgroundGradients.meta.docs.description).toBe('Disallow custom gradients in CSS backgrounds.');
-    expect(noCustomBackgroundGradients.meta.docs.recommended).toBe(false);
+    expect(noCustomBackgroundGradients.meta.docs.recommended).toBe(true);
   });
 
   it('should disallow gradients in background declarations', () => {

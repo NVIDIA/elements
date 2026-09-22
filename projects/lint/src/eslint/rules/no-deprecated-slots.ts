@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DEPRECATED_SLOTS = {
   'nve-accordion-header': {
     slots: ['title', 'subtitle', 'actions']
@@ -22,12 +22,17 @@ const DEPRECATED_SLOTS = {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-slots',
       description: 'Disallow use of deprecated slot APIs.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<nve-accordion-header><span slot="prefix">Info</span></nve-accordion-header>',
+        invalid: '<nve-accordion-header><span slot="title">Title</span></nve-accordion-header>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-slots']: 'Unexpected use of deprecated slot "{{slot}}"'

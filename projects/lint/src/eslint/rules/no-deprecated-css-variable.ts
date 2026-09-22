@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { theme } from '@nvidia-elements/themes';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { CssDeclarationNode, CssValueChild, HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 interface DeprecatedCssVariable {
   alternative: string;
@@ -92,12 +91,17 @@ function findDeprecatedCssVariables(text: string, selector: string) {
 const rule = {
   meta: {
     type: 'problem' as const,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-css-variable',
       description: 'Disallow use of deprecated CSS custom properties.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'css',
+        valid: ':root { margin: var(--nve-ref-space-md); }',
+        invalid: ':root { margin: var(--mlv-ref-space-md); }'
+      }
+    }),
     fixable: 'code' as const,
     schema: [],
     messages: {

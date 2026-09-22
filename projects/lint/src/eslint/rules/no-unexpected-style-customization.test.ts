@@ -32,7 +32,7 @@ describe('noUnexpectedStyleCustomization', () => {
       'Disallow use of style customization in Elements playground template.'
     );
     expect(noUnexpectedStyleCustomization.meta.docs.category).toBe('Best Practice');
-    expect(noUnexpectedStyleCustomization.meta.docs.recommended).toBe(true);
+    expect(noUnexpectedStyleCustomization.meta.docs.recommended).toBe(false);
     expect(noUnexpectedStyleCustomization.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedStyleCustomization.meta.schema).toBeDefined();
     expect(noUnexpectedStyleCustomization.meta.messages).toBeDefined();

@@ -2,12 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Rule } from 'eslint';
+import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
 import type { HtmlTagNode } from '../rule-types.js';
-
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 export const DEPRECATED_ATTRIBUTE_VALUES: Record<string, Record<string, string>> = {};
 
@@ -23,12 +22,17 @@ const rule = {
     type: 'problem' as const,
     fixable: 'code' as const,
     hasSuggestions: true,
-    docs: {
+    docs: defineRuleDocumentation({
+      name: 'no-deprecated-global-attribute-value',
       description: 'Disallow use of deprecated attribute values for nve-* utility attributes.',
       category: 'Best Practice',
       recommended: true,
-      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
-    },
+      examples: {
+        language: 'html',
+        valid: '<p nve-text="body"></p>',
+        invalid: '<p nve-text="default"></p>'
+      }
+    }),
     schema: [],
     messages: {
       ['unexpected-deprecated-global-attribute-value']:
