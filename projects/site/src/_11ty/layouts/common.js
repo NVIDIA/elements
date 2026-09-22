@@ -413,6 +413,34 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''} style="--color: var(--nve-sys-text-muted-color)">
     <a href="/docs/labs/">Labs</a>
+    <nve-tree-node ${data.page.url.includes('/docs/plot/') ? 'expanded' : ''}>
+      <a href="/docs/plot/">Plot <nve-icon name="beaker" size="sm"></nve-icon></a>
+      <nve-tree-node ${data.page.url === '/docs/plot/' ? 'highlighted selected' : ''}><a href="/docs/plot/">Overview</a></nve-tree-node>
+    </nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/scene/') ? 'expanded' : ''}>
+      <a href="/docs/scene/">Scene <nve-icon name="beaker" size="sm"></nve-icon></a>
+      <nve-tree-node ${data.page.url === '/docs/scene/' ? 'highlighted selected' : ''}><a href="/docs/scene/">Overview</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/record-buffers/') ? 'highlighted selected' : ''}><a href="/docs/scene/record-buffers/">Record Buffers</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/interaction/') ? 'highlighted selected' : ''}><a href="/docs/scene/interaction/">Interaction</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/arrows/') ? 'highlighted selected' : ''}><a href="/docs/scene/arrows/">Arrows</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/axes/') ? 'highlighted selected' : ''}><a href="/docs/scene/axes/">Axes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/camera/') ? 'highlighted selected' : ''}><a href="/docs/scene/camera/">Camera</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/cones/') ? 'highlighted selected' : ''}><a href="/docs/scene/cones/">Cones</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/cubes/') ? 'highlighted selected' : ''}><a href="/docs/scene/cubes/">Cubes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/cylinders/') ? 'highlighted selected' : ''}><a href="/docs/scene/cylinders/">Cylinders</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/frame/') ? 'highlighted selected' : ''}><a href="/docs/scene/frame/">Frame</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/gridlines/') ? 'highlighted selected' : ''}><a href="/docs/scene/gridlines/">Gridlines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/heightfield/') ? 'highlighted selected' : ''}><a href="/docs/scene/heightfield/">Heightfield</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/labels/') ? 'highlighted selected' : ''}><a href="/docs/scene/labels/">Labels</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/lines/') ? 'highlighted selected' : ''}><a href="/docs/scene/lines/">Lines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/mesh/') ? 'highlighted selected' : ''}><a href="/docs/scene/mesh/">Mesh</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/model/') ? 'highlighted selected' : ''}><a href="/docs/scene/model/">Model</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/points/') ? 'highlighted selected' : ''}><a href="/docs/scene/points/">Points</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/polygon/') ? 'highlighted selected' : ''}><a href="/docs/scene/polygon/">Polygon</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/pyramids/') ? 'highlighted selected' : ''}><a href="/docs/scene/pyramids/">Pyramids</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/spheres/') ? 'highlighted selected' : ''}><a href="/docs/scene/spheres/">Spheres</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/triangles/') ? 'highlighted selected' : ''}><a href="/docs/scene/triangles/">Triangles</a></nve-tree-node>
+    </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/layout/responsive/' ? 'highlighted' : ''}>
       <a href="/docs/labs/layout/responsive/" nve-layout="row align:vertical-center gap:xs">Responsive Layout <nve-icon name="beaker" size="sm"></nve-icon></a>
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/viewport/') ? 'highlighted selected' : ''}><a href="/docs/labs/layout/responsive/viewport/">Viewport</a></nve-tree-node>

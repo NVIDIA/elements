@@ -213,7 +213,7 @@ export declare class WebGPUTestRunner {
   writeArtifact(label: string, suffix: string, contents: string): Promise<string>;
 }
 
-export declare const WEBGPU_BUFFER_USAGE: Readonly<{ storage: number; uniform: number }>;
+export declare const WEBGPU_BUFFER_USAGE: Readonly<{ storage: number; uniform: number; vertex: number }>;
 export declare function getWebGPUTestMode(): WebGPUTestMode;
 export declare function assertNativeWebGPUAdapter(adapter: WebGPUAdapterInfo): void;
 export declare function collectWebGPUMemorySnapshot(

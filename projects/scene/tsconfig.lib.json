@@ -5,7 +5,7 @@
     "types": []
   },
   "exclude": [
-    "src/internal/testing.ts",
+    "src/internal/testing/scene.ts",
     "**/*.typecheck.ts",
     "**/*.test.bench.ts",
     "**/*.test.webgpu.ts",

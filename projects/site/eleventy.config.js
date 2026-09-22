@@ -112,6 +112,9 @@ export default function (eleventyConfig) {
   // Configure front matter parsing and file copying
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.{ts,css}');
+  eleventyConfig.addPassthroughCopy({
+    '../scene/demos/robot-playback': 'public/static/scene/robot-playback'
+  });
 
   // Expose locally built bundles so iframe previews can load them on localhost
   // instead of fetching from the CDN. Allows testing local component changes in
@@ -242,7 +245,8 @@ export default function (eleventyConfig) {
         'src/docs/monaco/*.md',
         'src/docs/media/*.md',
         'src/docs/markdown/index.md',
-        'src/docs/viewport/*.md'
+        'src/docs/viewport/*.md',
+        'src/docs/scene/*.md'
       ])
       .filter(page => page.data.tag);
   });
