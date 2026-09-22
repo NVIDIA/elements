@@ -58,6 +58,7 @@ export class Menu extends LitElement {
   @queryAssignedElements() private items!: MenuItem[];
 
   #scrollRAF: number | null = null;
+  #assignedMenuSlot = false;
 
   #handleScroll = () => {
     if (this.#scrollRAF !== null) return;
@@ -96,5 +97,18 @@ export class Menu extends LitElement {
     attachInternals(this);
     this._internals.role = 'menu';
     appendRootNodeStyle(this, globalStyles);
+
+    if (this.parentElement?.localName === 'nve-menu-group' && !this.slot) {
+      this.slot = 'menu';
+      this.#assignedMenuSlot = true;
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.#assignedMenuSlot && this.slot === 'menu') {
+      this.slot = '';
+    }
+    this.#assignedMenuSlot = false;
   }
 }

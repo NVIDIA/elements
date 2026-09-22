@@ -4,7 +4,7 @@
   description: 'Use NVIDIA Elements menus for accessible navigation and actions with keyboard controls, selected states, links, icons, scrolling, and nested dropdown patterns.',
   layout: 'docs.11ty.js',
   tag: 'nve-menu',
-  associatedElements: ['nve-menu-item']
+  associatedElements: ['nve-menu-group', 'nve-menu-item']
 }
 ---
 
@@ -23,6 +23,10 @@
 {% api 'nve-menu-item', 'property', 'current' %}
 
 {% example '@nvidia-elements/core/menu/menu.examples.json' 'Current' %}
+
+## Collapsible Menu Groups
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'CollapsibleNavigation' %}
 
 ## Border Background
 
@@ -73,3 +77,7 @@
 ## Danger Status
 
 {% example '@nvidia-elements/core/menu/menu.examples.json' 'DangerStatus' %}
+
+## Expanded Navigation
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'ExpandedNavigation' %}

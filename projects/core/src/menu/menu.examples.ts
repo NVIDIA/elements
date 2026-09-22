@@ -3,6 +3,7 @@
 
 import { html } from 'lit';
 import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/dot/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/menu/define.js';
@@ -15,7 +16,7 @@ import '@nvidia-elements/core/page/define.js';
 
 export default {
   title: 'Elements/Menu',
-  component: 'nve-menu',
+  component: 'nve-menu'
 };
 
 /**
@@ -29,6 +30,65 @@ export const Default = {
     <nve-menu-item>item 3</nve-menu-item>
     <nve-menu-item>item 4</nve-menu-item>
   </nve-menu>
+  `
+};
+
+/**
+ * @summary Collapsible menu groups organize related navigation destinations under concise parent labels. Use in persistent sidebars where users need to scan and reveal sections on demand. For deeply nested navigation use the `nve-tree` component.
+ */
+export const CollapsibleNavigation = {
+  render: () => html`
+    <nav aria-label="Product navigation" style="width: 240px">
+      <nve-menu-group behavior-expand expanded>
+        <nve-icon name="folder" slot="prefix" aria-hidden="true"></nve-icon>
+        Labs Projects
+        <nve-dot slot="suffix" aria-label="4 projects">4</nve-dot>
+        <nve-menu>
+          <nve-menu-item>Markdown</nve-menu-item>
+          <nve-menu-item>Code</nve-menu-item>
+          <nve-menu-item>Lint</nve-menu-item>
+          <nve-menu-item>CLI</nve-menu-item>
+        </nve-menu>
+      </nve-menu-group>
+      <nve-menu-group behavior-expand>
+        <nve-icon name="gear" slot="prefix" aria-hidden="true"></nve-icon>
+        Settings
+        <nve-menu>
+          <nve-menu-item>Profile</nve-menu-item>
+          <nve-menu-item>Access</nve-menu-item>
+        </nve-menu>
+      </nve-menu-group>
+    </nav>
+  `
+};
+
+/**
+ * @summary An explicitly expanded group keeps navigation state controlled by the application without enabling automatic state changes. Use when the application owns expansion state.
+ */
+export const ExpandedNavigation = {
+  render: () => html`
+    <nve-menu-group expanded style="--width: 240px">
+      Resources
+      <nve-menu>
+        <nve-menu-item>Documentation</nve-menu-item>
+        <nve-menu-item>Examples</nve-menu-item>
+      </nve-menu>
+    </nve-menu-group>
+  `
+};
+
+/**
+ * @summary A disabled menu-group header preserves its current expanded content while preventing user toggling. Use when group availability depends on application state.
+ */
+export const UnavailableNavigation = {
+  render: () => html`
+    <nve-menu-group expanded disabled style="--width: 240px">
+      Provisioning
+      <nve-menu>
+        <nve-menu-item>Clusters</nve-menu-item>
+        <nve-menu-item>Storage</nve-menu-item>
+      </nve-menu>
+    </nve-menu-group>
   `
 };
 
@@ -273,7 +333,7 @@ export const ItemTooltip = {
     <nve-menu-item>item 3</nve-menu-item>
   </nve-menu>
   `
-}
+};
 
 /**
  * @summary Menu items with danger status styling for destructive actions like delete or logout operations.
@@ -289,4 +349,4 @@ export const DangerStatus = {
     <nve-menu-item status="danger">icon right <nve-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon></nve-menu-item>
   </nve-menu>
   `
-}
+};

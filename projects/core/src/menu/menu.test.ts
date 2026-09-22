@@ -71,6 +71,54 @@ describe(Menu.metadata.tag, () => {
   });
 });
 
+describe(`${Menu.metadata.tag}: menu group slot`, () => {
+  let fixture: HTMLElement;
+  let element: Menu;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-menu-group>
+        <nve-menu>item</nve-menu>
+      </nve-menu-group>
+    `);
+    element = fixture.querySelector(Menu.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should clear an automatically assigned menu slot on disconnect', () => {
+    expect(element.slot).toBe('menu');
+    element.remove();
+    expect(element.slot).toBe('');
+
+    fixture.querySelector('nve-menu-group').append(element);
+    expect(element.slot).toBe('menu');
+    element.remove();
+    expect(element.slot).toBe('');
+  });
+
+  it('should preserve an authored menu slot on disconnect', () => {
+    element.remove();
+    const authoredGroup = document.createElement('nve-menu-group');
+    element = document.createElement(Menu.metadata.tag);
+    element.slot = 'menu';
+    authoredGroup.append(element);
+    fixture.append(authoredGroup);
+
+    element.remove();
+    expect(element.slot).toBe('menu');
+  });
+
+  it('should preserve a changed slot on disconnect', () => {
+    element.slot = 'other';
+    element.remove();
+    expect(element.slot).toBe('other');
+  });
+});
+
 describe(`${Menu.metadata.tag}: scroll event`, () => {
   let fixture: HTMLElement;
   let element: Menu;

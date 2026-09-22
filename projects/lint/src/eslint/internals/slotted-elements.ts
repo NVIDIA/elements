@@ -23,6 +23,7 @@ export const SLOTTED_ELEMENT_CONTRACTS = {
   'nve-grid-header': ['nve-grid-column'],
   'nve-grid-row': ['nve-grid-cell'],
   'nve-menu': ['nve-menu-item', 'nve-divider'],
+  'nve-menu-group': ['nve-menu'],
   'nve-notification-group': ['nve-notification'],
   'nve-radio': ['label', 'input', 'nve-control-message'],
   'nve-radio-group': ['label', 'nve-control-message', 'nve-radio'],
