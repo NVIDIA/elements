@@ -71,7 +71,7 @@ export function examplesToJSON(packageFile) {
                     template = await prettier.format(template.replace(/\n\n/g, '\n'), {
                       parser: 'html',
                       singleAttributePerLine: false,
-                      printWidth: 120
+                      printWidth: 220
                     });
                   } catch {}
                 }

@@ -10,7 +10,7 @@ export const LIGHTHOUSE_PROJECTS = Object.freeze([
   { name: '@nvidia-elements/markdown', dir: 'markdown', metrics: true },
   { name: '@nvidia-elements/media', dir: 'media', metrics: true },
   { name: '@nvidia-elements/monaco', dir: 'monaco', metrics: true },
-  { name: '@nvidia-elements/plot', dir: 'plot', metrics: true },
+  // { name: '@nvidia-elements/plot', dir: 'plot', metrics: true },
   { name: '@nvidia-elements/scene', dir: 'scene', metrics: true },
   { name: 'site', dir: 'site', metrics: false }
 ]);

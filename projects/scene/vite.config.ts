@@ -1,13 +1,11 @@
-import { resolve } from 'path';
-import { UserConfig, defineConfig, mergeConfig } from 'vite';
+import { resolve } from 'node:path';
+import { defineConfig, mergeConfig, type UserConfig } from 'vite';
 import { libraryBuildConfig } from '@internals/vite';
 
-export default defineConfig(() => {
-  const config: UserConfig = {
-    resolve: {
-      alias: { '@nvidia-elements/scene': resolve(import.meta.dirname, './src') }
-    }
-  };
+const config: UserConfig = {
+  resolve: {
+    alias: { '@nvidia-elements/scene': resolve(import.meta.dirname, './src') }
+  }
+};
 
-  return mergeConfig(libraryBuildConfig, config);
-});
+export default defineConfig(mergeConfig(libraryBuildConfig, config));

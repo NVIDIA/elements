@@ -8,7 +8,7 @@ const config = mergeConfig(libraryTestConfig, {
     alias: { '@nvidia-elements/scene': resolve(import.meta.dirname, './src') }
   },
   test: {
-    include: ['./src/**/*.test.ts'],
+    include: ['./build/**/*.test.ts', './src/**/*.test.ts'],
     setupFiles: [],
     coverage: {
       thresholds: {
