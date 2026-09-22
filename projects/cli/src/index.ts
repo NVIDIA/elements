@@ -188,7 +188,7 @@ tools
       // main handler for the command
       async args => {
         const start = performance.now();
-        const parsedArgs = normalizeOptionNames(args as Record<string, unknown>, cli?.optionNames);
+        const parsedArgs = normalizeOptionNames(args, cli?.optionNames);
         const input = cli?.transformInput ? await cli.transformInput(parsedArgs) : parsedArgs;
         const { result, status, message } = await runAsyncTool(input, tool);
         const end = performance.now();
