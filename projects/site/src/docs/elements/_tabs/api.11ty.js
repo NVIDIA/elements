@@ -20,6 +20,7 @@ export const data = {
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
     else if (filePath.includes('/media/')) dir = 'media';
+    else if (filePath.includes('/scene/')) dir = 'scene';
     else if (filePath.includes('/markdown/')) dir = '';
     return `/docs/${dir}/${data.component.fileSlug}/api/`;
   }

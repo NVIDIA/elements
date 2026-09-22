@@ -8,6 +8,7 @@ const SERVER_ENTRIES = ['src/**/server.ts'];
 const EXAMPLE_ENTRIES = ['src/**/*.examples.ts'];
 const TEST_ENTRIES = ['src/**/*.test.{ts,tsx}'];
 const TEST_VARIANT_ENTRIES = ['src/**/*.test.*.ts'];
+const TYPECHECK_ENTRIES = ['src/**/*.typecheck.ts'];
 const BUNDLE_ENTRIES = ['src/bundle.ts'];
 const VITE_CONFIGS = ['vite*.ts'];
 const VITEST_CONFIGS = ['vitest*.ts'];
@@ -209,6 +210,7 @@ export default {
         ...EXAMPLE_ENTRIES,
         ...TEST_ENTRIES,
         ...TEST_VARIANT_ENTRIES,
+        ...TYPECHECK_ENTRIES,
         ...VITE_CONFIGS,
         ...VITEST_CONFIGS
       ],
