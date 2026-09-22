@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Skills',
+  title: 'NVIDIA Elements Skills',
   description: 'Install the NVIDIA Elements skill to give AI agents persistent project context and UI authoring guidance.',
   layout: 'docs.11ty.js'
 }

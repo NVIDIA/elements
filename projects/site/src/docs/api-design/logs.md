@@ -54,7 +54,7 @@ To resolve this warning:
 
 ## Invalid Slotted Children
 
-This warning appears when invalid elements are slotted into a component. Example `nve-tree` and `nve-tree` have direct child relationships.
+This warning appears when invalid elements are slotted into a component. For example, `nve-tree` and `nve-grid-row` require specific direct children.
 
 <nve-alert status="success">Valid</nve-alert>
 
@@ -70,6 +70,8 @@ This warning appears when invalid elements are slotted into a component. Example
 
 <nve-alert status="danger">Invalid</nve-alert>
 
+<!-- eslint-disable @nvidia-elements/lint/no-invalid-slotted-elements -- This example intentionally demonstrates invalid slotted children. -->
+
 ```html
 <nve-tree>
   <div>
@@ -83,6 +85,8 @@ This warning appears when invalid elements are slotted into a component. Example
   </div>
 </nve-grid-row>
 ```
+
+<!-- eslint-enable @nvidia-elements/lint/no-invalid-slotted-elements -->
 
 To resolve this warning:
 

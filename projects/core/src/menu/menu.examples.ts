@@ -202,7 +202,7 @@ export const Complex = {
 export const VerticalNavigationDrawer = {
   render: () => html`
   <nve-page>
-    <nve-page-header>
+    <nve-page-header slot="header">
       <nve-logo slot="prefix" size="sm">NV</nve-logo>
       <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
     </nve-page-header>
@@ -233,7 +233,7 @@ export const VerticalNavigationDrawer = {
 export const VerticalNavigationPanel = {
   render: () => html`
 <nve-page>
-  <nve-page-header>
+  <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm">NV</nve-logo>
     <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
   </nve-page-header>

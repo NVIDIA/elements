@@ -10,7 +10,7 @@
 
 ## Login Form
 
-{% example '@internals/patterns/authentication.examples.json' 'LoginForm' %}
+{% example '@nvidia-elements/core/forms/validation.examples.json' 'LoginForm' %}
 
 ## No Access
 
@@ -18,4 +18,4 @@
 
 ## Login Page
 
-{% example '@internals/patterns/authentication.examples.json' 'LoginPage' '{ "inline": false, "height": "600px" }' %}
+{% example '@internals/patterns/templates.examples.json' 'Auth' %}

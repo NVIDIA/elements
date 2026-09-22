@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Elements MCP',
+  title: 'NVIDIA Elements MCP',
   description: 'The NVIDIA Elements MCP server: exposes component metadata, examples, and design tokens to AI assistants over the Model Context Protocol.',
   layout: 'docs.11ty.js'
 }

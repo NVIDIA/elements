@@ -13,3 +13,7 @@ Logging patterns for displaying event timelines, activity feeds, and audit logs 
 ## Event Timeline
 
 {% example '@internals/patterns/logging.examples.json', 'EventTimeline' %}
+
+## Audit Feed
+
+{% example '@internals/patterns/logging.examples.json', 'AuditFeed', '{ "height": "560px" }' %}

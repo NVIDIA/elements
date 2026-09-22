@@ -3,7 +3,6 @@
 
 import { html } from 'lit';
 import '@nvidia-elements/core/alert/define.js';
-import '@nvidia-elements/core/alert-group/define.js';
 import '@nvidia-elements/core/avatar/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/breadcrumb/define.js';
@@ -12,7 +11,7 @@ import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/chat-message/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
-import '@nvidia-elements/core/control-message/define.js';
+import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/icon/define.js';
