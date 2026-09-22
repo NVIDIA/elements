@@ -16,7 +16,7 @@ class AuditTestElement extends LitElement {
   };
 
   render() {
-    return html`<slot></slot>`;
+    return html`<slot></slot><slot name="suffix"></slot>`;
   }
 }
 
@@ -63,6 +63,7 @@ describe('audit', () => {
       <audit-test-element>
         <p nve-text="body"></p>
         <span></span>
+        <button slot="suffix">Action</button>
       </audit-test-element>
     </audit-test-parent-element>`);
     element = fixture.querySelector('audit-test-element') as AuditTestElement;

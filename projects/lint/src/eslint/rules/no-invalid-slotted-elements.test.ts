@@ -134,6 +134,15 @@ describe('noInvalidSlottedElements', () => {
           ]
         },
         {
+          code: '<nve-menu-group><nve-menu-item></nve-menu-item></nve-menu-group>',
+          errors: [
+            {
+              messageId: 'invalid-slotted-element',
+              data: { allowed: 'nve-menu', child: 'nve-menu-item', parent: 'nve-menu-group' }
+            }
+          ]
+        },
+        {
           code: '<nve-grid><div slot=""></div></nve-grid>',
           errors: [
             {

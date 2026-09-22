@@ -48,7 +48,26 @@ describe(MenuItem.metadata.tag, () => {
     expect(element.tabIndex).toBe(-1);
   });
 
-  it('should provide suffix slot', async () => {
-    expect(element.shadowRoot.querySelector('slot[name="suffix"]')).toBeTruthy();
+  it.each(['prefix', 'suffix'])('should assign content to the %s slot', async name => {
+    const content = document.createElement('span');
+    content.slot = name;
+    content.textContent = name;
+    element.append(content);
+    await elementIsStable(element);
+
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>(`slot[name="${name}"]`);
+    const labelSlot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
+    expect(slot.assignedElements()).toEqual([content]);
+    expect(
+      labelSlot
+        .assignedNodes()
+        .map(node => node.textContent)
+        .join('')
+    ).toBe('item 1');
+
+    content.remove();
+    await elementIsStable(element);
+
+    expect(slot.assignedElements()).toEqual([]);
   });
 });

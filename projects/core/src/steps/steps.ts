@@ -8,7 +8,7 @@ import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
-import type { KeynavListConfig, Container } from '@nvidia-elements/core/internal';
+import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   stateSelected,
   useStyles,
@@ -58,7 +58,7 @@ export class StepsItem extends ButtonFormControlMixin(LitElement) {
   /**
    * Determines whether the steps should display in condensed format with no text labels.
    */
-  @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
+  @property({ type: String, reflect: true }) container?: 'condensed';
 
   /** @private */
   @state() index: number = 0;
@@ -122,7 +122,7 @@ export class Steps extends LitElement {
   /**
    * Determines whether the steps should display in condensed format with no text labels.
    */
-  @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
+  @property({ type: String, reflect: true }) container?: 'condensed';
 
   /**
    * Determines whether the steps should handle selection behavior vs. defaults to off.

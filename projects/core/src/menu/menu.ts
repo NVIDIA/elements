@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import type { KeynavListConfig } from '@nvidia-elements/core/internal';
+import type { Density, KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   useStyles,
   attachInternals,
@@ -44,6 +45,11 @@ export class Menu extends LitElement {
 
   static elementDefinitions = {};
 
+  /**
+   * Determines if the menu is in a compact layout. This hides all menu item content except the prefix icon slot.
+   */
+  @property({ type: String, reflect: true }) density?: Density;
+
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
@@ -58,6 +64,7 @@ export class Menu extends LitElement {
   @queryAssignedElements() private items!: MenuItem[];
 
   #scrollRAF: number | null = null;
+  #assignedMenuSlot = false;
 
   #handleScroll = () => {
     if (this.#scrollRAF !== null) return;
@@ -96,5 +103,18 @@ export class Menu extends LitElement {
     attachInternals(this);
     this._internals.role = 'menu';
     appendRootNodeStyle(this, globalStyles);
+
+    if (this.parentElement?.localName === 'nve-menu-group' && !this.slot) {
+      this.slot = 'menu';
+      this.#assignedMenuSlot = true;
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.#assignedMenuSlot && this.slot === 'menu') {
+      this.slot = '';
+    }
+    this.#assignedMenuSlot = false;
   }
 }

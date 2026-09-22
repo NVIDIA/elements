@@ -4,7 +4,7 @@
   description: 'Use NVIDIA Elements menus for accessible navigation and actions with keyboard controls, selected states, links, icons, scrolling, and nested dropdown patterns.',
   layout: 'docs.11ty.js',
   tag: 'nve-menu',
-  associatedElements: ['nve-menu-item']
+  associatedElements: ['nve-menu-group', 'nve-menu-item']
 }
 ---
 
@@ -24,19 +24,15 @@
 
 {% example '@nvidia-elements/core/menu/menu.examples.json' 'Current' %}
 
-## Border Background
-
-{% example '@nvidia-elements/core/menu/menu.examples.json' 'BorderBackground' %}
-
 ## Disabled
 
 {% api 'nve-menu-item', 'property', 'disabled' %}
 
 {% example '@nvidia-elements/core/menu/menu.examples.json' 'Disabled' %}
 
-## Icons
+## Content Slots
 
-{% example '@nvidia-elements/core/menu/menu.examples.json' 'Icons' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'ContentSlots' %}
 
 ## Scroll
 
@@ -44,7 +40,11 @@
 
 ## Dropdown
 
-{% example '@nvidia-elements/core/menu/menu.examples.json' 'Dropdown' '{ "inline": false, "height": "380px" }' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Dropdown' '{ "inline": false, "height": "400px" }' %}
+
+## Vertical Navigation
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'VerticalNavigation' %}
 
 ## Vertical Navigation Drawer
 
@@ -53,6 +53,10 @@
 ## Vertical Navigation Panel
 
 {% example '@nvidia-elements/core/menu/menu.examples.json' 'VerticalNavigationPanel' %}
+
+## Compact
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Compact' %}
 
 ## Menu Item Tooltip
 
@@ -73,3 +77,11 @@
 ## Danger Status
 
 {% example '@nvidia-elements/core/menu/menu.examples.json' 'DangerStatus' %}
+
+## Expanded Navigation
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'ExpandedNavigation' %}
+
+## Border Background
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'BorderBackground' %}
