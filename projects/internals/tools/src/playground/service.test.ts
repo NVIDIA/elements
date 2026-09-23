@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { writeFileSync, unlinkSync, mkdtempSync } from 'node:fs';
-import { join } from 'node:path';
+import { writeFileSync, rmSync, mkdtempSync, symlinkSync, mkdirSync } from 'node:fs';
+import { join, relative } from 'node:path';
 import { tmpdir } from 'node:os';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
@@ -252,22 +252,21 @@ describe('PlaygroundService', () => {
 
   describe('path input', () => {
     let tempDir: string;
+    let outsideDir: string;
     let tempFile: string;
     let originalEnv: string | undefined;
 
     beforeEach(() => {
       originalEnv = process.env.ELEMENTS_ENV;
-      tempDir = mkdtempSync(join(tmpdir(), 'playground-test-'));
+      tempDir = mkdtempSync(join(process.cwd(), 'playground-test-'));
+      outsideDir = mkdtempSync(join(tmpdir(), 'playground-test-'));
       tempFile = join(tempDir, 'template.html');
     });
 
     afterEach(() => {
       process.env.ELEMENTS_ENV = originalEnv;
-      try {
-        unlinkSync(tempFile);
-      } catch {
-        // already cleaned up
-      }
+      rmSync(tempDir, { recursive: true, force: true });
+      rmSync(outsideDir, { recursive: true, force: true });
     });
 
     it('should expose path in validate inputSchema', () => {
@@ -298,6 +297,89 @@ describe('PlaygroundService', () => {
       const result = await PlaygroundService.validate({ path: tempFile });
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(0);
+    });
+
+    it('should read relative paths within the current directory', async () => {
+      writeFileSync(tempFile, '<nve-button>hello</nve-button>');
+      await expect(PlaygroundService.validate({ path: relative(process.cwd(), tempFile) })).resolves.toEqual([]);
+    });
+
+    it('should reject absolute paths outside the current directory in both tools', async () => {
+      const outsideFile = join(outsideDir, 'secret.html');
+      writeFileSync(outsideFile, '<nve-button>secret</nve-button>');
+      await expect(PlaygroundService.validate({ path: outsideFile })).rejects.toThrow(
+        'Refusing to read outside the current directory'
+      );
+      await expect(PlaygroundService.create({ path: outsideFile })).rejects.toThrow(
+        'Refusing to read outside the current directory'
+      );
+    });
+
+    it('should refuse missing outside paths the same way as existing outside paths', async () => {
+      const outsideFile = join(outsideDir, 'existing.html');
+      const missingFile = join(outsideDir, 'missing.html');
+      writeFileSync(outsideFile, '<nve-button>secret</nve-button>');
+      await expect(PlaygroundService.validate({ path: outsideFile })).rejects.toThrow(
+        `Refusing to read outside the current directory: ${outsideFile}`
+      );
+      await expect(PlaygroundService.validate({ path: missingFile })).rejects.toThrow(
+        `Refusing to read outside the current directory: ${missingFile}`
+      );
+    });
+
+    it('should return a managed tool error without exposing outside file contents', async () => {
+      const outsideFile = join(outsideDir, 'secret.html');
+      writeFileSync(outsideFile, '<nve-button>secret</nve-button>');
+      const validateTool = loadTools(PlaygroundService).find(tool => tool.metadata.name === 'validate');
+      const result = await validateTool?.({ path: outsideFile });
+      expect(result).toMatchObject({ status: 'error', message: expect.stringContaining('Refusing to read') });
+      expect(JSON.stringify(result)).not.toContain('secret</nve-button>');
+    });
+
+    it('should reject traversal to files outside the current directory', async () => {
+      const outsideFile = join(outsideDir, 'secret.html');
+      writeFileSync(outsideFile, '<nve-button>secret</nve-button>');
+      const path = relative(process.cwd(), outsideFile);
+      await expect(PlaygroundService.validate({ path })).rejects.toThrow(
+        'Refusing to read outside the current directory'
+      );
+    });
+
+    it('should read symlinks to files inside the current directory', async () => {
+      writeFileSync(tempFile, '<nve-button>hello</nve-button>');
+      const link = join(tempDir, 'linked.html');
+      symlinkSync(tempFile, link);
+      await expect(PlaygroundService.validate({ path: link })).resolves.toEqual([]);
+    });
+
+    it('should report the supplied path when reading a resolved target fails', async () => {
+      const directory = join(tempDir, 'directory');
+      mkdirSync(directory);
+      const link = join(tempDir, 'linked.html');
+      symlinkSync(directory, link);
+      const suppliedPath = relative(process.cwd(), link);
+
+      await expect(PlaygroundService.validate({ path: suppliedPath })).rejects.toMatchObject({
+        message: `Unable to read template file: ${suppliedPath}`
+      });
+    });
+
+    it('should reject symlinks to files outside the current directory', async () => {
+      const outsideFile = join(outsideDir, 'secret.html');
+      writeFileSync(outsideFile, '<nve-button>secret</nve-button>');
+      const link = join(tempDir, 'linked.html');
+      symlinkSync(outsideFile, link);
+      await expect(PlaygroundService.validate({ path: link })).rejects.toThrow(
+        'Refusing to read outside the current directory'
+      );
+    });
+
+    it('should refuse dangling symlinks without exposing resolution errors', async () => {
+      const link = join(tempDir, 'linked.html');
+      symlinkSync(join(outsideDir, 'missing.html'), link);
+      await expect(PlaygroundService.validate({ path: link })).rejects.toThrow(
+        `Refusing to read outside the current directory: ${link}`
+      );
     });
 
     it('validate should return lint errors from file path', async () => {

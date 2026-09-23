@@ -49,10 +49,13 @@ export const PageChat = {
     </section>
   </main>
   <form slot="footer" nve-layout="column gap:sm full pad:md" style="max-width: 520px; margin: 0 auto;">
-    <nve-textarea>
+    <nve-textarea container="flat">
       <textarea aria-label="Message Agent" name="message" rows="3" maxlength="4000" placeholder="Ask about this deployment"></textarea>
+      <nve-tag slot="prefix" color="gray-denim" closable>AGENTS.md</nve-tag>
+      <nve-tag slot="prefix" color="gray-denim" closable>Web Search</nve-tag>
+      <nve-icon-button slot="suffix" type="button" icon-name="paper-clip"  container="flat" aria-label="Attach file"></nve-icon-button>
+      <nve-icon-button slot="suffix" type="button" icon-name="paper-airplane" style="margin-left: auto" aria-label="Send message"></nve-icon-button>
     </nve-textarea>
-    <nve-button type="button" style="margin-inline-start: auto;">Send</nve-button>
   </form>
 </nve-page>
   `
@@ -93,10 +96,11 @@ export const PanelChat = {
     </nve-page-panel-content>
     <nve-page-panel-footer>
       <form nve-layout="column gap:sm full">
-        <nve-textarea>
+        <nve-textarea container="flat">
           <textarea aria-label="Message Agent" name="message" rows="3" maxlength="4000" placeholder="Ask about NVIDIA Elements"></textarea>
+          <nve-icon-button slot="suffix" type="button" icon-name="paper-clip"  container="flat" aria-label="Attach file"></nve-icon-button>
+          <nve-icon-button slot="suffix" type="button" icon-name="paper-airplane" style="margin-left: auto" aria-label="Send message"></nve-icon-button>
         </nve-textarea>
-        <nve-button type="button" style="margin-inline-start: auto;">Send</nve-button>
       </form>
     </nve-page-panel-footer>
   </nve-page-panel>
@@ -145,9 +149,10 @@ export const PopoverChat = {
   <nve-dialog-footer>
     <form nve-layout="column gap:sm full">
       <nve-textarea>
-        <textarea aria-label="Message Agent" name="message" rows="2" maxlength="4000" placeholder="Ask for help"></textarea>
+        <textarea aria-label="Message Agent" name="message" rows="3" maxlength="4000" placeholder="Ask for help"></textarea>
+        <nve-icon-button slot="suffix" type="button" icon-name="paper-clip"  container="flat" aria-label="Attach file"></nve-icon-button>
+        <nve-icon-button slot="suffix" type="button" icon-name="paper-airplane" style="margin-left: auto" aria-label="Send message"></nve-icon-button>
       </nve-textarea>
-      <nve-button type="button" style="margin-inline-start: auto;">Send</nve-button>
     </form>
   </nve-dialog-footer>
 </nve-dialog>
