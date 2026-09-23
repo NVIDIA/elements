@@ -13,29 +13,69 @@
   --cursor: text;
   --border: 0;
   display: block;
-  width: 100%;
+  width: var(--width);
   contain: layout;
 }
 
 ::slotted(textarea) {
-  padding: var(--padding) !important;
   font-size: var(--font-size) !important;
   margin: 0 !important;
   align-content: stretch !important;
   background: var(--background) !important;
-  border: var(--border) !important;
+  border: 0 !important;
   color: var(--color) !important;
-  border-radius: var(--border-radius) !important;
   cursor: var(--cursor) !important;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
 }
 
-::slotted(textarea:not([rows])) {
+slot[name='prefix'],
+slot[name='suffix'] {
+  display: none;
+  gap: var(--nve-ref-space-xxs);
+}
+
+@scope {
+  :scope:has([slot='prefix']) slot[name='prefix'] {
+    display: flex;
+  }
+
+  :scope:has([slot='suffix']) slot[name='suffix'] {
+    display: flex;
+  }
+
+  :scope:has(textarea[style*='width'], textarea[cols]) [input] {
+    width: fit-content;
+  }
+
+  :scope:has(textarea:focus-visible) [input] {
+    outline: 5px auto -webkit-focus-ring-color !important;
+    outline: Highlight solid 2px !important;
+  }
+}
+
+[input] {
+  flex-direction: column;
+  gap: var(--nve-ref-space-xs);
+  background: var(--background);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  cursor: initial;
+  outline: none !important;
+}
+
+::slotted(textarea:not([rows], [style*='height'])) {
+  height: var(--height) !important;
   min-height: var(--min-height) !important;
-  height: var(--min-height) !important;
 }
 
-::slotted(textarea:not([cols])) {
+::slotted(textarea:not([cols], [style*='width'])) {
   width: var(--width) !important;
+}
+
+::slotted(textarea:not([cols], [rows])) {
+  field-sizing: content;
 }
 
 :host([layout*='horizontal']) ::slotted(label) {
@@ -60,4 +100,9 @@
 
 :host(:state(disabled)) {
   --border: var(--nve-ref-border-width-md) solid transparent;
+}
+
+:host([container='flat']) {
+  --background: transparent;
+  --border: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
 }
