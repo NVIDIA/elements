@@ -38,7 +38,8 @@ export class PlaygroundService {
         },
         path: {
           type: 'string',
-          description: 'Absolute file path to an HTML template file. Provide either "template" or "path", not both.'
+          description:
+            'Path to an HTML template file within the current directory. Provide either "template" or "path", not both.'
         }
       }
     },
@@ -80,7 +81,8 @@ export class PlaygroundService {
         },
         path: {
           type: 'string',
-          description: 'Absolute file path to an HTML template file. Provide either "template" or "path", not both.'
+          description:
+            'Path to an HTML template file within the current directory. Provide either "template" or "path", not both.'
         },
         type: {
           type: 'string',

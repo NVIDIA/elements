@@ -38,16 +38,40 @@ export async function resolveTemplate({ template, path }: { template?: string; p
   }
 
   // only load in node environment when caller supplies a path
-  if (path) {
-    const { readFileSync } = await import('node:fs');
-    return readFileSync(path, 'utf8');
-  }
+  if (path) return readTemplatePath(path);
 
   if (template !== undefined) {
     return template;
   }
 
   throw new Error('Either "template" or "path" is required.');
+}
+
+async function readTemplatePath(path: string): Promise<string> {
+  const { readFileSync, realpathSync } = await import('node:fs');
+  const { isAbsolute, relative, resolve, sep } = await import('node:path');
+  const cwd = realpathSync(process.cwd());
+  const refusal = `Refusing to read outside the current directory: ${path}`;
+  const isOutsideCwd = (candidate: string) => {
+    const pathRelative = relative(cwd, candidate);
+    return pathRelative === '..' || pathRelative.startsWith(`..${sep}`) || isAbsolute(pathRelative);
+  };
+  const resolvedPath = resolve(cwd, path);
+  if (isOutsideCwd(resolvedPath)) throw new Error(refusal);
+  let canonicalPath: string;
+  try {
+    canonicalPath = realpathSync(resolvedPath);
+  } catch {
+    // A dangling symlink may escape cwd; don't expose its target's resolution error.
+    throw new Error(refusal);
+  }
+  if (isOutsideCwd(canonicalPath)) throw new Error(refusal);
+  try {
+    return readFileSync(canonicalPath, 'utf8');
+  } catch {
+    // Filesystem read errors can include the canonical target instead of the supplied path.
+    throw new Error(`Unable to read template file: ${path}`);
+  }
 }
 
 const frameworkConfigs: Record<
