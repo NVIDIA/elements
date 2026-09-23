@@ -143,6 +143,20 @@ describe('noDeprecatedCssVariable', () => {
                 data: { value: '--border-background', alternative: '--indicator-background' }
               }
             ]
+          },
+          {
+            code: 'nve-breadcrumb { color: var(--item-active-color); font-size: var(--item-text-size); }',
+            output: 'nve-breadcrumb { color: var(--item-active-color); font-size: var(--font-size); }',
+            errors: [
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--item-active-color', alternative: 'active breadcrumb item styles' }
+              },
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--item-text-size', alternative: '--font-size' }
+              }
+            ]
           }
         ]
       });
@@ -169,7 +183,18 @@ describe('noDeprecatedCssVariable', () => {
         valid: [
           '<nve-breadcrumb style="--height: 32px;"></nve-breadcrumb>',
           '<nve-tabs style="--indicator-background: red;"></nve-tabs>',
-          '<nve-menu-item style="--border-background: red;"></nve-menu-item>'
+          '<nve-menu-item style="--border-background: red;"></nve-menu-item>',
+          '<div></div>'
+        ],
+        invalid: []
+      });
+    });
+
+    it('should allow valid custom properties in style tags', () => {
+      tester.run('should allow valid custom properties in style tags', rule, {
+        valid: [
+          '<style>:root { margin: var(--nve-ref-space-md); }</style>',
+          '<style>.custom { --border-background: red; }</style>'
         ],
         invalid: []
       });
@@ -190,6 +215,54 @@ describe('noDeprecatedCssVariable', () => {
           },
           {
             code: '<nve-tabs-item style="--border-background: red;"></nve-tabs-item>',
+            errors: [
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--border-background', alternative: '--indicator-background' }
+              }
+            ]
+          },
+          {
+            code: '<nve-breadcrumb style="color: var(--item-color);"></nve-breadcrumb>',
+            errors: [
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--item-color', alternative: '--color' }
+              }
+            ]
+          }
+        ]
+      });
+    });
+
+    it('should not allow deprecated custom properties in style tags', () => {
+      tester.run('should not allow deprecated custom properties in style tags', rule, {
+        valid: [],
+        invalid: [
+          {
+            code: '<style>nve-breadcrumb { --breadcrumb-height: 32px; color: var(--item-color); }</style>',
+            errors: [
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--item-color', alternative: '--color' }
+              },
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--breadcrumb-height', alternative: '--height' }
+              }
+            ]
+          },
+          {
+            code: '<style>:root { margin: var(--mlv-ref-space-md); }</style>',
+            errors: [
+              {
+                messageId: 'deprecated-css-var',
+                data: { value: '--mlv-ref-space-md', alternative: '--nve-ref-space-md' }
+              }
+            ]
+          },
+          {
+            code: '<style>nve-tabs { color: var(--border-background); }</style>',
             errors: [
               {
                 messageId: 'deprecated-css-var',
