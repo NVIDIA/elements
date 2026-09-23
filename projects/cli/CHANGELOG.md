@@ -1,3 +1,15 @@
+## [2.2.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.4...@nvidia-elements/cli-v2.2.5) (2026-09-23)
+
+### Features
+
+* **lint:** improve slotted element checks ([0e1985d](https://github.com/NVIDIA/elements/commit/0e1985deb9edba09cbcbd9eec121e445d3559624))
+
+### Bug Fixes
+
+* **cli:** update bun to 1.4.2 ([0e84e28](https://github.com/NVIDIA/elements/commit/0e84e2880ca5ff09405d0d88d16ef12d9341623e))
+* **core:** textarea slots ([0f8fb33](https://github.com/NVIDIA/elements/commit/0f8fb33a38c60a08aaf37e774a92338cf5416401))
+* **lint:** skip generated eleventy vite directories in eslint ([92e5d50](https://github.com/NVIDIA/elements/commit/92e5d506fe0a951c354641a1aad2b1a9dd75a212))
+
 ## [2.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.3...@nvidia-elements/cli-v2.2.4) (2026-09-21)
 
 ### Features
