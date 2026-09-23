@@ -112,3 +112,31 @@ export const ColumnsAndRows = {
   <nve-control-message>message</nve-control-message>
 </nve-textarea>`
 };
+
+/**
+ * @summary Flat textarea with prefix tags for context and suffix buttons to attach files or send a message.
+ * @tags test-case
+ */
+export const Slots = {
+  render: () => html`
+<nve-textarea container="flat">
+  <textarea placeholder="Build something..." aria-label="prompt"></textarea>
+  <nve-tag slot="prefix" color="gray-denim" closable>AGENTS.md</nve-tag>
+  <nve-tag slot="prefix" color="gray-denim" closable>Web Search</nve-tag>
+  <nve-icon-button slot="suffix" icon-name="paper-clip" aria-label="Attach file" container="flat"></nve-icon-button>
+  <nve-icon-button slot="suffix" icon-name="paper-airplane" aria-label="Send message" style="margin-left: auto"></nve-icon-button>
+</nve-textarea>`
+};
+
+/**
+ * @summary Textarea with flat container for inline forms.
+ * @tags test-case
+ */
+export const ContainerFlat = {
+  render: () => html`
+<nve-textarea container="flat">
+  <label>label</label>
+  <textarea></textarea>
+  <nve-control-message>message</nve-control-message>
+</nve-textarea>`
+};

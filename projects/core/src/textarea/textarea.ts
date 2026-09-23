@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { CSSResult } from 'lit';
+import { html, type CSSResult } from 'lit';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './textarea.css?inline';
@@ -12,6 +12,8 @@ import styles from './textarea.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/textarea/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/textarea
+ * @slot prefix - Content to display before the textarea.
+ * @slot suffix - Content to display after the textarea.
  * @cssprop --padding
  * @cssprop --font-size
  * @cssprop --height
@@ -26,6 +28,16 @@ import styles from './textarea.css?inline';
  */
 export class Textarea extends Control {
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
+
+  /** @private */
+  protected get prefixContent() {
+    return html`<slot name="prefix"></slot>`;
+  }
+
+  /** @private */
+  protected get suffixContent() {
+    return html`<slot name="suffix"></slot>`;
+  }
 
   static readonly metadata = {
     tag: 'nve-textarea',
