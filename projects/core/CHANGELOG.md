@@ -1,3 +1,15 @@
+## [2.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.8.0...@nvidia-elements/core-v2.8.1) (2026-09-23)
+
+### Features
+
+* **lint:** improve slotted element checks ([0e1985d](https://github.com/NVIDIA/elements/commit/0e1985deb9edba09cbcbd9eec121e445d3559624))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.2 ([b6984b5](https://github.com/NVIDIA/elements/commit/b6984b58a80a666b7a83aac1e109337e90c469d1))
+* **core:** textarea slots ([0f8fb33](https://github.com/NVIDIA/elements/commit/0f8fb33a38c60a08aaf37e774a92338cf5416401))
+* **lint:** skip generated eleventy vite directories in eslint ([92e5d50](https://github.com/NVIDIA/elements/commit/92e5d506fe0a951c354641a1aad2b1a9dd75a212))
+
 ## [2.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.7.3...@nvidia-elements/core-v2.8.0) (2026-09-19)
 
 ### Features
