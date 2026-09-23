@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { resolvePageMeta } from '../../_11ty/layouts/metadata.js';
 import { createLintRules, lintRules } from './rules.js';
 import { data, renderRulePage } from './rules/index.11ty.js';
 
@@ -20,7 +21,18 @@ describe('lint rule documentation', () => {
     const rule = lintRules.find(candidate => candidate.name === 'no-missing-icon-name');
 
     expect(data.permalink({ lintRule: rule })).toBe('docs/lint/rules/no-missing-icon-name/index.html');
-    expect(data.eleventyComputed.title({ lintRule: rule })).toBe('@nvidia-elements/lint/no-missing-icon-name');
+    expect(data.eleventyComputed.title({ lintRule: rule })).toBe('no-missing-icon-name Lint Rule');
+  });
+
+  it('should keep every generated rule page title within 70 characters', () => {
+    const longTitles = lintRules
+      .map(rule => {
+        const title = data.eleventyComputed.title({ lintRule: rule });
+        return resolvePageMeta({ title, page: { url: rule.path }, description: rule.description }).title;
+      })
+      .filter(title => title.length > 70);
+
+    expect(longTitles).toEqual([]);
   });
 
   it('should render rule facts and escaped do and dont examples', async () => {
