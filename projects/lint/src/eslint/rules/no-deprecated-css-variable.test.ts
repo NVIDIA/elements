@@ -3,10 +3,11 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
-import type { JSRuleDefinition } from 'eslint';
+import type { JSRuleDefinition, Rule } from 'eslint';
 import css from '@eslint/css';
 import html from '@html-eslint/eslint-plugin';
 import noDeprecatedCssVariable from './no-deprecated-css-variable.js';
+import type { CssDeclarationNode } from '../rule-types.js';
 
 const rule = noDeprecatedCssVariable as unknown as JSRuleDefinition;
 
@@ -48,7 +49,8 @@ describe('noDeprecatedCssVariable', () => {
           ':root { margin: 1000px; }',
           ':root { color: blue; }',
           'nve-menu-item { --border-background: red; }',
-          '.custom { --border-background: red; }'
+          '.custom { --border-background: red; }',
+          ':root { color: var(); }'
         ],
         invalid: []
       });
@@ -184,7 +186,8 @@ describe('noDeprecatedCssVariable', () => {
           '<nve-breadcrumb style="--height: 32px;"></nve-breadcrumb>',
           '<nve-tabs style="--indicator-background: red;"></nve-tabs>',
           '<nve-menu-item style="--border-background: red;"></nve-menu-item>',
-          '<div></div>'
+          '<div></div>',
+          '<div style=""></div>'
         ],
         invalid: []
       });
@@ -272,6 +275,73 @@ describe('noDeprecatedCssVariable', () => {
           }
         ]
       });
+    });
+  });
+
+  describe('visitors', () => {
+    function createContext(ancestors: Rule.Node[] = []) {
+      const reports: Array<{ messageId: string; data?: Record<string, unknown> }> = [];
+      const context = {
+        report(descriptor: { messageId: string; data?: Record<string, unknown> }) {
+          reports.push({ messageId: descriptor.messageId, data: descriptor.data });
+        },
+        sourceCode: {
+          getText(node: { property?: string }) {
+            return node.property ?? '';
+          },
+          getAncestors() {
+            return ancestors;
+          }
+        }
+      } as unknown as Rule.RuleContext;
+
+      return { context, reports };
+    }
+
+    function visitDeclaration(listeners: ReturnType<typeof noDeprecatedCssVariable.create>, node: CssDeclarationNode) {
+      const visit = listeners.Declaration as ((declaration: CssDeclarationNode) => void) | undefined;
+      visit?.(node);
+    }
+
+    it('should report unscoped deprecated assignments when no rule selector exists', () => {
+      const { context, reports } = createContext();
+      visitDeclaration(noDeprecatedCssVariable.create(context), {
+        type: 'Declaration',
+        property: '--breadcrumb-height',
+        value: { value: '32px', children: [] }
+      });
+      expect(reports).toEqual([
+        {
+          messageId: 'deprecated-css-var',
+          data: { value: '--breadcrumb-height', alternative: '--height' }
+        }
+      ]);
+    });
+
+    it('should ignore var functions without identifiers', () => {
+      const { context, reports } = createContext();
+      visitDeclaration(noDeprecatedCssVariable.create(context), {
+        type: 'Declaration',
+        property: 'color',
+        value: {
+          value: 'var()',
+          children: [{ type: 'Function', name: 'var' }]
+        }
+      });
+      expect(reports).toEqual([]);
+    });
+
+    it('should ignore nameless var children', () => {
+      const { context, reports } = createContext();
+      visitDeclaration(noDeprecatedCssVariable.create(context), {
+        type: 'Declaration',
+        property: 'color',
+        value: {
+          value: 'var()',
+          children: [{ type: 'Function', name: 'var', children: [{ type: 'Identifier' }] }]
+        }
+      });
+      expect(reports).toEqual([]);
     });
   });
 });
