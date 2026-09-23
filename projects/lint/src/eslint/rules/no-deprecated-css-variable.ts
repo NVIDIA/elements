@@ -150,39 +150,35 @@ const rule = {
       }
     };
 
-    try {
-      const htmlVisitors = createVisitors(context, {
-        StyleTag(node: HtmlTagNode) {
-          const text = context.sourceCode.getText(node as unknown as Rule.Node);
-          findDeprecatedCssVariables(text, text).forEach(name => {
-            const config = getDeprecatedCssVariable(name, text);
-            if (!config) return;
-            context.report({
-              messageId: 'deprecated-css-var',
-              node: node as unknown as Rule.Node,
-              data: { value: name, alternative: config.alternative }
-            });
+    const htmlVisitors = createVisitors(context, {
+      StyleTag(node: HtmlTagNode) {
+        const text = context.sourceCode.getText(node as unknown as Rule.Node);
+        findDeprecatedCssVariables(text, text).forEach(name => {
+          const config = getDeprecatedCssVariable(name, text);
+          if (!config) return;
+          context.report({
+            messageId: 'deprecated-css-var',
+            node: node as unknown as Rule.Node,
+            data: { value: name, alternative: config.alternative }
           });
-        },
-        Tag(node: HtmlTagNode) {
-          const styleAttr = findAttr(node, 'style');
-          if (!styleAttr?.value?.value) return;
-          findDeprecatedCssVariables(styleAttr.value.value, node.name).forEach(name => {
-            const config = getDeprecatedCssVariable(name, node.name);
-            if (!config) return;
-            context.report({
-              messageId: 'deprecated-css-var',
-              node: styleAttr as unknown as Rule.Node,
-              data: { value: name, alternative: config.alternative }
-            });
+        });
+      },
+      Tag(node: HtmlTagNode) {
+        const styleAttr = findAttr(node, 'style');
+        if (!styleAttr?.value?.value) return;
+        findDeprecatedCssVariables(styleAttr.value.value, node.name).forEach(name => {
+          const config = getDeprecatedCssVariable(name, node.name);
+          if (!config) return;
+          context.report({
+            messageId: 'deprecated-css-var',
+            node: styleAttr as unknown as Rule.Node,
+            data: { value: name, alternative: config.alternative }
           });
-        }
-      });
+        });
+      }
+    });
 
-      return { ...cssVisitors, ...htmlVisitors };
-    } catch {
-      return cssVisitors;
-    }
+    return { ...cssVisitors, ...htmlVisitors };
   }
 } as const;
 
