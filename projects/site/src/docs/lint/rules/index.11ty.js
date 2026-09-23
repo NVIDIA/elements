@@ -10,7 +10,7 @@ export const data = {
     addAllPagesToCollections: true
   },
   eleventyComputed: {
-    title: data => data.lintRule.ruleId,
+    title: data => `${data.lintRule.name} Lint Rule`,
     description: data => data.lintRule.description
   },
   permalink: data => `docs/lint/rules/${data.lintRule.name}/index.html`
