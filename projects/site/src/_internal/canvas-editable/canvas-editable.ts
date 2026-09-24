@@ -188,6 +188,7 @@ export class CanvasEditable extends LitElement {
               <script async type="module" src="${elements}"></script>
               <link rel="stylesheet" type="text/css" href="${themes}" />
               <link rel="stylesheet" type="text/css" href="${stylesUrl}" />
+              ${globalThis.document.querySelector('#classic-theme-stylesheet') ? `<link id="classic-theme-stylesheet" rel="stylesheet" href="${new URL('static/themes/classic.css', globalThis.document.baseURI).href}" />` : ''}
             </head>
             <body>
               ${srcdoc}
@@ -233,7 +234,20 @@ export class CanvasEditable extends LitElement {
   #handleThemeChange = (e: Event) => {
     const theme = (e as CustomEvent).detail.theme;
     const iframe = this.shadowRoot?.querySelector('iframe');
-    iframe?.contentDocument?.documentElement.setAttribute('nve-theme', theme);
+    const iframeDocument = iframe?.contentDocument;
+    iframeDocument?.documentElement.setAttribute('nve-theme', theme);
+    if (!iframeDocument) return;
+
+    const classicStylesheet = iframeDocument.querySelector('#classic-theme-stylesheet');
+    if (theme.includes('classic') && !classicStylesheet) {
+      const link = iframeDocument.createElement('link');
+      link.id = 'classic-theme-stylesheet';
+      link.rel = 'stylesheet';
+      link.href = new URL('static/themes/classic.css', globalThis.document.baseURI).href;
+      iframeDocument.head.append(link);
+    } else if (!theme.includes('classic')) {
+      classicStylesheet?.remove();
+    }
   };
 
   #handleSourceClick() {

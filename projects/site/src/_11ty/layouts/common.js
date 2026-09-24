@@ -123,6 +123,15 @@ export const renderBaseHead = data => {
       white-space: nowrap;
     }
   </style>
+  <script>
+    if (JSON.parse(localStorage.getItem('elements-sb-globals') ?? '{}').classic === 'classic') {
+      const link = document.createElement('link');
+      link.id = 'classic-theme-stylesheet';
+      link.rel = 'stylesheet';
+      link.href = new URL('static/themes/classic.css', document.baseURI).href;
+      document.head.append(link);
+    }
+  </script>
   <script type="module">
     const sidenavPanel = globalThis.document.querySelector('#sidenav-panel');
     if (sidenavPanel && globalThis.window.innerWidth < 920) {
@@ -431,12 +440,14 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
 <script>
   (() => {
     const SB_GLOBALS = { theme: 'dark', font: '', layer: '', scale: '', debug: '', animation: '', sourceType: 'html', showAdvancedApi: '', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
+    const colorScheme = SB_GLOBALS.theme === 'auto'
+      ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
+        ? 'light'
+        : 'dark'
+      : SB_GLOBALS.theme;
     const themes = [
-      SB_GLOBALS.theme === 'auto'
-        ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
-          ? 'light'
-          : 'dark'
-        : SB_GLOBALS.theme,
+      colorScheme,
+      SB_GLOBALS.classic === 'classic' ? (colorScheme === 'dark' ? 'classic-dark' : 'classic') : '',
       SB_GLOBALS.font,
       SB_GLOBALS.scale,
       SB_GLOBALS.debug,
