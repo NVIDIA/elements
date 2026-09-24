@@ -1,3 +1,14 @@
+## [2.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.8.1...@nvidia-elements/core-v2.9.0) (2026-09-24)
+
+### Features
+
+* **core:** add viewport ([0e9e892](https://github.com/NVIDIA/elements/commit/0e9e892de5d41c2a64d1e9adcfaa7a9df2c4deef))
+
+### Bug Fixes
+
+* **cli:** update bun to 1.4.2 ([0e84e28](https://github.com/NVIDIA/elements/commit/0e84e2880ca5ff09405d0d88d16ef12d9341623e))
+* **core:** enhance gesture recognizer ([0be2399](https://github.com/NVIDIA/elements/commit/0be2399b37982fde94c061ed811c280b29e3a3ae))
+
 ## [2.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.8.0...@nvidia-elements/core-v2.8.1) (2026-09-23)
 
 ### Features
