@@ -116,6 +116,26 @@ describe('KeyNavigationSpatialController', () => {
     expect(events).toEqual([]);
   });
 
+  it('dispatches spatial commands when constructed without options', () => {
+    const defaultHost = document.createElement(tag) as KeyNavigationSpatialControllerTestHost;
+    const defaultEvents: CustomEvent<SpatialKeyCommand>[] = [];
+    new KeyNavigationSpatialController(defaultHost);
+    defaultHost.addEventListener('nve-key', event => defaultEvents.push(event as CustomEvent<SpatialKeyCommand>));
+    fixture.append(defaultHost);
+
+    defaultHost.dispatchEvent(new KeyboardEvent('keydown', { cancelable: true, key: 'ArrowRight' }));
+
+    expect(defaultEvents).toHaveLength(1);
+    expect(defaultEvents[0]?.detail).toMatchObject({
+      ctrlKey: false,
+      horizontal: 1,
+      key: 'ArrowRight',
+      kind: 'direction',
+      shiftKey: false,
+      vertical: 0
+    });
+  });
+
   it('removes its listener when the host disconnects', () => {
     host.remove();
     host.dispatchEvent(new KeyboardEvent('keydown', { cancelable: true, key: 'ArrowRight' }));
