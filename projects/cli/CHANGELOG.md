@@ -1,3 +1,14 @@
+## [2.2.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.5...@nvidia-elements/cli-v2.2.6) (2026-09-24)
+
+### Features
+
+* **core:** add viewport ([0e9e892](https://github.com/NVIDIA/elements/commit/0e9e892de5d41c2a64d1e9adcfaa7a9df2c4deef))
+
+### Bug Fixes
+
+* **cli:** update marked to 18.0.14 ([b24d6cb](https://github.com/NVIDIA/elements/commit/b24d6cb07ee47cf392214e0a934f1caee31eb510))
+* **core:** enhance gesture recognizer ([0be2399](https://github.com/NVIDIA/elements/commit/0be2399b37982fde94c061ed811c280b29e3a3ae))
+
 ## [2.2.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.4...@nvidia-elements/cli-v2.2.5) (2026-09-23)
 
 ### Features
