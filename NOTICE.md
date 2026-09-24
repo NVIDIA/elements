@@ -58,7 +58,7 @@ This product includes the following bundled third-party software:
 - markdown-it v15.0.1 [MIT] (used by: @nvidia-elements/markdown)
   Copyright: Unknown
 
-- marked v18.0.11 [MIT] (used by: @nvidia-elements/cli)
+- marked v18.0.14 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Christopher Jeffrey
 
 - marked-terminal v7.3.0 [MIT] (used by: @nvidia-elements/cli)
@@ -324,7 +324,7 @@ eslint v10.10.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 ignore v7.0.8 - Copyright kael
 markdown-it v15.0.1 - Copyright Unknown
-marked v18.0.11 - Copyright Christopher Jeffrey
+marked v18.0.14 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.55.1 - Copyright Microsoft Corporation
