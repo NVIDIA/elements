@@ -80,7 +80,7 @@ function registerTools(server: McpServer): void {
         _meta: !tool.metadata.app ? undefined : { ui: { resourceUri: tool.metadata.app.resourceUri } }
       };
       server.registerTool(toolName, config, async (params, ctx) => {
-        attachProgress(params as Record<string, unknown>, ctx);
+        attachProgress(params, ctx);
         const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
         // https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1624
         const text =
