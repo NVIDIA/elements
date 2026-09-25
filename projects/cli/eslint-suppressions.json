@@ -1,9 +1,4 @@
 {
-  "src/mcp/index.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/utils.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 2
