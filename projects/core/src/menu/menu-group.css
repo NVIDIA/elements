@@ -1,0 +1,107 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --background: transparent;
+  --font-size: var(--nve-ref-font-size-100);
+  --padding: var(--nve-ref-size-200);
+  --gap: var(--nve-ref-space-sm);
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --color: var(--nve-sys-interaction-color);
+  --width: 100%;
+  --min-height: var(--nve-ref-size-800);
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
+  display: block;
+  width: var(--width);
+  contain: layout;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--nve-ref-space-xxs);
+}
+
+button {
+  appearance: none;
+  padding: var(--padding);
+  color: var(--color);
+  background: var(--background);
+  font-size: var(--font-size);
+  border-radius: var(--border-radius);
+  min-height: var(--min-height);
+  gap: var(--gap);
+  font-weight: var(--nve-ref-font-weight-medium);
+  border: 0;
+  width: 100%;
+  margin: 0;
+  font-family: inherit;
+  line-height: normal;
+  text-align: start;
+  cursor: pointer;
+  outline-offset: calc(-1 * var(--nve-ref-size-50));
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(
+    color-mix(
+        in oklab,
+        var(--nve-sys-interaction-state-base) 100%,
+        var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
+      )
+      0 0
+  ) !important;
+
+  &:hover {
+    --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+  }
+}
+
+button:not([disabled]):focus-visible {
+  outline: Highlight solid 2px !important;
+  outline: 5px auto -webkit-focus-ring-color !important;
+}
+
+slot:not([name]) {
+  display: inline-flex;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[part='caret'] {
+  flex: none;
+  --color: currentColor;
+}
+
+slot[name='menu'] {
+  width: 100%;
+  display: block;
+  padding-inline-start: var(--gap);
+}
+
+::slotted(nve-menu) {
+  --min-width: 0;
+  --width: 100%;
+}
+
+::slotted(nve-icon) {
+  --color: currentColor;
+}
+
+:host([disabled]) {
+  --color: var(--nve-sys-interaction-disabled-color);
+}
+
+:host([disabled]) button {
+  --nve-sys-interaction-state-ratio: 0;
+  cursor: not-allowed;
+  opacity: var(--nve-ref-opacity-500);
+}
+
+:host(:not([disabled]):hover) {
+  --color: var(--nve-sys-interaction-selected-color);
+}
