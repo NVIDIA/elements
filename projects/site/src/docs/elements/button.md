@@ -1,6 +1,7 @@
 ---
 {
   title: 'Button',
+  description: 'Use the NVIDIA Elements button to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or deleting content in an app.',
   layout: 'docs.11ty.js',
   tag: 'nve-button'
 }

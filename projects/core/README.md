@@ -9,15 +9,15 @@ NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Aut
 
 ## Getting Started
 
+Install the packages from the public npm registry:
+
 ```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 ```
+
+## Framework integration
+
+Use React, Vue, and Angular as integration targets for these Web Components. See the [integration guides](https://NVIDIA.github.io/elements/docs/integrations/) for framework setup.
 
 Elements ships as many small packages. This allows you to choose what tools your application needs and omit anything unnecessary, improving application performance.
 
