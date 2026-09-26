@@ -12,6 +12,11 @@ class KeyStateControllerTestElement extends LitElement {
   readonly keyState = new KeyStateController(this, { watchedCodes: ['Space'] });
 }
 
+@customElement('key-state-controller-other-code-test-element')
+class KeyStateControllerOtherCodeTestElement extends LitElement {
+  readonly keyState = new KeyStateController(this, { watchedCodes: ['KeyA'] });
+}
+
 describe('key-state.controller', () => {
   let element: KeyStateControllerTestElement;
   let fixture: HTMLElement;
@@ -157,6 +162,64 @@ describe('key-state.controller', () => {
     iframeWindow.dispatchEvent(new iframeWindow.KeyboardEvent('keydown', { code: 'Space' }));
     expect(element.keyState.isPressed('Space')).toBe(false);
     expect(other.keyState.isPressed('Space')).toBe(true);
+  });
+
+  it('reports whether shared keyboard tracking is enabled', () => {
+    expect(element.keyState.enabled).toBe(false);
+    element.keyState.enabled = true;
+    expect(element.keyState.enabled).toBe(true);
+  });
+
+  it('ignores repeated keydown events and releases for keys that are not held', () => {
+    element.keyState.enabled = true;
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    requestUpdate.mockClear();
+
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+    expect(requestUpdate).not.toHaveBeenCalled();
+    expect(element.keyState.isPressed('Space')).toBe(true);
+
+    globalThis.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter' }));
+    expect(requestUpdate).not.toHaveBeenCalled();
+    expect(element.keyState.isPressed('Space')).toBe(true);
+  });
+
+  it('keeps held keys when the document stays visible and ignores blur with nothing held', () => {
+    element.keyState.enabled = true;
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    requestUpdate.mockClear();
+
+    document.dispatchEvent(new Event('visibilitychange'));
+    expect(element.keyState.isPressed('Space')).toBe(true);
+    expect(requestUpdate).not.toHaveBeenCalled();
+
+    globalThis.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
+    requestUpdate.mockClear();
+    globalThis.dispatchEvent(new Event('blur'));
+    expect(element.keyState.isPressed('Space')).toBe(false);
+    expect(requestUpdate).not.toHaveBeenCalled();
+  });
+
+  it('does not refresh hosts that are not watching keys cleared by blur', async () => {
+    const other = document.createElement('key-state-controller-other-code-test-element');
+    fixture.append(other);
+    await elementIsStable(other);
+    element.keyState.enabled = true;
+    other.keyState.enabled = true;
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+
+    const spaceUpdates = vi.spyOn(element, 'requestUpdate');
+    const otherUpdates = vi.spyOn(other, 'requestUpdate');
+    spaceUpdates.mockClear();
+    otherUpdates.mockClear();
+    globalThis.dispatchEvent(new Event('blur'));
+
+    expect(element.keyState.isPressed('Space')).toBe(false);
+    expect(other.keyState.isPressed('Space')).toBe(false);
+    expect(spaceUpdates).toHaveBeenCalledOnce();
+    expect(otherUpdates).not.toHaveBeenCalled();
   });
 });
 
