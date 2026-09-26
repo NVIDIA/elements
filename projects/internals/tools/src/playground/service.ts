@@ -10,7 +10,7 @@ import {
   playgroundTypes,
   resolveTemplate
 } from './utils.js';
-import { service, tool, ToolError } from '../internal/tools.js';
+import { service, tool, ToolError, ToolSupport } from '../internal/tools.js';
 import { ELEMENTS_ENV_ICON } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
 
@@ -25,6 +25,7 @@ export interface PlaygroundOptions {
 @service()
 export class PlaygroundService {
   @tool({
+    support: ToolSupport.MCP | ToolSupport.CLI,
     summary: 'Validates HTML templates specifically for playground examples.',
     description:
       'Validates HTML templates specifically for playground examples. Includes Elements API checks with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.',
@@ -67,6 +68,7 @@ export class PlaygroundService {
   }
 
   @tool({
+    support: ToolSupport.MCP | ToolSupport.CLI,
     summary: 'Create a shareable playground URL from an HTML template.',
     description:
       'Create a shareable playground URL from an HTML template. Returns URL if valid. Lint failures return a tool error. Tip: Use playground_validate first to check for issues.',

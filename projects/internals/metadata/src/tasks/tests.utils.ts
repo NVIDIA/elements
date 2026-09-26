@@ -103,6 +103,7 @@ export async function generateTestSummary(): Promise<ProjectsTestSummary> {
       '@nvidia-elements/markdown': await getTestReport('@nvidia-elements/markdown', '../../../../markdown'),
       '@nvidia-elements/media': await getTestReport('@nvidia-elements/media', '../../../../media'),
       '@nvidia-elements/monaco': await getTestReport('@nvidia-elements/monaco', '../../../../monaco'),
+      '@nvidia-elements/pi': await getTestReport('@nvidia-elements/pi', '../../../../pi'),
       '@internals/metadata': await getTestReport('@internals/metadata', '../../../../internals/metadata'),
       '@internals/patterns': await getTestReport('@internals/patterns', '../../../../internals/patterns'),
       '@internals/tools': await getTestReport('@internals/tools', '../../../../internals/tools')

@@ -26,6 +26,7 @@ export default {
         'core',
         'pages',
         'playground',
+        'pi',
         'plot',
         'styles',
         'themes',
