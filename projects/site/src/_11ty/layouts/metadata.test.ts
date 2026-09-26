@@ -17,7 +17,35 @@ vi.mock('../../index.11tydata.js', () => ({
         name: 'nve-button',
         version: '1.2.3',
         manifest: {
-          tagName: 'nve-button'
+          tagName: 'nve-button',
+          description:
+            'A button is a widget that enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.'
+        }
+      },
+      {
+        name: 'nve-cutoff',
+        version: '1.2.3',
+        manifest: {
+          tagName: 'nve-cutoff',
+          description: `${'metadata '.repeat(14).trimEnd()} unbrokenmetadatadescriptionsegmentthatwouldotherwisebecutmidword`
+        }
+      },
+      {
+        name: 'nve-sentence',
+        version: '1.2.3',
+        manifest: {
+          tagName: 'nve-sentence',
+          description:
+            'Generated metadata description that already forms a complete sentence about NVIDIA Elements Web Components, production UI, and published documentation. Additional words continue past the limit and should not receive a synthetic period.'
+        }
+      },
+      {
+        name: 'nve-homepage',
+        version: '1.2.3',
+        manifest: {
+          tagName: 'nve-homepage',
+          description:
+            'NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AI infrastructure, robotics, and autonomous vehicle UI.'
         }
       },
       {
@@ -36,6 +64,7 @@ const {
   AUTHOR_ID,
   AUTHOR_NAME,
   AUTHOR_URL,
+  escapeAttr,
   renderJsonLd,
   resolvePageMeta,
   SOFTWARE_ID,
@@ -344,26 +373,105 @@ describe('resolvePageMeta', () => {
     expect(meta.description).toBe(description);
   });
 
-  it('should clamp overlong descriptions', () => {
+  it('should preserve explicitly authored descriptions', () => {
+    const description =
+      'NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AI infrastructure, robotics, and autonomous vehicle UI.';
     const meta = resolvePageMeta({
-      page: { url: '/docs/integrations/react/' },
-      title: 'React',
-      description:
-        'A complete NVIDIA Elements guide for Web Component integration, API design, accessibility, examples, and production interface implementation across applications.'
+      page: { url: '/' },
+      title: 'NVIDIA Design System for AI UI',
+      description
     });
 
-    expect(meta.description.length).toBeLessThanOrEqual(MAX_DESCRIPTION_LENGTH);
+    expect(meta.description).toBe(description);
+    expect(meta.description.endsWith('autonomous vehicle UI.')).toBe(true);
+    expect(meta.description.endsWith('robotics, and.')).toBe(false);
   });
 
-  it('should clamp overlong descriptions to the available word boundary', () => {
+  it('should truncate generated descriptions without adding a period', () => {
     const prefix = 'metadata '.repeat(14).trimEnd();
     const meta = resolvePageMeta({
-      page: { url: '/docs/integrations/react/' },
-      title: 'React',
-      description: `${prefix} unbrokenmetadatadescriptionsegmentthatwouldotherwisebecutmidword`
+      page: { url: '/docs/elements/cutoff/' },
+      title: 'Cutoff',
+      tag: 'nve-cutoff'
+    });
+    const sentence = resolvePageMeta({
+      page: { url: '/docs/elements/sentence/' },
+      title: 'Sentence',
+      tag: 'nve-sentence'
+    });
+    const homepage = resolvePageMeta({
+      page: { url: '/docs/elements/homepage/' },
+      title: 'Homepage',
+      tag: 'nve-homepage'
     });
 
-    expect(meta.description).toBe(`${prefix}.`);
+    expect(meta.description).toBe(prefix);
+    expect(meta.description.endsWith('.')).toBe(false);
+    expect(sentence.description).toBe(
+      'Generated metadata description that already forms a complete sentence about NVIDIA Elements Web Components, production UI, and published documentation.'
+    );
+    expect(homepage.description.endsWith('and')).toBe(true);
+    expect(homepage.description.endsWith('and.')).toBe(false);
+    expect(homepage.description.endsWith('.')).toBe(false);
+  });
+
+  it('should publish distinct button overview, api, and examples descriptions', () => {
+    const overviewDescription =
+      'Use the NVIDIA Elements button to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or deleting content in an app.';
+    const pages = [
+      {
+        data: {
+          page: { url: '/docs/elements/button/' },
+          collections: { all: [] },
+          title: 'Button',
+          tag: 'nve-button',
+          description: overviewDescription
+        },
+        description: overviewDescription
+      },
+      {
+        data: {
+          page: { url: '/docs/elements/button/api/' },
+          collections: { all: [] },
+          title: 'Button',
+          tag: 'nve-button',
+          isApiTab: true
+        },
+        description:
+          'API reference for <nve-button>. Documents properties, events, slots, and CSS. Includes commands and styling hooks. Supports production interface workflows.'
+      },
+      {
+        data: {
+          page: { url: '/docs/elements/button/examples/' },
+          collections: { all: [] },
+          title: 'Button',
+          tag: 'nve-button',
+          isExamplesTab: true
+        },
+        description:
+          'Interactive examples for <nve-button>. Shows markup patterns, states, and usage. Includes runnable component examples. Covers actions and layout. For app teams.'
+      }
+    ];
+
+    const descriptions = pages.map(({ data, description }) => {
+      const meta = resolvePageMeta(data);
+      const html = renderBaseHead(data);
+      const graph = getGraphJsonLd(html);
+
+      expect(meta.description).toBe(description);
+      expect(meta.description.length).toBeGreaterThanOrEqual(150);
+      expect(meta.description.length).toBeLessThanOrEqual(MAX_DESCRIPTION_LENGTH);
+      expect(meta.description.endsWith('performing a.')).toBe(false);
+      expect(html).toContain(`<meta name="description" content="${escapeAttr(description)}">`);
+      expect(html).toContain(`<meta property="og:description" content="${escapeAttr(description)}">`);
+      expect(graph.some(node => node.description === description)).toBe(true);
+
+      return description;
+    });
+
+    expect(new Set(descriptions).size).toBe(3);
+    expect(descriptions[1]).toContain('API reference');
+    expect(descriptions[2]).toContain('Interactive examples');
   });
 });
 

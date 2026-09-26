@@ -331,7 +331,8 @@ function getDescriptionContexts(data) {
   ];
 }
 
-function expandShortDescription(data, description) {
+function expandShortDescription(data, description, { preserve = false } = {}) {
+  if (preserve && description.length >= MIN_DESCRIPTION_LENGTH) return description;
   if (description.length >= MIN_DESCRIPTION_LENGTH) return clampDescription(description);
 
   const contexts = getDescriptionContexts(data);
@@ -349,16 +350,88 @@ function expandShortDescription(data, description) {
   return clampDescription(expandedDescription);
 }
 
+const API_DESCRIPTION_PHRASES = [
+  'Documents properties, events, slots, and CSS.',
+  'Includes commands and styling hooks.',
+  'Supports production interface workflows.',
+  'For Web Components.',
+  'For app teams.',
+  'For apps.'
+];
+
+const EXAMPLES_DESCRIPTION_PHRASES = [
+  'Shows markup patterns, states, and usage.',
+  'Includes runnable component examples.',
+  'Covers actions and layout.',
+  'For Web Components.',
+  'For app teams.',
+  'For apps.'
+];
+
+function lastIndexBefore(description, max, isMatch, includeChar) {
+  const limit = Math.min(description.length, max);
+  let index = -1;
+
+  for (let i = 0; i < limit; i++) {
+    if (!isMatch(description[i], description[i + 1])) continue;
+    index = includeChar ? i + 1 : i;
+  }
+
+  return index;
+}
+
 function clampDescription(description) {
   if (description.length <= MAX_DESCRIPTION_LENGTH) return description;
 
+  const sentenceEnd = lastIndexBefore(
+    description,
+    MAX_DESCRIPTION_LENGTH,
+    (char, next) => (char === '.' || char === '!' || char === '?') && (next === undefined || /\s/u.test(next)),
+    true
+  );
+  if (sentenceEnd >= MIN_DESCRIPTION_LENGTH) return description.slice(0, sentenceEnd).trimEnd();
+
+  const clauseEnd = lastIndexBefore(
+    description,
+    MAX_DESCRIPTION_LENGTH,
+    char => char === ',' || char === ';' || char === ':' || char === '—',
+    false
+  );
+  if (clauseEnd >= MIN_DESCRIPTION_LENGTH) {
+    const clause = description
+      .slice(0, clauseEnd)
+      .replace(/[,:;—]+$/u, '')
+      .trimEnd();
+    if (clause.length >= MIN_DESCRIPTION_LENGTH) return clause;
+  }
+
   const trimmed = description.slice(0, MAX_DESCRIPTION_LENGTH).trimEnd();
   const lastSpace = trimmed.lastIndexOf(' ');
-  const sentence = (lastSpace === -1 ? trimmed : trimmed.slice(0, lastSpace))
-    .replace(/[,:;—-]+$/u, '')
-    .replace(/[.?!]$/u, '');
+  return (lastSpace === -1 ? trimmed : trimmed.slice(0, lastSpace)).replace(/[,:;—-]+$/u, '').trimEnd();
+}
 
-  return sentence.length < MAX_DESCRIPTION_LENGTH ? `${sentence}.` : sentence;
+function fitDescription(lead, phrases) {
+  let text = lead;
+
+  for (const phrase of phrases) {
+    if (text.length >= MIN_DESCRIPTION_LENGTH) return text;
+    const next = `${text} ${phrase}`;
+    if (next.length <= MAX_DESCRIPTION_LENGTH) text = next;
+  }
+
+  return text;
+}
+
+function componentTabDescription(kind, tag, componentDescription) {
+  const purpose = kind === 'api' ? `API reference for <${tag}>.` : `Interactive examples for <${tag}>.`;
+  const qualified = `${componentDescription} — ${purpose}`;
+  if (qualified.length <= MAX_DESCRIPTION_LENGTH) return qualified;
+
+  const phrases = kind === 'api' ? API_DESCRIPTION_PHRASES : EXAMPLES_DESCRIPTION_PHRASES;
+  const fitted = fitDescription(purpose, phrases);
+  if (fitted.length <= MAX_DESCRIPTION_LENGTH) return fitted;
+
+  return clampDescription(fitted);
 }
 
 function hasGeneratedPage(data, generatedUrls, url) {
@@ -375,12 +448,14 @@ export function resolvePageMeta(data) {
   const componentDescription = element?.manifest?.description?.trim();
 
   let description;
-  if (data.description) {
-    description = data.description;
+  let authored = false;
+  if (typeof data.description === 'string' && data.description.trim()) {
+    description = data.description.trim();
+    authored = true;
   } else if (data.isApiTab && componentDescription) {
-    description = `${componentDescription} — API reference for <${tag}>.`;
+    description = componentTabDescription('api', tag, componentDescription);
   } else if (data.isExamplesTab && componentDescription) {
-    description = `${componentDescription} — Interactive examples for <${tag}>.`;
+    description = componentTabDescription('examples', tag, componentDescription);
   } else if (data.changelog?.description) {
     description = `Changelog for ${data.changelog.title}: ${data.changelog.description}`;
   } else if (componentDescription) {
@@ -392,7 +467,7 @@ export function resolvePageMeta(data) {
     description = `Documentation for ${rawTitle} in NVIDIA Elements, the framework-agnostic design system for AI/ML factories.`;
   }
 
-  description = expandShortDescription(data, description);
+  description = expandShortDescription(data, description, { preserve: authored });
 
   const canonicalUrl = getSiteUrl(url);
   const ogImage = SOCIAL_IMAGE_URL;

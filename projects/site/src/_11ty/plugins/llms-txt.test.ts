@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createLlmsTxtContent, llmsTxtPlugin } from './llms-txt.js';
 import { getPublicOutputPath } from '../utils/public-output.js';
@@ -28,7 +29,8 @@ describe('createLlmsTxtContent', () => {
     const content = createLlmsTxtContent('https://nvidia.github.io/elements');
 
     expect(content).toContain('[CLI](https://nvidia.github.io/elements/context/cli.md)');
-    expect(content).toContain('[MCP](https://nvidia.github.io/elements/context/cli.md)');
+    expect(content).toContain('[MCP](https://nvidia.github.io/elements/context/mcp.md)');
+    expect(content).not.toContain('[MCP](https://nvidia.github.io/elements/context/cli.md)');
     expect(content).toContain('[Skills](https://nvidia.github.io/elements/context/skills/index.md)');
     expect(content).toContain('[CDN](https://nvidia.github.io/elements/context/integrations/cdn.md)');
     expect(content).toContain('[APIs](https://nvidia.github.io/elements/context/api/index.md)');
@@ -36,6 +38,19 @@ describe('createLlmsTxtContent', () => {
     expect(content).toContain('[Icons](https://nvidia.github.io/elements/context/api/icons/index.md)');
     expect(content).toContain('[Tokens](https://nvidia.github.io/elements/context/api/tokens/index.md)');
     expect(content).toContain('[llms-full.txt](https://nvidia.github.io/elements/llms-full.txt)');
+  });
+
+  it('should point MCP at a dedicated context page', async () => {
+    const content = createLlmsTxtContent('https://nvidia.github.io/elements');
+    const mcpLink = content.match(/\[MCP\]\(([^)]+)\)/)?.[1];
+    const source = await readFile(new URL('../context/mcp.md', import.meta.url), 'utf8');
+
+    expect(mcpLink).toBe('https://nvidia.github.io/elements/context/mcp.md');
+    expect(content).toContain('[CLI](https://nvidia.github.io/elements/context/cli.md)');
+    expect(source.startsWith('# MCP\n')).toBe(true);
+    expect(source).toContain('<nve-button>Save</nve-button>');
+    expect(source).toContain('/artifact Create an example login form');
+    expect(source).toContain('examples_render');
   });
 
   it('should include preferred terms for AI assistants', () => {
