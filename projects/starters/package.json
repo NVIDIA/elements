@@ -37,6 +37,12 @@
         "./nuxt/dist/**/*.js",
         "./react/dist/**/*.js",
         "./solidjs/dist/**/*.js",
+        "./sphinx/.gitignore",
+        "./sphinx/AGENTS.md",
+        "./sphinx/README.md",
+        "./sphinx/docs/**",
+        "./sphinx/pyproject.toml",
+        "./sphinx/uv.lock",
         "./svelte/dist/**/*.js",
         "./typescript/dist/**/*.js",
         "./vue/dist/**/*.js",
@@ -108,6 +114,10 @@
         },
         {
           "script": "./solidjs:build",
+          "cascade": false
+        },
+        {
+          "script": "./sphinx:build",
           "cascade": false
         },
         {

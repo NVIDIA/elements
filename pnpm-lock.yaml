@@ -1594,7 +1594,7 @@ importers:
         version: link:../themes
       '@vitest/browser':
         specifier: 'catalog:'
-        version: 4.1.10(vite@8.1.4(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)(sass@1.99.0)(sugarss@5.0.1(postcss@8.5.16))(terser@5.48.0)(yaml@2.9.0))(vitest@4.1.10)
+        version: 5.0.0(vite@8.2.2(@types/node@26.5.0)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.48.0)(yaml@2.9.0))(vitest@5.0.0)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
         version: 5.0.0(vitest@5.0.0)
@@ -2293,6 +2293,30 @@ importers:
       vite-plugin-solid:
         specifier: 2.11.14
         version: 2.11.14(solid-js@1.9.15)(supports-color@10.2.2)(vite@8.2.2(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.48.0)(yaml@2.9.0))
+
+  projects/starters/sphinx:
+    dependencies:
+      '@nvidia-elements/code':
+        specifier: workspace:*
+        version: link:../../code
+      '@nvidia-elements/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@nvidia-elements/markdown':
+        specifier: workspace:*
+        version: link:../../markdown
+      '@nvidia-elements/media':
+        specifier: workspace:*
+        version: link:../../media
+      '@nvidia-elements/monaco':
+        specifier: workspace:*
+        version: link:../../monaco
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
 
   projects/starters/svelte:
     dependencies:

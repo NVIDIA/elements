@@ -17,6 +17,7 @@ packages:
   - projects/starters/react
   - projects/starters/scoped-registry
   - projects/starters/solidjs
+  - projects/starters/sphinx
   - projects/starters/svelte
   - projects/starters/typescript
   - projects/starters/vue

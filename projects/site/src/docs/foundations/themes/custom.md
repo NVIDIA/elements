@@ -36,3 +36,26 @@ The demo below demonstrates how only a few tokens adjusted can drastically chang
 <theme-generator-demo></theme-generator-demo>
 
 <script type="module" src="/_internal/stories/theme/theme-generator.js"></script>
+
+## Classic Theme
+
+The classic theme stylesheet is a starting point for product-specific themes. View the [source CSS](/static/themes/classic.css).
+
+<nve-codeblock id="classic-theme-source" language="css" style="block-size: 400px"></nve-codeblock>
+
+<script type="module">
+  import '@nvidia-elements/code/codeblock/languages/css.js';
+  import '@nvidia-elements/code/codeblock/define.js';
+
+  const codeblock = document.querySelector('#classic-theme-source');
+  try {
+    const response = await fetch(new URL('static/themes/classic.css', document.baseURI));
+    if (response.ok) {
+      codeblock.code = await response.text();
+    } else {
+      console.warn('Could not load classic theme source:', response.status);
+    }
+  } catch (error) {
+    console.warn('Could not load classic theme source:', error);
+  }
+</script>

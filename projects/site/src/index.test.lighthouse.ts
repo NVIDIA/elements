@@ -131,7 +131,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(99);
+    expect(scores.payload.js).toBeLessThan(101);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBeLessThan(0.5);
   });

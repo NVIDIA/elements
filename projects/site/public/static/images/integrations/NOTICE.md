@@ -20,7 +20,10 @@ These logos are **not** covered by this project's Apache 2.0 license.
 | react.svg | Meta Platforms Inc. |
 | remix.svg | Shopify Inc. |
 | solidjs.svg | Ryan Carniato |
+| sphinx.svg | Sphinx contributors (BSD-2-Clause) |
 | svelte.svg | Svelte Contributors |
 | typescript.svg | Microsoft Corporation |
 | vite.svg | Evan You |
 | vue.svg | Evan You |
+
+The Sphinx mark comes from the [Sphinx 9.1.0 documentation assets](https://github.com/sphinx-doc/sphinx/blob/v9.1.0/doc/_static/favicon.svg).

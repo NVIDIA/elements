@@ -1,0 +1,1133 @@
+:root {
+  --nve-config-color-scheme-light: true;
+}
+
+[nve-theme*='classic'] {
+  --nve-config-color-scheme-light: true;
+  --nve-config-experimental: true;
+  --nve-config-theme-classic: true;
+  /* eslint-disable-line @nve/lint/no-unknown-css-variable */
+  --nve-ref-color-neutral-100: oklch(99.1% 0 none);
+  --nve-ref-color-neutral-200: oklch(98.1% 0 none);
+  --nve-ref-color-neutral-300: oklch(95.3% 0 none);
+  --nve-ref-color-neutral-400: oklch(93% 0 none);
+  --nve-ref-color-neutral-500: oklch(90.8% 0 none);
+  --nve-ref-color-neutral-600: oklch(88.4% 0 none);
+  --nve-ref-color-neutral-700: oklch(85.1% 0 none);
+  --nve-ref-color-neutral-800: oklch(79.1% 0 none);
+  --nve-ref-color-neutral-900: oklch(63.01% 0 0);
+  --nve-ref-color-neutral-1000: oklch(60.3% 0 none);
+  --nve-ref-color-neutral-1100: oklch(50.3% 0 none);
+  --nve-ref-color-neutral-1200: oklch(24.3% 0 none);
+  --nve-ref-border-radius-lg: 16px;
+  --nve-ref-shadow-100: 0 1px 1px rgb(0 0 0 / 0.06), 0 2px 2px rgb(0 0 0 / 0.05), 0 4px 4px rgb(0 0 0 / 0.04);
+  --nve-ref-shadow-200: 0 2px 2px rgb(0 0 0 / 0.06), 0 4px 4px rgb(0 0 0 / 0.05), 0 8px 8px rgb(0 0 0 / 0.04);
+  --nve-ref-shadow-300: 0 4px 4px rgb(0 0 0 / 0.05), 0 8px 8px rgb(0 0 0 / 0.04), 0 16px 16px rgb(0 0 0 / 0.03);
+  --nve-ref-shadow-400: 0 6px 6px rgb(0 0 0 / 0.05), 0 12px 12px rgb(0 0 0 / 0.04), 0 24px 24px rgb(0 0 0 / 0.03);
+  --nve-ref-shadow-500: 0 8px 8px rgb(0 0 0 / 0.04), 0 16px 16px rgb(0 0 0 / 0.03), 0 32px 32px rgb(0 0 0 / 0.02),
+    0 48px 48px rgb(0 0 0 / 0.01);
+
+  /* layers */
+  --nve-sys-layer-shell-background: var(--nve-ref-color-scheme-base);
+  --nve-sys-layer-canvas-background: var(--nve-sys-layer-container-accent-background);
+  --nve-sys-layer-container-background: var(--nve-ref-color-white);
+  --nve-sys-layer-overlay-background: var(--nve-ref-color-white);
+  --nve-sys-layer-popover-background: var(--nve-ref-color-white);
+
+  /* layer accent backgrounds */
+  --nve-sys-layer-shell-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-shell-background),
+      var(--nve-ref-color-scheme-inverse) 5.3%);
+  --nve-sys-layer-canvas-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-canvas-background),
+      var(--nve-ref-color-scheme-inverse) 5.3%);
+  --nve-sys-layer-container-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-container-background),
+      var(--nve-ref-color-scheme-inverse) 5.3%);
+  --nve-sys-layer-overlay-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-overlay-background),
+      var(--nve-ref-color-scheme-inverse) 5.3%);
+  --nve-sys-layer-popover-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-overlay-background),
+      var(--nve-ref-color-scheme-inverse) 5.3%);
+
+  /* text on layers */
+  --nve-sys-layer-popover-color: var(--nve-sys-text-color);
+
+  /* Accent */
+  --nve-sys-accent-primary-background: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-accent-secondary-background: var(--nve-ref-color-brand-green-1000);
+
+  /* Highlights */
+  --nve-sys-interaction-highlighted-muted-background: color-mix(in oklch,
+      var(--nve-ref-color-scheme-inverse) 5%,
+      transparent);
+  --nve-sys-interaction-highlighted-background: color-mix(in oklch,
+      var(--nve-sys-accent-primary-background) 30%,
+      transparent);
+
+  /* Text */
+  --nve-sys-text-emphasis-color: var(--nve-ref-color-neutral-1200);
+  --nve-sys-text-color: oklch(31.32% 0 0);
+  --nve-sys-text-muted-color: var(--nve-ref-color-neutral-1000);
+  --nve-sys-interaction-disabled-color: color-mix(in oklch, var(--nve-sys-text-color) 30%, transparent);
+  --nve-sys-text-placeholder-color: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 60%, transparent);
+
+  /* Links */
+  --nve-sys-text-link-emphasis-color: var(--nve-sys-accent-primary-background);
+  --nve-sys-text-link-hover-color: color-mix(in oklch,
+      var(--nve-ref-brand-color) 70%,
+      var(--nve-ref-color-scheme-inverse) 30%);
+
+  /* Borders */
+  --nve-ref-border-color-emphasis: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  --nve-ref-border-color: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  --nve-ref-border-color-muted: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+
+  /* Interaction States */
+  --nve-sys-interaction-state-base: var(--nve-ref-color-scheme-base);
+  --nve-sys-interaction-state-ratio-hover: 10%;
+  --nve-sys-interaction-state-ratio-disabled: 5%;
+  --nve-sys-interaction-state-ratio-active: 8%;
+  --nve-sys-interaction-state-ratio-selected: 7%;
+
+  /* Fields and Buttons */
+  --nve-sys-interaction-background: oklch(100% 0 0);
+  --nve-sys-interaction-background-100: var(--nve-sys-interaction-background);
+  --nve-sys-interaction-background-200: var(--nve-sys-interaction-background);
+  --nve-sys-interaction-background-300: var(--nve-sys-interaction-background);
+
+  --nve-sys-interaction-field-color: var(--nve-sys-text-color);
+
+  --nve-sys-interaction-field-background: oklch(100% 0 0);
+  --nve-sys-interaction-field-background-100: var(--nve-sys-interaction-field-background);
+  --nve-sys-interaction-field-background-200: var(--nve-sys-interaction-field-background);
+  --nve-sys-interaction-field-background-300: var(--nve-sys-interaction-field-background);
+
+  /* Support */
+  --nve-sys-support-emphasis-color: oklch(41.28% 0 0);
+  --nve-sys-support-color: oklch(84.52% 0 0);
+  --nve-sys-support-muted-color: oklch(90.67% 0 0);
+
+  --nve-sys-support-danger-emphasis-color: oklch(52.37% 0.1973 27.51);
+  --nve-sys-support-danger-color: oklch(58.98% 0.2266 27.87);
+  --nve-sys-support-danger-muted-color: oklch(74.61% 0.1537 21.45);
+
+  --nve-sys-support-warning-emphasis-color: oklch(64.63% 0.1748 48.45);
+  --nve-sys-support-warning-color: oklch(73.83% 0.1649 65.58);
+  --nve-sys-support-warning-muted-color: oklch(90.55% 0.1234 92.93);
+
+  --nve-sys-support-success-emphasis-color: oklch(61.55% 0.1767 134.03);
+  --nve-sys-support-success-color: oklch(61.55% 0.1767 134.03);
+  --nve-sys-support-success-muted-color: oklch(93.86% 0.1568 121.62);
+
+  --nve-sys-support-accent-emphasis-color: oklch(63.23% 0.1923 252.54);
+  --nve-sys-support-accent-color: oklch(56.65% 0.1848 254.73);
+  --nve-sys-support-accent-muted-color: oklch(94.37% 0.0452 213.77);
+
+  /* Status Accents */
+  --nve-sys-status-scheduled-color: oklch(43.8% 0.1939 311.6);
+  --nve-sys-status-pending-color: oklch(84.52% 0 0);
+  --nve-sys-status-starting-color: oklch(40.38% 0.0713 181.23);
+  --nve-sys-status-running-color: oklch(42.01% 0.164 259.14);
+  --nve-sys-status-restarting-color: oklch(42.91% 0.1442 36.83);
+  --nve-sys-status-finished-color: oklch(40.32% 0.1202 136.13);
+  --nve-sys-status-failed-color: oklch(43.32% 0.1629 27.48);
+
+  /* Categorical Accents */
+  --nve-sys-visualization-categorical-violet: oklch(43.8% 0.1939 311.6);
+  --nve-sys-visualization-categorical-red: oklch(43.32% 0.1629 27.48);
+  --nve-sys-visualization-categorical-nova: oklch(42.91% 0.1442 36.83);
+  --nve-sys-visualization-categorical-grass: oklch(40.32% 0.1202 136.13);
+  --nve-sys-visualization-categorical-seafoam: oklch(40.38% 0.0713 181.23);
+  --nve-sys-visualization-categorical-cyan: oklch(42.01% 0.164 259.14);
+  --nve-sys-visualization-categorical-slate: oklch(84.52% 0 0);
+}
+
+@container style(--nve-config-theme-classic: true) {
+
+  /*
+   * Reset margins semantic headings that lineheight and layout issues. Semantic HTML introduces line height issues
+   * this will be fixed in a follow up MR when we fix markdown rendering styles.
+   */
+  nve-card,
+  nve-dialog,
+  nve-panel,
+  nve-page-panel,
+  nve-accordion,
+  nve-dropdown,
+  nve-toggletip,
+  nve-tooltip,
+  nve-alert-group {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
+  }
+
+  nve-accordion {
+    --header-padding: var(--nve-ref-size-300);
+    --border-radius: var(--nve-ref-border-radius-none);
+  }
+
+  nve-accordion::part(icon-button) {
+    --height: var(--nve-ref-size-400);
+  }
+
+  nve-accordion-content {
+    --padding: var(--nve-ref-size-600) var(--nve-ref-size-300);
+    --color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-accordion-header {
+    font-size: var(--nve-ref-font-size-200);
+    font-weight: var(--nve-ref-font-weight-bold);
+    --color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-alert {
+    --font-weight: var(--nve-ref-font-weight-regular);
+    --font-size: var(--nve-ref-font-size-200);
+  }
+
+  nve-alert-group nve-alert {
+    --font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-alert-group {
+    --padding: var(--nve-ref-size-100) var(--nve-ref-size-200);
+  }
+
+  nve-alert-group>nve-alert::part(icon) {
+    --icon-color: var(--nve-ref-color-black) !important;
+  }
+
+  nve-alert-group:not([container='full']) {
+    --border-radius: var(--nve-ref-border-radius-xs);
+  }
+
+  nve-alert-group[prominence='emphasis'][status='accent'] {
+    --color: var(--nve-ref-color-white);
+  }
+
+  nve-alert-group[prominence='emphasis'][status='accent']>nve-alert {
+    --color: var(--nve-ref-color-white);
+  }
+
+  nve-alert-group[prominence='emphasis'][status='accent']>nve-alert::part(icon) {
+    --icon-color: var(--nve-ref-color-white) !important;
+  }
+
+  nve-alert-group:not([prominence='emphasis']) {
+    --border: var(--nve-ref-border-width-sm) solid var(--state-color-base);
+  }
+
+  nve-alert-group:not([prominence='emphasis'])[status='danger'] {
+    --background: var(--nve-sys-support-danger-muted-color);
+  }
+
+  nve-alert-group:not([prominence='emphasis'])[status='accent'] {
+    --background: var(--nve-sys-support-accent-muted-color);
+  }
+
+  nve-alert-group:not([prominence='emphasis'])[status='warning'] {
+    --background: var(--nve-sys-support-warning-muted-color);
+  }
+
+  nve-alert-group:not([prominence='emphasis'])[status='success'] {
+    --background: var(--nve-sys-support-success-muted-color);
+  }
+
+  nve-alert-group:not([prominence='emphasis'], [status]) {
+    --state-color-base: var(--nve-sys-support-emphasis-color);
+    --background: var(--nve-sys-support-muted-color);
+  }
+
+  nve-avatar {
+    --background: oklch(24.61% 0.0416 184.36);
+    --color: var(--nve-ref-color-white);
+    --font-weight: var(--nve-ref-font-weight-bold);
+  }
+
+  nve-avatar[size='sm'] {
+    --height: var(--nve-ref-size-600);
+    --width: var(--nve-ref-size-600);
+    --font-size: var(--nve-ref-font-size-150);
+  }
+
+  nve-avatar[size='lg'] {
+    --height: 48px;
+    --width: 48px;
+    --font-size: var(--nve-ref-font-size-500);
+  }
+
+  nve-badge {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --font-weight: var(--nve-ref-font-weight-bold);
+    --height: 22px;
+    --gap: var(--nve-ref-space-xxs);
+  }
+
+  nve-badge:not([container]) {
+    --border: var(--nve-ref-border-width-sm) solid var(--state-color-base);
+  }
+
+  nve-badge:not([status], [color]) {
+    --state-color-base: var(--nve-sys-support-accent-color);
+  }
+
+  nve-badge[color='blue-cobalt'] {
+    --state-color-base: var(--nve-sys-support-accent-color);
+  }
+
+  nve-breadcrumb {
+    --item-color: var(--nve-sys-text-color);
+    --item-text-size: var(--nve-ref-font-size-200);
+    --height: var(--nve-ref-size-400);
+    --gap: var(--nve-ref-space-none);
+  }
+
+  nve-breadcrumb>nve-button {
+    --font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-breadcrumb> :last-child {
+    --item-color: var(--nve-sys-text-emphasis-color);
+    --item-active-font-weight: var(--nve-ref-font-weight-bold);
+  }
+
+  nve-breadcrumb::part(icon) {
+    --width: var(--nve-ref-size-600);
+    --height: var(--nve-ref-size-600);
+  }
+
+  nve-button {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-bold);
+    --padding: var(--nve-ref-size-300);
+    --height: var(--nve-ref-size-1000);
+  }
+
+  nve-button[size='sm'],
+  nve-icon-button[size='sm'] {
+    --height: var(--nve-ref-size-500);
+    --font-size: var(--nve-ref-font-size-100);
+    --padding: var(--nve-ref-size-100);
+  }
+
+  nve-button[size='md'],
+  nve-icon-button[size='md'] {
+    --height: var(--nve-ref-size-700);
+    --padding: var(--nve-ref-size-200);
+  }
+
+  nve-button[size='lg'],
+  nve-icon-button[size='lg'] {
+    --font-size: var(--nve-ref-font-size-200);
+    --padding: var(--nve-ref-size-300);
+    --height: var(--nve-ref-size-1000);
+  }
+
+  nve-button:not([container], [interaction]) {
+    --nve-sys-interaction-background: var(--nve-ref-color-scheme-inverse);
+    --color: var(--nve-ref-color-scheme-base);
+  }
+
+  nve-button:not([container], [interaction]):hover {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse), var(--nve-ref-color-scheme-base) 45%);
+  }
+
+  nve-button[pressed]:not([container], [interaction]) {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+    --color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-button-group {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+    --gap: var(--nve-ref-space-xxs);
+    --border-radius: var(--nve-ref-border-radius-md);
+    --height: 48px;
+  }
+
+  nve-button-group>nve-button {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --padding: var(--nve-ref-size-300);
+  }
+
+  nve-button-group[container='rounded'] {
+    --border-radius: var(--nve-ref-border-radius-md);
+  }
+
+  nve-button-group:state(split) {
+
+    & nve-button,
+    & nve-icon-button {
+      --border-radius: var(--nve-ref-border-radius-none);
+    }
+  }
+
+  nve-button-group nve-button,
+  nve-button-group nve-button[pressed] {
+    --background: transparent !important;
+    --color: var(--nve-sys-text-emphasis-color) !important;
+  }
+
+  nve-button-group nve-icon-button,
+  nve-button-group nve-icon-button[pressed] {
+    --background: transparent !important;
+    --color: var(--nve-sys-text-emphasis-color) !important;
+  }
+
+  nve-button-group nve-button[pressed]:not([container], [interaction]) {
+    --background: var(--nve-ref-color-scheme-base) !important;
+    --color: var(--nve-sys-text-emphasis-color) !important;
+  }
+
+  nve-button-group nve-icon-button[pressed]:not([container], [interaction]) {
+    --background: var(--nve-ref-color-scheme-base) !important;
+    --color: var(--nve-sys-text-emphasis-color) !important;
+  }
+
+  nve-card {
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  }
+
+  nve-card-content {
+    --padding: var(--nve-ref-size-600) var(--nve-ref-size-600);
+  }
+
+  nve-card-footer {
+    --border-top: none;
+    --padding: 0 var(--nve-ref-size-600) var(--nve-ref-size-600);
+  }
+
+  nve-card-header {
+    color: var(--nve-sys-text-color);
+    --padding: var(--nve-ref-size-600) var(--nve-ref-size-600) 0px var(--nve-ref-size-600);
+    --border-bottom: none;
+  }
+
+  nve-card-header [slot='title'] {
+    font-size: var(--nve-ref-font-size-400);
+    font-weight: var(--nve-ref-font-weight-bold);
+  }
+
+  nve-codeblock {
+    --border-radius: var(--nve-ref-border-radius-sm);
+  }
+
+  [nve-control] {
+    --label-font-size: var(--nve-ref-font-size-200);
+    --font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-bold);
+    --label-color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-preferences-input::part(control) {
+    --label-font-size: var(--nve-ref-font-size-200);
+    --font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-bold);
+    --label-color: var(--nve-sys-text-emphasis-color);
+  }
+
+  [nve-control]:not([nve-control='inline'], nve-range, nve-file, nve-switch) {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --height: var(--nve-ref-size-1000);
+    --padding: var(--nve-ref-size-100) var(--nve-ref-size-300);
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  }
+
+  [nve-control]:not([nve-control='inline'], nve-range, nve-file, nve-switch):hover {
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-emphasis);
+  }
+
+  [nve-control]:not([nofocus])::part(_input) {
+    transition:
+      outline-color var(--nve-ref-animation-duration-150) ease-in-out,
+      border-color var(--nve-ref-animation-duration-150) ease-in-out;
+    outline: var(--nve-ref-border-width-md) solid transparent !important;
+    outline-offset: calc(var(--nve-ref-border-width-md) * -1) !important;
+  }
+
+  [nve-control][nve-control]:not([nofocus]):has(*:focus-visible)::part(_input) {
+    outline: var(--nve-ref-border-width-md) solid var(--nve-sys-accent-primary-background) !important;
+  }
+
+  nve-checkbox-group,
+  nve-radio-group,
+  nve-switch-group {
+    --label-font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-bold);
+    --label-color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-checkbox {
+    --check-color: var(--nve-ref-color-black);
+    --label-color: var(--nve-sys-text-color);
+  }
+
+  nve-combobox,
+  nve-select::part(dropdown) {
+    --padding: 0px;
+  }
+
+  nve-combobox[container='flat']::part(_input),
+  nve-select[container='flat']::part(_input),
+  nve-input[container='flat']::part(_input) {
+    --border: none;
+    --border-radius: none;
+  }
+
+  nve-dialog {
+    --padding: var(--nve-ref-size-600);
+  }
+
+  nve-dialog::part(close-button) {
+    --background: transparent;
+  }
+
+  nve-dialog-footer {
+    --border-top: none;
+    --padding: var(--nve-ref-size-600);
+  }
+
+  nve-dialog-header {
+    --border-bottom: none;
+    --padding: var(--nve-ref-size-600);
+  }
+
+  nve-dialog-header>h3 {
+    font-weight: var(--nve-ref-font-weight-bold);
+    font-size: var(--nve-ref-font-size-400);
+    color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-dot:not([status]) {
+    --color: var(--nve-ref-color-scheme-base);
+  }
+
+  nve-dot[status='accent'] {
+    --background: var(--nve-sys-support-accent-color);
+  }
+
+  nve-dot[status='warning'] {
+    --background: var(--nve-sys-support-warning-color);
+  }
+
+  nve-dot[status='danger'] {
+    --background: var(--nve-sys-support-danger-color);
+  }
+
+  nve-dot[size='sm'] {
+    --height: var(--nve-ref-size-150);
+    --width: var(--nve-ref-size-150);
+  }
+
+  nve-dot[size='md'] {
+    --height: var(--nve-ref-size-200);
+    --width: var(--nve-ref-size-200);
+  }
+
+  nve-dot[size='lg'] {
+    --height: var(--nve-ref-size-300);
+    --width: var(--nve-ref-size-300);
+  }
+
+  nve-dot[size='sm']:not(:empty) {
+    --height: var(--nve-ref-size-400);
+    --width: var(--nve-ref-size-400);
+  }
+
+  nve-dot:not(:empty) {
+    --height: var(--nve-ref-size-500);
+    --width: var(--nve-ref-size-500);
+  }
+
+  nve-dot[size='md']:not(:empty) {
+    --height: var(--nve-ref-size-500);
+    --width: var(--nve-ref-size-500);
+  }
+
+  nve-dot[size='lg']:not(:empty) {
+    --height: var(--nve-ref-size-600);
+    --width: var(--nve-ref-size-600);
+  }
+
+  nve-dropdown:has(nve-menu) {
+    --padding: 0px;
+  }
+
+  nve-dropzone::part(icon) {
+    display: none;
+  }
+
+  nve-dropzone:hover {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 10%, transparent);
+    --border: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 40%, transparent);
+  }
+
+  nve-grid {
+    --border-radius: var(--nve-ref-border-radius-none);
+  }
+
+  nve-grid-cell {
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-regular);
+    --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  }
+
+  nve-grid-column {
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-bold);
+    --color: var(--nve-sys-text-color);
+    --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  }
+
+  nve-grid-header {
+    --background: inherit;
+    --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  }
+
+  nve-icon-button {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --height: var(--nve-ref-size-1000);
+    --width: var(--nve-ref-size-1000);
+  }
+
+  nve-icon-button[disabled] {
+    opacity: var(--nve-ref-opacity-500);
+  }
+
+  nve-icon-button[disabled]::part(icon) {
+    --color: var(--nve-ref-color-scheme-inverse);
+  }
+
+  nve-copy-button[disabled] {
+    opacity: var(--nve-ref-opacity-500);
+  }
+
+  nve-copy-button[disabled]::part(icon) {
+    --color: var(--nve-ref-color-scheme-inverse);
+  }
+
+  nve-icon-button:not([container], [interaction]) {
+    --nve-sys-interaction-background: var(--nve-ref-color-scheme-inverse);
+    --color: var(--nve-ref-color-scheme-base);
+  }
+
+  nve-icon-button:not([container], [interaction]):hover {
+    --background: color-mix(in oklch,
+        var(--nve-ref-color-scheme-inverse),
+        var(--nve-ref-color-scheme-base) var(--nve-sys-interaction-state-ratio-hover));
+  }
+
+  nve-icon-button[pressed]:not([container], [interaction]) {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+    --color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-input-group {
+    --background: transparent;
+  }
+
+  nve-logo {
+    --border-radius: var(--nve-ref-border-radius-xs);
+  }
+
+  nve-menu-item {
+    --background: transparent;
+    --border-background: transparent;
+    --border-radius: var(--nve-ref-border-radius-none);
+    --font-size: var(--nve-ref-font-size-200);
+    --padding: var(--nve-ref-size-300);
+    --font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-menu-item[current]:not([status='danger']) {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  }
+
+  nve-menu-item[selected]:not([status='danger']) {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  }
+
+  nve-menu-item[status='danger'] {
+    --color: var(--nve-sys-support-danger-color);
+    --nve-sys-interaction-state-mix: transparent;
+  }
+
+  nve-menu-item[status='danger'][selected] {
+    --nve-sys-interaction-state-base: color-mix(in oklch, var(--nve-sys-support-danger-color) 20%, transparent);
+  }
+
+  nve-menu-item[status='danger'][current] {
+    --nve-sys-interaction-state-base: color-mix(in oklch, var(--nve-sys-support-danger-color) 20%, transparent);
+  }
+
+  nve-menu-item[status='danger']:hover {
+    --nve-sys-interaction-state-base: color-mix(in oklch, var(--nve-sys-support-danger-color) 20%, transparent);
+  }
+
+  nve-page-header {
+    --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
+  }
+
+  nve-page-header>[slot='prefix'] {
+    font-size: var(--nve-ref-font-size-200);
+    font-weight: var(--nve-ref-font-weight-bold);
+  }
+
+  nve-page-header nve-icon-button[interaction] {
+    --border-radius: var(--nve-ref-border-radius-full);
+    --height: var(--nve-ref-size-700);
+    --width: var(--nve-ref-size-700);
+    --background: oklch(24.61% 0.0416 184.36);
+    --color: var(--nve-ref-color-white);
+    --font-weight: var(--nve-ref-font-weight-bold);
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-emphasis);
+  }
+
+  nve-preferences-input {
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-select::part(menu-item),
+  nve-combobox::part(menu-item),
+  nve-preferences-input::part(menu-item) {
+    --background: transparent;
+    --border-background: transparent;
+    --border-radius: var(--nve-ref-border-radius-none);
+    --font-size: var(--nve-ref-font-size-200);
+    --padding: var(--nve-ref-size-300);
+    --font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-progress-bar {
+    --height: var(--nve-ref-size-250);
+  }
+
+  nve-progress-bar[value] {
+    --background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  }
+
+  nve-progress-bar[status='accent'] {
+    --accent-color: var(--nve-sys-accent-secondary-background);
+  }
+
+  nve-progress-ring[status='accent'][value] {
+    --background-color: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  }
+
+  nve-progress-ring[status='accent'] {
+    --ring-color: var(--nve-sys-accent-secondary-background);
+  }
+
+  nve-progressive-filter-chip::part(icon-button) {
+    --border-radius: var(--nve-ref-border-radius-none);
+    --border: none;
+    --height: var(--nve-ref-size-1000);
+  }
+
+  nve-progressive-filter-chip>[nve-control] {
+    --border: none !important;
+  }
+
+  nve-progressive-filter-chip>nve-input {
+    --border-radius: var(--nve-ref-border-radius-none);
+    --border: none;
+    border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  }
+
+  nve-progressive-filter-chip>nve-select {
+    --border-radius: var(--nve-ref-border-radius-none);
+    --border: none;
+    border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  }
+
+  nve-radio {
+    --label-font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-radio:has(input:checked):not([disabled]) {
+    --radio-color: var(--nve-ref-color-black);
+    --border-width: var(--nve-ref-border-width-xl);
+    --background: var(--nve-ref-color-black);
+  }
+
+  nve-radio-group {
+    --label-font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-bold);
+    --label-color: var(--nve-sys-text-emphasis-color);
+  }
+
+  nve-range {
+    --nve-sys-interaction-background: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+    --thumb-border: inset 0 0 0 var(--nve-ref-border-width-sm) var(--nve-ref-color-scheme-inverse);
+    --thumb-background: var(--nve-ref-color-black);
+    --thumb-width: var(--nve-ref-size-300);
+    --thumb-height: var(--nve-ref-size-300);
+    --track-height: var(--nve-ref-size-100);
+    --label-font-size: var(--nve-ref-font-size-100);
+    --label-font-weight: var(--nve-ref-font-weight-bold);
+    --label-color: var(--nve-sys-text-emphasis-color);
+
+    --control-height: var(--nve-ref-size-600);
+  }
+
+  nve-dialog::part(icon-button-icon),
+  nve-toggletip::part(icon-button-icon),
+  nve-alert::part(icon-button-icon),
+  nve-dropdown::part(icon-button-icon),
+  nve-select::part(caret),
+  nve-tree::part(icon-button-icon) {
+    --width: var(--nve-ref-size-500);
+    --height: var(--nve-ref-size-500);
+  }
+
+  nve-select::part(tag) {
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-regular);
+    --background: color-mix(in oklab, var(--color) 20%, var(--_input-background));
+  }
+
+  nve-steps-item {
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-regular);
+  }
+
+  nve-steps-item[selected] {
+    --font-weight: var(--nve-ref-font-weight-bold);
+  }
+
+  nve-switch {
+    --background: transparent;
+    --anchor-background: var(--nve-ref-color-scheme-inverse);
+    --label-font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-regular);
+    --border: var(--nve-ref-border-width-md) solid var(--nve-ref-color-scheme-inverse);
+    --height: var(--nve-ref-size-600);
+    --anchor-height: var(--nve-ref-size-400);
+    --anchor-width: var(--nve-ref-size-400);
+  }
+
+  nve-preferences-input::part(switch) {
+    --background: transparent;
+    --anchor-background: var(--nve-ref-color-black);
+    --label-font-size: var(--nve-ref-font-size-200);
+    --label-font-weight: var(--nve-ref-font-weight-regular);
+    --border: var(--nve-ref-border-width-md) solid var(--nve-ref-color-scheme-inverse);
+    --height: var(--nve-ref-size-600);
+    --anchor-height: var(--nve-ref-size-400);
+    --anchor-width: var(--nve-ref-size-400);
+  }
+
+  nve-switch:has(input:checked),
+  nve-preferences-input::part(switch):state(checked) {
+    --background: var(--nve-sys-accent-primary-background);
+    --anchor-background: var(--nve-ref-color-black);
+    --border: var(--border-width) solid var(--nve-sys-accent-primary-background);
+  }
+
+  nve-tag {
+    --padding: 0 var(--nve-ref-size-300) 0 var(--nve-ref-size-300);
+    --border: var(--nve-ref-border-width-sm) solid var(--state-color-base);
+    --height: 26px;
+    --font-weight: var(--nve-ref-font-weight-semibold);
+    --gap: var(--nve-ref-space-xxs);
+  }
+
+  nve-tag:not([status], [color]) {
+    --state-color-base: var(--nve-sys-support-accent-color);
+  }
+
+  nve-tabs {
+    --indicator-border-radius: var(--nve-ref-border-radius-none) !important;
+    --indicator-background-height: var(--nve-ref-border-width-xl) !important;
+    border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  }
+
+  nve-tabs-item {
+    --border-radius: var(--nve-ref-border-radius-none);
+    --font-size: var(--nve-ref-font-size-200);
+    --font-weight: var(--nve-ref-font-weight-regular);
+    border-bottom: var(--nve-ref-border-width-md) solid transparent;
+  }
+
+  nve-tabs-item[selected] {
+    --color: var(--nve-sys-text-emphasis-color);
+    --font-weight: var(--nve-ref-font-weight-bold);
+  }
+
+  nve-tabs-item:not([selected]):hover {
+    border-bottom: var(--nve-ref-border-width-md) solid color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  }
+
+  nve-tabs[vertical] nve-tabs-item {
+    --border-background: transparent;
+    --indicator-border-radius: none;
+  }
+
+  nve-tag::part(icon) {
+    --width: var(--nve-ref-size-400);
+    --height: var(--nve-ref-size-400);
+  }
+
+  nve-toast {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --background: var(--nve-sys-layer-popover-background);
+    --padding: var(--nve-ref-size-200);
+    --font-size: var(--nve-ref-font-size-200);
+    --color: var(--nve-sys-layer-popover-color);
+    --font-weight: var(--nve-ref-font-weight-regular);
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  }
+
+  nve-toast[status='accent']::part(prefix-icon) {
+    --color: var(--nve-sys-support-accent-color);
+  }
+
+  nve-toast[status='danger']::part(prefix-icon) {
+    --color: var(--nve-sys-support-danger-color);
+  }
+
+  nve-toast[status='success']::part(prefix-icon) {
+    --color: var(--nve-sys-support-success-color);
+  }
+
+  nve-toast[status='warning']::part(prefix-icon) {
+    --color: var(--nve-sys-support-warning-color);
+  }
+
+  nve-toggletip {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --padding: var(--nve-ref-size-50) var(--nve-ref-size-200);
+    --font-size: var(--nve-ref-font-size-100);
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  }
+
+  nve-tooltip {
+    --border-radius: var(--nve-ref-border-radius-xs);
+    --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+    --font-size: var(--nve-ref-font-size-100);
+    --font-weight: var(--nve-ref-font-weight-semibold);
+    --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  }
+
+  nve-tooltip::part(arrow) {
+    display: none;
+  }
+
+  nve-tree-node {
+    --font-size: var(--nve-ref-font-size-200);
+    --border-radius: var(--nve-ref-border-radius-none);
+  }
+}
+
+:root {
+  --nve-config-color-scheme-dark: true;
+}
+
+[nve-theme*='classic-dark'] {
+  --nve-sys-color-scheme: dark;
+  --nve-config-color-scheme-dark: true;
+  --nve-config-experimental: true;
+  --nve-config-theme-classic-dark: true;
+  /* eslint-disable-line @nve/lint/no-unknown-css-variable */
+  --nve-ref-color-neutral-100: oklch(10% 0 0);
+  --nve-ref-color-neutral-200: oklch(20.02% 0 0);
+  --nve-ref-color-neutral-300: oklch(25.2% 0 0);
+  --nve-ref-color-neutral-400: oklch(28.09% 0 0);
+  --nve-ref-color-neutral-500: oklch(31.32% 0 0);
+  --nve-ref-color-neutral-600: oklch(35.23% 0 0);
+  --nve-ref-color-neutral-700: oklch(40.17% 0 0);
+  --nve-ref-color-neutral-800: oklch(49.26% 0 0);
+  --nve-ref-color-neutral-900: oklch(56.24% 0 0);
+  --nve-ref-color-neutral-1000: oklch(77.31% 0 0);
+  --nve-ref-color-neutral-1100: oklch(85.45% 0 0);
+  --nve-ref-color-neutral-1200: oklch(90.67% 0 0);
+  --nve-ref-color-scheme-base: var(--nve-ref-color-black);
+  --nve-ref-color-scheme-inverse: var(--nve-ref-color-white);
+
+  /* layers */
+  --nve-sys-layer-shell-background: var(--nve-ref-color-scheme-base);
+  --nve-sys-layer-canvas-background: var(--nve-ref-color-neutral-100);
+  --nve-sys-layer-container-background: var(--nve-ref-color-neutral-200);
+  --nve-sys-layer-overlay-background: var(--nve-ref-color-neutral-300);
+  --nve-sys-layer-popover-background: var(--nve-ref-color-neutral-500);
+
+  /* layer accent backgrounds */
+  --nve-sys-layer-canvas-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-canvas-background),
+      var(--nve-ref-color-scheme-inverse) 5.1%);
+  --nve-sys-layer-container-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-container-background),
+      var(--nve-ref-color-scheme-inverse) 5.1%);
+  --nve-sys-layer-overlay-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-overlay-background),
+      var(--nve-ref-color-scheme-inverse) 5.1%);
+  --nve-sys-layer-popover-accent-background: color-mix(in oklch,
+      var(--nve-sys-layer-overlay-background),
+      var(--nve-ref-color-scheme-inverse) 5.1%);
+
+  /* text on layers */
+  --nve-sys-layer-popover-color: var(--nve-sys-text-color);
+
+  /* Accent */
+  --nve-sys-accent-primary-background: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-accent-secondary-background: var(--nve-ref-color-brand-green-1000);
+
+  /* Highlights */
+  --nve-sys-interaction-highlighted-muted-background: color-mix(in oklch,
+      var(--nve-ref-color-scheme-inverse) 5%,
+      transparent);
+  --nve-sys-interaction-highlighted-background: color-mix(in srgb,
+      var(--nve-sys-accent-primary-background) 30%,
+      transparent);
+
+  /* Text */
+  --nve-sys-text-emphasis-color: var(--nve-ref-color-neutral-1200);
+  --nve-sys-text-color: oklch(94.91% 0 0);
+  --nve-sys-text-muted-color: oklch(63.01% 0 0);
+  --nve-sys-interaction-disabled-color: color-mix(in oklch, var(--nve-sys-text-color) 30%, transparent);
+  --nve-sys-text-placeholder-color: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 60%, transparent);
+
+  /* Links */
+  --nve-sys-text-link-emphasis-color: var(--nve-sys-accent-primary-background);
+  --nve-sys-text-link-hover-color: color-mix(in oklch,
+      var(--nve-sys-accent-primary-background) 70%,
+      var(--nve-ref-color-scheme-inverse) 30%);
+
+  /* Borders */
+  --nve-ref-border-color-emphasis: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  --nve-ref-border-color: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+  --nve-ref-border-color-muted: color-mix(in oklch, var(--nve-ref-color-scheme-inverse) 20%, transparent);
+
+  /* Interaction States */
+  --nve-sys-interaction-state-base: oklch(0% 0 0 / 0.035);
+  --nve-sys-interaction-state-ratio-hover: 10%;
+  --nve-sys-interaction-state-ratio-disabled: 5%;
+  --nve-sys-interaction-state-ratio-active: 8%;
+  --nve-sys-interaction-state-ratio-selected: 7%;
+
+  /* Fields and Buttons */
+  --nve-sys-interaction-background: color-mix(in oklch, var(--nve-ref-color-scheme-base), transparent 60%);
+  --nve-sys-interaction-background-100: var(--nve-sys-interaction-background);
+  --nve-sys-interaction-background-200: var(--nve-sys-interaction-background);
+  --nve-sys-interaction-background-300: var(--nve-sys-interaction-background);
+
+  --nve-sys-interaction-field-color: var(--nve-sys-text-color);
+  --nve-sys-interaction-field-background: color-mix(in oklch, var(--nve-ref-color-scheme-base), transparent 60%);
+  --nve-sys-interaction-field-background-100: var(--nve-sys-interaction-field-background);
+  --nve-sys-interaction-field-background-200: var(--nve-sys-interaction-field-background);
+  --nve-sys-interaction-field-background-300: var(--nve-sys-interaction-field-background);
+
+  /* Support */
+  --nve-sys-support-emphasis-color: oklch(72.84% 0 0);
+  --nve-sys-support-color: oklch(56.24% 0 0);
+  --nve-sys-support-muted-color: oklch(25.2% 0 0);
+
+  --nve-sys-support-danger-emphasis-color: oklch(74.61% 0.1537 21.45);
+  --nve-sys-support-danger-color: oklch(58.98% 0.2266 27.87);
+  --nve-sys-support-danger-muted-color: oklch(26.38% 0.1018 27.95);
+
+  --nve-sys-support-warning-emphasis-color: oklch(84.56% 0.1728 89.35);
+  --nve-sys-support-warning-color: oklch(73.83% 0.1649 65.58);
+  --nve-sys-support-warning-muted-color: oklch(20.6% 0.0611 42.89);
+
+  --nve-sys-support-success-emphasis-color: var(--nve-ref-color-brand-green-1000);
+  --nve-sys-support-success-color: oklch(61.55% 0.1767 134.03);
+  --nve-sys-support-success-muted-color: oklch(19.8% 0.0535 130.27);
+
+  --nve-sys-support-accent-emphasis-color: oklch(72.19% 0.1572 237.85);
+  --nve-sys-support-accent-color: oklch(56.65% 0.1848 254.73);
+  --nve-sys-support-accent-muted-color: oklch(18.14% 0.0612 255.67);
+
+  /* Status Accents */
+  --nve-sys-status-scheduled-color: oklch(85.72% 0.1091 319.79);
+  --nve-sys-status-pending-color: oklch(94.91% 0 0);
+  --nve-sys-status-starting-color: oklch(82.63% 0.1383 179.72);
+  --nve-sys-status-running-color: oklch(83.67% 0.1028 227.73);
+  --nve-sys-status-restarting-color: oklch(84.56% 0.1728 89.35);
+  --nve-sys-status-finished-color: oklch(83.06% 0.2084 126.29);
+  --nve-sys-status-failed-color: oklch(85.46% 0.079 18.83);
+
+  /* Categorical Accents */
+  --nve-sys-visualization-categorical-violet: oklch(85.72% 0.1091 319.79);
+  --nve-sys-visualization-categorical-red: oklch(85.46% 0.079 18.83);
+  --nve-sys-visualization-categorical-nova: oklch(84.56% 0.1728 89.35);
+  --nve-sys-visualization-categorical-grass: oklch(83.06% 0.2084 126.29);
+  --nve-sys-visualization-categorical-seafoam: oklch(82.63% 0.1383 179.72);
+  --nve-sys-visualization-categorical-cyan: oklch(83.67% 0.1028 227.73);
+  --nve-sys-visualization-categorical-slate: oklch(63.01% 0 0);
+}
+
+@container style(--nve-config-theme-classic-dark: true) {
+  nve-alert-group>nve-alert::part(icon) {
+    --icon-color: inherit !important;
+  }
+
+  nve-alert-group[prominence='emphasis'][status='danger'] {
+    --color: var(--nve-ref-color-white);
+  }
+
+  nve-alert-group[prominence='emphasis'][status='danger']>nve-alert {
+    --color: var(--nve-ref-color-white);
+    --icon-color: var(--nve-ref-color-white);
+  }
+
+  nve-alert-group[prominence='emphasis'][status='success'] {
+    --color: var(--nve-ref-color-black);
+  }
+
+  nve-alert-group[prominence='emphasis'][status='success']>nve-alert {
+    --color: var(--nve-ref-color-black);
+  }
+
+  nve-alert:not([prominence='emphasis'])[status='danger'] {
+    --color: var(--nve-sys-support-danger-color);
+    --icon-color: var(--nve-sys-support-danger-color);
+  }
+
+  nve-alert-group:not([prominence='emphasis']) {
+    --color: var(--state-color-base);
+    --nve-sys-contrast-mute-ratio: 25%;
+  }
+
+  nve-alert-group:not([prominence='emphasis'])[status='danger']>nve-alert {
+    --color: var(--nve-sys-support-danger-emphasis-color);
+  }
+
+  nve-control-message[status='error'] {
+    --color: var(--nve-sys-support-danger-color);
+  }
+
+  nve-avatar {
+    --border: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+  }
+
+  nve-button:not([container], [interaction]):hover {
+    --background: color-mix(in oklch,
+        var(--nve-ref-color-scheme-inverse),
+        var(--nve-ref-color-scheme-base) var(--nve-sys-interaction-state-ratio-hover));
+  }
+
+  nve-dialog {
+    --background: var(--nve-sys-layer-canvas-background);
+  }
+
+  nve-menu-item[status='danger'] {
+    --nve-sys-contrast-mute-ratio: 10%;
+  }
+
+  nve-menu-item[status='danger']:hover>nve-icon {
+    --color: var(--nve-sys-support-danger-color) !important;
+  }
+}

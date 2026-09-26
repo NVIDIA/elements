@@ -8,6 +8,7 @@ import type { PreferencesInputValue } from '@nvidia-elements/core/preferences-in
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/switch/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/toggletip/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/preferences-input/define.js';
 import styles from './system-settings.css?inline';
@@ -20,6 +21,7 @@ export class SystemSettings extends LitElement {
       font: '',
       scale: '',
       debug: '',
+      classic: '',
       animation: '',
       layer: '',
       sourceType: 'html',
@@ -57,6 +59,13 @@ export class SystemSettings extends LitElement {
             'reduced-motion': this.#globals.animation === 'reduced-motion',
             scale: this.#globals.scale === '' ? 'default' : this.#globals.scale
           }}></nve-preferences-input>
+        <div nve-layout="row align:vertical-center gap:xs">
+          <nve-switch>
+            <label>Classic</label>
+            <input type="checkbox" value="classic" .checked=${this.#globals.classic === 'classic'} @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ classic: e.target.checked ? 'classic' : '' })} />
+          </nve-switch>
+          <nve-icon-button type="button" popovertarget="classic-theme-toggletip" size="sm" container="inline" icon-name="information-circle" aria-label="About the classic theme"></nve-icon-button>
+        </div>
         <nve-divider></nve-divider>
         <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
           <label>Layer Background</label>
@@ -80,18 +89,23 @@ export class SystemSettings extends LitElement {
         </nve-switch-group>
       </form>
       <nve-tooltip id="demo-layer-tooltip" position="left">The background layer color for examples and how they are displayed in the browser.</nve-tooltip>
+      <nve-toggletip id="classic-theme-toggletip" position="left">
+        Learn about the <a href="/docs/foundations/themes/custom/#classic-theme" nve-text="link">classic theme</a>.
+      </nve-toggletip>
     `;
   }
 
   #writeGlobals(update: Record<string, string>) {
-    const brandThemeSwitched = this.#globals.theme.includes('brand') || update.theme?.includes('brand');
     const globals = { ...this.#globals, ...update };
-    const themes = [
+    const colorScheme =
       globals.theme === 'auto'
         ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
           ? 'light'
           : 'dark'
-        : globals.theme,
+        : globals.theme;
+    const themes = [
+      colorScheme,
+      globals.classic === 'classic' ? (colorScheme === 'dark' ? 'classic-dark' : 'classic') : '',
       globals.font,
       globals.scale,
       globals.debug,
@@ -105,6 +119,16 @@ export class SystemSettings extends LitElement {
     this.requestUpdate();
 
     this.#globals = globals;
+    const classicStylesheet = globalThis.document.querySelector<HTMLLinkElement>('#classic-theme-stylesheet');
+    if (globals.classic === 'classic' && !classicStylesheet) {
+      const link = globalThis.document.createElement('link');
+      link.id = 'classic-theme-stylesheet';
+      link.rel = 'stylesheet';
+      link.href = new URL('static/themes/classic.css', globalThis.document.baseURI).href;
+      globalThis.document.head.append(link);
+    } else if (globals.classic !== 'classic') {
+      classicStylesheet?.remove();
+    }
     globalThis.document.documentElement.setAttribute('nve-theme', themes);
     globalThis.document.documentElement.setAttribute('nve-layer', globals.layer);
     globalThis.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
@@ -114,9 +138,5 @@ export class SystemSettings extends LitElement {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);
       iframe.contentWindow?.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
     });
-
-    if (brandThemeSwitched) {
-      globalThis.location.reload();
-    }
   }
 }
