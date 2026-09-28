@@ -12,7 +12,10 @@
     "design-system",
     "ui-components",
     "accessibility",
-    "lit"
+    "lit",
+    "react",
+    "vue",
+    "angular"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {

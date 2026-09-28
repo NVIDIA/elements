@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createLlmsTxtContent, llmsTxtPlugin } from './llms-txt.js';
 import { getPublicOutputPath } from '../utils/public-output.js';
@@ -28,7 +29,7 @@ describe('createLlmsTxtContent', () => {
     const content = createLlmsTxtContent('https://nvidia.github.io/elements');
 
     expect(content).toContain('[CLI](https://nvidia.github.io/elements/context/cli.md)');
-    expect(content).toContain('[MCP](https://nvidia.github.io/elements/context/cli.md)');
+    expect(content).toContain('[MCP](https://nvidia.github.io/elements/context/mcp.md)');
     expect(content).toContain('[Skills](https://nvidia.github.io/elements/context/skills/index.md)');
     expect(content).toContain('[CDN](https://nvidia.github.io/elements/context/integrations/cdn.md)');
     expect(content).toContain('[APIs](https://nvidia.github.io/elements/context/api/index.md)');
@@ -82,5 +83,24 @@ describe('createLlmsTxtContent', () => {
 
   it('should use the Eleventy output public directory', () => {
     expect(getPublicOutputPath({ output: 'dist' })).toBe('dist/public');
+  });
+
+  it('should publish distinct CLI and MCP context pages linked from both llms files', async () => {
+    const [index, full, cli, mcp, mcpHtml] = await Promise.all([
+      readFile('dist/llms.txt', 'utf-8'),
+      readFile('dist/llms-full.txt', 'utf-8'),
+      readFile('dist/context/cli.md', 'utf-8'),
+      readFile('dist/context/mcp.md', 'utf-8'),
+      readFile('dist/context/mcp.html', 'utf-8')
+    ]);
+
+    for (const content of [index, full]) {
+      expect(content).toMatch(/\[CLI\]\(https?:\/\/[^)]+\/context\/cli\.md\)/);
+      expect(content).toMatch(/\[MCP\]\(https?:\/\/[^)]+\/context\/mcp\.md\)/);
+    }
+    expect(cli).toContain('# @nvidia-elements/cli');
+    expect(mcp).toContain('# NVIDIA Elements MCP');
+    expect(mcp).toContain('## MCP Tools');
+    expect(mcpHtml).toContain('NVIDIA Elements MCP');
   });
 });

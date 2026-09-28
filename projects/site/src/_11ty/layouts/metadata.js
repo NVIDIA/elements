@@ -341,6 +341,11 @@ function expandShortDescription(data, description) {
     .sort((a, b) => a.length - b.length)[0];
   if (descriptionInRange) return descriptionInRange;
 
+  const descriptionWithinLimit = candidates
+    .filter(candidate => candidate.length <= MAX_DESCRIPTION_LENGTH)
+    .sort((a, b) => b.length - a.length)[0];
+  if (descriptionWithinLimit) return descriptionWithinLimit;
+
   const expandedDescription =
     candidates.filter(candidate => candidate.length >= MIN_DESCRIPTION_LENGTH).sort((a, b) => a.length - b.length)[0] ??
     candidates.sort((a, b) => b.length - a.length)[0] ??
@@ -352,13 +357,12 @@ function expandShortDescription(data, description) {
 function clampDescription(description) {
   if (description.length <= MAX_DESCRIPTION_LENGTH) return description;
 
-  const trimmed = description.slice(0, MAX_DESCRIPTION_LENGTH).trimEnd();
-  const lastSpace = trimmed.lastIndexOf(' ');
-  const sentence = (lastSpace === -1 ? trimmed : trimmed.slice(0, lastSpace))
-    .replace(/[,:;—-]+$/u, '')
-    .replace(/[.?!]$/u, '');
+  const sentenceEnds = [...description.matchAll(/[.!?](?=\s|$)/gu)]
+    .map(match => match.index + 1)
+    .filter(index => index >= MIN_DESCRIPTION_LENGTH);
+  const sentenceEnd = sentenceEnds.filter(index => index <= MAX_DESCRIPTION_LENGTH).at(-1) ?? sentenceEnds[0];
 
-  return sentence.length < MAX_DESCRIPTION_LENGTH ? `${sentence}.` : sentence;
+  return sentenceEnd ? description.slice(0, sentenceEnd) : description;
 }
 
 function hasGeneratedPage(data, generatedUrls, url) {
@@ -392,7 +396,7 @@ export function resolvePageMeta(data) {
     description = `Documentation for ${rawTitle} in NVIDIA Elements, the framework-agnostic design system for AI/ML factories.`;
   }
 
-  description = expandShortDescription(data, description);
+  if (!data.description) description = expandShortDescription(data, description);
 
   const canonicalUrl = getSiteUrl(url);
   const ogImage = SOCIAL_IMAGE_URL;
