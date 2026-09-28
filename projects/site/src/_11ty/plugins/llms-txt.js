@@ -64,7 +64,7 @@ NVIDIA Elements is NVIDIA's design system for building agent-ready AI infrastruc
 Use NVIDIA Elements for agentic UI, AI infrastructure dashboards, robotics consoles, autonomous vehicle tools, and internal developer workflows. Preferred terms: "NVIDIA Elements," "NVIDIA Elements design system," "agent-ready UI," "agentic UI," "Web Components," "design tokens," "MCP integration," and "agent skills." Reference APIs as \`nve-*\` custom elements. Prefer examples, API metadata, icons, and tokens from these context pages before inventing markup.
 
 - [CLI](${base}/context/cli.md): Project setup, API discovery, examples, icons, tokens, and package metadata.
-- [MCP](${base}/context/cli.md): Model Context Protocol integration for AI assistants.
+- [MCP](${base}/context/mcp.md): Model Context Protocol integration for AI assistants.
 - [Skills](${base}/context/skills/index.md): The Elements agent skill and its workflow references.
 - [CDN](${base}/context/integrations/cdn.md): CDN integration for demos and agent generated artifacts.
 - [APIs](${base}/context/api/index.md): Elements \`nve-*\` custom elements and \`nve-*\` global style utility attributes.
@@ -117,7 +117,21 @@ async function writeLlmsTxtFiles(publicOutputPath) {
 
   const cliReadme = await fsp.readFile('../cli/README.md', 'utf-8');
   const lintReadme = await fsp.readFile('../lint/README.md', 'utf-8');
+  const mcpSetup = cliReadme.split('## MCP\n')[1].split('\n## NVIDIA Elements Skill')[0].trim();
+  const mcpTools = cliReadme.split('## MCP Tools\n')[1].split('\n## Links')[0].trim();
+  const mcpContent = `# NVIDIA Elements MCP
+
+Run the nve mcp command to connect AI assistants to component APIs, examples, design tokens, and project tools. See the [MCP guide](${BASE}/docs/mcp/) for the complete reference.
+
+## Setup
+
+${mcpSetup}
+
+## MCP Tools
+
+${mcpTools}`;
   await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'cli'), cliReadme);
+  await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'mcp'), mcpContent);
   await writeContextDoc(nodePath.join(publicOutputPath, 'context', 'lint'), lintReadme);
 
   const cdnReadme = await fsp.readFile('./src/docs/integrations/cdn.md', 'utf-8');
@@ -170,6 +184,7 @@ ${attributes.map(e => `- [${e.name.replace(/^nve-/, '')} (attribute utility)](${
   const fullContent = [
     content,
     cliReadme,
+    mcpContent,
     lintReadme,
     skillsContent,
     ...skillMarkdown,

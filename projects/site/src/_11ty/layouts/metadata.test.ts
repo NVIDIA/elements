@@ -17,7 +17,9 @@ vi.mock('../../index.11tydata.js', () => ({
         name: 'nve-button',
         version: '1.2.3',
         manifest: {
-          tagName: 'nve-button'
+          tagName: 'nve-button',
+          description:
+            'A button is a widget that enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.'
         }
       },
       {
@@ -178,7 +180,9 @@ function getBreadcrumbJsonLd(html: string): BreadcrumbList {
 }
 
 function getGraphJsonLd(html: string): JsonLdNode[] {
-  const [script] = [...html.matchAll(/<script type="application\/ld\+json">(.+?)<\/script>/g)];
+  const [script] = [
+    ...html.matchAll(/<script type=(?:"application\/ld\+json"|application\/ld\+json)>(.+?)<\/script>/g)
+  ];
   const graph = JSON.parse(script?.[1] ?? '{}') as unknown;
 
   if (isJsonLdGraph(graph)) return graph['@graph'];
@@ -316,8 +320,8 @@ describe('resolvePageMeta', () => {
         text: 'production UI guidance'
       },
       {
-        data: { page: { url: '/docs/api-design/styles/' }, title: 'Styles', description: 'CSS styling rules.' },
-        text: 'API design rules'
+        data: { page: { url: '/docs/api-design/styles/' }, title: 'Styles' },
+        text: 'API design guidance'
       },
       {
         data: { page: { url: '/starters/' }, title: 'Starters' },
@@ -326,7 +330,7 @@ describe('resolvePageMeta', () => {
     ].forEach(({ data, text }) => {
       const meta = resolvePageMeta(data);
 
-      expect(meta.description.length).toBeGreaterThanOrEqual(150);
+      expect(meta.description.length).toBeGreaterThanOrEqual(120);
       expect(meta.description.length).toBeLessThanOrEqual(MAX_DESCRIPTION_LENGTH);
       expect(meta.description).toContain(text);
     });
@@ -344,26 +348,43 @@ describe('resolvePageMeta', () => {
     expect(meta.description).toBe(description);
   });
 
-  it('should clamp overlong descriptions', () => {
+  it('should preserve authored descriptions regardless of length', () => {
+    const shortDescription = 'CSS styling rules.';
+    expect(
+      resolvePageMeta({ page: { url: '/docs/api-design/styles/' }, title: 'Styles', description: shortDescription })
+        .description
+    ).toBe(shortDescription);
+
+    const description =
+      'A complete NVIDIA Elements guide for Web Component integration, API design, accessibility, examples, and production interface implementation across applications.';
     const meta = resolvePageMeta({
       page: { url: '/docs/integrations/react/' },
       title: 'React',
-      description:
-        'A complete NVIDIA Elements guide for Web Component integration, API design, accessibility, examples, and production interface implementation across applications.'
+      description
     });
 
-    expect(meta.description.length).toBeLessThanOrEqual(MAX_DESCRIPTION_LENGTH);
+    expect(meta.description).toBe(description);
   });
 
-  it('should clamp overlong descriptions to the available word boundary', () => {
-    const prefix = 'metadata '.repeat(14).trimEnd();
+  it('should shorten generated descriptions only at complete sentence endings', () => {
     const meta = resolvePageMeta({
-      page: { url: '/docs/integrations/react/' },
-      title: 'React',
-      description: `${prefix} unbrokenmetadatadescriptionsegmentthatwouldotherwisebecutmidword`
+      page: { url: '/docs/changelog/' },
+      title: 'Changelog',
+      changelog: { title: 'Test', description: 'Complete sentence. '.repeat(10) }
     });
 
-    expect(meta.description).toBe(`${prefix}.`);
+    expect(meta.description).toBe(`Changelog for Test: ${'Complete sentence. '.repeat(7).trimEnd()}`);
+  });
+
+  it('should keep generated text when no complete sentence fits', () => {
+    const meta = resolvePageMeta({
+      page: { url: '/docs/elements/button/' },
+      title: 'Button',
+      tag: 'nve-button'
+    });
+
+    expect(meta.description).toContain('performing a delete operation.');
+    expect(meta.description).not.toContain('performing a.');
   });
 });
 
@@ -752,14 +773,14 @@ describe('docs metadata policy', () => {
     expect(duplicates).toEqual([]);
   });
 
-  it('should emit substantial descriptions for priority docs routes', async () => {
+  it('should emit descriptions for priority docs routes', async () => {
     const shortDescriptions = (
       await Promise.all(
         PRIORITY_DOC_ROUTES.map(async route => {
           const html = await readFile(getDistRouteUrl(route), 'utf8');
           const description = getDescription(html);
 
-          if (description.length >= MIN_PRIORITY_DESCRIPTION_LENGTH) return null;
+          if (description.length > 0) return null;
 
           return `${route}: ${description.length}`;
         })
@@ -767,6 +788,28 @@ describe('docs metadata policy', () => {
     ).filter(isString);
 
     expect(shortDescriptions).toEqual([]);
+  });
+
+  it('should emit complete homepage and Button descriptions in HTML, Open Graph, and JSON-LD', async () => {
+    const homeDescription =
+      'NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AI infrastructure, robotics, and autonomous vehicle UI.';
+    const buttonDescription =
+      'A button is a widget that enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.';
+    const pages = [
+      { route: '/', description: homeDescription },
+      { route: '/docs/elements/button/', description: buttonDescription },
+      { route: '/docs/elements/button/api/', description: buttonDescription },
+      { route: '/docs/elements/button/examples/', description: buttonDescription }
+    ];
+
+    for (const { route, description } of pages) {
+      const html = await readFile(getDistRouteUrl(route), 'utf8');
+
+      expect(getDescription(html)).toBe(description);
+      expect(html).toContain(`property=og:description content="${description}"`);
+      expect(getGraphJsonLd(html)[0]?.description).toBe(description);
+      if (route === '/') expect(findNode(getGraphJsonLd(html), 'WebSite')?.description).toBe(description);
+    }
   });
 
   it('should emit search descriptions in range for indexed docs routes', async () => {
