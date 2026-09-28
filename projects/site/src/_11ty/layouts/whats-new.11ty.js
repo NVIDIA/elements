@@ -1,5 +1,7 @@
 import { getContentDates } from '../utils/content-dates.js';
+import { getReleaseVideo } from '../utils/release-video.js';
 import { getSiteUrl } from '../utils/site-url.js';
+import { escapeAttr } from './metadata.js';
 
 export const data = {
   layout: 'docs.11ty.js'
@@ -16,7 +18,7 @@ export function renderUpdatesFeedLink() {
 }
 
 export function getUpdateMonth(entry) {
-  return new Date(entry.data?.updateMonth ?? entry.date);
+  return new Date(entry.data?.updateMonth ?? entry.updateMonth ?? entry.date);
 }
 
 export function formatUpdateMonth(entry) {
@@ -75,6 +77,21 @@ export function renderRecentUpdates(data) {
   `;
 }
 
+export function renderUpdateVideo(data) {
+  const video = getReleaseVideo(data);
+  if (!video) return '';
+
+  return /* html */ `
+    <figure nve-layout="column gap:sm" style="margin: 0">
+      <video controls poster="${video.posterPath}" aria-label="${escapeAttr(video.title)}" style="width: 100%">
+        <source src="${video.videoPath}" type="video/webm" />
+        <a href="${video.videoPath}">Watch the ${escapeAttr(video.title)} video</a>.
+      </video>
+      <figcaption nve-text="body sm muted">${escapeAttr(video.description)}</figcaption>
+    </figure>
+  `;
+}
+
 export function render(data) {
   const recentUpdates = renderRecentUpdates(data);
 
@@ -85,6 +102,7 @@ export function render(data) {
     <div nve-layout="grid gap:xl">
       <article nve-layout="column gap:xl ${recentUpdates ? 'span:12 &xl|span:9' : 'span:12'}">
         ${renderUpdateDates(data)}
+        ${renderUpdateVideo(data)}
         ${data.content}
         <footer>
           <p nve-text="body">

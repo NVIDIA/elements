@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en" nve-theme="dark" nve-transition="auto">
+  <head>
+    <title>What’s new in NVIDIA Elements: September 2026</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/styles@2.1.3/dist/bundles/index.css';
+      @import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/themes@2.0.1/dist/bundles/index.css';
+      @import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/themes@2.0.1/dist/fonts/inter.css';
+
+      /*
+        Video art direction. Every value resolves to an Elements design token,
+        so the video follows the theme. Components are never restyled and no
+        selector targets an nve-* element. Brand green is reserved for the logo.
+      */
+      :root {
+        --signal: var(--nve-ref-border-color-emphasis);
+        --danger: var(--nve-sys-support-danger-color);
+        --warning: var(--nve-sys-support-warning-color);
+        --success: var(--nve-sys-support-success-color);
+        --muted: var(--nve-sys-text-muted-color);
+        --ink: var(--nve-sys-text-emphasis-color);
+        --line: var(--nve-ref-border-color-muted);
+        --mono: var(--nve-ref-font-family-roboto-mono);
+        --hero: calc(var(--nve-ref-font-size-1200) * 2);
+        --mega: calc(var(--nve-ref-font-size-1200) * 1.5);
+        --big: calc(var(--nve-ref-font-size-1200) * 1.15);
+        --ease-out: cubic-bezier(.16, 1, .3, 1);
+      }
+
+      /* frame: a fixed 1280x720 stage, scaled to fit the window (1.5x device scale renders 1080p) */
+      html, body { height: 100%; }
+      .frame { width: calc(1280px * var(--s, 1)); height: calc(720px * var(--s, 1)); }
+      .stage { position: relative; width: 1280px; height: 720px; overflow: hidden; transform: scale(var(--s, 1)); transform-origin: 0 0;
+        background: var(--nve-sys-layer-canvas-background); }
+      .stage:not([ready]) { visibility: hidden; }
+      .backdrop { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .backdrop circle { fill: var(--line); }
+
+      /* scenes */
+      .scene { position: absolute; inset: 0; opacity: 0; padding: 64px 72px;
+        animation: v-scene-in .45s var(--ease-out) var(--in) both, v-scene-out .35s ease-in var(--out, 9999s) forwards; }
+      .stack { display: grid; }
+      .stack > * { grid-area: 1 / 1; }
+      .cell { min-width: 0; } /* lets grid columns shrink so truncating components can truncate */
+
+      /* kinetic type */
+      .hero, .mega, .big { font-family: var(--nve-ref-font-family); color: var(--ink); margin: 0; }
+      .hero, .mega { font-weight: var(--nve-ref-font-weight-semibold); line-height: 1.04; letter-spacing: -0.035em; }
+      .hero { font-size: var(--hero); }
+      .mega { font-size: var(--mega); }
+      .big { font-size: var(--big); line-height: 1.12; letter-spacing: -0.02em; }
+      .dim { color: var(--muted); font-weight: var(--nve-ref-font-weight-regular); }
+      .lede { font-family: var(--nve-ref-font-family); font-size: var(--nve-ref-font-size-600); line-height: 1.35; color: var(--muted); margin: 0; max-width: 36ch; }
+      .mask { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; margin-bottom: -.08em; }
+      .word { display: inline-block; animation: v-up .6s var(--ease-out) var(--at) both; }
+      .stat { font-family: var(--nve-ref-font-family); font-size: var(--nve-ref-font-size-1100); font-weight: var(--nve-ref-font-weight-semibold); color: var(--ink); font-variant-numeric: tabular-nums; }
+      .stat-label { font-family: var(--nve-ref-font-family); font-size: var(--nve-ref-font-size-300); color: var(--muted); }
+
+      /* entrances */
+      .rise  { animation: v-rise .5s var(--ease-out) var(--at) both; }
+      .pop   { animation: v-pop .45s var(--ease-out) var(--at) both; }
+      .stamp { animation: v-stamp .5s var(--ease-out) var(--at) both; }
+      .win   { animation: v-rise .4s var(--ease-out) var(--at) both, v-fade-out .3s ease var(--until, 9999s) forwards; }
+      .type  { display: inline-block; animation: v-type var(--dur) steps(var(--steps)) var(--at) both; }
+
+      /* demo surface: a quiet, token-bordered area where real components render */
+      .demo { width: 100%; overflow: hidden; border: var(--nve-ref-border-width-sm) solid var(--line); border-radius: var(--nve-ref-border-radius-lg);
+        background: var(--nve-sys-layer-container-background); padding: var(--nve-ref-space-xl); box-shadow: var(--nve-ref-shadow-400); }
+      /* no surface, for demos that bring their own container such as nve-card */
+      .demo.bare { border: none; background: none; padding: 0; box-shadow: none; }
+
+      /* chips of code that agents tend to invent */
+      .guess { font-family: var(--mono); font-size: var(--nve-ref-font-size-600); color: var(--ink);
+        background: var(--nve-sys-layer-container-background); border: var(--nve-ref-border-width-sm) solid var(--line);
+        border-radius: var(--nve-ref-border-radius-md); padding: var(--nve-ref-space-sm) var(--nve-ref-space-md);
+        text-decoration: underline wavy transparent; text-underline-offset: 6px; text-decoration-thickness: 2px;
+        animation: v-pop .4s var(--ease-out) var(--at) both, v-squiggle .3s ease calc(var(--at) + .5s) both, v-shake .35s ease calc(var(--at) + .55s) both; }
+
+      /* terminal */
+      .term { font-family: var(--mono); font-size: var(--nve-ref-font-size-200); line-height: 1.75; color: var(--nve-sys-text-color); white-space: pre; overflow: hidden; }
+      .term .cmd { color: var(--ink); }
+      .term .prompt, .term .out { color: var(--muted); }
+      .term .hl { color: var(--nve-sys-visualization-categorical-amber); }
+      .term .ok { color: var(--success); }
+      .term .bad { color: var(--danger); }
+      .caret { display: inline-block; width: .6em; height: 1.1em; vertical-align: text-bottom; background: var(--nve-sys-text-color); animation: v-blink 1s steps(1) 0s infinite; }
+
+      /* fix editor: monospace, so token widths are exact in ch and each fix reflows like a real edit */
+      .editor { font-family: var(--mono); font-size: var(--nve-ref-font-size-300); line-height: 2; color: var(--nve-sys-text-color); white-space: pre; position: relative; overflow: hidden; }
+      .editor .ln { display: inline-block; width: 2.2em; color: var(--nve-sys-text-placeholder-color); }
+      .tk-t { color: var(--nve-sys-visualization-categorical-cyan); }
+      .tk-a { color: var(--nve-sys-visualization-categorical-lavender); }
+      .tk-s { color: var(--nve-sys-visualization-categorical-amber); }
+      .swap > * { display: inline-block; overflow: hidden; vertical-align: bottom; white-space: pre; }
+      .swap .bad { width: calc(var(--wb) * 1ch); text-decoration: underline wavy transparent; text-underline-offset: 6px; text-decoration-thickness: 2px;
+        animation: v-squiggle .3s ease var(--at) both, v-shrink .3s var(--ease-out) var(--fix) forwards; }
+      .swap .bad.warn { --danger: var(--warning); }
+      .swap .good { width: 0; border-radius: var(--nve-ref-border-radius-xs);
+        animation: v-grow .35s var(--ease-out) calc(var(--fix) + .1s) forwards, v-flash 1.2s ease calc(var(--fix) + .1s) both; }
+      .scan { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--signal); animation: v-scan 1s ease-in-out var(--at) both; }
+      .count { white-space: nowrap; font-family: var(--nve-ref-font-family); font-size: var(--nve-ref-font-size-1000); font-weight: var(--nve-ref-font-weight-semibold); font-variant-numeric: tabular-nums; }
+      .count.bad { color: var(--danger); }
+      .count.ok { color: var(--success); }
+
+      /* end card */
+      .chip { font-family: var(--mono); font-size: var(--nve-ref-font-size-500); color: var(--ink); white-space: nowrap;
+        background: var(--nve-sys-layer-overlay-background); border: var(--nve-ref-border-width-sm) solid var(--line);
+        border-radius: var(--nve-ref-border-radius-md); padding: var(--nve-ref-space-sm) var(--nve-ref-space-lg); box-shadow: var(--nve-ref-shadow-500); }
+      .url { font-family: var(--mono); font-size: var(--nve-ref-font-size-500); color: var(--muted); }
+
+      @keyframes v-scene-in  { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+      @keyframes v-scene-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(1.03); } }
+      @keyframes v-fade-out { from { opacity: 1; } to { opacity: 0; } }
+      @keyframes v-up    { from { transform: translateY(105%); } to { transform: none; } }
+      @keyframes v-rise  { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+      @keyframes v-pop   { from { opacity: 0; transform: scale(.85) rotate(var(--r, 0deg)); } to { opacity: 1; transform: rotate(var(--r, 0deg)); } }
+      @keyframes v-stamp { from { opacity: 0; transform: scale(1.25); } to { opacity: 1; transform: none; } }
+      @keyframes v-type  { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+      @keyframes v-blink { 50% { opacity: 0; } }
+      @keyframes v-squiggle { to { text-decoration-color: var(--danger); } }
+      @keyframes v-shake { 0%, 100% { translate: 0; } 25% { translate: -5px; } 50% { translate: 4px; } 75% { translate: -2px; } }
+      @keyframes v-flash { from { background: color-mix(in oklab, var(--success) 35%, transparent); } to { background: transparent; } }
+      @keyframes v-shrink { to { width: 0; opacity: 0; } }
+      @keyframes v-grow { from { width: 0; } to { width: calc(var(--wg) * 1ch); } }
+      @keyframes v-scan  { from { top: 0; opacity: 1; } 90% { opacity: 1; } to { top: 100%; opacity: 0; } }
+      
+    </style>
+    <script type="module">
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.0/dist/bundles/index.min.js';
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/code@2.1.0/dist/bundles/index.js';
+    </script>
+    
+  </head>
+  <body nve-text="body" nve-layout="column full">
+    <div nve-layout="column full align:center">
+      <div class="frame">
+        <div class="stage" id="stage" role="img" aria-label="What’s new in NVIDIA Elements: September 2026">
+          <svg class="backdrop" viewBox="0 0 1280 720" aria-hidden="true">
+            <defs>
+              <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1"></circle>
+              </pattern>
+            </defs>
+            <rect width="1280" height="720" fill="url(#dots)" opacity=".5"></rect>
+          </svg>
+                    <!-- 1. title: 0.00s to 3.00s -->
+          <section class="scene" style="--in: 0s; --out: 3s">
+<div nve-layout="column gap:lg align:center full:height">
+      <div class="stamp" style="--at: 0.1s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
+      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 0.2s">What’s new in NVIDIA Elements</span></span></p>
+      <h1 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 0.35s">September</span></span> <span class="mask"><span class="word" style="--at: 0.42s">2026</span></span></h1>
+      <p class="lede rise" nve-text="center" style="--at: 0.9s">Viewport, a native Pi extension, menu groups, and smarter linting.</p>
+    </div>
+          </section>
+
+          <!-- 2. feature: 3.00s to 8.00s -->
+          <section class="scene" style="--in: 3s; --out: 8s">
+<div nve-layout="grid gap:xxl align:vertical-center full:height">
+      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 3.05s"><nve-tag readonly>New: nve-viewport</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.1s">Pan</span></span> <span class="mask"><span class="word" style="--at: 3.17s">and</span></span> <span class="mask"><span class="word" style="--at: 3.24s">zoom</span></span> <span class="mask"><span class="word" style="--at: 3.31s">anything</span></span></h2><p class="lede rise" style="--at: 3.45s">One surface for diagrams, graphs, and maps, with grid lines and a minimap.</p></div>
+      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 3.6s"><div><div class="pop" style="--at: 3.6s"><nve-viewport id="sep-viewport" x="-50" y="-33" scale="0.6" behavior-pan behavior-zoom style="width: 600px; height: 400px"><nve-viewport-gridlines></nve-viewport-gridlines><svg role="img" aria-label="Three geometric forms in a spatial field" width="900" height="600" viewBox="0 0 900 600" style="position: absolute; left: 0; top: 0"><circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle><rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect><path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path></svg><nve-viewport-minimap></nve-viewport-minimap><div id="sep-hand" slot="overlay" style="--hand-x: 300px; --hand-y: 290px; --hand-o: 0; position: absolute; left: 0; top: 0; translate: var(--hand-x) var(--hand-y); opacity: var(--hand-o)"><nve-icon name="hand" size="xl"></nve-icon></div></nve-viewport></div></div></div></div>
+    </div>
+          </section>
+
+          <!-- 3. terminal: 8.00s to 12.50s -->
+          <section class="scene" style="--in: 8s; --out: 12.5s">
+<div nve-layout="grid gap:xxl align:vertical-center full:height">
+      <div class="cell" nve-layout="column gap:lg span:5"><h2 class="mega"><span class="mask"><span class="word" style="--at: 8.1s">Elements</span></span> <span class="mask"><span class="word" style="--at: 8.17s">tools,</span></span> <span class="mask"><span class="word" style="--at: 8.24s">native</span></span> <span class="mask"><span class="word" style="--at: 8.31s">in</span></span> <span class="mask"><span class="word" style="--at: 8.38s">Pi</span></span></h2><p class="lede rise" style="--at: 8.45s">Elements APIs, examples, tokens, and validation for Pi agents.</p></div>
+      <div class="rise cell" style="--at: 8.3s" nve-layout="span:7">
+        <nve-card>
+          <nve-card-header><div nve-layout="row gap:xs align:vertical-center"><nve-dot status="danger" size="sm"></nve-dot><nve-dot status="warning" size="sm"></nve-dot><nve-dot status="success" size="sm"></nve-dot><span nve-text="label sm muted">pi</span></div></nve-card-header>
+          <nve-card-content><div class="term"><span class="rise" style="--at: 8.6s"><span class="prompt">$ </span><span class="cmd type" style="--at: 8.6s; --dur: 0.9s; --steps: 37">pi install -l npm:@nvidia-elements/pi</span></span>
+<span class="out rise" style="--at: 9.7s">Installing npm:@nvidia-elements/pi...</span>
+<span class="out rise" style="--at: 9.82s">added 246 packages, and audited 247 packages in 8s</span>
+<span class="out rise" style="--at: 9.94s"><span class="ok">Installed npm:@nvidia-elements/pi</span></span>
+<span class="rise" style="--at: 10.41s"><span class="prompt">$ </span><span class="caret"></span></span></div></nve-card-content>
+        </nve-card>
+      </div>
+    </div>
+          </section>
+
+          <!-- 4. fix: 12.50s to 18.00s -->
+          <section class="scene" style="--in: 12.5s; --out: 18s">
+<div nve-layout="column gap:xl full:height">
+      <div nve-layout="row gap:xl align:vertical-center align:space-between">
+        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 12.6s">Catch</span></span> <span class="mask"><span class="word" style="--at: 12.67s">misplaced</span></span> <span class="mask"><span class="word" style="--at: 12.74s">markup</span></span></h2><p class="lede rise" style="--at: 12.95s">New rules flag invalid slotted children and misplaced page headers.</p></div>
+        <div class="stack">
+          <div class="win" style="--at: 13.7s; --until: 16.2s" nve-layout="column gap:xs align:right"><span class="count bad">2 problems</span><span class="stat-label">2 errors</span></div>
+          <div class="win" style="--at: 16.4s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
+        </div>
+      </div>
+      <div nve-layout="grid gap:xl">
+        <div class="rise cell" style="--at: 12.9s" nve-layout="span:7">
+          <nve-card>
+            <nve-card-header><div nve-layout="row gap:sm align:vertical-center align:space-between"><span nve-text="label muted">clusters.html</span><code nve-text="code">nve api.validate clusters.html</code></div></nve-card-header>
+            <nve-card-content><div class="editor"><div class="scan" style="--at: 13.4s"></div><span class="ln">1</span>&lt;<span class="tk-t">nve-page</span>&gt;
+<span class="ln">2</span>  &lt;<span class="swap" style="--at: 13.7s; --fix: 15.5s; --wb: 15; --wg: 29"><span class="bad">nve-page-header</span><span class="good">nve-page-header <span class="tk-a">slot</span>=<span class="tk-s">&quot;header&quot;</span></span></span>&gt;
+<span class="ln">3</span>    &lt;<span class="tk-t">h2</span> <span class="tk-a">slot</span>=<span class="tk-s">&quot;prefix&quot;</span> <span class="tk-a">nve-text</span>=<span class="tk-s">&quot;heading&quot;</span>&gt;Clusters&lt;/<span class="tk-t">h2</span>&gt;
+<span class="ln">4</span>  &lt;/<span class="tk-t">nve-page-header</span>&gt;
+<span class="ln">5</span>  &lt;<span class="tk-t">nve-menu</span>&gt;
+<span class="ln">6</span>    <span class="swap" style="--at: 13.95s; --fix: 15.75s; --wb: 19; --wg: 39"><span class="bad">&lt;<span class="tk-t">div</span>&gt;Settings&lt;/<span class="tk-t">div</span>&gt;</span><span class="good">&lt;<span class="tk-t">nve-menu-item</span>&gt;Settings&lt;/<span class="tk-t">nve-menu-item</span>&gt;</span></span>
+<span class="ln">7</span>  &lt;/<span class="tk-t">nve-menu</span>&gt;
+<span class="ln">8</span>&lt;/<span class="tk-t">nve-page</span>&gt;</div></nve-card-content>
+          </nve-card>
+        </div>
+        <div class="stack cell" nve-layout="span:5">
+          <div class="win" style="--at: 13.7s; --until: 16.2s" nve-layout="column gap:sm"><div class="rise" style="--at: 13.8s"><nve-alert status="danger"><span nve-text="label sm">2:3 no-invalid-page-header-slot</span> &lt;nve-page-header&gt; must use slot=&quot;header&quot; in &lt;nve-page&gt;.</nve-alert></div><div class="rise" style="--at: 14.05s"><nve-alert status="danger"><span nve-text="label sm">6:5 no-invalid-slotted-elements</span> Invalid direct child &lt;div&gt; in &lt;nve-menu&gt;.</nve-alert></div></div>
+          <div class="win" style="--at: 16.4s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert></div>
+        </div>
+      </div>
+    </div>
+          </section>
+
+          <!-- 5. list: 18.00s to 21.50s -->
+          <section class="scene" style="--in: 18s; --out: 21.5s">
+<div nve-layout="column gap:xl align:vertical-center full:height">
+      <h2 class="mega"><span class="mask"><span class="word" style="--at: 18.1s">Also</span></span> <span class="mask"><span class="word" style="--at: 18.17s">in</span></span> <span class="mask"><span class="word" style="--at: 18.24s">September</span></span></h2>
+      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 18.5s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="menu" size="lg"></nve-icon><span nve-text="label lg">Collapsible menu groups</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.68s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="bell" size="lg"></nve-icon><span nve-text="label lg">Solid icon artwork</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.86s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="tag" size="lg"></nve-icon><span nve-text="label lg">Tag prefix and suffix slots</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 19.04s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="markdown" size="lg"></nve-icon><span nve-text="label lg">Markdown linting</span></div></nve-card-content></nve-card></div></div>
+    </div>
+          </section>
+
+          <!-- 6. end: 21.50s to 25.00s -->
+          <section class="scene" style="--in: 21.5s">
+<div nve-layout="column gap:lg align:center full:height">
+      <div class="stamp" style="--at: 21.6s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
+      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 21.7s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 21.77s">Elements</span></span></h2>
+      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 22.05s">Read the September 2026 update</span></span></p>
+      
+      <span class="url rise" style="--at: 22.6s">nvidia.github.io/elements/docs/whats-new/09-2026/</span>
+      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 22.8s"><nve-tag readonly>cli 2.2.8</nve-tag></div><div class="pop" style="--at: 22.85s"><nve-tag readonly>code 2.1.0</nve-tag></div><div class="pop" style="--at: 22.9s"><nve-tag readonly>core 2.11.0</nve-tag></div><div class="pop" style="--at: 22.95s"><nve-tag readonly>lint 2.7.1</nve-tag></div><div class="pop" style="--at: 23s"><nve-tag readonly>media 1.0.1</nve-tag></div><div class="pop" style="--at: 23.05s"><nve-tag readonly>pi 1.0.0</nve-tag></div></div>
+    </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <nve-toolbar id="controls">
+      <nve-icon-button slot="prefix" id="play" icon-name="pause" aria-label="Pause"></nve-icon-button>
+      <nve-icon-button
+        slot="prefix"
+        id="restart"
+        icon-name="refresh"
+        container="flat"
+        aria-label="Restart"></nve-icon-button>
+      <nve-range fit-text>
+        <input type="range" id="scrub" min="0" max="25" step="0.05" value="0" aria-label="Timeline" />
+      </nve-range>
+      <span slot="suffix" nve-text="label sm muted nowrap" id="time">0:00</span>
+    </nve-toolbar>
+
+    <script type="application/json" id="timeline">
+      {"duration":25,"cues":[{"t":4.1,"target":"#sep-hand","kind":"style","name":"--hand-o","value":1,"duration":0.25},{"t":4.4,"target":"#sep-hand","kind":"style","name":"--hand-x","value":150,"duration":1.1,"unit":"px"},{"t":4.4,"target":"#sep-hand","kind":"style","name":"--hand-y","value":230,"duration":1.1,"unit":"px"},{"t":4.4,"target":"#sep-viewport","kind":"prop","name":"x","value":200,"duration":1.1},{"t":4.4,"target":"#sep-viewport","kind":"prop","name":"y","value":67,"duration":1.1},{"t":5.6,"target":"#sep-hand","kind":"style","name":"--hand-o","value":0,"duration":0.2},{"t":5.9,"target":"#sep-viewport","kind":"prop","name":"scale","value":1,"duration":1},{"t":5.9,"target":"#sep-viewport","kind":"prop","name":"x","value":400,"duration":1},{"t":5.9,"target":"#sep-viewport","kind":"prop","name":"y","value":200,"duration":1}],"counters":[],"poster":1.6}
+    </script>
+    <script type="module">
+      const { duration: DURATION, cues, counters, poster } = JSON.parse(document.getElementById('timeline').textContent);
+      const RECORD = new URLSearchParams(location.search).has('record');
+      const $ = id => document.getElementById(id);
+      const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+      const ease = x => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+
+      /* ---------- cues: state as a pure function of time ----------
+         Each cue sets an attribute, property, or text on its targets at an absolute time.
+         For any target and key, the latest cue at or before t wins; before the first cue,
+         the value captured at boot is restored. Scrubbing backwards therefore works.
+         A cue with a duration eases a numeric value from the previous one over that time. */
+      const easeInOut = x => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+      const tracks = new Map();
+      for (const cue of cues) {
+        const key = `${cue.target}|${cue.kind}|${cue.name ?? ''}`;
+        if (!tracks.has(key)) tracks.set(key, { ...cue, entries: [] });
+        tracks.get(key).entries.push({ t: cue.t, value: cue.value, duration: cue.duration });
+      }
+      for (const track of tracks.values()) {
+        track.entries.sort((a, b) => a.t - b.t);
+        track.els = [...document.querySelectorAll(track.target)];
+        track.initial = track.els.map(el => read(el, track));
+        track.current = undefined;
+      }
+      function read(el, { kind, name }) {
+        if (kind === 'attr') return el.getAttribute(name);
+        if (kind === 'prop') return el[name];
+        if (kind === 'style') return el.style.getPropertyValue(name);
+        return el.textContent;
+      }
+      function write(el, { kind, name, unit }, value) {
+        if (kind === 'attr') value === null || value === false ? el.removeAttribute(name) : el.setAttribute(name, value === true ? '' : value);
+        else if (kind === 'prop') el[name] = value;
+        else if (kind === 'style') el.style.setProperty(name, typeof value === 'number' ? `${value}${unit ?? ''}` : value);
+        else el.textContent = value;
+      }
+      function valueAt(track, index, i, t) {
+        if (index < 0) return track.initial[i];
+        const entry = track.entries[index];
+        const from = parseFloat(index > 0 ? track.entries[index - 1].value : track.initial[i]);
+        const to = Number(entry.value);
+        if (!entry.duration || !Number.isFinite(from) || !Number.isFinite(to)) return entry.value;
+        const v = from + (to - from) * easeInOut(clamp((t - entry.t) / entry.duration, 0, 1));
+        return track.kind === 'attr' ? String(v) : v;
+      }
+      function apply(t) {
+        for (const track of tracks.values()) {
+          let index = -1;
+          for (let i = 0; i < track.entries.length && track.entries[i].t <= t; i++) index = i;
+          const entry = track.entries[index];
+          const progress = entry?.duration ? clamp((t - entry.t) / entry.duration, 0, 1) : 1;
+          const state = `${index}|${progress}`;
+          if (state === track.current) continue;
+          track.current = state;
+          track.els.forEach((el, i) => write(el, track, valueAt(track, index, i, t)));
+        }
+        for (const c of counters) {
+          const el = document.querySelector(c.target);
+          const v = c.from + (c.to - c.from) * ease((t - c.t) / c.duration);
+          const text = c.decimals ? v.toFixed(c.decimals) : Math.round(v).toLocaleString('en-US');
+          if (el && el.textContent !== text) el.textContent = text;
+        }
+      }
+
+      /* ---------- clock ---------- */
+      function allAnimations(root = document) {
+        const animations = [...root.getAnimations()];
+        for (const element of root.querySelectorAll('*')) {
+          if (element.shadowRoot) animations.push(...allAnimations(element.shadowRoot));
+        }
+        return animations;
+      }
+
+      let mine = [];
+      const born = new WeakMap();
+      const collect = () => (mine = allAnimations().filter(a => a.animationName?.startsWith('v-')));
+      function seekAnimations(t) {
+        for (const a of mine) { a.pause(); a.currentTime = t * 1000; }
+        if (RECORD) {
+          // component-internal animations and transitions follow the same virtual clock
+          for (const a of allAnimations()) {
+            if (a.animationName?.startsWith('v-')) continue;
+            if (!born.has(a)) born.set(a, t);
+            const local = (t - born.get(a)) * 1000;
+            if (a.effect?.getKeyframes?.().length === 0) {
+              // keyframeless timers drive a component's own frame loop, which stops once paused,
+              // so hold them at rate 0 to keep them running, then finish them to settle the value
+              if (local >= a.effect.getComputedTiming().endTime) { a.playbackRate = 1; a.finish(); }
+              else { a.playbackRate = 0; a.currentTime = local; }
+              continue;
+            }
+            a.pause();
+            a.currentTime = local;
+          }
+        }
+      }
+
+      let playing = !RECORD, offset = 0, start = performance.now();
+      const now = () => (playing ? offset + (performance.now() - start) / 1000 : offset);
+      const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+      function render(t) {
+        apply(t);
+        seekAnimations(t);
+        if (!RECORD) { $('scrub').value = t.toFixed(2); $('time').textContent = `${fmt(t)} / ${fmt(DURATION)}`; }
+      }
+      function seek(t) { offset = clamp(t, 0, DURATION); start = performance.now(); render(offset); }
+      function setPlaying(p) {
+        offset = now(); start = performance.now(); playing = p;
+        $('play').setAttribute('icon-name', p ? 'pause' : 'play');
+        $('play').setAttribute('aria-label', p ? 'Pause' : 'Play');
+      }
+      function tick() {
+        if (playing) { const t = now(); if (t >= DURATION) { setPlaying(false); seek(DURATION); } else render(t); }
+        requestAnimationFrame(tick);
+      }
+      function fit() {
+        const bar = RECORD ? 0 : $('controls').offsetHeight;
+        document.documentElement.style.setProperty('--s', RECORD ? 1 : Math.min(innerWidth / 1280, (innerHeight - bar) / 720));
+      }
+
+      /* ---------- boot ---------- */
+      const tags = [...new Set([...document.querySelectorAll('*')].map(e => e.localName).filter(n => n.startsWith('nve-')))];
+      await Promise.race([Promise.all(tags.map(t => customElements.whenDefined(t))), new Promise(r => setTimeout(r, 8000))]);
+      const undefinedTags = tags.filter(t => !customElements.get(t));
+      if (undefinedTags.length) console.error(`Undefined elements: ${undefinedTags.join(', ')}. Add their imports to the storyboard.`);
+      await document.fonts.ready;
+      if (RECORD) $('controls').remove();
+      addEventListener('resize', fit);
+      fit();
+      apply(0);
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      collect();
+
+      if (RECORD) {
+        window.__video = {
+          duration: DURATION,
+          poster,
+          undefinedTags,
+          seek: async t => {
+            apply(t);
+            await new Promise(r => requestAnimationFrame(r));
+            await Promise.all([...document.querySelectorAll(tags.join(',') || 'nve-none')].map(e => e.updateComplete));
+            seekAnimations(t);
+            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+          },
+          // elements whose content spills past their box; checked on every still
+          overflow: () => {
+            const visible = [...document.querySelectorAll('.scene')].filter(s => getComputedStyle(s).opacity > 0.5);
+            const issues = [];
+            for (const scene of visible) {
+              for (const el of scene.querySelectorAll('.hero, .mega, .big, .lede, .term, .editor, .demo, .chip, .cell, nve-codeblock')) {
+                const box = el.getBoundingClientRect();
+                const label = `${el.className || el.localName}: ${el.textContent.trim().replace(/\s+/g, ' ').slice(0, 50)}`;
+                if (box.right > 1280 + 1 || box.bottom > 720 + 1) issues.push(`${label} leaves the frame`);
+                else if (el.scrollWidth > el.clientWidth + 2) issues.push(`${label} clips ${el.scrollWidth - el.clientWidth}px of content`);
+                const cell = el.parentElement?.closest('.cell');
+                if (cell && !el.classList.contains('cell')) {
+                  const c = cell.getBoundingClientRect();
+                  if (box.right > c.right + 2) issues.push(`${label} is wider than its column`);
+                }
+              }
+              for (const block of scene.querySelectorAll('nve-codeblock')) {
+                const pre = block.shadowRoot?.querySelector('pre');
+                if (pre && pre.scrollWidth > pre.clientWidth + 2) issues.push(`codeblock scrolls horizontally: ${block.textContent.trim().slice(0, 40)}`);
+              }
+            }
+            return [...new Set(issues)];
+          }
+        };
+        seek(0);
+      } else {
+        $('play').addEventListener('click', () => { if (!playing && now() >= DURATION) seek(0); setPlaying(!playing); });
+        $('restart').addEventListener('click', () => { seek(0); setPlaying(true); });
+        $('scrub').addEventListener('input', e => seek(+e.target.value));
+        addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); $('play').click(); } });
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setPlaying(false); seek(poster); } else seek(0);
+        requestAnimationFrame(tick);
+      }
+      $('stage').setAttribute('ready', '');
+    </script>
+  </body>
+</html>

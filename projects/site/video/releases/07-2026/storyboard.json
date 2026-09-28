@@ -1,0 +1,217 @@
+{
+  "month": "07-2026",
+  "title": "What’s new in NVIDIA Elements: July 2026",
+  "versions": {
+    "core": "2.11.0",
+    "code": "2.1.0",
+    "styles": "2.1.3",
+    "themes": "2.0.1"
+  },
+  "imports": [],
+  "scenes": [
+    {
+      "type": "title",
+      "month": "July 2026",
+      "line": "Gauge, smarter linting, and fitted metric text."
+    },
+    {
+      "type": "feature",
+      "layout": "demo",
+      "tag": "New: nve-gauge",
+      "headline": "Telemetry at a glance",
+      "lede": "Fill, dot, or needle indicators in a 270-degree or half-circle shape.",
+      "duration": 5,
+      "html": "<div nve-layout=\"row gap:lg align:vertical-center\"><div class=\"pop\" style=\"--at: +0.6s\"><nve-gauge id=\"jul-gpu\" status=\"success\" value=\"24\" aria-label=\"GPU usage\" aria-valuetext=\"24%\"><span id=\"jul-gpu-text\" nve-text=\"grow\">24%</span><span nve-text=\"body sm muted\">GPU</span></nve-gauge></div><div class=\"pop\" style=\"--at: +0.75s\"><nve-gauge id=\"jul-mem\" thumb=\"needle\" value=\"31\" aria-label=\"Memory usage\" aria-valuetext=\"31%\"><span id=\"jul-mem-text\" nve-text=\"body sm\">31%</span><span nve-text=\"body sm muted\">Memory</span></nve-gauge></div><div class=\"pop\" style=\"--at: +0.9s\"><nve-gauge id=\"jul-net\" thumb=\"dot\" status=\"accent\" value=\"40\" aria-label=\"Throughput\" aria-valuetext=\"400Mbps\"><span id=\"jul-net-text\" nve-text=\"body sm\">400Mbps</span><span nve-text=\"body sm muted\">Network</span></nve-gauge></div></div>",
+      "zoom": 1.4,
+      "cues": [
+        {
+          "at": 1.9,
+          "target": "#jul-gpu",
+          "attr": "value",
+          "value": "68"
+        },
+        {
+          "at": 1.9,
+          "target": "#jul-gpu",
+          "attr": "status",
+          "value": "warning"
+        },
+        {
+          "at": 1.9,
+          "target": "#jul-gpu",
+          "attr": "aria-valuetext",
+          "value": "68%"
+        },
+        {
+          "at": 1.9,
+          "target": "#jul-gpu-text",
+          "value": "68%"
+        },
+        {
+          "at": 2.2,
+          "target": "#jul-mem",
+          "attr": "value",
+          "value": "66"
+        },
+        {
+          "at": 2.2,
+          "target": "#jul-mem",
+          "attr": "aria-valuetext",
+          "value": "66%"
+        },
+        {
+          "at": 2.2,
+          "target": "#jul-mem-text",
+          "value": "66%"
+        },
+        {
+          "at": 2.5,
+          "target": "#jul-net",
+          "attr": "value",
+          "value": "92"
+        },
+        {
+          "at": 2.5,
+          "target": "#jul-net",
+          "attr": "aria-valuetext",
+          "value": "920Mbps"
+        },
+        {
+          "at": 2.5,
+          "target": "#jul-net-text",
+          "value": "920Mbps"
+        },
+        {
+          "at": 3.3,
+          "target": "#jul-gpu",
+          "attr": "value",
+          "value": "91"
+        },
+        {
+          "at": 3.3,
+          "target": "#jul-gpu",
+          "attr": "status",
+          "value": "danger"
+        },
+        {
+          "at": 3.3,
+          "target": "#jul-gpu",
+          "attr": "aria-valuetext",
+          "value": "91%"
+        },
+        {
+          "at": 3.3,
+          "target": "#jul-gpu-text",
+          "value": "91%"
+        }
+      ]
+    },
+    {
+      "type": "fix",
+      "headline": "Design feedback before review",
+      "lede": "New rules flag crowded toolbar labels and too many primary actions.",
+      "file": "toolbar.html",
+      "duration": 5.5,
+      "lines": [
+        "<nve-toolbar>",
+        "  <nve-search>",
+        [
+          "    ",
+          {
+            "bad": "<label>Search</label><input type=\"search\"",
+            "good": "<input type=\"search\" aria-label=\"Search\""
+          },
+          " />"
+        ],
+        "  </nve-search>",
+        "  <nve-button interaction=\"emphasis\">Run</nve-button>",
+        [
+          "  <nve-button",
+          {
+            "bad": " interaction=\"emphasis\"",
+            "good": ""
+          },
+          ">Stop</nve-button>"
+        ],
+        [
+          "  <nve-button",
+          {
+            "bad": " interaction=\"emphasis\"",
+            "good": ""
+          },
+          ">Undo</nve-button>"
+        ],
+        "</nve-toolbar>"
+      ],
+      "problems": [
+        {
+          "level": "error",
+          "loc": "3:5",
+          "rule": "prefer-aria-label-in-compact-containers",
+          "message": "Use aria-label instead of <label> in toolbars."
+        },
+        {
+          "level": "error",
+          "loc": "7:15",
+          "rule": "no-excessive-primary-actions",
+          "message": "Limit primary actions to 2 per page."
+        }
+      ],
+      "pass": "Validation passed. 1 file, 0 errors, 0 warnings.",
+      "html": "<div style=\"width: 100%\"><nve-toolbar><nve-search><input type=\"search\" aria-label=\"Search\" /></nve-search><nve-button interaction=\"emphasis\">Run</nve-button><nve-button>Stop</nve-button><nve-button>Undo</nve-button></nve-toolbar></div>"
+    },
+    {
+      "type": "feature",
+      "layout": "demo",
+      "tag": "nve-text=\"grow\"",
+      "headline": "Metric text that fits",
+      "duration": 4.5,
+      "html": "<div nve-layout=\"row gap:xl align:bottom\"><div class=\"rise\" nve-layout=\"column gap:xs\" style=\"--at: +0.6s; width: 360px\"><span nve-text=\"label muted\">Refresh</span><span class=\"jul-hz\" nve-text=\"grow\">30Hz</span></div><div class=\"rise\" nve-layout=\"column gap:xs\" style=\"--at: +0.75s; width: 220px\"><span nve-text=\"label muted\">Refresh</span><span class=\"jul-hz\" nve-text=\"grow\">30Hz</span></div><div class=\"rise\" nve-layout=\"column gap:xs\" style=\"--at: +0.9s; width: 120px\"><span nve-text=\"label muted\">Refresh</span><span class=\"jul-hz\" nve-text=\"grow\">30Hz</span></div></div>",
+      "cues": [
+        {
+          "at": 2.4,
+          "target": ".jul-hz",
+          "value": "120Hz"
+        }
+      ],
+      "lede": "A new typography utility scales metric text to fill its container."
+    },
+    {
+      "type": "list",
+      "headline": "Also in July",
+      "items": [
+        {
+          "icon": "link",
+          "text": "Custom data links to docs"
+        },
+        {
+          "icon": "terminal",
+          "text": "Sturdier CLI installer"
+        },
+        {
+          "icon": "globe",
+          "text": "Logical direction layouts"
+        },
+        {
+          "icon": "pointer",
+          "text": "Clean tooltip handoffs"
+        }
+      ]
+    },
+    {
+      "type": "end",
+      "line": "Read the July 2026 update",
+      "url": "nvidia.github.io/elements/docs/whats-new/07-2026/",
+      "packages": [
+        "cli 2.1.9",
+        "code 2.0.2",
+        "core 2.2.2",
+        "forms 2.0.5",
+        "lint 2.3.0",
+        "markdown 2.0.3",
+        "monaco 2.0.2",
+        "styles 2.1.2"
+      ]
+    }
+  ]
+}

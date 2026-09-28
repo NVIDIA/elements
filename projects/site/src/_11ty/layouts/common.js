@@ -43,6 +43,7 @@ export const renderBaseHead = data => {
   <meta property="og:description" content="${escapeAttr(meta.description)}">
   <meta property="og:image" content="${meta.ogImage}">
   <meta property="og:image:alt" content="${escapeAttr(meta.ogImageAlt)}">
+  ${meta.video ? '<meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:type" content="image/jpeg">' : ''}
   <meta property="og:site_name" content="NVIDIA Elements">
   <meta property="og:type" content="${ogType}">
   <meta name="twitter:card" content="summary_large_image">

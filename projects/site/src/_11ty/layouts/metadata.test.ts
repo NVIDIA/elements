@@ -130,11 +130,17 @@ interface PageData {
   collections: {
     all: { url: string }[];
   };
+  title?: string;
+  description?: string;
   content?: string;
   dateModified?: Date | string;
   datePublished?: Date | string;
   tag?: string;
   tags?: string[];
+  updateMonth?: string;
+  videoPublishedAt?: string;
+  videoDuration?: string;
+  videoSummary?: string;
 }
 
 function createMeta(url: string, overrides: Partial<MetadataInput> = {}): MetadataInput {
@@ -389,6 +395,43 @@ describe('resolvePageMeta', () => {
 });
 
 describe('renderBaseHead', () => {
+  it('should use the monthly poster and video schema on release pages', () => {
+    const data = createData({
+      page: { url: '/docs/whats-new/08-2026/' },
+      title: 'What’s new in NVIDIA Elements: August 2026',
+      description: 'August release highlights.',
+      tags: ['whats-new', 'updates'],
+      updateMonth: '2026-08-01',
+      videoPublishedAt: '2026-09-28',
+      videoDuration: 'PT28S',
+      videoSummary:
+        'See the standard icon set, operational data formatting, media controls, and stronger template validation.'
+    });
+    const html = renderBaseHead(data);
+    const graph = getGraphJsonLd(html);
+    const article = findNode(graph, 'BlogPosting');
+    const video = findNode(graph, 'VideoObject');
+
+    expect(html).toContain(
+      '<meta property="og:image" content="https://nvidia.github.io/elements/static/video/releases/08-2026.jpg">'
+    );
+    expect(html).toContain(
+      '<meta name="twitter:image" content="https://nvidia.github.io/elements/static/video/releases/08-2026.jpg">'
+    );
+    expect(html).toContain('<meta property="og:image:width" content="1920">');
+    expect(video).toMatchObject({
+      '@id': 'https://nvidia.github.io/elements/docs/whats-new/08-2026/#video',
+      name: 'August 2026 NVIDIA Elements release highlights',
+      description:
+        'See the standard icon set, operational data formatting, media controls, and stronger template validation.',
+      thumbnailUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.jpg',
+      uploadDate: '2026-09-28T00:00:00.000Z',
+      duration: 'PT28S',
+      contentUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webm'
+    });
+    expect(article.video).toEqual({ '@id': video['@id'] });
+  });
+
   it('should emit Open Graph and Twitter card metadata', () => {
     const data = {
       page: { url: '/' },

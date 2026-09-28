@@ -20,6 +20,7 @@ projects/code/index.html
 projects/core/src/css/*.css
 projects/core/src/icon/server.ts
 projects/internals/metadata/static/*.json
+projects/site/video/releases/**/video.html
 projects/monaco/src/themes/generated/*
 projects/**/src/vendor/**/*
 .vscode/*.json.code-snippets

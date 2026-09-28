@@ -1,0 +1,159 @@
+{
+  "month": "08-2026",
+  "title": "What’s new in NVIDIA Elements: August 2026",
+  "versions": {
+    "core": "2.6.0",
+    "code": "2.0.4",
+    "styles": "2.1.3",
+    "themes": "2.0.1"
+  },
+  "imports": [
+    "https://cdn.jsdelivr.net/npm/@nvidia-elements/media@1.0.0/controller/define.js/+esm",
+    "https://cdn.jsdelivr.net/npm/@nvidia-elements/media@1.0.0/pause-button/define.js/+esm",
+    "https://cdn.jsdelivr.net/npm/@nvidia-elements/media@1.0.0/time-range/define.js/+esm",
+    "https://cdn.jsdelivr.net/npm/@nvidia-elements/media@1.0.0/volume-range/define.js/+esm"
+  ],
+  "scenes": [
+    {
+      "type": "title",
+      "month": "August 2026",
+      "line": "New icons, data formatting, media controls, and stricter validation."
+    },
+    {
+      "type": "feature",
+      "layout": "demo",
+      "tag": "@nvidia-elements/core",
+      "headline": "A new standard icon set",
+      "lede": "Lucide artwork by default. Every nve-icon name stays the same.",
+      "duration": 4,
+      "html": "<div nve-layout=\"grid gap:lg span-items:2\"><div class=\"pop\" style=\"--at: +0.70s\"><nve-icon name=\"terminal\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.76s\"><nve-icon name=\"server-stack\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.82s\"><nve-icon name=\"chip\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.88s\"><nve-icon name=\"sparkles\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.94s\"><nve-icon name=\"rocketship\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.00s\"><nve-icon name=\"sensor\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.06s\"><nve-icon name=\"cloud\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.12s\"><nve-icon name=\"lightning-bolt\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.18s\"><nve-icon name=\"chart-bar\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.24s\"><nve-icon name=\"globe\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.30s\"><nve-icon name=\"lock\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.36s\"><nve-icon name=\"layers\" size=\"xl\"></nve-icon></div></div>",
+      "zoom": 1.8
+    },
+    {
+      "type": "feature",
+      "layout": "split",
+      "tag": "Format Bytes and Format Truncate",
+      "headline": "Operational data, readable",
+      "duration": 4.5,
+      "code": {
+        "language": "html",
+        "source": "<nve-format-bytes\n  display=\"binary\"\n  unit-display=\"long\">1048576</nve-format-bytes>\n\n<nve-format-truncate\n  position=\"center\"\n  strategy=\"path\"\n  preserve=\"2\">\n  /models/checkpoints/production/model.bin\n</nve-format-truncate>"
+      },
+      "html": "<div nve-layout=\"column gap:lg align:horizontal-stretch\"><div nve-layout=\"column gap:sm align:horizontal-stretch\"><span nve-text=\"label muted\">Checkpoint size</span><span class=\"big\"><nve-format-bytes id=\"aug-bytes\" display=\"binary\" unit-display=\"long\">1048576</nve-format-bytes></span></div><div nve-layout=\"column gap:sm align:horizontal-stretch\"><span nve-text=\"label muted\">Artifact</span><div class=\"big\"><nve-format-truncate position=\"center\" strategy=\"path\" preserve=\"2\">/models/checkpoints/production/model.bin</nve-format-truncate></div></div></div>",
+      "cues": [
+        {
+          "at": 1.8,
+          "target": "#aug-bytes",
+          "attr": "value",
+          "value": "5368709120"
+        },
+        {
+          "at": 2.8,
+          "target": "#aug-bytes",
+          "attr": "value",
+          "value": "1099511627776"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "layout": "demo",
+      "tag": "New: @nvidia-elements/media 1.0.0",
+      "headline": "Complete media controls",
+      "lede": "Compose Elements controls around your own video or audio element.",
+      "duration": 4.5,
+      "html": "<div nve-layout=\"column gap:sm\"><nve-media-controller id=\"aug-media\"><video id=\"aug-video\" src=\"/static/video/particle.mp4\" playsinline muted width=\"600\"></video></nve-media-controller><nve-media-time-range commandfor=\"aug-media\" name=\"currentTime\"></nve-media-time-range><div nve-layout=\"row gap:xs align:vertical-center\"><nve-media-pause-button commandfor=\"aug-media\" name=\"paused\" checked value=\"true\"></nve-media-pause-button><nve-media-volume-range commandfor=\"aug-media\" name=\"volume\"></nve-media-volume-range></div></div>",
+      "cues": []
+    },
+    {
+      "type": "fix",
+      "headline": "Validation before release",
+      "lede": "New rules flag misplaced full-width containers and too many primary actions.",
+      "file": "toolbar.html",
+      "duration": 5,
+      "lines": [
+        "<nve-card>",
+        [
+          "  <nve-toolbar",
+          {
+            "bad": " container=\"full\"",
+            "good": ""
+          },
+          ">"
+        ],
+        "    <nve-button interaction=\"emphasis\">Deploy</nve-button>",
+        "    <nve-button interaction=\"emphasis\">Rollback</nve-button>",
+        [
+          "    <nve-button",
+          {
+            "bad": " interaction=\"emphasis\"",
+            "good": ""
+          },
+          ">Scale</nve-button>"
+        ],
+        "  </nve-toolbar>",
+        "</nve-card>"
+      ],
+      "problems": [
+        {
+          "level": "error",
+          "loc": "2:16",
+          "rule": "no-restricted-container-full",
+          "message": "Requires the template root or a direct child of nve-page."
+        },
+        {
+          "level": "error",
+          "loc": "5:17",
+          "rule": "no-excessive-primary-actions",
+          "message": "Limit primary actions to 2 per page."
+        }
+      ],
+      "pass": "Validation passed. 1 file, 0 errors, 0 warnings."
+    },
+    {
+      "type": "list",
+      "headline": "Also in August",
+      "items": [
+        {
+          "stat": {
+            "prefix": "−",
+            "value": 22,
+            "suffix": "%"
+          },
+          "text": "Core JavaScript"
+        },
+        {
+          "stat": {
+            "prefix": "−",
+            "value": 50,
+            "suffix": "%"
+          },
+          "text": "Code JavaScript"
+        },
+        {
+          "icon": "typography",
+          "text": "Native text-box typography"
+        },
+        {
+          "icon": "view-as-grid",
+          "text": "Native field sizing"
+        }
+      ]
+    },
+    {
+      "type": "end",
+      "line": "Read the August 2026 update",
+      "url": "nvidia.github.io/elements/docs/whats-new/08-2026/",
+      "packages": [
+        "cli 2.2.1",
+        "code 2.0.4",
+        "core 2.6.0",
+        "forms 2.0.6",
+        "lint 2.4.0",
+        "media 1.0.0",
+        "styles 2.1.3",
+        "themes 2.0.1"
+      ]
+    }
+  ]
+}
