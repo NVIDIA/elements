@@ -1,5 +1,6 @@
 import { siteData } from '../../index.11tydata.js';
 import { getContentDates } from '../utils/content-dates.js';
+import { getReleaseVideo } from '../utils/release-video.js';
 import { BASE_URL, DEPLOYED_SITE_URL, getSiteUrl } from '../utils/site-url.js';
 
 export { BASE_URL };
@@ -399,9 +400,10 @@ export function resolvePageMeta(data) {
   if (!data.description) description = expandShortDescription(data, description);
 
   const canonicalUrl = getSiteUrl(url);
-  const ogImage = SOCIAL_IMAGE_URL;
-  const ogImageAlt = SOCIAL_IMAGE_ALT;
-  return { title, description, canonicalUrl, ogImage, ogImageAlt, url };
+  const video = getReleaseVideo(data);
+  const ogImage = video?.posterUrl ?? SOCIAL_IMAGE_URL;
+  const ogImageAlt = video?.posterAlt ?? SOCIAL_IMAGE_ALT;
+  return { title, description, canonicalUrl, ogImage, ogImageAlt, url, video };
 }
 
 function jsonLdEncode(value) {
@@ -627,10 +629,23 @@ function getSoftwareSourceCode(data, meta) {
 
 export function renderJsonLd(data, meta) {
   const article = getArticle(data, meta);
+  const video = meta.video
+    ? {
+        '@id': `${meta.canonicalUrl}#video`,
+        '@type': 'VideoObject',
+        name: meta.video.title,
+        description: meta.video.description,
+        thumbnailUrl: meta.video.posterUrl,
+        uploadDate: meta.video.uploadDate,
+        duration: meta.video.duration,
+        contentUrl: meta.video.videoUrl
+      }
+    : null;
   const breadcrumb = getBreadcrumb(data, meta);
   const sourceCode = getSoftwareSourceCode(data, meta);
   const graph = [
     article,
+    ...(video ? [video] : []),
     ...(breadcrumb ? [breadcrumb] : []),
     ...(meta.url === '/' ? [getWebSite(meta.description), getSoftwareApplication()] : []),
     ...(sourceCode ? [sourceCode] : [])
@@ -639,6 +654,8 @@ export function renderJsonLd(data, meta) {
   if (sourceCode) {
     article.hasPart = { '@id': sourceCode['@id'] };
   }
+
+  if (video) article.video = { '@id': video['@id'] };
 
   return `<script type="application/ld+json">${jsonLdEncode({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
 }

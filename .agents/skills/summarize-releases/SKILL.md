@@ -1,6 +1,6 @@
 ---
 name: summarize-releases
-description: Create a monthly NVIDIA Elements “What’s New” docs page and a concise, copy-ready summary from local release tags, tagged changelogs, package versions, and commit history. Use for a scheduled release PR, monthly update, release roundup, changelog digest, Slack blurb, announcement, or plain-language explanation of recent Elements releases.
+description: Create a monthly NVIDIA Elements “What’s New” docs page, matching video, and concise, copy-ready summary from local release tags, tagged changelogs, package versions, and commit history. Use for a scheduled release PR, monthly update, release roundup, changelog digest, Slack blurb, announcement, or plain-language explanation of recent Elements releases.
 ---
 
 # Summarize Releases
@@ -124,7 +124,7 @@ If the packet contains no release tags, do not create a page or propose an empty
 
 ## Prepare the copy-ready blurb
 
-After writing the page, return one self-contained block that users can paste into Slack or another channel. Base it on the page, and link its title to `page.url` when you know the deployed site URL. Do not put it in a code fence.
+After writing the page, prepare one self-contained block that users can paste into Slack or another channel. Base it on the page, and link its title to `page.url` when you know the deployed site URL. Do not put it in a code fence.
 
 Use this shape:
 
@@ -153,7 +153,13 @@ mise exec -- pnpm --dir projects/site run build
 git diff --check
 ```
 
-Inspect the built page and the What’s New index when practical. Keep the diff limited to the new monthly page unless another file must change for the page to build correctly.
+Inspect the built page and the What’s New index when practical.
+
+## Create the matching video
+
+Once the monthly Markdown page is complete and passes its initial checks, load and follow [summarize-video-releases](../summarize-video-releases/SKILL.md) for that same `updateMonth`. Pass the month explicitly as `MM-YYYY` so the video skill reads the page you just wrote. Finish its storyboard, review, render, poster, and required `videoPublishedAt`, `videoDuration`, and `videoSummary` frontmatter before reporting the release work as complete. Do not hand off the video as a separate task or stop after writing the page.
+
+The video skill stops when a video already exists unless the user asked to revise it. After adding a new video, rerun the page checks above and inspect the built page for the player, poster, and video metadata. The expected diff includes the monthly page, its WebM, and its poster.
 
 When the task explicitly requests a pull request, follow the host’s authorized Git publishing workflow only after validation. Otherwise, leave the validated file ready for review and report its path.
 

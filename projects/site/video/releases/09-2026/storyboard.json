@@ -1,0 +1,187 @@
+{
+  "month": "09-2026",
+  "title": "What’s new in NVIDIA Elements: September 2026",
+  "versions": {
+    "core": "2.11.0",
+    "code": "2.1.0",
+    "styles": "2.1.3",
+    "themes": "2.0.1"
+  },
+  "imports": [],
+  "scenes": [
+    {
+      "type": "title",
+      "month": "September 2026",
+      "line": "Viewport, a native Pi extension, menu groups, and smarter linting."
+    },
+    {
+      "type": "feature",
+      "layout": "demo",
+      "tag": "New: nve-viewport",
+      "headline": "Pan and zoom anything",
+      "lede": "One surface for diagrams, graphs, and maps, with grid lines and a minimap.",
+      "duration": 5,
+      "html": "<div class=\"pop\" style=\"--at: +0.6s\"><nve-viewport id=\"sep-viewport\" x=\"-50\" y=\"-33\" scale=\"0.6\" behavior-pan behavior-zoom style=\"width: 600px; height: 400px\"><nve-viewport-gridlines></nve-viewport-gridlines><svg role=\"img\" aria-label=\"Three geometric forms in a spatial field\" width=\"900\" height=\"600\" viewBox=\"0 0 900 600\" style=\"position: absolute; left: 0; top: 0\"><circle cx=\"200\" cy=\"400\" r=\"100\" fill=\"var(--nve-ref-color-green-jade-600)\"></circle><rect x=\"350\" y=\"100\" width=\"200\" height=\"200\" rx=\"50\" fill=\"var(--nve-ref-color-blue-cobalt-600)\"></rect><path d=\"M 700 290 L 810 400 L 700 510 L 590 400 Z\" fill=\"var(--nve-ref-color-purple-lavender-600)\"></path></svg><nve-viewport-minimap></nve-viewport-minimap><div id=\"sep-hand\" slot=\"overlay\" style=\"--hand-x: 300px; --hand-y: 290px; --hand-o: 0; position: absolute; left: 0; top: 0; translate: var(--hand-x) var(--hand-y); opacity: var(--hand-o)\"><nve-icon name=\"hand\" size=\"xl\"></nve-icon></div></nve-viewport></div>",
+      "cues": [
+        {
+          "at": 1.1,
+          "target": "#sep-hand",
+          "style": "--hand-o",
+          "value": 1,
+          "duration": 0.25
+        },
+        {
+          "at": 1.4,
+          "target": "#sep-hand",
+          "style": "--hand-x",
+          "value": 150,
+          "duration": 1.1,
+          "unit": "px"
+        },
+        {
+          "at": 1.4,
+          "target": "#sep-hand",
+          "style": "--hand-y",
+          "value": 230,
+          "duration": 1.1,
+          "unit": "px"
+        },
+        {
+          "at": 1.4,
+          "target": "#sep-viewport",
+          "prop": "x",
+          "value": 200,
+          "duration": 1.1
+        },
+        {
+          "at": 1.4,
+          "target": "#sep-viewport",
+          "prop": "y",
+          "value": 67,
+          "duration": 1.1
+        },
+        {
+          "at": 2.6,
+          "target": "#sep-hand",
+          "style": "--hand-o",
+          "value": 0,
+          "duration": 0.2
+        },
+        {
+          "at": 2.9,
+          "target": "#sep-viewport",
+          "prop": "scale",
+          "value": 1,
+          "duration": 1
+        },
+        {
+          "at": 2.9,
+          "target": "#sep-viewport",
+          "prop": "x",
+          "value": 400,
+          "duration": 1
+        },
+        {
+          "at": 2.9,
+          "target": "#sep-viewport",
+          "prop": "y",
+          "value": 200,
+          "duration": 1
+        }
+      ]
+    },
+    {
+      "type": "terminal",
+      "headline": "Elements tools, native in Pi",
+      "lede": "Elements APIs, examples, tokens, and validation for Pi agents.",
+      "title": "pi",
+      "duration": 4.5,
+      "commands": [
+        {
+          "cmd": "pi install -l npm:@nvidia-elements/pi",
+          "out": [
+            "Installing npm:@nvidia-elements/pi...",
+            "added 246 packages, and audited 247 packages in 8s",
+            {
+              "text": "Installed npm:@nvidia-elements/pi",
+              "tone": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "fix",
+      "headline": "Catch misplaced markup",
+      "lede": "New rules flag invalid slotted children and misplaced page headers.",
+      "file": "clusters.html",
+      "duration": 5.5,
+      "lines": [
+        "<nve-page>",
+        [
+          "  <",
+          {
+            "bad": "nve-page-header",
+            "good": "nve-page-header slot=\"header\""
+          },
+          ">"
+        ],
+        "    <h2 slot=\"prefix\" nve-text=\"heading\">Clusters</h2>",
+        "  </nve-page-header>",
+        "  <nve-menu>",
+        [
+          "    ",
+          {
+            "bad": "<div>Settings</div>",
+            "good": "<nve-menu-item>Settings</nve-menu-item>"
+          }
+        ],
+        "  </nve-menu>",
+        "</nve-page>"
+      ],
+      "problems": [
+        {
+          "level": "error",
+          "loc": "2:3",
+          "rule": "no-invalid-page-header-slot",
+          "message": "<nve-page-header> must use slot=\"header\" in <nve-page>."
+        },
+        {
+          "level": "error",
+          "loc": "6:5",
+          "rule": "no-invalid-slotted-elements",
+          "message": "Invalid direct child <div> in <nve-menu>."
+        }
+      ],
+      "pass": "Validation passed. 1 file, 0 errors, 0 warnings."
+    },
+    {
+      "type": "list",
+      "headline": "Also in September",
+      "items": [
+        {
+          "icon": "menu",
+          "text": "Collapsible menu groups"
+        },
+        {
+          "icon": "bell",
+          "text": "Solid icon artwork"
+        },
+        {
+          "icon": "tag",
+          "text": "Tag prefix and suffix slots"
+        },
+        {
+          "icon": "markdown",
+          "text": "Markdown linting"
+        }
+      ]
+    },
+    {
+      "type": "end",
+      "line": "Read the September 2026 update",
+      "url": "nvidia.github.io/elements/docs/whats-new/09-2026/",
+      "packages": ["cli 2.2.8", "code 2.1.0", "core 2.11.0", "lint 2.7.1", "media 1.0.1", "pi 1.0.0"]
+    }
+  ]
+}

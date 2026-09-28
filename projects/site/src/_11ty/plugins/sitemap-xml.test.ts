@@ -50,4 +50,33 @@ describe('isSitemapPageUrl', () => {
 
     expect(locations).toEqual(lintRules.map(rule => `https://nvidia.github.io/elements${rule.path}`));
   });
+
+  it('should include release video metadata and escape editorial text', () => {
+    const sitemap = renderSitemap([
+      {
+        url: '/docs/whats-new/08-2026/',
+        content: `<script type="application/ld+json">${JSON.stringify({
+          '@graph': [
+            {
+              '@type': 'VideoObject',
+              thumbnailUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.jpg',
+              name: 'August 2026 NVIDIA Elements release highlights',
+              description: 'Icons & media <release highlights>',
+              contentUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webm'
+            }
+          ]
+        })}</script>`
+      }
+    ]);
+
+    expect(sitemap).toContain('xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
+    expect(sitemap).toContain(
+      '<video:thumbnail_loc>https://nvidia.github.io/elements/static/video/releases/08-2026.jpg</video:thumbnail_loc>'
+    );
+    expect(sitemap).toContain('<video:description>Icons &amp; media &lt;release highlights&gt;</video:description>');
+    expect(sitemap).toContain(
+      '<video:content_loc>https://nvidia.github.io/elements/static/video/releases/08-2026.webm</video:content_loc>'
+    );
+    expect(sitemap.match(/<video:video>/g)).toHaveLength(1);
+  });
 });
