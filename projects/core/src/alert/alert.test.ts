@@ -68,7 +68,7 @@ describe(Alert.metadata.tag, () => {
   });
 
   it('should use hardcoded icon aria-label fallback when i18n is missing', async () => {
-    alert.i18n = {} as Alert['i18n'];
+    alert.i18n = {};
     await elementIsStable(alert);
 
     expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).ariaLabel).toBe('information');
