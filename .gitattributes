@@ -2,5 +2,9 @@
 projects/internals/metadata/static/*.json filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.webp filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+projects/site/public/static/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+projects/site/public/static/**/*.webm filter=lfs diff=lfs merge=lfs -text
+projects/site/public/static/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.png filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.png !text !filter !merge !diff
+projects/site/public/static/video/releases/*.png filter=lfs diff=lfs merge=lfs -text
