@@ -8,14 +8,12 @@ import {
   type SpatialKeyCommand
 } from '@nvidia-elements/core/internal';
 import type {
-  ViewportAnimationOptions,
-  ViewportDiscretePanDetail,
-  ViewportPanBehavior,
-  ViewportPoint,
-  ViewportTransform,
-  ViewportZoomDetail
+  ViewportPanProposal,
+  ViewportZoomProposal,
+  ViewportZoomRequestOptions,
+  ViewportTransform
 } from './viewport.types.js';
-import type { ViewportNavigationEventDelegate, ViewportZoomAction } from './viewport-navigation.types.js';
+import type { ViewportZoomAction } from './viewport-navigation.types.js';
 import { contentPointFromViewport } from './viewport-projection.utils.js';
 
 const KEYBOARD_PAN_STEP = 20;
@@ -34,23 +32,17 @@ interface DiscretePanRequest {
 
 type ViewportNavigationHost = HTMLElement &
   ReactiveControllerHost & {
-    readonly behaviorPan: ViewportPanBehavior;
-    readonly behaviorZoom: boolean;
+    readonly pannable: boolean;
+    readonly zoomable: boolean;
+    requestPan(proposal: ViewportPanProposal): boolean;
+    requestZoom(proposal: ViewportZoomProposal, options?: ViewportZoomRequestOptions): boolean;
   };
 
-export interface ViewportNavigationDelegate {
-  readonly animateTo: (target: Partial<ViewportTransform>, options?: ViewportAnimationOptions) => void;
-  readonly commitTransform: (next: ViewportTransform) => boolean;
-  readonly cancelAnimation: () => void;
-  readonly consumeAutoFit: () => void;
-  readonly events: ViewportNavigationEventDelegate;
+interface ViewportNavigationDelegate {
   readonly getTransform: () => ViewportTransform;
   readonly getZoomTarget: (action: ViewportZoomAction) => ViewportTransform | undefined;
-  readonly rebasePointerSessions: () => void;
-  readonly viewportToClient: (viewportX: number, viewportY: number) => ViewportPoint;
 }
 
-/** Coordinates the viewport's opt-in keyboard and Invoker navigation behavior. */
 export class ViewportNavigationController implements ReactiveController {
   readonly #host: ViewportNavigationHost;
   readonly #delegate: ViewportNavigationDelegate;
@@ -60,14 +52,14 @@ export class ViewportNavigationController implements ReactiveController {
     this.#host = host;
     this.#delegate = delegate;
     host.addController(this);
-    new KeyNavigationSpatialController(host, { isEnabled: () => Boolean(host.behaviorPan) || host.behaviorZoom });
+    new KeyNavigationSpatialController(host, { isEnabled: () => host.pannable || host.zoomable });
   }
 
   hostConnected(): void {
     this.#host.addEventListener('nve-key', this.#handleSpatialKey as EventListener);
     this.#host.addEventListener('command', this.#handleCommand as EventListener);
     this.#host.addEventListener('keydown', this.#handleViewportKeyDown as EventListener);
-    this.#syncFocusability(Boolean(this.#host.behaviorPan) || this.#host.behaviorZoom);
+    this.#syncFocusability(this.#host.pannable || this.#host.zoomable);
   }
 
   hostDisconnected(): void {
@@ -77,11 +69,11 @@ export class ViewportNavigationController implements ReactiveController {
   }
 
   hostUpdated(): void {
-    this.#syncFocusability(Boolean(this.#host.behaviorPan) || this.#host.behaviorZoom);
+    this.#syncFocusability(this.#host.pannable || this.#host.zoomable);
   }
 
   #handleCommand = (event: CommandEvent): void => {
-    const panDirection = this.#host.behaviorPan ? commandPanDirection(event.command) : undefined;
+    const panDirection = this.#host.pannable ? commandPanDirection(event.command) : undefined;
     if (panDirection) {
       this.#requestDiscretePan(event, {
         direction: panDirection,
@@ -90,7 +82,7 @@ export class ViewportNavigationController implements ReactiveController {
       });
       return;
     }
-    if (!this.#host.behaviorZoom) return;
+    if (!this.#host.zoomable) return;
     const action = commandZoomAction(event.command);
     if (!action) return;
     const next = this.#delegate.getZoomTarget(action);
@@ -116,8 +108,6 @@ export class ViewportNavigationController implements ReactiveController {
   };
 
   #requestDiscretePan(event: CommandEvent | KeyboardEvent, request: DiscretePanRequest): void {
-    this.#delegate.consumeAutoFit();
-    this.#delegate.cancelAnimation();
     const start = this.#delegate.getTransform();
     const contentStep = request.viewportPixelStep / start.scale;
     const next = {
@@ -125,10 +115,7 @@ export class ViewportNavigationController implements ReactiveController {
       x: start.x + request.direction.horizontal * contentStep,
       y: start.y + request.direction.vertical * contentStep
     };
-    const detail: ViewportDiscretePanDetail = { event, next, source: request.source, start };
-    if (this.#delegate.events.dispatchPan(detail) && this.#delegate.commitTransform(next)) {
-      this.#delegate.rebasePointerSessions();
-    }
+    this.#host.requestPan({ event, next, source: request.source });
   }
 
   #handleViewportKeyDown = (event: KeyboardEvent): void => {
@@ -142,32 +129,25 @@ export class ViewportNavigationController implements ReactiveController {
   };
 
   #requestZoom(event: CommandEvent | KeyboardEvent, next: ViewportTransform, source: 'command' | 'keyboard'): void {
-    this.#delegate.consumeAutoFit();
     const start = this.#delegate.getTransform();
     const viewport = { x: this.#host.clientWidth / 2, y: this.#host.clientHeight / 2 };
-    const client = this.#delegate.viewportToClient(viewport.x, viewport.y);
-    const detail: ViewportZoomDetail = {
+    const proposal: ViewportZoomProposal = {
       anchor: contentPointFromViewport(viewport.x, viewport.y, start),
-      clientX: client.x,
-      clientY: client.y,
       event,
       factor: next.scale / start.scale,
       next,
-      source,
-      start
+      source
     };
-    if (this.#delegate.events.dispatchZoom(detail)) this.#delegate.animateTo(next);
+    this.#host.requestZoom(proposal, { animated: true });
   }
 
   #acceptsKeyboardZoom(event: KeyboardEvent): boolean {
-    return (
-      this.#host.behaviorZoom && isImmediateRootActiveElement(this.#host) && event.composedPath()[0] === this.#host
-    );
+    return this.#host.zoomable && isImmediateRootActiveElement(this.#host) && event.composedPath()[0] === this.#host;
   }
 
   #acceptsKeyboardPan(event: KeyboardEvent): boolean {
     return (
-      Boolean(this.#host.behaviorPan) &&
+      this.#host.pannable &&
       isImmediateRootActiveElement(this.#host) &&
       event.composedPath()[0] === this.#host &&
       !event.ctrlKey &&

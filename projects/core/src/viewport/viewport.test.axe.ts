@@ -17,6 +17,7 @@ describe(Viewport.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-viewport behavior-pan behavior-zoom style="width: 400px; height: 300px">
         <nve-viewport-gridlines></nve-viewport-gridlines>
+        <nve-viewport-minimap></nve-viewport-minimap>
         <form>
           <label>Project name <input name="name" /></label>
           <button type="submit">Save</button>

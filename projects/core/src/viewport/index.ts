@@ -3,6 +3,7 @@
 
 export * from './viewport.js';
 export * from './viewport-gridlines.js';
+export * from './viewport-minimap.js';
 export type {
   ViewportAnimationOptions,
   ViewportDiscretePanDetail,
@@ -10,6 +11,13 @@ export type {
   ViewportPanDetail,
   ViewportPanEndDetail,
   ViewportPanEndReason,
+  ViewportNavigationSource,
+  ViewportPanProposal,
+  ViewportPanUpdateProposal,
+  ViewportPanEndRequest,
+  ViewportPanSession,
+  ViewportZoomProposal,
+  ViewportZoomRequestOptions,
   ViewportPoint,
   ViewportPointerPanDetail,
   ViewportRect,

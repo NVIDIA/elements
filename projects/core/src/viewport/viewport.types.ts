@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { PointerEndReason, PointerMovementGesture } from '@nvidia-elements/core/internal';
-
 export interface ViewportTransform {
   readonly x: number;
   readonly y: number;
@@ -21,52 +19,85 @@ export interface ViewportRect extends ViewportPoint {
 
 export type ViewportPanBehavior = boolean | 'space';
 
-export interface ViewportPointerPanDetail extends PointerMovementGesture {
-  readonly source: 'pointer';
-  readonly start: ViewportTransform;
+export type ViewportNavigationSource = 'pointer' | 'wheel' | 'pinch' | 'keyboard' | 'command' | 'minimap' | 'control';
+
+export interface ViewportPanProposal {
+  readonly source: ViewportNavigationSource;
+  readonly event: Event;
   readonly next: ViewportTransform;
+  readonly clientX?: number;
+  readonly clientY?: number;
+  readonly deltaX?: number;
+  readonly deltaY?: number;
 }
 
-export interface ViewportWheelPanDetail {
+export type ViewportPanUpdateProposal = Omit<ViewportPanProposal, 'source'>;
+
+export interface ViewportPanDetail extends ViewportPanProposal {
+  readonly start: ViewportTransform;
+}
+
+export interface ViewportPointerPanDetail extends ViewportPanDetail {
+  readonly source: 'pointer';
+  readonly event: PointerEvent;
+  readonly clientX: number;
+  readonly clientY: number;
+  readonly movementX: number;
+  readonly movementY: number;
+  readonly startClientX: number;
+  readonly startClientY: number;
+  readonly totalDisplacementX: number;
+  readonly totalDisplacementY: number;
+}
+export type ViewportWheelPanDetail = ViewportPanDetail & {
   readonly source: 'wheel';
   readonly event: WheelEvent;
   readonly clientX: number;
   readonly clientY: number;
   readonly deltaX: number;
   readonly deltaY: number;
-  readonly start: ViewportTransform;
-  readonly next: ViewportTransform;
-}
-
-export interface ViewportDiscretePanDetail {
+};
+export type ViewportDiscretePanDetail = ViewportPanDetail & {
   readonly source: 'keyboard' | 'command';
   readonly event: KeyboardEvent | CommandEvent;
-  readonly start: ViewportTransform;
-  readonly next: ViewportTransform;
-}
+};
 
-export type ViewportPanDetail = ViewportPointerPanDetail | ViewportWheelPanDetail | ViewportDiscretePanDetail;
+export type ViewportPanEndReason = 'up' | 'cancel' | 'lost-capture' | 'buttons-released' | 'pinch';
 
-export type ViewportPanEndReason = PointerEndReason | 'pinch';
-
-export interface ViewportPanEndDetail {
-  readonly source: 'pointer';
-  readonly event: PointerEvent;
+export interface ViewportPanEndRequest {
+  readonly event: Event;
   readonly interrupted: boolean;
   readonly reason: ViewportPanEndReason;
+}
+
+export interface ViewportPanEndDetail extends ViewportPanEndRequest {
+  readonly source: ViewportNavigationSource;
   readonly start: ViewportTransform;
   readonly transform: ViewportTransform;
 }
 
-export interface ViewportZoomDetail {
-  readonly source: 'wheel' | 'pinch' | 'keyboard' | 'command';
-  readonly event: WheelEvent | PointerEvent | KeyboardEvent | CommandEvent;
-  readonly clientX: number;
-  readonly clientY: number;
+export interface ViewportPanSession {
+  readonly start: ViewportTransform;
+  update(proposal: ViewportPanUpdateProposal): boolean;
+  end(request: ViewportPanEndRequest): void;
+}
+
+export interface ViewportZoomProposal {
+  readonly source: ViewportNavigationSource;
+  readonly event: Event;
+  readonly clientX?: number;
+  readonly clientY?: number;
   readonly anchor: ViewportPoint;
   readonly factor: number;
-  readonly start: ViewportTransform;
   readonly next: ViewportTransform;
+}
+
+export interface ViewportZoomRequestOptions {
+  readonly animated?: boolean;
+}
+
+export interface ViewportZoomDetail extends ViewportZoomProposal {
+  readonly start: ViewportTransform;
 }
 
 export interface ViewportAnimationOptions {

@@ -9,9 +9,10 @@ describe('viewport lighthouse report', () => {
     const report = await lighthouseRunner.getReport(
       'nve-viewport',
       /* html */ `
-      <nve-viewport style="width: 600px; height: 400px">
+      <nve-viewport behavior-pan style="width: 600px; height: 400px">
         <nve-viewport-gridlines></nve-viewport-gridlines>
         <div style="position: absolute; left: 100px; top: 100px">content</div>
+        <nve-viewport-minimap></nve-viewport-minimap>
       </nve-viewport>
       <script type="module">
         import '@nvidia-elements/core/viewport/define.js';
@@ -22,6 +23,6 @@ describe('viewport lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(21.8);
+    expect(report.payload.javascript.kb).toBeLessThan(25.0);
   });
 });

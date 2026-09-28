@@ -37,10 +37,21 @@
   transform-origin: 0 0;
 }
 
+.overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
 ::slotted([slot='background']) {
   pointer-events: none;
 }
 
-::slotted(:not([slot='background'])) {
+::slotted(:not([slot='background'], [slot='overlay'])) {
+  pointer-events: auto;
+}
+
+::slotted([slot='overlay']) {
   pointer-events: auto;
 }
