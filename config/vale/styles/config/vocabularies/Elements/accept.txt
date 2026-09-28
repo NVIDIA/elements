@@ -68,6 +68,8 @@ namespaces
 namespaced
 viewport
 viewports
+Minimap
+minimap
 flexbox
 Flexbox
 tooltip

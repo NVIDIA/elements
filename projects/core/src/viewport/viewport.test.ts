@@ -4,7 +4,18 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
-import { Viewport, type ViewportTransform } from '@nvidia-elements/core/viewport';
+import {
+  Viewport,
+  type ViewportNavigationSource,
+  type ViewportPanDetail,
+  type ViewportPanEndDetail,
+  type ViewportPanProposal,
+  type ViewportPanSession,
+  type ViewportPanUpdateProposal,
+  type ViewportTransform,
+  type ViewportZoomDetail,
+  type ViewportZoomProposal
+} from '@nvidia-elements/core/viewport';
 import '@nvidia-elements/core/viewport/define.js';
 
 describe(Viewport.metadata.tag, () => {
@@ -276,25 +287,327 @@ describe(Viewport.metadata.tag, () => {
       expect(element.getAttribute('tabindex')).toBe('0');
     });
 
-    it('renders an interaction frame beneath noninteractive background and interactive default content', () => {
+    it('renders transformed content beneath a fixed interactive overlay', () => {
       const plane = element.shadowRoot?.querySelector<HTMLElement>('.plane');
+      const overlayLayer = element.shadowRoot?.querySelector<HTMLElement>('.overlay');
       const frame = viewportFrame(element);
-      const slots = [...(plane?.querySelectorAll('slot') ?? [])];
+      const slots = [...(element.shadowRoot?.querySelectorAll('slot') ?? [])];
       const background = document.createElement('svg');
       background.slot = 'background';
       const contribution = document.createElement('div');
-      element.append(background, contribution);
+      const overlay = document.createElement('div');
+      overlay.slot = 'overlay';
+      element.append(background, contribution, overlay);
 
       expect(frame).toBeInstanceOf(HTMLElement);
-      expect(slots.map(slot => slot.name)).toEqual(['background', '']);
+      expect(slots.map(slot => slot.name)).toEqual(['background', '', 'overlay']);
       expect(getComputedStyle(plane as HTMLElement).pointerEvents).toBe('none');
+      expect(getComputedStyle(overlayLayer as HTMLElement).pointerEvents).toBe('none');
       expect(getComputedStyle(background).pointerEvents).toBe('none');
       expect(getComputedStyle(contribution).pointerEvents).toBe('auto');
+      expect(getComputedStyle(overlay).pointerEvents).toBe('auto');
       expect(getComputedStyle(element).overflow).toBe('hidden');
     });
   });
 
   describe('ownership and semantic events', () => {
+    it('reports effective admission only when pan or zoom availability changes', async () => {
+      const changes: Event[] = [];
+      const observed: { pannable: boolean; zoomable: boolean; panAttribute: string | null }[] = [];
+      fixture.addEventListener('capabilitieschange', event => {
+        changes.push(event);
+        observed.push({
+          pannable: element.pannable,
+          zoomable: element.zoomable,
+          panAttribute: element.getAttribute('behavior-pan')
+        });
+      });
+      expect([element.pannable, element.zoomable]).toEqual([false, false]);
+
+      element.behaviorPan = true;
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      expect([element.pannable, element.zoomable]).toEqual([true, true]);
+      expect(element.hasAttribute('pannable')).toBe(false);
+      expect(element.hasAttribute('zoomable')).toBe(false);
+      expect(changes).toHaveLength(1);
+      expect(observed[0]).toEqual({ pannable: true, zoomable: true, panAttribute: '' });
+      expect(changes[0]).toMatchObject({ bubbles: true, composed: true });
+      expect('detail' in changes[0]!).toBe(false);
+      expect(element.hasAttribute('behavior-pan')).toBe(true);
+      expect(element.hasAttribute('behavior-zoom')).toBe(true);
+
+      element.behaviorPan = 'space';
+      await elementIsStable(element);
+      expect(element.pannable).toBe(true);
+      expect(changes).toHaveLength(1);
+
+      element.behaviorPan = false;
+      await elementIsStable(element);
+      expect(element.pannable).toBe(false);
+      expect(changes).toHaveLength(2);
+
+      element.behaviorZoom = false;
+      await elementIsStable(element);
+      expect(element.zoomable).toBe(false);
+      expect(changes).toHaveLength(3);
+    });
+
+    it('admits discrete control pans and zooms and normalizes the proposed scale', async () => {
+      element.behaviorPan = true;
+      element.behaviorZoom = true;
+      const pan = vi.fn();
+      const zoom = vi.fn();
+      element.addEventListener('pan', pan);
+      element.addEventListener('zoom', zoom);
+      const event = new Event('input');
+      const controlZoom: ViewportZoomProposal = {
+        source: 'control',
+        event,
+        anchor: { x: 0, y: 0 },
+        factor: 100,
+        next: { x: 25, y: 5, scale: 100 }
+      };
+
+      expect(element.requestPan({ source: 'control', event, next: { x: 25, y: 5, scale: 1 } })).toBe(true);
+      expect(element.requestZoom(controlZoom)).toBe(true);
+
+      expect(pan.mock.calls[0]?.[0]).toMatchObject({
+        cancelable: true,
+        detail: { source: 'control', event, next: { x: 25, y: 5, scale: 1 } }
+      });
+      expect(zoom.mock.calls[0]?.[0]).toMatchObject({
+        cancelable: true,
+        detail: { source: 'control', event, next: { x: 25, y: 5, scale: 20 } }
+      });
+      expect('clientX' in (zoom.mock.calls[0]?.[0] as CustomEvent).detail).toBe(false);
+      expect('clientY' in (zoom.mock.calls[0]?.[0] as CustomEvent).detail).toBe(false);
+      expect(element.getTransform()).toEqual({ x: 25, y: 5, scale: 20 });
+      await elementIsStable(element);
+    });
+
+    it('rejects disabled proposals without events while direct writes remain programmatic', async () => {
+      const pan = vi.fn();
+      const zoom = vi.fn();
+      const change = vi.fn();
+      element.addEventListener('pan', pan);
+      element.addEventListener('zoom', zoom);
+      element.addEventListener('viewportchange', change);
+      const event = new Event('input');
+
+      expect(element.requestPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } })).toBe(false);
+      expect(
+        element.requestZoom({
+          source: 'control',
+          event,
+          anchor: { x: 0, y: 0 },
+          clientX: 0,
+          clientY: 0,
+          factor: 2,
+          next: { x: 0, y: 0, scale: 2 }
+        })
+      ).toBe(false);
+      expect(element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } })).toBeUndefined();
+      element.x = 10;
+      element.y = 20;
+      element.scale = 2;
+      await elementIsStable(element);
+
+      expect(pan).not.toHaveBeenCalled();
+      expect(zoom).not.toHaveBeenCalled();
+      expect(change).toHaveBeenCalledOnce();
+      expect(change.mock.calls[0]?.[0]).toMatchObject({ detail: { x: 10, y: 20, scale: 2 } });
+    });
+
+    it('keeps a canceled panstart interactive and ends its session exactly once', () => {
+      type UpdateHasSource = 'source' extends keyof ViewportPanUpdateProposal ? true : false;
+      const updateHasSource: UpdateHasSource = false;
+      expect(updateHasSource).toBe(false);
+      const acceptsUpdate: Parameters<ViewportPanSession['update']>[0] = {
+        event: new Event('input'),
+        next: { x: 0, y: 0, scale: 1 }
+      };
+      expect(acceptsUpdate).not.toHaveProperty('source');
+      element.behaviorPan = true;
+      const events: Event[] = [];
+      element.addEventListener('panstart', event => {
+        events.push(event);
+        event.preventDefault();
+      });
+      element.addEventListener('pan', event => events.push(event));
+      element.addEventListener('panend', event => events.push(event));
+      const event = new Event('input');
+      const session = element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } });
+
+      expect(session?.start).toEqual({ x: 0, y: 0, scale: 1 });
+      element.behaviorPan = false;
+      expect(session?.update({ event, next: { x: 20, y: 0, scale: 1 } })).toBe(false);
+      session?.end({ event, interrupted: false, reason: 'up' });
+      session?.end({ event, interrupted: false, reason: 'up' });
+      expect(events.map(item => item.type)).toEqual(['panstart', 'pan', 'pan', 'panend']);
+      expect(events.map(item => (item as CustomEvent).detail.source)).toEqual([
+        'control',
+        'control',
+        'control',
+        'control'
+      ]);
+      expect(element.x).toBe(0);
+    });
+
+    it('skips only a canceled pan update in an accepted session', () => {
+      element.behaviorPan = true;
+      const event = new Event('input');
+      const session = element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } });
+      expect(element.x).toBe(10);
+      element.addEventListener('pan', item => item.preventDefault(), { once: true });
+      expect(session?.update({ event, next: { x: 20, y: 0, scale: 1 } })).toBe(false);
+      expect(element.x).toBe(10);
+      expect(session?.update({ event, next: { x: 30, y: 0, scale: 1 } })).toBe(true);
+      expect(element.x).toBe(30);
+      session?.end({ event, interrupted: false, reason: 'up' });
+    });
+
+    it('keeps the initial pan target and session source despite mutation of the caller proposal', () => {
+      element.behaviorPan = true;
+      const event = new Event('input');
+      const proposal: ViewportPanProposal = { source: 'control', event, next: { x: 10, y: 0, scale: 1 } };
+      let panstart: ViewportPanDetail | undefined;
+      const pans: ViewportPanDetail[] = [];
+      let panend: ViewportPanEndDetail | undefined;
+      element.addEventListener('panstart', item => {
+        panstart = (item as CustomEvent<ViewportPanDetail>).detail;
+        Object.assign(proposal.next, { x: 900 });
+        (proposal as { source: ViewportNavigationSource }).source = 'minimap';
+      });
+      element.addEventListener('pan', item => pans.push((item as CustomEvent<ViewportPanDetail>).detail));
+      element.addEventListener('panend', item => {
+        panend = (item as CustomEvent<ViewportPanEndDetail>).detail;
+      });
+
+      const session = element.startPan(proposal);
+      expect(session?.update({ event, next: { x: 10, y: 0, scale: 1 } })).toBe(false);
+      session?.end({ event, interrupted: false, reason: 'up' });
+
+      expect(panstart?.next.x).toBe(10);
+      expect(pans[0]?.next.x).toBe(10);
+      expect(pans.map(detail => detail.source)).toEqual(['control', 'control']);
+      expect(element.x).toBe(10);
+      expect(panend?.source).toBe('control');
+    });
+
+    it('keeps pan targets and the session baseline independent of public snapshots', () => {
+      element.behaviorPan = true;
+      const event = new Event('input');
+      const panStarts: ViewportTransform[] = [];
+      let panend: ViewportPanEndDetail | undefined;
+      element.addEventListener('panstart', item => {
+        const detail = (item as CustomEvent<ViewportPanDetail>).detail;
+        Object.assign(detail.next, { x: 900 });
+        Object.assign(detail.start, { x: 900 });
+      });
+      element.addEventListener('pan', item => {
+        const detail = (item as CustomEvent<ViewportPanDetail>).detail;
+        panStarts.push({ ...detail.start });
+        Object.assign(detail.next, { x: 900 });
+        Object.assign(detail.start, { x: 900 });
+      });
+      element.addEventListener('panend', item => {
+        panend = (item as CustomEvent<ViewportPanEndDetail>).detail;
+      });
+
+      const session = element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } });
+      expect(element.x).toBe(10);
+      expect(session?.start).toEqual({ x: 0, y: 0, scale: 1 });
+      if (!session) throw new Error('Expected an admitted pan session');
+      Object.assign(session.start, { x: 800 });
+      expect(session.update({ event, next: { x: 20, y: 0, scale: 1 } })).toBe(true);
+      session.end({ event, interrupted: false, reason: 'up' });
+
+      expect(element.x).toBe(20);
+      expect(panStarts).toEqual([
+        { x: 0, y: 0, scale: 1 },
+        { x: 0, y: 0, scale: 1 }
+      ]);
+      expect(panend?.start).toEqual({ x: 0, y: 0, scale: 1 });
+      if (panend) Object.assign(panend.start, { x: 700 });
+      expect(session.start.x).toBe(800);
+    });
+
+    it('commits the private zoom target despite mutations to zoom detail values', () => {
+      element.behaviorZoom = true;
+      element.addEventListener('zoom', item => {
+        const detail = (item as CustomEvent<ViewportZoomDetail>).detail;
+        Object.assign(detail.next, { x: 900, scale: 10 });
+        Object.assign(detail.start, { x: 900 });
+      });
+
+      expect(
+        element.requestZoom({
+          source: 'control',
+          event: new Event('input'),
+          anchor: { x: 0, y: 0 },
+          factor: 2,
+          next: { x: 10, y: 5, scale: 2 }
+        })
+      ).toBe(true);
+      expect(element.getTransform()).toEqual({ x: 10, y: 5, scale: 2 });
+    });
+
+    it('preserves an admitted pan session after behavior is disabled and rejects the next one', () => {
+      element.behaviorPan = true;
+      const pan = vi.fn();
+      const panend = vi.fn();
+      element.addEventListener('pan', pan);
+      element.addEventListener('panend', panend);
+      const event = new Event('input');
+      const session = element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } });
+
+      element.behaviorPan = false;
+      expect(session?.update({ event, next: { x: 20, y: 0, scale: 1 } })).toBe(true);
+      session?.end({ event, interrupted: false, reason: 'up' });
+
+      expect(pan).toHaveBeenCalledTimes(2);
+      expect(panend).toHaveBeenCalledOnce();
+      expect(panend.mock.calls[0]?.[0]).toMatchObject({ detail: { interrupted: false, reason: 'up' } });
+      expect(element.x).toBe(20);
+      expect(element.startPan({ source: 'control', event, next: { x: 30, y: 0, scale: 1 } })).toBeUndefined();
+    });
+
+    it('continues an admitted pinch after zoom behavior is disabled', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      vi.spyOn(element, 'setPointerCapture').mockImplementation(() => {});
+      const zoom = vi.fn();
+      element.addEventListener('zoom', zoom);
+
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 61, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 62, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 62, pointerType: 'touch' }));
+      element.behaviorZoom = false;
+      await elementIsStable(element);
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 30, pointerId: 62, pointerType: 'touch' }));
+
+      expect(zoom).toHaveBeenCalledTimes(2);
+      expect(element.scale).toBe(3);
+      element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 61, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 62, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 63, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 64, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 64, pointerType: 'touch' }));
+      expect(zoom).toHaveBeenCalledTimes(2);
+      expect(
+        element.requestZoom({
+          source: 'control',
+          event: new Event('input'),
+          anchor: { x: 0, y: 0 },
+          clientX: 0,
+          clientY: 0,
+          factor: 2,
+          next: { x: 0, y: 0, scale: 6 }
+        })
+      ).toBe(false);
+    });
+
     it('makes semantic navigation events composed, bubbling, and selectively cancelable', async () => {
       element.behaviorPan = true;
       element.behaviorZoom = true;
@@ -332,7 +645,101 @@ describe(Viewport.metadata.tag, () => {
       expect(events.every(event => event.bubbles && event.composed)).toBe(true);
     });
 
-    it('wires a discrete keyboard request through the public event delegate before its default transform', async () => {
+    it('composes an accepted wheel pan with later movement in an active pointer pan', async () => {
+      await enablePointerPanning(element);
+      element.focus();
+      element.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+      expect(element.x).toBe(-10);
+
+      element.dispatchEvent(wheelEvent({ deltaX: 30 }));
+      expect(element.x).toBe(20);
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
+
+      expect(element.x).toBe(10);
+      element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 20, pointerId: 1 }));
+    });
+
+    it('does not rebase an active pointer pan for a canceled wheel proposal', async () => {
+      await enablePointerPanning(element);
+      element.focus();
+      element.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+      element.addEventListener('pan', event => {
+        if (event.detail.source === 'wheel') event.preventDefault();
+      });
+
+      element.dispatchEvent(wheelEvent({ deltaX: 30 }));
+      expect(element.x).toBe(-10);
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
+
+      expect(element.x).toBe(-20);
+      element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 20, pointerId: 1 }));
+    });
+
+    it('keeps the start focal content point while a pinch center translates and scales', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      vi.spyOn(element, 'setPointerCapture').mockImplementation(() => {});
+      const zoom = vi.fn();
+      element.addEventListener('zoom', zoom);
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 1, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 2, pointerType: 'touch' }));
+      element.dispatchEvent(
+        pointerEvent('pointermove', { clientX: 20, clientY: 10, pointerId: 2, pointerType: 'touch' })
+      );
+
+      expect(zoom).toHaveBeenCalledOnce();
+      const detail = (zoom.mock.calls[0]?.[0] as CustomEvent<ViewportZoomDetail>).detail;
+      expect(detail).toMatchObject({ source: 'pinch', anchor: { x: 5, y: 0 }, clientX: 10, clientY: 5 });
+      expect(detail.factor).toBeCloseTo(Math.sqrt(5));
+      expect(detail.next.scale).toBeCloseTo(Math.sqrt(5));
+      expect(detail.next.x).toBeCloseTo(5 - 10 / Math.sqrt(5));
+      expect(detail.next.y).toBeCloseTo(-5 / Math.sqrt(5));
+      expect(element.getTransform()).toEqual(detail.next);
+    });
+
+    it('emits a canceled pinch zoom without moving or starting a pointer pan', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      vi.spyOn(element, 'setPointerCapture').mockImplementation(() => {});
+      const zoom = vi.fn((event: CustomEvent<ViewportZoomDetail>) => {
+        if (event.detail.source === 'pinch') event.preventDefault();
+      });
+      const pan = vi.fn();
+      element.addEventListener('zoom', zoom);
+      element.addEventListener('pan', pan);
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 1, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 2, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 2, pointerType: 'touch' }));
+
+      expect(zoom).toHaveBeenCalledOnce();
+      expect(element.getTransform()).toEqual({ scale: 1, x: 0, y: 0 });
+      expect(pan).not.toHaveBeenCalled();
+      expect(element.matches(':state(panning)')).toBe(false);
+    });
+
+    it('does not commit a later pointer-pan update that synchronously ends its session', async () => {
+      await enablePointerPanning(element);
+      const panend = vi.fn();
+      element.addEventListener('panend', panend);
+      element.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
+      expect(element.x).toBe(-5);
+      element.addEventListener(
+        'pan',
+        () => element.dispatchEvent(pointerEvent('pointercancel', { clientX: 10, pointerId: 1 })),
+        { once: true }
+      );
+
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+
+      expect(element.x).toBe(-5);
+      expect(panend).toHaveBeenCalledOnce();
+      expect(panend.mock.calls[0]?.[0]).toMatchObject({ detail: { interrupted: true, reason: 'cancel' } });
+    });
+
+    it('dispatches a discrete keyboard pan proposal before its default transform', async () => {
       element.behaviorPan = true;
       await elementIsStable(element);
       element.focus();
@@ -368,6 +775,246 @@ describe(Viewport.metadata.tag, () => {
   });
 
   describe('animation integration', () => {
+    it('animates one keyboard zoom proposal and steps later keys from the pending destination', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      element.focus();
+      const animationFrame = vi.spyOn(globalThis, 'requestAnimationFrame').mockReturnValue(42);
+      vi.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation(() => {});
+      const animateTo = vi.spyOn(element, 'animateTo');
+      const details: Record<string, unknown>[] = [];
+      element.addEventListener('zoom', event => details.push((event as CustomEvent).detail as Record<string, unknown>));
+
+      for (let step = 0; step < 3; step += 1) {
+        element.dispatchEvent(
+          new KeyboardEvent('keydown', { bubbles: true, cancelable: true, composed: true, key: '+' })
+        );
+      }
+
+      expect(details.map(detail => (detail.next as ViewportTransform).scale)).toEqual([2, 4, 8]);
+      expect(details[0]).toMatchObject({ anchor: { x: 200, y: 150 }, source: 'keyboard' });
+      expect(details[0]).not.toHaveProperty('clientX');
+      expect(details[0]).not.toHaveProperty('clientY');
+      expect(details[0]).not.toHaveProperty('animated');
+      expect(animationFrame).toHaveBeenCalledTimes(3);
+      expect(animateTo.mock.calls.map(([target]) => target.scale)).toEqual([2, 4, 8]);
+      expect(element.scale).toBe(1);
+    });
+
+    it('animates one command zoom proposal without a synthetic client point', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      const animationFrame = vi.spyOn(globalThis, 'requestAnimationFrame').mockReturnValue(42);
+      const animateTo = vi.spyOn(element, 'animateTo');
+      const zoom = vi.fn();
+      element.addEventListener('zoom', zoom);
+
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+
+      expect(zoom).toHaveBeenCalledOnce();
+      const detail = (zoom.mock.calls[0]?.[0] as CustomEvent).detail;
+      expect(detail).toMatchObject({ anchor: { x: 200, y: 150 }, source: 'command' });
+      expect(detail).not.toHaveProperty('clientX');
+      expect(detail).not.toHaveProperty('clientY');
+      expect(detail).not.toHaveProperty('animated');
+      expect(animationFrame).toHaveBeenCalledOnce();
+      expect(animateTo).toHaveBeenCalledOnce();
+      expect(element.scale).toBe(1);
+    });
+
+    it.each([
+      { source: 'keyboard', zoomIn: () => keyEvent({ key: '+' }), zoomOut: () => keyEvent({ key: '-' }) },
+      {
+        source: 'command',
+        zoomIn: () => new CommandEvent('command', { command: '--zoom-in' }),
+        zoomOut: () => new CommandEvent('command', { command: '--zoom-out' })
+      }
+    ])(
+      'stops a pending $source zoom-in when the next animated request reverses it',
+      async ({ source, zoomIn, zoomOut }) => {
+        element.behaviorZoom = true;
+        await elementIsStable(element);
+        element.focus();
+        const frames = new Map<number, FrameRequestCallback>();
+        let nextFrame = 0;
+        vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation(callback => {
+          const frame = ++nextFrame;
+          frames.set(frame, callback);
+          return frame;
+        });
+        const cancelFrame = vi.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation(frame => {
+          frames.delete(frame);
+        });
+        const zoom = vi.fn();
+        element.addEventListener('zoom', zoom);
+
+        element.dispatchEvent(zoomIn());
+        const pendingFrame = nextFrame;
+        expect(frames.has(pendingFrame)).toBe(true);
+        element.dispatchEvent(zoomOut());
+
+        expect(zoom).toHaveBeenCalledTimes(2);
+        expect(zoom.mock.calls.map(([event]) => (event as CustomEvent<ViewportZoomDetail>).detail.next.scale)).toEqual([
+          2, 1
+        ]);
+        expect(
+          zoom.mock.calls.every(([event]) => (event as CustomEvent<ViewportZoomDetail>).detail.source === source)
+        ).toBe(true);
+        expect(cancelFrame).toHaveBeenCalledWith(pendingFrame);
+        expect(frames.size).toBe(0);
+        expect(element.getTransform()).toEqual({ scale: 1, x: 0, y: 0 });
+      }
+    );
+
+    it.each([
+      ['keyboard', () => new KeyboardEvent('keydown', { bubbles: true, cancelable: true, composed: true, key: '+' })],
+      ['command', () => new CommandEvent('command', { command: '--zoom-in' })]
+    ] as const)('does not animate a canceled %s zoom', async (_source, makeEvent) => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      element.focus();
+      const animationFrame = vi.spyOn(globalThis, 'requestAnimationFrame').mockReturnValue(42);
+      const animateTo = vi.spyOn(element, 'animateTo');
+      const zoom = vi.fn((event: Event) => event.preventDefault());
+      element.addEventListener('zoom', zoom);
+
+      element.dispatchEvent(makeEvent());
+
+      expect(zoom).toHaveBeenCalledOnce();
+      expect(animationFrame).not.toHaveBeenCalled();
+      expect(animateTo).not.toHaveBeenCalled();
+      expect(element.getTransform()).toEqual({ x: 0, y: 0, scale: 1 });
+    });
+
+    it('keeps an earlier accepted zoom animation running when a later zoom is canceled', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      element.focus();
+      const frames = new Map<number, FrameRequestCallback>();
+      let nextFrame = 0;
+      vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation(callback => {
+        const frame = ++nextFrame;
+        frames.set(frame, callback);
+        return frame;
+      });
+      const cancelFrame = vi.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation(frame => {
+        frames.delete(frame);
+      });
+      const zoom = vi.fn();
+      element.addEventListener('zoom', zoom);
+
+      element.dispatchEvent(keyEvent({ key: '+' }));
+      const acceptedFrame = nextFrame;
+      element.addEventListener('zoom', event => event.preventDefault(), { once: true });
+      element.dispatchEvent(keyEvent({ key: '+' }));
+
+      expect(zoom).toHaveBeenCalledTimes(2);
+      expect((zoom.mock.calls[1]?.[0] as CustomEvent).detail.next.scale).toBe(4);
+      expect(cancelFrame).not.toHaveBeenCalled();
+      expect(frames.has(acceptedFrame)).toBe(true);
+      expect(element.scale).toBe(1);
+
+      const first = frames.get(acceptedFrame);
+      if (!first) throw new Error('Expected the accepted animation frame');
+      frames.delete(acceptedFrame);
+      first(0);
+      const second = frames.get(nextFrame);
+      if (!second) throw new Error('Expected the continuing animation frame');
+      second(300);
+
+      expect(element.scale).toBe(2);
+    });
+
+    it.each(['canceled pan', 'canceled panstart', 'no-op pan', 'clamped no-op zoom'] as const)(
+      'keeps a keyboard zoom animation running after a %s proposal',
+      async kind => {
+        element.behaviorPan = true;
+        element.behaviorZoom = true;
+        element.minScale = 1;
+        await elementIsStable(element);
+        element.focus();
+        const frames = new Map<number, FrameRequestCallback>();
+        let nextFrame = 0;
+        vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation(callback => {
+          const frame = ++nextFrame;
+          frames.set(frame, callback);
+          return frame;
+        });
+        const cancelFrame = vi.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation(frame => {
+          frames.delete(frame);
+        });
+        element.dispatchEvent(keyEvent({ key: '+' }));
+        const acceptedFrame = nextFrame;
+        const event = new Event('input');
+        const pan = vi.fn();
+        const zoom = vi.fn();
+        element.addEventListener('pan', pan);
+        element.addEventListener('zoom', zoom);
+
+        if (kind === 'canceled pan') {
+          element.addEventListener('pan', item => item.preventDefault(), { once: true });
+          expect(element.requestPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } })).toBe(false);
+          expect(pan).toHaveBeenCalledOnce();
+        } else if (kind === 'canceled panstart') {
+          element.addEventListener('panstart', item => item.preventDefault(), { once: true });
+          const session = element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } });
+          expect(pan).toHaveBeenCalledOnce();
+          session?.end({ event, interrupted: false, reason: 'up' });
+        } else if (kind === 'no-op pan') {
+          expect(element.requestPan({ source: 'control', event, next: element.getTransform() })).toBe(false);
+          expect(pan).toHaveBeenCalledOnce();
+        } else {
+          expect(
+            element.requestZoom({
+              source: 'control',
+              event,
+              anchor: { x: 0, y: 0 },
+              factor: 0.25,
+              next: { x: 0, y: 0, scale: 0.25 }
+            })
+          ).toBe(false);
+          expect(zoom).toHaveBeenCalledOnce();
+          expect((zoom.mock.calls[0]?.[0] as CustomEvent<ViewportZoomDetail>).detail.next.scale).toBe(1);
+        }
+
+        expect(cancelFrame).not.toHaveBeenCalled();
+        expect(frames.has(acceptedFrame)).toBe(true);
+        const first = frames.get(acceptedFrame);
+        if (!first) throw new Error('Expected the accepted animation frame');
+        frames.delete(acceptedFrame);
+        first(0);
+        const second = frames.get(nextFrame);
+        if (!second) throw new Error('Expected the continuing animation frame');
+        second(300);
+        expect(element.scale).toBe(2);
+      }
+    );
+
+    it('commits wheel and pinch zoom immediately without scheduling an animation', async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      element.focus();
+      vi.spyOn(element, 'setPointerCapture').mockImplementation(() => {});
+      const animationFrame = vi.spyOn(globalThis, 'requestAnimationFrame').mockReturnValue(42);
+      const animateTo = vi.spyOn(element, 'animateTo');
+      const zoom = vi.fn();
+      element.addEventListener('zoom', zoom);
+
+      element.dispatchEvent(wheelEvent({ ctrlKey: true, deltaY: -10 }));
+      const afterWheel = element.scale;
+      expect(afterWheel).toBeGreaterThan(1);
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 70, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 71, pointerType: 'touch' }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 71, pointerType: 'touch' }));
+
+      expect(zoom).toHaveBeenCalledTimes(2);
+      expect((zoom.mock.calls[0]?.[0] as CustomEvent).detail.source).toBe('wheel');
+      expect((zoom.mock.calls[1]?.[0] as CustomEvent).detail.source).toBe('pinch');
+      expect(element.scale).toBeGreaterThan(afterWheel);
+      expect(animationFrame).not.toHaveBeenCalled();
+      expect(animateTo).not.toHaveBeenCalled();
+    });
+
     it('publishes animateTo transform as one render-coalesced viewport fact without navigation events', async () => {
       const changes: ViewportTransform[] = [];
       const semanticEvents = vi.fn();
@@ -533,6 +1180,35 @@ describe(Viewport.metadata.tag, () => {
   });
 
   describe('autofit', () => {
+    it('preserves pending autofit when a zoom proposal is canceled', async () => {
+      const customTag = `viewport-autofit-canceled-zoom-${crypto.randomUUID()}`;
+      const custom = document.createElement(customTag);
+      vi.spyOn(custom, 'getBoundingClientRect').mockReturnValue(
+        DOMRect.fromRect({ height: 100, width: 200, x: 150, y: 100 })
+      );
+      element.append(custom);
+      element.behaviorZoom = true;
+      element.autoFit = true;
+      await elementIsStable(element);
+      element.addEventListener('zoom', event => event.preventDefault(), { once: true });
+
+      const fitted = untilEvent(element, 'viewportchange');
+      expect(
+        element.requestZoom({
+          anchor: { x: 200, y: 150 },
+          event: new Event('input'),
+          factor: 2,
+          next: { scale: 2, x: 0, y: 0 },
+          source: 'control'
+        })
+      ).toBe(false);
+      customElements.define(customTag, class extends HTMLElement {});
+      await fitted;
+
+      expect(element.scale).toBe(2);
+      expect(element.x).not.toBe(0);
+    });
+
     it('autofits the initially measurable default-slot children once', async () => {
       vi.spyOn(viewportFrame(element), 'getBoundingClientRect').mockReturnValue(
         DOMRect.fromRect({ height: 300, width: 400, x: 100, y: 50 })
@@ -644,6 +1320,50 @@ describe(Viewport.metadata.tag, () => {
       });
     });
 
+    it.each(['canceled panstart', 'no-op pan', 'clamped no-op zoom'] as const)(
+      'keeps a definition-gated autofit pending after a %s proposal',
+      async kind => {
+        vi.stubGlobal('ResizeObserver', undefined);
+        vi.spyOn(viewportFrame(element), 'getBoundingClientRect').mockReturnValue(
+          DOMRect.fromRect({ height: 300, width: 400, x: 100, y: 50 })
+        );
+        const customTag = `viewport-autofit-proposal-${crypto.randomUUID()}`;
+        const custom = document.createElement(customTag);
+        vi.spyOn(custom, 'getBoundingClientRect').mockReturnValue(
+          DOMRect.fromRect({ height: 100, width: 200, x: 150, y: 100 })
+        );
+        element.append(custom);
+        element.behaviorPan = true;
+        element.behaviorZoom = true;
+        element.minScale = 1;
+        element.autoFit = true;
+        await elementIsStable(element);
+        const event = new Event('input');
+
+        if (kind === 'canceled panstart') {
+          element.addEventListener('panstart', item => item.preventDefault(), { once: true });
+          const session = element.startPan({ source: 'control', event, next: { x: 10, y: 0, scale: 1 } });
+          session?.end({ event, interrupted: false, reason: 'up' });
+        } else if (kind === 'no-op pan') {
+          expect(element.requestPan({ source: 'control', event, next: element.getTransform() })).toBe(false);
+        } else {
+          expect(
+            element.requestZoom({
+              source: 'control',
+              event,
+              anchor: { x: 0, y: 0 },
+              factor: 0.25,
+              next: { x: 0, y: 0, scale: 0.25 }
+            })
+          ).toBe(false);
+        }
+
+        customElements.define(customTag, class extends HTMLElement {});
+        await waitForAnimationFrames();
+        expect(element.scale).toBe(2);
+      }
+    );
+
     it('cancels a definition-gated autofit when pointer navigation takes ownership', async () => {
       const customTag = `viewport-autofit-pointer-${crypto.randomUUID()}`;
       const custom = document.createElement(customTag);
@@ -657,10 +1377,11 @@ describe(Viewport.metadata.tag, () => {
       element.autoFit = true;
       await elementIsStable(element);
       element.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
       customElements.define(customTag, class extends HTMLElement {});
       await waitForAnimationFrames();
 
-      expect(element.getTransform()).toEqual({ scale: 1, x: 0, y: 0 });
+      expect(element.getTransform()).toEqual({ scale: 1, x: -10, y: 0 });
     });
   });
 });
@@ -685,6 +1406,10 @@ function viewportFrame(element: Viewport): HTMLElement {
 
 function pointerEvent(type: string, init: PointerEventInit): PointerEvent {
   return new PointerEvent(type, { bubbles: true, buttons: 1, cancelable: true, composed: true, ...init });
+}
+
+function keyEvent(init: KeyboardEventInit): KeyboardEvent {
+  return new KeyboardEvent('keydown', { bubbles: true, cancelable: true, composed: true, ...init });
 }
 
 function viewportProperties(element: Viewport) {

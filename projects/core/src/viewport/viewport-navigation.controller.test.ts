@@ -4,9 +4,14 @@
 import { html, type ReactiveController } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
-import { ViewportNavigationController, type ViewportNavigationDelegate } from './viewport-navigation.controller.js';
-import type { ViewportNavigationEventDelegate } from './viewport-navigation.types.js';
-import type { ViewportPanBehavior, ViewportTransform } from './viewport.types.js';
+import { ViewportNavigationController } from './viewport-navigation.controller.js';
+import type {
+  ViewportPanBehavior,
+  ViewportPanProposal,
+  ViewportTransform,
+  ViewportZoomProposal,
+  ViewportZoomRequestOptions
+} from './viewport.types.js';
 import type { ViewportZoomAction } from './viewport-navigation.types.js';
 
 class ViewportNavigationControllerTestHost extends HTMLElement {
@@ -14,6 +19,16 @@ class ViewportNavigationControllerTestHost extends HTMLElement {
   readonly updateComplete = Promise.resolve(true);
   behaviorPan: ViewportPanBehavior = false;
   behaviorZoom = false;
+  readonly requestPan = vi.fn((_proposal: ViewportPanProposal) => true);
+  readonly requestZoom = vi.fn((_proposal: ViewportZoomProposal, _options?: ViewportZoomRequestOptions) => true);
+
+  get pannable(): boolean {
+    return Boolean(this.behaviorPan);
+  }
+
+  get zoomable(): boolean {
+    return this.behaviorZoom;
+  }
 
   addController(controller: ReactiveController): void {
     this.#controllers.add(controller);
@@ -42,17 +57,10 @@ const tag = 'viewport-navigation-controller-test-host';
 if (!customElements.get(tag)) customElements.define(tag, ViewportNavigationControllerTestHost);
 
 describe('ViewportNavigationController', () => {
-  let animateTo: ReturnType<typeof vi.fn<ViewportNavigationDelegate['animateTo']>>;
-  let commitTransform: ReturnType<typeof vi.fn<ViewportNavigationDelegate['commitTransform']>>;
-  let cancelAnimation: ReturnType<typeof vi.fn<ViewportNavigationDelegate['cancelAnimation']>>;
-  let consumeAutoFit: ReturnType<typeof vi.fn<ViewportNavigationDelegate['consumeAutoFit']>>;
-  let events: ViewportNavigationEventDelegate;
   let fixture: HTMLElement;
-  let getZoomTarget: ReturnType<typeof vi.fn<(action: ViewportZoomAction) => ViewportTransform | undefined>>;
   let host: ViewportNavigationControllerTestHost;
-  let rebasePointerSessions: ReturnType<typeof vi.fn<ViewportNavigationDelegate['rebasePointerSessions']>>;
   let transform: ViewportTransform;
-  let animationDestinationScale: number | undefined;
+  let getZoomTarget: ReturnType<typeof vi.fn<(action: ViewportZoomAction) => ViewportTransform | undefined>>;
 
   beforeEach(async () => {
     fixture = await createFixture(html`<div></div>`);
@@ -62,54 +70,24 @@ describe('ViewportNavigationController', () => {
       clientWidth: { configurable: true, value: 400 }
     });
     transform = { scale: 1, x: 0, y: 0 };
-    animationDestinationScale = undefined;
-    animateTo = vi.fn(target => {
-      animationDestinationScale = target.scale;
-    });
-    commitTransform = vi.fn(next => {
-      transform = next;
-      return true;
-    });
-    cancelAnimation = vi.fn();
-    consumeAutoFit = vi.fn();
-    rebasePointerSessions = vi.fn();
-    events = {
-      dispatchPanStart: vi.fn(() => true),
-      dispatchPan: vi.fn(() => true),
-      dispatchPanEnd: vi.fn(),
-      dispatchZoom: vi.fn(() => true)
-    };
     getZoomTarget = vi.fn(action => {
-      const scale = animationDestinationScale ?? transform.scale;
-      if (action === 'in') return { scale: Math.min(4, scale * 2), x: 0, y: 0 };
-      if (action === 'out') return { scale: Math.max(0.5, scale / 2), x: 0, y: 0 };
+      if (action === 'in') return { scale: 2, x: 100, y: 75 };
+      if (action === 'out') return { scale: 0.5, x: -200, y: -150 };
       if (action === 'reset') return { scale: 1, x: 0, y: 0 };
       return { scale: 1.5, x: 50, y: 25 };
     });
-    new ViewportNavigationController(host, {
-      animateTo,
-      commitTransform,
-      cancelAnimation,
-      consumeAutoFit,
-      events,
-      getTransform: () => transform,
-      getZoomTarget,
-      rebasePointerSessions,
-      viewportToClient: (x, y) => ({ x, y })
-    });
+    new ViewportNavigationController(host, { getTransform: () => transform, getZoomTarget });
     fixture.append(host);
   });
 
   afterEach(() => {
     removeFixture(fixture);
     vi.restoreAllMocks();
-    vi.unstubAllGlobals();
   });
 
-  it('manages only the tabindex it owns while either navigation policy needs focusability', () => {
+  it('manages only its own tabindex while either effective capability needs focus', () => {
     expect(host.hasAttribute('tabindex')).toBe(false);
-
-    host.behaviorPan = true;
+    host.behaviorPan = 'space';
     host.sync();
     expect(host.getAttribute('tabindex')).toBe('0');
 
@@ -122,32 +100,38 @@ describe('ViewportNavigationController', () => {
     host.behaviorZoom = true;
     host.sync();
     expect(host.getAttribute('tabindex')).toBe('0');
-
     host.behaviorZoom = false;
     host.sync();
     expect(host.hasAttribute('tabindex')).toBe(false);
   });
 
-  it('translates focused Arrow keys into scale-independent discrete pan requests', () => {
+  it('preserves a consumer tabindex assigned while disconnected', () => {
     host.behaviorPan = true;
     host.sync();
-    transform = { scale: 2, x: 100, y: 200 };
+    expect(host.getAttribute('tabindex')).toBe('0');
+
+    host.remove();
+    host.tabIndex = -1;
+    fixture.append(host);
+    host.behaviorPan = false;
+    host.sync();
+
+    expect(host.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('turns focused Arrow input into a scale-independent pan request in Space mode', () => {
+    host.behaviorPan = 'space';
+    host.sync();
     host.focus();
-
+    transform = { scale: 2, x: 100, y: 200 };
     const event = keyEvent({ key: 'ArrowRight', shiftKey: true });
-    expect(host.dispatchEvent(event)).toBe(false);
 
-    expect(event.defaultPrevented).toBe(true);
-    expect(events.dispatchPan).toHaveBeenCalledWith({
+    expect(host.dispatchEvent(event)).toBe(false);
+    expect(host.requestPan).toHaveBeenCalledWith({
       event,
       next: { scale: 2, x: 150, y: 200 },
-      source: 'keyboard',
-      start: { scale: 2, x: 100, y: 200 }
+      source: 'keyboard'
     });
-    expect(commitTransform).toHaveBeenCalledWith({ scale: 2, x: 150, y: 200 });
-    expect(cancelAnimation).toHaveBeenCalledOnce();
-    expect(consumeAutoFit).toHaveBeenCalledOnce();
-    expect(rebasePointerSessions).toHaveBeenCalledOnce();
   });
 
   it.each([
@@ -155,124 +139,80 @@ describe('ViewportNavigationController', () => {
     ['ArrowRight', { scale: 2, x: 110, y: 200 }],
     ['ArrowUp', { scale: 2, x: 100, y: 190 }],
     ['ArrowDown', { scale: 2, x: 100, y: 210 }]
-  ] as const)('translates %s into a visible 20-pixel pan step', (key, next) => {
+  ] as const)('maps %s to a 20-pixel pan step', (key, next) => {
     host.behaviorPan = true;
-    transform = { scale: 2, x: 100, y: 200 };
     host.sync();
     host.focus();
+    transform = { scale: 2, x: 100, y: 200 };
 
     host.dispatchEvent(keyEvent({ key }));
 
-    expect(events.dispatchPan).toHaveBeenCalledWith(
-      expect.objectContaining({ next, source: 'keyboard', start: { scale: 2, x: 100, y: 200 } })
-    );
-    expect(commitTransform).toHaveBeenCalledWith(next);
+    expect(host.requestPan).toHaveBeenCalledWith(expect.objectContaining({ next, source: 'keyboard' }));
   });
 
-  it.each([
-    [0.5, false, 40],
-    [0.5, true, 200]
-  ] as const)(
-    'converts a %s-scale Arrow step with Shift %s from viewport pixels to content space',
-    (scale, shiftKey, contentDelta) => {
-      host.behaviorPan = 'space';
-      transform = { scale, x: 0, y: 0 };
-      host.sync();
-      host.focus();
-
-      host.dispatchEvent(keyEvent({ key: 'ArrowRight', shiftKey }));
-
-      expect(commitTransform).toHaveBeenCalledWith({ scale, x: contentDelta, y: 0 });
-    }
-  );
-
-  it.each(['ctrlKey', 'metaKey', 'altKey'] as const)('leaves %s Arrow input alone', modifier => {
+  it('leaves modified and descendant Arrow input alone', () => {
     host.behaviorPan = true;
     host.sync();
     host.focus();
-    const modified = keyEvent({ key: 'ArrowRight', [modifier]: true });
-
-    expect(host.dispatchEvent(modified)).toBe(true);
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-  });
-
-  it('requires exact host focus and rejects focused light- and shadow-DOM descendants', () => {
-    host.behaviorPan = true;
-    host.behaviorZoom = true;
-    host.sync();
-    const outside = document.createElement('button');
+    for (const modifier of ['ctrlKey', 'metaKey', 'altKey'] as const) {
+      expect(host.dispatchEvent(keyEvent({ key: 'ArrowRight', [modifier]: true }))).toBe(true);
+    }
     const input = document.createElement('input');
-    const shadowHost = document.createElement('div');
-    const shadowButton = document.createElement('button');
-    shadowHost.attachShadow({ mode: 'open' }).append(shadowButton);
-    host.append(input, shadowHost);
-    fixture.append(outside);
-
-    outside.focus();
-    expect(host.dispatchEvent(keyEvent({ key: 'ArrowRight' }))).toBe(true);
-    expect(host.dispatchEvent(keyEvent({ key: '+' }))).toBe(true);
+    host.append(input);
     input.focus();
     expect(host.dispatchEvent(keyEvent({ key: 'ArrowRight' }))).toBe(true);
-    expect(host.dispatchEvent(keyEvent({ key: '+' }))).toBe(true);
-    shadowButton.focus();
-    expect(host.dispatchEvent(keyEvent({ key: 'ArrowRight' }))).toBe(true);
-    expect(host.dispatchEvent(keyEvent({ key: '+' }))).toBe(true);
 
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(events.dispatchZoom).not.toHaveBeenCalled();
+    expect(host.requestPan).not.toHaveBeenCalled();
   });
 
-  it('uses immediate shadow-root focus for keyboard admission', async () => {
+  it('accepts keyboard input when focused inside an immediate shadow root', () => {
     host.remove();
     const shadowHost = document.createElement('div');
-    const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
-    shadowRoot.append(host);
+    const root = shadowHost.attachShadow({ mode: 'open' });
+    root.append(host);
     fixture.append(shadowHost);
     host.behaviorPan = true;
     host.sync();
     host.focus();
-    const event = keyEvent({ key: 'ArrowDown' });
 
-    expect(shadowRoot.activeElement).toBe(host);
-    expect(host.dispatchEvent(event)).toBe(false);
-    expect(events.dispatchPan).toHaveBeenCalledOnce();
+    expect(host.dispatchEvent(keyEvent({ key: 'ArrowDown' }))).toBe(false);
+    expect(host.requestPan).toHaveBeenCalledOnce();
   });
 
-  it('handles Invoker commands without focus and uses the event delegate before the default', () => {
+  it.each([
+    ['--pan-left', { scale: 2, x: 90, y: 200 }],
+    ['--pan-right', { scale: 2, x: 110, y: 200 }],
+    ['--pan-up', { scale: 2, x: 100, y: 190 }],
+    ['--pan-down', { scale: 2, x: 100, y: 210 }]
+  ] as const)('issues a %s command pan without focus', (command, next) => {
     host.behaviorPan = 'space';
     host.sync();
-    const event = new CommandEvent('command', { command: '--pan-left' });
+    transform = { scale: 2, x: 100, y: 200 };
+    const event = new CommandEvent('command', { command });
 
     host.dispatchEvent(event);
 
-    expect(events.dispatchPan).toHaveBeenCalledWith({
-      event,
-      next: { scale: 1, x: -20, y: 0 },
-      source: 'command',
-      start: { scale: 1, x: 0, y: 0 }
-    });
-    expect(commitTransform).toHaveBeenCalledWith({ scale: 1, x: -20, y: 0 });
+    expect(host.requestPan).toHaveBeenCalledWith({ event, next, source: 'command' });
   });
 
-  it('constructs a focused keyboard zoom request and delegates its animated default', () => {
+  it('issues an animated keyboard zoom with a content anchor and no synthetic client point', () => {
     host.behaviorZoom = true;
     host.sync();
     host.focus();
     const event = keyEvent({ key: '+' });
 
     expect(host.dispatchEvent(event)).toBe(false);
-
-    expect(events.dispatchZoom).toHaveBeenCalledWith({
-      anchor: { x: 200, y: 150 },
-      clientX: 200,
-      clientY: 150,
-      event,
-      factor: 2,
-      next: { scale: 2, x: 0, y: 0 },
-      source: 'keyboard',
-      start: { scale: 1, x: 0, y: 0 }
-    });
-    expect(animateTo).toHaveBeenCalledWith({ scale: 2, x: 0, y: 0 });
+    expect(getZoomTarget).toHaveBeenCalledWith('in');
+    expect(host.requestZoom).toHaveBeenCalledWith(
+      {
+        anchor: { x: 200, y: 150 },
+        event,
+        factor: 2,
+        next: { scale: 2, x: 100, y: 75 },
+        source: 'keyboard'
+      },
+      { animated: true }
+    );
   });
 
   it.each([
@@ -281,91 +221,27 @@ describe('ViewportNavigationController', () => {
     ['numpad plus', { code: 'NumpadAdd', key: '+' }, 'in'],
     ['minus', { code: 'Minus', key: '-' }, 'out'],
     ['numpad minus', { code: 'NumpadSubtract', key: '-' }, 'out']
-  ] as const)('handles the focused %s keyboard zoom variant', (_name, init, action) => {
-    host.behaviorZoom = true;
-    host.sync();
-    host.focus();
-    const event = keyEvent(init);
-
-    expect(host.dispatchEvent(event)).toBe(false);
-
-    expect(event.defaultPrevented).toBe(true);
-    expect(getZoomTarget).toHaveBeenCalledWith(action);
-    expect(events.dispatchZoom).toHaveBeenCalledWith(expect.objectContaining({ event, source: 'keyboard' }));
-  });
-
-  it.each([
-    ['reset', { ctrlKey: true, key: '0' }, 'reset'],
-    ['fit', { key: '1', metaKey: true }, 'fit']
-  ] as const)('handles the focused modified %s shortcut', (_name, init, action) => {
+  ] as const)('maps focused %s zoom input to %s', (_name, init, action) => {
     host.behaviorZoom = true;
     host.sync();
     host.focus();
 
     expect(host.dispatchEvent(keyEvent(init))).toBe(false);
-
     expect(getZoomTarget).toHaveBeenCalledWith(action);
-    expect(events.dispatchZoom).toHaveBeenCalledWith(expect.objectContaining({ source: 'keyboard' }));
-  });
-
-  it('does not apply canceled discrete pan or zoom defaults', () => {
-    host.behaviorPan = true;
-    host.behaviorZoom = true;
-    host.sync();
-    vi.mocked(events.dispatchPan).mockReturnValue(false);
-    vi.mocked(events.dispatchZoom).mockReturnValue(false);
-
-    host.dispatchEvent(new CommandEvent('command', { command: '--pan-right' }));
-    host.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
-
-    expect(commitTransform).not.toHaveBeenCalled();
-    expect(animateTo).not.toHaveBeenCalled();
-    expect(consumeAutoFit).toHaveBeenCalledTimes(2);
-    expect(cancelAnimation).toHaveBeenCalledOnce();
-    expect(rebasePointerSessions).not.toHaveBeenCalled();
-  });
-
-  it('does not rebase pointer sessions when an accepted discrete pan proposal does not commit', () => {
-    host.behaviorPan = true;
-    host.sync();
-    commitTransform.mockReturnValue(false);
-
-    host.dispatchEvent(new CommandEvent('command', { command: '--pan-right' }));
-
-    expect(events.dispatchPan).toHaveBeenCalledOnce();
-    expect(commitTransform).toHaveBeenCalledOnce();
-    expect(consumeAutoFit).toHaveBeenCalledOnce();
-    expect(cancelAnimation).toHaveBeenCalledOnce();
-    expect(rebasePointerSessions).not.toHaveBeenCalled();
+    expect(host.requestZoom).toHaveBeenCalledWith(expect.objectContaining({ source: 'keyboard' }), { animated: true });
   });
 
   it.each([
-    ['--pan-left', { scale: 2, x: 90, y: 200 }],
-    ['--pan-right', { scale: 2, x: 110, y: 200 }],
-    ['--pan-up', { scale: 2, x: 100, y: 190 }],
-    ['--pan-down', { scale: 2, x: 100, y: 210 }]
-  ] as const)('handles %s without focus and constructs the command pan detail', (command, next) => {
-    host.behaviorPan = 'space';
-    transform = { scale: 2, x: 100, y: 200 };
+    ['reset', { ctrlKey: true, key: '0' }, 'reset'],
+    ['fit', { key: '1', metaKey: true }, 'fit']
+  ] as const)('maps modified %s input to %s', (_name, init, action) => {
+    host.behaviorZoom = true;
     host.sync();
-    const event = new CommandEvent('command', { command });
+    host.focus();
 
-    host.dispatchEvent(event);
-
-    expect(events.dispatchPan).toHaveBeenCalledWith({
-      event,
-      next,
-      source: 'command',
-      start: { scale: 2, x: 100, y: 200 }
-    });
-    expect(commitTransform).toHaveBeenCalledWith(next);
-  });
-
-  it('leaves pan commands inert when pan behavior is disabled', () => {
-    host.dispatchEvent(new CommandEvent('command', { command: '--pan-right' }));
-
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(commitTransform).not.toHaveBeenCalled();
+    expect(host.dispatchEvent(keyEvent(init))).toBe(false);
+    expect(getZoomTarget).toHaveBeenCalledWith(action);
+    expect(host.requestZoom).toHaveBeenCalledOnce();
   });
 
   it.each([
@@ -373,7 +249,7 @@ describe('ViewportNavigationController', () => {
     ['--zoom-out', 'out'],
     ['--zoom-reset', 'reset'],
     ['--zoom-to-fit', 'fit']
-  ] as const)('handles %s as a command-originated animated zoom request', (command, action) => {
+  ] as const)('issues an animated %s command zoom without focus', (command, action) => {
     host.behaviorZoom = true;
     host.sync();
     const event = new CommandEvent('command', { command });
@@ -381,91 +257,51 @@ describe('ViewportNavigationController', () => {
     host.dispatchEvent(event);
 
     expect(getZoomTarget).toHaveBeenCalledWith(action);
-    expect(events.dispatchZoom).toHaveBeenCalledWith(expect.objectContaining({ event, source: 'command' }));
-    expect(animateTo).toHaveBeenCalledOnce();
+    expect(host.requestZoom).toHaveBeenCalledWith(expect.objectContaining({ event, source: 'command' }), {
+      animated: true
+    });
   });
 
-  it('leaves zoom commands inert when zoom behavior is disabled', () => {
+  it('leaves disabled zoom commands unrequested', () => {
+    host.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+    expect(getZoomTarget).not.toHaveBeenCalled();
+    expect(host.requestZoom).not.toHaveBeenCalled();
+  });
+
+  it('registers keyboard and command zoom routes once after reconnecting', () => {
+    host.behaviorZoom = true;
+    host.sync();
+    host.remove();
+    fixture.append(host);
+    host.focus();
+
+    host.dispatchEvent(keyEvent({ key: '+' }));
     host.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
 
-    expect(events.dispatchZoom).not.toHaveBeenCalled();
-    expect(animateTo).not.toHaveBeenCalled();
+    expect(host.requestZoom).toHaveBeenCalledTimes(2);
+    expect(vi.mocked(host.requestZoom).mock.calls.map(([proposal]) => proposal.source)).toEqual([
+      'keyboard',
+      'command'
+    ]);
   });
 
-  it.each([
-    ['keyboard', () => host.dispatchEvent(keyEvent({ key: '+' }))],
-    ['command', () => host.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }))]
-  ] as const)('steps repeated %s zoom requests from the animation destination', (_source, requestZoom) => {
-    host.behaviorZoom = true;
-    host.sync();
-    host.focus();
-
-    requestZoom();
-    requestZoom();
-    requestZoom();
-
-    expect(events.dispatchZoom).toHaveBeenCalledTimes(3);
-    expect(animateTo.mock.calls.map(([target]) => target.scale)).toEqual([2, 4, 4]);
-    expect(transform.scale).toBe(1);
-  });
-
-  it('retains tabindex ownership through reconnects without blurring or overwriting consumer values', () => {
-    host.behaviorPan = true;
-    host.sync();
-    host.focus();
-    const blur = vi.spyOn(host, 'blur');
-
-    host.remove();
-    fixture.append(host);
-    expect(host.getAttribute('tabindex')).toBe('0');
-
-    host.focus();
-    host.behaviorPan = false;
-    host.sync();
-    expect(host.hasAttribute('tabindex')).toBe(false);
-    expect(blur).not.toHaveBeenCalled();
-
-    host.setAttribute('tabindex', '-1');
-    host.behaviorZoom = true;
-    host.sync();
-    host.behaviorZoom = false;
-    host.sync();
-    expect(host.getAttribute('tabindex')).toBe('-1');
-  });
-
-  it('ignores command and keyboard input while disabled or disconnected and handles each once after reconnection', () => {
-    const requestPan = (): void => {
-      host.dispatchEvent(new CommandEvent('command', { command: '--pan-right' }));
-      host.dispatchEvent(keyEvent({ key: 'ArrowRight' }));
-    };
-
-    requestPan();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-
-    for (let cycle = 0; cycle < 2; cycle += 1) {
-      host.behaviorPan = true;
-      host.sync();
-      host.focus();
-      requestPan();
-      expect(events.dispatchPan).toHaveBeenCalledTimes((cycle + 1) * 2);
-
-      host.behaviorPan = false;
-      host.sync();
-      requestPan();
-      expect(events.dispatchPan).toHaveBeenCalledTimes((cycle + 1) * 2);
-    }
+  it('rejects disabled input and resumes once after reconnecting', () => {
+    const command = (): void => host.dispatchEvent(new CommandEvent('command', { command: '--pan-right' }));
+    command();
+    expect(host.requestPan).not.toHaveBeenCalled();
 
     host.behaviorPan = true;
     host.sync();
-    host.focus();
+    command();
+    expect(host.requestPan).toHaveBeenCalledOnce();
+
     host.remove();
-    requestPan();
-    expect(events.dispatchPan).toHaveBeenCalledTimes(4);
+    command();
+    expect(host.requestPan).toHaveBeenCalledOnce();
 
     fixture.append(host);
-    host.focus();
-    requestPan();
-    expect(events.dispatchPan).toHaveBeenCalledTimes(6);
+    command();
+    expect(host.requestPan).toHaveBeenCalledTimes(2);
   });
 });
 

@@ -116,8 +116,8 @@ export class ViewportGridlines extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    const viewport = this.parentElement?.closest(Viewport.metadata.tag);
-    if (!(viewport instanceof Viewport) || viewport !== this.parentElement) return;
+    const viewport = this.parentElement;
+    if (!(viewport instanceof Viewport)) return;
     this.#viewport = viewport;
     this.style.setProperty('--_scale', `${viewport.scale}`);
     this.#viewport.addEventListener('viewportchange', this.#handleViewportChange);

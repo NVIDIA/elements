@@ -10,27 +10,25 @@ import {
   type GestureInput,
   type PinchStart,
   type PointerEndGesture,
+  type PointerMovementGesture,
   type WheelGestureInput
 } from '@nvidia-elements/core/internal';
-import type { PointerMovementGesture } from '@nvidia-elements/core/internal';
 import type {
   ViewportPanBehavior,
-  ViewportPanEndDetail,
+  ViewportPanSession,
+  ViewportPanProposal,
+  ViewportPanUpdateProposal,
+  ViewportPanEndRequest,
   ViewportPanEndReason,
   ViewportPoint,
-  ViewportPointerPanDetail,
   ViewportTransform,
-  ViewportWheelPanDetail,
-  ViewportZoomDetail
+  ViewportZoomProposal
 } from './viewport.types.js';
-import type { ViewportNavigationEventDelegate } from './viewport-navigation.types.js';
 import { anchoredTransform, contentPointFromViewport } from './viewport-projection.utils.js';
-
-type PointerPanDefaultAction = 'apply' | 'skip';
 
 type PointerPanLifecycle =
   | { readonly state: 'pending' }
-  | { readonly state: 'active'; readonly defaultAction: PointerPanDefaultAction }
+  | { readonly state: 'active'; readonly navigation: ViewportPanSession }
   | { readonly state: 'suppressed' };
 
 interface PointerPanSession {
@@ -39,6 +37,7 @@ interface PointerPanSession {
   lastTotalDisplacementX: number;
   lastTotalDisplacementY: number;
   lifecycle: PointerPanLifecycle;
+  pendingEnd?: ViewportPanEndRequest;
   readonly pointerType: string;
   readonly start: ViewportTransform;
   transformStart: ViewportTransform;
@@ -55,21 +54,21 @@ type ViewportGestureNavigationHost = HTMLElement &
   ReactiveControllerHost & {
     readonly _internals: ElementInternals;
     readonly behaviorPan: ViewportPanBehavior;
-    readonly behaviorZoom: boolean;
+    readonly pannable: boolean;
+    readonly zoomable: boolean;
     readonly dragThreshold: number;
+    requestPan(proposal: ViewportPanProposal): boolean;
+    requestZoom(proposal: ViewportZoomProposal): boolean;
+    startPan(proposal: ViewportPanProposal): ViewportPanSession | undefined;
   };
 
-export interface ViewportGestureNavigationDelegate {
-  readonly commitTransform: (next: ViewportTransform) => boolean;
-  readonly cancelAnimation: () => void;
+interface ViewportGestureNavigationDelegate {
   readonly clampScale: (value: number) => number;
   readonly clientToViewport: (clientX: number, clientY: number) => ViewportPoint;
-  readonly consumeAutoFit: () => void;
-  readonly events: ViewportNavigationEventDelegate;
   readonly getTransform: () => ViewportTransform;
+  readonly requestAdmittedPinchZoom: (proposal: ViewportZoomProposal) => boolean;
 }
 
-/** Coordinates the viewport's opt-in pointer, touch, pinch, and wheel navigation behavior. */
 export class ViewportGestureNavigationController implements ReactiveController {
   readonly #host: ViewportGestureNavigationHost;
   readonly #delegate: ViewportGestureNavigationDelegate;
@@ -131,26 +130,24 @@ export class ViewportGestureNavigationController implements ReactiveController {
     this.#syncPanEligibleState();
   }
 
-  /** Rebase in-progress pointer math synchronously after an independent transform change. */
   rebasePointerSessions(): void {
     this.#rebasePointerPans();
   }
 
   #syncBehaviorPolicy(): void {
     const panBehavior = this.#host.behaviorPan;
-    const zoomBehavior = this.#host.behaviorZoom;
-    const behaviorEnabled = Boolean(panBehavior) || zoomBehavior;
+    const behaviorEnabled = this.#host.pannable || this.#host.zoomable;
     const handlesClaimedPointers = this.#pointerPanSessions.size > 0;
     this.#keyStateController.enabled = this.#connected && panBehavior === 'space';
     this.#gestureController.target =
       this.#connected && (behaviorEnabled || handlesClaimedPointers) ? this.#host : undefined;
     this.#setSpaceKeyListener(this.#connected && panBehavior === 'space');
-    this.#setClickListeners(this.#connected && (Boolean(panBehavior) || this.#suppressedClicks.size > 0));
-    this.#syncDisabledPanEligibility(panBehavior);
+    this.#setClickListeners(this.#connected && (this.#host.pannable || this.#suppressedClicks.size > 0));
+    this.#syncDisabledPanEligibility();
   }
 
-  #syncDisabledPanEligibility(panBehavior: ViewportPanBehavior): void {
-    if (panBehavior) return;
+  #syncDisabledPanEligibility(): void {
+    if (this.#host.pannable) return;
     this.#nativeInteractionHovered = false;
     this.#host._internals?.states.delete('pan-eligible');
   }
@@ -170,14 +167,13 @@ export class ViewportGestureNavigationController implements ReactiveController {
     const nativeEvent = input.event;
     this.#clearSuppressedClick(nativeEvent.pointerId);
     const isTouch = nativeEvent.pointerType === 'touch';
-    const canPan = isTouch ? Boolean(this.#host.behaviorPan) : this.#acceptsPointerPan(nativeEvent);
-    const canPinch = isTouch && this.#host.behaviorZoom;
+    const canPan = isTouch ? this.#host.pannable : this.#acceptsPointerPan(nativeEvent);
+    const canPinch = isTouch && this.#host.zoomable;
     if (!canPan && !canPinch) return this.#focusSpaceViewportFromUnclaimedPointer(nativeEvent);
     const claimed = input.claim({ kind: canPan ? 'pan' : undefined, pinchCandidate: canPinch });
     if (!claimed) return;
     if (!isTouch) this.#host.focus({ preventScroll: true });
     if (nativeEvent.button === 1) nativeEvent.preventDefault();
-    this.#delegate.consumeAutoFit();
     const start = this.#delegate.getTransform();
     this.#pointerPanSessions.set(nativeEvent.pointerId, {
       button: nativeEvent.button,
@@ -220,11 +216,15 @@ export class ViewportGestureNavigationController implements ReactiveController {
   }
 
   #finishPointerPan(input: PointerEndGesture, session: PointerPanSession, endedPinch: boolean): void {
+    if (session.lifecycle.state === 'pending') {
+      session.pendingEnd = { event: input.event, interrupted: input.interrupted || endedPinch, reason: input.reason };
+      return;
+    }
     if (session.lifecycle.state !== 'active') return;
-    this.#suppressPointerPan(session);
-    this.#syncPanningState();
     const interrupted = input.interrupted || endedPinch;
     this.#dispatchPanEnd(input, session, interrupted);
+    this.#suppressPointerPan(session);
+    this.#syncPanningState();
     if (
       !interrupted &&
       this.#getAuthoritativePointerPanLifecycle(input.event.pointerId, session)?.state === 'suppressed'
@@ -243,52 +243,42 @@ export class ViewportGestureNavigationController implements ReactiveController {
   }
 
   #handleWheelZoom(input: WheelGestureInput): void {
-    if (!this.#host.behaviorZoom || !input.claim()) return;
-    this.#delegate.consumeAutoFit();
-    this.#delegate.cancelAnimation();
+    if (!this.#host.zoomable || !input.claim()) return;
     const start = this.#delegate.getTransform();
     const viewport = this.#delegate.clientToViewport(input.clientX, input.clientY);
     const anchor = contentPointFromViewport(viewport.x, viewport.y, start);
     const factor = this.#gestureController.getWheelZoomFactor(input);
     const next = anchoredTransform(anchor, viewport, this.#delegate.clampScale(start.scale * factor));
-    const detail: ViewportZoomDetail = {
+    const proposal: ViewportZoomProposal = {
       anchor,
       clientX: input.clientX,
       clientY: input.clientY,
       event: input.event,
       factor,
       next,
-      source: 'wheel',
-      start
+      source: 'wheel'
     };
-    if (this.#delegate.events.dispatchZoom(detail) && this.#delegate.commitTransform(next)) {
-      this.rebasePointerSessions();
-    }
+    this.#host.requestZoom(proposal);
   }
 
   #handleWheelPan(input: WheelGestureInput): void {
-    if (!this.#host.behaviorPan || !input.claim()) return;
-    this.#delegate.consumeAutoFit();
-    this.#delegate.cancelAnimation();
+    if (!this.#host.pannable || !input.claim()) return;
     const start = this.#delegate.getTransform();
     const next = {
       scale: start.scale,
       x: start.x + input.deltaX / start.scale,
       y: start.y + input.deltaY / start.scale
     };
-    const detail: ViewportWheelPanDetail = {
+    const proposal: ViewportPanProposal = {
       clientX: input.clientX,
       clientY: input.clientY,
       deltaX: input.deltaX,
       deltaY: input.deltaY,
       event: input.event,
       next,
-      source: 'wheel',
-      start
+      source: 'wheel'
     };
-    if (this.#delegate.events.dispatchPan(detail) && this.#delegate.commitTransform(next)) {
-      this.rebasePointerSessions();
-    }
+    this.#host.requestPan(proposal);
   }
 
   #handleGesture = (event: CustomEvent<Gesture<PinchContext>>): void => {
@@ -306,10 +296,15 @@ export class ViewportGestureNavigationController implements ReactiveController {
     if (!session || session.lifecycle.state === 'suppressed') return;
     session.lastTotalDisplacementX = gesture.totalDisplacementX;
     session.lastTotalDisplacementY = gesture.totalDisplacementY;
-    if (session.lifecycle.state === 'pending' && !this.#activatePendingPan(pointerId, session, gesture)) return;
-    const lifecycle = session.lifecycle;
-    if (lifecycle.state !== 'active') return;
-    this.#delegate.cancelAnimation();
+    const proposal = this.#pointerPanProposal(gesture, session);
+    if (session.lifecycle.state === 'pending') this.#activatePointerPan(gesture, session, proposal);
+    else session.lifecycle.navigation.update(proposal);
+  }
+
+  #pointerPanProposal(
+    gesture: PointerMovementGesture & { readonly kind: 'pan' },
+    session: PointerPanSession
+  ): ViewportPanUpdateProposal {
     const displacementX = gesture.totalDisplacementX - session.transformStartDisplacementX;
     const displacementY = gesture.totalDisplacementY - session.transformStartDisplacementY;
     const next = {
@@ -317,43 +312,24 @@ export class ViewportGestureNavigationController implements ReactiveController {
       x: session.transformStart.x - displacementX / session.transformStart.scale,
       y: session.transformStart.y - displacementY / session.transformStart.scale
     };
-    const detail: ViewportPointerPanDetail = { ...gesture, next, source: 'pointer', start: session.start };
-    this.#dispatchPointerPanAndApplyDefault(pointerId, session, detail);
+    return { ...gesture, next };
   }
 
-  #dispatchPointerPanAndApplyDefault(
-    pointerId: number,
+  #activatePointerPan(
+    gesture: PointerMovementGesture & { readonly kind: 'pan' },
     session: PointerPanSession,
-    detail: ViewportPointerPanDetail
+    proposal: ViewportPanUpdateProposal
   ): void {
-    const appliesPanDefault = this.#delegate.events.dispatchPan(detail);
-    const authoritativeLifecycle = this.#getAuthoritativePointerPanLifecycle(pointerId, session);
-    if (
-      appliesPanDefault &&
-      authoritativeLifecycle?.state === 'active' &&
-      authoritativeLifecycle.defaultAction === 'apply'
-    ) {
-      this.#delegate.commitTransform(detail.next);
-    }
-  }
-
-  #activatePendingPan(pointerId: number, session: PointerPanSession, gesture: PointerMovementGesture): boolean {
-    if (session.lifecycle.state !== 'pending') return false;
     const distanceSquared = gesture.totalDisplacementX ** 2 + gesture.totalDisplacementY ** 2;
-    if (distanceSquared < session.dragThreshold ** 2) return false;
-    const displacementX = gesture.totalDisplacementX - session.transformStartDisplacementX;
-    const displacementY = gesture.totalDisplacementY - session.transformStartDisplacementY;
-    const next = {
-      scale: session.transformStart.scale,
-      x: session.transformStart.x - displacementX / session.transformStart.scale,
-      y: session.transformStart.y - displacementY / session.transformStart.scale
-    };
-    const detail: ViewportPointerPanDetail = { ...gesture, next, source: 'pointer', start: session.start };
-    const defaultAction: PointerPanDefaultAction = this.#delegate.events.dispatchPanStart(detail) ? 'apply' : 'skip';
-    if (this.#getAuthoritativePointerPanLifecycle(pointerId, session)?.state !== 'pending') return false;
-    session.lifecycle = { defaultAction, state: 'active' };
+    if (distanceSquared < session.dragThreshold ** 2) return;
+    const navigation = this.#host.startPan({ ...proposal, source: 'pointer' });
+    if (!navigation) return;
+    if (this.#getAuthoritativePointerPanLifecycle(gesture.event.pointerId, session)?.state !== 'pending') {
+      if (session.pendingEnd) navigation.end(session.pendingEnd);
+      return;
+    }
+    session.lifecycle = { state: 'active', navigation };
     this.#syncPanningState();
-    return true;
   }
 
   #getAuthoritativePointerPanLifecycle(pointerId: number, session: PointerPanSession): PointerPanLifecycle | undefined {
@@ -362,27 +338,24 @@ export class ViewportGestureNavigationController implements ReactiveController {
   }
 
   #handlePinchGesture(gesture: Extract<Gesture<PinchContext>, { kind: 'pinch' }>): void {
-    this.#delegate.cancelAnimation();
     this.#interruptPointerPansForPinch(gesture.event);
     const viewport = this.#delegate.clientToViewport(gesture.centerClientX, gesture.centerClientY);
     const nextScale = this.#delegate.clampScale(gesture.context.start.scale * gesture.scale);
     const next = anchoredTransform(gesture.context.anchor, viewport, nextScale);
-    const detail: ViewportZoomDetail = {
+    const proposal: ViewportZoomProposal = {
       anchor: gesture.context.anchor,
       clientX: gesture.centerClientX,
       clientY: gesture.centerClientY,
       event: gesture.event,
       factor: gesture.scale,
       next,
-      source: 'pinch',
-      start: gesture.context.start
+      source: 'pinch'
     };
-    if (this.#delegate.events.dispatchZoom(detail) && this.#delegate.commitTransform(next)) {
-      this.rebasePointerSessions();
-    }
+    this.#delegate.requestAdmittedPinchZoom(proposal);
   }
 
   #beginPinch = (pinch: PinchStart): { context: PinchContext } | undefined => {
+    if (!this.#host.zoomable) return undefined;
     const start = this.#delegate.getTransform();
     const viewport = this.#delegate.clientToViewport(pinch.startCenterClientX, pinch.startCenterClientY);
     const context: PinchContext = {
@@ -409,8 +382,9 @@ export class ViewportGestureNavigationController implements ReactiveController {
     session: PointerPanSession
   ): void {
     const wasActive = session.lifecycle.state === 'active';
-    this.#suppressPointerPan(session);
+    if (session.lifecycle.state === 'pending') session.pendingEnd = { ...end, interrupted: true };
     if (wasActive) this.#dispatchPanEnd(end, session, true);
+    this.#suppressPointerPan(session);
   }
 
   #suppressPointerPan(session: PointerPanSession): void {
@@ -423,15 +397,8 @@ export class ViewportGestureNavigationController implements ReactiveController {
     session: PointerPanSession,
     interrupted: boolean
   ): void {
-    const detail: ViewportPanEndDetail = {
-      event: end.event,
-      interrupted,
-      reason: end.reason,
-      source: 'pointer',
-      start: session.start,
-      transform: this.#delegate.getTransform()
-    };
-    this.#delegate.events.dispatchPanEnd(detail);
+    if (session.lifecycle.state !== 'active') return;
+    session.lifecycle.navigation.end({ event: end.event, interrupted, reason: end.reason });
   }
 
   #handleSpaceKeyDown = (event: KeyboardEvent): void => {
@@ -449,7 +416,7 @@ export class ViewportGestureNavigationController implements ReactiveController {
   };
 
   #handlePointerOver = (event: PointerEvent): void => {
-    if (!this.#host.behaviorPan) return;
+    if (!this.#host.pannable) return;
     this.#nativeInteractionHovered = eventTargetsNativeInteraction(event, this.#host);
     this.#syncPanEligibleState();
   };
@@ -458,7 +425,7 @@ export class ViewportGestureNavigationController implements ReactiveController {
     if (event.button === 0) {
       return this.#host.behaviorPan === true || (this.#host.behaviorPan === 'space' && this.#isSpacePanEligible());
     }
-    if (event.button === 1) return Boolean(this.#host.behaviorPan);
+    if (event.button === 1) return this.#host.pannable;
     return false;
   }
 
@@ -467,8 +434,8 @@ export class ViewportGestureNavigationController implements ReactiveController {
   }
 
   #shouldIgnoreEvent = (event: Event): boolean => {
-    if (event.type === 'dragstart' && !this.#host.behaviorPan) return true;
-    return eventTargetsNativeInteraction(event, this.#host);
+    if (event.type === 'dragstart' && !this.#host.pannable) return true;
+    return eventTargetsViewportOverlay(event, this.#host) || eventTargetsNativeInteraction(event, this.#host);
   };
 
   #shouldPreventContextMenu = (event: MouseEvent): boolean => {
@@ -483,7 +450,7 @@ export class ViewportGestureNavigationController implements ReactiveController {
     event.button === 0;
 
   #getTouchAction = (): string | undefined =>
-    this.#host.behaviorPan || this.#host.behaviorZoom || this.#pointerPanSessions.size > 0 ? 'none' : undefined;
+    this.#host.pannable || this.#host.zoomable || this.#pointerPanSessions.size > 0 ? 'none' : undefined;
 
   #rebasePointerPans(): void {
     const transformStart = this.#delegate.getTransform();
@@ -566,6 +533,14 @@ export class ViewportGestureNavigationController implements ReactiveController {
       this.#host.removeEventListener('auxclick', this.#handleClickCapture as EventListener, true);
     }
   }
+}
+
+function eventTargetsViewportOverlay(event: Event, boundary: Element): boolean {
+  for (const target of event.composedPath()) {
+    if (target === boundary) break;
+    if (target instanceof Element && target.parentElement === boundary && target.slot === 'overlay') return true;
+  }
+  return false;
 }
 
 function eventTargetsNativeInteraction(event: Event, boundary: Element): boolean {

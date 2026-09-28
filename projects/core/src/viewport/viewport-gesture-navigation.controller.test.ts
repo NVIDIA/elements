@@ -5,12 +5,14 @@ import { html, type ReactiveController } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachInternals } from '@nvidia-elements/core/internal';
 import { createFixture, removeFixture } from '@internals/testing';
-import {
-  ViewportGestureNavigationController,
-  type ViewportGestureNavigationDelegate
-} from './viewport-gesture-navigation.controller.js';
-import type { ViewportNavigationEventDelegate } from './viewport-navigation.types.js';
-import type { ViewportPanBehavior, ViewportTransform } from './viewport.types.js';
+import { ViewportGestureNavigationController } from './viewport-gesture-navigation.controller.js';
+import type {
+  ViewportPanBehavior,
+  ViewportPanProposal,
+  ViewportPanSession,
+  ViewportTransform,
+  ViewportZoomProposal
+} from './viewport.types.js';
 
 class ViewportGestureNavigationControllerTestHost extends HTMLElement {
   readonly #controllers = new Set<ReactiveController>();
@@ -19,6 +21,26 @@ class ViewportGestureNavigationControllerTestHost extends HTMLElement {
   behaviorPan: ViewportPanBehavior = false;
   behaviorZoom = false;
   dragThreshold = 5;
+
+  get pannable(): boolean {
+    return Boolean(this.behaviorPan);
+  }
+
+  get zoomable(): boolean {
+    return this.behaviorZoom;
+  }
+
+  requestPan(_proposal: ViewportPanProposal): boolean {
+    return false;
+  }
+
+  requestZoom(_proposal: ViewportZoomProposal): boolean {
+    return false;
+  }
+
+  startPan(_proposal: ViewportPanProposal): ViewportPanSession | undefined {
+    return undefined;
+  }
 
   addController(controller: ReactiveController): void {
     this.#controllers.add(controller);
@@ -50,40 +72,36 @@ const tag = 'viewport-gesture-navigation-controller-test-host';
 if (!customElements.get(tag)) customElements.define(tag, ViewportGestureNavigationControllerTestHost);
 
 describe('ViewportGestureNavigationController', () => {
-  let commitTransform: ReturnType<typeof vi.fn<ViewportGestureNavigationDelegate['commitTransform']>>;
-  let cancelAnimation: ReturnType<typeof vi.fn<ViewportGestureNavigationDelegate['cancelAnimation']>>;
-  let consumeAutoFit: ReturnType<typeof vi.fn<ViewportGestureNavigationDelegate['consumeAutoFit']>>;
-  let events: ViewportNavigationEventDelegate;
+  let controller: ViewportGestureNavigationController;
   let fixture: HTMLElement;
   let host: ViewportGestureNavigationControllerTestHost;
+  let sessions: ViewportPanSession[];
   let transform: ViewportTransform;
-  let controller: ViewportGestureNavigationController;
+  let requestAdmittedPinchZoom: ReturnType<typeof vi.fn<(proposal: ViewportZoomProposal) => boolean>>;
 
   beforeEach(async () => {
     fixture = await createFixture(html`<div></div>`);
     host = document.createElement(tag) as ViewportGestureNavigationControllerTestHost;
     host.tabIndex = 0;
+    sessions = [];
     transform = { scale: 1, x: 0, y: 0 };
-    commitTransform = vi.fn(next => {
-      transform = next;
-      return true;
+    vi.spyOn(host, 'requestPan').mockReturnValue(true);
+    vi.spyOn(host, 'requestZoom').mockReturnValue(true);
+    vi.spyOn(host, 'startPan').mockImplementation(() => {
+      const session: ViewportPanSession = {
+        start: transform,
+        update: vi.fn(() => true),
+        end: vi.fn()
+      };
+      sessions.push(session);
+      return session;
     });
-    cancelAnimation = vi.fn();
-    consumeAutoFit = vi.fn();
-    events = {
-      dispatchPanStart: vi.fn(() => true),
-      dispatchPan: vi.fn(() => true),
-      dispatchPanEnd: vi.fn(),
-      dispatchZoom: vi.fn(() => true)
-    };
+    requestAdmittedPinchZoom = vi.fn(() => true);
     controller = new ViewportGestureNavigationController(host, {
-      commitTransform,
-      cancelAnimation,
       clampScale: value => Math.min(4, Math.max(0.5, value)),
       clientToViewport: (x, y) => ({ x, y }),
-      consumeAutoFit,
-      events,
-      getTransform: () => transform
+      getTransform: () => transform,
+      requestAdmittedPinchZoom
     });
     fixture.append(host);
   });
@@ -92,327 +110,110 @@ describe('ViewportGestureNavigationController', () => {
     removeFixture(fixture);
     vi.useRealTimers();
     vi.restoreAllMocks();
-    vi.unstubAllGlobals();
   });
 
-  it('does not admit native pointer and wheel input while gesture targeting is disabled', () => {
+  it('does not claim pointer or wheel input while both capabilities are disabled', () => {
     const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    const down = pointerEvent('pointerdown', { pointerId: 1 });
-    const wheel = wheelEvent({ deltaY: 10 });
 
-    expect(host.dispatchEvent(down)).toBe(true);
-    expect(host.dispatchEvent(wheel)).toBe(true);
+    expect(host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }))).toBe(true);
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+    expect(host.dispatchEvent(wheelEvent({ deltaY: 10 }))).toBe(true);
+
     expect(capture).not.toHaveBeenCalled();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(events.dispatchZoom).not.toHaveBeenCalled();
+    expect(host.startPan).not.toHaveBeenCalled();
+    expect(host.requestPan).not.toHaveBeenCalled();
+    expect(host.requestZoom).not.toHaveBeenCalled();
   });
 
-  it('does not retain native-interaction hover observed while panning is disabled', () => {
-    const input = document.createElement('input');
-    host.append(input);
-
-    input.dispatchEvent(pointerEvent('pointerover', { pointerId: 1 }));
-    host.behaviorPan = true;
+  it('prepares touch-action from effective capabilities and retains it for a claimed pointer', async () => {
+    host.style.setProperty('touch-action', 'pan-y', 'important');
+    host.behaviorPan = 'space';
     host.sync();
-    expect(host.matches(':state(pan-eligible)')).toBe(true);
+    expect(host.style.touchAction).toBe('none');
 
-    input.dispatchEvent(pointerEvent('pointerover', { pointerId: 1 }));
-    expect(host.matches(':state(pan-eligible)')).toBe(false);
-
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1, pointerType: 'touch' }));
     host.behaviorPan = false;
     host.sync();
-    expect(host.matches(':state(pan-eligible)')).toBe(false);
+    expect(host.style.touchAction).toBe('none');
 
-    host.behaviorPan = true;
-    host.sync();
-    expect(host.matches(':state(pan-eligible)')).toBe(true);
+    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 1, pointerType: 'touch' }));
+    await Promise.resolve();
+    expect(host.style.touchAction).toBe('pan-y');
+    expect(host.style.getPropertyPriority('touch-action')).toBe('important');
   });
 
-  it('keeps a claimed pointer pending below threshold and clears it without pan terminal effects', () => {
+  it('starts one pan at the sampled threshold, then updates and ends its session', () => {
     host.behaviorPan = true;
     host.sync();
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    const target = host;
+    target.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+    target.dispatchEvent(pointerEvent('pointermove', { clientX: 4, pointerId: 1 }));
+    expect(host.startPan).not.toHaveBeenCalled();
 
+    host.dragThreshold = 20;
+    host.sync();
+    target.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
+    target.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+    target.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 10, pointerId: 1 }));
+
+    expect(host.startPan).toHaveBeenCalledOnce();
+    expect(host.startPan).toHaveBeenCalledWith(
+      expect.objectContaining({
+        next: { scale: 1, x: -5, y: 0 },
+        source: 'pointer'
+      })
+    );
+    expect(sessions).toHaveLength(1);
+    expect(sessions[0]?.update).toHaveBeenCalledWith(expect.objectContaining({ next: { scale: 1, x: -10, y: 0 } }));
+    expect(vi.mocked(sessions[0]?.update).mock.calls[0]?.[0]).not.toHaveProperty('source');
+    expect(sessions[0]?.end).toHaveBeenCalledWith(expect.objectContaining({ interrupted: false, reason: 'up' }));
+    expect(host.matches(':state(panning)')).toBe(false);
+    expect(target.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(false);
+  });
+
+  it('leaves a pointer release below the drag threshold as an ordinary click', () => {
+    host.behaviorPan = true;
+    host.sync();
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
     host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 4, pointerId: 1 }));
-
-    expect(capture).toHaveBeenCalledWith(1);
-    expect(consumeAutoFit).toHaveBeenCalledOnce();
-    expect(cancelAnimation).not.toHaveBeenCalled();
-    expect(events.dispatchPanStart).not.toHaveBeenCalled();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(host.matches(':state(panning)')).toBe(false);
-
     host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 4, pointerId: 1 }));
 
-    expect(events.dispatchPanEnd).not.toHaveBeenCalled();
+    expect(host.startPan).not.toHaveBeenCalled();
+    expect(host.matches(':state(panning)')).toBe(false);
     expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(true);
   });
 
-  it('stops pending activation when panstart synchronously terminates its pointer', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    vi.mocked(events.dispatchPanStart).mockImplementation(() => {
-      host.dispatchEvent(pointerEvent('pointercancel', { buttons: 0, pointerId: 1 }));
-      return true;
-    });
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-
-    expect(events.dispatchPanStart).toHaveBeenCalledOnce();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(events.dispatchPanEnd).not.toHaveBeenCalled();
-    expect(commitTransform).not.toHaveBeenCalled();
-    expect(host.matches(':state(panning)')).toBe(false);
-
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    expect(events.dispatchPanStart).toHaveBeenCalledOnce();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(commitTransform).not.toHaveBeenCalled();
-    expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(true);
-  });
-
-  it('activates a pending pointer pan once at threshold, completes it once, and suppresses its click', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    const focus = vi.spyOn(host, 'focus');
-    const panStart = vi.mocked(events.dispatchPanStart);
-    const pan = vi.mocked(events.dispatchPan);
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 4, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
-
-    expect(focus).toHaveBeenCalledWith({ preventScroll: true });
-    expect(panStart).toHaveBeenCalledOnce();
-    expect(pan).toHaveBeenCalledTimes(2);
-    expect(commitTransform).toHaveBeenCalledWith({ scale: 1, x: -10, y: 0 });
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: -20, y: 0 });
-    expect(cancelAnimation).toHaveBeenCalledTimes(2);
-    expect(host.matches(':state(panning)')).toBe(true);
-
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 20, pointerId: 1 }));
-    expect(events.dispatchPanEnd).toHaveBeenCalledWith(expect.objectContaining({ interrupted: false, reason: 'up' }));
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-    expect(host.matches(':state(panning)')).toBe(false);
-    expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(false);
-  });
-
-  it('does not commit an active pan after its listener synchronously terminates the pointer', () => {
+  it.each([
+    { type: 'pointerup', buttons: 0, interrupted: false, reason: 'up' },
+    { type: 'pointermove', buttons: 0, interrupted: false, reason: 'buttons-released' },
+    { type: 'pointercancel', buttons: 1, interrupted: true, reason: 'cancel' },
+    { type: 'lostpointercapture', buttons: 1, interrupted: true, reason: 'lost-capture' }
+  ] as const)('ends an admitted pointer session after $type', ({ type, buttons, interrupted, reason }) => {
     host.behaviorPan = true;
     host.sync();
     vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
     host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-    vi.mocked(events.dispatchPan).mockImplementationOnce(() => {
-      host.dispatchEvent(pointerEvent('lostpointercapture', { buttons: 0, pointerId: 1 }));
-      return true;
-    });
+
+    host.dispatchEvent(pointerEvent(type, { buttons, clientX: 5, pointerId: 1 }));
+    expect(sessions[0]?.end).toHaveBeenCalledOnce();
+    expect(sessions[0]?.end).toHaveBeenCalledWith(expect.objectContaining({ interrupted, reason }));
 
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(events.dispatchPanEnd).toHaveBeenCalledWith(
-      expect.objectContaining({ interrupted: true, reason: 'lost-capture' })
-    );
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-    expect(commitTransform).toHaveBeenCalledOnce();
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: -5, y: 0 });
-    expect(host.matches(':state(panning)')).toBe(false);
-    expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(true);
-
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 15, pointerId: 1 }));
-
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(commitTransform).toHaveBeenCalledOnce();
-  });
-
-  it('does not restore click suppression after panend synchronously disconnects the host', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    vi.mocked(events.dispatchPanEnd).mockImplementation(() => host.remove());
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 5, pointerId: 1 }));
-
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-    expect(host.matches(':state(panning)')).toBe(false);
-
-    fixture.append(host);
-
-    expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(true);
-  });
-
-  it('does not commit or reactivate an active pan after its listener synchronously starts a pinch', () => {
-    host.behaviorPan = true;
-    host.behaviorZoom = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    vi.mocked(events.dispatchZoom).mockReturnValue(false);
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1, pointerType: 'touch' }));
-    vi.mocked(events.dispatchPan).mockImplementationOnce(() => {
-      host.dispatchEvent(pointerEvent('pointerdown', { clientX: 20, pointerId: 2, pointerType: 'touch' }));
-      host.dispatchEvent(pointerEvent('pointermove', { clientX: 40, pointerId: 2, pointerType: 'touch' }));
-      return true;
-    });
-
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1, pointerType: 'touch' }));
-
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(events.dispatchPanEnd).toHaveBeenCalledWith(expect.objectContaining({ interrupted: true, reason: 'pinch' }));
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-    expect(commitTransform).toHaveBeenCalledOnce();
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: -5, y: 0 });
-    expect(host.matches(':state(panning)')).toBe(false);
-    expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(true);
-  });
-
-  it('continues an admitted pointer session after pan behavior is disabled while rejecting new pointers', () => {
-    host.behaviorPan = true;
-    host.sync();
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-    host.behaviorPan = false;
-    host.sync();
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 2 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 10, pointerId: 1 }));
-
-    expect(capture).toHaveBeenCalledTimes(1);
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(events.dispatchPanEnd).toHaveBeenCalledWith(expect.objectContaining({ interrupted: false, reason: 'up' }));
-    expect(host.matches(':state(panning)')).toBe(false);
-    expect(host.matches(':state(pan-eligible)')).toBe(false);
-  });
-
-  it('samples dragThreshold when a pointer is admitted', () => {
-    host.behaviorPan = true;
-    host.dragThreshold = 10;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dragThreshold = 1;
-    host.sync();
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-
-    expect(events.dispatchPanStart).not.toHaveBeenCalled();
-    expect(host.matches(':state(panning)')).toBe(false);
-
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    expect(events.dispatchPanStart).toHaveBeenCalledOnce();
-    expect(host.matches(':state(panning)')).toBe(true);
-  });
-
-  it('derives panning from every active pointer session', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 2, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 2, pointerType: 'touch' }));
-
-    expect(host.matches(':state(panning)')).toBe(true);
-
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 5, pointerId: 1, pointerType: 'touch' }));
-    expect(host.matches(':state(panning)')).toBe(true);
-
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 5, pointerId: 2, pointerType: 'touch' }));
+    expect(sessions[0]?.update).not.toHaveBeenCalled();
+    expect(sessions[0]?.end).toHaveBeenCalledOnce();
     expect(host.matches(':state(panning)')).toBe(false);
   });
 
   it.each([
-    { init: { buttons: 0 }, interrupted: false, name: 'pointerup', reason: 'up', type: 'pointerup' },
-    { init: { buttons: 0 }, interrupted: true, name: 'pointercancel', reason: 'cancel', type: 'pointercancel' },
-    {
-      init: { buttons: 0 },
-      interrupted: true,
-      name: 'lost pointer capture',
-      reason: 'lost-capture',
-      type: 'lostpointercapture'
-    },
-    {
-      init: { buttons: 0 },
-      interrupted: false,
-      name: 'buttons released during movement',
-      reason: 'buttons-released',
-      type: 'pointermove'
-    }
-  ] as const)('translates $name into a cleaned-up panend contract', ({ init, interrupted, reason, type }) => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-
-    host.dispatchEvent(pointerEvent(type, { clientX: 5, pointerId: 1, ...init }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    expect(events.dispatchPanEnd).toHaveBeenCalledWith(
-      expect.objectContaining({ interrupted, reason, source: 'pointer', transform: expect.any(Object) })
-    );
-    expect(events.dispatchPan).toHaveBeenCalledOnce();
-    expect(host.matches(':state(panning)')).toBe(false);
-  });
-
-  it('continues reporting semantic pointer events when panstart cancels its session default', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    vi.mocked(events.dispatchPanStart).mockReturnValue(false);
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 20, pointerId: 1 }));
-
-    expect(events.dispatchPanStart).toHaveBeenCalledOnce();
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-    expect(commitTransform).not.toHaveBeenCalled();
-    expect(consumeAutoFit).toHaveBeenCalledOnce();
-    expect(cancelAnimation).toHaveBeenCalledTimes(2);
-    expect(host.matches(':state(panning)')).toBe(false);
-    expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(false);
-  });
-
-  it('skips only a canceled pan proposal while retaining the active session default', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    vi.mocked(events.dispatchPan).mockReturnValueOnce(false);
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
-
-    expect(events.dispatchPanStart).toHaveBeenCalledOnce();
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(consumeAutoFit).toHaveBeenCalledOnce();
-    expect(cancelAnimation).toHaveBeenCalledTimes(2);
-    expect(commitTransform).toHaveBeenCalledOnce();
-    expect(commitTransform).toHaveBeenCalledWith({ scale: 1, x: -20, y: 0 });
-    expect(host.matches(':state(panning)')).toBe(true);
-  });
-
-  it.each([
-    { button: 0, buttons: 1, matchingType: 'click', name: 'primary', wrongType: 'auxclick' },
-    { button: 1, buttons: 4, matchingType: 'auxclick', name: 'middle-button', wrongType: 'click' }
+    { button: 0, buttons: 1, matching: 'click', other: 'auxclick' },
+    { button: 1, buttons: 4, matching: 'auxclick', other: 'click' }
   ] as const)(
-    'suppresses only the matching terminal $name click type and pointer ID',
-    ({ button, buttons, matchingType, wrongType }) => {
+    'suppresses only the matching $matching after a completed drag',
+    ({ button, buttons, matching, other }) => {
       host.behaviorPan = true;
       host.sync();
       vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
@@ -420,404 +221,270 @@ describe('ViewportGestureNavigationController', () => {
       host.dispatchEvent(pointerEvent('pointermove', { button: -1, buttons, clientX: 5, pointerId: 1 }));
       host.dispatchEvent(pointerEvent('pointerup', { button, buttons: 0, clientX: 5, pointerId: 1 }));
 
-      expect(host.dispatchEvent(pointerEvent(wrongType, { button, buttons: 0, pointerId: 1 }))).toBe(true);
-      expect(host.dispatchEvent(pointerEvent(matchingType, { button, buttons: 0, pointerId: 2 }))).toBe(true);
-      expect(host.dispatchEvent(pointerEvent(matchingType, { button, buttons: 0, pointerId: 1 }))).toBe(false);
-      expect(host.dispatchEvent(pointerEvent(matchingType, { button, buttons: 0, pointerId: 1 }))).toBe(true);
+      expect(host.dispatchEvent(pointerEvent(other, { button, buttons: 0, pointerId: 1 }))).toBe(true);
+      expect(host.dispatchEvent(pointerEvent(matching, { button, buttons: 0, pointerId: 2 }))).toBe(true);
+      expect(host.dispatchEvent(pointerEvent(matching, { button, buttons: 0, pointerId: 1 }))).toBe(false);
+      expect(host.dispatchEvent(pointerEvent(matching, { button, buttons: 0, pointerId: 1 }))).toBe(true);
     }
   );
 
-  it('retains click suppression after behavior is disabled and clears it after its timer', () => {
+  it('keeps a queued click suppression after pan policy is disabled until consumed or expired', () => {
     vi.useFakeTimers();
     host.behaviorPan = true;
     host.sync();
     vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 5, pointerId: 1 }));
+    const drag = (pointerId: number): void => {
+      host.dispatchEvent(pointerEvent('pointerdown', { pointerId }));
+      host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId }));
+      host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 5, pointerId }));
+    };
+
+    drag(1);
     host.behaviorPan = false;
     host.sync();
-
     expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 1 }))).toBe(false);
 
     host.behaviorPan = true;
     host.sync();
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 2 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 2 }));
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 5, pointerId: 2 }));
-    vi.advanceTimersByTime(0);
-
+    drag(2);
+    host.behaviorPan = false;
+    host.sync();
+    vi.runAllTimers();
     expect(host.dispatchEvent(pointerEvent('click', { buttons: 0, pointerId: 2 }))).toBe(true);
   });
 
-  it('translates focused wheel pan and zoom through the event delegate before applying transform', () => {
-    host.behaviorPan = true;
-    host.behaviorZoom = true;
-    host.sync();
-    host.focus();
-
-    expect(host.dispatchEvent(wheelEvent({ deltaX: 20, deltaY: 10 }))).toBe(false);
-    expect(events.dispatchPan).toHaveBeenCalledWith(
-      expect.objectContaining({ next: { scale: 1, x: 20, y: 10 }, source: 'wheel' })
-    );
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: 20, y: 10 });
-
-    expect(host.dispatchEvent(wheelEvent({ ctrlKey: true, deltaY: -50 }))).toBe(false);
-    const zoom = vi.mocked(events.dispatchZoom).mock.calls[0]?.[0];
-    expect(zoom).toEqual(expect.objectContaining({ factor: expect.any(Number), source: 'wheel' }));
-    expect(zoom?.factor).toBeGreaterThan(1);
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: zoom?.factor, x: 20, y: 10 });
-    expect(cancelAnimation).toHaveBeenCalledTimes(2);
-  });
-
-  it('admits Meta-wheel input as zoom', () => {
-    host.behaviorZoom = true;
-    host.sync();
-    host.focus();
-
-    expect(host.dispatchEvent(wheelEvent({ deltaY: -50, metaKey: true }))).toBe(false);
-
-    const zoom = vi.mocked(events.dispatchZoom).mock.calls[0]?.[0];
-    expect(zoom).toEqual(expect.objectContaining({ factor: expect.any(Number), source: 'wheel' }));
-    expect(zoom?.factor).toBeGreaterThan(1);
-    expect(commitTransform).toHaveBeenCalledWith({ scale: zoom?.factor, x: 0, y: 0 });
-  });
-
-  it('preserves the focal content point during wheel zoom', () => {
-    host.behaviorZoom = true;
-    host.sync();
-    host.focus();
-    transform = { scale: 2, x: 10, y: -4 };
-    const viewportPoint = { x: 30, y: 50 };
-    const anchor = {
-      x: viewportPoint.x / transform.scale + transform.x,
-      y: viewportPoint.y / transform.scale + transform.y
-    };
-
-    host.dispatchEvent(wheelEvent({ clientX: viewportPoint.x, clientY: viewportPoint.y, ctrlKey: true, deltaY: -50 }));
-
-    expect(events.dispatchZoom).toHaveBeenCalledWith(expect.objectContaining({ anchor, source: 'wheel' }));
-    expect((anchor.x - transform.x) * transform.scale).toBeCloseTo(viewportPoint.x);
-    expect((anchor.y - transform.y) * transform.scale).toBeCloseTo(viewportPoint.y);
-  });
-
-  it.each([
-    { deltaY: -1000, expectedScale: 4, name: 'maximum' },
-    { deltaY: 1000, expectedScale: 0.5, name: 'minimum' }
-  ])('clamps wheel zoom to the $name scale while preserving its focal point', ({ deltaY, expectedScale }) => {
-    host.behaviorZoom = true;
-    host.sync();
-    host.focus();
-    transform = { scale: 1, x: 10, y: -5 };
-    const viewportPoint = { x: 80, y: 40 };
-    const anchor = { x: 90, y: 35 };
-
-    host.dispatchEvent(wheelEvent({ clientX: viewportPoint.x, clientY: viewportPoint.y, ctrlKey: true, deltaY }));
-
-    expect(transform.scale).toBe(expectedScale);
-    expect((anchor.x - transform.x) * transform.scale).toBeCloseTo(viewportPoint.x);
-    expect((anchor.y - transform.y) * transform.scale).toBeCloseTo(viewportPoint.y);
-  });
-
-  it.each([
-    { behaviorPan: false, behaviorZoom: true, event: wheelEvent({ deltaY: 10 }), name: 'plain wheel without pan' },
-    {
-      behaviorPan: true,
-      behaviorZoom: false,
-      event: wheelEvent({ ctrlKey: true, deltaY: -10 }),
-      name: 'modified wheel without zoom'
-    }
-  ] as const)('leaves $name passive', ({ behaviorPan, behaviorZoom, event }) => {
-    host.behaviorPan = behaviorPan;
-    host.behaviorZoom = behaviorZoom;
-    host.sync();
-    host.focus();
-
-    expect(host.dispatchEvent(event)).toBe(true);
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    expect(events.dispatchZoom).not.toHaveBeenCalled();
-    expect(consumeAutoFit).not.toHaveBeenCalled();
-    expect(cancelAnimation).not.toHaveBeenCalled();
-  });
-
-  it.each([
-    {
-      event: wheelEvent({ deltaX: 10, deltaY: 5 }),
-      eventDelegate: 'dispatchPan' as const,
-      name: 'pan',
-      behavior: 'behaviorPan' as const
-    },
-    {
-      event: wheelEvent({ ctrlKey: true, deltaY: -10 }),
-      eventDelegate: 'dispatchZoom' as const,
-      name: 'zoom',
-      behavior: 'behaviorZoom' as const
-    }
-  ])('does not apply a canceled wheel $name default', ({ behavior, event, eventDelegate }) => {
-    host[behavior] = true;
-    host.sync();
-    host.focus();
-    vi.mocked(events[eventDelegate]).mockReturnValue(false);
-
-    expect(host.dispatchEvent(event)).toBe(false);
-    expect(commitTransform).not.toHaveBeenCalled();
-    expect(consumeAutoFit).toHaveBeenCalledOnce();
-    expect(cancelAnimation).toHaveBeenCalledOnce();
-  });
-
-  it('does not rebase a live pointer pan for an accepted wheel proposal that does not commit', () => {
+  it('clears stale native-interaction hover when panning is disabled', () => {
+    const input = document.createElement('input');
+    host.append(input);
     host.behaviorPan = true;
     host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    commitTransform.mockImplementationOnce(() => false);
-
-    host.dispatchEvent(wheelEvent({ deltaX: 10, deltaY: 5 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
-
-    expect(events.dispatchPan).toHaveBeenCalledWith(expect.objectContaining({ source: 'wheel' }));
-    expect(transform).toEqual({ scale: 1, x: -20, y: 0 });
-  });
-
-  it('rebases a live pointer pan after an accepted wheel transform', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    host.dispatchEvent(wheelEvent({ deltaX: 20, deltaY: 0 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
-
-    expect(transform).toEqual({ scale: 1, x: 0, y: 0 });
-  });
-
-  it.each(['outside the viewport', 'a native descendant', 'a descendant shadow tree'] as const)(
-    'rejects wheel admission when focus is inside %s rather than on the host',
-    focusLocation => {
-      host.behaviorPan = true;
-      host.behaviorZoom = true;
-      host.sync();
-      if (focusLocation === 'outside the viewport') {
-        const outside = document.createElement('button');
-        fixture.append(outside);
-        outside.focus();
-      } else if (focusLocation === 'a native descendant') {
-        const input = document.createElement('input');
-        host.append(input);
-        input.focus();
-      } else {
-        const nestedHost = document.createElement('div');
-        const nestedButton = document.createElement('button');
-        nestedHost.attachShadow({ mode: 'open' }).append(nestedButton);
-        host.append(nestedHost);
-        nestedButton.focus();
-      }
-
-      expect(host.dispatchEvent(wheelEvent({ deltaY: 10 }))).toBe(true);
-      expect(host.dispatchEvent(wheelEvent({ ctrlKey: true, deltaY: -10 }))).toBe(true);
-      expect(events.dispatchPan).not.toHaveBeenCalled();
-      expect(events.dispatchZoom).not.toHaveBeenCalled();
-    }
-  );
-
-  it('uses immediate shadow-root focus for wheel and Space-pointer admission', async () => {
-    host.remove();
-    const shadowHost = document.createElement('div');
-    const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
-    shadowRoot.append(host);
-    fixture.append(shadowHost);
-    host.behaviorPan = 'space';
-    host.sync();
-    host.focus();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    window.dispatchEvent(keyEvent({ code: 'Space', key: ' ' }));
-    await Promise.resolve();
-
-    expect(shadowRoot.activeElement).toBe(host);
-    expect(host.dispatchEvent(wheelEvent({ deltaY: 10 }))).toBe(false);
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
-    expect(host.matches(':state(pan-eligible)')).toBe(true);
-    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
-  });
-
-  it('requires Space before primary admission and keeps an admitted session after Space releases', async () => {
-    host.behaviorPan = 'space';
-    host.sync();
-    host.focus();
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    expect(capture).not.toHaveBeenCalled();
-
-    const down = keyEvent({ code: 'Space', key: ' ' });
-    expect(window.dispatchEvent(down)).toBe(false);
-    expect(down.defaultPrevented).toBe(true);
-    await Promise.resolve();
     expect(host.matches(':state(pan-eligible)')).toBe(true);
 
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 2 }));
-    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
-    await Promise.resolve();
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 2 }));
-
-    expect(capture).toHaveBeenCalledWith(2);
-    expect(events.dispatchPan).toHaveBeenCalledOnce();
+    input.dispatchEvent(pointerEvent('pointerover', { pointerId: 1 }));
     expect(host.matches(':state(pan-eligible)')).toBe(false);
+    host.behaviorPan = false;
+    host.sync();
+    host.behaviorPan = true;
+    host.sync();
+    expect(host.matches(':state(pan-eligible)')).toBe(true);
   });
 
-  it('preserves native Space behavior without exact host focus and focuses an allowed unclaimed pointer', async () => {
-    host.behaviorPan = 'space';
+  it('retains aggregate panning state until both touch pans end', () => {
+    host.behaviorPan = true;
     host.sync();
-    const content = document.createElement('div');
-    const outside = document.createElement('button');
-    host.append(content);
-    fixture.append(outside);
-    outside.focus();
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    const space = keyEvent({ code: 'Space', key: ' ' });
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    for (const pointerId of [1, 2]) {
+      host.dispatchEvent(pointerEvent('pointerdown', { pointerId, pointerType: 'touch' }));
+      host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId, pointerType: 'touch' }));
+    }
+    expect(sessions).toHaveLength(2);
+    expect(host.matches(':state(panning)')).toBe(true);
 
-    expect(window.dispatchEvent(space)).toBe(true);
-    expect(space.defaultPrevented).toBe(false);
-    content.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-
-    expect(document.activeElement).toBe(host);
-    expect(capture).not.toHaveBeenCalled();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
-    await Promise.resolve();
+    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 1, pointerType: 'touch' }));
+    expect(host.matches(':state(panning)')).toBe(true);
+    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 2, pointerType: 'touch' }));
+    expect(host.matches(':state(panning)')).toBe(false);
   });
 
-  it('does not admit a Space pointer when focus is inside a descendant shadow tree', async () => {
-    host.behaviorPan = 'space';
+  it('does not reactivate a pointer canceled synchronously during pan activation', () => {
+    host.behaviorPan = true;
     host.sync();
-    const nestedHost = document.createElement('div');
-    const nestedButton = document.createElement('button');
-    nestedHost.attachShadow({ mode: 'open' }).append(nestedButton);
-    host.append(nestedHost);
-    nestedButton.focus();
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    const space = keyEvent({ code: 'Space', key: ' ' });
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    const navigation: ViewportPanSession = {
+      start: transform,
+      update: vi.fn(() => true),
+      end: vi.fn()
+    };
+    vi.mocked(host.startPan).mockImplementationOnce(() => {
+      host.dispatchEvent(pointerEvent('pointercancel', { pointerId: 1 }));
+      return navigation;
+    });
 
-    expect(window.dispatchEvent(space)).toBe(true);
     host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
 
-    expect(space.defaultPrevented).toBe(false);
-    expect(capture).not.toHaveBeenCalled();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
-    await Promise.resolve();
+    expect(host.startPan).toHaveBeenCalledOnce();
+    expect(navigation.end).toHaveBeenCalledWith(expect.objectContaining({ interrupted: true, reason: 'cancel' }));
+    expect(navigation.update).not.toHaveBeenCalled();
+    expect(host.matches(':state(panning)')).toBe(false);
   });
 
-  it('preserves native Space and excludes native interactive descendants during Space-pan', async () => {
+  it('keeps an admitted pan session active after panning is disabled and rejects a new pointer', () => {
+    host.behaviorPan = true;
+    host.sync();
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
+    host.behaviorPan = false;
+    host.sync();
+
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 10, pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 2 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 2 }));
+
+    expect(sessions[0]?.update).toHaveBeenCalledOnce();
+    expect(sessions[0]?.end).toHaveBeenCalledWith(expect.objectContaining({ interrupted: false, reason: 'up' }));
+    expect(host.startPan).toHaveBeenCalledOnce();
+  });
+
+  it('keeps overlay and native interactive descendants out of pointer admission', () => {
+    host.behaviorPan = true;
+    host.sync();
+    const overlay = document.createElement('div');
+    overlay.slot = 'overlay';
+    const input = document.createElement('input');
+    host.append(overlay, input);
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+
+    for (const target of [overlay, input]) {
+      target.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+      target.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+    }
+
+    expect(host.startPan).not.toHaveBeenCalled();
+  });
+
+  it('sends focused wheel pan and zoom through the public request methods', () => {
+    host.behaviorPan = true;
+    host.behaviorZoom = true;
+    host.sync();
+    host.focus();
+    transform = { scale: 2, x: 100, y: 200 };
+    const pan = wheelEvent({ clientX: 30, clientY: 40, deltaX: 20, deltaY: 10 });
+
+    expect(host.dispatchEvent(pan)).toBe(false);
+    expect(host.requestPan).toHaveBeenCalledWith({
+      clientX: 30,
+      clientY: 40,
+      deltaX: 20,
+      deltaY: 10,
+      event: pan,
+      next: { scale: 2, x: 110, y: 205 },
+      source: 'wheel'
+    });
+
+    const zoom = wheelEvent({ clientX: 30, clientY: 40, ctrlKey: true, deltaY: -50 });
+    expect(host.dispatchEvent(zoom)).toBe(false);
+    const proposal = vi.mocked(host.requestZoom).mock.calls[0]?.[0];
+    expect(proposal).toMatchObject({ clientX: 30, clientY: 40, event: zoom, source: 'wheel' });
+    expect(proposal?.factor).toBeGreaterThan(1);
+    expect(proposal?.anchor).toEqual({ x: 115, y: 220 });
+  });
+
+  it.each([
+    { name: 'Ctrl', modifier: { ctrlKey: true } },
+    { name: 'Meta', modifier: { metaKey: true } }
+  ])('admits focused $name-wheel zoom', ({ modifier }) => {
+    host.behaviorZoom = true;
+    host.sync();
+    host.focus();
+    const event = wheelEvent({ ...modifier, deltaY: -20 });
+
+    expect(host.dispatchEvent(event)).toBe(false);
+    expect(host.requestZoom).toHaveBeenCalledOnce();
+    expect(host.requestZoom).toHaveBeenCalledWith(
+      expect.objectContaining({ event, factor: expect.any(Number), source: 'wheel' })
+    );
+    expect(vi.mocked(host.requestZoom).mock.calls[0]?.[0].factor).toBeGreaterThan(1);
+  });
+
+  it('leaves wheel input unclaimed without exact viewport focus', () => {
+    host.behaviorPan = true;
+    host.behaviorZoom = true;
+    host.sync();
+    const input = document.createElement('input');
+    host.append(input);
+    input.focus();
+
+    expect(host.dispatchEvent(wheelEvent({ deltaY: 10 }))).toBe(true);
+    expect(host.dispatchEvent(wheelEvent({ ctrlKey: true, deltaY: -10 }))).toBe(true);
+    expect(host.requestPan).not.toHaveBeenCalled();
+    expect(host.requestZoom).not.toHaveBeenCalled();
+  });
+
+  it('requires Space for primary pointer panning in Space mode but admits middle-button panning', async () => {
+    host.behaviorPan = 'space';
+    host.sync();
+    host.focus();
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+    expect(host.startPan).not.toHaveBeenCalled();
+
+    host.dispatchEvent(pointerEvent('pointerdown', { button: 1, buttons: 4, pointerId: 2 }));
+    host.dispatchEvent(pointerEvent('pointermove', { button: -1, buttons: 4, clientX: 5, pointerId: 2 }));
+    expect(host.startPan).toHaveBeenCalledOnce();
+    host.dispatchEvent(pointerEvent('pointerup', { button: 1, buttons: 0, pointerId: 2 }));
+
+    const space = keyEvent({ code: 'Space', key: ' ' });
+    expect(window.dispatchEvent(space)).toBe(false);
+    await Promise.resolve();
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 3 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 3 }));
+    expect(host.startPan).toHaveBeenCalledTimes(2);
+    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
+  });
+
+  it('admits focused wheel and Space-pan input inside an enclosing shadow root', async () => {
+    const wrapper = document.createElement('div');
+    fixture.append(wrapper);
+    wrapper.attachShadow({ mode: 'open' }).append(host);
+    host.behaviorPan = 'space';
+    host.sync();
+    host.focus();
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+
+    expect(host.dispatchEvent(wheelEvent({ deltaY: 10 }))).toBe(false);
+    expect(host.requestPan).toHaveBeenCalledWith(expect.objectContaining({ source: 'wheel' }));
+
+    window.dispatchEvent(keyEvent({ code: 'Space', key: ' ' }));
+    await Promise.resolve();
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
+    expect(host.startPan).toHaveBeenCalledWith(expect.objectContaining({ source: 'pointer' }));
+    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
+  });
+
+  it('leaves Space and primary pointer input on a focused descendant alone in Space mode', () => {
     host.behaviorPan = 'space';
     host.sync();
     const input = document.createElement('input');
     host.append(input);
     input.focus();
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    const space = keyEvent({ code: 'Space', key: ' ' });
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
 
-    expect(input.dispatchEvent(space)).toBe(true);
-    expect(space.defaultPrevented).toBe(false);
-    input.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-
-    expect(capture).not.toHaveBeenCalled();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
-    input.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, code: 'Space', composed: true }));
-    await Promise.resolve();
-  });
-
-  it('excludes native interactive descendants from pointer admission', () => {
-    host.behaviorPan = true;
-    host.sync();
-    const input = document.createElement('input');
-    host.append(input);
-    const capture = vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
+    expect(input.dispatchEvent(keyEvent({ code: 'Space', key: ' ' }))).toBe(true);
     input.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
     input.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    expect(capture).not.toHaveBeenCalled();
-    expect(events.dispatchPan).not.toHaveBeenCalled();
+    expect(host.startPan).not.toHaveBeenCalled();
+    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
   });
 
-  it.each([
-    { behaviorPan: true, name: 'ordinary pan mode', prevents: true },
-    { behaviorPan: 'space' as const, name: 'Space mode without eligibility', prevents: false },
-    { behaviorPan: false, name: 'disabled navigation', prevents: false }
-  ])('applies the context-menu policy for $name', ({ behaviorPan, prevents }) => {
-    host.behaviorPan = behaviorPan;
+  it('limits Ctrl-context-menu suppression to eligible pan modes', async () => {
+    const contextMenu = (): boolean =>
+      host.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, ctrlKey: true }));
+    host.behaviorPan = true;
     host.sync();
-    const event = new MouseEvent('contextmenu', { bubbles: true, cancelable: true, composed: true, ctrlKey: true });
+    expect(contextMenu()).toBe(false);
 
-    expect(host.dispatchEvent(event)).toBe(!prevents);
-    expect(event.defaultPrevented).toBe(prevents);
-  });
+    host.behaviorPan = false;
+    host.sync();
+    expect(contextMenu()).toBe(true);
 
-  it('prevents Ctrl context menus for eligible Space panning only', async () => {
     host.behaviorPan = 'space';
     host.sync();
+    expect(contextMenu()).toBe(true);
     host.focus();
+    expect(contextMenu()).toBe(true);
     window.dispatchEvent(keyEvent({ code: 'Space', key: ' ' }));
     await Promise.resolve();
-    const event = new MouseEvent('contextmenu', { bubbles: true, cancelable: true, composed: true, ctrlKey: true });
-
-    expect(host.dispatchEvent(event)).toBe(false);
-    expect(event.defaultPrevented).toBe(true);
+    expect(contextMenu()).toBe(false);
+    window.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
   });
 
-  it('interrupts pointer pan for pinch and delegates the continuous zoom', () => {
-    host.behaviorPan = true;
-    host.behaviorZoom = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 20, pointerId: 2, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 40, pointerId: 2, pointerType: 'touch' }));
-
-    expect(events.dispatchPanEnd).toHaveBeenCalledWith(expect.objectContaining({ interrupted: true, reason: 'pinch' }));
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-    expect(events.dispatchZoom).toHaveBeenCalledWith(expect.objectContaining({ source: 'pinch' }));
-    expect(host.matches(':state(panning)')).toBe(false);
-
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 2, pointerType: 'touch' }));
-
-    expect(events.dispatchPanEnd).toHaveBeenCalledOnce();
-  });
-
-  it('pans and zooms simultaneously as a two-pointer pinch center moves', () => {
-    host.behaviorZoom = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 20, clientY: 20, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 40, clientY: 20, pointerId: 2, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 30, clientY: 30, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 70, clientY: 30, pointerId: 2, pointerType: 'touch' }));
-
-    expect(events.dispatchZoom).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        anchor: { x: 30, y: 20 },
-        clientX: 50,
-        clientY: 30,
-        factor: 2,
-        next: { scale: 2, x: 5, y: 5 },
-        source: 'pinch'
-      })
-    );
-    expect(transform).toEqual({ scale: 2, x: 5, y: 5 });
-  });
-
-  it('continues an admitted pinch after zoom behavior is disabled and cleans up after the pair ends', () => {
+  it('uses a private admitted-pinch proposal after zoom is disabled mid-gesture', () => {
     host.behaviorZoom = true;
     host.sync();
     vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
@@ -828,93 +495,59 @@ describe('ViewportGestureNavigationController', () => {
     host.sync();
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 30, pointerId: 2, pointerType: 'touch' }));
 
-    expect(events.dispatchZoom).toHaveBeenCalledTimes(2);
-    expect(events.dispatchZoom).toHaveBeenLastCalledWith(expect.objectContaining({ factor: 3, source: 'pinch' }));
-    expect(transform.scale).toBe(3);
+    expect(requestAdmittedPinchZoom).toHaveBeenCalledTimes(2);
+    expect(requestAdmittedPinchZoom).toHaveBeenLastCalledWith(expect.objectContaining({ factor: 3, source: 'pinch' }));
+    expect(host.requestZoom).not.toHaveBeenCalled();
 
     host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 40, pointerId: 2, pointerType: 'touch' }));
     host.dispatchEvent(pointerEvent('pointerup', { buttons: 0, pointerId: 2, pointerType: 'touch' }));
-
-    expect(events.dispatchZoom).toHaveBeenCalledTimes(2);
-    expect(host.matches(':state(panning)')).toBe(false);
+    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 3, pointerType: 'touch' }));
+    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 4, pointerType: 'touch' }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 4, pointerType: 'touch' }));
+    expect(requestAdmittedPinchZoom).toHaveBeenCalledTimes(2);
   });
 
-  it('reports a canceled pinch zoom request without applying its default transform', () => {
+  it('ends a pointer pan when an admitted pinch takes over', () => {
+    host.behaviorPan = true;
     host.behaviorZoom = true;
     host.sync();
     vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    vi.mocked(events.dispatchZoom).mockReturnValue(false);
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 0, pointerId: 1, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, pointerId: 2, pointerType: 'touch' }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 2, pointerType: 'touch' }));
+    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1, pointerType: 'touch' }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1, pointerType: 'touch' }));
+    host.dispatchEvent(pointerEvent('pointerdown', { clientX: 20, pointerId: 2, pointerType: 'touch' }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 40, pointerId: 2, pointerType: 'touch' }));
 
-    expect(events.dispatchZoom).toHaveBeenCalledWith(expect.objectContaining({ factor: 2, source: 'pinch' }));
-    expect(commitTransform).not.toHaveBeenCalled();
-    expect(transform).toEqual({ scale: 1, x: 0, y: 0 });
-    expect(consumeAutoFit).toHaveBeenCalledTimes(2);
-    expect(cancelAnimation).toHaveBeenCalledOnce();
+    expect(sessions[0]?.end).toHaveBeenCalledWith(expect.objectContaining({ interrupted: true, reason: 'pinch' }));
+    expect(requestAdmittedPinchZoom).toHaveBeenCalledOnce();
+    expect(host.matches(':state(panning)')).toBe(false);
   });
 
-  it('rebases a pending pointer session after an explicit independent transform', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    transform = { scale: 1, x: 10, y: 0 };
-    controller.rebasePointerSessions();
-
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: 0, y: 0 });
-  });
-
-  it('rebases an active pointer session after an explicit independent transform', () => {
-    host.behaviorPan = true;
-    host.sync();
-    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    transform = { scale: 1, x: 10, y: 0 };
-    controller.rebasePointerSessions();
-
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
-
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: 0, y: 0 });
-  });
-
-  it('does not rebase a pointer session from its own pointer-pan commit', () => {
+  it('rebases pointer proposal math after an independent transform change', () => {
     host.behaviorPan = true;
     host.sync();
     vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
     host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
     transform = { scale: 1, x: 100, y: 0 };
+    controller.rebasePointerSessions();
 
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 20, pointerId: 1 }));
 
-    expect(commitTransform).toHaveBeenLastCalledWith({ scale: 1, x: -20, y: 0 });
+    expect(sessions[0]?.update).toHaveBeenCalledWith(expect.objectContaining({ next: { scale: 1, x: 90, y: 0 } }));
   });
 
-  it('clears pending and active sessions and panning state on disconnection', () => {
+  it('clears an active pointer session and panning state on disconnection', () => {
     host.behaviorPan = true;
     host.sync();
     vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
     host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 2 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 2 }));
+    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 1 }));
     expect(host.matches(':state(panning)')).toBe(true);
 
     host.remove();
     host.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
-    expect(events.dispatchPan).toHaveBeenCalledOnce();
+    expect(sessions[0]?.update).not.toHaveBeenCalled();
     expect(host.matches(':state(panning)')).toBe(false);
-
-    fixture.append(host);
-    host.dispatchEvent(pointerEvent('pointerdown', { pointerId: 3 }));
-    host.dispatchEvent(pointerEvent('pointermove', { clientX: 5, pointerId: 3 }));
-
-    expect(events.dispatchPan).toHaveBeenCalledTimes(2);
   });
 });
 
