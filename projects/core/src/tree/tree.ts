@@ -66,6 +66,7 @@ export class Tree extends LitElement {
 
   _internals: ElementInternals;
 
+  /** Returns the tree nodes in document order. */
   get nodes() {
     return Array.from(this.querySelectorAll<TreeNode>(TreeNode.metadata.tag));
   }

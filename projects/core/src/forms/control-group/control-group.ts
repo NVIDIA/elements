@@ -47,10 +47,12 @@ export class ControlGroup extends LitElement {
   /** Set the visual prominence of the control group */
   @property({ type: String, reflect: true }) prominence: 'muted';
 
+  /** Returns the label associated with the control group. */
   get label() {
     return this.querySelector?.<HTMLLabelElement>('label');
   }
 
+  /** Returns the input elements associated with the control group. */
   get inputs() {
     return this.querySelectorAll ? Array.from(this.querySelectorAll<HTMLInputElement>(inputQuery)) : [];
   }
