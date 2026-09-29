@@ -81,12 +81,13 @@ function registerTools(server: McpServer): void {
       };
       server.registerTool(toolName, config, async (params, ctx) => {
         attachProgress(params, ctx);
-        const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
+        const serializedContent = JSON.stringify(await tool(params));
+        const structuredContent = JSON.parse(serializedContent) as { [x: string]: unknown };
         // https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1624
         const text =
           typeof structuredContent.result === 'string' && structuredContent.status !== 'error'
             ? structuredContent.result
-            : JSON.stringify(structuredContent);
+            : serializedContent;
         return { structuredContent, content: [{ type: 'text', text }] };
       });
     });

@@ -41,7 +41,7 @@ After adding the configuration in the root of your project, restart Claude Code 
 // .mcp.json
 {
   "mcpServers": {
-    "elements": {
+    "nvidia_elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "nve",
       "args": ["mcp"]
@@ -62,7 +62,7 @@ After adding the configuration in your project's .cursor directory, enable the M
 // .cursor/mcp.json
 {
   "mcpServers": {
-    "elements": {
+    "nvidia_elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "nve",
       "args": [
@@ -83,7 +83,7 @@ After adding the configuration in the root of your project, restart Codex for th
 
 ```shell
 # .codex/config.toml
-[mcp_servers.elements]
+[mcp_servers.nvidia_elements]
 description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
 command = "nve"
 args = ["mcp"]

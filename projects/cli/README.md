@@ -97,7 +97,7 @@ Install to Claude Code by adding the configuration to your `.mcp.json` file. The
 ```json
 {
   "mcpServers": {
-    "elements": {
+    "nvidia_elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "nve",
       "args": ["mcp"]
@@ -116,7 +116,7 @@ Install to Cursor with the MCP configuration below.
 // .cursor/mcp.json
 {
   "mcpServers": {
-    "elements": {
+    "nvidia_elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "nve",
       "args": ["mcp"]
@@ -130,7 +130,7 @@ Install to Cursor with the MCP configuration below.
 Install to Codex with the MCP configuration below.
 
 ```toml
-[mcp_servers.elements]
+[mcp_servers.nvidia_elements]
 description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
 command = "nve"
 args = ["mcp"]

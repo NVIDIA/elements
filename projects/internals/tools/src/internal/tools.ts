@@ -301,7 +301,7 @@ function convertLeafSchema(schema: Schema): z.ZodTypeAny {
   }
 
   if (schema.type === 'object' && schema.additionalProperties === true) {
-    return z.record(z.string(), z.any()).describe(schema.description ?? '');
+    return z.record(z.string(), z.json()).describe(schema.description ?? '');
   }
 
   return (z[schema.type as keyof typeof z] as () => z.ZodTypeAny)().describe(schema.description ?? '');

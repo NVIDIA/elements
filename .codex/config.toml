@@ -1,6 +1,6 @@
 [features]
 hooks = true # partial/experimental support
 
-[mcp_servers.elements]
+[mcp_servers.nvidia_elements]
 command = "node"
 args = ["./projects/cli/dist/index.js", "mcp"]
