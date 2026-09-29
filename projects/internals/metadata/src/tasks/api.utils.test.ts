@@ -11,8 +11,8 @@ function getElement(api: Api, name: string) {
   return api.data.elements.find(element => element.name === name);
 }
 
-function getMember(element: ApiElement | undefined, name: string) {
-  return element?.manifest?.members.find(member => member.name === name);
+function getField(element: ApiElement | undefined, name: string) {
+  return element?.manifest?.members.filter(member => member.kind === 'field').find(member => member.name === name);
 }
 
 function getAttribute(element: ApiElement | undefined, name: string) {
@@ -28,9 +28,9 @@ describe('ApiUtils', () => {
     const api = await getApi();
     const button = getElement(api, 'nve-button');
 
-    expect(getMember(button, 'pressed')?.attribute).toBe('pressed');
-    expect(getMember(button, 'readOnly')?.attribute).toBe('readonly');
-    expect(getMember(button, 'commandForElement')?.attribute).toBe('commandfor');
+    expect(getField(button, 'pressed')?.attribute).toBe('pressed');
+    expect(getField(button, 'readOnly')?.attribute).toBe('readonly');
+    expect(getField(button, 'commandForElement')?.attribute).toBe('commandfor');
     expect(button?.markdown).toContain('| readOnly (readonly) |');
   });
 
@@ -38,10 +38,10 @@ describe('ApiUtils', () => {
     const api = await getApi();
     const muteButton = getElement(api, 'nve-media-mute-button');
 
-    expect(getMember(muteButton, 'pressed')?.attribute).toBe('pressed');
-    expect(getMember(muteButton, 'checked')?.attribute).toBe('checked');
-    expect(getMember(muteButton, 'readOnly')?.attribute).toBe('readonly');
-    expect(getMember(muteButton, 'commandForElement')?.attribute).toBe('commandfor');
+    expect(getField(muteButton, 'pressed')?.attribute).toBe('pressed');
+    expect(getField(muteButton, 'checked')?.attribute).toBe('checked');
+    expect(getField(muteButton, 'readOnly')?.attribute).toBe('readonly');
+    expect(getField(muteButton, 'commandForElement')?.attribute).toBe('commandfor');
     expect(getAttribute(muteButton, 'commandForElement')).toBeUndefined();
     expect(muteButton?.markdown).toContain('| checked |');
   });
@@ -50,8 +50,8 @@ describe('ApiUtils', () => {
     const api = await getApi();
     const timeRange = getElement(api, 'nve-media-time-range');
 
-    expect(getMember(timeRange, 'min')?.attribute).toBe('min');
-    expect(getMember(timeRange, 'valueAsNumber')?.attribute).toBeUndefined();
+    expect(getField(timeRange, 'min')?.attribute).toBe('min');
+    expect(getField(timeRange, 'valueAsNumber')?.attribute).toBeUndefined();
     expect(getAttribute(timeRange, 'commandForElement')).toBeUndefined();
     expect(timeRange?.markdown).toContain('| valueAsNumber |');
   });
@@ -60,8 +60,8 @@ describe('ApiUtils', () => {
     const api = await getApi();
     const playbackRateSelect = getElement(api, 'nve-media-playback-rate-select');
 
-    expect(getMember(playbackRateSelect, 'selectedIndex')?.attribute).toBeUndefined();
-    expect(getMember(playbackRateSelect, 'value')?.attribute).toBe('value');
+    expect(getField(playbackRateSelect, 'selectedIndex')?.attribute).toBeUndefined();
+    expect(getField(playbackRateSelect, 'value')?.attribute).toBe('value');
     expect(getAttribute(playbackRateSelect, 'commandForElement')).toBeUndefined();
     expect(playbackRateSelect?.markdown).toContain('| selectedIndex |');
   });

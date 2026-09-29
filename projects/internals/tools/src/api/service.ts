@@ -378,10 +378,9 @@ export class ApiService {
   ): Promise<string[] | string> {
     const apis = await MetadataApiService.getData();
     const iconElement = apis.data.elements.find(e => e.name === 'nve-icon');
-    const values = iconElement?.manifest?.members?.find(m => m.name === 'name')?.type?.values ?? [];
-    const iconNames = values
-      .map(v => ('value' in v ? (v as { value: string }).value : (v as { name: string }).name))
-      .filter(Boolean);
+    const nameMember = iconElement?.manifest?.members?.find(member => member.name === 'name');
+    const values = nameMember?.kind === 'field' ? (nameMember.type?.values ?? []) : [];
+    const iconNames = values.map(value => value.value).filter(Boolean);
 
     if (format === 'json') {
       return iconNames;

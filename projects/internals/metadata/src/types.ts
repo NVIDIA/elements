@@ -130,6 +130,43 @@ export interface CustomElementsManifest {
   }[];
 }
 
+interface CustomElementMember {
+  name: string;
+  description?: string;
+  descriptionText?: string;
+  deprecated?: boolean | string;
+  privacy?: 'public' | 'protected' | 'private';
+  static?: boolean;
+}
+
+export interface CustomElementField extends CustomElementMember {
+  kind: 'field';
+  attribute?: string;
+  default?: string;
+  reflects?: boolean;
+  readonly?: boolean;
+  type?: {
+    text: string;
+    description?: string;
+    descriptionText?: string;
+    values?: {
+      value: string;
+      description?: string;
+    }[];
+  };
+}
+
+export interface CustomElementMethod extends CustomElementMember {
+  kind: 'method';
+  parameters?: {
+    name: string;
+    optional?: boolean;
+    default?: string;
+    type?: { text: string };
+  }[];
+  return?: { type?: { text: string } };
+}
+
 /**
  * @summary A Custom Elements Manifest declaration is a description of a custom element.
  * @see https://github.com/webcomponents/custom-elements-manifest
@@ -155,24 +192,7 @@ export interface CustomElementManifest {
     description: string;
     dynamic?: boolean;
   }[];
-  members: {
-    deprecated: boolean;
-    kind: string;
-    name: string;
-    description: string;
-    attribute: string;
-    default: string;
-    reflects: boolean;
-    type: {
-      text: string;
-      description?: string;
-      descriptionText?: string;
-      values?: {
-        name: string;
-        description?: string;
-      }[];
-    };
-  }[];
+  members: (CustomElementField | CustomElementMethod)[];
   attributes: {
     name: string;
     deprecated: boolean;
