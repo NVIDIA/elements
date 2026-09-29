@@ -9,6 +9,8 @@ import piPackage from '../package.json' with { type: 'json' };
 import toolsPackage from '../../internals/tools/package.json' with { type: 'json' };
 import lintPackage from '../../lint/package.json' with { type: 'json' };
 
+const { default: elementsExtension } = await import('../dist/index.js');
+
 describe('@nvidia-elements/pi package', () => {
   it('should declare runtime dependencies and host-provided peers', async () => {
     expect(piPackage.dependencies).toMatchObject(toolsPackage.dependencies);
@@ -59,8 +61,7 @@ describe('@nvidia-elements/pi package', () => {
     expect(extension).not.toMatch(/import\s+(?:[^;]*from\s+)?["']archiver["']/);
   });
 
-  it('should register the Elements tools from the built extension', async () => {
-    const { default: elementsExtension } = await import('../dist/index.js');
+  it('should register the Elements tools from the built extension', () => {
     const registerTool = vi.fn();
     const pi = {
       getFlag: vi.fn(() => false),

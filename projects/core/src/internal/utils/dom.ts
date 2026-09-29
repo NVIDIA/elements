@@ -224,7 +224,7 @@ export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
   ).flat(depth);
 }
 
-export function validKeyNavigationCode(e: KeyboardEvent) {
+export function validKeyNavigationCode(e: KeyboardEvent): e is KeyboardEvent & { code: KeynavCode } {
   return keynavCodes.has(e.code);
 }
 
