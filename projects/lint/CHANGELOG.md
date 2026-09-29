@@ -1,3 +1,19 @@
+## [2.7.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.0...@nvidia-elements/lint-v2.7.1) (2026-09-29)
+
+### Features
+
+* **core:** add viewport ([0e9e892](https://github.com/NVIDIA/elements/commit/0e9e892de5d41c2a64d1e9adcfaa7a9df2c4deef))
+* **pi:** pi extension ([88dea55](https://github.com/NVIDIA/elements/commit/88dea552fd28da8a31c95ff713218bda73d64e64))
+
+### Bug Fixes
+
+* **cli:** mcp app rendering and schema tools ([5cf5f51](https://github.com/NVIDIA/elements/commit/5cf5f51e8b77468451024a9a31f247ac0beb5373))
+* **cli:** update bun to 1.4.2 ([0e84e28](https://github.com/NVIDIA/elements/commit/0e84e2880ca5ff09405d0d88d16ef12d9341623e))
+* **cli:** update marked to 18.0.14 ([b24d6cb](https://github.com/NVIDIA/elements/commit/b24d6cb07ee47cf392214e0a934f1caee31eb510))
+* **core:** enhance gesture recognizer ([0be2399](https://github.com/NVIDIA/elements/commit/0be2399b37982fde94c061ed811c280b29e3a3ae))
+* **core:** textarea slots ([0f8fb33](https://github.com/NVIDIA/elements/commit/0f8fb33a38c60a08aaf37e774a92338cf5416401))
+* **lint:** update eslint ([2a3ad12](https://github.com/NVIDIA/elements/commit/2a3ad1217db5aadfdef4a89f796f96348dc0f330))
+
 ## [2.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.6.1...@nvidia-elements/lint-v2.7.0) (2026-09-22)
 
 ### Features
