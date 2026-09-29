@@ -142,6 +142,130 @@ describe(ViewportGridlines.metadata.tag, () => {
     await elementIsStable(gridlines);
     expect(gridlines.shadowRoot?.querySelector('svg')?.getAttribute('viewBox')).not.toBe(initial);
   });
+
+  it('keeps normalized defaults when a new assignment does not change them', async () => {
+    const before = renderedGrid(gridlines);
+
+    gridlines.step = 0;
+    gridlines.step = Number.NaN;
+    gridlines.step = Number.POSITIVE_INFINITY;
+    gridlines.originX = Number.NaN;
+    gridlines.originX = Number.POSITIVE_INFINITY;
+    gridlines.originY = Number.NaN;
+    gridlines.originY = Number.NEGATIVE_INFINITY;
+    gridlines.targetSpacing = 0;
+    gridlines.targetSpacing = Number.NaN;
+    gridlines.targetSpacing = Number.POSITIVE_INFINITY;
+    await elementIsStable(gridlines);
+
+    expect({
+      originX: gridlines.originX,
+      originY: gridlines.originY,
+      step: gridlines.step,
+      targetSpacing: gridlines.targetSpacing
+    }).toEqual({ originX: 0, originY: 0, step: 10, targetSpacing: 64 });
+    expect(renderedGrid(gridlines)).toEqual(before);
+  });
+
+  it('keeps a repeated finite property assignment', async () => {
+    gridlines.step = 20;
+    gridlines.originX = -15;
+    gridlines.originY = 25;
+    gridlines.targetSpacing = 80;
+    await elementIsStable(gridlines);
+    const before = renderedGrid(gridlines);
+
+    gridlines.step = 20;
+    gridlines.originX = -15;
+    gridlines.originY = 25;
+    gridlines.targetSpacing = 80;
+    await elementIsStable(gridlines);
+
+    expect(gridlines.getAttribute('step')).toBe('20');
+    expect(gridlines.getAttribute('origin-x')).toBe('-15');
+    expect(gridlines.getAttribute('origin-y')).toBe('25');
+    expect(gridlines.getAttribute('target-spacing')).toBe('80');
+    expect(renderedGrid(gridlines)).toEqual(before);
+  });
+
+  it('keeps the current pattern when the viewport has no area', async () => {
+    const before = renderedGrid(gridlines);
+    Object.defineProperties(viewport, {
+      clientHeight: { configurable: true, value: 0 },
+      clientWidth: { configurable: true, value: 0 }
+    });
+
+    gridlines.step = 20;
+    await elementIsStable(gridlines);
+
+    expect(gridlines.getAttribute('step')).toBe('20');
+    expect(renderedGrid(gridlines)).toEqual(before);
+  });
+});
+
+class RecordingResizeObserver implements ResizeObserver {
+  static latest?: RecordingResizeObserver;
+  readonly disconnect = vi.fn();
+  readonly observe = vi.fn();
+  readonly unobserve = vi.fn();
+  readonly #callback: ResizeObserverCallback;
+
+  constructor(callback: ResizeObserverCallback) {
+    this.#callback = callback;
+    RecordingResizeObserver.latest = this;
+  }
+
+  notify(): void {
+    this.#callback([], this);
+  }
+}
+
+describe('viewport gridlines resize observation', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it('rebuilds overscan coverage when the viewport element resizes', async () => {
+    vi.stubGlobal('ResizeObserver', RecordingResizeObserver);
+    const fixture = await createFixture(html`
+      <nve-viewport style="width: 400px; height: 300px">
+        <nve-viewport-gridlines></nve-viewport-gridlines>
+      </nve-viewport>
+    `);
+    const viewport = fixture.querySelector(Viewport.metadata.tag);
+    const gridlines = fixture.querySelector(ViewportGridlines.metadata.tag);
+    await elementIsStable(viewport);
+    await elementIsStable(gridlines);
+    const svg = gridlines.shadowRoot?.querySelector('svg');
+    const before = svg?.getAttribute('viewBox');
+    Object.defineProperties(viewport, {
+      clientHeight: { configurable: true, value: 180 },
+      clientWidth: { configurable: true, value: 720 }
+    });
+
+    RecordingResizeObserver.latest?.notify();
+    await elementIsStable(gridlines);
+
+    expect(svg?.getAttribute('viewBox')).toBe('-720 -180 2160 540');
+    expect(svg?.getAttribute('viewBox')).not.toBe(before);
+    removeFixture(fixture);
+  });
+
+  it('draws gridlines when resize observation is unavailable', async () => {
+    vi.stubGlobal('ResizeObserver', undefined);
+    const fixture = await createFixture(html`
+      <nve-viewport style="width: 400px; height: 300px">
+        <nve-viewport-gridlines></nve-viewport-gridlines>
+      </nve-viewport>
+    `);
+    const gridlines = fixture.querySelector(ViewportGridlines.metadata.tag);
+    await elementIsStable(gridlines);
+
+    expect(gridlines.shadowRoot?.querySelector('svg')).not.toBeNull();
+    gridlines.remove();
+    removeFixture(fixture);
+  });
 });
 
 describe('viewport gridline interval selection', () => {
@@ -181,4 +305,20 @@ describe('viewport gridline interval selection', () => {
 function patternOrigin(element: ViewportGridlines): { x: number; y: number } {
   const pattern = element.shadowRoot?.querySelector('[data-gridline-pattern]');
   return { x: Number(pattern?.getAttribute('x')), y: Number(pattern?.getAttribute('y')) };
+}
+
+function renderedGrid(element: ViewportGridlines): {
+  originX: string | null;
+  originY: string | null;
+  viewBox: string | null;
+  width: string | null;
+} {
+  const pattern = element.shadowRoot?.querySelector('[data-gridline-pattern]');
+  const svg = element.shadowRoot?.querySelector('svg');
+  return {
+    originX: pattern ? pattern.getAttribute('x') : null,
+    originY: pattern ? pattern.getAttribute('y') : null,
+    viewBox: svg ? svg.getAttribute('viewBox') : null,
+    width: pattern ? pattern.getAttribute('width') : null
+  };
 }

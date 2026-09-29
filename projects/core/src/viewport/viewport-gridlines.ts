@@ -198,7 +198,7 @@ export class ViewportGridlines extends LitElement {
     if (this.#updateProjection(options)) this.requestUpdate();
   }
 
-  #updateProjection(options: ProjectionSyncOptions = {}): boolean {
+  #updateProjection(options: ProjectionSyncOptions): boolean {
     const viewport = this.#viewport;
     if (!viewport) return false;
     const visible = viewport.getVisibleRect();
