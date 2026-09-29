@@ -233,6 +233,21 @@ describe('MCP server', () => {
     expect(result.content[0].text).toBe(JSON.stringify(objResult));
   });
 
+  it('should omit undefined values before returning structured content', async () => {
+    const { startMcpServer } = await import('./index.js');
+    await startMcpServer();
+    const handler = mockRegisterTool.mock.calls[0][2];
+    mcpTool.mockResolvedValueOnce({
+      status: 'complete',
+      result: [{ name: 'nve-button', markdown: undefined, changelog: undefined, manifest: { tagName: 'nve-button' } }]
+    });
+
+    const result = await handler({}, createRequestContext());
+    const expected = { status: 'complete', result: [{ name: 'nve-button', manifest: { tagName: 'nve-button' } }] };
+    expect(result.structuredContent).toEqual(expected);
+    expect(result.content[0].text).toBe(JSON.stringify(expected));
+  });
+
   it('should report progress through the v2 request context', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();

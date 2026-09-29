@@ -38,7 +38,7 @@
     "dist/**/*.js"
   ],
   "scripts": {
-    "dev": "pnpm run cli:install && npx @modelcontextprotocol/inspector@2.0.0 node ./dist/index.js mcp",
+    "dev": "pnpm run cli:install && npx @modelcontextprotocol/inspector@2.8.0 node ./dist/index.js mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",
@@ -144,7 +144,8 @@
       ],
       "output": [
         "dist/**/*.js",
-        "dist/**/*.d.ts"
+        "dist/**/*.d.ts",
+        "dist/**/*.html"
       ],
       "env": {
         "CI": {

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
+import z from 'zod';
 import { loadTools, service, tool, jsonSchemaToZod, ToolError, ToolSupport } from './tools.js';
 import type { ToolCli, ToolMethod, ToolOutput, Schema } from './tools.js';
 
@@ -781,6 +782,21 @@ describe('jsonSchemaToZod', () => {
     const emptyObjectData = {};
     const emptyObjectResult = result.safeParse(emptyObjectData);
     expect(emptyObjectResult.success).toBe(true);
+  });
+
+  it('should publish a constrained schema for api.get object values', () => {
+    const schema = {
+      oneOf: [
+        { type: 'string' as const },
+        { type: 'array' as const, items: { type: 'object' as const, additionalProperties: true } }
+      ]
+    };
+
+    const outputSchema = z.toJSONSchema(jsonSchemaToZod(schema));
+    expect(outputSchema.anyOf?.[1]).toMatchObject({
+      type: 'array',
+      items: { type: 'object', additionalProperties: { $ref: expect.any(String) } }
+    });
   });
 
   it('should handle array type without description', () => {

@@ -28,9 +28,9 @@ vi.mock('./starters.js', () => ({
   claudeProjectSettings: {
     $schema: 'https://json.schemastore.org/claude-code-settings.json',
     permissions: {
-      allow: ['mcp__elements__api_list', 'mcp__elements__api_get']
+      allow: ['mcp__nvidia_elements__api_list', 'mcp__nvidia_elements__api_get']
     },
-    enabledMcpjsonServers: ['elements']
+    enabledMcpjsonServers: ['nvidia_elements']
   }
 }));
 
@@ -50,9 +50,9 @@ describe('setup-mcp', () => {
       expect(writeFileSync).toHaveBeenCalled();
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
-      expect(written.mcpServers.elements).toBeDefined();
-      expect(written.mcpServers.elements.command).toBe('nve');
-      expect(written.mcpServers.elements.args).toEqual(['mcp']);
+      expect(written.mcpServers.nvidia_elements).toBeDefined();
+      expect(written.mcpServers.nvidia_elements.command).toBe('nve');
+      expect(written.mcpServers.nvidia_elements.args).toEqual(['mcp']);
     });
 
     it('should merge into existing config preserving other servers', async () => {
@@ -70,11 +70,11 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.mcpServers['other-server']).toEqual({ command: 'other', description: 'Other MCP' });
-      expect(written.mcpServers.elements).toBeDefined();
-      expect(written.mcpServers.elements.command).toBe('nve');
+      expect(written.mcpServers.nvidia_elements).toBeDefined();
+      expect(written.mcpServers.nvidia_elements.command).toBe('nve');
     });
 
-    it('should overwrite existing elements config', async () => {
+    it('should migrate the old elements alias', async () => {
       const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
       const existing = {
         mcpServers: {
@@ -88,9 +88,10 @@ describe('setup-mcp', () => {
       writeMcpJsonConfig('/project/.cursor/mcp.json');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
-      expect(written.mcpServers.elements.command).toBe('nve');
-      expect(written.mcpServers.elements.args).toEqual(['mcp']);
-      expect(written.mcpServers.elements.description).toBe(
+      expect(written.mcpServers.elements).toBeUndefined();
+      expect(written.mcpServers.nvidia_elements.command).toBe('nve');
+      expect(written.mcpServers.nvidia_elements.args).toEqual(['mcp']);
+      expect(written.mcpServers.nvidia_elements.description).toBe(
         'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples'
       );
     });
@@ -120,7 +121,7 @@ describe('setup-mcp', () => {
       writeMcpJsonConfig('/project/.mcp.json');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
-      expect(written.mcpServers.elements).toBeDefined();
+      expect(written.mcpServers.nvidia_elements).toBeDefined();
     });
 
     it('should create parent directory', async () => {
@@ -154,10 +155,7 @@ describe('setup-mcp', () => {
       expect(writeFileSync).toHaveBeenCalled();
 
       const written = vi.mocked(writeFileSync).mock.calls[0][1] as string;
-      expect(written).toContain('[mcp_servers.elements]');
-      expect(written).toContain(
-        'description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"'
-      );
+      expect(written).toContain('[mcp_servers.nvidia_elements]');
       expect(written).toContain('command = "nve"');
       expect(written).toContain('args = ["mcp"]');
     });
@@ -174,13 +172,16 @@ describe('setup-mcp', () => {
       const written = vi.mocked(writeFileSync).mock.calls[0][1] as string;
       expect(written).toContain('[mcp_servers.other]');
       expect(written).toContain('command = "other-cmd"');
-      expect(written).toContain('[mcp_servers.elements]');
+      expect(written).toContain('[mcp_servers.nvidia_elements]');
       expect(written).toContain('command = "nve"');
     });
 
-    it('should overwrite existing elements entry in TOML config', async () => {
+    it('should migrate the old elements alias and replace the current entry in TOML config', async () => {
       const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
-      const existing = '[mcp_servers.elements]\ncommand = "old-cmd"\n';
+      const existing =
+        '[mcp_servers.elements]\ncommand = "old-cmd"\n\n' +
+        '[mcp_servers.other]\ncommand = "other-cmd"\n\n' +
+        '[mcp_servers.nvidia_elements]\ncommand = "old-new-cmd"\n';
 
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readFileSync).mockReturnValue(existing);
@@ -188,8 +189,12 @@ describe('setup-mcp', () => {
       writeMcpTomlConfig('/project/.codex/config.toml');
 
       const written = vi.mocked(writeFileSync).mock.calls[0][1] as string;
+      expect(written).not.toContain('[mcp_servers.elements]');
+      expect(written.match(/\[mcp_servers\.nvidia_elements\]/g)).toHaveLength(1);
+      expect(written).toContain('[mcp_servers.other]');
       expect(written).toContain('command = "nve"');
       expect(written).not.toContain('command = "old-cmd"');
+      expect(written).not.toContain('command = "old-new-cmd"');
     });
 
     it('should handle empty or invalid file gracefully', async () => {
@@ -203,7 +208,7 @@ describe('setup-mcp', () => {
       writeMcpTomlConfig('/project/.codex/config.toml');
 
       const written = vi.mocked(writeFileSync).mock.calls[0][1] as string;
-      expect(written).toContain('[mcp_servers.elements]');
+      expect(written).toContain('[mcp_servers.nvidia_elements]');
     });
 
     it('should create parent directory', async () => {
@@ -238,8 +243,8 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.$schema).toBe('https://json.schemastore.org/claude-code-settings.json');
-      expect(written.permissions.allow).toContain('mcp__elements__api_list');
-      expect(written.enabledMcpjsonServers).toContain('elements');
+      expect(written.permissions.allow).toContain('mcp__nvidia_elements__api_list');
+      expect(written.enabledMcpjsonServers).toContain('nvidia_elements');
     });
 
     it('should merge permissions.allow without removing existing entries', async () => {
@@ -257,15 +262,15 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.permissions.allow).toContain('user_custom_permission');
-      expect(written.permissions.allow).toContain('mcp__elements__api_list');
-      expect(written.permissions.allow).toContain('mcp__elements__api_get');
+      expect(written.permissions.allow).toContain('mcp__nvidia_elements__api_list');
+      expect(written.permissions.allow).toContain('mcp__nvidia_elements__api_get');
     });
 
     it('should deduplicate permissions.allow entries', async () => {
       const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
       const existing = {
         permissions: {
-          allow: ['mcp__elements__api_list', 'user_custom']
+          allow: ['mcp__nvidia_elements__api_list', 'user_custom']
         }
       };
 
@@ -275,7 +280,9 @@ describe('setup-mcp', () => {
       writeClaudeSettings('/project');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
-      const apiListCount = written.permissions.allow.filter((p: string) => p === 'mcp__elements__api_list').length;
+      const apiListCount = written.permissions.allow.filter(
+        (p: string) => p === 'mcp__nvidia_elements__api_list'
+      ).length;
       expect(apiListCount).toBe(1);
     });
 
@@ -292,7 +299,36 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.enabledMcpjsonServers).toContain('other-server');
-      expect(written.enabledMcpjsonServers).toContain('elements');
+      expect(written.enabledMcpjsonServers).toContain('nvidia_elements');
+    });
+
+    it('should migrate old server and tool permissions in existing settings', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+      const existing = {
+        permissions: {
+          allow: ['mcp__elements__api_list', 'mcp__elements__custom_tool', 'other_permission'],
+          deny: ['mcp__elements__api_get', 'mcp__nvidia_elements__api_get', 'other_denied_tool'],
+          ask: ['mcp__elements__api_list', 'other_asked_tool']
+        },
+        enabledMcpjsonServers: ['elements', 'other-server']
+      };
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.permissions.allow).toContain('other_permission');
+      expect(written.permissions.allow).toContain('mcp__nvidia_elements__custom_tool');
+      expect(written.permissions.allow).not.toContain('mcp__elements__api_list');
+      expect(written.permissions.allow).not.toContain('mcp__elements__custom_tool');
+      expect(
+        written.permissions.allow.filter((value: string) => value === 'mcp__nvidia_elements__api_list')
+      ).toHaveLength(1);
+      expect(written.permissions.deny).toEqual(['mcp__nvidia_elements__api_get', 'other_denied_tool']);
+      expect(written.permissions.ask).toEqual(['mcp__nvidia_elements__api_list', 'other_asked_tool']);
+      expect(written.enabledMcpjsonServers).toEqual(['nvidia_elements', 'other-server']);
     });
 
     it('should preserve other existing permissions properties', async () => {
@@ -338,9 +374,9 @@ describe('setup-mcp', () => {
       writeClaudeSettings('/project');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
-      expect(written.permissions.allow).toContain('mcp__elements__api_list');
-      expect(written.permissions.allow).not.toContain('mcp__elements__skills_list');
-      expect(written.permissions.allow).not.toContain('mcp__elements__skills_get');
+      expect(written.permissions.allow).toContain('mcp__nvidia_elements__api_list');
+      expect(written.permissions.allow).not.toContain('mcp__nvidia_elements__skills_list');
+      expect(written.permissions.allow).not.toContain('mcp__nvidia_elements__skills_get');
     });
 
     it('should return the settings file path', async () => {

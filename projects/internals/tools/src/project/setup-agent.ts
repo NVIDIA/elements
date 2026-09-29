@@ -11,6 +11,8 @@ import { elementsSkill, writeSkillDirectorySync } from '../skills/index.js';
 type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
 
 const DESCRIPTION = 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples';
+const MCP_SERVER_ALIAS = 'nvidia_elements';
+const LEGACY_MCP_SERVER_ALIAS = 'elements';
 
 interface McpServerConfig {
   description: string;
@@ -35,12 +37,14 @@ export function writeMcpJsonConfig(configPath: string): string {
     // start fresh if file is invalid
   }
 
+  const mcpServers = Object.fromEntries(
+    Object.entries(existing.mcpServers ?? {}).filter(([name]) => name !== LEGACY_MCP_SERVER_ALIAS)
+  );
+  mcpServers[MCP_SERVER_ALIAS] = jsonConfig;
+
   const updated = {
     ...existing,
-    mcpServers: {
-      ...existing.mcpServers,
-      elements: jsonConfig
-    },
+    mcpServers,
     enabledPlugins: {
       ...(existing.enabledPlugins ?? {}),
       'frontend-design@claude-plugins-official': false
@@ -63,9 +67,9 @@ export function writeMcpTomlConfig(configPath: string): string {
     // start fresh
   }
 
-  const sectionRegex = new RegExp(`\\[mcp_servers\\.elements\\][\\s\\S]*?(?=\\n\\[|$)`);
+  const sectionRegex = /\[mcp_servers\.(?:elements|nvidia_elements)\][\s\S]*?(?=\n\[|$)/g;
   const content = existing.replace(sectionRegex, '').trimEnd();
-  const block = `\n\n[mcp_servers.elements]\ndescription = "${DESCRIPTION}"\ncommand = "nve"\nargs = ["mcp"]\n`;
+  const block = `\n\n[mcp_servers.${MCP_SERVER_ALIAS}]\ncommand = "nve"\nargs = ["mcp"]\n`;
   const updated = (content + block).trimStart();
   const dir = configPath.substring(0, configPath.lastIndexOf('/'));
 
@@ -74,9 +78,16 @@ export function writeMcpTomlConfig(configPath: string): string {
   return configPath;
 }
 
+function migrateMcpAlias(value: string): string {
+  if (value === LEGACY_MCP_SERVER_ALIAS) return MCP_SERVER_ALIAS;
+  const legacyPrefix = `mcp__${LEGACY_MCP_SERVER_ALIAS}__`;
+  if (value.startsWith(legacyPrefix)) return `mcp__${MCP_SERVER_ALIAS}__${value.slice(legacyPrefix.length)}`;
+  return value;
+}
+
 function mergeArrays(existing: unknown, incoming: string[]): string[] {
-  const base = Array.isArray(existing) ? (existing as string[]) : [];
-  return [...new Set([...base, ...incoming])];
+  const base = Array.isArray(existing) ? existing.filter((value): value is string => typeof value === 'string') : [];
+  return [...new Set([...base, ...incoming].map(migrateMcpAlias))];
 }
 
 export function writeClaudeSettings(cwd: string): string {
@@ -99,7 +110,9 @@ export function writeClaudeSettings(cwd: string): string {
     $schema: existing.$schema ?? claudeProjectSettings.$schema,
     permissions: {
       ...existingPermissions,
-      allow: mergeArrays(existingPermissions.allow, incomingPermissions.allow)
+      allow: mergeArrays(existingPermissions.allow, incomingPermissions.allow),
+      ...(Array.isArray(existingPermissions.deny) && { deny: mergeArrays(existingPermissions.deny, []) }),
+      ...(Array.isArray(existingPermissions.ask) && { ask: mergeArrays(existingPermissions.ask, []) })
     },
     enabledMcpjsonServers: mergeArrays(existing.enabledMcpjsonServers, claudeProjectSettings.enabledMcpjsonServers)
   };

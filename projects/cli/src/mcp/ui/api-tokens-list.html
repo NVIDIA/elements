@@ -23,7 +23,10 @@
       import '@nvidia-elements/styles/typography.css';
       import '@nvidia-elements/styles/layout.css';
       import '@nvidia-elements/core/bundles/index.js';
-      import { App, applyDocumentTheme } from '@modelcontextprotocol/ext-apps';
+      import { z } from 'zod/v4';
+
+      z.config({ jitless: true });
+      const { App, applyDocumentTheme } = await import('@modelcontextprotocol/ext-apps');
 
       function applyHostContext(context) {
         if (!context?.theme) return;
@@ -755,7 +758,7 @@
       if (pendingToolResult) {
         handleToolResult(pendingToolResult);
       }
-      document.body.replaceChildren(tokenList);
+      document.body.append(tokenList);
     </script>
   </body>
 </html>

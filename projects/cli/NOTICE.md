@@ -8,10 +8,10 @@ This project includes the following bundled third-party software:
 - @inquirer/prompts v8.7.2 [MIT]
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
-- @modelcontextprotocol/ext-apps v1.7.5 [MIT]
+- @modelcontextprotocol/ext-apps v2.0.3 [MIT]
   Copyright: Olivier Chafik
 
-- @modelcontextprotocol/server v2.0.0 [MIT]
+- @modelcontextprotocol/server v2.2.0 [MIT]
   Copyright: Anthropic, PBC (https://anthropic.com)
 
 - adm-zip v0.6.1 [MIT]
@@ -20,7 +20,7 @@ This project includes the following bundled third-party software:
 - archiver v8.0.0 [MIT]
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.10.0 [MIT]
+- eslint v10.11.0 [MIT]
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
 - fast-glob v3.3.3 [MIT]
@@ -57,11 +57,11 @@ MIT
 The following bundled components are provided under the MIT license:
 
 @inquirer/prompts v8.7.2 - Copyright Simon Boudrias <admin@simonboudrias.com>
-@modelcontextprotocol/ext-apps v1.7.5 - Copyright Olivier Chafik
-@modelcontextprotocol/server v2.0.0 - Copyright Anthropic, PBC (https://anthropic.com)
+@modelcontextprotocol/ext-apps v2.0.3 - Copyright Olivier Chafik
+@modelcontextprotocol/server v2.2.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.6.1 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-eslint v10.10.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+eslint v10.11.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 ignore v7.0.8 - Copyright kael
 marked v18.0.14 - Copyright Christopher Jeffrey

@@ -42,7 +42,9 @@ describe('MCP UI resources', () => {
   it('should use the official MCP app client module', () => {
     uiResources.forEach(resource => {
       const html = resource.getHtml();
-      expect(html).toContain("import { App, applyDocumentTheme } from '@modelcontextprotocol/ext-apps';");
+      expect(html).toContain("import { z } from 'zod/v4';");
+      expect(html).toContain('z.config({ jitless: true });');
+      expect(html).toContain("await import('@modelcontextprotocol/ext-apps');");
       expect(html).toContain('function applyHostContext(context)');
       expect(html).toContain('const app = new App(');
       expect(html).toContain("app.addEventListener('hostcontextchanged'");
@@ -55,6 +57,12 @@ describe('MCP UI resources', () => {
       expect(html).not.toContain('new Client');
       expect(html).not.toContain("window.addEventListener('message'");
       expect(html).not.toContain('window.parent.postMessage');
+    });
+  });
+
+  it('should keep body styles when hosts nest the app document', () => {
+    uiResources.forEach(resource => {
+      expect(resource.getHtml()).not.toContain('document.body.replaceChildren(');
     });
   });
 

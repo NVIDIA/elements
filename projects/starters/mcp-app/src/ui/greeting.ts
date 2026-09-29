@@ -3,7 +3,11 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';
-import { App, applyDocumentTheme, type McpUiHostContext } from '@modelcontextprotocol/ext-apps';
+import type { McpUiHostContext } from '@modelcontextprotocol/ext-apps';
+import { z } from 'zod/v4';
+
+z.config({ jitless: true });
+const { App, applyDocumentTheme } = await import('@modelcontextprotocol/ext-apps');
 
 interface HelloToolResult {
   content?: {
@@ -11,9 +15,7 @@ interface HelloToolResult {
     type?: string;
   }[];
   isError?: boolean;
-  structuredContent?: {
-    greeting?: unknown;
-  };
+  structuredContent?: unknown;
 }
 
 const FALLBACK_GREETING = 'Hello from an Elements MCP App.';
@@ -64,7 +66,11 @@ async function refreshGreeting() {
 function getGreeting(result: HelloToolResult) {
   if (result.isError) return ERROR_GREETING;
 
-  const structuredGreeting = result.structuredContent?.greeting;
+  const structuredContent = result.structuredContent;
+  const structuredGreeting =
+    typeof structuredContent === 'object' && structuredContent !== null && 'greeting' in structuredContent
+      ? structuredContent.greeting
+      : undefined;
   if (typeof structuredGreeting === 'string') return structuredGreeting;
 
   const textContent = result.content?.find(item => item.type === 'text' && typeof item.text === 'string')?.text;

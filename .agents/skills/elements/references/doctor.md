@@ -17,7 +17,7 @@ Ensure the MCP is properly configured and working as expected.
 ```json
 {
   "mcpServers": {
-    "elements": {
+    "nvidia_elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "nve",
       "args": ["mcp"]
@@ -33,7 +33,7 @@ Ensure the MCP is properly configured and working as expected.
 ```json
 {
   "mcpServers": {
-    "elements": {
+    "nvidia_elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "nve",
       "args": ["mcp"]
@@ -47,7 +47,7 @@ Ensure the MCP is properly configured and working as expected.
 `.codex/config.toml`
 
 ```toml
-[mcp_servers.elements]
+[mcp_servers.nvidia_elements]
 description = "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
 command = "nve"
 args = ["mcp"]
