@@ -9,6 +9,7 @@ import { getCustomDataOutputs } from './cem.js';
 import {
   addUniqueMember,
   attributeTypesPlugin,
+  createStandaloneTypesManifest,
   elementMetadataToMarkdown,
   getAttributeFacingTypeText,
   getDocumentedTypeValues,
@@ -423,6 +424,13 @@ test('generates JSX and Vue bindings from property and attribute relationships',
             members: [
               {
                 kind: 'field',
+                name: 'nodes',
+                readonly: true,
+                type: { text: 'TreeNode[]' },
+                description: 'Returns the slotted child tree nodes.'
+              },
+              {
+                kind: 'field',
                 name: 'behaviorExpand',
                 attribute: 'behavior-expand',
                 type: { text: 'boolean' },
@@ -448,22 +456,15 @@ test('generates JSX and Vue bindings from property and attribute relationships',
     ]
   };
 
-  const jsxManifest = structuredClone(manifest);
-  const vueManifest = structuredClone(manifest);
+  const jsxManifest = createStandaloneTypesManifest(manifest);
+  const vueManifest = structuredClone(jsxManifest);
 
-  jsxManifest.modules[0].declarations.forEach(declaration => {
-    projectFrameworkPropertyBindings(declaration);
-    [...declaration.members, ...declaration.attributes].forEach(item => {
-      item.standaloneType = { text: item.type.text };
-    });
-  });
   vueManifest.modules[0].declarations.forEach(declaration => {
-    projectFrameworkPropertyBindings(declaration);
     omitVueBooleanAttributeAliases(declaration);
-    [...declaration.members, ...declaration.attributes].forEach(item => {
-      item.standaloneType = { text: item.type.text };
-    });
   });
+
+  assert.ok(manifest.modules[0].declarations[3].members.some(member => member.name === 'nodes'));
+  assert.ok(jsxManifest.modules[0].declarations[3].members.every(member => member.name !== 'nodes'));
 
   try {
     generateJsxTypes(jsxManifest, {
@@ -489,6 +490,7 @@ test('generates JSX and Vue bindings from property and attribute relationships',
       assert.doesNotMatch(output, /anchor\?: string;/);
       assert.match(output, /behaviorExpand\?: boolean;/);
       assert.match(output, /"boolean-attribute-only"\?: boolean;/);
+      assert.doesNotMatch(output, /nodes\?: TreeNode\[\];/);
     }
 
     assert.match(readFileSync(join(outputDirectory, 'jsx.d.ts'), 'utf8'), /"behavior-expand"\?: boolean;/);
@@ -631,10 +633,42 @@ test('removes attributes linked to non-public members', () => {
 
   assert.deepEqual(
     declaration.members.map(member => member.name),
-    ['implicitPublic', 'explicitPublic', 'protectedField']
+    ['implicitPublic', 'explicitPublic']
   );
   assert.deepEqual(
     declaration.attributes.map(attribute => attribute.name),
     ['implicit-public', 'explicit-public', 'orphan-attribute']
+  );
+});
+
+test('preserves documented readonly members', () => {
+  const declaration = {
+    tagName: 'nve-example',
+    members: [
+      { kind: 'field', name: 'documentedField', readonly: true, description: 'Returns the current state.' },
+      { kind: 'method', name: 'documentedMethod', readonly: true, description: 'Returns the current state.' },
+      { kind: 'field', name: 'undocumentedField', readonly: true },
+      { kind: 'field', name: 'emptyDescription', readonly: true, description: '  ' },
+      { kind: 'field', name: 'protectedField', privacy: 'protected', readonly: true, description: 'Internal state.' },
+      { kind: 'field', name: '_internalField', readonly: true, description: 'Internal state.' },
+      { kind: 'field', name: 'staticField', static: true, readonly: true, description: 'Static state.' }
+    ],
+    attributes: [
+      { name: 'documented-field', fieldName: 'documentedField' },
+      { name: 'undocumented-field', fieldName: 'undocumentedField' }
+    ]
+  };
+
+  publicPropertiesPlugin().packageLinkPhase({
+    customElementsManifest: { modules: [{ declarations: [declaration] }] }
+  });
+
+  assert.deepEqual(
+    declaration.members.map(member => member.name),
+    ['documentedField', 'documentedMethod']
+  );
+  assert.deepEqual(
+    declaration.attributes.map(attribute => attribute.name),
+    ['documented-field']
   );
 });

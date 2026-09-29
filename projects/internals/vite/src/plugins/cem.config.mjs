@@ -989,8 +989,15 @@ export function omitVueBooleanAttributeAliases(declaration) {
 }
 
 // Preserve the shared CEM types and select standalone types only for framework declaration generators.
-function createStandaloneTypesManifest(customElementsManifest) {
+export function createStandaloneTypesManifest(customElementsManifest) {
   const standaloneTypesManifest = structuredClone(customElementsManifest);
+  // Framework props are assignable; readonly fields stay in the CEM for documentation.
+  standaloneTypesManifest.modules
+    .flatMap(module => module.declarations ?? [])
+    .filter(declaration => declaration.tagName)
+    .forEach(declaration => {
+      declaration.members = declaration.members?.filter(member => member.kind !== 'field' || !member.readonly);
+    });
   const standaloneInterfaceTypes = collectReachableStandaloneInterfaceTypes(standaloneTypesManifest);
 
   standaloneTypesManifest.modules
@@ -1718,6 +1725,17 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
   };
 }
 
+function isDocumentedPublicMember(member) {
+  return (
+    (member.kind === 'field' || member.kind === 'method') &&
+    !member.name.startsWith('_') &&
+    !member.name.startsWith('#') &&
+    !member.static &&
+    isPublicMember(member) &&
+    (!member.readonly || Boolean(member.description?.trim()))
+  );
+}
+
 /** Filters members by kind, privacy, name, readonly, and static status, plus attributes linked to non-public members. */
 export function publicPropertiesPlugin() {
   return {
@@ -1727,23 +1745,12 @@ export function publicPropertiesPlugin() {
         for (const declaration of module.declarations) {
           if (declaration.tagName) {
             const nonPublicMemberNames = new Set(
-              declaration.members
-                ?.filter(member => member.privacy != null && member.privacy !== 'public')
-                .map(member => member.name)
+              declaration.members?.filter(member => !isDocumentedPublicMember(member)).map(member => member.name)
             );
             declaration.attributes = declaration.attributes?.filter(
               attribute => !attribute.fieldName || !nonPublicMemberNames.has(attribute.fieldName)
             );
-            declaration.members =
-              declaration.members?.filter(
-                m =>
-                  (m.kind === 'field' || m.kind === 'method') &&
-                  !m.name.startsWith('_') &&
-                  !m.name.startsWith('#') &&
-                  !m.readonly &&
-                  !m.static &&
-                  m.privacy !== 'private'
-              ) ?? [];
+            declaration.members = declaration.members?.filter(isDocumentedPublicMember) ?? [];
           }
         }
       }
