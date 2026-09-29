@@ -65,6 +65,7 @@ export class Grid extends LitElement implements ContainerElement {
 
   static elementDefinitions = {};
 
+  /** @private */
   get keynavGridConfig() {
     return {
       columns: this.#columns,
@@ -73,6 +74,7 @@ export class Grid extends LitElement implements ContainerElement {
     };
   }
 
+  /** @private */
   get stateScrollConfig(): StateScrollConfig {
     return {
       target: this.shadowRoot?.querySelector<HTMLElement>('[part="_scrollbox"]') ?? undefined

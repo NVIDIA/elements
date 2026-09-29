@@ -41,6 +41,7 @@ import type { Button } from '@nvidia-elements/core/button';
 @scopedRegistry()
 @keyNavigationList<Breadcrumb>()
 export class Breadcrumb extends LitElement {
+  /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
       items: Array.from(this.shadowRoot!.querySelectorAll('slot'))

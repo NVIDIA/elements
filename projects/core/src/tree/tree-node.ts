@@ -108,7 +108,7 @@ export class TreeNode extends LitElement {
   }
 
   /**
-   * Returns list of child nodes
+   * Returns the slotted child tree nodes.
    */
   @queryAssignedElements({ slot: 'nodes' }) readonly nodes!: TreeNode[];
 
