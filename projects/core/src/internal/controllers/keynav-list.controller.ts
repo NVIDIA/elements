@@ -89,7 +89,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
           loop,
           layout,
           dir,
-          code: e.code as KeynavCode
+          code: e.code
         });
 
         if (next !== previous) {

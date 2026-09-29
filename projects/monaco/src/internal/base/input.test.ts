@@ -39,7 +39,7 @@ function simulateValidationError(monaco: Monaco, model: monaco.editor.ITextModel
   monaco.editor.setModelMarkers(model, 'mock', [
     {
       message,
-      severity: 8 /* monaco.MarkerSeverity.Error */,
+      severity: monaco.MarkerSeverity.Error,
       startLineNumber: 1,
       startColumn: 1,
       endLineNumber: 1,

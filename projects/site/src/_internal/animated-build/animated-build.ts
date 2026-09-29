@@ -205,7 +205,7 @@ export class AnimatedBuild extends LitElement {
         wrapper.setAttribute('data-reset', 'true');
 
         // Force reflow
-        void wrapper.offsetWidth;
+        wrapper.getBoundingClientRect();
 
         // Remove reset attribute after a brief moment
         setTimeout(() => {
