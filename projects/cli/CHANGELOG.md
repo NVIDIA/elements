@@ -1,3 +1,14 @@
+## [2.2.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.6...@nvidia-elements/cli-v2.2.7) (2026-09-29)
+
+### Features
+
+* **pi:** pi extension ([88dea55](https://github.com/NVIDIA/elements/commit/88dea552fd28da8a31c95ff713218bda73d64e64))
+
+### Bug Fixes
+
+* **cli:** mcp app rendering and schema tools ([5cf5f51](https://github.com/NVIDIA/elements/commit/5cf5f51e8b77468451024a9a31f247ac0beb5373))
+* **lint:** update eslint ([2a3ad12](https://github.com/NVIDIA/elements/commit/2a3ad1217db5aadfdef4a89f796f96348dc0f330))
+
 ## [2.2.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.5...@nvidia-elements/cli-v2.2.6) (2026-09-24)
 
 ### Features
