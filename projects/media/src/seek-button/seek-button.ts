@@ -52,6 +52,7 @@ export class MediaSeekButton extends ButtonFormControlMixin(LitElement) {
 
   #derivedCommand: MediaCommand = mediaCommands.seekForward;
 
+  /** Returns the seek amount as a number. */
   get valueAsNumber() {
     return Number(this.value);
   }
