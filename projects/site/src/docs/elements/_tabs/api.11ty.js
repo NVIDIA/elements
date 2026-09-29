@@ -77,6 +77,7 @@ ${renderAPISection(element, 'property', 'Properties')}
 ${renderAPISection(element, 'event', 'Events')}
 ${renderAPISection(element, 'slot', 'Slots')}
 ${renderAPISection(element, 'command', 'Invoker Commands')}
+${renderAPISection(element, 'method', 'Methods')}
 ${renderAPISection(element, 'css-property', 'CSS Properties')}
 ${renderAPISection(element, 'css-part', 'CSS Parts', ' data-api-section="css-parts"')}`;
 }

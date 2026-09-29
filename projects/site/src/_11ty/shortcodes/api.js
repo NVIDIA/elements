@@ -5,39 +5,27 @@ import { siteData } from '../../index.11tydata.js';
 
 const { elements } = siteData;
 
-const typeAliasMap = {
-  command: 'commands',
-  description: 'description',
-  event: 'events',
-  property: 'members',
-  slot: 'slots',
-  'css-property': 'cssProperties',
-  'css-part': 'cssParts'
-};
-
 export async function apiShortcode(tag, type, name = null, value = null) {
   const element = elements.find(d => d.name === tag);
+  if (!element?.manifest) return '';
 
-  if (element?.manifest) {
-    if (type === 'description') {
-      return markdown
-        .render(element.manifest.description ?? '')
-        .trim()
-        .replaceAll('<p>', '<p class="api-description" nve-text="body relaxed mkd">');
-    }
-
-    const apiItem = element.manifest[typeAliasMap[type]]?.find(m => m.name === name);
-    const shouldRenderAPINameTable = apiItem && name !== null && value === null;
-    const shouldRenderAPIValueDescription = apiItem && name !== null && value !== null;
-
-    return /* html */ `<div class="api-shortcode" nve-layout="column gap:sm">
-      ${shouldRenderAPINameTable ? renderAPINameTable(apiItem) : ''}
-      ${shouldRenderAPIValueDescription ? renderAPIValueDescription(apiItem, value) : ''}
-      ${!shouldRenderAPINameTable && !shouldRenderAPIValueDescription ? renderAPITable(element, type) : ''}
-    </div>`.replaceAll('\n', '');
+  if (type === 'description') {
+    return markdown
+      .render(element.manifest.description ?? '')
+      .trim()
+      .replaceAll('<p>', '<p class="api-description" nve-text="body relaxed mkd">');
   }
 
-  return '';
+  let content;
+  if (type === 'method') {
+    content = renderAPITable(element, type, { container: 'flat', methodName: name });
+  } else {
+    const item = name === null ? undefined : getAPIItems(element, type).find(item => item.name === name);
+    if (!item) content = renderAPITable(element, type);
+    else if (value === null) content = renderAPINameTable(item);
+    else content = renderAPIValueDescription(item, value);
+  }
+  return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`.replaceAll('\n', '');
 }
 
 function renderAPIValueDescription(apiItem, value) {
@@ -80,63 +68,142 @@ export function renderAPINameTable(apiValue) {
 }
 
 export function hasAPIData(element, type) {
-  const items =
-    element.manifest[typeAliasMap[type]]?.filter(
-      i => !i.name?.startsWith?.('nve-') && i.privacy !== 'private' && i.privacy !== 'protected'
-    ) ?? [];
-  return items.length > 0;
+  return getAPIItems(element, type).length > 0;
+}
+
+function getAPIItems(element, type) {
+  const manifest = element.manifest;
+  let items;
+  switch (type) {
+    case 'property':
+      items = manifest.members?.filter(member => member.kind === 'field');
+      break;
+    case 'method':
+      items = manifest.members?.filter(member => member.kind === 'method');
+      break;
+    case 'command':
+      items = manifest.commands;
+      break;
+    case 'event':
+      items = manifest.events;
+      break;
+    case 'slot':
+      items = manifest.slots;
+      break;
+    case 'css-property':
+      items = manifest.cssProperties;
+      break;
+    case 'css-part':
+      items = manifest.cssParts;
+      break;
+    default:
+      items = [];
+  }
+  return (items ?? [])
+    .filter(item => !item.name?.startsWith?.('nve-') && item.privacy !== 'private' && item.privacy !== 'protected')
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function formatMethodSignature(method) {
+  const parameters = (method.parameters ?? [])
+    .map(parameter => {
+      const optional = parameter.optional || parameter.default !== undefined ? '?' : '';
+      return `${parameter.name}${optional}: ${parameter.type?.text ?? 'unknown'}`;
+    })
+    .join(', ');
+  return `${method.name}(${parameters}): ${method.return?.type?.text ?? 'unknown'}`;
+}
+
+function groupMethods(methods) {
+  const groups = new Map();
+  for (const method of methods) {
+    const group = groups.get(method.name) ?? [];
+    group.push(method);
+    groups.set(method.name, group);
+  }
+  return [...groups.values()].map(group => ({
+    ...(group.find(method => method.description) ?? group[0]),
+    signatures: [...new Set(group.map(formatMethodSignature))]
+  }));
 }
 
 export function renderAPITable(element, type, options = { container: 'flat' }) {
-  const items =
-    element.manifest[typeAliasMap[type]]
-      ?.filter(i => !i.name?.startsWith?.('nve-') && i.privacy !== 'private' && i.privacy !== 'protected')
-      ?.sort(i => (i.deprecated ? 1 : -1)) ?? [];
-  const noItems = items.length === 0;
+  if (type === 'method') return renderMethodTable(element, options);
+
+  const items = getAPIItems(element, type);
+  const columns = [
+    `<nve-grid-column role="columnheader" width="200px">${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>`,
+    ...(type === 'property' ? ['<nve-grid-column role="columnheader" width="200px">Attribute</nve-grid-column>'] : []),
+    '<nve-grid-column role="columnheader">Description</nve-grid-column>',
+    ...(type === 'property' ? ['<nve-grid-column role="columnheader">Values</nve-grid-column>'] : [])
+  ];
+  const rows = items.map(
+    i => /* html */ `<nve-grid-row role="row">
+      <nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(i.name === '' ? 'default' : i.name)}</span></nve-grid-cell>
+      ${type === 'property' ? /* html */ `<nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(getMemberAttributeName(element.manifest, i) ?? 'none')}</span></nve-grid-cell>` : ''}
+      <nve-grid-cell role="gridcell">${renderDescription(i)}</nve-grid-cell>
+      ${type === 'property' ? renderPropertyValues(i) : ''}
+    </nve-grid-row>`
+  );
+
+  return renderAPIGrid(type, columns, rows, options.container);
+}
+
+function renderMethodTable(element, options) {
+  const methods = groupMethods(
+    getAPIItems(element, 'method').filter(method => options.methodName == null || method.name === options.methodName)
+  );
+  const columns = [
+    '<nve-grid-column role="columnheader" width="200px">Method</nve-grid-column>',
+    '<nve-grid-column role="columnheader">Signatures</nve-grid-column>',
+    '<nve-grid-column role="columnheader">Description</nve-grid-column>'
+  ];
+  const rows = methods.map(
+    method => /* html */ `<nve-grid-row role="row">
+      <nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(method.name)}</span></nve-grid-cell>
+      <nve-grid-cell role="gridcell"><div nve-layout="column gap:xs">${method.signatures.map(signature => `<span nve-text="code">${escapeHtml(signature)}</span>`).join('')}</div></nve-grid-cell>
+      <nve-grid-cell role="gridcell">${renderDescription(method)}</nve-grid-cell>
+    </nve-grid-row>`
+  );
+
+  return renderAPIGrid('method', columns, rows, options.container);
+}
+
+function renderPropertyValues(property) {
+  return /* html */ `<nve-grid-cell role="gridcell">
+    <div nve-layout="${property.type?.values?.some(value => value.description) ? 'column gap:xs' : 'row gap:xxs align:wrap'}">
+      ${(property.type?.values ?? [])
+        .map(
+          value =>
+            /* html */ `<div><span nve-text="code nowrap">${escapeHtml(value.value)}</span> ${value.description ?? ''}</div>`
+        )
+        .join('')}
+    </div>
+  </nve-grid-cell>`;
+}
+
+function renderDescription(item) {
+  const rawDescription = item.deprecated ?? item.descriptionText ?? item.description;
+  const description = rawDescription
+    ? markdown
+        .render(rawDescription)
+        .trim()
+        .replaceAll('<p', `<p nve-text="body relaxed sm${item.deprecated ? ' muted' : ''}"`)
+        .replaceAll('<code', '<code nve-text="code nowrap"')
+    : '';
+  return `<div nve-layout="column gap:xs">${item.deprecated ? '<nve-badge status="warning" container="flat">deprecated</nve-badge>' : ''}${description}</div>`;
+}
+
+function renderAPIGrid(type, columns, rows, container) {
   return /* html */ `
   <div class="api-table" nve-layout="column gap:sm full">
-    <nve-grid role="grid" aria-label="api ${type}" container="${options.container}" style="min-height: 100px">
+    <nve-grid role="grid" aria-label="api ${type}" container="${container}" style="min-height: 100px">
       <nve-grid-header role="row">
-        <nve-grid-column role="columnheader" width="200px">${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>
-        ${type === 'property' ? '<nve-grid-column role="columnheader" width="200px">Attribute</nve-grid-column>' : ''}
-        <nve-grid-column role="columnheader">Description</nve-grid-column>
-        ${type === 'property' ? '<nve-grid-column role="columnheader">Values</nve-grid-column>' : ''}
+        ${columns.join('')}
       </nve-grid-header>
-      ${items
-        .map(i => {
-          const rawDescription = i.deprecated ?? i.descriptionText ?? i.description;
-          const description = rawDescription
-            ? markdown
-                .render(rawDescription)
-                .trim()
-                .replaceAll('<p', `<p nve-text="body relaxed sm${i.deprecated ? ' muted' : ''}"`)
-                .replaceAll('<code', '<code nve-text="code nowrap"')
-            : '';
-          return /* html */ `<nve-grid-row role="row">
-        <nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(i.name === '' ? 'default' : i.name)}</span></nve-grid-cell>
-        ${type === 'property' ? /* html */ `<nve-grid-cell role="gridcell"><span nve-text="code nowrap">${escapeHtml(getMemberAttributeName(element.manifest, i) ?? 'none')}</span></nve-grid-cell>` : ''}
-        <nve-grid-cell role="gridcell">
-          <div nve-layout="column gap:xs">${i.deprecated ? '<nve-badge status="warning" container="flat">deprecated</nve-badge>' : ''}${description}</div>
-        </nve-grid-cell>
-        ${
-          type === 'property'
-            ? /* html */ `<nve-grid-cell role="gridcell">
-          <div nve-layout="${i.type?.values?.some(v => v.description) ? 'column gap:xs' : 'row gap:xxs align:wrap'}">
-          ${(i.type?.values ?? [])
-            .map(
-              v =>
-                /* html */ `<div><span nve-text="code nowrap">${escapeHtml(v.value)}</span> ${v.description ? v.description : ''}</div>`
-            )
-            .join('')}
-          </div>
-        </nve-grid-cell>`
-            : ''
-        }
-      </nve-grid-row>`;
-        })
-        .join('')}
+      ${rows.join('')}
       ${
-        noItems
+        rows.length === 0
           ? /* html */ `<nve-grid-placeholder>
         <p nve-text="body relaxed sm">No ${type}s found</p>
       </nve-grid-placeholder>`

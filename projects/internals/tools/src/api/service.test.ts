@@ -90,7 +90,9 @@ describe('ApiService', () => {
       expect(result[0].name).toBe('nve-button');
 
       const button = result[0] as Element;
-      const readOnly = button.manifest?.members.find(member => member.name === 'readOnly');
+      const readOnly = button.manifest?.members
+        .filter(member => member.kind === 'field')
+        .find(member => member.name === 'readOnly');
 
       expect(readOnly?.attribute).toBe('readonly');
     });
@@ -101,8 +103,9 @@ describe('ApiService', () => {
         | Attribute
       )[];
       const muteButton = result[0] as Element;
-      const checked = muteButton.manifest?.members.find(member => member.name === 'checked');
-      const commandForElement = muteButton.manifest?.members.find(member => member.name === 'commandForElement');
+      const fields = muteButton.manifest?.members.filter(member => member.kind === 'field');
+      const checked = fields?.find(member => member.name === 'checked');
+      const commandForElement = fields?.find(member => member.name === 'commandForElement');
 
       expect(checked?.attribute).toBe('checked');
       expect(commandForElement?.attribute).toBe('commandfor');
@@ -337,7 +340,7 @@ describe('ApiService', () => {
       expect(Array.isArray(result)).toBe(true);
       const iconEl = result[0] as Element;
       const nameMember = iconEl.manifest?.members?.find(m => m.name === 'name');
-      if (nameMember?.type?.values && nameMember.type.values.length > 0) {
+      if (nameMember?.kind === 'field' && nameMember.type?.values && nameMember.type.values.length > 0) {
         expect(nameMember.type.values.length).toBeGreaterThan(20);
       }
     });

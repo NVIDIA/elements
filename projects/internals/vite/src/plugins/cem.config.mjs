@@ -513,7 +513,7 @@ function replaceTypeName(typeText, name, replacement) {
   return typeText.replace(new RegExp(`(?<![\\w$])${escapeRegExp(name)}(?![\\w$])`, 'g'), replacement);
 }
 
-function createMixinApiEntry(property, location, mixinName) {
+export function createMixinApiEntry(property, location, mixinName) {
   const declarations = property.getDeclarations();
   const declaration = declarations.find(item => typeof item.getJsDocs === 'function');
   if (!declaration) {
@@ -533,15 +533,23 @@ function createMixinApiEntry(property, location, mixinName) {
   const attribute = attributeTag?.getCommentText()?.trim();
   const propertyType = property.getTypeAtLocation(location);
   const typeText = getTypeText(propertyType, location);
+  const isMethod = declaration.getKindName() === 'MethodSignature';
   const requiresMixinTypeSpecialization = location
     .getTypeParameters()
     .some(typeParameter => typeTextReferencesName(typeText, typeParameter.getName()));
   const member = {
-    kind: declarations.some(item => item.getKindName?.() === 'MethodSignature') ? 'method' : 'field',
+    kind: isMethod ? 'method' : 'field',
     name: property.getName(),
-    type: {
-      text: typeText
-    },
+    ...(isMethod
+      ? {
+          parameters: declaration.getParameters().map(parameter => ({
+            name: parameter.getName(),
+            ...(parameter.isOptional() && { optional: true }),
+            type: { text: getTypeText(parameter.getType(), location) }
+          })),
+          return: { type: { text: getTypeText(declaration.getReturnType(), location) } }
+        }
+      : { type: { text: typeText } }),
     description,
     inheritedFrom: {
       name: mixinName
@@ -1175,7 +1183,7 @@ function elementMetadataToMarkdownPlugin() {
   };
 }
 
-/** Deduplicate members by name, preferring entries that have a description (handles TS method overloads). */
+/** Deduplicate properties by name, preferring entries that have a description. */
 function deduplicateByName(members) {
   const seen = new Map();
   for (const member of members) {
@@ -1185,6 +1193,73 @@ function deduplicateByName(members) {
     }
   }
   return [...seen.values()];
+}
+
+function sortByName(items) {
+  return [...items].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function overloadMethodsPlugin() {
+  return {
+    name: 'overload-methods-plugin',
+    analyzePhase({ ts, node, moduleDoc }) {
+      if (!ts.isClassDeclaration(node) || !node.name) return;
+
+      const declaration = moduleDoc.declarations.find(item => item.name === node.name.getText());
+      if (!declaration?.members) return;
+
+      const sourceMethods = node.members.filter(
+        member =>
+          ts.isMethodDeclaration(member) &&
+          !member.jsDoc?.some(doc => doc.tags?.some(tag => ['ignore', 'internal'].includes(tag.tagName.getText())))
+      );
+      const overloadNames = new Set(sourceMethods.filter(method => !method.body).map(method => method.name.getText()));
+      if (!overloadNames.size) return;
+
+      const excludedMembers = new Set();
+      for (const name of overloadNames) {
+        const sourceEntries = sourceMethods.filter(method => method.name.getText() === name);
+        const manifestEntries = declaration.members.filter(member => member.kind === 'method' && member.name === name);
+        if (sourceEntries.length !== manifestEntries.length) continue;
+
+        const overloadEntries = manifestEntries.filter((_member, index) => !sourceEntries[index].body);
+        const implementationDescription = manifestEntries.find(
+          (member, index) => sourceEntries[index].body && member.description
+        )?.description;
+        if (implementationDescription && !overloadEntries.some(member => member.description)) {
+          overloadEntries[0].description = implementationDescription;
+        }
+
+        sourceEntries.forEach((method, index) => {
+          if (method.body) excludedMembers.add(manifestEntries[index]);
+        });
+      }
+      declaration.members = declaration.members.filter(member => !excludedMembers.has(member));
+    }
+  };
+}
+
+function formatMethodSignature(method) {
+  const parameters = (method.parameters ?? [])
+    .map(parameter => {
+      const optional = parameter.optional || parameter.default !== undefined ? '?' : '';
+      return `${parameter.name}${optional}: ${parameter.type?.text ?? 'unknown'}`;
+    })
+    .join(', ');
+  return `${method.name}(${parameters}): ${method.return?.type?.text ?? 'unknown'}`;
+}
+
+function groupMethods(methods) {
+  const groups = new Map();
+  for (const method of methods) {
+    const group = groups.get(method.name) ?? [];
+    group.push(method);
+    groups.set(method.name, group);
+  }
+  return [...groups.values()].map(group => ({
+    ...(group.find(method => method.description) ?? group[0]),
+    signatures: [...new Set(group.map(formatMethodSignature))]
+  }));
 }
 
 function getMemberAttribute(manifest, member) {
@@ -1231,8 +1306,13 @@ function escapeMarkdownTableType(type) {
 
 export function elementMetadataToMarkdown(manifest) {
   if (manifest.tagName) {
-    const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
-    const members = deduplicateByName(manifest.members?.filter(i => !i.deprecated && isPublicMember(i)) ?? []);
+    const slots = sortByName(manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? []);
+    const members = manifest.members?.filter(i => !i.deprecated && isPublicMember(i)) ?? [];
+    const properties = sortByName(deduplicateByName(members.filter(i => i.kind !== 'method')));
+    const methods = sortByName(groupMethods(members.filter(i => i.kind === 'method')));
+    const events = sortByName(manifest.events ?? []);
+    const commands = sortByName(manifest.commands ?? []);
+    const cssProperties = sortByName(manifest.cssProperties ?? []);
     return `
 ## ${manifest.tagName}
 ${manifest.description ? `\n${manifest.description}\n` : ''}${manifest.metadata.example ? `\n### Example\n\n\`\`\`html\n${manifest.metadata.example}\n\`\`\`\n` : ''}
@@ -1256,11 +1336,11 @@ ${slots
 }
 
 ${
-  members.length
+  properties.length
     ? `### Properties / Attributes\n
 | property (attribute) | value | description |
 | -------------------- | ----- | ----------- |
-${members
+${properties
   .map(i => {
     const propertyType = i.type?.text;
     const attributeType = getMemberAttribute(manifest, i)?.type?.text;
@@ -1288,29 +1368,43 @@ ${members
 }
 
 ${
-  manifest.events?.length
+  events.length
     ? `### Events\n
 | name | value | description |
 | ---- | ----- | ----------- |
-${manifest.events.map(i => `| ${i.name} | \`CustomEvent\` | ${formatDescription(i.description)} |`).join('\n')}\n`
+${events.map(i => `| ${i.name} | \`CustomEvent\` | ${formatDescription(i.description)} |`).join('\n')}\n`
     : ''
 }
 
 ${
-  manifest.commands?.length
+  commands.length
     ? `### Invoker Commands\n
 | name | value | description |
 | ---- | ----- | ----------- |
-${manifest.commands.map(i => `| ${i.name} | \`CommandEvent\` | ${formatDescription(i.description)} |`).join('\n')}\n`
+${commands.map(i => `| ${i.name} | \`CommandEvent\` | ${formatDescription(i.description)} |`).join('\n')}\n`
     : ''
 }
 
 ${
-  manifest.cssProperties?.length
+  methods.length
+    ? `### Methods\n
+| method | signatures | description |
+| ------ | ---------- | ----------- |
+${methods
+  .map(
+    method =>
+      `| ${method.name} | ${method.signatures.map(signature => `\`${escapeMarkdownTableType(signature)}\``).join('<br>')} | ${formatDescription(method.description)} |`
+  )
+  .join('\n')}\n`
+    : ''
+}
+
+${
+  cssProperties.length
     ? `### CSS Properties\n
 | name | value | description |
 | ---- | ----- | ----------- |
-${manifest.cssProperties.map(i => `| ${i.name} | \`string\` | ${formatDescription(i.description)} |`).join('\n')}`
+${cssProperties.map(i => `| ${i.name} | \`string\` | ${formatDescription(i.description)} |`).join('\n')}`
     : ''
 }`
       .trim()
@@ -1815,6 +1909,7 @@ export default {
     mixinApiProjectionPlugin(),
     rewriteExportedStringLiteralTypeAliasesPlugin(),
     attributeTypesPlugin(),
+    overloadMethodsPlugin(),
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
     dynamicSlotsPlugin(),

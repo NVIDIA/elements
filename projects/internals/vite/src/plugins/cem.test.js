@@ -3,12 +3,16 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { create, ts } from '@custom-elements-manifest/analyzer';
 import { generateJsxTypes } from 'custom-element-jsx-integration';
 import { generateVuejsTypes } from 'custom-element-vuejs-integration';
+import { Project } from 'ts-morph';
 import { getCustomDataOutputs } from './cem.js';
-import {
+import cemConfig, {
   addUniqueMember,
   attributeTypesPlugin,
+  createMixinApiEntry,
   createStandaloneTypesManifest,
   elementMetadataToMarkdown,
   getAttributeFacingTypeText,
@@ -187,6 +191,35 @@ test('adds inherited descriptions to existing projected members', () => {
   assert.equal(declaration.members.length, 1);
   assert.equal(existingMember.description, 'The current form control value.');
   assert.equal(existingMember.type.text, 'number');
+});
+
+test('projects form control method signatures', () => {
+  const project = new Project({ compilerOptions: { strictNullChecks: true }, skipAddingFilesFromTsConfig: true });
+  const source = project.addSourceFileAtPath(
+    fileURLToPath(new URL('../../../../forms/src/mixins/control.ts', import.meta.url))
+  );
+  const mixin = source.getInterfaceOrThrow('FormControlMixinInstance');
+  const declaration = { tagName: 'nve-example', metadata: { entrypoint: '@nvidia-elements/example' }, members: [] };
+
+  for (const name of ['setCustomValidity', 'checkValidity']) {
+    const property = mixin
+      .getType()
+      .getProperties()
+      .find(property => property.getName() === name);
+    assert.ok(property);
+    const entry = createMixinApiEntry(property, mixin, 'FormControlMixin');
+    assert.ok(entry);
+    addUniqueMember(declaration, entry.member);
+  }
+
+  assert.deepEqual(declaration.members[0].parameters, [{ name: 'message', type: { text: 'string' } }]);
+  assert.deepEqual(declaration.members[0].return, { type: { text: 'void' } });
+  assert.deepEqual(declaration.members[1].parameters, []);
+  assert.deepEqual(declaration.members[1].return, { type: { text: 'boolean' } });
+
+  const markdown = elementMetadataToMarkdown(declaration);
+  assert.match(markdown, /setCustomValidity\(message: string\): void/);
+  assert.match(markdown, /checkValidity\(\): boolean/);
 });
 
 test('narrows inferred string members to inherited finite unions', () => {
@@ -671,4 +704,104 @@ test('preserves documented readonly members', () => {
     declaration.attributes.map(attribute => attribute.name),
     ['documented-field']
   );
+});
+
+test('keeps callable method overloads in the manifest', () => {
+  const source = ts.createSourceFile(
+    'example.ts',
+    `export class Example {
+      scrollTo(options?: ScrollToOptions): Promise<void>;
+      scrollTo(x: number, y: number): Promise<void>;
+      /** Scroll to a position. */
+      async scrollTo(...args: [options?: ScrollToOptions] | [x: number, y: number]): Promise<void> {}
+      reset(): void {}
+    }`,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS
+  );
+  const plugin = cemConfig.plugins.find(plugin => plugin.name === 'overload-methods-plugin');
+  assert.ok(plugin);
+
+  const manifest = create({ modules: [source], plugins: [plugin] });
+  const declaration = manifest.modules[0].declarations.find(declaration => declaration.name === 'Example');
+  const overloads = declaration.members.filter(member => member.name === 'scrollTo');
+
+  assert.deepEqual(
+    overloads.map(method => method.parameters.map(parameter => parameter.name)),
+    [['options'], ['x', 'y']]
+  );
+  assert.equal(overloads[0].description, 'Scroll to a position.');
+  assert.ok(declaration.members.some(member => member.name === 'reset'));
+});
+
+test('renders fields and method overloads in separate Markdown sections', () => {
+  const markdown = elementMetadataToMarkdown({
+    tagName: 'nve-example',
+    metadata: { entrypoint: '@nvidia-elements/example' },
+    members: [
+      {
+        kind: 'field',
+        name: 'targetScale',
+        readonly: true,
+        type: { text: 'number' },
+        description: 'The target scale.'
+      },
+      {
+        kind: 'method',
+        name: 'scrollTo',
+        description: 'Scroll to a position.',
+        parameters: [{ name: 'options', optional: true, type: { text: 'ScrollToOptions' } }],
+        return: { type: { text: 'Promise<void>' } }
+      },
+      {
+        kind: 'method',
+        name: 'scrollTo',
+        parameters: [
+          { name: 'x', type: { text: 'number' } },
+          { name: 'y', type: { text: 'number' } }
+        ],
+        return: { type: { text: 'Promise<void>' } }
+      }
+    ]
+  });
+  const properties = markdown.split('### Properties / Attributes')[1].split('### Methods')[0];
+  const methods = markdown.split('### Methods')[1];
+
+  assert.match(properties, /\| targetScale \| `number` \| The target scale\. \|/);
+  assert.doesNotMatch(properties, /scrollTo/);
+  assert.match(
+    methods,
+    /\| scrollTo \| `scrollTo\(options\?: ScrollToOptions\): Promise<void>`<br>`scrollTo\(x: number, y: number\): Promise<void>` \| Scroll to a position\. \|/
+  );
+  assert.equal((methods.match(/\| scrollTo \|/g) ?? []).length, 1);
+  assert.doesNotMatch(methods, /targetScale/);
+});
+
+test('sorts generated Markdown API rows by name', () => {
+  const markdown = elementMetadataToMarkdown({
+    tagName: 'nve-example',
+    metadata: { entrypoint: '@nvidia-elements/example' },
+    members: [
+      { kind: 'field', name: 'y' },
+      { kind: 'field', name: 'x' },
+      { kind: 'method', name: 'zoom' },
+      { kind: 'method', name: 'pan' }
+    ],
+    slots: [{ name: 'suffix' }, { name: 'prefix' }, { name: '' }],
+    events: [{ name: 'zoom' }, { name: 'pan' }],
+    commands: [{ name: '--zoom-in' }, { name: '--pan-left' }],
+    cssProperties: [{ name: '--z-color' }, { name: '--a-color' }]
+  });
+  const rowNames = title => {
+    const section = markdown.split(`### ${title}\n`)[1]?.split('\n### ')[0] ?? '';
+    return [...section.matchAll(/^\| ([^|]+) \|/gm)].slice(2).map(match => match[1]);
+  };
+
+  assert.deepEqual(rowNames('Properties / Attributes'), ['x', 'y']);
+  assert.deepEqual(rowNames('Events'), ['pan', 'zoom']);
+  assert.deepEqual(rowNames('Slots'), ['(default)', 'prefix', 'suffix']);
+  assert.deepEqual(rowNames('Invoker Commands'), ['--pan-left', '--zoom-in']);
+  assert.deepEqual(rowNames('Methods'), ['pan', 'zoom']);
+  assert.deepEqual(rowNames('CSS Properties'), ['--a-color', '--z-color']);
 });
