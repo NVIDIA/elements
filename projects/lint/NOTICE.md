@@ -14,10 +14,10 @@ This project includes the following bundled third-party software:
 - @eslint/json v2.1.0 [Apache-2.0]
   Copyright: Nicholas C. Zakas
 
-- @html-eslint/eslint-plugin v0.65.0 [MIT]
+- @html-eslint/eslint-plugin v0.66.1 [MIT]
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @html-eslint/parser v0.65.0 [MIT]
+- @html-eslint/parser v0.66.1 [MIT]
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
 - minisearch v7.2.0 [MIT]
@@ -216,8 +216,8 @@ MIT
 The following bundled components are provided under the MIT license:
 
 @eslint/js v10.0.1 - Copyright Unknown
-@html-eslint/eslint-plugin v0.65.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@html-eslint/parser v0.65.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/eslint-plugin v0.66.1 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/parser v0.66.1 - Copyright yeonjuan (https://github.com/yeonjuan)
 minisearch v7.2.0 - Copyright Luca Ongaro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
