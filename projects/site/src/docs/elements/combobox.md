@@ -78,7 +78,7 @@
 
 ## Reset
 
-{% api 'nve-combobox', 'property', 'reset' %}
+{% api 'nve-combobox', 'method', 'reset' %}
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Reset' %}
 
@@ -94,6 +94,6 @@
 
 ## Select All
 
-{% api 'nve-combobox', 'property', 'selectAll' %}
+{% api 'nve-combobox', 'method', 'selectAll' %}
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'SelectAll' %}

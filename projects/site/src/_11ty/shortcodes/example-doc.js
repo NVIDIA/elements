@@ -37,23 +37,30 @@ export async function exampleDocShortcode(entrypoint, exampleName, config = {}) 
 }
 
 async function getBestAvailableContent(example, element) {
-  const member = element?.manifest?.members?.find(m => m.name.toLowerCase() === example.name.toLowerCase());
+  const member = element?.manifest?.members?.find(
+    m =>
+      (m.kind === 'field' || m.kind === 'method') &&
+      m.privacy !== 'private' &&
+      m.privacy !== 'protected' &&
+      m.name.toLowerCase() === example.name.toLowerCase()
+  );
   const isDefaultElementExample = example.name === 'Default';
   const isEventExample = example.name.startsWith('Event');
-  const isPropertyExample = member;
+  const isMethodExample = member?.kind === 'method';
+  const isPropertyExample = member?.kind === 'field';
 
   let content = '';
   if (isDefaultElementExample) {
     content = await apiShortcode(element.name, 'description');
   } else if (isEventExample) {
     content = await apiShortcode(element.name, 'event');
+  } else if (isMethodExample) {
+    content = await apiShortcode(element.name, 'method', member.name);
   } else if (isPropertyExample) {
     content = await apiShortcode(element.name, 'property', member.name);
-  } else {
-    content = `<p nve-text="body relaxed">${md.renderInline(example.summary)}</p>`;
   }
 
-  return content;
+  return content || `<p nve-text="body relaxed">${md.renderInline(example.summary ?? '')}</p>`;
 }
 
 function findElement(elementName) {
