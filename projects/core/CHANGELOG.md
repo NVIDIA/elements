@@ -1,3 +1,16 @@
+## [2.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.9.0...@nvidia-elements/core-v2.10.0) (2026-09-30)
+
+### Features
+
+* **core:** add viewport minimap ([c3cc189](https://github.com/NVIDIA/elements/commit/c3cc1891132f6ae6ab27c94fcdfe79d38b592230))
+* **pi:** pi extension ([88dea55](https://github.com/NVIDIA/elements/commit/88dea552fd28da8a31c95ff713218bda73d64e64))
+
+### Bug Fixes
+
+* **cli:** mcp app rendering and schema tools ([5cf5f51](https://github.com/NVIDIA/elements/commit/5cf5f51e8b77468451024a9a31f247ac0beb5373))
+* **cli:** update marked to 18.0.14 ([b24d6cb](https://github.com/NVIDIA/elements/commit/b24d6cb07ee47cf392214e0a934f1caee31eb510))
+* **lint:** update eslint ([2a3ad12](https://github.com/NVIDIA/elements/commit/2a3ad1217db5aadfdef4a89f796f96348dc0f330))
+
 ## [2.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.8.1...@nvidia-elements/core-v2.9.0) (2026-09-24)
 
 ### Features
