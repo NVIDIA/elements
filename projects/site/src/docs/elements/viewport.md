@@ -42,4 +42,4 @@
 
 ## Programmatic Navigation
 
-{% example '@nvidia-elements/core/viewport/viewport.examples.json' 'Reveal' '{ "inline": false, "height": "420px" }' %}
+{% example '@nvidia-elements/core/viewport/viewport.examples.json' 'ProgrammaticNavigation' '{ "inline": false, "height": "420px" }' %}

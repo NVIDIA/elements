@@ -2,11 +2,53 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('../../index.11tydata.js', () => ({
   siteData: {
-    elements: []
+    elements: [
+      {
+        name: 'nve-viewport',
+        manifest: {
+          members: [
+            { kind: 'field', name: 'autofit', description: 'Automatically fit content.' },
+            { kind: 'method', name: 'reveal', description: 'Reveal a region.' }
+          ]
+        }
+      },
+      {
+        name: 'nve-test-component',
+        manifest: {
+          members: [
+            {
+              kind: 'field',
+              name: 'property',
+              description: 'Property description.',
+              type: { values: [{ value: 'value' }] }
+            }
+          ]
+        }
+      }
+    ]
   }
 }));
 
-const { renderAPITable } = await import('./api.js');
+vi.resetModules();
+const { apiShortcode, renderAPITable } = await import('./api.js');
+
+describe('apiShortcode', () => {
+  it.each(['property', 'method', 'event', 'slot'])('should return no content for a missing named %s', async type => {
+    expect(await apiShortcode('nve-viewport', type, 'missing')).toBe('');
+  });
+
+  it('should not render all properties when the requested name is a method', async () => {
+    expect(await apiShortcode('nve-viewport', 'property', 'reveal')).toBe('');
+  });
+
+  it('should still render all properties when no name is requested', async () => {
+    expect(await apiShortcode('nve-viewport', 'property')).toContain('Automatically fit content.');
+  });
+
+  it('should return no content for a requested value without a description', async () => {
+    expect(await apiShortcode('nve-test-component', 'property', 'property', 'value')).toBe('');
+  });
+});
 
 describe('renderAPITable', () => {
   it('should resolve inherited property attributes from manifest attributes', () => {

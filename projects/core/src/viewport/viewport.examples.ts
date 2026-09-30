@@ -294,7 +294,7 @@ export const Commands = {
 /**
  * @summary Viewport navigation helpers let application logic animate specific content regions into view.
  */
-export const Reveal = {
+export const ProgrammaticNavigation = {
   render: () => html`
     <div nve-layout="column gap:sm align:horizontal-stretch" style="height: 420px">
       <div nve-layout="row align:center">

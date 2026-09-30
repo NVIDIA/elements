@@ -17,14 +17,19 @@ export async function apiShortcode(tag, type, name = null, value = null) {
   }
 
   let content;
+  const items = getAPIItems(element, type);
+  if (name !== null && !items.some(item => item.name === name)) return '';
+
   if (type === 'method') {
     content = renderAPITable(element, type, { container: 'flat', methodName: name });
   } else {
-    const item = name === null ? undefined : getAPIItems(element, type).find(item => item.name === name);
+    const item = name === null ? undefined : items.find(item => item.name === name);
     if (!item) content = renderAPITable(element, type);
     else if (value === null) content = renderAPINameTable(item);
     else content = renderAPIValueDescription(item, value);
   }
+  if (!content) return '';
+
   return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`.replaceAll('\n', '');
 }
 
@@ -35,15 +40,17 @@ function renderAPIValueDescription(apiItem, value) {
 
 export function renderAPINameTable(apiValue) {
   const values = apiValue.type?.values ?? [];
+  const description = markdown
+    .render(values.length ? (apiValue.descriptionText ?? apiValue.description ?? '') : (apiValue.description ?? ''))
+    .trim();
+  if (!description && !values.length) return '';
+
   return /* html */ `
   <div class="api-value-table" nve-layout="column gap:sm full">
     ${
       values.length
         ? /* html */ `
-    ${markdown
-      .render(apiValue.descriptionText ?? apiValue.description ?? '')
-      .trim()
-      .replaceAll('<p>', '<p nve-text="body relaxed">')}
+    ${description.replaceAll('<p>', '<p nve-text="body relaxed">')}
     <nve-grid role="grid" container="flat" aria-label="api options for '${apiValue.name}'">
       <nve-grid-header role="row">
         <nve-grid-column role="columnheader" width="200px">${apiValue.name.charAt(0).toUpperCase() + apiValue.name.slice(1)}</nve-grid-column>
@@ -59,10 +66,7 @@ export function renderAPINameTable(apiValue) {
         )
         .join('')}
     </nve-grid>`
-        : markdown
-            .render(apiValue.description ?? '')
-            .trim()
-            .replaceAll('nve-text', 'class="api-value-table-description" nve-text')
+        : description.replaceAll('nve-text', 'class="api-value-table-description" nve-text')
     }
   </div>`;
 }
