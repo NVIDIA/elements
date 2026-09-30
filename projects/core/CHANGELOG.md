@@ -1,3 +1,13 @@
+## [2.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.10.0...@nvidia-elements/core-v2.11.0) (2026-09-30)
+
+### Features
+
+* **core:** menu group ([d9a24e9](https://github.com/NVIDIA/elements/commit/d9a24e961e1c5394367e7ae9bf931d9e1e2d58b0))
+
+### Bug Fixes
+
+* **cli:** ui resources ([166a537](https://github.com/NVIDIA/elements/commit/166a5374c9aa022a2cc86c262d5165acdee7112e))
+
 ## [2.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.9.0...@nvidia-elements/core-v2.10.0) (2026-09-30)
 
 ### Features
