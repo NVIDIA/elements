@@ -14,9 +14,7 @@ const MCP_UI_ENTRYPOINTS = ['api-icons-list.html', 'api-tokens-list.html', 'exam
 const MCP_UI_INLINE_MODULE_ID = 'virtual:mcp-ui-inline';
 const PACKAGE_JSON_PATH = resolve(import.meta.dirname, 'package.json');
 
-export default defineConfig(async ({ command }) => {
-  if (command === 'build') await buildMcpUiResources();
-
+export default defineConfig(() => {
   const libConfig = libraryNodeBuildConfig;
   const rollupOptions = libConfig.build?.rolldownOptions;
   if (rollupOptions?.external) rollupOptions.external = NODE_BUILT_IN_MODULES;
@@ -53,6 +51,9 @@ function loadMcpUiResourcesPlugin(): Plugin {
   return {
     name: 'load-mcp-ui-resources',
     enforce: 'pre',
+    async buildStart() {
+      await buildMcpUiResources();
+    },
     load(id) {
       const htmlPath = id.match(/^(.+\.html)\?raw(?:$|&)/)?.[1];
       if (!htmlPath || dirname(htmlPath) !== MCP_UI_SOURCE_DIR) return null;
