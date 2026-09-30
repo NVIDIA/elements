@@ -2,21 +2,16 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { builtinModules } from 'node:module';
 import { createHash } from 'node:crypto';
 import { basename, dirname, resolve } from 'node:path';
-import { build as viteBuild, defineConfig, mergeConfig, type Plugin } from 'vite';
-import { viteSingleFile } from 'vite-plugin-singlefile';
+import { defineConfig, mergeConfig, type Plugin } from 'vite';
 import { libraryNodeBuildConfig } from '@internals/vite';
 import semanticRelease from 'semantic-release';
 
 const NODE_BUILT_IN_MODULES = builtinModules.flatMap(m => (m.startsWith('_') ? [] : [m, `node:${m}`]));
 const MCP_UI_SOURCE_DIR = resolve(import.meta.dirname, 'src/mcp/ui');
 const MCP_UI_OUTPUT_DIR = resolve(import.meta.dirname, 'dist/mcp/ui');
-const MCP_UI_ENTRYPOINTS = ['api-icons-list.html', 'api-tokens-list.html', 'examples-render.html'];
-const MCP_UI_INLINE_MODULE_ID = 'virtual:mcp-ui-inline';
 const PACKAGE_JSON_PATH = resolve(import.meta.dirname, 'package.json');
 
-export default defineConfig(async ({ command }) => {
-  if (command === 'build') await buildMcpUiResources();
-
+export default defineConfig(() => {
   const libConfig = libraryNodeBuildConfig;
   const rollupOptions = libConfig.build?.rolldownOptions;
   if (rollupOptions?.external) rollupOptions.external = NODE_BUILT_IN_MODULES;
@@ -30,25 +25,6 @@ export default defineConfig(async ({ command }) => {
   });
 });
 
-async function buildMcpUiResources(): Promise<void> {
-  for (const entrypoint of MCP_UI_ENTRYPOINTS) {
-    await viteBuild({
-      root: MCP_UI_SOURCE_DIR,
-      base: './',
-      configFile: false,
-      publicDir: false,
-      plugins: [bundleInlineHtmlModulesPlugin(), viteSingleFile()],
-      build: {
-        outDir: MCP_UI_OUTPUT_DIR,
-        emptyOutDir: false,
-        rollupOptions: {
-          input: resolve(MCP_UI_SOURCE_DIR, entrypoint)
-        }
-      }
-    });
-  }
-}
-
 function loadMcpUiResourcesPlugin(): Plugin {
   return {
     name: 'load-mcp-ui-resources',
@@ -58,29 +34,6 @@ function loadMcpUiResourcesPlugin(): Plugin {
       if (!htmlPath || dirname(htmlPath) !== MCP_UI_SOURCE_DIR) return null;
       const html = readFileSync(resolve(MCP_UI_OUTPUT_DIR, basename(htmlPath)), 'utf-8');
       return `export default ${JSON.stringify(html)};`;
-    }
-  };
-}
-
-function bundleInlineHtmlModulesPlugin(): Plugin {
-  let moduleCode = '';
-  return {
-    name: 'bundle-inline-html-modules',
-    transformIndexHtml: {
-      order: 'pre',
-      handler(html) {
-        const match = html.match(/<script type="module">\s*([\s\S]*?)<\/script>/);
-        if (!match) return html;
-        moduleCode = match[1] ?? '';
-        return html.replace(match[0], `<script type="module" src="${MCP_UI_INLINE_MODULE_ID}"></script>`);
-      }
-    },
-    resolveId(id) {
-      if (id === MCP_UI_INLINE_MODULE_ID) return id;
-      return null;
-    },
-    load(id) {
-      return id === MCP_UI_INLINE_MODULE_ID ? moduleCode : null;
     }
   };
 }

@@ -125,7 +125,7 @@
       ]
     },
     "build:vite": {
-      "command": "NODE_ENV=production vite build",
+      "command": "node scripts/build-mcp-ui.mjs && NODE_ENV=production vite build",
       "files": [
         "../internals/tools/dist/**/*.js",
         "../core/dist/bundles/index.js",
@@ -135,6 +135,7 @@
         "../themes/dist/high-contrast.css",
         "../styles/dist/typography.css",
         "../styles/dist/layout.css",
+        "scripts/build-mcp-ui.mjs",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
