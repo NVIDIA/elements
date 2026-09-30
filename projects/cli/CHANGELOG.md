@@ -1,3 +1,14 @@
+## [2.2.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.7...@nvidia-elements/cli-v2.2.8) (2026-09-30)
+
+### Features
+
+* **core:** add viewport minimap ([c3cc189](https://github.com/NVIDIA/elements/commit/c3cc1891132f6ae6ab27c94fcdfe79d38b592230))
+* **core:** menu group ([d9a24e9](https://github.com/NVIDIA/elements/commit/d9a24e961e1c5394367e7ae9bf931d9e1e2d58b0))
+
+### Bug Fixes
+
+* **cli:** ui resources ([166a537](https://github.com/NVIDIA/elements/commit/166a5374c9aa022a2cc86c262d5165acdee7112e))
+
 ## [2.2.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.6...@nvidia-elements/cli-v2.2.7) (2026-09-29)
 
 ### Features
