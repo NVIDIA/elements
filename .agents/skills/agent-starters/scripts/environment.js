@@ -38,13 +38,29 @@ const CACHE_DIRECTORIES = {
   GOPATH: 'go-path',
   HUGO_CACHEDIR: 'hugo',
   NEXT_CACHE_DIR: 'next',
-  NUXT_DATA_DIR: 'nuxt'
+  NUXT_DATA_DIR: 'nuxt',
+  UV_CACHE_DIR: 'uv'
 };
 
-async function commandPath(command) {
-  const result = await runCommand('which', [command], { timeoutMs: 10_000 });
+function isMiseShim(found) {
+  return found.includes(`${path.sep}mise${path.sep}shims${path.sep}`);
+}
+
+async function commandPath(command, env = process.env) {
+  const result = await runCommand('which', [command], { env, timeoutMs: 10_000 });
   if (!result.ok) throw new Error(`Required command ${command} was not found.`);
-  return result.stdout.trim();
+  const found = result.stdout.trim();
+  // Generated projects run outside the repository, where mise shims have no
+  // project version. Resolve every shim to its installed binary first.
+  if (!isMiseShim(found)) return found;
+  const resolved = await runCommand('mise', ['which', command], { env, timeoutMs: 10_000 });
+  const target = resolved.ok ? resolved.stdout.trim().split('\n').at(-1)?.trim() : '';
+  if (!target) {
+    throw new Error(
+      `Required command ${command} points at a mise shim that does not run outside the repository. Start verification from the repository root.`
+    );
+  }
+  return target;
 }
 
 function quoteCommand(command, args) {
@@ -151,6 +167,7 @@ export async function runCommand(command, args = [], options = {}) {
     exitCode: code,
     ok: !timedOut && !spawnError && code === 0,
     signal,
+    spawnError: spawnError ? spawnError.message : undefined,
     stderr,
     stdout,
     timedOut
@@ -213,16 +230,16 @@ async function wrapCommand(toolBin, name, target) {
   await writeFile(destination, `#!/bin/sh\nexec ${shellQuote(target)} "$@"\n`, { mode: 0o755 });
 }
 
-export async function createToolBin(root) {
+export async function createToolBin(root, baseEnv = process.env) {
   const toolBin = path.join(root, 'tool-bin');
   await mkdir(toolBin, { recursive: true });
-  for (const command of ['node', 'npm', 'npx', 'pnpm', 'git', 'go', 'hugo']) {
+  for (const command of ['node', 'npm', 'npx', 'pnpm', 'git', 'go', 'hugo', 'uv']) {
     try {
-      const target = await commandPath(command);
+      const target = await commandPath(command, baseEnv);
       if (command === 'npm' || command === 'npx') await wrapCommand(toolBin, command, target);
       else await symlink(target, path.join(toolBin, command));
     } catch (error) {
-      if (['go', 'hugo'].includes(command)) continue;
+      if (['go', 'hugo', 'uv'].includes(command)) continue;
       throw error;
     }
   }

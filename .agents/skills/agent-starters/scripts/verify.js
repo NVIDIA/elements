@@ -25,10 +25,27 @@ export const STARTERS = [
   'nuxt',
   'react',
   'solidjs',
+  'sphinx',
   'svelte',
   'typescript',
   'vue'
 ];
+
+/**
+ * Starters whose published archives are not Node packages.
+ * Commands match the starter README in this repository.
+ */
+export const EXTERNAL_VERIFICATION = {
+  sphinx: {
+    install: { command: 'uv', args: ['sync', '--locked'], phase: 'sync' },
+    verify: {
+      command: 'uv',
+      args: ['run', '--locked', 'sphinx-build', '-W', '--keep-going', '-n', '-b', 'html', 'docs', 'dist'],
+      phase: 'build'
+    },
+    requiredFiles: ['pyproject.toml', 'uv.lock']
+  }
+};
 
 function now() {
   return new Date().toISOString();
@@ -60,7 +77,15 @@ function hasDependencies(packageJson) {
   );
 }
 
-export function evaluateCreation({ command, hasNodeModules, output, packageJson, projectExists }) {
+export function evaluateCreation({
+  command,
+  external = false,
+  hasNodeModules,
+  output,
+  packageJson,
+  projectExists,
+  requiredFilesExist = true
+}) {
   const reasons = [];
   if (!command.ok) {
     reasons.push(command.timedOut ? 'CLI creation timed out.' : `CLI creation exited ${command.exitCode}.`);
@@ -73,11 +98,22 @@ export function evaluateCreation({ command, hasNodeModules, output, packageJson,
     reasons.push('CLI output reported a creation or installation failure.');
   }
   if (!projectExists) reasons.push('Expected project directory was not created.');
-  if (!packageJson) reasons.push('Generated package.json was missing or unreadable.');
-  if (hasDependencies(packageJson) && !hasNodeModules) {
-    reasons.push('Dependency installation did not produce node_modules.');
+  if (external) {
+    if (packageJson) reasons.push('External starter exported a package.json.');
+    if (!requiredFilesExist) reasons.push('External starter is missing required project files.');
+  } else {
+    if (!packageJson) reasons.push('Generated package.json was missing or unreadable.');
+    if (hasDependencies(packageJson) && !hasNodeModules) {
+      reasons.push('Dependency installation did not produce node_modules.');
+    }
   }
   return { ok: reasons.length === 0, reasons };
+}
+
+function commandFailure(phase, result) {
+  if (result.timedOut) return `${phase} timed out.`;
+  if (result.spawnError) return `${phase} failed to start: ${result.spawnError}`;
+  return `${phase} exited ${result.exitCode}.`;
 }
 
 export function verificationScript(packageJson) {
@@ -136,30 +172,48 @@ export async function verifyStarter({ cli, name, progress, runRoot, toolBin }) {
     });
     commands.push({ ...create, phase });
     const packageJson = await readPackageJson(projectDir);
+    const external = EXTERNAL_VERIFICATION[name];
     const creation = evaluateCreation({
       command: create,
+      external: Boolean(external),
       hasNodeModules: existsSync(path.join(projectDir, 'node_modules')),
       output: await readFile(createLog, 'utf8'),
       packageJson,
-      projectExists: existsSync(projectDir)
+      projectExists: existsSync(projectDir),
+      requiredFilesExist: external?.requiredFiles.every(file => existsSync(path.join(projectDir, file))) ?? true
     });
     if (!creation.ok) throw new Error(creation.reasons.join(' '));
 
-    phase = 'verification';
-    const script = verificationScript(packageJson);
-    phase = script;
-    progress(`${name}: running pnpm run ${script}`);
-    const verification = await runCommand('pnpm', ['run', script], {
-      cwd: projectDir,
-      env,
-      logFile: path.join(evidenceDir, `${script}.log`),
-      progress,
-      progressLabel: `${name} ${script}`,
-      timeoutMs: DEFAULT_TIMEOUT_MS
-    });
-    commands.push({ ...verification, phase });
-    if (!verification.ok) {
-      throw new Error(verification.timedOut ? `${phase} timed out.` : `${phase} exited ${verification.exitCode}.`);
+    if (external) {
+      for (const step of [external.install, external.verify]) {
+        phase = step.phase;
+        progress(`${name}: running ${step.command} ${step.args.join(' ')}`);
+        const verification = await runCommand(step.command, step.args, {
+          cwd: projectDir,
+          env,
+          logFile: path.join(evidenceDir, `${phase}.log`),
+          progress,
+          progressLabel: `${name} ${phase}`,
+          timeoutMs: DEFAULT_TIMEOUT_MS
+        });
+        commands.push({ ...verification, phase });
+        if (!verification.ok) throw new Error(commandFailure(phase, verification));
+      }
+    } else {
+      phase = 'verification';
+      const script = verificationScript(packageJson);
+      phase = script;
+      progress(`${name}: running pnpm run ${script}`);
+      const verification = await runCommand('pnpm', ['run', script], {
+        cwd: projectDir,
+        env,
+        logFile: path.join(evidenceDir, `${script}.log`),
+        progress,
+        progressLabel: `${name} ${script}`,
+        timeoutMs: DEFAULT_TIMEOUT_MS
+      });
+      commands.push({ ...verification, phase });
+      if (!verification.ok) throw new Error(commandFailure(phase, verification));
     }
 
     result.status = 'pass';
