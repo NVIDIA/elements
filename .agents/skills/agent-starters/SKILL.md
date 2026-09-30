@@ -31,7 +31,7 @@ From the repository root, run:
 mise exec -- node .agents/skills/agent-starters/scripts/index.js
 ```
 
-The script owns CLI installation and provenance, production inventory discovery, project creation, dependency verification, starter CI or build checks, cache isolation, timeouts, evidence, cleanup, and result formatting. It runs `pnpm run ci` when a generated starter exposes that script and otherwise runs `pnpm run build`. Do not duplicate or override its commands, starter list, expectations, or cache configuration in this skill.
+The script owns CLI installation and provenance, production inventory discovery, project creation, dependency verification, starter CI or build checks, cache isolation, timeouts, evidence, cleanup, and result formatting. Node starters run `pnpm run ci` when the generated project exposes that script, and `pnpm run build` otherwise. External toolchain starters run their configured install and build commands. Do not duplicate or override its commands, starter list, expectations, or cache configuration in this skill.
 
 The script writes timestamped phase updates and long-command heartbeats to standard error while it runs. It also updates command logs incrementally, so you can tail the current log during a long phase. The script prints a concise report to standard output, writes `results.json`, and exits nonzero when any required check fails. Use `--json` for structured standard output; progress remains on standard error. Every run uses new directories outside the checkout. It deletes successful generated projects and retains failed projects plus evidence. Use only the exact cleanup command printed in the report to remove a retained run.
 

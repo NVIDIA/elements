@@ -124,7 +124,8 @@ export async function toolVersions(toolBin) {
     ['pnpm', 'pnpm', ['--version']],
     ['npm', 'npm', ['--version']],
     ['go', 'go', ['version']],
-    ['hugo', 'hugo', ['version']]
+    ['hugo', 'hugo', ['version']],
+    ['uv', 'uv', ['--version']]
   ]) {
     const result = await runCommand(command, args, { env, timeoutMs: 15_000 });
     values[name] = result.ok ? cleanText(result.stdout || result.stderr) : null;
