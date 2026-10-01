@@ -3,7 +3,7 @@
 
 import { html, LitElement, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import type { StateScrollConfig } from '@nvidia-elements/core/internal';
 import { stateScroll } from '@nvidia-elements/core/internal';
@@ -37,11 +37,14 @@ describe('state-scroll.controller', () => {
     fixture = await createFixture(html`<state-scroll-controller-test-element></state-scroll-controller-test-element>`);
     element = fixture.querySelector<StateScrollControllerTestElement>('state-scroll-controller-test-element');
     await elementIsStable(element);
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
   });
 
   afterEach(async () => {
+    vi.restoreAllMocks();
     removeFixture(fixture);
     element._internals.states.delete('scrolling');
+    vi.useRealTimers();
   });
 
   it('should initialize with no scrolling state', async () => {
@@ -57,22 +60,84 @@ describe('state-scroll.controller', () => {
     expect(element.matches(':state(scrolling)')).toBe(true);
   });
 
-  it('should remove scrolling state on scrollend', async () => {
-    const event = untilEvent(element, 'scrollend');
-    element.scrollLeft = 10;
-    element.dispatchEvent(new Event('scrollend', { bubbles: true }));
-    await event;
+  it('should keep scrolling state for 100ms after scrollend', () => {
+    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scrollend'));
+    expect(element.matches(':state(scrolling)')).toBe(true);
+    vi.advanceTimersByTime(99);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+    vi.advanceTimersByTime(1);
     expect(element.matches(':state(scrolling)')).toBe(false);
+  });
+
+  it('should keep one scrolling state across closely spaced scroll bursts', () => {
+    const addState = vi.spyOn(element._internals.states, 'add');
+    const deleteState = vi.spyOn(element._internals.states, 'delete');
+    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scrollend'));
+    vi.advanceTimersByTime(60);
+    element.dispatchEvent(new Event('scroll'));
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+    expect(addState).toHaveBeenCalledOnce();
+    expect(deleteState).not.toHaveBeenCalled();
+
+    element.dispatchEvent(new Event('scrollend'));
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(false);
+    expect(deleteState).toHaveBeenCalledOnce();
+  });
+
+  it('should restart the pending reset on repeated scrollend events', () => {
+    const deleteState = vi.spyOn(element._internals.states, 'delete');
+    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scrollend'));
+    vi.advanceTimersByTime(60);
+    element.dispatchEvent(new Event('scrollend'));
+    vi.advanceTimersByTime(60);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+    vi.advanceTimersByTime(40);
+    expect(element.matches(':state(scrolling)')).toBe(false);
+    expect(deleteState).toHaveBeenCalledOnce();
+  });
+
+  it('should cancel pending resets when disconnected and reconnected', async () => {
+    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scrollend'));
+    element.remove();
+    expect(element.matches(':state(scrolling)')).toBe(false);
+    fixture.append(element);
+    await elementIsStable(element);
+    element.dispatchEvent(new Event('scroll'));
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+  });
+
+  it('should cancel pending resets when the scroll target changes', async () => {
+    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scrollend'));
+    const target = element.shadowRoot.querySelector<HTMLElement>('div')!;
+    element.stateScrollConfig.target = target;
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.matches(':state(scrolling)')).toBe(false);
+    target.dispatchEvent(new Event('scroll'));
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(true);
   });
 
   it('should dispatch scrollend event when scroll reaches end of scrollbox', async () => {
     const event = untilEvent(element, 'scrollboxend');
     element.scrollTop = 50;
+    element.dispatchEvent(new Event('scroll'));
     element.dispatchEvent(new Event('scrollend'));
     const scrollboxEndEvent = await event;
     expect(scrollboxEndEvent).toBeTruthy();
     expect(scrollboxEndEvent.bubbles).toBe(true);
     expect(scrollboxEndEvent.composed).toBe(true);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(false);
   });
 
   it('should account for scroll offset', async () => {
@@ -82,6 +147,25 @@ describe('state-scroll.controller', () => {
     element.dispatchEvent(new Event('scrollend'));
     await event;
     expect(await event).toBeTruthy();
+  });
+
+  it('should retain scrolling when a scrollboxend listener resumes scrolling', () => {
+    Object.defineProperties(element, {
+      scrollTop: { configurable: true, value: 50 },
+      offsetHeight: { configurable: true, value: 50 },
+      scrollHeight: { configurable: true, value: 100 }
+    });
+    element.addEventListener(
+      'scrollboxend',
+      () => {
+        element.dispatchEvent(new Event('scroll'));
+      },
+      { once: true }
+    );
+    element.dispatchEvent(new Event('scroll'));
+    element.dispatchEvent(new Event('scrollend'));
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(true);
   });
 
   it('should add scrolling state on scroll for custom target', async () => {

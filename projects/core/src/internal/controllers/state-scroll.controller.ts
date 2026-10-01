@@ -25,6 +25,7 @@ export type Scroll = ReactiveElement & {
 
 export class StateScrollController<T extends Scroll> implements ReactiveController {
   #activeTarget?: HTMLElement;
+  #scrollEndTimeout?: ReturnType<typeof setTimeout>;
 
   get #target(): HTMLElement {
     const target = this.host.stateScrollConfig?.target;
@@ -64,18 +65,33 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   }
 
   #onScrollEnd = () => {
-    this.host._internals!.states.delete('scrolling');
+    this.#cancelScrollEnd();
+    // Keep brief scroll bursts in one state to reduce repeated style invalidation.
+    if (this.host._internals!.states.has('scrolling')) {
+      this.#scrollEndTimeout = setTimeout(() => {
+        this.#scrollEndTimeout = undefined;
+        this.host._internals!.states.delete('scrolling');
+      }, 100);
+    }
+    this.#startScroll();
 
     if (this.#activeTarget && endOfScrollBox(this.#activeTarget, this.#offset)) {
       this.host.dispatchEvent(new CustomEvent('scrollboxend', { bubbles: true, composed: true }));
     }
-
-    this.#startScroll();
   };
 
   #onScroll = () => {
-    this.host._internals!.states.add('scrolling');
+    this.#cancelScrollEnd();
+    const states = this.host._internals!.states;
+    if (!states.has('scrolling')) states.add('scrolling');
   };
+
+  #cancelScrollEnd() {
+    if (this.#scrollEndTimeout !== undefined) {
+      clearTimeout(this.#scrollEndTimeout);
+      this.#scrollEndTimeout = undefined;
+    }
+  }
 
   #startScroll() {
     this.#activeTarget?.removeEventListener('scroll', this.#onScroll);
@@ -83,8 +99,11 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   }
 
   #removeTargetListeners() {
+    this.#cancelScrollEnd();
     this.#activeTarget?.removeEventListener('scroll', this.#onScroll);
     this.#activeTarget?.removeEventListener('scrollend', this.#onScrollEnd);
     this.#activeTarget = undefined;
+    const states = this.host._internals?.states;
+    if (states?.has('scrolling')) states.delete('scrolling');
   }
 }
