@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
@@ -172,7 +172,9 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     removeFixture(fixture);
+    vi.useRealTimers();
   });
 
   it('should allow scroll position to be set', async () => {
@@ -182,6 +184,34 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
     await element.scrollTo({ top: 20 });
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('[part="_scrollbox"]').scrollTop).toBe(20);
+  });
+
+  it('should debounce scrolling state and dispatch scrollboxend immediately', () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    const scrollbox = element.shadowRoot.querySelector<HTMLElement>('[part="_scrollbox"]')!;
+    Object.defineProperties(scrollbox, {
+      clientHeight: { configurable: true, value: 50 },
+      scrollHeight: { configurable: true, value: 100 },
+      scrollTop: { configurable: true, value: 50 }
+    });
+    const scrollboxEnd = vi.fn();
+    element.addEventListener('scrollboxend', scrollboxEnd);
+    scrollbox.dispatchEvent(new Event('scroll'));
+    scrollbox.dispatchEvent(new Event('scrollend'));
+    expect(scrollboxEnd).toHaveBeenCalledOnce();
+    expect(element.matches(':state(scrolling)')).toBe(true);
+
+    vi.advanceTimersByTime(60);
+    scrollbox.dispatchEvent(new Event('scroll'));
+    vi.advanceTimersByTime(100);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+
+    scrollbox.dispatchEvent(new Event('scrollend'));
+    expect(scrollboxEnd).toHaveBeenCalledTimes(2);
+    vi.advanceTimersByTime(99);
+    expect(element.matches(':state(scrolling)')).toBe(true);
+    vi.advanceTimersByTime(1);
+    expect(element.matches(':state(scrolling)')).toBe(false);
   });
 
   it('should dispatch scrollboxend when the scrollbox reaches the end', async () => {
