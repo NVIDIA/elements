@@ -63,6 +63,10 @@ export class PagePanel extends LitElement {
     parents: ['nve-page']
   };
 
+  static get observedAttributes() {
+    return [...super.observedAttributes, 'hidden'];
+  }
+
   constructor() {
     super();
     new TypeExpandableController(this, { useHidden: true });
@@ -91,7 +95,15 @@ export class PagePanel extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    this._internals.states.delete('reopened');
     appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'region';
+  }
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    super.attributeChangedCallback(name, oldValue, newValue);
+    if (name === 'hidden' && oldValue !== null && newValue === null && this.isConnected) {
+      this._internals.states.add('reopened');
+    }
   }
 }

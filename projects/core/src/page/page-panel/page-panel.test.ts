@@ -85,4 +85,54 @@ describe(PagePanel.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.hidden).toBe(true);
   });
+
+  it.each(['left', 'right', 'bottom'])('should remove closed panels from the %s slot after sliding', async slot => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-page>
+        <nve-page-panel slot="left" style="--animation-duration: 40ms;">first</nve-page-panel>
+        <nve-page-panel slot="left" style="--animation-duration: 40ms;" hidden>second</nve-page-panel>
+        <main>main</main>
+      </nve-page>
+    `);
+    const panels = [...fixture.querySelectorAll('nve-page-panel')];
+    for (const panel of panels) {
+      panel.slot = slot;
+      await elementIsStable(panel);
+    }
+    const [first, second] = panels;
+    expect(first.getAnimations()).toHaveLength(0);
+    expect(second.getClientRects()).toHaveLength(0);
+    await expect.poll(() => first.getAnimations().length).toBe(0);
+
+    for (const [opening, closing] of [
+      [second, first],
+      [first, second]
+    ]) {
+      opening.dispatchEvent(new CommandEvent('command', { command: '--open' }));
+      closing.dispatchEvent(new CommandEvent('command', { command: '--close' }));
+      expect(closing.hidden).toBe(true);
+      expect(opening.getAnimations().length).toBeGreaterThan(0);
+      const animations = closing.getAnimations();
+      expect(animations.length).toBeGreaterThan(0);
+      expect(closing.getClientRects()).toHaveLength(1);
+      await expect.poll(() => opening.getAnimations().length + closing.getAnimations().length).toBe(0);
+      expect(closing.getClientRects()).toHaveLength(0);
+      expect(opening.getClientRects()).toHaveLength(1);
+    }
+
+    first.dispatchEvent(new CommandEvent('command', { command: '--close' }));
+    first.getBoundingClientRect();
+    first.dispatchEvent(new CommandEvent('command', { command: '--open' }));
+    await expect.poll(() => first.getAnimations().length).toBe(0);
+    expect(first.hidden).toBe(false);
+    expect(first.getClientRects()).toHaveLength(1);
+    expect(second.getClientRects()).toHaveLength(0);
+
+    first.style.setProperty('--animation-duration', '0ms');
+    first.dispatchEvent(new CommandEvent('command', { command: '--close' }));
+    expect(first.getClientRects()).toHaveLength(0);
+    first.dispatchEvent(new CommandEvent('command', { command: '--open' }));
+    expect(first.getClientRects()).toHaveLength(1);
+  });
 });

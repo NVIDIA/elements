@@ -1364,3 +1364,55 @@ export const ResizeSnap = {
 </script>
   `
 };
+
+/**
+ * @summary Switch between panels that share a page slot. Use this pattern to show one tool panel at a time.
+ * @tags test-case
+ */
+export const MultiSlottedPanel = {
+  render: () => html`
+<nve-page id="multi-slotted-panel">
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+  <nve-page-panel slot="left" size="sm">
+    <nve-page-panel-content>panel 1</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="left" size="sm" hidden>
+    <nve-page-panel-content>panel 2</nve-page-panel-content>
+  </nve-page-panel>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+    <nve-button>panel 1</nve-button>
+    <nve-button>panel 2</nve-button>
+  </main>
+</nve-page>
+<script type="module">
+  const [panel1, panel2] = Array.from(document.querySelectorAll('#multi-slotted-panel nve-page-panel'));
+  const [button1, button2] = Array.from(document.querySelectorAll('#multi-slotted-panel main nve-button'));
+
+  button1.addEventListener('click', () => {
+    if (panel1.hidden) {
+      panel1.hidden = false;
+      panel2.hidden = true;
+    } else {
+      panel1.hidden = true;
+    }
+  });
+
+  button2.addEventListener('click', () => {
+    if (panel2.hidden) {
+      panel1.hidden = true;
+      panel2.hidden = false;
+    } else {
+      panel2.hidden = true;
+    }
+  });
+</script>
+`
+};

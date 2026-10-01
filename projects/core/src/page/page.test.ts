@@ -6,6 +6,7 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Page } from '@nvidia-elements/core/page';
 import '@nvidia-elements/core/page/define.js';
+import '@nvidia-elements/core/resize-handle/define.js';
 
 describe(Page.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -95,5 +96,36 @@ describe(Page.metadata.tag, () => {
     element.documentScroll = true;
     await elementIsStable(element);
     expect(element.hasAttribute('document-scroll')).toBe(true);
+  });
+
+  it('should paint both panel borders above positioned main content', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-page document-scroll>
+        <nve-page-panel slot="left" style="width: 200px;"></nve-page-panel>
+        <nve-resize-handle slot="left" orientation="vertical" aria-label="Resize left panel"></nve-resize-handle>
+        <main style="height: 300px;">
+          <div id="surface" style="position: relative; height: 100%; background: var(--nve-sys-layer-container-background);"></div>
+        </main>
+        <nve-resize-handle slot="right" orientation="vertical" aria-label="Resize right panel"></nve-resize-handle>
+        <nve-page-panel slot="right" style="width: 200px;"></nve-page-panel>
+      </nve-page>
+    `);
+    element = fixture.querySelector('nve-page');
+    await elementIsStable(element);
+
+    const surface = fixture.querySelector('#surface');
+    for (const panel of fixture.querySelectorAll('nve-page-panel')) {
+      await elementIsStable(panel);
+      await expect.poll(() => panel.getAnimations().length).toBe(0);
+      const bounds = panel.getBoundingClientRect();
+      const x = panel.slot === 'left' ? bounds.right - 0.5 : bounds.left + 0.5;
+      for (const y of [bounds.top + 1, bounds.top + bounds.height / 2, bounds.bottom - 1]) {
+        const painted = document.elementsFromPoint(x, y);
+        expect(painted).toContain(panel);
+        expect(painted).toContain(surface);
+        expect(painted.indexOf(panel)).toBeLessThan(painted.indexOf(surface));
+      }
+    }
   });
 });
