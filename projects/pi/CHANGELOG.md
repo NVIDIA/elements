@@ -1,3 +1,19 @@
+## [1.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.0...@nvidia-elements/pi-v1.0.1) (2026-10-01)
+
+### Features
+
+* **core:** add viewport minimap ([c3cc189](https://github.com/NVIDIA/elements/commit/c3cc1891132f6ae6ab27c94fcdfe79d38b592230))
+* **core:** menu group ([d9a24e9](https://github.com/NVIDIA/elements/commit/d9a24e961e1c5394367e7ae9bf931d9e1e2d58b0))
+
+### Bug Fixes
+
+* **cli:** mcp app rendering and schema tools ([5cf5f51](https://github.com/NVIDIA/elements/commit/5cf5f51e8b77468451024a9a31f247ac0beb5373))
+* **cli:** ui resources ([166a537](https://github.com/NVIDIA/elements/commit/166a5374c9aa022a2cc86c262d5165acdee7112e))
+* **core:** debounce scroll tracking state updates ([ce5b688](https://github.com/NVIDIA/elements/commit/ce5b688310d13dcc51e26bd0434599fecc610e4b))
+* **docs:** correct example api mapping and summary fallback ([f0dd837](https://github.com/NVIDIA/elements/commit/f0dd837756f44f05f1c115384d18e02a40cff32d))
+* **lint:** update eslint ([2a3ad12](https://github.com/NVIDIA/elements/commit/2a3ad1217db5aadfdef4a89f796f96348dc0f330))
+* **pi:** update to pi.dev 1.0.0 ([3d44c15](https://github.com/NVIDIA/elements/commit/3d44c159c4c45b38789aa96615faaf0f97e798f6))
+
 ## 1.0.0 (2026-09-29)
 
 ### ⚠ BREAKING CHANGES
