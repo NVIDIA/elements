@@ -67,7 +67,12 @@ export function renderRecentUpdates(data) {
 
   return /* html */ `
     <aside nve-layout="column gap:sm span:12 &xl|span:3 pad-left:lg">
-      ${renderUpdatesFeedLink()}
+      <div nve-layout="row gap:none">
+        <nve-button container="flat">
+          <a href="https://github.com/NVIDIA/elements" target="_blank" rel="noopener">Star on GitHub <nve-icon name="arrow-angle" size="sm"></nve-icon></a>
+        </nve-button>
+        ${renderUpdatesFeedLink()}
+      </div>
       <nav aria-label="Recent updates" nve-layout="column gap:sm">
         <ul nve-text="list" nve-layout="column gap:xs">
           ${entries.map(entry => `<li><a href="${entry.url}" ${entry.url === data.page?.url ? 'aria-current="page"' : ''} nve-text="link no-visit">What’s New - ${formatUpdateMonth(entry)}</a></li>`).join('')}
@@ -100,7 +105,7 @@ export function render(data) {
       <h1 nve-text="display">${data.title}</h1>
     </header>
     <div nve-layout="grid gap:xl">
-      <article nve-layout="column gap:xl ${recentUpdates ? 'span:12 &xl|span:9' : 'span:12'}">
+      <article class="whats-new-content" nve-layout="column gap:xl ${recentUpdates ? 'span:12 &xl|span:9' : 'span:12'}">
         ${renderUpdateDates(data)}
         ${renderUpdateVideo(data)}
         ${data.content}

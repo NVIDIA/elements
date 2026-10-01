@@ -68,6 +68,8 @@
       /* demo surface: a quiet, token-bordered area where real components render */
       .demo { width: 100%; overflow: hidden; border: var(--nve-ref-border-width-sm) solid var(--line); border-radius: var(--nve-ref-border-radius-lg);
         background: var(--nve-sys-layer-container-background); padding: var(--nve-ref-space-xl); box-shadow: var(--nve-ref-shadow-400); }
+      /* no surface, for demos that bring their own container such as nve-card */
+      .demo.bare { border: none; background: none; padding: 0; box-shadow: none; }
 
       /* chips of code that agents tend to invent */
       .guess { font-family: var(--mono); font-size: var(--nve-ref-font-size-600); color: var(--ink);
@@ -126,7 +128,7 @@
       
     </style>
     <script type="module">
-      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.0/dist/bundles/index.min.js';
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.1/dist/bundles/index.min.js';
       import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/code@2.1.0/dist/bundles/index.js';
     </script>
     
@@ -143,8 +145,8 @@
             </defs>
             <rect width="1280" height="720" fill="url(#dots)" opacity=".5"></rect>
           </svg>
-                    <!-- 1. title: 0.00s to 3.00s -->
-          <section class="scene" style="--in: 0s; --out: 3s">
+                    <!-- 1. title: 0.00s to 3.60s -->
+          <section class="scene" style="--in: 0s; --out: 3.6s">
 <div nve-layout="column gap:lg align:center full:height">
       <div class="stamp" style="--at: 0.1s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
       <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 0.2s">What’s new in NVIDIA Elements</span></span></p>
@@ -153,23 +155,23 @@
     </div>
           </section>
 
-          <!-- 2. fix: 3.00s to 8.50s -->
-          <section class="scene" style="--in: 3s; --out: 8.5s">
+          <!-- 2. fix: 3.60s to 10.20s -->
+          <section class="scene" style="--in: 3.6s; --out: 10.2s">
 <div nve-layout="column gap:xl full:height">
       <div nve-layout="row gap:xl align:vertical-center align:space-between">
-        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.1s">Upgrade</span></span> <span class="mask"><span class="word" style="--at: 3.17s">to</span></span> <span class="mask"><span class="word" style="--at: 3.24s">stable</span></span> <span class="mask"><span class="word" style="--at: 3.31s">2.0</span></span></h2><p class="lede rise" style="--at: 3.45s">Updated lint rules flag retired APIs and name the replacement for each.</p></div>
+        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.7s">Upgrade</span></span> <span class="mask"><span class="word" style="--at: 3.77s">to</span></span> <span class="mask"><span class="word" style="--at: 3.84s">stable</span></span> <span class="mask"><span class="word" style="--at: 3.91s">2.0</span></span></h2><p class="lede rise" style="--at: 4.05s">Updated lint rules flag retired APIs and name the replacement for each.</p></div>
         <div class="stack">
-          <div class="win" style="--at: 4.2s; --until: 6.7s" nve-layout="column gap:xs align:right"><span class="count bad">3 problems</span><span class="stat-label">3 errors</span></div>
-          <div class="win" style="--at: 6.9s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
+          <div class="win" style="--at: 4.8s; --until: 7.8s" nve-layout="column gap:xs align:right"><span class="count bad">3 problems</span><span class="stat-label">3 errors</span></div>
+          <div class="win" style="--at: 8s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
         </div>
       </div>
       <div nve-layout="grid gap:xl">
-        <div class="rise cell" style="--at: 3.4s" nve-layout="span:7">
+        <div class="rise cell" style="--at: 4s" nve-layout="span:7">
           <nve-card>
             <nve-card-header><div nve-layout="row gap:sm align:vertical-center align:space-between"><span nve-text="label muted">regions.html</span><code nve-text="code">nve api.validate regions.html</code></div></nve-card-header>
-            <nve-card-content><div class="editor"><div class="scan" style="--at: 3.9s"></div><span class="ln">1</span>&lt;<span class="tk-t">div</span> nve-layout=&quot;<span class="swap" style="--at: 4.2s; --fix: 6s; --wb: 4; --wg: 4"><span class="bad">grow</span><span class="good">full</span></span>&quot;&gt;
-<span class="ln">2</span>  &lt;<span class="tk-t">span</span> nve-text=&quot;<span class="swap" style="--at: 4.45s; --fix: 6.25s; --wb: 7; --wg: 8"><span class="bad">eyebrow</span><span class="good">label sm</span></span>&quot;&gt;Clusters&lt;/<span class="tk-t">span</span>&gt;
-<span class="ln">3</span>  &lt;<span class="tk-t">nve-combobox</span><span class="swap" style="--at: 4.7s; --fix: 6.5s; --wb: 7; --wg: 20"><span class="bad"> notags</span><span class="good"> <span class="tk-a">tag-layout</span>=<span class="tk-s">&quot;hidden&quot;</span></span></span>&gt;
+            <nve-card-content><div class="editor"><div class="scan" style="--at: 4.5s"></div><span class="ln">1</span>&lt;<span class="tk-t">div</span> nve-layout=&quot;<span class="swap" style="--at: 4.8s; --fix: 6.6s; --wb: 4; --wg: 4"><span class="bad">grow</span><span class="good">full</span></span>&quot;&gt;
+<span class="ln">2</span>  &lt;<span class="tk-t">span</span> nve-text=&quot;<span class="swap" style="--at: 5.05s; --fix: 6.85s; --wb: 7; --wg: 8"><span class="bad">eyebrow</span><span class="good">label sm</span></span>&quot;&gt;Clusters&lt;/<span class="tk-t">span</span>&gt;
+<span class="ln">3</span>  &lt;<span class="tk-t">nve-combobox</span><span class="swap" style="--at: 5.3s; --fix: 7.1s; --wb: 7; --wg: 20"><span class="bad"> notags</span><span class="good"> <span class="tk-a">tag-layout</span>=<span class="tk-s">&quot;hidden&quot;</span></span></span>&gt;
 <span class="ln">4</span>    &lt;<span class="tk-t">label</span>&gt;Regions&lt;/<span class="tk-t">label</span>&gt;
 <span class="ln">5</span>    &lt;<span class="tk-t">input</span> <span class="tk-a">type</span>=<span class="tk-s">&quot;search&quot;</span> /&gt;
 <span class="ln">6</span>    &lt;<span class="tk-t">datalist</span>&gt;&lt;<span class="tk-t">option</span> <span class="tk-a">value</span>=<span class="tk-s">&quot;us-west&quot;</span>&gt;&lt;/<span class="tk-t">option</span>&gt;&lt;/<span class="tk-t">datalist</span>&gt;
@@ -178,18 +180,18 @@
           </nve-card>
         </div>
         <div class="stack cell" nve-layout="span:5">
-          <div class="win" style="--at: 4.2s; --until: 6.7s" nve-layout="column gap:sm"><div class="rise" style="--at: 4.3s"><nve-alert status="danger"><span nve-text="label sm">1:6 no-unexpected-global-attribute-value</span> Unexpected value &quot;grow&quot;. Use &quot;full&quot; instead.</nve-alert></div><div class="rise" style="--at: 4.55s"><nve-alert status="danger"><span nve-text="label sm">2:9 no-unexpected-global-attribute-value</span> Unexpected value &quot;eyebrow&quot;. Use &quot;label sm&quot; instead.</nve-alert></div><div class="rise" style="--at: 4.8s"><nve-alert status="danger"><span nve-text="label sm">3:17 no-deprecated-attributes</span> Deprecated attribute &quot;notags&quot;. Use tag-layout=&quot;hidden&quot; instead.</nve-alert></div></div>
-          <div class="win" style="--at: 6.9s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert></div>
+          <div class="win" style="--at: 4.8s; --until: 7.8s" nve-layout="column gap:sm"><div class="rise" style="--at: 4.9s"><nve-alert status="danger"><span nve-text="label sm">1:6 no-unexpected-global-attribute-value</span> Unexpected value &quot;grow&quot;. Use &quot;full&quot; instead.</nve-alert></div><div class="rise" style="--at: 5.15s"><nve-alert status="danger"><span nve-text="label sm">2:9 no-unexpected-global-attribute-value</span> Unexpected value &quot;eyebrow&quot;. Use &quot;label sm&quot; instead.</nve-alert></div><div class="rise" style="--at: 5.4s"><nve-alert status="danger"><span nve-text="label sm">3:17 no-deprecated-attributes</span> Deprecated attribute &quot;notags&quot;. Use tag-layout=&quot;hidden&quot; instead.</nve-alert></div></div>
+          <div class="win" style="--at: 8s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert></div>
         </div>
       </div>
     </div>
           </section>
 
-          <!-- 3. feature: 8.50s to 13.00s -->
-          <section class="scene" style="--in: 8.5s; --out: 13s">
+          <!-- 3. feature: 10.20s to 15.60s -->
+          <section class="scene" style="--in: 10.2s; --out: 15.6s">
 <div nve-layout="grid gap:xxl align:vertical-center full:height">
-      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 8.55s"><nve-tag readonly>@nvidia-elements/forms</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 8.6s">Shared</span></span> <span class="mask"><span class="word" style="--at: 8.67s">form</span></span> <span class="mask"><span class="word" style="--at: 8.74s">mixins</span></span></h2><p class="lede rise" style="--at: 8.95s">Button, checkbox, select, and slider mixins supply native form behavior.</p></div>
-      <div class="cell" nve-layout="span:7"><div class="rise" style="--at: 8.9s" nve-layout="column gap:xs full:width"><nve-codeblock language="typescript"><template>import { html, LitElement } from 'lit';
+      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 10.25s"><nve-tag readonly>@nvidia-elements/forms</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 10.3s">Shared</span></span> <span class="mask"><span class="word" style="--at: 10.37s">form</span></span> <span class="mask"><span class="word" style="--at: 10.44s">mixins</span></span></h2><p class="lede rise" style="--at: 10.65s">Button, checkbox, select, and slider mixins supply native form behavior.</p></div>
+      <div class="cell" nve-layout="span:7"><div class="rise" style="--at: 10.6s" nve-layout="column gap:xs full:width"><nve-codeblock language="typescript"><template>import { html, LitElement } from 'lit';
 import { CheckboxFormControlMixin } from
   '@nvidia-elements/forms/mixins';
 
@@ -203,41 +205,41 @@ class RunToggle extends CheckboxFormControlMixin(LitElement) {
     </div>
           </section>
 
-          <!-- 4. terminal: 13.00s to 17.50s -->
-          <section class="scene" style="--in: 13s; --out: 17.5s">
+          <!-- 4. terminal: 15.60s to 21.00s -->
+          <section class="scene" style="--in: 15.6s; --out: 21s">
 <div nve-layout="grid gap:xxl align:vertical-center full:height">
-      <div class="cell" nve-layout="column gap:lg span:5"><h2 class="mega"><span class="mask"><span class="word" style="--at: 13.1s">Three</span></span> <span class="mask"><span class="word" style="--at: 13.17s">new</span></span> <span class="mask"><span class="word" style="--at: 13.24s">starters</span></span></h2><p class="lede rise" style="--at: 13.45s">MCP Apps, Lit libraries, and HTMX with Go join the starter catalog.</p></div>
-      <div class="rise cell" style="--at: 13.3s" nve-layout="span:7">
+      <div class="cell" nve-layout="column gap:lg span:5"><h2 class="mega"><span class="mask"><span class="word" style="--at: 15.7s">Three</span></span> <span class="mask"><span class="word" style="--at: 15.77s">new</span></span> <span class="mask"><span class="word" style="--at: 15.84s">starters</span></span></h2><p class="lede rise" style="--at: 16.05s">MCP Apps, Lit libraries, and HTMX with Go join the starter catalog.</p></div>
+      <div class="rise cell" style="--at: 15.9s" nve-layout="span:7">
         <nve-card>
           <nve-card-header><div nve-layout="row gap:xs align:vertical-center"><nve-dot status="danger" size="sm"></nve-dot><nve-dot status="warning" size="sm"></nve-dot><nve-dot status="success" size="sm"></nve-dot><span nve-text="label sm muted">terminal</span></div></nve-card-header>
-          <nve-card-content><div class="term"><span class="rise" style="--at: 13.6s"><span class="prompt">$ </span><span class="cmd type" style="--at: 13.6s; --dur: 0.728s; --steps: 26">nve project.create mcp-app</span></span>
-<span class="out rise" style="--at: 14.528s">Downloading starter...</span>
-<span class="out rise" style="--at: 14.648s">Installing dependencies...</span>
-<span class="out rise" style="--at: 14.768s"><span class="ok">Starter created successfully</span></span>
-<span class="out rise" style="--at: 14.888s"><span class="ok">(claude-code): Claude Code configured</span></span>
-<span class="rise" style="--at: 15.358s"><span class="prompt">$ </span><span class="caret"></span></span></div></nve-card-content>
+          <nve-card-content><div class="term"><span class="rise" style="--at: 16.2s"><span class="prompt">$ </span><span class="cmd type" style="--at: 16.2s; --dur: 0.728s; --steps: 26">nve project.create mcp-app</span></span>
+<span class="out rise" style="--at: 17.128s">Downloading starter...</span>
+<span class="out rise" style="--at: 17.248s">Installing dependencies...</span>
+<span class="out rise" style="--at: 17.368s"><span class="ok">Starter created successfully</span></span>
+<span class="out rise" style="--at: 17.488s"><span class="ok">(claude-code): Claude Code configured</span></span>
+<span class="rise" style="--at: 17.958s"><span class="prompt">$ </span><span class="caret"></span></span></div></nve-card-content>
         </nve-card>
       </div>
     </div>
           </section>
 
-          <!-- 5. list: 17.50s to 21.00s -->
-          <section class="scene" style="--in: 17.5s; --out: 21s">
+          <!-- 5. list: 21.00s to 25.20s -->
+          <section class="scene" style="--in: 21s; --out: 25.2s">
 <div nve-layout="column gap:xl align:vertical-center full:height">
-      <h2 class="mega"><span class="mask"><span class="word" style="--at: 17.6s">Also</span></span> <span class="mask"><span class="word" style="--at: 17.67s">in</span></span> <span class="mask"><span class="word" style="--at: 17.74s">June</span></span></h2>
-      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 18s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><span class="stat"><span id="count-1">0</span></span><span nve-text="label lg">Packages on stable 2.0</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.18s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="terminal" size="lg"></nve-icon><span nve-text="label lg">PowerShell installer for Windows</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.36s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="gear" size="lg"></nve-icon><span nve-text="label lg">Clearer CLI errors in automation</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.54s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="refresh" size="lg"></nve-icon><span nve-text="label lg">Core lifecycle fixes</span></div></nve-card-content></nve-card></div></div>
+      <h2 class="mega"><span class="mask"><span class="word" style="--at: 21.1s">Also</span></span> <span class="mask"><span class="word" style="--at: 21.17s">in</span></span> <span class="mask"><span class="word" style="--at: 21.24s">June</span></span></h2>
+      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 21.5s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><span class="stat"><span id="count-1">0</span></span><span nve-text="label lg">Packages on stable 2.0</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 21.68s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="terminal" size="lg"></nve-icon><span nve-text="label lg">PowerShell installer for Windows</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 21.86s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="gear" size="lg"></nve-icon><span nve-text="label lg">Clearer CLI errors in automation</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.04s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="refresh" size="lg"></nve-icon><span nve-text="label lg">Core lifecycle fixes</span></div></nve-card-content></nve-card></div></div>
     </div>
           </section>
 
-          <!-- 6. end: 21.00s to 24.50s -->
-          <section class="scene" style="--in: 21s">
+          <!-- 6. end: 25.20s to 29.40s -->
+          <section class="scene" style="--in: 25.2s">
 <div nve-layout="column gap:lg align:center full:height">
-      <div class="stamp" style="--at: 21.1s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
-      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 21.2s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 21.27s">Elements</span></span></h2>
-      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 21.55s">Read the June 2026 update</span></span></p>
+      <div class="stamp" style="--at: 25.3s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
+      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 25.4s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 25.47s">Elements</span></span></h2>
+      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 25.75s">Read the June 2026 update</span></span></p>
       
-      <span class="url rise" style="--at: 22.1s">nvidia.github.io/elements/docs/whats-new/06-2026/</span>
-      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 22.3s"><nve-tag readonly>cli 2.1.3</nve-tag></div><div class="pop" style="--at: 22.35s"><nve-tag readonly>core 2.0.2</nve-tag></div><div class="pop" style="--at: 22.4s"><nve-tag readonly>forms 2.0.1</nve-tag></div><div class="pop" style="--at: 22.45s"><nve-tag readonly>lint 2.0.1</nve-tag></div><div class="pop" style="--at: 22.5s"><nve-tag readonly>styles 2.0.2</nve-tag></div><div class="pop" style="--at: 22.55s"><nve-tag readonly>themes 2.0.0</nve-tag></div></div>
+      <span class="url rise" style="--at: 26.3s">nvidia.github.io/elements/docs/whats-new/06-2026/</span>
+      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 26.5s"><nve-tag readonly>cli 2.1.3</nve-tag></div><div class="pop" style="--at: 26.55s"><nve-tag readonly>core 2.0.2</nve-tag></div><div class="pop" style="--at: 26.6s"><nve-tag readonly>forms 2.0.1</nve-tag></div><div class="pop" style="--at: 26.65s"><nve-tag readonly>lint 2.0.1</nve-tag></div><div class="pop" style="--at: 26.7s"><nve-tag readonly>styles 2.0.2</nve-tag></div><div class="pop" style="--at: 26.75s"><nve-tag readonly>themes 2.0.0</nve-tag></div></div>
     </div>
           </section>
         </div>
@@ -253,13 +255,13 @@ class RunToggle extends CheckboxFormControlMixin(LitElement) {
         container="flat"
         aria-label="Restart"></nve-icon-button>
       <nve-range fit-text>
-        <input type="range" id="scrub" min="0" max="24.5" step="0.05" value="0" aria-label="Timeline" />
+        <input type="range" id="scrub" min="0" max="29.4" step="0.05" value="0" aria-label="Timeline" />
       </nve-range>
       <span slot="suffix" nve-text="label sm muted nowrap" id="time">0:00</span>
     </nve-toolbar>
 
     <script type="application/json" id="timeline">
-      {"duration":24.5,"cues":[],"counters":[{"target":"#count-1","from":0,"to":9,"t":18,"duration":0.8,"decimals":0}],"poster":1.6}
+      {"duration":29.4,"cues":[],"counters":[{"target":"#count-1","from":0,"to":9,"t":21.5,"duration":0.8,"decimals":0}],"poster":1.6}
     </script>
     <script type="module">
       const { duration: DURATION, cues, counters, poster } = JSON.parse(document.getElementById('timeline').textContent);
@@ -271,12 +273,14 @@ class RunToggle extends CheckboxFormControlMixin(LitElement) {
       /* ---------- cues: state as a pure function of time ----------
          Each cue sets an attribute, property, or text on its targets at an absolute time.
          For any target and key, the latest cue at or before t wins; before the first cue,
-         the value captured at boot is restored. Scrubbing backwards therefore works. */
+         the value captured at boot is restored. Scrubbing backwards therefore works.
+         A cue with a duration eases a numeric value from the previous one over that time. */
+      const easeInOut = x => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
       const tracks = new Map();
       for (const cue of cues) {
         const key = `${cue.target}|${cue.kind}|${cue.name ?? ''}`;
         if (!tracks.has(key)) tracks.set(key, { ...cue, entries: [] });
-        tracks.get(key).entries.push({ t: cue.t, value: cue.value });
+        tracks.get(key).entries.push({ t: cue.t, value: cue.value, duration: cue.duration });
       }
       for (const track of tracks.values()) {
         track.entries.sort((a, b) => a.t - b.t);
@@ -287,20 +291,34 @@ class RunToggle extends CheckboxFormControlMixin(LitElement) {
       function read(el, { kind, name }) {
         if (kind === 'attr') return el.getAttribute(name);
         if (kind === 'prop') return el[name];
+        if (kind === 'style') return el.style.getPropertyValue(name);
         return el.textContent;
       }
-      function write(el, { kind, name }, value) {
+      function write(el, { kind, name, unit }, value) {
         if (kind === 'attr') value === null || value === false ? el.removeAttribute(name) : el.setAttribute(name, value === true ? '' : value);
         else if (kind === 'prop') el[name] = value;
+        else if (kind === 'style') el.style.setProperty(name, typeof value === 'number' ? `${value}${unit ?? ''}` : value);
         else el.textContent = value;
+      }
+      function valueAt(track, index, i, t) {
+        if (index < 0) return track.initial[i];
+        const entry = track.entries[index];
+        const from = parseFloat(index > 0 ? track.entries[index - 1].value : track.initial[i]);
+        const to = Number(entry.value);
+        if (!entry.duration || !Number.isFinite(from) || !Number.isFinite(to)) return entry.value;
+        const v = from + (to - from) * easeInOut(clamp((t - entry.t) / entry.duration, 0, 1));
+        return track.kind === 'attr' ? String(v) : v;
       }
       function apply(t) {
         for (const track of tracks.values()) {
           let index = -1;
           for (let i = 0; i < track.entries.length && track.entries[i].t <= t; i++) index = i;
-          if (index === track.current) continue;
-          track.current = index;
-          track.els.forEach((el, i) => write(el, track, index < 0 ? track.initial[i] : track.entries[index].value));
+          const entry = track.entries[index];
+          const progress = entry?.duration ? clamp((t - entry.t) / entry.duration, 0, 1) : 1;
+          const state = `${index}|${progress}`;
+          if (state === track.current) continue;
+          track.current = state;
+          track.els.forEach((el, i) => write(el, track, valueAt(track, index, i, t)));
         }
         for (const c of counters) {
           const el = document.querySelector(c.target);
@@ -329,8 +347,16 @@ class RunToggle extends CheckboxFormControlMixin(LitElement) {
           for (const a of allAnimations()) {
             if (a.animationName?.startsWith('v-')) continue;
             if (!born.has(a)) born.set(a, t);
+            const local = (t - born.get(a)) * 1000;
+            if (a.effect?.getKeyframes?.().length === 0) {
+              // keyframeless timers drive a component's own frame loop, which stops once paused,
+              // so hold them at rate 0 to keep them running, then finish them to settle the value
+              if (local >= a.effect.getComputedTiming().endTime) { a.playbackRate = 1; a.finish(); }
+              else { a.playbackRate = 0; a.currentTime = local; }
+              continue;
+            }
             a.pause();
-            a.currentTime = (t - born.get(a)) * 1000;
+            a.currentTime = local;
           }
         }
       }

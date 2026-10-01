@@ -15,9 +15,10 @@ import { parseArgs } from 'node:util';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const SHELL = join(here, '../assets/video-shell.html');
-const MIN_DURATION = 20;
-const MAX_DURATION = 30;
-const DEFAULT_DURATIONS = { hook: 3, title: 3, feature: 4.5, terminal: 4.5, fix: 5.5, list: 3.5, end: 3.5 };
+const MIN_DURATION = 24;
+const MAX_DURATION = 36;
+// Hold each scene 20% longer; entrance animations and cue offsets retain their timing.
+const DEFAULT_DURATIONS = { hook: 3.6, title: 3.6, feature: 5.4, terminal: 5.4, fix: 6.6, list: 4.2, end: 4.2 };
 
 const { values } = parseArgs({
   options: {

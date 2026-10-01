@@ -157,9 +157,9 @@ Inspect the built page and the What’s New index when practical.
 
 ## Create the matching video
 
-Once the monthly Markdown page is complete and passes its initial checks, load and follow [summarize-video-releases](../summarize-video-releases/SKILL.md) for that same `updateMonth`. Pass the month explicitly as `MM-YYYY` so the video skill reads the page you just wrote. Finish its storyboard, review, render, poster, and required `videoPublishedAt`, `videoDuration`, and `videoSummary` frontmatter before reporting the release work as complete. Do not hand off the video as a separate task or stop after writing the page.
+Once the monthly Markdown page is complete and passes its initial checks, load and follow [summarize-video-releases](../summarize-video-releases/SKILL.md) for that same `updateMonth`. Pass the month explicitly as `MM-YYYY` so the video skill reads the page you just wrote. Finish its storyboard, review, render, poster, feature snapshots in the corresponding post sections, and required `videoPublishedAt`, `videoDuration`, and `videoSummary` frontmatter before reporting the release work as complete. Do not hand off the video as a separate task or stop after writing the page.
 
-The video skill stops when a video already exists unless the user asked to revise it. After adding a new video, rerun the page checks above and inspect the built page for the player, poster, and video metadata. The expected diff includes the monthly page, its WebM, and its poster.
+The video skill stops when a video already exists unless the user asked to revise it. After adding a new video, rerun the page checks above and inspect the built page for the player, poster, video metadata, and contextual feature images. Confirm that each `feature`, `terminal`, and `fix` scene has a snapshot beside the prose explaining it and that all image URLs resolve. Keep the smaller updates from the video's “Also in …” list scene in Markdown text, without a list-scene image. The expected diff includes the monthly page, its WebM, its `<month>.webp` poster, and the published feature WebP files.
 
 When the task explicitly requests a pull request, follow the host’s authorized Git publishing workflow only after validation. Otherwise, leave the validated file ready for review and report its path.
 

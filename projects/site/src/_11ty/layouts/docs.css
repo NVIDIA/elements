@@ -189,6 +189,17 @@ h3[nve-text*='mkd'] {
   display: inline !important;
 }
 
+/* Release Feature Snapshots */
+.whats-new-content > p:has(> img) {
+  width: 100%;
+}
+
+.whats-new-content > p > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Code Block Styles */
 
 /* Temporary fix for code_inline tag renderer in paragraphs, applies nve-text="code" styles */

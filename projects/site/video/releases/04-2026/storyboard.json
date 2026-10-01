@@ -2,7 +2,7 @@
   "month": "04-2026",
   "title": "What’s new in NVIDIA Elements: April 2026",
   "versions": {
-    "core": "2.11.0",
+    "core": "2.11.1",
     "code": "2.1.0",
     "styles": "2.1.3",
     "themes": "2.0.1"
@@ -12,7 +12,8 @@
     {
       "type": "title",
       "month": "April 2026",
-      "line": "Smoother Data Grids, a finished migration, and new lint checks."
+      "line": "Smoother Data Grids, a finished migration, and new lint checks.",
+      "duration": 3.6
     },
     {
       "type": "feature",
@@ -20,7 +21,7 @@
       "tag": "Data Grid",
       "headline": "Smoother Data Grids",
       "lede": "Columns measure in one batch, avoiding repeated layout work.",
-      "duration": 4.5,
+      "duration": 5.4,
       "html": "<div class=\"rise\" style=\"--at: +0.6s\"><nve-grid><nve-grid-header><nve-grid-column width=\"150px\">Node</nve-grid-column><nve-grid-column width=\"170px\">Status</nve-grid-column><nve-grid-column width=\"110px\">GPU</nve-grid-column></nve-grid-header><nve-grid-row><nve-grid-cell>dgx-01</nve-grid-cell><nve-grid-cell><nve-badge status=\"running\" container=\"flat\">running</nve-badge></nve-grid-cell><nve-grid-cell id=\"apr-gpu-1\">72%</nve-grid-cell></nve-grid-row><nve-grid-row><nve-grid-cell>dgx-02</nve-grid-cell><nve-grid-cell><nve-badge id=\"apr-status-2\" status=\"queued\" container=\"flat\">queued</nve-badge></nve-grid-cell><nve-grid-cell id=\"apr-gpu-2\">0%</nve-grid-cell></nve-grid-row><nve-grid-row><nve-grid-cell>dgx-03</nve-grid-cell><nve-grid-cell><nve-badge status=\"running\" container=\"flat\">running</nve-badge></nve-grid-cell><nve-grid-cell id=\"apr-gpu-3\">91%</nve-grid-cell></nve-grid-row><nve-grid-row><nve-grid-cell>dgx-04</nve-grid-cell><nve-grid-cell><nve-badge id=\"apr-status-4\" status=\"starting\" container=\"flat\">starting</nve-badge></nve-grid-cell><nve-grid-cell id=\"apr-gpu-4\">4%</nve-grid-cell></nve-grid-row></nve-grid></div>",
       "zoom": 1.5,
       "cues": [
@@ -73,7 +74,7 @@
       "headline": "No more mlv prefixes",
       "lede": "Core and Themes dropped the last mlv prefixes; lint flags leftovers.",
       "title": "terminal",
-      "duration": 5,
+      "duration": 6.0,
       "commands": [
         {
           "cmd": "nve api.validate legacy.html",
@@ -106,7 +107,7 @@
       "headline": "Catch composition problems early",
       "lede": "New rules flag Tailwind classes on components and popovers in named slots.",
       "file": "toolbar.html",
-      "duration": 5.5,
+      "duration": 6.6,
       "lines": [
         "<nve-toolbar>",
         [
@@ -168,13 +169,15 @@
           "icon": "stop",
           "text": "Restored stop icon"
         }
-      ]
+      ],
+      "duration": 4.2
     },
     {
       "type": "end",
       "line": "Read the April 2026 update",
       "url": "nvidia.github.io/elements/docs/whats-new/04-2026/",
-      "packages": ["cli 0.0.9", "core 0.0.11", "lint 0.2.0", "themes 0.0.9"]
+      "packages": ["cli 0.0.9", "core 0.0.11", "lint 0.2.0", "themes 0.0.9"],
+      "duration": 4.2
     }
   ]
 }

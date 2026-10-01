@@ -1,11 +1,11 @@
 ---
 name: summarize-video-releases
-description: Create the 20–30 second marketing video for a monthly NVIDIA Elements “What’s New” post, rendered to projects/site/public/static/video/releases/MM-YYYY.webm from real Elements components. Use after the summarize-releases skill creates or updates a post, and whenever someone asks for a release video, what’s new video, monthly recap clip, changelog teaser, social video, or animated summary of Elements releases, even if they do not say “video skill”.
+description: Create the 24–36 second marketing video for a monthly NVIDIA Elements “What’s New” post, rendered to projects/site/public/static/video/releases/MM-YYYY.webm from real Elements components, with feature snapshots inserted into the post. Use after the summarize-releases skill creates or updates a post, and whenever someone asks for a release video, what’s new video, monthly recap clip, changelog teaser, social video, or animated summary of Elements releases, even if they do not say “video skill”.
 ---
 
 # Summarize Video Releases
 
-Turn a monthly What’s New post into a short, fast-paced marketing video that shows the month’s changes with real Elements components, CLI output, and lint results. The post is the source of truth. This skill runs after `summarize-releases` and adds a WebM video, its poster image, and three video metadata fields in the post frontmatter.
+Turn a monthly What’s New post into a short, fast-paced marketing video that shows the month’s changes with real Elements components, CLI output, and lint results. The post is the source of truth. This skill runs after `summarize-releases` and adds a WebM video, its WebP poster, a static WebP snapshot of each showcased feature in the corresponding post section, and three video metadata fields in the post frontmatter.
 
 The video should make someone who has never used Elements want to read the post. It should be accurate to the release, legible at 1080p, and consistent with the Elements design language.
 
@@ -15,12 +15,14 @@ The scripts own everything that must be exact; you own the story and the markup.
 
 - `scripts/read-post.js` parses the post into a JSON outline and resolves the input and output paths.
 - You write a storyboard JSON: scene order, copy, durations, and `nve-*` demo markup. See [references/storyboard.md](references/storyboard.md).
-- `scripts/compose-video.js` turns the storyboard into one static HTML page from `assets/video-shell.html`. It computes all timing, escapes code, and rejects videos outside 20–30 seconds.
-- `scripts/render-video.js` serves the page with Elements CDN URLs mapped to this repository’s built packages, captures frames on a virtual clock, and encodes VP9 with the browser’s built-in WebCodecs encoder. `scripts/webm.js` writes the WebM file. The workflow uses no external encoder: VP9 and its encoder are royalty-free and BSD-licensed, and everything else is Playwright and code in this skill. Output is deterministic: the same storyboard renders the same video.
+- `scripts/compose-video.js` turns the storyboard into one static HTML page from `assets/video-shell.html`. It computes all timing, escapes code, and rejects videos outside 24–36 seconds.
+- `scripts/render-video.js` serves the page with Elements CDN URLs mapped to this repository’s built packages, captures frames on a virtual clock, and encodes VP9 with the browser’s built-in WebCodecs encoder. `scripts/webm.js` writes the WebM file. The video workflow uses no external encoder: VP9 and its encoder are royalty-free and BSD-licensed. The renderer uses the pinned Sharp dependency to convert PNG screenshots to lossless WebP posters and stills. Output is deterministic: the same storyboard renders the same video.
 
 ## Prerequisites
 
 Run everything from the repository root.
+
+Run `mise run install` to install repository dependencies, including the Sharp image encoder.
 
 ```shell
 mise exec -- pnpm run playwright
@@ -57,7 +59,9 @@ Make a short plan before writing JSON:
 1. Choose two to four highlights for their own scenes. Favor changes a viewer can see: a new component, a new command, a new lint rule. When the month includes CLI, MCP, lint, or agent-skill changes, give one of them a `terminal` or `fix` scene, because agent tooling is what sets Elements apart.
 2. Put the remaining user-facing changes in one `list` scene. Mention breaking changes there only if the post covers them, and keep the wording neutral.
 3. Assign each highlight a scene type and layout, and write its headline (six words or fewer) and optional opening line.
-4. Add up durations. Stay within 20–30 seconds by cutting scenes rather than shortening them below four seconds.
+4. Add up durations. Stay within 24–36 seconds. Use the composer's longer scene defaults and allow at least 4.8 seconds for a feature. Keep entrance animations and cue offsets at their normal speed so the added scene time gives viewers longer to read the completed view.
+
+Map each `feature`, `terminal`, or `fix` scene to the heading and paragraph that explain it in the post, and plan one snapshot for each. Keep the smaller updates in the video's `list` scene, typically titled “Also in …”, and in the post's Markdown text. Do not publish snapshots of list scenes, title cards, hooks, or end cards; their text adds no visual benefit to the post.
 
 Every claim, number, and example must trace back to the post or to command output you ran. Leave out anything you cannot trace.
 
@@ -103,9 +107,11 @@ mise exec -- node .agents/skills/summarize-video-releases/scripts/render-video.j
   --stills-dir "${TMPDIR:-/tmp}/elements-release-video/<month>/stills"
 ```
 
-The script steps the clock forward to each time, so transitions and component animations match the final video. It writes PNG files to the temporary stills directory and prints, for each still, an overflow report of text, code, or demos that clip, leave the frame, or outgrow their column. Always use this script for stills: jumping straight to a time freezes transitions that start at that moment.
+The script steps the clock forward to each time, so transitions and component animations match the final video. It writes lossless WebP files to the temporary stills directory and prints, for each still, an overflow report of text, code, or demos that clip, leave the frame, or outgrow their column. Always use this script for stills: jumping straight to a time freezes transitions that start at that moment.
 
 Open every still and work through the review checklist in the storyboard reference. Fix the storyboard, compose, and review again until every overflow report is empty and every still passes. Expect two or three rounds.
+
+Choose publication snapshots only for `feature`, `terminal`, and `fix` scenes during this review. Select a time inside its scene after entrances, relevant cues, terminal output, or fix swaps finish and before the scene fades. Review list scenes and cards for the video, but keep their stills in temporary storage. Each published snapshot must explain the feature without playback and remain readable at the post's content width. Adjust the scene and review again if it depends on motion to make sense.
 
 The script also reports `network`: pinned CDN URLs it could not serve from a matching local build. An empty list means the video uses matching builds in this clone. If the list has entries, build those versions when available, or confirm that the pinned CDN versions are the latest published versions selected for this generation and mention them in your report.
 
@@ -116,29 +122,59 @@ mise exec -- node .agents/skills/summarize-video-releases/scripts/render-video.j
   --html "$VIDEO_DIR/video.html" --month <month>
 ```
 
-Add `--channel chrome` when a scene includes a `<video>` element without a poster frame. Rendering takes a few minutes. The script writes `output.video` (VP9 in WebM, 1920×1080, 30 fps) and `output.poster`, then prints the duration, frame count, encoding mode, and file size.
+Add `--channel chrome` when a scene includes a `<video>` element without a poster frame. Rendering takes a few minutes. The script writes `output.video` (VP9 in WebM, 1920×1080, 30 fps) and `output.poster` (lossless WebP, 1920×1080, named `<month>.webp`), then prints the duration, frame count, encoding mode, and file size. Use lossless WebP for every published poster and feature snapshot. A custom `--poster` path must end in `.webp`.
 
 Confirm that:
 
-- the duration is between 20 and 30 seconds.
+- the duration is between 24 and 36 seconds.
 - the file is under about 5 MB. For a larger file, render again with a higher `--quality` value (default 34; the range is 0–63, higher is smaller).
 - `errors` and `network` are empty, or you can explain them.
 - the poster shows the title scene cleanly.
 
-## 8. Finish
+## 8. Publish feature snapshots in the post
 
-Check the new video, poster, and post metadata:
+Export the selected frames from the final composed page with the existing still renderer. Use the same HTML, package versions, local assets, and browser flags as the final video. These images come from the video's rendered scenes; do not recreate the demos separately. If the storyboard or render inputs change, regenerate the affected snapshots with the video.
 
 ```shell
-git status --short projects/site/video/releases projects/site/public/static/video/releases
+SNAPSHOT_DIR="${TMPDIR:-/tmp}/elements-release-video/<month>/snapshots"
+mise exec -- node .agents/skills/summarize-video-releases/scripts/render-video.js \
+  --html "$VIDEO_DIR/video.html" --stills 6.5,11,15.5 --snapshots \
+  --stills-dir "$SNAPSHOT_DIR"
+```
+
+Replace the example times with the reviewed feature times. Always pass `--snapshots` for post images: the renderer reads the composed page's saved scene timings and exports only `feature`, `terminal`, and `fix` scenes. It reports excluded list scenes and cards under `skipped`. Apply the final render's browser flags here too, including `--channel chrome` when needed. The renderer prints each file path, such as `still-6.50.webp`, together with its overflow report. Open every selected WebP and confirm that `errors` and all overflow reports are empty before publishing it.
+
+Copy each approved snapshot to `projects/site/public/static/video/releases/<month>-<feature-slug>.webp`. Use a short, descriptive lowercase slug rather than a scene number or timestamp. Keep the full 1920×1080 frame. For example:
+
+```shell
+cp "$SNAPSHOT_DIR/still-6.50.webp" \
+  "projects/site/public/static/video/releases/<month>-media-controls.webp"
+```
+
+Insert each image in the monthly Markdown post directly after the paragraph explaining that feature, before its code example when one follows. Use the post's existing section structure and descriptive alt text explaining the visible state or result:
+
+```markdown
+![Media playback controls with play, volume, and progress indicators](/static/video/releases/08-2026-media-controls.webp)
+```
+
+Preserve the explanatory prose and copyable examples, including the smaller updates summarized in the video's list scene. On revisions, replace the existing image reference for that feature instead of adding a duplicate, and remove obsolete references and image files, including any older “Also in …” list snapshots. Keep `datePublished` fixed; advance `dateModified` when revising a published post.
+
+Run the Vale, Prettier, and site build checks from `summarize-releases`. Inspect the built monthly page to confirm that each `feature`, `terminal`, and `fix` scene has its contextual image, each image URL resolves, and the snapshots fit the content column and remain readable. Confirm that the post has no list-scene images. Always include the published feature snapshots in the completed release work; temporary review stills remain disposable.
+
+## 9. Finish
+
+Check the new video, poster, feature snapshots, and updated post:
+
+```shell
+git status --short projects/site/src/docs/whats-new projects/site/video/releases projects/site/public/static/video/releases
 git diff --check
 ```
 
-The shared What’s New layout displays `releases/<month>.webm` automatically. The monthly Markdown frontmatter must include `videoPublishedAt` (the video’s first public date), `videoDuration` (ISO 8601 seconds, such as `PT28S`), and `videoSummary` (one sentence describing the clip). Use the duration reported by the renderer. Include the matching JPG poster. The layout uses these fields for the caption, share image, video schema, and sitemap. Do not embed a second video player in the post.
+The shared What’s New layout displays `releases/<month>.webm` automatically. The monthly Markdown frontmatter must include `videoPublishedAt` (the video’s first public date), `videoDuration` (ISO 8601 seconds, such as `PT28S`), and `videoSummary` (one sentence describing the clip). Use the duration reported by the renderer. Include the matching `projects/site/public/static/video/releases/<month>.webp` poster. The layout uses these fields for the caption, share image, video schema, and sitemap. Do not embed a second video player in the post.
 
-Record the render command, any flags that override defaults, and the Playwright and browser versions in `$VIDEO_DIR/render.md`. Keep this file under source control too. Keep review stills and intermediate renders in temporary storage. Confirm every local URL resolves to a tracked asset, and include the sources in the same change as the published video and poster.
+Record the render command, any flags that override defaults, and the Playwright, browser, and Sharp versions in `$VIDEO_DIR/render.md`. Also record the snapshot command and a table mapping each published snapshot's filename and selected time to its scene and post heading. Keep this file under source control too. Keep review stills and intermediate renders in temporary storage. Confirm every local URL resolves to a tracked asset, and include the sources, published feature WebP files, video, poster, and updated post in the same change. The existing Git LFS rule covers WebP files in this release-video directory.
 
-Report the source and output paths, duration, size, the scenes you chose, and which post changes went into the `list` scene. Revisions start from the saved storyboard, then compose and render again.
+Report the source and output paths, duration, size, the scenes you chose, which post changes went into the `list` scene, and the snapshot paths with their corresponding post sections. Revisions start from the saved storyboard, then compose, render, regenerate snapshots, and update their references again.
 
 When the task explicitly asks for a pull request, follow the host’s authorized Git workflow after review.
 

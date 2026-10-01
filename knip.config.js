@@ -60,7 +60,12 @@ export default {
   // Keep this map explicit so package additions and entrypoint changes are reviewed.
   workspaces: {
     '.': {
-      entry: ['stylelint.config.mjs', '.husky/*', 'projects/internals/ci/**/*.js'],
+      entry: [
+        'stylelint.config.mjs',
+        '.husky/*',
+        'projects/internals/ci/**/*.js',
+        '.agents/skills/summarize-video-releases/scripts/render-video.js'
+      ],
       project: ['*.{js,mjs}', '.husky/*', 'projects/internals/ci/**/*.js']
     },
     'projects/cli': {

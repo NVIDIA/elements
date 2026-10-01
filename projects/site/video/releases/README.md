@@ -1,13 +1,13 @@
 # Release video sources
 
-Keep each month's editable inputs in `MM-YYYY/`, alongside the composed page used for its render. This directory sits outside the site's public assets and Eleventy input, so the site only publishes the WebM and JPG from `projects/site/public/static/video/releases/`.
+Keep each month's editable inputs in `MM-YYYY/`, alongside the composed page used for its render. This directory sits outside the site's public assets and Eleventy input. The site publishes the WebM, WebP poster, and feature WebP snapshots from `projects/site/public/static/video/releases/`. Posters use `<month>.webp`; feature snapshots use `<month>-<feature-slug>.webp` and appear beside the corresponding explanation in the monthly post. The renderer converts PNG screenshots to lossless WebP with the pinned Sharp dependency. Run `mise run install` to install the encoder before rendering.
 
 ## Files
 
 - `storyboard.json`: scene copy, timing, demo markup, and exact Elements package versions.
 - `video.html`: the composed page. Keep this snapshot so changes to the shared composer and shell do not change an existing render's input.
 - `assets/`: local demo inputs, such as poster frames, images, or media. Reference these as `/__video/assets/<file>`.
-- `render.md`: the render command, flags that override defaults, and Playwright and browser versions used for the published clip.
+- `render.md`: the render and snapshot commands, flags that override defaults, and Playwright and browser versions used for the published clip. Include a table mapping snapshot filenames and selected times to their scenes and post headings.
 
 Reuse assets already tracked under `projects/site/public/static/` through `/static/…` URLs. Keep review stills, logs, and intermediate renders in temporary storage.
 
@@ -34,4 +34,6 @@ mise exec -- node .agents/skills/summarize-video-releases/scripts/compose-video.
   --storyboard "$VIDEO_DIR/storyboard.json" --out "$VIDEO_DIR/video.html"
 ```
 
-Commit the updated source files with the published WebM and JPG. Review stills stay in temporary storage.
+Publish snapshots only from `feature`, `terminal`, and `fix` scenes. Keep smaller updates from “Also in …” list scenes in the video and in the post's Markdown text, without a list-scene image.
+
+Regenerate the feature snapshots from the updated page using `--snapshots` with the times and browser flags recorded in `render.md`, following the release-video skill's snapshot review and placement steps. Commit the updated source files with the published WebM, WebP poster, feature WebP files, and monthly post. Review stills stay in temporary storage.
