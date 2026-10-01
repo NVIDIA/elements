@@ -4,11 +4,6 @@
       "count": 2
     }
   },
-  "src/button/button.test.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/combobox/combobox.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 5
