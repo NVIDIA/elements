@@ -118,7 +118,7 @@ describe(`${Button.metadata.tag} - submit`, () => {
 
 describe('dynamic form reference', () => {
   it('should gracefully fall back to null if created and referencing a form not yet created', async () => {
-    const button = document.createElement('nve-button') as Button;
+    const button = document.createElement('nve-button');
     button.setAttribute('form', 'test-form');
     expect(button.form).toBe(null);
 
