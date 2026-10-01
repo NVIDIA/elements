@@ -22,6 +22,7 @@
 }
 
 [internal-host] {
+  position: relative;
   border: var(--border);
   background: var(--background);
   color: var(--color);
@@ -78,7 +79,7 @@
 slot[name='actions'] {
   display: block;
   margin-inline-start: auto;
-  position: fixed;
+  position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
   z-index: 99;
@@ -98,11 +99,12 @@ slot[name='actions'] {
 :host([slot='right'][hidden]),
 :host([slot='bottom'][hidden]) {
   pointer-events: none;
-  display: block !important;
 }
 
 :host([slot='left']) {
-  transition: margin-inline-start var(--animation-duration) ease-in-out;
+  transition:
+    margin-inline-start var(--animation-duration) ease-in-out,
+    display var(--animation-duration) allow-discrete;
   margin-inline-start: 0;
 }
 
@@ -111,7 +113,9 @@ slot[name='actions'] {
 }
 
 :host([slot='right']) {
-  transition: margin-inline-end var(--animation-duration) ease-in-out;
+  transition:
+    margin-inline-end var(--animation-duration) ease-in-out,
+    display var(--animation-duration) allow-discrete;
   margin-inline-end: 0;
 }
 
@@ -120,10 +124,26 @@ slot[name='actions'] {
 }
 
 :host([slot='bottom']) {
-  transition: margin-block-end var(--animation-duration) ease-in-out;
+  transition:
+    margin-block-end var(--animation-duration) ease-in-out,
+    display var(--animation-duration) allow-discrete;
   margin-block-end: 0;
 }
 
 :host([slot='bottom'][hidden]) {
   margin-block-end: calc(-1 * var(--max-height));
+}
+
+@starting-style {
+  :host([slot='left']:not([hidden]):state(reopened)) {
+    margin-inline-start: calc(-1 * var(--max-width));
+  }
+
+  :host([slot='right']:not([hidden]):state(reopened)) {
+    margin-inline-end: calc(-1 * var(--max-width));
+  }
+
+  :host([slot='bottom']:not([hidden]):state(reopened)) {
+    margin-block-end: calc(-1 * var(--max-height));
+  }
 }

@@ -50,6 +50,12 @@ slot {
   flex-direction: column;
 }
 
+/* Keep overlapping panel borders above positioned main content. */
+[name='left'],
+[name='right'] {
+  z-index: 1;
+}
+
 [name='left'] {
   grid-area: left;
   height: 100%;
@@ -70,7 +76,7 @@ slot {
 [name='left-aside'],
 [name='right-aside'] {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 [name='left-aside'] {
