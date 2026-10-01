@@ -1,3 +1,10 @@
+## [2.11.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.11.0...@nvidia-elements/core-v2.11.1) (2026-10-01)
+
+### Bug Fixes
+
+* **core:** debounce scroll tracking state updates ([ce5b688](https://github.com/NVIDIA/elements/commit/ce5b688310d13dcc51e26bd0434599fecc610e4b))
+* **docs:** correct example api mapping and summary fallback ([f0dd837](https://github.com/NVIDIA/elements/commit/f0dd837756f44f05f1c115384d18e02a40cff32d))
+
 ## [2.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.10.0...@nvidia-elements/core-v2.11.0) (2026-09-30)
 
 ### Features
