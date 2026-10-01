@@ -68,6 +68,8 @@
       /* demo surface: a quiet, token-bordered area where real components render */
       .demo { width: 100%; overflow: hidden; border: var(--nve-ref-border-width-sm) solid var(--line); border-radius: var(--nve-ref-border-radius-lg);
         background: var(--nve-sys-layer-container-background); padding: var(--nve-ref-space-xl); box-shadow: var(--nve-ref-shadow-400); }
+      /* no surface, for demos that bring their own container such as nve-card */
+      .demo.bare { border: none; background: none; padding: 0; box-shadow: none; }
 
       /* chips of code that agents tend to invent */
       .guess { font-family: var(--mono); font-size: var(--nve-ref-font-size-600); color: var(--ink);
@@ -126,7 +128,7 @@
       
     </style>
     <script type="module">
-      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.0/dist/bundles/index.min.js';
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.1/dist/bundles/index.min.js';
       import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/code@2.1.0/dist/bundles/index.js';
     </script>
     
@@ -143,8 +145,8 @@
             </defs>
             <rect width="1280" height="720" fill="url(#dots)" opacity=".5"></rect>
           </svg>
-                    <!-- 1. title: 0.00s to 3.00s -->
-          <section class="scene" style="--in: 0s; --out: 3s">
+                    <!-- 1. title: 0.00s to 3.60s -->
+          <section class="scene" style="--in: 0s; --out: 3.6s">
 <div nve-layout="column gap:lg align:center full:height">
       <div class="stamp" style="--at: 0.1s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
       <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 0.2s">What’s new in NVIDIA Elements</span></span></p>
@@ -153,71 +155,71 @@
     </div>
           </section>
 
-          <!-- 2. feature: 3.00s to 8.00s -->
-          <section class="scene" style="--in: 3s; --out: 8s">
+          <!-- 2. feature: 3.60s to 9.60s -->
+          <section class="scene" style="--in: 3.6s; --out: 9.6s">
 <div nve-layout="grid gap:xxl align:vertical-center full:height">
-      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 3.05s"><nve-tag readonly>New: nve-gauge</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.1s">Telemetry</span></span> <span class="mask"><span class="word" style="--at: 3.17s">at</span></span> <span class="mask"><span class="word" style="--at: 3.24s">a</span></span> <span class="mask"><span class="word" style="--at: 3.31s">glance</span></span></h2><p class="lede rise" style="--at: 3.45s">Fill, dot, or needle indicators in a 270-degree or half-circle shape.</p></div>
-      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 3.6s"><div style="zoom: 1.4"><div nve-layout="row gap:lg align:vertical-center"><div class="pop" style="--at: 3.6s"><nve-gauge id="jul-gpu" status="success" value="24" aria-label="GPU usage" aria-valuetext="24%"><span id="jul-gpu-text" nve-text="grow">24%</span><span nve-text="body sm muted">GPU</span></nve-gauge></div><div class="pop" style="--at: 3.75s"><nve-gauge id="jul-mem" thumb="needle" value="31" aria-label="Memory usage" aria-valuetext="31%"><span id="jul-mem-text" nve-text="body sm">31%</span><span nve-text="body sm muted">Memory</span></nve-gauge></div><div class="pop" style="--at: 3.9s"><nve-gauge id="jul-net" thumb="dot" status="accent" value="40" aria-label="Throughput" aria-valuetext="400Mbps"><span id="jul-net-text" nve-text="body sm">400Mbps</span><span nve-text="body sm muted">Network</span></nve-gauge></div></div></div></div></div>
+      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 3.65s"><nve-tag readonly>New: nve-gauge</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.7s">Telemetry</span></span> <span class="mask"><span class="word" style="--at: 3.77s">at</span></span> <span class="mask"><span class="word" style="--at: 3.84s">a</span></span> <span class="mask"><span class="word" style="--at: 3.91s">glance</span></span></h2><p class="lede rise" style="--at: 4.05s">Fill, dot, or needle indicators in a 270-degree or half-circle shape.</p></div>
+      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 4.2s"><div style="zoom: 1.4"><div nve-layout="row gap:lg align:vertical-center"><div class="pop" style="--at: 4.2s"><nve-gauge id="jul-gpu" status="success" value="24" aria-label="GPU usage" aria-valuetext="24%"><span id="jul-gpu-text" nve-text="grow">24%</span><span nve-text="body sm muted">GPU</span></nve-gauge></div><div class="pop" style="--at: 4.35s"><nve-gauge id="jul-mem" thumb="needle" value="31" aria-label="Memory usage" aria-valuetext="31%"><span id="jul-mem-text" nve-text="body sm">31%</span><span nve-text="body sm muted">Memory</span></nve-gauge></div><div class="pop" style="--at: 4.5s"><nve-gauge id="jul-net" thumb="dot" status="accent" value="40" aria-label="Throughput" aria-valuetext="400Mbps"><span id="jul-net-text" nve-text="body sm">400Mbps</span><span nve-text="body sm muted">Network</span></nve-gauge></div></div></div></div></div>
     </div>
           </section>
 
-          <!-- 3. fix: 8.00s to 13.50s -->
-          <section class="scene" style="--in: 8s; --out: 13.5s">
+          <!-- 3. fix: 9.60s to 16.20s -->
+          <section class="scene" style="--in: 9.6s; --out: 16.2s">
 <div nve-layout="column gap:xl full:height">
       <div nve-layout="row gap:xl align:vertical-center align:space-between">
-        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 8.1s">Design</span></span> <span class="mask"><span class="word" style="--at: 8.17s">feedback</span></span> <span class="mask"><span class="word" style="--at: 8.24s">before</span></span> <span class="mask"><span class="word" style="--at: 8.31s">review</span></span></h2><p class="lede rise" style="--at: 8.45s">New rules flag crowded toolbar labels and too many primary actions.</p></div>
+        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 9.7s">Design</span></span> <span class="mask"><span class="word" style="--at: 9.77s">feedback</span></span> <span class="mask"><span class="word" style="--at: 9.84s">before</span></span> <span class="mask"><span class="word" style="--at: 9.91s">review</span></span></h2><p class="lede rise" style="--at: 10.05s">New rules flag crowded toolbar labels and too many primary actions.</p></div>
         <div class="stack">
-          <div class="win" style="--at: 9.2s; --until: 11.7s" nve-layout="column gap:xs align:right"><span class="count bad">2 problems</span><span class="stat-label">2 errors</span></div>
-          <div class="win" style="--at: 11.9s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
+          <div class="win" style="--at: 10.8s; --until: 13.8s" nve-layout="column gap:xs align:right"><span class="count bad">2 problems</span><span class="stat-label">2 errors</span></div>
+          <div class="win" style="--at: 14s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
         </div>
       </div>
       <div nve-layout="grid gap:xl">
-        <div class="rise cell" style="--at: 8.4s" nve-layout="span:7">
+        <div class="rise cell" style="--at: 10s" nve-layout="span:7">
           <nve-card>
             <nve-card-header><div nve-layout="row gap:sm align:vertical-center align:space-between"><span nve-text="label muted">toolbar.html</span><code nve-text="code">nve api.validate toolbar.html</code></div></nve-card-header>
-            <nve-card-content><div class="editor"><div class="scan" style="--at: 8.9s"></div><span class="ln">1</span>&lt;<span class="tk-t">nve-toolbar</span>&gt;
+            <nve-card-content><div class="editor"><div class="scan" style="--at: 10.5s"></div><span class="ln">1</span>&lt;<span class="tk-t">nve-toolbar</span>&gt;
 <span class="ln">2</span>  &lt;<span class="tk-t">nve-search</span>&gt;
-<span class="ln">3</span>    <span class="swap" style="--at: 9.2s; --fix: 11s; --wb: 41; --wg: 40"><span class="bad">&lt;<span class="tk-t">label</span>&gt;Search&lt;/<span class="tk-t">label</span>&gt;&lt;<span class="tk-t">input</span> <span class="tk-a">type</span>=<span class="tk-s">&quot;search&quot;</span></span><span class="good">&lt;<span class="tk-t">input</span> <span class="tk-a">type</span>=<span class="tk-s">&quot;search&quot;</span> <span class="tk-a">aria-label</span>=<span class="tk-s">&quot;Search&quot;</span></span></span> /&gt;
+<span class="ln">3</span>    <span class="swap" style="--at: 10.8s; --fix: 12.6s; --wb: 41; --wg: 40"><span class="bad">&lt;<span class="tk-t">label</span>&gt;Search&lt;/<span class="tk-t">label</span>&gt;&lt;<span class="tk-t">input</span> <span class="tk-a">type</span>=<span class="tk-s">&quot;search&quot;</span></span><span class="good">&lt;<span class="tk-t">input</span> <span class="tk-a">type</span>=<span class="tk-s">&quot;search&quot;</span> <span class="tk-a">aria-label</span>=<span class="tk-s">&quot;Search&quot;</span></span></span> /&gt;
 <span class="ln">4</span>  &lt;/<span class="tk-t">nve-search</span>&gt;
 <span class="ln">5</span>  &lt;<span class="tk-t">nve-button</span> <span class="tk-a">interaction</span>=<span class="tk-s">&quot;emphasis&quot;</span>&gt;Run&lt;/<span class="tk-t">nve-button</span>&gt;
-<span class="ln">6</span>  &lt;<span class="tk-t">nve-button</span><span class="swap" style="--at: 9.45s; --fix: 11.25s; --wb: 23; --wg: 0"><span class="bad"> <span class="tk-a">interaction</span>=<span class="tk-s">&quot;emphasis&quot;</span></span><span class="good"></span></span>&gt;Stop&lt;/<span class="tk-t">nve-button</span>&gt;
-<span class="ln">7</span>  &lt;<span class="tk-t">nve-button</span><span class="swap" style="--at: 9.7s; --fix: 11.5s; --wb: 23; --wg: 0"><span class="bad"> <span class="tk-a">interaction</span>=<span class="tk-s">&quot;emphasis&quot;</span></span><span class="good"></span></span>&gt;Undo&lt;/<span class="tk-t">nve-button</span>&gt;
+<span class="ln">6</span>  &lt;<span class="tk-t">nve-button</span><span class="swap" style="--at: 11.05s; --fix: 12.85s; --wb: 23; --wg: 0"><span class="bad"> <span class="tk-a">interaction</span>=<span class="tk-s">&quot;emphasis&quot;</span></span><span class="good"></span></span>&gt;Stop&lt;/<span class="tk-t">nve-button</span>&gt;
+<span class="ln">7</span>  &lt;<span class="tk-t">nve-button</span><span class="swap" style="--at: 11.3s; --fix: 13.1s; --wb: 23; --wg: 0"><span class="bad"> <span class="tk-a">interaction</span>=<span class="tk-s">&quot;emphasis&quot;</span></span><span class="good"></span></span>&gt;Undo&lt;/<span class="tk-t">nve-button</span>&gt;
 <span class="ln">8</span>&lt;/<span class="tk-t">nve-toolbar</span>&gt;</div></nve-card-content>
           </nve-card>
         </div>
         <div class="stack cell" nve-layout="span:5">
-          <div class="win" style="--at: 9.2s; --until: 11.7s" nve-layout="column gap:sm"><div class="rise" style="--at: 9.3s"><nve-alert status="danger"><span nve-text="label sm">3:5 prefer-aria-label-in-compact-containers</span> Use aria-label instead of &lt;label&gt; in toolbars.</nve-alert></div><div class="rise" style="--at: 9.55s"><nve-alert status="danger"><span nve-text="label sm">7:15 no-excessive-primary-actions</span> Limit primary actions to 2 per page.</nve-alert></div></div>
-          <div class="win" style="--at: 11.9s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert><div class="rise" style="--at: 12.2s"><div style="width: 100%"><nve-toolbar><nve-search><input type="search" aria-label="Search" /></nve-search><nve-button interaction="emphasis">Run</nve-button><nve-button>Stop</nve-button><nve-button>Undo</nve-button></nve-toolbar></div></div></div>
+          <div class="win" style="--at: 10.8s; --until: 13.8s" nve-layout="column gap:sm"><div class="rise" style="--at: 10.9s"><nve-alert status="danger"><span nve-text="label sm">3:5 prefer-aria-label-in-compact-containers</span> Use aria-label instead of &lt;label&gt; in toolbars.</nve-alert></div><div class="rise" style="--at: 11.15s"><nve-alert status="danger"><span nve-text="label sm">7:15 no-excessive-primary-actions</span> Limit primary actions to 2 per page.</nve-alert></div></div>
+          <div class="win" style="--at: 14s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert><div class="rise" style="--at: 14.3s"><div style="width: 100%"><nve-toolbar><nve-search><input type="search" aria-label="Search" /></nve-search><nve-button interaction="emphasis">Run</nve-button><nve-button>Stop</nve-button><nve-button>Undo</nve-button></nve-toolbar></div></div></div>
         </div>
       </div>
     </div>
           </section>
 
-          <!-- 4. feature: 13.50s to 18.00s -->
-          <section class="scene" style="--in: 13.5s; --out: 18s">
+          <!-- 4. feature: 16.20s to 21.60s -->
+          <section class="scene" style="--in: 16.2s; --out: 21.6s">
 <div nve-layout="grid gap:xxl align:vertical-center full:height">
-      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 13.55s"><nve-tag readonly>nve-text=&quot;grow&quot;</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 13.6s">Metric</span></span> <span class="mask"><span class="word" style="--at: 13.67s">text</span></span> <span class="mask"><span class="word" style="--at: 13.74s">that</span></span> <span class="mask"><span class="word" style="--at: 13.81s">fits</span></span></h2><p class="lede rise" style="--at: 13.95s">A new typography utility scales metric text to fill its container.</p></div>
-      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 14.1s"><div><div nve-layout="row gap:xl align:bottom"><div class="rise" nve-layout="column gap:xs" style="--at: 14.1s; width: 360px"><span nve-text="label muted">Refresh</span><span class="jul-hz" nve-text="grow">30Hz</span></div><div class="rise" nve-layout="column gap:xs" style="--at: 14.25s; width: 220px"><span nve-text="label muted">Refresh</span><span class="jul-hz" nve-text="grow">30Hz</span></div><div class="rise" nve-layout="column gap:xs" style="--at: 14.4s; width: 120px"><span nve-text="label muted">Refresh</span><span class="jul-hz" nve-text="grow">30Hz</span></div></div></div></div></div>
+      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 16.25s"><nve-tag readonly>nve-text=&quot;grow&quot;</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 16.3s">Metric</span></span> <span class="mask"><span class="word" style="--at: 16.37s">text</span></span> <span class="mask"><span class="word" style="--at: 16.44s">that</span></span> <span class="mask"><span class="word" style="--at: 16.51s">fits</span></span></h2><p class="lede rise" style="--at: 16.65s">A new typography utility scales metric text to fill its container.</p></div>
+      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 16.8s"><div><div nve-layout="row gap:xl align:bottom"><div class="rise" nve-layout="column gap:xs" style="--at: 16.8s; width: 360px"><span nve-text="label muted">Refresh</span><span class="jul-hz" nve-text="grow">30Hz</span></div><div class="rise" nve-layout="column gap:xs" style="--at: 16.95s; width: 220px"><span nve-text="label muted">Refresh</span><span class="jul-hz" nve-text="grow">30Hz</span></div><div class="rise" nve-layout="column gap:xs" style="--at: 17.1s; width: 120px"><span nve-text="label muted">Refresh</span><span class="jul-hz" nve-text="grow">30Hz</span></div></div></div></div></div>
     </div>
           </section>
 
-          <!-- 5. list: 18.00s to 21.50s -->
-          <section class="scene" style="--in: 18s; --out: 21.5s">
+          <!-- 5. list: 21.60s to 25.80s -->
+          <section class="scene" style="--in: 21.6s; --out: 25.8s">
 <div nve-layout="column gap:xl align:vertical-center full:height">
-      <h2 class="mega"><span class="mask"><span class="word" style="--at: 18.1s">Also</span></span> <span class="mask"><span class="word" style="--at: 18.17s">in</span></span> <span class="mask"><span class="word" style="--at: 18.24s">July</span></span></h2>
-      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 18.5s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="link" size="lg"></nve-icon><span nve-text="label lg">Custom data links to docs</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.68s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="terminal" size="lg"></nve-icon><span nve-text="label lg">Sturdier CLI installer</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.86s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="globe" size="lg"></nve-icon><span nve-text="label lg">Logical direction layouts</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 19.04s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="pointer" size="lg"></nve-icon><span nve-text="label lg">Clean tooltip handoffs</span></div></nve-card-content></nve-card></div></div>
+      <h2 class="mega"><span class="mask"><span class="word" style="--at: 21.7s">Also</span></span> <span class="mask"><span class="word" style="--at: 21.77s">in</span></span> <span class="mask"><span class="word" style="--at: 21.84s">July</span></span></h2>
+      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 22.1s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="link" size="lg"></nve-icon><span nve-text="label lg">Custom data links to docs</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.28s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="terminal" size="lg"></nve-icon><span nve-text="label lg">Sturdier CLI installer</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.46s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="globe" size="lg"></nve-icon><span nve-text="label lg">Logical direction layouts</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.64s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="pointer" size="lg"></nve-icon><span nve-text="label lg">Clean tooltip handoffs</span></div></nve-card-content></nve-card></div></div>
     </div>
           </section>
 
-          <!-- 6. end: 21.50s to 25.00s -->
-          <section class="scene" style="--in: 21.5s">
+          <!-- 6. end: 25.80s to 30.00s -->
+          <section class="scene" style="--in: 25.8s">
 <div nve-layout="column gap:lg align:center full:height">
-      <div class="stamp" style="--at: 21.6s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
-      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 21.7s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 21.77s">Elements</span></span></h2>
-      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 22.05s">Read the July 2026 update</span></span></p>
+      <div class="stamp" style="--at: 25.9s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
+      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 26s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 26.07s">Elements</span></span></h2>
+      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 26.35s">Read the July 2026 update</span></span></p>
       
-      <span class="url rise" style="--at: 22.6s">nvidia.github.io/elements/docs/whats-new/07-2026/</span>
-      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 22.8s"><nve-tag readonly>cli 2.1.9</nve-tag></div><div class="pop" style="--at: 22.85s"><nve-tag readonly>code 2.0.2</nve-tag></div><div class="pop" style="--at: 22.9s"><nve-tag readonly>core 2.2.2</nve-tag></div><div class="pop" style="--at: 22.95s"><nve-tag readonly>forms 2.0.5</nve-tag></div><div class="pop" style="--at: 23s"><nve-tag readonly>lint 2.3.0</nve-tag></div><div class="pop" style="--at: 23.05s"><nve-tag readonly>markdown 2.0.3</nve-tag></div><div class="pop" style="--at: 23.1s"><nve-tag readonly>monaco 2.0.2</nve-tag></div><div class="pop" style="--at: 23.15s"><nve-tag readonly>styles 2.1.2</nve-tag></div></div>
+      <span class="url rise" style="--at: 26.9s">nvidia.github.io/elements/docs/whats-new/07-2026/</span>
+      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 27.1s"><nve-tag readonly>cli 2.1.9</nve-tag></div><div class="pop" style="--at: 27.15s"><nve-tag readonly>code 2.0.2</nve-tag></div><div class="pop" style="--at: 27.2s"><nve-tag readonly>core 2.2.2</nve-tag></div><div class="pop" style="--at: 27.25s"><nve-tag readonly>forms 2.0.5</nve-tag></div><div class="pop" style="--at: 27.3s"><nve-tag readonly>lint 2.3.0</nve-tag></div><div class="pop" style="--at: 27.35s"><nve-tag readonly>markdown 2.0.3</nve-tag></div><div class="pop" style="--at: 27.4s"><nve-tag readonly>monaco 2.0.2</nve-tag></div><div class="pop" style="--at: 27.45s"><nve-tag readonly>styles 2.1.2</nve-tag></div></div>
     </div>
           </section>
         </div>
@@ -233,13 +235,13 @@
         container="flat"
         aria-label="Restart"></nve-icon-button>
       <nve-range fit-text>
-        <input type="range" id="scrub" min="0" max="25" step="0.05" value="0" aria-label="Timeline" />
+        <input type="range" id="scrub" min="0" max="30" step="0.05" value="0" aria-label="Timeline" />
       </nve-range>
       <span slot="suffix" nve-text="label sm muted nowrap" id="time">0:00</span>
     </nve-toolbar>
 
     <script type="application/json" id="timeline">
-      {"duration":25,"cues":[{"t":4.9,"target":"#jul-gpu","kind":"attr","name":"value","value":"68"},{"t":4.9,"target":"#jul-gpu","kind":"attr","name":"status","value":"warning"},{"t":4.9,"target":"#jul-gpu","kind":"attr","name":"aria-valuetext","value":"68%"},{"t":4.9,"target":"#jul-gpu-text","kind":"text","value":"68%"},{"t":5.2,"target":"#jul-mem","kind":"attr","name":"value","value":"66"},{"t":5.2,"target":"#jul-mem","kind":"attr","name":"aria-valuetext","value":"66%"},{"t":5.2,"target":"#jul-mem-text","kind":"text","value":"66%"},{"t":5.5,"target":"#jul-net","kind":"attr","name":"value","value":"92"},{"t":5.5,"target":"#jul-net","kind":"attr","name":"aria-valuetext","value":"920Mbps"},{"t":5.5,"target":"#jul-net-text","kind":"text","value":"920Mbps"},{"t":6.3,"target":"#jul-gpu","kind":"attr","name":"value","value":"91"},{"t":6.3,"target":"#jul-gpu","kind":"attr","name":"status","value":"danger"},{"t":6.3,"target":"#jul-gpu","kind":"attr","name":"aria-valuetext","value":"91%"},{"t":6.3,"target":"#jul-gpu-text","kind":"text","value":"91%"},{"t":15.9,"target":".jul-hz","kind":"text","value":"120Hz"}],"counters":[],"poster":1.6}
+      {"duration":30,"cues":[{"t":5.5,"target":"#jul-gpu","kind":"attr","name":"value","value":"68"},{"t":5.5,"target":"#jul-gpu","kind":"attr","name":"status","value":"warning"},{"t":5.5,"target":"#jul-gpu","kind":"attr","name":"aria-valuetext","value":"68%"},{"t":5.5,"target":"#jul-gpu-text","kind":"text","value":"68%"},{"t":5.800000000000001,"target":"#jul-mem","kind":"attr","name":"value","value":"66"},{"t":5.800000000000001,"target":"#jul-mem","kind":"attr","name":"aria-valuetext","value":"66%"},{"t":5.800000000000001,"target":"#jul-mem-text","kind":"text","value":"66%"},{"t":6.1,"target":"#jul-net","kind":"attr","name":"value","value":"92"},{"t":6.1,"target":"#jul-net","kind":"attr","name":"aria-valuetext","value":"920Mbps"},{"t":6.1,"target":"#jul-net-text","kind":"text","value":"920Mbps"},{"t":6.9,"target":"#jul-gpu","kind":"attr","name":"value","value":"91"},{"t":6.9,"target":"#jul-gpu","kind":"attr","name":"status","value":"danger"},{"t":6.9,"target":"#jul-gpu","kind":"attr","name":"aria-valuetext","value":"91%"},{"t":6.9,"target":"#jul-gpu-text","kind":"text","value":"91%"},{"t":18.599999999999998,"target":".jul-hz","kind":"text","value":"120Hz"}],"counters":[],"poster":1.6}
     </script>
     <script type="module">
       const { duration: DURATION, cues, counters, poster } = JSON.parse(document.getElementById('timeline').textContent);
@@ -251,12 +253,14 @@
       /* ---------- cues: state as a pure function of time ----------
          Each cue sets an attribute, property, or text on its targets at an absolute time.
          For any target and key, the latest cue at or before t wins; before the first cue,
-         the value captured at boot is restored. Scrubbing backwards therefore works. */
+         the value captured at boot is restored. Scrubbing backwards therefore works.
+         A cue with a duration eases a numeric value from the previous one over that time. */
+      const easeInOut = x => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
       const tracks = new Map();
       for (const cue of cues) {
         const key = `${cue.target}|${cue.kind}|${cue.name ?? ''}`;
         if (!tracks.has(key)) tracks.set(key, { ...cue, entries: [] });
-        tracks.get(key).entries.push({ t: cue.t, value: cue.value });
+        tracks.get(key).entries.push({ t: cue.t, value: cue.value, duration: cue.duration });
       }
       for (const track of tracks.values()) {
         track.entries.sort((a, b) => a.t - b.t);
@@ -267,20 +271,34 @@
       function read(el, { kind, name }) {
         if (kind === 'attr') return el.getAttribute(name);
         if (kind === 'prop') return el[name];
+        if (kind === 'style') return el.style.getPropertyValue(name);
         return el.textContent;
       }
-      function write(el, { kind, name }, value) {
+      function write(el, { kind, name, unit }, value) {
         if (kind === 'attr') value === null || value === false ? el.removeAttribute(name) : el.setAttribute(name, value === true ? '' : value);
         else if (kind === 'prop') el[name] = value;
+        else if (kind === 'style') el.style.setProperty(name, typeof value === 'number' ? `${value}${unit ?? ''}` : value);
         else el.textContent = value;
+      }
+      function valueAt(track, index, i, t) {
+        if (index < 0) return track.initial[i];
+        const entry = track.entries[index];
+        const from = parseFloat(index > 0 ? track.entries[index - 1].value : track.initial[i]);
+        const to = Number(entry.value);
+        if (!entry.duration || !Number.isFinite(from) || !Number.isFinite(to)) return entry.value;
+        const v = from + (to - from) * easeInOut(clamp((t - entry.t) / entry.duration, 0, 1));
+        return track.kind === 'attr' ? String(v) : v;
       }
       function apply(t) {
         for (const track of tracks.values()) {
           let index = -1;
           for (let i = 0; i < track.entries.length && track.entries[i].t <= t; i++) index = i;
-          if (index === track.current) continue;
-          track.current = index;
-          track.els.forEach((el, i) => write(el, track, index < 0 ? track.initial[i] : track.entries[index].value));
+          const entry = track.entries[index];
+          const progress = entry?.duration ? clamp((t - entry.t) / entry.duration, 0, 1) : 1;
+          const state = `${index}|${progress}`;
+          if (state === track.current) continue;
+          track.current = state;
+          track.els.forEach((el, i) => write(el, track, valueAt(track, index, i, t)));
         }
         for (const c of counters) {
           const el = document.querySelector(c.target);

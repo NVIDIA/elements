@@ -28,7 +28,7 @@ A storyboard is one JSON file that `compose-video.js` turns into the video page.
 
 - `versions`: exact Core, Code, Styles, and Themes versions, using each package's latest published version at generation time regardless of the release month. Resolve versions with `nve packages.list` or `nve packages.get <name>`. Refresh the pins for each new or regenerated video, including videos for older months. The composer pins these URLs. The renderer substitutes a local build only when its package version matches the pinned version.
 - `imports`: extra component registrations beyond the Core and Code bundles, which are always loaded. Get the entry points from `nve api.imports.get '<markup>'` and turn each into a jsDelivr URL: `https://cdn.jsdelivr.net/npm/<package>@<exact version>/<subpath>/+esm`. Pin each package's latest published version at generation time. The renderer serves these from the local build when it can.
-- `poster`: optional time in seconds for the poster frame. Defaults to 1.6 seconds into the title scene.
+- `poster`: optional time in seconds for the lossless WebP poster frame, saved as `<month>.webp`. Defaults to 1.6 seconds into the title scene.
 - `css`: optional storyboard-specific motion. Use it rarely; every value must be an Elements token (`var(--nve-…)`) and no selector may target an `nve-*` element.
 
 Every scene accepts `duration` in seconds to override its default.
@@ -37,7 +37,7 @@ The version numbers in the example above illustrate the file shape. Resolve curr
 
 ## Scene types
 
-### `title` (default 3 seconds)
+### `title` (default 3.6 seconds)
 
 Opens the video: logo, “What’s new in NVIDIA Elements”, the month in hero type, and an optional one-line summary.
 
@@ -47,7 +47,7 @@ Opens the video: logo, “What’s new in NVIDIA Elements”, the month in hero 
 
 Optional `kicker` replaces “What’s new in NVIDIA Elements”. Keep `line` under about 70 characters.
 
-### `hook` (default 3 seconds)
+### `hook` (default 3.6 seconds)
 
 Optional cold open before the title: one or two large lines and optional code chips that get a red squiggle and shake. Use it only when the month has a sharp agent-tooling story, such as lint catching invented markup.
 
@@ -55,7 +55,7 @@ Optional cold open before the title: one or two large lines and optional code ch
 { "type": "hook", "lines": ["Agents write UI now.", "Most of it is guessed."], "chips": ["<nv-button>", "status=\"green\""] }
 ```
 
-### `feature` (default 4.5 seconds)
+### `feature` (default 5.4 seconds)
 
 One highlight. `layout` is `demo` (headline beside a rendered component), `split` (headline above code and the rendered component), or `code` (headline beside a code block). The composer picks `split` when both `html` and `code` are present.
 
@@ -81,7 +81,7 @@ One highlight. `layout` is `demo` (headline beside a rendered component), `split
   - `duration` (seconds) eases a numeric value from the previous one instead of jumping, which suits continuous motion such as panning or zooming a viewport. Components that animate their own changes, such as a gauge, don't need it.
   - `style` with an optional `unit` sets an inline custom property on a native wrapper, for example `{ "at": 1.4, "target": "#hand", "style": "--hand-x", "value": 150, "unit": "px", "duration": 1.1 }`. Use it to move a pointer or hand icon that demonstrates a gesture, and keep that wrapper's position driven by the property.
 
-### `terminal` (default 4.5 seconds)
+### `terminal` (default 5.4 seconds)
 
 A headline beside an agent terminal that types commands and prints output. Use it for CLI and MCP features.
 
@@ -100,7 +100,7 @@ A headline beside an agent terminal that types commands and prints output. Use i
 
 `tone` is `hl`, `ok`, or `bad`. `stats` count up beneath the opening line. The composer warns when typing runs past the scene; trim output rather than speeding it up.
 
-### `fix` (default 5.5 seconds)
+### `fix` (default 6.6 seconds)
 
 Lint catching problems and the agent fixing them in place. This is the strongest scene for lint and validation features.
 
@@ -123,7 +123,7 @@ Lint catching problems and the agent fixing them in place. This is the strongest
 
 Each line is a string or an array of strings and `{ bad, good, level }` swaps. Swaps get a squiggle, then shrink and grow into the fix; widths are exact because the editor uses a fixed-width font. `good` may be empty to show a removal. Optional `html` renders the fixed result after the pass message.
 
-### `list` (default 3.5 seconds)
+### `list` (default 4.2 seconds)
 
 Rapid-fire secondary changes as stamped cards, two to four items. Items take `icon` (an `nve-icon` name) or `stat` (`{ prefix, value, suffix, decimals }`, which counts up), plus `text`.
 
@@ -131,7 +131,7 @@ Rapid-fire secondary changes as stamped cards, two to four items. Items take `ic
 { "type": "list", "headline": "Also in August", "items": [{ "stat": { "prefix": "−", "value": 22, "suffix": "%" }, "text": "Core JavaScript" }] }
 ```
 
-### `end` (default 3.5 seconds)
+### `end` (default 4.2 seconds)
 
 Logo, headline (defaults to “NVIDIA Elements”), a call to read the post, the post URL, and optional `command` and `packages` tags.
 
@@ -141,16 +141,16 @@ Logo, headline (defaults to “NVIDIA Elements”), a call to read the post, the
 
 ## Timing budget
 
-The composer rejects videos outside 20–30 seconds. A typical month:
+The composer rejects videos outside 24–36 seconds. Scene defaults hold each view 20% longer than the earlier pacing. Entrance animations, typing, and cue offsets keep their normal speed, giving viewers more time to read the completed content before the next transition. A typical month:
 
-| Scene                                 | Seconds    |
-| ------------------------------------- | ---------- |
-| `title`                               | 3          |
-| 2–4 × `feature`, `terminal`, or `fix` | 4–5.5 each |
-| `list`                                | 3.5        |
-| `end`                                 | 3.5        |
+| Scene                                 | Seconds      |
+| ------------------------------------- | ------------ |
+| `title`                               | 3.6          |
+| 2–4 × `feature`, `terminal`, or `fix` | 4.8–6.6 each |
+| `list`                                | 4.2          |
+| `end`                                 | 4.2          |
 
-A viewer needs about 1.5 seconds to read a headline and 2 more to take in a demo, so a feature under 4 seconds feels rushed. If the month has more than four headline changes, move the rest into the `list` scene rather than shortening scenes.
+Allow at least 4.8 seconds for a feature and check that its completed content stays visible long enough to read. If the month has more than four headline changes, move the rest into the `list` scene rather than shortening scenes. When revising older pacing, multiply each existing scene duration by 1.2, including explicit `duration` overrides. Update snapshot times from the recomposed scene starts; select the same completed demo state within each scene.
 
 ## Copy rules
 
@@ -173,7 +173,7 @@ Demo markup follows the `elements` skill: look up every tag, attribute, and valu
 - Badges inside grid cells need `container="flat"`.
 - `container="full"` is valid only at the template root or directly inside `nve-page`.
 - Wrap long attributes onto new lines in `code` so no line exceeds 52 characters in `split` and 64 in `code`; the composer warns otherwise.
-- Playwright’s bundled Chromium cannot decode H.264 video. For `<video>` demos, render with `--channel chrome` (an installed Google Chrome decodes H.264), or set `poster` to an existing still, either from `projects/site/public/static/` or saved into the working directory and referenced as `poster="/__video/<file>.jpg"`.
+- Playwright’s bundled Chromium cannot decode H.264 video. For `<video>` demos, render with `--channel chrome` (an installed Google Chrome decodes H.264), or set `poster` to an existing still, either from `projects/site/public/static/` or saved into the working directory and referenced as `poster="/__video/<file>.webp"`.
 
 - The renderer serves `/static/…` from `projects/site/public/static/` and `/__video/…` from the storyboard’s working directory.
 
@@ -197,3 +197,5 @@ Check every still from `render-video.js --stills`:
 - Code blocks show all lines without horizontal scrolling.
 - Terminal typing and fix swaps finish before the scene fades.
 - The end card shows the correct month and post URL.
+
+For each feature snapshot selected for the monthly post, also check that it shows the relevant demo state or completed command result, makes sense without playback, and remains readable at the post's content width. Publish snapshots only from `feature`, `terminal`, and `fix` scenes, using `render-video.js --stills <times> --snapshots`. Review `list` scenes such as “Also in …” for the video; the post covers their smaller updates in Markdown text. Match each published image to the paragraph explaining its contents.

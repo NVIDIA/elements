@@ -25,7 +25,7 @@
       "tag": "@nvidia-elements/core",
       "headline": "A new standard icon set",
       "lede": "Lucide artwork by default. Every nve-icon name stays the same.",
-      "duration": 4,
+      "duration": 4.8,
       "html": "<div nve-layout=\"grid gap:lg span-items:2\"><div class=\"pop\" style=\"--at: +0.70s\"><nve-icon name=\"terminal\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.76s\"><nve-icon name=\"server-stack\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.82s\"><nve-icon name=\"chip\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.88s\"><nve-icon name=\"sparkles\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +0.94s\"><nve-icon name=\"rocketship\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.00s\"><nve-icon name=\"sensor\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.06s\"><nve-icon name=\"cloud\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.12s\"><nve-icon name=\"lightning-bolt\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.18s\"><nve-icon name=\"chart-bar\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.24s\"><nve-icon name=\"globe\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.30s\"><nve-icon name=\"lock\" size=\"xl\"></nve-icon></div><div class=\"pop\" style=\"--at: +1.36s\"><nve-icon name=\"layers\" size=\"xl\"></nve-icon></div></div>",
       "zoom": 1.8
     },
@@ -34,7 +34,7 @@
       "layout": "split",
       "tag": "Format Bytes and Format Truncate",
       "headline": "Operational data, readable",
-      "duration": 4.5,
+      "duration": 5.4,
       "code": {
         "language": "html",
         "source": "<nve-format-bytes\n  display=\"binary\"\n  unit-display=\"long\">1048576</nve-format-bytes>\n\n<nve-format-truncate\n  position=\"center\"\n  strategy=\"path\"\n  preserve=\"2\">\n  /models/checkpoints/production/model.bin\n</nve-format-truncate>"
@@ -61,7 +61,7 @@
       "tag": "New: @nvidia-elements/media 1.0.0",
       "headline": "Complete media controls",
       "lede": "Compose Elements controls around your own video or audio element.",
-      "duration": 4.5,
+      "duration": 5.4,
       "html": "<div nve-layout=\"column gap:sm\"><nve-media-controller id=\"aug-media\"><video id=\"aug-video\" src=\"/static/video/particle.mp4\" playsinline muted width=\"600\"></video></nve-media-controller><nve-media-time-range commandfor=\"aug-media\" name=\"currentTime\"></nve-media-time-range><div nve-layout=\"row gap:xs align:vertical-center\"><nve-media-pause-button commandfor=\"aug-media\" name=\"paused\" checked value=\"true\"></nve-media-pause-button><nve-media-volume-range commandfor=\"aug-media\" name=\"volume\"></nve-media-volume-range></div></div>",
       "cues": []
     },
@@ -70,7 +70,7 @@
       "headline": "Validation before release",
       "lede": "New rules flag misplaced full-width containers and too many primary actions.",
       "file": "toolbar.html",
-      "duration": 5,
+      "duration": 6,
       "lines": [
         "<nve-card>",
         [

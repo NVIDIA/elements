@@ -14,7 +14,7 @@ export function getReleaseVideo(data = {}) {
   if (!existsSync(new URL(`${slug}.webm`, RELEASES_DIR))) return null;
 
   const missing = [
-    !existsSync(new URL(`${slug}.jpg`, RELEASES_DIR)) && `${slug}.jpg poster`,
+    !existsSync(new URL(`${slug}.webp`, RELEASES_DIR)) && `${slug}.webp poster`,
     !data.videoSummary?.trim() && 'videoSummary',
     !data.videoPublishedAt && 'videoPublishedAt',
     !data.videoDuration && 'videoDuration'
@@ -31,7 +31,7 @@ export function getReleaseVideo(data = {}) {
     month
   );
   const videoPath = `/static/video/releases/${slug}.webm`;
-  const posterPath = `/static/video/releases/${slug}.jpg`;
+  const posterPath = `/static/video/releases/${slug}.webp`;
 
   return {
     slug,

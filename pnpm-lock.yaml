@@ -457,6 +457,9 @@ importers:
       semantic-release-replace-plugin:
         specifier: 1.2.7
         version: 1.2.7(semantic-release@25.0.9(supports-color@10.2.2)(typescript@7.0.2))
+      sharp:
+        specifier: 0.35.4
+        version: 0.35.4(@types/node@26.5.0)
       wireit:
         specifier: 0.14.13
         version: 0.14.13
@@ -16387,8 +16390,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.35.4':
     optionalDependencies:
@@ -26680,7 +26682,6 @@ snapshots:
       '@img/sharp-win32-ia32': 0.35.4
       '@img/sharp-win32-x64': 0.35.4
       '@types/node': 26.5.0
-    optional: true
 
   shebang-command@2.0.0:
     dependencies:

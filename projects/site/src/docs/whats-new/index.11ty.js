@@ -33,7 +33,12 @@ export function render(data) {
 
 <div nve-layout="row full align:space-between align:vertical-center">
   <p nve-text="heading muted">Follow the latest NVIDIA Elements features, fixes, and package releases.</p>
-  ${renderUpdatesFeedLink()}
+  <div nve-layout="row gap:none">
+    <nve-button container="flat">
+      <a href="https://github.com/NVIDIA/elements" target="_blank" rel="noopener">Star on GitHub <nve-icon name="arrow-angle" size="sm"></nve-icon></a>
+    </nve-button>
+    ${renderUpdatesFeedLink()}
+  </div>
 </div>
 
 <section nve-layout="grid span-items:12 &md|span-items:6 gap:md align:vertical-stretch">

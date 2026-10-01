@@ -128,7 +128,7 @@
       
     </style>
     <script type="module">
-      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.0/dist/bundles/index.min.js';
+      import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/core@2.11.1/dist/bundles/index.min.js';
       import 'https://cdn.jsdelivr.net/npm/@nvidia-elements/code@2.1.0/dist/bundles/index.js';
     </script>
     
@@ -145,8 +145,8 @@
             </defs>
             <rect width="1280" height="720" fill="url(#dots)" opacity=".5"></rect>
           </svg>
-                    <!-- 1. title: 0.00s to 3.00s -->
-          <section class="scene" style="--in: 0s; --out: 3s">
+                    <!-- 1. title: 0.00s to 3.60s -->
+          <section class="scene" style="--in: 0s; --out: 3.6s">
 <div nve-layout="column gap:lg align:center full:height">
       <div class="stamp" style="--at: 0.1s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
       <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 0.2s">What’s new in NVIDIA Elements</span></span></p>
@@ -155,80 +155,80 @@
     </div>
           </section>
 
-          <!-- 2. feature: 3.00s to 8.00s -->
-          <section class="scene" style="--in: 3s; --out: 8s">
+          <!-- 2. feature: 3.60s to 9.60s -->
+          <section class="scene" style="--in: 3.6s; --out: 9.6s">
 <div nve-layout="grid gap:xxl align:vertical-center full:height">
-      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 3.05s"><nve-tag readonly>New: nve-viewport</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.1s">Pan</span></span> <span class="mask"><span class="word" style="--at: 3.17s">and</span></span> <span class="mask"><span class="word" style="--at: 3.24s">zoom</span></span> <span class="mask"><span class="word" style="--at: 3.31s">anything</span></span></h2><p class="lede rise" style="--at: 3.45s">One surface for diagrams, graphs, and maps, with grid lines and a minimap.</p></div>
-      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 3.6s"><div><div class="pop" style="--at: 3.6s"><nve-viewport id="sep-viewport" x="-50" y="-33" scale="0.6" behavior-pan behavior-zoom style="width: 600px; height: 400px"><nve-viewport-gridlines></nve-viewport-gridlines><svg role="img" aria-label="Three geometric forms in a spatial field" width="900" height="600" viewBox="0 0 900 600" style="position: absolute; left: 0; top: 0"><circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle><rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect><path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path></svg><nve-viewport-minimap></nve-viewport-minimap><div id="sep-hand" slot="overlay" style="--hand-x: 300px; --hand-y: 290px; --hand-o: 0; position: absolute; left: 0; top: 0; translate: var(--hand-x) var(--hand-y); opacity: var(--hand-o)"><nve-icon name="hand" size="xl"></nve-icon></div></nve-viewport></div></div></div></div>
+      <div class="cell" nve-layout="column gap:lg span:5"><div class="pop" style="--at: 3.65s"><nve-tag readonly>New: nve-viewport</nve-tag></div><h2 class="mega"><span class="mask"><span class="word" style="--at: 3.7s">Pan</span></span> <span class="mask"><span class="word" style="--at: 3.77s">and</span></span> <span class="mask"><span class="word" style="--at: 3.84s">zoom</span></span> <span class="mask"><span class="word" style="--at: 3.91s">anything</span></span></h2><p class="lede rise" style="--at: 4.05s">One surface for diagrams, graphs, and maps, with grid lines and a minimap.</p></div>
+      <div class="cell" nve-layout="span:7"><div class="demo rise" style="--at: 4.2s"><div><div class="pop" style="--at: 4.2s"><nve-viewport id="sep-viewport" x="-50" y="-33" scale="0.6" behavior-pan behavior-zoom style="width: 600px; height: 400px"><nve-viewport-gridlines></nve-viewport-gridlines><svg role="img" aria-label="Three geometric forms in a spatial field" width="900" height="600" viewBox="0 0 900 600" style="position: absolute; left: 0; top: 0"><circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle><rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect><path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path></svg><nve-viewport-minimap></nve-viewport-minimap><div id="sep-hand" slot="overlay" style="--hand-x: 300px; --hand-y: 290px; --hand-o: 0; position: absolute; left: 0; top: 0; translate: var(--hand-x) var(--hand-y); opacity: var(--hand-o)"><nve-icon name="hand" size="xl"></nve-icon></div></nve-viewport></div></div></div></div>
     </div>
           </section>
 
-          <!-- 3. terminal: 8.00s to 12.50s -->
-          <section class="scene" style="--in: 8s; --out: 12.5s">
+          <!-- 3. terminal: 9.60s to 15.00s -->
+          <section class="scene" style="--in: 9.6s; --out: 15s">
 <div nve-layout="grid gap:xxl align:vertical-center full:height">
-      <div class="cell" nve-layout="column gap:lg span:5"><h2 class="mega"><span class="mask"><span class="word" style="--at: 8.1s">Elements</span></span> <span class="mask"><span class="word" style="--at: 8.17s">tools,</span></span> <span class="mask"><span class="word" style="--at: 8.24s">native</span></span> <span class="mask"><span class="word" style="--at: 8.31s">in</span></span> <span class="mask"><span class="word" style="--at: 8.38s">Pi</span></span></h2><p class="lede rise" style="--at: 8.45s">Elements APIs, examples, tokens, and validation for Pi agents.</p></div>
-      <div class="rise cell" style="--at: 8.3s" nve-layout="span:7">
+      <div class="cell" nve-layout="column gap:lg span:5"><h2 class="mega"><span class="mask"><span class="word" style="--at: 9.7s">Elements</span></span> <span class="mask"><span class="word" style="--at: 9.77s">tools,</span></span> <span class="mask"><span class="word" style="--at: 9.84s">native</span></span> <span class="mask"><span class="word" style="--at: 9.91s">in</span></span> <span class="mask"><span class="word" style="--at: 9.98s">Pi</span></span></h2><p class="lede rise" style="--at: 10.05s">Elements APIs, examples, tokens, and validation for Pi agents.</p></div>
+      <div class="rise cell" style="--at: 9.9s" nve-layout="span:7">
         <nve-card>
           <nve-card-header><div nve-layout="row gap:xs align:vertical-center"><nve-dot status="danger" size="sm"></nve-dot><nve-dot status="warning" size="sm"></nve-dot><nve-dot status="success" size="sm"></nve-dot><span nve-text="label sm muted">pi</span></div></nve-card-header>
-          <nve-card-content><div class="term"><span class="rise" style="--at: 8.6s"><span class="prompt">$ </span><span class="cmd type" style="--at: 8.6s; --dur: 0.9s; --steps: 37">pi install -l npm:@nvidia-elements/pi</span></span>
-<span class="out rise" style="--at: 9.7s">Installing npm:@nvidia-elements/pi...</span>
-<span class="out rise" style="--at: 9.82s">added 246 packages, and audited 247 packages in 8s</span>
-<span class="out rise" style="--at: 9.94s"><span class="ok">Installed npm:@nvidia-elements/pi</span></span>
-<span class="rise" style="--at: 10.41s"><span class="prompt">$ </span><span class="caret"></span></span></div></nve-card-content>
+          <nve-card-content><div class="term"><span class="rise" style="--at: 10.2s"><span class="prompt">$ </span><span class="cmd type" style="--at: 10.2s; --dur: 0.9s; --steps: 37">pi install -l npm:@nvidia-elements/pi</span></span>
+<span class="out rise" style="--at: 11.3s">Installing npm:@nvidia-elements/pi...</span>
+<span class="out rise" style="--at: 11.42s">added 246 packages, and audited 247 packages in 8s</span>
+<span class="out rise" style="--at: 11.54s"><span class="ok">Installed npm:@nvidia-elements/pi</span></span>
+<span class="rise" style="--at: 12.01s"><span class="prompt">$ </span><span class="caret"></span></span></div></nve-card-content>
         </nve-card>
       </div>
     </div>
           </section>
 
-          <!-- 4. fix: 12.50s to 18.00s -->
-          <section class="scene" style="--in: 12.5s; --out: 18s">
+          <!-- 4. fix: 15.00s to 21.60s -->
+          <section class="scene" style="--in: 15s; --out: 21.6s">
 <div nve-layout="column gap:xl full:height">
       <div nve-layout="row gap:xl align:vertical-center align:space-between">
-        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 12.6s">Catch</span></span> <span class="mask"><span class="word" style="--at: 12.67s">misplaced</span></span> <span class="mask"><span class="word" style="--at: 12.74s">markup</span></span></h2><p class="lede rise" style="--at: 12.95s">New rules flag invalid slotted children and misplaced page headers.</p></div>
+        <div nve-layout="column gap:md"><h2 class="mega"><span class="mask"><span class="word" style="--at: 15.1s">Catch</span></span> <span class="mask"><span class="word" style="--at: 15.17s">misplaced</span></span> <span class="mask"><span class="word" style="--at: 15.24s">markup</span></span></h2><p class="lede rise" style="--at: 15.45s">New rules flag invalid slotted children and misplaced page headers.</p></div>
         <div class="stack">
-          <div class="win" style="--at: 13.7s; --until: 16.2s" nve-layout="column gap:xs align:right"><span class="count bad">2 problems</span><span class="stat-label">2 errors</span></div>
-          <div class="win" style="--at: 16.4s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
+          <div class="win" style="--at: 16.2s; --until: 18.95s" nve-layout="column gap:xs align:right"><span class="count bad">2 problems</span><span class="stat-label">2 errors</span></div>
+          <div class="win" style="--at: 19.15s" nve-layout="column gap:xs align:right"><span class="count ok">0 problems</span><span class="stat-label">Validation passed</span></div>
         </div>
       </div>
       <div nve-layout="grid gap:xl">
-        <div class="rise cell" style="--at: 12.9s" nve-layout="span:7">
+        <div class="rise cell" style="--at: 15.4s" nve-layout="span:7">
           <nve-card>
             <nve-card-header><div nve-layout="row gap:sm align:vertical-center align:space-between"><span nve-text="label muted">clusters.html</span><code nve-text="code">nve api.validate clusters.html</code></div></nve-card-header>
-            <nve-card-content><div class="editor"><div class="scan" style="--at: 13.4s"></div><span class="ln">1</span>&lt;<span class="tk-t">nve-page</span>&gt;
-<span class="ln">2</span>  &lt;<span class="swap" style="--at: 13.7s; --fix: 15.5s; --wb: 15; --wg: 29"><span class="bad">nve-page-header</span><span class="good">nve-page-header <span class="tk-a">slot</span>=<span class="tk-s">&quot;header&quot;</span></span></span>&gt;
+            <nve-card-content><div class="editor"><div class="scan" style="--at: 15.9s"></div><span class="ln">1</span>&lt;<span class="tk-t">nve-page</span>&gt;
+<span class="ln">2</span>  &lt;<span class="swap" style="--at: 16.2s; --fix: 18s; --wb: 15; --wg: 29"><span class="bad">nve-page-header</span><span class="good">nve-page-header <span class="tk-a">slot</span>=<span class="tk-s">&quot;header&quot;</span></span></span>&gt;
 <span class="ln">3</span>    &lt;<span class="tk-t">h2</span> <span class="tk-a">slot</span>=<span class="tk-s">&quot;prefix&quot;</span> <span class="tk-a">nve-text</span>=<span class="tk-s">&quot;heading&quot;</span>&gt;Clusters&lt;/<span class="tk-t">h2</span>&gt;
 <span class="ln">4</span>  &lt;/<span class="tk-t">nve-page-header</span>&gt;
 <span class="ln">5</span>  &lt;<span class="tk-t">nve-menu</span>&gt;
-<span class="ln">6</span>    <span class="swap" style="--at: 13.95s; --fix: 15.75s; --wb: 19; --wg: 39"><span class="bad">&lt;<span class="tk-t">div</span>&gt;Settings&lt;/<span class="tk-t">div</span>&gt;</span><span class="good">&lt;<span class="tk-t">nve-menu-item</span>&gt;Settings&lt;/<span class="tk-t">nve-menu-item</span>&gt;</span></span>
+<span class="ln">6</span>    <span class="swap" style="--at: 16.45s; --fix: 18.25s; --wb: 19; --wg: 39"><span class="bad">&lt;<span class="tk-t">div</span>&gt;Settings&lt;/<span class="tk-t">div</span>&gt;</span><span class="good">&lt;<span class="tk-t">nve-menu-item</span>&gt;Settings&lt;/<span class="tk-t">nve-menu-item</span>&gt;</span></span>
 <span class="ln">7</span>  &lt;/<span class="tk-t">nve-menu</span>&gt;
 <span class="ln">8</span>&lt;/<span class="tk-t">nve-page</span>&gt;</div></nve-card-content>
           </nve-card>
         </div>
         <div class="stack cell" nve-layout="span:5">
-          <div class="win" style="--at: 13.7s; --until: 16.2s" nve-layout="column gap:sm"><div class="rise" style="--at: 13.8s"><nve-alert status="danger"><span nve-text="label sm">2:3 no-invalid-page-header-slot</span> &lt;nve-page-header&gt; must use slot=&quot;header&quot; in &lt;nve-page&gt;.</nve-alert></div><div class="rise" style="--at: 14.05s"><nve-alert status="danger"><span nve-text="label sm">6:5 no-invalid-slotted-elements</span> Invalid direct child &lt;div&gt; in &lt;nve-menu&gt;.</nve-alert></div></div>
-          <div class="win" style="--at: 16.4s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert></div>
+          <div class="win" style="--at: 16.2s; --until: 18.95s" nve-layout="column gap:sm"><div class="rise" style="--at: 16.3s"><nve-alert status="danger"><span nve-text="label sm">2:3 no-invalid-page-header-slot</span> &lt;nve-page-header&gt; must use slot=&quot;header&quot; in &lt;nve-page&gt;.</nve-alert></div><div class="rise" style="--at: 16.55s"><nve-alert status="danger"><span nve-text="label sm">6:5 no-invalid-slotted-elements</span> Invalid direct child &lt;div&gt; in &lt;nve-menu&gt;.</nve-alert></div></div>
+          <div class="win" style="--at: 19.15s" nve-layout="column gap:md"><nve-alert status="success">Validation passed. 1 file, 0 errors, 0 warnings.</nve-alert></div>
         </div>
       </div>
     </div>
           </section>
 
-          <!-- 5. list: 18.00s to 21.50s -->
-          <section class="scene" style="--in: 18s; --out: 21.5s">
+          <!-- 5. list: 21.60s to 25.80s -->
+          <section class="scene" style="--in: 21.6s; --out: 25.8s">
 <div nve-layout="column gap:xl align:vertical-center full:height">
-      <h2 class="mega"><span class="mask"><span class="word" style="--at: 18.1s">Also</span></span> <span class="mask"><span class="word" style="--at: 18.17s">in</span></span> <span class="mask"><span class="word" style="--at: 18.24s">September</span></span></h2>
-      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 18.5s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="menu" size="lg"></nve-icon><span nve-text="label lg">Collapsible menu groups</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.68s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="bell" size="lg"></nve-icon><span nve-text="label lg">Solid icon artwork</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 18.86s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="tag" size="lg"></nve-icon><span nve-text="label lg">Tag prefix and suffix slots</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 19.04s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="markdown" size="lg"></nve-icon><span nve-text="label lg">Markdown linting</span></div></nve-card-content></nve-card></div></div>
+      <h2 class="mega"><span class="mask"><span class="word" style="--at: 21.7s">Also</span></span> <span class="mask"><span class="word" style="--at: 21.77s">in</span></span> <span class="mask"><span class="word" style="--at: 21.84s">September</span></span></h2>
+      <div nve-layout="grid gap:lg span-items:3 align:vertical-stretch"><div class="stamp" style="--at: 22.1s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="menu" size="lg"></nve-icon><span nve-text="label lg">Collapsible menu groups</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.28s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="bell" size="lg"></nve-icon><span nve-text="label lg">Solid icon artwork</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.46s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="tag" size="lg"></nve-icon><span nve-text="label lg">Tag prefix and suffix slots</span></div></nve-card-content></nve-card></div><div class="stamp" style="--at: 22.64s" nve-layout="column align:stretch"><nve-card><nve-card-content><div nve-layout="column gap:md"><nve-icon name="markdown" size="lg"></nve-icon><span nve-text="label lg">Markdown linting</span></div></nve-card-content></nve-card></div></div>
     </div>
           </section>
 
-          <!-- 6. end: 21.50s to 25.00s -->
-          <section class="scene" style="--in: 21.5s">
+          <!-- 6. end: 25.80s to 30.00s -->
+          <section class="scene" style="--in: 25.8s">
 <div nve-layout="column gap:lg align:center full:height">
-      <div class="stamp" style="--at: 21.6s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
-      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 21.7s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 21.77s">Elements</span></span></h2>
-      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 22.05s">Read the September 2026 update</span></span></p>
+      <div class="stamp" style="--at: 25.9s"><nve-logo size="lg" color="brand-green" aria-label="NVIDIA">NV</nve-logo></div>
+      <h2 class="hero" nve-text="center"><span class="mask"><span class="word" style="--at: 26s">NVIDIA</span></span> <span class="mask"><span class="word" style="--at: 26.07s">Elements</span></span></h2>
+      <p class="big dim" nve-text="center"><span class="mask"><span class="word" style="--at: 26.35s">Read the September 2026 update</span></span></p>
       
-      <span class="url rise" style="--at: 22.6s">nvidia.github.io/elements/docs/whats-new/09-2026/</span>
-      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 22.8s"><nve-tag readonly>cli 2.2.8</nve-tag></div><div class="pop" style="--at: 22.85s"><nve-tag readonly>code 2.1.0</nve-tag></div><div class="pop" style="--at: 22.9s"><nve-tag readonly>core 2.11.0</nve-tag></div><div class="pop" style="--at: 22.95s"><nve-tag readonly>lint 2.7.1</nve-tag></div><div class="pop" style="--at: 23s"><nve-tag readonly>media 1.0.1</nve-tag></div><div class="pop" style="--at: 23.05s"><nve-tag readonly>pi 1.0.0</nve-tag></div></div>
+      <span class="url rise" style="--at: 26.9s">nvidia.github.io/elements/docs/whats-new/09-2026/</span>
+      <div nve-layout="row gap:xs align:wrap align:horizontal-center"><div class="pop" style="--at: 27.1s"><nve-tag readonly>cli 2.2.8</nve-tag></div><div class="pop" style="--at: 27.15s"><nve-tag readonly>code 2.1.0</nve-tag></div><div class="pop" style="--at: 27.2s"><nve-tag readonly>core 2.11.0</nve-tag></div><div class="pop" style="--at: 27.25s"><nve-tag readonly>lint 2.7.1</nve-tag></div><div class="pop" style="--at: 27.3s"><nve-tag readonly>media 1.0.1</nve-tag></div><div class="pop" style="--at: 27.35s"><nve-tag readonly>pi 1.0.0</nve-tag></div></div>
     </div>
           </section>
         </div>
@@ -244,13 +244,13 @@
         container="flat"
         aria-label="Restart"></nve-icon-button>
       <nve-range fit-text>
-        <input type="range" id="scrub" min="0" max="25" step="0.05" value="0" aria-label="Timeline" />
+        <input type="range" id="scrub" min="0" max="30" step="0.05" value="0" aria-label="Timeline" />
       </nve-range>
       <span slot="suffix" nve-text="label sm muted nowrap" id="time">0:00</span>
     </nve-toolbar>
 
     <script type="application/json" id="timeline">
-      {"duration":25,"cues":[{"t":4.1,"target":"#sep-hand","kind":"style","name":"--hand-o","value":1,"duration":0.25},{"t":4.4,"target":"#sep-hand","kind":"style","name":"--hand-x","value":150,"duration":1.1,"unit":"px"},{"t":4.4,"target":"#sep-hand","kind":"style","name":"--hand-y","value":230,"duration":1.1,"unit":"px"},{"t":4.4,"target":"#sep-viewport","kind":"prop","name":"x","value":200,"duration":1.1},{"t":4.4,"target":"#sep-viewport","kind":"prop","name":"y","value":67,"duration":1.1},{"t":5.6,"target":"#sep-hand","kind":"style","name":"--hand-o","value":0,"duration":0.2},{"t":5.9,"target":"#sep-viewport","kind":"prop","name":"scale","value":1,"duration":1},{"t":5.9,"target":"#sep-viewport","kind":"prop","name":"x","value":400,"duration":1},{"t":5.9,"target":"#sep-viewport","kind":"prop","name":"y","value":200,"duration":1}],"counters":[],"poster":1.6}
+      {"duration":30,"cues":[{"t":4.7,"target":"#sep-hand","kind":"style","name":"--hand-o","value":1,"duration":0.25},{"t":5,"target":"#sep-hand","kind":"style","name":"--hand-x","value":150,"duration":1.1,"unit":"px"},{"t":5,"target":"#sep-hand","kind":"style","name":"--hand-y","value":230,"duration":1.1,"unit":"px"},{"t":5,"target":"#sep-viewport","kind":"prop","name":"x","value":200,"duration":1.1},{"t":5,"target":"#sep-viewport","kind":"prop","name":"y","value":67,"duration":1.1},{"t":6.2,"target":"#sep-hand","kind":"style","name":"--hand-o","value":0,"duration":0.2},{"t":6.5,"target":"#sep-viewport","kind":"prop","name":"scale","value":1,"duration":1},{"t":6.5,"target":"#sep-viewport","kind":"prop","name":"x","value":400,"duration":1},{"t":6.5,"target":"#sep-viewport","kind":"prop","name":"y","value":200,"duration":1}],"counters":[],"poster":1.6}
     </script>
     <script type="module">
       const { duration: DURATION, cues, counters, poster } = JSON.parse(document.getElementById('timeline').textContent);

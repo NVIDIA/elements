@@ -74,7 +74,7 @@ const outline = {
   },
   output: {
     video: `${VIDEO_DIR}/${month}.webm`,
-    poster: `${VIDEO_DIR}/${month}.jpg`,
+    poster: `${VIDEO_DIR}/${month}.webp`,
     publicUrl: `/static/video/releases/${month}.webm`,
     exists: existsSync(join(root, VIDEO_DIR, `${month}.webm`))
   },

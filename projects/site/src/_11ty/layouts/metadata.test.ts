@@ -413,18 +413,19 @@ describe('renderBaseHead', () => {
     const video = findNode(graph, 'VideoObject');
 
     expect(html).toContain(
-      '<meta property="og:image" content="https://nvidia.github.io/elements/static/video/releases/08-2026.jpg">'
+      '<meta property="og:image" content="https://nvidia.github.io/elements/static/video/releases/08-2026.webp">'
     );
     expect(html).toContain(
-      '<meta name="twitter:image" content="https://nvidia.github.io/elements/static/video/releases/08-2026.jpg">'
+      '<meta name="twitter:image" content="https://nvidia.github.io/elements/static/video/releases/08-2026.webp">'
     );
     expect(html).toContain('<meta property="og:image:width" content="1920">');
+    expect(html).toContain('<meta property="og:image:type" content="image/webp">');
     expect(video).toMatchObject({
       '@id': 'https://nvidia.github.io/elements/docs/whats-new/08-2026/#video',
       name: 'August 2026 NVIDIA Elements release highlights',
       description:
         'See the standard icon set, operational data formatting, media controls, and stronger template validation.',
-      thumbnailUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.jpg',
+      thumbnailUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webp',
       uploadDate: '2026-09-28T00:00:00.000Z',
       duration: 'PT28S',
       contentUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webm'

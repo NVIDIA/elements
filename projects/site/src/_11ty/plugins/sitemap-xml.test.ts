@@ -59,7 +59,7 @@ describe('isSitemapPageUrl', () => {
           '@graph': [
             {
               '@type': 'VideoObject',
-              thumbnailUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.jpg',
+              thumbnailUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webp',
               name: 'August 2026 NVIDIA Elements release highlights',
               description: 'Icons & media <release highlights>',
               contentUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webm'
@@ -71,7 +71,7 @@ describe('isSitemapPageUrl', () => {
 
     expect(sitemap).toContain('xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
     expect(sitemap).toContain(
-      '<video:thumbnail_loc>https://nvidia.github.io/elements/static/video/releases/08-2026.jpg</video:thumbnail_loc>'
+      '<video:thumbnail_loc>https://nvidia.github.io/elements/static/video/releases/08-2026.webp</video:thumbnail_loc>'
     );
     expect(sitemap).toContain('<video:description>Icons &amp; media &lt;release highlights&gt;</video:description>');
     expect(sitemap).toContain(

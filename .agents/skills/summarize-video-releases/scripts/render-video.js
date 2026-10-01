@@ -1,10 +1,13 @@
 #!/usr/bin/env node
-// Renders a composed video page to WebM (plus a poster JPG), or to review stills.
+// Renders a composed video page to WebM (plus a lossless WebP poster), or to WebP review stills.
 //
 //   # review stills at chosen times (seconds)
 //   node .agents/skills/summarize-video-releases/scripts/render-video.js --html <dir>/video.html --stills 1.5,6,11 --stills-dir <dir>/stills
 //
-//   # final render: projects/site/public/static/video/releases/08-2026.webm and .jpg
+//   # post snapshots: only feature, terminal, and fix scenes; skips "Also in ..." lists and cards
+//   node .agents/skills/summarize-video-releases/scripts/render-video.js --html <dir>/video.html --stills 6,11,20 --snapshots --stills-dir <dir>/snapshots
+//
+//   # final render: projects/site/public/static/video/releases/08-2026.webm and .webp
 //   node .agents/skills/summarize-video-releases/scripts/render-video.js --html <dir>/video.html --month 08-2026
 //
 // Elements CDN URLs in the page are served from this repository's built packages
@@ -14,12 +17,14 @@
 // Frames are captured on a virtual clock: CSS animations, component animations,
 // and transitions are all seeked to the frame time, so output is deterministic.
 // Encoding uses the browser's own WebCodecs VP9 encoder (libvpx, BSD-licensed and
-// royalty-free) and a built-in WebM muxer, so no external encoder is required.
+// royalty-free) and a built-in WebM muxer, so no external video encoder is required.
+// Sharp converts PNG screenshots to lossless WebP posters and stills.
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { basename, dirname, extname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
+import sharp from 'sharp';
 import { resolveAssetPath } from './asset-path.js';
 import { muxWebM } from './webm.js';
 
@@ -47,6 +52,7 @@ const { values } = parseArgs({
     out: { type: 'string' },
     poster: { type: 'string' },
     stills: { type: 'string' },
+    snapshots: { type: 'boolean', default: false },
     'stills-dir': { type: 'string' },
     fps: { type: 'string', default: '30' },
     quality: { type: 'string', default: '34' },
@@ -62,7 +68,7 @@ const root = resolve(values.root);
 if (!values.html) fail('Pass --html <composed video page>.');
 const htmlPath = resolve(values.html);
 const fps = Number(values.fps);
-const stills = values.stills
+let stills = values.stills
   ? values.stills
       .split(',')
       .map(Number)
@@ -70,10 +76,29 @@ const stills = values.stills
       .sort((a, b) => a - b)
   : null;
 const outPath = values.out ? resolve(values.out) : values.month ? join(root, VIDEO_DIR, `${values.month}.webm`) : null;
-const posterPath = values.poster ? resolve(values.poster) : outPath ? outPath.replace(/\.webm$/, '.jpg') : null;
+const posterPath = values.poster ? resolve(values.poster) : outPath ? outPath.replace(/\.webm$/, '.webp') : null;
 if (!stills && !outPath)
   fail('Pass --stills <times> for review, or --month MM-YYYY / --out <file.webm> for the final render.');
 if (outPath && !outPath.endsWith('.webm')) fail('The renderer writes WebM (VP9). Use a .webm output path.');
+if (posterPath && !posterPath.endsWith('.webp')) fail('The renderer writes WebP posters. Use a .webp poster path.');
+const skipped = [];
+if (values.snapshots) {
+  if (!stills) fail('Pass --stills <times> with --snapshots to export post images.');
+  // The composer saves scene types and timing in comments in the rendered HTML.
+  // Read those saved timings so snapshot selection matches the archived video page.
+  const scenes = [...readFileSync(htmlPath, 'utf8').matchAll(/<!-- \d+\. (\w+): ([\d.]+)s to ([\d.]+)s -->/g)].map(
+    ([, type, start, end]) => ({ type, start: Number(start), end: Number(end) })
+  );
+  if (!scenes.length) fail('No scene timings found. Compose the video page before exporting snapshots.');
+  stills = stills.filter(time => {
+    const scene = scenes.find(s => time >= s.start && time < s.end);
+    if (scene && ['feature', 'terminal', 'fix'].includes(scene.type)) return true;
+    skipped.push({ time, scene: scene?.type ?? null });
+    return false;
+  });
+  if (!stills.length)
+    fail('No feature, terminal, or fix scene times selected. List scenes and cards have no post snapshots.');
+}
 
 const packageDirs = mapPackages(root);
 const missingAssets = new Set();
@@ -194,21 +219,22 @@ if (stills) {
   for (let t = 0; next < stills.length && t <= info.duration + 1e-6; t += step) {
     await page.evaluate(time => window.__video.seek(time), t);
     while (next < stills.length && stills[next] <= t + step / 2) {
-      const file = join(dir, `still-${stills[next].toFixed(2)}.png`);
-      await page.screenshot({ path: file });
+      const file = join(dir, `still-${stills[next].toFixed(2)}.webp`);
+      await captureWebP(file);
       const overflow = await page.evaluate(() => window.__video.overflow());
       report.push({ time: stills[next], file, overflow });
       next++;
     }
   }
   process.stdout.write(
-    `${JSON.stringify({ stills: report, network: [...networkAssets], errors: pageErrors }, null, 2)}\n`
+    `${JSON.stringify({ stills: report, ...(values.snapshots ? { skipped } : {}), network: [...networkAssets], errors: pageErrors }, null, 2)}\n`
   );
   await finish(0);
 }
 
 /* ---------- final render ---------- */
 mkdirSync(dirname(outPath), { recursive: true });
+mkdirSync(dirname(posterPath), { recursive: true });
 const frames = Math.round(info.duration * fps);
 const posterFrame = Math.round(info.poster * fps);
 if (!Number.isFinite(fps) || fps <= 0 || !Number.isFinite(info.poster) || posterFrame < 0 || posterFrame >= frames) {
@@ -279,7 +305,7 @@ const started = Date.now();
 for (let i = 0; i < frames; i++) {
   await page.evaluate(time => window.__video.seek(time), i / fps);
   const frame = await page.screenshot({ type: 'jpeg', quality: 95 });
-  if (i === posterFrame && posterPath) writeFileSync(posterPath, await page.screenshot({ type: 'jpeg', quality: 85 }));
+  if (i === posterFrame && posterPath) await captureWebP(posterPath);
   const error = await encoderPage.evaluate(
     async ({ jpeg, i, fps, keyframeInterval }) => {
       const bytes = Uint8Array.from(atob(jpeg), c => c.charCodeAt(0));
@@ -314,6 +340,11 @@ process.stdout.write(
 await finish(0);
 
 /* ---------- helpers ---------- */
+async function captureWebP(file) {
+  const png = await page.screenshot({ type: 'png' });
+  writeFileSync(file, await sharp(png).webp({ lossless: true, effort: 6 }).toBuffer());
+}
+
 // Serve a CDN URL from the local build when a self-contained file exists: bundle paths
 // map directly, other subpaths go through the package "exports" map. Files that still
 // contain bare imports (for example "lit") cannot load in a browser without a bundler,
