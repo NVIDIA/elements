@@ -25,7 +25,7 @@ function canvasWithRect(rect: Partial<DOMRect> = {}): HTMLCanvasElement {
     y: 5,
     toJSON: () => ({}),
     ...rect
-  } as DOMRect);
+  });
   return canvas;
 }
 

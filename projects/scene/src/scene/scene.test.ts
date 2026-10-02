@@ -795,7 +795,7 @@ describe(Scene.metadata.tag, () => {
     const { element } = await createScene(html`<nve-scene aria-label="Scene"></nve-scene>`);
     appendSlottedParagraph(element, { slot: 'fallback', id: 'fallback', text: 'Scene unavailable.' });
     const errors: CustomEvent<SceneErrorDetail>[] = [];
-    element.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent<SceneErrorDetail>));
+    element.addEventListener('nve-scene-error', event => errors.push(event));
     const ready = element.ready;
 
     resolveAdapter(null);
@@ -857,7 +857,7 @@ describe(Scene.metadata.tag, () => {
     appendSlottedParagraph(element, { slot: 'fallback', id: 'recovery-fallback', text: 'Scene unavailable.' });
     const errorCodes: string[] = [];
     element.addEventListener('nve-scene-error', event => {
-      errorCodes.push((event as CustomEvent<SceneErrorDetail>).detail.code);
+      errorCodes.push(event.detail.code);
     });
     gpu.resolveNextDevice();
     const initialReady = element.ready;
@@ -1168,9 +1168,7 @@ describe(Scene.metadata.tag, () => {
     );
     if (!first || !second || !invalid) throw new Error('Expected camera behaviors.');
     const errors: string[] = [];
-    element.addEventListener('nve-scene-error', event =>
-      errors.push((event as CustomEvent<SceneErrorDetail>).detail.code)
-    );
+    element.addEventListener('nve-scene-error', event => errors.push(event.detail.code));
     gpu.resolveNextDevice();
     await element.ready;
     await waitForAnimationFrames(3);
@@ -1255,9 +1253,7 @@ describe(Scene.metadata.tag, () => {
       <nve-scene aria-label="Follow resolution"><nve-scene-camera behavior="follow" frame="robot" follow-mode="pose"></nve-scene-camera></nve-scene>
     `);
     const errors: string[] = [];
-    element.addEventListener('nve-scene-error', event =>
-      errors.push((event as CustomEvent<SceneErrorDetail>).detail.code)
-    );
+    element.addEventListener('nve-scene-error', event => errors.push(event.detail.code));
     gpu.resolveNextDevice();
     await element.ready;
     await waitForAnimationFrames(2);
@@ -2133,7 +2129,7 @@ function createManualMutationObserver(): MutationObserver {
     disconnect: () => undefined,
     observe: () => undefined,
     takeRecords: () => []
-  } as MutationObserver;
+  };
 }
 
 function notifyMutation(callback: MutationCallback | undefined, records: MutationRecord[]): void {
@@ -2163,7 +2159,7 @@ function createMutationRecord(options: {
     removedNodes: [] as unknown as NodeList,
     target: options.target,
     type: options.type
-  } as MutationRecord;
+  };
 }
 
 function createChildListMutation(target: Node, addedNodes: Node[]): MutationRecord {
@@ -2177,7 +2173,7 @@ function createChildListMutation(target: Node, addedNodes: Node[]): MutationReco
     removedNodes: [] as unknown as NodeList,
     target,
     type: 'childList'
-  } as MutationRecord;
+  };
 }
 
 function createModel(id: string, shape: ScenePart['shape']): SceneModel {

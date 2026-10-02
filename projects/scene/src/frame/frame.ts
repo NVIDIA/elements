@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement, type PropertyValues } from 'lit';
+import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { FRAME_TRANSFORM } from '../errors.js';
@@ -104,7 +104,7 @@ export class SceneFrame extends LitElement {
     }
   }
 
-  render() {
+  render(): TemplateResult<1> {
     return html`<slot></slot>`;
   }
 

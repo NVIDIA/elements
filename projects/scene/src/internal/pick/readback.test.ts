@@ -37,12 +37,9 @@ describe(PickReadback.name, () => {
       lost: new Promise<SceneGPUDeviceLostInfo>(() => undefined),
       queue: { submit: () => undefined }
     });
-    const onPixel = vi.fn();
-
     const result = readback.copy({
       encoder,
       frame: { decodeTarget: id => (id === 1 ? { value: 'first' } : undefined), inverseViewProjection: identityMat4() },
-      onPixel,
       pixel: { x: 3, y: 4 },
       size: { height: 10, width: 10 },
       textures: { depth: texture, id: texture }
@@ -54,7 +51,6 @@ describe(PickReadback.name, () => {
     const mapped = await result;
     expect(mapped?.target).toEqual({ value: 'first' });
     expect(mapped?.worldPosition).toEqual(expect.arrayContaining([expect.closeTo(-0.3), expect.closeTo(0.1), 0.5]));
-    expect(onPixel).toHaveBeenCalledWith({ depth: 0.5, id: 1 });
     expect(buffer.unmap).toHaveBeenCalledOnce();
     expect(buffer.destroy).not.toHaveBeenCalled();
 

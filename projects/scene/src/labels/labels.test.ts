@@ -52,7 +52,7 @@ describe(SceneLabels.metadata.tag, () => {
     fixture = await createFixture(html`<nve-scene-labels></nve-scene-labels>`);
     const layer = required(fixture.querySelector<SceneLabels>(SceneLabels.metadata.tag), 'Expected labels fixture.');
     const errors: SceneErrorDetail[] = [];
-    layer.addEventListener('nve-scene-error', event => errors.push((event as CustomEvent<SceneErrorDetail>).detail));
+    layer.addEventListener('nve-scene-error', event => errors.push(event.detail));
     layer.append(document.createElement('span'));
     await elementIsStable(layer);
     expect(errors.at(-1)).toMatchObject({ code: LAYER_CHILD, element: layer, severity: 'error' });

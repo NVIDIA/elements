@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { LayoutDescriptor } from './layouts/define-layout.js';
 import type { LineTopology, LineWidthUnit } from './lines/data.js';
@@ -82,7 +82,7 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
   }
 
   /** Internal renderer seam; it drains pending upload ranges. */
-  render() {
+  render(): TemplateResult<1> {
     return html`<slot @slotchange=${this.#handleSlotChange}></slot>`;
   }
 

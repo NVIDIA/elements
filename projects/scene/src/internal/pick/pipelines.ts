@@ -9,6 +9,7 @@ import type {
   SceneGPUVertexBufferLayout
 } from '../../internal/gpu/platform.js';
 import { LINE_PICK_SHADER, createPointShader, createTriangleShader } from '../rendering/stream-pipelines.js';
+import { MARKER_VERTEX_LAYOUTS, MESH_VERTEX_LAYOUTS, OUTLINE_VERTEX_LAYOUTS } from '../rendering/vertex-layouts.js';
 
 export interface PickPipelines {
   readonly line: PickPipelinePair;
@@ -37,13 +38,13 @@ export function createPickPipelines(device: SceneGPURenderPipelineDevice): PickP
   return {
     line: createPair(device, { code: LINE_PICK_SHADER }),
     marker: createPair(device, {
-      buffers: markerVertexBuffers(),
+      buffers: MARKER_VERTEX_LAYOUTS,
       code: createMarkerShader({ pass: 'pick' }),
       cullMode: 'back'
     }),
     mesh: createMeshPair(device),
     outline: createPair(device, {
-      buffers: [{ arrayStride: 12, attributes: [{ shaderLocation: 0, offset: 0, format: 'float32x3' }] }],
+      buffers: OUTLINE_VERTEX_LAYOUTS,
       code: createOutlineShader({ pass: 'pick' }),
       depthCompare: 'less-equal',
       topology: 'line-list'
@@ -66,18 +67,6 @@ function createPair(device: SceneGPURenderPipelineDevice, options: PickPipelineO
   return { opaque: pipeline, transparent: pipeline };
 }
 
-function markerVertexBuffers(): readonly SceneGPUVertexBufferLayout[] {
-  return [
-    {
-      arrayStride: 24,
-      attributes: [
-        { shaderLocation: 0, offset: 0, format: 'float32x3' },
-        { shaderLocation: 1, offset: 12, format: 'float32x3' }
-      ]
-    }
-  ];
-}
-
 function createMeshPair(device: SceneGPURenderPipelineDevice): PickPipelinePair {
   const module = device.createShaderModule({ code: createMeshShader({ pass: 'pick' }) });
   const pipeline = device.createRenderPipeline({
@@ -85,12 +74,7 @@ function createMeshPair(device: SceneGPURenderPipelineDevice): PickPipelinePair 
     vertex: {
       module,
       entryPoint: 'vertexMain',
-      buffers: [
-        { arrayStride: 12, attributes: [{ shaderLocation: 0, offset: 0, format: 'float32x3' }] },
-        { arrayStride: 12, attributes: [{ shaderLocation: 1, offset: 0, format: 'float32x3' }] },
-        { arrayStride: 8, attributes: [{ shaderLocation: 2, offset: 0, format: 'float32x2' }] },
-        { arrayStride: 16, attributes: [{ shaderLocation: 3, offset: 0, format: 'float32x4' }] }
-      ]
+      buffers: MESH_VERTEX_LAYOUTS
     },
     fragment: { module, entryPoint: 'fragmentMain', targets: [{ format: 'rgba8uint' }, { format: 'r32float' }] },
     primitive: { topology: 'triangle-list', frontFace: 'ccw', cullMode: 'back' },

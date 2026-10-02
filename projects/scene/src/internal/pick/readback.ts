@@ -15,7 +15,7 @@ interface PickFrame<T> {
   readonly inverseViewProjection: Matrix4;
 }
 
-export interface PickPixel {
+interface PickPixel {
   readonly depth: number;
   /** ID zero means that no geometry covered the pixel. */
   readonly id: number;
@@ -26,7 +26,7 @@ interface PickPixelResult<T> {
   readonly worldPosition: Vec3;
 }
 
-export interface PickReadbackDevice extends SceneGPUDevice {
+interface PickReadbackDevice extends SceneGPUDevice {
   createBuffer(descriptor: { size: number; usage: number }): SceneGPUBuffer;
 }
 
@@ -67,8 +67,6 @@ export class PickReadback<T> {
     readonly pixel: { readonly x: number; readonly y: number };
     readonly size: { readonly height: number; readonly width: number };
     readonly textures: { readonly depth: SceneGPUTexture; readonly id: SceneGPUTexture };
-    /** Receives the completed raw ID/depth sample before target decoding. */
-    readonly onPixel?: (pixel: PickPixel) => void;
   }): Promise<PickPixelResult<T> | null> {
     const { encoder, frame, pixel, size, textures } = options;
     const copy = encoder.copyTextureToBuffer;
@@ -94,24 +92,22 @@ export class PickReadback<T> {
     // Mapping before the caller submits the encoder leaves the buffer mapped
     // during submit, which WebGPU rejects. A microtask lets the caller submit
     // the recorded copies before mapAsync begins without waiting for GPU work.
-    return Promise.resolve().then(() => this.#map({ buffer, frame, onPixel: options.onPixel, pixel, size }));
+    return Promise.resolve().then(() => this.#map({ buffer, frame, pixel, size }));
   }
 
   async #map(options: {
     readonly buffer: SceneGPUBuffer;
     readonly frame: PickFrame<T>;
-    readonly onPixel?: (pixel: PickPixel) => void;
     readonly pixel: { readonly x: number; readonly y: number };
     readonly size: { readonly height: number; readonly width: number };
   }): Promise<PickPixelResult<T> | null> {
-    const { buffer, frame, onPixel, pixel, size } = options;
+    const { buffer, frame, pixel, size } = options;
     let reusable = false;
     try {
       if (!buffer.mapAsync || !buffer.getMappedRange) return null;
       await buffer.mapAsync(MAP_READ);
       const bytes = new Uint8Array(buffer.getMappedRange());
       const sample = decodePickPixel(bytes);
-      onPixel?.(sample);
       const target = sample.id === 0 ? undefined : frame.decodeTarget(sample.id);
       const result =
         target === undefined || !Number.isFinite(sample.depth)

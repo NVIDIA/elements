@@ -62,7 +62,7 @@ describe(SceneHeightfield.metadata.tag, () => {
     fixture = await createFixture(html`<nve-scene-heightfield></nve-scene-heightfield>`);
     const heightfield = fixture.querySelector(SceneHeightfield.metadata.tag) as SceneHeightfield;
     const errors: CustomEvent<SceneErrorDetail>[] = [];
-    heightfield.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent<SceneErrorDetail>));
+    heightfield.addEventListener('nve-scene-error', event => errors.push(event));
     const invalids = [
       validGrid({ heights: new Float32Array(3) }),
       validGrid({ colors: new Uint8Array(3) }),
@@ -148,9 +148,7 @@ describe(SceneHeightfield.metadata.tag, () => {
     fixture = await createFixture(html`<nve-scene-heightfield></nve-scene-heightfield>`);
     const heightfield = fixture.querySelector(SceneHeightfield.metadata.tag) as SceneHeightfield;
     const errors: SceneErrorDetail[] = [];
-    heightfield.addEventListener('nve-scene-error', event =>
-      errors.push((event as CustomEvent<SceneErrorDetail>).detail)
-    );
+    heightfield.addEventListener('nve-scene-error', event => errors.push(event.detail));
     heightfield.grid = validGrid();
     heightfield.append(document.createElement('span'));
     await elementIsStable(heightfield);

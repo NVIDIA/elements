@@ -100,7 +100,7 @@ describe(SceneAxes.metadata.tag, () => {
     const axes = fixture.querySelector<SceneAxes>(SceneAxes.metadata.tag);
     if (!axes) throw new Error('Expected axes layer.');
     const errors: SceneErrorDetail[] = [];
-    axes.addEventListener('nve-scene-error', event => errors.push((event as CustomEvent<SceneErrorDetail>).detail));
+    axes.addEventListener('nve-scene-error', event => errors.push(event.detail));
 
     axes.append(document.createElement('span'));
     await elementIsStable(axes);

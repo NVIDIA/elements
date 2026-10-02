@@ -53,7 +53,7 @@ describe(ScenePoints.metadata.tag, () => {
     const layer = required(fixture.querySelector<ScenePoints>(ScenePoints.metadata.tag), 'Expected points fixture.');
     if (!layer) throw new Error('Expected point layer.');
     const errors: SceneErrorDetail[] = [];
-    layer.addEventListener('nve-scene-error', event => errors.push((event as CustomEvent<SceneErrorDetail>).detail));
+    layer.addEventListener('nve-scene-error', event => errors.push(event.detail));
     layer.innerHTML = '<div></div>';
     await elementIsStable(layer);
     expect(errors.at(-1)).toMatchObject({ code: LAYER_CHILD, severity: 'error', element: layer });

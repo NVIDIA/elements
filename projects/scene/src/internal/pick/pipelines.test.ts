@@ -2,7 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import type { SceneGPURenderPipelineDescriptor } from '../gpu/platform.js';
+import type {
+  SceneGPURenderPipeline,
+  SceneGPURenderPipelineDescriptor,
+  SceneGPURenderPipelineDevice
+} from '../gpu/platform.js';
+import { createMarkerPipelines } from '../markers/pipelines.js';
+import { createMeshPipelines } from '../mesh/pipelines.js';
 import { createPickPipelines } from './pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from './uniform-offsets.js';
 
@@ -13,6 +19,24 @@ describe(PICK_UNIFORM_OFFSETS.constructor.name, () => {
 });
 
 describe(createPickPipelines.name, () => {
+  it('should interpret marker, mesh, and outline buffers identically across color and pick passes', () => {
+    const { descriptors, device } = createPipelineRecorder();
+    const markers = createMarkerPipelines(device, 'rgba8unorm');
+    const meshes = createMeshPipelines(device, 'rgba8unorm');
+    const picks = createPickPipelines(device);
+    const layouts = [
+      [[markers.opaque, markers.transparent, markers.compactOpaque, markers.compactTransparent], picks.marker.opaque],
+      [[markers.outlineOpaque, markers.outlineTransparent], picks.outline.opaque],
+      [[meshes.lit.opaque, meshes.lit.transparent, meshes.unlit.opaque, meshes.unlit.transparent], picks.mesh.opaque]
+    ] as const;
+
+    for (const [colors, pick] of layouts) {
+      const pickBuffers = descriptors.get(pick)?.vertex.buffers;
+      expect(pickBuffers).toBeDefined();
+      for (const color of colors) expect(descriptors.get(color)?.vertex.buffers).toEqual(pickBuffers);
+    }
+  });
+
   it('should create matching depth-tested ID pipelines for marker, stream, and mesh draws', () => {
     const descriptors: SceneGPURenderPipelineDescriptor[] = [];
     const shaderSources: string[] = [];
@@ -63,3 +87,20 @@ describe(createPickPipelines.name, () => {
     });
   });
 });
+
+function createPipelineRecorder() {
+  const descriptors = new Map<SceneGPURenderPipeline, SceneGPURenderPipelineDescriptor>();
+  const device: SceneGPURenderPipelineDevice = {
+    createCommandEncoder: () => ({ beginRenderPass: () => ({ end: () => undefined }), finish: () => ({}) }),
+    createRenderPipeline: descriptor => {
+      const pipeline = { getBindGroupLayout: () => ({}) };
+      descriptors.set(pipeline, descriptor);
+      return pipeline;
+    },
+    createShaderModule: () => ({}),
+    destroy: () => undefined,
+    lost: new Promise(() => undefined),
+    queue: { submit: () => undefined }
+  };
+  return { descriptors, device };
+}

@@ -107,7 +107,7 @@ describe(SceneGridlines.metadata.tag, () => {
     const grid = fixture.querySelector<SceneGridlines>(SceneGridlines.metadata.tag);
     if (!grid) throw new Error('Expected grid layer.');
     const errors: SceneErrorDetail[] = [];
-    grid.addEventListener('nve-scene-error', event => errors.push((event as CustomEvent<SceneErrorDetail>).detail));
+    grid.addEventListener('nve-scene-error', event => errors.push(event.detail));
 
     grid.append(document.createElement('span'));
     await elementIsStable(grid);

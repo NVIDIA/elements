@@ -63,7 +63,7 @@ export function compileParts(parts: readonly ModelPart[]): {
 }
 
 /** Validates raw producer input once, before geometry preparation or state publication. */
-export function normalizeModelParts(parts: readonly ModelPart[]): NormalizedModelPart[] {
+function normalizeModelParts(parts: readonly ModelPart[]): NormalizedModelPart[] {
   if (!Array.isArray(parts)) throw new TypeError('parts must be an array.');
   if (parts.length > MAX_PART_COUNT) throw new RangeError('Model parts exceed the compiled allocation limit.');
   return Array.from(parts, (part, index) => normalizeModelPart(part, `parts[${index}]`));
@@ -76,17 +76,6 @@ export function compileNormalizedParts(parts: readonly NormalizedModelPart[]): R
   const prepared = Array.from(parts, part => preparePart(part, allocation));
   validateAllocation(allocation);
   return compilePreparedParts(prepared, allocation);
-}
-
-/** Copies borrowed tuples for retained state while retaining the normalized quaternion. */
-export function copyNormalizedModelPart(part: NormalizedModelPart): NormalizedModelPart {
-  return {
-    color: [part.color[0], part.color[1], part.color[2], part.color[3]],
-    orientation: part.orientation,
-    position: [part.position[0], part.position[1], part.position[2]],
-    scale: [part.scale[0], part.scale[1], part.scale[2]],
-    shape: part.shape
-  };
 }
 
 function compilePreparedParts(

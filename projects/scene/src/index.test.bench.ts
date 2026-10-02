@@ -314,7 +314,7 @@ describe('vertex stream buffer', () => {
   stream.takeUploadRanges();
   test('cached stream transparency classification', async ({ bench }) => {
     await bench('cached stream transparency classification', () => {
-      void stream.toRenderData({ consumeUploadRanges: false }).transparent;
+      return stream.toRenderData({ consumeUploadRanges: false }).transparent;
     }).run(runOptions);
   });
 });
@@ -535,7 +535,7 @@ describe('camera contribution comparison', () => {
   });
 
   for (const count of [1, 100, 1_000] as const) {
-    const host = document.createElement('nve-scene') as Scene;
+    const host = document.createElement('nve-scene');
     const cameras = Array.from(
       { length: count },
       () => document.createElement(SceneCamera.metadata.tag) as SceneCamera

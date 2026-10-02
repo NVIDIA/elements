@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { PickReadback, type PickPixel, type PickReadbackDevice } from '../pick/readback.js';
+import { PickReadback } from '../pick/readback.js';
 import type { PickPipelines } from '../pick/pipelines.js';
 import type { PickScope, ScenePickRequest, ScenePickResult } from '../pick/routing.js';
 import type { ScenePickTarget } from '../pick/types.js';
 import type { SceneGPURenderPass, SceneGPURenderPassDescriptor, SceneGPUTextureView } from '../gpu/platform.js';
-import type { Matrix4, Vec3 } from '../types.js';
+import type { Matrix4 } from '../types.js';
 import { invertPreciseMat4 } from '../math/mat4.js';
 import type { GeometryDevice } from './geometry-renderer.js';
 import {
@@ -23,11 +23,6 @@ const PICK_FRAME_CHANGED = Symbol('pick-frame-changed');
 const TEXTURE_COPY_SRC = 0x01;
 const TEXTURE_RENDER_ATTACHMENT = 0x10;
 
-export interface CompletedGeometryPixel extends PickPixel {
-  readonly pixelX: number;
-  readonly pixelY: number;
-}
-
 interface PickFrameSnapshot {
   readonly canvas: HTMLCanvasElement;
   readonly device: GeometryDevice;
@@ -36,7 +31,6 @@ interface PickFrameSnapshot {
   readonly height: number;
   readonly items: readonly SceneRenderItem[];
   readonly projection: Matrix4;
-  readonly scope: PickScope;
   readonly width: number;
 }
 
@@ -60,10 +54,6 @@ interface PickTargetRange {
   readonly firstId: number;
   readonly layer: HTMLElement;
   readonly targetAt: (index: number) => ScenePickTarget;
-}
-
-interface CachedGeometryPixel extends CompletedGeometryPixel {
-  readonly frameGeneration: number;
 }
 
 type PickTextures = {
@@ -95,7 +85,6 @@ export class PickRenderer {
   #frameGeneration = 0;
   #idTexture?: ReturnType<GeometryDevice['createTexture']>;
   #items: readonly SceneRenderItem[] = [];
-  #latestGeometryPixels = new Map<string, CachedGeometryPixel>();
   #load?: Promise<void>;
   #pipelines?: PickPipelines;
   #projection?: Matrix4;
@@ -124,7 +113,7 @@ export class PickRenderer {
     this.disconnect();
     this.#canvas = canvas;
     this.#device = device;
-    if (device?.createBuffer) this.#readback = new PickReadback(device as PickReadbackDevice);
+    if (device?.createBuffer) this.#readback = new PickReadback(device);
   }
 
   disconnect(): void {
@@ -145,7 +134,6 @@ export class PickRenderer {
     this.#depthTexture = undefined;
     this.#idTexture = undefined;
     this.#projection = undefined;
-    this.#latestGeometryPixels.clear();
     this.#renderedPixelKey = undefined;
     this.#resourceGeneration += 1;
   }
@@ -165,18 +153,6 @@ export class PickRenderer {
     this.#scope = scope;
     this.#renderedPixelKey = undefined;
     this.#targetRanges = undefined;
-  }
-
-  getCompletedGeometryPixel(pixelX: number, pixelY: number): CompletedGeometryPixel | undefined {
-    const key = geometryPixelKey(pixelX, pixelY);
-    const cached = this.#latestGeometryPixels.get(key);
-    if (!cached) return undefined;
-    if (this.#frameGeneration - cached.frameGeneration > 1) {
-      this.#latestGeometryPixels.delete(key);
-      return undefined;
-    }
-    const { frameGeneration: _frameGeneration, ...pixel } = cached;
-    return pixel;
   }
 
   async pick(request: ScenePickRequest): Promise<ScenePickResult | null> {
@@ -230,7 +206,7 @@ export class PickRenderer {
           ...hit.target,
           clientX: request.clientX,
           clientY: request.clientY,
-          worldPosition: hit.worldPosition as Vec3
+          worldPosition: hit.worldPosition
         };
   }
 
@@ -241,7 +217,6 @@ export class PickRenderer {
     const result = readback.copy({
       encoder,
       frame: { decodeTarget: id => decodePickTarget(targetRanges, id), inverseViewProjection },
-      onPixel: this.#createGeometryPixelConsumer(request, snapshot),
       pixel: { x: request.pixelX, y: request.pixelY },
       size: { height: snapshot.height, width: snapshot.width },
       textures
@@ -268,13 +243,6 @@ export class PickRenderer {
     return { pixelKey: renderedPixelKey, required };
   }
 
-  #createGeometryPixelConsumer(request: ScenePickRequest, snapshot: PickFrameSnapshot) {
-    return snapshot.scope === 'all'
-      ? (sample: PickPixel) =>
-          this.#storeCompletedGeometryPixel({ pixelX: request.pixelX, pixelY: request.pixelY, sample, snapshot })
-      : undefined;
-  }
-
   #commitRenderedPickFrame(encoded: EncodedPickFrame): void {
     if (!encoded.rendered) return;
     this.#renderedPixelKey = encoded.renderedPixelKey;
@@ -296,7 +264,6 @@ export class PickRenderer {
       height,
       items: this.#items,
       projection,
-      scope: this.#scope,
       width
     };
   }
@@ -401,21 +368,6 @@ export class PickRenderer {
         });
     }
     await this.#load;
-  }
-
-  #storeCompletedGeometryPixel(options: {
-    readonly pixelX: number;
-    readonly pixelY: number;
-    readonly sample: PickPixel;
-    readonly snapshot: PickFrameSnapshot;
-  }): void {
-    const { pixelX, pixelY, sample, snapshot } = options;
-    if (!this.#resourcesAreCurrent(snapshot)) return;
-    const key = geometryPixelKey(pixelX, pixelY);
-    this.#latestGeometryPixels.set(key, { ...sample, frameGeneration: snapshot.frameGeneration, pixelX, pixelY });
-    if (this.#latestGeometryPixels.size > 128) {
-      this.#latestGeometryPixels.delete(this.#latestGeometryPixels.keys().next().value ?? key);
-    }
   }
 }
 

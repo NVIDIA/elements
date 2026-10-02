@@ -5,9 +5,7 @@ import { MODEL_DUAL_SOURCE, PART_SHAPE } from '../../errors.js';
 import {
   compileNormalizedParts,
   compileParts,
-  copyNormalizedModelPart,
   normalizeModelPart,
-  normalizeModelParts,
   type ModelPart,
   type NormalizedModelPart
 } from './compile.js';
@@ -21,8 +19,8 @@ import { SCENE_PART_TAG } from '../layer-tags.js';
 interface ModelLayerState {
   compiled: ReturnType<typeof compileParts>;
   geometryError: boolean;
+  hasBulkParts: boolean;
   observer?: MutationObserver;
-  parts: NormalizedModelPart[] | null;
   aggregateErrorPart?: HTMLElement;
   topologyVersion: number;
   version: number;
@@ -34,7 +32,7 @@ export function registerModelLayer(layer: HTMLElement): void {
   states.set(layer, {
     compiled: compileParts([]),
     geometryError: false,
-    parts: null,
+    hasBulkParts: false,
     topologyVersion: 0,
     version: 0
   });
@@ -61,12 +59,11 @@ export function notifyOwningModelPart(part: HTMLElement): void {
   if (layer && isModelLayerRegistered(layer)) recompileDeclarative(layer, getState(layer));
 }
 
-/** Validates and stores a bulk source before replacing the rendered geometry. */
+/** Compiles bulk input before replacing the rendered geometry and source authority. */
 export function setModelLayerParts(layer: HTMLElement, parts: readonly ModelPart[] | null): void {
   const state = getState(layer);
-  const next = parts === null ? null : normalizeModelParts(parts).map(copyNormalizedModelPart);
-  const compiled = next === null ? null : compileNormalizedParts(next);
-  state.parts = next;
+  const compiled = parts === null ? null : compileParts(parts);
+  state.hasBulkParts = parts !== null;
   if (compiled !== null) {
     clearAggregateError(state);
     state.geometryError = false;
@@ -103,7 +100,7 @@ export function takeModelLayerRenderData(layer: HTMLElement): MeshRenderData {
 }
 
 function recompileDeclarative(layer: HTMLElement, state: ModelLayerState): void {
-  if (state.parts !== null) {
+  if (state.hasBulkParts) {
     updateDualSource(layer, state);
     notifyOwningScene(layer);
     return;
@@ -153,7 +150,7 @@ function replaceCompiled(state: ModelLayerState, compiled: ReturnType<typeof com
 
 function updateDualSource(layer: HTMLElement, state: ModelLayerState): void {
   diagnosticReporterService.update({
-    active: state.parts !== null && [...layer.children].some(isPartElement),
+    active: state.hasBulkParts && [...layer.children].some(isPartElement),
     code: MODEL_DUAL_SOURCE,
     element: layer,
     message: 'Bulk model parts take precedence over declarative scene parts.',

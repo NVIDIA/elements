@@ -3,7 +3,7 @@
 
 import { composePreciseMat4, identityPreciseMat4, multiplyPreciseMat4 } from '../math/mat4.js';
 import { normalizeQuaternion } from '../math/quaternion.js';
-import type { Mat4, PreciseMat4, Quaternion, ScenePose, Vec3 } from '../types.js';
+import type { Mat4, PreciseMat4, ScenePose, Vec3 } from '../types.js';
 import { notifyOwningScene } from '../scene/notifications.js';
 
 interface FrameState {
@@ -130,7 +130,7 @@ function normalizeFrameTransform(value: ScenePose): ScenePose {
   assertNumberTuple(orientation, 4, 'Orientation');
   return {
     position: [...position] as Vec3,
-    orientation: normalizeQuaternion(orientation as Quaternion)
+    orientation: normalizeQuaternion(orientation)
   };
 }
 

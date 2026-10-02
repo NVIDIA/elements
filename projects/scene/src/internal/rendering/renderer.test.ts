@@ -887,12 +887,6 @@ describe(SceneRenderer.name, () => {
     expect(hit?.worldPosition).toEqual(
       expect.arrayContaining([expect.any(Number), expect.any(Number), expect.any(Number)])
     );
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toEqual({ depth: 0.5, id: 1, pixelX: 2, pixelY: 3 });
-    expect(renderer.getCompletedGeometryPixel(3, 2)).toBeUndefined();
-    renderer.render([loaded]);
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toEqual({ depth: 0.5, id: 1, pixelX: 2, pixelY: 3 });
-    renderer.render([loaded]);
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toBeUndefined();
     expect(gpu.copyTextureToBuffer).toHaveBeenCalledTimes(2);
     gpu.mappedBytes.fill(0);
     await expect(renderer.pick({ canvas, clientX: 2, clientY: 3, pixelX: 2, pixelY: 3 })).resolves.toBeNull();
@@ -973,7 +967,6 @@ describe(SceneRenderer.name, () => {
     expect(result?.worldPosition[0]).toBeCloseTo(999_999.26, 3);
     expect(mapAsync).toHaveBeenCalledOnce();
     expect(gpu.copyTextureToBuffer).toHaveBeenCalledTimes(2);
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toEqual({ depth: 0.5, id: 1, pixelX: 2, pixelY: 3 });
     renderer.disconnect();
     resetSceneTesting();
   });
@@ -1023,45 +1016,6 @@ describe(SceneRenderer.name, () => {
     mapResolvers[0]?.();
 
     await expect(pick).resolves.toMatchObject({ featureId: 1842, instanceIndex: 0, layer: rendered.layer });
-    renderer.disconnect();
-    resetSceneTesting();
-  });
-
-  it('should prefetch raw geometry pixels without requiring a Scene event dispatch', async () => {
-    const renderer = new SceneRenderer();
-    const request = { canvas: document.createElement('canvas'), clientX: 1, clientY: 2, pixelX: 3, pixelY: 4 };
-    await expect(renderer.prefetchGeometryPixel(request)).resolves.toBeUndefined();
-    const pick = vi.spyOn(renderer, 'pick').mockRejectedValue(new DOMException('Unavailable.', 'AbortError'));
-
-    await expect(renderer.prefetchGeometryPixel(request)).resolves.toBeUndefined();
-    expect(pick).toHaveBeenCalledWith(request);
-  });
-
-  it('should retain a bounded set of same-frame geometry pixels and evict the oldest sample', async () => {
-    const gpu = createAdvancedDevice();
-    configureSceneTesting({
-      getCanvasContext: () => ({
-        configure: () => undefined,
-        unconfigure: () => undefined,
-        getCurrentTexture: () => ({ createView: () => ({}) })
-      })
-    });
-    const renderer = new SceneRenderer();
-    const canvas = document.createElement('canvas');
-    renderer.initialize(canvas, { device: gpu.device, format: 'bgra8unorm' });
-    renderer.resize(200, 1);
-    renderer.render([createPointRenderItem({ count: 1 })]);
-    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
-    renderer.render([createPointRenderItem({ count: 1 })]);
-    gpu.mappedBytes[0] = 1;
-    new DataView(gpu.mappedBytes.buffer).setFloat32(256, 0.5, true);
-
-    for (let pixelX = 0; pixelX < 129; pixelX += 1) {
-      await renderer.prefetchGeometryPixel({ canvas, clientX: pixelX, clientY: 0, pixelX, pixelY: 0 });
-    }
-
-    expect(renderer.getCompletedGeometryPixel(0, 0)).toBeUndefined();
-    expect(renderer.getCompletedGeometryPixel(128, 0)).toEqual({ depth: 0.5, id: 1, pixelX: 128, pixelY: 0 });
     renderer.disconnect();
     resetSceneTesting();
   });
@@ -1845,7 +1799,7 @@ describe(SceneRenderer.name, () => {
     resetSceneTesting();
   });
 
-  it('should isolate interactive and explicit target IDs and geometry-pixel caches', async () => {
+  it('should isolate interactive and explicit target IDs', async () => {
     const gpu = createAdvancedDevice();
     configureSceneTesting({
       getCanvasContext: () => ({
@@ -1876,21 +1830,18 @@ describe(SceneRenderer.name, () => {
       instanceIndex: 0,
       layer: interactivePoints.layer
     });
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toBeUndefined();
 
     new DataView(gpu.mappedBytes.buffer).setUint32(0, 3, true);
     await expect(renderer.pick(request, 'all')).resolves.toMatchObject({
       instanceIndex: 0,
       layer: interactivePoints.layer
     });
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toMatchObject({ id: 3 });
 
     new DataView(gpu.mappedBytes.buffer).setUint32(0, 1, true);
     await expect(renderer.pick(request, 'interactive')).resolves.toMatchObject({
       instanceIndex: 0,
       layer: interactivePoints.layer
     });
-    expect(renderer.getCompletedGeometryPixel(2, 3)).toMatchObject({ id: 3 });
     expect(gpu.draws.slice(pickDrawStart)).toHaveLength(4);
     renderer.disconnect();
     resetSceneTesting();

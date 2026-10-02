@@ -9,7 +9,6 @@ import {
   type SceneGPUDevice,
   type SceneGPURenderPassDescriptor,
   type SceneGPUTextureView,
-  type SceneGPURenderPass,
   supportsSceneGeometryRendering
 } from '../gpu/platform.js';
 import { srgbByteToLinear } from '../utils/color.js';
@@ -17,7 +16,7 @@ import type { PickScope, ScenePickRequest, ScenePickResult } from '../pick/routi
 import type { Matrix4, PreciseMat4 } from '../types.js';
 import type { GeometryRenderer } from './geometry-renderer.js';
 import { hasPickTargets, isInteractiveItem, isTransparentItem, type SceneRenderItem } from './render-items.js';
-import type { CompletedGeometryPixel, PickRenderer } from './pick-renderer.js';
+import type { PickRenderer } from './pick-renderer.js';
 import type { LinearColor, OitResources, RenderTargets } from './render-targets.js';
 
 export type {
@@ -81,10 +80,6 @@ export class SceneRenderer {
     return this.#context !== undefined && this.#device !== undefined;
   }
 
-  getCompletedGeometryPixel(pixelX: number, pixelY: number): CompletedGeometryPixel | undefined {
-    return this.#picking?.getCompletedGeometryPixel(pixelX, pixelY);
-  }
-
   getSubmittedProjection(): SubmittedProjectionSnapshot | null {
     const snapshot = this.#submittedProjection;
     const canvas = this.#canvas;
@@ -98,13 +93,6 @@ export class SceneRenderer {
     )
       return null;
     return { ...snapshot, projection: new Float64Array(snapshot.projection) };
-  }
-
-  prefetchGeometryPixel(request: ScenePickRequest): Promise<void> {
-    return this.pick(request).then(
-      () => undefined,
-      () => undefined
-    );
   }
 
   async pick(request: ScenePickRequest, scope: PickScope = 'all'): Promise<ScenePickResult | null> {
@@ -313,8 +301,7 @@ export class SceneRenderer {
         if (!this.#isResourceContextCurrent(resources)) return undefined;
         const picking = new PickRenderer({
           draw: {
-            drawPickItems: (pass, items, pipelines) =>
-              this.#geometry?.drawPickItems(pass as SceneGPURenderPass, items, pipelines)
+            drawPickItems: (pass, items, pipelines) => this.#geometry?.drawPickItems(pass, items, pipelines)
           },
           getDepthView: () => this.#targets?.getDepthView() ?? null
         });

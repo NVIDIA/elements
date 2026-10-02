@@ -52,7 +52,7 @@ export function copyPickHit(result: ScenePickResult): ScenePickHit {
       layer: result.layer,
       instanceIndex: result.instanceIndex
     },
-    result.worldPosition as Vec3
+    result.worldPosition
   );
   return Object.freeze({
     clientX: result.clientX,
@@ -86,13 +86,13 @@ function copyPickTarget(target: ScenePickTarget): ScenePickTarget {
   if (target.kind === 'segment') {
     return Object.freeze({
       ...target,
-      vertexIndices: Object.freeze([...target.vertexIndices]) as readonly [number, number]
+      vertexIndices: Object.freeze<[number, number]>([...target.vertexIndices])
     });
   }
   if (target.kind === 'triangle') {
     return Object.freeze({
       ...target,
-      vertexIndices: Object.freeze([...target.vertexIndices]) as readonly [number, number, number]
+      vertexIndices: Object.freeze<[number, number, number]>([...target.vertexIndices])
     });
   }
   return Object.freeze({ ...target });

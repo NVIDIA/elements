@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
-import { html, LitElement } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { DEVICE_LOST, WEBGPU_UNAVAILABLE, type SceneErrorCode } from '../errors.js';
 import { diagnosticReporterService } from '../internal/services/diagnostic-reporter.service.js';
 import {
@@ -188,7 +188,7 @@ export class Scene extends LitElement {
     return direction ? Object.freeze({ direction: Object.freeze(direction), origin: Object.freeze(near) }) : null;
   }
 
-  render() {
+  render(): TemplateResult<1> {
     return html`
       <div internal-host>
         <canvas aria-hidden="true"></canvas>

@@ -11,7 +11,7 @@ export interface MeshGeometryUploadRange {
   readonly size: number;
 }
 
-export type MeshGeometryAttributeVersions = Readonly<Record<MeshGeometryAttribute, number>>;
+type MeshGeometryAttributeVersions = Readonly<Record<MeshGeometryAttribute, number>>;
 
 export interface HeightfieldMeshData {
   readonly colors: Uint8Array | null;

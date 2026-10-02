@@ -7,6 +7,7 @@ import { createPrimitiveGeometry, type PrimitiveGeometry, type PrimitiveKind } f
 import type { SceneGPURenderPipelineDevice, SceneGPURenderPipeline, SceneGPUShaderModule } from '../gpu/platform.js';
 import { PICK_OUTPUT_WGSL } from '../pick/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../rendering/transparency.js';
+import { MARKER_VERTEX_LAYOUTS, OUTLINE_VERTEX_LAYOUTS } from '../rendering/vertex-layouts.js';
 
 export interface MarkerPipelines {
   readonly compactOpaque: SceneGPURenderPipeline;
@@ -40,15 +41,7 @@ export function createMarkerPipelines(device: SceneGPURenderPipelineDevice, form
       vertex: {
         module: shaderModule,
         entryPoint: 'vertexMain',
-        buffers: [
-          {
-            arrayStride: 24,
-            attributes: [
-              { shaderLocation: 0, offset: 0, format: 'float32x3' },
-              { shaderLocation: 1, offset: 12, format: 'float32x3' }
-            ]
-          }
-        ]
+        buffers: MARKER_VERTEX_LAYOUTS
       },
       fragment: {
         module: shaderModule,
@@ -86,7 +79,7 @@ function createMarkerOutlinePipeline(options: {
     vertex: {
       module: options.module,
       entryPoint: 'vertexMain',
-      buffers: [{ arrayStride: 12, attributes: [{ shaderLocation: 0, offset: 0, format: 'float32x3' }] }]
+      buffers: OUTLINE_VERTEX_LAYOUTS
     },
     fragment: {
       module: options.module,

@@ -73,7 +73,7 @@ void device.createBindGroup?.({
   layout: bindGroupLayout
 });
 
-const malformedRenderPass = {
+const _malformedRenderPass = {
   colorAttachments: [
     // @ts-expect-error Render pass attachments require an explicit store operation.
     {
@@ -82,14 +82,12 @@ const malformedRenderPass = {
     }
   ]
 } satisfies SceneGPURenderPassDescriptor;
-void malformedRenderPass;
 
-const malformedCompute = {
+const _malformedCompute = {
   layout: 'auto',
   // @ts-expect-error Compute pipelines require an explicit entry point.
   compute: { module: shader }
 } satisfies SceneGPUComputePipelineDescriptor;
-void malformedCompute;
 
 // @ts-expect-error Query sets require a count.
 void device.createQuerySet?.({
@@ -111,5 +109,4 @@ const malformedPick: ScenePickResult = {
   worldPosition: [0, 0, 0]
 };
 
-const typedPickDriver: ScenePickDriver = async () => malformedPick;
-void typedPickDriver;
+const _typedPickDriver: ScenePickDriver = async () => malformedPick;

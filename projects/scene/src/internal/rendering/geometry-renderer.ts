@@ -571,7 +571,7 @@ export class GeometryRenderer {
     pass.setIndexBuffer(geometry.outlineIndex, 'uint32');
     resources.instance.partitions.forEach((partition, index) => {
       this.#bindLayer(pass, { groups: getDirectLayerBindGroups(device, pipeline, resources, index), pipeline });
-      pass.drawIndexed(geometry.outlineIndexCount!, partition.recordCount);
+      pass.drawIndexed(geometry.outlineIndexCount, partition.recordCount);
     });
   }
 

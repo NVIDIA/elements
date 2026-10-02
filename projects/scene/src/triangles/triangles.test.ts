@@ -44,7 +44,7 @@ describe(SceneTriangles.metadata.tag, () => {
     const layer = fixture.querySelector<SceneTriangles>(SceneTriangles.metadata.tag);
     if (!layer) throw new Error('Expected triangle layer.');
     const errors: SceneErrorDetail[] = [];
-    layer.addEventListener('nve-scene-error', event => errors.push((event as CustomEvent<SceneErrorDetail>).detail));
+    layer.addEventListener('nve-scene-error', event => errors.push(event.detail));
     const vertices = new TriangleVertexBuffer({ capacity: 3 });
     vertices.add({ position: [0, 0, 0] });
     vertices.add({ position: [1, 0, 0] });

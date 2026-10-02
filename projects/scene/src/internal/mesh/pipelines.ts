@@ -5,6 +5,7 @@ import type { SceneGPURenderPipelineDevice, SceneGPURenderPipeline } from '../gp
 import { DEFAULT_LIGHTING_WGSL, MARKER_WGSL } from '../layouts/wgsl.js';
 import { PICK_OUTPUT_WGSL } from '../pick/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../rendering/transparency.js';
+import { MESH_VERTEX_LAYOUTS } from '../rendering/vertex-layouts.js';
 import { SRGB_TO_LINEAR_WGSL } from '../utils/color.js';
 
 export interface MeshPipelines {
@@ -26,12 +27,7 @@ export function createMeshPipelines(device: SceneGPURenderPipelineDevice, format
       vertex: {
         module,
         entryPoint: 'vertexMain',
-        buffers: [
-          { arrayStride: 12, attributes: [{ shaderLocation: 0, offset: 0, format: 'float32x3' }] },
-          { arrayStride: 12, attributes: [{ shaderLocation: 1, offset: 0, format: 'float32x3' }] },
-          { arrayStride: 8, attributes: [{ shaderLocation: 2, offset: 0, format: 'float32x2' }] },
-          { arrayStride: 16, attributes: [{ shaderLocation: 3, offset: 0, format: 'float32x4' }] }
-        ]
+        buffers: MESH_VERTEX_LAYOUTS
       },
       fragment: {
         module,

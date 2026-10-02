@@ -7,7 +7,7 @@ import { LABEL } from '../layouts/built-ins.js';
 import { getPackedRecordBytes, getPackedRecordKind, isPackedRecordSource } from '../packed-record-source.js';
 import { replacePreparedVertexSource } from '../prepared-record-source.js';
 import { notifyOwningScene } from '../scene/notifications.js';
-import { VertexStreamBuffer, type VertexStreamIssue } from '../vertex-stream.js';
+import { VertexStreamBuffer } from '../vertex-stream.js';
 import { hasVisibleLabelText, labelRecordIsValid } from './data.js';
 import { getLabelSourceTexts } from './source.js';
 import type { LabelSource } from './buffer.js';
@@ -235,7 +235,7 @@ function updateDiagnostics(layer: HTMLElement, state: LabelLayerState): void {
   const issues = state.buffer.getIssues();
   for (const code of [LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID] as const) {
     diagnosticReporterService.update({
-      active: issues.has(code as VertexStreamIssue) || (code === LAYOUT_VALUE_INVALID && state.publicationError),
+      active: issues.has(code) || (code === LAYOUT_VALUE_INVALID && state.publicationError),
       code,
       element: layer,
       message:

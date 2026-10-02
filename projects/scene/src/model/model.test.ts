@@ -70,7 +70,7 @@ describe(SceneModel.metadata.tag, () => {
   it('reads declarative attributes while parser-created parts upgrade', async () => {
     fixture = document.createElement('div');
     const errors: CustomEvent<SceneErrorDetail>[] = [];
-    fixture.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent<SceneErrorDetail>));
+    fixture.addEventListener('nve-scene-error', event => errors.push(event));
     document.body.append(fixture);
     fixture.innerHTML = `<nve-scene-model>
       <nve-scene-part
@@ -120,7 +120,7 @@ describe(SceneModel.metadata.tag, () => {
     const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
     model.source = new MarkerBuffer({ records: [{}] });
     const warnings: CustomEvent<SceneErrorDetail>[] = [];
-    model.addEventListener('nve-scene-error', event => warnings.push(event as CustomEvent<SceneErrorDetail>));
+    model.addEventListener('nve-scene-error', event => warnings.push(event));
     const parts: ModelPart[] = [{ shape: 'sphere' }];
 
     model.parts = parts;
@@ -157,13 +157,19 @@ describe(SceneModel.metadata.tag, () => {
     const parts: ModelPart[] = [{ color, orientation, position, scale, shape: 'cube' }];
     model.parts = parts;
     await elementIsStable(model);
-    const before = takeModelLayerRenderData(model).positions;
+    const before = takeModelLayerRenderData(model);
+    const expected = {
+      colors: before.colors?.slice(),
+      indices: before.indices?.slice(),
+      normals: before.normals?.slice(),
+      positions: before.positions?.slice()
+    };
 
     position.splice(0, 1, 3);
     color.splice(0, 1, 0);
     orientation.splice(2, 1, 1);
     scale.splice(1, 1, 2);
-    expect(takeModelLayerRenderData(model).positions).toEqual(before);
+    expect(takeModelLayerRenderData(model)).toMatchObject(expected);
     model.parts = parts;
     await elementIsStable(model);
     expect(takeModelLayerRenderData(model).positions).toEqual(compileParts(parts).positions);
@@ -173,6 +179,53 @@ describe(SceneModel.metadata.tag, () => {
     expect(takeModelLayerRenderData(model).positions).toEqual(compileParts([{ shape: 'sphere' }]).positions);
   });
 
+  it('keeps an empty bulk source authoritative across child edits and reconnects until cleared', async () => {
+    fixture = await createFixture(html`<nve-scene-model><nve-scene-part></nve-scene-part></nve-scene-model>`);
+    const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
+    const part = model.querySelector(ScenePart.metadata.tag) as ScenePart;
+    const parts: ModelPart[] = [];
+    model.parts = parts;
+    part.position = [1, 2, 3];
+    await elementIsStable(model);
+    expect(takeModelLayerRenderData(model)).toMatchObject({ positions: new Float32Array(), ready: false });
+
+    model.remove();
+    fixture.append(model);
+    await elementIsStable(model);
+    expect(model.parts).toBe(parts);
+    expect(takeModelLayerRenderData(model)).toMatchObject({ positions: new Float32Array(), ready: false });
+
+    model.parts = null;
+    await elementIsStable(model);
+    expect(takeModelLayerRenderData(model)).toMatchObject({
+      positions: compileParts([{ position: [1, 2, 3], shape: 'cube' }]).positions,
+      ready: true
+    });
+  });
+
+  it.each<readonly ModelPart[] | null>([null, [{ shape: 'pyramid' }]])(
+    'preserves the accepted %j source when a bulk assignment fails',
+    async parts => {
+      fixture = await createFixture(html`<nve-scene-model><nve-scene-part></nve-scene-part></nve-scene-model>`);
+      const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
+      const part = model.querySelector(ScenePart.metadata.tag) as ScenePart;
+      model.parts = parts;
+      await elementIsStable(model);
+      const before = takeModelLayerRenderData(model);
+
+      expect(() => {
+        model.parts = [{ scale: [1, 0, 1], shape: 'cube' }];
+      }).toThrow(RangeError);
+      expect(model.parts).toBe(parts);
+      expect(takeModelLayerRenderData(model)).toMatchObject({ positions: before.positions, ready: before.ready });
+
+      part.position = [1, 2, 3];
+      await elementIsStable(model);
+      const expected: readonly ModelPart[] = parts ?? [{ position: [1, 2, 3], shape: 'cube' }];
+      expect(takeModelLayerRenderData(model).positions).toEqual(compileParts(expected).positions);
+    }
+  );
+
   it('skips invalid declarative parts once per error episode and recovers their siblings', async () => {
     fixture = await createFixture(
       html`<nve-scene-model><nve-scene-part shape="cube"></nve-scene-part><nve-scene-part shape="cube"></nve-scene-part></nve-scene-model>`
@@ -180,7 +233,7 @@ describe(SceneModel.metadata.tag, () => {
     const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
     const bad = model.querySelectorAll('nve-scene-part')[1] as HTMLElement;
     const errors: CustomEvent<SceneErrorDetail>[] = [];
-    model.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent<SceneErrorDetail>));
+    model.addEventListener('nve-scene-error', event => errors.push(event));
 
     bad.setAttribute('scale', '[0,1,1]');
     await elementIsStable(bad);
@@ -218,10 +271,10 @@ describe(SceneModel.metadata.tag, () => {
     fixture = await createFixture(html`<nve-scene-model><nve-scene-part></nve-scene-part></nve-scene-model>`);
     const model = fixture.querySelector(SceneModel.metadata.tag) as SceneModel;
     const errors: CustomEvent<SceneErrorDetail>[] = [];
-    model.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent<SceneErrorDetail>));
+    model.addEventListener('nve-scene-error', event => errors.push(event));
     const orphan = document.createElement('nve-scene-part');
     const orphanErrors: CustomEvent<SceneErrorDetail>[] = [];
-    orphan.addEventListener('nve-scene-error', event => orphanErrors.push(event as CustomEvent<SceneErrorDetail>));
+    orphan.addEventListener('nve-scene-error', event => orphanErrors.push(event));
     document.body.append(orphan);
     await elementIsStable(orphan);
     orphan.remove();

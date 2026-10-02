@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement, type PropertyValues } from 'lit';
+import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/utils/color.js';
@@ -128,7 +128,7 @@ export class SceneGridlines extends LitElement {
     this.#replaceVertices();
   }
 
-  render() {
+  render(): TemplateResult<1> {
     return html`<slot hidden @slotchange=${this.#handleSlotChange}></slot>`;
   }
 

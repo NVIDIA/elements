@@ -2,13 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import {
-  compileParts,
-  copyNormalizedModelPart,
-  createModelPrimitiveGeometry,
-  normalizeModelPart,
-  type ModelPart
-} from './compile.js';
+import { compileParts, createModelPrimitiveGeometry, type ModelPart } from './compile.js';
 import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../primitive-geometry.js';
 
 describe(compileParts.name, () => {
@@ -81,20 +75,52 @@ describe(compileParts.name, () => {
     expect([...compiled.colors.subarray(firstVertices * 4, firstVertices * 4 + 4)]).toEqual([0, 1, 0, 0.5]);
   });
 
-  it('should reject malformed part structures and noninvertible transforms', () => {
-    const invalid: unknown[] = [
-      null,
-      {},
-      { shape: 'torus' },
-      { shape: 'cube', position: [0, 0] },
-      { shape: 'cube', orientation: [0, 0, 0, 0] },
-      { shape: 'cube', scale: [1, 0, 1] },
-      { shape: 'cube', color: [1, 1, 1, 2] },
-      new Array<ModelPart>(1)
-    ];
+  it('should reject malformed input arrays and oversized models', () => {
+    const invalid: unknown[] = [null, {}, new Array<ModelPart>(1)];
 
     for (const parts of invalid) expect(() => compileParts(parts as ModelPart[])).toThrow();
     expect(() => compileParts(new Array<ModelPart>(250_000))).toThrow(RangeError);
+  });
+
+  it.each([
+    { part: null, error: TypeError, message: 'parts[0] must be an object.' },
+    { part: {}, error: TypeError, message: 'parts[0].shape must name a supported primitive.' },
+    { part: { shape: 'torus' }, error: TypeError, message: 'parts[0].shape must name a supported primitive.' },
+    {
+      part: { shape: 'cube', position: [0, 0] },
+      error: TypeError,
+      message: 'parts[0].position must contain exactly 3 numbers.'
+    },
+    {
+      part: { shape: 'cube', position: [0, '0', 0] },
+      error: TypeError,
+      message: 'parts[0].position must contain exactly 3 numbers.'
+    },
+    {
+      part: { shape: 'cube', position: [0, Number.NaN, 0] },
+      error: RangeError,
+      message: 'parts[0].position must contain finite numbers.'
+    },
+    {
+      part: { shape: 'cube', orientation: [0, 0, 0, 0] },
+      error: RangeError,
+      message: 'Quaternion length must be greater than zero.'
+    },
+    { part: { shape: 'cube', scale: [1, 0, 1] }, error: RangeError, message: 'parts[0].scale must not contain zero.' },
+    {
+      part: { shape: 'cube', color: 'not-a-color' },
+      error: TypeError,
+      message: 'parts[0].color must be a supported Scene color.'
+    },
+    {
+      part: { shape: 'cube', color: [1, 1, 1, 2] },
+      error: RangeError,
+      message: 'parts[0].color values must be finite and in the range 0..1.'
+    }
+  ])('rejects invalid part $part with a specific diagnostic', ({ part, error, message }) => {
+    const compile = () => compileParts([part] as ModelPart[]);
+    expect(compile).toThrow(error);
+    expect(compile).toThrow(message);
   });
 
   it('should reject oversized input before reading a producer element', () => {
@@ -109,18 +135,6 @@ describe(compileParts.name, () => {
 
     expect(() => compileParts(oversized)).toThrow(RangeError);
     expect(reads).toBe(0);
-  });
-
-  it('should borrow direct tuples and copy only retained bulk tuples', () => {
-    const position: [number, number, number] = [1, 2, 3];
-    const normalized = normalizeModelPart({ position, shape: 'cube' }, 'part');
-    const owned = copyNormalizedModelPart(normalized);
-
-    expect(normalized.position).toBe(position);
-    expect(owned.position).not.toBe(position);
-    expect(owned.orientation).toBe(normalized.orientation);
-    position[0] = 9;
-    expect(owned.position[0]).toBe(1);
   });
 
   it('should compile no parts into empty planar arrays', () => {

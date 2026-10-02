@@ -221,7 +221,7 @@ function createHeightfieldDevice(failure?: 'bind-group' | 'write' | 'buffer', fa
       bufferCount += 1;
       if (failure === 'buffer' && bufferCount === failBufferAt) throw new Error('test failure');
       const resource: SceneGPUBuffer = { destroy: () => destroyedBuffers.push(resource) };
-      buffers.push({ descriptor: descriptor as { size: number; usage: number }, resource });
+      buffers.push({ descriptor: descriptor, resource });
       return resource;
     },
     createCommandEncoder: () => ({ beginRenderPass: () => ({ end: () => undefined }), finish: () => ({}) }),

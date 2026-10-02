@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement } from 'lit';
+import { html, LitElement, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import {
@@ -66,7 +66,7 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
 
   /** Replaces the label records or renders nothing when null. */
   get source(): LabelSource | null {
-    return getLabelLayerSource(this) as LabelSource | null;
+    return getLabelLayerSource(this);
   }
 
   set source(value: LabelSource | null) {
@@ -91,7 +91,7 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
     publishLabelLayer(this, options);
   }
 
-  render() {
+  render(): TemplateResult<1> {
     return html`<slot @slotchange=${this.#handleSlotChange}></slot>`;
   }
 
