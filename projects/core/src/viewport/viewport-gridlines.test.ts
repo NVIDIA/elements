@@ -8,6 +8,23 @@ import { Viewport, ViewportGridlines } from '@nvidia-elements/core/viewport';
 import { selectGridlineInterval } from './viewport-gridlines.utils.js';
 import '@nvidia-elements/core/viewport/define.js';
 
+class TestResizeObserver implements ResizeObserver {
+  static readonly instances: TestResizeObserver[] = [];
+  readonly disconnect = vi.fn();
+  readonly observe = vi.fn();
+  readonly unobserve = vi.fn();
+  readonly #callback: ResizeObserverCallback;
+
+  constructor(callback: ResizeObserverCallback) {
+    this.#callback = callback;
+    TestResizeObserver.instances.push(this);
+  }
+
+  notify(): void {
+    this.#callback([], this);
+  }
+}
+
 describe(ViewportGridlines.metadata.tag, () => {
   let fixture: HTMLElement;
   let gridlines: ViewportGridlines;
@@ -28,6 +45,7 @@ describe(ViewportGridlines.metadata.tag, () => {
   afterEach(() => {
     removeFixture(fixture);
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('defines reflected properties with normalized defaults', async () => {
@@ -130,6 +148,35 @@ describe(ViewportGridlines.metadata.tag, () => {
 
     expect(gridlines.style.getPropertyValue('--_scale')).toBe('1.01');
     expect(requestUpdate).not.toHaveBeenCalled();
+  });
+
+  it('retains property values when they are assigned again', () => {
+    gridlines.step = gridlines.step;
+    gridlines.originX = gridlines.originX;
+    gridlines.originY = gridlines.originY;
+    gridlines.targetSpacing = gridlines.targetSpacing;
+
+    expect({
+      originX: gridlines.originX,
+      originY: gridlines.originY,
+      step: gridlines.step,
+      targetSpacing: gridlines.targetSpacing
+    }).toEqual({ originX: 0, originY: 0, step: 10, targetSpacing: 64 });
+  });
+
+  it('refreshes its projection when the viewport is resized', async () => {
+    gridlines.remove();
+    vi.stubGlobal('ResizeObserver', TestResizeObserver);
+    const resizedGridlines = document.createElement(ViewportGridlines.metadata.tag);
+    viewport.append(resizedGridlines);
+    await elementIsStable(resizedGridlines);
+    const initial = resizedGridlines.shadowRoot?.querySelector('svg')?.getAttribute('viewBox');
+
+    vi.spyOn(viewport, 'getVisibleRect').mockReturnValue({ x: 1000, y: 1000, width: 200, height: 100 });
+    TestResizeObserver.instances.at(-1)?.notify();
+    await elementIsStable(resizedGridlines);
+
+    expect(resizedGridlines.shadowRoot?.querySelector('svg')?.getAttribute('viewBox')).not.toBe(initial);
   });
 
   it('retains overscan coverage until the visible bounds approach its edge', async () => {
