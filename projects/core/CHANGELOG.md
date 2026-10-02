@@ -1,3 +1,10 @@
+## [2.11.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.11.1...@nvidia-elements/core-v2.11.2) (2026-10-02)
+
+### Bug Fixes
+
+* **core:** resolve page panel stacking and visibility ([3bd2fc9](https://github.com/NVIDIA/elements/commit/3bd2fc9d2e3fa9ba740a486cd7a826bb17ffcaa2))
+* **pi:** update to pi.dev 1.0.0 ([3d44c15](https://github.com/NVIDIA/elements/commit/3d44c159c4c45b38789aa96615faaf0f97e798f6))
+
 ## [2.11.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.11.0...@nvidia-elements/core-v2.11.1) (2026-10-01)
 
 ### Bug Fixes
