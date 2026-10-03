@@ -81,7 +81,7 @@
     "glob": "catalog:",
     "rollup-plugin-html-literals": "catalog:",
     "typescript": "catalog:",
-    "unplugin-dts": "1.1.0",
+    "unplugin-dts": "1.1.1",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
