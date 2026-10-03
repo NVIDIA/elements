@@ -507,6 +507,18 @@
       "types": "./dist/icon-button/define.d.ts",
       "default": "./dist/icon-button/define.js"
     },
+    "./iframe": {
+      "types": "./dist/iframe/index.d.ts",
+      "default": "./dist/iframe/index.js"
+    },
+    "./iframe/index.js": {
+      "types": "./dist/iframe/index.d.ts",
+      "default": "./dist/iframe/index.js"
+    },
+    "./iframe/define.js": {
+      "types": "./dist/iframe/define.d.ts",
+      "default": "./dist/iframe/define.js"
+    },
     "./input": {
       "types": "./dist/input/index.d.ts",
       "default": "./dist/input/index.js"
@@ -1016,6 +1028,7 @@
     "@nvidia-elements/styles": "workspace:^",
     "@typescript/lib-dom": "npm:@types/web@0.0.312",
     "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
