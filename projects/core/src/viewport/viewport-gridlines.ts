@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement, nothing, type PropertyValues } from 'lit';
+import { html, LitElement, nothing, svg, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { finiteOr, hostAttr, positiveFiniteOr, useStyles } from '@nvidia-elements/core/internal';
@@ -29,12 +29,14 @@ interface ProjectionSyncOptions {
 
 /**
  * @element nve-viewport-gridlines
- * @description Renders origin-stable, zoom-adaptive gridlines behind viewport content.
+ * @description Renders origin-stable, zoom-adaptive gridline patterns behind viewport content.
  * @documentation https://nvidia.github.io/elements/docs/elements/viewport/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/viewport
- * @cssprop --color - Sets the gridline stroke color.
+ * @cssprop --color - Sets the gridline pattern color.
  * @cssprop --line-width - Sets the approximate stroke width in CSS pixels.
+ * @cssprop --dot-radius - Sets the approximate dot radius in CSS pixels.
+ * @cssprop --cross-size - Sets the approximate full width and height of each cross in CSS pixels.
  */
 export class ViewportGridlines extends LitElement {
   static styles = useStyles([styles]);
@@ -57,6 +59,9 @@ export class ViewportGridlines extends LitElement {
   #viewport?: Viewport;
   #resizeObserver?: ResizeObserver;
   #projection?: GridlineProjection;
+
+  /** Grid pattern to render. */
+  @property({ type: String, reflect: true }) pattern: 'lines' | 'dots' | 'crosses' = 'lines';
 
   /** Smallest gridline interval in content-space units. */
   @property({ type: Number, reflect: true })
@@ -150,6 +155,7 @@ export class ViewportGridlines extends LitElement {
     const projection = this.#projection;
     if (!projection) return nothing;
     const { coverage, interval } = projection;
+    const centered = this.pattern === 'dots' || this.pattern === 'crosses';
     return html`
       <svg
         internal-host
@@ -163,13 +169,13 @@ export class ViewportGridlines extends LitElement {
           <pattern
             data-gridline-pattern
             id="gridlines"
-            x=${this.#originX}
-            y=${this.#originY}
+            x=${this.#originX - (centered ? interval / 2 : 0)}
+            y=${this.#originY - (centered ? interval / 2 : 0)}
             width=${interval}
             height=${interval}
             patternUnits="userSpaceOnUse"
           >
-            <path d="M ${interval} 0 H 0 V ${interval}"></path>
+            ${this.#renderPattern(interval)}
           </pattern>
         </defs>
         <rect
@@ -181,6 +187,33 @@ export class ViewportGridlines extends LitElement {
         ></rect>
       </svg>
     `;
+  }
+
+  #renderPattern(interval: number) {
+    switch (this.pattern) {
+      case 'dots':
+        return svg`<circle cx=${interval / 2} cy=${interval / 2} r="2"></circle>`;
+      case 'crosses':
+        return svg`
+          <g transform="translate(${interval / 2} ${interval / 2})">
+            <clipPath id="cross-clip">
+              <rect class="cross-horizontal"></rect>
+              <rect class="cross-vertical"></rect>
+            </clipPath>
+            <rect
+              class="cross"
+              x=${-interval / 2}
+              y=${-interval / 2}
+              width=${interval}
+              height=${interval}
+              clip-path="url(#cross-clip)"
+            ></rect>
+          </g>
+        `;
+      case 'lines':
+      default:
+        return svg`<path d="M ${interval} 0 H 0 V ${interval}"></path>`;
+    }
   }
 
   #handleViewportChange = (): void => {
