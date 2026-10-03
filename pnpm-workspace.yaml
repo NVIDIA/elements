@@ -119,7 +119,7 @@ catalog:
   markdown-it: 15.0.1
   markdown-it-link-attributes: 4.0.1
   minisearch: 7.2.0
-  playwright: 1.62.1
+  playwright: 1.63.0
   postcss: 8.5.26
   publint: 0.3.24
   react: 19.2.8
