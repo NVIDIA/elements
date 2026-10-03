@@ -53,15 +53,18 @@ describe(ViewportGridlines.metadata.tag, () => {
     expect({
       originX: gridlines.originX,
       originY: gridlines.originY,
+      pattern: gridlines.pattern,
       step: gridlines.step,
       targetSpacing: gridlines.targetSpacing
-    }).toEqual({ originX: 0, originY: 0, step: 10, targetSpacing: 64 });
+    }).toEqual({ originX: 0, originY: 0, pattern: 'lines', step: 10, targetSpacing: 64 });
 
+    gridlines.pattern = 'dots';
     gridlines.step = 20;
     gridlines.originX = -15;
     gridlines.originY = 25;
     gridlines.targetSpacing = 80;
     await elementIsStable(gridlines);
+    expect(gridlines.getAttribute('pattern')).toBe('dots');
     expect(gridlines.getAttribute('step')).toBe('20');
     expect(gridlines.getAttribute('origin-x')).toBe('-15');
     expect(gridlines.getAttribute('origin-y')).toBe('25');
@@ -119,13 +122,150 @@ describe(ViewportGridlines.metadata.tag, () => {
     gridlines.originX = 20;
     gridlines.originY = -30;
     await elementIsStable(gridlines);
-    expect(patternOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+    expect(lineOrigin(gridlines)).toEqual({ x: 20, y: -30 });
 
     viewport.x = 600;
     viewport.y = -450;
     viewport.scale = 2;
     await elementIsStable(gridlines);
-    expect(patternOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+    expect(lineOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+  });
+
+  it('places dots at line intersections through panning and adaptive zoom', async () => {
+    gridlines.originX = 20;
+    gridlines.originY = -30;
+    await elementIsStable(gridlines);
+    const lineInterval = gridlines.shadowRoot?.querySelector('pattern')?.getAttribute('width');
+
+    gridlines.pattern = 'dots';
+    await elementIsStable(gridlines);
+    expect(gridlines.getAttribute('pattern')).toBe('dots');
+    expect(gridlines.shadowRoot?.querySelector('pattern')?.getAttribute('width')).toBe(lineInterval);
+    expect(dotOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+    expect(gridlines.shadowRoot?.querySelector('circle')?.namespaceURI).toBe('http://www.w3.org/2000/svg');
+
+    viewport.x = 600;
+    viewport.y = -450;
+    viewport.scale = 2;
+    await elementIsStable(gridlines);
+    expect(dotOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+    expect(gridlines.shadowRoot?.querySelector('pattern')?.getAttribute('width')).toBe('20');
+  });
+
+  it('keeps configured dot radius stable on screen while zooming', async () => {
+    gridlines.pattern = 'dots';
+    await elementIsStable(gridlines);
+    const circle = gridlines.shadowRoot?.querySelector<SVGCircleElement>('circle');
+    if (!circle) throw new Error('Expected a dot');
+    expect(getComputedStyle(circle).r).toBe('2px');
+
+    gridlines.style.setProperty('--dot-radius', '4px');
+    gridlines.style.setProperty('--color', 'rgb(10, 20, 30)');
+    expect(getComputedStyle(circle).r).toBe('4px');
+    expect(getComputedStyle(circle).fill).toBe('rgb(10, 20, 30)');
+
+    viewport.scale = 2;
+    await elementIsStable(gridlines);
+    expect(getComputedStyle(circle).r).toBe('2px');
+  });
+
+  it('places crosses at line intersections through panning and adaptive zoom', async () => {
+    const root = gridlines.shadowRoot;
+    if (!root) throw new Error('Expected a gridline shadow root');
+    gridlines.originX = 20;
+    gridlines.originY = -30;
+    await elementIsStable(gridlines);
+    const lineInterval = root.querySelector('pattern')?.getAttribute('width');
+
+    gridlines.pattern = 'crosses';
+    await elementIsStable(gridlines);
+    expect(gridlines.getAttribute('pattern')).toBe('crosses');
+    expect(root.querySelector('pattern')?.getAttribute('width')).toBe(lineInterval);
+    expect(crossOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+    expect(root.querySelector('g')?.namespaceURI).toBe('http://www.w3.org/2000/svg');
+
+    viewport.x = 600;
+    viewport.y = -450;
+    viewport.scale = 2;
+    await elementIsStable(gridlines);
+    expect(crossOrigin(gridlines)).toEqual({ x: 20, y: -30 });
+    expect(root.querySelector('pattern')?.getAttribute('width')).toBe('20');
+  });
+
+  it('keeps configured cross size and arm thickness stable on screen while zooming', async () => {
+    gridlines.pattern = 'crosses';
+    await elementIsStable(gridlines);
+    const horizontal = gridlines.shadowRoot?.querySelector('.cross-horizontal');
+    const vertical = gridlines.shadowRoot?.querySelector('.cross-vertical');
+    if (!(horizontal instanceof SVGRectElement) || !(vertical instanceof SVGRectElement)) {
+      throw new Error('Expected both cross arms');
+    }
+    expect(getComputedStyle(horizontal).width).toBe('8px');
+    expect(getComputedStyle(horizontal).height).toBe('1px');
+
+    gridlines.style.setProperty('--cross-size', '12px');
+    gridlines.style.setProperty('--line-width', '2px');
+    gridlines.style.setProperty('--color', 'rgb(10, 20, 30)');
+    expect(getComputedStyle(horizontal).width).toBe('12px');
+    expect(getComputedStyle(horizontal).height).toBe('2px');
+    expect(getComputedStyle(vertical).width).toBe('2px');
+    expect(getComputedStyle(vertical).height).toBe('12px');
+    const cross = gridlines.shadowRoot?.querySelector('.cross');
+    if (!cross) throw new Error('Expected a cross');
+    expect(getComputedStyle(cross).fill).toBe('rgb(10, 20, 30)');
+
+    viewport.scale = 2;
+    await elementIsStable(gridlines);
+    expect(getComputedStyle(horizontal).width).toBe('6px');
+    expect(getComputedStyle(horizontal).height).toBe('1px');
+    expect(getComputedStyle(horizontal).x).toBe('-3px');
+    expect(getComputedStyle(horizontal).y).toBe('-0.5px');
+    expect(getComputedStyle(vertical).width).toBe('1px');
+    expect(getComputedStyle(vertical).height).toBe('6px');
+    expect(getComputedStyle(vertical).x).toBe('-0.5px');
+    expect(getComputedStyle(vertical).y).toBe('-3px');
+  });
+
+  it('paints translucent crosses with the same opacity at the center and along each arm', async () => {
+    gridlines.pattern = 'crosses';
+    gridlines.originX = 25;
+    gridlines.originY = 25;
+    gridlines.style.setProperty('--cross-size', '20px');
+    gridlines.style.setProperty('--line-width', '4px');
+    gridlines.style.setProperty('--color', 'rgb(10 20 30 / 50%)');
+    await elementIsStable(gridlines);
+    const source = gridlines.shadowRoot?.querySelector('svg');
+    if (!source) throw new Error('Expected a gridline SVG');
+
+    // Rasterize the rendered SVG with resolved CSS geometry and paint.
+    const snapshot = source.cloneNode(true);
+    if (!(snapshot instanceof SVGSVGElement)) throw new Error('Expected an SVG snapshot');
+    snapshot.removeAttribute('style');
+    snapshot.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    snapshot.setAttribute('viewBox', '0 0 50 50');
+    snapshot.setAttribute('width', '50');
+    snapshot.setAttribute('height', '50');
+    const sourceRects = source.querySelectorAll('rect');
+    snapshot.querySelectorAll('rect').forEach((rect, index) => {
+      const original = sourceRects.item(index);
+      const style = getComputedStyle(original);
+      for (const property of ['x', 'y', 'width', 'height', 'fill']) {
+        rect.style.setProperty(property, style.getPropertyValue(property));
+      }
+    });
+    const image = new Image();
+    image.src = `data:image/svg+xml,${encodeURIComponent(new XMLSerializer().serializeToString(snapshot))}`;
+    await image.decode();
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 50;
+    const context = canvas.getContext('2d');
+    if (!context) throw new Error('Expected a canvas context');
+    context.drawImage(image, 0, 0);
+    const alphaAt = (x: number, y: number) => context.getImageData(x, y, 1, 1).data[3];
+    expect(alphaAt(25, 25)).toBe(128);
+    expect(alphaAt(18, 25)).toBe(128);
+    expect(alphaAt(25, 18)).toBe(128);
+    expect(alphaAt(18, 18)).toBe(0);
   });
 
   it('uses one shared interval and visually compensates line width for scale', async () => {
@@ -150,18 +290,22 @@ describe(ViewportGridlines.metadata.tag, () => {
     expect(requestUpdate).not.toHaveBeenCalled();
   });
 
-  it('retains property values when they are assigned again', () => {
+  it('does not schedule an update or render when configuration values are assigned again', async () => {
+    gridlines.step = 20;
+    gridlines.originX = -15;
+    gridlines.originY = 25;
+    gridlines.targetSpacing = 80;
+    await elementIsStable(gridlines);
+    const render = vi.spyOn(gridlines, 'render');
+
     gridlines.step = gridlines.step;
     gridlines.originX = gridlines.originX;
     gridlines.originY = gridlines.originY;
     gridlines.targetSpacing = gridlines.targetSpacing;
 
-    expect({
-      originX: gridlines.originX,
-      originY: gridlines.originY,
-      step: gridlines.step,
-      targetSpacing: gridlines.targetSpacing
-    }).toEqual({ originX: 0, originY: 0, step: 10, targetSpacing: 64 });
+    expect(gridlines.isUpdatePending).toBe(false);
+    await elementIsStable(gridlines);
+    expect(render).not.toHaveBeenCalled();
   });
 
   it('refreshes its projection when the viewport is resized', async () => {
@@ -225,7 +369,26 @@ describe('viewport gridline interval selection', () => {
   });
 });
 
-function patternOrigin(element: ViewportGridlines): { x: number; y: number } {
+function lineOrigin(element: ViewportGridlines): { x: number; y: number } {
   const pattern = element.shadowRoot?.querySelector('[data-gridline-pattern]');
   return { x: Number(pattern?.getAttribute('x')), y: Number(pattern?.getAttribute('y')) };
+}
+
+function dotOrigin(element: ViewportGridlines): { x: number; y: number } {
+  const pattern = element.shadowRoot?.querySelector('[data-gridline-pattern]');
+  const circle = pattern?.querySelector('circle');
+  return {
+    x: Number(pattern?.getAttribute('x')) + Number(circle?.getAttribute('cx')),
+    y: Number(pattern?.getAttribute('y')) + Number(circle?.getAttribute('cy'))
+  };
+}
+
+function crossOrigin(element: ViewportGridlines): { x: number; y: number } {
+  const pattern = element.shadowRoot?.querySelector('[data-gridline-pattern]');
+  const cross = pattern?.querySelector('g');
+  const translation = cross?.transform.baseVal.getItem(0).matrix;
+  return {
+    x: Number(pattern?.getAttribute('x')) + Number(translation?.e),
+    y: Number(pattern?.getAttribute('y')) + Number(translation?.f)
+  };
 }

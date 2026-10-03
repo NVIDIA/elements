@@ -24,10 +24,6 @@
 
 {% example '@nvidia-elements/core/viewport/viewport.examples.json' 'Minimap' '{ "inline": false, "height": "420px" }' %}
 
-## Customizable Background
-
-{% example '@nvidia-elements/core/viewport/viewport.examples.json' 'Background' '{ "inline": false, "height": "420px" }' %}
-
 ## Interactive Content
 
 {% example '@nvidia-elements/core/viewport/viewport.examples.json' 'InteractiveContent' '{ "inline": false, "height": "420px" }' %}
@@ -43,3 +39,15 @@
 ## Programmatic Navigation
 
 {% example '@nvidia-elements/core/viewport/viewport.examples.json' 'ProgrammaticNavigation' '{ "inline": false, "height": "420px" }' %}
+
+## Dot Grid
+
+{% example '@nvidia-elements/core/viewport/viewport.examples.json' 'Dots' '{ "inline": false, "height": "420px" }' %}
+
+## Cross Grid
+
+{% example '@nvidia-elements/core/viewport/viewport.examples.json' 'Crosses' '{ "inline": false, "height": "420px" }' %}
+
+## Customizable Background
+
+{% example '@nvidia-elements/core/viewport/viewport.examples.json' 'Background' '{ "inline": false, "height": "420px" }' %}

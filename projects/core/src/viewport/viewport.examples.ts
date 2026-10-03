@@ -43,7 +43,7 @@ export const Default = {
 };
 
 /**
- * @summary Provide custom minimap content to replace the automatic bounding boxes with a simplified representation of the viewport content.
+ * @summary Provide custom minimap content to replace the default bounding boxes with a simplified representation of the viewport content.
  */
 export const Minimap = {
   render: () => html`
@@ -71,45 +71,6 @@ export const Minimap = {
           <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
         </svg>
       </nve-viewport-minimap>
-    </nve-viewport>
-  `
-};
-
-/**
- * @summary Place custom content in the background slot to provide a spatial reference without affecting content fitting.
- */
-export const Background = {
-  render: () => html`
-    <nve-viewport autofit fit-inset="24" behavior-pan behavior-zoom style="height: 420px">
-      <svg
-        slot="background"
-        aria-hidden="true"
-        width="20480"
-        height="20480"
-        viewBox="-10240 -10240 20480 20480"
-        style="position: absolute; left: -10240px; top: -10240px"
-      >
-        <defs>
-          <pattern id="viewport-background-dots" width="100" height="100" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="2" fill="var(--nve-ref-border-color-emphasis)"></circle>
-          </pattern>
-        </defs>
-        <rect x="-10240" y="-10240" width="20480" height="20480" fill="url(#viewport-background-dots)"></rect>
-      </svg>
-
-      <svg
-        role="img"
-        aria-label="Three geometric forms in a spatial field"
-        width="900"
-        height="600"
-        viewBox="0 0 900 600"
-        style="position: absolute; left: 0; top: 0"
-      >
-        <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
-        <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
-        <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
-        <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
-      </svg>
     </nve-viewport>
   `
 };
@@ -364,5 +325,94 @@ export const ProgrammaticNavigation = {
         });
       });
     </script>
+  `
+};
+
+/**
+ * @summary Optionally configure viewport grid lines to use dots instead of lines.
+ */
+export const Dots = {
+  render: () => html`
+    <nve-viewport autofit fit-inset="24" behavior-pan behavior-zoom style="height: 420px">
+      <nve-viewport-gridlines pattern="dots"></nve-viewport-gridlines>
+
+      <svg
+        role="img"
+        aria-label="Three geometric forms in a spatial field"
+        width="900"
+        height="600"
+        viewBox="0 0 900 600"
+        style="position: absolute; left: 0; top: 0"
+      >
+        <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
+        <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
+        <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
+        <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
+      </svg>
+    </nve-viewport>
+  `
+};
+
+/**
+ * @summary Use crosses as spatial reference points to help users judge positions while keeping the content between them unobstructed.
+ */
+export const Crosses = {
+  render: () => html`
+    <nve-viewport autofit fit-inset="24" behavior-pan behavior-zoom style="height: 420px">
+      <nve-viewport-gridlines pattern="crosses"></nve-viewport-gridlines>
+
+      <svg
+        role="img"
+        aria-label="Three geometric forms in a spatial field"
+        width="900"
+        height="600"
+        viewBox="0 0 900 600"
+        style="position: absolute; left: 0; top: 0"
+      >
+        <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
+        <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
+        <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
+        <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
+      </svg>
+    </nve-viewport>
+  `
+};
+
+/**
+ * @summary Place custom content in the background slot to provide a spatial reference without affecting content fitting.
+ */
+export const Background = {
+  render: () => html`
+    <nve-viewport autofit fit-inset="24" behavior-pan behavior-zoom style="height: 420px">
+      <svg
+        slot="background"
+        aria-hidden="true"
+        width="20480"
+        height="20480"
+        viewBox="-10240 -10240 20480 20480"
+        style="position: absolute; left: -10240px; top: -10240px"
+      >
+        <defs>
+          <pattern id="viewport-background-triangles" width="200" height="200" patternUnits="userSpaceOnUse">
+            <path d="M 0 0 H 200 V 200 M 0 0 L 200 200 M 0 200 L 200 0" fill="none" stroke="var(--nve-ref-border-color-muted)" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+          </pattern>
+        </defs>
+        <rect x="-10240" y="-10240" width="20480" height="20480" fill="url(#viewport-background-triangles)"></rect>
+      </svg>
+
+      <svg
+        role="img"
+        aria-label="Three geometric forms in a spatial field"
+        width="900"
+        height="600"
+        viewBox="0 0 900 600"
+        style="position: absolute; left: 0; top: 0"
+      >
+        <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
+        <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
+        <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
+        <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
+      </svg>
+    </nve-viewport>
   `
 };

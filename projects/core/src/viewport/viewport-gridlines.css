@@ -2,9 +2,12 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 :host {
-  --_scale: 1;
   --color: var(--nve-ref-border-color-muted);
-  --line-width: 1px;
+  --line-width: var(--nve-ref-border-width-sm);
+  --dot-radius: var(--nve-ref-size-50);
+  --cross-size: var(--nve-ref-size-200);
+
+  --_scale: 1;
 
   position: absolute;
   inset: 0;
@@ -23,4 +26,27 @@ path {
   fill: none;
   stroke: var(--color);
   stroke-width: calc(var(--line-width) / var(--_scale));
+}
+
+circle {
+  fill: var(--color);
+  r: calc(var(--dot-radius) / var(--_scale));
+}
+
+.cross {
+  fill: var(--color);
+}
+
+.cross-horizontal {
+  x: calc(var(--cross-size) / var(--_scale) / -2);
+  y: calc(var(--line-width) / var(--_scale) / -2);
+  width: calc(var(--cross-size) / var(--_scale));
+  height: calc(var(--line-width) / var(--_scale));
+}
+
+.cross-vertical {
+  x: calc(var(--line-width) / var(--_scale) / -2);
+  y: calc(var(--cross-size) / var(--_scale) / -2);
+  width: calc(var(--line-width) / var(--_scale));
+  height: calc(var(--cross-size) / var(--_scale));
 }
