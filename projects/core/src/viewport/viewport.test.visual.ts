@@ -15,6 +15,26 @@ describe('viewport visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
+  test('viewport dots should match visual baseline', async () => {
+    const report = await visualRunner.render('viewport-dots', template('', 'dots'));
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('viewport dots should match visual baseline dark theme', async () => {
+    const report = await visualRunner.render('viewport-dots.dark', template('dark', 'dots'));
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('viewport crosses should match visual baseline', async () => {
+    const report = await visualRunner.render('viewport-crosses', template('', 'crosses'));
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('viewport crosses should match visual baseline dark theme', async () => {
+    const report = await visualRunner.render('viewport-crosses.dark', template('dark', 'crosses'));
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
   test('viewport minimap should match visual baseline', async () => {
     const report = await visualRunner.render('viewport-minimap', minimapTemplate(), { waitFor: waitForMinimap });
     expect(report.maxDiffPercentage).toBeLessThan(1);
@@ -46,16 +66,16 @@ async function waitForMinimap(waitForFunction: (...args: unknown[]) => Promise<u
   await waitForFunction(() => document.querySelector('nve-viewport-minimap')?.hasAttribute('data-visual-ready'));
 }
 
-function template(theme: '' | 'dark' = '') {
+function template(theme: '' | 'dark' = '', pattern: 'lines' | 'dots' | 'crosses' = 'lines') {
   return /* html */ `
     <script type="module">
       import '@nvidia-elements/core/viewport/define.js';
       document.documentElement.setAttribute('nve-theme', '${theme}');
     </script>
     <nve-viewport id="visual-viewport" x="40" y="30" scale="1.25" style="width: 500px; height: 320px; border: 1px solid currentColor">
-      <nve-viewport-gridlines origin-x="100" origin-y="100"></nve-viewport-gridlines>
+      <nve-viewport-gridlines pattern="${pattern}" origin-x="100" origin-y="100"></nve-viewport-gridlines>
       <svg aria-hidden="true" width="240" height="180" viewBox="0 0 240 180" style="position: absolute">
-        <circle cx="100" cy="100" r="6" fill="var(--nve-sys-accent-primary-background)"></circle>
+        <circle cx="85" cy="125" r="24" fill="var(--nve-sys-accent-primary-background)"></circle>
       </svg>
       <div style="position: absolute; left: 120px; top: 90px; padding: 24px; background: var(--nve-sys-layer-container-background)">•︎•︎•︎•︎•︎</div>
       <div style="position: absolute; left: 380px; top: 220px; padding: 16px; background: var(--nve-sys-layer-container-background)">•︎•︎•︎</div>
