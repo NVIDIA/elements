@@ -44,6 +44,20 @@ describe(Control.metadata.tag, () => {
     expect(customElements.get(Control.metadata.tag)).toBeDefined();
   });
 
+  it('should update associations and listeners when the native input changes', async () => {
+    const replacement = document.createElement('input');
+    replacement.required = true;
+    input.replaceWith(replacement);
+    await elementIsStable(element);
+    expect(element.input).toBe(replacement);
+    expect(label.htmlFor).toBe(replacement.id);
+    replacement.dispatchEvent(new Event('blur'));
+    expect(element.matches(':state(invalid)')).toBe(true);
+    input.value = 'detached';
+    input.dispatchEvent(new Event('input'));
+    expect(element.input).toBe(replacement);
+  });
+
   it('should assign nve-control attribute identifier', async () => {
     expect(element.hasAttribute('nve-control')).toBe(true);
   });

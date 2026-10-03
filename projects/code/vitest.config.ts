@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { playwright } from '@vitest/browser-playwright';
 import { mergeConfig } from 'vitest/config';
 import { libraryTestConfig } from '@internals/vite/configs/test.js';
 
@@ -7,24 +8,18 @@ export default mergeConfig(libraryTestConfig, {
   resolve: {
     alias: { '@nvidia-elements/code': resolve(import.meta.dirname, './src') }
   },
-  optimizeDeps: {
-    include: [
-      'highlight.js/lib/core',
-      'highlight.js/lib/languages/bash',
-      'highlight.js/lib/languages/css',
-      'highlight.js/lib/languages/go',
-      'highlight.js/lib/languages/ini',
-      'highlight.js/lib/languages/javascript',
-      'highlight.js/lib/languages/json',
-      'highlight.js/lib/languages/markdown',
-      'highlight.js/lib/languages/python',
-      'highlight.js/lib/languages/shell',
-      'highlight.js/lib/languages/typescript',
-      'highlight.js/lib/languages/xml',
-      'highlight.js/lib/languages/yaml'
-    ]
-  },
+
   test: {
+    browser: {
+      provider: playwright({
+        contextOptions: { permissions: ['clipboard-read', 'clipboard-write'] },
+        launchOptions: {
+          ...libraryTestConfig.test.browser.provider.options.launch,
+          channel: process.env.NVE_TEST_BROWSER_CHANNEL,
+          args: [...libraryTestConfig.test.browser.provider.options.launch.args, '--enable-blink-features=OpaqueRange']
+        }
+      })
+    },
     include: ['./src/**/*.test.ts'],
     coverage: {
       thresholds: {

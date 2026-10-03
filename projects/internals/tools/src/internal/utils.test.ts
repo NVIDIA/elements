@@ -47,6 +47,27 @@ describe('getElementImports', () => {
     expect(imports[5]).toBe(`import '@nvidia-elements/code/codeblock/define.js';`);
   });
 
+  it('loads selected code textarea languages and deduplicates registrations', () => {
+    const source =
+      '<nve-code-textarea language="markdown"></nve-code-textarea>' +
+      "<nve-code-textarea language='tsx'></nve-code-textarea>" +
+      '<nve-code-textarea language=markdown></nve-code-textarea>';
+    expect(getElementImports(source, elements)).toEqual([
+      "import '@nvidia-elements/code/codeblock/languages/markdown.js';",
+      "import '@nvidia-elements/code/codeblock/languages/tsx.js';"
+    ]);
+  });
+
+  it('ignores unsupported and misleading code textarea language attributes', () => {
+    const source =
+      '<nve-code-textarea language="../../other"></nve-code-textarea>' +
+      '<nve-code-textarea language="js"></nve-code-textarea>' +
+      '<nve-code-textarea data-language="markdown"></nve-code-textarea>';
+    expect(getElementImports(source, elements)).toEqual([
+      "import '@nvidia-elements/code/codeblock/languages/shell.js';"
+    ]);
+  });
+
   it('should get lazy element imports', () => {
     const html = '<nve-button></nve-button>';
     const imports = getElementImports(html, elements, true);

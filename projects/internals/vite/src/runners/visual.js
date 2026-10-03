@@ -17,9 +17,9 @@ export class VisualRunner {
   #chromiumArgs;
   #runner;
 
-  constructor({ chromiumArgs = CHROMIUM_ARGS } = {}) {
+  constructor({ chromiumArgs = CHROMIUM_ARGS, chromiumChannel } = {}) {
     this.#chromiumArgs = chromiumArgs;
-    this.#runner = new VitePlaywrightRunner({ runnerID: RUNNER_ID, chromiumArgs });
+    this.#runner = new VitePlaywrightRunner({ runnerID: RUNNER_ID, chromiumArgs, chromiumChannel });
   }
 
   async open() {

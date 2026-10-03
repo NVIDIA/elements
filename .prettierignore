@@ -21,6 +21,7 @@ projects/core/src/css/*.css
 projects/core/src/icon/server.ts
 projects/internals/metadata/static/*.json
 projects/monaco/src/themes/generated/*
+projects/code/src/internal/highlight/generated/**
 projects/**/src/vendor/**/*
 .vscode/*.json.code-snippets
 .output/**/*

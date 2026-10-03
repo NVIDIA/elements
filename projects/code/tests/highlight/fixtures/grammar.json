@@ -1,0 +1,43 @@
+{
+  "scopeName": "source.elements-experiment",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#keywords" },
+    { "match": "\\b\\d+(?:\\.\\d+)?\\b", "name": "constant.numeric" },
+    {
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.block",
+      "beginCaptures": { "0": { "name": "punctuation.section.block.begin" } },
+      "endCaptures": { "0": { "name": "punctuation.section.block.end" } },
+      "patterns": [{ "include": "$self" }]
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "match": "//[^\\n]*", "name": "comment.line" },
+        { "begin": "/\\*", "end": "\\*/", "name": "comment.block" }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "begin": "([\"'`])",
+          "end": "\\1",
+          "name": "string.quoted",
+          "beginCaptures": { "1": { "name": "punctuation.definition.string.begin" } },
+          "endCaptures": { "0": { "name": "punctuation.definition.string.end" } },
+          "patterns": [{ "match": "\\\\.", "name": "constant.character.escape" }]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        { "match": "\\b(?:const|let|function|return|true|false|null)\\b", "name": "keyword.control" },
+        { "match": "\\b(?:number|string|boolean)\\b", "name": "storage.type" }
+      ]
+    }
+  }
+}

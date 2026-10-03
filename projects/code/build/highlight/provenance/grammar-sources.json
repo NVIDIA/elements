@@ -1,0 +1,178 @@
+{
+  "shikiVersion": "4.4.3",
+  "archive": {
+    "package": "tm-grammars",
+    "version": "1.32.3",
+    "url": "https://registry.npmjs.org/tm-grammars/-/tm-grammars-1.32.3.tgz",
+    "integrity": "sha512-7h+UR4PPD4KY5Bu6olRkylEoEkrO8lK0Q6cHgThgq/IJWyiMj3iCcGlvJaLLplXW9PmOniOKnhajsBnM5/btfQ==",
+    "shikiLockfile": "https://github.com/shikijs/shiki/blob/v4.4.3/pnpm-lock.yaml"
+  },
+  "licenses": [
+    {
+      "name": "Microsoft VS Code grammar sources",
+      "file": "vscode.txt",
+      "source": "https://registry.npmjs.org/tm-grammars/-/tm-grammars-1.32.3.tgz#package/NOTICE",
+      "sha256": "9480271317925265e806a9a196aaa33410a962fa9d4d1e248a4a5187bc8c9df9"
+    },
+    {
+      "name": "Shell session grammar source",
+      "file": "shellsession.txt",
+      "source": "https://registry.npmjs.org/tm-grammars/-/tm-grammars-1.32.3.tgz#package/NOTICE",
+      "sha256": "ddc2256019afd35354a1a2ed90d13604209ce60c8eea2f4553beb3d7f4972286"
+    },
+    {
+      "name": "YAML grammar source",
+      "file": "yaml.txt",
+      "source": "https://raw.githubusercontent.com/textmate/yaml.tmbundle/e54ceae3b719506dba7e481a77cea4a8b576ae46/Syntaxes/YAML-license.txt",
+      "sha256": "e581bcdef2143dd5f06596801baebd40c0a31ee04b039b65f07a9ee3a5ea2afc"
+    },
+    {
+      "name": "TextMate TOML bundle source",
+      "file": "textmate-bundles.txt",
+      "source": "https://raw.githubusercontent.com/textmate/toml.tmbundle/e82b64c1e86396220786846201e9aa3f0a2d9ca2/README.mdown",
+      "sha256": "ad54092e1e9bffb3652ec126370dfaca6af630a317c57fa376819544542c440c"
+    }
+  ],
+  "sources": [
+    {
+      "language": "bash",
+      "module": "@shikijs/langs/bash",
+      "grammar": "shellscript",
+      "grammarSha256": "789d3394be453f4dc6cc9aa1890b8825af2ff24c2fa6c0cff8bb012e577fe95e",
+      "source": "https://github.com/microsoft/vscode/blob/9473445f7d3dcb5c579f42ece8b6c18c43c63ed3/extensions/shellscript/syntaxes/shell-unix-bash.tmLanguage.json",
+      "sourceCommit": "9473445f7d3dcb5c579f42ece8b6c18c43c63ed3",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "css",
+      "module": "@shikijs/langs/css",
+      "grammar": "css",
+      "grammarSha256": "e1e3736b0e10c63174768b99cb1f9a91952df5362a495def9f800d01682cfcc5",
+      "source": "https://github.com/microsoft/vscode/blob/091ef378baaa141c8bc4bbe9775d4cb3bd655a80/extensions/css/syntaxes/css.tmLanguage.json",
+      "sourceCommit": "091ef378baaa141c8bc4bbe9775d4cb3bd655a80",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "go",
+      "module": "@shikijs/langs/go",
+      "grammar": "go",
+      "grammarSha256": "f98f8200392637e24c25b329e7efc18014b0c48c094aca088c1352d704b88b2b",
+      "source": "https://github.com/microsoft/vscode/blob/091ef378baaa141c8bc4bbe9775d4cb3bd655a80/extensions/go/syntaxes/go.tmLanguage.json",
+      "sourceCommit": "091ef378baaa141c8bc4bbe9775d4cb3bd655a80",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "html",
+      "module": "@shikijs/langs/html",
+      "grammar": "html",
+      "grammarSha256": "fade3455c4d350d45719f5a2f7301ced5b24c0e20c2ae4146e17d1b98bf5971f",
+      "source": "https://github.com/microsoft/vscode/blob/45324363153075dab0482312ae24d8c068d81e4f/extensions/html/syntaxes/html.tmLanguage.json",
+      "sourceCommit": "45324363153075dab0482312ae24d8c068d81e4f",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "javascript",
+      "module": "@shikijs/langs/javascript",
+      "grammar": "javascript",
+      "grammarSha256": "a2108c805865c3a1d4941b30c97bdb68b23bebd6fd22c7656d2925527cc463fb",
+      "source": "https://github.com/microsoft/vscode/blob/210541906e5a96ab39f9c753f921b1bd35f4138b/extensions/javascript/syntaxes/JavaScript.tmLanguage.json",
+      "sourceCommit": "210541906e5a96ab39f9c753f921b1bd35f4138b",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "json",
+      "module": "@shikijs/langs/json",
+      "grammar": "json",
+      "grammarSha256": "9381fc3b1fd0bf3aad0dde03ca4a610fe4026b42173d33d4ae7b420ff24b5989",
+      "source": "https://github.com/microsoft/vscode/blob/d6af4893ed9a3545163a4cb748fa5548bd1e51a5/extensions/json/syntaxes/JSON.tmLanguage.json",
+      "sourceCommit": "d6af4893ed9a3545163a4cb748fa5548bd1e51a5",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "markdown",
+      "module": "@shikijs/langs/markdown",
+      "grammar": "markdown",
+      "grammarSha256": "fde1b213bed66c82be370343c505dd8abb85779c2c67959e67de312174d525c9",
+      "source": "https://github.com/microsoft/vscode/blob/6d8ab9737d58fc5eaf07e2ae6553b38183a5de47/extensions/markdown-basics/syntaxes/markdown.tmLanguage.json",
+      "sourceCommit": "6d8ab9737d58fc5eaf07e2ae6553b38183a5de47",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "python",
+      "module": "@shikijs/langs/python",
+      "grammar": "python",
+      "grammarSha256": "381098c267ced3f1cdf3a2f47b9d3692da77601575c30251c25ab2fde4a7b999",
+      "source": "https://github.com/microsoft/vscode/blob/cf4c9e469d521fa5f33353737e8157eb0789ad02/extensions/python/syntaxes/MagicPython.tmLanguage.json",
+      "sourceCommit": "cf4c9e469d521fa5f33353737e8157eb0789ad02",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "shell",
+      "module": "@shikijs/langs/shellsession",
+      "grammar": "shellsession",
+      "grammarSha256": "71c8a776ffd0f6981b20bd4b1560ecbfd27d35d2b4e945fed19984a8b4f664c1",
+      "source": "https://github.com/hronro/sublime-linguist-syntax/blob/9c84f1d69dbe89bc23292f129cf2d408a9c7afe1/syntaxes/ShellSession.tmLanguage",
+      "sourceCommit": "9c84f1d69dbe89bc23292f129cf2d408a9c7afe1",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/hronro/sublime-linguist-syntax/master/LICENSE"
+    },
+    {
+      "language": "toml",
+      "module": "@shikijs/langs/toml",
+      "grammar": "toml",
+      "grammarSha256": "5988b12d0dad9c8c45abb97e2f7e5eb65350f4b5267881d6ea7261f3bea6b775",
+      "source": "https://github.com/textmate/toml.tmbundle/blob/e82b64c1e86396220786846201e9aa3f0a2d9ca2/Syntaxes/TOML.tmLanguage",
+      "sourceCommit": "e82b64c1e86396220786846201e9aa3f0a2d9ca2",
+      "license": "LicenseRef-TextMateBundle",
+      "licenseUrl": "https://raw.githubusercontent.com/textmate/toml.tmbundle/e82b64c1e86396220786846201e9aa3f0a2d9ca2/README.mdown"
+    },
+    {
+      "language": "tsx",
+      "module": "@shikijs/langs/tsx",
+      "grammar": "tsx",
+      "grammarSha256": "e04ffdb50f237b70ab8c27653681a72004617ece8a6d5ff6aba58eaae6082eae",
+      "source": "https://github.com/microsoft/vscode/blob/210541906e5a96ab39f9c753f921b1bd35f4138b/extensions/typescript-basics/syntaxes/TypeScriptReact.tmLanguage.json",
+      "sourceCommit": "210541906e5a96ab39f9c753f921b1bd35f4138b",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "typescript",
+      "module": "@shikijs/langs/typescript",
+      "grammar": "typescript",
+      "grammarSha256": "c131a59a924cda308e7110ca829803fa2bfd04688f6bc1c809285c4a583e25cc",
+      "source": "https://github.com/microsoft/vscode/blob/210541906e5a96ab39f9c753f921b1bd35f4138b/extensions/typescript-basics/syntaxes/TypeScript.tmLanguage.json",
+      "sourceCommit": "210541906e5a96ab39f9c753f921b1bd35f4138b",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "xml",
+      "module": "@shikijs/langs/xml",
+      "grammar": "xml",
+      "grammarSha256": "f3f0790779b50a53d18e9a988b573f2022fa62593900523f30201de37e99267a",
+      "source": "https://github.com/microsoft/vscode/blob/10a1d2a50a2882f5ae85bdb51eb04d3064fb9de9/extensions/xml/syntaxes/xml.tmLanguage.json",
+      "sourceCommit": "10a1d2a50a2882f5ae85bdb51eb04d3064fb9de9",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/microsoft/vscode/main/LICENSE.txt"
+    },
+    {
+      "language": "yaml",
+      "module": "@shikijs/langs/yaml",
+      "grammar": "yaml",
+      "grammarSha256": "882cd7b525700b12cf1d3640473a8bae8a43bf93a4347506e3b73455f7352c4f",
+      "source": "https://github.com/textmate/yaml.tmbundle/blob/e54ceae3b719506dba7e481a77cea4a8b576ae46/Syntaxes/YAML.tmLanguage",
+      "sourceCommit": "e54ceae3b719506dba7e481a77cea4a8b576ae46",
+      "license": "MIT",
+      "licenseUrl": "https://raw.githubusercontent.com/textmate/yaml.tmbundle/e54ceae3b719506dba7e481a77cea4a8b576ae46/Syntaxes/YAML-license.txt"
+    }
+  ]
+}

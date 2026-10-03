@@ -70,7 +70,6 @@ catalogs:
     element-internals-polyfill: ^3.0.2
     eslint: '>= 10' # peer dependency for eslint
     formdata-polyfill: ^4.0.10
-    highlight.js: ^11.12.0
     lit: ^3.3.3
     lit-html: ^3.3.3
     markdown-it: ^15.0.1
@@ -98,6 +97,7 @@ catalog:
   '@modelcontextprotocol/ext-apps': 2.0.3
   '@modelcontextprotocol/sdk': 1.31.0
   '@modelcontextprotocol/server': 2.2.0
+  '@shikijs/langs': 4.4.3
   '@types/node': 26.5.0
   '@types/react': 19.2.18
   '@types/react-dom': 19.2.7
@@ -119,7 +119,7 @@ catalog:
   markdown-it: 15.0.1
   markdown-it-link-attributes: 4.0.1
   minisearch: 7.2.0
-  playwright: 1.62.1
+  playwright: 1.63.0
   postcss: 8.5.26
   publint: 0.3.24
   react: 19.2.8

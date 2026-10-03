@@ -50,7 +50,19 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
       ]
     : [];
 
-  return Array.from(new Set([...IMPORTS, ...ELEMENTS_CODE_IMPORTS]));
+  return Array.from(new Set([...IMPORTS, ...ELEMENTS_CODE_IMPORTS, ...getCodeTextareaLanguages(html)]));
+}
+
+function getCodeTextareaLanguages(html: string) {
+  const imports = new Set<string>();
+  for (const [, attributes] of html.matchAll(/<nve-code-textarea\b([^>]*)>/g)) {
+    const match = attributes?.match(/(?:^|\s)language\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/);
+    const language = match?.[1] ?? match?.[2] ?? match?.[3] ?? 'shell';
+    if (/^(?:bash|css|go|html|javascript|json|markdown|python|shell|toml|tsx|typescript|xml|yaml)$/.test(language)) {
+      imports.add(`import '@nvidia-elements/code/codeblock/languages/${language}.js';`);
+    }
+  }
+  return [...imports];
 }
 
 export function wrapText(text = '', width = 80) {

@@ -11,8 +11,8 @@
     "custom-elements",
     "code-blocks",
     "syntax-highlighting",
-    "highlight.js",
-    "lit"
+    "lit",
+    "css-highlights"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
@@ -142,6 +142,14 @@
       "types": "./dist/codeblock/languages/typescript.d.ts",
       "default": "./dist/codeblock/languages/typescript.js"
     },
+    "./codeblock/languages/tsx": {
+      "types": "./dist/codeblock/languages/tsx.d.ts",
+      "default": "./dist/codeblock/languages/tsx.js"
+    },
+    "./codeblock/languages/tsx.js": {
+      "types": "./dist/codeblock/languages/tsx.d.ts",
+      "default": "./dist/codeblock/languages/tsx.js"
+    },
     "./codeblock/languages/typescript.js": {
       "types": "./dist/codeblock/languages/typescript.d.ts",
       "default": "./dist/codeblock/languages/typescript.js"
@@ -169,6 +177,26 @@
     "./codeblock/languages/yaml.js": {
       "types": "./dist/codeblock/languages/yaml.d.ts",
       "default": "./dist/codeblock/languages/yaml.js"
+    },
+    "./codeblock/languages/shell": {
+      "types": "./dist/codeblock/languages/shell.d.ts",
+      "default": "./dist/codeblock/languages/shell.js"
+    },
+    "./codeblock/languages/shell.js": {
+      "types": "./dist/codeblock/languages/shell.d.ts",
+      "default": "./dist/codeblock/languages/shell.js"
+    },
+    "./code-textarea": {
+      "types": "./dist/code-textarea/index.d.ts",
+      "default": "./dist/code-textarea/index.js"
+    },
+    "./code-textarea/index.js": {
+      "types": "./dist/code-textarea/index.d.ts",
+      "default": "./dist/code-textarea/index.js"
+    },
+    "./code-textarea/define.js": {
+      "types": "./dist/code-textarea/define.d.ts",
+      "default": "./dist/code-textarea/define.js"
     }
   },
   "sideEffects": [
@@ -176,7 +204,9 @@
     "./src/codeblock/languages/*.ts",
     "./**/define.js",
     "./dist/bundles/*.js",
-    "./dist/codeblock/languages/*.js"
+    "./dist/codeblock/languages/*.js",
+    "./src/internal/highlight/generated/register-*.mjs",
+    "./dist/internal/highlight/generated/register-*.js"
   ],
   "scripts": {
     "ci": "wireit",
@@ -185,13 +215,18 @@
     "build:watch": "wireit",
     "lint": "wireit",
     "test": "wireit",
+    "test:bench": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
-    "test:lighthouse": "wireit"
+    "test:lighthouse": "wireit",
+    "test:visual": "wireit",
+    "test:ssr": "wireit",
+    "test:bench:code-textarea": "wireit",
+    "build:highlight": "wireit",
+    "test:highlight": "wireit"
   },
   "dependencies": {
-    "highlight.js": "catalog:publish",
     "lit": "catalog:publish",
     "lit-html": "catalog:publish"
   },
@@ -200,6 +235,7 @@
     "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
+    "@lit-labs/ssr-client": "catalog:",
     "@eslint/js": "catalog:",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
@@ -207,10 +243,12 @@
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
+    "@shikijs/langs": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
+    "esbuild": "catalog:",
     "highlight.js": "catalog:",
     "lit": "catalog:",
     "lit-html": "catalog:",
@@ -219,7 +257,8 @@
     "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "@vitest/browser-playwright": "catalog:"
   },
   "wireit": {
     "dev": {
@@ -227,7 +266,8 @@
       "dependencies": [
         "build",
         "build:watch"
-      ]
+      ],
+      "files": []
     },
     "ci": {
       "dependencies": [
@@ -235,8 +275,12 @@
         "lint",
         "publint",
         "test:axe",
-        "test:coverage"
-      ]
+        "test:coverage",
+        "test:ssr",
+        "test:highlight",
+        "test:visual"
+      ],
+      "files": []
     },
     "publint": {
       "dependencies": [
@@ -264,7 +308,10 @@
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
-        "vite.bundle.ts"
+        "vite.bundle.ts",
+        "src/internal/highlight/generated/**",
+        "!src/**/*.test.mjs",
+        "!src/**/*.test.bench.ts"
       ],
       "output": [
         "dist/**"
@@ -274,7 +321,8 @@
         {
           "script": "../core:build",
           "cascade": false
-        }
+        },
+        "build:highlight"
       ]
     },
     "build:watch": {
@@ -282,7 +330,8 @@
       "service": true,
       "dependencies": [
         "build"
-      ]
+      ],
+      "files": []
     },
     "test": {
       "command": "vitest run",
@@ -306,7 +355,13 @@
           "script": "build",
           "cascade": false
         }
-      ]
+      ],
+      "env": {
+        "NVE_TEST_BROWSER_CHANNEL": {
+          "external": true,
+          "default": ""
+        }
+      }
     },
     "test:coverage": {
       "command": "vitest run --coverage",
@@ -332,11 +387,41 @@
           "script": "build",
           "cascade": false
         }
-      ]
+      ],
+      "env": {
+        "NVE_TEST_BROWSER_CHANNEL": {
+          "external": true,
+          "default": ""
+        }
+      }
     },
     "test:watch": {
       "command": "vitest --watch",
-      "service": true
+      "service": true,
+      "dependencies": [],
+      "files": []
+    },
+    "test:bench": {
+      "command": "vitest bench --run --config=vitest.bench.ts",
+      "files": [
+        "src/**",
+        "tests/highlight/fixtures/**",
+        "vitest.bench.ts",
+        "package.json"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../internals/testing:build",
+        "../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        "NVE_TEST_BROWSER_CHANNEL": {
+          "external": true,
+          "default": ""
+        }
+      }
     },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
@@ -377,20 +462,32 @@
         }
       ],
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "NVE_TEST_BROWSER_CHANNEL": {
+          "external": true,
+          "default": ""
+        }
       }
     },
     "lint": {
       "dependencies": [
         "lint:eslint",
         "lint:style"
-      ]
+      ],
+      "files": []
     },
     "lint:eslint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
-        "eslint.config.js"
+        "eslint.config.js",
+        "src/**/*.mjs",
+        "src/**/*.d.mts",
+        "build/**/*.mjs",
+        "tests/**/*.mjs",
+        "benchmarks/**/*.mjs",
+        "src/**/*.test.bench.ts",
+        "vitest.bench.ts"
       ],
       "output": [],
       "dependencies": [
@@ -404,14 +501,117 @@
         "src/**/*.css",
         "../../stylelint.config.mjs"
       ],
-      "output": []
+      "output": [],
+      "dependencies": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
         "../internals/eslint:ci",
         "../lint:build"
+      ],
+      "files": []
+    },
+    "test:visual": {
+      "command": "vitest run --config=vitest.visual.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.visual.ts",
+        "vitest.visual.ts",
+        "vitest.visual.html"
+      ],
+      "output": [
+        ".visual/*.png",
+        "coverage/visual/**"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ],
+      "env": {
+        "NVE_TEST_BROWSER_CHANNEL": {
+          "external": true,
+          "default": ""
+        }
+      },
+      "clean": false
+    },
+    "test:ssr": {
+      "command": "vitest run --config=vitest.ssr.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ssr.ts",
+        "vitest.ssr.ts",
+        "tests/fixtures/**",
+        "vitest.ssr.html"
+      ],
+      "output": [
+        "coverage/ssr/**"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
       ]
+    },
+    "test:bench:code-textarea": {
+      "command": "vitest bench --run --config=vitest.bench.ts src/code-textarea/code-textarea.test.bench.ts --outputFile.json=coverage/bench/code-textarea.json",
+      "files": [
+        "src/code-textarea/**",
+        "src/codeblock/**",
+        "vitest.bench.ts",
+        "package.json",
+        "../../pnpm-lock.yaml",
+        "src/internal/highlight/**"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ],
+      "output": [
+        "coverage/bench/code-textarea.json"
+      ],
+      "env": {
+        "NVE_TEST_BROWSER_CHANNEL": {
+          "external": true,
+          "default": ""
+        }
+      }
+    },
+    "build:highlight": {
+      "command": "node build/highlight/generate.mjs src/internal/highlight/generated --shared-fragments",
+      "files": [
+        "build/highlight/**",
+        "!build/highlight/**/*.test.mjs",
+        "src/internal/highlight/categories.mjs",
+        "node_modules/@shikijs/langs/package.json",
+        "node_modules/@shikijs/langs/LICENSE",
+        "node_modules/@shikijs/langs/dist/*.mjs",
+        "node_modules/highlight.js/package.json",
+        "node_modules/highlight.js/LICENSE",
+        "node_modules/highlight.js/lib/core.js",
+        "node_modules/highlight.js/lib/languages/{bash,go,javascript,typescript,xml}.js",
+        "../../pnpm-lock.yaml",
+        "../../pnpm-workspace.yaml",
+        "package.json"
+      ],
+      "output": [
+        "src/internal/highlight/generated/**"
+      ],
+      "clean": false,
+      "dependencies": []
+    },
+    "test:highlight": {
+      "command": "node --test build/highlight/**/*.test.mjs build/highlight/*.test.mjs src/internal/highlight/*.test.mjs tests/highlight/compatibility.test.mjs tests/highlight/jsx-dialects.test.mjs benchmarks/highlight/memory-dump.test.mjs",
+      "files": [
+        "build/highlight/**",
+        "src/internal/highlight/**",
+        "src/code-textarea/internal/incremental.mjs",
+        "tests/highlight/**",
+        "benchmarks/highlight/memory-dump*",
+        "package.json",
+        "../../pnpm-lock.yaml"
+      ],
+      "output": []
     }
   },
   "publishConfig": {

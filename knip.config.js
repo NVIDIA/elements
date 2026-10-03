@@ -1,8 +1,8 @@
 const PACKAGE_FILES = ['*.config.{js,ts,mjs,cjs}', '*.{js,ts,mjs,cjs}'];
 const PROJECT_FILES = ['*.{js,ts,mjs,cjs}'];
-const SOURCE_FILES = ['src/**/*.{js,ts,tsx}'];
+const SOURCE_FILES = ['src/**/*.{js,ts,tsx,mjs}'];
 const SOURCE_INDEX = ['src/**/index.{js,ts,tsx}'];
-const BUILD_FILES = ['build/**/*.{js,ts}'];
+const BUILD_FILES = ['build/**/*.{js,ts,mjs}'];
 const DEFINE_ENTRIES = ['src/**/define.ts'];
 const SERVER_ENTRIES = ['src/**/server.ts'];
 const EXAMPLE_ENTRIES = ['src/**/*.examples.ts'];
@@ -37,7 +37,6 @@ export default {
     'axe-core',
     'bun',
     'glob',
-    'highlight.js',
     'lit',
     'lit-html',
     'lint-staged',
@@ -73,6 +72,12 @@ export default {
     'projects/code': {
       entry: [
         ...PACKAGE_FILES,
+        'build/highlight/{compile,generate}.mjs',
+        'build/highlight/tools/*.mjs',
+        'build/**/*.test.mjs',
+        'tests/**/*.test.mjs',
+        'benchmarks/highlight/{bundle-size,measure-*}.mjs',
+        'benchmarks/**/*.test.mjs',
         ...SOURCE_INDEX,
         ...DEFINE_ENTRIES,
         ...EXAMPLE_ENTRIES,
@@ -82,7 +87,7 @@ export default {
         ...VITE_CONFIGS,
         ...VITEST_CONFIGS
       ],
-      project: [...PROJECT_FILES, ...SOURCE_FILES]
+      project: [...PROJECT_FILES, ...BUILD_FILES, ...SOURCE_FILES, 'tests/**/*.mjs', 'benchmarks/**/*.mjs']
     },
     'projects/core': {
       entry: [
@@ -137,7 +142,7 @@ export default {
       project: [...PROJECT_FILES, ...SOURCE_FILES]
     },
     'projects/internals/vite': {
-      entry: [...SOURCE_INDEX],
+      entry: [...SOURCE_INDEX, 'src/runners/*.d.ts'],
       project: [...SOURCE_FILES]
     },
     'projects/lint': {

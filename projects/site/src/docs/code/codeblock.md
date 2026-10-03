@@ -8,7 +8,7 @@
 
 ## Installation
 
-Note: import the language before the codeblock
+Note: Import the languages you need before defining the component.
 
 ```typescript
 // only import languages that you need

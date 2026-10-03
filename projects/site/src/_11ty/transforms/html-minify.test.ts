@@ -8,6 +8,14 @@ afterAll(() => {
 });
 
 describe('htmlMinifyTransform', () => {
+  it('should preserve native textarea whitespace and entities', async () => {
+    const value = '  # Title\n\n~~~typescript\n  const answer = 42;\n~~~\n&amp;\n';
+    const html = `<!doctype html><html><body><textarea name="source">${value}</textarea></body></html>`;
+    const result = await htmlMinifyTransform.call({ page: {} }, html, '/index.html');
+
+    expect(result).toContain(`<textarea name=source>${value}</textarea>`);
+  });
+
   it('should minify html output', async () => {
     const html = '<!doctype html>\n<html lang="en">\n  <body>Updates</body>\n</html>';
     const result = await htmlMinifyTransform.call({ page: {} }, html, '/index.html');

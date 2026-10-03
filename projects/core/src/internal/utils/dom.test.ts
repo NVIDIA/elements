@@ -370,6 +370,25 @@ describe('getPropertyChanges', () => {
     expect(input.value).toBe('after cleanup');
   });
 
+  it('preserves an existing own accessor and restores it after observation', () => {
+    const textarea = document.createElement('textarea');
+    const native = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+    if (!native?.get || !native.set) throw new Error('Missing native value accessor');
+    const getter = native.get;
+    const setter = native.set;
+    const tracked = vi.fn((value: string) => setter.call(textarea, value));
+    const own = { configurable: true, enumerable: true, get: getter, set: tracked };
+    Object.defineProperty(textarea, 'value', own);
+    const observed = vi.fn();
+    const cleanup = getPropertyChanges(textarea, 'value', observed);
+    textarea.value = 'tracked';
+    expect(tracked).toHaveBeenCalledWith('tracked');
+    expect(observed).toHaveBeenCalledWith('tracked');
+    expect(textarea.value).toBe('tracked');
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(own);
+  });
+
   it('should not throw when the property has no prototype descriptor', () => {
     const div = document.createElement('div');
 

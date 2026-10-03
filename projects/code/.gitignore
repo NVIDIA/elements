@@ -1,2 +1,6 @@
 dist
 node_modules
+src/internal/highlight/generated/
+.ssr/
+.visual/port
+.visual/*.diff.png

@@ -66,7 +66,8 @@ export function examplesToJSON(packageFile) {
                   console.warn(`Element ${element} example "${name}" is not stateless.`);
                 }
 
-                if (!template.includes('<template>')) {
+                // Code templates and native textarea values preserve authored whitespace.
+                if (!/<(?:template|textarea)(?:\s|>)/i.test(template)) {
                   try {
                     template = await prettier.format(template.replace(/\n\n/g, '\n'), {
                       parser: 'html',

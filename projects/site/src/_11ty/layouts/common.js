@@ -250,6 +250,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'highlighted selected' : ''}><a href="/docs/elements/card/">Card</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/chat-message/') ? 'highlighted selected' : ''}><a href="/docs/elements/chat-message/">Chat Message</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'highlighted selected' : ''}><a href="/docs/elements/checkbox/">Checkbox</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/code/code-textarea/') ? 'highlighted selected' : ''}><a href="/docs/code/code-textarea/">Code Textarea</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted selected' : ''}><a href="/docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted selected' : ''}><a href="/docs/elements/combobox/">Combobox</a></nve-tree-node>

@@ -52,12 +52,14 @@ export async function exampleShortcode(
           .toLowerCase()}">Edit Example</a></nve-button>`
       : '';
 
-  // replace all double newlines with single newlines in script tags only
-  // https://github.com/markdown-it/markdown-it/issues/1056
-  // https://spec.commonmark.org/0.31.2/#html-blocks
-  const templateContent = example?.template.replace(/\n\n/g, '\n');
+  const templateContent = example.template;
+  // Preserve textarea values while keeping blank lines from ending the surrounding Markdown HTML block.
+  const inlineContent = templateContent.replace(
+    /(<textarea\b[^>]*>)([\s\S]*?)(<\/textarea>)/gi,
+    (_match, opening, value, closing) => `${opening}${value.replaceAll('\n', '&#10;')}${closing}`
+  );
   const reload = globalThis.process.env.ELEVENTY_RUN_MODE === 'serve' ? reloadScript(example, canvasId) : '';
-  const inlineTemplate = /* html */ `<div id="${canvasId}_content">${templateContent}</div>${reload}`;
+  const inlineTemplate = /* html */ `<div id="${canvasId}_content">${inlineContent}</div>${reload}`;
   const iframeTemplate = /* html */ `<iframe loading="lazy" src="/examples/${example?.permalink}index.html" style="height: 100%; width: 100%; border: none;"></iframe>`;
   const template = config.inline ? inlineTemplate : iframeTemplate;
   const summary = example.description || example.summary || '';
@@ -77,7 +79,7 @@ export async function exampleShortcode(
 <script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
 ${formattedSummary}
 <nvd-canvas id="${canvasId}" aria-label="example '${md.utils.escapeHtml(example.name)}'" data-pagefind-ignore="all" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
-  <pre aria-hidden="true"><code>${md.utils?.escapeHtml(templateContent)}</code></pre>${template}${editButton}
+  <pre aria-hidden="true"><code>${md.utils.escapeHtml(templateContent).replaceAll('\n', '&#10;')}</code></pre>${template}${editButton}
 </nvd-canvas>
 </div>`
         .trim()

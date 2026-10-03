@@ -99,17 +99,21 @@ export class Control extends LitElement {
   /** @private */
   get input(): HTMLInputElement {
     if (!isServer && !this.#input) {
-      const slotted =
-        this.querySelector('slot')
-          ?.assignedElements()
-          ?.find(i => i.matches(inputQuery)) ??
-        Array.from(this.shadowRoot!.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
-          i.matches(inputQuery)
-        );
-      this.#input = (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
+      this.#input = this.#findInput();
     }
 
     return this.#input;
+  }
+
+  #findInput(): HTMLInputElement {
+    const slotted =
+      this.querySelector('slot')
+        ?.assignedElements()
+        ?.find(i => i.matches(inputQuery)) ??
+      Array.from(this.shadowRoot!.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
+        i.matches(inputQuery)
+      );
+    return (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
   }
 
   /** @private */
@@ -176,6 +180,12 @@ export class Control extends LitElement {
   }
 
   #onRootSlotchange = () => {
+    const previous = this.#input;
+    this.#input = this.#findInput();
+    if (previous !== this.#input) {
+      this.#observers.forEach(observer => observer.disconnect());
+      this.#observers.length = 0;
+    }
     this.#updateStyleStates();
 
     if (this.input && this.#observers.length === 0) {

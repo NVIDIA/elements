@@ -14,7 +14,9 @@ describe('cdn bundle', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`<nve-codeblock></nve-codeblock>`);
-    element = fixture.querySelector('nve-codeblock');
+    const control = fixture.querySelector('nve-codeblock');
+    if (!control) throw new Error('Missing codeblock fixture');
+    element = control;
     await elementIsStable(element);
   });
 
@@ -24,6 +26,7 @@ describe('cdn bundle', () => {
 
   it('should register bundled custom elements', () => {
     expect(customElements.get('nve-codeblock')).toBeDefined();
+    expect(customElements.get('nve-code-textarea')).toBeDefined();
   });
 
   it('should register bundled languages', async () => {
@@ -38,6 +41,7 @@ describe('cdn bundle', () => {
       'python',
       'shell',
       'toml',
+      'tsx',
       'typescript',
       'xml',
       'yaml'
@@ -49,6 +53,6 @@ describe('cdn bundle', () => {
       await elementIsStable(element);
     }
 
-    expect(element.shadowRoot?.querySelector('code')?.textContent).toContain('value12');
+    expect(element.shadowRoot?.querySelector('code')?.textContent).toContain('value13');
   });
 });

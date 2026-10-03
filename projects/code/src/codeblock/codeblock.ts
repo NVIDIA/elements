@@ -1,20 +1,20 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement } from 'lit';
-import type { PropertyValues } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import { useStyles, shiftLeft } from '@nvidia-elements/core/internal';
 import styles from './codeblock.css?inline';
+import palette from '../internal/highlight/highlights.css?inline';
+import lines from './internal/line-decorations.css?inline';
+import { registerHighlights } from './internal/highlights.mjs';
+import { decorateLines } from './internal/line-decorations.mjs';
+import { getScanner } from '../internal/highlight/language-registry.mjs';
+import './languages/shell.js';
 
-import hljs from 'highlight.js/lib/core';
-import shell from 'highlight.js/lib/languages/shell';
-
-hljs.registerLanguage('shell', shell);
+const canHighlight = () => typeof CSS !== 'undefined' && CSS.highlights && typeof Highlight !== 'undefined';
 
 /**
  * @element nve-codeblock
@@ -58,6 +58,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
     | 'python'
     | 'shell'
     | 'toml'
+    | 'tsx'
     | 'typescript'
     | 'xml'
     | 'yaml' = 'shell';
@@ -80,105 +81,121 @@ export class CodeBlock extends LitElement implements ContainerElement {
    */
   @property({ type: String }) highlight?: string;
 
-  @state() private formattedCode?: string;
+  static styles = useStyles([styles, palette, lines]);
 
-  static styles = useStyles([styles]);
+  #text = '';
+  #slottedText = '';
+  #language?: CodeBlock['language'];
+  #cleanup?: () => void;
+  #register = true;
+  #lineCount = 0;
+  #observer?: ResizeObserver;
+  #lineFrame = 0;
+  #refreshLines = () => {
+    if (!this.isConnected || this.#lineFrame) return;
+    this.#lineFrame = requestAnimationFrame(() => {
+      this.#lineFrame = 0;
+      if (this.isConnected) this.#decorate();
+    });
+  };
 
-  get #source(): string | undefined {
-    const textContent = this.shadowRoot
-      ?.querySelector('slot')
-      ?.assignedNodes()
-      .reduce((p: string[], n) => {
-        let template = '';
-        if (n instanceof HTMLTemplateElement) {
-          template = n.content.textContent ?? '';
-        } else if (n instanceof HTMLPreElement) {
-          const code = n.querySelector('code');
-          template = code ? (code.textContent ?? '') : n.innerHTML;
-        } else if (n instanceof HTMLElement) {
-          template = n.innerHTML;
-        } else {
-          template = n.textContent ?? '';
-        }
-
-        return [...p, template];
-      }, [] as string[])
-      .join('');
-
-    return shiftLeft(this.code ?? (textContent as string));
-  }
-
-  render() {
-    return html`
-      <div internal-host role="none">
-        <pre class="hljs" role="none"><code class=${this.language ?? ''}><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
-        <slot name="actions"></slot>
-      </div>
-    `;
-  }
-
-  update(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('code')) {
-      this.#updateCode();
-    }
-
-    super.update(changedProperties);
-  }
-
-  #updateCode(): void {
-    const code = this.#source?.trim();
-    if (!code) {
-      return;
-    }
-
-    // apply highlightjs
-    this.formattedCode = hljs.highlight(code, { language: this.language }).value;
-
-    // apply line-numbers
-    if (this.lineNumbers) {
-      const lines = this.formattedCode.split('\n').map((line, index) => {
-        return `<span class="hljs-linenumber">${index + 1}</span>${line}`;
-      });
-      this.formattedCode = lines.join('\n');
-    }
-
-    // apply line highlights
-    if (this.highlight) {
-      const linesToHighlight = this.#getLinesToHighlight();
-      const lines = this.formattedCode.split('\n').map((line, index) => {
-        let span = line;
-        if (linesToHighlight.includes(index + 1)) {
-          let wrapped = line;
-          // fix for highlightjs multi-line comments
-          if (line.includes('hljs-comment') && !line.endsWith('</span>')) {
-            wrapped = `${line}</span>`;
-          }
-          span = `<span class="hljs-highlight">${wrapped}</span>`;
-        }
-        return span;
-      });
-      this.formattedCode = lines.join('\n');
-    }
-
+  connectedCallback() {
+    super.connectedCallback();
+    this.#register = true;
     this.requestUpdate();
   }
 
-  #getLinesToHighlight() {
-    const range: number[] = [];
-    const lines = this.highlight!.split(',');
-    for (const line of lines) {
-      const [startStr, endStr] = line.split('-');
-      const start = parseInt(startStr!);
-      let end = parseInt(endStr!);
-      if (!end) {
-        end = start;
-      }
+  disconnectedCallback() {
+    this.#cleanup?.();
+    this.#cleanup = undefined;
+    this.#stopLines();
+    super.disconnectedCallback();
+  }
 
-      for (let i = start; i <= end; i++) {
-        range.push(i);
+  #readSlot = () => {
+    if (!this.hasUpdated) return;
+    const source =
+      this.shadowRoot
+        ?.querySelector<HTMLSlotElement>('slot:not([name])')
+        ?.assignedNodes()
+        .map(node => {
+          if (node instanceof HTMLTemplateElement) return node.content.textContent ?? '';
+          if (node instanceof HTMLPreElement) return node.querySelector('code')?.textContent ?? node.innerHTML;
+          if (node instanceof HTMLElement) return node.innerHTML;
+          return node.textContent ?? '';
+        })
+        .join('') ?? '';
+    const text = shiftLeft(source).trim();
+    if (text === this.#slottedText) return;
+    this.#slottedText = text;
+    this.requestUpdate();
+  };
+
+  firstUpdated() {
+    // Hydrate the server's empty slotted-source part before updating its text.
+    this.#readSlot();
+  }
+
+  willUpdate() {
+    const text = this.code !== undefined ? shiftLeft(this.code).trim() : this.#slottedText;
+    if (text === this.#text && this.language === this.#language) return;
+    // Dispose ranges before Lit changes their text node.
+    this.#cleanup?.();
+    this.#cleanup = undefined;
+    this.#text = text;
+    this.#lineCount = text ? 1 : 0;
+    for (let offset = text.indexOf('\n'); offset !== -1; offset = text.indexOf('\n', offset + 1)) {
+      this.#lineCount++;
+    }
+    this.#language = this.language;
+    this.#register = true;
+  }
+
+  updated() {
+    if (!this.isConnected) return;
+    const code = this.shadowRoot?.querySelector('code');
+    this.#updateLines(code);
+    if (this.#register) {
+      this.#register = false;
+      if (code && canHighlight()) {
+        // Offsets are transient; the native highlights own the rendered ranges.
+        this.#cleanup = registerHighlights(code, this.#text ? getScanner(this.language)(this.#text) : []);
       }
     }
+  }
 
-    return range;
+  #updateLines(code?: HTMLElement | null) {
+    if (code && (this.lineNumbers || this.highlight)) {
+      if (!this.#observer) {
+        this.#observer = new ResizeObserver(this.#refreshLines);
+        this.#observer.observe(code);
+        this.ownerDocument.fonts.addEventListener('loadingdone', this.#refreshLines);
+      }
+      this.#decorate();
+    } else {
+      this.#stopLines();
+    }
+  }
+
+  #decorate() {
+    const pre = this.shadowRoot?.querySelector('pre');
+    if (pre) decorateLines(pre, this.#text, this.lineNumbers, this.highlight);
+  }
+
+  #stopLines() {
+    this.#observer?.disconnect();
+    this.#observer = undefined;
+    this.ownerDocument.fonts?.removeEventListener('loadingdone', this.#refreshLines);
+    if (this.#lineFrame) cancelAnimationFrame(this.#lineFrame);
+    this.#lineFrame = 0;
+  }
+
+  render() {
+    const decorated = this.lineNumbers || this.highlight;
+    return html`<div internal-host role="none">
+      <slot hidden @slotchange=${this.#readSlot}></slot>
+      <pre class=${`hljs${decorated ? ' decorated' : ''}${this.lineNumbers ? ' numbered' : ''}`} style=${`--_gutter-width:${Math.max(3, String(this.#lineCount).length)}ch`} role="none"><code class=${this.language}>${this.#text || nothing}</code>${decorated ? html`<span data-lines aria-hidden="true" inert></span>` : nothing}</pre>
+      <slot name="actions"></slot>
+    </div>`;
   }
 }

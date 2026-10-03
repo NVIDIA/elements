@@ -23,6 +23,7 @@ export class VitePlaywrightRunner {
   #chromiumArgs;
   /** @type {string} */
   #runnerID;
+  #chromiumChannel;
 
   get page() {
     return this.#page;
@@ -64,6 +65,7 @@ export class VitePlaywrightRunner {
 
   constructor(config = {}) {
     this.#runnerID = config.runnerID ?? 'playwright';
+    this.#chromiumChannel = config.chromiumChannel;
     this.#chromiumArgs = config.chromiumArgs ?? [
       '--headless',
       '--disable-dev-shm-usage',
@@ -97,10 +99,12 @@ export class VitePlaywrightRunner {
       }
 
       console.log('playwright-runner: launching browser');
-      this.#browser = await chromium.launch({ args: this.#chromiumArgs }).catch(error => {
-        console.error('playwright-runner: error launching browser', error);
-        throw error;
-      });
+      this.#browser = await chromium
+        .launch({ args: this.#chromiumArgs, channel: this.#chromiumChannel })
+        .catch(error => {
+          console.error('playwright-runner: error launching browser', error);
+          throw error;
+        });
       console.log('playwright-runner: creating context');
       this.#page = await (
         await this.#browser.newContext({ viewport: { width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT } })

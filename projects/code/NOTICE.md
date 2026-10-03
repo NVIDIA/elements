@@ -5,9 +5,6 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- highlight.js v11.12.0 [BSD-3-Clause]
-  Copyright: Josh Goebel <hello@joshgoebel.com>
-
 - lit v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
@@ -20,7 +17,6 @@ BSD-3-Clause
 
 The following bundled components are provided under the BSD-3-Clause license:
 
-highlight.js v11.12.0 - Copyright Josh Goebel <hello@joshgoebel.com>
 lit v3.3.3 - Copyright Google LLC
 lit-html v3.3.3 - Copyright Google LLC
 

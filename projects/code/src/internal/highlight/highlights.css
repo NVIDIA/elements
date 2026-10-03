@@ -1,0 +1,60 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+code::highlight(nve-code-keyword),
+code::highlight(nve-code-type),
+code::highlight(nve-code-literal) {
+  color: light-dark(var(--nve-ref-color-purple-violet-1100), var(--nve-ref-color-blue-cobalt-1100));
+}
+
+code::highlight(nve-code-tag) {
+  color: var(--nve-ref-color-blue-cobalt-1100);
+}
+
+code::highlight(nve-code-builtin) {
+  color: var(--nve-ref-color-yellow-nova-1100);
+}
+
+code::highlight(nve-code-class) {
+  color: var(--nve-ref-color-teal-seafoam-1100);
+}
+
+code::highlight(nve-code-comment),
+code::highlight(nve-code-number) {
+  color: var(--nve-ref-color-green-grass-1100);
+}
+
+code::highlight(nve-code-regex) {
+  color: light-dark(var(--nve-ref-color-red-tomato-1100), var(--nve-ref-color-pink-rose-1100));
+}
+
+code::highlight(nve-code-string),
+code::highlight(nve-code-escape),
+code::highlight(nve-code-link) {
+  color: var(--nve-ref-color-red-tomato-1100);
+}
+
+code::highlight(nve-code-addition) {
+  color: var(--nve-ref-color-lime-pear-1100);
+}
+
+code::highlight(nve-code-deletion) {
+  color: var(--nve-ref-color-red-cardinal-1100);
+}
+
+code::highlight(nve-code-invalid) {
+  text-decoration: underline wavy var(--nve-ref-color-red-cardinal-1100);
+}
+
+code::highlight(nve-code-selector),
+code::highlight(nve-code-attribute) {
+  color: light-dark(var(--nve-ref-color-red-tomato-1100), var(--nve-ref-color-blue-cobalt-1100));
+}
+
+code::highlight(nve-code-meta) {
+  color: light-dark(var(--nve-sys-text-muted-color), var(--nve-ref-color-blue-cobalt-1100));
+}
+
+code::highlight(nve-code-selector-attribute) {
+  color: light-dark(var(--nve-ref-color-blue-indigo-1100), var(--nve-ref-color-red-tomato-1100));
+}

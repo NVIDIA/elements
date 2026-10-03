@@ -58,9 +58,6 @@ This product includes the following bundled third-party software:
 - fflate v0.8.3 [MIT] (used by: @nvidia-elements/pi)
   Copyright: Arjun Barrett <arjunbarrett@gmail.com>
 
-- highlight.js v11.12.0 [BSD-3-Clause] (used by: @nvidia-elements/code)
-  Copyright: Josh Goebel <hello@joshgoebel.com>
-
 - html-format v1.1.7 [MIT] (used by: @nvidia-elements/pi)
   Copyright: Mohamed Akram
 
@@ -307,7 +304,6 @@ BSD-3-Clause
 
 The following bundled components are provided under the BSD-3-Clause license:
 
-highlight.js v11.12.0 - Copyright Josh Goebel <hello@joshgoebel.com>
 lit v3.3.3 - Copyright Google LLC
 lit-html v3.3.3 - Copyright Google LLC
 

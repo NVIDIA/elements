@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { transformWithOxc } from 'vite';
+import { parse, type DefaultTreeAdapterMap } from 'parse5';
+import markdown from '../libraries/markdown.js';
 
 const patternExample = {
   id: 'pattern-chat-popover-chat',
@@ -32,11 +34,20 @@ const quotedNameExample = {
   permalink: '@internals/patterns/chat-pattern-chat-quoted-name/'
 };
 
+const textareaExample = {
+  ...patternExample,
+  id: 'code-textarea-markdown',
+  name: 'Markdown',
+  element: 'nve-code-textarea',
+  template:
+    '<nve-code-textarea><textarea>  # Title\n\n~~~typescript\n  const answer = 42;\n~~~\n</textarea></nve-code-textarea>'
+};
+
 async function importShortcode() {
   vi.resetModules();
   vi.doMock('../../index.11tydata.js', () => ({
     siteData: {
-      examples: [patternExample, structuredDataExample, quotedNameExample]
+      examples: [patternExample, structuredDataExample, quotedNameExample, textareaExample]
     }
   }));
   vi.doMock('@internals/tools/playground', () => ({
@@ -55,6 +66,24 @@ afterEach(() => {
 });
 
 describe('exampleShortcode', () => {
+  it('should preserve textarea values and displayed source through Markdown rendering', async () => {
+    const { exampleShortcode } = await importShortcode();
+    const html = await exampleShortcode('nve-code-textarea', 'Markdown');
+    const fragment = parse(markdown.render(html));
+    const nodes: DefaultTreeAdapterMap['node'][] = [];
+    const pending: DefaultTreeAdapterMap['node'][] = [fragment];
+    while (pending.length) {
+      const node = pending.pop();
+      if (!node) continue;
+      nodes.push(node);
+      if ('childNodes' in node) pending.push(...node.childNodes);
+    }
+    const textarea = nodes.find(node => node.nodeName === 'textarea');
+    const source = nodes.find(node => node.nodeName === 'code');
+    expect(textarea).toHaveProperty('childNodes.0.value', '  # Title\n\n~~~typescript\n  const answer = 42;\n~~~\n');
+    expect(source).toHaveProperty('childNodes.0.value', textareaExample.template);
+  });
+
   it('should render iframe examples from the root examples route', async () => {
     const { exampleShortcode } = await importShortcode();
 

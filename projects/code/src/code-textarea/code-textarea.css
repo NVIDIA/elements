@@ -1,0 +1,11 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --font-family: var(--nve-ref-font-family-roboto-mono);
+}
+
+::slotted(textarea) {
+  font-family: var(--font-family);
+  tab-size: 2;
+}
