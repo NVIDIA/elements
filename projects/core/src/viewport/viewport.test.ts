@@ -79,6 +79,10 @@ describe(Viewport.metadata.tag, () => {
       expect(element.hasAttribute('autofit')).toBe(true);
       expect(element.getAttribute('fit-inset')).toBe('24');
 
+      element.removeAttribute('behavior-pan');
+      await elementIsStable(element);
+      expect(element.behaviorPan).toBe(false);
+
       element.x = Number.NaN;
       element.y = Number.POSITIVE_INFINITY;
       element.scale = 0;
@@ -775,6 +779,23 @@ describe(Viewport.metadata.tag, () => {
   });
 
   describe('animation integration', () => {
+    it('keeps the minimum scale for an animated zoom-out request', async () => {
+      element.behaviorZoom = true;
+      element.minScale = 0.3;
+      element.scale = 0.3;
+      await elementIsStable(element);
+      const animationFrame = vi.spyOn(globalThis, 'requestAnimationFrame');
+      const zoom = vi.fn();
+      element.addEventListener('zoom', zoom);
+
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+
+      expect(zoom).toHaveBeenCalledOnce();
+      expect((zoom.mock.calls[0]?.[0] as CustomEvent<ViewportZoomDetail>).detail.next.scale).toBe(0.3);
+      expect(animationFrame).not.toHaveBeenCalled();
+      expect(element.scale).toBe(0.3);
+    });
+
     it('animates one keyboard zoom proposal and steps later keys from the pending destination', async () => {
       element.behaviorZoom = true;
       await elementIsStable(element);
