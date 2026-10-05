@@ -1,3 +1,9 @@
+## [2.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.11.2...@nvidia-elements/core-v2.12.0) (2026-10-05)
+
+### Features
+
+* **core:** add dot and cross patterns to viewport gridlines ([2693005](https://github.com/NVIDIA/elements/commit/26930057a5e4da4a0c2fb0d9fcfebf95c3dd9bc3))
+
 ## [2.11.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.11.1...@nvidia-elements/core-v2.11.2) (2026-10-02)
 
 ### Bug Fixes
