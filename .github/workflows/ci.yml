@@ -41,7 +41,7 @@ jobs:
         if: >-
           github.event_name == 'push' ||
           (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
-        uses: actions/upload-code-coverage@d8e329117199404bba6fc81efe8093dc7c015e34 # v1.4.2
+        uses: actions/upload-code-coverage@2b21a77928be8d5168c2b9581a67f2adbebacc52 # v1.4.4
         with:
           file: projects/internals/ci/coverage/cobertura.xml
           language: TypeScript
@@ -228,7 +228,7 @@ jobs:
             projects/internals/ci/indexnow.js
             projects/internals/ci/package.json
           sparse-checkout-cone-mode: false
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+      - uses: jdx/mise-action@7a4e45a543138629540c9a1616d08632b893e492
         with:
           version: 2026.6.14
           install: true
@@ -255,7 +255,7 @@ jobs:
           overwrite: true
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
 
   notify-indexnow:
     needs: deploy-pages
@@ -273,7 +273,7 @@ jobs:
             projects/internals/ci/indexnow.js
             projects/internals/ci/package.json
           sparse-checkout-cone-mode: false
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+      - uses: jdx/mise-action@7a4e45a543138629540c9a1616d08632b893e492
         with:
           version: 2026.6.14
           install: true
