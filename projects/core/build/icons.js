@@ -130,6 +130,20 @@ function writeIconFiles(icons) {
 }
 
 function writeIconRegistry(icons) {
+  fs.writeFileSync(
+    path.join(outputPath, '../internal/types/icons.ts'),
+    `// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+// This is an auto-generated file. DO NOT EDIT
+export type IconName =
+${sortIconKeys(Object.keys(icons))
+  .filter(i => !i.endsWith('-outline') && !i.endsWith('-filled') && !i.endsWith('-solid'))
+  .map(i => `  | '${i}'`)
+  .join('\n')};
+`,
+    { encoding: 'utf-8' }
+  );
   return new Promise(r => {
     fs.writeFile(
       `${outputPath}/icons.ts`,
@@ -153,11 +167,8 @@ export const ICON_IMPORTS = {\n${sortIconKeys(Object.keys(icons))
         .map(i => `  '${i}': iconImport(() => import('./icons/${i}.svg?raw')),`)
         .join('\n')}\n};
 
-export type IconName =
-${sortIconKeys(Object.keys(icons))
-  .filter(i => !i.endsWith('-outline') && !i.endsWith('-filled') && !i.endsWith('-solid'))
-  .map(i => `  | '${i}'`)
-  .join('\n')};
+import type { IconName } from '../internal/types/icons.js';
+export type { IconName } from '../internal/types/icons.js';
 
 export type IconNameSolid =
 ${sortIconKeys(Object.keys(icons))

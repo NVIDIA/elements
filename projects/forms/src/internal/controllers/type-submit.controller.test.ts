@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
 
 import { TypeSubmitController } from './type-submit.controller.js';
-import type { ButtonType } from '../../mixins/button.types.js';
+import type { ButtonType } from '../types/button.js';
 import type { ReactiveController } from './types.js';
 
 class TypeSubmitControllerTestElement extends HTMLElement {

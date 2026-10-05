@@ -5,7 +5,7 @@ import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, emulateClick, removeFixture } from '@internals/testing';
 
-import type { PopoverTargetAction } from '../../mixins/button.types.js';
+import type { PopoverTargetAction } from '../types/button.js';
 import { TypePopoverTriggerController } from './type-popover-trigger.controller.js';
 import type { ReactiveController } from './types.js';
 
