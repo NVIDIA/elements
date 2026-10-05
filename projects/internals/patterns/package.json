@@ -48,6 +48,7 @@
     "test:types": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "lit": "catalog:"
   },
   "peerDependencies": {
@@ -98,6 +99,7 @@
       "command": "vite build",
       "clean": "if-file-deleted",
       "files": [
+        "../../code/dist/**/*.js",
         "../../core/dist/**/*.js",
         "../../themes/dist/**/*.css",
         "src/**",
@@ -111,6 +113,10 @@
       ],
       "dependencies": [
         "../vite:ci",
+        {
+          "script": "../../code:build",
+          "cascade": false
+        },
         {
           "script": "../../core:build",
           "cascade": false
