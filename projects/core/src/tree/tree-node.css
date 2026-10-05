@@ -53,8 +53,10 @@ slot:not(:has-slotted) {
   margin-inline-start: var(--nve-ref-space-xxxs);
   padding: var(--nve-ref-size-200) var(--nve-ref-size-100);
   min-height: var(--min-height);
+  gap: var(--nve-ref-space-xs);
   width: 100%;
-  display: block;
+  display: flex;
+  flex-direction: row;
 }
 
 [part='_node-header'] {

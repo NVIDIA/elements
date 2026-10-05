@@ -254,7 +254,8 @@ export const Complex = {
 };
 
 /**
- * @summary Vertical navigation menu groups with and without icons. For deeply nested navigation use the `nve-tree` component.
+ * @summary Use vertical navigation menu groups with optional icons to organize related destinations into collapsible sections. Use the `nve-tree` component for deeply nested navigation.
+ * @tags pattern
  */
 export const VerticalNavigation = {
   render: () => html`
