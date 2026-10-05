@@ -8,6 +8,10 @@
 
 # {{ title }}
 
+## Simple Vertical Navigation
+
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'VerticalNavigationPanel' %}
+
 ## Complex Tree Navigation
 
 {% example '@internals/patterns/navigation.examples.json' 'ComplexTreeNavigation' %}

@@ -801,7 +801,7 @@ export const StackedKitchenSinkHeaderDetailPage = {
 
 /**
  * @summary Viewer page subheader with centered zoom/layout controls and grouped action buttons. Ideal for media viewers, document previews, and split-pane layouts.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const StandardHeaderViewerPage = {
   render: () => html`
@@ -856,8 +856,8 @@ export const StandardHeaderViewerPage = {
 }
 
 /**
- * @summary Editor-style toolbar subheader with left tool groups, centered title, and right action buttons. Use for canvas editors and creative tools.
- * @tags test-case
+ * @summary Editor-style toolbar subheader with tool groups, content tile and action buttons. Use for canvas editors and creative tools.
+ * @tags pattern
  */
 export const StandardHeaderToolbarPage = {
   render: () => html`
