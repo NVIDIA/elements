@@ -4,13 +4,40 @@
 import { writeFileSync, rmSync, mkdtempSync, symlinkSync, mkdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { tmpdir } from 'node:os';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import open from 'open';
 import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
 import { PlaygroundService } from './service.js';
 import { createPlaygroundURL, MAX_PLAYGROUND_URL_LENGTH } from './utils.js';
 
+vi.mock('open', () => ({
+  default: vi.fn(() => Promise.resolve())
+}));
+
 // when ELEMENTS_PLAYGROUND_BASE_URL is not configured, createPlaygroundURL returns ''
 const hasPlaygroundBaseURL = createPlaygroundURL('test', []).length > 0;
+
+async function expectPlaygroundToOpen(environment: 'mcp' | 'cli') {
+  process.env.ELEMENTS_ENV = environment;
+  const ci = process.env.CI;
+  delete process.env.CI;
+  vi.mocked(open).mockClear();
+
+  try {
+    const result = await PlaygroundService.create({
+      template: '<nve-button>valid</nve-button>',
+      start: false
+    });
+    expect(vi.mocked(open)).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(open)).toHaveBeenCalledWith(result);
+  } finally {
+    if (ci === undefined) {
+      delete process.env.CI;
+    } else {
+      process.env.CI = ci;
+    }
+  }
+}
 
 describe('PlaygroundService', () => {
   it('should provide validate', async () => {
@@ -181,6 +208,14 @@ describe('PlaygroundService', () => {
       } else {
         expect(result).toBe('');
       }
+    });
+
+    it('should open the playground url outside ci in the mcp environment', async () => {
+      await expectPlaygroundToOpen('mcp');
+    });
+
+    it('should open the playground url outside ci in the cli environment', async () => {
+      await expectPlaygroundToOpen('cli');
     });
 
     it('should return URL when template passes lint in mcp environment', async () => {
