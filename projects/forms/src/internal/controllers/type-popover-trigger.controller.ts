@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { PopoverTargetAction } from '../../mixins/button.types.js';
+import type { PopoverTargetAction } from '../types/button.js';
 import { getFlattenedDOMTree, getHostAnchor } from '../utils.js';
 import type { PopoverAnchorElement } from '../utils.js';
 import type { ReactiveController, ReactiveElement } from './types.js';

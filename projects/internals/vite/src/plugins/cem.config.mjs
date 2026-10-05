@@ -405,7 +405,10 @@ function getMixinSourceRoots() {
   return [pkg.name, ...getDependencyPackageNames()]
     .map(getPackageRoot)
     .filter(Boolean)
-    .map(packageRoot => path.join(packageRoot, 'src', 'mixins'))
+    .flatMap(packageRoot => [
+      path.join(packageRoot, 'src', 'mixins'),
+      path.join(packageRoot, 'src', 'internal', 'types')
+    ])
     .filter(sourceRoot => fs.existsSync(sourceRoot));
 }
 

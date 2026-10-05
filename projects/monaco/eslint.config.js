@@ -9,6 +9,12 @@ export default [
   ...litConfig,
   ...jsonConfig,
   {
+    files: ['src/internal/base/editor.ts', 'src/internal/base/input.ts', 'src/internal/formats/problems-format.ts'],
+    rules: {
+      'local-typescript/no-internal-external-imports': 'off'
+    }
+  },
+  {
     files: ['src/bundle.ts'],
     rules: {
       'local/no-missing-bundle-registration': ['error']

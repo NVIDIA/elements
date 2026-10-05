@@ -23,8 +23,18 @@ import {
   isFormElement,
   setAttributeValue
 } from '../internal/utils.js';
-import type { ButtonFormControlMixinInstance, ButtonType, CurrentState, PopoverTargetAction } from './button.types.js';
-export type { ButtonFormControlMixinInstance, ButtonType, CurrentState, PopoverTargetAction } from './button.types.js';
+import type {
+  ButtonFormControlMixinInstance,
+  ButtonType,
+  CurrentState,
+  PopoverTargetAction
+} from '../internal/types/button.js';
+export type {
+  ButtonFormControlMixinInstance,
+  ButtonType,
+  CurrentState,
+  PopoverTargetAction
+} from '../internal/types/button.js';
 
 type ChangedProperties = Map<PropertyKey, unknown>;
 interface ButtonFormControlHost {

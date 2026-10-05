@@ -1125,6 +1125,7 @@
       ],
       "output": [
         "src/icon/icons.ts",
+        "src/internal/types/icons.ts",
         "src/icon/server.ts"
       ]
     },

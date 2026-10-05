@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { onKeys, stopEvent } from '../utils.js';
-import type { ButtonType } from '../../mixins/button.types.js';
+import type { ButtonType } from '../types/button.js';
 import type { ReactiveController, ReactiveElement } from './types.js';
 
 type SubmitHost = ReactiveElement & {

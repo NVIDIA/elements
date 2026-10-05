@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { TemplateResult } from 'lit';
-import type { IconName } from '@nvidia-elements/core/icon';
+import type { IconName } from './icons.js';
 import type { I18nStrings } from '../services/i18n.service.js';
 
 export type Color =

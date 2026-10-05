@@ -5,6 +5,7 @@ import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
 import deadCode from '../local/dead-code.js';
 import noDeepClassInheritance from '../local/no-deep-class-inheritance.js';
+import noInternalExternalImports from '../local/no-internal-external-imports.js';
 import exampleMetadata from '../local/example-metadata.js';
 import exampleNaming from '../local/example-naming.js';
 import exampleTemplateSize from '../local/example-template-size.js';
@@ -54,6 +55,7 @@ const config = {
       rules: {
         'no-dead-code': deadCode,
         'no-deep-class-inheritance': noDeepClassInheritance,
+        'no-internal-external-imports': noInternalExternalImports,
         'example-metadata': exampleMetadata,
         'example-naming': exampleNaming,
         'example-template-size': exampleTemplateSize,
@@ -119,6 +121,7 @@ const config = {
     'local-typescript/require-listener-cleanup': 'error',
     'local-typescript/require-observer-cleanup': 'error',
     'local-typescript/require-timer-cleanup': 'error',
+    'local-typescript/no-internal-external-imports': 'error',
 
     // todo: enable these rules incrementally as the codebase is cleaned up
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
