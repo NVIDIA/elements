@@ -374,9 +374,11 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''} ${data.page.url === '/docs/patterns/' ? 'highlighted' : ''}>
     <a href="/docs/patterns/">Patterns</a>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/agent/') ? 'highlighted selected' : ''}><a href="/docs/patterns/agent/">Agent</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/authentication/') ? 'highlighted selected' : ''}><a href="/docs/patterns/authentication/">Authentication</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted selected' : ''}><a href="/docs/patterns/browse/">Browse</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/chat/') ? 'highlighted selected' : ''}><a href="/docs/patterns/chat/">Chat</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/code/') ? 'highlighted selected' : ''}><a href="/docs/patterns/code/">Code</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/dashboard/') ? 'highlighted selected' : ''}><a href="/docs/patterns/dashboard/">Dashboard</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted selected' : ''}><a href="/docs/patterns/editor/">Editor</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/empty-states/') ? 'highlighted selected' : ''}><a href="/docs/patterns/empty-states/">Empty States</a></nve-tree-node>

@@ -21,6 +21,19 @@
 Patterns are an essential component of creating a cohesive and consistent user experience. Patterns are pre-defined combinations of existing components that teams reuse across different parts of the platform to streamline development and ensure consistency in the UI. By grouping components into patterns, teams can create a more organized and maintainable UI, as well as provide a unified look and feel for all users.
 
 <section class="pattern-links" nve-layout="grid gap:md span-items:12 &md|span-items:6 &xl|span-items:4 pad-top:lg">
+  <a href="/docs/patterns/agent/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="sparkles"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium emphasis">Agent</h2>
+          <p nve-text="body sm muted">Tasks, reasoning, sources, and prompt input.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="/docs/patterns/authentication/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
@@ -60,6 +73,19 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
+  <a href="/docs/patterns/code/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="code"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium emphasis">Code</h2>
+          <p nve-text="body sm muted">Test results, files, commits, and environment variables.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="/docs/patterns/editor/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
@@ -68,7 +94,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium emphasis">Editor</h2>
-          <p nve-text="body sm muted">Code and Content Editing Patterns</p>
+          <p nve-text="body sm muted">Content Editing Environment Patterns</p>
         </div>
       </div>
     </nve-card>
