@@ -3,7 +3,7 @@
 
 :host {
   margin: 0 calc(var(--padding) * -1) var(--padding) calc(var(--padding) * -1);
-  --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
   --padding: var(--nve-ref-size-400);
   width: calc(100% + calc(var(--padding) * 2));
 }

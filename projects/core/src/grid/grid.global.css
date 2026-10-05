@@ -15,11 +15,13 @@ nve-grid[container='flat'] nve-grid-header {
   --background: var(--nve-sys-layer-canvas-background);
 }
 
-nve-card,
-nve-panel,
 nve-dialog,
 nve-drawer,
-nve-accordion {
+nve-panel,
+nve-toggletip,
+nve-card:not([container='flat']),
+nve-page-panel:not([container='flat']),
+nve-accordion:not([container='flat']) {
   nve-grid[container='flat'] {
     nve-grid-header {
       --background: var(--nve-sys-layer-container-background);

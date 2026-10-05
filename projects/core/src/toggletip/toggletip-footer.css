@@ -2,7 +2,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 :host {
-  --border-top: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color);
+  --border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
   --padding: var(--nve-ref-size-400);
   --gap: var(--nve-ref-space-sm);
   display: block;

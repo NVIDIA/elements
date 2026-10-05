@@ -56,6 +56,11 @@
 
 :host([container='flat']) {
   --background: inherit;
+  --header-padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
+}
+
+:host([container='flat']) ::slotted(nve-accordion-content) {
+  --padding: var(--nve-ref-size-50) var(--nve-ref-size-400) var(--nve-ref-size-300) var(--nve-ref-size-400);
 }
 
 :host([disabled]) {
