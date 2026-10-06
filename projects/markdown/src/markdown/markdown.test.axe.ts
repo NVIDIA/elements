@@ -16,7 +16,8 @@ describe(Markdown.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-markdown></nve-markdown>
     `);
-    element = fixture.querySelector(Markdown.metadata.tag);
+    const fixtureElement = fixture.querySelector(Markdown.metadata.tag) as Markdown;
+    element = fixtureElement;
     await elementIsStable(element);
   });
 

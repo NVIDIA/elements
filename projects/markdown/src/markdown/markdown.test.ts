@@ -25,7 +25,7 @@ describe(Markdown.metadata.tag, () => {
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -46,7 +46,7 @@ describe(Markdown.metadata.tag, () => {
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -58,7 +58,7 @@ describe(Markdown.metadata.tag, () => {
       element.source = '# Hello Markdown';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h1>Hello Markdown</h1>');
     });
@@ -67,7 +67,7 @@ describe(Markdown.metadata.tag, () => {
       element.source = '# Hello HTML\n\nThis is <strong>HTML</strong> content within markdown';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h1>Hello HTML</h1>');
       expect(content.innerHTML).toContain('<p>This is <strong>HTML</strong> content within markdown</p>');
@@ -80,7 +80,7 @@ describe(Markdown.metadata.tag, () => {
       element.source = '*Updated content*';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<em>Updated content</em>');
     });
 
@@ -89,14 +89,14 @@ describe(Markdown.metadata.tag, () => {
       element.source = '# Hello World';
       await waitForMarkdownParsing(element);
 
-      let content = element.shadowRoot.querySelector('div');
+      let content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h1>Hello World</h1>');
 
       // Update with markdown containing HTML
       element.source = '## Hello **World** with <em>HTML</em>';
       await waitForMarkdownParsing(element);
 
-      content = element.shadowRoot.querySelector('div');
+      content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h2>Hello <strong>World</strong> with <em>HTML</em></h2>');
     });
   });
@@ -118,12 +118,12 @@ describe(Markdown.metadata.tag, () => {
 - item 2</template>
         </nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
 
       // Wait for the element to process the initial slotchange and markdown parsing
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h1>Markdown from template</h1>');
       expect(content.innerHTML).toContain('<ul>');
@@ -140,12 +140,12 @@ describe(Markdown.metadata.tag, () => {
 - item 2</template>
         </nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
 
       // Wait for the element to process the initial slotchange
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h1>Markdown with <em>HTML</em></h1>');
       expect(content.innerHTML).toContain('<ul>');
@@ -161,10 +161,10 @@ describe(Markdown.metadata.tag, () => {
 - This becomes a list item</template>
         </nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       // Should contain parsed HTML elements
       expect(content.innerHTML).toContain('<h1>This becomes a heading</h1>');
@@ -181,7 +181,7 @@ describe(Markdown.metadata.tag, () => {
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -193,7 +193,7 @@ describe(Markdown.metadata.tag, () => {
       element.source = '# Hello **World**';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h1>Hello <strong>World</strong></h1>');
     });
 
@@ -203,10 +203,10 @@ describe(Markdown.metadata.tag, () => {
           <template># Markdown Template</template>
         </nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h1>Markdown Template</h1>');
     });
   });
@@ -227,10 +227,10 @@ describe(Markdown.metadata.tag, () => {
           <p>After template</p>
         </nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h1>Template content</h1>');
     });
@@ -244,7 +244,7 @@ describe(Markdown.metadata.tag, () => {
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -258,7 +258,7 @@ describe(Markdown.metadata.tag, () => {
       await waitForMarkdownParsing(element);
 
       // Should now show parsed content
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h1>Programmatic Content</h1>');
     });
@@ -268,14 +268,14 @@ describe(Markdown.metadata.tag, () => {
       element.source = '# First Content';
       await waitForMarkdownParsing(element);
 
-      let content = element.shadowRoot.querySelector('div');
+      let content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h1>First Content</h1>');
 
       // Update content
       element.source = '## Second Content';
       await waitForMarkdownParsing(element);
 
-      content = element.shadowRoot.querySelector('div');
+      content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h2>Second Content</h2>');
       expect(content.innerHTML).not.toContain('<h1>First Content</h1>');
 
@@ -283,7 +283,7 @@ describe(Markdown.metadata.tag, () => {
       element.source = '### Third Content\n\n- Item 1\n- Item 2';
       await waitForMarkdownParsing(element);
 
-      content = element.shadowRoot.querySelector('div');
+      content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h3>Third Content</h3>');
       expect(content.innerHTML).toContain('<ul>');
       expect(content.innerHTML).toContain('<li>Item 1</li>');
@@ -295,14 +295,14 @@ describe(Markdown.metadata.tag, () => {
       element.source = '# Some Content';
       await waitForMarkdownParsing(element);
 
-      expect(element.shadowRoot.querySelector('div')).toBeTruthy();
+      expect(element.shadowRoot?.querySelector('div') as HTMLDivElement).toBeTruthy();
 
       // Clear content
       element.source = '';
       await waitForMarkdownParsing(element);
 
       // Should show slot again
-      expect(element.shadowRoot.querySelector('slot')).toBeTruthy();
+      expect(element.shadowRoot?.querySelector('slot')).toBeTruthy();
       // Note: div is still present but empty with the new render method
     });
 
@@ -316,7 +316,7 @@ describe(Markdown.metadata.tag, () => {
       await waitForMarkdownParsing(element);
 
       // Should show the final content
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
       expect(content.innerHTML).toContain('<h3>Third</h3>');
       expect(content.innerHTML).not.toContain('<h1>First</h1>');
@@ -354,7 +354,7 @@ Visit [this link](https://example.com) for more info.
       element.source = complexMarkdown;
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content).toBeTruthy();
 
       // Check various elements are present
@@ -378,7 +378,7 @@ Visit [this link](https://example.com) for more info.
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -390,7 +390,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '# H1\n## H2\n### H3';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h1>H1</h1>');
       expect(content.innerHTML).toContain('<h2>H2</h2>');
       expect(content.innerHTML).toContain('<h3>H3</h3>');
@@ -400,7 +400,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '*italic* and **bold** and ***both***';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<em>italic</em>');
       expect(content.innerHTML).toContain('<strong>bold</strong>');
       // markdown-it can render ***both*** as either <strong><em>both</em></strong> or <em><strong>both</strong></em>
@@ -411,7 +411,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '[Link text](https://example.com)';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<a href="https://example.com">Link text</a>');
     });
 
@@ -419,7 +419,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '- Item 1\n- Item 2\n- Item 3';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<ul>');
       expect(content.innerHTML).toContain('<li>Item 1</li>');
       expect(content.innerHTML).toContain('<li>Item 2</li>');
@@ -430,7 +430,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '1. First\n2. Second\n3. Third';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<ol>');
       expect(content.innerHTML).toContain('<li>First</li>');
       expect(content.innerHTML).toContain('<li>Second</li>');
@@ -441,7 +441,7 @@ Visit [this link](https://example.com) for more info.
       element.source = 'Here is `inline code` in text';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<code>inline code</code>');
     });
 
@@ -449,7 +449,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '```javascript\nconst x = 1;\n```';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<pre>');
       expect(content.innerHTML).toContain('<code');
       expect(content.innerHTML).toContain('const x = 1;');
@@ -459,7 +459,7 @@ Visit [this link](https://example.com) for more info.
       element.source = '> This is a blockquote';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<blockquote>');
       expect(content.innerHTML).toContain('This is a blockquote');
     });
@@ -476,7 +476,7 @@ This is a paragraph with **bold** and *italic* text.
 
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<h1>Title</h1>');
       expect(content.innerHTML).toContain('<p>');
       expect(content.innerHTML).toContain('<strong>bold</strong>');
@@ -490,7 +490,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = 'Visit https://example.com for more info';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<a href="https://example.com">https://example.com</a>');
     });
 
@@ -498,7 +498,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = 'Markdown with <strong>HTML</strong> tags';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<strong>HTML</strong>');
     });
   });
@@ -511,7 +511,7 @@ This is a paragraph with **bold** and *italic* text.
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -523,8 +523,8 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# H1\n## H2\n### H3\n#### H4\n##### H5\n###### H6';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
-      const h1 = content.querySelector('h1');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
+      const h1 = content.querySelector('h1') as HTMLHeadingElement;
       const h2 = content.querySelector('h2');
       const h3 = content.querySelector('h3');
       const h6 = content.querySelector('h6');
@@ -555,8 +555,8 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '- Item 1\n- Item 2\n- Item 3';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
-      const ul = content.querySelector('ul');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
+      const ul = content.querySelector('ul') as HTMLUListElement;
       const li = content.querySelector('li');
 
       expect(ul).toBeTruthy();
@@ -573,10 +573,10 @@ This is a paragraph with **bold** and *italic* text.
       element.source = 'Here is `inline code` and a block:\n\n```\ncode block\n```';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
-      const inlineCode = content.querySelector('code');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
+      const inlineCode = content.querySelector('code') as HTMLElement;
       const preElement = content.querySelector('pre');
-      const blockCode = preElement?.querySelector('code');
+      const blockCode = preElement?.querySelector('code') as HTMLElement;
 
       expect(inlineCode).toBeTruthy();
       expect(preElement).toBeTruthy();
@@ -595,12 +595,12 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '[Internal link](#test) and [External link](https://example.com)';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       const links = content.querySelectorAll('a');
 
       expect(links.length).toBe(2);
 
-      const linkStyles = getComputedStyle(links[0]);
+      const linkStyles = getComputedStyle(links[0] as HTMLAnchorElement);
       expect(linkStyles.textDecoration).toContain('underline');
       // Note: text-underline-offset may not apply in test environment
     });
@@ -609,8 +609,8 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '> This is a blockquote\n> with multiple lines';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
-      const blockquote = content.querySelector('blockquote');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
+      const blockquote = content.querySelector('blockquote') as HTMLQuoteElement;
 
       expect(blockquote).toBeTruthy();
 
@@ -623,8 +623,8 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '*italic text* and **bold text** and ***both***';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
-      const em = content.querySelector('em');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
+      const em = content.querySelector('em') as HTMLElement;
       const strong = content.querySelector('strong');
 
       expect(em).toBeTruthy();
@@ -651,7 +651,7 @@ This is a paragraph with **bold** and *italic* text.
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
     });
 
@@ -673,7 +673,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Should still show the source content, not template content
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('Source content');
       expect(content.innerHTML).not.toContain('Template content');
     });
@@ -683,7 +683,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '';
       await waitForMarkdownParsing(element);
 
-      const slot = element.shadowRoot.querySelector('slot');
+      const slot = element.shadowRoot?.querySelector('slot');
       expect(slot).toBeTruthy();
     });
   });
@@ -698,7 +698,7 @@ This is a paragraph with **bold** and *italic* text.
       fixture = await createFixture(html`
         <nve-markdown></nve-markdown>
       `);
-      element = fixture.querySelector(Markdown.metadata.tag);
+      element = fixture.querySelector(Markdown.metadata.tag) as Markdown;
       await waitForMarkdownParsing(element);
 
       // Spy on console methods to verify error handling
@@ -717,7 +717,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set null input - this should clear content (falsy value behavior)
@@ -725,7 +725,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should be cleared because null is falsy
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       // Check that HTML content is cleared (Lit template markers may remain)
       expect(content.innerHTML).not.toContain('<h1>Initial content</h1>');
     });
@@ -735,7 +735,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set undefined input - this should clear content (falsy value behavior)
@@ -743,7 +743,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should be cleared because undefined is falsy
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       // Check that HTML content is cleared (Lit template markers may remain)
       expect(content.innerHTML).not.toContain('<h1>Initial content</h1>');
     });
@@ -753,7 +753,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set zero input - this should clear content (falsy value behavior)
@@ -761,7 +761,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should be cleared because 0 is falsy
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       // Check that HTML content is cleared (Lit template markers may remain)
       expect(content.innerHTML).not.toContain('<h1>Initial content</h1>');
     });
@@ -771,7 +771,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set false input - this should clear content (falsy value behavior)
@@ -779,7 +779,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should be cleared because false is falsy
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       // Check that HTML content is cleared (Lit template markers may remain)
       expect(content.innerHTML).not.toContain('<h1>Initial content</h1>');
     });
@@ -789,7 +789,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set object input - this is truthy so it will attempt to parse
@@ -797,7 +797,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should remain unchanged due to parsing error being caught
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toBe(initialContent);
 
       // Should have logged the parsing error
@@ -809,7 +809,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set array input - this is truthy so it will attempt to parse
@@ -817,7 +817,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should remain unchanged due to parsing error being caught
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toBe(initialContent);
 
       // Should have logged the parsing error
@@ -829,7 +829,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '12345';
       await waitForMarkdownParsing(element);
 
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toContain('<p>12345</p>');
     });
 
@@ -838,7 +838,7 @@ This is a paragraph with **bold** and *italic* text.
       element.source = '# Initial content';
       await waitForMarkdownParsing(element);
 
-      const initialContent = element.shadowRoot.querySelector('div').innerHTML;
+      const initialContent = (element.shadowRoot?.querySelector('div') as HTMLDivElement).innerHTML;
       expect(initialContent).toContain('<h1>Initial content</h1>');
 
       // Set true input - this is truthy so it will attempt to parse
@@ -846,7 +846,7 @@ This is a paragraph with **bold** and *italic* text.
       await waitForMarkdownParsing(element);
 
       // Content should remain unchanged due to parsing error being caught
-      const content = element.shadowRoot.querySelector('div');
+      const content = element.shadowRoot?.querySelector('div') as HTMLDivElement;
       expect(content.innerHTML).toBe(initialContent);
 
       // Should have logged the parsing error
