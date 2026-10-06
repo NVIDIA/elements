@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, it, expect } from 'vitest';
+import { assert, describe, it, expect } from 'vitest';
 import { lintTemplate } from './index.js';
 
 describe('lintPlaygroundTemplate', () => {
@@ -54,6 +54,7 @@ describe('lintPlaygroundTemplate', () => {
 
     expect(result.length).toBeGreaterThan(0);
     const message = result[0];
+    assert.exists(message);
     expect(['error', 'warn']).toContain(message.severity);
   });
 
@@ -63,6 +64,7 @@ describe('lintPlaygroundTemplate', () => {
 
     expect(result.length).toBeGreaterThan(0);
     const message = result[0];
+    assert.exists(message);
     expect(typeof message.line).toBe('number');
     expect(typeof message.column).toBe('number');
     expect(typeof message.endLine).toBe('number');
@@ -77,6 +79,7 @@ describe('lintPlaygroundTemplate', () => {
 
     expect(result.length).toBeGreaterThan(0);
     const message = result[0];
+    assert.exists(message);
 
     // Verify all required properties exist
     expect(message).toHaveProperty('id');
@@ -100,15 +103,17 @@ describe('lintPlaygroundTemplate', () => {
   it('should return warning for empty string input', async () => {
     const result = await lintTemplate('', { strict: true });
     expect(result).toHaveLength(1);
-    expect(result[0].id).toBe('empty-template');
-    expect(result[0].severity).toBe('warn');
-    expect(result[0].message).toContain('Template is empty');
+    const [message] = result;
+    assert.exists(message);
+    expect(message.id).toBe('empty-template');
+    expect(message.severity).toBe('warn');
+    expect(message.message).toContain('Template is empty');
   });
 
   it('should return warning for whitespace-only input', async () => {
     const result = await lintTemplate('   \n\t  ', { strict: true });
     expect(result).toHaveLength(1);
-    expect(result[0].id).toBe('empty-template');
+    expect(result[0]?.id).toBe('empty-template');
   });
 
   it('should handle malformed HTML gracefully', async () => {
@@ -125,8 +130,8 @@ describe('lintPlaygroundTemplate', () => {
     const result = await lintTemplate(codeWithMultipleViolations, { strict: true });
 
     expect(result.length).toBeGreaterThan(1);
-    expect(result[0].id).toBe('no-restricted-attributes-with-supported');
-    expect(result[1].id).toBe('no-restricted-attributes-with-supported');
+    expect(result[0]?.id).toBe('no-restricted-attributes-with-supported');
+    expect(result[1]?.id).toBe('no-restricted-attributes-with-supported');
   });
 
   it('should handle suggestions', async () => {
@@ -135,7 +140,7 @@ describe('lintPlaygroundTemplate', () => {
     expect(result.length).toBeGreaterThan(0);
 
     const messageWithSuggestion = result.find(msg => msg.id === 'unexpected-deprecated-global-attribute');
-    expect(messageWithSuggestion).toBeDefined();
+    assert.exists(messageWithSuggestion);
     expect(messageWithSuggestion.suggestions).toBeDefined();
     expect(messageWithSuggestion.suggestions.length).toBeGreaterThan(0);
   });

@@ -61,7 +61,7 @@ describe('preferAriaLabelInCompactContainers', () => {
     expect(preferAriaLabelInCompactContainers.meta.docs.recommended).toBe(true);
     expect(preferAriaLabelInCompactContainers.meta.docs.url).toContain('/docs/lint/');
     expect(preferAriaLabelInCompactContainers.meta.schema).toEqual([]);
-    expect(preferAriaLabelInCompactContainers.meta.messages['prefer-aria-label']).toBe(
+    expect(preferAriaLabelInCompactContainers.meta.messages?.['prefer-aria-label']).toBe(
       'Remove <label> from <{{control}}> inside <{{container}}> and use aria-label instead to preserve the compact layout.'
     );
   });

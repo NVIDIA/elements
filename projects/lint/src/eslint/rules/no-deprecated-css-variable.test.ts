@@ -338,7 +338,7 @@ describe('noDeprecatedCssVariable', () => {
         property: 'color',
         value: {
           value: 'var()',
-          children: [{ type: 'Function', name: 'var', children: [{ type: 'Identifier' }] }]
+          children: [{ type: 'Function', name: 'var', children: [{ type: 'Identifier', name: '' }] }]
         }
       });
       expect(reports).toEqual([]);
