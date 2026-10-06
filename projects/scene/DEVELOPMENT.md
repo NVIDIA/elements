@@ -9,5 +9,6 @@
 | `pnpm run test:watch`      | Run unit tests in watch mode              |
 | `pnpm run test:axe`        | Run accessibility tests                   |
 | `pnpm run test:coverage`   | Run unit tests with coverage              |
+| `pnpm run test:types`      | Type-check source, tests, and examples    |
 | `pnpm run test:lighthouse` | Run Lighthouse performance tests          |
 | `pnpm run ci`              | Run the full CI pipeline                  |
