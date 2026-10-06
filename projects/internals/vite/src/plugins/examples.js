@@ -6,6 +6,7 @@ import { createHash } from 'crypto';
 import path from 'path';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
+import { parseFragment } from 'parse5';
 
 const project = new Project();
 const cache = new Map();
@@ -66,15 +67,7 @@ export function examplesToJSON(packageFile) {
                   console.warn(`Element ${element} example "${name}" is not stateless.`);
                 }
 
-                if (!template.includes('<template>')) {
-                  try {
-                    template = await prettier.format(template.replace(/\n\n/g, '\n'), {
-                      parser: 'html',
-                      singleAttributePerLine: false,
-                      printWidth: 220
-                    });
-                  } catch {}
-                }
+                template = await formatTemplate(template);
               }
 
               const jsTags = example.getJsDocs().flatMap(doc => doc.getTags());
@@ -188,5 +181,81 @@ async function renderTemplate(template) {
   const data = eval(`html\`${template}\``); // treat parsed source string as a template literal
   const result = render(data);
   const contents = await collectResult(result);
-  return contents.replaceAll(/<!--[^>]*lit[^>]*-->/g, '').replaceAll('=""', '');
+  return cleanRenderResult(contents);
+}
+
+function cleanRenderResult(contents) {
+  // Remove Lit SSR bookkeeping comments; examples are consumed as HTML snapshots.
+  const markers = [];
+  function visit(node) {
+    if (node.nodeName === '#comment' && /^(?:\/?lit-part(?:\s|$)|lit-node\s)/.test(node.data)) {
+      markers.push(node.sourceCodeLocation);
+    }
+    for (const child of node.childNodes ?? []) visit(child);
+    if (node.tagName === 'template') visit(node.content);
+  }
+  visit(parseFragment(contents, { sourceCodeLocationInfo: true }));
+
+  let cleaned = contents;
+  for (const marker of markers.sort((a, b) => b.startOffset - a.startOffset)) {
+    cleaned = cleaned.slice(0, marker.startOffset) + cleaned.slice(marker.endOffset);
+  }
+  return cleaned;
+}
+
+async function formatTemplate(template) {
+  const verbatimContents = findVerbatimContentRanges(template).map(({ tag, start, end }) => ({
+    tag,
+    content: template.slice(start, end)
+  }));
+  let formatted;
+  try {
+    formatted = await prettier.format(template, {
+      parser: 'html',
+      singleAttributePerLine: false,
+      printWidth: 220
+    });
+  } catch {
+    return template;
+  }
+  return restoreVerbatimContents(formatted, verbatimContents);
+}
+
+// NOTE: Verbatim content retains authored formatting where reformatting would otherwise alter displayed output.
+function findVerbatimContentRanges(template) {
+  const ranges = [];
+  function visit(node) {
+    if (node.tagName === 'template' || node.tagName === 'textarea') {
+      const location = node.sourceCodeLocation;
+      if (location?.startTag && location?.endTag) {
+        const start = location.startTag.endOffset;
+        const end = location.endTag.startOffset;
+        ranges.push({ tag: node.tagName, start, end });
+      }
+      return;
+    }
+    for (const child of node.childNodes ?? []) visit(child);
+  }
+  if (/<(template|textarea)[\s>]/i.test(template)) {
+    visit(parseFragment(template, { sourceCodeLocationInfo: true }));
+  }
+
+  return ranges.sort((a, b) => a.start - b.start);
+}
+
+function restoreVerbatimContents(formatted, verbatimContents) {
+  const ranges = findVerbatimContentRanges(formatted);
+  if (
+    ranges.length !== verbatimContents.length ||
+    ranges.some((range, index) => range.tag !== verbatimContents[index].tag)
+  ) {
+    throw new Error('Formatting unexpectedly changed the sequence of verbatim content.');
+  }
+
+  // NOTE: Replace ranges in reverse order so each edit only shifts previously processed content.
+  for (let index = ranges.length - 1; index >= 0; index--) {
+    const { start, end } = ranges[index];
+    formatted = formatted.slice(0, start) + verbatimContents[index].content + formatted.slice(end);
+  }
+  return formatted;
 }
