@@ -81,6 +81,7 @@
     "test": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
+    "test:types": "wireit",
     "test:watch": "wireit",
     "test:lighthouse": "wireit"
   },
@@ -109,6 +110,7 @@
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
+    "typescript-7": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
@@ -123,7 +125,8 @@
         "lint",
         "publint",
         "test:axe",
-        "test:coverage"
+        "test:coverage",
+        "test:types"
       ]
     },
     "publint": {
@@ -210,6 +213,32 @@
         "../internals/testing:build",
         "../internals/vite:ci",
         "../core:build"
+      ]
+    },
+    "test:types": {
+      "command": "node ./node_modules/typescript-7/bin/tsc --project tsconfig.json --noEmit",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json",
+        "../core/dist/**/*.d.ts",
+        "../internals/testing/dist/**/*.d.ts",
+        "../internals/vite/src/**/*.d.ts",
+        "../themes/dist/**/*.json"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../internals/testing:build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
+          "cascade": false
+        }
       ]
     },
     "test:watch": {
