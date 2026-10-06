@@ -39,7 +39,8 @@ export interface SelectFormControlMixinInstance extends FormControlMixinInstance
   /**
    * The select control type.
    */
-  type: 'select-one';
+  get type(): 'select-one';
+  set type(value: string);
 
   /**
    * The selected value.
@@ -48,6 +49,9 @@ export interface SelectFormControlMixinInstance extends FormControlMixinInstance
    * @reflect
    */
   value: SelectFormControlValue;
+
+  /** Restores the selected value from saved form state. */
+  formStateRestoreCallback(state: SelectFormControlValue | null, reason?: string): void;
 
   updateSelectState(): void;
 }

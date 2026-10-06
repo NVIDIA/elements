@@ -23,7 +23,8 @@ export interface SliderFormControlMixinInstance extends FormControlMixinInstance
    * @attr max
    * @reflect
    */
-  max: number;
+  get max(): number;
+  set max(value: number | null);
 
   /**
    * Defines the minimum slider value.
@@ -31,7 +32,8 @@ export interface SliderFormControlMixinInstance extends FormControlMixinInstance
    * @attr min
    * @reflect
    */
-  min: number;
+  get min(): number;
+  set min(value: number | null);
 
   /**
    * Defines the slider value granularity.
@@ -39,7 +41,8 @@ export interface SliderFormControlMixinInstance extends FormControlMixinInstance
    * @attr step
    * @reflect
    */
-  step: number;
+  get step(): number;
+  set step(value: number | null);
 
   /**
    * The current slider value.
@@ -54,6 +57,9 @@ export interface SliderFormControlMixinInstance extends FormControlMixinInstance
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/valueAsNumber
    */
   valueAsNumber: number;
+
+  /** Restores the slider value from saved form state. */
+  formStateRestoreCallback(state: number | string | null, reason?: string): void;
 
   updateSliderState(): void;
 }

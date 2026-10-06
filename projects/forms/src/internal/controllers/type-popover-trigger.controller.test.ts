@@ -261,7 +261,7 @@ describe('PopoverTriggerController', () => {
     const anchor = fixture.querySelector<HTMLElement>('#anchor')!;
     const popover = fixture.querySelector<HTMLElement>('[popover]')!;
     let interestSource: HTMLElement | undefined;
-    let popoverSource: HTMLElement | null | undefined;
+    let popoverSource: ToggleEvent['source'] | undefined;
     tooltip.addEventListener('loseinterest', event => {
       interestSource = (event as Event & { source: HTMLElement }).source;
     });

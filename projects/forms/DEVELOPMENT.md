@@ -8,5 +8,6 @@
 | `pnpm run test`            | Run unit tests                            |
 | `pnpm run test:watch`      | Run unit tests in watch mode              |
 | `pnpm run test:coverage`   | Run unit tests with coverage              |
+| `pnpm run test:types`      | Check types with TypeScript 7             |
 | `pnpm run test:lighthouse` | Run Lighthouse performance tests          |
 | `pnpm run ci`              | Run the full CI pipeline                  |

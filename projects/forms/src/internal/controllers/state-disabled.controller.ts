@@ -4,7 +4,11 @@
 import { attachInternals } from '../utils.js';
 import type { ReactiveController, ReactiveElement } from './types.js';
 
-type Disabled = ReactiveElement & { disabled: boolean; readOnly?: boolean; _internals?: ElementInternals };
+type Disabled = ReactiveElement & {
+  disabled: boolean | null | undefined;
+  readOnly?: boolean;
+  _internals?: ElementInternals;
+};
 
 /**
  * Adds disabled support for interactive custom elements including CSS State psuedo-selector :state(disabled) and aria-disabled.

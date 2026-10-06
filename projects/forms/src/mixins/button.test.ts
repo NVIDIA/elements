@@ -426,7 +426,7 @@ describe('ButtonFormControlMixin', () => {
     it('should not submit when type is button', async () => {
       const buttonTypeButton = fixture.querySelector<ButtonFormControlMixinTestElement>(
         'button-form-control-mixin-test-element'
-      );
+      ) as ButtonFormControlMixinTestElement;
       const submit = vi.fn();
       form.addEventListener('submit', submit);
 
@@ -441,9 +441,10 @@ describe('ButtonFormControlMixin', () => {
       emulateClick(submitButton);
       const event = await submit;
 
-      expect(event.submitter?.name).toBe('button-name');
-      expect(event.submitter?.value).toBe('button-value');
-      expect(event.submitter?.form).toBe(form);
+      const submitter = event.submitter as HTMLButtonElement;
+      expect(submitter.name).toBe('button-name');
+      expect(submitter.value).toBe('button-value');
+      expect(submitter.form).toBe(form);
     });
 
     it('should submit with empty native submitter data by default', async () => {
@@ -457,8 +458,9 @@ describe('ButtonFormControlMixin', () => {
       emulateClick(defaultButton);
       const event = await submit;
 
-      expect(event.submitter?.name).toBe('');
-      expect(event.submitter?.value).toBe('');
+      const submitter = event.submitter as HTMLButtonElement;
+      expect(submitter.name).toBe('');
+      expect(submitter.value).toBe('');
     });
 
     it('should clean up the hidden native submitter after submit', async () => {
@@ -575,8 +577,12 @@ describe('ButtonFormControlMixin', () => {
           <a href="#">anchor</a>
         </button-form-control-mixin-test-element>
       `);
-      button = fixture.querySelector<ButtonFormControlMixinTestElement>('button-form-control-mixin-test-element');
-      anchor = fixture.querySelector<HTMLAnchorElement>('a');
+      const fixtureButton = fixture.querySelector(
+        'button-form-control-mixin-test-element'
+      ) as ButtonFormControlMixinTestElement;
+      const fixtureAnchor = fixture.querySelector('a') as HTMLAnchorElement;
+      button = fixtureButton;
+      anchor = fixtureAnchor;
       await elementIsStable(button);
     });
 
@@ -664,8 +670,11 @@ describe('ButtonFormControlMixin', () => {
           <button-form-control-mixin-test-element>anchor</button-form-control-mixin-test-element>
         </a>
       `);
-      button = fixture.querySelector<ButtonFormControlMixinTestElement>('button-form-control-mixin-test-element');
-      const parentAnchor = fixture.querySelector<HTMLAnchorElement>('a');
+      const fixtureButton = fixture.querySelector(
+        'button-form-control-mixin-test-element'
+      ) as ButtonFormControlMixinTestElement;
+      const parentAnchor = fixture.querySelector('a') as HTMLAnchorElement;
+      button = fixtureButton;
       await elementIsStable(button);
 
       expect(button.readOnly).toBe(true);
@@ -965,7 +974,7 @@ describe('ButtonFormControlMixin', () => {
       `);
       button = fixture.querySelector<ButtonFormControlMixinTestElement>('button-form-control-mixin-test-element')!;
       const anchorTarget = fixture.querySelector<HTMLElement>('#anchor')!;
-      const popover = fixture.querySelector<HTMLElement>('[popover]');
+      const popover = fixture.querySelector<HTMLElement>('[popover]') as HTMLElement;
       Object.defineProperty(popover, 'anchor', { configurable: true, value: 'anchor' });
       const showPopover = vi.spyOn(popover, 'showPopover').mockImplementation(() => {});
       await elementIsStable(button);
@@ -998,7 +1007,10 @@ describe('ButtonFormControlMixin', () => {
       fixture = await createFixture(
         html`<button-form-control-mixin-test-element interestfor="missing"></button-form-control-mixin-test-element>`
       );
-      button = fixture.querySelector<ButtonFormControlMixinTestElement>('button-form-control-mixin-test-element');
+      const fixtureButton = fixture.querySelector(
+        'button-form-control-mixin-test-element'
+      ) as ButtonFormControlMixinTestElement;
+      button = fixtureButton;
       await elementIsStable(button);
 
       button.dispatchEvent(new MouseEvent('mouseenter'));

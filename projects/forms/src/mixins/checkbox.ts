@@ -34,6 +34,9 @@ export interface CheckboxFormControlMixinInstance extends FormControlMixinInstan
    */
   indeterminate: boolean;
 
+  /** Restores the checked state from a saved form value. */
+  formStateRestoreCallback(state: string | null, reason?: string): void;
+
   updateCheckedState(): void;
 
   /**
