@@ -28,7 +28,7 @@ export type MediaStateChangeEvent = CustomEvent<MediaState>;
 
 export const mediaStateChange = 'media-state-change';
 
-const booleanStateKeys = ['ended', 'fullscreen', 'muted', 'paused', 'pip', 'pipAvailable', 'seeking'] as const;
+const booleanStateKeys = ['ended', 'fullscreen', 'loop', 'muted', 'paused', 'pip', 'pipAvailable', 'seeking'] as const;
 
 const numberStateKeys = ['currentTime', 'duration', 'playbackRate', 'volume'] as const;
 

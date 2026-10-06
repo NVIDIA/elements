@@ -10,7 +10,7 @@ import noInvalidInvokerTriggers from './no-invalid-invoker-triggers.js';
 const rule = noInvalidInvokerTriggers as unknown as JSRuleDefinition;
 
 const validElements =
-  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-loop-button, nve-media-mute-button, nve-media-pause-button, nve-media-seek-button';
+  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-loop-button, nve-media-mute-button, nve-media-pause-button, nve-media-pip-button, nve-media-seek-button';
 
 const commandElements = `${validElements}, nve-media-playback-rate-select, nve-media-time-range, nve-media-volume-range, nve-viewport-minimap, nve-viewport-zoom-range`;
 
@@ -53,7 +53,8 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-tag popovertarget="my-popover">Tag</nve-tag>',
         '<nve-steps-item popovertarget="my-popover">Step</nve-steps-item>',
         '<nve-copy-button popovertarget="my-popover"></nve-copy-button>',
-        '<nve-media-fullscreen-button popovertarget="my-popover"></nve-media-fullscreen-button>'
+        '<nve-media-fullscreen-button popovertarget="my-popover"></nve-media-fullscreen-button>',
+        '<nve-media-pip-button popovertarget="my-popover"></nve-media-pip-button>'
       ],
       invalid: []
     });
@@ -66,6 +67,7 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-icon-button commandfor="my-panel"></nve-icon-button>',
         '<nve-tag commandfor="my-panel">Tag</nve-tag>',
         '<nve-media-pause-button commandfor="my-player"></nve-media-pause-button>',
+        '<nve-media-pip-button commandfor="my-player"></nve-media-pip-button>',
         '<nve-media-playback-rate-select commandfor="my-player"></nve-media-playback-rate-select>',
         '<nve-media-mute-button commandfor="my-player"></nve-media-mute-button>',
         '<nve-media-seek-button commandfor="my-player"></nve-media-seek-button>',
@@ -84,7 +86,8 @@ describe('noInvalidInvokerTriggers', () => {
     tester.run('interestfor on button-type elements', rule, {
       valid: [
         '<nve-button interestfor="my-tooltip">Hover</nve-button>',
-        '<nve-icon-button interestfor="my-tooltip"></nve-icon-button>'
+        '<nve-icon-button interestfor="my-tooltip"></nve-icon-button>',
+        '<nve-media-pip-button interestfor="my-tooltip"></nve-media-pip-button>'
       ],
       invalid: []
     });
