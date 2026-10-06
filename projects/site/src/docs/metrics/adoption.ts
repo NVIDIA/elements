@@ -34,8 +34,8 @@ function getChartColor(index: number): string {
   return chartColors[index % chartColors.length] ?? tokens['--nve-sys-visualization-categorical-grass'];
 }
 
-function getCurrencyFormat(value: number): string {
-  return value.toLocaleString();
+function getCurrencyFormat(value: number | null): string {
+  return value === null ? 'Unavailable' : value.toLocaleString();
 }
 
 function getVersionShareLabel(version: string, share: number, requests: number): string {
@@ -295,7 +295,9 @@ new Chart(getCanvas('adoption-channel-mix-chart'), {
   }
 });
 
-new Chart(getCanvas('adoption-release-overlay-chart'), {
+type ReleaseOverlayPoint = number | { x: string; y: number };
+
+new Chart<'line' | 'scatter', ReleaseOverlayPoint[]>(getCanvas('adoption-release-overlay-chart'), {
   type: 'line',
   data: {
     labels: releaseAdoptionTimeline.labels,

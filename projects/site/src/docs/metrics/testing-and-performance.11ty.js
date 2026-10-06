@@ -9,13 +9,13 @@ export const data = {
   layout: 'docs.11ty.js'
 };
 
-/** @type {import('@internals/metadata').ProjectsTestSummary} */
 const tests = await TestsService.getData();
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
   new Date(tests.created)
 );
 
+/** @this {import('../../_11ty/types.js').TemplateContext} */
 export function render() {
   return this.renderTemplate(
     /* html */ `

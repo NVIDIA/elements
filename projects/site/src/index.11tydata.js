@@ -19,10 +19,8 @@ const apiMetrics = await ApiService.getData();
 /** @type {import('@internals/metadata').Element[]} */
 const elements = apiMetrics.data.elements;
 
-/** @type {import('@internals/metadata').ProjectTestSummary} */
 const tests = await TestsService.getData();
 
-/** @type {import('@internals/metadata').ProjectTestSummary} */
 const wireit = await WireitService.getData();
 
 const examples = (await ExamplesService.getAll())
@@ -32,7 +30,7 @@ const examples = (await ExamplesService.getAll())
     example: example.element,
     summary: example.summary,
     description: example.description,
-    tags: example.tags.filter(tag => tag !== 'priority'),
+    tags: example.tags.filter((/** @type {string} */ tag) => tag !== 'priority'),
     deprecated: example.deprecated,
     template: example.template,
     element: example.element,

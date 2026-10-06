@@ -30,22 +30,27 @@ const totalTests = Object.values(testMetrics.projects).reduce(
   0
 );
 
+/** @param {number} value */
 function formatNumber(value) {
   return value.toLocaleString();
 }
 
+/** @param {string | null} value */
 function formatDate(value) {
   return value ? new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(value)) : 'Unavailable';
 }
 
+/** @param {number} value */
 function formatPercent(value) {
   return `${value.toFixed(1)}%`;
 }
 
+/** @param {string} packageName */
 function getPackageLabel(packageName) {
   return packageName.replace('@nvidia-elements/', '');
 }
 
+/** @param {import('@internals/metadata').AdoptionPackage} packageData */
 function getAdoptionStatus(packageData) {
   if (packageData.status === 'unavailable') {
     return /* html */ `<nve-badge status="warning" container="flat">unavailable</nve-badge>`;
@@ -58,17 +63,23 @@ function getAdoptionStatus(packageData) {
   return /* html */ `<nve-badge status="success" container="flat">published</nve-badge>`;
 }
 
+/** @param {import('@internals/metadata').AdoptionPackage} packageData */
 function getTopCdnVersion(packageData) {
   return packageData.cdn.topVersion
     ? `${packageData.cdn.topVersion.version} (${formatPercent(packageData.cdn.topVersion.share)})`
     : 'None';
 }
 
+/**
+ * @param {number | null} value
+ * @param {string} label
+ */
 function renderOptionalCount(value, label) {
   const formattedValue = value === null ? 'unavailable' : value.toLocaleString();
   return `<span><span nve-text="emphasis">${formattedValue}</span> ${label}</span>`;
 }
 
+/** @this {import('../../_11ty/types.js').TemplateContext} */
 export function render() {
   return this.renderTemplate(
     /* html */ `

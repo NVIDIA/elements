@@ -11,6 +11,10 @@ export const data = {
   layout: 'docs.11ty.js'
 };
 
+/**
+ * @this {import('../../_11ty/types.js').TemplateContext}
+ * @param {{title: string}} data
+ */
 export function render(data) {
   return this.renderTemplate(
     /* markdown */ `

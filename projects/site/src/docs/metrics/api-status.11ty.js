@@ -34,6 +34,7 @@ const elements = siteData.elements
   .filter(element => !element.name.includes('internal'))
   .sort((a, b) => a.name.localeCompare(b.name));
 
+/** @this {import('../../_11ty/types.js').TemplateContext} */
 export function render() {
   return this.renderTemplate(
     /* html */ `
@@ -120,6 +121,7 @@ export function render() {
   );
 }
 
+/** @type {Record<string, {width?: string, tooltip: string}>} */
 const columns = {
   element: { width: '200px', tooltip: 'Custom Element API' },
   status: { width: '130px', tooltip: 'Element Stability Status' },
@@ -136,8 +138,10 @@ const columns = {
   responsive: { tooltip: 'Provides basic minimal resposive layouts' }
 };
 
+/** @param {string} category */
 function getBehaviorCategoryIcon(category) {
-  return {
+  /** @type {Record<string, string>} */
+  const icons = {
     ['navigation']: '🧭',
     ['content']: '🖥️',
     ['list']: '📃',
@@ -146,9 +150,17 @@ function getBehaviorCategoryIcon(category) {
     ['popover']: '💬',
     ['container']: '📦',
     ['button']: '🆗'
-  }[category];
+  };
+  return icons[category];
 }
 
+/**
+ * @template {{fullName?: string}} T
+ * @param {{name?: string, assertionResults?: T[]}[]} results
+ * @param {string} elementName
+ * @param {string} [manifestPath]
+ * @param {string} [testSuffix]
+ */
 export function getAssertionResult(results, elementName, manifestPath = '', testSuffix = '.test.ts') {
   return (
     results
@@ -161,20 +173,31 @@ export function getAssertionResult(results, elementName, manifestPath = '', test
   );
 }
 
+/**
+ * @template {{name: string}} T
+ * @param {T[]} results
+ * @param {string} elementName
+ */
 export function getLighthouseResult(results, elementName) {
   const parentElementName = getParentElementName(elementName);
   return results.find(result => result.name === elementName || result.name === parentElementName);
 }
 
+/** @param {string} elementName */
 function getParentElementName(elementName) {
   const [, rootName, childName] = elementName.split('-');
   return childName ? `nve-${rootName}` : elementName;
 }
 
+/** @param {string} manifestPath */
 function getSourcePath(manifestPath) {
   return manifestPath.replace(/^\/src\//, '').replace(/\.js$/, '.ts');
 }
 
+/**
+ * @param {string} manifestPath
+ * @param {string} testSuffix
+ */
 function getTestPath(manifestPath, testSuffix) {
   return getSourcePath(manifestPath).replace(/\.ts$/, testSuffix);
 }

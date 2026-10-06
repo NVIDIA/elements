@@ -51,6 +51,20 @@ describe('apiShortcode', () => {
 });
 
 describe('renderAPITable', () => {
+  it('should render descriptions when deprecation is a boolean', () => {
+    const html = renderAPITable(
+      {
+        manifest: {
+          members: [{ kind: 'field', name: 'legacy', deprecated: true, description: 'Legacy property.' }]
+        }
+      },
+      'property'
+    );
+
+    expect(html).toContain('>deprecated</nve-badge>');
+    expect(html).toContain('Legacy property.');
+  });
+
   it('should resolve inherited property attributes from manifest attributes', () => {
     const html = renderAPITable(
       {
@@ -144,7 +158,7 @@ describe('renderAPITable', () => {
         cssParts: [{ name: 'zoom' }, { name: 'pan' }]
       }
     };
-    const rowNames = type =>
+    const rowNames = (type: string) =>
       [
         ...renderAPITable(element, type).matchAll(
           /<nve-grid-row role="row">\s*<nve-grid-cell role="gridcell"><span nve-text="code nowrap">([^<]*)<\/span>/g

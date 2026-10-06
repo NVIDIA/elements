@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement, nothing } from 'lit';
+import type { TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
 
@@ -10,6 +11,12 @@ import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/progress-ring/define.js';
+
+interface TreeNode {
+  label: string;
+  expanded: boolean;
+  nodes: TreeNode[];
+}
 
 @customElement('test-dynamic-tree')
 export class TestDynamicTree extends LitElement {
@@ -23,21 +30,21 @@ export class TestDynamicTree extends LitElement {
     </nve-tree>`;
   }
 
-  #getNodeList(node) {
-    return html`<nve-tree-node .expandable=${node.nodes.length} .expanded=${node.expanded} @open=${e => this.#open(e, node)} @close=${e => this.#close(e, node)}>
+  #getNodeList(node: TreeNode): TemplateResult {
+    return html`<nve-tree-node .expandable=${node.nodes.length} .expanded=${node.expanded} @open=${(e: Event) => this.#open(e, node)} @close=${(e: Event) => this.#close(e, node)}>
       ${node.label} node
       ${node.expanded ? node.nodes.map(n => html`${this.#getNodeList(n)}`) : nothing}
     </nve-tree-node>`;
   }
 
-  #open(e, node) {
+  #open(e: Event, node: TreeNode) {
     e.stopPropagation();
     node.expanded = true;
     this.nodes = [...this.nodes];
     this.requestUpdate();
   }
 
-  #close(e, node) {
+  #close(e: Event, node: TreeNode) {
     e.stopPropagation();
     node.expanded = false;
     this.nodes = [...this.nodes];
@@ -59,6 +66,6 @@ function createTree() {
   });
 }
 
-function createNodeList(nodes: number) {
+function createNodeList(nodes: number): TreeNode[] {
   return new Array(nodes).fill('').map((_, i) => ({ label: `${i}`, expanded: false, nodes: [] }));
 }

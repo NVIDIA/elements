@@ -6,10 +6,10 @@ import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 import { siteData } from '../index.11tydata.js';
 import { getSiteUrl } from '../_11ty/utils/site-url.js';
 import { ELEMENTS_PAGES_BASE_URL } from '../_11ty/utils/env.js';
-import markdown from '../_11ty/libraries/markdown.js';
 
 const { BASE_URL, examples } = siteData;
 
+/** @param {unknown} value */
 function escapeAttr(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -19,10 +19,12 @@ function escapeAttr(value) {
     .replace(/'/g, '&#39;');
 }
 
+/** @param {{entrypoint?: string}} example */
 function getPatternName(example) {
   return example.entrypoint?.match(/^@internals\/patterns\/([^/]+)\.examples\.json$/)?.[1] ?? null;
 }
 
+/** @param {{entrypoint?: string, elementName?: string}} example */
 export function getCanonicalPath(example) {
   const patternName = getPatternName(example);
 
@@ -32,6 +34,7 @@ export function getCanonicalPath(example) {
   return '/examples/';
 }
 
+/** @param {{entrypoint?: string, elementName?: string}} example */
 export function getDocumentationPath(example) {
   const patternName = getPatternName(example);
   const { elementName } = example;
@@ -49,10 +52,12 @@ export function getDocumentationPath(example) {
   return `/docs/elements/${elementName}/`;
 }
 
+/** @param {{entrypoint?: string, elementName?: string}} example */
 export function getCanonicalUrl(example) {
   return getSiteUrl(getCanonicalPath(example));
 }
 
+/** @param {{entrypoint?: string, id?: string}} example */
 export function renderServeExampleScript(example) {
   if (process.env.ELEVENTY_RUN_MODE !== 'serve') return '';
 
@@ -74,9 +79,13 @@ export const data = {
     alias: 'example'
   },
   examples,
-  permalink: data => `examples/${data.example.permalink}`
+  permalink: (/** @type {{example: typeof examples[number]}} */ data) => `examples/${data.example.permalink}`
 };
 
+/**
+ * @this {import('../_11ty/types.js').TemplateContext}
+ * @param {{example: typeof examples[number], disableTheme?: boolean}} data
+ */
 export async function render(data) {
   return this.renderTemplate(
     /* html */ `

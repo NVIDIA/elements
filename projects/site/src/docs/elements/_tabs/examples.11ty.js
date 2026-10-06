@@ -6,6 +6,10 @@ import { exampleDocShortcode } from '../../../_11ty/shortcodes/example-doc.js';
 
 const { examples, elements } = siteData;
 
+/**
+ * @typedef {{component: {filePathStem: string, fileSlug: string, data: {tag?: string, title: string, hideExamplesTab?: boolean, page: {fileSlug: string}}}, page: {fileSlug: string}, tag?: string, title?: string, isExamplesTab?: boolean, noindex?: boolean}} ExamplesPageData
+ */
+
 // Initialize markdown parser and metadata service
 const md = markdownIt();
 
@@ -24,10 +28,10 @@ export const data = {
     addAllPagesToCollections: true
   },
   eleventyComputed: {
-    noindex: data => data.component.data.hideExamplesTab || !data.component.data.tag
+    noindex: (/** @type {ExamplesPageData} */ data) => data.component.data.hideExamplesTab || !data.component.data.tag
   },
   // Generate URLs in the format /docs/elements/{component-name}/examples/ or package-specific component docs paths.
-  permalink: data => {
+  permalink: (/** @type {ExamplesPageData} */ data) => {
     const filePath = data.component.filePathStem;
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
@@ -42,7 +46,7 @@ export const data = {
  * Renders the examples documentation page for a component.
  * Currently a placeholder that will be expanded to show component examples.
  *
- * @param {Object} data - The page data object from 11ty
+ * @param {ExamplesPageData} data - The page data object from 11ty
  * @returns {Promise<string>} HTML string containing the examples documentation
  */
 export async function render(data) {
@@ -101,11 +105,10 @@ export async function render(data) {
     ${(
       await Promise.all(
         exampleTemplates.map(async example => {
-          const config = { editAction: true };
-          if (example.element?.includes('grid')) {
-            config.inline = false;
-            config.height = '540px';
-          }
+          const config = {
+            editAction: true,
+            ...(example.element?.includes('grid') ? { inline: false, height: '540px' } : {})
+          };
           return await exampleDocShortcode(example.entrypoint, example.name, config);
         })
       )
