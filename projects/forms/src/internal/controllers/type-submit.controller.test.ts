@@ -105,7 +105,8 @@ describe('type-submit.controller', () => {
     element.sync();
     element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
 
-    const submitter = requestSubmit.mock.calls[0][0] as HTMLButtonElement;
+    const submitter = requestSubmit.mock.calls[0]?.[0];
+    if (!(submitter instanceof HTMLButtonElement)) throw new Error('Expected a submit button.');
     expect(submitter.name).toBe('action');
     expect(submitter.value).toBe('save');
     expect(form.contains(submitter)).toBe(true);

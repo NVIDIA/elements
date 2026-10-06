@@ -30,6 +30,9 @@ export interface ButtonFormControlMixinInstance {
    */
   readOnly: boolean;
 
+  /** @deprecated Use readOnly instead. */
+  readonly: boolean;
+
   /**
    * Associates the button with a form. Set the property to a form element or its ID. The HTML attribute accepts only
    * the form ID. Reading the property returns the associated form element or `null`.
@@ -84,7 +87,8 @@ export interface ButtonFormControlMixinInstance {
    * @attr current
    * @reflect
    */
-  current: CurrentState;
+  get current(): CurrentState;
+  set current(value: CurrentState | null | undefined);
 
   /**
    * Establishes a relationship between a popover and its invoker button.
