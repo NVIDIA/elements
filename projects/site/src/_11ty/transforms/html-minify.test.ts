@@ -1,5 +1,5 @@
 import { afterAll, describe, expect, it, vi } from 'vitest';
-import { parseFragment, type DefaultTreeAdapterTypes } from 'parse5';
+import { parseFragment, type DefaultTreeAdapterMap } from 'parse5';
 import markdown from '../libraries/markdown.js';
 import { htmlMinifyTransform } from './html-minify.js';
 
@@ -13,11 +13,11 @@ const exampleSource = `<div>${textarea}<textarea aria-label="Second">  second\n\
 
 function textOfTags(html: string, tag: string): string[] {
   const values: string[] = [];
-  function text(node: DefaultTreeAdapterTypes.Node): string {
+  function text(node: DefaultTreeAdapterMap['node']): string {
     if ('value' in node) return node.value;
     return 'childNodes' in node ? node.childNodes.map(text).join('') : '';
   }
-  function visit(node: DefaultTreeAdapterTypes.Node) {
+  function visit(node: DefaultTreeAdapterMap['node']) {
     if ('tagName' in node && node.tagName === tag) values.push(text(node));
     if ('childNodes' in node) node.childNodes.forEach(visit);
   }

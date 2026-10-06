@@ -18,7 +18,7 @@ const md = markdown();
 
 // Open MDN links in new tab
 md.use(markdownItLink, {
-  matcher(href) {
+  matcher(/** @type {string} */ href) {
     return href.match(/^https?:\/\//);
   },
   attrs: {
@@ -92,6 +92,12 @@ export function elementSummary(tag) {
   </section>`;
 }
 
+/**
+ * @template {{file?: string}} T
+ * @param {T[]} results
+ * @param {string} elementName
+ * @param {string} [manifestPath]
+ */
 export function getCoverageResult(results, elementName, manifestPath = '') {
   const elementPath = elementName.replace(/^nve-/, '');
   return (
@@ -101,6 +107,7 @@ export function getCoverageResult(results, elementName, manifestPath = '') {
   );
 }
 
+/** @param {string} manifestPath */
 function getSourcePath(manifestPath) {
   return manifestPath.replace(/^\/src\//, '').replace(/\.js$/, '.ts');
 }
@@ -181,6 +188,7 @@ export function elementSupportButtons(tag) {
  * @returns {string} HTML string for the status badge
  */
 export function badgeStatus(status, container = '', content = '') {
+  /** @type {Record<string, string>} */
   const statuses = {
     'pre-release': 'warning',
     beta: 'accent',
@@ -197,14 +205,14 @@ export function badgeStatus(status, container = '', content = '') {
 
 /**
  * Generates a coverage badge with color based on test coverage percentage
- * @param {number} value - Test coverage percentage
+ * @param {number | undefined} value - Test coverage percentage
  * @param {string} container - Container class for the badge
  * @param {string} content - Additional content to display
  * @returns {string} HTML string for the coverage badge
  */
 export function badgeCoverage(value, container = '', content = '') {
   let status = 'unknown';
-  const hasCoverage = Number.isFinite(value);
+  const hasCoverage = typeof value === 'number' && Number.isFinite(value);
   const formattedValue = hasCoverage
     ? new Intl.NumberFormat('default', {
         style: 'percent',
@@ -258,7 +266,7 @@ export function badgeBundle(value, container = '', content = '') {
 
 /**
  * Generates a Lighthouse score badge with color based on average score
- * @param {Object} value - Lighthouse scores object
+ * @param {Record<string, number | undefined> | null} value - Lighthouse scores object
  * @param {string} container - Container class for the badge
  * @param {string} content - Additional content to display
  * @returns {string} HTML string for the Lighthouse score badge
@@ -307,7 +315,6 @@ export function badgeAxe(value, container = '') {
  * @returns {string} HTML string containing the component status section
  */
 export function elementStatus(tag) {
-  /** @type {import('@internals/metadata').MetadataCustomElementsManifestDeclaration['metadata']} */
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata ?? {
     status: 'unknown',
     aria: '',

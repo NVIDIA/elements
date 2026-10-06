@@ -67,7 +67,10 @@ export function getSitemapCategories(pages = []) {
     entries.set(baseUrl, entry);
   }
 
-  const categories = CATEGORIES.map(category => ({ ...category, entries: [] }));
+  const categories = CATEGORIES.map(category => ({
+    ...category,
+    entries: /** @type {{ url: string, title: string, links: { url: string, label: string }[] }[]} */ ([])
+  }));
   for (const entry of entries.values()) {
     const category =
       categories.findLast(category =>

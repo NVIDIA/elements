@@ -44,6 +44,7 @@ ${examples.find(s => (s.name === 'Default' || s.name === 'InstallSource') && s.e
     : '';
 }
 
+/** @param {string} content */
 export async function doDontShortcode(content) {
   return /* html */ `
 <div nve-layout="column gap:sm">
@@ -68,6 +69,7 @@ export async function doDontShortcode(content) {
 </div>`;
 }
 
+/** @param {string} content */
 export async function beforeAfterShortcode(content) {
   return /* html */ `
 <div nve-layout="column gap:sm">
@@ -92,6 +94,7 @@ export async function beforeAfterShortcode(content) {
 </div>`;
 }
 
+/** @param {string} content */
 export async function splitShortcode(content) {
   return /* html */ `
 <div class="split-shortcode" nve-layout="grid gap:lg span-items:12 &xl|span-items:6">

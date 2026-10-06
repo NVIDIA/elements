@@ -5,6 +5,19 @@ import { siteData } from '../../index.11tydata.js';
 
 const { elements } = siteData;
 
+/**
+ * @typedef {import('../types.js').ApiItem} ApiItem
+ * @typedef {import('../types.js').ApiManifest} ApiManifest
+ * @typedef {import('../types.js').ApiElement} ApiElement
+ * @typedef {import('../types.js').ApiTableOptions} ApiTableOptions
+ */
+
+/**
+ * @param {string} tag
+ * @param {string} type
+ * @param {string | null} [name]
+ * @param {string | null} [value]
+ */
 export async function apiShortcode(tag, type, name = null, value = null) {
   const element = elements.find(d => d.name === tag);
   if (!element?.manifest) return '';
@@ -33,11 +46,16 @@ export async function apiShortcode(tag, type, name = null, value = null) {
   return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`.replaceAll('\n', '');
 }
 
+/**
+ * @param {ApiItem} apiItem
+ * @param {string} value
+ */
 function renderAPIValueDescription(apiItem, value) {
   const valueItem = apiItem.type?.values?.find(v => v.value === value);
   return /* html */ `${valueItem?.description ?? ''}`;
 }
 
+/** @param {ApiItem} apiValue */
 export function renderAPINameTable(apiValue) {
   const values = apiValue.type?.values ?? [];
   const description = markdown
@@ -71,12 +89,22 @@ export function renderAPINameTable(apiValue) {
   </div>`;
 }
 
+/**
+ * @param {ApiElement} element
+ * @param {string} type
+ */
 export function hasAPIData(element, type) {
   return getAPIItems(element, type).length > 0;
 }
 
+/**
+ * @param {ApiElement} element
+ * @param {string} type
+ * @returns {ApiItem[]}
+ */
 function getAPIItems(element, type) {
-  const manifest = element.manifest;
+  const manifest = element.manifest ?? {};
+  /** @type {ApiItem[] | undefined} */
   let items;
   switch (type) {
     case 'property':
@@ -108,6 +136,7 @@ function getAPIItems(element, type) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** @param {ApiItem} method */
 function formatMethodSignature(method) {
   const parameters = (method.parameters ?? [])
     .map(parameter => {
@@ -118,7 +147,9 @@ function formatMethodSignature(method) {
   return `${method.name}(${parameters}): ${method.return?.type?.text ?? 'unknown'}`;
 }
 
+/** @param {ApiItem[]} methods */
 function groupMethods(methods) {
+  /** @type {Map<string, ApiItem[]>} */
   const groups = new Map();
   for (const method of methods) {
     const group = groups.get(method.name) ?? [];
@@ -131,6 +162,11 @@ function groupMethods(methods) {
   }));
 }
 
+/**
+ * @param {ApiElement} element
+ * @param {string} type
+ * @param {ApiTableOptions} [options]
+ */
 export function renderAPITable(element, type, options = { container: 'flat' }) {
   if (type === 'method') return renderMethodTable(element, options);
 
@@ -153,6 +189,10 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
   return renderAPIGrid(type, columns, rows, options.container);
 }
 
+/**
+ * @param {ApiElement} element
+ * @param {ApiTableOptions} options
+ */
 function renderMethodTable(element, options) {
   const methods = groupMethods(
     getAPIItems(element, 'method').filter(method => options.methodName == null || method.name === options.methodName)
@@ -173,6 +213,7 @@ function renderMethodTable(element, options) {
   return renderAPIGrid('method', columns, rows, options.container);
 }
 
+/** @param {ApiItem} property */
 function renderPropertyValues(property) {
   return /* html */ `<nve-grid-cell role="gridcell">
     <div nve-layout="${property.type?.values?.some(value => value.description) ? 'column gap:xs' : 'row gap:xxs align:wrap'}">
@@ -186,8 +227,10 @@ function renderPropertyValues(property) {
   </nve-grid-cell>`;
 }
 
+/** @param {ApiItem} item */
 function renderDescription(item) {
-  const rawDescription = item.deprecated ?? item.descriptionText ?? item.description;
+  const rawDescription =
+    typeof item.deprecated === 'string' ? item.deprecated : (item.descriptionText ?? item.description);
   const description = rawDescription
     ? markdown
         .render(rawDescription)
@@ -198,6 +241,12 @@ function renderDescription(item) {
   return `<div nve-layout="column gap:xs">${item.deprecated ? '<nve-badge status="warning" container="flat">deprecated</nve-badge>' : ''}${description}</div>`;
 }
 
+/**
+ * @param {string} type
+ * @param {string[]} columns
+ * @param {string[]} rows
+ * @param {string} container
+ */
 function renderAPIGrid(type, columns, rows, container) {
   return /* html */ `
   <div class="api-table" nve-layout="column gap:sm full">
@@ -217,19 +266,24 @@ function renderAPIGrid(type, columns, rows, container) {
   </div>`;
 }
 
+/**
+ * @param {ApiManifest | undefined} manifest
+ * @param {ApiItem} member
+ */
 function getMemberAttributeName(manifest, member) {
   if (member.attribute) {
     return member.attribute;
   }
 
   const normalizedMemberName = member.name.toLowerCase();
-  const attribute = manifest.attributes?.find(
+  const attribute = manifest?.attributes?.find(
     attr =>
       attr.fieldName === member.name || attr.name === member.name || attr.name.toLowerCase() === normalizedMemberName
   );
   return attribute?.name;
 }
 
+/** @param {unknown} value */
 function escapeHtml(value) {
   return markdown.utils.escapeHtml(`${value ?? ''}`);
 }

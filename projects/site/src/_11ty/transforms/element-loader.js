@@ -5,7 +5,10 @@ import { getElementImports } from '@internals/tools';
 
 const apis = await ApiService.getData();
 
-/** based on element tags found, inline the imports for the elements */
+/**
+ * Based on element tags found, inline the imports for the elements.
+ * @param {string} content
+ */
 export async function elementLoaderTransform(content) {
   const lazy = content.includes('<!-- ELEMENT_LOADER_LAZY -->');
   const imports = getElementImports(content, apis.data.elements, lazy).join('');

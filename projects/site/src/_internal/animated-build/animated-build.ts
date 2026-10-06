@@ -200,7 +200,7 @@ export class AnimatedBuild extends LitElement {
       const totalCycleTime = maxDelay + animationDuration + displayTime;
 
       // Set up the reset cycle
-      this.#resetInterval = globalThis.setInterval(() => {
+      this.#resetInterval = globalThis.window.setInterval(() => {
         // Reset all animations
         wrapper.setAttribute('data-reset', 'true');
 

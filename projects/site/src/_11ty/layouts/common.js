@@ -443,6 +443,7 @@ export const renderDocsNav = data => /* html */ `
 </nve-tree>
 `;
 
+/** @param {{disableTheme?: boolean}} [data] */
 export function renderGlobalsScript(data = { disableTheme: false }) {
   return data.disableTheme
     ? ''

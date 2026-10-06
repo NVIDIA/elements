@@ -16,7 +16,7 @@ import {
 } from './updates-feed.js';
 
 describe('updatesFeedPlugin', () => {
-  let publicOutputPath;
+  let publicOutputPath: string | undefined;
 
   afterEach(async () => {
     if (publicOutputPath) await rm(publicOutputPath, { force: true, recursive: true });

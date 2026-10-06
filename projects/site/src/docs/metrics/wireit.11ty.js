@@ -10,6 +10,7 @@ export const data = {
 
 const { wireit } = siteData;
 
+/** @this {import('../../_11ty/types.js').TemplateContext} */
 export function render() {
   return this.renderTemplate(
     /* html */ `

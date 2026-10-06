@@ -13,6 +13,7 @@
     "test": "wireit",
     "test:browser": "wireit",
     "test:node": "wireit",
+    "test:types": "wireit",
     "test:lighthouse": "wireit",
     "preview": "wireit"
   },
@@ -21,7 +22,8 @@
       "dependencies": [
         "lint",
         "build",
-        "test"
+        "test",
+        "test:types"
       ]
     },
     "dev": {
@@ -268,6 +270,31 @@
         "build"
       ]
     },
+    "test:types": {
+      "command": "node ./node_modules/typescript-7/bin/tsc --project tsconfig.json",
+      "files": [
+        "src/**/*.ts",
+        "src/**/*.js",
+        "tsconfig.json",
+        "../code/dist/**/*.d.ts",
+        "../core/dist/**/*.d.ts",
+        "../forms/dist/**/*.d.ts",
+        "../lint/dist/**/*.d.ts",
+        "../monaco/dist/**/*.d.ts",
+        "../themes/dist/**/*.json",
+        "../internals/metadata/dist/**/*.d.ts",
+        "../internals/tools/dist/**/*.d.ts",
+        "../internals/vite/src/configs/env.js",
+        "../internals/vite/src/**/*.d.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "build:dependencies",
+          "cascade": false
+        }
+      ]
+    },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
       "files": [
@@ -333,6 +360,7 @@
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
+    "typescript-7": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   }

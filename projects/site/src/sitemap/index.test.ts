@@ -1,5 +1,5 @@
 import { readdir, readFile } from 'node:fs/promises';
-import { parse, parseFragment, type DefaultTreeAdapterTypes } from 'parse5';
+import { parse, parseFragment, type DefaultTreeAdapterMap } from 'parse5';
 import { describe, expect, it } from 'vitest';
 import { getSitemapCategories, isHumanSitemapPage, render } from './index.11ty.js';
 
@@ -18,9 +18,9 @@ function page(url: string, title = url): SitemapPage {
 }
 
 function findElements(
-  node: DefaultTreeAdapterTypes.Node,
-  predicate: (element: DefaultTreeAdapterTypes.Element) => boolean
-): DefaultTreeAdapterTypes.Element[] {
+  node: DefaultTreeAdapterMap['node'],
+  predicate: (element: DefaultTreeAdapterMap['element']) => boolean
+): DefaultTreeAdapterMap['element'][] {
   const matches = 'tagName' in node && predicate(node) ? [node] : [];
   if ('childNodes' in node) {
     for (const child of node.childNodes) matches.push(...findElements(child, predicate));
@@ -28,7 +28,7 @@ function findElements(
   return matches;
 }
 
-function attribute(element: DefaultTreeAdapterTypes.Element, name: string) {
+function attribute(element: DefaultTreeAdapterMap['element'], name: string) {
   return element.attrs.find(attr => attr.name === name)?.value;
 }
 

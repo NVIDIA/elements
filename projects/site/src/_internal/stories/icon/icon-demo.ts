@@ -46,9 +46,9 @@ export class IconDemo extends LitElement {
     <nve-card>
       <nve-card-content>
         <div nve-layout="column gap:lg">
-          <form @submit=${e => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
+          <form @submit=${(e: SubmitEvent) => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
             <nve-search style="width: 350px">
-              <input type="search" @input=${e => (this.iconSearchKey = e.target.value)} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
+              <input type="search" @input=${this.#search} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
             </nve-search>
             <nve-select style="--width: 90px; --text-transform: none">
               <select aria-label="size" .value=${this.values.size} name="size">
@@ -99,16 +99,20 @@ export class IconDemo extends LitElement {
   @state() values = { size: 'xl', outline: false, solid: false, direction: '' };
 
   get #form() {
-    return this.shadowRoot.querySelector('form');
+    return this.shadowRoot?.querySelector('form');
   }
 
-  #getRotation(iconName, direction) {
+  #getRotation(iconName: string, direction: string) {
     return iconName.includes('arrow') ||
       iconName.includes('chevron') ||
       iconName.includes('caret') ||
       iconName.includes('thumb')
       ? direction
       : '';
+  }
+
+  #search(event: InputEvent) {
+    if (event.target instanceof HTMLInputElement) this.iconSearchKey = event.target.value;
   }
 
   #input() {

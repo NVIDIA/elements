@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { afterAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, assert, describe, expect, it, vi } from 'vitest';
 
 vi.stubEnv('ELEMENTS_SITE_URL', 'https://nvidia.github.io');
 vi.stubEnv('PAGES_BASE_URL', '/elements/');
@@ -102,7 +102,7 @@ interface JsonLdListItem {
   item: string;
 }
 
-interface BreadcrumbList {
+interface BreadcrumbList extends JsonLdNode {
   '@type': 'BreadcrumbList';
   itemListElement: JsonLdListItem[];
 }
@@ -430,6 +430,8 @@ describe('renderBaseHead', () => {
       duration: 'PT28S',
       contentUrl: 'https://nvidia.github.io/elements/static/video/releases/08-2026.webm'
     });
+    assert.isDefined(article);
+    assert.isDefined(video);
     expect(article.video).toEqual({ '@id': video['@id'] });
   });
 

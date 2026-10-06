@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { transformWithOxc } from 'vite';
 import { chromium } from 'playwright';
-import { parseFragment, type DefaultTreeAdapterTypes } from 'parse5';
+import { parseFragment, type DefaultTreeAdapterMap } from 'parse5';
 import markdown from '../libraries/markdown.js';
 
 const patternExample = {
@@ -103,8 +103,8 @@ const lineEndingExamples = [
   }
 ];
 
-function findElements(node: DefaultTreeAdapterTypes.Node, tag: string): DefaultTreeAdapterTypes.Element[] {
-  const elements: DefaultTreeAdapterTypes.Element[] = [];
+function findElements(node: DefaultTreeAdapterMap['node'], tag: string): DefaultTreeAdapterMap['element'][] {
+  const elements: DefaultTreeAdapterMap['element'][] = [];
   if ('tagName' in node && node.tagName === tag) elements.push(node);
   if ('childNodes' in node) {
     for (const child of node.childNodes) {

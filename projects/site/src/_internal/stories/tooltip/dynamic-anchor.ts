@@ -47,9 +47,8 @@ export class DynamicAnchorPositionDemo extends LitElement {
 
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
-    this.addEventListener(
-      'mousemove',
-      e => (this.#anchor.value.style.inset = `${e.clientY - 15}px auto auto ${e.clientX - 15}px`)
-    );
+    this.addEventListener('mousemove', e => {
+      if (this.#anchor.value) this.#anchor.value.style.inset = `${e.clientY - 15}px auto auto ${e.clientX - 15}px`;
+    });
   }
 }

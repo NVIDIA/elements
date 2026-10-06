@@ -102,17 +102,15 @@ const lighthouseByComponent = new Map();
 coverageTestResults.forEach(result => {
   if (result.file !== 'total') {
     const componentName = result.file.split('/')[0];
-    if (!coverageByComponent.has(componentName)) {
-      coverageByComponent.set(componentName, {
-        branches: 0,
-        coverage: 0,
-        count: 0
-      });
-    }
-    const component = coverageByComponent.get(componentName);
+    const component = coverageByComponent.get(componentName) ?? {
+      branches: 0,
+      coverage: 0,
+      count: 0
+    };
     component.branches += result.branches.total;
     component.coverage += result.branches.pct;
     component.count += 1;
+    coverageByComponent.set(componentName, component);
   }
 });
 
