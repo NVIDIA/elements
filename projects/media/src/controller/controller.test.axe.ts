@@ -24,7 +24,8 @@ describe(MediaController.metadata.tag, () => {
       </nve-media-controller>
     `);
     try {
-      await elementIsStable(fixture.querySelector(MediaController.metadata.tag));
+      const element = fixture.querySelector(MediaController.metadata.tag) as MediaController;
+      await elementIsStable(element);
 
       const results = await runAxe([MediaController.metadata.tag]);
       expect(results.violations.length).toBe(0);

@@ -15,7 +15,8 @@ describe(MediaPauseButton.metadata.tag, () => {
       <nve-media-pause-button aria-label="play media" checked></nve-media-pause-button>
       <nve-media-pause-button aria-label="disabled pause media" disabled></nve-media-pause-button>
     `);
-    await elementIsStable(fixture.querySelector(MediaPauseButton.metadata.tag));
+    const element = fixture.querySelector(MediaPauseButton.metadata.tag) as MediaPauseButton;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaPauseButton.metadata.tag]);
     expect(results.violations.length).toBe(0);

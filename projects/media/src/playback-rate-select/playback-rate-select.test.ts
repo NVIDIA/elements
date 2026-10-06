@@ -85,14 +85,14 @@ describe(MediaPlaybackRateSelect.metadata.tag, () => {
   it('should use i18n strings for its accessible name and option text', async () => {
     let nativeSelect = getElement<HTMLSelectElement>(select.shadowRoot as ShadowRoot, 'select');
     expect(nativeSelect.getAttribute('aria-label')).toBe('playback rate');
-    expect(nativeSelect.options[0].text).toBe('0.5x');
+    expect(nativeSelect.options[0]?.text).toBe('0.5x');
 
     select.i18n = { playbackRate: 'speed', playbackRateOption: '{rate} times' };
     await elementIsStable(select);
     nativeSelect = getElement<HTMLSelectElement>(select.shadowRoot as ShadowRoot, 'select');
 
     expect(nativeSelect.getAttribute('aria-label')).toBe('speed');
-    expect(nativeSelect.options[0].text).toBe('0.5 times');
+    expect(nativeSelect.options[0]?.text).toBe('0.5 times');
   });
 
   it('should render transparent closed control styles', () => {

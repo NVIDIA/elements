@@ -15,7 +15,8 @@ describe(MediaMuteButton.metadata.tag, () => {
       <nve-media-mute-button aria-label="unmute media" checked></nve-media-mute-button>
       <nve-media-mute-button aria-label="disabled mute media" disabled></nve-media-mute-button>
     `);
-    await elementIsStable(fixture.querySelector(MediaMuteButton.metadata.tag));
+    const element = fixture.querySelector(MediaMuteButton.metadata.tag) as MediaMuteButton;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaMuteButton.metadata.tag]);
     expect(results.violations.length).toBe(0);

@@ -88,7 +88,7 @@ describe(MediaSeekButton.metadata.tag, () => {
       <div id="seek-target"></div>
     `);
     const explicitButton = getElement<MediaSeekButton>(commandFixture, MediaSeekButton.metadata.tag);
-    const explicitTarget = getElement(commandFixture, '#seek-target');
+    const explicitTarget = getElement<HTMLElement>(commandFixture, '#seek-target');
     await elementIsStable(explicitButton);
 
     const event = untilEvent<Event & { command: string }>(explicitTarget, 'command');

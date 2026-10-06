@@ -14,7 +14,8 @@ describe(MediaTimeRange.metadata.tag, () => {
       <nve-media-time-range aria-label="current time" min="0" max="100" value="50"></nve-media-time-range>
       <nve-media-time-range aria-label="disabled current time" disabled></nve-media-time-range>
     `);
-    await elementIsStable(fixture.querySelector(MediaTimeRange.metadata.tag));
+    const element = fixture.querySelector(MediaTimeRange.metadata.tag) as MediaTimeRange;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaTimeRange.metadata.tag]);
     expect(results.violations.length).toBe(0);

@@ -15,7 +15,8 @@ describe(MediaFullscreenButton.metadata.tag, () => {
       <nve-media-fullscreen-button aria-label="exit full screen" pressed></nve-media-fullscreen-button>
       <nve-media-fullscreen-button aria-label="disabled full screen" disabled></nve-media-fullscreen-button>
     `);
-    await elementIsStable(fixture.querySelector(MediaFullscreenButton.metadata.tag));
+    const element = fixture.querySelector(MediaFullscreenButton.metadata.tag) as MediaFullscreenButton;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaFullscreenButton.metadata.tag]);
     expect(results.violations.length).toBe(0);
