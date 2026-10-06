@@ -5,7 +5,7 @@ import { chmod, mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ESLint } from 'eslint';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, assert, describe, expect, it } from 'vitest';
 import { elementsHtmlConfig, elementsRecommended, VERSION } from './index.js';
 
 describe('VERSION', () => {
@@ -31,6 +31,7 @@ title: Example
 \`\`\``;
 
     const [result] = await eslint.lintText(markdown, { filePath: 'src/example.md' });
+    assert.exists(result);
 
     expect(result.messages).toEqual([
       expect.objectContaining({
@@ -63,6 +64,7 @@ describe('elementsRecommended', () => {
 
   it('should export a global ignores-only config for generated directories', () => {
     const [globalIgnores] = elementsRecommended;
+    assert.exists(globalIgnores);
 
     expect(Object.keys(globalIgnores)).toEqual(['ignores']);
     expect(globalIgnores.ignores).toEqual(expect.arrayContaining(['.11ty-vite/', 'dist/', '.wireit/']));
