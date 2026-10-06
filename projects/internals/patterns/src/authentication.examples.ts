@@ -4,10 +4,8 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/alert/define.js';
-import '@nvidia-elements/core/alert-group/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/card/define.js';
-import '@nvidia-elements/core/control-message/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/logo/define.js';
