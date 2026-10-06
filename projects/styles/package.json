@@ -65,6 +65,7 @@
     "build": "wireit",
     "lint": "wireit",
     "test": "wireit",
+    "test:types": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit"
   },
@@ -90,6 +91,7 @@
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
+    "typescript-7": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
@@ -100,6 +102,7 @@
         "build",
         "publint",
         "test",
+        "test:types",
         "test:visual"
       ]
     },
@@ -142,6 +145,23 @@
       "command": "vite build --watch",
       "service": true,
       "dependencies": []
+    },
+    "test:types": {
+      "command": "node ./node_modules/typescript-7/bin/tsc --project tsconfig.json --noEmit",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json",
+        "../core/dist/**/*.d.ts",
+        "../forms/dist/**/*.d.ts",
+        "../internals/vite/src/**/*.d.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "../core:build",
+          "cascade": false
+        }
+      ]
     },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
