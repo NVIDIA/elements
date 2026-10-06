@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, assert, vi, beforeEach, afterEach } from 'vitest';
+import type { serveStdio } from '@modelcontextprotocol/server/stdio';
 
 const {
   mockRegisterTool,
@@ -40,8 +41,8 @@ const {
     mockRegisterPrompt: vi.fn(),
     mockRegisterResource: vi.fn(),
     mockRegisterCapabilities: vi.fn(),
-    mockServeStdio: vi.fn((factory: () => unknown) => {
-      factory();
+    mockServeStdio: vi.fn<typeof serveStdio>(factory => {
+      void factory({ era: 'modern' });
       return stdioHandle;
     }),
     mockNotify: vi.fn().mockResolvedValue(undefined),
@@ -118,6 +119,12 @@ const createRequestContext = () => ({
   }
 });
 
+function getRegisteredToolHandler() {
+  const [call] = mockRegisterTool.mock.calls;
+  assert.exists(call, 'Expected a tool registration');
+  return call[2];
+}
+
 describe('MCP server', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -155,6 +162,7 @@ describe('MCP server', () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
     const allToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'all_tool');
+    assert.exists(allToolCall, 'Expected all_tool to be registered');
     expect(allToolCall[1]).toEqual(
       expect.objectContaining({
         title: 'All Tool',
@@ -168,6 +176,7 @@ describe('MCP server', () => {
     await startMcpServer();
     // mcpTool has no inputSchema — should still register without error
     const mcpToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'mcp_tool');
+    assert.exists(mcpToolCall, 'Expected mcp_tool to be registered');
     expect(mcpToolCall[1].inputSchema.shape).toEqual({});
   });
 
@@ -188,7 +197,9 @@ describe('MCP server', () => {
   it('should invoke prompt handler with params', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const handler = mockRegisterPrompt.mock.calls[0][2];
+    const [promptCall] = mockRegisterPrompt.mock.calls;
+    assert.exists(promptCall, 'Expected a prompt registration');
+    const handler = promptCall[2];
     const result = await handler({ arg: 'value' });
     expect(mockPrompt.handler).toHaveBeenCalledWith({ arg: 'value' });
     expect(result).toEqual({ messages: [] });
@@ -205,7 +216,7 @@ describe('MCP server', () => {
   it('should return string result as text content', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const handler = mockRegisterTool.mock.calls[0][2];
+    const handler = getRegisteredToolHandler();
     const result = await handler({}, createRequestContext());
     expect(result).toEqual({
       structuredContent: { status: 'complete', result: 'test' },
@@ -216,7 +227,7 @@ describe('MCP server', () => {
   it('should return JSON for error responses', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const handler = mockRegisterTool.mock.calls[0][2];
+    const handler = getRegisteredToolHandler();
     const errorResult = { status: 'error', message: 'failed' };
     mcpTool.mockResolvedValueOnce(errorResult);
     const result = await handler({}, createRequestContext());
@@ -226,7 +237,7 @@ describe('MCP server', () => {
   it('should return JSON for non-string results', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const handler = mockRegisterTool.mock.calls[0][2];
+    const handler = getRegisteredToolHandler();
     const objResult = { status: 'complete', result: { key: 'value' } };
     mcpTool.mockResolvedValueOnce(objResult);
     const result = await handler({}, createRequestContext());
@@ -236,7 +247,7 @@ describe('MCP server', () => {
   it('should omit undefined values before returning structured content', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const handler = mockRegisterTool.mock.calls[0][2];
+    const handler = getRegisteredToolHandler();
     mcpTool.mockResolvedValueOnce({
       status: 'complete',
       result: [{ name: 'nve-button', markdown: undefined, changelog: undefined, manifest: { tagName: 'nve-button' } }]
@@ -251,7 +262,7 @@ describe('MCP server', () => {
   it('should report progress through the v2 request context', async () => {
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const handler = mockRegisterTool.mock.calls[0][2];
+    const handler = getRegisteredToolHandler();
     const params: Record<string, unknown> = {};
     await handler(params, {
       mcpReq: {
@@ -421,9 +432,10 @@ describe('MCP server', () => {
 
     const { startMcpServer } = await import('./index.js');
     await startMcpServer();
-    const options = mockServeStdio.mock.calls[0][1];
+    const onerror = mockServeStdio.mock.calls[0]?.[1]?.onerror;
+    assert.exists(onerror, 'Expected a stdio error handler');
     const error = new Error('Connection failed');
-    options.onerror(error);
+    onerror(error);
 
     expect(errorSpy).toHaveBeenCalledWith(error);
     expect(exitSpy).toHaveBeenCalledWith(1);

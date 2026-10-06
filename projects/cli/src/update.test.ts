@@ -248,7 +248,7 @@ describe('update-check', () => {
       await notifyIfUpdateAvailable('abc123');
 
       expect(console.log).toHaveBeenCalled();
-      const logCall = vi.mocked(console.log).mock.calls[0][0];
+      const logCall = vi.mocked(console.log).mock.calls[0]?.[0];
       expect(logCall).toContain('Update available');
       expect(logCall).toContain('nve --upgrade');
     });

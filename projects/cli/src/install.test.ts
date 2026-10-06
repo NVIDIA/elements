@@ -800,7 +800,7 @@ async function createInstallerContext(): Promise<InstallerContext> {
 }
 
 function createUnixEnv({ fakeBin, home }: InstallerContext): NodeJS.ProcessEnv {
-  const env = { ...process.env, HOME: home, PATH: fakeBin, SHELL: '/bin/zsh' };
+  const env: NodeJS.ProcessEnv = { ...process.env, HOME: home, PATH: fakeBin, SHELL: '/bin/zsh' };
   delete env.CI;
   return env;
 }

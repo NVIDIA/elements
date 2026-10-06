@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, assert, vi, beforeEach, afterEach } from 'vitest';
 import { marked } from 'marked';
 import ora, { type Ora } from 'ora';
-import type { ManagedToolMethod } from '@internals/tools';
+import type { ManagedToolMethod, Schema, ToolOutput } from '@internals/tools';
 import {
   banner,
   colors,
@@ -54,7 +54,7 @@ describe('utils', () => {
     if (stderrIsTTYDescriptor) {
       Object.defineProperty(process.stderr, 'isTTY', stderrIsTTYDescriptor);
     } else {
-      delete process.stderr.isTTY;
+      Reflect.deleteProperty(process.stderr, 'isTTY');
     }
   });
 
@@ -95,6 +95,7 @@ describe('utils', () => {
   describe('getSpinnerProgressMessage', () => {
     it('should return a random message from predefined list', () => {
       const message = getSpinnerProgressMessage();
+      assert.exists(message);
       expect(typeof message).toBe('string');
       expect(message.length).toBeGreaterThan(0);
     });
@@ -111,7 +112,17 @@ describe('utils', () => {
   });
 
   describe('runAsyncTool', () => {
-    const mockFn = vi.fn();
+    const mockResult: ToolOutput<string> = { status: 'complete', result: 'test result' };
+    const mockFn = Object.assign(vi.fn<(args: Record<string, unknown>) => Promise<ToolOutput<string>>>(), {
+      metadata: {
+        name: 'test',
+        summary: 'Test tool',
+        title: 'Test tool',
+        command: 'test.tool',
+        toolName: 'test_tool',
+        support: 0
+      }
+    }) satisfies ManagedToolMethod<string>;
     const mockSpinner: Partial<Ora> = {
       start: vi.fn(),
       stop: vi.fn()
@@ -120,7 +131,7 @@ describe('utils', () => {
     beforeEach(() => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       vi.mocked(ora).mockReturnValue(mockSpinner as any);
-      mockFn.mockResolvedValue('test result');
+      mockFn.mockResolvedValue(mockResult);
     });
 
     it('should run function without spinner in CI environment', async () => {
@@ -128,7 +139,7 @@ describe('utils', () => {
       const args = {};
       const result = await runAsyncTool(args, mockFn);
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(ora).not.toHaveBeenCalled();
       delete process.env.CI;
@@ -139,7 +150,7 @@ describe('utils', () => {
       const args = {};
       const result = await runAsyncTool(args, mockFn);
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(ora).not.toHaveBeenCalled();
     });
@@ -148,7 +159,7 @@ describe('utils', () => {
       const args = { start: true };
       const result = await runAsyncTool(args, mockFn);
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(ora).not.toHaveBeenCalled();
     });
@@ -157,7 +168,7 @@ describe('utils', () => {
       const args = { log: true };
       const result = await runAsyncTool(args, mockFn);
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(ora).not.toHaveBeenCalled();
     });
@@ -166,7 +177,7 @@ describe('utils', () => {
       const args = {};
       const result = await runAsyncTool(args, mockFn, { interactiveProgress: false });
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(args).not.toHaveProperty('onProgress');
       expect(ora).not.toHaveBeenCalled();
@@ -176,7 +187,7 @@ describe('utils', () => {
       const args = {};
       const result = await runAsyncTool(args, mockFn);
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockFn).toHaveBeenCalledWith(args);
       expect(ora).toHaveBeenCalledWith({
         spinner: 'star',
@@ -202,13 +213,14 @@ describe('utils', () => {
       const args = {};
       mockFn.mockImplementationOnce(async value => {
         console.log('console update');
-        (value.onProgress as (message: string) => void)('progress update');
-        return 'test result';
+        if (typeof value.onProgress !== 'function') throw new TypeError('Expected an onProgress callback');
+        value.onProgress('progress update');
+        return mockResult;
       });
 
       const result = await runAsyncTool(args, mockFn);
 
-      expect(result).toBe('test result');
+      expect(result).toBe(mockResult);
       expect(mockSpinner.text).toContain('console update');
       expect(mockSpinner.text).toContain('progress update');
     });
@@ -219,7 +231,7 @@ describe('utils', () => {
 
     it('should call getSelect for string enum properties', async () => {
       vi.mocked(select).mockResolvedValue('option1');
-      const schema = { type: 'string', enum: ['option1', 'option2'] };
+      const schema: Schema = { type: 'string', enum: ['option1', 'option2'] };
       const result = await getArgValue('testArg', schema);
 
       expect(result).toBe('option1');
@@ -234,7 +246,7 @@ describe('utils', () => {
 
     it('should call getBoolean for boolean properties', async () => {
       vi.mocked(confirm).mockResolvedValue(true);
-      const schema = { type: 'boolean', description: 'Test boolean' };
+      const schema: Schema = { type: 'boolean', description: 'Test boolean' };
       const result = await getArgValue('testArg', schema);
 
       expect(result).toBe(true);
@@ -245,7 +257,7 @@ describe('utils', () => {
 
     it('should call getEditor for string properties with defaultTemplate', async () => {
       vi.mocked(editor).mockResolvedValue('edited content');
-      const schema = {
+      const schema: Parameters<typeof getArgValue>[1] = {
         type: 'string',
         defaultTemplate: 'default content',
         filename: '.md'
@@ -263,7 +275,7 @@ describe('utils', () => {
 
     it('should call getInput for other string properties', async () => {
       vi.mocked(input).mockResolvedValue('input value');
-      const schema = { type: 'string' };
+      const schema: Schema = { type: 'string' };
       const result = await getArgValue('testArg', schema);
 
       expect(result).toBe('input value');
@@ -272,7 +284,7 @@ describe('utils', () => {
 
     it('should split comma-separated input into array for array properties', async () => {
       vi.mocked(input).mockResolvedValue('nve-button, nve-badge');
-      const schema = { type: 'array', items: { type: 'string' } };
+      const schema: Schema = { type: 'array', items: { type: 'string' } };
       const result = await getArgValue('names', schema);
 
       expect(result).toEqual(['nve-button', 'nve-badge']);
@@ -281,7 +293,7 @@ describe('utils', () => {
 
     it('should handle single value input for array properties', async () => {
       vi.mocked(input).mockResolvedValue('nve-button');
-      const schema = { type: 'array', items: { type: 'string' } };
+      const schema: Schema = { type: 'array', items: { type: 'string' } };
       const result = await getArgValue('names', schema);
 
       expect(result).toEqual(['nve-button']);
@@ -289,7 +301,7 @@ describe('utils', () => {
 
     it('should filter empty entries from array input', async () => {
       vi.mocked(input).mockResolvedValue('nve-button,,nve-badge,');
-      const schema = { type: 'array', items: { type: 'string' } };
+      const schema: Schema = { type: 'array', items: { type: 'string' } };
       const result = await getArgValue('names', schema);
 
       expect(result).toEqual(['nve-button', 'nve-badge']);

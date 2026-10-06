@@ -45,6 +45,7 @@
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
+    "test:types": "wireit",
     "cli:install": "pnpm run build && NVE_BASE_URL=\"file://$PWD/dist\" ./install.sh",
     "cli:uninstall": "root=\"${NVE_HOME:-$HOME/.nve}\" && rm -f \"$root/bin/nve\" \"$root/manifest.json\" \"$HOME/.local/bin/nve\" && (rmdir \"$root/bin\" \"$root\" 2>/dev/null || true)"
   },
@@ -76,6 +77,7 @@
     "@types/yargs": "17.0.35",
     "bun": "1.4.2",
     "typescript": "catalog:",
+    "typescript-7": "catalog:",
     "vite": "catalog:",
     "vite-plugin-singlefile": "2.3.3",
     "vitest": "catalog:"
@@ -86,7 +88,8 @@
         "lint",
         "build",
         "publint",
-        "test:coverage"
+        "test:coverage",
+        "test:types"
       ]
     },
     "publint": {
@@ -222,6 +225,22 @@
         "../internals/vite:ci",
         {
           "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:types": {
+      "command": "node ./node_modules/typescript-7/bin/tsc --project tsconfig.json --noEmit",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json",
+        "../internals/tools/dist/**/*.d.ts",
+        "../internals/metadata/dist/**/*.d.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "../internals/tools:build",
           "cascade": false
         }
       ]
