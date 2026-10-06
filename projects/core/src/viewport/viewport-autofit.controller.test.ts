@@ -293,10 +293,80 @@ describe('ViewportAutoFitController', () => {
     expect(first.getBoundingClientRect).toHaveBeenCalledOnce();
     expect(second.getBoundingClientRect).toHaveBeenCalledOnce();
   });
+
+  it('ignores content changes that do not come from a slot', async () => {
+    host.autoFit = true;
+    const source = document.createElement('div');
+    source.addEventListener('slotchange', event => controller.contentChanged(event));
+    source.dispatchEvent(new Event('slotchange'));
+    await settleController();
+
+    expect(TestResizeObserver.instances).toEqual([]);
+    expect(applyInitialFit).not.toHaveBeenCalled();
+  });
+
+  it('continues the initial fit when a reserved element name cannot be defined', async () => {
+    const reserved = document.createElement('font-face');
+    vi.spyOn(reserved, 'getBoundingClientRect').mockReturnValue(DOMRect.fromRect({ height: 0, width: 120 }));
+    const measurable = child({ height: 80, width: 120, x: 40, y: 30 });
+    host.append(reserved, measurable);
+
+    enableAutoFit(host);
+    await settleController();
+    applyScheduledFit();
+
+    expect(applyInitialFit).toHaveBeenCalledWith([{ height: 80, left: 40, top: 30, width: 120 }]);
+  });
+
+  it('does not wait for an undefined element inside a hidden ancestor', async () => {
+    const wrapper = child({ height: 80, width: 120, x: 40, y: 30 });
+    const hidden = document.createElement('div');
+    hidden.hidden = true;
+    const custom = document.createElement(`viewport-autofit-concealed-${crypto.randomUUID()}`);
+    hidden.append(custom);
+    wrapper.append(hidden);
+    host.append(wrapper);
+
+    enableAutoFit(host);
+    await settleController();
+    applyScheduledFit();
+
+    expect(applyInitialFit).toHaveBeenCalledOnce();
+    expect(customElements.get(custom.localName)).toBeUndefined();
+  });
+
+  it('cancels a scheduled frame when autofit is consumed', async () => {
+    host.append(child({ height: 80, width: 120, x: 40, y: 30 }));
+    enableAutoFit(host);
+    await settleController();
+    resizeObserver().notify();
+    expect(animationFrameCallbacks.size).toBe(1);
+
+    controller.consume();
+
+    expect(animationFrameCallbacks.size).toBe(0);
+    expect(applyInitialFit).not.toHaveBeenCalled();
+  });
+
+  it('does not fit when the host loses layout before the frame', async () => {
+    host.append(child({ height: 80, width: 120, x: 40, y: 30 }));
+    enableAutoFit(host);
+    await settleController();
+    resizeObserver().notify();
+    host.layoutWidth = 0;
+    host.layoutHeight = 0;
+    flushAnimationFrame();
+
+    expect(applyInitialFit).not.toHaveBeenCalled();
+  });
 });
 
 function applyScheduledFit(): void {
   resizeObserver().notify();
+  flushAnimationFrame();
+}
+
+function flushAnimationFrame(): void {
   for (const [frame, callback] of animationFrameCallbacks) {
     animationFrameCallbacks.delete(frame);
     callback(0);
