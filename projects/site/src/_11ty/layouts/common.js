@@ -288,6 +288,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/dialog/') ? 'highlighted selected' : ''}><a href="/docs/elements/dialog/">Dialog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/divider/') ? 'highlighted selected' : ''}><a href="/docs/elements/divider/">Divider</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted selected' : ''}><a href="/docs/elements/dot/">Dot</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/drag-handle/') ? 'highlighted selected' : ''}><a href="/docs/elements/drag-handle/">Drag Handle</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/drawer/') ? 'highlighted selected' : ''}><a href="/docs/elements/drawer/">Drawer</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropdown/">Dropdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>
