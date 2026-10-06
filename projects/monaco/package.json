@@ -166,6 +166,7 @@
     "build:themes": "wireit",
     "lint": "wireit",
     "test": "wireit",
+    "test:types": "wireit",
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
@@ -206,6 +207,7 @@
     "postcss": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
+    "typescript-7": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
@@ -221,6 +223,7 @@
         "build",
         "lint",
         "publint",
+        "test:types",
         "test:axe",
         "test:coverage",
         "test:visual"
@@ -334,6 +337,21 @@
         "../internals/vite:ci",
         {
           "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:types": {
+      "command": "node ./node_modules/typescript-7/bin/tsc --project build/tsconfig.json",
+      "files": [
+        "build/**/*.ts",
+        "build/tsconfig.json",
+        "../themes/dist/**/*.json"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "../themes:build",
           "cascade": false
         }
       ]
