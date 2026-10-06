@@ -180,6 +180,17 @@ describe('siteUrlsTransform', () => {
     expect(result).toContain('href="#icon"');
   });
 
+  it('should rewrite SVG links while retaining qualified attribute names', async () => {
+    const { siteUrlsTransform } = await importTransform('build');
+    const html = '<svg><a href="/docs/cli/" xlink:href="/docs/mcp/"><text>Docs</text></a></svg>';
+
+    const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
+
+    expect(result).toBe(
+      '<svg><a href="https://nvidia.github.io/elements/docs/cli/" xlink:href="https://nvidia.github.io/elements/docs/mcp/"><text>Docs</text></a></svg>'
+    );
+  });
+
   it('should not rewrite urls inside template content', async () => {
     const { siteUrlsTransform } = await importTransform('build');
     const html = '<template><a href="/docs/cli/">CLI</a><img src="/elements/elements/static/x.svg"></template>';
@@ -187,6 +198,41 @@ describe('siteUrlsTransform', () => {
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
 
     expect(result).toBe(html);
+  });
+
+  it('should preserve all source outside the URL attributes it rewrites', async () => {
+    const { siteUrlsTransform } = await importTransform('build');
+    const html = `<!DOCTYPE html>
+<!-- authored comment -->
+<div CLASS='example' data-label="a > b">
+  <textarea>\n\n  &amp; &#10;\n\n</textarea>
+  <pre><code>&lt;textarea&gt;\n\n&amp;amp;\n&lt;/textarea&gt;</code></pre>
+  <a href = '/docs/cli/' title='docs'>Docs</a>
+</div>`;
+
+    const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
+
+    expect(result).toBe(html.replace("href = '/docs/cli/'", 'href="https://nvidia.github.io/elements/docs/cli/"'));
+  });
+
+  it('should rewrite each authored attribute once when HTML parsing reconstructs an anchor', async () => {
+    const { siteUrlsTransform } = await importTransform('build');
+    const html = '<p><a href="/docs/cli/">one<p>two</a><a href="/docs/mcp/">three</a>';
+
+    const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
+
+    expect(result).toBe(
+      '<p><a href="https://nvidia.github.io/elements/docs/cli/">one<p>two</a><a href="https://nvidia.github.io/elements/docs/mcp/">three</a>'
+    );
+  });
+
+  it('should safely encode rewritten URL attribute values', async () => {
+    const { siteUrlsTransform } = await importTransform('build');
+    const html = '<a href="/docs/cli/?first=1&amp;second=2">Docs</a>';
+
+    const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
+
+    expect(result).toBe('<a href="https://nvidia.github.io/elements/docs/cli/?first=1&amp;second=2">Docs</a>');
   });
 
   it('should return non-html output unchanged', async () => {

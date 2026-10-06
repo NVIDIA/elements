@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { transformWithOxc } from 'vite';
+import { parseFragment, type DefaultTreeAdapterTypes } from 'parse5';
+import markdown from '../libraries/markdown.js';
 
 const patternExample = {
   id: 'pattern-chat-popover-chat',
@@ -32,11 +34,97 @@ const quotedNameExample = {
   permalink: '@internals/patterns/chat-pattern-chat-quoted-name/'
 };
 
+const authoredContent = [
+  '',
+  '',
+  '  first line',
+  '',
+  '    indented line',
+  '',
+  '# heading',
+  '- list',
+  '```typescript',
+  '  const answer = 42;',
+  '```',
+  '**bold** &amp; &lt;tag&gt; &#10;',
+  '',
+  ''
+].join('\n');
+// HTML consumes the first leading LF and decodes character references in textarea values.
+const expectedValue = [
+  '',
+  '  first line',
+  '',
+  '    indented line',
+  '',
+  '# heading',
+  '- list',
+  '```typescript',
+  '  const answer = 42;',
+  '```',
+  '**bold** & <tag> \n',
+  '',
+  ''
+].join('\n');
+const textarea = `<textarea aria-label="Message">${authoredContent}</textarea>`;
+const textareaExample = {
+  ...patternExample,
+  id: 'textarea-whitespace',
+  name: 'Whitespace',
+  element: 'nve-textarea',
+  template: `<div>${textarea}<textarea aria-label="Second">  second\n\n</textarea></div>`,
+  summary: '',
+  description: '',
+  tags: [],
+  entrypoint: '@nvidia-elements/core/textarea/textarea.examples.json'
+};
+
+const scriptContent = 'const markup = `<textarea>\nfirst\n</textarea>`;';
+const scriptExample = {
+  ...textareaExample,
+  id: 'textarea-script-content',
+  name: 'ScriptContent',
+  template: `<div>${textarea}<script type="module">${scriptContent}</script><template>${textarea}</template></div>`
+};
+
+const lineEndingExamples = [
+  {
+    ...textareaExample,
+    id: 'textarea-crlf',
+    name: 'CRLF',
+    template: '<textarea>\r\nfirst\r\nsecond\r\n</textarea>'
+  },
+  {
+    ...textareaExample,
+    id: 'textarea-cr',
+    name: 'CR',
+    template: '<textarea>\rfirst\rsecond\r</textarea>'
+  }
+];
+
+function findElements(node: DefaultTreeAdapterTypes.Node, tag: string): DefaultTreeAdapterTypes.Element[] {
+  const elements: DefaultTreeAdapterTypes.Element[] = [];
+  if ('tagName' in node && node.tagName === tag) elements.push(node);
+  if ('childNodes' in node) {
+    for (const child of node.childNodes) {
+      elements.push(...findElements(child, tag));
+    }
+  }
+  return elements;
+}
+
 async function importShortcode() {
   vi.resetModules();
   vi.doMock('../../index.11tydata.js', () => ({
     siteData: {
-      examples: [patternExample, structuredDataExample, quotedNameExample]
+      examples: [
+        patternExample,
+        structuredDataExample,
+        quotedNameExample,
+        textareaExample,
+        scriptExample,
+        ...lineEndingExamples
+      ]
     }
   }));
   vi.doMock('@internals/tools/playground', () => ({
@@ -55,6 +143,66 @@ afterEach(() => {
 });
 
 describe('exampleShortcode', () => {
+  it('preserves values and displayed source through the shortcode, Markdown, and HTML parsing', async () => {
+    const { exampleShortcode } = await importShortcode();
+    const shortcodeHtml = await exampleShortcode(textareaExample.entrypoint, textareaExample.name, {
+      summary: false
+    });
+    const renderedHtml = markdown.render(shortcodeHtml);
+    const document = parseFragment(renderedHtml);
+
+    const textareas = findElements(document, 'textarea');
+    expect(textareas).toHaveLength(2);
+    expect(textareas[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: expectedValue }]);
+    expect(textareas[1]?.childNodes).toMatchObject([{ nodeName: '#text', value: '  second\n\n' }]);
+
+    const codeBlocks = findElements(document, 'code');
+    expect(codeBlocks).toHaveLength(1);
+    expect(codeBlocks[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: textareaExample.template }]);
+  });
+
+  it.each(lineEndingExamples)('preserves native values and exact source with $name line endings', async example => {
+    const { exampleShortcode } = await importShortcode();
+    const shortcodeHtml = await exampleShortcode(example.entrypoint, example.name, { summary: false });
+    const renderedHtml = markdown.render(shortcodeHtml);
+    const document = parseFragment(renderedHtml);
+
+    const textareas = findElements(document, 'textarea');
+    expect(textareas).toHaveLength(1);
+    expect(textareas[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: 'first\nsecond\n' }]);
+
+    const codeBlocks = findElements(document, 'code');
+    expect(codeBlocks).toHaveLength(1);
+    expect(codeBlocks[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: example.template }]);
+  });
+
+  it('preserves script strings containing textarea markup while encoding actual textarea content', async () => {
+    const { exampleShortcode } = await importShortcode();
+    const shortcodeHtml = await exampleShortcode(scriptExample.entrypoint, scriptExample.name, { summary: false });
+    const renderedHtml = markdown.render(shortcodeHtml);
+    const document = parseFragment(renderedHtml);
+
+    const scripts = findElements(document, 'script').filter(script =>
+      script.attrs.some(attr => attr.name === 'type' && attr.value === 'module')
+    );
+    expect(scripts).toHaveLength(1);
+    expect(scripts[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: scriptContent }]);
+
+    const textareas = findElements(document, 'textarea');
+    expect(textareas).toHaveLength(1);
+    expect(textareas[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: expectedValue }]);
+
+    const templates = findElements(document, 'template');
+    expect(templates).toHaveLength(1);
+    expect(templates[0]).toMatchObject({
+      content: { childNodes: [{ tagName: 'textarea', childNodes: [{ nodeName: '#text', value: expectedValue }] }] }
+    });
+
+    const codeBlocks = findElements(document, 'code');
+    expect(codeBlocks).toHaveLength(1);
+    expect(codeBlocks[0]?.childNodes).toMatchObject([{ nodeName: '#text', value: scriptExample.template }]);
+  });
+
   it('should render iframe examples from the root examples route', async () => {
     const { exampleShortcode } = await importShortcode();
 
