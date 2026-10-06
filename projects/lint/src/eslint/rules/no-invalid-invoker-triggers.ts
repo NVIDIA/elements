@@ -29,6 +29,7 @@ const BUTTON_TYPE_ELEMENTS = [
   'nve-media-loop-button',
   'nve-media-mute-button',
   'nve-media-pause-button',
+  'nve-media-pip-button',
   'nve-media-playback-rate-select',
   'nve-media-seek-button',
   'nve-media-time-range',
