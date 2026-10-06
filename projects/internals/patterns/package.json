@@ -44,7 +44,8 @@
     "dev": "wireit",
     "build": "wireit",
     "build:watch": "wireit",
-    "lint": "wireit"
+    "lint": "wireit",
+    "test:types": "wireit"
   },
   "dependencies": {
     "lit": "catalog:"
@@ -65,6 +66,7 @@
     "eslint": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
+    "typescript-7": "catalog:",
     "vite": "catalog:"
   },
   "wireit": {
@@ -78,7 +80,8 @@
       "dependencies": [
         "build",
         "lint",
-        "publint"
+        "publint",
+        "test:types"
       ]
     },
     "publint": {
@@ -123,6 +126,32 @@
       "service": true,
       "dependencies": [
         "build"
+      ]
+    },
+    "test:types": {
+      "command": "node ./node_modules/typescript-7/bin/tsc --project tsconfig.json --noEmit",
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.json",
+        "../../core/dist/**/*.d.ts",
+        "../../forms/dist/**/*.d.ts",
+        "../../code/dist/**/*.d.ts",
+        "../../monaco/dist/**/*.d.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        {
+          "script": "../../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../../code:build",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:build",
+          "cascade": false
+        }
       ]
     },
     "lint": {
