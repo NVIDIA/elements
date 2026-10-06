@@ -16,7 +16,8 @@ describe(MediaSeekButton.metadata.tag, () => {
       <nve-media-seek-button action="forward" aria-label="seek forward"></nve-media-seek-button>
       <nve-media-seek-button action="end" aria-label="seek to end"></nve-media-seek-button>
     `);
-    await elementIsStable(fixture.querySelector(MediaSeekButton.metadata.tag));
+    const element = fixture.querySelector(MediaSeekButton.metadata.tag) as MediaSeekButton;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaSeekButton.metadata.tag]);
     expect(results.violations.length).toBe(0);

@@ -15,7 +15,8 @@ describe(MediaPlaybackRateSelect.metadata.tag, () => {
       <nve-media-playback-rate-select aria-label="disabled playback rate" disabled></nve-media-playback-rate-select>
       <nve-media-playback-rate-select aria-label="readonly playback rate" readonly></nve-media-playback-rate-select>
     `);
-    await elementIsStable(fixture.querySelector(MediaPlaybackRateSelect.metadata.tag));
+    const element = fixture.querySelector(MediaPlaybackRateSelect.metadata.tag) as MediaPlaybackRateSelect;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaPlaybackRateSelect.metadata.tag]);
     expect(results.violations.length).toBe(0);

@@ -6,9 +6,10 @@ import { createMediaState, getTargetMediaState, isMediaState, mediaStatesEqual }
 
 describe(createMediaState.name, () => {
   it('should copy and freeze buffered time spans', () => {
-    const buffered = [{ start: 0, end: 10 }];
+    const span = { start: 0, end: 10 };
+    const buffered = [span];
     const state = createMediaState({ buffered });
-    buffered[0].end = 20;
+    span.end = 20;
 
     expect(state.buffered).toEqual([{ start: 0, end: 10 }]);
     expect(Object.isFrozen(state)).toBe(true);

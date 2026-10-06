@@ -14,7 +14,8 @@ describe(MediaVolumeRange.metadata.tag, () => {
       <nve-media-volume-range aria-label="volume" value="0.5"></nve-media-volume-range>
       <nve-media-volume-range aria-label="disabled volume" disabled></nve-media-volume-range>
     `);
-    await elementIsStable(fixture.querySelector(MediaVolumeRange.metadata.tag));
+    const element = fixture.querySelector(MediaVolumeRange.metadata.tag) as MediaVolumeRange;
+    await elementIsStable(element);
 
     const results = await runAxe([MediaVolumeRange.metadata.tag]);
     expect(results.violations.length).toBe(0);

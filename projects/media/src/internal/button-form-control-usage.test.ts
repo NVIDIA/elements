@@ -142,10 +142,12 @@ describe('ButtonFormControlMixin media usage', () => {
         const submit = untilEvent<SubmitEvent>(form, 'submit');
         emulateClick(button);
         const event = await submit;
+        const { submitter } = event;
+        if (!(submitter instanceof HTMLButtonElement)) throw new Error('Expected a submit button.');
 
-        expect(event.submitter?.name).toBe('button-name');
-        expect(event.submitter?.value).toBe('button-value');
-        expect(event.submitter?.form).toBe(form);
+        expect(submitter.name).toBe('button-name');
+        expect(submitter.value).toBe('button-value');
+        expect(submitter.form).toBe(form);
       });
     });
   });
