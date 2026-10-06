@@ -1,8 +1,10 @@
 import markdownIt from 'markdown-it';
+import { parseFragment } from 'parse5';
 import markdown from '../libraries/markdown.js';
 import { siteData } from '../../index.11tydata.js';
 import { ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
 import { getSiteUrl } from '../utils/site-url.js';
+import { replaceTextRanges } from '../utils/string.js';
 
 const md = markdownIt();
 const { examples } = siteData;
@@ -52,12 +54,11 @@ export async function exampleShortcode(
           .toLowerCase()}">Edit Example</a></nve-button>`
       : '';
 
-  // replace all double newlines with single newlines in script tags only
-  // https://github.com/markdown-it/markdown-it/issues/1056
-  // https://spec.commonmark.org/0.31.2/#html-blocks
-  const templateContent = example?.template.replace(/\n\n/g, '\n');
+  const templateContent = example.template;
+  const sourceContent = md.utils.escapeHtml(templateContent).replaceAll('\r', '&#13;').replaceAll('\n', '&#10;');
+  const inlineContent = prepareInlineExample(templateContent);
   const reload = globalThis.process.env.ELEVENTY_RUN_MODE === 'serve' ? reloadScript(example, canvasId) : '';
-  const inlineTemplate = /* html */ `<div id="${canvasId}_content">${templateContent}</div>${reload}`;
+  const inlineTemplate = /* html */ `<div id="${canvasId}_content">${inlineContent}</div>${reload}`;
   const iframeTemplate = /* html */ `<iframe loading="lazy" src="/examples/${example?.permalink}index.html" style="height: 100%; width: 100%; border: none;"></iframe>`;
   const template = config.inline ? inlineTemplate : iframeTemplate;
   const summary = example.description || example.summary || '';
@@ -77,12 +78,37 @@ export async function exampleShortcode(
 <script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
 ${formattedSummary}
 <nvd-canvas id="${canvasId}" aria-label="example '${md.utils.escapeHtml(example.name)}'" data-pagefind-ignore="all" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
-  <pre aria-hidden="true"><code>${md.utils?.escapeHtml(templateContent)}</code></pre>${template}${editButton}
+  <pre aria-hidden="true"><code>${sourceContent}</code></pre>${template}${editButton}
 </nvd-canvas>
 </div>`
         .trim()
         .replace(/\n\n/g, '\n')
     : '';
+}
+
+// Preserve textarea values while keeping blank lines from ending the surrounding Markdown HTML block.
+function prepareInlineExample(content) {
+  const replacements = [];
+
+  function visit(node) {
+    if (node.tagName === 'textarea') {
+      const location = node.sourceCodeLocation;
+      if (location?.startTag && location?.endTag) {
+        const start = location.startTag.endOffset;
+        const end = location.endTag.startOffset;
+        // Normalize literal line endings as HTML parsing would before encoding them.
+        const value = content.slice(start, end).replace(/\r\n?/g, '\n').replaceAll('\n', '&#10;');
+        replacements.push({ start, end, value });
+      }
+      return;
+    }
+    for (const child of node.childNodes ?? []) visit(child);
+    if (node.tagName === 'template') visit(node.content);
+  }
+
+  visit(parseFragment(content, { sourceCodeLocationInfo: true }));
+
+  return replaceTextRanges(content, replacements);
 }
 
 function getExampleStructuredData(example, templateContent, summary, canvasId, pageUrl) {

@@ -1,7 +1,8 @@
 /* eslint-env node */
 /* global process */
 
-import { parse, parseFragment, serialize } from 'parse5';
+import { parse, parseFragment } from 'parse5';
+import { replaceTextRanges } from '../utils/string.js';
 
 import {
   BASE_URL,
@@ -127,50 +128,55 @@ function resolveSourceModuleUrl(value) {
   return getBaseFreeSitePath(sitePath);
 }
 
-function transformSourceModuleAttribute(node) {
-  if (node.nodeName !== 'script' || !isModuleScript(node)) return false;
+function collectAttributeReplacement(node, attribute, value, replacements) {
+  if (value === attribute.value) return;
+
+  const qualifiedName = attribute.prefix ? `${attribute.prefix}:${attribute.name}` : attribute.name;
+  const location = node.sourceCodeLocation?.attrs?.[qualifiedName];
+  if (!location) return;
+
+  const escapedValue = value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
+  // HTML error recovery can create multiple nodes from one source element; edit each source attribute only once.
+  replacements.set(`${location.startOffset}:${location.endOffset}`, {
+    start: location.startOffset,
+    end: location.endOffset,
+    value: `${qualifiedName}="${escapedValue}"`
+  });
+}
+
+function transformSourceModuleAttribute(node, replacements) {
+  if (node.nodeName !== 'script' || !isModuleScript(node)) return;
 
   const src = getAttribute(node, 'src');
-  if (!src) return false;
+  if (!src) return;
 
-  const value = resolveSourceModuleUrl(src.value);
-  const changed = value !== src.value;
-  src.value = value;
-
-  return changed;
+  collectAttributeReplacement(node, src, resolveSourceModuleUrl(src.value), replacements);
 }
 
-function transformAttributes(node) {
-  if (!Array.isArray(node.attrs)) return false;
-
-  return node.attrs
-    .filter(attribute => URL_ATTRIBUTES.has(attribute.name))
-    .map(attribute => {
-      const value = resolveAttributeUrl(node, attribute);
-      const changed = value !== attribute.value;
-      attribute.value = value;
-
-      return changed;
-    })
-    .some(Boolean);
+function transformAttributes(node, replacements) {
+  for (const attribute of node.attrs ?? []) {
+    if (URL_ATTRIBUTES.has(attribute.name)) {
+      collectAttributeReplacement(node, attribute, resolveAttributeUrl(node, attribute), replacements);
+    }
+  }
 }
 
-function transformNode(node) {
-  if (node.nodeName === 'script') return transformSourceModuleAttribute(node);
+function collectUrlReplacements(node, replacements) {
+  if (node.nodeName === 'script') return transformSourceModuleAttribute(node, replacements);
 
-  if (SKIPPED_CHILD_TAGS.has(node.nodeName)) return false;
+  if (SKIPPED_CHILD_TAGS.has(node.nodeName)) return;
 
-  const changed = transformAttributes(node);
-
-  return (node.childNodes ?? []).map(transformNode).some(Boolean) || changed;
+  transformAttributes(node, replacements);
+  for (const child of node.childNodes ?? []) collectUrlReplacements(child, replacements);
 }
 
 export async function siteUrlsTransform(content, outputPath) {
   if (!isHtmlOutput(outputPath ?? this.page?.outputPath, content)) return content;
 
-  const document = IS_FULL_DOCUMENT_PATTERN.test(content) ? parse(content) : parseFragment(content);
+  const options = { sourceCodeLocationInfo: true };
+  const document = IS_FULL_DOCUMENT_PATTERN.test(content) ? parse(content, options) : parseFragment(content, options);
+  const replacements = new Map();
+  collectUrlReplacements(document, replacements);
 
-  if (!transformNode(document)) return content;
-
-  return serialize(document);
+  return replaceTextRanges(content, [...replacements.values()]);
 }
