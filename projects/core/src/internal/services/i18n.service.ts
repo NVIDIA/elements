@@ -45,7 +45,9 @@ export interface I18nStrings {
   enableLoop: string;
   disableLoop: string;
   enterFullscreen: string;
+  enterPip: string;
   exitFullscreen: string;
+  exitPip: string;
   muteMedia: string;
   pauseMedia: string;
   playMedia: string;
@@ -101,7 +103,9 @@ const i18nRegistry = {
   enableLoop: 'enable looping',
   disableLoop: 'disable looping',
   enterFullscreen: 'enter full screen',
+  enterPip: 'enter picture in picture',
   exitFullscreen: 'exit full screen',
+  exitPip: 'exit picture in picture',
   muteMedia: 'mute media',
   pauseMedia: 'pause media',
   playMedia: 'play media',
