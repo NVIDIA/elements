@@ -16,7 +16,8 @@ describe(Plot.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-plot></nve-plot>
     `);
-    element = fixture.querySelector(Plot.metadata.tag);
+    const fixtureElement = fixture.querySelector(Plot.metadata.tag) as Plot;
+    element = fixtureElement;
     await elementIsStable(element);
   });
 
