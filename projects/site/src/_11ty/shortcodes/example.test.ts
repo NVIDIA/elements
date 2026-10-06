@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { transformWithOxc } from 'vite';
+import { chromium } from 'playwright';
 import { parseFragment, type DefaultTreeAdapterTypes } from 'parse5';
 import markdown from '../libraries/markdown.js';
 
@@ -304,52 +305,98 @@ describe('exampleShortcode', () => {
     await expect(transformWithOxc(collapsedModule, 'reload.js', { lang: 'js' })).resolves.toBeDefined();
   });
 
+  it('preserves textarea values and updates source across development reloads while executing scripts once per reload', async () => {
+    vi.stubEnv('ELEVENTY_RUN_MODE', 'serve');
+    const { exampleShortcode } = await importShortcode();
+    const shortcodeHtml = await exampleShortcode(textareaExample.entrypoint, textareaExample.name, {
+      summary: false
+    });
+    const scriptText = `<script type="module">import 'textarea-content';</script>`;
+    const updatedTemplate = [
+      `<textarea>${authoredContent}${scriptText}</textarea>`,
+      `<script>document.body.dataset.reloadExecutions = String(Number(document.body.dataset.reloadExecutions ?? 0) + 1); document.body.dataset.classicText = "import 'classic-content';";</script>`,
+      `<script type="module">import 'reload-module'; document.body.dataset.moduleExecutions = String(Number(document.body.dataset.moduleExecutions ?? 0) + 1);</script>`
+    ].join('');
+    const importMap = { imports: { [textareaExample.entrypoint]: '/reload-examples.json' } };
+    const browser = await chromium.launch();
+    try {
+      const page = await browser.newPage();
+      await page.route('http://localhost/reload-examples.json', route =>
+        route.fulfill({
+          contentType: 'application/json',
+          body: JSON.stringify({ items: [{ id: textareaExample.id, template: updatedTemplate }] })
+        })
+      );
+      await page.route('http://localhost/@id/reload-module', route =>
+        route.fulfill({ contentType: 'text/javascript', body: 'export const loaded = true;' })
+      );
+      await page.route('http://localhost/reload-test/', route =>
+        route.fulfill({
+          contentType: 'text/html',
+          body: `<!doctype html><html><head><script type="importmap">${JSON.stringify(importMap)}</script></head><body>${shortcodeHtml}</body></html>`
+        })
+      );
+      await page.goto('http://localhost/reload-test/');
+
+      for (let reload = 1; reload <= 2; reload++) {
+        await page.waitForFunction(
+          count => globalThis.document.body.dataset.reloadExecutions === String(count),
+          reload
+        );
+        await page.waitForFunction(
+          count => globalThis.document.body.dataset.moduleExecutions === String(count),
+          reload
+        );
+        expect(await page.locator('nvd-canvas textarea').count()).toBe(1);
+        expect(await page.locator('nvd-canvas textarea').inputValue()).toBe(expectedValue + scriptText);
+        expect(await page.locator('body').getAttribute('data-classic-text')).toBe("import 'classic-content';");
+        expect(
+          await page.locator('nvd-canvas').evaluate(canvas => ('source' in canvas ? canvas.source : undefined))
+        ).toBe(updatedTemplate);
+        if (reload === 1) {
+          await page.evaluate(() => {
+            const original = globalThis.document.querySelector('nvd-canvas > script[type="module"]');
+            const script = globalThis.document.createElement('script');
+            script.type = 'module';
+            script.textContent = original?.textContent ?? '';
+            globalThis.document.body.append(script);
+          });
+        }
+      }
+    } finally {
+      await browser.close();
+    }
+  });
+
   it('should preserve imported example bindings when rewriting development module imports', async () => {
     const { rewriteDevImports } = await importShortcode();
-    const template = `<script type="module">
+    const script = `
       import { Badge, Button } from '@nvidia-elements/core';
       import 'lit';
       import './local.js';
       const constructors = [Badge, Button];
-    </script>`;
+    `;
 
-    expect(rewriteDevImports(template)).toBe(`<script type="module">
+    expect(rewriteDevImports({ type: 'module', textContent: script })).toBe(`
       import { Badge, Button } from '/@id/@nvidia-elements/core';
       import '/@id/lit';
       import './local.js';
       const constructors = [Badge, Button];
-    </script>`);
+    `);
   });
 
   it('should preserve absolute URL imports when rewriting development module imports', async () => {
     const { rewriteDevImports } = await importShortcode();
-    const template = `<script type="module">
+    const script = `
       import 'http://localhost:3000/component.js';
       import { register } from 'https://cdn.example.com/component.js';
       import '@nvidia-elements/core';
-    </script>`;
+    `;
 
-    expect(rewriteDevImports(template)).toBe(`<script type="module">
+    expect(rewriteDevImports({ type: 'module', textContent: script })).toBe(`
       import 'http://localhost:3000/component.js';
       import { register } from 'https://cdn.example.com/component.js';
       import '/@id/@nvidia-elements/core';
-    </script>`);
-  });
-
-  it('should only rewrite imports in module script blocks', async () => {
-    const { rewriteDevImports } = await importShortcode();
-    const template = `<nve-codeblock language="typescript">
-      import '@nvidia-elements/core/chat-message/define.js';
-    </nve-codeblock>
-    <script type="module">
-      import '@nvidia-elements/core/chat-message/define.js';
-    </script>`;
-
-    expect(rewriteDevImports(template)).toBe(`<nve-codeblock language="typescript">
-      import '@nvidia-elements/core/chat-message/define.js';
-    </nve-codeblock>
-    <script type="module">
-      import '/@id/@nvidia-elements/core/chat-message/define.js';
-    </script>`);
+    `);
   });
 });

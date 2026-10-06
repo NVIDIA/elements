@@ -207,30 +207,31 @@ function reloadScript(example, canvasId) {
   const rawTemplate = examples?.items?.find(s => s.id === '${example.id}')?.template ?? '';
   const container = document.querySelector('#${canvasId}_content:not(:has(iframe))');
   if (container) {
-    /* Parse the template to extract script tags since innerHTML does not execute scripts. */
+    /* Parse once, then recreate scripts separately so they execute. */
     ${rewriteDevImports.toString()}
-    const template = rewriteDevImports(rawTemplate);
     const parser = new DOMParser();
-    const doc = parser.parseFromString('<body>' + template + '</body>', 'text/html');
+    const doc = parser.parseFromString('<body>' + rawTemplate + '</body>', 'text/html');
     const scripts = doc.querySelectorAll('script');
     scripts.forEach(script => script.remove());
-    container.innerHTML = doc.body.innerHTML;
+    container.replaceChildren(...doc.body.childNodes);
+    const canvas = container.closest('nvd-canvas');
+    if (canvas) canvas.source = rawTemplate;
     scripts.forEach(oldScript => {
       const newScript = document.createElement('script');
       [...oldScript.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));
-      newScript.textContent = oldScript.textContent;
+      newScript.textContent = rewriteDevImports(oldScript);
       container.appendChild(newScript);
     });
   }
 </script>`.replace(/\n\n/g, '\n');
 }
 
-export function rewriteDevImports(template) {
-  return template.replace(/<script\b(?=[^>]*\s+type\s*=\s*(['"])module\1)[^>]*>[\s\S]*?<\/script>/gi, script =>
-    script.replace(
-      /(\bfrom\s+|\bimport\s+)(['"])((?![./]|[a-zA-Z][a-zA-Z\d+.-]*:)[^'"]+)\2/g,
-      (_match, prefix, quote, specifier) => `${prefix}${quote}/@id/${specifier}${quote}`
-    )
+export function rewriteDevImports(script) {
+  if (script.type.toLowerCase() !== 'module') return script.textContent;
+
+  return script.textContent.replace(
+    /(\bfrom\s+|\bimport\s+)(['"])((?![./]|[a-zA-Z][a-zA-Z\d+.-]*:)[^'"]+)\2/g,
+    (_match, prefix, quote, specifier) => `${prefix}${quote}/@id/${specifier}${quote}`
   );
 }
 
