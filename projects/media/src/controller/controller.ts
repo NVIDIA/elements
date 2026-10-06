@@ -18,11 +18,14 @@ const mediaEventTypes = [
   'durationchange',
   'emptied',
   'ended',
+  'enterpictureinpicture',
+  'leavepictureinpicture',
   'loadedmetadata',
   'pause',
   'play',
   'progress',
   'ratechange',
+  'resize',
   'seeked',
   'seeking',
   'timeupdate',
@@ -54,6 +57,9 @@ const mediaEventTypes = [
  * @command --enter-fullscreen - Request full-screen mode on the controller.
  * @command --exit-fullscreen - Exit full-screen mode.
  * @command --toggle-fullscreen - Toggle full-screen mode.
+ * @command --enter-pip - Request picture-in-picture mode on the video.
+ * @command --exit-pip - Exit picture-in-picture mode for the video.
+ * @command --toggle-pip - Toggle picture-in-picture mode for the video.
  * @property mediaState - The latest immutable media and full-screen state snapshot.
  * @event media-state-change - Dispatched with the complete state snapshot when the controller media state changes.
  * @slot - The controlled video or audio element and supporting controls or content.
@@ -79,6 +85,10 @@ export class MediaController extends LitElement {
 
   #mediaState = createMediaState();
 
+  #pipObserver: MutationObserver | null = null;
+
+  #pipOperation: symbol | null = null;
+
   #commandHandlers = new Map<MediaCommand, (source: MediaCommandSource | null) => void>([
     [mediaCommands.play, () => this.#play()],
     [mediaCommands.pause, () => this.#pause()],
@@ -98,7 +108,10 @@ export class MediaController extends LitElement {
     [mediaCommands.setPlaybackRate, source => this.#setPlaybackRateFromSource(source)],
     [mediaCommands.enterFullscreen, () => this.#enterFullscreen()],
     [mediaCommands.exitFullscreen, () => this.#exitFullscreen()],
-    [mediaCommands.toggleFullscreen, () => this.#toggleFullscreen()]
+    [mediaCommands.toggleFullscreen, () => this.#toggleFullscreen()],
+    [mediaCommands.enterPip, () => this.#enterPip()],
+    [mediaCommands.exitPip, () => this.#exitPip()],
+    [mediaCommands.togglePip, () => this.#togglePip()]
   ]);
 
   render() {
@@ -168,18 +181,31 @@ export class MediaController extends LitElement {
     }
 
     this.#media && mediaEventTypes.forEach(type => this.#media?.removeEventListener(type, this.#syncMediaState));
-    this.#loopObserver?.disconnect();
+    this.#observeLoop(media);
+    this.#pipObserver?.disconnect();
+    this.#pipObserver = null;
+    this.#pipOperation = null;
     this.#media = media;
     this.#media && mediaEventTypes.forEach(type => this.#media?.addEventListener(type, this.#syncMediaState));
-    if (media) {
-      this.#loopObserver ??= new MutationObserver(this.#syncMediaState);
-      this.#loopObserver.observe(media, { attributes: true, attributeFilter: ['loop'] });
+    if (isVideoElement(media)) {
+      this.#pipObserver = new MutationObserver(this.#syncMediaState);
+      this.#pipObserver.observe(media, { attributes: true, attributeFilter: ['disablepictureinpicture'] });
     }
     this.#syncMediaState();
   }
 
+  #observeLoop(media: HTMLMediaElement | null) {
+    this.#loopObserver?.disconnect();
+    if (media) {
+      this.#loopObserver ??= new MutationObserver(this.#syncMediaState);
+      this.#loopObserver.observe(media, { attributes: true, attributeFilter: ['loop'] });
+    }
+  }
+
   #syncMediaState = () => {
-    this.#setMediaState(createMediaState({ ...getMediaState(this.#media), fullscreen: this.#fullscreen }));
+    this.#setMediaState(
+      createMediaState({ ...getMediaState(this.#media), ...getPipState(this.#media), fullscreen: this.#fullscreen })
+    );
   };
 
   #syncFullscreen = () => {
@@ -193,12 +219,10 @@ export class MediaController extends LitElement {
       return;
     }
 
-    setBooleanAttribute(this, 'paused', state.paused);
-    setBooleanAttribute(this, 'muted', state.muted);
-    setBooleanAttribute(this, 'ended', state.ended);
-    setBooleanAttribute(this, 'seeking', state.seeking);
-    setBooleanAttribute(this, 'fullscreen', state.fullscreen);
-    setBooleanAttribute(this, 'loop', state.loop);
+    for (const attribute of ['paused', 'muted', 'ended', 'seeking', 'fullscreen', 'loop', 'pip'] as const) {
+      setBooleanAttribute(this, attribute, state[attribute]);
+    }
+    setBooleanAttribute(this, 'pip-available', state.pipAvailable);
     setNumberAttribute(this, 'current-time', state.currentTime);
     setNumberAttribute(this, 'duration', state.duration);
     setNumberAttribute(this, 'volume', state.volume);
@@ -334,6 +358,52 @@ export class MediaController extends LitElement {
     this.#fullscreen ? this.#exitFullscreen() : this.#enterFullscreen();
   }
 
+  #enterPip() {
+    const video = this.#media;
+    if (this.#pipOperation || !isVideoElement(video) || getPipState(video).pip) {
+      return;
+    }
+    if (!getPipState(video).pipAvailable) {
+      this.#syncMediaState();
+      console.warn('nve-media-controller picture-in-picture unavailable');
+      return;
+    }
+    this.#runPipOperation(video, () => video.requestPictureInPicture(), 'picture-in-picture failed');
+  }
+
+  #exitPip() {
+    const video = this.#media;
+    if (this.#pipOperation || !isVideoElement(video) || !getPipState(video).pip) {
+      return;
+    }
+    this.#runPipOperation(video, () => video.ownerDocument.exitPictureInPicture(), 'picture-in-picture exit failed');
+  }
+
+  #togglePip() {
+    getPipState(this.#media).pip ? this.#exitPip() : this.#enterPip();
+  }
+
+  #runPipOperation(video: HTMLVideoElement, operation: () => Promise<unknown>, warning: string) {
+    const token = Symbol();
+    this.#pipOperation = token;
+    const complete = () => {
+      if (this.#pipOperation === token) {
+        this.#pipOperation = null;
+        if (this.isConnected && video === this.#media) {
+          this.#syncMediaState();
+        }
+      }
+    };
+    try {
+      void operation()
+        .catch(error => console.warn(`nve-media-controller ${warning}`, error))
+        .finally(complete);
+    } catch (error) {
+      console.warn(`nve-media-controller ${warning}`, error);
+      complete();
+    }
+  }
+
   #getMedia() {
     if (!this.#media) {
       console.warn('nve-media-controller missing media element');
@@ -348,6 +418,29 @@ export class MediaController extends LitElement {
 
 function isSupportedMediaElement(element: Element): element is HTMLMediaElement {
   return typeof HTMLMediaElement !== 'undefined' && element instanceof HTMLMediaElement;
+}
+
+function isVideoElement(media: HTMLMediaElement | null): media is HTMLVideoElement {
+  return typeof globalThis.HTMLVideoElement !== 'undefined' && media instanceof globalThis.HTMLVideoElement;
+}
+
+function getPipState(media: HTMLMediaElement | null) {
+  if (!isVideoElement(media)) {
+    return { pip: false, pipAvailable: false };
+  }
+  const document = media.ownerDocument;
+  const root = media.getRootNode();
+  const scope = root instanceof ShadowRoot ? root : document;
+  return {
+    pip: scope.pictureInPictureElement === media,
+    pipAvailable:
+      (document.pictureInPictureEnabled ?? false) &&
+      typeof media.requestPictureInPicture === 'function' &&
+      typeof document.exitPictureInPicture === 'function' &&
+      media.readyState > HTMLMediaElement.HAVE_NOTHING &&
+      media.videoWidth > 0 &&
+      !media.disablePictureInPicture
+  };
 }
 
 function getMediaState(media: HTMLMediaElement | null) {

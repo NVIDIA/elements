@@ -31,7 +31,7 @@
 
 ## State
 
-Read the latest immutable state from `mediaState`. The state includes `paused`, `muted`, `ended`, `seeking`, `fullscreen`, `loop`, `currentTime`, `duration`, `volume`, `playbackRate`, and `buffered`.
+Read the latest immutable state from `mediaState`. The state includes `paused`, `muted`, `ended`, `seeking`, `fullscreen`, `loop`, `pip`, `pipAvailable`, `currentTime`, `duration`, `volume`, `playbackRate`, and `buffered`.
 
 The `buffered` value contains ordered, disjoint time spans in seconds. The controller copies these spans from the native media element instead of exposing the browser-owned `TimeRanges` object.
 
@@ -49,6 +49,6 @@ console.log(controller.mediaState);
 controller.addEventListener('media-state-change', event => console.log(event.detail));
 ```
 
-The controller continues to reflect `paused`, `muted`, `ended`, `seeking`, `fullscreen`, `loop`, `current-time`, `duration`, `volume`, and `playback-rate` for styling and inspection. Buffered spans remain available through `mediaState` and `media-state-change`. The native media element still emits events such as `play`, `pause`, `progress`, `timeupdate`, `durationchange`, `volumechange`, and `ratechange`.
+The controller continues to reflect `paused`, `muted`, `ended`, `seeking`, `fullscreen`, `loop`, `pip`, `pip-available`, `current-time`, `duration`, `volume`, and `playback-rate` for styling and inspection. Buffered spans remain available through `mediaState` and `media-state-change`. The native media element still emits events such as `play`, `pause`, `progress`, `timeupdate`, `durationchange`, `volumechange`, and `ratechange`.
 
 The controller does not include `src`, `poster`, `autoplay`, track, or caption APIs. Use native media markup for media ownership and compose the Elements controls around it.

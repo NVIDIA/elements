@@ -30,6 +30,12 @@ describe(isMediaState.name, () => {
     expect(isMediaState(createMediaState({ loop: true }))).toBe(true);
   });
 
+  it('should validate PiP state and availability as booleans', () => {
+    expect(isMediaState({ ...createMediaState(), pip: 'true' })).toBe(false);
+    expect(isMediaState({ ...createMediaState(), pipAvailable: undefined })).toBe(false);
+    expect(isMediaState(createMediaState({ pip: true, pipAvailable: true }))).toBe(true);
+  });
+
   it('should validate ordered and disjoint buffered time spans', () => {
     expect(
       isMediaState(
@@ -74,6 +80,14 @@ describe(mediaStatesEqual.name, () => {
   it('should detect loop-only changes', () => {
     expect(mediaStatesEqual(createMediaState(), createMediaState({ loop: true }))).toBe(false);
     expect(mediaStatesEqual(createMediaState({ loop: true }), createMediaState({ loop: true }))).toBe(true);
+  });
+
+  it('should compare PiP state and availability', () => {
+    const state = createMediaState();
+    expect(state.pip).toBe(false);
+    expect(state.pipAvailable).toBe(false);
+    expect(mediaStatesEqual(state, createMediaState({ pip: true }))).toBe(false);
+    expect(mediaStatesEqual(state, createMediaState({ pipAvailable: true }))).toBe(false);
   });
 
   it('should compare buffered time spans by value', () => {
