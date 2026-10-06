@@ -40,6 +40,23 @@ describe(MediaPipButton.metadata.tag, () => {
     expect(button.tabIndex).toBe(0);
   });
 
+  it('should sync pressed and type through inherited setters', async () => {
+    button.pressed = true;
+    expect(button.hasAttribute('pressed')).toBe(true);
+    button.removeAttribute('pressed');
+    expect(button.pressed).toBe(false);
+    button.setAttribute('pressed', '');
+    expect(button.pressed).toBe(true);
+
+    button.type = 'submit';
+    expect(button.getAttribute('type')).toBe('submit');
+    button.setAttribute('type', 'reset');
+    expect(button.type).toBe('reset');
+    button.type = 'button';
+    expect(button.getAttribute('type')).toBe('button');
+    await elementIsStable(button);
+  });
+
   it('should send the toggle command without changing pressed state optimistically', async () => {
     const event = untilEvent<Event & { command: string; source: HTMLElement }>(target, 'command');
     await emulateClick(button);

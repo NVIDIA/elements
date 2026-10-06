@@ -4,7 +4,7 @@
 import { property } from 'lit/decorators/property.js';
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
-import { ButtonFormControlMixin, type ButtonType } from '@nvidia-elements/forms/mixins';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { attachInternals, I18nController, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import { MediaStateController } from '../internal/controllers/media-state.controller.js';
@@ -46,9 +46,7 @@ export class MediaPipButton extends ButtonFormControlMixin(LitElement) {
 
   override command: string = mediaCommands.togglePip;
 
-  override type: ButtonType = 'button';
-
-  @property({ type: Boolean, reflect: true }) pressed = false;
+  @property({ type: Boolean, reflect: true, noAccessor: true }) declare pressed: boolean;
 
   #pipAvailable = false;
 
@@ -66,6 +64,12 @@ export class MediaPipButton extends ButtonFormControlMixin(LitElement) {
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   #mediaStateController = new MediaStateController(this, mediaState => this.#syncMediaState(mediaState));
+
+  constructor() {
+    super();
+    this.type = 'button';
+    this.pressed = false;
+  }
 
   render() {
     return html`
