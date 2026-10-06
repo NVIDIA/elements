@@ -1,0 +1,65 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --nve-sys-interaction-state-base: transparent;
+  --cursor: move;
+  --color: var(--nve-sys-text-muted-color);
+  --width: var(--nve-ref-size-800);
+  --height: var(--nve-ref-size-800);
+  --border-radius: var(--nve-ref-border-radius-xs);
+  display: inline-flex;
+  user-select: none;
+}
+
+:host([draggable='true']) {
+  -webkit-user-drag: element;
+}
+
+:host(:state(disabled)),
+:host([readonly]) {
+  -webkit-user-drag: none;
+}
+
+[internal-host] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--border-radius);
+  cursor: var(--cursor);
+}
+
+nve-icon {
+  --color: inherit;
+  pointer-events: none;
+}
+
+:host(:state(pressed)) {
+  --color: var(--nve-sys-interaction-selected-color);
+}
+
+:host(:hover:not(:state(disabled), [readonly], :state(pressed))) {
+  --color: var(--nve-sys-interaction-hover-color);
+}
+
+:host(:state(pressed)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+}
+
+@container style(--nve-sys-color-scheme: dark) {
+  :host {
+    --nve-sys-interaction-state-ratio-selected: 16% !important;
+    --nve-sys-interaction-state-ratio-hover: 12% !important;
+  }
+}
+
+:host(:state(disabled)) {
+  --color: var(--nve-sys-interaction-disabled-color);
+  --cursor: default;
+}
+
+:host(:state(disabled)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
+}

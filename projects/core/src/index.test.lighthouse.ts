@@ -18,7 +18,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(124.0);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(124.5);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
@@ -47,6 +47,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/dialog/define.js';
         import '@nvidia-elements/core/divider/define.js';
         import '@nvidia-elements/core/dot/define.js';
+        import '@nvidia-elements/core/drag-handle/define.js';
         import '@nvidia-elements/core/drawer/define.js';
         import '@nvidia-elements/core/dropdown/define.js';
         import '@nvidia-elements/core/dropdown-group/define.js';
@@ -107,9 +108,9 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    // Allow a small margin above measured local and CI payloads.
+    // Allow a small margin above the 104.65 KB measured locally and in CI.
     expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(
-      104.3
+      105.0
     );
   });
 });

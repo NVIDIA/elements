@@ -323,6 +323,18 @@
       "types": "./dist/dot/define.d.ts",
       "default": "./dist/dot/define.js"
     },
+    "./drag-handle": {
+      "types": "./dist/drag-handle/index.d.ts",
+      "default": "./dist/drag-handle/index.js"
+    },
+    "./drag-handle/index.js": {
+      "types": "./dist/drag-handle/index.d.ts",
+      "default": "./dist/drag-handle/index.js"
+    },
+    "./drag-handle/define.js": {
+      "types": "./dist/drag-handle/define.d.ts",
+      "default": "./dist/drag-handle/define.js"
+    },
     "./drawer": {
       "types": "./dist/drawer/index.d.ts",
       "default": "./dist/drawer/index.js"
