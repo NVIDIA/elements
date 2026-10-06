@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { onKeys, stopEvent } from '../utils.js';
+import { stopEvent } from '../utils.js';
 import type { ButtonType } from '../types/button.js';
 import type { ReactiveController, ReactiveElement } from './types.js';
 
@@ -53,7 +53,9 @@ export class TypeSubmitController<T extends SubmitHost> implements ReactiveContr
   }
 
   #onSubmitKeyup = (event: KeyboardEvent) => {
-    onKeys(['Enter', 'Space'], event, () => this.host.click());
+    if (event.key === ' ' || event.key === 'Enter' || event.code === 'Space' || event.code === 'Enter') {
+      this.host.click();
+    }
   };
 
   #onSubmitClick = (event: Event) => {

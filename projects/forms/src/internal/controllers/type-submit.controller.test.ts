@@ -83,10 +83,13 @@ describe('type-submit.controller', () => {
 
     element.sync();
     element.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter' }));
-    element.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space' }));
+    element.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter', code: 'Unidentified' }));
+    element.dispatchEvent(new KeyboardEvent('keyup', { key: ' ', code: 'Space' }));
+    element.dispatchEvent(new KeyboardEvent('keyup', { key: ' ', code: 'Unidentified' }));
+    element.dispatchEvent(new KeyboardEvent('keyup', { key: 'a', code: 'Unidentified' }));
     element.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyA' }));
 
-    expect(click).toHaveBeenCalledTimes(2);
+    expect(click).toHaveBeenCalledTimes(4);
   });
 
   it('should submit with hidden native submitter data', async () => {
