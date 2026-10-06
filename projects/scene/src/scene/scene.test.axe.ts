@@ -16,7 +16,8 @@ describe(Scene.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-scene></nve-scene>
     `);
-    element = fixture.querySelector(Scene.metadata.tag);
+    const fixtureElement = fixture.querySelector(Scene.metadata.tag) as Scene;
+    element = fixtureElement;
     await elementIsStable(element);
   });
 
