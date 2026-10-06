@@ -20,7 +20,10 @@ export const mediaCommands = {
   setPlaybackRate: '--set-playback-rate',
   enterFullscreen: '--enter-fullscreen',
   exitFullscreen: '--exit-fullscreen',
-  toggleFullscreen: '--toggle-fullscreen'
+  toggleFullscreen: '--toggle-fullscreen',
+  enterPip: '--enter-pip',
+  exitPip: '--exit-pip',
+  togglePip: '--toggle-pip'
 } as const;
 
 export type MediaCommand = (typeof mediaCommands)[keyof typeof mediaCommands];

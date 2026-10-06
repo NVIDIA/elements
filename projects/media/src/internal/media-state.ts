@@ -17,6 +17,8 @@ export interface MediaState {
   readonly loop: boolean;
   readonly muted: boolean;
   readonly paused: boolean;
+  readonly pip: boolean;
+  readonly pipAvailable: boolean;
   readonly playbackRate: number;
   readonly seeking: boolean;
   readonly volume: number;
@@ -26,7 +28,7 @@ export type MediaStateChangeEvent = CustomEvent<MediaState>;
 
 export const mediaStateChange = 'media-state-change';
 
-const booleanStateKeys = ['ended', 'fullscreen', 'loop', 'muted', 'paused', 'seeking'] as const;
+const booleanStateKeys = ['ended', 'fullscreen', 'muted', 'paused', 'pip', 'pipAvailable', 'seeking'] as const;
 
 const numberStateKeys = ['currentTime', 'duration', 'playbackRate', 'volume'] as const;
 
@@ -41,6 +43,8 @@ const defaultMediaState: MediaState = {
   loop: false,
   muted: false,
   paused: true,
+  pip: false,
+  pipAvailable: false,
   playbackRate: 1,
   seeking: false,
   volume: 1

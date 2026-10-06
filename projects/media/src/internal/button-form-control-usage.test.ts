@@ -5,6 +5,9 @@ import { html, type TemplateResult } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import type { ButtonFormControlMixinInstance } from '@nvidia-elements/forms/mixins';
+import { createMediaState } from './media-state.js';
+import { MediaPipButton } from '../pip-button/pip-button.js';
+import '../pip-button/define.js';
 import { MediaFullscreenButton } from '../fullscreen-button/fullscreen-button.js';
 import { MediaLoopButton } from '../loop-button/loop-button.js';
 import { MediaMuteButton } from '../mute-button/mute-button.js';
@@ -27,6 +30,11 @@ type ButtonElement = HTMLElement & ButtonFormControlMixinInstance & { _internals
 type CheckboxButtonElement = ButtonElement & { checked: boolean };
 
 const usages: ButtonUsage[] = [
+  {
+    tag: MediaPipButton.metadata.tag,
+    template: html`<nve-media-pip-button commandfor="target"></nve-media-pip-button>`,
+    submitTemplate: html`<nve-media-pip-button type="submit" name="button-name" value="button-value" commandfor="target"></nve-media-pip-button>`
+  },
   {
     tag: MediaFullscreenButton.metadata.tag,
     template: html`<nve-media-fullscreen-button commandfor="target"></nve-media-fullscreen-button>`,
@@ -162,7 +170,7 @@ describe('ButtonFormControlMixin media usage', () => {
   async function createButton({ template, tag }: ButtonUsage) {
     fixture = await createFixture(html`
       ${template}
-      <div id="target"></div>
+      <div id="target" .mediaState=${createMediaState({ pipAvailable: true })}></div>
     `);
     const button = getElement<ButtonElement>(fixture, tag);
     await elementIsStable(button);
@@ -174,7 +182,7 @@ describe('ButtonFormControlMixin media usage', () => {
       <form>
         ${submitTemplate}
       </form>
-      <div id="target"></div>
+      <div id="target" .mediaState=${createMediaState({ pipAvailable: true })}></div>
     `);
     const button = getElement<ButtonElement>(fixture, tag);
     await elementIsStable(button);

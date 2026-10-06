@@ -324,6 +324,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'highlighted selected' : ''}><a href="/docs/media/playback-rate-select/">Playback Rate Select</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/media/loop-button/') ? 'highlighted selected' : ''}><a href="/docs/media/loop-button/">Loop Button</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'highlighted selected' : ''}><a href="/docs/media/mute-button/">Mute Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/pip-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pip-button/">Media PiP Button</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'highlighted selected' : ''}><a href="/docs/media/seek-button/">Seek Button</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'highlighted selected' : ''}><a href="/docs/media/time-range/">Time Range</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'highlighted selected' : ''}><a href="/docs/media/volume-range/">Volume Range</a></nve-tree-node>
