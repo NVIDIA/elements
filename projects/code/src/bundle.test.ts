@@ -14,7 +14,7 @@ describe('cdn bundle', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`<nve-codeblock></nve-codeblock>`);
-    element = fixture.querySelector('nve-codeblock');
+    element = fixture.querySelector('nve-codeblock') as CodeBlock;
     await elementIsStable(element);
   });
 
