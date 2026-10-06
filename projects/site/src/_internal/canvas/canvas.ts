@@ -30,7 +30,7 @@ function convertToJsxElement(source: string): string {
 
 @customElement('nvd-canvas')
 export class Canvas extends LitElement {
-  @property({ type: String }) source: string = '';
+  @property({ type: String }) source?: string;
 
   @property({ type: String, reflect: true }) align?: 'center';
 
@@ -77,15 +77,16 @@ export class Canvas extends LitElement {
   }
 
   get formattedSource() {
-    const source = (this.source ? this.source : this.innerHTML).trim();
+    const source = (this.source ?? this.#slottedSource ?? this.innerHTML).trim();
     return this.sourceType === 'react' ? convertToJsxElement(source) : source;
   }
 
   render() {
+    const source = this.source ?? this.#slottedSource;
     return html`
       <div internal-host>
         <div role="figure" aria-label="example preview" class="resizer" style="--preview-width: ${this.previewWidth}px">
-          <slot @slotchange=${() => this.#updateSource()}></slot>
+          <slot @slotchange=${() => this.requestUpdate()}></slot>
           <nve-resize-handle 
             class="preview-resize-handle" 
             orientation="vertical" 
@@ -97,7 +98,7 @@ export class Canvas extends LitElement {
           </nve-resize-handle>
         </div>
         <div class="code" .hidden=${!this.showSource}>
-          ${this.source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
+          ${source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
           <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.formattedSource} aria-label="copy"></nve-copy-button>
         </div>
         <div class="toolbar">
@@ -112,10 +113,6 @@ export class Canvas extends LitElement {
     const elements = this.shadowRoot?.querySelector('slot')?.assignedElements();
     const pre = elements?.find(element => element instanceof HTMLPreElement && element.querySelector('code'));
     return pre?.querySelector('code')?.textContent ?? undefined;
-  }
-
-  #updateSource() {
-    this.source = this.#slottedSource ?? this.source;
   }
 
   #handleSourceClick() {
