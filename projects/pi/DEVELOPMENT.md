@@ -5,6 +5,7 @@
 | `pnpm run build`         | Build the extension, skill, and workflow prompts |
 | `pnpm run lint`          | Lint source and build scripts                    |
 | `pnpm run test`          | Run unit and package contract tests              |
+| `pnpm run test:types`    | Type-check source, tests, and scripts            |
 | `pnpm run test:coverage` | Run unit tests with coverage                     |
 | `pnpm run ci`            | Run the complete project CI pipeline             |
 
