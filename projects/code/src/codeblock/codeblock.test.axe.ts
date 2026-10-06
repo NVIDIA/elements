@@ -17,7 +17,7 @@ describe(CodeBlock.metadata.tag, () => {
     `);
 
     await elementIsStable(fixture.querySelector(CodeBlock.metadata.tag)!);
-    const results = (await runAxe([CodeBlock.metadata.tag])) as { violations: { length: number }[] };
+    const results = await runAxe([CodeBlock.metadata.tag]);
     expect(results.violations.length).toBe(0);
     removeFixture(fixture);
   });
