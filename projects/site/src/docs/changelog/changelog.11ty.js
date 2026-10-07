@@ -7,7 +7,8 @@ export const data = {
   pagination: {
     data: 'changelogs',
     size: 1,
-    alias: 'changelog'
+    alias: 'changelog',
+    addAllPagesToCollections: true
   },
   changelogs,
   permalink: data => `docs/changelog${data.changelog.permalink}index.html`

@@ -36,6 +36,20 @@ afterEach(() => {
 });
 
 describe('siteUrlsTransform', () => {
+  it.each(['/', '/elements/', '/elements/preview/'])(
+    'should keep sitemap navigation local under %s',
+    async pagesBaseUrl => {
+      const { siteUrlsTransform } = await importTransform('build', { localPreview: true, pagesBaseUrl });
+      const result = await siteUrlsTransform.call(
+        createContext('/sitemap/'),
+        '<a href="/sitemap/">Sitemap</a>',
+        'index.html'
+      );
+
+      expect(result).toContain(`href="${pagesBaseUrl}sitemap/"`);
+    }
+  );
+
   it('should fully qualify same-site urls in build output', async () => {
     const { siteUrlsTransform } = await importTransform('build');
     const html = `
