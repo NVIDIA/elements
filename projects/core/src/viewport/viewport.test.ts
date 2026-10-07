@@ -778,6 +778,305 @@ describe(Viewport.metadata.tag, () => {
     });
   });
 
+  describe('zoom stops', () => {
+    const routes = [
+      { source: 'keyboard', zoomIn: () => keyEvent({ key: '+' }), zoomOut: () => keyEvent({ key: '-' }) },
+      {
+        source: 'command',
+        zoomIn: () => new CommandEvent('command', { command: '--zoom-in' }),
+        zoomOut: () => new CommandEvent('command', { command: '--zoom-out' })
+      }
+    ];
+
+    beforeEach(async () => {
+      element.behaviorZoom = true;
+      await elementIsStable(element);
+      element.focus();
+      vi.stubGlobal(
+        'matchMedia',
+        vi.fn(() => ({ matches: true }))
+      );
+    });
+
+    describe.each(routes)('$source', ({ zoomIn, zoomOut }) => {
+      it('uses built-in stops when no override is supplied', () => {
+        expect(element.zoomStops).toBeUndefined();
+        element.scale = element.minScale;
+        for (const scale of [0.1, 0.25, 0.5, 1, 2, 4, 8, 16, 20, 20]) {
+          element.dispatchEvent(zoomIn());
+          expect(element.scale).toBe(scale);
+        }
+        for (const scale of [16, 8, 4, 2, 1, 0.5, 0.25, 0.1, 0.05, 0.05]) {
+          element.dispatchEvent(zoomOut());
+          expect(element.scale).toBe(scale);
+        }
+      });
+
+      it('sorts and deduplicates custom stops without changing the supplied array', () => {
+        const stops = Object.freeze([3, 0.75, 3, 1.5, 0.75]);
+        element.zoomStops = stops;
+        element.minScale = 0.5;
+        element.maxScale = 4;
+        element.scale = 0.5;
+        for (const scale of [0.75, 1.5, 3, 4]) {
+          element.dispatchEvent(zoomIn());
+          expect(element.scale).toBe(scale);
+        }
+        for (const scale of [3, 1.5, 0.75, 0.5]) {
+          element.dispatchEvent(zoomOut());
+          expect(element.scale).toBe(scale);
+        }
+        expect(element.zoomStops).toBe(stops);
+        expect(stops).toEqual([3, 0.75, 3, 1.5, 0.75]);
+      });
+
+      it('ignores nonfinite and nonpositive stops', () => {
+        element.zoomStops = [NaN, Infinity, -Infinity, 0, -2, 1.5];
+        element.minScale = 0.5;
+        element.maxScale = 4;
+        element.scale = 0.5;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(1.5);
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(4);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(1.5);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.5);
+      });
+
+      it('uses only the bounds when all supplied stops are invalid', () => {
+        element.zoomStops = [NaN, Infinity, 0, -2];
+        element.minScale = 0.5;
+        element.maxScale = 4;
+        element.scale = 0.5;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(4);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.5);
+      });
+
+      it('clamps custom stops to the scale bounds', () => {
+        element.zoomStops = [0.1, 0.2, 1.5, 8, 10];
+        element.minScale = 0.5;
+        element.maxScale = 4;
+        element.scale = 1.5;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(4);
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(4);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(1.5);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.5);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.5);
+      });
+
+      it('uses only the bounds for an empty override', () => {
+        element.zoomStops = [];
+        element.minScale = 0.5;
+        element.maxScale = 4;
+        element.scale = 1;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(4);
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(4);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.5);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.5);
+      });
+
+      it('keeps the scale fixed when the bounds are equal', () => {
+        element.zoomStops = [0.5, 1, 4];
+        element.minScale = 2;
+        element.maxScale = 2;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(2);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(2);
+      });
+
+      it('selects the next higher or lower stop from a scale between stops', () => {
+        element.zoomStops = [0.75, 1.5, 3];
+        element.scale = 1.2;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(1.5);
+        element.scale = 1.2;
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.75);
+      });
+
+      it('reclamps stops when the scale bounds change', () => {
+        element.zoomStops = [0.1, 0.75, 1.5, 3, 10];
+        element.minScale = 0.6;
+        element.maxScale = 2.5;
+        element.scale = 1.5;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(2.5);
+        element.scale = 0.75;
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.6);
+
+        element.minScale = 0.8;
+        element.maxScale = 1.4;
+        element.scale = 1;
+        element.dispatchEvent(zoomIn());
+        expect(element.scale).toBe(1.4);
+        element.dispatchEvent(zoomOut());
+        expect(element.scale).toBe(0.8);
+      });
+
+      it('steps from the pending animation destination on repeated input', () => {
+        vi.stubGlobal(
+          'matchMedia',
+          vi.fn(() => ({ matches: false }))
+        );
+        vi.spyOn(globalThis, 'requestAnimationFrame').mockReturnValue(42);
+        vi.spyOn(globalThis, 'cancelAnimationFrame').mockImplementation(() => {});
+        element.zoomStops = [0.75, 1.5, 3, 6];
+        element.scale = 1.2;
+        const details: ViewportZoomDetail[] = [];
+        element.addEventListener('zoom', event => details.push((event as CustomEvent<ViewportZoomDetail>).detail));
+
+        for (const makeEvent of [zoomIn, zoomIn, zoomIn, zoomOut, zoomOut, zoomOut]) {
+          element.dispatchEvent(makeEvent());
+        }
+
+        expect(details.map(detail => detail.next.scale)).toEqual([1.5, 3, 6, 3, 1.5, 0.75]);
+        expect(element.scale).toBe(1.2);
+      });
+    });
+
+    it('uses JSON attribute stops and applies attribute updates', async () => {
+      element.setAttribute('zoom-stops', '[3, 1.5, 1.5, 0.75]');
+      await elementIsStable(element);
+      expect(element.zoomStops).toEqual([3, 1.5, 1.5, 0.75]);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(1.5);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(0.75);
+
+      element.setAttribute('zoom-stops', '[1.25, 2.5]');
+      await elementIsStable(element);
+      element.scale = 1;
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(1.25);
+    });
+
+    it('uses property stops without reflecting them to an existing attribute', async () => {
+      element.setAttribute('zoom-stops', '[1.25, 2.5]');
+      element.zoomStops = [1.75, 3.5];
+      await elementIsStable(element);
+      expect(element.getAttribute('zoom-stops')).toBe('[1.25, 2.5]');
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(1.75);
+    });
+
+    it('does not create an attribute when stops are assigned through the property', async () => {
+      element.zoomStops = [1.5, 3];
+      await elementIsStable(element);
+      expect(element.hasAttribute('zoom-stops')).toBe(false);
+    });
+
+    it('uses only the scale bounds for an empty JSON array attribute', async () => {
+      element.setAttribute('zoom-stops', '[]');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(20);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(0.05);
+    });
+
+    it('restores built-in stops when the attribute is removed', async () => {
+      element.setAttribute('zoom-stops', '[1.5, 3]');
+      await elementIsStable(element);
+      element.removeAttribute('zoom-stops');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('restores built-in stops when the property is set to undefined', () => {
+      element.zoomStops = [1.5, 3];
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(1.5);
+      element.zoomStops = undefined;
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+    });
+
+    it('uses built-in stops when the attribute contains invalid JSON', async () => {
+      element.setAttribute('zoom-stops', 'invalid json');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('uses built-in stops when the attribute contains a JSON object', async () => {
+      element.setAttribute('zoom-stops', '{}');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('uses built-in stops when the attribute contains a JSON number', async () => {
+      element.setAttribute('zoom-stops', '2');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('uses built-in stops when the attribute contains a JSON string', async () => {
+      element.setAttribute('zoom-stops', '"text"');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('uses built-in stops when the attribute contains null', async () => {
+      element.setAttribute('zoom-stops', 'null');
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-in' }));
+      expect(element.scale).toBe(2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-out' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('keeps scale assignment and zoom reset independent of custom stops', () => {
+      element.zoomStops = [];
+      element.scale = 1.2;
+      expect(element.scale).toBe(1.2);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-reset' }));
+      expect(element.scale).toBe(1);
+    });
+
+    it('keeps content fitting independent of custom stops', async () => {
+      element.zoomStops = [];
+      const content = document.createElement('div');
+      content.style.cssText = 'width: 200px; height: 100px';
+      element.append(content);
+      await elementIsStable(element);
+      element.dispatchEvent(new CommandEvent('command', { command: '--zoom-to-fit' }));
+      expect(element.scale).toBeCloseTo(2);
+      element.scale = 1.2;
+      await elementIsStable(element);
+      element.fitContents();
+      expect(element.scale).toBeCloseTo(2);
+    });
+  });
+
   describe('animation integration', () => {
     it('keeps the minimum scale for an animated zoom-out request', async () => {
       element.behaviorZoom = true;
@@ -1012,6 +1311,7 @@ describe(Viewport.metadata.tag, () => {
     );
 
     it('commits wheel and pinch zoom immediately without scheduling an animation', async () => {
+      element.zoomStops = [];
       element.behaviorZoom = true;
       await elementIsStable(element);
       element.focus();

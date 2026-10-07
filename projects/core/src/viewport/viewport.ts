@@ -196,6 +196,13 @@ export class Viewport extends LitElement {
     this.#commitExternalTransform({ ...this.getTransform(), scale: this.#scale });
   }
 
+  /**
+   * Scale stops for keyboard and command zoom, clamped to the scale bounds.
+   * Defaults to built-in stops; an empty array uses only the bounds.
+   */
+  // eslint-disable-next-line local/primitive-property
+  @property({ attribute: 'zoom-stops', type: Array }) zoomStops?: readonly number[];
+
   /** Enables panning by pointer, focused wheel, focused keyboard, and Invoker commands; requires Space for primary-pointer dragging when set to space. */
   @property({ attribute: 'behavior-pan', converter: BEHAVIOR_PAN_CONVERTER, reflect: true })
   get behaviorPan(): ViewportPanBehavior {
@@ -496,13 +503,20 @@ export class Viewport extends LitElement {
   }
 
   #getZoomTarget(action: ViewportZoomAction, stepScale: number): ViewportTransform | undefined {
-    if (action === 'in') return this.#getCenteredScaleTransform(nextScaleStep(1, stepScale, this.#getScaleRange()));
-    if (action === 'out') return this.#getCenteredScaleTransform(nextScaleStep(-1, stepScale, this.#getScaleRange()));
+    if (action === 'in') return this.#getZoomStepTarget(1, stepScale);
+    if (action === 'out') return this.#getZoomStepTarget(-1, stepScale);
     if (action === 'reset') return this.#getCenteredScaleTransform(this.#clampScale(1));
     return this.#getFitContentsTargetFromClientRects(
       this.#clientRectsFromChildren(Array.from(this.children).filter(child => !child.slot)),
       this.#resolveFitOptions({})
     );
+  }
+
+  #getZoomStepTarget(direction: -1 | 1, currentScale: number): ViewportTransform {
+    const stops = Array.isArray(this.zoomStops) ? this.zoomStops : ZOOM_SCALE_STEPS;
+    const scaleRange = { ...this.#getScaleRange(), stops };
+    const scale = nextScaleStep(direction, currentScale, scaleRange);
+    return this.#getCenteredScaleTransform(scale);
   }
 
   #clientRectsFromChildren(children: Iterable<Element>): Iterable<ViewportClientRect> {
@@ -587,8 +601,13 @@ export class Viewport extends LitElement {
   }
 }
 
-function nextScaleStep(direction: -1 | 1, current: number, scaleRange: { min: number; max: number }): number {
-  const steps = [...ZOOM_SCALE_STEPS, scaleRange.min, scaleRange.max]
+function nextScaleStep(
+  direction: -1 | 1,
+  current: number,
+  scaleRange: { min: number; max: number; stops: readonly number[] }
+): number {
+  const steps = [...scaleRange.stops, scaleRange.min, scaleRange.max]
+    .filter(scale => Number.isFinite(scale) && scale > 0)
     .map(scale => Math.min(scaleRange.max, Math.max(scaleRange.min, scale)))
     .sort((first, second) => first - second)
     .filter((scale, index, all) => index === 0 || scale !== all[index - 1]);
