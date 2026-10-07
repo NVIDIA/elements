@@ -60,7 +60,7 @@
     "proper-lockfile": "4.1.2",
     "semantic-release": "25.0.9",
     "semantic-release-replace-plugin": "1.2.7",
-    "sharp": "0.35.4",
+    "sharp": "0.35.5",
     "wireit": "0.14.13"
   },
   "lint-staged": {
