@@ -240,11 +240,7 @@ export class Combobox extends Control implements ContainerElement {
 
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
-    this.shadowRoot!.addEventListener('slotchange', () => {
-      this.#_datalist = null;
-      this.#_select = null;
-      this.#onSlottedChildMutation();
-    });
+    this.shadowRoot!.addEventListener('slotchange', () => this.#onSlottedChildMutation());
     await this.updateComplete;
     this.#setupSingleSelect();
     this.#setupMultipleSelect();
@@ -260,13 +256,7 @@ export class Combobox extends Control implements ContainerElement {
 
   connectedCallback() {
     super.connectedCallback();
-    const observer = new MutationObserver(mutations => {
-      if (mutations.some(m => m.type === 'childList' && m.target === this)) {
-        this.#_datalist = null;
-        this.#_select = null;
-      }
-      this.#onSlottedChildMutation();
-    });
+    const observer = new MutationObserver(() => this.#onSlottedChildMutation());
     observer.observe(this, {
       childList: true,
       subtree: true,
@@ -275,11 +265,13 @@ export class Combobox extends Control implements ContainerElement {
       characterData: true
     });
     this.#observers.push(observer);
+    this.#setupOptionObservers();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#observers.forEach(observer => observer.disconnect());
+    this.#cleanupOptionObservers();
   }
 
   reset() {
@@ -302,7 +294,6 @@ export class Combobox extends Control implements ContainerElement {
     if (this.#select && !this.#select.multiple) {
       this.#setupInitialValue();
       this.#syncSelectValueStates();
-      this.#syncOptionSelectedStates();
     }
   }
 
@@ -310,7 +301,6 @@ export class Combobox extends Control implements ContainerElement {
     if (this.#select?.multiple) {
       this.#setupInitialValue();
       this.#syncSelectValueStates();
-      this.#syncOptionSelectedStates();
       this._internals.states.add('multiple');
     }
   }
@@ -341,12 +331,28 @@ export class Combobox extends Control implements ContainerElement {
     );
   }
 
-  #trackedOptions = new Set<HTMLOptionElement>();
+  #trackedOptions = new Map<HTMLOptionElement, ReturnType<typeof getPropertyChanges>>();
+
+  #setupOptionObservers() {
+    this.#_datalist = null;
+    this.#_select = null;
+    this.#syncOptionSelectedStates();
+    this.requestUpdate();
+  }
+
+  #cleanupOptionObservers() {
+    this.#trackedOptions.forEach(cleanup => cleanup?.());
+    this.#trackedOptions.clear();
+  }
+
   #syncOptionSelectedStates() {
+    if (!this.isConnected) return;
     this.#options.forEach(o => {
       if (!this.#trackedOptions.has(o)) {
-        this.#trackedOptions.add(o);
-        getPropertyChanges(o, 'selected', () => this.requestUpdate());
+        this.#trackedOptions.set(
+          o,
+          getPropertyChanges(o, 'selected', () => this.requestUpdate())
+        );
       }
     });
   }
@@ -356,6 +362,9 @@ export class Combobox extends Control implements ContainerElement {
       this.#syncPending = true;
       queueMicrotask(() => {
         this.#syncPending = false;
+        if (!this.isConnected) return;
+        this.#_datalist = null;
+        this.#_select = null;
         this.#cleanupStaleTrackedOptions();
         this.#syncOptionSelectedStates();
         this.requestUpdate();
@@ -365,8 +374,9 @@ export class Combobox extends Control implements ContainerElement {
 
   #cleanupStaleTrackedOptions() {
     const currentOptions = new Set(this.#options);
-    for (const tracked of this.#trackedOptions) {
+    for (const [tracked, cleanup] of this.#trackedOptions) {
       if (!currentOptions.has(tracked)) {
+        cleanup?.();
         this.#trackedOptions.delete(tracked);
       }
     }
