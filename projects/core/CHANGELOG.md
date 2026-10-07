@@ -1,3 +1,13 @@
+## [2.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.12.0...@nvidia-elements/core-v2.12.1) (2026-10-07)
+
+### Bug Fixes
+
+* **ci:** preserve authored contents in example metadata ([0ea8618](https://github.com/NVIDIA/elements/commit/0ea86182b4c654c4d8301bad7fbc06f0d3b11187))
+* **core:** preserve accessors during property observation ([37c137d](https://github.com/NVIDIA/elements/commit/37c137d305273cbf4382908cd00d0ca2dd273036))
+* **docs:** preserve example content through html processing ([7055d3c](https://github.com/NVIDIA/elements/commit/7055d3ce12a10b0e494da9c73c8f34fce62b9884))
+* **docs:** preserve example source during development reloads ([162082b](https://github.com/NVIDIA/elements/commit/162082b8bead05283646ae68ad3ecd391be8c962))
+* **docs:** prevent runtime errors when loading examples pages in dev ([1d57c69](https://github.com/NVIDIA/elements/commit/1d57c690819c009a1abac037b00f631d18db076a))
+
 ## [2.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.11.2...@nvidia-elements/core-v2.12.0) (2026-10-05)
 
 ### Features
