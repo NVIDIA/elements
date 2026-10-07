@@ -79,21 +79,42 @@ export function styleSheetToString(stylesheet: CSSStyleSheet) {
 
 /** Intercepts a property setter on an element so `callback` fires on every assignment. Does not use a MutationObserver. */
 export function getPropertyChanges(element: HTMLElement, key: string, callback: (value: unknown) => void) {
-  const proto = Object.getPrototypeOf(element);
-  const descriptor = Object.getOwnPropertyDescriptor(proto, key);
-  if (!descriptor) return;
   const own = Object.getOwnPropertyDescriptor(element, key);
-  if (own && own.configurable === false) return;
-  Object.defineProperty(element, key, {
+  if (own?.configurable === false) return;
+
+  let descriptor = own;
+  let proto = Object.getPrototypeOf(element);
+  while (!descriptor && proto) {
+    descriptor = Object.getOwnPropertyDescriptor(proto, key);
+    proto = Object.getPrototypeOf(proto);
+  }
+  if (!descriptor?.set) return;
+  const setter = descriptor.set;
+
+  let active = true;
+  const observation: PropertyDescriptor = {
     configurable: true,
+    enumerable: descriptor.enumerable,
     get: descriptor.get,
     set: (val: unknown) => {
-      descriptor.set!.call(element, val);
-      callback(val);
+      setter.call(element, val);
+      if (active) callback(val);
     }
-  });
+  };
+  Object.defineProperty(element, key, observation);
 
   return () => {
+    active = false;
+    const current = Object.getOwnPropertyDescriptor(element, key);
+    if (
+      current?.configurable !== observation.configurable ||
+      current?.enumerable !== observation.enumerable ||
+      current?.get !== observation.get ||
+      current?.set !== observation.set
+    ) {
+      return;
+    }
+
     if (own) {
       Object.defineProperty(element, key, own);
       return;
