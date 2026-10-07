@@ -1,3 +1,9 @@
+## [2.12.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.12.1...@nvidia-elements/core-v2.12.2) (2026-10-07)
+
+### Bug Fixes
+
+* **core:** clean up combobox option observers across connections ([3af4742](https://github.com/NVIDIA/elements/commit/3af4742f53a3d6c09b59b0ac445da9bb268de73e))
+
 ## [2.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.12.0...@nvidia-elements/core-v2.12.1) (2026-10-07)
 
 ### Bug Fixes
