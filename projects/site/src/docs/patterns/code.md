@@ -10,10 +10,6 @@
 
 Code patterns help users inspect test results, explore project files, review changes, and manage environment settings.
 
-## Test Results
-
-{% example '@internals/patterns/code.examples.json', 'TestResults' %}
-
 ## File Tree
 
 {% example '@internals/patterns/code.examples.json', 'FileTree' %}
@@ -21,6 +17,10 @@ Code patterns help users inspect test results, explore project files, review cha
 ## Commit
 
 {% example '@internals/patterns/code.examples.json', 'Commit' %}
+
+## Test Results
+
+{% example '@internals/patterns/code.examples.json', 'TestResults' %}
 
 ## Environment Variables
 

@@ -5,6 +5,14 @@ nve-tree-node:not(:has(> [slot='content']))::part(_content) {
   display: none !important;
 }
 
+nve-tree-node:not(:has(> [slot='prefix']))::part(_prefix) {
+  display: none !important;
+}
+
+nve-tree-node:not(:has(> [slot='suffix']))::part(_suffix) {
+  display: none !important;
+}
+
 nve-tree-node:not(:has(> [slot='nodes']))::part(_nodes) {
   height: 0;
 }

@@ -47,6 +47,10 @@
 
 {% example '@nvidia-elements/core/tree/tree.examples.json' 'Async' %}
 
+## Prefix and Suffix
+
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'PrefixSuffix' %}
+
 ## Complex Tree Navigation
 
 {% example '@internals/patterns/navigation.examples.json' 'ComplexTreeNavigation' %}

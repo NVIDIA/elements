@@ -48,15 +48,26 @@ slot:not(:has-slotted) {
 }
 
 .node-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--nve-ref-space-xs);
   border-radius: var(--border-radius);
   border-inline-start: var(--nve-ref-border-width-md) solid transparent;
   margin-inline-start: var(--nve-ref-space-xxxs);
-  padding: var(--nve-ref-size-200) var(--nve-ref-size-100);
+  padding: var(--nve-ref-size-200) var(--nve-ref-size-200) var(--nve-ref-size-200) var(--nve-ref-size-100);
   min-height: var(--min-height);
-  gap: var(--nve-ref-space-xs);
   width: 100%;
-  display: flex;
-  flex-direction: row;
+
+  & slot {
+    width: fit-content;
+  }
+
+  & slot:not([name]) {
+    width: 100%;
+    display: block;
+    position: relative;
+  }
 }
 
 [part='_node-header'] {

@@ -36,14 +36,14 @@ export const Citation = {
 <div nve-layout="row gap:xs align:vertical-center align:wrap">
   <p nve-text="body sm">For the AMR-07 aisle 3 review, pair Isaac Sim robot simulation with the Nav2 navigation framework.</p>
   <nve-tag id="agent-citation-trigger" size="sm" popovertarget="agent-citation" popovertargetaction="show" aria-label="View two sources for the navigation review">
-    <nve-icon slot="prefix" name="book"></nve-icon> GitHub +1
+    <nve-icon slot="prefix" name="book"></nve-icon> GitHub
   </nve-tag>
 </div>
 <nve-toggletip id="agent-citation" anchor="agent-citation-trigger" position="left" alignment="center" closable style="--width: min(320px, 90vw); --min-width: 0">
   <nve-toggletip-header>
-    <h2 nve-text="heading sm">Sources</h2>
+    <h2 nve-text="heading sm">Source</h2>
   </nve-toggletip-header>
-  <article data-citation-source nve-layout="column gap:sm" aria-label="Isaac Sim source">
+  <article nve-layout="column gap:sm" aria-label="Isaac Sim source">
     <h3 nve-text="body sm semibold"><a nve-text="link sm" href="https://github.com/isaac-sim/IsaacSim">Isaac Sim</a></h3>
     <p nve-text="body sm muted">github.com · NVIDIA</p>
     <p nve-text="body sm">A robotics simulation platform for developing and testing robots in virtual environments.</p>
@@ -51,34 +51,7 @@ export const Citation = {
       “It supports importing robotic systems from common formats such as URDF, MJCF, and CAD.”
     </blockquote>
   </article>
-  <article data-citation-source nve-layout="column gap:sm" aria-label="Nav2 source" hidden>
-    <h3 nve-text="body sm semibold"><a nve-text="link sm" href="https://github.com/ros-navigation/navigation2">Nav2</a></h3>
-    <p nve-text="body sm muted">github.com · ROS 2</p>
-    <p nve-text="body sm">Navigation software with documentation for robot setup, navigation plugins, and configuration.</p>
-    <blockquote nve-layout="column gap:xs" nve-text="body sm muted" cite="https://github.com/ros-navigation/navigation2">
-      “ROS 2 Navigation Framework and System”
-    </blockquote>
-  </article>
-  <div nve-layout="row gap:sm pad-top:md align:space-between align:vertical-center full:width">
-    <nve-icon-button id="agent-citation-previous" size="sm" container="flat" icon-name="chevron" direction="left" aria-label="Previous source"></nve-icon-button>
-    <output id="agent-citation-index" nve-text="body sm muted" aria-live="polite" aria-atomic="true">1 / 2</output>
-    <nve-icon-button id="agent-citation-next" size="sm" container="flat" icon-name="chevron" direction="right" aria-label="Next source"></nve-icon-button>
-  </div>
 </nve-toggletip>
-<script type="module">
-  const citation = document.querySelector('#agent-citation');
-  const sources = Array.from(citation.querySelectorAll('[data-citation-source]'));
-  const counter = citation.querySelector('#agent-citation-index');
-  let activeSource = 0;
-
-  const moveSource = direction => {
-    activeSource = (activeSource + direction + sources.length) % sources.length;
-    sources.forEach((source, index) => { source.hidden = index !== activeSource; });
-    counter.textContent = (activeSource + 1) + ' / ' + sources.length;
-  };
-  citation.querySelector('#agent-citation-previous').addEventListener('click', () => moveSource(-1));
-  citation.querySelector('#agent-citation-next').addEventListener('click', () => moveSource(1));
-</script>
     `;
   }
 };
@@ -89,7 +62,7 @@ export const Citation = {
  */
 export const Task = {
   render: () => html`
-<nve-accordion container="flat" behavior-expand expanded>
+<nve-accordion container="flat" behavior-expand>
   <nve-accordion-header>
     <nve-icon slot="prefix" name="checklist"></nve-icon>
     <h2 nve-text="body muted sm">Review AMR-07 navigation</h2>
@@ -150,44 +123,12 @@ export const Task = {
 };
 
 /**
- * @summary Suggested prompts arranged as wrapping buttons that populate a composer. Use at the start of a conversation to help users discover useful requests and refine a suggestion before sending it.
- * @tags pattern
- */
-export const Suggestion = {
-  render() {
-    return html`
-<section id="agent-suggestions" nve-layout="column gap:sm" aria-label="Suggested robotics prompts">
-  <div nve-layout="row gap:xs align:wrap">
-    <nve-button size="sm" value="Review sensor health">Review sensor health</nve-button>
-    <nve-button size="sm" value="Explain this route">Explain this route</nve-button>
-    <nve-button size="sm" value="Compare simulation runs">Compare simulation runs</nve-button>
-  </div>
-  <nve-textarea>
-    <textarea aria-label="Suggested robot request" rows="2" placeholder="Choose a prompt for AMR-07"></textarea>
-  </nve-textarea>
-</section>
-<script type="module">
-  const root = document.querySelector('#agent-suggestions');
-  const textarea = root.querySelector('textarea');
-  root.querySelectorAll('nve-button').forEach(button => {
-    button.addEventListener('click', () => {
-      textarea.value = button.value;
-      textarea.dispatchEvent(new Event('input', { bubbles: true }));
-      textarea.focus();
-    });
-  });
-</script>
-    `;
-  }
-};
-
-/**
  * @summary Collapsible citations with descriptive links to supporting documentation. Use alongside assistant responses to let users verify references without interrupting the conversation.
  * @tags pattern
  */
 export const Sources = {
   render: () => html`
-<nve-accordion container="flat" behavior-expand expanded>
+<nve-accordion container="flat" behavior-expand>
   <nve-accordion-header>
     <nve-icon slot="prefix" name="book"></nve-icon>
     <h2 nve-text="body muted sm">Navigation references</h2>
@@ -235,7 +176,7 @@ export const Sources = {
  */
 export const Reasoning = {
   render: () => html`
-<nve-accordion container="flat" behavior-expand expanded>
+<nve-accordion container="flat" behavior-expand>
   <nve-accordion-header>
     <nve-icon slot="prefix" name="lightbulb"></nve-icon>
     <h2 nve-text="body muted sm">Route review · <nve-format-number format-style="unit" unit="second" unit-display="narrow">8</nve-format-number></h2>
@@ -258,7 +199,7 @@ export const Reasoning = {
 export const Queue = {
   render: () => html`
 <div nve-layout="column gap:sm align:horizontal-stretch">
-  <nve-accordion container="flat" behavior-expand expanded>
+  <nve-accordion container="flat" behavior-expand>
     <nve-accordion-header>
       <nve-icon slot="prefix" name="inbox"></nve-icon>
       <h2 nve-text="body muted sm">Request queue</h2>
@@ -299,15 +240,15 @@ export const PromptInput = {
 <form id="agent-prompt" nve-layout="column gap:xs" aria-label="Message robotics assistant">
   <nve-textarea>
     <textarea name="message" aria-label="Message robotics assistant" rows="3" maxlength="4000" required placeholder="Ask about AMR-07 navigation or sensor health"></textarea>
-    <nve-tag slot="prefix" closable><nve-icon slot="prefix" name="document"></nve-icon>mission.log</nve-tag>
-    <nve-tag slot="prefix" closable><nve-icon slot="prefix" name="document"></nve-icon>robot.yaml</nve-tag>
+    <nve-tag slot="prefix" color="gray-denim" closable><nve-icon slot="prefix" name="document"></nve-icon>mission.log</nve-tag>
+    <nve-tag slot="prefix" color="gray-denim" closable><nve-icon slot="prefix" name="document"></nve-icon>robot.yaml</nve-tag>
     <div slot="suffix" nve-layout="row gap:xs align:wrap align:vertical-center align:space-between full:width">
       <div nve-layout="row gap:xs align:wrap align:vertical-center">
         <nve-icon-button id="agent-attach" type="button" size="sm" icon-name="paper-clip" container="flat" aria-label="Attach robot logs"></nve-icon-button>
         <input id="agent-files" type="file" name="attachments" aria-label="Robot log attachments" multiple hidden />
         <nve-checkbox>
+          <label>Search</label>
           <input type="checkbox" name="search" checked />
-          <label>Search docs</label>
         </nve-checkbox>
         <nve-select container="flat" fit-content>
           <select name="model" aria-label="Assistant model">
@@ -360,17 +301,17 @@ export const Context = {
   <div nve-layout="column gap:sm">
     <p nve-text="body sm muted"><nve-format-number notation="compact">40000</nve-format-number> / <nve-format-number notation="compact">128000</nve-format-number> tokens</p>
     <nve-progress-bar value="40000" max="128000" aria-label="Robot mission context usage"></nve-progress-bar>
-    <nve-grid container="flat" aria-label="Mission token usage">
-      <nve-grid-header><nve-grid-column>Usage</nve-grid-column><nve-grid-column column-align="end">Tokens</nve-grid-column></nve-grid-header>
-      <nve-grid-row><nve-grid-cell>Input · logs</nve-grid-cell><nve-grid-cell><nve-format-number>24000</nve-format-number></nve-grid-cell></nve-grid-row>
-      <nve-grid-row><nve-grid-cell>Output · plan</nve-grid-cell><nve-grid-cell><nve-format-number>8000</nve-format-number></nve-grid-cell></nve-grid-row>
-      <nve-grid-row><nve-grid-cell>Reasoning</nve-grid-cell><nve-grid-cell><nve-format-number>4000</nve-format-number></nve-grid-cell></nve-grid-row>
-      <nve-grid-row><nve-grid-cell>Cached input</nve-grid-cell><nve-grid-cell><nve-format-number>4000</nve-format-number></nve-grid-cell></nve-grid-row>
-    </nve-grid>
+    <dl nve-layout="grid span-items:6 gap:md">
+      <dt nve-text="body muted medium">Input · logs</dt>
+      <dd nve-text="body"><nve-format-number>24000</nve-format-number></dd>
+      <dt nve-text="body muted medium">Output · plan</dt>
+      <dd nve-text="body"><nve-format-number>8000</nve-format-number></dd>
+      <dt nve-text="body muted medium">Reasoning</dt>
+      <dd nve-text="body"><nve-format-number>4000</nve-format-number></dd>
+      <dt nve-text="body muted medium">Cached input</dt>
+      <dd nve-text="body"><nve-format-number>4000</nve-format-number></dd>
+    </dl>
   </div>
-  <nve-toggletip-footer>
-    <span nve-text="body sm muted">Estimated Cost: <nve-format-number format-style="currency" currency="USD">0.12</nve-format-number></span>
-  </nve-toggletip-footer>
 </nve-toggletip>
   `
 };
@@ -461,7 +402,7 @@ export const Tools = {
       </div>
     </nve-accordion-content>
   </nve-accordion>
-  <nve-accordion expanded>
+  <nve-accordion>
     <nve-accordion-header>
       <nve-icon slot="prefix" name="wrench"></nve-icon>
       <h2 nve-text="body muted sm">Read robot state</h2>
@@ -491,7 +432,7 @@ export const Tools = {
       </div>
     </nve-accordion-content>
   </nve-accordion>
-  <nve-accordion expanded>
+  <nve-accordion>
     <nve-accordion-header>
       <nve-icon slot="prefix" name="wrench"></nve-icon>
       <h2 nve-text="body muted sm">Fetch mission logs</h2>

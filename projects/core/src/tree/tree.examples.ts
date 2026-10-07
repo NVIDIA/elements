@@ -328,6 +328,25 @@ export const Async = {
 };
 
 /**
+ * @summary Tree with prefix and suffix content for each node, enabling flexible content organization and visual hierarchy.
+ * @tags test-case
+ */
+export const PrefixSuffix = {
+  render: () => html`
+<nve-tree behavior-expand behavior-select selectable="single" aria-label="Robot workspace files">
+  <nve-tree-node expanded>
+    <nve-icon name="folder" slot="prefix"></nve-icon> src
+    <nve-tree-node expanded>
+      <nve-icon name="folder" slot="prefix"></nve-icon> navigation
+      <nve-tree-node selected><nve-icon name="code" slot="prefix"></nve-icon> controller.py <nve-dot status="accent" size="sm" slot="suffix"></nve-dot></nve-tree-node>
+      <nve-tree-node><nve-icon name="code" slot="prefix"></nve-icon> planner.py</nve-tree-node>
+    </nve-tree-node>
+  </nve-tree-node>
+</nve-tree>
+  `
+};
+
+/**
  * @summary Tree with rich node content including forms, controls, and interactive elements, enabling complex data management within hierarchical structures.
  */
 export const NodeContent = {
@@ -337,6 +356,11 @@ export const NodeContent = {
         text content
         <nve-tree-node>
           <a href="." nve-text="link">node link</a>
+        </nve-tree-node>
+        <nve-tree-node>
+          <nve-icon name="code" slot="prefix"></nve-icon>
+          <a href="." nve-text="link">node link</a>
+          <nve-dot status="accent" size="sm" slot="suffix"></nve-dot>
         </nve-tree-node>
         <nve-tree-node>
           inline content <nve-dot status="success" size="sm"></nve-dot>

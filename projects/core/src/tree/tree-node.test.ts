@@ -423,6 +423,56 @@ describe(TreeNode.metadata.tag, () => {
     expect(element.selected).toBe(true);
   });
 
+  it('should select node when clicking non-interactive prefix and suffix content', async () => {
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+    await elementIsStable(tree);
+
+    const selectHandler = vi.fn();
+    element.addEventListener('select', selectHandler);
+
+    for (const slot of ['prefix', 'suffix']) {
+      const content = document.createElement('span');
+      content.slot = slot;
+      content.textContent = slot;
+      element.appendChild(content);
+      await elementIsStable(element);
+
+      emulateClick(content);
+      await elementIsStable(element);
+    }
+
+    expect(selectHandler).toHaveBeenCalledTimes(2);
+  });
+
+  it('should not select or expand node when clicking a prefix or suffix button', async () => {
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+    tree.behaviorExpand = true;
+    await elementIsStable(tree);
+
+    const selectHandler = vi.fn();
+    const openHandler = vi.fn();
+    nestedNodeElement.addEventListener('select', selectHandler);
+    nestedNodeElement.addEventListener('open', openHandler);
+
+    for (const slot of ['prefix', 'suffix']) {
+      const button = document.createElement('button');
+      button.slot = slot;
+      button.textContent = slot;
+      nestedNodeElement.appendChild(button);
+      await elementIsStable(nestedNodeElement);
+
+      emulateClick(button);
+      await elementIsStable(nestedNodeElement);
+    }
+
+    expect(nestedNodeElement.selected).toBe(false);
+    expect(nestedNodeElement.expanded).toBe(false);
+    expect(selectHandler).not.toHaveBeenCalled();
+    expect(openHandler).not.toHaveBeenCalled();
+  });
+
   it('should NOT select node if node header is clicked with a slotted non-anchor focusable element', async () => {
     const button = document.createElement('button');
     element.appendChild(button);

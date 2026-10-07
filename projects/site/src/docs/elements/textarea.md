@@ -25,3 +25,7 @@
 ### Columns and Rows
 
 {% example '@nvidia-elements/core/textarea/textarea.examples.json' 'ColumnsAndRows' %}
+
+### Slots
+
+{% example '@nvidia-elements/core/textarea/textarea.examples.json' 'Slots' %}
