@@ -9,8 +9,10 @@ import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
 declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
+declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
 
-const ELEMENTS_PLAYGROUND_BASE_URL = process.env.ELEMENTS_PLAYGROUND_BASE_URL ?? '';
+const ELEMENTS_PLAYGROUND_BASE_URL =
+  globalThis.process?.env.ELEMENTS_PLAYGROUND_BASE_URL ?? __ELEMENTS_PLAYGROUND_BASE_URL__;
 const ELEMENTS_ESM_CDN_BASE_URL = __ELEMENTS_ESM_CDN_BASE_URL__;
 export const MAX_PLAYGROUND_URL_LENGTH = 32_768;
 

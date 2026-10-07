@@ -22,6 +22,11 @@ export interface PlaygroundOptions {
   start?: boolean;
 }
 
+function isCommandEnvironment(): boolean {
+  const environment = globalThis.process?.env.ELEMENTS_ENV;
+  return environment === 'mcp' || environment === 'cli';
+}
+
 @service()
 export class PlaygroundService {
   @tool({
@@ -59,7 +64,7 @@ export class PlaygroundService {
   static async validate({ template, path }: { template?: string; path?: string }): Promise<TemplateLintMessage[]> {
     const templateContent = await resolveTemplate({ template, path });
 
-    if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
+    if (isCommandEnvironment()) {
       const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
       return await lintTemplate(templateContent, { strict: true });
     } else {
@@ -126,7 +131,7 @@ export class PlaygroundService {
   }: PlaygroundOptions & { author?: string }): Promise<string> {
     const templateContent = await resolveTemplate({ template, path });
 
-    if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
+    if (isCommandEnvironment()) {
       const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
       const lintResult = await lintTemplate(templateContent, { strict: true });
 
@@ -136,13 +141,12 @@ export class PlaygroundService {
     }
 
     const apis = await ApiService.getData();
-    const environment = process.env.ELEMENTS_ENV
-      ? ELEMENTS_ENV_ICON[process.env.ELEMENTS_ENV as keyof typeof ELEMENTS_ENV_ICON]
-      : undefined;
-    const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
+    const environment = globalThis.process?.env.ELEMENTS_ENV;
+    const environmentIcon = environment ? ELEMENTS_ENV_ICON[environment as keyof typeof ELEMENTS_ENV_ICON] : undefined;
+    const formattedName = `${name}${author ? ` - (${author})` : ''}${environmentIcon ? ` ${environmentIcon}` : ''}`;
     const result = createPlaygroundURL(templateContent, apis.data.elements, { name: formattedName, type });
 
-    if (!process.env.CI && (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli')) {
+    if (isCommandEnvironment() && !process.env.CI) {
       const openBrowser = await import('open');
       void openBrowser.default(result);
     }
