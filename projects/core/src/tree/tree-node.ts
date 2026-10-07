@@ -44,6 +44,8 @@ import { updateNodeSelection } from './utils.js';
  * @command --close - use to close the node
  * @command --toggle - use to toggle open / closed state of the node
  * @slot - Use default slot for basic text content or nested <nve-tree-node> elements.
+ * @slot prefix - Use for prefix content before the node title.
+ * @slot suffix - Use for suffix content after the node title.
  * @slot content - Use only for extended long form content containing interactive elements or form inputs.
  * @cssprop --color
  * @cssprop --border-radius
@@ -167,7 +169,11 @@ export class TreeNode extends LitElement {
               : nothing
           }
           <div tabindex="0" part="_node-header">
-            <slot class="node-title" @click=${this.#nodeHeaderClick}></slot>
+            <div class="node-title" @click=${this.#nodeHeaderClick}>
+              <slot name="prefix" part="_prefix"></slot>
+              <slot></slot>
+              <slot name="suffix" part="_suffix"></slot>
+            </div>
             <slot name="content" part="_content"></slot>
           </div>
         </div>

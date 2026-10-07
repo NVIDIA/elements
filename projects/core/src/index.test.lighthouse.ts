@@ -107,8 +107,9 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
+    // Allow a small margin above measured local and CI payloads.
     expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(
-      104.2
+      104.3
     );
   });
 });

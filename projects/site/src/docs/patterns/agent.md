@@ -1,14 +1,14 @@
 ---
 {
   title: 'Agent Patterns',
-  description: 'Agent patterns built with NVIDIA Elements for task progress, suggestions, sources, reasoning, queues, prompt input, and context usage.',
+  description: 'AI Agent patterns built with NVIDIA Elements for task progress, suggestions, sources, reasoning, queues, prompt input, and context usage.',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-Agent patterns keep tasks, supporting evidence, and user requests visible while an assistant works.
+AI Agent patterns keep tasks, supporting evidence, and user requests visible while an assistant works.
 
 ## Task
 
@@ -34,10 +34,6 @@ Agent patterns keep tasks, supporting evidence, and user requests visible while 
 
 {% example '@internals/patterns/agent.examples.json', 'Citation', '{ "height": "460px", "inline": false }' %}
 
-## Suggestion
-
-{% example '@internals/patterns/agent.examples.json', 'Suggestion' %}
-
 ## Prompt Input
 
 {% example '@internals/patterns/agent.examples.json', 'PromptInput' %}
@@ -45,7 +41,3 @@ Agent patterns keep tasks, supporting evidence, and user requests visible while 
 ## Context
 
 {% example '@internals/patterns/agent.examples.json', 'Context', '{ "height": "520px", "inline": false }' %}
-
-## Chain of Thought
-
-{% example '@internals/patterns/agent.examples.json', 'ChainOfThought' %}

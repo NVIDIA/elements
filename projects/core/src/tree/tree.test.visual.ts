@@ -14,6 +14,28 @@ describe('tree visual', () => {
     const report = await visualRunner.render('tree.dark', template('dark'));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('tree should preserve tree node title block rendering', async () => {
+    const report = await visualRunner.render(
+      'tree.title-block',
+      `
+      <script type="module">
+        import '@nvidia-elements/core/tree/define.js';
+      </script>
+      <nve-tree>
+        <nve-tree-node>
+          <!-- inline content is side by side -->
+          <span>•︎•︎•︎•︎•︎•︎</span><span>•︎•︎•︎•︎•︎•︎</span>
+        </nve-tree-node>
+        <nve-tree-node>
+          <!-- block content is stacked -->
+          <div>•︎•︎•︎•︎•︎•︎</div><div>•︎•︎•︎•︎•︎•︎</div>
+        </nve-tree-node>
+      </nve-tree>
+    `
+    );
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 function template(theme: '' | 'dark' = '') {

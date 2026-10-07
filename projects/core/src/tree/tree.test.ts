@@ -283,7 +283,7 @@ describe(`${Tree.metadata.tag} - collapsed nodes`, () => {
   it('should move focus with ArrowDown after a node label is clicked', async () => {
     const currentNode = element.nodes[1]!;
     const currentHeader = currentNode.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
-    const currentLabel = currentNode.shadowRoot!.querySelector<HTMLElement>('.node-title')!;
+    const currentLabel = currentNode.shadowRoot!.querySelector<HTMLElement>('.node-title > slot:not([name])')!;
     const nextHeader = element.nodes[2]!.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
     let eventDetail: Record<string, unknown> | undefined;
 

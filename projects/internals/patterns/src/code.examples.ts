@@ -25,7 +25,7 @@ export default {
  */
 export const TestResults = {
   render: () => html`
-<nve-card>
+<nve-card container="flat">
   <nve-card-header>
     <div nve-layout="row gap:sm align:wrap align:space-between full:width">
       <h2 nve-text="heading sm">Navigation tests</h2>
@@ -144,28 +144,28 @@ export const FileTree = {
   render: () => html`
 <nve-tree behavior-expand behavior-select selectable="single" aria-label="Robot workspace files">
   <nve-tree-node expanded>
-    <nve-icon name="folder"></nve-icon> src
+    <nve-icon name="folder" slot="prefix"></nve-icon> src
     <nve-tree-node expanded>
-      <nve-icon name="folder"></nve-icon> navigation
-      <nve-tree-node selected><nve-icon name="code"></nve-icon> controller.py</nve-tree-node>
-      <nve-tree-node><nve-icon name="code"></nve-icon> planner.py</nve-tree-node>
+      <nve-icon name="folder" slot="prefix"></nve-icon> navigation
+      <nve-tree-node selected><nve-icon name="code" slot="prefix"></nve-icon> controller.py</nve-tree-node>
+      <nve-tree-node><nve-icon name="code" slot="prefix"></nve-icon> planner.py</nve-tree-node>
     </nve-tree-node>
     <nve-tree-node>
-      <nve-icon name="folder"></nve-icon> perception
-      <nve-tree-node><nve-icon name="code"></nve-icon> fusion.py</nve-tree-node>
-      <nve-tree-node><nve-icon name="code"></nve-icon> lidar.py</nve-tree-node>
+      <nve-icon name="folder" slot="prefix"></nve-icon> perception
+      <nve-tree-node><nve-icon name="code" slot="prefix"></nve-icon> fusion.py</nve-tree-node>
+      <nve-tree-node><nve-icon name="code" slot="prefix"></nve-icon> lidar.py</nve-tree-node>
     </nve-tree-node>
   </nve-tree-node>
   <nve-tree-node>
-    <nve-icon name="folder"></nve-icon> config
-    <nve-tree-node><nve-icon name="document"></nve-icon> robot.yaml</nve-tree-node>
+    <nve-icon name="folder" slot="prefix"></nve-icon> config
+    <nve-tree-node><nve-icon name="document" slot="prefix"></nve-icon> robot.yaml</nve-tree-node>
   </nve-tree-node>
   <nve-tree-node>
-    <nve-icon name="folder"></nve-icon> launch
-    <nve-tree-node><nve-icon name="code"></nve-icon> warehouse.launch.py</nve-tree-node>
+    <nve-icon name="folder" slot="prefix"></nve-icon> launch
+    <nve-tree-node><nve-icon name="code" slot="prefix"></nve-icon> warehouse.launch.py</nve-tree-node>
   </nve-tree-node>
-  <nve-tree-node><nve-icon name="document"></nve-icon> package.xml</nve-tree-node>
-  <nve-tree-node><nve-icon name="document"></nve-icon> README.md</nve-tree-node>
+  <nve-tree-node><nve-icon name="document" slot="prefix"></nve-icon> package.xml</nve-tree-node>
+  <nve-tree-node><nve-icon name="document" slot="prefix"></nve-icon> README.md</nve-tree-node>
 </nve-tree>
   `
 };
@@ -176,63 +176,54 @@ export const FileTree = {
  */
 export const Commit = {
   render: () => html`
-<nve-accordion container="flat" behavior-expand expanded>
-  <nve-accordion-header>
-    <nve-icon slot="prefix" name="branch"></nve-icon>
-    <span nve-text="heading sm">Filter stale lidar scans</span>
-    <nve-badge slot="suffix" container="flat">4 files</nve-badge>
-  </nve-accordion-header>
-  <nve-accordion-content>
-    <div nve-layout="column gap:sm">
-      <div nve-layout="row gap:sm align:wrap align:vertical-center full:width">
-        <nve-avatar size="xs" aria-label="Upkeep Agent">NV</nve-avatar>
-        <span nve-text="body sm">Upkeep Agent</span>
-        <span nve-text="body sm muted"><nve-format-datetime date-style="medium">2026-10-05T14:30:00Z</nve-format-datetime></span>
-        <nve-copy-button behavior-copy container="inline" size="sm" value="a1b2c3d4e5f678901234567890abcdef1234567890" aria-label="Copy commit hash">a1b2c3d</nve-copy-button>
-      </div>
-      <nve-grid container="flat" aria-label="Robot software commit changes">
-        <nve-grid-header>
-          <nve-grid-column>File</nve-grid-column>
-          <nve-grid-column>Changes</nve-grid-column>
-        </nve-grid-header>
-        <nve-grid-row>
-          <nve-grid-cell>
-            <code nve-layout="full:width" nve-text="monospace sm truncate" title="perception/lidar.py">perception/lidar.py</code>
-          </nve-grid-cell>
-          <nve-grid-cell>
-            <span nve-layout="row gap:xs align:wrap"><nve-badge container="flat" status="success">+24</nve-badge><nve-badge container="flat" status="danger">−8</nve-badge></span>
-          </nve-grid-cell>
-        </nve-grid-row>
-        <nve-grid-row>
-          <nve-grid-cell>
-            <code nve-layout="full:width" nve-text="monospace sm truncate" title="tests/test_lidar.py">tests/test_lidar.py</code>
-          </nve-grid-cell>
-          <nve-grid-cell>
-            <span nve-layout="row gap:xs align:wrap"><nve-badge container="flat" status="success">+42</nve-badge></span>
-          </nve-grid-cell>
-        </nve-grid-row>
-        <nve-grid-row>
-          <nve-grid-cell>
-            <code nve-layout="full:width" nve-text="monospace sm truncate" title="perception/legacy.py">perception/legacy.py</code>
-          </nve-grid-cell>
-          <nve-grid-cell>
-            <span nve-layout="row gap:xs align:wrap"><nve-badge container="flat" status="danger">−18</nve-badge></span>
-          </nve-grid-cell>
-        </nve-grid-row>
-        <nve-grid-row>
-          <nve-grid-cell>
-            <code nve-layout="full:width" nve-text="monospace sm truncate" title="config/sensors.yaml">config/sensors.yaml</code>
-          </nve-grid-cell>
-          <nve-grid-cell>
-            <span nve-layout="row gap:xs align:wrap align:vertical-center">
-              <nve-badge container="flat" status="accent">Renamed</nve-badge> <span nve-text="body sm muted">from lidar.yaml</span>
-            </span>
-          </nve-grid-cell>
-        </nve-grid-row>
-      </nve-grid>
-    </div>
-  </nve-accordion-content>
-</nve-accordion>
+<div nve-layout="column gap:sm">
+  <div nve-layout="row gap:sm align:wrap align:vertical-center full:width">
+    <nve-avatar size="xs" aria-label="Upkeep Agent">NV</nve-avatar>
+    <span nve-text="body sm">Upkeep Agent</span>
+    <span nve-text="body sm muted"><nve-format-datetime date-style="medium">2026-10-05T14:30:00Z</nve-format-datetime></span>
+    <nve-copy-button behavior-copy container="inline" size="sm" value="a1b2c3d4e5f678901234567890abcdef1234567890" aria-label="Copy commit hash">a1b2c3d</nve-copy-button>
+  </div>
+  <nve-grid container="flat" aria-label="Robot software commit changes">
+    <nve-grid-header>
+      <nve-grid-column>File</nve-grid-column>
+      <nve-grid-column>Changes</nve-grid-column>
+    </nve-grid-header>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <code nve-layout="full:width" nve-text="monospace sm truncate" title="perception/lidar.py">perception/lidar.py</code>
+      </nve-grid-cell>
+      <nve-grid-cell>
+        <span nve-layout="row gap:xs align:wrap"><nve-badge container="flat" status="success">+24</nve-badge><nve-badge container="flat" status="failed">−8</nve-badge></span>
+      </nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <code nve-layout="full:width" nve-text="monospace sm truncate" title="tests/test_lidar.py">tests/test_lidar.py</code>
+      </nve-grid-cell>
+      <nve-grid-cell>
+        <span nve-layout="row gap:xs align:wrap"><nve-badge container="flat" status="success">+42</nve-badge></span>
+      </nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <code nve-layout="full:width" nve-text="monospace sm truncate" title="perception/legacy.py">perception/legacy.py</code>
+      </nve-grid-cell>
+      <nve-grid-cell>
+        <span nve-layout="row gap:xs align:wrap"><nve-badge container="flat" status="failed">−18</nve-badge></span>
+      </nve-grid-cell>
+    </nve-grid-row>
+    <nve-grid-row>
+      <nve-grid-cell>
+        <code nve-layout="full:width" nve-text="monospace sm truncate" title="config/sensors.yaml">config/sensors.yaml</code>
+      </nve-grid-cell>
+      <nve-grid-cell>
+        <span nve-layout="row gap:xs align:wrap align:vertical-center">
+          <nve-badge container="flat" status="accent">Renamed</nve-badge> <span nve-text="body sm muted">from lidar.yaml</span>
+        </span>
+      </nve-grid-cell>
+    </nve-grid-row>
+  </nve-grid>
+</div>
   `
 };
 
@@ -242,7 +233,7 @@ export const Commit = {
  */
 export const EnvironmentVariables = {
   render: () => html`
-<nve-card>
+<nve-card container="flat">
   <nve-card-header>
     <div nve-layout="row gap:sm align:wrap align:space-between full:width">
       <h2 nve-text="heading sm">Robot environment</h2>
