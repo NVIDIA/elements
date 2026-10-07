@@ -2275,6 +2275,102 @@ describe(`${Combobox.metadata.tag}: slotted child mutation observation`, () => {
     expect(items[0].textContent.trim()).toBe('Keep');
   });
 
+  it('should render and observe a select replaced inside an existing wrapper', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <div>
+          <select multiple>
+            <option value="A">A</option>
+          </select>
+        </div>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+
+    const select = fixture.querySelector('select');
+    const originalOption = select.options[0];
+    const replacement = document.createElement('select');
+    replacement.multiple = true;
+    const replacementOption = new Option('B', 'B', false, true);
+    replacement.appendChild(replacementOption);
+    select.replaceWith(replacement);
+    await elementIsStable(element);
+
+    const tags = element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags.length).toBe(1);
+    expect(tags[0].textContent.trim()).toBe('B');
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    originalOption.selected = true;
+    expect(requestUpdate).not.toHaveBeenCalled();
+    expect(Object.getOwnPropertyDescriptor(originalOption, 'selected')).toBeUndefined();
+
+    replacementOption.selected = false;
+    expect(requestUpdate).toHaveBeenCalledTimes(1);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+  });
+
+  it('should stop observing removed option selected state changes', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A">A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+
+    const option = fixture.querySelector('option');
+    option.remove();
+    await elementIsStable(element);
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    option.selected = true;
+
+    expect(requestUpdate).not.toHaveBeenCalled();
+    expect(option.selected).toBe(true);
+    expect(Object.getOwnPropertyDescriptor(option, 'selected')).toBeUndefined();
+  });
+
+  it('should avoid duplicate updates after repeated option reinsertion', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A">A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+
+    const select = fixture.querySelector('select');
+    const option = select.options[0];
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+
+    for (let i = 0; i < 3; i++) {
+      option.remove();
+      await elementIsStable(element);
+      select.appendChild(option);
+      await elementIsStable(element);
+      requestUpdate.mockClear();
+
+      option.selected = !option.selected;
+
+      expect(requestUpdate).toHaveBeenCalledTimes(1);
+      await elementIsStable(element);
+      expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(Number(option.selected));
+    }
+  });
+
   it('should remove inline tag when selected option is removed from multi-select', async () => {
     fixture = await createFixture(html`
       <nve-combobox>
@@ -2436,6 +2532,157 @@ describe(`${Combobox.metadata.tag}: slotted child mutation observation`, () => {
     expect(tags.length).toBe(1);
 
     fixture = null;
+  });
+});
+
+describe(`${Combobox.metadata.tag}: option observers on connection`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+
+  beforeEach(async () => {
+    fixture = await createFixture();
+    element = document.createElement(Combobox.metadata.tag);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    removeFixture(fixture);
+  });
+
+  it('should observe existing options before the first render', async () => {
+    element.innerHTML = '<label>combobox</label><input type="search"><select multiple><option>A</option></select>';
+    fixture.appendChild(element);
+
+    const option = element.querySelector('option');
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    option.selected = true;
+
+    expect(requestUpdate).toHaveBeenCalledTimes(1);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(1);
+  });
+
+  it('should observe options added after connection', async () => {
+    fixture.appendChild(element);
+    element.innerHTML = '<label>combobox</label><input type="search"><select multiple><option>A</option></select>';
+    await elementIsStable(element);
+
+    const option = element.querySelector('option');
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    option.selected = true;
+
+    expect(requestUpdate).toHaveBeenCalledTimes(1);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(1);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: option observers across reconnect`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let select: HTMLSelectElement;
+  let option: HTMLOptionElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A">A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    select = fixture.querySelector('select');
+    option = select.options[0];
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    removeFixture(fixture);
+  });
+
+  it('should stop observing on disconnect and resume without duplicate updates', async () => {
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+
+    for (let i = 0; i < 3; i++) {
+      element.remove();
+      requestUpdate.mockClear();
+      option.selected = true;
+
+      expect(requestUpdate).not.toHaveBeenCalled();
+      expect(Object.getOwnPropertyDescriptor(option, 'selected')).toBeUndefined();
+
+      fixture.appendChild(element);
+      await elementIsStable(element);
+      expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(1);
+      requestUpdate.mockClear();
+      option.selected = false;
+
+      expect(requestUpdate).toHaveBeenCalledTimes(1);
+      await elementIsStable(element);
+      expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+    }
+  });
+
+  it('should render and observe options replaced while disconnected', async () => {
+    element.remove();
+    const replacement = new Option('B', 'B', false, true);
+    select.replaceChildren(replacement);
+    fixture.appendChild(element);
+    await elementIsStable(element);
+
+    const tags = element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags.length).toBe(1);
+    expect(tags[0].textContent.trim()).toBe('B');
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    option.selected = true;
+    expect(requestUpdate).not.toHaveBeenCalled();
+
+    replacement.selected = false;
+    expect(requestUpdate).toHaveBeenCalledTimes(1);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+  });
+
+  it('should observe options in a select replaced while disconnected', async () => {
+    element.remove();
+    const replacement = document.createElement('select');
+    replacement.multiple = true;
+    const replacementOption = new Option('B', 'B', false, true);
+    replacement.appendChild(replacementOption);
+    select.replaceWith(replacement);
+    fixture.appendChild(element);
+    await elementIsStable(element);
+
+    const tags = element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags.length).toBe(1);
+    expect(tags[0].textContent.trim()).toBe('B');
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    replacementOption.selected = false;
+    expect(requestUpdate).toHaveBeenCalledTimes(1);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+  });
+
+  it('should not reinstall option observers from a pending mutation after disconnect', async () => {
+    const added = new Option('B', 'B');
+    select.appendChild(added);
+    await Promise.resolve();
+    element.remove();
+    await Promise.resolve();
+
+    const requestUpdate = vi.spyOn(element, 'requestUpdate');
+    option.selected = true;
+    added.selected = true;
+
+    expect(requestUpdate).not.toHaveBeenCalled();
+    expect(Object.getOwnPropertyDescriptor(option, 'selected')).toBeUndefined();
+    expect(Object.getOwnPropertyDescriptor(added, 'selected')).toBeUndefined();
   });
 });
 
