@@ -195,7 +195,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted selected' : ''}><a href="/docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/whats-new/') || data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/whats-new/') || data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/sitemap/' ? 'expanded' : ''}>
     <a href="/docs/whats-new/">About</a>
     <nve-tree-node ${data.page.url.includes('/docs/whats-new/') ? 'highlighted selected' : ''}><a href="/docs/whats-new/">What’s New</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="/docs/changelog/">Changelog</a></nve-tree-node>
@@ -205,6 +205,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="/docs/about/contributions/">Contributions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="/docs/about/requests/">Requests</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="/docs/about/migration/">Migration</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/sitemap/' ? 'highlighted selected' : ''}><a href="/sitemap/">Sitemap</a></nve-tree-node>
   </nve-tree-node>
   
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') || data.page.url.includes('/docs/design-md/') ? 'expanded' : ''}>

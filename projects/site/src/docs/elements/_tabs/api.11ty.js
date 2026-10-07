@@ -12,7 +12,8 @@ export const data = {
   pagination: {
     data: 'collections.componentDocs',
     size: 1,
-    alias: 'component'
+    alias: 'component',
+    addAllPagesToCollections: true
   },
   permalink: data => {
     const filePath = data.component.filePathStem;
