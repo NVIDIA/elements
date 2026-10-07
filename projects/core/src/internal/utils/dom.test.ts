@@ -368,6 +368,203 @@ describe('getPropertyChanges', () => {
 
     expect(spy).toHaveBeenCalledOnce();
     expect(input.value).toBe('after cleanup');
+    expect(Object.getOwnPropertyDescriptor(input, 'value')).toBeUndefined();
+  });
+
+  it.each([true, false])('should preserve existing textarea value tracking (enumerable: %s)', enumerable => {
+    const textarea = document.createElement('textarea');
+    const native = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+    if (!native?.get || !native.set) throw new Error('Missing native value accessor');
+    const getter = native.get;
+    const setter = native.set;
+    const frameworkGetter = vi.fn(() => getter.call(textarea));
+    const frameworkSetter = vi.fn((value: string) => setter.call(textarea, value));
+    const originalDescriptor = { configurable: true, enumerable, get: frameworkGetter, set: frameworkSetter };
+    Object.defineProperty(textarea, 'value', originalDescriptor);
+    const observed = vi.fn((value: unknown) => {
+      expect(textarea.value).toBe(value);
+    });
+    const cleanup = getPropertyChanges(textarea, 'value', observed);
+
+    expect(cleanup).toBeTypeOf('function');
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')?.enumerable).toBe(enumerable);
+    textarea.value = 'first';
+    textarea.value = 'second';
+
+    expect(frameworkSetter.mock.calls).toEqual([['first'], ['second']]);
+    expect(observed.mock.calls).toEqual([['first'], ['second']]);
+    expect(textarea.value).toBe('second');
+    expect(frameworkGetter).toHaveBeenCalled();
+    expect(getter.call(textarea)).toBe('second');
+
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(originalDescriptor);
+    textarea.value = 'after cleanup';
+    expect(frameworkSetter).toHaveBeenCalledTimes(3);
+    expect(frameworkSetter).toHaveBeenLastCalledWith('after cleanup');
+    expect(observed).toHaveBeenCalledTimes(2);
+    expect(textarea.value).toBe('after cleanup');
+  });
+
+  it('should stop callbacks after cleanup when a framework wraps the observed setter', () => {
+    const textarea = document.createElement('textarea');
+    const observed = vi.fn();
+    const cleanup = getPropertyChanges(textarea, 'value', observed);
+    const observation = Object.getOwnPropertyDescriptor(textarea, 'value');
+    if (!observation?.get || !observation.set) throw new Error('Missing observation accessor');
+    const observedSetter = observation.set;
+    const frameworkSetter = vi.fn((value: string) => observedSetter.call(textarea, value));
+    const frameworkDescriptor = { ...observation, set: frameworkSetter };
+    Object.defineProperty(textarea, 'value', frameworkDescriptor);
+
+    textarea.value = 'before cleanup';
+    expect(observed).toHaveBeenCalledOnce();
+    expect(observed).toHaveBeenCalledWith('before cleanup');
+
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(frameworkDescriptor);
+    textarea.value = 'after cleanup';
+    expect(textarea.value).toBe('after cleanup');
+    expect(frameworkSetter.mock.calls).toEqual([['before cleanup'], ['after cleanup']]);
+    expect(observed).toHaveBeenCalledOnce();
+  });
+
+  it('should preserve a framework getter installed during observation', () => {
+    const textarea = document.createElement('textarea');
+    const observed = vi.fn();
+    const cleanup = getPropertyChanges(textarea, 'value', observed);
+    const observation = Object.getOwnPropertyDescriptor(textarea, 'value');
+    if (!observation?.get) throw new Error('Missing observation getter');
+    const observedGetter = observation.get;
+    const frameworkGetter = vi.fn(() => observedGetter.call(textarea));
+    const frameworkDescriptor = { ...observation, get: frameworkGetter };
+    Object.defineProperty(textarea, 'value', frameworkDescriptor);
+
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(frameworkDescriptor);
+    textarea.value = 'after cleanup';
+    expect(textarea.value).toBe('after cleanup');
+    expect(frameworkGetter).toHaveBeenCalledOnce();
+    expect(observed).not.toHaveBeenCalled();
+  });
+
+  it('should not restore an accessor removed by another owner', () => {
+    const textarea = document.createElement('textarea');
+    const native = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+    if (!native?.get || !native.set) throw new Error('Missing native value accessor');
+    const getter = native.get;
+    const setter = native.set;
+    const frameworkSetter = vi.fn((value: string) => setter.call(textarea, value));
+    Object.defineProperty(textarea, 'value', { ...native, set: frameworkSetter });
+    const observed = vi.fn();
+    const cleanup = getPropertyChanges(textarea, 'value', observed);
+
+    Reflect.deleteProperty(textarea, 'value');
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toBeUndefined();
+    textarea.value = 'after cleanup';
+    expect(getter.call(textarea)).toBe('after cleanup');
+    expect(frameworkSetter).not.toHaveBeenCalled();
+    expect(observed).not.toHaveBeenCalled();
+  });
+
+  it.each(['configurable', 'enumerable'])('should preserve a later change to %s during cleanup', attribute => {
+    const textarea = document.createElement('textarea');
+    const observed = vi.fn();
+    const cleanup = getPropertyChanges(textarea, 'value', observed);
+    Object.defineProperty(textarea, 'value', { [attribute]: false });
+    const changed = Object.getOwnPropertyDescriptor(textarea, 'value');
+
+    expect(() => cleanup?.()).not.toThrow();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(changed);
+    textarea.value = 'after cleanup';
+    expect(textarea.value).toBe('after cleanup');
+    expect(observed).not.toHaveBeenCalled();
+  });
+
+  it('should observe a consumer-defined property without a prototype descriptor', () => {
+    const div = document.createElement('div');
+    const setter = vi.fn();
+    const own = { configurable: true, enumerable: false, set: setter };
+    Object.defineProperty(div, 'customValue', own);
+    const spy = vi.fn();
+    const cleanup = getPropertyChanges(div, 'customValue', spy);
+
+    expect(Reflect.set(div, 'customValue', 'hello')).toBe(true);
+    expect(setter).toHaveBeenCalledWith('hello');
+    expect(spy).toHaveBeenCalledWith('hello');
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(div, 'customValue')).toEqual({ ...own, get: undefined });
+  });
+
+  it('should observe a native property inherited beyond the immediate prototype', () => {
+    const div = document.createElement('div');
+    const spy = vi.fn();
+    const cleanup = getPropertyChanges(div, 'id', spy);
+
+    div.id = 'observed';
+    expect(spy).toHaveBeenCalledWith('observed');
+    expect(div.getAttribute('id')).toBe('observed');
+    expect(Object.getOwnPropertyDescriptor(div, 'id')?.enumerable).toBe(
+      Object.getOwnPropertyDescriptor(Element.prototype, 'id')?.enumerable
+    );
+
+    cleanup?.();
+    expect(Object.getOwnPropertyDescriptor(div, 'id')).toBeUndefined();
+    div.id = 'after cleanup';
+    expect(spy).toHaveBeenCalledOnce();
+    expect(div.id).toBe('after cleanup');
+  });
+
+  it('should not override a getter-only own accessor', () => {
+    const textarea = document.createElement('textarea');
+    const own = { configurable: true, enumerable: true, get: () => 'read only', set: undefined };
+    Object.defineProperty(textarea, 'value', own);
+    const spy = vi.fn();
+
+    expect(getPropertyChanges(textarea, 'value', spy)).toBeUndefined();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(own);
+    expect(Reflect.set(textarea, 'value', 'changed')).toBe(false);
+    expect(textarea.value).toBe('read only');
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should not override a getter-only prototype accessor', () => {
+    const textarea = document.createElement('textarea');
+    const spy = vi.fn();
+
+    expect(getPropertyChanges(textarea, 'type', spy)).toBeUndefined();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'type')).toBeUndefined();
+    expect(Reflect.set(textarea, 'type', 'changed')).toBe(false);
+    expect(textarea.type).toBe('textarea');
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should not override an own data property with a prototype accessor', () => {
+    const textarea = document.createElement('textarea');
+    const own = { configurable: true, enumerable: false, writable: true, value: 'original' };
+    Object.defineProperty(textarea, 'value', own);
+    const spy = vi.fn();
+
+    expect(getPropertyChanges(textarea, 'value', spy)).toBeUndefined();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(own);
+    textarea.value = 'changed';
+    expect(textarea.value).toBe('changed');
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should not override a non-configurable own accessor', () => {
+    const textarea = document.createElement('textarea');
+    const setter = vi.fn();
+    const own = { configurable: false, enumerable: true, get: () => 'locked', set: setter };
+    Object.defineProperty(textarea, 'value', own);
+    const spy = vi.fn();
+
+    expect(getPropertyChanges(textarea, 'value', spy)).toBeUndefined();
+    expect(Object.getOwnPropertyDescriptor(textarea, 'value')).toEqual(own);
+    textarea.value = 'changed';
+    expect(setter).toHaveBeenCalledWith('changed');
+    expect(spy).not.toHaveBeenCalled();
   });
 
   it('should not throw when the property has no prototype descriptor', () => {
