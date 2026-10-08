@@ -6,7 +6,9 @@ import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/viewport/define.js';
 
@@ -16,11 +18,11 @@ export default {
 };
 
 /**
- * @summary Auto-fit a bounded SVG with direct pan and zoom; the minimap represents its single content root as one rectangle.
+ * @summary Navigate a bounded SVG with pan, zoom, gridlines, and a minimap. Fixed overlay controls adjust zoom without moving with the content.
  */
 export const Default = {
   render: () => html`
-    <nve-viewport autofit fit-inset="24" behavior-pan behavior-zoom style="height: 420px">
+    <nve-viewport id="viewport-default" autofit fit-inset="24" behavior-pan behavior-zoom style="height: 420px">
       <nve-viewport-gridlines></nve-viewport-gridlines>
 
       <svg
@@ -38,6 +40,12 @@ export const Default = {
       </svg>
 
       <nve-viewport-minimap></nve-viewport-minimap>
+      <nve-toolbar slot="overlay" orientation="vertical" aria-label="Viewport zoom controls"
+        style="position: absolute; inset-block-start: var(--nve-ref-space-md); inset-inline-start: var(--nve-ref-space-md); width: fit-content">
+        <nve-button commandfor="viewport-default" command="--zoom-in" aria-label="Zoom in">+</nve-button>
+        <nve-viewport-zoom-range commandfor="viewport-default" orientation="vertical" aria-label="Viewport zoom"></nve-viewport-zoom-range>
+        <nve-button commandfor="viewport-default" command="--zoom-out" aria-label="Zoom out">−</nve-button>
+      </nve-toolbar>
     </nve-viewport>
   `
 };
@@ -208,20 +216,17 @@ export const PanWithSpace = {
 };
 
 /**
- * @summary Use external controls with `commandfor` to invoke viewport pan, zoom, reset, and fit commands.
+ * @summary Connect an external zoom toolbar and navigator to a viewport with commandfor. Use the range for continuous zoom, the minimap to recenter, and directional buttons to pan.
  */
 export const Commands = {
   render: () => html`
-    <div nve-layout="column align:horizontal-stretch" style="height: 420px">
-      <nve-toolbar aria-label="Viewport navigation controls">
-        <nve-button commandfor="viewport-command-demo" command="--pan-left" aria-label="Pan left">←</nve-button>
-        <nve-button commandfor="viewport-command-demo" command="--pan-up" aria-label="Pan up">↑</nve-button>
-        <nve-button commandfor="viewport-command-demo" command="--pan-down" aria-label="Pan down">↓</nve-button>
-        <nve-button commandfor="viewport-command-demo" command="--pan-right" aria-label="Pan right">→</nve-button>
-        <nve-button slot="suffix" commandfor="viewport-command-demo" command="--zoom-out" aria-label="Zoom out">−</nve-button>
-        <nve-button slot="suffix" commandfor="viewport-command-demo" command="--zoom-reset">100%</nve-button>
-        <nve-button slot="suffix" commandfor="viewport-command-demo" command="--zoom-in" aria-label="Zoom in">+</nve-button>
-        <nve-button slot="suffix" commandfor="viewport-command-demo" command="--zoom-to-fit">Fit</nve-button>
+    <nve-page>
+      <nve-toolbar slot="subheader" container="full" aria-label="Viewport zoom controls">
+        <span nve-text="body">Zoom</span>
+        <nve-button commandfor="viewport-command-demo" command="--zoom-out" aria-label="Zoom out">−</nve-button>
+        <nve-viewport-zoom-range commandfor="viewport-command-demo" aria-label="Viewport zoom" style="flex: 1; min-width: 0"></nve-viewport-zoom-range>
+        <nve-button commandfor="viewport-command-demo" command="--zoom-in" aria-label="Zoom in">+</nve-button>
+        <nve-icon-button slot="suffix" icon-name="maximize" commandfor="viewport-command-demo" command="--zoom-to-fit" aria-label="Fit content"></nve-icon-button>
       </nve-toolbar>
 
       <nve-viewport
@@ -230,7 +235,9 @@ export const Commands = {
         fit-inset="24"
         behavior-pan
         behavior-zoom
-        style="flex: 1; --min-height: 0"
+        min-scale="0.25"
+        max-scale="4"
+        style="width: 100%; height: 100%; --min-height: 0"
       >
         <nve-viewport-gridlines></nve-viewport-gridlines>
 
@@ -248,7 +255,31 @@ export const Commands = {
           <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
         </svg>
       </nve-viewport>
-    </div>
+
+      <nve-page-panel slot="right-aside" aria-label="Viewport navigation" style="width: 164px">
+        <nve-page-panel-content>
+          <div nve-layout="column gap:sm">
+            <h2 nve-text="heading xs medium">Navigate</h2>
+            <nve-viewport-minimap commandfor="viewport-command-demo" style="position: relative; inset: auto; width: 100%; max-width: none">
+              <svg slot="preview" width="900" height="600" viewBox="0 0 900 600" style="position: absolute; left: 0; top: 0">
+                <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
+                <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
+                <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
+              </svg>
+            </nve-viewport-minimap>
+            <h2 nve-text="heading xs medium">Pan</h2>
+            <div nve-layout="column gap:xs align:horizontal-center">
+              <nve-button commandfor="viewport-command-demo" command="--pan-up" aria-label="Pan up">↑</nve-button>
+              <div nve-layout="row gap:lg align:horizontal-center">
+                <nve-button commandfor="viewport-command-demo" command="--pan-left" aria-label="Pan left">←</nve-button>
+                <nve-button commandfor="viewport-command-demo" command="--pan-right" aria-label="Pan right">→</nve-button>
+              </div>
+              <nve-button commandfor="viewport-command-demo" command="--pan-down" aria-label="Pan down">↓</nve-button>
+            </div>
+          </div>
+        </nve-page-panel-content>
+      </nve-page-panel>
+    </nve-page>
   `
 };
 

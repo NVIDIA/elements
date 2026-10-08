@@ -3,11 +3,18 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import { getFlattenedDOMTree } from '@nvidia-elements/core/internal';
+import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { Viewport } from './viewport.js';
 
 type ViewportControlHost = ReactiveElement & {
   readonly commandfor: string | null;
   commandForElement: HTMLElement | null;
+};
+
+type ViewportCommandHost = ViewportControlHost & {
+  command?: string;
+  disabled: boolean;
+  readOnly: boolean;
 };
 
 /** Binds a navigation control to its command target and committed viewport state. */
@@ -78,4 +85,18 @@ export class ViewportControlController implements ReactiveController {
   }
 
   #handleChange = (): void => this.onChange(this.target);
+}
+
+// eslint-disable-next-line local/require-component-metadata -- Controllers do not define custom elements.
+export class ViewportCommandController extends TypeCommandController<ViewportCommandHost> {
+  constructor(
+    host: ViewportCommandHost,
+    private readonly viewportControl: ViewportControlController
+  ) {
+    super(host, { events: ['input'] });
+  }
+
+  override get target(): Viewport | null {
+    return this.viewportControl.target;
+  }
 }

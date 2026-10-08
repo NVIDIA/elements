@@ -15,9 +15,10 @@ describe(Viewport.metadata.tag, () => {
 
   it('should pass axe check with interactive slotted content', async () => {
     fixture = await createFixture(html`
-      <nve-viewport behavior-pan behavior-zoom style="width: 400px; height: 300px">
+      <nve-viewport id="target" behavior-pan behavior-zoom style="width: 400px; height: 300px">
         <nve-viewport-gridlines></nve-viewport-gridlines>
         <nve-viewport-minimap></nve-viewport-minimap>
+        <nve-viewport-zoom-range slot="overlay" commandfor="target" orientation="vertical" aria-label="Viewport zoom"></nve-viewport-zoom-range>
         <form>
           <label>Project name <input name="name" /></label>
           <button type="submit">Save</button>

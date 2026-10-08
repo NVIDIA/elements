@@ -4,6 +4,7 @@
 export * from './viewport.js';
 export * from './viewport-gridlines.js';
 export * from './viewport-minimap.js';
+export * from './viewport-zoom-range.js';
 export type {
   ViewportAnimationOptions,
   ViewportPanBehavior,
