@@ -9,7 +9,7 @@ import { isNVElement } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
 /**
- * Invoker attributes that apply only to button-type elements.
+ * Invoker attributes supported by button controls and, for commandfor, command-only controls.
  */
 const INVOKER_ATTRIBUTES = ['popovertarget', 'commandfor', 'interestfor'] as const;
 
@@ -28,10 +28,16 @@ const BUTTON_TYPE_ELEMENTS = [
   'nve-media-fullscreen-button',
   'nve-media-mute-button',
   'nve-media-pause-button',
+  'nve-media-seek-button'
+] as const;
+
+/** Controls that invoke commands without button, popover, or interest behavior. */
+const COMMAND_CONTROLS = [
   'nve-media-playback-rate-select',
-  'nve-media-seek-button',
   'nve-media-time-range',
-  'nve-media-volume-range'
+  'nve-media-volume-range',
+  'nve-viewport-minimap',
+  'nve-viewport-zoom-range'
 ] as const;
 
 const rule = {
@@ -39,7 +45,7 @@ const rule = {
     type: 'problem' as const,
     docs: defineRuleDocumentation({
       name: 'no-invalid-invoker-triggers',
-      description: 'Disallow use of invoker trigger attributes on non-button nve-* elements.',
+      description: 'Disallow unsupported invoker trigger attributes on nve-* elements.',
       category: 'Best Practice',
       recommended: true,
       examples: {
@@ -51,7 +57,7 @@ const rule = {
     schema: [],
     messages: {
       ['no-invalid-invoker-triggers']:
-        'Unexpected use of "{{attribute}}" on <{{element}}>. Invoker attributes are only valid on button-type elements: {{validElements}}.'
+        'Unexpected use of "{{attribute}}" on <{{element}}>. Invoker attributes are only valid on supported controls: {{validElements}}.'
     }
   },
   create(context: Rule.RuleContext) {
@@ -68,6 +74,8 @@ const rule = {
         }
 
         for (const attribute of INVOKER_ATTRIBUTES) {
+          if (attribute === 'commandfor' && COMMAND_CONTROLS.includes(tagName as (typeof COMMAND_CONTROLS)[number]))
+            continue;
           const attr = findAttr(node, attribute);
           if (attr) {
             context.report({
@@ -76,7 +84,10 @@ const rule = {
               data: {
                 attribute,
                 element: tagName,
-                validElements: BUTTON_TYPE_ELEMENTS.join(', ')
+                validElements: (attribute === 'commandfor'
+                  ? [...BUTTON_TYPE_ELEMENTS, ...COMMAND_CONTROLS]
+                  : BUTTON_TYPE_ELEMENTS
+                ).join(', ')
               }
             });
           }
