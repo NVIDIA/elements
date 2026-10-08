@@ -10,7 +10,7 @@ import noInvalidInvokerTriggers from './no-invalid-invoker-triggers.js';
 const rule = noInvalidInvokerTriggers as unknown as JSRuleDefinition;
 
 const validElements =
-  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-mute-button, nve-media-pause-button, nve-media-playback-rate-select, nve-media-seek-button, nve-media-time-range, nve-media-volume-range';
+  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-loop-button, nve-media-mute-button, nve-media-pause-button, nve-media-playback-rate-select, nve-media-seek-button, nve-media-time-range, nve-media-volume-range';
 
 describe('noInvalidInvokerTriggers', () => {
   let tester: RuleTester;
@@ -69,6 +69,7 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-media-seek-button commandfor="my-player"></nve-media-seek-button>',
         '<nve-media-time-range commandfor="my-player"></nve-media-time-range>',
         '<nve-media-volume-range commandfor="my-player"></nve-media-volume-range>',
+        '<nve-media-loop-button commandfor="my-player"></nve-media-loop-button>',
         '<nve-media-fullscreen-button commandfor="my-player"></nve-media-fullscreen-button>'
       ],
       invalid: []
