@@ -68,8 +68,16 @@ class ViewportGestureNavigationControllerTestHost extends HTMLElement {
   }
 }
 
+class ViewportGestureFormAssociatedField extends HTMLElement {
+  static formAssociated = true;
+}
+
 const tag = 'viewport-gesture-navigation-controller-test-host';
+const formAssociatedFieldTag = 'viewport-gesture-form-associated-field';
 if (!customElements.get(tag)) customElements.define(tag, ViewportGestureNavigationControllerTestHost);
+if (!customElements.get(formAssociatedFieldTag)) {
+  customElements.define(formAssociatedFieldTag, ViewportGestureFormAssociatedField);
+}
 
 describe('ViewportGestureNavigationController', () => {
   let controller: ViewportGestureNavigationController;
@@ -344,6 +352,52 @@ describe('ViewportGestureNavigationController', () => {
     }
 
     expect(host.startPan).not.toHaveBeenCalled();
+  });
+
+  it('keeps a form-associated custom element out of pointer admission', () => {
+    host.behaviorPan = true;
+    host.sync();
+    const field = document.createElement(formAssociatedFieldTag);
+    host.append(field);
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+
+    field.dispatchEvent(pointerEvent('pointerdown', { pointerId: 1 }));
+    field.dispatchEvent(pointerEvent('pointermove', { clientX: 10, pointerId: 1 }));
+
+    expect(host.startPan).not.toHaveBeenCalled();
+  });
+
+  it('does not admit a right mouse button as a pan', () => {
+    host.behaviorPan = true;
+    host.sync();
+    vi.spyOn(host, 'setPointerCapture').mockImplementation(() => {});
+
+    host.dispatchEvent(pointerEvent('pointerdown', { button: 2, buttons: 2, pointerId: 1 }));
+    host.dispatchEvent(pointerEvent('pointermove', { button: -1, buttons: 2, clientX: 10, pointerId: 1 }));
+
+    expect(host.startPan).not.toHaveBeenCalled();
+    expect(host.matches(':state(panning)')).toBe(false);
+  });
+
+  it('leaves a focused modifier wheel unclaimed when zoom is disabled', () => {
+    host.behaviorPan = true;
+    host.sync();
+    host.focus();
+
+    expect(host.dispatchEvent(wheelEvent({ ctrlKey: true, deltaY: -20 }))).toBe(true);
+    expect(host.dispatchEvent(wheelEvent({ metaKey: true, deltaY: -20 }))).toBe(true);
+    expect(host.requestZoom).not.toHaveBeenCalled();
+    expect(host.requestPan).not.toHaveBeenCalled();
+  });
+
+  it('leaves a focused wheel unclaimed when pan is disabled', () => {
+    host.behaviorZoom = true;
+    host.sync();
+    host.focus();
+
+    expect(host.dispatchEvent(wheelEvent({ deltaY: 10 }))).toBe(true);
+    expect(host.requestPan).not.toHaveBeenCalled();
+    expect(host.requestZoom).not.toHaveBeenCalled();
   });
 
   it('sends focused wheel pan and zoom through the public request methods', () => {
