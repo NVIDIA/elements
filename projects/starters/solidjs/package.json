@@ -28,7 +28,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "solid-js": "1.9.15"
+    "solid-js": "1.9.16"
   },
   "wireit": {
     "ci": {
