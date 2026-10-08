@@ -42,6 +42,8 @@ export interface I18nStrings {
   maxFileSize: string;
   create: string;
   currentTime: string;
+  enableLoop: string;
+  disableLoop: string;
   enterFullscreen: string;
   exitFullscreen: string;
   muteMedia: string;
@@ -96,6 +98,8 @@ const i18nRegistry = {
   maxFileSize: 'max file size',
   create: 'create',
   currentTime: 'current time',
+  enableLoop: 'enable looping',
+  disableLoop: 'disable looping',
   enterFullscreen: 'enter full screen',
   exitFullscreen: 'exit full screen',
   muteMedia: 'mute media',

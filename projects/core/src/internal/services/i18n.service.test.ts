@@ -50,6 +50,8 @@ describe('I18nService', () => {
       maxFileSize: 'max file size',
       create: 'create',
       currentTime: 'current time',
+      enableLoop: 'enable looping',
+      disableLoop: 'disable looping',
       enterFullscreen: 'enter full screen',
       exitFullscreen: 'exit full screen',
       muteMedia: 'mute media',
