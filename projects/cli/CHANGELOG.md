@@ -1,3 +1,27 @@
+## [2.2.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.8...@nvidia-elements/cli-v2.2.9) (2026-10-08)
+
+### Features
+
+* **core:** add configurable viewport zoom stops ([ff741ea](https://github.com/NVIDIA/elements/commit/ff741eac903e2543c0fa3b9fefc8ef28a5e82d90))
+* **core:** add dot and cross patterns to viewport gridlines ([2693005](https://github.com/NVIDIA/elements/commit/26930057a5e4da4a0c2fb0d9fcfebf95c3dd9bc3))
+* **core:** tree node prefix and suffix ([bc0f2f1](https://github.com/NVIDIA/elements/commit/bc0f2f13bbc4119b1941a8102d09e3eba41f278b))
+
+### Bug Fixes
+
+* **ci:** preserve authored contents in example metadata ([0ea8618](https://github.com/NVIDIA/elements/commit/0ea86182b4c654c4d8301bad7fbc06f0d3b11187))
+* **cli:** update dependencies ([2a84274](https://github.com/NVIDIA/elements/commit/2a842746f3cd4055ab53414dd263511d74bad10f))
+* **core:** clean up combobox option observers across connections ([3af4742](https://github.com/NVIDIA/elements/commit/3af4742f53a3d6c09b59b0ac445da9bb268de73e))
+* **core:** debounce scroll tracking state updates ([ce5b688](https://github.com/NVIDIA/elements/commit/ce5b688310d13dcc51e26bd0434599fecc610e4b))
+* **core:** nested background styles ([66d44e7](https://github.com/NVIDIA/elements/commit/66d44e7549f25f096d71c5fc662d805b4267bc72))
+* **core:** preserve accessors during property observation ([37c137d](https://github.com/NVIDIA/elements/commit/37c137d305273cbf4382908cd00d0ca2dd273036))
+* **core:** resolve page panel stacking and visibility ([3bd2fc9](https://github.com/NVIDIA/elements/commit/3bd2fc9d2e3fa9ba740a486cd7a826bb17ffcaa2))
+* **docs:** correct example api mapping and summary fallback ([f0dd837](https://github.com/NVIDIA/elements/commit/f0dd837756f44f05f1c115384d18e02a40cff32d))
+* **docs:** preserve example content through html processing ([7055d3c](https://github.com/NVIDIA/elements/commit/7055d3ce12a10b0e494da9c73c8f34fce62b9884))
+* **docs:** preserve example source during development reloads ([162082b](https://github.com/NVIDIA/elements/commit/162082b8bead05283646ae68ad3ecd391be8c962))
+* **docs:** prevent runtime errors when loading examples pages in dev ([1d57c69](https://github.com/NVIDIA/elements/commit/1d57c690819c009a1abac037b00f631d18db076a))
+* **forms:** form state restore callback types ([8a060db](https://github.com/NVIDIA/elements/commit/8a060db7366b54ec22e8163a36ee18613a0c479c))
+* **pi:** update to pi.dev 1.0.0 ([3d44c15](https://github.com/NVIDIA/elements/commit/3d44c159c4c45b38789aa96615faaf0f97e798f6))
+
 ## [2.2.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.7...@nvidia-elements/cli-v2.2.8) (2026-09-30)
 
 ### Features
