@@ -237,6 +237,7 @@ const previewOverrides = {
   'nve-monaco-input': renderMonacoMock('nve-monaco-input'),
   'nve-monaco-problems': renderMonacoMock('nve-monaco-problems'),
   'nve-media-fullscreen-button': /* html */ `<nve-media-fullscreen-button></nve-media-fullscreen-button>`,
+  'nve-media-loop-button': /* html */ `<nve-media-loop-button></nve-media-loop-button>`,
   'nve-media-mute-button': /* html */ `<nve-media-mute-button></nve-media-mute-button>`,
   'nve-media-pause-button': /* html */ `<nve-media-pause-button></nve-media-pause-button>`,
   'nve-media-playback-rate-select': /* html */ `<nve-media-playback-rate-select></nve-media-playback-rate-select>`,

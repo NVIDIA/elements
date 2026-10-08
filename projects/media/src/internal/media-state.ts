@@ -14,6 +14,7 @@ export interface MediaState {
   readonly duration: number;
   readonly ended: boolean;
   readonly fullscreen: boolean;
+  readonly loop: boolean;
   readonly muted: boolean;
   readonly paused: boolean;
   readonly playbackRate: number;
@@ -25,7 +26,7 @@ export type MediaStateChangeEvent = CustomEvent<MediaState>;
 
 export const mediaStateChange = 'media-state-change';
 
-const booleanStateKeys = ['ended', 'fullscreen', 'muted', 'paused', 'seeking'] as const;
+const booleanStateKeys = ['ended', 'fullscreen', 'loop', 'muted', 'paused', 'seeking'] as const;
 
 const numberStateKeys = ['currentTime', 'duration', 'playbackRate', 'volume'] as const;
 
@@ -37,6 +38,7 @@ const defaultMediaState: MediaState = {
   duration: 0,
   ended: false,
   fullscreen: false,
+  loop: false,
   muted: false,
   paused: true,
   playbackRate: 1,
@@ -61,15 +63,8 @@ export function isMediaState(value: unknown): value is MediaState {
 export function mediaStatesEqual(a: MediaState, b: MediaState) {
   return (
     mediaTimeSpansEqual(a.buffered, b.buffered) &&
-    a.currentTime === b.currentTime &&
-    a.duration === b.duration &&
-    a.ended === b.ended &&
-    a.fullscreen === b.fullscreen &&
-    a.muted === b.muted &&
-    a.paused === b.paused &&
-    a.playbackRate === b.playbackRate &&
-    a.seeking === b.seeking &&
-    a.volume === b.volume
+    booleanStateKeys.every(key => a[key] === b[key]) &&
+    numberStateKeys.every(key => a[key] === b[key])
   );
 }
 

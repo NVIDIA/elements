@@ -77,6 +77,18 @@
       "types": "./dist/fullscreen-button/index.d.ts",
       "default": "./dist/fullscreen-button/index.js"
     },
+    "./loop-button": {
+      "types": "./dist/loop-button/index.d.ts",
+      "default": "./dist/loop-button/index.js"
+    },
+    "./loop-button/define.js": {
+      "types": "./dist/loop-button/define.d.ts",
+      "default": "./dist/loop-button/define.js"
+    },
+    "./loop-button/index.js": {
+      "types": "./dist/loop-button/index.d.ts",
+      "default": "./dist/loop-button/index.js"
+    },
     "./mute-button": {
       "types": "./dist/mute-button/index.d.ts",
       "default": "./dist/mute-button/index.js"

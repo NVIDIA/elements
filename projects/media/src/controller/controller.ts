@@ -41,6 +41,9 @@ const mediaEventTypes = [
  * @command --mute - Mute the media element.
  * @command --unmute - Unmute the media element.
  * @command --toggle-mute - Toggle media muted state.
+ * @command --enable-loop - Enable continuous media looping.
+ * @command --disable-loop - Disable media looping.
+ * @command --toggle-loop - Toggle media looping.
  * @command --seek - Move playback to the source valueAsNumber.
  * @command --seek-start - Move playback to zero seconds.
  * @command --seek-end - Move playback to the finite duration.
@@ -68,6 +71,8 @@ export class MediaController extends LitElement {
 
   #media: HTMLMediaElement | null = null;
 
+  #loopObserver: MutationObserver | null = null;
+
   #currentTime = 0;
 
   #fullscreen = false;
@@ -81,6 +86,9 @@ export class MediaController extends LitElement {
     [mediaCommands.mute, () => this.#setMuted(true)],
     [mediaCommands.unmute, () => this.#setMuted(false)],
     [mediaCommands.toggleMuted, () => this.#toggleMuted()],
+    [mediaCommands.enableLoop, () => this.#setLoop(true)],
+    [mediaCommands.disableLoop, () => this.#setLoop(false)],
+    [mediaCommands.toggleLoop, () => this.#toggleLoop()],
     [mediaCommands.seek, source => this.#seekToSourceValue(source)],
     [mediaCommands.seekToStart, () => this.#setCurrentTime(0)],
     [mediaCommands.seekToEnd, () => this.#seekToEnd()],
@@ -114,6 +122,9 @@ export class MediaController extends LitElement {
     super.connectedCallback();
     this.addEventListener('command', this.#onCommand as EventListener);
     globalThis.document?.addEventListener('fullscreenchange', this.#syncFullscreen);
+    if (this.hasUpdated) {
+      this.#syncMediaSlot();
+    }
   }
 
   disconnectedCallback() {
@@ -138,6 +149,10 @@ export class MediaController extends LitElement {
   };
 
   #syncMediaSlot = () => {
+    if (!this.isConnected) {
+      return;
+    }
+
     const slot = this.renderRoot.querySelector<HTMLSlotElement>('slot');
     const media = (slot?.assignedElements({ flatten: true }) ?? []).filter(isSupportedMediaElement);
     if (media.length > 1) {
@@ -153,8 +168,13 @@ export class MediaController extends LitElement {
     }
 
     this.#media && mediaEventTypes.forEach(type => this.#media?.removeEventListener(type, this.#syncMediaState));
+    this.#loopObserver?.disconnect();
     this.#media = media;
     this.#media && mediaEventTypes.forEach(type => this.#media?.addEventListener(type, this.#syncMediaState));
+    if (media) {
+      this.#loopObserver ??= new MutationObserver(this.#syncMediaState);
+      this.#loopObserver.observe(media, { attributes: true, attributeFilter: ['loop'] });
+    }
     this.#syncMediaState();
   }
 
@@ -178,6 +198,7 @@ export class MediaController extends LitElement {
     setBooleanAttribute(this, 'ended', state.ended);
     setBooleanAttribute(this, 'seeking', state.seeking);
     setBooleanAttribute(this, 'fullscreen', state.fullscreen);
+    setBooleanAttribute(this, 'loop', state.loop);
     setNumberAttribute(this, 'current-time', state.currentTime);
     setNumberAttribute(this, 'duration', state.duration);
     setNumberAttribute(this, 'volume', state.volume);
@@ -215,6 +236,22 @@ export class MediaController extends LitElement {
     const media = this.#getMedia();
     if (media) {
       media.muted = !media.muted;
+      this.#syncMediaState();
+    }
+  }
+
+  #setLoop(loop: boolean) {
+    const media = this.#getMedia();
+    if (media) {
+      media.loop = loop;
+      this.#syncMediaState();
+    }
+  }
+
+  #toggleLoop() {
+    const media = this.#getMedia();
+    if (media) {
+      media.loop = !media.loop;
       this.#syncMediaState();
     }
   }
@@ -318,6 +355,7 @@ function getMediaState(media: HTMLMediaElement | null) {
     return {
       paused: true,
       muted: false,
+      loop: false,
       ended: false,
       seeking: false,
       currentTime: 0,
@@ -331,6 +369,7 @@ function getMediaState(media: HTMLMediaElement | null) {
     buffered: getMediaTimeSpans(media.buffered),
     paused: media.paused,
     muted: media.muted,
+    loop: media.loop,
     ended: media.ended,
     seeking: media.seeking,
     currentTime: getFiniteNumber(media.currentTime, 0),
