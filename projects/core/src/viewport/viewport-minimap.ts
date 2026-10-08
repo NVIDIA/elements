@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement, nothing, svg } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import {
   GestureController,
@@ -22,15 +23,9 @@ import {
   unprojectViewportMinimapPoint,
   type ViewportMinimapProjection
 } from './viewport-minimap.utils.js';
-import { anchoredTransform } from './viewport-projection.utils.js';
-import { Viewport } from './viewport.js';
-import type {
-  ViewportPanEndRequest,
-  ViewportPanUpdateProposal,
-  ViewportPanSession,
-  ViewportRect,
-  ViewportTransform
-} from './viewport.types.js';
+import type { Viewport } from './viewport.js';
+import type { ViewportPoint, ViewportRect, ViewportTransform } from './viewport.types.js';
+import { ViewportControlController } from './viewport-control.controller.js';
 
 const DRAG_THRESHOLD = 3;
 
@@ -39,9 +34,6 @@ interface MinimapPointerSession {
   readonly dragProjection: ViewportMinimapProjection;
   readonly indicator: boolean;
   active: boolean;
-  activating: boolean;
-  navigation?: ViewportPanSession;
-  pendingEnd?: ViewportPanEndRequest;
   exceededThreshold: boolean;
   transformStart: ViewportTransform;
   transformStartDisplacementX: number;
@@ -60,13 +52,14 @@ interface AutomaticPreviewItem extends ViewportRect {
 
 /**
  * @element nve-viewport-minimap
- * @description Provides a simplified overview and direct navigation for its parent viewport.
+ * @description Provides a simplified overview and direct navigation for a viewport command target.
  * @documentation https://nvidia.github.io/elements/docs/elements/viewport/
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/core/viewport
  * @cssprop --background - Color of the surface behind preview geometry.
  * @cssprop --color - Color of automatically drawn root rectangles.
  * @cssprop --indicator-color - Color of the current visible-region indicator.
+ * @cssprop --border - Boundary of the minimap.
  * @cssprop --border-radius - Corner radius of the minimap.
  * @cssprop --recenter-cursor - Cursor for clicking the background to center the viewport.
  * @cssprop --pan-cursor - Cursor over a draggable visible region.
@@ -89,6 +82,28 @@ export class ViewportMinimap extends LitElement {
 
   /** @private */
   @hostAttr({ attribute: 'aria-hidden' }) protected accessibilityHidden = 'true';
+
+  /** ID of the viewport command target. Defaults to a direct parent viewport. */
+  @property({ type: String, attribute: 'commandfor', reflect: true }) commandfor: string | null = null;
+
+  /** Viewport command target, taking precedence over commandfor. */
+  @property({ attribute: false }) commandForElement: HTMLElement | null = null;
+
+  #commandPoint: ViewportPoint = { x: 0, y: 0 };
+  #commandScale = 1;
+
+  /** Content-space horizontal coordinate submitted by a pan command. */
+  get x(): number {
+    return this.#commandPoint.x;
+  }
+  /** Content-space vertical coordinate submitted by a pan command. */
+  get y(): number {
+    return this.#commandPoint.y;
+  }
+  /** Scale submitted by a zoom command. */
+  get scale(): number {
+    return this.#commandScale;
+  }
 
   readonly #gestureController: GestureController;
   readonly #rootKeys = new WeakMap<Element, string>();
@@ -121,18 +136,27 @@ export class ViewportMinimap extends LitElement {
       suppressNativeDrag: true,
       touchAction: () => (this.#pointerSession || this.#viewport?.pannable ? 'none' : undefined)
     });
+    new ViewportControlController(this, target => this.#handleViewportChange(target), { parentFallback: true });
   }
 
   connectedCallback(): void {
-    super.connectedCallback();
     attachInternals(this);
-    const viewport = this.parentElement;
-    if (!(viewport instanceof Viewport)) return;
-    this.#viewport = viewport;
-    this.#viewport.addEventListener('viewportchange', this.#handleTransformCommitted);
-    this.#viewport.addEventListener('capabilitieschange', this.#handleCapabilitiesChange);
-    this.#connectViewport(viewport);
-    this.requestUpdate();
+    super.connectedCallback();
+  }
+
+  #handleViewportChange(viewport: Viewport | null): void {
+    if (viewport !== this.#viewport) {
+      this.#interruptPointerSession();
+      this.#disconnectViewport();
+      this.#disconnectObservers();
+      this.#resetConnectionState();
+      this.#viewport = viewport ?? undefined;
+      if (viewport) this.#connectViewport(viewport);
+      this.requestUpdate();
+    } else {
+      this.#handleTransformCommitted();
+    }
+    this.#handleCapabilitiesChange();
   }
 
   #connectViewport(viewport: Viewport): void {
@@ -151,8 +175,6 @@ export class ViewportMinimap extends LitElement {
 
   disconnectedCallback(): void {
     this.#interruptPointerSession();
-    this.#viewport?.removeEventListener('viewportchange', this.#handleTransformCommitted);
-    this.#viewport?.removeEventListener('capabilitieschange', this.#handleCapabilitiesChange);
     this.#disconnectViewport();
     this.#disconnectObservers();
     this.#resetConnectionState();
@@ -411,27 +433,16 @@ export class ViewportMinimap extends LitElement {
       input.deltaY === 0 ||
       !viewport ||
       !viewport.zoomable ||
-      !isImmediateRootActiveElement(viewport) ||
+      (viewport.contains(this) && !isImmediateRootActiveElement(viewport)) ||
       !input.claim()
     ) {
       return;
     }
-    const start = viewport.getTransform();
-    const visible = viewport.getVisibleRect();
-    const anchor = { x: visible.x + visible.width / 2, y: visible.y + visible.height / 2 };
-    const factor = this.#gestureController.getWheelZoomFactor(input);
-    const viewportCenter = { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2 };
-    viewport.requestZoom({
-      anchor,
-      event: input.event,
-      factor,
-      next: anchoredTransform(
-        anchor,
-        viewportCenter,
-        Math.min(viewport.maxScale, Math.max(viewport.minScale, start.scale * factor))
-      ),
-      source: 'minimap'
-    });
+    this.#commandScale = Math.min(
+      viewport.maxScale,
+      Math.max(viewport.minScale, viewport.scale * this.#gestureController.getWheelZoomFactor(input))
+    );
+    viewport.dispatchEvent(new CommandEvent('command', { command: '--zoom-to', source: this }));
   }
 
   #handlePointerDown(input: Extract<GestureInput, { kind: 'pointerdown' }>): void {
@@ -449,7 +460,6 @@ export class ViewportMinimap extends LitElement {
       .some(target => target instanceof Element && target.hasAttribute('data-visible-region'));
     this.#pointerSession = {
       active: false,
-      activating: false,
       exceededThreshold: false,
       indicator,
       lastTotalDisplacementX: 0,
@@ -473,41 +483,33 @@ export class ViewportMinimap extends LitElement {
     session.lastTotalDisplacementX = gesture.totalDisplacementX;
     session.lastTotalDisplacementY = gesture.totalDisplacementY;
     const distanceSquared = gesture.totalDisplacementX ** 2 + gesture.totalDisplacementY ** 2;
-    if (distanceSquared < DRAG_THRESHOLD ** 2) return;
+    if (!session.active && distanceSquared < DRAG_THRESHOLD ** 2) return;
     session.exceededThreshold = true;
     if (!session.indicator) return;
-    const proposal = this.#dragProposal(gesture, session);
-    if (!session.active) this.#activateDrag(session, proposal);
-    else session.navigation?.update(proposal);
-  }
-
-  #activateDrag(session: MinimapPointerSession, proposal: ViewportPanUpdateProposal): void {
-    session.activating = true;
-    const navigation = this.#viewport?.startPan({ ...proposal, source: 'minimap' });
-    session.activating = false;
-    if (!navigation) return;
-    if (this.#pointerSession !== session) {
-      if (session.pendingEnd) navigation.end(session.pendingEnd);
-      return;
-    }
-    session.navigation = navigation;
+    if (!session.active && !this.#viewport?.pannable) return;
     session.active = true;
     this._internals.states.add('panning');
-  }
-
-  #dragProposal(gesture: PointerMovementGesture, session: MinimapPointerSession): ViewportPanUpdateProposal {
     const displacementX = gesture.totalDisplacementX - session.transformStartDisplacementX;
     const displacementY = gesture.totalDisplacementY - session.transformStartDisplacementY;
-    return {
-      clientX: gesture.clientX,
-      clientY: gesture.clientY,
-      event: gesture.event,
-      next: {
-        scale: session.transformStart.scale,
-        x: session.transformStart.x + displacementX / session.dragProjection.scale,
-        y: session.transformStart.y + displacementY / session.dragProjection.scale
-      }
-    };
+    this.#sendPan({
+      x: session.transformStart.x + displacementX / session.dragProjection.scale,
+      y: session.transformStart.y + displacementY / session.dragProjection.scale
+    });
+  }
+
+  #sendPan(point: ViewportPoint): void {
+    const viewport = this.#viewport;
+    const session = this.#pointerSession;
+    if (!viewport) return;
+    this.#commandPoint = point;
+    viewport.dispatchEvent(new CommandEvent('command', { command: '--pan-to', source: this }));
+    const actual = viewport.getTransform();
+    if (session?.active) {
+      session.transformStart = actual;
+      session.transformStartDisplacementX = session.lastTotalDisplacementX;
+      session.transformStartDisplacementY = session.lastTotalDisplacementY;
+    }
+    this.requestUpdate();
   }
 
   #handlePointerEnd(input: PointerEndGesture): void {
@@ -515,11 +517,7 @@ export class ViewportMinimap extends LitElement {
     if (!session || session.pointerId !== input.event.pointerId) return;
     session.lastTotalDisplacementX = input.totalDisplacementX;
     session.lastTotalDisplacementY = input.totalDisplacementY;
-    if (session.active) {
-      session.navigation?.end({ event: input.event, interrupted: input.interrupted, reason: input.reason });
-    } else if (session.activating) {
-      session.pendingEnd = { event: input.event, interrupted: input.interrupted, reason: input.reason };
-    } else if (input.reason === 'up' && !session.exceededThreshold) {
+    if (input.reason === 'up' && !session.exceededThreshold) {
       this.#requestClickPan(input.event, session);
     }
     this.#endPointerSession(session);
@@ -530,22 +528,11 @@ export class ViewportMinimap extends LitElement {
     if (!viewport) return;
     const frame = this.getBoundingClientRect();
     const point = unprojectViewportMinimapPoint(
-      { x: event.clientX - frame.left, y: event.clientY - frame.top },
+      { x: event.clientX - frame.left - this.clientLeft, y: event.clientY - frame.top - this.clientTop },
       session.dragProjection
     );
-    const current = viewport.getTransform();
     const visible = viewport.getVisibleRect();
-    viewport.requestPan({
-      clientX: event.clientX,
-      clientY: event.clientY,
-      event,
-      next: {
-        scale: current.scale,
-        x: point.x - visible.width / 2,
-        y: point.y - visible.height / 2
-      },
-      source: 'minimap'
-    });
+    this.#sendPan({ x: point.x - visible.width / 2, y: point.y - visible.height / 2 });
   }
 
   #endPointerSession(session: MinimapPointerSession): void {
@@ -559,8 +546,5 @@ export class ViewportMinimap extends LitElement {
     const session = this.#pointerSession;
     if (!session) return;
     this.#endPointerSession(session);
-    const end: ViewportPanEndRequest = { event: new Event('disconnect'), interrupted: true, reason: 'cancel' };
-    if (session.active) session.navigation?.end(end);
-    else if (session.activating) session.pendingEnd = end;
   }
 }
