@@ -1,3 +1,14 @@
+## [2.14.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.13.0...@nvidia-elements/core-v2.14.0) (2026-10-08)
+
+### Features
+
+* **core:** tree node prefix and suffix ([bc0f2f1](https://github.com/NVIDIA/elements/commit/bc0f2f13bbc4119b1941a8102d09e3eba41f278b))
+
+### Bug Fixes
+
+* **cli:** update dependencies ([2a84274](https://github.com/NVIDIA/elements/commit/2a842746f3cd4055ab53414dd263511d74bad10f))
+* **core:** nested background styles ([66d44e7](https://github.com/NVIDIA/elements/commit/66d44e7549f25f096d71c5fc662d805b4267bc72))
+
 ## [2.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.12.2...@nvidia-elements/core-v2.13.0) (2026-10-08)
 
 ### Features
