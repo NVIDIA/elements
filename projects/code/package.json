@@ -4,7 +4,7 @@
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
+  "description": "NVIDIA Elements code authoring related components such as syntax-highlighted code blocks.",
   "keywords": [
     "nvidia",
     "web-components",
@@ -186,6 +186,7 @@
     "lint": "wireit",
     "test": "wireit",
     "test:axe": "wireit",
+    "test:ssr": "wireit",
     "test:coverage": "wireit",
     "test:types": "wireit",
     "test:watch": "wireit",
@@ -238,6 +239,7 @@
         "publint",
         "test:axe",
         "test:coverage",
+        "test:ssr",
         "test:types"
       ]
     },
@@ -396,6 +398,28 @@
       ],
       "dependencies": [
         "../internals/testing:build",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:ssr": {
+      "command": "vitest run --config=vitest.ssr.ts",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vitest.ssr.ts"
+      ],
+      "output": [
+        "coverage/ssr/**"
+      ],
+      "dependencies": [
         "../internals/vite:ci",
         {
           "script": "build",
