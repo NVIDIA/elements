@@ -1,3 +1,13 @@
+## [2.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.12.2...@nvidia-elements/core-v2.13.0) (2026-10-08)
+
+### Features
+
+* **core:** add configurable viewport zoom stops ([ff741ea](https://github.com/NVIDIA/elements/commit/ff741eac903e2543c0fa3b9fefc8ef28a5e82d90))
+
+### Bug Fixes
+
+* **forms:** form state restore callback types ([8a060db](https://github.com/NVIDIA/elements/commit/8a060db7366b54ec22e8163a36ee18613a0c479c))
+
 ## [2.12.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.12.1...@nvidia-elements/core-v2.12.2) (2026-10-07)
 
 ### Bug Fixes
