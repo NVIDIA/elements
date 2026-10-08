@@ -26,6 +26,7 @@ const BUTTON_TYPE_ELEMENTS = [
   'nve-steps-item',
   'nve-copy-button',
   'nve-media-fullscreen-button',
+  'nve-media-loop-button',
   'nve-media-mute-button',
   'nve-media-pause-button',
   'nve-media-playback-rate-select',
