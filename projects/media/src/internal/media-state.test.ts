@@ -5,6 +5,11 @@ import { describe, expect, it } from 'vitest';
 import { createMediaState, getTargetMediaState, isMediaState, mediaStatesEqual } from './media-state.js';
 
 describe(createMediaState.name, () => {
+  it('should default loop state to false', () => {
+    expect(createMediaState().loop).toBe(false);
+    expect(createMediaState({ loop: true }).loop).toBe(true);
+  });
+
   it('should copy and freeze buffered time spans', () => {
     const span = { start: 0, end: 10 };
     const buffered = [span];
@@ -19,6 +24,12 @@ describe(createMediaState.name, () => {
 });
 
 describe(isMediaState.name, () => {
+  it('should require a boolean loop state', () => {
+    expect(isMediaState({ ...createMediaState(), loop: undefined })).toBe(false);
+    expect(isMediaState({ ...createMediaState(), loop: 'true' })).toBe(false);
+    expect(isMediaState(createMediaState({ loop: true }))).toBe(true);
+  });
+
   it('should validate ordered and disjoint buffered time spans', () => {
     expect(
       isMediaState(
@@ -60,6 +71,11 @@ describe(getTargetMediaState.name, () => {
 });
 
 describe(mediaStatesEqual.name, () => {
+  it('should detect loop-only changes', () => {
+    expect(mediaStatesEqual(createMediaState(), createMediaState({ loop: true }))).toBe(false);
+    expect(mediaStatesEqual(createMediaState({ loop: true }), createMediaState({ loop: true }))).toBe(true);
+  });
+
   it('should compare buffered time spans by value', () => {
     const state = createMediaState({
       buffered: [

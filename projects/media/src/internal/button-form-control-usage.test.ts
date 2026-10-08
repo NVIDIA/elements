@@ -6,10 +6,12 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import type { ButtonFormControlMixinInstance } from '@nvidia-elements/forms/mixins';
 import { MediaFullscreenButton } from '../fullscreen-button/fullscreen-button.js';
+import { MediaLoopButton } from '../loop-button/loop-button.js';
 import { MediaMuteButton } from '../mute-button/mute-button.js';
 import { MediaPauseButton } from '../pause-button/pause-button.js';
 import { MediaSeekButton } from '../seek-button/seek-button.js';
 import '../fullscreen-button/define.js';
+import '../loop-button/define.js';
 import '../mute-button/define.js';
 import '../pause-button/define.js';
 import '../seek-button/define.js';
@@ -29,6 +31,11 @@ const usages: ButtonUsage[] = [
     tag: MediaFullscreenButton.metadata.tag,
     template: html`<nve-media-fullscreen-button commandfor="target"></nve-media-fullscreen-button>`,
     submitTemplate: html`<nve-media-fullscreen-button type="submit" name="button-name" value="button-value" commandfor="target"></nve-media-fullscreen-button>`
+  },
+  {
+    tag: MediaLoopButton.metadata.tag,
+    template: html`<nve-media-loop-button commandfor="target"></nve-media-loop-button>`,
+    submitTemplate: html`<nve-media-loop-button type="submit" name="button-name" value="button-value" commandfor="target"></nve-media-loop-button>`
   },
   {
     tag: MediaMuteButton.metadata.tag,
