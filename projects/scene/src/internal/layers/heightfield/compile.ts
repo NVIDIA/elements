@@ -12,7 +12,8 @@ import {
 } from './topology.js';
 import {
   beginPreparation,
-  continuePreparation,
+  resumePreparation,
+  runPreparationSync,
   PREPARATION_CHUNK_SIZE,
   type PreparationContext
 } from '../../rendering/preparation.js';
@@ -158,51 +159,53 @@ function validateAllocationCounts(grid: HeightfieldGrid): void {
 }
 
 function createPositions(grid: HeightfieldGrid): Float32Array {
-  const positions = new Float32Array(grid.rows * grid.columns * 3);
-  const [originX, originY] = grid.origin ?? [0, 0];
-  for (let row = 0; row < grid.rows; row += 1) {
-    for (let column = 0; column < grid.columns; column += 1) {
-      const sample = row * grid.columns + column;
-      const offset = sample * 3;
-      positions[offset] = originX + column * grid.spacing;
-      positions[offset + 1] = originY + row * grid.spacing;
-      positions[offset + 2] = grid.heights[sample]!;
-    }
+  return runPreparationSync(buildPositions(grid, Number.MAX_SAFE_INTEGER));
+}
+
+function preparePositions(grid: HeightfieldGrid, context: PreparationContext): Promise<Float32Array | undefined> {
+  return resumePreparation(buildPositions(grid), context);
+}
+
+function* buildPositions(
+  grid: HeightfieldGrid,
+  chunkSize = PREPARATION_CHUNK_SIZE
+): Generator<void, Float32Array, void> {
+  const count = grid.rows * grid.columns;
+  const positions = new Float32Array(count * 3);
+  for (let start = 0; start < count; start += chunkSize) {
+    writePositions(grid, positions, start, Math.min(count, start + chunkSize));
+    if (start + chunkSize <= count) yield;
   }
   return positions;
 }
 
-async function preparePositions(grid: HeightfieldGrid, context: PreparationContext): Promise<Float32Array | undefined> {
-  const count = grid.rows * grid.columns;
-  const positions = new Float32Array(count * 3);
+// eslint-disable-next-line max-params -- @hotpath Chunk boundaries stay outside the per-sample loop.
+function writePositions(grid: HeightfieldGrid, positions: Float32Array, start: number, end: number): void {
   const [originX, originY] = grid.origin ?? [0, 0];
-  for (let sample = 0; sample < count; sample += 1) {
-    const offset = sample * 3;
-    positions[offset] = originX + (sample % grid.columns) * grid.spacing;
-    positions[offset + 1] = originY + Math.floor(sample / grid.columns) * grid.spacing;
-    positions[offset + 2] = grid.heights[sample]!;
-    if ((sample + 1) % PREPARATION_CHUNK_SIZE === 0 && !(await continuePreparation(context))) return undefined;
+  let column = start % grid.columns;
+  let sample = start;
+  for (let row = Math.floor(start / grid.columns); row < Math.ceil(end / grid.columns); row += 1) {
+    const lastColumn = Math.min(grid.columns, end - row * grid.columns);
+    for (; column < lastColumn; column += 1) {
+      const offset = sample * 3;
+      positions[offset] = originX + column * grid.spacing;
+      positions[offset + 1] = originY + row * grid.spacing;
+      positions[offset + 2] = grid.heights[sample]!;
+      sample += 1;
+    }
+    column = 0;
   }
-  return context.isCurrent() ? positions : undefined;
 }
 
 function createNormals(grid: HeightfieldGrid): Float32Array {
-  const normals = new Float32Array(grid.rows * grid.columns * 3);
-  const samples: UniformScalarGrid = {
-    values: grid.heights,
-    columns: grid.columns,
-    rows: grid.rows,
-    spacing: grid.spacing
-  };
-  for (let row = 0; row < grid.rows; row += 1) {
-    for (let column = 0; column < grid.columns; column += 1) {
-      writeGridNormal(samples, normals, row, column);
-    }
-  }
-  return normals;
+  return runPreparationSync(buildNormals(grid, Number.MAX_SAFE_INTEGER));
 }
 
-async function prepareNormals(grid: HeightfieldGrid, context: PreparationContext): Promise<Float32Array | undefined> {
+function prepareNormals(grid: HeightfieldGrid, context: PreparationContext): Promise<Float32Array | undefined> {
+  return resumePreparation(buildNormals(grid), context);
+}
+
+function* buildNormals(grid: HeightfieldGrid, chunkSize = PREPARATION_CHUNK_SIZE): Generator<void, Float32Array, void> {
   const count = grid.rows * grid.columns;
   const normals = new Float32Array(count * 3);
   const samples: UniformScalarGrid = {
@@ -211,29 +214,41 @@ async function prepareNormals(grid: HeightfieldGrid, context: PreparationContext
     rows: grid.rows,
     spacing: grid.spacing
   };
-  for (let sample = 0; sample < count; sample += 1) {
-    writeGridNormal(samples, normals, Math.floor(sample / grid.columns), sample % grid.columns);
-    if ((sample + 1) % PREPARATION_CHUNK_SIZE === 0 && !(await continuePreparation(context))) return undefined;
+  for (let start = 0; start < count; start += chunkSize) {
+    writeNormals(samples, normals, start, Math.min(count, start + chunkSize));
+    if (start + chunkSize <= count) yield;
   }
-  return context.isCurrent() ? normals : undefined;
+  return normals;
+}
+
+// eslint-disable-next-line max-params -- @hotpath Chunk boundaries stay outside the per-sample loop.
+function writeNormals(samples: UniformScalarGrid, normals: Float32Array, start: number, end: number): void {
+  let column = start % samples.columns;
+  for (let row = Math.floor(start / samples.columns); row < Math.ceil(end / samples.columns); row += 1) {
+    const lastColumn = Math.min(samples.columns, end - row * samples.columns);
+    for (; column < lastColumn; column += 1) writeGridNormal(samples, normals, row, column);
+    column = 0;
+  }
 }
 
 function createColors(colors: Uint8Array | undefined): Float32Array | null {
   if (colors === undefined) return null;
-  const normalized = new Float32Array(colors.length);
-  for (let index = 0; index < colors.length; index += 1) normalized[index] = colors[index]! / 255;
-  return normalized;
+  return runPreparationSync(buildColors(colors, Number.MAX_SAFE_INTEGER));
 }
 
-async function prepareColors(
+function prepareColors(
   colors: Uint8Array | undefined,
   context: PreparationContext
 ): Promise<Float32Array | null | undefined> {
-  if (colors === undefined) return null;
+  return colors === undefined ? Promise.resolve(null) : resumePreparation(buildColors(colors), context);
+}
+
+function* buildColors(colors: Uint8Array, chunkSize = PREPARATION_CHUNK_SIZE): Generator<void, Float32Array, void> {
   const normalized = new Float32Array(colors.length);
-  for (let index = 0; index < colors.length; index += 1) {
-    normalized[index] = colors[index]! / 255;
-    if ((index + 1) % PREPARATION_CHUNK_SIZE === 0 && !(await continuePreparation(context))) return undefined;
+  for (let start = 0; start < colors.length; start += chunkSize) {
+    const end = Math.min(colors.length, start + chunkSize);
+    for (let index = start; index < end; index += 1) normalized[index] = colors[index]! / 255;
+    if (start + chunkSize <= colors.length) yield;
   }
-  return context.isCurrent() ? normalized : undefined;
+  return normalized;
 }

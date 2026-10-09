@@ -5,7 +5,7 @@ import { SRGB_TO_LINEAR_WGSL } from '../../color/transfer.js';
 import { ROTATE_BY_QUATERNION_WGSL } from '../../math/quaternion.js';
 import { MARKER_WGSL } from '../../records/layouts/wgsl.js';
 import { DEFAULT_LIGHTING_WGSL } from '../../rendering/lighting.js';
-import { createPrimitiveGeometry, type PrimitiveGeometry, type PrimitiveKind } from '../../geometry/primitives.js';
+import { createPrimitiveGeometry, type PrimitiveGeometry, type PrimitiveKind } from '../../math/primitive-geometry.js';
 import type { SceneGPURenderPipelineDevice, SceneGPURenderPipeline, SceneGPUShaderModule } from '../../gpu/platform.js';
 import { PICK_OUTPUT_WGSL } from '../../rendering/picking/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../../rendering/transparency.js';

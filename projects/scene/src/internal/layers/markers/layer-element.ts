@@ -14,7 +14,7 @@ import {
   type ExternalMarkerSource,
   type ScenePublishOptions
 } from '../../records/packed-record-source.js';
-import type { PrimitiveKind } from '../../geometry/primitives.js';
+import type { PrimitiveKind } from '../../math/primitive-geometry.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import {
   connectMarkerLayer,

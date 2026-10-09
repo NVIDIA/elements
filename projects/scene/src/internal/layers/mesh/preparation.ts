@@ -6,7 +6,7 @@ import { MARKER } from '../../records/layouts/built-ins.js';
 import { writeMarker } from '../../records/layouts/codecs.js';
 import { PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
 import type { MeshRenderItem } from '../../rendering/render-items.js';
-import { RangeSet } from '../../structures/range-set.js';
+import { mergeVersionedRangeSnapshots, type VersionedRangeSnapshot } from '../../structures/versioned-range-journal.js';
 import type { HeightfieldMeshData, MeshGeometryAttribute, MeshRenderData } from './render-data.js';
 import type { ProcessedMeshGeometry } from './processing.js';
 import type { MeshGeometryUpload } from './resources.js';
@@ -104,25 +104,29 @@ export function heightfieldGrid(source: HeightfieldMeshData): HeightfieldGrid {
 
 export function retainGeometryUploadRanges(item: MeshRenderItem, previous?: MeshRenderItem): MeshRenderItem {
   if (!previous || previous.data.topologyVersion !== item.data.topologyVersion) return item;
-  const ranges = GEOMETRY_ATTRIBUTES.flatMap(attribute => {
-    const pending = new RangeSet();
-    pending.addAll(previous.data.geometryUploadRanges.filter(range => range.attribute === attribute));
-    pending.addAll(item.data.geometryUploadRanges.filter(range => range.attribute === attribute));
-    return pending.drain().map(range => ({ ...range, attribute }));
-  });
-  const geometryUploadBaseVersions = { ...item.data.geometryUploadBaseVersions };
+  const ranges: MeshRenderData['geometryUploadRanges'][number][] = [];
+  const geometryUploadBaseVersions: Partial<Record<MeshGeometryAttribute, number>> = {};
   for (const attribute of GEOMETRY_ATTRIBUTES) {
-    const base = previous.data.geometryUploadBaseVersions?.[attribute];
-    const currentBase = geometryUploadBaseVersions[attribute];
-    const unchanged = previous.data.geometryVersions[attribute] === item.data.geometryVersions[attribute];
-    if (
-      base !== undefined &&
-      (unchanged || (currentBase !== undefined && currentBase <= previous.data.geometryVersions[attribute]))
-    ) {
-      geometryUploadBaseVersions[attribute] = Math.min(base, currentBase ?? base);
-    }
+    const history = mergeVersionedRangeSnapshots(
+      attributeHistory(previous.data, attribute),
+      attributeHistory(item.data, attribute),
+      item.data.geometryVersions[attribute]
+    );
+    if (!history) continue;
+    geometryUploadBaseVersions[attribute] = history.baseVersion;
+    for (const range of history.ranges) ranges.push({ ...range, attribute });
   }
   return { ...item, data: { ...item.data, geometryUploadRanges: ranges, geometryUploadBaseVersions } };
+}
+
+function attributeHistory(data: MeshRenderData, attribute: MeshGeometryAttribute): VersionedRangeSnapshot | undefined {
+  const baseVersion = data.geometryUploadBaseVersions?.[attribute];
+  if (baseVersion === undefined) return undefined;
+  return {
+    baseVersion,
+    version: data.geometryVersions[attribute],
+    ranges: data.geometryUploadRanges.filter(range => range.attribute === attribute)
+  };
 }
 
 export function meshUpload(processed: ProcessedMeshGeometry): MeshGeometryUpload {

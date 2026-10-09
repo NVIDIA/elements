@@ -1,25 +1,16 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-export interface RangeInterval {
-  offset: number;
-  size: number;
-}
+import { assertRangeInterval, type RangeInterval } from './range-interval.js';
+
+export type { RangeInterval } from './range-interval.js';
 
 /** Accumulates half-open integer intervals and merges them when read. */
 export class RangeSet {
   #ranges: RangeInterval[] = [];
 
   add(offset: number, size: number): void {
-    if (
-      !Number.isSafeInteger(offset) ||
-      offset < 0 ||
-      !Number.isSafeInteger(size) ||
-      size < 0 ||
-      !Number.isSafeInteger(offset + size)
-    ) {
-      throw new RangeError('Range offsets, sizes, and endpoints must be nonnegative safe integers.');
-    }
+    assertRangeInterval(offset, size);
     if (size > 0) this.#ranges.push({ offset, size });
   }
 

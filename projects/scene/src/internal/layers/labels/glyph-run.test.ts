@@ -26,6 +26,69 @@ describe(createLabelGlyphRun.name, () => {
     expect(run.bytes).toHaveLength(LABEL_GLYPH_STRIDE);
   });
 
+  it('preserves the existing width precision of synchronous and scheduled glyph packing', async () => {
+    const base = createAtlas();
+    const atlas = {
+      ...base,
+      glyphs: new Map(base.glyphs).set('A', glyph({ height: 10, width: 6, xAdvance: 0.1, yOffset: 2 }))
+    };
+    const sync = createLabelGlyphRun(['AAA'], 1, atlas);
+    const scheduled = (await prepareLabelGlyphRun({
+      atlas,
+      context: createSequencedContext(true),
+      count: 1,
+      texts: ['AAA']
+    }))!;
+
+    expect([...sync.offsets]).toEqual([0, 3]);
+    expect(scheduled.offsets).toEqual(sync.offsets);
+    expect(readGlyph(new DataView(sync.bytes.buffer), 2).x).toBe(0.05000000074505806);
+    expect(readGlyph(new DataView(scheduled.bytes.buffer), 2).x).toBe(0.04999999329447746);
+  });
+
+  it('resumes within a label without splitting Unicode code points or losing its cursor', async () => {
+    const atlas = createAtlas();
+    const texts = ['A'.repeat(PREPARATION_CHUNK_SIZE - 1) + '🙂 A', 'A🙂'];
+    const expected = createLabelGlyphRun(texts, 2, atlas);
+    let yields = 0;
+    const prepared = await prepareLabelGlyphRun({
+      atlas,
+      context: {
+        isCurrent: () => true,
+        yield: async () => {
+          yields += 1;
+        }
+      },
+      count: 2,
+      texts
+    });
+
+    expect(prepared).toEqual(expected);
+    expect(yields).toBe(3);
+    expect([...prepared!.offsets]).toEqual([0, PREPARATION_CHUNK_SIZE + 1, PREPARATION_CHUNK_SIZE + 3]);
+    const view = new DataView(prepared!.bytes.buffer);
+    expect(readGlyph(view, PREPARATION_CHUNK_SIZE - 1)).toMatchObject({ height: 9, labelIndex: 0, width: 5 });
+    expect(readGlyph(view, PREPARATION_CHUNK_SIZE + 1)).toMatchObject({ labelIndex: 1, x: -7.5 });
+  });
+
+  it.each([2, 3])('cancels an empty label prefix at yield %i in metric or byte generation', async stopAt => {
+    let yields = 0;
+    await expect(
+      prepareLabelGlyphRun({
+        atlas: createAtlas(),
+        context: {
+          isCurrent: () => yields < stopAt,
+          yield: async () => {
+            yields += 1;
+          }
+        },
+        count: PREPARATION_CHUNK_SIZE + 1,
+        texts: []
+      })
+    ).resolves.toBeUndefined();
+    expect(yields).toBe(stopAt);
+  });
+
   it('prepares the same glyph run after yielding outside the requesting task', async () => {
     const atlas = createAtlas();
     const sync = createLabelGlyphRun(['A A', '🙂'], 2, atlas);
@@ -96,6 +159,12 @@ describe(createLabelGlyphRun.name, () => {
     ).resolves.toBeUndefined();
     await expect(
       prepareLabelGlyphRun({ ...options, context: createSequencedContext(true, true, true, false) })
+    ).resolves.toBeUndefined();
+    await expect(
+      prepareLabelGlyphRun({ ...options, context: createSequencedContext(true, true, true, true, false) })
+    ).resolves.toBeUndefined();
+    await expect(
+      prepareLabelGlyphRun({ ...options, context: createSequencedContext(true, true, true, true, true, false) })
     ).resolves.toBeUndefined();
   });
 });

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Matrix4 } from '../../math/types.js';
+import { hasVersionedRangeCoverage } from '../../structures/versioned-range-journal.js';
 import { identityMat4, multiplyMat4Into, writeMat4ToFloat32 } from '../../math/mat4.js';
 import type { SceneGPUCommandEncoder } from '../../gpu/platform.js';
 import { compileHeightfield, prepareHeightfield } from '../heightfield/compile.js';
@@ -184,6 +185,7 @@ interface MeshAttributeUploadOptions {
   readonly attribute: Exclude<MeshGeometryAttribute, 'indices'>;
   readonly buffer: SceneGPUBuffer;
   readonly changed: boolean;
+  readonly historyComplete: boolean;
   readonly data: MeshRenderData;
   readonly values: Float32Array;
 }
@@ -668,6 +670,13 @@ export class MeshRenderer {
         attribute,
         buffer: resources.geometry[attribute],
         changed,
+        historyComplete:
+          processed.geometryUploadRanges !== undefined ||
+          hasVersionedRangeCoverage(
+            data.geometryUploadBaseVersions?.[attribute],
+            data.geometryVersions[attribute],
+            resources.source.versions[attribute]
+          ),
         data,
         values: upload[attribute]
       });
@@ -675,11 +684,11 @@ export class MeshRenderer {
   }
 
   #uploadAttribute(options: MeshAttributeUploadOptions): void {
-    const { attribute, buffer, changed, data, values } = options;
+    const { attribute, buffer, changed, data, historyComplete, values } = options;
     if (!changed) return;
     const ranges = data.geometryUploadRanges.filter(range => range.attribute === attribute);
     const fragmented = data.indices !== null && data.normals === null && ranges.length > MAX_INDEXED_FLAT_UPLOAD_RANGES;
-    if (ranges.length === 0 || fragmented) {
+    if (!historyComplete || fragmented) {
       uploadMeshGeometryBuffer({ buffer, device: this.#device, values });
       return;
     }
