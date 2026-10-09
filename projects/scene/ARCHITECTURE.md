@@ -101,6 +101,14 @@ and rebuilding changed blocks; the tree owns numeric unions and prefix aggregati
 until the next query and clones independently with prepared snapshots. The tree uses twice the numeric storage
 of the block summaries, while the marker layer retains its version-and-count query cache and trailing-record scan.
 
+Frustum culling uses the pure `classifyAabbFrustum` math kernel and shared `AabbBounds` and `FrustumRelation` types.
+The kernel applies six half-space tests to a local box using a validated local-to-clip matrix at JavaScript precision.
+It follows WebGPU depth bounds from zero to the clip-space w coordinate, includes touching boundaries, computes
+box center and extents once, and stops at the first rejecting plane. The intersecting result identifies a conservative
+candidate; passing all planes does not establish an exact box/frustum intersection.
+`MarkerBoundsClassifier` owns its reusable Float64 matrix and the marker policies for unknown and empty bounds.
+The renderer consumes the shared relation type to select marker culling and compaction work.
+
 Polygon ear clipping uses `ArrayBackedLinkedList`, an array-backed circular doubly linked list of stable integer indices.
 The list owns neighbor links and constant-time removal. The polygon compiler owns traversal order, hole bridges,
 geometric checks, and fill verification. `RectangleIndex` owns a packed hierarchy of inclusive numeric bounds with
