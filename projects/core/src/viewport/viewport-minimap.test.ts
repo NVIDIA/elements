@@ -44,6 +44,7 @@ describe(ViewportMinimap.metadata.tag, () => {
   afterEach(() => {
     removeFixture(fixture);
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('defines the associated element and assigns the fixed overlay slot without a tab stop', () => {
@@ -52,6 +53,22 @@ describe(ViewportMinimap.metadata.tag, () => {
     expect(minimap.getAttribute('aria-hidden')).toBe('true');
     expect(minimap.tabIndex).toBe(-1);
     expect(minimap.shadowRoot?.querySelector('svg')?.getAttribute('focusable')).toBe('false');
+  });
+
+  it('stays inert outside a viewport and connects without resize observer support', async () => {
+    const standalone = document.createElement(ViewportMinimap.metadata.tag);
+    fixture.append(standalone);
+    await elementIsStable(standalone);
+    standalone.refresh();
+    await flushProjection(standalone);
+    expect(standalone.shadowRoot?.querySelector('[data-visible-region]')).toBeNull();
+
+    vi.stubGlobal('ResizeObserver', undefined);
+    const fallback = document.createElement(ViewportMinimap.metadata.tag);
+    viewport.append(fallback);
+    await elementIsStable(fallback);
+    await flushProjection(fallback);
+    expect(fallback.shadowRoot?.querySelector('[data-visible-region]')).not.toBeNull();
   });
 
   it('prepares touch dragging from the parent capability and restores prior inline touch-action', async () => {
@@ -198,6 +215,26 @@ describe(ViewportMinimap.metadata.tag, () => {
     expect(itemKeys(minimap)).toEqual(['automatic-root']);
   });
 
+  it('measures custom preview roots from their initial unprojected state', async () => {
+    const freshMinimap = document.createElement(ViewportMinimap.metadata.tag);
+    const empty = document.createElement('div');
+    const visible = document.createElement('div');
+    empty.slot = 'preview';
+    visible.slot = 'preview';
+    vi.spyOn(visible, 'getBoundingClientRect').mockReturnValue(rect({ width: 100, height: 50 }));
+    freshMinimap.append(empty, visible);
+    mockSize(freshMinimap, 192, 144);
+    viewport.append(freshMinimap);
+    await elementIsStable(freshMinimap);
+    await flushProjection(freshMinimap);
+
+    expect(itemKeys(freshMinimap)).toEqual([]);
+    expect(freshMinimap.shadowRoot?.querySelector('slot[name="preview"]')?.assignedElements()).toEqual([
+      empty,
+      visible
+    ]);
+  });
+
   it('uses HTML preview root bounds and remeasures them after position-only changes', async () => {
     let contentX = 100;
     const preview = document.createElement('div');
@@ -243,6 +280,22 @@ describe(ViewportMinimap.metadata.tag, () => {
     expect(rootRect).toHaveBeenCalled();
     expect(nestedRect).not.toHaveBeenCalled();
     expect(firstKey).toHaveLength(1);
+  });
+
+  it('ignores empty automatic roots and keeps generated keys stable', async () => {
+    const empty = document.createElement('div');
+    const visible = document.createElement('div');
+    vi.spyOn(visible, 'getBoundingClientRect').mockReturnValue(rect({ x: 100, y: 100, width: 50, height: 50 }));
+    viewport.append(empty, visible);
+    await elementIsStable(viewport);
+    await flushProjection(minimap);
+    const firstKeys = itemKeys(minimap);
+
+    minimap.refresh();
+    await flushProjection(minimap);
+
+    expect(firstKeys).toEqual(['automatic-root', 'root-0']);
+    expect(itemKeys(minimap)).toEqual(firstKeys);
   });
 
   it('rebuilds automatic roots on default-slot changes while excluding background and overlay children', async () => {
@@ -308,6 +361,19 @@ describe(ViewportMinimap.metadata.tag, () => {
     indicator.dispatchEvent(pointerEvent('pointermove', { clientX: 23, clientY: 20, pointerId: 2 }));
     expect(panstart).toHaveBeenCalledOnce();
     expect(viewport.x).toBeCloseTo(15);
+  });
+
+  it('does not start navigation when panning is disabled before the drag threshold', () => {
+    const panstart = vi.fn();
+    viewport.addEventListener('panstart', panstart);
+    const indicator = visibleRegion(minimap);
+    indicator.dispatchEvent(pointerEvent('pointerdown', { clientX: 20, pointerId: 20 }));
+    viewport.behaviorPan = false;
+    indicator.dispatchEvent(pointerEvent('pointermove', { clientX: 23, pointerId: 20 }));
+    indicator.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 23, pointerId: 20 }));
+
+    expect(panstart).not.toHaveBeenCalled();
+    expect(viewport.getTransform()).toEqual({ scale: 1, x: 0, y: 0 });
   });
 
   it('emits the minimap pan lifecycle', () => {
