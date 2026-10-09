@@ -236,10 +236,23 @@ export default {
       ],
       project: [...PROJECT_FILES, ...SOURCE_FILES]
     },
+    'projects/viewport': {
+      entry: [
+        ...PACKAGE_FILES,
+        ...SOURCE_INDEX,
+        ...DEFINE_ENTRIES,
+        ...EXAMPLE_ENTRIES,
+        ...TEST_ENTRIES,
+        ...TEST_VARIANT_ENTRIES,
+        ...VITE_CONFIGS,
+        ...VITEST_CONFIGS
+      ],
+      project: [...PROJECT_FILES, ...SOURCE_FILES]
+    },
     'projects/site': {
       entry: [...PACKAGE_FILES, 'src/**/*.{js,ts}', ...VITEST_CONFIGS],
       project: [...PACKAGE_FILES, 'src/**/*.{js,ts}', ...VITEST_CONFIGS],
-      ignoreDependencies: ['@nvidia-elements/plot', '@nvidia-elements/scene'] // temporary
+      ignoreDependencies: ['@nvidia-elements/plot', '@nvidia-elements/scene', '@nvidia-elements/viewport']
     },
     'projects/styles': {
       entry: [

@@ -500,6 +500,17 @@ describe('renderBaseHead', () => {
 });
 
 describe('renderDocsNav', () => {
+  it.each(
+    ['/docs/viewport/', '/docs/viewport/gridlines/', '/docs/viewport/minimap/'].flatMap(component =>
+      ['', 'api/', 'examples/'].map(tab => `${component}${tab}`)
+    )
+  )('should keep the elements and viewport groups expanded on %s', url => {
+    const html = renderDocsNav({ page: { url } });
+
+    expect(html).toMatch(/<nve-tree-node expanded\s*>\s*<a href="\/docs\/elements\/">Elements<\/a>/);
+    expect(html).toMatch(/<nve-tree-node expanded\s*>\s*<a href="\/docs\/viewport\/">Viewport<\/a>/);
+  });
+
   it('should expose DESIGN.md in getting started navigation', () => {
     const html = renderDocsNav({ page: { url: '/docs/design-md/' } });
 

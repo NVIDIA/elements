@@ -35,6 +35,7 @@ packages:
   - projects/forms
   - projects/plot
   - projects/scene
+  - projects/viewport
   - projects/styles
   - projects/themes
   - projects/internals/design

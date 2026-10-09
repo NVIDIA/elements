@@ -7,7 +7,7 @@ import { exampleDocShortcode } from '../../../_11ty/shortcodes/example-doc.js';
 const { examples, elements } = siteData;
 
 /**
- * @typedef {{component: {filePathStem: string, fileSlug: string, data: {tag?: string, title: string, hideExamplesTab?: boolean, page: {fileSlug: string}}}, page: {fileSlug: string}, tag?: string, title?: string, isExamplesTab?: boolean, noindex?: boolean}} ExamplesPageData
+ * @typedef {{component: {url: string, filePathStem: string, fileSlug: string, data: {tag?: string, title: string, hideExamplesTab?: boolean, page: {fileSlug: string}}}, page: {fileSlug: string}, tag?: string, title?: string, isExamplesTab?: boolean, noindex?: boolean}} ExamplesPageData
  */
 
 // Initialize markdown parser and metadata service
@@ -33,6 +33,7 @@ export const data = {
   // Generate URLs in the format /docs/elements/{component-name}/examples/ or package-specific component docs paths.
   permalink: (/** @type {ExamplesPageData} */ data) => {
     const filePath = data.component.filePathStem;
+    if (filePath.includes('/viewport/')) return `${data.component.url}examples/`;
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
@@ -119,7 +120,7 @@ export async function render(data) {
       const params = new URLSearchParams(window.location.search);
       const cyclingExample = document.querySelector('#cycling-example');
       const exampleSelector = document.querySelector('.example-selector');
-      const exampleSelectorItems = Array.from(exampleSelector.querySelectorAll('nve-menu-item'));
+      const exampleSelectorItems = Array.from(exampleSelector?.querySelectorAll('nve-menu-item') ?? []);
       const examples = ${JSON.stringify(exampleTemplates.map(i => ({ id: i.id, template: md.utils.escapeHtml(i.template) })))};
       const exampleId = params.get('example') ?? examples[0].id;
       const example = examples.find(e => e.id === exampleId);
@@ -131,10 +132,11 @@ export async function render(data) {
 
       if (example) {
         cyclingExample.source = unescapeHtml(example.template);
-        exampleSelectorItems.find(item => item.value === exampleId).selected = true;
+        const selectedItem = exampleSelectorItems.find(item => item.value === exampleId);
+        if (selectedItem) selectedItem.selected = true;
       }
 
-      exampleSelector.addEventListener('click', (event) => {
+      exampleSelector?.addEventListener('click', (event) => {
         const example = examples.find(e => e.id === event.target.value);
         if (example) {
           exampleSelectorItems.forEach(item => item.selected = false);

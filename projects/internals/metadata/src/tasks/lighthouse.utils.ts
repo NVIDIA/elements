@@ -18,6 +18,7 @@ export interface LighthouseScores {
   '@nvidia-elements/markdown': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/media': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/monaco': { [key: string]: LighthouseElementReport };
+  '@nvidia-elements/viewport': { [key: string]: LighthouseElementReport };
 }
 
 interface LighthouseElementReport {
@@ -59,7 +60,8 @@ export async function generateLighthouseReport(): Promise<LighthouseScores> {
     '@nvidia-elements/forms': await loadLighthouseReport('../../../../forms'),
     '@nvidia-elements/markdown': await loadLighthouseReport('../../../../markdown'),
     '@nvidia-elements/media': await loadLighthouseReport('../../../../media'),
-    '@nvidia-elements/monaco': await loadLighthouseReport('../../../../monaco')
+    '@nvidia-elements/monaco': await loadLighthouseReport('../../../../monaco'),
+    '@nvidia-elements/viewport': await loadLighthouseReport('../../../../viewport')
   };
 }
 

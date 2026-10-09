@@ -70,7 +70,7 @@ This product includes the following bundled third-party software:
 - ignore v7.0.6 [MIT] (used by: @nvidia-elements/pi)
   Copyright: kael
 
-- lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco, @nvidia-elements/plot, @nvidia-elements/scene)
+- lit v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco, @nvidia-elements/plot, @nvidia-elements/scene, @nvidia-elements/viewport)
   Copyright: Google LLC
 
 - lit-html v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/monaco)
