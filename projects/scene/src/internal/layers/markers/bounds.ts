@@ -6,19 +6,12 @@ import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import type { Matrix4 } from '../../math/types.js';
 import { multiplyMat4Into } from '../../math/mat4.js';
 import { BoundsSegmentTree } from '../../structures/bounds-segment-tree.js';
+import { classifyAabbFrustum, type AabbBounds, type FrustumRelation } from '../../math/frustum.js';
 
 const BLOCK_SIZE = 256;
 const FACE_ALPHA_OFFSET = getFieldOffset(MARKER, 'color') + 3;
 const OUTLINE_ALPHA_OFFSET = getFieldOffset(MARKER, 'outline-color') + 3;
 const FLOATS_PER_RECORD = MARKER.stride / Float32Array.BYTES_PER_ELEMENT;
-const FRUSTUM_PLANES = [
-  { firstRow: 3, secondRow: 0, secondScale: 1 },
-  { firstRow: 3, secondRow: 0, secondScale: -1 },
-  { firstRow: 3, secondRow: 1, secondScale: 1 },
-  { firstRow: 3, secondRow: 1, secondScale: -1 },
-  { firstRow: 2 },
-  { firstRow: 3, secondRow: 2, secondScale: -1 }
-] as const;
 
 interface MarkerBoundsSource {
   readonly bytes: Uint8Array;
@@ -26,22 +19,9 @@ interface MarkerBoundsSource {
   readonly view: DataView | null;
 }
 
-interface FrustumPlaneRows {
-  readonly firstRow: number;
-  readonly secondRow?: number;
-  readonly secondScale?: number;
-}
+export type MarkerBounds = AabbBounds;
 
-export interface MarkerBounds {
-  readonly maximumX: number;
-  readonly maximumY: number;
-  readonly maximumZ: number;
-  readonly minimumX: number;
-  readonly minimumY: number;
-  readonly minimumZ: number;
-}
-
-export type MarkerFrustumRelation = 'inside' | 'intersecting' | 'outside';
+export type MarkerFrustumRelation = FrustumRelation;
 
 /** Block-indexed local bounds for prefix queries and bounded partial updates. */
 export class MarkerBoundsIndex {
@@ -122,25 +102,13 @@ export class MarkerBoundsIndex {
 
 /** Allocation-free local-AABB classification against a WebGPU clip-space frustum. */
 export class MarkerBoundsClassifier {
-  #plane = new Float64Array(4);
   #transform = new Float64Array(16);
 
   classify(bounds: MarkerBounds | null | undefined, viewProjection: Matrix4, frame: Matrix4): MarkerFrustumRelation {
     if (bounds === undefined) return 'intersecting';
     if (bounds === null) return 'outside';
     multiplyMat4Into(viewProjection, frame, this.#transform);
-    let relation: MarkerFrustumRelation = 'inside';
-    for (const rows of FRUSTUM_PLANES) {
-      this.#writePlane(rows);
-      relation = mergeRelation(relation, classifyAabbPlane(bounds, this.#plane));
-    }
-    return relation;
-  }
-
-  #writePlane(rows: FrustumPlaneRows): void {
-    for (let column = 0; column < 4; column += 1) {
-      this.#plane[column] = planeCoefficient(this.#transform, column, rows);
-    }
+    return classifyAabbFrustum(bounds, this.#transform);
   }
 }
 
@@ -159,26 +127,6 @@ function readRadius(source: MarkerBoundsSource, floatOffset: number, byteOffset:
     Math.abs(readFloat(source, floatOffset + 8, byteOffset + 32)),
     Math.abs(readFloat(source, floatOffset + 9, byteOffset + 36))
   );
-}
-
-function planeCoefficient(transform: Float64Array, column: number, rows: FrustumPlaneRows): number {
-  const offset = column * 4;
-  const first = transform[offset + rows.firstRow] ?? 0;
-  if (rows.secondRow === undefined) return first;
-  return first + (transform[offset + rows.secondRow] ?? 0) * (rows.secondScale ?? 0);
-}
-
-function classifyAabbPlane(bounds: MarkerBounds, plane: Float64Array): MarkerFrustumRelation {
-  const centerX = (bounds.minimumX + bounds.maximumX) * 0.5;
-  const centerY = (bounds.minimumY + bounds.maximumY) * 0.5;
-  const centerZ = (bounds.minimumZ + bounds.maximumZ) * 0.5;
-  const extentX = (bounds.maximumX - bounds.minimumX) * 0.5;
-  const extentY = (bounds.maximumY - bounds.minimumY) * 0.5;
-  const extentZ = (bounds.maximumZ - bounds.minimumZ) * 0.5;
-  const distance = at(plane, 0) * centerX + at(plane, 1) * centerY + at(plane, 2) * centerZ + at(plane, 3);
-  const radius = Math.abs(at(plane, 0)) * extentX + Math.abs(at(plane, 1)) * extentY + Math.abs(at(plane, 2)) * extentZ;
-  if (distance + radius < 0) return 'outside';
-  return distance - radius < 0 ? 'intersecting' : 'inside';
 }
 
 function resetBounds(bounds: Float64Array): void {
@@ -214,9 +162,4 @@ function createBounds(values: Float64Array): MarkerBounds | null {
 
 function at(values: Float64Array, index: number): number {
   return values[index] ?? 0;
-}
-
-function mergeRelation(left: MarkerFrustumRelation, right: MarkerFrustumRelation): MarkerFrustumRelation {
-  if (left === 'outside' || right === 'outside') return 'outside';
-  return left === 'intersecting' || right === 'intersecting' ? 'intersecting' : 'inside';
 }

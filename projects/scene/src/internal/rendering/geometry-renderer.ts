@@ -21,7 +21,8 @@ import { createPerspectiveMatrix } from '../composition/camera/math.js';
 import { identityMat4, multiplyMat4Into, multiplyPreciseMat4, writeMat4ToFloat32 } from '../math/mat4.js';
 import type { MeshRenderer, MeshRendererDevice } from '../layers/mesh/renderer.js';
 import type { MarkerGeometry, MarkerPipelines } from '../layers/markers/pipelines.js';
-import { MarkerBoundsClassifier, type MarkerFrustumRelation } from '../layers/markers/bounds.js';
+import { MarkerBoundsClassifier } from '../layers/markers/bounds.js';
+import type { FrustumRelation } from '../math/frustum.js';
 import {
   destroyMarkerCompactionResources,
   MarkerCompactor,
@@ -93,7 +94,7 @@ interface LayerResources {
   compactTransparentBindGroups: WeakMap<SceneGPURenderPipeline, LayerBindGroups>;
   compaction?: MarkerCompactionResources;
   compactionReady: boolean;
-  frustumRelation: MarkerFrustumRelation;
+  frustumRelation: FrustumRelation;
   readonly instance: SharedInstanceBufferLease;
   readonly linePartitions?: readonly ConnectedLineDrawPartition[];
   readonly partitions: readonly LayerPartitionResources[];
