@@ -429,3 +429,4 @@ resizable
 groupable
 fullscreen
 fullscreenable
+retain
