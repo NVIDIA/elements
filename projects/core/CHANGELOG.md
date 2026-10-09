@@ -1,3 +1,14 @@
+## [2.15.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.0...@nvidia-elements/core-v2.15.1) (2026-10-09)
+
+### Features
+
+* **media:** add media loop button ([791c76b](https://github.com/NVIDIA/elements/commit/791c76b2ae06c108a8a0b3c2e60b3fe0c4e8c72c))
+
+### Bug Fixes
+
+* **core:** add i18n strings ([676f543](https://github.com/NVIDIA/elements/commit/676f5434c494301ea4df09cd4dd632c7fb9ce0f1))
+* **lint:** add invoker trigger elements ([417fb63](https://github.com/NVIDIA/elements/commit/417fb6304d5722fa7bb07a91886ab26da603c630))
+
 ## [2.15.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.14.0...@nvidia-elements/core-v2.15.0) (2026-10-09)
 
 ### Features
