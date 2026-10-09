@@ -1,3 +1,17 @@
+## [2.0.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.7...@nvidia-elements/forms-v2.0.8) (2026-10-09)
+
+### Features
+
+* **core:** add configurable viewport zoom stops ([ff741ea](https://github.com/NVIDIA/elements/commit/ff741eac903e2543c0fa3b9fefc8ef28a5e82d90))
+* **core:** drag handle ([cc6d5b1](https://github.com/NVIDIA/elements/commit/cc6d5b17aac74e65163d581d8525897762d714c2))
+* **core:** tree node prefix and suffix ([bc0f2f1](https://github.com/NVIDIA/elements/commit/bc0f2f13bbc4119b1941a8102d09e3eba41f278b))
+
+### Bug Fixes
+
+* **cli:** update dependencies ([2a84274](https://github.com/NVIDIA/elements/commit/2a842746f3cd4055ab53414dd263511d74bad10f))
+* **core:** nested background styles ([66d44e7](https://github.com/NVIDIA/elements/commit/66d44e7549f25f096d71c5fc662d805b4267bc72))
+* **forms:** missing key event check ([3854d5f](https://github.com/NVIDIA/elements/commit/3854d5fb614912eb225612bcdf308badc832093d))
+
 ## [2.0.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.6...@nvidia-elements/forms-v2.0.7) (2026-10-07)
 
 ### Features
