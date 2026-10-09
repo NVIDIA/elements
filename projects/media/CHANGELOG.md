@@ -1,3 +1,49 @@
+## [1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.0.1...@nvidia-elements/media-v1.1.0) (2026-10-09)
+
+### Features
+
+* **code:** support code element slot content ([25486f5](https://github.com/NVIDIA/elements/commit/25486f52fa95ac2cb865a20748467d4d5729e673))
+* **core:** add configurable viewport zoom stops ([ff741ea](https://github.com/NVIDIA/elements/commit/ff741eac903e2543c0fa3b9fefc8ef28a5e82d90))
+* **core:** add dot and cross patterns to viewport gridlines ([2693005](https://github.com/NVIDIA/elements/commit/26930057a5e4da4a0c2fb0d9fcfebf95c3dd9bc3))
+* **core:** add viewport ([0e9e892](https://github.com/NVIDIA/elements/commit/0e9e892de5d41c2a64d1e9adcfaa7a9df2c4deef))
+* **core:** add viewport minimap ([c3cc189](https://github.com/NVIDIA/elements/commit/c3cc1891132f6ae6ab27c94fcdfe79d38b592230))
+* **core:** drag handle ([cc6d5b1](https://github.com/NVIDIA/elements/commit/cc6d5b17aac74e65163d581d8525897762d714c2))
+* **core:** menu group ([d9a24e9](https://github.com/NVIDIA/elements/commit/d9a24e961e1c5394367e7ae9bf931d9e1e2d58b0))
+* **core:** tag slots ([c4e0edd](https://github.com/NVIDIA/elements/commit/c4e0edd7b5bdd8c619ca969fd537352466fc759a))
+* **core:** tree node prefix and suffix ([bc0f2f1](https://github.com/NVIDIA/elements/commit/bc0f2f13bbc4119b1941a8102d09e3eba41f278b))
+* **lint:** improve slotted element checks ([0e1985d](https://github.com/NVIDIA/elements/commit/0e1985deb9edba09cbcbd9eec121e445d3559624))
+* **media:** add media loop button ([791c76b](https://github.com/NVIDIA/elements/commit/791c76b2ae06c108a8a0b3c2e60b3fe0c4e8c72c))
+* **pi:** pi extension ([88dea55](https://github.com/NVIDIA/elements/commit/88dea552fd28da8a31c95ff713218bda73d64e64))
+
+### Bug Fixes
+
+* **ci:** ignore test runner artifacts in knip cache ([7415260](https://github.com/NVIDIA/elements/commit/74152608703345d5507ba5f64e5f1535f98b36e3))
+* **ci:** preserve authored contents in example metadata ([0ea8618](https://github.com/NVIDIA/elements/commit/0ea86182b4c654c4d8301bad7fbc06f0d3b11187))
+* **cli:** mcp app rendering and schema tools ([5cf5f51](https://github.com/NVIDIA/elements/commit/5cf5f51e8b77468451024a9a31f247ac0beb5373))
+* **cli:** ui resources ([166a537](https://github.com/NVIDIA/elements/commit/166a5374c9aa022a2cc86c262d5165acdee7112e))
+* **cli:** update @inquirer/prompts to 8.7.2 ([b6984b5](https://github.com/NVIDIA/elements/commit/b6984b58a80a666b7a83aac1e109337e90c469d1))
+* **cli:** update bun to 1.4.2 ([0e84e28](https://github.com/NVIDIA/elements/commit/0e84e2880ca5ff09405d0d88d16ef12d9341623e))
+* **cli:** update dependencies ([2a84274](https://github.com/NVIDIA/elements/commit/2a842746f3cd4055ab53414dd263511d74bad10f))
+* **cli:** update marked to 18.0.14 ([b24d6cb](https://github.com/NVIDIA/elements/commit/b24d6cb07ee47cf392214e0a934f1caee31eb510))
+* **core:** add i18n strings ([676f543](https://github.com/NVIDIA/elements/commit/676f5434c494301ea4df09cd4dd632c7fb9ce0f1))
+* **core:** clean up combobox option observers across connections ([3af4742](https://github.com/NVIDIA/elements/commit/3af4742f53a3d6c09b59b0ac445da9bb268de73e))
+* **core:** debounce scroll tracking state updates ([ce5b688](https://github.com/NVIDIA/elements/commit/ce5b688310d13dcc51e26bd0434599fecc610e4b))
+* **core:** enhance gesture recognizer ([0be2399](https://github.com/NVIDIA/elements/commit/0be2399b37982fde94c061ed811c280b29e3a3ae))
+* **core:** nested background styles ([66d44e7](https://github.com/NVIDIA/elements/commit/66d44e7549f25f096d71c5fc662d805b4267bc72))
+* **core:** preserve accessors during property observation ([37c137d](https://github.com/NVIDIA/elements/commit/37c137d305273cbf4382908cd00d0ca2dd273036))
+* **core:** resolve page panel stacking and visibility ([3bd2fc9](https://github.com/NVIDIA/elements/commit/3bd2fc9d2e3fa9ba740a486cd7a826bb17ffcaa2))
+* **core:** textarea slots ([0f8fb33](https://github.com/NVIDIA/elements/commit/0f8fb33a38c60a08aaf37e774a92338cf5416401))
+* **docs:** correct example api mapping and summary fallback ([f0dd837](https://github.com/NVIDIA/elements/commit/f0dd837756f44f05f1c115384d18e02a40cff32d))
+* **docs:** preserve example content through html processing ([7055d3c](https://github.com/NVIDIA/elements/commit/7055d3ce12a10b0e494da9c73c8f34fce62b9884))
+* **docs:** preserve example source during development reloads ([162082b](https://github.com/NVIDIA/elements/commit/162082b8bead05283646ae68ad3ecd391be8c962))
+* **docs:** prevent runtime errors when loading examples pages in dev ([1d57c69](https://github.com/NVIDIA/elements/commit/1d57c690819c009a1abac037b00f631d18db076a))
+* **forms:** form state restore callback types ([8a060db](https://github.com/NVIDIA/elements/commit/8a060db7366b54ec22e8163a36ee18613a0c479c))
+* **forms:** missing key event check ([3854d5f](https://github.com/NVIDIA/elements/commit/3854d5fb614912eb225612bcdf308badc832093d))
+* **lint:** add invoker trigger elements ([417fb63](https://github.com/NVIDIA/elements/commit/417fb6304d5722fa7bb07a91886ab26da603c630))
+* **lint:** skip generated eleventy vite directories in eslint ([92e5d50](https://github.com/NVIDIA/elements/commit/92e5d506fe0a951c354641a1aad2b1a9dd75a212))
+* **lint:** update eslint ([2a3ad12](https://github.com/NVIDIA/elements/commit/2a3ad1217db5aadfdef4a89f796f96348dc0f330))
+* **pi:** update to pi.dev 1.0.0 ([3d44c15](https://github.com/NVIDIA/elements/commit/3d44c159c4c45b38789aa96615faaf0f97e798f6))
+
 ## [1.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.0.0...@nvidia-elements/media-v1.0.1) (2026-09-16)
 
 ### Features
