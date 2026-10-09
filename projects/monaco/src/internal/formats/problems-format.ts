@@ -5,6 +5,7 @@ import type { Monaco } from '@nvidia-elements/monaco';
 import type * as monaco from '@nvidia-elements/monaco';
 
 import type { Problem } from '../types/index.js';
+import { ProblemSeverity } from '../types/index.js';
 
 interface ColumnRange {
   startColumn: number;
@@ -42,13 +43,13 @@ export type SeverityLabel = 'hint' | 'info' | 'warning' | 'error';
 
 export function toSeverityLabel(severity: number): SeverityLabel {
   switch (severity) {
-    case 1: // ProblemSeverity.Hint:
+    case ProblemSeverity.Hint:
       return 'hint';
-    case 2: // ProblemSeverity.Info:
+    case ProblemSeverity.Info:
       return 'info';
-    case 4: // ProblemSeverity.Warning:
+    case ProblemSeverity.Warning:
       return 'warning';
-    case 8: // ProblemSeverity.Error:
+    case ProblemSeverity.Error:
       return 'error';
     default:
       throw new Error(`Unknown severity: ${severity}`);

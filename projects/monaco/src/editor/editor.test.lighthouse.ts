@@ -25,11 +25,11 @@ describe('monaco-editor lighthouse report', () => {
     expect(report.scores.performance).toBeGreaterThanOrEqual(72);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(1318);
+    expect(report.payload.javascript.kb).toBeLessThan(1415);
     expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(11);
-    expect(report.payload.javascript.requests['editor2.global.js'].kb).toBeLessThan(78);
-    expect(report.payload.javascript.requests['editor2.main.js'].kb).toBeLessThan(24);
-    expect(report.payload.javascript.requests['dist.js'].kb).toBeLessThan(1114);
+    expect(report.payload.javascript.requests['editor2.global.js'].kb).toBeLessThan(100);
+    expect(report.payload.javascript.requests['editor2.main.js'].kb).toBeLessThan(29);
+    expect(report.payload.javascript.requests['dist.js'].kb).toBeLessThan(1192);
     expect(report.payload.javascript.requests['dark.js'].kb).toBeLessThan(3);
     expect(report.payload.javascript.requests['light.js'].kb).toBeLessThan(3);
     expect(report.payload.javascript.requests['editor2.worker.js'].kb).toBeLessThan(88);

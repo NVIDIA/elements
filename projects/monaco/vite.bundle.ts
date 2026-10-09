@@ -16,7 +16,10 @@ function workerIgnore(): Plugin {
     generateBundle(_, bundle) {
       for (const chunk of Object.values(bundle)) {
         if (chunk.type === 'chunk') {
-          chunk.code = chunk.code.replace(/new Worker\(\s*new URL\(/g, 'new Worker(/* @vite-ignore */ new URL(');
+          chunk.code = chunk.code.replace(
+            /new Worker\(\s*new URL\(/g,
+            'new Worker(/* @vite-ignore */ new URL(/* @vite-ignore */'
+          );
         }
       }
     }

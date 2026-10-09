@@ -11,7 +11,7 @@ This project includes the following bundled third-party software:
 - lit-html v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
-- monaco-editor v0.55.1 [MIT]
+- monaco-editor v0.57.0 [MIT]
   Copyright: Microsoft Corporation
 
 ==============================================================================
@@ -54,7 +54,7 @@ MIT
 
 The following bundled components are provided under the MIT license:
 
-monaco-editor v0.55.1 - Copyright Microsoft Corporation
+monaco-editor v0.57.0 - Copyright Microsoft Corporation
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

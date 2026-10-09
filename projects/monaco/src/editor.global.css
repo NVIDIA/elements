@@ -9,12 +9,37 @@
   src: url('../node_modules/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf') format('truetype');
 }
 
-[nve-theme*='reduced-motion'] {
-  --vscode-animationDuration-instant: 0;
-  --vscode-animationDuration-short: 0;
-  --vscode-animationDuration-medium: 0;
-  --vscode-animationDuration-long: 0;
-  --vscode-animationDuration-slow: 0;
-  --vscode-animationDuration-ambient: 0;
-  --vscode-animationDuration-cycle: 0;
+/* Define our duration scale in the document stylesheet so it inherits into editor shadow roots.
+   :root in Monaco's shadow stylesheet cannot match the document root.
+   The vendor patch consumes these variables; reduced-motion overrides remain below. */
+:root {
+  --vscode-animationDuration-instant: 50ms;
+  --vscode-animationDuration-short: 100ms;
+  --vscode-animationDuration-medium: 300ms;
+  --vscode-animationDuration-long: 500ms;
+  --vscode-animationDuration-slow: 800ms;
+  --vscode-animationDuration-ambient: 1.25s;
+  --vscode-animationDuration-cycle: 4s;
+}
+
+[nve-theme~='reduced-motion'] {
+  --vscode-animationDuration-instant: 0ms;
+  --vscode-animationDuration-short: 0ms;
+  --vscode-animationDuration-medium: 0ms;
+  --vscode-animationDuration-long: 0ms;
+  --vscode-animationDuration-slow: 0ms;
+  --vscode-animationDuration-ambient: 0ms;
+  --vscode-animationDuration-cycle: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --vscode-animationDuration-instant: 0ms;
+    --vscode-animationDuration-short: 0ms;
+    --vscode-animationDuration-medium: 0ms;
+    --vscode-animationDuration-long: 0ms;
+    --vscode-animationDuration-slow: 0ms;
+    --vscode-animationDuration-ambient: 0ms;
+    --vscode-animationDuration-cycle: 0ms;
+  }
 }

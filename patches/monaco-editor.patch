@@ -1,8 +1,7 @@
 diff --git a/dev/vs/editor/editor.main.css b/dev/vs/editor/editor.main.css
-index 417e8ba19145547ea1f35c415c346df9e86534ac..b004b3221c28dea5c5d39212c8d000cedd3f04fe 100644
 --- a/dev/vs/editor/editor.main.css
 +++ b/dev/vs/editor/editor.main.css
-@@ -5343,7 +5343,8 @@
+@@ -7651,7 +7651,8 @@
  	overflow: hidden;
  	border-bottom: 1px solid var(--vscode-editorStickyScroll-border);
  	width: 100%;
@@ -12,29 +11,87 @@ index 417e8ba19145547ea1f35c415c346df9e86534ac..b004b3221c28dea5c5d39212c8d000ce
  	z-index: 4;
  	right: initial !important;
  	margin-left: '0px';
+diff --git a/esm/vs/base/browser/motion.d.ts b/esm/vs/base/browser/motion.d.ts
+new file mode 100644
+--- /dev/null
++++ b/esm/vs/base/browser/motion.d.ts
+@@ -0,0 +1 @@
++export declare function getMotionDuration(element: HTMLElement | null, property: string, fallback: number): number;
+diff --git a/esm/vs/base/browser/motion.js b/esm/vs/base/browser/motion.js
+new file mode 100644
+--- /dev/null
++++ b/esm/vs/base/browser/motion.js
+@@ -0,0 +1,14 @@
++// PATCH: Read local motion durations for numeric animations and dismissal timers.
++function getMotionDuration(element, property, fallback) {
++    if (!element) {
++        return fallback;
++    }
++    const value = element.ownerDocument.defaultView?.getComputedStyle(element).getPropertyValue(property).trim();
++    const time = value?.match(/^(\d+(?:\.\d+)?|\.\d+)(ms|s)$/);
++    if (!time) {
++        return fallback;
++    }
++    const duration = Number(time[1]) * (time[2] === 's' ? 1000 : 1);
++    return Number.isFinite(duration) ? duration : fallback;
++}
++export { getMotionDuration };
 diff --git a/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css b/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css
-index 9666216f6ae00e73fd6ce82d8039f6d97ab179cb..4db2b1f115ade9456fd2e4771ec44914c68e9944 100644
 --- a/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css
 +++ b/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css
-@@ -18,7 +18,7 @@
- .codicon-gear.codicon-modifier-spin,
- .codicon-notebook-state-executing.codicon-modifier-spin {
- 	/* Use steps to throttle FPS to reduce CPU usage */
--	animation: codicon-spin 1.5s steps(30) infinite;
-+	animation: codicon-spin var(--vscode-animationDuration-ambient, 1.25s) steps(30) infinite;
- }
- 
- .codicon-modifier-disabled {
-@@ -28,6 +28,6 @@
- /* custom speed & easing for loading icon */
+@@ -20,7 +20,7 @@
  .codicon-loading,
  .codicon-tree-item-loading::before {
--	animation-duration: 1s !important;
-+	animation-duration: var(--vscode-animationDuration-ambient, 1.25s) !important;
- 	animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
+ 	/* Use steps to throttle FPS to reduce CPU usage */
+-	animation: codicon-spin 1.5s steps(30) infinite;
++	animation: codicon-spin var(--vscode-animationDuration-ambient, 1.5s) steps(30) infinite;
+ 	/* Ensure rotation happens around exact center to prevent wobble */
+ 	transform-origin: center center;
  }
+diff --git a/esm/vs/base/browser/ui/contextview/contextview.js b/esm/vs/base/browser/ui/contextview/contextview.js
+--- a/esm/vs/base/browser/ui/contextview/contextview.js
++++ b/esm/vs/base/browser/ui/contextview/contextview.js
+@@ -1,3 +1,4 @@
++import { getMotionDuration } from '../../motion.js';
+ import { BrowserFeatures } from '../../canIUse.js';
+ import { $, hide, addStandardDisposableListener, clearNode, show, getWindow, getActiveWindow, getDomNodePagePosition, getTotalHeight, getTotalWidth, isHTMLElement, isAncestor, getDomNodeZoomLevel } from '../../dom.js';
+ import { createStyleSheet } from '../../domStylesheets.js';
+@@ -38,7 +39,7 @@
+ 	}
+ 
+ 	${enabledSelectorPrefix} .context-view.${CONTEXT_VIEW_MENU_MOTION_CLASS} > .monaco-scrollable-element {
+-		animation: context-view-menu-motion-open ${CONTEXT_VIEW_MENU_MOTION_OPEN_DURATION_MS}ms ${CONTEXT_VIEW_MENU_MOTION_EASING} backwards;
++		animation: context-view-menu-motion-open var(--vscode-animationDuration-medium, ${CONTEXT_VIEW_MENU_MOTION_OPEN_DURATION_MS}ms) ${CONTEXT_VIEW_MENU_MOTION_EASING} backwards;
+ 		box-shadow: var(${CONTEXT_VIEW_MENU_MOTION_SHADOW_VARIABLE});
+ 		transform-origin: top left;
+ 		will-change: opacity;
+@@ -57,7 +58,7 @@
+ 	}
+ 
+ 	${enabledSelectorPrefix} .context-view.${CONTEXT_VIEW_MENU_MOTION_CLASS}.${CONTEXT_VIEW_MENU_MOTION_CLOSING_CLASS} > .monaco-scrollable-element {
+-		animation: context-view-menu-motion-close var(${CONTEXT_VIEW_CLOSE_ANIMATION_DURATION_VARIABLE}) ${CONTEXT_VIEW_MENU_MOTION_EASING} both;
++		animation: context-view-menu-motion-close var(--vscode-animationDuration-short, var(${CONTEXT_VIEW_CLOSE_ANIMATION_DURATION_VARIABLE})) ${CONTEXT_VIEW_MENU_MOTION_EASING} both;
+ 		pointer-events: none;
+ 	}
+ 
+@@ -283,12 +284,13 @@
+         this.toDisposeOnClean = Disposable.None;
+         delegate.onHide?.(data);
+         const closeAnimation = delegate.closeAnimation;
+-        if (!skipAnimation && closeAnimation && closeAnimation.duration > 0 && this.hasRequiredAncestorClasses(closeAnimation.requiredAncestorClasses)) {
+-            this.view.style.setProperty(CONTEXT_VIEW_CLOSE_ANIMATION_DURATION_VARIABLE, `${closeAnimation.duration}ms`);
++        const duration = getMotionDuration(this.view, '--vscode-animationDuration-short', closeAnimation?.duration ?? 0);
++        if (!skipAnimation && closeAnimation && duration > 0 && this.hasRequiredAncestorClasses(closeAnimation.requiredAncestorClasses)) {
++            this.view.style.setProperty(CONTEXT_VIEW_CLOSE_ANIMATION_DURATION_VARIABLE, `${duration}ms`);
+             this.prepareMenuCloseAnimation();
+             this.view.inert = true;
+             this.view.classList.add(closeAnimation.className);
+-            const timeout = setTimeout(() => this.completeHideAnimation(), closeAnimation.duration);
++            const timeout = setTimeout(() => this.completeHideAnimation(), duration);
+             this.hidingContextView = {
+                 disposable: toDisposable(() => clearTimeout(timeout)),
+                 toDispose,
 diff --git a/esm/vs/base/browser/ui/findinput/findInput.css b/esm/vs/base/browser/ui/findinput/findInput.css
-index 3de2fd329aca8658d65e4335f171057dd1cc9736..29a79816c3a302196f5568e3ed6a4d07ee260cb7 100644
 --- a/esm/vs/base/browser/ui/findinput/findInput.css
 +++ b/esm/vs/base/browser/ui/findinput/findInput.css
 @@ -31,22 +31,22 @@
@@ -65,7 +122,6 @@ index 3de2fd329aca8658d65e4335f171057dd1cc9736..29a79816c3a302196f5568e3ed6a4d07
  
  @keyframes monaco-findInput-highlight-0 {
 diff --git a/esm/vs/base/browser/ui/hover/hoverWidget.css b/esm/vs/base/browser/ui/hover/hoverWidget.css
-index 11f1fdccc7c09b913394d77b3977d89913a4b516..83750f6f8d6ea076883609accea84cddf0bb9eeb 100644
 --- a/esm/vs/base/browser/ui/hover/hoverWidget.css
 +++ b/esm/vs/base/browser/ui/hover/hoverWidget.css
 @@ -15,7 +15,7 @@
@@ -77,11 +133,34 @@ index 11f1fdccc7c09b913394d77b3977d89913a4b516..83750f6f8d6ea076883609accea84cdd
  }
  
  .monaco-hover.hidden {
+diff --git a/esm/vs/base/browser/ui/list/listView.js b/esm/vs/base/browser/ui/list/listView.js
+--- a/esm/vs/base/browser/ui/list/listView.js
++++ b/esm/vs/base/browser/ui/list/listView.js
+@@ -12,7 +12,7 @@
+ import { Scrollable } from '../../../common/scrollable.js';
+ import { RangeMap, shift } from './rangeMap.js';
+ import { RowCache } from './rowCache.js';
+-import { BugIndicatingError } from '../../../common/errors.js';
++import { BugIndicatingError, onUnexpectedError } from '../../../common/errors.js';
+ import { clamp } from '../../../common/numbers.js';
+ import { applyDragImage } from '../dnd/dnd.js';
+ 
+@@ -491,7 +491,10 @@
+             this.scrollableElementWidthDelayer.cancel();
+             return;
+         }
+-        this.scrollableElementWidthDelayer.trigger(() => this.updateScrollWidth());
++        // PATCH: Observe canceled width updates to prevent unhandled rejections.
++        // Preserve Delayer promise settlement; report errors other than cancellation.
++        // Related disposal report: https://github.com/microsoft/monaco-editor/issues/4702
++        this.scrollableElementWidthDelayer.trigger(() => this.updateScrollWidth()).catch(onUnexpectedError);
+     }
+     updateScrollWidth() {
+         if (!this.horizontalScrolling) {
 diff --git a/esm/vs/base/browser/ui/menu/menu.js b/esm/vs/base/browser/ui/menu/menu.js
-index 424bac8eb56ca35b8754953fe7269cdd408aa2ba..0ce8436d723fdb6e99acb7d5fc4d993cbf35269b 100644
 --- a/esm/vs/base/browser/ui/menu/menu.js
 +++ b/esm/vs/base/browser/ui/menu/menu.js
-@@ -783,7 +783,7 @@ ${formatRule(Codicon.menuSubmenu)}
+@@ -795,7 +795,7 @@
  .monaco-menu .monaco-action-bar .action-item {
  	cursor: pointer;
  	display: inline-block;
@@ -90,16 +169,16 @@ index 424bac8eb56ca35b8754953fe7269cdd408aa2ba..0ce8436d723fdb6e99acb7d5fc4d993c
  	position: relative;  /* DO NOT REMOVE - this is the key to preventing the ghosting icon bug in Chrome 42 */
  }
  
-@@ -968,7 +968,7 @@ ${formatRule(Codicon.menuSubmenu)}
- .context-view.monaco-menu-container {
+@@ -981,7 +981,7 @@
+ 	${CONTEXT_VIEW_MENU_MOTION_SHADOW_VARIABLE}: ${menuShadow};
  	outline: 0;
  	border: none;
 -	animation: fadeIn 0.083s linear;
 +	animation: fadeIn var(--vscode-animationDuration-short, 100ms) linear;
  	-webkit-app-region: no-drag;
- }
- 
-@@ -1058,14 +1058,14 @@ ${formatRule(Codicon.menuSubmenu)}
+ 	box-shadow: var(${CONTEXT_VIEW_MENU_MOTION_SHADOW_VARIABLE});
+ 	border-radius: var(--vscode-cornerRadius-large);
+@@ -1095,14 +1095,14 @@
  				/* Background rule added for IE9 - to allow clicks on dom node */
  				background:rgba(0,0,0,0);
  
@@ -117,7 +196,6 @@ index 424bac8eb56ca35b8754953fe7269cdd408aa2ba..0ce8436d723fdb6e99acb7d5fc4d993c
  
  			/* Scrollable Content Inset Shadow */
 diff --git a/esm/vs/base/browser/ui/progressbar/progressbar.css b/esm/vs/base/browser/ui/progressbar/progressbar.css
-index dc23cd255ecfcf1a6243f8b636d52ce83769f212..db44dbdcdef2965ad55608ce9bfdbffb2e79f8f6 100644
 --- a/esm/vs/base/browser/ui/progressbar/progressbar.css
 +++ b/esm/vs/base/browser/ui/progressbar/progressbar.css
 @@ -23,7 +23,7 @@
@@ -139,7 +217,6 @@ index dc23cd255ecfcf1a6243f8b636d52ce83769f212..db44dbdcdef2965ad55608ce9bfdbffb
  	transform: translate3d(0px, 0px, 0px);
  	animation-timing-function: linear;
 diff --git a/esm/vs/base/browser/ui/sash/sash.css b/esm/vs/base/browser/ui/sash/sash.css
-index 52419ac7d454939c41423b960c0d021cdc3df669..1b8beff5f9efc0f52913e5c21046dc59a71e337c 100644
 --- a/esm/vs/base/browser/ui/sash/sash.css
 +++ b/esm/vs/base/browser/ui/sash/sash.css
 @@ -112,7 +112,7 @@
@@ -152,7 +229,6 @@ index 52419ac7d454939c41423b960c0d021cdc3df669..1b8beff5f9efc0f52913e5c21046dc59
  
  .monaco-sash.hover:before,
 diff --git a/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css b/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css
-index be500bc2e56c4748b4fd35126495840629c9373b..9e9c07d9805a04483952c0a67ca2155e7f71f7ca 100644
 --- a/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css
 +++ b/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css
 @@ -15,7 +15,7 @@
@@ -172,12 +248,11 @@ index be500bc2e56c4748b4fd35126495840629c9373b..9e9c07d9805a04483952c0a67ca2155e
 +	transition: opacity var(--vscode-animationDuration-slow, 800ms) linear;
  }
  
- /* Scrollable Content Inset Shadow */
+ .disable-animations .monaco-scrollable-element > .visible,
 diff --git a/esm/vs/base/browser/ui/scrollbar/scrollableElement.js b/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
-index 05c1ff7bbbf873939fd7f9eb29bd9958425dd8bc..c84e28fdb07ea79b829f2ceb5fbf5c60fd03fdb0 100644
 --- a/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
 +++ b/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
-@@ -236,6 +236,10 @@ class AbstractScrollableElement extends Widget {
+@@ -254,6 +254,10 @@
       * Update configuration options for the scrollbar.
       */
      updateOptions(newOptions) {
@@ -189,7 +264,6 @@ index 05c1ff7bbbf873939fd7f9eb29bd9958425dd8bc..c84e28fdb07ea79b829f2ceb5fbf5c60
              this._options.handleMouseWheel = newOptions.handleMouseWheel;
              this._setListeningToMouseWheel(this._options.handleMouseWheel);
 diff --git a/esm/vs/base/browser/ui/table/table.css b/esm/vs/base/browser/ui/table/table.css
-index 03dbcb31566ce542bf5f09df063eb72cc6f46373..1ddb1e70ffd459ceba66a03ffea66cfe6be152e6 100644
 --- a/esm/vs/base/browser/ui/table/table.css
 +++ b/esm/vs/base/browser/ui/table/table.css
 @@ -53,5 +53,5 @@
@@ -199,8 +273,78 @@ index 03dbcb31566ce542bf5f09df063eb72cc6f46373..1ddb1e70ffd459ceba66a03ffea66cfe
 -	transition: border-color 0.2s ease-out;
 +	transition: border-color var(--vscode-animationDuration-medium, 300ms) ease-out;
  }
+diff --git a/esm/vs/base/browser/ui/toggle/switch.css b/esm/vs/base/browser/ui/toggle/switch.css
+--- a/esm/vs/base/browser/ui/toggle/switch.css
++++ b/esm/vs/base/browser/ui/toggle/switch.css
+@@ -13,7 +13,7 @@
+ 	border-radius: var(--vscode-cornerRadius-circle);
+ 	background: color-mix(in srgb, var(--vscode-descriptionForeground) 36%, transparent);
+ 	cursor: pointer;
+-	transition: background-color 120ms ease, border-color 120ms ease;
++	transition: background-color var(--vscode-animationDuration-short, 120ms) ease, border-color var(--vscode-animationDuration-short, 120ms) ease;
+ }
+ 
+ .monaco-switch.checked {
+@@ -39,7 +39,7 @@
+ 	height: var(--vscode-spacing-size120);
+ 	border-radius: var(--vscode-cornerRadius-circle);
+ 	background: var(--vscode-button-foreground);
+-	transition: transform 120ms ease;
++	transition: transform var(--vscode-animationDuration-short, 120ms) ease;
+ }
+ 
+ .monaco-switch.checked .monaco-switch-thumb {
+diff --git a/esm/vs/base/browser/ui/tree/abstractTree.js b/esm/vs/base/browser/ui/tree/abstractTree.js
+--- a/esm/vs/base/browser/ui/tree/abstractTree.js
++++ b/esm/vs/base/browser/ui/tree/abstractTree.js
+@@ -1,6 +1,7 @@
+ import { isEditableElement, isActiveElement, isKeyboardEvent, hasParentWithClass, append, $, clearNode, addDisposableListener } from '../../dom.js';
+ import { createStyleSheet } from '../../domStylesheets.js';
+ import { asCssValueWithDefault } from '../../cssValue.js';
++import { onUnexpectedError } from '../../../common/errors.js';
+ import { Event, EventBufferer, Emitter, Relay } from '../../../common/event.js';
+ import { StandardKeyboardEvent } from '../../keyboardEvent.js';
+ import '../../browser.js';
+@@ -2142,6 +2143,9 @@
+         const activeNodesEmitter = this.modelDisposables.add(new Emitter());
+         const activeNodesDebounce = this.modelDisposables.add(new Delayer(0));
+         this.modelDisposables.add(Event.any(onDidModelSplice, this.focus.onDidChange, this.selection.onDidChange)(() => {
++            // PATCH: Observe pending active-node updates canceled during disposal.
++            // Preserve Delayer promise settlement; report errors other than cancellation.
++            // Related disposal report: https://github.com/microsoft/monaco-editor/issues/4702
+             activeNodesDebounce.trigger(() => {
+                 const set = new Set();
+                 for (const node of this.focus.getNodes()) {
+@@ -2151,7 +2155,7 @@
+                     set.add(node);
+                 }
+                 activeNodesEmitter.fire([...set.values()]);
+-            });
++            }).catch(onUnexpectedError);
+         }));
+         this.onDidChangeActiveNodesRelay.input = activeNodesEmitter.event;
+         this.onDidChangeModelRelay.input = Event.signal(model.onDidSpliceModel);
+diff --git a/esm/vs/base/browser/ui/tree/indexTreeModel.js b/esm/vs/base/browser/ui/tree/indexTreeModel.js
+--- a/esm/vs/base/browser/ui/tree/indexTreeModel.js
++++ b/esm/vs/base/browser/ui/tree/indexTreeModel.js
+@@ -1,3 +1,4 @@
++import { onUnexpectedError } from '../../../common/errors.js';
+ import { TreeError } from './tree.js';
+ import { splice, tail } from '../../../common/arrays.js';
+ import { Delayer } from '../../../common/async.js';
+@@ -177,7 +178,10 @@
+         while (node) {
+             if (node.visibility === 2 /* TreeVisibility.Recurse */) {
+                 // delayed to avoid excessive refiltering, see #135941
+-                this.refilterDelayer.trigger(() => this.refilter());
++                // PATCH: Observe pending updates canceled by an immediate refilter.
++                // Preserve Delayer promise settlement; report errors other than cancellation.
++                // Related disposal report: https://github.com/microsoft/monaco-editor/issues/4702
++                this.refilterDelayer.trigger(() => this.refilter()).catch(onUnexpectedError);
+                 break;
+             }
+             node = node.parent;
 diff --git a/esm/vs/base/browser/ui/tree/media/tree.css b/esm/vs/base/browser/ui/tree/media/tree.css
-index b5330b90041c2da2342aec46f5103e3901700900..41c1c99393fec2855bad98483f350d74a57a159f 100644
 --- a/esm/vs/base/browser/ui/tree/media/tree.css
 +++ b/esm/vs/base/browser/ui/tree/media/tree.css
 @@ -34,7 +34,7 @@
@@ -218,10 +362,10 @@ index b5330b90041c2da2342aec46f5103e3901700900..41c1c99393fec2855bad98483f350d74
  	/* Use steps to throttle FPS to reduce CPU usage */
 -	animation: codicon-spin 1.25s steps(30) infinite;
 +	animation: codicon-spin var(--vscode-animationDuration-ambient, 1.25s) steps(30) infinite;
+ 	/* Ensure rotation happens around exact center to prevent wobble */
+ 	transform-origin: center center;
  }
- 
- .monaco-tree-type-filter {
-@@ -87,7 +87,7 @@
+@@ -89,7 +89,7 @@
  }
  
  .monaco-enable-motion .monaco-tree-type-filter {
@@ -230,34 +374,10 @@ index b5330b90041c2da2342aec46f5103e3901700900..41c1c99393fec2855bad98483f350d74
  }
  
  .monaco-tree-type-filter.disabled {
-diff --git a/esm/vs/base/common/async.js b/esm/vs/base/common/async.js
-index 969f181185395a6150f4c44f2d3a3090cb38c5f3..d5de20cf4ad61605f9d2474fa06811c8505ac649 100644
---- a/esm/vs/base/common/async.js
-+++ b/esm/vs/base/common/async.js
-@@ -248,7 +248,17 @@ class Delayer {
-     cancel() {
-         this.cancelTimeout();
-         if (this.completionPromise) {
--            this.doReject?.(new CancellationError());
-+            // PATCH: Remove error throwing during cancellation
-+            // The Delayer treats cancellation as an error condition that should be thrown,
-+            // but this is problematic during editor disposal where cancellation is a normal
-+            // part of the lifecycle. This patch changes the behavior to treat cancellation
-+            // as a normal state transition rather than an error condition.
-+            //
-+            // This fixes unhandled rejections that occur when the editor is disposed while
-+            // async operations are pending. The issue affects both test and production
-+            // environments.
-+            // See: https://github.com/microsoft/monaco-editor/issues/4702
-+            // this.doReject?.(new CancellationError());
-             this.completionPromise = null;
-         }
-     }
 diff --git a/esm/vs/editor/browser/controller/mouseHandler.js b/esm/vs/editor/browser/controller/mouseHandler.js
-index be17f497db57379c0e5f5fc4d87b3a38ffe55a44..68f09c0cc7497c45031a977bd8f9162020b70945 100644
 --- a/esm/vs/editor/browser/controller/mouseHandler.js
 +++ b/esm/vs/editor/browser/controller/mouseHandler.js
-@@ -38,7 +38,10 @@ class MouseHandler extends ViewEventHandler {
+@@ -39,7 +39,10 @@
              // remove this listener
              if (!this._mouseLeaveMonitor) {
                  this._mouseLeaveMonitor = addDisposableListener(this.viewHelper.viewDomNode.ownerDocument, 'mousemove', (e) => {
@@ -270,10 +390,9 @@ index be17f497db57379c0e5f5fc4d87b3a38ffe55a44..68f09c0cc7497c45031a977bd8f91620
                          this._onMouseLeave(new EditorMouseEvent(e, false, this.viewHelper.viewDomNode));
                      }
 diff --git a/esm/vs/editor/browser/controller/mouseTarget.js b/esm/vs/editor/browser/controller/mouseTarget.js
-index 909381244394b4588c2f6577d5603203c993619b..bbc03b0810e0d0e88b0b22bc1b765acdbbc69378 100644
 --- a/esm/vs/editor/browser/controller/mouseTarget.js
 +++ b/esm/vs/editor/browser/controller/mouseTarget.js
-@@ -891,18 +891,26 @@ class MouseTargetFactory {
+@@ -891,18 +891,26 @@
          return result;
      }
  }
@@ -302,7 +421,7 @@ index 909381244394b4588c2f6577d5603203c993619b..bbc03b0810e0d0e88b0b22bc1b765acd
          }
          // Grab its rect
          const rect = el.getBoundingClientRect();
-@@ -944,8 +952,9 @@ function shadowCaretRangeFromPoint(shadowRoot, x, y) {
+@@ -945,8 +953,9 @@
              }
          }
          // Creates a range with the text node of the element and set the offset found
@@ -315,10 +434,9 @@ index 909381244394b4588c2f6577d5603203c993619b..bbc03b0810e0d0e88b0b22bc1b765acd
      return range;
  }
 diff --git a/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js b/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js
-index 46c25ca9ffca832406cd14de8ef9d135e42db05f..0e0954e54ab4d65ab128f3e730048f153d1b4397 100644
 --- a/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js
 +++ b/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js
-@@ -115,6 +115,8 @@ class EditorScrollbar extends ViewPart {
+@@ -112,6 +112,8 @@
              const fastScrollSensitivity = options.get(49 /* EditorOption.fastScrollSensitivity */);
              const scrollPredominantAxis = options.get(120 /* EditorOption.scrollPredominantAxis */);
              const newOpts = {
@@ -328,7 +446,6 @@ index 46c25ca9ffca832406cd14de8ef9d135e42db05f..0e0954e54ab4d65ab128f3e730048f15
                  horizontal: scrollbar.horizontal,
                  verticalScrollbarSize: scrollbar.verticalScrollbarSize,
 diff --git a/esm/vs/editor/browser/viewParts/gpuMark/gpuMark.css b/esm/vs/editor/browser/viewParts/gpuMark/gpuMark.css
-index 988c4bcb24ad04568f8678468d6d948b5d1a50eb..5892bf5e70c0fc147de00839117a9e188e516d73 100644
 --- a/esm/vs/editor/browser/viewParts/gpuMark/gpuMark.css
 +++ b/esm/vs/editor/browser/viewParts/gpuMark/gpuMark.css
 @@ -12,7 +12,7 @@
@@ -341,7 +458,6 @@ index 988c4bcb24ad04568f8678468d6d948b5d1a50eb..5892bf5e70c0fc147de00839117a9e18
  
  .monaco-editor .margin-view-overlays .gpu-mark:hover {
 diff --git a/esm/vs/editor/browser/viewParts/minimap/minimap.css b/esm/vs/editor/browser/viewParts/minimap/minimap.css
-index 35bb6e3b7178b3df37b018b6dc629a34076ee085..9d8b485c95ac4a44bb8dae09097190f1b196c4c7 100644
 --- a/esm/vs/editor/browser/viewParts/minimap/minimap.css
 +++ b/esm/vs/editor/browser/viewParts/minimap/minimap.css
 @@ -6,7 +6,7 @@
@@ -363,7 +479,6 @@ index 35bb6e3b7178b3df37b018b6dc629a34076ee085..9d8b485c95ac4a44bb8dae09097190f1
  .minimap.minimap-autohide-scroll{
  	pointer-events: none;
 diff --git a/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css b/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css
-index 5549376d99d507c93f0da27de7d852aa85fe4a93..b54a5617183d45d33f62d8fae9b7d957a8d9fa67 100644
 --- a/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css
 +++ b/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css
 @@ -15,7 +15,7 @@
@@ -393,7 +508,6 @@ index 5549376d99d507c93f0da27de7d852aa85fe4a93..b54a5617183d45d33f62d8fae9b7d957
 +	animation: monaco-cursor-expand var(--vscode-animationDuration-long, 500ms) ease-in-out 0s 20 alternate;
  }
 diff --git a/esm/vs/editor/browser/viewParts/viewLines/viewLines.css b/esm/vs/editor/browser/viewParts/viewLines/viewLines.css
-index 2e2e717307bf2e7891bec2a949cb8171783667ea..8c1b262ee60e3d10ab76d1bea8f25625ab72a498 100644
 --- a/esm/vs/editor/browser/viewParts/viewLines/viewLines.css
 +++ b/esm/vs/editor/browser/viewParts/viewLines/viewLines.css
 @@ -7,7 +7,7 @@
@@ -405,30 +519,10 @@ index 2e2e717307bf2e7891bec2a949cb8171783667ea..8c1b262ee60e3d10ab76d1bea8f25625
  }
  @keyframes flash-background {
  	0%   { background-color: lightgreen; }
-diff --git a/esm/vs/editor/browser/widget/codeEditor/editor.css b/esm/vs/editor/browser/widget/codeEditor/editor.css
-index d33122122dedf0c3ef6b1e02355caa16fc2c829c..f578a62e9a6b1a5d28e5c0e0e32c7cdffef5e0f8 100644
---- a/esm/vs/editor/browser/widget/codeEditor/editor.css
-+++ b/esm/vs/editor/browser/widget/codeEditor/editor.css
-@@ -117,3 +117,14 @@
- 	text-decoration: line-through;
- 	text-decoration-color: var(--vscode-editor-foreground, inherit);
- }
-+
-+/* PATCH: Add animation duration CSS properties */
-+:root {
-+	--vscode-animationDuration-instant: 50ms;
-+	--vscode-animationDuration-short: 100ms;
-+	--vscode-animationDuration-medium: 300ms;
-+	--vscode-animationDuration-long: 500ms;
-+	--vscode-animationDuration-slow: 800ms;
-+	--vscode-animationDuration-ambient: 1.25s;
-+	--vscode-animationDuration-cycle: 4s;	
-+}
 diff --git a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
-index 3187a99bd9eea0dab59833a57cd556f99f2c41ae..a963a2a9cb1c53d4f49be71e617780f48552c062 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
 +++ b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
-@@ -65,11 +65,14 @@ let DiffEditorEditors = class DiffEditorEditors extends Disposable {
+@@ -68,11 +68,14 @@
                  }
              }
          }, (reader, changeSummary) => {
@@ -445,7 +539,7 @@ index 3187a99bd9eea0dab59833a57cd556f99f2c41ae..a963a2a9cb1c53d4f49be71e617780f4
          }));
      }
      _createLeftHandSideEditor(options, codeEditorWidgetOptions) {
-@@ -155,7 +158,8 @@ let DiffEditorEditors = class DiffEditorEditors extends Disposable {
+@@ -157,7 +160,8 @@
          clonedOptions.scrollbar = { ...(clonedOptions.scrollbar || {}) };
          clonedOptions.folding = false;
          clonedOptions.codeLens = this._options.diffCodeLens.get();
@@ -456,10 +550,9 @@ index 3187a99bd9eea0dab59833a57cd556f99f2c41ae..a963a2a9cb1c53d4f49be71e617780f4
          clonedOptions.minimap = { ...(clonedOptions.minimap || {}) };
          clonedOptions.minimap.enabled = false;
 diff --git a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js
-index d7d24568eb3a404073eb71a4aedbf79d7576914c..bca64e9a2fc8cd613c3615e89df8a92ff37a1509 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js
 +++ b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js
-@@ -40,7 +40,7 @@ class InlineDiffDeletedCodeMargin extends Disposable {
+@@ -40,7 +40,7 @@
          this._diffActions.className = ThemeIcon.asClassName(Codicon.lightBulb) + ' lightbulb-glyph';
          this._diffActions.style.position = 'absolute';
          const lineHeight = this._modifiedEditor.getOption(75 /* EditorOption.lineHeight */);
@@ -469,10 +562,9 @@ index d7d24568eb3a404073eb71a4aedbf79d7576914c..bca64e9a2fc8cd613c3615e89df8a92f
          this._diffActions.style.height = `${lineHeight}px`;
          this._diffActions.style.lineHeight = `${lineHeight}px`;
 diff --git a/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js b/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
-index 8dd4050bd048abb31f44f69658d4403f91b52d26..b999412a3ff25d7c6882ee8a6701d26a5d290235 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
 +++ b/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
-@@ -106,6 +106,12 @@ class DelegatingEditor extends Disposable {
+@@ -106,6 +106,12 @@
      changeDecorations(callback) {
          return this._targetEditor.changeDecorations(callback);
      }
@@ -486,10 +578,9 @@ index 8dd4050bd048abb31f44f69658d4403f91b52d26..b999412a3ff25d7c6882ee8a6701d26a
  
  export { DelegatingEditor };
 diff --git a/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js b/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js
-index 01877be4c38d00326feeb1067c81a440bead31c0..d58aa77a2cef63e76920cd4de12f2fb43acf4c20 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js
 +++ b/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js
-@@ -92,6 +92,10 @@ let DiffEditorGutter = class DiffEditorGutter extends Disposable {
+@@ -92,6 +92,10 @@
          this._register(addDisposableListener(this.elements.root, 'click', () => {
              this._editors.modified.focus();
          }));
@@ -500,7 +591,7 @@ index 01877be4c38d00326feeb1067c81a440bead31c0..d58aa77a2cef63e76920cd4de12f2fb4
          this._register(applyStyle(this.elements.root, { display: this._hasActions.map(a => a ? 'block' : 'none') }));
          derivedDisposable(this, reader => {
              const showSash = this._showSash.read(reader);
-@@ -190,6 +194,8 @@ let DiffToolBar = class DiffToolBar extends Disposable {
+@@ -190,6 +194,8 @@
                      primaryGroup: g => g.startsWith('primary'),
                  },
                  overflowBehavior: { maxItems: this._isSmall.read(reader) ? 1 : 3 },
@@ -510,7 +601,6 @@ index 01877be4c38d00326feeb1067c81a440bead31c0..d58aa77a2cef63e76920cd4de12f2fb4
                  actionRunner: store.add(new ActionRunnerWithContext(() => {
                      const item = this._item.read(undefined);
 diff --git a/esm/vs/editor/browser/widget/diffEditor/style.css b/esm/vs/editor/browser/widget/diffEditor/style.css
-index 6e27efbe75aeed885fece4ca4ae38e1ff78d74bd..d32f3778e8f6afe9f9a82f8d3d72176aa647223d 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/style.css
 +++ b/esm/vs/editor/browser/widget/diffEditor/style.css
 @@ -23,7 +23,7 @@
@@ -522,7 +612,7 @@ index 6e27efbe75aeed885fece4ca4ae38e1ff78d74bd..d32f3778e8f6afe9f9a82f8d3d72176a
  	height: 4px;
  	background-color: transparent;
  	background-clip: padding-box;
-@@ -338,7 +338,7 @@
+@@ -465,7 +465,7 @@
  
  	.gutterItem {
  		opacity: 0;
@@ -531,7 +621,7 @@ index 6e27efbe75aeed885fece4ca4ae38e1ff78d74bd..d32f3778e8f6afe9f9a82f8d3d72176a
  
  		&.showAlways {
  			opacity: 1;
-@@ -352,7 +352,7 @@
+@@ -479,7 +479,7 @@
  
  	&:hover .gutterItem {
  		opacity: 1;
@@ -541,10 +631,19 @@ index 6e27efbe75aeed885fece4ca4ae38e1ff78d74bd..d32f3778e8f6afe9f9a82f8d3d72176a
  
  	.gutterItem {
 diff --git a/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js b/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js
-index d272dc1a9cac2191cbc1f3f6ef73a5742162ad6a..331f6fa53c24df1a3c4c62a4c616f2606e964c76 100644
 --- a/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js
 +++ b/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js
-@@ -175,7 +175,8 @@ let DiffEditorItemTemplate = class DiffEditorItemTemplate extends Disposable {
+@@ -95,7 +95,8 @@
+         ]);
+         this.editor = this._register(this._instantiationService.createInstance(DiffEditorWidget, this._elements.editor, {
+             overflowWidgetsDomNode: this._overflowWidgetsDomNode,
+-            fixedOverflowWidgets: true
++            // PATCH: Fixed overflow widgets cannot escape the containing shadow root.
++            fixedOverflowWidgets: false
+         }, {
+             variant: this._variantConfiguration.diffEditorVariant,
+             runWithOriginalEditorScrollAnchor: (anchorLineNumber, update) => this._runWithEditorScrollAnchor(() => this._outerEditorHeight + this._getOriginalEditorLineTop(anchorLineNumber), update),
+@@ -323,7 +324,8 @@
                      useShadows: false,
                  },
                  renderOverviewRuler: false,
@@ -555,63 +654,30 @@ index d272dc1a9cac2191cbc1f3f6ef73a5742162ad6a..331f6fa53c24df1a3c4c62a4c616f260
              };
          }
 diff --git a/esm/vs/editor/common/model/textModel.js b/esm/vs/editor/common/model/textModel.js
-index 5ea5530740156d0602887b5a72155f654a92e214..3e04aa520519ef8f82c992bfa47aed016d564db0 100644
 --- a/esm/vs/editor/common/model/textModel.js
 +++ b/esm/vs/editor/common/model/textModel.js
-@@ -179,6 +179,9 @@ let TextModel = class TextModel extends Disposable {
-         this._languageSelectionListener = this._register(new MutableDisposable());
+@@ -179,6 +179,9 @@
          this._deltaDecorationCallCnt = 0;
-         this._attachedViews = new AttachedViews();
-+        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
-+        this._onDidValidateVersion = new Emitter();
+         this._attachedViews = this._register(new AttachedViews());
+         this._viewModels = new Set();
++        // PATCH: Report validation completion for each model version.
++        this._onDidValidateVersion = this._register(new Emitter());
 +        this.onDidValidateVersion = this._onDidValidateVersion.event;
          // Generate a new unique model id
          MODEL_ID++;
          this.id = '$model' + MODEL_ID;
-@@ -256,6 +259,10 @@ let TextModel = class TextModel extends Disposable {
+@@ -268,6 +271,10 @@
+         emptyDisposedTextBuffer.dispose();
          this._buffer = emptyDisposedTextBuffer;
          this._bufferDisposable = Disposable.None;
-     }
-+    // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++    }
++    // PATCH: Report validation completion for each model version.
 +    setVersionValidated(versionId) {
 +        this._onDidValidateVersion.fire(versionId);
-+    }
+     }
      _assertNotDisposed() {
          if (this._isDisposed) {
-             throw new BugIndicatingError('Model is disposed!');
-diff --git a/esm/vs/editor/contrib/clipboard/browser/clipboard.js b/esm/vs/editor/contrib/clipboard/browser/clipboard.js
-index 1a8db88ee15a4c23c648f22bb6ae45af3a1f096d..7a814a1755cebb428f8b6df2b17258f9d1f7a3da 100644
---- a/esm/vs/editor/contrib/clipboard/browser/clipboard.js
-+++ b/esm/vs/editor/contrib/clipboard/browser/clipboard.js
-@@ -235,7 +235,11 @@ if (PasteAction) {
-         const codeEditorService = accessor.get(ICodeEditorService);
-         const clipboardService = accessor.get(IClipboardService);
-         const telemetryService = accessor.get(ITelemetryService);
-+        // PATCH: Workaround for broken PasteAction due to missing ProductService
-+        // See https://github.com/microsoft/monaco-editor/issues/5079#issuecomment-3625281388
-+        /*
-         const productService = accessor.get(IProductService);
-+        */
-         // Only if editor text focus (i.e. not if editor has widget focus).
-         const focusedEditor = codeEditorService.getFocusedCodeEditor();
-         if (focusedEditor && focusedEditor.hasModel() && focusedEditor.hasTextFocus()) {
-@@ -254,10 +258,14 @@ if (PasteAction) {
-                 logService.trace('registerExecCommandImpl (triggerPaste defined)');
-                 return triggerPaste.then(async () => {
-                     logService.trace('registerExecCommandImpl (after triggerPaste)');
-+                    // PATCH: Workaround for broken PasteAction due to missing ProductService
-+                    // See https://github.com/microsoft/monaco-editor/issues/5079#issuecomment-3625281388
-+                    /*
-                     if (productService.quality !== 'stable') {
-                         const duration = sw.elapsed();
-                         telemetryService.publicLog2('editorAsyncPaste', { duration });
-                     }
-+                    */
-                     return CopyPasteController.get(focusedEditor)?.finishedPaste() ?? Promise.resolve();
-                 });
-             }
 diff --git a/esm/vs/editor/contrib/codelens/browser/codelensWidget.css b/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
-index a7ec91c06d96824d0a54f95fa5c3d886e01a874a..5cb31704d917e126557ec6c06f1df0d1d7b9c724 100644
 --- a/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
 +++ b/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
 @@ -59,5 +59,5 @@
@@ -622,20 +688,18 @@ index a7ec91c06d96824d0a54f95fa5c3d886e01a874a..5cb31704d917e126557ec6c06f1df0d1
 +	animation: fadein var(--vscode-animationDuration-short, 100ms) linear;
  }
 diff --git a/esm/vs/editor/contrib/find/browser/findWidget.css b/esm/vs/editor/contrib/find/browser/findWidget.css
-index a8f936985138e8ca882cdb81204b699208d7707c..b0f9e26943dbc4daded7d39e8610cecf4b578d7c 100644
 --- a/esm/vs/editor/contrib/find/browser/findWidget.css
 +++ b/esm/vs/editor/contrib/find/browser/findWidget.css
 @@ -10,7 +10,7 @@
- 	height: 33px;
+ 	height: 34px;
  	overflow: hidden;
  	line-height: 19px;
 -	transition: transform 200ms linear;
 +	transition: transform var(--vscode-animationDuration-medium, 200ms) linear;
- 	padding: 0 4px;
+ 	padding: 0 4px 0 9px;
+ 	margin-top: 4px;
  	box-sizing: border-box;
- 	transform: translateY(calc(-100% - 10px)); /* shadow (10px) */
 diff --git a/esm/vs/editor/contrib/folding/browser/folding.css b/esm/vs/editor/contrib/folding/browser/folding.css
-index 11ee8010be44daf620f027ad67403e1a5ee6b0e5..83bc51f61a60614065add8ab39a698556eeb520a 100644
 --- a/esm/vs/editor/contrib/folding/browser/folding.css
 +++ b/esm/vs/editor/contrib/folding/browser/folding.css
 @@ -8,7 +8,7 @@
@@ -648,10 +712,9 @@ index 11ee8010be44daf620f027ad67403e1a5ee6b0e5..83bc51f61a60614065add8ab39a69855
  	align-items: center;
  	justify-content: center;
 diff --git a/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js b/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
-index 14da55aa45ed683df456d75adf74ccb59e1faa25..21dc2e94fe1ca1125b38d5eb51aafdcc1c8f593d 100644
 --- a/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
 +++ b/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
-@@ -295,7 +295,8 @@ let ReferenceWidget = class ReferenceWidget extends PeekViewWidget {
+@@ -295,7 +295,8 @@
                  alwaysConsumeMouseWheel: true
              },
              overviewRulerLanes: 2,
@@ -661,33 +724,94 @@ index 14da55aa45ed683df456d75adf74ccb59e1faa25..21dc2e94fe1ca1125b38d5eb51aafdcc
              minimap: {
                  enabled: false
              }
+diff --git a/esm/vs/editor/contrib/inlineCompletions/browser/model/inlineCompletionsModel.js b/esm/vs/editor/contrib/inlineCompletions/browser/model/inlineCompletionsModel.js
+--- a/esm/vs/editor/contrib/inlineCompletions/browser/model/inlineCompletionsModel.js
++++ b/esm/vs/editor/contrib/inlineCompletions/browser/model/inlineCompletionsModel.js
+@@ -859,7 +859,7 @@
+                         // do not move the cursor when the completion is displayed in a different location
+                         editor.setSelections(state.kind === 'inlineEdit' ? selections.slice(-1) : selections, 'inlineCompletionAccept');
+                     }
+-                    if (state.kind === 'inlineEdit' && !this._accessibilityService.isMotionReduced()) {
++                    if (state.kind === 'inlineEdit' && !this._accessibilityService.isMotionReduced(editor.getDomNode())) {
+                         const editRanges = edit.getNewRanges();
+                         const dec = this._store.add(new FadeoutDecoration(editor, editRanges, () => {
+                             this._store.delete(dec);
 diff --git a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/components/gutterIndicatorView.js b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/components/gutterIndicatorView.js
-index 4f2b65df75df0de7728ba6ba9a86c924e203b37a..c9f49931360cd062469959c229e286fd0f699b33 100644
 --- a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/components/gutterIndicatorView.js
 +++ b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/components/gutterIndicatorView.js
-@@ -323,7 +323,7 @@ let InlineEditsGutterIndicator = class InlineEditsGutterIndicator extends Dispos
-                     borderRadius: '4px',
+@@ -1,3 +1,4 @@
++import { getMotionDuration } from '../../../../../../../base/browser/motion.js';
+ import { n } from '../../../../../../../base/browser/dom.js';
+ import { renderIcon } from '../../../../../../../base/browser/ui/iconLabel/iconLabels.js';
+ import { Codicon } from '../../../../../../../base/common/codicons.js';
+@@ -369,7 +370,7 @@
+                     borderRadius: `${INLINE_EDITS_BORDER_RADIUS}px`,
                      display: 'flex',
-                     justifyContent: 'flex-end',
--                    transition: 'background-color 0.2s ease-in-out, width 0.2s ease-in-out',
-+                    transition: 'background-color var(--vscode-animationDuration-medium, 200ms) ease-in-out, width var(--vscode-animationDuration-medium, 200ms) ease-in-out',
+                     justifyContent: layout.map(l => l.iconDirection === 'bottom' ? 'flex-start' : 'flex-end'),
+-                    transition: this._modifierPressed.map(m => m ? '' : 'background-color 0.2s ease-in-out, width 0.2s ease-in-out'),
++                    transition: this._modifierPressed.map(m => m ? '' : 'background-color var(--vscode-animationDuration-medium, 200ms) ease-in-out, width var(--vscode-animationDuration-medium, 200ms) ease-in-out'),
                      ...rectToProps(reader => layout.read(reader).pillRect),
                  }
              }, [
-@@ -342,7 +342,7 @@ let InlineEditsGutterIndicator = class InlineEditsGutterIndicator extends Dispos
+@@ -388,7 +389,7 @@
                  n.div({
                      style: {
-                         rotate: layout.map(l => `${getRotationFromDirection(l.iconDirection)}deg`),
--                        transition: 'rotate 0.2s ease-in-out',
-+                        transition: 'rotate var(--vscode-animationDuration-medium, 200ms) ease-in-out',
+                         transform: layout.map(l => `rotate(${getRotationFromDirection(l.iconDirection)}deg)`),
+-                        transition: 'rotate 0.2s ease-in-out, opacity 0.2s ease-in-out',
++                        transition: 'rotate var(--vscode-animationDuration-medium, 200ms) ease-in-out, opacity var(--vscode-animationDuration-medium, 200ms) ease-in-out',
                          display: 'flex',
                          alignItems: 'center',
                          justifyContent: 'center',
+@@ -436,8 +437,8 @@
+         }));
+     }
+     triggerAnimation() {
+-        if (this._accessibilityService.isMotionReduced()) {
+-            return new Animation(null, null).finished;
++        if (this._accessibilityService.isMotionReduced(this._iconRef.element)) {
++            return Promise.resolve();
+         }
+         // PULSE ANIMATION:
+         const animation = this._iconRef.element.animate([
+@@ -451,7 +452,7 @@
+                 outlineOffset: '10px',
+                 offset: 1
+             },
+-        ], { duration: 500 });
++        ] , { duration: getMotionDuration(this._iconRef.element, '--vscode-animationDuration-long', 500) });
+         return animation.finished;
+     }
+     _showHover() {
+diff --git a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/inlineEditsCollapsedView.js b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/inlineEditsCollapsedView.js
+--- a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/inlineEditsCollapsedView.js
++++ b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/inlineEditsCollapsedView.js
+@@ -64,8 +64,8 @@
+         this.isVisible = this._edit.map((inlineEdit, reader) => !!inlineEdit && startPoint.read(reader) !== null);
+     }
+     triggerAnimation() {
+-        if (this._accessibilityService.isMotionReduced()) {
+-            return new Animation(null, null).finished;
++        if (this._accessibilityService.isMotionReduced(this._iconRef.element)) {
++            return Promise.resolve();
+         }
+         // PULSE ANIMATION:
+         const animation = this._iconRef.element.animate([
+diff --git a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/longDistanceHint/inlineEditsLongDistanceHint.js b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/longDistanceHint/inlineEditsLongDistanceHint.js
+--- a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/longDistanceHint/inlineEditsLongDistanceHint.js
++++ b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/longDistanceHint/inlineEditsLongDistanceHint.js
+@@ -218,7 +218,7 @@
+                 display: 'flex',
+                 flexDirection: 'column',
+                 opacity: derived(reader => this._viewState.read(reader)?.hint.isVisible ? '1' : '0'),
+-                transition: 'opacity 200ms ease-in-out',
++                transition: 'opacity var(--vscode-animationDuration-medium, 200ms) ease-in-out',
+                 ...rectToProps(reader => this._previewEditorLayoutInfo.read(reader)?.widgetRect)
+             },
+             onmousedown: e => {
 diff --git a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css
-index f93e486260393a423db91ae2837b2df7f74c26d9..f7215e5069700f36a2e7412c8326f318eea84121 100644
 --- a/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css
 +++ b/esm/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/view.css
-@@ -32,8 +32,8 @@
+@@ -34,8 +34,8 @@
  		opacity: 0;
  
  		&.contained {
@@ -698,7 +822,7 @@ index f93e486260393a423db91ae2837b2df7f74c26d9..f7215e5069700f36a2e7412c8326f318
  		}
  
  		&.visible {
-@@ -61,7 +61,7 @@
+@@ -63,7 +63,7 @@
  			align-items: center;
  			margin: 0 2px;
  			transform: none;
@@ -707,8 +831,30 @@ index f93e486260393a423db91ae2837b2df7f74c26d9..f7215e5069700f36a2e7412c8326f318
  			.codicon {
  				color: var(--vscode-inlineEdit-gutterIndicator-primaryForeground);
  			}
+diff --git a/esm/vs/editor/contrib/linkedEditing/browser/linkedEditing.js b/esm/vs/editor/contrib/linkedEditing/browser/linkedEditing.js
+--- a/esm/vs/editor/contrib/linkedEditing/browser/linkedEditing.js
++++ b/esm/vs/editor/contrib/linkedEditing/browser/linkedEditing.js
+@@ -106,11 +106,17 @@
+         }));
+         const rangeUpdateScheduler = new Delayer(this._debounceInformation.get(model));
+         const triggerRangeUpdate = () => {
+-            this._rangeUpdateTriggerPromise = rangeUpdateScheduler.trigger(() => this.updateRanges(), this._debounceDuration ?? this._debounceInformation.get(model));
++            // PATCH: Observe range updates canceled during model or editor disposal.
++            // Preserve Delayer promise settlement; report errors other than cancellation.
++            // Related disposal report: https://github.com/microsoft/monaco-editor/issues/4702
++            this._rangeUpdateTriggerPromise = rangeUpdateScheduler.trigger(() => this.updateRanges(), this._debounceDuration ?? this._debounceInformation.get(model)).catch(onUnexpectedError);
+         };
+         const rangeSyncScheduler = new Delayer(0);
+         const triggerRangeSync = (token) => {
+-            this._rangeSyncTriggerPromise = rangeSyncScheduler.trigger(() => this._syncRanges(token));
++            // PATCH: Observe synchronization canceled before its queued task runs.
++            // Preserve Delayer promise settlement; report errors other than cancellation.
++            // Related disposal report: https://github.com/microsoft/monaco-editor/issues/4702
++            this._rangeSyncTriggerPromise = rangeSyncScheduler.trigger(() => this._syncRanges(token)).catch(onUnexpectedError);
+         };
+         this._localToDispose.add(this._editor.onDidChangeCursorPosition(() => {
+             triggerRangeUpdate();
 diff --git a/esm/vs/editor/contrib/message/browser/messageController.css b/esm/vs/editor/contrib/message/browser/messageController.css
-index 6ea335781ce0df57917f086974bed027421f8411..9532c077395c83bc959d920bee5beea0a04ca635 100644
 --- a/esm/vs/editor/contrib/message/browser/messageController.css
 +++ b/esm/vs/editor/contrib/message/browser/messageController.css
 @@ -19,7 +19,7 @@
@@ -730,7 +876,6 @@ index 6ea335781ce0df57917f086974bed027421f8411..9532c077395c83bc959d920bee5beea0
  
  .monaco-editor .monaco-editor-overlaymessage .message {
 diff --git a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css b/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
-index ecc59245decf80102324d31128af25843a108cb9..6e4946bac8cce9632033a4e8efeb10588875f4b2 100644
 --- a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
 +++ b/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
 @@ -7,7 +7,8 @@
@@ -743,11 +888,22 @@ index ecc59245decf80102324d31128af25843a108cb9..6e4946bac8cce9632033a4e8efeb1058
  	z-index: 4;
  	right: initial !important;
  	margin-left: '0px';
+diff --git a/esm/vs/editor/contrib/stickyScroll/browser/stickyScrollWidget.js b/esm/vs/editor/contrib/stickyScroll/browser/stickyScrollWidget.js
+--- a/esm/vs/editor/contrib/stickyScroll/browser/stickyScrollWidget.js
++++ b/esm/vs/editor/contrib/stickyScroll/browser/stickyScrollWidget.js
+@@ -160,7 +160,7 @@
+         this._rootDomNode.style.width = `${layoutInfo.width - layoutInfo.verticalScrollbarWidth}px`;
+     }
+     _useFoldingOpacityTransition(requireTransitions) {
+-        this._lineNumbersDomNode.style.setProperty('--vscode-editorStickyScroll-foldingOpacityTransition', `opacity ${requireTransitions ? 0.5 : 0}s`);
++        this._lineNumbersDomNode.style.setProperty('--vscode-editorStickyScroll-foldingOpacityTransition', `opacity ${requireTransitions ? 'var(--vscode-animationDuration-long, 500ms)' : '0s'}`);
+     }
+     _setFoldingIconsVisibility(allVisible) {
+         for (const line of this._renderedStickyLines) {
 diff --git a/esm/vs/editor/editor.api.d.ts b/esm/vs/editor/editor.api.d.ts
-index afd0fca4a0e8ebaad5f1948d6bbc049432d41af4..78398813a240af6613404d8db2985a0ad7789e63 100644
 --- a/esm/vs/editor/editor.api.d.ts
 +++ b/esm/vs/editor/editor.api.d.ts
-@@ -1033,6 +1033,19 @@ declare namespace editor {
+@@ -1036,6 +1036,19 @@
  	 */
  	export function setModelLanguage(model: ITextModel, mimeTypeOrLanguageId: string): void;
  
@@ -767,20 +923,20 @@ index afd0fca4a0e8ebaad5f1948d6bbc049432d41af4..78398813a240af6613404d8db2985a0a
  	/**
  	 * Set the markers for a model.
  	 */
-@@ -1127,6 +1140,12 @@ declare namespace editor {
+@@ -1129,6 +1142,12 @@
+ 	 * Switches to a theme.
  	 */
  	export function setTheme(themeName: string): void;
- 
++
 +	// PATCH: Add missing accessor for current theme.
 +	/**
 +	 * Get the current theme.
 +	 */
 +	export function getTheme(): string;
-+
+ 
  	/**
  	 * Clears all cached font measurements and triggers re-measurement.
- 	 */
-@@ -2428,6 +2447,18 @@ declare namespace editor {
+@@ -2437,6 +2456,18 @@
  		 * Returns if this model is attached to an editor or not.
  		 */
  		isAttachedToEditor(): boolean;
@@ -799,7 +955,7 @@ index afd0fca4a0e8ebaad5f1948d6bbc049432d41af4..78398813a240af6613404d8db2985a0a
  	}
  
  	export enum PositionAffinity {
-@@ -4662,10 +4693,10 @@ declare namespace editor {
+@@ -4697,10 +4728,10 @@
  		 * Defaults to true.
  		 */
  		handleMouseWheel?: boolean;
@@ -812,10 +968,9 @@ index afd0fca4a0e8ebaad5f1948d6bbc049432d41af4..78398813a240af6613404d8db2985a0a
  		alwaysConsumeMouseWheel?: boolean;
  		/**
 diff --git a/esm/vs/editor/standalone/browser/standaloneEditor.js b/esm/vs/editor/standalone/browser/standaloneEditor.js
-index 9490e25363fb401bfc0dae094012675c1e8a5ba9..adfa224edb41f454732cb16ee66b2998aeb532ec 100644
 --- a/esm/vs/editor/standalone/browser/standaloneEditor.js
 +++ b/esm/vs/editor/standalone/browser/standaloneEditor.js
-@@ -187,6 +187,22 @@ function setModelLanguage(model, mimeTypeOrLanguageId) {
+@@ -188,6 +188,22 @@
      const languageId = languageService.getLanguageIdByMimeType(mimeTypeOrLanguageId) || mimeTypeOrLanguageId || PLAINTEXT_LANGUAGE_ID;
      model.setLanguage(languageService.createById(languageId));
  }
@@ -833,12 +988,12 @@ index 9490e25363fb401bfc0dae094012675c1e8a5ba9..adfa224edb41f454732cb16ee66b2998
 + * @event
 + */
 +export function onDidValidateModelVersion(model, listener) {
-+    return model.onDidValidateModelVersion(listener);
++    return model.onDidValidateVersion(listener);
 +}
  /**
   * Set the markers for a model.
   */
-@@ -335,6 +351,14 @@ function defineTheme(themeName, themeData) {
+@@ -336,6 +352,14 @@
      const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
      standaloneThemeService.defineTheme(themeName, themeData);
  }
@@ -853,7 +1008,7 @@ index 9490e25363fb401bfc0dae094012675c1e8a5ba9..adfa224edb41f454732cb16ee66b2998
  /**
   * Switches to a theme.
   */
-@@ -429,6 +453,11 @@ function createMonacoEditorAPI() {
+@@ -430,6 +454,11 @@
          createModel: createModel,
          // eslint-disable-next-line local/code-no-any-casts
          setModelLanguage: setModelLanguage,
@@ -865,7 +1020,7 @@ index 9490e25363fb401bfc0dae094012675c1e8a5ba9..adfa224edb41f454732cb16ee66b2998
          // eslint-disable-next-line local/code-no-any-casts
          setModelMarkers: setModelMarkers,
          // eslint-disable-next-line local/code-no-any-casts
-@@ -458,6 +487,9 @@ function createMonacoEditorAPI() {
+@@ -459,6 +488,9 @@
          tokenize: tokenize,
          // eslint-disable-next-line local/code-no-any-casts
          defineTheme: defineTheme,
@@ -875,11 +1030,10 @@ index 9490e25363fb401bfc0dae094012675c1e8a5ba9..adfa224edb41f454732cb16ee66b2998
          // eslint-disable-next-line local/code-no-any-casts
          setTheme: setTheme,
          remeasureFonts: remeasureFonts,
-diff --git a/esm/vs/language/common/lspLanguageFeatures.js b/esm/vs/language/common/lspLanguageFeatures.js
-index 12a49bd4ac441dcbf3db21a25fb15614294f17d8..b5087cf444492a8bcabed2a748efcb9561175cde 100644
---- a/esm/vs/language/common/lspLanguageFeatures.js
-+++ b/esm/vs/language/common/lspLanguageFeatures.js
-@@ -133,13 +133,23 @@ class DiagnosticsAdapter {
+diff --git a/esm/vs/languages/features/common/lspLanguageFeatures.js b/esm/vs/languages/features/common/lspLanguageFeatures.js
+--- a/esm/vs/languages/features/common/lspLanguageFeatures.js
++++ b/esm/vs/languages/features/common/lspLanguageFeatures.js
+@@ -61,13 +61,23 @@
      this._disposables.length = 0;
    }
    _doValidate(resource, languageId) {
@@ -905,7 +1059,7 @@ index 12a49bd4ac441dcbf3db21a25fb15614294f17d8..b5087cf444492a8bcabed2a748efcb95
        }
      }).then(void 0, (err) => {
        console.error(err);
-@@ -482,26 +492,11 @@ class DocumentSymbolAdapter {
+@@ -410,25 +420,10 @@
        if (!items) {
          return;
        }
@@ -923,22 +1077,22 @@ index 12a49bd4ac441dcbf3db21a25fb15614294f17d8..b5087cf444492a8bcabed2a748efcb95
 -          tags: []
 -        };
 -      });
-+      // PATCH: Ensure the new standard DocumentSymbol data structure is provided from language services
-+      return items.map((item) => toDocumentSymbol(item));
-     });
-   }
- }
+-    });
+-  }
+-}
 -function isDocumentSymbol(symbol) {
 -  return "children" in symbol;
--}
++      // PATCH: Ensure the new standard DocumentSymbol data structure is provided from language services
++      return items.map((item) => toDocumentSymbol(item));
++    });
++  }
+ }
  function toDocumentSymbol(symbol) {
    return {
-     name: symbol.name,
-diff --git a/esm/vs/language/css/cssWorker.js b/esm/vs/language/css/cssWorker.js
-index 413afcb2bfe66d80302f27aa02324d865777f851..a3a59caf9930c48dd7be75fcba3be075a3265028 100644
---- a/esm/vs/language/css/cssWorker.js
-+++ b/esm/vs/language/css/cssWorker.js
-@@ -94,7 +94,8 @@ class CSSWorker {
+diff --git a/esm/vs/languages/features/css/cssWorker.js b/esm/vs/languages/features/css/cssWorker.js
+--- a/esm/vs/languages/features/css/cssWorker.js
++++ b/esm/vs/languages/features/css/cssWorker.js
+@@ -94,7 +94,8 @@
        return [];
      }
      const stylesheet = this._languageService.parseStylesheet(document);
@@ -948,11 +1102,10 @@ index 413afcb2bfe66d80302f27aa02324d865777f851..a3a59caf9930c48dd7be75fcba3be075
      return Promise.resolve(symbols);
    }
    async doCodeActions(uri, range, context) {
-diff --git a/esm/vs/language/html/htmlWorker.js b/esm/vs/language/html/htmlWorker.js
-index 9e9a1cab25d7c35fb2632587c8ee3dcaac8a73c0..7d2ed929c787e3f8a9a086e9952b6981d2988582 100644
---- a/esm/vs/language/html/htmlWorker.js
-+++ b/esm/vs/language/html/htmlWorker.js
-@@ -79,7 +79,8 @@ class HTMLWorker {
+diff --git a/esm/vs/languages/features/html/htmlWorker.js b/esm/vs/languages/features/html/htmlWorker.js
+--- a/esm/vs/languages/features/html/htmlWorker.js
++++ b/esm/vs/languages/features/html/htmlWorker.js
+@@ -79,7 +79,8 @@
        return [];
      }
      let htmlDocument = this._languageService.parseHTMLDocument(document);
@@ -962,11 +1115,10 @@ index 9e9a1cab25d7c35fb2632587c8ee3dcaac8a73c0..7d2ed929c787e3f8a9a086e9952b6981
      return Promise.resolve(symbols);
    }
    async getFoldingRanges(uri, context) {
-diff --git a/esm/vs/language/typescript/languageFeatures.js b/esm/vs/language/typescript/languageFeatures.js
-index 485cbd9239469d5168907e2250d5bf1615116c2b..e5565c067e336f3014c5c3829a1f02a64a54a3b8 100644
---- a/esm/vs/language/typescript/languageFeatures.js
-+++ b/esm/vs/language/typescript/languageFeatures.js
-@@ -261,6 +261,8 @@ class DiagnosticsAdapter extends Adapter {
+diff --git a/esm/vs/languages/features/typescript/languageFeatures.js b/esm/vs/languages/features/typescript/languageFeatures.js
+--- a/esm/vs/languages/features/typescript/languageFeatures.js
++++ b/esm/vs/languages/features/typescript/languageFeatures.js
+@@ -189,6 +189,8 @@
      this._disposables = [];
    }
    async _doValidate(model) {
@@ -975,12 +1127,12 @@ index 485cbd9239469d5168907e2250d5bf1615116c2b..e5565c067e336f3014c5c3829a1f02a6
      const worker = await this._worker(model.uri);
      if (model.isDisposed()) {
        return;
-@@ -290,11 +292,17 @@ class DiagnosticsAdapter extends Adapter {
+@@ -218,11 +220,17 @@
      if (model.isDisposed()) {
        return;
      }
 +    // PATCH: Don't apply model markers if the language has changed. (Aligns this behavior with other language services.) 
-+    if (model.getLanguageId() !== this._selector) {
++    if (model.getLanguageId() !== this._selector || model.getVersionId() !== modelVersionId) {
 +      return;
 +    }
      editor.setModelMarkers(
@@ -993,7 +1145,7 @@ index 485cbd9239469d5168907e2250d5bf1615116c2b..e5565c067e336f3014c5c3829a1f02a6
    }
    _convertDiagnostics(model, diag) {
      const diagStart = diag.start || 0;
-@@ -317,6 +325,8 @@ class DiagnosticsAdapter extends Adapter {
+@@ -245,6 +253,8 @@
        endLineNumber,
        endColumn,
        message: flattenDiagnosticMessageText(diag.messageText, "\n"),
@@ -1002,25 +1154,24 @@ index 485cbd9239469d5168907e2250d5bf1615116c2b..e5565c067e336f3014c5c3829a1f02a6
        code: diag.code.toString(),
        tags,
        relatedInformation: this._convertRelatedInformation(model, diag.relatedInformation)
-diff --git a/esm/vs/language/typescript/tsWorker.js b/esm/vs/language/typescript/tsWorker.js
-index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b48ee709a 100644
---- a/esm/vs/language/typescript/tsWorker.js
-+++ b/esm/vs/language/typescript/tsWorker.js
-@@ -14,6 +14,13 @@ function fileNameIsLib(resource) {
+diff --git a/esm/vs/languages/features/typescript/tsWorker.js b/esm/vs/languages/features/typescript/tsWorker.js
+--- a/esm/vs/languages/features/typescript/tsWorker.js
++++ b/esm/vs/languages/features/typescript/tsWorker.js
+@@ -13,6 +13,13 @@
+     return !!libFileMap[resource.path.slice(1)];
    }
    return false;
- }
++}
 +// PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
 +function fileNameIsDiff(resource) {
 +  if (typeof resource === 'string') {
 +    return /^diff:\//.test(resource);
 +  }
 +  return resource.scheme === 'diff';
-+}
+ }
  class TypeScriptWorker {
    constructor(ctx, createData) {
-     this._extraLibs = /* @__PURE__ */ Object.create(null);
-@@ -35,7 +42,8 @@ class TypeScriptWorker {
+@@ -35,7 +42,8 @@
    }
    getScriptFileNames() {
      const allModels = this._ctx.getMirrorModels().map((model) => model.uri);
@@ -1030,7 +1181,7 @@ index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b
      return models.concat(Object.keys(this._extraLibs));
    }
    _getModel(fileName) {
-@@ -162,35 +170,40 @@ class TypeScriptWorker {
+@@ -162,35 +170,40 @@
      return diagnostics;
    }
    async getSyntacticDiagnostics(fileName) {
@@ -1076,7 +1227,7 @@ index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b
        return void 0;
      }
      return this._languageService.getCompletionsAtPosition(fileName, position, void 0);
-@@ -207,61 +220,71 @@ class TypeScriptWorker {
+@@ -207,61 +220,71 @@
      );
    }
    async getSignatureHelpItems(fileName, position, options) {
@@ -1158,7 +1309,7 @@ index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b
        return void 0;
      }
      return this._languageService.findRenameLocations(
-@@ -273,13 +296,15 @@ class TypeScriptWorker {
+@@ -273,13 +296,15 @@
      );
    }
    async getRenameInfo(fileName, position, options) {
@@ -1176,7 +1327,7 @@ index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b
        return { outputFiles: [], emitSkipped: true };
      }
      const emitOutput = this._languageService.getEmitOutput(
-@@ -291,7 +316,8 @@ class TypeScriptWorker {
+@@ -291,7 +316,8 @@
      return { ...emitOutput, diagnostics };
    }
    async getCodeFixesAtPosition(fileName, start, end, errorCodes, formatOptions) {
@@ -1186,7 +1337,7 @@ index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b
        return [];
      }
      const preferences = {};
-@@ -312,7 +338,8 @@ class TypeScriptWorker {
+@@ -312,7 +338,8 @@
      this._extraLibs = extraLibs;
    }
    async provideInlayHints(fileName, start, end) {
@@ -1196,18 +1347,154 @@ index d875e075fea0eb8da7159f2168660231ad017663..7abc711c253a6a53f5a8eaf8712dd01b
        return [];
      }
      const preferences = this._inlayHintsOptions ?? {};
+diff --git a/esm/vs/platform/accessibility/browser/accessibilityService.js b/esm/vs/platform/accessibility/browser/accessibilityService.js
+--- a/esm/vs/platform/accessibility/browser/accessibilityService.js
++++ b/esm/vs/platform/accessibility/browser/accessibilityService.js
+@@ -1,3 +1,4 @@
++import { getMotionDuration } from '../../../base/browser/motion.js';
+ import { addDisposableListener } from '../../../base/browser/dom.js';
+ import { mainWindow } from '../../../base/browser/window.js';
+ import { Emitter } from '../../../base/common/event.js';
+@@ -39,7 +40,7 @@
+                 this._onDidChangeScreenReaderOptimized.fire();
+             }
+             if (e.affectsConfiguration('workbench.reduceMotion')) {
+-                this._configMotionReduced = this._configurationService.getValue('workbench.reduceMotion');
++                this._configMotionReduced = this._configurationService.getValue('workbench.reduceMotion') ?? 'auto';
+                 this._onDidChangeReducedMotion.fire();
+             }
+             if (e.affectsConfiguration('workbench.reduceTransparency')) {
+@@ -51,7 +52,7 @@
+         this._register(this.onDidChangeScreenReaderOptimized(() => updateContextKey()));
+         const reduceMotionMatcher = mainWindow.matchMedia(`(prefers-reduced-motion: reduce)`);
+         this._systemMotionReduced = reduceMotionMatcher.matches;
+-        this._configMotionReduced = this._configurationService.getValue('workbench.reduceMotion');
++        this._configMotionReduced = this._configurationService.getValue('workbench.reduceMotion') ?? 'auto';
+         const reduceTransparencyMatcher = mainWindow.matchMedia(`(prefers-reduced-transparency: reduce)`);
+         this._systemTransparencyReduced = reduceTransparencyMatcher.matches;
+         this._configTransparencyReduced = this._configurationService.getValue('workbench.reduceTransparency');
+@@ -68,7 +69,7 @@
+             }
+         }));
+         const updateContainerClasses = (container) => {
+-            const reduce = this.isMotionReduced();
++            const reduce = this.isMotionReduced(container);
+             container.classList.toggle('monaco-reduce-motion', reduce);
+             container.classList.toggle('monaco-enable-motion', !reduce);
+         };
+@@ -136,9 +137,11 @@
+     get onDidChangeReducedMotion() {
+         return this._onDidChangeReducedMotion.event;
+     }
+-    isMotionReduced() {
++    // PATCH: Keep explicit theme preferences scoped to the animation target.
++    isMotionReduced(container = this._layoutService.activeContainer) {
+         const config = this._configMotionReduced;
+-        return config === 'on' || (config === 'auto' && this._systemMotionReduced);
++        return config === 'on' || (config === 'auto' && this._systemMotionReduced)
++            || getMotionDuration(container, '--vscode-animationDuration-medium', 300) === 0;
+     }
+     get onDidChangeReducedTransparency() {
+         return this._onDidChangeReducedTransparency.event;
 diff --git a/esm/vs/platform/actionWidget/browser/actionList.js b/esm/vs/platform/actionWidget/browser/actionList.js
-index 414405319ded9b3671a070b7405b7150afaa8321..c8b924d17e513acb02b8f8a74b75d8a7f22433d7 100644
 --- a/esm/vs/platform/actionWidget/browser/actionList.js
 +++ b/esm/vs/platform/actionWidget/browser/actionList.js
-@@ -253,8 +253,9 @@ let ActionList = class ActionList extends Disposable {
-         else {
-             // For finding width dynamically (not using resize observer)
-             const itemWidths = this._allMenuItems.map((_, index) => {
-+                // PATCH: support lookup / measurement when hosted in a shadow DOM
-                 // eslint-disable-next-line no-restricted-syntax
--                const element = this.domNode.ownerDocument.getElementById(this._list.getElementID(index));
-+                const element = this.domNode.getRootNode().querySelector(`#${this._list.getElementID(index)}`);
-                 if (element) {
-                     element.style.width = 'auto';
-                     const width = element.getBoundingClientRect().width;
+@@ -1635,7 +1635,8 @@
+             return null;
+         }
+         // eslint-disable-next-line no-restricted-syntax
+-        return this.domNode.ownerDocument.getElementById(this._list.getElementID(index));
++        // PATCH: Resolve rows in the containing shadow root for measurement, focus and anchoring.
++        return this.domNode.getRootNode().getElementById(this._list.getElementID(index));
+     }
+     _showTabThroughPanelForFocusedItem() {
+         const focused = this._list.getFocus();
+diff --git a/esm/vs/platform/actionWidget/browser/actionWidget.css b/esm/vs/platform/actionWidget/browser/actionWidget.css
+--- a/esm/vs/platform/actionWidget/browser/actionWidget.css
++++ b/esm/vs/platform/actionWidget/browser/actionWidget.css
+@@ -19,7 +19,7 @@
+ }
+ 
+ .modern-ui.monaco-enable-motion .action-widget.action-widget-dropdown {
+-	animation: action-widget-dropdown-open 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
++	animation: action-widget-dropdown-open var(--vscode-animationDuration-medium, 250ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+ 	transform-origin: bottom left;
+ 	will-change: transform, opacity;
+ }
+@@ -29,7 +29,7 @@
+ }
+ 
+ .modern-ui.monaco-enable-motion .action-widget.action-widget-dropdown.action-widget-dropdown-closing {
+-	animation: action-widget-dropdown-close 150ms cubic-bezier(0.22, 1, 0.36, 1) both;
++	animation: action-widget-dropdown-close var(--vscode-animationDuration-short, 150ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+ 	pointer-events: none;
+ }
+ 
+diff --git a/esm/vs/platform/actionWidget/browser/actionWidget.js b/esm/vs/platform/actionWidget/browser/actionWidget.js
+--- a/esm/vs/platform/actionWidget/browser/actionWidget.js
++++ b/esm/vs/platform/actionWidget/browser/actionWidget.js
+@@ -1,3 +1,4 @@
++import { getMotionDuration } from '../../../base/browser/motion.js';
+ import { getWindow, addStandardDisposableListener, EventHelper, addDisposableGenericMouseDownListener, addDisposableListener, trackFocus, $, getActiveElement } from '../../../base/browser/dom.js';
+ import { ActionBar } from '../../../base/browser/ui/actionbar/actionbar.js';
+ import { disposableTimeout } from '../../../base/common/async.js';
+@@ -96,7 +97,8 @@
+             return;
+         }
+         const closeAnimation = list.closeAnimation;
+-        if (!widget || !closeAnimation || closeAnimation.duration <= 0 || !this._hasRequiredAncestorClasses(widget, closeAnimation.requiredAncestorClasses)) {
++        const duration = getMotionDuration(widget, '--vscode-animationDuration-short', closeAnimation?.duration ?? 0);
++        if (!widget || !closeAnimation || duration <= 0 || !this._hasRequiredAncestorClasses(widget, closeAnimation.requiredAncestorClasses)) {
+             this._closingList = list;
+             list.hide(didCancel);
+             return;
+@@ -111,7 +113,7 @@
+             if (this._list.value === list) {
+                 this._contextViewService.hideContextView(didCancel);
+             }
+-        }, closeAnimation.duration);
++        }, duration);
+     }
+     clear() {
+         this._closeAnimation.clear();
+diff --git a/esm/vs/platform/quickinput/browser/media/quickInput.css b/esm/vs/platform/quickinput/browser/media/quickInput.css
+--- a/esm/vs/platform/quickinput/browser/media/quickInput.css
++++ b/esm/vs/platform/quickinput/browser/media/quickInput.css
+@@ -14,13 +14,13 @@
+ }
+ 
+ .modern-ui.monaco-enable-motion .quick-input-widget:not(.quick-input-widget-overlay) {
+-	animation: quick-input-widget-open 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
++	animation: quick-input-widget-open var(--vscode-animationDuration-medium, 250ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+ 	transform-origin: top center;
+ 	will-change: transform, opacity;
+ }
+ 
+ .modern-ui.monaco-enable-motion .quick-input-widget.quick-input-widget-closing:not(.quick-input-widget-overlay) {
+-	animation: quick-input-widget-close 150ms cubic-bezier(0.22, 1, 0.36, 1) both;
++	animation: quick-input-widget-close var(--vscode-animationDuration-short, 150ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+ 	pointer-events: none;
+ }
+ 
+diff --git a/esm/vs/platform/quickinput/browser/quickInputController.js b/esm/vs/platform/quickinput/browser/quickInputController.js
+--- a/esm/vs/platform/quickinput/browser/quickInputController.js
++++ b/esm/vs/platform/quickinput/browser/quickInputController.js
+@@ -1,3 +1,4 @@
++import { getMotionDuration } from '../../../base/browser/motion.js';
+ import { onDidRegisterWindow, onWillUnregisterWindow, getWindow, EventType, addDisposableListener, append, $ as $$1, trackFocus, isAncestor, isHTMLElement, reset, isAncestorOfActiveElement, hasParentWithClass, getActiveWindow, addDisposableGenericMouseUpListener, addDisposableGenericMouseDownListener, addDisposableGenericMouseMoveListener } from '../../../base/browser/dom.js';
+ import { createStyleSheet } from '../../../base/browser/domStylesheets.js';
+ import { ToolBar } from '../../../base/browser/ui/toolbar/toolbar.js';
+@@ -725,10 +726,11 @@
+         this.controller = null;
+         this.onHideEmitter.fire();
+         if (container) {
+-            if (!container.classList.contains(QUICK_INPUT_OVERLAY_CLASS) && hasParentWithClass(container, QUICK_INPUT_MOTION_ANCESTOR_CLASSES)) {
++            const duration = getMotionDuration(container, '--vscode-animationDuration-short', QUICK_INPUT_CLOSE_ANIMATION_DURATION);
++            if (duration > 0 && !container.classList.contains(QUICK_INPUT_OVERLAY_CLASS) && hasParentWithClass(container, QUICK_INPUT_MOTION_ANCESTOR_CLASSES)) {
+                 container.inert = true;
+                 container.classList.add(QUICK_INPUT_MOTION_CLOSING_CLASS);
+-                this.closeAnimation.value = disposableTimeout(() => this.completeCloseAnimation(), QUICK_INPUT_CLOSE_ANIMATION_DURATION);
++                this.closeAnimation.value = disposableTimeout(() => this.completeCloseAnimation(), duration);
+             }
+             else {
+                 container.style.display = 'none';
