@@ -201,7 +201,7 @@
     "eslint": "catalog:",
     "lit": "catalog:",
     "lit-html": "catalog:",
-    "monaco-editor": "0.55.1",
+    "monaco-editor": "0.57.0",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
     "postcss": "catalog:",

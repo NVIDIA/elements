@@ -68,14 +68,18 @@ const workerUrlRewritePlugin: Plugin = {
       const normalizedPath = path.replace(/\\/g, '/');
 
       for (const language of languages) {
-        if (normalizedPath.endsWith(`monaco-editor/esm/vs/language/${language}/workerManager.js`)) {
+        if (normalizedPath.endsWith(`monaco-editor/esm/vs/languages/features/${language}/workerManager.js`)) {
           const workerFile = language === 'typescript' ? 'ts.worker.js' : `${language}.worker.js`;
-          let code = await fs.promises.readFile(path, 'utf8');
+          const code = await fs.promises.readFile(path, 'utf8');
+          const rewritten = code.replace(
+            new RegExp(`new Worker\\(new URL\\(['"\`]${workerFile}['"\`],\\s*import\\.meta\\.url\\)`, 'g'),
+            `new Worker(/* @vite-ignore */new URL(/* @vite-ignore */'${`../../../workers/${workerFile}`}', import.meta.url)`
+          );
+          if (rewritten === code) {
+            throw new Error(`Unable to rewrite the ${language} worker URL in ${path}`);
+          }
           return {
-            contents: code.replace(
-              new RegExp(`new Worker\\(new URL\\(['"\`]${workerFile}['"\`],\\s*import\\.meta\\.url\\)`, 'g'),
-              `new Worker(/* @vite-ignore */new URL(/* @vite-ignore */'${`../../../workers/${workerFile}`}', import.meta.url)`
-            ),
+            contents: rewritten,
             loader: 'js'
           };
         }
@@ -89,14 +93,14 @@ const workerUrlRewritePlugin: Plugin = {
 
 // Prebundle the vendored monaco-editor code
 await build({
-  entryPoints: [
-    'monaco-editor/esm/vs/editor/editor.main.js',
-    'monaco-editor/esm/vs/editor/editor.worker.js',
-    'monaco-editor/esm/vs/language/css/css.worker.js',
-    'monaco-editor/esm/vs/language/html/html.worker.js',
-    'monaco-editor/esm/vs/language/json/json.worker.js',
-    'monaco-editor/esm/vs/language/typescript/ts.worker.js'
-  ],
+  entryPoints: {
+    'editor/editor.main': 'monaco-editor',
+    'editor/editor.worker': 'monaco-editor/editor/editor.worker',
+    'language/css/css.worker': 'monaco-editor/languages/features/css/css.worker',
+    'language/html/html.worker': 'monaco-editor/languages/features/html/html.worker',
+    'language/json/json.worker': 'monaco-editor/languages/features/json/json.worker',
+    'language/typescript/ts.worker': 'monaco-editor/languages/features/typescript/ts.worker'
+  },
   plugins: [workerUrlRewritePlugin, postcssPlugin],
   outdir,
   format: 'esm',
@@ -112,24 +116,20 @@ await build({
 // Prebundle the vendored monaco-editor types
 const types = generateDtsBundle([
   {
-    filePath: path.resolve(node_modules_dir, 'monaco-editor/esm/vs/editor/editor.api.d.ts'),
+    filePath: path.resolve(node_modules_dir, 'monaco-editor/esm/vs/index.d.ts'),
     libraries: {
       inlinedLibraries: ['monaco-editor']
     },
     output: {
       inlineDeclareExternals: true,
+      exportReferencedTypes: false,
       sortNodes: false,
       noBanner: true
     }
   }
 ]);
 
-fs.writeFileSync(path.resolve(outdir, 'editor/editor.api.d.ts'), types.join('\n'));
-
-fs.copyFileSync(
-  path.resolve(node_modules_dir, 'monaco-editor/esm/vs/editor/editor.main.d.ts'),
-  path.resolve(outdir, 'editor/editor.main.d.ts')
-);
+fs.writeFileSync(path.resolve(outdir, 'editor/editor.main.d.ts'), types.join('\n'));
 
 // ---
 

@@ -19,12 +19,13 @@ export const Default = {
   render: () => html`
 <nve-monaco-problems></nve-monaco-problems>
 <script type="module">
+  import { ProblemSeverity } from '@nvidia-elements/monaco/problems';
   const problemsEl = document.querySelector('nve-monaco-problems');
   problemsEl.problems = [
     {
       resource: 'file:///src/components/Button.ts',
       message: "Type 'string' is not assignable to type 'number'.",
-      severity: 8, // ProblemSeverity.Error
+      severity: ProblemSeverity.Error,
       startLineNumber: 14,
       startColumn: 8,
       endLineNumber: 14,
@@ -36,7 +37,7 @@ export const Default = {
     {
       resource: 'file:///src/components/Button.ts',
       message: "'index' is declared but its value is never read.",
-      severity: 4, // ProblemSeverity.Warning
+      severity: ProblemSeverity.Warning,
       startLineNumber: 16,
       startColumn: 5,
       endLineNumber: 16,
@@ -48,7 +49,7 @@ export const Default = {
     {
       resource: 'file:///src/utils/styles.css',
       message: "Unknown property 'colr'. Did you mean 'color'?",
-      severity: 2, // ProblemSeverity.Info
+      severity: ProblemSeverity.Info,
       startLineNumber: 40,
       startColumn: 2,
       endLineNumber: 40,
@@ -59,7 +60,7 @@ export const Default = {
     {
       resource: 'file:///src/utils/formatDate.ts',
       message: "Convert 'var' to 'let' or 'const'.",
-      severity: 1, // ProblemSeverity.Hint
+      severity: ProblemSeverity.Hint,
       startLineNumber: 57,
       startColumn: 1,
       endLineNumber: 57,

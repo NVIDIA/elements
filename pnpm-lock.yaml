@@ -373,7 +373,7 @@ overrides:
   tmp: 0.2.6
 
 patchedDependencies:
-  monaco-editor: 816acc114a79d140634c004e170171c7736fd63c38f11f24a2c9ccfa2cc21eaf
+  monaco-editor: 84f18e6eae545bde7d50d1ad63c53b48b3348946e90ab6c21a4571cadee5a25f
 
 importers:
 
@@ -1398,8 +1398,8 @@ importers:
         specifier: 10.11.0
         version: 10.11.0(jiti@2.7.0)(supports-color@10.2.2)
       monaco-editor:
-        specifier: 0.55.1
-        version: 0.55.1(patch_hash=816acc114a79d140634c004e170171c7736fd63c38f11f24a2c9ccfa2cc21eaf)
+        specifier: 0.57.0
+        version: 0.57.0(patch_hash=84f18e6eae545bde7d50d1ad63c53b48b3348946e90ab6c21a4571cadee5a25f)
       postcss:
         specifier: 'catalog:'
         version: 8.5.26
@@ -9034,8 +9034,8 @@ packages:
     resolution: {integrity: sha512-gYzvtM72ZtxQO0T048kd6HWSbbGCNOUwcnfQ01cqIJ4X2IYKFFHZ5mKvrQETcFXxsRObZulDaKmy//R7TPtsBg==}
     engines: {node: '>=20.19.0'}
 
-  dompurify@3.2.7:
-    resolution: {integrity: sha512-WhL/YuveyGXJaerVlMYGWhvQswa7myDG17P7Vu65EWC05o8vfeNbvNf4d/BOvH99+ZW+LlQsc1GDKMa1vNK6dw==}
+  dompurify@3.4.15:
+    resolution: {integrity: sha512-EUBjM+B+lkDE41iE82DDSCfkoPGfXx8IxFxPMjNzm/Uk4xDet77rTN9wqlxlVg71kK7XGuUMv6wUxJUwwv+Xyw==}
 
   domutils@2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
@@ -11288,8 +11288,8 @@ packages:
   module-details-from-path@1.0.4:
     resolution: {integrity: sha512-EGWKgxALGMgzvxYF1UyGTy0HXX/2vHLkw6+NvDKW2jypWbHpjQuj4UMcqQWXHERJhVGKikolT06G3bcKe4fi7w==}
 
-  monaco-editor@0.55.1:
-    resolution: {integrity: sha512-jz4x+TJNFHwHtwuV9vA9rMujcZRb0CEilTEwG2rRSpe/A7Jdkuj8xPKttCgOh+v/lkHy7HsZ64oj+q3xoAFl9A==}
+  monaco-editor@0.57.0:
+    resolution: {integrity: sha512-5BkI9KGoqrNvBGUe15/QlZq3OooZ8WLg1AxTpaqHRCP3HNpzPPZKE2EDz8M7c+VRmCeUw1Brp4cx/PWm3kI/5A==}
 
   moo@0.5.2:
     resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==}
@@ -21751,7 +21751,7 @@ snapshots:
     dependencies:
       domelementtype: 3.0.0
 
-  dompurify@3.2.7:
+  dompurify@3.4.15:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -24414,9 +24414,9 @@ snapshots:
 
   module-details-from-path@1.0.4: {}
 
-  monaco-editor@0.55.1(patch_hash=816acc114a79d140634c004e170171c7736fd63c38f11f24a2c9ccfa2cc21eaf):
+  monaco-editor@0.57.0(patch_hash=84f18e6eae545bde7d50d1ad63c53b48b3348946e90ab6c21a4571cadee5a25f):
     dependencies:
-      dompurify: 3.2.7
+      dompurify: 3.4.15
       marked: 14.0.0
 
   moo@0.5.2: {}
