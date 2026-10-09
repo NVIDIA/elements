@@ -31,7 +31,7 @@ import {
 } from '../layers/markers/compaction.js';
 import { PICK_UNIFORM_OFFSETS } from './picking/uniform-offsets.js';
 import type { PickPipelines } from './picking/pipelines.js';
-import type { PrimitiveKind } from '../geometry/primitives.js';
+import type { PrimitiveKind } from '../math/primitive-geometry.js';
 import type { Matrix4 } from '../math/types.js';
 import type { LabelRenderer } from '../layers/labels/renderer.js';
 import {

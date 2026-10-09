@@ -4,7 +4,11 @@
 import { describe, expect, it } from 'vitest';
 import type { MeshRenderItem } from '../../rendering/render-items.js';
 import { retainGeometryUploadRanges } from './preparation.js';
-import { createConstructedMeshRenderData, type MeshGeometryUploadRange } from './render-data.js';
+import {
+  createConstructedMeshRenderData,
+  createMeshGeometryAttributeVersions,
+  type MeshGeometryUploadRange
+} from './render-data.js';
 
 describe(retainGeometryUploadRanges.name, () => {
   it('retains the oldest base only across continuous attribute generations', () => {
@@ -51,6 +55,8 @@ describe(retainGeometryUploadRanges.name, () => {
       ...previous,
       data: {
         ...previous.data,
+        geometryVersions: { ...previous.data.geometryVersions, positions: 2, colors: 1 },
+        geometryUploadBaseVersions: { positions: 1, colors: 0 },
         geometryUploadRanges: [
           { attribute: 'positions' as const, offset: 12, size: 12 },
           { attribute: 'positions' as const, offset: 48, size: 12 },
@@ -80,6 +86,30 @@ describe(retainGeometryUploadRanges.name, () => {
     expect(current.data.geometryUploadRanges).toEqual([]);
   });
 
+  it('drops obsolete ranges after a gap and retains unchanged attributes when current history is missing', () => {
+    const previous = createItem([
+      { attribute: 'positions', offset: 0, size: 12 },
+      { attribute: 'colors', offset: 0, size: 16 }
+    ]);
+    const current = {
+      ...previous,
+      data: {
+        ...previous.data,
+        geometryVersions: { ...previous.data.geometryVersions, positions: 4 },
+        geometryUploadBaseVersions: { positions: 3 },
+        geometryUploadRanges: [{ attribute: 'positions' as const, offset: 24, size: 12 }]
+      }
+    };
+    expect(retainGeometryUploadRanges(current, previous).data.geometryUploadRanges).toEqual([
+      { attribute: 'positions', offset: 24, size: 12 },
+      { attribute: 'colors', offset: 0, size: 16 }
+    ]);
+    const missing = { ...current, data: { ...current.data, geometryUploadBaseVersions: {} } };
+    const result = retainGeometryUploadRanges(missing, previous).data;
+    expect(result.geometryUploadBaseVersions).toEqual({ colors: 0 });
+    expect(result.geometryUploadRanges).toEqual([{ attribute: 'colors', offset: 0, size: 16 }]);
+  });
+
   it('returns the current item when there is no previous preparation', () => {
     const current = createItem([{ attribute: 'positions', offset: 0, size: 12 }]);
     expect(retainGeometryUploadRanges(current)).toBe(current);
@@ -87,12 +117,20 @@ describe(retainGeometryUploadRanges.name, () => {
 });
 
 function createItem(geometryUploadRanges: readonly MeshGeometryUploadRange[]): MeshRenderItem {
+  const geometryVersions = createMeshGeometryAttributeVersions();
+  const geometryUploadBaseVersions: Partial<typeof geometryVersions> = {};
+  for (const range of geometryUploadRanges) {
+    geometryVersions[range.attribute] = 1;
+    geometryUploadBaseVersions[range.attribute] = 0;
+  }
   return {
     data: createConstructedMeshRenderData({
       color: [1, 1, 1, 1],
       colors: null,
       geometryError: false,
       geometryUploadRanges,
+      geometryVersions,
+      geometryUploadBaseVersions,
       identityInstance: true,
       indices: null,
       normals: null,

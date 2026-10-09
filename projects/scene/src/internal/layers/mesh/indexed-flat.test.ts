@@ -95,6 +95,19 @@ describe('indexed flat mesh updates', () => {
     expect(result.normals).toBe(processed.normals);
   });
 
+  it('reuses every expanded array after a known empty publication', () => {
+    const { layer, source, processed } = fixture();
+    source.positions[0] = 100;
+    publishMeshGeometry(layer, { attribute: 'positions', source: source.positions, start: 0, count: 0 });
+    const data = takeMeshLayerRenderData(layer);
+    const result = updateFlatGeometry(data, processed)!;
+    matchesFull(result, data);
+    expect(result.geometryUploadRanges).toEqual([]);
+    for (const attribute of ['positions', 'normals', 'uvs', 'colors'] as const) {
+      expect(result[attribute]).toBe(processed[attribute]);
+    }
+  });
+
   it('updates repeated triangle corners and degenerate normals', () => {
     const { layer, source, processed } = fixture();
     source.positions[17] = 3;

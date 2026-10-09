@@ -23,7 +23,7 @@ import {
   type PackedSourcePublication
 } from '../../records/packed-source-publication.js';
 import { replacePreparedMarkerSource } from '../sources/prepared-record-source.js';
-import type { PrimitiveKind } from '../../geometry/primitives.js';
+import type { PrimitiveKind } from '../../math/primitive-geometry.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import type { RangeInterval } from '../../structures/range-set.js';

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export { compileParts, type ModelPart } from '../internal/layers/model/compile.js';
-export type { ScenePrimitiveKind } from '../internal/geometry/primitives.js';
+export type { ScenePrimitiveKind } from '../internal/math/primitive-geometry.js';
 export { SceneModel, type ModelInstanceSource } from './model.js';
 export { ScenePart } from './part.js';
 export type {

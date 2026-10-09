@@ -159,6 +159,43 @@ describe('heightfield compilation', () => {
     }
   });
 
+  it.each([
+    [2, 8192],
+    [3, 5462]
+  ])('preserves colored rectangular grids across chunks for %i rows and %i columns', async (rows, columns) => {
+    const grid = {
+      ...withColors(
+        gridFrom(rows, columns, (row, column) => row * 3 - column * 2),
+        [0, 64, 128, 255]
+      ),
+      origin: [1.5, -2.25] as const,
+      spacing: 0.25
+    };
+    let yields = 0;
+    const prepared = await prepareHeightfield(grid, {
+      isCurrent: () => true,
+      yield: async () => {
+        yields += 1;
+      }
+    });
+
+    expect(prepared).toEqual(compileHeightfield(grid));
+    expect(yields).toBe(8);
+    const offset = (rows * columns - 1) * 3;
+    expect([...prepared!.positions.subarray(offset)]).toEqual([
+      1.5 + (columns - 1) * 0.25,
+      -2.25 + (rows - 1) * 0.25,
+      (rows - 1) * 3 - (columns - 1) * 2
+    ]);
+    expectCloseArray(prepared!.normals.subarray(offset), normalize(8, -12, 1), 6);
+    expect([...prepared!.colors!.subarray((rows * columns - 1) * 4)]).toEqual([
+      0,
+      Math.fround(64 / 255),
+      Math.fround(128 / 255),
+      1
+    ]);
+  });
+
   it('discards bounded color preparation while normalizing samples', async () => {
     const grid = withColors(
       gridFrom(2, PREPARATION_CHUNK_SIZE / 2 + 1, () => 0),

@@ -1958,6 +1958,7 @@ describe(SceneRenderer.name, () => {
       ...deformed,
       data: {
         ...deformed.data,
+        geometryUploadBaseVersions: { positions: deformed.data.geometryVersions.positions },
         geometryUploadRanges: [{ attribute: 'positions' as const, offset: 0, size: 12 }],
         geometryVersions: {
           ...deformed.data.geometryVersions,
@@ -2005,6 +2006,7 @@ describe(SceneRenderer.name, () => {
       ...mesh,
       data: {
         ...mesh.data,
+        geometryUploadBaseVersions: { positions: mesh.data.geometryVersions.positions },
         geometryUploadRanges: [{ attribute: 'positions' as const, offset: 0, size: 12 }],
         geometryVersions: { ...mesh.data.geometryVersions, positions: mesh.data.geometryVersions.positions + 1 },
         positions,
@@ -2064,6 +2066,7 @@ describe(SceneRenderer.name, () => {
       ...mesh,
       data: {
         ...mesh.data,
+        geometryUploadBaseVersions: { positions: mesh.data.geometryVersions.positions },
         geometryUploadRanges: [{ attribute: 'positions' as const, offset: 0, size: 12 }],
         geometryVersions: { ...mesh.data.geometryVersions, positions: mesh.data.geometryVersions.positions + 1 },
         positions: updatedPositions,
@@ -2075,6 +2078,7 @@ describe(SceneRenderer.name, () => {
       data: {
         ...updated.data,
         color: [0.5, 0.5, 0.5, 1] as [number, number, number, number],
+        geometryUploadBaseVersions: {},
         geometryUploadRanges: [],
         version: updated.data.version + 1
       }
