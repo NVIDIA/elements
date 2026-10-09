@@ -37,7 +37,7 @@ The `nve-markdown` component renders markdown content with Elements styling. It 
 
 ### Streaming Content
 
-{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'JavaScriptDriven' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'StreamingContent' %}
 
 ## Features
 

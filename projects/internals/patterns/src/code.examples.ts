@@ -12,7 +12,9 @@ import '@nvidia-elements/core/format-datetime/define.js';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/password/define.js';
+import '@nvidia-elements/core/switch/define.js';
 import '@nvidia-elements/core/tree/define.js';
+import '@nvidia-elements/monaco/diff-editor/define.js';
 
 export default {
   title: 'Patterns/Code',
@@ -171,6 +173,43 @@ export const FileTree = {
 };
 
 /**
+ * @summary Expandable changed-file tree with additions and deletions aligned beside each file. Use during Git reviews to scan the scope of changes without losing the repository hierarchy.
+ * @tags pattern
+ */
+export const FileTreeGitDiff = {
+  render: () => html`
+<nve-tree behavior-expand aria-label="Changed robot software files" style="max-width: 360px">
+  <nve-tree-node expanded>
+    <span nve-text="body muted">src</span>
+    <nve-tree-node>
+      <code nve-text="code" title="src/robot_state.py">robot_state.py</code>
+      <div slot="suffix" nve-layout="row gap:xs">
+        <nve-badge container="flat" status="success" aria-label="18 added lines">+18</nve-badge>
+        <nve-badge container="flat" status="failed" aria-label="6 deleted lines">−6</nve-badge>
+      </div>
+    </nve-tree-node>
+    <nve-tree-node expanded>
+      <span nve-text="body muted">navigation</span>
+      <nve-tree-node>
+        <code nve-text="code" title="src/navigation/planner.py">planner.py</code>
+        <div slot="suffix" nve-layout="row gap:xs">
+          <nve-badge container="flat" status="success" aria-label="32 added lines">+32</nve-badge>
+          <nve-badge container="flat" status="failed" aria-label="12 deleted lines">−12</nve-badge>
+        </div>
+      </nve-tree-node>
+    </nve-tree-node>
+  </nve-tree-node>
+  <nve-tree-node>
+    <code nve-text="code" title="robot.yaml">robot.yaml</code>
+    <div slot="suffix" nve-layout="row gap:xs">
+      <nve-badge container="flat" status="success" aria-label="9 added lines">+9</nve-badge>
+    </div>
+  </nve-tree-node>
+</nve-tree>
+  `
+};
+
+/**
  * @summary Commit details with author, copyable hash, and expandable file changes. Use after an assistant edits a repository to show the scope of a change and distinguish added, modified, deleted, and renamed files.
  * @tags pattern
  */
@@ -273,4 +312,84 @@ export const EnvironmentVariables = {
   </nve-card-content>
 </nve-card>
   `
+};
+
+/**
+ * @summary Git change review for a warehouse robot navigation configuration with branch context and read-only comparisons. Use before merging robot behavior changes to inspect revised parameters in side-by-side or inline views.
+ * @tags pattern
+ */
+export const GitReviewDiff = {
+  render() {
+    return html`
+<div id="git-review-diff" nve-layout="column gap:sm align:horizontal-stretch">
+  <div nve-layout="row gap:md align:wrap align:space-between full:width">
+    <code nve-text="code sm">config/warehouse-navigation.json</code>
+    <nve-switch>
+      <label>Side by side</label>
+      <input type="checkbox" checked />
+    </nve-switch>
+  </div>
+  <nve-monaco-diff-editor aria-label="Warehouse robot navigation configuration changes" style="height: 480px"></nve-monaco-diff-editor>
+</div>
+<script type="module">
+  const review = document.querySelector('#git-review-diff');
+  const diff = review.querySelector('nve-monaco-diff-editor');
+  const sideBySide = review.querySelector('input[type="checkbox"]');
+
+  const initialize = () => {
+    const { editor, monaco } = diff;
+    if (!editor || !monaco || editor.getModel()) return;
+
+    const original = monaco.editor.createModel(JSON.stringify({
+      robot_id: 'AMR-07',
+      scenario: 'warehouse-aisle-3',
+      navigation: {
+        max_speed_mps: 1.2,
+        obstacle_clearance_m: 0.35,
+        blocked_aisle_behavior: 'pause',
+        planner: 'grid_search'
+      }
+    }, null, 2), 'json');
+    const modified = monaco.editor.createModel(JSON.stringify({
+      robot_id: 'AMR-07',
+      scenario: 'warehouse-aisle-3',
+      navigation: {
+        max_speed_mps: 0.8,
+        obstacle_clearance_m: 0.6,
+        blocked_aisle_behavior: 'replan',
+        planner: 'grid_search',
+        replanning: {
+          enabled: true,
+          retry_interval_s: 2,
+          max_attempts: 3
+        }
+      }
+    }, null, 2), 'json');
+
+    editor.updateOptions({
+      readOnly: true,
+      originalEditable: false,
+      renderSideBySide: sideBySide.checked,
+      useInlineViewWhenSpaceIsLimited: false,
+      originalAriaLabel: 'Base warehouse navigation configuration on main',
+      modifiedAriaLabel: 'Proposed warehouse navigation configuration',
+      minimap: { enabled: false },
+      scrollBeyondLastLine: false
+    });
+    editor.setModel({ original, modified });
+    editor.onDidDispose(() => {
+      editor.setModel(null);
+      original.dispose();
+      modified.dispose();
+    });
+  };
+
+  diff.addEventListener('ready', initialize);
+  initialize();
+  sideBySide.addEventListener('change', () => {
+    diff.editor?.updateOptions({ renderSideBySide: sideBySide.checked });
+  });
+</script>
+    `;
+  }
 };

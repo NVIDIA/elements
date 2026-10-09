@@ -24,6 +24,31 @@ describe('isSitemapPageUrl', () => {
     expect(isSitemapPageUrl('/examples/')).toBe(false);
   });
 
+  it.each([true, false])(
+    'should preserve component overview and api pages when hideExamplesTab is %s',
+    hideExamplesTab => {
+      const component = { data: { hideExamplesTab } };
+      const sitemap = renderSitemap([
+        { url: '/docs/media/controller/', data: { hideExamplesTab } },
+        {
+          url: '/docs/media/controller/api/',
+          data: { component, hideExamplesTab, isApiTab: true }
+        },
+        {
+          url: '/docs/media/controller/examples/',
+          data: { component, isExamplesTab: true }
+        }
+      ]);
+      const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+
+      expect(locations).toEqual([
+        'https://nvidia.github.io/elements/docs/media/controller/',
+        'https://nvidia.github.io/elements/docs/media/controller/api/',
+        ...(hideExamplesTab ? [] : ['https://nvidia.github.io/elements/docs/media/controller/examples/'])
+      ]);
+    }
+  );
+
   it('should emit lastmod only from explicit modification metadata', () => {
     const sitemap = renderSitemap([
       {

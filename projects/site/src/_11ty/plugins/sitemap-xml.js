@@ -27,7 +27,11 @@ export function isSitemapPageUrl(url) {
 }
 
 function isPublishableResult(result) {
-  if (!isSitemapPageUrl(result.url) || result.data?.noindex || result.data?.component?.data?.hideExamplesTab) {
+  if (
+    !isSitemapPageUrl(result.url) ||
+    result.data?.noindex ||
+    (result.data?.isExamplesTab && result.data?.component?.data?.hideExamplesTab)
+  ) {
     return false;
   }
   return !ROBOTS_NOINDEX.test(result.content ?? '');

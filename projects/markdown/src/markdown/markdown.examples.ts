@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
+import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/markdown/markdown/define.js';
 import '@nvidia-elements/markdown/styles/index.css';
 
@@ -249,12 +250,15 @@ This content has <strong>HTML</strong> mixed with markdown.
 };
 
 /**
- * @summary Progressive streaming demo simulating AI assistant responses with block-by-block content rendering
+ * @summary Progressive AI response streaming with a restart action. Use to replay content from the beginning and inspect how markdown renders as new blocks arrive.
  * @tags test-case
  */
-export const JavaScriptDriven = {
+export const StreamingContent = {
   render: () => html`
-    <div>
+    <div nve-layout="column gap:md">
+      <div>
+        <nve-button id="restart-markdown-stream" type="button">Restart stream</nve-button>
+      </div>
       <nve-markdown id="programmatic-markdown"></nve-markdown>
       
       <script type="module">
@@ -312,7 +316,9 @@ The component uses a reactive approach:
         // Split content into blocks/paragraphs for progressive display
         const blocks = fullContent.split('\\n');
         let currentBlockIndex = 0;
+        let streamTimeout;
         function streamContent() {
+          if (!element.isConnected) return;
           if (currentBlockIndex < blocks.length) {
             // Add 1 block at a time to preserve markdown structure
             currentBlockIndex++;
@@ -320,11 +326,17 @@ The component uses a reactive approach:
             
             element.source = currentContent;
             
-            setTimeout(streamContent, 300);
+            streamTimeout = setTimeout(streamContent, 300);
           }
         }
+        document.getElementById('restart-markdown-stream').addEventListener('click', () => {
+          clearTimeout(streamTimeout);
+          currentBlockIndex = 0;
+          element.source = '';
+          streamTimeout = setTimeout(streamContent, 300);
+        });
         // Start streaming after a brief delay
-        setTimeout(streamContent, 1000);
+        streamTimeout = setTimeout(streamContent, 1000);
       </script>
     </div>
   `

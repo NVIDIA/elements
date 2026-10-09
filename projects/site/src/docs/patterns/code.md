@@ -14,6 +14,14 @@ Code patterns help users inspect test results, explore project files, review cha
 
 {% example '@internals/patterns/code.examples.json', 'FileTree' %}
 
+## File Tree Git Diff
+
+{% example '@internals/patterns/code.examples.json', 'FileTreeGitDiff' %}
+
+## Git Review Diff
+
+{% example '@internals/patterns/code.examples.json', 'GitReviewDiff' '{ "inline": false, "height": "480px" }' %}
+
 ## Commit
 
 {% example '@internals/patterns/code.examples.json', 'Commit' %}

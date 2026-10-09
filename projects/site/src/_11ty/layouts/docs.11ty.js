@@ -70,13 +70,6 @@ export async function render(data) {
         <div class="visually-hidden" aria-hidden="true">${ELEMENTS_PAGES_BASE_URL}/llms.txt is available and optimized for AI and LLM tools.</div>
         <nve-page style="anchor-name: --page-anchor;">
           ${renderBasePageHeader(data)}
-          <nve-page-panel slot="left-aside" id="sidenav-panel" style="width: 250px;">
-            <nve-page-panel-content>
-              <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
-              ${renderDocsNav(data)}
-            </nve-page-panel-content>
-          </nve-page-panel>
-          <nve-resize-handle slot="left-aside" min="5" max="460" value="250" step="5" orientation="vertical"></nve-resize-handle>
           ${
             data.tag
               ? `
@@ -129,6 +122,13 @@ export async function render(data) {
               ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
           </main>
+          <nve-page-panel slot="left-aside" id="sidenav-panel" style="width: 250px;">
+            <nve-page-panel-content>
+              <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
+              ${renderDocsNav(data)}
+            </nve-page-panel-content>
+          </nve-page-panel>
+          <nve-resize-handle slot="left-aside" min="5" max="460" value="250" step="5" orientation="vertical"></nve-resize-handle>
           <!-- ANCHOR-GENERATOR -->
           <nve-page-panel closable hidden slot="right-aside" size="sm" id="system-options-panel">
             <nve-page-panel-content>

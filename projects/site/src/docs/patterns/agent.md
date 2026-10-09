@@ -10,21 +10,9 @@
 
 AI Agent patterns keep tasks, supporting evidence, and user requests visible while an assistant works.
 
-## Task
+## Workflows
 
-{% example '@internals/patterns/agent.examples.json', 'Task' %}
-
-## Sources
-
-{% example '@internals/patterns/agent.examples.json', 'Sources' %}
-
-## Queue
-
-{% example '@internals/patterns/agent.examples.json', 'Queue' %}
-
-## Reasoning
-
-{% example '@internals/patterns/agent.examples.json', 'Reasoning' %}
+{% example '@internals/patterns/agent.examples.json', 'Workflows' %}
 
 ## Tools
 
@@ -41,3 +29,11 @@ AI Agent patterns keep tasks, supporting evidence, and user requests visible whi
 ## Context
 
 {% example '@internals/patterns/agent.examples.json', 'Context', '{ "height": "520px", "inline": false }' %}
+
+## Model Settings
+
+{% example '@internals/patterns/agent.examples.json', 'ModelSettings', '{ "height": "540px", "inline": false }' %}
+
+## Streaming Content
+
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'StreamingContent' %}
