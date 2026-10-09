@@ -113,6 +113,18 @@
       "types": "./dist/pause-button/index.d.ts",
       "default": "./dist/pause-button/index.js"
     },
+    "./pip-button": {
+      "types": "./dist/pip-button/index.d.ts",
+      "default": "./dist/pip-button/index.js"
+    },
+    "./pip-button/define.js": {
+      "types": "./dist/pip-button/define.d.ts",
+      "default": "./dist/pip-button/define.js"
+    },
+    "./pip-button/index.js": {
+      "types": "./dist/pip-button/index.d.ts",
+      "default": "./dist/pip-button/index.js"
+    },
     "./playback-rate-select": {
       "types": "./dist/playback-rate-select/index.d.ts",
       "default": "./dist/playback-rate-select/index.js"

@@ -28,6 +28,7 @@ export const Default = {
     <nve-media-volume-range commandfor="example-media" name="volume" style="max-width: 100px"></nve-media-volume-range>
     <nve-media-playback-rate-select commandfor="example-media" name="playbackRate"></nve-media-playback-rate-select>
     <nve-media-loop-button commandfor="example-media"></nve-media-loop-button>
+    <nve-media-pip-button commandfor="example-media"></nve-media-pip-button>
     <nve-media-fullscreen-button commandfor="example-media"></nve-media-fullscreen-button>
   </div>
 </div>
