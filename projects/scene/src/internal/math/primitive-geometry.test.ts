@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { createPrimitiveGeometry, type PrimitiveKind } from './primitives.js';
+import { createPrimitiveGeometry, type PrimitiveKind } from './primitive-geometry.js';
 
 describe('primitive geometry', () => {
   it.each<[PrimitiveKind, number]>([

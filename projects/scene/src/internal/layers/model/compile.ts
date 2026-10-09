@@ -4,7 +4,11 @@
 import { normalizeQuaternion, rotateVectorByQuaternion } from '../../math/quaternion.js';
 import { resolveSceneColor } from '../../records/packed-record-buffer.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
-import { createPrimitiveGeometry, type PrimitiveGeometry, type ScenePrimitiveKind } from '../../geometry/primitives.js';
+import {
+  createPrimitiveGeometry,
+  type PrimitiveGeometry,
+  type ScenePrimitiveKind
+} from '../../math/primitive-geometry.js';
 import type { Quaternion, Vec3 } from '../../math/types.js';
 
 import { MAX_MODEL_BYTES as MAX_COMPILED_BYTES } from './limits.js';

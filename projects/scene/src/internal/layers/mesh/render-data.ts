@@ -37,7 +37,7 @@ export interface MeshRenderData {
   readonly topologyVersion: number;
   readonly geometryError: boolean;
   readonly geometryUploadRanges: readonly MeshGeometryUploadRange[];
-  /** Attribute versions immediately before the retained source ranges began. */
+  /** Earliest attribute versions covered by these source ranges. Missing entries require a full refresh. */
   readonly geometryUploadBaseVersions?: Partial<MeshGeometryAttributeVersions>;
   readonly geometryVersions: MeshGeometryAttributeVersions;
   readonly identityInstance: boolean;

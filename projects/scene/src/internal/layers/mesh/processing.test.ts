@@ -249,6 +249,35 @@ describe('mesh geometry processing', () => {
     expect(updated.uploadUvs).not.toBe(previous.uploadUvs);
   });
 
+  it('matches nonindexed normals and defaults across chunks and reuses unchanged synthesized arrays', async () => {
+    const triangleCount = Math.ceil(PREPARATION_CHUNK_SIZE / 3) + 1;
+    const positions = new Float32Array(triangleCount * 9);
+    for (let offset = 0; offset < positions.length; offset += 9) positions.set(triangle, offset);
+    const source = { colors: null, indices: null, normals: null, positions, uvs: null };
+    let yields = 0;
+    const context = {
+      isCurrent: () => true,
+      yield: async () => {
+        yields += 1;
+      }
+    };
+    const prepared = (await prepareMeshGeometry(source, context))!;
+
+    expect(prepared).toEqual(processMeshGeometry(source));
+    expect(yields).toBe(6);
+    expect([...prepared.normals.subarray(prepared.normals.length - 9)]).toEqual([0, 0, 1, 0, 0, 1, 0, 0, 1]);
+    expect(prepared.uploadColors.every(value => value === 1)).toBe(true);
+    expect(prepared.uploadUvs.every(value => value === 0)).toBe(true);
+
+    yields = 0;
+    const updated = (await prepareFlatGeometryUpdate(source, prepared, context))!;
+    expect(updated.uploadColors).toBe(prepared.uploadColors);
+    expect(updated.uploadUvs).toBe(prepared.uploadUvs);
+    expect(updated.normals).not.toBe(prepared.normals);
+    expect(updated.normals).toEqual(prepared.normals);
+    expect(yields).toBe(2);
+  });
+
   it.each([
     { name: 'expanded positions', checks: [true, false] },
     { name: 'generated normals', checks: [true, true, true, false] },
