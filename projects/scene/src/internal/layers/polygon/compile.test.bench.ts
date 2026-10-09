@@ -43,22 +43,20 @@ describe('complete polygon compilation', () => {
       }).run(runOptions);
     });
   }
-  for (const count of [32, 256, 1_024, 4_096]) {
-    const batch = count === 32 ? 256 : count === 256 ? 8 : 1;
+  for (const count of [32, 64, 128, 256, 1_024, 3_072, 4_096]) {
+    const batch = count <= 128 ? 256 : count === 256 ? 8 : 1;
     const fixtures: Array<{ name: string; geometry: PolygonGeometry }> = [
       { name: 'convex', geometry: { outer: radialRing(count, 100) } }
     ];
+    fixtures.push({ name: 'concave', geometry: { outer: radialRing(count, 80) } });
     if (count < 4_096) {
-      fixtures.push(
-        { name: 'concave', geometry: { outer: radialRing(count, 80) } },
-        {
-          name: 'holed',
-          geometry: {
-            outer: radialRing(count, 100),
-            holes: [radialRing(count / 4, 100).map(([x, y]) => [x * 0.2, y * 0.2] as const)]
-          }
+      fixtures.push({
+        name: 'holed',
+        geometry: {
+          outer: radialRing(count, 100),
+          holes: [radialRing(count / 4, 100).map(([x, y]) => [x * 0.2, y * 0.2] as const)]
         }
-      );
+      });
     }
     for (const { name, geometry } of fixtures) {
       test(`compiles ${batch} ${name} polygons with ${count} outer vertices`, async ({ bench }) => {
