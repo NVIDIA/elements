@@ -215,6 +215,56 @@ describe(compilePolygon.name, () => {
     }
   });
 
+  it.each([127, 128, 129, 257])(
+    'preserves convex fan triangle order through indexed edge updates with %i vertices',
+    count => {
+      const outer: PolygonRing = Array.from({ length: count }, (_, index) => {
+        const angle = (index / count) * Math.PI * 2;
+        return [Math.cos(angle) * 100, Math.sin(angle) * 100];
+      });
+      const expected = Array.from({ length: count - 3 }, (_, index) => [count - 1, index, index + 1]).flat();
+      expected.push(count - 3, count - 2, count - 1);
+      expect([...compilePolygon({ outer }).indices]).toEqual(expected);
+    }
+  );
+
+  it.each([128, 257, 512])(
+    'triangulates %i concave vertices and multiple indexed holes with independent fill checks',
+    count => {
+      const data = seededPolygon(count, count);
+      const compiled = compilePolygon(data);
+      const expected =
+        Math.abs(ringArea(data.outer)) - (data.holes ?? []).reduce((area, hole) => area + Math.abs(ringArea(hole)), 0);
+      expect(triangleArea(compiled.positions, compiled.indices)).toBeCloseTo(expected, 4);
+      expect([...compilePolygon(data).indices]).toEqual([...compiled.indices]);
+      for (let index = 0; index < compiled.indices.length; index += 3) {
+        const triangle = trianglePoints(compiled.positions, compiled.indices, index);
+        expect(cross(...triangle)).toBeGreaterThan(0);
+        expect(pointInPolygon(centroid(...triangle), data)).toBe(true);
+        expect(triangleCrossesBoundary(triangle, data)).toBe(false);
+      }
+    }
+  );
+
+  it('rejects crossing, touching, and nested boundaries with indexed rings', () => {
+    const data = seededPolygon(1, 257);
+    const crossed = [...data.outer];
+    [crossed[1], crossed[128]] = [crossed[128]!, crossed[1]!];
+    expect(() => compilePolygon({ outer: crossed })).toThrow('simple');
+    const touching: PolygonRing = [data.outer[0]!, [10, 0], [10, 1]];
+    expect(() => compilePolygon({ outer: data.outer, holes: [touching] })).toThrow('strictly inside');
+    const largeHole = seededPolygon(2, 129).outer.map(([x, y]) => [x * 0.5, y * 0.5] as const);
+    const smallHole: PolygonRing = [
+      [-1, -1],
+      [-1, 1],
+      [1, 1],
+      [1, -1]
+    ];
+    expect(() => compilePolygon({ outer: data.outer, holes: [largeHole, smallHole] })).toThrow('unnested');
+    const shiftedHole = largeHole.map(([x, y]) => [x + 4, y] as const);
+    expect(() => compilePolygon({ outer: data.outer, holes: [largeHole, shiftedHole] })).toThrow('disjoint');
+  });
+
   it.each([
     [
       'self-intersection',
@@ -498,11 +548,11 @@ function pointInRing(point: Point, ring: PolygonRing): boolean {
   return inside;
 }
 
-function seededPolygon(seed: number): PolygonGeometry {
+function seededPolygon(seed: number, count = 12): PolygonGeometry {
   let state = seed;
   const random = () => (state = (Math.imul(state, 1664525) + 1013904223) >>> 0) / 4294967296;
-  const outer = Array.from({ length: 12 }, (_, index) => {
-    const angle = (index / 12) * Math.PI * 2;
+  const outer = Array.from({ length: count }, (_, index) => {
+    const angle = (index / count) * Math.PI * 2;
     const radius = index % 2 === 0 ? 18 : 13 + random();
     return [Math.cos(angle) * radius, Math.sin(angle) * radius] as const;
   });
@@ -513,6 +563,11 @@ function seededPolygon(seed: number): PolygonGeometry {
   ] as const;
   const holes = centers.map(([x, y]) => {
     const half = 0.8 + random() * 0.5;
+    if (count >= 128)
+      return Array.from({ length: 129 }, (_, index) => {
+        const angle = (-index / 129) * Math.PI * 2;
+        return [x + Math.cos(angle) * half, y + Math.sin(angle) * half] as const;
+      });
     return [
       [x - half, y - half],
       [x - half, y + half],
