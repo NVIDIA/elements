@@ -28,15 +28,10 @@ import type { ViewportZoomAction } from './viewport-navigation.types.js';
 import type {
   ViewportAnimationOptions,
   ViewportPanBehavior,
-  ViewportPanProposal,
-  ViewportPanSession,
-  ViewportPanUpdateProposal,
   ViewportPoint,
   ViewportRect,
   ViewportRevealOptions,
-  ViewportTransform,
-  ViewportZoomProposal,
-  ViewportZoomRequestOptions
+  ViewportTransform
 } from './viewport.types.js';
 import { centeredScaleTransform, contentPointFromViewport } from './viewport-projection.utils.js';
 
@@ -64,12 +59,8 @@ const BEHAVIOR_PAN_CONVERTER = {
  * @slot - Content positioned in the viewport's infinite content space.
  * @slot background - Custom content rendered behind viewport content and excluded from content fitting
  * @slot overlay - Interactive content fixed above the transformed plane and excluded from content fitting
- * @event panstart - Dispatched when a sustained pointer or control pan begins. Cancel to suppress the default for its session.
- * @event pan - Dispatched for admitted user pan proposals. Cancel to skip the proposed transform mutation.
- * @event panend - Dispatched once when a sustained pan ends, including its terminal reason.
- * @event zoom - Dispatched for admitted user zoom proposals. Cancel to skip the proposed transform mutation.
  * @event viewportchange - Dispatched once after a render that commits one or more viewport transform changes.
- * @event capabilitieschange - Dispatched after effective user-input pan or zoom admission changes.
+ * @event capabilitieschange - Dispatched after pan or zoom availability or scale limits change.
  * @cssprop --background - Background color of the fixed viewport area.
  * @cssprop --min-height
  * @cssprop --pan-cursor - Cursor shown over a background eligible for primary-pointer panning.
@@ -81,6 +72,8 @@ const BEHAVIOR_PAN_CONVERTER = {
  * @command --zoom-in - With behavior-zoom enabled, animates to the next permitted scale step.
  * @command --zoom-out - With behavior-zoom enabled, animates to the previous permitted scale step.
  * @command --zoom-reset - With behavior-zoom enabled, animates to 100% scale.
+ * @command --pan-to - With behavior-pan enabled, moves to the source x and y content coordinates.
+ * @command --zoom-to - With behavior-zoom enabled, sets the centered scale from the source's numeric scale property.
  * @command --zoom-to-fit - With behavior-zoom enabled, animates to fit direct default-slot element boxes.
  * @stable false
  */
@@ -112,6 +105,7 @@ export class Viewport extends LitElement {
   #dragThreshold = DEFAULT_DRAG_THRESHOLD;
   #fitInset = 0;
   #behaviorPan: ViewportPanBehavior = false;
+  #behaviorZoom = false;
   constructor() {
     super();
     this.#animationController = new ViewportAnimationController(this, {
@@ -123,6 +117,9 @@ export class Viewport extends LitElement {
       getViewportSize: () => ({ height: this.clientHeight, width: this.clientWidth })
     });
     this.#navigationController = new ViewportNavigationController(this, {
+      applyPan: next => this.#applyUserTransform(next),
+      applyZoom: (next, options) => this.#applyUserTransform(next, options),
+      getCenteredZoomTarget: scale => this.#getCenteredScaleTransform(this.#clampScale(scale)),
       getTransform: () => this.getTransform(),
       getZoomTarget: action => this.#getZoomTarget(action, this.#animationController.destinationScale ?? this.#scale)
     });
@@ -130,7 +127,8 @@ export class Viewport extends LitElement {
       clampScale: value => this.#clampScale(value),
       clientToViewport: (clientX, clientY) => this.#clientToViewport(clientX, clientY),
       getTransform: () => this.getTransform(),
-      requestAdmittedPinchZoom: proposal => this.#performZoom(proposal)
+      applyPan: next => this.#applyUserTransform(next),
+      applyZoom: next => this.#applyUserTransform(next)
     });
   }
 
@@ -178,6 +176,7 @@ export class Viewport extends LitElement {
     this.#minScale = next;
     this.requestUpdate('minScale', previous);
     this.#commitExternalTransform({ ...this.getTransform(), scale: this.#scale });
+    this.#notifyCapabilitiesChange();
   }
 
   /** Inclusive upper scale limit. */
@@ -194,6 +193,7 @@ export class Viewport extends LitElement {
     this.#maxScale = next;
     this.requestUpdate('maxScale', previous);
     this.#commitExternalTransform({ ...this.getTransform(), scale: this.#scale });
+    this.#notifyCapabilitiesChange();
   }
 
   /**
@@ -215,10 +215,23 @@ export class Viewport extends LitElement {
     const previous = this.#behaviorPan;
     this.#behaviorPan = next;
     this.requestUpdate('behaviorPan', previous);
+    if (Boolean(previous) !== this.pannable) this.#notifyCapabilitiesChange();
   }
 
   /** Enables zooming by pinch, focused modified wheel, focused keyboard, and Invoker commands. */
-  @property({ type: Boolean, attribute: 'behavior-zoom', reflect: true }) behaviorZoom = false;
+  @property({ type: Boolean, attribute: 'behavior-zoom', reflect: true })
+  get behaviorZoom(): boolean {
+    return this.#behaviorZoom;
+  }
+
+  set behaviorZoom(value: boolean | null | undefined) {
+    const next = Boolean(value);
+    if (next === this.#behaviorZoom) return;
+    const previous = this.#behaviorZoom;
+    this.#behaviorZoom = next;
+    this.requestUpdate('behaviorZoom', previous);
+    this.#notifyCapabilitiesChange();
+  }
 
   /** Whether the viewport may admit new user-input panning. */
   get pannable(): boolean {
@@ -274,12 +287,6 @@ export class Viewport extends LitElement {
   protected updated(changed: PropertyValues<this>): void {
     super.updated(changed);
     if (
-      (changed.has('behaviorPan') && Boolean(changed.get('behaviorPan')) !== this.pannable) ||
-      (changed.has('behaviorZoom') && Boolean(changed.get('behaviorZoom')) !== this.zoomable)
-    ) {
-      this.dispatchEvent(new Event('capabilitieschange', { bubbles: true, composed: true }));
-    }
-    if (
       this.isConnected &&
       this.#publishTransformChanges &&
       (changed.has('x') || changed.has('y') || changed.has('scale'))
@@ -293,6 +300,10 @@ export class Viewport extends LitElement {
       );
     }
     this.#publishTransformChanges = this.isConnected;
+  }
+
+  #notifyCapabilitiesChange(): void {
+    this.dispatchEvent(new Event('capabilitieschange', { bubbles: true, composed: true }));
   }
 
   render() {
@@ -340,105 +351,14 @@ export class Viewport extends LitElement {
     };
   }
 
-  /**
-   * Requests one discrete user-originated pan. When pannable, the viewport dispatches
-   * a cancelable `pan` and applies the default transform if no listener cancels the event.
-   * Returns true only when that default changes the transform.
-   */
-  requestPan(proposal: ViewportPanProposal): boolean {
-    if (!this.pannable) return false;
-    return this.#requestPan(proposal, { start: this.getTransform(), appliesDefault: true });
-  }
-
-  /**
-   * Requests one discrete user-originated zoom. When zoomable, the viewport dispatches
-   * a cancelable `zoom` and applies the default transform if no listener cancels the event.
-   * Set `options.animated` to animate the uncanceled default; the option is absent from the `zoom` detail.
-   * Returns true when the default changes or schedules a change to the transform.
-   */
-  requestZoom(proposal: ViewportZoomProposal, options: ViewportZoomRequestOptions = {}): boolean {
-    if (!this.zoomable) return false;
-    return this.#performZoom(proposal, options);
-  }
-
-  #performZoom(proposal: ViewportZoomProposal, options: ViewportZoomRequestOptions = {}): boolean {
-    const next = this.#normalizeTransform(proposal.next);
-    const start = this.getTransform();
-    if (!this.#dispatchNavigationEvent('zoom', { ...proposal, next: { ...next }, start: { ...start } }, true))
-      return false;
+  #applyUserTransform(next: ViewportTransform, options: { readonly animated?: boolean } = {}): void {
     const current = this.getTransform();
     const unchanged = next.x === current.x && next.y === current.y && next.scale === current.scale;
-    if (unchanged && (!options.animated || this.#animationController.destinationScale === undefined)) return false;
+    if (unchanged && (!options.animated || this.#animationController.destinationScale === undefined)) return;
     this.#animationController.cancel();
     this.#autoFitController.consume();
-    if (options.animated) {
-      this.animateTo(next);
-      return true;
-    }
-    if (!this.#commitTransform(next)) return false;
-    this.#gestureNavigationController.rebasePointerSessions();
-    return true;
-  }
-
-  /**
-   * Starts a sustained semantic pan after the caller crosses its activation threshold.
-   * Dispatches `panstart`, performs the initial `pan` update, and returns a session for later updates
-   * and one terminal `panend`. Returns undefined when pannable is false.
-   */
-  startPan(proposal: ViewportPanProposal): ViewportPanSession | undefined {
-    if (!this.pannable) return undefined;
-    const source = proposal.source;
-    const next = this.#normalizeTransform(proposal.next);
-    const initialProposal: ViewportPanProposal = { ...proposal, source, next };
-    const sessionStart = this.getTransform();
-    const appliesDefault = this.#dispatchNavigationEvent(
-      'panstart',
-      { ...initialProposal, next: { ...next }, start: { ...sessionStart } },
-      true
-    );
-    let ended = false;
-    const session: ViewportPanSession = {
-      start: { ...sessionStart },
-      update: (update: ViewportPanUpdateProposal): boolean => {
-        if (ended) return false;
-        return this.#requestPan({ ...update, source }, { start: sessionStart, appliesDefault, isActive: () => !ended });
-      },
-      end: request => {
-        if (ended) return;
-        ended = true;
-        this.#dispatchNavigationEvent(
-          'panend',
-          { ...request, source, start: { ...sessionStart }, transform: this.getTransform() },
-          false
-        );
-      }
-    };
-    this.#requestPan(initialProposal, { start: sessionStart, appliesDefault, isActive: () => !ended });
-    return session;
-  }
-
-  #requestPan(
-    proposal: ViewportPanProposal,
-    disposition: { start: ViewportTransform; appliesDefault: boolean; isActive?: () => boolean }
-  ): boolean {
-    const next = this.#normalizeTransform(proposal.next);
-    if (
-      !this.#dispatchNavigationEvent('pan', { ...proposal, next: { ...next }, start: { ...disposition.start } }, true)
-    ) {
-      return false;
-    }
-    if (!disposition.appliesDefault || disposition.isActive?.() === false) return false;
-    const current = this.getTransform();
-    if (next.x === current.x && next.y === current.y && next.scale === current.scale) return false;
-    this.#animationController.cancel();
-    this.#autoFitController.consume();
-    if (!this.#commitTransform(next)) return false;
-    this.#gestureNavigationController.rebasePointerSessions();
-    return true;
-  }
-
-  #normalizeTransform(next: ViewportTransform): ViewportTransform {
-    return { x: finiteOr(next.x, this.#x), y: finiteOr(next.y, this.#y), scale: this.#clampScale(next.scale) };
+    if (options.animated) this.animateTo(next);
+    else if (this.#commitTransform(next)) this.#gestureNavigationController.rebasePointerSessions();
   }
 
   /** Animates the viewport to the requested partial transform. */
@@ -571,17 +491,6 @@ export class Viewport extends LitElement {
     if (!committed) return;
     if (this.isConnected) this.#autoFitController.consume();
     this.#gestureNavigationController.rebasePointerSessions();
-  }
-
-  #dispatchNavigationEvent<T>(type: string, detail: T, cancelable: boolean): boolean {
-    return this.dispatchEvent(
-      new CustomEvent<T>(type, {
-        bubbles: true,
-        cancelable,
-        composed: true,
-        detail
-      })
-    );
   }
 
   #updateTransformFields(next: ViewportTransform): void {

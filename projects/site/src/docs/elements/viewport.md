@@ -4,7 +4,7 @@
   description: 'Use the NVIDIA Elements viewport to navigate arbitrary spatial content with pan, zoom, fitting, grid lines, and programmatic controls.',
   layout: 'docs.11ty.js',
   tag: 'nve-viewport',
-  associatedElements: ['nve-viewport-gridlines', 'nve-viewport-minimap']
+  associatedElements: ['nve-viewport-gridlines', 'nve-viewport-minimap', 'nve-viewport-zoom-range']
 }
 ---
 

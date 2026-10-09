@@ -4,25 +4,12 @@
 export * from './viewport.js';
 export * from './viewport-gridlines.js';
 export * from './viewport-minimap.js';
+export * from './viewport-zoom-range.js';
 export type {
   ViewportAnimationOptions,
-  ViewportDiscretePanDetail,
   ViewportPanBehavior,
-  ViewportPanDetail,
-  ViewportPanEndDetail,
-  ViewportPanEndReason,
-  ViewportNavigationSource,
-  ViewportPanProposal,
-  ViewportPanUpdateProposal,
-  ViewportPanEndRequest,
-  ViewportPanSession,
-  ViewportZoomProposal,
-  ViewportZoomRequestOptions,
   ViewportPoint,
-  ViewportPointerPanDetail,
   ViewportRect,
   ViewportRevealOptions,
-  ViewportTransform,
-  ViewportWheelPanDetail,
-  ViewportZoomDetail
+  ViewportTransform
 } from './viewport.types.js';

@@ -10,7 +10,9 @@ import noInvalidInvokerTriggers from './no-invalid-invoker-triggers.js';
 const rule = noInvalidInvokerTriggers as unknown as JSRuleDefinition;
 
 const validElements =
-  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-mute-button, nve-media-pause-button, nve-media-playback-rate-select, nve-media-seek-button, nve-media-time-range, nve-media-volume-range';
+  'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-mute-button, nve-media-pause-button, nve-media-seek-button';
+
+const commandElements = `${validElements}, nve-media-playback-rate-select, nve-media-time-range, nve-media-volume-range, nve-viewport-minimap, nve-viewport-zoom-range`;
 
 describe('noInvalidInvokerTriggers', () => {
   let tester: RuleTester;
@@ -28,7 +30,7 @@ describe('noInvalidInvokerTriggers', () => {
     expect(noInvalidInvokerTriggers.meta.type).toBe('problem');
     expect(noInvalidInvokerTriggers.meta.docs).toBeDefined();
     expect(noInvalidInvokerTriggers.meta.docs.description).toBe(
-      'Disallow use of invoker trigger attributes on non-button nve-* elements.'
+      'Disallow unsupported invoker trigger attributes on nve-* elements.'
     );
     expect(noInvalidInvokerTriggers.meta.docs.category).toBe('Best Practice');
     expect(noInvalidInvokerTriggers.meta.docs.recommended).toBe(true);
@@ -36,7 +38,7 @@ describe('noInvalidInvokerTriggers', () => {
     expect(noInvalidInvokerTriggers.meta.schema).toEqual([]);
     expect(noInvalidInvokerTriggers.meta.messages).toBeDefined();
     expect(noInvalidInvokerTriggers.meta.messages['no-invalid-invoker-triggers']).toBe(
-      'Unexpected use of "{{attribute}}" on <{{element}}>. Invoker attributes are only valid on button-type elements: {{validElements}}.'
+      'Unexpected use of "{{attribute}}" on <{{element}}>. Invoker attributes are only valid on supported controls: {{validElements}}.'
     );
   });
 
@@ -57,8 +59,8 @@ describe('noInvalidInvokerTriggers', () => {
     });
   });
 
-  it('should allow commandfor on valid button-type elements', () => {
-    tester.run('commandfor on button-type elements', rule, {
+  it('should allow commandfor on supported controls', () => {
+    tester.run('commandfor on supported controls', rule, {
       valid: [
         '<nve-button commandfor="my-panel">Toggle</nve-button>',
         '<nve-icon-button commandfor="my-panel"></nve-icon-button>',
@@ -67,6 +69,8 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-media-playback-rate-select commandfor="my-player"></nve-media-playback-rate-select>',
         '<nve-media-mute-button commandfor="my-player"></nve-media-mute-button>',
         '<nve-media-seek-button commandfor="my-player"></nve-media-seek-button>',
+        '<nve-viewport-minimap commandfor="viewport"></nve-viewport-minimap>',
+        '<nve-viewport-zoom-range commandfor="viewport"></nve-viewport-zoom-range>',
         '<nve-media-time-range commandfor="my-player"></nve-media-time-range>',
         '<nve-media-volume-range commandfor="my-player"></nve-media-volume-range>',
         '<nve-media-fullscreen-button commandfor="my-player"></nve-media-fullscreen-button>'
@@ -82,6 +86,27 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-icon-button interestfor="my-tooltip"></nve-icon-button>'
       ],
       invalid: []
+    });
+  });
+
+  it.each([
+    'nve-media-playback-rate-select',
+    'nve-media-time-range',
+    'nve-media-volume-range',
+    'nve-viewport-minimap',
+    'nve-viewport-zoom-range'
+  ])('should only allow command targeting on %s', element => {
+    tester.run(`unsupported invoker attributes on ${element}`, rule, {
+      valid: [`<${element} commandfor="target"></${element}>`],
+      invalid: ['popovertarget', 'interestfor'].map(attribute => ({
+        code: `<${element} commandfor="target" ${attribute}="panel"></${element}>`,
+        errors: [
+          {
+            messageId: 'no-invalid-invoker-triggers',
+            data: { attribute, element, validElements }
+          }
+        ]
+      }))
     });
   });
 
@@ -152,7 +177,7 @@ describe('noInvalidInvokerTriggers', () => {
           errors: [
             {
               messageId: 'no-invalid-invoker-triggers',
-              data: { attribute: 'commandfor', element: 'nve-badge', validElements }
+              data: { attribute: 'commandfor', element: 'nve-badge', validElements: commandElements }
             }
           ]
         },
@@ -161,7 +186,7 @@ describe('noInvalidInvokerTriggers', () => {
           errors: [
             {
               messageId: 'no-invalid-invoker-triggers',
-              data: { attribute: 'commandfor', element: 'nve-tooltip', validElements }
+              data: { attribute: 'commandfor', element: 'nve-tooltip', validElements: commandElements }
             }
           ]
         }
@@ -199,7 +224,7 @@ describe('noInvalidInvokerTriggers', () => {
             },
             {
               messageId: 'no-invalid-invoker-triggers',
-              data: { attribute: 'commandfor', element: 'nve-badge', validElements }
+              data: { attribute: 'commandfor', element: 'nve-badge', validElements: commandElements }
             }
           ]
         }

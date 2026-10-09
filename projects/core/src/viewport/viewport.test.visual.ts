@@ -6,12 +6,22 @@ import { visualRunner } from '@internals/vite';
 
 describe('viewport visual', () => {
   test('viewport should match visual baseline', async () => {
-    const report = await visualRunner.render('viewport', template());
+    const report = await visualRunner.render('viewport', template(''));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
   test('viewport should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('viewport.dark', template('dark'));
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('viewport lines should match visual baseline', async () => {
+    const report = await visualRunner.render('viewport-lines', template('', 'lines'));
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('viewport lines should match visual baseline dark theme', async () => {
+    const report = await visualRunner.render('viewport-lines.dark', template('dark', 'lines'));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
@@ -34,46 +44,27 @@ describe('viewport visual', () => {
     const report = await visualRunner.render('viewport-crosses.dark', template('dark', 'crosses'));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
-
-  test('viewport minimap should match visual baseline', async () => {
-    const report = await visualRunner.render('viewport-minimap', minimapTemplate(), { waitFor: waitForMinimap });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
-  });
-
-  test('viewport minimap should match visual baseline dark theme', async () => {
-    const report = await visualRunner.render('viewport-minimap.dark', minimapTemplate('dark'), {
-      waitFor: waitForMinimap
-    });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
-  });
-
-  test('viewport minimap custom should match visual baseline', async () => {
-    const report = await visualRunner.render('viewport-minimap-custom', minimapTemplate('', 'custom'), {
-      waitFor: waitForMinimap
-    });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
-  });
-
-  test('viewport minimap custom should match visual baseline dark theme', async () => {
-    const report = await visualRunner.render('viewport-minimap-custom.dark', minimapTemplate('dark', 'custom'), {
-      waitFor: waitForMinimap
-    });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
-  });
+});
+test('embedded viewport controls should match visual baseline', async () => {
+  const report = await visualRunner.render('viewport-controls', controlsTemplate(''), { waitFor: waitForControls });
+  expect(report.maxDiffPercentage).toBeLessThan(1);
 });
 
-async function waitForMinimap(waitForFunction: (...args: unknown[]) => Promise<unknown>) {
-  await waitForFunction(() => document.querySelector('nve-viewport-minimap')?.hasAttribute('data-visual-ready'));
-}
+test('embedded viewport controls should match visual baseline dark theme', async () => {
+  const report = await visualRunner.render('viewport-controls.dark', controlsTemplate('dark'), {
+    waitFor: waitForControls
+  });
+  expect(report.maxDiffPercentage).toBeLessThan(1);
+});
 
-function template(theme: '' | 'dark' = '', pattern: 'lines' | 'dots' | 'crosses' = 'lines') {
+function template(theme: '' | 'dark' = '', pattern?: 'lines' | 'dots' | 'crosses') {
   return /* html */ `
     <script type="module">
       import '@nvidia-elements/core/viewport/define.js';
       document.documentElement.setAttribute('nve-theme', '${theme}');
     </script>
     <nve-viewport id="visual-viewport" x="40" y="30" scale="1.25" style="width: 500px; height: 320px; border: 1px solid currentColor">
-      <nve-viewport-gridlines pattern="${pattern}" origin-x="100" origin-y="100"></nve-viewport-gridlines>
+      ${pattern ? `<nve-viewport-gridlines pattern="${pattern}" origin-x="100" origin-y="100"></nve-viewport-gridlines>` : ''}
       <svg aria-hidden="true" width="240" height="180" viewBox="0 0 240 180" style="position: absolute">
         <circle cx="85" cy="125" r="24" fill="var(--nve-sys-accent-primary-background)"></circle>
       </svg>
@@ -88,57 +79,61 @@ function template(theme: '' | 'dark' = '', pattern: 'lines' | 'dots' | 'crosses'
       viewport.y = 45;
       viewport.scale = 2;
       await viewport.updateComplete;
-      await gridlines.updateComplete;
+      if (gridlines) await gridlines.updateComplete;
     </script>
   `;
 }
 
-function minimapTemplate(theme: '' | 'dark' = '', preview: 'automatic' | 'custom' = 'automatic') {
-  const content =
-    preview === 'custom'
-      ? /* html */ `<svg width="900" height="600" viewBox="0 0 900 600" style="position: absolute; left: 0; top: 0">
-          <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
-          <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
-          <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
-          <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
-        </svg>`
-      : /* html */ `<svg width="200" height="200" viewBox="0 0 200 200" style="position: absolute; left: 100px; top: 300px">
-          <circle cx="100" cy="100" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
-        </svg>
-        <svg width="200" height="200" viewBox="0 0 200 200" style="position: absolute; left: 350px; top: 100px">
-          <rect width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
-        </svg>
-        <svg width="220" height="220" viewBox="0 0 220 220" style="position: absolute; left: 590px; top: 290px">
-          <path d="M 110 0 L 220 110 L 110 220 L 0 110 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
-        </svg>`;
-  const customPreview =
-    preview === 'custom'
-      ? /* html */ `<svg slot="preview" width="900" height="600" viewBox="0 0 900 600" style="position: absolute; left: 0; top: 0">
-          <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
-          <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
-          <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
-        </svg>`
-      : '';
+async function waitForControls(waitForFunction: (...args: unknown[]) => Promise<unknown>) {
+  await waitForFunction(() => document.querySelector('nve-viewport')?.hasAttribute('data-visual-ready'));
+}
+
+function controlsTemplate(theme: '' | 'dark' = '') {
   return /* html */ `
     <script type="module">
       import '@nvidia-elements/core/viewport/define.js';
+      import '@nvidia-elements/core/toolbar/define.js';
+      import '@nvidia-elements/core/button/define.js';
       document.documentElement.setAttribute('nve-theme', '${theme}');
     </script>
-    <nve-viewport id="visual-minimap-viewport" behavior-pan x="40" y="30" style="width: 500px; height: 320px; border: 1px solid currentColor">
+
+    <nve-viewport id="viewport-default" autofit fit-inset="24" behavior-pan behavior-zoom style="width: 500px; height: 420px">
       <nve-viewport-gridlines></nve-viewport-gridlines>
-      ${content}
-      <nve-viewport-minimap id="visual-minimap">
-        ${customPreview}
-      </nve-viewport-minimap>
+
+      <svg
+        role="img"
+        aria-label="Three geometric forms in a spatial field"
+        width="900"
+        height="600"
+        viewBox="0 0 900 600"
+        style="position: absolute; left: 0; top: 0"
+      >
+        <circle cx="200" cy="400" r="100" fill="var(--nve-ref-color-green-jade-600)"></circle>
+        <rect x="350" y="100" width="200" height="200" rx="50" fill="var(--nve-ref-color-blue-cobalt-600)"></rect>
+        <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
+        <rect x="1" y="1" width="898" height="598" rx="24" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" stroke-dasharray="32 20" vector-effect="non-scaling-stroke"></rect>
+      </svg>
+
+      <nve-viewport-minimap></nve-viewport-minimap>
+      <nve-toolbar slot="overlay" orientation="vertical" aria-label="Viewport zoom controls"
+        style="position: absolute; inset-block-start: var(--nve-ref-space-md); inset-inline-start: var(--nve-ref-space-md); width: fit-content">
+        <nve-button commandfor="viewport-default" command="--zoom-in" aria-label="Zoom in">+</nve-button>
+        <nve-viewport-zoom-range commandfor="viewport-default" orientation="vertical" aria-label="Viewport zoom"></nve-viewport-zoom-range>
+        <nve-button commandfor="viewport-default" command="--zoom-out" aria-label="Zoom out">−</nve-button>
+      </nve-toolbar>
     </nve-viewport>
+
     <script type="module">
-      await customElements.whenDefined('nve-viewport-minimap');
-      const minimap = document.querySelector('#visual-minimap');
+      await customElements.whenDefined('nve-viewport-zoom-range');
+      const viewport = document.querySelector('nve-viewport');
+      const minimap = document.querySelector('nve-viewport-minimap');
+      const range = document.querySelector('nve-viewport-zoom-range');
+      await viewport.updateComplete;
+      await range.updateComplete;
       await minimap.updateComplete;
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       await minimap.updateComplete;
-      await new Promise(resolve => requestAnimationFrame(resolve));
-      minimap.setAttribute('data-visual-ready', '');
+      viewport.setAttribute('data-visual-ready', '');
     </script>
   `;
 }
