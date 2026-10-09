@@ -38,6 +38,25 @@ describe(MarkerBoundsClassifier.name, () => {
     frame[12] = 0.75;
     expect(classifier.classify(inside, identityMat4(), frame)).toBe('intersecting');
   });
+
+  it('keeps empty and unknown bounds policies outside matrix validation', () => {
+    const invalid = new Float32Array(0);
+    expect(classifier.classify(undefined, invalid, invalid)).toBe('intersecting');
+    expect(classifier.classify(null, invalid, invalid)).toBe('outside');
+    expect(() => classifier.classify(inside, invalid, identityMat4())).toThrow(RangeError);
+    expect(() => classifier.classify(inside, identityMat4(), invalid)).toThrow(RangeError);
+  });
+
+  it('recovers from rejected transforms without retaining a previous classification', () => {
+    const invalid = identityMat4();
+    invalid[0] = NaN;
+    expect(() => classifier.classify(inside, invalid, identityMat4())).toThrow(RangeError);
+    expect(classifier.classify(inside, identityMat4(), identityMat4())).toBe('inside');
+    const frame = identityMat4();
+    frame[12] = -3;
+    expect(classifier.classify(inside, identityMat4(), frame)).toBe('outside');
+    expect(classifier.classify(inside, identityMat4(), identityMat4())).toBe('inside');
+  });
 });
 
 describe(MarkerBoundsIndex.name, () => {
