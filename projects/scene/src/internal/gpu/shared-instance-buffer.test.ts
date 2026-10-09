@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
+import { createLineItem } from '../../../test/rendering.js';
+import { LINE_VERTEX } from '../records/layouts/built-ins.js';
+import { getInstanceAllocation } from '../rendering/instance-partitions.js';
+import type { StoragePartition } from './partition.js';
 import type { SceneGPUBuffer } from './platform.js';
 import {
   acquireSharedInstanceBuffer,
@@ -113,7 +117,139 @@ describe('shared instance buffers', () => {
     lease.release();
     expect(destroy).toHaveBeenCalledTimes(2);
   });
+
+  it.each(['strip', 'loop'] as const)(
+    'updates duplicated and wrapped records in partitioned line %s storage',
+    topology => {
+      const { buffers, device } = createMemoryDevice({
+        maxBufferSize: 4096,
+        maxStorageBufferBindingSize: LINE_VERTEX.stride * 4
+      });
+      const allocation = getInstanceAllocation(createLineItem(20, topology), device);
+      const storage = new Uint8Array(allocation.byteLength + 32);
+      const bytes = storage.subarray(16, 16 + allocation.byteLength);
+      bytes.forEach((_value, index) => {
+        bytes[index] = index % 251;
+      });
+      const lease = acquireSharedInstanceBuffer(device, bytes, allocation);
+      for (const range of [
+        { offset: 0, size: 4 },
+        { offset: LINE_VERTEX.stride * 5 - 4, size: 12 },
+        { offset: bytes.byteLength - 4, size: 4 }
+      ]) {
+        bytes.fill(255, range.offset, range.offset + range.size);
+        writeSharedInstanceBuffer({ bytes, device, lease, range });
+        for (const partition of lease.partitions)
+          expect(buffers.get(partition.buffer)).toEqual(mappedBytes(bytes, partition));
+      }
+      const index = lease.transferIndex;
+      const replacement = bytes.slice();
+      replacement.fill(7);
+      expect(lease.tryReassign(replacement)).toBe(true);
+      expect(lease.transferIndex).toBe(index);
+      const sibling = acquireSharedInstanceBuffer(device, replacement, allocation);
+      expect(sibling.transferIndex).toBe(index);
+      writeSharedInstanceBuffer({
+        bytes: replacement,
+        device,
+        lease,
+        range: { offset: 0, size: replacement.byteLength }
+      });
+      for (const partition of lease.partitions)
+        expect(buffers.get(partition.buffer)).toEqual(mappedBytes(replacement, partition));
+      sibling.release();
+      lease.release();
+    }
+  );
+
+  it('honors reordered and overlapping destination spans on a full single-partition update', () => {
+    const { buffers, device } = createMemoryDevice();
+    const bytes = Uint8Array.from({ length: 32 }, (_value, index) => index);
+    const partitions = [
+      {
+        byteLength: 32,
+        byteOffset: 0,
+        firstRecord: 0,
+        recordCount: 2,
+        sourceRanges: [
+          { byteLength: 16, sourceByteOffset: 16, targetByteOffset: 0 },
+          { byteLength: 16, sourceByteOffset: 0, targetByteOffset: 16 },
+          { byteLength: 8, sourceByteOffset: 24, targetByteOffset: 8 }
+        ]
+      }
+    ];
+    const lease = acquireSharedInstanceBuffer(device, bytes, { partitions, stride: 16 });
+    bytes.forEach((_value, index) => {
+      bytes[index] = 255 - index;
+    });
+    writeSharedInstanceBuffer({ bytes, device, lease, range: { offset: 0, size: bytes.byteLength } });
+    expect(buffers.get(lease.buffer)).toEqual(mappedBytes(bytes, partitions[0]!));
+    lease.release();
+  });
+
+  it('clips updates to active bytes and skips empty ranges, gaps, and ranges outside storage', () => {
+    const { buffers, device, writeBuffer } = createMemoryDevice();
+    const bytes = new Uint8Array(64);
+    const partitions = [
+      { byteLength: 8, byteOffset: 0, firstRecord: 0, recordCount: 1 },
+      { byteLength: 8, byteOffset: 24, firstRecord: 3, recordCount: 1 }
+    ];
+    const lease = acquireSharedInstanceBuffer(device, bytes, { byteLength: 32, partitions, stride: 8 });
+    writeBuffer.mockClear();
+    for (const range of [
+      { offset: 0, size: 0 },
+      { offset: 8, size: 16 },
+      { offset: 32, size: 32 }
+    ]) {
+      writeSharedInstanceBuffer({ bytes, device, lease, range });
+    }
+    expect(writeBuffer).not.toHaveBeenCalled();
+    bytes.fill(9);
+    writeSharedInstanceBuffer({ bytes, device, lease, range: { offset: 28, size: 36 } });
+    expect(writeBuffer).toHaveBeenCalledOnce();
+    expect(buffers.get(lease.partitions[1]!.buffer)).toEqual(new Uint8Array([0, 0, 0, 0, 9, 9, 9, 9]));
+    lease.release();
+  });
+
+  it('maps a full update into a single allocation containing only a source suffix', () => {
+    const { buffers, device, writeBuffer } = createMemoryDevice();
+    const bytes = new Uint8Array(32);
+    const partitions = [{ byteLength: 16, byteOffset: 16, firstRecord: 1, recordCount: 1 }];
+    const lease = acquireSharedInstanceBuffer(device, bytes, { partitions, stride: 16 });
+    bytes.fill(7, 16);
+    writeBuffer.mockClear();
+    writeSharedInstanceBuffer({ bytes, device, lease, range: { offset: 0, size: bytes.byteLength } });
+    expect(writeBuffer).toHaveBeenCalledOnce();
+    expect(buffers.get(lease.buffer)).toEqual(new Uint8Array(16).fill(7));
+    lease.release();
+  });
 });
+
+function createMemoryDevice(limits?: SharedInstanceBufferDevice['limits']) {
+  const gpu = createDevice(limits);
+  const buffers = new Map<SceneGPUBuffer, Uint8Array>();
+  gpu.createBuffer.mockImplementation((descriptor: { size: number }) => {
+    const buffer: SceneGPUBuffer = { destroy: () => undefined };
+    buffers.set(buffer, new Uint8Array(descriptor.size));
+    return buffer;
+  });
+  gpu.writeBuffer.mockImplementation((buffer: SceneGPUBuffer, offset: number, data: Uint8Array) => {
+    buffers.get(buffer)!.set(data, offset);
+  });
+  return { ...gpu, buffers };
+}
+
+function mappedBytes(bytes: Uint8Array, partition: StoragePartition): Uint8Array {
+  if (!partition.sourceRanges) return bytes.slice(partition.byteOffset, partition.byteOffset + partition.byteLength);
+  const result = new Uint8Array(partition.byteLength);
+  for (const range of partition.sourceRanges) {
+    result.set(
+      bytes.subarray(range.sourceByteOffset, range.sourceByteOffset + range.byteLength),
+      range.targetByteOffset
+    );
+  }
+  return result;
+}
 
 function createDevice(limits?: SharedInstanceBufferDevice['limits']): {
   readonly createBuffer: ReturnType<typeof vi.fn>;

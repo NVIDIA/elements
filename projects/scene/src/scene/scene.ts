@@ -22,7 +22,7 @@ import { createReadyCycle, type ReadyCycle } from '../internal/composition/scene
 import styles from './scene.css?inline';
 import { invertPreciseMat4, multiplyMat4Vec4 } from '../internal/math/mat4.js';
 import type { Matrix4, Vec3 } from '../internal/math/types.js';
-import { getDevicePixelSize } from '../internal/rendering/viewport-size.js';
+import { getDevicePixelSize } from '../internal/dom/viewport-size.js';
 import { SceneInteractionSource } from '../internal/interaction/source.js';
 import type { SceneCamera } from '../camera/camera.js';
 import type { SceneBounds } from '../internal/math/bounds.js';

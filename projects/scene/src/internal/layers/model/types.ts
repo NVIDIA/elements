@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { SceneColor } from '../../color/types.js';
-import type { ScenePrimitiveKind } from '../../geometry/primitives.js';
+import type { ScenePrimitiveKind } from '../../math/primitive-geometry.js';
 import type { Mat4, Quaternion, Vec3 } from '../../math/types.js';
 import type { SceneMeshGeometry } from '../mesh/types.js';
 

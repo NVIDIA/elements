@@ -6,7 +6,7 @@ import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { notifyOwningModelPart } from '../internal/layers/model/layer-state.js';
 import type { SceneColor } from '../internal/color/types.js';
-import type { ScenePrimitiveKind } from '../internal/geometry/primitives.js';
+import type { ScenePrimitiveKind } from '../internal/math/primitive-geometry.js';
 import type { Quaternion, Vec3 } from '../internal/math/types.js';
 import styles from '../internal/dom/host.css?inline';
 

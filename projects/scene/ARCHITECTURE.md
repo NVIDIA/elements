@@ -81,12 +81,11 @@ Every file in `src/internal/` belongs to a directory that names its responsibili
 | `records/`     | Packed record storage, mutable buffers, publication, canonical layouts, and record encoding.                         |
 | `structures/`  | Reusable bit arrays, numeric ring buffers, range sets and maps, copy-on-write bytes, flag indexes, and bounds trees. |
 | `interaction/` | Feature identities, pointer requests, routed events, and the scene interaction source.                               |
-| `rendering/`   | Render items, shared render passes, targets, preparation, viewport sizing, and GPU picking.                          |
+| `rendering/`   | Render items, shared render passes, targets, preparation, and GPU picking.                                           |
 | `gpu/`         | The platform boundary, device recovery, storage limits, buffer leases, and upload ranges.                            |
-| `geometry/`    | Primitive tessellation shared by marker and model layers.                                                            |
-| `math/`        | Spatial numeric types, matrices, quaternions, and triangle normals.                                                  |
+| `math/`        | Spatial numeric types, matrices, quaternions, geometric algorithms, and primitive tessellation.                      |
 | `color/`       | Color types, CSS color parsing, and color transfer functions.                                                        |
-| `dom/`         | Host styles and attribute converters shared by Web Components.                                                       |
+| `dom/`         | Host styles, attribute converters, and DOM viewport measurements for Web Components.                                 |
 | `diagnostics/` | Error codes and diagnostic episode reporting.                                                                        |
 | `testing/`     | Platform overrides and frame lookup for tests.                                                                       |
 
@@ -106,18 +105,46 @@ Polygon ear clipping uses `ArrayBackedLinkedList`, an array-backed circular doub
 The list owns neighbor links and constant-time removal. The polygon compiler owns traversal order, hole bridges,
 geometric checks, and fill verification. Geometric scans still determine the cost of compiling large polygons.
 
+Attributes and topology in `layers/heightfield`, label metrics and glyph bytes, and generated mesh attributes each use one bounded
+traversal for synchronous creation and asynchronous preparation. The runners in `rendering/preparation` consume those
+traversals. Algorithms allocate inside their first step, yield after bounded work, and return their result on completion.
+The asynchronous runner yields before the first step, checks cancellation after each yield and at completion, and closes
+cancelled traversals. `resumePreparation` continues compound tasks after their initial yield. The kernels for grids, glyphs, and
+nonindexed meshes write whole ranges between yields so scheduling adds no per-element checks; synchronous callers
+select one complete range. Label traversals bound UTF-16 spans without splitting surrogate pairs, count empty labels as
+work units, and keep their cursors across chunks. Label width storage
+preserves the existing number precision for synchronous callers and float32 rounding for asynchronous callers.
+Synchronous indexed mesh processing keeps its local traversal loop to preserve the existing hot path.
+Its asynchronous path uses the shared runner and the same traversal.
+
 Indexed meshes with generated flat normals keep a `CompressedAdjacencyIndex` in compressed sparse row form.
 The index maps source vertices to expanded triangle corners; the mesh layer owns attribute expansion, normal generation,
 and upload planning. Stable topology reuses the index. Position publications update their corners and affected triangles;
 color and UV publications keep existing positions and normals.
 
-Source ranges carry their base attribute versions through cancelled preparations. Missing history triggers a complete
-attribute rebuild. Preparation copies changed output arrays before editing and uses the same bounded traversal as
-synchronous processing. Publication still copies and validates complete source geometry. GPU uploads merge adjacent
+`VersionedRangeJournal` owns a covered numeric version window and its conservative byte-range union. It distinguishes
+known empty updates from missing history, caches immutable snapshots, and periodically compacts repeated edits. Its
+storage tracks changed spans rather than retaining an event for every publication. Queries within the window can return
+extra ranges from earlier covered versions; consumers outside the window require a full refresh.
+Normalized snapshots merge in a linear traversal; other inputs use `RangeSet` normalization.
+
+Mesh attributes keep these windows through cancelled preparations. Topology changes invalidate their history, and
+missing generations trigger a complete attribute rebuild and upload. The mesh layer owns attribute versions and topology
+policy; the journal owns numeric continuity and range unions. Empty publications preserve continuity and can reuse
+expanded attributes without GPU writes. Preparation copies changed output arrays before editing and uses the same bounded
+traversal as synchronous processing. Publication still copies and validates complete source geometry. GPU uploads merge adjacent
 ranges and use a complete attribute upload when more than 64 expanded ranges would require separate writes.
 
 `RangeMap` stores sorted integer ranges without overlaps and provides point lookup. Picking uses these snapshots to map GPU
 IDs to layer metadata. Submitted readbacks keep their original map when a later frame changes the ID assignments.
+
+`ByteTransferIndex` owns numeric source spans, destination identifiers, and destination offsets. Queries clip and translate
+every intersecting span in its original order, preserving duplicated boundary records and wrapped connected-line storage.
+A balanced interval tree stores the maximum endpoint of each subtree to skip unrelated spans. Small plans and complete
+transfers use linear traversal; reordered matches keep their original write precedence. Shared GPU buffer entries build
+and cache the index on their first partitioned update, then keep it across leases and snapshot reassignment. The GPU owner
+clips updates to active source bytes and keeps a direct path for one contiguous allocation. Mesh instances use the same
+buffer owner. Planar mesh attributes keep direct uploads and the renderer's existing fragmentation policy.
 
 Performance examples embed local copies of `Float64RingBuffer` for bounded numeric sample windows. Each diagnostic
 script contains its helper; the rendering runtime does not collect sample history.
