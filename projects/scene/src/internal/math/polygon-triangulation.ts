@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { ArrayBackedLinkedList } from '../structures/array-backed-linked-list.js';
+import { RectangleIndex } from '../structures/rectangle-index.js';
 import {
   pointInPolygon as pointInFill,
   isCollinearBetween,
@@ -12,6 +13,7 @@ import {
   segmentsConflict,
   signedDoubleArea
 } from './geometry-2d.js';
+import { PolygonFillQuery, RING_INDEX_THRESHOLD, segmentBounds } from './ring-query.js';
 
 type Ring = readonly Point[];
 
@@ -29,8 +31,12 @@ interface TriangulatedPolygon {
  */
 export function triangulatePolygon(outer: Ring, holes: readonly Ring[] = []): TriangulatedPolygon {
   const boundary = bridgeHoles(outer, holes);
-  const triangles = clipEars(boundary, outer, holes);
-  verifyTriangulation({ boundary, holes, outer, triangles });
+  const fill =
+    outer.length >= RING_INDEX_THRESHOLD || holes.some(hole => hole.length >= RING_INDEX_THRESHOLD)
+      ? new PolygonFillQuery(outer, holes)
+      : undefined;
+  const triangles = clipEars(boundary, outer, holes, fill);
+  verifyTriangulation({ boundary, fill, holes, outer, triangles });
   return { boundary, triangles };
 }
 
@@ -100,9 +106,16 @@ function findRayHit(boundary: Ring, origin: Point): { edge: number; point: Point
   return nearest;
 }
 
-// eslint-disable-next-line complexity, max-statements -- @hotpath Ear clipping retains stable indices and allocates no candidate wrappers.
-function clipEars(boundary: Ring, outer: Ring, holes: readonly Ring[]): Array<[number, number, number]> {
+// eslint-disable-next-line complexity, max-statements, max-params -- @hotpath Ear clipping keeps stable indices and allocates no candidate wrappers.
+function clipEars(
+  boundary: Ring,
+  outer: Ring,
+  holes: readonly Ring[],
+  fill: PolygonFillQuery | undefined
+): Array<[number, number, number]> {
   const remaining = new ArrayBackedLinkedList(boundary.length);
+  const points = createBoundaryIndex(boundary, 'points');
+  const edges = createBoundaryIndex(boundary, 'edges');
   const triangles: Array<[number, number, number]> = [];
   let current = remaining.first;
   let stalled = 0;
@@ -117,12 +130,15 @@ function clipEars(boundary: Ring, outer: Ring, holes: readonly Ring[]): Array<[n
     const ear =
       !degenerate &&
       orient2D(a, b, c) > 0 &&
-      diagonalIsValid(previous, next, remaining, boundary, outer, holes) &&
-      !triangleContainsActiveVertex(remaining, boundary, previous, current, next);
+      diagonalIsValid(previous, next, remaining, boundary, outer, holes, fill, edges) &&
+      !triangleContainsActiveVertex(remaining, boundary, previous, current, next, points);
     if (degenerate || ear) {
       if (ear) triangles.push([previous, current, next]);
       const wasFirst = current === remaining.first;
       remaining.remove(current);
+      points?.remove(current);
+      edges?.remove(current);
+      edges?.set(previous, ...segmentBounds(a, c));
       // Removing the first active vertex continues at the new first vertex.
       current = wasFirst ? remaining.first : previous;
       stalled = 0;
@@ -142,17 +158,39 @@ function clipEars(boundary: Ring, outer: Ring, holes: readonly Ring[]): Array<[n
   return triangles;
 }
 
+function createBoundaryIndex(boundary: Ring, kind: 'points' | 'edges'): RectangleIndex | undefined {
+  if (boundary.length < RING_INDEX_THRESHOLD) return undefined;
+  return new RectangleIndex(
+    boundary.map((start, index) =>
+      segmentBounds(start, kind === 'points' ? start : boundary[(index + 1) % boundary.length]!)
+    )
+  );
+}
+
 // eslint-disable-next-line max-params -- @hotpath Stable scalar indices avoid allocating one triangle wrapper per candidate.
 function triangleContainsActiveVertex(
   remaining: ArrayBackedLinkedList,
   boundary: Ring,
   first: number,
   second: number,
-  third: number
+  third: number,
+  points: RectangleIndex | undefined
 ): boolean {
   const a = boundary[first]!;
   const b = boundary[second]!;
   const c = boundary[third]!;
+  if (points)
+    return points.some(
+      Math.min(a[0], b[0], c[0]),
+      Math.min(a[1], b[1], c[1]),
+      Math.max(a[0], b[0], c[0]),
+      Math.max(a[1], b[1], c[1]),
+      index =>
+        index !== first &&
+        index !== second &&
+        index !== third &&
+        pointInCounterclockwiseTriangle(boundary[index]!, a, b, c)
+    );
   for (
     let index = remaining.first, visited = 0;
     visited < remaining.size;
@@ -173,18 +211,35 @@ function isRemovableDegenerate(previous: Point, point: Point, next: Point): bool
   return samePoint(previous, point) || samePoint(point, next) || isCollinearBetween(previous, point, next);
 }
 
-// eslint-disable-next-line max-params -- @hotpath This triangulation inner loop avoids allocating one options object per diagonal candidate.
+// eslint-disable-next-line complexity, max-params -- @hotpath Direct small-ring checks avoid allocating an index or an options object per diagonal candidate.
 function diagonalIsValid(
   startIndex: number,
   endIndex: number,
   remaining: ArrayBackedLinkedList,
   boundary: Ring,
   outer: Ring,
-  holes: readonly Ring[]
+  holes: readonly Ring[],
+  fill: PolygonFillQuery | undefined,
+  edges: RectangleIndex | undefined
 ): boolean {
   const start = boundary[startIndex]!;
   const end = boundary[endIndex]!;
-  if (samePoint(start, end) || !pointInFill(midpoint(start, end), outer, holes)) return false;
+  if (
+    samePoint(start, end) ||
+    !(fill ? fill.contains(midpoint(start, end)) : pointInFill(midpoint(start, end), outer, holes))
+  )
+    return false;
+  if (edges)
+    return !edges.some(...segmentBounds(start, end), firstIndex => {
+      const secondIndex = remaining.next(firstIndex);
+      return (
+        firstIndex !== startIndex &&
+        secondIndex !== startIndex &&
+        firstIndex !== endIndex &&
+        secondIndex !== endIndex &&
+        segmentsConflict(start, end, boundary[firstIndex]!, boundary[secondIndex]!)
+      );
+    });
   for (
     let firstIndex = remaining.first, visited = 0;
     visited < remaining.size;
@@ -206,11 +261,12 @@ function diagonalIsValid(
 
 function verifyTriangulation(options: {
   readonly boundary: Ring;
+  readonly fill: PolygonFillQuery | undefined;
   readonly holes: readonly Ring[];
   readonly outer: Ring;
   readonly triangles: Array<[number, number, number]>;
 }): void {
-  const { boundary, holes, outer, triangles } = options;
+  const { boundary, fill, holes, outer, triangles } = options;
   const expectedArea =
     Math.abs(signedDoubleArea(outer)) / 2 -
     holes.reduce((area, hole) => area + Math.abs(signedDoubleArea(hole)) / 2, 0);
@@ -220,7 +276,7 @@ function verifyTriangulation(options: {
     const b = boundary[second]!;
     const c = boundary[third]!;
     const area = orient2D(a, b, c) / 2;
-    if (!(area > 0) || !pointInFill(centroid(a, b, c), outer, holes)) {
+    if (!(area > 0) || !(fill ? fill.contains(centroid(a, b, c)) : pointInFill(centroid(a, b, c), outer, holes))) {
       throw new RangeError('Polygon triangulation produced an invalid triangle.');
     }
     triangleArea += area;
