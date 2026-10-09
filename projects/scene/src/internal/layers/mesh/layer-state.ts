@@ -10,7 +10,7 @@ import { validateMeshGeometry, type MeshGeometryInput } from './geometry.js';
 import { createTopologyKey } from './processing.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import { scenePlatform } from '../../gpu/platform.js';
-import { RangeSet } from '../../structures/range-set.js';
+import { VersionedRangeJournal } from '../../structures/versioned-range-journal.js';
 import {
   createConstructedMeshRenderData,
   createMeshGeometryAttributeVersions,
@@ -58,8 +58,7 @@ interface MeshState {
   topologyKey: string;
   geometryError: boolean;
   observer?: MutationObserver;
-  readonly pendingGeometryUploadBaseVersions: Partial<Record<MeshGeometryAttribute, number>>;
-  readonly pendingGeometryUploads: Map<MeshGeometryAttribute, RangeSet>;
+  readonly pendingGeometryUploads: Map<MeshGeometryAttribute, VersionedRangeJournal>;
 }
 
 interface PreparedGeometryPublication {
@@ -99,7 +98,6 @@ export function registerMeshLayer(mesh: HTMLElement): void {
     topologyVersion: 0,
     topologyKey: createTopologyKey({ positions: null, indices: null, uvs: null }),
     geometryError: false,
-    pendingGeometryUploadBaseVersions: {},
     pendingGeometryUploads: new Map()
   });
 }
@@ -124,12 +122,13 @@ function createMeshRenderData(mesh: HTMLElement, consumeUploads: boolean): MeshR
   const markerSource = getLayerInstances(mesh);
   const markerCount = getLayerCount(mesh);
   const hasChildren = mesh.children.length > 0;
+  const uploads = takeGeometryUploadHistory(state, consumeUploads);
   return createConstructedMeshRenderData({
     color: state.color,
     colors: state.colors,
     geometryError: state.geometryError || state.textureError,
-    geometryUploadBaseVersions: { ...state.pendingGeometryUploadBaseVersions },
-    geometryUploadRanges: takeGeometryUploadRanges(state, consumeUploads),
+    geometryUploadBaseVersions: uploads.baseVersions,
+    geometryUploadRanges: uploads.ranges,
     geometryVersions: { ...state.attributeVersions },
     identityInstance: markerSource === null && !hasChildren && markerCount === undefined,
     indices: state.indices,
@@ -272,8 +271,12 @@ function applyGeometryPublication(state: MeshState, prepared: PreparedGeometryPu
 }
 
 function queuePublishedGeometryUpload(state: MeshState, prepared: PreparedGeometryPublication): void {
-  if (prepared.recordCount <= 0) return;
-  getPendingGeometryUploadRanges(state, prepared.attribute).add(prepared.byteOffset, prepared.byteSize);
+  const version = state.attributeVersions[prepared.attribute];
+  getPendingGeometryUploadJournal(state, prepared.attribute).record({
+    baseVersion: version - 1,
+    version,
+    ranges: prepared.recordCount > 0 ? [{ offset: prepared.byteOffset, size: prepared.byteSize }] : []
+  });
 }
 
 function captureGeometryReplacement(input: unknown): {
@@ -461,30 +464,36 @@ function getState(mesh: HTMLElement): MeshState {
 
 const MESH_GEOMETRY_ATTRIBUTES = ['positions', 'normals', 'uvs', 'colors', 'indices'] as const;
 
-function takeGeometryUploadRanges(state: MeshState, consume: boolean): MeshGeometryUploadRange[] {
-  return MESH_GEOMETRY_ATTRIBUTES.flatMap(attribute => {
+function takeGeometryUploadHistory(
+  state: MeshState,
+  consume: boolean
+): {
+  readonly baseVersions: Partial<Record<MeshGeometryAttribute, number>>;
+  readonly ranges: MeshGeometryUploadRange[];
+} {
+  const baseVersions: Partial<Record<MeshGeometryAttribute, number>> = {};
+  const ranges: MeshGeometryUploadRange[] = [];
+  for (const attribute of MESH_GEOMETRY_ATTRIBUTES) {
     const pending = state.pendingGeometryUploads.get(attribute);
-    if (!pending) return [];
-    const ranges = consume ? pending.drain() : pending.snapshot();
-    if (consume) Reflect.deleteProperty(state.pendingGeometryUploadBaseVersions, attribute);
-    return ranges.map(range => ({ ...range, attribute }));
-  });
+    const snapshot = consume ? pending?.drain() : pending?.snapshot();
+    if (!snapshot) continue;
+    baseVersions[attribute] = snapshot.baseVersion;
+    for (const range of snapshot.ranges) ranges.push({ ...range, attribute });
+  }
+  return { baseVersions, ranges };
 }
 
-function getPendingGeometryUploadRanges(state: MeshState, attribute: MeshGeometryAttribute): RangeSet {
-  let ranges = state.pendingGeometryUploads.get(attribute);
-  if (!ranges) {
-    ranges = new RangeSet();
-    state.pendingGeometryUploads.set(attribute, ranges);
+function getPendingGeometryUploadJournal(state: MeshState, attribute: MeshGeometryAttribute): VersionedRangeJournal {
+  let journal = state.pendingGeometryUploads.get(attribute);
+  if (!journal) {
+    journal = new VersionedRangeJournal();
+    state.pendingGeometryUploads.set(attribute, journal);
   }
-  state.pendingGeometryUploadBaseVersions[attribute] ??= state.attributeVersions[attribute] - 1;
-  return ranges;
+  return journal;
 }
 
 function clearPendingGeometryUploads(state: MeshState): void {
   state.pendingGeometryUploads.clear();
-  for (const attribute of MESH_GEOMETRY_ATTRIBUTES)
-    Reflect.deleteProperty(state.pendingGeometryUploadBaseVersions, attribute);
 }
 
 function queueFullGeometryUpload(
@@ -492,8 +501,16 @@ function queueFullGeometryUpload(
   attribute: MeshGeometryAttribute,
   source: Float32Array | Uint32Array | null
 ): void {
-  if (!source) return;
-  getPendingGeometryUploadRanges(state, attribute).add(0, source.byteLength);
+  if (!source) {
+    state.pendingGeometryUploads.delete(attribute);
+    return;
+  }
+  const version = state.attributeVersions[attribute];
+  getPendingGeometryUploadJournal(state, attribute).record({
+    baseVersion: version - 1,
+    version,
+    ranges: [{ offset: 0, size: source.byteLength }]
+  });
 }
 
 function geometryAttributeWidth(attribute: MeshGeometryAttribute): number {

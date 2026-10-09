@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { compileParts, createModelPrimitiveGeometry, type ModelPart } from './compile.js';
-import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../../geometry/primitives.js';
+import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../../math/primitive-geometry.js';
 
 describe(compileParts.name, () => {
   it('should compile an identity cube from its unit tessellation with opaque white colors', () => {

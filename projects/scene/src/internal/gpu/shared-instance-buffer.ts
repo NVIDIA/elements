@@ -3,6 +3,7 @@
 
 import type { SceneGPUBuffer, SceneGPUBufferDescriptor, SceneGPUDevice, SceneGPUQueue } from './platform.js';
 import { planStoragePartitions, type StoragePartition } from './partition.js';
+import { ByteTransferIndex, type ByteTransferSpan } from '../structures/byte-transfer-index.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
@@ -22,12 +23,14 @@ export interface SharedInstanceBufferLease {
   readonly bytes: Uint8Array;
   readonly byteLength: number;
   readonly partitions: readonly SharedInstanceBufferPartition[];
+  readonly transferIndex: ByteTransferIndex;
   release(): void;
   tryReassign(bytes: Uint8Array): boolean;
 }
 
 interface SharedInstanceBufferEntry {
   readonly partitions: readonly SharedInstanceBufferPartition[];
+  transferIndex?: ByteTransferIndex;
   references: number;
 }
 
@@ -86,29 +89,38 @@ export function acquireSharedInstanceBuffer(
 /** Routes one byte update across every intersecting GPU partition. */
 export function writeSharedInstanceBuffer(options: WriteSharedInstanceBufferOptions): void {
   const { bytes, device, lease, range } = options;
+  if (writeSinglePartition(options)) return;
+  const rangeEnd = Math.min(range.offset + range.size, lease.byteLength);
+  const start = Math.max(0, range.offset);
+  if (start >= rangeEnd) return;
+  // eslint-disable-next-line max-params -- @hotpath Numeric arguments avoid allocating an object for every GPU write.
+  lease.transferIndex.forEachIntersection(start, rangeEnd - start, (target, sourceOffset, targetOffset, size) => {
+    device.queue.writeBuffer(
+      lease.partitions[target]!.buffer,
+      targetOffset,
+      bytes.subarray(sourceOffset, sourceOffset + size)
+    );
+  });
+}
+
+function writeSinglePartition(options: WriteSharedInstanceBufferOptions): boolean {
+  const { bytes, device, lease, range } = options;
+  const partition = lease.partitions[0]!;
+  if (lease.partitions.length !== 1 || partition.sourceRanges) return false;
   if (
-    lease.partitions.length === 1 &&
+    partition.byteOffset === 0 &&
+    partition.byteLength === lease.byteLength &&
     range.offset === 0 &&
     range.size >= lease.byteLength &&
     bytes.byteLength === lease.byteLength
   ) {
     device.queue.writeBuffer(lease.buffer, 0, bytes);
-    return;
+    return true;
   }
-  const rangeEnd = Math.min(range.offset + range.size, lease.byteLength);
-  for (const partition of lease.partitions) {
-    const sourceRanges = partition.sourceRanges ?? [
-      { byteLength: partition.byteLength, sourceByteOffset: partition.byteOffset, targetByteOffset: 0 }
-    ];
-    for (const sourceRange of sourceRanges) {
-      const start = Math.max(range.offset, sourceRange.sourceByteOffset);
-      const end = Math.min(rangeEnd, sourceRange.sourceByteOffset + sourceRange.byteLength);
-      if (start >= end) continue;
-      const targetOffset = sourceRange.targetByteOffset + start - sourceRange.sourceByteOffset;
-      // eslint-disable-next-line local-performance/no-gpu-upload-in-loop -- @hotpath Boundary records can update more than one allocation.
-      device.queue.writeBuffer(partition.buffer, targetOffset, bytes.subarray(start, end));
-    }
-  }
+  const start = Math.max(range.offset, partition.byteOffset);
+  const end = Math.min(range.offset + range.size, lease.byteLength, partition.byteOffset + partition.byteLength);
+  if (start < end) device.queue.writeBuffer(partition.buffer, start - partition.byteOffset, bytes.subarray(start, end));
+  return true;
 }
 
 function resolveSharedInstanceBufferOptions(
@@ -160,6 +172,9 @@ function createLease(options: {
       return source;
     },
     partitions: entry.partitions,
+    get transferIndex() {
+      return (entry.transferIndex ??= createTransferIndex(entry.partitions));
+    },
     release: () => {
       if (released) return;
       released = true;
@@ -181,6 +196,25 @@ function createLease(options: {
       return true;
     }
   };
+}
+
+function createTransferIndex(partitions: readonly StoragePartition[]): ByteTransferIndex {
+  const spans: ByteTransferSpan[] = [];
+  for (const [target, partition] of partitions.entries()) {
+    if (partition.sourceRanges) {
+      for (const range of partition.sourceRanges) {
+        spans.push({
+          sourceOffset: range.sourceByteOffset,
+          target,
+          targetOffset: range.targetByteOffset,
+          size: range.byteLength
+        });
+      }
+    } else {
+      spans.push({ sourceOffset: partition.byteOffset, target, targetOffset: 0, size: partition.byteLength });
+    }
+  }
+  return new ByteTransferIndex(spans);
 }
 
 function getDeviceCache(

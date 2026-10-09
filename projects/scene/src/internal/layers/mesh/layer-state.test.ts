@@ -60,6 +60,26 @@ describe('mesh layer state', () => {
     expect(takeMeshLayerRenderData(mesh).geometryUploadRanges).toEqual([]);
   });
 
+  it('preserves empty publications in the covered version window without publishing producer changes', () => {
+    const mesh = layer();
+    const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
+    replaceMeshGeometry(mesh, { positions });
+    const before = takeMeshLayerRenderData(mesh);
+    positions[0] = 8;
+    publishMeshGeometry(mesh, { attribute: 'positions', source: positions, start: 0, count: 0 });
+    const empty = getMeshRenderData(mesh);
+    expect(empty.positions).toEqual(before.positions);
+    expect(empty.geometryVersions.positions).toBe(before.geometryVersions.positions + 1);
+    expect(empty.geometryUploadBaseVersions).toEqual({ positions: before.geometryVersions.positions });
+    expect(empty.geometryUploadRanges).toEqual([]);
+    publishMeshGeometry(mesh, { attribute: 'positions', source: positions, start: 1, count: 1 });
+    const data = takeMeshLayerRenderData(mesh);
+    expect(data.geometryUploadBaseVersions).toEqual(empty.geometryUploadBaseVersions);
+    expect(data.geometryUploadRanges).toEqual([{ attribute: 'positions', offset: 12, size: 12 }]);
+    expect(empty.geometryUploadRanges).toEqual([]);
+    expect(takeMeshLayerRenderData(mesh).geometryUploadBaseVersions).toEqual({});
+  });
+
   it('rejects invalid publication atomically and recovers invalid replacements', () => {
     const mesh = layer();
     const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);

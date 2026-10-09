@@ -5,6 +5,7 @@ import { writeTriangleNormal } from '../../math/triangle-normal.js';
 import { PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
 import { CompressedAdjacencyIndex } from '../../structures/compressed-adjacency-index.js';
 import { RangeSet, type RangeInterval } from '../../structures/range-set.js';
+import { hasVersionedRangeCoverage } from '../../structures/versioned-range-journal.js';
 import type { MeshGeometryInput } from './geometry.js';
 import type { ProcessedMeshGeometry } from './processing.js';
 import type { MeshGeometryUploadRange, MeshRenderData } from './render-data.js';
@@ -91,30 +92,37 @@ function attributeChanged(update: AttributeUpdate): boolean {
   );
 }
 
-// eslint-disable-next-line complexity -- Both snapshots and retained range history must be available.
 function sourceRanges(update: AttributeUpdate): readonly MeshGeometryUploadRange[] | undefined {
   const { source } = update.state;
   const before = update.previous?.indexedFlat?.source;
   const base = source.geometryUploadBaseVersions?.[update.attribute];
   const version = before?.geometryVersions?.[update.attribute];
-  if (base === undefined || version === undefined || base > version) return undefined;
-  const ranges = source.geometryUploadRanges?.filter(range => range.attribute === update.attribute);
-  return ranges?.length ? ranges : undefined;
+  if (!hasVersionedRangeCoverage(base, source.geometryVersions?.[update.attribute], version)) return undefined;
+  return source.geometryUploadRanges?.filter(range => range.attribute === update.attribute);
 }
 
 function* updateAttribute(update: AttributeUpdate): Generator<void, Float32Array | null> {
   const { source } = update.state;
-  const { attribute, previous, width } = update;
+  const { attribute, previous } = update;
   if (!attributeChanged(update)) return previous![attribute];
   const values = source[attribute];
-  if (values === null) {
-    if (previous?.[attribute]) update.uploads.push({ attribute, offset: 0, size: source.indices!.length * width * 4 });
-    return null;
-  }
+  if (values === null) return removeAttribute(update);
   const ranges = sourceRanges(update);
   const before = previous?.[attribute];
+  if (ranges?.length === 0 && before) return before;
   if (ranges && before && !coversAll(values, ranges)) return yield* patchAttribute(update, ranges, before);
   return yield* expandAttribute(update, values);
+}
+
+function removeAttribute(update: AttributeUpdate): null {
+  if (update.previous?.[update.attribute]) {
+    update.uploads.push({
+      attribute: update.attribute,
+      offset: 0,
+      size: update.state.source.indices!.length * update.width * 4
+    });
+  }
+  return null;
 }
 
 function* expandAttribute(update: AttributeUpdate, values: Float32Array): Generator<void, Float32Array> {

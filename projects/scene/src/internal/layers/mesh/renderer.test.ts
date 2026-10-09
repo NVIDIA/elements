@@ -7,7 +7,12 @@ import { composePreciseMat4, identityMat4 } from '../../math/mat4.js';
 import { createPickPipelines } from '../../rendering/picking/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
 import { MeshRenderer } from './renderer.js';
-import { publishMeshGeometry, replaceMeshGeometry, takeMeshLayerRenderData } from './layer-state.js';
+import {
+  publishMeshGeometry,
+  replaceMeshGeometry,
+  setMeshGeometryProperty,
+  takeMeshLayerRenderData
+} from './layer-state.js';
 
 let renderer: MeshRenderer | undefined;
 afterEach(() => {
@@ -17,6 +22,74 @@ afterEach(() => {
 });
 
 describe('MeshRenderer', () => {
+  it.each(['indexed flat', 'explicit normals'])('emits no geometry writes for an empty %s publication', mode => {
+    const gpu = createGpu();
+    renderer = new MeshRenderer(gpu.device, 'bgra8unorm');
+    const item = createMeshItem();
+    const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
+    replaceMeshGeometry(item.layer, {
+      positions,
+      ...(mode === 'indexed flat' ? { indices: new Uint32Array([0, 1, 2]) } : { normals: new Float32Array(9) })
+    });
+    renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
+    const allocations = gpu.buffers.length;
+    const writes = vi.mocked(gpu.device.queue.writeBuffer);
+    writes.mockClear();
+    publishMeshGeometry(item.layer, { attribute: 'positions', source: positions, start: 0, count: 0 });
+    renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
+    expect(writes).not.toHaveBeenCalled();
+    expect(gpu.buffers).toHaveLength(allocations);
+  });
+
+  it('uploads complete nonindexed positions when another consumer drained an intermediate generation', () => {
+    const gpu = createGpu();
+    renderer = new MeshRenderer(gpu.device, 'bgra8unorm');
+    const item = createMeshItem();
+    const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
+    replaceMeshGeometry(item.layer, { positions, normals: new Float32Array(9) });
+    renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
+    const allocations = gpu.buffers.length;
+    const positionBuffer = gpu.buffers[0];
+    const writes = vi.mocked(gpu.device.queue.writeBuffer);
+    writes.mockClear();
+    positions[0] = 8;
+    publishMeshGeometry(item.layer, { attribute: 'positions', source: positions, start: 0, count: 1 });
+    takeMeshLayerRenderData(item.layer);
+    positions[3] = 9;
+    publishMeshGeometry(item.layer, { attribute: 'positions', source: positions, start: 1, count: 1 });
+    renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
+    const uploads = writes.mock.calls.filter(([buffer]) => buffer === positionBuffer);
+    expect(uploads).toHaveLength(1);
+    expect(uploads[0]![1]).toBe(0);
+    expect(uploads[0]![2]).toEqual(positions);
+    expect(gpu.buffers).toHaveLength(allocations);
+  });
+
+  it('uploads every default color when removing colors after a pending partial publication', () => {
+    const gpu = createGpu();
+    renderer = new MeshRenderer(gpu.device, 'bgra8unorm');
+    const item = createMeshItem();
+    const colors = new Float32Array(12).fill(0.25);
+    replaceMeshGeometry(item.layer, {
+      positions: new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]),
+      normals: new Float32Array(9),
+      colors
+    });
+    renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
+    const colorBuffer = gpu.buffers[3];
+    const allocations = gpu.buffers.length;
+    const writes = vi.mocked(gpu.device.queue.writeBuffer);
+    writes.mockClear();
+    publishMeshGeometry(item.layer, { attribute: 'colors', source: colors, start: 1, count: 1 });
+    setMeshGeometryProperty(item.layer, 'colors', null);
+    renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
+    const uploads = writes.mock.calls.filter(([buffer]) => buffer === colorBuffer);
+    expect(uploads).toHaveLength(1);
+    expect(uploads[0]![1]).toBe(0);
+    expect(uploads[0]![2]).toEqual(new Float32Array(12).fill(1));
+    expect(gpu.buffers).toHaveLength(allocations);
+  });
+
   it('bounds upload calls when one source vertex appears in many separated corners', () => {
     const gpu = createGpu();
     renderer = new MeshRenderer(gpu.device, 'bgra8unorm');
