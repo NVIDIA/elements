@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { existsSync, readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { type LighthouseScores, generateLighthouseReport, getLighthouseReport } from './lighthouse.utils.js';
 
@@ -43,5 +44,13 @@ describe('Lighthouse Metadata', () => {
     const report = await generateLighthouseReport();
     expect(report.created).toBeDefined();
     expect(report['@nvidia-elements/core']).not.toBe(undefined);
+  });
+
+  it('should preserve viewport component scores from the package report', async () => {
+    const reportPath = new URL('../../../../viewport/.lighthouse/dist/report.json', import.meta.url);
+    const expected = existsSync(reportPath) ? JSON.parse(readFileSync(reportPath, 'utf8')) : null;
+    const report = await generateLighthouseReport();
+
+    expect(report).toHaveProperty('@nvidia-elements/viewport', expected);
   });
 });

@@ -118,6 +118,8 @@
         "../../media/dist/custom-elements.json",
         "../../monaco/package.json",
         "../../monaco/dist/custom-elements.json",
+        "../../viewport/package.json",
+        "../../viewport/dist/custom-elements.json",
         "../../patterns/package.json",
         "../../patterns/dist/custom-elements.json",
         "../../plot/dist/custom-elements.json",
@@ -167,6 +169,10 @@
         },
         {
           "script": "../../scene:build",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:build",
           "cascade": false
         }
       ]
@@ -250,6 +256,11 @@
         "../../monaco/coverage/unit/summary.json",
         "../../monaco/coverage/visual/summary.json",
         "../../monaco/coverage/ssr/summary.json",
+        "../../viewport/coverage/unit/coverage-summary.json",
+        "../../viewport/coverage/unit/summary.json",
+        "../../viewport/coverage/axe/summary.json",
+        "../../viewport/coverage/visual/summary.json",
+        "../../viewport/coverage/ssr/summary.json",
         "../tools/coverage/unit/coverage-summary.json",
         "../tools/coverage/unit/summary.json"
       ],
@@ -314,6 +325,22 @@
           "cascade": false
         },
         {
+          "script": "../../viewport:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:test:axe",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:test:ssr",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:test:visual",
+          "cascade": false
+        },
+        {
           "script": "../../cli:test:coverage",
           "cascade": false
         },
@@ -343,7 +370,8 @@
         "../../forms/dist/**/*.examples.json",
         "../../markdown/dist/**/*.examples.json",
         "../../media/dist/**/*.examples.json",
-        "../../scene/dist/**/*.examples.json"
+        "../../scene/dist/**/*.examples.json",
+        "../../viewport/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"
@@ -386,6 +414,10 @@
           "cascade": false
         },
         {
+          "script": "../../viewport:build",
+          "cascade": false
+        },
+        {
           "script": "../patterns:build",
           "cascade": false
         }
@@ -408,7 +440,8 @@
       "clean": false,
       "files": [
         "src/tasks/lighthouse.ts",
-        "src/tasks/lighthouse.utils.ts"
+        "src/tasks/lighthouse.utils.ts",
+        "../../viewport/.lighthouse/dist/report.json"
       ],
       "output": [
         "static/lighthouse.json"

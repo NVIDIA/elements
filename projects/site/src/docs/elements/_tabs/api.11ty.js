@@ -17,6 +17,7 @@ export const data = {
   },
   permalink: data => {
     const filePath = data.component.filePathStem;
+    if (filePath.includes('/viewport/')) return `${data.component.url}api/`;
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
