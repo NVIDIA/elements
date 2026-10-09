@@ -2,16 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { PolygonRing } from './types.js';
-import {
-  classifyPointInRing,
-  type Point2 as Point,
-  samePoint,
-  ringsIntersect,
-  ringSelfIntersects,
-  signedDoubleArea
-} from '../../math/geometry-2d.js';
+import { type Point2 as Point, samePoint, signedDoubleArea } from '../../math/geometry-2d.js';
 import { removeCollinearVertices } from '../../math/ring-simplification.js';
 import { triangulatePolygon } from '../../math/polygon-triangulation.js';
+import { RingQuery } from '../../math/ring-query.js';
 
 export const POLYGON_VERTEX_LIMIT = 4096;
 
@@ -79,21 +73,23 @@ function assertPolygonPoint(value: unknown): asserts value is Point {
 }
 
 function validatePolygon(data: { outer: Ring; holes: Ring[] }): void {
-  assertSimpleRing(data.outer);
-  data.holes.forEach(assertSimpleRing);
-  for (const hole of data.holes) {
-    if (classifyPointInRing(hole[0]!, data.outer) !== 'inside' || ringsIntersect(hole, data.outer)) {
+  const outer = new RingQuery(data.outer);
+  const holes = data.holes.map(hole => new RingQuery(hole));
+  assertSimpleRing(outer);
+  holes.forEach(assertSimpleRing);
+  for (const hole of holes) {
+    if (outer.classify(hole.ring[0]!) !== 'inside' || hole.intersects(outer)) {
       throw new RangeError('Polygon holes must be strictly inside the outer ring.');
     }
   }
-  for (let left = 0; left < data.holes.length; left += 1) {
-    for (let right = left + 1; right < data.holes.length; right += 1) {
-      const first = data.holes[left]!;
-      const second = data.holes[right]!;
+  for (let left = 0; left < holes.length; left += 1) {
+    for (let right = left + 1; right < holes.length; right += 1) {
+      const first = holes[left]!;
+      const second = holes[right]!;
       if (
-        ringsIntersect(first, second) ||
-        classifyPointInRing(first[0]!, second) !== 'outside' ||
-        classifyPointInRing(second[0]!, first) !== 'outside'
+        first.intersects(second) ||
+        second.classify(first.ring[0]!) !== 'outside' ||
+        first.classify(second.ring[0]!) !== 'outside'
       ) {
         throw new RangeError('Polygon holes must be disjoint and unnested.');
       }
@@ -101,8 +97,8 @@ function validatePolygon(data: { outer: Ring; holes: Ring[] }): void {
   }
 }
 
-function assertSimpleRing(ring: Ring): void {
-  if (ringSelfIntersects(ring)) throw new RangeError('Polygon rings must be simple.');
+function assertSimpleRing(ring: RingQuery): void {
+  if (ring.selfIntersects()) throw new RangeError('Polygon rings must be simple.');
 }
 
 function orient(ring: Ring, winding: 'clockwise' | 'counterclockwise'): Ring {

@@ -103,7 +103,19 @@ of the block summaries, while the marker layer retains its version-and-count que
 
 Polygon ear clipping uses `ArrayBackedLinkedList`, an array-backed circular doubly linked list of stable integer indices.
 The list owns neighbor links and constant-time removal. The polygon compiler owns traversal order, hole bridges,
-geometric checks, and fill verification. Geometric scans still determine the cost of compiling large polygons.
+geometric checks, and fill verification. `RectangleIndex` owns a packed hierarchy of inclusive numeric bounds with
+stable source indices, replacement, removal, and early termination of overlap queries. It copies bounds in input
+order, uses 64 bytes per slot, builds in linear time, and updates ancestors in logarithmic time. Overlap queries
+can still visit every slot when bounds overlap; input order affects spatial locality and pruning.
+
+`RingQuery` uses edge bounds to select candidates for ring validation and repeated point classification.
+Point classification queries a full horizontal strip, then applies the existing boundary and ray predicates.
+`PolygonFillQuery` shares those ring indices across diagonal checks and final triangle verification.
+Ear clipping maintains separate point and outgoing-edge indices, removes clipped slots, and replaces the previous
+vertex's outgoing edge after every removal. Duplicate bridge coordinates keep separate stable indices.
+These indices select candidates; geometry predicates and list traversal still determine triangle order and fill.
+Rings and bridged boundaries below 128 vertices use direct scans to avoid index construction overhead.
+Hole bridging keeps its linear ray scan. All indices live within one synchronous polygon compilation.
 
 Attributes and topology in `layers/heightfield`, label metrics and glyph bytes, and generated mesh attributes each use one bounded
 traversal for synchronous creation and asynchronous preparation. The runners in `rendering/preparation` consume those

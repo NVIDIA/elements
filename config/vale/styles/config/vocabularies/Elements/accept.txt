@@ -424,3 +424,4 @@ readbacks
 uncached
 reflows
 CDPSession
+retain
