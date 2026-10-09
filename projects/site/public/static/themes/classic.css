@@ -6,7 +6,6 @@
   --nve-config-color-scheme-light: true;
   --nve-config-experimental: true;
   --nve-config-theme-classic: true;
-  /* eslint-disable-line @nve/lint/no-unknown-css-variable */
   --nve-ref-color-neutral-100: oklch(99.1% 0 none);
   --nve-ref-color-neutral-200: oklch(98.1% 0 none);
   --nve-ref-color-neutral-300: oklch(95.3% 0 none);
@@ -19,6 +18,19 @@
   --nve-ref-color-neutral-1000: oklch(60.3% 0 none);
   --nve-ref-color-neutral-1100: oklch(50.3% 0 none);
   --nve-ref-color-neutral-1200: oklch(24.3% 0 none);
+  --nve-ref-color-gray-denim-100: oklch(99.1% 0 none);
+  --nve-ref-color-gray-denim-200: oklch(98.1% 0 none);
+  --nve-ref-color-gray-denim-300: oklch(95.3% 0 none);
+  --nve-ref-color-gray-denim-400: oklch(93% 0 none);
+  --nve-ref-color-gray-denim-500: oklch(90.8% 0 none);
+  --nve-ref-color-gray-denim-600: oklch(88.4% 0 none);
+  --nve-ref-color-gray-denim-700: oklch(85.1% 0 none);
+  --nve-ref-color-gray-denim-800: oklch(79.1% 0 none);
+  --nve-ref-color-gray-denim-900: oklch(63.01% 0 0);
+  --nve-ref-color-gray-denim-1000: oklch(60.3% 0 none);
+  --nve-ref-color-gray-denim-1100: oklch(50.3% 0 none);
+  --nve-ref-color-gray-denim-1200: oklch(24.3% 0 none);
+
   --nve-ref-border-radius-lg: 16px;
   --nve-ref-shadow-100: 0 1px 1px rgb(0 0 0 / 0.06), 0 2px 2px rgb(0 0 0 / 0.05), 0 4px 4px rgb(0 0 0 / 0.04);
   --nve-ref-shadow-200: 0 2px 2px rgb(0 0 0 / 0.06), 0 4px 4px rgb(0 0 0 / 0.05), 0 8px 8px rgb(0 0 0 / 0.04);
@@ -43,7 +55,7 @@
       var(--nve-ref-color-scheme-inverse) 5.3%);
   --nve-sys-layer-container-accent-background: color-mix(in oklch,
       var(--nve-sys-layer-container-background),
-      var(--nve-ref-color-scheme-inverse) 5.3%);
+      var(--nve-ref-color-scheme-inverse) 2.3%);
   --nve-sys-layer-overlay-accent-background: color-mix(in oklch,
       var(--nve-sys-layer-overlay-background),
       var(--nve-ref-color-scheme-inverse) 5.3%);
@@ -271,10 +283,6 @@
     --font-weight: var(--nve-ref-font-weight-bold);
     --height: 22px;
     --gap: var(--nve-ref-space-xxs);
-  }
-
-  nve-badge:not([container]) {
-    --border: var(--nve-ref-border-width-sm) solid var(--state-color-base);
   }
 
   nve-badge:not([status], [color]) {
@@ -940,8 +948,7 @@
   --nve-config-color-scheme-dark: true;
   --nve-config-experimental: true;
   --nve-config-theme-classic-dark: true;
-  /* eslint-disable-line @nve/lint/no-unknown-css-variable */
-  --nve-ref-color-neutral-100: oklch(10% 0 0);
+  --nve-ref-color-neutral-100: oklch(0% 0 0);
   --nve-ref-color-neutral-200: oklch(20.02% 0 0);
   --nve-ref-color-neutral-300: oklch(25.2% 0 0);
   --nve-ref-color-neutral-400: oklch(28.09% 0 0);
@@ -953,6 +960,19 @@
   --nve-ref-color-neutral-1000: oklch(77.31% 0 0);
   --nve-ref-color-neutral-1100: oklch(85.45% 0 0);
   --nve-ref-color-neutral-1200: oklch(90.67% 0 0);
+  --nve-ref-color-gray-denim-100: oklch(0% 0 0);
+  --nve-ref-color-gray-denim-200: oklch(20.02% 0 0);
+  --nve-ref-color-gray-denim-300: oklch(25.2% 0 0);
+  --nve-ref-color-gray-denim-400: oklch(28.09% 0 0);
+  --nve-ref-color-gray-denim-500: oklch(31.32% 0 0);
+  --nve-ref-color-gray-denim-600: oklch(35.23% 0 0);
+  --nve-ref-color-gray-denim-700: oklch(40.17% 0 0);
+  --nve-ref-color-gray-denim-800: oklch(49.26% 0 0);
+  --nve-ref-color-gray-denim-900: oklch(56.24% 0 0);
+  --nve-ref-color-gray-denim-1000: oklch(77.31% 0 0);
+  --nve-ref-color-gray-denim-1100: oklch(85.45% 0 0);
+  --nve-ref-color-gray-denim-1200: oklch(90.67% 0 0);
+
   --nve-ref-color-scheme-base: var(--nve-ref-color-black);
   --nve-ref-color-scheme-inverse: var(--nve-ref-color-white);
 
