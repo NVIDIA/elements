@@ -118,6 +118,8 @@
         "../../media/dist/custom-elements.json",
         "../../monaco/package.json",
         "../../monaco/dist/custom-elements.json",
+        "../../viewport/package.json",
+        "../../viewport/dist/custom-elements.json",
         "../../patterns/package.json",
         "../../patterns/dist/custom-elements.json",
         "../../plot/dist/custom-elements.json",
@@ -167,6 +169,10 @@
         },
         {
           "script": "../../scene:build",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:build",
           "cascade": false
         }
       ]
@@ -343,7 +349,8 @@
         "../../forms/dist/**/*.examples.json",
         "../../markdown/dist/**/*.examples.json",
         "../../media/dist/**/*.examples.json",
-        "../../scene/dist/**/*.examples.json"
+        "../../scene/dist/**/*.examples.json",
+        "../../viewport/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"
@@ -383,6 +390,10 @@
         },
         {
           "script": "../../scene:build",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:build",
           "cascade": false
         },
         {

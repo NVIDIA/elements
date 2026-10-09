@@ -90,6 +90,7 @@
         "./projects/pi:ci",
         "./projects/plot:ci",
         "./projects/scene:ci",
+        "./projects/viewport:ci",
         "./projects/site:ci",
         "./projects/starters:ci",
         "./projects/starters/angular:ci",
@@ -145,6 +146,7 @@
         "./projects/monaco:test:lighthouse",
         "./projects/plot:test:lighthouse",
         "./projects/scene:test:lighthouse",
+        "./projects/viewport:test:lighthouse",
         "./projects/site:test:lighthouse"
       ],
       "output": [
@@ -172,7 +174,8 @@
         "release:media",
         "release:monaco",
         "release:pi",
-        "release:styles"
+        "release:styles",
+        "release:viewport"
       ]
     },
     "release:themes": {
@@ -245,6 +248,13 @@
         "release:themes"
       ]
     },
+    "release:viewport": {
+      "command": "cd projects/viewport && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:core",
+        "release:themes"
+      ]
+    },
     "format": {
       "command": "prettier --config prettier.config.js --check --cache .",
       "files": [
@@ -305,6 +315,7 @@
         "./projects/media:lint:fix",
         "./projects/monaco:lint:fix",
         "./projects/scene:lint:fix",
+        "./projects/viewport:lint:fix",
         "./projects/site:lint:fix"
       ]
     },

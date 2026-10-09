@@ -1,0 +1,52 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --color: var(--nve-ref-border-color-muted);
+  --line-width: var(--nve-ref-border-width-sm);
+  --dot-radius: var(--nve-ref-size-50);
+  --cross-size: var(--nve-ref-size-200);
+
+  --_scale: 1;
+
+  position: absolute;
+  inset: 0;
+  contain: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+svg {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+
+path {
+  fill: none;
+  stroke: var(--color);
+  stroke-width: calc(var(--line-width) / var(--_scale));
+}
+
+circle {
+  fill: var(--color);
+  r: calc(var(--dot-radius) / var(--_scale));
+}
+
+.cross {
+  fill: var(--color);
+}
+
+.cross-horizontal {
+  x: calc(var(--cross-size) / var(--_scale) / -2);
+  y: calc(var(--line-width) / var(--_scale) / -2);
+  width: calc(var(--cross-size) / var(--_scale));
+  height: calc(var(--line-width) / var(--_scale));
+}
+
+.cross-vertical {
+  x: calc(var(--line-width) / var(--_scale) / -2);
+  y: calc(var(--cross-size) / var(--_scale) / -2);
+  width: calc(var(--line-width) / var(--_scale));
+  height: calc(var(--cross-size) / var(--_scale));
+}

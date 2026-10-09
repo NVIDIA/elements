@@ -136,7 +136,8 @@ export async function getApi(): Promise<{
     '../../../../media',
     '../../../../monaco',
     '../../../../plot',
-    '../../../../scene'
+    '../../../../scene',
+    '../../../../viewport'
   ];
 
   const types = getElementsStandardAPIProperties();

@@ -37,7 +37,8 @@ export default {
         'markdown',
         'media',
         'monaco',
-        'scene'
+        'scene',
+        'viewport'
       ]
     ]
   }

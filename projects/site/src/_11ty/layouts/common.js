@@ -370,7 +370,12 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/toolbar/') ? 'highlighted selected' : ''}><a href="/docs/elements/toolbar/">Toolbar</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/tooltip/') ? 'highlighted selected' : ''}><a href="/docs/elements/tooltip/">Tooltip</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/tree/') ? 'highlighted selected' : ''}><a href="/docs/elements/tree/">Tree</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/viewport/') ? 'highlighted selected' : ''}><a href="/docs/elements/viewport/">Viewport</a></nve-tree-node>
+    <nve-tree-node expanded>
+      <a href="/docs/viewport/">Viewport</a>
+      <nve-tree-node ${['/docs/viewport/', '/docs/viewport/api/', '/docs/viewport/examples/'].includes(data.page.url) ? 'highlighted selected' : ''}><a href="/docs/viewport/">Viewport</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/viewport/gridlines/') ? 'highlighted selected' : ''}><a href="/docs/viewport/gridlines/">Gridlines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/viewport/minimap/') ? 'highlighted selected' : ''}><a href="/docs/viewport/minimap/">Minimap</a></nve-tree-node>
+    </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted selected' : ''}><a href="/docs/elements/week/">Week</a></nve-tree-node>
   </nve-tree-node>
 
