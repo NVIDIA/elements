@@ -1,3 +1,35 @@
+## [2.7.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.1...@nvidia-elements/lint-v2.7.2) (2026-10-09)
+
+### Features
+
+* **core:** add configurable viewport zoom stops ([ff741ea](https://github.com/NVIDIA/elements/commit/ff741eac903e2543c0fa3b9fefc8ef28a5e82d90))
+* **core:** add dot and cross patterns to viewport gridlines ([2693005](https://github.com/NVIDIA/elements/commit/26930057a5e4da4a0c2fb0d9fcfebf95c3dd9bc3))
+* **core:** add viewport minimap ([c3cc189](https://github.com/NVIDIA/elements/commit/c3cc1891132f6ae6ab27c94fcdfe79d38b592230))
+* **core:** drag handle ([cc6d5b1](https://github.com/NVIDIA/elements/commit/cc6d5b17aac74e65163d581d8525897762d714c2))
+* **core:** menu group ([d9a24e9](https://github.com/NVIDIA/elements/commit/d9a24e961e1c5394367e7ae9bf931d9e1e2d58b0))
+* **core:** tree node prefix and suffix ([bc0f2f1](https://github.com/NVIDIA/elements/commit/bc0f2f13bbc4119b1941a8102d09e3eba41f278b))
+* **media:** add media loop button ([791c76b](https://github.com/NVIDIA/elements/commit/791c76b2ae06c108a8a0b3c2e60b3fe0c4e8c72c))
+
+### Bug Fixes
+
+* **ci:** preserve authored contents in example metadata ([0ea8618](https://github.com/NVIDIA/elements/commit/0ea86182b4c654c4d8301bad7fbc06f0d3b11187))
+* **cli:** ui resources ([166a537](https://github.com/NVIDIA/elements/commit/166a5374c9aa022a2cc86c262d5165acdee7112e))
+* **cli:** update dependencies ([2a84274](https://github.com/NVIDIA/elements/commit/2a842746f3cd4055ab53414dd263511d74bad10f))
+* **core:** add i18n strings ([676f543](https://github.com/NVIDIA/elements/commit/676f5434c494301ea4df09cd4dd632c7fb9ce0f1))
+* **core:** clean up combobox option observers across connections ([3af4742](https://github.com/NVIDIA/elements/commit/3af4742f53a3d6c09b59b0ac445da9bb268de73e))
+* **core:** debounce scroll tracking state updates ([ce5b688](https://github.com/NVIDIA/elements/commit/ce5b688310d13dcc51e26bd0434599fecc610e4b))
+* **core:** nested background styles ([66d44e7](https://github.com/NVIDIA/elements/commit/66d44e7549f25f096d71c5fc662d805b4267bc72))
+* **core:** preserve accessors during property observation ([37c137d](https://github.com/NVIDIA/elements/commit/37c137d305273cbf4382908cd00d0ca2dd273036))
+* **core:** resolve page panel stacking and visibility ([3bd2fc9](https://github.com/NVIDIA/elements/commit/3bd2fc9d2e3fa9ba740a486cd7a826bb17ffcaa2))
+* **docs:** correct example api mapping and summary fallback ([f0dd837](https://github.com/NVIDIA/elements/commit/f0dd837756f44f05f1c115384d18e02a40cff32d))
+* **docs:** preserve example content through html processing ([7055d3c](https://github.com/NVIDIA/elements/commit/7055d3ce12a10b0e494da9c73c8f34fce62b9884))
+* **docs:** preserve example source during development reloads ([162082b](https://github.com/NVIDIA/elements/commit/162082b8bead05283646ae68ad3ecd391be8c962))
+* **docs:** prevent runtime errors when loading examples pages in dev ([1d57c69](https://github.com/NVIDIA/elements/commit/1d57c690819c009a1abac037b00f631d18db076a))
+* **forms:** form state restore callback types ([8a060db](https://github.com/NVIDIA/elements/commit/8a060db7366b54ec22e8163a36ee18613a0c479c))
+* **forms:** missing key event check ([3854d5f](https://github.com/NVIDIA/elements/commit/3854d5fb614912eb225612bcdf308badc832093d))
+* **lint:** add invoker trigger elements ([417fb63](https://github.com/NVIDIA/elements/commit/417fb6304d5722fa7bb07a91886ab26da603c630))
+* **pi:** update to pi.dev 1.0.0 ([3d44c15](https://github.com/NVIDIA/elements/commit/3d44c159c4c45b38789aa96615faaf0f97e798f6))
+
 ## [2.7.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.0...@nvidia-elements/lint-v2.7.1) (2026-09-29)
 
 ### Features
