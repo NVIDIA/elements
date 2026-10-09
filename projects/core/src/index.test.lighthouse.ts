@@ -99,7 +99,6 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/toolbar/define.js';
         import '@nvidia-elements/core/tooltip/define.js';
         import '@nvidia-elements/core/tree/define.js';
-        import '@nvidia-elements/core/viewport/define.js';
         import '@nvidia-elements/core/week/define.js';
       </script>
     `
