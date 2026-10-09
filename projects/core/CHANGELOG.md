@@ -1,3 +1,13 @@
+## [2.15.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.14.0...@nvidia-elements/core-v2.15.0) (2026-10-09)
+
+### Features
+
+* **core:** drag handle ([cc6d5b1](https://github.com/NVIDIA/elements/commit/cc6d5b17aac74e65163d581d8525897762d714c2))
+
+### Bug Fixes
+
+* **forms:** missing key event check ([3854d5f](https://github.com/NVIDIA/elements/commit/3854d5fb614912eb225612bcdf308badc832093d))
+
 ## [2.14.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.13.0...@nvidia-elements/core-v2.14.0) (2026-10-08)
 
 ### Features
