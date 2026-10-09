@@ -27,6 +27,33 @@ describe('marker frustum classification', () => {
       }).run(runOptions);
     });
   }
+  const workloads = [
+    { name: 'inside', bounds },
+    { name: 'intersecting', bounds: { ...bounds, minimumX: 0.75, maximumX: 1.25 } },
+    { name: 'outside first plane', bounds: { ...bounds, minimumX: -2.5, maximumX: -1.5 } },
+    { name: 'outside last plane', bounds: { ...bounds, minimumZ: 1.5, maximumZ: 2.5 } },
+    { name: 'degenerate boundary', bounds: { ...bounds, minimumX: 1, maximumX: 1 } },
+    {
+      name: 'spanning frustum',
+      bounds: { minimumX: -2, maximumX: 2, minimumY: -2, maximumY: 2, minimumZ: -1, maximumZ: 2 }
+    },
+    { name: 'unknown bounds', bounds: undefined },
+    { name: 'empty bounds', bounds: null }
+  ];
+  for (const workload of workloads) {
+    // Policy shortcuts need a larger batch to exceed the browser timer resolution.
+    const count = workload.bounds === null || workload.bounds === undefined ? 262_144 : 16_384;
+    test(`classifies ${count} ${workload.name} marker bounds`, async ({ bench }) => {
+      await bench('frustum classification', () => {
+        let checksum = 0;
+        for (let index = 0; index < count; index += 1) {
+          const relation = classifier.classify(workload.bounds, projection, projection);
+          checksum += relation === 'inside' ? 2 : relation === 'intersecting' ? 1 : 0;
+        }
+        return checksum;
+      }).run(runOptions);
+    });
+  }
 });
 
 describe('marker bounds aggregation', () => {
