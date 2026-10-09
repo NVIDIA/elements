@@ -489,13 +489,22 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
 }
 
 export function renderBasePageHeader(data) {
+  const isCatalogPage = [
+    '/docs/elements/',
+    '/docs/code/',
+    '/docs/markdown/',
+    '/docs/media/',
+    '/docs/monaco/',
+    '/docs/viewport/'
+  ].some(path => data.page.url.startsWith(path));
+
   return /* html */ `
 <nve-page-header slot="header">
   <nve-logo slot="prefix" color="brand-green" size="sm" aria-label="NVIDIA Elements Design System">NV</nve-logo>
   <a slot="prefix" href="/">NVIDIA Elements</a>
-  <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="/">Catalog</a></nve-button>
+  <nve-button container="flat" ${isCatalogPage ? 'selected' : ''} class="header-btn"><a href="/docs/elements/">Catalog</a></nve-button>
   ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat" class="header-btn"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
-  <nve-button container="flat" class="header-btn"><a href="/docs/integrations/">Starters</a></nve-button>
+  <nve-button container="flat" ${data.page.url.startsWith('/docs/integrations/') ? 'selected' : ''} class="header-btn"><a href="/docs/integrations/">Starters</a></nve-button>
   <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">GitHub</a></nve-button>
   <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
   <nve-icon-button class="header-menu-btn" role="button" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>

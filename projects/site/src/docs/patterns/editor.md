@@ -23,3 +23,7 @@ in AV and Robotics applications.
 ## Read-Only Viewer
 
 {% example '@internals/patterns/editor.examples.json', 'ReadOnly', '{ "inline": false, "height": "650px" }' %}
+
+## File Tree
+
+{% example '@internals/patterns/code.examples.json', 'FileTree' %}

@@ -14,7 +14,7 @@ const isElementsComponentDoc = component =>
   component.inputPath?.includes('/docs/elements/') && hasComponentTag(component);
 
 const isLibraryComponentDoc = component =>
-  ['/docs/code/', '/docs/markdown/', '/docs/media/', '/docs/monaco/'].some(path =>
+  ['/docs/code/', '/docs/markdown/', '/docs/media/', '/docs/monaco/', '/docs/viewport/'].some(path =>
     component.inputPath?.includes(path)
   ) && hasComponentTag(component);
 
@@ -27,6 +27,151 @@ const escapeHtml = value =>
     .replace(/'/g, '&#39;');
 
 const sortByTitle = (a, b) => a.title.localeCompare(b.title);
+
+const componentGroups = [
+  {
+    title: 'Form controls',
+    tags: [
+      'nve-checkbox',
+      'nve-color',
+      'nve-combobox',
+      'nve-control',
+      'nve-dropzone',
+      'nve-file',
+      'nve-input',
+      'nve-input-group',
+      'nve-password',
+      'nve-preferences-input',
+      'nve-progressive-filter-chip',
+      'nve-radio',
+      'nve-range',
+      'nve-search',
+      'nve-select',
+      'nve-star-rating',
+      'nve-switch',
+      'nve-textarea'
+    ]
+  },
+  {
+    title: 'Date and time',
+    tags: ['nve-date', 'nve-datetime', 'nve-month', 'nve-time', 'nve-week']
+  },
+  {
+    title: 'Buttons and actions',
+    tags: ['nve-button', 'nve-button-group', 'nve-copy-button', 'nve-icon-button', 'nve-sort-button']
+  },
+  {
+    title: 'Navigation',
+    tags: ['nve-breadcrumb', 'nve-menu', 'nve-pagination', 'nve-steps', 'nve-tabs', 'nve-tree']
+  },
+  {
+    title: 'Layout and containers',
+    tags: [
+      'nve-accordion',
+      'nve-card',
+      'nve-divider',
+      'nve-page',
+      'nve-page-header',
+      'nve-panel',
+      'nve-resize-handle',
+      'nve-toolbar'
+    ]
+  },
+  {
+    title: 'Viewport',
+    tags: ['nve-viewport', 'nve-viewport-gridlines', 'nve-viewport-minimap']
+  },
+  {
+    title: 'Popovers',
+    tags: [
+      'nve-dialog',
+      'nve-drawer',
+      'nve-dropdown',
+      'nve-dropdown-group',
+      'nve-notification',
+      'nve-toggletip',
+      'nve-tooltip'
+    ]
+  },
+  {
+    title: 'Feedback and status',
+    tags: [
+      'nve-alert',
+      'nve-page-loader',
+      'nve-progress-bar',
+      'nve-progress-ring',
+      'nve-pulse',
+      'nve-skeleton',
+      'nve-toast'
+    ]
+  },
+  {
+    title: 'Data display',
+    tags: [
+      'nve-avatar',
+      'nve-badge',
+      'nve-chat-message',
+      'nve-dot',
+      'nve-gauge',
+      'nve-grid',
+      'nve-icon',
+      'nve-logo',
+      'nve-sparkline',
+      'nve-tag'
+    ]
+  },
+  {
+    title: 'Formatting',
+    tags: [
+      'nve-format-bytes',
+      'nve-format-datetime',
+      'nve-format-number',
+      'nve-format-relative-time',
+      'nve-format-truncate'
+    ]
+  },
+  {
+    title: 'Code and text',
+    tags: [
+      'nve-codeblock',
+      'nve-markdown',
+      'nve-monaco-diff-editor',
+      'nve-monaco-diff-input',
+      'nve-monaco-editor',
+      'nve-monaco-input',
+      'nve-monaco-problems'
+    ]
+  },
+  {
+    title: 'Media',
+    tags: [
+      'nve-media-controller',
+      'nve-media-fullscreen-button',
+      'nve-media-loop-button',
+      'nve-media-mute-button',
+      'nve-media-pause-button',
+      'nve-media-playback-rate-select',
+      'nve-media-seek-button',
+      'nve-media-time-range',
+      'nve-media-volume-range'
+    ]
+  }
+];
+
+const groupComponents = components => {
+  const groupedTags = new Set(componentGroups.flatMap(group => group.tags));
+
+  return [
+    ...componentGroups.map(group => ({
+      title: group.title,
+      components: components.filter(component => group.tags.includes(component.tag)).sort(sortByTitle)
+    })),
+    {
+      title: 'Other components',
+      components: components.filter(component => !groupedTags.has(component.tag)).sort(sortByTitle)
+    }
+  ].filter(group => group.components.length > 0);
+};
 
 const defaultExamplesByTag = new Map(
   siteData.examples
@@ -316,6 +461,10 @@ const renderComponentCard = component => /* html */ `
 
 const renderPreviewScript = () => /* html */ `
 <script type="module">
+  import '@nvidia-elements/viewport/viewport/define.js';
+  import '@nvidia-elements/viewport/gridlines/define.js';
+  import '@nvidia-elements/viewport/minimap/define.js';
+
   const loadPreview = async preview => {
     const tag = preview.dataset.componentPreview;
 
@@ -366,6 +515,7 @@ const renderPreviewScript = () => /* html */ `
 
 export function render(data) {
   const components = createComponentCatalog(data.collections.componentDocs);
+  const groups = groupComponents(components);
 
   return /* html */ `
 <style>
@@ -417,6 +567,27 @@ export function render(data) {
     nve-steps {
       width: 600px;
     }
+
+    nve-viewport {
+      --min-height: 0;
+      width: 100%;
+      height: 100% !important;
+    }
+  }
+
+  .component-preview:is(
+    [data-component-preview$='-button'],
+    [data-component-preview='nve-button-group'],
+    [data-component-preview='nve-icon'],
+    [data-component-preview='nve-sparkline'],
+    [data-component-preview='nve-dot'],
+    [data-component-preview='nve-badge'],
+    [data-component-preview='nve-tag'],
+    [data-component-preview='nve-checkbox'],
+    [data-component-preview='nve-radio'],
+    [data-component-preview='nve-switch']
+  ) .component-preview-content {
+    transform: none;
   }
 
   .preview-mock,
@@ -601,7 +772,7 @@ export function render(data) {
   }
 </style>
 
-<h1 nve-text="heading xl mkd">NVIDIA Elements Components</h1>
+<h1 nve-text="display emphasis semibold">NVIDIA Elements Components</h1>
 
 <p nve-text="body">
   NVIDIA Elements components are production Web Components for an agent-ready design system. Use them to build AI
@@ -609,8 +780,18 @@ export function render(data) {
   stable <code nve-text="code">nve-*</code> APIs, design tokens, accessibility guidance, and examples.
 </p>
 
-<div nve-layout="grid gap:md align:vertical-stretch span-items:12 &lg|span-items:6 &xl|span-items:4 &xxl|span-items:3">
-  ${components.map(renderComponentCard).join('')}
+<div nve-layout="column gap:xxl">
+  ${groups
+    .map(
+      group => /* html */ `
+    <section nve-layout="column gap:lg">
+      <h2 nve-text="heading xl">${escapeHtml(group.title)}</h2>
+      <div nve-layout="grid gap:md align:vertical-stretch span-items:12 &lg|span-items:6 &xl|span-items:4 &xxl|span-items:3">
+        ${group.components.map(renderComponentCard).join('')}
+      </div>
+    </section>`
+    )
+    .join('')}
 </div>
 
 ${renderPreviewScript()}`;

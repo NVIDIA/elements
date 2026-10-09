@@ -62,7 +62,7 @@ globalThis.window.addEventListener('beforeunload', () => {
 });
 
 const savedPosition = sessionStorage.getItem('sidenav-scroll-position');
-if (savedPosition) {
+if (savedPosition && savedPosition !== '0') {
   await customElements.whenDefined('nve-page-panel-content');
   content.scrollTop = parseInt(savedPosition);
   await content.updateComplete;

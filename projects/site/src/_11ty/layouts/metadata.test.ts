@@ -45,7 +45,8 @@ const {
   SOCIAL_IMAGE_URL,
   SOCIAL_IMAGE_ALT
 } = await import('./metadata.js');
-const { renderBaseHead, renderDocsNav } = await import('./common.js');
+const { renderBaseHead, renderBasePageHeader, renderDocsNav } = await import('./common.js');
+const { render: renderPage } = await import('./page.11ty.js');
 
 const SOFTWARE_DESCRIPTION =
   'NVIDIA Elements is a framework-agnostic Design System and UI Agent Harness for AI/ML Infrastructure, Robotics, and Autonomous Vehicles';
@@ -496,6 +497,43 @@ describe('renderBaseHead', () => {
     expect(html).toContain(
       '<link rel="alternate" type="application/atom+xml" title="NVIDIA Elements Updates (Atom)" href="https://nvidia.github.io/elements/atom.xml">'
     );
+  });
+});
+
+describe('renderBasePageHeader', () => {
+  it('should link the basic page header to the catalog and retain the home link', () => {
+    const html = renderPage(createData({ page: { url: '/docs/metrics/bundle-explorer-report/' }, content: '' }));
+
+    expect(html).toContain('<nve-button container="flat"><a href="/docs/elements/">Catalog</a></nve-button>');
+    expect(html).toContain('<a slot="prefix" href="/">NVIDIA Elements</a>');
+  });
+
+  it.each([
+    { url: '/', catalog: false, starters: false },
+    { url: '/docs/elements/', catalog: true, starters: false },
+    { url: '/docs/elements/button/', catalog: true, starters: false },
+    { url: '/docs/elements/button/api/', catalog: true, starters: false },
+    { url: '/docs/elements/button/examples/', catalog: true, starters: false },
+    { url: '/docs/code/codeblock/', catalog: true, starters: false },
+    { url: '/docs/markdown/', catalog: true, starters: false },
+    { url: '/docs/media/controller/api/', catalog: true, starters: false },
+    { url: '/docs/monaco/input/examples/', catalog: true, starters: false },
+    { url: '/docs/viewport/', catalog: true, starters: false },
+    { url: '/docs/integrations/', catalog: false, starters: true },
+    { url: '/docs/integrations/react/', catalog: false, starters: true },
+    { url: '/docs/cli/', catalog: false, starters: false },
+    { url: '/docs/foundations/', catalog: false, starters: false },
+    { url: '/docs/about/support/', catalog: false, starters: false }
+  ])('should link to the catalog and select the current header section on $url', ({ url, catalog, starters }) => {
+    const html = renderBasePageHeader({ page: { url } });
+    const catalogButton = html.match(/<nve-button([^>]*)><a href="([^"]+)">Catalog<\/a>/);
+    const startersButton = html.match(/<nve-button([^>]*)><a href="([^"]+)">Starters<\/a>/);
+
+    expect(catalogButton?.[2]).toBe('/docs/elements/');
+    expect(catalogButton?.[1].includes('selected')).toBe(catalog);
+    expect(startersButton?.[2]).toBe('/docs/integrations/');
+    expect(startersButton?.[1].includes('selected')).toBe(starters);
+    expect(html).toContain('<a slot="prefix" href="/">NVIDIA Elements</a>');
   });
 });
 

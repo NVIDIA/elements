@@ -7,8 +7,8 @@ Instructions for migrating a project from deprecated Elements APIs to the latest
 - The public npm registry hosts the public packages under the `@nvidia-elements` scope.
 - Internal NVIDIA teams should keep using Artifactory. Artifactory proxies the public npm registry.
 - Component APIs, `nve-*` tag names, and the theming system remain the same unless a rule below says to change them.
-- The new packages reset version numbers to `0.x`. Use the latest available public package versions instead of copying old internal versions.
-- The `0.x` public packages contain the same non-deprecated components as the latest internal releases. Deprecated or removed APIs need explicit migration.
+- The initial public `0.x` packages were transitional preview releases. Stable public releases started at `2.0.0`, following the internal `1.x` generation.
+- Use stable `2.x` versions instead of transitional `0.x` packages or old internal versions. Deprecated or removed APIs need explicit migration.
 - Prefer lint-driven changes. Install `@nvidia-elements/lint`, run ESLint, build a work list from the findings, and fix one category at a time.
 
 ## Recommended Agent Workflow
@@ -117,12 +117,14 @@ Before:
 
 After:
 
+Use stable `2.x` versions. The `^2.0.0` ranges accept later `2.x` releases and exclude transitional `0.x` versions. Run `nve packages.list` to check published versions before updating.
+
 ```json
 {
   "dependencies": {
-    "@nvidia-elements/core": "0.x",
-    "@nvidia-elements/themes": "0.x",
-    "@nvidia-elements/styles": "0.x"
+    "@nvidia-elements/core": "^2.0.0",
+    "@nvidia-elements/themes": "^2.0.0",
+    "@nvidia-elements/styles": "^2.0.0"
   }
 }
 ```

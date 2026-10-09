@@ -19,3 +19,7 @@
 ## Popover Chat
 
 {% example '@internals/patterns/chat.examples.json', 'PopoverChat' '{ "height": "720px", "inline": false  }' %}
+
+### Streaming Content
+
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'StreamingContent' %}

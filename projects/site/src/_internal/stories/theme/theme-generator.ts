@@ -46,7 +46,13 @@ export class ThemeGeneratorDemo extends LitElement {
     unsafeCSS(typography),
     css`
       :host {
-        display: contents;
+        display: block;
+        height: 920px;
+        overflow: hidden;
+      }
+
+      nve-page {
+        height: 100%;
       }
     `
   ];
@@ -71,10 +77,6 @@ export class ThemeGeneratorDemo extends LitElement {
           <nve-button container="flat">Link 2</nve-button>
           <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
         </nve-page-header>
-
-        <nve-alert-group slot="header" status="accent" prominence="emphasis" container="full">
-          <nve-alert closable>banner message</nve-alert>
-        </nve-alert-group>
 
         <nve-page-panel slot="left" expanded size="sm">
           <nve-page-panel-header>

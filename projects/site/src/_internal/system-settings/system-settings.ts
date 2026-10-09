@@ -52,6 +52,13 @@ export class SystemSettings extends LitElement {
   render() {
     return html`
       <form internal-host>
+        <div class="theme-switch">
+          <nve-switch>
+            <label>Classic</label>
+            <input type="checkbox" value="classic" .checked=${this.#globals.classic === 'classic'} ?disabled=${this.#globals.theme === 'high-contrast'} @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ classic: e.target.checked ? 'classic' : '' })} />
+          </nve-switch>
+          <nve-icon-button type="button" popovertarget="classic-theme-toggletip" size="sm" container="inline" icon-name="information-circle" aria-label="About custom themes"></nve-icon-button>
+        </div>
         <nve-preferences-input
           @change=${(e: Event) => this.#updatePreferences(e)}
           .value=${{
@@ -59,13 +66,6 @@ export class SystemSettings extends LitElement {
             'reduced-motion': this.#globals.animation === 'reduced-motion',
             scale: this.#globals.scale === '' ? 'default' : this.#globals.scale
           }}></nve-preferences-input>
-        <div nve-layout="row align:vertical-center gap:xs">
-          <nve-switch>
-            <label>Classic</label>
-            <input type="checkbox" value="classic" .checked=${this.#globals.classic === 'classic'} ?disabled=${this.#globals.theme === 'high-contrast'} @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ classic: e.target.checked ? 'classic' : '' })} />
-          </nve-switch>
-          <nve-icon-button type="button" popovertarget="classic-theme-toggletip" size="sm" container="inline" icon-name="information-circle" aria-label="About the classic theme"></nve-icon-button>
-        </div>
         <nve-divider></nve-divider>
         <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
           <label>Layer Background</label>
@@ -89,7 +89,7 @@ export class SystemSettings extends LitElement {
         </nve-switch-group>
       </form>
       <nve-tooltip id="demo-layer-tooltip" position="left">The background layer color for examples and how they are displayed in the browser.</nve-tooltip>
-      <nve-toggletip id="classic-theme-toggletip" position="left">
+      <nve-toggletip id="classic-theme-toggletip" position="left" @close=${(e: CustomEvent) => e.stopPropagation()}>
         Learn about the <a href="/docs/foundations/themes/custom/#classic-theme" nve-text="link">classic theme</a>.
       </nve-toggletip>
     `;

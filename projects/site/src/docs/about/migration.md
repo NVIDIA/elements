@@ -60,16 +60,16 @@ The `@nvidia-elements` packages are on the public npm registry and require no sp
 
 ### 2. Update Dependencies
 
-In your `package.json`, replace the old scope names with the new ones:
+In your `package.json`, replace the old scope names with the new ones and use stable `2.x` versions. The `^2.0.0` ranges accept later `2.x` releases and exclude the transitional `0.x` versions. Run `nve packages.list` to check published versions before updating.
 
 ```shell
   "dependencies": {
 -   "@nve/elements": "^1.67.0",
 -   "@nve/themes": "^1.12.0",
 -   "@nve/styles": "^1.14.0"
-+   "@nvidia-elements/core": "^0.0.3",
-+   "@nvidia-elements/themes": "^0.0.4",
-+   "@nvidia-elements/styles": "^0.0.3"
++   "@nvidia-elements/core": "^2.0.0",
++   "@nvidia-elements/themes": "^2.0.0",
++   "@nvidia-elements/styles": "^2.0.0"
   }
 ```
 

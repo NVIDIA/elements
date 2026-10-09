@@ -11,7 +11,7 @@ import { ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
 const { elements, tests } = siteData;
 
 // Base URL for package releases
-const PACKAGE_URL = `${ELEMENTS_REPO_BASE_URL}/-/releases`;
+const PACKAGE_URL = `${ELEMENTS_REPO_BASE_URL}/releases`;
 
 // Initialize markdown parser and metadata service
 const md = markdown();

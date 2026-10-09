@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--nve-ref-space-md);
-  padding-block: var(--nve-ref-size-400);
+  padding-block: var(--nve-ref-size-200);
 }
 
 nve-preferences-input {
@@ -14,4 +14,10 @@ nve-preferences-input {
 
 nve-select {
   --size: initial !important;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--nve-ref-space-xs);
 }
