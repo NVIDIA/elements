@@ -7,7 +7,8 @@ import type { MeshGeometryUploadRange } from './render-data.js';
 import { writeTriangleNormal } from '../../math/triangle-normal.js';
 import {
   beginPreparation,
-  continuePreparation,
+  resumePreparation,
+  runPreparationSync,
   PREPARATION_CHUNK_SIZE,
   type PreparationContext
 } from '../../rendering/preparation.js';
@@ -49,7 +50,7 @@ export function processMeshGeometry(input: IndexedFlatInput): ProcessedMeshGeome
     return processIndexedFlat(input, topologyKey);
   }
   const positions = input.positions;
-  const normals = input.normals ?? calculateFlatNormals(positions, null);
+  const normals = input.normals ?? runPreparationSync(buildFlatNormals(positions, Number.MAX_SAFE_INTEGER));
   return completeUploadValues({
     positions,
     normals,
@@ -99,7 +100,7 @@ export async function continueMeshGeometryPreparation(
     );
   }
   if (input.indices !== null) return prepareIndexedFlat({ input, topologyKey }, context);
-  const normals = await prepareFlatNormals(input.positions, context);
+  const normals = await resumePreparation(buildFlatNormals(input.positions), context);
   if (!normals) return undefined;
   return prepareUploadValues(
     {
@@ -140,7 +141,7 @@ export function updateFlatGeometry(
       {
         ...previous,
         positions: source.positions,
-        normals: calculateFlatNormals(source.positions, null),
+        normals: runPreparationSync(buildFlatNormals(source.positions, Number.MAX_SAFE_INTEGER)),
         colors: source.colors,
         uvs: source.uvs
       },
@@ -172,7 +173,7 @@ export async function prepareFlatGeometryUpdate(
     );
   }
   if (source.indices === null) {
-    const normals = await prepareFlatNormals(source.positions, context);
+    const normals = await resumePreparation(buildFlatNormals(source.positions), context);
     return normals
       ? prepareUploadValues(
           { ...previous, colors: source.colors, normals, positions: source.positions, uvs: source.uvs },
@@ -189,6 +190,7 @@ function processIndexedFlat(
   topologyKey: string,
   previous?: ProcessedMeshGeometry
 ): ProcessedMeshGeometry {
+  // @hotpath A local drain preserves the indexed traversal's fast synchronous updates.
   const builder = indexedFlatGeometry({ source: input, topologyKey, previous });
   let step = builder.next();
   while (!step.done) step = builder.next();
@@ -203,17 +205,15 @@ async function prepareIndexedFlat(
   },
   context: PreparationContext
 ): Promise<ProcessedMeshGeometry | undefined> {
-  const builder = indexedFlatGeometry({
-    source: options.input,
-    topologyKey: options.topologyKey,
-    previous: options.previous
-  });
-  let step = builder.next();
-  while (!step.done) {
-    if (!(await continuePreparation(context))) return undefined;
-    step = builder.next();
-  }
-  return prepareUploadValues(step.value, context, options.previous);
+  const core = await resumePreparation(
+    indexedFlatGeometry({
+      source: options.input,
+      topologyKey: options.topologyKey,
+      previous: options.previous
+    }),
+    context
+  );
+  return core ? prepareUploadValues(core, context, options.previous) : undefined;
 }
 
 function completeUploadValues(core: ProcessedMeshCore, previous?: ProcessedMeshGeometry): ProcessedMeshGeometry {
@@ -221,7 +221,10 @@ function completeUploadValues(core: ProcessedMeshCore, previous?: ProcessedMeshG
   const reusedUvs = reusableUploadValues(core, previous, 'uvs');
   return {
     ...core,
-    uploadColors: core.colors ?? reusedColors ?? new Float32Array(core.vertexCount * 4).fill(1),
+    uploadColors:
+      core.colors ??
+      reusedColors ??
+      runPreparationSync(buildFilledValues(core.vertexCount * 4, 1, Number.MAX_SAFE_INTEGER)),
     uploadUvs: core.uvs ?? reusedUvs ?? new Float32Array(core.vertexCount * 2)
   };
 }
@@ -232,7 +235,8 @@ async function prepareUploadValues(
   previous?: ProcessedMeshGeometry
 ): Promise<ProcessedMeshGeometry | undefined> {
   const reusedColors = reusableUploadValues(core, previous, 'colors');
-  const uploadColors = core.colors ?? reusedColors ?? (await prepareFilledValues(core.vertexCount * 4, 1, context));
+  const uploadColors =
+    core.colors ?? reusedColors ?? (await resumePreparation(buildFilledValues(core.vertexCount * 4, 1), context));
   if (!uploadColors) return undefined;
   const reusedUvs = reusableUploadValues(core, previous, 'uvs');
   const uploadUvs = core.uvs ?? reusedUvs ?? new Float32Array(core.vertexCount * 2);
@@ -248,42 +252,30 @@ function reusableUploadValues(
   return attribute === 'colors' ? previous.uploadColors : previous.uploadUvs;
 }
 
-async function prepareFilledValues(
+function* buildFilledValues(
   length: number,
   value: number,
-  context: PreparationContext
-): Promise<Float32Array | undefined> {
+  chunkSize = PREPARATION_CHUNK_SIZE
+): Generator<void, Float32Array, void> {
   const values = new Float32Array(length);
-  for (let index = 0; index < length; index += 1) {
-    values[index] = value;
-    if ((index + 1) % PREPARATION_CHUNK_SIZE === 0 && !(await continuePreparation(context))) return undefined;
+  for (let start = 0; start < length; start += chunkSize) {
+    values.fill(value, start, Math.min(length, start + chunkSize));
+    if (start + chunkSize <= length) yield;
   }
-  return context.isCurrent() ? values : undefined;
+  return values;
 }
 
-function calculateFlatNormals(positions: Float32Array, _indices: Uint32Array | null): Float32Array {
+function* buildFlatNormals(
+  positions: Float32Array,
+  chunkSize = PREPARATION_CHUNK_SIZE
+): Generator<void, Float32Array, void> {
   const normals = new Float32Array(positions.length);
   const geometry = { positions, normals };
-  for (let offset = 0; offset < positions.length; offset += 9) {
-    writeTriangleNormal(geometry, offset);
+  const chunkLength = Math.ceil(chunkSize / 3) * 9;
+  for (let start = 0; start < positions.length; start += chunkLength) {
+    const end = Math.min(positions.length, start + chunkLength);
+    for (let offset = start; offset < end; offset += 9) writeTriangleNormal(geometry, offset);
+    if (start + chunkLength <= positions.length) yield;
   }
   return normals;
-}
-
-async function prepareFlatNormals(
-  positions: Float32Array,
-  context: PreparationContext
-): Promise<Float32Array | undefined> {
-  const normals = new Float32Array(positions.length);
-  const geometry = { positions, normals };
-  let work = 0;
-  for (let offset = 0; offset < positions.length; offset += 9) {
-    writeTriangleNormal(geometry, offset);
-    work += 3;
-    if (work >= PREPARATION_CHUNK_SIZE) {
-      work = 0;
-      if (!(await continuePreparation(context))) return undefined;
-    }
-  }
-  return context.isCurrent() ? normals : undefined;
 }

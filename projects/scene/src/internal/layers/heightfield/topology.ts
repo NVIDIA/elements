@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import {
-  beginPreparation,
-  continuePreparation,
+  runPreparation,
+  runPreparationSync,
   PREPARATION_CHUNK_SIZE,
   type PreparationContext
 } from '../../rendering/preparation.js';
@@ -28,35 +28,52 @@ export function hasSameHeightfieldTopology(
 
 /** Creates the shared row-major, counter-clockwise index topology for a heightfield grid. */
 export function createHeightfieldIndices(rows: number, columns: number): Uint32Array {
-  const indices = new Uint32Array((rows - 1) * (columns - 1) * 6);
-  let offset = 0;
-  for (let row = 0; row < rows - 1; row += 1) {
-    for (let column = 0; column < columns - 1; column += 1) {
-      const topLeft = row * columns + column;
-      writeHeightfieldCell(indices, offset, columns, topLeft);
-      offset += 6;
-    }
-  }
-  return indices;
+  return runPreparationSync(buildHeightfieldIndices(rows, columns, Number.MAX_SAFE_INTEGER));
 }
 
 /** Creates heightfield topology in bounded tasks, or returns undefined after cancellation. */
-export async function prepareHeightfieldIndices(
+export function prepareHeightfieldIndices(
   rows: number,
   columns: number,
   context: PreparationContext
 ): Promise<Uint32Array | undefined> {
-  if (!(await beginPreparation(context))) return undefined;
+  return runPreparation(buildHeightfieldIndices(rows, columns), context);
+}
+
+/** Builds row-major topology, yielding after each complete cell budget, including the final budget. */
+export function* buildHeightfieldIndices(
+  rows: number,
+  columns: number,
+  chunkSize = PREPARATION_CHUNK_SIZE
+): Generator<void, Uint32Array, void> {
+  if (!Number.isSafeInteger(chunkSize) || chunkSize < 1) {
+    throw new RangeError('Heightfield topology chunk size must be a positive safe integer.');
+  }
   const columnCount = columns - 1;
   const cellCount = (rows - 1) * columnCount;
   const indices = new Uint32Array(cellCount * 6);
-  for (let cell = 0; cell < cellCount; cell += 1) {
-    const row = Math.floor(cell / columnCount);
-    const column = cell % columnCount;
-    writeHeightfieldCell(indices, cell * 6, columns, row * columns + column);
-    if ((cell + 1) % PREPARATION_CHUNK_SIZE === 0 && !(await continuePreparation(context))) return undefined;
+  for (let start = 0; start < cellCount; start += chunkSize) {
+    writeHeightfieldCells(indices, columns, start, Math.min(cellCount, start + chunkSize));
+    if (start + chunkSize <= cellCount) yield;
   }
-  return context.isCurrent() ? indices : undefined;
+  return indices;
+}
+
+// eslint-disable-next-line max-params -- @hotpath One range call keeps chunk scheduling outside the per-cell loop.
+function writeHeightfieldCells(indices: Uint32Array, columns: number, start: number, end: number): void {
+  const columnCount = columns - 1;
+  const firstRow = Math.floor(start / columnCount);
+  const lastRow = Math.ceil(end / columnCount);
+  let column = start % columnCount;
+  let offset = start * 6;
+  for (let row = firstRow; row < lastRow; row += 1) {
+    const lastColumn = Math.min(columnCount, end - row * columnCount);
+    for (; column < lastColumn; column += 1) {
+      writeHeightfieldCell(indices, offset, columns, row * columns + column);
+      offset += 6;
+    }
+    column = 0;
+  }
 }
 
 // eslint-disable-next-line max-params -- @hotpath Positional arguments avoid allocating one options object per grid cell.

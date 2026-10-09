@@ -3,7 +3,7 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createGpu, createMarkerItem } from '../../../test/rendering.js';
-import type { PrimitiveKind } from '../geometry/primitives.js';
+import type { PrimitiveKind } from '../math/primitive-geometry.js';
 import type { MarkerBuffer } from '../layers/markers/buffer.js';
 import {
   ArrowBuffer,
