@@ -24,11 +24,6 @@
       "count": 40
     }
   },
-  "src/forms/control/control.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/forms/utils/states.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
