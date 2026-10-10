@@ -185,7 +185,7 @@ export class Control extends LitElement {
 
   /** Resets control value to initial attribute value and clears any active validation rules. */
   reset() {
-    this.#resetInputValue(this.input as ControlInput);
+    this.#resetInputValue(this.input);
     this.requestUpdate();
     this.dispatchEvent(new CustomEvent('reset', { bubbles: true, composed: true }));
   }
