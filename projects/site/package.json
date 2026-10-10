@@ -106,6 +106,8 @@
         "../plot/dist/**/*.examples.json",
         "../scene/dist/**/*.js",
         "../scene/dist/**/*.examples.json",
+        "../viewport/dist/**/*.js",
+        "../viewport/dist/**/*.examples.json",
         "../internals/design/dist/DESIGN.md",
         "../internals/metadata/static/**",
         "../internals/patterns/dist/**/*.js",
@@ -172,6 +174,10 @@
         },
         {
           "script": "../internals/tools:build",
+          "cascade": false
+        },
+        {
+          "script": "../viewport:build",
           "cascade": false
         }
       ],
@@ -346,6 +352,7 @@
     "@nvidia-elements/scene": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/viewport": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "compare-versions": "6.1.1",
