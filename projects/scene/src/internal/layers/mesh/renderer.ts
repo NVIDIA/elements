@@ -59,9 +59,11 @@ import {
   createPartitionUniformResources,
   destroyPartitionUniformResources
 } from '../../rendering/partition-resources.js';
-import { acquireSharedInstanceBuffer, writeSharedInstanceBuffer } from '../../gpu/shared-instance-buffer.js';
+import { acquireSharedInstanceBuffer, writeSharedInstanceBufferRanges } from '../../gpu/shared-instance-buffer.js';
+import { planBufferUploads } from '../../gpu/buffer-upload-plan.js';
 import type { SharedInstanceBufferLease } from '../../gpu/shared-instance-buffer.js';
 import { createPreparationContext } from '../../rendering/preparation.js';
+import { GenerationTasks, type GenerationTask } from '../../structures/generation-tasks.js';
 import { prepareHeightfieldIndices } from '../heightfield/topology.js';
 import {
   createIdentityMarkerBytes,
@@ -203,14 +205,14 @@ interface ReplaceGeometryResourcesOptions {
 interface PublishMeshPreparationOptions {
   readonly existing: MeshLayerResources | undefined;
   readonly item: MeshRenderItem;
-  readonly preparation: MeshPreparation;
+  readonly task: GenerationTask<MeshPreparation>;
   readonly processed: ProcessedMeshGeometry | null | undefined;
 }
 
 interface PublishMeshUpdateOptions {
   readonly existing: MeshLayerResources;
   readonly item: MeshRenderItem;
-  readonly preparation: MeshPreparation;
+  readonly task: GenerationTask<MeshPreparation>;
   readonly processed: ProcessedMeshGeometry;
 }
 
@@ -218,14 +220,14 @@ interface PublishMeshUpdateOptions {
 export class MeshRenderer {
   #device: MeshRendererDevice;
   #heightfieldCompiler?: HeightfieldGPUCompiler;
-  #heightfieldFallbackPreparations = new Map<HTMLElement, HeightfieldFallbackPreparation>();
-  #heightfieldIndexPreparations = new Map<HTMLElement, HeightfieldTopologyPreparation>();
+  #heightfieldFallbackPreparations = new GenerationTasks<HTMLElement, HeightfieldFallbackPreparation>();
+  #heightfieldIndexPreparations = new GenerationTasks<HTMLElement, HeightfieldTopologyPreparation>();
   #preparedHeightfields = new Map<HTMLElement, HeightfieldLayerResources>();
   #heightfieldStates = new Set<HeightfieldGPUState>();
   #heightfields = new Map<HTMLElement, HeightfieldLayerResources>();
   #instanceLayers = new Map<HTMLElement, LayerResources>();
   #layers = new Map<HTMLElement, MeshLayerResources>();
-  #meshPreparations = new Map<HTMLElement, MeshPreparation>();
+  #meshPreparations = new GenerationTasks<HTMLElement, MeshPreparation>();
   #preparedHeightfieldFallbacks = new Map<HTMLElement, PreparedHeightfieldFallback>();
   #preparedMeshes = new Map<HTMLElement, PreparedMesh>();
   #pickIdScratch = new Uint32Array(1);
@@ -303,15 +305,15 @@ export class MeshRenderer {
   }
 
   #processGeometry(item: MeshRenderItem, existing: MeshLayerResources | undefined): ProcessedMeshGeometry | null {
-    const pending = this.#meshPreparations.get(item.layer);
     if (existing && !existing.heightfieldSource && sameMeshGeometrySource(existing.source, item)) {
+      this.#meshPreparations.cancel(item.layer);
       return existing.processed;
     }
     if (requiresMeshPreparation(item.data)) {
       this.#scheduleMeshPreparation(item, existing);
       return null;
     }
-    if (pending) this.#meshPreparations.delete(item.layer);
+    this.#meshPreparations.cancel(item.layer);
     if (!existing || existing.heightfieldSource || existing.source.topologyVersion !== item.data.topologyVersion) {
       return processMeshGeometry(item.data);
     }
@@ -323,55 +325,53 @@ export class MeshRenderer {
     const current = this.#meshPreparations.get(item.layer);
     if (current && sameMeshSources(current.source, source)) return;
     const preparationItem = retainGeometryUploadRanges(item, current?.item);
-    const preparation = { item: preparationItem, source };
-    this.#meshPreparations.set(item.layer, preparation);
-    const isCurrent = () => this.#meshPreparations.get(item.layer) === preparation;
-    const context = createPreparationContext(isCurrent);
+    const task = this.#meshPreparations.start(item.layer, { item: preparationItem, source });
+    const context = createPreparationContext(task.isCurrent);
     const work =
       existing && !existing.heightfieldSource && existing.source.topologyVersion === item.data.topologyVersion
         ? prepareFlatGeometryUpdate(preparationItem.data, existing.processed, context)
         : prepareMeshGeometry(preparationItem.data, context);
     void work
-      .then(processed => this.#publishMeshPreparation({ existing, item: preparationItem, preparation, processed }))
+      .then(processed => this.#publishMeshPreparation({ existing, item: preparationItem, task, processed }))
       .catch(error => {
-        if (!isCurrent()) return;
-        this.#meshPreparations.delete(item.layer);
-        this.#onFailure(error);
+        if (task.fail()) this.#onFailure(error);
       });
   }
 
   #publishMeshPreparation(options: PublishMeshPreparationOptions): void {
-    const { existing, item, preparation, processed } = options;
-    const isCurrent = this.#meshPreparations.get(item.layer) === preparation;
-    if (processed === undefined || !isCurrent) return;
+    const { existing, item, task, processed } = options;
+    if (processed === undefined || !task.isCurrent()) return;
     if (processed === null) {
-      this.#meshPreparations.delete(item.layer);
+      task.complete();
       return;
     }
-    if (existing && this.#canUpdatePreparedMesh(existing, preparation.source, item.layer)) {
-      this.#publishMeshUpdate({ existing, item, preparation, processed });
+    if (existing && this.#canUpdatePreparedMesh(existing, task.value.source, item.layer)) {
+      this.#publishMeshUpdate({ existing, item, task, processed });
       return;
     }
-    this.#publishMeshReplacement(item.layer, preparation, processed);
+    this.#publishMeshReplacement(item.layer, task, processed);
   }
 
   #publishMeshUpdate(options: PublishMeshUpdateOptions): void {
-    const { existing, item, preparation, processed } = options;
+    const { existing, item, task, processed } = options;
     this.#uploadChangedBuffers(existing, processed, item);
+    if (!task.complete()) return;
     existing.processed = processed;
-    existing.source = preparation.source;
-    this.#meshPreparations.delete(item.layer);
+    existing.source = task.value.source;
     this.#requestRender();
   }
 
-  #publishMeshReplacement(layer: HTMLElement, preparation: MeshPreparation, processed: ProcessedMeshGeometry): void {
+  #publishMeshReplacement(
+    layer: HTMLElement,
+    task: GenerationTask<MeshPreparation>,
+    processed: ProcessedMeshGeometry
+  ): void {
     const geometry = createMeshGeometryResources(this.#device, meshUpload(processed));
-    if (this.#meshPreparations.get(layer) !== preparation) {
+    if (!task.complete()) {
       destroyMeshGeometryResources(geometry);
       return;
     }
-    this.#meshPreparations.delete(layer);
-    this.#replacePreparedMesh(layer, { geometry, processed, source: preparation.source });
+    this.#replacePreparedMesh(layer, { geometry, processed, source: task.value.source });
     this.#requestRender();
   }
 
@@ -408,22 +408,22 @@ export class MeshRenderer {
 
   #cancelIncompatiblePreparations(item: MeshRenderItem): void {
     if (item.data.heightfield) {
-      this.#meshPreparations.delete(item.layer);
+      this.#meshPreparations.cancel(item.layer);
       this.#discardPreparedMesh(item.layer);
       return;
     }
-    this.#heightfieldFallbackPreparations.delete(item.layer);
+    this.#heightfieldFallbackPreparations.cancel(item.layer);
     this.#discardPreparedHeightfieldFallback(item.layer);
-    this.#heightfieldIndexPreparations.delete(item.layer);
+    this.#heightfieldIndexPreparations.cancel(item.layer);
     this.#discardPreparedHeightfield(item.layer);
   }
 
   #cancelLayerPreparations(layer: HTMLElement): void {
-    this.#heightfieldFallbackPreparations.delete(layer);
+    this.#heightfieldFallbackPreparations.cancel(layer);
     this.#discardPreparedHeightfieldFallback(layer);
-    this.#heightfieldIndexPreparations.delete(layer);
+    this.#heightfieldIndexPreparations.cancel(layer);
     this.#discardPreparedHeightfield(layer);
-    this.#meshPreparations.delete(layer);
+    this.#meshPreparations.cancel(layer);
     this.#discardPreparedMesh(layer);
   }
 
@@ -488,7 +488,7 @@ export class MeshRenderer {
         this.#heightfieldStates.add(resources.state);
         this.#heightfields.set(item.layer, resources);
       } else if (heightfieldTopologyWorkIsBounded(source)) {
-        this.#heightfieldIndexPreparations.delete(item.layer);
+        this.#heightfieldIndexPreparations.cancel(item.layer);
         if (resources) this.#destroyHeightfieldResources(resources);
         const state = compiler.create(source);
         resources = { geometry: state.geometry, state, textureBindGroups: new WeakMap() };
@@ -500,8 +500,10 @@ export class MeshRenderer {
         if (retained && resources) this.#writeUniforms(retained, item, projection);
         return;
       }
-    } else if (!sameHeightfieldSource(resources.state.source, source)) {
-      compiler.update(resources.state, source);
+    } else {
+      this.#heightfieldIndexPreparations.cancel(item.layer);
+      this.#discardPreparedHeightfield(item.layer);
+      if (!sameHeightfieldSource(resources.state.source, source)) compiler.update(resources.state, source);
     }
     const layer = this.#ensureInstanceResources(item);
     if (layer) this.#writeUniforms(layer, item, projection);
@@ -513,21 +515,18 @@ export class MeshRenderer {
       current.source = source;
       return;
     }
-    const preparation = { source };
-    this.#heightfieldIndexPreparations.set(layer, preparation);
-    const isCurrent = () => this.#heightfieldIndexPreparations.get(layer) === preparation;
-    void prepareHeightfieldIndices(source.rows, source.columns, createPreparationContext(isCurrent))
+    const task = this.#heightfieldIndexPreparations.start(layer, { source });
+    void prepareHeightfieldIndices(source.rows, source.columns, createPreparationContext(task.isCurrent))
       .then(indices => {
-        if (!indices || !isCurrent()) return;
+        if (!indices || !task.isCurrent()) return;
         const compiler = this.#heightfieldCompiler;
         if (!compiler) return;
-        const state = compiler.create(preparation.source, indices);
-        if (!isCurrent()) {
+        const state = compiler.create(task.value.source, indices);
+        if (!task.complete()) {
           destroyMeshGeometryResources(state.geometry);
           compiler.destroy(state);
           return;
         }
-        this.#heightfieldIndexPreparations.delete(layer);
         this.#replacePreparedHeightfield(layer, {
           geometry: state.geometry,
           state,
@@ -536,9 +535,7 @@ export class MeshRenderer {
         this.#requestRender();
       })
       .catch(error => {
-        if (!isCurrent()) return;
-        this.#heightfieldIndexPreparations.delete(layer);
-        this.#onFailure(error);
+        if (task.fail()) this.#onFailure(error);
       });
   }
 
@@ -557,9 +554,12 @@ export class MeshRenderer {
     this.#preparedHeightfields.set(layer, prepared);
   }
 
+  // eslint-disable-next-line max-statements -- Retained data, pending work, and staged resources have separate cleanup paths.
   #prepareHeightfieldFallback(item: MeshRenderItem, projection: Matrix4, source: HeightfieldMeshData): void {
     const existing = this.#layers.get(item.layer);
     if (existing?.heightfieldSource && sameHeightfieldSource(existing.heightfieldSource, source)) {
+      this.#heightfieldFallbackPreparations.cancel(item.layer);
+      this.#discardPreparedHeightfieldFallback(item.layer);
       this.#prepareRetainedMesh(item, projection, existing);
       return;
     }
@@ -593,7 +593,7 @@ export class MeshRenderer {
   ): void {
     const source = item.data.heightfield;
     if (!source) return;
-    this.#heightfieldFallbackPreparations.delete(item.layer);
+    this.#heightfieldFallbackPreparations.cancel(item.layer);
     const processed = processMeshGeometry({ ...compileHeightfield(heightfieldGrid(source)), uvs: null });
     if (!processed) return;
     const resources = this.#replaceGeometryResources({
@@ -612,27 +612,22 @@ export class MeshRenderer {
   #scheduleHeightfieldFallback(layer: HTMLElement, source: HeightfieldMeshData): void {
     const current = this.#heightfieldFallbackPreparations.get(layer);
     if (current && sameHeightfieldSource(current.source, source)) return;
-    const preparation = { source };
-    this.#heightfieldFallbackPreparations.set(layer, preparation);
-    const isCurrent = () => this.#heightfieldFallbackPreparations.get(layer) === preparation;
-    const context = createPreparationContext(isCurrent);
+    const task = this.#heightfieldFallbackPreparations.start(layer, { source });
+    const context = createPreparationContext(task.isCurrent);
     void prepareHeightfield(heightfieldGrid(source), context)
       .then(compiled => (compiled ? continueMeshGeometryPreparation({ ...compiled, uvs: null }, context) : undefined))
       .then(processed => {
-        if (!processed || !isCurrent()) return;
+        if (!processed || !task.isCurrent()) return;
         const geometry = createMeshGeometryResources(this.#device, meshUpload(processed));
-        if (!isCurrent()) {
+        if (!task.complete()) {
           destroyMeshGeometryResources(geometry);
           return;
         }
-        this.#heightfieldFallbackPreparations.delete(layer);
         this.#replacePreparedHeightfieldFallback(layer, { geometry, processed, source });
         this.#requestRender();
       })
       .catch(error => {
-        if (!isCurrent()) return;
-        this.#heightfieldFallbackPreparations.delete(layer);
-        this.#onFailure(error);
+        if (task.fail()) this.#onFailure(error);
       });
   }
 
@@ -686,12 +681,15 @@ export class MeshRenderer {
   #uploadAttribute(options: MeshAttributeUploadOptions): void {
     const { attribute, buffer, changed, data, historyComplete, values } = options;
     if (!changed) return;
-    const ranges = data.geometryUploadRanges.filter(range => range.attribute === attribute);
-    const fragmented = data.indices !== null && data.normals === null && ranges.length > MAX_INDEXED_FLAT_UPLOAD_RANGES;
-    if (!historyComplete || fragmented) {
+    if (!historyComplete) {
       uploadMeshGeometryBuffer({ buffer, device: this.#device, values });
       return;
     }
+    const ranges = planBufferUploads({
+      byteLength: values.byteLength,
+      maxWrites: data.indices !== null && data.normals === null ? MAX_INDEXED_FLAT_UPLOAD_RANGES : undefined,
+      ranges: data.geometryUploadRanges.filter(range => range.attribute === attribute)
+    });
     for (const range of ranges) uploadMeshGeometryBuffer({ buffer, device: this.#device, range, values });
   }
 
@@ -776,9 +774,7 @@ export class MeshRenderer {
       this.#heightfieldIndexPreparations,
       this.#meshPreparations
     ]) {
-      for (const layer of collection.keys()) {
-        if (!liveLayers.has(layer)) collection.delete(layer);
-      }
+      collection.retain(liveLayers);
     }
     for (const layer of this.#preparedHeightfieldFallbacks.keys()) {
       if (!liveLayers.has(layer)) this.#discardPreparedHeightfieldFallback(layer);
@@ -829,9 +825,7 @@ export class MeshRenderer {
     ) {
       return this.#replaceInstanceResources(item.layer, bytes, count);
     }
-    ranges.forEach(range =>
-      writeSharedInstanceBuffer({ bytes, device: this.#device, lease: existing.instance, range })
-    );
+    writeSharedInstanceBufferRanges({ bytes, device: this.#device, lease: existing.instance, ranges });
     return existing;
   }
 

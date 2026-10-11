@@ -15,6 +15,7 @@ import {
   type SceneGPUTexture
 } from '../../gpu/platform.js';
 import { writeMat4ToFloat32 } from '../../math/mat4.js';
+import { planBufferUploads } from '../../gpu/buffer-upload-plan.js';
 import { PICK_OUTPUT_WGSL } from '../../rendering/picking/wgsl.js';
 import { OIT_WGSL, oitTargetStates } from '../../rendering/transparency.js';
 import type { Matrix4 } from '../../math/types.js';
@@ -22,6 +23,7 @@ import type { LabelRenderItem } from '../../rendering/render-items.js';
 import { getLabelFontAtlas, LABEL_REFERENCE_LINE_HEIGHT, type LabelFontAtlas } from './font/atlas.js';
 import { createLabelGlyphRun, LABEL_GLYPH_STRIDE, prepareLabelGlyphRun, type LabelGlyphRun } from './glyph-run.js';
 import { createPreparationContext, PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
+import { GenerationTasks, type GenerationTask } from '../../structures/generation-tasks.js';
 import { SRGB_TO_LINEAR_WGSL } from '../../color/transfer.js';
 import { parseCSSColor, srgbToLinear } from '../../color/color.js';
 
@@ -83,7 +85,7 @@ export class LabelRenderer {
   readonly #device: LabelRendererDevice;
   readonly #layers = new Map<HTMLElement, LabelLayerResources>();
   readonly #onFailure: (error: unknown) => void;
-  readonly #preparations = new Map<HTMLElement, LabelPreparation>();
+  readonly #preparations = new GenerationTasks<HTMLElement, LabelPreparation>();
   readonly #pickId = new Uint32Array(1);
   readonly #pickPipeline: SceneGPURenderPipeline;
   readonly #sampler: SceneGPUSampler;
@@ -141,7 +143,7 @@ export class LabelRenderer {
   }
 
   #suspendLayer(layer: HTMLElement): void {
-    this.#preparations.delete(layer);
+    this.#preparations.cancel(layer);
     const resources = this.#layers.get(layer);
     if (resources) resources.glyphCount = 0;
   }
@@ -165,7 +167,7 @@ export class LabelRenderer {
       if (liveLayers.has(layer)) continue;
       destroyLayerResources(resources);
       this.#layers.delete(layer);
-      this.#preparations.delete(layer);
+      this.#preparations.cancel(layer);
     }
   }
 
@@ -217,7 +219,7 @@ export class LabelRenderer {
     bytes: Uint8Array,
     previous: LabelLayerResources | undefined
   ): LabelLayerResources {
-    this.#preparations.delete(item.layer);
+    this.#preparations.cancel(item.layer);
     const glyphCapacity = LABEL_GLYPH_STRIDE;
     const resources: LabelLayerResources = {
       bindGroups: new WeakMap(),
@@ -251,19 +253,20 @@ export class LabelRenderer {
       resources.sourceBytes = bytes;
       return;
     }
-    for (const range of item.data.uploadRanges) {
-      const end = Math.min(bytes.byteLength, range.offset + range.size);
-      if (end > range.offset) {
-        // eslint-disable-next-line local-performance/no-gpu-upload-in-loop -- The stream supplies merged ranges to this bounded upload loop.
-        this.#device.queue.writeBuffer(resources.label, range.offset, bytes.subarray(range.offset, end));
-      }
+    for (const range of planBufferUploads({ byteLength: bytes.byteLength, ranges: item.data.uploadRanges })) {
+      // eslint-disable-next-line local-performance/no-gpu-upload-in-loop -- The planner supplies disjoint aligned ranges to this bounded upload loop.
+      this.#device.queue.writeBuffer(
+        resources.label,
+        range.offset,
+        bytes.subarray(range.offset, range.offset + range.size)
+      );
     }
   }
 
   // eslint-disable-next-line complexity -- Prepared prefixes and pending generations have independent count and text identities.
   #prepareChangedText(resources: LabelLayerResources, item: LabelRenderItem): void {
     if (resources.textVersion === item.data.textVersion && item.data.count < resources.glyphOffsets.length) {
-      this.#preparations.delete(item.layer);
+      this.#preparations.cancel(item.layer);
       this.#selectGlyphPrefix(resources, item.data);
       return;
     }
@@ -283,7 +286,7 @@ export class LabelRenderer {
       textVersion: item.data.textVersion
     };
     if (labelGlyphWorkIsBounded(preparation.texts, preparation.count)) {
-      this.#preparations.delete(item.layer);
+      this.#preparations.cancel(item.layer);
       this.#installGlyphRun(
         resources,
         preparation,
@@ -291,31 +294,27 @@ export class LabelRenderer {
       );
       return;
     }
-    this.#preparations.set(item.layer, preparation);
+    const task = this.#preparations.start(item.layer, preparation);
     if (resources.sourceCount !== item.data.sourceCount || resources.labelCount !== item.data.count) {
       resources.glyphCount = 0;
     }
-    void this.#runTextPreparation(item.layer, preparation);
+    void this.#runTextPreparation(task);
   }
 
-  async #runTextPreparation(layer: HTMLElement, preparation: LabelPreparation): Promise<void> {
-    const isCurrent = () =>
-      this.#preparations.get(layer) === preparation && this.#layers.get(layer) === preparation.resources;
+  async #runTextPreparation(task: GenerationTask<LabelPreparation>): Promise<void> {
+    const preparation = task.value;
     try {
       const glyphRun = await prepareLabelGlyphRun({
         atlas: this.#atlas,
-        context: createPreparationContext(isCurrent),
+        context: createPreparationContext(task.isCurrent),
         count: preparation.count,
         texts: preparation.texts
       });
-      if (!glyphRun || !isCurrent()) return;
+      if (!glyphRun || !task.isCurrent()) return;
       this.#installGlyphRun(preparation.resources, preparation, glyphRun);
-      this.#preparations.delete(layer);
-      this.#requestRender();
+      if (task.complete()) this.#requestRender();
     } catch (error) {
-      if (!isCurrent()) return;
-      this.#preparations.delete(layer);
-      this.#onFailure(error);
+      if (task.fail()) this.#onFailure(error);
     }
   }
 

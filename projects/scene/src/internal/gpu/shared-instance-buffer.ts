@@ -3,7 +3,9 @@
 
 import type { SceneGPUBuffer, SceneGPUBufferDescriptor, SceneGPUDevice, SceneGPUQueue } from './platform.js';
 import { planStoragePartitions, type StoragePartition } from './partition.js';
+import { planBufferUploads } from './buffer-upload-plan.js';
 import { ByteTransferIndex, type ByteTransferSpan } from '../structures/byte-transfer-index.js';
+import type { RangeInterval } from '../structures/range-interval.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
@@ -101,6 +103,16 @@ export function writeSharedInstanceBuffer(options: WriteSharedInstanceBufferOpti
       bytes.subarray(sourceOffset, sourceOffset + size)
     );
   });
+}
+
+/** Plans a dirty range union before routing writes into duplicated or wrapped GPU partitions. */
+export function writeSharedInstanceBufferRanges(
+  options: Omit<WriteSharedInstanceBufferOptions, 'range'> & { readonly ranges: readonly Readonly<RangeInterval>[] }
+): void {
+  const { bytes, device, lease } = options;
+  if (options.ranges.length === 0) return;
+  const ranges = planBufferUploads({ byteLength: lease.byteLength, ranges: options.ranges });
+  for (const range of ranges) writeSharedInstanceBuffer({ bytes, device, lease, range });
 }
 
 function writeSinglePartition(options: WriteSharedInstanceBufferOptions): boolean {
