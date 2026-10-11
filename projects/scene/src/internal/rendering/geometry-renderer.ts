@@ -13,7 +13,7 @@ import {
 } from '../gpu/platform.js';
 import {
   acquireSharedInstanceBuffer,
-  writeSharedInstanceBuffer,
+  writeSharedInstanceBufferRanges,
   type SharedInstanceBufferLease
 } from '../gpu/shared-instance-buffer.js';
 import { createUploadedBuffer } from '../gpu/uploaded-buffer.js';
@@ -397,9 +397,7 @@ export class GeometryRenderer {
     ) {
       return this.#replaceLayerResources({ allocation, bytes, device, item, resources });
     }
-    for (const range of item.data.uploadRanges) {
-      writeSharedInstanceBuffer({ bytes, device, lease: resources.instance, range });
-    }
+    writeSharedInstanceBufferRanges({ bytes, device, lease: resources.instance, ranges: item.data.uploadRanges });
     return resources;
   }
 
