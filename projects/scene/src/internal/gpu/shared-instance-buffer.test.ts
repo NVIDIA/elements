@@ -10,6 +10,7 @@ import type { SceneGPUBuffer } from './platform.js';
 import {
   acquireSharedInstanceBuffer,
   writeSharedInstanceBuffer,
+  writeSharedInstanceBufferRanges,
   type SharedInstanceBufferDevice
 } from './shared-instance-buffer.js';
 
@@ -161,6 +162,61 @@ describe('shared instance buffers', () => {
       lease.release();
     }
   );
+
+  it('normalizes a batch before splitting aligned writes across active partitions', () => {
+    const { buffers, device, writeBuffer } = createMemoryDevice({
+      maxBufferSize: 32,
+      maxStorageBufferBindingSize: 32
+    });
+    const bytes = new Uint8Array(new ArrayBuffer(112), 8, 96);
+    bytes.fill(7);
+    const lease = acquireSharedInstanceBuffer(device, bytes, { byteLength: 64, stride: 16 });
+    const ranges = [
+      { offset: 33, size: 1 },
+      { offset: 29, size: 4 },
+      { offset: 31, size: 2 },
+      { offset: 64, size: 32 }
+    ];
+    for (const range of ranges) bytes.fill(9, range.offset, range.offset + range.size);
+    writeBuffer.mockClear();
+    writeSharedInstanceBufferRanges({ bytes, device, lease, ranges });
+    expect(writeBuffer.mock.calls.map(([, offset, data]) => [offset, data.byteLength])).toEqual([
+      [28, 4],
+      [0, 4]
+    ]);
+    for (const partition of lease.partitions)
+      expect(buffers.get(partition.buffer)).toEqual(mappedBytes(bytes, partition));
+    writeBuffer.mockClear();
+    writeSharedInstanceBufferRanges({ bytes, device, lease, ranges: [] });
+    expect(writeBuffer).not.toHaveBeenCalled();
+    lease.release();
+  });
+
+  it.each(['strip', 'loop'] as const)('routes merged batches into duplicated line %s records', topology => {
+    const { buffers, device, writeBuffer } = createMemoryDevice({
+      maxBufferSize: 4096,
+      maxStorageBufferBindingSize: LINE_VERTEX.stride * 4
+    });
+    const allocation = getInstanceAllocation(createLineItem(20, topology), device);
+    const bytes = Uint8Array.from({ length: allocation.byteLength }, (_value, index) => index % 251);
+    const lease = acquireSharedInstanceBuffer(device, bytes, allocation);
+    const ranges = [
+      { offset: bytes.byteLength - 4, size: 4 },
+      { offset: LINE_VERTEX.stride * 3, size: LINE_VERTEX.stride * 2 },
+      { offset: LINE_VERTEX.stride * 4, size: LINE_VERTEX.stride },
+      { offset: 1, size: 2 }
+    ];
+    for (const range of ranges) bytes.fill(255, range.offset, range.offset + range.size);
+    writeBuffer.mockClear();
+    writeSharedInstanceBufferRanges({ bytes, device, lease, ranges });
+    for (const partition of lease.partitions)
+      expect(buffers.get(partition.buffer)).toEqual(mappedBytes(bytes, partition));
+    for (const [, offset, data] of writeBuffer.mock.calls) {
+      expect(offset % 4).toBe(0);
+      expect(data.byteLength % 4).toBe(0);
+    }
+    lease.release();
+  });
 
   it('honors reordered and overlapping destination spans on a full single-partition update', () => {
     const { buffers, device } = createMemoryDevice();
