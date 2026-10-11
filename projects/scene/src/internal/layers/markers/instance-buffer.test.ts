@@ -154,6 +154,46 @@ describe('marker instance buffer', () => {
     expect(buffer.takeUploadRanges()).toEqual([{ offset: 0, size: MARKER.stride * 2 }]);
   });
 
+  it('should isolate batched marker classifications across prepared snapshots and later commits', () => {
+    const count = 4353;
+    const source = new Uint8Array(MARKER.stride * count);
+    for (let index = 0; index < count; index += 1) writeMarker(source, index, { position: [0, 0, 0] });
+    const buffer = new MarkerInstanceBuffer();
+    buffer.replace(source);
+    buffer.takeUploadRanges();
+    for (const index of [255, 256, 257]) {
+      writeMarker(source, index, { position: [0, 0, 0], color: [1, 1, 1, 0.5], outlineColor: [1, 1, 1, 1] });
+    }
+    buffer.commit(255, 3);
+    const prepared = required(buffer.createPreparedSnapshot(), 'Expected a prepared marker snapshot.');
+    const sibling = new MarkerInstanceBuffer();
+    sibling.replacePrepared(source, prepared);
+    for (const index of [255, 256, 257]) writeMarker(source, index, { position: [0, 0, 0] });
+    buffer.commit(255, 3);
+    expect(buffer.hasPartialFaceAlpha(count)).toBe(false);
+    expect(buffer.hasVisibleOutlineAlpha(count)).toBe(false);
+    expect(sibling.hasPartialFaceAlpha(255)).toBe(false);
+    expect(sibling.hasPartialFaceAlpha(256)).toBe(true);
+    expect(sibling.hasOpaqueOutlineAlpha(258)).toBe(true);
+
+    for (let index = 0; index < count; index += 1) {
+      writeMarker(source, index, {
+        position: [0, 0, 0],
+        color: [1, 1, 1, 0.5],
+        outlineColor: [1, 1, 1, 0.5]
+      });
+    }
+    buffer.commit();
+    expect(buffer.ready).toBe(true);
+    expect(buffer.hasOpaqueFaceAlpha(count)).toBe(false);
+    expect(buffer.hasOpaqueOutlineAlpha(count)).toBe(false);
+    expect(buffer.hasPartialFaceAlpha(count)).toBe(true);
+    expect(buffer.hasPartialOutlineAlpha(count)).toBe(true);
+    expect(sibling.hasPartialOutlineAlpha(count)).toBe(false);
+    expect(buffer.getBounds(count)).toMatchObject({ minimumX: -1, maximumX: 1 });
+    expect(buffer.takeUploadRanges()).toEqual([{ offset: 0, size: source.byteLength }]);
+  });
+
   it('should reject invalid commit ranges and no-op without a source', () => {
     const buffer = new MarkerInstanceBuffer();
     expect(() => buffer.commit(-1)).not.toThrow();
