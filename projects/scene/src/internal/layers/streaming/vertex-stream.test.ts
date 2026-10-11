@@ -187,6 +187,49 @@ describe('vertex stream buffer', () => {
     expect(stream.toRenderData({ consumeUploadRanges: false })).toMatchObject({ opaque: true, transparent: false });
   });
 
+  it.each([
+    ['packed points', POINT, {}],
+    ['default lines', LINE_VERTEX, {}],
+    ['custom points', POINT, { validateRecord: () => true }]
+  ] as const)('batches %s commits and isolates prepared summaries', (_name, layout, options) => {
+    const count = 4353;
+    const source = new Uint8Array(layout.stride * count);
+    const write = layout === LINE_VERTEX ? writeLineVertex : writePoint;
+    for (let index = 0; index < count; index += 1) write(source, index, { position: [index, 0, 0] });
+    const stream = new VertexStreamBuffer(layout, options);
+    stream.replace(source);
+    stream.takeUploadRanges();
+
+    for (let index = 0; index < count; index += 1) {
+      write(source, index, { position: [index, 0, 0], color: [1, 1, 1, 0.5] });
+    }
+    stream.commit();
+    const prepared = required(stream.createPreparedSnapshot(), 'Expected a prepared vertex snapshot.');
+    const sibling = new VertexStreamBuffer(layout, options);
+    sibling.replacePrepared(source, undefined, prepared);
+
+    write(source, 255, { position: [255, 0, 0] });
+    write(source, 256, { position: [256, 0, 0] });
+    new DataView(source.buffer).setFloat32(256 * layout.stride, Number.NaN, true);
+    stream.commit(255, 2);
+    stream.count = 256;
+    expect(stream.ready).toBe(true);
+    stream.count = 257;
+    expect(stream.ready).toBe(false);
+    expect(stream.hasOpacity(257)).toBe(true);
+    expect(stream.hasOpacity(257, true)).toBe(true);
+    expect(sibling.toRenderData({ consumeUploadRanges: false })).toMatchObject({
+      ready: true,
+      opaque: false,
+      transparent: true
+    });
+
+    write(source, 256, { position: [256, 0, 0] });
+    stream.commit(256, 1);
+    expect(stream.ready).toBe(true);
+    expect(stream.takeUploadRanges()).toEqual([{ offset: 0, size: source.byteLength }]);
+  });
+
   it('validates stride and recovers a touched range through commit', () => {
     const stream = new VertexStreamBuffer(POINT);
     stream.replace(new Uint8Array(1));
