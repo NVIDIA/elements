@@ -90,12 +90,12 @@ describe('MeshRenderer', () => {
     expect(gpu.buffers).toHaveLength(allocations);
   });
 
-  it('bounds upload calls when one source vertex appears in many separated corners', () => {
+  it.each([64, 65])('bounds upload calls when one source vertex appears in %s separated corners', count => {
     const gpu = createGpu();
     renderer = new MeshRenderer(gpu.device, 'bgra8unorm');
     const item = createMeshItem();
     const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
-    const indices = Uint32Array.from({ length: 65 * 3 }, (_, corner) => corner % 3);
+    const indices = Uint32Array.from({ length: count * 3 }, (_, corner) => corner % 3);
     replaceMeshGeometry(item.layer, { positions, indices });
     renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
     const writes = vi.mocked(gpu.device.queue.writeBuffer);
@@ -108,7 +108,9 @@ describe('MeshRenderer', () => {
       writes.mock.calls
         .filter(([buffer]) => buffer === positionBuffer)
         .map(([, offset, data]) => [offset, data.byteLength])
-    ).toEqual([[0, indices.length * 12]]);
+    ).toEqual(
+      count === 65 ? [[0, indices.length * 12]] : Array.from({ length: count }, (_, index) => [index * 36, 12])
+    );
   });
 
   it('retains both edits when a newer publication cancels a pending indexed preparation', async () => {
