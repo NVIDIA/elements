@@ -10,6 +10,7 @@ import {
   runPreparationSync
 } from './preparation.js';
 import { configureSceneTesting, resetSceneTesting } from '../testing/scene.js';
+import { GenerationTasks } from '../structures/generation-tasks.js';
 
 afterEach(resetSceneTesting);
 describe('preparation scheduling', () => {
@@ -40,6 +41,48 @@ describe('preparation scheduling', () => {
 });
 
 describe('bounded preparation traversal', () => {
+  it.each(['cancel', 'supersede', 'clear'] as const)(
+    'closes a generation-owned traversal after %s without disturbing replacement work',
+    async operation => {
+      const tasks = new GenerationTasks<string, number>();
+      const task = tasks.start('layer', 1);
+      const close = vi.fn();
+      const continueWork = vi.fn();
+      let release = () => {};
+      let yields = 0;
+      function* steps(): Generator<void, number, void> {
+        try {
+          yield;
+          continueWork();
+          return 1;
+        } finally {
+          close();
+        }
+      }
+      const pending = runPreparation(steps(), {
+        isCurrent: task.isCurrent,
+        yield: () => {
+          yields += 1;
+          return yields === 1 ? Promise.resolve() : new Promise<void>(resolve => (release = resolve));
+        }
+      });
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(yields).toBe(2);
+      if (operation === 'cancel') tasks.cancel('layer');
+      if (operation === 'clear') tasks.clear();
+      const replacement = tasks.start('layer', 2);
+      release();
+      await expect(pending).resolves.toBeUndefined();
+      expect(close).toHaveBeenCalledOnce();
+      expect(continueWork).not.toHaveBeenCalled();
+      expect(task.complete()).toBe(false);
+      expect(task.fail()).toBe(false);
+      expect(replacement.isCurrent()).toBe(true);
+      expect(tasks.get('layer')).toBe(2);
+    }
+  );
+
   it('continues an enclosing task without another initial yield and closes cancelled work', async () => {
     const close = vi.fn();
     const continueWork = vi.fn();

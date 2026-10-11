@@ -20,6 +20,76 @@ afterEach(() => {
 });
 
 describe('LabelRenderer', () => {
+  it('ignores a stale scheduling failure without removing the latest pending glyph task', async () => {
+    const gpu = createGpu();
+    const requestRender = vi.fn();
+    const onFailure = vi.fn();
+    const yields = controlledLabelYields();
+    renderer = new LabelRenderer(gpu.device, requestRender, onFailure);
+    const first = createLabelItem('A'.repeat(9000));
+    const latest = {
+      ...first,
+      data: { ...first.data, texts: ['B'.repeat(9001)], textVersion: first.data.textVersion + 1 }
+    };
+    renderer.prepare(first, identityMat4(), frame);
+    renderer.prepare(first, identityMat4(), frame);
+    expect(yields).toHaveLength(1);
+    renderer.prepare(latest, identityMat4(), frame);
+    expect(yields).toHaveLength(2);
+    yields[0]!.reject(new Error('obsolete label failure'));
+    await new Promise<void>(resolve => setTimeout(resolve, 0));
+    expect(onFailure).not.toHaveBeenCalled();
+    expect(requestRender).not.toHaveBeenCalled();
+    renderer.prepare(latest, identityMat4(), frame);
+    expect(yields).toHaveLength(2);
+    configureSceneTesting({ yieldForPreparation: async () => undefined });
+    yields[1]!.resolve();
+    await vi.waitFor(() => expect(requestRender).toHaveBeenCalledOnce());
+    expect(renderer.readyFor(latest)).toBe(true);
+    renderer.draw(gpu.pass, latest);
+    expect(gpu.pass.draw).toHaveBeenCalledWith(54006);
+  });
+
+  it('reports a current glyph preparation failure once and permits a fresh attempt', async () => {
+    const gpu = createGpu();
+    const requestRender = vi.fn();
+    const onFailure = vi.fn();
+    const yields = controlledLabelYields();
+    renderer = new LabelRenderer(gpu.device, requestRender, onFailure);
+    const item = createLabelItem('A'.repeat(9000));
+    renderer.prepare(item, identityMat4(), frame);
+    const error = new Error('current label failure');
+    yields[0]!.reject(error);
+    await vi.waitFor(() => expect(onFailure).toHaveBeenCalledExactlyOnceWith(error));
+    configureSceneTesting({ yieldForPreparation: async () => undefined });
+    renderer.prepare(item, identityMat4(), frame);
+    await vi.waitFor(() => expect(requestRender).toHaveBeenCalledOnce());
+    expect(renderer.readyFor(item)).toBe(true);
+    expect(onFailure).toHaveBeenCalledOnce();
+  });
+
+  it.each(['suspend', 'prune', 'disconnect'] as const)('cancels pending glyph work on %s', async stop => {
+    const gpu = createGpu();
+    const requestRender = vi.fn();
+    const onFailure = vi.fn();
+    const yields = controlledLabelYields();
+    renderer = new LabelRenderer(gpu.device, requestRender, onFailure);
+    const item = createLabelItem('A'.repeat(9000));
+    renderer.prepare(item, identityMat4(), frame);
+    if (stop === 'prune') renderer.prune(new Set());
+    else if (stop === 'disconnect') renderer.disconnect();
+    else renderer.prepare({ ...item, data: { ...item.data, ready: false } }, identityMat4(), frame);
+    const allocations = gpu.buffers.length;
+    vi.mocked(gpu.device.queue.writeBuffer).mockClear();
+    yields[0]!.resolve();
+    await new Promise<void>(resolve => setTimeout(resolve, 0));
+    expect(gpu.buffers).toHaveLength(allocations);
+    expect(gpu.device.queue.writeBuffer).not.toHaveBeenCalled();
+    expect(requestRender).not.toHaveBeenCalled();
+    expect(onFailure).not.toHaveBeenCalled();
+    if (stop === 'disconnect') renderer = undefined;
+  });
+
   it('prepares six vertices per visible glyph and caches draw bind groups', () => {
     const gpu = createGpu();
     renderer = new LabelRenderer(gpu.device);
@@ -239,4 +309,15 @@ function glyphUploads(gpu: ReturnType<typeof createGpu>): ArrayBufferView[] {
     .mocked(gpu.device.queue.writeBuffer)
     .mock.calls.map(([, , bytes]) => bytes)
     .filter(bytes => bytes instanceof Uint8Array);
+}
+
+function controlledLabelYields() {
+  const yields: Array<{ resolve(): void; reject(error: unknown): void }> = [];
+  configureSceneTesting({
+    yieldForPreparation: () =>
+      new Promise<void>((resolve, reject) => {
+        yields.push({ resolve, reject });
+      })
+  });
+  return yields;
 }
