@@ -36,6 +36,7 @@ packages:
   - projects/plot
   - projects/scene
   - projects/viewport
+  - projects/foundations
   - projects/styles
   - projects/themes
   - projects/internals/design
