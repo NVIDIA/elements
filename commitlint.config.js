@@ -20,6 +20,7 @@ export default {
         'ci',
         'deps',
         'docs',
+        'foundations',
         'internals',
         'create',
         'starters',
