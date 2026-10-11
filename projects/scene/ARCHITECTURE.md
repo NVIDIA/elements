@@ -45,7 +45,7 @@ Scene owns:
 - Canonical packed layouts and typed source APIs for frequently changing geometry.
 - Validation and capture of scene-local values at documented ownership boundaries.
 - Scene-local frame composition and camera projection.
-- Spatial primitives, meshes, surfaces, vector labels, and annotations.
+- Spatial primitives, meshes, surfaces, camera-facing SDF text labels, and annotations.
 - Bounded static model file loading and decoding through an isolated model loader.
 - Renderer snapshots that pair content with transforms, topology, units, and interaction configuration.
 - WebGPU resource creation, reuse, uploads, render passes, picking, cleanup, and device recovery.
@@ -95,6 +95,21 @@ The adapters in `layers/sources/` connect packed sources to layer-specific valid
 
 Keep structures independent of layer policies, record layouts, DOM elements, and GPU resources. Record range
 validation belongs in `records/`; marker bounds decoding belongs in `layers/markers/`.
+
+Flag prefix indexes use trees of block counts for all-record and even-record queries. Single-record edits update
+the trees eagerly; bulk scans accumulate signed deltas per 256-record block until a query or clone. The index
+selects sparse tree updates or linear rebuilding of affected channels from the number of changed blocks. Dense
+updates recover block counts from the trees without scanning record flags again. Reset and initialization discard
+pending deltas, and clones own independent flags and trees. Marker and vertex layers own record validation and
+flag meanings; the index owns batching and prefix aggregation.
+
+`GenerationTasks` owns one pending task per key. Each handle moves once from pending to completed, failed, cancelled,
+or superseded. Reusing an input creates a new handle; obsolete success and failure callbacks cannot release a newer
+task's key. Cancellation and owner removal invalidate handles before their next scheduling checkpoint. Completed
+handles release the key before render notifications, and settled handles release their registry callback. Mesh,
+grid, and label renderers use these handles with the preparation runner. Layers own input equivalence, GPU
+publication, and candidate cleanup. Returning to installed data cancels pending work for another source while keeping
+the installed resources drawable. Renderer disconnection cancels all pending handles.
 
 Marker bounds use a numeric segment tree over 256-record blocks. The marker layer owns visibility, decoding,
 and rebuilding changed blocks; the tree owns numeric unions and prefix aggregation. It batches ancestor updates
@@ -152,8 +167,8 @@ Mesh attributes keep these windows through cancelled preparations. Topology chan
 missing generations trigger a complete attribute rebuild and upload. The mesh layer owns attribute versions and topology
 policy; the journal owns numeric continuity and range unions. Empty publications preserve continuity and can reuse
 expanded attributes without GPU writes. Preparation copies changed output arrays before editing and uses the same bounded
-traversal as synchronous processing. Publication still copies and validates complete source geometry. GPU uploads merge adjacent
-ranges and use a complete attribute upload when more than 64 expanded ranges would require separate writes.
+traversal as synchronous processing. Publication still copies and validates complete source geometry. GPU uploads use the
+shared buffer upload planner and a complete attribute upload when more than 64 expanded ranges would require separate writes.
 
 `RangeMap` stores sorted integer ranges without overlaps and provides point lookup. Picking uses these snapshots to map GPU
 IDs to layer metadata. Submitted readbacks keep their original map when a later frame changes the ID assignments.
@@ -165,6 +180,17 @@ transfers use linear traversal; reordered matches keep their original write prec
 and cache the index on their first partitioned update, then keep it across leases and snapshot reassignment. The GPU owner
 clips updates to active source bytes and keeps a direct path for one contiguous allocation. Mesh instances use the same
 buffer owner. Planar mesh attributes keep direct uploads and the renderer's existing fragmentation policy.
+
+`planBufferUploads` owns byte-range selection without owning source snapshots or GPU resources. It clips ranges to
+available bytes, aligns writes to four bytes, and merges overlaps and adjacency through `RangeSet`. A configurable
+write cost merges clean gaps when their byte cost is no greater than the saved call cost. This minimizes source bytes
+plus planned write count times call overhead before applying the write budget or partition mapping. If the plan exceeds
+the write budget, the planner selects a complete upload without searching for a lower-cost plan within the budget.
+Partition mapping can increase actual transferred bytes and GPU write count by duplicating boundary records or splitting
+ranges. Consumers use zero call overhead by default to preserve clean gaps. The planner reuses normalized inputs and
+leaves other inputs unchanged. Shared instance storage plans source ranges before partition mapping; labels and planar
+mesh attributes use the same planner. Partition mapping owns duplicated boundary records, wrapped storage, and destination
+limits.
 
 Performance examples embed local copies of `Float64RingBuffer` for bounded numeric sample windows. Each diagnostic
 script contains its helper; the rendering runtime does not collect sample history.
@@ -234,6 +260,10 @@ Publication ranges communicate which records changed. CPU validation, snapshot u
 with that range or with the newly activated data. They should not routinely scan or upload an entire capacity for a
 small change.
 
+Mesh geometry publication has a current exception: each publication copies the complete published attribute and
+validates the complete geometry, even for a small range. Published ranges guide later attribute patches and GPU
+uploads. Range-proportional capture and validation remain design targets for this path.
+
 Topology changes may require complete preparation because they change how the renderer interprets a source. APIs and
 tests must distinguish topology replacement from an attribute-only or record-only update.
 
@@ -267,6 +297,11 @@ Replacement follows an ownership sequence: prepare the next generation, install 
 release the superseded generation. Disconnection, layer removal, resize, device loss, and failed initialization must
 all have deterministic cleanup paths.
 
+`SharedDeviceService` owns one device shared by Scene instances. Each scene owns its canvas context and renderer
+resources. Disconnection releases those scene resources and removes the scene's device-loss listener while retaining
+the shared device for later connections. Device loss invalidates affected renderers and starts automatic recovery.
+A second loss within ten seconds blocks further automatic recovery until a scene reconnects.
+
 ### Keep asynchronous work generation-safe
 
 Optional rendering systems may load lazily. A completion from an obsolete connection, renderer, or WebGPU device must
@@ -291,17 +326,20 @@ measure completed GPU execution. Do not describe either result as GPU time.
 
 ## Failure and diagnostic architecture
 
-Scene fails closed for data that it knows is invalid. It reports invalid component state through local Scene
-diagnostics and keeps unrelated layers usable. Immediate violations of a JavaScript API contract may throw before
-Scene stores the value.
+Scene fails closed for spatial and record data that it knows is invalid. It reports invalid geometry, transforms, and
+records through local Scene diagnostics and keeps unrelated layers usable. Immediate violations of a JavaScript API
+contract may throw before Scene stores the value.
+
+Appearance handling has a separate default policy. Unsupported CSS colors can fall back without diagnostics; mesh
+colors fall back to white. These defaults do not permit repair of invalid geometry, transforms, or records.
 
 Use a whole-scene unavailable state only when Scene cannot render reliably, such as adapter acquisition, canvas
 configuration, device loss, or a required renderer failure. The adapter must reject malformed domain messages and
 unsupported producer values or report them at the affected Scene boundary instead of presenting a WebGPU outage.
 
-Diagnostics must identify the affected element and provide a stable error code. They must not silently repair data in
-a way that changes its meaning. The application decides whether to keep an older snapshot, show stale state, retry,
-or replace the source.
+Diagnostics must identify the affected element and provide a stable error code. Scene must not silently repair spatial
+or record data in a way that changes its meaning. The application decides whether to keep an older snapshot, show stale
+state, retry, or replace the source.
 
 ## Non-goals
 
