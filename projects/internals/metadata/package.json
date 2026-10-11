@@ -120,6 +120,8 @@
         "../../monaco/dist/custom-elements.json",
         "../../viewport/package.json",
         "../../viewport/dist/custom-elements.json",
+        "../../foundations/package.json",
+        "../../foundations/dist/custom-elements.json",
         "../../patterns/package.json",
         "../../patterns/dist/custom-elements.json",
         "../../plot/dist/custom-elements.json",
@@ -169,6 +171,10 @@
         },
         {
           "script": "../../scene:build",
+          "cascade": false
+        },
+        {
+          "script": "../../foundations:build",
           "cascade": false
         },
         {
