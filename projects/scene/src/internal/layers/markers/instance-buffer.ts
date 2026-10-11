@@ -54,7 +54,6 @@ const FACE_ALPHA_OFFSET = getFieldOffset(MARKER, 'color') + 3;
 const OUTLINE_ALPHA_OFFSET = getFieldOffset(MARKER, 'outline-color') + 3;
 const FLOATS_PER_RECORD = MARKER.stride / Float32Array.BYTES_PER_ELEMENT;
 const PLATFORM_IS_LITTLE_ENDIAN = new Uint8Array(new Uint16Array([1]).buffer)[0] === 1;
-const MAX_INCREMENTAL_SUMMARY_CHANGES = 1_024;
 const INVALID_RECORD = 1;
 const PARTIAL_FACE_ALPHA = 2;
 const PARTIAL_OUTLINE_ALPHA = 4;
@@ -222,8 +221,11 @@ export class MarkerInstanceBuffer {
       return;
     }
     const source = this.#getBoundsSource(ownedBytes);
-    for (let index = start; index < start + count; index += 1) {
-      this.#summary.updateFlags(index, this.#scanRecordFlags(index, source));
+    if (count === 1) this.#summary.updateFlags(start, this.#scanRecordFlags(start, source));
+    else {
+      for (let index = start; index < start + count; index += 1) {
+        this.#summary.updateFlagsBatched(index, this.#scanRecordFlags(index, source));
+      }
     }
     this.#bounds.updateBlocks({
       ...source,
@@ -307,30 +309,13 @@ export class MarkerInstanceBuffer {
     const source = this.#getBoundsSource(bytes);
     const count = bytes.byteLength / MARKER.stride;
     this.#bounds.reset(count);
-    let changedRecords = 0;
-    let index = 0;
-    for (; index < count; index += 1) {
-      if (this.#updateRecord(index, source)) {
-        changedRecords += 1;
-        if (changedRecords > MAX_INCREMENTAL_SUMMARY_CHANGES) {
-          index += 1;
-          break;
-        }
-      }
+    if (count === 1) {
+      this.#summary.updateFlags(0, this.#scanRecordFlags(0, source, this.#bounds));
+      return;
     }
-    if (changedRecords <= MAX_INCREMENTAL_SUMMARY_CHANGES) return;
-    this.#finishSummaryRebuild(index, count, source);
-  }
-
-  #updateRecord(index: number, source: MarkerBoundsSource): boolean {
-    return this.#summary.updateFlags(index, this.#scanRecordFlags(index, source, this.#bounds));
-  }
-
-  #finishSummaryRebuild(index: number, count: number, source: MarkerBoundsSource): void {
-    for (let cursor = index; cursor < count; cursor += 1) {
-      this.#summary.setInitialFlags(cursor, this.#scanRecordFlags(cursor, source, this.#bounds));
+    for (let index = 0; index < count; index += 1) {
+      this.#summary.updateFlagsBatched(index, this.#scanRecordFlags(index, source, this.#bounds));
     }
-    this.#summary.finishInitialFlags();
   }
 
   #getStatus(): MarkerInstanceStatus {

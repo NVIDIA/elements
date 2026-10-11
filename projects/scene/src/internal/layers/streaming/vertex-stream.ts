@@ -46,7 +46,6 @@ interface OwnedRecordData {
 const INVALID_RECORD = 1;
 const TRANSPARENT_RECORD = 2;
 const OPAQUE_RECORD = 4;
-const MAX_INCREMENTAL_SUMMARY_CHANGES = 1_024;
 const PACKED_POSITION_COLOR_STRIDE = POINT.stride;
 const PACKED_COLOR_ALPHA_OFFSET = getFieldOffset(POINT, 'color') + 3;
 const PLATFORM_IS_LITTLE_ENDIAN = new Uint8Array(new Uint16Array([1]).buffer)[0] === 1;
@@ -91,21 +90,13 @@ function scanRevalidatedRecord(index: number, data: RevalidationData, options: R
 }
 
 function revalidateRecords(data: RevalidationData, options: RevalidationOptions, summary: FlagPrefixIndex): void {
-  let changedRecords = 0;
-  let rebuildSummary = false;
   const count = data.bytes.byteLength / options.stride;
   for (let index = 0; index < count; index += 1) {
-    const flags = scanRevalidatedRecord(index, data, options);
-    if (rebuildSummary) summary.setInitialFlags(index, flags);
-    else if (summary.updateFlags(index, flags)) {
-      changedRecords += 1;
-      rebuildSummary = changedRecords > MAX_INCREMENTAL_SUMMARY_CHANGES;
-    }
+    summary.updateFlagsBatched(index, scanRevalidatedRecord(index, data, options));
   }
-  if (rebuildSummary) summary.finishInitialFlags();
 }
 
-// eslint-disable-next-line complexity, max-params, max-statements -- @hotpath This default-layout scan keeps all record state scalar and avoids per-record helper calls.
+// eslint-disable-next-line max-params -- @hotpath This default-layout scan keeps all record state scalar and avoids per-record helper calls.
 function revalidateDefaultRecords(
   bytes: Uint8Array,
   records: DataView,
@@ -115,8 +106,6 @@ function revalidateDefaultRecords(
   positionWidth: number,
   colorOffset: number | undefined
 ): void {
-  let changedRecords = 0;
-  let rebuildSummary = false;
   const count = bytes.byteLength / stride;
   for (let index = 0; index < count; index += 1) {
     const byteOffset = index * stride;
@@ -130,13 +119,8 @@ function revalidateDefaultRecords(
     const alpha = colorOffset === undefined ? 255 : (bytes[byteOffset + colorOffset + 3] ?? 0);
     const flags =
       (invalid ? INVALID_RECORD : 0) | (alpha < 255 ? TRANSPARENT_RECORD : 0) | (alpha === 255 ? OPAQUE_RECORD : 0);
-    if (rebuildSummary) summary.setInitialFlags(index, flags);
-    else if (summary.updateFlags(index, flags)) {
-      changedRecords += 1;
-      rebuildSummary = changedRecords > MAX_INCREMENTAL_SUMMARY_CHANGES;
-    }
+    summary.updateFlagsBatched(index, flags);
   }
-  if (rebuildSummary) summary.finishInitialFlags();
 }
 
 // eslint-disable-next-line max-params -- @hotpath This commit scan keeps all record state scalar and avoids per-record helper calls.
@@ -164,7 +148,7 @@ function validateDefaultRecords(
     const alpha = colorOffset === undefined ? 255 : (bytes[byteOffset + colorOffset + 3] ?? 0);
     const flags =
       (invalid ? INVALID_RECORD : 0) | (alpha < 255 ? TRANSPARENT_RECORD : 0) | (alpha === 255 ? OPAQUE_RECORD : 0);
-    summary.updateFlags(index, flags);
+    summary.updateFlagsBatched(index, flags);
   }
 }
 
@@ -437,22 +421,30 @@ export class VertexStreamBuffer {
   #validateRecord(index: number, initial: boolean, data: OwnedRecordData): void {
     const flags = this.#scanRecordFlagsIn(index, data.bytes, data.records);
     if (initial) this.#summary.setInitialFlags(index, flags);
-    else this.#summary.updateFlags(index, flags);
+    else this.#summary.updateFlagsBatched(index, flags);
   }
 
-  // eslint-disable-next-line complexity -- @hotpath The default scan selects a scalar fast path before the extensible fallback.
+  // eslint-disable-next-line complexity, max-statements -- @hotpath Select single-record and bulk scalar scans before the extensible fallback.
   #validateCommittedRecords(start: number, count: number): void {
     const bytes = this.#ownedBytes;
     const floats = this.#ownedFloats;
     if (this.#usePackedPositionColorScan && bytes && floats) {
+      if (count === 1) {
+        this.#summary.updateFlags(start, packedPositionColorFlags(bytes, floats, start));
+        return;
+      }
       const end = start + count;
       for (let index = start; index < end; index += 1) {
-        this.#summary.updateFlags(index, packedPositionColorFlags(bytes, floats, index));
+        this.#summary.updateFlagsBatched(index, packedPositionColorFlags(bytes, floats, index));
       }
       return;
     }
     const records = this.#ownedView;
     if (!bytes || !records) return;
+    if (count === 1) {
+      this.#summary.updateFlags(start, this.#scanRecordFlagsIn(start, bytes, records));
+      return;
+    }
     if (this.validateRecord === undefined && this.opaqueRecord === undefined && this.transparentRecord === undefined) {
       const position = this.layout.fields.position;
       validateDefaultRecords(
@@ -601,6 +593,10 @@ export class VertexStreamBuffer {
     const bytes = this.#ownedBytes;
     const records = this.#ownedView;
     if (!bytes || !records) return;
+    if (bytes.byteLength === this.layout.stride) {
+      this.#summary.updateFlags(0, this.#scanRecordFlagsIn(0, bytes, records));
+      return;
+    }
     const position = this.layout.fields.position;
     if (this.validateRecord === undefined && this.opaqueRecord === undefined && this.transparentRecord === undefined) {
       revalidateDefaultRecords(
