@@ -91,6 +91,7 @@
         "./projects/plot:ci",
         "./projects/scene:ci",
         "./projects/viewport:ci",
+        "./projects/foundations:ci",
         "./projects/site:ci",
         "./projects/starters:ci",
         "./projects/starters/angular:ci",
@@ -147,6 +148,7 @@
         "./projects/plot:test:lighthouse",
         "./projects/scene:test:lighthouse",
         "./projects/viewport:test:lighthouse",
+        "./projects/foundations:test:lighthouse",
         "./projects/site:test:lighthouse"
       ],
       "output": [
@@ -316,6 +318,7 @@
         "./projects/monaco:lint:fix",
         "./projects/scene:lint:fix",
         "./projects/viewport:lint:fix",
+        "./projects/foundations:lint:fix",
         "./projects/site:lint:fix"
       ]
     },

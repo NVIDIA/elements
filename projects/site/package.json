@@ -108,6 +108,8 @@
         "../scene/dist/**/*.examples.json",
         "../viewport/dist/**/*.js",
         "../viewport/dist/**/*.examples.json",
+        "../foundations/dist/**/*.js",
+        "../foundations/dist/**/*.examples.json",
         "../internals/design/dist/DESIGN.md",
         "../internals/metadata/static/**",
         "../internals/patterns/dist/**/*.js",
@@ -178,6 +180,10 @@
         },
         {
           "script": "../viewport:build",
+          "cascade": false
+        },
+        {
+          "script": "../foundations:build",
           "cascade": false
         }
       ],
@@ -344,6 +350,7 @@
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
+    "@nvidia-elements/foundations": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/media": "workspace:*",
