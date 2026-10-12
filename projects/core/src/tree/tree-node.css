@@ -57,14 +57,16 @@ slot:not(:has-slotted) {
   margin-inline-start: var(--nve-ref-space-xxxs);
   padding: var(--nve-ref-size-200) var(--nve-ref-size-200) var(--nve-ref-size-200) var(--nve-ref-size-100);
   min-height: var(--min-height);
-  width: 100%;
 
   & slot {
     width: fit-content;
+    flex-shrink: 0;
   }
 
   & slot:not([name]) {
     width: 100%;
+    min-width: 0;
+    flex-shrink: 1;
     display: block;
     position: relative;
   }
@@ -75,7 +77,7 @@ slot:not(:has-slotted) {
   flex-direction: column;
   width: 100%;
   position: relative;
-  min-width: fit-content;
+  min-width: 0;
 }
 
 :host(:focus-visible) [part='_node-header'],

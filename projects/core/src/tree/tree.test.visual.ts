@@ -15,6 +15,36 @@ describe('tree visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
+  test.each(['', 'dark'] as const)('tree should truncate long labels within its width in theme=%s', async theme => {
+    const label =
+      '•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎_•︎•︎•︎•︎•︎•︎';
+    const report = await visualRunner.render(
+      `tree.truncate${theme ? '.dark' : ''}`,
+      `
+      <script type="module">
+        import '@nvidia-elements/core/tree/define.js';
+        document.documentElement.setAttribute('nve-theme', '${theme}');
+      </script>
+      <section nve-layout="column gap:lg" style="width: 600px;">
+        <nve-tree style="max-width: 500px; outline: 1px dashed red;">
+          <nve-tree-node style="outline: 1px dashed blue;">
+            <p nve-text="label truncate">${label}</p>
+          </nve-tree-node>
+        </nve-tree>
+        <nve-tree selectable="multi" style="width: 500px; outline: 1px dashed red;">
+          <nve-tree-node expanded style="outline: 1px dashed blue;">
+            <p nve-text="label truncate">${label}</p>
+            <nve-tree-node style="outline: 1px dashed blue;">
+              <p nve-text="label truncate">${label}</p>
+            </nve-tree-node>
+          </nve-tree-node>
+        </nve-tree>
+      </section>
+      `
+    );
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
   test('tree should preserve tree node title block rendering', async () => {
     const report = await visualRunner.render(
       'tree.title-block',
