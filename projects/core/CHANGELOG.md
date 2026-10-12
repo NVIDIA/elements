@@ -1,3 +1,14 @@
+## [2.15.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.1...@nvidia-elements/core-v2.15.2) (2026-10-12)
+
+### Features
+
+* **monaco:** upgrade monaco editor to 0.57.0 ([4d86c93](https://github.com/NVIDIA/elements/commit/4d86c930ad22a142cf426591b6850ef63c04540a))
+* **viewport:** init ([ac4651d](https://github.com/NVIDIA/elements/commit/ac4651df3bacfc68807eff2ec38e89dde0511b67))
+
+### Bug Fixes
+
+* **core:** migrate viewport to new package ([2ea0a3f](https://github.com/NVIDIA/elements/commit/2ea0a3f809f7b63d09c87227d56f7addc02ed544))
+
 ## [2.15.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.0...@nvidia-elements/core-v2.15.1) (2026-10-09)
 
 ### Features
