@@ -233,7 +233,7 @@ describe('ViewportAutoFitController', () => {
     expect(animationFrameCallbacks).toEqual(new Map());
   });
 
-  it('allows application or navigation ownership to consume a pending autofit', async () => {
+  it('does not apply a pending autofit after it is consumed', async () => {
     host.append(child({ height: 80, width: 120, x: 40, y: 30 }));
 
     enableAutoFit(host);

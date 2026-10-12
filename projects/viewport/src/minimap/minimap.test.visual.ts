@@ -5,26 +5,28 @@ import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
 
 describe('minimap visual', () => {
-  test('minimap should match visual baseline', async () => {
-    const report = await visualRunner.render('minimap', minimapTemplate(), { waitFor: waitForMinimap });
-    expect(report.maxDiffPercentage).toBeLessThan(1);
-  });
-
-  test('minimap should match visual baseline dark theme', async () => {
-    const report = await visualRunner.render('minimap.dark', minimapTemplate('dark'), {
+  test('automatic viewport minimap should match visual baseline', async () => {
+    const report = await visualRunner.render('minimap', minimapTemplate('', 'automatic'), {
       waitFor: waitForMinimap
     });
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test('minimap custom should match visual baseline', async () => {
+  test('automatic viewport minimap should match visual baseline dark theme', async () => {
+    const report = await visualRunner.render('minimap.dark', minimapTemplate('dark', 'automatic'), {
+      waitFor: waitForMinimap
+    });
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('custom viewport minimap should match visual baseline', async () => {
     const report = await visualRunner.render('minimap-custom', minimapTemplate('', 'custom'), {
       waitFor: waitForMinimap
     });
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test('minimap custom should match visual baseline dark theme', async () => {
+  test('custom viewport minimap should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('minimap-custom.dark', minimapTemplate('dark', 'custom'), {
       waitFor: waitForMinimap
     });
@@ -62,6 +64,10 @@ function minimapTemplate(theme: '' | 'dark' = '', preview: 'automatic' | 'custom
           <path d="M 700 290 L 810 400 L 700 510 L 590 400 Z" fill="var(--nve-ref-color-purple-lavender-600)"></path>
         </svg>`
       : '';
+  const minimap = /* html */ `<nve-viewport-minimap id="visual-minimap" commandfor="visual-minimap-viewport"
+    style="position: relative; inset: auto; width: 160px; max-width: none">
+    ${customPreview}
+  </nve-viewport-minimap>`;
   return /* html */ `
     <script type="module">
       import '@nvidia-elements/viewport/viewport/define.js';
@@ -72,10 +78,8 @@ function minimapTemplate(theme: '' | 'dark' = '', preview: 'automatic' | 'custom
     <nve-viewport id="visual-minimap-viewport" behavior-pan x="40" y="30" style="width: 500px; height: 320px; border: 1px solid currentColor">
       <nve-viewport-gridlines></nve-viewport-gridlines>
       ${content}
-      <nve-viewport-minimap id="visual-minimap">
-        ${customPreview}
-      </nve-viewport-minimap>
     </nve-viewport>
+    ${minimap}
     <script type="module">
       await customElements.whenDefined('nve-viewport-minimap');
       const minimap = document.querySelector('#visual-minimap');

@@ -55,3 +55,8 @@
 ::slotted([slot='overlay']) {
   pointer-events: auto;
 }
+
+::slotted(nve-viewport-minimap) {
+  --border: 0;
+  --border-radius: var(--nve-ref-border-radius-md);
+}
