@@ -11,7 +11,6 @@ import '@nvidia-elements/viewport/minimap/define.js';
 
 describe(ViewportMinimap.metadata.tag, () => {
   let fixture: HTMLElement;
-
   afterEach(() => removeFixture(fixture));
 
   it('should pass axe check with interactive viewport content', async () => {
@@ -31,6 +30,22 @@ describe(ViewportMinimap.metadata.tag, () => {
     await elementIsStable(minimap);
 
     const results = await runAxe(['nve-viewport']);
+    expect(results.violations.length).toBe(0);
+  });
+
+  it('should pass axe check for an external command control', async () => {
+    fixture = await createFixture(html`
+      <nve-viewport id="target" behavior-pan behavior-zoom style="width: 400px; height: 300px">
+        <div style="width: 800px; height: 600px">Content</div>
+      </nve-viewport>
+      <nve-viewport-minimap commandfor="target" style="position: relative; inset: auto"></nve-viewport-minimap>
+    `);
+    const minimap = fixture.querySelector('nve-viewport-minimap');
+    if (!minimap) throw new Error('Minimap fixture is missing.');
+    await elementIsStable(minimap);
+    expect(minimap.tabIndex).toBe(-1);
+    expect(minimap.getAttribute('aria-hidden')).toBe('true');
+    const results = await runAxe(['nve-viewport', ViewportMinimap.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

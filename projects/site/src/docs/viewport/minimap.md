@@ -13,4 +13,4 @@
 
 ## Custom Preview
 
-{% example '@nvidia-elements/viewport/minimap/minimap.examples.json' 'Default' '{ "inline": false, "height": "420px" }' %}
+{% example '@nvidia-elements/viewport/minimap/minimap.examples.json' 'CustomContent' '{ "inline": false, "height": "420px" }' %}

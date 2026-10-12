@@ -7,14 +7,8 @@ import {
   KeyNavigationSpatialController,
   type SpatialKeyCommand
 } from '@nvidia-elements/core/internal';
-import type {
-  ViewportPanProposal,
-  ViewportZoomProposal,
-  ViewportZoomRequestOptions,
-  ViewportTransform
-} from './viewport.types.js';
+import type { ViewportTransform } from './viewport.types.js';
 import type { ViewportZoomAction } from './viewport-navigation.types.js';
-import { contentPointFromViewport } from './viewport-projection.utils.js';
 
 const KEYBOARD_PAN_STEP = 20;
 const KEYBOARD_PAN_LARGE_STEP = 100;
@@ -26,7 +20,6 @@ interface PanDirection {
 
 interface DiscretePanRequest {
   readonly direction: PanDirection;
-  readonly source: 'command' | 'keyboard';
   readonly viewportPixelStep: number;
 }
 
@@ -34,11 +27,12 @@ type ViewportNavigationHost = HTMLElement &
   ReactiveControllerHost & {
     readonly pannable: boolean;
     readonly zoomable: boolean;
-    requestPan(proposal: ViewportPanProposal): boolean;
-    requestZoom(proposal: ViewportZoomProposal, options?: ViewportZoomRequestOptions): boolean;
   };
 
 interface ViewportNavigationDelegate {
+  readonly applyPan: (next: ViewportTransform) => void;
+  readonly applyZoom: (next: ViewportTransform, options: { readonly animated?: boolean }) => void;
+  readonly getCenteredZoomTarget: (scale: number) => ViewportTransform;
   readonly getTransform: () => ViewportTransform;
   readonly getZoomTarget: (action: ViewportZoomAction) => ViewportTransform | undefined;
 }
@@ -73,11 +67,12 @@ export class ViewportNavigationController implements ReactiveController {
   }
 
   #handleCommand = (event: CommandEvent): void => {
+    if (event.command === '--pan-to') return this.#panTo(event.source);
+    if (event.command === '--zoom-to') return this.#zoomTo(event.source);
     const panDirection = this.#host.pannable ? commandPanDirection(event.command) : undefined;
     if (panDirection) {
-      this.#requestDiscretePan(event, {
+      this.#requestDiscretePan({
         direction: panDirection,
-        source: 'command',
         viewportPixelStep: KEYBOARD_PAN_STEP
       });
       return;
@@ -86,28 +81,41 @@ export class ViewportNavigationController implements ReactiveController {
     const action = commandZoomAction(event.command);
     if (!action) return;
     const next = this.#delegate.getZoomTarget(action);
-    if (next) this.#requestZoom(event, next, 'command');
+    if (next) this.#delegate.applyZoom(next, { animated: true });
   };
+
+  #panTo(source: Element | null): void {
+    if (!this.#host.pannable || !source || !('x' in source) || !('y' in source)) return;
+    const { x, y } = source;
+    if (typeof x !== 'number' || typeof y !== 'number' || !Number.isFinite(x) || !Number.isFinite(y)) return;
+    this.#delegate.applyPan({ ...this.#delegate.getTransform(), x, y });
+  }
+
+  #zoomTo(source: Element | null): void {
+    if (!this.#host.zoomable || !source || !('scale' in source)) return;
+    const { scale } = source;
+    if (typeof scale !== 'number' || !Number.isFinite(scale) || scale <= 0) return;
+    this.#delegate.applyZoom(this.#delegate.getCenteredZoomTarget(scale), {});
+  }
 
   #handleSpatialKey = (event: CustomEvent<SpatialKeyCommand>): void => {
     const command = event.detail;
     if (command.kind === 'direction') {
       if (!this.#acceptsKeyboardPan(command.event)) return;
       command.event.preventDefault();
-      this.#requestDiscretePan(command.event, {
+      this.#requestDiscretePan({
         direction: keyboardPanDirection(command.key),
-        source: 'keyboard',
         viewportPixelStep: command.shiftKey ? KEYBOARD_PAN_LARGE_STEP : KEYBOARD_PAN_STEP
       });
     } else if (this.#acceptsKeyboardZoom(command.event)) {
       command.event.preventDefault();
       const action = command.key === '-' ? 'out' : 'in';
       const next = this.#delegate.getZoomTarget(action);
-      if (next) this.#requestZoom(command.event, next, 'keyboard');
+      if (next) this.#delegate.applyZoom(next, { animated: true });
     }
   };
 
-  #requestDiscretePan(event: CommandEvent | KeyboardEvent, request: DiscretePanRequest): void {
+  #requestDiscretePan(request: DiscretePanRequest): void {
     const start = this.#delegate.getTransform();
     const contentStep = request.viewportPixelStep / start.scale;
     const next = {
@@ -115,7 +123,7 @@ export class ViewportNavigationController implements ReactiveController {
       x: start.x + request.direction.horizontal * contentStep,
       y: start.y + request.direction.vertical * contentStep
     };
-    this.#host.requestPan({ event, next, source: request.source });
+    this.#delegate.applyPan(next);
   }
 
   #handleViewportKeyDown = (event: KeyboardEvent): void => {
@@ -125,21 +133,8 @@ export class ViewportNavigationController implements ReactiveController {
     const next = this.#delegate.getZoomTarget(action);
     if (!next) return;
     event.preventDefault();
-    this.#requestZoom(event, next, 'keyboard');
+    this.#delegate.applyZoom(next, { animated: true });
   };
-
-  #requestZoom(event: CommandEvent | KeyboardEvent, next: ViewportTransform, source: 'command' | 'keyboard'): void {
-    const start = this.#delegate.getTransform();
-    const viewport = { x: this.#host.clientWidth / 2, y: this.#host.clientHeight / 2 };
-    const proposal: ViewportZoomProposal = {
-      anchor: contentPointFromViewport(viewport.x, viewport.y, start),
-      event,
-      factor: next.scale / start.scale,
-      next,
-      source
-    };
-    this.#host.requestZoom(proposal, { animated: true });
-  }
 
   #acceptsKeyboardZoom(event: KeyboardEvent): boolean {
     return this.#host.zoomable && isImmediateRootActiveElement(this.#host) && event.composedPath()[0] === this.#host;

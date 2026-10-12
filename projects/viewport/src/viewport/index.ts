@@ -4,23 +4,9 @@
 export * from './viewport.js';
 export type {
   ViewportAnimationOptions,
-  ViewportDiscretePanDetail,
   ViewportPanBehavior,
-  ViewportPanDetail,
-  ViewportPanEndDetail,
-  ViewportPanEndReason,
-  ViewportNavigationSource,
-  ViewportPanProposal,
-  ViewportPanUpdateProposal,
-  ViewportPanEndRequest,
-  ViewportPanSession,
-  ViewportZoomProposal,
-  ViewportZoomRequestOptions,
   ViewportPoint,
-  ViewportPointerPanDetail,
   ViewportRect,
   ViewportRevealOptions,
-  ViewportTransform,
-  ViewportWheelPanDetail,
-  ViewportZoomDetail
+  ViewportTransform
 } from './viewport.types.js';
