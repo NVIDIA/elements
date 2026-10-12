@@ -375,6 +375,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${['/docs/viewport/', '/docs/viewport/api/', '/docs/viewport/examples/'].includes(data.page.url) ? 'highlighted selected' : ''}><a href="/docs/viewport/">Viewport</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/viewport/gridlines/') ? 'highlighted selected' : ''}><a href="/docs/viewport/gridlines/">Gridlines</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/viewport/minimap/') ? 'highlighted selected' : ''}><a href="/docs/viewport/minimap/">Minimap</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/viewport/zoom-range/') ? 'highlighted selected' : ''}><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted selected' : ''}><a href="/docs/elements/week/">Week</a></nve-tree-node>
   </nve-tree-node>

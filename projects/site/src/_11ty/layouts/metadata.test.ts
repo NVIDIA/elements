@@ -501,14 +501,24 @@ describe('renderBaseHead', () => {
 
 describe('renderDocsNav', () => {
   it.each(
-    ['/docs/viewport/', '/docs/viewport/gridlines/', '/docs/viewport/minimap/'].flatMap(component =>
-      ['', 'api/', 'examples/'].map(tab => `${component}${tab}`)
+    ['/docs/viewport/', '/docs/viewport/gridlines/', '/docs/viewport/minimap/', '/docs/viewport/zoom-range/'].flatMap(
+      component => ['', 'api/', 'examples/'].map(tab => `${component}${tab}`)
     )
   )('should keep the elements and viewport groups expanded on %s', url => {
     const html = renderDocsNav({ page: { url } });
 
     expect(html).toMatch(/<nve-tree-node expanded\s*>\s*<a href="\/docs\/elements\/">Elements<\/a>/);
     expect(html).toMatch(/<nve-tree-node expanded\s*>\s*<a href="\/docs\/viewport\/">Viewport<\/a>/);
+  });
+
+  it('should select zoom range navigation on its overview, API, and examples tabs', () => {
+    for (const tab of ['', 'api/', 'examples/']) {
+      const html = renderDocsNav({ page: { url: `/docs/viewport/zoom-range/${tab}` } });
+
+      expect(html).toContain(
+        '<nve-tree-node highlighted selected><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>'
+      );
+    }
   });
 
   it('should expose DESIGN.md in getting started navigation', () => {

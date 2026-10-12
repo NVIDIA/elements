@@ -31,6 +31,7 @@ describe(Viewport.metadata.tag, () => {
 
   it('registers without unrelated viewport components', () => {
     expect(customElements.get('nve-viewport-gridlines')).toBeUndefined();
+    expect(customElements.get('nve-viewport-zoom-range')).toBeUndefined();
     expect(customElements.get('nve-viewport-minimap')).toBeUndefined();
   });
 

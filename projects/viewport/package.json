@@ -74,6 +74,14 @@
     "./viewport/define.js": {
       "types": "./dist/viewport/define.d.ts",
       "default": "./dist/viewport/define.js"
+    },
+    "./zoom-range": {
+      "types": "./dist/zoom-range/index.d.ts",
+      "default": "./dist/zoom-range/index.js"
+    },
+    "./zoom-range/define.js": {
+      "types": "./dist/zoom-range/define.d.ts",
+      "default": "./dist/zoom-range/define.js"
     }
   },
   "sideEffects": [
@@ -97,6 +105,7 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/forms": "workspace:^",
     "lit": "catalog:publish"
   },
   "peerDependencies": {
@@ -129,7 +138,8 @@
       "service": true,
       "dependencies": [
         "../core:build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        "../forms:build"
       ]
     },
     "ci": {
@@ -157,6 +167,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../forms/dist/**/*.js",
+        "!../forms/dist/**/*.examples.js",
         "src/**",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -179,6 +191,10 @@
         },
         {
           "script": "../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../forms:build",
           "cascade": false
         }
       ]
@@ -252,6 +268,10 @@
         },
         {
           "script": "../internals/testing:build",
+          "cascade": false
+        },
+        {
+          "script": "../forms:build",
           "cascade": false
         }
       ]

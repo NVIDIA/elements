@@ -7,6 +7,7 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import { runAxe } from '@internals/testing/axe';
 import { Viewport } from '@nvidia-elements/viewport/viewport';
 import '@nvidia-elements/viewport/viewport/define.js';
+import '@nvidia-elements/viewport/zoom-range/define.js';
 
 describe(Viewport.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -15,7 +16,8 @@ describe(Viewport.metadata.tag, () => {
 
   it('should pass axe check with interactive slotted content', async () => {
     fixture = await createFixture(html`
-      <nve-viewport behavior-pan behavior-zoom style="width: 400px; height: 300px">
+      <nve-viewport id="target" behavior-pan behavior-zoom style="width: 400px; height: 300px">
+        <nve-viewport-zoom-range slot="overlay" commandfor="target" orientation="vertical" aria-label="Viewport zoom"></nve-viewport-zoom-range>
         <form>
           <label>Project name <input name="name" /></label>
           <button type="submit">Save</button>
