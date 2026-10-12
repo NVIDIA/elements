@@ -62,7 +62,7 @@ export function elementSummary(tag) {
   const lighthouseResults = testReports
     .flatMap(report => report.lighthouse)
     .flatMap(result => result.testResults)
-    .find(result => result.name.includes(tag)) ?? {
+    .find(result => result.name === tag) ?? {
     payload: {
       javascript: {
         kb: 10
