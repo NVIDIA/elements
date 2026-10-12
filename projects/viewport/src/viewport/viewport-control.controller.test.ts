@@ -4,12 +4,16 @@
 import { html, LitElement } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import { ViewportControlController } from './viewport-control.controller.js';
+import { ViewportControlController, ViewportCommandController } from './viewport-control.controller.js';
 import './define.js';
 
 class ViewportControlTestHost extends LitElement {
   commandfor: string | null = null;
   commandForElement: HTMLElement | null = null;
+  command = '--zoom-to';
+  disabled = false;
+  readOnly = false;
+  scale = 2;
 }
 
 const tag = 'viewport-control-controller-test-host';
@@ -24,9 +28,7 @@ describe('ViewportControlController', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`<div></div>`);
     host = new ViewportControlTestHost();
-    controller = new ViewportControlController(host, onChange, {
-      parentFallback: true
-    });
+    controller = new ViewportControlController(host, onChange, { parentFallback: true });
     onChange.mockClear();
     fixture.append(host);
     await elementIsStable(host);
@@ -211,6 +213,51 @@ describe('ViewportControlController', () => {
       target.dispatchEvent(new Event('viewportchange'));
       expect(onChange).toHaveBeenCalledOnce();
       expect(onChange).toHaveBeenLastCalledWith(target);
+    });
+  });
+
+  describe('ViewportCommandController integration', () => {
+    it('revalidates the shared state target before dispatching an input command', () => {
+      const previous = document.createElement('nve-viewport');
+      previous.id = 'command-target';
+      fixture.append(previous);
+      host.commandfor = previous.id;
+      controller.resolveTarget();
+      host.remove();
+      new ViewportCommandController(host, controller);
+      fixture.append(host);
+      const replacement = document.createElement('nve-viewport');
+      replacement.id = previous.id;
+      previous.replaceWith(replacement);
+      const oldCommand = vi.fn();
+      const newCommand = vi.fn();
+      previous.addEventListener('command', oldCommand);
+      replacement.addEventListener('command', newCommand);
+      host.dispatchEvent(new Event('input'));
+      expect(oldCommand).not.toHaveBeenCalled();
+      expect(newCommand).toHaveBeenCalledOnce();
+      expect(newCommand).toHaveBeenCalledWith(expect.objectContaining({ command: '--zoom-to', source: host }));
+      expect(onChange).toHaveBeenLastCalledWith(replacement);
+    });
+
+    it('reconnects input handling without property changes or duplicate command listeners', async () => {
+      const target = document.createElement('nve-viewport');
+      host.commandForElement = target;
+      new ViewportCommandController(host, controller);
+      host.remove();
+      fixture.append(host);
+      await elementIsStable(host);
+      const command = vi.fn();
+      target.addEventListener('command', command);
+      host.dispatchEvent(new Event('input'));
+      expect(command).toHaveBeenCalledOnce();
+      command.mockClear();
+      host.remove();
+      host.dispatchEvent(new Event('input'));
+      expect(command).not.toHaveBeenCalled();
+      fixture.append(host);
+      host.dispatchEvent(new Event('input'));
+      expect(command).toHaveBeenCalledOnce();
     });
   });
 });

@@ -3,6 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import { getFlattenedDOMTree } from '@nvidia-elements/core/internal';
+import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { Viewport } from './viewport.js';
 
 type ViewportControlHost = ReactiveElement & {
@@ -10,9 +11,15 @@ type ViewportControlHost = ReactiveElement & {
   commandForElement: HTMLElement | null;
 };
 
+type ViewportCommandHost = ViewportControlHost & {
+  command?: string;
+  disabled: boolean;
+  readOnly: boolean;
+};
+
 /** Binds a navigation control to its command target and committed viewport state. */
 export class ViewportControlController implements ReactiveController {
-  target: Viewport | null = null;
+  #target: Viewport | null = null;
   #connected = false;
   #commandTargetInput: HTMLElement | string | null | undefined;
 
@@ -37,13 +44,13 @@ export class ViewportControlController implements ReactiveController {
     this.#connected = false;
     this.#commandTargetInput = undefined;
     this.#disconnectTarget();
-    this.target = null;
+    this.#target = null;
     this.onChange(null);
   }
 
   resolveTarget(): Viewport | null {
     this.#syncTarget();
-    return this.target;
+    return this.#target;
   }
 
   #syncTarget(): void {
@@ -58,16 +65,16 @@ export class ViewportControlController implements ReactiveController {
         : commandTargetInput;
     const target = element instanceof Viewport ? element : null;
     if (target) this.#commandTargetInput = commandTargetInput;
-    if (target === this.target) return;
+    if (target === this.#target) return;
     this.#disconnectTarget();
-    this.target = target;
+    this.#target = target;
     target?.addEventListener('viewportchange', this.#handleChange);
     target?.addEventListener('capabilitieschange', this.#handleChange);
     this.onChange(target);
   }
 
   #hasValidTarget(input: HTMLElement | string | null): boolean {
-    return !!this.target && (typeof input !== 'string' || (this.target.isConnected && this.target.id === input));
+    return !!this.#target && (typeof input !== 'string' || (this.#target.isConnected && this.#target.id === input));
   }
 
   #getCommandTargetInput(): HTMLElement | string | null {
@@ -78,9 +85,27 @@ export class ViewportControlController implements ReactiveController {
   }
 
   #disconnectTarget(): void {
-    this.target?.removeEventListener('viewportchange', this.#handleChange);
-    this.target?.removeEventListener('capabilitieschange', this.#handleChange);
+    this.#target?.removeEventListener('viewportchange', this.#handleChange);
+    this.#target?.removeEventListener('capabilitieschange', this.#handleChange);
   }
 
-  #handleChange = (): void => this.onChange(this.target);
+  #handleChange = (): void => this.onChange(this.#target);
+}
+
+// eslint-disable-next-line local/require-component-metadata -- Controllers do not define custom elements.
+export class ViewportCommandController extends TypeCommandController<ViewportCommandHost> {
+  constructor(
+    host: ViewportCommandHost,
+    private readonly viewportControl: ViewportControlController
+  ) {
+    super(host, { events: ['input'] });
+  }
+
+  hostConnected(): void {
+    this.hostUpdated();
+  }
+
+  override get target(): Viewport | null {
+    return this.viewportControl.resolveTarget();
+  }
 }
