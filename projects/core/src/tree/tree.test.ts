@@ -3,12 +3,78 @@
 
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
+import { createFixture, elementIsStable, removeFixture, required, untilEvent } from '@internals/testing';
 import { Tree } from '@nvidia-elements/core/tree';
 import { TreeNode } from '@nvidia-elements/core/tree';
 import '@nvidia-elements/core/tree/define.js';
+import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/styles/typography.css';
 
 /* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
+
+describe.each(['width: 500px;', 'max-width: 500px;', '--max-width: 500px;'])(
+  `${Tree.metadata.tag} constrained by %s`,
+  constraint => {
+    let fixture: HTMLElement;
+    let element: Tree;
+    const label = 'LongTreeNodeLabelThatExceedsTheAvailableWidth'.repeat(5);
+
+    beforeEach(async () => {
+      fixture = await createFixture(html`
+        <div style="width: 800px;">
+          <nve-tree style=${constraint}>
+            <nve-tree-node><p nve-text="label truncate">${label}</p></nve-tree-node>
+            <nve-tree-node expanded>
+              <nve-icon slot="prefix" name="folder"></nve-icon>
+              <p nve-text="label truncate">${label}</p>
+              <nve-icon slot="suffix" name="check"></nve-icon>
+              <nve-tree-node expanded>
+                <p nve-text="label truncate">${label}</p>
+                <nve-tree-node><p nve-text="label truncate">${label}</p></nve-tree-node>
+              </nve-tree-node>
+            </nve-tree-node>
+          </nve-tree>
+        </div>
+      `);
+      element = required(fixture.querySelector(Tree.metadata.tag), 'Tree must exist');
+      await elementIsStable(element);
+      await Promise.all(element.nodes.map(node => elementIsStable(node)));
+    });
+
+    afterEach(() => {
+      removeFixture(fixture);
+    });
+
+    it.each([undefined, 'single', 'multi'] as const)(
+      'should constrain nodes and truncate labels with selectable=%s',
+      async selectable => {
+        element.selectable = selectable;
+        await elementIsStable(element);
+        await Promise.all(element.nodes.map(node => elementIsStable(node)));
+
+        const container = required(element.shadowRoot?.querySelector('[internal-host]'), 'Tree container must exist');
+        const bounds = container.getBoundingClientRect();
+        expect(bounds.width).toBe(500);
+
+        for (const node of element.nodes) {
+          const nodeBounds = node.getBoundingClientRect();
+          const text = required(node.querySelector('p'), 'Node label must exist');
+          const textBounds = text.getBoundingClientRect();
+          expect(nodeBounds.left).toBeGreaterThanOrEqual(bounds.left);
+          expect(nodeBounds.right).toBeLessThanOrEqual(bounds.right);
+          expect(node.scrollWidth).toBeLessThanOrEqual(node.clientWidth);
+          expect(textBounds.right).toBeLessThanOrEqual(nodeBounds.right);
+          expect(text.clientWidth).toBeGreaterThan(0);
+          expect(text.scrollWidth).toBeGreaterThan(text.clientWidth);
+          expect(getComputedStyle(text).textOverflow).toBe('ellipsis');
+        }
+
+        const suffix = required(element.querySelector('[slot="suffix"]'), 'Suffix icon must exist');
+        expect(suffix.getBoundingClientRect().right).toBeLessThanOrEqual(bounds.right);
+      }
+    );
+  }
+);
 
 describe(Tree.metadata.tag, () => {
   let fixture: HTMLElement;

@@ -443,6 +443,20 @@ export const NodeContent = {
 };
 
 /**
+ * @summary Tree with a max width, ensuring the tree does not exceed the specified width.
+ * @tags test-case
+ */
+export const MaxWidth = {
+  render: () => html`
+<nve-tree style="max-width: 500px; outline: 1px dashed red;">
+  <nve-tree-node style="outline: 1px dashed blue;">
+    <p nve-text="label truncate">1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890_1234567890</p>
+  </nve-tree-node>
+</nve-tree>
+  `
+};
+
+/**
  * @summary Dynamic tree with programmatic node creation and management, for scalable hierarchical data handling with large datasets.
  * @tags test-case
  */
