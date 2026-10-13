@@ -66,6 +66,30 @@ describe('tree visual', () => {
     );
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('slotted link ::after should fill visible node space', async () => {
+    const report = await visualRunner.render(
+      'tree.slotted-link-after',
+      `
+      <script type="module">
+        import '@nvidia-elements/core/tree/define.js';
+      </script>
+      <style>
+        nve-tree-node a::after {
+          background: oklch(0.63 0.26 29.23 / 0.5);
+          color: white;
+        }
+      </style>
+      <nve-tree>
+        <nve-tree-node>
+          <!-- link ::after should fill visible space -->
+          <a href="#">•︎•︎•︎•︎•︎•︎</a>
+        </nve-tree-node>
+      </nve-tree>
+    `
+    );
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 function template(theme: '' | 'dark' = '') {

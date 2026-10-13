@@ -57,6 +57,7 @@ slot:not(:has-slotted) {
   margin-inline-start: var(--nve-ref-space-xxxs);
   padding: var(--nve-ref-size-200) var(--nve-ref-size-200) var(--nve-ref-size-200) var(--nve-ref-size-100);
   min-height: var(--min-height);
+  position: relative;
 
   & slot {
     width: fit-content;
@@ -68,7 +69,6 @@ slot:not(:has-slotted) {
     min-width: 0;
     flex-shrink: 1;
     display: block;
-    position: relative;
   }
 }
 
