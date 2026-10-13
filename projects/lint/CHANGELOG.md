@@ -1,3 +1,14 @@
+## [2.7.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.3...@nvidia-elements/lint-v2.7.4) (2026-10-13)
+
+### Features
+
+* **media:** picture in picture button ([edeec60](https://github.com/NVIDIA/elements/commit/edeec60309675c977da136ef92d1b2ab8333774f))
+
+### Bug Fixes
+
+* **core:** add pip i18n strings ([9b1b755](https://github.com/NVIDIA/elements/commit/9b1b755bff25aee35c0206972858301285821621))
+* **lint:** add invoker trigger element reference ([89daf8a](https://github.com/NVIDIA/elements/commit/89daf8a3b5930f64b2f12d2d5d6a31b9d601cd26))
+
 ## [2.7.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.2...@nvidia-elements/lint-v2.7.3) (2026-10-13)
 
 ### Features
