@@ -1,3 +1,18 @@
+## [2.15.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.3...@nvidia-elements/core-v2.15.4) (2026-10-13)
+
+### Features
+
+* **media:** picture in picture button ([edeec60](https://github.com/NVIDIA/elements/commit/edeec60309675c977da136ef92d1b2ab8333774f))
+* **viewport:** add zoom range ([37040c9](https://github.com/NVIDIA/elements/commit/37040c91170e82d105b0e48b05b06879086566b8))
+* **viewport:** simplify viewport navigation with invoker commands ([51e95fe](https://github.com/NVIDIA/elements/commit/51e95fe78d5b544b8cdff2066d85418d1d65e23a))
+
+### Bug Fixes
+
+* **core:** add pip i18n strings ([9b1b755](https://github.com/NVIDIA/elements/commit/9b1b755bff25aee35c0206972858301285821621))
+* **docs:** match lighthouse reports by exact component tag ([16c4570](https://github.com/NVIDIA/elements/commit/16c45703a01bd6318765969dc8d5550fa7dc09bd))
+* **lint:** add invoker trigger element reference ([89daf8a](https://github.com/NVIDIA/elements/commit/89daf8a3b5930f64b2f12d2d5d6a31b9d601cd26))
+* **lint:** recognize command-only invoker controls ([e8d47e2](https://github.com/NVIDIA/elements/commit/e8d47e2b48bccbe69fd3835827a0841049ade4c1))
+
 ## [2.15.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.2...@nvidia-elements/core-v2.15.3) (2026-10-13)
 
 ### Bug Fixes
