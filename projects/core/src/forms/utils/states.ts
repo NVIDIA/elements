@@ -247,6 +247,6 @@ export function showActiveValidationMessages(control: Control, messages: Control
 
 export function hideInactiveValidationMessages(control: Control, messages: ControlMessage[]) {
   if (messages.find(m => m.error) && control.input.validity.valid) {
-    messages.filter(m => m.error && !control.input.validity[m.error!]).forEach(m => m.setAttribute('hidden', ''));
+    messages.filter(m => m.error && !control.input.validity[m.error]).forEach(m => m.setAttribute('hidden', ''));
   }
 }
