@@ -50,7 +50,7 @@
     "@vitest/istanbul-lib-coverage": "catalog:",
     "@vitest/istanbul-lib-report": "catalog:",
     "@weiran.zsd/multi-eslint-rule-config": "0.0.6",
-    "commitlint": "21.2.2",
+    "commitlint": "21.2.3",
     "glob": "catalog:",
     "husky": "9.1.7",
     "knip": "6.11.0",
