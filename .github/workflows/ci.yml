@@ -86,6 +86,8 @@ jobs:
             projects/plot/package.json
             projects/scene/dist
             projects/scene/package.json
+            projects/viewport/dist
+            projects/viewport/package.json
       - name: Prepare IndexNow artifacts
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         env:
