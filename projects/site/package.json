@@ -357,7 +357,7 @@
     "@vitest/coverage-istanbul": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
-    "html-minifier-next": "5.2.2",
+    "html-minifier-next": "8.10.7",
     "lighthouse": "catalog:",
     "markdown-it": "catalog:",
     "markdown-it-link-attributes": "catalog:",
