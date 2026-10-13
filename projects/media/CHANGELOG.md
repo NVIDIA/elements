@@ -1,3 +1,22 @@
+## [1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.1.0...@nvidia-elements/media-v1.2.0) (2026-10-13)
+
+### Features
+
+* **media:** picture in picture button ([edeec60](https://github.com/NVIDIA/elements/commit/edeec60309675c977da136ef92d1b2ab8333774f))
+* **monaco:** upgrade monaco editor to 0.57.0 ([4d86c93](https://github.com/NVIDIA/elements/commit/4d86c930ad22a142cf426591b6850ef63c04540a))
+* **viewport:** add zoom range ([37040c9](https://github.com/NVIDIA/elements/commit/37040c91170e82d105b0e48b05b06879086566b8))
+* **viewport:** init ([ac4651d](https://github.com/NVIDIA/elements/commit/ac4651df3bacfc68807eff2ec38e89dde0511b67))
+* **viewport:** simplify viewport navigation with invoker commands ([51e95fe](https://github.com/NVIDIA/elements/commit/51e95fe78d5b544b8cdff2066d85418d1d65e23a))
+
+### Bug Fixes
+
+* **core:**  add visual tests for label truncation and max-width constraints ([4f2e6d4](https://github.com/NVIDIA/elements/commit/4f2e6d4bc0eabddc269ccc8f48ec193278cefcb8))
+* **core:** add pip i18n strings ([9b1b755](https://github.com/NVIDIA/elements/commit/9b1b755bff25aee35c0206972858301285821621))
+* **core:** migrate viewport to new package ([2ea0a3f](https://github.com/NVIDIA/elements/commit/2ea0a3f809f7b63d09c87227d56f7addc02ed544))
+* **docs:** match lighthouse reports by exact component tag ([16c4570](https://github.com/NVIDIA/elements/commit/16c45703a01bd6318765969dc8d5550fa7dc09bd))
+* **lint:** add invoker trigger element reference ([89daf8a](https://github.com/NVIDIA/elements/commit/89daf8a3b5930f64b2f12d2d5d6a31b9d601cd26))
+* **lint:** recognize command-only invoker controls ([e8d47e2](https://github.com/NVIDIA/elements/commit/e8d47e2b48bccbe69fd3835827a0841049ade4c1))
+
 ## [1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.0.1...@nvidia-elements/media-v1.1.0) (2026-10-09)
 
 ### Features
