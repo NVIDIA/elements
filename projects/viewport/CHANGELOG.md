@@ -1,3 +1,15 @@
+## [1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/viewport-v1.1.0...@nvidia-elements/viewport-v1.1.1) (2026-10-13)
+
+### Features
+
+* **media:** picture in picture button ([edeec60](https://github.com/NVIDIA/elements/commit/edeec60309675c977da136ef92d1b2ab8333774f))
+
+### Bug Fixes
+
+* **core:** add pip i18n strings ([9b1b755](https://github.com/NVIDIA/elements/commit/9b1b755bff25aee35c0206972858301285821621))
+* **lint:** add invoker trigger element reference ([89daf8a](https://github.com/NVIDIA/elements/commit/89daf8a3b5930f64b2f12d2d5d6a31b9d601cd26))
+* **viewport:** include build artifacts in releases ([7ab75d4](https://github.com/NVIDIA/elements/commit/7ab75d4477b4364557d2f0d17af15a6ad3b453a8))
+
 ## [1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/viewport-v1.0.0...@nvidia-elements/viewport-v1.1.0) (2026-10-13)
 
 ### Features
