@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/viewport-v1.0.0...@nvidia-elements/viewport-v1.1.0) (2026-10-13)
+
+### Features
+
+* **viewport:** add zoom range ([37040c9](https://github.com/NVIDIA/elements/commit/37040c91170e82d105b0e48b05b06879086566b8))
+* **viewport:** simplify viewport navigation with invoker commands ([51e95fe](https://github.com/NVIDIA/elements/commit/51e95fe78d5b544b8cdff2066d85418d1d65e23a))
+
+### Bug Fixes
+
+* **core:**  add visual tests for label truncation and max-width constraints ([4f2e6d4](https://github.com/NVIDIA/elements/commit/4f2e6d4bc0eabddc269ccc8f48ec193278cefcb8))
+* **docs:** match lighthouse reports by exact component tag ([16c4570](https://github.com/NVIDIA/elements/commit/16c45703a01bd6318765969dc8d5550fa7dc09bd))
+* **lint:** recognize command-only invoker controls ([e8d47e2](https://github.com/NVIDIA/elements/commit/e8d47e2b48bccbe69fd3835827a0841049ade4c1))
+
 ## 1.0.0 (2026-10-12)
 
 ### ⚠ BREAKING CHANGES
