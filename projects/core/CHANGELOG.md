@@ -1,3 +1,9 @@
+## [2.15.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.2...@nvidia-elements/core-v2.15.3) (2026-10-13)
+
+### Bug Fixes
+
+* **core:**  add visual tests for label truncation and max-width constraints ([4f2e6d4](https://github.com/NVIDIA/elements/commit/4f2e6d4bc0eabddc269ccc8f48ec193278cefcb8))
+
 ## [2.15.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.1...@nvidia-elements/core-v2.15.2) (2026-10-12)
 
 ### Features
