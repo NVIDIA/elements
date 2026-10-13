@@ -3,5 +3,8 @@ language: 'en-US'
 reviews:
   poem: false
   profile: assertive
+  pre_merge_checks:
+    docstrings:
+      mode: off
   auto_review:
     enabled: true
