@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement, nothing, svg } from 'lit';
-import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import {
   GestureController,
@@ -23,8 +22,8 @@ import {
   unprojectViewportMinimapPoint,
   type ViewportMinimapProjection
 } from './minimap.utils.js';
-import type { Viewport, ViewportPoint, ViewportRect, ViewportTransform } from '@nvidia-elements/viewport/viewport';
-import { ViewportControlController } from '../viewport/viewport-control.controller.js';
+import type { ViewportTarget, ViewportPoint, ViewportRect, ViewportTransform } from '../internal/viewport.types.js';
+import { ViewportAccessoryMixin } from '../internal/mixins/viewport-accessory.js';
 
 const DRAG_THRESHOLD = 3;
 
@@ -65,7 +64,7 @@ interface AutomaticPreviewItem extends ViewportRect {
  * @cssprop --panning-cursor - Cursor during a visible-region drag.
  * @slot preview - Optional simplified content drawn in viewport content coordinates. Replaces automatic root rectangles.
  */
-export class ViewportMinimap extends LitElement {
+export class ViewportMinimap extends ViewportAccessoryMixin(LitElement) {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -81,12 +80,6 @@ export class ViewportMinimap extends LitElement {
 
   /** @private */
   @hostAttr({ attribute: 'aria-hidden' }) protected accessibilityHidden = 'true';
-
-  /** ID of the viewport command target. Defaults to a direct parent viewport. */
-  @property({ type: String, attribute: 'commandfor', reflect: true }) commandfor: string | null = null;
-
-  /** Viewport command target, taking precedence over commandfor. */
-  @property({ attribute: false }) commandForElement: HTMLElement | null = null;
 
   #commandPoint: ViewportPoint = { x: 0, y: 0 };
   #commandScale = 1;
@@ -105,10 +98,9 @@ export class ViewportMinimap extends LitElement {
   }
 
   readonly #gestureController: GestureController;
-  readonly #viewportControl: ViewportControlController;
   readonly #rootKeys = new WeakMap<Element, string>();
   #nextRootKey = 0;
-  #viewport?: Viewport;
+  #viewport?: ViewportTarget;
   #defaultSlot?: HTMLSlotElement;
   #layoutResizeObserver?: ResizeObserver;
   #rootResizeObserver?: ResizeObserver;
@@ -136,9 +128,6 @@ export class ViewportMinimap extends LitElement {
       suppressNativeDrag: true,
       touchAction: () => (this.#pointerSession || this.#viewport?.pannable ? 'none' : undefined)
     });
-    this.#viewportControl = new ViewportControlController(this, target => this.#handleViewportChange(target), {
-      parentFallback: true
-    });
   }
 
   connectedCallback(): void {
@@ -149,45 +138,41 @@ export class ViewportMinimap extends LitElement {
     this.addEventListener('nve-gesture', this.#handleGesture as EventListener);
   }
 
-  #handleViewportChange(viewport: Viewport | null): void {
-    if (viewport !== this.#viewport) {
-      this.#interruptPointerSession();
-      this.#disconnectViewport();
-      this.#disconnectObservers();
-      this.#resetConnectionState();
-      this.#viewport = viewport ?? undefined;
-      if (viewport) this.#connectViewport(viewport);
-      this.requestUpdate();
-    } else {
-      this.#handleTransformCommitted();
-    }
+  protected override viewportConnected(viewport: ViewportTarget): void {
+    if (this.#viewport) this.viewportDisconnected();
+    this.#viewport = viewport;
+    this.#connectResizeObservers();
+    this.#defaultSlot = viewport.shadowRoot?.querySelector('slot:not([name])') ?? undefined;
+    this.#defaultSlot?.addEventListener('slotchange', this.#handleSlotChange);
+    this.#syncObservedRoots();
+    this.#scheduleProjectionUpdate({ measureRoots: true });
     this.#handleCapabilitiesChange();
   }
 
-  #connectViewport(viewport: Viewport): void {
-    this.#connectResizeObservers();
-    void viewport.updateComplete.then(() => {
-      if (this.#viewport !== viewport) return;
-      this.#defaultSlot = viewport.shadowRoot?.querySelector('slot:not([name])') ?? undefined;
-      this.#defaultSlot?.addEventListener('slotchange', this.#handleSlotChange);
-      this.#syncObservedRoots();
-      this.#scheduleProjectionUpdate({ measureRoots: true });
-    });
+  protected override viewportChanged(viewport: ViewportTarget): void {
+    const session = this.#pointerSession;
+    if (session?.active) {
+      session.transformStart = viewport.getTransform();
+      session.transformStartDisplacementX = session.lastTotalDisplacementX;
+      session.transformStartDisplacementY = session.lastTotalDisplacementY;
+    }
+    this.#scheduleProjectionUpdate({ measureRoots: false });
+    this.#handleCapabilitiesChange();
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('nve-gesture-input', this.#handleGestureInput as EventListener);
     this.removeEventListener('nve-gesture', this.#handleGesture as EventListener);
     this.#gestureController.target = undefined;
-    this.#interruptPointerSession();
-    this.#disconnectViewport();
-    this.#disconnectObservers();
-    this.#resetConnectionState();
     super.disconnectedCallback();
   }
 
-  #disconnectViewport(): void {
+  protected override viewportDisconnected(): void {
+    this.#interruptPointerSession();
     this.#defaultSlot?.removeEventListener('slotchange', this.#handleSlotChange);
+    this.#disconnectObservers();
+    this.#resetConnectionState();
+    this.requestUpdate();
   }
 
   #disconnectObservers(): void {
@@ -318,21 +303,10 @@ export class ViewportMinimap extends LitElement {
     for (const root of roots) this.#rootResizeObserver?.observe(root);
   }
 
-  #handleTransformCommitted = (): void => {
-    const transform = this.#viewport?.getTransform();
-    const session = this.#pointerSession;
-    if (session?.active && transform) {
-      session.transformStart = transform;
-      session.transformStartDisplacementX = session.lastTotalDisplacementX;
-      session.transformStartDisplacementY = session.lastTotalDisplacementY;
-    }
-    this.#scheduleProjectionUpdate({ measureRoots: false });
-  };
-
-  #handleCapabilitiesChange = (): void => {
+  #handleCapabilitiesChange(): void {
     this.#syncPanEligibleState();
     this.requestUpdate();
-  };
+  }
 
   #syncPanEligibleState(): void {
     const eligible = Boolean(this.#viewport?.pannable && this.#projection);
@@ -393,7 +367,7 @@ export class ViewportMinimap extends LitElement {
     return bounds;
   }
 
-  #measureAutomaticItems(viewport: Viewport, roots: readonly Element[]): readonly AutomaticPreviewItem[] {
+  #measureAutomaticItems(viewport: ViewportTarget, roots: readonly Element[]): readonly AutomaticPreviewItem[] {
     const frame = viewport.getBoundingClientRect();
     const transform = viewport.getTransform();
     const items: AutomaticPreviewItem[] = [];
@@ -423,7 +397,7 @@ export class ViewportMinimap extends LitElement {
   }
 
   #handleGestureInput = (event: CustomEvent<GestureInput>): void => {
-    this.#viewportControl.resolveTarget();
+    this.resolveViewport();
     const input = event.detail;
     if (input.kind === 'pointerdown') this.#handlePointerDown(input);
     else if (input.kind === 'pointerend') this.#handlePointerEnd(input);
@@ -476,7 +450,7 @@ export class ViewportMinimap extends LitElement {
   }
 
   #handleGesture = (event: CustomEvent<Gesture<undefined>>): void => {
-    this.#viewportControl.resolveTarget();
+    this.resolveViewport();
     const gesture = event.detail;
     if (gesture.kind === 'drag') this.#handlePointerDrag(gesture);
   };

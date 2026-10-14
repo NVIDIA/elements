@@ -7,8 +7,8 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { finiteOr, hostAttr, positiveFiniteOr, useStyles } from '@nvidia-elements/core/internal';
 import styles from './gridlines.css?inline';
 import { createGridlineCoverage, gridlineCoverageNeedsUpdate, selectGridlineInterval } from './gridlines.utils.js';
-import { Viewport } from '@nvidia-elements/viewport/viewport';
-import type { ViewportRect } from '@nvidia-elements/viewport/viewport';
+import { ViewportAccessoryMixin } from '../internal/mixins/viewport-accessory.js';
+import type { ViewportTarget, ViewportRect } from '../internal/viewport.types.js';
 
 const DEFAULT_STEP = 10;
 const DEFAULT_TARGET_SPACING = 64;
@@ -34,7 +34,7 @@ interface ProjectionSyncOptions {
  * @cssprop --dot-radius - Sets the approximate dot radius in CSS pixels.
  * @cssprop --cross-size - Sets the approximate full width and height of each cross in CSS pixels.
  */
-export class ViewportGridlines extends LitElement {
+export class ViewportGridlines extends ViewportAccessoryMixin(LitElement) {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -52,7 +52,7 @@ export class ViewportGridlines extends LitElement {
   #originX = 0;
   #originY = 0;
   #targetSpacing = DEFAULT_TARGET_SPACING;
-  #viewport?: Viewport;
+  #viewport?: ViewportTarget;
   #resizeObserver?: ResizeObserver;
   #projection?: GridlineProjection;
 
@@ -115,29 +115,29 @@ export class ViewportGridlines extends LitElement {
     this.requestUpdate('targetSpacing', previous);
   }
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    const viewport = this.parentElement;
-    if (!(viewport instanceof Viewport)) return;
+  protected override viewportConnected(viewport: ViewportTarget): void {
+    if (this.#viewport) this.viewportDisconnected();
     this.#viewport = viewport;
-    this.style.setProperty('--_scale', `${viewport.scale}`);
-    this.#viewport.addEventListener('viewportchange', this.#handleViewportChange);
     if (typeof ResizeObserver !== 'undefined') {
       this.#resizeObserver = new ResizeObserver(this.#handleViewportResize);
       this.#resizeObserver.observe(viewport);
     }
+    this.style.setProperty('--_scale', `${viewport.scale}`);
     this.#updateProjection({ forceCoverage: true, resetInterval: true });
+    this.requestUpdate();
   }
 
-  disconnectedCallback(): void {
-    if (this.#viewport) {
-      this.#viewport.removeEventListener('viewportchange', this.#handleViewportChange);
-    }
+  protected override viewportChanged(viewport: ViewportTarget): void {
+    this.style.setProperty('--_scale', `${viewport.scale}`);
+    this.#requestProjectionUpdate();
+  }
+
+  protected override viewportDisconnected(): void {
     this.#resizeObserver?.disconnect();
     this.#resizeObserver = undefined;
-    this.#viewport = undefined;
     this.#projection = undefined;
-    super.disconnectedCallback();
+    this.#viewport = undefined;
+    this.requestUpdate();
   }
 
   protected willUpdate(changed: PropertyValues<this>): void {
@@ -211,13 +211,6 @@ export class ViewportGridlines extends LitElement {
         return svg`<path d="M ${interval} 0 H 0 V ${interval}"></path>`;
     }
   }
-
-  #handleViewportChange = (): void => {
-    const viewport = this.#viewport;
-    if (!viewport) return;
-    this.style.setProperty('--_scale', `${viewport.scale}`);
-    this.#requestProjectionUpdate();
-  };
 
   #handleViewportResize = (): void => {
     this.#requestProjectionUpdate({ forceCoverage: true });

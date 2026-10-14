@@ -229,6 +229,80 @@ describe(Viewport.metadata.tag, () => {
     });
   });
 
+  describe('readiness', () => {
+    it('announces rendered readiness even with default values', async () => {
+      const viewport = document.createElement('nve-viewport');
+      const ready = vi.fn(() => {
+        expect(viewport.hasUpdated).toBe(true);
+        expect(viewport.shadowRoot?.querySelector('slot')).toBeInstanceOf(HTMLSlotElement);
+      });
+      viewport.addEventListener('viewportready', ready);
+      expect(viewport.hasUpdated).toBe(false);
+      fixture.append(viewport);
+      expect(viewport.hasUpdated).toBe(false);
+      await elementIsStable(viewport);
+      expect(ready).toHaveBeenCalledOnce();
+
+      viewport.scale = 2;
+      await elementIsStable(viewport);
+      expect(ready).toHaveBeenCalledOnce();
+    });
+
+    it('immediately announces a rendered viewport moved without pending updates', () => {
+      const ready = vi.fn();
+      element.addEventListener('viewportready', ready);
+      element.remove();
+      fixture.append(element);
+      expect(element.hasUpdated).toBe(true);
+      expect(ready).toHaveBeenCalledOnce();
+    });
+
+    it('announces a rendered viewport immediately on reconnection with a pending update', async () => {
+      const scales: number[] = [];
+      element.addEventListener('viewportready', () => scales.push(element.scale));
+      element.remove();
+      expect(element.hasUpdated).toBe(true);
+      element.scale = 3;
+      fixture.append(element);
+
+      expect(element.isUpdatePending).toBe(true);
+      expect(scales).toEqual([3]);
+      await elementIsStable(element);
+      expect(scales).toEqual([3]);
+    });
+
+    it('announces on reconnection after the first render completed while disconnected', async () => {
+      const viewport = document.createElement('nve-viewport');
+      const ready = vi.fn();
+      viewport.addEventListener('viewportready', ready);
+      fixture.append(viewport);
+      viewport.remove();
+      await viewport.updateComplete;
+      expect(viewport.hasUpdated).toBe(true);
+      expect(ready).not.toHaveBeenCalled();
+
+      fixture.append(viewport);
+      expect(ready).toHaveBeenCalledOnce();
+      await elementIsStable(viewport);
+      expect(ready).toHaveBeenCalledOnce();
+    });
+
+    it('announces once when reparented before its first render', async () => {
+      const viewport = document.createElement('nve-viewport');
+      const container = document.createElement('div');
+      fixture.append(container);
+      const ready = vi.fn();
+      viewport.addEventListener('viewportready', ready);
+      fixture.append(viewport);
+      container.append(viewport);
+
+      expect(viewport.hasUpdated).toBe(false);
+      expect(ready).not.toHaveBeenCalled();
+      await elementIsStable(viewport);
+      expect(ready).toHaveBeenCalledOnce();
+    });
+  });
+
   describe('change notifications', () => {
     it('coalesces synchronous transform writes into one viewportchange after rendering', async () => {
       const changes: ViewportTransform[] = [];
@@ -243,6 +317,22 @@ describe(Viewport.metadata.tag, () => {
       await elementIsStable(element);
 
       expect(changes).toEqual([{ scale: 2, x: 10, y: 20 }]);
+    });
+
+    it('allows a change listener to read the rendered transform and schedule another update', async () => {
+      const changes: number[] = [];
+      element.addEventListener('viewportchange', () => {
+        const plane = element.shadowRoot?.querySelector<HTMLElement>('.plane');
+        const transform = new DOMMatrix(plane?.style.transform);
+        changes.push(element.x);
+        expect(transform.e).toBe(-element.x);
+        if (element.x === 10) element.x = 20;
+      });
+
+      element.x = 10;
+      await elementIsStable(element);
+
+      expect(changes).toEqual([10, 20]);
     });
 
     it('does not publish viewportchange for a no-op transform write', async () => {
@@ -271,7 +361,7 @@ describe(Viewport.metadata.tag, () => {
       expect(changes).toEqual([{ scale: 1, x: 0, y: 0 }]);
     });
 
-    it('does not publish initial declarative or disconnected setup as viewportchange', async () => {
+    it('does not publish initial declarative setup as viewportchange', async () => {
       const configured = document.createElement('nve-viewport');
       configured.setAttribute('x', '10');
       configured.setAttribute('y', '20');
@@ -282,34 +372,39 @@ describe(Viewport.metadata.tag, () => {
       fixture.append(configured);
       await elementIsStable(configured);
       expect(changes).not.toHaveBeenCalled();
+    });
 
-      configured.remove();
-      configured.x = 30;
-      await elementIsStable(configured);
-      configured.y = 40;
-      await elementIsStable(configured);
-      configured.scale = 3;
-      await elementIsStable(configured);
+    it('does not publish transform updates rendered while disconnected', async () => {
+      const changes = vi.fn();
+      element.addEventListener('viewportchange', changes);
+      element.remove();
+      element.x = 30;
+      element.scale = 3;
+      await elementIsStable(element);
       expect(changes).not.toHaveBeenCalled();
 
-      fixture.append(configured);
-      await elementIsStable(configured);
+      fixture.append(element);
+      await elementIsStable(element);
       expect(changes).not.toHaveBeenCalled();
 
-      configured.x = 50;
-      await elementIsStable(configured);
+      element.x = 50;
+      await elementIsStable(element);
       expect(changes).toHaveBeenCalledOnce();
-      expect(changes.mock.calls[0]?.[0]).toMatchObject({ detail: { scale: 3, x: 50, y: 40 } });
+      expect(changes.mock.calls[0]?.[0]).toMatchObject({ detail: { scale: 3, x: 50, y: 0 } });
+    });
 
-      configured.remove();
-      configured.x = 60;
-      fixture.append(configured);
-      await elementIsStable(configured);
-      expect(changes).toHaveBeenCalledOnce();
+    it('publishes pending transform updates rendered after reconnection', async () => {
+      const changes: ViewportTransform[] = [];
+      element.addEventListener('viewportchange', event =>
+        changes.push((event as CustomEvent<ViewportTransform>).detail)
+      );
+      element.remove();
+      element.x = 60;
+      fixture.append(element);
+      element.scale = 2;
+      await elementIsStable(element);
 
-      configured.x = 70;
-      await elementIsStable(configured);
-      expect(changes).toHaveBeenCalledTimes(2);
+      expect(changes).toEqual([{ scale: 2, x: 60, y: 0 }]);
     });
 
     it('publishes changed scale limits even when the current scale remains valid', async () => {
