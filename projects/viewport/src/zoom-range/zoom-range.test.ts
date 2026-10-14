@@ -385,6 +385,8 @@ describe(ViewportZoomRange.metadata.tag, () => {
       expect(viewport.scale).toBe(1.25);
       await userEvent.keyboard('{ArrowLeft}');
       expect(viewport.scale).toBe(1);
+      await userEvent.keyboard('a');
+      expect(viewport.scale).toBe(1);
     });
 
     it('preserves off-step viewport scales and reports stepMismatch', async () => {
