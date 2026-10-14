@@ -1,11 +1,10 @@
 {
   "name": "@nvidia-elements/foundations",
   "version": "0.0.0",
-  "private": true,
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "A slotted container component for NVIDIA Elements.",
+  "description": "Shared foundational components and utilities for NVIDIA UI libraries and custom component development.",
   "keywords": [
     "nvidia",
     "web-components",
@@ -52,13 +51,25 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./foundations": {
-      "types": "./dist/foundations/index.d.ts",
-      "default": "./dist/foundations/index.js"
+    "./scroll-box": {
+      "types": "./dist/scroll-box/index.d.ts",
+      "default": "./dist/scroll-box/index.js"
     },
-    "./foundations/define.js": {
-      "types": "./dist/foundations/define.d.ts",
-      "default": "./dist/foundations/define.js"
+    "./scroll-box/index.js": {
+      "types": "./dist/scroll-box/index.d.ts",
+      "default": "./dist/scroll-box/index.js"
+    },
+    "./scroll-box/define.js": {
+      "types": "./dist/scroll-box/define.d.ts",
+      "default": "./dist/scroll-box/define.js"
+    },
+    "./internal": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
+    },
+    "./internal/index.js": {
+      "types": "./dist/internal/index.d.ts",
+      "default": "./dist/internal/index.js"
     }
   },
   "sideEffects": [
@@ -84,7 +95,6 @@
     "lit": "catalog:publish"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:^",
     "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
@@ -92,6 +102,7 @@
     "@internals/eslint": "workspace:*",
     "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@vitest/browser": "catalog:",
@@ -111,7 +122,8 @@
       "command": "NODE_ENV=development vite build --watch",
       "service": true,
       "dependencies": [
-        "../core:build",
+        "../themes:build",
+        "../styles:build",
         "../internals/vite:ci"
       ]
     },
@@ -160,10 +172,6 @@
         {
           "script": "../themes:build",
           "cascade": false
-        },
-        {
-          "script": "../core:build",
-          "cascade": false
         }
       ]
     },
@@ -191,7 +199,7 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../core:build"
+        "../themes:build"
       ]
     },
     "test:coverage": {
@@ -213,7 +221,7 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../core:build"
+        "../themes:build"
       ]
     },
     "test:watch": {
@@ -233,6 +241,7 @@
       ],
       "dependencies": [
         "build",
+        "../styles:build",
         "../internals/vite:ci"
       ],
       "env": {
@@ -254,6 +263,7 @@
       ],
       "dependencies": [
         "../internals/vite:ci",
+        "../styles:build",
         {
           "script": "build",
           "cascade": false

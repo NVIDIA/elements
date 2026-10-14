@@ -168,10 +168,11 @@
         "release:cli",
         "release:code",
         "release:create",
+        "release:foundations",
         "release:themes",
         "release:core",
         "release:lint",
-        "release:labs-forms",
+        "release:forms",
         "release:markdown",
         "release:media",
         "release:monaco",
@@ -193,7 +194,8 @@
       "command": "cd projects/core && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:themes",
-        "release:labs-forms"
+        "release:foundations",
+        "release:forms"
       ]
     },
     "release:cli": {
@@ -208,8 +210,14 @@
         "release:core"
       ]
     },
-    "release:labs-forms": {
+    "release:forms": {
       "command": "cd projects/forms && HUSKY=0 pnpm exec semantic-release"
+    },
+    "release:foundations": {
+      "command": "cd projects/foundations && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes"
+      ]
     },
     "release:lint": {
       "command": "cd projects/lint && HUSKY=0 pnpm exec semantic-release",
@@ -235,7 +243,7 @@
       "dependencies": [
         "release:core",
         "release:themes",
-        "release:labs-forms"
+        "release:forms"
       ]
     },
     "release:pi": {

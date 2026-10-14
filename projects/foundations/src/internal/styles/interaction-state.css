@@ -1,0 +1,46 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+[interaction-state] {
+  background-image: var(
+    --background-image,
+    linear-gradient(
+      color-mix(
+          in oklab,
+          var(--nve-sys-interaction-state-base) 100%,
+          var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
+        )
+        0 0
+    )
+  ) !important;
+}
+
+:host(:hover) [interaction-state],
+:host(:state(hover)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+}
+
+:host(:active) [interaction-state],
+:host(:state(active)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-active);
+}
+
+:host([selected]) [interaction-state],
+:host(:state(selected)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+}
+
+:host([current]) [interaction-state],
+:host(:state(current)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+}
+
+:host([disabled]) [interaction-state],
+:host(:state(disabled)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-disabled);
+}
+
+:host(:not(:state(anchor))[readonly]) [interaction-state],
+:host(:not(:state(anchor)):state(readonly)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
+}

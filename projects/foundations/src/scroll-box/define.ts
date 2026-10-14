@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { define } from '@nvidia-elements/core/internal';
-import { Foundations } from '@nvidia-elements/foundations/foundations';
+import { define } from '@nvidia-elements/foundations/internal';
+import { ScrollBox } from '@nvidia-elements/foundations/scroll-box';
 
-define(Foundations);
+define(ScrollBox);
 
 declare global {
   interface HTMLElementTagNameMap {
-    'nve-foundations': Foundations;
+    'nve-scroll-box': ScrollBox;
   }
 }
