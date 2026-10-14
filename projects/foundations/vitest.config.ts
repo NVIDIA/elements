@@ -2,14 +2,13 @@ import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
 import { libraryTestConfig } from '@internals/vite/configs/test.js';
 
-const config = mergeConfig(libraryTestConfig, {
+export default mergeConfig(libraryTestConfig, {
   root: import.meta.dirname,
   resolve: {
     alias: { '@nvidia-elements/foundations': resolve(import.meta.dirname, './src') }
   },
   test: {
     include: ['./src/**/*.test.ts'],
-    setupFiles: [],
     coverage: {
       thresholds: {
         lines: 90,
@@ -20,7 +19,3 @@ const config = mergeConfig(libraryTestConfig, {
     }
   }
 });
-
-config.test.setupFiles = [];
-
-export default config;

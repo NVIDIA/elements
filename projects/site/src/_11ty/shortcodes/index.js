@@ -7,13 +7,19 @@ const { examples, elements } = siteData;
 /**
  * Shortcode for generating installation instructions for a component
  * Returns TypeScript import statement and example HTML usage
+ * @this {{page?: Record<string, unknown>} | void}
  * @param {string} tag - The component tag name
+ * @param {Object|string} exampleOptions - Optional configuration for the page's default example.
  * @returns {Promise<string>} HTML string containing installation instructions
  */
-export async function installShortcode(tag) {
+export async function installShortcode(tag, exampleOptions = {}) {
   const element = elements.find(d => d.name === tag);
-  return element?.manifest?.metadata?.entrypoint
-    ? /* html */ `
+  if (!element?.manifest?.metadata?.entrypoint) return '';
+  // The layout renders the default preview after this shortcode runs.
+  if (this && this.page) {
+    this.page.installExampleOptions = typeof exampleOptions === 'string' ? JSON.parse(exampleOptions) : exampleOptions;
+  }
+  return /* html */ `
 <section nve-layout="column gap:sm">
 
 \`\`\`html
@@ -40,8 +46,7 @@ ${examples.find(s => (s.name === 'Default' || s.name === 'InstallSource') && s.e
 </div>
 
 </section>
-`
-    : '';
+`;
 }
 
 /** @param {string} content */
