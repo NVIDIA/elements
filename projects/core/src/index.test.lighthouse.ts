@@ -82,6 +82,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/radio/define.js';
         import '@nvidia-elements/core/range/define.js';
         import '@nvidia-elements/core/resize-handle/define.js';
+        import '@nvidia-elements/core/scroll-box/define.js';
         import '@nvidia-elements/core/search/define.js';
         import '@nvidia-elements/core/select/define.js';
         import '@nvidia-elements/core/skeleton/define.js';

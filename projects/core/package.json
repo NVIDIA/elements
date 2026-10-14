@@ -735,6 +735,18 @@
       "types": "./dist/resize-handle/define.d.ts",
       "default": "./dist/resize-handle/define.js"
     },
+    "./scroll-box": {
+      "types": "./dist/scroll-box/index.d.ts",
+      "default": "./dist/scroll-box/index.js"
+    },
+    "./scroll-box/index.js": {
+      "types": "./dist/scroll-box/index.d.ts",
+      "default": "./dist/scroll-box/index.js"
+    },
+    "./scroll-box/define.js": {
+      "types": "./dist/scroll-box/define.d.ts",
+      "default": "./dist/scroll-box/define.js"
+    },
     "./search": {
       "types": "./dist/search/index.d.ts",
       "default": "./dist/search/index.js"

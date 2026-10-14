@@ -1,0 +1,156 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  --scrollbar-width: var(--nve-sys-scrollbar-width);
+  --shadow-color: transparent;
+  --shadow-size: var(--nve-ref-size-800);
+  position: relative;
+  display: block;
+  min-inline-size: 0;
+  min-block-size: 0;
+  writing-mode: inherit;
+  overflow: auto;
+  container-type: scroll-state;
+  container-name: nve-scroll-box;
+  scrollbar-color: var(--scrollbar-color);
+  scrollbar-width: var(--scrollbar-width);
+}
+
+:host([orientation='horizontal']) {
+  overflow-y: hidden;
+}
+
+:host([orientation='vertical']) {
+  overflow-x: hidden;
+}
+
+:host(:focus-visible) {
+  outline: var(--nve-ref-outline);
+}
+
+.content {
+  display: flow-root;
+}
+
+.shadow-layer {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shadows {
+  position: sticky;
+  inset: 0;
+}
+
+.edge {
+  position: absolute;
+  opacity: 0;
+  overflow: clip;
+}
+
+/* Cast the theme shadow from outside the viewport and clip it to the edge. */
+.edge::before {
+  content: '';
+  position: absolute;
+  height: var(--nve-ref-size-800);
+  /* Layer the same recipe to increase contrast without changing its shape. */
+  box-shadow: var(--nve-ref-shadow-100), var(--nve-ref-shadow-100);
+  transform-origin: 0 0;
+}
+
+@container nve-scroll-box scroll-state(scrollable: top) {
+  .top {
+    opacity: var(--_shadow-y);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: right) {
+  .right {
+    opacity: var(--_shadow-x);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: bottom) {
+  .bottom {
+    opacity: var(--_shadow-y);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: left) {
+  .left {
+    opacity: var(--_shadow-x);
+  }
+}
+
+/* Physical edges correspond to the host's native scroll coordinates. */
+.top,
+.bottom {
+  left: 0;
+  right: 0;
+  height: var(--shadow-size);
+  max-height: 100%;
+}
+
+.left,
+.right {
+  top: 0;
+  bottom: 0;
+  width: var(--shadow-size);
+  max-width: 100%;
+}
+
+.top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--shadow-color), transparent);
+}
+
+.top::before,
+.bottom::before {
+  bottom: 100%;
+  left: -100%;
+  width: 300%;
+}
+
+.left::before,
+.right::before {
+  width: calc(var(--_height) + 2 * var(--nve-ref-size-800));
+}
+
+.left::before {
+  top: calc(var(--_height) + var(--nve-ref-size-800));
+  left: calc(-1 * var(--nve-ref-size-800));
+  transform: rotate(-90deg);
+}
+
+.right::before {
+  top: calc(-1 * var(--nve-ref-size-800));
+  left: calc(100% + var(--nve-ref-size-800));
+  transform: rotate(90deg);
+}
+
+.right {
+  right: 0;
+  background: linear-gradient(to left, var(--shadow-color), transparent);
+}
+
+.bottom {
+  bottom: 0;
+  background: linear-gradient(to bottom, var(--shadow-color), transparent);
+  transform: rotate(180deg);
+}
+
+.left {
+  left: 0;
+  background: linear-gradient(to right, var(--shadow-color), transparent);
+}
+
+@media (forced-colors: active) {
+  .shadow-layer {
+    display: none;
+  }
+}
