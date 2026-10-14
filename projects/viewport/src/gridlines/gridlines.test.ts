@@ -101,6 +101,39 @@ describe(ViewportGridlines.metadata.tag, () => {
     expect(warnings.mock.calls.flat().join(' ')).not.toContain('scheduled an update after an update completed');
   });
 
+  it('uses an explicit viewport id and restores its parent association when cleared', async () => {
+    const other = document.createElement('nve-viewport');
+    other.id = 'gridlines-target';
+    other.scale = 3;
+    fixture.append(other);
+    await elementIsStable(other);
+    gridlines.commandfor = other.id;
+    await elementIsStable(gridlines);
+    expect(gridlines.commandForElement).toBe(other);
+    expect(gridlines.style.getPropertyValue('--_scale')).toBe('3');
+
+    gridlines.commandForElement = null;
+    await elementIsStable(gridlines);
+    expect(gridlines.hasAttribute('commandfor')).toBe(false);
+    expect(gridlines.commandForElement).toBe(viewport);
+    expect(gridlines.style.getPropertyValue('--_scale')).toBe(String(viewport.scale));
+  });
+
+  it('reflects an explicit viewport element and observes its committed state', async () => {
+    const other = document.createElement('nve-viewport');
+    fixture.append(other);
+    await elementIsStable(other);
+    gridlines.commandForElement = other;
+    await elementIsStable(gridlines);
+    expect(gridlines.commandfor).toBe('');
+    expect(gridlines.commandForElement).toBe(other);
+
+    other.scale = 2;
+    await elementIsStable(other);
+    await elementIsStable(gridlines);
+    expect(gridlines.style.getPropertyValue('--_scale')).toBe('2');
+  });
+
   it('assigns itself to the background and remains inert and hidden from accessibility', () => {
     const svg = gridlines.shadowRoot?.querySelector('svg');
     expect(gridlines.slot).toBe('background');
@@ -111,15 +144,7 @@ describe(ViewportGridlines.metadata.tag, () => {
     expect(getComputedStyle(gridlines).userSelect).toBe('none');
   });
 
-  it('cleans up the owning viewport listener and size observer', () => {
-    const removeListener = vi.spyOn(viewport, 'removeEventListener');
-    const disconnectObserver = vi.spyOn(ResizeObserver.prototype, 'disconnect');
-    gridlines.remove();
-    expect(removeListener).toHaveBeenCalledWith('viewportchange', expect.any(Function));
-    expect(disconnectObserver).toHaveBeenCalled();
-  });
-
-  it('fails harmlessly outside a direct viewport background context', async () => {
+  it('renders no grid without an associated viewport', async () => {
     const standalone = document.createElement(ViewportGridlines.metadata.tag);
     fixture.append(standalone);
     await elementIsStable(standalone);
@@ -341,6 +366,14 @@ describe(ViewportGridlines.metadata.tag, () => {
     viewport.x = 600;
     await elementIsStable(gridlines);
     expect(gridlines.shadowRoot?.querySelector('svg')?.getAttribute('viewBox')).not.toBe(initial);
+  });
+
+  it('cleans up the owning viewport listener and size observer', () => {
+    const removeListener = vi.spyOn(viewport, 'removeEventListener');
+    const disconnectObserver = vi.spyOn(ResizeObserver.prototype, 'disconnect');
+    gridlines.remove();
+    expect(removeListener).toHaveBeenCalledWith('viewportchange', expect.any(Function));
+    expect(disconnectObserver).toHaveBeenCalled();
   });
 });
 

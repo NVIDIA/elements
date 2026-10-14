@@ -38,7 +38,10 @@ describe(ViewportZoomRange.metadata.tag, () => {
     await elementIsStable(range);
   });
 
-  afterEach(() => removeFixture(fixture));
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   describe('setup and targeting', () => {
     it('initializes its bounds and value from the viewport', () => {
@@ -46,6 +49,7 @@ describe(ViewportZoomRange.metadata.tag, () => {
       expect(range.min).toBe(0.25);
       expect(range.max).toBe(4);
       expect(range.valueAsNumber).toBe(1);
+      expect(range.commandForElement).toBe(viewport);
       expect(input().disabled).toBe(false);
       expect(input().getAttribute('aria-label')).toBe('Zoom');
     });
@@ -54,6 +58,7 @@ describe(ViewportZoomRange.metadata.tag, () => {
       range.commandfor = null;
       viewport.append(range);
       await elementIsStable(range);
+      expect(range.commandForElement).toBe(viewport);
       change(2);
       expect(viewport.scale).toBeCloseTo(2);
       viewport.scale = 3;
@@ -75,6 +80,98 @@ describe(ViewportZoomRange.metadata.tag, () => {
       change(4);
       expect(other.scale).toBeCloseTo(4);
       expect(viewport.scale).toBe(1);
+    });
+
+    it('reflects an explicit element and lets an attribute change replace it', async () => {
+      const other = document.createElement('nve-viewport');
+      other.behaviorZoom = true;
+      fixture.append(other);
+      await elementIsStable(other);
+      range.commandForElement = other;
+
+      expect(range.commandForElement).toBe(other);
+      expect(range.commandfor).toBe('');
+      expect(range.getAttribute('commandfor')).toBe('');
+      await elementIsStable(range);
+      change(2);
+      expect(other.scale).toBeCloseTo(2);
+      expect(viewport.scale).toBe(1);
+
+      range.setAttribute('commandfor', viewport.id);
+
+      expect(range.commandForElement).toBe(viewport);
+      await elementIsStable(range);
+      change(3);
+      expect(viewport.scale).toBeCloseTo(3);
+      expect(other.scale).toBeCloseTo(2);
+    });
+
+    it('clears the attribute and restores the parent default when the element property is cleared', async () => {
+      viewport.append(range);
+      range.commandForElement = viewport;
+      await elementIsStable(range);
+
+      range.commandForElement = null;
+
+      expect(range.hasAttribute('commandfor')).toBe(false);
+      expect(range.commandfor).toBeNull();
+      expect(range.commandForElement).toBe(viewport);
+      await elementIsStable(range);
+      change(2);
+      expect(viewport.scale).toBeCloseTo(2);
+    });
+
+    it('treats an empty explicit attribute as an unresolved target', async () => {
+      viewport.append(range);
+      range.commandForElement = viewport;
+      range.setAttribute('commandfor', '');
+      await elementIsStable(range);
+
+      expect(range.commandForElement).toBeNull();
+      expect(input().disabled).toBe(true);
+    });
+
+    it('follows its parent when moved and lets an explicit id override discovery', async () => {
+      const other = document.createElement('nve-viewport');
+      other.behaviorZoom = true;
+      fixture.append(other);
+      await elementIsStable(other);
+      range.commandfor = null;
+      viewport.append(range);
+      await elementIsStable(range);
+
+      other.append(range);
+
+      expect(range.commandForElement).toBe(other);
+      change(2);
+      expect(other.scale).toBeCloseTo(2);
+      expect(viewport.scale).toBe(1);
+
+      range.commandfor = viewport.id;
+
+      expect(range.commandForElement).toBe(viewport);
+      await elementIsStable(range);
+      change(3);
+      expect(viewport.scale).toBeCloseTo(3);
+      expect(other.scale).toBeCloseTo(2);
+    });
+
+    it('keeps an unresolved explicit id from falling back to the parent viewport', async () => {
+      range.commandfor = 'missing-viewport';
+      viewport.append(range);
+      await elementIsStable(range);
+
+      expect(range.commandForElement).toBeNull();
+      expect(input().disabled).toBe(true);
+      change(2);
+      expect(viewport.scale).toBe(1);
+
+      range.commandfor = null;
+
+      expect(range.commandForElement).toBe(viewport);
+      await elementIsStable(range);
+      change(2);
+      expect(viewport.scale).toBeCloseTo(2);
     });
 
     it('navigates through native input within an enclosing shadow root', async () => {
@@ -106,6 +203,24 @@ describe(ViewportZoomRange.metadata.tag, () => {
       expect(command).not.toHaveBeenCalled();
     });
 
+    it('caches its subscription while public association reads resolve the current id', async () => {
+      const getElementById = vi.spyOn(document, 'getElementById');
+      expect(range.commandForElement).toBe(viewport);
+      expect(range.commandForElement).toBe(viewport);
+      expect(getElementById).toHaveBeenCalledTimes(2);
+      getElementById.mockClear();
+
+      viewport.scale = 2;
+      await elementIsStable(viewport);
+      await elementIsStable(range);
+      viewport.scale = 3;
+      await elementIsStable(viewport);
+      await elementIsStable(range);
+
+      expect(range.scale).toBe(3);
+      expect(getElementById).not.toHaveBeenCalled();
+    });
+
     it('updates limits and disabled state independently of transform changes', async () => {
       viewport.minScale = 0.5;
       viewport.maxScale = 3;
@@ -123,13 +238,9 @@ describe(ViewportZoomRange.metadata.tag, () => {
   });
 
   describe('target lifecycle', () => {
-    it('retains configured bounds and submits local input without a viewport target', async () => {
+    it('disables input and omits form data without a viewport target', async () => {
       range.remove();
       range = document.createElement('nve-viewport-zoom-range');
-      range.min = 0.5;
-      range.max = 4;
-      range.step = 0.5;
-      range.valueAsNumber = 1;
       range.name = 'scale';
       const form = document.createElement('form');
       fixture.append(form);
@@ -137,37 +248,34 @@ describe(ViewportZoomRange.metadata.tag, () => {
       await elementIsStable(range);
       const inputs = vi.fn();
       const changes = vi.fn();
-      const command = vi.fn();
       range.addEventListener('input', inputs);
       range.addEventListener('change', changes);
-      viewport.addEventListener('command', command);
-      expect(input().disabled).toBe(false);
-      input().focus();
+      expect(input().disabled).toBe(true);
 
-      await userEvent.keyboard('{ArrowRight}');
-      await elementIsStable(range);
+      input().valueAsNumber = 0.75;
+      input().dispatchEvent(new InputEvent('input', { bubbles: true }));
+      input().dispatchEvent(new Event('change', { bubbles: true }));
 
-      expect(range.min).toBe(0.5);
-      expect(range.max).toBe(4);
-      expect(range.scale).toBeCloseTo(1.5);
-      expect(new FormData(form).get('scale')).toBe('1.5');
-      expect(inputs).toHaveBeenCalledOnce();
-      expect(changes).toHaveBeenCalledOnce();
-      expect(command).not.toHaveBeenCalled();
+      expect(range.scale).toBe(1);
+      expect(new FormData(form).has('scale')).toBe(false);
+      expect(inputs).not.toHaveBeenCalled();
+      expect(changes).not.toHaveBeenCalled();
       expect(viewport.scale).toBe(1);
     });
 
-    it('binds a late commandfor target through native keyboard input', async () => {
+    it('enables input when a late commandfor target announces readiness', async () => {
       range.commandfor = 'later-viewport';
       await elementIsStable(range);
-      expect(input().disabled).toBe(false);
+      expect(input().disabled).toBe(true);
       const later = document.createElement('nve-viewport');
       later.id = 'later-viewport';
       later.behaviorZoom = true;
-      later.minScale = range.min;
-      later.maxScale = range.max;
+      later.minScale = 0.25;
+      later.maxScale = 4;
       fixture.append(later);
       await elementIsStable(later);
+      await elementIsStable(range);
+      expect(input().disabled).toBe(false);
       const command = vi.fn();
       later.addEventListener('command', command);
       input().focus();
@@ -210,6 +318,45 @@ describe(ViewportZoomRange.metadata.tag, () => {
       expect(range.scale).toBe(4);
     });
 
+    it('ignores input during replacement readiness and then uses the replacement bounds', async () => {
+      const replacement = document.createElement('nve-viewport');
+      replacement.id = viewport.id;
+      replacement.behaviorZoom = true;
+      replacement.minScale = 1;
+      replacement.maxScale = 9;
+      range.step = 0.25;
+      const command = vi.fn();
+      const inputs = vi.fn();
+      const changes = vi.fn();
+      replacement.addEventListener('command', command);
+      range.addEventListener('input', inputs);
+      range.addEventListener('change', changes);
+      viewport.replaceWith(replacement);
+      expect(replacement.hasUpdated).toBe(false);
+
+      input().valueAsNumber = 0.5;
+      input().dispatchEvent(new InputEvent('input', { bubbles: true }));
+      input().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+      input().dispatchEvent(new Event('change', { bubbles: true }));
+
+      expect(command).not.toHaveBeenCalled();
+      expect(inputs).not.toHaveBeenCalled();
+      expect(changes).not.toHaveBeenCalled();
+      expect(replacement.scale).toBe(1);
+      await elementIsStable(replacement);
+      await elementIsStable(range);
+      expect(input().disabled).toBe(false);
+      expect(range.min).toBe(1);
+      expect(range.max).toBe(9);
+      expect(range.scale).toBe(1);
+
+      input().valueAsNumber = 0.5;
+      input().dispatchEvent(new InputEvent('input', { bubbles: true }));
+      expect(command).toHaveBeenCalledOnce();
+      expect(replacement.scale).toBe(3);
+      expect(range.scale).toBe(3);
+    });
+
     it('does not send input commands to a removed id target', async () => {
       const command = vi.fn();
       viewport.addEventListener('command', command);
@@ -217,10 +364,26 @@ describe(ViewportZoomRange.metadata.tag, () => {
       change(2);
       expect(command).not.toHaveBeenCalled();
       await elementIsStable(range);
-      expect(input().disabled).toBe(false);
-      expect(range.scale).toBeCloseTo(2);
+      expect(input().disabled).toBe(true);
+      expect(range.scale).toBe(1);
       expect(range.min).toBe(0.25);
       expect(range.max).toBe(4);
+    });
+
+    it('restores input commands on reconnection without duplicate listeners', async () => {
+      const command = vi.fn();
+      viewport.addEventListener('command', command);
+      change(2);
+      expect(command).toHaveBeenCalledOnce();
+
+      range.remove();
+      change(3);
+      expect(command).toHaveBeenCalledOnce();
+      fixture.append(range);
+      change(3);
+
+      expect(command).toHaveBeenCalledTimes(2);
+      expect(viewport.scale).toBe(3);
     });
   });
 
@@ -356,16 +519,16 @@ describe(ViewportZoomRange.metadata.tag, () => {
       expect(viewport.scale).toBe(1);
     });
 
-    it('enables local input after losing a viewport target that cannot zoom', async () => {
+    it('remains disabled after losing a viewport target that cannot zoom', async () => {
       viewport.behaviorZoom = false;
       await elementIsStable(viewport);
       await elementIsStable(range);
       expect(input().disabled).toBe(true);
       range.commandfor = 'missing-viewport';
       await elementIsStable(range);
-      expect(input().disabled).toBe(false);
+      expect(input().disabled).toBe(true);
       change(2);
-      expect(range.scale).toBeCloseTo(2);
+      expect(range.scale).toBe(1);
       expect(viewport.scale).toBe(1);
     });
   });

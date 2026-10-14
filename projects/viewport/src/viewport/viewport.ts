@@ -13,6 +13,7 @@ import {
   positiveFiniteOr,
   useStyles
 } from '@nvidia-elements/core/internal';
+import type { ViewportTarget } from '../internal/viewport.types.js';
 import styles from './viewport.css?inline';
 import { ViewportAnimationController } from './viewport-animation.controller.js';
 import { ViewportAutoFitController } from './viewport-autofit.controller.js';
@@ -59,6 +60,7 @@ const BEHAVIOR_PAN_CONVERTER = {
  * @slot - Content positioned in the viewport's infinite content space.
  * @slot background - Custom content rendered behind viewport content and excluded from content fitting
  * @slot overlay - Interactive content fixed above the transformed plane and excluded from content fitting
+ * @event viewportready - Dispatched when a rendered viewport connects or completes its first render while connected.
  * @event viewportchange - Dispatched once after a render that commits one or more viewport transform changes.
  * @event capabilitieschange - Dispatched after pan or zoom availability or scale limits change.
  * @cssprop --background - Background color of the fixed viewport area.
@@ -78,7 +80,7 @@ const BEHAVIOR_PAN_CONVERTER = {
  * @stable false
  */
 @audit()
-export class Viewport extends LitElement {
+export class Viewport extends LitElement implements ViewportTarget {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -96,7 +98,6 @@ export class Viewport extends LitElement {
   readonly #autoFitController = new ViewportAutoFitController(this, clientRects =>
     this.#applyInitialAutoFit(clientRects)
   );
-  #publishTransformChanges = false;
   #x = 0;
   #y = 0;
   #scale = 1;
@@ -276,21 +277,23 @@ export class Viewport extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     attachInternals(this);
-    if (this.hasUpdated && !this.isUpdatePending) this.#publishTransformChanges = true;
+    if (this.hasUpdated) this.#notifyReady();
   }
 
-  disconnectedCallback(): void {
-    this.#publishTransformChanges = false;
-    super.disconnectedCallback();
+  protected firstUpdated(changed: PropertyValues<this>): void {
+    super.firstUpdated(changed);
+    this.#notifyReady();
   }
 
-  protected updated(changed: PropertyValues<this>): void {
-    super.updated(changed);
-    if (
-      this.isConnected &&
-      this.#publishTransformChanges &&
-      (changed.has('x') || changed.has('y') || changed.has('scale'))
-    ) {
+  #notifyReady(): void {
+    if (!this.isConnected) return;
+    this.dispatchEvent(new Event('viewportready', { bubbles: true, composed: true }));
+  }
+
+  protected update(changed: PropertyValues<this>): void {
+    super.update(changed);
+    // Lit sets hasUpdated after update(), before firstUpdated() and updated().
+    if (this.isConnected && this.hasUpdated && (changed.has('x') || changed.has('y') || changed.has('scale'))) {
       this.dispatchEvent(
         new CustomEvent<ViewportTransform>('viewportchange', {
           bubbles: true,
@@ -299,7 +302,6 @@ export class Viewport extends LitElement {
         })
       );
     }
-    this.#publishTransformChanges = this.isConnected;
   }
 
   #notifyCapabilitiesChange(): void {

@@ -1,21 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-export interface ViewportTransform {
-  readonly x: number;
-  readonly y: number;
-  readonly scale: number;
-}
-
-export interface ViewportPoint {
-  readonly x: number;
-  readonly y: number;
-}
-
-export interface ViewportRect extends ViewportPoint {
-  readonly width: number;
-  readonly height: number;
-}
+export type { ViewportPoint, ViewportRect, ViewportTransform } from '../internal/viewport.types.js';
 
 export type ViewportPanBehavior = boolean | 'space';
 

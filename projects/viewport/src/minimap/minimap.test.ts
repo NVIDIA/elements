@@ -78,6 +78,28 @@ describe(ViewportMinimap.metadata.tag, () => {
       expect(viewport.y).toBe(150);
     });
 
+    it('reflects element associations and lets commandfor replace them', async () => {
+      const other = document.createElement('nve-viewport');
+      fixture.append(other);
+      await elementIsStable(other);
+      viewport.id = 'minimap-target';
+      minimap.commandForElement = other;
+      expect(minimap.commandfor).toBe('');
+      expect(minimap.commandForElement).toBe(other);
+
+      minimap.commandfor = viewport.id;
+
+      expect(minimap.getAttribute('commandfor')).toBe(viewport.id);
+      expect(minimap.commandForElement).toBe(viewport);
+      await elementIsStable(minimap);
+
+      minimap.commandForElement = null;
+
+      expect(minimap.hasAttribute('commandfor')).toBe(false);
+      expect(minimap.commandForElement).toBe(viewport);
+      await elementIsStable(minimap);
+    });
+
     it('navigates through an explicit commandForElement target', async () => {
       const other = document.createElement('nve-viewport');
       other.behaviorPan = true;
@@ -152,6 +174,32 @@ describe(ViewportMinimap.metadata.tag, () => {
 
       expect(command).not.toHaveBeenCalled();
       expect(minimap.matches(':state(panning)')).toBe(false);
+    });
+
+    it('releases viewport resources when removed and restores them when reconnected', async () => {
+      const slot = viewport.shadowRoot?.querySelector('slot:not([name])');
+      if (!slot) throw new Error('Expected the viewport content slot');
+      const removeViewportListener = vi.spyOn(viewport, 'removeEventListener');
+      const removeSlotListener = vi.spyOn(slot, 'removeEventListener');
+      const disconnectObserver = vi.spyOn(ResizeObserver.prototype, 'disconnect');
+      const cancelFrame = vi.spyOn(globalThis, 'cancelAnimationFrame');
+
+      minimap.refresh();
+      minimap.remove();
+
+      for (const type of ['viewportready', 'viewportchange', 'capabilitieschange']) {
+        expect(removeViewportListener).toHaveBeenCalledWith(type, expect.any(Function));
+      }
+      expect(removeSlotListener).toHaveBeenCalledWith('slotchange', expect.any(Function));
+      expect(disconnectObserver).toHaveBeenCalledTimes(2);
+      expect(cancelFrame).toHaveBeenCalled();
+
+      viewport.append(minimap);
+      await elementIsStable(minimap);
+      await flushProjection(minimap);
+
+      expect(itemKeys(minimap)).toEqual(['automatic-root']);
+      expect(visibleRegionRect(minimap).width).toBeGreaterThan(0);
     });
   });
 

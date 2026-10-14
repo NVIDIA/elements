@@ -5,9 +5,10 @@ import { html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { I18nController, useStyles } from '@nvidia-elements/core/internal';
+import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { SliderFormControlMixin } from '@nvidia-elements/forms/mixins';
-import { ViewportControlController, ViewportCommandController } from '../viewport/viewport-control.controller.js';
-import type { Viewport } from '@nvidia-elements/viewport/viewport';
+import { ViewportAccessoryMixin } from '../internal/mixins/viewport-accessory.js';
+import type { ViewportTarget } from '../internal/viewport.types.js';
 import styles from './zoom-range.css?inline';
 
 /**
@@ -27,7 +28,7 @@ import styles from './zoom-range.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
  * @stable false
  */
-export class ViewportZoomRange extends SliderFormControlMixin(LitElement) {
+export class ViewportZoomRange extends ViewportAccessoryMixin(SliderFormControlMixin(LitElement)) {
   static styles = useStyles([styles]);
   static override readonly sliderDefaults = { min: 0.05, max: 20, step: 0, value: 1 };
   static readonly metadata = {
@@ -41,10 +42,6 @@ export class ViewportZoomRange extends SliderFormControlMixin(LitElement) {
 
   /** Command issued for each user input. */
   @property({ type: String, reflect: true }) command = '--zoom-to';
-  /** ID of the viewport command target. Defaults to a direct parent viewport. */
-  @property({ type: String, attribute: 'commandfor', reflect: true }) commandfor: string | null = null;
-  /** Viewport command target, taking precedence over commandfor. */
-  @property({ attribute: false }) commandForElement: HTMLElement | null = null;
 
   /** Scale submitted by a zoom command. */
   get scale(): number {
@@ -55,11 +52,8 @@ export class ViewportZoomRange extends SliderFormControlMixin(LitElement) {
   /** Enables updating internal strings for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  @state() protected viewportDisabled = false;
-  readonly #viewportControl = new ViewportControlController(this, target => this.#syncViewport(target), {
-    parentFallback: true
-  });
-  protected readonly commandController = new ViewportCommandController(this, this.#viewportControl);
+  @state() protected viewportDisabled = true;
+  protected readonly commandController = new TypeCommandController(this, { events: ['input'] });
 
   render() {
     return html`<div internal-host>
@@ -78,6 +72,7 @@ export class ViewportZoomRange extends SliderFormControlMixin(LitElement) {
   override connectedCallback(): void {
     super.connectedCallback();
     this.tabIndex = -1;
+    this.commandController.hostUpdated();
   }
 
   protected override updated(changed: PropertyValues<this>): void {
@@ -95,8 +90,20 @@ export class ViewportZoomRange extends SliderFormControlMixin(LitElement) {
     if (this.viewportDisabled) this._internals.setFormValue(null);
   }
 
-  #syncViewport(target: Viewport | null): void {
-    this.viewportDisabled = target ? !target.zoomable : false;
+  protected override viewportConnected(target: ViewportTarget): void {
+    this.#syncViewport(target);
+  }
+
+  protected override viewportChanged(target: ViewportTarget): void {
+    this.#syncViewport(target);
+  }
+
+  protected override viewportDisconnected(): void {
+    this.#syncViewport(null);
+  }
+
+  #syncViewport(target: ViewportTarget | null): void {
+    this.viewportDisabled = !target?.zoomable;
     if (target) {
       this.min = target.minScale;
       this.max = target.maxScale;
@@ -107,25 +114,26 @@ export class ViewportZoomRange extends SliderFormControlMixin(LitElement) {
 
   #onInput = (event: InputEvent): void => {
     event.stopPropagation();
-    const target = this.#viewportControl.resolveTarget();
-    if (this.disabled || this.readOnly || (target && !target.zoomable)) return;
+    const target = this.resolveViewport();
+    if (this.disabled || this.readOnly || !target?.zoomable) return;
     const position = (event.currentTarget as HTMLInputElement).valueAsNumber;
     let scale = this.min * (this.max / this.min) ** position;
     if (this.step > 0) scale = this.min + Math.round((scale - this.min) / this.step) * this.step;
     this.valueAsNumber = Math.min(this.max, Math.max(this.min, scale));
     this.dispatchInputEvent();
-    this.#syncViewport(this.#viewportControl.resolveTarget());
+    this.#syncViewport(this.resolveViewport());
   };
 
   #onChange = (event: Event): void => {
     event.stopPropagation();
-    if (!this.disabled && !this.readOnly && !this.viewportDisabled) this.dispatchChangeEvent();
+    const target = this.resolveViewport();
+    if (!this.disabled && !this.readOnly && target?.zoomable) this.dispatchChangeEvent();
   };
 
   #onKeyDown = (event: KeyboardEvent): void => {
     if (this.step <= 0 || this.disabled || this.readOnly) return;
-    const target = this.#viewportControl.resolveTarget();
-    if (target && !target.zoomable) return;
+    const target = this.resolveViewport();
+    if (!target?.zoomable) return;
     const direction = scaleStepDirection(event.key);
     if (!direction) return;
     event.preventDefault();
