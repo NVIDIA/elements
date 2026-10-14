@@ -111,7 +111,8 @@ export async function render(data) {
                     ? await exampleShortcode(data.tag, 'Default', {
                         summary: false,
                         inline: data.tag !== 'nve-page-loader',
-                        pageUrl: data.page.url
+                        pageUrl: data.page.url,
+                        ...data.page.installExampleOptions
                       })
                     : ''
                 }

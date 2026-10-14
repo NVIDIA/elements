@@ -193,7 +193,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted selected' : ''}><a href="/docs/patterns/trend/">Trend</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') || data.page.url.includes('/docs/viewport/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/foundations/scroll-box/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') || data.page.url.includes('/docs/viewport/') ? 'expanded' : ''}>
     <a href="/docs/elements/">Elements</a>
     <nve-tree-node ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}><a href="/docs/elements/">Overview</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
@@ -310,6 +310,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/radio/') ? 'highlighted selected' : ''}><a href="/docs/elements/radio/">Radio</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/range/') ? 'highlighted selected' : ''}><a href="/docs/elements/range/">Range</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'highlighted selected' : ''}><a href="/docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/scroll-box/') ? 'highlighted selected' : ''}><a href="/docs/foundations/scroll-box/">Scroll Box</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'highlighted selected' : ''}><a href="/docs/elements/search/">Search</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted selected' : ''}><a href="/docs/elements/select/">Select</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'highlighted selected' : ''}><a href="/docs/elements/skeleton/">Skeleton</a></nve-tree-node>
