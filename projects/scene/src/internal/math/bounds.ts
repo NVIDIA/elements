@@ -3,11 +3,51 @@
 
 import type { Matrix4, Vec3 } from './types.js';
 import { transformPointMat4 } from './mat4.js';
+import { assertAffineMatrix } from './affine-transform.js';
 
 /** A conservative world-space axis-aligned box at JavaScript numeric precision. */
 export interface SceneBounds {
   readonly minimum: Readonly<Vec3>;
   readonly maximum: Readonly<Vec3>;
+}
+
+/**
+ * Extends distinct caller-owned xyz minima and maxima with a finite box's affine image.
+ * Destinations contain existing bounds or positive minima and negative maxima at infinity.
+ * Endpoint products retain corner evaluation order at JavaScript precision, with 18 multiplications
+ * and no temporary storage. Singular transforms are valid. Reads all source coordinates before
+ * writing, allowing destinations to alias the source bounds. Upper zero bounds become positive zero,
+ * matching point accumulation. Callers supply valid destination tuples.
+ */
+// eslint-disable-next-line max-params -- @hotpath Separate destination tuples avoid allocating a wrapper for every box.
+export function extendAffineBounds(bounds: SceneBounds, matrix: Matrix4, minimum: Vec3, maximum: Vec3): void {
+  assertAffineMatrix(matrix);
+  if (minimum === maximum) throw new RangeError('Bounds destination tuples must be distinct.');
+  const minimumX = bounds.minimum[0],
+    minimumY = bounds.minimum[1],
+    minimumZ = bounds.minimum[2],
+    maximumX = bounds.maximum[0],
+    maximumY = bounds.maximum[1],
+    maximumZ = bounds.maximum[2];
+  for (let axis = 0; axis < 3; axis += 1) {
+    const x = matrix[axis]!,
+      y = matrix[axis + 4]!,
+      z = matrix[axis + 8]!,
+      translation = matrix[axis + 12]!;
+    const firstX = x * minimumX,
+      lastX = x * maximumX,
+      firstY = y * minimumY,
+      lastY = y * maximumY,
+      firstZ = z * minimumZ,
+      lastZ = z * maximumZ;
+    const lower = Math.min(firstX, lastX) + Math.min(firstY, lastY) + Math.min(firstZ, lastZ) + translation;
+    const upper = Math.max(firstX, lastX) + Math.max(firstY, lastY) + Math.max(firstZ, lastZ) + translation;
+    if (!Number.isFinite(lower) || !Number.isFinite(upper)) {
+      throw new RangeError('Bounds arithmetic must remain finite.');
+    }
+    minimum[axis] = Math.min(minimum[axis]!, lower);
+    maximum[axis] = Math.max(maximum[axis]!, upper) + 0;
+  }
 }
 
 /** Accumulates geometry without rounding frame translations to GPU precision. */
@@ -29,7 +69,11 @@ export class BoundsAccumulator {
   }
 
   includeBox(bounds: SceneBounds, matrix: Matrix4): void {
-    for (const corner of boundsCorners(bounds)) this.include(transformPointMat4(matrix, corner));
+    if (matrix[3] !== 0 || matrix[7] !== 0 || matrix[11] !== 0 || matrix[15] !== 1) {
+      for (const corner of boundsCorners(bounds)) this.include(transformPointMat4(matrix, corner));
+      return;
+    }
+    extendAffineBounds(bounds, matrix, this.#minimum, this.#maximum);
   }
 
   get bounds(): SceneBounds | null {

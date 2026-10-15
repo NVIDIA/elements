@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { FrameEvaluation } from '../frame/state.js';
+import { POLYLINE_MITER_LIMIT } from '../../math/polyline.js';
 import { SCENE_LAYER_SELECTOR } from '../../layers/registry.js';
 import { getMarkerLayerRenderData, type MarkerLayerRenderData } from '../../layers/markers/layer-state.js';
 import { getStreamingLayerRenderData } from '../../layers/streaming/layer-state.js';
@@ -13,7 +14,8 @@ import { takeHeightfieldLayerRenderData } from '../../layers/heightfield/layer-s
 import type { MeshRenderData } from '../../layers/mesh/render-data.js';
 import { lineSegmentCount } from '../../layers/lines/data.js';
 import { BoundsAccumulator, type SceneBounds } from '../../math/bounds.js';
-import { composePreciseMat4, multiplyPreciseMat4, transformPointMat4 } from '../../math/mat4.js';
+import { composePreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
+import { PreparedAffineTransform } from '../../math/affine-transform.js';
 import type { Matrix4, Vec3 } from '../../math/types.js';
 import { LABEL, LINE_VERTEX, POINT, TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
 import { readMarker } from '../../records/layouts/codecs.js';
@@ -117,8 +119,8 @@ function streamRadius(
   let width = 0;
   for (let index = 0; index < data.count; index++)
     width = Math.max(width, view.getFloat32(index * LINE_VERTEX.stride + WIDTH_OFFSET, true));
-  // World joins cap miters at four half-widths. Independent segments have no joins.
-  return width * (data.topology !== 'segments' && data.count > 2 ? 2 : 0.5);
+  const halfWidth = width * 0.5;
+  return halfWidth * (data.topology !== 'segments' && data.count > 2 ? POLYLINE_MITER_LIMIT : 1);
 }
 
 function pointRadius(layer: HTMLElement): number {
@@ -139,14 +141,14 @@ function includePositions(
 ): void {
   if (!options.bytes) return;
   const view = new DataView(options.bytes.buffer, options.bytes.byteOffset, options.bytes.byteLength);
+  const transform = new PreparedAffineTransform(options.frame);
+  const position: Vec3 = [0, 0, 0];
   for (let index = 0; index < options.count; index++) {
     const offset = index * options.stride;
-    const position: Vec3 = [
-      view.getFloat32(offset, true),
-      view.getFloat32(offset + 4, true),
-      view.getFloat32(offset + 8, true)
-    ];
-    bounds.include(transformPointMat4(options.frame, position), options.radius);
+    position[0] = view.getFloat32(offset, true);
+    position[1] = view.getFloat32(offset + 4, true);
+    position[2] = view.getFloat32(offset + 8, true);
+    bounds.include(transform.writePosition(position, 0, position, 0), options.radius);
   }
 }
 

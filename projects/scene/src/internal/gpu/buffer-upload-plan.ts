@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { coalesceRanges } from '../algorithms/range-coalescing.js';
 import { assertRangeInterval, type RangeInterval } from '../structures/range-interval.js';
 import { RangeSet } from '../structures/range-set.js';
 
@@ -10,23 +11,26 @@ export interface BufferUploadPlanOptions {
   readonly ranges: readonly Readonly<RangeInterval>[];
   /** Cost of one write expressed in transferred bytes. Zero preserves clean gaps. */
   readonly callOverheadBytes?: number;
-  /** Uses a complete upload if the coalesced plan would exceed this write budget. */
+  /** Merges the cheapest remaining gaps to stay within this write budget. */
   readonly maxWrites?: number;
 }
 
 /**
  * Plans bounded, four-byte-aligned writes without owning source bytes or GPU resources.
- * A gap merges when its byte cost is no greater than the saved write cost. This minimizes
- * transferred bytes plus write count times call overhead before applying the write budget.
+ * Minimizes source bytes plus write count times call overhead within the write budget.
+ * The numeric coalescer owns gap selection; this planner owns alignment and clipping.
  * The planner reuses normalized inputs; callers must keep them unchanged during use.
  */
 export function planBufferUploads(options: BufferUploadPlanOptions): readonly Readonly<RangeInterval>[] {
   const { byteLength, ranges, callOverheadBytes = 0, maxWrites = Number.MAX_SAFE_INTEGER } = options;
   validateOptions(byteLength, callOverheadBytes, maxWrites);
-  const planned = isNormalized(ranges, byteLength, callOverheadBytes)
-    ? ranges
-    : coalesce(normalize(ranges, byteLength), callOverheadBytes);
-  return planned.length > maxWrites ? [{ offset: 0, size: byteLength }] : planned;
+  const normalized = isNormalized(ranges, byteLength, callOverheadBytes);
+  if (normalized && ranges.length <= maxWrites) return ranges;
+  return coalesceRanges({
+    ranges: normalized ? ranges : normalize(ranges, byteLength),
+    rangeOverhead: callOverheadBytes,
+    maxRanges: maxWrites
+  });
 }
 
 function validateOptions(byteLength: number, callOverheadBytes: number, maxWrites: number): void {
@@ -69,18 +73,4 @@ function normalize(ranges: readonly Readonly<RangeInterval>[], byteLength: numbe
     normalized.add(start, end - start);
   }
   return normalized.drain();
-}
-
-function coalesce(ranges: RangeInterval[], overhead: number): RangeInterval[] {
-  let count = 0;
-  for (const range of ranges) {
-    const previous = ranges[count - 1];
-    if (previous && range.offset - previous.offset - previous.size <= overhead) {
-      previous.size = range.offset + range.size - previous.offset;
-    } else {
-      ranges[count++] = range;
-    }
-  }
-  ranges.length = count;
-  return ranges;
 }
