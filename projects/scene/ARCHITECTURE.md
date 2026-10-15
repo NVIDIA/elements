@@ -151,6 +151,11 @@ box center and extents once, and stops at the first rejecting plane. The interse
 candidate; passing all planes does not establish an exact box/frustum intersection.
 `MarkerBoundsClassifier` owns its reusable Float64 matrix and the marker policies for unknown and empty bounds.
 The renderer consumes the shared relation type to select marker culling and compaction work.
+`math/frustum.ts` owns one ordered plane definition for CPU classification and the generated `FRUSTUM_WGSL` sphere tests.
+Both use strict support-interval rejection through the same half-space rule; touching remains a candidate without
+normalization or a tolerance. Box support uses absolute coefficient-weighted extents, while sphere support uses radius
+times plane-normal length. CPU calculations retain JavaScript precision; shader calculations retain float32 precision.
+Marker compaction owns record decoding, its enclosing-sphere radius, alpha routing, and dispatch policy.
 
 `PreparedAffineTransform` captures finite affine matrix coefficients at JavaScript precision and writes positions
 directly into caller-owned coordinate spans. Singular transforms remain valid for positions. `PreparedAffineGeometryTransform`
@@ -168,6 +173,15 @@ extent arithmetic, including extreme finite coordinates, shear, reflection, and 
 captures source endpoints before writing, supports aliases with distinct destination tuples, and rejects invalid
 matrices and overflowing bounds. Upper zero bounds follow point accumulation's positive-zero convention.
 `BoundsAccumulator.includeBox` uses this kernel for affine transforms and corner projection for perspective transforms.
+
+`PreparedGridSampler` in `math/grid-sampling.ts` captures dimensions, spacing, and origin from a checked `UniformScalarGrid`
+while borrowing its sample storage. It owns bilinear and triangle interpolation, analytic surface normals, inclination,
+and batch height writes into caller-owned coordinate storage. Scalar height and slope queries and batch writes allocate no
+temporary objects per point. Coordinate division, interpolation order, inclusive outer edges, triangle diagonal ties,
+and normal signed zeros follow the existing heightfield queries. Finite-difference shading normals remain in
+`math/grid-gradient.ts`. Heightfield layers validate and capture producer grids, retain one sampler per captured grid,
+and discard it when the grid clears or becomes invalid. The layer query adapter owns null-grid behavior and copying
+for draping; the numeric batch writer changes only in-bounds z values and rejects storage that overlaps grid samples.
 
 Polygon ear clipping uses `ArrayBackedLinkedList`, an array-backed circular doubly linked list of stable integer indices.
 The list owns neighbor links and constant-time removal. The polygon compiler owns traversal order, hole bridges,
@@ -225,6 +239,14 @@ transfers use linear traversal; reordered matches keep their original write prec
 and cache the index on their first partitioned update, then keep it across leases and snapshot reassignment. The GPU owner
 clips updates to active source bytes and keeps a direct path for one contiguous allocation. Mesh instances use the same
 buffer owner. Planar mesh attributes keep direct uploads with the shared planner's write budget.
+
+`partitionSequence` in `algorithms/sequence-partitioning.ts` assigns an integer prefix to bounded windows with context
+before and after each owned range. Context clamps at source boundaries or wraps, while ownership never overlaps.
+Scalar callbacks avoid temporary partition objects. Range mapping writes caller-defined ranges in destination order.
+Callers check input bounds once before traversing. The algorithm retains no complete plan. Context counts cannot exceed
+the source length, so each window needs at most three source spans. Connected lines use one context record on each
+side; strips reserve the final endpoint, and loops wrap both ends. Rendering owns segment and join identities, byte
+conversion, device limits, allocation keys, and the complete-buffer path. Shared instance storage owns actual transfers.
 
 `planBufferUploads` owns byte-range selection without owning source snapshots or GPU resources. It clips ranges to
 available bytes, aligns writes to four bytes, and merges overlaps and adjacency through `RangeSet`. A configurable
