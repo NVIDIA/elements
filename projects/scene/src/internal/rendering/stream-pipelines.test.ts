@@ -3,7 +3,8 @@
 
 import { describe, expect, it } from 'vitest';
 import type { SceneGPURenderPipelineDescriptor } from '../gpu/platform.js';
-import { createStreamPipelines, GRID_DEPTH_BIAS } from './stream-pipelines.js';
+import { createStreamPipelines, GRID_DEPTH_BIAS, LINE_PICK_SHADER } from './stream-pipelines.js';
+import { POLYLINE_WGSL } from '../math/polyline.js';
 
 describe(createStreamPipelines.name, () => {
   it('should reserve positive depth bias while keeping every transparent pass read-only', () => {
@@ -51,6 +52,9 @@ describe(createStreamPipelines.name, () => {
     ]);
     expect(depthStencils.filter(depthStencil => depthStencil.depthBias === undefined)).toHaveLength(6);
     expect(shaderSources).toHaveLength(4);
+    for (const source of [shaderSources[0]!, shaderSources[3]!, LINE_PICK_SHADER]) {
+      expect(source.split(POLYLINE_WGSL)).toHaveLength(2);
+    }
     expect(shaderSources.every(source => source.match(/fn srgbToLinear/g)?.length === 1)).toBe(true);
     expect(depthStencils.slice(0, 6).map(depthStencil => depthStencil.depthWriteEnabled)).toEqual([
       true,

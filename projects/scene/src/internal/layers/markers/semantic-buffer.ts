@@ -5,13 +5,12 @@ import {
   MutableVector3View,
   PackedRecordBuffer,
   assertFinite,
-  readPackedColor,
-  resolveSceneColor,
-  writePackedColor,
   type MutableQuaternion,
   type MutableVector3,
   type RecordBufferOptions
 } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor, writePackedColor } from '../../color/color.js';
+import { readRGBA8 } from '../../color/rgba8.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 import { getSceneFeatureId, setSceneFeatureId } from '../../interaction/feature-ids.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
@@ -214,7 +213,7 @@ class CenteredRecord implements CenteredPrimitive {
   }
 
   get color(): RGBA {
-    return readPackedColor(this.view, this.recordOffset + COLOR_OFFSET);
+    return readRGBA8(this.view, this.recordOffset + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {
@@ -233,7 +232,7 @@ class CenteredRecord implements CenteredPrimitive {
 
 class CubeRecord extends CenteredRecord implements Cube {
   get outlineColor(): RGBA {
-    return readPackedColor(this.view, this.recordOffset + OUTLINE_COLOR_OFFSET);
+    return readRGBA8(this.view, this.recordOffset + OUTLINE_COLOR_OFFSET);
   }
 
   set outlineColor(value: SceneColor) {
@@ -275,7 +274,7 @@ class ArrowRecord implements Arrow {
   }
 
   get color(): RGBA {
-    return readPackedColor(this.#view, this.#recordOffset + COLOR_OFFSET);
+    return readRGBA8(this.#view, this.#recordOffset + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {

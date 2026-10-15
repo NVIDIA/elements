@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { MutableVector3View, resolveSceneColor } from '../../records/packed-record-buffer.js';
+import { MutableVector3View } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor } from '../../color/color.js';
 import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from './instance-buffer.js';
 import { readMarker } from '../../records/layouts/codecs.js';
 import { MarkerBuffer } from './buffer.js';

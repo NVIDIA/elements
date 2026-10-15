@@ -22,6 +22,40 @@ const grid = () => ({
 });
 
 describe('heightfield layer state', () => {
+  it('captures byte alpha with each grid generation and clears it after invalid or absent grids', () => {
+    const layer = document.createElement('div');
+    registerHeightfieldLayer(layer, [1, 1, 1, 1]);
+    const colors = new Uint8Array(16).fill(255);
+    const source = { ...grid(), colors };
+    setHeightfieldLayerGrid(layer, source);
+    const opaque = takeHeightfieldLayerRenderData(layer);
+    colors[3] = 254;
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(false);
+    setHeightfieldLayerColor(layer, [1, 1, 1, 0.5]);
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(true);
+    setHeightfieldLayerColor(layer, [1, 1, 1, 1]);
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(false);
+    setHeightfieldLayerGrid(layer, source);
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(true);
+    colors[3] = 0;
+    setHeightfieldLayerGrid(layer, source);
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(true);
+    expect(opaque.heightfield?.colors?.[3]).toBe(255);
+    expect(opaque.transparent).toBe(false);
+    setHeightfieldLayerGrid(layer, { ...source, spacing: 0 });
+    expect(takeHeightfieldLayerRenderData(layer)).toMatchObject({ ready: false, transparent: false });
+    colors.fill(255);
+    setHeightfieldLayerGrid(layer, source);
+    expect(takeHeightfieldLayerRenderData(layer)).toMatchObject({ ready: true, transparent: false });
+    colors[3] = 128;
+    setHeightfieldLayerGrid(layer, source);
+    setHeightfieldLayerGrid(layer, grid());
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(false);
+    setHeightfieldLayerGrid(layer, source);
+    setHeightfieldLayerGrid(layer, null);
+    expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(false);
+  });
+
   it('snapshots grids, retains topology for stable updates, and tracks color', () => {
     const layer = document.createElement('div');
     registerHeightfieldLayer(layer, [0.5, 0.5, 0.5, 1]);

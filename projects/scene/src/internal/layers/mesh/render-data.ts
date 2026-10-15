@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { RGBA } from '../../color/types.js';
+import type { AlphaSummary } from '../../color/alpha.js';
 import type { RangeInterval } from '../../structures/range-set.js';
 
 export type MeshGeometryAttribute = 'positions' | 'normals' | 'uvs' | 'colors' | 'indices';
@@ -49,6 +50,8 @@ type MeshShading = 'lit' | 'unlit';
 
 /** Renderer-boundary input shared by authored meshes and geometry constructors. */
 interface ConstructedMeshRenderDataOptions {
+  /** Alpha counts captured with vertex or heightfield colors. */
+  readonly alphaSummary: AlphaSummary;
   readonly color: RGBA;
   readonly colors: Float32Array | null;
   readonly geometryError: boolean;
@@ -101,21 +104,5 @@ export function createMeshGeometryAttributeVersions(): Record<MeshGeometryAttrib
 
 function meshIsTransparent(options: ConstructedMeshRenderDataOptions, texture: ImageBitmap | null): boolean {
   if (texture !== null || options.color[3] < 1) return true;
-  return hasTransparentVertexColor(options.colors) || hasTransparentHeightfieldColor(options.heightfield?.colors);
-}
-
-function hasTransparentVertexColor(colors: Float32Array | null): boolean {
-  if (colors === null) return false;
-  for (let index = 3; index < colors.length; index += 4) {
-    if (colors[index]! < 1) return true;
-  }
-  return false;
-}
-
-function hasTransparentHeightfieldColor(colors: Uint8Array | null | undefined): boolean {
-  if (!colors) return false;
-  for (let index = 3; index < colors.length; index += 4) {
-    if (colors[index]! < 255) return true;
-  }
-  return false;
+  return options.alphaSummary.zero + options.alphaSummary.partial > 0;
 }

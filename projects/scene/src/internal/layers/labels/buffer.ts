@@ -5,11 +5,10 @@ import {
   MutableVector3View,
   PackedRecordBuffer,
   assertFinite,
-  readPackedColor,
-  resolveRecordBufferOptions,
-  resolveSceneColor,
-  writePackedColor
+  resolveRecordBufferOptions
 } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor } from '../../color/color.js';
+import { readRGBA8, writeRGBA8 } from '../../color/rgba8.js';
 import { LABEL } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { registerLabelSourceTexts } from './source.js';
@@ -119,7 +118,7 @@ class LabelRecord implements Label {
     if (this.#view.getUint32(this.index * LABEL.stride + USE_CURRENT_COLOR_OFFSET, true) !== 0) {
       return 'currentColor';
     }
-    return readPackedColor(this.#view, this.index * LABEL.stride + COLOR_OFFSET);
+    return readRGBA8(this.#view, this.index * LABEL.stride + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {
@@ -172,7 +171,7 @@ function writeLabelColor(view: DataView, recordOffset: number, value: SceneColor
     return;
   }
   const color = resolveSceneColor(value);
-  writePackedColor(view, recordOffset + COLOR_OFFSET, color);
+  writeRGBA8(view, recordOffset + COLOR_OFFSET, color);
   view.setUint32(recordOffset + USE_CURRENT_COLOR_OFFSET, 0, true);
 }
 

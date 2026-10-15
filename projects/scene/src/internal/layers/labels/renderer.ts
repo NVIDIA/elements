@@ -26,6 +26,7 @@ import { createPreparationContext, PREPARATION_CHUNK_SIZE } from '../../renderin
 import { GenerationTasks, type GenerationTask } from '../../structures/generation-tasks.js';
 import { SRGB_TO_LINEAR_WGSL } from '../../color/transfer.js';
 import { parseCSSColor, srgbToLinear } from '../../color/color.js';
+import { UNPACK_RGBA8_WGSL } from '../../color/rgba8.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
@@ -412,6 +413,7 @@ struct Output {
 }
 ${pick ? PICK_OUTPUT_WGSL : OIT_WGSL}
 ${SRGB_TO_LINEAR_WGSL}
+${UNPACK_RGBA8_WGSL}
 @group(0) @binding(0) var<uniform> scene: Scene;
 @group(0) @binding(1) var<storage, read> labelWords: array<u32>;
 @group(0) @binding(2) var<storage, read> glyphWords: array<u32>;
@@ -420,7 +422,7 @@ ${SRGB_TO_LINEAR_WGSL}
 fn loadLabel(index: u32) -> Label {
   let offset = index * 6u;
   let packed = labelWords[offset + 4u];
-  let encoded = vec4f(f32(packed & 255u), f32((packed >> 8u) & 255u), f32((packed >> 16u) & 255u), f32(packed >> 24u)) / 255.0;
+  let encoded = nve_unpack_unorm8x4(packed);
   let linear = srgbToLinear(encoded.rgb);
   let color = select(vec4f(linear, encoded.a), scene.currentColor, labelWords[offset + 5u] != 0u);
   return Label(vec3f(bitcast<f32>(labelWords[offset]), bitcast<f32>(labelWords[offset + 1u]), bitcast<f32>(labelWords[offset + 2u])), bitcast<f32>(labelWords[offset + 3u]), color);

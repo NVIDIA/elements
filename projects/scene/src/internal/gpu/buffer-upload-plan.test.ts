@@ -42,14 +42,36 @@ describe(planBufferUploads.name, () => {
   it('applies the write budget after normalization and cost coalescing', () => {
     const ranges = Array.from({ length: 65 }, (_, index) => ({ offset: index * 8, size: 4 }));
     expect(planBufferUploads({ byteLength: 520, ranges: ranges.slice(0, 64), maxWrites: 64 })).toHaveLength(64);
-    expect(planBufferUploads({ byteLength: 520, ranges, maxWrites: 64 })).toEqual([{ offset: 0, size: 520 }]);
+    const bounded = [{ offset: 0, size: 12 }, ...ranges.slice(2)];
+    expect(planBufferUploads({ byteLength: 520, ranges, maxWrites: 64 })).toEqual(bounded);
     expect(planBufferUploads({ byteLength: 520, ranges, maxWrites: 64, callOverheadBytes: 4 })).toEqual([
       { offset: 0, size: 516 }
     ]);
     expect(planBufferUploads({ byteLength: 520, ranges: [...ranges, ...ranges], maxWrites: 65 })).toHaveLength(65);
-    expect(planBufferUploads({ byteLength: 520, ranges: ranges.slice().reverse(), maxWrites: 64 })).toEqual([
-      { offset: 0, size: 520 }
-    ]);
+    expect(planBufferUploads({ byteLength: 520, ranges: ranges.slice().reverse(), maxWrites: 64 })).toEqual(bounded);
+  });
+
+  it('avoids a full storage upload when only one gap must merge to satisfy the budget', () => {
+    const ranges = Object.freeze(
+      Array.from({ length: 65 }, (_, index) => Object.freeze({ offset: index * 8, size: 4 }))
+    );
+    const plan = planBufferUploads({ byteLength: 1024 * 1024, ranges, maxWrites: 64 });
+    expect(plan).toHaveLength(64);
+    expect(plan.reduce((bytes, range) => bytes + range.size, 0)).toBe(264);
+    expect(ranges[0]).toEqual({ offset: 0, size: 4 });
+  });
+
+  it('retains alignment, clipping, and changed extents when the budget requires one write', () => {
+    expect(
+      planBufferUploads({
+        byteLength: 32,
+        ranges: [
+          { offset: 29, size: 12 },
+          { offset: 7, size: 2 }
+        ],
+        maxWrites: 1
+      })
+    ).toEqual([{ offset: 4, size: 28 }]);
   });
 
   it('emits no writes for empty storage, empty ranges, or changes outside the active prefix', () => {
@@ -96,7 +118,7 @@ describe(planBufferUploads.name, () => {
     { offset: 0, size: -1 },
     { offset: 0, size: Number.NaN },
     { offset: Number.MAX_SAFE_INTEGER, size: 1 }
-  ])('rejects invalid intervals %o before producing a fallback upload', range => {
+  ])('rejects invalid intervals %o before coalescing to the write budget', range => {
     const options: BufferUploadPlanOptions = {
       byteLength: 32,
       ranges: [{ offset: 0, size: 4 }, { offset: 8, size: 4 }, range],

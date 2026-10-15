@@ -62,6 +62,15 @@ describe('model geometry capture', () => {
     expect(compiled.normals[1]).toBeCloseTo(2 / Math.sqrt(5));
   });
 
+  it('retains the model Float32 position limit without changing producer geometry', () => {
+    const source = triangle();
+    const original = source.positions.slice();
+    expect(() => compileModelGeometry([{ position: [1e100, 0, 0], geometry: source }])).toThrow(
+      'Model positions must fit the finite Float32 range.'
+    );
+    expect(source.positions).toEqual(original);
+  });
+
   it('keeps supplied normals perpendicular to tangents when a matrix needs pivoting', () => {
     const compiled = compileModelGeometry([
       {
