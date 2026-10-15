@@ -1,8 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { RGBA } from './types.js';
+import type { RGBA, SceneColor } from './types.js';
 import { decodeSrgbChannel } from './transfer.js';
+import { copyRGBA } from './rgba.js';
+import { decodeUnorm8, writeRGBA8 } from './rgba8.js';
 
 let colorContext: CanvasRenderingContext2D | null | undefined;
 
@@ -27,7 +29,20 @@ export function parseCSSColor(source: string): RGBA | null {
   const green = pixels[1] as number;
   const blue = pixels[2] as number;
   const alpha = pixels[3] as number;
-  return [red / 255, green / 255, blue / 255, alpha / 255];
+  return [decodeUnorm8(red), decodeUnorm8(green), decodeUnorm8(blue), decodeUnorm8(alpha)];
+}
+
+/** Resolves supported CSS colors or captures a strictly normalized RGBA tuple. */
+export function resolveSceneColor(value: SceneColor): RGBA {
+  if (typeof value !== 'string') return copyRGBA(value);
+  const color = parseCSSColor(value);
+  if (!color) throw new TypeError(`Record color must be a supported CSS color: "${value}".`);
+  return color;
+}
+
+/** Validates a Scene color before writing any RGBA8 channel. */
+export function writePackedColor(view: DataView, offset: number, color: SceneColor): void {
+  writeRGBA8(view, offset, resolveSceneColor(color));
 }
 
 /** Preserves a supported CSS color source or returns the supplied fallback. */
@@ -45,10 +60,6 @@ export function createCSSColorConverter(fallback: CSSColor) {
   };
 }
 
-export function sameRGBA(left: RGBA, right: RGBA): boolean {
-  return left[0] === right[0] && left[1] === right[1] && left[2] === right[2] && left[3] === right[3];
-}
-
 /** Converts one normalized sRGB channel to linear light. */
 export function srgbToLinear(channel: number): number {
   if (!Number.isFinite(channel)) {
@@ -60,7 +71,7 @@ export function srgbToLinear(channel: number): number {
 
 /** Converts one byte-scale sRGB channel to linear light. */
 export function srgbByteToLinear(channel: number): number {
-  return srgbToLinear(channel / 255);
+  return srgbToLinear(decodeUnorm8(channel));
 }
 
 function createColorContext(): CanvasRenderingContext2D | null {

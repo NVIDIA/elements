@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SceneColor, RGBA } from '../color/types.js';
-import { parseCSSColor } from '../color/color.js';
 import {
   assertSceneFeatureId,
   getSceneFeatureIds,
@@ -300,40 +298,6 @@ export class MutableVector3View implements MutableVector3 {
     this.#view.setFloat32(this.#offset + component * 4, value, true);
     this.#notifyMutation?.();
   }
-}
-
-export function resolveSceneColor(value: SceneColor): RGBA {
-  if (typeof value === 'string') {
-    const color = parseCSSColor(value);
-    if (!color) {
-      throw new TypeError(`Record color must be a supported CSS color: "${value}".`);
-    }
-    return color;
-  }
-  if (!Array.isArray(value) || value.length !== 4) {
-    throw new RangeError('Record colors must contain four channels.');
-  }
-  const color: RGBA = [value[0], value[1], value[2], value[3]];
-  color.forEach(assertFinite);
-  if (color.some(channel => channel < 0 || channel > 1)) {
-    throw new RangeError('Record color channels must be in the range 0..1.');
-  }
-  return color;
-}
-
-export function readPackedColor(view: DataView, offset: number): RGBA {
-  return [
-    view.getUint8(offset) / 255,
-    view.getUint8(offset + 1) / 255,
-    view.getUint8(offset + 2) / 255,
-    view.getUint8(offset + 3) / 255
-  ];
-}
-
-export function writePackedColor(view: DataView, offset: number, color: SceneColor): void {
-  resolveSceneColor(color).forEach((value, channel) => {
-    view.setUint8(offset + channel, Math.floor(value * 255 + 0.5));
-  });
 }
 
 export function assertFinite(value: number): void {

@@ -3,13 +3,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import { MarkerBuffer } from '../layers/markers/buffer.js';
 import { getPackedRecordState } from './packed-record-source.js';
-import {
-  MutableVector3View,
-  readPackedColor,
-  resolveRecordBufferOptions,
-  resolveSceneColor,
-  writePackedColor
-} from './packed-record-buffer.js';
+import { MutableVector3View, resolveRecordBufferOptions } from './packed-record-buffer.js';
+import { resolveSceneColor, writePackedColor } from '../color/color.js';
+import { readRGBA8 } from '../color/rgba8.js';
 
 describe('packed record buffer ownership', () => {
   it('keeps handles stable across active-prefix edits and invalidates caching when mutable bytes escape', () => {
@@ -62,10 +58,11 @@ describe('packed record buffer ownership', () => {
   it('packs CSS and numeric colors with bounded channels and rejects invalid input before writing', () => {
     const view = new DataView(new ArrayBuffer(8));
     writePackedColor(view, 4, [1, 0.5, 0, 1]);
-    expect(readPackedColor(view, 4)).toEqual([1, 128 / 255, 0, 1]);
+    expect(readRGBA8(view, 4)).toEqual([1, 128 / 255, 0, 1]);
     expect(resolveSceneColor('#ff000080')).toEqual([1, 0, 0, 128 / 255]);
     expect(() => writePackedColor(view, 4, [2, 0, 0, 1])).toThrow();
-    expect(readPackedColor(view, 4)).toEqual([1, 128 / 255, 0, 1]);
+    expect(() => writePackedColor(view, 4, [0, 0, 0, NaN])).toThrow('Record values must be finite.');
+    expect(readRGBA8(view, 4)).toEqual([1, 128 / 255, 0, 1]);
     expect(() => resolveSceneColor('invalid')).toThrow();
   });
 });

@@ -25,6 +25,28 @@ function layer(): HTMLElement {
   return element;
 }
 describe('model layer state', () => {
+  it('captures compiled alpha independently of tint and replaces it with each compiled generation', () => {
+    const model = layer();
+    setModelLayerGeometry(model, [{ shape: 'cube', color: [1, 1, 1, 0.999] }]);
+    const translucent = takeModelLayerRenderData(model);
+    expect(translucent.transparent).toBe(true);
+    setModelLayerTint(model, '#ffffff');
+    expect(takeModelLayerRenderData(model).transparent).toBe(true);
+    expect(() => setModelLayerGeometry(model, [{ shape: 'cube', scale: [0, 1, 1] }])).toThrow();
+    expect(takeModelLayerRenderData(model).transparent).toBe(true);
+    setModelLayerGeometry(model, [{ shape: 'cube' }]);
+    expect(takeModelLayerRenderData(model).transparent).toBe(false);
+    setModelLayerTint(model, '#ffffff80');
+    expect(takeModelLayerRenderData(model).transparent).toBe(true);
+    setModelLayerTint(model, '#ffffff');
+    expect(takeModelLayerRenderData(model).transparent).toBe(false);
+    setModelLayerGeometry(model, [{ shape: 'cube', color: [1, 1, 1, 0] }]);
+    expect(takeModelLayerRenderData(model).transparent).toBe(true);
+    beginModelLayerAsset(model);
+    expect(takeModelLayerRenderData(model)).toMatchObject({ ready: false, transparent: false });
+    expect(translucent.transparent).toBe(true);
+  });
+
   it('captures geometry independently of readback and keeps tint edits outside topology updates', () => {
     const model = layer();
     const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);

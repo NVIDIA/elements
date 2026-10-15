@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { HeightfieldGrid } from './types.js';
+import { decodeUnorm8 } from '../../color/rgba8.js';
 import { writeGridNormal, type UniformScalarGrid } from '../../math/grid-gradient.js';
 import {
   createHeightfieldIndices,
@@ -247,7 +248,7 @@ function* buildColors(colors: Uint8Array, chunkSize = PREPARATION_CHUNK_SIZE): G
   const normalized = new Float32Array(colors.length);
   for (let start = 0; start < colors.length; start += chunkSize) {
     const end = Math.min(colors.length, start + chunkSize);
-    for (let index = start; index < end; index += 1) normalized[index] = colors[index]! / 255;
+    for (let index = start; index < end; index += 1) normalized[index] = decodeUnorm8(colors[index]!);
     if (start + chunkSize <= colors.length) yield;
   }
   return normalized;

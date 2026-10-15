@@ -6,12 +6,15 @@ import type { SceneMeshGeometry } from '../mesh/types.js';
 import { composePreciseMat4, identityPreciseMat4, invertPreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
 import { validateMeshGeometry } from '../mesh/geometry.js';
 import { processMeshGeometry } from '../mesh/processing.js';
-import { resolveSceneColor } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor } from '../../color/color.js';
 import type { Matrix4 } from '../../math/types.js';
+import { PreparedAffineGeometryTransform } from '../../math/affine-transform.js';
 import type { RGBA } from '../../color/types.js';
-import { decodeSrgbChannel, encodeSrgbChannel } from '../../color/transfer.js';
+import { PreparedRGBAModulation } from '../../color/modulation.js';
 import { compileParts, normalizeModelPart } from './compile.js';
 import { MAX_MODEL_BYTES } from './limits.js';
+
+const DEFAULT_COLOR: Readonly<RGBA> = [1, 1, 1, 1];
 
 export interface CompiledModelGeometry extends ReturnType<typeof compileParts> {
   readonly uvs?: Float32Array;
@@ -153,25 +156,18 @@ function concatenatePieces(pieces: readonly Piece[]): CompiledModelGeometry {
   let indexOffset = 0;
   for (const piece of prepared) {
     const { processed, matrix, color } = piece;
-    const linearColor: RGBA = [
-      decodeSrgbChannel(color[0]),
-      decodeSrgbChannel(color[1]),
-      decodeSrgbChannel(color[2]),
-      color[3]
-    ];
-    const inverse = invertPreciseMat4(matrix);
-    if (!inverse) throw new RangeError('Model transform must be nonsingular.');
+    const modulation = new PreparedRGBAModulation(color);
+    const transform = new PreparedAffineGeometryTransform(matrix);
     for (let vertex = 0; vertex < processed.vertexCount; vertex += 1) {
       writeVertex(result, {
         vertex: vertex + vertexOffset,
         sourceVertex: vertex,
         source: processed,
-        matrix,
-        inverse,
-        linearColor
+        transform,
+        modulation
       });
     }
-    const mirrored = determinant(matrix) < 0;
+    const mirrored = transform.mirrored;
     const count = processed.indices?.length ?? processed.vertexCount;
     for (let index = 0; index < count; index += 3) {
       const triangle = [0, mirrored ? 2 : 1, mirrored ? 1 : 2].map(
@@ -185,59 +181,31 @@ function concatenatePieces(pieces: readonly Piece[]): CompiledModelGeometry {
   return result;
 }
 
-function determinant(matrix: Matrix4): number {
-  return (
-    matrix[0]! * (matrix[5]! * matrix[10]! - matrix[9]! * matrix[6]!) -
-    matrix[4]! * (matrix[1]! * matrix[10]! - matrix[9]! * matrix[2]!) +
-    matrix[8]! * (matrix[1]! * matrix[6]! - matrix[5]! * matrix[2]!)
-  );
-}
-
 function writeVertex(
   result: Required<CompiledModelGeometry>,
   options: {
     vertex: number;
     sourceVertex: number;
     source: SceneMeshGeometry;
-    matrix: Matrix4;
-    inverse: Matrix4;
-    linearColor: RGBA;
+    transform: PreparedAffineGeometryTransform;
+    modulation: PreparedRGBAModulation;
   }
 ): void {
-  const { vertex, sourceVertex, source, matrix, inverse, linearColor } = options;
+  const { vertex, sourceVertex, source, transform, modulation } = options;
   const offset = sourceVertex * 3;
-  const x = source.positions[offset]!,
-    y = source.positions[offset + 1]!,
-    z = source.positions[offset + 2]!;
-  const position = [
-    matrix[0]! * x + matrix[4]! * y + matrix[8]! * z + matrix[12]!,
-    matrix[1]! * x + matrix[5]! * y + matrix[9]! * z + matrix[13]!,
-    matrix[2]! * x + matrix[6]! * y + matrix[10]! * z + matrix[14]!
-  ];
-  if (position.some(value => !Number.isFinite(Math.fround(value))))
-    throw new RangeError('Model positions must fit the finite Float32 range.');
-  result.positions.set(position, vertex * 3);
-  const nx = source.normals![offset]!,
-    ny = source.normals![offset + 1]!,
-    nz = source.normals![offset + 2]!;
-  const normal = [
-    inverse[0]! * nx + inverse[1]! * ny + inverse[2]! * nz,
-    inverse[4]! * nx + inverse[5]! * ny + inverse[6]! * nz,
-    inverse[8]! * nx + inverse[9]! * ny + inverse[10]! * nz
-  ];
-  const length = Math.hypot(...normal);
-  result.normals.set(length === 0 ? [0, 0, 1] : normal.map(value => value / length), vertex * 3);
-  for (let channel = 0; channel < 4; channel += 1)
-    result.colors[vertex * 4 + channel] = multiplyColor(
-      source.colors?.[sourceVertex * 4 + channel] ?? 1,
-      linearColor[channel]!,
-      channel
-    );
+  const targetOffset = vertex * 3;
+  transform.writePosition(source.positions, offset, result.positions, targetOffset);
+  for (let axis = 0; axis < 3; axis += 1) {
+    if (!Number.isFinite(result.positions[targetOffset + axis])) {
+      throw new RangeError('Model positions must fit the finite Float32 range.');
+    }
+  }
+  transform.writeNormal(source.normals!, offset, result.normals, targetOffset);
+  modulation.writeColor(
+    source.colors ?? DEFAULT_COLOR,
+    source.colors ? sourceVertex * 4 : 0,
+    result.colors,
+    vertex * 4
+  );
   if (source.uvs) result.uvs.set(source.uvs.subarray(sourceVertex * 2, sourceVertex * 2 + 2), vertex * 2);
-}
-
-/** Combines a linear base color with an sRGB vertex color, retaining the renderer's sRGB input convention. */
-function multiplyColor(vertex: number, base: number, channel: number): number {
-  if (channel === 3) return vertex * base;
-  return encodeSrgbChannel(decodeSrgbChannel(vertex) * base);
 }

@@ -361,6 +361,7 @@ callouts
 toolchain
 removeFixture
 emulateClick
+heightfield
 untilEvent
 runAxe
 args

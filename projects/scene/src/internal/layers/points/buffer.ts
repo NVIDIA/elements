@@ -1,13 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-  MutableVector3View,
-  PackedRecordBuffer,
-  readPackedColor,
-  resolveSceneColor,
-  writePackedColor
-} from '../../records/packed-record-buffer.js';
+import { MutableVector3View, PackedRecordBuffer } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor, writePackedColor } from '../../color/color.js';
+import { readRGBA8 } from '../../color/rgba8.js';
 import { POINT } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { writePoint } from '../../records/layouts/codecs.js';
@@ -79,7 +75,7 @@ class PointRecord implements Point {
   }
 
   get color(): RGBA {
-    return readPackedColor(this.#view, this.index * POINT.stride + COLOR_OFFSET);
+    return readRGBA8(this.#view, this.index * POINT.stride + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {

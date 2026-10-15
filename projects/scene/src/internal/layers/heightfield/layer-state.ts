@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../diagnostics/errors.js';
-import { sameRGBA } from '../../color/color.js';
+import { sameRGBA } from '../../color/rgba.js';
+import { EMPTY_ALPHA_SUMMARY, summarizeRGBAAlpha, type AlphaSummary } from '../../color/alpha.js';
 import { validateHeightfieldGrid } from './compile.js';
 import { getHeightfieldTopology, hasSameHeightfieldTopology, type HeightfieldTopology } from './topology.js';
 import type { HeightfieldGrid } from './types.js';
@@ -12,6 +13,7 @@ import type { RGBA } from '../../color/types.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 
 interface HeightfieldState {
+  alphaSummary: AlphaSummary;
   childError: boolean;
   color: RGBA;
   grid: HeightfieldGrid | null;
@@ -26,6 +28,7 @@ const states = new WeakMap<HTMLElement, HeightfieldState>();
 
 export function registerHeightfieldLayer(layer: HTMLElement, color: RGBA): void {
   states.set(layer, {
+    alphaSummary: EMPTY_ALPHA_SUMMARY,
     childError: false,
     color,
     grid: null,
@@ -65,6 +68,7 @@ export function setHeightfieldLayerGrid(layer: HTMLElement, value: unknown): voi
 }
 
 function clearGrid(state: HeightfieldState): void {
+  state.alphaSummary = EMPTY_ALPHA_SUMMARY;
   state.grid = null;
   state.gridError = false;
   state.topology = null;
@@ -75,11 +79,13 @@ function compileGrid(state: HeightfieldState, value: unknown): void {
     const grid = snapshotGrid(value);
     const topology = getHeightfieldTopology(grid);
     validateHeightfieldGrid(grid);
+    state.alphaSummary = summarizeRGBAAlpha(grid.colors ?? null);
     if (!hasSameHeightfieldTopology(state.topology, topology)) state.topologyVersion += 1;
     state.topology = topology;
     state.grid = grid;
     state.gridError = false;
   } catch {
+    state.alphaSummary = EMPTY_ALPHA_SUMMARY;
     state.grid = null;
     state.gridError = true;
     state.topology = null;
@@ -124,6 +130,7 @@ export function takeHeightfieldLayerRenderData(layer: HTMLElement): MeshRenderDa
   const state = getState(layer);
   const grid = state.grid;
   return createConstructedMeshRenderData({
+    alphaSummary: state.alphaSummary,
     color: state.color,
     colors: null,
     geometryError: state.gridError || state.childError,
