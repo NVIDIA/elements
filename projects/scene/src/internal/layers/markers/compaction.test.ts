@@ -3,6 +3,7 @@
 
 import { describe, expect, it, vi } from 'vitest';
 import type { SceneGPUBuffer, SceneGPUCommandEncoder, SceneGPUDevice } from '../../gpu/platform.js';
+import { FRUSTUM_WGSL } from '../../math/frustum.js';
 import {
   destroyMarkerCompactionResources,
   MarkerCompactor,
@@ -61,16 +62,11 @@ describe('marker compaction', () => {
     expect(buffers.every(buffer => vi.mocked(buffer.destroy).mock.calls.length === 1)).toBe(true);
   });
 
-  it('contains frustum, alpha, and record-copy logic in WGSL', () => {
+  it('composes shared frustum tests with marker radius, alpha, and index routing', () => {
     expect(MARKER_COMPACTION_SHADER).toContain('fn isVisible');
-    expect(MARKER_COMPACTION_SHADER).toContain('fn outsidePlane');
-    expect(MARKER_COMPACTION_SHADER).toContain('outsidePlane(row3 + row0, point, radius)');
-    expect(MARKER_COMPACTION_SHADER).toContain('outsidePlane(row3 - row0, point, radius)');
-    expect(MARKER_COMPACTION_SHADER).toContain('outsidePlane(row3 + row1, point, radius)');
-    expect(MARKER_COMPACTION_SHADER).toContain('outsidePlane(row3 - row1, point, radius)');
-    expect(MARKER_COMPACTION_SHADER).toContain('outsidePlane(row2, point, radius)');
-    expect(MARKER_COMPACTION_SHADER).toContain('outsidePlane(row3 - row2, point, radius)');
-    expect(MARKER_COMPACTION_SHADER).not.toContain('clip.x + extent.x');
+    expect(MARKER_COMPACTION_SHADER.split(FRUSTUM_WGSL)).toHaveLength(2);
+    expect(MARKER_COMPACTION_SHADER).toContain('return nve_frustum_intersects_sphere(transform, position, radius)');
+    expect(MARKER_COMPACTION_SHADER).toContain('0.8660254 * max(abs(scale.x), max(abs(scale.y), abs(scale.z)))');
     expect(MARKER_COMPACTION_SHADER).toContain('alpha == 255u');
     expect(MARKER_COMPACTION_SHADER).toContain('atomicAdd(&arguments[1]');
     expect(MARKER_COMPACTION_SHADER).toContain('opaqueIndices[atomicAdd');

@@ -8,7 +8,7 @@ import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../in
 import {
   connectHeightfieldLayer,
   disconnectHeightfieldLayer,
-  getHeightfieldLayerGrid,
+  getHeightfieldLayerSampler,
   registerHeightfieldLayer,
   setHeightfieldLayerColor,
   setHeightfieldLayerGrid
@@ -138,41 +138,41 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
 
   /** Return the bilinearly interpolated terrain elevation at frame-local xy. */
   heightAt(x: number, y: number): number | undefined {
-    return heightAt(getHeightfieldLayerGrid(this), x, y);
+    return heightAt(getHeightfieldLayerSampler(this), x, y);
   }
 
   /** Return the unit normal of the bilinear terrain surface at frame-local xy. */
   normalAt(x: number, y: number): Vec3 | undefined {
-    return normalAt(getHeightfieldLayerGrid(this), x, y);
+    return normalAt(getHeightfieldLayerSampler(this), x, y);
   }
 
   /** Return terrain inclination in radians from horizontal at frame-local xy. */
   slopeAt(x: number, y: number): number | undefined {
-    return slopeAt(getHeightfieldLayerGrid(this), x, y);
+    return slopeAt(getHeightfieldLayerSampler(this), x, y);
   }
 
   /** Return the rendered triangle-surface elevation at frame-local xy. */
   surfaceHeightAt(x: number, y: number): number | undefined {
-    return surfaceHeightAt(getHeightfieldLayerGrid(this), x, y);
+    return surfaceHeightAt(getHeightfieldLayerSampler(this), x, y);
   }
 
   /** Return the unit normal of the rendered terrain triangle at frame-local xy. */
   surfaceNormalAt(x: number, y: number): Vec3 | undefined {
-    return surfaceNormalAt(getHeightfieldLayerGrid(this), x, y);
+    return surfaceNormalAt(getHeightfieldLayerSampler(this), x, y);
   }
 
   /** Return rendered triangle inclination in radians from horizontal at frame-local xy. */
   surfaceSlopeAt(x: number, y: number): number | undefined {
-    return surfaceSlopeAt(getHeightfieldLayerGrid(this), x, y);
+    return surfaceSlopeAt(getHeightfieldLayerSampler(this), x, y);
   }
 
   /** Copy xyz points and move in-bounds points to terrain elevation plus lift. */
   drape(points: Float32Array, lift?: number): Float32Array {
-    return drape(getHeightfieldLayerGrid(this), points, lift);
+    return drape(getHeightfieldLayerSampler(this), points, lift);
   }
 
   /** Copy xyz points and move in-bounds points to the rendered triangle surface plus lift. */
   drapeToSurface(points: Float32Array, lift?: number): Float32Array {
-    return drapeToSurface(getHeightfieldLayerGrid(this), points, lift);
+    return drapeToSurface(getHeightfieldLayerSampler(this), points, lift);
   }
 }

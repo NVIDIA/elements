@@ -88,8 +88,3 @@ function writeHeightfieldCell(indices: Uint32Array, offset: number, columns: num
   indices[offset + 4] = bottomRight;
   indices[offset + 5] = bottomLeft;
 }
-
-/** Selects the top-left triangle used by the shared top-right-to-bottom-left cell diagonal. */
-export function isHeightfieldTopLeftTriangle(columnFraction: number, rowFraction: number): boolean {
-  return columnFraction + rowFraction <= 1;
-}

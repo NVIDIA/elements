@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { createOrthographicMatrix, createPerspectiveMatrix } from '../composition/camera/math.js';
-import { classifyAabbFrustum, type AabbBounds, type FrustumRelation } from './frustum.js';
+import { classifyAabbFrustum, isOutsideHalfSpace, type AabbBounds, type FrustumRelation } from './frustum.js';
 import {
   composePreciseMat4,
   identityMat4,
@@ -41,6 +41,18 @@ function classifyCorners(bounds: AabbBounds, transform: Matrix4): FrustumRelatio
 }
 
 describe(classifyAabbFrustum.name, () => {
+  it('rejects only support intervals strictly outside a half-space, without normalization or a tolerance', () => {
+    for (const scale of [0.125, 1, 1024]) {
+      expect(isOutsideHalfSpace(-scale, scale)).toBe(false);
+      expect(isOutsideHalfSpace((-1 - Number.EPSILON) * scale, scale)).toBe(true);
+      expect(isOutsideHalfSpace((-1 + Number.EPSILON) * scale, scale)).toBe(false);
+    }
+    expect(isOutsideHalfSpace(-0, 0)).toBe(false);
+    expect(isOutsideHalfSpace(-Number.MIN_VALUE, 0)).toBe(true);
+    expect(isOutsideHalfSpace(0, 0)).toBe(false);
+    expect(isOutsideHalfSpace(Number.MIN_VALUE, 0)).toBe(false);
+  });
+
   it.each([
     { name: 'left', bounds: box([-2, -0.5, 0.25], [-1.25, 0.5, 0.75]) },
     { name: 'right', bounds: box([1.25, -0.5, 0.25], [2, 0.5, 0.75]) },

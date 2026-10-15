@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import type { HeightfieldGrid } from './types.js';
 import {
   drape,
   drapeToSurface,
   heightAt,
   normalAt,
+  prepareHeightfieldSampler,
   slopeAt,
   surfaceHeightAt,
   surfaceNormalAt,
@@ -15,13 +15,13 @@ import {
 } from './query.js';
 
 describe('heightfield queries', () => {
-  const bilinearGrid: HeightfieldGrid = {
+  const bilinearGrid = prepareHeightfieldSampler({
     origin: [10, -5],
     spacing: 2,
     columns: 2,
     rows: 2,
     heights: new Float32Array([0, 2, 4, 10])
-  };
+  });
 
   it('interpolates exact sample and cell-center heights', () => {
     expect(heightAt(bilinearGrid, 10, -5)).toBe(0);
@@ -40,12 +40,12 @@ describe('heightfield queries', () => {
   });
 
   it('returns the analytic bilinear normal and plane slope', () => {
-    const plane: HeightfieldGrid = {
+    const plane = prepareHeightfieldSampler({
       spacing: 1,
       columns: 3,
       rows: 3,
       heights: new Float32Array([0, 2, 4, 3, 5, 7, 6, 8, 10])
-    };
+    });
     const expectedNormal = normalize(-2, -3, 1);
     expectCloseArray(normalAt(plane, 1.25, 0.75)!, expectedNormal, 12);
     expect(slopeAt(plane, 1.25, 0.75)).toBeCloseTo(Math.atan(Math.hypot(2, 3)), 6);
@@ -76,12 +76,12 @@ describe('heightfield queries', () => {
   });
 
   it('samples the same top-right-to-bottom-left triangles as rendered terrain', () => {
-    const saddle: HeightfieldGrid = {
+    const saddle = prepareHeightfieldSampler({
       spacing: 1,
       columns: 2,
       rows: 2,
       heights: new Float32Array([0, 0, 0, 4])
-    };
+    });
 
     expect(heightAt(saddle, 0.5, 0.5)).toBe(1);
     expect(surfaceHeightAt(saddle, 0.5, 0.5)).toBe(0);
