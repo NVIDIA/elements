@@ -1,3 +1,9 @@
+## [1.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/viewport-v1.1.1...@nvidia-elements/viewport-v1.1.2) (2026-10-15)
+
+### Bug Fixes
+
+* **viewport:** connect accessories across separate imports ([13e446d](https://github.com/NVIDIA/elements/commit/13e446d52b52491d5a7597f520b86e43f749c412))
+
 ## [1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/viewport-v1.1.0...@nvidia-elements/viewport-v1.1.1) (2026-10-13)
 
 ### Features
