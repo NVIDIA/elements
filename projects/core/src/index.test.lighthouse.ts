@@ -78,6 +78,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/password/define.js';
         import '@nvidia-elements/core/preferences-input/define.js';
         import '@nvidia-elements/core/progress-bar/define.js';
+        import '@nvidia-elements/core/progress-dot/define.js';
         import '@nvidia-elements/core/progress-ring/define.js';
         import '@nvidia-elements/core/progressive-filter-chip/define.js';
         import '@nvidia-elements/core/pulse/define.js';
