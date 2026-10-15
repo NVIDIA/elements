@@ -1,3 +1,11 @@
+## [2.15.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.4...@nvidia-elements/core-v2.15.5) (2026-10-15)
+
+### Bug Fixes
+
+* **core:** tree node link target ([1362388](https://github.com/NVIDIA/elements/commit/1362388c6d94ba480da6854210b6c68f5d59b926))
+* **viewport:** connect accessories across separate imports ([13e446d](https://github.com/NVIDIA/elements/commit/13e446d52b52491d5a7597f520b86e43f749c412))
+* **viewport:** include build artifacts in releases ([7ab75d4](https://github.com/NVIDIA/elements/commit/7ab75d4477b4364557d2f0d17af15a6ad3b453a8))
+
 ## [2.15.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.3...@nvidia-elements/core-v2.15.4) (2026-10-13)
 
 ### Features
