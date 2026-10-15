@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { GRID_GRADIENT_WGSL } from '../../math/grid-gradient.js';
+import { UNPACK_RGBA8_WGSL } from '../../color/rgba8.js';
 import {
   supportsSceneGPUCompute,
   type SceneGPUBindGroup,
@@ -219,6 +220,7 @@ struct Parameters {
 @group(0) @binding(5) var<storage, read_write> colors: array<u32>;
 
 ${GRID_GRADIENT_WGSL}
+${UNPACK_RGBA8_WGSL}
 fn writeVec3(outputWords: ptr<storage, array<u32>, read_write>, index: u32, value: vec3f) {
   let base = index * 3u;
   (*outputWords)[base] = bitcast<u32>(value.x);
@@ -240,7 +242,7 @@ fn main(
   writeVec3(&normals, index, normalize(vec3f(-gradient.x, -gradient.y, 1.0)));
   var packed = 0xffffffffu;
   if (parameters.hasColors != 0u) { packed = packedColors[index]; }
-  let color = vec4f(vec4u(packed & 255u, (packed >> 8u) & 255u, (packed >> 16u) & 255u, packed >> 24u)) / 255.0;
+  let color = nve_unpack_unorm8x4(packed);
   let base = index * 4u;
   colors[base] = bitcast<u32>(color.x);
   colors[base + 1u] = bitcast<u32>(color.y);

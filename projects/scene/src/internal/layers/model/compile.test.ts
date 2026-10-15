@@ -4,6 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import { compileParts, createModelPrimitiveGeometry, type ModelPart } from './compile.js';
 import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../../math/primitive-geometry.js';
+import { normalizeQuaternion, rotateVectorByQuaternion } from '../../math/quaternion.js';
 
 describe(compileParts.name, () => {
   it('should compile an identity cube from its unit tessellation with opaque white colors', () => {
@@ -57,6 +58,37 @@ describe(compileParts.name, () => {
       expect(dot(cross(ab, ac), normal)).toBeGreaterThan(0);
     }
   });
+
+  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+    'matches quaternion position and inverse-scale normal references for %s vertices',
+    shape => {
+      const source = createModelPrimitiveGeometry(shape);
+      const orientation = normalizeQuaternion([1, -2, 3, 4]);
+      const compiled = compileParts([
+        { shape, position: [1e6 + 0.125, -0.25, 30], orientation, scale: [-2, 0.125, 5] }
+      ]);
+      for (let offset = 0, vertex = 0; offset < source.vertices.length; offset += 6, vertex += 1) {
+        const position = rotateVectorByQuaternion(
+          [source.vertices[offset]! * -2, source.vertices[offset + 1]! * 0.125, source.vertices[offset + 2]! * 5],
+          orientation
+        );
+        position[0] += 1e6 + 0.125;
+        position[1] -= 0.25;
+        position[2] += 30;
+        const normal = rotateVectorByQuaternion(
+          [source.vertices[offset + 3]! / -2, source.vertices[offset + 4]! / 0.125, source.vertices[offset + 5]! / 5],
+          orientation
+        );
+        const length = Math.hypot(...normal);
+        for (let axis = 0; axis < 3; axis += 1) {
+          expect(Math.abs(compiled.positions[vertex * 3 + axis]! - position[axis]!)).toBeLessThanOrEqual(
+            Math.max(1, Math.abs(position[axis]!)) * 2 ** -22
+          );
+          expect(compiled.normals[vertex * 3 + axis]).toBeCloseTo(normal[axis]! / length, 6);
+        }
+      }
+    }
+  );
 
   it('should concatenate part buffers with deterministic index offsets and colors', () => {
     const first = createModelPrimitiveGeometry('cube');

@@ -1,14 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-  MutableVector3View,
-  PackedRecordBuffer,
-  assertFinite,
-  readPackedColor,
-  resolveSceneColor,
-  writePackedColor
-} from '../../records/packed-record-buffer.js';
+import { MutableVector3View, PackedRecordBuffer, assertFinite } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor, writePackedColor } from '../../color/color.js';
+import { readRGBA8 } from '../../color/rgba8.js';
 import { LINE_VERTEX } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { writeLineVertex } from '../../records/layouts/codecs.js';
@@ -103,7 +98,7 @@ class LineVertexRecord implements LineVertex {
   }
 
   get color(): RGBA {
-    return readPackedColor(this.#view, this.#recordOffset + COLOR_OFFSET);
+    return readRGBA8(this.#view, this.#recordOffset + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {

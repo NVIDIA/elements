@@ -19,6 +19,7 @@ import {
 import { createUploadedBuffer } from '../gpu/uploaded-buffer.js';
 import { createPerspectiveMatrix } from '../composition/camera/math.js';
 import { identityMat4, multiplyMat4Into, multiplyPreciseMat4, writeMat4ToFloat32 } from '../math/mat4.js';
+import { POLYLINE_JOIN_VERTEX_COUNT } from '../math/polyline.js';
 import type { MeshRenderer, MeshRendererDevice } from '../layers/mesh/renderer.js';
 import type { MarkerGeometry, MarkerPipelines } from '../layers/markers/pipelines.js';
 import { MarkerBoundsClassifier } from '../layers/markers/bounds.js';
@@ -604,7 +605,7 @@ export class GeometryRenderer {
   ): void {
     if (item.type === 'point') pass.draw(count * 6);
     else if (item.type === 'triangle') pass.draw(count);
-    else if (line) pass.draw(line.segmentCount * 6 + line.joinCount * 3);
+    else if (line) pass.draw(line.segmentCount * 6 + line.joinCount * POLYLINE_JOIN_VERTEX_COUNT);
   }
 
   #pipelineSetFor(item: SceneRenderItem): RenderPipelines | undefined {

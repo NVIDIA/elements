@@ -62,6 +62,27 @@ describe('buffer upload planning', () => {
   }
 });
 
+describe('bounded buffer upload planning', () => {
+  for (const count of [64, 65, 256, 4096]) {
+    const planningBatch = count <= 65 ? 1_024 : count === 256 ? 256 : 16;
+    const ranges = Array.from({ length: count }, (_, index) => ({ offset: index * 72, size: 12 }));
+    for (const maxWrites of [64, Number.MAX_SAFE_INTEGER]) {
+      test(`plans ${count} normalized ranges with write budget ${maxWrites}, batch ${planningBatch}`, async ({
+        bench
+      }) => {
+        await bench('bounded upload planning', () => {
+          let checksum = 0;
+          for (let index = 0; index < planningBatch; index += 1) {
+            const plan = planBufferUploads({ byteLength: 1024 * 1024, maxWrites, ranges });
+            checksum += plan.length + plan[0]!.size;
+          }
+          return checksum;
+        }).run(options);
+      });
+    }
+  }
+});
+
 function createDevice(byteLength: number, observation: { checksum: number }): SharedInstanceBufferDevice {
   return {
     createBuffer: () => ({ destroy: () => undefined }),

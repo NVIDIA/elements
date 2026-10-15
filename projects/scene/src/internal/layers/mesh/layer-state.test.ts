@@ -9,6 +9,8 @@ import {
   publishMeshGeometry,
   registerMeshLayer,
   replaceMeshGeometry,
+  setMeshColor,
+  setMeshGeometryProperty,
   takeMeshLayerRenderData
 } from './layer-state.js';
 
@@ -19,6 +21,75 @@ function layer(): HTMLElement {
   return element;
 }
 describe('mesh layer state', () => {
+  it('tracks alpha through selected publications, empty edits, and removal of the last nonopaque color', () => {
+    const mesh = layer();
+    const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
+    const colors = new Float32Array(12).fill(1);
+    const expected = colors.slice();
+    replaceMeshGeometry(mesh, { positions, colors });
+    const opaque = getMeshRenderData(mesh);
+    colors[3] = 0.5;
+    expect(getMeshRenderData(mesh).transparent).toBe(false);
+    publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 0, count: 0 });
+    expect(getMeshRenderData(mesh).transparent).toBe(false);
+    publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 0, count: 1 });
+    expect(getMeshRenderData(mesh).transparent).toBe(true);
+    colors[7] = 0;
+    publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 1, count: 1 });
+    colors[3] = 1;
+    publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 0, count: 1 });
+    expect(getMeshRenderData(mesh).transparent).toBe(true);
+    colors[7] = 1;
+    publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 1, count: 1 });
+    expect(getMeshRenderData(mesh).transparent).toBe(false);
+
+    for (let step = 0; step < 40; step += 1) {
+      const start = step % 3;
+      const count = Math.min(3 - start, step % 4);
+      colors[start * 4 + 3] = ([0, 0.5, 1] as const)[Math.floor(step / 3) % 3]!;
+      expected.set(colors.subarray(start * 4, (start + count) * 4), start * 4);
+      publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start, count });
+      const data = getMeshRenderData(mesh);
+      expect(data.colors).toEqual(expected);
+      expect(data.transparent).toBe(expected.some((value, index) => index % 4 === 3 && value < 1));
+    }
+    expect(opaque.transparent).toBe(false);
+    expect(opaque.colors).toEqual(new Float32Array(12).fill(1));
+  });
+
+  it('preserves alpha counts after rejected publications and refreshes them for replacements', () => {
+    const mesh = layer();
+    const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
+    const colors = new Float32Array(12).fill(1);
+    colors[11] = 0.999;
+    replaceMeshGeometry(mesh, { positions, colors });
+    const before = getMeshRenderData(mesh);
+    expect(before.transparent).toBe(true);
+    colors[8] = NaN;
+    colors[11] = 1;
+    expect(() => publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 2, count: 1 })).toThrow();
+    expect(getMeshRenderData(mesh).colors).toBe(before.colors);
+    expect(getMeshRenderData(mesh).transparent).toBe(true);
+    publishMeshGeometry(mesh, { attribute: 'positions', source: positions, start: 0, count: 1 });
+    expect(getMeshRenderData(mesh).transparent).toBe(true);
+    colors[8] = 1;
+    publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 2, count: 1 });
+    expect(getMeshRenderData(mesh).transparent).toBe(false);
+    setMeshColor(mesh, '#ffffff80');
+    expect(getMeshRenderData(mesh).transparent).toBe(true);
+    setMeshColor(mesh, '#ffffff');
+    expect(getMeshRenderData(mesh).transparent).toBe(false);
+    colors[3] = 0;
+    setMeshGeometryProperty(mesh, 'colors', colors);
+    expect(getMeshRenderData(mesh).transparent).toBe(true);
+    setMeshGeometryProperty(mesh, 'colors', null);
+    expect(getMeshRenderData(mesh).transparent).toBe(false);
+    replaceMeshGeometry(mesh, { positions, colors: new Float32Array([0, 0, 0, NaN]) });
+    expect(getMeshRenderData(mesh).ready).toBe(false);
+    replaceMeshGeometry(mesh, { positions, colors: new Float32Array(12).fill(1) });
+    expect(getMeshRenderData(mesh)).toMatchObject({ ready: true, transparent: false });
+  });
+
   it('retains indexed source ranges with their base version and clears both after consumption or topology changes', () => {
     const mesh = layer();
     const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);

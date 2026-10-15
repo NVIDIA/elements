@@ -3,9 +3,24 @@
 
 import { SRGB_TO_LINEAR_WGSL } from './transfer.js';
 import { describe, expect, it } from 'vitest';
-import { createCSSColorConverter, parseCSSColor, srgbByteToLinear, srgbToLinear, type CSSColor } from './color.js';
+import {
+  createCSSColorConverter,
+  parseCSSColor,
+  resolveSceneColor,
+  srgbByteToLinear,
+  srgbToLinear,
+  type CSSColor
+} from './color.js';
 
 describe('scene colors', () => {
+  it('resolves CSS colors and captures numeric tuples independently with the existing strict policy', () => {
+    const source = Object.freeze([1, 0.5, 0, 0.25] as const);
+    expect(resolveSceneColor(source)).toEqual(source);
+    expect(resolveSceneColor(source)).not.toBe(source);
+    expect(resolveSceneColor('#ff000080')).toEqual([1, 0, 0, 128 / 255]);
+    expect(() => resolveSceneColor('var(--color)')).toThrow(TypeError);
+    expect(() => resolveSceneColor([2, 0, 0, 1])).toThrow('Record color channels must be in the range 0..1.');
+  });
   it('should parse CSS colors with alpha and reject unsupported values', () => {
     expect(parseCSSColor('rgb(255 128 0 / 50%)')).toEqual([1, 128 / 255, 0, 128 / 255]);
     expect(parseCSSColor('rebeccapurple')).toEqual([102 / 255, 51 / 255, 153 / 255, 1]);
