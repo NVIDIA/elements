@@ -6,6 +6,7 @@ import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../diagnostics/errors.js';
 import {
   connectHeightfieldLayer,
   getHeightfieldLayerGrid,
+  getHeightfieldLayerSampler,
   getHeightfieldLayerTopologyVersion,
   getHeightfieldLayerVersion,
   registerHeightfieldLayer,
@@ -22,6 +23,30 @@ const grid = () => ({
 });
 
 describe('heightfield layer state', () => {
+  it('reuses the sampler for one captured grid and replaces or clears it with that grid', () => {
+    const layer = document.createElement('div');
+    registerHeightfieldLayer(layer, [1, 1, 1, 1]);
+    expect(getHeightfieldLayerSampler(layer)).toBeNull();
+    const source = { ...grid(), origin: [10, -5] as const };
+    setHeightfieldLayerGrid(layer, source);
+    const first = getHeightfieldLayerSampler(layer);
+    expect(first?.heightAt(10, -5)).toBe(0);
+    source.heights[0] = 7;
+    setHeightfieldLayerColor(layer, [0.5, 0.5, 0.5, 1]);
+    expect(getHeightfieldLayerSampler(layer)).toBe(first);
+    expect(first?.heightAt(10, -5)).toBe(0);
+    setHeightfieldLayerGrid(layer, source);
+    expect(getHeightfieldLayerSampler(layer)).not.toBe(first);
+    expect(getHeightfieldLayerSampler(layer)?.heightAt(10, -5)).toBe(7);
+    expect(first?.heightAt(10, -5)).toBe(0);
+    setHeightfieldLayerGrid(layer, { ...source, spacing: 0 });
+    expect(getHeightfieldLayerSampler(layer)).toBeNull();
+    setHeightfieldLayerGrid(layer, source);
+    expect(getHeightfieldLayerSampler(layer)?.heightAt(10, -5)).toBe(7);
+    setHeightfieldLayerGrid(layer, null);
+    expect(getHeightfieldLayerSampler(layer)).toBeNull();
+  });
+
   it('captures byte alpha with each grid generation and clears it after invalid or absent grids', () => {
     const layer = document.createElement('div');
     registerHeightfieldLayer(layer, [1, 1, 1, 1]);

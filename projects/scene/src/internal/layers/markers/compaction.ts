@@ -11,6 +11,7 @@ import {
   type SceneGPUDevice
 } from '../../gpu/platform.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
+import { FRUSTUM_WGSL } from '../../math/frustum.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
@@ -123,25 +124,14 @@ struct SceneUniforms {
 @group(1) @binding(2) var<storage, read_write> transparentIndices: array<u32>;
 @group(1) @binding(3) var<storage, read_write> arguments: array<atomic<u32>>;
 
+${FRUSTUM_WGSL}
+
 fn isVisible(base: u32) -> bool {
   let position = vec3f(bitcast<f32>(source[base]), bitcast<f32>(source[base + 1u]), bitcast<f32>(source[base + 2u]));
   let scale = vec3f(bitcast<f32>(source[base + 7u]), bitcast<f32>(source[base + 8u]), bitcast<f32>(source[base + 9u]));
   let transform = scene.viewProjection * scene.frame;
-  let point = vec4f(position, 1.0);
   let radius = 0.8660254 * max(abs(scale.x), max(abs(scale.y), abs(scale.z)));
-  let row0 = vec4f(transform[0].x, transform[1].x, transform[2].x, transform[3].x);
-  let row1 = vec4f(transform[0].y, transform[1].y, transform[2].y, transform[3].y);
-  let row2 = vec4f(transform[0].z, transform[1].z, transform[2].z, transform[3].z);
-  let row3 = vec4f(transform[0].w, transform[1].w, transform[2].w, transform[3].w);
-  return !(
-    outsidePlane(row3 + row0, point, radius) || outsidePlane(row3 - row0, point, radius) ||
-    outsidePlane(row3 + row1, point, radius) || outsidePlane(row3 - row1, point, radius) ||
-    outsidePlane(row2, point, radius) || outsidePlane(row3 - row2, point, radius)
-  );
-}
-
-fn outsidePlane(plane: vec4f, point: vec4f, radius: f32) -> bool {
-  return dot(plane, point) + radius * length(plane.xyz) < 0.0;
+  return nve_frustum_intersects_sphere(transform, position, radius);
 }
 
 @compute @workgroup_size(${WORKGROUP_SIZE})
