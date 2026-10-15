@@ -5,6 +5,80 @@ import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
 
 describe('scene lines visual runtime', () => {
+  test.each([
+    { unit: 'pixel', width: 40, alpha: 1 },
+    { unit: 'world', width: 0.15625, alpha: 1 },
+    { unit: 'pixel', width: 40, alpha: 0.5 },
+    { unit: 'world', width: 0.15625, alpha: 0.5 }
+  ])('fills and picks the outside miter of a $unit-width turn at alpha $alpha', async ({ unit, width, alpha }) => {
+    const pixels = await visualRunner.inspect(
+      `scene-line-join-${unit}${alpha < 1 ? '-transparent' : ''}`,
+      `<nve-scene aria-label="line join" style="width:512px;height:512px;background:rgb(0 0 0)"><nve-scene-camera behavior="top" target="[0,0,0]" altitude="2" frustum-height="2"></nve-scene-camera><nve-scene-lines id="joined-line" width-unit="${unit}"></nve-scene-lines></nve-scene><script type="module">
+        window.__lineErrors = [];
+        const originalError = console.error;
+        console.error = (...values) => { window.__lineErrors.push(values.map(String).join(' ')); originalError(...values); };
+        import { LineVertexBuffer } from '@nvidia-elements/scene/lines';
+        import '@nvidia-elements/scene/camera/define.js';
+        import '@nvidia-elements/scene/lines/define.js';
+        const vertices = new LineVertexBuffer({ capacity: 3 });
+        for (const position of [[-0.6, 0, 0], [0, 0, 0], [0, 0.6, 0]]) {
+          vertices.add({ position, color: [1, 0, 0, ${alpha}], normal: [0, 0, 1], width: ${width} });
+        }
+        document.querySelector('#joined-line').source = vertices;
+      </script>`,
+      page =>
+        page.evaluate(async () => {
+          const scene = document.querySelector('nve-scene');
+          if (!scene) throw new Error('Expected line join scene.');
+          await scene.ready;
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          const canvas = scene.shadowRoot?.querySelector('canvas');
+          if (!canvas) throw new Error('Expected line join canvas.');
+          const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve));
+          if (!blob) throw new Error('Expected line join image.');
+          const bitmap = await createImageBitmap(blob);
+          const probe = document.createElement('canvas');
+          probe.width = bitmap.width;
+          probe.height = bitmap.height;
+          const context = probe.getContext('2d');
+          if (!context) throw new Error('Expected line join image context.');
+          context.drawImage(bitmap, 0, 0);
+          bitmap.close();
+          const data = context.getImageData(0, 0, probe.width, probe.height).data;
+          // This point lies outside both segment quads, inside only the miter triangle.
+          const x = probe.width / 2 + 12;
+          const y = probe.height / 2 - 12;
+          const rect = canvas.getBoundingClientRect();
+          const picked = await scene.pick(
+            rect.left + ((x + 0.5) / canvas.width) * rect.width,
+            rect.top + ((y + 0.5) / canvas.height) * rect.height
+          );
+          const innerX = probe.width / 2 + 5;
+          const innerY = probe.height / 2 - 5;
+          const innerPick = await scene.pick(
+            rect.left + ((innerX + 0.5) / canvas.width) * rect.width,
+            rect.top + ((innerY + 0.5) / canvas.height) * rect.height
+          );
+          return {
+            errors: Reflect.get(window, '__lineErrors') as string[],
+            join: data[(y * probe.width + x) * 4],
+            innerJoin: data[(innerY * probe.width + innerX) * 4],
+            outside: data[((probe.height / 2 - 24) * probe.width + probe.width / 2 + 24) * 4],
+            picked: picked?.target.kind === 'segment' ? { index: picked.target.index, layer: picked.layer.id } : null,
+            innerPick:
+              innerPick?.target.kind === 'segment' ? { index: innerPick.target.index, layer: innerPick.layer.id } : null
+          };
+        }),
+      { deviceScaleFactor: 1 }
+    );
+    expect(pixels.errors).toEqual([]);
+    expect(pixels.join).toBeGreaterThan(100);
+    expect(pixels.innerJoin).toBe(pixels.join);
+    expect(pixels.outside).toBe(0);
+    expect(pixels.picked).toEqual({ index: 1, layer: 'joined-line' });
+    expect(pixels.innerPick).toEqual({ index: 1, layer: 'joined-line' });
+  });
+
   test('renders pixel widths and excludes dash gaps from picking', async () => {
     const pixels = await visualRunner.inspect(
       'scene-rich-lines-layer',

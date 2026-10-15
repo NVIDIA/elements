@@ -1,12 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-const UNPACK_COLOR_WGSL = /* wgsl */ `
-fn nve_unpack_unorm8x4(word: u32) -> vec4f {
-  let bytes = vec4u(word & 0xffu, (word >> 8u) & 0xffu, (word >> 16u) & 0xffu, (word >> 24u) & 0xffu);
-  return vec4f(bytes) / 255.0;
-}
-`;
+import { UNPACK_RGBA8_WGSL } from '../../color/rgba8.js';
 
 export const MARKER_WGSL = /* wgsl */ `
 struct NveMarker {
@@ -18,7 +13,7 @@ struct NveMarker {
 }
 
 @group(1) @binding(0) var<storage, read> nve_marker_words: array<u32>;
-${UNPACK_COLOR_WGSL}
+${UNPACK_RGBA8_WGSL}
 fn nve_load_marker(i: u32) -> NveMarker {
   let base = i * 12u;
   return NveMarker(
@@ -51,7 +46,7 @@ struct NveStreamVertex {
 }
 
 @group(1) @binding(0) var<storage, read> nve_stream_words: array<u32>;
-${UNPACK_COLOR_WGSL}
+${UNPACK_RGBA8_WGSL}
 fn nve_load_stream_vertex(i: u32) -> NveStreamVertex {
   let base = i * 4u;
   return NveStreamVertex(
@@ -76,7 +71,7 @@ struct NveLineVertex {
 }
 
 @group(1) @binding(0) var<storage, read> nve_line_words: array<u32>;
-${UNPACK_COLOR_WGSL}
+${UNPACK_RGBA8_WGSL}
 fn nve_load_line_vertex(i: u32) -> NveLineVertex {
   let base = i * 10u;
   return NveLineVertex(

@@ -79,12 +79,13 @@ Every file in `src/internal/` belongs to a directory that names its responsibili
 | `composition/` | Scene content discovery, frame composition, camera state, and scene notifications.                                   |
 | `layers/`      | Layer sources, state, validation, and rendering specific to each content type.                                       |
 | `records/`     | Packed record storage, mutable buffers, publication, canonical layouts, and record encoding.                         |
+| `algorithms/`  | Reusable algorithms over plain data, independent of geometry, color, record layouts, and GPU resources.              |
 | `structures/`  | Reusable bit arrays, numeric ring buffers, range sets and maps, copy-on-write bytes, flag indexes, and bounds trees. |
 | `interaction/` | Feature identities, pointer requests, routed events, and the scene interaction source.                               |
 | `rendering/`   | Render items, shared render passes, targets, preparation, and GPU picking.                                           |
 | `gpu/`         | The platform boundary, device recovery, storage limits, buffer leases, and upload ranges.                            |
 | `math/`        | Spatial numeric types, matrices, quaternions, geometric algorithms, and primitive tessellation.                      |
-| `color/`       | Color types, CSS color parsing, and color transfer functions.                                                        |
+| `color/`       | Color types, CSS color parsing, normalized RGBA storage, RGBA8 encoding, transfer functions, and tint modulation.    |
 | `dom/`         | Host styles, attribute converters, and DOM viewport measurements for Web Components.                                 |
 | `diagnostics/` | Error codes and diagnostic episode reporting.                                                                        |
 | `testing/`     | Platform overrides and frame lookup for tests.                                                                       |
@@ -95,6 +96,33 @@ The adapters in `layers/sources/` connect packed sources to layer-specific valid
 
 Keep structures independent of layer policies, record layouts, DOM elements, and GPU resources. Record range
 validation belongs in `records/`; marker bounds decoding belongs in `layers/markers/`.
+
+General algorithms can depend on `structures/`; structures do not depend on `algorithms/`. Shared representations and
+validation, such as `RangeInterval`, stay in `structures/`. Spatial algorithms belong in `math/`, and color computations
+belong in `color/`.
+
+`rgba.ts` captures and compares normalized RGBA tuples with separate color and alpha channels. `rgba8.ts` owns red, green, blue,
+and alpha bytes: finite channels clamp to [0, 1], quantization rounds half upward, and decoding applies no color-space
+transfer. Its shared WGSL decoder reads little-endian packed words for packed records, labels, and scalar grids.
+Checked Scene color APIs reject out-of-range channels before writing; layout writers retain their finite-value
+clamping policy and diagnostics. `PreparedRGBAModulation` captures a tint once, multiplies RGB in linear light,
+returns RGB to the renderer's sRGB convention, and multiplies alpha directly. Its repeated writes use caller-owned
+spans without allocating color tuples. Layer defaults, record offsets, and transparency classification stay with callers.
+
+`color/alpha.ts` classifies normalized float and byte alpha without quantization or color transfer. `AlphaSummary`
+counts zero, partial, and opaque channels over checked spans with an offset and stride. Summaries merge by addition;
+span replacement subtracts the previous contribution and adds the next. Mesh, model, and heightfield layers capture summaries with their
+owned color arrays. Accepted mesh color publications update only the selected span after geometry validation; rejected
+and empty publications preserve the counts. Render snapshots combine these counts with layer tint and texture policy
+without scanning color arrays. Mesh publication still copies the complete published attribute and validates complete
+geometry. Packed marker and vertex layers retain their flag prefix indexes and active-count policies.
+
+`math/polyline.ts` owns shared WGSL geometry for screen-space and frame-local line joins. It defines segment direction
+tolerances, turn detection, adjacent normal handling, averaged miter widths, and bevel fallback. The miter limit
+also bounds world-space joins during scene fitting. Color and picking passes use the same kernel. Rendering owns
+projection, topology, units, dash suppression, and feature identities. Miters use two triangles to fill the corner;
+bevels suppress the second triangle to avoid overlapping translucent fragments. The kernel and draw submission
+share the join vertex count. Numeric tests execute the kernel through GPU readback against geometric fixtures.
 
 Flag prefix indexes use trees of block counts for all-record and even-record queries. Single-record edits update
 the trees eagerly; bulk scans accumulate signed deltas per 256-record block until a query or clone. The index
@@ -123,6 +151,23 @@ box center and extents once, and stops at the first rejecting plane. The interse
 candidate; passing all planes does not establish an exact box/frustum intersection.
 `MarkerBoundsClassifier` owns its reusable Float64 matrix and the marker policies for unknown and empty bounds.
 The renderer consumes the shared relation type to select marker culling and compaction work.
+
+`PreparedAffineTransform` captures finite affine matrix coefficients at JavaScript precision and writes positions
+directly into caller-owned coordinate spans. Singular transforms remain valid for positions. `PreparedAffineGeometryTransform`
+adds a captured inverse transpose through the existing pivoted matrix inverse and classifies reflections using scaled
+columns. Geometry preparation requires a finite inverse and gives zero normals the existing positive Z fallback.
+Prepared transforms retain independent coefficients; repeated writes allocate no vectors and round only into destination
+storage. Model compilation prepares one transform per part or mesh piece; bounds queries prepare one per position layer.
+Callers own span validation, record decoding, output storage, winding, and diagnostics. General matrix and perspective
+operations remain in `math/mat4.ts`; box bounds retain the perspective path for non-affine matrices.
+
+`extendAffineBounds` in `math/bounds.ts` extends caller-owned minimum and maximum tuples with an affine box.
+It selects extrema from both endpoint products on each axis and adds terms in point-transform order. Each box
+uses 18 coefficient multiplications and no temporary storage. This preserves corner results without midpoint or
+extent arithmetic, including extreme finite coordinates, shear, reflection, and singular transforms. The kernel
+captures source endpoints before writing, supports aliases with distinct destination tuples, and rejects invalid
+matrices and overflowing bounds. Upper zero bounds follow point accumulation's positive-zero convention.
+`BoundsAccumulator.includeBox` uses this kernel for affine transforms and corner projection for perspective transforms.
 
 Polygon ear clipping uses `ArrayBackedLinkedList`, an array-backed circular doubly linked list of stable integer indices.
 The list owns neighbor links and constant-time removal. The polygon compiler owns traversal order, hole bridges,
@@ -168,7 +213,7 @@ missing generations trigger a complete attribute rebuild and upload. The mesh la
 policy; the journal owns numeric continuity and range unions. Empty publications preserve continuity and can reuse
 expanded attributes without GPU writes. Preparation copies changed output arrays before editing and uses the same bounded
 traversal as synchronous processing. Publication still copies and validates complete source geometry. GPU uploads use the
-shared buffer upload planner and a complete attribute upload when more than 64 expanded ranges would require separate writes.
+shared buffer upload planner to coalesce expanded ranges into at most 64 writes per attribute.
 
 `RangeMap` stores sorted integer ranges without overlaps and provides point lookup. Picking uses these snapshots to map GPU
 IDs to layer metadata. Submitted readbacks keep their original map when a later frame changes the ID assignments.
@@ -179,13 +224,15 @@ A balanced interval tree stores the maximum endpoint of each subtree to skip unr
 transfers use linear traversal; reordered matches keep their original write precedence. Shared GPU buffer entries build
 and cache the index on their first partitioned update, then keep it across leases and snapshot reassignment. The GPU owner
 clips updates to active source bytes and keeps a direct path for one contiguous allocation. Mesh instances use the same
-buffer owner. Planar mesh attributes keep direct uploads and the renderer's existing fragmentation policy.
+buffer owner. Planar mesh attributes keep direct uploads with the shared planner's write budget.
 
 `planBufferUploads` owns byte-range selection without owning source snapshots or GPU resources. It clips ranges to
 available bytes, aligns writes to four bytes, and merges overlaps and adjacency through `RangeSet`. A configurable
-write cost merges clean gaps when their byte cost is no greater than the saved call cost. This minimizes source bytes
-plus planned write count times call overhead before applying the write budget or partition mapping. If the plan exceeds
-the write budget, the planner selects a complete upload without searching for a lower-cost plan within the budget.
+write cost merges clean gaps when their byte cost is no greater than the saved call cost. `coalesceRanges` in `algorithms/`
+owns this numeric optimization for sorted intervals without overlaps. It minimizes covered length plus range count times
+overhead within a range budget. When the initial plan exceeds the budget, it merges the smallest remaining gaps; equal
+gaps merge in source order. Planning takes linear time unless the budget requires additional merges, which sort the gaps.
+The GPU planner retains alignment, clipping, and validation and applies the numeric optimizer before partition mapping.
 Partition mapping can increase actual transferred bytes and GPU write count by duplicating boundary records or splitting
 ranges. Consumers use zero call overhead by default to preserve clean gaps. The planner reuses normalized inputs and
 leaves other inputs unchanged. Shared instance storage plans source ranges before partition mapping; labels and planar

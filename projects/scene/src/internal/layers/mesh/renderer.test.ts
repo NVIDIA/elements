@@ -104,13 +104,19 @@ describe('MeshRenderer', () => {
     positions[2] = 1;
     publishMeshGeometry(item.layer, { attribute: 'positions', source: positions, start: 0, count: 1 });
     renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
-    expect(
-      writes.mock.calls
-        .filter(([buffer]) => buffer === positionBuffer)
-        .map(([, offset, data]) => [offset, data.byteLength])
-    ).toEqual(
-      count === 65 ? [[0, indices.length * 12]] : Array.from({ length: count }, (_, index) => [index * 36, 12])
+    const uploads = writes.mock.calls.filter(([buffer]) => buffer === positionBuffer);
+    expect(uploads.map(([, offset, data]) => [offset, data.byteLength])).toEqual(
+      count === 65
+        ? [[0, 48], ...Array.from({ length: 63 }, (_, index) => [(index + 2) * 36, 12])]
+        : Array.from({ length: count }, (_, index) => [index * 36, 12])
     );
+    expect(uploads).toHaveLength(64);
+    expect(uploads.reduce((bytes, [, , data]) => bytes + data.byteLength, 0)).toBe(
+      count * 12 + (count === 65 ? 24 : 0)
+    );
+    const expectedPositions =
+      count === 65 ? new Float32Array([0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1]) : new Float32Array([0, 0, 1]);
+    expect(uploads[0]![2]).toEqual(new Uint8Array(expectedPositions.buffer));
   });
 
   it('retains both edits when a newer publication cancels a pending indexed preparation', async () => {

@@ -10,6 +10,7 @@ import {
 } from '../../layers/lines/style.js';
 import type { Quaternion, Vec3 } from '../../math/types.js';
 import type { RGBA } from '../../color/types.js';
+import { encodeUnorm8, readRGBA8 } from '../../color/rgba8.js';
 import { LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './built-ins.js';
 import type { LayoutDescriptor } from './define-layout.js';
 
@@ -74,8 +75,8 @@ export function readMarker(view: ArrayBufferView, index: number): Required<Marke
     position: readFloat3(record, offsetOf(MARKER, 'position')),
     orientation,
     scale: readFloat3(record, offsetOf(MARKER, 'scale')),
-    color: readColor(record, offsetOf(MARKER, 'color')),
-    outlineColor: readColor(record, offsetOf(MARKER, 'outline-color'))
+    color: readRGBA8(record, offsetOf(MARKER, 'color')),
+    outlineColor: readRGBA8(record, offsetOf(MARKER, 'outline-color'))
   };
 }
 
@@ -106,7 +107,7 @@ export function readLineVertex(view: ArrayBufferView, index: number): Required<L
   const record = getRecordView(view, index, LINE_VERTEX);
   const fields = {
     position: readFloat3(record, offsetOf(LINE_VERTEX, 'position')),
-    color: readColor(record, offsetOf(LINE_VERTEX, 'color')),
+    color: readRGBA8(record, offsetOf(LINE_VERTEX, 'color')),
     normal: readFloat3(record, offsetOf(LINE_VERTEX, 'normal')),
     width: readFiniteFloat(record, offsetOf(LINE_VERTEX, 'width')),
     dash: readFiniteFloat(record, offsetOf(LINE_VERTEX, 'dash')),
@@ -139,7 +140,7 @@ function readPointRecord(view: ArrayBufferView, index: number, layout: LayoutDes
   const record = getRecordView(view, index, layout);
   return {
     position: readFloat3(record, offsetOf(layout, 'position')),
-    color: readColor(record, offsetOf(layout, 'color'))
+    color: readRGBA8(record, offsetOf(layout, 'color'))
   };
 }
 
@@ -257,17 +258,8 @@ function writeColor(record: DataView, offset: number, color: readonly number[]):
   for (let channel = 0; channel < 4; channel += 1) {
     const value = color[channel];
     assertFinite(value);
-    record.setUint8(offset + channel, Math.floor(Math.min(1, Math.max(0, value)) * 255 + 0.5));
+    record.setUint8(offset + channel, encodeUnorm8(value));
   }
-}
-
-function readColor(record: DataView, offset: number): RGBA {
-  return [
-    record.getUint8(offset) / 255,
-    record.getUint8(offset + 1) / 255,
-    record.getUint8(offset + 2) / 255,
-    record.getUint8(offset + 3) / 255
-  ];
 }
 
 function assertFinite(value: unknown): asserts value is number {

@@ -17,10 +17,12 @@ import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import { SCENE_PART_TAG } from '../registry.js';
 import type { SceneModelGeometry } from './types.js';
 import { compileModelGeometry, type CompiledModelGeometry } from './geometry.js';
-import { resolveSceneColor } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor } from '../../color/color.js';
+import { EMPTY_ALPHA_SUMMARY, summarizeRGBAAlpha, type AlphaSummary } from '../../color/alpha.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 
 interface ModelLayerState {
+  alphaSummary: AlphaSummary;
   compiled: CompiledModelGeometry;
   geometry: SceneModelGeometry | null;
   input: 'children' | 'geometry' | 'asset';
@@ -36,6 +38,7 @@ const states = new WeakMap<HTMLElement, ModelLayerState>();
 
 export function registerModelLayer(layer: HTMLElement): void {
   states.set(layer, {
+    alphaSummary: EMPTY_ALPHA_SUMMARY,
     compiled: compileParts([]),
     geometryError: false,
     geometry: [],
@@ -127,6 +130,7 @@ export function takeModelLayerRenderData(layer: HTMLElement): MeshRenderData {
   const state = getState(layer);
   const identityInstance = getLayerInstances(layer) === null;
   return createConstructedMeshRenderData({
+    alphaSummary: state.alphaSummary,
     color: state.tint,
     colors: state.compiled.colors,
     geometryError:
@@ -185,6 +189,7 @@ function setAggregateError(state: ModelLayerState, part: HTMLElement | undefined
 }
 
 function replaceCompiled(state: ModelLayerState, compiled: CompiledModelGeometry): void {
+  state.alphaSummary = summarizeRGBAAlpha(compiled.colors);
   state.compiled = compiled;
   state.topologyVersion += 1;
   state.version += 1;

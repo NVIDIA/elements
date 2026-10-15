@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { POLYGON_GEOMETRY } from '../../diagnostics/errors.js';
-import { sameRGBA } from '../../color/color.js';
+import { sameRGBA } from '../../color/rgba.js';
+import { EMPTY_ALPHA_SUMMARY } from '../../color/alpha.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import { getLayerCount, getLayerInstances } from '../markers/layer-state.js';
@@ -91,6 +92,7 @@ export function takePolygonLayerRenderData(layer: HTMLElement): MeshRenderData {
   const markerCount = getLayerCount(layer);
   const hasChildren = layer.children.length > 0;
   return createConstructedMeshRenderData({
+    alphaSummary: EMPTY_ALPHA_SUMMARY,
     color: state.color,
     colors: null,
     geometryError: state.geometryError,
