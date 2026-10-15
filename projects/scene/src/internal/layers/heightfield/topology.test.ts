@@ -1,20 +1,35 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it, vi } from 'vitest';
-import {
-  buildHeightfieldIndices,
-  createHeightfieldIndices,
-  isHeightfieldTopLeftTriangle,
-  prepareHeightfieldIndices
-} from './topology.js';
+import { buildHeightfieldIndices, createHeightfieldIndices, prepareHeightfieldIndices } from './topology.js';
 import { PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
+import { prepareHeightfieldSampler } from './query.js';
 
 describe('heightfield topology', () => {
+  it('samples the elevation of each rendered triangle at its centroid', () => {
+    const grid = {
+      columns: 5,
+      rows: 3,
+      spacing: 0.5,
+      origin: [10, -5] as const,
+      heights: Float32Array.from({ length: 15 }, (_, index) => (index * 19) % 13)
+    };
+    const sampler = prepareHeightfieldSampler(grid);
+    const indices = createHeightfieldIndices(grid.rows, grid.columns);
+    for (let offset = 0; offset < indices.length; offset += 3) {
+      const vertices = [...indices.subarray(offset, offset + 3)];
+      const x = vertices.reduce((sum, index) => sum + (index % grid.columns), 0) / 3;
+      const y = vertices.reduce((sum, index) => sum + Math.floor(index / grid.columns), 0) / 3;
+      const height = vertices.reduce((sum, index) => sum + grid.heights[index]!, 0) / 3;
+      expect(
+        sampler.heightAt(grid.origin[0] + x * grid.spacing, grid.origin[1] + y * grid.spacing, 'triangle')
+      ).toBeCloseTo(height, 12);
+    }
+  });
+
   it('connects neighboring rectangular cells with consistent winding and shared diagonals', () => {
     expect([...createHeightfieldIndices(2, 3)]).toEqual([0, 1, 3, 1, 4, 3, 1, 2, 4, 2, 5, 4]);
     expect(createHeightfieldIndices(1, 3)).toHaveLength(0);
-    expect(isHeightfieldTopLeftTriangle(0.5, 0.5)).toBe(true);
-    expect(isHeightfieldTopLeftTriangle(0.6, 0.5)).toBe(false);
   });
 
   it('matches synchronous topology and stops obsolete work before allocating its result', async () => {

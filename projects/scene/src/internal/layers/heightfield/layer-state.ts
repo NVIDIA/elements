@@ -11,6 +11,8 @@ import { diagnosticReporterService } from '../../diagnostics/reporter.service.js
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/render-data.js';
 import type { RGBA } from '../../color/types.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
+import { prepareHeightfieldSampler } from './query.js';
+import type { PreparedGridSampler } from '../../math/grid-sampling.js';
 
 interface HeightfieldState {
   alphaSummary: AlphaSummary;
@@ -19,6 +21,7 @@ interface HeightfieldState {
   grid: HeightfieldGrid | null;
   gridError: boolean;
   observer?: MutationObserver;
+  sampler: PreparedGridSampler | null;
   topology: HeightfieldTopology | null;
   topologyVersion: number;
   version: number;
@@ -33,6 +36,7 @@ export function registerHeightfieldLayer(layer: HTMLElement, color: RGBA): void 
     color,
     grid: null,
     gridError: false,
+    sampler: null,
     topology: null,
     topologyVersion: 0,
     version: 0
@@ -70,6 +74,7 @@ export function setHeightfieldLayerGrid(layer: HTMLElement, value: unknown): voi
 function clearGrid(state: HeightfieldState): void {
   state.alphaSummary = EMPTY_ALPHA_SUMMARY;
   state.grid = null;
+  state.sampler = null;
   state.gridError = false;
   state.topology = null;
 }
@@ -79,6 +84,7 @@ function compileGrid(state: HeightfieldState, value: unknown): void {
     const grid = snapshotGrid(value);
     const topology = getHeightfieldTopology(grid);
     validateHeightfieldGrid(grid);
+    state.sampler = prepareHeightfieldSampler(grid);
     state.alphaSummary = summarizeRGBAAlpha(grid.colors ?? null);
     if (!hasSameHeightfieldTopology(state.topology, topology)) state.topologyVersion += 1;
     state.topology = topology;
@@ -87,6 +93,7 @@ function compileGrid(state: HeightfieldState, value: unknown): void {
   } catch {
     state.alphaSummary = EMPTY_ALPHA_SUMMARY;
     state.grid = null;
+    state.sampler = null;
     state.gridError = true;
     state.topology = null;
   }
@@ -120,6 +127,10 @@ export function getHeightfieldLayerTopologyVersion(layer: HTMLElement): number {
 
 export function getHeightfieldLayerGrid(layer: HTMLElement): HeightfieldGrid | null {
   return getState(layer).grid;
+}
+
+export function getHeightfieldLayerSampler(layer: HTMLElement): PreparedGridSampler | null {
+  return getState(layer).sampler;
 }
 
 export function isHeightfieldLayerRegistered(layer: HTMLElement): boolean {

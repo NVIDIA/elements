@@ -1,6 +1,11 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import {
+  partitionSequence,
+  mapSequenceSourceRanges,
+  type SequencePartitionOptions
+} from '../algorithms/sequence-partitioning.js';
 import { maximumStoragePartitionByteLength, planStoragePartitions } from '../gpu/partition.js';
 import type { StoragePartition, StoragePartitionSourceRange } from '../gpu/partition.js';
 import type { SceneGPUDevice } from '../gpu/platform.js';
@@ -143,15 +148,12 @@ function getConnectedLineAllocation(
   if (maximumRecords < 3) {
     throw new RangeError('The device cannot bind the records required for one connected line segment.');
   }
-  const planned =
-    item.topology === 'loop'
-      ? planLoopLinePartitions(item.data.count, maximumRecords)
-      : planStripLinePartitions(item.data.count, maximumRecords);
+  // Source capture checks line records; this path has count > maximumRecords >= 3.
+  const planned = planConnectedLinePartitions(item, maximumRecords);
   return {
     byteLength,
     key: `line/${item.topology}/${item.data.count}/${maximumRecords}`,
-    linePartitions: planned.map(entry => entry.draw),
-    partitions: planned.map(entry => entry.storage),
+    ...planned,
     primitiveRecordCount: 1,
     stride: LINE_VERTEX.stride
   };
@@ -168,111 +170,60 @@ function completeConnectedLineDraw(item: LineRenderItem): ConnectedLineDrawParti
   };
 }
 
-function planStripLinePartitions(
-  count: number,
-  maximumRecords: number
-): Array<{ readonly draw: ConnectedLineDrawPartition; readonly storage: StoragePartition }> {
-  const result: Array<{ draw: ConnectedLineDrawPartition; storage: StoragePartition }> = [];
-  let segmentBase = 0;
-  while (segmentBase < count - 1) {
-    const segmentStart = segmentBase === 0 ? 0 : 1;
-    const segmentCount = Math.min(maximumRecords - segmentStart - 1, count - 1 - segmentBase);
-    const sourceFirstRecord = segmentBase - segmentStart;
-    const recordCount = segmentStart + segmentCount + 1;
-    const lastSegment = segmentBase + segmentCount - 1;
-    const firstJoin = Math.max(1, segmentBase);
-    const lastJoin = Math.min(count - 2, lastSegment);
-    result.push({
-      draw: {
-        joinCount: Math.max(0, lastJoin - firstJoin + 1),
-        joinStart: firstJoin - sourceFirstRecord - 1,
-        segmentBase,
-        segmentCount,
-        segmentStart,
-        sourceCount: count
-      },
-      storage: createLineStoragePartition({
-        circular: false,
-        firstRecord: segmentBase,
-        firstSourceRecord: sourceFirstRecord,
-        recordCount,
-        sourceCount: count
-      })
-    });
-    segmentBase += segmentCount;
-  }
-  return result;
-}
-
-function planLoopLinePartitions(
-  count: number,
-  maximumRecords: number
-): Array<{ readonly draw: ConnectedLineDrawPartition; readonly storage: StoragePartition }> {
-  const result: Array<{ draw: ConnectedLineDrawPartition; storage: StoragePartition }> = [];
-  const maximumSegments = maximumRecords - 2;
-  for (let segmentBase = 0; segmentBase < count; segmentBase += maximumSegments) {
-    const segmentCount = Math.min(maximumSegments, count - segmentBase);
-    result.push({
-      draw: {
-        joinCount: segmentCount,
-        joinStart: 1,
-        segmentBase,
-        segmentCount,
-        segmentStart: 1,
-        sourceCount: count
-      },
-      storage: createLineStoragePartition({
-        circular: true,
-        firstRecord: segmentBase,
-        firstSourceRecord: segmentBase - 1,
-        recordCount: segmentCount + 2,
-        sourceCount: count
-      })
-    });
-  }
-  return result;
-}
-
-function createLineStoragePartition(options: {
-  readonly circular: boolean;
-  readonly firstRecord: number;
-  readonly firstSourceRecord: number;
-  readonly recordCount: number;
-  readonly sourceCount: number;
-}): StoragePartition {
-  const { circular, firstRecord, firstSourceRecord, recordCount, sourceCount } = options;
-  const normalizedFirst = circular ? (firstSourceRecord + sourceCount) % sourceCount : firstSourceRecord;
-  return {
-    byteLength: recordCount * LINE_VERTEX.stride,
-    byteOffset: normalizedFirst * LINE_VERTEX.stride,
-    firstRecord,
-    recordCount,
-    sourceRanges: createLineSourceRanges({ circular, firstRecord: normalizedFirst, recordCount, sourceCount })
+function planConnectedLinePartitions(
+  item: LineRenderItem,
+  capacity: number
+): { linePartitions: ConnectedLineDrawPartition[]; partitions: StoragePartition[] } {
+  const count = item.data.count;
+  const loop = item.topology === 'loop';
+  const partitionLimit = Math.ceil(count / (capacity - 2));
+  const linePartitions = new Array<ConnectedLineDrawPartition>(partitionLimit);
+  const partitions = new Array<StoragePartition>(partitionLimit);
+  let partitionCount = 0;
+  const options: SequencePartitionOptions = {
+    count: loop ? count : count - 1,
+    sourceCount: count,
+    capacity,
+    before: 1,
+    after: 1,
+    boundary: loop ? 'wrap' : 'clamp'
   };
+  partitionSequence(options, appendPartition);
+  linePartitions.length = partitionCount;
+  partitions.length = partitionCount;
+  return { linePartitions, partitions };
+
+  // eslint-disable-next-line max-params -- @hotpath Scalar spans avoid allocating temporary partition objects.
+  function appendPartition(
+    offset: number,
+    assigned: number,
+    windowOffset: number,
+    windowCount: number,
+    sourceOffset: number
+  ): void {
+    // Each segment owns its starting join, except the first segment of a strip.
+    linePartitions[partitionCount] = {
+      joinCount: assigned - (!loop && offset === 0 ? 1 : 0),
+      joinStart: loop ? 1 : 0,
+      segmentBase: offset,
+      segmentCount: assigned,
+      segmentStart: windowOffset,
+      sourceCount: count
+    };
+    partitions[partitionCount++] = {
+      byteLength: windowCount * LINE_VERTEX.stride,
+      byteOffset: sourceOffset * LINE_VERTEX.stride,
+      firstRecord: offset,
+      recordCount: windowCount,
+      sourceRanges: mapSequenceSourceRanges(count, sourceOffset, windowCount, toStorageSourceRange)
+    };
+  }
 }
 
-function createLineSourceRanges(options: {
-  readonly circular: boolean;
-  readonly firstRecord: number;
-  readonly recordCount: number;
-  readonly sourceCount: number;
-}): readonly StoragePartitionSourceRange[] {
-  const { circular, firstRecord, recordCount, sourceCount } = options;
-  const firstCount = circular ? Math.min(recordCount, sourceCount - firstRecord) : recordCount;
-  const ranges: StoragePartitionSourceRange[] = [createSourceRange(firstRecord, 0, firstCount)];
-  const remaining = recordCount - firstCount;
-  if (remaining > 0) ranges.push(createSourceRange(0, firstCount, remaining));
-  return ranges;
-}
-
-function createSourceRange(
-  sourceFirstRecord: number,
-  targetFirstRecord: number,
-  recordCount: number
-): StoragePartitionSourceRange {
+function toStorageSourceRange(sourceOffset: number, targetOffset: number, count: number): StoragePartitionSourceRange {
   return {
-    byteLength: recordCount * LINE_VERTEX.stride,
-    sourceByteOffset: sourceFirstRecord * LINE_VERTEX.stride,
-    targetByteOffset: targetFirstRecord * LINE_VERTEX.stride
+    byteLength: count * LINE_VERTEX.stride,
+    sourceByteOffset: sourceOffset * LINE_VERTEX.stride,
+    targetByteOffset: targetOffset * LINE_VERTEX.stride
   };
 }
