@@ -8,9 +8,11 @@ import { decodeSrgbChannel, SRGB_TO_LINEAR_WGSL } from '../color/transfer.js';
 import { readRGBA8, UNPACK_RGBA8_WGSL } from '../color/rgba8.js';
 import { GRID_GRADIENT_WGSL, writeGridNormal } from './grid-gradient.js';
 import { normalizeQuaternion, ROTATE_BY_QUATERNION_WGSL, rotateVectorByQuaternion } from './quaternion.js';
-import type { Vec3 } from './types.js';
+import type { Matrix4, Vec3 } from './types.js';
 import { POLYLINE_WGSL } from './polyline.js';
 import type { Point2 } from './geometry-2d.js';
+import { classifyAabbFrustum, FRUSTUM_WGSL, isOutsideHalfSpace } from './frustum.js';
+import { identityMat4, multiplyMat4Vec4 } from './mat4.js';
 
 const bindings = /* wgsl */ `
 @group(0) @binding(0) var<storage, read> input: array<f32>;
@@ -29,6 +31,66 @@ describe.runIf(getWebGPUTestMode() === 'check')('shared numeric shader kernels',
 
   afterAll(async () => {
     await runner.close();
+  });
+
+  test('executes half-space support rejection at and immediately around float32 boundaries', async () => {
+    const step = 2 ** -23;
+    const pairs = [
+      [-1, 1],
+      [-1 - step, 1],
+      [-1 + step, 1],
+      [-0, 0],
+      [0, 0],
+      [-step, 0],
+      [step, 0],
+      [-4, 4],
+      [-4 - 4 * step, 4]
+    ];
+    const code = /* wgsl */ `${bindings}
+${FRUSTUM_WGSL}
+@compute @workgroup_size(1) fn main(@builtin(global_invocation_id) id: vec3u) {
+  let start = id.x * 2u;
+  output[id.x] = select(0.0, 1.0, nve_frustum_outside_half_space(input[start], input[start + 1u]));
+}`;
+    const actual = await executeKernel(session, {
+      code,
+      inputs: Float32Array.from(pairs.flat()),
+      outputLength: pairs.length,
+      workgroups: pairs.length
+    });
+    expect(actual).toEqual(pairs.map(([distance, support]) => Number(isOutsideHalfSpace(distance!, support!))));
+    expect(session.errors).toEqual([]);
+  });
+
+  test('executes all six sphere clip planes with touching boundaries and transformed support radii', async () => {
+    const fixtures = frustumSphereFixtures();
+    const code = /* wgsl */ `${bindings}
+${FRUSTUM_WGSL}
+@compute @workgroup_size(1) fn main(@builtin(global_invocation_id) id: vec3u) {
+  let start = id.x * 20u;
+  let transform = mat4x4f(
+    vec4f(input[start], input[start + 1u], input[start + 2u], input[start + 3u]),
+    vec4f(input[start + 4u], input[start + 5u], input[start + 6u], input[start + 7u]),
+    vec4f(input[start + 8u], input[start + 9u], input[start + 10u], input[start + 11u]),
+    vec4f(input[start + 12u], input[start + 13u], input[start + 14u], input[start + 15u])
+  );
+  let center = vec3f(input[start + 16u], input[start + 17u], input[start + 18u]);
+  output[id.x] = select(0.0, 1.0, nve_frustum_intersects_sphere(transform, center, input[start + 19u]));
+}`;
+    const actual = await executeKernel(session, {
+      code,
+      inputs: Float32Array.from(fixtures.flatMap(fixture => [...fixture.transform, ...fixture.center, fixture.radius])),
+      outputLength: fixtures.length,
+      workgroups: fixtures.length
+    });
+    expect(actual).toEqual(fixtures.map(fixture => Number(fixture.visible)));
+    for (const [index, fixture] of fixtures.entries()) {
+      if (fixture.radius !== 0) continue;
+      const [x, y, z] = fixture.center;
+      const bounds = { minimumX: x, maximumX: x, minimumY: y, maximumY: y, minimumZ: z, maximumZ: z };
+      expect(actual[index]).toBe(Number(classifyAabbFrustum(bounds, fixture.transform) !== 'outside'));
+    }
+    expect(session.errors).toEqual([]);
   });
 
   test('normalizes polyline directions and suppresses repeated or sub-threshold segments', async () => {
@@ -296,6 +358,71 @@ ${UNPACK_RGBA8_WGSL}
     expect(session.errors).toEqual([]);
   });
 });
+
+interface FrustumSphereFixture {
+  readonly transform: Matrix4;
+  readonly center: Readonly<Vec3>;
+  readonly radius: number;
+  readonly visible: boolean;
+}
+
+function frustumSphereFixtures(): FrustumSphereFixture[] {
+  const fixtures: FrustumSphereFixture[] = [];
+  const boundaryPoints: readonly Readonly<Vec3>[] = [
+    [-1, 0, 0.5],
+    [1, 0, 0.5],
+    [0, -1, 0.5],
+    [0, 1, 0.5],
+    [0, 0, 0],
+    [0, 0, 1]
+  ];
+  for (const [plane, point] of boundaryPoints.entries()) {
+    const axis = Math.floor(plane / 2);
+    const direction = plane % 2 === 0 ? -1 : 1;
+    for (const radius of [0, 0.25]) {
+      for (const delta of [-(2 ** -22), 0, 2 ** -22]) {
+        const center: Vec3 = [...point];
+        center[axis] = center[axis]! + direction * (radius + delta);
+        fixtures.push({ transform: identityMat4(), center, radius, visible: delta <= 0 });
+      }
+    }
+  }
+  return [...fixtures, ...transformedFrustumSpheres()];
+}
+
+function transformedFrustumSpheres(): FrustumSphereFixture[] {
+  const transforms = [
+    identityMat4(),
+    new Float32Array([-1, 0, 0.25, 0, 0.5, 2, 0, 0, 0, 0.5, 1, 0, 0.25, -0.5, 0, 1]),
+    new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1.125, -1, 0, 0, -1.125, 0]),
+    new Float32Array(16)
+  ];
+  return Array.from({ length: 512 }, (_, index) => {
+    const transform = transforms[index % transforms.length]!;
+    const center: Vec3 = [(((index * 13) % 37) - 18) / 4, (((index * 7) % 29) - 14) / 4, -((index * 11) % 53) / 4];
+    const radius = (index % 5) / 8;
+    return { transform, center, radius, visible: referenceSphereVisible(transform, center, radius) };
+  });
+}
+
+// Transform the center and each independent basis direction before applying clip inequalities.
+function referenceSphereVisible(transform: Matrix4, center: Readonly<Vec3>, radius: number): boolean {
+  const distances = clipDistances(multiplyMat4Vec4(transform, [...center, 1]));
+  const axes = [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0]
+  ] as const;
+  const gradients = axes.map(axis => clipDistances(multiplyMat4Vec4(transform, axis)));
+  return distances.every(
+    (distance, plane) =>
+      distance + radius * Math.hypot(gradients[0]![plane]!, gradients[1]![plane]!, gradients[2]![plane]!) >= 0
+  );
+}
+
+function clipDistances([x, y, z, w]: readonly number[]): number[] {
+  return [w! + x!, w! - x!, w! + y!, w! - y!, z!, w! - z!];
+}
 
 interface ScreenJoinFixture {
   readonly name: string;
