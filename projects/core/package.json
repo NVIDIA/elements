@@ -663,6 +663,18 @@
       "types": "./dist/progress-bar/define.d.ts",
       "default": "./dist/progress-bar/define.js"
     },
+    "./progress-dot": {
+      "types": "./dist/progress-dot/index.d.ts",
+      "default": "./dist/progress-dot/index.js"
+    },
+    "./progress-dot/index.js": {
+      "types": "./dist/progress-dot/index.d.ts",
+      "default": "./dist/progress-dot/index.js"
+    },
+    "./progress-dot/define.js": {
+      "types": "./dist/progress-dot/define.d.ts",
+      "default": "./dist/progress-dot/define.js"
+    },
     "./progress-ring": {
       "types": "./dist/progress-ring/index.d.ts",
       "default": "./dist/progress-ring/index.js"
