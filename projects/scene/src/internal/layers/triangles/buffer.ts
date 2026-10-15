@@ -1,13 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import {
-  MutableVector3View,
-  PackedRecordBuffer,
-  readPackedColor,
-  resolveSceneColor,
-  writePackedColor
-} from '../../records/packed-record-buffer.js';
+import { MutableVector3View, PackedRecordBuffer } from '../../records/packed-record-buffer.js';
+import { resolveSceneColor, writePackedColor } from '../../color/color.js';
+import { readRGBA8 } from '../../color/rgba8.js';
 import { TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { writeTriangleVertex } from '../../records/layouts/codecs.js';
@@ -71,7 +67,7 @@ class TriangleVertexRecord implements TriangleVertex {
   }
 
   get color(): RGBA {
-    return readPackedColor(this.#view, this.index * TRIANGLE_VERTEX.stride + COLOR_OFFSET);
+    return readRGBA8(this.#view, this.index * TRIANGLE_VERTEX.stride + COLOR_OFFSET);
   }
 
   set color(value: SceneColor) {

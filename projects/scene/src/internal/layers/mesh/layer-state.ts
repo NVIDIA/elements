@@ -3,6 +3,13 @@
 
 import { MESH_GEOMETRY, MESH_TEXTURE_CAPTURE, MESH_TEXTURE_WITHOUT_UVS } from '../../diagnostics/errors.js';
 import { parseCSSColor } from '../../color/color.js';
+import {
+  EMPTY_ALPHA_SUMMARY,
+  replaceAlphaSummary,
+  summarizeAlpha,
+  summarizeRGBAAlpha,
+  type AlphaSummary
+} from '../../color/alpha.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../../color/types.js';
@@ -40,6 +47,7 @@ interface MeshGeometryReplacement {
 }
 
 interface MeshState {
+  alphaSummary: AlphaSummary;
   readonly attributeVersions: Record<MeshGeometryAttribute, number>;
   positions: Float32Array | null;
   normals: Float32Array | null;
@@ -81,6 +89,7 @@ const states = new WeakMap<HTMLElement, MeshState>();
 
 export function registerMeshLayer(mesh: HTMLElement): void {
   states.set(mesh, {
+    alphaSummary: EMPTY_ALPHA_SUMMARY,
     attributeVersions: createMeshGeometryAttributeVersions(),
     positions: null,
     normals: null,
@@ -124,6 +133,7 @@ function createMeshRenderData(mesh: HTMLElement, consumeUploads: boolean): MeshR
   const hasChildren = mesh.children.length > 0;
   const uploads = takeGeometryUploadHistory(state, consumeUploads);
   return createConstructedMeshRenderData({
+    alphaSummary: state.alphaSummary,
     color: state.color,
     colors: state.colors,
     geometryError: state.geometryError || state.textureError,
@@ -208,6 +218,7 @@ function replaceMeshGeometryAttributes(
 
 function applyGeometryReplacement(update: GeometryReplacementUpdate): void {
   const { captured, changedAttributes, invalid, state } = update;
+  state.alphaSummary = summarizeRGBAAlpha(captured.colors);
   state.positions = captured.positions;
   state.normals = captured.normals;
   state.uvs = captured.uvs;
@@ -267,6 +278,19 @@ function resolveGeometryPublicationRange(options: {
 }
 
 function applyGeometryPublication(state: MeshState, prepared: PreparedGeometryPublication): void {
+  if (prepared.attribute === 'colors' && prepared.recordCount > 0) {
+    const span = {
+      offset: prepared.byteOffset / Float32Array.BYTES_PER_ELEMENT + 3,
+      stride: 4,
+      count: prepared.recordCount,
+      opaqueValue: 1
+    } as const;
+    state.alphaSummary = replaceAlphaSummary(
+      state.alphaSummary,
+      summarizeAlpha({ ...span, values: state.colors! }),
+      summarizeAlpha({ ...span, values: prepared.geometry.colors! })
+    );
+  }
   Reflect.set(state, prepared.attribute, prepared.candidate);
 }
 

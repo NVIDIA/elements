@@ -1,8 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { normalizeQuaternion, rotateVectorByQuaternion } from '../../math/quaternion.js';
-import { resolveSceneColor } from '../../records/packed-record-buffer.js';
+import { normalizeQuaternion } from '../../math/quaternion.js';
+import { composePreciseMat4 } from '../../math/mat4.js';
+import { PreparedAffineGeometryTransform } from '../../math/affine-transform.js';
+import { resolveSceneColor } from '../../color/color.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 import {
   createPrimitiveGeometry,
@@ -202,45 +204,23 @@ function writePart(options: {
   readonly vertexOffset: number;
 }): void {
   const { colors, indexOffset, indices, normals, part, positions, source, vertexOffset } = options;
+  const transform = new PreparedAffineGeometryTransform(
+    composePreciseMat4(part.position, part.orientation, part.scale)
+  );
   for (
     let sourceOffset = 0, vertex = vertexOffset;
     sourceOffset < source.vertices.length;
     sourceOffset += 6, vertex += 1
   ) {
-    const position = transformPosition(
-      [source.vertices[sourceOffset]!, source.vertices[sourceOffset + 1]!, source.vertices[sourceOffset + 2]!],
-      part
-    );
-    positions.set(position, vertex * 3);
-    normals.set(
-      transformNormal(
-        [source.vertices[sourceOffset + 3]!, source.vertices[sourceOffset + 4]!, source.vertices[sourceOffset + 5]!],
-        part
-      ),
-      vertex * 3
-    );
+    transform.writePosition(source.vertices, sourceOffset, positions, vertex * 3);
+    transform.writeNormal(source.vertices, sourceOffset + 3, normals, vertex * 3);
     colors.set(part.color, vertex * 4);
   }
-  const mirrored = part.scale[0] * part.scale[1] * part.scale[2] < 0;
+  const mirrored = transform.mirrored;
   for (let index = 0; index < source.indices.length; index += 3) {
     const first = source.indices[index]! + vertexOffset;
     const second = source.indices[index + 1]! + vertexOffset;
     const third = source.indices[index + 2]! + vertexOffset;
     indices.set(mirrored ? [first, third, second] : [first, second, third], indexOffset + index);
   }
-}
-
-function transformPosition(point: Readonly<Vec3>, part: NormalizedModelPart): Vec3 {
-  const [x, y, z] = point;
-  const [sx, sy, sz] = part.scale;
-  const rotated = rotateVectorByQuaternion([x * sx, y * sy, z * sz], part.orientation);
-  return [rotated[0] + part.position[0], rotated[1] + part.position[1], rotated[2] + part.position[2]];
-}
-
-function transformNormal(normal: Readonly<Vec3>, part: NormalizedModelPart): Vec3 {
-  const [x, y, z] = normal;
-  const [sx, sy, sz] = part.scale;
-  const rotated = rotateVectorByQuaternion([x / sx, y / sy, z / sz], part.orientation);
-  const length = Math.hypot(...rotated);
-  return [rotated[0] / length, rotated[1] / length, rotated[2] / length];
 }

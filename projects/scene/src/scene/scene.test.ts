@@ -561,7 +561,7 @@ describe(Scene.metadata.tag, () => {
       expect.objectContaining({ vertexCount: 3 }),
       expect.objectContaining({ indexed: true }),
       expect.objectContaining({ vertexCount: 6 }),
-      expect.objectContaining({ vertexCount: 15 })
+      expect.objectContaining({ vertexCount: 18 })
     ]);
 
     points.setAttribute('size', '7');
@@ -569,7 +569,7 @@ describe(Scene.metadata.tag, () => {
     lines.setAttribute('topology', 'loop');
     await waitForAnimationFrames(2);
     expect(gpu.devices[0]?.draws.at(-2)).toEqual(expect.objectContaining({ vertexCount: 6 }));
-    expect(gpu.devices[0]?.draws.at(-1)).toEqual(expect.objectContaining({ vertexCount: 27 }));
+    expect(gpu.devices[0]?.draws.at(-1)).toEqual(expect.objectContaining({ vertexCount: 36 }));
   });
 
   it('should synchronize mesh geometry, instances, owning frames, hidden updates, and removal', async () => {

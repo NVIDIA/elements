@@ -657,7 +657,7 @@ describe(SceneRenderer.name, () => {
     renderer.render([strip]);
     gpu.draws.length = 0;
     renderer.render([{ ...strip, data: { ...strip.data, uploadRanges: [] } }]);
-    expect(gpu.draws.map(draw => draw.vertexCount)).toEqual([24, 18]);
+    expect(gpu.draws.map(draw => draw.vertexCount)).toEqual([30, 24]);
     const writeStart = gpu.writes.length;
     renderer.render([
       {
@@ -686,7 +686,7 @@ describe(SceneRenderer.name, () => {
     renderer.render([loop]);
     gpu.draws.length = 0;
     renderer.render([{ ...loop, data: { ...loop.data, uploadRanges: [] } }]);
-    expect(gpu.draws.map(draw => draw.vertexCount)).toEqual([18, 18, 18]);
+    expect(gpu.draws.map(draw => draw.vertexCount)).toEqual([24, 24, 24]);
 
     Reflect.set(gpu.device, 'limits', { maxBufferSize: 96, maxStorageBufferBindingSize: 96 });
     const instanceBytes = new Uint8Array(MARKER.stride * 3);
@@ -1606,7 +1606,7 @@ describe(SceneRenderer.name, () => {
     const loadedLine = { ...opaqueLine, data: { ...opaqueLine.data, uploadRanges: [] } };
     renderer.render([loadedPoints, loadedTriangles, loadedMarker, loadedLine]);
 
-    expect(gpu.draws.slice(-5).map(draw => draw.vertexCount)).toEqual([3, undefined, 15, 12, 3]);
+    expect(gpu.draws.slice(-5).map(draw => draw.vertexCount)).toEqual([3, undefined, 18, 12, 3]);
     expect(gpu.draws.slice(-5).map(draw => draw.pipeline)).toEqual([
       gpu.pipelines[11],
       gpu.pipelines[1],
@@ -1671,7 +1671,7 @@ describe(SceneRenderer.name, () => {
     const loaded = { ...loop, data: { ...loop.data, uploadRanges: [] } };
     renderer.render([loaded]);
 
-    expect(gpu.draws.at(-1)).toEqual(expect.objectContaining({ vertexCount: 27 }));
+    expect(gpu.draws.at(-1)).toEqual(expect.objectContaining({ vertexCount: 36 }));
     expect(gpu.writes.find(write => write instanceof Float32Array && write.length === 48)).toMatchObject(
       expect.objectContaining({ 37: 1, 38: 1 })
     );

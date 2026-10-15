@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
+import { EMPTY_ALPHA_SUMMARY } from '../../color/alpha.js';
 import type { MeshRenderItem } from '../../rendering/render-items.js';
 import { retainGeometryUploadRanges } from './preparation.js';
 import {
@@ -125,6 +126,7 @@ function createItem(geometryUploadRanges: readonly MeshGeometryUploadRange[]): M
   }
   return {
     data: createConstructedMeshRenderData({
+      alphaSummary: EMPTY_ALPHA_SUMMARY,
       color: [1, 1, 1, 1],
       colors: null,
       geometryError: false,
