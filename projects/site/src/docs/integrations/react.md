@@ -47,7 +47,7 @@ declare module 'react/jsx-runtime' {
 
 ### React SSR
 
-An experimental [@lit-labs/ssr-react](https://github.com/lit/lit/tree/main/packages/labs/ssr-react) package exists for rendering elements with SSR.
+[@lit-labs/ssr-react](https://github.com/lit/lit/tree/main/packages/labs/ssr-react) is an experimental package for rendering Elements during React server rendering. The experimental label applies to this Lit integration. It does not change the [browser support policy](/docs/about/support/#browsers), and it does not make every Elements server-rendering path experimental. Component SSR tests check that a component can produce server markup. Read [SSR testing](/docs/internal/guidelines/testing-ssr/) for that check.
 
 ```typescript
 // app/root.tsx, import before any other elements import statements

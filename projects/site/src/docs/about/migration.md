@@ -46,6 +46,8 @@ The Elements Design System is now hosted and developed in a public GitHub reposi
 
 ## Stability and Versioning
 
+The [support page](/docs/about/support/#versioning) states the current stable release and the deprecation cycle. This section records how public versions relate to earlier releases.
+
 Teams have run Elements in production since 2022, and NVIDIA already released it internally as `1.x`. The move to open source changes the package scope to `@nvidia-elements/*`, but it does not reset the maturity of the system.
 
 NVIDIA published the initial public open source packages as `0.x` while the project completed its public release migration. Treat these `0.x` versions as transitional open source preview releases, not proof that Elements itself is experimental or newly developed.

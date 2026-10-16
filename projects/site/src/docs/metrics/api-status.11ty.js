@@ -128,10 +128,20 @@ const columns = {
   coverage: { width: '130px', tooltip: 'Unit Test Coverage' },
   bundle: { width: '130px', tooltip: 'Standalone total JavaScript bundle size in kb' },
   performance: { width: '130px', tooltip: 'Chrome Lighthouse Performance Score' },
-  accessibility: { width: '130px', tooltip: 'Chrome Lighthouse Accessibility Score' },
+  accessibility: {
+    width: '130px',
+    tooltip: 'Automated Chrome Lighthouse accessibility score. This score is not a WCAG conformance result.'
+  },
   bestPractices: { width: '130px', tooltip: 'Chrome Lighthouse Best Practices Score' },
-  ssr: { width: '130px', tooltip: 'Support Basic Server Side Rendering (SSR)' },
-  axe: { width: '170px', tooltip: 'Accessibility status from Axe Core API' },
+  ssr: {
+    width: '130px',
+    tooltip: 'Basic server-render check in CI. This result is not a production SSR support commitment.'
+  },
+  axe: {
+    width: '170px',
+    tooltip:
+      'Automated axe-core result for the default light theme in Chromium. A pass is not complete accessibility coverage.'
+  },
   spec: { tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '170px' },
   released: { tooltip: 'Version Element was first released', width: '170px' },
   themes: { width: '170px', tooltip: 'Supports base light and dark theme' },

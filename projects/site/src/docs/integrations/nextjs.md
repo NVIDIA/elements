@@ -47,7 +47,7 @@ declare module 'react' {
 
 ## SSR
 
-An experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering Elements with NextJS SSR.
+[@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) is an experimental package for rendering Elements during NextJS server rendering. The experimental label applies to this Lit integration. It does not change the [browser support policy](/docs/about/support/#browsers), and it does not make every Elements server-rendering path experimental. Component SSR tests check that a component can produce server markup. Read [SSR testing](/docs/internal/guidelines/testing-ssr/) for that check.
 
 ```typescript
 import withLitSSR from '@lit-labs/nextjs'; // https://github.com/lit/lit/tree/main/packages/labs/nextjs

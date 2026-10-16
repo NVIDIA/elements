@@ -8,7 +8,7 @@
 
 # {{ title }}
 
-Lighthouse performance, accessibility, and best practices tests.
+Lighthouse performance, accessibility, and best practices tests. The runner uses the default Lighthouse config in Chromium and skips the `aria-prohibited-attr` audit. Read the accessibility score as an automated Chrome score, separate from a WCAG conformance result. See the [accessibility policy](/docs/about/accessibility/) for the project target and for how these scores differ from axe tests.
 
 **Key Patterns:**
 

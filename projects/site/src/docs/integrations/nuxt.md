@@ -1,7 +1,7 @@
 ---
 {
   title: 'Nuxt',
-  description: 'Use NVIDIA Elements in a Nuxt app: register components, configure SSR, bind native form controls with v-model, and handle custom events.',
+  description: 'Use NVIDIA Elements in a Nuxt app: register custom elements, bind native form controls with v-model, and handle custom events.',
   layout: 'docs.11ty.js'
 }
 ---

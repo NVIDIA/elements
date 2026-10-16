@@ -12,16 +12,13 @@ The forms utility library provides a base mixin to make it easy to create form a
 
 ## Getting Started
 
+Install `@nvidia-elements/forms` from the public npm registry. A public install works without `npm login` and without a custom registry URL.
+
 ```shell
-# local .npmrc file
-registry={{ELEMENTS_REGISTRY_URL}}
-
-# https://registry.npmjs.org
-npm login
-
-# install
 npm install @nvidia-elements/forms
 ```
+
+If npm reports `403 Forbidden`, identify the registry that served the request before changing credentials. The [CLI troubleshooting](/docs/cli/#403-forbidden) section covers public access, private registries, and network or proxy failures.
 
 ## API
 

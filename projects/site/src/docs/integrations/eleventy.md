@@ -119,7 +119,7 @@ When configuring a custom Markdown library, enable inline HTML so Markdown pages
 
 ## Server-Side Rendering
 
-The [`@lit-labs/eleventy-plugin-lit`](https://github.com/lit/lit/tree/main/packages/labs/eleventy-plugin-lit) plugin can render Lit components into declarative shadow DOM during the Eleventy build. Lit SSR and the Eleventy plugin are experimental, so verify component compatibility before using this path in production. The [Eleventy SSR starter]({{ELEMENTS_REPO_BASE_URL}}/tree/main/projects/starters/eleventy-ssr) provides a working testbed.
+The [`@lit-labs/eleventy-plugin-lit`](https://github.com/lit/lit/tree/main/packages/labs/eleventy-plugin-lit) plugin can render Lit components into declarative shadow DOM during the Eleventy build. Lit SSR and the Eleventy plugin are experimental, so verify component compatibility before using this path in production. The experimental label applies to this plugin. It does not change the [browser support policy](/docs/about/support/#browsers). The [Eleventy SSR starter]({{ELEMENTS_REPO_BASE_URL}}/tree/main/projects/starters/eleventy-ssr) provides a working testbed.
 
 Install the SSR plugin and client hydration support:
 

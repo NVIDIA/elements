@@ -1,7 +1,7 @@
 ---
 {
   title: 'Lit',
-  description: 'Use NVIDIA Elements alongside Lit components and templates, including server-side rendering and shared reactive controllers.',
+  description: 'Use NVIDIA Elements alongside Lit components and templates, including forms and shared style utilities.',
   layout: 'docs.11ty.js'
 }
 ---

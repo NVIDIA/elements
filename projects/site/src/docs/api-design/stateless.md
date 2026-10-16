@@ -1,72 +1,89 @@
 ---
 {
   title: 'Stateless',
-  description: 'Why NVIDIA Elements components default to stateless APIs, when to introduce internal state, and patterns for keeping components controllable.',
+  description: 'How NVIDIA Elements keeps business state in the application, and how dialog presentation uses the browser Popover API.',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-## Escape Hatch - anti-pattern
+## Application state and presentation state
 
-Elements are intentionally as stateless as possible. This means elements do not maintain any internal state but rather only render based on the information/state passed to the element via properties/attributes. Consider the following example with a modal element.
+Elements keep business state in the application. A component can still manage interaction details, and the browser can manage presentation. [`nve-dialog`](/docs/elements/dialog/) is the current dialog. It uses the native [Popover API](/docs/foundations/popovers/).
+
+The application owns the decision to accept, reject, or validate work. The browser owns whether the dialog is showing. `nve-dialog` sets the `popover` attribute to `auto` when `modal` is present and to `manual` otherwise. Open and close that presentation with `popovertarget`, [invoker commands](/docs/foundations/popovers/#invoker-commands), or the native `showPopover()` and `hidePopover()` methods.
+
+`closable` adds a close button. On a modal dialog it also allows a click outside the dialog to dismiss it. Those controls change presentation. They do not store the application's result.
+
+The dialog dispatches `beforetoggle` and `toggle` from the Popover API, then dispatches `open` or `close` after the presentation changes. Listen to those events when application state needs to follow the dialog. The `close` event reports a dialog that has already closed. It does not wait for application validation.
+
+Native popovers also close when the user presses Escape. The [popover guide](/docs/foundations/popovers/#closable) describes that behavior.
+
+<nve-alert status="warning">You can hide an element with the `hidden` attribute, CSS, or by removing it from the DOM. For `nve-dialog`, use the Popover API so focus and the top layer stay with the browser.</nve-alert>
+
+### Confirm in application code
+
+This example opens a modal dialog from a button. The Save button runs application logic, then calls `hidePopover()` only when that logic accepts the change. The close button, an outside click, and Escape can still hide the dialog, because the browser owns that presentation.
 
 ```html
-<nve-modal></nve-modal>
+<div nve-layout="column gap:md">
+  <nve-button popovertarget="review-dialog">Review changes</nve-button>
+  <nve-dialog id="review-dialog" modal closable>
+    <nve-dialog-header>
+      <h2 nve-text="heading semibold">Review changes</h2>
+    </nve-dialog-header>
+    <p nve-text="body">Save these settings before you leave this page.</p>
+    <nve-dialog-footer>
+      <nve-button id="save-changes" interaction="emphasis">Save</nve-button>
+    </nve-dialog-footer>
+  </nve-dialog>
+</div>
 ```
-
-With the modal, the goal is to show or hide based on some application logic. No open or show property exists. The application fully controls the logic to determine whether to show the modal.
-
-<nve-alert status="warning">Warning: you can hide Elements via CSS, hidden attribute or add/remove them from the DOM. Elements should remain visible by default, providing the most flexibility to the consumer.</nve-alert>
-
-Instead of defining an `open` or `show` state, the element provides a `close` event. This event fires when the user has clicked the close button within the modal. The modal itself does nothing but emit the event. The modal only notifies the application the user had clicked the close button. The application then determines what it should do.
-
-This is important as it provides a much more flexible API and prevents "escape hatch" APIs. If the modal controls the visibility state, and the application needs to check logic before closing, yet another API would need to intercept before the close event (example: `onBeforeClose`). Consider how an Angular app would use a stateless example.
 
 ```html
-<nve-button (click)="showModal = true">open modal</nve-button>
+<script type="module">
+  import '@nvidia-elements/core/button/define.js';
+  import '@nvidia-elements/core/dialog/define.js';
 
-<nve-modal *ngIf="showModal" (close)="closeModal($event.detail)">
-  Some Content
-</nve-modal>
-```
+  const dialog = document.querySelector('#review-dialog');
+  const save = document.querySelector('#save-changes');
 
-```typescript
-export class AppComponent {
-  showModal = false;
-
-  async closeModal() {
-    const valid: boolean = await someAsyncValidationCheck();
-
-    if (valid) {
-      this.showModal = false;
-    } else {
-      warnOfPotentialIssues();
+  save.addEventListener('click', async () => {
+    const accepted = await acceptChanges();
+    if (accepted) {
+      dialog.hidePopover();
     }
+  });
+
+  dialog.addEventListener('close', () => {
+    console.log('dialog presentation closed');
+  });
+
+  async function acceptChanges() {
+    return true;
   }
-}
+</script>
 ```
 
-Because the application manages the state, the developer now has the flexibility to intercept and run extra checks before closing the modal. While this is a subtle difference when compared to the stateful version, it provides a more flexible element and keeps the public API surface small.
+`nve-layout` and `nve-text` come from `@nvidia-elements/styles`. Import `layout.css` and `typography.css` with the theme when you use them outside the documentation site. The dialog import also registers `nve-dialog-header` and `nve-dialog-footer`.
 
-<nve-alert status="accent">Tip: a guiding principle for element API design is to ask, “Can you prototype/demo any visual state of the element using only HTML?”</nve-alert>
+In Chrome, opening this modal dialog moves focus to the dialog. Tab reaches the close button. Escape closes the dialog and returns focus to the trigger. A `beforetoggle` event for that close is not cancelable, so application code cannot veto Escape, the close button, or `hidePopover()`.
 
-## Synchronizing State
+<nve-alert status="accent">Tip: ask whether you can show each visual state in HTML. `popovertarget`, `modal`, and `closable` cover open and closed dialog presentation. The acceptance decision stays in application code.</nve-alert>
 
-Stateless elements also prevent the state from becoming out of sync. If the modal retains an internal visibility state, this opens up the potential for bugs where the element is out of sync with the application state. View the demos below to learn more detail about the risks of stateful leaf elements.
+## Synchronizing state
 
-<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn:&nbsp;<a href="https://stackblitz.com/edit/angular-ivy-cjr3hj?file=src%2Fapp%2Fapp.component.html">stateless vs stateful demo in Angular</a></nve-alert>
-<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn:&nbsp;<a href="https://stackblitz.com/edit/http-server-kojqdg?file=src%2FApp.tsx">stateless vs stateful demo in React</a></nve-alert>
+Keep a copy of presentation state in the application only when another view depends on it. The browser can close a dialog through Escape, the close button, or an outside click. If the application also stores an open flag, update that flag from `toggle` or `close` so the two stay aligned.
 
-## Stateful Events - anti-pattern
+<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn:&nbsp;<a href="/docs/elements/dialog/">dialog events and examples</a></nve-alert>
 
-Do not emit/reflect events in response to setting state on the element. This is unnecessary from the consumer API as the application component does not need event updates for the state it maintains. Example: when you set an expand property, do not emit an expand-change event in response. Only user interactions, not property updates, should trigger events.
+## Stateful events
 
-<nve-alert status="warning">Reflective state update events can also trigger infinite loops in certain situations.</nve-alert>
+Do not emit an event because application code set a property. The application already knows the value it wrote. Emit events for user or browser interaction. Setting `expanded` can update CSS classes and ARIA state inside the element. That property update should not also emit an expand-change event.
 
-Always derive internal state from incoming properties and not user actions. Example, setting a expanded property on an element can cause the element to set css classes and aria-\* attributes to visually and semantically represent the expanded state.
+<nve-alert status="warning">An event that echoes a property write can loop when the listener writes the property again.</nve-alert>
+
+`open` and `close` on `nve-dialog` follow the popover toggle. They are interaction events, not echoes of a property assignment.
 
 <nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Learn: web.dev&nbsp;<a href="https://web.dev/custom-elements-best-practices/#events">Custom Element Event Best Practices</a></nve-alert>
-
-<nve-alert><nve-icon slot="icon" name="academic-cap"></nve-icon> Case Study:&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/tag/tag.element.ts#L74">a tag element setting child badge component to align visual status</a></nve-alert>

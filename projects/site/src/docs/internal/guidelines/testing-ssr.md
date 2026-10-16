@@ -1,14 +1,14 @@
 ---
 {
   title: 'SSR Testing',
-  description: 'Internal guidelines: write server-side rendering tests for NVIDIA Elements components and catch hydration regressions.',
+  description: 'Internal guidelines: write server-side rendering tests that check NVIDIA Elements components can render to a string.',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-Server-side rendering compatibility tests.
+Server-side rendering tests. Each test renders a Lit template to a string and checks that the output contains the element tag and `shadowroot="open"`. The runner does not hydrate the markup, and a passing test is not a production SSR support commitment. Framework packages have their own status on the [support page](/docs/about/support/#environments). `@lit-labs/ssr-react`, `@lit-labs/nextjs`, and `@lit-labs/eleventy-plugin-lit` stay experimental on their integration pages.
 
 **Key Patterns:**
 

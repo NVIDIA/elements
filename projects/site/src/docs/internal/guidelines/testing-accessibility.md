@@ -1,14 +1,21 @@
 ---
 {
   title: 'Accessibility Testing',
-  description: 'Internal guidelines: write axe-core accessibility tests for NVIDIA Elements components and verify WCAG compliance.',
+  description: 'Internal guidelines: write axe-core accessibility tests and read their Chromium, theme, and rule coverage.',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-Accessibility compliance tests using axe-core.
+Accessibility tests using axe-core. A passing test records an automated result, separate from a WCAG conformance claim. The [accessibility policy](/docs/about/accessibility/) separates the WCAG 2.1 AA target, the current WCAG 2.2 Recommendation, and these checks.
+
+**Coverage of `runAxe`:**
+
+- Browser: Chromium through Playwright.
+- Theme: `@nvidia-elements/themes/index.css` with an empty `nve-theme` attribute, which uses the default light theme on `:root`. The setup does not load `dark.css` or `high-contrast.css`.
+- Rules: axe-core 4.11.0 default selection, with `aria-prohibited-attr` disabled. That default selection leaves the WCAG 2.2 `target-size` rule disabled.
+- Manual follow-up: keyboard, screen reader, focus, contrast, zoom, and interaction testing. axe-core reports that automated rules find, on average, 57% of WCAG issues.
 
 **Key Patterns:**
 

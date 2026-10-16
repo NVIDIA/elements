@@ -1,53 +1,56 @@
 ---
 {
   title: 'Accessibility',
-  description: 'How NVIDIA Elements meets WCAG accessibility standards, tested assistive-technology coverage, and accommodations available across components.',
+  description: 'Accessibility goals for NVIDIA Elements, the WCAG 2.1 AA target, and what automated Chromium checks cover.',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-The following document outlines the accessibility standards and guidelines for the Elements system.
-The goal is to provide an inclusive and accessible user experience for all users.
+This page records the accessibility target for Elements and the checks that run in the repository. Read an automated result on this site as a test outcome, separate from conformance.
 
 ## Guidelines
 
-The World Wide Web Consortium (W3C) provides guidelines for making web content more
-accessible to people with disabilities. The following are the guidelines that the
-system aims to follow:
+The World Wide Web Consortium (W3C) publishes the Web Content Accessibility Guidelines (WCAG). [WCAG 2.2](https://www.w3.org/TR/WCAG22/) is the current W3C Recommendation. It extends [WCAG 2.1](https://www.w3.org/TR/WCAG21/), which remains a W3C Recommendation. W3C advises the use of WCAG 2.2. Content that conforms to WCAG 2.2 also conforms to WCAG 2.1 and WCAG 2.0.
 
-- [WCAG 2.1 AA](https://www.w3.org/TR/WCAG21/): This is the latest set of guidelines, which builds upon the previous versions and provides more recommendations for improving accessibility.
-- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/): This guide describes how to apply accessibility semantics to common design patterns and widgets. It provides design patterns and functional examples complemented by in-depth guidance for fundamental practices.
-- [WCAG Legal Guidance](https://wcag.com/legal/): Conformance with WCAG is a best practice for legal compliance. WCAG is the universally accepted set of technical standards that, when followed, make digital experiences more accessible. As the global standard, many laws, including the Americans with Disabilities Act and the Accessibility for Ontarians with Disabilities Act, reference conformance with WCAG.
+The Elements target remains WCAG 2.1 Level AA. This page leaves that target in place. It does not claim WCAG 2.2 conformance. Moving the project target to WCAG 2.2 AA needs a separate decision.
 
-## Automated Testing
+The system also follows these references:
 
-All components in the library's light theme undergo accessibility testing with [axe-core](https://github.com/dequelabs/axe-core).
-This automated accessibility testing tool identifies and addresses accessibility issues.
-But this automates only up to ~60% of test cases and the remaining test cases need manual testing.
-The team tracks known issues and calls them out on the component documentation page.
+- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/): patterns and functional examples for common widgets.
+- [WCAG legal guidance](https://wcag.com/legal/): background on how laws reference WCAG. The link is a reference, not an audit result for Elements.
 
-## Component Specs
+## Automated testing
 
-All component target to meet a pre-defined and established [ARIA Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/)
-or existing Web Standard Spec. This is to ensure that the component is accessible by default
-follow well established UX patterns. You can find the spec of each component at the top
-of its given documentation page.
+Accessibility tests call `runAxe` from `@internals/testing/axe`. That helper runs [axe-core](https://github.com/dequelabs/axe-core) 4.11.0, the version pinned in the workspace catalog. The call uses axe-core's default rule selection and disables `aria-prohibited-attr`, because axe-core does not yet support the ElementInternals accessibility object model. In axe-core 4.11.0 the default selection leaves the WCAG 2.2 `target-size` rule disabled, and it includes enabled rules tagged `best-practice` plus some rules tagged `experimental`.
+
+The axe setup loads `@nvidia-elements/themes/index.css` and sets `nve-theme` to an empty value. `:root` in that stylesheet supplies the default light theme. The setup does not load `dark.css` or `high-contrast.css`. Tests run in Chromium through Playwright.
+
+axe-core reports that its rules find, on average, 57% of WCAG issues automatically. Manual keyboard, screen-reader, focus, contrast, zoom, and interaction testing still has to cover the rest. Component pages call out known issues.
+
+Lighthouse tests are a second automated check. They use the default Lighthouse config in Chromium, limited to the performance, accessibility, and best-practices categories, and they skip `aria-prohibited-attr`. Lighthouse HTML templates set `nve-theme="dark"`. Some templates also import `dark.css`, and some do not. A Lighthouse accessibility score and a passing axe result stay automated scores, separate from a conformance audit. The [metrics](/docs/metrics/) pages show those test results.
+
+The [accessibility testing guide](/docs/internal/guidelines/testing-accessibility/) shows how to write an axe test.
+
+## Component specs
+
+Each component targets a published [ARIA pattern](https://www.w3.org/WAI/ARIA/apg/patterns/) or an existing web standard. The component documentation page names that spec.
 
 ## Expectations
 
-The system has the following expectations for designers and developers:
+Designers and developers:
 
-- Ensure that all interactive elements are accessible via keyboard navigation.
-- Follow WCAG guidelines for color contrast, layout, and other accessibility-related factors.
-- Conduct regular accessibility audits to identify and address any issues or areas of improvement.
-- Work with stakeholders and users to gather feedback and ensure that the system meets the needs of all users.
+- Make interactive elements available from the keyboard.
+- Apply the WCAG 2.1 AA target to color contrast, layout, and related factors.
+- Review keyboard, screen-reader, focus, contrast, zoom, and interaction behavior along with the automated checks.
+- Track known gaps on the component page.
 
 ## Resources
 
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/), the current W3C Recommendation
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/), the Elements target
 - [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
-- [WCAG 2.1 Spec](https://www.w3.org/TR/WCAG21/)
 - [The A11y Project Checklist](https://www.a11yproject.com/checklist/)
 - [Four Categories of Accessibility](https://www.a11yproject.com/posts/accessibility-is-blind-people/)
 - [The A11y Project](https://www.a11yproject.com/)

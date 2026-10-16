@@ -266,13 +266,22 @@ Client support for MCP Apps is host-specific. Check the [MCP extension support m
 
 ## Troubleshooting
 
+### Public packages
+
+The project publishes `@nvidia-elements/cli` and the other `@nvidia-elements/*` packages to the public npm registry at `https://registry.npmjs.org`. A public install uses the commands on this page, without a version pin and without `npm login` or an NVIDIA registry credential. The same guidance is on the [CLI page](/docs/cli/#public-packages).
+
 ### 403 Forbidden
 
-A `403 Forbidden` error means your token has expired. Re-authenticate to resolve it.
+A `403 Forbidden` response can come from the registry that received the request, from a proxy, or from an authorization check. Read the registry host in the error, then compare it with the npm settings for the default registry and the `@nvidia-elements` scope:
 
 ```shell
-npm config set registry {{ELEMENTS_REGISTRY_URL}} && npm login --auth-type=legacy
+npm config get registry
+npm config get @nvidia-elements:registry
 ```
+
+When the request goes to `https://registry.npmjs.org`, treat the failure as a network, proxy, or registry-policy problem. Leave `npm login` for a later step.
+
+When the request goes to a private registry that your organization requires, refresh that registry's credentials with the login method the registry documents. Keep tokens out of shell history, examples, and logs. Internal NVIDIA teams can keep using Artifactory, which proxies the public npm registry. The [migration guide](/docs/about/migration/#1-update-registry-configuration) describes that setup.
 
 ### Unsupported Engine
 
