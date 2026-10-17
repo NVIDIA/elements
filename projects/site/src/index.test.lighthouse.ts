@@ -120,7 +120,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(162);
+    expect(scores.payload.js).toBeLessThan(163.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -142,7 +142,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(95);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(174.5);
+    expect(scores.payload.js).toBeLessThan(176);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -153,7 +153,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(162.5);
+    expect(scores.payload.js).toBeLessThan(163.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });

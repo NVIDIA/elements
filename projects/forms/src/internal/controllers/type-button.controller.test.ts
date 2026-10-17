@@ -121,4 +121,26 @@ describe('ButtonBehaviorController', () => {
     expect(element._internals.role).toBe('tab');
     expect(element.tabIndex).toBe(3);
   });
+
+  it('should preserve roving tabindex through ordinary updates and restore it after disabling', async () => {
+    fixture = await createFixture(
+      html`<button-behavior-controller-test-element></button-behavior-controller-test-element>`
+    );
+    const element = fixture.querySelector<ButtonBehaviorControllerTestElement>(
+      'button-behavior-controller-test-element'
+    )!;
+    element.sync();
+    element.tabIndex = -1;
+    element.sync();
+    expect(element.tabIndex).toBe(-1);
+    element.tabIndex = 0;
+    element.sync();
+    expect(element.tabIndex).toBe(0);
+    element.disabled = true;
+    element.sync();
+    expect(element.tabIndex).toBe(-1);
+    element.disabled = false;
+    element.sync();
+    expect(element.tabIndex).toBe(0);
+  });
 });

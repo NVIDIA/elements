@@ -1,0 +1,159 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  --min-height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
+  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --prefix-padding: 0;
+  --prefix-border: none;
+  --suffix-padding: var(--nve-ref-size-200);
+  --suffix-border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --gap: var(--nve-ref-space-xs);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  contain: none;
+}
+
+[internal-host] {
+  position: relative;
+  height: 100%;
+}
+
+.label-viewport {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.label-track {
+  transform: translateX(var(--_workspace-tab-scroll, 0));
+  position: absolute;
+  inset: 0;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.label-content {
+  padding: var(--padding);
+  min-height: var(--min-height);
+  box-sizing: border-box;
+  color: var(--color);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  line-height: var(--nve-ref-font-size-500);
+  text-transform: var(--text-transform);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap);
+  white-space: nowrap;
+  width: 100%;
+}
+
+.title-content {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title-content slot {
+  display: contents;
+}
+
+slot[name='prefix'] {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap);
+  padding: var(--prefix-padding);
+}
+
+slot[name='prefix'][data-empty] {
+  display: none;
+}
+
+slot[name='prefix']:not([data-empty]) {
+  border-inline-end: var(--prefix-border);
+}
+
+.suffix {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.suffix[data-inactive] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.label[data-animate] {
+  transition:
+    left var(--animation-duration) var(--nve-ref-animation-easing-100),
+    width var(--animation-duration) var(--nve-ref-animation-easing-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .label[data-animate] {
+    transition: none;
+  }
+}
+
+.suffix-content {
+  min-height: var(--min-height);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  padding: var(--suffix-padding);
+  gap: var(--gap);
+}
+
+.suffix:not([data-empty]) .suffix-content {
+  border-inline-start: var(--suffix-border);
+  border-inline-start-color: transparent;
+}
+
+.suffix:not([data-empty])::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  border-inline-start: var(--suffix-border);
+  pointer-events: none;
+}
+
+.suffix[data-empty] .suffix-content {
+  min-height: 0;
+  padding: 0;
+}
+
+:host-context(nve-workspace[container='flat']) {
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
+}
+
+.separator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: var(--border-bottom);
+  z-index: 1;
+  pointer-events: none;
+}

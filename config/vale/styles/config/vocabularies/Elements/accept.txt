@@ -421,3 +421,7 @@ allocate
 middleware
 nonspatial
 readbacks
+rearrangeable
+resizable
+fullscreen
+Groupable

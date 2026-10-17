@@ -21,6 +21,7 @@ import type { TabsItemGroup } from './tabs-item-group.js';
 import { getTabItems, isTabItemTabbable } from './utils.js';
 import globalStyles from './tabs.global.css?inline';
 import tabsItemStyleSheet from './tabs-item.css?inline';
+import tabsItemPresentation from './tabs-item.presentation.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 
 /**
@@ -54,7 +55,7 @@ export class TabsItem extends ButtonFormControlMixin(LitElement) {
    */
   @property({ type: Boolean, reflect: true }) selected = false;
 
-  static styles = useStyles([tabsItemStyleSheet]);
+  static styles = useStyles([tabsItemPresentation, tabsItemStyleSheet]);
 
   static readonly metadata = {
     tag: 'nve-tabs-item',
@@ -103,6 +104,7 @@ export class TabsItem extends ButtonFormControlMixin(LitElement) {
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for tab-item
  * @cssprop --gap
+ * @cssprop --indicator-animation-duration - Duration of selection indicator movement.
  * @cssprop --indicator-background
  * @cssprop --indicator-border-radius
  * @cssprop --indicator-height

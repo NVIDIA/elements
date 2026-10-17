@@ -6,6 +6,11 @@ export function auditParentElement(
 ): [boolean, string[]] {
   const validParentTags = host.constructor.metadata?.parents ?? [];
   return validParentTags.length
-    ? [!!validParentTags.find(p => host.parentElement?.localName === p), validParentTags]
+    ? [
+        validParentTags.some(
+          tag => host.parentElement?.localName === tag || host.assignedSlot?.parentElement?.localName === tag
+        ),
+        validParentTags
+      ]
     : [true, []];
 }

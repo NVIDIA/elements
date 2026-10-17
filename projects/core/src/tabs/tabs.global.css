@@ -6,6 +6,7 @@ nve-tabs {
   --indicator-background: var(--nve-sys-accent-secondary-background);
   --indicator-height: var(--nve-ref-border-width-xl);
   --indicator-border-radius: var(--nve-ref-border-radius-sm);
+  --indicator-animation-duration: var(--nve-ref-animation-duration-150);
 
   &::after {
     background: var(--indicator-background);
@@ -15,7 +16,7 @@ nve-tabs {
     display: block;
     content: '';
     width: anchor-size(width);
-    transition: left var(--nve-ref-animation-duration-150) var(--nve-ref-animation-easing-100);
+    transition: left var(--indicator-animation-duration) var(--nve-ref-animation-easing-100);
     position-anchor: --selected;
     top: calc(anchor(bottom) - var(--indicator-height));
     left: anchor(left);
@@ -31,7 +32,7 @@ nve-tabs[vertical] {
   &::after {
     width: var(--indicator-height);
     height: anchor-size(height);
-    transition: top var(--nve-ref-animation-duration-150) var(--nve-ref-animation-easing-100);
+    transition: top var(--indicator-animation-duration) var(--nve-ref-animation-easing-100);
     top: anchor(top);
   }
 }

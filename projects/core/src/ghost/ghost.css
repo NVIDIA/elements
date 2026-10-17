@@ -1,0 +1,53 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value -- Preview translucency blends semantic surface tokens. */
+  --background: color-mix(
+    in srgb,
+    var(--nve-sys-layer-container-background) 76%,
+    var(--nve-sys-accent-secondary-background) 12%
+  );
+  --border: 2px dashed var(--nve-sys-accent-secondary-background);
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --padding: var(--nve-ref-space-xs);
+  border-radius: var(--border-radius);
+  display: block;
+  pointer-events: none;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--background);
+  border: var(--border);
+  border-radius: inherit;
+  color: var(--nve-sys-text-emphasis-color);
+}
+
+slot[name='label'] {
+  display: contents;
+}
+
+::slotted([slot='label']) {
+  display: block;
+  flex: none;
+  box-sizing: border-box;
+  padding: var(--padding);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: var(--nve-sys-layer-container-background);
+  border-block-end: 1px dashed var(--nve-sys-accent-secondary-background);
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  padding: var(--padding);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

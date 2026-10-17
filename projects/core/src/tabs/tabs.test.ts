@@ -55,6 +55,17 @@ describe(Tabs.metadata.tag, () => {
     expect(parentElement.behaviorSelect).toBe(false);
   });
 
+  it('should configure indicator animation timing in either orientation', async () => {
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0.15s');
+    parentElement.style.setProperty('--indicator-animation-duration', '75ms');
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0.075s');
+    parentElement.vertical = true;
+    await elementIsStable(parentElement);
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0.075s');
+    parentElement.style.setProperty('--indicator-animation-duration', '0ms');
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0s');
+  });
+
   it('should handle behaviorSelect via clicking', async () => {
     expect(childElement.selected).toBe(false);
     parentElement.behaviorSelect = true;

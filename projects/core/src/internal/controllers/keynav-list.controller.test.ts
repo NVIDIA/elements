@@ -138,6 +138,59 @@ describe('keynav-list.controller', () => {
     });
   });
 
+  it('should preserve the focused item when items are appended', async () => {
+    const items = element.keynavListConfig.items;
+    items[2].focus();
+    const added = document.createElement('button');
+    element.shadowRoot.querySelector('section').append(added);
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(items[2].tabIndex).toBe(0);
+    expect(added.tabIndex).toBe(-1);
+    expect(Array.from(element.keynavListConfig.items).filter(item => item.tabIndex === 0)).toHaveLength(1);
+    expect(document.activeElement).toBe(element);
+    expect(element.shadowRoot.activeElement).toBe(items[2]);
+  });
+
+  it('should preserve the surviving tab stop without taking focus', async () => {
+    const items = element.keynavListConfig.items;
+    items[2].dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    const outside = document.createElement('button');
+    fixture.append(outside);
+    outside.focus();
+    items[0].remove();
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(items[2].tabIndex).toBe(0);
+    expect(Array.from(element.keynavListConfig.items).filter(item => item.tabIndex === 0)).toHaveLength(1);
+    expect(document.activeElement).toBe(outside);
+  });
+
+  it('should restore the configured initial item when the current tab stop is removed', async () => {
+    element.initialItemIndex = 1;
+    const items = element.keynavListConfig.items;
+    items[0].remove();
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.shadowRoot.activeElement).toBeNull();
+  });
+
+  it('should exclude newly disabled items when the host updates', async () => {
+    const items = element.keynavListConfig.items;
+    items[0].setAttribute('disabled', '');
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(items[0].tabIndex).toBe(-1);
+    expect(items[1].tabIndex).toBe(0);
+    expect(Array.from(items).filter(item => item.tabIndex === 0)).toHaveLength(1);
+  });
+
   it('should set activate a item on click', async () => {
     await elementIsStable(element);
     element.keynavListConfig.items[2].dispatchEvent(
