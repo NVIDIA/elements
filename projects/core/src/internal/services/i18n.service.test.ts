@@ -12,6 +12,34 @@ describe('I18nService', () => {
 
   it('should provide an intial i18n state', () => {
     expect(I18nService.i18n).toStrictEqual({
+      workspaceArrange: 'Arrange',
+      workspacePanels: 'Workspace panels',
+      workspaceDragGroup: 'Drag panel group',
+      workspaceArrangePanels: 'Arrange workspace panels',
+      workspaceOperation: 'Operation',
+      workspaceSplit: 'Split pane',
+      workspaceOrder: 'Order peers',
+      workspaceInsert: 'Insert into arrangement',
+      workspaceScope: 'Scope',
+      workspaceArrangement: 'Target arrangement',
+      workspaceEntire: 'Whole workspace',
+      workspaceBefore: 'Before peer',
+      workspaceAfter: 'After peer',
+      workspaceGroup: 'Move whole group',
+      workspacePanel: 'Move only this tab',
+      workspaceDestination: 'Destination',
+      workspacePlacement: 'Placement',
+      workspaceJoin: 'Join tabs',
+      workspaceLeft: 'Split left',
+      workspaceRight: 'Split right',
+      workspaceAbove: 'Split above',
+      workspaceBelow: 'Split below',
+      workspaceMove: 'Move',
+      workspaceEarlier: 'Move tab earlier',
+      workspaceLater: 'Move tab later',
+      workspaceCancel: 'Cancel',
+      workspaceResize: 'Resize workspace regions',
+
       close: 'close',
       copy: 'copy',
       copied: 'copied',
@@ -114,7 +142,29 @@ describe('I18nService', () => {
 
     I18nService.update(translations);
 
-    expect(I18nService.i18n).toStrictEqual({ ...original, ...translations });
+    expect(I18nService.i18n).toStrictEqual({
+      workspaceArrange: 'Arrange',
+      workspacePanels: 'Workspace panels',
+      workspaceDragGroup: 'Drag panel group',
+      workspaceArrangePanels: 'Arrange workspace panels',
+      workspaceGroup: 'Move whole group',
+      workspacePanel: 'Move only this tab',
+      workspaceDestination: 'Destination',
+      workspacePlacement: 'Placement',
+      workspaceJoin: 'Join tabs',
+      workspaceLeft: 'Split left',
+      workspaceRight: 'Split right',
+      workspaceAbove: 'Split above',
+      workspaceBelow: 'Split below',
+      workspaceMove: 'Move',
+      workspaceEarlier: 'Move tab earlier',
+      workspaceLater: 'Move tab later',
+      workspaceCancel: 'Cancel',
+      workspaceResize: 'Resize workspace regions',
+
+      ...original,
+      ...translations
+    });
 
     I18nService.update(original);
   });

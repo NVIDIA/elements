@@ -1,0 +1,80 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  --background: var(--nve-sys-layer-container-background);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  display: block;
+  pointer-events: none;
+}
+
+[internal-host] {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.label-viewport {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.label-content {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  box-sizing: border-box;
+  padding: var(--nve-ref-space-xs);
+  background: transparent;
+  color: var(--nve-sys-text-emphasis-color);
+  z-index: 2;
+  font: inherit;
+}
+
+.content {
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  pointer-events: auto;
+  background: var(--background);
+  border: var(--border);
+}
+
+[hidden] {
+  display: none;
+}
+
+:host([presentation='flush']) .content {
+  border: none;
+}
+
+:host([presentation='inset']) .content {
+  padding: var(--nve-ref-space-sm);
+}
+
+.label-track {
+  position: absolute;
+  inset: 0;
+}
+
+.label[data-animate] {
+  transition:
+    left var(--animation-duration) var(--nve-ref-animation-easing-100),
+    width var(--animation-duration) var(--nve-ref-animation-easing-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .label[data-animate] {
+    transition: none;
+  }
+}

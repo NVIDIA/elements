@@ -310,6 +310,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/elements/control/') ? 'highlighted selected' : ''}><a href="/docs/elements/control/">Control</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/gauge/') ? 'highlighted selected' : ''}><a href="/docs/elements/gauge/">Gauge</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/ghost/') ? 'highlighted selected' : ''}><a href="/docs/elements/ghost/">Ghost</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/icon/') ? 'highlighted selected' : ''}><a href="/docs/elements/icon/">Icon</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/icon-button/') ? 'highlighted selected' : ''}><a href="/docs/elements/icon-button/">Icon Button</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'highlighted selected' : ''}><a href="/docs/elements/input/">Input</a></nve-tree-node>
@@ -379,6 +380,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/viewport/zoom-range/') ? 'highlighted selected' : ''}><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted selected' : ''}><a href="/docs/elements/week/">Week</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/workspace/') ? 'highlighted selected' : ''}><a href="/docs/elements/workspace/">Workspace</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''} ${data.page.url === '/docs/patterns/' ? 'highlighted' : ''}>

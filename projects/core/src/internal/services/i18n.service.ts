@@ -4,6 +4,34 @@
 import { GlobalStateService } from './global.service.js';
 
 export interface I18nStrings {
+  workspaceArrange: string;
+  workspacePanels: string;
+  workspaceDragGroup: string;
+  workspaceArrangePanels: string;
+  workspaceOperation: string;
+  workspaceSplit: string;
+  workspaceOrder: string;
+  workspaceInsert: string;
+  workspaceScope: string;
+  workspaceArrangement: string;
+  workspaceEntire: string;
+  workspaceBefore: string;
+  workspaceAfter: string;
+  workspaceGroup: string;
+  workspacePanel: string;
+  workspaceDestination: string;
+  workspacePlacement: string;
+  workspaceJoin: string;
+  workspaceLeft: string;
+  workspaceRight: string;
+  workspaceAbove: string;
+  workspaceBelow: string;
+  workspaceMove: string;
+  workspaceEarlier: string;
+  workspaceLater: string;
+  workspaceCancel: string;
+  workspaceResize: string;
+
   close: string;
   copy: string;
   copied: string;
@@ -62,6 +90,34 @@ export interface I18nStrings {
 }
 
 const i18nRegistry = {
+  workspaceArrange: 'Arrange',
+  workspacePanels: 'Workspace panels',
+  workspaceDragGroup: 'Drag panel group',
+  workspaceArrangePanels: 'Arrange workspace panels',
+  workspaceOperation: 'Operation',
+  workspaceSplit: 'Split pane',
+  workspaceOrder: 'Order peers',
+  workspaceInsert: 'Insert into arrangement',
+  workspaceScope: 'Scope',
+  workspaceArrangement: 'Target arrangement',
+  workspaceEntire: 'Whole workspace',
+  workspaceBefore: 'Before peer',
+  workspaceAfter: 'After peer',
+  workspaceGroup: 'Move whole group',
+  workspacePanel: 'Move only this tab',
+  workspaceDestination: 'Destination',
+  workspacePlacement: 'Placement',
+  workspaceJoin: 'Join tabs',
+  workspaceLeft: 'Split left',
+  workspaceRight: 'Split right',
+  workspaceAbove: 'Split above',
+  workspaceBelow: 'Split below',
+  workspaceMove: 'Move',
+  workspaceEarlier: 'Move tab earlier',
+  workspaceLater: 'Move tab later',
+  workspaceCancel: 'Cancel',
+  workspaceResize: 'Resize workspace regions',
+
   close: 'close',
   copy: 'copy',
   copied: 'copied',

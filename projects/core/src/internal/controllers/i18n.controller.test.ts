@@ -37,6 +37,34 @@ describe('i18n.controller', () => {
     await elementIsStable(element);
 
     expect(element.i18n).toStrictEqual({
+      workspaceArrange: 'Arrange',
+      workspacePanels: 'Workspace panels',
+      workspaceDragGroup: 'Drag panel group',
+      workspaceArrangePanels: 'Arrange workspace panels',
+      workspaceGroup: 'Move whole group',
+      workspacePanel: 'Move only this tab',
+      workspaceDestination: 'Destination',
+      workspacePlacement: 'Placement',
+      workspaceOperation: 'Operation',
+      workspaceSplit: 'Split pane',
+      workspaceOrder: 'Order peers',
+      workspaceInsert: 'Insert into arrangement',
+      workspaceScope: 'Scope',
+      workspaceArrangement: 'Target arrangement',
+      workspaceEntire: 'Whole workspace',
+      workspaceBefore: 'Before peer',
+      workspaceAfter: 'After peer',
+      workspaceJoin: 'Join tabs',
+      workspaceLeft: 'Split left',
+      workspaceRight: 'Split right',
+      workspaceAbove: 'Split above',
+      workspaceBelow: 'Split below',
+      workspaceMove: 'Move',
+      workspaceEarlier: 'Move tab earlier',
+      workspaceLater: 'Move tab later',
+      workspaceCancel: 'Cancel',
+      workspaceResize: 'Resize workspace regions',
+
       __set: false,
       close: 'close',
       create: 'create',
@@ -108,10 +136,38 @@ describe('i18n.controller', () => {
   });
 
   it('should merge global default and element instance override', async () => {
-    element.i18n = { close: 'close override' };
+    element.i18n = { close: 'close override', workspaceOperation: 'operation override' };
     await elementIsStable(element);
 
     expect(element.i18n).toStrictEqual({
+      workspaceArrange: 'Arrange',
+      workspacePanels: 'Workspace panels',
+      workspaceDragGroup: 'Drag panel group',
+      workspaceArrangePanels: 'Arrange workspace panels',
+      workspaceGroup: 'Move whole group',
+      workspacePanel: 'Move only this tab',
+      workspaceDestination: 'Destination',
+      workspacePlacement: 'Placement',
+      workspaceOperation: 'operation override',
+      workspaceSplit: 'Split pane',
+      workspaceOrder: 'Order peers',
+      workspaceInsert: 'Insert into arrangement',
+      workspaceScope: 'Scope',
+      workspaceArrangement: 'Target arrangement',
+      workspaceEntire: 'Whole workspace',
+      workspaceBefore: 'Before peer',
+      workspaceAfter: 'After peer',
+      workspaceJoin: 'Join tabs',
+      workspaceLeft: 'Split left',
+      workspaceRight: 'Split right',
+      workspaceAbove: 'Split above',
+      workspaceBelow: 'Split below',
+      workspaceMove: 'Move',
+      workspaceEarlier: 'Move tab earlier',
+      workspaceLater: 'Move tab later',
+      workspaceCancel: 'Cancel',
+      workspaceResize: 'Resize workspace regions',
+
       __set: true,
       close: 'close override',
       create: 'create',
