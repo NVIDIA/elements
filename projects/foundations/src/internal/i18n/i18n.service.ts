@@ -36,6 +36,7 @@ export interface I18nStrings {
   reducedMotion: string;
   colorScheme: string;
   resize: string;
+  move: string;
   or: string;
   files: string;
   dragAndDrop: string;

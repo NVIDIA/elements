@@ -424,3 +424,8 @@ readbacks
 uncached
 reflows
 CDPSession
+rearrangeable
+resizable
+groupable
+fullscreen
+fullscreenable
