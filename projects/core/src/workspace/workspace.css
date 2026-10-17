@@ -1,0 +1,337 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  --gap: var(--nve-ref-size-150);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  --_workspace-border-radius: var(--border-radius);
+  --animation-duration: var(--nve-ref-animation-duration-150);
+  --_placement-reserved-background: color-mix(in srgb, var(--nve-sys-accent-secondary-background) 28%, transparent);
+  --resize-line-width: var(--nve-ref-border-width-md);
+  --gutter-background: transparent;
+  --gutter-hover-background: var(--nve-sys-accent-secondary-background);
+  display: grid;
+  width: 100%; /* fallback safari */
+  width: stretch;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+[internal-host] {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  contain: size;
+  contain-intrinsic-block-size: var(--_minimum-height, 0);
+}
+
+.viewport {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: clip;
+}
+
+.preview-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 6;
+}
+
+::slotted(nve-workspace-panel) {
+  position: absolute;
+}
+
+::slotted(nve-workspace-panel:not(:state(workspace-presented))) {
+  display: none !important;
+}
+
+.gutter {
+  position: absolute;
+  background: var(--gutter-background);
+  pointer-events: none;
+}
+
+nve-resize-handle {
+  position: absolute;
+  pointer-events: auto;
+  --background: transparent;
+  --line-width: max(var(--gap), var(--nve-ref-border-width-sm));
+  --target-size: var(--nve-ref-size-100);
+}
+
+nve-resize-handle::part(_line) {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+nve-resize-handle[orientation='vertical']::part(_line) {
+  max-width: var(--resize-line-width);
+}
+
+nve-resize-handle[orientation='horizontal']::part(_line) {
+  max-height: var(--resize-line-width);
+}
+
+.gutter:not([data-flush]) nve-resize-handle::part(_line) {
+  outline-offset: calc(-1 * var(--nve-ref-border-width-sm));
+}
+
+nve-resize-handle:hover:not(:state(active))::part(_line) {
+  background: var(--gutter-hover-background);
+}
+
+.group-chrome {
+  position: absolute;
+  overflow: clip;
+  border-radius: var(--_workspace-border-radius);
+  pointer-events: none;
+}
+
+.tabs {
+  direction: ltr;
+  position: relative;
+  display: flex;
+  pointer-events: auto;
+  background: var(--nve-sys-layer-container-background);
+}
+
+.tablist {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: auto hidden;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+}
+
+.tab-track {
+  position: relative;
+  height: 100%;
+  display: block;
+  --gap: 0;
+  --indicator-border-radius: var(--nve-ref-border-radius-none);
+}
+
+.tab-entry {
+  --padding: 0;
+  --gap: 0;
+  --border-radius: var(--nve-ref-border-radius-none);
+}
+
+.tab-entry nve-tabs-item {
+  --padding: 0 var(--nve-ref-size-200);
+}
+
+.tablist .tab-entry {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  --width: 100%;
+  box-sizing: border-box;
+}
+
+.tablist .tab-entry + .tab-entry,
+.tabs > nve-drag-handle + .tablist .tab-entry:first-child {
+  border-inline-start: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+[data-carried-tab] {
+  visibility: hidden;
+}
+
+[internal-host][data-rearranging] .tablist .tab-entry {
+  transition:
+    left var(--animation-duration) var(--nve-ref-animation-easing-100),
+    width var(--animation-duration) var(--nve-ref-animation-easing-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [internal-host][data-rearranging] .tablist .tab-entry {
+    transition: none;
+  }
+}
+
+.tabs nve-drag-handle {
+  flex: 0 0 auto;
+  --cursor: grab;
+  --width: var(--nve-ref-size-700);
+  --height: 100%;
+  --border-radius: var(--nve-ref-border-radius-none);
+  touch-action: none;
+}
+
+:host([rearrangeable]) .tabs nve-tabs-item {
+  --cursor: grab;
+  touch-action: pan-x;
+}
+
+.destination {
+  position: absolute;
+  inset: 0 auto auto 0;
+  pointer-events: none;
+  z-index: 6;
+  box-sizing: border-box;
+  --background: transparent;
+  background-color: color-mix(in srgb, var(--nve-sys-accent-secondary-background) 16%, transparent);
+  border-radius: var(--border-radius);
+  transition:
+    background-color var(--animation-duration) var(--nve-ref-animation-easing-100),
+    transform var(--animation-duration) var(--nve-ref-animation-easing-100),
+    width var(--animation-duration) var(--nve-ref-animation-easing-100),
+    height var(--animation-duration) var(--nve-ref-animation-easing-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .destination {
+    transition: none;
+  }
+}
+
+.destination[data-reserved-placement] {
+  background-color: var(--_placement-reserved-background);
+}
+
+.destination[data-cue-clipped] {
+  visibility: hidden;
+}
+
+.destination[data-drop-blocked] {
+  --border: 2px solid var(--nve-sys-support-danger-emphasis-color);
+}
+
+.carried {
+  position: absolute;
+  z-index: 8;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+  --background: var(--nve-sys-layer-container-background);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-sys-accent-secondary-background);
+}
+
+.destination nve-icon {
+  position: absolute;
+  inset: var(--nve-ref-space-sm) auto auto var(--nve-ref-space-sm);
+}
+
+.chrome {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  width: max-content;
+}
+
+.gap-probe {
+  position: absolute;
+  width: max(0px, var(--gap));
+  height: 0;
+}
+
+.chrome-header {
+  min-height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
+  direction: ltr;
+  display: flex;
+}
+
+.chrome nve-drag-handle {
+  --width: var(--nve-ref-size-700);
+  --height: var(--nve-ref-size-900);
+}
+
+.tabs[data-carried-reservation] {
+  visibility: hidden;
+}
+
+[internal-host][data-peer-preview] .context-boundary,
+[internal-host][data-peer-preview] .group-chrome,
+[internal-host][data-peer-preview] ::slotted(nve-workspace-panel) {
+  transition:
+    left var(--animation-duration) var(--nve-ref-animation-easing-100),
+    top var(--animation-duration) var(--nve-ref-animation-easing-100),
+    width var(--animation-duration) var(--nve-ref-animation-easing-100),
+    height var(--animation-duration) var(--nve-ref-animation-easing-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [internal-host][data-peer-preview] .context-boundary,
+  [internal-host][data-peer-preview] .group-chrome,
+  [internal-host][data-peer-preview] ::slotted(nve-workspace-panel) {
+    transition: none;
+  }
+}
+
+.context-boundary {
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: inset 0 0 0 var(--nve-ref-border-width-md) var(--nve-sys-accent-secondary-background);
+  z-index: 4;
+}
+
+.context-boundary[data-active] {
+  opacity: 1;
+}
+
+.order-overlay {
+  position: absolute;
+  pointer-events: none;
+  background: var(--_placement-reserved-background);
+  z-index: 7;
+}
+
+.seam-badge {
+  position: absolute;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: var(--nve-ref-size-800);
+  height: var(--nve-ref-size-800);
+  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  border-radius: var(--nve-ref-border-radius-full);
+  background: var(--nve-sys-layer-container-background);
+  /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-variable -- The seam icon uses the same accent as the operating outline. */
+  color: var(--nve-sys-accent-secondary-background);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.seam-badge-icon {
+  display: block;
+  width: var(--nve-ref-size-500);
+  height: var(--nve-ref-size-500);
+  overflow: visible;
+  pointer-events: none;
+}
+
+:host(:fullscreen) {
+  width: 100%;
+  height: 100%;
+  background: var(--nve-sys-layer-container-background);
+}
+
+.fullscreen-exit {
+  position: absolute;
+  inset: auto var(--nve-ref-space-sm) var(--nve-ref-space-sm) auto;
+  z-index: 9;
+}
+
+:host([container='flat']) .tabs {
+  background: transparent;
+}
+
+:host([container='flat']),
+:host([container='full']) {
+  --_workspace-border-radius: var(--nve-ref-border-radius-none);
+}

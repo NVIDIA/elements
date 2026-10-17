@@ -71,6 +71,7 @@ describe('noInvalidSlottedElements', () => {
         '<nve-button-group><nve-media-seek-button></nve-media-seek-button><nve-media-pause-button></nve-media-pause-button></nve-button-group>',
         '<nve-card><div></div></nve-card>',
         '<nve-tabs><nve-tabs-item-group><nve-tabs-item>Tab</nve-tabs-item><button slot="suffix">Close</button></nve-tabs-item-group></nve-tabs>',
+        '<nve-menu><slot></slot></nve-menu>',
         '<nve-grid>dynamic rows</nve-grid>',
         {
           filename: 'documentation.md',
@@ -136,6 +137,15 @@ describe('noInvalidSlottedElements', () => {
         },
         {
           code: '<nve-menu><nve-button></nve-button></nve-menu>',
+          errors: [
+            {
+              messageId: 'invalid-slotted-element',
+              data: { allowed: 'nve-menu-item, nve-divider', child: 'nve-button', parent: 'nve-menu' }
+            }
+          ]
+        },
+        {
+          code: '<nve-menu><slot></slot><nve-button></nve-button></nve-menu>',
           errors: [
             {
               messageId: 'invalid-slotted-element',

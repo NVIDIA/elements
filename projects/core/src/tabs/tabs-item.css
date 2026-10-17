@@ -5,13 +5,9 @@
   --width: 100%;
   --gap: var(--nve-ref-space-xs);
   --padding: 0 var(--nve-ref-size-200);
-  --font-size: var(--nve-ref-font-size-100);
-  --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: var(--nve-ref-border-radius-sm);
-  --color: var(--nve-sys-text-muted-color);
   --height: var(--nve-ref-size-800);
   --cursor: pointer;
-  --text-transform: initial;
   --nve-sys-interaction-state-ratio: 0;
 }
 
@@ -45,22 +41,15 @@
   position: var(--_tabs-item-position, relative);
 }
 
-:host(:state(selected)) {
-  --color: var(--nve-sys-text-emphasis-color);
-  --font-weight: var(--nve-ref-font-weight-semibold);
-}
-
 :host(:state(selected)) ::slotted(nve-icon) {
   --color: var(--nve-sys-interaction-color);
 }
 
 :host(:hover:not(:state(disabled), :state(selected))) {
-  --color: var(--nve-sys-text-emphasis-color);
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
 :host(:state(disabled)) {
-  --color: var(--nve-sys-interaction-disabled-color);
   --cursor: not-allowed;
 }
 

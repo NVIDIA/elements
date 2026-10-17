@@ -3,9 +3,10 @@
 
 import { html } from 'lit';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { Menu } from '@nvidia-elements/core/menu';
 import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/divider/define.js';
 
 describe(Menu.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -106,6 +107,23 @@ describe(Menu.metadata.tag, () => {
     expect(items[0].matches(':focus')).toBe(true);
   });
 
+  it('should keep one tab stop when direct menu items are appended', async () => {
+    const items = element.querySelectorAll('nve-menu-item');
+    items[1].focus();
+    const added = document.createElement('nve-menu-item');
+    added.textContent = 'Added';
+    const assigned = untilEvent(element.shadowRoot.querySelector('slot'), 'slotchange');
+    element.append(added);
+    await assigned;
+    await elementIsStable(element);
+
+    expect(items[1].tabIndex).toBe(0);
+    expect(items[0].tabIndex).toBe(-1);
+    expect(items[2].tabIndex).toBe(-1);
+    expect(added.tabIndex).toBe(-1);
+    expect(document.activeElement).toBe(items[1]);
+  });
+
   it('should skip disabled items during keyboard navigation', async () => {
     await elementIsStable(element);
     const items = element.querySelectorAll('nve-menu-item');
@@ -116,6 +134,79 @@ describe(Menu.metadata.tag, () => {
     items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true }));
     await elementIsStable(element);
     expect(items[2].matches(':focus')).toBe(true);
+  });
+});
+
+describe(`${Menu.metadata.tag}: forwarded items`, () => {
+  let fixture: HTMLElement;
+  let host: HTMLElement;
+  let element: Menu;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <div>
+        <nve-menu-item>First</nve-menu-item>
+        <nve-divider></nve-divider>
+        <nve-menu-item disabled>Unavailable</nve-menu-item>
+        <nve-menu-item>Last</nve-menu-item>
+      </div>
+    `);
+    host = fixture.querySelector('div');
+    host.attachShadow({ mode: 'open' }).innerHTML = '<nve-menu><slot></slot></nve-menu>';
+    element = host.shadowRoot.querySelector('nve-menu');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should use forwarded menu items for roving keyboard navigation', () => {
+    const items = host.querySelectorAll('nve-menu-item');
+
+    expect(element.keynavListConfig.items).toEqual(Array.from(items));
+    expect(items[0].tabIndex).toBe(0);
+    expect(items[2].tabIndex).toBe(-1);
+  });
+
+  it('should skip forwarded dividers and disabled items', () => {
+    const items = host.querySelectorAll('nve-menu-item');
+    items[0].focus();
+    items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true }));
+
+    expect(document.activeElement).toBe(items[2]);
+    expect(host.querySelector('nve-divider').hasAttribute('tabindex')).toBe(false);
+  });
+
+  it('should keep the focused forwarded item as the only tab stop after removal', async () => {
+    const items = host.querySelectorAll('nve-menu-item');
+    items[2].focus();
+    const assigned = untilEvent(element.shadowRoot.querySelector('slot'), 'slotchange');
+    items[0].remove();
+    await assigned;
+    await elementIsStable(element);
+
+    expect(items[2].tabIndex).toBe(0);
+    expect(items[1].tabIndex).toBe(-1);
+    expect(document.activeElement).toBe(items[2]);
+  });
+
+  it('should include newly assigned items in arrow navigation', async () => {
+    const previous = host.querySelectorAll('nve-menu-item')[2];
+    const added = document.createElement('nve-menu-item');
+    added.textContent = 'Added';
+    const assigned = untilEvent(element.shadowRoot.querySelector('slot'), 'slotchange');
+    host.append(added);
+    await assigned;
+    await elementIsStable(element);
+    await elementIsStable(added);
+    expect(added.tabIndex).toBe(-1);
+    previous.focus();
+    previous.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true }));
+
+    expect(document.activeElement).toBe(added);
+    expect(added.tabIndex).toBe(0);
+    expect(previous.tabIndex).toBe(-1);
   });
 });
 

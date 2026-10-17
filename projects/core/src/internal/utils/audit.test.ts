@@ -50,7 +50,25 @@ class AuditTestParentElement extends LitElement {
 }
 
 @customElement('valid-audit-test-parent-element')
-class ValidAuditTestParentElement extends LitElement {}
+class ValidAuditTestParentElement extends LitElement {
+  render() {
+    return html`<slot></slot>`;
+  }
+}
+
+@customElement('audit-forwarded-test-element')
+class AuditForwardedTestElement extends LitElement {
+  render() {
+    return html`<valid-audit-test-parent-element><slot></slot></valid-audit-test-parent-element>`;
+  }
+}
+
+@customElement('audit-forwarded-slots-test-element')
+class AuditForwardedSlotsTestElement extends LitElement {
+  render() {
+    return html`<audit-test-element><slot></slot></audit-test-element>`;
+  }
+}
 
 describe('audit', () => {
   let fixture: HTMLElement;
@@ -160,5 +178,39 @@ describe('audit', () => {
 
     expect(valid).toBe(true);
     expect(validParents).toEqual([]);
+  });
+});
+
+describe('audit forwarded content', () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => removeFixture(fixture));
+
+  it('accepts a valid immediate slot parent without changing physical ownership', async () => {
+    fixture = await createFixture(
+      html`<audit-forwarded-test-element><audit-test-parent-element></audit-test-parent-element></audit-forwarded-test-element>`
+    );
+    const child = fixture.querySelector<AuditTestParentElement>('audit-test-parent-element')!;
+    const [valid] = auditParentElement(
+      child as AuditTestParentElement & { constructor: typeof AuditTestParentElement }
+    );
+    expect(valid).toBe(true);
+    expect(child.parentElement?.localName).toBe('audit-forwarded-test-element');
+    expect(child.assignedSlot?.parentElement?.localName).toBe('valid-audit-test-parent-element');
+  });
+
+  it('reports invalid projected children and invalid immediate slot parents', async () => {
+    fixture = await createFixture(
+      html`<audit-forwarded-slots-test-element><p nve-text="body">Valid</p><span>Invalid</span><audit-test-parent-element></audit-test-parent-element></audit-forwarded-slots-test-element>`
+    );
+    const wrapper = fixture.querySelector('audit-forwarded-slots-test-element')!;
+    const host = wrapper.shadowRoot!.querySelector<AuditTestElement>('audit-test-element')!;
+    const [invalid] = auditSlots(host as AuditTestElement & { constructor: typeof AuditTestElement });
+    expect(invalid.map(element => element.localName)).toEqual(['span', 'audit-test-parent-element']);
+    const child = fixture.querySelector<AuditTestParentElement>('audit-test-parent-element')!;
+    const [valid] = auditParentElement(
+      child as AuditTestParentElement & { constructor: typeof AuditTestParentElement }
+    );
+    expect(valid).toBe(false);
   });
 });

@@ -479,6 +479,18 @@
       "types": "./dist/gauge/define.d.ts",
       "default": "./dist/gauge/define.js"
     },
+    "./ghost": {
+      "types": "./dist/ghost/index.d.ts",
+      "default": "./dist/ghost/index.js"
+    },
+    "./ghost/index.js": {
+      "types": "./dist/ghost/index.d.ts",
+      "default": "./dist/ghost/index.js"
+    },
+    "./ghost/define.js": {
+      "types": "./dist/ghost/define.d.ts",
+      "default": "./dist/ghost/define.js"
+    },
     "./grid": {
       "types": "./dist/grid/index.d.ts",
       "default": "./dist/grid/index.js"
@@ -994,6 +1006,18 @@
     "./internal/index.js": {
       "types": "./dist/internal/index.d.ts",
       "default": "./dist/internal/index.js"
+    },
+    "./workspace": {
+      "types": "./dist/workspace/index.d.ts",
+      "default": "./dist/workspace/index.js"
+    },
+    "./workspace/index.js": {
+      "types": "./dist/workspace/index.d.ts",
+      "default": "./dist/workspace/index.js"
+    },
+    "./workspace/define.js": {
+      "types": "./dist/workspace/define.d.ts",
+      "default": "./dist/workspace/define.js"
     }
   },
   "typesVersions": {

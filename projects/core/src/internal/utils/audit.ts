@@ -7,7 +7,9 @@ export function auditSlots(
   const validElements = ['template', ...(host.constructor.metadata?.children ?? [])].filter(c => typeof c === 'string');
   const invalidElements = Array.from(host.shadowRoot!.querySelectorAll('slot'))
     .filter(slot => slot.name === '')
-    .flatMap(slot => slot.assignedElements().filter(e => !validElements.map(i => i).includes(e.localName)));
+    .flatMap(slot =>
+      slot.assignedElements({ flatten: true }).filter(e => !validElements.map(i => i).includes(e.localName))
+    );
   return [invalidElements, validElements];
 }
 
@@ -16,6 +18,11 @@ export function auditParentElement(
 ): [boolean, string[]] {
   const validParentTags = host.constructor.metadata?.parents ?? [];
   return validParentTags.length
-    ? [!!validParentTags.find(p => host.parentElement?.localName === p), validParentTags]
+    ? [
+        validParentTags.some(
+          tag => host.parentElement?.localName === tag || host.assignedSlot?.parentElement?.localName === tag
+        ),
+        validParentTags
+      ]
     : [true, []];
 }

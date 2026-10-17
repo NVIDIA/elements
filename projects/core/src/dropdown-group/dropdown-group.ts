@@ -36,7 +36,7 @@ export class DropdownGroup extends LitElement {
     children: ['nve-dropdown']
   };
 
-  @queryAssignedElements() protected dropdowns!: Dropdown[];
+  @queryAssignedElements({ selector: 'nve-dropdown' }) protected dropdowns!: Dropdown[];
 
   render() {
     return html`
@@ -47,6 +47,7 @@ export class DropdownGroup extends LitElement {
   }
 
   #_pointerup = (e: PointerEvent) => this.#pointerup(e);
+  #triggers = new WeakMap<Dropdown, HTMLElement>();
 
   connectedCallback() {
     super.connectedCallback();
@@ -80,35 +81,59 @@ export class DropdownGroup extends LitElement {
   }
 
   #keydown(event: KeyboardEvent) {
-    const target = event.target as HTMLElement;
+    const target = event.composedPath()[0];
+    if (!(target instanceof HTMLElement)) return;
+
     if (event.code === 'Escape') {
       this.close();
+      return;
     }
-    if (event.code === 'ArrowRight') {
-      const targetId = target.getAttribute('popovertarget');
-      const dropdown = this.dropdowns.find(d => d.id === targetId);
-      dropdown?.showPopover();
-    }
-    if (event.code === 'ArrowLeft' && isSimpleFocusable(event.target as HTMLElement)) {
-      target.closest('nve-dropdown')?.hidePopover();
+
+    const rtl = getComputedStyle(this).direction === 'rtl';
+    const forward = rtl ? 'ArrowLeft' : 'ArrowRight';
+    const backward = rtl ? 'ArrowRight' : 'ArrowLeft';
+
+    if (event.code === forward) this.#openSubmenu(target, event);
+    if (event.code === backward) this.#closeSubmenu(target, event);
+  }
+
+  #openSubmenu(target: HTMLElement, event: KeyboardEvent) {
+    const trigger = target.closest('nve-menu-item');
+    if (!trigger || trigger.disabled) return;
+    const dropdown = this.dropdowns.find(item => item === trigger.popoverTargetElement);
+    if (dropdown) {
+      event.preventDefault();
+      event.stopPropagation();
+      dropdown.showPopover({ source: trigger });
     }
   }
 
-  #onOpen(event: CustomEvent) {
-    const dropdown = event.target as HTMLElement;
-    const isLocalDropdown = dropdown.localName === 'nve-dropdown' && this.dropdowns.find(d => d === dropdown);
-    if (isLocalDropdown) {
+  #closeSubmenu(target: HTMLElement, event: KeyboardEvent) {
+    if (!isSimpleFocusable(target)) return;
+    const dropdown = this.dropdowns.find(item => item === target.closest('nve-dropdown'));
+    if (dropdown) {
+      event.preventDefault();
+      event.stopPropagation();
+      dropdown.hidePopover();
+    }
+  }
+
+  #onOpen(event: CustomEvent<{ trigger?: HTMLElement }>) {
+    const dropdown = this.dropdowns.find(item => item === event.composedPath()[0]);
+    if (dropdown) {
+      if (event.detail?.trigger instanceof HTMLElement) {
+        this.#triggers.set(dropdown, event.detail.trigger);
+      }
       getFlattenedFocusableItems(dropdown)[0]?.focus();
     }
   }
 
   #onClose(event: CustomEvent) {
-    const element = event.target as HTMLElement;
-    const isLocalDropdown = element.localName === 'nve-dropdown' && this.dropdowns.find(d => d === element);
-    if (isLocalDropdown) {
-      // _activeTrigger is a popover controller internal API
-      const dropdown = element as Dropdown & { _activeTrigger?: HTMLElement };
-      dropdown._activeTrigger?.focus();
+    const dropdown = this.dropdowns.find(item => item === event.composedPath()[0]);
+    if (dropdown) {
+      const trigger = this.#triggers.get(dropdown);
+      if (trigger?.isConnected) trigger.focus();
+      this.#triggers.delete(dropdown);
     }
   }
 

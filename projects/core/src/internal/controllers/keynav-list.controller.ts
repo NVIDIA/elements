@@ -3,7 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { focusElement, initializeKeyListItems, isFocusable, setActiveKeyListItem } from '../utils/focus.js';
+import { focusElement, isFocusable, setActiveKeyListItem } from '../utils/focus.js';
 import { KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
 
 export interface KeynavListConfig {
@@ -41,6 +41,8 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     };
   }
 
+  #previousItems: HTMLElement[] = [];
+
   constructor(private host: T) {
     this.host.addController(this);
   }
@@ -53,12 +55,17 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   async hostConnected() {
     await this.host.updateComplete;
     if (!this.host.isConnected) return;
-    this.#initializeTabIndex();
+    this.#reconcileTabIndex();
     this.host.addEventListener('pointerup', this.#onPointerUp);
     this.host.addEventListener('keydown', this.#onKeyDown);
   }
 
+  hostUpdated() {
+    this.#reconcileTabIndex();
+  }
+
   hostDisconnected() {
+    this.#previousItems = [];
     this.host.removeEventListener('pointerup', this.#onPointerUp);
     this.host.removeEventListener('keydown', this.#onKeyDown);
   }
@@ -69,6 +76,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     if (!manageFocus || !manageTabindex || this.#keynavDisabled) return;
 
     const activeItem =
+      items.find(item => item.matches(':focus-within')) ??
       items.find(item => previousItems.includes(item) && item.tabIndex === 0) ??
       (initialItem && items.includes(initialItem) ? initialItem : items[0]);
     Array.from(this.host.keynavListConfig.items).forEach(item => {
@@ -76,14 +84,17 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     });
   }
 
-  #initializeTabIndex() {
-    const { manageFocus, manageTabindex, items, initialItem } = this.#config;
-    if (manageFocus && manageTabindex && !this.#keynavDisabled) {
-      initializeKeyListItems(items);
-      if (initialItem && items.includes(initialItem)) {
-        setActiveKeyListItem(items, initialItem);
-      }
-    }
+  #reconcileTabIndex() {
+    const { manageFocus, manageTabindex, items } = this.#config;
+    if (!manageFocus || !manageTabindex || this.#keynavDisabled) return;
+    if (
+      items.length === this.#previousItems.length &&
+      items.every((item, index) => item === this.#previousItems[index])
+    )
+      return;
+
+    this.refreshItems(this.#previousItems);
+    this.#previousItems = items;
   }
 
   #clickItem(e: PointerEvent) {

@@ -43,6 +43,7 @@ describe('I18nService', () => {
       reducedMotion: 'reduced motion',
       colorScheme: 'color scheme',
       resize: 'resize',
+      move: 'move',
       or: 'or',
       files: 'files',
       dragAndDrop: 'drag & drop',
@@ -114,7 +115,10 @@ describe('I18nService', () => {
 
     I18nService.update(translations);
 
-    expect(I18nService.i18n).toStrictEqual({ ...original, ...translations });
+    expect(I18nService.i18n).toStrictEqual({
+      ...original,
+      ...translations
+    });
 
     I18nService.update(original);
   });

@@ -61,10 +61,14 @@ export class Menu extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements() private items!: MenuItem[];
+  @queryAssignedElements({ flatten: true, selector: 'nve-menu-item' }) private items!: MenuItem[];
 
   #scrollRAF: number | null = null;
   #assignedMenuSlot = false;
+
+  #handleSlotChange = () => {
+    this.requestUpdate();
+  };
 
   #handleScroll = () => {
     if (this.#scrollRAF !== null) return;
@@ -86,7 +90,7 @@ export class Menu extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot></slot>
+        <slot @slotchange=${this.#handleSlotChange}></slot>
       </div>
     `;
   }

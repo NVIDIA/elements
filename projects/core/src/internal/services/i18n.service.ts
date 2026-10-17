@@ -35,6 +35,7 @@ export interface I18nStrings {
   reducedMotion: string;
   colorScheme: string;
   resize: string;
+  move: string;
   or: string;
   files: string;
   dragAndDrop: string;
@@ -93,6 +94,7 @@ const i18nRegistry = {
   reducedMotion: 'reduced motion',
   colorScheme: 'color scheme',
   resize: 'resize',
+  move: 'move',
   or: 'or',
   files: 'files',
   dragAndDrop: 'drag & drop',

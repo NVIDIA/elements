@@ -86,7 +86,7 @@
 }
 
 [internal-host]:hover,
-[internal-host]:has(input:focus),
+[internal-host]:has(input:focus-visible),
 :host(:state(active)) [internal-host] {
   --background: var(--nve-sys-accent-secondary-background);
 

@@ -34,6 +34,7 @@ function shouldIgnoreChild(context: Rule.RuleContext, contract: SlottedElementCo
     isMarkdownInlineCode(context, child) ||
     getSlotAssignment(child).kind !== 'default' ||
     childTagName === 'template' ||
+    childTagName === 'slot' ||
     contract.allowedElements.includes(childTagName) ||
     isDocumentedGridScroller(contract.parentTagName, child)
   );

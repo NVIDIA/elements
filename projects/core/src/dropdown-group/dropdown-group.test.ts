@@ -3,7 +3,7 @@
 
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { DropdownGroup } from '@nvidia-elements/core/dropdown-group';
 import '@nvidia-elements/core/dropdown-group/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
@@ -231,5 +231,85 @@ describe(DropdownGroup.metadata.tag, () => {
     await elementIsStable(element);
 
     expect(document.activeElement).toBe(activeElement);
+  });
+});
+
+describe(`${DropdownGroup.metadata.tag}: secondary menus`, () => {
+  let fixture: HTMLElement;
+  let element: DropdownGroup;
+  let dropdown: HTMLElement;
+  let trigger: HTMLElement;
+  let childItem: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button popovertarget="outer-menu">Actions</nve-button>
+      <nve-dropdown-group>
+        <nve-dropdown id="outer-menu">
+          <nve-menu>
+            <nve-menu-item popovertarget="secondary-menu"><span>Move</span></nve-menu-item>
+          </nve-menu>
+        </nve-dropdown>
+        <nve-dropdown id="secondary-menu" position="right">
+          <nve-menu>
+            <nve-menu-item disabled>Unavailable</nve-menu-item>
+            <nve-menu-item>Left</nve-menu-item>
+            <nve-menu-item>Right</nve-menu-item>
+          </nve-menu>
+        </nve-dropdown>
+      </nve-dropdown-group>
+    `);
+    element = fixture.querySelector('nve-dropdown-group');
+    dropdown = fixture.querySelector('#secondary-menu');
+    trigger = element.querySelector('nve-menu-item');
+    childItem = dropdown.querySelector('nve-menu-item:not([disabled])');
+    await elementIsStable(element);
+    const outer = fixture.querySelector('nve-dropdown');
+    const opened = untilEvent(outer, 'open');
+    outer.showPopover({ source: fixture.querySelector('nve-button') });
+    await opened;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should open the associated dropdown and focus its first enabled item', async () => {
+    const opened = untilEvent(dropdown, 'open');
+    trigger
+      .querySelector('span')
+      .dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true }));
+    await opened;
+
+    expect(dropdown.matches(':popover-open')).toBe(true);
+    expect(document.activeElement).toBe(childItem);
+  });
+
+  it('should return focus to the native invoker when closing the secondary dropdown', async () => {
+    const opened = untilEvent(dropdown, 'open');
+    dropdown.showPopover({ source: trigger });
+    await opened;
+
+    const closed = untilEvent(dropdown, 'close');
+    childItem.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true, composed: true }));
+    await closed;
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    expect(document.activeElement).toBe(trigger);
+    expect(fixture.querySelector('#outer-menu').matches(':popover-open')).toBe(true);
+  });
+
+  it('should reverse the submenu arrow keys in right-to-left layouts', async () => {
+    element.dir = 'rtl';
+    const opened = untilEvent(dropdown, 'open');
+    trigger.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true, composed: true }));
+    await opened;
+
+    const closed = untilEvent(dropdown, 'close');
+    childItem.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true }));
+    await closed;
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    expect(document.activeElement).toBe(trigger);
   });
 });
