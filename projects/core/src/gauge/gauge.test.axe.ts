@@ -20,7 +20,7 @@ describe(Gauge.metadata.tag, () => {
       <nve-gauge aria-label="progress" thumb="dot" status="accent" value="50"></nve-gauge>
       <nve-gauge aria-label="progress" thumb="needle" status="accent" value="50"></nve-gauge>
     `);
-    const elements = Array.from(fixture.querySelectorAll(Gauge.metadata.tag)) as Gauge[];
+    const elements = Array.from(fixture.querySelectorAll(Gauge.metadata.tag));
     await Promise.all(elements.map(gauge => elementIsStable(gauge)));
   });
 
