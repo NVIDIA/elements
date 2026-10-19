@@ -41,7 +41,7 @@ jobs:
         if: >-
           github.event_name == 'push' ||
           (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
-        uses: actions/upload-code-coverage@d8e329117199404bba6fc81efe8093dc7c015e34 # v1.4.2
+        uses: actions/upload-code-coverage@2b21a77928be8d5168c2b9581a67f2adbebacc52 # v1.4.4
         with:
           file: projects/internals/ci/coverage/cobertura.xml
           language: TypeScript
@@ -52,7 +52,7 @@ jobs:
         run: node ./projects/internals/ci/ci-summary.js >> "$GITHUB_STEP_SUMMARY"
       - name: Upload build artifacts
         if: github.event_name == 'push'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: build-artifacts
           retention-days: 1
@@ -105,7 +105,7 @@ jobs:
           include-hidden-files: true
       - name: Upload IndexNow state
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: indexnow-state
           retention-days: 1
@@ -150,7 +150,7 @@ jobs:
         with:
           install-playwright: 'false'
       - name: Download build artifacts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: build-artifacts
           path: projects
@@ -163,7 +163,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: WIREIT_PARALLEL=1 WIREIT_LOGGER=metrics pnpm run release
       - name: Upload MCP server manifest
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: mcp-server
           retention-days: 1
@@ -177,7 +177,7 @@ jobs:
     concurrency: mcp-registry-publish
     steps:
       - name: Download MCP server manifest
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: mcp-server
           path: projects/cli
@@ -230,13 +230,13 @@ jobs:
             projects/internals/ci/indexnow.js
             projects/internals/ci/package.json
           sparse-checkout-cone-mode: false
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+      - uses: jdx/mise-action@9b200bcecbfd6303e69a4a261b2e09e3757440a7
         with:
           version: 2026.6.14
           install: true
           cache: true
       - name: Download IndexNow state
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: indexnow-state
           path: indexnow/current
@@ -249,7 +249,7 @@ jobs:
           --site-url "$ELEMENTS_PAGES_BASE_URL"
           --output-file indexnow/payload.json
       - name: Upload IndexNow payload
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: indexnow-payload
           retention-days: 30
@@ -257,7 +257,7 @@ jobs:
           overwrite: true
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
 
   notify-indexnow:
     needs: deploy-pages
@@ -275,13 +275,13 @@ jobs:
             projects/internals/ci/indexnow.js
             projects/internals/ci/package.json
           sparse-checkout-cone-mode: false
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+      - uses: jdx/mise-action@9b200bcecbfd6303e69a4a261b2e09e3757440a7
         with:
           version: 2026.6.14
           install: true
           cache: true
       - name: Download IndexNow payload
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: indexnow-payload
           path: indexnow
