@@ -12,7 +12,7 @@ import '../dist/cubes/define.js';
 import '../dist/frame/define.js';
 import '../dist/lines/define.js';
 import '../dist/mesh/define.js';
-import '../dist/model/define.js';
+import '../dist/body/define.js';
 import '../dist/labels/define.js';
 import '../dist/points/define.js';
 import '../dist/scene/define.js';
@@ -91,11 +91,11 @@ const PROFILE_CONFIG = {
     operations: ['camera-composition-edit'],
     pointCount: 10_000
   },
-  'model-edits': {
+  'body-edits': {
     dpr: 1,
     markerCount: MARKER_COUNT,
-    mode: 'model-edits',
-    operations: ['model-declarative-edit', 'model-bulk-assignment'],
+    mode: 'body-edits',
+    operations: ['body-declarative-edit', 'body-bulk-assignment'],
     pointCount: 10_000
   },
   'layer-tracking': {
@@ -141,8 +141,8 @@ const profileLayers = {
   frame: null,
   labels: null,
   mesh: null,
-  model: null,
-  part: null,
+  body: null,
+  shape: null,
   trackingLayer: null
 };
 let labelSource = null;
@@ -165,13 +165,13 @@ if (profile.mode === 'mesh-updates' || profile.mode === 'shader-coverage') {
   scene.append(mesh);
   profileLayers.mesh = mesh;
 }
-if (profile.mode === 'model-edits') {
-  const model = document.createElement('nve-scene-model');
-  const part = document.createElement('nve-scene-part');
-  model.append(part);
-  scene.append(model);
-  profileLayers.model = model;
-  profileLayers.part = part;
+if (profile.mode === 'body-edits') {
+  const body = document.createElement('nve-scene-body');
+  const shape = document.createElement('nve-scene-shape');
+  body.append(shape);
+  scene.append(body);
+  profileLayers.body = body;
+  profileLayers.shape = shape;
 }
 if (profile.mode === 'labels-10k') {
   const labels = document.createElement('nve-scene-labels');
@@ -235,7 +235,7 @@ let activePointSources = profile.translucent ? translucentPointSources : opaqueP
 let pointSourceIndex = 0;
 let markerPublishIndex = 0;
 let meshGeometryRevision = 0;
-let modelEditRevision = 0;
+let bodyEditRevision = 0;
 let profileOperationPending = false;
 let profileOperationRevision = 0;
 let textureImagePromise;
@@ -452,8 +452,8 @@ async function triggerProfileOperation() {
       triggerLabelUpdate();
     } else if (profile.mode === 'camera-composition') {
       triggerCameraComposition();
-    } else if (profile.mode === 'model-edits') {
-      triggerModelEdit();
+    } else if (profile.mode === 'body-edits') {
+      triggerBodyEdit();
     } else if (profile.mode === 'layer-tracking') {
       triggerLayerTrackingUpdate();
     } else if (profile.mode === 'lazy-recovery') {
@@ -531,20 +531,20 @@ function triggerCameraComposition() {
   frame.position = [profileOperationRevision % 3, profileOperationRevision % 2, 0];
 }
 
-function triggerModelEdit() {
-  const { model, part } = profileLayers;
-  if (!model || !part) throw new Error('Model edit profile did not create a model part.');
-  modelEditRevision += 1;
-  if (modelEditRevision % 2 === 0) {
-    noteProfileOperation('model-bulk-assignment');
-    part.remove();
-    model.geometry = [{ position: [modelEditRevision % 5, 0, 0], shape: 'cube' }];
+function triggerBodyEdit() {
+  const { body, shape } = profileLayers;
+  if (!body || !shape) throw new Error('Body edit profile did not create a body shape.');
+  bodyEditRevision += 1;
+  if (bodyEditRevision % 2 === 0) {
+    noteProfileOperation('body-bulk-assignment');
+    shape.remove();
+    body.geometry = [{ position: [bodyEditRevision % 5, 0, 0], kind: 'cube' }];
     return;
   }
-  noteProfileOperation('model-declarative-edit');
-  model.geometry = null;
-  if (!model.contains(part)) model.append(part);
-  part.position = [modelEditRevision % 5, 0, 0];
+  noteProfileOperation('body-declarative-edit');
+  body.geometry = null;
+  if (!body.contains(shape)) body.append(shape);
+  shape.position = [bodyEditRevision % 5, 0, 0];
 }
 
 function triggerLayerTrackingUpdate() {
@@ -828,26 +828,26 @@ async function runProfileProbe() {
       snapshot: observer.snapshot()
     };
   }
-  if (profile.mode === 'model-edits') {
-    const { model, part } = profileLayers;
-    if (!model || !part) throw new Error('Model edit profile did not create a model part.');
-    model.geometry = null;
-    await model.updateComplete;
-    if (!model.contains(part)) model.append(part);
-    part.position = [1, 0, 0];
-    await Promise.all([model.updateComplete, part.updateComplete]);
+  if (profile.mode === 'body-edits') {
+    const { body, shape } = profileLayers;
+    if (!body || !shape) throw new Error('Body edit profile did not create a body shape.');
+    body.geometry = null;
+    await body.updateComplete;
+    if (!body.contains(shape)) body.append(shape);
+    shape.position = [1, 0, 0];
+    await Promise.all([body.updateComplete, shape.updateComplete]);
     await waitFrames(3);
-    const declarativeChildPresent = model.contains(part);
-    part.remove();
-    await model.updateComplete;
-    model.geometry = [{ position: [2, 0, 0], shape: 'cube' }];
-    await model.updateComplete;
+    const declarativeChildPresent = body.contains(shape);
+    shape.remove();
+    await body.updateComplete;
+    body.geometry = [{ position: [2, 0, 0], kind: 'cube' }];
+    await body.updateComplete;
     await waitFrames(3);
     return {
-      bulkPartCount: model.geometry?.length ?? 0,
+      bulkShapeCount: body.geometry?.length ?? 0,
       declarativeChildPresent,
-      declarativeChildPresentDuringBulk: model.contains(part),
-      declarativePosition: [...part.position],
+      declarativeChildPresentDuringBulk: body.contains(shape),
+      declarativePosition: [...shape.position],
       profile: profile.name,
       snapshot: observer.snapshot()
     };

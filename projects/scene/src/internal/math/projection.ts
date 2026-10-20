@@ -10,7 +10,7 @@ interface ViewportSize {
   readonly height: number;
 }
 
-export interface ProjectionRay {
+interface ProjectionRay {
   readonly origin: Vec3;
   readonly direction: Vec3;
 }

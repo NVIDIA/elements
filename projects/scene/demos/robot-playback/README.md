@@ -13,11 +13,12 @@ the original SO-100 STL assets. The documentation site copies this directory to
 - `provenance.json` records the pinned source revisions and SHA-256 hashes for the
   source files and replay outputs.
 
-The example creates one `nve-scene-model` per visual, sets its `asset` URL and
+The example creates one `nve-scene-body` per visual, sets its `src` URL and
 `tint`, and waits for `loadComplete` before enabling playback. Motors keep the
-dark tint and printed parts keep the light tint. Nested `nve-scene-frame`
-elements apply the joint poses without changing model geometry. Failed loads
-remove the robot models, which also cancels the remaining model requests.
+dark tint and printed bodies keep the light tint. One `nve-scene-model` contains flat
+`nve-scene-joint` declarations and the bodies attached through `frame`. Joint values move the entity
+without changing body geometry. Failed loads
+remove the robot bodies, which also cancels the remaining body requests.
 
 The metadata preserves the joint definitions and jaw-tip point from the earlier
 prepared geometry. The jaw-tip point is the midpoint of the moving jaw's bounds
@@ -29,3 +30,14 @@ The recording comes from the [LeRobot sorting dataset](https://huggingface.co/da
 Both sources use Apache-2.0. The assets directory includes the original
 [license](assets/LICENSE). The camera video streams from the pinned dataset
 revision; playback uses a local clock when the video is unavailable.
+
+## Metadata regeneration
+
+The body/shape and joint update regenerated `robot.json` from the pinned local metadata.
+Each joint origin now contains an x y z w `orientation` quaternion, converted once with
+`Rz(yaw) * Ry(pitch) * Rx(roll)`, and `frame` names its parent joint (`null` for the model root).
+The previous visualization zero and direction conventions now appear as joint `offset` and `scale`.
+The geometry, recording, source revisions, and jaw-tip point remain unchanged. `provenance.json` records
+the prior metadata hash, the conversion, and the regenerated output hash.
+The example contains no quaternion or axis-angle calculations; both tool paths use the jaw joint's
+`getWorldPoint` after synchronous `arm.joints.set` assignments.

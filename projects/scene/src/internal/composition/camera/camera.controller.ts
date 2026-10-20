@@ -143,7 +143,7 @@ export class CameraController implements ReactiveController {
       setCameraRuntimeProperty(
         behavior,
         'position',
-        this.#fitPosePosition(contribution.frame, fit.state.pose.position)
+        this.#fitPosePosition(contribution.frame, fit.state.pose.position, behavior)
       );
     } else if (contribution.kind === 'orbit') {
       setCameraRuntimeProperty(behavior, 'maxDistance', Math.max(contribution.maxDistance, fit.distance));
@@ -160,9 +160,9 @@ export class CameraController implements ReactiveController {
     }
   }
 
-  #fitPosePosition(frameName: string, position: Readonly<Vec3>): Vec3 {
+  #fitPosePosition(frameName: string, position: Readonly<Vec3>, context: CameraElement): Vec3 {
     if (!frameName) return [...position];
-    const frame = this.#resolveFollowFrame(frameName);
+    const frame = this.#resolveFollowFrame(frameName, context);
     if (!frame) throw new DOMException('The camera frame is unresolved.', 'InvalidStateError');
     const matrix = getFrameWorldMatrixPrecise(frame);
     const delta = [position[0] - matrix[12]!, position[1] - matrix[13]!, position[2] - matrix[14]!];
@@ -211,7 +211,7 @@ export class CameraController implements ReactiveController {
       } => entry.contribution.kind === 'pose'
     );
     if (pose) {
-      this.#state = this.#resolvePoseCameraState(pose.contribution);
+      this.#state = this.#resolvePoseCameraState(pose.contribution, pose.behavior);
     } else if (contributions.length > 0 || !this.#hasEnabledPoseBehavior()) {
       this.#state = orbitCameraStateToCameraState(this.#orbitState);
     }
@@ -246,7 +246,7 @@ export class CameraController implements ReactiveController {
           entry.contribution !== null
       );
     for (const entry of configured) {
-      const resolved = this.#isCameraFrameResolved(entry.contribution);
+      const resolved = this.#isCameraFrameResolved(entry.contribution, entry.behavior);
       sceneCameraController.setFrameResolved(entry.behavior, resolved);
     }
     const resolvable = configured.filter(entry => sceneCameraController.isResolvable(entry.behavior));
@@ -290,7 +290,7 @@ export class CameraController implements ReactiveController {
     const { contribution } = entry;
     if (contribution.kind === 'orbit') return this.#toOrbitCameraContribution(contribution);
     if (contribution.kind === 'top') return this.#toTopCameraContribution(contribution);
-    if (contribution.kind === 'follow') return this.#toFollowCameraContribution(contribution);
+    if (contribution.kind === 'follow') return this.#toFollowCameraContribution(contribution, entry.behavior);
     throw new TypeError('Pose contributions resolve directly to canonical camera state.');
   }
 
@@ -318,9 +318,10 @@ export class CameraController implements ReactiveController {
   }
 
   #toFollowCameraContribution(
-    contribution: Extract<CameraBehaviorContribution, { kind: 'follow' }>
+    contribution: Extract<CameraBehaviorContribution, { kind: 'follow' }>,
+    context: CameraElement
   ): CameraContribution {
-    const frame = this.#resolveFollowFrame(contribution.frame);
+    const frame = this.#resolveFollowFrame(contribution.frame, context);
     if (!frame) return { fields: contribution.fields, patch: {} };
     const matrix = getFrameWorldMatrixPrecise(frame);
     return {
@@ -334,13 +335,18 @@ export class CameraController implements ReactiveController {
     };
   }
 
-  #resolvePoseCameraState(contribution: Extract<CameraBehaviorContribution, { kind: 'pose' }>): SceneCameraState {
-    const pose = contribution.frame ? this.#composeFramePose(contribution.frame, contribution.pose) : contribution.pose;
+  #resolvePoseCameraState(
+    contribution: Extract<CameraBehaviorContribution, { kind: 'pose' }>,
+    context: CameraElement
+  ): SceneCameraState {
+    const pose = contribution.frame
+      ? this.#composeFramePose(contribution.frame, contribution.pose, context)
+      : contribution.pose;
     return { pose, projection: { ...contribution.projection } };
   }
 
-  #composeFramePose(frameName: string, localPose: ScenePose): ScenePose {
-    const frame = this.#resolveFollowFrame(frameName);
+  #composeFramePose(frameName: string, localPose: ScenePose, context: CameraElement): ScenePose {
+    const frame = this.#resolveFollowFrame(frameName, context);
     if (!frame) throw new DOMException('The camera frame is unresolved.', 'InvalidStateError');
     const matrix = getFrameWorldMatrixPrecise(frame);
     return {
@@ -349,16 +355,16 @@ export class CameraController implements ReactiveController {
     };
   }
 
-  #isCameraFrameResolved(contribution: CameraBehaviorContribution): boolean {
-    if (contribution.kind === 'follow') return this.#resolveFollowFrame(contribution.frame) !== undefined;
+  #isCameraFrameResolved(contribution: CameraBehaviorContribution, context: CameraElement): boolean {
+    if (contribution.kind === 'follow') return this.#resolveFollowFrame(contribution.frame, context) !== undefined;
     if (contribution.kind === 'pose' && contribution.frame) {
-      return this.#resolveFollowFrame(contribution.frame) !== undefined;
+      return this.#resolveFollowFrame(contribution.frame, context) !== undefined;
     }
     return true;
   }
 
-  #resolveFollowFrame(name: string): HTMLElement | undefined {
-    const frame = getNamedSceneFrame(this.#host, name);
+  #resolveFollowFrame(name: string, context: CameraElement): HTMLElement | undefined {
+    const frame = getNamedSceneFrame(this.#host, name, context);
     return frame && isFrameChainValid(frame) ? frame : undefined;
   }
 

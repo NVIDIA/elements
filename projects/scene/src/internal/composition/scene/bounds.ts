@@ -8,7 +8,7 @@ import { getMarkerLayerRenderData, type MarkerLayerRenderData } from '../../laye
 import { getStreamingLayerRenderData } from '../../layers/streaming/layer-state.js';
 import { getLabelLayerRenderData } from '../../layers/labels/layer-state.js';
 import { getMeshRenderData } from '../../layers/mesh/layer-state.js';
-import { takeModelLayerRenderData } from '../../layers/model/layer-state.js';
+import { takeBodyLayerRenderData } from '../../layers/body/layer-state.js';
 import { takePolygonLayerRenderData } from '../../layers/polygon/layer-state.js';
 import { takeHeightfieldLayerRenderData } from '../../layers/heightfield/layer-state.js';
 import type { MeshRenderData } from '../../layers/mesh/render-data.js';
@@ -176,7 +176,7 @@ function includeMesh(bounds: BoundsAccumulator, record: SceneLayerRecord, frame:
 
 function meshData(record: SceneLayerRecord): MeshRenderData | undefined {
   if (record.kind === 'mesh') return getMeshRenderData(record.layer);
-  if (record.kind === 'model') return takeModelLayerRenderData(record.layer);
+  if (record.kind === 'body') return takeBodyLayerRenderData(record.layer);
   if (record.kind === 'polygon') return takePolygonLayerRenderData(record.layer);
   if (record.kind === 'heightfield') return takeHeightfieldLayerRenderData(record.layer);
   return undefined;

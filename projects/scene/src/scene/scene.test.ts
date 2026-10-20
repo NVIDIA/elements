@@ -17,14 +17,14 @@ import {
 } from '../internal/records/layouts/codecs.js';
 import { CubeBuffer, type SceneCubes } from '../cubes/index.js';
 import { takeHeightfieldLayerRenderData } from '../internal/layers/heightfield/layer-state.js';
-import { takeModelLayerRenderData } from '../internal/layers/model/layer-state.js';
+import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 import { takePolygonLayerRenderData } from '../internal/layers/polygon/layer-state.js';
 import { MarkerBuffer } from '../internal/layers/markers/buffer.js';
 import { takeMarkerLayerRenderData } from '../internal/layers/markers/layer-state.js';
 import type { Vec3 } from '../internal/math/types.js';
 import { SceneRenderer, type SceneRenderItem } from '../internal/rendering/renderer.js';
-import { SceneModel } from '../model/model.js';
-import { ScenePart } from '../model/part.js';
+import { SceneBody } from '../body/body.js';
+import { SceneShape } from '../body/shape.js';
 import {
   createLineVertexSource,
   createMarkerSource,
@@ -47,7 +47,7 @@ import '../frame/define.js';
 import '../heightfield/define.js';
 import '../lines/define.js';
 import '../mesh/define.js';
-import '../model/define.js';
+import '../body/define.js';
 import '../points/define.js';
 import '../polygon/define.js';
 import '../triangles/define.js';
@@ -786,17 +786,17 @@ describe(Scene.metadata.tag, () => {
     const gpu = configureFakeWebGPU();
     const render = vi.spyOn(SceneRenderer.prototype, 'render');
     const { element: outer } = await createScene(html`
-      <nve-scene id="outer" aria-label="Outer model scene">
-        <nve-scene-frame id="model-frame" position="[2,3,4]"></nve-scene-frame>
-        <nve-scene id="inner" aria-label="Inner model scene"></nve-scene>
+      <nve-scene id="outer" aria-label="Outer body scene">
+        <nve-scene-frame id="body-frame" position="[2,3,4]"></nve-scene-frame>
+        <nve-scene id="inner" aria-label="Inner body scene"></nve-scene>
       </nve-scene>
     `);
-    const frame = outer.querySelector<SceneFrame>('#model-frame');
+    const frame = outer.querySelector<SceneFrame>('#body-frame');
     const inner = outer.querySelector<Scene>('#inner');
-    if (!frame || !inner) throw new Error('Expected model integration fixtures.');
-    const identity = createModel('identity', 'cube');
-    const instanced = createModel('instanced', 'sphere');
-    const innerModel = createModel('inner-model', 'cone');
+    if (!frame || !inner) throw new Error('Expected body integration fixtures.');
+    const identity = createBody('identity', 'cube');
+    const instanced = createBody('instanced', 'sphere');
+    const innerModel = createBody('inner-body', 'cone');
     const markers = new MarkerBuffer({ records: [{}] });
     const marker = markers.at(0);
     instanced.source = markers;
@@ -830,16 +830,16 @@ describe(Scene.metadata.tag, () => {
       layer: instanced,
       type: 'mesh'
     });
-    expect(takeModelLayerRenderData(identity).positions?.length).toBeGreaterThan(0);
+    expect(takeBodyLayerRenderData(identity).positions?.length).toBeGreaterThan(0);
 
-    const identityPart = identity.querySelector<HTMLElement>(ScenePart.metadata.tag);
-    if (!identityPart) throw new Error('Expected a declarative model part.');
+    const identityPart = identity.querySelector<HTMLElement>(SceneShape.metadata.tag);
+    if (!identityPart) throw new Error('Expected a declarative body shape.');
     identityPart.setAttribute('position', '[1,0,0]');
     await waitForAnimationFrames(2);
 
-    Reflect.set(identity, 'parts', [{ shape: 'cube', position: [1, 0, 0] }]);
+    Reflect.set(identity, 'shapes', [{ kind: 'cube', position: [1, 0, 0] }]);
     await waitForAnimationFrames(2);
-    expect(Reflect.get(identity, 'parts')).not.toBeNull();
+    expect(Reflect.get(identity, 'shapes')).not.toBeNull();
 
     let callCount = render.mock.calls.length;
     identity.hidden = true;
@@ -1391,7 +1391,7 @@ describe(Scene.metadata.tag, () => {
     gpu.resolveNextDevice();
     await element.ready;
     await waitForAnimationFrames(2);
-    expect(errors).toContain('camera-frame-unresolved');
+    expect(errors).toContain('frame-unresolved');
     const beforeUnresolvedCameraState = element.cameraState;
     const first = document.createElement('nve-scene-frame');
     const second = document.createElement('nve-scene-frame');
@@ -1405,11 +1405,11 @@ describe(Scene.metadata.tag, () => {
     await waitForAnimationFrames(2);
     expect(element.cameraState.pose.position[0]).toBeCloseTo(3);
 
-    const resolvedErrorCount = errors.filter(code => code === 'camera-frame-unresolved').length;
+    const resolvedErrorCount = errors.filter(code => code === 'frame-unresolved').length;
     Reflect.set(first, 'position', [0, 0]);
     await waitForAnimationFrames(2);
     expect(element.cameraState.pose.position[0]).toBeCloseTo(3);
-    expect(errors.filter(code => code === 'camera-frame-unresolved')).toHaveLength(resolvedErrorCount + 1);
+    expect(errors.filter(code => code === 'frame-unresolved')).toHaveLength(resolvedErrorCount + 1);
 
     Reflect.set(first, 'position', [5, 0, 0]);
     await waitForAnimationFrames(2);
@@ -2310,13 +2310,13 @@ function createChildListMutation(target: Node, addedNodes: Node[]): MutationReco
   };
 }
 
-function createModel(id: string, shape: ScenePart['shape']): SceneModel {
-  const model = document.createElement(SceneModel.metadata.tag) as SceneModel;
-  const part = document.createElement(ScenePart.metadata.tag) as ScenePart;
-  model.id = id;
-  part.shape = shape;
-  model.append(part);
-  return model;
+function createBody(id: string, kind: SceneShape['kind']): SceneBody {
+  const body = document.createElement(SceneBody.metadata.tag) as SceneBody;
+  const shape = document.createElement(SceneShape.metadata.tag) as SceneShape;
+  body.id = id;
+  shape.kind = kind;
+  body.append(shape);
+  return body;
 }
 
 function setMarkerBytes(layer: HTMLElement): void {

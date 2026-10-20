@@ -30,26 +30,57 @@ import '@nvidia-elements/scene/labels/define.js';
 
 ## First scene
 
+A body is one rigid compound of shapes. Assign `geometry` or author shape children; use `nve-scene-body src`
+when geometry comes from a file. The URL extension selects a lazily loaded decoder; Scene ships STL support.
+
 ```html
-<nve-scene aria-label="visualization" style="height: 480px">
+<nve-scene aria-label="Robot base" style="height: 480px">
+  <nve-scene-camera behavior="orbit" target="[0,0,0.3]" distance="3"></nve-scene-camera>
   <nve-scene-gridlines></nve-scene-gridlines>
-  <nve-scene-axes></nve-scene-axes>
-  <nve-scene-cubes id="cubes"></nve-scene-cubes>
-  <nve-scene-labels id="labels"></nve-scene-labels>
+  <nve-scene-body tint="#76b900">
+    <nve-scene-shape kind="cylinder" position="[0,0,0.15]" scale="[0.58,0.58,0.3]"></nve-scene-shape>
+  </nve-scene-body>
 </nve-scene>
+```
 
-<script type="module">
-  import { LabelBuffer } from '@nvidia-elements/scene/labels';
-  import { CubeBuffer } from '@nvidia-elements/scene/cubes';
+```ts
+import '@nvidia-elements/scene/body/define.js';
+import '@nvidia-elements/scene/camera/define.js';
+import '@nvidia-elements/scene/gridlines/define.js';
+```
 
-  const cubes = new CubeBuffer({ capacity: 2 });
-  const labels = new LabelBuffer({ capacity: 1 });
-  const cube = cubes.add({ color: 'rgb(118 185 0)' });
-  labels.add({ color: 'white', position: [0, 0, 1.4], scale: 18, text: 'origin cube' });
-  cube.position.set(0, 0, 0.5);
-  document.querySelector('#cubes').source = cubes;
-  document.querySelector('#labels').source = labels;
-  cube.position.z = 1;
-  document.querySelector('#cubes').publish({ count: 1, start: 0 });
-</script>
+Load a rigid visual from a file using the same body element:
+
+```html
+<nve-scene-body src="/bodies/robot-base.stl" tint="#76b900"></nve-scene-body>
+```
+
+The fragment supports future sub-asset selection and passes unchanged to the decoder. STL ignores it.
+Await `body.loadComplete` for decoded and captured geometry.
+
+## A model with two joints
+
+A model is the whole entity. Its joints are coordinate frames with one degree of freedom; bodies attach with
+`frame`, and each body contains inert shapes. Each model scopes its joint names, so two models can reuse them.
+
+```html
+<nve-scene aria-label="Articulated arm" style="height: 480px">
+  <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="4"></nve-scene-camera>
+  <nve-scene-model name="arm">
+    <nve-scene-joint name="shoulder" axis="[0,1,0]" value="0.3"></nve-scene-joint>
+    <nve-scene-joint name="elbow" frame="shoulder" axis="[0,1,0]" position="[0,0,1]" value="-0.6"></nve-scene-joint>
+    <nve-scene-body frame="shoulder"><nve-scene-shape position="[0,0,0.5]" scale="[0.1,0.1,1]"></nve-scene-shape></nve-scene-body>
+    <nve-scene-body frame="elbow"><nve-scene-shape position="[0,0,0.4]" scale="[0.1,0.1,0.8]"></nve-scene-shape></nve-scene-body>
+  </nve-scene-model>
+</nve-scene>
+```
+
+```ts
+import '@nvidia-elements/scene/model/define.js';
+import '@nvidia-elements/scene/joint/define.js';
+import '@nvidia-elements/scene/body/define.js';
+import '@nvidia-elements/scene/camera/define.js';
+
+const arm = document.querySelector('nve-scene-model')!;
+arm.joints.set('elbow', -0.8); // radians, applied synchronously
 ```
