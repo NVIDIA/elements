@@ -13,7 +13,7 @@ This product includes the following bundled third-party software:
 - @eslint/js v10.0.1 [MIT] (used by: @nvidia-elements/lint)
   Copyright: Unknown
 
-- @eslint/json v2.1.0 [Apache-2.0] (used by: @nvidia-elements/lint)
+- @eslint/json v2.1.1 [Apache-2.0] (used by: @nvidia-elements/lint)
   Copyright: Nicholas C. Zakas
 
 - @html-eslint/eslint-plugin v0.66.1 [MIT] (used by: @nvidia-elements/lint)
@@ -49,7 +49,7 @@ This product includes the following bundled third-party software:
 - archiver v8.0.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.11.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
+- eslint v10.12.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
 - fast-glob v3.3.3 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
@@ -103,7 +103,7 @@ This product includes the following bundled third-party software:
 - publint v0.3.24 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Bjorn Lu
 
-- sanitize-html v2.17.7 [MIT] (used by: @nvidia-elements/pi)
+- sanitize-html v2.18.0 [MIT] (used by: @nvidia-elements/pi)
   Copyright: Apostrophe Technologies, Inc.
 
 - ts-morph v28.0.0 [MIT] (used by: @nvidia-elements/pi)
@@ -122,7 +122,7 @@ Apache-2.0
 The following bundled components are provided under the Apache-2.0 license:
 
 @eslint/css v2.0.0 - Copyright Nicholas C. Zakas
-@eslint/json v2.1.0 - Copyright Nicholas C. Zakas
+@eslint/json v2.1.1 - Copyright Nicholas C. Zakas
 
                                  Apache License
                            Version 2.0, January 2004
@@ -354,7 +354,7 @@ The following bundled components are provided under the MIT license:
 @pnpm/workspace.read-manifest v2.2.0 - Copyright Unknown
 adm-zip v0.6.1 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-eslint v10.11.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+eslint v10.12.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 fflate v0.8.3 - Copyright Arjun Barrett <arjunbarrett@gmail.com>
 html-format v1.1.7 - Copyright Mohamed Akram
@@ -369,7 +369,7 @@ open v11.0.4 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindres
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.24 - Copyright Bjorn Lu
-sanitize-html v2.17.7 - Copyright Apostrophe Technologies, Inc.
+sanitize-html v2.18.0 - Copyright Apostrophe Technologies, Inc.
 ts-morph v28.0.0 - Copyright David Sherret
 yargs v18.2.0 - Copyright Unknown
 zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
