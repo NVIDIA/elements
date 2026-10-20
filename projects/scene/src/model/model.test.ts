@@ -4,7 +4,7 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import { SceneModel, type SceneModelJoints } from './index.js';
+import { SceneModel, type SceneModelBodies, type SceneModelJoints } from './index.js';
 import { CameraController } from '../internal/composition/camera/camera.controller.js';
 import { SceneContent } from '../internal/composition/scene/content.js';
 import { getNamedSceneFrame, isFrameChainValid } from '../internal/composition/frame/state.js';
@@ -25,7 +25,7 @@ function composition() {
   const errors: SceneErrorDetail[] = [];
   scene.addEventListener('nve-scene-error', event => errors.push(event.detail));
   const unrelated = document.createElement('nve-scene-body');
-  unrelated.geometry = [{ kind: 'cube' }];
+  unrelated.geometry = [{ type: 'cube' }];
   scene.append(unrelated);
   return {
     scene,
@@ -47,11 +47,17 @@ function arm(name: string) {
   joint.type = 'prismatic';
   const tip = document.createElement('nve-scene-frame');
   tip.name = 'tcp';
-  tip.frame = 'shoulder';
+  tip.frame = 'driven';
+  joint.parent = 'base';
+  joint.child = 'driven';
+  const base = document.createElement('nve-scene-body');
+  base.name = 'base';
+  const driven = document.createElement('nve-scene-body');
+  driven.name = 'driven';
   const body = document.createElement('nve-scene-body');
   body.frame = 'tcp';
-  body.geometry = [{ kind: 'cube' }];
-  model.append(joint, tip, body);
+  body.geometry = [{ type: 'cube' }];
+  model.append(base, driven, joint, tip, body);
   return { model, joint, tip, body };
 }
 
@@ -85,7 +91,11 @@ describe(SceneModel.metadata.tag, () => {
     follower.type = 'prismatic';
     follower.name = 'follower';
     follower.mimic = 'shoulder';
-    first.model.append(follower);
+    follower.parent = 'base';
+    follower.child = 'follower-body';
+    const followerBody = document.createElement('nve-scene-body');
+    followerBody.name = 'follower-body';
+    first.model.append(followerBody, follower);
     resolve();
     first.model.joints.set('shoulder', 3);
     expect(follower.pose.position[0]).toBe(3);
@@ -110,7 +120,8 @@ describe(SceneModel.metadata.tag, () => {
     inner.model.append(reference);
     const anchor = document.createElement('nve-scene-frame');
     anchor.name = 'anchor';
-    anchor.setPose({ position: [4, 0, 0], orientation: [0, 0, 0, 1] });
+    anchor.position = [4, 0, 0];
+    anchor.orientation = [0, 0, 0, 1];
     outer.model.append(anchor);
     resolve();
     expect(reference.getWorldMatrix()[12]).toBe(4);
@@ -118,7 +129,8 @@ describe(SceneModel.metadata.tag, () => {
     expect(getNamedSceneFrame(scene, ' outer / inner / tcp ')).toBe(inner.tip);
     const local = document.createElement('nve-scene-frame');
     local.name = 'anchor';
-    local.setPose({ position: [7, 0, 0], orientation: [0, 0, 0, 1] });
+    local.position = [7, 0, 0];
+    local.orientation = [0, 0, 0, 1];
     inner.model.append(local);
     resolve();
     expect(reference.getWorldMatrix()[12]).toBe(7);
@@ -153,6 +165,57 @@ describe(SceneModel.metadata.tag, () => {
     expectTypeOf<Extract<keyof SceneModel, 'src' | 'description' | 'source'>>().toEqualTypeOf<never>();
   });
 
+  it('assigns a record of joint values and reports unknown names without skipping known joints', () => {
+    const { scene, errors, resolve } = composition();
+    const entity = arm('arm');
+    const follower = document.createElement('nve-scene-joint');
+    follower.name = 'follower';
+    follower.mimic = 'shoulder';
+    entity.model.append(follower);
+    scene.append(entity.model);
+    resolve();
+    const view = entity.model.joints;
+    view.set({ shoulder: 1, follower: 5 });
+    expect(view.values()).toEqual({ shoulder: 1, follower: 5 });
+    view.set({ ' shoulder ': 3, missing: 4 });
+    expect(entity.joint.value).toBe(3);
+    expect(errors).toContainEqual(expect.objectContaining({ code: 'model-joint', element: entity.model }));
+    expect(isFrameChainValid(entity.body)).toBe(false);
+    view.set(view.values());
+    expect(isFrameChainValid(entity.body)).toBe(true);
+    expectTypeOf(view.set).toBeCallableWith({ shoulder: 1 });
+    expectTypeOf(view.set).toBeCallableWith('shoulder', 1);
+  });
+
+  it('views bodies named in its own frame scope and follows membership changes', () => {
+    const entity = arm('arm');
+    const view = entity.model.bodies;
+    expect(Object.isFrozen(view)).toBe(true);
+    expect(view.names()).toEqual(['base', 'driven']);
+    expect(view.get('base')).toBe(entity.model.querySelector('nve-scene-body'));
+    expect(view.get(' driven ')?.name).toBe('driven');
+    expect(view.has('tcp')).toBe(false);
+    const nested = document.createElement('nve-scene-model');
+    nested.name = 'gripper';
+    const jaw = document.createElement('nve-scene-body');
+    jaw.name = 'jaw';
+    nested.append(jaw);
+    entity.model.append(nested);
+    expect(view.has('jaw')).toBe(false);
+    expect(nested.bodies.get('jaw')).toBe(jaw);
+    const shadow = document.createElement('nve-scene-frame');
+    shadow.name = 'base';
+    entity.model.append(shadow);
+    expect(view.get('base')).toBeUndefined();
+    shadow.remove();
+    jaw.name = 'tool';
+    entity.model.append(jaw);
+    expect(view.names()).toEqual(['base', 'driven', 'tool']);
+    jaw.remove();
+    expect(view.has('tool')).toBe(false);
+    expectTypeOf<SceneModel['bodies']>().toEqualTypeOf<SceneModelBodies>();
+  });
+
   it('reports unknown joints on the model, invalidates its chain, and recovers on a valid access', () => {
     const { scene, content, unrelated, errors, resolve } = composition();
     const entity = arm('arm');
@@ -161,7 +224,12 @@ describe(SceneModel.metadata.tag, () => {
     entity.model.joints.set('missing', 1);
     expect(errors).toContainEqual(expect.objectContaining({ code: 'model-joint', element: entity.model }));
     expect(isFrameChainValid(entity.body)).toBe(false);
-    expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+    expect(
+      content
+        .compileRenderItems()
+
+        .map(item => item.layer)
+    ).toEqual([unrelated]);
     entity.model.joints.set('shoulder', 1);
     expect(isFrameChainValid(entity.body)).toBe(true);
   });
@@ -174,15 +242,27 @@ describe(SceneModel.metadata.tag, () => {
     resolve();
     expect(errors).toContainEqual(expect.objectContaining({ code: 'frame-name', element: entity.joint }));
     expect(isFrameChainValid(entity.joint)).toBe(false);
-    expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+    expect(
+      content
+        .compileRenderItems()
+
+        .map(item => item.layer)
+    ).toEqual([unrelated]);
     entity.joint.name = 'shoulder';
-    const duplicate = document.createElement('nve-scene-frame');
+    const duplicate = document.createElement('nve-scene-joint');
     duplicate.name = 'shoulder';
+    duplicate.parent = 'base';
+    duplicate.child = 'driven';
     entity.model.append(duplicate);
     resolve();
     expect(errors.filter(error => error.code === 'frame-name-duplicate')).toHaveLength(2);
     expect(isFrameChainValid(entity.tip)).toBe(false);
-    expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+    expect(
+      content
+        .compileRenderItems()
+
+        .map(item => item.layer)
+    ).toEqual([unrelated]);
     duplicate.remove();
     resolve();
     expect(isFrameChainValid(entity.tip)).toBe(true);
@@ -195,13 +275,18 @@ describe(SceneModel.metadata.tag, () => {
     resolve();
     expect(isFrameChainValid(entity.body)).toBe(true);
     const outside = document.createElement('nve-scene-body');
-    outside.geometry = [{ kind: 'cube' }];
+    outside.geometry = [{ type: 'cube' }];
     outside.frame = 'arm/tcp';
     scene.append(outside);
     resolve();
     expect(errors).toContainEqual(expect.objectContaining({ code: 'model-name', element: entity.model }));
     expect(isFrameChainValid(entity.body)).toBe(false);
-    expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+    expect(
+      content
+        .compileRenderItems()
+
+        .map(item => item.layer)
+    ).toEqual([unrelated]);
     resolve();
     expect(errors.filter(error => error.code === 'model-name')).toHaveLength(1);
     outside.frame = null;
@@ -269,7 +354,7 @@ describe(SceneModel.metadata.tag, () => {
     configureSceneTesting({ requestAdapter: async () => null });
     vi.spyOn(console, 'error').mockImplementation(() => {});
     fixture = await createFixture(html`<nve-scene aria-label="Models">
-      <nve-scene-model name="arm"><nve-scene-joint name="shoulder" type="prismatic" value="3"></nve-scene-joint><nve-scene-frame name="tcp" frame="shoulder"></nve-scene-frame></nve-scene-model>
+      <nve-scene-model name="arm"><nve-scene-body name="base"></nve-scene-body><nve-scene-body name="driven"></nve-scene-body><nve-scene-joint name="shoulder" parent="base" child="driven" type="prismatic" value="3"></nve-scene-joint><nve-scene-frame name="tcp" frame="driven"></nve-scene-frame></nve-scene-model>
       <nve-scene-camera behavior="follow" frame="arm/tcp"></nve-scene-camera><nve-scene-camera behavior="orbit"></nve-scene-camera>
     </nve-scene>`);
     const scene = fixture.querySelector('nve-scene')!;

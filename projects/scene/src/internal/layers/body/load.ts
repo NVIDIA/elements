@@ -19,7 +19,13 @@ export interface LoadGeometryOptions {
   readonly signal?: AbortSignal;
 }
 
-/** Decodes captured bytes without changing their coordinates or units. */
+/**
+ * Decodes body geometry without an element, registration, or WebGPU. Uses the shared lazy
+ * decoder registry and requires an explicit format. Captures an ArrayBuffer or the selected
+ * byte range of an array view before asynchronous decoding; preserves coordinates and units.
+ * The optional signal cancels work. Fragment passes unchanged to the decoder, including #
+ * when supplied. STL ignores fragments. File input has a 256 MiB limit.
+ */
 export async function decodeGeometry(
   bytes: ArrayBuffer | ArrayBufferView,
   options: DecodeGeometryOptions
@@ -34,7 +40,14 @@ export async function decodeGeometry(
   return geometry;
 }
 
-/** Fetches and decodes a geometry file independently of any scene element. */
+/**
+ * Fetches and decodes body nodes independently of any scene element or WebGPU device.
+ * Omitted format uses the case-insensitive URL path extension, ignoring query and fragment;
+ * unsupported or missing extensions reject before fetching. An explicit format overrides
+ * dispatch. The original fragment, including # and percent escapes, passes to the decoder
+ * for sub-asset selection. Accepts an abort signal and enforces a 256 MiB file limit on
+ * response headers and streamed bytes. Does not change file coordinates or units.
+ */
 export async function loadGeometry(url: string | URL, options: LoadGeometryOptions = {}): Promise<SceneBodyGeometry> {
   options.signal?.throwIfAborted();
   const format = options.format ?? inferGeometryFormat(url);

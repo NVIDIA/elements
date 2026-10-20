@@ -7,7 +7,7 @@ import type { Scene } from '../scene/scene.js';
 import type { SceneBody } from './body.js';
 
 describe('scene body STL visual runtime', () => {
-  test('renders a loaded STL inside a frame, matches mesh pixels, picks it, and applies tint', async () => {
+  test('renders a loaded STL mesh part inside a frame, matches mesh pixels, picks it, and applies tint', async () => {
     const result = await visualRunner.inspect('scene-body-src', assetTemplate(), page =>
       page.evaluate(async () => {
         const scene = document.querySelector<Scene>('#asset-scene');
@@ -67,7 +67,7 @@ function assetTemplate(): string {
   return /* html */ `
     <nve-scene id="asset-scene" style="width:256px;height:256px;background:black">
       ${camera}
-      <nve-scene-frame name="arm" position="[1,0,0]"><nve-scene-body id="asset-body" src="/triangle.stl" tint="#76b900" feature-id="7"></nve-scene-body></nve-scene-frame>
+      <nve-scene-frame name="arm" position="[1,0,0]"><nve-scene-body id="asset-body" tint="#76b900" feature-id="7"><nve-scene-mesh src="/triangle.stl"></nve-scene-mesh></nve-scene-body></nve-scene-frame>
     </nve-scene>
     <nve-scene id="reference-scene" style="width:256px;height:256px;background:black">
       ${camera}

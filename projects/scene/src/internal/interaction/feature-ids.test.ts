@@ -11,7 +11,6 @@ import {
   resolveSceneFeatureId,
   setSceneFeatureId,
   setSceneFeatureIds,
-  takeSceneFeatureIdListSnapshot,
   takeSceneFeatureIdSnapshot,
   type SceneFeatureIds
 } from './feature-ids.js';
@@ -146,43 +145,8 @@ describe('scene feature IDs', () => {
     });
   });
 
-  it('preserves missing, zero, and uint32-max identities in declarative lists', () => {
-    const sources = [createSource(1), createSource(1), createSource(1)];
-    setSceneFeatureId(sources[1]!, 0, 0);
-    setSceneFeatureId(sources[2]!, 0, 0xffffffff);
-    sources.forEach(publishSceneFeatureIds);
-
-    const snapshot = takeSceneFeatureIdListSnapshot(sources);
-    expect(takeSceneFeatureIdListSnapshot(sources)).toBe(snapshot);
-    expect([0, 1, 2].map(index => resolveSceneFeatureId(snapshot, index))).toEqual([undefined, 0, 0xffffffff]);
-
-    setSceneFeatureId(sources[1]!, 0, 42);
-    publishSceneFeatureIds(sources[1]!);
-    expect(takeSceneFeatureIdListSnapshot(sources)).not.toBe(snapshot);
-  });
-
-  it('builds declarative validity across byte boundaries without changing a cached snapshot', () => {
-    const sources = Array.from({ length: 10 }, () => createSource(1));
-    const seventh = sources[7];
-    const eighth = sources[8];
-    if (!seventh || !eighth) throw new Error('Expected ten sources.');
-    setSceneFeatureId(seventh, 0, 0);
-    setSceneFeatureId(eighth, 0, 0xffffffff);
-    sources.forEach(publishSceneFeatureIds);
-    const first = takeSceneFeatureIdListSnapshot(sources);
-    expect([7, 8, 9].map(index => resolveSceneFeatureId(first, index))).toEqual([0, 0xffffffff, undefined]);
-
-    setSceneFeatureId(seventh, 0, undefined);
-    publishSceneFeatureIds(seventh);
-    const second = takeSceneFeatureIdListSnapshot(sources);
-    expect(second).not.toBe(first);
-    expect(resolveSceneFeatureId(second, 7)).toBeUndefined();
-    expect(resolveSceneFeatureId(second, 8)).toBe(0xffffffff);
-    expect(resolveSceneFeatureId(first, 7)).toBe(0);
-  });
-
   it('treats unregistered objects as unidentified and rejects invalid capacities', () => {
-    expect(resolveSceneFeatureId(takeSceneFeatureIdListSnapshot([{}]), 0)).toBeUndefined();
+    expect(resolveSceneFeatureId(takeSceneFeatureIdSnapshot({}, 1), 0)).toBeUndefined();
     expect(() => registerSceneFeatureIdSource({}, -1)).toThrow(RangeError);
     expect(() => registerSceneFeatureIdSource({}, 0.5)).toThrow(RangeError);
   });

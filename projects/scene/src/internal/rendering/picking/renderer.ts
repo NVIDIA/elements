@@ -18,6 +18,7 @@ import {
 } from '../render-items.js';
 import { resolveSceneFeatureId, type SceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
 import { RangeMap, type RangeMapEntry } from '../../structures/range-map.js';
+import { lineSegmentEnd, lineSegmentStart } from '../../algorithms/line-topology.js';
 
 const PICK_ATTEMPTS = 2;
 const PICK_FRAME_CHANGED = Symbol('pick-frame-changed');
@@ -424,8 +425,8 @@ export function createPickTargetDecoder(item: SceneRenderItem): (index: number) 
       });
   }
   return index => {
-    const first = item.topology === 'segments' ? index * 2 : index;
-    const second = item.topology === 'loop' ? (first + 1) % item.data.count : first + 1;
+    const first = lineSegmentStart(index, item.topology);
+    const second = lineSegmentEnd(index, item.data.count, item.topology);
     return Object.freeze({
       index,
       kind: 'segment',

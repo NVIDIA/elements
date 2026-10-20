@@ -9,7 +9,7 @@ import type { SceneColor, RGBA } from '../../color/types.js';
 import {
   createPrimitiveGeometry,
   type PrimitiveGeometry,
-  type ScenePrimitiveKind
+  type ScenePrimitiveType
 } from '../../math/primitive-geometry.js';
 import type { Quaternion, Vec3 } from '../../math/types.js';
 
@@ -21,11 +21,11 @@ export interface BodyShape {
   readonly orientation?: Readonly<Quaternion>;
   readonly position?: Readonly<Vec3>;
   readonly scale?: Readonly<Vec3>;
-  readonly kind: ScenePrimitiveKind;
+  readonly type: ScenePrimitiveType;
 }
 
 /** The unit shapes that may compose a scene body. */
-type BodyPrimitive = ScenePrimitiveKind;
+type BodyPrimitive = ScenePrimitiveType;
 type BodyPrimitiveGeometry = PrimitiveGeometry;
 
 /** Checked body input shared by direct, bulk, and declarative compilation. */
@@ -34,7 +34,7 @@ export interface NormalizedBodyShape {
   readonly position: Readonly<Vec3>;
   readonly orientation: Readonly<Quaternion>;
   readonly scale: Readonly<Vec3>;
-  readonly kind: BodyShape['kind'];
+  readonly type: BodyShape['type'];
 }
 
 const MAX_UINT32 = 0xffff_ffff;
@@ -51,15 +51,15 @@ const primitiveGeometries = new Map<BodyPrimitive, BodyPrimitiveGeometry>();
  * Returns the exact unit tessellation used by the corresponding marker layer.
  * The geometry stores interleaved xyz position and xyz normal vertex data.
  */
-export function createBodyPrimitiveGeometry(kind: BodyPrimitive): BodyPrimitiveGeometry {
-  return createPrimitiveGeometry(kind);
+export function createBodyPrimitiveGeometry(type: BodyPrimitive): BodyPrimitiveGeometry {
+  return createPrimitiveGeometry(type);
 }
 
-function getBodyPrimitiveGeometry(kind: BodyPrimitive): BodyPrimitiveGeometry {
-  let geometry = primitiveGeometries.get(kind);
+function getBodyPrimitiveGeometry(type: BodyPrimitive): BodyPrimitiveGeometry {
+  let geometry = primitiveGeometries.get(type);
   if (!geometry) {
-    geometry = createBodyPrimitiveGeometry(kind);
-    primitiveGeometries.set(kind, geometry);
+    geometry = createBodyPrimitiveGeometry(type);
+    primitiveGeometries.set(type, geometry);
   }
   return geometry;
 }
@@ -93,7 +93,7 @@ export function compileNormalizedShapes(shapes: readonly NormalizedBodyShape[]):
 }
 
 function prepareShape(shape: NormalizedBodyShape): MeshAssemblyPart {
-  const source = getBodyPrimitiveGeometry(shape.kind);
+  const source = getBodyPrimitiveGeometry(shape.type);
   return {
     positions: { values: source.vertices, offset: 0, stride: 6 },
     normals: { values: source.vertices, offset: 3, stride: 6 },
@@ -108,21 +108,21 @@ export function normalizeBodyShape(shape: unknown, path: string): NormalizedBody
   if (!isBodyShapeObject(shape)) {
     throw new TypeError(`${path} must be an object.`);
   }
-  if (!isBodyPrimitive(shape.kind)) throw new TypeError(`${path}.kind must name a supported primitive.`);
+  if (!isBodyPrimitive(shape.type)) throw new TypeError(`${path}.type must name a supported primitive.`);
   const position = checkVec3(shape.position ?? DEFAULT_POSITION, `${path}.position`);
   const orientation = normalizeQuaternion(
     checkQuaternion(shape.orientation ?? DEFAULT_ORIENTATION, `${path}.orientation`)
   );
   const scale = checkScale(shape.scale ?? DEFAULT_SCALE, `${path}.scale`);
   const color = checkColor(shape.color ?? DEFAULT_COLOR, `${path}.color`);
-  return { color, position, orientation, scale, kind: shape.kind };
+  return { color, position, orientation, scale, type: shape.type };
 }
 
 function isBodyShapeObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-function isBodyPrimitive(value: unknown): value is BodyShape['kind'] {
+function isBodyPrimitive(value: unknown): value is BodyShape['type'] {
   return value === 'cube' || value === 'sphere' || value === 'cylinder' || value === 'cone' || value === 'pyramid';
 }
 

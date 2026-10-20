@@ -9,7 +9,7 @@ import {
 } from '../../diagnostics/errors.js';
 import { takeSceneFeatureIdSnapshot, type SceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
 import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from './instance-buffer.js';
-import { getSceneLayerSpec, SCENE_SHAPE_TAG } from '../registry.js';
+import { getSceneLayerSpec, isSceneBodyPart, SCENE_SHAPE_TAG } from '../registry.js';
 import {
   getPackedRecordBytes,
   getPackedRecordKind,
@@ -18,6 +18,7 @@ import {
   type ScenePublishOptions
 } from '../../records/packed-record-source.js';
 import {
+  packedPublicationNeedsRender,
   publishPackedSourceGeneration,
   resolvePackedSourcePublication,
   type PackedSourcePublication
@@ -61,7 +62,7 @@ const layerStates = new WeakMap<HTMLElement, MarkerLayerState>();
 
 export function registerMarkerLayer(layer: HTMLElement, kind: PrimitiveKind): void {
   layerStates.set(layer, {
-    buffer: new MarkerInstanceBuffer(),
+    buffer: new MarkerInstanceBuffer(kind),
     childError: false,
     count: undefined,
     kind,
@@ -127,6 +128,7 @@ export function publishLayerInstances(layer: HTMLElement, options?: ScenePublish
   const state = getLayerState(layer);
   const source = state.source;
   if (source === null) return;
+  const previousPublicationError = state.publicationError;
   const publication = resolvePackedSourcePublication({
     currentActiveCount: state.sourceCount,
     currentSourceVersion: state.sourceVersion,
@@ -135,7 +137,8 @@ export function publishLayerInstances(layer: HTMLElement, options?: ScenePublish
     unavailableStateMessage: 'Packed marker source state is unavailable.'
   });
   state.publicationError = !markerPublicationIsValid(source, publication.resolved.activeCount);
-  const visualChanged = applyValidPublication(source, state, publication);
+  if (!state.publicationError) applyValidPublication(source, state, publication);
+  const visualChanged = packedPublicationNeedsRender(publication, state, previousPublicationError);
   updateBufferIssues(layer, state);
   state.version += 1;
   notifyOwningScene(layer, visualChanged ? 'render' : 'identity');
@@ -193,13 +196,11 @@ function applyValidPublication(
   source: AnyPackedRecordSource<'marker'>,
   state: MarkerLayerState,
   publication: PackedSourcePublication
-): boolean {
-  if (state.publicationError) return false;
+): void {
   if (publication.geometryChanged) state.buffer.commit(publication.resolved.start, publication.resolved.count);
   state.sourceCount = publication.resolved.activeCount;
   state.buffer.setSourceCount(publication.resolved.activeCount);
   state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
-  return publication.visualChanged;
 }
 
 function markerPublicationIsValid(source: AnyPackedRecordSource<'marker'>, activeCount: number): boolean {
@@ -212,13 +213,13 @@ function markerPublicationIsValid(source: AnyPackedRecordSource<'marker'>, activ
 
 function validateLayerChildren(layer: HTMLElement, state: MarkerLayerState): void {
   const body = getSceneLayerSpec(layer.localName)?.kind === 'body';
-  state.childError = [...layer.children].some(child => !body || child.localName !== SCENE_SHAPE_TAG);
+  state.childError = [...layer.children].some(child => !body || !isBodyChild(child));
   diagnosticReporterService.update({
     active: state.childError,
     code: LAYER_CHILD,
     element: layer,
     message: body
-      ? 'Scene bodies allow only direct scene shape children.'
+      ? 'Scene bodies allow only direct scene shape and mesh children.'
       : 'Source-backed instance layers do not accept element children.',
     severity: 'error'
   });
@@ -282,4 +283,8 @@ function getLayerState(layer: HTMLElement): MarkerLayerState {
   const state = layerStates.get(layer);
   if (!state) throw new TypeError('Element is not a registered marker layer.');
   return state;
+}
+
+function isBodyChild(child: Element): boolean {
+  return child.localName === SCENE_SHAPE_TAG || isSceneBodyPart(child);
 }

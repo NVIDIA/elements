@@ -17,7 +17,8 @@ import '../points/define.js';
 function frame(name: string, position: Vec3 = [0, 0, 0]): SceneFrame {
   const element = document.createElement('nve-scene-frame');
   element.name = name;
-  element.setPose({ position, orientation: [0, 0, 0, 1] });
+  element.position = position;
+  element.orientation = [0, 0, 0, 1];
   return element;
 }
 
@@ -27,7 +28,7 @@ function composition() {
   scene.addEventListener('nve-scene-error', event => errors.push(event.detail));
   const content = new SceneContent(scene);
   const body = document.createElement('nve-scene-body');
-  body.geometry = [{ kind: 'cube' }];
+  body.geometry = [{ type: 'cube' }];
   scene.append(body);
   return {
     scene,
@@ -56,7 +57,7 @@ describe('coordinate frame references', () => {
     moving.frame = 'late';
     scene.append(moving);
     const attached = document.createElement('nve-scene-body');
-    attached.geometry = [{ kind: 'cube' }];
+    attached.geometry = [{ type: 'cube' }];
     attached.frame = 'moving';
     scene.append(attached);
     resolve();
@@ -142,7 +143,8 @@ describe('coordinate frame references', () => {
   it('matches nested world matrices while mixing referenced and nested parents', () => {
     const { scene, resolve } = composition();
     const root = frame('root', [1, 0, 0]);
-    root.setPose({ position: [1, 0, 0], orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2] });
+    root.position = [1, 0, 0];
+    root.orientation = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
     const nested = frame('nested', [2, 0, 0]);
     const expected = frame('expected', [1, 0, 0]);
     const referenced = frame('referenced', [1, 0, 0]);
@@ -166,7 +168,7 @@ describe('coordinate frame references', () => {
     const child = frame('child', [0, 3, 0]);
     child.frame = 'root';
     const attached = document.createElement('nve-scene-body');
-    attached.geometry = [{ kind: 'cube' }];
+    attached.geometry = [{ type: 'cube' }];
     attached.frame = 'child';
     const points = document.createElement('nve-scene-points');
     points.frame = 'child';
@@ -177,11 +179,12 @@ describe('coordinate frame references', () => {
     root.hidden = true;
     expect(content.compileRenderItems().map(item => item.layer)).toEqual([body]);
     root.hidden = false;
-    root.setPose({ position: [NaN, 0, 0], orientation: [0, 0, 0, 1] });
+    root.position = [NaN, 0, 0];
+    root.orientation = [0, 0, 0, 1];
     expect(isFrameChainValid(attached)).toBe(false);
     expect(isFrameChainValid(points)).toBe(false);
     expect(content.compileRenderItems().map(item => item.layer)).toEqual([body]);
-    root.setPose(null);
+    root.position = null;
     expect(content.compileRenderItems()).toHaveLength(3);
   });
 

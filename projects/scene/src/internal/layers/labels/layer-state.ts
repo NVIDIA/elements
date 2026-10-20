@@ -14,6 +14,7 @@ import type { LabelSource } from './buffer.js';
 import type { ScenePublishOptions } from '../../records/packed-record-source.js';
 import type { RangeInterval } from '../../structures/range-set.js';
 import {
+  packedPublicationNeedsRender,
   publishPackedSourceGeneration,
   resolvePackedSourcePublication,
   type PackedSourcePublication
@@ -111,10 +112,8 @@ export function publishLabelLayer(layer: HTMLElement, options?: ScenePublishOpti
   const sourceBytes = getPackedRecordBytes(source);
   const candidateReady = state.buffer.sourceRecordsAreValid(sourceBytes, publication.resolved.activeCount);
   state.publicationError = !candidateReady;
-  let visualChanged = previousPublicationError !== state.publicationError;
-  if (!state.publicationError) {
-    visualChanged = applySuccessfulLabelPublication({ publication, source, state }) || visualChanged;
-  }
+  const textChanged = !state.publicationError && applySuccessfulLabelPublication({ publication, source, state });
+  const visualChanged = packedPublicationNeedsRender(publication, state, previousPublicationError) || textChanged;
   updateDiagnostics(layer, state);
   notifyOwningScene(layer, visualChanged ? 'render' : 'identity');
 }
@@ -135,7 +134,7 @@ function applySuccessfulLabelPublication(options: {
   if (textChanged) state.textVersion += 1;
   state.version += 1;
   state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
-  return publication.visualChanged || textChanged;
+  return textChanged;
 }
 
 function replaceLabelSource(state: LabelLayerState, source: LabelSource | null): void {

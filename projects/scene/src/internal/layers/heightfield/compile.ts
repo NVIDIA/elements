@@ -4,13 +4,7 @@
 import type { HeightfieldGrid } from './types.js';
 import { decodeUnorm8 } from '../../color/rgba8.js';
 import { writeGridNormal, type UniformScalarGrid } from '../../math/grid-gradient.js';
-import {
-  createHeightfieldIndices,
-  getHeightfieldTopology,
-  hasSameHeightfieldTopology,
-  prepareHeightfieldIndices,
-  type HeightfieldTopology
-} from './topology.js';
+import { createHeightfieldIndices, prepareHeightfieldIndices } from './topology.js';
 import {
   beginPreparation,
   resumePreparation,
@@ -30,8 +24,6 @@ interface CompiledHeightfield {
   readonly colors: Float32Array | null;
   readonly indices: Uint32Array;
 }
-
-const compiledTopologies = new WeakMap<CompiledHeightfield, HeightfieldTopology>();
 
 /** Check a grid before compiling or assigning it to a heightfield element. */
 export function validateHeightfieldGrid(grid: HeightfieldGrid): void {
@@ -77,14 +69,12 @@ function validateColors(grid: HeightfieldGrid): void {
 export function compileHeightfield(grid: HeightfieldGrid): CompiledHeightfield {
   validateHeightfieldGrid(grid);
   const positions = createPositions(grid);
-  const compiled = {
+  return {
     positions,
     normals: createNormals(grid),
     colors: createColors(grid.colors),
     indices: createHeightfieldIndices(grid.rows, grid.columns)
   };
-  compiledTopologies.set(compiled, getHeightfieldTopology(grid));
-  return compiled;
 }
 
 /** Compiles an already validated grid in bounded tasks and honors generation cancellation. */
@@ -101,29 +91,7 @@ export async function prepareHeightfield(
   if (colors === undefined) return undefined;
   const indices = await prepareHeightfieldIndices(grid.rows, grid.columns, context);
   if (!indices) return undefined;
-  const compiled = { colors, indices, normals, positions };
-  compiledTopologies.set(compiled, getHeightfieldTopology(grid));
-  return compiled;
-}
-
-/**
- * Rebuild mutable heightfield attributes while retaining known-safe topology.
- * Dimensions and spacing must match the previous grid's topology; origin and
- * colors may change and update the returned mesh data.
- */
-export function recomputeHeightfield(grid: HeightfieldGrid, previous: CompiledHeightfield): CompiledHeightfield {
-  validateHeightfieldGrid(grid);
-  if (!hasSameHeightfieldTopology(compiledTopologies.get(previous), grid)) {
-    throw new RangeError('Grid topology does not match the previously compiled heightfield.');
-  }
-  const compiled = {
-    positions: createPositions(grid),
-    normals: createNormals(grid),
-    colors: createColors(grid.colors),
-    indices: previous.indices
-  };
-  compiledTopologies.set(compiled, getHeightfieldTopology(grid));
-  return compiled;
+  return { colors, indices, normals, positions };
 }
 
 function validateDimension(value: number, name: 'rows' | 'columns'): void {

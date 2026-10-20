@@ -5,6 +5,7 @@ import { MARKER } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import type { Matrix4 } from '../../math/types.js';
 import { multiplyMat4Into } from '../../math/mat4.js';
+import { scaledEnclosingRadius } from '../../math/bounds.js';
 import { BoundsSegmentTree } from '../../structures/bounds-segment-tree.js';
 import { classifyAabbFrustum, type AabbBounds, type FrustumRelation } from '../../math/frustum.js';
 
@@ -23,14 +24,23 @@ export type MarkerBounds = AabbBounds;
 
 type MarkerFrustumRelation = FrustumRelation;
 
-/** Block-indexed local bounds for prefix queries and bounded partial updates. */
+/**
+ * Block-indexed local bounds for prefix queries and bounded partial updates. Each visible record contributes the
+ * cube around its `scaledEnclosingRadius`, which stays conservative under any orientation.
+ */
 export class MarkerBoundsIndex {
   #blocks = new BoundsSegmentTree();
   #queryBounds = new Float64Array(6);
   #recordBounds = new Float64Array(6);
+  readonly #unitRadius: number;
+
+  /** Takes the `unitScaleEnclosingRadius` of the primitive that every record scales, rotates, and positions. */
+  constructor(unitRadius: number) {
+    this.#unitRadius = unitRadius;
+  }
 
   clone(): MarkerBoundsIndex {
-    const clone = new MarkerBoundsIndex();
+    const clone = new MarkerBoundsIndex(this.#unitRadius);
     clone.#blocks = this.#blocks.clone();
     return clone;
   }
@@ -44,8 +54,16 @@ export class MarkerBoundsIndex {
     this.#includeBounds(index);
   }
 
+  /** Includes a finite record position and its largest absolute scale, the inlined `scaledEnclosingRadius` input. */
   // eslint-disable-next-line max-params -- @hotpath This bulk scan avoids allocating one tuple per marker record.
-  includeRecordValues(index: number, positionX: number, positionY: number, positionZ: number, radius: number): void {
+  includeRecordValues(
+    index: number,
+    positionX: number,
+    positionY: number,
+    positionZ: number,
+    largestScale: number
+  ): void {
+    const radius = this.#unitRadius * largestScale;
     this.#recordBounds[0] = positionX - radius;
     this.#recordBounds[1] = positionY - radius;
     this.#recordBounds[2] = positionZ - radius;
@@ -88,7 +106,12 @@ export class MarkerBoundsIndex {
     const positionX = readFloat(source, floatOffset, byteOffset);
     const positionY = readFloat(source, floatOffset + 1, byteOffset + 4);
     const positionZ = readFloat(source, floatOffset + 2, byteOffset + 8);
-    const radius = readRadius(source, floatOffset, byteOffset);
+    const radius = scaledEnclosingRadius(
+      this.#unitRadius,
+      readFloat(source, floatOffset + 7, byteOffset + 28),
+      readFloat(source, floatOffset + 8, byteOffset + 32),
+      readFloat(source, floatOffset + 9, byteOffset + 36)
+    );
     if (!Number.isFinite(positionX + positionY + positionZ + radius)) return false;
     this.#recordBounds[0] = positionX - radius;
     this.#recordBounds[1] = positionY - radius;
@@ -119,14 +142,6 @@ function recordIsVisible(bytes: Uint8Array, byteOffset: number): boolean {
 function readFloat(source: MarkerBoundsSource, floatOffset: number, byteOffset: number): number {
   if (source.floats) return source.floats[floatOffset] ?? Number.NaN;
   return source.view?.getFloat32(byteOffset, true) ?? Number.NaN;
-}
-
-function readRadius(source: MarkerBoundsSource, floatOffset: number, byteOffset: number): number {
-  return Math.max(
-    Math.abs(readFloat(source, floatOffset + 7, byteOffset + 28)),
-    Math.abs(readFloat(source, floatOffset + 8, byteOffset + 32)),
-    Math.abs(readFloat(source, floatOffset + 9, byteOffset + 36))
-  );
 }
 
 function resetBounds(bounds: Float64Array): void {

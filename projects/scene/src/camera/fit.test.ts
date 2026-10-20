@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import { Scene } from './scene.js';
-import { SceneCamera } from '../camera/camera.js';
+import { Scene } from '../scene/scene.js';
+import { SceneCamera } from './camera.js';
 import { SceneFrame } from '../frame/frame.js';
 import { SceneCubes, CubeBuffer } from '../cubes/cubes.js';
 import { boundsCorners, type SceneBounds } from '../internal/math/bounds.js';
 import { transformPointMat4 } from '../internal/math/mat4.js';
 import { createCameraViewProjection } from '../internal/composition/camera/math.js';
+import '../scene/define.js';
 import './define.js';
-import '../camera/define.js';
 import '../frame/define.js';
 import '../cubes/define.js';
 
@@ -46,7 +46,8 @@ describe('explicit public camera fitting', () => {
     const scene = new Scene();
     const frame = new SceneFrame();
     frame.name = 'remote';
-    frame.setPose({ position: [-1e308, 0, 0], orientation: [0, 0, 0, 1] });
+    frame.position = [-1e308, 0, 0];
+    frame.orientation = [0, 0, 0, 1];
     const camera = new SceneCamera();
     camera.frame = 'remote';
     camera.orientation = [0, 0, 0, 1];
@@ -89,7 +90,8 @@ describe('explicit public camera fitting', () => {
     const camera = new SceneCamera();
     const frame = new SceneFrame();
     frame.name = 'survey';
-    frame.setPose({ position: [1e12, 1e12, 1e12], orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2] });
+    frame.position = [1e12, 1e12, 1e12];
+    frame.orientation = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
     camera.frame = 'survey';
     camera.orientation = [Math.sin(0.3), 0, 0, Math.cos(0.3)];
     camera.projection = projection;
@@ -108,7 +110,8 @@ describe('explicit public camera fitting', () => {
       const scene = new Scene();
       const frame = new SceneFrame();
       frame.name = 'tracked';
-      frame.setPose({ position: [5, 6, 7], orientation: [0, 0, Math.sin(0.25), Math.cos(0.25)] });
+      frame.position = [5, 6, 7];
+      frame.orientation = [0, 0, Math.sin(0.25), Math.cos(0.25)];
       const follow = new SceneCamera();
       follow.behavior = 'follow';
       follow.frame = 'tracked';
@@ -124,7 +127,8 @@ describe('explicit public camera fitting', () => {
       expect(follow.frame).toBe('tracked');
       expect(follow.followMode).toBe('pose');
       const before = scene.cameraState.pose.orientation;
-      frame.setPose({ position: [5, 6, 7], orientation: [0, 0, 0, 1] });
+      frame.position = [5, 6, 7];
+      frame.orientation = [0, 0, 0, 1];
       scene.fitCamera(orbit, box, { aspect: 0.25 });
       expect(scene.cameraState.pose.orientation).not.toEqual(before);
     }

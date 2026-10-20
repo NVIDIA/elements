@@ -12,7 +12,19 @@ import type { Matrix4, Vec3 } from './types.js';
 import { POLYLINE_WGSL } from './polyline.js';
 import type { Point2 } from './geometry-2d.js';
 import { classifyAabbFrustum, FRUSTUM_WGSL, isOutsideHalfSpace } from './frustum.js';
+import { SCALED_ENCLOSING_RADIUS_WGSL, scaledEnclosingRadius } from './bounds.js';
+import { PRIMITIVE_ENCLOSING_RADII } from './primitive-bounds.js';
 import { identityMat4, multiplyMat4Vec4 } from './mat4.js';
+import {
+  LINE_TOPOLOGY_CODE,
+  LINE_TOPOLOGY_WGSL,
+  lineJoinCount,
+  lineJoinVertex,
+  lineSegmentCount,
+  lineSegmentEnd,
+  lineSegmentStart,
+  type LineTopology
+} from '../algorithms/line-topology.js';
 
 const bindings = /* wgsl */ `
 @group(0) @binding(0) var<storage, read> input: array<f32>;
@@ -31,6 +43,53 @@ describe.runIf(getWebGPUTestMode() === 'check')('shared numeric shader kernels',
 
   afterAll(async () => {
     await runner.close();
+  });
+
+  test('matches CPU segment endpoints and join vertices for every topology through GPU readback', async () => {
+    const fixtures = lineTopologyFixtures();
+    const code = /* wgsl */ `${bindings}
+${LINE_TOPOLOGY_WGSL}
+@compute @workgroup_size(1) fn main(@builtin(global_invocation_id) id: vec3u) {
+  let start = id.x * 6u;
+  let count = u32(input[start]);
+  let topology = u32(input[start + 1u]);
+  let segment = u32(input[start + 2u]);
+  let join = u32(input[start + 3u]);
+  let resultOffset = id.x * 3u;
+  output[resultOffset] = -1.0;
+  output[resultOffset + 1u] = -1.0;
+  output[resultOffset + 2u] = -1.0;
+  if (input[start + 4u] > 0.0) {
+    output[resultOffset] = f32(nve_line_segment_start(segment, topology));
+    output[resultOffset + 1u] = f32(nve_line_segment_end(segment, count, topology));
+  }
+  if (input[start + 5u] > 0.0) {
+    output[resultOffset + 2u] = f32(nve_line_join_vertex(join, topology));
+  }
+}`;
+    const actual = await executeKernel(session, {
+      code,
+      inputs: Float32Array.from(
+        fixtures.flatMap(({ count, topology, segment, join, segments, joins }) => [
+          count,
+          LINE_TOPOLOGY_CODE[topology],
+          segment,
+          join,
+          segments,
+          joins
+        ])
+      ),
+      outputLength: fixtures.length * 3,
+      workgroups: fixtures.length
+    });
+    expect(actual).toEqual(
+      fixtures.flatMap(({ count, topology, segment, join, segments, joins }) => [
+        segments > 0 ? lineSegmentStart(segment, topology) : -1,
+        segments > 0 ? lineSegmentEnd(segment, count, topology) : -1,
+        joins > 0 ? lineJoinVertex(join, topology) : -1
+      ])
+    );
+    expect(session.errors).toEqual([]);
   });
 
   test('executes half-space support rejection at and immediately around float32 boundaries', async () => {
@@ -272,6 +331,39 @@ ${ROTATE_BY_QUATERNION_WGSL}
 }`;
     const actual = await executeKernel(session, { code, inputs, outputLength: count * 4, workgroups: count });
     expectCloseTo(actual, expected);
+    expect(session.errors).toEqual([]);
+  });
+
+  test('executes the scaled enclosing radius against the CPU kernel for centered and arrow primitives', async () => {
+    const scales: Vec3[] = [
+      [1, 1, 1],
+      [0.05, 0.05, 2],
+      [-3, 0.5, 0],
+      [0, 0, 0],
+      [1e-20, 2, -4]
+    ];
+    const fixtures = [PRIMITIVE_ENCLOSING_RADII.cube, PRIMITIVE_ENCLOSING_RADII.arrow].flatMap(unitRadius =>
+      scales.map(scale => [unitRadius, ...scale])
+    );
+    const code = /* wgsl */ `${bindings}
+${SCALED_ENCLOSING_RADIUS_WGSL}
+@compute @workgroup_size(1) fn main(@builtin(global_invocation_id) id: vec3u) {
+  let start = id.x * 4u;
+  let scale = vec3f(input[start + 1u], input[start + 2u], input[start + 3u]);
+  output[id.x] = nve_scaled_enclosing_radius(input[start], scale);
+}`;
+    const actual = await executeKernel(session, {
+      code,
+      inputs: Float32Array.from(fixtures.flat()),
+      outputLength: fixtures.length,
+      workgroups: fixtures.length
+    });
+    expectCloseTo(
+      actual,
+      fixtures.map(([unitRadius, scaleX, scaleY, scaleZ]) =>
+        scaledEnclosingRadius(unitRadius!, scaleX!, scaleY!, scaleZ!)
+      )
+    );
     expect(session.errors).toEqual([]);
   });
 
@@ -668,6 +760,34 @@ function expectedJoinVertices(offsets: readonly (readonly number[])[] | undefine
 function expectCloseTo(actual: readonly number[], expected: readonly number[]): void {
   expect(actual).toHaveLength(expected.length);
   actual.forEach((value, index) => expect(value).toBeCloseTo(expected[index]!, 5));
+}
+
+function lineTopologyFixtures() {
+  const fixtures: {
+    count: number;
+    topology: LineTopology;
+    segment: number;
+    join: number;
+    segments: number;
+    joins: number;
+  }[] = [];
+  for (const topology of ['strip', 'loop', 'segments'] as const) {
+    for (let count = 0; count <= 16; count += 1) {
+      const segments = lineSegmentCount(count, topology);
+      const joins = lineJoinCount(count, topology);
+      for (let index = 0; index < Math.max(segments, joins, 1); index += 1) {
+        fixtures.push({
+          count,
+          topology,
+          segments,
+          joins,
+          segment: Math.max(0, Math.min(index, segments - 1)),
+          join: Math.max(0, Math.min(index, joins - 1))
+        });
+      }
+    }
+  }
+  return fixtures;
 }
 
 async function executeKernel(

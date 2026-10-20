@@ -30,9 +30,9 @@ export const InstallSource = {
       <nve-scene-gridlines count="12" spacing="2"></nve-scene-gridlines>
       <nve-scene-axes length="4" width="5"></nve-scene-axes>
       <nve-scene-body aria-label="orbit camera reference">
-        <nve-scene-shape kind="cube" position="[-2,-1,0.5]" color="yellow"></nve-scene-shape>
-        <nve-scene-shape kind="sphere" position="[0,0,0.75]" color="cyan"></nve-scene-shape>
-        <nve-scene-shape kind="pyramid" position="[2,1,0.75]" color="magenta"></nve-scene-shape>
+        <nve-scene-shape type="cube" position="[-2,-1,0.5]" color="yellow"></nve-scene-shape>
+        <nve-scene-shape type="sphere" position="[0,0,0.75]" color="cyan"></nve-scene-shape>
+        <nve-scene-shape type="pyramid" position="[2,1,0.75]" color="magenta"></nve-scene-shape>
       </nve-scene-body>
     </nve-scene>
   `
@@ -50,9 +50,9 @@ export const Default = {
           <nve-scene-gridlines count="14" spacing="1"></nve-scene-gridlines>
           <nve-scene-axes length="4" width="2"></nve-scene-axes>
           <nve-scene-body aria-label="camera pose reference">
-            <nve-scene-shape kind="cube" position="[-2,-1,0.5]" color="yellow"></nve-scene-shape>
-            <nve-scene-shape kind="sphere" position="[0,0,0.75]" color="cyan"></nve-scene-shape>
-            <nve-scene-shape kind="pyramid" position="[2,1,0.75]" color="magenta"></nve-scene-shape>
+            <nve-scene-shape type="cube" position="[-2,-1,0.5]" color="yellow"></nve-scene-shape>
+            <nve-scene-shape type="sphere" position="[0,0,0.75]" color="cyan"></nve-scene-shape>
+            <nve-scene-shape type="pyramid" position="[2,1,0.75]" color="magenta"></nve-scene-shape>
           </nve-scene-body>
         </nve-scene>
       </main>
@@ -193,16 +193,16 @@ export const BehaviorOrbit = {
           <nve-scene-gridlines count="12" spacing="2"></nve-scene-gridlines>
           <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="8" polar-angle="0.9" azimuth="-0.75"></nve-scene-camera>
           <nve-scene-body aria-label="rover body">
-            <nve-scene-shape kind="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-shape>
-            <nve-scene-shape kind="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-shape>
-            <nve-scene-shape kind="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-            <nve-scene-shape kind="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-shape>
+            <nve-scene-shape type="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+            <nve-scene-shape type="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
           </nve-scene-body>
         </nve-scene>
         <nve-card aria-label="camera keyboard controls" style="position: absolute; inset: 6px auto auto 6px; width: fit-content; z-index: 1;">
@@ -231,16 +231,16 @@ export const BehaviorFollow = {
       <nve-scene-lines id="camera-follow-track" topology="loop" width-unit="pixel"></nve-scene-lines>
       <nve-scene-frame id="camera-follow-rover" name="camera-follow-rover">
         <nve-scene-body aria-label="rover body">
-          <nve-scene-shape kind="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-shape>
-          <nve-scene-shape kind="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
         </nve-scene-body>
       </nve-scene-frame>
     </nve-scene>
@@ -271,10 +271,8 @@ export const BehaviorFollow = {
 
       const setRoverPose = angle => {
         const heading = angle + Math.PI / 2;
-        rover.setPose({
-          position: [Math.cos(angle) * radius, Math.sin(angle) * radius, 0],
-          orientation: [0, 0, Math.sin(heading / 2), Math.cos(heading / 2)]
-        });
+        rover.position = [Math.cos(angle) * radius, Math.sin(angle) * radius, 0];
+        rover.orientation = [0, 0, Math.sin(heading / 2), Math.cos(heading / 2)];
       };
       setRoverPose(-Math.PI / 2);
 
@@ -300,16 +298,16 @@ export const BehaviorTop = {
       <nve-scene-lines id="camera-top-track" topology="loop" width-unit="pixel"></nve-scene-lines>
       <nve-scene-frame id="camera-top-rover" name="camera-top-rover">
         <nve-scene-body aria-label="rover body">
-          <nve-scene-shape kind="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-shape>
-          <nve-scene-shape kind="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-shape>
         </nve-scene-body>
       </nve-scene-frame>
     </nve-scene>
@@ -345,10 +343,8 @@ export const BehaviorTop = {
 
       const setRoverPose = angle => {
         const heading = angle + Math.PI / 2;
-        rover.setPose({
-          position: [Math.cos(angle) * radius, Math.sin(angle) * radius, 0],
-          orientation: [0, 0, Math.sin(heading / 2), Math.cos(heading / 2)]
-        });
+        rover.position = [Math.cos(angle) * radius, Math.sin(angle) * radius, 0];
+        rover.orientation = [0, 0, Math.sin(heading / 2), Math.cos(heading / 2)];
       };
       setRoverPose(-Math.PI / 2);
 

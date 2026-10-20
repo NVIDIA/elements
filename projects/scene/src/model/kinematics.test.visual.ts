@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { readFileSync } from 'node:fs';
-import { gunzipSync } from 'node:zlib';
 import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
 import { composePreciseMat4, multiplyPreciseMat4, transformPointMat4 } from '../internal/math/mat4.js';
@@ -10,12 +9,19 @@ import { multiplyQuaternions } from '../internal/math/quaternion.js';
 import type { Quaternion, ScenePose, Vec3 } from '../index.js';
 import type { Scene } from '../scene/scene.js';
 import type { SceneBody } from '../body/body.js';
+import type { loadGeometry } from '../index.js';
+
+declare global {
+  interface Window {
+    sceneLoadGeometry: typeof loadGeometry;
+  }
+}
 
 interface ReplayRobot {
   joints: {
     name: string;
     child: string;
-    frame: string | null;
+    parent: string;
     axis: Vec3;
     position: Vec3;
     orientation: Quaternion;
@@ -59,6 +65,16 @@ const replayCalibration = [
   [-1, 0],
   [1, 0]
 ];
+// Printed-part colors per link, matching the replay palette that approximates the recorded arm.
+const replayLinkColors: Record<string, string> = {
+  base: '#ff7a33',
+  shoulder: '#ff7a33',
+  upper_arm: '#ff7a33',
+  lower_arm: '#ff7a33',
+  wrist: '#eceae6',
+  gripper: '#eceae6',
+  jaw: '#ff7a33'
+};
 
 function referencePoses(values: number[]): ScenePose[] {
   return replayOrigins.map((origin, index) => {
@@ -82,6 +98,8 @@ function referencePoint(poses: ScenePose[], point: Vec3): Vec3 {
 }
 
 const imports = `<script type="module">
+  import { loadGeometry } from '@nvidia-elements/scene';
+  window.sceneLoadGeometry = loadGeometry;
   import '@nvidia-elements/scene/model/define.js';
   import '@nvidia-elements/scene/joint/define.js';
   import '@nvidia-elements/scene/body/define.js';
@@ -94,7 +112,7 @@ const cameraMarkup =
 
 describe('example kinematics preservation', () => {
   test('renders the flat arm with the same world matrices and pixels as the nested arm', async () => {
-    const source = readFileSync(new URL('../body/body.examples.ts', import.meta.url), 'utf8');
+    const source = readFileSync(new URL('./model.examples.ts', import.meta.url), 'utf8');
     const section = source.slice(source.indexOf('export const RobotArmAnimated'));
     const markup = section
       .slice(section.indexOf('<nve-scene '), section.indexOf('</nve-scene>') + '</nve-scene>'.length)
@@ -121,16 +139,16 @@ describe('example kinematics preservation', () => {
             let parent: HTMLElement = reference;
             const frames = poses.map(pose => {
               const frame = document.createElement('nve-scene-frame');
-              frame.setPose(pose);
+              Object.assign(frame, pose);
               parent.append(frame);
               parent = frame;
               return frame;
             });
             for (const body of model.querySelectorAll('nve-scene-body')) {
               const clone = body.cloneNode(true) as SceneBody;
-              const name = body.frame;
+              const name = body.name;
               clone.removeAttribute('frame');
-              const owner = name ? frames[Number(name.slice(1)) - 1]! : reference;
+              const owner = name?.startsWith('body') ? frames[Number(name.slice(4)) - 1]! : reference;
               owner.insertBefore(clone, owner.querySelector(':scope > nve-scene-frame'));
             }
             await Promise.all([actual.ready, reference.ready]);
@@ -167,7 +185,7 @@ describe('example kinematics preservation', () => {
             const joints = [...model.querySelectorAll('nve-scene-joint')];
             const maxMatrixError = Math.max(
               ...joints.flatMap((joint, index) =>
-                [...joint.getWorldMatrix()].map((value, component) =>
+                [...model.bodies.get(joint.child ?? '')!.getWorldMatrix()].map((value, component) =>
                   Math.abs(value - frames[index]!.getWorldMatrix()[component]!)
                 )
               )
@@ -189,10 +207,163 @@ describe('example kinematics preservation', () => {
   });
 
   test('preserves all 1924 replay jaw-tip points and representative STL pixels', async () => {
-    const directory = new URL('../../demos/robot-playback/', import.meta.url);
-    const fixtureRobot = JSON.parse(readFileSync(new URL('robot.json', directory), 'utf8')) as ReplayRobot;
-    const records = gunzipSync(readFileSync(new URL('episode-0.ndjson.gz', directory)))
-      .toString()
+    const directory = new URL('../../demos/so-100/', import.meta.url);
+    // Frozen pre-URDF metadata keeps the expected robot independent of the example translator.
+    const fixtureRobot: ReplayRobot = {
+      links: [
+        {
+          name: 'base',
+          visuals: [
+            {
+              asset: 'assets/Base.stl',
+              motor: false
+            },
+            {
+              asset: 'assets/Base_Motor.stl',
+              motor: true
+            }
+          ]
+        },
+        {
+          name: 'shoulder',
+          visuals: [
+            {
+              asset: 'assets/Rotation_Pitch.stl',
+              motor: false
+            },
+            {
+              asset: 'assets/Rotation_Pitch_Motor.stl',
+              motor: true
+            }
+          ]
+        },
+        {
+          name: 'upper_arm',
+          visuals: [
+            {
+              asset: 'assets/Upper_Arm.stl',
+              motor: false
+            },
+            {
+              asset: 'assets/Upper_Arm_Motor.stl',
+              motor: true
+            }
+          ]
+        },
+        {
+          name: 'lower_arm',
+          visuals: [
+            {
+              asset: 'assets/Lower_Arm.stl',
+              motor: false
+            },
+            {
+              asset: 'assets/Lower_Arm_Motor.stl',
+              motor: true
+            }
+          ]
+        },
+        {
+          name: 'wrist',
+          visuals: [
+            {
+              asset: 'assets/Wrist_Pitch_Roll.stl',
+              motor: false
+            },
+            {
+              asset: 'assets/Wrist_Pitch_Roll_Motor.stl',
+              motor: true
+            }
+          ]
+        },
+        {
+          name: 'gripper',
+          visuals: [
+            {
+              asset: 'assets/Fixed_Jaw.stl',
+              motor: false
+            },
+            {
+              asset: 'assets/Fixed_Jaw_Motor.stl',
+              motor: true
+            }
+          ]
+        },
+        {
+          name: 'jaw',
+          visuals: [
+            {
+              asset: 'assets/Moving_Jaw.stl',
+              motor: false
+            }
+          ]
+        }
+      ],
+      joints: [
+        {
+          name: 'shoulder_pan',
+          child: 'shoulder',
+          position: [0.0, -0.0452, 0.0165],
+          axis: [0.0, 1.0, 0.0],
+          orientation: [0.7071045443232222, 0.0, 0.0, 0.7071090180427968],
+          scale: -1,
+          offset: 0,
+          parent: 'base'
+        },
+        {
+          name: 'shoulder_lift',
+          child: 'upper_arm',
+          position: [0.0, 0.1025, 0.0306],
+          axis: [1.0, 0.0, 0.0],
+          orientation: [-0.7833269096274834, 0.0, 0.0, 0.6216099682706644],
+          scale: 1,
+          offset: 1.8,
+          parent: 'shoulder'
+        },
+        {
+          name: 'elbow_flex',
+          child: 'lower_arm',
+          position: [0.0, 0.11257, 0.028],
+          axis: [1.0, 0.0, 0.0],
+          orientation: [0.7071045443232222, 0.0, 0.0, 0.7071090180427968],
+          scale: 1,
+          offset: -1.5707963267948966,
+          parent: 'upper_arm'
+        },
+        {
+          name: 'wrist_flex',
+          child: 'wrist',
+          position: [0.0, 0.0052, 0.1349],
+          axis: [1.0, 0.0, 0.0],
+          orientation: [-0.479425538604203, 0.0, 0.0, 0.8775825618903728],
+          scale: 1,
+          offset: -0.5707963267948966,
+          parent: 'lower_arm'
+        },
+        {
+          name: 'wrist_roll',
+          child: 'gripper',
+          position: [0.0, -0.0601, 0.0],
+          axis: [0.0, 1.0, 0.0],
+          orientation: [0.0, 0.7071045443232222, 0.0, 0.7071090180427968],
+          scale: -1,
+          offset: 0,
+          parent: 'wrist'
+        },
+        {
+          name: 'gripper',
+          child: 'jaw',
+          position: [-0.0202, -0.0244, 0.0],
+          axis: [0.0, 0.0, 1.0],
+          orientation: [0.0, 0.9999999999799858, 0.0, 6.326794896668469e-6],
+          scale: 1,
+          offset: 0,
+          parent: 'gripper'
+        }
+      ],
+      jawTip: [-0.00115, -0.082, 9.99999999999994e-5]
+    };
+    const records = readFileSync(new URL('episode-0.ndjson', directory), 'utf8')
       .trim()
       .split('\n')
       .map(line => JSON.parse(line) as { msg: { position: number[] } });
@@ -207,12 +378,61 @@ describe('example kinematics preservation', () => {
         ])
       )
     );
+    const replaySource = readFileSync(new URL('../scene/replay.examples.ts', import.meta.url), 'utf8');
+    const replayMarkup = replaySource
+      .slice(replaySource.indexOf('<div id="lerobot-episode-replay"'), replaySource.lastIndexOf('  `'))
+      .replace(/video\.src = 'https:[^']+';/, "video.src = 'data:video/mp4;base64,';");
+    const fixtureFiles = {
+      ...fixtureAssets,
+      'so100.urdf': 'data:application/xml;base64,' + readFileSync(new URL('so100.urdf', directory)).toString('base64'),
+      'episode-0.ndjson':
+        'data:application/x-ndjson;base64,' + readFileSync(new URL('episode-0.ndjson', directory)).toString('base64')
+    };
+    const fixtureScript = `<script type="application/json" id="replay-fixtures">${JSON.stringify(fixtureFiles)}</script>
+      <script>
+        addEventListener('error', event => { document.body.dataset.fixtureError = event.message; });
+        addEventListener('unhandledrejection', event => { document.body.dataset.fixtureError = String(event.reason); });
+        const fixtureFiles = JSON.parse(document.querySelector('#replay-fixtures').textContent);
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = (url, options) => {
+          const path = new URL(url instanceof Request ? url.url : url, document.baseURI).pathname;
+          const prefix = '/static/scene/so-100/';
+          const asset = fixtureFiles[path.slice(prefix.length)];
+          return path.startsWith(prefix) && asset ? originalFetch(asset, options) : originalFetch(url, options);
+        };
+      </script>`;
     const result = await visualRunner.inspect(
       'scene-replay-flat',
-      `<nve-scene id="actual">${cameraMarkup}</nve-scene><nve-scene id="reference">${cameraMarkup}</nve-scene>${imports}`,
-      page =>
-        page.evaluate(
-          async ({ robot, values, poses, points, assets }) => {
+      `${fixtureScript}${replayMarkup}<nve-scene id="reference">${cameraMarkup}</nve-scene>${imports}`,
+      async page => {
+        await page
+          .waitForFunction(
+            () => {
+              const output = document.querySelector('#lerobot-frame-time');
+              return (
+                output?.textContent?.startsWith('Frame 0 / 961') ||
+                output?.textContent?.startsWith('Robot recording unavailable:') ||
+                document.body.dataset.fixtureError
+              );
+            },
+            null,
+            { timeout: 10000 }
+          )
+          .catch(async () => {
+            throw new Error(
+              await page.evaluate(() =>
+                JSON.stringify({
+                  output: document.querySelector('#lerobot-frame-time')?.textContent,
+                  error: document.body.dataset.fixtureError,
+                  bodies: document.querySelectorAll('nve-scene-body').length,
+                  modelDefined: !!customElements.get('nve-scene-model'),
+                  geometryLoaded: !!window.sceneLoadGeometry
+                })
+              )
+            );
+          });
+        return page.evaluate(
+          async ({ robot, values, poses, points, assets, camera, colors }) => {
             const originalFetch = globalThis.fetch;
             globalThis.fetch = (url, options) => {
               const path = new URL(url instanceof Request ? url.url : url, document.baseURI).pathname;
@@ -221,20 +441,27 @@ describe('example kinematics preservation', () => {
                 ? originalFetch(asset, options)
                 : originalFetch(url, options);
             };
-            const actual = document.querySelector<Scene>('#actual')!;
+            if (document.body.dataset.fixtureError) throw new Error(document.body.dataset.fixtureError);
+            const actual = document.querySelector<Scene>('#lerobot-replay-scene')!;
+            const wrapper = document.querySelector<HTMLElement>('#lerobot-episode-replay')!;
+            const output = wrapper.querySelector<HTMLOutputElement>('#lerobot-frame-time')!;
+            if (!output.value.startsWith('Frame 0 / 961')) throw new Error(output.value);
+            wrapper.before(actual);
+            wrapper.hidden = true;
+            for (const layer of actual.querySelectorAll('nve-scene-gridlines, nve-scene-axes, nve-scene-lines'))
+              layer.remove();
             const reference = document.querySelector<Scene>('#reference')!;
+            actual.querySelector('nve-scene-camera')!.outerHTML = camera;
             for (const scene of [actual, reference]) {
               scene.style.cssText = 'width:512px;height:512px;background:black';
               const cameraControl = scene.querySelector('nve-scene-camera')!;
               cameraControl.target = [0, 0, 0.15];
               cameraControl.distance = 0.8;
             }
-            const model = document.createElement('nve-scene-model');
-            model.name = 'arm';
-            model.orientation = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
-            actual.append(model);
+            const model = actual.querySelector('nve-scene-model')!;
             const root = document.createElement('nve-scene-frame');
-            root.setPose({ position: [0, 0, 0], orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2] });
+            root.position = [0, 0, 0];
+            root.orientation = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
             reference.append(root);
             let parent: HTMLElement = root;
             const jointUpdates: Promise<unknown>[] = [];
@@ -242,31 +469,28 @@ describe('example kinematics preservation', () => {
               const frame = document.createElement('nve-scene-frame');
               parent.append(frame);
               parent = frame;
-              const element = document.createElement('nve-scene-joint');
-              Object.assign(element, { ...joint, type: 'revolute' });
-              model.append(element);
+              const element = model.joints.get(joint.name)!;
+              if (element.parent !== joint.parent || element.child !== joint.child)
+                throw new Error('Incorrect URDF endpoints.');
               jointUpdates.push(element.updateComplete);
               return frame;
             });
             const loads: Promise<unknown>[] = [model.updateComplete];
             for (const link of robot.links) {
               const jointIndex = robot.joints.findIndex(joint => joint.child === link.name);
-              for (const visual of link.visuals) {
-                const body = document.createElement('nve-scene-body');
-                body.frame = jointIndex >= 0 ? robot.joints[jointIndex]!.name : null;
-                body.tint = visual.motor ? '#30343b' : '#e8eaed';
-                body.src = '/replay-fixture/' + visual.asset;
-                model.append(body);
-                loads.push(
-                  body.loadComplete.then(() => {
-                    const clone = document.createElement('nve-scene-body');
-                    clone.geometry = body.geometry;
-                    clone.tint = body.tint;
-                    const owner = jointIndex >= 0 ? frames[jointIndex]! : root;
-                    owner.insertBefore(clone, owner.querySelector(':scope > nve-scene-frame'));
+              loads.push(
+                Promise.all(
+                  link.visuals.map(async visual => {
+                    const geometry = await window.sceneLoadGeometry('/replay-fixture/' + visual.asset);
+                    return geometry.map(node => ({ ...node, color: visual.motor ? '#222326' : colors[link.name]! }));
                   })
-                );
-              }
+                ).then(visuals => {
+                  const clone = document.createElement('nve-scene-body');
+                  clone.geometry = visuals.flat();
+                  const owner = jointIndex >= 0 ? frames[jointIndex]! : root;
+                  owner.insertBefore(clone, owner.querySelector(':scope > nve-scene-frame'));
+                })
+              );
             }
             await Promise.all([...loads, actual.ready, reference.ready, ...jointUpdates]);
             await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
@@ -302,31 +526,43 @@ describe('example kinematics preservation', () => {
             };
             for (let sample = 0; sample < values.length; sample += 1) {
               robot.joints.forEach((joint, index) => model.joints.set(joint.name, values[sample]![index]!));
-              const point = model.joints.get('gripper')!.getWorldPoint(robot.jawTip)!;
+              const point = model.bodies.get('jaw')!.getWorldPoint(robot.jawTip)!;
               maxPointError = Math.max(
                 maxPointError,
                 ...point.map((value, index) => Math.abs(value - points[sample]![index]!))
               );
               if ([0, 962, 1923].includes(sample)) {
-                frames.forEach((frame, index) => frame.setPose(poses[sample]![index]!));
+                frames.forEach((frame, index) => Object.assign(frame, poses[sample]![index]!));
                 await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
                 const comparison = await capture();
                 equal &&= comparison.equal;
                 visible &&= comparison.visible;
               }
             }
-            return { maxPointError, equal, visible, count: values.length };
+            return {
+              maxPointError,
+              equal,
+              visible,
+              count: values.length,
+              bodyCount: model.querySelectorAll('nve-scene-body').length,
+              jointCount: model.querySelectorAll('nve-scene-joint').length
+            };
           },
           {
             robot: fixtureRobot,
             values: fixtureValues,
             poses: fixturePoses,
             points: fixturePoints,
-            assets: fixtureAssets
+            assets: fixtureAssets,
+            camera: cameraMarkup,
+            colors: replayLinkColors
           }
-        )
+        );
+      }
     );
     expect(result.count).toBe(1924);
+    expect(result.bodyCount).toBe(7);
+    expect(result.jointCount).toBe(6);
     expect(result.visible).toBe(true);
     expect(result.maxPointError).toBeLessThan(1e-10);
     expect(result.equal, JSON.stringify(result)).toBe(true);

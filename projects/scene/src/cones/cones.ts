@@ -10,6 +10,8 @@ import styles from '../internal/dom/host.css?inline';
 /**
  * @element nve-scene-cones
  * @description Renders fixed-geometry cones from semantic source records.
+ * ConeBuffer and JSON source records default position to origin, orientation to identity,
+ * and size to [1, 1, 1]. Size gives full local X/Y base diameters and Z height.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/cones
  * @stable false

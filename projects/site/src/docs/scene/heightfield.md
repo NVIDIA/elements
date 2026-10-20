@@ -21,16 +21,26 @@
 
 ## Query terrain
 
-All query coordinates are local to the height field's frame and include the grid `origin` and positive `spacing`. A query outside the grid returns `undefined`. Drape methods return a copy, update only in-bounds XYZ triples, and preserve the input array.
+{% api 'nve-scene-heightfield' 'method' 'heightAt' %}
 
-`heightAt()`, `normalAt()`, and `slopeAt()` describe the continuous bilinear field between four cell samples. `drape()` uses the same bilinear elevation. These methods preserve their existing smooth-field behavior.
+{% api 'nve-scene-heightfield' 'method' 'normalAt' %}
 
-Rendered terrain uses two planar triangles per grid cell. Use `surfaceHeightAt()`, `surfaceNormalAt()`, `surfaceSlopeAt()`, and `drapeToSurface()` when application geometry must lie on those visible triangles.
+{% api 'nve-scene-heightfield' 'method' 'slopeAt' %}
+
+{% api 'nve-scene-heightfield' 'method' 'drape' %}
+
+## Query the rendered surface
+
+{% api 'nve-scene-heightfield' 'method' 'surfaceHeightAt' %}
+
+{% api 'nve-scene-heightfield' 'method' 'surfaceNormalAt' %}
+
+{% api 'nve-scene-heightfield' 'method' 'surfaceSlopeAt' %}
+
+{% api 'nve-scene-heightfield' 'method' 'drapeToSurface' %}
 
 ```js
 const height = terrain.surfaceHeightAt(localX, localY);
 const normal = terrain.surfaceNormalAt(localX, localY);
 const routeOnMesh = terrain.drapeToSurface(routePoints, 0.05);
 ```
-
-The shared diagonal runs from the top-right sample to the bottom-left sample. Points exactly on that diagonal use the triangle containing the top-left sample. Surface normals and slopes are geometric face values, so they can change abruptly across a diagonal or cell edge. Outer-edge queries use the adjacent interior cell.

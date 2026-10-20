@@ -53,13 +53,7 @@ interface FeatureIdSourceState {
   workingSnapshot?: SceneFeatureIdSnapshot;
 }
 
-interface FeatureIdListState {
-  readonly snapshot?: SceneFeatureIdSnapshot;
-  readonly versions: readonly number[];
-}
-
 const states = new WeakMap<object, FeatureIdSourceState>();
-const listStates = new WeakMap<object, FeatureIdListState>();
 
 /** Registers a record source and indexes its identities by logical record. */
 export function registerSceneFeatureIdSource(source: object, capacity: number): void {
@@ -128,35 +122,6 @@ export function takeSceneFeatureIdSnapshot(
 ): SceneFeatureIdSnapshot | undefined {
   const snapshot = source ? states.get(source)?.publishedSnapshot : undefined;
   updateCoverageDiagnostic(snapshot, targetCount, diagnosticElement);
-  return snapshot;
-}
-
-/** Captures published singular identities from a list of declarative records. */
-export function takeSceneFeatureIdListSnapshot(
-  sources: readonly object[],
-  diagnosticElement?: HTMLElement
-): SceneFeatureIdSnapshot | undefined {
-  const cached = listStates.get(sources);
-  if (cached && listVersionsMatch(sources, cached.versions)) {
-    updateCoverageDiagnostic(cached.snapshot, sources.length, diagnosticElement);
-    return cached.snapshot;
-  }
-  const versions = new Array<number>(sources.length);
-  let values: Uint32Array | undefined;
-  let validity: BitArray | undefined;
-  sources.forEach((source, index) => {
-    const state = states.get(source);
-    versions[index] = state?.publishedVersion ?? -1;
-    const featureId = resolveSceneFeatureId(state?.publishedSnapshot, 0);
-    if (featureId === undefined) return;
-    values ??= new Uint32Array(sources.length);
-    validity ??= new BitArray(sources.length);
-    values[index] = featureId;
-    validity.set(index, true);
-  });
-  const snapshot = values && validity ? Object.freeze({ kind: 'direct' as const, values, validity }) : undefined;
-  listStates.set(sources, { snapshot, versions });
-  updateCoverageDiagnostic(snapshot, sources.length, diagnosticElement);
   return snapshot;
 }
 
@@ -312,13 +277,6 @@ function updateCoverageDiagnostic(
     message: 'Feature IDs do not cover every logical target in the source.',
     severity: 'warning'
   });
-}
-
-function listVersionsMatch(sources: readonly object[], versions: readonly number[]): boolean {
-  return (
-    sources.length === versions.length &&
-    sources.every((source, index) => (states.get(source)?.publishedVersion ?? -1) === versions[index])
-  );
 }
 
 function getState(source: object): FeatureIdSourceState {

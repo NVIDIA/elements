@@ -4,7 +4,7 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import { BODY_DUAL_SOURCE, SHAPE_KIND } from '../internal/diagnostics/errors.js';
+import { BODY_DUAL_SOURCE, SHAPE_TYPE } from '../internal/diagnostics/errors.js';
 import { takeMarkerLayerRenderData } from '../internal/layers/markers/layer-state.js';
 import { getBodyLayerTopologyVersion, takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 import type { Quaternion, Vec3 } from '../internal/math/types.js';
@@ -48,7 +48,7 @@ describe(SceneBody.metadata.tag, () => {
   it('exposes the complete compiled declarative planar geometry', async () => {
     fixture = await createFixture(
       html`<nve-scene-body>
-        <nve-scene-shape kind="cone" position="[1,2,3]" orientation="[0,0,1,0]" scale="[2,3,4]" color="#4080c0"></nve-scene-shape>
+        <nve-scene-shape type="cone" position="[1,2,3]" orientation="[0,0,1,0]" scale="[2,3,4]" color="#4080c0"></nve-scene-shape>
       </nve-scene-body>`
     );
     const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
@@ -59,7 +59,7 @@ describe(SceneBody.metadata.tag, () => {
         position: [1, 2, 3],
         orientation: [0, 0, 1, 0],
         scale: [2, 3, 4],
-        kind: 'cone'
+        type: 'cone'
       }
     ]);
     const actual = takeBodyLayerRenderData(body);
@@ -77,7 +77,7 @@ describe(SceneBody.metadata.tag, () => {
     document.body.append(fixture);
     fixture.innerHTML = `<nve-scene-body>
       <nve-scene-shape
-        kind="cylinder"
+        type="cylinder"
         position="[-0.7,-0.77,0.34]"
         orientation="[0.7071,0,0,0.7071]"
         scale="[0.68,0.68,0.24]"
@@ -87,11 +87,11 @@ describe(SceneBody.metadata.tag, () => {
     const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
     await elementIsStable(body);
 
-    expect(errors.filter(event => event.detail.code === SHAPE_KIND)).toEqual([]);
+    expect(errors.filter(event => event.detail.code === SHAPE_TYPE)).toEqual([]);
     expect(takeBodyLayerRenderData(body).positions).toEqual(
       compileShapes([
         {
-          kind: 'cylinder',
+          type: 'cylinder',
           position: [-0.7, -0.77, 0.34],
           orientation: [0.7071, 0, 0, 0.7071],
           scale: [0.68, 0.68, 0.24],
@@ -115,7 +115,7 @@ describe(SceneBody.metadata.tag, () => {
     shape.removeAttribute('scale');
     await elementIsStable(body);
 
-    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes([{ kind: 'cube' }]).positions);
+    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes([{ type: 'cube' }]).positions);
   });
 
   it('selects direct geometry without warnings while keeping children and instance sources live', async () => {
@@ -124,7 +124,7 @@ describe(SceneBody.metadata.tag, () => {
     body.source = new MarkerBuffer({ records: [{}] });
     const warnings: CustomEvent<SceneErrorDetail>[] = [];
     body.addEventListener('nve-scene-error', event => warnings.push(event));
-    const shapes: BodyShape[] = [{ kind: 'sphere' }];
+    const shapes: BodyShape[] = [{ type: 'sphere' }];
 
     body.geometry = shapes;
     body.geometry = shapes;
@@ -144,14 +144,14 @@ describe(SceneBody.metadata.tag, () => {
 
   it('snapshots bulk shapes until the caller reassigns the source', async () => {
     fixture = await createFixture(
-      html`<nve-scene-body><nve-scene-shape kind="sphere"></nve-scene-shape></nve-scene-body>`
+      html`<nve-scene-body><nve-scene-shape type="sphere"></nve-scene-shape></nve-scene-body>`
     );
     const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
     const color: RGBA = [1, 0, 0, 1];
     const orientation: Quaternion = [0, 0, 0, 1];
     const position: Vec3 = [0, 0, 0];
     const scale: Vec3 = [1, 1, 1];
-    const shapes: BodyShape[] = [{ color, orientation, position, scale, kind: 'cube' }];
+    const shapes: BodyShape[] = [{ color, orientation, position, scale, type: 'cube' }];
     body.geometry = shapes;
     await elementIsStable(body);
     const before = takeBodyLayerRenderData(body);
@@ -173,7 +173,7 @@ describe(SceneBody.metadata.tag, () => {
 
     body.geometry = null;
     await elementIsStable(body);
-    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes([{ kind: 'sphere' }]).positions);
+    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes([{ type: 'sphere' }]).positions);
   });
 
   it('keeps an empty bulk source authoritative across child edits and reconnects until cleared', async () => {
@@ -195,12 +195,12 @@ describe(SceneBody.metadata.tag, () => {
     body.geometry = null;
     await elementIsStable(body);
     expect(takeBodyLayerRenderData(body)).toMatchObject({
-      positions: compileShapes([{ position: [1, 2, 3], kind: 'cube' }]).positions,
+      positions: compileShapes([{ position: [1, 2, 3], type: 'cube' }]).positions,
       ready: true
     });
   });
 
-  it.each<readonly BodyShape[] | null>([null, [{ kind: 'pyramid' }]])(
+  it.each<readonly BodyShape[] | null>([null, [{ type: 'pyramid' }]])(
     'preserves the accepted %j source when a bulk assignment fails',
     async shapes => {
       fixture = await createFixture(html`<nve-scene-body><nve-scene-shape></nve-scene-shape></nve-scene-body>`);
@@ -212,21 +212,21 @@ describe(SceneBody.metadata.tag, () => {
       const accepted = body.geometry;
 
       expect(() => {
-        body.geometry = [{ scale: [1, 0, 1], kind: 'cube' }];
+        body.geometry = [{ scale: [1, 0, 1], type: 'cube' }];
       }).toThrow(RangeError);
       expect(body.geometry).toBe(accepted);
       expect(takeBodyLayerRenderData(body)).toMatchObject({ positions: before.positions, ready: before.ready });
 
       shape.position = [1, 2, 3];
       await elementIsStable(body);
-      const expected: readonly BodyShape[] = shapes ?? [{ position: [1, 2, 3], kind: 'cube' }];
+      const expected: readonly BodyShape[] = shapes ?? [{ position: [1, 2, 3], type: 'cube' }];
       expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes(expected).positions);
     }
   );
 
   it('skips invalid declarative shapes once per error episode and recovers their siblings', async () => {
     fixture = await createFixture(
-      html`<nve-scene-body><nve-scene-shape kind="cube"></nve-scene-shape><nve-scene-shape kind="cube"></nve-scene-shape></nve-scene-body>`
+      html`<nve-scene-body><nve-scene-shape type="cube"></nve-scene-shape><nve-scene-shape type="cube"></nve-scene-shape></nve-scene-body>`
     );
     const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
     const bad = body.querySelectorAll('nve-scene-shape')[1] as HTMLElement;
@@ -237,25 +237,25 @@ describe(SceneBody.metadata.tag, () => {
     await elementIsStable(bad);
     bad.setAttribute('scale', '[1,2]');
     await elementIsStable(bad);
-    const shapeErrors = () => errors.filter(event => event.detail.code === SHAPE_KIND);
+    const shapeErrors = () => errors.filter(event => event.detail.code === SHAPE_TYPE);
     expect(shapeErrors()).toHaveLength(1);
     expect(shapeErrors()[0]).toMatchObject({
       bubbles: true,
       cancelable: false,
       composed: true,
-      detail: { code: SHAPE_KIND, element: bad, severity: 'error' }
+      detail: { code: SHAPE_TYPE, element: bad, severity: 'error' }
     });
-    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes([{ kind: 'cube' }]).positions);
+    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes([{ type: 'cube' }]).positions);
 
     bad.setAttribute('scale', '[1,1,1]');
     await elementIsStable(bad);
-    bad.setAttribute('kind', 'also-nope');
+    bad.setAttribute('type', 'also-nope');
     await elementIsStable(bad);
     expect(shapeErrors()).toHaveLength(2);
-    bad.setAttribute('kind', 'sphere');
+    bad.setAttribute('type', 'sphere');
     await elementIsStable(bad);
     expect(takeBodyLayerRenderData(body).positions?.length).toBeGreaterThan(
-      compileShapes([{ kind: 'cube' }]).positions.length
+      compileShapes([{ type: 'cube' }]).positions.length
     );
 
     bad.setAttribute('color', 'not-a-color');
@@ -281,16 +281,16 @@ describe(SceneBody.metadata.tag, () => {
     body.append(document.createElement('span'));
     await elementIsStable(body);
     expect(takeBodyLayerRenderData(body).geometryError).toBe(true);
-    expect(errors.at(-1)?.detail.message).toBe('Scene bodies allow only direct scene shape children.');
+    expect(errors.at(-1)?.detail.message).toBe('Scene bodies allow only direct scene shape and mesh children.');
   });
 
   it('exposes declarative geometry and preserves assigned hierarchy without exposing renderer arrays', async () => {
     fixture = await createFixture(
-      html`<nve-scene-body><nve-scene-shape kind="cylinder" position="[1,2,3]"></nve-scene-shape></nve-scene-body>`
+      html`<nve-scene-body><nve-scene-shape type="cylinder" position="[1,2,3]"></nve-scene-shape></nve-scene-body>`
     );
     const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
     await elementIsStable(body);
-    expect(body.geometry).toMatchObject([{ kind: 'cylinder', position: [1, 2, 3] }]);
+    expect(body.geometry).toMatchObject([{ type: 'cylinder', position: [1, 2, 3] }]);
     const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
     const nodes = [{ name: 'arm', children: [{ name: 'arm', geometry: { positions } }] }];
     body.geometry = nodes;
@@ -301,7 +301,7 @@ describe(SceneBody.metadata.tag, () => {
     body.geometry = nodes;
     expect(takeBodyLayerRenderData(body).positions?.[0]).toBe(4);
     body.geometry = null;
-    expect(fixture.querySelector<SceneBody>(SceneBody.metadata.tag)?.geometry?.[0]?.kind).toBe('cylinder');
+    expect(fixture.querySelector<SceneBody>(SceneBody.metadata.tag)?.geometry?.[0]?.type).toBe('cylinder');
     expect('shapes' in body).toBe(false);
   });
 

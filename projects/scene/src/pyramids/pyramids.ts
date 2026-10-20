@@ -15,6 +15,8 @@ import styles from '../internal/dom/host.css?inline';
 /**
  * @element nve-scene-pyramids
  * @description Renders fixed-geometry square pyramids from semantic source records.
+ * PyramidBuffer and JSON source records default position to origin, orientation to identity,
+ * and size to [1, 1, 1]. Size gives full local base width, base depth, and height.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/pyramids
  * @stable false

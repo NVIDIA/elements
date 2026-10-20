@@ -1,7 +1,7 @@
 ---
 {
   title: 'Scene Joint',
-  description: 'One degree of freedom in a Scene coordinate frame.',
+  description: 'Connections and relative motion between rigid bodies.',
   layout: 'docs.11ty.js',
   tag: 'nve-scene-joint'
 }
@@ -11,22 +11,60 @@
 
 {% install 'nve-scene-joint' %}
 
-A joint specialises a [frame](../frame/). Its local pose is the origin (`position` and `orientation`) followed
-by motion about `axis`. Revolute and continuous values use radians; prismatic values use metres; fixed joints
-add no motion. The default is revolute, axis `[1,0,0]`, and value zero. Scene normalises the axis on capture.
+## Independent Arms
 
-`value` applies synchronously and reflects to its attribute. Rendering observes assignments at its next boundary.
-Calibration applies `scale * value + offset`. `setPose` overrides origin and motion until `setPose(null)` releases
-authority; values assigned during that authority take effect on release.
+{% example 'nve-scene-joint' 'IndependentArms' %}
 
-Optional `lower` and `upper` limits report `joint-limit` once per crossing while applying the value.
-Scene never clamps. Reversed limits disable checking; continuous joints ignore limits.
+## Prismatic lift
 
-`mimic` names a non-mimic joint through the [model name scopes](../model/). It replaces the joint's own value
-with `mimic-multiplier * target.effectiveValue + mimic-offset`. Dependents update synchronously.
-Scene supports one level only; a target cannot itself mimic. Invalid types, axes, numeric inputs, or mimic
-references invalidate that joint's transform and its dependent chains, leaving unrelated content usable.
+{% example 'nve-scene-joint' 'Forklift' %}
 
-{% example 'nve-scene-joint' 'Pendulum' %}
+## Robot Arm
 
-Mimic resolution can read enclosing scopes; it cannot bind into a different entity's private scope.
+{% example 'nve-scene-model' 'Default' %}
+
+## Robot Arm Animated
+
+{% example 'nve-scene-model' 'RobotArmAnimated' %}
+
+## Body connections
+
+{% api 'nve-scene-joint' 'property' 'parent' %}
+
+{% api 'nve-scene-joint' 'property' 'child' %}
+
+{% api 'nve-scene-joint' 'property' 'name' %}
+
+## Origin
+
+{% api 'nve-scene-joint' 'property' 'position' %}
+
+{% api 'nve-scene-joint' 'property' 'orientation' %}
+
+## Motion
+
+{% api 'nve-scene-joint' 'property' 'type' %}
+
+{% api 'nve-scene-joint' 'property' 'axis' %}
+
+{% api 'nve-scene-joint' 'property' 'value' %}
+
+{% api 'nve-scene-joint' 'property' 'offset' %}
+
+{% api 'nve-scene-joint' 'property' 'scale' %}
+
+## Limits
+
+{% api 'nve-scene-joint' 'property' 'lower' %}
+
+{% api 'nve-scene-joint' 'property' 'upper' %}
+
+## Mimic
+
+{% api 'nve-scene-joint' 'property' 'mimic' %}
+
+{% api 'nve-scene-joint' 'property' 'mimicMultiplier' %}
+
+{% api 'nve-scene-joint' 'property' 'mimicOffset' %}
+
+Use [coordinate frames](/docs/scene/frame/#current-poses) for application-supplied poses. Joints expose scalar motion; floating and planar joint types remain unsupported.

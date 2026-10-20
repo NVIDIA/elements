@@ -50,6 +50,10 @@ const colorConverter = createCSSColorConverter(DEFAULT_COLOR);
 /**
  * @element nve-scene-heightfield
  * @description A frame-local, smooth-shaded terrain compiled from a uniform elevation grid.
+ * Queries use frame-local XY coordinates including grid origin and positive spacing;
+ * out-of-grid queries return undefined. heightAt(), normalAt(), slopeAt(), and drape()
+ * describe the continuous bilinear field. The surface variants follow the visible mesh's
+ * two planar triangles per cell, for geometry that must lie on the rendered terrain.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/heightfield
  * @event {SceneClick} nve-scene-click - Dispatched when pointer activation resolves to this layer.
@@ -149,42 +153,58 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
     super.disconnectedCallback();
   }
 
-  /** Return the bilinearly interpolated terrain elevation at frame-local xy. */
+  /** Returns bilinear elevation at frame-local XY, including grid origin and spacing, or undefined outside the grid. */
   heightAt(x: number, y: number): number | undefined {
     return heightAt(getHeightfieldLayerSampler(this), x, y);
   }
 
-  /** Return the unit normal of the bilinear terrain surface at frame-local xy. */
+  /** Returns the continuous bilinear field's unit normal at frame-local XY, or undefined outside the grid. */
   normalAt(x: number, y: number): Vec3 | undefined {
     return normalAt(getHeightfieldLayerSampler(this), x, y);
   }
 
-  /** Return terrain inclination in radians from horizontal at frame-local xy. */
+  /** Returns bilinear field inclination from horizontal in radians at frame-local XY, or undefined outside the grid. */
   slopeAt(x: number, y: number): number | undefined {
     return slopeAt(getHeightfieldLayerSampler(this), x, y);
   }
 
-  /** Return the rendered triangle-surface elevation at frame-local xy. */
+  /**
+   * Returns rendered triangle elevation at frame-local XY, or undefined outside the grid.
+   * The cell diagonal runs from top-right to bottom-left; points on it use the triangle
+   * containing top-left. Outer-edge queries use the adjacent interior cell.
+   */
   surfaceHeightAt(x: number, y: number): number | undefined {
     return surfaceHeightAt(getHeightfieldLayerSampler(this), x, y);
   }
 
-  /** Return the unit normal of the rendered terrain triangle at frame-local xy. */
+  /**
+   * Returns the rendered face's unit normal at frame-local XY, or undefined outside the
+   * grid. Geometric face normals can change abruptly across cell edges and diagonals.
+   */
   surfaceNormalAt(x: number, y: number): Vec3 | undefined {
     return surfaceNormalAt(getHeightfieldLayerSampler(this), x, y);
   }
 
-  /** Return rendered triangle inclination in radians from horizontal at frame-local xy. */
+  /**
+   * Returns rendered face inclination from horizontal in radians at frame-local XY,
+   * or undefined outside the grid. Slopes can change abruptly across edges and diagonals.
+   */
   surfaceSlopeAt(x: number, y: number): number | undefined {
     return surfaceSlopeAt(getHeightfieldLayerSampler(this), x, y);
   }
 
-  /** Copy xyz points and move in-bounds points to terrain elevation plus lift. */
+  /**
+   * Copies XYZ triples, replacing only in-bounds Z values with bilinear elevation plus
+   * lift (default zero). Coordinates include grid origin and spacing; input remains unchanged.
+   */
   drape(points: Float32Array, lift?: number): Float32Array {
     return drape(getHeightfieldLayerSampler(this), points, lift);
   }
 
-  /** Copy xyz points and move in-bounds points to the rendered triangle surface plus lift. */
+  /**
+   * Copies XYZ triples onto the visible triangle surface plus lift (default zero).
+   * Only in-bounds Z values change; out-of-grid triples and the producer array remain unchanged.
+   */
   drapeToSurface(points: Float32Array, lift?: number): Float32Array {
     return drapeToSurface(getHeightfieldLayerSampler(this), points, lift);
   }

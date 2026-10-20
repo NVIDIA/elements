@@ -7,6 +7,7 @@ import { setFrameConstraint } from './constraints.js';
 
 interface Registry {
   readonly scopes: ReadonlyMap<HTMLElement, ReadonlyMap<string, HTMLElement | null>>;
+  readonly jointScopes: ReadonlyMap<HTMLElement, ReadonlyMap<string, HTMLElement | null>>;
   readonly elements: readonly HTMLElement[];
   readonly anonymous: readonly HTMLElement[];
   readonly addressed: Set<HTMLElement>;
@@ -30,9 +31,16 @@ export function updateFrameRegistry(
   referrers: readonly HTMLElement[]
 ): void {
   const previous = registries.get(scene);
-  const scopes = collectScopes(scene, elements);
+  const scopes = collectScopes(
+    scene,
+    elements.filter(element => element.localName !== 'nve-scene-joint')
+  );
+  const jointScopes = collectScopes(
+    scene,
+    elements.filter(element => element.localName === 'nve-scene-joint')
+  );
   const anonymous = elements.filter(element => element.localName === 'nve-scene-model' && !getElementName(element));
-  const registry: Registry = { scopes, elements, anonymous, addressed: new Set() };
+  const registry: Registry = { scopes, jointScopes, elements, anonymous, addressed: new Set() };
   registries.set(scene, registry);
   updateRegistryNames(scene, registry, previous);
   updateAnonymousNames(scene, registry, referrers);
@@ -45,7 +53,8 @@ function updateRegistryNames(scene: HTMLElement, registry: Registry, previous?: 
   }
   for (const element of registry.elements) {
     const name = getElementName(element);
-    const duplicate = registry.scopes.get(getNameScope(element, scene))?.get(name) === null;
+    const scopes = element.localName === 'nve-scene-joint' ? registry.jointScopes : registry.scopes;
+    const duplicate = scopes.get(getNameScope(element, scene))?.get(name) === null;
     updateNameDiagnostics(element, name.includes('/'), Boolean(name && duplicate));
   }
 }
@@ -54,7 +63,9 @@ function updateAnonymousNames(scene: HTMLElement, registry: Registry, referrers:
   for (const referrer of referrers) {
     for (const property of ['frame', 'mimic']) {
       const reference: unknown = Reflect.get(referrer, property);
-      if (typeof reference === 'string' && reference.includes('/')) resolveFrameName(scene, reference, referrer);
+      if (typeof reference !== 'string' || !reference.includes('/')) continue;
+      const resolve = property === 'mimic' ? resolveJointName : resolveFrameName;
+      resolve(scene, reference, referrer);
     }
   }
   for (const model of registry.elements.filter(element => element.localName === 'nve-scene-model')) {
@@ -98,26 +109,43 @@ export function resolveFrameName(
   name: string,
   context: HTMLElement = scene
 ): HTMLElement | undefined {
+  return resolveName(scene, { name, context, kind: 'frame' });
+}
+
+export function resolveJointName(
+  scene: HTMLElement,
+  name: string,
+  context: HTMLElement = scene
+): HTMLElement | undefined {
+  return resolveName(scene, { name, context, kind: 'joint' });
+}
+
+function resolveName(
+  scene: HTMLElement,
+  query: { name: string; context: HTMLElement; kind: 'frame' | 'joint' }
+): HTMLElement | undefined {
+  const { name, context, kind } = query;
   const registry = registries.get(scene);
   if (!registry) return undefined;
   const [first, ...rest] = name
     .trim()
     .split('/')
     .map(segment => segment.trim());
-  if (!first || rest.some(segment => !segment)) return unresolvedQualified(registry, rest, context);
-  const initial = lookupLexicalName(registry, scene, { first, context });
-  if (initial !== undefined) return descendScopes(registry, initial, rest);
-  return rest.length ? unresolvedQualified(registry, rest, context) : undefined;
+  if (!first || rest.some(segment => !segment)) return unresolvedQualified(registry, { path: rest, kind }, context);
+  const scopes = kind === 'joint' && !rest.length ? registry.jointScopes : registry.scopes;
+  const initial = lookupLexicalName(scopes, scene, { first, context });
+  if (initial !== undefined) return descendScopes(registry, initial, { path: rest, kind });
+  return rest.length ? unresolvedQualified(registry, { path: rest, kind }, context) : undefined;
 }
 
 function lookupLexicalName(
-  registry: Registry,
+  scopes: Registry['scopes'],
   scene: HTMLElement,
   input: { first: string; context: HTMLElement }
 ): HTMLElement | null | undefined {
   let scope = input.context === scene ? scene : getNameScope(input.context, scene);
   while (true) {
-    const names = registry.scopes.get(scope);
+    const names = scopes.get(scope);
     if (names?.has(input.first)) return names.get(input.first);
     if (scope === scene) return undefined;
     scope = getNameScope(scope, scene);
@@ -127,20 +155,27 @@ function lookupLexicalName(
 function descendScopes(
   registry: Registry,
   initial: HTMLElement | null | undefined,
-  path: readonly string[]
+  query: { path: readonly string[]; kind: 'frame' | 'joint' }
 ): HTMLElement | undefined {
+  const { path, kind } = query;
   let target = initial;
-  for (const segment of path) {
+  for (const [index, segment] of path.entries()) {
     if (!target || target.localName !== 'nve-scene-model') return undefined;
-    target = registry.scopes.get(target)?.get(segment);
+    const scopes = kind === 'joint' && index === path.length - 1 ? registry.jointScopes : registry.scopes;
+    target = scopes.get(target)?.get(segment);
   }
   return target ?? undefined;
 }
 
-function unresolvedQualified(registry: Registry, path: readonly string[], context: HTMLElement): undefined {
+function unresolvedQualified(
+  registry: Registry,
+  query: { path: readonly string[]; kind: 'frame' | 'joint' },
+  context: HTMLElement
+): undefined {
+  const { path, kind } = query;
   if (!path.length) return undefined;
   const candidates = registry.anonymous.filter(
-    model => !model.contains(context) && descendScopes(registry, model, path)
+    model => !model.contains(context) && descendScopes(registry, model, { path, kind })
   );
   if (candidates.length !== 1) return undefined;
   const model = candidates[0]!;

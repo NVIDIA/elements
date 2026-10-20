@@ -43,7 +43,13 @@ export abstract class MarkerLayerElement<Source extends AnyPackedRecordSource<'m
   extends LitElement
   implements SceneInteractionTarget
 {
-  /** Names the owning coordinate frame; an omitted value uses DOM ancestry. */
+  /**
+   * Names the owning coordinate frame instead of the nearest DOM ancestor frame.
+   * Resolves in the nearest model scope, then outward; qualified paths such as arm/tcp
+   * address model members. Omit to use DOM ancestry. Missing, duplicate, cross-scene,
+   * or cyclic references report frame-unresolved and suppress this contribution until
+   * corrected. Hidden or invalid resolved ancestors also suppress it.
+   */
   @property({ type: String })
   get frame(): string | null {
     return getFrameReference(this);
@@ -68,7 +74,12 @@ export abstract class MarkerLayerElement<Source extends AnyPackedRecordSource<'m
     registerMarkerLayer(this, kind);
   }
 
-  /** Enables automatic pointer hit testing and routed interaction events for this layer. */
+  /**
+   * Enables automatic nve-scene-click, nve-scene-pointerenter, and nve-scene-pointerleave
+   * events; default false avoids picking work for decorative geometry. Records create no
+   * DOM targets: detail.target identifies submitted slots and detail.featureId provides
+   * application identity. Explicit scene.pick() includes rendered geometry regardless.
+   */
   @property({ type: Boolean })
   get interactive(): boolean {
     return getLayerInteractive(this);
@@ -78,7 +89,13 @@ export abstract class MarkerLayerElement<Source extends AnyPackedRecordSource<'m
     setLayerInteractive(this, value);
   }
 
-  /** Resolved packed instance source. The HTML attribute is a JSON initialization format. */
+  /**
+   * Packed instances: use the primitive's matching buffer, or MarkerBuffer for body, mesh,
+   * and polygon; layers reject other buffers. External sources must meet layer encoding. The HTML
+   * attribute initializes from strict JSON records; this property accepts packed sources,
+   * never arrays, and does not reflect. Removing the attribute clears source. Edit records,
+   * then publish() on each consumer.
+   */
   @property({ attribute: false })
   get source(): Source | ExternalMarkerSource | null {
     return getLayerInstances(this) as Source | ExternalMarkerSource | null;
@@ -92,7 +109,11 @@ export abstract class MarkerLayerElement<Source extends AnyPackedRecordSource<'m
     this.requestUpdate('source', previous);
   }
 
-  /** Limits how many records render; undefined renders the complete source. */
+  /**
+   * Limits rendered records independently of source count; undefined uses the complete
+   * active prefix. Shrinking a source clamps effective draw count without rewriting the
+   * authored limit. Regrowing can restore records under that same limit.
+   */
   get countLimit(): number | undefined {
     return getLayerCount(this);
   }
@@ -101,7 +122,26 @@ export abstract class MarkerLayerElement<Source extends AnyPackedRecordSource<'m
     setLayerCount(this, value);
   }
 
-  /** Captures changed records and publishes the selected active source prefix to this layer. */
+  /**
+   * Synchronously validates and captures changed records for this layer's rendering snapshot.
+   * Options start and count describe changed records, not bytes; activeCount selects the
+   * complete active prefix. With no options, uses the typed buffer's current count and
+   * never activates unused capacity. Source mutations and setCount() alone do not publish.
+   *
+   * Each layer owns its capture: publishing one consumer never changes another that shares
+   * the source. Device recovery uses each layer's last publication, not unpublished producer edits.
+   * Invalid records or ranges make this contribution inert without partially mixing
+   * generations; a valid publication recovers it. Other valid layers remain usable.
+   * Record APIs advance source version so consumers can reuse an unchanged prepared generation.
+   * Accessing mutableBytes permanently disables prepared-source caching because later direct
+   * writes cannot advance version. Byte publication uses the canonical layout's field offsets,
+   * stride, and little-endian encoding.
+   *
+   * Pass the smallest accurate changed range. A count-only reduction can use count: 0;
+   * growth also captures newly exposed records even outside the requested dirty range.
+   * Fixed-size edits upload only their record range. Mesh publish() affects instance records;
+   * use publishGeometry() for mesh vertices or indices.
+   */
   publish(options?: ScenePublishOptions): void {
     publishLayerInstances(this, options);
   }

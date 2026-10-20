@@ -10,6 +10,10 @@ import styles from '../internal/dom/host.css?inline';
 /**
  * @element nve-scene-cubes
  * @description Renders fixed-geometry cubes from semantic source records.
+ * CubeBuffer and JSON source records use position (default origin), orientation (default
+ * identity XYZW quaternion), and size (default [1, 1, 1]) for full local width, depth, and height.
+ * outlineColor is independent of face color, preserving boundaries through overlapping
+ * translucent faces. Packed and JSON records expose the same fields.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/cubes
  * @stable false

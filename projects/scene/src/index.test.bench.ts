@@ -96,7 +96,7 @@ describe('marker instance buffer', () => {
     const source = createMarkers(count);
     test(`${count / 1_000}K replace`, async ({ bench }) => {
       await bench(`${count / 1_000}K replace`, () => {
-        const buffer = new MarkerInstanceBuffer();
+        const buffer = new MarkerInstanceBuffer('cube');
         buffer.replace(source);
         void buffer.getUploadBytes();
       }).run(runOptions);
@@ -110,7 +110,7 @@ describe('marker instance buffer', () => {
     ['1% commit', MARKER_COUNT / 100],
     ['full commit', MARKER_COUNT]
   ] as const) {
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     buffer.takeUploadRanges();
     test(name, async ({ bench }) => {
@@ -121,7 +121,7 @@ describe('marker instance buffer', () => {
     });
   }
 
-  const buffer = new MarkerInstanceBuffer();
+  const buffer = new MarkerInstanceBuffer('cube');
   buffer.replace(source);
   buffer.takeUploadRanges();
   test('cached transparency classification', async ({ bench }) => {
@@ -135,7 +135,7 @@ describe('marker instance buffer', () => {
 
 describe('marker replacement reuse', () => {
   const source = createMarkers(VERTEX_COUNT);
-  const buffer = new MarkerInstanceBuffer();
+  const buffer = new MarkerInstanceBuffer('cube');
   buffer.replace(source);
   test('100K same-capacity replace', async ({ bench }) => {
     await bench('100K same-capacity replace', () => {
@@ -144,7 +144,7 @@ describe('marker replacement reuse', () => {
     }).run(runOptions);
   });
 
-  const commitBuffer = new MarkerInstanceBuffer();
+  const commitBuffer = new MarkerInstanceBuffer('cube');
   commitBuffer.replace(source);
   commitBuffer.takeUploadRanges();
   test('100K full commit reference', async ({ bench }) => {
@@ -157,7 +157,7 @@ describe('marker replacement reuse', () => {
 
 describe('marker replacement classification churn', () => {
   const sources = [createMarkers(VERTEX_COUNT), createTransparentMarkers(VERTEX_COUNT)] as const;
-  const buffer = new MarkerInstanceBuffer();
+  const buffer = new MarkerInstanceBuffer('cube');
   let activeSource: 0 | 1 = 0;
   buffer.replace(sources[activeSource]);
   test('100K alternating transparency replace', async ({ bench }) => {
@@ -176,7 +176,7 @@ describe('marker quaternion normalization', () => {
   ] as const) {
     test(name, async ({ bench }) => {
       await bench(name, () => {
-        const buffer = new MarkerInstanceBuffer();
+        const buffer = new MarkerInstanceBuffer('cube');
         buffer.replace(source);
         void buffer.getUploadBytes();
       }).run(runOptions);
@@ -187,7 +187,7 @@ describe('marker quaternion normalization', () => {
 describe('replacement fan-out', () => {
   const source = createMarkers(MARKER_COUNT);
   for (const layerCount of [1, 3, 6]) {
-    const buffers = Array.from({ length: layerCount }, () => new MarkerInstanceBuffer());
+    const buffers = Array.from({ length: layerCount }, () => new MarkerInstanceBuffer('cube'));
     test(`10K markers to ${layerCount} layer${layerCount === 1 ? '' : 's'}`, async ({ bench }) => {
       await bench(`10K markers to ${layerCount} layer${layerCount === 1 ? '' : 's'}`, () => {
         for (const buffer of buffers) buffer.replace(source);
@@ -201,7 +201,7 @@ describe('prepared replacement fan-out', () => {
   const pointSource = createPointBuffer(MARKER_COUNT);
 
   for (const layerCount of [1, 3, 6]) {
-    const markerBuffers = Array.from({ length: layerCount }, () => new MarkerInstanceBuffer());
+    const markerBuffers = Array.from({ length: layerCount }, () => new MarkerInstanceBuffer('cube'));
     test(`10K prepared markers to ${layerCount} layer${layerCount === 1 ? '' : 's'}`, async ({ bench }) => {
       await bench(`10K prepared markers to ${layerCount} layer${layerCount === 1 ? '' : 's'}`, () => {
         for (const buffer of markerBuffers) replacePreparedMarkerSource(buffer, markerSource);
@@ -222,7 +222,7 @@ describe('large prepared replacement fan-out', () => {
   const pointSource = createPointBuffer(VERTEX_COUNT);
 
   for (const layerCount of [1, 3, 6, 9]) {
-    const markerBuffers = Array.from({ length: layerCount }, () => new MarkerInstanceBuffer());
+    const markerBuffers = Array.from({ length: layerCount }, () => new MarkerInstanceBuffer('cube'));
     test(`100K prepared markers to ${layerCount} layer${layerCount === 1 ? '' : 's'}`, async ({ bench }) => {
       await bench(`100K prepared markers to ${layerCount} layer${layerCount === 1 ? '' : 's'}`, () => {
         for (const buffer of markerBuffers) replacePreparedMarkerSource(buffer, markerSource);
@@ -402,7 +402,7 @@ describe('derived content preparation', () => {
 describe('record publication contracts', () => {
   for (const count of [1, 100, 1_000] as const) {
     const source = createMarkers(count);
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     buffer.takeUploadRanges();
     test(`${count} count change`, async ({ bench }) => {
@@ -418,7 +418,7 @@ describe('record publication contracts', () => {
 
   test('100K partial publication crossing a dirty range', async ({ bench }) => {
     const source = createMarkers(VERTEX_COUNT);
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     buffer.takeUploadRanges();
     await bench('100K partial publication crossing a dirty range', () => {
@@ -429,7 +429,7 @@ describe('record publication contracts', () => {
 
   test('100K prepared sharing across six consumers', async ({ bench }) => {
     const source = createMarkerBuffer(VERTEX_COUNT);
-    const buffers = Array.from({ length: 6 }, () => new MarkerInstanceBuffer());
+    const buffers = Array.from({ length: 6 }, () => new MarkerInstanceBuffer('cube'));
     await bench('100K prepared sharing across six consumers', () => {
       for (const buffer of buffers) replacePreparedMarkerSource(buffer, source);
     }).run(runOptions);
@@ -667,9 +667,9 @@ function createHeightfieldGrid(size: number) {
   return { columns: size, heights: new Float32Array(size * size), rows: size, spacing: 1 };
 }
 
-function createBodyShapes(count: number): Array<{ kind: 'cube'; position: [number, number, number] }> {
+function createBodyShapes(count: number): Array<{ type: 'cube'; position: [number, number, number] }> {
   return Array.from({ length: count }, (_, index) => ({
     position: [index % 100, Math.floor(index / 100), 0] as [number, number, number],
-    kind: 'cube' as const
+    type: 'cube' as const
   }));
 }

@@ -30,6 +30,7 @@ import type { LabelScaleUnit } from '../../layers/labels/data.js';
 import type { PointSizeUnit } from '../../layers/points/data.js';
 import {
   getSceneLayerSpec,
+  isSceneBodyPart,
   type MeshSceneLayerKind,
   type SceneLayerKind,
   type StreamSceneLayerKind
@@ -78,7 +79,7 @@ export type SceneLayerRecord =
 // eslint-disable-next-line complexity -- Each supported custom-element tag has one explicit resolution branch.
 export function resolveSceneLayer(layer: HTMLElement): SceneLayerRecord | undefined {
   const spec = getSceneLayerSpec(layer.localName);
-  if (!spec) return undefined;
+  if (!spec || isSceneBodyPart(layer)) return undefined;
   if (spec.family === 'marker')
     return isMarkerLayerRegistered(layer) ? { kind: 'marker', layer, status: 'registered' } : pending(layer, 'marker');
   if (spec.family === 'stream') {
@@ -169,10 +170,12 @@ function createMeshLayerRenderItem(
   record: MeshLayerRecord,
   frameMatrix: Float64Array,
   interactive: boolean
-): MeshRenderItem {
+): MeshRenderItem | undefined {
   const { layer } = record;
+  const data = takeMeshRecordRenderData(record);
+  if (record.kind === 'body' && !data.ready) return undefined;
   const item = meshItem({
-    data: takeMeshRecordRenderData(record),
+    data,
     frameMatrix,
     instances: optionalMarkers(layer),
     interactive,

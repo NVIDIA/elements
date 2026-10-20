@@ -32,7 +32,11 @@ export class ScenePoints extends StreamingLayerElement<PointSource> {
   /** Uniform point size in the selected size unit. */
   @property({ converter: createPositiveFiniteNumberConverter(3) }) size = 3;
 
-  /** Unit used by the point size. Defaults to CSS pixels. */
+  /**
+   * Unit used by size. Default pixel keeps point clouds and markers readable in CSS
+   * pixels as the camera moves. Use world when size represents a scene distance that
+   * should scale with camera projection.
+   */
   @property({ attribute: 'size-unit', converter: sizeUnitConverter })
   sizeUnit: PointSizeUnit = 'pixel';
 

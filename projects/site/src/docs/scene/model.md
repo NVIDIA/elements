@@ -11,28 +11,32 @@
 
 {% install 'nve-scene-model' %}
 
-A model is the whole entity: [bodies](../body/) connected by [joints](../joint/). It extends a [frame](../frame/)
-with a name scope, the `joints` view, and `tint`. Pose, visibility, and lifecycle retain frame behavior.
-A base model has no `src` and never loads files. Bodies keep their feature IDs and picking behavior.
+A model groups rigid bodies and their joint connections. Bodies own named coordinate frames and geometry; joints identify parent and child bodies. Body frame names and joint names occupy separate namespaces, scoped to the nearest model. Two models can reuse internal names. The model pose places its root bodies.
 
-## Name scopes
+## Joint access
 
-Members use names local to their nearest model. Unqualified `frame` and `mimic` references search that scope,
-then outer models and the scene. Separate models can use identical internal names. `/` separates qualified
-names, such as a camera's `frame="armB/tcp"`; bare names cannot contain `/`.
-Nested models extend the path, for example `cell/arm/tcp`. Document order does not affect resolution.
-An unnamed model works internally. An outside qualified reference to its member requires a model name,
-otherwise Scene reports `model-name` and suppresses that chain until corrected.
+{% api 'nve-scene-model' 'property' 'joints' %}
 
-## Drive joints
+Pass a record to set more than one joint with one membership lookup. The record has the same shape that `values()` returns.
 
-`model.joints` is a read-only live view of this scope, excluding nested models. `get(name)` returns a joint;
-`set(name, value)` assigns its synchronous value. `has`, `names`, and `values` inspect current membership;
-`values` returns a plain object. `reset` sets every non-mimic joint to zero.
-An unknown name through `get` or `set` reports `model-joint` and invalidates this entity chain until a valid
-access or reset corrects the input.
+```js
+arm.joints.set({ shoulder: 0.4, elbow: -0.8 });
+```
 
-Model `tint` defaults to white and multiplies into each body's own tint. Nested model tints compose in the
-existing linear-light color pipeline without recapturing geometry.
+## Body access
 
-{% example 'nve-scene-model' 'IndependentArms' %}
+{% api 'nve-scene-model' 'property' 'bodies' %}
+
+```js
+const tip = arm.bodies.get('forearm')?.getWorldPoint([0, 0, 0.8]);
+```
+
+## Body tint
+
+{% api 'nve-scene-model' 'property' 'tint' %}
+
+## Animated arm
+
+{% example 'nve-scene-model' 'RobotArmAnimated' %}
+
+See [frames](/docs/scene/frame/) for transform authority and [joints](/docs/scene/joint/) for motion and limits.

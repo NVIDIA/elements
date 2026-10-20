@@ -16,16 +16,20 @@ export const LINES_COUNT = 'lines-count';
 export const MESH_GEOMETRY = 'mesh-geometry';
 export const MESH_TEXTURE_WITHOUT_UVS = 'mesh-texture-without-uvs';
 export const MESH_TEXTURE_CAPTURE = 'mesh-texture-capture';
+export const MESH_SRC = 'mesh-src';
+export const MESH_PART = 'mesh-part';
+export const MESH_PROPERTY_INACTIVE = 'mesh-property-inactive';
 export const HEIGHTFIELD_GRID = 'heightfield-grid';
 export const POLYGON_GEOMETRY = 'polygon-geometry';
 /** Reserved; assigned geometry currently overrides shape children without a diagnostic. */
 export const BODY_DUAL_SOURCE = 'body-dual-source';
-export const BODY_SRC = 'body-src';
-export const SHAPE_KIND = 'shape-kind';
+export const SHAPE_TYPE = 'shape-type';
 export const CAMERA_SLOT_CONFLICT = 'camera-slot-conflict';
 export const CAMERA_RANGE = 'camera-range';
 export const FRAME_UNRESOLVED = 'frame-unresolved';
 export const CAMERA_PROPERTY_INACTIVE = 'camera-property-inactive';
+
+export const JOINT_CONNECTION = 'joint-connection';
 
 export const JOINT_TYPE = 'joint-type';
 
@@ -44,6 +48,7 @@ export const MODEL_JOINT = 'model-joint';
 export const MODEL_NAME = 'model-name';
 
 export type SceneErrorCode =
+  | typeof JOINT_CONNECTION
   | typeof MODEL_NAME
   | typeof MODEL_JOINT
   | typeof FRAME_NAME
@@ -70,9 +75,11 @@ export type SceneErrorCode =
   | typeof MESH_GEOMETRY
   | typeof MESH_TEXTURE_CAPTURE
   | typeof MESH_TEXTURE_WITHOUT_UVS
+  | typeof MESH_SRC
+  | typeof MESH_PART
+  | typeof MESH_PROPERTY_INACTIVE
   | typeof BODY_DUAL_SOURCE
-  | typeof BODY_SRC
-  | typeof SHAPE_KIND
+  | typeof SHAPE_TYPE
   | typeof POLYGON_GEOMETRY
   | typeof TRIANGLES_COUNT
   | typeof WEBGPU_UNAVAILABLE;

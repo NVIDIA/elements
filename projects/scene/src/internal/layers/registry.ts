@@ -30,6 +30,7 @@ export type SceneLayerKind = SceneLayerSpec['kind'];
 
 const SCENE_BODY_TAG = 'nve-scene-body';
 export const SCENE_SHAPE_TAG = 'nve-scene-shape';
+export const SCENE_MESH_TAG = 'nve-scene-mesh';
 
 const SCENE_LAYER_SPECS = [
   { family: 'label', kind: 'label', markerInstances: false, tag: 'nve-scene-labels' },
@@ -44,7 +45,7 @@ const SCENE_LAYER_SPECS = [
   { family: 'stream', kind: 'line', markerInstances: false, tag: 'nve-scene-lines' },
   { family: 'stream', kind: 'point', markerInstances: false, tag: 'nve-scene-points' },
   { family: 'stream', kind: 'triangle', markerInstances: false, tag: 'nve-scene-triangles' },
-  { family: 'mesh', kind: 'mesh', markerInstances: true, tag: 'nve-scene-mesh' },
+  { family: 'mesh', kind: 'mesh', markerInstances: true, tag: SCENE_MESH_TAG },
   { family: 'mesh', kind: 'body', markerInstances: true, tag: SCENE_BODY_TAG },
   { family: 'mesh', kind: 'polygon', markerInstances: true, tag: 'nve-scene-polygon' },
   { family: 'heightfield', kind: 'heightfield', markerInstances: false, tag: 'nve-scene-heightfield' }
@@ -56,4 +57,9 @@ export const SCENE_LAYER_SELECTOR = SCENE_LAYER_SPECS.map(spec => spec.tag).join
 
 export function getSceneLayerSpec(tag: string): SceneLayerSpec | undefined {
   return specsByTag.get(tag);
+}
+
+/** Direct mesh children compile into their body instead of rendering as separate layers. */
+export function isSceneBodyPart(element: Element): boolean {
+  return element.localName === SCENE_MESH_TAG && element.parentElement?.localName === SCENE_BODY_TAG;
 }

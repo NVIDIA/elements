@@ -6,10 +6,26 @@ import {
   IDENTITY_QUATERNION,
   multiplyQuaternions,
   normalizeQuaternion,
+  normalizeQuaternionInto,
+  quaternionFromRpy,
   rotateVectorByQuaternion
 } from './quaternion.js';
 
 describe('quaternion math', () => {
+  it('converts URDF fixed-axis roll, pitch, and yaw as yaw, then pitch, then roll rotations', () => {
+    const turn = (axis: readonly [number, number, number], angle: number) =>
+      [...axis.map(value => value * Math.sin(angle / 2)), Math.cos(angle / 2)] as [number, number, number, number];
+    const [roll, pitch, yaw] = [0.3, -0.7, 1.1];
+    const expected = multiplyQuaternions(
+      multiplyQuaternions(turn([0, 0, 1], yaw), turn([0, 1, 0], pitch)),
+      turn([1, 0, 0], roll)
+    );
+    expectQuaternionCloseTo(quaternionFromRpy([roll, pitch, yaw]), expected);
+    expect(quaternionFromRpy([0, 0, 0])).toEqual([0, 0, 0, 1]);
+    for (const invalid of [null, [], [1, 2], [1, 2, 3, 4], [1, Number.NaN, 0], ['1', 0, 0]])
+      expect(() => quaternionFromRpy(invalid as unknown as [number, number, number])).toThrow(TypeError);
+  });
+
   it('rotates known axes and preserves vector length and inputs', () => {
     const vector = [3, 4, 5] as const;
     const quarterTurn = [0, 0, Math.SQRT1_2, Math.SQRT1_2] as const;
@@ -56,6 +72,26 @@ describe('quaternion math', () => {
       0,
       0
     ]);
+  });
+
+  it('writes normalized quaternions into caller-owned storage, including aliased and extreme inputs', () => {
+    const inputs: Array<[number, number, number, number]> = [
+      [1, 2, 3, 4],
+      [0, 0, 0, 1],
+      [-0, 0.5, -0.5, 0.5],
+      [Number.MIN_VALUE, 0, 0, 0],
+      [Number.MAX_VALUE, Number.MAX_VALUE, 0, 0]
+    ];
+    const precise = new Float64Array(4);
+
+    for (const input of inputs) {
+      const expected = normalizeQuaternion(input);
+      expect(normalizeQuaternionInto(input, precise)).toBe(precise);
+      expect([...precise]).toEqual(expected);
+      const aliased: [number, number, number, number] = [...input];
+      expect(normalizeQuaternionInto(aliased, aliased)).toEqual(expected);
+    }
+    expect(() => normalizeQuaternionInto([0, 0, 0, 0], precise)).toThrow(RangeError);
   });
 
   it('should multiply orientations with overflowing squared lengths', () => {

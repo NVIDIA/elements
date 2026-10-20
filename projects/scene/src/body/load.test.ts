@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { decodeGeometry, loadGeometry } from './load.js';
+import { decodeGeometry, loadGeometry } from '../index.js';
 import { MAX_GEOMETRY_BYTES } from '../internal/layers/body/limits.js';
 
 const ASCII_STL = `solid triangle

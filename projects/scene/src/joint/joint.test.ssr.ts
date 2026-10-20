@@ -16,19 +16,17 @@ describe(SceneJoint.metadata.tag, () => {
     expect(joint.pose.orientation).toEqual([0, 0, 0, 1]);
   });
 
-  it('should render nested joint content on the server', async () => {
+  it('renders flat body connections on the server', async () => {
     const result = await ssrRunner.render(html`
       <nve-scene aria-label="Robot visualization">
-        <nve-scene-joint name="base-link" position="[1,0,0]">
-          <nve-scene-joint name="sensor" type="prismatic" axis="[0,0,1]" value="0.5" frame="base-link" position="[0,0,1]"></nve-scene-joint>
-        </nve-scene-joint>
+        <nve-scene-body name="base"></nve-scene-body>
+        <nve-scene-body name="sensor"></nve-scene-body>
+        <nve-scene-joint name="lift" parent="base" child="sensor" type="prismatic" axis="[0,0,1]" value="0.5"></nve-scene-joint>
       </nve-scene>
     `);
-
-    expect(result.includes('nve-scene-joint')).toBe(true);
-    expect(result).toContain('frame="base-link"');
+    expect(result).toContain('parent="base"');
+    expect(result).toContain('child="sensor"');
     expect(result).toContain('value="0.5"');
-    expect(result.includes('slot></slot>')).toBe(true);
-    expect(result.match(/shadowroot="open"/g)).toHaveLength(3);
+    expect(result.match(/shadowroot="open"/g)).toHaveLength(4);
   });
 });

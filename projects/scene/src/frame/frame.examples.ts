@@ -2,9 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import '@nvidia-elements/media/time-range/define.js';
+import '@nvidia-elements/scene/axes/define.js';
 import '@nvidia-elements/scene/camera/define.js';
 import '@nvidia-elements/scene/frame/define.js';
+import '@nvidia-elements/scene/gridlines/define.js';
+import '@nvidia-elements/scene/labels/define.js';
+import '@nvidia-elements/scene/points/define.js';
+import '@nvidia-elements/scene/scene/define.js';
 
 export default {
   title: 'Elements/Scene/Frame',
@@ -12,41 +16,64 @@ export default {
 };
 
 /**
- * @summary A forklift carriage groups the forks, pallet, and load under one moving frame. Use nested frames to update an articulated assembly while preserving each body's local offset.
+ * @summary Place a sensor scan, axes, and label in one coordinate frame. Adjust the sensor heading to move them together while the world grid stays fixed and scan records keep their local coordinates.
  */
 export const Default = {
   render: () => html`
-    <div nve-layout="column gap:md pad:md">
-      <nve-scene aria-label="Forklift lifting a pallet" style="width: 100%; height: 480px">
-        <nve-scene-camera behavior="orbit" target="[0.25,0,0.75]" distance="6"></nve-scene-camera>
-        <nve-scene-frame name="warehouse">
-          <nve-scene-gridlines></nve-scene-gridlines>
-          <nve-scene-frame name="forklift" position="[-0.75,0,0]">
-            <nve-scene-cubes source='[{"position":[-0.3,0,0.3],"size":[1.2,0.9,0.5],"color":"#76b900"},{"position":[-0.55,0,0.72],"size":[0.55,0.8,0.55],"color":"#30343b"},{"position":[0.35,-0.34,0.85],"size":[0.12,0.12,1.5],"color":"#aeb4be"},{"position":[0.35,0.34,0.85],"size":[0.12,0.12,1.5],"color":"#aeb4be"}]'>
-            </nve-scene-cubes>
-            <nve-scene-cylinders source='[{"position":[-0.65,-0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"},{"position":[-0.65,0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"},{"position":[0.15,-0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"},{"position":[0.15,0.5,0.2],"orientation":[0.707107,0,0,0.707107],"size":[0.4,0.4,0.18],"color":"#20242a"}]'>
-            </nve-scene-cylinders>
-            <nve-scene-frame id="carriage" name="carriage" position="[0.4,0,0.25]">
-              <nve-scene-cubes source='[{"position":[0,0,0.2],"size":[0.15,0.8,0.45],"color":"#aeb4be"},{"position":[0.5,-0.28,0],"size":[1,0.1,0.08],"color":"#aeb4be"},{"position":[0.5,0.28,0],"size":[1,0.1,0.08],"color":"#aeb4be"},{"position":[0.7,0,0.14],"size":[0.8,0.75,0.18],"color":"#d97736"},{"position":[0.7,0,0.55],"size":[0.7,0.65,0.65],"color":"#e8eaed"}]'>
-              </nve-scene-cubes>
-            </nve-scene-frame>
-          </nve-scene-frame>
+    <div id="sensor-frame-demo" nve-layout="column gap:md pad:md">
+      <nve-scene aria-label="Sensor scan in a movable coordinate frame" style="width: 100%; height: 400px">
+        <nve-scene-camera behavior="orbit" target="[0,0,0.8]" distance="6" polar-angle="1" azimuth="-0.8"></nve-scene-camera>
+        <nve-scene-gridlines spacing="0.5" count="6"></nve-scene-gridlines>
+        <nve-scene-axes length="0.6"></nve-scene-axes>
+        <nve-scene-frame id="sensor-frame" name="sensor" position="[-1,0,0.4]">
+          <nve-scene-axes length="0.8" width="3"></nve-scene-axes>
+          <nve-scene-points id="sensor-scan" size="5"></nve-scene-points>
         </nve-scene-frame>
+        <nve-scene-labels id="sensor-label" frame="sensor"></nve-scene-labels>
       </nve-scene>
       <div nve-layout="column gap:xs">
-        <label for="lift-height" nve-text="label">Lift height: <output id="lift-height-output" for="lift-height">0.25 m</output></label>
-        <nve-media-time-range id="lift-height" aria-label="Lift height" min="0.25" max="1.25" step="0.05" value="0.25"></nve-media-time-range>
+        <label for="sensor-heading" nve-text="label">Sensor heading: <output id="sensor-heading-output" for="sensor-heading">25°</output></label>
+        <input id="sensor-heading" type="range" min="-90" max="90" step="1" value="25" />
+        <p nve-text="body sm muted">The scan, sensor axes, and label move together. The grid and world axes stay fixed.</p>
       </div>
     </div>
     <script type="module">
-      import '@nvidia-elements/scene/bundles/index.js';
-      const carriage = document.querySelector('#carriage');
-      const liftHeight = document.querySelector('#lift-height');
-      const liftHeightOutput = document.querySelector('#lift-height-output');
-      liftHeight.addEventListener('input', () => {
-        carriage.setPose({ position: [0.4, 0, liftHeight.valueAsNumber], orientation: [0, 0, 0, 1] });
-        liftHeightOutput.value = liftHeight.valueAsNumber.toFixed(2) + ' m';
+      import { LabelBuffer } from '@nvidia-elements/scene/labels';
+      import { PointBuffer } from '@nvidia-elements/scene/points';
+      import '@nvidia-elements/scene/axes/define.js';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/frame/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/labels/define.js';
+      import '@nvidia-elements/scene/points/define.js';
+      import '@nvidia-elements/scene/scene/define.js';
+
+      const demo = document.querySelector('#sensor-frame-demo');
+      const sensor = demo.querySelector('#sensor-frame');
+      const heading = demo.querySelector('#sensor-heading');
+      const headingOutput = demo.querySelector('#sensor-heading-output');
+      const scan = new PointBuffer({ capacity: 286 });
+      for (let row = 0; row < 11; row += 1) {
+        for (let column = 0; column < 13; column += 1) {
+          const index = (row * 13 + column) * 2;
+          const height = row * 0.12;
+          scan.set(index, { position: [1.8, -0.9 + column * 0.15, height], color: '#76b900' });
+          scan.set(index + 1, { position: [0.6 + column * 0.1, 0.9, height], color: '#76b900' });
+        }
+      }
+      demo.querySelector('#sensor-scan').source = scan;
+      demo.querySelector('#sensor-label').source = new LabelBuffer({
+        records: [{ text: 'Sensor scan', position: [1.8, 0, 1.4], scale: 18 }]
       });
+
+      const updatePose = () => {
+        const angle = heading.valueAsNumber * Math.PI / 180;
+        sensor.position = [-1, 0, 0.4];
+        sensor.orientation = [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)];
+        headingOutput.value = heading.value + '°';
+      };
+      heading.addEventListener('input', updatePose);
+      updatePose();
     </script>
   `
 };

@@ -2,9 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { BoundsAccumulator, boundsCorners, extendAffineBounds, type SceneBounds } from './bounds.js';
+import {
+  BoundsAccumulator,
+  boundsCorners,
+  extendAffineBounds,
+  scaledEnclosingRadius,
+  unitScaleEnclosingRadius,
+  type SceneBounds
+} from './bounds.js';
 import { composePreciseMat4, identityPreciseMat4, transformPointMat4 } from './mat4.js';
-import type { Matrix4, Vec3 } from './types.js';
+import type { Matrix4, Quaternion, Vec3 } from './types.js';
 
 const box: SceneBounds = { minimum: [-1, -2, -3], maximum: [2, 3, 4] };
 
@@ -124,6 +131,37 @@ describe(extendAffineBounds.name, () => {
     const point: SceneBounds = { minimum: [2, 2, 0], maximum: [2, 2, 0] };
     expect(() => cornerBounds(point, matrix)).toThrow(RangeError);
     expect(() => new BoundsAccumulator().includeBox(point, matrix)).toThrow(RangeError);
+  });
+});
+
+describe(scaledEnclosingRadius.name, () => {
+  it('derives unit radii from the largest absolute coordinate and scales them by the largest absolute scale', () => {
+    expect(unitScaleEnclosingRadius(box)).toBe(Math.sqrt(3) * 4);
+    expect(unitScaleEnclosingRadius({ minimum: [-1, -1, 0], maximum: [1, 1, 1] })).toBe(Math.sqrt(3));
+    expect(unitScaleEnclosingRadius({ minimum: [-0.5, -0.5, -0.5], maximum: [0.5, 0.5, 0.5] })).toBe(Math.sqrt(3) / 2);
+    expect(scaledEnclosingRadius(2, -3, 0.5, 1)).toBe(6);
+    expect(scaledEnclosingRadius(2, 0, 0, 0)).toBe(0);
+    expect(scaledEnclosingRadius(2, Number.NaN, 1, 1)).toBeNaN();
+    expect(scaledEnclosingRadius(Math.sqrt(3), 3.4028234663852886e38, 1, 1)).toBe(Math.sqrt(3) * 3.4028234663852886e38);
+  });
+
+  it('encloses every corner of rotated, unevenly scaled boxes', () => {
+    const unitRadius = unitScaleEnclosingRadius(box);
+    const scales: Vec3[] = [
+      [1, 1, 1],
+      [-2, 0.5, 3],
+      [0, 0.25, -4]
+    ];
+    for (const scale of scales) {
+      const radius = scaledEnclosingRadius(unitRadius, ...scale);
+      for (let turn = 0; turn < 8; turn += 1) {
+        const orientation: Quaternion = [Math.sin(turn), Math.cos(turn * 3), turn / 8, 1];
+        const matrix = composePreciseMat4([0, 0, 0], orientation, scale);
+        for (const corner of boundsCorners(box)) {
+          expect(Math.hypot(...transformPointMat4(matrix, corner))).toBeLessThan(radius);
+        }
+      }
+    }
   });
 });
 

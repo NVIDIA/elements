@@ -12,8 +12,11 @@ import {
   getNamedSceneFrame,
   invalidateFrameTransform,
   isFrameChainValid,
+  isFrameChainVisible,
   isFrameStateRegistered,
   registerFrameState,
+  resolveSceneFrameReferences,
+  setFrameReference,
   setFrameTransform
 } from './state.js';
 
@@ -165,7 +168,80 @@ describe(FrameEvaluation.name, () => {
 
     expect(new FrameEvaluation().getWorldMatrix(descendant)).toEqual(getFrameWorldMatrixPrecise(frame));
   });
+
+  it('shares validity and visibility within an evaluation and observes input edits in the next evaluation', () => {
+    const { root, first, second } = referencedFrames();
+    const evaluation = new FrameEvaluation();
+    expect(evaluation.isValid(first)).toBe(true);
+    expect(evaluation.isValid(second)).toBe(true);
+    expect(evaluation.isVisible(first)).toBe(true);
+    expect(evaluation.isVisible(second)).toBe(true);
+
+    invalidateFrameTransform(root);
+    root.hidden = true;
+    expect(evaluation.isValid(first)).toBe(true);
+    expect(evaluation.isVisible(first)).toBe(true);
+    const next = new FrameEvaluation();
+    expect(next.isValid(first)).toBe(false);
+    expect(next.isValid(second)).toBe(false);
+    expect(next.isVisible(first)).toBe(false);
+    expect(next.isVisible(second)).toBe(false);
+    clearFrameTransform(root);
+    root.hidden = false;
+    expect(new FrameEvaluation().isValid(first)).toBe(true);
+    expect(new FrameEvaluation().isVisible(first)).toBe(true);
+  });
+
+  it('combines authored DOM hiding with hiding along referenced parents, including outside the scene', () => {
+    const { scene, root, wrapper, first, second } = referencedFrames();
+    wrapper.hidden = true;
+    const authored = new FrameEvaluation();
+    expect(authored.isVisible(first)).toBe(false);
+    expect(authored.isVisible(second)).toBe(true);
+    expect(authored.getWorldMatrix(first)).toEqual(authored.getWorldMatrix(second));
+    wrapper.hidden = false;
+    const rootWrapper = document.createElement('div');
+    rootWrapper.hidden = true;
+    scene.append(rootWrapper);
+    rootWrapper.append(root);
+    expect(new FrameEvaluation().isVisible(second)).toBe(false);
+    rootWrapper.hidden = false;
+    const outside = document.createElement('div');
+    outside.hidden = true;
+    outside.append(scene);
+    expect(new FrameEvaluation().isVisible(first)).toBe(false);
+    expect(isFrameChainVisible(second)).toBe(false);
+  });
+
+  it('fails closed for a detached reference target before the next registry refresh', () => {
+    const { root, first, second } = referencedFrames();
+    root.remove();
+    const evaluation = new FrameEvaluation();
+    expect(evaluation.isValid(first)).toBe(false);
+    expect(evaluation.isVisible(first)).toBe(false);
+    expect(evaluation.getWorldMatrix(first)).toBeNull();
+    expect(evaluation.isValid(second)).toBe(false);
+    expect(evaluation.isVisible(second)).toBe(false);
+    expect(evaluation.getWorldMatrix(second)).toBeNull();
+  });
 });
+
+function referencedFrames() {
+  const scene = document.createElement('nve-scene');
+  const root = document.createElement('nve-scene-frame');
+  const wrapper = document.createElement('div');
+  const first = document.createElement('div');
+  const second = document.createElement('div');
+  root.setAttribute('name', 'root');
+  registerFrameState(root);
+  scene.append(root, wrapper, second);
+  wrapper.append(first);
+  setFrameReference(first, 'root');
+  setFrameReference(second, 'root');
+  updateFrameRegistry(scene, [root], [first, second]);
+  resolveSceneFrameReferences(scene, [root], [first, second]);
+  return { scene, root, wrapper, first, second };
+}
 
 function resolveUncached(frame: HTMLElement) {
   const matrices = [];
