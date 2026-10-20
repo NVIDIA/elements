@@ -18,21 +18,91 @@ export default {
 };
 
 /**
- * @summary Load an STL surface directly through the model asset attribute. Use tint to color geometry without changing file coordinates or instance placements.
+ * @summary Load the rover from an STL file. Use tint to color imported geometry while preserving its coordinates and units.
  */
 export const FileAsset = {
   render: () => html`
-    <nve-scene aria-label="Imported STL triangle" style="height: 320px">
-      <nve-scene-camera behavior="orbit" target="[0,0,0]" distance="4" polar-angle="0.5" azimuth="0" projection="orthographic" frustum-height="3"></nve-scene-camera>
-      <nve-scene-model asset="data:application/sla,solid%20triangle%0Afacet%20normal%200%200%201%0Aouter%20loop%0Avertex%20-1%20-1%200%0Avertex%201%20-1%200%0Avertex%200%201%200%0Aendloop%0Aendfacet%0Aendsolid%20triangle%0A" format="stl" tint="#76b900" aria-label="STL triangle"></nve-scene-model>
+    <nve-scene aria-label="STL rover model" style="height: 100%">
+      <nve-scene-gridlines count="12" spacing="2"></nve-scene-gridlines>
+      <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="8" polar-angle="0.9" azimuth="-0.75"></nve-scene-camera>
+      <nve-scene-model asset="/static/models/rover.stl" tint="#76b900" aria-label="Rover model"></nve-scene-model>
     </nve-scene>
+  `
+};
+
+/**
+ * @summary Build a rover from primitive parts. Use declarative geometry to adjust shapes, transforms, and colors directly in HTML.
+ */
+export const Default = {
+  render: () => html`
+    <nve-scene id="robot-rover-scene" aria-label="robot rover model" style="height: 100%">
+      <nve-scene-gridlines count="12" spacing="2"></nve-scene-gridlines>
+      <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="8" polar-angle="0.9" azimuth="-0.75"></nve-scene-camera>
+      <nve-scene-model aria-label="rover model">
+        <nve-scene-part shape="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-part>
+        <nve-scene-part shape="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+      </nve-scene-model>
+    </nve-scene>
+  `
+};
+
+/**
+ * @summary Place three rovers with different positions, rotations, and scales from one MarkerBuffer. Use packed instance records to reuse authored geometry across repeated assets.
+ */
+export const BufferSource = {
+  render: () => html`
+    <nve-scene aria-label="three buffered rover models" style="height: 100%">
+      <nve-scene-gridlines count="12" spacing="2"></nve-scene-gridlines>
+      <nve-scene-camera behavior="orbit" target="[0,0,1]" distance="13" polar-angle="0.9" azimuth="-0.75"></nve-scene-camera>
+      <nve-scene-model id="buffered-rover" aria-label="three rover instances">
+        <nve-scene-part shape="cube" position="[0,0,0.68]" scale="[1.9,1.3,0.5]" color="#76b900"></nve-scene-part>
+        <nve-scene-part shape="cube" position="[0.35,0,1.04]" scale="[0.7,1,0.22]" color="#76b900"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[-0.55,0,1.38]" scale="[0.1,0.1,0.9]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cube" position="[-0.55,0,1.91]" scale="[0.22,0.34,0.16]" color="#e0a53e"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[0,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[-0.7,0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+        <nve-scene-part shape="cylinder" position="[-0.7,-0.77,0.34]" scale="[0.68,0.68,0.24]" orientation="[0.7071,0,0,0.7071]" color="#343946"></nve-scene-part>
+      </nve-scene-model>
+    </nve-scene>
+    <script type="module">
+      import { MarkerBuffer } from '@nvidia-elements/scene';
+      import '@nvidia-elements/scene/camera/define.js';
+      import '@nvidia-elements/scene/gridlines/define.js';
+      import '@nvidia-elements/scene/model/define.js';
+      import '@nvidia-elements/scene/scene/define.js';
+
+      const markers = new MarkerBuffer({ capacity: 3 });
+      markers.add({ position: [-3, 0, 0] });
+      markers.add({
+        position: [0, 0, 0],
+        orientation: [0, 0, 0.382683, 0.92388],
+        scale: [0.75, 0.75, 0.75]
+      });
+      markers.add({
+        position: [3, 0, 0],
+        orientation: [0, 0, -0.258819, 0.965926],
+        scale: [1.15, 1.15, 1.15]
+      });
+      document.querySelector('#buffered-rover').source = markers;
+    </script>
   `
 };
 
 /**
  * @summary An articulated six-joint arm nests compound link models in scene frames, with live joint controls and an end-effector trace. Use this pattern to prototype inspectable robot kinematics without rebuilding model geometry per frame.
  */
-export const Default = {
+export const RobotArm = {
   render: () => html`
     <nve-scene id="robot-arm-scene" aria-label="six-joint industrial robot arm model" style="height: 100%">
       <nve-scene-gridlines spacing="0.25" count="24"></nve-scene-gridlines>
@@ -55,46 +125,6 @@ export const Default = {
         <nve-scene-part shape="cone" position="[-0.063744,-0.136639,2.581457]" orientation="[0.145455,-0.085277,0.375658,0.911291]" scale="[0.15,0.15,0.26]" color="#e0a53e"></nve-scene-part>
       </nve-scene-model>
     </nve-scene>
-  `
-};
-
-/**
- * @summary A model instance supplied by a packed buffer reproduces the declarative robot arm scene. Use a MarkerBuffer for large or frequently updated instance sets.
- */
-export const BufferSource = {
-  render: () => html`
-    <nve-scene aria-label="buffered six-joint industrial robot arm model" style="height: 100%">
-      <nve-scene-gridlines spacing="0.25" count="24"></nve-scene-gridlines>
-      <nve-scene-camera behavior="orbit" projection="perspective" target="[-0.15,-0.08,1.35]" distance="4.6" polar-angle="1.1" azimuth="-0.75" vertical-field-of-view="0.785398163" min-distance="2.5" max-distance="10"></nve-scene-camera>
-      <nve-scene-model id="buffered-robot-arm" aria-label="industrial robot arm">
-        <nve-scene-part shape="cylinder" position="[0,0,0.15]" scale="[0.58,0.58,0.3]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[0,0,0.31]" scale="[0.46,0.46,0.12]" color="#76b900"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[0,0,0.185]" scale="[0.4,0.4,0.33]" color="#4a5160"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[0,0,0.475]" orientation="[0,0,0.258819,0.965926]" scale="[0.26,0.26,0.25]" color="#8f97a6"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.304229,-0.175647,0.990151]" orientation="[0.092752,-0.346157,0.241628,0.901769]" scale="[0.17,0.17,1.05]" color="#8f97a6"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.379392,-0.219042,1.74436]" orientation="[-0.079979,0.298487,0.246152,0.91865]" scale="[0.14,0.14,0.9]" color="#8f97a6"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.099421,-0.057401,2.189319]" orientation="[-0.026933,0.307841,0.401934,0.86195]" scale="[0.12,0.12,0.2]" color="#8f97a6"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.053132,-0.060929,2.364535]" orientation="[0.145455,-0.085277,0.375658,0.911291]" scale="[0.11,0.11,0.2]" color="#8f97a6"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[0,0,0.35]" scale="[0.22,0.22,0.24]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[0,0,0.6]" orientation="[-0.683013,-0.183013,0.183013,0.683013]" scale="[0.24255,0.24255,0.2646]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.608458,-0.351294,1.380302]" orientation="[-0.572061,-0.415627,-0.073913,0.703233]" scale="[0.22,0.22,0.24]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.150325,-0.08679,2.108417]" orientation="[-0.079979,0.298487,0.246152,0.91865]" scale="[0.22,0.22,0.24]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.048518,-0.028012,2.270221]" orientation="[-0.628535,-0.066534,0.501887,0.590446]" scale="[0.22,0.22,0.24]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cylinder" position="[-0.057746,-0.093847,2.458849]" orientation="[0.145455,-0.085277,0.375658,0.911291]" scale="[0.22,0.22,0.24]" color="#39404e"></nve-scene-part>
-        <nve-scene-part shape="cone" position="[-0.063744,-0.136639,2.581457]" orientation="[0.145455,-0.085277,0.375658,0.911291]" scale="[0.15,0.15,0.26]" color="#e0a53e"></nve-scene-part>
-      </nve-scene-model>
-    </nve-scene>
-    <script type="module">
-      import { MarkerBuffer } from '@nvidia-elements/scene';
-      import '@nvidia-elements/scene/camera/define.js';
-      import '@nvidia-elements/scene/gridlines/define.js';
-      import '@nvidia-elements/scene/model/define.js';
-      import '@nvidia-elements/scene/scene/define.js';
-
-      const markers = new MarkerBuffer({ capacity: 1 });
-      markers.add();
-      document.querySelector('#buffered-robot-arm').source = markers;
-    </script>
   `
 };
 

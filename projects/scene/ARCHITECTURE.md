@@ -67,8 +67,9 @@ Applications and integration layers own:
 
 An integration may use Scene as a geometry presentation lens. It must resolve expressions, memory, messages,
 or recorded data into bounded Scene inputs before crossing the Scene API boundary. Static model files are a narrow
-exception: `nve-scene-model.asset` can fetch and decode a supported geometry format. Its loader publishes the same
-model nodes that applications assign through `geometry`; it adds no transport-shaped source or alternate renderer.
+exception: `nve-scene-model.asset` fetches and decodes ASCII or binary STL files. File loading publishes the same model
+nodes that applications assign through `nve-scene-model.geometry`; this adds no transport-shaped source or alternate renderer.
+The STL decoder loads on demand. Applications own texture fetching and playback.
 
 ## Internal source organization
 
@@ -163,8 +164,28 @@ adds a captured inverse transpose through the existing pivoted matrix inverse an
 columns. Geometry preparation requires a finite inverse and gives zero normals the existing positive Z fallback.
 Prepared transforms retain independent coefficients; repeated writes allocate no vectors and round only into destination
 storage. Model compilation prepares one transform per part or mesh piece; bounds queries prepare one per position layer.
-Callers own span validation, record decoding, output storage, winding, and diagnostics. General matrix and perspective
-operations remain in `math/mat4.ts`; box bounds retain the perspective path for non-affine matrices.
+Callers own source validation, record decoding, output storage, winding, and diagnostics. General matrix operations
+remain in `math/mat4.ts`; box bounds retain the perspective path for non-affine matrices.
+
+`math/projection.ts` owns optical-camera view matrices, perspective and orthographic WebGPU projection matrices,
+point projection, unprojection, and unit rays from the near plane. Viewport conversions use continuous coordinates
+from the top left and preserve zero-to-one depth. Calculations retain JavaScript precision and Float64 matrices.
+Forward projection requires finite clip coordinates and positive w; offscreen results remain available for visibility
+classification. Ray unprojection requires finite results and absolute w of at least `Number.EPSILON`. Depth-sample
+reconstruction selects an explicit policy that divides by any nonzero w and retains undivided coordinates at zero w.
+Scene queries own submitted-frame selection, DOM offsets, viewport containment, and frozen results. Picking owns
+device-pixel selection and the half-pixel center offset. Camera composition retains state validation, behavior
+resolution, and navigation policy.
+
+`MeshAssembly` in `math/mesh-assembly.ts` plans and joins checked geometry into independent planar attribute arrays.
+Attribute spans count numeric elements and support interleaved or planar storage; zero strides broadcast constant
+attributes. Planning checks span boundaries and reports vertex, index, and byte counts without reading vertex values
+or allocating output arrays. Model compilers check their allocation limits before assembly. The shared writer applies
+affine position and inverse-transpose normal transforms, adjusts triangle indices, and reverses winding for reflected
+parts. Its loops allocate no objects per vertex or triangle. Optional UV output keeps missing coordinates at zero.
+Callers choose direct color copies or prepared linear-light modulation and supply their position-overflow error policy.
+The primitive compiler retains its cached tessellations and constant colors; model geometry retains hierarchy validation,
+generated attributes, and its finite Float32 position limit. Source arrays and assembled results own independent storage.
 
 `extendAffineBounds` in `math/bounds.ts` extends caller-owned minimum and maximum tuples with an affine box.
 It selects extrema from both endpoint products on each axis and adds terms in point-transform order. Each box
@@ -253,13 +274,22 @@ available bytes, aligns writes to four bytes, and merges overlaps and adjacency 
 write cost merges clean gaps when their byte cost is no greater than the saved call cost. `coalesceRanges` in `algorithms/`
 owns this numeric optimization for sorted intervals without overlaps. It minimizes covered length plus range count times
 overhead within a range budget. When the initial plan exceeds the budget, it merges the smallest remaining gaps; equal
-gaps merge in source order. Planning takes linear time unless the budget requires additional merges, which sort the gaps.
+gaps merge in source order. When the budget requires additional merges, selection retains the smaller set of gaps to
+merge or keep in a `BoundedHeap`. For m ranges after cost-based merging and budget b, k is min(m - b, b - 1).
+Selection uses O(k) storage and planning takes O(n log(k + 1)) time, including sorting the selected indices into source
+order. A one-range budget uses a direct merge. Other plans take linear time.
 The GPU planner retains alignment, clipping, and validation and applies the numeric optimizer before partition mapping.
 Partition mapping can increase actual transferred bytes and GPU write count by duplicating boundary records or splitting
 ranges. Consumers use zero call overhead by default to preserve clean gaps. The planner reuses normalized inputs and
 leaves other inputs unchanged. Shared instance storage plans source ranges before partition mapping; labels and planar
 mesh attributes use the same planner. Partition mapping owns duplicated boundary records, wrapped storage, and destination
 limits.
+
+`BoundedHeap` in `structures/` retains the smallest values under a caller-defined order. Its greatest retained value
+occupies the root, so a rejected addition takes constant time. Accepted additions take O(log(k + 1)) time for capacity k.
+Storage grows with retained values; construction does not allocate the full capacity. Draining transfers the values in
+heap order without copying and resets the heap. Callers keep comparison keys stable and supply any required tie order.
+Range coalescing stores gap indices and compares their sizes and source positions, avoiding one object per input gap.
 
 Performance examples embed local copies of `Float64RingBuffer` for bounded numeric sample windows. Each diagnostic
 script contains its helper; the rendering runtime does not collect sample history.
@@ -417,8 +447,8 @@ The following capabilities do not belong in Scene.
 ### Data acquisition and transport
 
 Scene does not open sockets, subscribe to middleware, read logs, poll devices, or map process memory. It does not
-define ROS, telemetry, debugger, recording, or product-specific message schemas. The isolated static model loader
-can fetch supported geometry files on demand, with cancellation, bounded file sizes, and bounded decoded allocations. It does
+define ROS, telemetry, debugger, recording, or product-specific message schemas. The isolated static model components
+can fetch their respective geometry files on demand, with cancellation, bounded file sizes, and bounded decoded allocations. It does
 not load recordings, decode joint descriptions, or own application replay. Parsing and model compilation remain
 outside render callbacks, and file changes never allow an older request to publish over a newer input.
 
