@@ -4,6 +4,9 @@
 import { LINE_VERTEX } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { lineDimensionsAreValid, lineNormalIsValid } from './style.js';
+import type { LineTopology } from '../../algorithms/line-topology.js';
+
+export type { LineTopology } from '../../algorithms/line-topology.js';
 
 const COLOR_OFFSET = getFieldOffset(LINE_VERTEX, 'color');
 const DASH_OFFSET = getFieldOffset(LINE_VERTEX, 'dash');
@@ -11,7 +14,6 @@ const GAP_OFFSET = getFieldOffset(LINE_VERTEX, 'gap');
 const NORMAL_OFFSET = getFieldOffset(LINE_VERTEX, 'normal');
 const WIDTH_OFFSET = getFieldOffset(LINE_VERTEX, 'width');
 
-export type LineTopology = 'strip' | 'loop' | 'segments';
 export type LineWidthUnit = 'pixel' | 'world';
 
 export function normalizeLineTopology(value: unknown): LineTopology {
@@ -20,18 +22,6 @@ export function normalizeLineTopology(value: unknown): LineTopology {
 
 export function normalizeLineWidthUnit(value: unknown): LineWidthUnit {
   return value === 'pixel' ? 'pixel' : 'world';
-}
-
-export function lineSegmentCount(count: number, topology: LineTopology): number {
-  if (topology === 'segments') return Math.floor(count / 2);
-  if (topology === 'loop') return count >= 3 ? count : 0;
-  return Math.max(0, count - 1);
-}
-
-export function lineCountIsValid(count: number, topology: LineTopology): boolean {
-  if (topology === 'segments') return count % 2 === 0;
-  if (topology === 'loop') return count === 0 || count >= 3;
-  return true;
 }
 
 export function lineRecordIsValid(records: DataView, byteOffset = 0): boolean {

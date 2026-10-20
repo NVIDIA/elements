@@ -33,7 +33,13 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
   extends LitElement
   implements SceneInteractionTarget
 {
-  /** Names the owning coordinate frame; an omitted value uses DOM ancestry. */
+  /**
+   * Names the owning coordinate frame instead of the nearest DOM ancestor frame.
+   * Resolves in the nearest model scope, then outward; qualified paths such as arm/tcp
+   * address model members. Omit to use DOM ancestry. Missing, duplicate, cross-scene,
+   * or cyclic references report frame-unresolved and suppress this contribution until
+   * corrected. Hidden or invalid resolved ancestors also suppress it.
+   */
   @property({ type: String })
   get frame(): string | null {
     return getFrameReference(this);
@@ -61,7 +67,12 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
     });
   }
 
-  /** Enables automatic pointer hit testing and routed interaction events for this layer. */
+  /**
+   * Enables automatic pointer hit testing and routed nve-scene-click, nve-scene-pointerenter,
+   * and nve-scene-pointerleave events on this layer. Defaults to false, avoiding picking
+   * work for decorative geometry. Read event.detail.target for source indices and
+   * event.detail.featureId for application identity. Explicit scene.pick() ignores this setting.
+   */
   @property({ type: Boolean })
   get interactive(): boolean {
     return getLayerInteractive(this);
@@ -71,7 +82,12 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
     setLayerInteractive(this, value);
   }
 
-  /** Replaces the streamed records or renders nothing when null. */
+  /**
+   * PointBuffer, LineVertexBuffer, TriangleVertexBuffer, or compatible external source;
+   * null renders nothing. Capacity never resizes; count is the active prefix. Empty sources
+   * are valid and skip GPU allocation. Edit records or mutableBytes, then publish() on each
+   * consumer. Direct byte access disables prepared-source caching; record APIs advance version.
+   */
   get source(): Source | null {
     return getStreamingLayerSource(this) as Source | null;
   }
@@ -80,7 +96,11 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
     setStreamingLayerSource(this, value);
   }
 
-  /** Limits how many records render; undefined renders the complete source. */
+  /**
+   * Limits rendered records independently of source count; undefined uses the complete
+   * active prefix. Shrinking clamps effective draw count while preserving this authored
+   * limit, so regrowing can restore records without rewriting it.
+   */
   get countLimit(): number | undefined {
     return getStreamingLayerCount(this);
   }
@@ -89,7 +109,15 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
     setStreamingLayerCount(this, value);
   }
 
-  /** Captures changed records and publishes the selected active source prefix to this layer. */
+  /**
+   * Synchronously validates and captures this layer's changed records. Options start and
+   * count select records, not bytes; activeCount selects the complete active prefix. No
+   * options uses the buffer's current count without activating unused capacity. A count-only
+   * reduction can use count: 0; growth also captures newly exposed records outside the dirty range.
+   * Each consumer owns its snapshot, including device recovery: publishing another layer
+   * sharing this source never changes it. Invalid records, ranges, or line/triangle counts
+   * make this contribution inert without partially publishing; a later valid call recovers it.
+   */
   publish(options?: ScenePublishOptions): void {
     publishStreamingLayer(this, options);
   }

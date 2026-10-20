@@ -15,6 +15,10 @@ import styles from '../internal/dom/host.css?inline';
 /**
  * @element nve-scene-arrows
  * @description Renders fixed-geometry arrows from semantic source records.
+ * Use ArrowBuffer for dense or frequently updated sets. Records use origin, vector,
+ * and shaftDiameter. Arrows point along vector: the shaft occupies 80% of its length,
+ * the head occupies 20%, and head diameter is twice shaftDiameter. Use a separate
+ * nve-scene-labels layer for text annotations.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/arrows
  * @stable false

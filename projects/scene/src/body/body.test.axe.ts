@@ -13,7 +13,7 @@ describe(SceneBody.metadata.tag, () => {
     const fixture = await createFixture(html`
       <nve-scene aria-label="body scene">
         <nve-scene-body source="[{}]">
-          <nve-scene-shape kind="cube"></nve-scene-shape>
+          <nve-scene-shape type="cube"></nve-scene-shape>
         </nve-scene-body>
       </nve-scene>
     `);

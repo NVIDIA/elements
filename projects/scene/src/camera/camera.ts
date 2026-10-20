@@ -78,6 +78,28 @@ const altitudeConverter = numberConverter(40);
 /**
  * @element nve-scene-camera
  * @description Configures one repeatable camera behavior for the owning scene.
+ * Camera-local view calculations use the REP-103 optical basis: +X image right,
+ * +Y image down, +Z forward through the image plane. World data remains +X forward,
+ * +Y left, +Z up. Positions, targets, distances, and clipping use meters; heading,
+ * polar angle, azimuth, and vertical field of view use radians. Resolved snapshots
+ * contain a world-space optical pose and explicit perspective or orthographic clipping.
+ * Query scene.getBounds() and call scene.fitCamera() explicitly to frame selected content;
+ * later publications preserve the user's view.
+ *
+ * | Behavior | Active inputs |
+ * | --- | --- |
+ * | pose | Position, orientation, optional frame, projection, clipping |
+ * | orbit | Target, heading, distance, angles, distance limits, projection, clipping |
+ * | follow | Frame and follow mode |
+ * | top | Target, heading, altitude, orthographic extent, clipping |
+ *
+ * Pose preserves optical rotation and roll; built-in controls do not change it. Orbit
+ * enables pointer, touch, wheel, and keyboard navigation. One orbit may compose with one
+ * follow: follow owns the moving target, orbit its distance, angles, and projection.
+ * Top always uses orthographic projection, with altitude independent of frustumHeight.
+ * Explicit HTML attributes and JavaScript assignments express intent, even at default
+ * values. Ignored properties warn with camera-property-inactive; defaults alone do not.
+ * Valid inactive inputs leave the behavior usable; invalid active values make it inert.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/camera
  * @stable false
@@ -115,7 +137,12 @@ export class SceneCamera extends LitElement implements CameraConfiguration {
     registerCameraInput(this);
   }
 
-  /** Chooses the camera behavior configured by this element. Defaults to a static pose. */
+  /**
+   * Chooses pose (default), orbit, follow, or top. Pose preserves rotation and roll; orbit
+   * enables navigation and can compose with follow. Top is orthographic with independent
+   * altitude and extent. Explicit ignored inputs warn with camera-property-inactive;
+   * invalid active inputs make the camera inert. See the overview for active inputs.
+   */
   @property({ converter: cameraBehaviorConverter, noAccessor: true })
   get behavior(): SceneCameraBehavior {
     return this.#behavior;
@@ -205,7 +232,10 @@ export class SceneCamera extends LitElement implements CameraConfiguration {
     this.#assign('position', this.#position, () => (this.#position = value));
   }
 
-  /** Sets the normalized XYZW world-from-optical-camera rotation. Used by the pose behavior. */
+  /**
+   * XYZW world-from-optical-camera quaternion for pose behavior, preserving roll.
+   * With frame, rotation is relative to that frame. Finite nonzero values normalize on capture.
+   */
   @property({ noAccessor: true, type: Array })
   get orientation(): Quaternion {
     return this.#orientation;
@@ -250,7 +280,12 @@ export class SceneCamera extends LitElement implements CameraConfiguration {
     this.#assign('maxDistance', this.#maxDistance, () => (this.#maxDistance = value));
   }
 
-  /** Names the scene-local frame tracked by the follow or pose behavior. */
+  /**
+   * Frame tracked by follow, or parent of a pose camera's local pose. Names search the
+   * nearest model scope then outward; arm/tcp addresses a model member. Targets must be
+   * unique and in this scene. Missing, duplicate, cyclic, or cross-scene references report
+   * frame-unresolved and stay inert until recovery. Hidden or invalid chains suppress it.
+   */
   @property({ noAccessor: true, type: String })
   get frame(): string | null {
     return this.#frame;

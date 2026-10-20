@@ -13,7 +13,8 @@ import {
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../../color/types.js';
-import { validateMeshGeometry, type MeshGeometryInput } from './geometry.js';
+import { validateMeshGeometry } from './geometry.js';
+import type { SceneMeshGeometry } from './types.js';
 import { createTopologyKey } from './processing.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import { scenePlatform } from '../../gpu/platform.js';
@@ -65,7 +66,6 @@ interface MeshState {
   topologyVersion: number;
   topologyKey: string;
   geometryError: boolean;
-  observer?: MutationObserver;
   readonly pendingGeometryUploads: Map<MeshGeometryAttribute, VersionedRangeJournal>;
 }
 
@@ -111,17 +111,6 @@ export function registerMeshLayer(mesh: HTMLElement): void {
   });
 }
 
-export function connectMeshLayer(mesh: HTMLElement): void {
-  const state = getState(mesh);
-  state.observer = new MutationObserver(() => validateMesh(mesh));
-  state.observer.observe(mesh, { childList: true, subtree: false });
-  validateMesh(mesh);
-}
-
-export function disconnectMeshLayer(mesh: HTMLElement): void {
-  getState(mesh).observer?.disconnect();
-}
-
 export function getMeshRenderData(mesh: HTMLElement): MeshRenderData {
   return createMeshRenderData(mesh, false);
 }
@@ -162,6 +151,17 @@ export function takeMeshLayerRenderData(mesh: HTMLElement): MeshRenderData {
 }
 export function getMeshTopologyVersion(mesh: HTMLElement): number {
   return getState(mesh).topologyVersion;
+}
+
+/** Captured geometry for body compilation; null while empty or invalid. */
+export function getMeshPartGeometry(mesh: HTMLElement): SceneMeshGeometry | null {
+  const state = getState(mesh);
+  if (state.geometryError || !state.positions) return null;
+  return { ...getCurrentGeometry(state), positions: state.positions };
+}
+
+export function hasMeshTexture(mesh: HTMLElement): boolean {
+  return getState(mesh).texture !== null;
 }
 
 export function setMeshGeometryProperty(mesh: HTMLElement, name: MeshGeometryAttribute, value: unknown): void {
@@ -374,26 +374,6 @@ export function setMeshColor(mesh: HTMLElement, source: string): void {
   notifyOwningScene(mesh);
 }
 
-function validateMesh(mesh: HTMLElement): void {
-  const state = getState(mesh);
-  const input: MeshGeometryInput = {
-    positions: state.positions,
-    normals: state.normals,
-    uvs: state.uvs,
-    colors: state.colors,
-    indices: state.indices
-  };
-  let invalid = false;
-  try {
-    validateMeshGeometry(input);
-  } catch {
-    invalid = true;
-  }
-  state.geometryError = invalid;
-  updateMeshDiagnostics(mesh, state);
-  notifyOwningScene(mesh);
-}
-
 function updateMeshDiagnostics(mesh: HTMLElement, state: MeshState): void {
   diagnosticReporterService.update({
     element: mesh,
@@ -424,7 +404,8 @@ function applyCapturedTexture(mesh: HTMLElement, state: MeshState, texture: Imag
   state.textureOwned = texture !== null;
   state.textureError = false;
   state.version += 1;
-  validateMesh(mesh);
+  updateMeshDiagnostics(mesh, state);
+  notifyOwningScene(mesh);
 }
 
 function failTextureCapture(mesh: HTMLElement, state: MeshState): void {

@@ -50,6 +50,45 @@ export function extendAffineBounds(bounds: SceneBounds, matrix: Matrix4, minimum
   }
 }
 
+const SQRT_3 = Math.sqrt(3);
+
+/**
+ * Returns the radius of an origin-centered sphere that encloses a box after any rotation and any per-axis scale of
+ * magnitude at most one: the square root of 3 times the box's largest absolute coordinate. At unit scale, it equals
+ * the farthest corner distance when every axis reaches that coordinate, as Scene primitives do.
+ */
+export function unitScaleEnclosingRadius(bounds: SceneBounds): number {
+  const { minimum, maximum } = bounds;
+  return (
+    SQRT_3 *
+    Math.max(
+      Math.abs(minimum[0]),
+      Math.abs(minimum[1]),
+      Math.abs(minimum[2]),
+      Math.abs(maximum[0]),
+      Math.abs(maximum[1]),
+      Math.abs(maximum[2])
+    )
+  );
+}
+
+/**
+ * Multiplies a `unitScaleEnclosingRadius` by a record's largest absolute scale, which encloses the scaled box under
+ * any rotation without a square root per record. Shaders use `SCALED_ENCLOSING_RADIUS_WGSL` at float32 precision.
+ */
+// eslint-disable-next-line max-params -- @hotpath Scalar scale components avoid allocating one tuple per record.
+export function scaledEnclosingRadius(unitRadius: number, scaleX: number, scaleY: number, scaleZ: number): number {
+  return unitRadius * Math.max(Math.abs(scaleX), Math.abs(scaleY), Math.abs(scaleZ));
+}
+
+/** Shader form of `scaledEnclosingRadius`; float32 overflow yields an infinite, conservative radius. */
+export const SCALED_ENCLOSING_RADIUS_WGSL = /* wgsl */ `
+fn nve_scaled_enclosing_radius(unitRadius: f32, scale: vec3f) -> f32 {
+  let magnitude = abs(scale);
+  return unitRadius * max(magnitude.x, max(magnitude.y, magnitude.z));
+}
+`;
+
 /** Accumulates geometry without rounding frame translations to GPU precision. */
 export class BoundsAccumulator {
   readonly #minimum: Vec3 = [Infinity, Infinity, Infinity];

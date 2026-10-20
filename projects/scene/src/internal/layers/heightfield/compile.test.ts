@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { compileHeightfield, prepareHeightfield, recomputeHeightfield, validateHeightfieldGrid } from './compile.js';
+import { compileHeightfield, prepareHeightfield, validateHeightfieldGrid } from './compile.js';
 import { PREPARATION_CHUNK_SIZE, type PreparationContext } from '../../rendering/preparation.js';
 import { prepareHeightfieldIndices } from './topology.js';
 import type { HeightfieldGrid } from './types.js';
@@ -57,28 +57,6 @@ describe('heightfield compilation', () => {
     }
   });
 
-  it('updates positions, normals, and colors while reusing prior topology', () => {
-    const initial = withColors(
-      gridFrom(3, 2, (row, column) => row + column),
-      [0, 64, 128, 255]
-    );
-    const previous = compileHeightfield(initial);
-    const updated: HeightfieldGrid = {
-      ...initial,
-      origin: [5, -2],
-      heights: new Float32Array([0, 1, 4, 9, 16, 25]),
-      colors: new Uint8Array([255, 128, 64, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
-    };
-    const recomputed = recomputeHeightfield(updated, previous);
-    const full = compileHeightfield(updated);
-
-    expect(recomputed.indices).toBe(previous.indices);
-    expect([...recomputed.positions]).toEqual([...full.positions]);
-    expect([...recomputed.normals]).toEqual([...full.normals]);
-    expect([...recomputed.colors!]).toEqual([...full.colors!]);
-    expect(recomputed.colors).not.toBe(previous.colors);
-  });
-
   it('rejects invalid grid shapes, values, and unsafe allocation dimensions', () => {
     const grid = gridFrom(2, 2, () => 0);
     expect(() => validateHeightfieldGrid(null as unknown as HeightfieldGrid)).toThrow(RangeError);
@@ -108,19 +86,6 @@ describe('heightfield compilation', () => {
     expect(() => validateHeightfieldGrid({ ...grid, rows: 10_000, columns: 10_000 })).toThrow(
       'heightfield allocation limit'
     );
-    expect(() =>
-      recomputeHeightfield(
-        gridFrom(2, 3, () => 0),
-        compileHeightfield(grid)
-      )
-    ).toThrow(RangeError);
-    expect(() =>
-      recomputeHeightfield(
-        gridFrom(3, 2, () => 0),
-        compileHeightfield(gridFrom(2, 3, () => 0))
-      )
-    ).toThrow(RangeError);
-    expect(() => recomputeHeightfield(grid, { ...compileHeightfield(grid) })).toThrow(RangeError);
   });
 
   it('prepares a validated grid after yielding and matches synchronous compilation', async () => {

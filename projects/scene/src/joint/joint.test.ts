@@ -8,6 +8,7 @@ import { SceneContent } from '../internal/composition/scene/content.js';
 import { isFrameChainValid } from '../internal/composition/frame/state.js';
 import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import { SceneJoint, type SceneJointType } from './index.js';
+import type { SceneBody } from '../body/body.js';
 import type { SceneErrorDetail, ScenePose, Vec3 } from '../index.js';
 import './define.js';
 import '../frame/define.js';
@@ -18,11 +19,15 @@ function composition() {
   const joint = document.createElement('nve-scene-joint');
   joint.name = 'drive';
   const body = document.createElement('nve-scene-body');
-  body.geometry = [{ kind: 'cube' }];
-  joint.append(body);
+  body.geometry = [{ type: 'cube' }];
+  const base = document.createElement('nve-scene-body');
+  base.name = 'base';
+  body.name = 'driven';
+  joint.parent = 'base';
+  joint.child = 'driven';
   const unrelated = document.createElement('nve-scene-body');
-  unrelated.geometry = [{ kind: 'cube' }];
-  scene.append(joint, unrelated);
+  unrelated.geometry = [{ type: 'cube' }];
+  scene.append(base, joint, body, unrelated);
   const errors: SceneErrorDetail[] = [];
   scene.addEventListener('nve-scene-error', event => errors.push(event.detail));
   const content = new SceneContent(scene);
@@ -130,7 +135,11 @@ describe(SceneJoint.metadata.tag, () => {
     follower.mimic = 'drive';
     follower.mimicMultiplier = -2;
     follower.mimicOffset = 1;
-    scene.append(follower);
+    follower.parent = 'base';
+    follower.child = 'follower-body';
+    const followerBody = document.createElement('nve-scene-body');
+    followerBody.name = 'follower-body';
+    scene.append(followerBody, follower);
     resolve();
     joint.mimic = '  ';
     resolve();
@@ -156,9 +165,19 @@ describe(SceneJoint.metadata.tag, () => {
     const { scene, joint, unrelated, content, errors, resolve } = composition();
     joint.mimic = 'late';
     resolve();
-    expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+    expect(
+      content
+        .compileRenderItems()
+
+        .map(item => item.layer)
+    ).toEqual([unrelated]);
     const target = document.createElement('nve-scene-joint');
     target.name = 'late';
+    target.parent = 'base';
+    target.child = 'target-body';
+    const targetBody = document.createElement('nve-scene-body');
+    targetBody.name = 'target-body';
+    scene.append(targetBody);
     scene.append(target);
     resolve();
     expect(isFrameChainValid(joint)).toBe(true);
@@ -188,8 +207,13 @@ describe(SceneJoint.metadata.tag, () => {
       Reflect.set(joint, key, key === 'type' ? 'spherical' : key === 'axis' ? [0, 0, 0] : Infinity);
       expect(isFrameChainValid(body)).toBe(false);
       expect(invalidAtDiagnostic).toEqual([true]);
-      expect(() => joint.getWorldMatrix()).toThrow();
-      expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+      expect(() => body.getWorldMatrix()).toThrow();
+      expect(
+        content
+          .compileRenderItems()
+
+          .map(item => item.layer)
+      ).toEqual([unrelated]);
       expect(errors).toContainEqual(
         expect.objectContaining({
           code: key === 'type' ? 'joint-type' : key === 'axis' ? 'joint-axis' : 'joint-value',
@@ -210,7 +234,12 @@ describe(SceneJoint.metadata.tag, () => {
       Reflect.set(joint, 'axis', axis);
       expect(errors).toContainEqual(expect.objectContaining({ code: 'joint-axis', element: joint }));
       expect(isFrameChainValid(joint)).toBe(false);
-      expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+      expect(
+        content
+          .compileRenderItems()
+
+          .map(item => item.layer)
+      ).toEqual([unrelated]);
     }
   );
 
@@ -220,7 +249,11 @@ describe(SceneJoint.metadata.tag, () => {
     joint.type = 'prismatic';
     follower.type = 'prismatic';
     follower.mimic = 'drive';
-    scene.append(follower);
+    follower.parent = 'base';
+    follower.child = 'follower-body';
+    const followerBody = document.createElement('nve-scene-body');
+    followerBody.name = 'follower-body';
+    scene.append(followerBody, follower);
     resolve();
     joint.addEventListener('nve-scene-error', event => {
       if (event.detail.code === 'joint-value') joint.value = 2;
@@ -230,24 +263,21 @@ describe(SceneJoint.metadata.tag, () => {
     expect(follower.pose.position).toEqual([2, 0, 0]);
   });
 
-  it('stores values under explicit authority and restores motion on release', () => {
+  it('exposes joint inputs without a competing frame or explicit pose authority', () => {
     const joint = document.createElement('nve-scene-joint');
-    joint.type = 'prismatic';
-    joint.setPose({ position: [4, 5, 6], orientation: [0, 0, 0, 1] });
-    joint.value = 2;
-    joint.offset = 1;
-    expect(joint.pose.position).toEqual([4, 5, 6]);
-    expect(joint.value).toBe(2);
-    joint.setPose(null);
-    expect(joint.pose.position).toEqual([3, 0, 0]);
+    expect('frame' in joint).toBe(false);
+    expect('setPose' in joint).toBe(false);
+    expectTypeOf<SceneJoint['parent']>().toEqualTypeOf<string | null>();
+    expectTypeOf<SceneJoint['child']>().toEqualTypeOf<string | null>();
   });
 
   it('matches a flat three-joint chain to nested frames driven by precomputed poses', async () => {
     configureSceneTesting({ requestAdapter: async () => null });
     fixture = await createFixture(html`<nve-scene aria-label="Kinematics">
-      <nve-scene-joint name="j3" frame="j2" axis="[0,1,0]" position="[0,0,3]"></nve-scene-joint>
-      <nve-scene-joint name="j2" frame="j1" axis="[0,1,0]" position="[0,0,2]"></nve-scene-joint>
-      <nve-scene-joint name="j1" axis="[0,0,1]" position="[1,0,0]"></nve-scene-joint>
+      <nve-scene-body name="base"></nve-scene-body><nve-scene-body name="b1"></nve-scene-body><nve-scene-body name="b2"></nve-scene-body><nve-scene-body name="b3"></nve-scene-body>
+      <nve-scene-joint name="j3" parent="b2" child="b3" axis="[0,1,0]" position="[0,0,3]"></nve-scene-joint>
+      <nve-scene-joint name="j2" parent="b1" child="b2" axis="[0,1,0]" position="[0,0,2]"></nve-scene-joint>
+      <nve-scene-joint name="j1" parent="base" child="b1" axis="[0,0,1]" position="[1,0,0]"></nve-scene-joint>
       <nve-scene-frame id="f1"><nve-scene-frame id="f2"><nve-scene-frame id="f3"></nve-scene-frame></nve-scene-frame></nve-scene-frame>
     </nve-scene>`);
     const scene = fixture.querySelector('nve-scene')!;
@@ -260,12 +290,12 @@ describe(SceneJoint.metadata.tag, () => {
       { position: [0, 0, 3], orientation: [0, Math.SQRT1_2, 0, Math.SQRT1_2] }
     ];
     const frames = [...scene.querySelectorAll('nve-scene-frame')];
-    frames.forEach((frame, index) => frame.setPose(poses[index]!));
-    joints[0]!
+    frames.forEach((frame, index) => Object.assign(frame, poses[index]!));
+    scene
+      .querySelector<SceneBody>('nve-scene-body[name="b3"]')!
       .getWorldMatrix()
       .forEach((value, index) => expect(value).toBeCloseTo(frames[2]!.getWorldMatrix()[index]!, 5));
     expectTypeOf<SceneJoint['type']>().toEqualTypeOf<SceneJointType>();
     expectTypeOf<SceneJoint['value']>().toEqualTypeOf<number>();
-    expectTypeOf<SceneJoint['frame']>().toEqualTypeOf<string | null>();
   });
 });

@@ -2,7 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
+import { scaledEnclosingRadius, unitScaleEnclosingRadius } from './bounds.js';
+import { PRIMITIVE_BOUNDS, PRIMITIVE_ENCLOSING_RADII } from './primitive-bounds.js';
 import { createPrimitiveGeometry, type PrimitiveKind } from './primitive-geometry.js';
+import type { Vec3 } from './types.js';
+
+const PRIMITIVE_KINDS: readonly PrimitiveKind[] = ['arrow', 'cone', 'cube', 'cylinder', 'pyramid', 'sphere'];
 
 describe('primitive geometry', () => {
   it.each<[PrimitiveKind, number]>([
@@ -19,6 +24,40 @@ describe('primitive geometry', () => {
     expect(geometry.vertices.length % 6).toBe(0);
     for (let offset = 3; offset < geometry.vertices.length; offset += 6) {
       expect(Math.hypot(...geometry.vertices.slice(offset, offset + 3))).toBeCloseTo(1, 5);
+    }
+  });
+
+  it.each(PRIMITIVE_KINDS)('should keep every %s vertex inside tight local bounds', kind => {
+    const { maximum, minimum } = PRIMITIVE_BOUNDS[kind];
+    const { max, min } = getBounds(createPrimitiveGeometry(kind).vertices);
+
+    for (let axis = 0; axis < 3; axis += 1) {
+      expect(min[axis]).toBeGreaterThanOrEqual(minimum[axis]!);
+      expect(max[axis]).toBeLessThanOrEqual(maximum[axis]!);
+      // Faceted spheres reach slightly short of their analytic bounds.
+      expect(max[axis]! - min[axis]!).toBeGreaterThan(0.95 * (maximum[axis]! - minimum[axis]!));
+    }
+    expect(PRIMITIVE_ENCLOSING_RADII[kind]).toBe(unitScaleEnclosingRadius(PRIMITIVE_BOUNDS[kind]));
+  });
+
+  it.each(PRIMITIVE_KINDS)('should enclose every scaled %s vertex within its scaled enclosing radius', kind => {
+    const { vertices } = createPrimitiveGeometry(kind);
+    const scales: Vec3[] = [
+      [1, 1, 1],
+      [0.05, 0.05, 1],
+      [2, 2, 1],
+      [-3, 0.5, 0]
+    ];
+
+    for (const [scaleX, scaleY, scaleZ] of scales) {
+      const radius = scaledEnclosingRadius(PRIMITIVE_ENCLOSING_RADII[kind], scaleX, scaleY, scaleZ);
+      for (let offset = 0; offset < vertices.length; offset += 6) {
+        const x = vertices[offset]! * scaleX;
+        const y = vertices[offset + 1]! * scaleY;
+        const z = vertices[offset + 2]! * scaleZ;
+        // Rotation preserves this distance, so the radius bounds every record orientation.
+        expect(Math.sqrt(x * x + y * y + z * z)).toBeLessThanOrEqual(radius);
+      }
     }
   });
 

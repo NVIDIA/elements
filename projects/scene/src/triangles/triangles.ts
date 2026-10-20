@@ -10,6 +10,8 @@ import styles from '../internal/dom/host.css?inline';
 /**
  * @element nve-scene-triangles
  * @description Renders an unlit triangle soup from nve.triangle-vertex records.
+ * Use for frequently changing overlays: ranged publication uploads only changed records, and picks
+ * report the hit triangle. Persistent lit, textured, or instanced assets belong in nve-scene-mesh.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/triangles
  * @stable false

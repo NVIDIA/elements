@@ -3,7 +3,7 @@
 
 import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
-import { MARKER_COMPACTION_SHADER } from '../internal/layers/markers/compaction.js';
+import { MARKER_COMPACTION_SHADER, writeMarkerCompactionUniforms } from '../internal/layers/markers/compaction.js';
 
 describe('scene cubes visual runtime', () => {
   test('should render a known cube in the real WebGPU profile', async () => {
@@ -100,9 +100,7 @@ describe('scene cubes visual runtime', () => {
             }
             const source = device.createBuffer({ size: sourceBytes.byteLength, usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.STORAGE });
             device.queue.writeBuffer(source, 0, sourceData);
-            const uniformData = new Float32Array(36);
-            for (const index of [0, 5, 10, 15, 16, 21, 26, 31]) uniformData[index] = 1;
-            uniformData[32] = count;
+            const uniformData = new Float32Array(${JSON.stringify(createCompactionUniforms(4))});
             const uniform = device.createBuffer({ size: uniformData.byteLength, usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.UNIFORM });
             device.queue.writeBuffer(uniform, 0, uniformData);
             const opaque = device.createBuffer({ size: 16, usage: GPUBufferUsage.COPY_SRC | GPUBufferUsage.STORAGE });
@@ -400,3 +398,12 @@ describe('scene cubes visual runtime', () => {
     expect(pixels[1]).toEqual(pixels[0]);
   });
 });
+
+/** Identity transforms, the record count, and the cube radius in the marker uniform layout that compaction reads. */
+function createCompactionUniforms(count: number): number[] {
+  const uniforms = new Float32Array(36);
+  for (const index of [0, 5, 10, 15, 16, 21, 26, 31]) uniforms[index] = 1;
+  uniforms[32] = count;
+  writeMarkerCompactionUniforms(uniforms, 'cube');
+  return [...uniforms];
+}

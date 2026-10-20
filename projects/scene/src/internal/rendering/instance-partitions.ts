@@ -9,6 +9,7 @@ import {
 import { maximumStoragePartitionByteLength, planStoragePartitions } from '../gpu/partition.js';
 import type { StoragePartition, StoragePartitionSourceRange } from '../gpu/partition.js';
 import type { SceneGPUDevice } from '../gpu/platform.js';
+import { lineJoinCount, lineSegmentCount } from '../algorithms/line-topology.js';
 import { LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from '../records/layouts/built-ins.js';
 import { PICK_UNIFORM_OFFSETS } from './picking/uniform-offsets.js';
 import type { LineRenderItem, SceneRenderItem } from './render-items.js';
@@ -111,8 +112,8 @@ function getSegmentLineAllocation(
     linePartitions: partitions.map(partition => ({
       joinCount: 0,
       joinStart: 0,
-      segmentBase: partition.firstRecord / 2,
-      segmentCount: partition.recordCount / 2,
+      segmentBase: lineSegmentCount(partition.firstRecord, 'segments'),
+      segmentCount: lineSegmentCount(partition.recordCount, 'segments'),
       segmentStart: 0,
       sourceCount: item.data.count
     })),
@@ -161,10 +162,10 @@ function getConnectedLineAllocation(
 
 function completeConnectedLineDraw(item: LineRenderItem): ConnectedLineDrawPartition {
   return {
-    joinCount: item.topology === 'loop' ? item.data.count : Math.max(0, item.data.count - 2),
+    joinCount: lineJoinCount(item.data.count, item.topology),
     joinStart: 0,
     segmentBase: 0,
-    segmentCount: item.topology === 'loop' ? item.data.count : Math.max(0, item.data.count - 1),
+    segmentCount: lineSegmentCount(item.data.count, item.topology),
     segmentStart: 0,
     sourceCount: item.data.count
   };
@@ -181,7 +182,7 @@ function planConnectedLinePartitions(
   const partitions = new Array<StoragePartition>(partitionLimit);
   let partitionCount = 0;
   const options: SequencePartitionOptions = {
-    count: loop ? count : count - 1,
+    count: lineSegmentCount(count, item.topology),
     sourceCount: count,
     capacity,
     before: 1,

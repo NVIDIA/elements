@@ -3,12 +3,15 @@
 
 import { bindFrameConstraints, hasFrameConstraintFailure } from './constraints.js';
 import { resolveFrameName } from './registry.js';
+import { captureJointConnections, reportJointConnections } from '../joint/connections.js';
 import { composePreciseMat4, identityPreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
 import { normalizeQuaternion } from '../../math/quaternion.js';
 import type { Mat4, PreciseMat4, ScenePose, Vec3 } from '../../math/types.js';
 import { notifyOwningScene } from '../scene/notifications.js';
 import { FRAME_UNRESOLVED } from '../../diagnostics/errors.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
+import { findParentCycles } from '../../algorithms/parent-graph.js';
+import { ParentEvaluation } from '../../structures/parent-evaluation.js';
 
 interface FrameState {
   constraintValid: boolean;
@@ -17,14 +20,16 @@ interface FrameState {
   valid: boolean;
 }
 
-export const FRAME_SELECTOR = 'nve-scene-frame, nve-scene-joint, nve-scene-model';
+export const FRAME_SELECTOR = 'nve-scene-frame, nve-scene-joint, nve-scene-model, nve-scene-body';
 
 const frameStates = new WeakMap<HTMLElement, FrameState>();
 
 /** Memoizes DOM ancestry for one synchronous render snapshot. Create a new instance after edits. */
 export class FrameEvaluation {
-  readonly #identity = identityPreciseMat4();
-  readonly #matrices = new Map<HTMLElement, PreciseMat4 | null>();
+  #matrices?: ParentEvaluation<HTMLElement, PreciseMat4 | null>;
+  #validity?: ParentEvaluation<HTMLElement, boolean>;
+  #visibility?: ParentEvaluation<HTMLElement, boolean>;
+  #domVisibility?: ParentEvaluation<HTMLElement, boolean>;
   #parents?: ReadonlyMap<HTMLElement, HTMLElement | null>;
   #initialized = false;
   #scene: HTMLElement | null = null;
@@ -35,16 +40,52 @@ export class FrameEvaluation {
 
   /** Returns a shared world matrix, or null for an invalid chain. Treat returned matrices as read-only. */
   getWorldMatrix(element: HTMLElement): PreciseMat4 | null {
+    this.#initializeFor(element);
+    this.#matrices ??= new ParentEvaluation({
+      getParent: ancestor => this.#getParent(ancestor),
+      rootValue: identityPreciseMat4(),
+      invalidValue: null,
+      reduce: (ancestor, parent) => this.#compose(ancestor, parent)
+    });
+    return this.#matrices.get(element);
+  }
+
+  isValid(element: HTMLElement): boolean {
+    this.#initializeFor(element);
+    this.#validity ??= new ParentEvaluation({
+      getParent: ancestor => this.#getParent(ancestor),
+      rootValue: true,
+      invalidValue: false,
+      reduce: (ancestor, valid) => valid && (ancestor.localName === 'nve-scene' || localFrameIsValid(ancestor))
+    });
+    return this.#validity.get(element);
+  }
+
+  /** Includes hidden DOM ancestors even when a reference replaces the transform parent. */
+  isVisible(element: HTMLElement): boolean {
+    this.#initializeFor(element);
+    if (!this.#parents) return element.closest('[hidden]') === null;
+    this.#visibility ??= new ParentEvaluation({
+      getParent: ancestor => this.#getParent(ancestor),
+      rootValue: true,
+      invalidValue: false,
+      reduce: (ancestor, visible) => visible && (ancestor.localName === 'nve-scene' || this.#isDomVisible(ancestor))
+    });
+    return this.#visibility.get(element);
+  }
+
+  #isDomVisible(element: HTMLElement): boolean {
+    this.#domVisibility ??= new ParentEvaluation({
+      getParent: ancestor => ancestor.parentElement ?? undefined,
+      rootValue: true,
+      invalidValue: false,
+      reduce: (ancestor, visible) => visible && !ancestor.hasAttribute('hidden')
+    });
+    return this.#domVisibility.get(element);
+  }
+
+  #initializeFor(element: HTMLElement): void {
     if (!this.#initialized) this.#initialize(element.closest<HTMLElement>('nve-scene'));
-    const path: HTMLElement[] = [];
-    let current: HTMLElement | null | false = element;
-    while (current && current.localName !== 'nve-scene' && !this.#matrices.has(current)) {
-      path.push(current);
-      current = this.#parents ? resolvedFrameParent(current, this.#parents, this.#scene) : current.parentElement;
-    }
-    if (current === false) return this.#invalidatePath(path);
-    const parent = current && this.#matrices.has(current) ? (this.#matrices.get(current) ?? null) : this.#identity;
-    return this.#composePath(path, parent);
   }
 
   #initialize(scene: HTMLElement | null): void {
@@ -53,38 +94,37 @@ export class FrameEvaluation {
     this.#initialized = true;
   }
 
-  #invalidatePath(path: readonly HTMLElement[]): null {
-    for (const element of path) this.#matrices.set(element, null);
-    return null;
-  }
-
-  #composePath(path: readonly HTMLElement[], parent: PreciseMat4 | null): PreciseMat4 | null {
-    let world = parent;
-    for (let index = path.length - 1; index >= 0; index -= 1) {
-      const ancestor = path[index]!;
-      world = this.#compose(ancestor, world);
-      this.#matrices.set(ancestor, world);
-    }
-    return world;
+  #getParent(element: HTMLElement): HTMLElement | null | undefined {
+    if (element.localName === 'nve-scene') return undefined;
+    const parent = this.#parents ? resolvedFrameParent(element, this.#parents, this.#scene) : element.parentElement;
+    if (parent === false) return null;
+    return parent?.localName === 'nve-scene' ? undefined : (parent ?? undefined);
   }
 
   #compose(element: HTMLElement, parent: PreciseMat4 | null): PreciseMat4 | null {
     if (!parent) return null;
     const state = frameStates.get(element);
-    if (state) return state.valid && state.constraintValid ? multiplyPreciseMat4(parent, state.localMatrix) : null;
+    if (state) {
+      if (!state.valid || !state.constraintValid) return null;
+      return state.pose ? multiplyPreciseMat4(parent, state.localMatrix) : parent;
+    }
     const name = element.localName;
     if (isFrameTag(name)) return null;
-    if (name === 'nve-scene-body' && hasFrameConstraintFailure(element)) return null;
     return parent;
   }
 }
 
-function isFrameElement(element: HTMLElement): boolean {
-  return isFrameTag(element.localName);
+function localFrameIsValid(element: HTMLElement): boolean {
+  const state = frameStates.get(element);
+  return state
+    ? state.valid && state.constraintValid
+    : !isFrameTag(element.localName) && !hasFrameConstraintFailure(element);
 }
 
 function isFrameTag(name: string): boolean {
-  return name === 'nve-scene-frame' || name === 'nve-scene-joint' || name === 'nve-scene-model';
+  return (
+    name === 'nve-scene-frame' || name === 'nve-scene-joint' || name === 'nve-scene-model' || name === 'nve-scene-body'
+  );
 }
 
 export function registerFrameState(frame: HTMLElement): void {
@@ -136,29 +176,12 @@ export function getFramePose(frame: HTMLElement): ScenePose {
 
 /** Returns false when a frame in the owning-scene chain lacks state or has an invalid transform. */
 export function isFrameChainValid(element: HTMLElement): boolean {
-  const scene = element.closest<HTMLElement>('nve-scene');
-  const parents = scene ? sceneReferences.get(scene)?.parents : undefined;
-  let current: HTMLElement | null | false = element;
-  while (current && current !== scene) {
-    const state = frameStates.get(current);
-    if (state ? !state.valid || !state.constraintValid : isFrameElement(current) || hasFrameConstraintFailure(current))
-      return false;
-    current = parents ? resolvedFrameParent(current, parents, scene) : current.parentElement;
-  }
-  return current !== false;
+  return new FrameEvaluation().isValid(element);
 }
 
 /** Visibility follows both the authored DOM and resolved transform parents. */
 export function isFrameChainVisible(element: HTMLElement): boolean {
-  const scene = element.closest<HTMLElement>('nve-scene');
-  const parents = scene ? sceneReferences.get(scene)?.parents : undefined;
-  if (!parents) return element.closest('[hidden]') === null;
-  let current: HTMLElement | null | false = element;
-  while (current && current !== scene) {
-    if (current.closest('[hidden]') !== null) return false;
-    current = resolvedFrameParent(current, parents, scene);
-  }
-  return current !== false;
+  return new FrameEvaluation().isVisible(element);
 }
 
 function resolvedFrameParent(
@@ -200,7 +223,12 @@ export function getNamedFrameElement(
   context: HTMLElement = scene
 ): HTMLElement | undefined {
   const target = resolveFrameName(scene, name, context);
-  return target && target.closest('nve-scene') === scene && isFrameStateRegistered(target) ? target : undefined;
+  return target &&
+    target.localName !== 'nve-scene-joint' &&
+    target.closest('nve-scene') === scene &&
+    isFrameStateRegistered(target)
+    ? target
+    : undefined;
 }
 
 function normalizeFrameTransform(value: ScenePose): ScenePose {
@@ -273,20 +301,23 @@ export function resolveSceneFrameReferences(
   frames: readonly HTMLElement[],
   layers: readonly HTMLElement[]
 ): void {
-  const elements = [...frames, ...layers];
+  const elements = [...new Set([...frames, ...layers])];
   const references = captureReferences(elements);
+  const connections = captureJointConnections(scene, frames.filter(isFrameStateRegistered));
   const previous = sceneReferences.get(scene);
-  if (references.size === 0) {
+  if (references.size === 0 && connections.parents.size === 0) {
     sceneReferences.delete(scene);
     updateReferenceErrors(previous?.references, references);
     return;
   }
   const authoredParents = captureReferenceParents(scene, elements, references);
+  for (const [element, parent] of connections.parents) authoredParents.set(element, parent);
   const parents =
     sameParents(authoredParents, previous?.authoredParents) && previous
       ? previous.parents
-      : checkedReferenceParents(frames, authoredParents, references);
+      : checkedReferenceParents(authoredParents);
   sceneReferences.set(scene, { parents, authoredParents, references });
+  reportJointConnections(connections, parents);
   updateReferenceErrors(previous?.references, references);
 }
 
@@ -322,11 +353,12 @@ function updateReferenceErrors(
   for (const element of previous?.keys() ?? []) {
     if (!references.has(element)) updateReferenceError(element, false);
   }
-  for (const element of references.keys()) updateReferenceError(element, !isFrameChainValid(element));
+  const evaluation = new FrameEvaluation();
+  for (const element of references.keys()) updateReferenceError(element, !evaluation.isValid(element));
 }
 
 function nearestFrameParent(element: HTMLElement, scene: HTMLElement): HTMLElement {
-  const parent = element.parentElement?.closest<HTMLElement>(FRAME_SELECTOR);
+  const parent = element.parentElement?.closest<HTMLElement>('nve-scene-frame, nve-scene-model, nve-scene-body');
   return parent?.closest('nve-scene') === scene ? parent : scene;
 }
 
@@ -342,44 +374,13 @@ function sameParents(
 }
 
 function checkedReferenceParents(
-  frames: readonly HTMLElement[],
-  authored: ReadonlyMap<HTMLElement, HTMLElement | null>,
-  references: ReadonlyMap<HTMLElement, string>
+  authored: ReadonlyMap<HTMLElement, HTMLElement | null>
 ): ReadonlyMap<HTMLElement, HTMLElement | null> {
   const parents = new Map(authored);
-  const complete = new Set<HTMLElement>();
-  for (const frame of frames) {
-    const { path, cycle } = dependencyPath(frame, parents, complete);
-    if (cycle) rejectReferenceCycle(path.slice(path.indexOf(cycle)), parents, references);
-    for (const element of path) complete.add(element);
+  for (const cycle of findParentCycles(authored)) {
+    for (const element of cycle) parents.set(element, null);
   }
   return parents;
-}
-
-function dependencyPath(
-  frame: HTMLElement,
-  parents: ReadonlyMap<HTMLElement, HTMLElement | null>,
-  complete: ReadonlySet<HTMLElement>
-): { path: HTMLElement[]; cycle: HTMLElement | null } {
-  const path: HTMLElement[] = [];
-  const visiting = new Set<HTMLElement>();
-  let current: HTMLElement | null = frame;
-  while (current && parents.has(current) && !complete.has(current) && !visiting.has(current)) {
-    visiting.add(current);
-    path.push(current);
-    current = parents.get(current) ?? null;
-  }
-  return { path, cycle: current && visiting.has(current) ? current : null };
-}
-
-function rejectReferenceCycle(
-  cycle: readonly HTMLElement[],
-  parents: Map<HTMLElement, HTMLElement | null>,
-  references: ReadonlyMap<HTMLElement, string>
-): void {
-  for (const element of cycle) {
-    if (references.has(element)) parents.set(element, null);
-  }
 }
 
 function updateReferenceError(element: HTMLElement, active: boolean): void {

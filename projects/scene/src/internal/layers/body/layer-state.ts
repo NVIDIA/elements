@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { composeModelTint } from '../../composition/model/tint.js';
-import { SHAPE_KIND } from '../../diagnostics/errors.js';
+import { MESH_PART, SHAPE_TYPE } from '../../diagnostics/errors.js';
 import {
   compileNormalizedShapes,
   compileShapes,
@@ -15,10 +15,12 @@ import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/re
 import { getLayerInstances } from '../markers/layer-state.js';
 import type { Quaternion, Vec3 } from '../../math/types.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
-import { SCENE_SHAPE_TAG } from '../registry.js';
-import type { SceneBodyGeometry } from './types.js';
+import { isSceneBodyPart, SCENE_SHAPE_TAG } from '../registry.js';
+import { getMeshPartGeometry, isMeshLayerRegistered } from '../mesh/layer-state.js';
+import type { SceneBodyGeometry, SceneBodyNode } from './types.js';
+import { observeBodyParts } from './part-notifications.js';
 import { compileBodyGeometry, type CompiledBodyGeometry } from './geometry.js';
-import { resolveSceneColor } from '../../color/color.js';
+import { parseCSSColor, resolveSceneColor } from '../../color/color.js';
 import { EMPTY_ALPHA_SUMMARY, summarizeRGBAAlpha, type AlphaSummary } from '../../color/alpha.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 
@@ -26,12 +28,13 @@ interface BodyLayerState {
   alphaSummary: AlphaSummary;
   compiled: CompiledBodyGeometry;
   geometry: SceneBodyGeometry | null;
-  input: 'children' | 'geometry' | 'asset';
+  input: 'children' | 'geometry';
   tint: RGBA;
   ownTint: RGBA;
   geometryError: boolean;
   observer?: MutationObserver;
-  aggregateErrorShape?: HTMLElement;
+  aggregateErrorPart?: HTMLElement;
+  parts: ReadonlySet<HTMLElement>;
   topologyVersion: number;
   version: number;
 }
@@ -45,11 +48,13 @@ export function registerBodyLayer(layer: HTMLElement): void {
     geometryError: false,
     geometry: [],
     input: 'children',
+    parts: new Set(),
     tint: [1, 1, 1, 1],
     ownTint: [1, 1, 1, 1],
     topologyVersion: 0,
     version: 0
   });
+  observeBodyParts(layer, () => recompileDeclarative(layer, getState(layer)));
 }
 
 export function connectBodyLayer(layer: HTMLElement): void {
@@ -68,21 +73,11 @@ export function disconnectBodyLayer(layer: HTMLElement): void {
   state.observer = undefined;
 }
 
-/** Recompiles a body when one of its declarative shape properties changes. */
-export function notifyOwningBodyShape(shape: HTMLElement): void {
-  const layer = shape.parentElement;
-  if (layer && isBodyLayerRegistered(layer)) recompileDeclarative(layer, getState(layer));
-}
-
 /** Captures geometry before replacing its input authority. */
-export function setBodyLayerGeometry(
-  layer: HTMLElement,
-  geometry: SceneBodyGeometry | null,
-  input: 'geometry' | 'asset' = 'geometry'
-): void {
+export function setBodyLayerGeometry(layer: HTMLElement, geometry: SceneBodyGeometry | null): void {
   const state = getState(layer);
   const compiled = geometry === null ? null : compileBodyGeometry(geometry);
-  state.input = geometry === null ? 'children' : input;
+  state.input = geometry === null ? 'children' : 'geometry';
   state.geometry = geometry;
   if (compiled !== null) {
     clearAggregateError(state);
@@ -95,22 +90,6 @@ export function setBodyLayerGeometry(
 /** Current resolved data; renderer captures have separate ownership. */
 export function getBodyLayerGeometry(layer: HTMLElement): SceneBodyGeometry | null {
   return getState(layer).geometry;
-}
-
-/** Selects an unresolved file input and clears the previous rendered contribution. */
-export function beginBodyLayerAsset(layer: HTMLElement): void {
-  const state = getState(layer);
-  clearAggregateError(state);
-  state.input = 'asset';
-  state.geometry = null;
-  state.geometryError = false;
-  replaceCompiled(state, compileShapes([]));
-  notifyOwningScene(layer);
-}
-
-export function failBodyLayerAsset(layer: HTMLElement): void {
-  getState(layer).geometryError = true;
-  notifyOwningScene(layer);
 }
 
 /** Updates the shader color factor without recompiling captured geometry. */
@@ -144,8 +123,7 @@ export function takeBodyLayerRenderData(layer: HTMLElement): MeshRenderData {
     color: state.tint,
     colors: state.compiled.colors,
     geometryError:
-      state.geometryError ||
-      (state.input === 'children' && [...layer.children].some(child => child.localName !== SCENE_SHAPE_TAG)),
+      state.geometryError || (state.input === 'children' && [...layer.children].some(child => !isPartElement(child))),
     identityInstance,
     indices: state.compiled.indices,
     normals: state.compiled.normals,
@@ -159,16 +137,19 @@ export function takeBodyLayerRenderData(layer: HTMLElement): MeshRenderData {
 
 function recompileDeclarative(layer: HTMLElement, state: BodyLayerState): void {
   if (state.input !== 'children') return;
-  const candidates = [...layer.children].filter(isShapeElement).map(shape => ({ shape, value: readShape(shape) }));
+  const candidates = [...layer.children].filter(isPartElement).map(part => ({ part, value: readPart(part) }));
+  clearDepartedParts(state, new Set(candidates.map(candidate => candidate.part)));
   try {
     const geometry = candidates.flatMap(candidate => candidate.value ?? []);
-    const compiled = compileNormalizedShapes(geometry);
+    const compiled = candidates.every(candidate => isShapeElement(candidate.part))
+      ? compileNormalizedShapes(geometry as NormalizedBodyShape[])
+      : compileBodyGeometry(geometry);
     state.geometry = geometry;
     clearAggregateError(state);
     state.geometryError = false;
     replaceCompiled(state, compiled);
   } catch {
-    setAggregateError(state, getLatestValidShape(candidates));
+    setAggregateError(state, getLatestValidPart(candidates));
     state.geometryError = true;
     state.geometry = null;
     replaceCompiled(state, compileShapes([]));
@@ -176,26 +157,39 @@ function recompileDeclarative(layer: HTMLElement, state: BodyLayerState): void {
   notifyOwningScene(layer);
 }
 
-function getLatestValidShape(
-  candidates: readonly { readonly shape: HTMLElement; readonly value: NormalizedBodyShape | null }[]
+function getLatestValidPart(
+  candidates: readonly { readonly part: HTMLElement; readonly value: readonly SceneBodyNode[] | null }[]
 ): HTMLElement | undefined {
   let latest: HTMLElement | undefined;
   for (const candidate of candidates) {
-    if (candidate.value !== null) latest = candidate.shape;
+    if (candidate.value !== null) latest = candidate.part;
   }
   return latest;
 }
 
-function clearAggregateError(state: BodyLayerState): void {
-  if (state.aggregateErrorShape) updateShapeAggregateError(state.aggregateErrorShape, false);
-  state.aggregateErrorShape = undefined;
+/** Clears diagnostics on parts that left the body since its previous compilation. */
+function clearDepartedParts(state: BodyLayerState, parts: ReadonlySet<HTMLElement>): void {
+  for (const part of state.parts) {
+    if (parts.has(part)) continue;
+    if (state.aggregateErrorPart === part) state.aggregateErrorPart = undefined;
+    const errors = getPartErrorState(part);
+    errors.aggregate = false;
+    errors.invalid = false;
+    updatePartError(part, errors);
+  }
+  state.parts = parts;
 }
 
-function setAggregateError(state: BodyLayerState, shape: HTMLElement | undefined): void {
-  if (state.aggregateErrorShape && state.aggregateErrorShape !== shape)
-    updateShapeAggregateError(state.aggregateErrorShape, false);
-  if (shape) updateShapeAggregateError(shape, true);
-  state.aggregateErrorShape = shape;
+function clearAggregateError(state: BodyLayerState): void {
+  if (state.aggregateErrorPart) updatePartAggregateError(state.aggregateErrorPart, false);
+  state.aggregateErrorPart = undefined;
+}
+
+function setAggregateError(state: BodyLayerState, part: HTMLElement | undefined): void {
+  if (state.aggregateErrorPart && state.aggregateErrorPart !== part)
+    updatePartAggregateError(state.aggregateErrorPart, false);
+  if (part) updatePartAggregateError(part, true);
+  state.aggregateErrorPart = part;
 }
 
 function replaceCompiled(state: BodyLayerState, compiled: CompiledBodyGeometry): void {
@@ -205,85 +199,126 @@ function replaceCompiled(state: BodyLayerState, compiled: CompiledBodyGeometry):
   state.version += 1;
 }
 
-function readShape(shape: HTMLElement): NormalizedBodyShape | null {
+function readPart(part: HTMLElement): readonly SceneBodyNode[] | null {
+  return isShapeElement(part) ? readShape(part) : readMesh(part);
+}
+
+function readShape(shape: HTMLElement): readonly NormalizedBodyShape[] | null {
   try {
     const candidate: BodyShape = {
       color: readString(shape, 'color', '#ffffff'),
       position: readVector3(shape, 'position', [0, 0, 0]),
-      orientation: readVector4(shape, 'orientation'),
+      orientation: readOrientation(shape),
       scale: readVector3(shape, 'scale', [1, 1, 1]),
-      kind: readString(shape, 'kind', 'cube') as BodyShape['kind']
+      type: readString(shape, 'type', 'cube') as BodyShape['type']
     };
     const normalized = normalizeBodyShape(candidate, 'shape');
-    updateShapeInvalidError(shape, false);
-    return normalized;
+    updatePartInvalidError(shape, false);
+    return [normalized];
   } catch {
-    updateShapeInvalidError(shape, true);
+    updatePartInvalidError(shape, true);
     return null;
   }
 }
 
-function readVector3(shape: HTMLElement, name: string, fallback: Readonly<Vec3>): Vec3 {
-  const values = readVector(shape, name, fallback);
+/** Reads one mesh part; an unloaded, empty, or not yet upgraded mesh contributes no nodes. */
+function readMesh(mesh: HTMLElement): readonly SceneBodyNode[] | null {
+  try {
+    const transform = normalizeBodyShape(
+      {
+        type: 'cube',
+        position: readVector3(mesh, 'position', [0, 0, 0]),
+        orientation: readOrientation(mesh),
+        scale: readVector3(mesh, 'scale', [1, 1, 1])
+      },
+      'mesh'
+    );
+    updatePartInvalidError(mesh, false);
+    const geometry = isMeshLayerRegistered(mesh) ? getMeshPartGeometry(mesh) : null;
+    if (!geometry) return [];
+    // Matches standalone meshes, where unsupported CSS colors fall back to white.
+    const color = parseCSSColor(readString(mesh, 'color', '#ffffff')) ?? DEFAULT_PART_COLOR;
+    const { position, orientation, scale } = transform;
+    return [{ geometry, color, position, orientation, scale }];
+  } catch {
+    updatePartInvalidError(mesh, true);
+    return null;
+  }
+}
+
+function readVector3(part: HTMLElement, name: string, fallback: Readonly<Vec3>): Vec3 {
+  const values = readVector(part, name, fallback);
   const [x, y, z] = values;
   if (x === undefined || y === undefined || z === undefined) throw new RangeError(`${name} is invalid.`);
   return [x, y, z];
 }
 
-function readVector4(shape: HTMLElement, name: string): Quaternion {
-  const values = readVector(shape, name, [0, 0, 0, 1]);
-  const [x, y, z, w] = values;
+/** A null orientation means identity. */
+function readOrientation(part: HTMLElement): Quaternion {
+  const [x, y, z, w] = readVector(part, 'orientation', [0, 0, 0, 1]);
   if (x === undefined || y === undefined || z === undefined || w === undefined)
-    throw new RangeError(`${name} is invalid.`);
+    throw new RangeError('orientation is invalid.');
   return [x, y, z, w];
 }
 
-function readVector(shape: HTMLElement, name: string, fallback: readonly number[]): readonly number[] {
-  const property = Reflect.get(shape, name);
-  const attribute = shape.getAttribute(name);
-  const values = property ?? (attribute === null ? fallback : (JSON.parse(attribute) ?? fallback));
+function readVector(part: HTMLElement, name: string, fallback: readonly number[]): readonly number[] {
+  return checkVector(readInput(part, name) ?? fallback, fallback.length, name);
+}
+
+/** Reads the upgraded property, or the attribute before upgrade; null means unset. */
+function readInput(part: HTMLElement, name: string): unknown {
+  const property: unknown = Reflect.get(part, name);
+  if (property !== undefined) return property;
+  const attribute = part.getAttribute(name);
+  return attribute === null ? null : JSON.parse(attribute);
+}
+
+function checkVector(values: unknown, length: number, name: string): readonly number[] {
   if (
     !Array.isArray(values) ||
-    values.length !== fallback.length ||
+    values.length !== length ||
     values.some(value => typeof value !== 'number' || !Number.isFinite(value))
   )
     throw new RangeError(`${name} is invalid.`);
-  return [...values];
+  return [...(values as number[])];
 }
 
-function updateShapeInvalidError(shape: HTMLElement, active: boolean): void {
-  const state = getShapeErrorState(shape);
+function updatePartInvalidError(part: HTMLElement, active: boolean): void {
+  const state = getPartErrorState(part);
   state.invalid = active;
-  updateShapeError(shape, state);
+  updatePartError(part, state);
 }
 
-function updateShapeAggregateError(shape: HTMLElement, active: boolean): void {
-  const state = getShapeErrorState(shape);
+function updatePartAggregateError(part: HTMLElement, active: boolean): void {
+  const state = getPartErrorState(part);
   state.aggregate = active;
-  updateShapeError(shape, state);
+  updatePartError(part, state);
 }
 
-function updateShapeError(shape: HTMLElement, state: ShapeErrorState): void {
+function updatePartError(part: HTMLElement, state: PartErrorState): void {
+  const shape = isShapeElement(part);
   diagnosticReporterService.update({
     active: state.invalid || state.aggregate,
-    code: SHAPE_KIND,
-    element: shape,
-    message: 'Scene shape kind or transform is invalid.',
+    code: shape ? SHAPE_TYPE : MESH_PART,
+    element: part,
+    message: shape
+      ? 'Scene shape type or transform is invalid.'
+      : 'Body mesh transform is invalid, or the body exceeds its geometry limits.',
     severity: 'error'
   });
 }
 
-interface ShapeErrorState {
+interface PartErrorState {
   aggregate: boolean;
   invalid: boolean;
 }
 
-const shapeErrorStates = new WeakMap<HTMLElement, ShapeErrorState>();
-function getShapeErrorState(shape: HTMLElement): ShapeErrorState {
-  let state = shapeErrorStates.get(shape);
+const partErrorStates = new WeakMap<HTMLElement, PartErrorState>();
+function getPartErrorState(part: HTMLElement): PartErrorState {
+  let state = partErrorStates.get(part);
   if (!state) {
     state = { aggregate: false, invalid: false };
-    shapeErrorStates.set(shape, state);
+    partErrorStates.set(part, state);
   }
   return state;
 }
@@ -291,6 +326,12 @@ function getShapeErrorState(shape: HTMLElement): ShapeErrorState {
 function isShapeElement(element: Element): element is HTMLElement {
   return element.localName === SCENE_SHAPE_TAG;
 }
+
+function isPartElement(element: Element): element is HTMLElement {
+  return isShapeElement(element) || isSceneBodyPart(element);
+}
+
+const DEFAULT_PART_COLOR: Readonly<RGBA> = [1, 1, 1, 1];
 
 function readString(element: HTMLElement, name: string, fallback: string): string {
   const value = Reflect.get(element, name);

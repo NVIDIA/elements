@@ -12,6 +12,9 @@ import {
 } from '../../gpu/platform.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
 import { FRUSTUM_WGSL } from '../../math/frustum.js';
+import { SCALED_ENCLOSING_RADIUS_WGSL } from '../../math/bounds.js';
+import { PRIMITIVE_ENCLOSING_RADII } from '../../math/primitive-bounds.js';
+import type { PrimitiveKind } from '../../math/primitive-geometry.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
@@ -20,6 +23,8 @@ const MARKER_WORDS = MARKER.stride / Uint32Array.BYTES_PER_ELEMENT;
 const MARKER_BYTES = MARKER.stride;
 const WORKGROUP_SIZE = 64;
 const MARKER_COMPACTION_THRESHOLD = 25_000;
+/** Float index of `unitEnclosingRadius` in the marker uniform record, after the record count and marker pick ID. */
+const UNIT_ENCLOSING_RADIUS_UNIFORM_INDEX = 34;
 
 export function markerCompactionIsEligible(partitionCount: number, count: number, outlineVisible: boolean): boolean {
   return partitionCount === 1 && count >= MARKER_COMPACTION_THRESHOLD && !outlineVisible;
@@ -102,6 +107,11 @@ export class MarkerCompactor {
   }
 }
 
+/** Writes the drawn primitive's unit-scale enclosing radius into the marker uniform record that compaction reads. */
+export function writeMarkerCompactionUniforms(uniforms: Float32Array, kind: PrimitiveKind): void {
+  uniforms[UNIT_ENCLOSING_RADIUS_UNIFORM_INDEX] = PRIMITIVE_ENCLOSING_RADII[kind];
+}
+
 export function supportsMarkerCompaction(device: SceneGPUDevice): device is SceneGPUComputeDevice {
   return supportsSceneGPUCompute(device);
 }
@@ -117,6 +127,8 @@ struct SceneUniforms {
   viewProjection: mat4x4f,
   frame: mat4x4f,
   count: f32,
+  pickId: u32,
+  unitEnclosingRadius: f32,
 }
 @group(0) @binding(0) var<uniform> scene: SceneUniforms;
 @group(1) @binding(0) var<storage, read> source: array<u32>;
@@ -125,12 +137,12 @@ struct SceneUniforms {
 @group(1) @binding(3) var<storage, read_write> arguments: array<atomic<u32>>;
 
 ${FRUSTUM_WGSL}
-
+${SCALED_ENCLOSING_RADIUS_WGSL}
 fn isVisible(base: u32) -> bool {
   let position = vec3f(bitcast<f32>(source[base]), bitcast<f32>(source[base + 1u]), bitcast<f32>(source[base + 2u]));
   let scale = vec3f(bitcast<f32>(source[base + 7u]), bitcast<f32>(source[base + 8u]), bitcast<f32>(source[base + 9u]));
   let transform = scene.viewProjection * scene.frame;
-  let radius = 0.8660254 * max(abs(scale.x), max(abs(scale.y), abs(scale.z)));
+  let radius = nve_scaled_enclosing_radius(scene.unitEnclosingRadius, scale);
   return nve_frustum_intersects_sphere(transform, position, radius);
 }
 

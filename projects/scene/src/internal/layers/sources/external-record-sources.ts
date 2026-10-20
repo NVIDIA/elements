@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
-import { MarkerInstanceBuffer } from '../markers/instance-buffer.js';
+import { markerSourceRecordsAreValid } from '../markers/instance-buffer.js';
 import {
   registerExternalPackedRecordSource,
   type ExternalLabelSource,
@@ -39,9 +39,9 @@ interface ExternalLabelSourceOptions extends ExternalRecordSourceOptions {
 /** Wraps borrowed bytes using the canonical marker record layout. */
 export function createMarkerSource(options: ExternalRecordSourceOptions): ExternalMarkerSource {
   const source = createSource(options, 'marker', MARKER.stride);
-  const validation = new MarkerInstanceBuffer();
-  validation.replace(source.bytes.subarray(0, source.count * MARKER.stride));
-  if (!validation.ready) throw new RangeError('Marker source active records contain invalid values.');
+  if (!markerSourceRecordsAreValid(source.bytes, source.count)) {
+    throw new RangeError('Marker source active records contain invalid values.');
+  }
   return source;
 }
 

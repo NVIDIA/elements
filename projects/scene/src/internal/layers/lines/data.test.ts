@@ -5,11 +5,9 @@ import { describe, expect, it } from 'vitest';
 import { LINE_VERTEX } from '../../records/layouts/built-ins.js';
 import { writeLineVertex } from '../../records/layouts/codecs.js';
 import {
-  lineCountIsValid,
   lineRecordHasTransparency,
   lineRecordIsOpaque,
   lineRecordIsValid,
-  lineSegmentCount,
   normalizeLineTopology,
   normalizeLineWidthUnit
 } from './data.js';
@@ -22,22 +20,6 @@ describe('line data', () => {
     expect(normalizeLineWidthUnit('pixel')).toBe('pixel');
     expect(normalizeLineWidthUnit('world')).toBe('world');
     expect(normalizeLineWidthUnit('unknown')).toBe('world');
-  });
-
-  it('should validate topology-specific counts and calculate segment counts', () => {
-    expect(lineCountIsValid(2, 'loop')).toBe(false);
-    expect(lineCountIsValid(3, 'loop')).toBe(true);
-    expect(lineCountIsValid(3, 'segments')).toBe(false);
-    expect(lineCountIsValid(4, 'segments')).toBe(true);
-    expect(lineSegmentCount(5, 'strip')).toBe(4);
-    expect(lineSegmentCount(5, 'loop')).toBe(5);
-    expect(lineSegmentCount(6, 'segments')).toBe(3);
-  });
-
-  it('should represent one million segments without CPU-side geometry expansion', () => {
-    expect(lineSegmentCount(1_000_001, 'strip')).toBe(1_000_000);
-    expect(lineSegmentCount(1_000_000, 'loop')).toBe(1_000_000);
-    expect(lineSegmentCount(2_000_000, 'segments')).toBe(1_000_000);
   });
 
   it('should validate raw styles and classify only visible outgoing transparency', () => {

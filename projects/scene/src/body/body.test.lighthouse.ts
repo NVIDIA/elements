@@ -30,15 +30,16 @@ describe('scene body lighthouse report', () => {
     const report = await lighthouseRunner.getReport(
       'nve-scene-body-file',
       `
-      <nve-scene aria-label="Loaded body"><nve-scene-body id="loaded"></nve-scene-body></nve-scene>
+      <nve-scene aria-label="Loaded body"><nve-scene-body><nve-scene-mesh id="loaded"></nve-scene-mesh></nve-scene-body></nve-scene>
       <script type="module">
         import '@nvidia-elements/scene/body/define.js';
+        import '@nvidia-elements/scene/mesh/define.js';
         const originalFetch = globalThis.fetch;
         globalThis.fetch = (url, options) => new URL(url, document.baseURI).pathname === '/triangle.stl'
           ? Promise.resolve(new Response(${JSON.stringify(stl)})) : originalFetch(url, options);
-        const body = document.querySelector('#loaded');
-        body.src = '/triangle.stl';
-        await body.loadComplete;
+        const mesh = document.querySelector('#loaded');
+        mesh.src = '/triangle.stl';
+        await mesh.closest('nve-scene-body').loadComplete;
       </script>
     `
     );

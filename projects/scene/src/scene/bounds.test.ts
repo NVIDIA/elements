@@ -147,8 +147,10 @@ describe('published scene bounds', () => {
     const cubes = new SceneCubes();
     cubes.source = new CubeBuffer({ records: [{ position: [2, 0, 0], size: [2, 4, 6] }] });
     outer.name = inner.name = 'duplicate';
-    outer.setPose({ position: [1e12, 1e12, 1e12], orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2] });
-    inner.setPose({ position: [10, 20, 30], orientation: [0, 0, 0, 1] });
+    outer.position = [1e12, 1e12, 1e12];
+    outer.orientation = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
+    inner.position = [10, 20, 30];
+    inner.orientation = [0, 0, 0, 1];
     scene.append(outer);
     outer.append(inner);
     inner.append(cubes);
@@ -159,13 +161,15 @@ describe('published scene bounds', () => {
     });
     expect(Object.isFrozen(bounds)).toBe(true);
     expect(Object.isFrozen(bounds?.minimum)).toBe(true);
-    outer.setPose({ position: [NaN, 0, 0], orientation: [0, 0, 0, 1] });
+    outer.position = [NaN, 0, 0];
+    outer.orientation = [0, 0, 0, 1];
     expect(scene.getBounds({ content: [outer] })).toBeNull();
     const peer = new SceneCubes();
     peer.source = new CubeBuffer({ records: [{}] });
     scene.append(peer);
     expect(scene.getBounds({ content: [scene] })).toEqual({ minimum: [-0.5, -0.5, -0.5], maximum: [0.5, 0.5, 0.5] });
-    outer.setPose({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
+    outer.position = [0, 0, 0];
+    outer.orientation = [0, 0, 0, 1];
     expect(scene.getBounds({ content: [outer] })?.minimum).toEqual([11, 18, 27]);
   });
 
@@ -236,7 +240,7 @@ describe('published scene bounds', () => {
     expect(scene.getBounds({ content: [mesh] })).toEqual({ minimum: [10, 20, 30], maximum: [50, 29, 30] });
     mesh.source = null;
     const body = new SceneBody();
-    body.geometry = [{ kind: 'cube', position: [5, 0, 0], scale: [2, 4, 6] }];
+    body.geometry = [{ type: 'cube', position: [5, 0, 0], scale: [2, 4, 6] }];
     const polygon = new ScenePolygon();
     polygon.geometry = {
       outer: [
@@ -252,7 +256,10 @@ describe('published scene bounds', () => {
     expect(scene.getBounds({ content: [body] })).toEqual({ minimum: [4, -2, -3], maximum: [6, 2, 3] });
     expect(scene.getBounds({ content: [polygon] })).toEqual({ minimum: [0, 0, 0], maximum: [4, 3, 0] });
     expect(scene.getBounds({ content: [terrain] })).toEqual({ minimum: [10, 20, 0], maximum: [12, 22, 3] });
-    body.src = '/not-loaded.stl';
+    const part = new SceneMesh();
+    part.src = '/not-loaded.stl';
+    body.append(part);
+    body.geometry = null;
     expect(scene.getBounds({ content: [body] })).toBeNull();
   });
 
@@ -277,5 +284,98 @@ describe('published scene bounds', () => {
     expect(takeStreamingLayerRenderData(triangles).uploadRanges).not.toHaveLength(0);
     expect(takeLabelLayerRenderData(labels).uploadRanges).not.toHaveLength(0);
     expect(takeMeshLayerRenderData(mesh).geometryUploadRanges).not.toHaveLength(0);
+  });
+
+  it('updates warmed mesh bounds when positions shrink or indices change and preserves rejected publications', () => {
+    const scene = new Scene();
+    const mesh = new SceneMesh();
+    const positions = new Float32Array([0, 0, 0, 10, 0, 0, 0, 6, 0, -20, 40, 0]);
+    const indices = new Uint32Array([0, 1, 2]);
+    mesh.geometry = { positions, indices };
+    scene.append(mesh);
+    const query = () => scene.getBounds({ content: [mesh] });
+    expect(query()).toEqual({ minimum: [0, 0, 0], maximum: [10, 6, 0] });
+    positions[3] = 2;
+    positions[7] = 1;
+    expect(query()?.maximum).toEqual([10, 6, 0]);
+    mesh.publishGeometry({ attribute: 'positions', start: 1, count: 2 });
+    expect(query()).toEqual({ minimum: [0, 0, 0], maximum: [2, 1, 0] });
+    indices[1] = 3;
+    expect(query()?.maximum).toEqual([2, 1, 0]);
+    mesh.publishGeometry({ attribute: 'indices', start: 1, count: 1 });
+    expect(query()).toEqual({ minimum: [-20, 0, 0], maximum: [0, 40, 0] });
+    positions[3] = NaN;
+    expect(() => mesh.publishGeometry({ attribute: 'positions', start: 1, count: 1 })).toThrow(RangeError);
+    expect(query()).toEqual({ minimum: [-20, 0, 0], maximum: [0, 40, 0] });
+    mesh.publishGeometry({ attribute: 'positions', start: 1, count: 0 });
+    expect(query()).toEqual({ minimum: [-20, 0, 0], maximum: [0, 40, 0] });
+    positions[3] = 2;
+    mesh.geometry = { positions, indices: new Uint32Array() };
+    expect(query()).toBeNull();
+    mesh.geometry = { positions: positions.subarray(0, 9) };
+    expect(query()).toEqual({ minimum: [0, 0, 0], maximum: [2, 1, 0] });
+    mesh.geometry = { positions: new Float32Array([1, 1, 1, 2, 1, 1, 1, 2, 1]) };
+    expect(query()).toEqual({ minimum: [1, 1, 1], maximum: [2, 2, 1] });
+  });
+
+  it('keeps independently captured meshes isolated when they share producer arrays', () => {
+    const scene = new Scene();
+    const first = new SceneMesh();
+    const second = new SceneMesh();
+    const positions = new Float32Array([0, 0, 0, 10, 0, 0, 0, 6, 0]);
+    const indices = new Uint32Array([0, 1, 2]);
+    first.geometry = second.geometry = { positions, indices };
+    scene.append(first, second);
+    expect(scene.getBounds({ content: [first] })?.maximum).toEqual([10, 6, 0]);
+    expect(scene.getBounds({ content: [second] })?.maximum).toEqual([10, 6, 0]);
+    positions[3] = 2;
+    first.publishGeometry({ attribute: 'positions', start: 1, count: 1 });
+    expect(scene.getBounds({ content: [first] })?.maximum).toEqual([2, 6, 0]);
+    expect(scene.getBounds({ content: [second] })?.maximum).toEqual([10, 6, 0]);
+  });
+
+  it('updates warmed grid extrema and extents only after capturing a replacement grid', () => {
+    const scene = new Scene();
+    const terrain = new SceneHeightfield();
+    const heights = new Float32Array([-8, 10, 1, 2, 3, 4]);
+    const grid = { columns: 3, rows: 2, spacing: 0.5, origin: [10, 20] as const, heights };
+    terrain.grid = grid;
+    scene.append(terrain);
+    const query = () => scene.getBounds({ content: [terrain] });
+    expect(query()).toEqual({ minimum: [10, 20, -8], maximum: [11, 20.5, 10] });
+    heights[0] = 0;
+    heights[1] = 1;
+    terrain.color = '#ff0000';
+    expect(query()).toEqual({ minimum: [10, 20, -8], maximum: [11, 20.5, 10] });
+    terrain.grid = { ...grid, columns: 2, rows: 3, spacing: 2, origin: [30, 40] };
+    expect(query()).toEqual({ minimum: [30, 40, 0], maximum: [32, 44, 4] });
+    terrain.grid = { ...grid, heights: new Float32Array(6).fill(NaN) };
+    expect(query()).toBeNull();
+    terrain.grid = grid;
+    expect(query()).toEqual({ minimum: [10, 20, 0], maximum: [11, 20.5, 4] });
+    terrain.grid = null;
+    expect(query()).toBeNull();
+    terrain.grid = { columns: 2, rows: 2, spacing: 0.1, origin: [1e8, 0], heights: new Float32Array(4).fill(2) };
+    expect(query()).toEqual({ minimum: [1e8, 0, 2], maximum: [Math.fround(1e8 + 0.1), Math.fround(0.1), 2] });
+  });
+
+  it('applies current frame and instance placement to warmed local geometry bounds', () => {
+    const scene = new Scene();
+    const frame = new SceneFrame();
+    const mesh = new SceneMesh();
+    mesh.geometry = { positions: new Float32Array([0, 0, 0, 4, 0, 0, 0, 3, 0]) };
+    scene.append(frame);
+    frame.append(mesh);
+    const query = () => scene.getBounds({ content: [mesh] });
+    expect(query()).toEqual({ minimum: [0, 0, 0], maximum: [4, 3, 0] });
+    frame.position = [1e12, 20, 30];
+    frame.orientation = [0, 0, 0, 1];
+    expect(query()).toEqual({ minimum: [1e12, 20, 30], maximum: [1e12 + 4, 23, 30] });
+    const source = new MarkerBuffer({ records: [{ position: [10, 0, 0], scale: [-2, 3, 1] }] });
+    mesh.source = source;
+    expect(query()).toEqual({ minimum: [1e12 + 2, 20, 30], maximum: [1e12 + 10, 29, 30] });
+    source.at(0).position.x = 1;
+    mesh.publish();
+    expect(query()).toEqual({ minimum: [1e12 - 7, 20, 30], maximum: [1e12 + 1, 29, 30] });
   });
 });

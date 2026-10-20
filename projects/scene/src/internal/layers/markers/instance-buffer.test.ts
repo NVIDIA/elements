@@ -5,14 +5,20 @@ import { describe, expect, it, vi } from 'vitest';
 import { required } from '@internals/testing';
 import { writeMarker } from '../../records/layouts/codecs.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
+import { composePreciseMat4, transformPointMat4 } from '../../math/mat4.js';
+import { createPrimitiveGeometry } from '../../math/primitive-geometry.js';
+import type { Quaternion } from '../../math/types.js';
 import { MarkerInstanceBuffer } from './instance-buffer.js';
+
+/** Half the diagonal of a unit cube, the enclosing radius of an unscaled cube record. */
+const UNIT_CUBE_RADIUS = Math.sqrt(3) / 2;
 
 describe('marker instance buffer', () => {
   it('should copy source bytes and normalize quaternions in the owned upload', () => {
     const source = new Uint8Array(MARKER.stride);
     writeMarker(source, 0, { position: [1, 2, 3], orientation: [0, 0, 0, 1] });
     new DataView(source.buffer).setFloat32(24, 2, true);
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     source.fill(0);
 
@@ -27,7 +33,7 @@ describe('marker instance buffer', () => {
     const source = new Uint8Array(MARKER.stride * 2);
     writeMarker(source, 0, { orientation: [0, 0, 0, 1], position: [0, 0, 0] });
     writeMarker(source, 1, { orientation: [0.5, 0.5, 0.5, 0.5], position: [0, 0, 0] });
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     const setFloat32 = vi.spyOn(DataView.prototype, 'setFloat32');
 
     try {
@@ -42,7 +48,7 @@ describe('marker instance buffer', () => {
   it('should reuse same-capacity owned storage and replace it after capacity changes', () => {
     const source = new Uint8Array(MARKER.stride);
     writeMarker(source, 0, { position: [1, 2, 3] });
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     const initialUpload = buffer.getUploadBytes();
 
@@ -78,7 +84,7 @@ describe('marker instance buffer', () => {
         position: [index, 0, 0]
       });
     }
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
 
     buffer.replace(opaque);
     buffer.replace(transparent);
@@ -98,7 +104,7 @@ describe('marker instance buffer', () => {
     writeMarker(source, 0, { orientation: [0, 0, 0, 1], position: [0, 0, 0] });
     const orientation = required(MARKER.fields.orientation, 'Expected the marker orientation field.');
     new DataView(source.buffer).setFloat32(orientation.offset, Number.POSITIVE_INFINITY, true);
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
 
     buffer.replace(source);
 
@@ -108,7 +114,7 @@ describe('marker instance buffer', () => {
   });
 
   it('should validate stride and values and recover touched records', () => {
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(new Uint8Array(1));
     expect([...buffer.getIssues()]).toEqual(['layout-stride-mismatch']);
 
@@ -136,7 +142,7 @@ describe('marker instance buffer', () => {
     const source = new Uint8Array(MARKER.stride * 2);
     writeMarker(source, 0, { color: [1, 1, 1, 0.5], position: [1, 0, 0] });
     writeMarker(source, 1, { position: [3, 0, 0] });
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     buffer.takeUploadRanges();
 
@@ -147,7 +153,7 @@ describe('marker instance buffer', () => {
     expect(buffer.ready).toBe(true);
     expect(buffer.hasOpaqueFaceAlpha(2)).toBe(true);
     expect(buffer.hasPartialFaceAlpha(2)).toBe(true);
-    expect(buffer.getBounds(2)).toMatchObject({ maximumX: 7, minimumX: -6 });
+    expect(buffer.getBounds(2)).toMatchObject({ maximumX: 6 + UNIT_CUBE_RADIUS, minimumX: -4 - Math.sqrt(3) });
     expect(
       new DataView(buffer.getUploadBytes()?.buffer ?? new ArrayBuffer()).getFloat32(MARKER.stride + 24, true)
     ).toBe(1);
@@ -158,7 +164,7 @@ describe('marker instance buffer', () => {
     const count = 4353;
     const source = new Uint8Array(MARKER.stride * count);
     for (let index = 0; index < count; index += 1) writeMarker(source, index, { position: [0, 0, 0] });
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
     buffer.takeUploadRanges();
     for (const index of [255, 256, 257]) {
@@ -166,7 +172,7 @@ describe('marker instance buffer', () => {
     }
     buffer.commit(255, 3);
     const prepared = required(buffer.createPreparedSnapshot(), 'Expected a prepared marker snapshot.');
-    const sibling = new MarkerInstanceBuffer();
+    const sibling = new MarkerInstanceBuffer('cube');
     sibling.replacePrepared(source, prepared);
     for (const index of [255, 256, 257]) writeMarker(source, index, { position: [0, 0, 0] });
     buffer.commit(255, 3);
@@ -190,12 +196,12 @@ describe('marker instance buffer', () => {
     expect(buffer.hasPartialFaceAlpha(count)).toBe(true);
     expect(buffer.hasPartialOutlineAlpha(count)).toBe(true);
     expect(sibling.hasPartialOutlineAlpha(count)).toBe(false);
-    expect(buffer.getBounds(count)).toMatchObject({ minimumX: -1, maximumX: 1 });
+    expect(buffer.getBounds(count)).toMatchObject({ minimumX: -UNIT_CUBE_RADIUS, maximumX: UNIT_CUBE_RADIUS });
     expect(buffer.takeUploadRanges()).toEqual([{ offset: 0, size: source.byteLength }]);
   });
 
   it('should reject invalid commit ranges and no-op without a source', () => {
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     expect(() => buffer.commit(-1)).not.toThrow();
     expect(buffer.createPreparedSnapshot()).toBeNull();
     expect(buffer.getUploadBytes()).toBeNull();
@@ -210,7 +216,7 @@ describe('marker instance buffer', () => {
   it('should treat empty commits and cleared sources as no-ops', () => {
     const source = new Uint8Array(MARKER.stride);
     writeMarker(source, 0, { position: [1, 2, 3] });
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
 
     buffer.commit(0, 0);
@@ -229,37 +235,79 @@ describe('marker instance buffer', () => {
     const source = new Uint8Array(MARKER.stride * 2);
     writeMarker(source, 0, { position: [2, 0, 0] });
     writeMarker(source, 1, { position: [3, 0, 0] });
-    const first = new MarkerInstanceBuffer();
+    const first = new MarkerInstanceBuffer('cube');
     first.replace(original);
     const snapshot = first.createPreparedSnapshot();
     if (!snapshot) throw new TypeError('Expected a prepared marker snapshot.');
 
-    const second = new MarkerInstanceBuffer();
+    const second = new MarkerInstanceBuffer('cube');
     second.replacePrepared(source, snapshot);
 
     expect(second.capacity).toBe(2);
-    expect(second.getBounds(2)).toMatchObject({ maximumX: 4, minimumX: 1 });
+    expect(second.getBounds(2)).toMatchObject({ maximumX: 3 + UNIT_CUBE_RADIUS, minimumX: 2 - UNIT_CUBE_RADIUS });
   });
 
   it('should detach shared bounds trees when prepared consumers commit different blocks', () => {
     const count = 768;
     const source = new Uint8Array(MARKER.stride * count);
     for (let index = 0; index < count; index += 1) writeMarker(source, index, { position: [0, 0, 0] });
-    const first = new MarkerInstanceBuffer();
+    const first = new MarkerInstanceBuffer('cube');
     first.replace(source);
     const snapshot = required(first.createPreparedSnapshot(), 'Expected a prepared marker snapshot.');
-    const second = new MarkerInstanceBuffer();
+    const second = new MarkerInstanceBuffer('cube');
     second.replacePrepared(source, snapshot);
 
     writeMarker(source, 700, { position: [100, 0, 0] });
     first.commit(700, 1);
-    expect(first.getBounds(count)).toMatchObject({ maximumX: 101, minimumX: -1 });
-    expect(second.getBounds(count)).toMatchObject({ maximumX: 1, minimumX: -1 });
+    expect(first.getBounds(count)).toMatchObject({ maximumX: 100 + UNIT_CUBE_RADIUS, minimumX: -UNIT_CUBE_RADIUS });
+    expect(second.getBounds(count)).toMatchObject({ maximumX: UNIT_CUBE_RADIUS, minimumX: -UNIT_CUBE_RADIUS });
 
     writeMarker(source, 500, { position: [-100, 0, 0] });
     second.commit(500, 1);
-    expect(second.getBounds(count)).toMatchObject({ maximumX: 1, minimumX: -101 });
-    expect(first.getBounds(count)).toMatchObject({ maximumX: 101, minimumX: -1 });
+    expect(second.getBounds(count)).toMatchObject({ maximumX: UNIT_CUBE_RADIUS, minimumX: -100 - UNIT_CUBE_RADIUS });
+    expect(first.getBounds(count)).toMatchObject({ maximumX: 100 + UNIT_CUBE_RADIUS, minimumX: -UNIT_CUBE_RADIUS });
+  });
+
+  it('should enclose rotated arrow heads and tips in arrow layer bounds', () => {
+    // A 45-degree turn about y moves part of the head ring beyond the record's largest scale.
+    const orientation: Quaternion = [0, Math.sin(Math.PI / 8), 0, Math.cos(Math.PI / 8)];
+    const source = new Uint8Array(MARKER.stride * 2);
+    writeMarker(source, 0, { orientation, position: [0, 0, 0] });
+    writeMarker(source, 1, { position: [10, 0, 0], scale: [0.05, 0.05, 2] });
+    const buffer = new MarkerInstanceBuffer('arrow');
+    buffer.replace(source);
+    const bounds = required(buffer.getBounds(2), 'Expected arrow bounds.');
+    const { vertices } = createPrimitiveGeometry('arrow');
+    const records = [
+      composePreciseMat4([0, 0, 0], orientation),
+      composePreciseMat4([10, 0, 0], [0, 0, 0, 1], [0.05, 0.05, 2])
+    ];
+
+    for (const matrix of records) {
+      for (let offset = 0; offset < vertices.length; offset += 6) {
+        const [x, y, z] = transformPointMat4(matrix, [vertices[offset]!, vertices[offset + 1]!, vertices[offset + 2]!]);
+        expect(x).toBeGreaterThanOrEqual(bounds.minimumX);
+        expect(x).toBeLessThanOrEqual(bounds.maximumX);
+        expect(y).toBeGreaterThanOrEqual(bounds.minimumY);
+        expect(y).toBeLessThanOrEqual(bounds.maximumY);
+        expect(z).toBeGreaterThanOrEqual(bounds.minimumZ);
+        expect(z).toBeLessThanOrEqual(bounds.maximumZ);
+      }
+    }
+  });
+
+  it('should rebuild bounds instead of sharing a snapshot prepared for another primitive kind', () => {
+    const source = new Uint8Array(MARKER.stride);
+    writeMarker(source, 0, { position: [0, 0, 0] });
+    const cubes = new MarkerInstanceBuffer('cube');
+    cubes.replace(source);
+    const snapshot = required(cubes.createPreparedSnapshot(), 'Expected a prepared marker snapshot.');
+    const arrows = new MarkerInstanceBuffer('arrow');
+    arrows.replacePrepared(source, snapshot);
+
+    expect(arrows.getUploadBytes()).not.toBe(cubes.getUploadBytes());
+    expect(arrows.getBounds(1)).toMatchObject({ maximumX: Math.sqrt(3), minimumX: -Math.sqrt(3) });
+    expect(cubes.getBounds(1)).toMatchObject({ maximumX: UNIT_CUBE_RADIUS, minimumX: -UNIT_CUBE_RADIUS });
   });
 
   it('should cache conservative visible bounds by prefix and update only committed blocks', () => {
@@ -270,27 +318,29 @@ describe('marker instance buffer', () => {
     }
     writeMarker(source, 0, { position: [1, 2, 3], scale: [-2, 0.5, 1] });
     writeMarker(source, 1, { position: [10, 0, 0] });
-    const buffer = new MarkerInstanceBuffer();
+    const buffer = new MarkerInstanceBuffer('cube');
     buffer.replace(source);
+    // The largest scaled half extent is 1, so the cube's enclosing radius is root three.
+    const radius = Math.sqrt(3);
 
     expect(buffer.getBounds(1)).toEqual({
-      maximumX: 3,
-      maximumY: 4,
-      maximumZ: 5,
-      minimumX: -1,
-      minimumY: 0,
-      minimumZ: 1
+      maximumX: 1 + radius,
+      maximumY: 2 + radius,
+      maximumZ: 3 + radius,
+      minimumX: 1 - radius,
+      minimumY: 2 - radius,
+      minimumZ: 3 - radius
     });
-    expect(buffer.getBounds(2)).toMatchObject({ maximumX: 11, minimumX: -1 });
+    expect(buffer.getBounds(2)).toMatchObject({ maximumX: 10 + UNIT_CUBE_RADIUS, minimumX: 1 - radius });
     expect(buffer.getBounds(0)).toBeNull();
 
     writeMarker(source, 1, { position: [-10, 0, 0] });
     buffer.commit(1, 1);
-    expect(buffer.getBounds(2)).toMatchObject({ maximumX: 3, minimumX: -11 });
+    expect(buffer.getBounds(2)).toMatchObject({ maximumX: 1 + radius, minimumX: -10 - UNIT_CUBE_RADIUS });
 
     const snapshot = buffer.createPreparedSnapshot();
     if (!snapshot) throw new TypeError('Expected prepared marker bounds.');
-    const sibling = new MarkerInstanceBuffer();
+    const sibling = new MarkerInstanceBuffer('cube');
     sibling.replacePrepared(source, snapshot);
     expect(sibling.getBounds(2)).toEqual(buffer.getBounds(2));
   });
