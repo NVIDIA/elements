@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { createOrthographicMatrix, createPerspectiveMatrix } from '../composition/camera/math.js';
+import { createOrthographicMatrix, createPerspectiveMatrix } from './projection.js';
 import { classifyAabbFrustum, isOutsideHalfSpace, type AabbBounds, type FrustumRelation } from './frustum.js';
 import {
   composePreciseMat4,

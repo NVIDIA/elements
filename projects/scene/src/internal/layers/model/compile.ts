@@ -3,7 +3,7 @@
 
 import { normalizeQuaternion } from '../../math/quaternion.js';
 import { composePreciseMat4 } from '../../math/mat4.js';
-import { PreparedAffineGeometryTransform } from '../../math/affine-transform.js';
+import { MeshAssembly, type MeshAssemblyPart } from '../../math/mesh-assembly.js';
 import { resolveSceneColor } from '../../color/color.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 import {
@@ -35,10 +35,6 @@ export interface NormalizedModelPart {
   readonly orientation: Readonly<Quaternion>;
   readonly scale: Readonly<Vec3>;
   readonly shape: ModelPart['shape'];
-}
-
-interface PreparedPart extends NormalizedModelPart {
-  readonly source: ReturnType<typeof createModelPrimitiveGeometry>;
 }
 
 const MAX_UINT32 = 0xffff_ffff;
@@ -91,42 +87,21 @@ function normalizeModelParts(parts: readonly ModelPart[]): NormalizedModelPart[]
 /** Compiles already-normalized parts without revisiting producer values. */
 export function compileNormalizedParts(parts: readonly NormalizedModelPart[]): ReturnType<typeof compileParts> {
   if (parts.length > MAX_PART_COUNT) throw new RangeError('Model parts exceed the compiled allocation limit.');
-  const allocation = { indexCount: 0, vertexCount: 0 };
-  const prepared = Array.from(parts, part => preparePart(part, allocation));
-  validateAllocation(allocation);
-  return compilePreparedParts(prepared, allocation);
+  const assembly = new MeshAssembly(Array.from(parts, preparePart));
+  validateAllocation(assembly);
+  return assembly.assemble();
 }
 
-function compilePreparedParts(
-  parts: readonly PreparedPart[],
-  allocation: { readonly indexCount: number; readonly vertexCount: number }
-): ReturnType<typeof compileParts> {
-  const positions = new Float32Array(allocation.vertexCount * 3);
-  const normals = new Float32Array(allocation.vertexCount * 3);
-  const colors = new Float32Array(allocation.vertexCount * 4);
-  const indices = new Uint32Array(allocation.indexCount);
-  let vertexOffset = 0;
-  let indexOffset = 0;
-  for (const part of parts) {
-    writePart({ colors, indices, normals, part, positions, source: part.source, vertexOffset, indexOffset });
-    vertexOffset += part.source.vertices.length / 6;
-    indexOffset += part.source.indices.length;
-  }
-  return { positions, normals, colors, indices };
-}
-
-function preparePart(part: NormalizedModelPart, allocation: { indexCount: number; vertexCount: number }): PreparedPart {
+function preparePart(part: NormalizedModelPart): MeshAssemblyPart {
   const source = getModelPrimitiveGeometry(part.shape);
-  allocation.vertexCount += source.vertices.length / 6;
-  allocation.indexCount += source.indices.length;
-  if (
-    !Number.isSafeInteger(allocation.vertexCount) ||
-    !Number.isSafeInteger(allocation.indexCount) ||
-    allocation.vertexCount > MAX_UINT32
-  ) {
-    throw new RangeError('Model parts exceed the indexed-geometry limit.');
-  }
-  return { ...part, source };
+  return {
+    positions: { values: source.vertices, offset: 0, stride: 6 },
+    normals: { values: source.vertices, offset: 3, stride: 6 },
+    colors: { values: part.color, offset: 0, stride: 0 },
+    indices: source.indices,
+    vertexCount: source.vertices.length / 6,
+    matrix: composePreciseMat4(part.position, part.orientation, part.scale)
+  };
 }
 
 export function normalizeModelPart(part: unknown, path: string): NormalizedModelPart {
@@ -184,43 +159,15 @@ function checkColor(value: unknown, name: string): Readonly<RGBA> {
   }
 }
 
-function validateAllocation(allocation: { readonly indexCount: number; readonly vertexCount: number }): void {
-  const bytes =
-    allocation.vertexCount * (3 + 3 + 4) * Float32Array.BYTES_PER_ELEMENT +
-    allocation.indexCount * Uint32Array.BYTES_PER_ELEMENT;
-  if (!Number.isSafeInteger(bytes) || bytes > MAX_COMPILED_BYTES) {
-    throw new RangeError('Model parts exceed the compiled allocation limit.');
-  }
-}
-
-function writePart(options: {
-  readonly colors: Float32Array;
-  readonly indexOffset: number;
-  readonly indices: Uint32Array;
-  readonly normals: Float32Array;
-  readonly part: NormalizedModelPart;
-  readonly positions: Float32Array;
-  readonly source: ReturnType<typeof createModelPrimitiveGeometry>;
-  readonly vertexOffset: number;
-}): void {
-  const { colors, indexOffset, indices, normals, part, positions, source, vertexOffset } = options;
-  const transform = new PreparedAffineGeometryTransform(
-    composePreciseMat4(part.position, part.orientation, part.scale)
-  );
-  for (
-    let sourceOffset = 0, vertex = vertexOffset;
-    sourceOffset < source.vertices.length;
-    sourceOffset += 6, vertex += 1
+function validateAllocation(allocation: MeshAssembly): void {
+  if (
+    !Number.isSafeInteger(allocation.vertexCount) ||
+    !Number.isSafeInteger(allocation.indexCount) ||
+    allocation.vertexCount > MAX_UINT32
   ) {
-    transform.writePosition(source.vertices, sourceOffset, positions, vertex * 3);
-    transform.writeNormal(source.vertices, sourceOffset + 3, normals, vertex * 3);
-    colors.set(part.color, vertex * 4);
+    throw new RangeError('Model parts exceed the indexed-geometry limit.');
   }
-  const mirrored = transform.mirrored;
-  for (let index = 0; index < source.indices.length; index += 3) {
-    const first = source.indices[index]! + vertexOffset;
-    const second = source.indices[index + 1]! + vertexOffset;
-    const third = source.indices[index + 2]! + vertexOffset;
-    indices.set(mirrored ? [first, third, second] : [first, second, third], indexOffset + index);
+  if (!Number.isSafeInteger(allocation.byteLength) || allocation.byteLength > MAX_COMPILED_BYTES) {
+    throw new RangeError('Model parts exceed the compiled allocation limit.');
   }
 }

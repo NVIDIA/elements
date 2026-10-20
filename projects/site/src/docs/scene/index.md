@@ -29,6 +29,8 @@ Scene geometry uses weighted blended order-independent transparency so intersect
 
 {% example 'nve-scene-model' 'Default' %}
 
+Load STL files through [Scene Model](/docs/scene/model/#load-a-model-file).
+
 ## Camera
 
 Use [bounds queries and explicit camera fitting](/docs/scene/camera/#bounds-and-camera-fitting) to frame selected spatial content without dataset-specific targets or distances. Later publications preserve the user's view.
