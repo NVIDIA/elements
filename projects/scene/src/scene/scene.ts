@@ -20,8 +20,15 @@ import { SceneRenderer } from '../internal/rendering/renderer.js';
 import { SceneContent } from '../internal/composition/scene/content.js';
 import { createReadyCycle, type ReadyCycle } from '../internal/composition/scene/ready-cycle.js';
 import styles from './scene.css?inline';
-import { invertPreciseMat4, multiplyMat4Vec4 } from '../internal/math/mat4.js';
-import type { Matrix4, Vec3 } from '../internal/math/types.js';
+import { invertPreciseMat4 } from '../internal/math/mat4.js';
+import {
+  createProjectionRay,
+  isInsideClipVolume,
+  ndcToViewport,
+  projectPoint,
+  viewportToNdc
+} from '../internal/math/projection.js';
+import type { Vec3 } from '../internal/math/types.js';
 import { getDevicePixelSize } from '../internal/dom/viewport-size.js';
 import { SceneInteractionSource } from '../internal/interaction/source.js';
 import type { SceneCamera } from '../camera/camera.js';
@@ -180,18 +187,15 @@ export class Scene extends LitElement {
     if (!isFiniteVec3(worldPoint)) return null;
     const snapshot = this.#renderer.getSubmittedProjection();
     if (!snapshot) return null;
-    const clip = multiplyMat4Vec4(snapshot.projection, [...worldPoint, 1]);
-    if (!isProjectableClipPoint(clip)) return null;
-    const inverseW = 1 / clip[3];
-    const ndcX = clip[0] * inverseW;
-    const ndcY = clip[1] * inverseW;
-    const depth = clip[2] * inverseW;
+    const point = projectPoint(snapshot.projection, worldPoint);
+    if (!point) return null;
     const rect = snapshot.canvas.getBoundingClientRect();
-    const visibility = pointIsInsideClipVolume(ndcX, ndcY, depth) ? 'visible' : 'clipped';
+    const viewport = ndcToViewport(point, rect);
+    const visibility = isInsideClipVolume(point) ? 'visible' : 'clipped';
     return Object.freeze({
-      clientX: rect.left + ((ndcX + 1) / 2) * rect.width,
-      clientY: rect.top + ((1 - ndcY) / 2) * rect.height,
-      depth,
+      clientX: rect.left + viewport[0],
+      clientY: rect.top + viewport[1],
+      depth: point[2],
       visibility
     });
   }
@@ -205,13 +209,9 @@ export class Scene extends LitElement {
     if (!clientPointIsInside(rect, clientX, clientY)) return null;
     const inverse = invertPreciseMat4(snapshot.projection);
     if (!inverse) return null;
-    const ndcX = ((clientX - rect.left) / rect.width) * 2 - 1;
-    const ndcY = 1 - ((clientY - rect.top) / rect.height) * 2;
-    const near = unproject(inverse, [ndcX, ndcY, 0]);
-    const far = unproject(inverse, [ndcX, ndcY, 1]);
-    if (!near || !far) return null;
-    const direction = normalizeDirection([far[0] - near[0], far[1] - near[1], far[2] - near[2]]);
-    return direction ? Object.freeze({ direction: Object.freeze(direction), origin: Object.freeze(near) }) : null;
+    const point = viewportToNdc([clientX - rect.left, clientY - rect.top, 0], rect);
+    const ray = createProjectionRay(inverse, [point[0], point[1]]);
+    return ray ? Object.freeze({ direction: Object.freeze(ray.direction), origin: Object.freeze(ray.origin) }) : null;
   }
 
   render(): TemplateResult<1> {
@@ -502,33 +502,12 @@ export class Scene extends LitElement {
   }
 }
 
-function isProjectableClipPoint(point: readonly number[]): boolean {
-  return point.every(Number.isFinite) && (point[3] ?? 0) > 0;
-}
-
-function pointIsInsideClipVolume(x: number, y: number, depth: number): boolean {
-  return x >= -1 && x <= 1 && y >= -1 && y <= 1 && depth >= 0 && depth <= 1;
-}
-
 function clientPointIsInside(rect: DOMRect, x: number, y: number): boolean {
   return x >= rect.left && x < rect.right && y >= rect.top && y < rect.bottom;
 }
 
 function isFiniteVec3(value: unknown): value is Readonly<Vec3> {
   return Array.isArray(value) && value.length === 3 && value.every(component => Number.isFinite(component));
-}
-
-function unproject(matrix: Matrix4, point: Vec3): Vec3 | null {
-  const value = multiplyMat4Vec4(matrix, [...point, 1]);
-  if (!value.every(Number.isFinite) || Math.abs(value[3]) < Number.EPSILON) return null;
-  const inverseW = 1 / value[3];
-  const result: Vec3 = [value[0] * inverseW, value[1] * inverseW, value[2] * inverseW];
-  return result.every(Number.isFinite) ? result : null;
-}
-
-function normalizeDirection(value: Vec3): Vec3 | null {
-  const length = Math.hypot(...value);
-  return Number.isFinite(length) && length > 0 ? [value[0] / length, value[1] / length, value[2] / length] : null;
 }
 
 function getErrorMessage(error: unknown): string {

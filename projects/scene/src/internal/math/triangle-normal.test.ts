@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { decodeStl } from '../layers/model/stl.js';
+import { decodeStl } from '../layers/model/stl/stl.js';
 import { prepareMeshGeometry, processMeshGeometry } from '../layers/mesh/processing.js';
 
 const MAX_FLOAT32 = 3.4028234663852886e38;
