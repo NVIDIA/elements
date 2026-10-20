@@ -91,51 +91,63 @@
   "joints": [
     {
       "name": "shoulder_pan",
-      "parent": "base",
       "child": "shoulder",
       "position": [0.0, -0.0452, 0.0165],
-      "rpy": [1.57079, 0.0, 0.0],
-      "axis": [0.0, 1.0, 0.0]
+      "axis": [0.0, 1.0, 0.0],
+      "orientation": [0.7071045443232222, 0.0, 0.0, 0.7071090180427968],
+      "frame": null,
+      "scale": -1,
+      "offset": 0
     },
     {
       "name": "shoulder_lift",
-      "parent": "shoulder",
       "child": "upper_arm",
       "position": [0.0, 0.1025, 0.0306],
-      "rpy": [-1.8, 0.0, 0.0],
-      "axis": [1.0, 0.0, 0.0]
+      "axis": [1.0, 0.0, 0.0],
+      "orientation": [-0.7833269096274834, 0.0, 0.0, 0.6216099682706644],
+      "frame": "shoulder_pan",
+      "scale": 1,
+      "offset": 1.8
     },
     {
       "name": "elbow_flex",
-      "parent": "upper_arm",
       "child": "lower_arm",
       "position": [0.0, 0.11257, 0.028],
-      "rpy": [1.57079, 0.0, 0.0],
-      "axis": [1.0, 0.0, 0.0]
+      "axis": [1.0, 0.0, 0.0],
+      "orientation": [0.7071045443232222, 0.0, 0.0, 0.7071090180427968],
+      "frame": "shoulder_lift",
+      "scale": 1,
+      "offset": -1.5707963267948966
     },
     {
       "name": "wrist_flex",
-      "parent": "lower_arm",
       "child": "wrist",
       "position": [0.0, 0.0052, 0.1349],
-      "rpy": [-1.0, 0.0, 0.0],
-      "axis": [1.0, 0.0, 0.0]
+      "axis": [1.0, 0.0, 0.0],
+      "orientation": [-0.479425538604203, 0.0, 0.0, 0.8775825618903728],
+      "frame": "elbow_flex",
+      "scale": 1,
+      "offset": -0.5707963267948966
     },
     {
       "name": "wrist_roll",
-      "parent": "wrist",
       "child": "gripper",
       "position": [0.0, -0.0601, 0.0],
-      "rpy": [0.0, 1.57079, 0.0],
-      "axis": [0.0, 1.0, 0.0]
+      "axis": [0.0, 1.0, 0.0],
+      "orientation": [0.0, 0.7071045443232222, 0.0, 0.7071090180427968],
+      "frame": "wrist_flex",
+      "scale": -1,
+      "offset": 0
     },
     {
       "name": "gripper",
-      "parent": "gripper",
       "child": "jaw",
       "position": [-0.0202, -0.0244, 0.0],
-      "rpy": [0.0, 3.14158, 0.0],
-      "axis": [0.0, 0.0, 1.0]
+      "axis": [0.0, 0.0, 1.0],
+      "orientation": [0.0, 0.9999999999799858, 0.0, 6.326794896668469e-6],
+      "frame": "wrist_roll",
+      "scale": 1,
+      "offset": 0
     }
   ],
   "jawTip": [-0.00115, -0.082, 9.99999999999994e-5]

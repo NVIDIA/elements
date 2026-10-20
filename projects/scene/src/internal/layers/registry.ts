@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export type StreamSceneLayerKind = 'point' | 'line' | 'triangle';
-export type MeshSceneLayerKind = 'mesh' | 'model' | 'polygon';
+export type MeshSceneLayerKind = 'mesh' | 'body' | 'polygon';
 
 type SceneLayerSpec =
   | { readonly family: 'label'; readonly kind: 'label'; readonly markerInstances: false; readonly tag: string }
@@ -28,8 +28,8 @@ type SceneLayerSpec =
 
 export type SceneLayerKind = SceneLayerSpec['kind'];
 
-export const SCENE_MODEL_TAG = 'nve-scene-model';
-export const SCENE_PART_TAG = 'nve-scene-part';
+const SCENE_BODY_TAG = 'nve-scene-body';
+export const SCENE_SHAPE_TAG = 'nve-scene-shape';
 
 const SCENE_LAYER_SPECS = [
   { family: 'label', kind: 'label', markerInstances: false, tag: 'nve-scene-labels' },
@@ -45,7 +45,7 @@ const SCENE_LAYER_SPECS = [
   { family: 'stream', kind: 'point', markerInstances: false, tag: 'nve-scene-points' },
   { family: 'stream', kind: 'triangle', markerInstances: false, tag: 'nve-scene-triangles' },
   { family: 'mesh', kind: 'mesh', markerInstances: true, tag: 'nve-scene-mesh' },
-  { family: 'mesh', kind: 'model', markerInstances: true, tag: SCENE_MODEL_TAG },
+  { family: 'mesh', kind: 'body', markerInstances: true, tag: SCENE_BODY_TAG },
   { family: 'mesh', kind: 'polygon', markerInstances: true, tag: 'nve-scene-polygon' },
   { family: 'heightfield', kind: 'heightfield', markerInstances: false, tag: 'nve-scene-heightfield' }
 ] as const satisfies readonly SceneLayerSpec[];

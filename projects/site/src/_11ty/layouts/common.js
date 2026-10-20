@@ -424,6 +424,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/scene/interaction/') ? 'highlighted selected' : ''}><a href="/docs/scene/interaction/">Interaction</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/arrows/') ? 'highlighted selected' : ''}><a href="/docs/scene/arrows/">Arrows</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/axes/') ? 'highlighted selected' : ''}><a href="/docs/scene/axes/">Axes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/body/') ? 'highlighted selected' : ''}><a href="/docs/scene/body/">Body</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/camera/') ? 'highlighted selected' : ''}><a href="/docs/scene/camera/">Camera</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/cones/') ? 'highlighted selected' : ''}><a href="/docs/scene/cones/">Cones</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/cubes/') ? 'highlighted selected' : ''}><a href="/docs/scene/cubes/">Cubes</a></nve-tree-node>
@@ -431,6 +432,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/scene/frame/') ? 'highlighted selected' : ''}><a href="/docs/scene/frame/">Frame</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/gridlines/') ? 'highlighted selected' : ''}><a href="/docs/scene/gridlines/">Gridlines</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/heightfield/') ? 'highlighted selected' : ''}><a href="/docs/scene/heightfield/">Heightfield</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/scene/joint/') ? 'highlighted selected' : ''}><a href="/docs/scene/joint/">Joint</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/labels/') ? 'highlighted selected' : ''}><a href="/docs/scene/labels/">Labels</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/lines/') ? 'highlighted selected' : ''}><a href="/docs/scene/lines/">Lines</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/scene/mesh/') ? 'highlighted selected' : ''}><a href="/docs/scene/mesh/">Mesh</a></nve-tree-node>

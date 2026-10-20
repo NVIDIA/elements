@@ -25,11 +25,11 @@ Scene geometry uses weighted blended order-independent transparency so intersect
 
 {% example 'nve-scene-cubes' 'Volumes' %}
 
-## Compose models
+## Compose bodies
 
-{% example 'nve-scene-model' 'Default' %}
+{% example 'nve-scene-body' 'Default' %}
 
-Load STL files through [Scene Model](/docs/scene/model/#load-a-model-file).
+Load STL files through [Scene Body](/docs/scene/body/) with `src`.
 
 ## Camera
 

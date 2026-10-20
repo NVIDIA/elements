@@ -46,7 +46,7 @@ Scene owns:
 - Validation and capture of scene-local values at documented ownership boundaries.
 - Scene-local frame composition and camera projection.
 - Spatial primitives, meshes, surfaces, camera-facing SDF text labels, and annotations.
-- Bounded static model file loading and decoding through an isolated model loader.
+- Bounded body geometry file loading through lazy, extension-dispatched decoders.
 - Renderer snapshots that pair content with transforms, topology, units, and interaction configuration.
 - WebGPU resource creation, reuse, uploads, render passes, picking, cleanup, and device recovery.
 - Local diagnostics for invalid component state and unsupported rendering behavior.
@@ -66,10 +66,16 @@ Applications and integration layers own:
 - Expensive preparation that is specific to an origin, debugger, application, or product workflow.
 
 An integration may use Scene as a geometry presentation lens. It must resolve expressions, memory, messages,
-or recorded data into bounded Scene inputs before crossing the Scene API boundary. Static model files are a narrow
-exception: `nve-scene-model.asset` fetches and decodes ASCII or binary STL files. File loading publishes the same model
-nodes that applications assign through `nve-scene-model.geometry`; this adds no transport-shaped source or alternate renderer.
-The STL decoder loads on demand. Applications own texture fetching and playback.
+or recorded data into bounded Scene inputs before crossing the Scene API boundary. The body geometry loader is a
+narrow exception: `nve-scene-body.src` fetches bounded geometry files and decodes them into the same nodes that
+applications assign through `nve-scene-body.geometry`; this adds no alternate renderer. The concept element carries
+`src`. A file format is a lazily loaded decoder selected by extension, never a per-format element. Scene ships an
+ASCII and binary STL decoder. Applications own texture fetching and playback.
+
+A model is a whole entity made of bodies connected by joints. A body is one rigid compound of shapes, and a shape
+is one inert primitive or mesh inside a body. A coordinate frame defines a rigid origin and orientation; a joint
+specializes a frame with one degree of freedom. These concepts do not own transport, time, history, interpolation,
+or description decoding.
 
 ## Internal source organization
 
@@ -77,7 +83,7 @@ Every file in `src/internal/` belongs to a directory that names its responsibili
 
 | Directory      | Responsibility                                                                                                       |
 | -------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `composition/` | Scene content discovery, frame composition, camera state, and scene notifications.                                   |
+| `composition/` | Scene discovery, scoped names, frame and joint composition, model tint, camera state, and notifications.             |
 | `layers/`      | Layer sources, state, validation, and rendering specific to each content type.                                       |
 | `records/`     | Packed record storage, mutable buffers, publication, canonical layouts, and record encoding.                         |
 | `algorithms/`  | Reusable algorithms over plain data, independent of geometry, color, record layouts, and GPU resources.              |
@@ -90,6 +96,14 @@ Every file in `src/internal/` belongs to a directory that names its responsibili
 | `dom/`         | Host styles, attribute converters, and DOM viewport measurements for Web Components.                                 |
 | `diagnostics/` | Error codes and diagnostic episode reporting.                                                                        |
 | `testing/`     | Platform overrides and frame lookup for tests.                                                                       |
+
+`layers/body/` owns body geometry capture, primitive compilation, bounded file requests, and the geometry decoder
+registry in `decoders.ts`. Its extension table contains dynamic imports; format implementations, including `decoders/stl.ts`,
+stay outside the base body bundle. Each decoder module has its own size budget. Import-boundary lint rejects
+static decoder imports.
+`composition/frame/` owns the named registry, resolved transform graph, and chain validity.
+`composition/joint/` owns motion capture and synchronous one-level mimic dependencies.
+`composition/model/` owns inherited body tint; the model element owns its scoped joint view.
 
 Keep tests and benchmarks beside their implementation. Keep layer-specific pipelines and resources with their layer;
 shared pass orchestration belongs in `rendering/`. Label font preparation belongs in `layers/labels/font/`.
@@ -112,7 +126,7 @@ spans without allocating color tuples. Layer defaults, record offsets, and trans
 
 `color/alpha.ts` classifies normalized float and byte alpha without quantization or color transfer. `AlphaSummary`
 counts zero, partial, and opaque channels over checked spans with an offset and stride. Summaries merge by addition;
-span replacement subtracts the previous contribution and adds the next. Mesh, model, and heightfield layers capture summaries with their
+span replacement subtracts the previous contribution and adds the next. Mesh, body, and heightfield layers capture summaries with their
 owned color arrays. Accepted mesh color publications update only the selected span after geometry validation; rejected
 and empty publications preserve the counts. Render snapshots combine these counts with layer tint and texture policy
 without scanning color arrays. Mesh publication still copies the complete published attribute and validates complete
@@ -163,7 +177,7 @@ directly into caller-owned coordinate spans. Singular transforms remain valid fo
 adds a captured inverse transpose through the existing pivoted matrix inverse and classifies reflections using scaled
 columns. Geometry preparation requires a finite inverse and gives zero normals the existing positive Z fallback.
 Prepared transforms retain independent coefficients; repeated writes allocate no vectors and round only into destination
-storage. Model compilation prepares one transform per part or mesh piece; bounds queries prepare one per position layer.
+storage. Body compilation prepares one transform per shape or mesh piece; bounds queries prepare one per position layer.
 Callers own source validation, record decoding, output storage, winding, and diagnostics. General matrix operations
 remain in `math/mat4.ts`; box bounds retain the perspective path for non-affine matrices.
 
@@ -180,11 +194,11 @@ resolution, and navigation policy.
 `MeshAssembly` in `math/mesh-assembly.ts` plans and joins checked geometry into independent planar attribute arrays.
 Attribute spans count numeric elements and support interleaved or planar storage; zero strides broadcast constant
 attributes. Planning checks span boundaries and reports vertex, index, and byte counts without reading vertex values
-or allocating output arrays. Model compilers check their allocation limits before assembly. The shared writer applies
+or allocating output arrays. Body compilers check their allocation limits before assembly. The shared writer applies
 affine position and inverse-transpose normal transforms, adjusts triangle indices, and reverses winding for reflected
-parts. Its loops allocate no objects per vertex or triangle. Optional UV output keeps missing coordinates at zero.
+shapes. Its loops allocate no objects per vertex or triangle. Optional UV output keeps missing coordinates at zero.
 Callers choose direct color copies or prepared linear-light modulation and supply their position-overflow error policy.
-The primitive compiler retains its cached tessellations and constant colors; model geometry retains hierarchy validation,
+The primitive compiler retains its cached tessellations and constant colors; body geometry retains hierarchy validation,
 generated attributes, and its finite Float32 position limit. Source arrays and assembled results own independent storage.
 
 `extendAffineBounds` in `math/bounds.ts` extends caller-owned minimum and maximum tuples with an affine box.
@@ -307,6 +321,91 @@ keeps composition compatible with HTML, component lifecycle, accessibility, and 
 
 Do not turn the element tree into a high-frequency transport. Large or frequently changing collections must use the
 typed source and publication APIs instead of creating or updating thousands of child elements.
+
+### Compose coordinate frames through nesting or references
+
+DOM nesting and `frame="name"` establish a coordinate frame's transform parent. An explicit reference replaces
+DOM transform ancestry; position, orientation, and explicit poses then use that named frame. Every renderable layer
+accepts the same reference to select its owning frame. An omitted reference preserves DOM ancestry.
+
+The scene-local named registry resolves references independently of document order and refreshes after structural,
+name, or reference changes. The CPU registry also works before WebGPU becomes available. The dependency graph
+captures parent relationships and checks cycles when its topology changes. Evaluation follows dependency order and
+shares ancestor results within each snapshot. Its cycle traversal visits each coordinate frame at most once.
+Scenes without references retain the DOM evaluation path.
+
+Missing, duplicate, cross-scene, and cyclic targets report `frame-unresolved` on the referring element. An invalid
+resolved chain suppresses descendants and referrers while unrelated content remains usable. Removing a target
+leaves references unresolved; it never moves content to the scene root. Visibility follows the resolved chain,
+including hidden ancestors, as well as ordinary DOM hiding. Cameras use the same registry and error code.
+
+### Joint motion
+
+`nve-scene-joint` specialises a frame with one degree of freedom. Its declarative position and orientation
+are the joint origin; the effective local pose is origin × motion. Revolute and continuous joints rotate
+about a normalised local axis, prismatic joints translate along it, and fixed joints add no motion.
+Calibration uses `scale * value + offset`. A synchronous `value` assignment becomes visible at the next
+render boundary. `setPose` retains explicit authority until `setPose(null)` restores the stored inputs.
+
+Optional limits report `joint-limit` once per crossing while applying the value and keeping the chain valid.
+Reversed limits disable checking and report the same diagnostic; continuous joints ignore limits.
+A mimic joint uses `mimic-multiplier * target.effectiveValue + mimic-offset` instead of its own value.
+Scene supports only one level: the target must be a joint in the same scene and must not itself mimic.
+Mimic resolution can read enclosing scopes; it cannot bind into a different entity's private scope.
+Invalid types, axes, numeric inputs, and mimic references report `joint-type`, `joint-axis`, `joint-value`,
+and `joint-mimic`, respectively. These invalidate only the affected transform and its dependent chains.
+Joints own no transport, time, history, interpolation, or description decoding.
+
+### Model entities and name scopes
+
+`nve-scene-model` specialises a frame with exactly a name scope, a `joints` view, and `tint`.
+Bodies remain individually pickable and keep their feature IDs. Models currently add no instancing or file loading.
+Position, orientation, explicit poses, frame references, visibility, and lifecycle retain frame semantics.
+Models own no transport, time, history, interpolation, or description decoding.
+
+Frames, joints, and named bodies inside a model belong to its scope. Bare names must not contain `/`;
+`frame-name` rejects that separator. Unqualified `frame` and `mimic` references search the nearest enclosing
+model first, then each outer scope and the scene. A duplicate in a nearer scope shadows an outer name and
+remains unresolved. Duplicate checking is per scope, so separate entities can reuse internal names.
+Qualified references walk model scopes with `/`, such as `arm/tcp` or `cell/arm/tcp`. Document order has no effect.
+An unnamed model works internally; an outside qualified reference to its member reports `model-name`
+until the model has a name or the reference no longer addresses it.
+
+The read-only `joints` view exposes `get`, `set`, `has`, `names`, `values`, and `reset` for the current scope,
+excluding nested models. Its membership follows DOM connection and removal. `set` assigns the joint's value;
+`values` returns a plain object, and `reset` zeroes non-mimic joints. Unknown names through `get` or `set`
+report `model-joint` and invalidate the entity chain until a valid access or reset corrects the input.
+Model tint multiplies through nested model tints and each body's own tint in the existing linear-light
+color pipeline. Tint changes preserve captured geometry and topology.
+
+### Geometry decoder registry
+
+`nve-scene-body src="robot.stl"` loads one rigid visual. The final URL path segment selects a lower-case extension;
+query parameters and fragments do not affect dispatch. Missing or unknown extensions report `body-src`, name the
+URL, and start no fetch or decoder import. Bodies have no `format` attribute. The URL fragment supports future sub-asset
+selection and reaches the decoder unchanged, including the leading `#` and percent escapes. An absent fragment is
+an empty string. STL ignores the fragment.
+
+`loadGeometry(url, { format?, signal })` uses the same table and infers the extension when format is absent.
+`decodeGeometry(bytes, { format, signal, fragment? })` captures the selected bytes before asynchronous decoding.
+Both return geometry independently of elements and WebGPU. File headers, streamed bytes, and compiled allocations
+have bounds. Source changes, direct geometry assignments, and disconnection cancel pending body requests;
+only the newest request can install geometry. `loadComplete` resolves after capture, before GPU presentation.
+Direct geometry assignment clears `src`; clearing `src` restores authored shapes.
+
+`registerGeometryDecoder(extension, loader)` adds an external decoder without adding its dependencies to Scene.
+The extension accepts an optional leading dot and uses lower-case comparison. Registration throws for any existing
+extension, including built-ins. The loader returns a promise of a module exposing
+`decode(bytes, { fragment, signal })`, which returns a promise of `SceneBodyGeometry`. Loading remains lazy;
+applications can keep third-party runtime dependencies in separate packages. Decoders preserve coordinates and units, respect
+cancellation, and bound their decoded allocations. The element validates and captures returned geometry through the
+existing body pipeline. This registry only selects geometry decoders; it differs from the general visualizer
+plug-in registry excluded by the non-goals.
+
+When description loading arrives, it follows the same concept rule: `nve-scene-model src="robot.urdf"` loads an entity
+through a separate extension-keyed description decoder table. `loadDescription()` provides the function form, and
+`registerDescriptionDecoder()` admits external decoders. Formats never introduce their own model elements. Models currently
+have none of these loading APIs; description decoding remains future work.
 
 ### Use typed sources for high-frequency data
 
@@ -436,6 +535,13 @@ Use a whole-scene unavailable state only when Scene cannot render reliably, such
 configuration, device loss, or a required renderer failure. The adapter must reject malformed domain messages and
 unsupported producer values or report them at the affected Scene boundary instead of presenting a WebGPU outage.
 
+`body-src` and `shape-kind` report body and shape failures. `body-dual-source` remains reserved; assigned
+geometry overrides shape children without a diagnostic. Frame references use
+`frame-unresolved`; duplicate names use `frame-name-duplicate`, and invalid bare names use `frame-name`.
+Joint diagnostics are `joint-type`, `joint-axis`, `joint-value`, `joint-limit`, and `joint-mimic`.
+Model diagnostics are `model-joint` and `model-name`. Limit warnings apply the value and retain chain validity;
+invalid inputs suppress the affected contribution and its dependent chains.
+
 Diagnostics must identify the affected element and provide a stable error code. Scene must not silently repair spatial
 or record data in a way that changes its meaning. The application decides whether to keep an older snapshot, show stale
 state, retry, or replace the source.
@@ -447,9 +553,9 @@ The following capabilities do not belong in Scene.
 ### Data acquisition and transport
 
 Scene does not open sockets, subscribe to middleware, read logs, poll devices, or map process memory. It does not
-define ROS, telemetry, debugger, recording, or product-specific message schemas. The isolated static model components
-can fetch their respective geometry files on demand, with cancellation, bounded file sizes, and bounded decoded allocations. It does
-not load recordings, decode joint descriptions, or own application replay. Parsing and model compilation remain
+define ROS, telemetry, debugger, recording, or product-specific message schemas. The body geometry loader
+can fetch geometry files on demand through isolated decoders, with cancellation, bounded file sizes, and bounded decoded allocations. It does
+not load recordings, decode joint descriptions, or own application replay. Parsing and body compilation remain
 outside render callbacks, and file changes never allow an older request to publish over a newer input.
 
 ### Time, synchronization, and history
