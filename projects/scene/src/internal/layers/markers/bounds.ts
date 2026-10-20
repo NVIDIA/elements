@@ -21,7 +21,7 @@ interface MarkerBoundsSource {
 
 export type MarkerBounds = AabbBounds;
 
-export type MarkerFrustumRelation = FrustumRelation;
+type MarkerFrustumRelation = FrustumRelation;
 
 /** Block-indexed local bounds for prefix queries and bounded partial updates. */
 export class MarkerBoundsIndex {

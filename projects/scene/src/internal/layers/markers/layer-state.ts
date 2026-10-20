@@ -9,7 +9,7 @@ import {
 } from '../../diagnostics/errors.js';
 import { takeSceneFeatureIdSnapshot, type SceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
 import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from './instance-buffer.js';
-import { SCENE_MODEL_TAG, SCENE_PART_TAG } from '../registry.js';
+import { getSceneLayerSpec, SCENE_SHAPE_TAG } from '../registry.js';
 import {
   getPackedRecordBytes,
   getPackedRecordKind,
@@ -211,17 +211,15 @@ function markerPublicationIsValid(source: AnyPackedRecordSource<'marker'>, activ
 }
 
 function validateLayerChildren(layer: HTMLElement, state: MarkerLayerState): void {
-  state.childError = [...layer.children].some(
-    child => layer.localName !== SCENE_MODEL_TAG || child.localName !== SCENE_PART_TAG
-  );
+  const body = getSceneLayerSpec(layer.localName)?.kind === 'body';
+  state.childError = [...layer.children].some(child => !body || child.localName !== SCENE_SHAPE_TAG);
   diagnosticReporterService.update({
     active: state.childError,
     code: LAYER_CHILD,
     element: layer,
-    message:
-      layer.localName === SCENE_MODEL_TAG
-        ? 'Scene models allow only direct scene part children.'
-        : 'Source-backed instance layers do not accept element children.',
+    message: body
+      ? 'Scene bodies allow only direct scene shape children.'
+      : 'Source-backed instance layers do not accept element children.',
     severity: 'error'
   });
   state.version += 1;

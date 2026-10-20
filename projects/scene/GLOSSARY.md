@@ -10,7 +10,7 @@
 
 This glossary explains the graphics vocabulary used in `@nvidia-elements/scene` for contributors who know web development but may be new to 3D rendering. It covers terms that appear in the public API, documentation, shaders, rendering architecture, and performance code. It isn't a general survey of every computer graphics technique.
 
-The shortest useful model of the renderer is:
+The shortest useful description of the renderer is:
 
 ```text
 application snapshot -> frame composition -> CPU staging -> GPU resources -> render passes -> canvas
@@ -63,6 +63,8 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 **Bind group** — A WebGPU object that bundles shader-visible resources, much like passing a stable input object to shader functions. A bind group can contain buffers, samplers, and texture views and must match a bind group layout expected by the pipeline.
 
 **Binding** — A numbered shader input location within a bind group. WGSL annotations such as `@group(0) @binding(1)` connect shader declarations to resources supplied by JavaScript.
+
+**Body** — One rigid compound of shapes. A body owns geometry, tint, picking identity, and optional instance placements; its optional `src` loads geometry through an extension-selected decoder.
 
 **Bounding volume** — A simple shape that encloses more detailed geometry and makes visibility or intersection tests cheaper. Scene uses marker bounds and bounding spheres during GPU visibility compaction.
 
@@ -124,6 +126,8 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 ## D
 
+**Decoder** — A lazily loaded module that converts bounded file bytes into Scene geometry. The geometry decoder registry includes STL and accepts external decoders without adding their dependencies to Scene.
+
 **Depth** — A projected measure of how far a fragment lies through the view volume. WebGPU normalized depth ranges from zero at the near plane to one at the far plane in Scene's projection helpers.
 
 **Depth attachment** — The render-pass texture that stores depth values. Scene uses a `depth24plus` attachment for normal color rendering and a float depth output for picking readback.
@@ -158,6 +162,8 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 ## E
 
+**Extension dispatch** — Selecting a decoder from the lower-case extension of the final URL path segment. Query parameters and fragments do not affect the selection.
+
 **Ear clipping** — A polygon triangulation algorithm that repeatedly removes a valid triangle, or "ear," from a polygon boundary. Scene uses it after bridging holes in valid polygon input.
 
 **Elevation** — Height along the local +Z axis. A height field stores one elevation for each regularly spaced XY sample.
@@ -188,11 +194,15 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Fragment shader** — A GPU program that runs for rasterized fragments. Scene's fragment shaders calculate color, lighting, transparency outputs, label coverage, or picking IDs and depth.
 
+**Forward kinematics** — Composition of joint origins and motion along the resolved frame chain to get a world pose.
+
 **Frame** — An overloaded graphics term. A **coordinate frame** is a local coordinate system; a **rendered frame** is one submitted image and its captured scene state. Code and documentation should qualify the term when either meaning could fit.
 
-**Frame hierarchy** — A tree of coordinate frames whose transforms inherit from their ancestors. Invalid frame transforms suppress the affected subtree because Scene can't place it coherently in world space.
+**Frame hierarchy** — Coordinate frames whose transform parents come from DOM nesting or named references. Invalid frame transforms suppress the affected subtree because Scene can't place it coherently in world space.
 
-**Frame-local coordinates (local space)** — Positions expressed relative to the nearest coordinate frame. Scene composes those coordinates through the ancestor chain to produce world coordinates.
+**Frame-local coordinates (local space)** — Positions expressed relative to the owning coordinate frame. Scene composes those coordinates through the ancestor chain to produce world coordinates.
+
+**Frame reference** — A `frame="name"` attribute that selects a coordinate frame as the transform parent of another frame or the owner of a layer. References resolve within one Scene regardless of document order; missing, ambiguous, or cyclic targets invalidate the affected chain.
 
 **Frame rate** — The number of rendered frames per second. It isn't the same as simulation update rate, sensor rate, or display refresh rate, even when those values happen to match.
 
@@ -206,7 +216,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Generation** — A distinct captured version of source or render state. Scene preserves generation boundaries so a render or delayed pick result doesn't mix records, topology, transforms, or identities from different application snapshots.
 
-**Geometry** — Numeric data that describes drawable shape: positions plus optional normals, colors, texture coordinates, and indices. A Scene mesh captures these arrays separately from its instances and material state.
+**Geometry** — Numeric data that describes drawable kind: positions plus optional normals, colors, texture coordinates, and indices. A Scene mesh captures these arrays separately from its instances and material state.
 
 **Glyph** — The rendered shape for a character. Scene converts browser-font glyphs to signed-distance-field atlas regions and draws each visible glyph as two triangles.
 
@@ -250,7 +260,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Instance** — One placement of reusable geometry with its own transform and colors. In Scene, a marker record commonly supplies the position, quaternion orientation, scale, face color, and outline color for one instance.
 
-**Instance buffer** — Packed storage containing per-instance values. Scene reads marker records as instance data while reusing one primitive, mesh, polygon, or model geometry definition.
+**Instance buffer** — Packed storage containing per-instance values. Scene reads marker records as instance data while reusing one primitive, mesh, polygon, or body geometry definition.
 
 **Instancing** — Drawing the same geometry many times with different per-instance data. On the GPU, this resembles rendering a list with one shared template instead of creating a different geometry resource for every item.
 
@@ -258,11 +268,19 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Inverse matrix** — A matrix that reverses another matrix's transform. Scene uses inverse transforms to convert world points to local coordinates and to unproject viewport coordinates into world-space rays or pick positions.
 
+## J
+
+**Joint** — A coordinate frame with one degree of freedom connecting bodies. Revolute and continuous joints rotate, prismatic joints translate, and fixed joints preserve their origin.
+
+**Joint calibration** — The scale and offset converting an application's recorded joint value to the model's zero and direction.
+
+**Joint origin** — The joint's declarative position and orientation in its parent frame, composed before motion.
+
 ## L
 
 **Layer** — A Scene element that owns and batches one kind of renderable content, such as cubes, lines, labels, a height field, or a mesh. Think of a layer as a specialized canvas renderer nested in the DOM, not one DOM node per rendered record.
 
-**Lighting** — Calculating color variation from surface orientation and a light model. Scene applies a small built-in lighting function to lit marker and mesh surfaces; line, point, triangle-soup, and polygon rendering is unlit.
+**Lighting** — Calculating color variation from surface orientation and a lighting function. Scene applies a small built-in lighting function to lit marker and mesh surfaces; line, point, triangle-soup, and polygon rendering is unlit.
 
 **Line list** — A GPU primitive topology in which each independent pair of vertices forms a line. Scene also uses line-list geometry for cube outlines.
 
@@ -282,19 +300,21 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Marker record** — Scene's internal packed transform and tint encoding. Generic geometry exposes this encoding through `MarkerBuffer`; semantic primitive buffers encode their records into the same layout.
 
-**Material** — The data and shader behavior that determine how a surface looks. Scene exposes a deliberately small material model: base color, optional per-vertex or per-instance colors, optional mesh texture, opacity, and either built-in lighting or unlit rendering.
+**Material** — The data and shader behavior that determine how a surface looks. Scene exposes a deliberately small material configuration: base color, optional per-vertex or per-instance colors, optional mesh texture, opacity, and either built-in lighting or unlit rendering.
 
 **Matrix** — A rectangular numeric structure used to transform coordinates. Scene uses 4-by-4 matrices for translation, rotation, scale, view transforms, projection, and their compositions.
 
 **Mesh** — A collection of vertices and triangles representing a surface. `nve-scene-mesh` accepts custom positions and optional indices, normals, UV coordinates, colors, and a texture.
 
-**Model** — A compound reusable object built from one or more primitive parts. Scene compiles model parts into mesh geometry and then places copies with source records.
+**Mimic joint** — A joint driven by another joint's effective value with a multiplier and offset. Scene supports one level; a mimic target must not itself mimic.
 
-**Model space** — Coordinates relative to an object's own origin before its instance and ancestor-frame transforms. Scene part positions, orientations, and scales are model-local.
+**Model** — A whole entity made of bodies connected by joints. Model here means the whole entity, as in RViz's RobotModel, Newton's `Model`, and MuJoCo's `mjModel`.
 
-**Model-view-projection (MVP)** — The conventional composition that transforms model-local vertices through world and camera space into clip space. Scene keeps reusable view-projection and frame or instance transforms as separate shader inputs where useful, but the mathematical pipeline is the same.
+**Model-view-projection (MVP)** — The conventional composition that transforms body-local vertices through world and camera space into clip space. Scene keeps reusable view-projection and frame or instance transforms as separate shader inputs where useful, but the mathematical pipeline is the same.
 
 ## N
+
+**Name scope** — The names owned by one model, excluding nested models' members. Unqualified frame and mimic references search from the nearest model outward to the scene. Qualified references use `/`, for example `arm/tcp`. Duplicate names conflict only within a scope; bare names cannot contain `/`.
 
 **Near plane** — The closest clipping plane of the camera frustum. The GPU clips geometry closer than this plane. Keeping it as far from zero as the application permits generally improves depth precision.
 
@@ -424,7 +444,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Right-handed coordinate system** — A coordinate system in which the ordered positive axes follow the right-hand rule. Scene uses +X forward, +Y left, and +Z up for world data.
 
-**Rigid transform** — A transform containing translation and rotation but no scale or shear. Scene coordinate frames are rigid; marker and model-part transforms can also include scale.
+**Rigid transform** — A transform containing translation and rotation but no scale or shear. Scene coordinate frames are rigid; marker and shape transforms can also include scale.
 
 **Roll** — Rotation around a camera's forward axis. Scene's explicit pose camera preserves roll, while target-based camera behaviors derive their own up direction.
 
@@ -434,7 +454,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Sampler** — A WebGPU object describing how shaders read between and beyond texture samples. Scene uses linear minification and magnification filtering for mesh textures and the label atlas.
 
-**Scale** — Per-axis size multipliers in X, Y, and Z order. Marker and model-part scale changes geometry size; coordinate frames intentionally don't support scale.
+**Scale** — Per-axis size multipliers in X, Y, and Z order. Marker and shape scale changes geometry size; coordinate frames intentionally don't support scale.
 
 **Scene** — The composition root that owns the canvas, current camera, frame registry, layer collection, rendering schedule, picking, and device lifecycle. The application owns transport, time, history, synchronization, and selection of each coherent current snapshot.
 
@@ -449,6 +469,8 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 **Shader** — A GPU program. WebGPU shaders use WGSL and run in a defined stage such as vertex, fragment, or compute.
 
 **Shader module** — A WebGPU object created from WGSL source. Pipelines select entry-point functions from the module for their stages.
+
+**Shape** — One inert primitive or mesh inside a body. A primitive shape declares its `kind`, local transform, and color.
 
 **Shading** — Calculating the appearance of rendered fragments. It can include color, lighting, texture sampling, transparency, and edge coverage.
 
@@ -472,13 +494,15 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Stride** — The byte distance from the beginning of one record or vertex to the beginning of the next. A source's byte length must align with its canonical layout stride.
 
+**Sub-asset fragment** — The URL part beginning with `#`, reserved for selecting content inside a file. Scene passes it unchanged to the decoder, including percent escapes. The STL decoder ignores it.
+
 **Subdivision** — Splitting geometry into smaller primitives to approximate a smoother shape. Scene creates its unit sphere by subdividing an icosahedron and projecting new positions to the sphere radius.
 
 **Surface** — The visible boundary represented by triangles. A height field exposes separate smooth-field and triangle-surface queries because their interpolated results aren't always identical.
 
 ## T
 
-**Tessellation** — Converting a higher-level shape into renderable primitives. Scene tessellates unit solids, models, polygons, and height fields into indexed triangles on the CPU.
+**Tessellation** — Converting a higher-level shape into renderable primitives. Scene tessellates unit solids, bodies, polygons, and height fields into indexed triangles on the CPU.
 
 **Texel** — One sample in a texture, analogous to a pixel in an image but not necessarily mapped one-to-one to a screen pixel.
 
@@ -496,7 +520,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Topology** — Connectivity: which vertices form primitives and how those primitives relate. Updating mesh indices changes topology; updating only positions changes shape without changing connectivity.
 
-**Transform** — A mapping from one coordinate space to another. Translation, rotation, and scale combine into model or instance transforms; view and projection transforms carry world positions to clip space.
+**Transform** — A mapping from one coordinate space to another. Translation, rotation, and scale combine into body or instance transforms; view and projection transforms carry world positions to clip space.
 
 **Transform chain** — The ordered composition of local and ancestor transforms needed to reach world space. A Scene frame reference is resolvable only when the complete relevant chain is valid.
 
@@ -512,7 +536,7 @@ Scene uses a right-handed, REP-103-aligned world coordinate system. +X points fo
 
 **Triangle soup** — Independent triangle data without higher-level mesh connectivity or material structure. `nve-scene-triangles` renders a streamed, unlit triangle soup from consecutive triples of triangle-vertex records.
 
-**Triangulation** — Converting a polygonal surface into triangles. Scene triangulates height-field cells, polygon boundaries and holes, unit primitives, and compound model parts.
+**Triangulation** — Converting a polygonal surface into triangles. Scene triangulates height-field cells, polygon boundaries and holes, unit primitives, and compound body shapes.
 
 **Typed array** — A JavaScript view such as `Float32Array`, `Uint32Array`, or `Uint8Array` over binary memory. Scene uses typed arrays for predictable layouts, efficient copies, and direct compatibility with GPU data formats.
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import {
-  CAMERA_FRAME_UNRESOLVED,
+  FRAME_UNRESOLVED,
   CAMERA_PROPERTY_INACTIVE,
   CAMERA_RANGE,
   CAMERA_SLOT_CONFLICT,
@@ -165,9 +165,9 @@ export const sceneCameraController = {
     state.frameResolved = resolved;
     diagnosticReporterService.update({
       active: !resolved,
-      code: CAMERA_FRAME_UNRESOLVED,
+      code: FRAME_UNRESOLVED,
       element: camera,
-      message: 'The camera frame must resolve to one uniquely named valid frame in this scene.',
+      message: 'The frame reference must resolve to one uniquely named valid frame in this scene.',
       severity: 'error'
     });
   }
@@ -247,7 +247,7 @@ function getFollowContribution(camera: CameraElement): FollowCameraContribution 
   getCameraBehaviorState(camera).configured = valid;
   updateCameraBehaviorDiagnostic(camera, {
     active: !valid,
-    code: CAMERA_FRAME_UNRESOLVED,
+    code: FRAME_UNRESOLVED,
     message: 'The camera follow frame must resolve to one uniquely named frame in this scene.'
   });
   return valid

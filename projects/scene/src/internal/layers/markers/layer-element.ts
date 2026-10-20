@@ -3,6 +3,7 @@
 
 import { LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { getFrameReference, setFrameReference } from '../../composition/frame/state.js';
 import { LAYER_SOURCE_INVALID } from '../../diagnostics/errors.js';
 import { getLayerInteractive, registerInteractiveLayer, setLayerInteractive } from '../../interaction/layer-state.js';
 import type { SceneInteractionTarget } from '../../interaction/target.js';
@@ -42,6 +43,18 @@ export abstract class MarkerLayerElement<Source extends AnyPackedRecordSource<'m
   extends LitElement
   implements SceneInteractionTarget
 {
+  /** Names the owning coordinate frame; an omitted value uses DOM ancestry. */
+  @property({ type: String })
+  get frame(): string | null {
+    return getFrameReference(this);
+  }
+
+  set frame(value: string | null) {
+    const previous = this.frame;
+    setFrameReference(this, value);
+    this.requestUpdate('frame', previous);
+  }
+
   static override get observedAttributes(): string[] {
     return [...super.observedAttributes, 'source'];
   }

@@ -6,7 +6,7 @@ import { BoundedHeap } from '../structures/bounded-heap.js';
 
 type GapSelection = 'merge' | 'keep';
 
-export interface RangeCoalescingOptions {
+interface RangeCoalescingOptions {
   /** Sorted, nonoverlapping intervals with positive sizes and safe integer endpoints. */
   readonly ranges: readonly Readonly<RangeInterval>[];
   /** Cost of each output range in the same units as interval size. Defaults to zero. */

@@ -67,6 +67,14 @@
       "types": "./dist/axes/define.d.ts",
       "default": "./dist/axes/define.js"
     },
+    "./body": {
+      "types": "./dist/body/index.d.ts",
+      "default": "./dist/body/index.js"
+    },
+    "./body/define.js": {
+      "types": "./dist/body/define.d.ts",
+      "default": "./dist/body/define.js"
+    },
     "./camera": {
       "types": "./dist/camera/index.d.ts",
       "default": "./dist/camera/index.js"
@@ -122,6 +130,14 @@
     "./heightfield/define.js": {
       "types": "./dist/heightfield/define.d.ts",
       "default": "./dist/heightfield/define.js"
+    },
+    "./joint": {
+      "types": "./dist/joint/index.d.ts",
+      "default": "./dist/joint/index.js"
+    },
+    "./joint/define.js": {
+      "types": "./dist/joint/define.d.ts",
+      "default": "./dist/joint/define.js"
     },
     "./labels": {
       "types": "./dist/labels/index.d.ts",
