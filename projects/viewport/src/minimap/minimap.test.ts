@@ -223,6 +223,23 @@ describe(ViewportMinimap.metadata.tag, () => {
       expect(firstKey).toHaveLength(1);
     });
 
+    it('assigns stable generated keys when automatic roots have no id', async () => {
+      const root = viewport.querySelector<HTMLElement>('#automatic-root')!;
+      root.id = '';
+      const added = document.createElement('div');
+      vi.spyOn(added, 'getBoundingClientRect').mockReturnValue(rect({ x: 40, y: 50, width: 60, height: 40 }));
+      viewport.append(added);
+      await elementIsStable(viewport);
+      await flushProjection(minimap);
+
+      expect(itemKeys(minimap)).toEqual(['root-0', 'root-1']);
+
+      minimap.refresh();
+      await flushProjection(minimap);
+
+      expect(itemKeys(minimap)).toEqual(['root-0', 'root-1']);
+    });
+
     it('rebuilds automatic roots on default-slot changes while excluding background and overlay children', async () => {
       const added = document.createElement('div');
       added.id = 'added-root';
