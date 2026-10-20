@@ -23,7 +23,7 @@ This project includes the following bundled third-party software:
 - archiver v8.0.0 [MIT]
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.11.0 [MIT]
+- eslint v10.12.0 [MIT]
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
 - fast-glob v3.3.3 [MIT]
@@ -47,7 +47,7 @@ This project includes the following bundled third-party software:
 - publint v0.3.24 [MIT]
   Copyright: Bjorn Lu
 
-- sanitize-html v2.17.7 [MIT]
+- sanitize-html v2.18.0 [MIT]
   Copyright: Apostrophe Technologies, Inc.
 
 - ts-morph v28.0.0 [MIT]
@@ -68,7 +68,7 @@ The following bundled components are provided under the MIT license:
 @pnpm/workspace.read-manifest v2.2.0 - Copyright Unknown
 adm-zip v0.6.1 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-eslint v10.11.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+eslint v10.12.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 fflate v0.8.3 - Copyright Arjun Barrett <arjunbarrett@gmail.com>
 html-format v1.1.7 - Copyright Mohamed Akram
@@ -76,7 +76,7 @@ ignore v7.0.6 - Copyright kael
 minisearch v7.2.0 - Copyright Luca Ongaro
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.24 - Copyright Bjorn Lu
-sanitize-html v2.17.7 - Copyright Apostrophe Technologies, Inc.
+sanitize-html v2.18.0 - Copyright Apostrophe Technologies, Inc.
 ts-morph v28.0.0 - Copyright David Sherret
 zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
 
