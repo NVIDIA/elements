@@ -40,7 +40,7 @@ describe('scene shape declarations', () => {
     shape.scale = [2, 3, 4];
     shape.orientation = null;
     shape.scale = null;
-    expect(shape.orientation).toEqual([0, 0, 0, 1]);
+    expect(shape.orientation).toBeNull();
     expect(shape.scale).toEqual([1, 1, 1]);
   });
 });

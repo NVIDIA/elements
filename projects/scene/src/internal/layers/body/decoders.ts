@@ -24,7 +24,14 @@ export type GeometryDecoderLoader = () => Promise<GeometryDecoderModule>;
 // The only built-in format dispatch table. Decoder code stays behind dynamic imports.
 const decoders = new Map<string, GeometryDecoderLoader>([['stl', () => import('./decoders/stl.js')]]);
 
-/** Registers an external decoder. Rejects replacement of existing extensions, including built-ins. */
+/**
+ * Registers an external lazy geometry decoder shared by body src, loadGeometry(), and
+ * decodeGeometry(). Accepts letters and digits with an optional leading dot; extensions
+ * compare without case. Duplicate registration, including built-in STL, throws TypeError.
+ * The loader returns a module exposing decode(bytes, { fragment, signal }) and runs only
+ * when that extension needs decoding. External packages own any decoder dependencies.
+ * This registry dispatches geometry formats, not arbitrary visualizer plug-ins.
+ */
 export function registerGeometryDecoder(extension: string, loader: GeometryDecoderLoader): void {
   const key = normalizeExtension(extension);
   if (decoders.has(key)) throw new TypeError(`A geometry decoder is already registered for ".${key}".`);

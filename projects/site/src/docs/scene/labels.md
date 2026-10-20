@@ -13,10 +13,14 @@
 
 ## Packed labels
 
-Use `LabelBuffer` to store each label's text, position, scale, and color. Assign the buffer to the label layer's `source` property. Update record handles and call `publish()` to copy only the changed numeric records into the render snapshot.
+{% api 'nve-scene-labels' 'property' 'source' %}
 
-The `scale-unit` attribute controls how Scene interprets every record's scale. The default `pixel` value keeps text at a stable CSS-pixel height as the camera moves. Use `world` to size labels in scene units.
+{% api 'nve-scene-labels' 'method' 'publish' %}
 
-Scene renders labels as depth-tested signed-distance-field glyphs. The built-in atlas supports printable ASCII and displays a replacement glyph for unsupported characters. Label records are visual annotations; they don't create one DOM or keyboard target per record. Provide an accessible name and fallback content on the owning scene when the labels convey required information.
+{% api 'nve-scene-labels' 'property' 'scaleUnit' %}
 
-Set `interactive` and, optionally, `featureIds` on the layer to enable glyph-aware pointer picking. Transparent pixels around and inside glyphs don't produce hits.
+## Interaction
+
+{% api 'nve-scene-labels' 'property' 'interactive' %}
+
+See [record buffers](/docs/scene/record-buffers/) for storage and [interaction](/docs/scene/interaction/) for picking results.

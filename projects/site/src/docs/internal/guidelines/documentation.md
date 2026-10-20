@@ -158,11 +158,11 @@ Leverage accordions alone or in conjunction with others to create progressive di
 
 Renders the description metadata of a given API. The identifier of the referenced API is optional. If you omit the identifier, the shortcode displays all API references of the provided type.
 
-| Parameter  | Description              | Type                                                                             |
-| ---------- | ------------------------ | -------------------------------------------------------------------------------- |
-| Tag Name   | Tag name of element API  | `string`                                                                         |
-| API        | API metadata to render   | `description` \| `event` \| `property` \| `slot` \| `css-property` \| `css-part` |
-| Identifier | Optional public API name | `string`                                                                         |
+| Parameter  | Description              | Type                                                                                         |
+| ---------- | ------------------------ | -------------------------------------------------------------------------------------------- |
+| Tag Name   | Tag name of element API  | `string`                                                                                     |
+| API        | API metadata to render   | `description` \| `event` \| `property` \| `method` \| `slot` \| `css-property` \| `css-part` |
+| Identifier | Optional public API name | `string`                                                                                     |
 
 ### API Description
 
@@ -259,6 +259,16 @@ Renders the description metadata of a given API. The identifier of the reference
 </div>
 
 </div>
+
+### API Method
+
+Use method metadata for signatures and behavior so the site and API tools share the source JSDoc contract.
+
+```html
+{% raw %}
+{% api 'nve-scene-frame' 'method' 'getWorldMatrix' %}
+{% endraw %}
+```
 
 ### API Value
 

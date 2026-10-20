@@ -15,6 +15,8 @@ import styles from '../internal/dom/host.css?inline';
 /**
  * @element nve-scene-spheres
  * @description Renders fixed-geometry spheres from semantic source records.
+ * SphereBuffer and JSON source records default position to origin, orientation to identity,
+ * and size to [1, 1, 1]. Size gives full local X/Y/Z diameters.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/spheres
  * @stable false

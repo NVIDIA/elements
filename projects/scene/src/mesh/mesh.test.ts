@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import {
   FEATURE_ID_INACTIVE,
+  LAYER_CHILD,
   MESH_GEOMETRY,
   MESH_TEXTURE_CAPTURE,
   MESH_TEXTURE_WITHOUT_UVS
@@ -596,6 +597,69 @@ describe(SceneMesh.metadata.tag, () => {
     mesh.append(document.createElement('span'));
     expect(getMeshRenderData(mesh).identityInstance).toBe(false);
   });
+
+  it('preserves captured geometry through child validation and reconnection', async () => {
+    fixture = await createFixture(html`<nve-scene-mesh></nve-scene-mesh>`);
+    const mesh = fixture.querySelector(SceneMesh.metadata.tag) as SceneMesh;
+    const positions = new Float32Array(triangle);
+    mesh.geometry = { positions };
+    await elementIsStable(mesh);
+    const captured = getMeshRenderData(mesh).positions;
+    positions[0] = NaN;
+    const errors: string[] = [];
+    vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    mesh.addEventListener('nve-scene-error', event => errors.push((event as CustomEvent).detail.code));
+
+    for (let episode = 0; episode < 2; episode += 1) {
+      const child = document.createElement('span');
+      mesh.append(child);
+      await elementIsStable(mesh);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: false, identityInstance: false });
+      child.remove();
+      await elementIsStable(mesh);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: false, identityInstance: true });
+    }
+    expect(errors).toEqual([LAYER_CHILD, LAYER_CHILD]);
+
+    mesh.remove();
+    fixture.append(mesh);
+    await elementIsStable(mesh);
+    expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: false, identityInstance: true });
+    expect(getMeshRenderData(mesh).positions).toBe(captured);
+    expect(captured).toEqual(triangle);
+  });
+
+  it.each(['malformed arrays', 'invalid indices'] as const)(
+    'keeps %s invalid through connection, child edits, and reconnection',
+    async input => {
+      fixture = await createFixture(html`<div></div>`);
+      const mesh = new SceneMesh();
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      if (input === 'malformed arrays') mesh.geometry = { positions: [] } as never;
+      else mesh.geometry = { positions: triangle, indices: new Uint32Array([0, 1, 9]) };
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: true, ready: false });
+      await mesh.setTexture(null);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: true, ready: false });
+
+      fixture.append(mesh);
+      await elementIsStable(mesh);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: true, ready: false });
+      const child = document.createElement('span');
+      mesh.append(child);
+      await elementIsStable(mesh);
+      child.remove();
+      await elementIsStable(mesh);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: true, ready: false });
+
+      mesh.remove();
+      fixture.append(mesh);
+      await elementIsStable(mesh);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: true, ready: false });
+      mesh.geometry = { positions: triangle };
+      await elementIsStable(mesh);
+      expect(getMeshRenderData(mesh)).toMatchObject({ geometryError: false, ready: true, identityInstance: true });
+    }
+  );
 });
 
 function deferred<T>(): { promise: Promise<T>; resolve(value: T): void } {

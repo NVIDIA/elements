@@ -30,6 +30,9 @@ export type PolygonInstanceSource = MarkerSource;
 /**
  * @element nve-scene-polygon
  * @description An unlit, frame-local polygon surface with optional holes and source-backed instancing.
+ * Without a source, uses one identity placement. Assign a MarkerBuffer for retained
+ * instance updates or a JSON source attribute for static placements. Polygon layers
+ * do not accept element children.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/polygon
  * @stable false

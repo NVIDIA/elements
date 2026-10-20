@@ -6,8 +6,6 @@ import { refreshSceneJoints } from '../joint/state.js';
 import {
   FrameEvaluation,
   FRAME_SELECTOR,
-  isFrameChainValid,
-  isFrameChainVisible,
   getFrameReference,
   hasSceneFrameReferences,
   resolveSceneFrameReferences,
@@ -40,12 +38,12 @@ export class SceneContent {
   }
 
   hasInteractiveTargets(): boolean {
-    const referenced = hasSceneFrameReferences(this.#host);
+    const frames = new FrameEvaluation(this.#host);
     return this.#layerRecords.some(
       record =>
         isInteractiveLayer(record.layer) &&
-        (referenced ? isFrameChainVisible(record.layer) : record.layer.closest('[hidden]') === null) &&
-        isFrameChainValid(record.layer) &&
+        frames.isVisible(record.layer) &&
+        frames.isValid(record.layer) &&
         isTechnicallyPickableLayer(record)
     );
   }
@@ -92,13 +90,8 @@ export class SceneContent {
 
   compileRenderItems(): SceneRenderItem[] {
     const frames = new FrameEvaluation(this.#host);
-    const referenced = hasSceneFrameReferences(this.#host);
     return this.#layerRecords.flatMap<SceneRenderItem>(record => {
-      if (
-        record.status === 'pending' ||
-        (referenced ? !isFrameChainVisible(record.layer) : record.layer.closest('[hidden]') !== null)
-      )
-        return [];
+      if (record.status === 'pending' || !frames.isVisible(record.layer)) return [];
       const frameMatrix = frames.getWorldMatrix(record.layer);
       if (!frameMatrix) return [];
       const item = createSceneLayerRenderItem(record, frameMatrix);
@@ -107,22 +100,15 @@ export class SceneContent {
   }
 
   #updateNamedFrames(): void {
-    updateFrameRegistry(
-      this.#host,
-      [
-        ...this.#frames.filter(isFrameStateRegistered),
-        ...this.#layerRecords.filter(record => record.kind === 'body').map(record => record.layer)
-      ],
-      [
-        ...this.#frames,
-        ...this.#layerRecords.map(record => record.layer),
-        ...(this.#scoped
-          ? [...this.#host.querySelectorAll<HTMLElement>('nve-scene-camera')].filter(
-              camera => camera.closest('nve-scene') === this.#host
-            )
-          : [])
-      ]
-    );
+    updateFrameRegistry(this.#host, this.#frames.filter(isFrameStateRegistered), [
+      ...this.#frames,
+      ...this.#layerRecords.map(record => record.layer),
+      ...(this.#scoped
+        ? [...this.#host.querySelectorAll<HTMLElement>('nve-scene-camera')].filter(
+            camera => camera.closest('nve-scene') === this.#host
+          )
+        : [])
+    ]);
     this.#resolveDependencies();
   }
 

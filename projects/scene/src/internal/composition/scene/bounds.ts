@@ -12,13 +12,14 @@ import { takeBodyLayerRenderData } from '../../layers/body/layer-state.js';
 import { takePolygonLayerRenderData } from '../../layers/polygon/layer-state.js';
 import { takeHeightfieldLayerRenderData } from '../../layers/heightfield/layer-state.js';
 import type { MeshRenderData } from '../../layers/mesh/render-data.js';
-import { lineSegmentCount } from '../../layers/lines/data.js';
+import { getMeshLocalBounds } from '../../layers/mesh/bounds.js';
+import { lineJoinCount, lineSegmentCount } from '../../algorithms/line-topology.js';
 import { BoundsAccumulator, type SceneBounds } from '../../math/bounds.js';
-import { composePreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
+import { composeMat4Into, multiplyMat4Into } from '../../math/mat4.js';
+import { PRIMITIVE_BOUNDS } from '../../math/primitive-bounds.js';
 import { PreparedAffineTransform } from '../../math/affine-transform.js';
-import type { Matrix4, Vec3 } from '../../math/types.js';
-import { LABEL, LINE_VERTEX, POINT, TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
-import { readMarker } from '../../records/layouts/codecs.js';
+import type { Matrix4, Quaternion, Vec3 } from '../../math/types.js';
+import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { resolveSceneLayer, type SceneLayerRecord } from './layer-record.js';
 
@@ -31,9 +32,10 @@ export interface SceneBoundsQueryOptions {
   readonly includeHidden?: boolean;
 }
 
-const CENTERED_BOX: SceneBounds = { minimum: [-0.5, -0.5, -0.5], maximum: [0.5, 0.5, 0.5] };
-const ARROW_BOX: SceneBounds = { minimum: [-1, -1, 0], maximum: [1, 1, 1] };
 const WIDTH_OFFSET = getFieldOffset(LINE_VERTEX, 'width');
+const POSITION_OFFSET = getFieldOffset(MARKER, 'position');
+const ORIENTATION_OFFSET = getFieldOffset(MARKER, 'orientation');
+const SCALE_OFFSET = getFieldOffset(MARKER, 'scale');
 
 /** Queries published captures without taking a renderer snapshot or draining uploads. */
 export function getSceneBounds(scene: HTMLElement, options: SceneBoundsQueryOptions): SceneBounds | null {
@@ -86,7 +88,7 @@ function includeLayer(bounds: BoundsAccumulator, record: SceneLayerRecord, frame
   if (record.status === 'pending') return;
   if (record.kind === 'marker') {
     const data = getMarkerLayerRenderData(record.layer);
-    includeInstances(bounds, { data, frame, geometry: data.kind === 'arrow' ? ARROW_BOX : CENTERED_BOX });
+    includeInstances(bounds, { data, frame, geometry: PRIMITIVE_BOUNDS[data.kind] });
   } else if (record.kind === 'label') {
     const data = getLabelLayerRenderData(record.layer);
     if (data.ready && data.bytes) includePositions(bounds, { ...data, frame, stride: LABEL.stride, radius: 0 });
@@ -120,7 +122,7 @@ function streamRadius(
   for (let index = 0; index < data.count; index++)
     width = Math.max(width, view.getFloat32(index * LINE_VERTEX.stride + WIDTH_OFFSET, true));
   const halfWidth = width * 0.5;
-  return halfWidth * (data.topology !== 'segments' && data.count > 2 ? POLYLINE_MITER_LIMIT : 1);
+  return halfWidth * (lineJoinCount(data.count, data.topology) > 0 ? POLYLINE_MITER_LIMIT : 1);
 }
 
 function pointRadius(layer: HTMLElement): number {
@@ -158,17 +160,30 @@ function includeInstances(
 ): void {
   const { data, geometry, frame } = options;
   if (!data.ready || !data.bytes) return;
+  const view = new DataView(data.bytes.buffer, data.bytes.byteOffset, data.bytes.byteLength);
+  const position: Vec3 = [0, 0, 0];
+  const orientation: Quaternion = [0, 0, 0, 1];
+  const scale: Vec3 = [1, 1, 1];
+  const local = new Float64Array(16);
+  const world = new Float64Array(16);
   for (let index = 0; index < data.count; index++) {
-    const marker = readMarker(data.bytes, index);
-    const matrix = multiplyPreciseMat4(frame, composePreciseMat4(marker.position, marker.orientation, marker.scale));
-    bounds.includeBox(geometry, matrix);
+    const offset = index * MARKER.stride;
+    readFloats(view, offset + POSITION_OFFSET, position);
+    readFloats(view, offset + ORIENTATION_OFFSET, orientation);
+    readFloats(view, offset + SCALE_OFFSET, scale);
+    composeMat4Into(position, orientation, scale, local);
+    bounds.includeBox(geometry, multiplyMat4Into(frame, local, world));
   }
+}
+
+function readFloats(view: DataView, byteOffset: number, target: number[]): void {
+  for (let index = 0; index < target.length; index++) target[index] = view.getFloat32(byteOffset + index * 4, true);
 }
 
 function includeMesh(bounds: BoundsAccumulator, record: SceneLayerRecord, frame: Matrix4): void {
   const data = meshData(record);
   if (!data?.ready) return;
-  const geometry = meshBounds(data);
+  const geometry = getMeshLocalBounds(data);
   if (!geometry) return;
   if (data.identityInstance) bounds.includeBox(geometry, frame);
   else includeInstances(bounds, { data: getMarkerLayerRenderData(record.layer), geometry, frame });
@@ -180,26 +195,4 @@ function meshData(record: SceneLayerRecord): MeshRenderData | undefined {
   if (record.kind === 'polygon') return takePolygonLayerRenderData(record.layer);
   if (record.kind === 'heightfield') return takeHeightfieldLayerRenderData(record.layer);
   return undefined;
-}
-
-function meshBounds(data: MeshRenderData): SceneBounds | null {
-  const bounds = new BoundsAccumulator();
-  if (data.heightfield) {
-    const grid = data.heightfield;
-    for (let index = 0; index < grid.heights.length; index++) {
-      bounds.include([
-        Math.fround(grid.origin[0] + (index % grid.columns) * grid.spacing),
-        Math.fround(grid.origin[1] + Math.floor(index / grid.columns) * grid.spacing),
-        grid.heights[index]!
-      ]);
-    }
-  } else if (data.positions) {
-    const positions = data.positions;
-    const count = data.indices?.length ?? positions.length / 3;
-    for (let index = 0; index < count; index++) {
-      const offset = (data.indices?.[index] ?? index) * 3;
-      bounds.include([positions[offset]!, positions[offset + 1]!, positions[offset + 2]!]);
-    }
-  }
-  return bounds.bounds;
 }

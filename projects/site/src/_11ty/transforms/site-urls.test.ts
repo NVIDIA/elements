@@ -61,7 +61,7 @@ describe('siteUrlsTransform', () => {
 <a href="./">Home</a>
 <a href=".">Root</a>
 <img src="/elements/elements/static/images/integrations/angular.svg" alt="Angular logo">
-<nve-scene-body src="/static/bodies/rover.stl"></nve-scene-body>
+<nve-scene-mesh src="/static/bodies/rover.stl"></nve-scene-mesh>
 `;
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
@@ -82,7 +82,7 @@ describe('siteUrlsTransform', () => {
 <a href="/docs/metrics/">Metrics</a>
 <a href="/elements/elements/docs/cli/">CLI</a>
 <img src="/elements/elements/static/images/integrations/angular.svg" alt="Angular logo">
-<nve-scene-body src="/elements/static/bodies/rover.stl"></nve-scene-body>
+<nve-scene-mesh src="/elements/static/bodies/rover.stl"></nve-scene-mesh>
 `;
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
@@ -115,7 +115,7 @@ describe('siteUrlsTransform', () => {
 <base href="https://nvidia.github.io/elements/preview/">
 <a href="https://nvidia.github.io/elements/preview/docs/cli/">CLI</a>
 <img src="https://nvidia.github.io/elements/preview/static/images/integrations/angular.svg" alt="Angular logo">
-<nve-scene-body src="/static/bodies/rover.stl"></nve-scene-body>
+<nve-scene-mesh src="/static/bodies/rover.stl"></nve-scene-mesh>
 `;
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');

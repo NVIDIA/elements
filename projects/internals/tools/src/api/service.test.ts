@@ -5,12 +5,14 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { PassThrough } from 'node:stream';
-import { describe, expect, it } from 'vitest';
-import type { Attribute, Element } from '@internals/metadata';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { ApiService as MetadataApiService, type Attribute, type Element } from '@internals/metadata';
 import type { ToolMethod } from '../internal/tools.js';
 import { ApiService } from './service.js';
 
 describe('ApiService', () => {
+  afterEach(() => vi.restoreAllMocks());
+
   it('should provide list tool', async () => {
     const result = await ApiService.list();
     expect(result).toBeDefined();
@@ -44,6 +46,7 @@ describe('ApiService', () => {
   });
 
   it('should return helpful message for empty search results (markdown)', async () => {
+    vi.spyOn(MetadataApiService, 'search').mockResolvedValueOnce([]);
     const result = await ApiService.search({ query: 'nonexistent-component-xyz', format: 'markdown' });
     expect(result).toContain('No components or APIs found matching');
     expect(result).toContain('nonexistent-component-xyz');
@@ -51,6 +54,7 @@ describe('ApiService', () => {
   });
 
   it('should return empty array for empty search results (json)', async () => {
+    vi.spyOn(MetadataApiService, 'search').mockResolvedValueOnce([]);
     const result = await ApiService.search({ query: 'nonexistent-component-xyz', format: 'json' });
     expect(Array.isArray(result)).toBe(true);
     expect(result).toHaveLength(0);

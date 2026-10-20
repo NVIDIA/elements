@@ -4,11 +4,14 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { SceneGPUBuffer, SceneGPUCommandEncoder, SceneGPUDevice } from '../../gpu/platform.js';
 import { FRUSTUM_WGSL } from '../../math/frustum.js';
+import { SCALED_ENCLOSING_RADIUS_WGSL } from '../../math/bounds.js';
+import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
 import {
   destroyMarkerCompactionResources,
   MarkerCompactor,
   MARKER_COMPACTION_SHADER,
-  supportsMarkerCompaction
+  supportsMarkerCompaction,
+  writeMarkerCompactionUniforms
 } from './compaction.js';
 
 describe('marker compaction', () => {
@@ -66,10 +69,24 @@ describe('marker compaction', () => {
     expect(MARKER_COMPACTION_SHADER).toContain('fn isVisible');
     expect(MARKER_COMPACTION_SHADER.split(FRUSTUM_WGSL)).toHaveLength(2);
     expect(MARKER_COMPACTION_SHADER).toContain('return nve_frustum_intersects_sphere(transform, position, radius)');
-    expect(MARKER_COMPACTION_SHADER).toContain('0.8660254 * max(abs(scale.x), max(abs(scale.y), abs(scale.z)))');
+    expect(MARKER_COMPACTION_SHADER.split(SCALED_ENCLOSING_RADIUS_WGSL)).toHaveLength(2);
+    expect(MARKER_COMPACTION_SHADER).toContain('nve_scaled_enclosing_radius(scene.unitEnclosingRadius, scale)');
     expect(MARKER_COMPACTION_SHADER).toContain('alpha == 255u');
     expect(MARKER_COMPACTION_SHADER).toContain('atomicAdd(&arguments[1]');
     expect(MARKER_COMPACTION_SHADER).toContain('opaqueIndices[atomicAdd');
+  });
+
+  it('writes unit radii where the compaction uniform reads them, after the count and pick ID', () => {
+    const uniforms = new Float32Array(40);
+
+    writeMarkerCompactionUniforms(uniforms, 'arrow');
+    expect(uniforms[34]).toBe(Math.fround(Math.sqrt(3)));
+    writeMarkerCompactionUniforms(uniforms, 'cube');
+    expect(uniforms[34]).toBe(Math.fround(Math.sqrt(3) / 2));
+    expect([...uniforms].filter(value => value !== 0)).toHaveLength(1);
+    // The radius follows `count: f32` at byte 128 and the ID pass's `pickId: u32` at byte 132.
+    expect(MARKER_COMPACTION_SHADER).toMatch(/count: f32,\s+pickId: u32,\s+unitEnclosingRadius: f32,\s+}/);
+    expect(PICK_UNIFORM_OFFSETS.marker + 4).toBe(34 * 4);
   });
 
   it('rolls back buffers when bind-group creation fails', () => {

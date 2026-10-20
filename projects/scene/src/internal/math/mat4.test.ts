@@ -4,6 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   composeMat4,
+  composeMat4Into,
   composePreciseMat4,
   identityMat4,
   invertMat4,
@@ -14,6 +15,7 @@ import {
   transformPointMat4,
   writeMat4ToFloat32
 } from './mat4.js';
+import type { Quaternion, Vec3 } from './types.js';
 
 describe('mat4 math', () => {
   it('should return a column-major identity matrix', () => {
@@ -27,6 +29,36 @@ describe('mat4 math', () => {
     const matrix = composeMat4([1, 2, 3], [0, 0, Math.SQRT1_2, Math.SQRT1_2], [2, 3, 4]);
 
     expectArrayCloseTo([...matrix], [0, 2, 0, 0, -3, 0, 0, 0, 0, 0, 4, 0, 1, 2, 3, 1]);
+  });
+
+  it('writes compositions into reusable storage that match allocated compositions at each precision', () => {
+    const precise = new Float64Array(16);
+    const single = new Float32Array(16);
+    const inputs: Array<[Vec3, Quaternion, Vec3]> = [
+      [
+        [1, 2, 3],
+        [0, 0, 0, 1],
+        [1, 1, 1]
+      ],
+      [
+        [-4, 0.1, 1e7],
+        [1, 2, 3, 4],
+        [2, -0.5, 3]
+      ],
+      [
+        [0, 0, 0],
+        [Number.MAX_VALUE, 0, 0, Number.MAX_VALUE],
+        [1e-3, 1e3, 1]
+      ]
+    ];
+
+    for (const [position, orientation, scale] of inputs) {
+      expect(composeMat4Into(position, orientation, scale, precise)).toBe(precise);
+      expect(precise).toEqual(composePreciseMat4(position, orientation, scale));
+      expect(composeMat4Into(position, orientation, scale, single)).toEqual(composeMat4(position, orientation, scale));
+    }
+    expect(() => composeMat4Into([0, 0, 0], [0, 0, 0, 1], [1, 1, 1], new Float64Array(15))).toThrow(RangeError);
+    expect(() => composeMat4Into([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], precise)).toThrow(RangeError);
   });
 
   it('should multiply parent and child transforms in column-major order', () => {

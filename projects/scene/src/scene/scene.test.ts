@@ -323,6 +323,58 @@ describe(Scene.metadata.tag, () => {
     expect(animation.pendingCount).toBe(0);
   });
 
+  it('redraws an idle scene on marker publication failure and upload-free recovery', async () => {
+    const animation = new ManualAnimationFrames();
+    const gpu = configureFakeWebGPU({
+      cancelAnimationFrame: handle => animation.cancel(handle),
+      requestAnimationFrame: callback => animation.request(callback)
+    });
+    const { element } = await createScene(html`
+      <nve-scene aria-label="Publication recovery"><nve-scene-cubes></nve-scene-cubes></nve-scene>
+    `);
+    const layer = required(element.querySelector<SceneCubes>('nve-scene-cubes'), 'Expected cube layer.');
+    const source = new CubeBuffer({ records: [{ featureId: 1 }] });
+    layer.source = source;
+    gpu.resolveNextDevice();
+    await vi.waitFor(() => {
+      animation.flush();
+      expect(gpu.devices[0]?.draws.length).toBeGreaterThan(0);
+    });
+    await element.ready;
+    await drainSceneTicks(animation, element);
+    const device = required(gpu.devices[0], 'Expected scene device.');
+    const submissions = device.submissions.length;
+
+    source.at(0).featureId = 2;
+    layer.publish();
+    await drainSceneTicks(animation, element);
+    expect(device.submissions).toHaveLength(submissions);
+
+    const bytes = source.mutableBytes;
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    view.setFloat32(0, NaN, true);
+    consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const render = vi.spyOn(SceneRenderer.prototype, 'render');
+    layer.publish();
+    await drainSceneTicks(animation, element);
+    expect(device.submissions).toHaveLength(submissions + 1);
+    expect(renderedItems(render)).toContainEqual(
+      expect.objectContaining({ data: expect.objectContaining({ count: 0 }) })
+    );
+
+    layer.publish();
+    await drainSceneTicks(animation, element);
+    expect(device.submissions).toHaveLength(submissions + 1);
+
+    view.setFloat32(0, 0, true);
+    layer.publish({ count: 0 });
+    await drainSceneTicks(animation, element);
+    expect(device.submissions).toHaveLength(submissions + 2);
+    expect(takeMarkerLayerRenderData(layer)).toMatchObject({ count: 1, ready: true, uploadRanges: [] });
+    expect(renderedItems(render).at(-1)).toMatchObject({ data: { count: 1, ready: true } });
+    expect(animation.pendingCount).toBe(0);
+  });
+
   it('should wake once for a current frame transform and park again', async () => {
     const animation = new ManualAnimationFrames();
     const gpu = configureFakeWebGPU({
@@ -338,7 +390,7 @@ describe(Scene.metadata.tag, () => {
     await element.ready;
     await drainSceneTicks(animation, element);
 
-    Reflect.get(frame, 'setPose').call(frame, { position: [1, 0, 0], orientation: [0, 0, 0, 1] });
+    Object.assign(frame, { position: [1, 0, 0], orientation: [0, 0, 0, 1] });
     await vi.waitFor(() => expect(animation.pendingCount).toBe(1));
     animation.flush();
     await drainSceneTicks(animation, element);
@@ -398,7 +450,7 @@ describe(Scene.metadata.tag, () => {
       await camera.updateComplete;
     });
     await expectWake(() => {
-      Reflect.get(frame, 'setPose').call(frame, { position: [1, 2, 3], orientation: [0, 0, 0, 1] });
+      Object.assign(frame, { position: [1, 2, 3], orientation: [0, 0, 0, 1] });
     });
     await expectWake(() => {
       const entry = {
@@ -837,7 +889,7 @@ describe(Scene.metadata.tag, () => {
     identityPart.setAttribute('position', '[1,0,0]');
     await waitForAnimationFrames(2);
 
-    Reflect.set(identity, 'shapes', [{ kind: 'cube', position: [1, 0, 0] }]);
+    Reflect.set(identity, 'shapes', [{ type: 'cube', position: [1, 0, 0] }]);
     await waitForAnimationFrames(2);
     expect(Reflect.get(identity, 'shapes')).not.toBeNull();
 
@@ -1103,7 +1155,7 @@ describe(Scene.metadata.tag, () => {
     `);
     const frame = element.querySelector<HTMLElement>('nve-scene-frame');
     if (!frame) throw new Error('Expected frame.');
-    Reflect.get(frame, 'setPose').call(frame, { position: [2, 3, 4], orientation: [0, 0, 0, 1] });
+    Object.assign(frame, { position: [2, 3, 4], orientation: [0, 0, 0, 1] });
     let changes = 0;
     element.addEventListener('nve-scene-camera-change', () => (changes += 1));
     gpu.resolveNextDevice();
@@ -1114,7 +1166,7 @@ describe(Scene.metadata.tag, () => {
       expect.closeTo(-5.485281),
       expect.closeTo(12.485281)
     ]);
-    Reflect.get(frame, 'setPose').call(frame, { position: [5, 6, 7], orientation: [0, 0, 1, 0] });
+    Object.assign(frame, { position: [5, 6, 7], orientation: [0, 0, 1, 0] });
     await waitForAnimationFrames(2);
     expect(element.cameraState.pose.position).toEqual([
       expect.closeTo(5),
@@ -1263,7 +1315,8 @@ describe(Scene.metadata.tag, () => {
     await waitForAnimationFrames(2);
     expect(element.cameraState.pose.position).toEqual([expect.closeTo(10), expect.closeTo(1), expect.closeTo(0)]);
 
-    map.setPose({ position: [8, 0, 0], orientation: [0, 0, 0, 1] });
+    map.position = [8, 0, 0];
+    map.orientation = [0, 0, 0, 1];
     await waitForAnimationFrames(2);
     expect(element.cameraState.pose.position).toEqual([expect.closeTo(13), expect.closeTo(1), expect.closeTo(0)]);
   });
@@ -1915,7 +1968,7 @@ describe(Scene.metadata.tag, () => {
     const frame = element.querySelector<HTMLElement>('nve-scene-frame');
     const orbit = element.querySelector<SceneCamera>('nve-scene-camera[behavior="orbit"]');
     if (!frame || !orbit) throw new Error('Expected frame and orbit camera.');
-    Reflect.get(frame, 'setPose').call(frame, { position: [3, 4, 0], orientation: [0, 0, 0, 1] });
+    Object.assign(frame, { position: [3, 4, 0], orientation: [0, 0, 0, 1] });
     gpu.resolveNextDevice();
     await element.ready;
     const before = { distance: orbit.distance, polarAngle: orbit.polarAngle };
@@ -2310,11 +2363,11 @@ function createChildListMutation(target: Node, addedNodes: Node[]): MutationReco
   };
 }
 
-function createBody(id: string, kind: SceneShape['kind']): SceneBody {
+function createBody(id: string, type: SceneShape['type']): SceneBody {
   const body = document.createElement(SceneBody.metadata.tag) as SceneBody;
   const shape = document.createElement(SceneShape.metadata.tag) as SceneShape;
   body.id = id;
-  shape.kind = kind;
+  shape.type = type;
   body.append(shape);
   return body;
 }

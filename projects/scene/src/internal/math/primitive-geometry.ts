@@ -3,10 +3,10 @@
 
 import type { Vec3 } from './types.js';
 
-export type ScenePrimitiveKind = 'cone' | 'cube' | 'cylinder' | 'pyramid' | 'sphere';
+export type ScenePrimitiveType = 'cone' | 'cube' | 'cylinder' | 'pyramid' | 'sphere';
 
 /** @internal Renderer-facing shorthand. */
-export type PrimitiveKind = ScenePrimitiveKind | 'arrow';
+export type PrimitiveKind = ScenePrimitiveType | 'arrow';
 
 export interface PrimitiveGeometry {
   readonly vertices: Float32Array;

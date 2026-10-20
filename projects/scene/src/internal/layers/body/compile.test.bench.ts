@@ -14,7 +14,7 @@ describe('body shape compilation', () => {
       const shapes = Array.from(
         { length: count },
         (_, index): BodyShape => ({
-          kind: kind === 'mixed' ? kinds[index % kinds.length]! : kind,
+          type: kind === 'mixed' ? kinds[index % kinds.length]! : kind,
           position: [index, index % 3, 0],
           orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2],
           scale: [index % 2 ? -1 : 1, 2, 0.5],

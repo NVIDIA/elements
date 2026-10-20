@@ -538,7 +538,7 @@ function triggerBodyEdit() {
   if (bodyEditRevision % 2 === 0) {
     noteProfileOperation('body-bulk-assignment');
     shape.remove();
-    body.geometry = [{ position: [bodyEditRevision % 5, 0, 0], kind: 'cube' }];
+    body.geometry = [{ position: [bodyEditRevision % 5, 0, 0], type: 'cube' }];
     return;
   }
   noteProfileOperation('body-declarative-edit');
@@ -840,7 +840,7 @@ async function runProfileProbe() {
     const declarativeChildPresent = body.contains(shape);
     shape.remove();
     await body.updateComplete;
-    body.geometry = [{ position: [2, 0, 0], kind: 'cube' }];
+    body.geometry = [{ position: [2, 0, 0], type: 'cube' }];
     await body.updateComplete;
     await waitFrames(3);
     return {

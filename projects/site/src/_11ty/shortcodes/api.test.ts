@@ -15,12 +15,23 @@ vi.mock('../../index.11tydata.js', () => ({
       {
         name: 'nve-test-component',
         manifest: {
+          events: [{ name: 'nve-scene-error', description: 'Reports a scoped Scene error.' }],
           members: [
             {
               kind: 'field',
               name: 'property',
               description: 'Property description.',
               type: { values: [{ value: 'value' }] }
+            },
+            {
+              kind: 'field',
+              name: 'multiline',
+              description: 'Wrapped source\nprose.\n\n```js\nfirst();\nsecond();\n```'
+            },
+            {
+              kind: 'method',
+              name: 'publish',
+              description: 'Captures changed\nrecords synchronously.'
             }
           ]
         }
@@ -47,6 +58,24 @@ describe('apiShortcode', () => {
 
   it('should return no content for a requested value without a description', async () => {
     expect(await apiShortcode('nve-test-component', 'property', 'property', 'value')).toBe('');
+  });
+
+  it('preserves word boundaries and code lines in multiline source descriptions', async () => {
+    const html = await apiShortcode('nve-test-component', 'property', 'multiline');
+    expect(html).toContain('Wrapped source\nprose.');
+    expect(html).toContain('first();\nsecond();');
+    expect(html).not.toContain('sourceprose');
+
+    const method = await apiShortcode('nve-test-component', 'method', 'publish');
+    expect(method).toContain('Captures changed\nrecords synchronously.');
+  });
+
+  it('renders custom event names that use the nve prefix', async () => {
+    const html = await apiShortcode('nve-test-component', 'event', 'nve-scene-error');
+    expect(html).toContain('Reports a scoped Scene error.');
+    expect(renderAPITable({ manifest: { events: [{ name: 'nve-scene-error' }] } }, 'event')).toContain(
+      'nve-scene-error'
+    );
   });
 });
 

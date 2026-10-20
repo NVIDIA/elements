@@ -2,7 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Mat4, Matrix4, PreciseMat4, Quaternion, Vec3 } from './types.js';
-import { normalizeQuaternion } from './quaternion.js';
+import { normalizeQuaternionInto } from './quaternion.js';
+
+const unitOrientation: Quaternion = [0, 0, 0, 1];
 
 export function identityMat4(): Mat4 {
   return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
@@ -17,7 +19,7 @@ export function composeMat4(
   orientation: Readonly<Quaternion>,
   scale: Readonly<Vec3> = [1, 1, 1]
 ): Mat4 {
-  return new Float32Array(composeMat4Values(position, orientation, scale));
+  return composeMat4Into(position, orientation, scale, new Float32Array(16));
 }
 
 export function composePreciseMat4(
@@ -25,18 +27,26 @@ export function composePreciseMat4(
   orientation: Readonly<Quaternion>,
   scale: Readonly<Vec3> = [1, 1, 1]
 ): PreciseMat4 {
-  return new Float64Array(composeMat4Values(position, orientation, scale));
+  return composeMat4Into(position, orientation, scale, new Float64Array(16));
 }
 
-function composeMat4Values(
+/**
+ * Writes the column-major scale, then normalized orientation, then position transform into caller-owned storage
+ * and returns that storage. Arithmetic uses JavaScript precision and rounds only when writing to the destination's
+ * element type. Orientations whose squared length neither overflows nor underflows allocate nothing.
+ */
+// eslint-disable-next-line max-params, max-statements -- @hotpath Caller-owned storage and scalar entries avoid allocating per composition.
+export function composeMat4Into<T extends Matrix4>(
   position: Readonly<Vec3>,
   orientation: Readonly<Quaternion>,
-  scale: Readonly<Vec3>
-): number[] {
+  scale: Readonly<Vec3>,
+  result: T
+): T {
+  if (result.length !== 16) throw new RangeError('Matrix destination must contain 16 values.');
   assertFiniteVec3(position);
   assertFiniteVec3(scale);
 
-  const [x, y, z, w] = normalizeQuaternion(orientation),
+  const [x, y, z, w] = normalizeQuaternionInto(orientation, unitOrientation),
     [sx, sy, sz] = scale,
     x2 = x + x,
     y2 = y + y,
@@ -51,24 +61,23 @@ function composeMat4Values(
     wy = w * y2,
     wz = w * z2;
 
-  return [
-    (1 - (yy + zz)) * sx,
-    (xy + wz) * sx,
-    (xz - wy) * sx,
-    0,
-    (xy - wz) * sy,
-    (1 - (xx + zz)) * sy,
-    (yz + wx) * sy,
-    0,
-    (xz + wy) * sz,
-    (yz - wx) * sz,
-    (1 - (xx + yy)) * sz,
-    0,
-    position[0],
-    position[1],
-    position[2],
-    1
-  ];
+  result[0] = (1 - (yy + zz)) * sx;
+  result[1] = (xy + wz) * sx;
+  result[2] = (xz - wy) * sx;
+  result[3] = 0;
+  result[4] = (xy - wz) * sy;
+  result[5] = (1 - (xx + zz)) * sy;
+  result[6] = (yz + wx) * sy;
+  result[7] = 0;
+  result[8] = (xz + wy) * sz;
+  result[9] = (yz - wx) * sz;
+  result[10] = (1 - (xx + yy)) * sz;
+  result[11] = 0;
+  result[12] = position[0];
+  result[13] = position[1];
+  result[14] = position[2];
+  result[15] = 1;
+  return result;
 }
 
 export function multiplyMat4(left: Mat4, right: Mat4): Mat4 {

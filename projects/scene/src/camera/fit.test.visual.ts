@@ -3,8 +3,8 @@
 
 import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
-import type { Scene, SceneBounds } from './scene.js';
-import type { SceneCamera } from '../camera/camera.js';
+import type { Scene, SceneBounds } from '../scene/scene.js';
+import type { SceneCamera } from './camera.js';
 import type { SceneFrame } from '../frame/frame.js';
 import type { Vec3 } from '../index.js';
 
@@ -74,13 +74,15 @@ describe('bounds fitting through the real renderer', () => {
               ]);
             }
             const fitted = scene.cameraState;
-            frame.setPose({ position: [1e12 + 50, 1e12, 1e12], orientation: [0, 0, 0, 1] });
+            frame.position = [1e12 + 50, 1e12, 1e12];
+            frame.orientation = [0, 0, 0, 1];
             await settle();
             const unchanged = JSON.stringify(fitted) === JSON.stringify(scene.cameraState);
             // Query and refit the new publication explicitly, then finish with the original view.
             scene.fitCamera(camera, scene.getBounds({ content: [frame] }));
             const refitted = JSON.stringify(fitted) !== JSON.stringify(scene.cameraState);
-            frame.setPose({ position: [1e12, 1e12, 1e12], orientation: [0, 0, 0, 1] });
+            frame.position = [1e12, 1e12, 1e12];
+            frame.orientation = [0, 0, 0, 1];
             scene.fitCamera(camera, bounds);
             await settle();
             return {
@@ -139,9 +141,11 @@ function fitTemplate(projection: string, aspect: number): string {
       camera.behavior = 'orbit'; camera.projection = '${projection}';
       camera.polarAngle = 0.85; camera.azimuth = -1.2;
       const frame = document.createElement('nve-scene-frame');
-      frame.setPose({position:[1e12,1e12,1e12], orientation:[0,0,0,1]});
+      frame.position = [1e12,1e12,1e12];
+      frame.orientation = [0,0,0,1];
       const inner = document.createElement('nve-scene-frame');
-      inner.setPose({position:[17,23,5], orientation:[0,0,Math.sin(0.3),Math.cos(0.3)]});
+      inner.position = [17,23,5];
+      inner.orientation = [0,0,Math.sin(0.3),Math.cos(0.3)];
       const layer = document.createElement('nve-scene-cubes');
       layer.id = 'content';
       const positions = [[-20,-5,0], [0,0,0], [25,8,3]];

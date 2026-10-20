@@ -10,9 +10,9 @@ describe('referenced coordinate frame rendering', () => {
   test('matches nested pixels and hides unresolved or hidden chains while unrelated bodies render', async () => {
     const camera = '<nve-scene-camera behavior="top" altitude="8" frustum-height="8"></nve-scene-camera>';
     const body =
-      '<nve-scene-body id="attached" frame="tip"><nve-scene-shape kind="cube" color="#76b900"></nve-scene-shape></nve-scene-body>';
+      '<nve-scene-body id="attached" frame="tip"><nve-scene-shape type="cube" color="#76b900"></nve-scene-shape></nve-scene-body>';
     const fixed =
-      '<nve-scene-body><nve-scene-shape kind="cube" position="[-2,0,0]" color="#ff0000"></nve-scene-shape></nve-scene-body>';
+      '<nve-scene-body><nve-scene-shape type="cube" position="[-2,0,0]" color="#ff0000"></nve-scene-shape></nve-scene-body>';
     const result = await visualRunner.inspect(
       'scene-frame-reference',
       `
