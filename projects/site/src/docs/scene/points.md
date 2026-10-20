@@ -11,12 +11,12 @@
 
 {% install 'nve-scene-points' %}
 
-Point size defaults to CSS pixels so dense point clouds and interface markers remain readable while the camera moves. Set `size-unit="world"` when `size` represents a distance in the scene and should scale with the camera projection.
-
 ## Scatter Plot
 
 {% example 'nve-scene-points' 'ScatterPlot' %}
 
 ## Size Units
+
+{% api 'nve-scene-points' 'property' 'sizeUnit' %}
 
 {% example 'nve-scene-points' 'SizeUnits' %}

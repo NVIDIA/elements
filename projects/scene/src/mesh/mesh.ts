@@ -8,15 +8,20 @@ import { MarkerLayerElement } from '../internal/layers/markers/layer-element.js'
 import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/layers/markers/buffer.js';
 import { MARKER } from '../internal/records/layouts/built-ins.js';
 import {
-  connectMeshLayer,
   captureMeshTexture,
-  disconnectMeshLayer,
   publishMeshGeometry,
   registerMeshLayer,
   setMeshColor,
   setMeshGeometryProperty,
-  replaceMeshGeometry
+  replaceMeshGeometry,
+  hasMeshTexture
 } from '../internal/layers/mesh/layer-state.js';
+import { MeshAssetLoader } from '../internal/layers/mesh/asset-loader.js';
+import { notifyOwningBodyPart } from '../internal/layers/body/part-notifications.js';
+import { isSceneBodyPart } from '../internal/layers/registry.js';
+import { MESH_PROPERTY_INACTIVE } from '../internal/diagnostics/errors.js';
+import { diagnosticReporterService } from '../internal/diagnostics/reporter.service.js';
+import type { Quaternion, Vec3 } from '../internal/math/types.js';
 import type { SceneTextureCaptureResult } from '../internal/layers/mesh/layer-state.js';
 import {
   getElementFeatureId,
@@ -58,7 +63,11 @@ export type MeshInstanceSource = MarkerSource;
 
 /**
  * @element nve-scene-mesh
- * @description Raw triangle mesh with optional source-backed instancing.
+ * @description Triangle mesh from assigned arrays or a geometry file, either as its own layer or as part of a body.
+ * Standalone, geometry without a source uses one identity placement. Assign a MarkerBuffer for many
+ * placements, or a JSON source attribute for modest static instance sets.
+ * Use for persistent lit, textured, or instanced assets; frequently changing overlays that need
+ * range-proportional updates or per-triangle picking belong in nve-scene-triangles.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/mesh
  * @stable false
@@ -69,6 +78,86 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   static readonly metadata = { tag: 'nve-scene-mesh', version: '0.0.0' };
 
   #geometry: SceneMeshGeometry | null = null;
+  readonly #loader = new MeshAssetLoader(this, geometry => this.#applyGeometry(geometry));
+
+  /**
+   * Reflected geometry file URL, loaded while connected. Its case-insensitive path extension
+   * selects a lazy decoder, ignoring query and fragment; the original fragment passes unchanged
+   * for sub-asset selection. The file must decode to one untransformed mesh, as STL does. Failures
+   * reject loadComplete and report mesh-src. Assigning geometry clears src.
+   */
+  @property({
+    type: String,
+    reflect: true,
+    converter: { fromAttribute: (value: string | null) => value ?? '', toAttribute: (value: string) => value || null }
+  })
+  get src(): string {
+    return this.#loader.src;
+  }
+
+  set src(value: string) {
+    this.#loader.src = value;
+  }
+
+  /**
+   * Current file request, resolving after decoding and geometry capture, before GPU presentation.
+   * Changing src, assigning geometry, or disconnecting cancels pending work with AbortError;
+   * only the newest request can apply. An unfinished request restarts on reconnect.
+   */
+  get loadComplete(): Promise<void> {
+    return this.#loader.loadComplete;
+  }
+
+  /** Body-local translation in x y z order. Applies only to direct nve-scene-body children. */
+  @property({ type: Array, noAccessor: true })
+  get position(): Vec3 {
+    return this.#position;
+  }
+
+  set position(value: Vec3 | null) {
+    this.#setPartProperty({
+      name: 'position',
+      previous: this.#position,
+      value: value ?? [0, 0, 0],
+      assign: next => (this.#position = next)
+    });
+  }
+
+  #position: Vec3 = [0, 0, 0];
+
+  /** Body-local x y z w quaternion; null uses identity. Applies only to direct nve-scene-body children. */
+  @property({ type: Array, noAccessor: true })
+  get orientation(): Quaternion | null {
+    return this.#orientation;
+  }
+
+  set orientation(value: Quaternion | null) {
+    this.#setPartProperty({
+      name: 'orientation',
+      previous: this.#orientation,
+      value: value ?? null,
+      assign: next => (this.#orientation = next)
+    });
+  }
+
+  #orientation: Quaternion | null = null;
+
+  /** Nonzero body-local scale in x y z order. Applies only to direct nve-scene-body children. */
+  @property({ type: Array, noAccessor: true })
+  get scale(): Vec3 {
+    return this.#scale;
+  }
+
+  set scale(value: Vec3 | null) {
+    this.#setPartProperty({
+      name: 'scale',
+      previous: this.#scale,
+      value: value ?? [1, 1, 1],
+      assign: next => (this.#scale = next)
+    });
+  }
+
+  #scale: Vec3 = [1, 1, 1];
 
   /** Stable application identity returned when picking the uninstanced mesh. */
   @property({ attribute: 'feature-id', converter: sceneFeatureIdConverter })
@@ -80,27 +169,56 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
     setElementFeatureId(this, value);
   }
 
-  /** Captures and replaces the complete geometry, or clears it when null. */
+  /**
+   * Captures a complete geometry snapshot. Omitted arrays clear prior fields; null clears
+   * all geometry. Assigning clears src; loaded files show here. Reassign even unchanged
+   * arrays to publish edits, or use publishGeometry(). Producer mutations stay invisible across
+   * recovery. Invalid input reports mesh-geometry and makes this mesh inert until a valid
+   * assignment. Materials and instances stay unchanged.
+   */
   @property({ attribute: false })
   get geometry(): SceneMeshGeometry | null {
     return this.#geometry;
   }
 
   set geometry(value: SceneMeshGeometry | null) {
-    const previous = this.#geometry;
-    const replacement =
-      value === null ? { colors: null, indices: null, normals: null, positions: null, uvs: null } : value;
-    replaceMeshGeometry(this, replacement);
-    this.#storeProducerGeometry(value);
-    this.requestUpdate('geometry', previous);
+    this.#applyGeometry(value);
+    this.#loader.geometryAssigned();
   }
 
-  /** Captures an independently owned texture source; the newest request wins. */
+  /**
+   * Captures an independently owned texture recovery source; the newest request wins.
+   * Keep the input open until the promise settles. An applied result means the capture
+   * succeeded and the caller can close its bitmap; Scene never closes caller inputs.
+   * Replacing or clearing closes only Scene's owned captures. A superseded request resolves
+   * with superseded. A current failure resolves with failed, reports mesh-texture-capture,
+   * and makes the mesh inert; a valid replacement or explicit clear recovers it.
+   *
+   * setTexture(null) clears the rendering texture and releases the owned capture. Capture
+   * needs no connected scene or GPU device. Successful CPU snapshots survive disconnect
+   * and device recovery, where Scene rebuilds GPU resources from the capture.
+   * Clearing geometry UVs preserves the capture but ignores it with a warning until valid
+   * UVs return. Materials, textures, and instance data are independent of geometry replacement.
+   */
   setTexture(source: ImageBitmap | null): Promise<SceneTextureCaptureResult> {
-    return captureMeshTexture(this, source);
+    return captureMeshTexture(this, source).then(result => {
+      this.#updateInactiveDiagnostic();
+      return result;
+    });
   }
 
-  /** Captures a producer-array range without replacing geometry capacity. */
+  /**
+   * Captures a producer-array range for one geometry attribute without replacing capacity.
+   * start and count select vertices for positions, normals, colors, and UV coordinates;
+   * indices uses scalar indices. Omit source to read the current producer array, or supply
+   * a replacement. Mutations outside the range remain invisible, including after recovery.
+   * Consecutive publications before a frame preserve all changed ranges. Invalid ranges
+   * or values throw without changing the last valid snapshot.
+   *
+   * Changing indices updates topology. Position changes refresh generated normals when
+   * normals are absent. Indexed flat geometry may need a full derived-attribute upload
+   * even for a partial publication. The inherited publish() affects instance records only.
+   */
   publishGeometry(options: SceneMeshGeometryPublishOptions): void {
     if (typeof options !== 'object' || options === null || !isMeshGeometryAttribute(options.attribute)) {
       throw new TypeError('Mesh geometry publication requires a supported attribute.');
@@ -109,6 +227,7 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
     if (options.source !== undefined && options.start === undefined && options.count === undefined) {
       setMeshGeometryProperty(this, options.attribute, source);
       this.#setProducerGeometry(options.attribute, source);
+      notifyOwningBodyPart(this);
       return;
     }
     publishMeshGeometry(this, {
@@ -118,6 +237,7 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
       start: options.start
     });
     if (options.source !== undefined) this.#setProducerGeometry(options.attribute, source);
+    notifyOwningBodyPart(this);
   }
 
   /** CSS base-color factor multiplied with mesh colors and texture samples. */
@@ -127,6 +247,54 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   #uvs: Float32Array | null = null;
   #colors: Float32Array | null = null;
   #indices: Uint32Array | null = null;
+
+  #applyGeometry(value: SceneMeshGeometry | null): void {
+    const previous = this.#geometry;
+    const replacement =
+      value === null ? { colors: null, indices: null, normals: null, positions: null, uvs: null } : value;
+    replaceMeshGeometry(this, replacement);
+    this.#storeProducerGeometry(value);
+    this.requestUpdate('geometry', previous);
+  }
+
+  #setPartProperty<T extends Vec3 | Quaternion | null>(options: {
+    readonly assign: (value: T) => void;
+    readonly name: 'position' | 'orientation' | 'scale';
+    readonly previous: T;
+    readonly value: T;
+  }): void {
+    const { assign, name, previous, value } = options;
+    if (
+      value === previous ||
+      (Array.isArray(value) &&
+        Array.isArray(previous) &&
+        value.length === previous.length &&
+        value.every((entry, i) => entry === previous[i]))
+    )
+      return;
+    assign(value);
+    this.requestUpdate(name, previous);
+  }
+
+  #updateInactiveDiagnostic(): void {
+    const part = isSceneBodyPart(this);
+    const active = part
+      ? this.source !== null ||
+        this.frame !== null ||
+        this.featureId !== undefined ||
+        this.interactive ||
+        hasMeshTexture(this)
+      : !isIdentityTransform(this.#position, this.#orientation, this.#scale);
+    diagnosticReporterService.update({
+      active,
+      code: MESH_PROPERTY_INACTIVE,
+      element: this,
+      message: part
+        ? 'Body meshes ignore source, frame, feature-id, interactive, and textures; the body owns them.'
+        : 'Mesh position, orientation, and scale apply only to direct nve-scene-body children.',
+      severity: 'warning'
+    });
+  }
 
   #getProducerGeometry(attribute: SceneMeshGeometryAttribute): Float32Array | Uint32Array | null {
     if (attribute === 'positions') return this.#positions;
@@ -188,17 +356,43 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   }
   protected override updated(changed: PropertyValues<this>): void {
     if (changed.has('color')) setMeshColor(this, this.color);
+    if (
+      changed.has('color') ||
+      changed.has('geometry') ||
+      changed.has('position') ||
+      changed.has('orientation') ||
+      changed.has('scale')
+    )
+      notifyOwningBodyPart(this);
+    this.#updateInactiveDiagnostic();
   }
   override connectedCallback(): void {
     super.connectedCallback();
-    connectMeshLayer(this);
+    this.#loader.connect();
+    this.#updateInactiveDiagnostic();
   }
   override disconnectedCallback(): void {
-    disconnectMeshLayer(this);
+    this.#loader.disconnect();
     super.disconnectedCallback();
   }
 }
 
 function isMeshGeometryAttribute(value: unknown): value is SceneMeshGeometryAttribute {
   return ['positions', 'normals', 'uvs', 'colors', 'indices'].includes(String(value));
+}
+
+function isIdentityTransform(
+  position: Readonly<Vec3>,
+  orientation: Readonly<Quaternion> | null,
+  scale: Readonly<Vec3>
+): boolean {
+  const rotation = orientation ?? [0, 0, 0, 1];
+  return (
+    position.every(value => value === 0) &&
+    rotation[0] === 0 &&
+    rotation[1] === 0 &&
+    rotation[2] === 0 &&
+    rotation[3] === 1 &&
+    scale.every(value => value === 1)
+  );
 }

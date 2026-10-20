@@ -122,6 +122,17 @@ describe(MeshAssembly.name, () => {
     expect(result.indices).toEqual(new Uint32Array([2, 2, 2, 3, 5, 4]));
   });
 
+  it('keeps transformed normals perpendicular to tangents when the matrix needs pivoting', () => {
+    const matrix = identityPreciseMat4();
+    matrix.set([1e-15, 1, 0, 0, 1, 1, 0, 0]);
+    const result = new MeshAssembly([
+      trianglePart({ matrix, normals: { values: [1, 0, 0], offset: 0, stride: 0 } })
+    ]).assemble();
+    expect(result.normals[0]).toBeCloseTo(-Math.SQRT1_2, 6);
+    expect(result.normals[1]).toBeCloseTo(Math.SQRT1_2, 6);
+    expect(result.normals[0]! + result.normals[1]!).toBeCloseTo(0, 6);
+  });
+
   it('uses the existing positive-Z fallback for zero normals', () => {
     const result = new MeshAssembly([
       trianglePart({ normals: { values: [0, 0, 0], offset: 0, stride: 0 } })

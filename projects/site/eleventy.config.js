@@ -112,7 +112,7 @@ export default function (eleventyConfig) {
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.{ts,css}');
   eleventyConfig.addPassthroughCopy({
-    '../scene/demos/robot-playback': 'public/static/scene/robot-playback'
+    '../scene/demos/so-100': 'public/static/scene/so-100'
   });
 
   // Expose locally built bundles so iframe previews can load them on localhost

@@ -20,6 +20,7 @@ import { createUploadedBuffer } from '../gpu/uploaded-buffer.js';
 import { createPerspectiveMatrix } from '../math/projection.js';
 import { identityMat4, multiplyMat4Into, multiplyPreciseMat4, writeMat4ToFloat32 } from '../math/mat4.js';
 import { POLYLINE_JOIN_VERTEX_COUNT } from '../math/polyline.js';
+import { LINE_TOPOLOGY_CODE } from '../algorithms/line-topology.js';
 import type { MeshRenderer, MeshRendererDevice } from '../layers/mesh/renderer.js';
 import type { MarkerGeometry, MarkerPipelines } from '../layers/markers/pipelines.js';
 import { MarkerBoundsClassifier } from '../layers/markers/bounds.js';
@@ -29,6 +30,7 @@ import {
   MarkerCompactor,
   markerCompactionIsEligible,
   supportsMarkerCompaction,
+  writeMarkerCompactionUniforms,
   type MarkerCompactionResources
 } from '../layers/markers/compaction.js';
 import { PICK_UNIFORM_OFFSETS } from './picking/uniform-offsets.js';
@@ -47,7 +49,6 @@ import {
   isPickableItem,
   isTransparentItem,
   markerOutlinePassIsVisible,
-  topologyUniform,
   type LineRenderItem,
   type MarkerRenderItem,
   type PointRenderItem,
@@ -326,8 +327,10 @@ export class GeometryRenderer {
       uniforms.fill(0);
       writeMat4ToFloat32(uniforms, multiplyMat4Into(frame.projection, item.frameMatrix, this.#matrixScratch));
       uniforms.set(identityMat4(), 16);
-      if (isMarkerRenderItem(item)) uniforms[32] = partition.recordCount;
-      else if (!isMeshRenderItem(item) && !isLabelRenderItem(item)) {
+      if (isMarkerRenderItem(item)) {
+        uniforms[32] = partition.recordCount;
+        writeMarkerCompactionUniforms(uniforms, item.data.kind);
+      } else if (!isMeshRenderItem(item) && !isLabelRenderItem(item)) {
         this.#writeStreamUniforms(uniforms, item, frame.pixelRatio);
         writeInstancePartitionUniforms(uniforms, {
           item,
@@ -353,7 +356,7 @@ export class GeometryRenderer {
     uniforms[34] = canvas?.height ?? 1;
     uniforms[35] = getStreamSize(item);
     uniforms[36] = item.data.count;
-    uniforms[37] = item.type === 'line' ? topologyUniform(item.topology) : 0;
+    uniforms[37] = item.type === 'line' ? LINE_TOPOLOGY_CODE[item.topology] : 0;
     uniforms[38] =
       (item.type === 'point' && item.sizeUnit === 'world') || (item.type === 'line' && item.widthUnit === 'world')
         ? 1

@@ -21,8 +21,6 @@
 
 ## Volumes and Outlines
 
-Use `outlineColor` independently from `color` to preserve box boundaries through overlapping translucent faces. JSON source records and `CubeBuffer` records expose the same field.
-
 {% example 'nve-scene-cubes' 'Volumes' %}
 
 ## Performance

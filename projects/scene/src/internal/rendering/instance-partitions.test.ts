@@ -13,6 +13,36 @@ import {
 } from './instance-partitions.js';
 
 describe('instance partition planning', () => {
+  it.each([2, 4, 6, 64])(
+    'keeps %i independent segment records and identities intact across varied capacities',
+    count => {
+      const gpu = createGpu();
+      for (let capacity = 2; capacity <= 12; capacity += 1) {
+        const item = createLineItem(count, 'segments');
+        const device = {
+          ...gpu.device,
+          limits: { maxStorageBufferBindingSize: capacity * LINE_VERTEX.stride, maxBufferSize: 4096 }
+        };
+        const allocation = getInstanceAllocation(item, device);
+        const edges: number[][] = [];
+        for (const [index, partition] of allocation.partitions!.entries()) {
+          const draw = allocation.linePartitions![index]!;
+          expect(partition.recordCount % 2).toBe(0);
+          expect(partition.recordCount).toBeLessThanOrEqual(capacity);
+          expect(draw.joinCount).toBe(0);
+          expect(draw.segmentStart).toBe(0);
+          for (let local = 0; local < draw.segmentCount; local += 1) {
+            const identity = draw.segmentBase + local;
+            const first = partition.firstRecord + local * 2;
+            expect(first).toBe(identity * 2);
+            edges.push([first, first + 1]);
+          }
+        }
+        expect(edges).toEqual(Array.from({ length: count / 2 }, (_, index) => [index * 2, index * 2 + 1]));
+      }
+    }
+  );
+
   it.each(['strip', 'loop'] as const)(
     'preserves %s segment identities and join neighbors across varied capacities',
     topology => {

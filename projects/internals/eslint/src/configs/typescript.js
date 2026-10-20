@@ -3,6 +3,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
+import maxJsdocLength from '../local/max-jsdoc-length.js';
 import deadCode from '../local/dead-code.js';
 import noDeepClassInheritance from '../local/no-deep-class-inheritance.js';
 import noInternalExternalImports from '../local/no-internal-external-imports.js';
@@ -53,6 +54,7 @@ const config = {
     jsdoc,
     'local-typescript': {
       rules: {
+        'max-jsdoc-length': maxJsdocLength,
         'no-dead-code': deadCode,
         'no-deep-class-inheritance': noDeepClassInheritance,
         'no-internal-external-imports': noInternalExternalImports,
@@ -113,6 +115,8 @@ const config = {
     'jsdoc/valid-types': 'error',
     'jsdoc/check-tag-names': 'error',
     'jsdoc/informative-docs': 'error',
+    // Warn while existing long member descriptions migrate to concise API contracts.
+    'local-typescript/max-jsdoc-length': ['warn', { maxLength: 400 }],
     'local-typescript/no-dead-code': ['warn'], // todo, this should be migrated to the internal playground template config
     'local-typescript/no-deep-class-inheritance': [
       'error',

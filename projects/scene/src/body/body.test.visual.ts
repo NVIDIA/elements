@@ -205,15 +205,15 @@ function template(): string {
 
       define(Scene); define(SceneCamera); define(SceneMesh); define(SceneShape); define(SceneBody);
       const shapes = () => [
-        { kind: 'cube', position: [0, 0, 0], scale: [2.8, 1.5, 0.5], color: [242 / 255, 158 / 255, 20 / 255, 1] },
-        { kind: 'pyramid', position: [-0.75, -0.15, 0.7], scale: [0.7, 0.7, 0.55], color: [75 / 255, 86 / 255, 104 / 255, 1] },
-        { kind: 'cylinder', position: [0, 0, 0.72], scale: [0.24, 0.24, 1.15], color: [89 / 255, 217 / 255, 115 / 255, 1] },
-        { kind: 'cone', position: [0, 0, 1.7], scale: [0.55, 0.55, 0.55], color: [242 / 255, 89 / 255, 26 / 255, 1] },
-        { kind: 'sphere', position: [0, 0.3, 1.85], scale: [0.27, 0.27, 0.27], color: [89 / 255, 191 / 255, 1, 1] },
-        { kind: 'cylinder', position: [-1.15, -1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] },
-        { kind: 'cylinder', position: [1.15, -1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] },
-        { kind: 'cylinder', position: [-1.15, 1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] },
-        { kind: 'cylinder', position: [1.15, 1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] }
+        { type: 'cube', position: [0, 0, 0], scale: [2.8, 1.5, 0.5], color: [242 / 255, 158 / 255, 20 / 255, 1] },
+        { type: 'pyramid', position: [-0.75, -0.15, 0.7], scale: [0.7, 0.7, 0.55], color: [75 / 255, 86 / 255, 104 / 255, 1] },
+        { type: 'cylinder', position: [0, 0, 0.72], scale: [0.24, 0.24, 1.15], color: [89 / 255, 217 / 255, 115 / 255, 1] },
+        { type: 'cone', position: [0, 0, 1.7], scale: [0.55, 0.55, 0.55], color: [242 / 255, 89 / 255, 26 / 255, 1] },
+        { type: 'sphere', position: [0, 0.3, 1.85], scale: [0.27, 0.27, 0.27], color: [89 / 255, 191 / 255, 1, 1] },
+        { type: 'cylinder', position: [-1.15, -1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] },
+        { type: 'cylinder', position: [1.15, -1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] },
+        { type: 'cylinder', position: [-1.15, 1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] },
+        { type: 'cylinder', position: [1.15, 1.2, 0], orientation: [0.70710678, 0, 0, 0.70710678], scale: [0.55, 0.55, 0.32], color: [230 / 255, 230 / 255, 230 / 255, 1] }
       ];
       const compiled = compileShapes(shapes());
       const mesh = document.querySelector('#mesh');
@@ -237,11 +237,11 @@ function template(): string {
 
 function shapesHtml(): string {
   return /* html */ `
-    <nve-scene-shape id="chassis" kind="cube" position="[0,0,0]" scale="[2.8,1.5,0.5]" color="#f29e14"></nve-scene-shape>
-    <nve-scene-shape kind="pyramid" position="[-0.75,-0.15,0.7]" scale="[0.7,0.7,0.55]" color="#4b5668"></nve-scene-shape>
-    <nve-scene-shape kind="cylinder" position="[0,0,0.72]" scale="[0.24,0.24,1.15]" color="#59d973"></nve-scene-shape>
-    <nve-scene-shape kind="cone" position="[0,0,1.7]" scale="[0.55,0.55,0.55]" color="#f2591a"></nve-scene-shape>
-    <nve-scene-shape kind="sphere" position="[0,0.3,1.85]" scale="[0.27,0.27,0.27]" color="#59bfff"></nve-scene-shape>
+    <nve-scene-shape id="chassis" type="cube" position="[0,0,0]" scale="[2.8,1.5,0.5]" color="#f29e14"></nve-scene-shape>
+    <nve-scene-shape type="pyramid" position="[-0.75,-0.15,0.7]" scale="[0.7,0.7,0.55]" color="#4b5668"></nve-scene-shape>
+    <nve-scene-shape type="cylinder" position="[0,0,0.72]" scale="[0.24,0.24,1.15]" color="#59d973"></nve-scene-shape>
+    <nve-scene-shape type="cone" position="[0,0,1.7]" scale="[0.55,0.55,0.55]" color="#f2591a"></nve-scene-shape>
+    <nve-scene-shape type="sphere" position="[0,0.3,1.85]" scale="[0.27,0.27,0.27]" color="#59bfff"></nve-scene-shape>
     ${wheelHtml('-1.15', '-1.2')}
     ${wheelHtml('1.15', '-1.2')}
     ${wheelHtml('-1.15', '1.2')}
@@ -250,5 +250,5 @@ function shapesHtml(): string {
 }
 
 function wheelHtml(x: string, y: string): string {
-  return `<nve-scene-shape kind="cylinder" position="[${x},${y},0]" orientation="[0.70710678,0,0,0.70710678]" scale="[0.55,0.55,0.32]" color="#e6e6e6"></nve-scene-shape>`;
+  return `<nve-scene-shape type="cylinder" position="[${x},${y},0]" orientation="[0.70710678,0,0,0.70710678]" scale="[0.55,0.55,0.32]" color="#e6e6e6"></nve-scene-shape>`;
 }

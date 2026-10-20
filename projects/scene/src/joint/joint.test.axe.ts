@@ -21,7 +21,14 @@ describe(SceneJoint.metadata.tag, () => {
     fallback.slot = 'fallback';
     fallback.textContent = 'The 3D scene is unavailable.';
     const frame = document.createElement(SceneJoint.metadata.tag) as SceneJoint;
-    frame.name = 'base-link';
+    frame.name = 'mount';
+    frame.parent = 'base';
+    frame.child = 'sensor';
+    const base = document.createElement('nve-scene-body');
+    base.name = 'base';
+    const sensor = document.createElement('nve-scene-body');
+    sensor.name = 'sensor';
+    scene.append(base, sensor);
     scene.append(fallback, frame);
     await Promise.all([elementIsStable(scene), elementIsStable(frame)]);
   });

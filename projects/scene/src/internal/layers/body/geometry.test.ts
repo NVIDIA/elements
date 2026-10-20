@@ -5,7 +5,6 @@ import { describe, expect, it } from 'vitest';
 import { compileBodyGeometry } from './geometry.js';
 import { compileShapes } from './compile.js';
 import type { SceneBodyGeometry, SceneBodyGroupNode, SceneBodyNode } from './types.js';
-import { identityMat4 } from '../../math/mat4.js';
 import { MAX_GEOMETRY_BYTES } from './limits.js';
 
 const triangle = () => ({ positions: new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]) });
@@ -13,9 +12,9 @@ const triangle = () => ({ positions: new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0
 describe('body geometry capture', () => {
   it('preserves the existing primitive batching result', () => {
     const nodes: SceneBodyGeometry = [
-      { kind: 'cone', color: '#4080c0', position: [1, 2, 3], scale: [2, 3, 4], orientation: [0, 0, 1, 0] }
+      { type: 'cone', color: '#4080c0', position: [1, 2, 3], scale: [2, 3, 4], orientation: [0, 0, 1, 0] }
     ];
-    expect(compileBodyGeometry(nodes)).toEqual(compileShapes(nodes.flatMap(node => (node.kind ? [node] : []))));
+    expect(compileBodyGeometry(nodes)).toEqual(compileShapes(nodes.flatMap(node => (node.type ? [node] : []))));
   });
 
   it('composes nested transforms and allows repeated names', () => {
@@ -32,16 +31,14 @@ describe('body geometry capture', () => {
     expect(compiled.normals).toEqual(new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1]));
   });
 
-  it('captures affine matrices and reverses triangle winding for mirrored transforms', () => {
-    const matrix = identityMat4();
-    matrix[0] = -2;
-    matrix[4] = 1;
+  it('captures transforms and reverses triangle winding for mirrored scale', () => {
+    const scale: [number, number, number] = [-2, 1, 1];
     const source = triangle();
-    const nodes: SceneBodyGeometry = [{ matrix, geometry: source }];
+    const nodes: SceneBodyGeometry = [{ scale, geometry: source }];
     const compiled = compileBodyGeometry(nodes);
-    expect(compiled.positions).toEqual(new Float32Array([0, 0, 0, -2, 0, 0, 1, 1, 0]));
+    expect(compiled.positions).toEqual(new Float32Array([0, 0, 0, -2, 0, 0, 0, 1, 0]));
     expect(compiled.indices).toEqual(new Uint32Array([0, 2, 1]));
-    matrix[0] = 2;
+    scale[0] = 2;
     source.positions[3] = 4;
     expect(compiled.positions[3]).toBe(-2);
     expect(compileBodyGeometry(nodes).positions[3]).toBe(8);
@@ -71,19 +68,6 @@ describe('body geometry capture', () => {
     expect(source.positions).toEqual(original);
   });
 
-  it('keeps supplied normals perpendicular to tangents when a matrix needs pivoting', () => {
-    const compiled = compileBodyGeometry([
-      {
-        matrix: new Float32Array([1e-15, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]),
-        geometry: { ...triangle(), normals: new Float32Array([1, 0, 0, 1, 0, 0, 1, 0, 0]) }
-      }
-    ]);
-
-    expect(compiled.normals[0]).toBeCloseTo(-Math.SQRT1_2, 6);
-    expect(compiled.normals[1]).toBeCloseTo(Math.SQRT1_2, 6);
-    expect(compiled.normals[0]! + compiled.normals[1]!).toBeCloseTo(0, 6);
-  });
-
   it('preserves UVs and per-vertex colors and combines a mesh base color', () => {
     const uvs = new Float32Array([0, 0, 1, 0, 0, 1]);
     const compiled = compileBodyGeometry([
@@ -100,7 +84,7 @@ describe('body geometry capture', () => {
     const root: SceneBodyGroupNode = { children };
     children.push(root);
     expect(() => compileBodyGeometry([root])).toThrow(RangeError);
-    expect(() => compileBodyGeometry(new Array<SceneBodyNode>(65_537).fill({ kind: 'cube' }))).toThrow(RangeError);
+    expect(() => compileBodyGeometry(new Array<SceneBodyNode>(65_537).fill({ type: 'cube' }))).toThrow(RangeError);
   });
 
   it('applies each node color independently in linear light while preserving alpha and signed zero', () => {
@@ -122,14 +106,14 @@ describe('body geometry capture', () => {
     expect(() => compileBodyGeometry([{ geometry: { ...triangle(), indices } }])).toThrow('allocation limit');
   });
 
-  it('rejects conflicting input kinds, matrix/TRS combinations, and singular transforms', () => {
-    const conflicting = { kind: 'cube' as const, geometry: triangle() };
+  it('rejects conflicting input kinds and singular transforms', () => {
+    const conflicting = { type: 'cube' as const, geometry: triangle() };
     // @ts-expect-error Conflicting kinds must fail at the type boundary as well as runtime.
     expect(() => compileBodyGeometry([conflicting])).toThrow(TypeError);
-    const conflictingTransform = { matrix: identityMat4(), position: [0, 0, 0] as const, kind: 'cube' as const };
-    // @ts-expect-error Matrix and TRS are mutually exclusive.
-    expect(() => compileBodyGeometry([conflictingTransform])).toThrow(TypeError);
-    expect(() => compileBodyGeometry([{ matrix: new Float32Array(16), geometry: triangle() }])).toThrow(RangeError);
+    // @ts-expect-error Transforms use position, orientation, and scale only.
+    const matrixNode: SceneBodyNode = { matrix: new Float32Array(16), type: 'cube' };
+    expect(matrixNode.type).toBe('cube');
+    expect(() => compileBodyGeometry([{ scale: [0, 1, 1], geometry: triangle() }])).toThrow(RangeError);
     expect(() => compileBodyGeometry([{ geometry: { positions: new Float32Array([NaN, 0, 0]) } }])).toThrow(RangeError);
   });
 });

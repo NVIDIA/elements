@@ -70,8 +70,8 @@ export const Default = {
       <nve-scene-frame position="[5,2.5,0]">
         <nve-scene-labels id="basic-labels"></nve-scene-labels>
         <nve-scene-body>
-          <nve-scene-shape kind="cube" position="[0,0,0.6]" scale="[1.4,0.9,0.5]" color="yellow"></nve-scene-shape>
-          <nve-scene-shape kind="cylinder" position="[0,0,1.3]" scale="[0.2,0.2,0.9]" color="yellow"></nve-scene-shape>
+          <nve-scene-shape type="cube" position="[0,0,0.6]" scale="[1.4,0.9,0.5]" color="yellow"></nve-scene-shape>
+          <nve-scene-shape type="cylinder" position="[0,0,1.3]" scale="[0.2,0.2,0.9]" color="yellow"></nve-scene-shape>
         </nve-scene-body>
       </nve-scene-frame>
 
@@ -335,10 +335,8 @@ export const CoordinateHelpers = {
         if (!ray || Math.abs(ray.direction[2]) < 1e-8) return;
         const distance = -ray.origin[2] / ray.direction[2];
         if (distance < 0) return;
-        frame.setPose({
-          position: ray.origin.map((value, axis) => value + ray.direction[axis] * distance),
-          orientation: [0, 0, 0, 1]
-        });
+        frame.position = ray.origin.map((value, axis) => value + ray.direction[axis] * distance);
+        frame.orientation = [0, 0, 0, 1];
       });
       await scene.ready;
     </script>

@@ -16,6 +16,15 @@ export interface PackedSourcePublication {
   readonly visualChanged: boolean;
 }
 
+/** Validity transitions redraw; rejected candidates and identity-only edits do not change accepted geometry. */
+export function packedPublicationNeedsRender(
+  publication: PackedSourcePublication,
+  state: { readonly publicationError: boolean },
+  previousPublicationError: boolean
+): boolean {
+  return previousPublicationError !== state.publicationError || (!state.publicationError && publication.visualChanged);
+}
+
 /** Resolves one packed source generation without committing layer-specific state. */
 export function resolvePackedSourcePublication(options: {
   readonly currentActiveCount: number;

@@ -13,16 +13,16 @@ describe('prepared record sources', () => {
   it('should validate a versioned marker source once across fan-out targets', () => {
     const source = new MarkerBuffer({ capacity: 2 });
     source.set(0, { position: [1, 2, 3] }).set(1, { position: [4, 5, 6] });
-    const first = new MarkerInstanceBuffer();
-    const second = new MarkerInstanceBuffer();
+    const first = new MarkerInstanceBuffer('cube');
+    const second = new MarkerInstanceBuffer('cube');
 
     replacePreparedMarkerSource(first, source);
     replacePreparedMarkerSource(second, source);
     expect(second.getUploadBytes()).toBe(first.getUploadBytes());
 
     source.at(0).position.x = 7;
-    const updatedOwner = new MarkerInstanceBuffer();
-    const updatedSibling = new MarkerInstanceBuffer();
+    const updatedOwner = new MarkerInstanceBuffer('cube');
+    const updatedSibling = new MarkerInstanceBuffer('cube');
     replacePreparedMarkerSource(updatedOwner, source);
     replacePreparedMarkerSource(updatedSibling, source);
     expect(updatedSibling.getUploadBytes()).toBe(updatedOwner.getUploadBytes());
@@ -33,8 +33,8 @@ describe('prepared record sources', () => {
   it('should detach shared marker bytes on commit', () => {
     const source = new MarkerBuffer({ capacity: 1 });
     source.set(0, { position: [1, 0, 0] });
-    const owner = new MarkerInstanceBuffer();
-    const sibling = new MarkerInstanceBuffer();
+    const owner = new MarkerInstanceBuffer('cube');
+    const sibling = new MarkerInstanceBuffer('cube');
     replacePreparedMarkerSource(owner, source);
     replacePreparedMarkerSource(sibling, source);
     const sharedBytes = owner.getUploadBytes();
@@ -51,16 +51,17 @@ describe('prepared record sources', () => {
     expect(new DataView(sibling.getUploadBytes()?.buffer ?? new ArrayBuffer()).getFloat32(0, true)).toBe(1);
     expect(owner.hasPartialFaceAlpha(1)).toBe(true);
     expect(sibling.hasPartialFaceAlpha(1)).toBe(false);
-    expect(owner.getBounds(1)).toMatchObject({ maximumX: 10, minimumX: 8 });
-    expect(sibling.getBounds(1)).toMatchObject({ maximumX: 2, minimumX: 0 });
+    const radius = Math.sqrt(3) / 2;
+    expect(owner.getBounds(1)).toMatchObject({ maximumX: 9 + radius, minimumX: 9 - radius });
+    expect(sibling.getBounds(1)).toMatchObject({ maximumX: 1 + radius, minimumX: 1 - radius });
     expect(owner.takeUploadRanges()).toEqual([{ offset: 0, size: 48 }]);
   });
 
   it('should detach shared marker bytes on replacement', () => {
     const source = new MarkerBuffer({ capacity: 1 });
     source.set(0, { position: [1, 0, 0] });
-    const first = new MarkerInstanceBuffer();
-    const second = new MarkerInstanceBuffer();
+    const first = new MarkerInstanceBuffer('cube');
+    const second = new MarkerInstanceBuffer('cube');
     replacePreparedMarkerSource(first, source);
     replacePreparedMarkerSource(second, source);
     const sharedBytes = second.getUploadBytes();
@@ -78,7 +79,7 @@ describe('prepared record sources', () => {
     const source = new MarkerBuffer({ capacity: 1 });
     const bytes = source.mutableBytes;
     new DataView(bytes.buffer).setFloat32(0, 3, true);
-    const uncached = [new MarkerInstanceBuffer(), new MarkerInstanceBuffer()];
+    const uncached = [new MarkerInstanceBuffer('cube'), new MarkerInstanceBuffer('cube')];
     uncached.forEach(target => replacePreparedMarkerSource(target, source));
     expect(uncached[0]?.getUploadBytes()).not.toBe(uncached[1]?.getUploadBytes());
   });
