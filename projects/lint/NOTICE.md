@@ -11,7 +11,7 @@ This project includes the following bundled third-party software:
 - @eslint/js v10.0.1 [MIT]
   Copyright: Unknown
 
-- @eslint/json v2.1.0 [Apache-2.0]
+- @eslint/json v2.1.1 [Apache-2.0]
   Copyright: Nicholas C. Zakas
 
 - @html-eslint/eslint-plugin v0.66.1 [MIT]
@@ -30,7 +30,7 @@ Apache-2.0
 The following bundled components are provided under the Apache-2.0 license:
 
 @eslint/css v2.0.0 - Copyright Nicholas C. Zakas
-@eslint/json v2.1.0 - Copyright Nicholas C. Zakas
+@eslint/json v2.1.1 - Copyright Nicholas C. Zakas
 
                                  Apache License
                            Version 2.0, January 2004
