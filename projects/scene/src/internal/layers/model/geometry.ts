@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SceneModelGeometry, SceneModelNode, SceneModelPrimitiveNode } from './types.js';
+import type { SceneModelGeometry, SceneModelMeshNode, SceneModelNode, SceneModelPrimitiveNode } from './types.js';
 import type { SceneMeshGeometry } from '../mesh/types.js';
 import { composePreciseMat4, identityPreciseMat4, invertPreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
 import { validateMeshGeometry } from '../mesh/geometry.js';
 import { processMeshGeometry } from '../mesh/processing.js';
 import { resolveSceneColor } from '../../color/color.js';
 import type { Matrix4 } from '../../math/types.js';
-import { PreparedAffineGeometryTransform } from '../../math/affine-transform.js';
+import { MeshAssembly, type MeshAssemblyPart } from '../../math/mesh-assembly.js';
 import type { RGBA } from '../../color/types.js';
 import { PreparedRGBAModulation } from '../../color/modulation.js';
 import { compileParts, normalizeModelPart } from './compile.js';
@@ -46,10 +46,8 @@ function collectPieces(roots: SceneModelGeometry): Piece[] {
   const ancestors = new Set<SceneModelNode>();
   let nodeCount = 0;
   let bytes = 0;
-  // eslint-disable-next-line complexity, max-statements -- Bounded traversal checks cycles, transforms, and allocation before capture.
   function visit(nodes: SceneModelGeometry, parent: Matrix4, depth: number): void {
-    if (!Array.isArray(nodes)) throw new TypeError('Model children must be an array.');
-    if (depth > 128) throw new RangeError('Model hierarchy is too deep.');
+    validateHierarchyLevel(nodes, depth);
     for (const node of nodes) {
       if (!isNode(node)) throw new TypeError('Model nodes must be objects.');
       if (++nodeCount > 65_536 || ancestors.has(node))
@@ -61,22 +59,30 @@ function collectPieces(roots: SceneModelGeometry): Piece[] {
         visit(node.children, matrix, depth + 1);
         ancestors.delete(node);
       } else {
-        const source: SceneMeshGeometry = node.geometry ?? compileParts([{ shape: node.shape }]);
-        bytes += compiledByteLength(source);
-        if (bytes > MAX_MODEL_BYTES) throw new RangeError('Model geometry exceeds the compiled allocation limit.');
-        validateMeshGeometry({
-          ...source,
-          normals: source.normals ?? null,
-          colors: source.colors ?? null,
-          indices: source.indices ?? null,
-          uvs: source.uvs ?? null
-        });
-        pieces.push({ geometry: source, matrix, color: resolveSceneColor(node.color ?? '#ffffff') });
+        capturePiece(node, matrix);
       }
     }
   }
+  function capturePiece(node: SceneModelPrimitiveNode | SceneModelMeshNode, matrix: Matrix4): void {
+    const source: SceneMeshGeometry = node.geometry ?? compileParts([{ shape: node.shape }]);
+    bytes += compiledByteLength(source);
+    if (bytes > MAX_MODEL_BYTES) throw new RangeError('Model geometry exceeds the compiled allocation limit.');
+    validateMeshGeometry({
+      ...source,
+      normals: source.normals ?? null,
+      colors: source.colors ?? null,
+      indices: source.indices ?? null,
+      uvs: source.uvs ?? null
+    });
+    pieces.push({ geometry: source, matrix, color: resolveSceneColor(node.color ?? DEFAULT_COLOR) });
+  }
   visit(roots, identityPreciseMat4(), 0);
   return pieces;
+}
+
+function validateHierarchyLevel(nodes: SceneModelGeometry, depth: number): void {
+  if (!Array.isArray(nodes)) throw new TypeError('Model children must be an array.');
+  if (depth > 128) throw new RangeError('Model hierarchy is too deep.');
 }
 
 function validateNode(node: SceneModelNode): void {
@@ -128,84 +134,31 @@ function compiledByteLength(source: SceneMeshGeometry): number {
   return vertices * 12 * Float32Array.BYTES_PER_ELEMENT + indices * Uint32Array.BYTES_PER_ELEMENT;
 }
 
-// eslint-disable-next-line max-lines-per-function, max-statements -- One allocation and ordered copies preserve batching across static graph nodes.
 function concatenatePieces(pieces: readonly Piece[]): CompiledModelGeometry {
-  const prepared = pieces.map(piece => ({
-    ...piece,
-    processed: processMeshGeometry({
-      positions: piece.geometry.positions,
-      normals: piece.geometry.normals ?? null,
-      colors: piece.geometry.colors ?? null,
-      indices: piece.geometry.indices ?? null,
-      uvs: piece.geometry.uvs ?? null
-    })!
-  }));
-  const vertexCount = prepared.reduce((count, piece) => count + piece.processed.vertexCount, 0);
-  const indexCount = prepared.reduce(
-    (count, piece) => count + (piece.processed.indices?.length ?? piece.processed.vertexCount),
-    0
-  );
-  const result = {
-    positions: new Float32Array(vertexCount * 3),
-    normals: new Float32Array(vertexCount * 3),
-    colors: new Float32Array(vertexCount * 4),
-    indices: new Uint32Array(indexCount),
-    uvs: new Float32Array(vertexCount * 2)
-  };
-  let vertexOffset = 0;
-  let indexOffset = 0;
-  for (const piece of prepared) {
-    const { processed, matrix, color } = piece;
-    const modulation = new PreparedRGBAModulation(color);
-    const transform = new PreparedAffineGeometryTransform(matrix);
-    for (let vertex = 0; vertex < processed.vertexCount; vertex += 1) {
-      writeVertex(result, {
-        vertex: vertex + vertexOffset,
-        sourceVertex: vertex,
-        source: processed,
-        transform,
-        modulation
-      });
-    }
-    const mirrored = transform.mirrored;
-    const count = processed.indices?.length ?? processed.vertexCount;
-    for (let index = 0; index < count; index += 3) {
-      const triangle = [0, mirrored ? 2 : 1, mirrored ? 1 : 2].map(
-        offset => vertexOffset + (processed.indices?.[index + offset] ?? index + offset)
-      );
-      result.indices.set(triangle, indexOffset + index);
-    }
-    vertexOffset += processed.vertexCount;
-    indexOffset += count;
-  }
-  return result;
-}
-
-function writeVertex(
-  result: Required<CompiledModelGeometry>,
-  options: {
-    vertex: number;
-    sourceVertex: number;
-    source: SceneMeshGeometry;
-    transform: PreparedAffineGeometryTransform;
-    modulation: PreparedRGBAModulation;
-  }
-): void {
-  const { vertex, sourceVertex, source, transform, modulation } = options;
-  const offset = sourceVertex * 3;
-  const targetOffset = vertex * 3;
-  transform.writePosition(source.positions, offset, result.positions, targetOffset);
-  for (let axis = 0; axis < 3; axis += 1) {
-    if (!Number.isFinite(result.positions[targetOffset + axis])) {
+  const assembly = new MeshAssembly(pieces.map(preparePiece), { includeUvs: true });
+  return assembly.assemble({
+    onPositionOverflow: () => {
       throw new RangeError('Model positions must fit the finite Float32 range.');
     }
-  }
-  transform.writeNormal(source.normals!, offset, result.normals, targetOffset);
-  modulation.writeColor(
-    source.colors ?? DEFAULT_COLOR,
-    source.colors ? sourceVertex * 4 : 0,
-    result.colors,
-    vertex * 4
-  );
-  if (source.uvs) result.uvs.set(source.uvs.subarray(sourceVertex * 2, sourceVertex * 2 + 2), vertex * 2);
+  });
+}
+
+function preparePiece(piece: Piece): MeshAssemblyPart {
+  const processed = processMeshGeometry({
+    positions: piece.geometry.positions,
+    normals: piece.geometry.normals ?? null,
+    colors: piece.geometry.colors ?? null,
+    indices: piece.geometry.indices ?? null,
+    uvs: piece.geometry.uvs ?? null
+  })!;
+  return {
+    positions: { values: processed.positions, offset: 0, stride: 3 },
+    normals: { values: processed.normals, offset: 0, stride: 3 },
+    colors: { values: processed.colors ?? DEFAULT_COLOR, offset: 0, stride: processed.colors ? 4 : 0 },
+    uvs: processed.uvs ? { values: processed.uvs, offset: 0, stride: 2 } : undefined,
+    indices: processed.indices,
+    vertexCount: processed.vertexCount,
+    matrix: piece.matrix,
+    modulation: new PreparedRGBAModulation(piece.color)
+  };
 }

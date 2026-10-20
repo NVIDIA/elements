@@ -90,6 +90,14 @@ model.geometry = await decodeModel(bytes, { format: 'stl', signal: controller.si
 
 Both helpers return model nodes and accept an optional abort signal. `decodeModel` accepts an `ArrayBuffer` or an array view and captures the selected bytes before asynchronous decoding. Helpers don't register custom elements or require WebGPU. File and compiled geometry allocations each have a 256 MiB limit; hierarchies also have node and depth limits.
 
+## Buffer Source
+
+{% example 'nve-scene-model' 'BufferSource' %}
+
+## Robot Arm
+
+{% example 'nve-scene-model' 'RobotArm' %}
+
 ## Robot Arm Animated
 
 {% example 'nve-scene-model' 'RobotArmAnimated' %}

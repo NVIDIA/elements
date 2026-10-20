@@ -12,10 +12,7 @@ import {
   clampOrbit,
   copyCameraState,
   copyOrbitCameraState,
-  createCameraViewMatrix,
   createCameraViewProjection,
-  createOrthographicMatrix,
-  createPerspectiveMatrix,
   DEFAULT_CAMERA_STATE,
   DEFAULT_FAR,
   DEFAULT_NEAR,
@@ -24,6 +21,7 @@ import {
   pinchDistance,
   type SceneCameraState
 } from './math.js';
+import { createCameraViewMatrix } from '../../math/projection.js';
 import { transformPointMat4 } from '../../math/mat4.js';
 import type { Quaternion, Vec3 } from '../../math/types.js';
 
@@ -68,30 +66,6 @@ describe('camera math', () => {
     expect(screenRight[1]).toBeCloseTo(0);
     expect(screenDown[0]).toBeCloseTo(0);
     expect(screenDown[1]).toBeCloseTo(-1);
-  });
-
-  it('maps identity optical axes and preserves roll', () => {
-    const identityView = createCameraViewMatrix({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
-    expect(transformPointMat4(identityView, [1, 2, 3])).toEqual([1, -2, -3]);
-
-    const roll = Math.PI / 2;
-    const rolledView = createCameraViewMatrix({
-      position: [0, 0, 0],
-      orientation: [0, 0, Math.sin(roll / 2), Math.cos(roll / 2)]
-    });
-    const worldRight = transformPointMat4(rolledView, [0, 1, 0]);
-    expect(worldRight[0]).toBeCloseTo(1);
-    expect(worldRight[1]).toBeCloseTo(0);
-    expect(worldRight[2]).toBeCloseTo(0);
-  });
-
-  it('uses explicit clipping in perspective and orthographic zero-to-one depth matrices', () => {
-    const perspective = createPerspectiveMatrix(Math.PI / 2, 2, 2, 10);
-    expect(perspective[10]).toBeCloseTo(-1.25);
-    expect(perspective[14]).toBeCloseTo(-2.5);
-    const orthographic = createOrthographicMatrix(4, 2, 2, 10);
-    expect(orthographic[10]).toBeCloseTo(-0.125);
-    expect(orthographic[14]).toBeCloseTo(-0.25);
   });
 
   it('clamps interactive orbit limits and applies fixed input constants', () => {
@@ -178,15 +152,6 @@ describe('camera math', () => {
 
   it('rejects invalid aspects, clipping, and gesture inputs', () => {
     expect(() => createCameraViewProjection(DEFAULT_CAMERA_STATE, 0)).toThrow(RangeError);
-    expect(() => createPerspectiveMatrix(Number.NaN, 1, 0.1, 10)).toThrow(RangeError);
-    expect(() => createPerspectiveMatrix(0, 1, 0.1, 10)).toThrow(RangeError);
-    expect(() => createPerspectiveMatrix(Math.PI, 1, 0.1, 10)).toThrow(RangeError);
-    expect(() => createPerspectiveMatrix(1, 0, 0.1, 10)).toThrow(RangeError);
-    expect(() => createPerspectiveMatrix(1, 1, 0, 10)).toThrow(RangeError);
-    expect(() => createPerspectiveMatrix(1, 1, 10, 10)).toThrow(RangeError);
-    expect(() => createOrthographicMatrix(0, 1, 0.1, 10)).toThrow(RangeError);
-    expect(() => createOrthographicMatrix(1, 0, 0.1, 10)).toThrow(RangeError);
-    expect(() => createOrthographicMatrix(1, 1, 10, 1)).toThrow(RangeError);
     expect(clampOrbit(2, 0, 1)).toBe(1);
     expect(() => clampOrbit(1, 2, 0)).toThrow(RangeError);
     expect(() => applyOrbitDrag(DEFAULT_ORBIT_CAMERA_STATE, { movementX: Number.NaN, movementY: 0 })).toThrow(

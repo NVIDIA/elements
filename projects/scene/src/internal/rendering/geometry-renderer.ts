@@ -17,7 +17,7 @@ import {
   type SharedInstanceBufferLease
 } from '../gpu/shared-instance-buffer.js';
 import { createUploadedBuffer } from '../gpu/uploaded-buffer.js';
-import { createPerspectiveMatrix } from '../composition/camera/math.js';
+import { createPerspectiveMatrix } from '../math/projection.js';
 import { identityMat4, multiplyMat4Into, multiplyPreciseMat4, writeMat4ToFloat32 } from '../math/mat4.js';
 import { POLYLINE_JOIN_VERTEX_COUNT } from '../math/polyline.js';
 import type { MeshRenderer, MeshRendererDevice } from '../layers/mesh/renderer.js';

@@ -68,7 +68,7 @@ describe('model file loading', () => {
     expect(await loadModel('/arm.STL?download=1#part')).toHaveLength(1);
     expect(await loadModel('/download', { format: 'stl' })).toHaveLength(1);
     await expect(loadModel('/download')).rejects.toThrow(TypeError);
-    await expect(loadModel('/arm.glb')).rejects.toThrow(TypeError);
+    await expect(loadModel('/arm.obj')).rejects.toThrow(TypeError);
     expect(fetchModel).toHaveBeenCalledTimes(2);
   });
 

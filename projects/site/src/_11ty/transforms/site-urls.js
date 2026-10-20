@@ -155,7 +155,7 @@ function transformSourceModuleAttribute(node, replacements) {
 
 function transformAttributes(node, replacements) {
   for (const attribute of node.attrs ?? []) {
-    if (URL_ATTRIBUTES.has(attribute.name)) {
+    if (URL_ATTRIBUTES.has(attribute.name) || (node.nodeName === 'nve-scene-model' && attribute.name === 'asset')) {
       collectAttributeReplacement(node, attribute, resolveAttributeUrl(node, attribute), replacements);
     }
   }

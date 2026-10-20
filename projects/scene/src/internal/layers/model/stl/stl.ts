@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import type { SceneModelGeometry } from './types.js';
-import { MAX_MODEL_BYTES, MODEL_TRIANGLE_BYTES } from './limits.js';
-import { writeTriangleNormal } from '../../math/triangle-normal.js';
+import type { SceneModelGeometry } from '../types.js';
+import { MAX_MODEL_BYTES, MODEL_TRIANGLE_BYTES } from '../limits.js';
+import { writeTriangleNormal } from '../../../math/triangle-normal.js';
 
 interface StlGeometry {
   positions: Float32Array;
@@ -54,7 +54,6 @@ async function decodeAscii(bytes: Uint8Array, signal?: AbortSignal): Promise<Stl
   return geometry;
 }
 
-// eslint-disable-next-line max-statements -- The ordered grammar checks delimit each facet before counting or writing it.
 async function readFacets(
   text: string,
   start: number,
@@ -65,26 +64,35 @@ async function readFacets(
   tokens.lastIndex = start;
   const next = () => tokens.exec(text)?.[0];
   let count = 0;
-  while (true) {
-    const token = next();
-    if (token === 'endsolid') {
-      if (!/^[^\r\n]*(?:\r\n|\n|\r)?\s*$/.test(text.slice(tokens.lastIndex)))
-        throw new TypeError('Unexpected data after STL endsolid.');
-      return count;
-    }
-    if (token !== 'facet') throw new TypeError('Expected STL facet or endsolid.');
-    requireToken(next, 'normal');
-    for (let component = 0; component < 3; component += 1) readNumber(next);
-    requireToken(next, 'outer');
-    requireToken(next, 'loop');
-    readVertices(next, count, geometry);
-    requireToken(next, 'endloop');
-    requireToken(next, 'endfacet');
-    if (geometry) writeTriangleNormal(geometry, count * 9, 'division');
+  while (readFacetStart(text, tokens)) {
+    readFacet(next, count, geometry);
     if (++count * MODEL_TRIANGLE_BYTES > MAX_MODEL_BYTES)
       throw new RangeError('STL exceeds the compiled allocation limit.');
     if (count % 4096 === 0) await yieldDecode(signal);
   }
+  return count;
+}
+
+function readFacetStart(text: string, tokens: RegExp): boolean {
+  const token = tokens.exec(text)?.[0];
+  if (token === 'endsolid') {
+    if (!/^[^\r\n]*(?:\r\n|\n|\r)?\s*$/.test(text.slice(tokens.lastIndex)))
+      throw new TypeError('Unexpected data after STL endsolid.');
+    return false;
+  }
+  if (token !== 'facet') throw new TypeError('Expected STL facet or endsolid.');
+  return true;
+}
+
+function readFacet(next: () => string | undefined, triangle: number, geometry?: StlGeometry): void {
+  requireToken(next, 'normal');
+  for (let component = 0; component < 3; component += 1) readNumber(next);
+  requireToken(next, 'outer');
+  requireToken(next, 'loop');
+  readVertices(next, triangle, geometry);
+  requireToken(next, 'endloop');
+  requireToken(next, 'endfacet');
+  if (geometry) writeTriangleNormal(geometry, triangle * 9, 'division');
 }
 
 function requireToken(next: () => string | undefined, expected: string): void {

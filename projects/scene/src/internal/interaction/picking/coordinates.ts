@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { multiplyMat4Vec4 } from '../../math/mat4.js';
+import { unprojectPoint, viewportToNdc } from '../../math/projection.js';
 import type { Matrix4, Vec3 } from '../../math/types.js';
 
 /** Maps a client point to the device pixel, returning a miss outside the canvas. */
@@ -36,9 +36,6 @@ export function reconstructWorldPosition(options: {
   readonly size: { readonly height: number; readonly width: number };
 }): Vec3 {
   const { depth, inverseViewProjection, pixel, size } = options;
-  const x = ((pixel.x + 0.5) / size.width) * 2 - 1;
-  const y = 1 - ((pixel.y + 0.5) / size.height) * 2;
-  const transformed = multiplyMat4Vec4(inverseViewProjection, [x, y, depth, 1]);
-  const inverseW = transformed[3] === 0 ? 1 : 1 / transformed[3];
-  return [transformed[0] * inverseW, transformed[1] * inverseW, transformed[2] * inverseW];
+  const point = viewportToNdc([pixel.x + 0.5, pixel.y + 0.5, depth], size);
+  return unprojectPoint(inverseViewProjection, point, 'preserve-zero-w');
 }
