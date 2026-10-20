@@ -10,10 +10,11 @@ import '@nvidia-elements/media/seek-button/define.js';
 import '@nvidia-elements/media/time-range/define.js';
 import '@nvidia-elements/scene/axes/define.js';
 import '@nvidia-elements/scene/camera/define.js';
-import '@nvidia-elements/scene/frame/define.js';
+import '@nvidia-elements/scene/joint/define.js';
+import '@nvidia-elements/scene/model/define.js';
 import '@nvidia-elements/scene/gridlines/define.js';
 import '@nvidia-elements/scene/lines/define.js';
-import '@nvidia-elements/scene/model/define.js';
+import '@nvidia-elements/scene/body/define.js';
 import '@nvidia-elements/scene/scene/define.js';
 
 export default {
@@ -37,7 +38,6 @@ export const EpisodeReplay = {
           <nve-scene-camera behavior="orbit" target="[0.1,0,0.12]" distance="0.75" polar-angle="0.9" azimuth="0.7" min-distance="0.15" max-distance="2" near="0.001" far="10"></nve-scene-camera>
           <nve-scene-gridlines count="20" spacing="0.05"></nve-scene-gridlines>
           <nve-scene-axes length="0.1"></nve-scene-axes>
-          <nve-scene-frame id="lerobot-base" name="base" orientation="[0,0,0.7071067811865475,0.7071067811865476]"></nve-scene-frame>
           <nve-scene-lines id="lerobot-observed-path" width-unit="pixel" topology="strip"></nve-scene-lines>
           <nve-scene-lines id="lerobot-command-path" width-unit="pixel" topology="strip"></nve-scene-lines>
           <p slot="fallback" nve-text="body">The joint readout and playback controls remain available when WebGPU is unavailable.</p>
@@ -61,7 +61,7 @@ export const EpisodeReplay = {
         <p nve-text="body sm muted">Observed: solid CAD robot and cyan path. Commanded: magenta path. Joint readouts use radians. The gripper travel and joint zero offsets are visualization estimates; this recording does not include hardware calibration.</p>
       </div>
       <nve-dialog id="lerobot-episode-info" modal closable hidden>
-        <nve-dialog-header><h2 nve-text="heading sm">Recording and model</h2></nve-dialog-header>
+        <nve-dialog-header><h2 nve-text="heading sm">Recording and body</h2></nve-dialog-header>
         <div nve-layout="column gap:md">
           <p nve-text="body"><a href="https://huggingface.co/datasets/lerobot/svla_so100_sorting/tree/13870ca969084d8ce4d8a0391b06cead78e804ba" target="_blank" rel="noreferrer">Hugging Face LeRobot sorting dataset</a> · Apache-2.0 · Episode 0 · 962 samples.</p>
           <p nve-text="body">Task: put the red cube in the right box and the blue cube in the left box.</p>
@@ -77,8 +77,9 @@ export const EpisodeReplay = {
       import '@nvidia-elements/scene/camera/define.js';
       import '@nvidia-elements/scene/gridlines/define.js';
       import '@nvidia-elements/scene/axes/define.js';
-      import '@nvidia-elements/scene/frame/define.js';
-      import '@nvidia-elements/scene/model/define.js';
+      import '@nvidia-elements/scene/joint/define.js';
+import '@nvidia-elements/scene/model/define.js';
+      import '@nvidia-elements/scene/body/define.js';
       import '@nvidia-elements/scene/lines/define.js';
       import '@nvidia-elements/core/button/define.js';
       import '@nvidia-elements/core/dialog/define.js';
@@ -90,7 +91,7 @@ export const EpisodeReplay = {
       const wrapper = document.querySelector('#lerobot-episode-replay');
       const assetRequests = new AbortController();
       const scene = wrapper.querySelector('#lerobot-replay-scene');
-      const base = wrapper.querySelector('#lerobot-base');
+      let arm;
       const video = wrapper.querySelector('#lerobot-episode-video');
       const output = wrapper.querySelector('#lerobot-frame-time');
       const range = wrapper.querySelector('#lerobot-frame-range');
@@ -103,8 +104,6 @@ export const EpisodeReplay = {
       const controls = [range, playPause, speedSelect, pathButton,
         wrapper.querySelector('#lerobot-restart'), wrapper.querySelector('#lerobot-end')];
       let samples = [];
-      let frames = [];
-      let joints = [];
       let currentFrame = 0;
       let playing = false;
       let speed = 1;
@@ -124,34 +123,6 @@ export const EpisodeReplay = {
         if (readouts.length === names.length) showFrame(currentFrame);
       });
 
-      function multiply(left, right) {
-        return [
-          left[3]*right[0]+left[0]*right[3]+left[1]*right[2]-left[2]*right[1],
-          left[3]*right[1]-left[0]*right[2]+left[1]*right[3]+left[2]*right[0],
-          left[3]*right[2]+left[0]*right[1]-left[1]*right[0]+left[2]*right[3],
-          left[3]*right[3]-left[0]*right[0]-left[1]*right[1]-left[2]*right[2]
-        ];
-      }
-      function axisAngle(axis, angle) {
-        return [...axis.map(value => value * Math.sin(angle / 2)), Math.cos(angle / 2)];
-      }
-      function rpyQuaternion(rpy) {
-        return multiply(multiply(axisAngle([0,0,1],rpy[2]), axisAngle([0,1,0],rpy[1])), axisAngle([1,0,0],rpy[0]));
-      }
-      // Adapt physical-degree recording zeros to the older SO-100 simulation URDF.
-      // These fixed offsets describe a visualization convention, not measured calibration.
-      // Wrist roll uses the recorded zero so the claw opens horizontally without an extra quarter-turn.
-      function cadAngle(index, angle) {
-        return [-angle, 1.8 + angle, angle - Math.PI/2, 1 - Math.PI/2 + angle, -angle, angle][index];
-      }
-      function poses(positions) {
-        return joints.map((joint, index) => ({position: joint.position,
-          orientation: multiply(rpyQuaternion(joint.rpy), axisAngle(joint.axis, cadAngle(index, positions[index])))}));
-      }
-      function applyPoses(next) {
-        // Prepare all transforms before the synchronous setters; rendering observes the whole snapshot.
-        frames.forEach((frame, index) => frame.setPose(next[index]));
-      }
       async function loadCompressed(url) {
         const response = await fetch(url, {signal: assetRequests.signal});
         if (!response.ok) throw new Error('Asset request failed: ' + response.status + ' ' + url);
@@ -206,8 +177,7 @@ export const EpisodeReplay = {
       function showFrame(index) {
         currentFrame = Math.min(samples.length-1, Math.max(0, index));
         const sample = samples[currentFrame];
-        const next = poses(sample.observed);
-        applyPoses(next);
+        names.forEach((name, index) => arm.joints.set(name, sample.observed[index]));
         snapshotCount += 1;
         range.valueAsNumber = sample.time;
         output.value = 'Frame ' + currentFrame + ' / 961 · ' + sample.time.toFixed(3) + ' / 32.033 s · ' + snapshotCount + ' snapshots' + sceneDiagnostic;
@@ -267,26 +237,32 @@ export const EpisodeReplay = {
         video.pause();
       }
       async function buildRobot(robot, metadataUrl) {
-        joints = robot.joints;
         jawTip = robot.jawTip;
-        const loads = [base.updateComplete];
-        let parent = base;
+        arm = document.createElement('nve-scene-model');
+        arm.name = 'arm';
+        arm.orientation = [0, 0, 0.7071067811865475, 0.7071067811865476];
+        scene.append(arm);
+        const loads = [arm.updateComplete];
+        for (const joint of robot.joints) {
+          const element = document.createElement('nve-scene-joint');
+          // Offset and scale adapt recorded zeros and directions to the older CAD convention.
+          // These visualization estimates do not represent measured hardware calibration.
+          Object.assign(element, { name: joint.name, frame: joint.frame, type: 'revolute',
+            axis: joint.axis, position: joint.position, orientation: joint.orientation,
+            offset: joint.offset, scale: joint.scale });
+          arm.append(element);
+          loads.push(element.updateComplete);
+        }
         robot.links.forEach((link, index) => {
-          if (index > 0) {
-            const frame = document.createElement('nve-scene-frame');
-            frame.name = link.name;
-            parent.append(frame);
-            parent = frame;
-            frames.push(frame);
-            loads.push(frame.updateComplete);
-          }
+          const joint = robot.joints.find(joint => joint.child === link.name);
           for (const visual of link.visuals) {
-            const model = document.createElement('nve-scene-model');
-            model.featureId = index + 1;
-            model.tint = visual.motor ? '#30343b' : '#e8eaed';
-            model.asset = new URL(visual.asset, metadataUrl).href;
-            parent.append(model);
-            loads.push(model.loadComplete);
+            const body = document.createElement('nve-scene-body');
+            body.featureId = index + 1;
+            body.tint = visual.motor ? '#30343b' : '#e8eaed';
+            body.frame = joint?.name ?? null;
+            body.src = new URL(visual.asset, metadataUrl).href;
+            arm.append(body);
+            loads.push(body.loadComplete);
           }
         });
         await Promise.all(loads);
@@ -295,9 +271,9 @@ export const EpisodeReplay = {
         const buffers = [new LineVertexBuffer({capacity: samples.length}), new LineVertexBuffer({capacity: samples.length})];
         samples.forEach(sample => {
           for (const [index, positions] of [sample.observed, sample.commanded].entries()) {
-            applyPoses(poses(positions));
+            names.forEach((name, index) => arm.joints.set(name, positions[index]));
             // Jaw tip in the official Moving_Jaw mesh's local frame; no world-space FK reimplementation.
-            const point = frames[5].getWorldPoint(jawTip);
+            const point = arm.joints.get('gripper').getWorldPoint(jawTip);
             if (!point) throw new Error('Robot frame chain is unresolved.');
             buffers[index].add({position: point, width: 2, color: index === 0 ? 'cyan' : 'magenta'});
           }
@@ -378,7 +354,7 @@ export const EpisodeReplay = {
         video.load();
       } catch (error) {
         assetRequests.abort();
-        base.replaceChildren();
+        arm?.remove();
         pause();
         output.value = 'Robot recording unavailable: ' + error.message;
         disconnectObserver.disconnect();

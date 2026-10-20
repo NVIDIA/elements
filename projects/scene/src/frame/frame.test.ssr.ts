@@ -12,12 +12,13 @@ describe(SceneFrame.metadata.tag, () => {
     const result = await ssrRunner.render(html`
       <nve-scene aria-label="Robot visualization">
         <nve-scene-frame name="base-link" position="[1,0,0]">
-          <nve-scene-frame name="sensor" position="[0,0,1]"></nve-scene-frame>
+          <nve-scene-frame name="sensor" frame="base-link" position="[0,0,1]"></nve-scene-frame>
         </nve-scene-frame>
       </nve-scene>
     `);
 
     expect(result.includes('nve-scene-frame')).toBe(true);
+    expect(result).toContain('frame="base-link"');
     expect(result.includes('slot></slot>')).toBe(true);
     expect(result.match(/shadowroot="open"/g)).toHaveLength(3);
   });

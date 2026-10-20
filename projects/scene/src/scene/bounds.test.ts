@@ -15,7 +15,8 @@ import { SceneLines } from '../lines/lines.js';
 import { SceneTriangles } from '../triangles/triangles.js';
 import { SceneLabels } from '../labels/labels.js';
 import { SceneMesh } from '../mesh/mesh.js';
-import { SceneModel } from '../model/model.js';
+import { SceneBody } from '../body/body.js';
+import '../body/define.js';
 import { ScenePolygon } from '../polygon/polygon.js';
 import { SceneHeightfield } from '../heightfield/heightfield.js';
 import { getMarkerLayerRenderData, takeMarkerLayerRenderData } from '../internal/layers/markers/layer-state.js';
@@ -43,7 +44,7 @@ import '../lines/define.js';
 import '../triangles/define.js';
 import '../labels/define.js';
 import '../mesh/define.js';
-import '../model/define.js';
+import '../body/define.js';
 import '../polygon/define.js';
 import '../heightfield/define.js';
 
@@ -234,8 +235,8 @@ describe('published scene bounds', () => {
     mesh.source = new MarkerBuffer({ records: [{ position: [10, 20, 30], scale: [2, 3, 4] }] });
     expect(scene.getBounds({ content: [mesh] })).toEqual({ minimum: [10, 20, 30], maximum: [50, 29, 30] });
     mesh.source = null;
-    const model = new SceneModel();
-    model.geometry = [{ shape: 'cube', position: [5, 0, 0], scale: [2, 4, 6] }];
+    const body = new SceneBody();
+    body.geometry = [{ kind: 'cube', position: [5, 0, 0], scale: [2, 4, 6] }];
     const polygon = new ScenePolygon();
     polygon.geometry = {
       outer: [
@@ -247,12 +248,12 @@ describe('published scene bounds', () => {
     };
     const terrain = new SceneHeightfield();
     terrain.grid = { columns: 2, rows: 2, spacing: 2, origin: [10, 20], heights: new Float32Array([0, 1, 2, 3]) };
-    scene.append(model, polygon, terrain);
-    expect(scene.getBounds({ content: [model] })).toEqual({ minimum: [4, -2, -3], maximum: [6, 2, 3] });
+    scene.append(body, polygon, terrain);
+    expect(scene.getBounds({ content: [body] })).toEqual({ minimum: [4, -2, -3], maximum: [6, 2, 3] });
     expect(scene.getBounds({ content: [polygon] })).toEqual({ minimum: [0, 0, 0], maximum: [4, 3, 0] });
     expect(scene.getBounds({ content: [terrain] })).toEqual({ minimum: [10, 20, 0], maximum: [12, 22, 3] });
-    model.asset = '/not-loaded.stl';
-    expect(scene.getBounds({ content: [model] })).toBeNull();
+    body.src = '/not-loaded.stl';
+    expect(scene.getBounds({ content: [body] })).toBeNull();
   });
 
   it('does not drain marker, stream, label, or mesh publication uploads', () => {

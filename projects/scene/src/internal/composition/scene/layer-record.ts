@@ -9,7 +9,7 @@ import {
   takeMarkerLayerRenderData
 } from '../../layers/markers/layer-state.js';
 import { isMeshLayerRegistered, takeMeshLayerRenderData } from '../../layers/mesh/layer-state.js';
-import { isModelLayerRegistered, takeModelLayerRenderData } from '../../layers/model/layer-state.js';
+import { isBodyLayerRegistered, takeBodyLayerRenderData } from '../../layers/body/layer-state.js';
 import { isPolygonLayerRegistered, takePolygonLayerRenderData } from '../../layers/polygon/layer-state.js';
 import type { MeshRenderItem, SceneRenderItem } from '../../rendering/render-items.js';
 import {
@@ -196,7 +196,7 @@ function pending(layer: HTMLElement, kind: SceneLayerKind): PendingLayerRecord {
 
 function isRegisteredMeshKind(layer: HTMLElement, kind: MeshLayerRecord['kind']): boolean {
   if (kind === 'mesh') return isMeshLayerRegistered(layer);
-  if (kind === 'model') return isModelLayerRegistered(layer);
+  if (kind === 'body') return isBodyLayerRegistered(layer);
   return isPolygonLayerRegistered(layer);
 }
 
@@ -208,7 +208,7 @@ function isStreamRecord(
 
 function takeMeshRecordRenderData(record: MeshLayerRecord) {
   if (record.kind === 'mesh') return takeMeshLayerRenderData(record.layer);
-  if (record.kind === 'model') return takeModelLayerRenderData(record.layer);
+  if (record.kind === 'body') return takeBodyLayerRenderData(record.layer);
   return takePolygonLayerRenderData(record.layer);
 }
 

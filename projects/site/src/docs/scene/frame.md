@@ -21,9 +21,29 @@ Scene uses a right-handed, REP-103-aligned world coordinate system:
 - Quaternions use XYZW component order. Scene normalizes finite, nonzero quaternions when it ingests them and rejects zero-length values or values that aren't finite.
 - Public matrices are column-major `Float32Array` values. Nested frames compose as `world = parent × local`.
 
-These conventions apply to frames, markers, meshes, models, labels, picking results, camera targets, and internal layer prototypes unless an API documents a specialized local basis. The [camera optical basis](/docs/scene/camera/#optical-local-basis) uses image-oriented axes. See [direct byte writes](/docs/scene/record-buffers/#direct-byte-writes) for the packed record descriptors, field offsets, and strides that carry frame-local values.
+These conventions apply to frames, markers, meshes, bodies, labels, picking results, camera targets, and internal layer prototypes unless an API documents a specialized local basis. The [camera optical basis](/docs/scene/camera/#optical-local-basis) uses image-oriented axes. See [direct byte writes](/docs/scene/record-buffers/#direct-byte-writes) for the packed record descriptors, field offsets, and strides that carry frame-local values.
 
 Mesh front faces use counterclockwise triangle winding and outward-facing normals. Scene passes UV coordinates through unchanged. It uploads an `ImageBitmap` without vertical flipping, so the texture origin follows the browser image that the app provides.
+
+## Named parent references
+
+Use `frame="name"` on a coordinate frame to replace its nearest DOM transform parent. The frame's position,
+orientation, and explicit poses then use that named frame. Every layer accepts the same attribute to choose its
+owning coordinate frame. Without it, DOM ancestry continues to apply.
+
+```html
+<nve-scene-frame name="base" position="[1,0,0]"></nve-scene-frame>
+<nve-scene-frame name="tool" frame="base" position="[0,0,1]"></nve-scene-frame>
+<nve-scene-body frame="tool">
+  <nve-scene-shape kind="cube"></nve-scene-shape>
+</nve-scene-body>
+```
+
+Targets can appear before or after their referrers. Nesting and references compose together. Registry changes
+resolve the dependency graph and reject self references and longer cycles. Missing, ambiguous, cross-scene, and
+cyclic references report `frame-unresolved` on the referring element. Removing a target makes its referrers
+unresolved; Scene never moves them to the origin. Hidden or invalid resolved ancestors suppress their content,
+while unrelated layers remain usable. Cameras share the same lookup and diagnostic.
 
 ## Current poses
 
@@ -74,7 +94,7 @@ Keep packed `Float32Array` positions near their frame origin and express large t
 
 ## Frame names
 
-Scene trims leading and trailing whitespace from frame names. Every nonempty name must be unique within its owning Scene. If a name occurs more than once, Scene excludes every occurrence from name-based camera and label resolution and reports a recoverable `frame-name-duplicate` warning. Structurally nested content under each duplicate frame continues to render when its transform chain remains valid.
+Scene trims leading and trailing whitespace from frame names. Every nonempty name must be unique within its model scope, or within the scene when outside a model. Bare names cannot contain `/`; Scene reports `frame-name` and invalidates the affected chain for that input. If a name occurs more than once, Scene excludes every occurrence from name-based camera and label resolution and reports a recoverable `frame-name-duplicate` warning. Structurally nested content under each duplicate frame continues to render when its transform chain remains valid.
 
 ```js
 toolFrame.name = 'tool';
@@ -84,6 +104,9 @@ duplicateFrame.name = ' tool ';
 duplicateFrame.name = 'sensor';
 // Both names now resolve independently.
 ```
+
+A model introduces a name scope. Unqualified references search its scope first and then outward; qualified
+references such as `arm/tcp` address members from outside. See [models](../model/) and [joints](../joint/).
 
 Nested Scene elements own independent name registries. A frame in an inner Scene neither conflicts with nor resolves from
 an outer Scene.

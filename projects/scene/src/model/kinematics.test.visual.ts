@@ -1,0 +1,334 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
+import { describe, expect, test } from 'vitest';
+import { visualRunner } from '@internals/vite';
+import { composePreciseMat4, multiplyPreciseMat4, transformPointMat4 } from '../internal/math/mat4.js';
+import { multiplyQuaternions } from '../internal/math/quaternion.js';
+import type { Quaternion, ScenePose, Vec3 } from '../index.js';
+import type { Scene } from '../scene/scene.js';
+import type { SceneBody } from '../body/body.js';
+
+interface ReplayRobot {
+  joints: {
+    name: string;
+    child: string;
+    frame: string | null;
+    axis: Vec3;
+    position: Vec3;
+    orientation: Quaternion;
+    scale: number;
+    offset: number;
+  }[];
+  links: { name: string; visuals: { asset: string; motor: boolean }[] }[];
+  jawTip: Vec3;
+}
+
+// Frozen origins, axes, and calibration from the pre-joint replay, independent of the regenerated metadata.
+const replayOrigins: Quaternion[] = [
+  [0.7071045443232222, 0, 0, 0.7071090180427968],
+  [-0.7833269096274834, 0, 0, 0.6216099682706644],
+  [0.7071045443232222, 0, 0, 0.7071090180427968],
+  [-0.479425538604203, 0, 0, 0.8775825618903728],
+  [0, 0.7071045443232222, 0, 0.7071090180427968],
+  [0, 0.9999999999799858, 0, 0.000006326794896668469]
+];
+const replayPositions: Vec3[] = [
+  [0, -0.0452, 0.0165],
+  [0, 0.1025, 0.0306],
+  [0, 0.11257, 0.028],
+  [0, 0.0052, 0.1349],
+  [0, -0.0601, 0],
+  [-0.0202, -0.0244, 0]
+];
+const replayAxes: Vec3[] = [
+  [0, 1, 0],
+  [1, 0, 0],
+  [1, 0, 0],
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1]
+];
+const replayCalibration = [
+  [-1, 0],
+  [1, 1.8],
+  [1, -Math.PI / 2],
+  [1, 1 - Math.PI / 2],
+  [-1, 0],
+  [1, 0]
+];
+
+function referencePoses(values: number[]): ScenePose[] {
+  return replayOrigins.map((origin, index) => {
+    const axis = replayAxes[index]!;
+    const [scale, offset] = replayCalibration[index]!;
+    const half = (scale! * values[index]! + offset!) / 2;
+    const motion: Quaternion = [
+      axis[0] * Math.sin(half),
+      axis[1] * Math.sin(half),
+      axis[2] * Math.sin(half),
+      Math.cos(half)
+    ];
+    return { position: replayPositions[index]!, orientation: multiplyQuaternions(origin, motion) };
+  });
+}
+
+function referencePoint(poses: ScenePose[], point: Vec3): Vec3 {
+  let world = composePreciseMat4([0, 0, 0], [0, 0, Math.SQRT1_2, Math.SQRT1_2]);
+  for (const pose of poses) world = multiplyPreciseMat4(world, composePreciseMat4(pose.position, pose.orientation));
+  return transformPointMat4(world, point);
+}
+
+const imports = `<script type="module">
+  import '@nvidia-elements/scene/model/define.js';
+  import '@nvidia-elements/scene/joint/define.js';
+  import '@nvidia-elements/scene/body/define.js';
+  import '@nvidia-elements/scene/camera/define.js';
+  import '@nvidia-elements/scene/gridlines/define.js';
+</script>`;
+
+const cameraMarkup =
+  '<nve-scene-camera behavior="orbit" target="[0,0,1]" distance="4.6" polar-angle="1.15" azimuth="-0.75"></nve-scene-camera>';
+
+describe('example kinematics preservation', () => {
+  test('renders the flat arm with the same world matrices and pixels as the nested arm', async () => {
+    const source = readFileSync(new URL('../body/body.examples.ts', import.meta.url), 'utf8');
+    const section = source.slice(source.indexOf('export const RobotArmAnimated'));
+    const markup = section
+      .slice(section.indexOf('<nve-scene '), section.indexOf('</nve-scene>') + '</nve-scene>'.length)
+      .replace('id="robot-arm-scene"', 'id="actual"');
+    const armPoses: ScenePose[] = [
+      { position: [0, 0, 0.35], orientation: [0, 0, 0.25881904510252074, 0.9659258262890683] },
+      { position: [0, 0, 0.25], orientation: [0, -0.35836794954530027, 0, 0.9335804264972017] },
+      { position: [0, 0, 1.05], orientation: [0, 0.6293203910498374, 0, 0.7771459614569709] },
+      { position: [0, 0, 0.9], orientation: [0, 0, 0.17364817766693033, 0.984807753012208] },
+      { position: [0, 0, 0.2], orientation: [0, -0.42261826174069944, 0, 0.9063077870366499] },
+      { position: [0, 0, 0.2], orientation: [0, 0, 0, 1] }
+    ];
+    const result = await visualRunner.inspect(
+      'scene-arm-flat',
+      `${markup}<nve-scene id="reference">${cameraMarkup}<nve-scene-gridlines spacing="0.25" count="24"></nve-scene-gridlines></nve-scene>${imports}`,
+      page =>
+        page.evaluate(
+          async ({ poses, camera }) => {
+            const actual = document.querySelector<Scene>('#actual')!;
+            const reference = document.querySelector<Scene>('#reference')!;
+            for (const scene of [actual, reference]) scene.style.cssText = 'width:512px;height:512px;background:black';
+            actual.querySelector('nve-scene-camera')!.outerHTML = camera;
+            const model = actual.querySelector('nve-scene-model')!;
+            let parent: HTMLElement = reference;
+            const frames = poses.map(pose => {
+              const frame = document.createElement('nve-scene-frame');
+              frame.setPose(pose);
+              parent.append(frame);
+              parent = frame;
+              return frame;
+            });
+            for (const body of model.querySelectorAll('nve-scene-body')) {
+              const clone = body.cloneNode(true) as SceneBody;
+              const name = body.frame;
+              clone.removeAttribute('frame');
+              const owner = name ? frames[Number(name.slice(1)) - 1]! : reference;
+              owner.insertBefore(clone, owner.querySelector(':scope > nve-scene-frame'));
+            }
+            await Promise.all([actual.ready, reference.ready]);
+            await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+            const read = async (scene: Scene): Promise<number[]> => {
+              const canvas = scene.shadowRoot!.querySelector('canvas')!;
+              const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve));
+              if (!blob) throw new Error('Expected scene pixels.');
+              const bitmap = await createImageBitmap(blob);
+              const probe = document.createElement('canvas');
+              probe.width = bitmap.width;
+              probe.height = bitmap.height;
+              const context = probe.getContext('2d')!;
+              context.drawImage(bitmap, 0, 0);
+              bitmap.close();
+              return [...context.getImageData(0, 0, probe.width, probe.height).data];
+            };
+            // The reference scene was initially empty; ready may precede its late geometry preparation.
+            let first = await read(actual);
+            let second = await read(reference);
+            const deadline = performance.now() + 5000;
+            const equalPixels = () =>
+              first.length === second.length && first.every((value, index) => value === second[index]);
+            const hasBodyPixels = () =>
+              first.some(
+                (value, index) =>
+                  index % 4 === 1 && value > 40 && value > first[index - 1]! * 1.2 && value > first[index + 1]! * 1.2
+              );
+            while ((!equalPixels() || !hasBodyPixels()) && performance.now() < deadline) {
+              await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+              first = await read(actual);
+              second = await read(reference);
+            }
+            const joints = [...model.querySelectorAll('nve-scene-joint')];
+            const maxMatrixError = Math.max(
+              ...joints.flatMap((joint, index) =>
+                [...joint.getWorldMatrix()].map((value, component) =>
+                  Math.abs(value - frames[index]!.getWorldMatrix()[component]!)
+                )
+              )
+            );
+            return {
+              equal: equalPixels(),
+              differences: first.filter((value, index) => value !== second[index]).length,
+              lengths: [first.length, second.length],
+              visible: hasBodyPixels(),
+              maxMatrixError
+            };
+          },
+          { poses: armPoses, camera: cameraMarkup }
+        )
+    );
+    expect(result.maxMatrixError).toBeLessThan(1e-6);
+    expect(result.visible).toBe(true);
+    expect(result.equal, JSON.stringify(result)).toBe(true);
+  });
+
+  test('preserves all 1924 replay jaw-tip points and representative STL pixels', async () => {
+    const directory = new URL('../../demos/robot-playback/', import.meta.url);
+    const fixtureRobot = JSON.parse(readFileSync(new URL('robot.json', directory), 'utf8')) as ReplayRobot;
+    const records = gunzipSync(readFileSync(new URL('episode-0.ndjson.gz', directory)))
+      .toString()
+      .trim()
+      .split('\n')
+      .map(line => JSON.parse(line) as { msg: { position: number[] } });
+    const fixtureValues = records.map(record => record.msg.position);
+    const fixturePoses = fixtureValues.map(referencePoses);
+    const fixturePoints = fixturePoses.map(pose => referencePoint(pose, fixtureRobot.jawTip));
+    const fixtureAssets = Object.fromEntries(
+      fixtureRobot.links.flatMap(link =>
+        link.visuals.map(visual => [
+          visual.asset,
+          'data:application/sla;base64,' + readFileSync(new URL(visual.asset, directory)).toString('base64')
+        ])
+      )
+    );
+    const result = await visualRunner.inspect(
+      'scene-replay-flat',
+      `<nve-scene id="actual">${cameraMarkup}</nve-scene><nve-scene id="reference">${cameraMarkup}</nve-scene>${imports}`,
+      page =>
+        page.evaluate(
+          async ({ robot, values, poses, points, assets }) => {
+            const originalFetch = globalThis.fetch;
+            globalThis.fetch = (url, options) => {
+              const path = new URL(url instanceof Request ? url.url : url, document.baseURI).pathname;
+              const asset = assets[path.slice('/replay-fixture/'.length)];
+              return path.startsWith('/replay-fixture/') && asset
+                ? originalFetch(asset, options)
+                : originalFetch(url, options);
+            };
+            const actual = document.querySelector<Scene>('#actual')!;
+            const reference = document.querySelector<Scene>('#reference')!;
+            for (const scene of [actual, reference]) {
+              scene.style.cssText = 'width:512px;height:512px;background:black';
+              const cameraControl = scene.querySelector('nve-scene-camera')!;
+              cameraControl.target = [0, 0, 0.15];
+              cameraControl.distance = 0.8;
+            }
+            const model = document.createElement('nve-scene-model');
+            model.name = 'arm';
+            model.orientation = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
+            actual.append(model);
+            const root = document.createElement('nve-scene-frame');
+            root.setPose({ position: [0, 0, 0], orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2] });
+            reference.append(root);
+            let parent: HTMLElement = root;
+            const jointUpdates: Promise<unknown>[] = [];
+            const frames = robot.joints.map(joint => {
+              const frame = document.createElement('nve-scene-frame');
+              parent.append(frame);
+              parent = frame;
+              const element = document.createElement('nve-scene-joint');
+              Object.assign(element, { ...joint, type: 'revolute' });
+              model.append(element);
+              jointUpdates.push(element.updateComplete);
+              return frame;
+            });
+            const loads: Promise<unknown>[] = [model.updateComplete];
+            for (const link of robot.links) {
+              const jointIndex = robot.joints.findIndex(joint => joint.child === link.name);
+              for (const visual of link.visuals) {
+                const body = document.createElement('nve-scene-body');
+                body.frame = jointIndex >= 0 ? robot.joints[jointIndex]!.name : null;
+                body.tint = visual.motor ? '#30343b' : '#e8eaed';
+                body.src = '/replay-fixture/' + visual.asset;
+                model.append(body);
+                loads.push(
+                  body.loadComplete.then(() => {
+                    const clone = document.createElement('nve-scene-body');
+                    clone.geometry = body.geometry;
+                    clone.tint = body.tint;
+                    const owner = jointIndex >= 0 ? frames[jointIndex]! : root;
+                    owner.insertBefore(clone, owner.querySelector(':scope > nve-scene-frame'));
+                  })
+                );
+              }
+            }
+            await Promise.all([...loads, actual.ready, reference.ready, ...jointUpdates]);
+            await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+            let maxPointError = 0;
+            let equal = true;
+            let visible = true;
+            const read = async (scene: Scene): Promise<number[]> => {
+              const canvas = scene.shadowRoot!.querySelector('canvas')!;
+              const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve));
+              if (!blob) throw new Error('Expected scene pixels.');
+              const bitmap = await createImageBitmap(blob);
+              const probe = document.createElement('canvas');
+              probe.width = bitmap.width;
+              probe.height = bitmap.height;
+              const context = probe.getContext('2d')!;
+              context.drawImage(bitmap, 0, 0);
+              bitmap.close();
+              return [...context.getImageData(0, 0, probe.width, probe.height).data];
+            };
+            const capture = async () => {
+              let first = await read(actual);
+              let second = await read(reference);
+              const deadline = performance.now() + 5000;
+              const same = () =>
+                first.length === second.length && first.every((value, index) => value === second[index]);
+              const hasBodyPixels = () => first.filter((value, index) => index % 4 !== 3 && value > 30).length > 100;
+              while ((!same() || !hasBodyPixels()) && performance.now() < deadline) {
+                await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+                first = await read(actual);
+                second = await read(reference);
+              }
+              return { equal: same(), visible: hasBodyPixels() };
+            };
+            for (let sample = 0; sample < values.length; sample += 1) {
+              robot.joints.forEach((joint, index) => model.joints.set(joint.name, values[sample]![index]!));
+              const point = model.joints.get('gripper')!.getWorldPoint(robot.jawTip)!;
+              maxPointError = Math.max(
+                maxPointError,
+                ...point.map((value, index) => Math.abs(value - points[sample]![index]!))
+              );
+              if ([0, 962, 1923].includes(sample)) {
+                frames.forEach((frame, index) => frame.setPose(poses[sample]![index]!));
+                await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+                const comparison = await capture();
+                equal &&= comparison.equal;
+                visible &&= comparison.visible;
+              }
+            }
+            return { maxPointError, equal, visible, count: values.length };
+          },
+          {
+            robot: fixtureRobot,
+            values: fixtureValues,
+            poses: fixturePoses,
+            points: fixturePoints,
+            assets: fixtureAssets
+          }
+        )
+    );
+    expect(result.count).toBe(1924);
+    expect(result.visible).toBe(true);
+    expect(result.maxPointError).toBeLessThan(1e-10);
+    expect(result.equal, JSON.stringify(result)).toBe(true);
+  });
+});

@@ -1,0 +1,284 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+import { describe, expect, it } from 'vitest';
+import { compileShapes, createBodyPrimitiveGeometry, type BodyShape } from './compile.js';
+import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../../math/primitive-geometry.js';
+import { normalizeQuaternion, rotateVectorByQuaternion } from '../../math/quaternion.js';
+
+describe(compileShapes.name, () => {
+  it('should compile an identity cube from its unit tessellation with opaque white colors', () => {
+    const source = createBodyPrimitiveGeometry('cube');
+    const compiled = compileShapes([{ kind: 'cube' }]);
+
+    expect(compiled.positions).toEqual(deinterleave(source.vertices, 0));
+    expect(compiled.normals).toEqual(deinterleave(source.vertices, 3));
+    expect(compiled.indices).toEqual(source.indices);
+    expect(compiled.colors).toEqual(new Float32Array((source.vertices.length / 6) * 4).fill(1));
+  });
+
+  it('should apply translation, orientation, and nonuniform scale to positions and inverse-transpose normals', () => {
+    const compiled = compileShapes([
+      {
+        kind: 'cube',
+        position: [3, 5, 7],
+        orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2],
+        scale: [2, 3, 4]
+      }
+    ]);
+
+    // The first cube vertex is [0.5, -0.5, -0.5], face normal +X.
+    expect([...compiled.positions.subarray(0, 3)]).toEqual([4.5, 6, 5]);
+    expect(compiled.normals[0]).toBeCloseTo(0, 6);
+    expect(compiled.normals[1]).toBeCloseTo(1, 6);
+    expect(compiled.normals[2]).toBeCloseTo(0, 6);
+    for (let offset = 0; offset < compiled.normals.length; offset += 3) {
+      expect(Math.hypot(...compiled.normals.subarray(offset, offset + 3))).toBeCloseTo(1, 6);
+    }
+
+    const sphere = compileShapes([
+      { kind: 'sphere', orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2], scale: [2, 3, 4] }
+    ]);
+    // The first icosphere normal is normalized [-1, φ, 0]. Its inverse-transpose normal, then Z-axis rotation, is:
+    // [-0.7333492283, -0.6798521231, 0]. An orientation-only normal transform would not produce these values.
+    expect(sphere.normals[0]).toBeCloseTo(-0.7333492283, 6);
+    expect(sphere.normals[1]).toBeCloseTo(-0.6798521231, 6);
+    expect(sphere.normals[2]).toBeCloseTo(0, 6);
+  });
+
+  it('should retain outward-facing winding after a mirrored transform', () => {
+    const compiled = compileShapes([{ kind: 'cube', scale: [-1, 2, 3] }]);
+    for (let offset = 0; offset < compiled.indices.length; offset += 3) {
+      const first = compiled.indices[offset]! * 3;
+      const second = compiled.indices[offset + 1]! * 3;
+      const third = compiled.indices[offset + 2]! * 3;
+      const ab = subtract(compiled.positions, second, first);
+      const ac = subtract(compiled.positions, third, first);
+      const normal = compiled.normals.subarray(first, first + 3);
+      expect(dot(cross(ab, ac), normal)).toBeGreaterThan(0);
+    }
+  });
+
+  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+    'matches quaternion position and inverse-scale normal references for %s vertices',
+    kind => {
+      const source = createBodyPrimitiveGeometry(kind);
+      const orientation = normalizeQuaternion([1, -2, 3, 4]);
+      const compiled = compileShapes([
+        { kind, position: [1e6 + 0.125, -0.25, 30], orientation, scale: [-2, 0.125, 5] }
+      ]);
+      for (let offset = 0, vertex = 0; offset < source.vertices.length; offset += 6, vertex += 1) {
+        const position = rotateVectorByQuaternion(
+          [source.vertices[offset]! * -2, source.vertices[offset + 1]! * 0.125, source.vertices[offset + 2]! * 5],
+          orientation
+        );
+        position[0] += 1e6 + 0.125;
+        position[1] -= 0.25;
+        position[2] += 30;
+        const normal = rotateVectorByQuaternion(
+          [source.vertices[offset + 3]! / -2, source.vertices[offset + 4]! / 0.125, source.vertices[offset + 5]! / 5],
+          orientation
+        );
+        const length = Math.hypot(...normal);
+        for (let axis = 0; axis < 3; axis += 1) {
+          expect(Math.abs(compiled.positions[vertex * 3 + axis]! - position[axis]!)).toBeLessThanOrEqual(
+            Math.max(1, Math.abs(position[axis]!)) * 2 ** -22
+          );
+          expect(compiled.normals[vertex * 3 + axis]).toBeCloseTo(normal[axis]! / length, 6);
+        }
+      }
+    }
+  );
+
+  it('should concatenate shape buffers with deterministic index offsets and colors', () => {
+    const first = createBodyPrimitiveGeometry('cube');
+    const second = createBodyPrimitiveGeometry('pyramid');
+    const compiled = compileShapes([
+      { kind: 'cube', color: [1, 0, 0, 1] },
+      { kind: 'pyramid', position: [2, 0, 0], color: [0, 1, 0, 0.5] }
+    ]);
+    const firstVertices = first.vertices.length / 6;
+
+    expect(compiled.indices.subarray(0, first.indices.length)).toEqual(first.indices);
+    expect(compiled.indices.subarray(first.indices.length)).toEqual(
+      new Uint32Array([...second.indices].map(index => index + firstVertices))
+    );
+    expect([...compiled.colors.subarray(0, 4)]).toEqual([1, 0, 0, 1]);
+    expect([...compiled.colors.subarray(firstVertices * 4, firstVertices * 4 + 4)]).toEqual([0, 1, 0, 0.5]);
+  });
+
+  it('should reject malformed input arrays and oversized bodies', () => {
+    const invalid: unknown[] = [null, {}, new Array<BodyShape>(1)];
+
+    for (const shapes of invalid) expect(() => compileShapes(shapes as BodyShape[])).toThrow();
+    expect(() => compileShapes(new Array<BodyShape>(250_000))).toThrow(RangeError);
+  });
+
+  it.each([
+    { shape: null, error: TypeError, message: 'shapes[0] must be an object.' },
+    { shape: {}, error: TypeError, message: 'shapes[0].kind must name a supported primitive.' },
+    { shape: { kind: 'torus' }, error: TypeError, message: 'shapes[0].kind must name a supported primitive.' },
+    {
+      shape: { kind: 'cube', position: [0, 0] },
+      error: TypeError,
+      message: 'shapes[0].position must contain exactly 3 numbers.'
+    },
+    {
+      shape: { kind: 'cube', position: [0, '0', 0] },
+      error: TypeError,
+      message: 'shapes[0].position must contain exactly 3 numbers.'
+    },
+    {
+      shape: { kind: 'cube', position: [0, Number.NaN, 0] },
+      error: RangeError,
+      message: 'shapes[0].position must contain finite numbers.'
+    },
+    {
+      shape: { kind: 'cube', orientation: [0, 0, 0, 0] },
+      error: RangeError,
+      message: 'Quaternion length must be greater than zero.'
+    },
+    { shape: { kind: 'cube', scale: [1, 0, 1] }, error: RangeError, message: 'shapes[0].scale must not contain zero.' },
+    {
+      shape: { kind: 'cube', color: 'not-a-color' },
+      error: TypeError,
+      message: 'shapes[0].color must be a supported Scene color.'
+    },
+    {
+      shape: { kind: 'cube', color: [1, 1, 1, 2] },
+      error: RangeError,
+      message: 'shapes[0].color values must be finite and in the range 0..1.'
+    }
+  ])('rejects invalid shape $shape with a specific diagnostic', ({ shape, error, message }) => {
+    const compile = () => compileShapes([shape] as BodyShape[]);
+    expect(compile).toThrow(error);
+    expect(compile).toThrow(message);
+  });
+
+  it('should reject oversized input before reading a producer element', () => {
+    const oversized = new Array<BodyShape>(250_000);
+    let reads = 0;
+    Object.defineProperty(oversized, 0, {
+      get() {
+        reads += 1;
+        return { kind: 'cube' };
+      }
+    });
+
+    expect(() => compileShapes(oversized)).toThrow(RangeError);
+    expect(reads).toBe(0);
+  });
+
+  it('should compile no shapes into empty planar arrays', () => {
+    expect(compileShapes([])).toEqual({
+      positions: new Float32Array(),
+      normals: new Float32Array(),
+      colors: new Float32Array(),
+      indices: new Uint32Array()
+    });
+  });
+
+  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+    'keeps repeated %s compilation isolated from modified outputs and tessellations',
+    kind => {
+      const shapes: BodyShape[] = [
+        {
+          kind,
+          position: [3, 5, 7],
+          orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2],
+          scale: [-2, 3, 4],
+          color: [0.25, 0.5, 0.75, 0.5]
+        },
+        { kind, position: [-1, 2, 0], scale: [1, 0.5, 2], color: [1, 0, 0, 1] }
+      ];
+      const retained = compileShapes(shapes);
+      const modified = compileShapes(shapes);
+      const tessellation = createBodyPrimitiveGeometry(kind);
+      const expected = {
+        positions: retained.positions.slice(),
+        normals: retained.normals.slice(),
+        colors: retained.colors.slice(),
+        indices: retained.indices.slice()
+      };
+
+      for (const attribute of ['positions', 'normals', 'colors', 'indices'] as const) {
+        expect(modified[attribute].buffer).not.toBe(retained[attribute].buffer);
+        modified[attribute].fill(0);
+      }
+      tessellation.vertices.fill(Number.NaN);
+      tessellation.indices.fill(0);
+
+      expect(retained).toEqual(expected);
+      expect(compileShapes(shapes)).toEqual(expected);
+      expect(createBodyPrimitiveGeometry(kind)).toEqual(createPrimitiveGeometry(kind));
+    }
+  );
+});
+
+describe('body primitive tessellators', () => {
+  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+    'should retain the marker bytes for the %s tessellation',
+    kind => {
+      const marker = createPrimitiveGeometry(kind);
+      const body = createBodyPrimitiveGeometry(kind);
+
+      expect(body.triangleCount).toBe(marker.triangleCount);
+      expect(body.vertices).toEqual(marker.vertices);
+      expect(body.indices).toEqual(marker.indices);
+    }
+  );
+
+  it.each([
+    ['cube', '3b486745', '4db830c5'],
+    ['sphere', 'e23578b5', '5bf9535'],
+    ['cylinder', '406f95d9', 'c0dfd685'],
+    ['cone', '17b547a0', '3cdfcb45'],
+    ['pyramid', '80077345', 'd3fbbac7']
+  ] as const)('should retain the established %s tessellation bytes', (kind, vertexFingerprint, indexFingerprint) => {
+    const geometry = createPrimitiveGeometry(kind);
+
+    expect(fingerprint(geometry.vertices)).toBe(vertexFingerprint);
+    expect(fingerprint(geometry.indices)).toBe(indexFingerprint);
+  });
+});
+
+function fingerprint(values: ArrayBufferView): string {
+  let hash = 0x811c9dc5;
+  const bytes = new Uint8Array(values.buffer, values.byteOffset, values.byteLength);
+  for (const byte of bytes) {
+    hash ^= byte;
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return (hash >>> 0).toString(16);
+}
+
+function deinterleave(vertices: Float32Array, start: number): Float32Array {
+  const values = new Float32Array((vertices.length / 6) * 3);
+  for (let source = start, target = 0; source < vertices.length; source += 6, target += 3) {
+    values.set(vertices.subarray(source, source + 3), target);
+  }
+  return values;
+}
+
+function subtract(values: Float32Array, left: number, right: number): [number, number, number] {
+  return [
+    values[left]! - values[right]!,
+    values[left + 1]! - values[right + 1]!,
+    values[left + 2]! - values[right + 2]!
+  ];
+}
+
+function cross(
+  left: readonly [number, number, number],
+  right: readonly [number, number, number]
+): [number, number, number] {
+  return [
+    left[1] * right[2] - left[2] * right[1],
+    left[2] * right[0] - left[0] * right[2],
+    left[0] * right[1] - left[1] * right[0]
+  ];
+}
+
+function dot(left: readonly number[], right: ArrayLike<number>): number {
+  return left[0]! * (right[0] ?? 0) + left[1]! * (right[1] ?? 0) + left[2]! * (right[2] ?? 0);
+}

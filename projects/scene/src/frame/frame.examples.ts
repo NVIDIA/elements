@@ -12,7 +12,7 @@ export default {
 };
 
 /**
- * @summary A forklift carriage groups the forks, pallet, and load under one moving frame. Use nested frames to update an articulated assembly while preserving each part's local offset.
+ * @summary A forklift carriage groups the forks, pallet, and load under one moving frame. Use nested frames to update an articulated assembly while preserving each body's local offset.
  */
 export const Default = {
   render: () => html`

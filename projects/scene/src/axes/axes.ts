@@ -3,6 +3,7 @@
 
 import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { LINE_VERTEX } from '../internal/records/layouts/built-ins.js';
 import {
@@ -28,6 +29,18 @@ const DEFAULT_WIDTH = 2;
  * @stable false
  */
 export class SceneAxes extends LitElement {
+  /** Names the owning coordinate frame; an omitted value uses DOM ancestry. */
+  @property({ type: String })
+  get frame(): string | null {
+    return getFrameReference(this);
+  }
+
+  set frame(value: string | null) {
+    const previous = this.frame;
+    setFrameReference(this, value);
+    this.requestUpdate('frame', previous);
+  }
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {

@@ -3,7 +3,9 @@
 
 import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
 import { useStyles } from '@nvidia-elements/core/internal';
+import { validateFrameName } from '../internal/composition/frame/registry.js';
 import { FRAME_TRANSFORM } from '../internal/diagnostics/errors.js';
 import { diagnosticReporterService } from '../internal/diagnostics/reporter.service.js';
 import {
@@ -30,6 +32,18 @@ import styles from '../internal/dom/host.css?inline';
  * @stable false
  */
 export class SceneFrame extends LitElement {
+  /** Names the owning coordinate frame; an omitted value uses DOM ancestry. */
+  @property({ type: String })
+  get frame(): string | null {
+    return getFrameReference(this);
+  }
+
+  set frame(value: string | null) {
+    const previous = this.frame;
+    setFrameReference(this, value);
+    this.requestUpdate('frame', previous);
+  }
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -39,6 +53,7 @@ export class SceneFrame extends LitElement {
 
   #declarativeTransform = false;
   #explicitAuthority = false;
+  #captureRevision = 0;
 
   /** Identifies the frame for scene-local lookup. */
   @property({ type: String }) name: string | null = null;
@@ -110,30 +125,45 @@ export class SceneFrame extends LitElement {
 
   protected override updated(changedProperties: PropertyValues<this>): void {
     if (changedProperties.has('name')) {
+      validateFrameName(this);
       notifyFrameStateChange(this);
     }
     if (changedProperties.has('position') || changedProperties.has('orientation')) {
-      this.#applyDeclarativeTransform();
+      this.applyDeclarativeTransform();
     }
   }
 
-  #applyDeclarativeTransform(): void {
+  /** Captures the declarative origin. Specialisations may append motion or reject their own inputs. */
+  protected captureDeclarativePose(): ScenePose | null | false {
+    if (this.position === null && this.orientation === null) return null;
+    const position = this.position === null ? ([0, 0, 0] as Vec3) : toVec3(this.position);
+    const orientation = this.orientation === null ? ([0, 0, 0, 1] as Quaternion) : toQuaternion(this.orientation);
+    if (position === null || orientation === null) throw new TypeError('Invalid frame origin.');
+    return { position, orientation };
+  }
+
+  /** Applies current declarative inputs unless setPose holds explicit authority. */
+  protected applyDeclarativeTransform(): void {
     if (this.#explicitAuthority) return;
-    if (this.position === null && this.orientation === null) {
-      this.#clearDeclarativeTransform();
-      return;
-    }
-
-    const position: Vec3 | null = this.position === null ? [0, 0, 0] : toVec3(this.position);
-    const orientation: Quaternion | null = this.orientation === null ? [0, 0, 0, 1] : toQuaternion(this.orientation);
-    if (position === null || orientation === null) {
+    const revision = ++this.#captureRevision;
+    try {
+      const pose = this.captureDeclarativePose();
+      if (revision !== this.#captureRevision || this.#explicitAuthority) return;
+      if (pose === null) {
+        this.#clearDeclarativeTransform();
+        return;
+      }
+      if (pose === false) {
+        invalidateFrameTransform(this);
+      } else {
+        setFrameTransform(this, pose);
+      }
+      this.#clearTransformError();
+      this.#declarativeTransform = true;
+    } catch {
+      if (revision !== this.#captureRevision || this.#explicitAuthority) return;
       this.#rejectDeclarativeTransform();
-      return;
     }
-
-    this.#clearTransformError();
-    setFrameTransform(this, { position, orientation });
-    this.#declarativeTransform = true;
   }
 
   #clearDeclarativeTransform(): void {
@@ -172,13 +202,9 @@ export class SceneFrame extends LitElement {
 
   #releasePoseAuthority(): void {
     this.#explicitAuthority = false;
-    if (this.position !== null || this.orientation !== null) {
-      this.#applyDeclarativeTransform();
-      return;
-    }
-    this.#clearTransformError();
-    clearFrameTransform(this);
-    this.#declarativeTransform = false;
+    // Explicit capture clears the declarative flag; release must also restore an absent origin.
+    this.#declarativeTransform = true;
+    this.applyDeclarativeTransform();
   }
 
   #hasOwningScene(): boolean {

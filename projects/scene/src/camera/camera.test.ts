@@ -170,7 +170,7 @@ describe(SceneCamera.metadata.tag, () => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined);
     camera.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent));
     expect(sceneCameraController.getContribution(camera)).toBeNull();
-    expect(errors[0]?.detail).toMatchObject({ code: 'camera-frame-unresolved', element: camera });
+    expect(errors[0]?.detail).toMatchObject({ code: 'frame-unresolved', element: camera });
 
     camera.frame = 'robot';
     camera.setAttribute('follow-mode', 'unsupported');

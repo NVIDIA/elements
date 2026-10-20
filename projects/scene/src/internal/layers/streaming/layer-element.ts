@@ -3,6 +3,7 @@
 
 import { html, LitElement, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { getFrameReference, setFrameReference } from '../../composition/frame/state.js';
 import type { LayoutDescriptor } from '../../records/layouts/define-layout.js';
 import type { LineTopology, LineWidthUnit } from '../lines/data.js';
 import {
@@ -32,6 +33,18 @@ export abstract class StreamingLayerElement<Source extends StreamingLayerSource>
   extends LitElement
   implements SceneInteractionTarget
 {
+  /** Names the owning coordinate frame; an omitted value uses DOM ancestry. */
+  @property({ type: String })
+  get frame(): string | null {
+    return getFrameReference(this);
+  }
+
+  set frame(value: string | null) {
+    const previous = this.frame;
+    setFrameReference(this, value);
+    this.requestUpdate('frame', previous);
+  }
+
   protected constructor(
     kind: StreamingLayerKind | 'triangles',
     layout: LayoutDescriptor,

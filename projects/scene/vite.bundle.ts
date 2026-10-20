@@ -4,6 +4,7 @@ import { libraryBundleConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config: UserConfig = {
+    build: { rolldownOptions: { output: { codeSplitting: true } } },
     resolve: {
       alias: { '@nvidia-elements/scene': resolve(import.meta.dirname, './src') }
     }

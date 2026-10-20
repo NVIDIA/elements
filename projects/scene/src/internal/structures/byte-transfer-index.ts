@@ -9,7 +9,7 @@ export interface ByteTransferSpan {
 }
 
 // eslint-disable-next-line max-params -- @hotpath Numeric arguments avoid allocating a result object for every transfer.
-export type ByteTransferVisitor = (target: number, sourceOffset: number, targetOffset: number, size: number) => void;
+type ByteTransferVisitor = (target: number, sourceOffset: number, targetOffset: number, size: number) => void;
 
 interface IndexedSpan extends ByteTransferSpan {
   readonly end: number;

@@ -8,7 +8,7 @@ import { registerLabelLayer } from '../../layers/labels/layer-state.js';
 import { LineVertexBuffer } from '../../layers/lines/buffer.js';
 import { registerMarkerLayer } from '../../layers/markers/layer-state.js';
 import { registerMeshLayer } from '../../layers/mesh/layer-state.js';
-import { registerModelLayer } from '../../layers/model/layer-state.js';
+import { registerBodyLayer } from '../../layers/body/layer-state.js';
 import { registerPolygonLayer } from '../../layers/polygon/layer-state.js';
 import {
   publishStreamingLayer,
@@ -59,7 +59,7 @@ describe('resolveSceneLayer', () => {
     ['nve-scene-points', 'point', 'point'],
     ['nve-scene-triangles', 'triangle', 'triangle'],
     ['nve-scene-mesh', 'mesh', 'mesh'],
-    ['nve-scene-model', 'model', 'mesh'],
+    ['nve-scene-body', 'body', 'mesh'],
     ['nve-scene-polygon', 'polygon', 'mesh'],
     ['nve-scene-heightfield', 'heightfield', 'mesh']
   ] as const)('resolves and builds the registered %s family', (tag, kind, renderType) => {
@@ -181,10 +181,10 @@ function registerLayer(layer: HTMLElement, kind: SceneLayerKind): void {
     registerMeshLayer(layer);
     return;
   }
-  if (kind === 'model') {
+  if (kind === 'body') {
     registerMarkerLayer(layer, 'cube');
     registerElementIdentity(layer);
-    registerModelLayer(layer);
+    registerBodyLayer(layer);
     return;
   }
   if (kind === 'polygon') {

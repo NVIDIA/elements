@@ -8,7 +8,7 @@ import {
   takeHeightfieldLayerRenderData
 } from '../heightfield/layer-state.js';
 import { registerMarkerLayer } from '../markers/layer-state.js';
-import { registerModelLayer, setModelLayerGeometry, takeModelLayerRenderData } from '../model/layer-state.js';
+import { registerBodyLayer, setBodyLayerGeometry, takeBodyLayerRenderData } from '../body/layer-state.js';
 import { getMeshRenderData, registerMeshLayer, replaceMeshGeometry } from './layer-state.js';
 
 const options = { iterations: 10, throws: true, time: 750, warmupTime: 200 } satisfies BenchRunOptions;
@@ -23,7 +23,7 @@ function geometry(vertexCount: number) {
   };
 }
 
-function snapshotReader(kind: 'mesh' | 'model' | 'heightfield', side: number) {
+function snapshotReader(kind: 'mesh' | 'body' | 'heightfield', side: number) {
   const layer = document.createElement('div');
   const vertexCount = side * side;
   if (kind === 'heightfield') {
@@ -38,10 +38,10 @@ function snapshotReader(kind: 'mesh' | 'model' | 'heightfield', side: number) {
     return () => takeHeightfieldLayerRenderData(layer);
   }
   registerMarkerLayer(layer, 'cube');
-  if (kind === 'model') {
-    registerModelLayer(layer);
-    setModelLayerGeometry(layer, [{ geometry: geometry(vertexCount) }]);
-    return () => takeModelLayerRenderData(layer);
+  if (kind === 'body') {
+    registerBodyLayer(layer);
+    setBodyLayerGeometry(layer, [{ geometry: geometry(vertexCount) }]);
+    return () => takeBodyLayerRenderData(layer);
   }
   registerMeshLayer(layer);
   replaceMeshGeometry(layer, geometry(vertexCount));
@@ -50,7 +50,7 @@ function snapshotReader(kind: 'mesh' | 'model' | 'heightfield', side: number) {
 
 describe('mesh color snapshot classification', () => {
   for (const side of [64, 256]) {
-    for (const kind of ['mesh', 'model', 'heightfield'] as const) {
+    for (const kind of ['mesh', 'body', 'heightfield'] as const) {
       test(`captures ${BATCH} unchanged ${kind} snapshots with ${side * side} opaque colors`, async ({ bench }) => {
         const snapshot = snapshotReader(kind, side);
         await bench('repeated snapshots', () => {

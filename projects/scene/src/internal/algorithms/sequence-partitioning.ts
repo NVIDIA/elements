@@ -30,7 +30,7 @@ export interface SequencePartition {
   readonly sourceOffset: number;
 }
 
-export type SequencePartitionVisitor = (
+type SequencePartitionVisitor = (
   ...partition: [offset: number, count: number, windowOffset: number, windowCount: number, sourceOffset: number]
 ) => void;
 

@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it } from 'vitest';
+import { updateFrameRegistry } from './registry.js';
 import { composePreciseMat4, identityPreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
 import {
   clearFrameTransform,
@@ -13,8 +14,7 @@ import {
   isFrameChainValid,
   isFrameStateRegistered,
   registerFrameState,
-  setFrameTransform,
-  setSceneNamedFrames
+  setFrameTransform
 } from './state.js';
 
 describe('frame transform state', () => {
@@ -55,9 +55,12 @@ describe('frame transform state', () => {
   });
 
   it('normalizes lookup names without leaking named frames between scenes', () => {
-    const scene = document.createElement('div');
-    const frame = document.createElement('div');
-    setSceneNamedFrames(scene, new Map([['arm', frame]]));
+    const scene = document.createElement('nve-scene');
+    const frame = document.createElement('nve-scene-frame');
+    frame.setAttribute('name', 'arm');
+    registerFrameState(frame);
+    scene.append(frame);
+    updateFrameRegistry(scene, [frame], []);
     expect(getNamedSceneFrame(scene, ' arm ')).toBe(frame);
     expect(getNamedSceneFrame(document.createElement('div'), 'arm')).toBeUndefined();
   });

@@ -11,7 +11,7 @@
   "videoStart": 0,
   "videoEnd": 32.06666666666667,
   "recordingSha256": "afe8008266acfaca0dd3d5c84d27bbcc4638dd5572f4fe60fa68cd27a2cc6879",
-  "robotSha256": "be676441ba2d242e9e89a846d2ca4dbc1720d47d45e716301fa5725942089db2",
+  "robotSha256": "defa7586d7a519a659352d14b7fe41f604e7955c3c42b1b41355401d8297c59d",
   "triangles": 60682,
   "sources": [
     {
@@ -112,7 +112,7 @@
     },
     {
       "path": "replay/robot.json",
-      "sha256": "be676441ba2d242e9e89a846d2ca4dbc1720d47d45e716301fa5725942089db2"
+      "sha256": "defa7586d7a519a659352d14b7fe41f604e7955c3c42b1b41355401d8297c59d"
     },
     {
       "path": "replay/assets/Base.stl",
@@ -170,5 +170,10 @@
       "path": "replay/assets/LICENSE",
       "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
     }
-  ]
+  ],
+  "robotRegeneration": {
+    "inputSha256": "be676441ba2d242e9e89a846d2ca4dbc1720d47d45e716301fa5725942089db2",
+    "operation": "Convert joint origin rpy to x y z w quaternions using Rz(yaw) * Ry(pitch) * Rx(roll); replace parent link with parent joint frame; capture the existing cadAngle scale and offset conventions.",
+    "geometryChanged": false
+  }
 }

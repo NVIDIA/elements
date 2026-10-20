@@ -92,7 +92,7 @@ The result is a frozen, independent world-space axis-aligned box with `minimum` 
 | Content or state                                                     | Contribution                                                                                                            |
 | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | Primitive instances                                                  | Conservative geometry boxes transformed by instance and ancestor frame poses; arrows extend from origin toward the head |
-| Meshes, models, polygons                                             | Captured geometry bounds, transformed by each effective instance; geometry without instances uses its identity instance |
+| Meshes, bodies, polygons                                             | Captured geometry bounds, transformed by each effective instance; geometry without instances uses its identity instance |
 | Terrain                                                              | Captured grid positions and heights                                                                                     |
 | Triangle vertices                                                    | Published effective vertex prefix                                                                                       |
 | World-sized points                                                   | Positions expanded to contain the camera-facing square at any orientation                                               |
@@ -102,7 +102,7 @@ The result is a frozen, independent world-space axis-aligned box with `minimum` 
 | `countLimit`                                                         | Restricts the published active prefix exactly as rendering does                                                         |
 | `[hidden]` layer or ancestor                                         | Omitted unless `includeHidden: true`; arbitrary CSS visibility doesn't change query selection                           |
 | Empty or invalid source, invalid frame chain, pending custom element | No contribution; unrelated valid content still contributes                                                              |
-| Unloaded model asset                                                 | No contribution; await `model.loadComplete` before querying loaded geometry                                             |
+| Unloaded STL body                                                    | No contribution; await `body.loadComplete` before querying loaded geometry                                              |
 
 Bounds don't depend on opacity, occlusion, or renderer culling. Transparent records still contribute. Bounds can be conservative for curved primitives, transformed mesh boxes, and line joins. Pixel footprints and label text can extend beyond a fitted view; increase padding when those footprints matter. Query detached scene-owned content before GPU initialization. Buffer capacity doesn't contribute: valid empty sources return no geometry, according to each source's capacity contract.
 

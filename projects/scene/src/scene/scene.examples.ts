@@ -16,7 +16,7 @@ import '@nvidia-elements/scene/heightfield/define.js';
 import '@nvidia-elements/scene/labels/define.js';
 import '@nvidia-elements/scene/lines/define.js';
 import '@nvidia-elements/scene/mesh/define.js';
-import '@nvidia-elements/scene/model/define.js';
+import '@nvidia-elements/scene/body/define.js';
 import '@nvidia-elements/scene/points/define.js';
 import '@nvidia-elements/scene/polygon/define.js';
 import '@nvidia-elements/scene/pyramids/define.js';
@@ -48,7 +48,7 @@ export const InstallSource = {
 };
 
 /**
- * @summary Combines reference geometry, a directional arrow, opaque and outlined translucent primitives, streamed data, terrain, a mesh, a compound model, and a vector label. Use this scene as a compact starting point for exploring each major Scene component.
+ * @summary Combines reference geometry, a directional arrow, opaque and outlined translucent primitives, streamed data, terrain, a mesh, a compound body, and a vector label. Use this scene as a compact starting point for exploring each major Scene component.
  */
 export const Default = {
   render: () => html`
@@ -69,10 +69,10 @@ export const Default = {
       </nve-scene-pyramids>
       <nve-scene-frame position="[5,2.5,0]">
         <nve-scene-labels id="basic-labels"></nve-scene-labels>
-        <nve-scene-model>
-          <nve-scene-part shape="cube" position="[0,0,0.6]" scale="[1.4,0.9,0.5]" color="yellow"></nve-scene-part>
-          <nve-scene-part shape="cylinder" position="[0,0,1.3]" scale="[0.2,0.2,0.9]" color="yellow"></nve-scene-part>
-        </nve-scene-model>
+        <nve-scene-body>
+          <nve-scene-shape kind="cube" position="[0,0,0.6]" scale="[1.4,0.9,0.5]" color="yellow"></nve-scene-shape>
+          <nve-scene-shape kind="cylinder" position="[0,0,1.3]" scale="[0.2,0.2,0.9]" color="yellow"></nve-scene-shape>
+        </nve-scene-body>
       </nve-scene-frame>
 
       <nve-scene-cubes source='[{"position":[-4,0,0.5],"color":"rgba(0,255,255,0.2)","outlineColor":"cyan"},{"position":[-3.6,0.2,0.5],"color":"rgba(255,255,0,0.2)","outlineColor":"yellow"},{"position":[-4.4,-0.2,0.5],"color":"rgba(255,0,255,0.2)","outlineColor":"magenta"}]'>
@@ -113,7 +113,7 @@ export const Default = {
       import '@nvidia-elements/scene/pyramids/define.js';
       import '@nvidia-elements/scene/frame/define.js';
       import '@nvidia-elements/scene/labels/define.js';
-      import '@nvidia-elements/scene/model/define.js';
+      import '@nvidia-elements/scene/body/define.js';
       import '@nvidia-elements/scene/heightfield/define.js';
       import '@nvidia-elements/scene/mesh/define.js';
       import '@nvidia-elements/scene/points/define.js';

@@ -10,7 +10,7 @@ export interface VersionedRangeSnapshot {
   readonly ranges: readonly Readonly<RangeInterval>[];
 }
 
-export type VersionedRangeChanges =
+type VersionedRangeChanges =
   | { readonly kind: 'ranges'; readonly ranges: readonly Readonly<RangeInterval>[] }
   | { readonly kind: 'unknown' };
 

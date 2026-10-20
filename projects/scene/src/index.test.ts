@@ -11,10 +11,12 @@ import { CylinderBuffer, SceneCylinders } from '@nvidia-elements/scene/cylinders
 import { SceneFrame } from '@nvidia-elements/scene/frame';
 import { SceneGridlines } from '@nvidia-elements/scene/gridlines';
 import { SceneHeightfield } from '@nvidia-elements/scene/heightfield';
+import { SceneModel } from '@nvidia-elements/scene/model';
+import { SceneJoint } from '@nvidia-elements/scene/joint';
 import { LabelBuffer, SceneLabels } from '@nvidia-elements/scene/labels';
 import { LineVertexBuffer, SceneLines } from '@nvidia-elements/scene/lines';
 import { SceneMesh, type SceneMeshGeometry, type SceneTextureCaptureResult } from '@nvidia-elements/scene/mesh';
-import { SceneModel, ScenePart, type ModelInstanceSource } from '@nvidia-elements/scene/model';
+import { SceneBody, SceneShape, type BodyInstanceSource } from '@nvidia-elements/scene/body';
 import { PointBuffer, ScenePoints } from '@nvidia-elements/scene/points';
 import {
   ScenePolygon,
@@ -95,7 +97,7 @@ type PublicFeatureIdLayer =
   | SceneLabels
   | SceneLines
   | SceneMesh
-  | SceneModel
+  | SceneBody
   | ScenePoints
   | ScenePolygon
   | ScenePyramids
@@ -169,18 +171,20 @@ const componentEntrypointRuntimeExports = [
   'SceneFrame',
   'SceneGridlines',
   'SceneHeightfield',
+  'SceneModel',
+  'SceneJoint',
   'SceneLabels',
   'SceneLines',
   'SceneMesh',
-  'SceneModel',
-  'ScenePart',
+  'SceneBody',
+  'SceneShape',
   'ScenePoints',
   'ScenePolygon',
   'ScenePyramids',
   'SceneSpheres',
   'SceneTriangles',
   'TriangleVertexBuffer',
-  'compileParts'
+  'compileShapes'
 ] as const;
 
 describe('@nvidia-elements/scene', () => {
@@ -198,8 +202,8 @@ describe('@nvidia-elements/scene', () => {
     expect(SceneHeightfield.metadata.tag).toBe('nve-scene-heightfield');
     expect(SceneLabels.metadata.tag).toBe('nve-scene-labels');
     expect(SceneMesh.metadata.tag).toBe('nve-scene-mesh');
-    expect(SceneModel.metadata.tag).toBe('nve-scene-model');
-    expect(ScenePart.metadata.tag).toBe('nve-scene-part');
+    expect(SceneBody.metadata.tag).toBe('nve-scene-body');
+    expect(SceneShape.metadata.tag).toBe('nve-scene-shape');
     expect(ScenePolygon.metadata.tag).toBe('nve-scene-polygon');
     expect(ScenePyramids.metadata.tag).toBe('nve-scene-pyramids');
     for (const element of [
@@ -208,13 +212,15 @@ describe('@nvidia-elements/scene', () => {
       SceneCubes,
       SceneCylinders,
       SceneMesh,
-      SceneModel,
+      SceneBody,
       ScenePolygon,
       ScenePyramids,
       SceneSpheres
     ]) {
       expect(element.layout).toBe(MARKER);
     }
+    expect(SceneModel.metadata.tag).toBe('nve-scene-model');
+    expect(SceneJoint.metadata.tag).toBe('nve-scene-joint');
     expect(SceneLabels.layout).toBe(LABEL);
     expect(SceneLines.layout).toBe(LINE_VERTEX);
     expect(ScenePoints.layout).toBe(POINT);
@@ -358,8 +364,11 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<TriangleVertexBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
     expectTypeOf<SceneHeightfield['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<SceneMesh['featureId']>().toEqualTypeOf<number | undefined>();
-    expectTypeOf<SceneModel['source']>().toEqualTypeOf<ModelInstanceSource | null>();
-    expectTypeOf<SceneModel['featureId']>().toEqualTypeOf<number | undefined>();
+    expectTypeOf<Extract<keyof SceneBody, 'asset' | 'format'>>().toEqualTypeOf<never>();
+    expectTypeOf<SceneBody['src']>().toEqualTypeOf<string>();
+    expectTypeOf<SceneBody['loadComplete']>().toEqualTypeOf<Promise<void>>();
+    expectTypeOf<SceneBody['source']>().toEqualTypeOf<BodyInstanceSource | null>();
+    expectTypeOf<SceneBody['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<ScenePolygon['source']>().toEqualTypeOf<PolygonInstanceSource | null>();
     expectTypeOf<ScenePolygon['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<MarkerInit['featureId']>().toEqualTypeOf<number | undefined>();
@@ -429,10 +438,12 @@ describe('@nvidia-elements/scene', () => {
       SceneFrame,
       SceneGridlines,
       SceneHeightfield,
+      SceneModel,
+      SceneJoint,
       SceneLabels,
       SceneMesh,
-      SceneModel,
-      ScenePart,
+      SceneBody,
+      SceneShape,
       ScenePolygon,
       ScenePyramids,
       SceneSpheres,
