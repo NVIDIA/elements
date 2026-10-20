@@ -11,14 +11,13 @@ import {
 import type { LayoutDescriptor } from '../../records/layouts/define-layout.js';
 import { LINE_VERTEX } from '../../records/layouts/built-ins.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
+import { lineRecordHasTransparency, lineRecordIsOpaque, lineRecordIsValid, type LineWidthUnit } from '../lines/data.js';
 import {
   lineCountIsValid,
-  lineRecordHasTransparency,
-  lineRecordIsOpaque,
-  lineRecordIsValid,
-  type LineTopology,
-  type LineWidthUnit
-} from '../lines/data.js';
+  lineSegmentCount,
+  lineSegmentStart,
+  type LineTopology
+} from '../../algorithms/line-topology.js';
 import { VertexStreamBuffer, type VertexStreamIssue, type VertexStreamRenderData } from './vertex-stream.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import {
@@ -31,6 +30,7 @@ import {
 } from '../../records/packed-record-source.js';
 import { replacePreparedVertexSource } from '../sources/prepared-record-source.js';
 import {
+  packedPublicationNeedsRender,
   publishPackedSourceGeneration,
   resolvePackedSourcePublication,
   type PackedSourcePublication
@@ -143,15 +143,10 @@ export function publishStreamingLayer(layer: HTMLElement, options?: ScenePublish
   const candidateReady = streamingPublicationIsValid(state, source, publication.resolved.activeCount);
   const lineCountValid = state.kind !== 'line' || lineCountIsValid(publication.resolved.activeCount, state.topology);
   state.publicationError = !candidateReady || !lineCountValid;
-  let visualChanged = previousPublicationError !== state.publicationError;
   if (!state.publicationError) {
-    visualChanged =
-      applySuccessfulStreamingPublication({
-        publication,
-        source,
-        state
-      }) || visualChanged;
+    applySuccessfulStreamingPublication({ publication, source, state });
   }
+  const visualChanged = packedPublicationNeedsRender(publication, state, previousPublicationError);
   updateDataDiagnostics(layer, state);
   notifyOwningScene(layer, visualChanged ? 'render' : 'identity');
 }
@@ -160,11 +155,10 @@ function applySuccessfulStreamingPublication(options: {
   publication: PackedSourcePublication;
   source: StreamingLayerSource;
   state: StreamingLayerState;
-}): boolean {
+}): void {
   const { publication, source, state } = options;
   applyStreamingPublication(state, publication.resolved, publication.geometryChanged);
   state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
-  return publication.visualChanged;
 }
 
 function streamingPublicationIsValid(
@@ -279,7 +273,8 @@ function createVertexStreamBuffer(options: StreamingLayerOptions): VertexStreamB
 function getStreamPasses(state: StreamingLayerState, data: VertexStreamRenderData, ready: boolean): StreamPasses {
   if (!ready) return { opaque: false, transparent: false };
   if (state.kind !== 'line') return { opaque: data.opaque, transparent: data.transparent };
-  const count = state.topology === 'loop' ? data.count : Math.max(0, data.count - 1);
+  const segments = lineSegmentCount(data.count, state.topology);
+  const count = segments === 0 ? 0 : lineSegmentStart(segments - 1, state.topology) + 1;
   const evenOnly = state.topology === 'segments';
   return {
     opaque: state.buffer.hasOpacity(count, evenOnly),

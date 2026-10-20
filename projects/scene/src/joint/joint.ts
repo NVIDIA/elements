@@ -2,8 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { property } from 'lit/decorators/property.js';
-import { SceneFrame } from '../frame/frame.js';
-import { invalidateFrameTransform, notifyFrameStateChange } from '../internal/composition/frame/state.js';
+import { LitElement, nothing, type PropertyValues } from 'lit';
+import { validateFrameName } from '../internal/composition/frame/registry.js';
+import {
+  getFramePose,
+  setFrameTransform,
+  registerFrameState,
+  invalidateFrameTransform,
+  notifyFrameStateChange
+} from '../internal/composition/frame/state.js';
 import { captureJointAxis, composeJointMotion, type SceneJointType } from '../internal/composition/joint/motion.js';
 import {
   disconnectJoint,
@@ -12,6 +19,7 @@ import {
   registerJoint
 } from '../internal/composition/joint/state.js';
 import {
+  FRAME_TRANSFORM,
   JOINT_AXIS,
   JOINT_LIMIT,
   JOINT_MIMIC,
@@ -20,9 +28,11 @@ import {
   type SceneErrorCode
 } from '../internal/diagnostics/errors.js';
 import { diagnosticReporterService } from '../internal/diagnostics/reporter.service.js';
-import type { ScenePose, Vec3 } from '../internal/math/types.js';
+import type { Quaternion, ScenePose, Vec3 } from '../internal/math/types.js';
 
 interface JointInputs {
+  position: Vec3 | null;
+  orientation: Quaternion | null;
   type: SceneJointType;
   axis: Vec3;
   value: number;
@@ -39,16 +49,44 @@ export type { SceneJointType } from '../internal/composition/joint/motion.js';
 
 /**
  * @element nve-scene-joint
- * @description A coordinate frame with one degree of freedom, composed after its declarative origin.
+ * @description A connection that moves a child rigid body relative to a parent body.
+ * Parent and child name bodies in the same model scope, independently of DOM order.
+ * Position and orientation define the joint origin in parent-body coordinates.
+ * The child pose is `parent × origin × motion`. Assign value for live motion; assignments
+ * in one task become visible together at the next render boundary.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/joint
- * @slot - Contains nested frames and renderable scene elements.
  * @stable false
  */
-export class SceneJoint extends SceneFrame {
+export class SceneJoint extends LitElement {
   static readonly metadata = { tag: 'nve-scene-joint', version: '0.0.0' };
 
+  /** Joint identifier in this model's joint namespace. */
+  @property({ type: String }) name: string | null = null;
+
+  /** Required parent body name in this model scope. */
+  @property({ type: String }) parent: string | null = null;
+
+  /** Child body name in this model scope. Each child accepts exactly one incoming joint. */
+  @property({ type: String }) child: string | null = null;
+
+  /** Current parent-to-child pose, including origin and motion. */
+  get pose(): ScenePose {
+    return getFramePose(this);
+  }
+
+  render() {
+    return nothing;
+  }
+
+  protected override updated(changes: PropertyValues<this>): void {
+    if (changes.has('name')) validateFrameName(this);
+    if (changes.has('name') || changes.has('parent') || changes.has('child')) notifyFrameStateChange(this);
+  }
+
   #inputs: JointInputs = {
+    position: null,
+    orientation: null,
     type: 'revolute',
     axis: [1, 0, 0] as Vec3,
     value: 0,
@@ -65,6 +103,7 @@ export class SceneJoint extends SceneFrame {
 
   constructor() {
     super();
+    registerFrameState(this);
     registerJoint(
       this,
       () => this.applyDeclarativeTransform(),
@@ -72,7 +111,30 @@ export class SceneJoint extends SceneFrame {
     );
   }
 
-  /** Selects revolute, continuous, prismatic, or fixed motion. */
+  /** Joint origin translation in parent-body coordinates, in meters. Applies synchronously. */
+  @property({ type: Array })
+  get position(): Vec3 | null {
+    return this.#inputs.position;
+  }
+  set position(value: Vec3 | null) {
+    this.#set('position', value ?? null);
+  }
+
+  /** Joint origin orientation as an XYZW quaternion in parent-body coordinates. Applies synchronously. */
+  @property({ type: Array })
+  get orientation(): Quaternion | null {
+    return this.#inputs.orientation;
+  }
+  set orientation(value: Quaternion | null) {
+    this.#set('orientation', value ?? null);
+  }
+
+  /**
+   * Selects motion, defaulting to revolute. Revolute and continuous rotate about axis
+   * in radians; continuous allows rotations past ±π and ignores limits. Prismatic
+   * translates along axis in meters. Fixed contributes identity motion and ignores axis.
+   * Unknown types report joint-type and invalidate this transform until corrected.
+   */
   @property({ type: String })
   get type(): SceneJointType {
     return this.#inputs.type;
@@ -81,7 +143,11 @@ export class SceneJoint extends SceneFrame {
     this.#set('type', value);
   }
 
-  /** Joint-local axis, normalized when captured. Ignored for fixed joints. */
+  /**
+   * Joint-local axis, defaulting to [1, 0, 0], normalized on capture.
+   * Zero or non-finite axes report joint-axis and invalidate the transform until corrected.
+   * Ignored for fixed joints.
+   */
   @property({ type: Array })
   get axis(): Vec3 {
     return [...this.#inputs.axis];
@@ -90,7 +156,12 @@ export class SceneJoint extends SceneFrame {
     this.#set('axis', value);
   }
 
-  /** Current joint input in radians or metres. Applies synchronously. */
+  /**
+   * Reflected input in radians for rotation or meters for translation; defaults to zero.
+   * Applies synchronously with effective value `scale * value + offset`, unless mimic
+   * supplies the effective value. Non-finite numeric inputs report joint-value and invalidate
+   * the transform until corrected. The application owns the current value.
+   */
   @property({ type: Number, reflect: true })
   get value(): number {
     return this.#inputs.value;
@@ -99,7 +170,12 @@ export class SceneJoint extends SceneFrame {
     this.#set('value', value);
   }
 
-  /** Optional lower limit on the effective value. Values are never clamped. */
+  /**
+   * Optional lower limit on the effective value. A crossing reports joint-limit once
+   * per episode while applying the value and keeping the chain valid; never clamps.
+   * Lower greater than upper reports joint-limit and disables checking. Continuous joints
+   * ignore limits. A non-finite limit reports joint-value and invalidates the transform.
+   */
   @property({ type: Number })
   get lower(): number | null {
     return this.#inputs.lower;
@@ -108,7 +184,11 @@ export class SceneJoint extends SceneFrame {
     this.#set('lower', value);
   }
 
-  /** Optional upper limit on the effective value. Values are never clamped. */
+  /**
+   * Optional upper limit on the effective value. Crossings report joint-limit without
+   * clamping or invalidating the chain. Reversed limits disable checking; continuous
+   * joints ignore limits. A non-finite limit reports joint-value and invalidates the transform.
+   */
   @property({ type: Number })
   get upper(): number | null {
     return this.#inputs.upper;
@@ -117,7 +197,7 @@ export class SceneJoint extends SceneFrame {
     this.#set('upper', value);
   }
 
-  /** Calibration offset added after scaling the input value. */
+  /** Calibration offset in joint units, default zero: effective = scale * value + offset. Non-finite input reports joint-value. */
   @property({ type: Number })
   get offset(): number {
     return this.#inputs.offset;
@@ -126,7 +206,7 @@ export class SceneJoint extends SceneFrame {
     this.#set('offset', value);
   }
 
-  /** Calibration multiplier applied to the input value. */
+  /** Calibration multiplier, default one, to reconcile recorded and model zeros or directions. Non-finite input reports joint-value. */
   @property({ type: Number })
   get scale(): number {
     return this.#inputs.scale;
@@ -135,7 +215,12 @@ export class SceneJoint extends SceneFrame {
     this.#set('scale', value);
   }
 
-  /** Names one non-mimic joint in the same scene and name scope. Ignores its own value. */
+  /**
+   * Joint name resolved in the nearest model scope, then outward. Target must be one
+   * non-mimic joint in this scene; otherwise joint-mimic invalidates this transform.
+   * Effective value is `mimicMultiplier * target.effectiveValue + mimicOffset`; own value,
+   * scale, and offset do not drive motion. Dependents update synchronously. One level only.
+   */
   @property({ type: String })
   get mimic(): string | null {
     return this.#inputs.mimic;
@@ -173,9 +258,9 @@ export class SceneJoint extends SceneFrame {
     super.disconnectedCallback();
   }
 
-  protected override captureDeclarativePose(): ScenePose | false {
+  protected captureDeclarativePose(): ScenePose | false {
     const revision = this.#inputRevision;
-    const origin = super.captureDeclarativePose() || { position: [0, 0, 0], orientation: [0, 0, 0, 1] };
+    const origin = captureOrigin(this.position, this.orientation);
     const effective = this.#captureValue();
     const axis = this.type === 'fixed' ? ([1, 0, 0] as Vec3) : captureJointAxis(this.#inputs.axis);
     const validAxis = this.#diagnostic(
@@ -188,6 +273,19 @@ export class SceneJoint extends SceneFrame {
     if (effective === null || !validAxis || !axis) return false;
     this.#checkLimits(effective);
     return composeJointMotion(origin, { type: this.type, axis, value: effective });
+  }
+
+  protected applyDeclarativeTransform(): void {
+    const revision = this.#inputRevision;
+    try {
+      const pose = this.captureDeclarativePose();
+      if (revision !== this.#inputRevision) return;
+      if (pose === false) invalidateFrameTransform(this);
+      else setFrameTransform(this, pose);
+      this.#diagnostic(FRAME_TRANSFORM, false, 'Joint origin must contain finite values and a nonzero quaternion.');
+    } catch {
+      this.#diagnostic(FRAME_TRANSFORM, true, 'Joint origin must contain finite values and a nonzero quaternion.');
+    }
   }
 
   #set<Key extends keyof JointInputs>(key: Key, value: JointInputs[Key]): void {
@@ -265,4 +363,19 @@ export class SceneJoint extends SceneFrame {
     });
     return !active;
   }
+}
+
+function validTuple(value: unknown, length: number): boolean {
+  return (
+    Array.isArray(value) &&
+    value.length === length &&
+    value.every(item => typeof item === 'number' && Number.isFinite(item))
+  );
+}
+
+function captureOrigin(position: Vec3 | null, orientation: Quaternion | null): ScenePose {
+  const origin: ScenePose = { position: position ?? [0, 0, 0], orientation: orientation ?? [0, 0, 0, 1] };
+  if (!validTuple(origin.position, 3) || !validTuple(origin.orientation, 4) || Math.hypot(...origin.orientation) === 0)
+    throw new TypeError('Invalid joint origin.');
+  return origin;
 }

@@ -12,7 +12,7 @@ import {
   type SceneGPUDevice
 } from '../internal/testing/scene.js';
 import { transformPointMat4 } from '../internal/math/mat4.js';
-import type { Quaternion, ScenePose, Vec3 } from '../internal/math/types.js';
+import type { Vec3 } from '../internal/math/types.js';
 import { Scene } from '../scene/scene.js';
 import { SceneFrame } from './frame.js';
 import './define.js';
@@ -54,8 +54,8 @@ describe(SceneFrame.metadata.tag, () => {
   it('should isolate stored and returned poses from external mutation', async () => {
     const frame = await createFrame();
     const position: Vec3 = [1, 2, 3];
-    const pose: ScenePose = { position, orientation: [0, 0, 0, 2] };
-    frame.setPose(pose);
+    frame.position = position;
+    frame.orientation = [0, 0, 0, 2];
     position[0] = 99;
     const first = frame.pose;
     (first.position as Vec3)[1] = 99;
@@ -63,38 +63,30 @@ describe(SceneFrame.metadata.tag, () => {
     expect(frame.pose).toEqual({ position: [1, 2, 3], orientation: [0, 0, 0, 1] });
   });
 
-  it('should support explicit poses, partial attribute defaults, and attribute removal', async () => {
+  it('should apply position and orientation assignments synchronously with partial defaults', async () => {
     const frame = await createFrame();
-    frame.setPose({ position: [4, 5, 6], orientation: [0, 0, 0, 1] });
+    frame.position = [4, 5, 6];
+    expect(frame.pose).toEqual({ position: [4, 5, 6], orientation: [0, 0, 0, 1] });
     expect(transformPointMat4(frame.getWorldMatrix(), [0, 0, 0])).toEqual([4, 5, 6]);
-    frame.setPose(null);
-
-    frame.position = [1, 2, 3];
-    frame.orientation = [0, 0, 0, 1];
-    await elementIsStable(frame);
-    expect(transformPointMat4(frame.getWorldMatrix(), [0, 0, 0])).toEqual([1, 2, 3]);
 
     frame.position = null;
     frame.orientation = [0, 0, 1, 0];
-    await elementIsStable(frame);
-    expect(transformPointMat4(frame.getWorldMatrix(), [0, 0, 0])).toEqual([0, 0, 0]);
+    expect(frame.pose).toEqual({ position: [0, 0, 0], orientation: [0, 0, 1, 0] });
 
     frame.orientation = null;
-    await elementIsStable(frame);
     expect(frame.pose).toEqual({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
+    expect([...frame.getWorldMatrix()]).toEqual([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
   });
 
-  it('should report invalid declarative transforms once per error episode and recover', async () => {
+  it('should report invalid transforms once per error episode and recover', async () => {
     consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     const frame = await createFrame();
     const errors: CustomEvent[] = [];
     frame.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent));
     frame.position = [4, 5, 6];
     frame.orientation = [0, 0, 0, 1];
-    await elementIsStable(frame);
 
     Reflect.set(frame, 'position', [0, 0]);
-    await elementIsStable(frame);
     expect(() => frame.pose).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
     expect(() => frame.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
     expect(errors).toHaveLength(1);
@@ -102,110 +94,45 @@ describe(SceneFrame.metadata.tag, () => {
     expect(errors[0]?.detail).toMatchObject({ code: 'frame-transform', element: frame, severity: 'error' });
 
     Reflect.set(frame, 'position', [0, 0]);
-    await elementIsStable(frame);
     expect(errors).toHaveLength(1);
 
     Reflect.set(frame, 'position', [0, 0, Number.NaN]);
-    await elementIsStable(frame);
     expect(() => frame.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
 
     frame.position = [1, 2, 3];
-    await elementIsStable(frame);
     expect(frame.pose).toEqual({ position: [1, 2, 3], orientation: [0, 0, 0, 1] });
 
     Reflect.set(frame, 'orientation', [0, 0, 0]);
-    await elementIsStable(frame);
     expect(() => frame.pose).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
 
     frame.orientation = [0, 0, 0, 0];
-    await elementIsStable(frame);
     expect(() => frame.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
     expect(errors).toHaveLength(2);
     expect(consoleError).toHaveBeenCalledTimes(2);
 
     frame.position = null;
     frame.orientation = null;
-    await elementIsStable(frame);
     expect(frame.pose).toEqual({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
     expect([...frame.getWorldMatrix()]).toEqual([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
   });
 
-  it('should replace the current explicit pose on every assignment', async () => {
+  it('should keep the latest assignment across pending component updates', async () => {
     const frame = await createFrame();
-    frame.setPose({ position: [1, 0, 0], orientation: [0, 0, 0, 1] });
-    frame.setPose({ position: [3, 0, 0], orientation: [0, 0, 0, 1] });
-    expect(frame.pose).toEqual({ position: [3, 0, 0], orientation: [0, 0, 0, 1] });
-    expect(transformPointMat4(frame.getWorldMatrix(), [0, 0, 0])).toEqual([3, 0, 0]);
-  });
-
-  it('keeps an explicit pose authoritative across pending declarative updates and release', async () => {
-    const frame = await createFrame();
-    frame.position = [1, 0, 0];
-    frame.setPose({ orientation: [0, 0, 0, 1], position: [5, 0, 0] });
+    frame.setAttribute('position', '[1,0,0]');
+    frame.position = [5, 0, 0];
     await elementIsStable(frame);
     expect(frame.pose).toEqual({ orientation: [0, 0, 0, 1], position: [5, 0, 0] });
-
-    frame.position = [2, 0, 0];
-    frame.setPose(null);
-    expect(frame.pose).toEqual({ orientation: [0, 0, 0, 1], position: [2, 0, 0] });
   });
 
-  it('reports invalid explicit poses without throwing and captures valid replacements', async () => {
-    consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    const frame = await createFrame();
-    const errors: CustomEvent[] = [];
-    frame.addEventListener('nve-scene-error', event => errors.push(event as CustomEvent));
-
-    expect(() => frame.setPose({ orientation: [0, 0, 0, 0], position: [0, 0, 0] })).not.toThrow();
-    expect(() => frame.pose).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
-    expect(() => frame.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
-    const pose = { orientation: [0, 0, 0, 1] as Quaternion, position: [3, 0, 0] as Vec3 };
-    frame.setPose(pose);
-    pose.position[0] = 7;
-    expect(frame.pose.position).toEqual([3, 0, 0]);
-    expect(errors.map(event => event.detail.code)).toEqual(['frame-transform']);
-  });
-
-  it('keeps invalid fallback input inert when explicit authority releases', async () => {
-    consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    const frame = await createFrame();
-    frame.setPose({ orientation: [0, 0, 0, 1], position: [3, 0, 0] });
-    Reflect.set(frame, 'position', [0, 0]);
-    await elementIsStable(frame);
-    expect(frame.pose.position).toEqual([3, 0, 0]);
-
-    frame.setPose(null);
-    expect(() => frame.pose).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
-    expect(() => frame.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
-    frame.position = [4, 0, 0];
-    await elementIsStable(frame);
-    expect(frame.pose.position).toEqual([4, 0, 0]);
-  });
-
-  it('should make malformed, nonfinite, and zero-length explicit poses inert', async () => {
-    consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    const frame = await createFrame();
-    const setPose = (sample: unknown) => Reflect.apply(frame.setPose, frame, [sample]);
-
-    expect(() => setPose({ position: [0, 0], orientation: [0, 0, 0, 1] })).not.toThrow();
-    expect(() => setPose({ stamp: 1, position: [0, 0, 0], orientation: [0, 0, 0, 1] })).not.toThrow();
-    expect(() => setPose({ position: [0, 0, Number.NaN], orientation: [0, 0, 0, 1] })).not.toThrow();
-    expect(() => setPose({ position: [0, 0, 0], orientation: [0, 0, 0, 0] })).not.toThrow();
-    expect(() => frame.pose).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
-    frame.setPose({ position: [1, 2, 3], orientation: [0, 0, 0, 1] });
-    expect(frame.pose).toEqual({ position: [1, 2, 3], orientation: [0, 0, 0, 1] });
-    expect(transformPointMat4(frame.getWorldMatrix(), [0, 0, 0])).toEqual([1, 2, 3]);
-  });
-
-  it('should resolve identity without a pose and clear through setPose', async () => {
+  it('should resolve identity without a pose', async () => {
     const frame = await createFrame();
     expect([...frame.getWorldMatrix()]).toEqual([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
     expect(frame.pose).toEqual({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
+  });
 
-    frame.setPose({ position: [1, 2, 3], orientation: [0, 0, 0, 1] });
-    frame.setPose(null);
-    expect(frame.pose).toEqual({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
-    expect([...frame.getWorldMatrix()]).toEqual([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+  it('should not expose a pose setter method', async () => {
+    const frame = await createFrame();
+    expect('setPose' in frame).toBe(false);
   });
 
   it('should reject unexpected arguments during world-matrix resolution', async () => {
@@ -226,12 +153,14 @@ describe(SceneFrame.metadata.tag, () => {
         scene.querySelector<SceneFrame>(SceneFrame.metadata.tag),
         'Expected current transform frame.'
       );
-      frame.setPose({ position: [0, 0, 0], orientation: [0, 0, 0, 1] });
+      frame.position = [0, 0, 0];
+      frame.orientation = [0, 0, 0, 1];
       gpu.resolveNextDevice();
       await scene.ready;
 
       const submissions = gpu.submissions.length;
-      frame.setPose({ position: [2, 0, 0], orientation: [0, 0, 0, 1] });
+      frame.position = [2, 0, 0];
+      frame.orientation = [0, 0, 0, 1];
       await vi.waitFor(() => expect(gpu.submissions.length).toBeGreaterThan(submissions));
       expect(transformPointMat4(frame.getWorldMatrix(), [0, 0, 0])).toEqual([2, 0, 0]);
     });

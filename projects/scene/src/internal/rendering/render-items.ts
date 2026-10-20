@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { lineSegmentCount, type LineTopology, type LineWidthUnit } from '../layers/lines/data.js';
+import { lineSegmentCount, type LineTopology } from '../algorithms/line-topology.js';
+import type { LineWidthUnit } from '../layers/lines/data.js';
 import type { MarkerLayerRenderData } from '../layers/markers/layer-state.js';
 import type { MeshRenderData } from '../layers/mesh/render-data.js';
 import type { PointSizeUnit } from '../layers/points/data.js';
@@ -133,10 +134,4 @@ export function getPickItemCount(item: SceneRenderItem): number {
   if (item.type === 'line') return lineSegmentCount(item.data.count, item.topology);
   if (item.type === 'label') return item.data.count;
   return item.type === 'triangle' ? item.data.count / 3 : item.data.count;
-}
-
-export function topologyUniform(topology: LineTopology): number {
-  if (topology === 'loop') return 1;
-  if (topology === 'segments') return 2;
-  return 0;
 }

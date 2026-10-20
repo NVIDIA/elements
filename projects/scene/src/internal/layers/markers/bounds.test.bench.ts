@@ -5,6 +5,7 @@ import type { BenchRunOptions } from 'vitest';
 import { describe, test } from 'vitest';
 import { MarkerBoundsClassifier, MarkerBoundsIndex } from './bounds.js';
 import { composePreciseMat4 } from '../../math/mat4.js';
+import { PRIMITIVE_ENCLOSING_RADII } from '../../math/primitive-bounds.js';
 
 const runOptions = { iterations: 10, throws: true, time: 750, warmupTime: 200 } satisfies BenchRunOptions;
 const QUERY_BATCH = 2_048;
@@ -73,7 +74,7 @@ describe('marker bounds aggregation', () => {
       bytes[index * 48 + 43] = 255;
     }
     const source = { bytes, floats, view: null };
-    const index = new MarkerBoundsIndex();
+    const index = new MarkerBoundsIndex(PRIMITIVE_ENCLOSING_RADII.cube);
     index.reset(count);
     index.updateBlocks({ ...source, count, recordCount: count, start: 0 });
     index.getBounds(count, source);

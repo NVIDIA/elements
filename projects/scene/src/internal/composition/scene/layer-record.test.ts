@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { registerFrameState } from '../frame/state.js';
 import { describe, expect, it } from 'vitest';
 import { registerHeightfieldLayer } from '../../layers/heightfield/layer-state.js';
 import { POINT, LINE_VERTEX, TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
@@ -8,7 +9,7 @@ import { registerLabelLayer } from '../../layers/labels/layer-state.js';
 import { LineVertexBuffer } from '../../layers/lines/buffer.js';
 import { registerMarkerLayer } from '../../layers/markers/layer-state.js';
 import { registerMeshLayer } from '../../layers/mesh/layer-state.js';
-import { registerBodyLayer } from '../../layers/body/layer-state.js';
+import { registerBodyLayer, setBodyLayerGeometry } from '../../layers/body/layer-state.js';
 import { registerPolygonLayer } from '../../layers/polygon/layer-state.js';
 import {
   publishStreamingLayer,
@@ -65,6 +66,10 @@ describe('resolveSceneLayer', () => {
   ] as const)('resolves and builds the registered %s family', (tag, kind, renderType) => {
     const layer = document.createElement(tag);
     registerLayer(layer, kind);
+    if (kind === 'body') {
+      registerFrameState(layer);
+      setBodyLayerGeometry(layer, [{ type: 'cube' }]);
+    }
     const record = resolveSceneLayer(layer);
 
     expect(record).toEqual(expect.objectContaining({ kind, layer, status: 'registered' }));

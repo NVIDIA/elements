@@ -493,9 +493,11 @@ function cameraT2Template(): string {
       import { SceneCubes } from '../../src/cubes/cubes.ts';
       define(Scene); define(SceneCamera); define(SceneFrame); define(SceneCubes);
       const robot = document.querySelector('#robot');
-      robot.setPose({ position: [-2, 0, 0], orientation: [0, 0, 0, 1] });
+      robot.position = [-2, 0, 0];
+      robot.orientation = [0, 0, 0, 1];
       globalThis.updateFollow = () => {
-        robot.setPose({ position: [2, 0, 0], orientation: [0, 0, 0, 1] });
+        robot.position = [2, 0, 0];
+        robot.orientation = [0, 0, 0, 1];
       };
     </script>
   `;

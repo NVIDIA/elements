@@ -1,24 +1,29 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { BODY_SRC } from '../../diagnostics/errors.js';
+import { MESH_SRC } from '../../diagnostics/errors.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
-import { loadGeometry } from './load.js';
-import { beginBodyLayerAsset, failBodyLayerAsset, getBodyLayerGeometry, setBodyLayerGeometry } from './layer-state.js';
+import { loadGeometry } from '../body/load.js';
+import type { SceneBodyGeometry } from '../body/types.js';
+import type { SceneMeshGeometry } from './types.js';
 
 interface AssetHost extends HTMLElement {
   requestUpdate(name?: string, previous?: unknown): void;
 }
 
 /** Owns bounded file requests and capture independently of the selected geometry format. */
-export class BodyAssetLoader {
+export class MeshAssetLoader {
   readonly #host: AssetHost;
+  readonly #apply: (geometry: SceneMeshGeometry | null) => void;
   #src = '';
   #request?: AssetRequest;
   #loadComplete: Promise<void> = Promise.resolve();
+  #loaded = false;
 
-  constructor(host: AssetHost) {
+  /** apply installs decoded geometry, or null while a file is pending, failed, or cleared. */
+  constructor(host: AssetHost, apply: (geometry: SceneMeshGeometry | null) => void) {
     this.#host = host;
+    this.#apply = apply;
   }
 
   get src(): string {
@@ -27,19 +32,16 @@ export class BodyAssetLoader {
 
   set src(value: string) {
     const next = value ?? '';
-    if (typeof next !== 'string') throw new TypeError('Body src must be a URL string.');
+    if (typeof next !== 'string') throw new TypeError('Mesh src must be a URL string.');
     const previous = this.#src;
     if (next === previous) return;
     this.#cancel();
     this.#src = next;
+    this.#loaded = false;
     this.#updateError(false);
-    if (next) {
-      beginBodyLayerAsset(this.#host);
-      this.#queue();
-    } else {
-      setBodyLayerGeometry(this.#host, null);
-      this.#loadComplete = Promise.resolve();
-    }
+    this.#apply(null);
+    if (next) this.#queue();
+    else this.#loadComplete = Promise.resolve();
     this.#host.requestUpdate('src', previous);
   }
 
@@ -51,13 +53,14 @@ export class BodyAssetLoader {
     this.#cancel();
     const previous = this.#src;
     this.#src = '';
+    this.#loaded = false;
     this.#loadComplete = Promise.resolve();
     this.#updateError(false);
     this.#host.requestUpdate('src', previous);
   }
 
   connect(): void {
-    if (this.#src && getBodyLayerGeometry(this.#host) === null && !this.#request) this.#queue();
+    if (this.#src && !this.#loaded && !this.#request) this.#queue();
     this.#start();
   }
 
@@ -84,19 +87,18 @@ export class BodyAssetLoader {
   async #load(request: AssetRequest): Promise<void> {
     try {
       const signal = request.controller.signal;
-      const geometry = await loadGeometry(resolveBodySrc(this.#src, this.#host.baseURI), { signal });
+      const geometry = await loadGeometry(resolveMeshSrc(this.#src, this.#host.baseURI), { signal });
       if (this.#request !== request) return;
-      setBodyLayerGeometry(this.#host, geometry, 'asset');
+      this.#apply(toMeshGeometry(geometry));
       this.#request = undefined;
-      this.#host.requestUpdate('geometry');
+      this.#loaded = true;
       request.resolve();
     } catch (error) {
       if (this.#request !== request) return;
       this.#request = undefined;
-      failBodyLayerAsset(this.#host);
       this.#updateError(
         true,
-        `Unable to load body src "${this.#src}": ${error instanceof Error ? error.message : String(error)}`
+        `Unable to load mesh src "${this.#src}": ${error instanceof Error ? error.message : String(error)}`
       );
       request.reject(error);
     }
@@ -106,13 +108,13 @@ export class BodyAssetLoader {
     const request = this.#request;
     if (!request) return;
     this.#request = undefined;
-    const error = new DOMException('Body load cancelled.', 'AbortError');
+    const error = new DOMException('Mesh load cancelled.', 'AbortError');
     request.controller.abort(error);
     request.reject(error);
   }
 
   #updateError(active: boolean, message = ''): void {
-    diagnosticReporterService.update({ active, code: BODY_SRC, element: this.#host, message, severity: 'error' });
+    diagnosticReporterService.update({ active, code: MESH_SRC, element: this.#host, message, severity: 'error' });
   }
 }
 
@@ -134,8 +136,22 @@ function createAssetRequest(): AssetRequest {
   return { controller: new AbortController(), promise, resolve, reject, started: false };
 }
 
+/** Accepts decoder output that is one triangle set; hierarchies need the body compiler that mesh pages omit. */
+function toMeshGeometry(nodes: SceneBodyGeometry): SceneMeshGeometry | null {
+  if (nodes.length === 0) return null;
+  const [node] = nodes;
+  if (nodes.length === 1 && node?.geometry && isUntransformed(node) && node.color === undefined) return node.geometry;
+  throw new TypeError(
+    'Mesh src must decode to one untransformed triangle mesh; assign loadGeometry() results to body geometry for hierarchies.'
+  );
+}
+
+function isUntransformed(node: SceneBodyGeometry[number]): boolean {
+  return node.position === undefined && node.orientation === undefined && node.scale === undefined;
+}
+
 /** Resolves the request URL while retaining the decoder's original sub-asset fragment. */
-function resolveBodySrc(src: string, baseURI: string): string {
+function resolveMeshSrc(src: string, baseURI: string): string {
   const url = new URL(src, baseURI);
   const hash = src.indexOf('#');
   url.hash = '';

@@ -19,7 +19,8 @@ describe('scene frame visual runtime', () => {
           import '@nvidia-elements/scene/camera/define.js';
           import '@nvidia-elements/scene/axes/define.js';
           const frame = document.querySelector('nve-scene-frame');
-          frame.setPose({ position: [5, 0, 0], orientation: [0, 0, 0, 1] });
+          frame.position = [5, 0, 0];
+          frame.orientation = [0, 0, 0, 1];
         </script>
       `,
       page =>

@@ -43,7 +43,7 @@ export async function apiShortcode(tag, type, name = null, value = null) {
   }
   if (!content) return '';
 
-  return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`.replaceAll('\n', '');
+  return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`;
 }
 
 /**
@@ -86,7 +86,7 @@ export function renderAPINameTable(apiValue) {
     </nve-grid>`
         : description.replaceAll('nve-text', 'class="api-value-table-description" nve-text')
     }
-  </div>`;
+  </div>`.replaceAll('\n', '');
 }
 
 /**
@@ -132,7 +132,12 @@ function getAPIItems(element, type) {
       items = [];
   }
   return (items ?? [])
-    .filter(item => !item.name?.startsWith?.('nve-') && item.privacy !== 'private' && item.privacy !== 'protected')
+    .filter(
+      item =>
+        (type === 'event' || !item.name?.startsWith?.('nve-')) &&
+        item.privacy !== 'private' &&
+        item.privacy !== 'protected'
+    )
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 

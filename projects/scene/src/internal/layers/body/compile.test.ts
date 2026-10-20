@@ -3,13 +3,13 @@
 
 import { describe, expect, it } from 'vitest';
 import { compileShapes, createBodyPrimitiveGeometry, type BodyShape } from './compile.js';
-import { createPrimitiveGeometry, type ScenePrimitiveKind } from '../../math/primitive-geometry.js';
+import { createPrimitiveGeometry, type ScenePrimitiveType } from '../../math/primitive-geometry.js';
 import { normalizeQuaternion, rotateVectorByQuaternion } from '../../math/quaternion.js';
 
 describe(compileShapes.name, () => {
   it('should compile an identity cube from its unit tessellation with opaque white colors', () => {
     const source = createBodyPrimitiveGeometry('cube');
-    const compiled = compileShapes([{ kind: 'cube' }]);
+    const compiled = compileShapes([{ type: 'cube' }]);
 
     expect(compiled.positions).toEqual(deinterleave(source.vertices, 0));
     expect(compiled.normals).toEqual(deinterleave(source.vertices, 3));
@@ -20,7 +20,7 @@ describe(compileShapes.name, () => {
   it('should apply translation, orientation, and nonuniform scale to positions and inverse-transpose normals', () => {
     const compiled = compileShapes([
       {
-        kind: 'cube',
+        type: 'cube',
         position: [3, 5, 7],
         orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2],
         scale: [2, 3, 4]
@@ -37,7 +37,7 @@ describe(compileShapes.name, () => {
     }
 
     const sphere = compileShapes([
-      { kind: 'sphere', orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2], scale: [2, 3, 4] }
+      { type: 'sphere', orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2], scale: [2, 3, 4] }
     ]);
     // The first icosphere normal is normalized [-1, φ, 0]. Its inverse-transpose normal, then Z-axis rotation, is:
     // [-0.7333492283, -0.6798521231, 0]. An orientation-only normal transform would not produce these values.
@@ -47,7 +47,7 @@ describe(compileShapes.name, () => {
   });
 
   it('should retain outward-facing winding after a mirrored transform', () => {
-    const compiled = compileShapes([{ kind: 'cube', scale: [-1, 2, 3] }]);
+    const compiled = compileShapes([{ type: 'cube', scale: [-1, 2, 3] }]);
     for (let offset = 0; offset < compiled.indices.length; offset += 3) {
       const first = compiled.indices[offset]! * 3;
       const second = compiled.indices[offset + 1]! * 3;
@@ -59,13 +59,13 @@ describe(compileShapes.name, () => {
     }
   });
 
-  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+  it.each<ScenePrimitiveType>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
     'matches quaternion position and inverse-scale normal references for %s vertices',
     kind => {
       const source = createBodyPrimitiveGeometry(kind);
       const orientation = normalizeQuaternion([1, -2, 3, 4]);
       const compiled = compileShapes([
-        { kind, position: [1e6 + 0.125, -0.25, 30], orientation, scale: [-2, 0.125, 5] }
+        { type: kind, position: [1e6 + 0.125, -0.25, 30], orientation, scale: [-2, 0.125, 5] }
       ]);
       for (let offset = 0, vertex = 0; offset < source.vertices.length; offset += 6, vertex += 1) {
         const position = rotateVectorByQuaternion(
@@ -94,8 +94,8 @@ describe(compileShapes.name, () => {
     const first = createBodyPrimitiveGeometry('cube');
     const second = createBodyPrimitiveGeometry('pyramid');
     const compiled = compileShapes([
-      { kind: 'cube', color: [1, 0, 0, 1] },
-      { kind: 'pyramid', position: [2, 0, 0], color: [0, 1, 0, 0.5] }
+      { type: 'cube', color: [1, 0, 0, 1] },
+      { type: 'pyramid', position: [2, 0, 0], color: [0, 1, 0, 0.5] }
     ]);
     const firstVertices = first.vertices.length / 6;
 
@@ -116,36 +116,36 @@ describe(compileShapes.name, () => {
 
   it.each([
     { shape: null, error: TypeError, message: 'shapes[0] must be an object.' },
-    { shape: {}, error: TypeError, message: 'shapes[0].kind must name a supported primitive.' },
-    { shape: { kind: 'torus' }, error: TypeError, message: 'shapes[0].kind must name a supported primitive.' },
+    { shape: {}, error: TypeError, message: 'shapes[0].type must name a supported primitive.' },
+    { shape: { type: 'torus' }, error: TypeError, message: 'shapes[0].type must name a supported primitive.' },
     {
-      shape: { kind: 'cube', position: [0, 0] },
+      shape: { type: 'cube', position: [0, 0] },
       error: TypeError,
       message: 'shapes[0].position must contain exactly 3 numbers.'
     },
     {
-      shape: { kind: 'cube', position: [0, '0', 0] },
+      shape: { type: 'cube', position: [0, '0', 0] },
       error: TypeError,
       message: 'shapes[0].position must contain exactly 3 numbers.'
     },
     {
-      shape: { kind: 'cube', position: [0, Number.NaN, 0] },
+      shape: { type: 'cube', position: [0, Number.NaN, 0] },
       error: RangeError,
       message: 'shapes[0].position must contain finite numbers.'
     },
     {
-      shape: { kind: 'cube', orientation: [0, 0, 0, 0] },
+      shape: { type: 'cube', orientation: [0, 0, 0, 0] },
       error: RangeError,
       message: 'Quaternion length must be greater than zero.'
     },
-    { shape: { kind: 'cube', scale: [1, 0, 1] }, error: RangeError, message: 'shapes[0].scale must not contain zero.' },
+    { shape: { type: 'cube', scale: [1, 0, 1] }, error: RangeError, message: 'shapes[0].scale must not contain zero.' },
     {
-      shape: { kind: 'cube', color: 'not-a-color' },
+      shape: { type: 'cube', color: 'not-a-color' },
       error: TypeError,
       message: 'shapes[0].color must be a supported Scene color.'
     },
     {
-      shape: { kind: 'cube', color: [1, 1, 1, 2] },
+      shape: { type: 'cube', color: [1, 1, 1, 2] },
       error: RangeError,
       message: 'shapes[0].color values must be finite and in the range 0..1.'
     }
@@ -161,7 +161,7 @@ describe(compileShapes.name, () => {
     Object.defineProperty(oversized, 0, {
       get() {
         reads += 1;
-        return { kind: 'cube' };
+        return { type: 'cube' };
       }
     });
 
@@ -178,18 +178,18 @@ describe(compileShapes.name, () => {
     });
   });
 
-  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+  it.each<ScenePrimitiveType>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
     'keeps repeated %s compilation isolated from modified outputs and tessellations',
     kind => {
       const shapes: BodyShape[] = [
         {
-          kind,
+          type: kind,
           position: [3, 5, 7],
           orientation: [0, 0, Math.SQRT1_2, Math.SQRT1_2],
           scale: [-2, 3, 4],
           color: [0.25, 0.5, 0.75, 0.5]
         },
-        { kind, position: [-1, 2, 0], scale: [1, 0.5, 2], color: [1, 0, 0, 1] }
+        { type: kind, position: [-1, 2, 0], scale: [1, 0.5, 2], color: [1, 0, 0, 1] }
       ];
       const retained = compileShapes(shapes);
       const modified = compileShapes(shapes);
@@ -216,7 +216,7 @@ describe(compileShapes.name, () => {
 });
 
 describe('body primitive tessellators', () => {
-  it.each<ScenePrimitiveKind>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
+  it.each<ScenePrimitiveType>(['cube', 'sphere', 'cylinder', 'cone', 'pyramid'])(
     'should retain the marker bytes for the %s tessellation',
     kind => {
       const marker = createPrimitiveGeometry(kind);

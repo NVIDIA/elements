@@ -103,7 +103,7 @@ describe('semantic marker buffers', () => {
   });
 
   it('tracks inactive counts, opaque outlines, and invalid bounds', () => {
-    const instances = new MarkerInstanceBuffer();
+    const instances = new MarkerInstanceBuffer('cube');
     instances.setSourceCount(undefined);
     expect(() => instances.setSourceCount(-1)).toThrow(RangeError);
 

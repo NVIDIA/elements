@@ -5,6 +5,8 @@ import { LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID } from '../../diagnostics/
 import { MARKER } from '../../records/layouts/built-ins.js';
 import { getFieldOffset } from '../../records/layouts/define-layout.js';
 import { MarkerBoundsIndex, type MarkerBounds } from './bounds.js';
+import { PRIMITIVE_ENCLOSING_RADII } from '../../math/primitive-bounds.js';
+import type { PrimitiveKind } from '../../math/primitive-geometry.js';
 import { assertCommitRange, getArrayBufferViewBytes } from '../../records/storage.js';
 import { CopyOnWriteBytes } from '../../structures/copy-on-write-bytes.js';
 import { FlagPrefixIndex } from '../../structures/flag-prefix-index.js';
@@ -15,6 +17,7 @@ type MarkerInstanceIssue = typeof LAYOUT_STRIDE_MISMATCH | typeof LAYOUT_VALUE_I
 export interface PreparedMarkerSnapshot {
   readonly bounds: MarkerBoundsIndex;
   readonly bytes: Uint8Array;
+  readonly kind: PrimitiveKind;
   readonly structuralIssues: ReadonlySet<MarkerInstanceIssue>;
   readonly summary: FlagPrefixIndex;
 }
@@ -63,10 +66,11 @@ const OPAQUE_OUTLINE_ALPHA = 32;
 
 export class MarkerInstanceBuffer {
   #alphaStatus?: MarkerAlphaStatus;
-  #bounds = new MarkerBoundsIndex();
+  #bounds: MarkerBoundsIndex;
   #boundsShared = false;
   #boundsStatus?: MarkerBoundsStatus;
   readonly #dirtyRanges = new RangeSet();
+  readonly #kind: PrimitiveKind;
   #source: ArrayBufferView | null = null;
   #sourceCount: number | undefined;
   #status?: MarkerInstanceStatus;
@@ -75,6 +79,12 @@ export class MarkerInstanceBuffer {
   #summaryShared = false;
   readonly #storage = new CopyOnWriteBytes();
   #version = 0;
+
+  /** Bounds each record with the local bounds of the primitive kind that its layer draws. */
+  constructor(kind: PrimitiveKind) {
+    this.#kind = kind;
+    this.#bounds = new MarkerBoundsIndex(PRIMITIVE_ENCLOSING_RADII[kind]);
+  }
 
   get #ownedBytes(): Uint8Array | null {
     return this.#storage.bytes;
@@ -120,9 +130,9 @@ export class MarkerInstanceBuffer {
     this.#replaceValidSource(source, sourceCount);
   }
 
-  /** Shares validated immutable bytes and indexes until this buffer changes. */
+  /** Shares validated immutable bytes and indexes until this buffer changes. Other primitive kinds rebuild bounds. */
   replacePrepared(source: ArrayBufferView, prepared: PreparedMarkerSnapshot, sourceCount?: number): void {
-    if (source.byteLength !== prepared.bytes.byteLength) {
+    if (source.byteLength !== prepared.bytes.byteLength || prepared.kind !== this.#kind) {
       this.replace(source, sourceCount);
       return;
     }
@@ -152,6 +162,7 @@ export class MarkerInstanceBuffer {
     return {
       bounds: this.#bounds,
       bytes,
+      kind: this.#kind,
       structuralIssues: new Set(this.#structuralIssues),
       summary: this.#summary
     };
@@ -523,11 +534,11 @@ function includeRecordBounds(
   positionX: number,
   positionY: number,
   positionZ: number,
-  radius: number
+  largestScale: number
 ): void {
   if (!bounds) return;
-  if (Number.isFinite(positionX + positionY + positionZ + radius)) {
-    bounds.includeRecordValues(index, positionX, positionY, positionZ, radius);
+  if (Number.isFinite(positionX + positionY + positionZ + largestScale)) {
+    bounds.includeRecordValues(index, positionX, positionY, positionZ, largestScale);
   }
 }
 

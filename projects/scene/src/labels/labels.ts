@@ -32,6 +32,11 @@ const scaleUnitConverter = { fromAttribute: normalizeLabelScaleUnit };
 /**
  * @element nve-scene-labels
  * @description Renders streamed, camera-facing SDF text labels in 3D space.
+ * Depth-tested signed-distance-field glyphs use a built-in printable ASCII atlas and a
+ * replacement glyph for unsupported characters. Records are visual annotations, not
+ * individual DOM or keyboard targets. Provide an accessible name and fallback content on
+ * the owning scene when labels convey required information. Enable interactive for
+ * glyph-aware picking; transparent pixels around and inside glyphs do not produce hits.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/labels
  * @event {SceneClick} nve-scene-click - Dispatched when pointer activation resolves to this layer.
@@ -67,7 +72,11 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
     registerLabelLayer(this);
   }
 
-  /** Enables automatic pointer hit testing and routed interaction events for this layer. */
+  /**
+   * Enables automatic pointer hit testing and routed interaction events; default false.
+   * Picking follows visible glyph coverage. Assign application identities through
+   * source.featureIds on the LabelBuffer, then publish() to capture changes.
+   */
   @property({ type: Boolean })
   get interactive(): boolean {
     return getLayerInteractive(this);
@@ -77,7 +86,11 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
     setLayerInteractive(this, value);
   }
 
-  /** Replaces the label records or renders nothing when null. */
+  /**
+   * LabelBuffer containing text, position, scale, and color, or a compatible external
+   * packed source. Null renders nothing. Update record handles and call publish() to
+   * capture changed numeric records. Each consumer owns its published snapshot.
+   */
   get source(): LabelSource | null {
     return getLabelLayerSource(this);
   }
@@ -95,11 +108,19 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
     setLabelLayerCount(this, value);
   }
 
-  /** Unit used by each record's scale. Defaults to CSS pixels. */
+  /**
+   * Unit used by every record's scale. Default pixel keeps stable CSS-pixel height as
+   * the camera moves. Use world to size labels in scene units.
+   */
   @property({ attribute: 'scale-unit', converter: scaleUnitConverter })
   scaleUnit: LabelScaleUnit = 'pixel';
 
-  /** Captures changed records and publishes the selected active source prefix to this layer. */
+  /**
+   * Synchronously captures changed records and the selected active prefix for this layer.
+   * start and count select records, not bytes; activeCount chooses the complete prefix.
+   * Without options, uses the buffer's count. Other consumers of the same source remain
+   * unchanged until they publish; recovery restores this layer's last captured state.
+   */
   publish(options?: ScenePublishOptions): void {
     publishLabelLayer(this, options);
   }

@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
+/// <reference types="vite/client" />
 
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { ArrowBuffer, SceneArrows, type ArrowSource } from '@nvidia-elements/scene/arrows';
@@ -114,6 +115,14 @@ type SurfaceTargetHasIndex = 'index' extends keyof SurfaceTarget ? true : false;
 
 const expectedLayoutRuntimeExports = ['LABEL', 'LINE_VERTEX', 'MARKER', 'POINT', 'TRIANGLE_VERTEX'] as const;
 
+const rootUtilityRuntimeExports = [
+  'compileShapes',
+  'decodeGeometry',
+  'loadGeometry',
+  'quaternionFromRpy',
+  'registerGeometryDecoder'
+] as const;
+
 const internalLayoutRuntimeExports = [
   'FIELD_BYTE_WIDTHS',
   'defineLayout',
@@ -183,8 +192,7 @@ const componentEntrypointRuntimeExports = [
   'ScenePyramids',
   'SceneSpheres',
   'SceneTriangles',
-  'TriangleVertexBuffer',
-  'compileShapes'
+  'TriangleVertexBuffer'
 ] as const;
 
 describe('@nvidia-elements/scene', () => {
@@ -309,6 +317,18 @@ describe('@nvidia-elements/scene', () => {
     expect('texture' in SceneMesh.prototype).toBe(false);
   });
 
+  it('exports utility functions from the root entrypoint only', () => {
+    for (const name of rootUtilityRuntimeExports) expect(scenePackage).toHaveProperty(name);
+    const entrypoints = import.meta.glob<Record<string, unknown>>('./*/index.ts', { eager: true });
+    expect(Object.keys(entrypoints).length).toBeGreaterThan(20);
+    for (const [path, entrypoint] of Object.entries(entrypoints)) {
+      const functions = Object.entries(entrypoint).flatMap(([name, value]) =>
+        typeof value === 'function' && !Function.prototype.toString.call(value).startsWith('class') ? [name] : []
+      );
+      expect(functions, path).toEqual([]);
+    }
+  });
+
   it('should keep the root entrypoint focused on shared data APIs', () => {
     for (const name of expectedLayoutRuntimeExports) {
       expect(scenePackage).toHaveProperty(name);
@@ -364,9 +384,18 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<TriangleVertexBuffer['featureIds']>().toEqualTypeOf<SceneFeatureIds | null>();
     expectTypeOf<SceneHeightfield['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<SceneMesh['featureId']>().toEqualTypeOf<number | undefined>();
-    expectTypeOf<Extract<keyof SceneBody, 'asset' | 'format'>>().toEqualTypeOf<never>();
-    expectTypeOf<SceneBody['src']>().toEqualTypeOf<string>();
+    expectTypeOf<Extract<keyof SceneBody, 'asset' | 'format' | 'src'>>().toEqualTypeOf<never>();
     expectTypeOf<SceneBody['loadComplete']>().toEqualTypeOf<Promise<void>>();
+    expectTypeOf<Extract<keyof SceneMesh, 'format'>>().toEqualTypeOf<never>();
+    expectTypeOf<SceneMesh['src']>().toEqualTypeOf<string>();
+    expectTypeOf<SceneMesh['loadComplete']>().toEqualTypeOf<Promise<void>>();
+    expectTypeOf<SceneMesh['position']>().toEqualTypeOf<Vec3>();
+    expectTypeOf<SceneMesh['orientation']>().toEqualTypeOf<Quaternion | null>();
+    expectTypeOf<SceneShape['orientation']>().toEqualTypeOf<Quaternion | null>();
+    expectTypeOf<
+      Extract<keyof SceneFrame | keyof SceneJoint | keyof SceneShape | keyof SceneMesh, 'rpy'>
+    >().toEqualTypeOf<never>();
+    expectTypeOf<SceneMesh['scale']>().toEqualTypeOf<Vec3>();
     expectTypeOf<SceneBody['source']>().toEqualTypeOf<BodyInstanceSource | null>();
     expectTypeOf<SceneBody['featureId']>().toEqualTypeOf<number | undefined>();
     expectTypeOf<ScenePolygon['source']>().toEqualTypeOf<PolygonInstanceSource | null>();

@@ -81,6 +81,7 @@ Applied to `src/**/*.ts`, `src/**/*.tsx`, test files, and `*.examples.ts`.
 
 **Source hygiene**
 
+- **`max-jsdoc-length`**. Caps JSDoc on class fields, methods, constructors, `get`/`set` accessors, auto-accessors, and constructor parameter properties at 400 characters. Counts tags and Markdown after stripping comment markers, leading stars, and repeated whitespace. Class descriptions and standalone functions remain outside its scope. Configure `{ maxLength: 400 }` to change the limit. The shared config enables warnings while existing long descriptions migrate; the rule never truncates comments automatically.
 - **`no-dead-code`**. Flags commented-out imports, exports, declarations, control-flow, and test blocks. The project currently sets this to `warn` during cleanup.
 - **`no-deep-class-inheritance`**. Limits class inheritance chains to two superclass hops by default, stopping at configured `allowedRoots` such as `HTMLElement` and `LitElement`.
 - **`require-spdx-header`**. Every source file must start with the two-line SPDX header (`SPDX-FileCopyrightText` copyright + `SPDX-License-Identifier: Apache-2.0`). The rule accepts any 4-digit year; auto-fix preserves an existing year and falls back to the current year only when inserting a header from scratch.

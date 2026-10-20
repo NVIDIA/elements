@@ -1,8 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { getNameScope } from '../frame/registry.js';
-import { getNamedFrameElement } from '../frame/state.js';
+import { getNameScope, resolveJointName } from '../frame/registry.js';
 
 interface JointState {
   readonly refresh: () => void;
@@ -79,7 +78,7 @@ export function refreshSceneJoints(scene: HTMLElement, frames: readonly HTMLElem
 function lookupTarget(element: HTMLElement, state: JointState) {
   const scene = typeof element.closest === 'function' ? element.closest<HTMLElement>('nve-scene') : null;
   const name = state.mimic()?.trim();
-  const named = scene && name ? getNamedFrameElement(scene, name, element) : undefined;
+  const named = scene && name ? resolveJointName(scene, name, element) : undefined;
   const candidate = scene && named && isVisibleJointScope(element, named, scene) ? named : undefined;
   return { scene, candidate, candidateMimic: getMimicName(candidate) };
 }

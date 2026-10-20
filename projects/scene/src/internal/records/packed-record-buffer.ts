@@ -18,6 +18,11 @@ import {
 } from './packed-record-source.js';
 import type { Quaternion, Vec3 } from '../math/types.js';
 
+/**
+ * Fixed-capacity allocation, initial records, or both. Capacity defaults to records.length
+ * and must be a nonnegative integer at least as large as the seeded count. Construction
+ * validates and packs every record; unused capacity remains initialized but inactive.
+ */
 export type RecordBufferOptions<Init> =
   | {
       readonly capacity: number;
@@ -57,10 +62,29 @@ interface RecordHandleOptions {
   readonly view: DataView;
 }
 
+/**
+ * Fixed-capacity packed storage shared by primitive, vertex, and label buffers.
+ * Construct with capacity, initial records, or both; omitted capacity uses records.length.
+ * Construction validates and packs every initial record before returning. Zero capacity
+ * is valid but cannot grow. Unused capacity stays initialized and inactive; count selects
+ * the contiguous active prefix. Empty sources remain valid for scene readiness and skip
+ * GPU allocation and uploads without blocking populated layers.
+ *
+ * set() replaces a record or appends at count; add() appends and returns a stable handle;
+ * at() returns a handle for an active slot. Handles identify storage slots rather than
+ * entities, and writing an inactive slot never reactivates it. setCount() changes the
+ * active prefix without resizing or publishing; regrowth requires valid initialized records.
+ * Publish separately on each consuming layer to capture mutations.
+ *
+ * Record APIs advance version, allowing consumers to reuse a prepared generation.
+ * mutableBytes exposes the canonical layout's field offsets, stride, and little-endian
+ * values. Access permanently disables prepared-source caching because later direct writes
+ * cannot advance version. Prefer record APIs when consumers share infrequently changing data.
+ */
 export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandle>
   implements VersionedPackedRecordSource<Kind>
 {
-  /** Record capacity for this allocation. */
+  /** Fixed nonnegative record capacity, at least the initial record count. Zero is valid but cannot grow. */
   readonly capacity: number;
   readonly [PACKED_RECORD_SOURCE]: Kind;
 
@@ -102,7 +126,12 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     this.#count = records.length;
   }
 
-  /** Complete mutable byte allocation. Direct access disables prepared-source caching. */
+  /**
+   * Complete mutable canonical byte allocation in the exported layout's little-endian
+   * encoding. Access permanently disables prepared-source caching: later direct writes
+   * cannot advance version. Prefer record APIs for consumers sharing unchanged generations.
+   * Byte edits require publication on each consuming layer and do not change count.
+   */
   get mutableBytes(): Uint8Array {
     this.#mutableStateEscaped = true;
     return this.#bytes;
@@ -134,7 +163,11 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     return this.at(index);
   }
 
-  /** Lazily creates and caches a stable mutable handle. */
+  /**
+   * Returns a stable mutable handle for an active storage slot. Handles identify slots,
+   * not application entities; later slot reuse changes the represented record. A retained
+   * handle can write an inactive slot without reactivating it. Throws for inactive indices.
+   */
   at(index: number): RecordHandle {
     this.#assertActiveIndex(index);
     const existing = this.#handles.get(index);
@@ -167,7 +200,11 @@ export class PackedRecordBuffer<Kind extends PackedRecordKind, Init, RecordHandl
     return this;
   }
 
-  /** Changes the active contiguous prefix without resizing or publishing the allocation. */
+  /**
+   * Changes the active prefix without resizing or publishing. Regrowth requires valid
+   * initialized records in exposed slots. Each consuming layer must publish separately;
+   * a count-only reduction can publish with count: 0 to avoid uploading unchanged bytes.
+   */
   setCount(count: number): this {
     if (!Number.isInteger(count) || count < 0 || count > this.capacity) {
       throw new RangeError('Record count must be a nonnegative integer within capacity.');

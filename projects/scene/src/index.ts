@@ -4,6 +4,21 @@
 // utilities
 export { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './internal/records/layouts/built-ins.js';
 export { MarkerBuffer } from './internal/layers/markers/buffer.js';
+export { compileShapes, type BodyShape } from './internal/layers/body/compile.js';
+export {
+  decodeGeometry,
+  loadGeometry,
+  type DecodeGeometryOptions,
+  type LoadGeometryOptions
+} from './internal/layers/body/load.js';
+export {
+  registerGeometryDecoder,
+  type GeometryDecoderLoader,
+  type GeometryDecoderModule,
+  type GeometryDecoderOptions,
+  type SceneGeometryFormat
+} from './internal/layers/body/decoders.js';
+export { quaternionFromRpy } from './internal/math/quaternion.js';
 
 // types
 export type { FieldSpec, FieldType, LayoutDescriptor } from './internal/records/layouts/define-layout.js';

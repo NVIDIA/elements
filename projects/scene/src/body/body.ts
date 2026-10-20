@@ -2,7 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { property } from 'lit/decorators/property.js';
-import { isServer } from 'lit';
+import { isServer, type PropertyValues } from 'lit';
+import { validateFrameName } from '../internal/composition/frame/registry.js';
+import {
+  getFrameWorldMatrix,
+  registerFrameState,
+  notifyFrameStateChange
+} from '../internal/composition/frame/state.js';
+import { getWorldPoint, getLocalPoint } from '../internal/composition/frame/points.js';
+import type { Vec3 } from '../internal/math/types.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { MarkerLayerElement } from '../internal/layers/markers/layer-element.js';
 import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/layers/markers/buffer.js';
@@ -16,7 +24,8 @@ import {
 } from '../internal/layers/body/layer-state.js';
 import { MARKER } from '../internal/records/layouts/built-ins.js';
 import type { SceneBodyGeometry } from '../internal/layers/body/types.js';
-import { BodyAssetLoader } from '../internal/layers/body/asset-loader.js';
+import { isSceneBodyPart } from '../internal/layers/registry.js';
+import type { SceneMesh } from '../mesh/mesh.js';
 import {
   getElementFeatureId,
   registerElementFeatureId,
@@ -29,8 +38,12 @@ export type BodyInstanceSource = MarkerSource;
 
 /**
  * @element nve-scene-body
- * @description One rigid compound of shapes, assigned geometry, or a geometry file, placed by source records.
- * @slot - Contains direct scene shape children that define body geometry.
+ * @description A rigid body owning a named coordinate frame and compound visual geometry.
+ * Joints connect parent and child bodies by name. The incoming joint determines this
+ * body's pose; root bodies inherit the model placement. Empty bodies remain valid frames.
+ * Direct nve-scene-shape children define declarative primitives, and direct nve-scene-mesh
+ * children add triangle meshes from arrays or files.
+ * @slot - Contains direct scene shape and mesh children that define body geometry.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/body
  * @stable false
@@ -40,26 +53,33 @@ export class SceneBody extends MarkerLayerElement<BodyInstanceSource, MarkerInit
   static readonly layout = MARKER;
   static readonly metadata = { tag: 'nve-scene-body', version: '0.0.0' };
 
+  /** Body frame name in the nearest model scope. Joint names use a separate namespace. */
+  @property({ type: String }) name: string | null = null;
+
+  /** Returns the current body frame's column-major world matrix, or throws for an invalid chain. */
+  getWorldMatrix(): Float32Array {
+    return getFrameWorldMatrix(this);
+  }
+
+  /** Converts a body-local point to world coordinates; returns null for a disconnected or invalid body. */
+  getWorldPoint(point: Readonly<Vec3>): Readonly<Vec3> | null {
+    return getWorldPoint(this, point);
+  }
+
+  /** Converts a world point to body-local coordinates; returns null for a disconnected or invalid body. */
+  getLocalPoint(point: Readonly<Vec3>): Readonly<Vec3> | null {
+    return getLocalPoint(this, point);
+  }
+
   #tint = '#ffffff';
-  readonly #loader = new BodyAssetLoader(this);
 
-  /** Geometry file URL. The extension selects a lazy decoder; the fragment selects a sub-asset. */
-  @property({
-    type: String,
-    reflect: true,
-    converter: { fromAttribute: (value: string | null) => value ?? '', toAttribute: (value: string) => value || null }
-  })
-  get src(): string {
-    return this.#loader.src;
-  }
-
-  set src(value: string) {
-    this.#loader.src = value;
-  }
-
-  /** Current request; resolves after geometry capture, before GPU presentation. */
+  /**
+   * Resolves after every direct mesh child present at access time finishes its current src request.
+   * Rejects when one of those requests fails or a newer request cancels it. Meshes without src resolve immediately.
+   */
   get loadComplete(): Promise<void> {
-    return this.#loader.loadComplete;
+    const parts = [...this.children].filter(isSceneBodyPart) as SceneMesh[];
+    return Promise.all(parts.map(part => part.loadComplete)).then(() => undefined);
   }
 
   /** CSS color multiplier. White preserves node colors and texture samples. */
@@ -87,10 +107,10 @@ export class SceneBody extends MarkerLayerElement<BodyInstanceSource, MarkerInit
   }
 
   /**
-   * Current resolved body nodes from direct assignment, file decoding, or shape children.
-   * Assignment captures arrays and transforms, cancels loading, and clears src.
-   * In-place edits take effect only after reassignment. Null restores shape children.
-   * Use source records or frames for per-frame movement instead of rebuilding geometry.
+   * Body nodes from assignment or from shape and mesh children. Assignment captures arrays
+   * and transforms and overrides children; null restores them.
+   * In-place edits require reassignment, even for the same object. Invalid assignments throw
+   * before replacing accepted geometry. Use frames or source records for per-frame movement.
    */
   @property({ attribute: false })
   get geometry(): SceneBodyGeometry | null {
@@ -100,24 +120,30 @@ export class SceneBody extends MarkerLayerElement<BodyInstanceSource, MarkerInit
   set geometry(value: SceneBodyGeometry | null) {
     const previous = this.geometry;
     setBodyLayerGeometry(this, value);
-    this.#loader.geometryAssigned();
     this.requestUpdate('geometry', previous);
   }
 
   constructor() {
     super('cube', { create: records => new MarkerBuffer({ records }), kind: 'marker' });
+    registerFrameState(this);
     registerElementFeatureId(this);
     registerBodyLayer(this);
+  }
+
+  protected override updated(changes: PropertyValues<this>): void {
+    super.updated(changes);
+    if (changes.has('name')) {
+      validateFrameName(this);
+      notifyFrameStateChange(this);
+    }
   }
 
   override connectedCallback(): void {
     super.connectedCallback();
     connectBodyLayer(this);
-    this.#loader.connect();
   }
 
   override disconnectedCallback(): void {
-    this.#loader.disconnect();
     disconnectBodyLayer(this);
     super.disconnectedCallback();
   }
