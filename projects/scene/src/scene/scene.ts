@@ -144,6 +144,7 @@ export class Scene extends LitElement {
     });
     registerSceneRenderNotifications(this, (source, kind) => {
       this.#content.refreshLayer(source);
+      if (kind === 'composition') this.#content.resolveReferences();
       if (kind === 'identity') {
         this.#needsIdentityRefresh = true;
         this.#scheduleTick();
@@ -285,6 +286,7 @@ export class Scene extends LitElement {
     }
     this.#interactionSource.bind(source);
     this.#content.refresh();
+    this.#content.resolveReferences();
     this.#picking.reconcileInteractionAvailability();
     this.#startObservers();
     this.#sampleBackground();
@@ -351,11 +353,14 @@ export class Scene extends LitElement {
       return;
     }
     if (owned.every(record => record.type === 'attributes' && record.attributeName === 'feature-id')) return;
+    if (owned.some(record => record.type === 'attributes' && record.attributeName === 'name'))
+      this.#content.resolveReferences();
     this.#requestRender();
   }
 
   #syncStructuralMutations(): void {
     this.#content.refresh();
+    this.#content.resolveReferences();
     this.#picking.reconcileInteractionAvailability();
     this.#observeResize();
     this.#requestRender();

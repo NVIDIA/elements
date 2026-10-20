@@ -35,7 +35,7 @@ type ProfileName =
   | 'mesh-updates'
   | 'labels-10k'
   | 'camera-composition'
-  | 'model-edits'
+  | 'body-edits'
   | 'layer-tracking'
   | 'lazy-recovery';
 
@@ -87,11 +87,11 @@ type ProfileProbeResult =
       readonly snapshot: WebGPUObserverSnapshot;
     }
   | {
-      readonly bulkPartCount: number;
+      readonly bulkShapeCount: number;
       readonly declarativeChildPresent: boolean;
       readonly declarativeChildPresentDuringBulk: boolean;
       readonly declarativePosition: readonly number[];
-      readonly profile: 'model-edits';
+      readonly profile: 'body-edits';
       readonly snapshot: WebGPUObserverSnapshot;
     }
   | {
@@ -168,7 +168,7 @@ const profiles: readonly ProfileName[] = [
   'mesh-updates',
   'labels-10k',
   'camera-composition',
-  'model-edits',
+  'body-edits',
   'layer-tracking',
   'lazy-recovery'
 ];
@@ -779,11 +779,11 @@ function expectMatrixProfileProbe(probe: ProfileProbeResult): void {
       expect(probe.after.orbitTheta).not.toBe(probe.before.orbitTheta);
       expect(probe.after.framePosition).not.toEqual(probe.before.framePosition);
       return;
-    case 'model-edits':
+    case 'body-edits':
       expect(probe.declarativePosition).toEqual([1, 0, 0]);
       expect(probe.declarativeChildPresent).toBe(true);
       expect(probe.declarativeChildPresentDuringBulk).toBe(false);
-      expect(probe.bulkPartCount).toBe(1);
+      expect(probe.bulkShapeCount).toBe(1);
       return;
     case 'layer-tracking':
       expect(probe.wasConnected).toBe(true);

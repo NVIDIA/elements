@@ -27,10 +27,10 @@ import {
   replacePreparedMarkerSource,
   replacePreparedVertexSource
 } from './internal/layers/sources/prepared-record-source.js';
-import { compileParts } from './internal/layers/model/compile.js';
+import { compileShapes } from './internal/layers/body/compile.js';
 import { CameraController } from './internal/composition/camera/camera.controller.js';
-import { SceneModel } from './model/model.js';
-import { ScenePart } from './model/part.js';
+import { SceneBody } from './body/body.js';
+import { SceneShape } from './body/shape.js';
 import { SceneCamera } from './camera/camera.js';
 import type { Scene } from './scene/scene.js';
 import {
@@ -43,7 +43,7 @@ import {
 } from './internal/interaction/feature-ids.js';
 import './camera/define.js';
 import './cubes/define.js';
-import './model/define.js';
+import './body/define.js';
 import './scene/define.js';
 
 // Keep scene-wide CPU workloads together; structure benchmarks live beside their implementations.
@@ -545,28 +545,28 @@ describe('camera contribution comparison', () => {
   }
 });
 
-describe('model edits', () => {
+describe('body edits', () => {
   for (const count of [1, 100, 1_000] as const) {
-    const parts = createModelParts(count);
-    test(`${count} direct compileParts`, async ({ bench }) => {
-      await bench(`${count} direct compileParts`, () => {
-        void compileParts(parts);
+    const shapes = createBodyShapes(count);
+    test(`${count} direct compileShapes`, async ({ bench }) => {
+      await bench(`${count} direct compileShapes`, () => {
+        void compileShapes(shapes);
       }).run(runOptions);
     });
 
-    const model = document.createElement(SceneModel.metadata.tag) as SceneModel;
+    const body = document.createElement(SceneBody.metadata.tag) as SceneBody;
     test(`${count} bulk assignment`, async ({ bench }) => {
       await bench(`${count} bulk assignment`, () => {
-        model.geometry = parts;
+        body.geometry = shapes;
       }).run(runOptions);
     });
 
-    const declarativeModel = document.createElement(SceneModel.metadata.tag) as SceneModel;
+    const declarativeBody = document.createElement(SceneBody.metadata.tag) as SceneBody;
     const declarativeParts = Array.from(
       { length: count },
-      () => document.createElement(ScenePart.metadata.tag) as ScenePart
+      () => document.createElement(SceneShape.metadata.tag) as SceneShape
     );
-    declarativeModel.append(...declarativeParts);
+    declarativeBody.append(...declarativeParts);
     test(`${count} declarative edit`, async ({ bench }) => {
       let position = 0;
       await bench(`${count} declarative edit`, () => {
@@ -667,9 +667,9 @@ function createHeightfieldGrid(size: number) {
   return { columns: size, heights: new Float32Array(size * size), rows: size, spacing: 1 };
 }
 
-function createModelParts(count: number): Array<{ shape: 'cube'; position: [number, number, number] }> {
+function createBodyShapes(count: number): Array<{ kind: 'cube'; position: [number, number, number] }> {
   return Array.from({ length: count }, (_, index) => ({
     position: [index % 100, Math.floor(index / 100), 0] as [number, number, number],
-    shape: 'cube' as const
+    kind: 'cube' as const
   }));
 }

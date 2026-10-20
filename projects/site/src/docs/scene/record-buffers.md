@@ -17,7 +17,7 @@ Scene record buffers provide fixed-capacity packed storage for instances and str
 | `ArrowBuffer`                                                 | `nve-scene-arrows.source`         |
 | `CubeBuffer`, `SphereBuffer`, `CylinderBuffer`, `ConeBuffer`  | Matching primitive layer `source` |
 | `PyramidBuffer`                                               | `nve-scene-pyramids.source`       |
-| `MarkerBuffer`                                                | Mesh, model, and polygon `source` |
+| `MarkerBuffer`                                                | Mesh, body, and polygon `source`  |
 | `PointBuffer`, `LineVertexBuffer`, and `TriangleVertexBuffer` | Matching streamed layer `source`  |
 
 Use a buffer only with its compatible layer. Primitive layers reject generic marker buffers and buffers for other primitives. External packed marker sources are an advanced integration escape hatch. Their producer must meet the target primitive's encoding invariants.

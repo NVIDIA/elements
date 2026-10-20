@@ -9,7 +9,7 @@ import '@nvidia-elements/scene/frame/define.js';
 import '@nvidia-elements/scene/heightfield/define.js';
 import '@nvidia-elements/scene/lines/define.js';
 import '@nvidia-elements/scene/mesh/define.js';
-import '@nvidia-elements/scene/model/define.js';
+import '@nvidia-elements/scene/body/define.js';
 import '@nvidia-elements/scene/points/define.js';
 import '@nvidia-elements/scene/polygon/define.js';
 
@@ -58,14 +58,14 @@ describe(SceneContent.name, () => {
     const unregisteredHeightfield = document.createElementNS('urn:nvidia-elements:test', 'nve-scene-heightfield');
     const unregisteredCubes = document.createElementNS('urn:nvidia-elements:test', 'nve-scene-cubes');
     const unregisteredMesh = document.createElementNS('urn:nvidia-elements:test', 'nve-scene-mesh');
-    const unregisteredModel = document.createElementNS('urn:nvidia-elements:test', 'nve-scene-model');
+    const unregisteredBody = document.createElementNS('urn:nvidia-elements:test', 'nve-scene-body');
     const unregisteredPolygon = document.createElementNS('urn:nvidia-elements:test', 'nve-scene-polygon');
     host.append(
       hidden,
       unregisteredHeightfield,
       unregisteredCubes,
       unregisteredMesh,
-      unregisteredModel,
+      unregisteredBody,
       unregisteredPolygon
     );
     const content = new SceneContent(host);
@@ -154,7 +154,7 @@ describe(SceneContent.name, () => {
     expect(content.hasInteractiveTargets()).toBe(true);
   });
 
-  it.each(['nve-scene-heightfield', 'nve-scene-mesh', 'nve-scene-model', 'nve-scene-polygon'] as const)(
+  it.each(['nve-scene-heightfield', 'nve-scene-mesh', 'nve-scene-body', 'nve-scene-polygon'] as const)(
     'recognizes an interactive %s as a pick target',
     tag => {
       const host = document.createElement('nve-scene');

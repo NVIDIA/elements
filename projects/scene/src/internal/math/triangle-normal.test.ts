@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { decodeStl } from '../layers/model/stl/stl.js';
+import { decodeGeometry } from '../layers/body/load.js';
 import { prepareMeshGeometry, processMeshGeometry } from '../layers/mesh/processing.js';
 
 const MAX_FLOAT32 = 3.4028234663852886e38;
@@ -40,7 +40,7 @@ describe('flat triangle normals', () => {
     expect(Object.is(asynchronous?.normals[0], meshNormal[0])).toBe(true);
 
     for (const bytes of [binaryStl(positions), asciiStl(positions)]) {
-      const geometry = (await decodeStl(bytes))[0]?.geometry;
+      const geometry = (await decodeGeometry(bytes, { format: 'stl' }))[0]?.geometry;
       expect(geometry?.positions).toEqual(positions);
       expect(geometry?.normals).toEqual(new Float32Array([...normal, ...normal]));
       expect(Object.is(geometry?.normals?.[0], test.normal[0])).toBe(true);

@@ -24,7 +24,7 @@ export interface MeshAssemblyPart {
   readonly modulation?: PreparedRGBAModulation;
 }
 
-export interface AssembledMesh {
+interface AssembledMesh {
   readonly positions: Float32Array;
   readonly normals: Float32Array;
   readonly colors: Float32Array;

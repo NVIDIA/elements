@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-export type AlphaClass = 'zero' | 'partial' | 'opaque';
+type AlphaClass = 'zero' | 'partial' | 'opaque';
 
 /** Additive counts of zero, partial, and opaque alpha channels. */
 export interface AlphaSummary {
@@ -10,7 +10,7 @@ export interface AlphaSummary {
   readonly opaque: number;
 }
 
-export interface AlphaSpan {
+interface AlphaSpan {
   readonly values: ArrayLike<number>;
   readonly offset: number;
   readonly stride: number;
