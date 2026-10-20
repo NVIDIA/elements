@@ -61,6 +61,7 @@ describe('siteUrlsTransform', () => {
 <a href="./">Home</a>
 <a href=".">Root</a>
 <img src="/elements/elements/static/images/integrations/angular.svg" alt="Angular logo">
+<nve-scene-model asset="/static/models/rover.stl"></nve-scene-model>
 `;
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
@@ -72,6 +73,7 @@ describe('siteUrlsTransform', () => {
     expect(result).toContain('href="https://nvidia.github.io/elements/docs/api-design/"');
     expect(result).toContain('href="https://nvidia.github.io/elements/"');
     expect(result).toContain('src="https://nvidia.github.io/elements/static/images/integrations/angular.svg"');
+    expect(result).toContain('asset="https://nvidia.github.io/elements/static/models/rover.stl"');
   });
 
   it('should keep local same-site urls root-relative outside build output', async () => {
@@ -80,6 +82,7 @@ describe('siteUrlsTransform', () => {
 <a href="/docs/metrics/">Metrics</a>
 <a href="/elements/elements/docs/cli/">CLI</a>
 <img src="/elements/elements/static/images/integrations/angular.svg" alt="Angular logo">
+<nve-scene-model asset="/elements/static/models/rover.stl"></nve-scene-model>
 `;
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
@@ -87,6 +90,7 @@ describe('siteUrlsTransform', () => {
     expect(result).toContain('href="/docs/metrics/"');
     expect(result).toContain('href="/docs/cli/"');
     expect(result).toContain('src="/static/images/integrations/angular.svg"');
+    expect(result).toContain('asset="/static/models/rover.stl"');
   });
 
   it('should preserve same-origin urls outside the configured site path', async () => {
@@ -111,6 +115,7 @@ describe('siteUrlsTransform', () => {
 <base href="https://nvidia.github.io/elements/preview/">
 <a href="https://nvidia.github.io/elements/preview/docs/cli/">CLI</a>
 <img src="https://nvidia.github.io/elements/preview/static/images/integrations/angular.svg" alt="Angular logo">
+<nve-scene-model asset="/static/models/rover.stl"></nve-scene-model>
 `;
 
     const result = await siteUrlsTransform.call(createContext(), html, 'index.html');
@@ -118,6 +123,13 @@ describe('siteUrlsTransform', () => {
     expect(result).toContain('href="/elements/preview/"');
     expect(result).toContain('href="/elements/preview/docs/cli/"');
     expect(result).toContain('src="/elements/preview/static/images/integrations/angular.svg"');
+    expect(result).toContain('asset="/elements/preview/static/models/rover.stl"');
+  });
+
+  it('should leave asset attributes on unrelated elements unchanged', async () => {
+    const { siteUrlsTransform } = await importTransform('build');
+    const html = '<div asset="/static/models/rover.stl"></div>';
+    expect(await siteUrlsTransform.call(createContext(), html, 'index.html')).toBe(html);
   });
 
   it('should keep canonical urls fully qualified when building for local preview', async () => {

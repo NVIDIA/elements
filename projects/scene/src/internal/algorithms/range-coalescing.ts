@@ -2,6 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { assertRangeInterval, type RangeInterval } from '../structures/range-interval.js';
+import { BoundedHeap } from '../structures/bounded-heap.js';
+
+type GapSelection = 'merge' | 'keep';
 
 export interface RangeCoalescingOptions {
   /** Sorted, nonoverlapping intervals with positive sizes and safe integer endpoints. */
@@ -17,7 +20,9 @@ export interface RangeCoalescingOptions {
  * Each merged gap adds its length and removes one range cost. Merge gaps within
  * that cost, then the smallest remaining gaps until the budget holds. Equal gaps
  * merge in source order. Inputs stay unchanged; an unchanged plan reuses them.
- * Runs in linear time, or O(n log n) when the budget requires additional merges.
+ * Runs in linear time when the budget is one or requires no additional merges.
+ * Other plans take O(n log(k + 1)) time with O(k) selection storage.
+ * For m ranges after cost-based merging and budget b, k is min(m - b, b - 1).
  */
 export function coalesceRanges(options: RangeCoalescingOptions): readonly Readonly<RangeInterval>[] {
   const { ranges, rangeOverhead = 0, maxRanges = Number.MAX_SAFE_INTEGER } = options;
@@ -72,21 +77,42 @@ function mergeCheapestGaps(ranges: RangeInterval[], maxRanges: number): RangeInt
     ranges.length = 1;
     return ranges;
   }
-  const gaps = Array.from({ length: ranges.length - 1 }, (_, index) => ({
-    index: index + 1,
-    size: ranges[index + 1]!.offset - ranges[index]!.offset - ranges[index]!.size
-  }));
-  gaps.sort((left, right) => left.size - right.size || left.index - right.index);
-  const selected = new Uint8Array(ranges.length);
-  for (let index = 0; index < ranges.length - maxRanges; index += 1) selected[gaps[index]!.index] = 1;
-  return mergeSelectedGaps(ranges, selected);
+  const mergeCount = ranges.length - maxRanges;
+  const keepCount = maxRanges - 1;
+  const selection = mergeCount <= keepCount ? 'merge' : 'keep';
+  const selected = selectGaps(ranges, Math.min(mergeCount, keepCount), selection);
+  return mergeSelectedGaps(ranges, selected, selection);
 }
 
-function mergeSelectedGaps(ranges: RangeInterval[], selected: Uint8Array): RangeInterval[] {
+function selectGaps(ranges: readonly RangeInterval[], count: number, selection: GapSelection): number[] {
+  const order = selection === 'merge' ? 1 : -1;
+  const compare = (left: number, right: number) =>
+    order * (gapSize(ranges, left) - gapSize(ranges, right) || left - right);
+  const heap = new BoundedHeap<number>(count, compare);
+  // Start at the preferred endpoint to avoid repeated replacement for ordered or equal gaps.
+  const direction = compare(1, ranges.length - 1) <= 0 ? 1 : -1;
+  const start = direction === 1 ? 1 : ranges.length - 1;
+  for (let index = start; index > 0 && index < ranges.length; index += direction) heap.add(index);
+  return heap.drain().sort((left, right) => left - right);
+}
+
+function gapSize(ranges: readonly RangeInterval[], index: number): number {
+  const previous = ranges[index - 1]!;
+  return ranges[index]!.offset - previous.offset - previous.size;
+}
+
+function mergeSelectedGaps(
+  ranges: RangeInterval[],
+  selected: readonly number[],
+  selection: GapSelection
+): RangeInterval[] {
   let count = 1;
+  let cursor = 0;
   for (let index = 1; index < ranges.length; index += 1) {
     const range = ranges[index]!;
-    if (selected[index]) {
+    const included = selected[cursor] === index;
+    if (included) cursor += 1;
+    if (selection === 'merge' ? included : !included) {
       const previous = ranges[count - 1]!;
       previous.size = range.offset + range.size - previous.offset;
     } else {

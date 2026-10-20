@@ -74,6 +74,23 @@ describe(coalesceRanges.name, () => {
     expect(coalesceRanges({ ranges, maxRanges: 1 })).toEqual([{ offset: end - 12, size: 12 }]);
   });
 
+  it('matches full sorting for both gap selections, cost merging, and deterministic ties', () => {
+    for (const count of [2, 3, 7, 65, 128, 257]) {
+      const gaps = Array.from({ length: count - 1 }, (_, index) => (index * 73) % 17);
+      for (const values of [
+        gaps,
+        gaps.slice().sort((left, right) => left - right),
+        gaps.slice().sort((left, right) => right - left),
+        gaps.map(() => 4)
+      ]) {
+        const ranges = rangesWithGaps(values);
+        const before = ranges.map(range => ({ ...range }));
+        expectSortedReference(ranges, count);
+        expect(ranges).toEqual(before);
+      }
+    }
+  });
+
   it.each([
     { rangeOverhead: -1 },
     { rangeOverhead: Number.NaN },
@@ -134,6 +151,56 @@ describe(coalesceRanges.name, () => {
     }
   });
 });
+
+function expectSortedReference(ranges: readonly RangeInterval[], count: number): void {
+  for (const rangeOverhead of [0, 1, 3, 20]) {
+    for (const maxRanges of [1, 2, Math.floor(count / 2), 64, count - 1, count, count + 1]) {
+      expect(coalesceRanges({ ranges, rangeOverhead, maxRanges })).toEqual(
+        sortedReference(ranges, rangeOverhead, maxRanges)
+      );
+    }
+  }
+}
+
+function rangesWithGaps(gaps: readonly number[]): RangeInterval[] {
+  let offset = 0;
+  return Array.from({ length: gaps.length + 1 }, (_, index) => {
+    const size = (index % 5) + 1;
+    const range = { offset, size };
+    offset += size + (gaps[index] ?? 0);
+    return Object.freeze(range);
+  });
+}
+
+// Preserve the previous full-sort strategy as an independent exact-output oracle.
+function sortedReference(ranges: readonly RangeInterval[], overhead: number, budget: number): RangeInterval[] {
+  const merged: RangeInterval[] = [];
+  for (const range of ranges) {
+    const previous = merged.at(-1);
+    if (previous && range.offset - previous.offset - previous.size <= overhead) {
+      previous.size = range.offset + range.size - previous.offset;
+    } else {
+      merged.push({ ...range });
+    }
+  }
+  if (merged.length <= budget) return merged;
+  const gaps = merged.slice(1).map((range, index) => ({
+    index: index + 1,
+    size: range.offset - merged[index]!.offset - merged[index]!.size
+  }));
+  gaps.sort((left, right) => left.size - right.size || left.index - right.index);
+  const selected = new Set(gaps.slice(0, merged.length - budget).map(gap => gap.index));
+  const result: RangeInterval[] = [];
+  merged.forEach((range, index) => {
+    if (selected.has(index)) {
+      const previous = result[result.length - 1]!;
+      previous.size = range.offset + range.size - previous.offset;
+    } else {
+      result.push({ ...range });
+    }
+  });
+  return result;
+}
 
 function minimumGroupingCost(ranges: readonly RangeInterval[], overhead: number, maxRanges: number): number {
   if (ranges.length === 0) return 0;

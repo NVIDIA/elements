@@ -2,8 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { PreciseMat4, Quaternion, ScenePose, Vec3 } from '../../math/types.js';
-import { composePreciseMat4, multiplyPreciseMat4 } from '../../math/mat4.js';
+import { multiplyPreciseMat4 } from '../../math/mat4.js';
 import { normalizeQuaternion } from '../../math/quaternion.js';
+import {
+  assertClippingDistances,
+  createCameraViewMatrix,
+  createOrthographicMatrix,
+  createPerspectiveMatrix
+} from '../../math/projection.js';
 
 export const DEFAULT_NEAR = 0.01;
 export const DEFAULT_FAR = 10_000;
@@ -100,14 +106,6 @@ function assertCameraPose(pose: ScenePose): void {
   normalizeQuaternion(pose.orientation);
 }
 
-function normalizeCameraPose(pose: ScenePose): ScenePose {
-  assertCameraPose(pose);
-  return {
-    position: [...pose.position],
-    orientation: normalizeQuaternion(pose.orientation)
-  };
-}
-
 export function assertOrbitCameraState(state: OrbitCameraState): void {
   if (typeof state !== 'object' || state === null) throw new TypeError('Orbit camera state must be an object.');
   assertTarget(state.target);
@@ -134,7 +132,7 @@ function assertOffset(offset: CameraOffset): void {
 function assertProjection(projection: SceneCameraProjection): void {
   if (typeof projection !== 'object' || projection === null)
     throw new TypeError('Camera projection must be an object.');
-  assertClipping(projection.near, projection.far);
+  assertClippingDistances(projection.near, projection.far);
   if (projection.mode === 'perspective') {
     assertFinite(projection.verticalFieldOfView, 'projection.verticalFieldOfView');
     if (projection.verticalFieldOfView <= 0 || projection.verticalFieldOfView >= Math.PI) {
@@ -145,12 +143,6 @@ function assertProjection(projection: SceneCameraProjection): void {
     if (projection.frustumHeight <= 0) throw new RangeError('Frustum height must be greater than zero.');
   } else {
     throw new TypeError('Camera projection mode is invalid.');
-  }
-}
-
-function assertClipping(near: number, far: number): void {
-  if (!Number.isFinite(near) || !Number.isFinite(far) || near <= 0 || near >= far) {
-    throw new RangeError('Camera clipping distances must be finite and satisfy 0 < near < far.');
   }
 }
 
@@ -199,99 +191,6 @@ export function createCameraViewProjection(state: SceneCameraState, aspect: numb
         )
       : createOrthographicMatrix(state.projection.frustumHeight, aspect, state.projection.near, state.projection.far);
   return multiplyPreciseMat4(projection, view);
-}
-
-/** Builds a right-handed view matrix from a world-from-optical-camera pose. */
-export function createCameraViewMatrix(pose: ScenePose): PreciseMat4 {
-  const normalized = normalizeCameraPose(pose);
-  const worldFromCamera = composePreciseMat4(normalized.position, normalized.orientation);
-  const right: Vec3 = [worldFromCamera[0]!, worldFromCamera[1]!, worldFromCamera[2]!];
-  const down: Vec3 = [worldFromCamera[4]!, worldFromCamera[5]!, worldFromCamera[6]!];
-  const forward: Vec3 = [worldFromCamera[8]!, worldFromCamera[9]!, worldFromCamera[10]!];
-  const up: Vec3 = [-down[0], -down[1], -down[2]];
-  const { position } = normalized;
-  return new Float64Array([
-    right[0],
-    up[0],
-    -forward[0],
-    0,
-    right[1],
-    up[1],
-    -forward[1],
-    0,
-    right[2],
-    up[2],
-    -forward[2],
-    0,
-    -dot(right, position),
-    -dot(up, position),
-    dot(forward, position),
-    1
-  ]);
-}
-
-// eslint-disable-next-line max-params -- @hotpath Per-frame projection construction avoids allocating an options object.
-export function createPerspectiveMatrix(
-  verticalFieldOfView: number,
-  aspect: number,
-  near: number,
-  far: number
-): PreciseMat4 {
-  if (!Number.isFinite(verticalFieldOfView) || verticalFieldOfView <= 0 || verticalFieldOfView >= Math.PI)
-    throw new RangeError('Perspective verticalFieldOfView must be in (0, π).');
-  if (!Number.isFinite(aspect) || aspect <= 0) throw new RangeError('Camera aspect must be positive and finite.');
-  assertClipping(near, far);
-  const focal = 1 / Math.tan(verticalFieldOfView / 2);
-  return new Float64Array([
-    focal / aspect,
-    0,
-    0,
-    0,
-    0,
-    focal,
-    0,
-    0,
-    0,
-    0,
-    far / (near - far),
-    -1,
-    0,
-    0,
-    (near * far) / (near - far),
-    0
-  ]);
-}
-
-// eslint-disable-next-line max-params -- @hotpath Per-frame projection construction avoids allocating an options object.
-export function createOrthographicMatrix(
-  frustumHeight: number,
-  aspect: number,
-  near: number,
-  far: number
-): PreciseMat4 {
-  if (!Number.isFinite(frustumHeight) || frustumHeight <= 0)
-    throw new RangeError('Frustum height must be greater than zero.');
-  if (!Number.isFinite(aspect) || aspect <= 0) throw new RangeError('Camera aspect must be positive and finite.');
-  assertClipping(near, far);
-  const width = frustumHeight * aspect;
-  return new Float64Array([
-    2 / width,
-    0,
-    0,
-    0,
-    0,
-    2 / frustumHeight,
-    0,
-    0,
-    0,
-    0,
-    1 / (near - far),
-    0,
-    0,
-    0,
-    near / (near - far),
-    1
-  ]);
 }
 
 export function clampOrbit(value: number, minimum: number, maximum: number): number {
@@ -406,10 +305,6 @@ function cross(left: Readonly<Vec3>, right: Readonly<Vec3>): Vec3 {
     left[2] * right[0] - left[0] * right[2],
     left[0] * right[1] - left[1] * right[0]
   ];
-}
-
-function dot(left: Readonly<Vec3>, right: Readonly<Vec3>): number {
-  return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
 }
 
 function normalize(vector: Vec3): Vec3 {

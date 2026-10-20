@@ -251,7 +251,7 @@ describe('published scene bounds', () => {
     expect(scene.getBounds({ content: [model] })).toEqual({ minimum: [4, -2, -3], maximum: [6, 2, 3] });
     expect(scene.getBounds({ content: [polygon] })).toEqual({ minimum: [0, 0, 0], maximum: [4, 3, 0] });
     expect(scene.getBounds({ content: [terrain] })).toEqual({ minimum: [10, 20, 0], maximum: [12, 22, 3] });
-    model.asset = '/not-loaded.glb';
+    model.asset = '/not-loaded.stl';
     expect(scene.getBounds({ content: [model] })).toBeNull();
   });
 

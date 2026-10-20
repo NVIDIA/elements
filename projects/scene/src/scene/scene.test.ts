@@ -243,6 +243,52 @@ describe(Scene.metadata.tag, () => {
     expect(element.getRay(110, 70)).toBeNull();
   });
 
+  it.each(['perspective', 'orthographic'] as const)(
+    'maps fractional client coordinates and rays through a translated %s camera',
+    async projection => {
+      const gpu = configureFakeWebGPU();
+      const { element } = await createScene(html`
+        <nve-scene aria-label="Projection coordinates">
+          <nve-scene-camera behavior="pose" .position=${[10, -20, 30]} .projection=${projection}
+            .frustumHeight=${4} .verticalFieldOfView=${Math.PI / 2} .near=${2} .far=${10}>
+          </nve-scene-camera>
+        </nve-scene>
+      `);
+      const canvas = required(element.shadowRoot?.querySelector('canvas'), 'Expected scene canvas.');
+      vi.spyOn(element, 'getBoundingClientRect').mockReturnValue(new DOMRect(10, 20, 200, 100));
+      vi.spyOn(canvas, 'getBoundingClientRect').mockReturnValue(new DOMRect(10, 20, 200, 100));
+      gpu.resolveNextDevice();
+      await element.ready;
+
+      const perspective = projection === 'perspective';
+      const point = required(element.getClientPoint([12, -19, 34]), 'Expected projected point.');
+      expect(point).toEqual({
+        clientX: expect.closeTo(perspective ? 135 : 160),
+        clientY: expect.closeTo(perspective ? 82.5 : 95),
+        depth: expect.closeTo(perspective ? 0.625 : 0.25),
+        visibility: 'visible'
+      });
+      expect(Object.isFrozen(point)).toBe(true);
+      const ray = required(element.getRay(point.clientX, point.clientY), 'Expected world ray.');
+      expect(ray.origin).toEqual([
+        expect.closeTo(perspective ? 11 : 12),
+        expect.closeTo(perspective ? -19.5 : -19),
+        expect.closeTo(32)
+      ]);
+      expect(ray.direction).toEqual(
+        perspective
+          ? [expect.closeTo(2 / Math.sqrt(21)), expect.closeTo(1 / Math.sqrt(21)), expect.closeTo(4 / Math.sqrt(21))]
+          : [expect.closeTo(0), expect.closeTo(0), expect.closeTo(1)]
+      );
+      expect(Object.isFrozen(ray)).toBe(true);
+      expect(Object.isFrozen(ray.direction)).toBe(true);
+      expect(element.getClientPoint([12, -19, 50])?.visibility).toBe('clipped');
+      expect(element.getClientPoint([Number.NaN, 0, 0])).toBeNull();
+      expect(element.getRay(Number.NaN, 40)).toBeNull();
+      expect(element.getRay(20, 120)).toBeNull();
+    }
+  );
+
   it('should park a connected static scene without scheduling another frame', async () => {
     const animation = new ManualAnimationFrames();
     const gpu = configureFakeWebGPU({
