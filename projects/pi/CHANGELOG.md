@@ -1,3 +1,46 @@
+## [1.0.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.1...@nvidia-elements/pi-v1.0.2) (2026-10-21)
+
+### Features
+
+* **core:** add configurable viewport zoom stops ([ff741ea](https://github.com/NVIDIA/elements/commit/ff741eac903e2543c0fa3b9fefc8ef28a5e82d90))
+* **core:** add dot and cross patterns to viewport gridlines ([2693005](https://github.com/NVIDIA/elements/commit/26930057a5e4da4a0c2fb0d9fcfebf95c3dd9bc3))
+* **core:** drag handle ([cc6d5b1](https://github.com/NVIDIA/elements/commit/cc6d5b17aac74e65163d581d8525897762d714c2))
+* **core:** tree node prefix and suffix ([bc0f2f1](https://github.com/NVIDIA/elements/commit/bc0f2f13bbc4119b1941a8102d09e3eba41f278b))
+* **media:** add media loop button ([791c76b](https://github.com/NVIDIA/elements/commit/791c76b2ae06c108a8a0b3c2e60b3fe0c4e8c72c))
+* **media:** picture in picture button ([edeec60](https://github.com/NVIDIA/elements/commit/edeec60309675c977da136ef92d1b2ab8333774f))
+* **monaco:** upgrade monaco editor to 0.57.0 ([4d86c93](https://github.com/NVIDIA/elements/commit/4d86c930ad22a142cf426591b6850ef63c04540a))
+* **viewport:** add zoom range ([37040c9](https://github.com/NVIDIA/elements/commit/37040c91170e82d105b0e48b05b06879086566b8))
+* **viewport:** init ([ac4651d](https://github.com/NVIDIA/elements/commit/ac4651df3bacfc68807eff2ec38e89dde0511b67))
+* **viewport:** simplify viewport navigation with invoker commands ([51e95fe](https://github.com/NVIDIA/elements/commit/51e95fe78d5b544b8cdff2066d85418d1d65e23a))
+
+### Bug Fixes
+
+* **ci:** preserve authored contents in example metadata ([0ea8618](https://github.com/NVIDIA/elements/commit/0ea86182b4c654c4d8301bad7fbc06f0d3b11187))
+* **cli:** update bun to 1.4.3 ([7521484](https://github.com/NVIDIA/elements/commit/7521484a82f2714594fab438eccf8d575d578def))
+* **cli:** update dependencies ([2a84274](https://github.com/NVIDIA/elements/commit/2a842746f3cd4055ab53414dd263511d74bad10f))
+* **cli:** update deps ([5c2e291](https://github.com/NVIDIA/elements/commit/5c2e2911a3c0e0d59b5572077be0fe54f580312c))
+* **core:**  add visual tests for label truncation and max-width constraints ([4f2e6d4](https://github.com/NVIDIA/elements/commit/4f2e6d4bc0eabddc269ccc8f48ec193278cefcb8))
+* **core:** add i18n strings ([676f543](https://github.com/NVIDIA/elements/commit/676f5434c494301ea4df09cd4dd632c7fb9ce0f1))
+* **core:** add pip i18n strings ([9b1b755](https://github.com/NVIDIA/elements/commit/9b1b755bff25aee35c0206972858301285821621))
+* **core:** clean up combobox option observers across connections ([3af4742](https://github.com/NVIDIA/elements/commit/3af4742f53a3d6c09b59b0ac445da9bb268de73e))
+* **core:** migrate viewport to new package ([2ea0a3f](https://github.com/NVIDIA/elements/commit/2ea0a3f809f7b63d09c87227d56f7addc02ed544))
+* **core:** nested background styles ([66d44e7](https://github.com/NVIDIA/elements/commit/66d44e7549f25f096d71c5fc662d805b4267bc72))
+* **core:** preserve accessors during property observation ([37c137d](https://github.com/NVIDIA/elements/commit/37c137d305273cbf4382908cd00d0ca2dd273036))
+* **core:** resolve page panel stacking and visibility ([3bd2fc9](https://github.com/NVIDIA/elements/commit/3bd2fc9d2e3fa9ba740a486cd7a826bb17ffcaa2))
+* **core:** tree node link target ([1362388](https://github.com/NVIDIA/elements/commit/1362388c6d94ba480da6854210b6c68f5d59b926))
+* **docs:** match lighthouse reports by exact component tag ([16c4570](https://github.com/NVIDIA/elements/commit/16c45703a01bd6318765969dc8d5550fa7dc09bd))
+* **docs:** preserve example content through html processing ([7055d3c](https://github.com/NVIDIA/elements/commit/7055d3ce12a10b0e494da9c73c8f34fce62b9884))
+* **docs:** preserve example source during development reloads ([162082b](https://github.com/NVIDIA/elements/commit/162082b8bead05283646ae68ad3ecd391be8c962))
+* **docs:** prevent runtime errors when loading examples pages in dev ([1d57c69](https://github.com/NVIDIA/elements/commit/1d57c690819c009a1abac037b00f631d18db076a))
+* **forms:** form state restore callback types ([8a060db](https://github.com/NVIDIA/elements/commit/8a060db7366b54ec22e8163a36ee18613a0c479c))
+* **forms:** missing key event check ([3854d5f](https://github.com/NVIDIA/elements/commit/3854d5fb614912eb225612bcdf308badc832093d))
+* **lint:** add invoker trigger element reference ([89daf8a](https://github.com/NVIDIA/elements/commit/89daf8a3b5930f64b2f12d2d5d6a31b9d601cd26))
+* **lint:** add invoker trigger elements ([417fb63](https://github.com/NVIDIA/elements/commit/417fb6304d5722fa7bb07a91886ab26da603c630))
+* **lint:** recognize command-only invoker controls ([e8d47e2](https://github.com/NVIDIA/elements/commit/e8d47e2b48bccbe69fd3835827a0841049ade4c1))
+* **pi:** update deps ([7edf89a](https://github.com/NVIDIA/elements/commit/7edf89ae10f5090e7612e67cafac8f25fb0c1d3b))
+* **viewport:** connect accessories across separate imports ([13e446d](https://github.com/NVIDIA/elements/commit/13e446d52b52491d5a7597f520b86e43f749c412))
+* **viewport:** include build artifacts in releases ([7ab75d4](https://github.com/NVIDIA/elements/commit/7ab75d4477b4364557d2f0d17af15a6ad3b453a8))
+
 ## [1.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.0...@nvidia-elements/pi-v1.0.1) (2026-10-01)
 
 ### Features
