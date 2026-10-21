@@ -1,3 +1,10 @@
+## [2.2.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.10...@nvidia-elements/cli-v2.2.11) (2026-10-21)
+
+### Bug Fixes
+
+* **cli:** update deps ([5c2e291](https://github.com/NVIDIA/elements/commit/5c2e2911a3c0e0d59b5572077be0fe54f580312c))
+* **pi:** update deps ([7edf89a](https://github.com/NVIDIA/elements/commit/7edf89ae10f5090e7612e67cafac8f25fb0c1d3b))
+
 ## [2.2.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.9...@nvidia-elements/cli-v2.2.10) (2026-10-20)
 
 ### Features
