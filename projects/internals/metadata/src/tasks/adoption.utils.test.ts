@@ -9,6 +9,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   createAdoptionSummary,
   fetchPublicJson,
+  getAdoptionData,
   getGitHubMetrics,
   getPackageAdoptionData,
   getWorkspacePackages,
@@ -101,6 +102,7 @@ function hasUrlHostname(url: string, hostname: string): boolean {
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.unstubAllEnvs();
 });
 
 describe('adoption utilities', () => {
@@ -403,5 +405,141 @@ describe('adoption utilities', () => {
       npmDownloads: 20,
       cdnRequests: 110
     });
+  });
+
+  it('should ignore adoption payloads that are not records', () => {
+    expect(parseNpmRegistry(null)).toBeNull();
+    expect(parseNpmRegistry({ 'dist-tags': { latest: '1.0.0' }, versions: { '1.0.0': {} } })).toBeNull();
+    expect(parseNpmDownloads(null)).toEqual({ start: '', end: '', total: 0, daily: [] });
+    expect(parseJsDelivrStats(null, null)).toEqual({
+      rank: null,
+      typeRank: null,
+      total: 0,
+      daily: [],
+      versions: [],
+      topVersion: null,
+      latestVersionShare: 0
+    });
+    expect(parseGitHubStargazers(null)).toEqual([]);
+    expect(parseGitHubPaginationTotal(null, 4)).toBe(4);
+  });
+
+  it('should capture thrown network errors without failing the generator', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new Error('offline');
+      })
+    );
+
+    await expect(fetchPublicJson('https://example.test/offline', 'github')).resolves.toEqual({
+      ok: false,
+      error: { source: 'github', status: null, message: 'offline' }
+    });
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => Promise.reject(Object.create(null)))
+    );
+
+    await expect(fetchPublicJson('https://example.test/offline', 'npm-downloads')).resolves.toEqual({
+      ok: false,
+      error: { source: 'npm-downloads', status: null, message: 'unknown network error' }
+    });
+  });
+
+  it('should mark a package published when every source succeeds', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (hasUrlHostname(url, 'registry.npmjs.org')) {
+          return jsonResponse(npmRegistryFixture);
+        }
+
+        if (hasUrlHostname(url, 'api.npmjs.org')) {
+          return jsonResponse(npmDownloadsFixture);
+        }
+
+        return jsonResponse(jsDelivrFixture);
+      })
+    );
+
+    const packageData = await getPackageAdoptionData({
+      name: '@nvidia-elements/core',
+      workspaceVersion: '2.0.2'
+    });
+
+    expect(packageData).toMatchObject({
+      status: 'published',
+      latestVersion: '2.0.2',
+      errors: []
+    });
+    expect(packageData.npm.total).toBe(13);
+    expect(packageData.cdn.latestVersionShare).toBe(30);
+  });
+
+  it('should mark a package partial when registry metadata is incomplete', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => {
+        if (hasUrlHostname(url, 'registry.npmjs.org')) {
+          return jsonResponse({ name: '@nvidia-elements/core' });
+        }
+
+        return new Response('', { status: 404 });
+      })
+    );
+
+    const packageData = await getPackageAdoptionData({
+      name: '@nvidia-elements/core',
+      workspaceVersion: '2.0.2'
+    });
+
+    expect(packageData.status).toBe('partial');
+    expect(packageData.latestVersion).toBeNull();
+    expect(packageData.versionCount).toBe(0);
+    expect(packageData.npm).toEqual({ start: '', end: '', total: 0, daily: [] });
+    expect(packageData.cdn.total).toBe(0);
+    expect(packageData.cdn.topVersion).toBeNull();
+    expect(packageData.errors.map(error => error.message)).toEqual(['HTTP 404', 'HTTP 404']);
+  });
+
+  it('should summarize workspace packages when every adoption source fails', async () => {
+    vi.stubEnv('GITHUB_TOKEN', 'test-token');
+    const fetchMock = vi.fn(async () => new Response('', { status: 503 }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const summary = await getAdoptionData();
+    const names = summary.packages.map(item => item.name);
+
+    expect(names.length).toBeGreaterThan(1);
+    expect(names).toEqual([...names].sort((left, right) => left.localeCompare(right)));
+    expect(names.every(name => name.startsWith('@nvidia-elements/'))).toBe(true);
+    expect(summary.period).toBe('last-month');
+    expect(summary.totals).toEqual({
+      packages: names.length,
+      publishedPackages: 0,
+      partialPackages: 0,
+      unavailablePackages: names.length,
+      npmDownloads: 0,
+      cdnRequests: 0
+    });
+    expect(
+      summary.packages.every(item => item.status === 'unavailable' && item.npm.total === 0 && item.cdn.total === 0)
+    ).toBe(true);
+    expect(summary.github).toMatchObject({
+      repository: 'NVIDIA/elements',
+      stars: null,
+      contributors: null,
+      releases: null,
+      stargazers: []
+    });
+    expect(summary.github.errors.every(error => error.message === 'HTTP 503')).toBe(true);
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.github.com/repos/NVIDIA/elements',
+      expect.objectContaining({
+        headers: expect.objectContaining({ Authorization: 'Bearer test-token' })
+      })
+    );
   });
 });
