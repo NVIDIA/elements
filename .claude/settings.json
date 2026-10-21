@@ -71,17 +71,6 @@
         ]
       }
     ],
-    "PermissionRequest": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PermissionRequest\", \"decision\": {\"behavior\": \"allow\"}}}'"
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "",
