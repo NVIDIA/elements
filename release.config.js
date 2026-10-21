@@ -123,8 +123,7 @@ export default {
     [
       '@semantic-release/github',
       {
-        successComment:
-          '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/docs/changelog/)',
+        successComment: false,
         releaseBodyTemplate: 'See CHANGELOG.md for details.'
       }
     ]
