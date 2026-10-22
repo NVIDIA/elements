@@ -51,7 +51,7 @@ class AnchorBehaviorControllerTestElement extends HTMLElement {
 class AnchorBehaviorControllerSlotTestElement extends AnchorBehaviorControllerTestElement {
   constructor() {
     super();
-    this.shadowRoot!.innerHTML = '<slot></slot><slot name="anchor"></slot>';
+    this.shadowRoot!.innerHTML = '<slot name="prefix"></slot><slot></slot><slot name="anchor"></slot>';
   }
 }
 

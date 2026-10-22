@@ -51,7 +51,7 @@ export class TypeAnchorController<T extends AnchorBehaviorHost> implements React
 
   get #slottedAnchor() {
     return this.host.shadowRoot
-      ?.querySelector<HTMLSlotElement>('slot, slot[name=anchor]')
+      ?.querySelector<HTMLSlotElement>('slot:not([name]), slot[name=anchor]')
       ?.assignedElements()
       ?.find(element => element?.tagName === 'A') as HTMLAnchorElement | undefined;
   }
