@@ -3,7 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { onChildListMutation, throttle } from '../utils/events.js';
+import { throttle } from '../utils/events.js';
 import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
 import {
@@ -14,13 +14,7 @@ import {
   KeynavCode,
   hasInvalidDOMGrid
 } from '../utils/dom.js';
-import {
-  focusElement,
-  getActiveElement,
-  initializeKeyListItems,
-  setActiveKeyListItem,
-  isSimpleFocusable
-} from '../utils/focus.js';
+import { focusElement, getActiveElement, setActiveKeyListItem, isSimpleFocusable } from '../utils/focus.js';
 
 export interface KeynavGridConfig {
   grid?: HTMLElement;
@@ -43,8 +37,11 @@ export function keyNavigationGrid<T extends ReactiveElement & KeynavGridElement>
 }
 
 export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridElement> implements ReactiveController {
-  #observers: MutationObserver[] = [];
+  #observer?: MutationObserver;
   #grid?: HTMLElement;
+  #activeCell?: HTMLElement;
+  #cells = new WeakSet<HTMLElement>();
+  #updateCells = throttle(() => this.#initializeCells(), 500, { trailing: true });
 
   get #config() {
     return {
@@ -64,7 +61,8 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   }
 
   get #hostCells() {
-    return [...Array.from(this.#config.columns ?? []), ...Array.from(this.#config.cells)];
+    const { columns, cells } = this.#config;
+    return [...Array.from(columns ?? []), ...Array.from(cells)];
   }
 
   constructor(private host: T) {
@@ -76,38 +74,83 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     if (!this.host.isConnected) return;
 
     this.#grid = this.#config.grid;
-    initializeKeyListItems(this.#hostCells);
+    this.#initializeCells();
     this.#grid.addEventListener('keyup', this.#onKeyUp);
     this.#grid.addEventListener('keydown', this.#onKeyDown);
     this.#grid.addEventListener('mouseup', this.#onMouseUp);
-    this.#observers.push(
-      onChildListMutation(
-        this.host,
-        throttle(() => initializeKeyListItems(this.#hostCells), 500)
-      )
-    );
+    this.#observer?.disconnect();
+    this.#observer = new MutationObserver(this.#onMutations);
+    this.#observer.observe(this.#grid, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['tabindex']
+    });
   }
 
   hostDisconnected() {
-    this.#observers.forEach(o => o?.disconnect());
-    this.#observers.length = 0;
+    this.#observer?.disconnect();
+    this.#observer = undefined;
+    this.#updateCells.cancel();
     this.#grid?.removeEventListener('keyup', this.#onKeyUp);
     this.#grid?.removeEventListener('keydown', this.#onKeyDown);
     this.#grid?.removeEventListener('mouseup', this.#onMouseUp);
     this.#grid = undefined;
+    this.#activeCell = undefined;
   }
 
-  #clickCell(e: MouseEvent) {
-    if (!isContextMenuClick(e)) {
-      const focusedElement = e.composedPath()[0] as HTMLElement;
-      const activeCell = this.#hostCells.find(i => i === focusedElement) ? focusedElement : null;
-      if (activeCell) {
-        this.#setActiveCell(e, activeCell as HTMLElement);
+  #initializeCells() {
+    const cells = this.#hostCells;
+    const activeCell =
+      cells.find(cell => cell.tabIndex === 0) ??
+      (this.#activeCell && cells.includes(this.#activeCell) ? this.#activeCell : cells[0]);
+    this.#activeCell = activeCell;
+    this.#cells = new WeakSet(cells);
+    for (const cell of cells) {
+      const tabIndex = cell === activeCell ? '0' : '-1';
+      // Avoid observing our own unchanged writes after a DOM morph or key change.
+      if (cell.getAttribute('tabindex') !== tabIndex) {
+        cell.setAttribute('tabindex', tabIndex);
       }
     }
   }
 
-  #keynavCell(e: KeyboardEvent) {
+  #onMutations = (mutations: MutationRecord[]) => {
+    const changed = mutations.some(mutation => {
+      if (mutation.type === 'attributes') {
+        const cell = mutation.target;
+        // Ignore nested controls and our own tabindex writes.
+        return (
+          cell instanceof HTMLElement &&
+          this.#cells.has(cell) &&
+          cell.getAttribute('tabindex') !== (cell === this.#activeCell ? '0' : '-1')
+        );
+      }
+      return [...mutation.addedNodes, ...mutation.removedNodes].some(node => node.nodeType === Node.ELEMENT_NODE);
+    });
+    if (changed) this.#updateCells();
+  };
+
+  #flushCellUpdates() {
+    // A key event can arrive before the observer delivers a synchronous DOM update.
+    this.#onMutations(this.#observer?.takeRecords() ?? []);
+    this.#updateCells.flush();
+  }
+
+  #onMouseUp = (e: MouseEvent) => {
+    if (!isContextMenuClick(e)) {
+      this.#flushCellUpdates();
+      const focusedElement = e.composedPath()[0] as HTMLElement;
+      const activeCell = this.#hostCells.find(i => i === focusedElement) ? focusedElement : null;
+      if (activeCell) {
+        this.#setActiveCell(e, activeCell);
+      }
+    }
+  };
+
+  #onKeyDown = (e: KeyboardEvent) => {
+    if (!validKeyNavigationCode(e)) return;
+    this.#flushCellUpdates();
     const rows = Array.from(this.#hostRows);
     const cells = Array.from(this.#hostCells);
 
@@ -116,7 +159,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
       return;
     }
 
-    if (validKeyNavigationCode(e) && isSimpleFocusable(getActiveElement() as Element)) {
+    if (isSimpleFocusable(getActiveElement() as Element)) {
       const { x, y } = getNextKeyGridItem(cells, rows, {
         code: e.code,
         ctrlKey: e.ctrlKey,
@@ -129,9 +172,10 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
       this.#setActiveCell(e, nextCell);
       e.preventDefault();
     }
-  }
+  };
 
   #setActiveCell(e: KeyboardEvent | MouseEvent, activeCell: HTMLElement) {
+    this.#activeCell = activeCell;
     setActiveKeyListItem(this.#hostCells, activeCell);
 
     const items = getFlattenedFocusableItems(activeCell);
@@ -147,22 +191,18 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     activeCell.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, composed: true, detail }));
   }
 
-  #updateCellActivation(e: KeyboardEvent) {
+  #onKeyUp = (e: KeyboardEvent) => {
+    if (e.code !== 'Enter' && e.code !== 'Escape') return;
+    this.#flushCellUpdates();
     const activeCell = Array.from(this.#hostCells).find(i => i.tabIndex === 0) as HTMLElement;
     if (e.code === 'Escape') {
       activeCell?.focus();
     }
 
     if (e.code === 'Enter' && activeCell === e.composedPath()[0]) {
-      getFlattenedFocusableItems(activeCell as HTMLElement)[0]?.focus();
+      getFlattenedFocusableItems(activeCell)[0]?.focus();
     }
-  }
-
-  #onKeyUp = (e: KeyboardEvent) => this.#updateCellActivation(e);
-
-  #onKeyDown = (e: KeyboardEvent) => this.#keynavCell(e);
-
-  #onMouseUp = (e: MouseEvent) => this.#clickCell(e);
+  };
 }
 
 function getGridDelta(code: KeynavCode | string, dir: string): { dx: number; dy: number } | null {

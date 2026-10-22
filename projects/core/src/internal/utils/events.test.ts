@@ -89,6 +89,72 @@ describe('throttle', () => {
     fn('a', 'b');
     expect(argFn).toHaveBeenCalledWith('a', 'b');
   });
+
+  describe('trailing calls', () => {
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('should run the last queued call at the end of the window', () => {
+      const callback = vi.fn();
+      const fn = throttle(callback, 500, { trailing: true });
+      fn('first');
+      fn('second');
+      fn('last');
+      expect(callback).toHaveBeenCalledExactlyOnceWith('first');
+
+      vi.advanceTimersByTime(500);
+      expect(callback.mock.calls).toEqual([['first'], ['last']]);
+      fn('next');
+      vi.advanceTimersByTime(499);
+      expect(callback).toHaveBeenCalledTimes(2);
+      vi.advanceTimersByTime(1);
+      expect(callback).toHaveBeenLastCalledWith('next');
+    });
+
+    it('should not invoke again without a queued call', () => {
+      const callback = vi.fn();
+      const fn = throttle(callback, 500, { trailing: true });
+      fn();
+      vi.advanceTimersByTime(1000);
+      expect(callback).toHaveBeenCalledOnce();
+    });
+
+    it('should flush once while preserving the throttle window', () => {
+      const callback = vi.fn();
+      const fn = throttle(callback, 500, { trailing: true });
+      fn('first');
+      vi.advanceTimersByTime(100);
+      fn('pending');
+      fn.flush();
+      fn.flush();
+      expect(callback.mock.calls).toEqual([['first'], ['pending']]);
+
+      fn('last');
+      vi.advanceTimersByTime(399);
+      expect(callback).toHaveBeenCalledTimes(2);
+      vi.advanceTimersByTime(1);
+      expect(callback).toHaveBeenLastCalledWith('last');
+    });
+
+    it('should cancel pending work and allow an immediate call', () => {
+      const callback = vi.fn();
+      const fn = throttle(callback, 500, { trailing: true });
+      fn('first');
+      fn('discarded');
+      fn.cancel();
+      fn.flush();
+      vi.advanceTimersByTime(1000);
+      expect(callback).toHaveBeenCalledExactlyOnceWith('first');
+
+      fn('next');
+      expect(callback).toHaveBeenLastCalledWith('next');
+    });
+  });
 });
 
 describe('debounce', () => {

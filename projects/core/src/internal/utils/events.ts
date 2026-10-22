@@ -26,16 +26,44 @@ export function onChildListMutation(
   return observer;
 }
 
-export function throttle(func: (...args: unknown[]) => void, limit: number) {
-  let wait = true;
-  return (...args: unknown[]) => {
-    if (wait) {
-      func(...args);
-      wait = false;
-      /* istanbul ignore next */
-      setTimeout(() => (wait = true), limit);
+export function throttle<Args extends unknown[]>(
+  func: (...args: Args) => void,
+  limit: number,
+  { trailing = false }: { trailing?: boolean } = {}
+) {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let pending: Args | undefined;
+
+  const throttled = (...args: Args): void => {
+    if (timer !== undefined) {
+      if (trailing) pending = args;
+      return;
     }
+
+    func(...args);
+    timer = setTimeout(() => {
+      timer = undefined;
+      if (pending) {
+        const nextArgs = pending;
+        pending = undefined;
+        throttled(...nextArgs);
+      }
+    }, limit);
   };
+
+  return Object.assign(throttled, {
+    flush() {
+      if (!pending) return;
+      const args = pending;
+      pending = undefined;
+      func(...args);
+    },
+    cancel() {
+      clearTimeout(timer);
+      timer = undefined;
+      pending = undefined;
+    }
+  });
 }
 
 export function debounce(func: (...args: unknown[]) => void, timeout = 0) {
