@@ -54,7 +54,7 @@ overrides:
   conventional-changelog-conventionalcommits: 9.3.1
   'dts-bundle-generator>typescript': 'catalog:'
   'lighthouse>axe-core': 4.11.3
-  devalue: 5.8.1
+  'devalue@<5.8.1': 5.8.1
   eslint: 'catalog:'
   fast-uri: 3.1.2
   liquidjs: 10.26.0
