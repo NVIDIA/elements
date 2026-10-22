@@ -18,4 +18,5 @@
   margin: calc(var(--nve-ref-size-400) * -1);
   width: calc(100% + var(--nve-ref-size-800));
   --border-radius: var(--nve-ref-border-radius-md) var(--nve-ref-border-radius-md) 0 0;
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-1000) var(--nve-ref-size-200) var(--nve-ref-size-300);
 }

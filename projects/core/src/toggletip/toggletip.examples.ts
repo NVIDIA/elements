@@ -134,13 +134,13 @@ export const Closable = {
 export const AlertGroup = {
   inline: false,
   render: () => html`
-<nve-toggletip id="toggletip-alert-group">
+<nve-toggletip id="toggletip-alert-group" closable>
   <nve-toggletip-header>
     <nve-alert-group status="danger" prominence="emphasis">
-      <nve-alert>Workflow Failed</nve-alert>
+      <nve-alert>Workflow Timeout</nve-alert>
     </nve-alert-group>
   </nve-toggletip-header>
-  <p nve-text="body">some text content in a toggletip</p>
+  <p nve-text="body">The training process has timed out. Please try again.</p>
   <nve-toggletip-footer>
     <nve-button style="width: 100%">Retry Workflow</nve-button>  
   </nve-toggletip-footer>
