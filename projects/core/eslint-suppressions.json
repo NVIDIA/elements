@@ -34,11 +34,6 @@
       "count": 1
     }
   },
-  "src/internal/controllers/keynav-grid.controller.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 2
-    }
-  },
   "src/internal/controllers/state-selected.controller.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 2
