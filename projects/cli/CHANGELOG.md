@@ -1,3 +1,9 @@
+## [2.2.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.11...@nvidia-elements/cli-v2.2.12) (2026-10-22)
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.4 ([ca5c60a](https://github.com/NVIDIA/elements/commit/ca5c60a0265fbe91b898bc0922e2d14a2ce0f965))
+
 ## [2.2.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.10...@nvidia-elements/cli-v2.2.11) (2026-10-21)
 
 ### Bug Fixes
