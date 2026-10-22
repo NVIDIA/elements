@@ -65,6 +65,25 @@ describe(Menu.metadata.tag, () => {
     expect(element.hasAttribute('density')).toBe(false);
   });
 
+  it('should detect a label link after the prefix slot and prevent its activation when disabled', async () => {
+    const item = element.querySelector('nve-menu-item');
+    item.innerHTML = '<span slot="prefix" aria-hidden="true">●</span><a href="#menu-link">Menu link</a>';
+    item.requestUpdate();
+    await elementIsStable(item);
+    expect(item.readOnly).toBe(true);
+    expect(item.matches(':state(anchor)')).toBe(true);
+
+    item.disabled = true;
+    await elementIsStable(item);
+    const link = item.querySelector('a');
+    const activate = vi.fn();
+    link.addEventListener('click', activate);
+    const click = new MouseEvent('click', { bubbles: true, composed: true, cancelable: true });
+    link.dispatchEvent(click);
+    expect(click.defaultPrevented).toBe(true);
+    expect(activate).not.toHaveBeenCalled();
+  });
+
   it('should navigate between items with ArrowDown key', async () => {
     await elementIsStable(element);
     const items = element.querySelectorAll('nve-menu-item');
