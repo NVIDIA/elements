@@ -103,7 +103,7 @@ This product includes the following bundled third-party software:
 - publint v0.3.24 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Bjorn Lu
 
-- sanitize-html v2.18.0 [MIT] (used by: @nvidia-elements/pi)
+- sanitize-html v2.18.1 [MIT] (used by: @nvidia-elements/pi)
   Copyright: Apostrophe Technologies, Inc.
 
 - ts-morph v28.0.0 [MIT] (used by: @nvidia-elements/pi)
@@ -369,7 +369,7 @@ open v11.0.4 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindres
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.24 - Copyright Bjorn Lu
-sanitize-html v2.18.0 - Copyright Apostrophe Technologies, Inc.
+sanitize-html v2.18.1 - Copyright Apostrophe Technologies, Inc.
 ts-morph v28.0.0 - Copyright David Sherret
 yargs v18.2.0 - Copyright Unknown
 zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
