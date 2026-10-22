@@ -1,3 +1,17 @@
+## [2.16.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.5...@nvidia-elements/core-v2.16.0) (2026-10-22)
+
+### Features
+
+* **code:** iframe component ([09f9a8c](https://github.com/NVIDIA/elements/commit/09f9a8cc43439b48a96185198dcd8b3ce590759b))
+* **core:** progress dot ([6a1ed16](https://github.com/NVIDIA/elements/commit/6a1ed16c62ca615f3e3f5f2ffd347f357fe9d0f3))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.4 ([ca5c60a](https://github.com/NVIDIA/elements/commit/ca5c60a0265fbe91b898bc0922e2d14a2ce0f965))
+* **cli:** update bun to 1.4.3 ([7521484](https://github.com/NVIDIA/elements/commit/7521484a82f2714594fab438eccf8d575d578def))
+* **cli:** update deps ([5c2e291](https://github.com/NVIDIA/elements/commit/5c2e2911a3c0e0d59b5572077be0fe54f580312c))
+* **pi:** update deps ([7edf89a](https://github.com/NVIDIA/elements/commit/7edf89ae10f5090e7612e67cafac8f25fb0c1d3b))
+
 ## [2.15.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.4...@nvidia-elements/core-v2.15.5) (2026-10-15)
 
 ### Bug Fixes
