@@ -21,6 +21,11 @@
   pointer-events: none;
 }
 
+/* Closed popovers must not retain layout boxes from host display styles. */
+:host([popover]:not(:popover-open)) {
+  display: none !important;
+}
+
 /* apply transitions during beforetoggle event to prevent flash of unstyled popover on page load */
 :host(:state(transition-start)) {
   transition-duration: var(--animation-duration);

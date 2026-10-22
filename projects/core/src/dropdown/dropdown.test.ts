@@ -106,6 +106,7 @@ describe(Dropdown.metadata.tag, () => {
     element.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, clientX: -10, clientY: -10 }));
     await close;
     expect(element.matches(':popover-open')).toBe(false);
+    await expect.poll(() => element.getClientRects().length).toBe(0);
   });
 
   it('should emit close event when close button clicked', async () => {
@@ -119,5 +120,39 @@ describe(Dropdown.metadata.tag, () => {
     const event = untilEvent(element, 'close');
     emulateClick(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag));
     expect(await event).toBeDefined();
+  });
+});
+
+describe(`${Dropdown.metadata.tag} - native visibility`, () => {
+  let fixture: HTMLElement;
+  let element: Dropdown;
+  let trigger: HTMLButtonElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <button popovertarget="dropdown">Open</button>
+      <nve-dropdown id="dropdown" .modal=${false}><button>Item</button></nve-dropdown>
+    `);
+    element = fixture.querySelector(Dropdown.metadata.tag);
+    trigger = fixture.querySelector('button');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => removeFixture(fixture));
+
+  it('should restore focus and remove layout after native trigger activation', async () => {
+    expect(element.getClientRects()).toHaveLength(0);
+    trigger.focus();
+    const open = untilEvent(element, 'open');
+    trigger.click();
+    await open;
+    expect(element.getClientRects()).toHaveLength(1);
+    element.querySelector('button').focus();
+    expect(document.activeElement).toBe(element.querySelector('button'));
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    await close;
+    await expect.poll(() => element.getClientRects().length).toBe(0);
+    expect(document.activeElement).toBe(trigger);
   });
 });
