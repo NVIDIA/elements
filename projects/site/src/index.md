@@ -10,9 +10,8 @@
 <div class="getting-started-page" nve-layout="column gap:xl pad-top:lg">
   <section nve-layout="column gap:md">
     <h1 nve-text="display sm emphasis semibold">NVIDIA Elements</h1>
-    <h2 nve-text="heading sm muted">The design language and UI agent harness for AI/ML factories, robotics, and autonomous vehicles.</h2>
+    <h2 nve-text="heading sm muted">The UI SDK and agent-ready developer toolkit for AI factories, robotics, and autonomous vehicles.</h2>
   </section>
-
   <section nve-layout="grid gap:md pad-top:xs span-items:12 &md|span-items:6">
     <nve-card class="getting-started-feature-card">
       <nve-card-content>
