@@ -48,6 +48,74 @@ export const Menu = {
 };
 
 /**
+ * @summary Closed dropdowns anchored to a resizable panel. Measure repeated layout before and after opening and dismissing every menu.
+ * @tags test-case performance
+ */
+export const ClosedPopoverLayout = {
+  render: () => html`
+<section id="closed-popover-layout" nve-layout="column gap:md">
+  <p nve-text="body">Measure 120 resize/layout operations with 64 closed menus, first fresh and then after dismissal. Lower times mean less work.</p>
+  <nve-button data-run>Run benchmark</nve-button>
+  <p nve-text="body" role="status">Ready. Each run resets the menus; setup time is excluded.</p>
+  <div data-panel nve-layout="column gap:sm pad:sm" style="resize: horizontal; overflow: auto; width: 640px; min-width: 320px; max-width: 100%; height: 360px;">
+    ${Array.from({ length: 64 }, (_, index) => html`
+      <div nve-layout="row full:width align:right">
+        <nve-button popovertarget=${`closed-popover-layout-menu-${index}`}>Menu ${index + 1}</nve-button>
+        <nve-dropdown id=${`closed-popover-layout-menu-${index}`}>Menu ${index + 1} content</nve-dropdown>
+      </div>
+    `)}
+  </div>
+</section>
+<script type="module">
+  const root = document.querySelector('#closed-popover-layout');
+  let panel = root.querySelector('[data-panel]');
+  const template = panel.cloneNode(true);
+  const button = root.querySelector('[data-run]');
+  const status = root.querySelector('[role="status"]');
+
+  function measure() {
+    panel.style.width = '640px';
+    panel.getBoundingClientRect();
+    const start = performance.now();
+    for (let iteration = 0; iteration < 120; iteration++) {
+      panel.style.width = (iteration % 2 ? 800 : 480) + 'px';
+      // Force each width change to finish layout within the measured interval.
+      panel.getBoundingClientRect();
+    }
+    const elapsed = performance.now() - start;
+    return elapsed.toFixed(1) + ' ms (' + (elapsed / 120).toFixed(2) + ' ms/operation)';
+  }
+
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    status.textContent = 'Running both measurements…';
+    try {
+      const freshPanel = template.cloneNode(true);
+      panel.replaceWith(freshPanel);
+      panel = freshPanel;
+      const menus = Array.from(panel.querySelectorAll('nve-dropdown'));
+      await Promise.all(menus.map(menu => menu.updateComplete));
+      await new Promise(requestAnimationFrame);
+      const fresh = measure();
+      for (const menu of menus) {
+        menu.showPopover({ source: menu.previousElementSibling });
+        // Flush open layout only during preparation so exit transitions can run.
+        menu.getBoundingClientRect();
+        menu.hidePopover();
+      }
+      await new Promise(requestAnimationFrame);
+      await Promise.allSettled(menus.flatMap(menu => menu.getAnimations().map(animation => animation.finished)));
+      const dismissed = measure();
+      status.textContent = '120 resize/layout operations each. Never opened: ' + fresh + '. After dismissal: ' + dismissed + '.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+  `
+};
+
+/**
  * @summary Dropdown using anchor attribute to reference trigger element by ID. Alternative approach for connecting dropdowns to their triggers.
  * @tags test-case
  */

@@ -270,6 +270,11 @@ describe(`${Notification.metadata.tag} - inline close event`, () => {
     removeFixture(fixture);
   });
 
+  it('should retain layout for inline notifications using shared popover styles', async () => {
+    expect(element.hasAttribute('popover')).toBe(false);
+    expect(element.getClientRects()).toHaveLength(1);
+  });
+
   it('should dispatch close event with bubbles and composed from inline notification', async () => {
     const event = untilEvent(element, 'close');
     element.hidePopover();

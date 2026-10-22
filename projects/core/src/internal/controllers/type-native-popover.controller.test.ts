@@ -96,6 +96,119 @@ describe('type-popover.controller', () => {
     expect(element.matches(':popover-open')).toBe(false);
   });
 
+  it('should remove initially closed and settled closed popovers from layout', async () => {
+    await elementIsStable(element);
+    expect(getComputedStyle(element).display).toBe('none');
+    expect(element.getClientRects()).toHaveLength(0);
+
+    element.showPopover();
+    await elementIsStable(element);
+    expect(element.getClientRects()).toHaveLength(1);
+    element.hidePopover();
+    await elementIsStable(element);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    expect(getComputedStyle(element).display).toBe('none');
+    expect(element.getClientRects()).toHaveLength(0);
+  });
+
+  it('should preserve custom display styling while open', async () => {
+    element.style.display = 'flex';
+    await elementIsStable(element);
+    expect(element.getClientRects()).toHaveLength(0);
+    element.showPopover();
+    await elementIsStable(element);
+    expect(getComputedStyle(element).display).toBe('flex');
+    expect(element.getClientRects()).toHaveLength(1);
+    element.hidePopover();
+    await elementIsStable(element);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    expect(element.getClientRects()).toHaveLength(0);
+  });
+
+  it.runIf(CSS.supports('container-type', 'anchored'))(
+    'should retain layout through entry and exit transitions',
+    async () => {
+      element.style.setProperty('--nve-ref-animation-duration-200', '0.15s');
+      await elementIsStable(element);
+      element.showPopover();
+      await elementIsStable(element);
+      expect(getComputedStyle(element).transitionBehavior).toBe('allow-discrete');
+      expect(element.getAnimations().some(animation => animation instanceof CSSTransition)).toBe(true);
+      await Promise.all(element.getAnimations().map(animation => animation.finished));
+      expect(getComputedStyle(element).opacity).toBe('1');
+      element.hidePopover();
+      await elementIsStable(element);
+      expect(element.matches(':popover-open')).toBe(false);
+      expect(element.getClientRects()).toHaveLength(1);
+      expect(
+        element
+          .getAnimations()
+          .some(animation => animation instanceof CSSTransition && animation.transitionProperty === 'display')
+      ).toBe(true);
+      await Promise.all(element.getAnimations().map(animation => animation.finished));
+      expect(element.getClientRects()).toHaveLength(0);
+    }
+  );
+
+  it.runIf(CSS.supports('container-type', 'anchored'))('should reopen during an exit transition', async () => {
+    element.style.setProperty('--nve-ref-animation-duration-200', '0.15s');
+    await elementIsStable(element);
+    element.showPopover();
+    await elementIsStable(element);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    element.hidePopover();
+    await elementIsStable(element);
+    expect(element.getClientRects()).toHaveLength(1);
+    element.showPopover();
+    await elementIsStable(element);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    expect(element.matches(':popover-open')).toBe(true);
+    expect(element.getClientRects()).toHaveLength(1);
+    expect(getComputedStyle(element).opacity).toBe('1');
+  });
+
+  it.skipIf(CSS.supports('container-type', 'anchored'))(
+    'should close immediately when anchored transitions are unsupported',
+    async () => {
+      await elementIsStable(element);
+      element.showPopover();
+      await elementIsStable(element);
+      expect(getComputedStyle(element).transitionDuration).toBe('0s');
+      expect(element.getClientRects()).toHaveLength(1);
+      element.hidePopover();
+      await elementIsStable(element);
+      expect(element.getAnimations()).toHaveLength(0);
+      expect(element.getClientRects()).toHaveLength(0);
+    }
+  );
+
+  it('should close without retaining layout with reduced motion tokens', async () => {
+    element.style.setProperty('--nve-ref-animation-duration-200', '0s');
+    await elementIsStable(element);
+    element.showPopover();
+    await elementIsStable(element);
+    expect(element.getClientRects()).toHaveLength(1);
+    element.hidePopover();
+    await elementIsStable(element);
+    expect(element.getAnimations()).toHaveLength(0);
+    expect(element.getClientRects()).toHaveLength(0);
+  });
+
+  it('should stay invisible during deferred hydration', async () => {
+    element.setAttribute('defer-hydration', '');
+    await elementIsStable(element);
+    expect(element.getClientRects()).toHaveLength(0);
+    element.showPopover();
+    await elementIsStable(element);
+    expect(getComputedStyle(element).opacity).toBe('0');
+    expect(getComputedStyle(element).pointerEvents).toBe('none');
+    element.removeAttribute('defer-hydration');
+    await elementIsStable(element);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    expect(getComputedStyle(element).opacity).toBe('1');
+    expect(element.getClientRects()).toHaveLength(1);
+  });
+
   it('should trigger open event when popover open', async () => {
     const event = untilEvent(element, 'open');
     element.showPopover();
@@ -279,8 +392,11 @@ describe('type-popover.controller - default open', () => {
   });
 
   it('if popover is open by default with no triggers it should not be inert', async () => {
+    await new Promise(resolve => requestAnimationFrame(resolve));
     await elementIsStable(element);
     expect(element.inert).toBe(false);
+    expect(element.matches(':popover-open')).toBe(true);
+    expect(element.getClientRects()).toHaveLength(1);
   });
 });
 
@@ -416,11 +532,14 @@ describe('type-popover.controller explicit trigger', () => {
     element.removeAttribute('hidden');
     expect((await open).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(true);
+    expect(element.getClientRects()).toHaveLength(1);
 
     const close = untilEvent(element, 'close');
     element.setAttribute('hidden', '');
     expect((await close).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(false);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    expect(element.getClientRects()).toHaveLength(0);
   });
 });
 
@@ -547,6 +666,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     expect((await event).target).toBe(element);
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
+    expect(element.getClientRects()).toHaveLength(1);
   });
 
   it('should trigger close event and close automaticaly when using behavior-trigger', async () => {
@@ -556,12 +676,15 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     expect((await open).target).toBe(element);
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
+    expect(element.getClientRects()).toHaveLength(1);
 
     const close = untilEvent(element, 'close');
     element.hidePopover();
     expect((await close).target).toBe(element);
     await elementIsStable(element);
     expect(element.hidden).toBe(true);
+    await Promise.all(element.getAnimations().map(animation => animation.finished));
+    expect(element.getClientRects()).toHaveLength(0);
   });
 
   it('should NOT trigger close if a close event fires from a slotted child element', async () => {
@@ -575,6 +698,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     await close;
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
+    expect(element.getClientRects()).toHaveLength(1);
   });
 
   it('should NOT trigger close if a cancel event fires from a slotted child element', async () => {
@@ -588,6 +712,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     await cancel;
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
+    expect(element.getClientRects()).toHaveLength(1);
   });
 });
 

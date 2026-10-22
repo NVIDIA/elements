@@ -54,6 +54,38 @@ describe(DropdownGroup.metadata.tag, () => {
     expect(element.dropdowns).toHaveLength(2);
   });
 
+  it('should remove closed cascading menus from layout without closing the parent', async () => {
+    const [parent, child] = element.dropdowns;
+    await elementIsStable(parent);
+    await elementIsStable(child);
+    expect(parent.getClientRects()).toHaveLength(0);
+    expect(child.getClientRects()).toHaveLength(0);
+    parent.showPopover();
+    await elementIsStable(parent);
+    parent.querySelector('nve-menu-item').dispatchEvent(
+      new KeyboardEvent('keydown', {
+        code: 'ArrowRight',
+        bubbles: true
+      })
+    );
+    await elementIsStable(child);
+    expect(parent.getClientRects()).toHaveLength(1);
+    expect(child.getClientRects()).toHaveLength(1);
+    child.querySelector('nve-menu-item').dispatchEvent(
+      new KeyboardEvent('keydown', {
+        code: 'ArrowLeft',
+        bubbles: true
+      })
+    );
+    await elementIsStable(child);
+    await expect.poll(() => child.getClientRects().length).toBe(0);
+    expect(parent.matches(':popover-open')).toBe(true);
+    expect(parent.getClientRects()).toHaveLength(1);
+    element.close();
+    await elementIsStable(parent);
+    await expect.poll(() => parent.getClientRects().length).toBe(0);
+  });
+
   it('should set popoverType to manual for all dropdowns', () => {
     element.dropdowns.forEach(dropdown => {
       expect(dropdown.popoverType).toBe('manual');
