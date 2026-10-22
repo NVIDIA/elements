@@ -47,6 +47,12 @@ export class IconButton extends Button {
    */
   @property({ type: String, reflect: true }) size?: Size;
 
+  /**
+   * Selects the outline or solid form of the named icon. Solid icons use an optional `-solid` asset and fall back to
+   * the outline form when that asset is unavailable.
+   */
+  @property({ type: String }) appearance?: 'outline' | 'solid';
+
   static styles = useStyles([...Button.styles, styles]);
 
   static readonly metadata = {
@@ -62,7 +68,7 @@ export class IconButton extends Button {
     return html`
       <div internal-host interaction-state focus-within aria-hidden="true">
         <slot @slotchange=${(e: Event) => removeEmptySlotWhitespace(e.target as HTMLSlotElement)}>
-          <nve-icon .name=${this.iconName} .direction=${this.direction} .size=${this.size} aria-hidden="true" part="icon"></nve-icon>
+          <nve-icon .name=${this.iconName} .appearance=${this.appearance} .direction=${this.direction} .size=${this.size} aria-hidden="true" part="icon"></nve-icon>
         </slot>
       </div>
       <slot name="anchor"></slot>
