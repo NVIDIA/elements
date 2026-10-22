@@ -47,7 +47,7 @@ This project includes the following bundled third-party software:
 - publint v0.3.24 [MIT]
   Copyright: Bjorn Lu
 
-- sanitize-html v2.18.0 [MIT]
+- sanitize-html v2.18.1 [MIT]
   Copyright: Apostrophe Technologies, Inc.
 
 - ts-morph v28.0.0 [MIT]
@@ -76,7 +76,7 @@ ignore v7.0.6 - Copyright kael
 minisearch v7.2.0 - Copyright Luca Ongaro
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 publint v0.3.24 - Copyright Bjorn Lu
-sanitize-html v2.18.0 - Copyright Apostrophe Technologies, Inc.
+sanitize-html v2.18.1 - Copyright Apostrophe Technologies, Inc.
 ts-morph v28.0.0 - Copyright David Sherret
 zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
 
