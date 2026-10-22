@@ -67,6 +67,46 @@ describe(IconButton.metadata.tag, () => {
     expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('cancel');
   });
 
+  it('should leave icon appearance unset by default', async () => {
+    await elementIsStable(element);
+
+    expect(element.appearance).toBeUndefined();
+    expect(element.hasAttribute('appearance')).toBe(false);
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).appearance).toBeUndefined();
+  });
+
+  it('should pass appearance changes to the child icon without reflecting them', async () => {
+    await elementIsStable(element);
+    const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
+
+    for (const appearance of ['solid', 'outline', undefined] as const) {
+      element.appearance = appearance;
+      await elementIsStable(element);
+
+      expect(icon.appearance).toBe(appearance);
+      expect(element.hasAttribute('appearance')).toBe(false);
+    }
+  });
+
+  it('should pass appearance attribute changes and removal to the child icon', async () => {
+    await elementIsStable(element);
+    const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
+
+    for (const appearance of ['solid', 'outline']) {
+      element.setAttribute('appearance', appearance);
+      await elementIsStable(element);
+
+      expect(element.appearance).toBe(appearance);
+      expect(icon.appearance).toBe(appearance);
+    }
+
+    element.removeAttribute('appearance');
+    await elementIsStable(element);
+
+    expect(element.appearance).toBeNull();
+    expect(icon.appearance).toBeNull();
+  });
+
   it('should allow anchor to be slotted', async () => {
     await elementIsStable(elementWithAnchor);
     expect(anchor.slot).toBe('anchor');
