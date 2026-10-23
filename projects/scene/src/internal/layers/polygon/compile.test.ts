@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { compilePolygon, POLYGON_VERTEX_LIMIT } from './compile.js';
+import { compilePolygon, POLYGON_INPUT_VERTEX_LIMIT, POLYGON_RING_LIMIT, POLYGON_VERTEX_LIMIT } from './compile.js';
 import type { PolygonGeometry, PolygonRing } from './types.js';
 
 describe(compilePolygon.name, () => {
@@ -504,6 +504,58 @@ describe(compilePolygon.name, () => {
       return [Math.cos(angle), Math.sin(angle)] as const;
     });
     expect(() => compilePolygon({ outer })).toThrow('normalized vertex limit');
+  });
+
+  it('accepts the raw vertex budget when redundant points normalize to one rectangle', () => {
+    const outer = Array.from({ length: POLYGON_INPUT_VERTEX_LIMIT - 3 }, (): [number, number] => [0, 0]);
+    outer.push([1, 0], [1, 1], [0, 1]);
+    const compiled = compilePolygon({ outer });
+    expect(compiled.outer).toHaveLength(4);
+    expect(triangleArea(compiled.positions, compiled.indices)).toBe(1);
+  });
+
+  it('rejects excessive raw vertices before accessing their coordinates', () => {
+    const outer = Array.from({ length: POLYGON_INPUT_VERTEX_LIMIT + 1 }, () => [0, 0]);
+    Object.defineProperty(outer, 0, {
+      get: () => {
+        throw new Error('Coordinates must not be read before the budget check.');
+      }
+    });
+    expect(() => compilePolygon({ outer })).toThrow('input vertex limit');
+  });
+
+  it('checks the combined raw budget before normalizing the outer ring or any holes', () => {
+    const outer = [
+      [0, 0],
+      [4, 0],
+      [0, 4]
+    ];
+    Object.defineProperty(outer, 0, {
+      get: () => {
+        throw new Error('The outer ring must not be normalized before checking all rings.');
+      }
+    });
+    const hole = Array.from({ length: POLYGON_INPUT_VERTEX_LIMIT / 2 }, () => [1, 1]);
+    expect(() => compilePolygon({ outer, holes: [hole, hole] })).toThrow('input vertex limit');
+  });
+
+  it('rejects excessive rings before accessing ring entries', () => {
+    const holes = new Array(POLYGON_RING_LIMIT);
+    Object.defineProperty(holes, 0, {
+      get: () => {
+        throw new Error('Ring entries must not be read before the budget check.');
+      }
+    });
+    expect(() =>
+      compilePolygon({
+        outer: [
+          [0, 0],
+          [1, 0],
+          [0, 1]
+        ],
+        holes
+      })
+    ).toThrow('ring limit');
   });
 });
 
