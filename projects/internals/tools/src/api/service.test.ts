@@ -4,6 +4,7 @@
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { PassThrough } from 'node:stream';
 import { describe, expect, it } from 'vitest';
 import type { Attribute, Element } from '@internals/metadata';
 import type { ToolMethod } from '../internal/tools.js';
@@ -250,6 +251,113 @@ describe('ApiService', () => {
       await expect(
         ApiService.validate({ template: '<nve-button></nve-button>', lang: 'html', format: 'json', fix: true })
       ).rejects.toThrow('--fix is available only');
+    });
+
+    it('should reject a request that provides neither paths nor template content', async () => {
+      await expect(ApiService.validate({ format: 'json' })).rejects.toThrow('Provide paths or template content.');
+    });
+
+    it('should reject a request that provides both paths and template content', async () => {
+      await expect(
+        ApiService.validate({
+          paths: ['page.html'],
+          template: '<nve-button></nve-button>',
+          format: 'json'
+        })
+      ).rejects.toThrow('Use paths or template, not both.');
+    });
+
+    it('should render a markdown report when format is omitted', async () => {
+      const result = await ApiService.validate({ template: '<nve-invalid></nve-invalid>' });
+      expect(typeof result).toBe('string');
+      expect(result).toContain('## Validation found errors');
+    });
+
+    describe('cli adapter', () => {
+      async function withStdin<T>(stream: PassThrough, callback: () => Promise<T>): Promise<T> {
+        const original = process.stdin;
+        Object.defineProperty(process, 'stdin', { configurable: true, value: stream });
+        try {
+          return await callback();
+        } finally {
+          Object.defineProperty(process, 'stdin', { configurable: true, value: original });
+        }
+      }
+
+      function validationCli() {
+        const cli = (ApiService.validate as ToolMethod<unknown>).metadata?.cli;
+        if (cli?.transformInput === undefined || cli.formatOutput === undefined || cli.exitCode === undefined) {
+          throw new Error('Validation CLI adapter is missing.');
+        }
+        return cli;
+      }
+
+      it('should normalize path arguments without reading standard input', async () => {
+        const { transformInput } = validationCli();
+        await expect(
+          transformInput({
+            stdin: false,
+            paths: ['page.html', 1],
+            lang: 'html',
+            fix: false,
+            maxDiagnostics: 5
+          })
+        ).resolves.toEqual({ maxDiagnostics: 5, paths: ['page.html'], fix: false, format: 'json' });
+        await expect(transformInput({})).resolves.toEqual({ paths: [], fix: false, format: 'json' });
+        await expect(transformInput({ paths: ['page.html'], fix: true })).resolves.toEqual({
+          paths: ['page.html'],
+          fix: true,
+          format: 'json'
+        });
+      });
+
+      it('should read standard input and reject mixed path or fix options', async () => {
+        const { transformInput } = validationCli();
+        await expect(transformInput({ stdin: true, paths: ['page.html'] })).rejects.toThrow(
+          'Use paths or --stdin, not both.'
+        );
+        await expect(transformInput({ stdin: true, fix: true })).rejects.toThrow(
+          '--fix is available only when checking paths.'
+        );
+
+        const jsonStream = new PassThrough();
+        await withStdin(jsonStream, async () => {
+          const pending = transformInput({ stdin: true, lang: 'json', fix: false, maxDiagnostics: 2 });
+          jsonStream.end('<nve-button></nve-button>');
+          await expect(pending).resolves.toEqual({
+            maxDiagnostics: 2,
+            template: '<nve-button></nve-button>',
+            lang: 'json',
+            format: 'json'
+          });
+        });
+
+        const htmlStream = new PassThrough();
+        await withStdin(htmlStream, async () => {
+          const pending = transformInput({ stdin: true, lang: 'html' });
+          htmlStream.end('x');
+          await expect(pending).resolves.toEqual({ template: 'x', lang: 'html', format: 'json' });
+        });
+      });
+
+      it('should format validation results and map failed checks to a non-zero exit code', () => {
+        const { formatOutput, exitCode } = validationCli();
+        const failed = {
+          ok: false,
+          summary: { files: 1, errors: 1, warnings: 0, truncated: false },
+          diagnostics: []
+        };
+
+        expect(() => formatOutput('nope', { format: 'json' })).toThrow('Validation returned an invalid result.');
+        expect(() => formatOutput(null, { format: 'json' })).toThrow('Validation returned an invalid result.');
+        expect(formatOutput(failed, { format: 'markdown' })).toBe(
+          '## Validation found errors\n\n1 file, 1 errors, 0 warnings'
+        );
+        expect(formatOutput(failed, { format: 'json' })).toBe(JSON.stringify(failed, null, 2));
+        expect(exitCode(failed)).toBe(1);
+        expect(exitCode({ ...failed, ok: true })).toBe(0);
+        expect(exitCode(null)).toBe(0);
+      });
     });
   });
 
