@@ -54,6 +54,33 @@ describe('scene render snapshot compilation', () => {
     });
 
     if (!referenced) continue;
+    test(`animates ${count} layers, ${path}, batch ${batch}`, async ({ bench }) => {
+      let fixture: HTMLElement;
+      let content: SceneContent;
+      let frame: HTMLElement;
+      await bench('resolve and compile animated frame', () => {
+        let checksum = 0;
+        for (let index = 0; index < batch; index += 1) {
+          // A pose-only edit followed by the scene's per-render resolution and compilation.
+          setFrameTransform(frame, { position: [index, 0, 0], orientation: [0, 0, 0, 1] });
+          content.resolveFrames();
+          const items = content.compileRenderItems();
+          checksum += items.length + items[items.length - 1]!.frameMatrix[12]!;
+        }
+        return checksum;
+      }).run({
+        ...options,
+        async setup() {
+          ({ fixture, content } = await createContentFixture(workload));
+          frame = fixture.querySelector('nve-scene-frame')!;
+          content.compileRenderItems();
+        },
+        teardown() {
+          removeFixture(fixture);
+        }
+      });
+    });
+
     test(`checks ${count} invalid interactive layers, ${path}, batch ${batch}`, async ({ bench }) => {
       let fixture: HTMLElement;
       let content: SceneContent;

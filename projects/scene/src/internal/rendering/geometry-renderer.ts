@@ -9,7 +9,8 @@ import {
   type SceneGPURenderPass,
   type SceneGPURenderPipeline,
   type SceneGeometryDevice,
-  supportsSceneGeometryRendering
+  supportsSceneGeometryRendering,
+  supportsSceneGPUCompute
 } from '../gpu/platform.js';
 import {
   acquireSharedInstanceBuffer,
@@ -29,7 +30,6 @@ import {
   destroyMarkerCompactionResources,
   MarkerCompactor,
   markerCompactionIsEligible,
-  supportsMarkerCompaction,
   writeMarkerCompactionUniforms,
   type MarkerCompactionResources
 } from '../layers/markers/compaction.js';
@@ -41,6 +41,7 @@ import type { LabelRenderer } from '../layers/labels/renderer.js';
 import {
   getPickItemCount,
   getStreamSize,
+  isCheckerboardRenderItem,
   isCubeMarkerRenderItem,
   isLabelRenderItem,
   isMarkerRenderItem,
@@ -48,6 +49,7 @@ import {
   isOpaqueItem,
   isPickableItem,
   isTransparentItem,
+  itemRequiresGeometry,
   markerOutlinePassIsVisible,
   type LineRenderItem,
   type MarkerRenderItem,
@@ -60,7 +62,6 @@ import {
   getInstanceAllocation,
   getPartitionPickId,
   getPickUniformOffset,
-  itemRequiresGeometry,
   writeInstancePartitionUniforms,
   type ConnectedLineDrawPartition,
   type InstanceAllocation
@@ -72,6 +73,7 @@ import {
   hasSameUniformValues
 } from './partition-resources.js';
 
+const IDENTITY_MAT4 = identityMat4();
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_INDEX = 0x10;
 const BUFFER_VERTEX = 0x20;
@@ -82,9 +84,13 @@ export type GeometryDevice = SceneGeometryDevice;
 interface GeometryResources {
   readonly index: SceneGPUBuffer;
   readonly indexCount: number;
-  readonly outlineIndex?: SceneGPUBuffer;
-  readonly outlineIndexCount?: number;
-  readonly outlineVertex?: SceneGPUBuffer;
+  readonly outline?: OutlineGeometryResources;
+  readonly vertex: SceneGPUBuffer;
+}
+
+interface OutlineGeometryResources {
+  readonly index: SceneGPUBuffer;
+  readonly indexCount: number;
   readonly vertex: SceneGPUBuffer;
 }
 
@@ -321,17 +327,13 @@ export class GeometryRenderer {
     item: SceneRenderItem,
     frame: { readonly pixelRatio: number; readonly projection: Matrix4 }
   ): void {
+    // Write item-wide values once; each partition only overwrites its own fields.
+    const uniforms = this.#writeItemUniforms(item, frame);
     for (let index = 0; index < resources.instance.partitions.length; index += 1) {
       const partition = resources.partitions[index]!;
-      const uniforms = 'type' in item && item.type === 'line' ? this.#lineUniformScratch : this.#uniformScratch;
-      uniforms.fill(0);
-      writeMat4ToFloat32(uniforms, multiplyMat4Into(frame.projection, item.frameMatrix, this.#matrixScratch));
-      uniforms.set(identityMat4(), 16);
       if (isMarkerRenderItem(item)) {
         uniforms[32] = partition.recordCount;
-        writeMarkerCompactionUniforms(uniforms, item.data.kind);
       } else if (!isMeshRenderItem(item) && !isLabelRenderItem(item)) {
-        this.#writeStreamUniforms(uniforms, item, frame.pixelRatio);
         writeInstancePartitionUniforms(uniforms, {
           item,
           line: resources.linePartitions?.[index],
@@ -343,6 +345,21 @@ export class GeometryRenderer {
       // eslint-disable-next-line local-performance/no-gpu-upload-in-loop -- @hotpath Each partition owns one uniform buffer.
       this.#device?.queue.writeBuffer(partition.uniform, 0, uniforms);
     }
+  }
+
+  #writeItemUniforms(
+    item: SceneRenderItem,
+    frame: { readonly pixelRatio: number; readonly projection: Matrix4 }
+  ): Float32Array {
+    const uniforms = item.type === 'line' ? this.#lineUniformScratch : this.#uniformScratch;
+    uniforms.fill(0);
+    writeMat4ToFloat32(uniforms, multiplyMat4Into(frame.projection, item.frameMatrix, this.#matrixScratch));
+    uniforms.set(IDENTITY_MAT4, 16);
+    if (isMarkerRenderItem(item)) writeMarkerCompactionUniforms(uniforms, item.data.kind);
+    else if (!isMeshRenderItem(item) && !isLabelRenderItem(item)) {
+      this.#writeStreamUniforms(uniforms, item, frame.pixelRatio);
+    }
+    return uniforms;
   }
 
   #writeStreamUniforms(
@@ -416,7 +433,7 @@ export class GeometryRenderer {
       ...options.allocation,
       onValidationError: error => this.#reportFailure(error)
     });
-    const uniformLength = 'type' in options.item && options.item.type === 'line' ? 48 : 40;
+    const uniformLength = options.item.type === 'line' ? 48 : 40;
     const uniformResources = createPartitionUniformResources({
       device: options.device,
       instance,
@@ -560,7 +577,7 @@ export class GeometryRenderer {
   }
 
   #initializeMarkerCompactor(device: GeometryDevice): void {
-    if (this.#markerCompactor || !supportsMarkerCompaction(device)) return;
+    if (this.#markerCompactor || !supportsSceneGPUCompute(device)) return;
     try {
       this.#markerCompactor = new MarkerCompactor(device);
     } catch {
@@ -579,24 +596,27 @@ export class GeometryRenderer {
   #drawMarkerOutline(pass: GeometryPass, item: MarkerRenderItem, transparent: boolean): void {
     const draw = this.#getMarkerOutlineDraw(item, transparent);
     if (!draw) return;
-    const { device, geometry, pipeline, resources } = draw;
-    pass.setVertexBuffer(0, geometry.outlineVertex);
-    pass.setIndexBuffer(geometry.outlineIndex, 'uint32');
+    const { device, outline, pipeline, resources } = draw;
+    pass.setVertexBuffer(0, outline.vertex);
+    pass.setIndexBuffer(outline.index, 'uint32');
     resources.instance.partitions.forEach((partition, index) => {
       this.#bindLayer(pass, { groups: getDirectLayerBindGroups(device, pipeline, resources, index), pipeline });
-      pass.drawIndexed(geometry.outlineIndexCount, partition.recordCount);
+      pass.drawIndexed(outline.indexCount, partition.recordCount);
     });
   }
 
   #getMarkerOutlineDraw(item: MarkerRenderItem, transparent: boolean) {
     const resources = this.#layers.get(item.layer);
     if (!resources || resources.frustumRelation === 'outside') return undefined;
-    const geometry = getOutlineGeometry(this.#geometries.get(item.data.kind));
-    if (!geometry) return undefined;
-    if (!markerOutlinePassIsVisible(item, transparent)) return undefined;
-    const pipeline = transparent ? this.#markerPipelines?.outlineTransparent : this.#markerPipelines?.outlineOpaque;
+    const outline = this.#geometries.get(item.data.kind)?.outline;
+    if (!outline || !markerOutlinePassIsVisible(item, transparent)) return undefined;
+    const pipeline = this.#markerOutlinePipeline(transparent);
     const device = this.#device;
-    return pipeline && device ? { device, geometry, pipeline, resources } : undefined;
+    return pipeline && device ? { device, outline, pipeline, resources } : undefined;
+  }
+
+  #markerOutlinePipeline(transparent: boolean): SceneGPURenderPipeline | undefined {
+    return transparent ? this.#markerPipelines?.outlineTransparent : this.#markerPipelines?.outlineOpaque;
   }
 
   // eslint-disable-next-line max-params -- @hotpath This per-partition render path avoids allocating an options object for every draw.
@@ -606,7 +626,8 @@ export class GeometryRenderer {
     count = item.data.count,
     line?: ConnectedLineDrawPartition
   ): void {
-    if (item.type === 'point') pass.draw(count * 6);
+    if (isCheckerboardRenderItem(item)) pass.draw(6);
+    else if (item.type === 'point') pass.draw(count * 6);
     else if (item.type === 'triangle') pass.draw(count);
     else if (line) pass.draw(line.segmentCount * 6 + line.joinCount * POLYLINE_JOIN_VERTEX_COUNT);
   }
@@ -614,6 +635,7 @@ export class GeometryRenderer {
   #pipelineSetFor(item: SceneRenderItem): RenderPipelines | undefined {
     if (isMarkerRenderItem(item)) return this.#markerPipelines;
     if (isMeshRenderItem(item) || isLabelRenderItem(item)) return undefined;
+    if (isCheckerboardRenderItem(item)) return this.#streamPipelines?.checkerboard;
     return item.type === 'line' && item.data.depthBias
       ? this.#streamPipelines?.biasedLine
       : this.#streamPipelines?.[item.type];
@@ -808,25 +830,16 @@ export class GeometryRenderer {
   #drawPickMarkerOutline(pass: GeometryPass, item: MarkerRenderItem, pipelines: PickPipelines, pickId: number): void {
     const pipeline = pipelines.outline.opaque;
     const resources = this.#layers.get(item.layer);
-    const geometry = this.#geometries.get(item.data.kind);
+    const outline = this.#geometries.get(item.data.kind)?.outline;
     const device = this.#device;
-    if (
-      !resources ||
-      !geometry?.outlineVertex ||
-      !geometry.outlineIndex ||
-      !geometry.outlineIndexCount ||
-      !device ||
-      !item.data.outlineVisible
-    ) {
-      return;
-    }
-    pass.setVertexBuffer(0, geometry.outlineVertex);
-    pass.setIndexBuffer(geometry.outlineIndex, 'uint32');
+    if (!resources || !outline || !device || !item.data.outlineVisible) return;
+    pass.setVertexBuffer(0, outline.vertex);
+    pass.setIndexBuffer(outline.index, 'uint32');
     resources.instance.partitions.forEach((partition, index) => {
       const layerPartition = resources.partitions[index]!;
       this.#writePickId(layerPartition.uniform, PICK_UNIFORM_OFFSETS.marker, pickId + partition.firstRecord);
       this.#bindLayer(pass, { groups: getDirectLayerBindGroups(device, pipeline, resources, index), pipeline });
-      pass.drawIndexed(geometry.outlineIndexCount!, partition.recordCount);
+      pass.drawIndexed(outline.indexCount, partition.recordCount);
     });
   }
 
@@ -848,8 +861,8 @@ export class GeometryRenderer {
     this.#geometries.forEach(resources => {
       resources.vertex.destroy();
       resources.index.destroy();
-      resources.outlineVertex?.destroy();
-      resources.outlineIndex?.destroy();
+      resources.outline?.vertex.destroy();
+      resources.outline?.index.destroy();
     });
     this.#geometries.clear();
     this.#layers.forEach(destroyLayerResources);
@@ -903,11 +916,6 @@ function getInstanceDraw(options: {
 
 function isOutsideMarker(item: SceneRenderItem, resources: LayerResources): boolean {
   return isMarkerRenderItem(item) && resources.frustumRelation === 'outside';
-}
-
-function getOutlineGeometry(geometry: GeometryResources | undefined): Required<GeometryResources> | undefined {
-  if (!geometry?.outlineVertex || !geometry.outlineIndex || !geometry.outlineIndexCount) return undefined;
-  return geometry as Required<GeometryResources>;
 }
 
 // eslint-disable-next-line max-params -- @hotpath This per-partition render path avoids allocating an options object for every bind lookup.
@@ -992,17 +1000,20 @@ function createMarkerGeometryResources(device: GeometryDevice, geometry: MarkerG
     return buffer;
   };
   try {
-    const index = createTracked(geometry.indices, BUFFER_INDEX);
-    const outlineIndex = geometry.outlineIndices ? createTracked(geometry.outlineIndices, BUFFER_INDEX) : undefined;
-    const outlineVertex = geometry.outlineVertices ? createTracked(geometry.outlineVertices, BUFFER_VERTEX) : undefined;
-    const vertex = createTracked(geometry.vertices, BUFFER_VERTEX);
+    const { outlineIndices, outlineVertices } = geometry;
+    const outline =
+      outlineIndices?.length && outlineVertices
+        ? {
+            index: createTracked(outlineIndices, BUFFER_INDEX),
+            indexCount: outlineIndices.length,
+            vertex: createTracked(outlineVertices, BUFFER_VERTEX)
+          }
+        : undefined;
     return {
-      index,
+      index: createTracked(geometry.indices, BUFFER_INDEX),
       indexCount: geometry.indices.length,
-      outlineIndex,
-      outlineIndexCount: geometry.outlineIndices?.length,
-      outlineVertex,
-      vertex
+      outline,
+      vertex: createTracked(geometry.vertices, BUFFER_VERTEX)
     };
   } catch (error) {
     buffers.forEach(buffer => buffer.destroy());

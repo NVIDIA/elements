@@ -36,6 +36,8 @@ export interface PointRenderItem extends FeatureIdentifiedRenderItem {
 }
 
 export interface LineRenderItem extends FeatureIdentifiedRenderItem {
+  /** Cell count from the origin to each edge of a procedural checkerboard. */
+  readonly checkerboard?: number;
   readonly data: StreamLayerRenderData;
   readonly frameMatrix: Matrix4;
   readonly interactive: boolean;
@@ -126,7 +128,12 @@ export function isOpaqueItem(item: SceneRenderItem): boolean {
 }
 
 export function getStreamSize(item: PointRenderItem | LineRenderItem | TriangleRenderItem): number {
-  return item.type === 'point' ? item.size : 0;
+  if (item.type === 'point') return item.size;
+  return item.type === 'line' ? (item.checkerboard ?? 0) : 0;
+}
+
+export function isCheckerboardRenderItem(item: SceneRenderItem): item is LineRenderItem & { checkerboard: number } {
+  return item.type === 'line' && item.checkerboard !== undefined;
 }
 
 export function getPickItemCount(item: SceneRenderItem): number {
@@ -134,4 +141,10 @@ export function getPickItemCount(item: SceneRenderItem): number {
   if (item.type === 'line') return lineSegmentCount(item.data.count, item.topology);
   if (item.type === 'label') return item.data.count;
   return item.type === 'triangle' ? item.data.count / 3 : item.data.count;
+}
+
+export function itemRequiresGeometry(item: SceneRenderItem): boolean {
+  if (!item.data.ready) return false;
+  if (item.type === 'mesh') return item.data.identityInstance || (item.instances?.count ?? 0) > 0;
+  return item.data.count > 0;
 }

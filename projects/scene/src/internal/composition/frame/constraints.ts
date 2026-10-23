@@ -19,6 +19,7 @@ const invalid = new WeakMap<HTMLElement, Set<string>>();
 /** Valid pose capture must preserve independent input failures. */
 export function setFrameConstraint(element: HTMLElement, code: string, valid: boolean): void {
   const failures = invalid.get(element);
+  const wasValid = !failures;
   if (valid) {
     if (!failures?.delete(code)) return;
     if (failures.size === 0) invalid.delete(element);
@@ -28,8 +29,9 @@ export function setFrameConstraint(element: HTMLElement, code: string, valid: bo
     else invalid.set(element, new Set([code]));
   }
   const state = targets.get(element);
-  if (state) state.constraintValid = !invalid.has(element);
-  notifyOwningScene(element);
+  const isValid = !invalid.has(element);
+  if (state) state.constraintValid = isValid;
+  notifyOwningScene(element, isValid === wasValid ? 'render' : 'frame-validity');
 }
 
 export function hasFrameConstraintFailure(element: HTMLElement): boolean {

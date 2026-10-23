@@ -102,5 +102,5 @@ describe(RenderTargets.name, () => {
 
 function createOitResources(): OitResources {
   const texture: SceneGPUTexture = { createView: () => ({}) };
-  return { accumulation: texture, bindGroup: {}, revealage: texture };
+  return { accumulation: texture, accumulationView: {}, bindGroup: {}, revealage: texture, revealageView: {} };
 }

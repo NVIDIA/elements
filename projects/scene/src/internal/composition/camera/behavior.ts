@@ -14,7 +14,8 @@ import type { CameraElement, CameraPropertyName, SceneCameraBehavior, SceneCamer
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import type { SceneCameraProjection, CameraTarget } from './math.js';
 import { normalizeQuaternion } from '../../math/quaternion.js';
-import type { Quaternion, ScenePose, Vec3 } from '../../math/types.js';
+import type { ScenePose } from '../../math/types.js';
+import { isFiniteQuaternion, toFiniteVec3 } from '../../math/tuples.js';
 
 interface OrbitCameraContribution {
   readonly fields: readonly CameraField[];
@@ -314,7 +315,7 @@ function getPoseContribution(camera: CameraElement): PoseCameraContribution | nu
 }
 
 function getCameraTarget(camera: CameraElement): CameraTarget | null {
-  const position = toVec3(camera.target);
+  const position = toFiniteVec3(camera.target);
   return position && Number.isFinite(camera.heading) ? { position, heading: camera.heading } : null;
 }
 
@@ -368,8 +369,8 @@ export function cameraPropertyFromAttribute(attribute: string): CameraPropertyNa
 }
 
 function getCameraPose(camera: CameraElement): ScenePose | null {
-  const position = toVec3(camera.position);
-  if (!position || !isQuaternion(camera.orientation)) return null;
+  const position = toFiniteVec3(camera.position);
+  if (!position || !isFiniteQuaternion(camera.orientation)) return null;
   try {
     return { position, orientation: normalizeQuaternion(camera.orientation) };
   } catch {
@@ -379,26 +380,6 @@ function getCameraPose(camera: CameraElement): ScenePose | null {
 
 function isValidClipping(near: number, far: number): boolean {
   return Number.isFinite(near) && Number.isFinite(far) && near > 0 && near < far;
-}
-
-function toVec3(value: unknown): Vec3 | null {
-  return isVec3(value) ? [value[0], value[1], value[2]] : null;
-}
-
-function isVec3(value: unknown): value is Vec3 {
-  return (
-    Array.isArray(value) &&
-    value.length === 3 &&
-    value.every(component => typeof component === 'number' && Number.isFinite(component))
-  );
-}
-
-function isQuaternion(value: unknown): value is Quaternion {
-  return (
-    Array.isArray(value) &&
-    value.length === 4 &&
-    value.every(component => typeof component === 'number' && Number.isFinite(component))
-  );
 }
 
 function clearBehaviorConfiguration(camera: CameraElement): void {

@@ -1720,6 +1720,38 @@ describe(SceneRenderer.name, () => {
     resetSceneTesting();
   });
 
+  it('renders a checkerboard as one quad and switches back to the line pipeline', async () => {
+    const gpu = createAdvancedDevice();
+    configureSceneTesting({
+      getCanvasContext: () => ({
+        configure: () => undefined,
+        unconfigure: () => undefined,
+        getCurrentTexture: () => ({ createView: () => ({}) })
+      })
+    });
+    const renderer = new SceneRenderer();
+    renderer.initialize(document.createElement('canvas'), { device: gpu.device, format: 'bgra8unorm' });
+    renderer.resize(80, 40);
+    const base = createLineRenderItem({ count: 2, topology: 'segments' });
+    const checkerboard: LineRenderItem = {
+      ...base,
+      checkerboard: 1000,
+      data: { ...base.data, depthBias: true, pickable: false }
+    };
+    renderer.render([checkerboard]);
+    await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
+    renderer.render([{ ...checkerboard, data: { ...checkerboard.data, uploadRanges: [] } }]);
+    const checkerboardPipeline = gpu.draws.at(-1)?.pipeline;
+    expect(gpu.draws.at(-1)).toMatchObject({ vertexCount: 6 });
+    expect(gpu.writes.find(write => write instanceof Float32Array && write.length === 48)).toMatchObject({ 35: 1000 });
+    expect(gpu.bufferDescriptors.some(descriptor => descriptor.size === 2 * LINE_VERTEX.stride)).toBe(true);
+
+    renderer.render([{ ...base, data: { ...base.data, uploadRanges: [] } }]);
+    expect(gpu.draws.at(-1)?.pipeline).not.toBe(checkerboardPipeline);
+    renderer.disconnect();
+    resetSceneTesting();
+  });
+
   it('should omit non-pickable stream records from ID draws and targets without ID gaps', async () => {
     const gpu = createAdvancedDevice();
     configureSceneTesting({

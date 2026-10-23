@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import {
-  supportsSceneGPUCompute,
   type SceneGPUBindGroup,
   type SceneGPUBuffer,
   type SceneGPUCommandEncoder,
   type SceneGPUComputeDevice,
-  type SceneGPUComputePipeline,
-  type SceneGPUDevice
+  type SceneGPUComputePipeline
 } from '../../gpu/platform.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
 import { FRUSTUM_WGSL } from '../../math/frustum.js';
@@ -110,10 +108,6 @@ export class MarkerCompactor {
 /** Writes the drawn primitive's unit-scale enclosing radius into the marker uniform record that compaction reads. */
 export function writeMarkerCompactionUniforms(uniforms: Float32Array, kind: PrimitiveKind): void {
   uniforms[UNIT_ENCLOSING_RADIUS_UNIFORM_INDEX] = PRIMITIVE_ENCLOSING_RADII[kind];
-}
-
-export function supportsMarkerCompaction(device: SceneGPUDevice): device is SceneGPUComputeDevice {
-  return supportsSceneGPUCompute(device);
 }
 
 export function destroyMarkerCompactionResources(resources: MarkerCompactionResources | undefined): void {

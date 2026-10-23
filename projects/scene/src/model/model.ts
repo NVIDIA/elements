@@ -15,7 +15,7 @@ import { diagnosticReporterService } from '../internal/diagnostics/reporter.serv
 
 /** A live view of the joint elements owned directly by one model's name scope. */
 export interface SceneModelJoints {
-  /** Returns the named joint element. Unknown names report model-joint and invalidate the model chain. */
+  /** Returns the named joint element, or undefined for unknown names, without changing validity or diagnostics. */
   get(name: string): SceneJoint | undefined;
   /** Assigns the named joint's synchronous value. Unknown names report model-joint and invalidate the model chain. */
   set(name: string, value: number): void;
@@ -70,17 +70,18 @@ export class SceneModel extends SceneFrame {
   #tint = '#ffffff';
 
   /**
-   * Live read-only view of this scope's joints, excluding nested models. get(name) returns
-   * an element; set(name, value) assigns synchronously. has(), names(), and values() inspect
-   * membership or authored values; reset() zeros non-mimic joints. Unknown get/set names
-   * report model-joint and invalidate the chain. Connect, disconnect, and rename update membership.
+   * Live view of this scope's joints, excluding nested models. get(name) returns an element
+   * or undefined without changing validity or diagnostics; set(name, value) assigns synchronously.
+   * has(), names(), and values() inspect membership or authored values; reset() zeros non-mimic
+   * joints. Unknown set names report model-joint and invalidate the chain. Connect, disconnect,
+   * and rename update membership.
    */
   get joints(): SceneModelJoints {
     return this.#joints;
   }
 
   readonly #joints: SceneModelJoints = Object.freeze({
-    get: (name: string) => this.#joint(name),
+    get: (name: string) => this.#jointMap().get(name.trim()),
     set: (target: string | Readonly<Record<string, number>>, value?: number) => {
       const joints = this.#jointMap();
       const entries = typeof target === 'string' ? [[target, value!] as const] : Object.entries(target);
@@ -171,12 +172,6 @@ export class SceneModel extends SceneFrame {
       if (name && !name.includes('/')) names.set(name, names.has(name) ? null : element);
     }
     return new Map([...names].flatMap(([name, element]) => (element ? [[name, element] as const] : [])));
-  }
-
-  #joint(name: string): SceneJoint | undefined {
-    const joint = this.#jointMap().get(name.trim());
-    this.#jointDiagnostic(!joint);
-    return joint;
   }
 
   #jointDiagnostic(active: boolean): void {

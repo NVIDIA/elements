@@ -145,19 +145,21 @@ export function notifyFrameStateChange(frame: HTMLElement): void {
 export function setFrameTransform(frame: HTMLElement, transform: ScenePose): void {
   const state = getFrameState(frame);
   const normalized = normalizeFrameTransform(transform);
+  const validityChanged = !state.valid;
   state.pose = normalized;
   state.localMatrix = composePreciseMat4(normalized.position, normalized.orientation);
   state.valid = true;
-  notifyOwningScene(frame);
+  notifyOwningScene(frame, validityChanged ? 'frame-validity' : 'render');
 }
 
 export function clearFrameTransform(frame: HTMLElement): void {
   const state = getFrameState(frame);
   if (state.pose !== null || !state.valid) {
+    const validityChanged = !state.valid;
     state.pose = null;
     state.localMatrix = identityPreciseMat4();
     state.valid = true;
-    notifyOwningScene(frame);
+    notifyOwningScene(frame, validityChanged ? 'frame-validity' : 'render');
   }
 }
 
@@ -165,7 +167,7 @@ export function invalidateFrameTransform(frame: HTMLElement): void {
   const state = getFrameState(frame);
   if (!state.valid) return;
   state.valid = false;
-  notifyOwningScene(frame);
+  notifyOwningScene(frame, 'frame-validity');
 }
 
 export function getFramePose(frame: HTMLElement): ScenePose {
@@ -217,11 +219,7 @@ export function getNamedSceneFrame(
 }
 
 /** Returns a registry target even while its transform is invalid, for dependency subscriptions. */
-export function getNamedFrameElement(
-  scene: HTMLElement,
-  name: string,
-  context: HTMLElement = scene
-): HTMLElement | undefined {
+function getNamedFrameElement(scene: HTMLElement, name: string, context: HTMLElement = scene): HTMLElement | undefined {
   const target = resolveFrameName(scene, name, context);
   return target &&
     target.localName !== 'nve-scene-joint' &&

@@ -793,8 +793,8 @@ async function runProfileProbe() {
     await mesh.setTexture(await getTextureImage());
     await waitFrames(6);
     return {
-      // Vertex zero occurs only in the first triangle: one position and its three normals.
-      expectedGeometryWriteBytes: [3 * Float32Array.BYTES_PER_ELEMENT, 9 * Float32Array.BYTES_PER_ELEMENT],
+      // Only the source position crosses the queue; compute writes expanded positions and normals.
+      expectedSourceWriteBytes: 3 * Float32Array.BYTES_PER_ELEMENT,
       expectedInstanceWriteBytes: MARKER.stride,
       profile: profile.name,
       snapshot: observer.snapshot()

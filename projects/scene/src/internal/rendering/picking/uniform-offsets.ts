@@ -3,6 +3,7 @@
 
 /** Byte offsets of each ID-pass uniform's `pickId` member. */
 export const PICK_UNIFORM_OFFSETS = {
+  label: 160,
   line: 180,
   marker: 132,
   mesh: 144,
