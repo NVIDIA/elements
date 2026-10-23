@@ -9,6 +9,11 @@ on:
     - cron: '7 23 * * *' # 11:07 PM America/Chicago
       timezone: America/Chicago
   workflow_dispatch:
+    inputs:
+      performance-only:
+        description: Measure PR checks without publishing pages
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -40,6 +45,7 @@ jobs:
       - name: Upload code coverage
         if: >-
           github.event_name == 'push' ||
+          inputs.performance-only ||
           (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
         uses: actions/upload-code-coverage@d8e329117199404bba6fc81efe8093dc7c015e34 # v1.4.2
         with:
@@ -89,7 +95,7 @@ jobs:
             projects/viewport/dist
             projects/viewport/package.json
       - name: Prepare IndexNow artifacts
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.performance-only)
         env:
           ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
           INDEXNOW_KEY: ${{secrets.INDEXNOW_KEY}}
@@ -98,13 +104,13 @@ jobs:
           --site-dir projects/pages/dist
           --site-url "$ELEMENTS_PAGES_BASE_URL"
       - name: Upload pages artifact
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.performance-only)
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: projects/pages/dist
           include-hidden-files: true
       - name: Upload IndexNow state
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.performance-only)
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: indexnow-state
@@ -119,6 +125,7 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: ./.github/actions/setup-ci
       - name: Run Lighthouse tests
         run: >-
@@ -225,7 +232,7 @@ jobs:
 
   deploy-pages:
     needs: ci
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.performance-only)
     runs-on: ubuntu-latest
     permissions:
       actions: read

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { readFileSync } from 'node:fs';
 import {
   createWireitLineParser,
   processTreeRss,
@@ -11,7 +12,11 @@ import {
 test('Lighthouse profiling rejects cached or incrementally fresh test tasks', () => {
   const graph = wireitGraph('lighthouse');
   const tests = graph.filter(task => task.id.endsWith(':test:lighthouse'));
-  assert.equal(tests.length, 12);
+  const root = JSON.parse(readFileSync(new URL('../../../package.json', import.meta.url), 'utf8'));
+  assert.deepEqual(
+    tests.map(task => task.id).sort(),
+    root.wireit.lighthouse.dependencies.map(id => id.replace(/^\.\//, '')).sort()
+  );
   assert.throws(() => verifyLighthouseExecution([], graph), /skipped expected test commands/);
   assert.throws(() => verifyLighthouseExecution(tests.slice(1), graph), /skipped expected test commands/);
   assert.doesNotThrow(() => verifyLighthouseExecution(tests, graph));
