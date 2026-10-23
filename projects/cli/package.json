@@ -75,7 +75,7 @@
     "@vitest/coverage-istanbul": "catalog:",
     "@types/node": "catalog:",
     "@types/yargs": "17.0.35",
-    "bun": "1.4.3",
+    "bun": "1.4.4",
     "typescript": "catalog:",
     "typescript-7": "catalog:",
     "vite": "catalog:",
