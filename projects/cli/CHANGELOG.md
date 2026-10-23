@@ -1,3 +1,23 @@
+## [2.2.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.12...@nvidia-elements/cli-v2.2.13) (2026-10-23)
+
+### Features
+
+* **code:** iframe component ([09f9a8c](https://github.com/NVIDIA/elements/commit/09f9a8cc43439b48a96185198dcd8b3ce590759b))
+* **core:** add appearance option to icon button ([942be28](https://github.com/NVIDIA/elements/commit/942be28dcc0eaff9495e59386e50da791f1217fb))
+* **core:** add composable tab item groups ([284eee9](https://github.com/NVIDIA/elements/commit/284eee904d77a9b84f2c122f35d95a2e18eba73e))
+* **core:** progress dot ([6a1ed16](https://github.com/NVIDIA/elements/commit/6a1ed16c62ca615f3e3f5f2ffd347f357fe9d0f3))
+* **lint:** prevent nested interactive elements ([a27b402](https://github.com/NVIDIA/elements/commit/a27b40258d94e5384b3a5424dd8176fddeefee81))
+
+### Bug Fixes
+
+* **cli:** update bun to 1.4.4 ([dc0a9d4](https://github.com/NVIDIA/elements/commit/dc0a9d4079cf3d8c7251ed4dfb6ff8ce728f8be1))
+* **core:** add padding for alert banners in toggletip header ([4954ec6](https://github.com/NVIDIA/elements/commit/4954ec6715a1b24c33a6c0fa261d9bffe526c9c8))
+* **core:** improve grid keynav event handling ([9045f7f](https://github.com/NVIDIA/elements/commit/9045f7fc1947bb20d93b3ac5e0489ee1126b9f2a))
+* **core:** remove layout boxes from closed popovers ([e7e89ac](https://github.com/NVIDIA/elements/commit/e7e89acc6565d325410590e91eba9966d2161052))
+* **docs:** prevent concurrent site output writes ([cd1bfdb](https://github.com/NVIDIA/elements/commit/cd1bfdbb2e177d8a4e958feb40ab01b0c9478caf))
+* **forms:** detect label anchors after named slots ([756b692](https://github.com/NVIDIA/elements/commit/756b69251f0d31aed089c3bb31ec3688866d3360))
+* **pi:** update deps ([64d830e](https://github.com/NVIDIA/elements/commit/64d830ee361dd0e537a63d89c844c4b76e370fb3))
+
 ## [2.2.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.11...@nvidia-elements/cli-v2.2.12) (2026-10-22)
 
 ### Bug Fixes
