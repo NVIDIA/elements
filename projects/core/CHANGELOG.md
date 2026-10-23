@@ -1,3 +1,9 @@
+## [2.17.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.17.0...@nvidia-elements/core-v2.17.1) (2026-10-23)
+
+### Bug Fixes
+
+* **core:** remove layout boxes from closed popovers ([e7e89ac](https://github.com/NVIDIA/elements/commit/e7e89acc6565d325410590e91eba9966d2161052))
+
 ## [2.17.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.16.0...@nvidia-elements/core-v2.17.0) (2026-10-23)
 
 ### Features
