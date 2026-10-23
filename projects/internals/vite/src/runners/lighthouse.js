@@ -4,13 +4,14 @@ import { resolve } from 'path';
 import { VitePlaywrightRunner, buildPage } from './playwright.js';
 import { withSoftwareWebGPUChromiumArgs } from './utils.js';
 import { profilePhase } from './profile.js';
+import { LIGHTHOUSE_WORKERS } from './lighthouse-workers.js';
 
 const output = process.env.CI ? ['json'] : ['json', 'html'];
 const RUNNER_ID = 'lighthouse';
 const LIGHTHOUSE_FLAGS = { logLevel: 'error', output };
 const CHROMIUM_ARGS = withSoftwareWebGPUChromiumArgs([
   '--headless',
-  '--remote-debugging-port=9222',
+  '--remote-debugging-port=0',
   '--disable-dev-shm-usage',
   '--disable-extensions',
   '--disable-background-networking',
@@ -39,17 +40,51 @@ const LIGHTHOUSE_CONFIG = {
 
 export class LighthouseRunner {
   #runner;
+  #pool = [];
+  #chromiumArgs;
 
   constructor({ chromiumArgs = CHROMIUM_ARGS } = {}) {
-    this.#runner = new VitePlaywrightRunner({ runnerID: RUNNER_ID, chromiumArgs });
+    this.#chromiumArgs = chromiumArgs;
+    this.#runner = new VitePlaywrightRunner({
+      runnerID: RUNNER_ID,
+      instanceID: process.env.VITEST_POOL_ID ?? '1',
+      chromiumArgs
+    });
   }
 
   async open() {
-    await profilePhase('browser-server-setup', () => this.#runner.open());
+    // Global setup owns the browsers. Each Vitest worker reads only its own ports.
+    // The project-wide browser lock bounds machine-wide audit concurrency.
+    this.#pool = Array.from(
+      { length: LIGHTHOUSE_WORKERS },
+      (_, index) =>
+        new VitePlaywrightRunner({
+          runnerID: RUNNER_ID,
+          instanceID: String(index + 1),
+          chromiumArgs: this.#chromiumArgs
+        })
+    );
+    try {
+      for (const runner of this.#pool) {
+        await profilePhase('browser-server-setup', () => runner.open());
+      }
+    } catch (error) {
+      try {
+        await this.close();
+      } catch (cleanupError) {
+        throw new AggregateError([error, cleanupError], 'Lighthouse setup and cleanup failed');
+      }
+      throw error;
+    }
   }
 
   async close() {
-    await profilePhase('report-collection-cleanup', () => this.#runner.close());
+    const results = await Promise.allSettled(
+      this.#pool.map(runner => profilePhase('report-collection-cleanup', () => runner.close()))
+    );
+    this.#pool = [];
+    const failures = results.filter(result => result.status === 'rejected').map(result => result.reason);
+    if (failures.length) throw new AggregateError(failures, 'Failed to close Lighthouse browsers');
   }
 
   async getReport(name, content) {
@@ -62,8 +97,18 @@ export class LighthouseRunner {
     console.log('lighthouse-runner: running tests...');
     const runnerResult = await profilePhase(
       'lighthouse-execution',
-      () => lighthouse(`http://localhost:${this.#runner.port}/${name}/index.html`, LIGHTHOUSE_FLAGS, LIGHTHOUSE_CONFIG),
-      { name }
+      () =>
+        lighthouse(
+          `http://localhost:${this.#runner.port}/${name}/index.html`,
+          { ...LIGHTHOUSE_FLAGS, port: this.#runner.debuggingPort },
+          LIGHTHOUSE_CONFIG
+        ),
+      {
+        name,
+        worker: process.env.VITEST_POOL_ID ?? '1',
+        port: this.#runner.port,
+        debuggingPort: this.#runner.debuggingPort
+      }
     );
 
     const networkRequests = runnerResult.lhr.audits['network-requests']?.details?.items;
