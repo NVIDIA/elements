@@ -1,6 +1,7 @@
+import { join } from 'node:path';
 import * as pagefind from 'pagefind';
 
-export async function searchPlugin(eleventyConfig, pluginOptions) {
+export async function searchPlugin(eleventyConfig) {
   const { index } = await pagefind.createIndex();
 
   eleventyConfig.addTransform('search-index', async function (content) {
@@ -17,9 +18,9 @@ export async function searchPlugin(eleventyConfig, pluginOptions) {
     return content;
   });
 
-  eleventyConfig.on('eleventy.after', async () => {
+  eleventyConfig.on('eleventy.after', async ({ directories }) => {
     const { errors } = await index.writeFiles({
-      outputPath: pluginOptions.outputPath
+      outputPath: join(directories.output, '.pagefind')
     });
     if (errors.length > 0) {
       console.error('Pagefind errors', errors);

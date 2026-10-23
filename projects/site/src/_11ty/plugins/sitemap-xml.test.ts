@@ -1,6 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { lintRules } from '../../docs/lint/rules.js';
-import { isSitemapPageUrl, renderSitemap } from './sitemap-xml.js';
+import { isSitemapPageUrl, renderSitemap, sitemapPlugin } from './sitemap-xml.js';
 
 describe('isSitemapPageUrl', () => {
   it('should include crawlable html pages', () => {
@@ -103,5 +106,29 @@ describe('isSitemapPageUrl', () => {
       '<video:content_loc>https://nvidia.github.io/elements/static/video/releases/08-2026.webm</video:content_loc>'
     );
     expect(sitemap.match(/<video:video>/g)).toHaveLength(1);
+  });
+});
+
+describe('sitemapPlugin', () => {
+  let outputPath: string | undefined;
+
+  afterEach(async () => {
+    if (outputPath) await rm(outputPath, { force: true, recursive: true });
+  });
+
+  it('should publish the sitemap to the completed site output', async () => {
+    outputPath = await mkdtemp(join(tmpdir(), 'elements-sitemap-'));
+    const on = vi.fn();
+    sitemapPlugin({ on });
+    const afterBuild = on.mock.calls.find(([event]) => event === 'eleventy.after')?.[1];
+
+    await afterBuild({
+      directories: { output: outputPath },
+      results: [{ url: '/docs/elements/tabs/', content: '' }]
+    });
+
+    await expect(readFile(join(outputPath, 'sitemap.xml'), 'utf-8')).resolves.toContain(
+      '<loc>https://nvidia.github.io/elements/docs/elements/tabs/</loc>'
+    );
   });
 });

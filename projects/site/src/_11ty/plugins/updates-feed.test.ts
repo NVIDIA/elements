@@ -116,14 +116,15 @@ describe('updatesFeedPlugin', () => {
     );
   });
 
-  it('should publish generated feeds to the Vite public directory', async () => {
+  it('should publish generated feeds to the completed site output', async () => {
     publicOutputPath = await mkdtemp(join(tmpdir(), 'elements-updates-feed-'));
     const on = vi.fn();
     const atom = '<feed>updates</feed>';
-    updatesFeedPlugin({ addCollection: vi.fn(), addPlugin: vi.fn(), addTemplate: vi.fn(), on }, { publicOutputPath });
+    updatesFeedPlugin({ addCollection: vi.fn(), addPlugin: vi.fn(), addTemplate: vi.fn(), on });
     const afterBuild = on.mock.calls.find(([event]) => event === 'eleventy.after')?.[1];
 
     await afterBuild({
+      directories: { output: publicOutputPath },
       results: [
         { content: '<rss>updates</rss>', url: '/feed.xml' },
         { content: atom, url: '/atom.xml' },

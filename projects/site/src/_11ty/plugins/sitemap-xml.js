@@ -1,4 +1,5 @@
 import { promises as fsp } from 'node:fs';
+import { join } from 'node:path';
 import { getExplicitModifiedDate, normalizeContentDate } from '../utils/content-dates.js';
 import { getReleaseVideo } from '../utils/release-video.js';
 import { getSiteUrl } from '../utils/site-url.js';
@@ -107,8 +108,8 @@ export function renderSitemap(results = []) {
 }
 
 export function sitemapPlugin(eleventyConfig) {
-  eleventyConfig.on('eleventy.after', async ({ results } = {}) => {
-    await fsp.mkdir('./.11ty-vite/public/', { recursive: true });
-    await fsp.writeFile('./.11ty-vite/public/sitemap.xml', renderSitemap(results), 'utf-8');
+  eleventyConfig.on('eleventy.after', async ({ results, directories }) => {
+    await fsp.mkdir(directories.output, { recursive: true });
+    await fsp.writeFile(join(directories.output, 'sitemap.xml'), renderSitemap(results), 'utf-8');
   });
 }
