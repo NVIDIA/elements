@@ -59,6 +59,11 @@ export interface I18nStrings {
   seekToStart: string;
   unmuteMedia: string;
   volume: string;
+  joystick: string;
+  joystickHorizontal: string;
+  joystickVertical: string;
+  joystickInstructions: string;
+  joystickUnavailable: string;
 }
 
 const i18nRegistry = {
