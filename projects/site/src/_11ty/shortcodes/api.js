@@ -86,7 +86,7 @@ export function renderAPINameTable(apiValue) {
     </nve-grid>`
         : description.replaceAll('nve-text', 'class="api-value-table-description" nve-text')
     }
-  </div>`.replaceAll('\n', '');
+  </div>`;
 }
 
 /**
