@@ -1,3 +1,18 @@
+## [1.0.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.2...@nvidia-elements/pi-v1.0.3) (2026-10-23)
+
+### Features
+
+* **code:** iframe component ([09f9a8c](https://github.com/NVIDIA/elements/commit/09f9a8cc43439b48a96185198dcd8b3ce590759b))
+* **core:** add appearance option to icon button ([942be28](https://github.com/NVIDIA/elements/commit/942be28dcc0eaff9495e59386e50da791f1217fb))
+* **core:** progress dot ([6a1ed16](https://github.com/NVIDIA/elements/commit/6a1ed16c62ca615f3e3f5f2ffd347f357fe9d0f3))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.4 ([ca5c60a](https://github.com/NVIDIA/elements/commit/ca5c60a0265fbe91b898bc0922e2d14a2ce0f965))
+* **core:** add padding for alert banners in toggletip header ([4954ec6](https://github.com/NVIDIA/elements/commit/4954ec6715a1b24c33a6c0fa261d9bffe526c9c8))
+* **core:** improve grid keynav event handling ([9045f7f](https://github.com/NVIDIA/elements/commit/9045f7fc1947bb20d93b3ac5e0489ee1126b9f2a))
+* **pi:** update deps ([64d830e](https://github.com/NVIDIA/elements/commit/64d830ee361dd0e537a63d89c844c4b76e370fb3))
+
 ## [1.0.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.1...@nvidia-elements/pi-v1.0.2) (2026-10-21)
 
 ### Features
