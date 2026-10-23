@@ -269,6 +269,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/iframe/') ? 'highlighted selected' : ''}><a href="/docs/elements/iframe/">Iframe</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'highlighted selected' : ''}><a href="/docs/elements/input/">Input</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/input-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/input-group/">Input Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/joystick/') ? 'highlighted selected' : ''}><a href="/docs/elements/joystick/">Joystick</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'highlighted selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>

@@ -543,6 +543,18 @@
       "types": "./dist/input/define.d.ts",
       "default": "./dist/input/define.js"
     },
+    "./joystick": {
+      "types": "./dist/joystick/index.d.ts",
+      "default": "./dist/joystick/index.js"
+    },
+    "./joystick/index.js": {
+      "types": "./dist/joystick/index.d.ts",
+      "default": "./dist/joystick/index.js"
+    },
+    "./joystick/define.js": {
+      "types": "./dist/joystick/define.d.ts",
+      "default": "./dist/joystick/define.js"
+    },
     "./logo": {
       "types": "./dist/logo/index.d.ts",
       "default": "./dist/logo/index.js"

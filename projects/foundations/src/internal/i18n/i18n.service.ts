@@ -60,6 +60,11 @@ export interface I18nStrings {
   seekToStart: string;
   unmuteMedia: string;
   volume: string;
+  joystickPosition: string;
+  joystickNoPosition: string;
+  joystickInstructions: string;
+  joystickHoldInstructions: string;
+  joystickReturnedToCenter: string;
 }
 
 export type I18nDefaults = Readonly<Partial<I18nStrings>>;
