@@ -68,7 +68,7 @@ type ProfileProbeResult =
       readonly snapshot: WebGPUObserverSnapshot;
     }
   | {
-      readonly expectedGeometryWriteBytes: readonly number[];
+      readonly expectedSourceWriteBytes: number;
       readonly expectedInstanceWriteBytes: number;
       readonly profile: 'mesh-updates';
       readonly snapshot: WebGPUObserverSnapshot;
@@ -760,11 +760,10 @@ function expectMatrixProfileProbe(probe: ProfileProbeResult): void {
     }
     case 'mesh-updates': {
       const writes = getWebGPUWrites(probe.snapshot, WEBGPU_BUFFER_USAGE.storage);
-      expect(writes.some(write => write.size === probe.expectedInstanceWriteBytes)).toBe(true);
-      const geometryWrites = getWebGPUWrites(probe.snapshot, WEBGPU_BUFFER_USAGE.vertex);
-      expect(geometryWrites.map(write => write.size).sort((left, right) => left - right)).toEqual(
-        [...probe.expectedGeometryWriteBytes].sort((left, right) => left - right)
+      expect(writes.map(write => write.size).sort((left, right) => left - right)).toEqual(
+        [probe.expectedInstanceWriteBytes, probe.expectedSourceWriteBytes].sort((left, right) => left - right)
       );
+      expect(getWebGPUWrites(probe.snapshot, WEBGPU_BUFFER_USAGE.vertex)).toEqual([]);
       expect(probe.snapshot.externalImageCopies.length).toBeGreaterThan(0);
       return;
     }

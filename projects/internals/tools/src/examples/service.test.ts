@@ -1,14 +1,16 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
-import type { Example } from '@internals/metadata';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { ExamplesService as MetadataExamplesService, type Example } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { ExamplesService } from './service.js';
 import { getContextExamples } from './utils.js';
 import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
 
 describe('ExampleService', () => {
+  afterEach(() => vi.restoreAllMocks());
+
   it('should provide list tool', async () => {
     const result = await ExamplesService.list();
     expect(result).toBeDefined();
@@ -114,6 +116,7 @@ describe('ExampleService', () => {
   });
 
   it('should return helpful message for empty search results (markdown)', async () => {
+    vi.spyOn(MetadataExamplesService, 'search').mockResolvedValueOnce([]);
     const result = await ExamplesService.search({ query: 'nonexistent-example-xyz', format: 'markdown' });
     expect(result).toContain('No examples found matching');
     expect(result).toContain('nonexistent-example-xyz');

@@ -166,8 +166,9 @@ function createMarkerLayerRenderData(
   const bytes = state.buffer.getUploadBytes();
   const ready = !state.childError && !state.publicationError && state.source !== null && state.buffer.ready;
   const count = ready ? Math.min(state.count ?? state.sourceCount, state.sourceCount) : 0;
+  const outlinesActive = ready && state.kind === 'cube';
   const faces = getFacePasses(state.buffer, count, ready);
-  const outlines = getOutlinePasses(state.buffer, count, ready && state.kind === 'cube');
+  const outlines = getOutlinePasses(state.buffer, count, outlinesActive);
   return {
     bounds: ready ? state.buffer.getBounds(count) : null,
     bytes,
@@ -176,9 +177,9 @@ function createMarkerLayerRenderData(
     opaque: faces.opaque,
     outlineOpaque: outlines.opaque,
     outlineTransparent: outlines.transparent,
-    outlineVisible: ready && state.kind === 'cube' && state.buffer.hasVisibleOutlineAlpha(count),
+    outlineVisible: outlinesActive && state.buffer.hasVisibleOutlineAlpha(count),
     ready,
-    transparent: ready && state.buffer.hasPartialFaceAlpha(count),
+    transparent: faces.transparent,
     uploadRanges: ready && options.consumeUploadRanges ? state.buffer.takeUploadRanges() : [],
     version: state.version
   };

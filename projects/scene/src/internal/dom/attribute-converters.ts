@@ -1,12 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { positiveFiniteOr } from '@nvidia-elements/core/internal';
+
 /** Creates a Lit attribute converter that restores the supplied fallback for non-positive or non-finite values. */
 export function createPositiveFiniteNumberConverter(fallback: number) {
   return {
     fromAttribute(value: string | null): number {
-      const parsed = value === null ? fallback : Number(value);
-      return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+      return value === null ? fallback : positiveFiniteOr(Number(value), fallback);
     }
   };
 }
