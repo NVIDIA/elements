@@ -19,10 +19,36 @@ You MUST review @projects/site/src/docs/internal/guidelines/documentation.md bef
 ## Key Principles
 
 1. **Frontmatter Required**: All documentation files must include proper frontmatter with title and layout
-2. **Eleventy Shortcodes**: Use built-in shortcodes for common patterns (code examples, callouts, etc.)
+2. **Source-Owned API Documentation**: Write component guidance in source JSDoc and render it with Eleventy shortcodes so the site, CLI, and MCP share the same documentation.
 3. **Clear Structure**: Use proper heading hierarchy and table of contents for long documents
 4. **Code Examples**: Include working code examples with proper syntax highlighting
 5. **Cross-References**: Link to related documentation and guidelines using proper paths
+
+## Single Source of Truth for Component Documentation
+
+Component JSDoc feeds the generated Custom Elements Manifest (CEM). The API catalog used by the CLI and Model Context Protocol (MCP) tools consumes that metadata. The documentation site renders the same descriptions through shortcodes. Example JSDoc feeds the separate example catalog used by the site, CLI, and MCP.
+
+Guidance written only in a component's Markdown page does not automatically enter the CEM or those catalogs. A page can look complete while tools still lack the information needed to use the component correctly.
+
+### Where Information Belongs
+
+- Put component purpose and shared behavior in the class description. Document properties, attributes, slots, methods, and events on their source declarations or supported JSDoc tags. Include relevant defaults, constraints, accessibility behavior, units, and application responsibilities.
+- Put an example's purpose, usage context, and benefits in its `@summary`. Use `@description` for additional explanation, mappings, or source references. These annotations travel with the example metadata.
+- Keep component Markdown pages focused on frontmatter, headings, and `install`, `api`, and `example` shortcodes. Select the source description or property that owns the information instead of repeating its prose in Markdown.
+- Keep conceptual guides and tutorials in Markdown when their content is not a component or example API contract. This convention does not require moving general documentation into code.
+
+### Author and Verify at the Source
+
+When adding or correcting component guidance, update the owning JSDoc first, then add or adjust the shortcode that presents it. Do not compensate for missing source annotations with a page-only explanation.
+
+For example, render an annotated property and example with:
+
+```liquid
+{% api 'nve-joystick', 'property', 'i18n' %}
+{% example '@nvidia-elements/core/joystick/joystick.examples.json' 'AccessibleFeedback' %}
+```
+
+For metadata changes, use the affected project's documented build or analyzer tasks and regenerate downstream metadata as needed. Inspect the relevant generated CEM description or member, and the API or example catalog consumed by the tools. Verify the site renders the content through its shortcodes. A successful site build alone does not prove that CLI and MCP consumers receive the guidance.
 
 ## Prose Linting (Vale)
 
