@@ -10,13 +10,15 @@ import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   stateSelected,
   useStyles,
-  keyNavigationList,
+  KeyNavigationListController,
   attachInternals,
   audit,
   appendRootNodeStyle,
   appendAnchorName,
   removeAnchorName
 } from '@nvidia-elements/core/internal';
+import type { TabsItemGroup } from './tabs-item-group.js';
+import { getTabItems, isTabItemTabbable } from './utils.js';
 import globalStyles from './tabs.global.css?inline';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
@@ -28,6 +30,9 @@ import tabsStyleSheet from './tabs.css?inline';
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - The label displayed for the tab.
+ * @slot prefix - Decoration before the label.
+ * @slot suffix - Supporting content after the label.
+ * @cssprop --gap - Spacing between the label and decoration.
  * @cssprop --font-size
  * @cssprop --width
  * @cssprop --padding
@@ -54,13 +59,15 @@ export class TabsItem extends ButtonFormControlMixin(LitElement) {
   static readonly metadata = {
     tag: 'nve-tabs-item',
     version: '0.0.0',
-    parents: ['nve-tabs']
+    parents: ['nve-tabs', 'nve-tabs-item-group']
   };
 
   render() {
     return html`
       <div internal-host focus-within>
-        <slot></slot>
+        <slot name="prefix"></slot>
+        <div id="label"><slot></slot></div>
+        <slot name="suffix"></slot>
       </div>
     `;
   }
@@ -104,7 +111,6 @@ export class TabsItem extends ButtonFormControlMixin(LitElement) {
  * @responsive false
  */
 @audit()
-@keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
   /**
    * Determines whether the tabs should display in a vertical layout vs. defaulting to horizontal.
@@ -126,37 +132,37 @@ export class Tabs extends LitElement {
   static readonly metadata = {
     tag: 'nve-tabs',
     version: '0.0.0',
-    children: ['nve-tabs-item']
+    children: ['nve-tabs-item', 'nve-tabs-item-group']
   };
 
   /** @private */
   get keynavListConfig(): KeynavListConfig {
-    const items = this.items;
+    const items = this.#items;
     return {
       items,
       initialItem: items.find(item => item.selected),
-      layout: this.vertical ? 'vertical' : 'horizontal'
+      layout: this.vertical ? 'vertical' : 'horizontal',
+      dir: getComputedStyle(this).direction
     };
   }
 
-  @queryAssignedElements() private items!: TabsItem[];
+  @queryAssignedElements() private entries!: HTMLElement[];
+
+  get #items(): TabsItem[] {
+    return getTabItems(this.entries ?? []);
+  }
+
+  #keynavController = new KeyNavigationListController(this);
+  #knownItems: TabsItem[] = [];
+  #itemsObserver?: MutationObserver;
 
   /** @private */
   declare _internals: ElementInternals;
 
-  #selectTab(tabItem: HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean }) {
-    if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item') || tabItem.disabled) {
-      return;
-    }
-
-    this.keynavListConfig.items.forEach((i: HTMLElement) => ((i as TabsItem).selected = false));
-    tabItem.selected = true;
-  }
-
   render() {
     return html`
       <div internal-host>
-        <slot></slot>
+        <slot @slotchange=${this.#syncItems}></slot>
       </div>
     `;
   }
@@ -167,19 +173,78 @@ export class Tabs extends LitElement {
     attachInternals(this);
     this._internals.role = 'tablist';
     this.addEventListener('click', this.#onClick);
+    this.#observeItems();
+    if (this.hasUpdated) this.#syncAccessoryTabState();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('click', this.#onClick);
+    this.#itemsObserver?.disconnect();
   }
 
-  #onClick = (e: Event) => {
-    this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean });
-  };
+  firstUpdated() {
+    this.#itemsObserver = new MutationObserver(this.#syncFromItems);
+    this.#observeItems();
+  }
 
   updated(props: PropertyValues<this>) {
     super.updated(props);
     this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
   }
+
+  #observeItems() {
+    this.#itemsObserver?.observe(this, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['tabindex', 'href', 'slot']
+    });
+  }
+
+  #syncFromItems = (records: MutationRecord[]) => {
+    if (records.some(record => record.type === 'childList' || record.attributeName === 'slot')) {
+      void this.#syncItems();
+    } else if (records.some(record => this.#items.some(item => item.contains(record.target)))) {
+      this.#syncAccessoryTabState();
+    }
+  };
+
+  #syncItems = async () => {
+    const items = this.#items;
+    if (items.length === this.#knownItems.length && items.every((item, index) => item === this.#knownItems[index])) {
+      this.#syncAccessoryTabState();
+      return;
+    }
+
+    const previousItems = this.#knownItems;
+    this.#knownItems = items;
+    await Promise.all(items.map(item => item.updateComplete));
+    if (items !== this.#knownItems) return;
+
+    this.#keynavController.refreshItems(previousItems);
+    this.#syncAccessoryTabState();
+  };
+
+  #syncAccessoryTabState() {
+    this.querySelectorAll<TabsItemGroup>(':scope > nve-tabs-item-group').forEach(group => {
+      const item = getTabItems([group])[0];
+      group.accessoryTabEnabled = !!item && isTabItemTabbable(item);
+    });
+  }
+
+  #selectTab(tabItem: HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean }) {
+    if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item') || tabItem.disabled) {
+      return;
+    }
+
+    this.keynavListConfig.items.forEach((i: HTMLElement) => ((i as TabsItem).selected = false));
+    tabItem.selected = true;
+  }
+
+  #onClick = (event: Event) => {
+    const path = event.composedPath();
+    const item = this.#items.find(candidate => path.includes(candidate));
+    if (item) this.#selectTab(item);
+  };
 }

@@ -3,6 +3,7 @@
 
 :host {
   --width: 100%;
+  --gap: var(--nve-ref-space-xs);
   --padding: 0 var(--nve-ref-size-200);
   --font-size: var(--nve-ref-font-size-100);
   --font-weight: var(--nve-ref-font-weight-medium);
@@ -16,20 +17,23 @@
 
 [internal-host] {
   width: var(--width);
-  gap: var(--nve-ref-space-xs);
+  gap: var(--gap);
   padding: var(--padding);
   height: var(--height);
   color: var(--color);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
   line-height: var(--nve-ref-font-size-500);
-  background-image: linear-gradient(
-    color-mix(
-        in oklab,
-        var(--nve-sys-interaction-state-base) 100%,
-        var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
-      )
-      0 0
+  background-image: var(
+    --_tabs-item-background,
+    linear-gradient(
+      color-mix(
+          in oklab,
+          var(--nve-sys-interaction-state-base) 100%,
+          var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
+        )
+        0 0
+    )
   ) !important;
   inset: var(--border-inset);
   border-radius: var(--border-radius);
@@ -38,7 +42,7 @@
   display: inline-flex;
   align-items: center;
   border: 0;
-  position: relative;
+  position: var(--_tabs-item-position, relative);
 }
 
 :host(:state(selected)) {
@@ -66,18 +70,40 @@
   outline: Highlight solid 2px; /* --nve-ref-outline */
 }
 
-::slotted(a) {
+slot:not([name])::slotted(a) {
   text-decoration: var(--text-decoration) !important;
   color: var(--color) !important;
   gap: var(--gap) !important;
   display: flex !important;
   align-items: center !important;
+  min-inline-size: 0;
   outline: 0;
 }
 
-::slotted(a)::after {
+slot:not([name])::slotted(a)::after {
   display: block;
   content: ' ';
   inset: 0;
   position: absolute;
+  z-index: 1;
+}
+
+#label {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+slot[name] {
+  display: contents;
+}
+
+::slotted([slot='prefix']),
+::slotted([slot='suffix']) {
+  flex: none;
+  align-self: center;
 }

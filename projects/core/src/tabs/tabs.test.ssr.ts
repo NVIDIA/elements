@@ -20,4 +20,15 @@ describe(Tabs.metadata.tag, () => {
     expect(result.includes('nve-tabs')).toBe(true);
     expect(result.includes('nve-tabs-item')).toBe(true);
   });
+  it('should render decorative prefix and suffix slots', async () => {
+    const result = await ssrRunner.render(html`
+      <nve-tabs><nve-tabs-item>
+        <span slot="prefix">●</span>Experiment
+        <span slot="suffix">3</span>
+      </nve-tabs-item></nve-tabs>
+    `);
+    expect(result).toContain('name="prefix"');
+    expect(result).toContain('name="suffix"');
+    expect(result).toContain('<span slot="suffix">3</span>');
+  });
 });

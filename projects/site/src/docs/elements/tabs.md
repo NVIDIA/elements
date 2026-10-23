@@ -3,7 +3,7 @@
   title: 'Tabs',
   layout: 'docs.11ty.js',
   tag: 'nve-tabs',
-  associatedElements: ['nve-tabs-item', 'nve-tabs-group']
+  associatedElements: ['nve-tabs-item', 'nve-tabs-item-group', 'nve-tabs-group']
 }
 ---
 
@@ -15,7 +15,7 @@ The Tabs component consists of a `<nve-tabs>` parent element and many `<nve-tabs
 
 Apply the `disabled` attribute to an item to get the proper visual cues and prevent interaction. The elements handle all default interaction, hover, and active states.
 
-Additionally, the component handles all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns out of the box. Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
+The component manages tab focus, selected state, and keyboard navigation following the [Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/). Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
 
 ## Borderless Tabs
 
@@ -29,11 +29,15 @@ You can change the border styles by overriding `--indicator-background` and `--i
 
 {% example '@nvidia-elements/core/tabs/tabs.examples.json' 'BorderBackground' %}
 
-## Tabs with Dot Indicators
+## Prefix and Suffix
 
-Add dots and icons by simply slotting in `nve-icon` or `nve-dot` into your `nve-tabs-item`.
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'PrefixAndSuffix' %}
 
-{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'WithDots' %}
+## Tab Actions
+
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'ItemGroupAction' %}
+
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'ItemGroupMenu' %}
 
 ## Vertical Tabs
 

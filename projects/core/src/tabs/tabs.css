@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 
-:host([vertical]) ::slotted(nve-tabs-item) {
+:host([vertical]) ::slotted(:is(nve-tabs-item, nve-tabs-item-group)) {
   --border-inset: 0 8px 0 8px;
   --width: calc(100% - 8px);
 }
@@ -32,6 +32,10 @@
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
 }
 
-::slotted(nve-tabs-item) {
+:host([vertical]) ::slotted(nve-tabs-item-group:has(> nve-tabs-item[selected])) {
+  --_tabs-group-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
+}
+
+::slotted(:is(nve-tabs-item, nve-tabs-item-group)) {
   white-space: nowrap;
 }

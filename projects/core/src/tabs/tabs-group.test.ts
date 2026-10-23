@@ -21,7 +21,7 @@ describe(TabsGroup.metadata.tag, () => {
     group = fixture.querySelector(TabsGroup.metadata.tag)!;
     tabs = fixture.querySelector(Tabs.metadata.tag)!;
     tabItems = Array.from(fixture.querySelectorAll(TabsItem.metadata.tag));
-    panels = Array.from(group.querySelectorAll<HTMLElement>('[slot]'));
+    panels = Array.from(group.querySelectorAll<HTMLElement>(':scope > [slot]'));
   }
 
   async function stabilizeTabsGroup() {
@@ -261,6 +261,35 @@ describe(TabsGroup.metadata.tag, () => {
     expect(tabItems[1]!.getAttribute('aria-controls')).toBe(panels[1]!.id);
     expect(panels[0]!.getAttribute('aria-labelledby')).toBe(tabItems[0]!.id);
     expect(panels[1]!.getAttribute('role')).toBe('tabpanel');
+  });
+
+  it('should retain grouped tab identities for commands and panel associations', async () => {
+    await remount(html`
+      <nve-tabs-group id="tab-group">
+        <nve-tabs>
+          <nve-tabs-item id="overview-tab" value="overview" selected command="--toggle" commandfor="tab-group">Overview</nve-tabs-item>
+          <nve-tabs-item-group id="details-entry">
+            <nve-tabs-item id="details-tab" value="details" command="--toggle" commandfor="tab-group">Details</nve-tabs-item>
+            <button type="button" slot="suffix">Close details</button>
+          </nve-tabs-item-group>
+        </nve-tabs>
+        <div slot="overview">Overview panel</div>
+        <div slot="details">Details panel</div>
+      </nve-tabs-group>
+    `);
+
+    expect(panels[1]!.getAttribute('aria-labelledby')).toBe('details-tab');
+    expect(tabItems[1]!.getAttribute('aria-controls')).toBe(panels[1]!.id);
+    expect(tabItems[1]!.parentElement.id).toBe('details-entry');
+
+    await emulateClick(tabItems[1]!);
+    await elementIsStable(group);
+
+    expect(tabItems[0]!.selected).toBe(false);
+    expect(tabItems[1]!.selected).toBe(true);
+    expect(panels[0]!.hidden).toBe(true);
+    expect(panels[1]!.hidden).toBe(false);
+    expect(panels[1]!.getAttribute('aria-labelledby')).toBe('details-tab');
   });
 
   it('should preserve author-provided panel aria attributes', async () => {

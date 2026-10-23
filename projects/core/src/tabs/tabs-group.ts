@@ -16,6 +16,7 @@ import {
 } from '@nvidia-elements/core/internal';
 import { Tabs, type TabsItem } from './tabs.js';
 import styles from './tabs-group.css?inline';
+import { getTabItems } from './utils.js';
 
 /** Invoker command source for `--toggle` (e.g. `nve-tabs-item` with `value`). */
 type TabsGroupCommandSource = HTMLElement & {
@@ -311,7 +312,7 @@ export class TabsGroup extends LitElement {
   }
 
   #getTabItems(): TabsItem[] {
-    return Array.from(this.#getTabsElement()?.querySelectorAll<TabsItem>('nve-tabs-item') ?? []);
+    return getTabItems(Array.from(this.#getTabsElement()?.children ?? []));
   }
 
   #getPanelSlots(): HTMLSlotElement[] {
