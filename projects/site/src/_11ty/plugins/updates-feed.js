@@ -4,7 +4,7 @@ import rssPlugin from '@11ty/eleventy-plugin-rss';
 import { getContentDates, normalizeContentDate } from '../utils/content-dates.js';
 import { ELEMENTS_SITE_ORIGIN } from '../utils/site-url.js';
 
-const DEFAULT_PUBLIC_OUTPUT_PATH = './.11ty-vite/public';
+const DEFAULT_PUBLIC_OUTPUT_PATH = './dist';
 
 export const UPDATES_COLLECTION = 'updates';
 export const RSS_UPDATES_COLLECTION = 'rssUpdates';
@@ -138,7 +138,7 @@ export function getAtomUpdatesCollection(collectionApi) {
   );
 }
 
-export function updatesFeedPlugin(eleventyConfig, { publicOutputPath = DEFAULT_PUBLIC_OUTPUT_PATH } = {}) {
+export function updatesFeedPlugin(eleventyConfig, { publicOutputPath } = {}) {
   eleventyConfig.addCollection(RSS_UPDATES_COLLECTION, getRssUpdatesCollection);
   eleventyConfig.addCollection(ATOM_UPDATES_COLLECTION, getAtomUpdatesCollection);
   eleventyConfig.addPlugin(rssPlugin);
@@ -152,5 +152,7 @@ export function updatesFeedPlugin(eleventyConfig, { publicOutputPath = DEFAULT_P
       permalink: feed.outputPath
     });
   }
-  eleventyConfig.on('eleventy.after', ({ results } = {}) => writeUpdateFeeds(results ?? [], publicOutputPath));
+  eleventyConfig.on('eleventy.after', ({ results, directories }) =>
+    writeUpdateFeeds(results ?? [], publicOutputPath ?? directories.output)
+  );
 }

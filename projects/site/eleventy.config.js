@@ -93,6 +93,8 @@ const entrypoints = [
  * Sets up plugins, transforms, collections, and build options
  */
 export default function (eleventyConfig) {
+  // Vite must finish before the other output writers run.
+  eleventyConfig.setEventEmitterMode('sequential');
   eleventyConfig.pathPrefix = BASE_URL;
 
   // Add core 11ty plugins
@@ -166,9 +168,7 @@ export default function (eleventyConfig) {
 
   // Add search plugin for documentation search functionality
   if (process.env.ELEVENTY_RUN_MODE === 'build') {
-    eleventyConfig.addPlugin(searchPlugin, {
-      outputPath: './.11ty-vite/public/.pagefind'
-    });
+    eleventyConfig.addPlugin(searchPlugin);
   }
 
   // https://llmstxt.org
