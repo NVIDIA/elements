@@ -1,3 +1,15 @@
+## [2.18.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.17.1...@nvidia-elements/core-v2.18.0) (2026-10-23)
+
+### Features
+
+* **core:** add composable tab item groups ([284eee9](https://github.com/NVIDIA/elements/commit/284eee904d77a9b84f2c122f35d95a2e18eba73e))
+* **lint:** prevent nested interactive elements ([a27b402](https://github.com/NVIDIA/elements/commit/a27b40258d94e5384b3a5424dd8176fddeefee81))
+
+### Bug Fixes
+
+* **docs:** prevent concurrent site output writes ([cd1bfdb](https://github.com/NVIDIA/elements/commit/cd1bfdbb2e177d8a4e958feb40ab01b0c9478caf))
+* **forms:** detect label anchors after named slots ([756b692](https://github.com/NVIDIA/elements/commit/756b69251f0d31aed089c3bb31ec3688866d3360))
+
 ## [2.17.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.17.0...@nvidia-elements/core-v2.17.1) (2026-10-23)
 
 ### Bug Fixes
