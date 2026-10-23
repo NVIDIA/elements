@@ -121,10 +121,25 @@ jobs:
           lfs: true
       - uses: ./.github/actions/setup-ci
       - name: Run Lighthouse tests
-        run: WIREIT_FAILURES=kill pnpm run lighthouse && node ./projects/internals/ci/cache-validate.js lighthouse && node ./projects/internals/ci/metrics.lighthouse.js
+        run: >-
+          WIREIT_FAILURES=kill mise exec -- pnpm run ci:profile --target lighthouse --samples 1 --reset none
+          && mise exec -- node ./projects/internals/ci/cache-validate.js lighthouse
+          && mise exec -- node ./projects/internals/ci/metrics.lighthouse.js
       - name: Write lighthouse job summary
         if: always()
         run: node ./projects/internals/ci/lighthouse-summary.js >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload Lighthouse measurements
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: lighthouse-measurements
+          retention-days: 14
+          include-hidden-files: true
+          path: |
+            .metrics/ci-profile*
+            projects/*/.lighthouse/dist/report.json
+            projects/*/coverage/lighthouse/*
+            projects/site/coverage/unit/summary.json
 
   release:
     needs: ci

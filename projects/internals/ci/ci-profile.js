@@ -21,6 +21,58 @@ const ANSI_PATTERN = /\u001b\[[0-?]*[ -/]*[@-~]/g;
 const RUNNING_PATTERN = /🏃 \[([^\]]+)\] Running command "(.*)"$/;
 const SUCCESS_PATTERN = /✅ \[([^\]]+)\] Executed successfully$/;
 
+export function profileOptions(args = process.argv.slice(2)) {
+  const options = { target: 'ci', samples: RUN_COUNT, reset: 'cold' };
+  for (let index = 0; index < args.length; index += 2) {
+    const key = args[index].replace(/^--/, '');
+    if (!Object.hasOwn(options, key) || args[index + 1] === undefined) {
+      throw new Error('Usage: ci:profile [--target ci|lighthouse] [--samples N] [--reset cold|none]');
+    }
+    options[key] = key === 'samples' ? Number(args[index + 1]) : args[index + 1];
+  }
+  if (
+    !['ci', 'lighthouse'].includes(options.target) ||
+    !['cold', 'none'].includes(options.reset) ||
+    !Number.isInteger(options.samples) ||
+    options.samples < 1
+  ) {
+    throw new Error('Invalid profile options');
+  }
+  return options;
+}
+
+/** Resolves the actual Wireit graph, including commandless prerequisite tasks. */
+export function wireitGraph(target, root = ROOT_DIR) {
+  const graph = new Map();
+  function visit(directory, task) {
+    const id = `${path.relative(root, directory) || '.'}:${task}`;
+    if (graph.has(id)) return;
+    const config = JSON.parse(readFileSync(path.join(directory, 'package.json'), 'utf8')).wireit?.[task];
+    if (!config) throw new Error(`Missing Wireit configuration: ${id}`);
+    graph.set(id, { id, command: config.command });
+    for (const dependency of config.dependencies ?? []) {
+      const script = typeof dependency === 'string' ? dependency : dependency.script;
+      const separator = script.indexOf(':');
+      if (script.startsWith('.')) {
+        visit(path.resolve(directory, script.slice(0, separator)), script.slice(separator + 1));
+      } else {
+        visit(directory, script);
+      }
+    }
+  }
+  visit(root, target);
+  return [...graph.values()];
+}
+
+export function verifyLighthouseExecution(scripts, graph) {
+  const executed = new Set(scripts.map(script => script.id));
+  const expected = graph.filter(task => task.id.endsWith(':test:lighthouse'));
+  const missing = expected.filter(task => !executed.has(task.id));
+  if (!expected.length || missing.length) {
+    throw new Error(`Lighthouse sample skipped expected test commands: ${missing.map(task => task.id).join(', ')}`);
+  }
+}
+
 function normalizeScriptId(label) {
   return label.includes(':') ? label : `.:${label}`;
 }
@@ -131,6 +183,7 @@ export function renderReport({ metadata, runs, scripts }) {
   const composites = scripts.filter(script => script.complete && script.composite);
   const medianCiMs = median(runs.map(run => run.durationMs));
   const generatedAt = new Date(metadata.generatedAt).toISOString();
+  const target = metadata.target ?? 'ci';
   const rows = topScripts.map(
     (script, index) =>
       `| ${index + 1} | \`${script.id}\` | ${seconds(script.medianMs)} s | ${seconds(script.minMs)} s | ${seconds(script.maxMs)} s | ${percent(script.medianMs, medianCiMs)} | \`${escapeTable(script.command)}\` |`
@@ -148,7 +201,7 @@ export function renderReport({ metadata, runs, scripts }) {
     '',
     '## Methodology',
     '',
-    `The profiler ran \`pnpm run ci:reset\` before each of ${runs.length} samples, then timed \`pnpm run ci\` with \`CI=true\`, \`WIREIT_CACHE=none\`, \`PAGES_BASE_URL=/elements/\`, and Wireit's default concurrency. Reset and dependency installation time is not part of the CI duration. Rankings use median command execution time and exclude dependency wait time, cache hits, commandless orchestration targets, and composite commands that invoke other Wireit scripts.`,
+    `The profiler used reset mode \`${metadata.reset ?? 'cold'}\` for ${runs.length} samples, then timed \`pnpm run ${target}\` with \`CI=true\`, \`WIREIT_CACHE=none\`, \`PAGES_BASE_URL=/elements/\`, and Wireit's default concurrency. Cold mode runs \`pnpm run ci:reset\`; none mode preserves existing outputs and incremental freshness. Reset and dependency installation time is separate from execution time. Lighthouse samples must execute every test command in the current Wireit graph. Rankings exclude dependency wait time, cache hits, commandless targets, and composite commands.`,
     '',
     `Environment: ${metadata.platform} ${metadata.release}, ${metadata.cpuModel}, ${metadata.cpuCount} logical CPUs, ${metadata.memoryGiB} GiB memory, Node ${metadata.node}, pnpm ${metadata.pnpm}, Wireit ${metadata.wireit}.`,
     '',
@@ -221,15 +274,42 @@ function getMetadata() {
   };
 }
 
-function runChild(command, args, { env = process.env, parser, logPath }) {
+export function processTreeRss(rows, rootPid) {
+  const descendants = new Set([rootPid]);
+  let previousSize;
+  do {
+    previousSize = descendants.size;
+    for (const row of rows) if (descendants.has(row.ppid)) descendants.add(row.pid);
+  } while (descendants.size !== previousSize);
+  return rows.filter(row => descendants.has(row.pid)).reduce((sum, row) => sum + row.rssKiB, 0);
+}
+
+function runChild(command, args, { env = process.env, parser, logPath, resources = false }) {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
+    const child = spawn(resources ? '/usr/bin/time' : command, resources ? ['-p', command, ...args] : args, {
       cwd: ROOT_DIR,
       env,
       stdio: ['ignore', 'pipe', 'pipe']
     });
     let stdout = '';
     let stderr = '';
+    const usage = { peakTreeRssMiB: 0, minimumFreeMemoryGiB: freemem() / 1024 ** 3, samples: 0 };
+    const interval = resources
+      ? setInterval(() => {
+          const result = spawnSync('ps', ['-A', '-o', 'pid=,ppid=,rss='], { encoding: 'utf8' });
+          if (result.status !== 0) return;
+          const rows = result.stdout
+            .trim()
+            .split('\n')
+            .map(line => {
+              const [pid, ppid, rssKiB] = line.trim().split(/\s+/).map(Number);
+              return { pid, ppid, rssKiB };
+            });
+          usage.peakTreeRssMiB = Math.max(usage.peakTreeRssMiB, processTreeRss(rows, child.pid) / 1024);
+          usage.minimumFreeMemoryGiB = Math.min(usage.minimumFreeMemoryGiB, freemem() / 1024 ** 3);
+          usage.samples++;
+        }, 1000)
+      : undefined;
 
     child.stdout.setEncoding('utf8');
     child.stderr.setEncoding('utf8');
@@ -240,46 +320,136 @@ function runChild(command, args, { env = process.env, parser, logPath }) {
     child.stderr.on('data', chunk => {
       stderr += chunk;
     });
-    child.on('error', reject);
+    child.on('error', error => {
+      clearInterval(interval);
+      reject(error);
+    });
     child.on('close', (code, signal) => {
+      clearInterval(interval);
       writeFileSync(logPath, `${stdout}${stderr ? `\n--- stderr ---\n${stderr}` : ''}`);
       if (code !== 0) {
         reject(new Error(`${command} ${args.join(' ')} failed with ${signal ?? `exit code ${code}`}`));
         return;
       }
-      resolve();
+      usage.userCpuSeconds = Number(stderr.match(/^user\s+([\d.]+)$/m)?.[1]);
+      usage.systemCpuSeconds = Number(stderr.match(/^sys\s+([\d.]+)$/m)?.[1]);
+      resolve(usage);
     });
   });
 }
 
-async function benchmarkRun(index, temporaryDirectory) {
+async function benchmarkRun(index, temporaryDirectory, options, graph) {
   const resetLog = path.join(temporaryDirectory, `run-${index}-reset.log`);
   const ciLog = path.join(temporaryDirectory, `run-${index}-ci.log`);
-  console.log(`Run ${index}/${RUN_COUNT}: resetting ignored outputs and dependencies...`);
-  await runChild('mise', ['exec', '--', 'pnpm', 'run', 'ci:reset'], {
-    env: { ...process.env, CI: 'true' },
-    logPath: resetLog
-  });
+  const phaseDirectory = path.join(temporaryDirectory, `phases-${index}`);
+  mkdirSync(phaseDirectory);
+  const resetStart = performance.now();
+  if (options.reset === 'cold') {
+    console.log(`Run ${index}/${options.samples}: resetting ignored outputs and dependencies...`);
+    await runChild('mise', ['exec', '--', 'pnpm', 'run', 'ci:reset'], {
+      env: { ...process.env, CI: 'true' },
+      logPath: resetLog
+    });
+  } else {
+    writeFileSync(resetLog, 'No reset. Existing outputs and incremental state preserved.\n');
+  }
+  const resetMs = performance.now() - resetStart;
 
-  console.log(`Run ${index}/${RUN_COUNT}: running cold CI...`);
+  console.log(`Run ${index}/${options.samples}: running ${options.target} (reset: ${options.reset})...`);
   const parser = createWireitLineParser();
   const start = performance.now();
-  await runChild('mise', ['exec', '--', 'pnpm', 'run', 'ci'], {
+  const resources = await runChild('mise', ['exec', '--', 'pnpm', 'run', options.target], {
     env: {
       ...process.env,
       CI: 'true',
       PAGES_BASE_URL: '/elements/',
       WIREIT_CACHE: 'none',
-      WIREIT_LOGGER: 'simple'
+      WIREIT_LOGGER: 'simple',
+      LIGHTHOUSE_PROFILE_DIR: phaseDirectory
     },
     parser,
-    logPath: ciLog
+    logPath: ciLog,
+    resources: true
   });
   const durationMs = performance.now() - start;
   const parsed = parser.finish();
-  console.log(`Run ${index}/${RUN_COUNT}: completed in ${seconds(durationMs)} seconds.`);
+  if (parsed.incomplete.length) throw new Error(`Incomplete scripts: ${parsed.incomplete.join(', ')}`);
+  if (options.target === 'lighthouse') verifyLighthouseExecution(parsed.scripts, graph);
+  const phases = readdirSync(phaseDirectory)
+    .flatMap(file =>
+      readFileSync(path.join(phaseDirectory, file), 'utf8')
+        .trim()
+        .split('\n')
+        .filter(Boolean)
+        .map(line => JSON.parse(line))
+    )
+    .sort((a, b) => a.startTime - b.startTime);
+  writeFileSync(path.join(temporaryDirectory, `run-${index}-phases.json`), JSON.stringify(phases, null, 2));
+  const tests =
+    options.target === 'lighthouse'
+      ? graph
+          .filter(task => task.id.endsWith(':test:lighthouse'))
+          .map(task => {
+            const directory = task.id.slice(0, -':test:lighthouse'.length);
+            // The site inherits its JSON reporter path from the Node test configuration.
+            const summaryPaths = ['coverage/lighthouse/summary.json', 'coverage/unit/summary.json'];
+            const summaryPath = summaryPaths
+              .map(file => path.join(ROOT_DIR, directory, file))
+              .find(file => {
+                try {
+                  return JSON.parse(readFileSync(file, 'utf8')).startTime >= Date.now() - durationMs - 1000;
+                } catch {
+                  return false;
+                }
+              });
+            if (!summaryPath) throw new Error(`No fresh test summary for ${task.id}`);
+            const summary = JSON.parse(readFileSync(summaryPath, 'utf8'));
+            if (!summary.success || summary.numFailedTests || !summary.numTotalTests)
+              throw new Error(`Invalid test summary for ${task.id}`);
+            const reportDirectory = path.join(ROOT_DIR, directory, '.lighthouse/dist');
+            let reports;
+            if (directory !== 'projects/site') {
+              reports = JSON.parse(readFileSync(path.join(reportDirectory, 'report.json'), 'utf8'));
+              const fixtureNames = readdirSync(reportDirectory, { withFileTypes: true })
+                .filter(entry => entry.isDirectory())
+                .filter(entry => {
+                  try {
+                    readFileSync(path.join(reportDirectory, entry.name, 'report.json'));
+                    return true;
+                  } catch {
+                    return false;
+                  }
+                })
+                .map(entry => entry.name)
+                .sort();
+              if (JSON.stringify(Object.keys(reports).sort()) !== JSON.stringify(fixtureNames)) {
+                throw new Error(`Aggregate report differs from individual reports for ${task.id}`);
+              }
+            }
+            return {
+              id: task.id,
+              total: summary.numTotalTests,
+              passed: summary.numPassedTests,
+              failed: summary.numFailedTests,
+              reports,
+              assertions: summary.testResults.flatMap(result =>
+                result.assertionResults.map(assertion => ({
+                  name: assertion.fullName,
+                  status: assertion.status,
+                  durationMs: assertion.duration,
+                  failureMessages: assertion.failureMessages
+                }))
+              )
+            };
+          })
+      : [];
+  console.log(`Run ${index}/${options.samples}: completed in ${seconds(durationMs)} seconds.`);
   return {
     durationMs,
+    resetMs,
+    resources,
+    phases,
+    tests,
     ...parsed,
     resetLog,
     ciLog
@@ -297,6 +467,7 @@ function copyLogs(runs) {
 function copyTemporaryLogs(temporaryDirectory) {
   mkdirSync(METRICS_DIR, { recursive: true });
   for (const fileName of readdirSync(temporaryDirectory)) {
+    if (fileName.startsWith('phases-')) continue;
     writeFileSync(
       path.join(METRICS_DIR, `ci-profile-${fileName}`),
       readFileSync(path.join(temporaryDirectory, fileName))
@@ -305,29 +476,41 @@ function copyTemporaryLogs(temporaryDirectory) {
 }
 
 export async function main() {
+  const options = profileOptions();
   const metadata = getMetadata();
+  Object.assign(metadata, options, {
+    graph: wireitGraph(options.target),
+    runner: {
+      os: process.env.RUNNER_OS,
+      arch: process.env.RUNNER_ARCH,
+      image: process.env.ImageOS,
+      imageVersion: process.env.ImageVersion,
+      runId: process.env.GITHUB_RUN_ID
+    }
+  });
   if (metadata.dirty && process.env.CI_PROFILE_ALLOW_DIRTY !== '1') {
     throw new Error(
-      `CI profiling requires a clean worktree. Commit or stash these changes first:\n${metadata.dirtyFiles.join('\n')}`
+      `Profiling requires a clean worktree or CI_PROFILE_ALLOW_DIRTY=1 for intentional profiling changes:\n${metadata.dirtyFiles.join('\n')}`
     );
   }
 
   const temporaryDirectory = mkdtempSync(path.join(tmpdir(), 'elements-ci-profile-'));
   const runs = [];
   try {
-    for (let index = 1; index <= RUN_COUNT; index++) {
-      runs.push(await benchmarkRun(index, temporaryDirectory));
+    for (let index = 1; index <= options.samples; index++) {
+      runs.push(await benchmarkRun(index, temporaryDirectory, options, metadata.graph));
     }
-    const scripts = aggregateRuns(runs, RUN_COUNT);
+    const scripts = aggregateRuns(runs, options.samples);
     const incomplete = scripts.filter(script => !script.complete);
     if (incomplete.length) {
       throw new Error(
-        `The following scripts did not produce ${RUN_COUNT} samples:\n${incomplete.map(script => script.id).join('\n')}`
+        `The following scripts did not produce ${options.samples} samples:\n${incomplete.map(script => script.id).join('\n')}`
       );
     }
 
     mkdirSync(METRICS_DIR, { recursive: true });
     copyLogs(runs);
+    copyTemporaryLogs(temporaryDirectory);
     const serializableRuns = runs.map(({ resetLog: _resetLog, ciLog: _ciLog, ...run }) => run);
     writeFileSync(
       path.join(METRICS_DIR, 'ci-profile.json'),

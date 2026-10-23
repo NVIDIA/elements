@@ -3,6 +3,7 @@ import fs from 'fs';
 import { resolve } from 'path';
 import { VitePlaywrightRunner, buildPage } from './playwright.js';
 import { withSoftwareWebGPUChromiumArgs } from './utils.js';
+import { profilePhase } from './profile.js';
 
 const output = process.env.CI ? ['json'] : ['json', 'html'];
 const RUNNER_ID = 'lighthouse';
@@ -44,21 +45,25 @@ export class LighthouseRunner {
   }
 
   async open() {
-    await this.#runner.open();
+    await profilePhase('browser-server-setup', () => this.#runner.open());
   }
 
   async close() {
-    await this.#runner.close();
+    await profilePhase('report-collection-cleanup', () => this.#runner.close());
   }
 
   async getReport(name, content) {
     console.log('lighthouse-runner: building test page...');
-    await buildPage(name, RUNNER_ID, t => t.replace('</body>', `${content}</body>`));
+    await profilePhase(
+      'fixture-build',
+      () => buildPage(name, RUNNER_ID, t => t.replace('</body>', `${content}</body>`)),
+      { name }
+    );
     console.log('lighthouse-runner: running tests...');
-    const runnerResult = await lighthouse(
-      `http://localhost:${this.#runner.port}/${name}/index.html`,
-      LIGHTHOUSE_FLAGS,
-      LIGHTHOUSE_CONFIG
+    const runnerResult = await profilePhase(
+      'lighthouse-execution',
+      () => lighthouse(`http://localhost:${this.#runner.port}/${name}/index.html`, LIGHTHOUSE_FLAGS, LIGHTHOUSE_CONFIG),
+      { name }
     );
 
     const networkRequests = runnerResult.lhr.audits['network-requests']?.details?.items;
@@ -83,7 +88,11 @@ export class LighthouseRunner {
     }
 
     console.log('lighthouse-runner: writing test report...');
-    fs.writeFileSync(`${dist}/report.json`, JSON.stringify(report, null, 2));
+    await profilePhase(
+      'report-write',
+      async () => fs.writeFileSync(`${dist}/report.json`, JSON.stringify(report, null, 2)),
+      { name }
+    );
     console.log(`lighthouse-runner: test report written to ${dist}/report.json`);
     return report;
   }
