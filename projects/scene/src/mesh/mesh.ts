@@ -214,6 +214,11 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
    * a replacement. Mutations outside the range remain invisible, including after recovery.
    * Consecutive publications before a frame preserve all changed ranges. Invalid ranges
    * or values throw without changing the last valid snapshot.
+   * Valid geometry needs validation only for the selected records. Preserving a captured
+   * renderer or body snapshot requires one full attribute copy; large copies prepare in
+   * bounded asynchronous chunks while rendering keeps the last ready snapshot. Publications
+   * share the pending copy. Repairing invalid geometry validates
+   * the complete result.
    *
    * Changing indices updates topology. Position changes refresh generated normals when
    * normals are absent. Indexed flat geometry may need a full derived-attribute upload
@@ -230,14 +235,14 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
       notifyOwningBodyPart(this);
       return;
     }
-    publishMeshGeometry(this, {
+    const result = publishMeshGeometry(this, {
       attribute: options.attribute,
       count: options.count,
       source,
       start: options.start
     });
     if (options.source !== undefined) this.#setProducerGeometry(options.attribute, source);
-    notifyOwningBodyPart(this);
+    if (result === 'applied') notifyOwningBodyPart(this);
   }
 
   /** CSS base-color factor multiplied with mesh colors and texture samples. */

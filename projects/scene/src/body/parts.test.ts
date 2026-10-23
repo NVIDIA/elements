@@ -7,6 +7,8 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import { MESH_PART, MESH_PROPERTY_INACTIVE } from '../internal/diagnostics/errors.js';
 import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 import { resolveSceneLayer } from '../internal/composition/scene/layer-record.js';
+import { scenePlatform, restoreScenePlatform } from '../internal/gpu/platform.js';
+import { PREPARATION_CHUNK_SIZE } from '../internal/rendering/preparation.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import type { SceneMesh } from '../mesh/mesh.js';
 import { SceneBody } from './body.js';
@@ -23,6 +25,7 @@ describe(`${SceneBody.metadata.tag} mesh parts`, () => {
     if (fixture) removeFixture(fixture);
     fixture = undefined;
     vi.unstubAllGlobals();
+    restoreScenePlatform();
   });
 
   it('compiles loaded mesh children with their transforms and colors after the body load completes', async () => {
@@ -65,6 +68,22 @@ describe(`${SceneBody.metadata.tag} mesh parts`, () => {
     fixture.append(mesh);
     await vi.waitFor(() => expect(body.geometry).toEqual([]));
     expect(resolveSceneLayer(mesh)).toMatchObject({ kind: 'mesh' });
+  });
+
+  it('keeps the ready body until a large mesh publication finishes copying', async () => {
+    scenePlatform.yieldForPreparation = async () => undefined;
+    fixture = await createFixture(html`<nve-scene-body><nve-scene-mesh></nve-scene-mesh></nve-scene-body>`);
+    const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
+    const mesh = body.querySelector<SceneMesh>('nve-scene-mesh')!;
+    const positions = new Float32Array(Math.ceil((PREPARATION_CHUNK_SIZE * 2) / 9) * 9);
+    mesh.geometry = { positions, normals: new Float32Array(positions.length) };
+    await elementIsStable(mesh);
+    const before = takeBodyLayerRenderData(body);
+    positions[0] = 4;
+    mesh.publishGeometry({ attribute: 'positions', count: 1 });
+    expect(takeBodyLayerRenderData(body).positions).toBe(before.positions);
+    await vi.waitFor(() => expect(takeBodyLayerRenderData(body).positions?.[0]).toBe(4));
+    expect(before.positions?.[0]).toBe(0);
   });
 
   it('resolves body loading after every mesh part and rejects when one fails', async () => {

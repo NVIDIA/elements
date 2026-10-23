@@ -40,6 +40,20 @@ export function validateMeshGeometry(input: MeshGeometryInput): void {
   validateIndices(input.indices, vertexCount);
 }
 
+/** Validates changed scalars when a valid snapshot already fixes array types, lengths, and topology. */
+export function validateMeshGeometryRange(
+  field: MeshGeometryField,
+  values: Float32Array | Uint32Array,
+  vertexCount: number
+): void {
+  if (field === 'indices') {
+    validateIndexValues(values, vertexCount);
+    return;
+  }
+  assertFinite(values, field);
+  if (field === 'colors') validateColorValues(values);
+}
+
 function validateArrayType<T extends Float32Array | Uint32Array>(
   value: T | null,
   field: MeshGeometryField,
@@ -116,6 +130,10 @@ function validateColors(colors: Float32Array | null, vertexCount: number): void 
     throw new MeshGeometryValidationError('colors', 'Colors must have four values per position.');
   }
   assertFinite(colors, 'colors');
+  validateColorValues(colors);
+}
+
+function validateColorValues(colors: ArrayLike<number>): void {
   for (let index = 0; index < colors.length; index += 1) {
     const value = colors[index] ?? 0;
     if (value < 0 || value > 1) {
@@ -129,6 +147,10 @@ function validateIndices(indices: Uint32Array | null, vertexCount: number): void
   if (indices.length % 3 !== 0) {
     throw new MeshGeometryValidationError('indices', 'Indices must contain triangle triples.');
   }
+  validateIndexValues(indices, vertexCount);
+}
+
+function validateIndexValues(indices: ArrayLike<number>, vertexCount: number): void {
   for (let offset = 0; offset < indices.length; offset += 1) {
     if ((indices[offset] ?? vertexCount) >= vertexCount) {
       throw new MeshGeometryValidationError('indices', 'Every index must identify a position vertex.');

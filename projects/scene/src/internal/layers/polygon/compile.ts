@@ -8,6 +8,8 @@ import { triangulatePolygon } from '../../math/polygon-triangulation.js';
 import { RingQuery } from '../../math/ring-query.js';
 
 export const POLYGON_VERTEX_LIMIT = 4096;
+export const POLYGON_INPUT_VERTEX_LIMIT = 16_384;
+export const POLYGON_RING_LIMIT = Math.floor(POLYGON_VERTEX_LIMIT / 3);
 
 type Ring = Point[];
 
@@ -38,13 +40,27 @@ export function compilePolygon(value: unknown): CompiledPolygon {
 
 function snapshotPolygon(value: unknown): { outer: Ring; holes: Ring[] } {
   if (value === null || typeof value !== 'object') throw new RangeError('Polygon geometry must be an object.');
-  const outer = normalizeRing(Reflect.get(value, 'outer'));
+  const outerValue: unknown = Reflect.get(value, 'outer');
   const holesValue: unknown = Reflect.get(value, 'holes');
   if (holesValue !== undefined && !Array.isArray(holesValue)) throw new RangeError('Polygon holes must be an array.');
-  const holes: Ring[] = holesValue === undefined ? [] : holesValue.map((hole: unknown) => normalizeRing(hole));
+  const holeRings: unknown[] = holesValue ?? [];
+  if (holeRings.length + 1 > POLYGON_RING_LIMIT) throw new RangeError('Polygon exceeds the ring limit.');
+  const rings = [outerValue, ...holeRings];
+  validateInputBudget(rings);
+  const outer = normalizeRing(outerValue);
+  const holes = holeRings.map(hole => normalizeRing(hole));
   const vertexCount = outer.length + holes.reduce((count, hole) => count + hole.length, 0);
   if (vertexCount > POLYGON_VERTEX_LIMIT) throw new RangeError('Polygon exceeds the normalized vertex limit.');
   return { holes, outer };
+}
+
+function validateInputBudget(rings: readonly unknown[]): void {
+  let count = 0;
+  for (const ring of rings) {
+    if (!Array.isArray(ring)) throw new RangeError('Polygon rings must be arrays.');
+    count += ring.length;
+    if (count > POLYGON_INPUT_VERTEX_LIMIT) throw new RangeError('Polygon exceeds the input vertex limit.');
+  }
 }
 
 function normalizeRing(value: unknown): Ring {

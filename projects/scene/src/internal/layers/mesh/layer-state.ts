@@ -13,12 +13,25 @@ import {
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../../color/types.js';
-import { validateMeshGeometry } from './geometry.js';
+import { validateMeshGeometry, validateMeshGeometryRange } from './geometry.js';
 import type { SceneMeshGeometry } from './types.js';
 import { createTopologyKey } from './processing.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
 import { scenePlatform } from '../../gpu/platform.js';
 import { VersionedRangeJournal } from '../../structures/versioned-range-journal.js';
+import {
+  createPreparationContext,
+  PREPARATION_CHUNK_SIZE,
+  runPreparation,
+  runPreparationSync
+} from '../../rendering/preparation.js';
+import { notifyOwningBodyPart } from '../body/part-notifications.js';
+import {
+  createMeshGeometryCopy,
+  finishMeshGeometryCopy,
+  prepareMeshGeometryCopyRange,
+  type MeshGeometryCopy
+} from './publication.js';
 import {
   createConstructedMeshRenderData,
   createMeshGeometryAttributeVersions,
@@ -66,15 +79,25 @@ interface MeshState {
   topologyVersion: number;
   topologyKey: string;
   geometryError: boolean;
+  readonly sharedAttributes: Set<MeshGeometryAttribute>;
+  readonly pendingCopies: Map<MeshGeometryAttribute, PendingGeometryCopy>;
   readonly pendingGeometryUploads: Map<MeshGeometryAttribute, VersionedRangeJournal>;
+}
+
+interface PendingGeometryCopy extends MeshGeometryCopy {
+  readonly baseVersion: number;
+  version: number;
+  alphaSummary: AlphaSummary;
+  readonly uploads: VersionedRangeJournal;
 }
 
 interface PreparedGeometryPublication {
   readonly attribute: MeshGeometryAttribute;
   readonly byteOffset: number;
   readonly byteSize: number;
-  readonly candidate: Float32Array | Uint32Array;
-  readonly geometry: MeshGeometryReplacement;
+  readonly values: Float32Array | Uint32Array;
+  readonly snapshot: Float32Array | Uint32Array;
+  readonly replacement?: Float32Array | Uint32Array;
   readonly recordCount: number;
 }
 
@@ -107,6 +130,8 @@ export function registerMeshLayer(mesh: HTMLElement): void {
     topologyVersion: 0,
     topologyKey: createTopologyKey({ positions: null, indices: null, uvs: null }),
     geometryError: false,
+    sharedAttributes: new Set(),
+    pendingCopies: new Map(),
     pendingGeometryUploads: new Map()
   });
 }
@@ -117,6 +142,7 @@ export function getMeshRenderData(mesh: HTMLElement): MeshRenderData {
 
 function createMeshRenderData(mesh: HTMLElement, consumeUploads: boolean): MeshRenderData {
   const state = getState(mesh);
+  shareGeometry(state);
   const markerSource = getLayerInstances(mesh);
   const markerCount = getLayerCount(mesh);
   const hasChildren = mesh.children.length > 0;
@@ -157,6 +183,7 @@ export function getMeshTopologyVersion(mesh: HTMLElement): number {
 export function getMeshPartGeometry(mesh: HTMLElement): SceneMeshGeometry | null {
   const state = getState(mesh);
   if (state.geometryError || !state.positions) return null;
+  shareGeometry(state);
   return { ...getCurrentGeometry(state), positions: state.positions };
 }
 
@@ -169,6 +196,7 @@ export function setMeshGeometryProperty(mesh: HTMLElement, name: MeshGeometryAtt
   if (value !== null && !(value instanceof (name === 'indices' ? Uint32Array : Float32Array))) {
     throw new TypeError(`${name} must be the specified typed array or null.`);
   }
+  flushGeometryCopies(mesh, state);
   const next = getNextGeometry(state, name, value);
   replaceMeshGeometryAttributes(
     mesh,
@@ -182,22 +210,24 @@ export function replaceMeshGeometry(mesh: HTMLElement, input: unknown): void {
   replaceMeshGeometryAttributes(mesh, input, MESH_GEOMETRY_ATTRIBUTES);
 }
 
-/** Captures one producer range after validating the complete resulting geometry. */
-export function publishMeshGeometry(mesh: HTMLElement, publication: MeshGeometryPublication): void {
+/** Captures and validates one changed range, detaching shared snapshots only before mutation. */
+export function publishMeshGeometry(mesh: HTMLElement, publication: MeshGeometryPublication): 'applied' | 'pending' {
   const state = getState(mesh);
   const prepared = prepareGeometryPublication(state, publication);
+  if (queueGeometryCopy(mesh, state, prepared)) return 'pending';
   applyGeometryPublication(state, prepared);
   state.geometryError = false;
   state.version += 1;
   state.attributeVersions[prepared.attribute] += 1;
   if (prepared.attribute === 'indices') {
-    updateTopologyState(state, prepared.geometry, true);
+    updateTopologyState(state, state, true);
     clearPendingGeometryUploads(state);
   } else {
     queuePublishedGeometryUpload(state, prepared);
   }
   updateMeshDiagnostics(mesh, state);
   notifyOwningScene(mesh);
+  return 'applied';
 }
 
 function replaceMeshGeometryAttributes(
@@ -225,6 +255,8 @@ function applyGeometryReplacement(update: GeometryReplacementUpdate): void {
   state.colors = captured.colors;
   state.indices = captured.indices;
   state.geometryError = invalid;
+  state.sharedAttributes.clear();
+  state.pendingCopies.clear();
   state.version += 1;
   for (const attribute of changedAttributes) state.attributeVersions[attribute] += 1;
 }
@@ -249,19 +281,38 @@ function prepareGeometryPublication(
   if (!source || !snapshot) throw new DOMException(`Mesh ${attribute} geometry is unavailable.`, 'InvalidStateError');
   const width = geometryAttributeWidth(attribute);
   const { recordCount, scalarCount, scalarStart } = resolveGeometryPublicationRange({ count, source, start, width });
-  const candidate = snapshot.slice() as Float32Array | Uint32Array;
-  candidate.set(source.subarray(scalarStart, scalarStart + scalarCount), scalarStart);
-  const geometry = getCurrentGeometry(state);
-  Reflect.set(geometry, attribute, candidate);
-  validateMeshGeometry(geometry);
+  const range = source.subarray(scalarStart, scalarStart + scalarCount);
+  const values = attribute === 'indices' ? new Uint32Array(range) : new Float32Array(range);
+  const replacement = state.geometryError
+    ? validateGeometryRepair(state, { attribute, snapshot, values, scalarStart })
+    : undefined;
+  if (!state.geometryError) validateMeshGeometryRange(attribute, values, (state.positions?.length ?? 0) / 3);
   return {
     attribute,
     byteOffset: scalarStart * source.BYTES_PER_ELEMENT,
     byteSize: scalarCount * source.BYTES_PER_ELEMENT,
-    candidate,
-    geometry,
+    values,
+    snapshot,
+    replacement,
     recordCount
   };
+}
+
+function validateGeometryRepair(
+  state: MeshState,
+  range: {
+    readonly attribute: MeshGeometryAttribute;
+    readonly snapshot: Float32Array | Uint32Array;
+    readonly values: Float32Array | Uint32Array;
+    readonly scalarStart: number;
+  }
+): Float32Array | Uint32Array {
+  const candidate = range.snapshot.slice();
+  candidate.set(range.values, range.scalarStart);
+  const geometry = getCurrentGeometry(state);
+  Reflect.set(geometry, range.attribute, candidate);
+  validateMeshGeometry(geometry);
+  return candidate;
 }
 
 function resolveGeometryPublicationRange(options: {
@@ -278,6 +329,9 @@ function resolveGeometryPublicationRange(options: {
 }
 
 function applyGeometryPublication(state: MeshState, prepared: PreparedGeometryPublication): void {
+  if (prepared.values.length === 0 && !prepared.replacement) return;
+  const { attribute, snapshot } = prepared;
+  const target = prepared.replacement ?? (state.sharedAttributes.has(attribute) ? snapshot.slice() : snapshot);
   if (prepared.attribute === 'colors' && prepared.recordCount > 0) {
     const span = {
       offset: prepared.byteOffset / Float32Array.BYTES_PER_ELEMENT + 3,
@@ -287,11 +341,114 @@ function applyGeometryPublication(state: MeshState, prepared: PreparedGeometryPu
     } as const;
     state.alphaSummary = replaceAlphaSummary(
       state.alphaSummary,
-      summarizeAlpha({ ...span, values: state.colors! }),
-      summarizeAlpha({ ...span, values: prepared.geometry.colors! })
+      summarizeAlpha({ ...span, values: snapshot }),
+      summarizeAlpha({ ...span, offset: 3, values: prepared.values })
     );
   }
-  Reflect.set(state, prepared.attribute, prepared.candidate);
+  target.set(prepared.values, prepared.byteOffset / target.BYTES_PER_ELEMENT);
+  Reflect.set(state, attribute, target);
+  state.sharedAttributes.delete(attribute);
+}
+
+function shareGeometry(state: MeshState): void {
+  for (const attribute of MESH_GEOMETRY_ATTRIBUTES) {
+    if (state[attribute]) state.sharedAttributes.add(attribute);
+  }
+}
+
+function queueGeometryCopy(mesh: HTMLElement, state: MeshState, prepared: PreparedGeometryPublication): boolean {
+  const { attribute, snapshot } = prepared;
+  let pending = state.pendingCopies.get(attribute);
+  if (!pending) {
+    if (
+      prepared.replacement ||
+      prepared.values.length === 0 ||
+      !state.sharedAttributes.has(attribute) ||
+      snapshot.length <= PREPARATION_CHUNK_SIZE
+    )
+      return false;
+    pending = {
+      ...createMeshGeometryCopy(snapshot),
+      alphaSummary: state.alphaSummary,
+      baseVersion: state.attributeVersions[attribute],
+      version: state.attributeVersions[attribute],
+      uploads: new VersionedRangeJournal()
+    };
+    state.pendingCopies.set(attribute, pending);
+    scheduleGeometryCopy(mesh, state, { attribute, pending });
+  }
+  const start = prepared.byteOffset / pending.target.BYTES_PER_ELEMENT;
+  prepareMeshGeometryCopyRange(pending, start, prepared.values.length);
+  if (attribute === 'colors' && prepared.recordCount > 0) {
+    const span = { stride: 4, count: prepared.recordCount, opaqueValue: 1 } as const;
+    pending.alphaSummary = replaceAlphaSummary(
+      pending.alphaSummary,
+      summarizeAlpha({ ...span, offset: start + 3, values: pending.target }),
+      summarizeAlpha({ ...span, offset: 3, values: prepared.values })
+    );
+  }
+  pending.target.set(prepared.values, start);
+  pending.uploads.record({
+    baseVersion: pending.version,
+    version: ++pending.version,
+    ranges: prepared.recordCount > 0 ? [{ offset: prepared.byteOffset, size: prepared.byteSize }] : []
+  });
+  return true;
+}
+
+function scheduleGeometryCopy(
+  mesh: HTMLElement,
+  state: MeshState,
+  job: { readonly attribute: MeshGeometryAttribute; readonly pending: PendingGeometryCopy }
+): void {
+  const { attribute, pending } = job;
+  const context = createPreparationContext(() => state.pendingCopies.get(attribute) === pending);
+  void runPreparation(finishMeshGeometryCopy(pending), context)
+    .then(result => {
+      if (result && context.isCurrent()) {
+        commitGeometryCopy(mesh, state, attribute);
+        updateMeshDiagnostics(mesh, state);
+        notifyOwningBodyPart(mesh);
+      }
+    })
+    .catch(() => {
+      if (!context.isCurrent()) return;
+      state.pendingCopies.delete(attribute);
+      diagnosticReporterService.update({
+        active: true,
+        code: MESH_GEOMETRY,
+        element: mesh,
+        message: 'Unable to prepare published mesh geometry.',
+        severity: 'error'
+      });
+    });
+}
+
+function commitGeometryCopy(mesh: HTMLElement, state: MeshState, attribute: MeshGeometryAttribute): void {
+  const pending = state.pendingCopies.get(attribute);
+  if (!pending) return;
+  state.pendingCopies.delete(attribute);
+  Reflect.set(state, attribute, pending.target);
+  state.sharedAttributes.delete(attribute);
+  state.version += pending.version - pending.baseVersion;
+  state.attributeVersions[attribute] = pending.version;
+  if (attribute === 'colors') state.alphaSummary = pending.alphaSummary;
+  if (attribute === 'indices') {
+    state.topologyVersion += pending.version - pending.baseVersion - 1;
+    updateTopologyState(state, state, true);
+    clearPendingGeometryUploads(state);
+  } else {
+    const uploads = pending.uploads.snapshot();
+    if (uploads) getPendingGeometryUploadJournal(state, attribute).record(uploads);
+  }
+  notifyOwningScene(mesh);
+}
+
+function flushGeometryCopies(mesh: HTMLElement, state: MeshState): void {
+  for (const [attribute, pending] of state.pendingCopies) {
+    runPreparationSync(finishMeshGeometryCopy(pending));
+    commitGeometryCopy(mesh, state, attribute);
+  }
 }
 
 function queuePublishedGeometryUpload(state: MeshState, prepared: PreparedGeometryPublication): void {
@@ -584,7 +741,7 @@ function getTopologySnapshot(input: Pick<MeshState, 'positions' | 'normals' | 'u
 } {
   return {
     indexedFlatNormals: usesIndexedFlatNormals(input.indices, input.normals),
-    indices: cloneIndices(input.indices),
+    indices: input.indices,
     key: createTopologyKey(input)
   };
 }
@@ -611,8 +768,4 @@ function sameIndices(previous: Uint32Array | null, next: Uint32Array | null): bo
     if (previous[index] !== next[index]) return false;
   }
   return true;
-}
-
-function cloneIndices(indices: Uint32Array | null): Uint32Array | null {
-  return indices === null ? null : new Uint32Array(indices);
 }
