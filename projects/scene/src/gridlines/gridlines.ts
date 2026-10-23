@@ -4,9 +4,13 @@
 import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
-import { useStyles } from '@nvidia-elements/core/internal';
-import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color/color.js';
-import { createGridVertices, gridVertexCount, MAX_GRID_COUNT } from './utils.js';
+import { positiveFiniteOr, useStyles } from '@nvidia-elements/core/internal';
+import { parseCSSColor } from '../internal/color/color.js';
+import { sameRGBA } from '../internal/color/rgba.js';
+import type { RGBA } from '../internal/color/types.js';
+import { scenePlatform } from '../internal/gpu/platform.js';
+import { createCheckerboardVertices, createGridVertices, gridVertexCount, MAX_GRID_COUNT } from './utils.js';
+import { registerGridlinesStyleSampler, setGridlinesCheckerboard } from '../internal/layers/gridlines.js';
 import {
   reconcileStreamingLayerChildren,
   registerStreamingLayer,
@@ -16,15 +20,20 @@ import {
 import { LINE_VERTEX } from '../internal/records/layouts/built-ins.js';
 import { createLineVertexSource } from '../internal/layers/sources/external-record-sources.js';
 import { createPositiveFiniteNumberConverter } from '../internal/dom/attribute-converters.js';
-import styles from '../internal/dom/host.css?inline';
+import hostStyles from '../internal/dom/host.css?inline';
+import styles from './gridlines.css?inline';
 
 const DEFAULT_SPACING = 1;
 const DEFAULT_COUNT = 10;
-const DEFAULT_COLOR = {
-  rgba: [162 / 255, 162 / 255, 162 / 255, 1],
-  source: '#a2a2a2'
-} satisfies CSSColor;
+const DEFAULT_COLOR: RGBA = [162 / 255, 162 / 255, 162 / 255, 1];
 const DEFAULT_WIDTH = 1;
+const DEFAULT_ALTERNATE_COLOR: RGBA = [240 / 255, 240 / 255, 240 / 255, 1];
+
+const patternConverter = {
+  fromAttribute(value: string | null): 'lines' | 'checkerboard' {
+    return value === 'checkerboard' ? value : 'lines';
+  }
+};
 
 const countConverter = {
   fromAttribute(value: string | null): number {
@@ -32,13 +41,13 @@ const countConverter = {
   }
 };
 
-const colorConverter = createCSSColorConverter(DEFAULT_COLOR);
-
 /**
  * @element nve-scene-gridlines
- * @description Renders a finite, frame-local reference grid on Z = 0.
+ * @description Renders finite reference lines or checkerboard squares on frame-local Z = 0.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/scene/gridlines
+ * @cssprop --color - Sets the line or primary square color. Defaults to the theme's border color.
+ * @cssprop --alternate-color - Sets the alternate square color. Defaults to the theme's canvas background.
  * @stable false
  */
 export class SceneGridlines extends LitElement {
@@ -54,7 +63,7 @@ export class SceneGridlines extends LitElement {
     this.requestUpdate('frame', previous);
   }
 
-  static styles = useStyles([styles]);
+  static styles = useStyles([hostStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-scene-gridlines',
@@ -63,11 +72,29 @@ export class SceneGridlines extends LitElement {
 
   #spacing = DEFAULT_SPACING;
   #count = DEFAULT_COUNT;
-  #color = DEFAULT_COLOR.source;
-  #rgba = DEFAULT_COLOR.rgba;
+  #rgba = DEFAULT_COLOR;
   #width = DEFAULT_WIDTH;
+  #pattern: 'lines' | 'checkerboard' = 'lines';
+  #alternateRGBA = DEFAULT_ALTERNATE_COLOR;
+  #colorSource?: string;
+  #alternateColorSource?: string;
 
-  /** World-unit distance between adjacent grid lines. */
+  /** Reference-grid pattern. Checkerboards contain filled squares without line borders. */
+  @property({ converter: patternConverter })
+  get pattern(): 'lines' | 'checkerboard' {
+    return this.#pattern;
+  }
+
+  set pattern(value: 'lines' | 'checkerboard') {
+    const next = value === 'checkerboard' ? value : 'lines';
+    const previous = this.#pattern;
+    if (next !== previous) {
+      this.#pattern = next;
+      this.requestUpdate('pattern', previous);
+    }
+  }
+
+  /** World-unit distance between grid lines or side length of one checkerboard square. */
   @property({ converter: createPositiveFiniteNumberConverter(DEFAULT_SPACING) })
   get spacing(): number {
     return this.#spacing;
@@ -97,30 +124,14 @@ export class SceneGridlines extends LitElement {
     }
   }
 
-  /** CSS color used for every reference-grid segment. */
-  @property({ converter: colorConverter })
-  get color(): string {
-    return this.#color;
-  }
-
-  set color(value: string) {
-    const next = normalizeCSSColor(value, DEFAULT_COLOR);
-    const previous = this.#color;
-    if (next.source !== previous) {
-      this.#color = next.source;
-      this.#rgba = next.rgba;
-      this.requestUpdate('color', previous);
-    }
-  }
-
-  /** Screen-space line width in CSS pixels. */
+  /** Screen-space line width in CSS pixels. Inactive for the checkerboard pattern. */
   @property({ converter: createPositiveFiniteNumberConverter(DEFAULT_WIDTH) })
   get width(): number {
     return this.#width;
   }
 
   set width(value: number) {
-    const next = normalizeNumber(value, DEFAULT_WIDTH);
+    const next = positiveFiniteOr(value, DEFAULT_WIDTH);
     const previous = this.#width;
     if (next !== previous) {
       this.#width = next;
@@ -138,6 +149,7 @@ export class SceneGridlines extends LitElement {
       topology: 'segments',
       widthUnit: 'pixel'
     });
+    registerGridlinesStyleSampler(this, this.#sampleColors);
     this.#replaceVertices();
   }
 
@@ -145,20 +157,50 @@ export class SceneGridlines extends LitElement {
     return html`<slot hidden @slotchange=${this.#handleSlotChange}></slot>`;
   }
 
+  protected override updated(): void {
+    this.#sampleColors();
+  }
+
   protected override willUpdate(changed: PropertyValues<this>): void {
-    if (changed.has('spacing') || changed.has('count') || changed.has('color') || changed.has('width')) {
+    if (
+      changed.has('pattern') ||
+      changed.has('spacing') ||
+      changed.has('count') ||
+      (this.pattern === 'lines' && changed.has('width'))
+    ) {
       this.#replaceVertices();
     }
   }
 
+  #sampleColors = (): void => {
+    if (!this.hasUpdated) return;
+    const computed = scenePlatform.getComputedStyle(this);
+    const color = resolveGridColor(computed, '--color');
+    const alternateColor =
+      this.pattern === 'checkerboard' ? resolveGridColor(computed, '--alternate-color') : this.#alternateColorSource;
+    if (color === this.#colorSource && alternateColor === this.#alternateColorSource) return;
+    this.#colorSource = color;
+    this.#alternateColorSource = alternateColor;
+    const rgba = parseCSSColor(color) ?? DEFAULT_COLOR;
+    const alternateRGBA = resolveAlternateColor(alternateColor);
+    if (sameRGBA(this.#rgba, rgba) && sameRGBA(this.#alternateRGBA, alternateRGBA)) return;
+    this.#rgba = rgba;
+    this.#alternateRGBA = alternateRGBA;
+    this.#replaceVertices();
+  };
+
   #replaceVertices(): void {
-    const count = gridVertexCount(this.count);
-    const bytes = createGridVertices({
+    const checkerboard = this.pattern === 'checkerboard';
+    const options = {
+      alternateColor: this.#alternateRGBA,
       color: this.#rgba,
       count: this.count,
       spacing: this.spacing,
       width: this.width
-    });
+    };
+    const count = checkerboard ? 2 : gridVertexCount(this.count);
+    const bytes = checkerboard ? createCheckerboardVertices(options) : createGridVertices(options);
+    setGridlinesCheckerboard(this, checkerboard ? options : undefined);
     const source = createLineVertexSource({ bytes, count });
     setStreamingLayerSource(this, source);
     setStreamingLayerCount(this, count);
@@ -173,10 +215,15 @@ function normalizeSpacing(value: number): number {
   return Number.isFinite(value) && value > 0 && value <= Number.MAX_VALUE / MAX_GRID_COUNT ? value : DEFAULT_SPACING;
 }
 
-function normalizeNumber(value: number, fallback: number): number {
-  return Number.isFinite(value) && value > 0 ? value : fallback;
-}
-
 function normalizeCount(value: number): number {
   return Number.isSafeInteger(value) && value >= 1 && value <= MAX_GRID_COUNT ? value : DEFAULT_COUNT;
+}
+
+function resolveAlternateColor(source: string | undefined): RGBA {
+  return source === undefined ? DEFAULT_ALTERNATE_COLOR : (parseCSSColor(source) ?? DEFAULT_ALTERNATE_COLOR);
+}
+
+function resolveGridColor(computed: CSSStyleDeclaration, name: '--color' | '--alternate-color'): string {
+  const source = computed.getPropertyValue(name).trim();
+  return source.toLowerCase() === 'currentcolor' ? computed.color : source;
 }

@@ -30,7 +30,7 @@ export type SceneLayerKind = SceneLayerSpec['kind'];
 
 const SCENE_BODY_TAG = 'nve-scene-body';
 export const SCENE_SHAPE_TAG = 'nve-scene-shape';
-export const SCENE_MESH_TAG = 'nve-scene-mesh';
+const SCENE_MESH_TAG = 'nve-scene-mesh';
 
 const SCENE_LAYER_SPECS = [
   { family: 'label', kind: 'label', markerInstances: false, tag: 'nve-scene-labels' },

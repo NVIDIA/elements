@@ -18,6 +18,7 @@ import {
   notifyFrameStateChange
 } from '../internal/composition/frame/state.js';
 import type { Quaternion, ScenePose, Vec3 } from '../internal/math/types.js';
+import { isFiniteQuaternion, toFiniteVec3 } from '../internal/math/tuples.js';
 import { getWorldPoint, getLocalPoint } from '../internal/composition/frame/points.js';
 import styles from '../internal/dom/host.css?inline';
 
@@ -175,7 +176,7 @@ export class SceneFrame extends LitElement {
 
   #applyTransform(): void {
     const unauthored = this.#position === null && this.#orientation === null;
-    const position = this.#position === null ? ([0, 0, 0] as Vec3) : toVec3(this.#position);
+    const position = this.#position === null ? ([0, 0, 0] as Vec3) : toFiniteVec3(this.#position);
     const orientation = this.#orientation === null ? ([0, 0, 0, 1] as Quaternion) : toQuaternion(this.#orientation);
     const valid = position !== null && orientation !== null;
     if (unauthored) clearFrameTransform(this);
@@ -191,26 +192,6 @@ export class SceneFrame extends LitElement {
   }
 }
 
-function toVec3(value: unknown): Vec3 | null {
-  return isVec3(value) ? [value[0], value[1], value[2]] : null;
-}
-
 function toQuaternion(value: unknown): Quaternion | null {
-  return !isQuaternion(value) || Math.hypot(...value) === 0 ? null : [value[0], value[1], value[2], value[3]];
-}
-
-function isVec3(value: unknown): value is Vec3 {
-  return (
-    Array.isArray(value) &&
-    value.length === 3 &&
-    value.every(component => typeof component === 'number' && Number.isFinite(component))
-  );
-}
-
-function isQuaternion(value: unknown): value is Quaternion {
-  return (
-    Array.isArray(value) &&
-    value.length === 4 &&
-    value.every(component => typeof component === 'number' && Number.isFinite(component))
-  );
+  return !isFiniteQuaternion(value) || Math.hypot(...value) === 0 ? null : [value[0], value[1], value[2], value[3]];
 }

@@ -347,6 +347,8 @@ export class SceneCamera extends LitElement implements CameraConfiguration {
   }
 
   protected override updated(changedProperties: PropertyValues<this>): void {
-    if (changedProperties.size > 0) notifyOwningScene(this);
+    // Qualified camera frames can address anonymous models, which resolution reports on.
+    if (changedProperties.has('frame')) notifyOwningScene(this, 'composition');
+    else if (changedProperties.size > 0) notifyOwningScene(this);
   }
 }

@@ -12,7 +12,7 @@ import type { Quaternion, Vec3 } from '../../math/types.js';
 import type { RGBA } from '../../color/types.js';
 import { encodeUnorm8, readRGBA8 } from '../../color/rgba8.js';
 import { LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './built-ins.js';
-import type { LayoutDescriptor } from './define-layout.js';
+import { getFieldOffset, type LayoutDescriptor } from './define-layout.js';
 
 interface MarkerFields {
   position: Vec3;
@@ -43,11 +43,11 @@ type TriangleVertexFields = PointFields;
 const DEFAULT_COLOR: RGBA = [1, 1, 1, 1];
 const DEFAULT_OUTLINE_COLOR: RGBA = [0, 0, 0, 0];
 const DEFAULT_SCALE: Vec3 = [1, 1, 1];
-const MARKER_POSITION_OFFSET = offsetOf(MARKER, 'position');
-const MARKER_ORIENTATION_OFFSET = offsetOf(MARKER, 'orientation');
-const MARKER_SCALE_OFFSET = offsetOf(MARKER, 'scale');
-const MARKER_COLOR_OFFSET = offsetOf(MARKER, 'color');
-const MARKER_OUTLINE_COLOR_OFFSET = offsetOf(MARKER, 'outline-color');
+const MARKER_POSITION_OFFSET = getFieldOffset(MARKER, 'position');
+const MARKER_ORIENTATION_OFFSET = getFieldOffset(MARKER, 'orientation');
+const MARKER_SCALE_OFFSET = getFieldOffset(MARKER, 'scale');
+const MARKER_COLOR_OFFSET = getFieldOffset(MARKER, 'color');
+const MARKER_OUTLINE_COLOR_OFFSET = getFieldOffset(MARKER, 'outline-color');
 const dataViews = new WeakMap<ArrayBufferView, DataView>();
 
 export function writeMarker(view: ArrayBufferView, index: number, fields: MarkerFields): void {
@@ -68,15 +68,15 @@ export function writeMarker(view: ArrayBufferView, index: number, fields: Marker
 
 export function readMarker(view: ArrayBufferView, index: number): Required<MarkerFields> {
   const record = getRecordView(view, index, MARKER);
-  const orientation = readFloat4(record, offsetOf(MARKER, 'orientation'));
+  const orientation = readFloat4(record, getFieldOffset(MARKER, 'orientation'));
   assertNonzeroQuaternion(orientation);
 
   return {
-    position: readFloat3(record, offsetOf(MARKER, 'position')),
+    position: readFloat3(record, getFieldOffset(MARKER, 'position')),
     orientation,
-    scale: readFloat3(record, offsetOf(MARKER, 'scale')),
-    color: readRGBA8(record, offsetOf(MARKER, 'color')),
-    outlineColor: readRGBA8(record, offsetOf(MARKER, 'outline-color'))
+    scale: readFloat3(record, getFieldOffset(MARKER, 'scale')),
+    color: readRGBA8(record, getFieldOffset(MARKER, 'color')),
+    outlineColor: readRGBA8(record, getFieldOffset(MARKER, 'outline-color'))
   };
 }
 
@@ -95,23 +95,23 @@ export function writeLineVertex(view: ArrayBufferView, index: number, fields: Li
   const gap = fields.gap ?? 0;
   const normal = fields.normal ?? DEFAULT_LINE_NORMAL;
   assertLineStyle({ dash, gap, normal, width });
-  writeFloatTuple(record, offsetOf(LINE_VERTEX, 'position'), fields.position);
-  writeColor(record, offsetOf(LINE_VERTEX, 'color'), fields.color ?? DEFAULT_COLOR);
-  writeFloatTuple(record, offsetOf(LINE_VERTEX, 'normal'), normal);
-  record.setFloat32(offsetOf(LINE_VERTEX, 'width'), width, true);
-  record.setFloat32(offsetOf(LINE_VERTEX, 'dash'), dash, true);
-  record.setFloat32(offsetOf(LINE_VERTEX, 'gap'), gap, true);
+  writeFloatTuple(record, getFieldOffset(LINE_VERTEX, 'position'), fields.position);
+  writeColor(record, getFieldOffset(LINE_VERTEX, 'color'), fields.color ?? DEFAULT_COLOR);
+  writeFloatTuple(record, getFieldOffset(LINE_VERTEX, 'normal'), normal);
+  record.setFloat32(getFieldOffset(LINE_VERTEX, 'width'), width, true);
+  record.setFloat32(getFieldOffset(LINE_VERTEX, 'dash'), dash, true);
+  record.setFloat32(getFieldOffset(LINE_VERTEX, 'gap'), gap, true);
 }
 
 export function readLineVertex(view: ArrayBufferView, index: number): Required<LineVertexFields> {
   const record = getRecordView(view, index, LINE_VERTEX);
   const fields = {
-    position: readFloat3(record, offsetOf(LINE_VERTEX, 'position')),
-    color: readRGBA8(record, offsetOf(LINE_VERTEX, 'color')),
-    normal: readFloat3(record, offsetOf(LINE_VERTEX, 'normal')),
-    width: readFiniteFloat(record, offsetOf(LINE_VERTEX, 'width')),
-    dash: readFiniteFloat(record, offsetOf(LINE_VERTEX, 'dash')),
-    gap: readFiniteFloat(record, offsetOf(LINE_VERTEX, 'gap'))
+    position: readFloat3(record, getFieldOffset(LINE_VERTEX, 'position')),
+    color: readRGBA8(record, getFieldOffset(LINE_VERTEX, 'color')),
+    normal: readFloat3(record, getFieldOffset(LINE_VERTEX, 'normal')),
+    width: readFiniteFloat(record, getFieldOffset(LINE_VERTEX, 'width')),
+    dash: readFiniteFloat(record, getFieldOffset(LINE_VERTEX, 'dash')),
+    gap: readFiniteFloat(record, getFieldOffset(LINE_VERTEX, 'gap'))
   };
   assertLineStyle(fields);
   return fields;
@@ -132,15 +132,15 @@ function writePointRecord(
 ): void {
   const { fields, layout } = options;
   const record = getRecordView(view, index, layout);
-  writeFloatTuple(record, offsetOf(layout, 'position'), fields.position);
-  writeColor(record, offsetOf(layout, 'color'), fields.color ?? DEFAULT_COLOR);
+  writeFloatTuple(record, getFieldOffset(layout, 'position'), fields.position);
+  writeColor(record, getFieldOffset(layout, 'color'), fields.color ?? DEFAULT_COLOR);
 }
 
 function readPointRecord(view: ArrayBufferView, index: number, layout: LayoutDescriptor): Required<PointFields> {
   const record = getRecordView(view, index, layout);
   return {
-    position: readFloat3(record, offsetOf(layout, 'position')),
-    color: readRGBA8(record, offsetOf(layout, 'color'))
+    position: readFloat3(record, getFieldOffset(layout, 'position')),
+    color: readRGBA8(record, getFieldOffset(layout, 'color'))
   };
 }
 
@@ -184,14 +184,6 @@ function getDataView(view: ArrayBufferView): DataView {
 
 function bufferCanResize(buffer: ArrayBufferLike): boolean {
   return Reflect.get(buffer, 'resizable') === true || Reflect.get(buffer, 'growable') === true;
-}
-
-function offsetOf(layout: LayoutDescriptor, name: string): number {
-  const field = layout.fields[name];
-  if (!field) {
-    throw new TypeError(`Layout "${layout.name}" has no field named "${name}".`);
-  }
-  return field.offset;
 }
 
 function writeFloatTuple(record: DataView, offset: number, values: readonly number[]): void {

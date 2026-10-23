@@ -213,26 +213,12 @@ export class VertexStreamBuffer {
     }
   }
 
-  /** Creates an empty buffer with the same layout and validation behavior. */
-  createCompatibleBuffer(): VertexStreamBuffer {
-    return new VertexStreamBuffer(this.layout, {
-      opaqueRecord: this.opaqueRecord,
-      requireCountMultipleOf: this.requireCountMultipleOf,
-      transparentRecord: this.transparentRecord,
-      validateRecord: this.validateRecord
-    });
-  }
-
   get source(): ArrayBufferView | null {
     return this.#source;
   }
 
   get count(): number | undefined {
     return this.#count;
-  }
-
-  set count(value: number | undefined) {
-    this.setCount(value);
   }
 
   get capacity(): number {

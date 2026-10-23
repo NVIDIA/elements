@@ -17,13 +17,13 @@ describe('vertex stream buffer', () => {
     writePoint(source, 1, { position: [4, 5, 6] });
     const stream = new VertexStreamBuffer(POINT);
     stream.replace(source);
-    stream.count = 1;
+    stream.setCount(1);
     source.fill(0);
     expect(stream.toRenderData().count).toBe(1);
     stream.replace(new Uint8Array(POINT.stride));
     expect(stream.count).toBe(1);
     stream.replace(new Uint8Array(POINT.stride * 2));
-    stream.count = 2;
+    stream.setCount(2);
     stream.replace(new Uint8Array(POINT.stride));
     expect(stream.count).toBeUndefined();
   });
@@ -160,7 +160,7 @@ describe('vertex stream buffer', () => {
 
     const triangles = new VertexStreamBuffer(TRIANGLE_VERTEX, { requireCountMultipleOf: 3 });
     triangles.replace(new Uint8Array(TRIANGLE_VERTEX.stride * 4));
-    triangles.count = 1;
+    triangles.setCount(1);
     expect(triangles.hasCountIssue()).toBe(true);
     expect(() => triangles.commit(-1)).toThrow(RangeError);
     expect(() => triangles.commit(0, 5)).toThrow(RangeError);
@@ -212,9 +212,9 @@ describe('vertex stream buffer', () => {
     write(source, 256, { position: [256, 0, 0] });
     new DataView(source.buffer).setFloat32(256 * layout.stride, Number.NaN, true);
     stream.commit(255, 2);
-    stream.count = 256;
+    stream.setCount(256);
     expect(stream.ready).toBe(true);
-    stream.count = 257;
+    stream.setCount(257);
     expect(stream.ready).toBe(false);
     expect(stream.hasOpacity(257)).toBe(true);
     expect(stream.hasOpacity(257, true)).toBe(true);
@@ -247,7 +247,7 @@ describe('vertex stream buffer', () => {
   it('reports triangle divisibility without throwing from count assignment', () => {
     const stream = new VertexStreamBuffer(TRIANGLE_VERTEX, { requireCountMultipleOf: 3 });
     stream.replace(new Uint8Array(16 * 4));
-    stream.count = 1;
+    stream.setCount(1);
     const data = stream.toRenderData();
     expect(data.ready).toBe(false);
     expect(data.issues.has(TRIANGLES_COUNT)).toBe(true);
@@ -285,9 +285,9 @@ describe('vertex stream buffer', () => {
     writeLineVertex(source, 0, { position: [0, 0, 0] });
     const stream = new VertexStreamBuffer(LINE_VERTEX, { validateRecord: lineRecordIsValid });
     stream.replace(source);
-    stream.count = 1;
+    stream.setCount(1);
     expect(stream.toRenderData()).toMatchObject({ count: 1, ready: true });
-    stream.count = 2;
+    stream.setCount(2);
     expect(stream.toRenderData()).toMatchObject({ count: 0, ready: false });
     writeLineVertex(source, 1, { position: [1, 0, 0] });
     stream.commit(1, 1);
@@ -299,9 +299,9 @@ describe('vertex stream buffer', () => {
     writePoint(source, 0, { position: [1, 2, 3], color: [1, 1, 1, 0.5] });
     const stream = new VertexStreamBuffer(POINT);
     stream.replace(source.subarray(0, POINT.stride));
-    stream.count = 0;
+    stream.setCount(0);
     expect(stream.toRenderData().transparent).toBe(false);
-    stream.count = 1;
+    stream.setCount(1);
     expect(stream.toRenderData()).toMatchObject({ opaque: false, transparent: true });
     expect(new VertexStreamBuffer(LINE_VERTEX).layout).toBe(LINE_VERTEX);
     expect(new VertexStreamBuffer(TRIANGLE_VERTEX).layout).toBe(TRIANGLE_VERTEX);
@@ -319,14 +319,14 @@ describe('vertex stream buffer', () => {
     const stream = new VertexStreamBuffer(POINT);
 
     stream.replace(source);
-    stream.count = 1;
+    stream.setCount(1);
     expect(stream.toRenderData()).toMatchObject({ opaque: true, transparent: false });
-    stream.count = 2;
+    stream.setCount(2);
     expect(stream.toRenderData()).toMatchObject({ opaque: true, transparent: true });
 
     writePoint(source, 0, { color: [1, 1, 1, 0], position: [0, 0, 0] });
     stream.commit(0, 1);
-    stream.count = 1;
+    stream.setCount(1);
     expect(stream.toRenderData()).toMatchObject({ opaque: false, transparent: true });
   });
 
@@ -335,9 +335,9 @@ describe('vertex stream buffer', () => {
     writePoint(source, 0, { position: [0, 0, 0] });
     const stream = new VertexStreamBuffer(POINT);
     stream.replace(source);
-    stream.count = 1;
+    stream.setCount(1);
     const version = stream.getVersion();
-    stream.count = 1;
+    stream.setCount(1);
     stream.commit(0, 0);
     expect(stream.getVersion()).toBe(version);
   });

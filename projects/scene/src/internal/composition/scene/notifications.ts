@@ -1,7 +1,11 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-type SceneNotificationKind = 'identity' | 'render' | 'composition';
+/**
+ * - `composition`: names, references, or joint connections changed; CPU references resolve immediately.
+ * - `frame-validity`: a frame became valid or invalid; resolution diagnostics refresh before the next render.
+ */
+type SceneNotificationKind = 'identity' | 'render' | 'composition' | 'frame-validity';
 
 const renderCallbacks = new WeakMap<HTMLElement, (source: HTMLElement, kind: SceneNotificationKind) => void>();
 

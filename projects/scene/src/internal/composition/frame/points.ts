@@ -4,6 +4,7 @@
 import { getFrameWorldMatrixPrecise } from './state.js';
 import { transformPointMat4 } from '../../math/mat4.js';
 import type { Matrix4, Vec3 } from '../../math/types.js';
+import { isFiniteVec3 } from '../../math/tuples.js';
 
 export function getWorldPoint(element: HTMLElement, point: Readonly<Vec3>): Readonly<Vec3> | null {
   return convertPoint(element, point, transformPointMat4);
@@ -24,10 +25,6 @@ function convertPoint(
   } catch {
     return null;
   }
-}
-
-function isFiniteVec3(value: unknown): value is Readonly<Vec3> {
-  return Array.isArray(value) && value.length === 3 && value.every(component => Number.isFinite(component));
 }
 
 function transformPointByInverseRigidMatrix(matrix: Matrix4, point: Readonly<Vec3>): Vec3 {

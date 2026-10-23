@@ -165,6 +165,23 @@ describe(SceneModel.metadata.tag, () => {
     expectTypeOf<Extract<keyof SceneModel, 'src' | 'description' | 'source'>>().toEqualTypeOf<never>();
   });
 
+  it('looks up unknown joints without reporting errors or suppressing model content', () => {
+    const { scene, content, unrelated, errors, resolve } = composition();
+    const entity = arm('arm');
+    scene.append(entity.model);
+    entity.model.joints.set('shoulder', 2);
+    resolve();
+
+    expect(entity.model.joints.get(' shoulder ')).toBe(entity.joint);
+    for (const name of ['missing', '', '   ']) {
+      expect(entity.model.joints.get(name)).toBeUndefined();
+      expect(isFrameChainValid(entity.body)).toBe(true);
+      expect(entity.tip.getWorldMatrix()[12]).toBe(2);
+      expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated, entity.body]);
+    }
+    expect(errors).toEqual([]);
+  });
+
   it('assigns a record of joint values and reports unknown names without skipping known joints', () => {
     const { scene, errors, resolve } = composition();
     const entity = arm('arm');
@@ -216,23 +233,32 @@ describe(SceneModel.metadata.tag, () => {
     expectTypeOf<SceneModel['bodies']>().toEqualTypeOf<SceneModelBodies>();
   });
 
-  it('reports unknown joints on the model, invalidates its chain, and recovers on a valid access', () => {
-    const { scene, content, unrelated, errors, resolve } = composition();
-    const entity = arm('arm');
-    scene.append(entity.model);
-    resolve();
-    entity.model.joints.set('missing', 1);
-    expect(errors).toContainEqual(expect.objectContaining({ code: 'model-joint', element: entity.model }));
-    expect(isFrameChainValid(entity.body)).toBe(false);
-    expect(
-      content
-        .compileRenderItems()
+  it.each(['shoulder', 'missing'])(
+    'preserves an unknown-joint assignment failure when looking up %s until a valid assignment',
+    name => {
+      const { scene, content, unrelated, errors, resolve } = composition();
+      const entity = arm('arm');
+      scene.append(entity.model);
+      resolve();
+      entity.model.joints.set('missing', 1);
+      expect(errors).toContainEqual(expect.objectContaining({ code: 'model-joint', element: entity.model }));
+      expect(isFrameChainValid(entity.body)).toBe(false);
+      expect(
+        content
+          .compileRenderItems()
 
-        .map(item => item.layer)
-    ).toEqual([unrelated]);
-    entity.model.joints.set('shoulder', 1);
-    expect(isFrameChainValid(entity.body)).toBe(true);
-  });
+          .map(item => item.layer)
+      ).toEqual([unrelated]);
+      expect(entity.model.joints.get(name)).toBe(name === 'shoulder' ? entity.joint : undefined);
+      expect(isFrameChainValid(entity.body)).toBe(false);
+      expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated]);
+      entity.model.joints.set('missing', 2);
+      expect(errors.filter(error => error.code === 'model-joint')).toHaveLength(1);
+      entity.model.joints.set('shoulder', 1);
+      expect(isFrameChainValid(entity.body)).toBe(true);
+      expect(content.compileRenderItems().map(item => item.layer)).toEqual([unrelated, entity.body]);
+    }
+  );
 
   it('rejects slash in bare names and scoped duplicates while unrelated content renders', () => {
     const { scene, content, unrelated, errors, resolve } = composition();

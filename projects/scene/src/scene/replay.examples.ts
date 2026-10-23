@@ -37,7 +37,7 @@ export const EpisodeReplay = {
       <div nve-layout="grid gap:none span-items:6">
         <nve-scene id="lerobot-replay-scene" aria-label="Recorded SO-100 robot and commanded tool path" style="height: 400px; min-width: 0;">
           <nve-scene-camera behavior="orbit" target="[0.1,0,0.12]" distance="0.75" polar-angle="0.9" azimuth="0.7" min-distance="0.15" max-distance="2" near="0.001" far="10"></nve-scene-camera>
-          <nve-scene-gridlines count="20" spacing="0.05"></nve-scene-gridlines>
+          <nve-scene-gridlines count="20" spacing="0.05" pattern="checkerboard"></nve-scene-gridlines>
           <nve-scene-axes length="0.1"></nve-scene-axes>
           <nve-scene-lines id="lerobot-observed-path" width-unit="pixel" topology="strip"></nve-scene-lines>
           <nve-scene-lines id="lerobot-command-path" width-unit="pixel" topology="strip"></nve-scene-lines>

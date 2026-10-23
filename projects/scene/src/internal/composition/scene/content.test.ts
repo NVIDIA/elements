@@ -36,6 +36,31 @@ describe(SceneContent.name, () => {
     expect(before.map(item => item.frameMatrix[12])).toEqual([2, 2]);
   });
 
+  it('skips name and reference resolution until composition inputs are invalidated', () => {
+    const host = document.createElement('nve-scene');
+    const first = document.createElement('nve-scene-frame');
+    const second = document.createElement('nve-scene-frame');
+    const points = document.createElement('nve-scene-points');
+    first.name = 'target';
+    points.frame = 'target';
+    host.append(first, second, points);
+    setFrameTransform(first, { position: [2, 0, 0], orientation: [0, 0, 0, 1] });
+    setFrameTransform(second, { position: [5, 0, 0], orientation: [0, 0, 0, 1] });
+    const content = new SceneContent(host);
+    content.refresh();
+    content.resolveFrames();
+    expect(content.compileRenderItems().map(item => item.frameMatrix[12])).toEqual([2]);
+
+    first.name = 'other';
+    second.name = 'target';
+    content.resolveFrames();
+    expect(content.compileRenderItems().map(item => item.frameMatrix[12])).toEqual([2]);
+
+    content.invalidateComposition();
+    content.resolveFrames();
+    expect(content.compileRenderItems().map(item => item.frameMatrix[12])).toEqual([5]);
+  });
+
   it('keeps a nested scene independent of frames surrounding its host', () => {
     const surrounding = document.createElement('nve-scene-frame');
     const host = document.createElement('nve-scene');

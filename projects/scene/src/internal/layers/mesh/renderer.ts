@@ -4,16 +4,16 @@
 import type { Matrix4 } from '../../math/types.js';
 import { hasVersionedRangeCoverage } from '../../structures/versioned-range-journal.js';
 import { identityMat4, multiplyMat4Into, writeMat4ToFloat32 } from '../../math/mat4.js';
-import type { SceneGPUCommandEncoder } from '../../gpu/platform.js';
+import { supportsSceneGPUCompute, type SceneGPUCommandEncoder } from '../../gpu/platform.js';
 import { compileHeightfield, prepareHeightfield } from '../heightfield/compile.js';
 import {
   HeightfieldGPUCompiler,
   sameHeightfieldSource,
   sameHeightfieldTopology,
-  supportsHeightfieldGPU,
   type HeightfieldGPUState
 } from '../heightfield/gpu.js';
 import { createMeshPipelines, type MeshPipelines } from './pipelines.js';
+import { MeshGPUCompiler, meshGPUIsEligible, sameMeshGPUTopology, type MeshGPUState } from './gpu.js';
 import {
   createMeshGeometryResources,
   createMeshTextureResource,
@@ -21,7 +21,6 @@ import {
   destroyMeshGeometryResources,
   destroyMeshTextureResource,
   uploadMeshGeometryBuffer,
-  type MeshGeometryResources,
   type MeshTextureResource
 } from './resources.js';
 import {
@@ -35,25 +34,32 @@ import {
 import type { PickPipelinePair } from '../../rendering/picking/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
 import type { MeshRenderItem } from '../../rendering/render-items.js';
-import type { HeightfieldMeshData, MeshGeometryAttribute, MeshRenderData } from './render-data.js';
+import type { HeightfieldMeshData } from './render-data.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
 import type {
   SceneGPUBindGroup,
   SceneGPUBindGroupDescriptor,
   SceneGPUBuffer,
-  SceneGPUBufferDescriptor,
-  SceneGPUDevice,
-  SceneGPUQueue,
-  SceneGPURenderPipelineDescriptor,
-  SceneGPURenderPass,
   SceneGPURenderPipeline,
   SceneGPUSampler,
-  SceneGPUSamplerDescriptor,
-  SceneGPUShaderModule,
-  SceneGPUShaderModuleDescriptor,
-  SceneGPUTexture,
-  SceneGPUTextureDescriptor
+  SceneGPUTexture
 } from '../../gpu/platform.js';
+import type { MeshGeometryPass as GeometryPass, MeshRendererDevice } from './renderer-types.js';
+export type { MeshRendererDevice } from './renderer-types.js';
+import type {
+  MeshLayerResources,
+  MeshAttributeUploadOptions,
+  MeshInstanceSource,
+  CPUMeshLayerResources,
+  HeightfieldLayerResources,
+  RenderableMeshResources,
+  TextureBindGroup,
+  MeshPreparation,
+  PreparedMesh,
+  HeightfieldFallbackPreparation,
+  PreparedHeightfieldFallback,
+  HeightfieldTopologyPreparation
+} from './renderer-types.js';
 import { hasSameUniformValues } from '../../rendering/partition-resources.js';
 import {
   createPartitionUniformResources,
@@ -83,38 +89,6 @@ import {
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_UNIFORM = 0x40;
 const IDENTITY_MARKER_BYTES = createIdentityMarkerBytes();
-export interface MeshRendererDevice extends SceneGPUDevice {
-  readonly queue: SceneGPUQueue & {
-    copyExternalImageToTexture(
-      source: { source: ImageBitmap },
-      destination: { texture: SceneGPUTexture },
-      copySize: { width: number; height: number }
-    ): void;
-    writeBuffer(buffer: SceneGPUBuffer, offset: number, data: ArrayBufferView): void;
-    writeTexture(
-      destination: { texture: SceneGPUTexture },
-      data: ArrayBufferView,
-      layout: { bytesPerRow: number },
-      size: { width: number; height: number }
-    ): void;
-  };
-  createBindGroup(descriptor: SceneGPUBindGroupDescriptor): SceneGPUBindGroup;
-  createBuffer(descriptor: SceneGPUBufferDescriptor): SceneGPUBuffer;
-  createRenderPipeline(descriptor: SceneGPURenderPipelineDescriptor): SceneGPURenderPipeline;
-  createSampler(descriptor?: SceneGPUSamplerDescriptor): SceneGPUSampler;
-  createShaderModule(descriptor: SceneGPUShaderModuleDescriptor): SceneGPUShaderModule;
-  createTexture(descriptor: SceneGPUTextureDescriptor): SceneGPUTexture;
-}
-
-interface GeometryPass extends SceneGPURenderPass {
-  draw(vertexCount: number, instanceCount?: number): void;
-  drawIndexed(indexCount: number, instanceCount?: number): void;
-  setBindGroup(index: number, bindGroup: SceneGPUBindGroup): void;
-  setIndexBuffer(buffer: SceneGPUBuffer, indexFormat: 'uint32'): void;
-  setPipeline(pipeline: SceneGPURenderPipeline): void;
-  setVertexBuffer(slot: number, buffer: SceneGPUBuffer): void;
-}
-
 type LayerBindGroups = readonly [SceneGPUBindGroup, SceneGPUBindGroup];
 interface LayerResources {
   readonly instance: SharedInstanceBufferLease;
@@ -128,68 +102,6 @@ interface LayerPartitionResources {
   readonly recordCount: number;
   readonly uniform: SceneGPUBuffer;
   readonly uniformValues: Float32Array;
-}
-
-interface MeshLayerResources {
-  geometry: MeshGeometryResources;
-  heightfieldSource?: HeightfieldMeshData;
-  processed: ProcessedMeshGeometry;
-  source: MeshGeometrySource;
-  texture?: MeshTextureResource;
-  readonly textureBindGroups: WeakMap<SceneGPURenderPipeline, TextureBindGroup>;
-}
-
-interface HeightfieldLayerResources {
-  readonly geometry: MeshGeometryResources;
-  readonly state: HeightfieldGPUState;
-  readonly textureBindGroups: WeakMap<SceneGPURenderPipeline, TextureBindGroup>;
-}
-
-type RenderableMeshResources = MeshLayerResources | HeightfieldLayerResources;
-
-interface TextureBindGroup {
-  readonly bindGroup: SceneGPUBindGroup;
-  readonly texture: SceneGPUTexture;
-}
-
-interface MeshPreparation {
-  readonly item: MeshRenderItem;
-  readonly source: MeshGeometrySource;
-}
-
-interface PreparedMesh {
-  readonly geometry: MeshGeometryResources;
-  readonly processed: ProcessedMeshGeometry;
-  readonly source: MeshGeometrySource;
-}
-
-interface HeightfieldFallbackPreparation {
-  readonly source: HeightfieldMeshData;
-}
-
-interface PreparedHeightfieldFallback {
-  readonly geometry: MeshGeometryResources;
-  readonly processed: ProcessedMeshGeometry;
-  readonly source: HeightfieldMeshData;
-}
-
-interface HeightfieldTopologyPreparation {
-  source: HeightfieldMeshData;
-}
-
-interface MeshInstanceSource {
-  readonly bytes: Uint8Array;
-  readonly count: number;
-  readonly ranges: readonly { readonly offset: number; readonly size: number }[];
-}
-
-interface MeshAttributeUploadOptions {
-  readonly attribute: Exclude<MeshGeometryAttribute, 'indices'>;
-  readonly buffer: SceneGPUBuffer;
-  readonly changed: boolean;
-  readonly historyComplete: boolean;
-  readonly data: MeshRenderData;
-  readonly values: Float32Array;
 }
 
 // Bound API calls when one source vertex fans out to many separated triangle corners.
@@ -210,7 +122,7 @@ interface PublishMeshPreparationOptions {
 }
 
 interface PublishMeshUpdateOptions {
-  readonly existing: MeshLayerResources;
+  readonly existing: CPUMeshLayerResources;
   readonly item: MeshRenderItem;
   readonly task: GenerationTask<MeshPreparation>;
   readonly processed: ProcessedMeshGeometry;
@@ -219,6 +131,9 @@ interface PublishMeshUpdateOptions {
 /** Deferred mesh-only GPU ownership and draw orchestration. */
 export class MeshRenderer {
   #device: MeshRendererDevice;
+  #meshCompiler?: MeshGPUCompiler;
+  #meshComputeDisabled = false;
+  readonly #meshStates = new Set<MeshGPUState>();
   #heightfieldCompiler?: HeightfieldGPUCompiler;
   #heightfieldFallbackPreparations = new GenerationTasks<HTMLElement, HeightfieldFallbackPreparation>();
   #heightfieldIndexPreparations = new GenerationTasks<HTMLElement, HeightfieldTopologyPreparation>();
@@ -250,7 +165,7 @@ export class MeshRenderer {
     this.#pipelines = createMeshPipelines(device, format);
     this.#sampler = device.createSampler({ magFilter: 'linear', minFilter: 'linear' });
     this.#whiteTexture = createMeshWhiteTexture(device);
-    if (supportsHeightfieldGPU(device)) {
+    if (supportsSceneGPUCompute(device)) {
       try {
         this.#heightfieldCompiler = new HeightfieldGPUCompiler(device);
       } catch {
@@ -260,7 +175,7 @@ export class MeshRenderer {
     }
   }
 
-  // eslint-disable-next-line max-statements -- Preparation dispatch keeps each retained-resource path explicit.
+  // eslint-disable-next-line complexity, max-statements -- Preparation dispatch keeps each retained-resource path explicit.
   prepare(item: MeshRenderItem, projection: Matrix4): void {
     if (!isReadyMesh(item)) {
       this.#cancelLayerPreparations(item.layer);
@@ -275,6 +190,7 @@ export class MeshRenderer {
       this.#prepareHeightfieldFallback(item, projection, item.data.heightfield);
       return;
     }
+    if (this.#prepareComputedMesh(item, projection)) return;
     const existing = this.#layers.get(item.layer);
     const installed = this.#installPreparedMesh(item, existing);
     const processed = installed ? installed.processed : this.#processGeometry(item, existing);
@@ -305,7 +221,7 @@ export class MeshRenderer {
   }
 
   #processGeometry(item: MeshRenderItem, existing: MeshLayerResources | undefined): ProcessedMeshGeometry | null {
-    if (existing && !existing.heightfieldSource && sameMeshGeometrySource(existing.source, item)) {
+    if (existing?.processed && !existing.heightfieldSource && sameMeshGeometrySource(existing.source, item)) {
       this.#meshPreparations.cancel(item.layer);
       return existing.processed;
     }
@@ -314,7 +230,11 @@ export class MeshRenderer {
       return null;
     }
     this.#meshPreparations.cancel(item.layer);
-    if (!existing || existing.heightfieldSource || existing.source.topologyVersion !== item.data.topologyVersion) {
+    if (
+      !existing?.processed ||
+      existing.heightfieldSource ||
+      existing.source.topologyVersion !== item.data.topologyVersion
+    ) {
       return processMeshGeometry(item.data);
     }
     return updateFlatGeometry(item.data, existing.processed);
@@ -328,7 +248,9 @@ export class MeshRenderer {
     const task = this.#meshPreparations.start(item.layer, { item: preparationItem, source });
     const context = createPreparationContext(task.isCurrent);
     const work =
-      existing && !existing.heightfieldSource && existing.source.topologyVersion === item.data.topologyVersion
+      existing?.processed &&
+      !existing.heightfieldSource &&
+      existing.source.topologyVersion === item.data.topologyVersion
         ? prepareFlatGeometryUpdate(preparationItem.data, existing.processed, context)
         : prepareMeshGeometry(preparationItem.data, context);
     void work
@@ -375,8 +297,13 @@ export class MeshRenderer {
     this.#requestRender();
   }
 
-  #canUpdatePreparedMesh(existing: MeshLayerResources, source: MeshGeometrySource, layer: HTMLElement): boolean {
+  #canUpdatePreparedMesh(
+    existing: MeshLayerResources,
+    source: MeshGeometrySource,
+    layer: HTMLElement
+  ): existing is CPUMeshLayerResources {
     return (
+      existing.processed !== undefined &&
       !existing.heightfieldSource &&
       existing.source.topologyVersion === source.topologyVersion &&
       this.#layers.get(layer) === existing
@@ -432,7 +359,11 @@ export class MeshRenderer {
     processed: ProcessedMeshGeometry,
     existing: MeshLayerResources | undefined
   ): MeshLayerResources {
-    if (!existing || existing.heightfieldSource || existing.source.topologyVersion !== item.data.topologyVersion) {
+    if (
+      !existing?.processed ||
+      existing.heightfieldSource ||
+      existing.source.topologyVersion !== item.data.topologyVersion
+    ) {
       return this.#replaceGeometryResources({
         existing,
         layer: item.layer,
@@ -451,7 +382,8 @@ export class MeshRenderer {
 
   #replaceGeometryResources(options: ReplaceGeometryResourcesOptions): MeshLayerResources {
     const { existing, heightfieldSource, layer, prepared } = options;
-    if (existing) destroyMeshGeometryResources(existing.geometry);
+    if (existing) this.#destroyGeometry(existing);
+    this.#retireHeightfield(layer);
     const replacement: MeshLayerResources = {
       geometry: prepared.geometry,
       processed: prepared.processed,
@@ -472,6 +404,48 @@ export class MeshRenderer {
 
   encodeCompute(encoder: SceneGPUCommandEncoder): void {
     this.#heightfieldCompiler?.encode(encoder, this.#heightfieldStates);
+    this.#meshCompiler?.encode(encoder, this.#meshStates);
+  }
+
+  // eslint-disable-next-line max-statements -- Installation keeps source uploads, retained textures, and GPU ownership in one transition.
+  #prepareComputedMesh(item: MeshRenderItem, projection: Matrix4): boolean {
+    if (this.#meshComputeDisabled || !supportsSceneGPUCompute(this.#device)) return false;
+    if (!meshGPUIsEligible(item.data, this.#device)) return false;
+    const compiler = this.#getMeshCompiler();
+    if (!compiler) return false;
+    this.#meshPreparations.cancel(item.layer);
+    this.#discardPreparedMesh(item.layer);
+    let resources = this.#layers.get(item.layer);
+    if (resources?.computation && sameMeshGPUTopology(resources.computation, item.data)) {
+      compiler.update(resources.computation, item.data);
+      resources.source = meshSource(item);
+    } else {
+      const computation = compiler.create(item.data);
+      if (resources) this.#destroyGeometry(resources);
+      resources = {
+        computation,
+        geometry: computation.geometry,
+        source: meshSource(item),
+        texture: resources?.texture,
+        textureBindGroups: new WeakMap()
+      };
+      this.#meshStates.add(computation);
+      this.#layers.set(item.layer, resources);
+      this.#retireHeightfield(item.layer);
+    }
+    this.#prepareRetainedMesh(item, projection, resources);
+    return true;
+  }
+
+  #getMeshCompiler(): MeshGPUCompiler | undefined {
+    if (!this.#meshCompiler && supportsSceneGPUCompute(this.#device)) {
+      try {
+        this.#meshCompiler = new MeshGPUCompiler(this.#device);
+      } catch {
+        this.#meshComputeDisabled = true;
+      }
+    }
+    return this.#meshCompiler;
   }
 
   // eslint-disable-next-line complexity, max-statements -- Topology preparation preserves the last valid generation.
@@ -505,6 +479,9 @@ export class MeshRenderer {
       this.#discardPreparedHeightfield(item.layer);
       if (!sameHeightfieldSource(resources.state.source, source)) compiler.update(resources.state, source);
     }
+    const previousMesh = this.#layers.get(item.layer);
+    if (previousMesh) this.#destroyMeshLayerResources(previousMesh);
+    this.#layers.delete(item.layer);
     const layer = this.#ensureInstanceResources(item);
     if (layer) this.#writeUniforms(layer, item, projection);
   }
@@ -557,7 +534,11 @@ export class MeshRenderer {
   // eslint-disable-next-line max-statements -- Retained data, pending work, and staged resources have separate cleanup paths.
   #prepareHeightfieldFallback(item: MeshRenderItem, projection: Matrix4, source: HeightfieldMeshData): void {
     const existing = this.#layers.get(item.layer);
-    if (existing?.heightfieldSource && sameHeightfieldSource(existing.heightfieldSource, source)) {
+    if (
+      existing?.processed &&
+      existing.heightfieldSource &&
+      sameHeightfieldSource(existing.heightfieldSource, source)
+    ) {
       this.#heightfieldFallbackPreparations.cancel(item.layer);
       this.#discardPreparedHeightfieldFallback(item.layer);
       this.#prepareRetainedMesh(item, projection, existing);
@@ -648,7 +629,11 @@ export class MeshRenderer {
     this.#preparedHeightfieldFallbacks.set(layer, prepared);
   }
 
-  #uploadChangedBuffers(resources: MeshLayerResources, processed: ProcessedMeshGeometry, item: MeshRenderItem): void {
+  #uploadChangedBuffers(
+    resources: CPUMeshLayerResources,
+    processed: ProcessedMeshGeometry,
+    item: MeshRenderItem
+  ): void {
     if (resources.processed === processed) return;
     const data = processed.geometryUploadRanges
       ? { ...item.data, geometryUploadRanges: processed.geometryUploadRanges }
@@ -793,6 +778,7 @@ export class MeshRenderer {
     this.#heightfields.forEach(resources => this.#destroyHeightfieldResources(resources));
     this.#heightfields.clear();
     this.#heightfieldStates.clear();
+    this.#meshStates.clear();
     this.#heightfieldFallbackPreparations.clear();
     this.#heightfieldIndexPreparations.clear();
     this.#meshPreparations.clear();
@@ -927,14 +913,28 @@ export class MeshRenderer {
   }
 
   #destroyMeshLayerResources(resources: MeshLayerResources): void {
-    destroyMeshGeometryResources(resources.geometry);
+    this.#destroyGeometry(resources);
     destroyMeshTextureResource(resources.texture);
+  }
+
+  #destroyGeometry(resources: MeshLayerResources): void {
+    destroyMeshGeometryResources(resources.geometry);
+    if (resources.computation) {
+      this.#meshStates.delete(resources.computation);
+      this.#meshCompiler?.destroy(resources.computation);
+    }
   }
 
   #destroyHeightfieldResources(resources: HeightfieldLayerResources): void {
     this.#heightfieldStates.delete(resources.state);
     destroyMeshGeometryResources(resources.geometry);
     this.#heightfieldCompiler?.destroy(resources.state);
+  }
+
+  #retireHeightfield(layer: HTMLElement): void {
+    const previous = this.#heightfields.get(layer);
+    if (previous) this.#destroyHeightfieldResources(previous);
+    this.#heightfields.delete(layer);
   }
 
   #discardPreparedMesh(layer: HTMLElement): void {

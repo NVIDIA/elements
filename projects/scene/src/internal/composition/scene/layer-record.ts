@@ -36,6 +36,7 @@ import {
   type StreamSceneLayerKind
 } from '../../layers/registry.js';
 import { getElementFeatureId, updateElementFeatureIdInactive } from '../../interaction/element-feature-id.js';
+import { getGridlinesCheckerboard } from '../../layers/gridlines.js';
 import type { SceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
 
 export type { SceneLayerKind } from '../../layers/registry.js';
@@ -148,8 +149,12 @@ function createStreamLayerRenderItem(
       type: 'point'
     };
   } else if (record.kind === 'line') {
+    const checkerboard = getGridlinesCheckerboard(layer);
     item = {
-      data,
+      checkerboard: checkerboard?.count,
+      data: checkerboard
+        ? { ...data, opaque: data.ready && checkerboard.opaque, transparent: data.ready && checkerboard.transparent }
+        : data,
       frameMatrix,
       interactive,
       layer,

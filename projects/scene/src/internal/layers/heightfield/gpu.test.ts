@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import type { SceneGPUBuffer, SceneGPUCommandEncoder, SceneGPUDevice } from '../../gpu/platform.js';
 import {
-  HeightfieldGPUCompiler,
-  HEIGHTFIELD_COMPUTE_SHADER,
-  supportsHeightfieldGPU,
-  type HeightfieldGPUState
-} from './gpu.js';
+  supportsSceneGPUCompute,
+  type SceneGPUBuffer,
+  type SceneGPUCommandEncoder,
+  type SceneGPUDevice
+} from '../../gpu/platform.js';
+import { HeightfieldGPUCompiler, HEIGHTFIELD_COMPUTE_SHADER, type HeightfieldGPUState } from './gpu.js';
 
 describe('heightfield GPU compilation', () => {
   it('creates descriptors, uploads sources, tracks pending updates, and destroys resources', () => {
@@ -121,7 +121,7 @@ describe('heightfield GPU compilation', () => {
       destroy: () => undefined
     };
 
-    expect(supportsHeightfieldGPU(device)).toBe(false);
+    expect(supportsSceneGPUCompute(device)).toBe(false);
   });
 
   it('should split oversized linear workloads across baseline-safe dispatch dimensions', () => {
@@ -136,8 +136,8 @@ describe('heightfield GPU compilation', () => {
       createShaderModule: () => ({}),
       destroy: () => undefined
     };
-    expect(supportsHeightfieldGPU(device)).toBe(true);
-    if (!supportsHeightfieldGPU(device)) throw new TypeError('Expected a heightfield-capable device.');
+    expect(supportsSceneGPUCompute(device)).toBe(true);
+    if (!supportsSceneGPUCompute(device)) throw new TypeError('Expected a heightfield-capable device.');
     const compiler = new HeightfieldGPUCompiler(device);
     const encoder: SceneGPUCommandEncoder = {
       beginComputePass: () => ({

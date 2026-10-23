@@ -5,6 +5,7 @@ import type { SceneBodyGeometry } from '../types.js';
 import type { GeometryDecoderOptions } from '../decoders.js';
 import { MAX_GEOMETRY_BYTES, GEOMETRY_TRIANGLE_BYTES } from '../limits.js';
 import { writeTriangleNormal } from '../../../math/triangle-normal.js';
+import { scenePlatform } from '../../../gpu/platform.js';
 
 interface StlGeometry {
   positions: Float32Array;
@@ -120,6 +121,6 @@ function readVertices(next: () => string | undefined, triangle: number, geometry
 }
 
 async function yieldDecode(signal?: AbortSignal): Promise<void> {
-  await new Promise<void>(resolve => setTimeout(resolve, 0));
+  await scenePlatform.yieldForPreparation();
   signal?.throwIfAborted();
 }

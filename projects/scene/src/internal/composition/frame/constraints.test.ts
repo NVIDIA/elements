@@ -31,11 +31,25 @@ describe('frame constraints', () => {
     setFrameConstraint(first, 'pose', true);
     setFrameConstraint(first, 'pose', false);
     setFrameConstraint(first, 'pose', false);
-    expect(notify).toHaveBeenCalledExactlyOnceWith(first, 'render');
+    expect(notify).toHaveBeenCalledExactlyOnceWith(first, 'frame-validity');
     expect(hasFrameConstraintFailure(second)).toBe(false);
     setFrameConstraint(first, 'pose', true);
     setFrameConstraint(first, 'pose', true);
     expect(notify).toHaveBeenCalledTimes(2);
+    release();
+  });
+
+  it('reports a validity change only when the overall constraint state flips', () => {
+    const scene = document.createElement('nve-scene');
+    const element = document.createElement('div');
+    scene.append(element);
+    const notify = vi.fn();
+    const release = registerSceneRenderNotifications(scene, notify);
+    setFrameConstraint(element, 'pose', false);
+    setFrameConstraint(element, 'connection', false);
+    setFrameConstraint(element, 'pose', true);
+    setFrameConstraint(element, 'connection', true);
+    expect(notify.mock.calls.map(([, kind]) => kind)).toEqual(['frame-validity', 'render', 'render', 'frame-validity']);
     release();
   });
 });

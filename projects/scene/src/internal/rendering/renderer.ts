@@ -15,7 +15,13 @@ import { srgbByteToLinear } from '../color/color.js';
 import type { PickScope, ScenePickRequest, ScenePickResult } from '../interaction/picking/routing.js';
 import type { Matrix4, PreciseMat4 } from '../math/types.js';
 import type { GeometryRenderer } from './geometry-renderer.js';
-import { hasPickTargets, isInteractiveItem, isTransparentItem, type SceneRenderItem } from './render-items.js';
+import {
+  hasPickTargets,
+  isInteractiveItem,
+  isTransparentItem,
+  itemRequiresGeometry,
+  type SceneRenderItem
+} from './render-items.js';
 import type { PickRenderer } from './picking/renderer.js';
 import type { LinearColor, OitResources, RenderTargets } from './render-targets.js';
 
@@ -479,11 +485,5 @@ function createOpaquePassDescriptor(options: {
 }
 
 function hasRequiredGeometry(items: readonly SceneRenderItem[]): boolean {
-  return items.some(item => {
-    if (!item.data.ready) return false;
-    if ('type' in item && item.type === 'mesh') {
-      return item.data.identityInstance || (item.instances?.count ?? 0) > 0;
-    }
-    return item.data.count > 0;
-  });
+  return items.some(itemRequiresGeometry);
 }
