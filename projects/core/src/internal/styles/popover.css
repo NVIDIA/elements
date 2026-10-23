@@ -160,14 +160,7 @@
   /** top */
   :host([position='top']) {
     position-area: top center;
-  }
-
-  :host([position='top'][alignment='start']) {
-    position-area: top left;
-  }
-
-  :host([position='top'][alignment='end']) {
-    position-area: top right;
+    position-try-fallbacks: top, bottom, left, right;
   }
 
   :host([position='top'][alignment='start']) {
@@ -181,6 +174,7 @@
   /** bottom */
   :host([position='bottom']) {
     position-area: bottom center;
+    position-try-fallbacks: bottom, top, left, right;
   }
 
   :host([position='bottom'][alignment='start']) {
@@ -194,6 +188,7 @@
   /** left */
   :host([position='left']) {
     position-area: left center;
+    position-try-fallbacks: left, right, top, bottom;
   }
 
   :host([position='left'][alignment='end']) {
@@ -207,6 +202,7 @@
   /** right */
   :host([position='right']) {
     position-area: right center;
+    position-try-fallbacks: right, left, top, bottom;
   }
 
   :host([position='right'][alignment='end']) {
@@ -215,22 +211,6 @@
 
   :host([position='right'][alignment='start']) {
     position-area: right span-bottom;
-  }
-
-  :host([position='top']) {
-    position-try-fallbacks: top, bottom, left, right;
-  }
-
-  :host([position='bottom']) {
-    position-try-fallbacks: bottom, top, left, right;
-  }
-
-  :host([position='left']) {
-    position-try-fallbacks: left, right, top, bottom;
-  }
-
-  :host([position='right']) {
-    position-try-fallbacks: right, left, top, bottom;
   }
 }
 
