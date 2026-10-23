@@ -1,11 +1,15 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import {
   createWireitLineParser,
   processTreeRss,
   profileOptions,
+  runChild,
   verifyLighthouseExecution,
+  verifyLighthouseSummary,
   wireitGraph
 } from './ci-profile.js';
 
@@ -34,6 +38,23 @@ test('profiling accepts a single fresh-run sample without changing cold CI defau
   assert.throws(() => profileOptions(['--reset']));
 });
 
+test('test summaries cannot hide skipped or missing assertions behind a successful command', () => {
+  const summary = {
+    success: true,
+    numFailedTests: 0,
+    numTotalTests: 2,
+    numPassedTests: 2,
+    testResults: [{ assertionResults: [{ status: 'passed' }, { status: 'passed' }] }]
+  };
+  assert.doesNotThrow(() => verifyLighthouseSummary(summary, 'project'));
+  assert.throws(
+    () => verifyLighthouseSummary({ ...summary, numPassedTests: 1 }, 'project'),
+    /skipped Lighthouse tests/
+  );
+  assert.throws(() => verifyLighthouseSummary({ ...summary, testResults: [] }, 'project'), /skipped Lighthouse tests/);
+  assert.throws(() => verifyLighthouseSummary({ ...summary, success: false }, 'project'), /skipped Lighthouse tests/);
+});
+
 test('Wireit parser handles chunk boundaries and exposes unfinished commands', () => {
   let time = 100;
   const parser = createWireitLineParser({ now: () => time });
@@ -59,4 +80,25 @@ test('resource samples include every descendant without counting unrelated proce
     ),
     60
   );
+});
+
+test('failed commands remain failures and preserve both diagnostic streams and resource evidence', async () => {
+  const directory = mkdtempSync(path.join(tmpdir(), 'elements-profiler-failure-'));
+  const logPath = path.join(directory, 'failure.log');
+  try {
+    await assert.rejects(
+      runChild(process.execPath, ['-e', 'console.log("test output"); console.error("test failure"); process.exit(7)'], {
+        logPath,
+        resources: true
+      }),
+      /exit code 7/
+    );
+    const log = readFileSync(logPath, 'utf8');
+    assert.match(log, /test output/);
+    assert.match(log, /test failure/);
+    const resources = JSON.parse(readFileSync(`${logPath}.resources.json`, 'utf8'));
+    assert.ok(Number.isFinite(resources.userCpuSeconds));
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });

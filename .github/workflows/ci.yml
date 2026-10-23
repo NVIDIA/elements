@@ -144,6 +144,7 @@ jobs:
           include-hidden-files: true
           path: |
             .metrics/ci-profile*
+            .metrics/metrics.lighthouse.txt
             projects/*/.lighthouse/dist/report.json
             projects/*/coverage/lighthouse/*
             projects/site/coverage/unit/summary.json

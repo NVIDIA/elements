@@ -52,11 +52,14 @@ export class LighthouseRunner {
     });
   }
 
-  async open() {
+  async open({ workers = LIGHTHOUSE_WORKERS } = {}) {
+    if (!Number.isInteger(workers) || workers < 1 || workers > LIGHTHOUSE_WORKERS) {
+      throw new Error(`Lighthouse requires between 1 and ${LIGHTHOUSE_WORKERS} workers`);
+    }
     // Global setup owns the browsers. Each Vitest worker reads only its own ports.
     // The project-wide browser lock bounds machine-wide audit concurrency.
     this.#pool = Array.from(
-      { length: LIGHTHOUSE_WORKERS },
+      { length: workers },
       (_, index) =>
         new VitePlaywrightRunner({
           runnerID: RUNNER_ID,

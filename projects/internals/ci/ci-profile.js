@@ -73,6 +73,20 @@ export function verifyLighthouseExecution(scripts, graph) {
   }
 }
 
+export function verifyLighthouseSummary(summary, id) {
+  const assertions = summary.testResults?.flatMap(result => result.assertionResults) ?? [];
+  if (
+    !summary.success ||
+    summary.numFailedTests ||
+    !summary.numTotalTests ||
+    summary.numPassedTests !== summary.numTotalTests ||
+    assertions.length !== summary.numTotalTests ||
+    assertions.some(assertion => assertion.status !== 'passed')
+  ) {
+    throw new Error(`Invalid or skipped Lighthouse tests for ${id}`);
+  }
+}
+
 function normalizeScriptId(label) {
   return label.includes(':') ? label : `.:${label}`;
 }
@@ -284,7 +298,7 @@ export function processTreeRss(rows, rootPid) {
   return rows.filter(row => descendants.has(row.pid)).reduce((sum, row) => sum + row.rssKiB, 0);
 }
 
-function runChild(command, args, { env = process.env, parser, logPath, resources = false }) {
+export function runChild(command, args, { env = process.env, parser, logPath, resources = false, stream = false }) {
   return new Promise((resolve, reject) => {
     const child = spawn(resources ? '/usr/bin/time' : command, resources ? ['-p', command, ...args] : args, {
       cwd: ROOT_DIR,
@@ -316,9 +330,11 @@ function runChild(command, args, { env = process.env, parser, logPath, resources
     child.stdout.on('data', chunk => {
       stdout += chunk;
       parser?.write(chunk);
+      if (stream) process.stdout.write(chunk);
     });
     child.stderr.on('data', chunk => {
       stderr += chunk;
+      if (stream) process.stderr.write(chunk);
     });
     child.on('error', error => {
       clearInterval(interval);
@@ -327,12 +343,13 @@ function runChild(command, args, { env = process.env, parser, logPath, resources
     child.on('close', (code, signal) => {
       clearInterval(interval);
       writeFileSync(logPath, `${stdout}${stderr ? `\n--- stderr ---\n${stderr}` : ''}`);
+      usage.userCpuSeconds = Number(stderr.match(/^user\s+([\d.]+)$/m)?.[1]);
+      usage.systemCpuSeconds = Number(stderr.match(/^sys\s+([\d.]+)$/m)?.[1]);
+      if (resources) writeFileSync(`${logPath}.resources.json`, JSON.stringify(usage, null, 2));
       if (code !== 0) {
         reject(new Error(`${command} ${args.join(' ')} failed with ${signal ?? `exit code ${code}`}`));
         return;
       }
-      usage.userCpuSeconds = Number(stderr.match(/^user\s+([\d.]+)$/m)?.[1]);
-      usage.systemCpuSeconds = Number(stderr.match(/^sys\s+([\d.]+)$/m)?.[1]);
       resolve(usage);
     });
   });
@@ -369,7 +386,8 @@ async function benchmarkRun(index, temporaryDirectory, options, graph) {
     },
     parser,
     logPath: ciLog,
-    resources: true
+    resources: true,
+    stream: options.target === 'lighthouse'
   });
   const durationMs = performance.now() - start;
   const parsed = parser.finish();
@@ -404,8 +422,7 @@ async function benchmarkRun(index, temporaryDirectory, options, graph) {
               });
             if (!summaryPath) throw new Error(`No fresh test summary for ${task.id}`);
             const summary = JSON.parse(readFileSync(summaryPath, 'utf8'));
-            if (!summary.success || summary.numFailedTests || !summary.numTotalTests)
-              throw new Error(`Invalid test summary for ${task.id}`);
+            verifyLighthouseSummary(summary, task.id);
             const reportDirectory = path.join(ROOT_DIR, directory, '.lighthouse/dist');
             let reports;
             if (directory !== 'projects/site') {
@@ -467,7 +484,15 @@ function copyLogs(runs) {
 function copyTemporaryLogs(temporaryDirectory) {
   mkdirSync(METRICS_DIR, { recursive: true });
   for (const fileName of readdirSync(temporaryDirectory)) {
-    if (fileName.startsWith('phases-')) continue;
+    if (fileName.startsWith('phases-')) {
+      for (const phaseFile of readdirSync(path.join(temporaryDirectory, fileName))) {
+        writeFileSync(
+          path.join(METRICS_DIR, `ci-profile-${fileName}-${phaseFile}`),
+          readFileSync(path.join(temporaryDirectory, fileName, phaseFile))
+        );
+      }
+      continue;
+    }
     writeFileSync(
       path.join(METRICS_DIR, `ci-profile-${fileName}`),
       readFileSync(path.join(temporaryDirectory, fileName))
