@@ -526,18 +526,37 @@ describe('renderBasePageHeader', () => {
     { url: '/docs/about/support/', catalog: false, starters: false }
   ])('should link to the catalog and select the current header section on $url', ({ url, catalog, starters }) => {
     const html = renderBasePageHeader({ page: { url } });
-    const catalogButton = html.match(/<nve-button([^>]*)><a href="([^"]+)">Catalog<\/a>/);
-    const startersButton = html.match(/<nve-button([^>]*)><a href="([^"]+)">Starters<\/a>/);
+    const elementsButton = html.match(/<nve-button([^>]*)><a href="([^"]+)">Elements<\/a>/);
+    const integrationsButton = html.match(/<nve-button([^>]*)><a href="([^"]+)">Integrations<\/a>/);
 
-    expect(catalogButton?.[2]).toBe('/docs/elements/');
-    expect(catalogButton?.[1].includes('selected')).toBe(catalog);
-    expect(startersButton?.[2]).toBe('/docs/integrations/');
-    expect(startersButton?.[1].includes('selected')).toBe(starters);
+    expect(elementsButton?.[2]).toBe('/docs/elements/');
+    expect(elementsButton?.[1].includes('selected')).toBe(catalog);
+    expect(integrationsButton?.[2]).toBe('/docs/integrations/');
+    expect(integrationsButton?.[1].includes('selected')).toBe(starters);
     expect(html).toContain('<a slot="prefix" href="/">NVIDIA Elements</a>');
   });
 });
 
 describe('renderDocsNav', () => {
+  it.each([
+    { url: '/examples/', internal: true, allExamples: true, button: false },
+    { url: '/examples/button/', internal: false, allExamples: false, button: false },
+    { url: '/docs/elements/button/examples/', internal: false, allExamples: false, button: true },
+    { url: '/docs/api-design/', internal: true, allExamples: false, button: false },
+    { url: '/docs/internal/guidelines/testing/', internal: true, allExamples: false, button: false },
+    { url: '/', internal: false, allExamples: false, button: false }
+  ])('should expand and select the current navigation section on $url', ({ url, internal, allExamples, button }) => {
+    const html = renderDocsNav({ page: { url } });
+    const internalNode = html.match(/<nve-tree-node([^>]*)>\s*<a href="\/docs\/api-design\/">Internal<\/a>/);
+    const allExamplesNode = html.match(/<nve-tree-node([^>]*)><a href="\/examples\/">All Examples<\/a>/);
+    const buttonNode = html.match(/<nve-tree-node([^>]*)><a href="\/docs\/elements\/button\/">Button<\/a>/);
+
+    expect(internalNode?.[1].includes('expanded')).toBe(internal);
+    expect(allExamplesNode?.[1].includes('highlighted')).toBe(allExamples);
+    expect(allExamplesNode?.[1].includes('selected')).toBe(allExamples);
+    expect(buttonNode?.[1].includes('highlighted selected')).toBe(button);
+  });
+
   it.each(
     ['/docs/viewport/', '/docs/viewport/gridlines/', '/docs/viewport/minimap/', '/docs/viewport/zoom-range/'].flatMap(
       component => ['', 'api/', 'examples/'].map(tab => `${component}${tab}`)
@@ -570,8 +589,10 @@ describe('renderDocsNav', () => {
   it('should link the elements section label to the component catalog', () => {
     const html = renderDocsNav({ page: { url: '/docs/elements/' } });
 
-    expect(html).toContain('<nve-tree-node expanded highlighted selected>');
-    expect(html).toContain('<a href="/docs/elements/">Elements</a>');
+    expect(html).toMatch(/<nve-tree-node expanded\s*>\s*<a href="\/docs\/elements\/">Elements<\/a>/);
+    expect(html).toContain(
+      '<nve-tree-node highlighted selected><a href="/docs/elements/">Overview</a></nve-tree-node>'
+    );
     expect(html).not.toContain('<a href="/docs/elements/accordion/">Elements</a>');
   });
 });
