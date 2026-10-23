@@ -70,6 +70,7 @@ describe('noInvalidSlottedElements', () => {
         '<nve-grid><ng-container><nve-grid-row></nve-grid-row></ng-container></nve-grid>',
         '<nve-button-group><nve-media-seek-button></nve-media-seek-button><nve-media-pause-button></nve-media-pause-button></nve-button-group>',
         '<nve-card><div></div></nve-card>',
+        '<nve-tabs><nve-tabs-item-group><nve-tabs-item>Tab</nve-tabs-item><button slot="suffix">Close</button></nve-tabs-item-group></nve-tabs>',
         '<nve-grid>dynamic rows</nve-grid>',
         {
           filename: 'documentation.md',
@@ -84,6 +85,15 @@ describe('noInvalidSlottedElements', () => {
     tester.run('invalid direct children', rule, {
       valid: [],
       invalid: [
+        {
+          code: '<nve-tabs-item-group><nve-button>Tab</nve-button></nve-tabs-item-group>',
+          errors: [
+            {
+              messageId: 'invalid-slotted-element',
+              data: { allowed: 'nve-tabs-item', child: 'nve-button', parent: 'nve-tabs-item-group' }
+            }
+          ]
+        },
         {
           code: '<nve-grid><table></table></nve-grid>',
           errors: [

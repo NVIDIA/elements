@@ -30,8 +30,9 @@ export const SLOTTED_ELEMENT_CONTRACTS = {
   'nve-steps': ['nve-steps-item'],
   'nve-switch': ['label', 'input', 'nve-control-message'],
   'nve-switch-group': ['label', 'nve-control-message', 'nve-switch'],
-  'nve-tabs': ['nve-tabs-item'],
+  'nve-tabs': ['nve-tabs-item', 'nve-tabs-item-group'],
   'nve-tabs-group': ['nve-tabs'],
+  'nve-tabs-item-group': ['nve-tabs-item'],
   'nve-tree': ['nve-tree-node']
 } as const satisfies Readonly<Record<string, readonly string[]>>;
 
