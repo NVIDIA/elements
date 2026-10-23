@@ -14,6 +14,7 @@ import {
 import type { SceneRenderItem } from '../../rendering/render-items.js';
 import { isInteractiveLayer } from '../../interaction/target.js';
 import { SCENE_LAYER_SELECTOR } from '../../layers/registry.js';
+import { getGridlinesStyleSampler } from '../../layers/gridlines.js';
 import {
   createSceneLayerRenderItem,
   isTechnicallyPickableLayer,
@@ -22,11 +23,14 @@ import {
 } from './layer-record.js';
 
 export class SceneContent {
+  #compositionDirty = true;
   #frames: HTMLElement[] = [];
   #joints: HTMLElement[] = [];
   #scoped = false;
   readonly #host: HTMLElement;
+  #layerIndexes = new Map<HTMLElement, number>();
   #layerRecords: SceneLayerRecord[] = [];
+  readonly #styleSamplers = new Map<HTMLElement, () => void>();
 
   constructor(host: HTMLElement) {
     this.#host = host;
@@ -61,19 +65,45 @@ export class SceneContent {
       const record = resolveSceneLayer(layer);
       return record ? [record] : [];
     });
+    this.#layerIndexes = new Map(this.#layerRecords.map((record, index) => [record.layer, index]));
+    this.#styleSamplers.clear();
+    for (const record of this.#layerRecords) this.#refreshStyleSampler(record.layer);
+    this.#compositionDirty = true;
   }
 
   refreshLayer(element: HTMLElement): void {
     const layer = element.matches(SCENE_LAYER_SELECTOR) ? element : element.closest<HTMLElement>(SCENE_LAYER_SELECTOR);
     if (!layer || layer.closest('nve-scene') !== this.#host) return;
-    const index = this.#layerRecords.findIndex(record => record.layer === layer);
-    if (index < 0) return;
+    const index = this.#layerIndexes.get(layer);
+    if (index === undefined) return;
     const record = resolveSceneLayer(layer);
     if (record) this.#layerRecords[index] = record;
+    this.#refreshStyleSampler(layer);
+  }
+
+  /** Samples only style-driven layers so inherited theme and stylesheet edits can request a render. */
+  sampleStyles(): void {
+    for (const sample of this.#styleSamplers.values()) sample();
+  }
+
+  get hasStyleSamplers(): boolean {
+    return this.#styleSamplers.size > 0;
+  }
+
+  #refreshStyleSampler(layer: HTMLElement): void {
+    const sample = getGridlinesStyleSampler(layer);
+    if (sample) this.#styleSamplers.set(layer, sample);
+    else this.#styleSamplers.delete(layer);
+  }
+
+  /** Defers name, joint, and reference resolution to the next render. */
+  invalidateComposition(): void {
+    this.#compositionDirty = true;
   }
 
   /** Keeps CPU references usable even before a GPU renderer becomes available. */
   resolveReferences(): void {
+    this.#compositionDirty = true;
     if (
       this.#joints.length > 0 ||
       this.#scoped ||
@@ -84,8 +114,17 @@ export class SceneContent {
       this.resolveFrames();
   }
 
+  /** Poses never change names, references, or connections, so animation frames skip resolution. */
   resolveFrames(): void {
-    this.#updateNamedFrames();
+    if (!this.#compositionDirty) return;
+    // Clear first so invalidations raised while resolving schedule one more pass.
+    this.#compositionDirty = false;
+    try {
+      this.#updateNamedFrames();
+    } catch (error) {
+      this.#compositionDirty = true;
+      throw error;
+    }
   }
 
   compileRenderItems(): SceneRenderItem[] {

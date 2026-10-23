@@ -2,7 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import type { SceneGPUBuffer, SceneGPUCommandEncoder, SceneGPUDevice } from '../../gpu/platform.js';
+import {
+  supportsSceneGPUCompute,
+  type SceneGPUBuffer,
+  type SceneGPUCommandEncoder,
+  type SceneGPUDevice
+} from '../../gpu/platform.js';
 import { FRUSTUM_WGSL } from '../../math/frustum.js';
 import { SCALED_ENCLOSING_RADIUS_WGSL } from '../../math/bounds.js';
 import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
@@ -10,7 +15,6 @@ import {
   destroyMarkerCompactionResources,
   MarkerCompactor,
   MARKER_COMPACTION_SHADER,
-  supportsMarkerCompaction,
   writeMarkerCompactionUniforms
 } from './compaction.js';
 
@@ -37,8 +41,8 @@ describe('marker compaction', () => {
       createShaderModule: () => ({}),
       destroy: () => undefined
     } satisfies SceneGPUDevice;
-    expect(supportsMarkerCompaction(device)).toBe(true);
-    if (!supportsMarkerCompaction(device)) throw new TypeError('Expected a compaction-capable device.');
+    expect(supportsSceneGPUCompute(device)).toBe(true);
+    if (!supportsSceneGPUCompute(device)) throw new TypeError('Expected a compaction-capable device.');
     const source = { destroy: vi.fn() };
     const uniform = { destroy: vi.fn() };
     const compactor = new MarkerCompactor(device);
@@ -140,7 +144,7 @@ describe('marker compaction', () => {
       destroy: () => undefined
     };
 
-    expect(supportsMarkerCompaction(device)).toBe(false);
+    expect(supportsSceneGPUCompute(device)).toBe(false);
   });
 });
 

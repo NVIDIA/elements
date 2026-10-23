@@ -17,6 +17,20 @@ export function gridVertexCount(count: number): number {
   return 8 * count + 4;
 }
 
+/** Packs opposite quad corners and both colors without allocating individual squares. */
+export function createCheckerboardVertices(options: {
+  readonly spacing: number;
+  readonly count: number;
+  readonly color: RGBA;
+  readonly alternateColor: RGBA;
+}): Uint8Array {
+  const extent = options.count * options.spacing;
+  const vertices = new Uint8Array(2 * LINE_VERTEX.stride);
+  writeLineVertex(vertices, 0, { color: options.color, position: [-extent, -extent, 0], width: 1 });
+  writeLineVertex(vertices, 1, { color: options.alternateColor, position: [extent, extent, 0], width: 1 });
+  return vertices;
+}
+
 /**
  * Builds X-parallel segments followed by Y-parallel segments on frame-local Z = 0.
  *

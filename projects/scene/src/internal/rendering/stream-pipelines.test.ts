@@ -12,7 +12,7 @@ describe(createStreamPipelines.name, () => {
     const descriptors: SceneGPURenderPipelineDescriptor[] = [];
     const shaderSources: string[] = [];
     const pipeline = { getBindGroupLayout: () => ({}) };
-    createStreamPipelines(
+    const pipelines = createStreamPipelines(
       {
         createCommandEncoder: () => ({ beginRenderPass: () => ({ end: () => undefined }), finish: () => ({}) }),
         createRenderPipeline: descriptor => {
@@ -72,5 +72,15 @@ describe(createStreamPipelines.name, () => {
         targets: [{ format: 'rgba16float' }, { format: 'r8unorm' }]
       });
     }
+
+    const checkerboard = pipelines.checkerboard;
+    expect(pipelines.checkerboard).toBe(checkerboard);
+    expect(descriptors).toHaveLength(10);
+    expect(shaderSources).toHaveLength(5);
+    expect(descriptors.slice(8).map(descriptor => descriptor.depthStencil)).toEqual([
+      expect.objectContaining({ depthBias: GRID_DEPTH_BIAS, depthWriteEnabled: true }),
+      expect.objectContaining({ depthBias: GRID_DEPTH_BIAS, depthWriteEnabled: false })
+    ]);
+    expect(descriptors[9]?.fragment).toMatchObject({ entryPoint: 'fragmentOit' });
   });
 });

@@ -20,3 +20,19 @@ export const Default = {
     </nve-scene>
   `
 };
+
+/**
+ * @summary Alternating squares provide a filled reference plane for robotics scenes. Set spacing for square size and count for the finite bounds.
+ */
+export const Checkerboard = {
+  render: () => html`
+    <nve-scene aria-label="Checkerboard reference plane">
+      <nve-scene-camera behavior="orbit"></nve-scene-camera>
+      <nve-scene-gridlines
+        pattern="checkerboard"
+        spacing="1"
+        count="10"
+      ></nve-scene-gridlines>
+    </nve-scene>
+  `
+};

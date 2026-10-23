@@ -14,7 +14,7 @@ import { PICK_UNIFORM_OFFSETS } from './uniform-offsets.js';
 
 describe(PICK_UNIFORM_OFFSETS.constructor.name, () => {
   it('should keep each pick ID aligned with its WGSL uniform layout', () => {
-    expect(PICK_UNIFORM_OFFSETS).toEqual({ line: 180, marker: 132, mesh: 144, stream: 156 });
+    expect(PICK_UNIFORM_OFFSETS).toEqual({ label: 160, line: 180, marker: 132, mesh: 144, stream: 156 });
   });
 });
 
