@@ -1,0 +1,81 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  display: block;
+  flex-shrink: 0;
+  min-inline-size: 0;
+  --gap: var(--nve-ref-space-xs);
+  --height: var(--nve-ref-size-800);
+  --padding: 0 var(--nve-ref-size-200);
+  --width: 100%;
+  --border-radius: var(--nve-ref-border-radius-sm);
+}
+
+[internal-host] {
+  display: flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+  inset: var(--border-inset, 0);
+  gap: var(--gap);
+  height: var(--height);
+  width: var(--width);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-image: linear-gradient(
+    color-mix(
+        in oklab,
+        var(--nve-sys-interaction-state-base) 100%,
+        var(--nve-sys-interaction-state-mix) var(--_tabs-group-interaction-state-ratio, 0)
+      )
+      0 0
+  );
+}
+
+slot:not([name]) {
+  display: flex;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+::slotted(nve-tabs-item) {
+  contain: none;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  --padding: 0;
+  --height: inherit;
+  --width: 100%;
+  --border-inset: 0;
+  --border-radius: inherit;
+  --_tabs-item-position: static;
+  --_tabs-item-background: none;
+}
+
+::slotted(nve-tabs-item)::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: var(--border-radius);
+  background-image: linear-gradient(
+    color-mix(
+        in oklab,
+        var(--nve-sys-interaction-state-base) 100%,
+        var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio)
+      )
+      0 0
+  );
+}
+
+slot[name] {
+  display: contents;
+}
+
+::slotted([slot='prefix']),
+::slotted([slot='suffix']) {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  align-self: center;
+}

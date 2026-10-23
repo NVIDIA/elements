@@ -2,6 +2,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 nve-tabs {
+  anchor-scope: --selected, --selected-group;
   --indicator-background: var(--nve-sys-accent-secondary-background);
   --indicator-height: var(--nve-ref-border-width-xl);
   --indicator-border-radius: var(--nve-ref-border-radius-sm);
@@ -35,8 +36,19 @@ nve-tabs[vertical] {
   }
 }
 
-nve-tabs-item {
-  &[selected] {
-    anchor-name: --selected;
-  }
+nve-tabs[vertical]:dir(rtl)::after {
+  left: auto;
+  right: anchor(right);
+}
+
+nve-tabs-item[selected] {
+  anchor-name: --selected;
+}
+
+nve-tabs-item-group:has(> nve-tabs-item[selected]) {
+  anchor-name: --selected-group;
+}
+
+nve-tabs:has(> nve-tabs-item-group > nve-tabs-item[selected])::after {
+  position-anchor: --selected-group;
 }

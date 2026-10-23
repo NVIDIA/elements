@@ -7,6 +7,9 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/dot/define.js';
 import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/menu/define.js';
 
 export default {
   title: 'Elements/Tabs',
@@ -35,7 +38,6 @@ export const Default = {
   </div>
 </nve-tabs-group>`
 };
-
 
 /**
  * @summary Borderless tabs variant for minimal visual styling without border emphasis.
@@ -72,19 +74,26 @@ export const BorderBackground = {
 };
 
 /**
- * @summary Tabs with notification dots for indicating unread content or alerts within tab sections.
+ * @summary Add icons and notification indicators around tab labels.
+ * @description Add Icons before tab labels and Dots after them using the `prefix` and `suffix` slots.
  */
-export const WithDots = {
+export const PrefixAndSuffix = {
   render: () => html`
 <nve-tabs behavior-select>
-  <nve-tabs-item>Tab 1</nve-tabs-item>
-  <nve-tabs-item>Tab 2</nve-tabs-item>
-  <nve-tabs-item>Tab 3 </nve-tabs-item>
   <nve-tabs-item selected>
-    Tab 4
-    <nve-dot aria-label="10 notifications">10</nve-dot>
+    <nve-icon slot="prefix" name="home" aria-hidden="true"></nve-icon>
+    Overview
+    <nve-dot slot="suffix" aria-label="10 notifications">10</nve-dot>
   </nve-tabs-item>
-  <nve-tabs-item>Tab 5</nve-tabs-item>
+  <nve-tabs-item>
+    <nve-icon slot="prefix" name="beaker" aria-hidden="true"></nve-icon>
+    Experiments
+  </nve-tabs-item>
+  <nve-tabs-item>
+    <nve-icon slot="prefix" name="gear" aria-hidden="true"></nve-icon>
+    Settings
+    <nve-dot slot="suffix" status="accent" size="sm" aria-hidden="true"></nve-dot>
+  </nve-tabs-item>
 </nve-tabs>`
 };
 
@@ -504,4 +513,48 @@ export const ExternalControls = {
     <nve-button command="--toggle" commandfor="tab-group-controls" value="settings">settings</nve-button>
   </div>
 </div>`
+};
+
+/**
+ * @summary Close a tab with an application-owned button.
+ * @description Add a labeled Icon Button to the `suffix` slot of a Tabs Item Group and handle its click to close the tab. Use arrow keys to focus a tab, then Tab to reach its actions.
+ */
+export const ItemGroupAction = {
+  render: () => html`
+<nve-tabs behavior-select>
+  <nve-tabs-item id="workspace-overview" selected>Overview</nve-tabs-item>
+  <nve-tabs-item-group id="workspace-experiment">
+    <nve-tabs-item>Experiment</nve-tabs-item>
+    <nve-icon-button id="close-experiment" slot="suffix" icon-name="cancel" size="sm" container="flat" aria-label="Close experiment"></nve-icon-button>
+  </nve-tabs-item-group>
+</nve-tabs>
+<script type="module">
+  const overview = document.querySelector('#workspace-overview');
+  document.querySelector('#close-experiment').addEventListener('click', () => {
+    document.querySelector('#workspace-experiment').remove();
+    overview.selected = true;
+    overview.focus();
+  });
+</script>`
+};
+
+/**
+ * @summary Open a tab's actions menu from a suffix button without selecting the tab.
+ * @description Add an Icon Button to open a Dropdown beside the tab strip.
+ */
+export const ItemGroupMenu = {
+  render: () => html`
+<nve-tabs behavior-select>
+  <nve-tabs-item selected>Overview</nve-tabs-item>
+  <nve-tabs-item-group>
+    <nve-tabs-item>Experiment</nve-tabs-item>
+    <nve-icon-button slot="suffix" icon-name="more-actions" size="sm" container="flat" aria-label="Experiment actions" aria-haspopup="menu" popovertarget="experiment-actions"></nve-icon-button>
+  </nve-tabs-item-group>
+</nve-tabs>
+<nve-dropdown id="experiment-actions">
+  <nve-menu>
+    <nve-menu-item>Rename</nve-menu-item>
+    <nve-menu-item>Duplicate</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>`
 };

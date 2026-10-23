@@ -63,6 +63,19 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     this.host.removeEventListener('keydown', this.#onKeyDown);
   }
 
+  /** Updates the focus order after configured items change without moving focus. */
+  refreshItems(previousItems: readonly HTMLElement[]) {
+    const { manageFocus, manageTabindex, items, initialItem } = this.#config;
+    if (!manageFocus || !manageTabindex || this.#keynavDisabled) return;
+
+    const activeItem =
+      items.find(item => previousItems.includes(item) && item.tabIndex === 0) ??
+      (initialItem && items.includes(initialItem) ? initialItem : items[0]);
+    Array.from(this.host.keynavListConfig.items).forEach(item => {
+      item.tabIndex = item === activeItem ? 0 : -1;
+    });
+  }
+
   #initializeTabIndex() {
     const { manageFocus, manageTabindex, items, initialItem } = this.#config;
     if (manageFocus && manageTabindex && !this.#keynavDisabled) {

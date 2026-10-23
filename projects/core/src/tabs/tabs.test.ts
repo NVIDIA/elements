@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { userEvent } from 'vitest/browser';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
 import { getAnchorNames } from '@nvidia-elements/core/internal';
@@ -269,5 +270,88 @@ describe(`${Tabs.metadata.tag} - initial focus`, () => {
     expect(tabItems[0].tabIndex).toBe(0);
     expect(tabItems[1].tabIndex).toBe(-1);
     expect(tabItems[2].tabIndex).toBe(-1);
+  });
+});
+
+describe(`${TabsItem.metadata.tag} - decorative slots`, () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => removeFixture(fixture));
+
+  it('should retain decoration and rich labels in their supplied parents', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs behavior-select>
+        <nve-tabs-item>
+          <span slot="prefix" aria-hidden="true">●</span>
+          <strong>Experiment</strong>
+          <span slot="suffix">3</span>
+        </nve-tabs-item>
+      </nve-tabs>
+    `);
+    const item = fixture.querySelector<TabsItem>('nve-tabs-item');
+    await elementIsStable(item);
+
+    expect(item.querySelector('strong').parentElement).toBe(item);
+    expect(item.shadowRoot.querySelector<HTMLSlotElement>('slot[name="prefix"]').assignedElements()[0]).toBe(
+      item.firstElementChild
+    );
+    expect(item.shadowRoot.querySelector<HTMLSlotElement>('slot[name="suffix"]').assignedElements()[0]).toBe(
+      item.lastElementChild
+    );
+    expect(item.querySelector('strong').assignedSlot.name).toBe('');
+  });
+
+  it('should select the tab when its decoration is clicked', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs behavior-select>
+        <nve-tabs-item><span slot="prefix">●</span>Experiment</nve-tabs-item>
+      </nve-tabs>
+    `);
+    const item = fixture.querySelector<TabsItem>('nve-tabs-item');
+    await elementIsStable(item);
+    emulateClick(item.querySelector('span'));
+    expect(item.selected).toBe(true);
+  });
+
+  it('should detect a label anchor after the prefix slot', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs>
+        <nve-tabs-item><span slot="prefix">●</span><a href="#experiment">Experiment</a></nve-tabs-item>
+      </nve-tabs>
+    `);
+    const item = fixture.querySelector<TabsItem>('nve-tabs-item');
+    await elementIsStable(item);
+    expect(item.readOnly).toBe(true);
+    item.disabled = true;
+    await elementIsStable(item);
+    const click = new MouseEvent('click', { bubbles: true, composed: true, cancelable: true });
+    item.querySelector('a').dispatchEvent(click);
+    expect(click.defaultPrevented).toBe(true);
+  });
+
+  it('should activate the label anchor when its suffix decoration is clicked', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs>
+        <nve-tabs-item>
+          <a href="#experiment">Experiment</a>
+          <span slot="suffix" style="contain: layout; display: inline-block">3</span>
+        </nve-tabs-item>
+      </nve-tabs>
+    `);
+    const item = fixture.querySelector<TabsItem>('nve-tabs-item');
+    await elementIsStable(item);
+    const click = vi.fn((event: Event) => event.preventDefault());
+    item.querySelector('a').addEventListener('click', click);
+    const decoration = item.querySelector('span').getBoundingClientRect();
+    const bounds = item.getBoundingClientRect();
+
+    await userEvent.click(item, {
+      position: {
+        x: decoration.left - bounds.left + decoration.width / 2,
+        y: decoration.top - bounds.top + decoration.height / 2
+      }
+    });
+
+    expect(click).toHaveBeenCalledTimes(1);
   });
 });

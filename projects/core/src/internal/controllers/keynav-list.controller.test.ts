@@ -6,11 +6,12 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { elementIsStable, createFixture, removeFixture, emulateClick } from '@internals/testing';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { keyNavigationList } from '@nvidia-elements/core/internal';
+import { KeyNavigationListController, keyNavigationList } from '@nvidia-elements/core/internal';
 
 @customElement('keynav-list-test-element')
-@keyNavigationList<KeynavListControllerTestElement>()
 class KeynavListControllerTestElement extends LitElement {
+  controller = new KeyNavigationListController(this);
+
   @property({ type: String }) layout: 'horizontal' | 'vertical' = 'horizontal';
 
   @property({ type: Boolean }) loop = false;
@@ -72,6 +73,69 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
+  });
+
+  describe('refreshing items', () => {
+    it('should preserve the existing tab stop when a new item is inserted', () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      const inserted = document.createElement('button');
+      element.shadowRoot.querySelector('section').prepend(inserted);
+      const change = vi.fn();
+      element.addEventListener('nve-key-change', change);
+
+      element.controller.refreshItems(previousItems);
+
+      expect(previousItems[0].tabIndex).toBe(0);
+      expect(inserted.tabIndex).toBe(-1);
+      expect(previousItems[0].matches(':focus')).toBe(true);
+      expect(change).not.toHaveBeenCalled();
+    });
+
+    it('should use the configured initial item when the tab stop is removed', async () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      previousItems[0].remove();
+      element.initialItemIndex = 2;
+      await elementIsStable(element);
+
+      element.controller.refreshItems(previousItems);
+
+      expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+      expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
+      expect(element.keynavListConfig.items[2].matches(':focus')).toBe(false);
+    });
+
+    it('should use the first enabled item when the tab stop is disabled', () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      previousItems[0].disabled = true;
+
+      element.controller.refreshItems(previousItems);
+
+      expect(previousItems[0].tabIndex).toBe(-1);
+      expect(previousItems[1].tabIndex).toBe(0);
+    });
+
+    it('should leave every item outside the tab order when none is enabled', () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      previousItems.forEach(item => {
+        item.disabled = true;
+      });
+
+      element.controller.refreshItems(previousItems);
+
+      expect(Array.from(element.keynavListConfig.items).every(item => item.tabIndex === -1)).toBe(true);
+    });
+
+    it('should preserve authored tab indices when key navigation is disabled', () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      element.setAttribute('nve-keynav-disabled', '');
+      previousItems[0].tabIndex = 2;
+      previousItems[1].tabIndex = 3;
+
+      element.controller.refreshItems(previousItems);
+
+      expect(previousItems[0].tabIndex).toBe(2);
+      expect(previousItems[1].tabIndex).toBe(3);
+    });
   });
 
   it('should set activate a item on click', async () => {
@@ -535,13 +599,14 @@ describe('nested interactive keynav-list.controller', () => {
     expect(element.keynavListConfig.items[3].tabIndex).toBe(-1);
   });
 
-  it('should not activate a node when a nested interactive element is clicked', async () => {
+  it('should not activate a node when a nested button receives a pointer event', async () => {
     const button = element.keynavListConfig.items[1]!.querySelector('button')!;
     button.focus();
+    expect(element.shadowRoot.activeElement).toBe(button);
     button.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
     await elementIsStable(element);
 
-    expect(button.matches(':focus')).toBe(true);
+    expect(element.shadowRoot.activeElement).toBe(button);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
   });

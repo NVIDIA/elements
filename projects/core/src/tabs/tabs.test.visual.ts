@@ -20,11 +20,13 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/tabs/define.js';
+    import '@nvidia-elements/core/dot/define.js';
+    import '@nvidia-elements/core/icon/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
   <nve-tabs>
     <nve-tabs-item selected>•︎•︎•︎•︎•︎•︎</nve-tabs-item>
-    <nve-tabs-item>•︎•︎•︎•︎•︎•︎</nve-tabs-item>
+    <nve-tabs-item>•︎•︎•︎•︎•︎•︎ <nve-dot aria-label="Notifications">•︎•︎</nve-dot></nve-tabs-item>
     <nve-tabs-item>•︎•︎•︎•︎•︎•︎</nve-tabs-item>
     <nve-tabs-item disabled>•︎•︎•︎•︎•︎•︎</nve-tabs-item>
   </nve-tabs>

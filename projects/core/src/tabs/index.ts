@@ -3,3 +3,4 @@
 
 export * from './tabs.js';
 export * from './tabs-group.js';
+export * from './tabs-item-group.js';
