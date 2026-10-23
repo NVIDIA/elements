@@ -1,3 +1,29 @@
+## [2.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.4...@nvidia-elements/lint-v2.8.0) (2026-10-23)
+
+### Features
+
+* **code:** iframe component ([09f9a8c](https://github.com/NVIDIA/elements/commit/09f9a8cc43439b48a96185198dcd8b3ce590759b))
+* **core:** add appearance option to icon button ([942be28](https://github.com/NVIDIA/elements/commit/942be28dcc0eaff9495e59386e50da791f1217fb))
+* **core:** add composable tab item groups ([284eee9](https://github.com/NVIDIA/elements/commit/284eee904d77a9b84f2c122f35d95a2e18eba73e))
+* **core:** progress dot ([6a1ed16](https://github.com/NVIDIA/elements/commit/6a1ed16c62ca615f3e3f5f2ffd347f357fe9d0f3))
+* **lint:** prevent nested interactive elements ([a27b402](https://github.com/NVIDIA/elements/commit/a27b40258d94e5384b3a5424dd8176fddeefee81))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.4 ([ca5c60a](https://github.com/NVIDIA/elements/commit/ca5c60a0265fbe91b898bc0922e2d14a2ce0f965))
+* **cli:** update bun to 1.4.3 ([7521484](https://github.com/NVIDIA/elements/commit/7521484a82f2714594fab438eccf8d575d578def))
+* **cli:** update deps ([5c2e291](https://github.com/NVIDIA/elements/commit/5c2e2911a3c0e0d59b5572077be0fe54f580312c))
+* **core:** add padding for alert banners in toggletip header ([4954ec6](https://github.com/NVIDIA/elements/commit/4954ec6715a1b24c33a6c0fa261d9bffe526c9c8))
+* **core:** improve grid keynav event handling ([9045f7f](https://github.com/NVIDIA/elements/commit/9045f7fc1947bb20d93b3ac5e0489ee1126b9f2a))
+* **core:** remove layout boxes from closed popovers ([e7e89ac](https://github.com/NVIDIA/elements/commit/e7e89acc6565d325410590e91eba9966d2161052))
+* **core:** tree node link target ([1362388](https://github.com/NVIDIA/elements/commit/1362388c6d94ba480da6854210b6c68f5d59b926))
+* **docs:** prevent concurrent site output writes ([cd1bfdb](https://github.com/NVIDIA/elements/commit/cd1bfdbb2e177d8a4e958feb40ab01b0c9478caf))
+* **forms:** detect label anchors after named slots ([756b692](https://github.com/NVIDIA/elements/commit/756b69251f0d31aed089c3bb31ec3688866d3360))
+* **pi:** update deps ([64d830e](https://github.com/NVIDIA/elements/commit/64d830ee361dd0e537a63d89c844c4b76e370fb3))
+* **pi:** update deps ([7edf89a](https://github.com/NVIDIA/elements/commit/7edf89ae10f5090e7612e67cafac8f25fb0c1d3b))
+* **viewport:** connect accessories across separate imports ([13e446d](https://github.com/NVIDIA/elements/commit/13e446d52b52491d5a7597f520b86e43f749c412))
+* **viewport:** include build artifacts in releases ([7ab75d4](https://github.com/NVIDIA/elements/commit/7ab75d4477b4364557d2f0d17af15a6ad3b453a8))
+
 ## [2.7.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.3...@nvidia-elements/lint-v2.7.4) (2026-10-13)
 
 ### Features
