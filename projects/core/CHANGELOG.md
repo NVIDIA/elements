@@ -1,3 +1,15 @@
+## [2.17.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.16.0...@nvidia-elements/core-v2.17.0) (2026-10-23)
+
+### Features
+
+* **core:** add appearance option to icon button ([942be28](https://github.com/NVIDIA/elements/commit/942be28dcc0eaff9495e59386e50da791f1217fb))
+
+### Bug Fixes
+
+* **core:** add padding for alert banners in toggletip header ([4954ec6](https://github.com/NVIDIA/elements/commit/4954ec6715a1b24c33a6c0fa261d9bffe526c9c8))
+* **core:** improve grid keynav event handling ([9045f7f](https://github.com/NVIDIA/elements/commit/9045f7fc1947bb20d93b3ac5e0489ee1126b9f2a))
+* **pi:** update deps ([64d830e](https://github.com/NVIDIA/elements/commit/64d830ee361dd0e537a63d89c844c4b76e370fb3))
+
 ## [2.16.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.15.5...@nvidia-elements/core-v2.16.0) (2026-10-22)
 
 ### Features
