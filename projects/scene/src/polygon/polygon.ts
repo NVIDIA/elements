@@ -55,7 +55,11 @@ export class ScenePolygon extends MarkerLayerElement<PolygonInstanceSource, Mark
     setElementFeatureId(this, value);
   }
 
-  /** Atomic outer boundary and optional hole rings, rendered in local xy at z zero. */
+  /**
+   * Atomic outer boundary and optional hole rings, rendered in local xy at z zero.
+   * Accepts at most 16,384 input vertices across 1,365 rings, including the outer ring,
+   * and at most 4,096 vertices after normalization. Checks input budgets before normalization.
+   */
   @property({ type: Object })
   get geometry(): PolygonGeometry | null {
     return this.#geometry;

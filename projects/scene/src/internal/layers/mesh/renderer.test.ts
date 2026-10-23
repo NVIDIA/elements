@@ -8,6 +8,7 @@ import { createPickPipelines } from '../../rendering/picking/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
 import { MeshRenderer } from './renderer.js';
 import {
+  getMeshRenderData,
   publishMeshGeometry,
   replaceMeshGeometry,
   setMeshGeometryProperty,
@@ -140,15 +141,20 @@ describe('MeshRenderer', () => {
     const geometryBuffers = gpu.buffers.slice(0, 4);
     const allocations = gpu.buffers.length;
     const releases: Array<() => void> = [];
-    scenePlatform.yieldForPreparation = () => new Promise<void>(resolve => releases.push(resolve));
+    const pausePreparation = () => new Promise<void>(resolve => releases.push(resolve));
     const writes = vi.mocked(gpu.device.queue.writeBuffer);
     writes.mockClear();
     requestRender.mockClear();
     positions[3] = 2;
     publishMeshGeometry(item.layer, { attribute: 'positions', source: positions, start: 1, count: 1 });
+    await vi.waitFor(() => expect(getMeshRenderData(item.layer).positions?.[3]).toBe(2));
+    scenePlatform.yieldForPreparation = pausePreparation;
     renderer.prepare({ ...item, data: takeMeshLayerRenderData(item.layer) }, identityMat4());
     positions[300] = 3;
+    scenePlatform.yieldForPreparation = async () => undefined;
     publishMeshGeometry(item.layer, { attribute: 'positions', source: positions, start: 100, count: 1 });
+    await vi.waitFor(() => expect(getMeshRenderData(item.layer).positions?.[300]).toBe(3));
+    scenePlatform.yieldForPreparation = pausePreparation;
     const newest = { ...item, data: takeMeshLayerRenderData(item.layer) };
     renderer.prepare(newest, identityMat4());
     expect(releases).toHaveLength(2);
