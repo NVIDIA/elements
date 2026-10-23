@@ -55,20 +55,14 @@ export function getInstanceAllocation(item: SceneRenderItem, device: SceneGPUDev
 }
 
 export function getPartitionPickId(item: SceneRenderItem, firstRecord: number, pickId: number): number {
-  if ('type' in item && item.type === 'line') return pickId;
-  if (!('type' in item) || item.type === 'point') return pickId + firstRecord;
+  if (item.type === 'line') return pickId;
+  if (item.type === 'point') return pickId + firstRecord;
   return pickId + (item.type === 'triangle' ? firstRecord / 3 : firstRecord);
 }
 
 export function getPickUniformOffset(item: SceneRenderItem): number {
   if (isMarkerRenderItem(item)) return PICK_UNIFORM_OFFSETS.marker;
   return item.type === 'line' ? PICK_UNIFORM_OFFSETS.line : PICK_UNIFORM_OFFSETS.stream;
-}
-
-export function itemRequiresGeometry(item: SceneRenderItem): boolean {
-  if (!item.data.ready) return false;
-  if ('type' in item && item.type === 'mesh') return item.data.identityInstance || (item.instances?.count ?? 0) > 0;
-  return item.data.count > 0;
 }
 
 export function writeInstancePartitionUniforms(
@@ -80,7 +74,7 @@ export function writeInstancePartitionUniforms(
   }
 ): void {
   uniforms[36] = options.recordCount;
-  if (!('type' in options.item) || options.item.type !== 'line') return;
+  if (options.item.type !== 'line') return;
   const { line } = options;
   if (!line) throw new TypeError('Connected line partition metadata is unavailable.');
   uniforms.set(

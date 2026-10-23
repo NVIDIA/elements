@@ -17,6 +17,7 @@ import {
 import { writeMat4ToFloat32 } from '../../math/mat4.js';
 import { planBufferUploads } from '../../gpu/buffer-upload-plan.js';
 import { PICK_OUTPUT_WGSL } from '../../rendering/picking/wgsl.js';
+import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
 import { OIT_WGSL, oitTargetStates } from '../../rendering/transparency.js';
 import type { Matrix4 } from '../../math/types.js';
 import type { LabelRenderItem } from '../../rendering/render-items.js';
@@ -34,7 +35,6 @@ const BUFFER_UNIFORM = 0x40;
 const TEXTURE_COPY_DST = 0x02;
 const TEXTURE_BINDING = 0x04;
 const LABEL_UNIFORM_BYTE_LENGTH = 176;
-const PICK_ID_BYTE_OFFSET = 160;
 
 interface LabelRendererDevice extends SceneGPURenderPipelineDevice {
   readonly queue: SceneGPUDevice['queue'] & {
@@ -159,7 +159,7 @@ export class LabelRenderer {
     const resources = this.#layers.get(item.layer);
     if (!resources) return;
     this.#pickId[0] = pickId;
-    this.#device.queue.writeBuffer(resources.uniform, PICK_ID_BYTE_OFFSET, this.#pickId);
+    this.#device.queue.writeBuffer(resources.uniform, PICK_UNIFORM_OFFSETS.label, this.#pickId);
     this.#draw(pass, item, this.#pickPipeline);
   }
 

@@ -28,8 +28,16 @@ export interface LinearColor {
 
 export interface OitResources {
   readonly accumulation: SceneGPUTexture;
+  readonly accumulationView: SceneGPUTextureView;
   readonly bindGroup: SceneGPUBindGroup;
   readonly revealage: SceneGPUTexture;
+  readonly revealageView: SceneGPUTextureView;
+}
+
+interface SizedTarget<T> {
+  readonly height: number;
+  readonly value: T;
+  readonly width: number;
 }
 
 interface RenderTargetDevice extends SceneGPURenderPipelineDevice {
@@ -39,14 +47,10 @@ interface RenderTargetDevice extends SceneGPURenderPipelineDevice {
 
 export class RenderTargets {
   #canvas?: HTMLCanvasElement;
-  #depthSize = '';
-  #depthTexture?: SceneGPUTexture;
+  #depth?: SizedTarget<{ readonly texture: SceneGPUTexture; readonly view: SceneGPUTextureView }>;
   #device?: RenderTargetDevice;
-  #oitAccumulationTexture?: SceneGPUTexture;
-  #oitBindGroup?: SceneGPUBindGroup;
+  #oit?: SizedTarget<OitResources>;
   #oitCompositePipeline?: SceneGPURenderPipeline;
-  #oitRevealageTexture?: SceneGPUTexture;
-  #oitSize = '';
 
   initialize(canvas: HTMLCanvasElement, device: SceneGPUDevice, format: string): void {
     this.disconnect();
@@ -72,17 +76,17 @@ export class RenderTargets {
     const device = this.#device;
     const canvas = this.#canvas;
     if (!device || !canvas) return null;
-    const size = `${canvas.width}x${canvas.height}`;
-    if (!this.#depthTexture || this.#depthSize !== size) {
+    const { height, width } = canvas;
+    if (!isSized(this.#depth, width, height)) {
       this.#destroyDepthTexture();
-      this.#depthTexture = device.createTexture({
-        size: [canvas.width, canvas.height],
+      const texture = device.createTexture({
+        size: [width, height],
         format: 'depth24plus',
         usage: TEXTURE_RENDER_ATTACHMENT
       });
-      this.#depthSize = size;
+      this.#depth = { height, value: { texture, view: texture.createView() }, width };
     }
-    return this.#depthTexture.createView();
+    return this.#depth.value.view;
   }
 
   getOitResources(): OitResources | undefined {
@@ -90,34 +94,31 @@ export class RenderTargets {
     const canvas = this.#canvas;
     const pipeline = this.#oitCompositePipeline;
     if (!device || !canvas || !pipeline) return undefined;
-    const size = `${canvas.width}x${canvas.height}`;
-    if (!this.#oitAccumulationTexture || !this.#oitRevealageTexture || this.#oitSize !== size) {
+    const { height, width } = canvas;
+    if (!isSized(this.#oit, width, height)) {
       this.#destroyOitTargets();
-      this.#oitAccumulationTexture = device.createTexture({
-        size: [canvas.width, canvas.height],
+      const accumulation = device.createTexture({
+        size: [width, height],
         format: OIT_ACCUMULATION_FORMAT,
         usage: TEXTURE_RENDER_ATTACHMENT | TEXTURE_BINDING
       });
-      this.#oitRevealageTexture = device.createTexture({
-        size: [canvas.width, canvas.height],
+      const revealage = device.createTexture({
+        size: [width, height],
         format: OIT_REVEALAGE_FORMAT,
         usage: TEXTURE_RENDER_ATTACHMENT | TEXTURE_BINDING
       });
-      this.#oitBindGroup = device.createBindGroup({
+      const accumulationView = accumulation.createView();
+      const revealageView = revealage.createView();
+      const bindGroup = device.createBindGroup({
         layout: pipeline.getBindGroupLayout(0),
         entries: [
-          { binding: 0, resource: this.#oitAccumulationTexture.createView() },
-          { binding: 1, resource: this.#oitRevealageTexture.createView() }
+          { binding: 0, resource: accumulationView },
+          { binding: 1, resource: revealageView }
         ]
       });
-      this.#oitSize = size;
+      this.#oit = { height, value: { accumulation, accumulationView, bindGroup, revealage, revealageView }, width };
     }
-    if (!this.#oitAccumulationTexture || !this.#oitRevealageTexture || !this.#oitBindGroup) return undefined;
-    return {
-      accumulation: this.#oitAccumulationTexture,
-      bindGroup: this.#oitBindGroup,
-      revealage: this.#oitRevealageTexture
-    };
+    return this.#oit.value;
   }
 
   createOitPassDescriptor(oit: OitResources, depthView: SceneGPUTextureView | null): SceneGPURenderPassDescriptor {
@@ -140,13 +141,13 @@ export class RenderTargets {
     } = {
       colorAttachments: [
         {
-          view: oit.accumulation.createView(),
+          view: oit.accumulationView,
           clearValue: { r: 0, g: 0, b: 0, a: 0 },
           loadOp: 'clear',
           storeOp: 'store'
         },
         {
-          view: oit.revealage.createView(),
+          view: oit.revealageView,
           clearValue: { r: 1, g: 0, b: 0, a: 0 },
           loadOp: 'clear',
           storeOp: 'store'
@@ -197,19 +198,19 @@ export class RenderTargets {
   }
 
   #destroyDepthTexture(): void {
-    this.#depthTexture?.destroy?.();
-    this.#depthTexture = undefined;
-    this.#depthSize = '';
+    this.#depth?.value.texture.destroy?.();
+    this.#depth = undefined;
   }
 
   #destroyOitTargets(): void {
-    this.#oitAccumulationTexture?.destroy?.();
-    this.#oitRevealageTexture?.destroy?.();
-    this.#oitAccumulationTexture = undefined;
-    this.#oitRevealageTexture = undefined;
-    this.#oitBindGroup = undefined;
-    this.#oitSize = '';
+    this.#oit?.value.accumulation.destroy?.();
+    this.#oit?.value.revealage.destroy?.();
+    this.#oit = undefined;
   }
+}
+
+function isSized<T>(target: SizedTarget<T> | undefined, width: number, height: number): target is SizedTarget<T> {
+  return target?.width === width && target.height === height;
 }
 
 function supportsRenderTargets(device: SceneGPUDevice): device is RenderTargetDevice {

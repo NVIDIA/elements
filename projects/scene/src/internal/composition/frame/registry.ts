@@ -112,6 +112,15 @@ export function resolveFrameName(
   return resolveName(scene, { name, context, kind: 'frame' });
 }
 
+/** Reads one local frame name; null distinguishes an ambiguous name from a missing name. */
+export function getScopedFrameName(
+  scene: HTMLElement,
+  name: string,
+  context: HTMLElement
+): HTMLElement | null | undefined {
+  return registries.get(scene)?.scopes.get(getNameScope(context, scene))?.get(name);
+}
+
 export function resolveJointName(
   scene: HTMLElement,
   name: string,

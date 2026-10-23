@@ -29,12 +29,15 @@ import {
   viewportToNdc
 } from '../internal/math/projection.js';
 import type { Vec3 } from '../internal/math/types.js';
+import { isFiniteVec3 } from '../internal/math/tuples.js';
 import { getDevicePixelSize } from '../internal/dom/viewport-size.js';
 import { SceneInteractionSource } from '../internal/interaction/source.js';
 import type { SceneCamera } from '../camera/camera.js';
 import type { SceneBounds } from '../internal/math/bounds.js';
 import { getSceneBounds, type SceneBoundsQueryOptions } from '../internal/composition/scene/bounds.js';
 import type { SceneCameraFitOptions } from '../internal/composition/camera/fit.js';
+
+const COMPOSITION_ATTRIBUTES = new Set(['child', 'frame', 'mimic', 'name', 'parent']);
 
 export type { SceneBounds } from '../internal/math/bounds.js';
 export type { SceneBoundsQueryOptions } from '../internal/composition/scene/bounds.js';
@@ -157,6 +160,7 @@ export class Scene extends LitElement {
     registerSceneRenderNotifications(this, (source, kind) => {
       this.#content.refreshLayer(source);
       if (kind === 'composition') this.#content.resolveReferences();
+      else if (kind === 'frame-validity') this.#content.invalidateComposition();
       if (kind === 'identity') {
         this.#needsIdentityRefresh = true;
         this.#scheduleTick();
@@ -334,6 +338,7 @@ export class Scene extends LitElement {
         <canvas aria-hidden="true"></canvas>
         <span data-interaction-source aria-hidden="true" hidden></span>
         <slot name="fallback" ?hidden=${this.#state !== 'failed'}></slot>
+        <slot hidden></slot>
       </div>
     `;
   }
@@ -466,8 +471,8 @@ export class Scene extends LitElement {
       return;
     }
     if (owned.every(record => record.type === 'attributes' && record.attributeName === 'feature-id')) return;
-    if (owned.some(record => record.type === 'attributes' && record.attributeName === 'name'))
-      this.#content.resolveReferences();
+    // Elements notify their own composition edits; attributes also cover elements that have not upgraded.
+    if (owned.some(record => COMPOSITION_ATTRIBUTES.has(record.attributeName ?? ''))) this.#content.resolveReferences();
     this.#requestRender();
   }
 
@@ -520,9 +525,11 @@ export class Scene extends LitElement {
     this.#needsRender = this.#needsRender || rendererRequested;
     this.#renderIfNeeded();
     this.#refreshIdentityIfNeeded();
+    if (this.#renderer.active && this.#content.hasStyleSamplers) this.#scheduleTick();
   }
 
   #trackRuntimeChanges(): void {
+    this.#content.sampleStyles();
     const cameraChanged = this.#camera.trackChanges();
     this.#needsRender = this.#needsRender || cameraChanged;
   }
@@ -622,10 +629,6 @@ export class Scene extends LitElement {
 
 function clientPointIsInside(rect: DOMRect, x: number, y: number): boolean {
   return x >= rect.left && x < rect.right && y >= rect.top && y < rect.bottom;
-}
-
-function isFiniteVec3(value: unknown): value is Readonly<Vec3> {
-  return Array.isArray(value) && value.length === 3 && value.every(component => Number.isFinite(component));
 }
 
 function getErrorMessage(error: unknown): string {

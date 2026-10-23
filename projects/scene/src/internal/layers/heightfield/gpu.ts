@@ -4,14 +4,12 @@
 import { GRID_GRADIENT_WGSL } from '../../math/grid-gradient.js';
 import { UNPACK_RGBA8_WGSL } from '../../color/rgba8.js';
 import {
-  supportsSceneGPUCompute,
   type SceneGPUBindGroup,
   type SceneGPUBuffer,
   type SceneGPUCommandEncoder,
   type SceneGPUComputeDevice,
   type SceneGPUComputePass,
-  type SceneGPUComputePipeline,
-  type SceneGPUDevice
+  type SceneGPUComputePipeline
 } from '../../gpu/platform.js';
 import type { HeightfieldMeshData } from '../mesh/render-data.js';
 import { createHeightfieldIndices } from './topology.js';
@@ -169,10 +167,6 @@ export class HeightfieldGPUCompiler {
     if (source.colors) this.#device.queue.writeBuffer(state.colors, 0, source.colors);
     this.#device.queue.writeBuffer(state.parameters, 0, createParameters(source));
   }
-}
-
-export function supportsHeightfieldGPU(device: SceneGPUDevice): device is SceneGPUComputeDevice {
-  return supportsSceneGPUCompute(device);
 }
 
 export function sameHeightfieldTopology(left: HeightfieldMeshData, right: HeightfieldMeshData): boolean {

@@ -8,8 +8,10 @@ import { SRGB_TO_LINEAR_WGSL } from '../color/transfer.js';
 import { POLYLINE_JOIN_VERTEX_COUNT, POLYLINE_WGSL } from '../math/polyline.js';
 import { LINE_TOPOLOGY_WGSL } from '../algorithms/line-topology.js';
 import { OIT_WGSL, oitTargetStates } from './transparency.js';
+import { CHECKERBOARD_SHADER } from './checkerboard-shader.js';
 
 export interface StreamPipelines {
+  readonly checkerboard: PipelinePair;
   readonly biasedLine: PipelinePair;
   readonly line: PipelinePair;
   readonly point: PipelinePair;
@@ -32,7 +34,11 @@ interface PairOptions {
 }
 
 export function createStreamPipelines(device: SceneGPURenderPipelineDevice, format: string): StreamPipelines {
+  let checkerboard: PipelinePair | undefined;
   return {
+    get checkerboard() {
+      return (checkerboard ??= createPair({ code: CHECKERBOARD_SHADER, depthBias: GRID_DEPTH_BIAS, device, format }));
+    },
     line: createPair({ code: LINE_SHADER, device, format }),
     point: createPair({ code: POINT_SHADER, device, format }),
     triangle: createPair({ code: TRIANGLE_SHADER, device, format }),

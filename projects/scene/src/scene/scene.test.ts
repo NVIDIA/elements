@@ -44,6 +44,7 @@ import { Scene, type SceneErrorDetail } from './scene.js';
 import '../cubes/define.js';
 import '../camera/define.js';
 import '../frame/define.js';
+import '../gridlines/define.js';
 import '../heightfield/define.js';
 import '../lines/define.js';
 import '../mesh/define.js';
@@ -104,6 +105,28 @@ describe(Scene.metadata.tag, () => {
     const idleSubmissions = gpu.devices[0]?.submissions.length;
     await waitForAnimationFrames(3);
     expect(gpu.devices[0]?.submissions).toHaveLength(idleSubmissions ?? 0);
+  });
+
+  it('samples inherited grid styles without submitting unchanged GPU frames', async () => {
+    const gpu = configureFakeWebGPU();
+    const { element, fixture } = await createScene(html`
+      <nve-scene aria-label="Themed grid">
+        <nve-scene-gridlines pattern="checkerboard" style="--color: var(--grid-color)"></nve-scene-gridlines>
+      </nve-scene>
+    `);
+    fixture.style.setProperty('--grid-color', 'red');
+    gpu.resolveNextDevice();
+    await element.ready;
+    await waitForAnimationFrames(3);
+    const device = required(gpu.devices[0], 'Expected grid device.');
+    const idleSubmissions = device.submissions.length;
+    await waitForAnimationFrames(3);
+    expect(device.submissions).toHaveLength(idleSubmissions);
+    fixture.style.setProperty('--grid-color', 'blue');
+    await waitForAnimationFrames(3);
+    expect(device.submissions).toHaveLength(idleSubmissions + 1);
+    await waitForAnimationFrames(3);
+    expect(device.submissions).toHaveLength(idleSubmissions + 1);
   });
 
   it('resolves an initially empty source without delayed renderer diagnostics', async () => {
@@ -1467,6 +1490,36 @@ describe(Scene.metadata.tag, () => {
     Reflect.set(first, 'position', [5, 0, 0]);
     await waitForAnimationFrames(2);
     expect(element.cameraState.pose.position[0]).toBeCloseTo(5);
+  });
+
+  it('should report and clear frame-unresolved on a referrer when its target frame validity flips without composition edits', async () => {
+    const gpu = configureFakeWebGPU();
+    const { element } = await createScene(html`
+      <nve-scene aria-label="Reference validity">
+        <nve-scene-frame name="target"></nve-scene-frame>
+        <nve-scene-points frame="target"></nve-scene-points>
+      </nve-scene>
+    `);
+    const points = element.querySelector('nve-scene-points')!;
+    const target = element.querySelector('nve-scene-frame')!;
+    const unresolved: unknown[] = [];
+    element.addEventListener('nve-scene-error', event => {
+      if (event.detail.code === 'frame-unresolved') unresolved.push(event.detail.element);
+    });
+    gpu.resolveNextDevice();
+    await element.ready;
+    await waitForAnimationFrames(2);
+    expect(unresolved).toEqual([]);
+
+    Reflect.set(target, 'position', [0, 0]);
+    await waitForAnimationFrames(2);
+    expect(unresolved).toEqual([points]);
+
+    Reflect.set(target, 'position', [1, 0, 0]);
+    await waitForAnimationFrames(2);
+    Reflect.set(target, 'position', [0, 0]);
+    await waitForAnimationFrames(2);
+    expect(unresolved).toEqual([points, points]);
   });
 
   it('should avoid full rescans for owned attribute mutations while still updating named frame state', async () => {

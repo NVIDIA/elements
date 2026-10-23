@@ -8,9 +8,9 @@ import {
   getInstanceAllocation,
   type ConnectedLineDrawPartition,
   getPartitionPickId,
-  itemRequiresGeometry,
   writeInstancePartitionUniforms
 } from './instance-partitions.js';
+import { itemRequiresGeometry } from './render-items.js';
 
 describe('instance partition planning', () => {
   it.each([2, 4, 6, 64])(
