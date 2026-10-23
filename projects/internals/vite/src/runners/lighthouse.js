@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { VitePlaywrightRunner, buildPage } from './playwright.js';
 import { withSoftwareWebGPUChromiumArgs } from './utils.js';
 import { profilePhase } from './profile.js';
-import { LIGHTHOUSE_WORKERS } from './lighthouse-workers.js';
+import { LIGHTHOUSE_WORKERS, MAX_LIGHTHOUSE_WORKERS } from './lighthouse-workers.js';
 
 const output = process.env.CI ? ['json'] : ['json', 'html'];
 const RUNNER_ID = 'lighthouse';
@@ -53,8 +53,8 @@ export class LighthouseRunner {
   }
 
   async open({ workers = LIGHTHOUSE_WORKERS } = {}) {
-    if (!Number.isInteger(workers) || workers < 1 || workers > LIGHTHOUSE_WORKERS) {
-      throw new Error(`Lighthouse requires between 1 and ${LIGHTHOUSE_WORKERS} workers`);
+    if (!Number.isInteger(workers) || workers < 1 || workers > MAX_LIGHTHOUSE_WORKERS) {
+      throw new Error(`Lighthouse requires between 1 and ${MAX_LIGHTHOUSE_WORKERS} workers`);
     }
     // Global setup owns the browsers. Each Vitest worker reads only its own ports.
     // The project-wide browser lock bounds machine-wide audit concurrency.
