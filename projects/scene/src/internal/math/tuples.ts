@@ -17,5 +17,9 @@ export function toFiniteVec3(value: unknown): Vec3 | null {
 }
 
 function isFiniteTuple(value: unknown, length: number): boolean {
-  return Array.isArray(value) && value.length === length && value.every(component => Number.isFinite(component));
+  if (!Array.isArray(value) || value.length !== length) return false;
+  for (let index = 0; index < length; index += 1) {
+    if (!Number.isFinite(value[index])) return false;
+  }
+  return true;
 }
