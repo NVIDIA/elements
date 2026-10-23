@@ -55,6 +55,18 @@ test('test summaries cannot hide skipped or missing assertions behind a successf
   assert.throws(() => verifyLighthouseSummary({ ...summary, success: false }, 'project'), /skipped Lighthouse tests/);
 });
 
+test('paired profiles require cold resets and explicit valid ordering', () => {
+  assert.deepEqual(profileOptions(['--compare-ref', 'main', '--order', 'candidate-first']), {
+    target: 'ci',
+    samples: 3,
+    reset: 'cold',
+    compareRef: 'main',
+    order: 'candidate-first'
+  });
+  assert.throws(() => profileOptions(['--compare-ref', 'main', '--reset', 'none']), /cold resets/);
+  assert.throws(() => profileOptions(['--compare-ref', 'main', '--order', 'invalid']), /valid execution order/);
+});
+
 test('Wireit parser handles chunk boundaries and exposes unfinished commands', () => {
   let time = 100;
   const parser = createWireitLineParser({ now: () => time });

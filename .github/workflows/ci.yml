@@ -14,6 +14,10 @@ on:
         description: Measure PR checks without publishing pages
         type: boolean
         default: false
+      ci-comparison-ref:
+        description: Optional baseline commit for paired cold CI profiles
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -150,6 +154,46 @@ jobs:
             projects/*/.lighthouse/dist/report.json
             projects/*/coverage/lighthouse/*
             projects/site/coverage/unit/summary.json
+
+  ci-comparison:
+    if: github.event_name == 'workflow_dispatch' && inputs.ci-comparison-ref != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - sample: 1
+            order: baseline-first
+          - sample: 2
+            order: candidate-first
+          - sample: 3
+            order: baseline-first
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          lfs: true
+      - uses: ./.github/actions/setup-ci
+      - name: Compare cold CI on the same runner
+        env:
+          CI_BASELINE_REF: ${{ inputs.ci-comparison-ref }}
+          CI_COMPARE_ORDER: ${{ matrix.order }}
+          ELEMENTS_PAGES_BASE_URL: ${{ vars.ELEMENTS_PAGES_BASE_URL }}
+          ELEMENTS_REGISTRY_URL: ${{ vars.ELEMENTS_REGISTRY_URL }}
+          ELEMENTS_REPO_BASE_URL: ${{ vars.ELEMENTS_REPO_BASE_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          mise exec -- pnpm run ci:profile --target ci --samples 1 --reset cold
+          --compare-ref "$CI_BASELINE_REF" --order "$CI_COMPARE_ORDER"
+      - name: Upload paired CI profiles
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: ci-comparison-${{ matrix.sample }}
+          retention-days: 14
+          include-hidden-files: true
+          path: .metrics/ci-profile-comparison/
 
   release:
     needs: ci

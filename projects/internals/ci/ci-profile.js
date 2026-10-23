@@ -5,7 +5,17 @@
  */
 
 import { spawn, spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync
+} from 'node:fs';
 import { cpus, freemem, platform, release, tmpdir, totalmem } from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
@@ -23,9 +33,10 @@ const SUCCESS_PATTERN = /✅ \[([^\]]+)\] Executed successfully$/;
 
 export function profileOptions(args = process.argv.slice(2)) {
   const options = { target: 'ci', samples: RUN_COUNT, reset: 'cold' };
+  const optionalKeys = { '--compare-ref': 'compareRef', '--order': 'order' };
   for (let index = 0; index < args.length; index += 2) {
-    const key = args[index].replace(/^--/, '');
-    if (!Object.hasOwn(options, key) || args[index + 1] === undefined) {
+    const key = optionalKeys[args[index]] ?? args[index].replace(/^--/, '');
+    if ((!Object.hasOwn(options, key) && !Object.values(optionalKeys).includes(key)) || args[index + 1] === undefined) {
       throw new Error('Usage: ci:profile [--target ci|lighthouse] [--samples N] [--reset cold|none]');
     }
     options[key] = key === 'samples' ? Number(args[index + 1]) : args[index + 1];
@@ -37,6 +48,12 @@ export function profileOptions(args = process.argv.slice(2)) {
     options.samples < 1
   ) {
     throw new Error('Invalid profile options');
+  }
+  if (
+    (options.order && !['baseline-first', 'candidate-first'].includes(options.order)) ||
+    (options.compareRef && options.reset !== 'cold')
+  ) {
+    throw new Error('Paired comparisons require cold resets and a valid execution order');
   }
   return options;
 }
@@ -298,10 +315,14 @@ export function processTreeRss(rows, rootPid) {
   return rows.filter(row => descendants.has(row.pid)).reduce((sum, row) => sum + row.rssKiB, 0);
 }
 
-export function runChild(command, args, { env = process.env, parser, logPath, resources = false, stream = false }) {
+export function runChild(
+  command,
+  args,
+  { env = process.env, parser, logPath, resources = false, stream = false, cwd = ROOT_DIR }
+) {
   return new Promise((resolve, reject) => {
     const child = spawn(resources ? '/usr/bin/time' : command, resources ? ['-p', command, ...args] : args, {
-      cwd: ROOT_DIR,
+      cwd,
       env,
       stdio: ['ignore', 'pipe', 'pipe']
     });
@@ -500,6 +521,66 @@ function copyTemporaryLogs(temporaryDirectory) {
   }
 }
 
+async function compareRevisions(options, metadata) {
+  const baseline = runSync('git', ['rev-parse', '--verify', '--end-of-options', `${options.compareRef}^{commit}`]);
+  const revisions = { baseline, candidate: metadata.commit };
+  const directory = mkdtempSync(path.join(tmpdir(), 'elements-ci-comparison-'));
+  const destination = path.join(METRICS_DIR, 'ci-profile-comparison');
+  const pairs = [];
+  mkdirSync(destination, { recursive: true });
+  try {
+    for (let sample = 1; sample <= options.samples; sample++) {
+      const candidateFirst = options.order === 'candidate-first' || (!options.order && sample % 2 === 0);
+      const order = candidateFirst ? ['candidate', 'baseline'] : ['baseline', 'candidate'];
+      const pair = { sample, order, results: {} };
+      for (const role of order) {
+        const worktree = path.join(directory, `${sample}-${role}`);
+        const artifacts = path.join(destination, `${sample}-${role}`);
+        let registered = false;
+        try {
+          runSync('git', ['worktree', 'add', '--detach', worktree, revisions[role]]);
+          registered = true;
+          // Metadata needs Wireit before reset. ci:reset removes this symlink and
+          // installs the revision's own dependencies before the timed command.
+          symlinkSync(path.join(ROOT_DIR, 'node_modules'), path.join(worktree, 'node_modules'), 'dir');
+          console.log(`Pair ${sample}/${options.samples}: ${role} ${revisions[role]}...`);
+          await runChild(
+            'mise',
+            [
+              'exec',
+              '--',
+              'pnpm',
+              'run',
+              'ci:profile',
+              '--target',
+              options.target,
+              '--samples',
+              '1',
+              '--reset',
+              'cold'
+            ],
+            {
+              cwd: worktree,
+              env: { ...process.env, CI: 'true', CI_PROFILE_ALLOW_DIRTY: '0', MISE_TRUSTED_CONFIG_PATHS: directory },
+              stream: true,
+              logPath: path.join(destination, `${sample}-${role}.log`)
+            }
+          );
+          pair.results[role] = JSON.parse(readFileSync(path.join(worktree, '.metrics/ci-profile.json'), 'utf8'));
+        } finally {
+          if (existsSync(path.join(worktree, '.metrics')))
+            cpSync(path.join(worktree, '.metrics'), artifacts, { recursive: true });
+          if (registered) runSync('git', ['worktree', 'remove', '--force', worktree]);
+        }
+      }
+      pairs.push(pair);
+      writeFileSync(path.join(destination, 'comparison.json'), JSON.stringify({ metadata, revisions, pairs }, null, 2));
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+}
+
 export async function main() {
   const options = profileOptions();
   const metadata = getMetadata();
@@ -517,6 +598,10 @@ export async function main() {
     throw new Error(
       `Profiling requires a clean worktree or CI_PROFILE_ALLOW_DIRTY=1 for intentional profiling changes:\n${metadata.dirtyFiles.join('\n')}`
     );
+  }
+  if (options.compareRef) {
+    await compareRevisions(options, metadata);
+    return;
   }
 
   const temporaryDirectory = mkdtempSync(path.join(tmpdir(), 'elements-ci-profile-'));
