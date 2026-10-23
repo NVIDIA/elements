@@ -5,6 +5,9 @@ inputs:
   install-playwright:
     description: Install Playwright browser and system dependencies.
     default: 'true'
+  playwright-ubuntu-mirror:
+    description: Use the Ubuntu archive for Playwright system packages.
+    default: 'false'
 
 runs:
   using: composite
@@ -51,6 +54,12 @@ runs:
       with:
         path: ~/.cache/ms-playwright
         key: ${{ runner.os }}-${{ runner.arch }}-playwright-chromium-shell-${{ steps.playwright-version.outputs.version }}-v1
+    - name: Select Ubuntu package mirror
+      if: inputs.install-playwright == 'true' && inputs.playwright-ubuntu-mirror == 'true'
+      shell: bash
+      run: |
+        test -f /etc/apt/apt-mirrors.txt
+        printf '%s\n' 'http://archive.ubuntu.com/ubuntu' | sudo tee /etc/apt/apt-mirrors.txt
     - name: Install Playwright system dependencies
       if: inputs.install-playwright == 'true'
       shell: bash
