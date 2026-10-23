@@ -30,6 +30,7 @@ import noInvalidEventListeners from '../rules/no-invalid-event-listeners.js';
 import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
 import noInvalidPageHeaderSlot from '../rules/no-invalid-page-header-slot.js';
 import noInvalidSlottedElements from '../rules/no-invalid-slotted-elements.js';
+import noNestedInteractiveElements from '../rules/no-nested-interactive-elements.js';
 import noMissingGapSpace from '../rules/no-missing-gap-space.js';
 import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
 import noRestrictedContainerFull from '../rules/no-restricted-container-full.js';
@@ -85,6 +86,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-invalid-invoker-triggers': noInvalidInvokerTriggers,
         'no-invalid-page-header-slot': noInvalidPageHeaderSlot,
         'no-invalid-slotted-elements': noInvalidSlottedElements,
+        'no-nested-interactive-elements': noNestedInteractiveElements,
         'no-missing-gap-space': noMissingGapSpace,
         'no-unknown-css-variable': noUnknownCssVariable,
         'no-nested-container-types': noNestedContainerTypes,
@@ -123,6 +125,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error'],
     '@nvidia-elements/lint/no-invalid-page-header-slot': ['error'],
     '@nvidia-elements/lint/no-invalid-slotted-elements': ['error'],
+    '@nvidia-elements/lint/no-nested-interactive-elements': ['error'],
     '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
     '@nvidia-elements/lint/no-nested-container-types': ['error'],
     '@nvidia-elements/lint/no-unstyled-typography': ['error'],

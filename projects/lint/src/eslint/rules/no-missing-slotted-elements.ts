@@ -4,12 +4,15 @@
 import type { Rule } from 'eslint';
 import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
-import { hasMatchingChild, hasTemplateSyntax, hasUnslottedContent } from '../internals/utils.js';
+import { hasMatchingChild, hasTemplateSyntax, hasUnslottedContent, parseSelector } from '../internals/utils.js';
+import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import { getSlotAssignment } from '../internals/slots.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
 interface RequiredSlotConfig {
   required?: string[];
   requiresDefaultSlotContent?: boolean;
+  requiresSingleDefaultSlotItem?: string[];
 }
 
 const REQUIRED_SLOTTED_ELEMENTS: Record<string, RequiredSlotConfig> = {
@@ -76,6 +79,9 @@ const REQUIRED_SLOTTED_ELEMENTS: Record<string, RequiredSlotConfig> = {
   'nve-switch-group': {
     required: ['nve-switch']
   },
+  'nve-tabs-item-group': {
+    requiresSingleDefaultSlotItem: ['nve-tabs-item']
+  },
   'nve-tree-node': {
     requiresDefaultSlotContent: true
   }
@@ -98,13 +104,15 @@ const rule = {
     schema: [{ type: 'object' }],
     messages: {
       ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element {{selector}}',
-      ['missing-default-slot-content']: 'Element <{{tagName}}> requires default slot content.'
+      ['missing-default-slot-content']: 'Element <{{tagName}}> requires default slot content.',
+      ['unexpected-slot-content']: '<{{tagName}}> requires only one default-slot child: {{required}}.'
     }
   },
   create(context: Rule.RuleContext) {
     function getRequirements(node: HtmlTagNode): {
       required: string[];
       requiresDefaultSlotContent: boolean;
+      requiresSingleDefaultSlotItem: string[];
       tagName: string;
     } {
       const options = context.options[0] ?? {};
@@ -112,7 +120,46 @@ const rule = {
       const config = REQUIRED_SLOTTED_ELEMENTS[tagName];
       const required = [...(config?.required ?? []), ...(options[tagName]?.required ?? [])];
       const requiresDefaultSlotContent = config?.requiresDefaultSlotContent ?? false;
-      return { required, requiresDefaultSlotContent, tagName };
+      const requiresSingleDefaultSlotItem = config?.requiresSingleDefaultSlotItem ?? [];
+      return { required, requiresDefaultSlotContent, requiresSingleDefaultSlotItem, tagName };
+    }
+
+    function matchesSelector(node: HtmlTagNode, selector: string): boolean {
+      const { tag, attrs } = parseSelector(selector);
+      return (
+        node.name.toLowerCase() === tag.toLowerCase() &&
+        Object.entries(attrs ?? {}).every(([name, value]) => findAttr(node, name)?.value?.value === value)
+      );
+    }
+
+    function getDefaultSlotElements(node: HtmlTagNode): HtmlTagNode[] | undefined {
+      const elements = (node.children ?? []).filter(child => child.type === 'Tag');
+      if (elements.some(child => getSlotAssignment(child).kind === 'dynamic')) return;
+      return elements.filter(child => getSlotAssignment(child).kind === 'default');
+    }
+
+    function matchesAllowedSelectors(node: HtmlTagNode, allowed: string[]): boolean {
+      return allowed.some(selector =>
+        selector.split(',').some(alternative => matchesSelector(node, alternative.trim()))
+      );
+    }
+
+    function hasDefaultSlotText(node: HtmlTagNode): boolean {
+      return (node.children ?? []).some(child => child.type === 'Text' && child.value?.trim());
+    }
+
+    function checkSingleDefaultSlotItem(node: HtmlTagNode, tagName: string, allowed: string[]) {
+      const items = getDefaultSlotElements(node);
+      if (!items) return;
+
+      const item = items[0];
+      if (items.length !== 1 || !item || !matchesAllowedSelectors(item, allowed) || hasDefaultSlotText(node)) {
+        context.report({
+          node,
+          messageId: 'unexpected-slot-content',
+          data: { tagName, required: allowed.join(' or ') }
+        });
+      }
     }
 
     function checkRequiredSelectors(node: HtmlTagNode, required: string[]) {
@@ -142,16 +189,21 @@ const rule = {
 
     return createVisitors(context, {
       Tag(node: HtmlTagNode) {
-        const { required, requiresDefaultSlotContent, tagName } = getRequirements(node);
+        const { required, requiresDefaultSlotContent, requiresSingleDefaultSlotItem, tagName } = getRequirements(node);
 
-        if ((!required.length && !requiresDefaultSlotContent) || hasTemplateSyntax(node)) {
+        if (
+          (!required.length && !requiresDefaultSlotContent && !requiresSingleDefaultSlotItem.length) ||
+          hasTemplateSyntax(node)
+        ) {
           return;
         }
 
+        if (requiresSingleDefaultSlotItem.length) {
+          checkSingleDefaultSlotItem(node, tagName, requiresSingleDefaultSlotItem);
+        }
         if (requiresDefaultSlotContent) {
           checkDefaultSlotContent(node, tagName);
         }
-
         checkRequiredSelectors(node, required);
       }
     });

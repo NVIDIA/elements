@@ -52,6 +52,7 @@ describe('noMissingSlottedElements', () => {
         `<nve-input>
           <input type="text" />
         </nve-input>`,
+        '<nve-input><label>Name<input type="text" /></label></nve-input>',
         `<nve-button>
           button
         </nve-button>`,
@@ -108,6 +109,65 @@ describe('noMissingSlottedElements', () => {
           errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input[type="search"]' } }]
         }
       ]
+    });
+  });
+
+  it('should allow one direct default-slotted tab item', () => {
+    tester.run('tab item groups', rule, {
+      valid: [
+        '<nve-tabs-item-group><nve-tabs-item>Tab</nve-tabs-item><button slot="suffix">Close</button></nve-tabs-item-group>',
+        '<nve-tabs-item-group><button slot="prefix">Pin</button><nve-tabs-item slot="">Tab</nve-tabs-item></nve-tabs-item-group>',
+        '<nve-tabs-item-group> \n <nve-tabs-item>Tab</nve-tabs-item> <!-- comment --> </nve-tabs-item-group>'
+      ],
+      invalid: []
+    });
+  });
+
+  it('should report groups without exactly one direct default-slotted tab item', () => {
+    tester.run('invalid tab item groups', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<nve-tabs-item-group></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        },
+        {
+          code: '<nve-tabs-item-group><button slot="suffix">Close</button></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        },
+        {
+          code: '<nve-tabs-item-group><nve-tabs-item slot="suffix">Tab</nve-tabs-item></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        },
+        {
+          code: '<nve-tabs-item-group><div><nve-tabs-item>Tab</nve-tabs-item></div></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        },
+        {
+          code: '<nve-tabs-item-group><nve-tabs-item>One</nve-tabs-item><nve-tabs-item slot="">Two</nve-tabs-item></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        },
+        {
+          code: '<nve-tabs-item-group>Label<nve-tabs-item>Tab</nve-tabs-item></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        },
+        {
+          code: '<nve-tabs-item-group><span>Label</span><nve-tabs-item>Tab</nve-tabs-item></nve-tabs-item-group>',
+          errors: [{ messageId: 'unexpected-slot-content' }]
+        }
+      ]
+    });
+  });
+
+  it('should not guess templated tab items or dynamic slot assignments', () => {
+    tester.run('dynamic tab item groups', rule, {
+      valid: [
+        '<nve-tabs-item-group>${items}</nve-tabs-item-group>',
+        '<nve-tabs-item-group><nve-tabs-item slot=${slotName}>Tab</nve-tabs-item></nve-tabs-item-group>',
+        '<nve-tabs-item-group><nve-tabs-item .slot=${slotName}>Tab</nve-tabs-item></nve-tabs-item-group>',
+        '<nve-tabs-item-group><nve-tabs-item :slot="slotName">Tab</nve-tabs-item></nve-tabs-item-group>'
+      ],
+      invalid: []
     });
   });
 

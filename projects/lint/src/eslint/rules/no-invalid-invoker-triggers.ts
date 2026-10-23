@@ -6,32 +6,13 @@ import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { isNVElement } from '../internals/utils.js';
+import { BUTTON_TYPE_ELEMENTS } from '../internals/button-elements.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
 /**
  * Invoker attributes supported by button controls and, for commandfor, command-only controls.
  */
 const INVOKER_ATTRIBUTES = ['popovertarget', 'commandfor', 'interestfor'] as const;
-
-/**
- * NVE elements that are button-type and can validly use invoker attributes.
- */
-const BUTTON_TYPE_ELEMENTS = [
-  'nve-button',
-  'nve-icon-button',
-  'nve-menu-item',
-  'nve-sort-button',
-  'nve-tabs-item',
-  'nve-tag',
-  'nve-steps-item',
-  'nve-copy-button',
-  'nve-media-fullscreen-button',
-  'nve-media-loop-button',
-  'nve-media-mute-button',
-  'nve-media-pause-button',
-  'nve-media-pip-button',
-  'nve-media-seek-button'
-] as const;
 
 /** Controls that invoke commands without button, popover, or interest behavior. */
 const COMMAND_CONTROLS = [
