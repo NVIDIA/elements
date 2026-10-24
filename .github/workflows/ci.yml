@@ -121,7 +121,10 @@ jobs:
           lfs: true
       - uses: ./.github/actions/setup-ci
       - name: Run Lighthouse tests
-        run: WIREIT_FAILURES=kill pnpm run lighthouse && node ./projects/internals/ci/cache-validate.js lighthouse && node ./projects/internals/ci/metrics.lighthouse.js
+        run: >-
+          WIREIT_FAILURES=kill mise exec -- pnpm run lighthouse
+          && mise exec -- node ./projects/internals/ci/cache-validate.js lighthouse
+          && mise exec -- node ./projects/internals/ci/metrics.lighthouse.js
       - name: Write lighthouse job summary
         if: always()
         run: node ./projects/internals/ci/lighthouse-summary.js >> "$GITHUB_STEP_SUMMARY"
