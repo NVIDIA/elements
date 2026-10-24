@@ -1,0 +1,133 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --_size-scale: 1;
+  --width: calc(8.125rem * var(--_size-scale));
+  --height: calc(8.125rem * var(--_size-scale));
+  --background: var(--nve-sys-interaction-background);
+  --opacity: 0.6;
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  --thumb-width: calc(var(--nve-ref-size-600) * var(--_size-scale));
+  --thumb-height: calc(var(--nve-ref-size-600) * var(--_size-scale));
+  --thumb-background: var(--nve-sys-text-muted-color);
+  --thumb-border: var(--nve-ref-border-width-sm) solid var(--nve-sys-layer-canvas-background);
+  --_axis-size: calc(3rem * var(--_size-scale));
+  display: inline-block;
+  width: var(--width);
+  height: var(--height);
+  user-select: none;
+}
+
+[internal-host] {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: var(--border);
+  border-radius: 50%;
+  cursor: grab;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--background);
+  pointer-events: none;
+}
+
+:host([opacity]) .background {
+  opacity: var(--opacity);
+}
+
+[internal-host]::before,
+[internal-host]::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+}
+
+[internal-host]::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  border-left: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+}
+
+[internal-host]::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+}
+
+.travel {
+  position: absolute;
+  inset: calc(var(--thumb-height) / 2) calc(var(--thumb-width) / 2);
+  z-index: 2;
+}
+
+.thumb {
+  position: absolute;
+  box-sizing: border-box;
+  width: var(--thumb-width);
+  height: var(--thumb-height);
+  border: var(--thumb-border);
+  border-radius: 50%;
+  background: var(--thumb-background);
+  transform: translate(-50%, -50%);
+}
+
+:host([constraint='square']) [internal-host] {
+  border-radius: var(--nve-ref-border-radius-md);
+}
+
+:host([size='sm']) {
+  --_size-scale: 0.8;
+}
+
+:host([size='lg']) {
+  --_size-scale: 1.2;
+}
+
+:host([constraint='horizontal']) {
+  --height: var(--_axis-size);
+}
+
+:host([constraint='vertical']) {
+  --width: var(--_axis-size);
+}
+
+:host([constraint='horizontal']) [internal-host],
+:host([constraint='vertical']) [internal-host] {
+  border-radius: var(--nve-ref-border-radius-md);
+}
+
+:host(:focus-visible) {
+  outline: none;
+}
+
+:host(:focus-visible) [internal-host] {
+  outline: var(--nve-ref-border-width-md) solid var(--nve-sys-accent-secondary-background);
+  outline-offset: var(--nve-ref-space-xs);
+}
+
+:host(:state(active)) {
+  --thumb-background: var(--nve-sys-accent-secondary-background);
+}
+
+:host(:state(active)) [internal-host] {
+  cursor: grabbing;
+}
+
+:host([disabled]) {
+  --background: var(--nve-sys-interaction-disabled-background);
+  --thumb-background: var(--nve-sys-interaction-disabled-color);
+}
+
+:host([disabled]) [internal-host],
+:host([readonly]) [internal-host] {
+  cursor: default;
+}

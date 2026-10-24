@@ -66,6 +66,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/icon-button/define.js';
         import '@nvidia-elements/core/iframe/define.js';
         import '@nvidia-elements/core/input/define.js';
+        import '@nvidia-elements/core/joystick/define.js';
         import '@nvidia-elements/core/logo/define.js';
         import '@nvidia-elements/core/menu/define.js';
         import '@nvidia-elements/core/month/define.js';
