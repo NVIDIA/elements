@@ -2,6 +2,8 @@ import { exec } from 'node:child_process';
 import { existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'path';
 import * as lockFile from 'proper-lockfile';
+import { performance } from 'node:perf_hooks';
+import { recordPhase } from '../runners/profile.js';
 
 /**
  * creates a lockfile to force parallel playwright runners to execute one at a time, example:
@@ -22,6 +24,7 @@ if (!existsSync(lockPath)) {
   writeFileSync(lockPath, '');
 }
 
+const waitStart = performance.now();
 const timerId = setInterval(() => {
   lockFile
     .lock(lockPath, {
@@ -29,6 +32,8 @@ const timerId = setInterval(() => {
     })
     .then(async release => {
       clearInterval(timerId);
+      recordPhase('browser-lock-wait', waitStart, { lockName });
+      const heldStart = performance.now();
       await new Promise(r => {
         exec(cmd, (error, stdout, stderr) => {
           console.log(stdout);
@@ -45,6 +50,7 @@ const timerId = setInterval(() => {
           r();
         });
       });
+      recordPhase('browser-lock-held', heldStart, { lockName });
       return release();
     })
     .catch(_ => {});

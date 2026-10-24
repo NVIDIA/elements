@@ -2,10 +2,10 @@ import { lighthouseRunner } from '../runners/lighthouse.js';
 
 let runnerInstance = null;
 
-export async function setup() {
+export async function setup(project) {
   if (!runnerInstance) {
     runnerInstance = lighthouseRunner;
-    await runnerInstance.open();
+    await runnerInstance.open({ workers: project.config.fileParallelism ? project.config.maxWorkers : 1 });
   }
 
   return async () => {
