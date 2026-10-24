@@ -10,7 +10,8 @@ import {
   type PreparationContext
 } from '../../rendering/preparation.js';
 
-export const LABEL_GLYPH_STRIDE = 36;
+import { LABEL_GLYPH_STRIDE, validateLabelTextBudget } from './limits.js';
+export { LABEL_GLYPH_STRIDE } from './limits.js';
 
 export interface LabelGlyphRun {
   readonly bytes: Uint8Array;
@@ -19,6 +20,7 @@ export interface LabelGlyphRun {
 }
 
 interface LabelGlyphPreparationOptions {
+  readonly maxGlyphBytes?: number;
   readonly atlas: LabelFontAtlas;
   readonly context: PreparationContext;
   readonly count: number;
@@ -53,6 +55,7 @@ interface LabelGlyphCursor extends LabelTextCursor {
 }
 
 export function createLabelGlyphRun(texts: readonly string[], count: number, atlas: LabelFontAtlas): LabelGlyphRun {
+  validateLabelTextBudget(texts, count);
   const options = { atlas, count, texts };
   const metrics = runPreparationSync(
     buildLabelMetrics({ ...options, chunkSize: Number.MAX_SAFE_INTEGER, widthPrecision: 'number' })
@@ -64,6 +67,7 @@ export function createLabelGlyphRun(texts: readonly string[], count: number, atl
 /** Builds a glyph run in bounded tasks and returns undefined when its generation is obsolete. */
 export async function prepareLabelGlyphRun(options: LabelGlyphPreparationOptions): Promise<LabelGlyphRun | undefined> {
   const { context } = options;
+  validateLabelTextBudget(options.texts, options.count, options.maxGlyphBytes);
   if (!(await beginPreparation(context))) return undefined;
   const metrics = await resumePreparation(
     buildLabelMetrics({ ...options, chunkSize: PREPARATION_CHUNK_SIZE, widthPrecision: 'float32' }),

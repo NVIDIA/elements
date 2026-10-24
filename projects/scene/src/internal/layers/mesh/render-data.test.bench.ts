@@ -2,14 +2,22 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, test, type BenchRunOptions } from 'vitest';
+import { captureTestMeshGeometry } from '../../../../test/rendering.js';
+import { prepareHeightfieldCapture } from '../heightfield/capture.js';
+import { createPreparationContext } from '../../rendering/preparation.js';
 import {
   registerHeightfieldLayer,
-  setHeightfieldLayerGrid,
+  applyCapturedHeightfieldGrid,
   takeHeightfieldLayerRenderData
 } from '../heightfield/layer-state.js';
 import { registerMarkerLayer } from '../markers/layer-state.js';
-import { registerBodyLayer, setBodyLayerGeometry, takeBodyLayerRenderData } from '../body/layer-state.js';
-import { getMeshRenderData, registerMeshLayer, replaceMeshGeometry } from './layer-state.js';
+import {
+  registerBodyLayer,
+  setBodyLayerGeometry,
+  getBodyLayerLoadComplete,
+  takeBodyLayerRenderData
+} from '../body/layer-state.js';
+import { getMeshRenderData, registerMeshLayer } from './layer-state.js';
 
 const options = { iterations: 10, throws: true, time: 750, warmupTime: 200 } satisfies BenchRunOptions;
 const BATCH = 4096;
@@ -23,28 +31,34 @@ function geometry(vertexCount: number) {
   };
 }
 
-function snapshotReader(kind: 'mesh' | 'body' | 'heightfield', side: number) {
+async function snapshotReader(kind: 'mesh' | 'body' | 'heightfield', side: number) {
   const layer = document.createElement('div');
   const vertexCount = side * side;
   if (kind === 'heightfield') {
     registerHeightfieldLayer(layer, [1, 1, 1, 1]);
-    setHeightfieldLayerGrid(layer, {
-      columns: side,
-      rows: side,
-      spacing: 1,
-      heights: new Float32Array(vertexCount),
-      colors: new Uint8Array(vertexCount * 4).fill(255)
-    });
+    const captured = await prepareHeightfieldCapture(
+      {
+        columns: side,
+        rows: side,
+        spacing: 1,
+        heights: new Float32Array(vertexCount),
+        colors: new Uint8Array(vertexCount * 4).fill(255)
+      },
+      createPreparationContext(() => true)
+    );
+    if (!captured) throw new Error('Expected a captured heightfield.');
+    applyCapturedHeightfieldGrid(layer, captured);
     return () => takeHeightfieldLayerRenderData(layer);
   }
   registerMarkerLayer(layer, 'cube');
   if (kind === 'body') {
     registerBodyLayer(layer);
     setBodyLayerGeometry(layer, [{ geometry: geometry(vertexCount) }]);
+    await getBodyLayerLoadComplete(layer);
     return () => takeBodyLayerRenderData(layer);
   }
   registerMeshLayer(layer);
-  replaceMeshGeometry(layer, geometry(vertexCount));
+  await captureTestMeshGeometry(layer, geometry(vertexCount));
   return () => getMeshRenderData(layer);
 }
 
@@ -52,7 +66,7 @@ describe('mesh color snapshot classification', () => {
   for (const side of [64, 256]) {
     for (const kind of ['mesh', 'body', 'heightfield'] as const) {
       test(`captures ${BATCH} unchanged ${kind} snapshots with ${side * side} opaque colors`, async ({ bench }) => {
-        const snapshot = snapshotReader(kind, side);
+        const snapshot = await snapshotReader(kind, side);
         await bench('repeated snapshots', () => {
           let checksum = 0;
           for (let index = 0; index < BATCH; index += 1) {

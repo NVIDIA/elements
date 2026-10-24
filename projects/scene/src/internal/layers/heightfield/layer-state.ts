@@ -4,7 +4,9 @@
 import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../diagnostics/errors.js';
 import { sameRGBA } from '../../color/rgba.js';
 import { EMPTY_ALPHA_SUMMARY, summarizeRGBAAlpha, type AlphaSummary } from '../../color/alpha.js';
-import { validateHeightfieldGrid } from './compile.js';
+import { validateHeightfieldHeights } from './compile.js';
+import { readHeightfieldGrid, type CapturedHeightfieldGrid } from './capture.js';
+import { assertSynchronousCapture, SynchronousCaptureLimitError } from '../../rendering/capture.js';
 import { getHeightfieldTopology, hasSameHeightfieldTopology, type HeightfieldTopology } from './topology.js';
 import type { HeightfieldGrid } from './types.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
@@ -59,14 +61,15 @@ export function disconnectHeightfieldLayer(layer: HTMLElement): void {
 /** Store a private grid snapshot, compiling it into renderer-owned geometry. */
 export function setHeightfieldLayerGrid(layer: HTMLElement, value: unknown): void {
   const state = getState(layer);
-  state.version += 1;
   if (value === null) {
+    state.version += 1;
     clearGrid(state);
     updateGridEpisode(layer, state);
     notifyOwningScene(layer);
     return;
   }
   compileGrid(state, value);
+  state.version += 1;
   updateGridEpisode(layer, state);
   notifyOwningScene(layer);
 }
@@ -82,21 +85,35 @@ function clearGrid(state: HeightfieldState): void {
 function compileGrid(state: HeightfieldState, value: unknown): void {
   try {
     const grid = snapshotGrid(value);
-    const topology = getHeightfieldTopology(grid);
-    validateHeightfieldGrid(grid);
-    state.sampler = prepareHeightfieldSampler(grid);
-    state.alphaSummary = summarizeRGBAAlpha(grid.colors ?? null);
-    if (!hasSameHeightfieldTopology(state.topology, topology)) state.topologyVersion += 1;
-    state.topology = topology;
-    state.grid = grid;
-    state.gridError = false;
-  } catch {
+    validateHeightfieldHeights(grid.heights);
+    installGrid(state, { grid, alphaSummary: summarizeRGBAAlpha(grid.colors ?? null) });
+  } catch (error) {
+    if (error instanceof SynchronousCaptureLimitError) throw error;
     state.alphaSummary = EMPTY_ALPHA_SUMMARY;
     state.grid = null;
     state.sampler = null;
     state.gridError = true;
     state.topology = null;
   }
+}
+
+/** Publishes a complete validated snapshot without scanning the samples again. */
+export function applyCapturedHeightfieldGrid(layer: HTMLElement, capture: CapturedHeightfieldGrid): void {
+  const state = getState(layer);
+  installGrid(state, capture);
+  state.version += 1;
+  updateGridEpisode(layer, state);
+  notifyOwningScene(layer);
+}
+
+function installGrid(state: HeightfieldState, { grid, alphaSummary }: CapturedHeightfieldGrid): void {
+  const topology = getHeightfieldTopology(grid);
+  state.sampler = prepareHeightfieldSampler(grid);
+  state.alphaSummary = alphaSummary;
+  if (!hasSameHeightfieldTopology(state.topology, topology)) state.topologyVersion += 1;
+  state.topology = topology;
+  state.grid = grid;
+  state.gridError = false;
 }
 
 function updateGridEpisode(layer: HTMLElement, state: HeightfieldState): void {
@@ -191,17 +208,11 @@ function validateChildren(layer: HTMLElement, state: HeightfieldState): void {
 }
 
 function snapshotGrid(value: unknown): HeightfieldGrid {
-  if (value === null || typeof value !== 'object') throw new RangeError('Grid must be an object.');
-  const candidate = value as Record<string, unknown>;
-  const heights = candidate.heights instanceof Float32Array ? new Float32Array(candidate.heights) : candidate.heights;
-  const colors = candidate.colors instanceof Uint8Array ? new Uint8Array(candidate.colors) : candidate.colors;
-  const origin = Array.isArray(candidate.origin) ? [...candidate.origin] : candidate.origin;
+  const grid = readHeightfieldGrid(value);
+  assertSynchronousCapture(grid.heights.length + (grid.colors?.length ?? 0), 'grid');
   return {
-    columns: candidate.columns as number,
-    rows: candidate.rows as number,
-    spacing: candidate.spacing as number,
-    heights: heights as Float32Array,
-    ...(colors === undefined ? {} : { colors: colors as Uint8Array }),
-    ...(origin === undefined ? {} : { origin: origin as readonly [number, number] })
+    ...grid,
+    heights: new Float32Array(grid.heights),
+    ...(grid.colors ? { colors: new Uint8Array(grid.colors) } : {})
   };
 }

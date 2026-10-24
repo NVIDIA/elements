@@ -27,6 +27,19 @@ interface CompiledHeightfield {
 
 /** Check a grid before compiling or assigning it to a heightfield element. */
 export function validateHeightfieldGrid(grid: HeightfieldGrid): void {
+  validateHeightfieldGridShape(grid);
+  validateHeightfieldHeights(grid.heights);
+}
+
+/** Checks sample values after metadata validation or a bounded capture. */
+export function validateHeightfieldHeights(heights: Float32Array): void {
+  if (heights.some(height => !Number.isFinite(height))) {
+    throw new RangeError('heights must contain only finite values.');
+  }
+}
+
+/** Checks dimensions, array lengths, and allocation bounds before reading sample data. */
+export function validateHeightfieldGridShape(grid: HeightfieldGrid): void {
   if (grid === null || typeof grid !== 'object') {
     throw new RangeError('Grid must be an object.');
   }
@@ -48,9 +61,6 @@ function validateHeights(grid: HeightfieldGrid): void {
   const vertexCount = grid.rows * grid.columns;
   if (grid.heights.length !== vertexCount) {
     throw new RangeError('heights length must equal rows multiplied by columns.');
-  }
-  if (grid.heights.some(height => !Number.isFinite(height))) {
-    throw new RangeError('heights must contain only finite values.');
   }
 }
 

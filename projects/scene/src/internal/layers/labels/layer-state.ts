@@ -3,6 +3,7 @@
 
 import { LAYER_CHILD, LAYOUT_STRIDE_MISMATCH, LAYOUT_VALUE_INVALID } from '../../diagnostics/errors.js';
 import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
+import { MAX_LABEL_COUNT, MAX_LABEL_TEXT_UNITS } from './limits.js';
 import { LABEL } from '../../records/layouts/built-ins.js';
 import { getPackedRecordBytes, getPackedRecordKind, isPackedRecordSource } from '../../records/packed-record-source.js';
 import { replacePreparedVertexSource } from '../sources/prepared-record-source.js';
@@ -189,8 +190,12 @@ function createLabelLayerRenderData(
 }
 
 function activeTextsHaveVisibleContent(texts: readonly string[], count: number): boolean {
+  if (count > MAX_LABEL_COUNT) return true;
+  let remaining = MAX_LABEL_TEXT_UNITS;
   for (let index = 0; index < count; index += 1) {
-    if (hasVisibleLabelText(texts[index] ?? '')) return true;
+    const text = texts[index] ?? '';
+    remaining -= text.length;
+    if (remaining < 0 || hasVisibleLabelText(text)) return true;
   }
   return false;
 }

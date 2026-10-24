@@ -7,6 +7,7 @@ export const FRAME_NAME_DUPLICATE = 'frame-name-duplicate';
 export const FRAME_TRANSFORM = 'frame-transform';
 export const LAYOUT_STRIDE_MISMATCH = 'layout-stride-mismatch';
 export const LAYOUT_VALUE_INVALID = 'layout-value-invalid';
+export const LABEL_TEXT_LIMIT = 'label-text-limit';
 export const LAYER_CHILD = 'layer-child';
 export const LAYER_SOURCE_INVALID = 'layer-source-invalid';
 export const FEATURE_ID_MAP_INVALID = 'feature-id-map-invalid';
@@ -48,6 +49,7 @@ export const MODEL_JOINT = 'model-joint';
 export const MODEL_NAME = 'model-name';
 
 export type SceneErrorCode =
+  | typeof LABEL_TEXT_LIMIT
   | typeof JOINT_CONNECTION
   | typeof MODEL_NAME
   | typeof MODEL_JOINT

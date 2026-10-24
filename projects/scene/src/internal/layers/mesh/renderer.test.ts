@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createGpu, createMeshItem } from '../../../../test/rendering.js';
+import { captureTestMeshGeometry, createGpu, createMeshItem } from '../../../../test/rendering.js';
 import { restoreScenePlatform, scenePlatform } from '../../gpu/platform.js';
 import { composePreciseMat4, identityMat4 } from '../../math/mat4.js';
 import { createPickPipelines } from '../../rendering/picking/pipelines.js';
@@ -128,7 +128,7 @@ describe('MeshRenderer', () => {
     const item = createMeshItem();
     const count = 16_386;
     const positions = new Float32Array(count * 3);
-    replaceMeshGeometry(item.layer, {
+    await captureTestMeshGeometry(item.layer, {
       positions,
       indices: Uint32Array.from({ length: count }, (_, index) => index),
       colors: new Float32Array(count * 4).fill(1)
