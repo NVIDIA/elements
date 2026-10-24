@@ -63,7 +63,13 @@ import '@nvidia-elements/scene/mesh/define.js';
 ```
 
 The fragment supports future sub-asset selection and passes unchanged to the decoder. STL ignores it.
-Await `body.loadComplete` for decoded and captured geometry from every mesh part.
+Await `body.loadComplete` for decoded and captured geometry from every mesh part and pending body compilation.
+Assign body and mesh data through `geometry`, and terrain data through `grid`. Keep the assigned inputs
+unchanged until the element's `loadComplete` promise settles. Large captures run in bounded tasks and retain
+accepted data until success; a newer assignment or disconnect cancels pending capture. Once capture completes,
+Scene owns its snapshot, and later producer edits require reassignment or mesh range publication.
+Mesh snapshots and prepared geometry each have a 256 MiB allocation limit; heightfield layers limit prepared
+geometry to 256 MiB and validate dimensions before copying samples.
 
 ## A model with two joints
 

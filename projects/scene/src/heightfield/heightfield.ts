@@ -7,6 +7,7 @@ import { getFrameReference, setFrameReference } from '../internal/composition/fr
 import { useStyles } from '@nvidia-elements/core/internal';
 import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color/color.js';
 import {
+  applyCapturedHeightfieldGrid,
   connectHeightfieldLayer,
   disconnectHeightfieldLayer,
   getHeightfieldLayerSampler,
@@ -14,6 +15,10 @@ import {
   setHeightfieldLayerColor,
   setHeightfieldLayerGrid
 } from '../internal/layers/heightfield/layer-state.js';
+import { prepareHeightfieldCapture } from '../internal/layers/heightfield/capture.js';
+import { SnapshotCapture, SynchronousCaptureLimitError } from '../internal/rendering/capture.js';
+import { HEIGHTFIELD_GRID } from '../internal/diagnostics/errors.js';
+import { diagnosticReporterService } from '../internal/diagnostics/reporter.service.js';
 import {
   drape,
   drapeToSurface,
@@ -79,6 +84,15 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
 
   #color = DEFAULT_COLOR.source;
   #grid: HeightfieldGrid | null = null;
+  readonly #capture = new SnapshotCapture(error =>
+    diagnosticReporterService.update({
+      active: true,
+      code: HEIGHTFIELD_GRID,
+      element: this,
+      message: error instanceof Error ? error.message : String(error),
+      severity: 'error'
+    })
+  );
 
   /** Stable application identity returned when picking this heightfield. */
   @property({ attribute: 'feature-id', converter: sceneFeatureIdConverter })
@@ -101,9 +115,9 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
   }
 
   /**
-   * The uniformly spaced elevation data to compile, or null to render nothing.
-   * The setter snapshots typed arrays and origin coordinates immediately, so
-   * later in-place edits take effect only after reassigning `grid` again.
+   * The uniformly spaced elevation data to capture, or null to render nothing.
+   * Keep input unchanged until loadComplete settles. Large captures yield between bounded
+   * tasks and retain accepted terrain and queries until success. Reassign grid to publish edits.
    */
   @property({ attribute: false })
   get grid(): HeightfieldGrid | null {
@@ -112,9 +126,32 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
 
   set grid(value: HeightfieldGrid | null) {
     const previous = this.#grid;
+    try {
+      setHeightfieldLayerGrid(this, value);
+    } catch (error) {
+      if (value === null || !(error instanceof SynchronousCaptureLimitError)) throw error;
+      void this.#prepareGrid(value);
+      return;
+    }
+    this.#capture.cancel();
     this.#grid = value;
-    setHeightfieldLayerGrid(this, value);
     this.requestUpdate('grid', previous);
+  }
+
+  /** Resolves after current grid capture; rejects pending capture failures or cancellation. */
+  get loadComplete(): Promise<void> {
+    return this.#capture.complete;
+  }
+
+  #prepareGrid(value: HeightfieldGrid): Promise<void> {
+    return this.#capture.run(async context => {
+      const captured = await prepareHeightfieldCapture(value, context);
+      if (!captured || !context.isCurrent()) return;
+      const previous = this.#grid;
+      applyCapturedHeightfieldGrid(this, captured);
+      this.#grid = value;
+      this.requestUpdate('grid', previous);
+    });
   }
 
   /** CSS base color multiplied by optional per-sample colors. */
@@ -149,6 +186,7 @@ export class SceneHeightfield extends LitElement implements SceneInteractionTarg
   }
 
   override disconnectedCallback(): void {
+    this.#capture.cancel();
     disconnectHeightfieldLayer(this);
     super.disconnectedCallback();
   }

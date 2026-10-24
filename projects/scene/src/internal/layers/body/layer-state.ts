@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { composeModelTint } from '../../composition/model/tint.js';
-import { MESH_PART, SHAPE_TYPE } from '../../diagnostics/errors.js';
+import { MESH_GEOMETRY, MESH_PART, SHAPE_TYPE } from '../../diagnostics/errors.js';
 import {
   compileNormalizedShapes,
   compileShapes,
@@ -19,12 +19,22 @@ import { isSceneBodyPart, SCENE_SHAPE_TAG } from '../registry.js';
 import { getMeshPartGeometry, isMeshLayerRegistered } from '../mesh/layer-state.js';
 import type { SceneBodyGeometry, SceneBodyNode } from './types.js';
 import { observeBodyParts } from './part-notifications.js';
-import { compileBodyGeometry, type CompiledBodyGeometry } from './geometry.js';
+import {
+  bodyGeometryWorkIsBounded,
+  compileBodyGeometry,
+  prepareBodyGeometry,
+  type CompiledBodyGeometry
+} from './geometry.js';
 import { parseCSSColor, resolveSceneColor } from '../../color/color.js';
 import { EMPTY_ALPHA_SUMMARY, summarizeRGBAAlpha, type AlphaSummary } from '../../color/alpha.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 
+import { createPreparationContext, runPreparation, type PreparationContext } from '../../rendering/preparation.js';
+
 interface BodyLayerState {
+  generation: number;
+  pendingInput?: 'children' | 'geometry';
+  preparationComplete: Promise<void>;
   alphaSummary: AlphaSummary;
   compiled: CompiledBodyGeometry;
   geometry: SceneBodyGeometry | null;
@@ -43,6 +53,8 @@ const states = new WeakMap<HTMLElement, BodyLayerState>();
 
 export function registerBodyLayer(layer: HTMLElement): void {
   states.set(layer, {
+    generation: 0,
+    preparationComplete: Promise.resolve(),
     alphaSummary: EMPTY_ALPHA_SUMMARY,
     compiled: compileShapes([]),
     geometryError: false,
@@ -69,14 +81,21 @@ export function connectBodyLayer(layer: HTMLElement): void {
 
 export function disconnectBodyLayer(layer: HTMLElement): void {
   const state = getState(layer);
+  cancelBodyPreparation(state);
   state.observer?.disconnect();
   state.observer = undefined;
 }
 
 /** Captures geometry before replacing its input authority. */
-export function setBodyLayerGeometry(layer: HTMLElement, geometry: SceneBodyGeometry | null): void {
+export function setBodyLayerGeometry(layer: HTMLElement, geometry: SceneBodyGeometry | null): 'applied' | 'pending' {
   const state = getState(layer);
+  if (geometry !== null && !bodyGeometryWorkIsBounded(geometry)) {
+    void scheduleBodyPreparation(layer, geometry, 'geometry');
+    return 'pending';
+  }
   const compiled = geometry === null ? null : compileBodyGeometry(geometry);
+  cancelBodyPreparation(state);
+  updatePreparationError(layer, false);
   state.input = geometry === null ? 'children' : 'geometry';
   state.geometry = geometry;
   if (compiled !== null) {
@@ -85,6 +104,105 @@ export function setBodyLayerGeometry(layer: HTMLElement, geometry: SceneBodyGeom
     replaceCompiled(state, compiled);
   } else recompileDeclarative(layer, state);
   notifyOwningScene(layer);
+  return 'applied';
+}
+
+export function getBodyLayerLoadComplete(layer: HTMLElement): Promise<void> {
+  return getState(layer).preparationComplete;
+}
+
+function cancelBodyPreparation(state: BodyLayerState): void {
+  state.generation += 1;
+  state.pendingInput = undefined;
+  state.preparationComplete = Promise.resolve();
+}
+
+function scheduleBodyPreparation(
+  layer: HTMLElement,
+  geometry: SceneBodyGeometry,
+  input: BodyLayerState['input']
+): Promise<void> {
+  return startBodyPreparation(layer, input, async context => {
+    const compiled = await prepareBodyGeometry(geometry, context);
+    return compiled ? { geometry, compiled } : undefined;
+  });
+}
+
+interface PreparedBody {
+  readonly geometry: SceneBodyGeometry;
+  readonly compiled: CompiledBodyGeometry;
+}
+
+function scheduleDeclarativePreparation(layer: HTMLElement): Promise<void> {
+  return startBodyPreparation(layer, 'children', async context => {
+    const geometry = await runPreparation(readDeclarativeGeometry(layer), context);
+    if (!geometry) return undefined;
+    const compiled = await prepareBodyGeometry(geometry, context);
+    return compiled ? { geometry, compiled } : undefined;
+  });
+}
+
+function* readDeclarativeGeometry(layer: HTMLElement): Generator<void, SceneBodyNode[]> {
+  if (layer.children.length > 65_536) throw new RangeError('body geometry exceeds its node limit.');
+  const geometry: SceneBodyNode[] = [];
+  const parts = new Set<HTMLElement>();
+  let count = 0;
+  for (const child of layer.children) {
+    if (isPartElement(child)) {
+      parts.add(child);
+      geometry.push(...(readPart(child) ?? []));
+    }
+    if (++count % 64 === 0) yield;
+  }
+  clearDepartedParts(getState(layer), parts);
+  return geometry;
+}
+
+function publishCompiledGeometry(layer: HTMLElement, prepared: PreparedBody, input: BodyLayerState['input']): void {
+  const state = getState(layer);
+  state.input = input;
+  state.geometry = prepared.geometry;
+  state.geometryError = false;
+  clearAggregateError(state);
+  replaceCompiled(state, prepared.compiled);
+  updatePreparationError(layer, false);
+  notifyOwningScene(layer);
+}
+
+function startBodyPreparation(
+  layer: HTMLElement,
+  input: BodyLayerState['input'],
+  prepare: (context: PreparationContext) => Promise<PreparedBody | undefined>
+): Promise<void> {
+  const state = getState(layer);
+  const generation = ++state.generation;
+  state.pendingInput = input;
+  const context = createPreparationContext(() => generation === state.generation);
+  const pending = prepare(context)
+    .then(prepared => {
+      if (!prepared || !context.isCurrent()) throw new DOMException('Body preparation cancelled.', 'AbortError');
+      publishCompiledGeometry(layer, prepared, input);
+    })
+    .catch((error: unknown) => {
+      if (context.isCurrent()) updatePreparationError(layer, true);
+      throw error;
+    })
+    .finally(() => {
+      if (context.isCurrent()) state.pendingInput = undefined;
+    });
+  state.preparationComplete = pending;
+  void pending.catch(() => {});
+  return pending;
+}
+
+function updatePreparationError(layer: HTMLElement, active: boolean): void {
+  diagnosticReporterService.update({
+    active,
+    code: MESH_GEOMETRY,
+    element: layer,
+    message: 'Unable to prepare body geometry.',
+    severity: 'error'
+  });
 }
 
 /** Current resolved data; renderer captures have separate ownership. */
@@ -136,25 +254,40 @@ export function takeBodyLayerRenderData(layer: HTMLElement): MeshRenderData {
 }
 
 function recompileDeclarative(layer: HTMLElement, state: BodyLayerState): void {
-  if (state.input !== 'children') return;
+  if (state.input !== 'children' || state.pendingInput === 'geometry') return;
+  if (layer.children.length > 64) {
+    void scheduleDeclarativePreparation(layer);
+    return;
+  }
   const candidates = [...layer.children].filter(isPartElement).map(part => ({ part, value: readPart(part) }));
   clearDepartedParts(state, new Set(candidates.map(candidate => candidate.part)));
   try {
-    const geometry = candidates.flatMap(candidate => candidate.value ?? []);
-    const compiled = candidates.every(candidate => isShapeElement(candidate.part))
-      ? compileNormalizedShapes(geometry as NormalizedBodyShape[])
-      : compileBodyGeometry(geometry);
-    state.geometry = geometry;
-    clearAggregateError(state);
-    state.geometryError = false;
-    replaceCompiled(state, compiled);
+    compileDeclarativeCandidates(layer, state, candidates);
   } catch {
+    cancelBodyPreparation(state);
     setAggregateError(state, getLatestValidPart(candidates));
     state.geometryError = true;
     state.geometry = null;
     replaceCompiled(state, compileShapes([]));
   }
   notifyOwningScene(layer);
+}
+
+function compileDeclarativeCandidates(
+  layer: HTMLElement,
+  state: BodyLayerState,
+  candidates: readonly { readonly part: HTMLElement; readonly value: readonly SceneBodyNode[] | null }[]
+): void {
+  const geometry = candidates.flatMap(candidate => candidate.value ?? []);
+  if (!bodyGeometryWorkIsBounded(geometry)) {
+    void scheduleBodyPreparation(layer, geometry, 'children');
+    return;
+  }
+  const compiled = candidates.every(candidate => isShapeElement(candidate.part))
+    ? compileNormalizedShapes(geometry as NormalizedBodyShape[])
+    : compileBodyGeometry(geometry);
+  cancelBodyPreparation(state);
+  publishCompiledGeometry(layer, { geometry, compiled }, 'children');
 }
 
 function getLatestValidPart(
@@ -193,7 +326,7 @@ function setAggregateError(state: BodyLayerState, part: HTMLElement | undefined)
 }
 
 function replaceCompiled(state: BodyLayerState, compiled: CompiledBodyGeometry): void {
-  state.alphaSummary = summarizeRGBAAlpha(compiled.colors);
+  state.alphaSummary = compiled.alphaSummary ?? summarizeRGBAAlpha(compiled.colors);
   state.compiled = compiled;
   state.topologyVersion += 1;
   state.version += 1;

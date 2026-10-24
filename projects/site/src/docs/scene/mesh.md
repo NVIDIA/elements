@@ -37,6 +37,13 @@ const indices = new Uint32Array([0, 1, 2, 1, 3, 2]);
 mesh.geometry = { indices, positions };
 ```
 
+Keep input arrays unchanged until `loadComplete` settles:
+
+```js
+mesh.geometry = { indices, positions };
+await mesh.loadComplete;
+```
+
 ## Publish reused arrays
 
 {% api 'nve-scene-mesh' 'method' 'publishGeometry' %}

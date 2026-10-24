@@ -555,9 +555,10 @@ describe('body edits', () => {
     });
 
     const body = document.createElement(SceneBody.metadata.tag) as SceneBody;
-    test(`${count} bulk assignment`, async ({ bench }) => {
-      await bench(`${count} bulk assignment`, () => {
+    test(`${count} body geometry capture`, async ({ bench }) => {
+      await bench(`${count} body geometry capture`, async () => {
         body.geometry = shapes;
+        await body.loadComplete;
       }).run(runOptions);
     });
 
@@ -569,9 +570,10 @@ describe('body edits', () => {
     declarativeBody.append(...declarativeParts);
     test(`${count} declarative edit`, async ({ bench }) => {
       let position = 0;
-      await bench(`${count} declarative edit`, () => {
+      await bench(`${count} declarative edit`, async () => {
         position += 1;
         declarativeParts[0]!.position = [position, 0, 0];
+        await declarativeBody.loadComplete;
       }).run(runOptions);
     });
   }

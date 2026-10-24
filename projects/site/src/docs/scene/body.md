@@ -53,6 +53,7 @@ body.geometry = [
     ]
   }
 ];
+await body.loadComplete;
 ```
 
 ## Load geometry
@@ -67,7 +68,9 @@ body.geometry = [
 import { loadGeometry, decodeGeometry } from '@nvidia-elements/scene';
 
 body.geometry = await loadGeometry('/models/robot-arm.stl', { signal: controller.signal });
+await body.loadComplete;
 body.geometry = await decodeGeometry(bytes, { format: 'stl', signal: controller.signal });
+await body.loadComplete;
 ```
 
 ## Register an external decoder

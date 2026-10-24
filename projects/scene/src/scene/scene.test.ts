@@ -4,6 +4,8 @@
 import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
+import type { SceneMesh } from '../mesh/mesh.js';
+import { scenePlatform } from '../internal/gpu/platform.js';
 import type { SceneCamera } from '../camera/camera.js';
 import { sceneCameraController } from '../internal/composition/camera/behavior.js';
 import type { SceneFrame } from '../frame/frame.js';
@@ -218,12 +220,15 @@ describe(Scene.metadata.tag, () => {
     `);
     const mesh = required(element.querySelector<HTMLElement>('#mesh'), 'Expected mesh layer.');
     const vertexCount = 16_386;
-    Reflect.set(mesh, 'geometry', {
+    scenePlatform.yieldForPreparation = async () => undefined;
+    (mesh as SceneMesh).geometry = {
       colors: new Float32Array(vertexCount * 4).fill(1),
       normals: new Float32Array(vertexCount * 3),
       positions: new Float32Array(vertexCount * 3),
       uvs: new Float32Array(vertexCount * 2)
-    });
+    };
+    await (mesh as SceneMesh).loadComplete;
+    scenePlatform.yieldForPreparation = () => new Promise<void>(resolve => releases.push(resolve));
     let ready = false;
     void element.ready.then(() => (ready = true));
 

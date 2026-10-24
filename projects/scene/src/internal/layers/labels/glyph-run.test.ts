@@ -6,7 +6,47 @@ import type { LabelFontAtlas, LabelGlyphMetric } from './font/atlas.js';
 import { createLabelGlyphRun, LABEL_GLYPH_STRIDE, prepareLabelGlyphRun } from './glyph-run.js';
 import { PREPARATION_CHUNK_SIZE, type PreparationContext } from '../../rendering/preparation.js';
 
+import { MAX_LABEL_COUNT, MAX_LABEL_TEXT_UNITS, validateLabelTextBudget } from './limits.js';
+
 describe(createLabelGlyphRun.name, () => {
+  it('rejects oversized strings, aggregate runs, and label counts before metric allocation', async () => {
+    const texts = ['A'.repeat(MAX_LABEL_TEXT_UNITS + 1)];
+    expect(() => createLabelGlyphRun(texts, 1, createAtlas())).toThrow('glyph byte limit');
+    let scheduled = false;
+    await expect(
+      prepareLabelGlyphRun({
+        atlas: createAtlas(),
+        count: 1,
+        texts,
+        context: {
+          isCurrent: () => true,
+          yield: async () => {
+            scheduled = true;
+          }
+        }
+      })
+    ).rejects.toThrow('glyph byte limit');
+    expect(scheduled).toBe(false);
+    expect(() => validateLabelTextBudget(['A'.repeat(MAX_LABEL_TEXT_UNITS), 'A'], 2)).toThrow('glyph byte limit');
+    expect(() => validateLabelTextBudget([], MAX_LABEL_COUNT + 1)).toThrow('count');
+    expect(() => validateLabelTextBudget([' '.repeat(MAX_LABEL_TEXT_UNITS + 1)], 1)).toThrow('glyph byte limit');
+    expect(() => validateLabelTextBudget(['A'.repeat(MAX_LABEL_TEXT_UNITS)], 1)).not.toThrow();
+  });
+
+  it('honors a smaller device budget and ignores text outside the requested prefix', async () => {
+    expect(createLabelGlyphRun(['AA', 'A'.repeat(MAX_LABEL_TEXT_UNITS + 1)], 1, createAtlas()).bytes).toHaveLength(72);
+    expect(() => validateLabelTextBudget(['AAA'], 1, 72)).toThrow('glyph byte limit');
+    await expect(
+      prepareLabelGlyphRun({
+        atlas: createAtlas(),
+        context: createSequencedContext(true),
+        count: 1,
+        texts: ['AAA'],
+        maxGlyphBytes: 72
+      })
+    ).rejects.toThrow('glyph byte limit');
+  });
+
   it('centers visible glyphs, preserves whitespace advances, and replaces unsupported characters', () => {
     const atlas = createAtlas();
     const run = createLabelGlyphRun(['A🙂 A', '\t\n'], 2, atlas);

@@ -1,11 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
-import { compileBodyGeometry } from './geometry.js';
+import { describe, expect, it, vi } from 'vitest';
+import { bodyGeometryWorkIsBounded, compileBodyGeometry, prepareBodyGeometry } from './geometry.js';
 import { compileShapes } from './compile.js';
 import type { SceneBodyGeometry, SceneBodyGroupNode, SceneBodyNode } from './types.js';
 import { MAX_GEOMETRY_BYTES } from './limits.js';
+
+import { PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
 
 const triangle = () => ({ positions: new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]) });
 
@@ -115,5 +117,71 @@ describe('body geometry capture', () => {
     expect(matrixNode.type).toBe('cube');
     expect(() => compileBodyGeometry([{ scale: [0, 1, 1], geometry: triangle() }])).toThrow(RangeError);
     expect(() => compileBodyGeometry([{ geometry: { positions: new Float32Array([NaN, 0, 0]) } }])).toThrow(RangeError);
+  });
+});
+
+describe('scheduled body geometry', () => {
+  it('matches synchronous primitive and mixed mesh assembly, including reflected UVs and alpha', async () => {
+    const mesh = { ...triangle(), uvs: new Float32Array([0, 0, 1, 0, 0, 1]) };
+    for (const geometry of [
+      [{ type: 'cube' as const, color: '#4080c080', scale: [-2, 3, 4] as const }],
+      [{ children: [{ geometry: mesh, color: '#4080c080' }], scale: [-2, 3, 4] as const }]
+    ]) {
+      const expected = compileBodyGeometry(geometry);
+      const compiled = await prepareBodyGeometry(geometry, { isCurrent: () => true, yield: async () => {} });
+      expect(compiled).toMatchObject(expected);
+      expect(compiled?.alphaSummary?.partial).toBe(expected.colors.length / 4);
+    }
+  });
+
+  it('classifies prepared primitive alpha after Float32 rounding without scanning compiled colors', async () => {
+    for (const alpha of [0, 0.5, 1 - Number.EPSILON, 1]) {
+      const compiled = await prepareBodyGeometry([{ type: 'cube', color: [1, 1, 1, alpha] }], {
+        isCurrent: () => true,
+        yield: async () => {}
+      });
+      const count = compiled!.colors.length / 4;
+      expect(compiled?.alphaSummary).toEqual({
+        zero: alpha === 0 ? count : 0,
+        partial: alpha > 0 && Math.fround(alpha) < 1 ? count : 0,
+        opaque: Math.fround(alpha) === 1 ? count : 0
+      });
+    }
+  });
+
+  it('yields repeatedly while validating, generating normals, and assembling one large mesh', async () => {
+    const positions = new Float32Array((PREPARATION_CHUNK_SIZE + 1) * 9);
+    const geometry = [{ geometry: { positions } }];
+    const yieldWork = vi.fn(async () => {});
+    const compiled = await prepareBodyGeometry(geometry, { isCurrent: () => true, yield: yieldWork });
+    expect(compiled).toMatchObject(compileBodyGeometry(geometry));
+    expect(yieldWork.mock.calls.length).toBeGreaterThan(10);
+    expect(bodyGeometryWorkIsBounded(geometry)).toBe(false);
+    expect(bodyGeometryWorkIsBounded([{ type: 'cube' }])).toBe(true);
+  });
+
+  it.each([1, 2, 8, 20])('discards obsolete large geometry at scheduling boundary %i', async stopAt => {
+    const positions = new Float32Array((PREPARATION_CHUNK_SIZE + 1) * 9);
+    let yields = 0;
+    const result = await prepareBodyGeometry([{ geometry: { positions } }], {
+      isCurrent: () => yields < stopAt,
+      yield: async () => {
+        yields += 1;
+      }
+    });
+    expect(result).toBeUndefined();
+    expect(yields).toBe(stopAt);
+    expect(positions.every(value => value === 0)).toBe(true);
+  });
+
+  it('rejects invalid large data, cycles, and allocation limits before publication', async () => {
+    const context = { isCurrent: () => true, yield: async () => {} };
+    const positions = new Float32Array((PREPARATION_CHUNK_SIZE + 1) * 9);
+    positions[positions.length - 1] = NaN;
+    await expect(prepareBodyGeometry([{ geometry: { positions } }], context)).rejects.toThrow('finite');
+    const children: SceneBodyNode[] = [];
+    children.push({ children });
+    await expect(prepareBodyGeometry(children, context)).rejects.toThrow('cycle');
+    await expect(prepareBodyGeometry(new Array<SceneBodyNode>(65_537), context)).rejects.toThrow('node limit');
   });
 });
