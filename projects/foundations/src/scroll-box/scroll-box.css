@@ -1,0 +1,135 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  --scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  --scrollbar-width: var(--nve-sys-scrollbar-width);
+  --shadow-color: transparent;
+  --shadow-size: var(--nve-ref-size-400);
+  position: relative;
+  display: block;
+  min-inline-size: 0;
+  min-block-size: 0;
+  writing-mode: inherit;
+  overflow: auto;
+  container-type: scroll-state;
+  container-name: nve-scroll-box;
+  scrollbar-color: var(--scrollbar-color);
+  scrollbar-width: var(--scrollbar-width);
+}
+
+:host([orientation='horizontal']) {
+  overflow-y: hidden;
+}
+
+:host([orientation='vertical']) {
+  overflow-x: hidden;
+}
+
+:host(:focus-visible) {
+  outline: var(--nve-ref-outline);
+}
+
+.content {
+  display: flow-root;
+}
+
+.shadow-layer {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shadows {
+  position: sticky;
+  inset: 0;
+}
+
+.edge {
+  --_contact-color: light-dark(var(--nve-ref-color-alpha-black-700), var(--nve-ref-color-alpha-black-1100));
+  --_ambient-color: light-dark(var(--nve-ref-color-alpha-black-600), var(--nve-ref-color-alpha-black-900));
+  position: absolute;
+  opacity: 0;
+  overflow: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .edge {
+    transition: opacity var(--nve-ref-animation-duration-150) var(--nve-ref-animation-easing-100);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: top) {
+  .top {
+    opacity: var(--_shadow-y);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: right) {
+  .right {
+    opacity: var(--_shadow-x);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: bottom) {
+  .bottom {
+    opacity: var(--_shadow-y);
+  }
+}
+
+@container nve-scroll-box scroll-state(scrollable: left) {
+  .left {
+    opacity: var(--_shadow-x);
+  }
+}
+
+/* Pair a narrow contact shadow with a softer falloff into the content. */
+.top,
+.bottom {
+  left: 0;
+  right: 0;
+  height: var(--shadow-size);
+  max-height: 100%;
+  background: linear-gradient(to bottom, var(--shadow-color), transparent);
+  box-shadow:
+    inset 0 var(--nve-ref-size-100) var(--nve-ref-size-100) calc(-1 * var(--nve-ref-size-100)) var(--_contact-color),
+    inset 0 var(--shadow-size) var(--shadow-size) calc(-1 * var(--shadow-size)) var(--_ambient-color);
+}
+
+.left,
+.right {
+  top: 0;
+  bottom: 0;
+  width: var(--shadow-size);
+  max-width: 100%;
+  background: linear-gradient(to right, var(--shadow-color), transparent);
+  box-shadow:
+    inset var(--nve-ref-size-100) 0 var(--nve-ref-size-100) calc(-1 * var(--nve-ref-size-100)) var(--_contact-color),
+    inset var(--shadow-size) 0 var(--shadow-size) calc(-1 * var(--shadow-size)) var(--_ambient-color);
+}
+
+.top {
+  top: 0;
+}
+
+.right {
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.bottom {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.left {
+  left: 0;
+}
+
+@media (forced-colors: active) {
+  .shadow-layer {
+    display: none;
+  }
+}

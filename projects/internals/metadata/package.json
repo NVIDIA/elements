@@ -374,8 +374,10 @@
         "../../monaco/dist/**/*.examples.json",
         "../../code/dist/**/*.examples.json",
         "../../forms/dist/**/*.examples.json",
+        "../../foundations/dist/**/*.examples.json",
         "../../markdown/dist/**/*.examples.json",
         "../../media/dist/**/*.examples.json",
+        "../../plot/dist/**/*.examples.json",
         "../../scene/dist/**/*.examples.json",
         "../../viewport/dist/**/*.examples.json"
       ],
@@ -421,6 +423,14 @@
         },
         {
           "script": "../../viewport:build",
+          "cascade": false
+        },
+        {
+          "script": "../../foundations:build",
+          "cascade": false
+        },
+        {
+          "script": "../../plot:build",
           "cascade": false
         },
         {

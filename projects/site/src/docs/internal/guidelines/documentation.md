@@ -31,9 +31,10 @@ API Guidelines for the [Eleventy](https://www.11ty.dev/) based documentation sit
 
 Renders the install entrypoint of a given element API.
 
-| Parameter | Description             | Type     |
-| --------- | ----------------------- | -------- |
-| Name      | Tag name of element API | `string` |
+| Parameter | Description                                           | Type                  |
+| --------- | ----------------------------------------------------- | --------------------- |
+| Name      | Tag name of element API                               | `string`              |
+| Options   | Optional configuration for the page's default example | Object or JSON string |
 
 ```html
 {% raw %}
@@ -44,6 +45,14 @@ Renders the install entrypoint of a given element API.
 <div class="shortcode-demo">
 {% install 'nve-badge' %}
 </div>
+
+Pass the same options as the example shortcode to configure the page's default preview, including its layer, height, alignment, and inline mode:
+
+```html
+{% raw %}
+{% install 'nve-scroll-box' '{ "layer": "container" }' %}
+{% endraw %}
+```
 
 ## Example Shortcode
 

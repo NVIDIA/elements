@@ -310,6 +310,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/radio/') ? 'highlighted selected' : ''}><a href="/docs/elements/radio/">Radio</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/range/') ? 'highlighted selected' : ''}><a href="/docs/elements/range/">Range</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'highlighted selected' : ''}><a href="/docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/scroll-box/') ? 'highlighted selected' : ''}><a href="/docs/foundations/scroll-box/">Scroll Box</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'highlighted selected' : ''}><a href="/docs/elements/search/">Search</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted selected' : ''}><a href="/docs/elements/select/">Select</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'highlighted selected' : ''}><a href="/docs/elements/skeleton/">Skeleton</a></nve-tree-node>

@@ -259,9 +259,15 @@ export const StreamingContent = {
       <div>
         <nve-button id="restart-markdown-stream" type="button">Restart stream</nve-button>
       </div>
-      <nve-markdown id="programmatic-markdown"></nve-markdown>
+      <nve-scroll-box auto-scroll="follow" scroll-shadow style="height: 20rem; width: 100%;">
+        <nve-markdown id="programmatic-markdown"></nve-markdown>
+      </nve-scroll-box>
       
       <script type="module">
+        import '@nvidia-elements/core/button/define.js';
+        import '@nvidia-elements/markdown/markdown/define.js';
+        import '@nvidia-elements/foundations/scroll-box/define.js';
+
         const element = document.getElementById('programmatic-markdown');
         // Complete markdown content to stream
         const fullContent = \`# AI Assistant Response

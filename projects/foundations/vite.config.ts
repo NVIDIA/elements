@@ -6,6 +6,12 @@ export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
       alias: { '@nvidia-elements/foundations': resolve(import.meta.dirname, './src') }
+    },
+    build: {
+      rolldownOptions: {
+        // Examples use core components supplied by the documentation site.
+        external: [/^@nvidia-elements\/core(?:\/|$)/]
+      }
     }
   };
 
