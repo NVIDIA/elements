@@ -116,6 +116,24 @@ describe('installNve', () => {
     expect(() => getInstallPaths({}, 'linux')).toThrow('HOME is not set. Set NVE_HOME and retry.');
   });
 
+  it('should default install paths to the process environment', () => {
+    const originalHome = process.env.HOME;
+    const originalNveHome = process.env.NVE_HOME;
+
+    try {
+      delete process.env.NVE_HOME;
+      process.env.HOME = '/tmp/nve-default-home';
+      const paths = getInstallPaths();
+
+      expect(paths.root).toBe('/tmp/nve-default-home/.nve');
+      expect(paths.canonicalBinaryPath).toBe('/tmp/nve-default-home/.nve/bin/nve');
+      expect(paths.convenienceShimPath).toBe('/tmp/nve-default-home/.local/bin/nve');
+    } finally {
+      restoreHome(originalHome);
+      restoreNveHome(originalNveHome);
+    }
+  });
+
   it('should fail when Windows install paths cannot resolve a local app data directory', () => {
     expect(() => getInstallPaths({}, 'win32')).toThrow('LOCALAPPDATA is not set. Set NVE_HOME and retry.');
   });
@@ -196,6 +214,26 @@ describe('installNve', () => {
     expect(shimStats.isSymbolicLink() || shimStats.isFile()).toBe(true);
   });
 
+  it('should warn when the convenience shim cannot be created', async () => {
+    const context = await createInstallerContext();
+    const source = await writeFakeNve(join(context.root, 'source-nve'));
+    const shimPath = join(context.home, '.local/bin/nve');
+    const warnings: string[] = [];
+    await writeFile(join(context.home, '.local'), 'not a directory');
+
+    const result = await installNve({
+      env: createUnixEnv(context),
+      log: () => {},
+      prompt: skipPrompt,
+      source,
+      warn: message => warnings.push(message)
+    });
+
+    expect(result.shimPaths).toEqual([]);
+    expect(existsSync(shimPath)).toBe(false);
+    expect(warnings.join('\n')).toContain(`Could not create convenience shim at ${shimPath}.`);
+  });
+
   it('should skip copying when the source already is the canonical binary', async () => {
     const context = await createInstallerContext();
     const source = await writeFakeNve(join(context.home, '.nve/bin/nve'));
@@ -223,6 +261,48 @@ describe('installNve', () => {
     });
 
     expect(result.version).toBe('9.8.7-stderr-test');
+  });
+
+  it.skipIf(process.platform === 'win32')('should install the Windows canonical binary and command shim', async () => {
+    const context = await createInstallerContext();
+    const source = await writeFakeNve(join(context.root, 'source-nve'));
+    const originalCwd = process.cwd();
+    const originalPath = process.env.PATH;
+    await writeCommand(join(context.fakeBin, 'powershell'), '#!/bin/sh\nexit 0\n');
+
+    try {
+      process.chdir(context.root);
+      process.env.PATH = `${context.fakeBin}:${originalPath ?? ''}`;
+      const warnings: string[] = [];
+      const result = await installNve({
+        env: {
+          NVE_HOME: 'C:\\Tools\\nve',
+          // POSIX spawn treats this backslash path as a command name and resolves it from PATH.
+          PATH: context.root,
+          USERPROFILE: 'C:\\Users\\Ada'
+        },
+        log: () => {},
+        platform: 'win32',
+        prompt: skipPrompt,
+        source,
+        warn: message => warnings.push(message)
+      });
+      const canonicalPath = join(context.root, result.canonicalBinaryPath);
+      const shimPath = join(context.root, 'C:\\Tools\\nve\\bin\\nve.cmd');
+      const direct = spawnSync(canonicalPath, ['--version'], { encoding: 'utf-8' });
+
+      expect(direct.status).toBe(0);
+      expect(direct.stdout.trim()).toBe('9.8.7-test');
+      expect(result.platform).toBe('Windows');
+      expect(result.canonicalBinaryPath).toBe('C:\\Tools\\nve\\bin\\nve.exe');
+      expect(result.restrictedPathExecutionWorked).toBe(true);
+      expect(result.shimPaths).toEqual(['C:\\Tools\\nve\\bin\\nve.cmd']);
+      expect(await readFile(shimPath, 'utf-8')).toBe('@echo off\r\n"%~dp0nve.exe" %*\r\n');
+      expect(warnings).toEqual([expect.stringContaining('Could not install Elements agent skill')]);
+    } finally {
+      process.chdir(originalCwd);
+      restorePath(originalPath);
+    }
   });
 
   it('should install with default options from process environment', async () => {
@@ -296,6 +376,29 @@ describe('installNve', () => {
         source
       })
     ).rejects.toThrow('exit code 7');
+  });
+
+  it('should ask the terminal when no prompt option is provided', async () => {
+    const context = await createInstallerContext();
+    const source = await writeFakeNve(join(context.root, 'source-nve'));
+    const originalCi = process.env.CI;
+    const logs: string[] = [];
+
+    try {
+      process.env.CI = 'true';
+      await installNve({
+        env: createUnixEnv(context),
+        log: message => logs.push(message),
+        source
+      });
+    } finally {
+      restoreCi(originalCi);
+    }
+
+    expect(logs.join('\n')).toContain(`Installed agent skill at ${join(context.home, '.agents/skills/elements')}`);
+    expect(await readFile(join(context.home, '.agents/skills/elements/SKILL.md'), 'utf-8')).toBe(
+      getSkillMarkdown(elementsSkill)
+    );
   });
 
   it('should install the global Elements skill when accepted', async () => {
@@ -670,6 +773,19 @@ describe('installNve', () => {
     try {
       process.env.CI = 'true';
       await expect(installInternals.promptFromTerminal('question', 'linux')).resolves.toBeUndefined();
+    } finally {
+      restoreCi(originalCi);
+    }
+  });
+
+  it('should return no Windows prompt answer when the terminal is not interactive', async () => {
+    expect(process.stdin.isTTY).toBeFalsy();
+    expect(process.stdout.isTTY).toBeFalsy();
+    const originalCi = process.env.CI;
+
+    try {
+      delete process.env.CI;
+      await expect(installInternals.promptFromTerminal('Install? ', 'win32')).resolves.toBeUndefined();
     } finally {
       restoreCi(originalCi);
     }
