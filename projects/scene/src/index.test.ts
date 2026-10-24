@@ -79,6 +79,8 @@ type SceneCameraHasTheta = 'theta' extends keyof SceneCamera ? true : false;
 type SceneHitHasInstanceIndex = 'instanceIndex' extends keyof ScenePickHit ? true : false;
 type SceneLabelsHasStale = 'stale' extends keyof SceneLabels ? true : false;
 type SceneMeshGeometryArrayKey = Extract<'colors' | 'indices' | 'normals' | 'positions' | 'uvs', keyof SceneMesh>;
+type SceneBodyHasSetGeometry = 'setGeometry' extends keyof SceneBody ? true : false;
+type SceneHeightfieldHasSetGrid = 'setGrid' extends keyof SceneHeightfield ? true : false;
 type SceneMeshHasSetGeometry = 'setGeometry' extends keyof SceneMesh ? true : false;
 type SceneMeshHasTexture = 'texture' extends keyof SceneMesh ? true : false;
 type MarkerBufferHasBytes = 'bytes' extends keyof MarkerBuffer ? true : false;
@@ -370,6 +372,8 @@ describe('@nvidia-elements/scene', () => {
     expectTypeOf<SceneLinesHasVertices>().toEqualTypeOf<false>();
     expectTypeOf<LayerWithFeatureIds<PublicFeatureIdLayer>>().toEqualTypeOf<never>();
     expectTypeOf<SceneMeshGeometryArrayKey>().toEqualTypeOf<never>();
+    expectTypeOf<SceneBodyHasSetGeometry>().toEqualTypeOf<false>();
+    expectTypeOf<SceneHeightfieldHasSetGrid>().toEqualTypeOf<false>();
     expectTypeOf<SceneMeshHasSetGeometry>().toEqualTypeOf<false>();
     expectTypeOf<SceneMeshHasTexture>().toEqualTypeOf<false>();
     expectTypeOf<MarkerBufferHasBytes>().toEqualTypeOf<false>();

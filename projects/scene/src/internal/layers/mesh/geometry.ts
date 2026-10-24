@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { PREPARATION_CHUNK_SIZE, runPreparationSync } from '../../rendering/preparation.js';
+
 import { MESH_GEOMETRY } from '../../diagnostics/errors.js';
 
 export interface MeshGeometryInput {
@@ -30,14 +32,36 @@ export class MeshGeometryValidationError extends RangeError {
  * can avoid validating every frame.
  */
 export function validateMeshGeometry(input: MeshGeometryInput): void {
-  validateArrayTypes(input);
+  runPreparationSync(validateMeshGeometrySteps(input, Number.MAX_SAFE_INTEGER));
+}
+
+/** Validates complete geometry in bounded scalar ranges before preparation. */
+export function* validateMeshGeometrySteps(
+  input: MeshGeometryInput,
+  chunkSize = PREPARATION_CHUNK_SIZE
+): Generator<void> {
+  const vertexCount = validateMeshGeometryShape(input);
+  for (const field of ['positions', 'normals', 'uvs', 'colors', 'indices'] as const) {
+    const values = input[field];
+    if (!values) continue;
+    for (let start = 0; start < values.length; start += chunkSize) {
+      validateMeshGeometryRange(field, values.subarray(start, start + chunkSize), vertexCount);
+      if (start + chunkSize <= values.length) yield;
+    }
+  }
+}
+
+/** Checks metadata and array lengths without visiting or copying their contents. */
+export function validateMeshGeometryShape(input: MeshGeometryInput): number {
+  validateMeshGeometryArrayTypes(input);
   const positions = requirePositions(input);
-  if (positions === null) return;
+  if (positions === null) return 0;
   const vertexCount = validatePositions(positions, input.indices !== null);
   validateNormals(input.normals, positions);
   validateUvs(input.uvs, vertexCount);
   validateColors(input.colors, vertexCount);
-  validateIndices(input.indices, vertexCount);
+  validateIndices(input.indices);
+  return vertexCount;
 }
 
 /** Validates changed scalars when a valid snapshot already fixes array types, lengths, and topology. */
@@ -72,7 +96,8 @@ function assertFinite(values: ArrayLike<number>, field: MeshGeometryField): void
   }
 }
 
-function validateArrayTypes(input: MeshGeometryInput): void {
+/** Checks array types without visiting their contents. */
+export function validateMeshGeometryArrayTypes(input: MeshGeometryInput): void {
   validateArrayType(input.positions, 'positions', Float32Array);
   validateArrayType(input.normals, 'normals', Float32Array);
   validateArrayType(input.uvs, 'uvs', Float32Array);
@@ -94,13 +119,9 @@ function validatePositions(positions: Float32Array, indexed: boolean): number {
   if (positions.length === 0) {
     throw new MeshGeometryValidationError('positions', 'Positions must not be empty.');
   }
-  if (positions.length === 0) {
-    throw new MeshGeometryValidationError('positions', 'Positions must contain at least one triangle.');
-  }
   if (positions.length % 3 !== 0) {
     throw new MeshGeometryValidationError('positions', 'Positions must contain xyz triples.');
   }
-  assertFinite(positions, 'positions');
   const vertexCount = positions.length / 3;
   if (!indexed && vertexCount % 3 !== 0) {
     throw new MeshGeometryValidationError('positions', 'Nonindexed positions must contain triangle triples.');
@@ -113,7 +134,6 @@ function validateNormals(normals: Float32Array | null, positions: Float32Array):
   if (normals.length !== positions.length) {
     throw new MeshGeometryValidationError('normals', 'Normals must have three values per position.');
   }
-  assertFinite(normals, 'normals');
 }
 
 function validateUvs(uvs: Float32Array | null, vertexCount: number): void {
@@ -121,7 +141,6 @@ function validateUvs(uvs: Float32Array | null, vertexCount: number): void {
   if (uvs.length !== vertexCount * 2) {
     throw new MeshGeometryValidationError('uvs', 'UVs must have two values per position.');
   }
-  assertFinite(uvs, 'uvs');
 }
 
 function validateColors(colors: Float32Array | null, vertexCount: number): void {
@@ -129,8 +148,6 @@ function validateColors(colors: Float32Array | null, vertexCount: number): void 
   if (colors.length !== vertexCount * 4) {
     throw new MeshGeometryValidationError('colors', 'Colors must have four values per position.');
   }
-  assertFinite(colors, 'colors');
-  validateColorValues(colors);
 }
 
 function validateColorValues(colors: ArrayLike<number>): void {
@@ -142,12 +159,11 @@ function validateColorValues(colors: ArrayLike<number>): void {
   }
 }
 
-function validateIndices(indices: Uint32Array | null, vertexCount: number): void {
+function validateIndices(indices: Uint32Array | null): void {
   if (indices === null) return;
   if (indices.length % 3 !== 0) {
     throw new MeshGeometryValidationError('indices', 'Indices must contain triangle triples.');
   }
-  validateIndexValues(indices, vertexCount);
 }
 
 function validateIndexValues(indices: ArrayLike<number>, vertexCount: number): void {

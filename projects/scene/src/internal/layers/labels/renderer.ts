@@ -16,6 +16,8 @@ import {
 } from '../../gpu/platform.js';
 import { writeMat4ToFloat32 } from '../../math/mat4.js';
 import { planBufferUploads } from '../../gpu/buffer-upload-plan.js';
+import { maximumStoragePartitionByteLength } from '../../gpu/partition.js';
+import { LABEL } from '../../records/layouts/built-ins.js';
 import { PICK_OUTPUT_WGSL } from '../../rendering/picking/wgsl.js';
 import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
 import { OIT_WGSL, oitTargetStates } from '../../rendering/transparency.js';
@@ -28,6 +30,16 @@ import { GenerationTasks, type GenerationTask } from '../../structures/generatio
 import { SRGB_TO_LINEAR_WGSL } from '../../color/transfer.js';
 import { parseCSSColor, srgbToLinear } from '../../color/color.js';
 import { UNPACK_RGBA8_WGSL } from '../../color/rgba8.js';
+
+import {
+  LabelBudgetError,
+  LabelTextBudget,
+  MAX_LABEL_COUNT,
+  MAX_LABEL_GLYPH_BYTES,
+  validateLabelTextBudget
+} from './limits.js';
+import { LABEL_TEXT_LIMIT } from '../../diagnostics/errors.js';
+import { diagnosticReporterService } from '../../diagnostics/reporter.service.js';
 
 const BUFFER_COPY_DST = 0x08;
 const BUFFER_STORAGE = 0x80;
@@ -71,7 +83,17 @@ interface LabelLayerResources {
   readonly uniformValues: Float32Array;
 }
 
+interface LabelBudgetCheck {
+  readonly texts: readonly string[];
+  readonly textVersion: number;
+  budget?: LabelTextBudget;
+  count: number;
+  limit: number;
+  valid: boolean;
+}
+
 interface LabelPreparation {
+  readonly maxGlyphBytes: number;
   readonly count: number;
   readonly resources: LabelLayerResources;
   readonly sourceCount: number;
@@ -86,12 +108,14 @@ export class LabelRenderer {
   readonly #device: LabelRendererDevice;
   readonly #layers = new Map<HTMLElement, LabelLayerResources>();
   readonly #onFailure: (error: unknown) => void;
+  readonly #budgetChecks = new WeakMap<HTMLElement, LabelBudgetCheck>();
   readonly #preparations = new GenerationTasks<HTMLElement, LabelPreparation>();
   readonly #pickId = new Uint32Array(1);
   readonly #pickPipeline: SceneGPURenderPipeline;
   readonly #sampler: SceneGPUSampler;
   readonly #texture: SceneGPUTexture;
   readonly #requestRender: () => void;
+  readonly #recordByteLimit: number;
 
   constructor(
     device: LabelRendererDevice,
@@ -99,6 +123,8 @@ export class LabelRenderer {
     onFailure: (error: unknown) => void = () => undefined
   ) {
     this.#device = device;
+    this.#recordByteLimit =
+      Math.min(MAX_LABEL_COUNT, Math.floor(maximumStoragePartitionByteLength(device) / LABEL.stride)) * LABEL.stride;
     this.#requestRender = requestRender;
     this.#onFailure = onFailure;
     this.#atlas = getLabelFontAtlas();
@@ -114,7 +140,7 @@ export class LabelRenderer {
     frame: { readonly pixelRatio: number; readonly viewportHeight: number; readonly viewportWidth: number }
   ): void {
     const bytes = item.data.bytes;
-    if (!bytes || !item.data.ready) {
+    if (!bytes || !item.data.ready || !this.#checkBudget(item)) {
       this.#suspendLayer(item.layer);
       return;
     }
@@ -133,6 +159,7 @@ export class LabelRenderer {
 
   /** Reports whether the current label generation has drawable GPU data installed. */
   readyFor(item: LabelRenderItem): boolean {
+    if (this.#budgetChecks.get(item.layer)?.valid === false) return true;
     if (!item.data.ready || item.data.bytes === null || !item.data.hasVisibleText) return true;
     const resources = this.#layers.get(item.layer);
     return Boolean(
@@ -141,6 +168,67 @@ export class LabelRenderer {
         resources.sourceCount === item.data.sourceCount &&
         resources.labelCount === item.data.count
     );
+  }
+
+  #glyphByteLimit(): number {
+    return Math.min(
+      MAX_LABEL_GLYPH_BYTES,
+      this.#device.limits?.maxBufferSize ?? MAX_LABEL_GLYPH_BYTES,
+      this.#device.limits?.maxStorageBufferBindingSize ?? MAX_LABEL_GLYPH_BYTES
+    );
+  }
+
+  #checkBudget(item: LabelRenderItem): boolean {
+    const limit = this.#glyphByteLimit();
+    const { texts, textVersion, count } = item.data;
+    let check = this.#budgetChecks.get(item.layer);
+    if (!check || check.texts !== texts || check.textVersion !== textVersion) {
+      check = {
+        texts,
+        textVersion,
+        count,
+        limit: -1,
+        valid: check?.valid ?? true
+      };
+      this.#budgetChecks.set(item.layer, check);
+    }
+    if (check.count === count && check.limit === limit) return check.valid;
+    if (check.count !== count && !check.budget) check.budget = new LabelTextBudget(texts);
+    check.count = count;
+    check.limit = limit;
+    return this.#validateBudget(item.layer, check);
+  }
+
+  #validateBudget(layer: HTMLElement, check: LabelBudgetCheck): boolean {
+    try {
+      if (check.count * LABEL.stride > this.#recordByteLimit) {
+        throw new LabelBudgetError('Active label records exceed the device storage limit.');
+      }
+      if (check.budget) check.budget.validate(check.count, check.limit);
+      else validateLabelTextBudget(check.texts, check.count, check.limit);
+      if (!check.valid) {
+        diagnosticReporterService.update({
+          active: false,
+          code: LABEL_TEXT_LIMIT,
+          element: layer,
+          message: '',
+          severity: 'error'
+        });
+      }
+      check.valid = true;
+      return true;
+    } catch (error) {
+      if (!(error instanceof LabelBudgetError)) throw error;
+      check.valid = false;
+      diagnosticReporterService.update({
+        active: true,
+        code: LABEL_TEXT_LIMIT,
+        element: layer,
+        message: error.message,
+        severity: 'error'
+      });
+      return false;
+    }
   }
 
   #suspendLayer(layer: HTMLElement): void {
@@ -206,7 +294,7 @@ export class LabelRenderer {
 
   #ensureResources(item: LabelRenderItem, bytes: Uint8Array): LabelLayerResources {
     let resources = this.#layers.get(item.layer);
-    if (!resources || resources.labelByteLength !== bytes.byteLength) {
+    if (!resources || resources.labelByteLength !== Math.min(bytes.byteLength, this.#recordByteLimit)) {
       resources = this.#replaceResources(item, bytes, resources);
     } else {
       this.#writeChangedLabels(resources, item, bytes);
@@ -222,6 +310,7 @@ export class LabelRenderer {
   ): LabelLayerResources {
     this.#preparations.cancel(item.layer);
     const glyphCapacity = LABEL_GLYPH_STRIDE;
+    const labelByteLength = Math.min(bytes.byteLength, this.#recordByteLimit);
     const resources: LabelLayerResources = {
       bindGroups: new WeakMap(),
       currentColor: new Float32Array([0, 0, 0, 1]),
@@ -231,10 +320,10 @@ export class LabelRenderer {
       glyphCount: 0,
       glyphOffsets: new Uint32Array(),
       label: this.#device.createBuffer({
-        size: Math.max(4, bytes.byteLength),
+        size: Math.max(4, labelByteLength),
         usage: BUFFER_COPY_DST | BUFFER_STORAGE
       }),
-      labelByteLength: bytes.byteLength,
+      labelByteLength,
       labelCount: -1,
       sourceBytes: bytes,
       sourceCount: -1,
@@ -242,19 +331,30 @@ export class LabelRenderer {
       uniform: this.#device.createBuffer({ size: LABEL_UNIFORM_BYTE_LENGTH, usage: BUFFER_COPY_DST | BUFFER_UNIFORM }),
       uniformValues: new Float32Array(LABEL_UNIFORM_BYTE_LENGTH / 4)
     };
-    if (bytes.byteLength > 0) this.#device.queue.writeBuffer(resources.label, 0, bytes);
+    if (labelByteLength > 0)
+      this.#device.queue.writeBuffer(
+        resources.label,
+        0,
+        bytes.byteLength === labelByteLength ? bytes : bytes.subarray(0, labelByteLength)
+      );
     if (previous) destroyLayerResources(previous);
     this.#layers.set(item.layer, resources);
     return resources;
   }
 
   #writeChangedLabels(resources: LabelLayerResources, item: LabelRenderItem, bytes: Uint8Array): void {
+    const byteLength = resources.labelByteLength;
     if (resources.sourceBytes !== bytes) {
-      if (bytes.byteLength > 0) this.#device.queue.writeBuffer(resources.label, 0, bytes);
+      if (byteLength > 0)
+        this.#device.queue.writeBuffer(
+          resources.label,
+          0,
+          bytes.byteLength === byteLength ? bytes : bytes.subarray(0, byteLength)
+        );
       resources.sourceBytes = bytes;
       return;
     }
-    for (const range of planBufferUploads({ byteLength: bytes.byteLength, ranges: item.data.uploadRanges })) {
+    for (const range of planBufferUploads({ byteLength, ranges: item.data.uploadRanges })) {
       // eslint-disable-next-line local-performance/no-gpu-upload-in-loop -- The planner supplies disjoint aligned ranges to this bounded upload loop.
       this.#device.queue.writeBuffer(
         resources.label,
@@ -280,6 +380,7 @@ export class LabelRenderer {
     )
       return;
     const preparation = {
+      maxGlyphBytes: this.#glyphByteLimit(),
       count: item.data.count,
       resources,
       sourceCount: item.data.sourceCount,
@@ -307,6 +408,7 @@ export class LabelRenderer {
     try {
       const glyphRun = await prepareLabelGlyphRun({
         atlas: this.#atlas,
+        maxGlyphBytes: preparation.maxGlyphBytes,
         context: createPreparationContext(task.isCurrent),
         count: preparation.count,
         texts: preparation.texts
@@ -323,7 +425,10 @@ export class LabelRenderer {
     const required = glyphRun.bytes.byteLength;
     if (required > resources.glyphCapacity) {
       resources.glyph.destroy();
-      resources.glyphCapacity = nextBufferCapacity(required, LABEL_GLYPH_STRIDE);
+      resources.glyphCapacity = Math.min(
+        nextBufferCapacity(required, LABEL_GLYPH_STRIDE),
+        Math.floor(preparation.maxGlyphBytes / LABEL_GLYPH_STRIDE) * LABEL_GLYPH_STRIDE
+      );
       resources.glyph = this.#device.createBuffer({
         size: resources.glyphCapacity,
         usage: BUFFER_COPY_DST | BUFFER_STORAGE

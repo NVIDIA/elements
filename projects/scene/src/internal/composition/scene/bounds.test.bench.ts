@@ -27,12 +27,13 @@ describe('published geometry bounds', () => {
           return checksum;
         }).run({
           ...options,
-          setup() {
+          async setup() {
             scene = new Scene();
             const heights = Float32Array.from({ length: count }, (_, index) => (index % 127) - 63);
             if (kind === 'heightfield') {
               const terrain = new SceneHeightfield();
               terrain.grid = { columns: side, rows: side, spacing: 0.25, heights };
+              await terrain.loadComplete;
               scene.append(terrain);
             } else {
               const mesh = new SceneMesh();
@@ -46,6 +47,7 @@ describe('published geometry bounds', () => {
                 ),
                 indices: Uint32Array.from({ length: Math.floor(count / 3) * 3 }, (_, index) => index)
               };
+              await mesh.loadComplete;
               scene.append(mesh);
             }
             if (!scene.getBounds({ content: [scene] })) throw new Error('Expected captured geometry bounds.');

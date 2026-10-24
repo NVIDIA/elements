@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
+import { prepareMeshGeometryCapture } from '../src/internal/layers/mesh/capture.js';
+import { createPreparationContext } from '../src/internal/rendering/preparation.js';
 import { vi, type Mock } from 'vitest';
 import type {
   SceneGPUBufferDescriptor,
@@ -23,7 +25,12 @@ import {
   takeMarkerLayerRenderData
 } from '../src/internal/layers/markers/layer-state.js';
 import { MarkerBuffer } from '../src/internal/layers/markers/buffer.js';
-import { registerMeshLayer, replaceMeshGeometry, getMeshRenderData } from '../src/internal/layers/mesh/layer-state.js';
+import {
+  applyCapturedMeshGeometry,
+  registerMeshLayer,
+  replaceMeshGeometry,
+  getMeshRenderData
+} from '../src/internal/layers/mesh/layer-state.js';
 import {
   registerStreamingLayer,
   setStreamingLayerSource,
@@ -164,4 +171,14 @@ export function createLabelItem(text = 'robot'): LabelRenderItem {
     scaleUnit: 'pixel',
     type: 'label'
   };
+}
+
+/** Creates complete geometry for renderer tests through the bounded capture path. */
+export async function captureTestMeshGeometry(layer: HTMLElement, input: unknown): Promise<void> {
+  const captured = await prepareMeshGeometryCapture(
+    input,
+    createPreparationContext(() => true)
+  );
+  if (!captured) throw new Error('Expected a completed test geometry capture.');
+  applyCapturedMeshGeometry(layer, captured);
 }

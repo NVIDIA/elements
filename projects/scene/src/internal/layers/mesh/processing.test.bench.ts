@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, test, type BenchRunOptions } from 'vitest';
+import { captureTestMeshGeometry } from '../../../../test/rendering.js';
 import { registerMarkerLayer } from '../markers/layer-state.js';
-import { publishMeshGeometry, registerMeshLayer, replaceMeshGeometry, takeMeshLayerRenderData } from './layer-state.js';
+import { publishMeshGeometry, registerMeshLayer, takeMeshLayerRenderData } from './layer-state.js';
 import { prepareMeshGeometry, processMeshGeometry, updateFlatGeometry } from './processing.js';
 
 const options = { iterations: 10, throws: true, time: 750, warmupTime: 200 } satisfies BenchRunOptions;
@@ -37,7 +38,7 @@ describe('indexed flat mesh publication and processing', () => {
         const layer = document.createElement('div');
         registerMarkerLayer(layer, 'cube');
         registerMeshLayer(layer);
-        replaceMeshGeometry(layer, source);
+        await captureTestMeshGeometry(layer, source);
         let processed = processMeshGeometry(takeMeshLayerRenderData(layer))!;
         const attribute = mode === 'one color' ? 'colors' : 'positions';
         const count =
@@ -119,7 +120,7 @@ describe('indexed flat mesh publication history', () => {
         const layer = document.createElement('div');
         registerMarkerLayer(layer, 'cube');
         registerMeshLayer(layer);
-        replaceMeshGeometry(layer, source);
+        await captureTestMeshGeometry(layer, source);
         let processed = processMeshGeometry(takeMeshLayerRenderData(layer))!;
         let iteration = 0;
         await bench('publication burst and generated attributes', () => {

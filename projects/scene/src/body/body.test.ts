@@ -12,6 +12,7 @@ import type { RGBA } from '../internal/color/types.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { compileShapes, type BodyShape } from '../internal/layers/body/compile.js';
 import { MarkerBuffer } from '../internal/layers/markers/buffer.js';
+import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import { SceneBody } from './body.js';
 import { SceneShape } from './shape.js';
 import './define.js';
@@ -20,6 +21,87 @@ describe(SceneBody.metadata.tag, () => {
   let fixture: HTMLElement | undefined;
   afterEach(() => {
     if (fixture) removeFixture(fixture);
+    resetSceneTesting();
+  });
+
+  it('automatically publishes large assigned geometry after scheduled completion', async () => {
+    fixture = await createFixture(html`<nve-scene-body><nve-scene-shape></nve-scene-shape></nve-scene-body>`);
+    const body = fixture.querySelector<SceneBody>(SceneBody.metadata.tag)!;
+    const before = takeBodyLayerRenderData(body);
+    const geometry: BodyShape[] = Array.from({ length: 128 }, () => ({ type: 'cube' }));
+    let release = () => {};
+    configureSceneTesting({
+      yieldForPreparation: () =>
+        new Promise<void>(resolve => {
+          release = resolve;
+        })
+    });
+    body.geometry = geometry;
+    const loaded = body.loadComplete;
+    expect(takeBodyLayerRenderData(body).positions).toBe(before.positions);
+    configureSceneTesting({ yieldForPreparation: async () => {} });
+    release();
+    await loaded;
+    expect(body.geometry).toBe(geometry);
+    expect(takeBodyLayerRenderData(body).positions).toEqual(compileShapes(geometry).positions);
+    expect(takeBodyLayerRenderData(body).geometryError).toBe(false);
+  });
+
+  it.each(['assignment', 'preparation', 'disconnect'] as const)(
+    'cancels obsolete body work on %s without overwriting accepted geometry',
+    async action => {
+      fixture = await createFixture(html`<nve-scene-body><nve-scene-shape></nve-scene-shape></nve-scene-body>`);
+      const body = fixture.querySelector<SceneBody>(SceneBody.metadata.tag)!;
+      let release = () => {};
+      configureSceneTesting({
+        yieldForPreparation: () =>
+          new Promise<void>(resolve => {
+            release = resolve;
+          })
+      });
+      body.geometry = Array.from({ length: 128 }, () => ({ type: 'sphere' }));
+      const pending = body.loadComplete;
+      const rejected = expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+      configureSceneTesting({ yieldForPreparation: async () => {} });
+      if (action === 'assignment') body.geometry = [{ type: 'cube' }];
+      if (action === 'preparation') {
+        body.geometry = Array.from({ length: 128 }, () => ({ type: 'cube' }));
+        await body.loadComplete;
+      }
+      if (action === 'disconnect') body.remove();
+      release();
+      await rejected;
+      expect(takeBodyLayerRenderData(body).positions).toEqual(
+        compileShapes(Array.from({ length: action === 'preparation' ? 128 : 1 }, () => ({ type: 'cube' }))).positions
+      );
+    }
+  );
+
+  it('keeps accepted geometry after scheduled validation fails', async () => {
+    fixture = await createFixture(html`<nve-scene-body><nve-scene-shape></nve-scene-shape></nve-scene-body>`);
+    const body = fixture.querySelector<SceneBody>(SceneBody.metadata.tag)!;
+    const accepted = body.geometry;
+    const before = takeBodyLayerRenderData(body);
+    configureSceneTesting({ yieldForPreparation: async () => {} });
+    const positions = new Float32Array(36_000);
+    positions[positions.length - 1] = NaN;
+    body.geometry = [{ geometry: { positions } }];
+    await expect(body.loadComplete).rejects.toThrow();
+    expect(body.geometry).toBe(accepted);
+    expect(takeBodyLayerRenderData(body).positions).toBe(before.positions);
+    expect(takeBodyLayerRenderData(body).geometryError).toBe(false);
+  });
+
+  it('schedules large declarative bodies and includes compilation in loadComplete', async () => {
+    fixture = await createFixture(html`<nve-scene-body></nve-scene-body>`);
+    const body = fixture.querySelector<SceneBody>(SceneBody.metadata.tag)!;
+    configureSceneTesting({ yieldForPreparation: async () => {} });
+    body.append(...Array.from({ length: 128 }, () => document.createElement('nve-scene-shape')));
+    await elementIsStable(body);
+    await body.loadComplete;
+    expect(takeBodyLayerRenderData(body).positions).toEqual(
+      compileShapes(Array.from({ length: 128 }, () => ({ type: 'cube' }))).positions
+    );
   });
 
   it('compiles declarative shapes exactly once for each same-task attribute or property edit', async () => {

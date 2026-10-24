@@ -14,14 +14,17 @@ interface AssetHost extends HTMLElement {
 /** Owns bounded file requests and capture independently of the selected geometry format. */
 export class MeshAssetLoader {
   readonly #host: AssetHost;
-  readonly #apply: (geometry: SceneMeshGeometry | null) => void;
+  readonly #apply: (geometry: SceneMeshGeometry | null, signal?: AbortSignal) => void | Promise<void>;
   #src = '';
   #request?: AssetRequest;
   #loadComplete: Promise<void> = Promise.resolve();
   #loaded = false;
 
   /** apply installs decoded geometry, or null while a file is pending, failed, or cleared. */
-  constructor(host: AssetHost, apply: (geometry: SceneMeshGeometry | null) => void) {
+  constructor(
+    host: AssetHost,
+    apply: (geometry: SceneMeshGeometry | null, signal?: AbortSignal) => void | Promise<void>
+  ) {
     this.#host = host;
     this.#apply = apply;
   }
@@ -39,7 +42,7 @@ export class MeshAssetLoader {
     this.#src = next;
     this.#loaded = false;
     this.#updateError(false);
-    this.#apply(null);
+    void this.#apply(null);
     if (next) this.#queue();
     else this.#loadComplete = Promise.resolve();
     this.#host.requestUpdate('src', previous);
@@ -89,7 +92,8 @@ export class MeshAssetLoader {
       const signal = request.controller.signal;
       const geometry = await loadGeometry(resolveMeshSrc(this.#src, this.#host.baseURI), { signal });
       if (this.#request !== request) return;
-      this.#apply(toMeshGeometry(geometry));
+      await this.#apply(toMeshGeometry(geometry), signal);
+      if (this.#request !== request) return;
       this.#request = undefined;
       this.#loaded = true;
       request.resolve();
