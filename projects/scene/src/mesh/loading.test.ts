@@ -13,6 +13,7 @@ import type { SceneErrorDetail } from '../scene/scene.js';
 import { registerGeometryDecoder, decodeGeometry, loadGeometry } from '../index.js';
 import type { SceneBodyGeometry } from '../body/index.js';
 import { SceneMesh } from './mesh.js';
+import { scenePlatform, restoreScenePlatform } from '../internal/gpu/platform.js';
 import './define.js';
 
 const ASCII_STL =
@@ -24,6 +25,46 @@ describe(`${SceneMesh.metadata.tag} src`, () => {
     if (fixture) removeFixture(fixture);
     fixture = undefined;
     vi.unstubAllGlobals();
+    restoreScenePlatform();
+  });
+
+  it('waits for decoded geometry capture and rejects cancellation during that capture', async () => {
+    const positions = new Float32Array(36_000);
+    registerGeometryDecoder('capturepending', async () => ({ decode: async () => [{ geometry: { positions } }] }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn<typeof fetch>().mockImplementation(async () => new Response(''))
+    );
+    const releases: (() => void)[] = [];
+    scenePlatform.yieldForPreparation = () => new Promise<void>(resolve => releases.push(resolve));
+    fixture = await createFixture(html`<nve-scene-mesh></nve-scene-mesh>`);
+    const mesh = fixture.querySelector<SceneMesh>('nve-scene-mesh')!;
+    mesh.src = '/first.capturepending';
+    const pending = mesh.loadComplete;
+    let settled = false;
+    void pending.then(
+      () => {
+        settled = true;
+      },
+      () => {
+        settled = true;
+      }
+    );
+    await vi.waitFor(() => expect(releases).toHaveLength(1));
+    expect(settled).toBe(false);
+    expect(mesh.geometry).toBeNull();
+    mesh.geometry = { positions: new Float32Array(9).fill(3) };
+    scenePlatform.yieldForPreparation = async () => undefined;
+    releases.shift()!();
+    await expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    await mesh.loadComplete;
+    expect(mesh.src).toBe('');
+    expect(getMeshRenderData(mesh).positions?.[0]).toBe(3);
+    mesh.src = '/second.capturepending';
+    await mesh.loadComplete;
+    expect(getMeshRenderData(mesh).positions).toHaveLength(36_000);
+    positions.fill(99);
+    expect(getMeshRenderData(mesh).positions?.[0]).toBe(0);
   });
 
   it('loads declarative URLs, exposes decoded geometry, and clears geometry when src clears', async () => {

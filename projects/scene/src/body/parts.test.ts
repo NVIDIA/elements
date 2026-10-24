@@ -77,7 +77,9 @@ describe(`${SceneBody.metadata.tag} mesh parts`, () => {
     const mesh = body.querySelector<SceneMesh>('nve-scene-mesh')!;
     const positions = new Float32Array(Math.ceil((PREPARATION_CHUNK_SIZE * 2) / 9) * 9);
     mesh.geometry = { positions, normals: new Float32Array(positions.length) };
+    await mesh.loadComplete;
     await elementIsStable(mesh);
+    await body.loadComplete;
     const before = takeBodyLayerRenderData(body);
     positions[0] = 4;
     mesh.publishGeometry({ attribute: 'positions', count: 1 });

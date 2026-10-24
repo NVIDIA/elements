@@ -11,6 +11,15 @@
 
 {% install 'nve-scene-heightfield' %}
 
+## Capture a grid
+
+Assign a grid and keep input unchanged until `loadComplete` settles:
+
+```js
+terrain.grid = { columns, rows, spacing, heights, colors };
+await terrain.loadComplete;
+```
+
 ## Robot Survey
 
 {% example 'nve-scene-heightfield' 'RobotSurvey' %}

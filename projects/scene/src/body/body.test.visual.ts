@@ -3,6 +3,7 @@
 
 import { describe, expect, test } from 'vitest';
 import { visualRunner } from '@internals/vite';
+import type { SceneBody } from './body.js';
 
 describe('scene body visual runtime', () => {
   test('renders, instances, recompiles, matches mesh pixels, and picks compound bodies through WebGPU', async () => {
@@ -109,6 +110,7 @@ describe('scene body visual runtime', () => {
           return { expected, pixel: candidate };
         };
 
+        await Promise.all([...document.querySelectorAll<SceneBody>('nve-scene-body')].map(body => body.loadComplete));
         await Promise.all(
           [bodyScene, meshScene, instanceScene].map(scene => (scene as unknown as { ready: Promise<void> }).ready)
         );
@@ -225,6 +227,7 @@ function template(): string {
       };
       const instanceBody = document.querySelector('#instance-body');
       instanceBody.geometry = shapes();
+      await instanceBody.loadComplete;
       const records = new Uint8Array(MARKER.stride * 3);
       writeMarker(records, 0, { position: [-3.5, 0, 0], color: [1, 0.25, 0.25, 1] });
       writeMarker(records, 1, { position: [0, 0, 0], color: [0.25, 1, 0.25, 1] });

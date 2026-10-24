@@ -14,12 +14,15 @@ import {
   setMeshColor,
   setMeshGeometryProperty,
   replaceMeshGeometry,
+  applyCapturedMeshGeometry,
   hasMeshTexture
 } from '../internal/layers/mesh/layer-state.js';
 import { MeshAssetLoader } from '../internal/layers/mesh/asset-loader.js';
+import { SnapshotCapture, SynchronousCaptureLimitError } from '../internal/rendering/capture.js';
+import { prepareMeshGeometryCapture } from '../internal/layers/mesh/capture.js';
 import { notifyOwningBodyPart } from '../internal/layers/body/part-notifications.js';
 import { isSceneBodyPart } from '../internal/layers/registry.js';
-import { MESH_PROPERTY_INACTIVE } from '../internal/diagnostics/errors.js';
+import { MESH_GEOMETRY, MESH_PROPERTY_INACTIVE } from '../internal/diagnostics/errors.js';
 import { diagnosticReporterService } from '../internal/diagnostics/reporter.service.js';
 import type { Quaternion, Vec3 } from '../internal/math/types.js';
 import type { SceneTextureCaptureResult } from '../internal/layers/mesh/layer-state.js';
@@ -78,7 +81,18 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   static readonly metadata = { tag: 'nve-scene-mesh', version: '0.0.0' };
 
   #geometry: SceneMeshGeometry | null = null;
-  readonly #loader = new MeshAssetLoader(this, geometry => this.#applyGeometry(geometry));
+  readonly #capture = new SnapshotCapture(error =>
+    diagnosticReporterService.update({
+      active: true,
+      code: MESH_GEOMETRY,
+      element: this,
+      message: error instanceof Error ? error.message : String(error),
+      severity: 'error'
+    })
+  );
+  readonly #loader = new MeshAssetLoader(this, (geometry, signal) =>
+    geometry ? this.#prepareGeometry(geometry, signal) : this.#applyGeometry(null)
+  );
 
   /**
    * Reflected geometry file URL, loaded while connected. Its case-insensitive path extension
@@ -100,12 +114,12 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   }
 
   /**
-   * Current file request, resolving after decoding and geometry capture, before GPU presentation.
+   * Current file request and geometry capture, resolving before GPU presentation.
    * Changing src, assigning geometry, or disconnecting cancels pending work with AbortError;
    * only the newest request can apply. An unfinished request restarts on reconnect.
    */
   get loadComplete(): Promise<void> {
-    return this.#loader.loadComplete;
+    return Promise.all([this.#loader.loadComplete, this.#capture.complete]).then(() => this.#capture.complete);
   }
 
   /** Body-local translation in x y z order. Applies only to direct nve-scene-body children. */
@@ -170,11 +184,10 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   }
 
   /**
-   * Captures a complete geometry snapshot. Omitted arrays clear prior fields; null clears
-   * all geometry. Assigning clears src; loaded files show here. Reassign even unchanged
-   * arrays to publish edits, or use publishGeometry(). Producer mutations stay invisible across
-   * recovery. Invalid input reports mesh-geometry and makes this mesh inert until a valid
-   * assignment. Materials and instances stay unchanged.
+   * Complete geometry snapshot; omitted arrays clear prior fields, and null clears geometry.
+   * Assigning clears src. Keep arrays unchanged until loadComplete settles. Large captures
+   * yield and retain accepted data until success. Reassign or use publishGeometry() for edits.
+   * Materials, textures, and instances remain independent.
    */
   @property({ attribute: false })
   get geometry(): SceneMeshGeometry | null {
@@ -182,8 +195,24 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
   }
 
   set geometry(value: SceneMeshGeometry | null) {
-    this.#applyGeometry(value);
     this.#loader.geometryAssigned();
+    try {
+      this.#applyGeometry(value);
+    } catch (error) {
+      if (value === null || !(error instanceof SynchronousCaptureLimitError)) throw error;
+      void this.#prepareGeometry(value);
+    }
+  }
+
+  #prepareGeometry(value: SceneMeshGeometry, signal?: AbortSignal): Promise<void> {
+    return this.#capture.run(async context => {
+      const captured = await prepareMeshGeometryCapture(value, context);
+      if (!captured || !context.isCurrent()) return;
+      const previous = this.#geometry;
+      applyCapturedMeshGeometry(this, captured);
+      this.#storeProducerGeometry(value);
+      this.requestUpdate('geometry', previous);
+    }, signal);
   }
 
   /**
@@ -219,6 +248,8 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
    * bounded asynchronous chunks while rendering keeps the last ready snapshot. Publications
    * share the pending copy. Repairing invalid geometry validates
    * the complete result.
+   * Replacing a complete attribute without a range uses the synchronous capture limit;
+   * assign geometry and await loadComplete to replace large geometry.
    *
    * Changing indices updates topology. Position changes refresh generated normals when
    * normals are absent. Indexed flat geometry may need a full derived-attribute upload
@@ -231,6 +262,7 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
     const source = options.source === undefined ? this.#getProducerGeometry(options.attribute) : options.source;
     if (options.source !== undefined && options.start === undefined && options.count === undefined) {
       setMeshGeometryProperty(this, options.attribute, source);
+      this.#capture.cancel();
       this.#setProducerGeometry(options.attribute, source);
       notifyOwningBodyPart(this);
       return;
@@ -241,6 +273,7 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
       source,
       start: options.start
     });
+    this.#capture.cancel();
     if (options.source !== undefined) this.#setProducerGeometry(options.attribute, source);
     if (result === 'applied') notifyOwningBodyPart(this);
   }
@@ -258,6 +291,7 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
     const replacement =
       value === null ? { colors: null, indices: null, normals: null, positions: null, uvs: null } : value;
     replaceMeshGeometry(this, replacement);
+    this.#capture.cancel();
     this.#storeProducerGeometry(value);
     this.requestUpdate('geometry', previous);
   }
@@ -377,6 +411,7 @@ export class SceneMesh extends MarkerLayerElement<MeshInstanceSource, MarkerInit
     this.#updateInactiveDiagnostic();
   }
   override disconnectedCallback(): void {
+    this.#capture.cancel();
     this.#loader.disconnect();
     super.disconnectedCallback();
   }

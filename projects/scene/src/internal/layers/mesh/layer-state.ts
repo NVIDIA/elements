@@ -14,6 +14,8 @@ import { diagnosticReporterService } from '../../diagnostics/reporter.service.js
 import { getLayerInstances, getLayerCount } from '../markers/layer-state.js';
 import type { RGBA } from '../../color/types.js';
 import { validateMeshGeometry, validateMeshGeometryRange } from './geometry.js';
+import { readMeshGeometry, meshGeometryScalarCount, type CapturedMeshGeometry } from './capture.js';
+import { assertSynchronousCapture, SynchronousCaptureLimitError } from '../../rendering/capture.js';
 import type { SceneMeshGeometry } from './types.js';
 import { createTopologyKey } from './processing.js';
 import { notifyOwningScene } from '../../composition/scene/notifications.js';
@@ -102,6 +104,7 @@ interface PreparedGeometryPublication {
 }
 
 interface GeometryReplacementUpdate {
+  readonly alphaSummary?: AlphaSummary;
   readonly captured: MeshGeometryReplacement;
   readonly changedAttributes: readonly MeshGeometryAttribute[];
   readonly invalid: boolean;
@@ -196,8 +199,13 @@ export function setMeshGeometryProperty(mesh: HTMLElement, name: MeshGeometryAtt
   if (value !== null && !(value instanceof (name === 'indices' ? Uint32Array : Float32Array))) {
     throw new TypeError(`${name} must be the specified typed array or null.`);
   }
+  const next = {
+    ...getNextGeometry(state, name, value),
+    colors: name === 'colors' ? (value as Float32Array | null) : state.colors
+  };
+  assertSynchronousCapture(meshGeometryScalarCount(next), 'geometry');
+  state.pendingCopies.delete(name);
   flushGeometryCopies(mesh, state);
-  const next = getNextGeometry(state, name, value);
   replaceMeshGeometryAttributes(
     mesh,
     { ...next, colors: name === 'colors' ? (value as Float32Array | null) : state.colors },
@@ -208,6 +216,22 @@ export function setMeshGeometryProperty(mesh: HTMLElement, name: MeshGeometryAtt
 /** Validates and captures one complete mesh geometry generation. */
 export function replaceMeshGeometry(mesh: HTMLElement, input: unknown): void {
   replaceMeshGeometryAttributes(mesh, input, MESH_GEOMETRY_ATTRIBUTES);
+}
+
+/** Installs a complete private capture without rescanning its validated arrays. */
+export function applyCapturedMeshGeometry(mesh: HTMLElement, capture: CapturedMeshGeometry): void {
+  const state = getState(mesh);
+  const update = {
+    captured: capture.geometry,
+    changedAttributes: MESH_GEOMETRY_ATTRIBUTES,
+    invalid: false,
+    state,
+    alphaSummary: capture.alphaSummary
+  };
+  applyGeometryReplacement(update);
+  updateReplacementTopology(update, true);
+  updateMeshDiagnostics(mesh, state);
+  notifyOwningScene(mesh);
 }
 
 /** Captures and validates one changed range, detaching shared snapshots only before mutation. */
@@ -248,7 +272,7 @@ function replaceMeshGeometryAttributes(
 
 function applyGeometryReplacement(update: GeometryReplacementUpdate): void {
   const { captured, changedAttributes, invalid, state } = update;
-  state.alphaSummary = summarizeRGBAAlpha(captured.colors);
+  state.alphaSummary = update.alphaSummary ?? summarizeRGBAAlpha(captured.colors);
   state.positions = captured.positions;
   state.normals = captured.normals;
   state.uvs = captured.uvs;
@@ -467,7 +491,8 @@ function captureGeometryReplacement(input: unknown): {
   let captured: MeshGeometryReplacement;
   try {
     captured = captureGeometry(input);
-  } catch {
+  } catch (error) {
+    if (error instanceof SynchronousCaptureLimitError) throw error;
     return {
       captured: { colors: null, indices: null, normals: null, positions: null, uvs: null },
       invalid: true
@@ -580,42 +605,23 @@ function releaseOwnedTexture(state: MeshState): void {
 }
 
 function captureGeometry(input: unknown): MeshGeometryReplacement {
-  if (typeof input !== 'object' || input === null) throw new TypeError('Mesh geometry must be an object.');
+  const geometry = readMeshGeometry(input);
+  assertSynchronousCapture(meshGeometryScalarCount(geometry), 'geometry');
   return {
-    colors: captureFloatGeometryArray(Reflect.get(input, 'colors') ?? null, 'colors'),
-    indices: captureIndexGeometryArray(Reflect.get(input, 'indices') ?? null),
-    normals: captureFloatGeometryArray(Reflect.get(input, 'normals') ?? null, 'normals'),
-    positions: captureFloatGeometryArray(Reflect.get(input, 'positions'), 'positions'),
-    uvs: captureFloatGeometryArray(Reflect.get(input, 'uvs') ?? null, 'uvs')
+    colors: captureFloatGeometryArray(geometry.colors),
+    indices: captureIndexGeometryArray(geometry.indices),
+    normals: captureFloatGeometryArray(geometry.normals),
+    positions: captureFloatGeometryArray(geometry.positions),
+    uvs: captureFloatGeometryArray(geometry.uvs)
   };
 }
 
-function captureFloatGeometryArray(value: unknown, name: string): Float32Array | null {
-  assertFloatGeometryArray(value, name);
+function captureFloatGeometryArray(value: Float32Array | null): Float32Array | null {
   return value === null ? null : new Float32Array(value);
 }
 
-function captureIndexGeometryArray(value: unknown): Uint32Array | null {
-  assertIndexGeometryArray(value);
+function captureIndexGeometryArray(value: Uint32Array | null): Uint32Array | null {
   return value === null ? null : new Uint32Array(value);
-}
-
-function assertFloatGeometryArray(value: unknown, name: string): asserts value is Float32Array | null {
-  assertGeometryArray(value, Float32Array, name);
-}
-
-function assertIndexGeometryArray(value: unknown): asserts value is Uint32Array | null {
-  assertGeometryArray(value, Uint32Array, 'indices');
-}
-
-function assertGeometryArray(
-  value: unknown,
-  constructor: typeof Float32Array | typeof Uint32Array,
-  name: string
-): void {
-  if (value !== null && !(value instanceof constructor)) {
-    throw new TypeError(`${name} must be the specified typed array or null.`);
-  }
 }
 
 function getState(mesh: HTMLElement): MeshState {

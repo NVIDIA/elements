@@ -10,6 +10,10 @@ import { publishLabelLayer, setLabelLayerCount, setLabelLayerSource, takeLabelLa
 import { configureSceneTesting, resetSceneTesting } from '../../testing/scene.js';
 import type { LabelRenderItem } from '../../rendering/render-items.js';
 
+import { MAX_LABEL_TEXT_UNITS } from './limits.js';
+import { LABEL_TEXT_LIMIT } from '../../diagnostics/errors.js';
+import { LABEL } from '../../records/layouts/built-ins.js';
+
 const frame = { pixelRatio: 1, viewportHeight: 100, viewportWidth: 200 };
 
 let renderer: LabelRenderer | undefined;
@@ -20,6 +24,148 @@ afterEach(() => {
 });
 
 describe('LabelRenderer', () => {
+  it.each(['buffer', 'binding'] as const)('caps spare record capacity and uploads to the device %s limit', limit => {
+    const gpu = createGpu();
+    Object.defineProperty(gpu.device, 'limits', {
+      value: {
+        maxBufferSize: limit === 'buffer' ? 256 : 65_536,
+        maxStorageBufferBindingSize: limit === 'binding' ? 256 : 65_536
+      }
+    });
+    const onFailure = vi.fn();
+    renderer = new LabelRenderer(gpu.device, () => {}, onFailure);
+    const initial = createLabelItem();
+    const source = new LabelBuffer({
+      capacity: 256,
+      records: [{ text: 'A' }, ...Array.from({ length: 8 }, () => ({ text: '' }))]
+    });
+    setLabelLayerSource(initial.layer, source);
+    setLabelLayerCount(initial.layer, 1);
+    const item = { ...initial, data: takeLabelLayerRenderData(initial.layer) };
+    const start = gpu.buffers.length;
+    renderer.prepare(item, identityMat4(), frame);
+    const label = gpu.buffers[start + 1]!;
+    expect(label.size).toBe(240);
+    expect(gpu.buffers.every(buffer => buffer.size <= 256)).toBe(true);
+    expect(vi.mocked(gpu.device.queue.writeBuffer).mock.calls.find(call => call[0] === label)?.[2].byteLength).toBe(
+      240
+    );
+    vi.mocked(gpu.device.queue.writeBuffer).mockClear();
+    const dirty = {
+      ...item,
+      data: {
+        ...item.data,
+        uploadRanges: [
+          { offset: 224, size: 64 },
+          { offset: 512, size: 32 }
+        ]
+      }
+    };
+    renderer.prepare(dirty, identityMat4(), frame);
+    expect(
+      vi
+        .mocked(gpu.device.queue.writeBuffer)
+        .mock.calls.filter(call => call[0] === label)
+        .map(call => [call[1], call[2].byteLength])
+    ).toEqual([[224, 16]]);
+    const grown = { ...item, data: { ...item.data, count: Math.floor(256 / LABEL.stride) } };
+    renderer.prepare(grown, identityMat4(), frame);
+    expect(renderer.readyFor(grown)).toBe(true);
+    const errors: CustomEvent[] = [];
+    item.layer.addEventListener('nve-scene-error', event => errors.push(event));
+    renderer.prepare(
+      { ...grown, data: { ...grown.data, count: Math.floor(256 / LABEL.stride) + 1 } },
+      identityMat4(),
+      frame
+    );
+    expect(errors.at(-1)?.detail.code).toBe(LABEL_TEXT_LIMIT);
+    expect(onFailure).not.toHaveBeenCalled();
+    renderer.prepare(item, identityMat4(), frame);
+    vi.mocked(gpu.pass.draw).mockClear();
+    renderer.draw(gpu.pass, item);
+    expect(gpu.pass.draw).toHaveBeenCalledWith(6);
+  });
+
+  it('caps record allocation at the package limit when the CPU source reserves more capacity', () => {
+    const gpu = createGpu();
+    renderer = new LabelRenderer(gpu.device);
+    const item = createLabelItem('A');
+    setLabelLayerSource(item.layer, new LabelBuffer({ capacity: 100_000, records: [{ text: 'A' }] }));
+    renderer.prepare({ ...item, data: takeLabelLayerRenderData(item.layer) }, identityMat4(), frame);
+    expect(gpu.buffers[1]?.size).toBe(65_536 * LABEL.stride);
+  });
+  it.each(['package', 'buffer', 'binding'] as const)(
+    'rejects the %s glyph budget before GPU allocation and recovers on valid text',
+    budget => {
+      const gpu = createGpu();
+      const onFailure = vi.fn();
+      if (budget !== 'package') {
+        Object.defineProperty(gpu.device, 'limits', {
+          value: {
+            maxBufferSize: budget === 'buffer' ? 72 : 1024,
+            maxStorageBufferBindingSize: budget === 'binding' ? 72 : 1024
+          }
+        });
+      }
+      renderer = new LabelRenderer(gpu.device, () => {}, onFailure);
+      const item = createLabelItem(budget === 'package' ? 'A'.repeat(MAX_LABEL_TEXT_UNITS + 1) : 'AAA');
+      const errors: CustomEvent[] = [];
+      item.layer.addEventListener('nve-scene-error', event => errors.push(event));
+      const allocationCount = gpu.buffers.length;
+      renderer.prepare(item, identityMat4(), frame);
+      expect(gpu.buffers).toHaveLength(allocationCount);
+      expect(errors.at(-1)?.detail.code).toBe(LABEL_TEXT_LIMIT);
+      expect(onFailure).not.toHaveBeenCalled();
+      expect(renderer.readyFor(item)).toBe(true);
+      renderer.draw(gpu.pass, item);
+      expect(gpu.pass.draw).not.toHaveBeenCalled();
+      const valid = { ...item, data: { ...item.data, texts: ['A'], textVersion: item.data.textVersion + 1 } };
+      renderer.prepare(valid, identityMat4(), frame);
+      expect(renderer.readyFor(valid)).toBe(true);
+      renderer.draw(gpu.pass, valid);
+      expect(gpu.pass.draw).toHaveBeenCalledWith(6);
+    }
+  );
+
+  it('keeps rounded glyph capacity within the device storage binding limit', () => {
+    const gpu = createGpu();
+    Object.defineProperty(gpu.device, 'limits', {
+      value: { maxBufferSize: 1024, maxStorageBufferBindingSize: 108 }
+    });
+    renderer = new LabelRenderer(gpu.device);
+    const item = createLabelItem('AAA');
+    renderer.prepare(item, identityMat4(), frame);
+    expect(gpu.buffers.at(-1)?.size).toBe(108);
+    renderer.draw(gpu.pass, item);
+    expect(gpu.pass.draw).toHaveBeenCalledWith(18);
+  });
+
+  it('invalidates cached prefix budgets when published text changes within the same array', () => {
+    const gpu = createGpu();
+    renderer = new LabelRenderer(gpu.device);
+    const initial = createLabelItem('A');
+    const texts = ['A', 'B'];
+    const item = { ...initial, data: { ...initial.data, texts, count: 1 } };
+    renderer.prepare(item, identityMat4(), frame);
+    const empty = { ...item, data: { ...item.data, count: 0 } };
+    renderer.prepare(empty, identityMat4(), frame);
+    renderer.prepare(item, identityMat4(), frame);
+    texts[0] = 'A'.repeat(MAX_LABEL_TEXT_UNITS + 1);
+    const changed = { ...item, data: { ...item.data, textVersion: item.data.textVersion + 1 } };
+    vi.mocked(gpu.pass.draw).mockClear();
+    const errors: CustomEvent[] = [];
+    item.layer.addEventListener('nve-scene-error', event => errors.push(event));
+    renderer.prepare(changed, identityMat4(), frame);
+    renderer.draw(gpu.pass, changed);
+    expect(gpu.pass.draw).not.toHaveBeenCalled();
+    expect(errors.at(-1)?.detail.code).toBe(LABEL_TEXT_LIMIT);
+    texts[0] = 'A';
+    const recovered = { ...changed, data: { ...changed.data, textVersion: changed.data.textVersion + 1 } };
+    renderer.prepare(recovered, identityMat4(), frame);
+    renderer.draw(gpu.pass, recovered);
+    expect(gpu.pass.draw).toHaveBeenCalledWith(6);
+  });
+
   it('ignores a stale scheduling failure without removing the latest pending glyph task', async () => {
     const gpu = createGpu();
     const requestRender = vi.fn();

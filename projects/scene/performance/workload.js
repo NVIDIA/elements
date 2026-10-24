@@ -161,6 +161,7 @@ if (profile.mode === 'camera-composition') {
 if (profile.mode === 'mesh-updates' || profile.mode === 'shader-coverage') {
   const mesh = document.createElement('nve-scene-mesh');
   mesh.geometry = profile.mode === 'mesh-updates' ? createMeshGridGeometry(1) : createMeshGeometry(1);
+  await mesh.loadComplete;
   mesh.interactive = profile.mode === 'shader-coverage';
   scene.append(mesh);
   profileLayers.mesh = mesh;
