@@ -7,6 +7,7 @@ export default mergeConfig(libraryLighthouseTestConfig, {
     alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './dist') }
   },
   test: {
+    maxWorkers: 4,
     include: ['src/**/*.test.lighthouse.ts'],
     outputFile: {
       junit: './coverage/lighthouse/junit.xml'

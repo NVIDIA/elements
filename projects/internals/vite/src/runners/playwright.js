@@ -19,10 +19,12 @@ export class VitePlaywrightRunner {
   #server;
   /** @type {import('playwright').Browser} */
   #browser;
+  #browserServer;
   /** @type {import('playwright').LaunchOptions} */
   #chromiumArgs;
   /** @type {string} */
   #runnerID;
+  #instanceID;
 
   get page() {
     return this.#page;
@@ -45,7 +47,13 @@ export class VitePlaywrightRunner {
   }
 
   get #portFile() {
-    return `.${this.#runnerID}/port`;
+    return `.${this.#runnerID}/port${this.#instanceID ? `-${this.#instanceID}` : ''}`;
+  }
+
+  get debuggingPort() {
+    const port = Number(fs.readFileSync(`${this.#portFile}-debugging`, 'utf8').trim());
+    if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid Chromium debugging port');
+    return port;
   }
 
   get #serverPort() {
@@ -64,6 +72,7 @@ export class VitePlaywrightRunner {
 
   constructor(config = {}) {
     this.#runnerID = config.runnerID ?? 'playwright';
+    this.#instanceID = config.instanceID;
     this.#chromiumArgs = config.chromiumArgs ?? [
       '--headless',
       '--disable-dev-shm-usage',
@@ -97,13 +106,25 @@ export class VitePlaywrightRunner {
       }
 
       console.log('playwright-runner: launching browser');
-      this.#browser = await chromium.launch({ args: this.#chromiumArgs }).catch(error => {
-        console.error('playwright-runner: error launching browser', error);
-        throw error;
-      });
+      // Chromium reserves the debugging port itself, avoiding a free-port race.
+      if (this.#chromiumArgs.includes('--remote-debugging-port=0')) {
+        this.#browserServer = await chromium.launchServer({
+          args: this.#chromiumArgs
+        });
+        this.#browser = await chromium.connect(this.#browserServer.wsEndpoint());
+        const args = this.#browserServer.process().spawnargs;
+        const userDataDir = args.find(arg => arg.startsWith('--user-data-dir='))?.slice('--user-data-dir='.length);
+        if (!userDataDir) throw new Error('Chromium did not expose its isolated profile directory');
+        const port = fs.readFileSync(path.join(userDataDir, 'DevToolsActivePort'), 'utf8').split('\n')[0];
+        fs.writeFileSync(`${this.#portFile}-debugging`, port);
+      } else {
+        this.#browser = await chromium.launch({ args: this.#chromiumArgs });
+      }
       console.log('playwright-runner: creating context');
       this.#page = await (
-        await this.#browser.newContext({ viewport: { width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT } })
+        await this.#browser.newContext({
+          viewport: { width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT }
+        })
       ).newPage();
       this.#page.on('crash', data => console.error('playwright-runner: browser crashed', data));
       console.log('playwright-runner: creating server');
@@ -117,21 +138,43 @@ export class VitePlaywrightRunner {
   }
 
   async close() {
-    const report = collectReports(this.#root);
-
-    fs.writeFileSync(`${this.#dist}/report.json`, JSON.stringify(report, null, 2));
-    await this.#page.close();
-    await this.#browser.close();
-    await this.#server.close();
+    const failures = [];
+    try {
+      if (fs.existsSync(this.#dist)) {
+        const report = collectReports(this.#root);
+        fs.writeFileSync(`${this.#dist}/report.json`, JSON.stringify(report, null, 2));
+      }
+    } catch (error) {
+      failures.push(error);
+    }
+    for (const close of [
+      () => this.#page?.close(),
+      () => this.#browser?.close(),
+      () => this.#browserServer?.close(),
+      () => this.#server?.close()
+    ]) {
+      try {
+        await close();
+      } catch (error) {
+        failures.push(error);
+      }
+    }
+    this.#page = undefined;
+    this.#browser = undefined;
+    this.#browserServer = undefined;
+    this.#server = undefined;
+    if (failures.length) throw new AggregateError(failures, 'Failed to close Playwright runner');
   }
 }
 
 /** Collects individual runner reports without re-reading the aggregate report. */
 export function collectReports(root) {
-  return globSync(path.resolve(root, 'dist/*/report.json')).reduce((reports, reportPath) => {
-    const report = JSON.parse(fs.readFileSync(reportPath));
-    return { ...reports, [report.name]: report };
-  }, {});
+  return globSync(path.resolve(root, 'dist/*/report.json'))
+    .sort()
+    .reduce((reports, reportPath) => {
+      const report = JSON.parse(fs.readFileSync(reportPath));
+      return { ...reports, [report.name]: report };
+    }, {});
 }
 
 /**
