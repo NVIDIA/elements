@@ -1,9 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { resumePreparation, type PreparationContext } from '../../rendering/preparation.js';
+
 import { normalizeQuaternion } from '../../math/quaternion.js';
 import { composePreciseMat4 } from '../../math/mat4.js';
 import { MeshAssembly, type MeshAssemblyPart } from '../../math/mesh-assembly.js';
+import { classifyAlpha, type AlphaSummary } from '../../color/alpha.js';
 import { resolveSceneColor } from '../../color/color.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
 import {
@@ -55,7 +58,7 @@ export function createBodyPrimitiveGeometry(type: BodyPrimitive): BodyPrimitiveG
   return createPrimitiveGeometry(type);
 }
 
-function getBodyPrimitiveGeometry(type: BodyPrimitive): BodyPrimitiveGeometry {
+export function getBodyPrimitiveGeometry(type: BodyPrimitive): BodyPrimitiveGeometry {
   let geometry = primitiveGeometries.get(type);
   if (!geometry) {
     geometry = createBodyPrimitiveGeometry(type);
@@ -90,6 +93,37 @@ export function compileNormalizedShapes(shapes: readonly NormalizedBodyShape[]):
   const assembly = new MeshAssembly(Array.from(shapes, prepareShape));
   validateAllocation(assembly);
   return assembly.assemble();
+}
+
+/** Prepares borrowed shape input in bounded tasks; callers keep it unchanged until settlement. */
+export async function prepareBodyShapes(
+  shapes: readonly BodyShape[],
+  context: PreparationContext
+): Promise<(ReturnType<typeof compileShapes> & { readonly alphaSummary: AlphaSummary }) | undefined> {
+  if (shapes.length > MAX_SHAPE_COUNT) throw new RangeError('body shapes exceed the compiled allocation limit.');
+  const plan = await resumePreparation(prepareShapeParts(shapes), context);
+  if (!plan) return undefined;
+  const assembly = new MeshAssembly(plan.parts);
+  validateAllocation(assembly);
+  const geometry = await resumePreparation(assembly.assembleSteps(), context);
+  return geometry ? { ...geometry, alphaSummary: plan.alphaSummary } : undefined;
+}
+
+function* prepareShapeParts(
+  shapes: readonly BodyShape[]
+): Generator<void, { parts: MeshAssemblyPart[]; alphaSummary: AlphaSummary }> {
+  const parts: MeshAssemblyPart[] = [];
+  const alphaSummary = { zero: 0, partial: 0, opaque: 0 };
+  let bytes = 0;
+  for (let index = 0; index < shapes.length; index += 1) {
+    const part = prepareShape(normalizeBodyShape(shapes[index], `shapes[${index}]`));
+    bytes += part.vertexCount * 40 + (part.indices?.byteLength ?? part.vertexCount * 4);
+    if (bytes > MAX_COMPILED_BYTES) throw new RangeError('body shapes exceed the compiled allocation limit.');
+    parts.push(part);
+    alphaSummary[classifyAlpha(Math.fround(part.colors.values[3]!), 1)] += part.vertexCount;
+    if ((index + 1) % 64 === 0) yield;
+  }
+  return { parts, alphaSummary };
 }
 
 function prepareShape(shape: NormalizedBodyShape): MeshAssemblyPart {

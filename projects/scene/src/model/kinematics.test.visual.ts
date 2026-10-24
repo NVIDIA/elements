@@ -484,9 +484,10 @@ describe('example kinematics preservation', () => {
                     const geometry = await window.sceneLoadGeometry('/replay-fixture/' + visual.asset);
                     return geometry.map(node => ({ ...node, color: visual.motor ? '#222326' : colors[link.name]! }));
                   })
-                ).then(visuals => {
+                ).then(async visuals => {
                   const clone = document.createElement('nve-scene-body');
                   clone.geometry = visuals.flat();
+                  await clone.loadComplete;
                   const owner = jointIndex >= 0 ? frames[jointIndex]! : root;
                   owner.insertBefore(clone, owner.querySelector(':scope > nve-scene-frame'));
                 })

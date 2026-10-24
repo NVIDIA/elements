@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { scenePlatform, restoreScenePlatform } from '../../gpu/platform.js';
+import { captureTestMeshGeometry } from '../../../../test/rendering.js';
 import { PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
 import { registerMarkerLayer } from '../markers/layer-state.js';
 import {
@@ -36,7 +37,7 @@ describe('mesh layer state', () => {
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 4).fill(1);
     const indices = new Uint32Array(count * 3);
-    replaceMeshGeometry(mesh, { positions, colors, indices });
+    await captureTestMeshGeometry(mesh, { positions, colors, indices });
     const before = takeMeshLayerRenderData(mesh);
     colors[3] = 0.5;
     publishMeshGeometry(mesh, { attribute: 'colors', source: colors, start: 0, count: 1 });
@@ -66,7 +67,7 @@ describe('mesh layer state', () => {
   it('retains ready geometry and reports a local error if deferred copying fails', async () => {
     const mesh = layer();
     const positions = new Float32Array(Math.ceil((PREPARATION_CHUNK_SIZE * 2) / 9) * 9);
-    replaceMeshGeometry(mesh, { positions });
+    await captureTestMeshGeometry(mesh, { positions });
     const before = getMeshRenderData(mesh);
     const diagnostic = vi.fn();
     mesh.addEventListener('nve-scene-error', diagnostic);
@@ -92,7 +93,7 @@ describe('mesh layer state', () => {
   it('copies large shared snapshots in bounded tasks while retaining the ready generation', async () => {
     const mesh = layer();
     const positions = new Float32Array(Math.ceil((PREPARATION_CHUNK_SIZE * 3) / 9) * 9);
-    replaceMeshGeometry(mesh, { positions });
+    await captureTestMeshGeometry(mesh, { positions });
     const before = takeMeshLayerRenderData(mesh);
     let resume: (() => void) | undefined;
     scenePlatform.yieldForPreparation = () =>
@@ -138,7 +139,7 @@ describe('mesh layer state', () => {
   it('cancels obsolete large copies when complete geometry replaces the pending generation', async () => {
     const mesh = layer();
     const positions = new Float32Array(Math.ceil((PREPARATION_CHUNK_SIZE * 2) / 9) * 9);
-    replaceMeshGeometry(mesh, { positions });
+    await captureTestMeshGeometry(mesh, { positions });
     getMeshRenderData(mesh);
     let resume: (() => void) | undefined;
     scenePlatform.yieldForPreparation = () =>
@@ -156,24 +157,48 @@ describe('mesh layer state', () => {
     expect(getMeshRenderData(mesh).positions?.[0]).toBe(2);
   });
 
-  it('preserves pending geometry when a complete attribute assignment captures the next generation', () => {
+  it('discards a pending large copy before clearing its attribute', async () => {
+    const mesh = layer();
+    const positions = new Float32Array(36_000);
+    await captureTestMeshGeometry(mesh, { positions });
+    getMeshRenderData(mesh);
+    let resume: (() => void) | undefined;
+    scenePlatform.yieldForPreparation = () =>
+      new Promise<void>(resolve => {
+        resume = resolve;
+      });
+    positions[0] = 5;
+    publishMeshGeometry(mesh, { attribute: 'positions', source: positions, count: 1 });
+    const writes = vi.spyOn(Float32Array.prototype, 'set');
+    setMeshGeometryProperty(mesh, 'positions', null);
+    expect(writes).not.toHaveBeenCalled();
+    expect(getMeshRenderData(mesh).positions).toBeNull();
+    resume?.();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(getMeshRenderData(mesh).positions).toBeNull();
+  });
+
+  it('rejects a large synchronous attribute assignment without flushing pending geometry', async () => {
     const mesh = layer();
     const positions = new Float32Array(Math.ceil((PREPARATION_CHUNK_SIZE * 2) / 9) * 9);
-    replaceMeshGeometry(mesh, { positions });
+    await captureTestMeshGeometry(mesh, { positions });
     const before = getMeshRenderData(mesh);
     positions[0] = 4;
     publishMeshGeometry(mesh, { attribute: 'positions', source: positions, count: 1 });
-    setMeshGeometryProperty(mesh, 'normals', new Float32Array(positions.length));
+    expect(() => setMeshGeometryProperty(mesh, 'normals', new Float32Array(positions.length))).toThrow(
+      /assign geometry/
+    );
+    await vi.waitFor(() => expect(getMeshRenderData(mesh).positions?.[0]).toBe(4));
     const after = getMeshRenderData(mesh);
     expect(after.positions?.[0]).toBe(4);
     expect(before.positions?.[0]).toBe(0);
   });
 
-  it.each([9, 90_000])('validates only the selected scalars in %i position values', length => {
+  it.each([9, 90_000])('validates only the selected scalars in %i position values', async length => {
     const mesh = layer();
     const positions = new Float32Array(length);
     const normals = new Float32Array(length);
-    replaceMeshGeometry(mesh, { positions, normals });
+    await captureTestMeshGeometry(mesh, { positions, normals });
     positions[0] = 2;
     positions[3] = NaN;
     const finite = vi.spyOn(Number, 'isFinite');

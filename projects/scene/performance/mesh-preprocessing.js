@@ -81,6 +81,7 @@ if (topology === 'nonindexed') {
 }
 const initializationStart = performance.now();
 mesh.geometry = source;
+await mesh.loadComplete;
 scene.append(camera, mesh);
 document.body.append(scene);
 
@@ -110,7 +111,7 @@ async function operation(callback) {
     return await new Promise((resolve, reject) => {
       timer = setTimeout(() => reject(new Error('Mesh submission timed out.')), 10_000);
       pending = { resolve, start: performance.now(), uploadedBytes, allocatedBytes };
-      callback();
+      Promise.resolve(callback()).catch(reject);
     });
   } finally {
     clearTimeout(timer);
@@ -194,6 +195,7 @@ globalThis.__webgpuTestWorkload = {
     };
     return operation(() => {
       mesh.geometry = source;
+      return mesh.loadComplete;
     });
   },
   async pick() {

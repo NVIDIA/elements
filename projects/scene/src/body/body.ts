@@ -19,6 +19,7 @@ import {
   disconnectBodyLayer,
   registerBodyLayer,
   setBodyLayerGeometry,
+  getBodyLayerLoadComplete,
   getBodyLayerGeometry,
   setBodyLayerTint
 } from '../internal/layers/body/layer-state.js';
@@ -74,12 +75,14 @@ export class SceneBody extends MarkerLayerElement<BodyInstanceSource, MarkerInit
   #tint = '#ffffff';
 
   /**
-   * Resolves after every direct mesh child present at access time finishes its current src request.
-   * Rejects when one of those requests fails or a newer request cancels it. Meshes without src resolve immediately.
+   * Resolves after current body preparation and direct mesh file requests finish.
+   * Rejects on failure or cancellation. Includes compilation triggered by those mesh requests.
    */
   get loadComplete(): Promise<void> {
     const parts = [...this.children].filter(isSceneBodyPart) as SceneMesh[];
-    return Promise.all(parts.map(part => part.loadComplete)).then(() => undefined);
+    return Promise.all([getBodyLayerLoadComplete(this), ...parts.map(part => part.loadComplete)]).then(() =>
+      getBodyLayerLoadComplete(this)
+    );
   }
 
   /** CSS color multiplier. White preserves node colors and texture samples. */
@@ -107,10 +110,10 @@ export class SceneBody extends MarkerLayerElement<BodyInstanceSource, MarkerInit
   }
 
   /**
-   * Body nodes from assignment or from shape and mesh children. Assignment captures arrays
-   * and transforms and overrides children; null restores them.
-   * In-place edits require reassignment, even for the same object. Invalid assignments throw
-   * before replacing accepted geometry. Use frames or source records for per-frame movement.
+   * Captures body nodes and overrides children; null restores them. In-place edits require
+   * reassignment. Keep input unchanged until loadComplete settles. Large captures yield
+   * between bounded tasks and retain accepted geometry until success.
+   * Use frames or source records for per-frame movement.
    */
   @property({ attribute: false })
   get geometry(): SceneBodyGeometry | null {
@@ -119,8 +122,12 @@ export class SceneBody extends MarkerLayerElement<BodyInstanceSource, MarkerInit
 
   set geometry(value: SceneBodyGeometry | null) {
     const previous = this.geometry;
-    setBodyLayerGeometry(this, value);
-    this.requestUpdate('geometry', previous);
+    if (setBodyLayerGeometry(this, value) === 'pending') {
+      void getBodyLayerLoadComplete(this).then(
+        () => this.requestUpdate('geometry', previous),
+        () => {}
+      );
+    } else this.requestUpdate('geometry', previous);
   }
 
   constructor() {
