@@ -24,11 +24,6 @@
       "count": 40
     }
   },
-  "src/gauge/gauge.test.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/internal/controllers/audit.controller.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
