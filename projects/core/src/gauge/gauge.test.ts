@@ -149,7 +149,7 @@ describe(Gauge.metadata.tag, () => {
       </div>
     `);
 
-    const gauges = Array.from(fixture.querySelectorAll(Gauge.metadata.tag)) as Gauge[];
+    const gauges = Array.from<Gauge>(fixture.querySelectorAll(Gauge.metadata.tag));
     await Promise.all(gauges.map(gauge => elementIsStable(gauge)));
 
     const fontSizes = ['sm', 'md', 'lg'].map(size =>
