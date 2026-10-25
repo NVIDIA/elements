@@ -21,7 +21,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "next": "16.4.2",
+    "next": "16.4.3",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
