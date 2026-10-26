@@ -2,9 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type * as childProcess from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
+import AdmZip from 'adm-zip';
 import type * as internalNode from '../internal/node.js';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  archiveStarter,
   startersData,
   createStarterCDNUrl,
   createGitInitProcess,
@@ -30,6 +37,8 @@ vi.mock('../internal/node.js', async importOriginal => {
   const actual = await importOriginal<typeof internalNode>();
   return { ...actual, getNPMClient: vi.fn().mockResolvedValue('pnpm') };
 });
+
+vi.mock('./setup-agent.js', () => ({ writeAllAgentConfigs: vi.fn() }));
 
 describe('startersData', () => {
   it('should provide a list of starter metadata', () => {
@@ -542,5 +551,144 @@ describe('startStarter with npm', () => {
 
     vi.doUnmock('../internal/node.js');
     vi.resetModules();
+  });
+});
+
+const repoRoot = join(import.meta.dirname, '../../../../..');
+const temporaryDirectories: string[] = [];
+const angularPackageJson = {
+  name: 'angular-starter',
+  version: '0.0.0',
+  scripts: {
+    build: 'wireit',
+    test: 'ng test'
+  },
+  wireit: {
+    build: {
+      command: 'mise exec -- echo build'
+    }
+  }
+};
+
+const angularConfig = {
+  projects: {
+    'angular-starter': {
+      architect: {
+        build: {
+          configurations: {
+            production: {
+              baseHref: '/elements/starters/angular/'
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+const sphinxLayout = [
+  '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/styles/dist/bundles/index.css" />',
+  '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/fonts/inter.css" />',
+  '<script type="module" src="https://cdn.jsdelivr.net/npm/@nvidia-elements/core/dist/bundles/index.min.js"></script>'
+].join('\n');
+function readAllowBuilds(workspace: unknown): Record<string, boolean> | undefined {
+  if (typeof workspace !== 'object' || workspace === null || !('allowBuilds' in workspace)) {
+    return undefined;
+  }
+  const { allowBuilds } = workspace;
+  if (typeof allowBuilds !== 'object' || allowBuilds === null || Array.isArray(allowBuilds)) {
+    return undefined;
+  }
+  const record: Record<string, boolean> = {};
+  for (const [name, allowed] of Object.entries(allowBuilds)) {
+    if (typeof allowed !== 'boolean') {
+      throw new Error(`Unexpected allowBuilds value for ${name}`);
+    }
+    record[name] = allowed;
+  }
+  return record;
+}
+
+function packageVersion(project: string) {
+  const manifest = JSON.parse(readFileSync(join(repoRoot, 'projects', project, 'package.json'), 'utf8'));
+  if (typeof manifest.version !== 'string' || manifest.version.length === 0) {
+    throw new Error(`No version for ${project}`);
+  }
+  return manifest.version;
+}
+
+async function readArchiveEntry(zipPath: string, entryName: string) {
+  const deadline = Date.now() + 2000;
+  let lastError: unknown;
+  while (Date.now() < deadline) {
+    try {
+      const entry = new AdmZip(zipPath).getEntry(entryName);
+      if (entry) {
+        return entry.getData().toString('utf8');
+      }
+    } catch (error) {
+      lastError = error;
+    }
+    await new Promise(resolve => {
+      setTimeout(resolve, 15);
+    });
+  }
+  throw new Error(`Missing archive entry ${entryName}`, { cause: lastError });
+}
+
+async function writeStarterFixture(starterDir: string, files: Record<string, string>) {
+  await rm(starterDir, { recursive: true, force: true });
+  await Promise.all(
+    Object.entries(files).map(async ([relativePath, content]) => {
+      const filePath = join(starterDir, relativePath);
+      await mkdir(dirname(filePath), { recursive: true });
+      await writeFile(filePath, content);
+    })
+  );
+}
+
+async function archivedStarter(name: string, files: Record<string, string>) {
+  const starterDir = join(process.cwd(), name);
+  const outDir = await mkdtemp(join(tmpdir(), 'elements-starter-archive-'));
+  temporaryDirectories.push(starterDir, outDir);
+  await writeStarterFixture(starterDir, files);
+  await archiveStarter(name, outDir);
+  return join(outDir, `${name}.zip`);
+}
+
+describe('archiveStarter', () => {
+  afterEach(async () => {
+    await Promise.all(temporaryDirectories.splice(0).map(directory => rm(directory, { recursive: true, force: true })));
+  });
+
+  it('should export angular metadata and the workspace build policy', async () => {
+    const zipPath = await archivedStarter('angular', {
+      'package.json': `${JSON.stringify(angularPackageJson, undefined, 2)}\n`,
+      'angular.json': `${JSON.stringify(angularConfig)}\n`
+    });
+    const packageJson = JSON.parse(await readArchiveEntry(zipPath, 'package.json'));
+    const angularJson = JSON.parse(await readArchiveEntry(zipPath, 'angular.json'));
+    const workspace = await readWorkspaceManifest(repoRoot);
+
+    expect(packageJson.scripts).toEqual({ build: 'echo build', test: 'ng test' });
+    expect(packageJson.wireit).toBeUndefined();
+    expect(await readArchiveEntry(zipPath, '.npmrc')).toBe('registry=https://registry.npmjs.org/');
+    expect(angularJson.projects['angular-starter'].architect.build.configurations.production.baseHref).toBe('/');
+    expect(await readArchiveEntry(zipPath, 'pnpm-workspace.yaml')).toBe(
+      serializeStarterWorkspaceManifest(readAllowBuilds(workspace))
+    );
+  });
+
+  it('should stamp published CDN versions into an external toolchain starter', async () => {
+    const zipPath = await archivedStarter('sphinx', {
+      'docs/_themes/nvidia_elements/layout.html': sphinxLayout
+    });
+    const layout = await readArchiveEntry(zipPath, 'docs/_themes/nvidia_elements/layout.html');
+
+    expect(layout).toContain(`@nvidia-elements/core@${packageVersion('core')}/dist/bundles/index.min.js`);
+    expect(layout).toContain(`@nvidia-elements/styles@${packageVersion('styles')}/dist/bundles/index.css`);
+    expect(layout).toContain(`@nvidia-elements/themes@${packageVersion('themes')}/dist/fonts/inter.css`);
+    expect(layout).not.toContain('npm/@nvidia-elements/core/dist/');
+    expect(layout).not.toContain('npm/@nvidia-elements/themes/dist/');
   });
 });
