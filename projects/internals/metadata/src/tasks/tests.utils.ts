@@ -100,6 +100,7 @@ export async function generateTestSummary(): Promise<ProjectsTestSummary> {
       '@nvidia-elements/cli': await getTestReport('@nvidia-elements/cli', '../../../../cli'),
       '@nvidia-elements/lint': await getTestReport('@nvidia-elements/lint', '../../../../lint'),
       '@nvidia-elements/forms': await getTestReport('@nvidia-elements/forms', '../../../../forms'),
+      '@nvidia-elements/foundations': await getTestReport('@nvidia-elements/foundations', '../../../../foundations'),
       '@nvidia-elements/markdown': await getTestReport('@nvidia-elements/markdown', '../../../../markdown'),
       '@nvidia-elements/media': await getTestReport('@nvidia-elements/media', '../../../../media'),
       '@nvidia-elements/monaco': await getTestReport('@nvidia-elements/monaco', '../../../../monaco'),
