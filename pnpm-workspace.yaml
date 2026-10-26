@@ -103,11 +103,11 @@ catalog:
   '@types/node': 26.5.0
   '@types/react': 19.2.18
   '@types/react-dom': 19.2.7
-  '@vitest/browser': 5.0.0
-  '@vitest/browser-playwright': 5.0.0
-  '@vitest/coverage-istanbul': 5.0.0
-  '@vitest/istanbul-lib-coverage': 1.0.1
-  '@vitest/istanbul-lib-report': 1.0.1
+  '@vitest/browser': 5.0.5
+  '@vitest/browser-playwright': 5.0.5
+  '@vitest/coverage-istanbul': 5.0.5
+  '@vitest/istanbul-lib-coverage': 2.0.0
+  '@vitest/istanbul-lib-report': 2.0.0
   'adm-zip': 0.6.1
   axe-core: 4.11.0
   eslint: 10.13.0
@@ -134,8 +134,8 @@ catalog:
   typescript: 6.0.3
   typescript-7: npm:typescript@7.0.2
   typescript-eslint: 8.72.0
-  vite: 8.2.2
-  vitest: 5.0.0
+  vite: 8.3.5
+  vitest: 5.0.5
   zod: 4.5.4
 
 minimumReleaseAge: 1140
