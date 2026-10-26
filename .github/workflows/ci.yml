@@ -61,6 +61,8 @@ jobs:
             projects/core/package.json
             projects/forms/dist
             projects/forms/package.json
+            projects/foundations/dist
+            projects/foundations/package.json
             projects/styles/dist
             projects/styles/package.json
             projects/themes/dist
