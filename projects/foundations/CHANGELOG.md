@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/foundations-v1.0.0...@nvidia-elements/foundations-v1.0.1) (2026-10-26)
+
+### Bug Fixes
+
+* **foundations:** missing dist publish ([5521fc0](https://github.com/NVIDIA/elements/commit/5521fc0d55e0542d028727531267241bc31f9401))
+
 ## 1.0.0 (2026-10-26)
 
 ### ⚠ BREAKING CHANGES
