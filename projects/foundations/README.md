@@ -2,9 +2,7 @@
 
 NVIDIA UI SDK and agent-ready developer toolkit for AI factories, robotics, and autonomous vehicles.
 
-Shared components and utilities for NVIDIA Elements libraries and custom component development.
-
-Elements packages use foundations to share components and behavior without depending directly on `@nvidia-elements/core`. Advanced users can also use its utility components and internal helpers when building their own Web Components.
+Shared components and utilities for NVIDIA Elements libraries and custom component development. Elements packages use foundations to share components and behavior without depending directly on `@nvidia-elements/core`. Advanced users can also use its utility components and internal helpers when building their own Web Components.
 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
