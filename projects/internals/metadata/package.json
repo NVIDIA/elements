@@ -247,6 +247,11 @@
         "../../code/coverage/ssr/summary.json",
         "../../forms/coverage/unit/coverage-summary.json",
         "../../forms/coverage/unit/summary.json",
+        "../../foundations/coverage/unit/coverage-summary.json",
+        "../../foundations/coverage/unit/summary.json",
+        "../../foundations/coverage/axe/summary.json",
+        "../../foundations/coverage/visual/summary.json",
+        "../../foundations/coverage/ssr/summary.json",
         "../../lint/coverage/unit/coverage-summary.json",
         "../../lint/coverage/unit/summary.json",
         "../../markdown/coverage/unit/coverage-summary.json",
@@ -304,6 +309,22 @@
         },
         {
           "script": "../../forms:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../../foundations:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../../foundations:test:axe",
+          "cascade": false
+        },
+        {
+          "script": "../../foundations:test:ssr",
+          "cascade": false
+        },
+        {
+          "script": "../../foundations:test:visual",
           "cascade": false
         },
         {

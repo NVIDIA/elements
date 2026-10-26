@@ -322,6 +322,7 @@ describe('generateTestSummary', () => {
       '@nvidia-elements/cli',
       '@nvidia-elements/lint',
       '@nvidia-elements/forms',
+      '@nvidia-elements/foundations',
       '@nvidia-elements/markdown',
       '@nvidia-elements/media',
       '@nvidia-elements/monaco',
