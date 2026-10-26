@@ -1723,8 +1723,8 @@ importers:
   projects/site:
     dependencies:
       3d-force-graph:
-        specifier: 1.79.0
-        version: 1.79.0
+        specifier: 1.80.1
+        version: 1.80.1
       chart.js:
         specifier: 4.5.1
         version: 4.5.1
@@ -2854,8 +2854,8 @@ importers:
 
 packages:
 
-  3d-force-graph@1.79.0:
-    resolution: {integrity: sha512-0RUNcfiH12f93loY/iS4wShzhXzdLLN4futvFnintF7eP30DjX+nAdLDAGOZwSflhijQyVwnGtpczNjFrDLUzQ==}
+  3d-force-graph@1.80.1:
+    resolution: {integrity: sha512-8+JcH/K1MkVncxthCVg1vdNY49PSUY7gPMlFzBHJD91AmofqqxZNnVo5RfY61BShwZk6koqyYK7f5hp+NT6utQ==}
     engines: {node: '>=12'}
 
   '@11ty/dependency-tree-esm@2.0.4':
@@ -15390,7 +15390,7 @@ packages:
 
 snapshots:
 
-  3d-force-graph@1.79.0:
+  3d-force-graph@1.80.1:
     dependencies:
       accessor-fn: 1.5.3
       kapsule: 1.16.3
@@ -15714,10 +15714,10 @@ snapshots:
 
   '@asamuzakjp/css-color@6.0.7':
     dependencies:
-      '@csstools/css-calc': 3.3.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
-      '@csstools/css-color-parser': 4.2.2(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
-      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
-      '@csstools/css-tokenizer': 4.0.0
+      '@csstools/css-calc': 3.3.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.2))(@csstools/css-tokenizer@4.0.2)
+      '@csstools/css-color-parser': 4.2.2(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.2))(@csstools/css-tokenizer@4.0.2)
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.2)
+      '@csstools/css-tokenizer': 4.0.2
       lru-cache: 11.5.2
 
   '@asamuzakjp/dom-selector@8.3.2':
@@ -16006,7 +16006,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 8.0.0
       '@babel/helper-validator-option': 8.0.0
-      browserslist: 4.28.7
+      browserslist: 4.29.4
       lru-cache: 11.5.2
       semver: 7.8.5
 
@@ -16397,21 +16397,25 @@ snapshots:
       '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-tokenizer': 4.0.0
 
-  '@csstools/css-calc@3.3.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)':
+  '@csstools/css-calc@3.3.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.2))(@csstools/css-tokenizer@4.0.2)':
     dependencies:
-      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
-      '@csstools/css-tokenizer': 4.0.0
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.2)
+      '@csstools/css-tokenizer': 4.0.2
 
-  '@csstools/css-color-parser@4.2.2(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)':
+  '@csstools/css-color-parser@4.2.2(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.2))(@csstools/css-tokenizer@4.0.2)':
     dependencies:
       '@csstools/color-helpers': 6.1.1
-      '@csstools/css-calc': 3.3.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
-      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
-      '@csstools/css-tokenizer': 4.0.0
+      '@csstools/css-calc': 3.3.0(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.2))(@csstools/css-tokenizer@4.0.2)
+      '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.2)
+      '@csstools/css-tokenizer': 4.0.2
 
   '@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0)':
     dependencies:
       '@csstools/css-tokenizer': 4.0.0
+
+  '@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.2)':
+    dependencies:
+      '@csstools/css-tokenizer': 4.0.2
 
   '@csstools/css-syntax-patches-for-csstree@1.1.12(css-tree@3.2.1)':
     optionalDependencies:
@@ -20590,7 +20594,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.2.2(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.24))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20599,7 +20603,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.2.2(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20608,7 +20612,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.2.2(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.31))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20617,7 +20621,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.2.2(@types/node@26.5.0)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20626,7 +20630,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.2.2(@types/node@26.5.0)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.31))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20635,7 +20639,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.2.2(@types/node@26.5.0)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.31))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20644,7 +20648,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.3.5(@types/node@26.5.0)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.26))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20653,7 +20657,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.0
       estree-walker: 3.0.3
-      magic-string: 1.2.3
+      magic-string: 1.4.3
     optionalDependencies:
       vite: 8.3.5(@types/node@26.5.0)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.31))(terser@5.48.0)(yaml@2.9.0)
 
@@ -20756,11 +20760,11 @@ snapshots:
 
   '@vue/compiler-core@3.5.42':
     dependencies:
-      '@babel/parser': 7.29.8
+      '@babel/parser': 7.29.9
       '@vue/shared': 3.5.42
       entities: 7.0.1
       estree-walker: 2.0.2
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   '@vue/compiler-core@3.5.44':
     dependencies:
@@ -20799,15 +20803,15 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.42':
     dependencies:
-      '@babel/parser': 7.29.8
+      '@babel/parser': 7.29.9
       '@vue/compiler-core': 3.5.42
       '@vue/compiler-dom': 3.5.42
       '@vue/compiler-ssr': 3.5.42
       '@vue/shared': 3.5.42
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.26
-      source-map-js: 1.2.1
+      postcss: 8.5.31
+      source-map-js: 1.2.2
 
   '@vue/compiler-sfc@3.5.44':
     dependencies:
@@ -20858,8 +20862,8 @@ snapshots:
   '@vue/language-core@3.3.11':
     dependencies:
       '@volar/language-core': 2.4.28
-      '@vue/compiler-dom': 3.5.42
-      '@vue/shared': 3.5.42
+      '@vue/compiler-dom': 3.5.44
+      '@vue/shared': 3.5.44
       alien-signals: 3.2.1
       muggle-string: 0.4.1
       path-browserify: 1.0.1
@@ -21604,8 +21608,8 @@ snapshots:
 
   caniuse-api@4.0.0:
     dependencies:
-      browserslist: 4.28.7
-      caniuse-lite: 1.0.30001806
+      browserslist: 4.29.4
+      caniuse-lite: 1.0.30001818
 
   caniuse-lite@1.0.30001806: {}
 
@@ -22017,12 +22021,12 @@ snapshots:
   css-tree@2.2.1:
     dependencies:
       mdn-data: 2.0.28
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   css-tree@3.2.1:
     dependencies:
       mdn-data: 2.27.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   css-what@7.0.0: {}
 
@@ -24169,7 +24173,7 @@ snapshots:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 6.0.2
-      undici: 8.10.2
+      undici: 8.12.3
       w3c-xmlserializer: 5.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -24664,7 +24668,7 @@ snapshots:
 
   magicast@0.5.5:
     dependencies:
-      '@babel/parser': 7.29.8
+      '@babel/parser': 7.29.9
       '@babel/types': 7.29.8
       source-map-js: 1.2.2
 
@@ -27594,7 +27598,7 @@ snapshots:
     dependencies:
       chokidar: 5.0.0
       immutable: 5.1.5
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
     optionalDependencies:
       '@parcel/watcher': 2.5.6
 
