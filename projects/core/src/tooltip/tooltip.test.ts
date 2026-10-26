@@ -96,6 +96,43 @@ describe(Tooltip.metadata.tag, () => {
     vi.advanceTimersByTime(1);
     expect(element.matches(':popover-open')).toBe(true);
   });
+
+  it('should stay dismissed when tooltip content changes visibility', async () => {
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const child = document.createElement('span');
+    element.append(child);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    await close;
+    expect(element.hidden).toBe(false);
+
+    child.hidden = true;
+    await elementIsStable(element);
+    child.hidden = false;
+    await elementIsStable(element);
+
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should preserve legacy host hidden visibility commands', async () => {
+    element.hidden = true;
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const open = untilEvent(element, 'open');
+    element.hidden = false;
+    await open;
+    expect(element.matches(':popover-open')).toBe(true);
+
+    const close = untilEvent(element, 'close');
+    element.hidden = true;
+    await close;
+    expect(element.matches(':popover-open')).toBe(false);
+  });
 });
 
 describe(`${Tooltip.metadata.tag}: popover interest handover`, () => {

@@ -1308,6 +1308,99 @@ describe('type-popover.controller - dynamic DOM creation', () => {
   });
 });
 
+describe('type-popover.controller - host visibility observation', () => {
+  let fixture: HTMLElement;
+  let element: TypeNativePopoverControllerTestElement;
+  let child: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button popovertarget="popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover"><span></span></type-native-popover-controller-test-element>
+    `);
+    const popover = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const content = popover?.querySelector('span');
+    if (!popover || !content) throw new Error('Missing popover fixture');
+    element = popover;
+    child = content;
+    await elementIsStable(element);
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
+
+  it.each([false, true])('should ignore descendant visibility changes when open is %s', async open => {
+    if (open) element.showPopover();
+    await elementIsStable(element);
+    const show = vi.spyOn(element, 'showPopover');
+    const hide = vi.spyOn(element, 'hidePopover');
+    const matches = vi.spyOn(element, 'matches');
+
+    child.hidden = true;
+    await elementIsStable(element);
+    child.hidden = false;
+    await elementIsStable(element);
+
+    expect(show).not.toHaveBeenCalled();
+    expect(hide).not.toHaveBeenCalled();
+    expect(matches).not.toHaveBeenCalledWith(':popover-open');
+    expect(element.matches(':popover-open')).toBe(open);
+  });
+
+  it('should stay closed after a native hide when descendants change visibility', async () => {
+    element.showPopover();
+    await elementIsStable(element);
+    element.hidePopover();
+    await elementIsStable(element);
+    expect(element.hidden).toBe(false);
+
+    child.hidden = true;
+    await elementIsStable(element);
+
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should preserve host hidden visibility commands after reconnection', async () => {
+    element.remove();
+    fixture.append(element);
+    await elementIsStable(element);
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const show = vi.spyOn(element, 'showPopover');
+    const hide = vi.spyOn(element, 'hidePopover');
+
+    element.hidden = true;
+    await elementIsStable(element);
+    element.hidden = false;
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+    expect(show).toHaveBeenCalledTimes(1);
+
+    element.hidden = true;
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+    expect(hide).toHaveBeenCalledTimes(1);
+  });
+
+  it('should disconnect visibility observation', async () => {
+    element.remove();
+    const show = vi.spyOn(element, 'showPopover');
+    const hide = vi.spyOn(element, 'hidePopover');
+
+    element.hidden = true;
+    await elementIsStable(element);
+    element.hidden = false;
+    await elementIsStable(element);
+
+    expect(show).not.toHaveBeenCalled();
+    expect(hide).not.toHaveBeenCalled();
+  });
+});
+
 describe('type-popover.controller - interest timeout cleanup on disconnect', () => {
   it('should cancel pending interest timeout when element is disconnected', async () => {
     const fixture = await createFixture(html`

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ReactiveController, ReactiveElement } from 'lit';
-import { clickOutsideElementBounds, generateId, getAttributeListChanges } from '../utils/dom.js';
+import { clickOutsideElementBounds, generateId } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 import { focusElement } from '../utils/focus.js';
 import { getHostAnchor, getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
@@ -164,18 +164,18 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   async #setupLegacyTriggers() {
     await new Promise(r => requestAnimationFrame(r));
 
-    // setup hidden updates for legacy triggers
-    this.#observers.push(
-      getAttributeListChanges(this.host, ['hidden'], () => {
-        if (this.host.isConnected && !this.host.hidden && !this.host.matches(':popover-open')) {
-          this.host.showPopover();
-        }
+    // setup host hidden updates for legacy triggers
+    const observer = new MutationObserver(() => {
+      if (this.host.isConnected && !this.host.hidden && !this.host.matches(':popover-open')) {
+        this.host.showPopover();
+      }
 
-        if (this.host.isConnected && this.host.hidden && this.host.matches(':popover-open')) {
-          this.host.hidePopover();
-        }
-      })
-    );
+      if (this.host.isConnected && this.host.hidden && this.host.matches(':popover-open')) {
+        this.host.hidePopover();
+      }
+    });
+    observer.observe(this.host, { attributes: true, attributeFilter: ['hidden'] });
+    this.#observers.push(observer);
 
     // determine if popover is open by default
     if (
