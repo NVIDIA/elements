@@ -45,7 +45,7 @@ eslint -c ./eslint.config.js --color
 
 ## Severity
 
-You can individually adjust rules for lint severity. By default rules use `error` severity.
+You can individually adjust rules for lint severity. Most rules use `error` severity; performance guidance can use `warn`.
 
 ```javascript
 import { elementsHtmlConfig, elementsCssConfig } from '@nvidia-elements/lint/eslint';
@@ -80,9 +80,15 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-display-override` | Disallow display overrides on Elements components. | CSS | `error` |
 | `@nvidia-elements/lint/no-excessive-primary-actions` | Limit primary actions to two per page. | HTML | `error` |
+| `@nvidia-elements/lint/no-excessive-popover-instances` | Warn about excessive or repeated popover instances. | HTML | `warn` |
+| `@nvidia-elements/lint/no-invalid-date-format-options` | Require valid date and relative time formatting options. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-date-value` | Require valid date input for date formatting elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-event-listeners` | Disallow inline event handler attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-invoker-triggers` | Disallow use of invoker trigger attributes on non-button nve-* elements. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-number-format-options` | Require valid number and byte formatting options. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-numeric-value` | Require finite numeric input for number and byte formatting elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-page-header-slot` | Require direct nve-page-header children of nve-page to use the header slot. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-parent-elements` | Require supported direct parents for Elements components. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-slotted-elements` | Disallow invalid direct slotted elements in Elements components. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-control-label` | Require form controls to have an accessible label. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-gap-space` | Require gap spacing on row, column, and grid layouts. | HTML | `error` |
@@ -90,6 +96,7 @@ export default [
 | `@nvidia-elements/lint/no-missing-popover-trigger` | Require popover elements to have a corresponding trigger element. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-misprefixed-tags` | Disallow misprefixed Elements tags that resolve to a known nve-* element. | HTML | `error` |
+| `@nvidia-elements/lint/no-multiple-page-elements` | Require one page shell per template. | HTML | `error` |
 | `@nvidia-elements/lint/no-nested-container-types` | Require nested container components to use flat container mode. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of invalid API attributes or utility attributes on custom HTML element tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-container-full` | Restrict container="full" to direct children of nve-page. | HTML | `error` |

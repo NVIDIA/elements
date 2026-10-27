@@ -94,7 +94,8 @@ const entrypoints = [
  */
 export default function (eleventyConfig) {
   // Vite must finish before the other output writers run.
-  eleventyConfig.setEventEmitterMode('sequential');
+  // Knip's Eleventy config mock omits this API.
+  eleventyConfig.setEventEmitterMode?.('sequential');
   eleventyConfig.pathPrefix = BASE_URL;
 
   // Add core 11ty plugins

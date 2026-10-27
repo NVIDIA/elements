@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { beforeEach, describe, expect, it } from 'vitest';
-import { RuleTester } from 'eslint';
+import { Linter, RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
 import htmlParser from '@html-eslint/parser';
 import { elementsHtmlConfig } from '../configs/html.js';
@@ -66,9 +66,7 @@ describe('noInvalidSlottedElements', () => {
         '<nve-grid><div slot=${slotName}></div></nve-grid>',
         '<nve-grid><div .slot=${slotName}></div></nve-grid>',
         '<nve-grid><template><div></div></template></nve-grid>',
-        '<nve-grid><lit-virtualizer scroller></lit-virtualizer></nve-grid>',
         '<nve-grid><ng-container><nve-grid-row></nve-grid-row></ng-container></nve-grid>',
-        '<nve-button-group><nve-media-seek-button></nve-media-seek-button><nve-media-pause-button></nve-media-pause-button></nve-button-group>',
         '<nve-card><div></div></nve-card>',
         '<nve-tabs><nve-tabs-item-group><nve-tabs-item>Tab</nve-tabs-item><button slot="suffix">Close</button></nve-tabs-item-group></nve-tabs>',
         '<nve-grid>dynamic rows</nve-grid>',
@@ -180,5 +178,51 @@ describe('noInvalidSlottedElements', () => {
         }
       ]
     });
+  });
+
+  it('should scope grid scroller and media control allowances to their supported parents', () => {
+    tester.run('supported compositions', rule, {
+      valid: [
+        '<nve-grid><lit-virtualizer scroller></lit-virtualizer></nve-grid>',
+        '<nve-grid><div scroller></div></nve-grid>',
+        '<nve-button-group><nve-media-seek-button></nve-media-seek-button><nve-media-pause-button></nve-media-pause-button></nve-button-group>'
+      ],
+      invalid: [
+        {
+          code: '<nve-menu><div scroller></div></nve-menu>',
+          errors: [
+            {
+              messageId: 'invalid-slotted-element',
+              data: { parent: 'nve-menu', child: 'div', allowed: 'nve-menu-item, nve-divider' }
+            }
+          ]
+        },
+        {
+          code: '<nve-menu><nve-media-seek-button></nve-media-seek-button></nve-menu>',
+          errors: [
+            {
+              messageId: 'invalid-slotted-element',
+              data: { parent: 'nve-menu', child: 'nve-media-seek-button', allowed: 'nve-menu-item, nve-divider' }
+            }
+          ]
+        }
+      ]
+    });
+  });
+
+  it.each([
+    { filename: 'src/example.html', code: '<nve-grid><table></table></nve-grid>' },
+    { filename: 'src/example.ts', code: 'const template = html`<nve-grid><table></table></nve-grid>`;' },
+    { filename: 'src/example.tsx', code: 'const template = <nve-grid><table /></nve-grid>;' },
+    { filename: 'src/example.md', code: '```html\n<nve-grid><table></table></nve-grid>\n```' }
+  ])('should report invalid children through the HTML config in $filename', ({ filename, code }) => {
+    const messages = new Linter().verify(code, [elementsHtmlConfig], { filename });
+    expect(messages).toEqual([
+      expect.objectContaining({
+        ruleId: '@nvidia-elements/lint/no-invalid-slotted-elements',
+        messageId: 'invalid-slotted-element',
+        severity: 2
+      })
+    ]);
   });
 });

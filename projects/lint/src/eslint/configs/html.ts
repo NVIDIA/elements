@@ -17,6 +17,8 @@ import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 import noSlottedPopovers from '../rules/no-slotted-popovers.js';
 import noDeprecatedSlots from '../rules/no-deprecated-slots.js';
 import noExcessivePrimaryActions from '../rules/no-excessive-primary-actions.js';
+import noExcessivePopoverInstances from '../rules/no-excessive-popover-instances.js';
+import noMultiplePageElements from '../rules/no-multiple-page-elements.js';
 import noMissingSlottedElements from '../rules/no-missing-slotted-elements.js';
 import noMissingControlLabel from '../rules/no-missing-control-label.js';
 import noMissingIconName from '../rules/no-missing-icon-name.js';
@@ -27,8 +29,13 @@ import noUnknownTags from '../rules/no-unknown-tags.js';
 import noUnexpectedAttributeValue from '../rules/no-unexpected-attribute-value.js';
 import noUnexpectedInputType from '../rules/no-unexpected-input-type.js';
 import noInvalidEventListeners from '../rules/no-invalid-event-listeners.js';
+import noInvalidDateValue from '../rules/no-invalid-date-value.js';
+import noInvalidDateFormatOptions from '../rules/no-invalid-date-format-options.js';
 import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
+import noInvalidNumericValue from '../rules/no-invalid-numeric-value.js';
+import noInvalidNumberFormatOptions from '../rules/no-invalid-number-format-options.js';
 import noInvalidPageHeaderSlot from '../rules/no-invalid-page-header-slot.js';
+import noInvalidParentElements from '../rules/no-invalid-parent-elements.js';
 import noInvalidSlottedElements from '../rules/no-invalid-slotted-elements.js';
 import noNestedInteractiveElements from '../rules/no-nested-interactive-elements.js';
 import noMissingGapSpace from '../rules/no-missing-gap-space.js';
@@ -67,6 +74,8 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-deprecated-global-attributes': noDeprecatedGlobalAttributes,
         'no-deprecated-slots': noDeprecatedSlots,
         'no-excessive-primary-actions': noExcessivePrimaryActions,
+        'no-excessive-popover-instances': noExcessivePopoverInstances,
+        'no-multiple-page-elements': noMultiplePageElements,
         'no-missing-slotted-elements': noMissingSlottedElements,
         'no-missing-control-label': noMissingControlLabel,
         'no-missing-icon-name': noMissingIconName,
@@ -83,8 +92,13 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-unexpected-attribute-value': noUnexpectedAttributeValue,
         'no-unexpected-input-type': noUnexpectedInputType,
         'no-invalid-event-listeners': noInvalidEventListeners,
+        'no-invalid-date-value': noInvalidDateValue,
+        'no-invalid-date-format-options': noInvalidDateFormatOptions,
         'no-invalid-invoker-triggers': noInvalidInvokerTriggers,
+        'no-invalid-numeric-value': noInvalidNumericValue,
+        'no-invalid-number-format-options': noInvalidNumberFormatOptions,
         'no-invalid-page-header-slot': noInvalidPageHeaderSlot,
+        'no-invalid-parent-elements': noInvalidParentElements,
         'no-invalid-slotted-elements': noInvalidSlottedElements,
         'no-nested-interactive-elements': noNestedInteractiveElements,
         'no-missing-gap-space': noMissingGapSpace,
@@ -107,6 +121,8 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-deprecated-global-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-slots': ['error'],
     '@nvidia-elements/lint/no-excessive-primary-actions': ['error'],
+    '@nvidia-elements/lint/no-excessive-popover-instances': ['warn'],
+    '@nvidia-elements/lint/no-multiple-page-elements': ['error'],
     '@nvidia-elements/lint/no-missing-slotted-elements': ['error'],
     '@nvidia-elements/lint/no-missing-control-label': ['error'],
     '@nvidia-elements/lint/no-missing-icon-name': ['error'],
@@ -122,8 +138,13 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unexpected-attribute-value': ['error'],
     '@nvidia-elements/lint/no-unexpected-input-type': ['error'],
     '@nvidia-elements/lint/no-invalid-event-listeners': ['error'],
+    '@nvidia-elements/lint/no-invalid-date-value': ['error'],
+    '@nvidia-elements/lint/no-invalid-date-format-options': ['error'],
     '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error'],
+    '@nvidia-elements/lint/no-invalid-numeric-value': ['error'],
+    '@nvidia-elements/lint/no-invalid-number-format-options': ['error'],
     '@nvidia-elements/lint/no-invalid-page-header-slot': ['error'],
+    '@nvidia-elements/lint/no-invalid-parent-elements': ['error'],
     '@nvidia-elements/lint/no-invalid-slotted-elements': ['error'],
     '@nvidia-elements/lint/no-nested-interactive-elements': ['error'],
     '@nvidia-elements/lint/no-unknown-css-variable': ['error'],

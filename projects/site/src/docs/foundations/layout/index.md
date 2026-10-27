@@ -315,14 +315,14 @@ You can compose layout attributes to create sophisticated designs:
 <!-- Complex dashboard layout using semantic HTML -->
 <div nve-layout="row gap:md pad:lg align:horizontal-stretch full">
   <aside style="width: 250px">
-    <nve-page-panel expanded>
-      <nve-page-panel-header>
+    <nve-card>
+      <nve-card-header>
         <div>Navigation menu</div>
-      </nve-page-panel-header>
-      <nve-page-panel-content>
+      </nve-card-header>
+      <nve-card-content>
         User profile
-      </nve-page-panel-content>
-    </nve-page-panel>
+      </nve-card-content>
+    </nve-card>
   </aside>
 
   <main nve-layout="column gap:lg pad:xl">
