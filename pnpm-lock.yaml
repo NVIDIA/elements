@@ -1004,6 +1004,9 @@ importers:
       '@nvidia-elements/themes':
         specifier: workspace:*
         version: link:../../themes
+      '@nvidia-elements/viewport':
+        specifier: workspace:*
+        version: link:../../viewport
       eslint:
         specifier: 10.13.0
         version: 10.13.0(jiti@2.7.0)(supports-color@10.2.2)
