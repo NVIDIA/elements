@@ -64,6 +64,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/viewport": "workspace:*",
     "eslint": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
@@ -102,6 +103,7 @@
         "../../code/dist/**/*.js",
         "../../core/dist/**/*.js",
         "../../themes/dist/**/*.css",
+        "../../viewport/dist/**/*.js",
         "src/**",
         "package.json",
         "tsconfig.json",
@@ -124,6 +126,10 @@
         {
           "script": "../../themes:build",
           "cascade": false
+        },
+        {
+          "script": "../../viewport:build",
+          "cascade": false
         }
       ]
     },
@@ -142,7 +148,8 @@
         "../../core/dist/**/*.d.ts",
         "../../forms/dist/**/*.d.ts",
         "../../code/dist/**/*.d.ts",
-        "../../monaco/dist/**/*.d.ts"
+        "../../monaco/dist/**/*.d.ts",
+        "../../viewport/dist/**/*.d.ts"
       ],
       "output": [],
       "dependencies": [
@@ -156,6 +163,10 @@
         },
         {
           "script": "../../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../../viewport:build",
           "cascade": false
         }
       ]
