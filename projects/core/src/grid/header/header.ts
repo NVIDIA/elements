@@ -4,14 +4,8 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import {
-  useStyles,
-  attachInternals,
-  debounce,
-  LogService,
-  audit,
-  GlobalStateService
-} from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, debounce, LogService, audit } from '@nvidia-elements/core/internal';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
 import styles from './header.css?inline';
 import { GridColumn } from '../column/column.js';
 import type { Grid } from '../grid.js';

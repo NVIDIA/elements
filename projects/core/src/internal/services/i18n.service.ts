@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { GlobalStateService } from './global.service.js';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
+import type { ElementsGlobal } from '@nvidia-elements/foundations/internal/state';
 
 export interface I18nStrings {
   close: string;
@@ -130,7 +131,7 @@ export class I18nService_ {
     }
   }
 
-  update(registry: Partial<typeof globalThis.NVE_ELEMENTS.state.i18nRegistry>) {
+  update(registry: Partial<ElementsGlobal['state']['i18nRegistry']>) {
     GlobalStateService.dispatch('NVE_ELEMENTS_I18N_UPDATE', { i18nRegistry: registry } as Partial<
       typeof globalThis.NVE_ELEMENTS.state
     >);

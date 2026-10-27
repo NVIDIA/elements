@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { GlobalStateService } from './global.service.js';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
 
 const prefix = '@nve: ';
 

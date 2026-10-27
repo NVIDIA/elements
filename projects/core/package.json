@@ -1016,6 +1016,7 @@
     }
   },
   "dependencies": {
+    "@nvidia-elements/foundations": "workspace:^",
     "@nvidia-elements/forms": "workspace:^",
     "lit": "catalog:publish",
     "lit-html": "catalog:publish"
@@ -1094,6 +1095,8 @@
       "command": "NODE_ENV=production ELEMENTS_BUILD=true vite build",
       "clean": "if-file-deleted",
       "files": [
+        "../foundations/dist/**/*.js",
+        "!../foundations/dist/**/*.examples.js",
         "../forms/src/mixins/**/*.ts",
         "../styles/dist/**/*.css",
         "../themes/dist/**/*.css",
@@ -1133,6 +1136,10 @@
         },
         {
           "script": "../forms:build",
+          "cascade": false
+        },
+        {
+          "script": "../foundations:build",
           "cascade": false
         }
       ],

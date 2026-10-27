@@ -1,9 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
-import type { ElementDefinition } from '../types/index.js';
 import { isFocusable } from './focus.js';
 
 export function getChildren(node: Document | Node | HTMLElement): Element[] {
@@ -168,55 +166,6 @@ export function getCustomElementRegistry(element: Element): CustomElementRegistr
   const documentRegistry = element.ownerDocument.defaultView?.customElements;
   if (documentRegistry) return documentRegistry;
   return typeof customElements === 'undefined' ? undefined : customElements;
-}
-
-/** true if the browser supports scoped custom element registries */
-export const supportsScopedRegistry =
-  globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype;
-
-/** defines an element with the given custom element registry */
-export function defineElement(element: ElementDefinition, customElementRegistry: CustomElementRegistry) {
-  Object.entries(element.elementDefinitions ?? {})
-    .filter(([_tag, e]) => !customElementRegistry.get(e.metadata.tag))
-    .forEach(([_tag, e]) => {
-      defineElement(e, customElementRegistry);
-    });
-
-  if (!customElementRegistry.get(element.metadata.tag)) {
-    customElementRegistry.define(element.metadata.tag, element);
-
-    if (customElementRegistry === customElements) {
-      GlobalStateService.dispatch('NVE_ELEMENT_DEFINE', {
-        elementRegistry: { [element.metadata.tag]: element.metadata.version }
-      });
-    }
-  }
-}
-
-/** defines an element with the global custom element registry */
-export function define(element: ElementDefinition) {
-  const { version } = element.metadata;
-
-  // if scoped registry supported, register only the root element to global registry
-  if (supportsScopedRegistry && !customElements.get(element.metadata.tag)) {
-    customElements.define(element.metadata.tag, element);
-    GlobalStateService.dispatch('NVE_ELEMENT_DEFINE', {
-      elementRegistry: { [element.metadata.tag]: element.metadata.version }
-    });
-  } else {
-    // if scoped registry not supported, register the element and all its children to the global registry
-    defineElement(element, customElements);
-  }
-
-  // warn on duplicate version
-  if (
-    GlobalStateService.state.elementRegistry[element.metadata.tag] !== version &&
-    globalThis?.location?.hostname === 'localhost'
-  ) {
-    void import('./audit-logs.js').then(m =>
-      console.warn(m.getDuplicatePackageVersionWarning(element.metadata.tag, version))
-    );
-  }
 }
 
 export function isContextMenuClick(event: MouseEvent) {

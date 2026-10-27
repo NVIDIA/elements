@@ -425,26 +425,6 @@ export const statusIcons: { [key: string]: IconName } = {
 } as const;
 
 declare global {
-  var NVE_ELEMENTS: {
-    state: {
-      bundle: boolean;
-      env: 'watch' | 'production' | 'development';
-      pageHost: string;
-      moduleHost: string;
-      versions: string[];
-      scopedRegistry: { [key: string]: CustomElementRegistry };
-      elementRegistry: Readonly<{ [key: string]: string }>;
-      i18nRegistry: Readonly<{ [key: string]: string }>;
-      audit: Readonly<{
-        [key: string]: {
-          count?: number;
-          excessiveInstanceLimitAudited?: boolean;
-        };
-      }>;
-    };
-    debug: (log?: (...args: unknown[]) => void) => void;
-  };
-
   interface HTMLElement {
     'nve-text': string;
     'nve-layout': string;
@@ -458,12 +438,6 @@ declare global {
     new (): CustomElementRegistry;
     prototype: CustomElementRegistry;
   };
-}
-
-export interface ElementDefinition extends CustomElementConstructor {
-  metadata: { version: string; tag: string };
-  elementDefinitions?: { [key: string]: ElementDefinition };
-  shadowRootOptions?: { customElementRegistry?: CustomElementRegistry | null };
 }
 
 export interface Point {

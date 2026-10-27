@@ -20,7 +20,6 @@ import {
   getFlattenedDOMTree,
   validKeyNavigationCode,
   KeynavCode,
-  define,
   removeEmptyTextNode,
   scrollBarWidth,
   hasScrollBar,
@@ -695,31 +694,6 @@ describe('parseTokenNumber', () => {
   it('should return 0 for invalid values', () => {
     expect(parseTokenNumber('')).toBe(0);
     expect(parseTokenNumber('invalid')).toBe(0);
-  });
-});
-
-describe('defineElement', () => {
-  let fixture: HTMLElement;
-
-  beforeEach(async () => {
-    define(class TestElement extends LitElement {
-      static metadata = { tag: 'define-test-element', version: '0.0.0' };
-    });
-    fixture = await createFixture(html`
-      <define-test-element></define-test-element>
-    `);
-  });
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
-  it('should define element', () => {
-    expect(customElements.get('define-test-element')).toBeDefined();
-  });
-
-  it('should add element to global service registry', () => {
-    expect(window.NVE_ELEMENTS.state.elementRegistry['define-test-element'].length > 0).toBe(true);
   });
 });
 
