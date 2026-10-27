@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type * as childProcess from 'node:child_process';
+import { EventEmitter } from 'node:events';
 import { readFileSync } from 'node:fs';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -13,6 +14,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   archiveStarter,
   startersData,
+  createStarter,
   createStarterCDNUrl,
   createGitInitProcess,
   createStarterPaths,
@@ -690,5 +692,74 @@ describe('archiveStarter', () => {
     expect(layout).toContain(`@nvidia-elements/themes@${packageVersion('themes')}/dist/fonts/inter.css`);
     expect(layout).not.toContain('npm/@nvidia-elements/core/dist/');
     expect(layout).not.toContain('npm/@nvidia-elements/themes/dist/');
+  });
+});
+
+describe('createStarter', () => {
+  const directories: string[] = [];
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  afterEach(async () => {
+    vi.unstubAllGlobals();
+    const { execFile } = await import('node:child_process');
+    vi.mocked(execFile).mockReset();
+    await Promise.all(directories.splice(0).map(directory => rm(directory, { recursive: true, force: true })));
+  });
+
+  async function createDownloadedStarter(starter: 'sphinx' | 'typescript') {
+    const { execFile } = await import('node:child_process');
+    vi.mocked(execFile).mockImplementation(() => {
+      const command = new EventEmitter();
+      setTimeout(() => {
+        command.emit('close', 0);
+      }, 0);
+      return command;
+    });
+    const archive = new AdmZip();
+    archive.addFile('README.md', Buffer.from('starter\n'));
+    vi.stubGlobal('fetch', async () => new Response(archive.toBuffer()));
+    const outDir = await mkdtemp(join(tmpdir(), 'elements-create-starter-'));
+    directories.push(outDir);
+    return createStarter(starter, outDir);
+  }
+
+  it('should explain the next commands after creating an external starter', async () => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    try {
+      await expect(createDownloadedStarter('sphinx')).resolves.toEqual({
+        create: {
+          message: 'Starter created successfully',
+          status: 'success'
+        }
+      });
+      expect(log).toHaveBeenCalledWith('🎉 Starter created successfully');
+      expect(log).toHaveBeenCalledWith(
+        'Next steps:\n  cd sphinx\n  uv sync --locked\n  uv run sphinx-autobuild docs dist'
+      );
+    } finally {
+      log.mockRestore();
+    }
+  });
+
+  it('should confirm creation without next steps for a node starter', async () => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    try {
+      await expect(createDownloadedStarter('typescript')).resolves.toEqual({
+        create: {
+          message: 'Starter created successfully',
+          status: 'success'
+        }
+      });
+      const messages = log.mock.calls.map(call => String(call[0]));
+      expect(messages).toContain('🎉 Starter created successfully');
+      expect(messages.some(message => message.startsWith('Next steps'))).toBe(false);
+    } finally {
+      log.mockRestore();
+    }
   });
 });
