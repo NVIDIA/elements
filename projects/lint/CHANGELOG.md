@@ -1,3 +1,18 @@
+## [2.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.8.0...@nvidia-elements/lint-v2.9.0) (2026-10-27)
+
+### Features
+
+* **foundations:** scroll box ([fa9d947](https://github.com/NVIDIA/elements/commit/fa9d947d076a9cbc356a307aa0fb1f219bb701a4))
+* **lint:** new rules ([1352a3e](https://github.com/NVIDIA/elements/commit/1352a3e579e6a2e3d4bff29c03c91379dbd30f93))
+
+### Bug Fixes
+
+* **cli:** update bun to 1.4.4 ([dc0a9d4](https://github.com/NVIDIA/elements/commit/dc0a9d4079cf3d8c7251ed4dfb6ff8ce728f8be1))
+* **core:** migrate runtime to static lint checks ([e616f85](https://github.com/NVIDIA/elements/commit/e616f85788c699b6c89c410625a23481834e48dd))
+* **core:** observe only host hidden changes for popover visibility ([3a2b58d](https://github.com/NVIDIA/elements/commit/3a2b58d26b7223677d8f23f8643dd6d1cc173882))
+* **docs:** prevent code block copy buttons from overflowing the page ([6972e4b](https://github.com/NVIDIA/elements/commit/6972e4b7e3dfaa936a650167c47a3d6d0cca2a35))
+* **foundations:** missing dist publish ([5521fc0](https://github.com/NVIDIA/elements/commit/5521fc0d55e0542d028727531267241bc31f9401))
+
 ## [2.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.7.4...@nvidia-elements/lint-v2.8.0) (2026-10-23)
 
 ### Features
