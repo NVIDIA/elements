@@ -4,7 +4,8 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { audit, AuditController, GlobalStateService } from '@nvidia-elements/core/internal';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
+import { audit, AuditController } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/dialog/define.js';

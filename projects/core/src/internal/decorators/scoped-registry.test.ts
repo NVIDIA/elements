@@ -6,9 +6,9 @@ import { LitElement } from 'lit';
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
-import { GlobalStateService } from '../services/global.service.js';
-import type { ElementDefinition } from '../types/index.js';
-import { supportsScopedRegistry } from '../utils/dom.js';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
+import type { ElementDefinition } from '@nvidia-elements/foundations/internal/define';
+import { supportsScopedRegistry } from '@nvidia-elements/foundations/internal/define';
 import { scopedRegistry } from './scoped-registry.js';
 
 const uid = Math.random().toString(36).slice(2, 8);
@@ -55,6 +55,22 @@ describe('scopedRegistry', () => {
 
     expect(GlobalStateService.state.scopedRegistry).toBe(savedScopedRegistry);
   });
+
+  it.skipIf(!supportsScopedRegistry)(
+    'should create a registry for a package with a different version from foundations',
+    () => {
+      class VersionedElement extends HTMLElement {
+        static readonly metadata = { tag: `nve-test-versioned-${uid}-${counter++}`, version: '9.8.7' };
+      }
+
+      scopedRegistry()(VersionedElement);
+
+      const registry = GlobalStateService.state.scopedRegistry['9.8.7'];
+      expect(registry).toBeDefined();
+      expect(registry.get(VersionedElement.metadata.tag)).toBe(VersionedElement);
+      expect(VersionedElement).toHaveProperty('shadowRootOptions.customElementRegistry', registry);
+    }
+  );
 
   it('should register element in its version registry', () => {
     const element = createMockElement();

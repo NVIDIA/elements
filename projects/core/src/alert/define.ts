@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { Alert, AlertGroup } from '@nvidia-elements/core/alert';
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 
 define(Alert);
 define(AlertGroup);

@@ -28,11 +28,3 @@ export function getSSRMismatchWarning(localName: string) {
 export function getCrossShadowRootAnchorWarning(localName: string) {
   return `(deprecated) ${localName} provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`;
 }
-
-export function getDuplicatePackageVersionWarning(localName: string, version: string) {
-  return `@nve: Element ${localName} version ${version} already defined, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`;
-}
-
-export function getDuplicatePackageGlobalVersionWarning() {
-  return `@nve: Multiple versions of Elements loaded, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`;
-}

@@ -3,7 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { GlobalStateService } from '../services/global.service.js';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
 import { LogService } from '../services/log.service.js';
 import { auditParentElement } from '../utils/audit.js';
 import {

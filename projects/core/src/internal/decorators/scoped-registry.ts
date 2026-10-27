@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { RenderOptions } from 'lit';
-import { GlobalStateService } from '../services/global.service.js';
-import type { ElementDefinition, LegacyDecoratorTarget } from '../types/index.js';
-import { defineElement, supportsScopedRegistry } from '../utils/dom.js';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
+import type { LegacyDecoratorTarget } from '../types/index.js';
+import type { ElementDefinition } from '@nvidia-elements/foundations/internal/define';
+import { defineElement, supportsScopedRegistry } from '@nvidia-elements/foundations/internal/define';
 
 interface ScopedRegistryHost extends HTMLElement {
   createRenderRoot?: () => HTMLElement | DocumentFragment;
@@ -49,8 +50,7 @@ function attachLitCreationScope(element: ElementDefinition, customElementRegistr
 export function scopedRegistry(): ClassDecorator {
   return (target: LegacyDecoratorTarget) => {
     const element = target as unknown as ElementDefinition;
-    GlobalStateService.state.scopedRegistry ??= {};
-    const customElementRegistry = GlobalStateService.state.scopedRegistry[element.metadata.version] ?? customElements;
+    const customElementRegistry = GlobalStateService.getScopedRegistry(element.metadata.version);
     if (supportsScopedRegistry) {
       Object.defineProperty(element, 'shadowRootOptions', {
         configurable: true,

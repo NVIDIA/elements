@@ -25,7 +25,6 @@ export * from './decorators/host-attr.js';
 export * from './decorators/scoped-registry.js';
 export * from './styles/index.js';
 export * from './styles/popover.js';
-export * from './services/global.service.js';
 export * from './services/i18n.service.js';
 export * from './services/log.service.js';
 export * from './services/transition.service.js';

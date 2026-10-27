@@ -49,11 +49,6 @@
       "count": 1
     }
   },
-  "src/internal/services/global.service.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 2
-    }
-  },
   "src/internal/utils/dom.test.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 4
