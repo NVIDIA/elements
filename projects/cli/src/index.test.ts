@@ -84,6 +84,7 @@ describe('index', { timeout: 15_000 }, () => {
 
   it('should require a JSON stdin filename', () => {
     const result = spawnSync(process.execPath, ['dist/index.js', 'api.validate', '--stdin', '--lang', 'json'], {
+      timeout: 10000,
       encoding: 'utf-8',
       input: '{}'
     });

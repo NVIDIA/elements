@@ -102,7 +102,7 @@ static readonly metadata = {
 Use the `define()` helper and declare global types:
 
 ```typescript
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 import { ComponentName } from '@nvidia-elements/core/component-name';
 
 define(ComponentName);

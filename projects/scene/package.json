@@ -81,6 +81,7 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/foundations": "workspace:^",
     "lit": "catalog:publish"
   },
   "peerDependencies": {
@@ -141,6 +142,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../foundations/dist/**/*.js",
+        "!../foundations/dist/**/*.examples.js",
         "src/**",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -163,6 +166,10 @@
         },
         {
           "script": "../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../foundations:build",
           "cascade": false
         }
       ]

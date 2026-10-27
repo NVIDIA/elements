@@ -18,6 +18,7 @@ function installFixtures() {
     symlinkSync('missing-entry-target', join(fixtureRoot, '000-missing-entry'));
   }
   mkdirSync(join(fixturePackageDir, 'nested', 'deeper'), { recursive: true });
+  symlinkSync(join(fixtureRoot, 'missing-target'), join(fixtureRoot, '00-unreadable-entry'));
   writeFileSync(join(fixturePackageDir, 'nested', 'package.json'), '{ not json');
   writeFileSync(
     join(fixturePackageDir, 'package.json'),
@@ -387,7 +388,7 @@ describe('generateGraphData', () => {
     }
   });
 
-  it('should categorize a package whose name includes labs/', () => {
+  it('should find and categorize packages after an unreadable directory entry', () => {
     const fixtureNode = result.nodes.find(n => n.packageName === 'labs/upkeep-wireit-fixture');
 
     expect(fixtureNode).toBeDefined();

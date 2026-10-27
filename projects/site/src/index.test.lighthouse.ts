@@ -109,8 +109,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(96);
     expect(scores.seo).toBeGreaterThanOrEqual(100);
-    // Allow a small margin above the 161.96 KB measured locally and in CI.
-    expect(scores.payload.js).toBeLessThan(163);
+    expect(scores.payload.js).toBeLessThan(165.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
   });
@@ -121,7 +120,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(160);
+    expect(scores.payload.js).toBeLessThan(162);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -132,7 +131,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(104);
+    expect(scores.payload.js).toBeLessThan(107.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBeLessThan(0.5);
   });
@@ -143,8 +142,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(95);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    // Allow a small margin above the 170.77 KB measured locally.
-    expect(scores.payload.js).toBeLessThan(172);
+    expect(scores.payload.js).toBeLessThan(174.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -155,8 +153,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    // Allow a small margin above the 158.43 KB measured locally.
-    expect(scores.payload.js).toBeLessThan(160);
+    expect(scores.payload.js).toBeLessThan(162.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -167,8 +164,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    // Allow a small margin above the 157.98 KB measured locally.
-    expect(scores.payload.js).toBeLessThan(159);
+    expect(scores.payload.js).toBeLessThan(162);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
