@@ -29,6 +29,10 @@ import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/tree/define.js';
 import '@nvidia-elements/monaco/input/define.js';
+import '@nvidia-elements/viewport/gridlines/define.js';
+import '@nvidia-elements/viewport/minimap/define.js';
+import '@nvidia-elements/viewport/viewport/define.js';
+import '@nvidia-elements/viewport/zoom-range/define.js';
 import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/code/codeblock/languages/python.js';
 import '@nvidia-elements/code/codeblock/languages/yaml.js';
@@ -884,6 +888,120 @@ class LidarConfig:
     <nve-divider orientation="vertical"></nve-divider>
     <span nve-text="body sm muted">Ln 1, Col 1</span>
     <span slot="suffix" nve-text="body sm muted">Python</span>
+  </nve-toolbar>
+</nve-page>
+  `
+};
+
+/**
+ * @summary Page-level starter for visual workflow editors with nodes initially centered and fitted to the canvas. Edit nodes and navigate spatial content with pan, zoom, gridlines, and a minimap without losing context.
+ * @tags template
+ */
+export const CanvasEditor = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h1 slot="prefix" nve-text="heading">Workflow Studio</h1>
+  </nve-page-header>
+  <nve-page-panel slot="left" size="sm">
+    <nve-page-panel-header>
+      <h2 nve-text="heading sm">Outline</h2>
+    </nve-page-panel-header>
+    <nve-page-panel-content>
+      <nve-tree behavior-expand aria-label="Workflow outline">
+        <nve-tree-node expanded>
+          Perception pipeline
+          <nve-tree-node>Dataset</nve-tree-node>
+          <nve-tree-node>Inference</nve-tree-node>
+          <nve-tree-node expanded>
+            Detections
+            <nve-tree-node>Tracking</nve-tree-node>
+            <nve-tree-node>Alerts</nve-tree-node>
+          </nve-tree-node>
+        </nve-tree-node>
+      </nve-tree>
+    </nve-page-panel-content>
+  </nve-page-panel>
+  <nve-toolbar slot="subheader" container="full" aria-label="Canvas controls">
+    <h2 slot="prefix" nve-text="heading sm">Perception pipeline</h2>
+    <nve-button slot="suffix" commandfor="canvas-editor-viewport" command="--zoom-reset" aria-label="Reset zoom to 100%">100%</nve-button>
+    <nve-button slot="suffix" commandfor="canvas-editor-viewport" command="--zoom-to-fit">Fit canvas</nve-button>
+  </nve-toolbar>
+  <main style="min-height: 0">
+    <nve-viewport id="canvas-editor-viewport" autofit fit-inset="48" behavior-pan behavior-zoom aria-label="Perception workflow canvas" style="width: 100%; height: 100%; --min-height: 0">
+      <nve-viewport-gridlines pattern="dots"></nve-viewport-gridlines>
+      <svg slot="background" aria-hidden="true" width="1360" height="520" viewBox="0 0 1360 520" style="position: absolute; left: 0; top: 0">
+        <path d="M 280 180 H 360 M 640 180 H 720 M 1000 180 H 1080 M 1040 180 V 420 H 1080" fill="none" stroke="var(--nve-ref-border-color-emphasis)" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+        <circle cx="1040" cy="180" r="4" fill="var(--nve-ref-border-color-emphasis)"></circle>
+      </svg>
+      <nve-card style="position: absolute; left: 0; top: 100px; width: 280px; height: 160px">
+        <nve-card-header>
+          <h3 nve-text="heading sm">Dataset</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-input>
+            <label>Dataset name</label>
+            <input value="warehouse-scenes" />
+          </nve-input>
+        </nve-card-content>
+      </nve-card>
+      <nve-card style="position: absolute; left: 360px; top: 100px; width: 280px; height: 160px">
+        <nve-card-header>
+          <h3 nve-text="heading sm">Inference</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-input>
+            <label>Model name</label>
+            <input value="perception-v2" />
+          </nve-input>
+        </nve-card-content>
+      </nve-card>
+      <nve-card style="position: absolute; left: 720px; top: 100px; width: 280px; height: 160px">
+        <nve-card-header>
+          <h3 nve-text="heading sm">Detections</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-input>
+            <label>Output topic</label>
+            <input value="/perception/detections" />
+          </nve-input>
+        </nve-card-content>
+      </nve-card>
+      <nve-card style="position: absolute; left: 1080px; top: 100px; width: 280px; height: 160px">
+        <nve-card-header>
+          <h3 nve-text="heading sm">Tracking</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-input>
+            <label>Tracker name</label>
+            <input value="multi-object-tracker" />
+          </nve-input>
+        </nve-card-content>
+      </nve-card>
+      <nve-card style="position: absolute; left: 1080px; top: 340px; width: 280px; height: 160px">
+        <nve-card-header>
+          <h3 nve-text="heading sm">Alerts</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-input>
+            <label>Alert topic</label>
+            <input value="/perception/alerts" />
+          </nve-input>
+        </nve-card-content>
+      </nve-card>
+      <nve-viewport-minimap aria-label="Workflow overview"></nve-viewport-minimap>
+      <nve-toolbar slot="overlay" orientation="vertical" aria-label="Canvas zoom controls"
+        style="position: absolute; inset-block-start: var(--nve-ref-space-md); inset-inline-start: var(--nve-ref-space-md); width: fit-content">
+        <nve-button commandfor="canvas-editor-viewport" command="--zoom-in" aria-label="Zoom in">+</nve-button>
+        <nve-viewport-zoom-range commandfor="canvas-editor-viewport" orientation="vertical" aria-label="Canvas zoom"></nve-viewport-zoom-range>
+        <nve-button commandfor="canvas-editor-viewport" command="--zoom-out" aria-label="Zoom out">−</nve-button>
+      </nve-toolbar>
+    </nve-viewport>
+  </main>
+  <nve-toolbar slot="subfooter" container="full" aria-label="Canvas navigation help">
+    <span nve-text="body sm muted">Drag the canvas background to pan. Use the zoom controls or minimap to navigate.</span>
+    <span slot="suffix" nve-text="body sm muted">5 nodes</span>
   </nve-toolbar>
 </nve-page>
   `
