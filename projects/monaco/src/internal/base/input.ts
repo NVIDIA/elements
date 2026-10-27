@@ -5,7 +5,7 @@ import { LitElement } from 'lit';
 import type { TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 

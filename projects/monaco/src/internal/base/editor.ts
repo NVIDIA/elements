@@ -5,7 +5,8 @@ import { LitElement } from 'lit';
 import type { TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 
 import type * as monaco from '@nvidia-elements/monaco';
 import type { Monaco } from '@nvidia-elements/monaco';
