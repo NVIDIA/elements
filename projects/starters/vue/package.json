@@ -19,7 +19,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.5.42"
+    "vue": "3.5.44"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
