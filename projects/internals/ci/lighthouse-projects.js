@@ -7,10 +7,12 @@ export const LIGHTHOUSE_PROJECTS = Object.freeze([
   { name: '@nvidia-elements/styles', dir: 'styles', metrics: true },
   { name: '@nvidia-elements/themes', dir: 'themes', metrics: true },
   { name: '@nvidia-elements/forms', dir: 'forms', metrics: true },
+  { name: '@nvidia-elements/foundations', dir: 'foundations', metrics: true },
   { name: '@nvidia-elements/markdown', dir: 'markdown', metrics: true },
   { name: '@nvidia-elements/media', dir: 'media', metrics: true },
   { name: '@nvidia-elements/monaco', dir: 'monaco', metrics: true },
-  // { name: '@nvidia-elements/plot', dir: 'plot', metrics: true },
+  { name: '@nvidia-elements/plot', dir: 'plot', metrics: true },
   { name: '@nvidia-elements/scene', dir: 'scene', metrics: true },
+  { name: '@nvidia-elements/viewport', dir: 'viewport', metrics: true },
   { name: 'site', dir: 'site', metrics: false }
 ]);

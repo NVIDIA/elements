@@ -62,7 +62,7 @@ Elements should not automatically register themselves to the `customElementsRegi
 
 ```typescript
 // dialog/define.ts
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 import { Dialog, DialogHeader, DialogFooter } from '@nvidia-elements/core/dialog';
 
 define(Dialog);

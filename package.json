@@ -340,6 +340,7 @@
         "./projects/*/README.md",
         "./projects/*/*/src/**/*.{md,ts}",
         "./projects/*/*/README.md",
+        "!**/node_modules/**",
         "!**/__screenshots__/**",
         "!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}"
       ],

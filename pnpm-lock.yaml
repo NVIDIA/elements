@@ -557,6 +557,9 @@ importers:
 
   projects/code:
     dependencies:
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -630,6 +633,9 @@ importers:
       '@nvidia-elements/forms':
         specifier: workspace:^
         version: link:../forms
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -1275,6 +1281,9 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:^
         version: link:../core
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -1345,6 +1354,9 @@ importers:
       '@nvidia-elements/forms':
         specifier: workspace:^
         version: link:../forms
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -1409,6 +1421,9 @@ importers:
       '@nvidia-elements/forms':
         specifier: workspace:^
         version: link:../forms
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       lit:
         specifier: catalog:publish
         version: 3.3.3
@@ -1600,6 +1615,9 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:^
         version: link:../core
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -1664,6 +1682,9 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:^
         version: link:../core
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -2796,6 +2817,9 @@ importers:
       '@nvidia-elements/forms':
         specifier: workspace:^
         version: link:../forms
+      '@nvidia-elements/foundations':
+        specifier: workspace:^
+        version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
