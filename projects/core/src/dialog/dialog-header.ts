@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { audit, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './dialog-header.css?inline';
 
 /**
@@ -16,7 +16,6 @@ import styles from './dialog-header.css?inline';
  * @cssprop --padding
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
-@audit()
 export class DialogHeader extends LitElement {
   static styles = useStyles([styles]);
 

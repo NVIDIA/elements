@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { audit, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './toggletip-footer.css?inline';
 
 /**
@@ -17,7 +17,6 @@ import styles from './toggletip-footer.css?inline';
  * @cssprop --gap
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
-@audit()
 export class ToggletipFooter extends LitElement {
   static styles = useStyles([styles]);
 

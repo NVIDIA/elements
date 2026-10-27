@@ -3,7 +3,7 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, typeSSR, LogService } from '@nvidia-elements/core/internal';
+import { useStyles, typeSSR } from '@nvidia-elements/core/internal';
 import styles from './format-number.css?inline';
 
 export type FormatNumberStyle = 'decimal' | 'currency' | 'percent' | 'unit';
@@ -114,12 +114,12 @@ export class FormatNumber extends LitElement {
   useGrouping?: 'auto' | 'always' | 'min2' | 'true' | 'false' | boolean;
 
   /**
-   * Pad fraction output to at least this many digits (0-20).
+   * Pad fraction output to at least this many digits (0-100).
    */
   @property({ type: Number, attribute: 'minimum-fraction-digits' }) minimumFractionDigits?: number;
 
   /**
-   * Round fraction output to at most this many digits (0-20).
+   * Round fraction output to at most this many digits (0-100).
    */
   @property({ type: Number, attribute: 'maximum-fraction-digits' }) maximumFractionDigits?: number;
 
@@ -143,7 +143,6 @@ export class FormatNumber extends LitElement {
     const numericValue = Number(raw);
     if (Number.isFinite(numericValue)) return numericValue;
 
-    LogService.warn(`format-number: invalid numeric value "${raw}"`);
     return null;
   }
 
@@ -177,8 +176,7 @@ export class FormatNumber extends LitElement {
 
     try {
       return new Intl.NumberFormat(this.#resolvedLocale, this.#formatOptions).format(numericValue);
-    } catch (e) {
-      LogService.warn(`format-number: ${(e as Error).message}`);
+    } catch {
       return raw;
     }
   }

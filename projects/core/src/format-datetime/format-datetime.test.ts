@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { FormatDatetime } from '@nvidia-elements/core/format-datetime';
+import { LogService } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/format-datetime/define.js';
 
 describe(FormatDatetime.metadata.tag, () => {
@@ -24,6 +25,7 @@ describe(FormatDatetime.metadata.tag, () => {
   afterEach(() => {
     document.documentElement.lang = originalDocumentLang;
     removeFixture(fixture);
+    vi.restoreAllMocks();
   });
 
   it('should define element', () => {
@@ -315,18 +317,93 @@ describe(FormatDatetime.metadata.tag, () => {
       expect(time!.textContent!.trim()).toBe('7/28/23');
     });
 
-    it('should show raw string for invalid date', async () => {
-      element.date = 'not-a-date';
+    it.each(['not-a-date', '2026-13-01', '2026-10-26T25:00:00Z', '+999999-01-01'])(
+      'should preserve invalid date %s without warning',
+      async value => {
+        const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+        element.date = value;
+        await elementIsStable(element);
+
+        const time = element.shadowRoot!.querySelector('time');
+        expect(time?.getAttribute('datetime')).toBe(value);
+        expect(time?.textContent.trim()).toBe(value);
+        expect(warn).not.toHaveBeenCalled();
+      }
+    );
+
+    it('should preserve invalid date attributes without warning', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.setAttribute('date', 'not-a-date');
       await elementIsStable(element);
+
       const time = element.shadowRoot!.querySelector('time');
-      expect(time!.textContent!.trim()).toBe('not-a-date');
+      expect(time?.getAttribute('datetime')).toBe('not-a-date');
+      expect(time?.textContent.trim()).toBe('not-a-date');
+      expect(warn).not.toHaveBeenCalled();
     });
 
-    it('should fall back to raw string for invalid Intl options', async () => {
+    it('should preserve invalid text content without warning', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.textContent = 'not-a-date';
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time?.getAttribute('datetime')).toBe('not-a-date');
+      expect(time?.textContent.trim()).toBe('not-a-date');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it('should fall back silently to raw string for invalid Intl options', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
       element.setAttribute('date-style', 'banana');
       await elementIsStable(element);
       const time = element.shadowRoot!.querySelector('time');
       expect(time!.textContent!.trim()).toBe('2023-07-28T04:20:17.434Z');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ['locale', 'en_US'],
+      ['locale', ''],
+      ['time-zone', 'Invalid/Zone'],
+      ['time-zone', '+24:00'],
+      ['time-zone', ' ']
+    ])('should preserve input without warning for invalid %s=%s', async (attribute, value) => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.setAttribute(attribute, value);
+      await elementIsStable(element);
+
+      const time = element.shadowRoot?.querySelector('time');
+      expect(time?.textContent.trim()).toBe('2023-07-28T04:20:17.434Z');
+      expect(time?.getAttribute('datetime')).toBe('2023-07-28T04:20:17.434Z');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ['locale', 'en_US', 'en-US'],
+      ['time-zone', 'Invalid/Zone', 'UTC']
+    ])('should resume formatting after correcting %s', async (attribute, invalid, valid) => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.setAttribute(attribute, invalid);
+      await elementIsStable(element);
+      expect(element.shadowRoot?.querySelector('time')?.textContent.trim()).toBe('2023-07-28T04:20:17.434Z');
+
+      element.setAttribute(attribute, valid);
+      await elementIsStable(element);
+      expect(element.shadowRoot?.querySelector('time')?.textContent.trim()).toBe('July 28, 2023');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it('should use the default time zone for an empty time zone option', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.timeZone = '';
+      await elementIsStable(element);
+      const expected = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
+        new Date('2023-07-28T04:20:17.434Z')
+      );
+
+      expect(element.shadowRoot?.querySelector('time')?.textContent.trim()).toBe(expected);
+      expect(warn).not.toHaveBeenCalled();
     });
 
     it('should render empty for no content', async () => {

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { audit, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './drawer-footer.css?inline';
 
 /**
@@ -18,7 +18,6 @@ import styles from './drawer-footer.css?inline';
  * @cssprop --min-height
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
-@audit()
 export class DrawerFooter extends LitElement {
   static styles = useStyles([styles]);
 

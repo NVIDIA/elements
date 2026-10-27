@@ -11,7 +11,7 @@
   },
   "src/format-datetime/format-datetime.test.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 27
+      "count": 26
     }
   },
   "src/format-number/format-number.test.ts": {
@@ -21,7 +21,7 @@
   },
   "src/format-relative-time/format-relative-time.test.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 40
+      "count": 39
     }
   },
   "src/internal/controllers/audit.controller.ts": {

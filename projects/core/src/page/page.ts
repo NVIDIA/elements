@@ -35,7 +35,7 @@ import styles from './page.css?inline';
  *
  */
 @audit({
-  excessiveInstanceLimit: 0
+  excessiveInstanceLimit: 1
 })
 export class Page extends LitElement {
   static styles = useStyles([styles]);

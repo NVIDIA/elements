@@ -560,6 +560,7 @@ export const BulkCreation = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-invalid-parent-elements -- Intentional invalid parent for audit documentation. */
 /**
  * @summary Examples of invalid tree usage patterns for testing and documentation purposes, showing what not to do when implementing trees.
  * @tags anti-pattern
@@ -571,6 +572,7 @@ export const Audit = {
     </div>
   `
 };
+/* eslint-enable @nvidia-elements/lint/no-invalid-parent-elements */
 
 export class TestDynamicTree extends LitElement {
   @state() nodes = createTree();

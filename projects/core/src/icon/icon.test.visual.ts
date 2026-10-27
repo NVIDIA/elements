@@ -7,12 +7,12 @@ import { ICON_NAMES, ICON_NAMES_SOLID } from '@nvidia-elements/core/icon';
 
 describe('icon visual', () => {
   test('icon should match visual baseline', async () => {
-    const report = await visualRunner.render('icon', template(), { network: true });
+    const report = await visualRunner.render('icon', template(), { waitFor: waitForIcons });
     expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 
   test('icon should match visual baseline dark theme', async () => {
-    const report = await visualRunner.render('icon.dark', template('dark'), { network: true });
+    const report = await visualRunner.render('icon.dark', template('dark'), { waitFor: waitForIcons });
     expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 
@@ -57,7 +57,7 @@ describe('icon visual', () => {
           .join('')}
       </div>
     `,
-      { network: true }
+      { waitFor: waitForIcons }
     );
     expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
@@ -84,7 +84,7 @@ describe('icon visual', () => {
         ${ICONS_WITH_OPTICAL_SPACING.map(i => `<nve-icon name="${i}"></nve-icon>`).join('')}
       </div>
     `,
-      { network: true }
+      { waitFor: waitForIcons }
     );
     expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
@@ -111,11 +111,17 @@ describe('icon visual', () => {
         ${ICON_NAMES_SOLID.map(i => `<nve-icon name="${i}" appearance="solid"></nve-icon>`).join('')}
       </div>
     `,
-      { network: true }
+      { waitFor: waitForIcons }
     );
     expect(report.maxDiffPercentage).toBeLessThan(0.1);
   });
 });
+
+async function waitForIcons(waitForFunction: (...args: unknown[]) => Promise<unknown>) {
+  await waitForFunction(() =>
+    Array.from(document.querySelectorAll('nve-icon')).every(icon => icon.shadowRoot?.querySelector('svg'))
+  );
+}
 
 function template(theme: '' | 'dark' = '') {
   return /* html */ `

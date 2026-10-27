@@ -228,51 +228,81 @@ describe(FormatBytes.metadata.tag, () => {
     ['display', 'invalid'],
     ['unit', 'invalid'],
     ['unit-display', 'invalid']
-  ])('should preserve input for an invalid %s option', async (attribute, value) => {
+  ])('should preserve input without warning for an invalid %s option', async (attribute, value) => {
     const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
     element.setAttribute(attribute, value);
     await elementIsStable(element);
 
     expect(renderedText(element)).toBe('1048576');
-    expect(warn).toHaveBeenCalledOnce();
+    expect(warn).not.toHaveBeenCalled();
   });
 
-  it('should preserve and warn for invalid numeric input', async () => {
-    const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
-    element.textContent = 'not-a-number';
-    await elementIsStable(element);
+  it.each(['not-a-number', 'NaN', 'Infinity', '-Infinity', '1e309'])(
+    'should preserve invalid numeric input %s without warning',
+    async value => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.textContent = value;
+      await elementIsStable(element);
 
-    expect(renderedText(element)).toBe('not-a-number');
-    expect(warn).toHaveBeenCalledWith('format-bytes: invalid numeric value "not-a-number"');
-  });
+      expect(renderedText(element)).toBe(value);
+      expect(warn).not.toHaveBeenCalled();
+    }
+  );
 
-  it('should preserve and warn for an invalid value attribute', async () => {
+  it('should preserve an invalid value attribute without warning', async () => {
     const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
     element.setAttribute('value', 'not-a-number');
     await elementIsStable(element);
 
     expect(renderedData(element)?.getAttribute('value')).toBe('not-a-number');
     expect(renderedText(element)).toBe('not-a-number');
-    expect(warn).toHaveBeenCalledWith('format-bytes: invalid numeric value "not-a-number"');
+    expect(warn).not.toHaveBeenCalled();
   });
 
-  it('should preserve and warn for a NaN value property', async () => {
+  it('should preserve a NaN value property without warning', async () => {
     const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
     element.value = Number.NaN;
     await elementIsStable(element);
 
     expect(renderedData(element)?.getAttribute('value')).toBe('NaN');
     expect(renderedText(element)).toBe('NaN');
-    expect(warn).toHaveBeenCalledWith('format-bytes: invalid numeric value "NaN"');
+    expect(warn).not.toHaveBeenCalled();
   });
 
-  it('should preserve input for invalid fraction digit options', async () => {
+  it('should preserve input silently for invalid fraction digit options', async () => {
     const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
     element.minimumFractionDigits = 3;
     element.maximumFractionDigits = 2;
     await elementIsStable(element);
 
     expect(renderedText(element)).toBe('1048576');
-    expect(warn).toHaveBeenCalledOnce();
+    expect(warn).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['locale', 'en_US'],
+    ['minimum-fraction-digits', '-1'],
+    ['maximum-fraction-digits', '101'],
+    ['maximum-fraction-digits', 'NaN'],
+    ['maximum-fraction-digits', 'Infinity']
+  ])('should preserve input without warning for invalid %s', async (attribute, value) => {
+    const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+    element.setAttribute(attribute, value);
+    await elementIsStable(element);
+
+    expect(renderedText(element)).toBe('1048576');
+    expect(warn).not.toHaveBeenCalled();
+  });
+
+  it('should resume formatting after correcting an invalid locale', async () => {
+    const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+    element.locale = 'en_US';
+    await elementIsStable(element);
+    expect(renderedText(element)).toBe('1048576');
+
+    element.locale = 'en-US';
+    await elementIsStable(element);
+    expect(renderedText(element)).toBe('1.05 MB');
+    expect(warn).not.toHaveBeenCalled();
   });
 });

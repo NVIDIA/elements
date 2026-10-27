@@ -7,7 +7,6 @@ import type { Size } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
-  audit,
   I18nController,
   TypeExpandableController,
   useStyles
@@ -41,7 +40,6 @@ import globalStyles from './page-panel.global.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role
  *
  */
-@audit()
 export class PagePanel extends LitElement {
   /**
    * Sets the max size of the panel.

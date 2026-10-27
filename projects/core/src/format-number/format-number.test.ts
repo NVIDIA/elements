@@ -290,26 +290,38 @@ describe(FormatNumber.metadata.tag, () => {
       warnSpy.mockRestore();
     });
 
-    it('should show raw string for invalid number input', async () => {
-      element.number = 'not-a-number';
+    it.each(['not-a-number', 'NaN', 'Infinity', '-Infinity', '1e309'])(
+      'should preserve invalid number %s without warning',
+      async value => {
+        element.number = value;
+        await elementIsStable(element);
+
+        const data = element.shadowRoot!.querySelector('data');
+        expect(data!.textContent!.trim()).toBe(value);
+        expect(warnSpy).not.toHaveBeenCalled();
+      }
+    );
+
+    it('should preserve invalid text content without warning', async () => {
+      element.textContent = 'not-a-number';
       await elementIsStable(element);
 
       const data = element.shadowRoot!.querySelector('data');
-      expect(data!.textContent!.trim()).toBe('not-a-number');
-      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('invalid numeric value'));
+      expect(data!.textContent.trim()).toBe('not-a-number');
+      expect(warnSpy).not.toHaveBeenCalled();
     });
 
-    it('should fall back for invalid Intl options', async () => {
+    it('should fall back silently for invalid Intl options', async () => {
       element.number = '1234.56';
       element.setAttribute('format-style', 'banana');
       await elementIsStable(element);
 
       const data = element.shadowRoot!.querySelector('data');
       expect(data!.textContent!.trim()).toBe('1234.56');
-      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy).not.toHaveBeenCalled();
     });
 
-    it('should fall back when currency is missing', async () => {
+    it('should fall back silently when currency is missing', async () => {
       element.number = '1234.56';
       element.formatStyle = 'currency';
       element.currency = undefined;
@@ -317,10 +329,10 @@ describe(FormatNumber.metadata.tag, () => {
 
       const data = element.shadowRoot!.querySelector('data');
       expect(data!.textContent!.trim()).toBe('1234.56');
-      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy).not.toHaveBeenCalled();
     });
 
-    it('should fall back when unit is missing', async () => {
+    it('should fall back silently when unit is missing', async () => {
       element.number = '12';
       element.formatStyle = 'unit';
       element.unit = undefined;
@@ -328,7 +340,46 @@ describe(FormatNumber.metadata.tag, () => {
 
       const data = element.shadowRoot!.querySelector('data');
       expect(data!.textContent!.trim()).toBe('12');
-      expect(warnSpy).toHaveBeenCalled();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ['locale', 'en_US'],
+      ['currency', 'US'],
+      ['unit', 'invalid'],
+      ['minimum-fraction-digits', '-1'],
+      ['maximum-fraction-digits', '101'],
+      ['maximum-fraction-digits', 'NaN'],
+      ['minimum-integer-digits', '0']
+    ])('should preserve input without warning for invalid %s', async (attribute, value) => {
+      element.number = '1234.56';
+      element.setAttribute(attribute, value);
+      await elementIsStable(element);
+
+      expect(element.shadowRoot!.querySelector('data')!.textContent.trim()).toBe('1234.56');
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('should preserve input silently for reversed fraction digit bounds', async () => {
+      element.number = '1234.56';
+      element.minimumFractionDigits = 3;
+      element.maximumFractionDigits = 2;
+      await elementIsStable(element);
+
+      expect(element.shadowRoot!.querySelector('data')!.textContent.trim()).toBe('1234.56');
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('should resume formatting after correcting an invalid locale', async () => {
+      element.number = '1234.56';
+      element.locale = 'en_US';
+      await elementIsStable(element);
+      expect(element.shadowRoot!.querySelector('data')!.textContent.trim()).toBe('1234.56');
+
+      element.locale = 'en-US';
+      await elementIsStable(element);
+      expect(element.shadowRoot!.querySelector('data')!.textContent.trim()).toBe('1,234.56');
+      expect(warnSpy).not.toHaveBeenCalled();
     });
 
     it('should render empty for no content', async () => {

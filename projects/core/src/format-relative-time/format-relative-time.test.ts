@@ -5,6 +5,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { FormatRelativeTime } from '@nvidia-elements/core/format-relative-time';
+import { LogService } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/format-relative-time/define.js';
 
 const NOW = new Date('2023-07-28T12:00:00.000Z');
@@ -30,6 +31,7 @@ describe(FormatRelativeTime.metadata.tag, () => {
     vi.useRealTimers();
     document.documentElement.lang = originalDocumentLang;
     removeFixture(fixture);
+    vi.restoreAllMocks();
   });
 
   it('should define element', () => {
@@ -384,11 +386,41 @@ describe(FormatRelativeTime.metadata.tag, () => {
   });
 
   describe('fallback', () => {
-    it('should show raw string for invalid date', async () => {
-      element.date = 'not-a-date';
+    it.each(['not-a-date', '2026-13-01', '2026-10-26T25:00:00Z', '+999999-01-01'])(
+      'should preserve invalid date %s without warning',
+      async value => {
+        const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+        element.date = value;
+        await elementIsStable(element);
+
+        const time = element.shadowRoot!.querySelector('time');
+        expect(time?.getAttribute('datetime')).toBe(value);
+        expect(time?.textContent.trim()).toBe(value);
+        expect(warn).not.toHaveBeenCalled();
+      }
+    );
+
+    it('should preserve invalid date attributes without warning', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.setAttribute('date', 'not-a-date');
       await elementIsStable(element);
+
       const time = element.shadowRoot!.querySelector('time');
-      expect(time!.textContent!.trim()).toBe('not-a-date');
+      expect(time?.getAttribute('datetime')).toBe('not-a-date');
+      expect(time?.textContent.trim()).toBe('not-a-date');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it('should preserve invalid text content without warning', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.date = undefined;
+      element.textContent = 'not-a-date';
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time?.getAttribute('datetime')).toBe('not-a-date');
+      expect(time?.textContent.trim()).toBe('not-a-date');
+      expect(warn).not.toHaveBeenCalled();
     });
 
     it('should render empty for no content', async () => {
@@ -402,12 +434,54 @@ describe(FormatRelativeTime.metadata.tag, () => {
       expect(time!.textContent!.trim()).toBe('');
     });
 
-    it('should fall back to raw string for invalid options', async () => {
+    it('should fall back silently to raw string for invalid options', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
       element.setAttribute('format-style', 'banana');
       await elementIsStable(element);
       const time = element.shadowRoot!.querySelector('time');
       expect(time!.textContent!.trim()).toBe('2023-07-27T12:00:00.000Z');
+      expect(warn).not.toHaveBeenCalled();
     });
+
+    it.each([
+      ['locale', 'en_US'],
+      ['locale', ''],
+      ['numeric', 'invalid'],
+      ['unit', 'invalid']
+    ])('should preserve input without warning for invalid %s=%s', async (attribute, value) => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.setAttribute(attribute, value);
+      await elementIsStable(element);
+
+      const time = element.shadowRoot?.querySelector('time');
+      expect(time?.textContent.trim()).toBe('2023-07-27T12:00:00.000Z');
+      expect(time?.getAttribute('datetime')).toBe('2023-07-27T12:00:00.000Z');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it('should resume relative formatting after correcting an invalid locale', async () => {
+      const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+      element.locale = 'en_US';
+      await elementIsStable(element);
+      expect(element.shadowRoot?.querySelector('time')?.textContent.trim()).toBe('2023-07-27T12:00:00.000Z');
+
+      element.locale = 'en-US';
+      await elementIsStable(element);
+      expect(element.shadowRoot?.querySelector('time')?.textContent.trim()).toBe('1 day ago');
+      expect(warn).not.toHaveBeenCalled();
+    });
+
+    it.each(['-271821-04-20T00:00:00.000Z', '+275760-09-13T00:00:00.000Z'])(
+      'should format the valid date boundary %s without warning',
+      async value => {
+        const warn = vi.spyOn(LogService, 'warn').mockImplementation(() => undefined);
+        element.date = value;
+        await elementIsStable(element);
+
+        expect(element.shadowRoot?.querySelector('time')?.textContent).toContain('years');
+        expect(warn).not.toHaveBeenCalled();
+      }
+    );
 
     it('should fall back to raw string for relative values outside Intl range', async () => {
       vi.useRealTimers();
