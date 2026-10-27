@@ -222,6 +222,7 @@ pre {
 }
 
 .markdown-codeblock {
+  position: relative;
   anchor-scope: --codeblock;
   width: 100%;
 
