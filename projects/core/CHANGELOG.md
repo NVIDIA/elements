@@ -1,3 +1,14 @@
+## [2.18.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.1...@nvidia-elements/core-v2.18.2) (2026-10-27)
+
+### Features
+
+* **lint:** new rules ([1352a3e](https://github.com/NVIDIA/elements/commit/1352a3e579e6a2e3d4bff29c03c91379dbd30f93))
+
+### Bug Fixes
+
+* **core:** migrate runtime to static lint checks ([e616f85](https://github.com/NVIDIA/elements/commit/e616f85788c699b6c89c410625a23481834e48dd))
+* **docs:** prevent code block copy buttons from overflowing the page ([6972e4b](https://github.com/NVIDIA/elements/commit/6972e4b7e3dfaa936a650167c47a3d6d0cca2a35))
+
 ## [2.18.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.0...@nvidia-elements/core-v2.18.1) (2026-10-27)
 
 ### Features
