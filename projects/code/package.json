@@ -193,6 +193,7 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/foundations": "workspace:^",
     "highlight.js": "catalog:publish",
     "lit": "catalog:publish",
     "lit-html": "catalog:publish"
@@ -256,6 +257,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../foundations/dist/**/*.js",
+        "!../foundations/dist/**/*.examples.js",
         "../../core/dist/**/*.js",
         "!../../core/dist/**/*.examples.js",
         "src/**",
@@ -278,6 +281,10 @@
         "../internals/vite:ci",
         {
           "script": "../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../foundations:build",
           "cascade": false
         }
       ]
