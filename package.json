@@ -201,13 +201,16 @@
     "release:cli": {
       "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:lint"
+        "release:lint",
+        "release:code"
       ]
     },
     "release:code": {
       "command": "cd projects/code && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:core"
+        "release:core",
+        "release:foundations",
+        "release:themes"
       ]
     },
     "release:forms": {
@@ -229,27 +232,33 @@
     "release:markdown": {
       "command": "cd projects/markdown && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:core"
+        "release:core",
+        "release:foundations",
+        "release:themes"
       ]
     },
     "release:media": {
       "command": "cd projects/media && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:core"
+        "release:core",
+        "release:foundations",
+        "release:forms",
+        "release:themes"
       ]
     },
     "release:monaco": {
       "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:core",
         "release:themes",
-        "release:forms"
+        "release:forms",
+        "release:foundations"
       ]
     },
     "release:pi": {
       "command": "cd projects/pi && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:lint"
+        "release:lint",
+        "release:themes"
       ]
     },
     "release:styles": {
@@ -262,7 +271,9 @@
       "command": "cd projects/viewport && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:core",
-        "release:themes"
+        "release:themes",
+        "release:foundations",
+        "release:forms"
       ]
     },
     "format": {
