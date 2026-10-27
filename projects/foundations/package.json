@@ -63,13 +63,37 @@
       "types": "./dist/scroll-box/define.d.ts",
       "default": "./dist/scroll-box/define.js"
     },
-    "./internal": {
-      "types": "./dist/internal/index.d.ts",
-      "default": "./dist/internal/index.js"
+    "./internal/define": {
+      "types": "./dist/internal/define/index.d.ts",
+      "default": "./dist/internal/define/index.js"
     },
-    "./internal/index.js": {
-      "types": "./dist/internal/index.d.ts",
-      "default": "./dist/internal/index.js"
+    "./internal/define/index.js": {
+      "types": "./dist/internal/define/index.d.ts",
+      "default": "./dist/internal/define/index.js"
+    },
+    "./internal/styles": {
+      "types": "./dist/internal/styles/index.d.ts",
+      "default": "./dist/internal/styles/index.js"
+    },
+    "./internal/styles/index.js": {
+      "types": "./dist/internal/styles/index.d.ts",
+      "default": "./dist/internal/styles/index.js"
+    },
+    "./internal/a11y": {
+      "types": "./dist/internal/a11y/index.d.ts",
+      "default": "./dist/internal/a11y/index.js"
+    },
+    "./internal/a11y/index.js": {
+      "types": "./dist/internal/a11y/index.d.ts",
+      "default": "./dist/internal/a11y/index.js"
+    },
+    "./internal/state": {
+      "types": "./dist/internal/state/index.d.ts",
+      "default": "./dist/internal/state/index.js"
+    },
+    "./internal/state/index.js": {
+      "types": "./dist/internal/state/index.d.ts",
+      "default": "./dist/internal/state/index.js"
     }
   },
   "sideEffects": [

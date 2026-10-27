@@ -1,0 +1,25 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+/* istanbul ignore next -- @preserve */
+export function getEnv(): 'development' | 'production' {
+  const runtime: typeof globalThis & { process?: { env?: { NODE_ENV?: string } } } = globalThis;
+  if (
+    runtime.process?.env?.NODE_ENV !== 'production' &&
+    (globalThis.location?.hostname === 'localhost' || globalThis.location?.href?.includes('elements-playground'))
+  ) {
+    return 'development';
+  } else {
+    return 'production';
+  }
+}
+
+export function getHostDetails(): { moduleHost: string; pageHost: string } {
+  const pageHost = globalThis.location?.hostname;
+  const moduleHost = new URL(import.meta.url).hostname;
+
+  return {
+    pageHost,
+    moduleHost
+  };
+}

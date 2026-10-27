@@ -5,7 +5,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
-import { attachInternals } from './a11y.js';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 
 @customElement('element-internals-test-element')
 class ElementInternalsTestElement extends LitElement {
