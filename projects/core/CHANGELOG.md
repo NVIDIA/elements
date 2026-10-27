@@ -1,3 +1,15 @@
+## [2.18.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.0...@nvidia-elements/core-v2.18.1) (2026-10-27)
+
+### Features
+
+* **foundations:** scroll box ([fa9d947](https://github.com/NVIDIA/elements/commit/fa9d947d076a9cbc356a307aa0fb1f219bb701a4))
+
+### Bug Fixes
+
+* **cli:** update bun to 1.4.4 ([dc0a9d4](https://github.com/NVIDIA/elements/commit/dc0a9d4079cf3d8c7251ed4dfb6ff8ce728f8be1))
+* **core:** observe only host hidden changes for popover visibility ([3a2b58d](https://github.com/NVIDIA/elements/commit/3a2b58d26b7223677d8f23f8643dd6d1cc173882))
+* **foundations:** missing dist publish ([5521fc0](https://github.com/NVIDIA/elements/commit/5521fc0d55e0542d028727531267241bc31f9401))
+
 ## [2.18.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.17.1...@nvidia-elements/core-v2.18.0) (2026-10-23)
 
 ### Features
