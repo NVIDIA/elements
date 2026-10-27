@@ -12,6 +12,10 @@ export default defineConfig(() => {
       preserveSymlinks: true
     },
     build: {
+      rolldownOptions: {
+        // Examples use core components supplied by the documentation site.
+        external: [/^@nvidia-elements\/core(?:\/|$)/]
+      },
       minify: prod,
       lib: {
         entry: {

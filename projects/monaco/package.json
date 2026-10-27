@@ -174,12 +174,12 @@
     "test:visual": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/foundations": "workspace:^",
     "@nvidia-elements/forms": "workspace:^",
     "lit": "catalog:publish",
     "lit-html": "catalog:publish"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:^",
     "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
@@ -242,9 +242,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
-        "../core/dist/internal/utils/dom.js",
-        "../core/dist/internal/styles/**",
-        "!../core/dist/**/*.examples.js",
+        "../foundations/dist/**/*.js",
+        "!../foundations/dist/**/*.examples.js",
         "../forms/dist/**/*.js",
         "!../forms/dist/**/*.examples.js",
         "../themes/dist/**/*.css",
@@ -272,15 +271,15 @@
         "build:themes",
         "../internals/vite:ci",
         {
-          "script": "../core:build",
-          "cascade": false
-        },
-        {
           "script": "../forms:build",
           "cascade": false
         },
         {
           "script": "../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../foundations:build",
           "cascade": false
         }
       ]
