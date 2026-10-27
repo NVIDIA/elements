@@ -7,7 +7,7 @@ For notices about third-party logos used in the documentation, see the [Third-Pa
 
 This product includes the following bundled third-party software:
 
-- @eslint/css v2.0.0 [Apache-2.0] (used by: @nvidia-elements/lint)
+- @eslint/css v2.0.1 [Apache-2.0] (used by: @nvidia-elements/lint)
   Copyright: Nicholas C. Zakas
 
 - @eslint/js v10.0.1 [MIT] (used by: @nvidia-elements/lint)
@@ -16,10 +16,10 @@ This product includes the following bundled third-party software:
 - @eslint/json v2.1.1 [Apache-2.0] (used by: @nvidia-elements/lint)
   Copyright: Nicholas C. Zakas
 
-- @html-eslint/eslint-plugin v0.66.1 [MIT] (used by: @nvidia-elements/lint)
+- @html-eslint/eslint-plugin v0.67.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @html-eslint/parser v0.66.1 [MIT] (used by: @nvidia-elements/lint)
+- @html-eslint/parser v0.67.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
 - @inquirer/prompts v8.7.4 [MIT] (used by: @nvidia-elements/cli)
@@ -49,7 +49,7 @@ This product includes the following bundled third-party software:
 - archiver v8.0.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- eslint v10.12.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
+- eslint v10.13.0 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 
 - fast-glob v3.3.3 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
@@ -121,7 +121,7 @@ Apache-2.0
 
 The following bundled components are provided under the Apache-2.0 license:
 
-@eslint/css v2.0.0 - Copyright Nicholas C. Zakas
+@eslint/css v2.0.1 - Copyright Nicholas C. Zakas
 @eslint/json v2.1.1 - Copyright Nicholas C. Zakas
 
                                  Apache License
@@ -343,8 +343,8 @@ MIT
 The following bundled components are provided under the MIT license:
 
 @eslint/js v10.0.1 - Copyright Unknown
-@html-eslint/eslint-plugin v0.66.1 - Copyright yeonjuan (https://github.com/yeonjuan)
-@html-eslint/parser v0.66.1 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/eslint-plugin v0.67.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/parser v0.67.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @inquirer/prompts v8.7.4 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/ext-apps v2.0.3 - Copyright Olivier Chafik
 @modelcontextprotocol/server v2.2.0 - Copyright Anthropic, PBC (https://anthropic.com)
@@ -354,7 +354,7 @@ The following bundled components are provided under the MIT license:
 @pnpm/workspace.read-manifest v2.2.0 - Copyright Unknown
 adm-zip v0.6.1 - Copyright Nasca Iacob <adm-zip@pm.me> (https://github.com/cthackers)
 archiver v8.0.0 - Copyright Chris Talkington (http://christalkington.com/)
-eslint v10.12.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
+eslint v10.13.0 - Copyright Nicholas C. Zakas <nicholas+npm@nczconsulting.com>
 fast-glob v3.3.3 - Copyright Denis Malinochkin (https://mrmlnc.com)
 fflate v0.8.3 - Copyright Arjun Barrett <arjunbarrett@gmail.com>
 html-format v1.1.7 - Copyright Mohamed Akram
