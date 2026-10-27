@@ -20,7 +20,7 @@
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "nuxt": "4.6.2",
-    "vue": "3.5.42",
+    "vue": "3.5.44",
     "vue-router": "5.3.1"
   },
   "devDependencies": {
