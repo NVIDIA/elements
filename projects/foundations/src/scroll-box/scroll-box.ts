@@ -3,7 +3,8 @@
 
 import { html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals } from '@nvidia-elements/foundations/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 import styles from './scroll-box.css?inline';
 
 /**

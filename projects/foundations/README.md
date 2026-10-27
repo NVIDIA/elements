@@ -11,10 +11,13 @@ Shared components and utilities for NVIDIA Elements libraries and custom compone
 
 ## Internal Utilities
 
-Shared helpers support element registration, styling, and other library implementation details. The `/internal` entrypoint provides a semi-public API for Elements packages and advanced component authors but are not API stable:
+Shared helpers support element registration, styling, and other library implementation details. Category entrypoints under `/internal` provide a semi-public API for Elements packages and advanced component authors. These APIs are not stable. Each category exports its shared helpers through an `index.ts` file; implementation files remain private:
 
 ```javascript
-import { define, useStyles } from '@nvidia-elements/foundations/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
 ```
 
 ## Public Utility Components
