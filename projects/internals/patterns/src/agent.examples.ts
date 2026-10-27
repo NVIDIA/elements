@@ -460,7 +460,7 @@ export const Context = {
       <dt nve-text="body muted medium">Reasoning</dt>
       <dd nve-text="body"><nve-format-number>4000</nve-format-number></dd>
       <dt nve-text="body muted medium">Cache Hit Rate</dt>
-      <dd nve-text="body"><nve-format-number>95%</nve-format-number></dd>
+      <dd nve-text="body"><nve-format-number format-style="percent">0.95</nve-format-number></dd>
     </dl>
     <p nve-text="body sm"><nve-format-number notation="compact">40000</nve-format-number> / <nve-format-number notation="compact">128000</nve-format-number> tokens used</p>
   </div>

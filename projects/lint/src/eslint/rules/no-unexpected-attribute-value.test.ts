@@ -72,6 +72,35 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
+  it.each([
+    { attribute: 'display', values: ['decimal', 'binary'] },
+    { attribute: 'unit', values: ['b', 'kb', 'mb', 'gb', 'tb', 'pb'] },
+    { attribute: 'unit-display', values: ['short', 'long'] }
+  ])('should validate byte formatting $attribute values', ({ attribute, values }) => {
+    tester.run(`byte formatting ${attribute}`, rule, {
+      valid: values.map(value => `<nve-format-bytes ${attribute}="${value}">1024</nve-format-bytes>`),
+      invalid: [
+        {
+          code: `<nve-format-bytes ${attribute}="invalid">1024</nve-format-bytes>`,
+          errors: [
+            {
+              messageId: 'no-unexpected-attribute-value',
+              data: {
+                tagName: 'nve-format-bytes',
+                attribute,
+                value: 'invalid',
+                validValues: [...values]
+                  .sort((a, b) => a.localeCompare(b))
+                  .map(value => `"${value}"`)
+                  .join(', ')
+              }
+            }
+          ]
+        }
+      ]
+    });
+  });
+
   it('should allow non-enum attribute values', () => {
     tester.run('should allow non-enum attribute values', rule, {
       valid: [

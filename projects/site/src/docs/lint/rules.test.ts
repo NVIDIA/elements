@@ -5,9 +5,9 @@ import { data, renderRulePage } from './rules/index.11ty.js';
 
 describe('lint rule documentation', () => {
   it('should create one sorted record for every registered rule', () => {
-    expect(createLintRules()).toHaveLength(43);
+    expect(createLintRules()).toHaveLength(50);
     expect(lintRules.map(rule => rule.name)).toEqual([...lintRules.map(rule => rule.name)].sort());
-    expect(new Set(lintRules.map(rule => rule.name)).size).toBe(43);
+    expect(new Set(lintRules.map(rule => rule.name)).size).toBe(50);
   });
 
   it('should merge language registrations for shared rules', () => {

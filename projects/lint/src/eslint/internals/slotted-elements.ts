@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /**
- * Allowed direct element children declared by production component
- * `metadata.children` contracts.
+ * Allowed direct default-slot children for static validation,
+ * including supported media controls in button groups.
  */
 export const SLOTTED_ELEMENT_CONTRACTS = {
   'nve-accordion': ['nve-accordion-header', 'nve-accordion-content', 'nve-icon-button'],
