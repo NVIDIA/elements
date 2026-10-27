@@ -3,7 +3,7 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, typeSSR, LogService } from '@nvidia-elements/core/internal';
+import { useStyles, typeSSR } from '@nvidia-elements/core/internal';
 import styles from './format-datetime.css?inline';
 
 /**
@@ -111,8 +111,7 @@ export class FormatDatetime extends LitElement {
 
     try {
       return new Intl.DateTimeFormat(this.#resolvedLocale, this.#formatOptions).format(date);
-    } catch (e) {
-      LogService.warn(`format-datetime: ${(e as Error).message}`);
+    } catch {
       return iso;
     }
   }
@@ -155,7 +154,6 @@ export class FormatDatetime extends LitElement {
     const date = new Date(iso);
     if (!isNaN(date.getTime())) return date;
 
-    LogService.warn(`format-datetime: invalid date value "${iso}"`);
     return null;
   }
 

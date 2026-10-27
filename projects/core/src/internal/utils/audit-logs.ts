@@ -9,8 +9,8 @@ export function getExcessiveInstanceLimitWarning(count: number, localName: strin
   return `Excessive rendering of ${count} ${localName} were detected in DOM. Recycle/reuse elements when possible to improve application performance. ${DOCS_LOG_URL}#excessive-instance-limit`;
 }
 
-export function getInvalidSlottedChildrenWarning(localName: string, allowed: Array<string>) {
-  return `Invalid slotted elements detected in ${localName}. Allowed: ${allowed.join(', ')}. ${DOCS_LOG_URL}#invalid-slotted-children`;
+export function getMultiplePageWarning(count: number) {
+  return `Detected ${count} nve-page elements. Use one nve-page as the application shell. ${DOCS_LOG_URL}#page-shell-count`;
 }
 
 export function getInvalidParentWarning(localName: string, allowedParent: string) {

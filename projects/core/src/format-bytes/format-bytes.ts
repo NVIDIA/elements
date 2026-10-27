@@ -3,7 +3,7 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { LogService, typeSSR, useStyles } from '@nvidia-elements/core/internal';
+import { typeSSR, useStyles } from '@nvidia-elements/core/internal';
 import styles from './format-bytes.css?inline';
 
 export type FormatBytesDisplay = 'decimal' | 'binary';
@@ -122,7 +122,6 @@ export class FormatBytes extends LitElement {
     const numericValue = Number(rawValue);
     if (Number.isFinite(numericValue)) return numericValue;
 
-    LogService.warn(`format-bytes: invalid numeric value "${rawValue}"`);
     return null;
   }
 
@@ -144,24 +143,8 @@ export class FormatBytes extends LitElement {
     return Math.abs(convertedValue) === 1 ? labels.singular : labels.plural;
   }
 
-  #warnInvalidOption(name: string, value: unknown): void {
-    LogService.warn(`format-bytes: invalid ${name} value "${String(value)}"`);
-  }
-
   #hasValidConfiguration(): boolean {
-    if (!isDisplay(this.display)) {
-      this.#warnInvalidOption('display', this.display);
-      return false;
-    }
-    if (!isUnitDisplay(this.unitDisplay)) {
-      this.#warnInvalidOption('unit-display', this.unitDisplay);
-      return false;
-    }
-    if (this.unit !== undefined && !isUnit(this.unit)) {
-      this.#warnInvalidOption('unit', this.unit);
-      return false;
-    }
-    return true;
+    return isDisplay(this.display) && isUnitDisplay(this.unitDisplay) && (this.unit === undefined || isUnit(this.unit));
   }
 
   get #numberFormatOptions(): Intl.NumberFormatOptions {
@@ -201,9 +184,7 @@ export class FormatBytes extends LitElement {
     try {
       const roundedValue = this.#roundNumber(convertedValue);
       return `${this.#formatNumber(roundedValue)} ${this.#formatLabel(resolvedUnit, roundedValue)}`;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      LogService.warn(`format-bytes: ${message}`);
+    } catch {
       return rawValue;
     }
   }

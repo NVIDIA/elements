@@ -10,7 +10,7 @@ import {
   getExcessiveInstanceLimitWarning,
   getIdMatchNotFoundWarning,
   getInvalidParentWarning,
-  getInvalidSlottedChildrenWarning,
+  getMultiplePageWarning,
   getSSRMismatchWarning
 } from './audit-logs.js';
 
@@ -22,10 +22,10 @@ describe('getExcessiveInstanceLimitWarning', () => {
   });
 });
 
-describe('getInvalidSlottedChildrenWarning', () => {
-  it('should return warning message for invalid slotted elements', () => {
-    expect(getInvalidSlottedChildrenWarning('test-element', ['test-element-one', 'test-element-two'])).toBe(
-      `Invalid slotted elements detected in test-element. Allowed: test-element-one, test-element-two. ${DOCS_LOG_URL}#invalid-slotted-children`
+describe('getMultiplePageWarning', () => {
+  it('should describe the page shell constraint', () => {
+    expect(getMultiplePageWarning(2)).toBe(
+      `Detected 2 nve-page elements. Use one nve-page as the application shell. ${DOCS_LOG_URL}#page-shell-count`
     );
   });
 });

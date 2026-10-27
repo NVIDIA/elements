@@ -3,7 +3,7 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, typeSSR, LogService } from '@nvidia-elements/core/internal';
+import { useStyles, typeSSR } from '@nvidia-elements/core/internal';
 import styles from './format-relative-time.css?inline';
 
 type TimeUnitOption = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year';
@@ -117,7 +117,6 @@ export class FormatRelativeTime extends LitElement {
 
     const target = new Date(iso);
     if (isNaN(target.getTime())) {
-      LogService.warn(`format-relative-time: invalid date value "${iso}"`);
       return iso;
     }
 
@@ -128,8 +127,7 @@ export class FormatRelativeTime extends LitElement {
         numeric: this.numeric,
         style: this.formatStyle
       }).format(value, resolvedUnit);
-    } catch (e) {
-      LogService.warn(`format-relative-time: ${(e as Error).message}`);
+    } catch {
       return iso;
     }
   }

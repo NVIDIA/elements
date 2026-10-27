@@ -62,7 +62,6 @@ export class Card extends LitElement implements ContainerElement {
  * @cssprop --gap
  * @aria https://github.com/w3c/aria-practices/issues
  */
-@audit()
 export class CardHeader extends LitElement {
   static styles = useStyles([cardHeaderStyleSheet]);
 
@@ -96,7 +95,6 @@ export class CardHeader extends LitElement {
  * @cssprop --padding
  * @aria https://github.com/w3c/aria-practices/issues
  */
-@audit()
 export class CardContent extends LitElement {
   static styles = useStyles([cardContentStyleSheet]);
 
@@ -124,7 +122,6 @@ export class CardContent extends LitElement {
  * @cssprop --border-top
  * @aria https://github.com/w3c/aria-practices/issues
  */
-@audit()
 export class CardFooter extends LitElement {
   static styles = useStyles([cardFooterStyleSheet]);
 

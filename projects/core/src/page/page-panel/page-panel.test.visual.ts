@@ -16,6 +16,7 @@ describe('page-panel visual', () => {
   });
 });
 
+/* eslint-disable @nvidia-elements/lint/no-invalid-parent-elements -- Render panels in isolation to test their visual states without page layout. */
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
@@ -52,3 +53,4 @@ function template(theme: '' | 'dark' = '') {
   </section>
   `;
 }
+/* eslint-enable @nvidia-elements/lint/no-invalid-parent-elements */

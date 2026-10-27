@@ -4,7 +4,13 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { GlobalStateService } from '../services/global.service.js';
-import { auditSlots, auditParentElement } from '../utils/audit.js';
+import { LogService } from '../services/log.service.js';
+import { auditParentElement } from '../utils/audit.js';
+import {
+  getExcessiveInstanceLimitWarning,
+  getInvalidParentWarning,
+  getMultiplePageWarning
+} from '../utils/audit-logs.js';
 
 export const excessiveInstanceLimit = 50;
 
@@ -15,8 +21,6 @@ export interface AuditOptions {
 
 export interface AuditMetadata {
   parents?: string[];
-  children?: string[];
-  disallowedChildren?: string[];
 }
 
 interface AuditRegistry {
@@ -24,11 +28,6 @@ interface AuditRegistry {
     count?: number;
     excessiveInstanceLimitAudited?: boolean;
   };
-}
-
-async function log(message: string) {
-  const { LogService } = await import('../services/log.service.js');
-  LogService.warn(message);
 }
 
 export function audit<T extends Audit>(options: AuditOptions = {}): ClassDecorator {
@@ -39,6 +38,8 @@ export function audit<T extends Audit>(options: AuditOptions = {}): ClassDecorat
 export type Audit = ReactiveElement;
 
 export class AuditController<T extends Audit> implements ReactiveController {
+  #counted = false;
+
   get #hostAuditState() {
     return GlobalStateService.state.audit[this.host.localName] ?? { count: 0 };
   }
@@ -62,11 +63,10 @@ export class AuditController<T extends Audit> implements ReactiveController {
   }
 
   async hostConnected() {
+    if (!this.#production) this.#auditExcessiveInstanceLimit();
     await this.host.updateComplete;
-    if (!this.#production) {
-      void this.#auditExcessiveInstanceLimit();
-      void this.#auditSlots();
-      void this.#auditParentElement();
+    if (!this.#production && this.host.isConnected) {
+      this.#auditParentElement();
     }
   }
 
@@ -80,29 +80,37 @@ export class AuditController<T extends Audit> implements ReactiveController {
     }
   }
 
-  async #auditExcessiveInstanceLimit() {
-    if (this.options.excessiveInstanceLimit !== undefined) {
-      if (
-        this.#hostAuditState.count! > this.options.excessiveInstanceLimit &&
-        !this.#hostAuditState.excessiveInstanceLimitAudited
-      ) {
-        const { getExcessiveInstanceLimitWarning } = await import('../utils/audit-logs.js');
-        void log(getExcessiveInstanceLimitWarning(this.#hostAuditState.count!, this.host.localName));
-        this.#update({
-          [this.host.localName]: { count: this.#hostAuditState.count! + 1, excessiveInstanceLimitAudited: true }
-        });
-      } else {
-        this.#update({ [this.host.localName]: { count: this.#hostAuditState.count! + 1 } });
-      }
+  #auditExcessiveInstanceLimit() {
+    const limit = this.options.excessiveInstanceLimit;
+    if (limit === undefined || this.#counted) return;
+
+    this.#counted = true;
+    const count = (this.#hostAuditState.count ?? 0) + 1;
+    const audited = this.#hostAuditState.excessiveInstanceLimitAudited ?? false;
+    const shouldWarn = count > limit && !audited;
+    this.#update({ [this.host.localName]: { count, excessiveInstanceLimitAudited: audited || shouldWarn } });
+
+    if (shouldWarn && this.#counted) {
+      LogService.warn(
+        this.host.localName === 'nve-page'
+          ? getMultiplePageWarning(count)
+          : getExcessiveInstanceLimitWarning(count, this.host.localName)
+      );
     }
   }
 
   #cleanupExcessiveInstanceLimit() {
-    if (this.options.excessiveInstanceLimit) {
-      this.#update({
-        [this.host.localName]: { count: this.#hostAuditState.count! - 1, excessiveInstanceLimitAudited: false }
-      });
-    }
+    const limit = this.options.excessiveInstanceLimit;
+    if (limit === undefined || !this.#counted) return;
+
+    this.#counted = false;
+    const count = Math.max(0, (this.#hostAuditState.count ?? 0) - 1);
+    this.#update({
+      [this.host.localName]: {
+        count,
+        excessiveInstanceLimitAudited: count > limit && this.#hostAuditState.excessiveInstanceLimitAudited
+      }
+    });
   }
 
   #update(registry: AuditRegistry) {
@@ -111,22 +119,11 @@ export class AuditController<T extends Audit> implements ReactiveController {
     >);
   }
 
-  async #auditSlots() {
-    if (this.#hostMetadata.children || this.#hostMetadata.disallowedChildren) {
-      const [invalidElements, validElements] = auditSlots(this.host);
-      if (invalidElements.length) {
-        const { getInvalidSlottedChildrenWarning } = await import('../utils/audit-logs.js');
-        void log(getInvalidSlottedChildrenWarning(this.host.localName, validElements));
-      }
-    }
-  }
-
-  async #auditParentElement() {
+  #auditParentElement() {
     if (this.#hostMetadata.parents) {
       const [valid, validParents] = auditParentElement(this.host);
       if (!valid) {
-        const { getInvalidParentWarning } = await import('../utils/audit-logs.js');
-        void log(getInvalidParentWarning(this.host.localName, validParents.join(', ')));
+        LogService.warn(getInvalidParentWarning(this.host.localName, validParents.join(', ')));
       }
     }
   }

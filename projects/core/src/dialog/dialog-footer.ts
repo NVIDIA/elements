@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { audit, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './dialog-footer.css?inline';
 
 /**
@@ -17,7 +17,6 @@ import styles from './dialog-footer.css?inline';
  * @cssprop --gap
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
-@audit()
 export class DialogFooter extends LitElement {
   static styles = useStyles([styles]);
 

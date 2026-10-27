@@ -25,7 +25,7 @@ import globalStyles from './button-group.global.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/button-group/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/button-group
- * @slot - default slot for `nve-button` or `nve-icon-button`
+ * @slot - default slot for `nve-button`, `nve-icon-button`, `nve-divider`, `nve-media-seek-button`, or `nve-media-pause-button`
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --padding
@@ -66,7 +66,7 @@ export class ButtonGroup extends LitElement {
   static readonly metadata = {
     tag: 'nve-button-group',
     version: '0.0.0',
-    children: ['nve-button', 'nve-icon-button', 'nve-divider']
+    children: ['nve-button', 'nve-icon-button', 'nve-divider', 'nve-media-seek-button', 'nve-media-pause-button']
   };
 
   /** @private */
