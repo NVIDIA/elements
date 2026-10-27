@@ -3,7 +3,7 @@
 
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
-import { audit, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import {
   isMediaCommand,
   mediaCommands,
@@ -66,7 +66,6 @@ const mediaEventTypes = [
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
  * @stable false
  */
-@audit()
 export class MediaController extends LitElement {
   static styles = useStyles([styles]);
 
