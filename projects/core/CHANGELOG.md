@@ -1,3 +1,14 @@
+## [2.19.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.4...@nvidia-elements/core-v2.19.0) (2026-10-28)
+
+### Features
+
+* **core:** tree node invoker command support ([2d889e4](https://github.com/NVIDIA/elements/commit/2d889e485b5aad0980731821691973d57c2ee343))
+
+### Bug Fixes
+
+* **forms:** enable invoke method for controller ([68c8aa3](https://github.com/NVIDIA/elements/commit/68c8aa33a4d9254601b56b219ae6cc4268b54306))
+* **lint:** add tree invoker command support ([bde2265](https://github.com/NVIDIA/elements/commit/bde2265de1ed48981de745d1f4ca733d28b65df0))
+
 ## [2.18.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.3...@nvidia-elements/core-v2.18.4) (2026-10-28)
 
 ### Bug Fixes
