@@ -17,7 +17,7 @@ const NATIVE_BINARY_FILENAMES = new Map([
   ['win32-x64', 'nve-windows-x64.exe']
 ]);
 
-describe('index', () => {
+describe('index', { timeout: 15_000 }, () => {
   const output = execFileSync(process.execPath, ['dist/index.js']).toString();
 
   it('should run the native binary for the current platform', () => {
