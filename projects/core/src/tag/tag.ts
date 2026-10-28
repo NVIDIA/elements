@@ -6,15 +6,14 @@ import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { Color, Prominence } from '@nvidia-elements/core/internal';
-import {
-  I18nController,
-  TypeClosableController,
-  useStyles,
-  colorStateStyles,
-  scopedRegistry
-} from '@nvidia-elements/core/internal';
+import { TypeClosableController, useStyles, colorStateStyles, scopedRegistry } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './tag.css?inline';
+
+const i18nDefaults = {
+  close: 'close'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-tag
@@ -63,7 +62,7 @@ export class Tag extends ButtonFormControlMixin(LitElement) {
   /** Determines the visual prominence or weight */
   @property({ type: String, reflect: true }) prominence?: Extract<Prominence, 'emphasis'>;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Updates internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

@@ -9,7 +9,12 @@ import { Control } from '@nvidia-elements/core/forms';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { inputStyles } from '@nvidia-elements/core/input';
 import globalStyles from './color.global.css?inline';
+import type { I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './color.css?inline';
+
+const i18nDefaults = {
+  expand: 'expand'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-color
@@ -23,6 +28,10 @@ import styles from './color.css?inline';
  */
 @scopedRegistry()
 export class Color extends Control implements ContainerElement {
+  protected override get i18nDefaults(): I18nDefaults {
+    return i18nDefaults;
+  }
+
   /**
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
    * Use when embedding within another container such as a toolbar.

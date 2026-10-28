@@ -6,15 +6,19 @@ import { property } from 'lit/decorators/property.js';
 import type { PopoverType, Size } from '@nvidia-elements/core/internal';
 import {
   createGhostElement,
-  I18nController,
   popoverStyles,
   scopedRegistry,
   TypeNativePopoverController,
   typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import styles from './drawer.css?inline';
+
+const i18nDefaults = {
+  close: 'close'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-drawer
@@ -90,7 +94,7 @@ export class Drawer extends LitElement {
    */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables internal string values to update for internationalization.

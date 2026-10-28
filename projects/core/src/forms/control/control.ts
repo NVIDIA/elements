@@ -12,10 +12,10 @@ import {
   associateDataList,
   appendRootNodeStyle,
   getAttributeListChanges,
-  I18nController,
   hostAttr,
   typeSSR
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import type { ControlMessage } from '../control-message/control-message.js';
 import {
   setupControlValidationStates,
@@ -74,7 +74,12 @@ export class Control extends LitElement {
   /** Sets the input to match native default content block */
   @property({ type: Boolean, reflect: true, attribute: 'fit-content' }) fitContent = false;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  /** Component-specific defaults supplied by a derived control. */
+  protected get i18nDefaults(): I18nDefaults {
+    return {};
+  }
+
+  #i18nController: I18nController<this> = new I18nController<this>(this, this.i18nDefaults);
 
   /** Enables internal string values to update for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

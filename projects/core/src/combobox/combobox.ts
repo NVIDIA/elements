@@ -6,6 +6,7 @@ import { html, isServer, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
+import type { I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import {
   createLightDismiss,
   focusElementTimeout,
@@ -23,6 +24,13 @@ import { Tag } from '@nvidia-elements/core/tag';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Checkbox } from '@nvidia-elements/core/checkbox';
 import styles from './combobox.css?inline';
+
+const comboboxI18nDefaults = {
+  select: 'select',
+  selected: 'selected',
+  noResults: 'no results',
+  create: 'create'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-combobox
@@ -60,6 +68,10 @@ import styles from './combobox.css?inline';
  */
 @scopedRegistry()
 export class Combobox extends Control implements ContainerElement {
+  protected override get i18nDefaults(): I18nDefaults {
+    return comboboxI18nDefaults;
+  }
+
   /**
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
    * Use when embedding within another container such as a toolbar.

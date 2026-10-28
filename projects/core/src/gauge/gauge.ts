@@ -6,7 +6,8 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, I18nController, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './gauge.css?inline';
 
 const GAUGE_GEOMETRY = {
@@ -37,6 +38,13 @@ const thumbStyle = (thumb: 'dot' | 'needle', progressAngle: number, geometry: Ga
   [`--_${thumb}-origin`]: `${geometry.center}px ${geometry.center}px`,
   [`--_${thumb}-start-angle`]: `${geometry.startAngle}deg`
 });
+
+const i18nDefaults = {
+  danger: 'danger',
+  information: 'information',
+  success: 'success',
+  warning: 'warning'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-gauge
@@ -88,7 +96,7 @@ export class Gauge extends LitElement {
   /** T-shirt `size` of the gauge. */
   @property({ type: String, reflect: true }) size?: Size;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

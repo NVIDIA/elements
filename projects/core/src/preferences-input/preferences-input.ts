@@ -3,7 +3,8 @@
 
 import { html, isServer, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { I18nController, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { state } from 'lit/decorators/state.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { type IconName, Icon } from '@nvidia-elements/core/icon';
@@ -22,6 +23,12 @@ export type Variant = 'reduced-motion';
 
 const colorSchemes: ColorScheme[] = ['auto', 'light', 'dark', 'high-contrast'];
 const scales: Scale[] = ['default', 'compact'];
+const i18nDefaults = {
+  theme: 'theme',
+  scale: 'scale',
+  reducedMotion: 'reduced motion',
+  colorScheme: 'color scheme'
+} satisfies I18nDefaults;
 const colorSchemesIcons = {
   auto: 'computer',
   light: 'sun',
@@ -71,7 +78,7 @@ export interface PreferencesInputValue {
  */
 @scopedRegistry()
 export class PreferencesInput extends FormControlMixin<typeof LitElement, PreferencesInputValue>(LitElement) {
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables updating internal string values for internationalization.

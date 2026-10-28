@@ -9,13 +9,12 @@ import {
   focusElementTimeout,
   onListboxActivate,
   useStyles,
-  i18n,
-  I18nController,
   onChildListMutation,
   getElementUpdate,
   scopedRegistry,
   appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
+import { i18n, I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
@@ -23,6 +22,11 @@ import { Dropdown } from '@nvidia-elements/core/dropdown';
 import { Tag } from '@nvidia-elements/core/tag';
 import styles from './select.css?inline';
 import globalStyles from './select.global.css?inline';
+
+const i18nDefaults = {
+  select: 'select',
+  selected: 'selected'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-select
@@ -79,7 +83,7 @@ export class Select extends Control {
   /** Flat container option applies when embedding the component within another containing element */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Updates internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

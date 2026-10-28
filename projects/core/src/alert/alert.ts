@@ -9,7 +9,6 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import type { SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
-  I18nController,
   statusIcons,
   TypeClosableController,
   useStyles,
@@ -18,8 +17,17 @@ import {
   appendRootNodeStyle,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import globalStyles from './alert.global.css?inline';
 import styles from './alert.css?inline';
+
+const i18nDefaults = {
+  close: 'close',
+  danger: 'danger',
+  information: 'information',
+  success: 'success',
+  warning: 'warning'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-alert
@@ -70,7 +78,7 @@ export class Alert extends LitElement {
 
   #typeClosableController = new TypeClosableController(this);
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

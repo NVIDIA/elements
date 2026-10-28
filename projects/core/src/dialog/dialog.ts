@@ -7,7 +7,6 @@ import type { PopoverAlign, PopoverPosition, PopoverType, Size } from '@nvidia-e
 import {
   audit,
   excessiveInstanceLimit,
-  I18nController,
   popoverStyles,
   TypeNativePopoverController,
   useStyles,
@@ -15,9 +14,14 @@ import {
   appendRootNodeStyle,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import globalStyles from './dialog.global.css?inline';
 import styles from './dialog.css?inline';
+
+const i18nDefaults = {
+  close: 'close'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-dialog
@@ -95,7 +99,7 @@ export class Dialog extends LitElement {
    */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables internal string values to update for internationalization.

@@ -12,11 +12,19 @@ import {
   popoverStyles,
   statusIcons,
   useStyles,
-  I18nController,
   TypeNativePopoverController,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './notification.css?inline';
+
+const i18nDefaults = {
+  close: 'close',
+  danger: 'danger',
+  information: 'information',
+  success: 'success',
+  warning: 'warning'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-notification
@@ -98,7 +106,7 @@ export class Notification extends LitElement {
    */
   @property({ type: String, reflect: true }) container?: 'flat';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables updating internal string values for internationalization.

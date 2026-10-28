@@ -10,15 +10,19 @@ import {
   attachInternals,
   audit,
   excessiveInstanceLimit,
-  I18nController,
   popoverStyles,
   TypeNativePopoverController,
   useStyles,
   appendRootNodeStyle,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './toggletip.css?inline';
 import globalStyles from './toggletip.global.css?inline';
+
+const i18nDefaults = {
+  close: 'close'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-toggletip
@@ -111,7 +115,7 @@ export class Toggletip extends LitElement {
 
   protected typeNativePopoverController = new TypeNativePopoverController<Toggletip>(this);
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Updates internal string values for internationalization.

@@ -5,14 +5,13 @@ import { html, LitElement, type PropertyValues } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators/property.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
-import {
-  GestureController,
-  I18nController,
-  useStyles,
-  type Gesture,
-  type GestureInput
-} from '@nvidia-elements/core/internal';
+import { GestureController, useStyles, type Gesture, type GestureInput } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './resize-handle.css?inline';
+
+const i18nDefaults = {
+  resize: 'resize'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-resize-handle
@@ -64,7 +63,7 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     }
   };
 
-  readonly #i18nController: I18nController<this> = new I18nController<this>(this);
+  readonly #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   readonly #gestureController: GestureController;
 

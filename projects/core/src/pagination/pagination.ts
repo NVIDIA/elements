@@ -7,16 +7,25 @@ import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
-  I18nController,
   formatStandardNumber,
   keyNavigationList,
   typeSSR,
   useStyles,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
 import styles from './pagination.css?inline';
+
+const i18nDefaults = {
+  of: 'of',
+  previous: 'previous',
+  next: 'next',
+  start: 'start',
+  end: 'end',
+  currentPage: 'current page'
+} satisfies I18nDefaults;
 
 /* eslint-disable jsdoc/no-types */
 // explicit jsdoc annotation due to inheritance context lost with CEM generator
@@ -79,7 +88,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables updating internal string values for internationalization.

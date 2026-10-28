@@ -4,12 +4,18 @@
 import { html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { useStyles, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
+import { useStyles, scopedRegistry } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Button } from '@nvidia-elements/core/button';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Toast } from '@nvidia-elements/core/toast';
 import { Tooltip } from '@nvidia-elements/core/tooltip';
 import styles from './copy-button.css?inline';
+
+const i18nDefaults = {
+  copy: 'copy',
+  copied: 'copied'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-copy-button
@@ -41,7 +47,7 @@ export class CopyButton extends Button {
 
   @state() private showTooltip = false;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables internal string values to update for internationalization.

@@ -4,8 +4,13 @@
 import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size } from '@nvidia-elements/core/internal';
-import { attachInternals, I18nController, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './progress-dot.css?inline';
+
+const i18nDefaults = {
+  loading: 'loading'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-progress-dot
@@ -33,7 +38,7 @@ export class ProgressDot extends LitElement {
   /** Controls the indicator size. */
   @property({ type: String, reflect: true }) size: Size = 'md';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating the default loading label for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

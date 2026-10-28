@@ -9,15 +9,23 @@ import {
   attachInternals,
   audit,
   excessiveInstanceLimit,
-  I18nController,
   popoverStyles,
   scopedRegistry,
   statusIcons,
   TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Icon, type IconName } from '@nvidia-elements/core/icon';
 import styles from './toast.css?inline';
+
+const i18nDefaults = {
+  close: 'close',
+  danger: 'danger',
+  information: 'information',
+  success: 'success',
+  warning: 'warning'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-toast
@@ -110,7 +118,7 @@ export class Toast extends LitElement {
    */
   @property({ type: String, reflect: true }) status: SupportStatus;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Updates internal string values for internationalization.

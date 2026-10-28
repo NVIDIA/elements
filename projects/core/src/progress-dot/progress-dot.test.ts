@@ -16,13 +16,13 @@ describe(ProgressDot.metadata.tag, () => {
   let themeStyles: HTMLStyleElement;
 
   beforeEach(async () => {
-    loadingLabel = I18nService.i18n.loading;
     themeStyles = document.createElement('style');
     themeStyles.textContent = reducedMotionStyles;
     document.head.append(themeStyles);
     fixture = await createFixture(html`<nve-progress-dot></nve-progress-dot>`);
     element = fixture.querySelector('nve-progress-dot');
     await elementIsStable(element);
+    loadingLabel = I18nService.i18n.loading;
   });
 
   afterEach(() => {

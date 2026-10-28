@@ -8,7 +8,12 @@ import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
 import { IconButton } from '@nvidia-elements/core/icon-button';
+import type { I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './date.css?inline';
+
+const i18nDefaults = {
+  expand: 'expand'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-date
@@ -34,6 +39,10 @@ import styles from './date.css?inline';
  */
 @scopedRegistry()
 export class Date extends Control implements ContainerElement {
+  protected override get i18nDefaults(): I18nDefaults {
+    return i18nDefaults;
+  }
+
   /**
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
    * Use when embedding within another container such as a toolbar.

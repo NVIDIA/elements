@@ -6,7 +6,6 @@
  */
 export * from './controllers/audit.controller.js';
 export * from './controllers/gesture.controller.js';
-export * from './controllers/i18n.controller.js';
 export * from './controllers/key-state.controller.js';
 export * from './controllers/keynav-grid.controller.js';
 export * from './controllers/keynav-list.controller.js';
@@ -25,7 +24,7 @@ export * from './decorators/host-attr.js';
 export * from './decorators/scoped-registry.js';
 export * from './styles/index.js';
 export * from './styles/popover.js';
-export * from './services/i18n.service.js';
+export * from '@nvidia-elements/foundations/internal/i18n';
 export * from './services/log.service.js';
 export * from './services/transition.service.js';
 export * from './types/index.js';
