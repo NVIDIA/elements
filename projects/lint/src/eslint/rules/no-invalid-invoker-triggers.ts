@@ -19,6 +19,7 @@ const COMMAND_CONTROLS = [
   'nve-media-playback-rate-select',
   'nve-media-time-range',
   'nve-media-volume-range',
+  'nve-tree-node',
   'nve-viewport-minimap',
   'nve-viewport-zoom-range'
 ] as const;
