@@ -1,3 +1,43 @@
+## [1.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.0...@nvidia-elements/media-v1.2.1) (2026-10-28)
+
+### Features
+
+* **code:** iframe component ([09f9a8c](https://github.com/NVIDIA/elements/commit/09f9a8cc43439b48a96185198dcd8b3ce590759b))
+* **core:** add appearance option to icon button ([942be28](https://github.com/NVIDIA/elements/commit/942be28dcc0eaff9495e59386e50da791f1217fb))
+* **core:** add composable tab item groups ([284eee9](https://github.com/NVIDIA/elements/commit/284eee904d77a9b84f2c122f35d95a2e18eba73e))
+* **core:** progress dot ([6a1ed16](https://github.com/NVIDIA/elements/commit/6a1ed16c62ca615f3e3f5f2ffd347f357fe9d0f3))
+* **foundations:** scroll box ([fa9d947](https://github.com/NVIDIA/elements/commit/fa9d947d076a9cbc356a307aa0fb1f219bb701a4))
+* **lint:** new rules ([1352a3e](https://github.com/NVIDIA/elements/commit/1352a3e579e6a2e3d4bff29c03c91379dbd30f93))
+* **lint:** prevent nested interactive elements ([a27b402](https://github.com/NVIDIA/elements/commit/a27b40258d94e5384b3a5424dd8176fddeefee81))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.4 ([ca5c60a](https://github.com/NVIDIA/elements/commit/ca5c60a0265fbe91b898bc0922e2d14a2ce0f965))
+* **cli:** update bun to 1.4.3 ([7521484](https://github.com/NVIDIA/elements/commit/7521484a82f2714594fab438eccf8d575d578def))
+* **cli:** update bun to 1.4.4 ([dc0a9d4](https://github.com/NVIDIA/elements/commit/dc0a9d4079cf3d8c7251ed4dfb6ff8ce728f8be1))
+* **cli:** update deps ([5c2e291](https://github.com/NVIDIA/elements/commit/5c2e2911a3c0e0d59b5572077be0fe54f580312c))
+* **code:** foundations utility functions ([aef8463](https://github.com/NVIDIA/elements/commit/aef846300b4861cc07c87ae32d844267302f62a3))
+* **core:** add padding for alert banners in toggletip header ([4954ec6](https://github.com/NVIDIA/elements/commit/4954ec6715a1b24c33a6c0fa261d9bffe526c9c8))
+* **core:** foundations utility functions ([4618981](https://github.com/NVIDIA/elements/commit/4618981acecdd4de0ed4b225c070a4506a6fd4fd))
+* **core:** improve grid keynav event handling ([9045f7f](https://github.com/NVIDIA/elements/commit/9045f7fc1947bb20d93b3ac5e0489ee1126b9f2a))
+* **core:** migrate runtime to static lint checks ([e616f85](https://github.com/NVIDIA/elements/commit/e616f85788c699b6c89c410625a23481834e48dd))
+* **core:** observe only host hidden changes for popover visibility ([3a2b58d](https://github.com/NVIDIA/elements/commit/3a2b58d26b7223677d8f23f8643dd6d1cc173882))
+* **core:** remove layout boxes from closed popovers ([e7e89ac](https://github.com/NVIDIA/elements/commit/e7e89acc6565d325410590e91eba9966d2161052))
+* **core:** tree node link target ([1362388](https://github.com/NVIDIA/elements/commit/1362388c6d94ba480da6854210b6c68f5d59b926))
+* **docs:** prevent code block copy buttons from overflowing the page ([6972e4b](https://github.com/NVIDIA/elements/commit/6972e4b7e3dfaa936a650167c47a3d6d0cca2a35))
+* **docs:** prevent concurrent site output writes ([cd1bfdb](https://github.com/NVIDIA/elements/commit/cd1bfdbb2e177d8a4e958feb40ab01b0c9478caf))
+* **forms:** detect label anchors after named slots ([756b692](https://github.com/NVIDIA/elements/commit/756b69251f0d31aed089c3bb31ec3688866d3360))
+* **foundations:** missing dist publish ([5521fc0](https://github.com/NVIDIA/elements/commit/5521fc0d55e0542d028727531267241bc31f9401))
+* **foundations:** utility exports ([9039bf0](https://github.com/NVIDIA/elements/commit/9039bf0c4fbeac17a16987b873c4de47d07fc313))
+* **markdown:** foundations utility functions ([1ed4bc6](https://github.com/NVIDIA/elements/commit/1ed4bc6dfe4eef0663ab78e450af9765a2265ae2))
+* **media:** foundations utility functions ([ee9b3c7](https://github.com/NVIDIA/elements/commit/ee9b3c7d18c04d3b1aa3c6bfef9dec528b9c0da1))
+* **monaco:** foundations utility functions ([a62e1db](https://github.com/NVIDIA/elements/commit/a62e1db32f0331108bb6518248cbf01bedb0076d))
+* **pi:** update deps ([64d830e](https://github.com/NVIDIA/elements/commit/64d830ee361dd0e537a63d89c844c4b76e370fb3))
+* **pi:** update deps ([7edf89a](https://github.com/NVIDIA/elements/commit/7edf89ae10f5090e7612e67cafac8f25fb0c1d3b))
+* **viewport:** connect accessories across separate imports ([13e446d](https://github.com/NVIDIA/elements/commit/13e446d52b52491d5a7597f520b86e43f749c412))
+* **viewport:** foundations utility functions ([74fe7db](https://github.com/NVIDIA/elements/commit/74fe7db2d00c3b1cd99a99bfc97556a58d017899))
+* **viewport:** include build artifacts in releases ([7ab75d4](https://github.com/NVIDIA/elements/commit/7ab75d4477b4364557d2f0d17af15a6ad3b453a8))
+
 ## [1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.1.0...@nvidia-elements/media-v1.2.0) (2026-10-13)
 
 ### Features
