@@ -7,8 +7,8 @@ import type { ReactiveController, ReactiveElement } from './types.js';
 type CommandBehaviorHost = ReactiveElement & {
   command?: string;
   commandForElement: HTMLElement | null;
-  disabled: boolean;
-  readOnly: boolean;
+  disabled?: boolean;
+  readOnly?: boolean;
 };
 
 type TypeCommandControllerOptions = {
@@ -43,11 +43,12 @@ export class TypeCommandController<T extends CommandBehaviorHost> implements Rea
 
   #onCommand = (event: Event) => {
     if (!event.defaultPrevented) {
-      this.#dispatchCommand();
+      this.invoke();
     }
   };
 
-  #dispatchCommand() {
+  /** Dispatches the configured command for controls that handle their own activation. */
+  invoke() {
     if (this.host.readOnly || this.host.disabled || !this.host.command) {
       return false;
     }
