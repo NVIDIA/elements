@@ -114,9 +114,7 @@ export class AuditController<T extends Audit> implements ReactiveController {
   }
 
   #update(registry: AuditRegistry) {
-    GlobalStateService.dispatch('NVE_ELEMENTS_AUDIT_UPDATE', { audit: registry } as Partial<
-      typeof globalThis.NVE_ELEMENTS.state
-    >);
+    GlobalStateService.dispatch('NVE_ELEMENTS_AUDIT_UPDATE', { audit: registry });
   }
 
   #auditParentElement() {
