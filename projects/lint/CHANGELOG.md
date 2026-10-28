@@ -1,3 +1,22 @@
+## [2.9.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.9.0...@nvidia-elements/lint-v2.9.1) (2026-10-28)
+
+### Features
+
+* **core:** tree node invoker command support ([2d889e4](https://github.com/NVIDIA/elements/commit/2d889e485b5aad0980731821691973d57c2ee343))
+
+### Bug Fixes
+
+* **code:** foundations utility functions ([aef8463](https://github.com/NVIDIA/elements/commit/aef846300b4861cc07c87ae32d844267302f62a3))
+* **core:** add min-width for fit-text styling for filter chip ([7bf423e](https://github.com/NVIDIA/elements/commit/7bf423ed11413e9aa33ca4f28658a1bcac011d26))
+* **core:** foundations utility functions ([4618981](https://github.com/NVIDIA/elements/commit/4618981acecdd4de0ed4b225c070a4506a6fd4fd))
+* **forms:** enable invoke method for controller ([68c8aa3](https://github.com/NVIDIA/elements/commit/68c8aa33a4d9254601b56b219ae6cc4268b54306))
+* **foundations:** utility exports ([9039bf0](https://github.com/NVIDIA/elements/commit/9039bf0c4fbeac17a16987b873c4de47d07fc313))
+* **lint:** add tree invoker command support ([bde2265](https://github.com/NVIDIA/elements/commit/bde2265de1ed48981de745d1f4ca733d28b65df0))
+* **markdown:** foundations utility functions ([1ed4bc6](https://github.com/NVIDIA/elements/commit/1ed4bc6dfe4eef0663ab78e450af9765a2265ae2))
+* **media:** foundations utility functions ([ee9b3c7](https://github.com/NVIDIA/elements/commit/ee9b3c7d18c04d3b1aa3c6bfef9dec528b9c0da1))
+* **monaco:** foundations utility functions ([a62e1db](https://github.com/NVIDIA/elements/commit/a62e1db32f0331108bb6518248cbf01bedb0076d))
+* **viewport:** foundations utility functions ([74fe7db](https://github.com/NVIDIA/elements/commit/74fe7db2d00c3b1cd99a99bfc97556a58d017899))
+
 ## [2.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.8.0...@nvidia-elements/lint-v2.9.0) (2026-10-27)
 
 ### Features
