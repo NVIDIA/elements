@@ -32,6 +32,7 @@ export class GlobalState {
       }
     };
     globalThis.NVE_ELEMENTS.state.elementRegistry ??= {};
+    globalThis.NVE_ELEMENTS.state.i18nRegistry ??= {};
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
     globalThis.NVE_ELEMENTS.state.scopedRegistry ??= {}; // if older versions used, they may not have a scopedRegistry
     globalThis.NVE_ELEMENTS.state.scopedRegistry['0.0.0'] ??= createScopedRegistry();
@@ -53,8 +54,12 @@ export class GlobalState {
     return (this.state.scopedRegistry[version] ??= createScopedRegistry());
   }
 
-  dispatch(type: string, state: Partial<typeof globalThis.NVE_ELEMENTS.state>) {
+  merge(state: Partial<typeof globalThis.NVE_ELEMENTS.state>) {
     globalThis.NVE_ELEMENTS.state = deepMerge(globalThis.NVE_ELEMENTS.state, state);
+  }
+
+  dispatch(type: string, state: Partial<typeof globalThis.NVE_ELEMENTS.state>) {
+    this.merge(state);
     globalThis?.document?.dispatchEvent(new CustomEvent(type, { detail: globalThis.NVE_ELEMENTS.state }));
   }
 }

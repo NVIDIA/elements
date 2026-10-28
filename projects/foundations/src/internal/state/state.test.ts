@@ -109,6 +109,31 @@ describe('GlobalStateService', () => {
     expect(service.state.elementRegistry).toEqual({});
   });
 
+  it('should initialize i18nRegistry when prior state did not define it', () => {
+    vi.stubGlobal('NVE_ELEMENTS', {
+      ...globalThis.NVE_ELEMENTS,
+      state: { ...globalThis.NVE_ELEMENTS.state }
+    });
+    Reflect.deleteProperty(globalThis.NVE_ELEMENTS.state, 'i18nRegistry');
+
+    const service = new GlobalState();
+
+    expect(service.state.i18nRegistry).toEqual({});
+  });
+
+  it('should preserve existing translations when another state service initializes', () => {
+    const registry = { close: 'fermer' };
+    vi.stubGlobal('NVE_ELEMENTS', {
+      ...globalThis.NVE_ELEMENTS,
+      state: { ...globalThis.NVE_ELEMENTS.state, i18nRegistry: registry }
+    });
+
+    const service = new GlobalState();
+
+    expect(service.state.i18nRegistry).toBe(registry);
+    expect(service.state.i18nRegistry.close).toBe('fermer');
+  });
+
   it('should initialize scopedRegistry when prior version did not define it', () => {
     delete (window.NVE_ELEMENTS.state as any).scopedRegistry; // eslint-disable-line @typescript-eslint/no-explicit-any
     const instance = new GlobalState();
