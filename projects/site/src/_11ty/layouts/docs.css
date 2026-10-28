@@ -286,7 +286,8 @@ nvd-canvas {
 
 nvd-canvas:has(nve-page),
 nvd-canvas:has(iframe[src*='page']),
-nvd-canvas:has(iframe[src*='scene']) {
+nvd-canvas:has(iframe[src*='scene']),
+nvd-canvas:has(iframe[src*='viewport']) {
   --padding: 0;
 
   nve-page {
@@ -294,7 +295,8 @@ nvd-canvas:has(iframe[src*='scene']) {
   }
 }
 
-nvd-canvas:has(nve-scene) {
+nvd-canvas:has(nve-scene),
+nvd-canvas:has(nve-viewport) {
   --padding: 0;
 }
 

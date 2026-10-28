@@ -39,4 +39,13 @@ describe(Tree.metadata.tag, () => {
     const results = await runAxe([Tree.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
+
+  it('should pass axe check with command invokers', async () => {
+    const node = element.querySelector('nve-tree-node')!;
+    node.command = '--open';
+    node.commandForElement = element.querySelectorAll('nve-tree-node')[1]!;
+    await elementIsStable(node);
+    const results = await runAxe([Tree.metadata.tag]);
+    expect(results.violations.length).toBe(0);
+  });
 });

@@ -51,6 +51,10 @@
 
 {% example '@nvidia-elements/core/tree/tree.examples.json' 'PrefixSuffix' %}
 
+## Invoker Commands
+
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'InvokerCommands' %}
+
 ## Complex Tree Navigation
 
 {% example '@internals/patterns/navigation.examples.json' 'ComplexTreeNavigation' %}
