@@ -5,13 +5,19 @@ import { property } from 'lit/decorators/property.js';
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
-import { attachInternals, I18nController, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Icon } from '@nvidia-elements/core/icon';
 import { MediaStateController } from '../internal/controllers/media-state.controller.js';
 import { mediaCommands } from '../internal/media-command.js';
 import type { MediaState } from '../internal/media-state.js';
 import mediaButtonStyles from '../internal/media-button.css?inline';
 import styles from './pip-button.css?inline';
+
+const i18nDefaults = {
+  enterPip: 'enter picture in picture',
+  exitPip: 'exit picture in picture'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-media-pip-button
@@ -58,7 +64,7 @@ export class MediaPipButton extends ButtonFormControlMixin(LitElement) {
     super.disabled = value;
   }
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
