@@ -36,6 +36,11 @@
   --border-radius: 0;
 }
 
+[nve-control][fit-text],
+::slotted([nve-control][fit-text]) {
+  flex-shrink: 0;
+}
+
 [internal-host] > :nth-child(2) {
   --font-weight: var(--nve-ref-font-weight-regular);
 }

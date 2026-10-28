@@ -12,6 +12,10 @@ import { Input } from '@nvidia-elements/core/input';
 import { Date } from '@nvidia-elements/core/date';
 import '@nvidia-elements/core/progressive-filter-chip/define.js';
 import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/color/define.js';
 
 describe(ProgressiveFilterChip.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -93,6 +97,63 @@ describe(ProgressiveFilterChip.metadata.tag, () => {
     element.querySelector('select').remove();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector(Select.metadata.tag)).toBe(null);
+  });
+
+  it.each(['number', 'text'])('should preserve fit-text %s input width alongside other controls', async type => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <div style="width: 450px; display: flex; align-items: center; gap: 4px;">
+        <span>When value</span>
+        <nve-progressive-filter-chip closable style="width: 100%;">
+          <nve-select fit-content>
+            <select aria-label="condition">
+              <option>Is anything</option>
+              <option selected>Is less than</option>
+              <option>Is greater than</option>
+            </select>
+          </nve-select>
+          <nve-input fit-text>
+            <input type=${type} value="50" aria-label="Conditional Value" />
+          </nve-input>
+          <nve-button readonly>Show as</nve-button>
+          <nve-color>
+            <input type="color" value="#ffef11" aria-label="Select conditional color" />
+          </nve-color>
+        </nve-progressive-filter-chip>
+      </div>
+      <nve-input fit-text style="--font-weight: var(--nve-ref-font-weight-medium);">
+        <input type=${type} value="50" aria-label="Standalone value" />
+      </nve-input>
+    `);
+    element = fixture.querySelector(ProgressiveFilterChip.metadata.tag);
+    await elementIsStable(element);
+    const inputs = fixture.querySelectorAll<Input>('nve-input');
+    await Promise.all(Array.from(inputs, control => elementIsStable(control)));
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    const input = inputs[0].querySelector('input');
+    const standaloneInput = inputs[1].querySelector('input');
+    expect(input.getBoundingClientRect().width).toBeCloseTo(standaloneInput.getBoundingClientRect().width, 0);
+
+    const initialWidth = input.getBoundingClientRect().width;
+    input.value = standaloneInput.value = '1234567890';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    standaloneInput.dispatchEvent(new Event('input', { bubbles: true }));
+    await Promise.all(Array.from(inputs, control => elementIsStable(control)));
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    expect(input.getBoundingClientRect().width).toBeGreaterThan(initialWidth);
+    expect(input.getBoundingClientRect().width).toBeCloseTo(standaloneInput.getBoundingClientRect().width, 0);
+    expect(inputs[0].getBoundingClientRect().width).toBeGreaterThanOrEqual(input.getBoundingClientRect().width);
+
+    inputs[0].style.setProperty('--max-width', '80px');
+    input.value = '123456789012345678901234567890';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(inputs[0]);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    expect(inputs[0].getBoundingClientRect().width).toBeLessThanOrEqual(80);
+    expect(input.getBoundingClientRect().width).toBeLessThanOrEqual(80);
   });
 
   it('should only update options if valid element is slotted', async () => {
