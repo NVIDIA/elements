@@ -1,3 +1,9 @@
+## [2.18.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.3...@nvidia-elements/core-v2.18.4) (2026-10-28)
+
+### Bug Fixes
+
+* **core:** add min-width for fit-text styling for filter chip ([7bf423e](https://github.com/NVIDIA/elements/commit/7bf423ed11413e9aa33ca4f28658a1bcac011d26))
+
 ## [2.18.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.2...@nvidia-elements/core-v2.18.3) (2026-10-28)
 
 ### Bug Fixes
