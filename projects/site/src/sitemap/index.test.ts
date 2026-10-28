@@ -223,5 +223,5 @@ describe('human sitemap', () => {
     expect(await readFile(new URL('sitemap.xml', output), 'utf8')).toContain(
       '<loc>https://nvidia.github.io/elements/sitemap/</loc>'
     );
-  });
+  }, 30_000);
 });

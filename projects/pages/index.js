@@ -1,11 +1,14 @@
-import { cpSync, existsSync, mkdirSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { cpSync, existsSync, lstatSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 
-if (!existsSync('./dist')) {
+const freshOutput = !existsSync('./dist');
+if (freshOutput) {
   mkdirSync('./dist/starters', { recursive: true });
   mkdirSync('./dist/api', { recursive: true });
 }
 
-cpSync('../site/dist/', './dist/', { recursive: true });
+copySite(freshOutput);
 cpSync('../internals/metadata/static/api.json', './dist/metadata/api.json');
 cpSync('../internals/metadata/static/examples.json', './dist/metadata/examples.json');
 cpSync('../internals/metadata/static/projects.json', './dist/metadata/projects.json');
@@ -18,9 +21,9 @@ if (existsSync('../cli/dist')) {
     const src = `../cli/dist/${bin}`;
     const srcExe = `../cli/dist/${bin}.exe`;
     if (existsSync(src)) {
-      cpSync(src, `./dist/cli/${bin}`);
+      copyBinary(src, `./dist/cli/${bin}`);
     } else if (existsSync(srcExe)) {
-      cpSync(srcExe, `./dist/cli/${bin}.exe`);
+      copyBinary(srcExe, `./dist/cli/${bin}.exe`);
     }
   }
   if (existsSync('../cli/dist/manifest.json')) {
@@ -43,3 +46,39 @@ cpSync('../starters/svelte/dist/', './dist/starters/svelte/', { recursive: true 
 cpSync('../starters/typescript/dist/', './dist/starters/typescript/', { recursive: true });
 cpSync('../starters/vue/dist/', './dist/starters/vue/', { recursive: true });
 cpSync('../starters/hugo/dist/', './dist/starters/hugo/', { recursive: true });
+
+function copySite(freshOutput) {
+  const source = '../site/dist/';
+  const maskedPermissions = process.umask() | 0o7000;
+  if (
+    freshOutput &&
+    process.platform === 'darwin' &&
+    readdirSync(source, { recursive: true, withFileTypes: true }).every(entry => {
+      if (!entry.isDirectory() && !entry.isFile()) return false;
+      const mode = statSync(join(entry.parentPath, entry.name)).mode;
+      if (entry.isDirectory() && (mode & 0o700) !== 0o700) return false;
+      return (mode & (entry.isFile() ? maskedPermissions : 0o7000)) === 0;
+    })
+  ) {
+    // macOS supports filesystem clones through cp; Node's clone flag falls back to copying here.
+    const result = spawnSync('/bin/cp', ['-cR', `${source}.`, './dist/'], { stdio: 'ignore' });
+    if (result.status === 0) return;
+    // This invocation owns the fresh directory, so discard any partial clone before retrying.
+    rmSync('./dist/', { recursive: true, force: true });
+    mkdirSync('./dist/starters', { recursive: true });
+    mkdirSync('./dist/api', { recursive: true });
+  }
+  cpSync(source, './dist/', { recursive: true });
+}
+
+function copyBinary(source, destination) {
+  if (process.platform === 'darwin' && !lstatSync(destination, { throwIfNoEntry: false })) {
+    const info = lstatSync(source);
+    if (info.isFile() && (info.mode & (process.umask() | 0o7000)) === 0) {
+      const result = spawnSync('/bin/cp', ['-c', source, destination], { stdio: 'ignore' });
+      if (result.status === 0) return;
+      rmSync(destination, { force: true });
+    }
+  }
+  cpSync(source, destination);
+}

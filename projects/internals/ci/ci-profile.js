@@ -217,6 +217,10 @@ export function renderReport({ metadata, runs, scripts }) {
   const medianCiMs = median(runs.map(run => run.durationMs));
   const generatedAt = new Date(metadata.generatedAt).toISOString();
   const target = metadata.target ?? 'ci';
+  const concurrency =
+    metadata.wireitParallel && metadata.wireitParallel !== 'default'
+      ? `\`WIREIT_PARALLEL=${metadata.wireitParallel}\``
+      : "Wireit's default concurrency";
   const rows = topScripts.map(
     (script, index) =>
       `| ${index + 1} | \`${script.id}\` | ${seconds(script.medianMs)} s | ${seconds(script.minMs)} s | ${seconds(script.maxMs)} s | ${percent(script.medianMs, medianCiMs)} | \`${escapeTable(script.command)}\` |`
@@ -234,7 +238,7 @@ export function renderReport({ metadata, runs, scripts }) {
     '',
     '## Methodology',
     '',
-    `The profiler used reset mode \`${metadata.reset ?? 'cold'}\` for ${runs.length} samples, then timed \`pnpm run ${target}\` with \`CI=true\`, \`WIREIT_CACHE=none\`, \`PAGES_BASE_URL=/elements/\`, and Wireit's default concurrency. Cold mode runs \`pnpm run ci:reset\`; none mode preserves existing outputs and incremental freshness. Reset and dependency installation time is separate from execution time. Lighthouse samples must execute every test command in the current Wireit graph. Rankings exclude dependency wait time, cache hits, commandless targets, and composite commands.`,
+    `The profiler used reset mode \`${metadata.reset ?? 'cold'}\` for ${runs.length} samples, then timed \`pnpm run ${target}\` with \`CI=true\`, \`WIREIT_CACHE=none\`, \`PAGES_BASE_URL=/elements/\`, and ${concurrency}. Cold mode runs \`pnpm run ci:reset\`; none mode preserves existing outputs and incremental freshness. Reset and dependency installation time is separate from execution time. Lighthouse samples must execute every test command in the current Wireit graph. Rankings exclude dependency wait time, cache hits, commandless targets, and composite commands.`,
     '',
     `Environment: ${metadata.platform} ${metadata.release}, ${metadata.cpuModel}, ${metadata.cpuCount} logical CPUs, ${metadata.memoryGiB} GiB memory, Node ${metadata.node}, pnpm ${metadata.pnpm}, Wireit ${metadata.wireit}.`,
     '',
@@ -304,6 +308,7 @@ function getMetadata() {
     node: process.version,
     pnpm: runSync('pnpm', ['--version']),
     wireit: wireitPackage.version,
+    wireitParallel: process.env.WIREIT_PARALLEL ?? 'default',
     profilerSha256: createHash('sha256')
       .update(readFileSync(fileURLToPath(import.meta.url)))
       .digest('hex')
@@ -507,6 +512,12 @@ async function benchmarkRun(index, temporaryDirectory, options, graph) {
 /** Preserves complete or partial samples, including the documented run/reset log names. */
 export function copyProfileArtifacts(temporaryDirectory, destination = METRICS_DIR) {
   mkdirSync(destination, { recursive: true });
+  for (const entry of readdirSync(destination, { withFileTypes: true })) {
+    if (!entry.isFile() && !entry.isSymbolicLink()) continue;
+    if (/^ci-profile-(?:run|reset|phases)-\d+(?:[.-]|$)/.test(entry.name)) {
+      rmSync(path.join(destination, entry.name), { force: true });
+    }
+  }
   for (const fileName of readdirSync(temporaryDirectory)) {
     if (fileName === 'vale-styles') continue;
     if (fileName.startsWith('phases-')) {
@@ -679,7 +690,17 @@ export async function main() {
       }
     }
     for (let index = 1; index <= options.samples; index++) {
-      runs.push(await benchmarkRun(index, temporaryDirectory, options, metadata.graph));
+      const run = await benchmarkRun(index, temporaryDirectory, options, metadata.graph);
+      runs.push(run);
+      const runMetadata = {
+        ...metadata,
+        wireit: JSON.parse(readFileSync(path.join(ROOT_DIR, 'node_modules/wireit/package.json'), 'utf8')).version
+      };
+      // Keep successful samples available even when a later sample fails.
+      writeFileSync(
+        path.join(temporaryDirectory, `run-${index}.json`),
+        JSON.stringify({ metadata: runMetadata, run }, null, 2)
+      );
     }
     // Reset replaces the comparison's bootstrap dependencies with this revision's.
     metadata.wireit = JSON.parse(readFileSync(path.join(ROOT_DIR, 'node_modules/wireit/package.json'), 'utf8')).version;

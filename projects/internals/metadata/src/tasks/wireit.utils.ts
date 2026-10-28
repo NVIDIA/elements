@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { readFileSync, readdirSync, statSync } from 'fs';
+import { readFileSync, readdirSync, statSync, type Stats } from 'fs';
 import { join, relative, resolve, dirname } from 'path';
 
 const rootDir = resolve(import.meta.dirname, '../../../../../');
@@ -9,7 +9,7 @@ const wireitScripts = new Map(); // key: "package-path:script-name", value: scri
 
 function findPackageJsonFiles(dir: string, results: string[] = []): string[] {
   try {
-    const items = readdirSync(dir);
+    const items = readdirSync(dir).sort();
 
     for (const item of items) {
       if (item === 'node_modules' || item === '.git' || item === 'dist' || item === 'coverage' || item === '.wireit') {
@@ -17,7 +17,13 @@ function findPackageJsonFiles(dir: string, results: string[] = []): string[] {
       }
 
       const fullPath = join(dir, item);
-      const stat = statSync(fullPath);
+      let stat: Stats;
+      try {
+        stat = statSync(fullPath);
+      } catch {
+        // Continue when a concurrent build removes an entry.
+        continue;
+      }
 
       if (stat.isDirectory()) {
         findPackageJsonFiles(fullPath, results);

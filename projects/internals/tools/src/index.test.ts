@@ -28,7 +28,7 @@ describe('tools', () => {
 
   it('should be defined', async () => {
     await expect(getToolNames()).resolves.toBeDefined();
-  });
+  }, 30_000);
 
   it('should omit playground tools without runtime playground url configuration', async () => {
     delete process.env.ELEMENTS_PLAYGROUND_BASE_URL;

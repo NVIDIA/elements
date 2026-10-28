@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { generateGraphData } from './wireit.utils.js';
@@ -13,6 +13,10 @@ const missingPackageDep = '../../../../../../../../upkeep-missing-wireit-pkg:bui
 
 function installFixtures() {
   rmSync(fixtureRoot, { recursive: true, force: true });
+  mkdirSync(fixtureRoot, { recursive: true });
+  if (process.platform !== 'win32') {
+    symlinkSync('missing-entry-target', join(fixtureRoot, '000-missing-entry'));
+  }
   mkdirSync(join(fixturePackageDir, 'nested', 'deeper'), { recursive: true });
   writeFileSync(join(fixturePackageDir, 'nested', 'package.json'), '{ not json');
   writeFileSync(
@@ -409,6 +413,10 @@ describe('generateGraphData', () => {
       true
     );
     expect(result.nodes.length).toBeGreaterThan(0);
+  });
+
+  it.skipIf(process.platform === 'win32')('should keep scanning packages after a missing filesystem entry', () => {
+    expect(result.nodes.some(node => node.packageName === 'labs/upkeep-wireit-fixture')).toBe(true);
   });
 
   it('should keep generating a graph when a wireit dependency cannot be parsed', () => {
