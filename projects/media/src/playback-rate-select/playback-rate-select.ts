@@ -5,7 +5,8 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { I18nController, LogService, useStyles } from '@nvidia-elements/core/internal';
+import { LogService, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { SelectFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { MediaStateController } from '../internal/controllers/media-state.controller.js';
@@ -14,6 +15,10 @@ import type { MediaState } from '../internal/media-state.js';
 import styles from './playback-rate-select.css?inline';
 
 const defaultRates = [0.5, 1.0, 1.5, 2.0];
+const i18nDefaults = {
+  playbackRate: 'playback rate',
+  playbackRateOption: '{rate}x'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-media-playback-rate-select
@@ -52,7 +57,7 @@ export class MediaPlaybackRateSelect extends SelectFormControlMixin(LitElement) 
 
   @property({ type: Array }) rates: Array<number | string> = [...defaultRates]; // eslint-disable-line local/primitive-property -- Playback rate lists map directly to native select options.
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

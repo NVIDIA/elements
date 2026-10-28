@@ -19,6 +19,6 @@ describe('media pause button lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(24.25);
+    expect(report.payload.javascript.kb).toBeLessThan(24);
   });
 });

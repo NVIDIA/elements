@@ -5,7 +5,8 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { I18nController, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { SliderFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { MediaStateController } from '../internal/controllers/media-state.controller.js';
@@ -13,6 +14,10 @@ import { mediaCommands } from '../internal/media-command.js';
 import type { MediaState } from '../internal/media-state.js';
 import mediaRangeStyles from '../internal/media-range.css?inline';
 import styles from './volume-range.css?inline';
+
+const i18nDefaults = {
+  volume: 'volume'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-media-volume-range
@@ -54,7 +59,7 @@ export class MediaVolumeRange extends SliderFormControlMixin(LitElement) {
 
   @property({ attribute: false }) commandForElement: HTMLElement | null = null;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

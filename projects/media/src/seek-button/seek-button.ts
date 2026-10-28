@@ -5,11 +5,19 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ButtonFormControlMixin, type ButtonType } from '@nvidia-elements/forms/mixins';
-import { attachInternals, I18nController, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Icon } from '@nvidia-elements/core/icon';
 import { mediaCommands, type MediaCommand, type MediaSeekAction } from '../internal/media-command.js';
 import mediaButtonStyles from '../internal/media-button.css?inline';
 import styles from './seek-button.css?inline';
+
+const i18nDefaults = {
+  seekBackward: 'seek backward {value} seconds',
+  seekForward: 'seek forward {value} seconds',
+  seekToEnd: 'seek to end',
+  seekToStart: 'seek to start'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-media-seek-button
@@ -63,7 +71,7 @@ export class MediaSeekButton extends ButtonFormControlMixin(LitElement) {
 
   override type: ButtonType = 'button';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
