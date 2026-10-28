@@ -5,8 +5,13 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { Icon } from '@nvidia-elements/core/icon';
-import { useStyles, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
+import { useStyles, scopedRegistry } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './sort-button.css?inline';
+
+const i18nDefaults = {
+  sort: 'sort'
+} satisfies I18nDefaults;
 
 const nextSort = {
   none: 'ascending',
@@ -46,7 +51,7 @@ export class SortButton extends ButtonFormControlMixin(LitElement) {
    */
   @property({ type: String, reflect: true }) sort: 'ascending' | 'descending' | 'none' = 'none';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Updates internal string values for internationalization.

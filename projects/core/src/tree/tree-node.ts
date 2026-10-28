@@ -6,7 +6,6 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
-  I18nController,
   TypeExpandableController,
   TypeSelectableController,
   attachInternals,
@@ -22,6 +21,7 @@ import {
   typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Checkbox } from '@nvidia-elements/core/checkbox';
@@ -29,6 +29,10 @@ import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import type { Tree } from './tree.js';
 import styles from './tree-node.css?inline';
 import { updateNodeSelection } from './utils.js';
+
+const i18nDefaults = {
+  expand: 'expand'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-tree-node
@@ -106,7 +110,7 @@ export class TreeNode extends LitElement {
    */
   @property({ type: Boolean }) highlighted = false;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Updates internal string values for internationalization.

@@ -6,17 +6,24 @@ import { property } from 'lit/decorators/property.js';
 import { when } from 'lit/directives/when.js';
 import {
   stateExpanded,
-  I18nController,
   TypeExpandableController,
   useStyles,
   attachInternals,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import panelStyleSheet from './panel.css?inline';
 import panelHeaderStyleSheet from './panel-header.css?inline';
 import panelContentStyleSheet from './panel-content.css?inline';
 import panelFooterStyleSheet from './panel-footer.css?inline';
+
+const i18nDefaults = {
+  close: 'close',
+  expand: 'expand',
+  hide: 'hide',
+  show: 'show'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-panel-header
@@ -180,7 +187,7 @@ export class Panel extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
   #typeExpandableController = new TypeExpandableController(this);
 
   /**

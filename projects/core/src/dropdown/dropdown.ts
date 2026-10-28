@@ -9,13 +9,17 @@ import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-element
 import {
   audit,
   excessiveInstanceLimit,
-  I18nController,
   popoverStyles,
   scopedRegistry,
   TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './dropdown.css?inline';
+
+const i18nDefaults = {
+  close: 'close'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-dropdown
@@ -106,7 +110,7 @@ export class Dropdown extends LitElement {
   /** @private */
   @query('.arrow') popoverArrow: HTMLElement;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   protected typeNativePopoverController = new TypeNativePopoverController<Dropdown>(this);
 

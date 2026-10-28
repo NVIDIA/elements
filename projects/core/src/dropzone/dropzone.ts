@@ -4,17 +4,20 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
-import {
-  formatFileSize,
-  useStyles,
-  removeEmptyTextNode,
-  I18nController,
-  scopedRegistry
-} from '@nvidia-elements/core/internal';
+import { formatFileSize, useStyles, removeEmptyTextNode, scopedRegistry } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './dropzone.util';
+
+const i18nDefaults = {
+  or: 'or',
+  files: 'files',
+  dragAndDrop: 'drag & drop',
+  browseFiles: 'browse files',
+  maxFileSize: 'max file size'
+} satisfies I18nDefaults;
 
 /* eslint-disable jsdoc/no-types */
 // Explicit JSDoc type because the CEM analyzer loses the inherited generic specialization.
@@ -48,7 +51,7 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
   @property({ attribute: 'max-file-size', type: Number })
   maxFileSize: number = 2 * 1024 ** 2;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /**
    * Enables internal string values to update for internationalization.

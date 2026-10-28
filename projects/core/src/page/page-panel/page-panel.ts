@@ -7,7 +7,6 @@ import type { Size } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
-  I18nController,
   TypeExpandableController,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -45,13 +44,6 @@ export class PagePanel extends LitElement {
    * Sets the max size of the panel.
    */
   @property({ type: String, reflect: true }) size?: Size;
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  /**
-   * Enables updating internal string values for internationalization.
-   */
-  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   static styles = useStyles([styles]);
 

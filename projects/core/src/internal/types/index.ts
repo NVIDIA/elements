@@ -3,7 +3,7 @@
 
 import type { TemplateResult } from 'lit';
 import type { IconName } from './icons.js';
-import type { I18nStrings } from '../services/i18n.service.js';
+import type { I18nStrings } from '@nvidia-elements/foundations/internal/i18n';
 
 export type Color =
   | 'red-cardinal'

@@ -8,7 +8,6 @@ import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js
 import type { ContainerElement, Container } from '@nvidia-elements/core/internal';
 import {
   stateExpanded,
-  I18nController,
   TypeExpandableController,
   useStyles,
   attachInternals,
@@ -18,11 +17,17 @@ import {
   audit,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
 import accordionHeaderStyleSheet from './accordion-header.css?inline';
 import accordionContentStyleSheet from './accordion-content.css?inline';
 import accordionGroupStyleSheet from './accordion-group.css?inline';
+
+const i18nDefaults = {
+  close: 'close',
+  expand: 'expand'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-accordion-header
@@ -133,7 +138,7 @@ export class Accordion extends LitElement implements ContainerElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
   #typeExpandableController = new TypeExpandableController(this);
 
   /**

@@ -158,16 +158,6 @@ describe(Badge.metadata.tag, () => {
     });
   });
 
-  describe('i18n property', () => {
-    it('should have default i18n values', () => {
-      expect(element.i18n).toBeDefined();
-      expect(typeof element.i18n.trend).toBe('string');
-      expect(typeof element.i18n.up).toBe('string');
-      expect(typeof element.i18n.down).toBe('string');
-      expect(typeof element.i18n.neutral).toBe('string');
-    });
-  });
-
   describe('status property', () => {
     it('should set a default aria role of status', async () => {
       await elementIsStable(element);

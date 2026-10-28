@@ -5,15 +5,17 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
-import {
-  attachInternals,
-  I18nController,
-  scopedRegistry,
-  statusIcons,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { attachInternals, scopedRegistry, statusIcons, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './progress-ring.css?inline';
+
+const i18nDefaults = {
+  danger: 'danger',
+  information: 'information',
+  success: 'success',
+  warning: 'warning'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-progress-ring
@@ -61,7 +63,7 @@ export class ProgressRing extends LitElement {
   /** T-shirt `size` of the progress indicator, used to scale the ring. */
   @property({ type: String, reflect: true }) size?: Size | 'xxs' | 'xs' | 'xl';
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;

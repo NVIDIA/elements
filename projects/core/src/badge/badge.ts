@@ -13,7 +13,6 @@ import {
   supportStateStyles,
   colorStateStyles,
   attachInternals,
-  I18nController,
   typeSSR,
   scopedRegistry
 } from '@nvidia-elements/core/internal';
@@ -80,13 +79,6 @@ export class Badge extends LitElement {
 
   /** @private */
   declare _internals: ElementInternals;
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  /**
-   * Enables updating internal string values for internationalization.
-   */
-  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
     return html`

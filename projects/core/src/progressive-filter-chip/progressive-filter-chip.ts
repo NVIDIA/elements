@@ -8,18 +8,22 @@ import {
   appendRootNodeStyle,
   attachInternals,
   generateId,
-  I18nController,
   scopedRegistry,
   TypeClosableController,
   typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Input } from '@nvidia-elements/core/input';
 import { Select } from '@nvidia-elements/core/select';
 import { Date } from '@nvidia-elements/core/date';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import globalStyles from './progressive-filter-chip.global.css?inline';
 import styles from './progressive-filter-chip.css?inline';
+
+const i18nDefaults = {
+  close: 'close'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-progressive-filter-chip
@@ -60,7 +64,7 @@ export class ProgressiveFilterChip extends LitElement {
   /** Determines if a close button should render within filter chip */
   @property({ type: Boolean }) closable: boolean;
 
-  #i18nController: I18nController<this> = new I18nController<this>(this);
+  #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
 
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
