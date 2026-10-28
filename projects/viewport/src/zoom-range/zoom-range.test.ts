@@ -40,10 +40,23 @@ describe(ViewportZoomRange.metadata.tag, () => {
 
   afterEach(() => {
     removeFixture(fixture);
+    vi.unstubAllGlobals();
     vi.restoreAllMocks();
   });
 
   describe('setup and targeting', () => {
+    it('provides a default slider label with an empty translation registry', async () => {
+      vi.stubGlobal('NVE_ELEMENTS', {
+        ...globalThis.NVE_ELEMENTS,
+        state: { ...globalThis.NVE_ELEMENTS.state, i18nRegistry: {} }
+      });
+      const unlabelledRange = new ViewportZoomRange();
+      fixture.append(unlabelledRange);
+      await elementIsStable(unlabelledRange);
+
+      expect(unlabelledRange.shadowRoot?.querySelector('input')?.getAttribute('aria-label')).toBe('scale');
+    });
+
     it('initializes its bounds and value from the viewport', () => {
       expect(customElements.get(ViewportZoomRange.metadata.tag)).toBe(ViewportZoomRange);
       expect(range.min).toBe(0.25);

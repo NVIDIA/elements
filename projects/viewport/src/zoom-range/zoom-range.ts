@@ -4,12 +4,17 @@
 import { html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { I18nController, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { SliderFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { ViewportAccessoryMixin } from '../internal/mixins/viewport-accessory.js';
 import type { ViewportTarget } from '../internal/viewport.types.js';
 import styles from './zoom-range.css?inline';
+
+const i18nDefaults = {
+  scale: 'scale'
+} satisfies I18nDefaults;
 
 /**
  * @element nve-viewport-zoom-range
@@ -48,7 +53,7 @@ export class ViewportZoomRange extends ViewportAccessoryMixin(SliderFormControlM
     return this.valueAsNumber;
   }
 
-  readonly #i18nController: I18nController<this> = new I18nController<this>(this);
+  readonly #i18nController: I18nController<this> = new I18nController<this>(this, i18nDefaults);
   /** Enables updating internal strings for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
