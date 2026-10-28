@@ -13,6 +13,7 @@ import {
   audit,
   getFlattenedFocusableItems,
   hostAttr,
+  isFocusable,
   scopedRegistry,
   stateExpanded,
   stateHighlighted,
@@ -24,6 +25,7 @@ import {
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Checkbox } from '@nvidia-elements/core/checkbox';
+import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import type { Tree } from './tree.js';
 import styles from './tree-node.css?inline';
 import { updateNodeSelection } from './utils.js';
@@ -70,6 +72,15 @@ import { updateNodeSelection } from './utils.js';
 @scopedRegistry()
 @stateHighlighted()
 export class TreeNode extends LitElement {
+  /** Command to invoke on a node title click or Enter on its header. */
+  @property({ type: String }) command = '';
+
+  /** ID of the element that receives the command. */
+  @property({ type: String, reflect: true }) commandfor: string | null = null;
+
+  /** Direct command target, taking precedence over commandfor. */
+  @property({ attribute: false }) commandForElement: HTMLElement | null = null;
+
   /**
    * Determines if node is in an expanded state.
    */
@@ -126,6 +137,8 @@ export class TreeNode extends LitElement {
   #typeExpandableController = new TypeExpandableController(this);
 
   #typeSelectableController = new TypeSelectableController(this);
+
+  #typeCommandController = new TypeCommandController(this, { events: [] });
 
   get #isExpandable() {
     return this.expandable || this.expanded || !!this.nodes?.length;
@@ -225,7 +238,19 @@ export class TreeNode extends LitElement {
     }
   };
 
+  #invokeFromKeyboard(e: KeyboardEvent) {
+    if (e.code !== 'Enter' || e.defaultPrevented || e.repeat) {
+      return;
+    }
+    const origin = e.composedPath()[0];
+    const header = this.shadowRoot?.querySelector('[part="_node-header"]');
+    if (origin === header || origin === this) {
+      this.#typeCommandController.invoke();
+    }
+  }
+
   #onKeyup = (e: KeyboardEvent) => {
+    this.#invokeFromKeyboard(e);
     if (this.#isExpandable && e.code === 'ArrowLeft' && e.target === this) {
       this.close();
     }
@@ -247,6 +272,14 @@ export class TreeNode extends LitElement {
 
     if (this.selectable && (!hasFocusableElements || (e.target as HTMLElement).localName === 'a')) {
       this.#toggleSelection();
+    }
+
+    const path = e.composedPath();
+    const hasInteractiveTarget = path
+      .slice(0, path.indexOf(e.currentTarget as HTMLElement))
+      .some(target => target instanceof Element && isFocusable(target));
+    if (!hasInteractiveTarget && !e.defaultPrevented) {
+      this.#typeCommandController.invoke();
     }
   }
 

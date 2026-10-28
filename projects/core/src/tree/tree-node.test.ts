@@ -9,6 +9,166 @@ import '@nvidia-elements/core/tree/define.js';
 
 /* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
 
+describe('nve-tree-node - invoker commands', () => {
+  let fixture: HTMLElement;
+  let node: TreeNode;
+  let target: HTMLElement;
+  let handler = vi.fn<(event: Event) => void>();
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-tree behavior-expand behavior-select selectable="single">
+        <nve-tree-node command="--activate" commandfor="command-target" expanded>
+          <span>Parent</span>
+          <nve-tree-node command="--child" commandfor="command-target">Child</nve-tree-node>
+        </nve-tree-node>
+      </nve-tree>
+      <div id="command-target"></div>
+      <div id="other-target"></div>
+    `);
+    node = fixture.querySelector<TreeNode>('nve-tree-node')!;
+    target = fixture.querySelector<HTMLElement>('#command-target')!;
+    handler = vi.fn();
+    target.addEventListener('command', handler);
+    await elementIsStable(node);
+  });
+
+  afterEach(() => removeFixture(fixture));
+
+  it('should invoke once on a title click while preserving selection', async () => {
+    await emulateClick(node.querySelector('span')!);
+    await elementIsStable(node);
+
+    expect(handler).toHaveBeenCalledOnce();
+    expect(handler).toHaveBeenCalledWith(expect.objectContaining({ command: '--activate', source: node }));
+    expect(node.selected).toBe(true);
+  });
+
+  it('should prefer a direct target and resolve the attribute again when cleared', async () => {
+    const other = fixture.querySelector<HTMLElement>('#other-target')!;
+    const otherHandler = vi.fn();
+    other.addEventListener('command', otherHandler);
+    node.commandForElement = other;
+    await elementIsStable(node);
+    await emulateClick(node.querySelector('span')!);
+    expect(otherHandler).toHaveBeenCalledOnce();
+    expect(handler).not.toHaveBeenCalled();
+
+    node.commandForElement = null;
+    await elementIsStable(node);
+    await emulateClick(node.querySelector('span')!);
+    expect(handler).toHaveBeenCalledOnce();
+  });
+
+  it('should resolve a target set through the commandfor property', async () => {
+    node.removeAttribute('commandfor');
+    node.commandfor = 'command-target';
+    await elementIsStable(node);
+    await emulateClick(node.querySelector('span')!);
+    expect(handler).toHaveBeenCalledOnce();
+  });
+
+  it('should invoke once on Enter from the header', async () => {
+    const header = node.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    header.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true, composed: true }));
+    header.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true, composed: true }));
+    expect(handler).toHaveBeenCalledOnce();
+    expect(handler).toHaveBeenCalledWith(expect.objectContaining({ source: node }));
+  });
+
+  it('should preserve Space selection and arrow expansion without invoking', async () => {
+    const header = node.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    for (const code of ['Space', 'ArrowLeft']) {
+      header.dispatchEvent(new KeyboardEvent('keyup', { code, bubbles: true, composed: true }));
+    }
+    await elementIsStable(node);
+    expect(node.selected).toBe(true);
+    expect(node.expanded).toBe(false);
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it('should invoke only the child command on child activation', async () => {
+    const child = node.querySelector<TreeNode>('nve-tree-node')!;
+    await elementIsStable(child);
+    const title = child.shadowRoot!.querySelector<HTMLElement>('.node-title')!;
+    await emulateClick(title);
+    expect(handler).toHaveBeenCalledOnce();
+    expect(handler).toHaveBeenCalledWith(expect.objectContaining({ source: child }));
+
+    handler.mockClear();
+    const header = child.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    header.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true, composed: true }));
+    expect(handler).toHaveBeenCalledOnce();
+    expect(handler).toHaveBeenCalledWith(expect.objectContaining({ source: child }));
+  });
+
+  it.each(['prefix', 'suffix', 'content', ''])('should not invoke from an embedded button in slot "%s"', async slot => {
+    const button = document.createElement('button');
+    button.slot = slot;
+    button.textContent = 'Action';
+    node.append(button);
+    await elementIsStable(node);
+    await emulateClick(button);
+    button.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true, composed: true }));
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it.each(['prefix', 'suffix'])(
+    'should invoke from title text beside a %s button but not from that button',
+    async slot => {
+      const button = document.createElement('button');
+      button.slot = slot;
+      const buttonLabel = document.createElement('span');
+      buttonLabel.textContent = 'Action';
+      button.append(buttonLabel);
+      node.append(button);
+      await elementIsStable(node);
+
+      node.querySelector('span')!.click();
+      expect(handler).toHaveBeenCalledOnce();
+      expect(handler).toHaveBeenCalledWith(expect.objectContaining({ command: '--activate', source: node }));
+
+      handler.mockClear();
+      buttonLabel.click();
+      expect(handler).not.toHaveBeenCalled();
+    }
+  );
+
+  it('should not invoke from the disclosure control or checkbox', async () => {
+    const tree = fixture.querySelector<Tree>('nve-tree')!;
+    tree.selectable = 'multi';
+    await elementIsStable(tree);
+    await elementIsStable(node);
+    await emulateClick(node.shadowRoot!.querySelector<HTMLElement>('nve-icon-button')!);
+    await emulateClick(node.shadowRoot!.querySelector<HTMLInputElement>('input')!);
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it('should respect canceled title clicks and Enter events', async () => {
+    const label = node.querySelector('span')!;
+    label.addEventListener('click', event => event.preventDefault());
+    label.click();
+    const header = node.shadowRoot!.querySelector<HTMLElement>('[part="_node-header"]')!;
+    header.addEventListener('keyup', event => event.preventDefault());
+    header.dispatchEvent(
+      new KeyboardEvent('keyup', {
+        code: 'Enter',
+        bubbles: true,
+        composed: true,
+        cancelable: true
+      })
+    );
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it('should not invoke without a command', async () => {
+    node.command = '';
+    await elementIsStable(node);
+    await emulateClick(node.querySelector('span')!);
+    expect(handler).not.toHaveBeenCalled();
+  });
+});
+
 describe(TreeNode.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: TreeNode;

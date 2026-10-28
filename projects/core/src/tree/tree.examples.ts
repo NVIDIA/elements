@@ -53,6 +53,25 @@ export const Default = {
 };
 
 /**
+ * @summary Invoke commands from tree node titles to control another tree without event handlers. Click a title or press Enter on its header to open or close the target node.
+ */
+export const InvokerCommands = {
+  render: () => html`
+    <nve-tree>
+      <nve-tree-node command="--open" commandfor="tree-command-details">Show details</nve-tree-node>
+      <nve-tree-node command="--close" commandfor="tree-command-details">Hide details</nve-tree-node>
+    </nve-tree>
+    <nve-tree>
+      <nve-tree-node id="tree-command-details">
+        Details
+        <nve-tree-node>Model configuration</nve-tree-node>
+        <nve-tree-node>Training results</nve-tree-node>
+      </nve-tree-node>
+    </nve-tree>
+  `
+};
+
+/**
  * @summary Tree with border styling for enhanced visual separation and container definition, improving content structure perception.
  */
 export const Border = {
