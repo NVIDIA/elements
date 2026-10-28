@@ -12,7 +12,7 @@ const rule = noInvalidInvokerTriggers as unknown as JSRuleDefinition;
 const validElements =
   'nve-button, nve-icon-button, nve-menu-item, nve-sort-button, nve-tabs-item, nve-tag, nve-steps-item, nve-copy-button, nve-media-fullscreen-button, nve-media-loop-button, nve-media-mute-button, nve-media-pause-button, nve-media-pip-button, nve-media-seek-button';
 
-const commandElements = `${validElements}, nve-media-playback-rate-select, nve-media-time-range, nve-media-volume-range, nve-viewport-minimap, nve-viewport-zoom-range`;
+const commandElements = `${validElements}, nve-media-playback-rate-select, nve-media-time-range, nve-media-volume-range, nve-tree-node, nve-viewport-minimap, nve-viewport-zoom-range`;
 
 describe('noInvalidInvokerTriggers', () => {
   let tester: RuleTester;
@@ -66,6 +66,7 @@ describe('noInvalidInvokerTriggers', () => {
         '<nve-button commandfor="my-panel">Toggle</nve-button>',
         '<nve-icon-button commandfor="my-panel"></nve-icon-button>',
         '<nve-tag commandfor="my-panel">Tag</nve-tag>',
+        '<nve-tree-node command="--open" commandfor="my-panel">Open</nve-tree-node>',
         '<nve-media-pause-button commandfor="my-player"></nve-media-pause-button>',
         '<nve-media-pip-button commandfor="my-player"></nve-media-pip-button>',
         '<nve-media-playback-rate-select commandfor="my-player"></nve-media-playback-rate-select>',
@@ -97,6 +98,7 @@ describe('noInvalidInvokerTriggers', () => {
     'nve-media-playback-rate-select',
     'nve-media-time-range',
     'nve-media-volume-range',
+    'nve-tree-node',
     'nve-viewport-minimap',
     'nve-viewport-zoom-range'
   ])('should only allow command targeting on %s', element => {
