@@ -1,3 +1,15 @@
+## [2.18.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.2...@nvidia-elements/core-v2.18.3) (2026-10-28)
+
+### Bug Fixes
+
+* **code:** foundations utility functions ([aef8463](https://github.com/NVIDIA/elements/commit/aef846300b4861cc07c87ae32d844267302f62a3))
+* **core:** foundations utility functions ([4618981](https://github.com/NVIDIA/elements/commit/4618981acecdd4de0ed4b225c070a4506a6fd4fd))
+* **foundations:** utility exports ([9039bf0](https://github.com/NVIDIA/elements/commit/9039bf0c4fbeac17a16987b873c4de47d07fc313))
+* **markdown:** foundations utility functions ([1ed4bc6](https://github.com/NVIDIA/elements/commit/1ed4bc6dfe4eef0663ab78e450af9765a2265ae2))
+* **media:** foundations utility functions ([ee9b3c7](https://github.com/NVIDIA/elements/commit/ee9b3c7d18c04d3b1aa3c6bfef9dec528b9c0da1))
+* **monaco:** foundations utility functions ([a62e1db](https://github.com/NVIDIA/elements/commit/a62e1db32f0331108bb6518248cbf01bedb0076d))
+* **viewport:** foundations utility functions ([74fe7db](https://github.com/NVIDIA/elements/commit/74fe7db2d00c3b1cd99a99bfc97556a58d017899))
+
 ## [2.18.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.1...@nvidia-elements/core-v2.18.2) (2026-10-27)
 
 ### Features
