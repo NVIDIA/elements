@@ -70,6 +70,46 @@ describe('CommandBehaviorController', () => {
     vi.restoreAllMocks();
   });
 
+  it('should support explicit invocation without form state or automatic click handling', async () => {
+    fixture = await createFixture(html`<div id="target"></div>`);
+    const target = fixture.querySelector<HTMLElement>('#target')!;
+    const host = Object.assign(document.createElement('div'), {
+      command: '--test',
+      commandForElement: target,
+      addController: vi.fn()
+    });
+    fixture.append(host);
+    const controller = new TypeCommandController(host, { events: [] });
+    const handler = vi.fn();
+    target.addEventListener('command', handler);
+    controller.hostUpdated();
+
+    await emulateClick(host);
+    expect(handler).not.toHaveBeenCalled();
+    expect(controller.invoke()).toBe(true);
+    expect(handler).toHaveBeenCalledOnce();
+    expect(handler).toHaveBeenCalledWith(expect.objectContaining({ command: '--test', source: host }));
+  });
+
+  it.each(['disabled', 'readOnly'] as const)('should guard explicit invocation when %s', async state => {
+    fixture = await createFixture(html`<div id="target"></div>`);
+    const target = fixture.querySelector<HTMLElement>('#target')!;
+    const host = Object.assign(document.createElement('div'), {
+      command: '--test',
+      commandForElement: target,
+      disabled: false,
+      readOnly: false,
+      addController: vi.fn()
+    });
+    host[state] = true;
+    const controller = new TypeCommandController(host, { events: [] });
+    const handler = vi.fn();
+    target.addEventListener('command', handler);
+
+    expect(controller.invoke()).toBe(false);
+    expect(handler).not.toHaveBeenCalled();
+  });
+
   it('should dispatch command events to direct commandForElement targets', async () => {
     fixture = await createFixture(
       html`<command-behavior-controller-test-element></command-behavior-controller-test-element><div id="target"></div>`
