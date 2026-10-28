@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { setTimeout } from 'node:timers/promises';
 import { globSync } from 'glob';
 import { chromium } from 'playwright';
 import { preview, build } from 'vite';
@@ -115,8 +116,8 @@ export class VitePlaywrightRunner {
         const args = this.#browserServer.process().spawnargs;
         const userDataDir = args.find(arg => arg.startsWith('--user-data-dir='))?.slice('--user-data-dir='.length);
         if (!userDataDir) throw new Error('Chromium did not expose its isolated profile directory');
-        const port = fs.readFileSync(path.join(userDataDir, 'DevToolsActivePort'), 'utf8').split('\n')[0];
-        fs.writeFileSync(`${this.#portFile}-debugging`, port);
+        const port = await waitForDebuggingPort(userDataDir);
+        fs.writeFileSync(`${this.#portFile}-debugging`, String(port));
       } else {
         this.#browser = await chromium.launch({ args: this.#chromiumArgs });
       }
@@ -164,6 +165,26 @@ export class VitePlaywrightRunner {
     this.#browserServer = undefined;
     this.#server = undefined;
     if (failures.length) throw new AggregateError(failures, 'Failed to close Playwright runner');
+  }
+}
+
+/** Waits for Chromium to finish publishing its automatically assigned debugging port. */
+export async function waitForDebuggingPort(userDataDir, { timeoutMs = 10000 } = {}) {
+  const portFile = path.join(userDataDir, 'DevToolsActivePort');
+  const deadline = Date.now() + timeoutMs;
+
+  while (true) {
+    try {
+      const contents = await fs.promises.readFile(portFile, 'utf8');
+      const port = Number(contents.split('\n')[0]);
+      if (contents.includes('\n') && Number.isInteger(port) && port > 0 && port <= 65535) return port;
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+    }
+
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) throw new Error(`Timed out waiting for Chromium debugging port in ${portFile}`);
+    await setTimeout(Math.min(50, remaining));
   }
 }
 
