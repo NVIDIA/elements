@@ -94,6 +94,22 @@
     "./internal/state/index.js": {
       "types": "./dist/internal/state/index.d.ts",
       "default": "./dist/internal/state/index.js"
+    },
+    "./internal/i18n": {
+      "types": "./dist/internal/i18n/index.d.ts",
+      "default": "./dist/internal/i18n/index.js"
+    },
+    "./internal/i18n/index.js": {
+      "types": "./dist/internal/i18n/index.d.ts",
+      "default": "./dist/internal/i18n/index.js"
+    },
+    "./i18n": {
+      "types": "./dist/i18n/index.d.ts",
+      "default": "./dist/i18n/index.js"
+    },
+    "./i18n/index.js": {
+      "types": "./dist/i18n/index.d.ts",
+      "default": "./dist/i18n/index.js"
     }
   },
   "sideEffects": [
