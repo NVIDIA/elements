@@ -1,3 +1,29 @@
+## [2.0.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.9...@nvidia-elements/forms-v2.0.10) (2026-10-28)
+
+### Features
+
+* **core:** tree node invoker command support ([2d889e4](https://github.com/NVIDIA/elements/commit/2d889e485b5aad0980731821691973d57c2ee343))
+* **foundations:** scroll box ([fa9d947](https://github.com/NVIDIA/elements/commit/fa9d947d076a9cbc356a307aa0fb1f219bb701a4))
+* **lint:** new rules ([1352a3e](https://github.com/NVIDIA/elements/commit/1352a3e579e6a2e3d4bff29c03c91379dbd30f93))
+
+### Bug Fixes
+
+* **cli:** update bun to 1.4.4 ([dc0a9d4](https://github.com/NVIDIA/elements/commit/dc0a9d4079cf3d8c7251ed4dfb6ff8ce728f8be1))
+* **code:** foundations utility functions ([aef8463](https://github.com/NVIDIA/elements/commit/aef846300b4861cc07c87ae32d844267302f62a3))
+* **core:** add min-width for fit-text styling for filter chip ([7bf423e](https://github.com/NVIDIA/elements/commit/7bf423ed11413e9aa33ca4f28658a1bcac011d26))
+* **core:** foundations utility functions ([4618981](https://github.com/NVIDIA/elements/commit/4618981acecdd4de0ed4b225c070a4506a6fd4fd))
+* **core:** migrate runtime to static lint checks ([e616f85](https://github.com/NVIDIA/elements/commit/e616f85788c699b6c89c410625a23481834e48dd))
+* **core:** observe only host hidden changes for popover visibility ([3a2b58d](https://github.com/NVIDIA/elements/commit/3a2b58d26b7223677d8f23f8643dd6d1cc173882))
+* **docs:** prevent code block copy buttons from overflowing the page ([6972e4b](https://github.com/NVIDIA/elements/commit/6972e4b7e3dfaa936a650167c47a3d6d0cca2a35))
+* **forms:** enable invoke method for controller ([68c8aa3](https://github.com/NVIDIA/elements/commit/68c8aa33a4d9254601b56b219ae6cc4268b54306))
+* **foundations:** missing dist publish ([5521fc0](https://github.com/NVIDIA/elements/commit/5521fc0d55e0542d028727531267241bc31f9401))
+* **foundations:** utility exports ([9039bf0](https://github.com/NVIDIA/elements/commit/9039bf0c4fbeac17a16987b873c4de47d07fc313))
+* **lint:** add tree invoker command support ([bde2265](https://github.com/NVIDIA/elements/commit/bde2265de1ed48981de745d1f4ca733d28b65df0))
+* **markdown:** foundations utility functions ([1ed4bc6](https://github.com/NVIDIA/elements/commit/1ed4bc6dfe4eef0663ab78e450af9765a2265ae2))
+* **media:** foundations utility functions ([ee9b3c7](https://github.com/NVIDIA/elements/commit/ee9b3c7d18c04d3b1aa3c6bfef9dec528b9c0da1))
+* **monaco:** foundations utility functions ([a62e1db](https://github.com/NVIDIA/elements/commit/a62e1db32f0331108bb6518248cbf01bedb0076d))
+* **viewport:** foundations utility functions ([74fe7db](https://github.com/NVIDIA/elements/commit/74fe7db2d00c3b1cd99a99bfc97556a58d017899))
+
 ## [2.0.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.8...@nvidia-elements/forms-v2.0.9) (2026-10-23)
 
 ### Features
