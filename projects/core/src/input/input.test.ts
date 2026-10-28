@@ -38,6 +38,21 @@ describe(Input.metadata.tag, () => {
     expect(element.hasAttribute('container')).toBe(true);
   });
 
+  it('should honor an explicit maximum width with fit-text', async () => {
+    element.querySelector('label').remove();
+    const input = element.querySelector('input');
+    input.value = '123456789012345678901234567890';
+    element.fitText = true;
+    await elementIsStable(element);
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    expect(element.getBoundingClientRect().width).toBeGreaterThan(80);
+
+    element.style.setProperty('--max-width', '80px');
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    expect(element.getBoundingClientRect().width).toBeLessThanOrEqual(80);
+    expect(input.getBoundingClientRect().width).toBeLessThanOrEqual(80);
+  });
+
   it('should reset input value to initial attribute value via reset()', async () => {
     const input = fixture.querySelector('input');
     input.setAttribute('value', 'initial');
