@@ -135,7 +135,8 @@ slot {
   --box-shadow: none;
 }
 
-::slotted(nve-toolbar[slot='subheader']) ::slotted(nve-toolbar[slot='subfooter']),
+::slotted(nve-toolbar[slot='subheader']),
+::slotted(nve-toolbar[slot='subfooter']),
 ::slotted(nve-toolbar[slot='footer']) {
   height: fit-content;
 }
