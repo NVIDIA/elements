@@ -33,12 +33,13 @@ export const data = {
   // Generate URLs in the format /docs/elements/{component-name}/examples/ or package-specific component docs paths.
   permalink: (/** @type {ExamplesPageData} */ data) => {
     const filePath = data.component.filePathStem;
-    if (filePath.includes('/viewport/')) return `${data.component.url}examples/`;
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
     else if (filePath.includes('/media/')) dir = 'media';
     else if (filePath.includes('/markdown/')) dir = '';
+    else if (filePath.includes('/foundations/')) dir = 'foundations';
+    else if (filePath.includes('/viewport/')) return `${data.component.url}examples/`;
     return `/docs/${dir}/${data.component.fileSlug}/examples/`;
   }
 };
