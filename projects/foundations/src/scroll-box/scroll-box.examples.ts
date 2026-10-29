@@ -3,6 +3,7 @@
 
 import { html } from 'lit';
 import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/foundations/scroll-box/define.js';
 
 export default {
@@ -57,6 +58,26 @@ export const Vertical = {
   `
 };
 
+/**
+ * @summary Command buttons navigate to the first message, latest message, or a specific position. Use for conversation history or activity logs without custom event handlers.
+ */
+export const InvokerCommand = {
+  render: () => html`
+    <div nve-layout="column gap:md">
+      <div nve-layout="row gap:sm align:wrap">
+        <nve-button commandfor="command-messages" command="--scroll-to" value="start">First message</nve-button>
+        <nve-button commandfor="command-messages" command="--scroll-to" value="end">Latest message</nve-button>
+        <nve-button commandfor="command-messages" command="--scroll-to" value="240">Jump to 240px</nve-button>
+      </div>
+      <nve-scroll-box id="command-messages" orientation="vertical" scroll-shadow aria-label="Conversation history" style="block-size: 12rem;">
+        <div nve-layout="column gap:md pad:md">
+          ${Array.from({ length: 20 }, (_, index) => html`<p nve-text="body">Conversation message ${index + 1}</p>`)}
+        </div>
+      </nve-scroll-box>
+    </div>
+  `
+};
+
 /** @summary Automatic scrolling follows new messages while allowing readers to review earlier content. Use for chat responses or logs; return to the latest message to resume following. */
 export const Follow = {
   render: () => html`
@@ -77,6 +98,47 @@ export const Follow = {
         messages.append(message);
       });
     </script>
+  `
+};
+
+/**
+ * @summary A fixed jump button returns readers to the latest message using the scroll command. Use for conversations or logs; the button appears while more content follows and hides once readers reach the latest message.
+ * @tags pattern
+ */
+export const JumpToLatest = {
+  render: () => html`
+    <!-- Anchor the fixed button to this wrapper instead of the scrolling host. -->
+    <div style="contain: layout;">
+      <nve-scroll-box id="latest-messages" orientation="vertical" scroll-shadow aria-label="Conversation" style="block-size: 12rem; contain: none;">
+        <div nve-layout="column gap:md pad:md">
+          ${Array.from({ length: 12 }, (_, index) => html`<p nve-text="body">Conversation message ${index + 1}</p>`)}
+        </div>
+        <nve-icon-button
+          id="jump-to-latest"
+          icon-name="arrow"
+          direction="down"
+          aria-label="Jump to latest message"
+          commandfor="latest-messages"
+          command="--scroll-to"
+          value="end"
+        ></nve-icon-button>
+      </nve-scroll-box>
+    </div>
+    <style>
+      #jump-to-latest {
+        position: fixed;
+        inset-block-end: var(--nve-ref-space-md);
+        inset-inline-end: var(--nve-ref-space-md);
+        z-index: 2;
+        visibility: hidden;
+      }
+
+      @container nve-scroll-box scroll-state(scrollable: bottom) {
+        #jump-to-latest {
+          visibility: visible;
+        }
+      }
+    </style>
   `
 };
 
