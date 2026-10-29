@@ -99,6 +99,122 @@ describe(ScrollBox.metadata.tag, () => {
     expect(element.scrollTop).toBe(40);
   });
 
+  function scrollCommand(value: string) {
+    const source = document.createElement('button');
+    source.value = value;
+    element.dispatchEvent(new CommandEvent('command', { command: '--scroll-to', source }));
+  }
+
+  it.each(['both', 'vertical', 'horizontal'] as const)(
+    'should scroll to pixels, start, and the current end in %s orientation',
+    async orientation => {
+      element.orientation = orientation;
+      await elementIsStable(element);
+      element.scrollTo(40, 50);
+      element.style.scrollBehavior = 'smooth';
+      const horizontal = orientation === 'horizontal';
+      const otherPosition = horizontal ? element.scrollTop : element.scrollLeft;
+      scrollCommand(' 120 ');
+      expect(horizontal ? element.scrollLeft : element.scrollTop).toBe(120);
+      expect(horizontal ? element.scrollTop : element.scrollLeft).toBe(otherPosition);
+      scrollCommand('start');
+      expect(horizontal ? element.scrollLeft : element.scrollTop).toBe(0);
+      content.style.cssText = 'width: 800px; height: 700px;';
+      scrollCommand('end');
+      expect(horizontal ? element.scrollLeft : element.scrollTop).toBe(
+        horizontal ? element.scrollWidth - element.clientWidth : element.scrollHeight - element.clientHeight
+      );
+    }
+  );
+
+  it('should pass fractional offsets to native scrolling and let the browser clamp numeric positions', () => {
+    const scroll = vi.spyOn(element, 'scrollTo');
+    scrollCommand('120.5');
+    expect(scroll).toHaveBeenLastCalledWith({ top: 120.5, behavior: 'instant' });
+    expect(Math.abs(element.scrollTop - 120.5)).toBeLessThanOrEqual(0.5);
+    scrollCommand('10000');
+    expectBottom();
+    scrollCommand('-100');
+    expect(element.scrollTop).toBe(0);
+  });
+
+  it('should use native negative horizontal coordinates in RTL', async () => {
+    element.orientation = 'horizontal';
+    element.dir = 'rtl';
+    await elementIsStable(element);
+    scrollCommand('end');
+    expect(element.scrollLeft).toBe(element.clientWidth - element.scrollWidth);
+    scrollCommand('-80');
+    expect(element.scrollLeft).toBe(-80);
+    scrollCommand('start');
+    expect(element.scrollLeft).toBe(0);
+  });
+
+  it.each(['', ' ', 'NaN', 'Infinity', '-Infinity', '120px', 'invalid'])(
+    'should ignore invalid command value "%s"',
+    value => {
+      element.scrollTop = 80;
+      const scroll = vi.spyOn(element, 'scrollTo');
+      scrollCommand(value);
+      expect(scroll).not.toHaveBeenCalled();
+      expect(element.scrollTop).toBe(80);
+    }
+  );
+
+  it('should ignore missing or unsupported sources, unrelated commands, and ordinary events', () => {
+    const scroll = vi.spyOn(element, 'scrollTo');
+    element.dispatchEvent(new CommandEvent('command', { command: '--scroll-to' }));
+    element.dispatchEvent(new CommandEvent('command', { command: '--scroll-to', source: content }));
+    const source = document.createElement('button');
+    source.value = 'end';
+    element.dispatchEvent(new CommandEvent('command', { command: '--other', source }));
+    element.dispatchEvent(new Event('command'));
+    expect(scroll).not.toHaveBeenCalled();
+  });
+
+  it('should only handle commands targeted directly at this scroll box', () => {
+    const source = document.createElement('button');
+    source.value = 'end';
+    const scroll = vi.spyOn(element, 'scrollTo');
+    content.dispatchEvent(new CommandEvent('command', { command: '--scroll-to', source, bubbles: true }));
+    expect(scroll).not.toHaveBeenCalled();
+  });
+
+  it('should accept native button commands', () => {
+    element.id = 'command-messages';
+    const source = document.createElement('button');
+    source.setAttribute('commandfor', element.id);
+    source.setAttribute('command', '--scroll-to');
+    source.value = 'end';
+    fixture.append(source);
+    source.click();
+    expectBottom();
+  });
+
+  it('should pause following on a command away and resume on a command to the end', async () => {
+    element.autoScroll = 'follow';
+    await vi.waitFor(() => expectBottom());
+    scrollCommand('start');
+    content.style.height = '700px';
+    await measureContent();
+    expect(element.scrollTop).toBe(0);
+    scrollCommand('end');
+    content.style.height = '900px';
+    await vi.waitFor(() => expectBottom());
+  });
+
+  it('should remove command handling while disconnected and restore it once on reconnection', async () => {
+    element.remove();
+    const scroll = vi.spyOn(element, 'scrollTo');
+    scrollCommand('end');
+    expect(scroll).not.toHaveBeenCalled();
+    fixture.append(element);
+    await elementIsStable(element);
+    scrollCommand('end');
+    expect(scroll).toHaveBeenCalledTimes(1);
+    expectBottom();
+  });
+
   it('should preserve the scroll position when auto scrolling is off', async () => {
     element.scrollTop = 80;
     content.style.height = '700px';

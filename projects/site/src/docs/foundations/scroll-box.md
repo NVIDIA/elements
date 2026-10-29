@@ -26,6 +26,10 @@
 
 {% example '@nvidia-elements/foundations/scroll-box/scroll-box.examples.json' 'HiddenScrollbar' '{ "layer": "container" }' %}
 
+## Scroll Command
+
+{% example '@nvidia-elements/foundations/scroll-box/scroll-box.examples.json' 'InvokerCommand' '{ "layer": "container" }' %}
+
 ## Native Scrolling APIs
 
 Use the host's native methods, properties, and events. Listen for `scroll` and `scrollend` directly on the host; element scroll events do not bubble. RTL scrolling retains native coordinates.
@@ -41,3 +45,7 @@ scrollBox.addEventListener('scroll', () => {
 ## Automatic Scrolling
 
 {% example '@nvidia-elements/foundations/scroll-box/scroll-box.examples.json' 'Follow' '{ "layer": "container" }' %}
+
+## Jump to Latest
+
+{% example '@nvidia-elements/foundations/scroll-box/scroll-box.examples.json' 'JumpToLatest' '{ "layer": "container" }' %}

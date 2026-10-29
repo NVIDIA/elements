@@ -238,6 +238,7 @@ export default function (eleventyConfig) {
       .getFilteredByGlob([
         'src/docs/elements/*.md',
         'src/docs/elements/data-grid/index.md',
+        'src/docs/foundations/*.md',
         'src/docs/code/*.md',
         'src/docs/monaco/*.md',
         'src/docs/media/*.md',
