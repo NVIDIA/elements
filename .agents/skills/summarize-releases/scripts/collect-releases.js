@@ -157,12 +157,13 @@ function parseConventionalCommit(subject, message = subject) {
 
 function extractChangelogSection(changelog, version) {
   const lines = changelog.split(/\r?\n/);
-  const headingPattern = /^##\s+(?:<small>)?([^\s<]+)\s+\((\d{4}-\d{2}-\d{2})\)(?:<\/small>)?\s*$/;
+  const headingPattern =
+    /^##\s+(?:<small>)?(?:\[([^\]]+)\]\([^)]*\)|([^\s<]+))\s+\((\d{4}-\d{2}-\d{2})\)(?:<\/small>)?\s*$/;
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index].match(headingPattern);
 
-    if (match?.[1] !== version) {
+    if ((match?.[1] ?? match?.[2]) !== version) {
       continue;
     }
 
@@ -173,7 +174,7 @@ function extractChangelogSection(changelog, version) {
     }
 
     return {
-      date: match[2],
+      date: match[3],
       notes: lines
         .slice(index + 1, end)
         .join('\n')

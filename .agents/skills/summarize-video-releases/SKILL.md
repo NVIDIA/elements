@@ -1,6 +1,6 @@
 ---
 name: summarize-video-releases
-description: Create the 24–36 second marketing video for a monthly NVIDIA Elements “What’s New” post, rendered to projects/site/public/static/video/releases/MM-YYYY.webm from real Elements components, with feature snapshots inserted into the post. Use after the summarize-releases skill creates or updates a post, and whenever someone asks for a release video, what’s new video, monthly recap clip, changelog teaser, social video, or animated summary of Elements releases, even if they do not say “video skill”.
+description: Create the 24–60 second marketing video for a monthly NVIDIA Elements “What’s New” post, rendered to projects/site/public/static/video/releases/MM-YYYY.webm from real Elements components, with feature snapshots inserted into the post. Use after the summarize-releases skill creates or updates a post, and whenever someone asks for a release video, what’s new video, monthly recap clip, changelog teaser, social video, or animated summary of Elements releases, even if they do not say “video skill”.
 ---
 
 # Summarize Video Releases
@@ -15,7 +15,7 @@ The scripts own everything that must be exact; you own the story and the markup.
 
 - `scripts/read-post.js` parses the post into a JSON outline and resolves the input and output paths.
 - You write a storyboard JSON: scene order, copy, durations, and `nve-*` demo markup. See [references/storyboard.md](references/storyboard.md).
-- `scripts/compose-video.js` turns the storyboard into one static HTML page from `assets/video-shell.html`. It computes all timing, escapes code, and rejects videos outside 24–36 seconds.
+- `scripts/compose-video.js` turns the storyboard into one static HTML page from `assets/video-shell.html`. It computes all timing, escapes code, and rejects videos outside 24–60 seconds.
 - `scripts/render-video.js` serves the page with Elements CDN URLs mapped to this repository’s built packages, captures frames on a virtual clock, and encodes VP9 with the browser’s built-in WebCodecs encoder. `scripts/webm.js` writes the WebM file. The video workflow uses no external encoder: VP9 and its encoder are royalty-free and BSD-licensed. The renderer uses the pinned Sharp dependency to convert PNG screenshots to lossless WebP posters and stills. Output is deterministic: the same storyboard renders the same video.
 
 ## Prerequisites
@@ -56,12 +56,13 @@ Read [references/storyboard.md](references/storyboard.md) before planning. It de
 
 Make a short plan before writing JSON:
 
-1. Choose two to four highlights for their own scenes. Favor changes a viewer can see: a new component, a new command, a new lint rule. When the month includes CLI, MCP, lint, or agent-skill changes, give one of them a `terminal` or `fix` scene, because agent tooling is what sets Elements apart.
-2. Put the remaining user-facing changes in one `list` scene. Mention breaking changes there only if the post covers them, and keep the wording neutral.
-3. Assign each highlight a scene type and layout, and write its headline (six words or fewer) and optional opening line.
-4. Add up durations. Stay within 24–36 seconds. Use the composer's longer scene defaults and allow at least 4.8 seconds for a feature. Keep entrance animations and cue offsets at their normal speed so the added scene time gives viewers longer to read the completed view.
+1. Choose two to four highlights for their own scenes, prioritizing new components, public APIs, commands, and other new capabilities. Use bug fixes for dedicated scenes only when the month has too few distinct, material features to tell the story. New lint rules count as features even when demonstrated with a `fix` scene. When choosing among features, include a new CLI, MCP, lint, or agent-skill capability when available.
+2. Add an additional feature slide from the remaining new capabilities. Consider a material bug fix only when there are too few features. Give it a distinct user benefit and a real demo or command result, using the existing `feature`, `terminal`, or `fix` scene types. Plan its post snapshot with the other featured scenes. Skip the extra slide when the post has no further material change to show; do not fill the time with minor fixes.
+3. Put the remaining user-facing changes in one `list` scene. Mention breaking changes there only if the post covers them, and keep the wording neutral.
+4. Assign each highlight a scene type and layout, and write its headline (six words or fewer) and optional opening line.
+5. Add up durations. Stay within 24–60 seconds, allowing the additional slide and completed demos time to read. Use the composer's scene defaults as starting points and allow at least 4.8 seconds for a feature. Extend scenes when their content needs it; keep shorter videos when the story is complete. Keep entrance animations and cue offsets at their normal speed.
 
-Map each `feature`, `terminal`, or `fix` scene to the heading and paragraph that explain it in the post, and plan one snapshot for each. Keep the smaller updates in the video's `list` scene, typically titled “Also in …”, and in the post's Markdown text. Do not publish snapshots of list scenes, title cards, hooks, or end cards; their text adds no visual benefit to the post.
+Apply the same feature-first selection to the published pictures: each snapshot comes from a selected scene, and bug fixes get pictures only when they qualify for a dedicated scene. Map each `feature`, `terminal`, or `fix` scene to the heading and paragraph that explain it in the post, and plan one snapshot for each. Keep the smaller updates in the video's `list` scene, typically titled “Also in …”, and in the post's Markdown text. Do not publish snapshots of list scenes, title cards, hooks, or end cards; their text adds no visual benefit to the post.
 
 Every claim, number, and example must trace back to the post or to command output you ran. Leave out anything you cannot trace.
 
@@ -126,7 +127,7 @@ Add `--channel chrome` when a scene includes a `<video>` element without a poste
 
 Confirm that:
 
-- the duration is between 24 and 36 seconds.
+- the duration is between 24 and 60 seconds.
 - the file is under about 5 MB. For a larger file, render again with a higher `--quality` value (default 34; the range is 0–63, higher is smaller).
 - `errors` and `network` are empty, or you can explain them.
 - the poster shows the title scene cleanly.
