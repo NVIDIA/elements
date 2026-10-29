@@ -12,7 +12,9 @@ describe('steps lighthouse report', () => {
       <nve-steps>
         <nve-steps-item>Step 1</nve-steps-item>
         <nve-steps-item selected>Step 2</nve-steps-item>
-        <nve-steps-item disabled>Step 3</nve-steps-item>
+        <!-- Mirror ElementInternals.ariaDisabled for the Lighthouse contrast audit. -->
+        <!-- https://github.com/dequelabs/axe-core/pull/5080 -->
+        <nve-steps-item disabled aria-disabled="true">Step 3</nve-steps-item>
       </nve-steps>
       <script type="module">
         import '@nvidia-elements/core/steps/define.js';

@@ -30,8 +30,7 @@ function isResizeMessage(value: unknown): value is ResizeMessage {
   );
 }
 
-const iframeScript = (documentId: number) => /* html */ `
-  <script type="module">
+const iframeThemeScript = `
     window.addEventListener('message', event => {
       if (event.source !== window.parent || typeof event.data !== 'string') {
         return;
@@ -51,9 +50,18 @@ const iframeScript = (documentId: number) => /* html */ `
       document.documentElement.setAttribute('nve-theme', message.theme);
       document.documentElement.style.colorScheme = message.theme;
     });
+`;
+
+const iframeScript = (documentId: number) => /* html */ `
+  <script type="module">
+    ${iframeThemeScript}
 
     let nativeHeight = CSS.supports('frame-sizing', 'content-height') && typeof window.requestResize === 'function';
     let previousWidth;
+    if (nativeHeight) {
+      // Establish the initial viewport before the load handler releases its height.
+      document.documentElement.getBoundingClientRect();
+    }
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.target === document.body) {

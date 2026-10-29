@@ -129,6 +129,20 @@ export class LighthouseRunner {
       }
     };
 
+    if (report.scores.performance < 100) {
+      console.log(
+        `lighthouse-runner: performance diagnostics for ${name}`,
+        JSON.stringify(
+          {
+            score: report.scores.performance,
+            metrics: runnerResult.lhr.audits.metrics?.details?.items?.[0]
+          },
+          null,
+          2
+        )
+      );
+    }
+
     const dist = resolve(`.${RUNNER_ID}/dist/${name}/`);
 
     if (!process.env.CI) {
