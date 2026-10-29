@@ -61,6 +61,7 @@
     "lint:fix": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/foundations": "workspace:*",
     "lit": "catalog:"
   },
   "peerDependencies": {

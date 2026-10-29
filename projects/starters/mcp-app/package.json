@@ -15,6 +15,7 @@
     "@modelcontextprotocol/server": "catalog:",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/foundations": "workspace:*",
     "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/media": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
