@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import '@nvidia-elements/scene/scene/define.js';
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 import { ScenePyramids } from '@nvidia-elements/scene/pyramids';
 
 define(ScenePyramids);

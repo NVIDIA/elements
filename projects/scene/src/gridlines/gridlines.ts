@@ -4,7 +4,8 @@
 import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
-import { positiveFiniteOr, useStyles } from '@nvidia-elements/core/internal';
+import { positiveFiniteOr } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { parseCSSColor } from '../internal/color/color.js';
 import { sameRGBA } from '../internal/color/rgba.js';
 import type { RGBA } from '../internal/color/types.js';

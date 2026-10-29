@@ -11,7 +11,7 @@ import {
 } from '../internal/composition/frame/state.js';
 import { getWorldPoint, getLocalPoint } from '../internal/composition/frame/points.js';
 import type { Vec3 } from '../internal/math/types.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { MarkerLayerElement } from '../internal/layers/markers/layer-element.js';
 import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/layers/markers/buffer.js';
 import {

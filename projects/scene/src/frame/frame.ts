@@ -4,7 +4,7 @@
 import { html, LitElement, type PropertyValues, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { validateFrameName } from '../internal/composition/frame/registry.js';
 import { FRAME_TRANSFORM } from '../internal/diagnostics/errors.js';
 import { diagnosticReporterService } from '../internal/diagnostics/reporter.service.js';

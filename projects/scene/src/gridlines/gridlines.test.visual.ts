@@ -244,7 +244,7 @@ function depthTemplate(): string {
       <nve-scene-triangles data-height="1"></nve-scene-triangles>
     </nve-scene>
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneGridlines } from '../../src/gridlines/gridlines.ts';
@@ -274,7 +274,7 @@ function themeTemplate(): string {
       <nve-scene-gridlines pattern="checkerboard" count="2"></nve-scene-gridlines>
     </nve-scene>
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneGridlines } from '../../src/gridlines/gridlines.ts';
@@ -301,7 +301,7 @@ function checkerboardTemplate(theme: string): string {
     ${scene('Minified squares', grid().replace('count="2"', 'count="2000" spacing="0.001"').replace('--color: red', '--color: black').replace('--alternate-color: blue', '--alternate-color: white'))}
     ${scene('Perspective checkerboard', grid().replace('count="2"', 'count="20"'), true)}
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneFrame } from '../../src/frame/frame.ts';

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { property } from 'lit/decorators/property.js';
 import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color/color.js';
 import { MARKER } from '../internal/records/layouts/built-ins.js';

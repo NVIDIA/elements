@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import '@nvidia-elements/scene/frame/define.js';
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 import { SceneModel } from '@nvidia-elements/scene/model';
 
 define(SceneModel);

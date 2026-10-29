@@ -406,7 +406,7 @@ function meshT2Template(): string {
       </nve-scene-mesh>
     </nve-scene>
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneMesh } from '../../src/mesh/mesh.ts';
@@ -460,7 +460,7 @@ function pickingT2Template(): string {
         consoleError(...values);
       };
       globalThis.getPickingValidationErrors = () => [...validationErrors];
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCubes } from '../../src/cubes/cubes.ts';
       import { SceneMesh } from '../../src/mesh/mesh.ts';
@@ -486,7 +486,7 @@ function cameraT2Template(): string {
       <nve-scene-cubes source='[{"position":[6,0,0],"size":[2,2,2],"color":"rgb(255 0 0)"}]'></nve-scene-cubes>
     </nve-scene>
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneFrame } from '../../src/frame/frame.ts';
