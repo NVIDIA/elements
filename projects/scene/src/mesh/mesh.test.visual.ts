@@ -14,7 +14,7 @@ describe('scene mesh visual runtime', () => {
           <nve-scene-mesh id="mesh" color="#76b900"></nve-scene-mesh>
         </nve-scene>
         <script type="module">
-          import { define } from '@nvidia-elements/core/internal';
+          import { define } from '@nvidia-elements/foundations/internal/define';
           import { SceneCamera } from '../../src/camera/camera.ts';
           import { Scene } from '../../src/scene/scene.ts';
           import { SceneMesh } from '../../src/mesh/mesh.ts';

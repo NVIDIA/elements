@@ -169,7 +169,7 @@ function sceneTemplate(layers: string): string {
       ${layers}
     </nve-scene>
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneAxes } from '../../src/axes/axes.ts';
