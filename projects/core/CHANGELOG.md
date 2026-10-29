@@ -1,3 +1,9 @@
+## [2.20.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.19.1...@nvidia-elements/core-v2.20.0) (2026-10-29)
+
+### Features
+
+* **core:** joystick ([a4461e1](https://github.com/NVIDIA/elements/commit/a4461e10930ec198bc43b846f7b090f5db70c371))
+
 ## [2.19.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.19.0...@nvidia-elements/core-v2.19.1) (2026-10-29)
 
 ### Features
