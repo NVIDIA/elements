@@ -25,10 +25,10 @@ This product includes the following bundled third-party software:
 - @inquirer/prompts v8.7.5 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
-- @modelcontextprotocol/ext-apps v2.0.3 [MIT] (used by: @nvidia-elements/cli)
+- @modelcontextprotocol/ext-apps v2.0.4 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Olivier Chafik
 
-- @modelcontextprotocol/server v2.2.0 [MIT] (used by: @nvidia-elements/cli)
+- @modelcontextprotocol/server v2.4.0 [Apache-2.0] (used by: @nvidia-elements/cli)
   Copyright: Anthropic, PBC (https://anthropic.com)
 
 - @pnpm/catalogs.config v0.1.0 [MIT] (used by: @nvidia-elements/pi)
@@ -76,7 +76,7 @@ This product includes the following bundled third-party software:
 - lit-html v3.3.3 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/monaco)
   Copyright: Google LLC
 
-- markdown-it v15.0.1 [MIT] (used by: @nvidia-elements/markdown)
+- markdown-it v15.0.3 [MIT] (used by: @nvidia-elements/markdown)
   Copyright: Unknown
 
 - marked v18.0.14 [MIT] (used by: @nvidia-elements/cli)
@@ -100,7 +100,7 @@ This product includes the following bundled third-party software:
 - ora v9.4.1 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.24 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
+- publint v0.3.25 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Bjorn Lu
 
 - sanitize-html v2.18.1 [MIT] (used by: @nvidia-elements/pi)
@@ -112,7 +112,7 @@ This product includes the following bundled third-party software:
 - yargs v18.2.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Unknown
 
-- zod v4.5.4 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
+- zod v4.6.7 [MIT] (used by: @nvidia-elements/cli, @nvidia-elements/pi)
   Copyright: Colin McDonnell <zod@colinhacks.com>
 
 ==============================================================================
@@ -123,6 +123,7 @@ The following bundled components are provided under the Apache-2.0 license:
 
 @eslint/css v2.0.1 - Copyright Nicholas C. Zakas
 @eslint/json v2.1.1 - Copyright Nicholas C. Zakas
+@modelcontextprotocol/server v2.4.0 - Copyright Anthropic, PBC (https://anthropic.com)
 
                                  Apache License
                            Version 2.0, January 2004
@@ -346,8 +347,7 @@ The following bundled components are provided under the MIT license:
 @html-eslint/eslint-plugin v0.67.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.67.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @inquirer/prompts v8.7.5 - Copyright Simon Boudrias <admin@simonboudrias.com>
-@modelcontextprotocol/ext-apps v2.0.3 - Copyright Olivier Chafik
-@modelcontextprotocol/server v2.2.0 - Copyright Anthropic, PBC (https://anthropic.com)
+@modelcontextprotocol/ext-apps v2.0.4 - Copyright Olivier Chafik
 @pnpm/catalogs.config v0.1.0 - Copyright Unknown
 @pnpm/exportable-manifest v7.0.3 - Copyright Unknown
 @pnpm/read-project-manifest v6.0.6 - Copyright Unknown
@@ -360,7 +360,7 @@ fflate v0.8.3 - Copyright Arjun Barrett <arjunbarrett@gmail.com>
 html-format v1.1.7 - Copyright Mohamed Akram
 ignore v7.0.12 - Copyright kael
 ignore v7.0.6 - Copyright kael
-markdown-it v15.0.1 - Copyright Unknown
+markdown-it v15.0.3 - Copyright Unknown
 marked v18.0.14 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
@@ -368,11 +368,11 @@ monaco-editor v0.57.0 - Copyright Microsoft Corporation
 open v11.0.4 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.4.1 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-publint v0.3.24 - Copyright Bjorn Lu
+publint v0.3.25 - Copyright Bjorn Lu
 sanitize-html v2.18.1 - Copyright Apostrophe Technologies, Inc.
 ts-morph v28.0.0 - Copyright David Sherret
 yargs v18.2.0 - Copyright Unknown
-zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
+zod v4.6.7 - Copyright Colin McDonnell <zod@colinhacks.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
