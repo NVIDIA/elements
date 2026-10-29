@@ -143,6 +143,54 @@ describe('define', () => {
     expect(warn).not.toHaveBeenCalled();
   });
 
+  it('should leave an existing registry entry unchanged', () => {
+    const registry = new CustomElementRegistry();
+    const element = createElement();
+    defineElement(element, registry);
+    const defineSpy = vi.spyOn(registry, 'define');
+    defineElement(element, registry);
+    expect(registry.get(element.metadata.tag)).toBe(element);
+    expect(defineSpy).not.toHaveBeenCalled();
+  });
+
+  it('should register descendants globally when scoped registries are unavailable', async () => {
+    const prototype = CustomElementRegistry.prototype;
+    const descriptor = Object.getOwnPropertyDescriptor(prototype, 'initialize');
+    const listener = vi.fn();
+    expect(descriptor).toBeDefined();
+    expect(Reflect.deleteProperty(prototype, 'initialize')).toBe(true);
+    document.addEventListener('NVE_ELEMENT_DEFINE', listener);
+
+    try {
+      // The support flag is fixed when the module first loads, so import a fresh copy.
+      const defineModule = await import('./define.js?legacy-registry=1');
+      expect(defineModule.supportsScopedRegistry).toBe(false);
+
+      const child = createElement();
+      class Parent extends createElement() {
+        static readonly elementDefinitions = { [child.metadata.tag]: child };
+      }
+      defineModule.define(Parent);
+      expect(customElements.get(child.metadata.tag)).toBe(child);
+      expect(customElements.get(Parent.metadata.tag)).toBe(Parent);
+      expect(globalThis.NVE_ELEMENTS.state.elementRegistry).toEqual({
+        [child.metadata.tag]: '1.0.0',
+        [Parent.metadata.tag]: '1.0.0'
+      });
+      expect(listener).toHaveBeenCalledTimes(2);
+
+      listener.mockClear();
+      defineModule.define(Parent);
+      expect(customElements.get(Parent.metadata.tag)).toBe(Parent);
+      expect(listener).not.toHaveBeenCalled();
+    } finally {
+      document.removeEventListener('NVE_ELEMENT_DEFINE', listener);
+      if (descriptor) {
+        Object.defineProperty(prototype, 'initialize', descriptor);
+      }
+    }
+  });
+
   it('should not warn about conflicting versions on other hosts', () => {
     vi.stubGlobal(
       'globalThis',
