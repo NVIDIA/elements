@@ -54,14 +54,12 @@ overrides:
   # commitlint pulls conventionalcommits@10, which only renders with writer@9.
   conventional-changelog-conventionalcommits: 9.3.1
   'dts-bundle-generator>typescript': 'catalog:'
-  'lighthouse>axe-core': 4.11.3
-  'devalue@<5.8.1': 5.8.1
+  'devalue@<5.8.1': 5.9.4
   eslint: 'catalog:'
-  fast-uri: 3.1.2
-  liquidjs: 10.26.0
-  shell-quote: 1.8.4
+  liquidjs: 10.30.1
+  shell-quote: 1.12.0
   svgo: 4.1.0
-  tmp: 0.2.6
+  tmp: 0.2.7
 
 # version ranges for published package dependencies
 catalogs:
@@ -75,17 +73,17 @@ catalogs:
     highlight.js: ^11.12.0
     lit: ^3.3.3
     lit-html: ^3.3.3
-    markdown-it: ^15.0.1
+    markdown-it: ^15.0.3
     minisearch: 7.2.0
 
 catalog:
   esbuild: 0.28.2
-  '@11ty/eleventy': 3.1.6
+  '@11ty/eleventy': 3.1.7
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 8.0.0
   '@custom-elements-manifest/analyzer': 0.11.0
-  '@earendil-works/pi-coding-agent': 1.0.0
-  '@earendil-works/pi-tui': 1.0.0
+  '@earendil-works/pi-coding-agent': 1.4.0
+  '@earendil-works/pi-tui': 1.4.0
   '@eslint/css': 2.0.1
   '@eslint/js': 10.0.1
   '@eslint/json': 2.1.1
@@ -97,46 +95,46 @@ catalog:
   '@lit-labs/ssr-react': 0.3.4
   '@lit-labs/virtualizer': 2.1.1
   '@lit/reactive-element': 2.1.2
-  '@modelcontextprotocol/ext-apps': 2.0.3
-  '@modelcontextprotocol/sdk': 1.31.0
-  '@modelcontextprotocol/server': 2.2.0
-  '@types/node': 26.5.0
-  '@types/react': 19.2.18
-  '@types/react-dom': 19.2.7
-  '@vitest/browser': 5.0.0
-  '@vitest/browser-playwright': 5.0.0
-  '@vitest/coverage-istanbul': 5.0.0
-  '@vitest/istanbul-lib-coverage': 1.0.1
-  '@vitest/istanbul-lib-report': 1.0.1
+  '@modelcontextprotocol/ext-apps': 2.0.4
+  '@modelcontextprotocol/sdk': 1.32.2
+  '@modelcontextprotocol/server': 2.4.0
+  '@types/node': 26.6.6
+  '@types/react': 19.3.0
+  '@types/react-dom': 19.3.0
+  '@vitest/browser': 5.0.5
+  '@vitest/browser-playwright': 5.0.5
+  '@vitest/coverage-istanbul': 5.0.5
+  '@vitest/istanbul-lib-coverage': 2.0.0
+  '@vitest/istanbul-lib-report': 2.0.0
   'adm-zip': 0.6.1
-  axe-core: 4.11.0
+  axe-core: 4.14.0
   eslint: 10.13.0
   fast-glob: 3.3.3
   glob: 13.0.6
   highlight.js: 11.12.0
-  lighthouse: 13.0.3
+  lighthouse: 13.6.0
   lit: 3.3.3
   lit-element: 4.2.2
   lit-html: 3.3.3
-  markdown-it: 15.0.1
+  markdown-it: 15.0.3
   markdown-it-link-attributes: 4.0.1
   minisearch: 7.2.0
-  playwright: 1.63.0
-  postcss: 8.5.26
-  publint: 0.3.24
-  react: 19.2.8
-  react-dom: 19.2.8
+  playwright: 1.64.1
+  postcss: 8.5.32
+  publint: 0.3.25
+  react: 19.3.1
+  react-dom: 19.3.1
   rollup-plugin-html-literals: 2.0.1
-  stylelint: 17.14.1
+  stylelint: 17.16.0
   stylelint-config-standard: 40.0.0
   ts-morph: 28.0.0
-  typebox: 1.3.7
+  typebox: 1.4.3
   typescript: 6.0.3
   typescript-7: npm:typescript@7.0.2
-  typescript-eslint: 8.72.0
-  vite: 8.2.2
-  vitest: 5.0.0
-  zod: 4.5.4
+  typescript-eslint: 8.72.1
+  vite: 8.3.5
+  vitest: 5.0.5
+  zod: 4.6.7
 
 minimumReleaseAge: 1140
 
