@@ -141,16 +141,16 @@ Logo, headline (defaults to “NVIDIA Elements”), a call to read the post, the
 
 ## Timing budget
 
-The composer rejects videos outside 24–36 seconds. Scene defaults hold each view 20% longer than the earlier pacing. Entrance animations, typing, and cue offsets keep their normal speed, giving viewers more time to read the completed content before the next transition. A typical month:
+The composer rejects videos outside 24–60 seconds. Plan the primary highlights plus one additional feature slide when the post has another material change to show. Use the existing `feature`, `terminal`, or `fix` scene types for that slide and publish its contextual snapshot. Entrance animations, typing, and cue offsets keep their normal speed, giving viewers more time to read the completed content before the next transition. A typical month:
 
 | Scene                                 | Seconds      |
 | ------------------------------------- | ------------ |
 | `title`                               | 3.6          |
-| 2–4 × `feature`, `terminal`, or `fix` | 4.8–6.6 each |
+| 3–5 × `feature`, `terminal`, or `fix` | 4.8–6.6 each |
 | `list`                                | 4.2          |
 | `end`                                 | 4.2          |
 
-Allow at least 4.8 seconds for a feature and check that its completed content stays visible long enough to read. If the month has more than four headline changes, move the rest into the `list` scene rather than shortening scenes. When revising older pacing, multiply each existing scene duration by 1.2, including explicit `duration` overrides. Update snapshot times from the recomposed scene starts; select the same completed demo state within each scene.
+Allow at least 4.8 seconds for a feature and check that its completed content stays visible long enough to read. Use the extra time for another distinct feature and readable completed demos. Move smaller changes into the `list` scene when they do not need their own demo or the story approaches 60 seconds. Do not stretch a shorter, complete story to fill the limit. Update snapshot times from the recomposed scene starts; select the same completed demo state within each scene.
 
 ## Copy rules
 
@@ -159,7 +159,7 @@ Allow at least 4.8 seconds for a feature and check that its completed content st
 - Use sentence case. Some components apply their own casing: `nve-button` and `nve-steps-item` title-case their labels, so keep those labels to one or two words.
 - Opening lines are one sentence of 60–90 characters. Skip the opening line when the demo explains itself.
 - Numbers must come from the post or from real command output. Counters are for measured values such as bundle savings or icon counts, never for decoration.
-- Lead with the most visible new capability. When the month includes CLI, MCP, lint, or agent-skill changes, give them a `terminal` or `fix` scene: Elements is the UI toolkit built for AI agents, and tooling is the story that sets it apart.
+- Favor new capabilities for dedicated video scenes and their post snapshots. Feature bug fixes only when there are too few distinct, material features; otherwise keep fixes in the list scene or post text. A new lint rule is a feature even when shown in a `fix` scene. Include a new CLI, MCP, lint, or agent-skill capability among the feature highlights when available.
 - Terminal output and lint diagnostics must be real. Run the command, then shorten long lines without changing their meaning, and keep rule names exact.
 
 ## Demo markup rules

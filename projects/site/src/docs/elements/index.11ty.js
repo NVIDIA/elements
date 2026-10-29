@@ -40,6 +40,7 @@ const componentGroups = [
       'nve-file',
       'nve-input',
       'nve-input-group',
+      'nve-joystick',
       'nve-password',
       'nve-preferences-input',
       'nve-progressive-filter-chip',
@@ -58,7 +59,7 @@ const componentGroups = [
   },
   {
     title: 'Buttons and actions',
-    tags: ['nve-button', 'nve-button-group', 'nve-copy-button', 'nve-icon-button', 'nve-sort-button']
+    tags: ['nve-button', 'nve-button-group', 'nve-copy-button', 'nve-drag-handle', 'nve-icon-button', 'nve-sort-button']
   },
   {
     title: 'Navigation',
@@ -70,6 +71,7 @@ const componentGroups = [
       'nve-accordion',
       'nve-card',
       'nve-divider',
+      'nve-iframe',
       'nve-page',
       'nve-page-header',
       'nve-panel',
@@ -79,7 +81,7 @@ const componentGroups = [
   },
   {
     title: 'Viewport',
-    tags: ['nve-viewport', 'nve-viewport-gridlines', 'nve-viewport-minimap']
+    tags: ['nve-viewport', 'nve-viewport-gridlines', 'nve-viewport-minimap', 'nve-viewport-zoom-range']
   },
   {
     title: 'Popovers',
@@ -99,6 +101,7 @@ const componentGroups = [
       'nve-alert',
       'nve-page-loader',
       'nve-progress-bar',
+      'nve-progress-dot',
       'nve-progress-ring',
       'nve-pulse',
       'nve-skeleton',
@@ -150,6 +153,7 @@ const componentGroups = [
       'nve-media-loop-button',
       'nve-media-mute-button',
       'nve-media-pause-button',
+      'nve-media-pip-button',
       'nve-media-playback-rate-select',
       'nve-media-seek-button',
       'nve-media-time-range',
@@ -408,7 +412,7 @@ const createComponentCatalog = componentDocs => {
       .filter(element => {
         const doc = docsByTag.get(element.name);
 
-        return doc && predicate(doc);
+        return doc && !element.manifest?.deprecated && predicate(doc);
       })
       .map(element => {
         const doc = docsByTag.get(element.name);
@@ -436,6 +440,9 @@ const createComponentCatalog = componentDocs => {
   return [...createCatalogSection(isElementsComponentDoc), ...createCatalogSection(isLibraryComponentDoc)];
 };
 
+const truncateDescription = description =>
+  description.length > 200 ? `${description.slice(0, 199).trimEnd()}…` : description;
+
 const renderComponentCard = component => /* html */ `
   <nve-card class="component-card">
     <div
@@ -449,7 +456,7 @@ const renderComponentCard = component => /* html */ `
     <nve-card-content>
       <div nve-layout="column gap:sm">
         <h3 nve-text="label medium">${escapeHtml(component.title)}</h3>
-        <p nve-text="body sm">${escapeHtml(component.description)}</p>
+        <p nve-text="body sm">${escapeHtml(truncateDescription(component.description))}</p>
       </div>
     </nve-card-content>
     <a
