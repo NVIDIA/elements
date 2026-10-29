@@ -44,7 +44,7 @@ This project includes the following bundled third-party software:
 - open v11.0.0 [MIT]
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.24 [MIT]
+- publint v0.3.25 [MIT]
   Copyright: Bjorn Lu
 
 - sanitize-html v2.18.1 [MIT]
@@ -53,7 +53,7 @@ This project includes the following bundled third-party software:
 - ts-morph v28.0.0 [MIT]
   Copyright: David Sherret
 
-- zod v4.5.4 [MIT]
+- zod v4.6.7 [MIT]
   Copyright: Colin McDonnell <zod@colinhacks.com>
 
 ==============================================================================
@@ -75,10 +75,10 @@ html-format v1.1.7 - Copyright Mohamed Akram
 ignore v7.0.6 - Copyright kael
 minisearch v7.2.0 - Copyright Luca Ongaro
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-publint v0.3.24 - Copyright Bjorn Lu
+publint v0.3.25 - Copyright Bjorn Lu
 sanitize-html v2.18.1 - Copyright Apostrophe Technologies, Inc.
 ts-morph v28.0.0 - Copyright David Sherret
-zod v4.5.4 - Copyright Colin McDonnell <zod@colinhacks.com>
+zod v4.6.7 - Copyright Colin McDonnell <zod@colinhacks.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
