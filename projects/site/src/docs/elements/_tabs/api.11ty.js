@@ -23,6 +23,8 @@ export const data = {
     else if (filePath.includes('/monaco/')) dir = 'monaco';
     else if (filePath.includes('/media/')) dir = 'media';
     else if (filePath.includes('/markdown/')) dir = '';
+    else if (filePath.includes('/foundations/')) dir = 'foundations';
+    else if (filePath.includes('/viewport/')) dir = 'viewport';
     return `/docs/${dir}/${data.component.fileSlug}/api/`;
   }
 };

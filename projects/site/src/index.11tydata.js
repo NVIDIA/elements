@@ -1,10 +1,12 @@
 // @ts-check
 
 import { join } from 'node:path';
-import { ApiService, TestsService, WireitService } from '@internals/metadata';
+import { ApiService, ProjectsService, TestsService, WireitService } from '@internals/metadata';
 import { PlaygroundService } from '@internals/tools/playground';
 import { ExamplesService } from '@internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
+import { getPackageCount, getPatternCount, getTotalTests } from './_11ty/utils/metrics.js';
+import { getComponentCatalog } from './_11ty/utils/component-catalog.js';
 import {
   ELEMENTS_PAGES_BASE_URL,
   ELEMENTS_REPO_BASE_URL,
@@ -20,10 +22,20 @@ const apiMetrics = await ApiService.getData();
 const elements = apiMetrics.data.elements;
 
 const tests = await TestsService.getData();
+const projects = await ProjectsService.getData();
+const allExamples = await ExamplesService.getAll();
+const homeStats = {
+  patterns: getPatternCount(allExamples).toLocaleString('en-US'),
+  packages: getPackageCount(projects.data).toLocaleString('en-US'),
+  tests: getTotalTests(tests.projects).toLocaleString('en-US'),
+  testsUpdated: new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeZone: 'UTC' }).format(
+    new Date(tests.created)
+  )
+};
 
 const wireit = await WireitService.getData();
 
-const examples = (await ExamplesService.getAll())
+const examples = allExamples
   .filter(s => !s.template?.includes('${'))
   .map(example => ({
     id: example.id,
@@ -324,9 +336,18 @@ export const siteData = {
   examples,
   integrations,
   tests,
+  homeStats,
   wireit
 };
 
+export const eleventyComputed = {
+  componentStats: {
+    count: (
+      /** @type {{collections: {componentDocs: import('./_11ty/utils/component-catalog.js').ComponentDoc[]}}} */ data
+    ) => getComponentCatalog(elements, data.collections.componentDocs).length.toLocaleString('en-US')
+  }
+};
+
 export default function siteDataFn() {
-  return siteData;
+  return { ...siteData, eleventyComputed };
 }

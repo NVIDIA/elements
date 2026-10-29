@@ -1,5 +1,6 @@
 import { siteData } from '../../index.11tydata.js';
 import { parseFragment, serialize } from 'parse5';
+import { getComponentCatalog } from '../../_11ty/utils/component-catalog.js';
 
 export const data = {
   title: 'Components',
@@ -7,16 +8,6 @@ export const data = {
     'NVIDIA Elements components are framework-agnostic Web Components for building agent-ready AI infrastructure, robotics, and autonomous vehicle user interfaces.',
   layout: 'docs.11ty.js'
 };
-
-const hasComponentTag = component => component.data?.tag;
-
-const isElementsComponentDoc = component =>
-  component.inputPath?.includes('/docs/elements/') && hasComponentTag(component);
-
-const isLibraryComponentDoc = component =>
-  ['/docs/code/', '/docs/markdown/', '/docs/media/', '/docs/monaco/', '/docs/viewport/'].some(path =>
-    component.inputPath?.includes(path)
-  ) && hasComponentTag(component);
 
 const escapeHtml = value =>
   String(value ?? '')
@@ -404,41 +395,11 @@ const getPreviewTemplate = tag => {
   return flattenNestedContainers(template);
 };
 
-const createComponentCatalog = componentDocs => {
-  const docsByTag = new Map(componentDocs.filter(hasComponentTag).map(component => [component.data.tag, component]));
-
-  const createCatalogSection = predicate =>
-    siteData.elements
-      .filter(element => {
-        const doc = docsByTag.get(element.name);
-
-        return doc && !element.manifest?.deprecated && predicate(doc);
-      })
-      .map(element => {
-        const doc = docsByTag.get(element.name);
-
-        return {
-          description: element.manifest?.description?.trim() ?? `Documentation for ${doc.data.title}.`,
-          href: doc.url,
-          packageName: element.package,
-          preview: '',
-          tag: element.name,
-          title: doc.data.title,
-          version: element.version
-        };
-      })
-      .map(component => {
-        const preview = getPreviewTemplate(component.tag);
-
-        return {
-          ...component,
-          preview
-        };
-      })
-      .sort(sortByTitle);
-
-  return [...createCatalogSection(isElementsComponentDoc), ...createCatalogSection(isLibraryComponentDoc)];
-};
+const createComponentCatalog = componentDocs =>
+  getComponentCatalog(siteData.elements, componentDocs).map(component => ({
+    ...component,
+    preview: getPreviewTemplate(component.tag)
+  }));
 
 const truncateDescription = description =>
   description.length > 200 ? `${description.slice(0, 199).trimEnd()}…` : description;
