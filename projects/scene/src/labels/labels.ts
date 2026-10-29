@@ -4,7 +4,7 @@
 import { html, LitElement, type TemplateResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import {
   getLabelLayerCount,
   getLabelLayerSource,

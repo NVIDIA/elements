@@ -3,7 +3,7 @@
 
 import type { PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { MarkerLayerElement } from '../internal/layers/markers/layer-element.js';
 import { MarkerBuffer, type MarkerInit, type MarkerSource } from '../internal/layers/markers/buffer.js';
 import { MARKER } from '../internal/records/layouts/built-ins.js';
