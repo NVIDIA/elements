@@ -18,6 +18,7 @@ import styles from './scroll-box.css?inline';
  * @cssprop --scrollbar-width - Native scrollbar width. Set to none to hide scrollbars.
  * @cssprop --shadow-color - Optional edge tint. Transparent uses the theme shadow.
  * @cssprop --shadow-size - Size of the edge shadows.
+ * @command --scroll-to - Instantly scroll to the source button's value: start, end, or a finite pixel offset. Uses the horizontal axis for horizontal orientation and vertical otherwise. Empty or invalid values have no effect; numeric offsets use native coordinates, including negative RTL offsets.
  */
 export class ScrollBox extends LitElement {
   static styles = useStyles([styles]);
@@ -105,6 +106,7 @@ export class ScrollBox extends LitElement {
     this.removeEventListener('load', this.#scheduleMeasure, true);
     this.removeEventListener('scroll', this.#onScroll);
     this.removeEventListener('scrollend', this.#onScrollEnd);
+    this.removeEventListener('command', this.#onCommand);
     this.ownerDocument.fonts.removeEventListener('loadingdone', this.#scheduleMeasure);
     if (this.#frame !== undefined) cancelAnimationFrame(this.#frame);
     this.#frame = undefined;
@@ -136,6 +138,7 @@ export class ScrollBox extends LitElement {
     this.addEventListener('load', this.#scheduleMeasure, true);
     this.addEventListener('scroll', this.#onScroll);
     this.addEventListener('scrollend', this.#onScrollEnd);
+    this.addEventListener('command', this.#onCommand);
     this.ownerDocument.fonts.addEventListener('loadingdone', this.#scheduleMeasure);
     this.#scheduleMeasure();
   }
@@ -158,6 +161,28 @@ export class ScrollBox extends LitElement {
     const shadows = layer?.querySelector<HTMLElement>('.shadows');
     if (!layer || !shadows) return;
     this.#sizeShadows(layer, shadows);
+  }
+
+  #onCommand = (event: Event) => {
+    if (!(event instanceof CommandEvent)) return;
+    if (event.command !== '--scroll-to' || event.target !== this) return;
+    const source = event.source;
+    if (!source || !('value' in source) || typeof source.value !== 'string') return;
+    const position = this.#commandPosition(source.value.trim());
+    if (!Number.isFinite(position)) return;
+
+    this.#autoScrolling = false;
+    this.scrollTo({ [this.orientation === 'horizontal' ? 'left' : 'top']: position, behavior: 'instant' });
+    this.#onScroll();
+  };
+
+  #commandPosition(value: string) {
+    if (!value) return NaN;
+    if (value === 'start') return 0;
+    if (value !== 'end') return Number(value);
+    const horizontal = this.orientation === 'horizontal';
+    const end = horizontal ? this.scrollWidth - this.clientWidth : this.scrollHeight - this.clientHeight;
+    return horizontal && getComputedStyle(this).direction === 'rtl' ? -end : end;
   }
 
   #onScroll = () => {
