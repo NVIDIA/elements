@@ -1,3 +1,15 @@
+## [2.19.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.19.0...@nvidia-elements/core-v2.19.1) (2026-10-29)
+
+### Features
+
+* **foundations:** add i18n support ([074f46c](https://github.com/NVIDIA/elements/commit/074f46ce0e148d00f40e6e320abec01e6fee5704))
+
+### Bug Fixes
+
+* **core:** i18n refactor ([4b6e10c](https://github.com/NVIDIA/elements/commit/4b6e10cd1ac30622b030be926e2d39e7e8039f95))
+* **media:** i18n refactor ([a730282](https://github.com/NVIDIA/elements/commit/a73028216d642440d5fe583584703793e38d39d9))
+* **viewport:** i18n refactor ([2a6825b](https://github.com/NVIDIA/elements/commit/2a6825b24be4ed4304c2b57c91bbaf3435a5a480))
+
 ## [2.19.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.18.4...@nvidia-elements/core-v2.19.0) (2026-10-28)
 
 ### Features
