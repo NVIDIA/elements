@@ -3,6 +3,16 @@
 }
 
 .getting-started-page {
+  .getting-started-feature-card,
+  .getting-started-explore-card {
+    height: 100%;
+  }
+
+  .getting-started-counts,
+  .getting-started-counts dd {
+    margin: 0;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -42,7 +52,6 @@
 
     nve-card-content {
       --padding: var(--nve-ref-space-lg);
-      min-height: calc(var(--nve-ref-size-900) * 3);
     }
 
     svg {

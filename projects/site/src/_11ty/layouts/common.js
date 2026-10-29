@@ -157,7 +157,7 @@ export const renderBaseHead = data => {
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">
-  <nve-tree-node ${data.page.url === '/' || data.page.url.includes('/docs/integrations/installation/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/skills/') || data.page.url.includes('/docs/lint/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url === '/' || data.page.url.includes('/docs/integrations/installation/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/skills/') || data.page.url.includes('/docs/lint/') || data.page.url.includes('/docs/whats-new/') ? 'expanded' : ''}>
     <a href="/">Getting Started</a>
     <nve-tree-node ${data.page.url === '/' ? 'highlighted selected' : ''}><a href="/">Overview</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="/docs/integrations/installation/">Installation</a></nve-tree-node>
@@ -398,9 +398,8 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted selected' : ''}><a href="/docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/whats-new/') || data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/sitemap/' ? 'expanded' : ''}>
-    <a href="/docs/whats-new/">About</a>
-    <nve-tree-node ${data.page.url.includes('/docs/whats-new/') ? 'highlighted selected' : ''}><a href="/docs/whats-new/">What’s New</a></nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/sitemap/' ? 'expanded' : ''}>
+    <a href="/docs/changelog/">About</a>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="/docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="/docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="/docs/about/support/">Support</a></nve-tree-node>

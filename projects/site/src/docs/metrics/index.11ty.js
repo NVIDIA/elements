@@ -1,6 +1,7 @@
 // @ts-check
 
 import { ReleasesService, TestsService, ApiService, AdoptionService } from '@internals/metadata';
+import { getTotalTests } from '../../_11ty/utils/metrics.js';
 
 export const data = {
   title: 'Metrics',
@@ -19,16 +20,7 @@ const releasesReportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium
 
 const elementTotal = apiMetrics.data.elements.length;
 
-const totalTests = Object.values(testMetrics.projects).reduce(
-  (p, n) =>
-    p +
-    n.unit.numPassedTests +
-    n.visual.numPassedTests +
-    n.axe.numPassedTests +
-    n.ssr.numPassedTests +
-    n.lighthouse.testResults.length,
-  0
-);
+const totalTests = getTotalTests(testMetrics.projects);
 
 /** @param {number} value */
 function formatNumber(value) {
