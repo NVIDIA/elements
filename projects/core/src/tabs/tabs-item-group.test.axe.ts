@@ -26,7 +26,7 @@ describe('nve-tabs-item-group', () => {
         </nve-tabs-item-group>
         <nve-tabs-item-group>
           <button slot="prefix" type="button" aria-label="Pin comparison" aria-pressed="false">Pin</button>
-          <nve-tabs-item role="tab" aria-label="Comparison">Comparison label</nve-tabs-item>
+          <nve-tabs-item role="tab" aria-label="Comparison label">Comparison label</nve-tabs-item>
         </nve-tabs-item-group>
         <nve-tabs-item-group>
           <nve-tabs-item role="tab" aria-labelledby="unavailable-label" disabled>
