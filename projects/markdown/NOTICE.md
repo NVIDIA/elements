@@ -8,7 +8,7 @@ This project includes the following bundled third-party software:
 - lit v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
-- markdown-it v15.0.1 [MIT]
+- markdown-it v15.0.3 [MIT]
   Copyright: Unknown
 
 ==============================================================================
@@ -50,7 +50,7 @@ MIT
 
 The following bundled components are provided under the MIT license:
 
-markdown-it v15.0.1 - Copyright Unknown
+markdown-it v15.0.3 - Copyright Unknown
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
