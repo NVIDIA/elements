@@ -9,6 +9,9 @@ export const libraryLighthouseTestConfig = {
     include: ['vitest > expect-type']
   },
   test: {
+    // Vitest 5.0.5 reads cached global-setup modules as Buffers,
+    // but Vite's stack formatter requires source strings. https://github.com/vitest-dev/vitest/pull/11709
+    fsModuleCache: false,
     retry: 2,
     isolate: false,
     maxWorkers: LIGHTHOUSE_WORKERS,
