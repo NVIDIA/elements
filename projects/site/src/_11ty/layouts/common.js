@@ -411,7 +411,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url === '/sitemap/' ? 'highlighted selected' : ''}><a href="/sitemap/">Sitemap</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''} style="--color: var(--nve-sys-text-muted-color)">
+  <nve-tree-node ${data.page.url.includes('/docs/labs/') || data.page.url.includes('/docs/plot/') || data.page.url.includes('/docs/scene/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''} style="--color: var(--nve-sys-text-muted-color)">
     <a href="/docs/labs/">Labs</a>
     <nve-tree-node ${data.page.url.includes('/docs/plot/') ? 'expanded' : ''}>
       <a href="/docs/plot/">Plot <nve-icon name="beaker" size="sm"></nve-icon></a>

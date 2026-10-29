@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import '@nvidia-elements/scene/body/define.js';
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 import { SceneJoint } from '@nvidia-elements/scene/joint';
 
 define(SceneJoint);

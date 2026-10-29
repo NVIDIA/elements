@@ -255,11 +255,11 @@
     "lit": "catalog:publish"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:^",
     "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
+    "@nvidia-elements/core": "workspace:^",
     "@nvidia-elements/styles": "workspace:*",
     "@internals/testing": "workspace:*",
     "@internals/eslint": "workspace:*",

@@ -1679,9 +1679,6 @@ importers:
 
   projects/scene:
     dependencies:
-      '@nvidia-elements/core':
-        specifier: workspace:^
-        version: link:../core
       '@nvidia-elements/foundations':
         specifier: workspace:^
         version: link:../foundations
@@ -1704,6 +1701,9 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
+      '@nvidia-elements/core':
+        specifier: workspace:^
+        version: link:../core
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
@@ -1725,6 +1725,9 @@ importers:
       eslint:
         specifier: 10.13.0
         version: 10.13.0(jiti@2.7.0)(supports-color@10.2.2)
+      playwright:
+        specifier: 'catalog:'
+        version: 1.63.0
       publint:
         specifier: 'catalog:'
         version: 0.3.24

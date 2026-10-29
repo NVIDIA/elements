@@ -3,7 +3,7 @@
 
 import '@nvidia-elements/scene/scene/define.js';
 import '@nvidia-elements/scene/frame/define.js';
-import { define } from '@nvidia-elements/core/internal';
+import { define } from '@nvidia-elements/foundations/internal/define';
 import { SceneCamera } from '@nvidia-elements/scene/camera';
 
 define(SceneCamera);

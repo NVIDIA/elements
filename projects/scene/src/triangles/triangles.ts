@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { StreamingLayerElement } from '../internal/layers/streaming/layer-element.js';
 import { TRIANGLE_VERTEX } from '../internal/records/layouts/built-ins.js';
 import type { TriangleVertexSource } from '../internal/layers/triangles/buffer.js';

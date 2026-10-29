@@ -4,7 +4,7 @@
 import { LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { getFrameReference, setFrameReference } from '../internal/composition/frame/state.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { createCSSColorConverter, normalizeCSSColor, type CSSColor } from '../internal/color/color.js';
 import {
   applyCapturedHeightfieldGrid,

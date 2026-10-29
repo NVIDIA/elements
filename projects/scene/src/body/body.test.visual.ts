@@ -194,7 +194,7 @@ function template(): string {
       <nve-scene-body id="instance-body"></nve-scene-body>
     </nve-scene>
     <script type="module">
-      import { define } from '@nvidia-elements/core/internal';
+      import { define } from '@nvidia-elements/foundations/internal/define';
       import { Scene } from '../../src/scene/scene.ts';
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneMesh } from '../../src/mesh/mesh.ts';

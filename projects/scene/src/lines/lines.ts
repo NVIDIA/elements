@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { property } from 'lit/decorators/property.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { StreamingLayerElement } from '../internal/layers/streaming/layer-element.js';
 import { LINE_VERTEX } from '../internal/records/layouts/built-ins.js';
 import {
