@@ -1,3 +1,19 @@
+## [1.2.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.1...@nvidia-elements/media-v1.2.2) (2026-10-29)
+
+### Features
+
+* **core:** tree node invoker command support ([2d889e4](https://github.com/NVIDIA/elements/commit/2d889e485b5aad0980731821691973d57c2ee343))
+* **foundations:** add i18n support ([074f46c](https://github.com/NVIDIA/elements/commit/074f46ce0e148d00f40e6e320abec01e6fee5704))
+
+### Bug Fixes
+
+* **core:** add min-width for fit-text styling for filter chip ([7bf423e](https://github.com/NVIDIA/elements/commit/7bf423ed11413e9aa33ca4f28658a1bcac011d26))
+* **core:** i18n refactor ([4b6e10c](https://github.com/NVIDIA/elements/commit/4b6e10cd1ac30622b030be926e2d39e7e8039f95))
+* **forms:** enable invoke method for controller ([68c8aa3](https://github.com/NVIDIA/elements/commit/68c8aa33a4d9254601b56b219ae6cc4268b54306))
+* **lint:** add tree invoker command support ([bde2265](https://github.com/NVIDIA/elements/commit/bde2265de1ed48981de745d1f4ca733d28b65df0))
+* **media:** i18n refactor ([a730282](https://github.com/NVIDIA/elements/commit/a73028216d642440d5fe583584703793e38d39d9))
+* **viewport:** i18n refactor ([2a6825b](https://github.com/NVIDIA/elements/commit/2a6825b24be4ed4304c2b57c91bbaf3435a5a480))
+
 ## [1.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.0...@nvidia-elements/media-v1.2.1) (2026-10-28)
 
 ### Features
