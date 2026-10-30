@@ -8,6 +8,7 @@ coverage
 .webgpu
 .next
 .output
+.render
 *.examples.ts
 *.test.lighthouse.ts
 CHANGELOG.md

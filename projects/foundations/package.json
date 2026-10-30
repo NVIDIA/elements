@@ -142,7 +142,6 @@
     "@internals/eslint": "workspace:*",
     "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@vitest/browser": "catalog:",

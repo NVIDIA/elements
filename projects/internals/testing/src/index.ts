@@ -123,3 +123,5 @@ export function untilEvent<T = Event>(element: HTMLElement | Document, event: st
   );
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
+
+export { waitForAnimationFrames } from './frames.js';

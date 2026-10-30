@@ -26,6 +26,7 @@ const tests = [
   '**/*.test.ts',
   '**/*.test.bench.ts',
   '**/*.test.webgpu.ts',
+  '**/*.test.render.ts',
   '**/*.test.visual.ts',
   '**/*.test.lighthouse.ts',
   '**/*.test.axe.ts',
@@ -40,6 +41,7 @@ const ignores = [
   'src/vendor/',
   '.visual/',
   '.lighthouse/',
+  '.render/',
   '.wireit/'
 ];
 
