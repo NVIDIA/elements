@@ -82,7 +82,7 @@ This product includes the following bundled third-party software:
 - marked v18.0.14 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Christopher Jeffrey
 
-- marked-terminal v7.3.0 [MIT] (used by: @nvidia-elements/cli)
+- marked-terminal v7.3.1 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Mikael Brevik
 
 - minisearch v7.2.0 [MIT] (used by: @nvidia-elements/lint, @nvidia-elements/pi)
@@ -362,7 +362,7 @@ ignore v7.0.12 - Copyright kael
 ignore v7.0.6 - Copyright kael
 markdown-it v15.0.1 - Copyright Unknown
 marked v18.0.14 - Copyright Christopher Jeffrey
-marked-terminal v7.3.0 - Copyright Mikael Brevik
+marked-terminal v7.3.1 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.57.0 - Copyright Microsoft Corporation
 open v11.0.4 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)

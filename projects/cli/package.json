@@ -61,7 +61,7 @@
     "fast-glob": "catalog:",
     "ignore": "7.0.12",
     "marked": "18.0.14",
-    "marked-terminal": "7.3.0",
+    "marked-terminal": "7.3.1",
     "open": "11.0.4",
     "ora": "9.4.1",
     "publint": "catalog:",

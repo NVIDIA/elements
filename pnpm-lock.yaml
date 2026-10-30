@@ -500,8 +500,8 @@ importers:
         specifier: 18.0.14
         version: 18.0.14
       marked-terminal:
-        specifier: 7.3.0
-        version: 7.3.0(marked@18.0.14)
+        specifier: 7.3.1
+        version: 7.3.1(marked@18.0.14)
       open:
         specifier: 11.0.4
         version: 11.0.4
@@ -8231,6 +8231,10 @@ packages:
     resolution: {integrity: sha512-Bq3SmSpyFHaWjPk8If9yc6svM8c56dB5BAtW4Qbw5jHTwwXXcTLoRMkpDJp6VL0XzlWaCHTXrkFURMYmD0sLqg==}
     engines: {node: '>=12'}
 
+  ansi-regex@6.5.0:
+    resolution: {integrity: sha512-zhvbbbdt1kbw7EJ9OQoxmQcuaNR9P5kTj7e/YdmOSU10aHWbycofJxA6jKfoEy3vlLdctOF9ZHaxLtmSm998wQ==}
+    engines: {node: '>=12'}
+
   ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
     engines: {node: '>=4'}
@@ -11451,6 +11455,12 @@ packages:
     engines: {node: '>=16.0.0'}
     peerDependencies:
       marked: '>=1 <16'
+
+  marked-terminal@7.3.1:
+    resolution: {integrity: sha512-B1eKs5mRiacjHHMlex1zn0zkVomz2/KWjD/dyA8WRQTXk2d15OzVjiK/iuPfvDFB27Gvr8p/u6MYgU0NY/O45w==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      marked: '>=1 <19'
 
   marked@14.0.0:
     resolution: {integrity: sha512-uIj4+faQ+MgHgwUW1l2PsPglZLOLOT1uErt06dAPtx2kjteLAkbsd/0FiYg/MGS+i7ZKLb7w2WClxHkzOOuryQ==}
@@ -21324,6 +21334,8 @@ snapshots:
 
   ansi-regex@6.2.2: {}
 
+  ansi-regex@6.5.0: {}
+
   ansi-styles@3.2.1:
     dependencies:
       color-convert: 1.9.3
@@ -24894,10 +24906,10 @@ snapshots:
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked-terminal@7.3.0(marked@18.0.14):
+  marked-terminal@7.3.1(marked@18.0.14):
     dependencies:
       ansi-escapes: 7.3.0
-      ansi-regex: 6.2.2
+      ansi-regex: 6.5.0
       chalk: 5.6.2
       cli-highlight: 2.1.11
       cli-table3: 0.6.5
