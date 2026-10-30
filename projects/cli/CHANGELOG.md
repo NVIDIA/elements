@@ -1,3 +1,9 @@
+## [2.2.15](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.14...@nvidia-elements/cli-v2.2.15) (2026-10-30)
+
+### Bug Fixes
+
+* **cli:** update marked-terminal to 7.3.1 ([d11932c](https://github.com/NVIDIA/elements/commit/d11932c791ae22a0847c00f20e5bd433d7b66444))
+
 ## [2.2.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v2.2.13...@nvidia-elements/cli-v2.2.14) (2026-10-29)
 
 ### Features
