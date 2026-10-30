@@ -27,6 +27,9 @@ pnpm run test:axe
 # Performance tests
 pnpm run test:lighthouse
 
+# Render regression tests (Core)
+pnpm run test:render
+
 # WebGPU rendering tests
 pnpm run test:webgpu
 
@@ -48,6 +51,14 @@ pnpm run test:ssr
 - [SSR Tests (`.test.ssr.ts`)](/docs/internal/guidelines/testing-ssr/): Server-side rendering compatibility tests.
 - **WebGPU rendering tests (`.test.webgpu.ts`)**: External rendering, resource, timing, diagnostic, and lifecycle tests
   orchestrated by Vitest against a clean Playwright page.
+
+### Render regression tests (`.test.render.ts`)
+
+Core measures Chromium layout and style recalculation counts during interactions on an isolated Playwright page.
+These counts include legitimate rendering and do not count forced reflows. Use `vitest.render.ts` with
+`libraryRenderTestConfig`. Keep explicit count budgets, readiness, and completion boundaries in each scenario.
+The [shared runner documentation](https://github.com/NVIDIA/elements/blob/main/projects/internals/vite/README.md#render-regression-tests)
+includes the API, a complete grid example, calibration results, commands, and trace investigation guidance.
 
 ## Test Configuration
 
