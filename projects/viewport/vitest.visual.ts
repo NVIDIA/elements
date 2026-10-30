@@ -4,6 +4,9 @@ import { libraryVisualTestConfig } from '@internals/vite/configs/visual.js';
 export default mergeConfig(libraryVisualTestConfig, {
   root: import.meta.dirname,
   test: {
+    fileParallelism: true,
+    maxWorkers: 2,
+    maxConcurrency: 1,
     include: ['src/**/*.test.visual.ts'],
     outputFile: {
       junit: './coverage/visual/junit.xml'

@@ -19,7 +19,11 @@ export class VisualRunner {
 
   constructor({ chromiumArgs = CHROMIUM_ARGS } = {}) {
     this.#chromiumArgs = chromiumArgs;
-    this.#runner = new VitePlaywrightRunner({ runnerID: RUNNER_ID, chromiumArgs });
+    this.#runner = new VitePlaywrightRunner({
+      runnerID: RUNNER_ID,
+      instanceID: process.env.VITEST_POOL_ID ?? '1',
+      chromiumArgs
+    });
   }
 
   async open() {
@@ -27,7 +31,8 @@ export class VisualRunner {
   }
 
   async close() {
-    await this.#runner.close();
+    // Visual results belong to Vitest; workers must not write a shared runner report.
+    await this.#runner.close({ collectReports: false });
   }
 
   async render(name, content, options = { network: false }) {
