@@ -15,6 +15,7 @@ export const libraryVisualTestConfig = {
     }
   },
   test: {
+    runner: '@internals/vite/runners/visual-test.js',
     retry: 2,
     isolate: false,
     fileParallelism: false,

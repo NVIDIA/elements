@@ -98,13 +98,7 @@ export class VitePlaywrightRunner {
 
   async open() {
     if (!this.#server) {
-      if (!fs.existsSync(this.#root)) {
-        fs.mkdirSync(this.#root);
-      }
-
-      if (!fs.existsSync(this.#dist)) {
-        fs.mkdirSync(this.#dist);
-      }
+      fs.mkdirSync(this.#dist, { recursive: true });
 
       console.log('playwright-runner: launching browser');
       // Chromium reserves the debugging port itself, avoiding a free-port race.
@@ -138,10 +132,10 @@ export class VitePlaywrightRunner {
     }
   }
 
-  async close() {
+  async close({ collectReports: collect = true } = {}) {
     const failures = [];
     try {
-      if (fs.existsSync(this.#dist)) {
+      if (collect && fs.existsSync(this.#dist)) {
         const report = collectReports(this.#root);
         fs.writeFileSync(`${this.#dist}/report.json`, JSON.stringify(report, null, 2));
       }
