@@ -121,6 +121,8 @@ export class Select extends Control {
   }
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
+  #overflowObserver?: ResizeObserver;
+  #observedTags?: Element | null;
 
   get #multipleSelectLabel() {
     const option = this.#placeholderOption;
@@ -196,6 +198,8 @@ export class Select extends Control {
     this.#observers.forEach(observer => observer.disconnect());
     this.#observers = [];
     this.#optionObservers.clear();
+    this.#overflowObserver = undefined;
+    this.#observedTags = undefined;
   }
 
   #syncOptionSelectedStates() {
@@ -248,6 +252,7 @@ export class Select extends Control {
     } else {
       this._internals.states.delete('multiple');
     }
+    this.#observeTags();
   }
 
   #setupCustomSelectUI() {
@@ -272,9 +277,29 @@ export class Select extends Control {
   }
 
   #setupOverflowListener() {
-    const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0]!.contentRect.width));
+    const input = this.#input;
+    if (!input) return;
+    let inputWidth: number | undefined;
+    const observer = new ResizeObserver(entries => {
+      const inputEntry = entries.find(entry => entry.target === input);
+      if (inputEntry) inputWidth = inputEntry.contentRect.width;
+      if (this.isConnected && inputWidth !== undefined) this.#updateMultipleOverflow(inputWidth);
+    });
+    this.#overflowObserver = observer;
     this.#observers.push(observer);
-    observer.observe(this.#input!);
+    observer.observe(input);
+    this.#observeTags();
+  }
+
+  #observeTags() {
+    const observer = this.#overflowObserver;
+    if (!observer) return;
+    const tags = this.#tags;
+    if (tags === this.#observedTags) return;
+    if (this.#observedTags) observer.unobserve(this.#observedTags);
+    this.#observedTags = tags;
+    if (tags) observer.observe(tags);
+    else this._internals.states.delete('multiple-overflow');
   }
 
   async #selectValue(option: HTMLOptionElement, selected: boolean) {

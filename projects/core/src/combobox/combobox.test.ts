@@ -764,9 +764,73 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':state(multiple-overflow)')).toBe(true);
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+  });
+
+  it.each([false, true])('should update overflow on input-only resizes with wrap=%s', async wrap => {
+    if (wrap) element.tagLayout = 'wrap';
+    element.style.setProperty('--width', '640px');
+    await elementIsStable(element);
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
+    const tags = element.shadowRoot.querySelector('.tags');
+    const selected = Array.from(select.selectedOptions);
+
+    element.style.setProperty('--width', '120px');
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+    element.style.setProperty('--width', '640px');
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
+
+    expect(element.shadowRoot.querySelector('.tags')).toBe(tags);
+    expect(Array.from(select.selectedOptions)).toEqual(selected);
+  });
+
+  it('should restore overflow observation through repeated reconnects', async () => {
+    element.style.setProperty('--width', '640px');
+    await elementIsStable(element);
+    for (let cycle = 0; cycle < 3; cycle++) {
+      await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
+      element.remove();
+      fixture.appendChild(element);
+      await elementIsStable(element);
+      element.style.setProperty('--width', '120px');
+      await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+      element.style.setProperty('--width', '640px');
+      await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
+    }
+  });
+
+  it.each([false, true])(
+    'should observe replaced tag content after hiding and enabling tags with wrap=%s',
+    async wrap => {
+      element.tagLayout = 'hidden';
+      await elementIsStable(element);
+      expect(element.shadowRoot.querySelector('.tags')).toBeNull();
+      element.style.setProperty('--width', '120px');
+      if (wrap) element.tagLayout = 'wrap';
+      else element.removeAttribute('tag-layout');
+      await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+      element.tagLayout = 'hidden';
+      await elementIsStable(element);
+      expect(element.matches(':state(multiple-overflow)')).toBe(false);
+      if (wrap) element.tagLayout = 'wrap';
+      else element.removeAttribute('tag-layout');
+      await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+      element.style.setProperty('--width', '640px');
+      await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
+    }
+  );
+
+  it('should clear overflow when tags are hidden while disconnected', async () => {
+    element.style.setProperty('--width', '120px');
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+    element.remove();
+    element.tagLayout = 'hidden';
+    fixture.appendChild(element);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.tags')).toBeNull();
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
+    element.tagLayout = 'wrap';
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
   it('should keep tags visible when wrap layout is used with overflow state', async () => {
@@ -830,9 +894,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[2].click();
 
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':state(multiple-overflow)')).toBe(true);
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
   it('should remove overflow if additional space is available', async () => {
@@ -847,9 +909,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':state(multiple-overflow)')).toBe(true);
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
 
     select.options[0].selected = false;
     select.options[1].selected = false;
@@ -858,9 +918,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
     element.requestUpdate();
     await elementIsStable(element);
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(resolve => setTimeout(resolve, 0));
-    expect(element.matches(':state(multiple-overflow)')).toBe(false);
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
   });
 
   it('should select all options when selectAll() is called', async () => {
@@ -3235,5 +3293,29 @@ describe(`${Combobox.metadata.tag}: behavior-create with datalist`, () => {
     );
     expect(disabledNoResults).toBeFalsy();
     expect(element.shadowRoot.querySelector('nve-menu-item[part="create-option"]')).toBeTruthy();
+  });
+});
+
+describe(`${Combobox.metadata.tag}: initially hidden tags`, () => {
+  let fixture: HTMLElement;
+  afterEach(() => removeFixture(fixture));
+
+  it('should start overflow observation when initially hidden tags become visible', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox tag-layout="hidden" style="--width: 120px">
+        <label>Options</label><input type="search" />
+        <select multiple>
+          <option selected>Option A</option><option selected>Option B</option>
+        </select>
+      </nve-combobox>
+    `);
+    const element = fixture.querySelector<Combobox>('nve-combobox');
+    if (!element) throw new Error('Missing combobox fixture');
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.tags')).toBeNull();
+    element.tagLayout = 'wrap';
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(true);
+    element.style.setProperty('--width', '640px');
+    await expect.poll(() => element.matches(':state(multiple-overflow)')).toBe(false);
   });
 });

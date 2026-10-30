@@ -12,6 +12,7 @@
     "**/*.test.ssr.ts",
     "**/*.test.visual.ts",
     "**/*.test.lighthouse.ts",
+    "**/*.test.render.ts",
     "**/*.examples.ts"
   ]
 }

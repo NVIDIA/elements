@@ -51,10 +51,13 @@ export class FormatTruncate extends LitElement {
 
   #measurementContext?: CanvasRenderingContext2D | null;
   #resizeObserver?: ResizeObserver;
+  #resizeFrame?: number;
+  #availableWidth = Number.POSITIVE_INFINITY;
 
   override connectedCallback(): void {
     super.connectedCallback();
     attachInternals(this);
+    this.#availableWidth = Number.POSITIVE_INFINITY;
     this.#observeAvailableWidth();
     this.requestUpdate();
   }
@@ -62,9 +65,12 @@ export class FormatTruncate extends LitElement {
   override disconnectedCallback(): void {
     super.disconnectedCallback();
     this.#resizeObserver?.disconnect();
+    if (this.#resizeFrame !== undefined) this.ownerDocument.defaultView?.cancelAnimationFrame(this.#resizeFrame);
+    this.#resizeFrame = undefined;
   }
 
   connectedMoveCallback(): void {
+    this.#availableWidth = Number.POSITIVE_INFINITY;
     this.#observeAvailableWidth();
     this.requestUpdate();
   }
@@ -73,8 +79,9 @@ export class FormatTruncate extends LitElement {
     const text = this.#slottedText;
     const truncatedText = this.#renderText(text);
 
-    if (truncatedText !== text) this.title = text;
-    else this.removeAttribute('title');
+    if (truncatedText !== text) {
+      if (this.title !== text) this.title = text;
+    } else this.removeAttribute('title');
 
     return html`<span internal-host aria-hidden="true">${truncatedText}</span><span sizing-host aria-hidden="true">${text}</span><slot @slotchange=${this.#onSlotChange}></slot>`;
   }
@@ -98,13 +105,6 @@ export class FormatTruncate extends LitElement {
       availableWidth: this.#availableWidth,
       measureText
     });
-  }
-
-  get #availableWidth(): number {
-    const view = this.ownerDocument?.defaultView;
-    if (!view || !this.shadowRoot?.querySelector('[internal-host]')) return Number.POSITIVE_INFINITY;
-
-    return getContentWidth(this, view);
   }
 
   #createTextMeasurer(): (text: string) => number {
@@ -157,8 +157,19 @@ export class FormatTruncate extends LitElement {
   #observeAvailableWidth(): void {
     if (typeof ResizeObserver === 'undefined') return;
 
-    this.#resizeObserver ??= new ResizeObserver(() => {
-      if (this.isConnected) this.requestUpdate();
+    this.#resizeObserver ??= new ResizeObserver(entries => {
+      const entry = entries[0];
+      if (this.isConnected && entry) {
+        // Content-box measurements avoid synchronous geometry reads between sibling Lit updates.
+        this.#availableWidth = entry.contentRect.width;
+        const view = this.ownerDocument.defaultView;
+        if (view && this.#resizeFrame === undefined) {
+          this.#resizeFrame = view.requestAnimationFrame(() => {
+            this.#resizeFrame = undefined;
+            if (this.isConnected) this.requestUpdate();
+          });
+        }
+      }
     });
     this.#resizeObserver.disconnect();
     this.#resizeObserver.observe(this);
@@ -167,18 +178,6 @@ export class FormatTruncate extends LitElement {
   #onSlotChange = (): void => {
     this.requestUpdate();
   };
-}
-
-function getContentWidth(element: HTMLElement, view: Window): number {
-  const computedStyles = view.getComputedStyle(element);
-  return Math.max(
-    0,
-    element.getBoundingClientRect().width -
-      cssPixelValue(computedStyles.borderInlineStartWidth) -
-      cssPixelValue(computedStyles.borderInlineEndWidth) -
-      cssPixelValue(computedStyles.paddingInlineStart) -
-      cssPixelValue(computedStyles.paddingInlineEnd)
-  );
 }
 
 function cssPixelValue(value: string): number {
