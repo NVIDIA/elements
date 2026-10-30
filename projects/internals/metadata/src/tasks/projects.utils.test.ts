@@ -5,6 +5,13 @@ import { describe, expect, it } from 'vitest';
 import { getProjects } from './projects.utils.js';
 
 describe('ProjectsUtils', () => {
+  it('includes the public foundations and viewport packages', () => {
+    const projects = getProjects().data;
+    for (const name of ['@nvidia-elements/foundations', '@nvidia-elements/viewport']) {
+      expect(projects.find(project => project.name === name)).toMatchObject({ name, private: false });
+    }
+  });
+
   it('should return the projects json', async () => {
     const projects = getProjects();
     expect(projects).toBeDefined();

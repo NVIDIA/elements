@@ -13,50 +13,90 @@
     <h2 nve-text="heading sm muted">The UI SDK and agent-ready developer toolkit for AI factories, robotics, and autonomous vehicles.</h2>
   </section>
   <section nve-layout="grid gap:md pad-top:xs span-items:12 &md|span-items:6">
-    <nve-card class="getting-started-feature-card">
-      <nve-card-content>
-        <div nve-layout="column gap:sm">
-          <nve-logo color="gray-denim"><nve-icon name="chip"></nve-icon></nve-logo>
+    <a href="/docs/whats-new/">
+      <nve-card class="getting-started-feature-card">
+        <nve-card-content>
           <div nve-layout="column gap:sm">
-            <h3 nve-text="heading xs emphasis semibold">Built for AI infrastructure</h3>
-            <p nve-text="body muted">Operational UI foundations for AI/ML workloads, autonomous vehicle tools, and robotics consoles.</p>
+            <nve-logo color="gray-denim"><nve-icon name="chip"></nve-icon></nve-logo>
+            <div nve-layout="column gap:sm">
+              <h3 nve-text="heading sm emphasis semibold">Built for AI infrastructure</h3>
+              <p nve-text="body muted">Operational UI foundations for AI/ML workloads, autonomous vehicle tools, and robotics consoles.</p>
+            </div>
           </div>
-        </div>
-      </nve-card-content>
-    </nve-card>
-    <nve-card class="getting-started-feature-card">
-      <nve-card-content>
-        <div nve-layout="column gap:sm">
-          <nve-logo color="gray-denim"><nve-icon name="add-grid"></nve-icon></nve-logo>
+        </nve-card-content>
+        <nve-icon name="arrow" direction="right" aria-hidden="true"></nve-icon>
+      </nve-card>
+    </a>
+    <a href="/docs/integrations/">
+      <nve-card class="getting-started-feature-card">
+        <nve-card-content>
           <div nve-layout="column gap:sm">
-            <h3 nve-text="heading xs emphasis semibold">Framework agnostic</h3>
-            <p nve-text="body muted">Web Components run in React, Angular, Vue, Svelte, Lit, plain HTML, server-rendered templates, and mixed stacks.</p>
+            <nve-logo color="gray-denim"><nve-icon name="add-grid"></nve-icon></nve-logo>
+            <div nve-layout="column gap:sm">
+              <h3 nve-text="heading sm emphasis semibold">Framework agnostic</h3>
+              <p nve-text="body muted">Web Components run in React, Angular, Vue, Svelte, Lit, plain HTML, server-rendered templates, and mixed stacks.</p>
+            </div>
           </div>
-        </div>
-      </nve-card-content>
-    </nve-card>
-    <nve-card class="getting-started-feature-card">
-      <nve-card-content>
-        <div nve-layout="column gap:sm">
-          <nve-logo color="gray-denim"><nve-icon name="sparkles"></nve-icon></nve-logo>
+        </nve-card-content>
+        <nve-icon name="arrow" direction="right" aria-hidden="true"></nve-icon>
+      </nve-card>
+    </a>
+    <a href="/docs/mcp/">
+      <nve-card class="getting-started-feature-card">
+        <nve-card-content>
           <div nve-layout="column gap:sm">
-            <h3 nve-text="heading xs emphasis semibold">Agent-ready tooling</h3>
-            <p nve-text="body muted"><a href="/docs/cli/" nve-text="link no-visit inherit">CLI</a> and <a href="/docs/mcp/" nve-text="link no-visit inherit">MCP</a> expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.</p>
+            <nve-logo color="gray-denim"><nve-icon name="sparkles"></nve-icon></nve-logo>
+            <div nve-layout="column gap:sm">
+              <h3 nve-text="heading sm emphasis semibold">Agent-ready tooling</h3>
+              <p nve-text="body muted">CLI and MCP expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.</p>
+            </div>
           </div>
-        </div>
-      </nve-card-content>
-    </nve-card>
-    <nve-card class="getting-started-feature-card">
-      <nve-card-content>
-        <div nve-layout="column gap:sm">
-          <nve-logo color="gray-denim"><nve-icon name="check-badge"></nve-icon></nve-logo>
+        </nve-card-content>
+        <nve-icon name="arrow" direction="right" aria-hidden="true"></nve-icon>
+      </nve-card>
+    </a>
+    <a href="/docs/metrics/api-status/">
+      <nve-card class="getting-started-feature-card">
+        <nve-card-content>
           <div nve-layout="column gap:sm">
-            <h3 nve-text="heading xs emphasis semibold">Stable API contracts</h3>
-            <p nve-text="body muted"><a href="/docs/mcp/#skills" nve-text="link no-visit inherit">Skills</a> and <a href="/docs/lint/" nve-text="link no-visit inherit">lint</a> guide authoring best practices, common Design System UI patterns, and automated static analysis.</p>
+            <nve-logo color="gray-denim"><nve-icon name="check-badge"></nve-icon></nve-logo>
+            <div nve-layout="column gap:sm">
+              <h3 nve-text="heading sm emphasis semibold">Stable API contracts</h3>
+              <p nve-text="body muted">Skills and lint guide authoring best practices, common Design System UI patterns, and automated static analysis backed by {{ siteData.homeStats.tests }}+ automated tests.</p>
+            </div>
           </div>
-        </div>
-      </nve-card-content>
-    </nve-card>
+        </nve-card-content>
+        <nve-icon name="arrow" direction="right" aria-hidden="true"></nve-icon>
+      </nve-card>
+    </a>
+    <a href="/docs/elements/">
+      <nve-card class="getting-started-explore-card">
+        <nve-card-content>
+          <div nve-layout="row gap:sm align:vertical-center">
+            <nve-logo color="gray-denim"><nve-icon name="add-grid" aria-hidden="true"></nve-icon></nve-logo>
+            <div nve-layout="column gap:sm">
+              <h3 nve-text="heading sm emphasis semibold">{{ componentStats.count }}+ Components</h3>
+              <p nve-text="body muted">Browse Web Components, APIs, and working examples.</p>
+            </div>
+          </div>
+        </nve-card-content>
+        <nve-icon name="arrow" direction="right" aria-hidden="true"></nve-icon>
+      </nve-card>
+    </a>
+    <a href="/docs/patterns/">
+      <nve-card class="getting-started-explore-card">
+        <nve-card-content>
+          <div nve-layout="row gap:sm align:vertical-center">
+            <nve-logo color="gray-denim"><nve-icon name="rectangle-group" aria-hidden="true"></nve-icon></nve-logo>
+            <div nve-layout="column gap:sm">
+              <h3 nve-text="heading sm emphasis semibold">{{ siteData.homeStats.patterns }}+ Patterns</h3>
+              <p nve-text="body muted">Explore reusable patterns for app workflows.</p>
+            </div>
+          </div>
+        </nve-card-content>
+        <nve-icon name="arrow" direction="right" aria-hidden="true"></nve-icon>
+      </nve-card>
+    </a>
   </section>
 
   <section nve-layout="column gap:lg pad-top:lg">

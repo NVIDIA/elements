@@ -44,10 +44,12 @@ export function getProjects(): { created: string; data: Project[] } {
     '../../../../code',
     '../../../../lint',
     '../../../../forms',
+    '../../../../foundations',
     '../../../../markdown',
     '../../../../media',
     '../../../../monaco',
     '../../../../pi',
+    '../../../../viewport',
     '../../../../internals/metadata',
     '../../../../internals/patterns'
   ];
