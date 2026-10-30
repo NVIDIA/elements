@@ -15,6 +15,7 @@ dist
 .lighthouse
 **/.visual/dist
 **/.visual/.tmp-*
+**/.visual/port-*
 *.diff.png
 coverage
 vendor/
