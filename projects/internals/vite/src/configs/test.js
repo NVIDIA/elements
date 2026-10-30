@@ -129,6 +129,7 @@ export const libraryTestConfig = {
         '**/.pnpm/**',
         '**/*.test.bench.ts',
         '**/*.test.webgpu.ts',
+        '**/*.test.render.ts',
         '**/*.test.ts',
         '**/*.test.bench.ts',
         '**/*.css.js',

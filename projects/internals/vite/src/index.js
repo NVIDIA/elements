@@ -14,3 +14,6 @@ export { visualRunner } from './runners/visual.js';
 export { ssrRunner } from './runners/ssr.js';
 
 export const VERSION = '0.0.0';
+
+export { libraryRenderTestConfig } from './configs/render.js';
+export { renderRunner } from './runners/render.js';

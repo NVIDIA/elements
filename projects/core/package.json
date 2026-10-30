@@ -53,7 +53,8 @@
     "test:lighthouse": "wireit",
     "test:visual": "wireit",
     "lint": "wireit",
-    "lint:fix": "wireit"
+    "lint:fix": "wireit",
+    "test:render": "wireit"
   },
   "files": [
     "README.md",
@@ -1080,7 +1081,8 @@
         "test:axe",
         "test:ssr",
         "test:coverage",
-        "test:visual"
+        "test:visual",
+        "test:render"
       ]
     },
     "publint": {
@@ -1128,7 +1130,8 @@
         "tsconfig.lib.json",
         "vite.config.ts",
         "vite.bundle.ts",
-        "custom-elements-manifest.config.mjs"
+        "custom-elements-manifest.config.mjs",
+        "!src/**/*.test.render.ts"
       ],
       "output": [
         "dist/**",
@@ -1396,6 +1399,38 @@
         "!src/**/__screenshots__/**"
       ],
       "output": []
+    },
+    "test:render": {
+      "command": "playwright-lock \"vitest run --config=vitest.render.ts\"",
+      "files": [
+        "src/**/*.test.render.ts",
+        "vitest.render.*",
+        "dist/**/*.js",
+        "dist/**/*.css",
+        "../themes/dist/**",
+        "../styles/dist/**",
+        "../foundations/dist/**",
+        "../forms/dist/**"
+      ],
+      "output": [
+        "coverage/render/**",
+        ".render/reports/**"
+      ],
+      "dependencies": [
+        "../internals/testing:build",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        "RENDER_TRACE": {
+          "default": "0",
+          "external": true
+        }
+      }
     }
   },
   "publishConfig": {

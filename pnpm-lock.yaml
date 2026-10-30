@@ -831,9 +831,6 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
-      '@nvidia-elements/core':
-        specifier: workspace:*
-        version: link:../core
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint

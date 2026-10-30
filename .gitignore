@@ -13,6 +13,7 @@ node_modules
 __pycache__
 dist
 .lighthouse
+.render
 **/.visual/dist
 **/.visual/.tmp-*
 *.diff.png

@@ -3,7 +3,7 @@
 
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent, waitForAnimationFrames } from '@internals/testing';
 import { Viewport, type ViewportTransform } from '@nvidia-elements/viewport/viewport';
 import '@nvidia-elements/viewport/viewport/define.js';
 
@@ -1312,12 +1312,6 @@ async function enablePointerPanning(element: Viewport): Promise<void> {
   element.behaviorPan = true;
   await elementIsStable(element);
   vi.spyOn(element, 'setPointerCapture').mockImplementation(() => {});
-}
-
-async function waitForAnimationFrames(count = 2): Promise<void> {
-  for (let frame = 0; frame < count; frame += 1) {
-    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
-  }
 }
 
 function viewportFrame(element: Viewport): HTMLElement {

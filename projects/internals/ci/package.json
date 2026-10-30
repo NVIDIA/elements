@@ -52,6 +52,7 @@
         "lighthouse-summary.js",
         "metrics.lighthouse.js",
         "release-notes.test.js",
+        "../../../package.json",
         "package.json"
       ],
       "output": []

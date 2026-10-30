@@ -42,6 +42,10 @@
     "./axe/index.js": {
       "types": "./dist/axe/index.d.ts",
       "default": "./dist/axe/index.js"
+    },
+    "./render": {
+      "types": "./dist/render/index.d.ts",
+      "default": "./dist/render/index.js"
     }
   },
   "wireit": {

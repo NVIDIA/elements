@@ -7,6 +7,7 @@ import path from 'path';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 import { parseFragment } from 'parse5';
+import { stripLitMarkers } from '../template.js';
 
 const project = new Project();
 const cache = new Map();
@@ -181,26 +182,7 @@ async function renderTemplate(template) {
   const data = eval(`html\`${template}\``); // treat parsed source string as a template literal
   const result = render(data);
   const contents = await collectResult(result);
-  return cleanRenderResult(contents);
-}
-
-function cleanRenderResult(contents) {
-  // Remove Lit SSR bookkeeping comments; examples are consumed as HTML snapshots.
-  const markers = [];
-  function visit(node) {
-    if (node.nodeName === '#comment' && /^(?:\/?lit-part(?:\s|$)|lit-node\s)/.test(node.data)) {
-      markers.push(node.sourceCodeLocation);
-    }
-    for (const child of node.childNodes ?? []) visit(child);
-    if (node.tagName === 'template') visit(node.content);
-  }
-  visit(parseFragment(contents, { sourceCodeLocationInfo: true }));
-
-  let cleaned = contents;
-  for (const marker of markers.sort((a, b) => b.startOffset - a.startOffset)) {
-    cleaned = cleaned.slice(0, marker.startOffset) + cleaned.slice(marker.endOffset);
-  }
-  return cleaned;
+  return stripLitMarkers(contents);
 }
 
 async function formatTemplate(template) {

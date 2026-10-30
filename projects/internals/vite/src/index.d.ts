@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { UserConfig } from 'vite';
+import type { TemplateResult } from 'lit';
 import type { CDPSession, Page, ViewportSize } from 'playwright';
 
 export declare const libraryBuildConfig: UserConfig;
@@ -249,3 +250,45 @@ export declare function positiveEnvironmentInteger(name: string, fallback: numbe
 export declare function delay(milliseconds: number): Promise<void>;
 
 export declare const VERSION: string;
+
+export declare const libraryRenderTestConfig: UserConfig;
+export interface RenderBudgets {
+  layoutCount?: number;
+  styleRecalcCount?: number;
+}
+export interface RenderOptions {
+  metadata?: Record<string, unknown>;
+  observe?: (page: Page) => Promise<Record<string, unknown>>;
+  validate?: (report: RenderReport) => void | Promise<void>;
+  reducedMotion?: 'reduce' | 'no-preference';
+  name: string;
+  workload: string;
+  content: string | TemplateResult;
+  prepare?: (page: Page) => Promise<unknown>;
+  interact: (page: Page) => Promise<unknown>;
+  complete?: (page: Page) => Promise<unknown>;
+  budgets?: RenderBudgets;
+  timeoutMs?: number;
+  outputDir?: string;
+  trace?: boolean;
+}
+export interface RenderReport {
+  metadata?: Record<string, unknown>;
+  observations?: Record<string, unknown>;
+  name: string;
+  workload: string;
+  layoutCount: number;
+  styleRecalcCount: number;
+  layoutDurationMs: number;
+  styleRecalcDurationMs: number;
+  budgets: RenderBudgets;
+  exceededBudgets: string[];
+  chromiumVersion: string;
+  viewport: ViewportSize;
+  settings: Record<string, unknown>;
+  artifacts: { report: string; trace?: string };
+  traceRun?: 'original';
+  diagnostics: string[];
+  error?: string;
+}
+export declare const renderRunner: { getReport(options: RenderOptions): Promise<RenderReport> };

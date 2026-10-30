@@ -67,6 +67,7 @@ export const libraryNodeTestConfig = {
         '**/*.test.ts',
         '**/*.test.bench.ts',
         '**/*.test.webgpu.ts',
+        '**/*.test.render.ts',
         '**/*.d.ts',
         '**/*.cjs',
         '**/*.mjs',
