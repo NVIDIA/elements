@@ -1900,7 +1900,8 @@ export default {
     resolve('src/**/*.test.ssr.ts'),
     resolve('src/**/*.test.lighthouse.ts'),
     resolve('src/**/*.test.visual.ts'),
-    resolve('src/**/*.test.webgpu.ts')
+    resolve('src/**/*.test.webgpu.ts'),
+    resolve('src/**/*.test.render.ts')
   ],
   litelement: true,
   plugins: [

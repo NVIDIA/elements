@@ -11,6 +11,7 @@ const ignores = [
   'src/vendor/',
   '.visual/',
   '.lighthouse/',
+  '.render/',
   '.wireit/'
 ];
 

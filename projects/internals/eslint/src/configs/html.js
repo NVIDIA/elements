@@ -17,6 +17,7 @@ const ignores = [
   'src/vendor/',
   '.visual/',
   '.lighthouse/',
+  '.render/',
   '.wireit/',
   '.11ty-vite/',
   'src/**/*.snippets.html'
