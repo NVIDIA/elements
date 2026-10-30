@@ -177,6 +177,9 @@ export class Combobox extends Control implements ContainerElement {
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
   #syncPending = false;
+  #overflowFrame?: number;
+  #overflowObserver?: ResizeObserver;
+  #overflowTarget: Element | null = null;
 
   protected _associateDatalist = false;
 
@@ -259,11 +262,15 @@ export class Combobox extends Control implements ContainerElement {
     this.#setupAutoCompleteKeyEvents();
     this.#setupMenuItemUpdateEvents();
     this.#setupOpenKeyEvents();
-    this.#setupOverflowListener();
     this.#setupSlotStates();
     await this.#setupLightDismiss();
     this.input.setAttribute('list', '');
     this.input.autocomplete = 'off';
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this.#setupOverflowListener();
   }
 
   connectedCallback() {
@@ -283,7 +290,13 @@ export class Combobox extends Control implements ContainerElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#observers.forEach(observer => observer.disconnect());
+    this.#observers.length = 0;
+    this.#overflowObserver?.disconnect();
+    this.#overflowTarget = null;
+    this._internals.states.delete('multiple-overflow');
     this.#cleanupOptionObservers();
+    if (this.#overflowFrame !== undefined) cancelAnimationFrame(this.#overflowFrame);
+    this.#overflowFrame = undefined;
   }
 
   reset() {
@@ -577,15 +590,30 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupOverflowListener() {
-    if (this.#select?.multiple && !this.#tagLayoutIsHidden) {
-      if (this.#select.selectedOptions.length > 1) {
-        // only calculate initial overflow if many tags exist
-        this.#updateMultipleOverflow(this.#tags!.getBoundingClientRect().width);
-      }
-      const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0]!.contentRect.width));
-      this.#observers.push(observer);
-      observer.observe(this.#tags!);
+    if (!this.isConnected) return;
+    const tags = this.#select?.multiple && !this.#tagLayoutIsHidden ? this.#tags : null;
+    if (tags === this.#overflowTarget) return;
+
+    this.#overflowObserver?.disconnect();
+    this.#overflowTarget = tags;
+    if (this.#overflowFrame !== undefined) cancelAnimationFrame(this.#overflowFrame);
+    this.#overflowFrame = undefined;
+    if (!tags) {
+      this._internals.states.delete('multiple-overflow');
+      return;
     }
+
+    this.#overflowObserver ??= new ResizeObserver(() => {
+      if (this.#overflowFrame !== undefined) return;
+      // Overflow styles can resize the input and tags. Apply them outside observer delivery.
+      this.#overflowFrame = requestAnimationFrame(() => {
+        this.#overflowFrame = undefined;
+        const currentTags = this.#tags;
+        if (this.isConnected && currentTags) this.#updateMultipleOverflow(currentTags.getBoundingClientRect().width);
+      });
+    });
+    this.#overflowObserver.observe(tags);
+    this.#overflowObserver.observe(this.#input!);
   }
 
   #updateMultipleOverflow(tagWidth: number) {
