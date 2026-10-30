@@ -57,7 +57,7 @@ pnpm run test:ssr
 Core measures Chromium layout and style recalculation counts during interactions on an isolated Playwright page.
 These counts include legitimate rendering and do not count forced reflows. Use `vitest.render.ts` with
 `libraryRenderTestConfig`. Keep explicit count budgets, readiness, and completion boundaries in each scenario.
-The [shared runner documentation](https://github.com/NVIDIA/elements/blob/main/projects/internals/vite/README.md#render-regression-tests)
+The [shared runner documentation](https://github.com/NVIDIA/elements/blob/main/projects/internals/vite/README.md#render)
 includes the API, a complete grid example, calibration results, commands, and trace investigation guidance.
 
 ## Test Configuration

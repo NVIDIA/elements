@@ -6,10 +6,9 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('skeleton lighthouse report', () => {
   test('skeleton should meet lighthouse benchmarks', async () => {
+    // Keep the page-load audit static; effect variants have visual and accessibility coverage.
     const report = await lighthouseRunner.getReport('nve-skeleton', /* html */`
       <nve-skeleton></nve-skeleton>
-      <nve-skeleton effect="pulse"></nve-skeleton>
-      <nve-skeleton effect="shimmer"></nve-skeleton>
       <nve-skeleton shape="pill"></nve-skeleton>
       <nve-skeleton shape="round" style="width: 40px; height: 40px;"></nve-skeleton>
       <script type="module">

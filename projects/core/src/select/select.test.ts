@@ -3,7 +3,14 @@
 
 import { html } from 'lit';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@internals/testing';
+import {
+  createFixture,
+  removeFixture,
+  elementIsStable,
+  emulateClick,
+  untilEvent,
+  waitForAnimationFrames
+} from '@internals/testing';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
@@ -449,6 +456,49 @@ describe(Select.metadata.tag, () => {
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(resolve => setTimeout(resolve, 0));
     expect(element.matches(':state(multiple-overflow)')).toBe(true);
+  });
+
+  it('should recompute overflow after batched selection changes without resizing the field', async () => {
+    element.style.setProperty('--width', '240px');
+    element.style.setProperty('--min-width', '0px');
+    select.multiple = true;
+    select.options[0].selected = true;
+    await elementIsStable(element);
+    await waitForAnimationFrames(4);
+    const input = element.shadowRoot.querySelector<HTMLElement>('[input]');
+    const width = input.getBoundingClientRect().width;
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
+
+    select.options[1].selected = true;
+    select.options[2].selected = true;
+    await elementIsStable(element);
+    await waitForAnimationFrames(4);
+    expect(input.getBoundingClientRect().width).toBe(width);
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
+
+    select.options[1].selected = false;
+    select.options[2].selected = false;
+    await elementIsStable(element);
+    await waitForAnimationFrames(4);
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
+  });
+
+  it('should observe replacement tags after switching between single and multiple selection', async () => {
+    element.style.setProperty('--width', '240px');
+    element.style.setProperty('--min-width', '0px');
+    for (let cycle = 0; cycle < 2; cycle++) {
+      select.multiple = true;
+      Array.from(select.options).forEach(option => (option.selected = true));
+      await elementIsStable(element);
+      await waitForAnimationFrames(4);
+      expect(element.matches(':state(multiple-overflow)')).toBe(true);
+
+      select.multiple = false;
+      await elementIsStable(element);
+      await waitForAnimationFrames(4);
+      expect(element.shadowRoot.querySelector('.tags')).toBeNull();
+      expect(element.matches(':state(multiple-overflow)')).toBe(false);
+    }
   });
 
   it('should set host :state(size) state when multiple is used', async () => {

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { VitePlaywrightRunner, buildPage, VIEWPORT_WIDTH, VIEWPORT_HEIGHT } from './playwright.js';
 import { metricDelta, validateBudgets, exceededBudgets } from './render-metrics.js';
@@ -152,6 +152,11 @@ export class RenderRunner {
           report.diagnostics.push(`Cleanup: ${error}`);
           primary ??= error;
         }
+      }
+      try {
+        await rm(resolve('.render/dist', id), { recursive: true, force: true });
+      } catch (error) {
+        report.diagnostics.push(`Fixture cleanup: ${error}`);
       }
       this.#busy = false;
       try {

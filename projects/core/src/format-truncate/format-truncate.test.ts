@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { createFixture, elementIsStable, removeFixture, waitForAnimationFrames } from '@internals/testing';
 import { FormatTruncate } from '@nvidia-elements/core/format-truncate';
 import '@nvidia-elements/core/format-truncate/define.js';
 import { truncateText } from './utils.js';
@@ -90,6 +90,7 @@ describe(FormatTruncate.metadata.tag, () => {
     element.textContent = 'abcdefghij';
     getDefaultSlot(element).dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
+    await waitForInternalHost(element, internalHost => internalHost.textContent?.includes('…'));
 
     expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toContain('…');
     expect(element.title).toBe('abcdefghij');
@@ -106,12 +107,14 @@ describe(FormatTruncate.metadata.tag, () => {
     element.textContent = 'abcdefghij';
     narrowContainer.append(element);
     await elementIsStable(element);
+    await waitForInternalHost(element, internalHost => internalHost.textContent?.includes('…'));
 
     expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toContain('…');
     expect(element.title).toBe('abcdefghij');
 
     wideContainer.append(element);
     await elementIsStable(element);
+    await waitForInternalHost(element, internalHost => internalHost.textContent === 'abcdefghij');
 
     expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toBe('abcdefghij');
     expect(element.hasAttribute('title')).toBe(false);
@@ -127,6 +130,7 @@ describe(FormatTruncate.metadata.tag, () => {
     element.textContent = 'abcdefghij';
     source.append(element);
     await elementIsStable(element);
+    await waitForInternalHost(element, internalHost => internalHost.textContent?.includes('…'));
 
     expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toContain('…');
     expect(element.title).toBe('abcdefghij');
@@ -134,6 +138,7 @@ describe(FormatTruncate.metadata.tag, () => {
     destination.moveBefore(element, null);
     element.connectedMoveCallback();
     await elementIsStable(element);
+    await waitForInternalHost(element, internalHost => internalHost.textContent === 'abcdefghij');
 
     expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toBe('abcdefghij');
     expect(element.hasAttribute('title')).toBe(false);
@@ -161,6 +166,50 @@ describe(FormatTruncate.metadata.tag, () => {
 
     expect(element.shadowRoot?.querySelector('[internal-host]')?.textContent).toBe('visible');
     expect(element.hasAttribute('title')).toBe(false);
+  });
+
+  it('should fit the content width after accounting for borders and padding', async () => {
+    element.style.cssText = 'box-sizing:border-box;width:160px;padding-inline:12px;border:2px solid transparent';
+    element.position = 'end';
+    element.textContent = 'training-pipeline-2026-08-05-production';
+    await elementIsStable(element);
+    await waitForInternalHost(element, host => host.textContent?.includes('…'));
+
+    const visual = element.shadowRoot.querySelector('[internal-host]');
+    const range = document.createRange();
+    range.selectNodeContents(visual);
+    expect(range.getBoundingClientRect().width).toBeLessThanOrEqual(element.clientWidth - 24 + 1);
+    range.detach();
+    expect(element.title).toBe(element.textContent);
+  });
+
+  it('should cancel a pending resize update when disconnected', async () => {
+    // Native observer delivery precedes the frame scheduled by the component.
+    const cancel = vi.spyOn(window, 'cancelAnimationFrame');
+    const update = vi.spyOn(element, 'requestUpdate');
+    let observer: ResizeObserver | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      await new Promise<void>((resolve, reject) => {
+        timer = setTimeout(() => reject(new Error('Resize observation timed out after 2000 ms')), 2000);
+        observer = new ResizeObserver(() => {
+          observer?.disconnect();
+          resolve();
+        });
+        element.style.width = '160px';
+        observer.observe(element);
+      });
+      update.mockClear();
+      element.remove();
+      expect(cancel).toHaveBeenCalledOnce();
+      await waitForAnimationFrames(2);
+      expect(update).not.toHaveBeenCalled();
+    } finally {
+      observer?.disconnect();
+      clearTimeout(timer);
+      cancel.mockRestore();
+      update.mockRestore();
+    }
   });
 
   it('should truncate using its flex item width', async () => {
@@ -387,10 +436,15 @@ function waitForInternalHost(
   if (!internalHost) throw new Error('Expected internal host');
   if (condition(internalHost)) return Promise.resolve();
 
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      observer.disconnect();
+      reject(new Error('Truncated text did not reach the expected state after resize within 2000 ms'));
+    }, 2000);
     const observer = new MutationObserver(() => {
       if (condition(internalHost)) {
         observer.disconnect();
+        clearTimeout(timer);
         resolve();
       }
     });
