@@ -408,6 +408,14 @@ describe(Joystick.metadata.tag, () => {
     expect(element.matches(':state(active)')).toBe(true);
   });
 
+  it('should track the pointer across the surface before release', () => {
+    element.dispatchEvent(pointer('pointerdown', 60, 60));
+    expect(element.value).toEqual({ x: 0, y: 0 });
+    element.dispatchEvent(pointer('pointermove', 85, 35));
+    expect(element.value).toEqual({ x: 0.5, y: -0.5 });
+    expect(element.matches(':state(active)')).toBe(true);
+  });
+
   it.each(['square', 'horizontal', 'vertical'] as const)('should constrain pointer input to %s', async constraint => {
     element.constraint = constraint;
     await elementIsStable(element);
