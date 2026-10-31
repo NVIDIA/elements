@@ -34,11 +34,6 @@
       "count": 6
     }
   },
-  "src/internal/controllers/type-native-popover.utils.test.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/internal/decorators/scoped-registry.test.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1

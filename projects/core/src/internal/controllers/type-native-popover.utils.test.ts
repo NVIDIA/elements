@@ -169,7 +169,7 @@ describe('getHostAnchor', () => {
 
   beforeEach(() => {
     logSpy = vi.spyOn(LogService, 'warn');
-    host = document.createElement('div') as TestHost;
+    host = document.createElement('div');
     anchor = document.createElement('div');
     document.body.appendChild(host);
     document.body.appendChild(anchor);
