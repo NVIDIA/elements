@@ -61,7 +61,7 @@
     "semantic-release": "25.0.9",
     "semantic-release-replace-plugin": "1.2.7",
     "sharp": "0.35.5",
-    "wireit": "0.14.13"
+    "wireit": "0.15.0"
   },
   "lint-staged": {
     "!{projects/internals/metadata/static/**,projects/site/public/static/**}": "prettier --write --ignore-unknown",
