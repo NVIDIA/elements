@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/pi",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "release": {
     "extends": "../../release.config.js"
   },

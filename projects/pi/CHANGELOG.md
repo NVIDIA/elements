@@ -1,3 +1,48 @@
+## [1.0.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.3...@nvidia-elements/pi-v1.0.4) (2026-11-02)
+
+### Features
+
+* **core:** add composable tab item groups ([284eee9](https://github.com/NVIDIA/elements/commit/284eee904d77a9b84f2c122f35d95a2e18eba73e))
+* **core:** joystick ([a4461e1](https://github.com/NVIDIA/elements/commit/a4461e10930ec198bc43b846f7b090f5db70c371))
+* **core:** tree node invoker command support ([2d889e4](https://github.com/NVIDIA/elements/commit/2d889e485b5aad0980731821691973d57c2ee343))
+* **foundations:** add i18n support ([074f46c](https://github.com/NVIDIA/elements/commit/074f46ce0e148d00f40e6e320abec01e6fee5704))
+* **foundations:** scroll box ([fa9d947](https://github.com/NVIDIA/elements/commit/fa9d947d076a9cbc356a307aa0fb1f219bb701a4))
+* **lint:** new rules ([1352a3e](https://github.com/NVIDIA/elements/commit/1352a3e579e6a2e3d4bff29c03c91379dbd30f93))
+* **lint:** prevent nested interactive elements ([a27b402](https://github.com/NVIDIA/elements/commit/a27b40258d94e5384b3a5424dd8176fddeefee81))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.5 ([8bfbeb0](https://github.com/NVIDIA/elements/commit/8bfbeb0953fae54aae4fdce15b455e2fed94a60b))
+* **cli:** update bun to 1.4.4 ([dc0a9d4](https://github.com/NVIDIA/elements/commit/dc0a9d4079cf3d8c7251ed4dfb6ff8ce728f8be1))
+* **cli:** update marked-terminal to 7.3.1 ([d11932c](https://github.com/NVIDIA/elements/commit/d11932c791ae22a0847c00f20e5bd433d7b66444))
+* **cli:** update notice ([21a6510](https://github.com/NVIDIA/elements/commit/21a6510164469615358937cdf833edc05bfa9cb8))
+* **code:** foundations utility functions ([aef8463](https://github.com/NVIDIA/elements/commit/aef846300b4861cc07c87ae32d844267302f62a3))
+* **core:** add min-width for fit-text styling for filter chip ([7bf423e](https://github.com/NVIDIA/elements/commit/7bf423ed11413e9aa33ca4f28658a1bcac011d26))
+* **core:** correct gesture termination handling ([0aab542](https://github.com/NVIDIA/elements/commit/0aab542b206b25933d921416a62f8a70c44b2723))
+* **core:** foundations utility functions ([4618981](https://github.com/NVIDIA/elements/commit/4618981acecdd4de0ed4b225c070a4506a6fd4fd))
+* **core:** i18n refactor ([4b6e10c](https://github.com/NVIDIA/elements/commit/4b6e10cd1ac30622b030be926e2d39e7e8039f95))
+* **core:** iframe separate theme script and resize handling ([9391e0b](https://github.com/NVIDIA/elements/commit/9391e0beffe1751d80c2cb8da981e20906fb48a9))
+* **core:** migrate runtime to static lint checks ([e616f85](https://github.com/NVIDIA/elements/commit/e616f85788c699b6c89c410625a23481834e48dd))
+* **core:** observe only host hidden changes for popover visibility ([3a2b58d](https://github.com/NVIDIA/elements/commit/3a2b58d26b7223677d8f23f8643dd6d1cc173882))
+* **core:** remove layout boxes from closed popovers ([e7e89ac](https://github.com/NVIDIA/elements/commit/e7e89acc6565d325410590e91eba9966d2161052))
+* **core:** remove unused polyfill ([427b3ef](https://github.com/NVIDIA/elements/commit/427b3ef8bf1fb4d70a86ede95b719e7aea1bd58e))
+* **docs:** prevent code block copy buttons from overflowing the page ([6972e4b](https://github.com/NVIDIA/elements/commit/6972e4b7e3dfaa936a650167c47a3d6d0cca2a35))
+* **docs:** prevent concurrent site output writes ([cd1bfdb](https://github.com/NVIDIA/elements/commit/cd1bfdbb2e177d8a4e958feb40ab01b0c9478caf))
+* **forms:** detect label anchors after named slots ([756b692](https://github.com/NVIDIA/elements/commit/756b69251f0d31aed089c3bb31ec3688866d3360))
+* **forms:** enable invoke method for controller ([68c8aa3](https://github.com/NVIDIA/elements/commit/68c8aa33a4d9254601b56b219ae6cc4268b54306))
+* **forms:** preserve managed tabindex across button state changes ([ee959b4](https://github.com/NVIDIA/elements/commit/ee959b407ad08ef158ffd3f422b57b2b895b40ba))
+* **foundations:** missing dist publish ([5521fc0](https://github.com/NVIDIA/elements/commit/5521fc0d55e0542d028727531267241bc31f9401))
+* **foundations:** utility exports ([9039bf0](https://github.com/NVIDIA/elements/commit/9039bf0c4fbeac17a16987b873c4de47d07fc313))
+* **lint:** add tree invoker command support ([bde2265](https://github.com/NVIDIA/elements/commit/bde2265de1ed48981de745d1f4ca733d28b65df0))
+* **markdown:** foundations utility functions ([1ed4bc6](https://github.com/NVIDIA/elements/commit/1ed4bc6dfe4eef0663ab78e450af9765a2265ae2))
+* **markdown:** update notice ([1315538](https://github.com/NVIDIA/elements/commit/1315538849bc452a321c3043411fd5e555025e75))
+* **media:** foundations utility functions ([ee9b3c7](https://github.com/NVIDIA/elements/commit/ee9b3c7d18c04d3b1aa3c6bfef9dec528b9c0da1))
+* **media:** i18n refactor ([a730282](https://github.com/NVIDIA/elements/commit/a73028216d642440d5fe583584703793e38d39d9))
+* **monaco:** foundations utility functions ([a62e1db](https://github.com/NVIDIA/elements/commit/a62e1db32f0331108bb6518248cbf01bedb0076d))
+* **pi:** update notice ([561c535](https://github.com/NVIDIA/elements/commit/561c535744d599f26fb2692f00b089ed8eac74ef))
+* **viewport:** foundations utility functions ([74fe7db](https://github.com/NVIDIA/elements/commit/74fe7db2d00c3b1cd99a99bfc97556a58d017899))
+* **viewport:** i18n refactor ([2a6825b](https://github.com/NVIDIA/elements/commit/2a6825b24be4ed4304c2b57c91bbaf3435a5a480))
+
 ## [1.0.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.2...@nvidia-elements/pi-v1.0.3) (2026-10-23)
 
 ### Features
