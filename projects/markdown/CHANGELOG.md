@@ -1,3 +1,29 @@
+## [2.0.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v2.0.4...@nvidia-elements/markdown-v2.0.5) (2026-11-02)
+
+### Features
+
+* **core:** joystick ([a4461e1](https://github.com/NVIDIA/elements/commit/a4461e10930ec198bc43b846f7b090f5db70c371))
+* **core:** tree node invoker command support ([2d889e4](https://github.com/NVIDIA/elements/commit/2d889e485b5aad0980731821691973d57c2ee343))
+* **foundations:** add i18n support ([074f46c](https://github.com/NVIDIA/elements/commit/074f46ce0e148d00f40e6e320abec01e6fee5704))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.5 ([8bfbeb0](https://github.com/NVIDIA/elements/commit/8bfbeb0953fae54aae4fdce15b455e2fed94a60b))
+* **cli:** update marked-terminal to 7.3.1 ([d11932c](https://github.com/NVIDIA/elements/commit/d11932c791ae22a0847c00f20e5bd433d7b66444))
+* **cli:** update notice ([21a6510](https://github.com/NVIDIA/elements/commit/21a6510164469615358937cdf833edc05bfa9cb8))
+* **core:** add min-width for fit-text styling for filter chip ([7bf423e](https://github.com/NVIDIA/elements/commit/7bf423ed11413e9aa33ca4f28658a1bcac011d26))
+* **core:** correct gesture termination handling ([0aab542](https://github.com/NVIDIA/elements/commit/0aab542b206b25933d921416a62f8a70c44b2723))
+* **core:** i18n refactor ([4b6e10c](https://github.com/NVIDIA/elements/commit/4b6e10cd1ac30622b030be926e2d39e7e8039f95))
+* **core:** iframe separate theme script and resize handling ([9391e0b](https://github.com/NVIDIA/elements/commit/9391e0beffe1751d80c2cb8da981e20906fb48a9))
+* **core:** remove unused polyfill ([427b3ef](https://github.com/NVIDIA/elements/commit/427b3ef8bf1fb4d70a86ede95b719e7aea1bd58e))
+* **forms:** enable invoke method for controller ([68c8aa3](https://github.com/NVIDIA/elements/commit/68c8aa33a4d9254601b56b219ae6cc4268b54306))
+* **forms:** preserve managed tabindex across button state changes ([ee959b4](https://github.com/NVIDIA/elements/commit/ee959b407ad08ef158ffd3f422b57b2b895b40ba))
+* **lint:** add tree invoker command support ([bde2265](https://github.com/NVIDIA/elements/commit/bde2265de1ed48981de745d1f4ca733d28b65df0))
+* **markdown:** update notice ([1315538](https://github.com/NVIDIA/elements/commit/1315538849bc452a321c3043411fd5e555025e75))
+* **media:** i18n refactor ([a730282](https://github.com/NVIDIA/elements/commit/a73028216d642440d5fe583584703793e38d39d9))
+* **pi:** update notice ([561c535](https://github.com/NVIDIA/elements/commit/561c535744d599f26fb2692f00b089ed8eac74ef))
+* **viewport:** i18n refactor ([2a6825b](https://github.com/NVIDIA/elements/commit/2a6825b24be4ed4304c2b57c91bbaf3435a5a480))
+
 ## [2.0.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v2.0.3...@nvidia-elements/markdown-v2.0.4) (2026-10-28)
 
 ### Features
