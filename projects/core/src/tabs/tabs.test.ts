@@ -229,6 +229,24 @@ describe(`${Tabs.metadata.tag} - multi tab selection`, () => {
     expect(tab1.selected).toBe(false);
     expect(tab2.selected).toBe(true);
   });
+
+  it('should preserve roving tabindex after selection updates the tab items', async () => {
+    await userEvent.click(tab1);
+    await elementIsStable(tab1);
+    await elementIsStable(tab2);
+    expect(tab1.selected).toBe(true);
+    expect(tab2.selected).toBe(false);
+    expect(tab1.tabIndex).toBe(0);
+    expect(tab2.tabIndex).toBe(-1);
+
+    await userEvent.click(tab2);
+    await elementIsStable(tab1);
+    await elementIsStable(tab2);
+    expect(tab1.selected).toBe(false);
+    expect(tab2.selected).toBe(true);
+    expect(tab1.tabIndex).toBe(-1);
+    expect(tab2.tabIndex).toBe(0);
+  });
 });
 
 describe(`${Tabs.metadata.tag} - initial focus`, () => {
