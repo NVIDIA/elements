@@ -247,10 +247,13 @@ export default {
         ...EXAMPLE_ENTRIES,
         ...TEST_ENTRIES,
         ...TEST_VARIANT_ENTRIES,
+        ...BUNDLE_ENTRIES,
         ...VITE_CONFIGS,
         ...VITEST_CONFIGS
       ],
-      project: [...PROJECT_FILES, ...SOURCE_FILES]
+      project: [...PROJECT_FILES, ...SOURCE_FILES],
+      // Consumers provide Vue when opting in to the generated framework typings.
+      ignoreDependencies: ['vue']
     },
     'projects/viewport': {
       entry: [
