@@ -291,6 +291,39 @@ describe(`${Tabs.metadata.tag} - initial focus`, () => {
   });
 });
 
+describe(`${Tabs.metadata.tag} - dynamic tab order`, () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => removeFixture(fixture));
+
+  it('should prefer the focused tab during insertion without changing selection', async () => {
+    fixture = await createFixture(html`
+      <nve-tabs>
+        <nve-tabs-item selected>Overview</nve-tabs-item>
+        <nve-tabs-item>Details</nve-tabs-item>
+        <nve-tabs-item>Settings</nve-tabs-item>
+      </nve-tabs>
+    `);
+    const tabs = fixture.querySelector<Tabs>(Tabs.metadata.tag);
+    const items = Array.from(tabs.querySelectorAll<TabsItem>(TabsItem.metadata.tag));
+    await elementIsStable(tabs);
+    items[0].selected = false;
+    items[2].selected = true;
+    await Promise.all(items.map(item => elementIsStable(item)));
+    items[1].focus();
+    expect(items.map(item => item.tabIndex)).toEqual([0, -1, -1]);
+
+    const added = document.createElement('nve-tabs-item');
+    tabs.append(added);
+    await elementIsStable(added);
+    await elementIsStable(tabs);
+
+    expect([...items, added].map(item => item.tabIndex)).toEqual([-1, 0, -1, -1]);
+    expect(items.map(item => item.selected)).toEqual([false, false, true]);
+    expect(document.activeElement).toBe(items[1]);
+  });
+});
+
 describe(`${TabsItem.metadata.tag} - decorative slots`, () => {
   let fixture: HTMLElement;
 

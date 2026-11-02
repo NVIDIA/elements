@@ -2052,6 +2052,7 @@ describe(`${Combobox.metadata.tag}: dynamic options`, () => {
     await elementIsStable(element);
 
     emulateClick(input);
+    input.focus();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(1);
 
@@ -2064,6 +2065,8 @@ describe(`${Combobox.metadata.tag}: dynamic options`, () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(2);
     expect(items[1].textContent.trim()).toBe('Option 2');
+    expect(Array.from(items).map(item => item.tabIndex)).toEqual([0, -1]);
+    expect(document.activeElement).toBe(input);
   });
 
   it('should render dynamically added options before dropdown opens', async () => {
@@ -2091,6 +2094,7 @@ describe(`${Combobox.metadata.tag}: dynamic options`, () => {
 
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(2);
+    expect(Array.from(items).map(item => item.tabIndex)).toEqual([0, -1]);
   });
 
   it('should render dynamically added options in open dropdown (select)', async () => {
@@ -2108,6 +2112,7 @@ describe(`${Combobox.metadata.tag}: dynamic options`, () => {
     await elementIsStable(element);
 
     emulateClick(input);
+    input.focus();
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(1);
 
@@ -2120,6 +2125,9 @@ describe(`${Combobox.metadata.tag}: dynamic options`, () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(2);
     expect(items[1].textContent.trim()).toBe('Option 2');
+    expect(Array.from(items).map(item => item.tabIndex)).toEqual([0, -1]);
+    expect(document.activeElement).toBe(input);
+    expect(select.value).toBe('Option 1');
   });
 });
 

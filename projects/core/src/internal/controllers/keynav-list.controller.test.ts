@@ -16,6 +16,10 @@ class KeynavListControllerTestElement extends LitElement {
 
   @property({ type: Boolean }) loop = false;
 
+  @property({ type: Boolean }) manageFocus = true;
+
+  @property({ type: Boolean }) manageTabindex = true;
+
   @property({ type: Number, attribute: 'initial-item-index' }) initialItemIndex?: number;
 
   get keynavListConfig() {
@@ -23,6 +27,8 @@ class KeynavListControllerTestElement extends LitElement {
     return {
       layout: this.layout,
       loop: this.loop,
+      manageFocus: this.manageFocus,
+      manageTabindex: this.manageTabindex,
       items,
       initialItem: this.initialItemIndex === undefined ? undefined : items[this.initialItemIndex],
       dir: this.dir
@@ -91,6 +97,17 @@ describe('keynav-list.controller', () => {
       expect(change).not.toHaveBeenCalled();
     });
 
+    it('should prefer the focused item when refreshing the tab order', () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      previousItems[2].focus();
+
+      element.controller.refreshItems(previousItems);
+
+      expect(previousItems[0].tabIndex).toBe(-1);
+      expect(previousItems[2].tabIndex).toBe(0);
+      expect(element.shadowRoot.activeElement).toBe(previousItems[2]);
+    });
+
     it('should use the configured initial item when the tab stop is removed', async () => {
       const previousItems = Array.from(element.keynavListConfig.items);
       previousItems[0].remove();
@@ -114,6 +131,18 @@ describe('keynav-list.controller', () => {
       expect(previousItems[1].tabIndex).toBe(0);
     });
 
+    it('should preserve the surviving tab stop when an item is re-enabled', () => {
+      const previousItems = Array.from(element.keynavListConfig.items);
+      previousItems[0].disabled = true;
+      element.controller.refreshItems(previousItems);
+      previousItems[0].disabled = false;
+
+      element.controller.refreshItems(previousItems);
+
+      expect(previousItems[0].tabIndex).toBe(-1);
+      expect(previousItems[1].tabIndex).toBe(0);
+    });
+
     it('should leave every item outside the tab order when none is enabled', () => {
       const previousItems = Array.from(element.keynavListConfig.items);
       previousItems.forEach(item => {
@@ -124,6 +153,21 @@ describe('keynav-list.controller', () => {
 
       expect(Array.from(element.keynavListConfig.items).every(item => item.tabIndex === -1)).toBe(true);
     });
+
+    it.each(['manageFocus', 'manageTabindex'] as const)(
+      'should preserve authored tab indices when %s is disabled',
+      setting => {
+        const previousItems = Array.from(element.keynavListConfig.items);
+        element[setting] = false;
+        previousItems[0].tabIndex = 2;
+        previousItems[1].tabIndex = 3;
+
+        element.controller.refreshItems(previousItems);
+
+        expect(previousItems[0].tabIndex).toBe(2);
+        expect(previousItems[1].tabIndex).toBe(3);
+      }
+    );
 
     it('should preserve authored tab indices when key navigation is disabled', () => {
       const previousItems = Array.from(element.keynavListConfig.items);
@@ -505,8 +549,9 @@ describe('disabled behaviors keynav-list.controller', () => {
 });
 
 @customElement('nested-interactive-keynav-list-test-element')
-@keyNavigationList<NestedInteractiveKeynavListControllerTestElement>()
 class NestedInteractiveKeynavListControllerTestElement extends LitElement {
+  controller = new KeyNavigationListController(this);
+
   get keynavListConfig() {
     return {
       layout: 'vertical' as const,
@@ -545,6 +590,16 @@ describe('nested interactive keynav-list.controller', () => {
 
   afterEach(() => {
     removeFixture(fixture);
+  });
+
+  it('should preserve focus within an item when refreshing the tab order', () => {
+    const previousItems = Array.from(element.keynavListConfig.items);
+    input.focus();
+
+    element.controller.refreshItems(previousItems);
+
+    expect(previousItems.map(item => item.tabIndex)).toEqual([-1, -1, 0, -1]);
+    expect(element.shadowRoot.activeElement).toBe(input);
   });
 
   it('should focus nodes skipping complex nested items when using arrow navigation', async () => {
