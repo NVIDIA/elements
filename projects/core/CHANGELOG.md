@@ -1,3 +1,13 @@
+## [2.20.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.1...@nvidia-elements/core-v2.20.2) (2026-11-02)
+
+### Bug Fixes
+
+* **cli:** update notice ([21a6510](https://github.com/NVIDIA/elements/commit/21a6510164469615358937cdf833edc05bfa9cb8))
+* **core:** correct gesture termination handling ([0aab542](https://github.com/NVIDIA/elements/commit/0aab542b206b25933d921416a62f8a70c44b2723))
+* **core:** iframe separate theme script and resize handling ([9391e0b](https://github.com/NVIDIA/elements/commit/9391e0beffe1751d80c2cb8da981e20906fb48a9))
+* **markdown:** update notice ([1315538](https://github.com/NVIDIA/elements/commit/1315538849bc452a321c3043411fd5e555025e75))
+* **pi:** update notice ([561c535](https://github.com/NVIDIA/elements/commit/561c535744d599f26fb2692f00b089ed8eac74ef))
+
 ## [2.20.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.0...@nvidia-elements/core-v2.20.1) (2026-11-02)
 
 ### Bug Fixes
