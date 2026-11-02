@@ -1,3 +1,19 @@
+## [2.0.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.10...@nvidia-elements/forms-v2.0.11) (2026-11-02)
+
+### Features
+
+* **core:** joystick ([a4461e1](https://github.com/NVIDIA/elements/commit/a4461e10930ec198bc43b846f7b090f5db70c371))
+* **foundations:** add i18n support ([074f46c](https://github.com/NVIDIA/elements/commit/074f46ce0e148d00f40e6e320abec01e6fee5704))
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.5 ([8bfbeb0](https://github.com/NVIDIA/elements/commit/8bfbeb0953fae54aae4fdce15b455e2fed94a60b))
+* **cli:** update marked-terminal to 7.3.1 ([d11932c](https://github.com/NVIDIA/elements/commit/d11932c791ae22a0847c00f20e5bd433d7b66444))
+* **core:** i18n refactor ([4b6e10c](https://github.com/NVIDIA/elements/commit/4b6e10cd1ac30622b030be926e2d39e7e8039f95))
+* **forms:** preserve managed tabindex across button state changes ([ee959b4](https://github.com/NVIDIA/elements/commit/ee959b407ad08ef158ffd3f422b57b2b895b40ba))
+* **media:** i18n refactor ([a730282](https://github.com/NVIDIA/elements/commit/a73028216d642440d5fe583584703793e38d39d9))
+* **viewport:** i18n refactor ([2a6825b](https://github.com/NVIDIA/elements/commit/2a6825b24be4ed4304c2b57c91bbaf3435a5a480))
+
 ## [2.0.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.9...@nvidia-elements/forms-v2.0.10) (2026-10-28)
 
 ### Features
