@@ -9,6 +9,19 @@ import type { HtmlTagNode } from '../rule-types.js';
 
 const STATIC_TAG_NAME = /^[a-z][a-z0-9.-]*$/;
 const OPAQUE_PARENTS = new Set(['template', 'ng-template', 'slot', 'component']);
+const DISALLOWED_ANCESTORS: Readonly<Record<string, readonly string[]>> = {
+  'nve-grid': ['nve-grid']
+};
+
+function isMarkdownInlineCode(context: Rule.RuleContext, node: HtmlTagNode): boolean {
+  if (!context.filename.endsWith('.md')) return false;
+  let current: HtmlTagNode | undefined = node;
+  while (current?.type === 'Tag') {
+    if (context.sourceCode.text[current.openStart.range[0] - 1] === '`') return true;
+    current = current.parent;
+  }
+  return false;
+}
 
 function getRenderedParent(node: HtmlTagNode, source: string): HtmlTagNode | undefined {
   let parent = node.parent;
@@ -21,12 +34,23 @@ function getRenderedParent(node: HtmlTagNode, source: string): HtmlTagNode | und
   return parent;
 }
 
+function getInvalidAncestor(node: HtmlTagNode, disallowed: readonly string[]): HtmlTagNode | undefined {
+  let ancestor = node.parent;
+  while (ancestor?.type === 'Tag') {
+    const name = ancestor.name.toLowerCase();
+    if (name === 'template' || name === 'ng-template') return;
+    if (disallowed.includes(name)) return ancestor;
+    ancestor = ancestor.parent;
+  }
+  return undefined;
+}
+
 const rule = {
   meta: {
     type: 'problem' as const,
     docs: defineRuleDocumentation({
       name: 'no-invalid-parent-elements',
-      description: 'Require supported direct parents for Elements components.',
+      description: 'Require supported parents and ancestors for Elements components.',
       category: 'Best Practice',
       recommended: true,
       examples: {
@@ -37,16 +61,27 @@ const rule = {
     }),
     schema: [],
     messages: {
-      ['invalid-parent-element']: '<{{element}}> requires a direct parent of {{parents}}. Found <{{parent}}>.'
+      ['invalid-parent-element']: '<{{element}}> requires a direct parent of {{parents}}. Found <{{parent}}>.',
+      'invalid-ancestor-element': '<{{element}}> must not be nested inside <{{ancestor}}>.'
     }
   },
   create(context: Rule.RuleContext) {
     return createVisitors(context, {
       Tag(node: HtmlTagNode) {
+        if (isMarkdownInlineCode(context, node)) return;
         const tagName = node.name.toLowerCase();
+        const disallowed = DISALLOWED_ANCESTORS[tagName];
+        const ancestor = disallowed && getInvalidAncestor(node, disallowed);
+        if (ancestor) {
+          context.report({
+            node,
+            messageId: 'invalid-ancestor-element',
+            data: { element: tagName, ancestor: ancestor.name.toLowerCase() }
+          });
+          return;
+        }
         const parents = PARENT_ELEMENT_CONTRACTS[tagName];
         if (!parents) return;
-        if (context.filename.endsWith('.md') && context.sourceCode.text[node.openStart.range[0] - 1] === '`') return;
         const parent = getRenderedParent(node, context.sourceCode.text);
         if (!parent || parents.includes(parent.name.toLowerCase())) return;
         context.report({

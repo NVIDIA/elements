@@ -61,6 +61,39 @@ describe('noInvalidParentElements', () => {
     });
   });
 
+  it('should reject grids nested through cells and other wrappers regardless of container styling', () => {
+    tester.run('nested grids', rule, {
+      valid: [
+        '<nve-grid></nve-grid>',
+        '<div><nve-grid></nve-grid><nve-grid></nve-grid></div>',
+        '<nve-card-content><nve-grid container="flat"></nve-grid></nve-card-content>',
+        '<nve-grid><template><nve-grid></nve-grid></template></nve-grid>',
+        '<nve-grid><ng-template><nve-grid></nve-grid></ng-template></nve-grid>',
+        { filename: 'src/example.md', code: 'Use `<nve-grid>` for data.' },
+        { filename: 'src/example.md', code: 'Avoid `<nve-grid><nve-grid></nve-grid></nve-grid>` nesting.' }
+      ],
+      invalid: [
+        ...[
+          '<nve-grid><nve-grid></nve-grid></nve-grid>',
+          '<nve-grid><div><nve-grid></nve-grid></div></nve-grid>',
+          '<nve-grid><nve-grid-row><nve-grid-cell><nve-grid></nve-grid></nve-grid-cell></nve-grid-row></nve-grid>',
+          '<nve-grid><nve-virtual-list><nve-grid></nve-grid></nve-virtual-list></nve-grid>',
+          '<nve-grid><nve-grid container="flat"></nve-grid></nve-grid>',
+          '<nve-grid><app-content><nve-grid></nve-grid></app-content></nve-grid>',
+          '<NVE-GRID><div><NVE-GRID></NVE-GRID></div></NVE-GRID>',
+          '<template><nve-grid><nve-grid></nve-grid></nve-grid></template>'
+        ].map(code => ({
+          code,
+          errors: [{ messageId: 'invalid-ancestor-element', data: { element: 'nve-grid', ancestor: 'nve-grid' } }]
+        })),
+        {
+          code: '<nve-grid><nve-grid><nve-grid></nve-grid></nve-grid></nve-grid>',
+          errors: [{ messageId: 'invalid-ancestor-element' }, { messageId: 'invalid-ancestor-element' }]
+        }
+      ]
+    });
+  });
+
   it('should traverse Angular containers that do not render an element', () => {
     tester.run('transparent containers', rule, {
       valid: [
@@ -113,6 +146,18 @@ describe('noInvalidParentElements', () => {
         messageId: 'invalid-parent-element',
         severity: 2
       })
+    ]);
+  });
+
+  it.each([
+    { filename: 'src/example.html', code: '<nve-grid><div><nve-grid></nve-grid></div></nve-grid>' },
+    { filename: 'src/example.ts', code: 'const view = html`<nve-grid><div><nve-grid></nve-grid></div></nve-grid>`;' },
+    { filename: 'src/example.tsx', code: 'const view = <nve-grid><div><nve-grid></nve-grid></div></nve-grid>;' },
+    { filename: 'src/example.md', code: '```html\n<nve-grid><div><nve-grid></nve-grid></div></nve-grid>\n```' }
+  ])('should report nested grids through the recommended config in $filename', ({ filename, code }) => {
+    const messages = new Linter().verify(code, [elementsHtmlConfig], { filename });
+    expect(messages.filter(message => message.ruleId === '@nvidia-elements/lint/no-invalid-parent-elements')).toEqual([
+      expect.objectContaining({ messageId: 'invalid-ancestor-element', severity: 2 })
     ]);
   });
 });
