@@ -25,7 +25,7 @@ function createMockElement(overrides?: Pick<Partial<ElementDefinition>, 'shadowR
       value: overrides.shadowRootOptions
     });
   }
-  return el as unknown as ElementDefinition;
+  return el;
 }
 
 describe('scopedRegistry', () => {
