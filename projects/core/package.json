@@ -1082,7 +1082,6 @@
     "@internals/eslint": "workspace:*",
     "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@lit-labs/virtualizer": "catalog:",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/styles": "workspace:^",
     "@typescript/lib-dom": "npm:@types/web@0.0.312",
@@ -1135,7 +1134,8 @@
         "build:icons",
         "../themes:build",
         "../styles:build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        "../foundations:build"
       ]
     },
     "build": {
@@ -1143,6 +1143,7 @@
       "clean": "if-file-deleted",
       "files": [
         "../foundations/dist/**/*.js",
+        "../foundations/dist/**/*.d.ts",
         "!../foundations/dist/**/*.examples.js",
         "../forms/src/mixins/**/*.ts",
         "../styles/dist/**/*.css",

@@ -43,12 +43,13 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
 
   async hostConnected() {
     await this.host.updateComplete;
+    if (!this.host.isConnected) return;
     attachInternals(this.host);
     this.#syncTarget();
   }
 
   hostUpdated() {
-    this.#syncTarget();
+    if (this.host.isConnected) this.#syncTarget();
   }
 
   hostDisconnected() {
@@ -57,7 +58,10 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
 
   #syncTarget() {
     const target = this.#target;
-    if (this.#activeTarget === target) return;
+    if (this.#activeTarget === target) {
+      this.#startScroll();
+      return;
+    }
 
     this.#removeTargetListeners();
     this.#activeTarget = target;

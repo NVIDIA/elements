@@ -87,6 +87,7 @@ export class GridHeader extends LitElement {
 
   async #computeColumnWidths() {
     await this.updateComplete;
+    if (!this.isConnected || !this.parentElement) return;
     this.columns.forEach((c, i) => (c.ariaColIndex = `${i + 1}`));
     this.#grid.style.setProperty('--grid-auto-flow', 'initial');
     this.#grid.style.setProperty('--grid-template-column', this.columns.map((_, i) => `var(--c${i})`).join(' '));
@@ -96,6 +97,7 @@ export class GridHeader extends LitElement {
 
     // compute column width based on content
     await this.updateComplete;
+    if (!this.isConnected || !this.parentElement) return;
     const widths = this.columns.map(c => (c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
     widths.forEach((w, i) => this.#grid.style.setProperty(`--c${i}`, w));
   }

@@ -137,11 +137,17 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     this.#updateCells.flush();
   }
 
+  #ownsEvent(event: Event) {
+    const path = event.composedPath();
+    const cells = this.#hostCells;
+    return event.target === this.#grid || path.some(node => node instanceof HTMLElement && cells.includes(node));
+  }
+
   #onMouseUp = (e: MouseEvent) => {
+    if (!this.#ownsEvent(e)) return;
     if (!isContextMenuClick(e)) {
       this.#flushCellUpdates();
-      const focusedElement = e.composedPath()[0] as HTMLElement;
-      const activeCell = this.#hostCells.find(i => i === focusedElement) ? focusedElement : null;
+      const activeCell = this.#hostCells.find(cell => cell === e.target || cell === e.composedPath()[0]);
       if (activeCell) {
         this.#setActiveCell(e, activeCell);
       }
@@ -149,10 +155,11 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   };
 
   #onKeyDown = (e: KeyboardEvent) => {
-    if (!validKeyNavigationCode(e)) return;
+    if (!validKeyNavigationCode(e) || !this.#ownsEvent(e)) return;
     this.#flushCellUpdates();
     const rows = Array.from(this.#hostRows);
     const cells = Array.from(this.#hostCells);
+    if (!rows.length || !cells.length) return;
 
     if (GlobalStateService.state.env !== 'production' && hasInvalidDOMGrid(rows)) {
       LogService.warn('Invalid grid structure, all rows must have the same number of cells');
@@ -192,6 +199,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   }
 
   #onKeyUp = (e: KeyboardEvent) => {
+    if (!this.#ownsEvent(e)) return;
     if (e.code !== 'Enter' && e.code !== 'Escape') return;
     this.#flushCellUpdates();
     const activeCell = Array.from(this.#hostCells).find(i => i.tabIndex === 0) as HTMLElement;
