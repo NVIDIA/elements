@@ -5,7 +5,13 @@ import { html, LitElement, type PropertyValues } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators/property.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
-import { GestureController, useStyles, type Gesture, type GestureInput } from '@nvidia-elements/core/internal';
+import {
+  GestureController,
+  useStyles,
+  type Gesture,
+  type GestureInput,
+  type PointerMovementGesture
+} from '@nvidia-elements/core/internal';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './resize-handle.css?inline';
 
@@ -130,7 +136,10 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
       if (canStartDrag && input.claim({ kind: 'drag' })) this.#dragStart(input.event.pointerId);
     } else if (input.kind === 'pointerend' && input.event.pointerId === this.#dragPointerId) {
       if (input.interrupted) this.#cancelDrag();
-      else this.#dragEnd();
+      else {
+        this.#dragMove(input);
+        this.#dragEnd();
+      }
     }
   };
 
@@ -147,9 +156,10 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     this.#offset = this.valueAsNumber;
   }
 
-  #dragMove(gesture: Extract<Gesture<undefined>, { kind: 'drag' }>) {
+  #dragMove(gesture: Pick<PointerMovementGesture, 'movementX' | 'movementY'>) {
     const offset =
       (this.orientation === 'vertical' ? gesture.movementX : -gesture.movementY) * (this.dir === 'rtl' ? -1 : 1);
+    if (offset === 0) return;
     this.#offset = Math.max(this.min, Math.min(this.max, this.#offset + offset));
     this.#setInput(this.#offset);
   }

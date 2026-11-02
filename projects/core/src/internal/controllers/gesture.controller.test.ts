@@ -539,41 +539,49 @@ describe('GestureController', () => {
 
   describe('pointer termination and ownership', () => {
     it.each([
-      ['pointerup', 'up', false],
-      ['pointercancel', 'cancel', true],
-      ['lostpointercapture', 'lost-capture', true],
-      ['pointermove', 'buttons-released', false]
-    ] as const)('reports one %s terminal outcome with reason %s and a final frame', (type, reason, interrupted) => {
-      target.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
-      expect(target.style.userSelect).toBe('none');
-      target.dispatchEvent(pointerEvent('pointermove', { clientX: 13, clientY: 25, pointerId: 1 }));
-      const end = interrupted
-        ? pointerEvent(type, { buttons: 0, pointerId: 1 })
-        : pointerEvent(type, { buttons: 0, clientX: 15, clientY: 29, pointerId: 1 });
-      const clientX = interrupted ? 13 : 15;
-      const clientY = interrupted ? 25 : 29;
+      { buttons: 0, interrupted: false, reason: 'up', type: 'pointerup' },
+      { buttons: 0, interrupted: true, reason: 'cancel', type: 'pointercancel' },
+      { buttons: 0, interrupted: false, reason: 'lost-capture', type: 'lostpointercapture' },
+      { buttons: 1, interrupted: true, reason: 'lost-capture', type: 'lostpointercapture' },
+      { buttons: 0, interrupted: false, reason: 'buttons-released', type: 'pointermove' }
+    ] as const)(
+      'reports one $type terminal outcome with buttons $buttons, reason $reason, and a final frame',
+      ({ buttons, interrupted, reason, type }) => {
+        target.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
+        expect(target.style.userSelect).toBe('none');
+        target.dispatchEvent(pointerEvent('pointermove', { clientX: 13, clientY: 25, pointerId: 1 }));
+        const end = interrupted
+          ? pointerEvent(type, { buttons, pointerId: 1 })
+          : pointerEvent(type, { buttons, clientX: 15, clientY: 29, pointerId: 1 });
+        const clientX = interrupted ? 13 : 15;
+        const clientY = interrupted ? 25 : 29;
 
-      target.dispatchEvent(end);
-      target.dispatchEvent(pointerEvent('lostpointercapture', { clientX: 15, clientY: 29, pointerId: 1 }));
+        target.dispatchEvent(end);
+        target.dispatchEvent(
+          pointerEvent('lostpointercapture', { buttons: 0, clientX: 15, clientY: 29, pointerId: 1 })
+        );
+        target.dispatchEvent(pointerEvent('pointermove', { buttons: 0, clientX: 15, clientY: 29, pointerId: 1 }));
+        target.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 15, clientY: 29, pointerId: 1 }));
 
-      const terminal = gestureInputEvents.filter(event => event.detail.kind === 'pointerend');
-      expect(terminal).toHaveLength(1);
-      expect(terminal[0]?.detail).toEqual({
-        clientX,
-        clientY,
-        event: end,
-        interrupted,
-        kind: 'pointerend',
-        movementX: interrupted ? 0 : 2,
-        movementY: interrupted ? 0 : 4,
-        reason,
-        startClientX: 10,
-        startClientY: 20,
-        totalDisplacementX: interrupted ? 3 : 5,
-        totalDisplacementY: interrupted ? 5 : 9
-      });
-      expect(target.style.userSelect).toBe('');
-    });
+        const terminal = gestureInputEvents.filter(event => event.detail.kind === 'pointerend');
+        expect(terminal).toHaveLength(1);
+        expect(terminal[0]?.detail).toEqual({
+          clientX,
+          clientY,
+          event: end,
+          interrupted,
+          kind: 'pointerend',
+          movementX: interrupted ? 0 : 2,
+          movementY: interrupted ? 0 : 4,
+          reason,
+          startClientX: 10,
+          startClientY: 20,
+          totalDisplacementX: interrupted ? 3 : 5,
+          totalDisplacementY: interrupted ? 5 : 9
+        });
+        expect(target.style.userSelect).toBe('');
+      }
+    );
 
     it('does not follow pointer movement after a terminal event', () => {
       target.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));

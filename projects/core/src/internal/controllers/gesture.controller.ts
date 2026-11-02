@@ -463,7 +463,7 @@ export class GestureController<TPinchContext = undefined> implements ReactiveCon
   #endPointer(event: PointerEvent, reason: PointerEndReason): void {
     const pointerState = this.#pointerStates.get(event.pointerId);
     if (!pointerState) return;
-    const interrupted = isPointerEndInterrupted(reason);
+    const interrupted = isPointerEndInterrupted(reason, event);
     const clientX = interrupted ? pointerState.clientX : event.clientX;
     const clientY = interrupted ? pointerState.clientY : event.clientY;
     event.stopPropagation();
@@ -718,8 +718,8 @@ function getPointerEndReason(event: PointerEvent): PointerEndReason | undefined 
   return undefined;
 }
 
-function isPointerEndInterrupted(reason: PointerEndReason): boolean {
-  return reason === 'cancel' || reason === 'lost-capture';
+function isPointerEndInterrupted(reason: PointerEndReason, event: PointerEvent): boolean {
+  return reason === 'cancel' || (reason === 'lost-capture' && event.buttons !== 0);
 }
 
 function normalizeWheelDelta(delta: number, deltaMode: number, pagePixels = 1): number {

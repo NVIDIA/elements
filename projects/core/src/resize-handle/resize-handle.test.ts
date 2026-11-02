@@ -243,6 +243,8 @@ describe(ResizeHandle.metadata.tag, () => {
 
   it('should restore its step and dispatch a final change on pointerup', async () => {
     const changeEvent = untilEvent(element, 'change');
+    const inputListener = vi.fn();
+    element.addEventListener('input', inputListener);
     const changeListener = vi.fn();
     element.addEventListener('change', changeListener);
     element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
@@ -255,44 +257,74 @@ describe(ResizeHandle.metadata.tag, () => {
     expect(input.step).toBe('10');
     expect(element.matches(':not(:state(active))')).toBe(true);
     expect(changeListener).toHaveBeenCalledOnce();
+    expect(inputListener).toHaveBeenCalledOnce();
   });
 
-  it.each(['pointercancel', 'lostpointercapture'] as const)(
-    'should restore drag state after %s and support subsequent drags',
-    async type => {
-      element.step = 5;
-      await elementIsStable(element);
-      const changeListener = vi.fn();
-      element.addEventListener('change', changeListener);
-      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
-      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 1 }));
-      element.dispatchEvent(pointerEvent(type, { pointerId: 1 }));
-
-      expect(element.valueAsNumber).toBe(60);
-      expect(input.step).toBe('5');
-      expect(element.matches(':not(:state(active))')).toBe(true);
-      expect(changeListener).not.toHaveBeenCalled();
-
-      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 2 }));
-      expect(element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 2 }))).toBe(
-        false
-      );
-      expect(element.valueAsNumber).toBe(70);
-    }
-  );
-
-  it('should dispatch a final change when released buttons end a drag', () => {
+  it.each([
+    { buttons: 0, type: 'pointercancel' },
+    { buttons: 1, type: 'lostpointercapture' }
+  ] as const)('should restore drag state after $type and support subsequent drags', async ({ buttons, type }) => {
+    element.step = 5;
+    await elementIsStable(element);
     const changeListener = vi.fn();
     element.addEventListener('change', changeListener);
     element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
     element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 1 }));
-    element.dispatchEvent(pointerEvent('pointermove', { buttons: 0, clientX: 10, clientY: 10, pointerId: 1 }));
+    element.dispatchEvent(pointerEvent(type, { buttons, clientX: 50, clientY: 0, pointerId: 1 }));
+    element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 50, clientY: 0, pointerId: 1 }));
 
     expect(element.valueAsNumber).toBe(60);
-    expect(input.step).toBe('10');
+    expect(input.step).toBe('5');
     expect(element.matches(':not(:state(active))')).toBe(true);
-    expect(changeListener).toHaveBeenCalledOnce();
+    expect(changeListener).not.toHaveBeenCalled();
+
+    element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 2 }));
+    expect(element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 2 }))).toBe(false);
+    expect(element.valueAsNumber).toBe(70);
   });
+
+  it.each(['pointerup', 'pointermove', 'lostpointercapture'] as const)(
+    'should apply remaining displacement before one final change on %s',
+    type => {
+      const values: number[] = [];
+      const changeListener = vi.fn(() => values.push(element.valueAsNumber));
+      const inputListener = vi.fn(() => values.push(element.valueAsNumber));
+      element.addEventListener('change', changeListener);
+      element.addEventListener('input', inputListener);
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 10, clientY: 10, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent(type, { buttons: 0, clientX: 10, clientY: 0, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 10, clientY: 0, pointerId: 1 }));
+
+      expect(element.valueAsNumber).toBe(70);
+      expect(values).toEqual([60, 70, 70]);
+      expect(inputListener).toHaveBeenCalledTimes(2);
+      expect(changeListener).toHaveBeenCalledOnce();
+      expect(input.step).toBe('10');
+      expect(element.matches(':not(:state(active))')).toBe(true);
+    }
+  );
+
+  it.each([
+    { dir: 'ltr', orientation: 'horizontal', value: 70 },
+    { dir: 'rtl', orientation: 'horizontal', value: 30 },
+    { dir: 'ltr', orientation: 'vertical', value: 70 },
+    { dir: 'rtl', orientation: 'vertical', value: 30 }
+  ] as const)(
+    'should clamp terminal movement for $orientation orientation in $dir',
+    async ({ dir, orientation, value }) => {
+      element.dir = dir;
+      element.orientation = orientation;
+      element.min = 30;
+      element.max = 70;
+      await elementIsStable(element);
+      element.dispatchEvent(pointerEvent('pointerdown', { clientX: 10, clientY: 20, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointermove', { clientX: 20, clientY: 10, pointerId: 1 }));
+      element.dispatchEvent(pointerEvent('pointerup', { buttons: 0, clientX: 40, clientY: -10, pointerId: 1 }));
+
+      expect(element.valueAsNumber).toBe(value);
+    }
+  );
 
   it('should support snap to value on double click', async () => {
     element.min = 10;
