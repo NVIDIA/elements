@@ -8,7 +8,7 @@ import type { Density, KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   useStyles,
   attachInternals,
-  keyNavigationList,
+  KeyNavigationListController,
   appendRootNodeStyle,
   audit
 } from '@nvidia-elements/core/internal';
@@ -33,7 +33,6 @@ import globalStyles from './menu.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 @audit()
-@keyNavigationList<Menu>()
 export class Menu extends LitElement {
   static styles = useStyles([styles]);
 
@@ -61,7 +60,10 @@ export class Menu extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements() private items!: MenuItem[];
+  @queryAssignedElements({ selector: 'nve-menu-item' }) private items!: MenuItem[];
+
+  #keynavController = new KeyNavigationListController(this);
+  #knownItems: MenuItem[] = [];
 
   #scrollRAF: number | null = null;
   #assignedMenuSlot = false;
@@ -86,7 +88,7 @@ export class Menu extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot></slot>
+        <slot @slotchange=${this.#syncItems}></slot>
       </div>
     `;
   }
@@ -103,6 +105,7 @@ export class Menu extends LitElement {
     attachInternals(this);
     this._internals.role = 'menu';
     appendRootNodeStyle(this, globalStyles);
+    if (this.hasUpdated) this.#knownItems = this.items;
 
     if (this.parentElement?.localName === 'nve-menu-group' && !this.slot) {
       this.slot = 'menu';
@@ -112,9 +115,15 @@ export class Menu extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.#knownItems = [];
     if (this.#assignedMenuSlot && this.slot === 'menu') {
       this.slot = '';
     }
     this.#assignedMenuSlot = false;
   }
+
+  #syncItems = () => {
+    this.#keynavController.refreshItems(this.#knownItems);
+    this.#knownItems = this.items;
+  };
 }

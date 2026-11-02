@@ -6,6 +6,7 @@ import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Menu } from '@nvidia-elements/core/menu';
 import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/divider/define.js';
 
 describe(Menu.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -82,6 +83,105 @@ describe(Menu.metadata.tag, () => {
     link.dispatchEvent(click);
     expect(click.defaultPrevented).toBe(true);
     expect(activate).not.toHaveBeenCalled();
+  });
+
+  it.each(['append', 'prepend'] as const)('should preserve the tab stop after %s', async placement => {
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    items[1].dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    const added = document.createElement('nve-menu-item');
+    added.textContent = 'added';
+    element[placement](added);
+    await elementIsStable(element);
+    await elementIsStable(added);
+
+    expect(items[1].tabIndex).toBe(0);
+    expect(added.tabIndex).toBe(-1);
+    expect(document.activeElement).toBe(items[1]);
+  });
+
+  it('should preserve a surviving tab stop through insertions without taking focus', async () => {
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    items[1].dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    const outside = document.createElement('button');
+    fixture.append(outside);
+    outside.focus();
+    const first = document.createElement('nve-menu-item');
+    const second = document.createElement('nve-menu-item');
+    element.prepend(first);
+    await elementIsStable(first);
+    element.prepend(second);
+    await elementIsStable(element);
+    await elementIsStable(second);
+
+    expect(Array.from(element.querySelectorAll('nve-menu-item')).map(item => item.tabIndex)).toEqual([
+      -1, -1, -1, 0, -1
+    ]);
+    expect(document.activeElement).toBe(outside);
+  });
+
+  it('should restore a tab stop when the current item is removed without taking focus', async () => {
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    const outside = document.createElement('button');
+    fixture.append(outside);
+    outside.focus();
+    items[0].remove();
+    await elementIsStable(element);
+
+    expect(items[1].tabIndex).toBe(0);
+    expect(items[2].tabIndex).toBe(-1);
+    expect(document.activeElement).toBe(outside);
+  });
+
+  it('should preserve the tab stop when items are reordered', async () => {
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    items[1].dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    element.prepend(items[2]);
+    await elementIsStable(element);
+
+    expect(items.map(item => item.tabIndex)).toEqual([-1, 0, -1]);
+    expect(document.activeElement).toBe(items[1]);
+  });
+
+  it('should skip dividers when restoring the tab stop after removal', async () => {
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    const divider = document.createElement('nve-divider');
+    items[0].after(divider);
+    await elementIsStable(divider);
+    items[0].remove();
+    await elementIsStable(element);
+
+    expect(divider.hasAttribute('tabindex')).toBe(false);
+    expect(items[1].tabIndex).toBe(0);
+    expect(items[2].tabIndex).toBe(-1);
+  });
+
+  it('should preserve a surviving tab stop after reconnecting unchanged children', async () => {
+    element.remove();
+    fixture.append(element);
+    await elementIsStable(element);
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    items[1].dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true }));
+    const outside = document.createElement('button');
+    fixture.append(outside);
+    outside.focus();
+    const added = document.createElement('nve-menu-item');
+    element.prepend(added);
+    await elementIsStable(added);
+    await elementIsStable(element);
+
+    expect([added, ...items].map(item => item.tabIndex)).toEqual([-1, -1, 0, -1]);
+    expect(document.activeElement).toBe(outside);
+  });
+
+  it('should initialize items added while disconnected on reconnection', async () => {
+    element.remove();
+    element.innerHTML = '<nve-menu-item>new first</nve-menu-item><nve-menu-item>new second</nve-menu-item>';
+    fixture.append(element);
+    await elementIsStable(element);
+    const items = Array.from(element.querySelectorAll('nve-menu-item'));
+    await Promise.all(items.map(item => elementIsStable(item)));
+
+    expect(items.map(item => item.tabIndex)).toEqual([0, -1]);
   });
 
   it('should navigate between items with ArrowDown key', async () => {

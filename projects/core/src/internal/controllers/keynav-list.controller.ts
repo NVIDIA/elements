@@ -69,6 +69,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     if (!manageFocus || !manageTabindex || this.#keynavDisabled) return;
 
     const activeItem =
+      items.find(item => item.matches(':focus-within')) ??
       items.find(item => previousItems.includes(item) && item.tabIndex === 0) ??
       (initialItem && items.includes(initialItem) ? initialItem : items[0]);
     Array.from(this.host.keynavListConfig.items).forEach(item => {
