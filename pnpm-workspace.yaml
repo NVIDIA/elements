@@ -104,8 +104,8 @@ catalog:
   '@vitest/browser': 5.0.5
   '@vitest/browser-playwright': 5.0.5
   '@vitest/coverage-istanbul': 5.0.5
-  '@vitest/istanbul-lib-coverage': 2.0.0
-  '@vitest/istanbul-lib-report': 2.0.0
+  '@vitest/istanbul-lib-coverage': 2.1.0
+  '@vitest/istanbul-lib-report': 2.1.0
   'adm-zip': 0.6.1
   axe-core: 4.14.0
   eslint: 10.13.0
