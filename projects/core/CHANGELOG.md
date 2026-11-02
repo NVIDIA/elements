@@ -1,3 +1,12 @@
+## [2.20.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.0...@nvidia-elements/core-v2.20.1) (2026-11-02)
+
+### Bug Fixes
+
+* **cli:** update @inquirer/prompts to 8.7.5 ([8bfbeb0](https://github.com/NVIDIA/elements/commit/8bfbeb0953fae54aae4fdce15b455e2fed94a60b))
+* **cli:** update marked-terminal to 7.3.1 ([d11932c](https://github.com/NVIDIA/elements/commit/d11932c791ae22a0847c00f20e5bd433d7b66444))
+* **core:** remove unused polyfill ([427b3ef](https://github.com/NVIDIA/elements/commit/427b3ef8bf1fb4d70a86ede95b719e7aea1bd58e))
+* **forms:** preserve managed tabindex across button state changes ([ee959b4](https://github.com/NVIDIA/elements/commit/ee959b407ad08ef158ffd3f422b57b2b895b40ba))
+
 ## [2.20.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.19.1...@nvidia-elements/core-v2.20.0) (2026-10-29)
 
 ### Features
