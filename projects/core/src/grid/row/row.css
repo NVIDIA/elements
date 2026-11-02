@@ -11,6 +11,8 @@
 }
 
 [internal-host] {
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr);
   grid-auto-columns: var(--grid-auto-columns);
   border-bottom: var(--border-bottom);
   display: grid;

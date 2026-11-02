@@ -5,7 +5,14 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { Grid } from '@nvidia-elements/core/grid';
+import type { VirtualList, VirtualRange } from '@nvidia-elements/foundations/virtual-list';
 import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/foundations/virtual-list/define.js';
+
+function navigationCells(grid: Grid) {
+  const { columns, cells } = grid.keynavGridConfig;
+  return [...columns, ...cells];
+}
 
 describe(Grid.metadata.tag, () => {
   let fixture: HTMLElement;
@@ -67,12 +74,12 @@ describe(Grid.metadata.tag, () => {
 
   it('should enable keynav control from keynav controller', async () => {
     await elementIsStable(element);
-    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
-    expect(element.keynavGridConfig.cells[1].tabIndex).toBe(-1);
+    expect(navigationCells(element)[0].tabIndex).toBe(0);
+    expect(navigationCells(element)[1].tabIndex).toBe(-1);
   });
 
   it('should restore keyboard navigation after repeated attribute-only mutations', async () => {
-    const cells = element.keynavGridConfig.cells;
+    const cells = navigationCells(element);
     cells[4].dispatchEvent(new MouseEvent('mouseup', { bubbles: true, buttons: 1 }));
     for (let update = 0; update < 2; update++) {
       cells.forEach(cell => cell.removeAttribute('tabindex'));
@@ -102,7 +109,7 @@ describe(Grid.metadata.tag, () => {
       await elementIsStable(element);
 
       await vi.waitFor(() => {
-        const cells = element.keynavGridConfig.cells;
+        const cells = navigationCells(element);
         expect(cells.filter(cell => cell.tabIndex === 0)).toHaveLength(1);
         expect(cells.every(cell => cell.hasAttribute('tabindex'))).toBe(true);
       });
@@ -118,7 +125,7 @@ describe(Grid.metadata.tag, () => {
 
     await vi.waitFor(() => {
       expect(cell.tabIndex).toBe(0);
-      expect(element.keynavGridConfig.cells.filter(item => item.tabIndex === 0)).toHaveLength(1);
+      expect(navigationCells(element).filter(item => item.tabIndex === 0)).toHaveLength(1);
     });
   });
 
@@ -178,7 +185,7 @@ describe(Grid.metadata.tag, () => {
 
   it.each([false, true])('should reconcile before arrow navigation with delivered mutations: %s', async delivered => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
-    const cells = element.keynavGridConfig.cells;
+    const cells = navigationCells(element);
     cells[4].innerHTML = '<a href="#first">first</a>';
     cells[8].innerHTML = '<a href="#second">second</a>';
     await elementIsStable(element);
@@ -374,5 +381,249 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
 
     expect(scrollboxEndEvent.bubbles).toBe(true);
     expect(scrollboxEndEvent.composed).toBe(true);
+  });
+});
+
+describe(`${Grid.metadata.tag}: windowed rows`, () => {
+  const frame = () => new Promise(requestAnimationFrame);
+  let fixture: HTMLElement;
+  let grid: Grid;
+  let list: VirtualList;
+  let deferred: boolean;
+
+  function draw(range: VirtualRange) {
+    if (range !== list.range) return;
+    grid.ariaRowCount = `${range.count + 2}`;
+    const rows = Array.from({ length: range.end - range.start }, (_, i) => {
+      const row = document.createElement('nve-grid-row');
+      row.ariaRowIndex = `${range.start + i + 2}`;
+      for (let column = 0; column < 3; column++) {
+        const cell = document.createElement('nve-grid-cell');
+        cell.textContent = `${range.start + i}:${column}`;
+        row.append(cell);
+      }
+      return row;
+    });
+    list.replaceChildren(...rows);
+  }
+
+  async function settle() {
+    await elementIsStable(grid);
+    await elementIsStable(list);
+    await frame();
+    await frame();
+  }
+
+  function key(code: string, ctrlKey = false) {
+    document.activeElement.dispatchEvent(
+      new KeyboardEvent('keydown', { code, ctrlKey, bubbles: true, composed: true, cancelable: true })
+    );
+  }
+
+  beforeEach(async () => {
+    deferred = false;
+    fixture = await createFixture(html`
+      <nve-grid aria-label="Jobs" stripe>
+        <nve-grid-header aria-rowindex="1"><nve-grid-column>Job</nve-grid-column><nve-grid-column>Status</nve-grid-column><nve-grid-column>Owner</nve-grid-column></nve-grid-header>
+        <nve-virtual-list item-count="10000" item-height="40" item-buffer="0" style="--scroll-height:200px"></nve-virtual-list>
+        <nve-grid-footer>10,000 jobs <button type="button">Next</button></nve-grid-footer>
+      </nve-grid>`);
+    grid = fixture.querySelector('nve-grid');
+    list = fixture.querySelector('nve-virtual-list');
+    list.addEventListener('virtual-change', event => {
+      if (!deferred) draw((event as CustomEvent<VirtualRange>).detail);
+    });
+    await settle();
+    draw(list.range);
+    await settle();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    removeFixture(fixture);
+  });
+
+  it('uses the existing grid navigation for rendered rows', () => {
+    const cells = navigationCells(grid);
+    expect(cells).toHaveLength(18);
+    expect(cells.filter(cell => cell.tabIndex === 0)).toHaveLength(1);
+    cells[0].focus();
+    key('ArrowDown');
+    expect(document.activeElement).toBe(cells[3]);
+    key('End', true);
+    expect(document.activeElement).toBe(cells.at(-1));
+    expect(list.scrollTop).toBe(0);
+    key('Home', true);
+    expect(document.activeElement).toBe(cells[0]);
+  });
+
+  it('reconciles replacement rows without a separate navigation mode', async () => {
+    list.scrollToIndex(500);
+    await settle();
+    await vi.waitFor(() => expect(navigationCells(grid).filter(cell => cell.tabIndex === 0)).toHaveLength(1));
+    const cells = navigationCells(grid);
+    cells[0].focus();
+    key('ArrowDown');
+    expect(document.activeElement).toBe(cells[3]);
+    expect(cells[3].textContent).toBe(`${list.start}:0`);
+    expect(list.children.length).toBeLessThanOrEqual(6);
+  });
+
+  it('leaves full-dataset ARIA metadata with the renderer', async () => {
+    expect(grid.getAttribute('aria-rowcount')).toBe('10002');
+    expect(list.firstElementChild.getAttribute('aria-rowindex')).toBe('2');
+    expect(grid._internals.ariaRowCount).toBe(null);
+    list.scrollToIndex(500);
+    await settle();
+    expect(list.firstElementChild.getAttribute('aria-rowindex')).toBe(`${list.start + 2}`);
+  });
+
+  it('lets the renderer discard stale requests and positions replacement rows automatically', async () => {
+    deferred = true;
+    list.scrollTop = 400;
+    list.refresh();
+    const stale = list.range;
+    list.scrollTop = 800;
+    list.refresh();
+    const current = list.range;
+    draw(stale);
+    await settle();
+    expect(list.firstElementChild.textContent).toContain('0:0');
+    expect(list.shadowRoot.querySelector<HTMLElement>('.content').hidden).toBe(true);
+    draw(current);
+    await settle();
+    expect(list.shadowRoot.querySelector<HTMLElement>('.content').hidden).toBe(false);
+    expect(list.shadowRoot.querySelector<HTMLElement>('.content').style.top).toBe(`${current.start * 40}px`);
+    expect(list.firstElementChild.textContent).toContain(`${current.start}:0`);
+  });
+
+  it('keeps item geometry in the viewport and styling in CSS', async () => {
+    list.firstElementChild.querySelector('nve-grid-cell').textContent = 'Long content '.repeat(100);
+    await settle();
+    expect(list.firstElementChild.getBoundingClientRect().height).toBe(40);
+    expect(list.firstElementChild.querySelector('nve-grid-cell').getBoundingClientRect().height).toBeLessThanOrEqual(
+      40
+    );
+    expect(getComputedStyle(list.firstElementChild).overflow).toBe('hidden');
+    expect(getComputedStyle(list.firstElementChild).getPropertyValue('--background')).not.toBe(
+      getComputedStyle(list.children[1]).getPropertyValue('--background')
+    );
+    expect(getComputedStyle(grid.shadowRoot.querySelector('[part="_scrollbox"]')).overflowX).toBe('auto');
+  });
+
+  it('keeps footer controls outside navigation and preserves Enter/Escape', async () => {
+    const cell = list.querySelector<HTMLElement>('nve-grid-cell');
+    cell.innerHTML = '<input aria-label="Name"><button type="button">Edit</button>';
+    await elementIsStable(cell);
+    cell.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, composed: true }));
+    cell.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter', bubbles: true, composed: true }));
+    expect(document.activeElement).toBe(cell.querySelector('input'));
+    key('ArrowDown');
+    expect(document.activeElement).toBe(cell.querySelector('input'));
+    cell
+      .querySelector('input')
+      .dispatchEvent(new KeyboardEvent('keyup', { code: 'Escape', bubbles: true, composed: true }));
+    expect(document.activeElement).toBe(cell);
+    const footer = grid.querySelector<HTMLButtonElement>('nve-grid-footer button');
+    footer.focus();
+    key('ArrowUp');
+    expect(document.activeElement).toBe(footer);
+  });
+
+  it('uses shared scroll state and emits a single end event', async () => {
+    const end = vi.fn();
+    grid.addEventListener('scrollboxend', end);
+    await grid.scrollTo({ top: 399800 });
+    await settle();
+    expect(list.scrollTop).toBe(399800);
+    end.mockClear();
+    list.dispatchEvent(new Event('scrollend'));
+    expect(end).toHaveBeenCalledOnce();
+    expect(grid.stateScrollConfig.target).toBe(list);
+  });
+
+  async function widenColumns() {
+    grid.style.width = '400px';
+    const header = grid.querySelector('nve-grid-header');
+    for (const column of header.columns) column.width = '300px';
+    await settle();
+    await vi.waitFor(() => expect(header.columns[0].getBoundingClientRect().width).toBe(300));
+    return header;
+  }
+
+  it('keeps header and body aligned when focus scrolls offscreen columns', async () => {
+    const header = await widenColumns();
+    const scrollbox = grid.shadowRoot.querySelector<HTMLElement>('[part="_scrollbox"]');
+    header.columns[0].focus();
+    key('End');
+    await settle();
+    await vi.waitFor(() => {
+      expect(scrollbox.scrollLeft).toBeGreaterThan(0);
+      expect(list.scrollLeft).toBe(0);
+      expect(header.scrollLeft).toBe(0);
+    });
+    const column = header.columns.at(-1);
+    const cell = list.firstElementChild.lastElementChild;
+    expect(Math.abs(column.getBoundingClientRect().x - cell.getBoundingClientRect().x)).toBeLessThan(1);
+    key('ArrowDown');
+    await settle();
+    expect(document.activeElement).toBe(cell);
+    expect(Math.abs(column.getBoundingClientRect().x - cell.getBoundingClientRect().x)).toBeLessThan(1);
+    await grid.scrollTo({ left: 100 });
+    await vi.waitFor(() => expect(scrollbox.scrollLeft).toBe(100));
+    expect(list.scrollWidth).toBe(list.clientWidth);
+    expect(scrollbox.scrollHeight).toBe(scrollbox.clientHeight);
+    expect(Math.abs(column.getBoundingClientRect().x - cell.getBoundingClientRect().x)).toBeLessThan(1);
+    await grid.scrollTo(200, 400);
+    await settle();
+    expect(scrollbox.scrollLeft).toBe(200);
+    expect(scrollbox.scrollTop).toBe(0);
+    expect(list.scrollTop).toBe(400);
+    expect(list.scrollLeft).toBe(0);
+  });
+
+  it('preserves horizontal scrolling while replacement rows are pending', async () => {
+    const header = await widenColumns();
+    const scrollbox = grid.shadowRoot.querySelector<HTMLElement>('[part="_scrollbox"]');
+    await grid.scrollTo({ left: 300 });
+    await settle();
+    deferred = true;
+    list.scrollTop = 400;
+    list.refresh();
+    await settle();
+    expect(list.shadowRoot.querySelector<HTMLElement>('.content').hidden).toBe(true);
+    expect(scrollbox.scrollLeft).toBe(300);
+    expect(list.scrollLeft).toBe(0);
+    expect(header.scrollLeft).toBe(0);
+    draw(list.range);
+    await settle();
+    expect(scrollbox.scrollLeft).toBe(300);
+    expect(list.scrollLeft).toBe(0);
+    expect(header.scrollLeft).toBe(0);
+  });
+
+  it('supports list replacement and returning to ordinary rows', async () => {
+    const header = await widenColumns();
+    const scrollbox = grid.shadowRoot.querySelector<HTMLElement>('[part="_scrollbox"]');
+    await grid.scrollTo({ left: 300 });
+    await settle();
+    expect(scrollbox.scrollLeft).toBe(300);
+    const replacement = list.cloneNode() as VirtualList;
+    list.replaceWith(replacement);
+    list = replacement;
+    await settle();
+    draw(list.range);
+    await settle();
+    expect(grid.stateScrollConfig.target).toBe(replacement);
+    expect(header.scrollLeft).toBe(0);
+    expect(scrollbox.scrollLeft).toBe(300);
+    list.remove();
+    const row = document.createElement('nve-grid-row');
+    row.innerHTML = '<nve-grid-cell>Ordinary</nve-grid-cell>';
+    grid.append(row);
+    await elementIsStable(grid);
+    await vi.waitFor(() => expect(navigationCells(grid).filter(cell => cell.tabIndex === 0)).toHaveLength(1));
+    expect(navigationCells(grid)).toContain(row.firstElementChild);
+    expect(grid.stateScrollConfig.target).toBe(grid.shadowRoot.querySelector('[part="_scrollbox"]'));
   });
 });

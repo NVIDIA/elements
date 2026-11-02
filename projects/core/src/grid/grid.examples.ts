@@ -5,6 +5,7 @@ import { LitElement, unsafeCSS, html, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { getItems, grid } from '../test/demo.js';
 import layout from '@nvidia-elements/styles/layout.css?inline';
+import '@nvidia-elements/foundations/virtual-list/define.js';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/badge/define.js'
 import '@nvidia-elements/core/button/define.js';
@@ -26,7 +27,6 @@ import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/sort-button/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
-import '@lit-labs/virtualizer';
 
 export default {
   title: 'Elements/Data Grid',
@@ -959,37 +959,48 @@ export const Performance = {
   `
 };
 
-class GridVirtualScrollDemo extends LitElement {
-  items = new Array(10000).fill('').map((_i, n) => ({ column: `${n}-0`, column1: `${n}-1`, column2: `${n}-2`, column3: `${n}-3` }));
-
-  render() {
-    return html`
-      <nve-grid>
-        <nve-grid-header>
-          <nve-grid-column>column</nve-grid-column>
-          <nve-grid-column>column</nve-grid-column>
-          <nve-grid-column>column</nve-grid-column>
-          <nve-grid-column>column</nve-grid-column>
-        </nve-grid-header>
-
-        <lit-virtualizer style="min-height: 350px" scroller .items=${this.items} .renderItem=${i => html`
-          <nve-grid-row style="width: 100%">
-            ${Object.keys(i).map(key => html`<nve-grid-cell>${i[key]}</nve-grid-cell>`)}
-          </nve-grid-row>`}>
-        </lit-virtualizer>
-      </nve-grid>
-    `;
-  }
-}
-
-customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-virtual-scroll-demo', GridVirtualScrollDemo);
-
 /**
- * @summary Performance virtual scroll tests the performance of the grid.
- * @tags test-case performance
+ * @summary A fixed-height viewport keeps 10,000 logical rows responsive with bounded DOM size. Use virtualization for large datasets with fixed-height rows to keep scrolling responsive.
+ * @tags pattern performance
  */
 export const PerformanceVirtualScroll = {
-  render: () => html`<grid-virtual-scroll-demo></grid-virtual-scroll-demo>`
+  render: () => html`
+<nve-grid id="virtual-jobs" aria-label="Training jobs" aria-rowcount="10002" stripe>
+  <nve-grid-header aria-rowindex="1">
+    <nve-grid-column>Job</nve-grid-column>
+    <nve-grid-column>Status</nve-grid-column>
+    <nve-grid-column>Queue</nve-grid-column>
+    <nve-grid-column>Owner</nve-grid-column>
+  </nve-grid-header>
+  <nve-virtual-list tabindex="-1" item-count="10000" item-height="44" style="--scroll-height: 400px"></nve-virtual-list>
+  <nve-grid-footer aria-rowindex="10002">10,000 training jobs</nve-grid-footer>
+</nve-grid>
+<template id="virtual-job-row">
+  <nve-grid-row>
+    <nve-grid-cell></nve-grid-cell><nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell></nve-grid-cell><nve-grid-cell></nve-grid-cell>
+  </nve-grid-row>
+</template>
+<script type="module">
+  import '@nvidia-elements/core/grid/define.js';
+  import '@nvidia-elements/foundations/virtual-list/define.js';
+  const list = document.querySelector('#virtual-jobs > nve-virtual-list');
+  const template = document.querySelector('#virtual-job-row');
+  function draw({ start, end }) {
+    const rows = Array.from({ length: end - start }, (_, localIndex) => {
+      const index = start + localIndex;
+      const row = template.content.firstElementChild.cloneNode(true);
+      row.ariaRowIndex = String(index + 2);
+      const values = ['Job ' + index, 'Running', 'Queue ' + (index % 5), 'Team ' + (index % 10)];
+      Array.from(row.children).forEach((cell, column) => cell.textContent = values[column]);
+      return row;
+    });
+    list.replaceChildren(...rows);
+  }
+  list.addEventListener('virtual-change', event => draw(event.detail));
+  draw(list.range);
+</script>
+  `
 };
 
 /**

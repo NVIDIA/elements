@@ -64,3 +64,48 @@ nve-grid {
     scrollbar-width: var(--nve-sys-scrollbar-width);
   }
 }
+
+/* Wrapped rows use the same layout tokens as direct grid rows. */
+nve-virtual-list > nve-grid-row {
+  --row-height: var(--item-height);
+}
+
+nve-virtual-list > nve-grid-row > nve-grid-cell {
+  --min-height: 0;
+  overflow: hidden;
+}
+
+nve-grid[stripe] > nve-virtual-list > nve-grid-row:nth-child(odd) {
+  --background: var(--nve-sys-layer-container-accent-background);
+}
+
+nve-grid > nve-virtual-list > nve-grid-row:last-child {
+  --border-bottom: 0;
+}
+
+nve-grid:has(> nve-virtual-list)::part(_scrollbox) {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  overflow: auto;
+}
+
+nve-grid:has(> nve-virtual-list)::part(_content) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: max-content;
+  min-width: 100%;
+}
+
+nve-grid:has(> nve-virtual-list) > nve-grid-header {
+  width: auto;
+  min-width: max-content;
+  overflow: hidden scroll;
+  scrollbar-gutter: stable;
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+  scrollbar-color: transparent transparent;
+}
+
+nve-grid > nve-virtual-list {
+  --width: auto;
+}
