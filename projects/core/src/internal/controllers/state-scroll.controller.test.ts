@@ -113,6 +113,20 @@ describe('state-scroll.controller', () => {
     expect(element.matches(':state(scrolling)')).toBe(true);
   });
 
+  it('should not resume scroll listeners when an update finishes after disconnection', async () => {
+    element.requestUpdate();
+    element.remove();
+    await element.updateComplete;
+
+    element.dispatchEvent(new Event('scroll'));
+    expect(element.matches(':state(scrolling)')).toBe(false);
+
+    fixture.append(element);
+    await elementIsStable(element);
+    element.dispatchEvent(new Event('scroll'));
+    expect(element.matches(':state(scrolling)')).toBe(true);
+  });
+
   it('should cancel pending resets when the scroll target changes', async () => {
     element.dispatchEvent(new Event('scroll'));
     element.dispatchEvent(new Event('scrollend'));

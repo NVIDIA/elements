@@ -29,7 +29,7 @@ import globalStyles from './grid.global.css?inline';
  * @documentation https://nvidia.github.io/elements/docs/elements/data-grid/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
- * @slot - `nve-grid-header`, `nve-grid-row`, and `nve-grid-placeholder` elements.
+ * @slot - `nve-grid-header`, `nve-grid-row`, `nve-virtual-list`, and `nve-grid-placeholder` elements.
  * @slot footer - slot for grid-footer or toolbar
  * @cssprop --background
  * @cssprop --color
@@ -60,24 +60,40 @@ export class Grid extends LitElement implements ContainerElement {
   static readonly metadata = {
     tag: 'nve-grid',
     version: '0.0.0',
-    children: [GridRow.metadata.tag, GridHeader.metadata.tag, GridFooter.metadata.tag, GridPlaceholder.metadata.tag]
+    children: [
+      GridRow.metadata.tag,
+      GridHeader.metadata.tag,
+      GridFooter.metadata.tag,
+      GridPlaceholder.metadata.tag,
+      'nve-virtual-list'
+    ]
   };
 
   static elementDefinitions = {};
 
   /** @private */
   get keynavGridConfig() {
+    const header = this.#header;
     return {
       columns: this.#columns,
-      rows: [this.#header!, ...this.#rows],
-      cells: [...this.#columns, ...this.#cells]
+      rows: header ? [header, ...this.#rows] : this.#rows,
+      cells: this.#cells
     };
+  }
+
+  get #scrollTarget() {
+    return (
+      this.querySelector<HTMLElement>(':scope > nve-virtual-list') ??
+      this.shadowRoot?.querySelector<HTMLElement>('[part="_scrollbox"]') ??
+      undefined
+    );
   }
 
   /** @private */
   get stateScrollConfig(): StateScrollConfig {
+    const target = this.#scrollTarget;
     return {
-      target: this.shadowRoot?.querySelector<HTMLElement>('[part="_scrollbox"]') ?? undefined
+      target
     };
   }
 
@@ -104,7 +120,7 @@ export class Grid extends LitElement implements ContainerElement {
     return html`
       <div internal-host>
         <div part="_scrollbox">
-          <slot></slot>
+          <slot part="_content" @slotchange=${() => this.requestUpdate()}></slot>
         </div>
         <slot name="footer"></slot>
       </div>
@@ -125,6 +141,13 @@ export class Grid extends LitElement implements ContainerElement {
   scrollTo(options?: ScrollToOptions): Promise<void>;
   scrollTo(x: number, y: number): Promise<void>;
   async scrollTo(...args: [options?: ScrollToOptions] | [x: number, y: number]): Promise<void> {
-    await this.shadowRoot!.querySelector('[part="_scrollbox"]')?.scrollTo(...(args as [ScrollToOptions]));
+    const target = this.#scrollTarget;
+    const options = typeof args[0] === 'number' ? { left: args[0], top: args[1] } : (args[0] ?? {});
+    if (target?.localName === 'nve-virtual-list') {
+      this.shadowRoot
+        ?.querySelector('[part="_scrollbox"]')
+        ?.scrollTo({ left: options.left, behavior: options.behavior });
+      target.scrollTo({ top: options.top, behavior: options.behavior });
+    } else target?.scrollTo(options);
   }
 }

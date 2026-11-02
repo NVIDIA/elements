@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { ssrRunner } from '@internals/vite';
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/foundations/virtual-list/define.js';
 
 describe(Grid.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
@@ -27,5 +28,17 @@ describe(Grid.metadata.tag, () => {
     `);
     expect(result.includes('shadowroot="open"')).toBe(true);
     expect(result.includes('nve-grid')).toBe(true);
+  });
+
+  it('renders composed slots without viewport measurements', async () => {
+    const result = await ssrRunner.render(html`<nve-grid aria-label="Jobs">
+      <nve-grid-header><nve-grid-column>Job</nve-grid-column></nve-grid-header>
+      <nve-virtual-list item-count="10000" item-height="44"></nve-virtual-list>
+      <nve-grid-footer>10,000 jobs</nve-grid-footer>
+    </nve-grid>`);
+    expect(result).toContain('shadowroot="open"');
+    expect(result).toContain('nve-virtual-list');
+    expect(result).toContain('class="content" hidden');
+    expect(result).not.toContain('aria-rowcount');
   });
 });
