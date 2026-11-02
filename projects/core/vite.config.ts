@@ -6,13 +6,6 @@ export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
       alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') }
-    },
-    build: {
-      lib: {
-        entry: {
-          'polyfills/custom-state-set': resolve(import.meta.dirname, './src/polyfills/custom-state-set.ts') // optional polyfills for non-chromium envs
-        }
-      }
     }
   };
 

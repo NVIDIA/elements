@@ -64,7 +64,6 @@
   ],
   "sideEffects": [
     "./dist/polyfills/index.js",
-    "./dist/polyfills/custom-state-set.js",
     "./dist/test/index.js",
     "./dist/bundles/*.js",
     "./src/**/define.ts",
@@ -93,10 +92,6 @@
     "./polyfills/index.js": {
       "types": "./dist/polyfills/index.d.ts",
       "default": "./dist/polyfills/index.js"
-    },
-    "./polyfills/custom-state-set.js": {
-      "types": "./dist/polyfills/custom-state-set.d.ts",
-      "default": "./dist/polyfills/custom-state-set.js"
     },
     "./bundles/*": {
       "default": "./dist/bundles/*"

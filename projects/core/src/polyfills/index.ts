@@ -13,7 +13,6 @@
 import 'construct-style-sheets-polyfill';
 import 'element-internals-polyfill';
 import 'formdata-polyfill';
-import './custom-state-set.js';
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute
