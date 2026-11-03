@@ -69,7 +69,9 @@
     "./dist/bundles/*.js",
     "./src/**/define.ts",
     "./**/define.js",
-    "./**/server.js"
+    "./**/server.js",
+    "./src/icon/icons/*.ts",
+    "./dist/icon/icons/*.js"
   ],
   "exports": {
     "./package.json": "./package.json",
@@ -514,6 +516,10 @@
     "./icon/server.js": {
       "types": "./dist/icon/server.d.ts",
       "default": "./dist/icon/server.js"
+    },
+    "./icon/icons/*.js": {
+      "types": "./dist/icon/icons/*.d.ts",
+      "default": "./dist/icon/icons/*.js"
     },
     "./icon-button": {
       "types": "./dist/icon-button/index.d.ts",
@@ -1147,7 +1153,9 @@
         "vite.config.ts",
         "vite.bundle.ts",
         "custom-elements-manifest.config.mjs",
-        "!src/**/*.test.render.ts"
+        "!src/**/*.test.render.ts",
+        "!src/icon/icons/*.ts",
+        "!src/icon/names.ts"
       ],
       "output": [
         "dist/**",
@@ -1190,7 +1198,9 @@
       "output": [
         "src/icon/icons.ts",
         "src/internal/types/icons.ts",
-        "src/icon/server.ts"
+        "src/icon/server.ts",
+        "src/icon/icons/*.ts",
+        "src/icon/names.ts"
       ]
     },
     "test": {
@@ -1383,7 +1393,9 @@
         "src/**/*.ts",
         "eslint.config.js",
         "!src/icon/{server,icons}.ts",
-        "!src/**/__screenshots__/**"
+        "!src/**/__screenshots__/**",
+        "!src/icon/icons/*.ts",
+        "!src/icon/names.ts"
       ],
       "output": [],
       "dependencies": [
@@ -1412,7 +1424,9 @@
         "src/**/*.ts",
         "tsconfig.json",
         "!src/icon/{server,icons}.ts",
-        "!src/**/__screenshots__/**"
+        "!src/**/__screenshots__/**",
+        "!src/icon/icons/*.ts",
+        "!src/icon/names.ts"
       ],
       "output": []
     },

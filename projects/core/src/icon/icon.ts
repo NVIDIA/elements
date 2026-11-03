@@ -9,7 +9,8 @@ import { state } from 'lit/decorators/state.js';
 import type { Size } from '@nvidia-elements/core/internal';
 import { attachInternals, parseVersion, useStyles } from '@nvidia-elements/core/internal';
 import type { IconName, IconSVG } from './icons.js';
-import { ICON_IMPORTS } from './icons.js';
+import { iconRegistry, getIconRegistry } from './registry.js';
+import { ICON_NAMES_SOLID } from './names.js';
 import styles from './icon.css?inline';
 
 export type { IconName, IconSVG } from './icons.js';
@@ -23,6 +24,9 @@ declare global {
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/icon
  * @description An icon is a graphic symbol designed to visually show the purpose of an interface element.
+ * Import `@nvidia-elements/core/icon/icons/person.js` to register one SVG before rendering.
+ * Import `person-solid.js` separately for solid appearance. Missing names load the built-in catalog on demand.
+ * Explicit imports reduce initial loading in application builds; the full browser bundle remains a single file.
  * @documentation https://nvidia.github.io/elements/docs/elements/icon/
  * @cssprop --color
  * @cssprop --width
@@ -66,21 +70,14 @@ export class Icon extends LitElement {
     version: '0.0.0'
   };
 
-  static _icons: { [key: string]: IconSVG } = ICON_IMPORTS;
+  static _registry = iconRegistry;
 
-  // eslint-disable-next-line no-restricted-syntax
-  private static get _iconsRegistry() {
-    return this.registeredIcon?._icons ?? Icon._icons;
+  static get _icons() {
+    return getIconRegistry().icons;
   }
 
-  // eslint-disable-next-line no-restricted-syntax
-  private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
-    this.registeredIcon._icons = { ...Icon._iconsRegistry, ...icons };
-  }
-
-  // eslint-disable-next-line no-restricted-syntax
-  private static get registeredIcon() {
-    return customElements.get(Icon.metadata.tag) as typeof Icon;
+  static set _icons(icons: Record<string, IconSVG>) {
+    getIconRegistry().icons = icons;
   }
 
   /** @private */
@@ -92,21 +89,30 @@ export class Icon extends LitElement {
     }
 
     const solidName = `${this.name}-solid`;
-    return Icon._iconsRegistry[solidName] ? solidName : this.name;
+    return getIconRegistry().icons[solidName] ||
+      ICON_NAMES_SOLID.includes(this.name as (typeof ICON_NAMES_SOLID)[number])
+      ? solidName
+      : this.name;
   }
 
   get #iconString() {
     const iconName = this.#resolvedIconName;
-    return isServer && globalThis._NVE_SSR_ICON_REGISTRY && iconName
-      ? globalThis._NVE_SSR_ICON_REGISTRY[iconName]
-      : this.svg;
+    if (!isServer || !iconName) return this.svg;
+    const registry = getIconRegistry();
+    return (
+      registry.sync(iconName) ??
+      globalThis._NVE_SSR_ICON_REGISTRY?.[iconName] ??
+      (this.name ? (registry.sync(this.name) ?? globalThis._NVE_SSR_ICON_REGISTRY?.[this.name]) : undefined)
+    );
   }
 
-  #iconRegistryEventName?: string;
+  #iconRegistryEventNames: string[] = [];
 
   #renderRequest = 0;
 
-  #onIconRegistryUpdate = (event: Event) => this.#asyncRender(event as CustomEvent<IconSVG>);
+  #onIconRegistryUpdate = () => {
+    if (this.isConnected) void this.#render();
+  };
 
   render() {
     return html`
@@ -119,20 +125,19 @@ export class Icon extends LitElement {
     attachInternals(this);
     this._internals.role = 'img';
     this.#addIconRegistryListener();
+    if (this.hasUpdated) void this.#render();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#removeIconRegistryListener();
+    this.#renderRequest++;
   }
 
   static async add(icons: { [key: string]: IconSVG }) {
     if (globalThis.customElements?.whenDefined) {
       await globalThis.customElements.whenDefined(Icon.metadata.tag);
-      Icon._iconsRegistry = icons;
-      Object.keys(icons).forEach(name =>
-        globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${name}`, { detail: icons[name] }))
-      );
+      for (const [name, icon] of Object.entries(icons)) getIconRegistry().add(name, icon);
     }
   }
 
@@ -141,12 +146,7 @@ export class Icon extends LitElement {
     if (globalThis.customElements?.whenDefined) {
       /* eslint-disable @typescript-eslint/no-floating-promises */
       globalThis.customElements.whenDefined(Icon.metadata.tag).then(() => {
-        Object.keys(aliases).forEach(alias => {
-          Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]!]!;
-          globalThis?.document?.dispatchEvent(
-            new CustomEvent(`${Icon.metadata.tag}-${alias}`, { detail: Icon._iconsRegistry[alias] })
-          );
-        });
+        for (const [name, target] of Object.entries(aliases)) getIconRegistry().alias(name, target);
       });
     }
   }
@@ -161,45 +161,50 @@ export class Icon extends LitElement {
   }
 
   #addIconRegistryListener() {
-    const iconName = this.#resolvedIconName;
-    if (!this.isConnected || !iconName || this.#iconRegistryEventName) return;
-    this.#iconRegistryEventName = `${Icon.metadata.tag}-${iconName}`;
-    globalThis.document?.addEventListener(this.#iconRegistryEventName, this.#onIconRegistryUpdate);
+    if (!this.isConnected || !this.name || this.#iconRegistryEventNames.length) return;
+    this.#iconRegistryEventNames = [this.name, `${this.name}-solid`].map(name => `nve-icon-${name}`);
+    for (const name of this.#iconRegistryEventNames)
+      globalThis.document.addEventListener(name, this.#onIconRegistryUpdate);
   }
 
   #removeIconRegistryListener() {
-    if (!this.#iconRegistryEventName) return;
-    globalThis.document?.removeEventListener(this.#iconRegistryEventName, this.#onIconRegistryUpdate);
-    this.#iconRegistryEventName = undefined;
-  }
-
-  async #asyncRender(event: CustomEvent<IconSVG>) {
-    if (this.isConnected && event.detail && this.svg !== (await event.detail.svg())) {
-      this.#render();
-    }
+    for (const name of this.#iconRegistryEventNames)
+      globalThis.document.removeEventListener(name, this.#onIconRegistryUpdate);
+    this.#iconRegistryEventNames = [];
   }
 
   async #render() {
     const renderRequest = ++this.#renderRequest;
     const iconName = this.#resolvedIconName;
-    if (!iconName) return;
-    const svg = await (iconName.endsWith('.svg')
-      ? fetch(iconName).then(res => res.text())
-      : (Icon._iconsRegistry[iconName]?.svg() ?? Promise.resolve('')));
-    if (renderRequest !== this.#renderRequest) return;
-    Icon._iconsRegistry[iconName] = { svg: () => svg, ...Icon._iconsRegistry[iconName] };
-    this.svg = svg;
+    if (isServer) return;
+    try {
+      const svg = !iconName
+        ? ''
+        : await (iconName.endsWith('.svg')
+            ? fetch(iconName).then(res => res.text())
+            : getIconRegistry().resolve(iconName));
+      if (renderRequest === this.#renderRequest && this.isConnected) this.svg = svg;
+    } catch {
+      if (renderRequest === this.#renderRequest && this.isConnected) this.svg = '';
+    }
   }
 }
 
 export function mergeIcons(RegisteredIcon: typeof Icon) {
   if (typeof globalThis.customElements?.get === 'function') {
+    if (RegisteredIcon._registry === iconRegistry) return;
     const registered = parseVersion(RegisteredIcon.metadata.version);
-    const current = parseVersion('0.0.0');
+    const current = parseVersion(Icon.metadata.version);
+    const difference =
+      current.major - registered.major || current.minor - registered.minor || current.patch - registered.patch;
 
-    // determine if an older icon already registered and if so, merge the icons with the latest svgs
-    if (registered.minor <= current.minor && registered.major <= current.major) {
-      RegisteredIcon._icons = { ...RegisteredIcon._icons, ...ICON_IMPORTS };
+    // A different compatible registry needs updated providers, cache invalidation, and render notifications.
+    if (difference >= 0) {
+      RegisteredIcon._registry?.merge(iconRegistry);
+      void iconRegistry
+        .loadCatalog()
+        .then(icons => RegisteredIcon.add(icons))
+        .catch(() => {});
     }
   }
 }

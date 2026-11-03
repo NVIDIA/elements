@@ -49,7 +49,7 @@ describe(Icon.metadata.tag, () => {
       'pointer-stroke': 'pointer',
       'question-mark-circle-stroke': 'question-mark-circle'
     });
-    expect(Icon._icons['thumb-stroke']).toBe(Icon._icons.thumb);
+    expect(await Icon._icons['thumb-stroke'].svg()).toBe(await Icon._registry.resolve('thumb'));
   });
 
   it('should provide a aria role of img', async () => {
@@ -170,9 +170,7 @@ describe(Icon.metadata.tag, () => {
     });
 
     await elementIsStable(element);
-    expect((customElements.get(Icon.metadata.tag) as typeof Icon)['_iconsRegistry']['chevron-up']).toStrictEqual(
-      (customElements.get(Icon.metadata.tag) as typeof Icon)['_iconsRegistry']['chevron']
-    );
+    expect(await Icon._registry.resolve('chevron-up')).toBe(await Icon._registry.resolve('chevron'));
   });
 
   it('should allow icons to be registered', async () => {
