@@ -15,7 +15,7 @@ const VITEST_CONFIGS = ['vitest*.ts'];
 /** @type {import('knip').KnipConfig} */
 export default {
   exclude: ['catalog'],
-  ignoreBinaries: ['codesign', 'vale'],
+  ignoreBinaries: ['vale'],
   ignoreDependencies: [
     '@eslint/js',
     '@internals/patterns',
@@ -35,7 +35,6 @@ export default {
     'adm-zip',
     'archiver',
     'axe-core',
-    'bun',
     'glob',
     'highlight.js',
     'lit',
@@ -71,6 +70,8 @@ export default {
     'projects/cli': {
       entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...TEST_ENTRIES, ...VITE_CONFIGS, ...VITEST_CONFIGS],
       project: [...PROJECT_FILES, ...SOURCE_FILES],
+      // Windows provides this command for locating executables on PATH.
+      ignoreBinaries: ['where.exe'],
       // The CLI bundle keeps these transitive imports external, so they remain runtime dependencies
       // even though the CLI source imports them through @internals/tools.
       ignoreDependencies: ['fast-glob', 'ignore']
@@ -103,7 +104,9 @@ export default {
         ...VITE_CONFIGS,
         ...VITEST_CONFIGS
       ],
-      project: [...PROJECT_FILES, ...BUILD_FILES, ...SOURCE_FILES]
+      project: [...PROJECT_FILES, ...BUILD_FILES, ...SOURCE_FILES],
+      // Consumers provide Vue when opting in to the generated framework typings.
+      ignoreDependencies: ['vue']
     },
     'projects/create': {
       entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...VITE_CONFIGS],
