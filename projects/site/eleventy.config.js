@@ -92,6 +92,11 @@ const entrypoints = [
  * Main 11ty configuration function
  * Sets up plugins, transforms, collections, and build options
  */
+// Keep eager registrations and their SVG payloads together in the multi-page build.
+const eagerIconModules = new Set();
+const iconRegistration = /\/core\/dist\/icon\/icons\/[^/]+\.js$/;
+const iconAsset = /\/core\/dist\/icon\/assets\/[^/]+\.js$/;
+
 export default function (eleventyConfig) {
   // Vite must finish before the other output writers run.
   // Knip's Eleventy config mock omits this API.
@@ -139,7 +144,20 @@ export default function (eleventyConfig) {
       base: BASE_URL,
       build: {
         rolldownOptions: {
-          external: ['open', '@nvidia-elements/lint', '@nvidia-elements/lint/eslint/internals'] // todo: remove when tools have conditional exports
+          external: ['open', '@nvidia-elements/lint', '@nvidia-elements/lint/eslint/internals'], // todo: remove when tools have conditional exports
+          output: {
+            codeSplitting: {
+              groups: [
+                {
+                  name: 'registered-icons',
+                  test: id => eagerIconModules.has(id),
+                  includeDependenciesRecursively: false,
+                  entriesAware: true,
+                  entriesAwareMergeThreshold: 2000
+                }
+              ]
+            }
+          }
         },
         target: 'esnext',
         sourcemap: false,
@@ -153,6 +171,21 @@ export default function (eleventyConfig) {
             : undefined
       },
       plugins: [
+        {
+          name: 'collect-eager-icons',
+          buildStart() {
+            eagerIconModules.clear();
+          },
+          buildEnd() {
+            for (const id of this.getModuleIds()) {
+              if (!iconRegistration.test(id)) continue;
+              eagerIconModules.add(id);
+              for (const dependency of this.getModuleInfo(id)?.importedIds ?? []) {
+                if (iconAsset.test(dependency)) eagerIconModules.add(dependency);
+              }
+            }
+          }
+        },
         transpileDecorators({ experimentalDecorators: true }),
         {
           name: 'remove-sourcemaps',

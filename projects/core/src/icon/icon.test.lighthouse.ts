@@ -17,7 +17,7 @@ describe('icon lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
     // The fallback transfers a separate catalog before the requested SVG.
-    expect(report.payload.javascript.kb).toBeLessThan(15.2);
+    expect(report.payload.javascript.kb).toBeLessThanOrEqual(15);
   });
   test('explicit icon registration should avoid the fallback catalog', async () => {
     const report = await lighthouseRunner.getReport('nve-icon-explicit', /* html */`
@@ -30,7 +30,7 @@ describe('icon lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(12);
+    expect(report.payload.javascript.kb).toBeLessThanOrEqual(12);
   });
 
 });

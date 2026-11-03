@@ -308,7 +308,8 @@
         "!**/.vitest/**",
         "!**/.vitest-attachments/**",
         "!**/node_modules/**",
-        "!projects/core/src/icon/{icons,server}.ts",
+        "!projects/core/src/icon/{icons,server,names}.ts",
+        "!projects/core/src/icon/icons/*.ts",
         "!projects/internals/metadata/static/**",
         "!projects/monaco/src/themes/generated/**",
         "!projects/**/src/vendor/**/*",
@@ -347,7 +348,7 @@
       ]
     },
     "lint:vale": {
-      "command": "vale --config .vale.ini .agents projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
+      "command": "vale --config .vale.ini .agents projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/icon/icons.ts,**/icon/server.ts,**/icon/names.ts,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
       "files": [
         "./.vale.ini",
         "./config/vale/**/*",
@@ -358,7 +359,8 @@
         "./projects/*/*/README.md",
         "!**/node_modules/**",
         "!**/__screenshots__/**",
-        "!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}"
+        "!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}",
+        "!./projects/core/src/icon/{icons,server,names}.ts"
       ],
       "output": []
     },
