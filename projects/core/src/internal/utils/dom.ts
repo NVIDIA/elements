@@ -173,7 +173,7 @@ export function isContextMenuClick(event: MouseEvent) {
 }
 
 export function getFlattenedFocusableItems(element: Node, depth = 10) {
-  return getFlattenedDOMTree(element, depth).filter((e: HTMLElement) => isFocusable(e)) as HTMLElement[];
+  return getFlattenedDOMTree(element, depth).filter((e: HTMLElement) => isFocusable(e));
 }
 
 /**
