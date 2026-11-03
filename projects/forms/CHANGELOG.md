@@ -1,3 +1,22 @@
+## [2.0.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.11...@nvidia-elements/forms-v2.0.12) (2026-11-03)
+
+### Features
+
+* **core:** scroll box invoker command support ([4b41419](https://github.com/NVIDIA/elements/commit/4b414197911ba0c5b3fd942f9f51a89b0768c419))
+
+### Bug Fixes
+
+* **cli:** update notice ([21a6510](https://github.com/NVIDIA/elements/commit/21a6510164469615358937cdf833edc05bfa9cb8))
+* **core:** correct dropdown group navigation and popover rendering ([5bf985f](https://github.com/NVIDIA/elements/commit/5bf985f1b0e434e8b5d08f1b29b18accbfd65c14))
+* **core:** correct gesture termination handling ([0aab542](https://github.com/NVIDIA/elements/commit/0aab542b206b25933d921416a62f8a70c44b2723))
+* **core:** iframe separate theme script and resize handling ([9391e0b](https://github.com/NVIDIA/elements/commit/9391e0beffe1751d80c2cb8da981e20906fb48a9))
+* **core:** refresh menu tab order when items change ([024ff58](https://github.com/NVIDIA/elements/commit/024ff582b0d01ec8f63c629922bbf77d8e72c989))
+* **core:** remove obsolete inset-area popover fallback ([8a1d913](https://github.com/NVIDIA/elements/commit/8a1d9131f75c6c9879bef3413688e7a22a7d2306))
+* **core:** remove unused polyfill ([427b3ef](https://github.com/NVIDIA/elements/commit/427b3ef8bf1fb4d70a86ede95b719e7aea1bd58e))
+* **forms:** remove obsolete popover trigger fallback ([0973027](https://github.com/NVIDIA/elements/commit/09730270e6d81c8d9139cfb56aef9d9c5a2344f6))
+* **markdown:** update notice ([1315538](https://github.com/NVIDIA/elements/commit/1315538849bc452a321c3043411fd5e555025e75))
+* **pi:** update notice ([561c535](https://github.com/NVIDIA/elements/commit/561c535744d599f26fb2692f00b089ed8eac74ef))
+
 ## [2.0.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.10...@nvidia-elements/forms-v2.0.11) (2026-11-02)
 
 ### Features
