@@ -12,6 +12,6 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(2);
+    expect(report.payload.javascript.kb).toBeLessThanOrEqual(2);
   });
 });

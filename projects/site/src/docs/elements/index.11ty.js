@@ -67,7 +67,9 @@ const componentGroups = [
       'nve-page-header',
       'nve-panel',
       'nve-resize-handle',
-      'nve-toolbar'
+      'nve-scroll-box',
+      'nve-toolbar',
+      'nve-workspace'
     ]
   },
   {
@@ -90,6 +92,7 @@ const componentGroups = [
     title: 'Feedback and status',
     tags: [
       'nve-alert',
+      'nve-ghost',
       'nve-page-loader',
       'nve-progress-bar',
       'nve-progress-dot',
@@ -540,6 +543,10 @@ export function render(data) {
       --min-height: 0;
       width: 100%;
       height: 100% !important;
+    }
+
+    nve-radio-group {
+      max-width: 100px;
     }
   }
 
