@@ -184,3 +184,33 @@ export const WithMoreIcons = {
     </nve-dropdown-group>
   `
 };
+
+/**
+ * @summary Navigate cascading menus with the keyboard when the document direction is RTL.
+ * @description `ArrowLeft` opens the focused item's submenu and focuses its first enabled item.
+ * `ArrowRight` closes the current dropdown and returns focus to its opening invoker.
+ * Escape closes the group's dropdowns.
+ * @tags test-case
+ */
+export const RightToLeft = {
+  render: () => html`
+    <div dir="rtl">
+      <nve-button popovertarget="rtl-menu">Actions</nve-button>
+      <nve-dropdown-group>
+        <nve-dropdown id="rtl-menu">
+          <nve-menu>
+            <nve-menu-item popovertarget="rtl-submenu">
+              Move <nve-icon name="caret" direction="left" size="sm" slot="suffix"></nve-icon>
+            </nve-menu-item>
+          </nve-menu>
+        </nve-dropdown>
+        <nve-dropdown id="rtl-submenu" position="left">
+          <nve-menu>
+            <nve-menu-item>Archive</nve-menu-item>
+            <nve-menu-item>Trash</nve-menu-item>
+          </nve-menu>
+        </nve-dropdown>
+      </nve-dropdown-group>
+    </div>
+  `
+};

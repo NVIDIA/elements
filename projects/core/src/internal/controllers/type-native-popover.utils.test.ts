@@ -160,7 +160,7 @@ describe('getHostTrigger', () => {
   });
 });
 
-type TestHost = HTMLElement & { anchor?: HTMLElement | string; _activeTrigger?: HTMLElement };
+type TestHost = HTMLElement & { anchor?: HTMLElement | string };
 
 describe('getHostAnchor', () => {
   let logSpy;
@@ -186,9 +186,8 @@ describe('getHostAnchor', () => {
     expect(getHostAnchor(host)).toBe(host.anchor);
   });
 
-  it('returns the active anchor element when no anchor is provided', () => {
-    host._activeTrigger = anchor;
-    expect(getHostAnchor(host)).toBe(host._activeTrigger);
+  it('returns the body when no anchor is provided', () => {
+    expect(getHostAnchor(host)).toBe(document.body);
   });
 
   it('returns the body as a fallback when anchor is not an element and id does not match any elements in the DOM tree', () => {

@@ -7,7 +7,7 @@
   --nve-sys-layer-popover-arrow-padding: 0px;
   --nve-sys-layer-popover-arrow-offset: 0px;
   --nve-sys-layer-popover-offset: 0px;
-  --arrow-transform: translate(0, -2px) rotate(-45deg);
+  --arrow-transform: translate(0, -2px) rotate(225deg);
   --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --border-radius: var(--nve-ref-border-radius-md);
   --background: var(--nve-sys-layer-overlay-background);
@@ -59,25 +59,28 @@ nve-icon-button {
   background: var(--background);
   transform: var(--arrow-transform);
   border-top-left-radius: var(--nve-ref-border-radius-xs);
+  /* Cover the panel shadow without painting the unused half over its content. */
+  z-index: 10000;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
   position: absolute;
   border-left: var(--border);
   border-top: var(--border);
 }
 
 :host([position*='top']) {
-  --arrow-transform: translate(0, -2px) rotate(-45deg);
+  --arrow-transform: translate(0, -2px) rotate(225deg);
 }
 
 :host([position*='right']) {
-  --arrow-transform: translate(2px, 0) rotate(45deg);
+  --arrow-transform: translate(2px, 0) rotate(-45deg);
 }
 
 :host([position*='bottom']) {
-  --arrow-transform: translate(0, -1px) rotate(45deg);
+  --arrow-transform: translate(0, 2px) rotate(45deg);
 }
 
 :host([position*='left']) {
-  --arrow-transform: translate(-2px, 0) rotate(45deg);
+  --arrow-transform: translate(-2px, 0) rotate(135deg);
 }
 
 ::slotted(nve-menu) {
