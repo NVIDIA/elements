@@ -1,3 +1,9 @@
+## [2.20.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.2...@nvidia-elements/core-v2.20.3) (2026-11-03)
+
+### Bug Fixes
+
+* **core:** refresh menu tab order when items change ([024ff58](https://github.com/NVIDIA/elements/commit/024ff582b0d01ec8f63c629922bbf77d8e72c989))
+
 ## [2.20.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.1...@nvidia-elements/core-v2.20.2) (2026-11-02)
 
 ### Bug Fixes
