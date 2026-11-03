@@ -25,7 +25,7 @@ export function toggleState(internals: ElementInternals, state: string, force: b
   }
 }
 
-export type PopoverAnchorElement = HTMLElement & { anchor?: HTMLElement | string; _activeTrigger?: HTMLElement };
+export type PopoverAnchorElement = HTMLElement & { anchor?: HTMLElement | string };
 
 export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
   return (
@@ -40,7 +40,7 @@ export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
 }
 
 export function getHostAnchor(host: PopoverAnchorElement) {
-  const anchor = host.anchor ?? host._activeTrigger;
+  const anchor = host.anchor;
 
   if (typeof anchor === 'string' && anchor.length) {
     if (!host.parentNode) {

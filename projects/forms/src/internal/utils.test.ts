@@ -145,8 +145,7 @@ describe('dom tree utilities', () => {
     expect(getHostAnchor(host)).toBe(anchor);
 
     host.anchor = undefined;
-    host._activeTrigger = anchor;
-    expect(getHostAnchor(host)).toBe(anchor);
+    expect(getHostAnchor(host)).toBe(document.body);
   });
 
   it('should fall back to body for unresolved popover host anchors', () => {
