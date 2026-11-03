@@ -315,7 +315,6 @@ export const ICON_IMPORTS = {
   'zoom-out': iconImport(() => import('./icons/zoom-out.svg?raw')),
 };
 
-import type { IconName } from '../internal/types/icons.js';
 export type { IconName } from '../internal/types/icons.js';
 
 export type IconNameSolid =
@@ -351,8 +350,4 @@ export type IconNameSolid =
   | 'wrench'
   | 'x-circle';
 
-export const ICON_NAMES_SOLID = Object.keys(ICON_IMPORTS)
-  .filter((name): name is IconNameSolid => name.endsWith('-solid'))
-  .map(name => name.slice(0, -'-solid'.length)) as readonly IconNameSolid[];
-
-export const ICON_NAMES = Object.keys(ICON_IMPORTS).filter((name): name is IconName => !name.endsWith('-solid'));
+export { ICON_NAMES, ICON_NAMES_SOLID } from './names.js';

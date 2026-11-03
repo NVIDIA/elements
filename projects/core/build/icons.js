@@ -130,6 +130,30 @@ function writeIconFiles(icons) {
 }
 
 function writeIconRegistry(icons) {
+  const generatedHeader = '// This is an auto-generated file. DO NOT EDIT\n';
+  for (const file of fs.readdirSync(inputPath).filter(file => file.endsWith('.ts'))) {
+    if (fs.readFileSync(path.join(inputPath, file), 'utf8').includes(generatedHeader.trim())) {
+      fs.unlinkSync(path.join(inputPath, file));
+    }
+  }
+  for (const name of Object.keys(icons)) {
+    fs.writeFileSync(
+      path.join(inputPath, `${name}.ts`),
+      generatedHeader +
+        `import svg from './${name}.svg?raw';\nimport { registerIcon } from '../registry.js';\nregisterIcon('${name}', () => svg);\n`
+    );
+  }
+  fs.writeFileSync(
+    path.join(outputPath, 'names.ts'),
+    generatedHeader +
+      `import type { IconName, IconNameSolid } from './icons.js';\nexport const ICON_NAMES: IconName[] = ${JSON.stringify(sortIconKeys(Object.keys(icons)).filter(name => !name.endsWith('-solid')))};\n` +
+      `export const ICON_NAMES_SOLID: readonly IconNameSolid[] = ${JSON.stringify(
+        sortIconKeys(Object.keys(icons))
+          .filter(name => name.endsWith('-solid'))
+          .map(name => name.slice(0, -6))
+      )};\n`
+  );
+
   fs.writeFileSync(
     path.join(outputPath, '../internal/types/icons.ts'),
     `// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
@@ -167,7 +191,6 @@ export const ICON_IMPORTS = {\n${sortIconKeys(Object.keys(icons))
         .map(i => `  '${i}': iconImport(() => import('./icons/${i}.svg?raw')),`)
         .join('\n')}\n};
 
-import type { IconName } from '../internal/types/icons.js';
 export type { IconName } from '../internal/types/icons.js';
 
 export type IconNameSolid =
@@ -176,11 +199,7 @@ ${sortIconKeys(Object.keys(icons))
   .map(i => `  | '${i.slice(0, -'-solid'.length)}'`)
   .join('\n')};
 
-export const ICON_NAMES_SOLID = Object.keys(ICON_IMPORTS)
-  .filter((name): name is IconNameSolid => name.endsWith('-solid'))
-  .map(name => name.slice(0, -'-solid'.length)) as readonly IconNameSolid[];
-
-export const ICON_NAMES = Object.keys(ICON_IMPORTS).filter((name): name is IconName => !name.endsWith('-solid'));
+export { ICON_NAMES, ICON_NAMES_SOLID } from './names.js';
 `,
       { encoding: 'utf-8' },
       r

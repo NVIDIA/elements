@@ -16,6 +16,21 @@ describe('icon lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(14.6);
+    // The fallback transfers a separate catalog before the requested SVG.
+    expect(report.payload.javascript.kb).toBeLessThan(15.2);
   });
+  test('explicit icon registration should avoid the fallback catalog', async () => {
+    const report = await lighthouseRunner.getReport('nve-icon-explicit', /* html */`
+      <nve-icon name="person"></nve-icon>
+      <script type="module">
+        import '@nvidia-elements/core/icon/icons/person.js';
+        import '@nvidia-elements/core/icon/define.js';
+      </script>
+    `);
+    expect(report.scores.performance).toBe(100);
+    expect(report.scores.accessibility).toBe(100);
+    expect(report.scores.bestPractices).toBe(100);
+    expect(report.payload.javascript.kb).toBeLessThan(12);
+  });
+
 });

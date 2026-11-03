@@ -47,6 +47,16 @@ the icon renders its outline form. Omit the attribute, or set `appearance="outli
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Themes' %}
 
+## Explicit Imports
+
+```typescript
+import '@nvidia-elements/core/icon/icons/person.js';
+import '@nvidia-elements/core/icon/icons/person-solid.js';
+import '@nvidia-elements/core/icon/define.js';
+```
+
+Each icon import registers one SVG. Import the solid variant separately when needed. Names without an explicit registration load from the built-in catalog on demand. Application builds can defer that catalog; the full browser bundle remains a single file.
+
 ## Registration
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Registration' %}

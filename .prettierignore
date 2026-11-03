@@ -46,3 +46,6 @@ projects/starters/vue/src/**/*
 projects/starters/nextjs/next-env.d.ts
 projects/starters/nuxt/.nuxt/**/*
 projects/starters/nuxt/app/**/*
+
+projects/core/src/icon/icons/*.ts
+projects/core/src/icon/names.ts
