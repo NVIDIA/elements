@@ -240,68 +240,6 @@
   inset: 0 !important;
 }
 
-/*
- * Remove the following @supports block after Chrome 145 is stable.
- * This is to compensate for a change in Chrome 144 for how anchor positioning with transforms works.
- * https://developer.chrome.com/blog/chrome-144-beta#css_anchor_positioning_with_transforms
- * https://x.com/una/status/1995538970223018004
- * 
- * The (not selector(::search-text)) selector is used to target Chrome 143 and below.
- */
-@supports (not selector(::search-text)) and (position-area: bottom) {
-  .arrow {
-    translate: 0% -50%;
-  }
-
-  :host([position='top']) .arrow {
-    translate: 0% -50%;
-  }
-
-  :host([position='top'][alignment='end']) .arrow {
-    translate: -150% -50%;
-  }
-
-  :host([position='top'][alignment='start']) .arrow {
-    translate: 150% -50%;
-  }
-
-  :host([position='bottom']) .arrow {
-    translate: 0% 50%;
-  }
-
-  :host([position='bottom'][alignment='end']) .arrow {
-    translate: -150% 50%;
-  }
-
-  :host([position='bottom'][alignment='start']) .arrow {
-    translate: 150% 50%;
-  }
-
-  :host([position='left']) .arrow {
-    translate: -50% 0%;
-  }
-
-  :host([position='left'][alignment='end']) .arrow {
-    translate: -50% -150%;
-  }
-
-  :host([position='left'][alignment='start']) .arrow {
-    translate: -50% 150%;
-  }
-
-  :host([position='right']) .arrow {
-    translate: 50% 0%;
-  }
-
-  :host([position='right'][alignment='end']) .arrow {
-    translate: 50% -150%;
-  }
-
-  :host([position='right'][alignment='start']) .arrow {
-    translate: 50% 150%;
-  }
-}
-
 :host([popover][modal])::before {
   content: ' ';
   display: block;
