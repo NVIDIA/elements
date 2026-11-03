@@ -49,17 +49,26 @@ packages:
 
 overrides:
   '@lit-labs/ssr-dom-shim': 1.6.0
+  '@modelcontextprotocol/sdk@<1.32.0': 'catalog:'
+  '@modelcontextprotocol/sdk>@hono/node-server': 2.1.3
   'archiver>glob': 'catalog:'
   # semantic-release 25 / release-notes-generator 14 still ship writer@8.
   # commitlint pulls conventionalcommits@10, which only renders with writer@9.
   conventional-changelog-conventionalcommits: 9.3.1
   'dts-bundle-generator>typescript': 'catalog:'
   'devalue@<5.8.1': 5.9.4
+  'dompurify@<3.4.17': 3.4.17
   eslint: 'catalog:'
+  'glob@>=9.0.0 <14.0.2': 'catalog:'
+  'ip-address@<10.7.4': 10.7.4
   liquidjs: 10.30.1
+  'piscina@>=5.0.0 <5.3.2': 5.3.2
   shell-quote: 1.12.0
   svgo: 4.1.0
   tmp: 0.2.7
+  'undici@>=8.0.0 <8.12.2': 8.12.3
+  'vite@>=8.0.0 <8.1.6': 'catalog:'
+  'zod@>=4.0.0 <4.6.6': 'catalog:'
 
 # version ranges for published package dependencies
 catalogs:
@@ -101,16 +110,16 @@ catalog:
   '@types/node': 26.6.6
   '@types/react': 19.3.0
   '@types/react-dom': 19.3.0
-  '@vitest/browser': 5.0.5
-  '@vitest/browser-playwright': 5.0.5
-  '@vitest/coverage-istanbul': 5.0.5
-  '@vitest/istanbul-lib-coverage': 2.0.0
-  '@vitest/istanbul-lib-report': 2.0.0
+  '@vitest/browser': 5.1.0
+  '@vitest/browser-playwright': 5.1.0
+  '@vitest/coverage-istanbul': 5.1.0
+  '@vitest/istanbul-lib-coverage': 2.1.0
+  '@vitest/istanbul-lib-report': 2.1.0
   'adm-zip': 0.6.1
   axe-core: 4.14.0
   eslint: 10.13.0
   fast-glob: 3.3.3
-  glob: 13.0.6
+  glob: 14.0.2
   highlight.js: 11.12.0
   lighthouse: 13.6.0
   lit: 3.3.3
@@ -133,7 +142,7 @@ catalog:
   typescript-7: npm:typescript@7.0.2
   typescript-eslint: 8.72.1
   vite: 8.3.5
-  vitest: 5.0.5
+  vitest: 5.1.0
   zod: 4.6.7
 
 minimumReleaseAge: 1140

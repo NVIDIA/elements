@@ -6,7 +6,7 @@ let docsURL = '';
 if (!import.meta.env.VITE_BUNDLE_CONFIG) {
   docsURL = 'https://nvidia.github.io/elements/';
 }
-export const DOCS_LOG_URL = `${docsURL}docs/api-design/logs/`;
+const DOCS_LOG_URL = `${docsURL}docs/api-design/logs/`;
 
 export function getDuplicatePackageVersionWarning(localName: string, version: string) {
   return `@nve: ${localName} version ${version} already defined, check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`;
