@@ -27,8 +27,8 @@ export function getHostTrigger(element: HTMLElement, trigger: HTMLElement | stri
   }
 }
 
-export function getHostAnchor(host: HTMLElement & { anchor?: HTMLElement | string; _activeTrigger?: HTMLElement }) {
-  const anchor = host.anchor ?? host._activeTrigger;
+export function getHostAnchor(host: HTMLElement & { anchor?: HTMLElement | string }) {
+  const anchor = host.anchor;
 
   if (typeof anchor === 'string' && anchor?.length) {
     const match = getFlattenedDOMTree(host.parentNode as HTMLElement).find(el => el.id === anchor);

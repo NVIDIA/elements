@@ -7,7 +7,7 @@ import {
   clickOutsideElementBounds,
   appendRootNodeStyle,
   getFlattenedFocusableItems,
-  isSimpleFocusable,
+  getActiveElement,
   useStyles,
   audit
 } from '@nvidia-elements/core/internal';
@@ -16,7 +16,7 @@ import globalStyles from './dropdown-group.global.css?inline';
 
 /**
  * @element nve-dropdown-group
- * @description A Dropdown Group streamlines the management of linked dropdowns and supports nested dropdowns for a more organized and intuitive user experience
+ * @description A dropdown group coordinates linked dropdowns and cascading submenus.
  * @documentation https://nvidia.github.io/elements/docs/elements/dropdown-group/
  * @since 1.30.1
  * @entrypoint \@nvidia-elements/core/dropdown-group
@@ -36,7 +36,7 @@ export class DropdownGroup extends LitElement {
     children: ['nve-dropdown']
   };
 
-  @queryAssignedElements() protected dropdowns!: Dropdown[];
+  @queryAssignedElements({ selector: 'nve-dropdown' }) protected dropdowns!: Dropdown[];
 
   render() {
     return html`
@@ -46,21 +46,24 @@ export class DropdownGroup extends LitElement {
     `;
   }
 
-  #_pointerup = (e: PointerEvent) => this.#pointerup(e);
+  #openingTriggers = new WeakMap<Dropdown, HTMLElement>();
+  #rootDropdown?: Dropdown;
 
   connectedCallback() {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
-    globalThis.document?.addEventListener('pointerup', this.#_pointerup);
+    globalThis.document?.addEventListener('pointerup', this.#pointerup);
     this.addEventListener('keydown', this.#keydown);
+    this.addEventListener('beforetoggle', this.#onBeforeToggle, true);
     this.addEventListener('open', this.#onOpen as EventListener);
     this.addEventListener('close', this.#onClose as EventListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    globalThis.document?.removeEventListener('pointerup', this.#_pointerup);
+    globalThis.document?.removeEventListener('pointerup', this.#pointerup);
     this.removeEventListener('keydown', this.#keydown);
+    this.removeEventListener('beforetoggle', this.#onBeforeToggle, true);
     this.removeEventListener('open', this.#onOpen as EventListener);
     this.removeEventListener('close', this.#onClose as EventListener);
   }
@@ -71,49 +74,120 @@ export class DropdownGroup extends LitElement {
     });
   }
 
-  #pointerup(event: PointerEvent) {
-    const multipleDropdownsOpen = this.dropdowns.some(dropdown => dropdown.matches(':popover-open'));
-    const pointerIsOutsideGroup = this.dropdowns.every(dropdown => clickOutsideElementBounds(event, dropdown));
-    if (multipleDropdownsOpen && pointerIsOutsideGroup) {
+  #pointerup = (event: PointerEvent) => {
+    const dropdowns = this.dropdowns.filter(dropdown => dropdown.matches(':popover-open'));
+    if (dropdowns.length && dropdowns.every(dropdown => clickOutsideElementBounds(event, dropdown))) {
       this.close();
     }
-  }
+  };
 
   #keydown(event: KeyboardEvent) {
-    const target = event.target as HTMLElement;
+    const isNavigationKey = event.code === 'Escape' || event.code === 'ArrowLeft' || event.code === 'ArrowRight';
+    if (event.defaultPrevented || !isNavigationKey) return;
+    const path = event.composedPath();
+    const boundary = this.#findDropdownBoundary(path);
+    const dropdown = this.#findOwnedDropdown(boundary);
+    if (!dropdown && boundary !== this) return;
+
     if (event.code === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
       this.close();
+      return;
     }
-    if (event.code === 'ArrowRight') {
-      const targetId = target.getAttribute('popovertarget');
-      const dropdown = this.dropdowns.find(d => d.id === targetId);
-      dropdown?.showPopover();
+    if (dropdown) this.#navigate(event, path, dropdown);
+  }
+
+  #findDropdownBoundary(path: EventTarget[]) {
+    return path.find(
+      node =>
+        node instanceof HTMLElement && (node.localName === 'nve-dropdown' || node.localName === 'nve-dropdown-group')
+    );
+  }
+
+  #navigate(event: KeyboardEvent, path: EventTarget[], dropdown: Dropdown) {
+    const target = getActiveElement(this.ownerDocument);
+    if (!(target instanceof HTMLElement) || !path.includes(target)) return;
+    const rtl = getComputedStyle(this).direction === 'rtl';
+    const openKey = rtl ? 'ArrowLeft' : 'ArrowRight';
+    const closeKey = rtl ? 'ArrowRight' : 'ArrowLeft';
+
+    if (event.code === openKey) {
+      this.#openSubmenu(target, event);
+      return;
     }
-    if (event.code === 'ArrowLeft' && isSimpleFocusable(event.target as HTMLElement)) {
-      target.closest('nve-dropdown')?.hidePopover();
+
+    if (event.code === closeKey && target.localName === 'nve-menu-item') {
+      event.preventDefault();
+      event.stopPropagation();
+      dropdown.hidePopover();
     }
   }
 
-  #onOpen(event: CustomEvent) {
-    const dropdown = event.target as HTMLElement;
-    const isLocalDropdown = dropdown.localName === 'nve-dropdown' && this.dropdowns.find(d => d === dropdown);
-    if (isLocalDropdown) {
+  #openSubmenu(trigger: HTMLElement, event: KeyboardEvent) {
+    if (trigger.matches('[disabled]') || !('popoverTargetElement' in trigger)) return;
+    const target = trigger.popoverTargetElement;
+    const submenu = this.#findOwnedDropdown(target);
+    if (!submenu) return;
+    event.preventDefault();
+    event.stopPropagation();
+    submenu.showPopover({ source: trigger });
+  }
+
+  #findOwnedDropdown(target: unknown): Dropdown | undefined {
+    return this.dropdowns.find(dropdown => dropdown === target);
+  }
+
+  #onOpen(event: CustomEvent<{ trigger?: HTMLElement }>) {
+    const dropdown = this.#findOwnedDropdown(event.composedPath()[0]);
+    if (dropdown) {
+      if (!this.#rootDropdown?.matches(':popover-open')) {
+        this.#rootDropdown = dropdown;
+      }
+      this.#openingTriggers.delete(dropdown);
+      if (event.detail?.trigger instanceof HTMLElement) {
+        this.#openingTriggers.set(dropdown, event.detail.trigger);
+      }
       getFlattenedFocusableItems(dropdown)[0]?.focus();
     }
   }
 
+  #onBeforeToggle(event: ToggleEvent) {
+    const dropdown = this.#findOwnedDropdown(event.composedPath()[0]);
+    if (dropdown && event.newState === 'closed' && !dropdown.matches(':focus-within')) {
+      this.#openingTriggers.delete(dropdown);
+    }
+  }
+
   #onClose(event: CustomEvent) {
-    const element = event.target as HTMLElement;
-    const isLocalDropdown = element.localName === 'nve-dropdown' && this.dropdowns.find(d => d === element);
-    if (isLocalDropdown) {
-      // _activeTrigger is a popover controller internal API
-      const dropdown = element as Dropdown & { _activeTrigger?: HTMLElement };
-      dropdown._activeTrigger?.focus();
+    const dropdown = this.#findOwnedDropdown(event.composedPath()[0]);
+    if (dropdown) {
+      const trigger = this.#openingTriggers.get(dropdown);
+      if (dropdown === this.#rootDropdown) {
+        this.#rootDropdown = undefined;
+      }
+      this.#openingTriggers.delete(dropdown);
+      const activeElement = this.ownerDocument.activeElement;
+      const focusLost = !activeElement || activeElement === this.ownerDocument.body;
+      const restoreFocus = focusLost || dropdown.matches(':focus-within');
+      if (restoreFocus && trigger?.isConnected) {
+        trigger.focus();
+      }
     }
   }
 
   /** Closes every descendant dropdown in the group. */
   close() {
-    this.querySelectorAll('nve-dropdown').forEach(d => d.hidePopover());
+    const trigger = this.#rootDropdown ? this.#openingTriggers.get(this.#rootDropdown) : undefined;
+    this.#rootDropdown = undefined;
+    this.#openingTriggers = new WeakMap();
+    const dropdowns = Array.from(this.querySelectorAll('nve-dropdown'));
+    dropdowns.forEach(dropdown => dropdown.hidePopover());
+    const activeElement = this.ownerDocument.activeElement;
+    const focusLost = !activeElement || activeElement === this.ownerDocument.body;
+    const restoreFocus = focusLost || dropdowns.some(item => item.matches(':focus-within'));
+    if (restoreFocus && trigger?.isConnected) {
+      trigger.focus();
+    }
   }
 }

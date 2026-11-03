@@ -14,7 +14,6 @@ export interface NativePopover extends ReactiveElement {
   popoverType?: PopoverType;
   modal?: boolean;
   popoverDismissible?: boolean;
-  _activeTrigger?: HTMLElement;
   _internals?: ElementInternals;
 
   /** @deprecated */
