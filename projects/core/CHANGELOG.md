@@ -1,3 +1,15 @@
+## [2.21.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.3...@nvidia-elements/core-v2.21.0) (2026-11-03)
+
+### Features
+
+* **core:** scroll box invoker command support ([4b41419](https://github.com/NVIDIA/elements/commit/4b414197911ba0c5b3fd942f9f51a89b0768c419))
+
+### Bug Fixes
+
+* **core:** correct dropdown group navigation and popover rendering ([5bf985f](https://github.com/NVIDIA/elements/commit/5bf985f1b0e434e8b5d08f1b29b18accbfd65c14))
+* **core:** remove obsolete inset-area popover fallback ([8a1d913](https://github.com/NVIDIA/elements/commit/8a1d9131f75c6c9879bef3413688e7a22a7d2306))
+* **forms:** remove obsolete popover trigger fallback ([0973027](https://github.com/NVIDIA/elements/commit/09730270e6d81c8d9139cfb56aef9d9c5a2344f6))
+
 ## [2.20.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.2...@nvidia-elements/core-v2.20.3) (2026-11-03)
 
 ### Bug Fixes
