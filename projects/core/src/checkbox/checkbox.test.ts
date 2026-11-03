@@ -31,6 +31,13 @@ describe(Checkbox.metadata.tag, () => {
     expect(customElements.get(Checkbox.metadata.tag)).toBeDefined();
   });
 
+  it('should clip the check indicator with a shape path', () => {
+    const indicator = element.shadowRoot!.querySelector('[input] slot');
+    expect(getComputedStyle(indicator!, '::before').clipPath).toBe(
+      'shape(from 98.17% 2.51%, arc by 0% 12.12% of 8% 8.57% cw, line by -60.51% 82.87%, arc by -8.85% 0% of 8% 8.57% cw, line to 1.68% 60.34%, arc by 0.15% -11.91% of 8% 8.58% cw, arc by 8.7% -0.21% of 8% 8.58% cw, line to 33.23% 79.32%, line by 56.09% -76.81%, arc by 8.85% 0% of 8% 8.57% cw, close)'
+    );
+  });
+
   it('should add :state(checked) when input is clicked', async () => {
     const input = fixture.querySelector('input');
     expect(element.matches(':state(checked)')).toBe(false);

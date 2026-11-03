@@ -69,35 +69,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1.05);
-}
-
-/* Fallback for browsers that don't support clip-path: shape(). Use polygon-based checkmark as fallback */
-@supports not (clip-path: shape(from 0% 0%, line to 100% 100%)) {
-  [input] slot::before {
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-    width: calc(var(--width) * 0.6);
-    height: calc(var(--width) * 0.6);
-    aspect-ratio: 1;
-  }
-}
-
-/* Modern browsers with shape() support */
-@supports (clip-path: shape(from 0% 0%, line to 100% 100%)) {
-  [input] slot::before {
-    clip-path: shape(
-      from 98.17% 2.51%,
-      arc by 0% 12.12% of 8% 8.57% small cw,
-      line by -60.51% 82.87%,
-      arc by -8.85% 0% of 8% 8.57% small cw,
-      line to 1.68% 60.34%,
-      arc by 0.15% -11.91% of 8% 8.58% small cw,
-      arc by 8.7% -0.21% of 8% 8.58% small cw,
-      line to 33.23% 79.32%,
-      line by 56.09% -76.81%,
-      arc by 8.85% 0% of 8% 8.57% small cw,
-      close
-    );
-  }
+  clip-path: shape(
+    from 98.17% 2.51%,
+    arc by 0% 12.12% of 8% 8.57% small cw,
+    line by -60.51% 82.87%,
+    arc by -8.85% 0% of 8% 8.57% small cw,
+    line to 1.68% 60.34%,
+    arc by 0.15% -11.91% of 8% 8.58% small cw,
+    arc by 8.7% -0.21% of 8% 8.58% small cw,
+    line to 33.23% 79.32%,
+    line by 56.09% -76.81%,
+    arc by 8.85% 0% of 8% 8.57% small cw,
+    close
+  );
 }
 
 :host(:state(checked)) {
