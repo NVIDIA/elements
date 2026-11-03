@@ -258,8 +258,8 @@ catalogs:
       specifier: 3.3.3
       version: 3.3.3
     glob:
-      specifier: 13.0.6
-      version: 13.0.6
+      specifier: 14.0.2
+      version: 14.0.2
     lighthouse:
       specifier: 13.6.0
       version: 13.6.0
@@ -360,7 +360,7 @@ catalogs:
 
 overrides:
   '@lit-labs/ssr-dom-shim': 1.6.0
-  archiver>glob: 13.0.6
+  archiver>glob: 14.0.2
   conventional-changelog-conventionalcommits: 9.3.1
   dts-bundle-generator>typescript: 6.0.3
   devalue@<5.8.1: 5.9.4
@@ -430,7 +430,7 @@ importers:
         version: 21.2.2(@types/node@26.6.6)(conventional-commits-parser@7.1.2)(typescript@7.0.2)
       glob:
         specifier: 'catalog:'
-        version: 13.0.6
+        version: 14.0.2
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -958,7 +958,7 @@ importers:
         version: 10.13.0(jiti@2.7.0)(supports-color@10.2.2)
       glob:
         specifier: 'catalog:'
-        version: 13.0.6
+        version: 14.0.2
       publint:
         specifier: 'catalog:'
         version: 0.3.25
@@ -1172,7 +1172,7 @@ importers:
         version: 9.5.1
       glob:
         specifier: 'catalog:'
-        version: 13.0.6
+        version: 14.0.2
       lighthouse:
         specifier: 'catalog:'
         version: 13.6.0(ajv@8.20.0)(rollup@4.60.4)(supports-color@10.2.2)(webpack@5.106.2(clean-css@5.3.3)(cssnano@9.9.0(postcss@8.5.32))(csso@5.0.5)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.32)(uglify-js@3.19.3))(yauzl@2.10.0)
@@ -2252,7 +2252,7 @@ importers:
         version: 10.13.0(jiti@2.7.0)(supports-color@10.2.2)
       glob:
         specifier: 'catalog:'
-        version: 13.0.6
+        version: 14.0.2
       rollup-plugin-html-literals:
         specifier: 'catalog:'
         version: 2.0.1(rollup@4.65.1)
@@ -2834,7 +2834,7 @@ importers:
         version: 7.1.7(postcss@8.5.32)
       glob:
         specifier: 'catalog:'
-        version: 13.0.6
+        version: 14.0.2
       lit:
         specifier: 'catalog:'
         version: 3.3.3
@@ -4357,6 +4357,9 @@ packages:
   '@isaacs/fs-minipass@4.0.1':
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
+
+  '@isaacs/nonrecursive-glob-match@1.0.3':
+    resolution: {integrity: sha512-SI7kyKHq4XXDRozw+r9GlRZkia1ZkFrpLW98r2IC2Bpr8YkFGE3fvjzmxCG0x78A++69HmDNrDvSMYBZmHGpKA==}
 
   '@istanbuljs/schema@0.1.6':
     resolution: {integrity: sha512-+Sg6GCR/wy1oSmQDFq4LQDAhm3ETKnorxN+y5nbLULOR3P0c14f2Wurzj3/xqPXtasLFfHd5iRFQ7AJt4KH2cw==}
@@ -9688,6 +9691,10 @@ packages:
     resolution: {integrity: sha512-Wjlyrolmm8uDpm/ogGyXZXb1Z+Ca2B8NbJwqBVg0axK9GbBeoS7yGV6vjXnYdGm6X53iehEuxxbyiKp8QmN4Vw==}
     engines: {node: 18 || 20 || >=22}
 
+  glob@14.0.2:
+    resolution: {integrity: sha512-vfMgTR2djMHPUchsJMLpZlYQvtjVL+mHpEr5wPpoCbQs2vr/FBNK+3Gnl9Ara1DSs4Aeg4eG9HiADb5/rkY/ZA==}
+    engines: {node: 18 || 20 || >=22}
+
   glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
@@ -11038,6 +11045,10 @@ packages:
     resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
     engines: {node: 18 || 20 || >=22}
 
+  minimatch@11.0.4:
+    resolution: {integrity: sha512-/UJ1dEoVQTjPNDh6SGlUo+ueLMmoHTas4q+8yaAR/5t6nLAIiBDJtoYUh20IYleix7ehiQkgczb84PE3uzHkxg==}
+    engines: {node: 20 || >=22}
+
   minimatch@3.1.5:
     resolution: {integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==}
 
@@ -11696,6 +11707,10 @@ packages:
 
   path-scurry@2.0.2:
     resolution: {integrity: sha512-3O/iVVsJAPsOnpwWIeD+d6z/7PmqApyQePUtCndjatj/9I5LylHvt5qluFaBT3I5h3r1ejfR056c+FCv+NnNXg==}
+    engines: {node: 18 || 20 || >=22}
+
+  path-scurry@3.0.0:
+    resolution: {integrity: sha512-1pTbQqH1wIwMi/eleQ5leFTTCkzFsPcgXNjwOA8YGGW/W4/kHT3dssE7Z6NH+zuqNLOzOB0uaD61yl7cAcVhgg==}
     engines: {node: 18 || 20 || >=22}
 
   path-to-regexp@8.4.2:
@@ -16323,6 +16338,8 @@ snapshots:
   '@isaacs/fs-minipass@4.0.1':
     dependencies:
       minipass: 7.1.3
+
+  '@isaacs/nonrecursive-glob-match@1.0.3': {}
 
   '@istanbuljs/schema@0.1.6': {}
 
@@ -21855,6 +21872,12 @@ snapshots:
       minipass: 7.1.3
       path-scurry: 2.0.2
 
+  glob@14.0.2:
+    dependencies:
+      minimatch: 11.0.4
+      minipass: 7.1.3
+      path-scurry: 3.0.0
+
   glob@8.1.0:
     dependencies:
       fs.realpath: 1.0.0
@@ -23487,6 +23510,11 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.12
 
+  minimatch@11.0.4:
+    dependencies:
+      '@isaacs/nonrecursive-glob-match': 1.0.3
+      brace-expansion: 5.0.12
+
   minimatch@3.1.5:
     dependencies:
       brace-expansion: 1.1.14
@@ -24399,6 +24427,11 @@ snapshots:
       minipass: 7.1.3
 
   path-scurry@2.0.2:
+    dependencies:
+      lru-cache: 11.5.3
+      minipass: 7.1.3
+
+  path-scurry@3.0.0:
     dependencies:
       lru-cache: 11.5.3
       minipass: 7.1.3
