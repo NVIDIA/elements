@@ -3,7 +3,8 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, typeSSR } from '@nvidia-elements/core/internal';
+import { typeSSR } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './format-relative-time.css?inline';
 
 type TimeUnitOption = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year';

@@ -6,7 +6,8 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import { popoverStyles, useStyles } from '@nvidia-elements/core/internal';
+import { popoverStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 
 @customElement('popover-styles-position-area-test-element')
 class PopoverStylesPositionAreaTestElement extends LitElement {

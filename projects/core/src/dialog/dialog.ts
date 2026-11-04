@@ -9,11 +9,11 @@ import {
   excessiveInstanceLimit,
   popoverStyles,
   TypeNativePopoverController,
-  useStyles,
-  attachInternals,
-  appendRootNodeStyle,
-  scopedRegistry
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import globalStyles from './dialog.global.css?inline';

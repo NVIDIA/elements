@@ -3,7 +3,8 @@
 
 import { html, LitElement } from 'lit';
 import type { SupportStatus } from '@nvidia-elements/core/internal';
-import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './progress-bar.css?inline';

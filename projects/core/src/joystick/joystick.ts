@@ -5,13 +5,8 @@ import { html, isServer, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
-import {
-  GestureController,
-  useStyles,
-  type Gesture,
-  type GestureInput,
-  type Size
-} from '@nvidia-elements/core/internal';
+import { GestureController, type Gesture, type GestureInput, type Size } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './joystick.css?inline';
 

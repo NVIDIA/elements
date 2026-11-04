@@ -5,14 +5,10 @@ import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import {
-  attachInternals,
-  formatStandardNumber,
-  keyNavigationList,
-  typeSSR,
-  useStyles,
-  scopedRegistry
-} from '@nvidia-elements/core/internal';
+import { formatStandardNumber, keyNavigationList, typeSSR } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';

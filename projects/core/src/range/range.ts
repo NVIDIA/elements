@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { appendRootNodeStyle, getElementUpdate, useStyles } from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle, getElementUpdate } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Control } from '@nvidia-elements/core/forms';
 import { property } from 'lit/decorators/property.js';
 import globalStyles from './range.global.css?inline';

@@ -4,7 +4,9 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size } from '@nvidia-elements/core/internal';
-import { removeEmptySlotWhitespace, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { removeEmptySlotWhitespace } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Button } from '@nvidia-elements/core/button';
 import type { IconName } from '@nvidia-elements/core/icon';
 import { Icon } from '@nvidia-elements/core/icon';

@@ -4,7 +4,9 @@
 import { html, isServer, LitElement } from 'lit';
 import { state } from 'lit/decorators/state.js';
 
-import { attachInternals, hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 
 import { sameHeaderConfiguration } from '../utils/presentation/header-configuration.utils.js';
 

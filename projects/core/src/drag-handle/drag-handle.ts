@@ -4,7 +4,8 @@
 import { html, LitElement } from 'lit';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { Icon } from '@nvidia-elements/core/icon';
-import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './drag-handle.css?inline';
 
 /**

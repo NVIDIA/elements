@@ -4,15 +4,10 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import {
-  appendRootNodeStyle,
-  attachInternals,
-  generateId,
-  scopedRegistry,
-  TypeClosableController,
-  typeSSR,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle, generateId, TypeClosableController, typeSSR } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Input } from '@nvidia-elements/core/input';
 import { Select } from '@nvidia-elements/core/select';

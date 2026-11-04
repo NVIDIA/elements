@@ -7,12 +7,12 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
 import {
   associateLabel,
-  attachInternals,
   associateAriaLabel,
   associateAriaDescribedBy,
   associateDataList,
   associateControlGroup
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 
 @customElement('element-internals-test-element')
 class ElementInternalsTestElement extends LitElement {

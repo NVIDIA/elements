@@ -9,14 +9,14 @@ import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   stateSelected,
-  useStyles,
   KeyNavigationListController,
-  attachInternals,
   audit,
   appendRootNodeStyle,
   appendAnchorName,
   removeAnchorName
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import type { TabsItemGroup } from './tabs-item-group.js';
 import { getTabItems, isTabItemTabbable } from './utils.js';
 import globalStyles from './tabs.global.css?inline';

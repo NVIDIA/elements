@@ -3,7 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { attachInternals } from '../utils/a11y.js';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 
 /**
  * Adds highlighted support for interactive custom elements including CSS State psuedo-selector :state(highlighted).

@@ -7,7 +7,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import { matchesElementName, type Point, type Rect, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { matchesElementName, type Point, type Rect } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 
 import { DragHandle } from '@nvidia-elements/core/drag-handle';

@@ -7,14 +7,10 @@ import { property } from 'lit/decorators/property.js';
 import { Icon } from '@nvidia-elements/core/icon';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import type { PopoverAlign, PopoverType, SupportStatus, PopoverPosition } from '@nvidia-elements/core/internal';
-import {
-  attachInternals,
-  popoverStyles,
-  statusIcons,
-  useStyles,
-  TypeNativePopoverController,
-  scopedRegistry
-} from '@nvidia-elements/core/internal';
+import { popoverStyles, statusIcons, TypeNativePopoverController } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './notification.css?inline';
 

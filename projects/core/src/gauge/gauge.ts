@@ -6,7 +6,8 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './gauge.css?inline';
 

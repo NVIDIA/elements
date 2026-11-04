@@ -7,15 +7,15 @@ import { query } from 'lit/decorators/query.js';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
 import {
-  attachInternals,
   audit,
   excessiveInstanceLimit,
   popoverStyles,
   TypeNativePopoverController,
-  useStyles,
-  appendRootNodeStyle,
-  scopedRegistry
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './toggletip.css?inline';
 import globalStyles from './toggletip.global.css?inline';

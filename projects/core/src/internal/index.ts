@@ -21,7 +21,6 @@ export * from './controllers/type-selectable.controller.js';
 export * from './controllers/type-native-popover.controller.js';
 export * from './controllers/type-ssr.controller.js';
 export * from './decorators/host-attr.js';
-export * from './decorators/scoped-registry.js';
 export * from './styles/index.js';
 export * from './styles/popover.js';
 export * from '@nvidia-elements/foundations/internal/i18n';

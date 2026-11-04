@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ReactiveController, ReactiveElement } from 'lit';
-import { attachInternals } from '../utils/a11y.js';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 
 export type TypeSelectable = ReactiveElement & {
   selected?: boolean;

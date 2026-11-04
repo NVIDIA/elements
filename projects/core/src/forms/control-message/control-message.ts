@@ -3,7 +3,9 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { hostAttr, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Icon } from '@nvidia-elements/core/icon';
 import { type ValidityStateError } from '../utils/types.js';
 import styles from './control-message.css?inline';
