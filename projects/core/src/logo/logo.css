@@ -15,14 +15,6 @@
   display: inline-block;
 }
 
-@supports not (background: color-mix(in oklab, #000 0%, #fff)) {
-  :host([color]) [internal-host] {
-    --background: var(--color);
-    border: 1px solid transparent;
-    background-image: linear-gradient(hsl(0 0% 0% / 0.8) 0 0) !important;
-  }
-}
-
 [internal-host] {
   font-weight: var(--font-weight);
   font-size: var(--font-size);

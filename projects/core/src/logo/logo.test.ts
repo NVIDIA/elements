@@ -37,6 +37,26 @@ describe(Logo.metadata.tag, () => {
       expect(element.getAttribute('color')).toBe('green-grass');
     });
 
+    it('should paint a palette color with the mixed background', async () => {
+      element.color = 'green-grass';
+      await elementIsStable(element);
+
+      const host = element.shadowRoot.querySelector('[internal-host]');
+      if (!(host instanceof HTMLElement)) throw new Error('Logo host missing');
+
+      const hostStyle = getComputedStyle(host);
+      const mixedBackground = getComputedStyle(element).getPropertyValue('--state-color-background').trim();
+      const probe = document.createElement('div');
+      probe.style.background = mixedBackground;
+      document.body.append(probe);
+
+      expect(hostStyle.backgroundImage).toBe('none');
+      expect(hostStyle.backgroundColor).toBe(getComputedStyle(probe).backgroundColor);
+      expect(mixedBackground).toContain('color-mix');
+
+      probe.remove();
+    });
+
     it('should work with all color values', async () => {
       const colors = [
         'red-cardinal',
