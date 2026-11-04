@@ -31,10 +31,27 @@ describe('home page', () => {
     );
     expect(componentUrls.size).toBeGreaterThan(0);
     expect(componentUrls.size).toBe(componentLinks.length);
+    const componentCount = componentLinks.filter(
+      node =>
+        'attrs' in node && node.attrs.some(attr => attr.name === 'data-component-kind' && attr.value === 'component')
+    ).length;
+    expect(componentCount).toBeGreaterThan(0);
+    const utilityUrls = componentLinks
+      .filter(
+        node =>
+          'attrs' in node && node.attrs.some(attr => attr.name === 'data-component-kind' && attr.value === 'utility')
+      )
+      .map(node => ('attrs' in node ? node.attrs.find(attr => attr.name === 'href')?.value : undefined));
+    expect(utilityUrls).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/\/docs\/elements\/list\/$/),
+        expect.stringMatching(/\/docs\/elements\/text\/$/)
+      ])
+    );
     const tests = await TestsService.getData();
     const examples = await ExamplesService.getData();
     const text = getText(homePage).replace(/\s+/g, ' ');
-    expect(text).toContain(`${componentUrls.size.toLocaleString('en-US')}+ Components`);
+    expect(text).toContain(`${componentCount.toLocaleString('en-US')}+ Components`);
     expect(text).toContain(`${getPatternCount(examples).toLocaleString('en-US')}+ Patterns`);
     expect(text).toContain(`${getTotalTests(tests.projects).toLocaleString('en-US')}+ automated tests`);
   });

@@ -15,6 +15,7 @@ import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/input/define.js';
+import '@nvidia-elements/core/notification/define.js';
 import '@nvidia-elements/core/progress-bar/define.js';
 import '@nvidia-elements/core/progress-ring/define.js';
 import '@nvidia-elements/core/range/define.js';
@@ -743,4 +744,36 @@ export const ModelSettings = {
 </script>
     `;
   }
+};
+
+/**
+ * @summary Use shimmer for a descriptive status message that tells users what the assistant is doing, such as reviewing navigation. Use a progress dot beside a short, stable label such as “Thinking” when a compact activity indicator is enough; neither conveys measurable progress.
+ * @tags pattern
+ */
+export const Thinking = {
+  render: () => html`
+<div nve-layout="column gap:md">
+  <p nve-text="body sm muted shimmer" role="status">Reviewing test results…</p>
+  <p nve-text="body" nve-layout="row gap:xs"><span nve-text="body sm muted">Thinking</span><nve-progress-dot size="sm"></nve-progress-dot></p>
+</div>
+  `
+};
+
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
+/**
+ * @summary Use when an agent needs permission outside its current capabilities. Name the resource, explain the task, and limit approval to one request so users can make an informed choice.
+ * @tags pattern
+ */
+export const PermissionRequest = {
+  render: () => html`
+<nve-notification position="center" style="--max-width: min(480px, 90vw); --min-width: 0">
+  <h3 nve-text="label">Permission Request: File System</h3>
+  <p nve-text="body">The navigation agent needs read access to /var/log/robots/amr-07/ for this request only, to investigate why the robot paused.</p>
+  <div nve-layout="row gap:sm align:right">
+    <nve-button container="inline">Deny</nve-button>
+    <nve-button container="inline">Allow once</nve-button>
+  </div>
+</nve-notification>
+  `
 };

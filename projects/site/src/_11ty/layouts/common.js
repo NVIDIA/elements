@@ -271,6 +271,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'selected' : ''}><a href="/docs/elements/input/">Input</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/input-group/') ? 'selected' : ''}><a href="/docs/elements/input-group/">Input Group</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/joystick/') ? 'selected' : ''}><a href="/docs/elements/joystick/">Joystick</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/list/') ? 'selected' : ''}><a href="/docs/elements/list/">List</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>
@@ -323,6 +324,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/switch/') ? 'selected' : ''}><a href="/docs/elements/switch/">Switch</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/tabs/') ? 'selected' : ''}><a href="/docs/elements/tabs/">Tabs</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/tag/') ? 'selected' : ''}><a href="/docs/elements/tag/">Tag</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/text/') ? 'selected' : ''}><a href="/docs/elements/text/">Text</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/textarea/') ? 'selected' : ''}><a href="/docs/elements/textarea/">Textarea</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/time/') ? 'selected' : ''}><a href="/docs/elements/time/">Time</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/toast/') ? 'selected' : ''}><a href="/docs/elements/toast/">Toast</a></nve-tree-node>
