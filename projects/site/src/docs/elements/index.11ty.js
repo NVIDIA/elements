@@ -153,6 +153,10 @@ const componentGroups = [
       'nve-media-time-range',
       'nve-media-volume-range'
     ]
+  },
+  {
+    title: 'Utilities',
+    tags: ['list', 'text']
   }
 ];
 
@@ -264,6 +268,18 @@ const renderMonacoMock = tag => {
 };
 
 const previewOverrides = {
+  list: /* html */ `
+    <ul nve-text="list body sm">
+      <li>Training</li>
+      <li>Inference</li>
+      <li>Evaluation</li>
+    </ul>`,
+  text: /* html */ `
+    <div nve-layout="column gap:md">
+      <p nve-text="heading">Text styles</p>
+      <p nve-text="body">Body text for readable content.</p>
+      <p nve-text="label sm muted">Labels and supporting text</p>
+    </div>`,
   'nve-dialog': renderPopoverMock({
     title: 'Deploy model?',
     content: 'Review the configuration before continuing.',
@@ -399,7 +415,21 @@ const getPreviewTemplate = tag => {
 };
 
 const createComponentCatalog = componentDocs =>
-  getComponentCatalog(siteData.elements, componentDocs).map(component => ({
+  [
+    ...getComponentCatalog(siteData.elements, componentDocs),
+    {
+      tag: 'list',
+      title: 'List',
+      href: '/docs/elements/list/',
+      description: 'Ordered, unordered, and navigation lists with consistent typography.'
+    },
+    {
+      tag: 'text',
+      title: 'Text',
+      href: '/docs/elements/text/',
+      description: 'Typography utilities for headings, body text, labels, and inline code.'
+    }
+  ].map(component => ({
     ...component,
     preview: getPreviewTemplate(component.tag)
   }));
@@ -425,6 +455,7 @@ const renderComponentCard = component => /* html */ `
     </nve-card-content>
     <a
       class="component-card-link"
+      data-component-kind="${component.tag.startsWith('nve-') ? 'component' : 'utility'}"
       href="${escapeHtml(component.href)}"
       aria-label="View ${escapeHtml(component.title)} documentation"
     ></a>

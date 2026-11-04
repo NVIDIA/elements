@@ -29,7 +29,7 @@ export const Default = {
 export const Headings = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <h1 nve-text="display">display</h1>
+  <h2 nve-text="display">display</h2>
   <h2 nve-text="heading">heading</h2>
   <h3 nve-text="body">body</h3>
   <h4 nve-text="label">label</h4>
@@ -218,20 +218,10 @@ export const Link = {
   <a nve-text="body link" href="#">link</a>
   <a nve-text="body link hover" href="#">link (hover)</a>
   <a nve-text="body link visited" href="#">link (visited)</a>
-
   <nve-divider></nve-divider>
-
   <a nve-text="link" href="#">link</a>
   <a nve-text="link muted" href="#">link muted</a>
   <a nve-text="link emphasis" href="#">link emphasis</a>
-
-  <nve-divider></nve-divider>
-  
-  <a nve-text="link sm" href="#">link sm</a>
-  <a nve-text="link" href="#">link</a>
-  <a nve-text="link lg" href="#">link lg</a>
-  <a nve-text="link xl" href="#">link xl</a>
-
 </div>
   `
 }
