@@ -417,6 +417,7 @@ Elements should be responsive to support a wide variety of use cases. While not 
 You can extract and import component specific styles from a separate CSS file.
 
 ```typescript
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './badge.css?inline';
 
 export class Badge extends LitElement {
