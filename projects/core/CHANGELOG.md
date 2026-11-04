@@ -1,3 +1,9 @@
+## [2.22.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.1...@nvidia-elements/core-v2.22.2) (2026-11-04)
+
+### Bug Fixes
+
+* **core:** drop obsolete logo color-mix fallback ([93ea57f](https://github.com/NVIDIA/elements/commit/93ea57f6ed300fce24952f5b44a4f5dc5b7b87b1))
+
 ## [2.22.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.0...@nvidia-elements/core-v2.22.1) (2026-11-04)
 
 ### Bug Fixes
