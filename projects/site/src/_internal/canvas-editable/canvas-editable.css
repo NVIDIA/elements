@@ -49,16 +49,17 @@
 }
 
 .preview {
+  --canvas-preview-height: var(--height);
   padding: var(--padding);
   display: block;
   overflow: hidden;
   width: 100%;
 }
 
-.preview iframe {
+.preview nve-iframe {
+  --width: 100%;
+  --height: var(--canvas-preview-height);
   width: 100%;
-  min-height: var(--height);
-  border: none;
 }
 
 .preview-backdrop {
