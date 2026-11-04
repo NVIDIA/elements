@@ -5,14 +5,9 @@ import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import {
-  audit,
-  attachInternals,
-  finiteOr,
-  nonnegativeFiniteOr,
-  positiveFiniteOr,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { audit, finiteOr, nonnegativeFiniteOr, positiveFiniteOr } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import type { ViewportTarget } from '../internal/viewport.types.js';
 import styles from './viewport.css?inline';
 import { ViewportAnimationController } from './viewport-animation.controller.js';

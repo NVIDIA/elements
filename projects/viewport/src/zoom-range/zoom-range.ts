@@ -4,7 +4,7 @@
 import { html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { TypeCommandController } from '@nvidia-elements/forms/internal';
 import { SliderFormControlMixin } from '@nvidia-elements/forms/mixins';
