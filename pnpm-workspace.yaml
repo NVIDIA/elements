@@ -78,7 +78,6 @@ catalogs:
     construct-style-sheets-polyfill: ^3.1.0
     element-internals-polyfill: ^3.0.2
     eslint: '>= 10' # peer dependency for eslint
-    formdata-polyfill: ^4.0.10
     highlight.js: ^11.12.0
     lit: ^3.3.3
     lit-html: ^3.3.3
