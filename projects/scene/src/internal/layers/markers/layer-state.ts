@@ -8,7 +8,7 @@ import {
   type SceneErrorCode
 } from '../../diagnostics/errors.js';
 import { takeSceneFeatureIdSnapshot, type SceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
-import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from './instance-buffer.js';
+import { MarkerInstanceBuffer } from './instance-buffer.js';
 import { getSceneLayerSpec, isSceneBodyPart, SCENE_SHAPE_TAG } from '../registry.js';
 import {
   getPackedRecordBytes,
@@ -136,7 +136,7 @@ export function publishLayerInstances(layer: HTMLElement, options?: ScenePublish
     source,
     unavailableStateMessage: 'Packed marker source state is unavailable.'
   });
-  state.publicationError = !markerPublicationIsValid(source, publication.resolved.activeCount);
+  state.publicationError = !markerPublicationIsValid(state, source, publication);
   if (!state.publicationError) applyValidPublication(source, state, publication);
   const visualChanged = packedPublicationNeedsRender(publication, state, previousPublicationError);
   updateBufferIssues(layer, state);
@@ -198,15 +198,21 @@ function applyValidPublication(
   state: MarkerLayerState,
   publication: PackedSourcePublication
 ): void {
-  if (publication.geometryChanged) state.buffer.commit(publication.resolved.start, publication.resolved.count);
+  if (publication.geometryChanged) {
+    for (const range of publication.resolved.ranges) state.buffer.commit(range.start, range.count);
+  }
   state.sourceCount = publication.resolved.activeCount;
   state.buffer.setSourceCount(publication.resolved.activeCount);
   state.sourceVersion = publishPackedSourceGeneration(source, publication.sourceVersion);
 }
 
-function markerPublicationIsValid(source: AnyPackedRecordSource<'marker'>, activeCount: number): boolean {
+function markerPublicationIsValid(
+  state: MarkerLayerState,
+  source: AnyPackedRecordSource<'marker'>,
+  publication: PackedSourcePublication
+): boolean {
   try {
-    return markerSourceRecordsAreValid(getPackedRecordBytes(source), activeCount);
+    return state.buffer.publicationIsValid(getPackedRecordBytes(source), publication);
   } catch {
     return false;
   }

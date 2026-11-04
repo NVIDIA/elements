@@ -12,6 +12,16 @@ export interface ScenePublishOptions {
   readonly start?: number;
 }
 
+export interface RecordPublicationRange {
+  readonly count: number;
+  readonly start: number;
+}
+
+export interface ResolvedRecordPublication {
+  readonly activeCount: number;
+  readonly ranges: readonly RecordPublicationRange[];
+}
+
 export const PACKED_RECORD_SOURCE = Symbol.for('nve.scene.packed-record-source');
 export const PACKED_RECORD_STATE = Symbol.for('nve.scene.packed-record-state');
 
@@ -126,7 +136,7 @@ export function resolvePublishOptions(options: {
   readonly currentActiveCount: number;
   readonly requested?: ScenePublishOptions;
   readonly sourceActiveCount: number;
-}): { readonly activeCount: number; readonly count: number; readonly start: number } {
+}): ResolvedRecordPublication {
   const { capacity, currentActiveCount, requested = {}, sourceActiveCount } = options;
   const activeCount = requested.activeCount ?? sourceActiveCount;
   assertRecordCount(activeCount, capacity, 'Published active count');
@@ -134,13 +144,19 @@ export function resolvePublishOptions(options: {
   const count = requested.count ?? activeCount - start;
   assertRecordRange(start, count, capacity);
   const dirtyEnd = start + count;
-  return activeCount > currentActiveCount
-    ? {
-        activeCount,
-        start: Math.min(start, currentActiveCount),
-        count: Math.max(dirtyEnd, activeCount) - Math.min(start, currentActiveCount)
-      }
-    : { activeCount, count, start };
+  const ranges: RecordPublicationRange[] = count === 0 ? [] : [{ start, count }];
+  if (activeCount > currentActiveCount) {
+    if (count === 0) ranges.push({ start: currentActiveCount, count: activeCount - currentActiveCount });
+    else if (dirtyEnd < currentActiveCount) {
+      ranges.push({ start: currentActiveCount, count: activeCount - currentActiveCount });
+    } else if (start > activeCount) {
+      ranges.unshift({ start: currentActiveCount, count: activeCount - currentActiveCount });
+    } else {
+      const first = Math.min(start, currentActiveCount);
+      ranges[0] = { start: first, count: Math.max(dirtyEnd, activeCount) - first };
+    }
+  }
+  return { activeCount, ranges };
 }
 
 function assertRecordCount(value: number, capacity: number, label: string): void {

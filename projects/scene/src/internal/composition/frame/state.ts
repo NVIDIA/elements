@@ -285,6 +285,7 @@ export function getFrameReference(element: HTMLElement): string | null {
 
 export function setFrameReference(element: HTMLElement, value: string | null): void {
   if (value !== null && typeof value !== 'string') throw new TypeError('Frame reference must be a name or null.');
+  if (frameReferences.has(element) && frameReferences.get(element) === value) return;
   frameReferences.set(element, value);
   notifyOwningScene(element, 'composition');
 }

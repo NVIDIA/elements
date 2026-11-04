@@ -150,6 +150,43 @@ describe(Scene.metadata.tag, () => {
     expect(gpu.devices[0]?.submissions.length).toBeGreaterThan(0);
   });
 
+  it('recovers independent shared-source captures after a ranged publication with invalid unpublished edits', async () => {
+    const gpu = configureFakeWebGPU();
+    const { element } = await createScene(html`
+      <nve-scene aria-label="Independent recovery snapshots">
+        <nve-scene-cubes id="first"></nve-scene-cubes>
+        <nve-scene-cubes id="second"></nve-scene-cubes>
+      </nve-scene>
+    `);
+    const first = required(element.querySelector<SceneCubes>('#first'), 'Expected first cube layer.');
+    const second = required(element.querySelector<SceneCubes>('#second'), 'Expected second cube layer.');
+    const source = new CubeBuffer({ records: [{ position: [0, 0, 0] }, { position: [1, 0, 0] }] });
+    first.source = second.source = source;
+    gpu.resolveNextDevice();
+    await element.ready;
+    const view = new DataView(source.mutableBytes.buffer);
+    view.setFloat32(0, 10, true);
+    view.setFloat32(MARKER.stride, NaN, true);
+    first.publish({ start: 0, count: 1 });
+    await waitForAnimationFrames(2);
+    consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    gpu.devices[0]?.lose({ message: 'partial capture recovery', reason: 'unknown' });
+    await vi.waitFor(() => expect(gpu.requestDeviceCount).toBe(2));
+    const recovery = element.ready;
+    gpu.resolveNextDevice();
+    await recovery;
+    for (const [layer, expectedX] of [
+      [first, 10],
+      [second, 0]
+    ] as const) {
+      const captured = takeMarkerLayerRenderData(layer);
+      expect(captured).toMatchObject({ ready: true, count: 2 });
+      if (!captured.bytes) throw new Error('Expected captured cube bytes.');
+      expect(readMarker(captured.bytes, 0).position[0]).toBe(expectedX);
+      expect(readMarker(captured.bytes, 1).position[0]).toBe(1);
+    }
+  });
+
   it.each([false, true])(
     'retains a source and its published prefix through reconnect and recovery (populated: %s)',
     async populated => {

@@ -124,7 +124,7 @@ ${OIT_WGSL}
 function streamFragment(pick: boolean): string {
   return pick
     ? '@fragment fn fragmentMain(input: Output) -> NvePickOutput { if (input.color.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
-    : '@fragment fn fragmentMain(input: Output) -> @location(0) vec4f { if (input.color.a < 1.0) { discard; } return input.color; } @fragment fn fragmentOit(input: Output) -> NveOitOutput { if (input.color.a <= 0.0 || input.color.a >= 1.0) { discard; } return nve_oit(input.color, input.position.z); }';
+    : '@fragment fn fragmentMain(input: Output) -> @location(0) vec4f { if (!nve_alpha_is_opaque(input.color.a)) { discard; } return input.color; } @fragment fn fragmentOit(input: Output) -> NveOitOutput { if (input.color.a <= 0.0 || nve_alpha_is_opaque(input.color.a)) { discard; } return nve_oit(input.color, input.position.z); }';
 }
 
 const LINE_BODY = /* wgsl */ `
@@ -166,8 +166,8 @@ ${PICK_OUTPUT_WGSL}
 @fragment fn fragmentMain(input: LineOutput) -> NvePickOutput { if (!lineVisible(input)) { discard; } let id = scene.pickId + input.segmentIndex; return nve_pick_output(id, input.position.z); }
 `
     : /* wgsl */ `
-@fragment fn fragmentMain(input: LineOutput) -> @location(0) vec4f { if (!lineVisible(input) || input.color.a < 1.0) { discard; } return input.color; }
-@fragment fn fragmentOit(input: LineOutput) -> NveOitOutput { if (!lineVisible(input) || input.color.a >= 1.0) { discard; } return nve_oit(input.color, input.position.z); }
+@fragment fn fragmentMain(input: LineOutput) -> @location(0) vec4f { if (!lineVisible(input) || !nve_alpha_is_opaque(input.color.a)) { discard; } return input.color; }
+@fragment fn fragmentOit(input: LineOutput) -> NveOitOutput { if (!lineVisible(input) || nve_alpha_is_opaque(input.color.a)) { discard; } return nve_oit(input.color, input.position.z); }
 `;
   return `struct Scene { ${LINE_SCENE_FIELDS}${pickField} }\n@group(0) @binding(0) var<uniform> scene: Scene;\n${LINE_BODY}\n${fragment}`;
 }

@@ -11,6 +11,11 @@ export const OIT_ACCUMULATION_FORMAT = 'rgba16float';
 export const OIT_REVEALAGE_FORMAT = 'r8unorm';
 
 export const OIT_WGSL = /* wgsl */ `
+// Perspective interpolation can move a constant opaque alpha a few float32 ULPs below one.
+// Use the same tolerance in both passes so those fragments neither disappear nor draw twice.
+fn nve_alpha_is_opaque(alpha: f32) -> bool {
+  return alpha >= 1.0 - 0.000001;
+}
 struct NveOitOutput {
   @location(0) accumulation: vec4f,
   @location(1) revealage: f32,

@@ -11,6 +11,7 @@ import { assertCommitRange, getArrayBufferViewBytes } from '../../records/storag
 import { CopyOnWriteBytes } from '../../structures/copy-on-write-bytes.js';
 import { FlagPrefixIndex } from '../../structures/flag-prefix-index.js';
 import { RangeSet, type RangeInterval } from '../../structures/range-set.js';
+import { packedPublicationIsValid, type PackedSourcePublication } from '../../records/packed-source-publication.js';
 
 type MarkerInstanceIssue = typeof LAYOUT_STRIDE_MISMATCH | typeof LAYOUT_VALUE_INVALID;
 
@@ -223,6 +224,22 @@ export class MarkerInstanceBuffer {
     this.#refreshCommittedRecords(ownedBytes, start, resolvedCount);
     this.#dirtyRanges.add(offset, size);
     this.#version += 1;
+  }
+
+  /** Checks the candidate before modifying captured bytes, bounds, or validity flags. */
+  publicationIsValid(source: Uint8Array, publication: PackedSourcePublication): boolean {
+    return (
+      this.#structuralIssues.size === 0 &&
+      packedPublicationIsValid({
+        capacity: this.capacity,
+        invalidFlag: INVALID_RECORD,
+        publication,
+        recordIsValid: markerRecordFieldsAreValid,
+        source,
+        stride: MARKER.stride,
+        summary: this.#summary
+      })
+    );
   }
 
   #refreshCommittedRecords(ownedBytes: Uint8Array, start: number, count: number): void {

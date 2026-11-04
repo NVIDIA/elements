@@ -8,6 +8,7 @@ import { assertCommitRange, getArrayBufferViewBytes } from '../../records/storag
 import { CopyOnWriteBytes } from '../../structures/copy-on-write-bytes.js';
 import { FlagPrefixIndex } from '../../structures/flag-prefix-index.js';
 import { RangeSet, type RangeInterval } from '../../structures/range-set.js';
+import { packedPublicationIsValid, type PackedSourcePublication } from '../../records/packed-source-publication.js';
 
 export type VertexStreamIssue = typeof LAYOUT_STRIDE_MISMATCH | typeof LAYOUT_VALUE_INVALID | typeof TRIANGLES_COUNT;
 
@@ -363,6 +364,22 @@ export class VertexStreamBuffer {
       if (this.#recordIsInvalidIn(records, index * this.layout.stride)) return false;
     }
     return true;
+  }
+
+  /** Validates only published records and uses retained flags for the rest of the candidate. */
+  publicationIsValid(source: Uint8Array, publication: PackedSourcePublication): boolean {
+    const { activeCount } = publication.resolved;
+    if (this.#structuralIssues.size !== 0) return false;
+    if (this.requireCountMultipleOf !== undefined && activeCount % this.requireCountMultipleOf !== 0) return false;
+    return packedPublicationIsValid({
+      capacity: this.capacity,
+      invalidFlag: INVALID_RECORD,
+      publication,
+      recordIsValid: (records, offset) => !this.#recordIsInvalidIn(records, offset),
+      source,
+      stride: this.layout.stride,
+      summary: this.#summary
+    });
   }
 
   getUploadBytes(): Uint8Array | null {

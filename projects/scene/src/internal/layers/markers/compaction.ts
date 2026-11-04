@@ -119,7 +119,7 @@ export function destroyMarkerCompactionResources(resources: MarkerCompactionReso
 export const MARKER_COMPACTION_SHADER = /* wgsl */ `
 struct SceneUniforms {
   viewProjection: mat4x4f,
-  frame: mat4x4f,
+  frameNormalTransform: mat4x4f,
   count: f32,
   pickId: u32,
   unitEnclosingRadius: f32,
@@ -135,7 +135,7 @@ ${SCALED_ENCLOSING_RADIUS_WGSL}
 fn isVisible(base: u32) -> bool {
   let position = vec3f(bitcast<f32>(source[base]), bitcast<f32>(source[base + 1u]), bitcast<f32>(source[base + 2u]));
   let scale = vec3f(bitcast<f32>(source[base + 7u]), bitcast<f32>(source[base + 8u]), bitcast<f32>(source[base + 9u]));
-  let transform = scene.viewProjection * scene.frame;
+  let transform = scene.viewProjection;
   let radius = nve_scaled_enclosing_radius(scene.unitEnclosingRadius, scale);
   return nve_frustum_intersects_sphere(transform, position, radius);
 }

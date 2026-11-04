@@ -40,7 +40,7 @@ describe('packed record sources', () => {
         sourceActiveCount: 6,
         requested: { start: 4, count: 1 }
       })
-    ).toEqual({ activeCount: 6, start: 2, count: 4 });
+    ).toEqual({ activeCount: 6, ranges: [{ start: 2, count: 4 }] });
     expect(
       resolvePublishOptions({
         capacity: 8,
@@ -48,7 +48,35 @@ describe('packed record sources', () => {
         sourceActiveCount: 2,
         requested: { start: 1, count: 1 }
       })
-    ).toEqual({ activeCount: 2, start: 1, count: 1 });
+    ).toEqual({ activeCount: 2, ranges: [{ start: 1, count: 1 }] });
+    expect(
+      resolvePublishOptions({
+        capacity: 8,
+        currentActiveCount: 3,
+        sourceActiveCount: 5,
+        requested: { start: 0, count: 1 }
+      })
+    ).toEqual({
+      activeCount: 5,
+      ranges: [
+        { start: 0, count: 1 },
+        { start: 3, count: 2 }
+      ]
+    });
+    expect(
+      resolvePublishOptions({
+        capacity: 8,
+        currentActiveCount: 1,
+        sourceActiveCount: 3,
+        requested: { start: 5, count: 1 }
+      })
+    ).toEqual({
+      activeCount: 3,
+      ranges: [
+        { start: 1, count: 2 },
+        { start: 5, count: 1 }
+      ]
+    });
     expect(() => resolvePublishOptions({ capacity: 8, currentActiveCount: 2, sourceActiveCount: 9 })).toThrow(
       RangeError
     );
