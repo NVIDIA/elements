@@ -1,9 +1,4 @@
 {
-  "src/_internal/canvas-editable/canvas-editable.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/_internal/canvas/canvas.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1

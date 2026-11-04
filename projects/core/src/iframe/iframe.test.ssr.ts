@@ -22,11 +22,8 @@ describe(Iframe.metadata.tag, () => {
     expect(result.includes('allow-same-origin')).toBe(false);
   });
 
-  it.each(['', 'allow-scripts'])(
-    'should render sandbox permissions %s',
-    async sandbox => {
-      const result = await ssrRunner.render(html`<nve-iframe sandbox=${sandbox}></nve-iframe>`);
-      expect(result).toContain(`sandbox="${sandbox}"`);
-    }
-  );
+  it.each(['', 'allow-scripts'])('should render sandbox permissions %s', async sandbox => {
+    const result = await ssrRunner.render(html`<nve-iframe sandbox=${sandbox}></nve-iframe>`);
+    expect(result).toContain(`sandbox="${sandbox}"`);
+  });
 });

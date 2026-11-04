@@ -13,7 +13,7 @@ import '@nvidia-elements/core/iframe/define.js';
 ```
 
 ```html
-<nve-iframe aria-label="Elements iframe example">
+<nve-iframe sandbox="allow-scripts" aria-label="Elements iframe example">
   <template slot="head">
     <title>Elements iframe example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
@@ -42,3 +42,13 @@ The iframe grows and shrinks with its content. Browsers that support native resp
 Set `--width` and `--height` to keep a fixed viewport with either sizing path.
 
 {% example '@nvidia-elements/core/iframe/iframe.examples.json', 'FixedSize' %}
+
+## Sandbox
+
+{% api 'nve-iframe', 'property', 'sandbox' %}
+
+{% example '@nvidia-elements/core/iframe/iframe.examples.json', 'Sandbox' %}
+
+## Complete Document
+
+{% api 'nve-iframe', 'property', 'srcdoc' %}
