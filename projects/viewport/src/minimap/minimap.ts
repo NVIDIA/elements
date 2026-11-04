@@ -5,16 +5,16 @@ import { html, LitElement, nothing, svg } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import {
   GestureController,
-  attachInternals,
   hostAttr,
   isImmediateRootActiveElement,
   type Gesture,
   type GestureInput,
   type PointerEndGesture,
   type PointerMovementGesture,
-  type WheelGestureInput,
-  useStyles
+  type WheelGestureInput
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './minimap.css?inline';
 import {
   createViewportMinimapProjection,
