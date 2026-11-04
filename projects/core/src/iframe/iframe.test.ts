@@ -73,7 +73,7 @@ describe(Iframe.metadata.tag, () => {
   beforeEach(async () => {
     initialTheme = globalThis.document.documentElement.getAttribute('nve-theme');
     fixture = await createFixture(html`
-      <nve-iframe>
+      <nve-iframe sandbox="allow-scripts">
         <template slot="head"><title>Iframe unit test</title></template>
         <template><main nve-text="body">Initial body content</main></template>
       </nve-iframe>
@@ -107,6 +107,87 @@ describe(Iframe.metadata.tag, () => {
     expect(iframe.title).toBe('Iframe unit test');
     expect(iframe.sandbox.contains('allow-scripts')).toBe(true);
     expect(iframe.sandbox.contains('allow-same-origin')).toBe(false);
+  });
+
+  it('should give the default sandbox a visible height and preserve height overrides', async () => {
+    const preview = globalThis.document.createElement('nve-iframe');
+    fixture.append(preview);
+    await elementIsStable(preview);
+    const frame = preview.shadowRoot?.querySelector('iframe');
+    if (!frame) throw new Error('Expected an iframe');
+
+    await vi.waitFor(() => expect(frame.style.height).toBe(''));
+    expect(frame.getAttribute('sandbox')).toBe('');
+    expect(frame.getBoundingClientRect().height).toBeGreaterThan(0);
+    expect(preview.getBoundingClientRect().height).toBeGreaterThan(0);
+
+    preview.style.setProperty('--height', '96px');
+    expect(frame.getBoundingClientRect().height).toBe(96);
+  });
+
+  it.each([
+    ['', false],
+    ['allow-same-origin', false],
+    ['allow-scripts', true],
+    ['ALLOW-SCRIPTS', true],
+    ['  allow-forms\tallow-scripts  ', true]
+  ] as const)('should only inject helper scripts when sandbox %s permits them', async (sandbox, permitsScripts) => {
+    const preview = globalThis.document.createElement('nve-iframe');
+    preview.sandbox = sandbox;
+    fixture.append(preview);
+    await elementIsStable(preview);
+    const frame = preview.shadowRoot?.querySelector('iframe');
+    if (!frame) throw new Error('Expected an iframe');
+    const document = new DOMParser().parseFromString(frame.srcdoc, 'text/html');
+    expect(document.querySelectorAll('script')).toHaveLength(permitsScripts ? 1 : 0);
+  });
+
+  it('should restrict scripts by default and apply permission changes to a new document', async () => {
+    const restricted = globalThis.document.createElement('nve-iframe');
+    const template = globalThis.document.createElement('template');
+    template.innerHTML = '<p>Sandbox test</p><script>document.body.dataset.executed = "true";<\/script>';
+    restricted.append(template);
+    fixture.append(restricted);
+    await elementIsStable(restricted);
+    const frame = restricted.shadowRoot?.querySelector('iframe');
+    if (!frame) throw new Error('Expected the restricted iframe');
+    expect(restricted.sandbox).toBe('');
+    expect(frame.getAttribute('sandbox')).toBe('');
+
+    // Same-origin access lets the test inspect a document whose scripts remain blocked.
+    let loaded = untilEvent(frame, 'load');
+    restricted.setAttribute('sandbox', 'allow-same-origin');
+    await loaded;
+    expect(frame.contentDocument?.body.textContent).toContain('Sandbox test');
+    expect(frame.contentDocument?.body.dataset.executed).toBeUndefined();
+
+    loaded = untilEvent(frame, 'load');
+    restricted.sandbox = 'allow-scripts allow-same-origin';
+    await loaded;
+    expect(frame.contentDocument?.body.dataset.executed).toBe('true');
+    expect(restricted.getAttribute('sandbox')).toBe('allow-same-origin');
+
+    loaded = untilEvent(frame, 'load');
+    restricted.sandbox = 'allow-scripts';
+    await loaded;
+    expect(frame.contentDocument).toBeNull();
+
+    loaded = untilEvent(frame, 'load');
+    restricted.removeAttribute('sandbox');
+    await loaded;
+    expect(restricted.sandbox).toBe('');
+    expect(frame.getAttribute('sandbox')).toBe('');
+    expect(frame.contentDocument).toBeNull();
+  });
+
+  it('should preserve sizing and live themes with same-origin scripts enabled', async () => {
+    const loaded = untilEvent(iframe, 'load');
+    element.sandbox = 'allow-scripts allow-same-origin';
+    await loaded;
+    globalThis.document.documentElement.setAttribute('nve-theme', 'light');
+    await vi.waitFor(() => expect(iframe.contentDocument?.documentElement.getAttribute('nve-theme')).toBe('light'));
+    await vi.waitFor(() => expect(element.style.getPropertyValue('--_width')).toMatch(/^\d+(?:\.\d+)?px$/));
+    expect(getDocumentId()).toBe(2);
   });
 
   it('should update the iframe title when aria-label changes or is removed', async () => {

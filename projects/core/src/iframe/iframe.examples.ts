@@ -14,7 +14,7 @@ export default {
  */
 export const Default = {
   render: () => html`
-<nve-iframe aria-label="Elements iframe example">
+<nve-iframe sandbox="allow-scripts" aria-label="Elements iframe example">
   <template slot="head">
     <title>Elements iframe example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
@@ -35,7 +35,7 @@ export const Default = {
  */
 export const DynamicHeight = {
   render: () => html`
-<nve-iframe aria-label="Dynamic height iframe example" style="--border: 1px solid red">
+<nve-iframe sandbox="allow-scripts" aria-label="Dynamic height iframe example" style="--border: 1px solid red">
   <template slot="head">
     <title>Dynamic iframe height</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
@@ -63,7 +63,7 @@ export const DynamicHeight = {
  */
 export const FixedSize = {
   render: () => html`
-<nve-iframe aria-label="Fixed-size iframe example" style="--height: 256px; --width: 256px; --border: 1px solid red">
+<nve-iframe sandbox="allow-scripts" aria-label="Fixed-size iframe example" style="--height: 256px; --width: 256px; --border: 1px solid red">
   <template><p style="height: 128px; width: 128px; margin: 1px; outline: 1px solid yellow;">override iframe size</p></template>
 </nve-iframe>
   `
@@ -75,7 +75,7 @@ export const FixedSize = {
  */
 export const OverflowClip = {
   render: () => html`
-<nve-iframe aria-label="Overflow clipping iframe example" style="--height: 150px; --border: 1px solid red">
+<nve-iframe sandbox="allow-scripts" aria-label="Overflow clipping iframe example" style="--height: 150px; --border: 1px solid red">
   <template slot="head">
     <title>Clipped iframe popover</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nvidia-elements/themes/dist/bundles/index.css" />
@@ -99,7 +99,7 @@ export const OverflowClip = {
  */
 export const DynamicallyUpdatedContent = {
   render: () => html`
-<nve-iframe id="property-example" aria-label="Dynamically updated iframe example">
+<nve-iframe sandbox="allow-scripts" id="property-example" aria-label="Dynamically updated iframe example">
   <template>
     <p nve-text="body">Initial iframe content.</p>
   </template>
@@ -108,5 +108,16 @@ export const DynamicallyUpdatedContent = {
   document.querySelector('#property-example template').innerHTML =
     '<p nve-text="body">This template was dynamically updated.</p>';
 </script>
+  `
+};
+
+/**
+ * @summary Allows scripts and same-origin access for trusted previews that need parent-origin resources. Use explicit sandbox permissions to enable only the capabilities your content needs.
+ */
+export const Sandbox = {
+  render: () => html`
+<nve-iframe sandbox="allow-scripts allow-same-origin" aria-label="Trusted preview" style="--width: 256px; --height: 128px">
+  <template><p nve-text="body">Trusted preview with explicit sandbox permissions.</p></template>
+</nve-iframe>
   `
 };
