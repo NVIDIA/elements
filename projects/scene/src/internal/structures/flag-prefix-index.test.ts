@@ -5,6 +5,27 @@ import { describe, expect, it } from 'vitest';
 import { FlagPrefixIndex } from './flag-prefix-index.js';
 
 describe(FlagPrefixIndex.name, () => {
+  it('queries retained intervals across block boundaries and pending updates', () => {
+    const summary = new FlagPrefixIndex(2);
+    summary.reset(1025);
+    summary.finishInitialFlags();
+    for (const index of [0, 255, 256, 511, 1024]) summary.updateFlagsBatched(index, 1);
+    for (const [start, count, expected] of [
+      [1, 254, false],
+      [1, 255, true],
+      [255, 2, true],
+      [257, 254, false],
+      [257, 255, true],
+      [512, 512, false],
+      [512, 513, true],
+      [1024, 0, false]
+    ] as const) {
+      expect(summary.hasInRange(1, start, count)).toBe(expected);
+      expect(summary.hasInRange(2, start, count)).toBe(false);
+    }
+    summary.updateFlagsBatched(256, 0);
+    expect(summary.hasInRange(1, 256, 255)).toBe(false);
+  });
   it.each([0, 9, 1.5])('should reject unsupported bit counts (%s)', bitCount => {
     expect(() => new FlagPrefixIndex(bitCount)).toThrow(RangeError);
   });

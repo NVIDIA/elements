@@ -65,7 +65,7 @@ export const EpisodeReplay = {
           <output nve-text="label sm"></output>
           <output nve-text="label sm"></output>
         </div>
-        <p nve-text="body sm muted">Observed: solid CAD robot and cyan path. Commanded: magenta path. Joint readouts use radians. The gripper travel and joint zero offsets are visualization estimates; this recording does not include hardware calibration.</p>
+        <p nve-text="body sm muted">Observed: solid CAD robot and cyan path. Commanded: magenta path. Video timestamps select the nearest robot sample, within 1/60 s at 30 Hz; scene submission follows on the next animation frame. Joint readouts use radians. The gripper travel and joint zero offsets are visualization estimates; this recording does not include hardware calibration.</p>
       </div>
       <nve-dialog id="lerobot-episode-info" modal closable hidden>
         <nve-dialog-header><h2 nve-text="heading sm">Recording and body</h2></nve-dialog-header>
@@ -137,6 +137,11 @@ export const EpisodeReplay = {
       let clockStart = 0;
       let animation;
       let videoEnabled = false;
+      let videoFrame;
+      let videoGeneration = 0;
+      let requestedVideoTime = null;
+      let presentedVideoTime = 0;
+      let stopped = false;
       let snapshotCount = 0;
       let sceneDiagnostic = '';
 
@@ -193,7 +198,7 @@ export const EpisodeReplay = {
         if (samples.length) showFrame(currentFrame);
       }
       function currentTime(now = performance.now()) {
-        return videoEnabled ? video.currentTime : clockTime + (playing ? (now-clockStart)/1000*speed : 0);
+        return videoEnabled ? presentedVideoTime : clockTime + (playing ? (now-clockStart)/1000*speed : 0);
       }
       function pause() {
         clockTime = currentTime();
@@ -203,12 +208,12 @@ export const EpisodeReplay = {
         cancelAnimationFrame(animation);
       }
       function tick(now) {
+        if (!playing || videoEnabled || stopped) return;
         let time = currentTime(now);
         if (time >= loopEnd) {
           time %= loopEnd;
           clockTime = time;
           clockStart = now;
-          if (videoEnabled) video.currentTime = time;
         }
         const index = nearestFrame(time);
         if (index !== currentFrame) showFrame(index);
@@ -223,24 +228,71 @@ export const EpisodeReplay = {
         clockStart = performance.now();
         playing = true;
         playPause.checked = false;
-        if (videoEnabled) playVideo();
-        animation = requestAnimationFrame(tick);
+        if (videoEnabled) {
+          watchVideoFrame();
+          playVideo();
+        } else animation = requestAnimationFrame(tick);
       }
       function seek(index) {
         pause();
-        showFrame(index);
-        clockTime = samples[currentFrame].time;
-        if (videoEnabled) video.currentTime = clockTime;
+        const selected = Math.min(samples.length-1, Math.max(0, index));
+        clockTime = samples[selected].time;
+        if (videoEnabled) seekVideo(clockTime);
+        else showFrame(selected);
+      }
+      function cancelVideoFrame() {
+        videoGeneration += 1;
+        if (videoFrame !== undefined) video.cancelVideoFrameCallback(videoFrame);
+        videoFrame = undefined;
+      }
+      function seekVideo(time) {
+        requestedVideoTime = time;
+        cancelVideoFrame();
+        watchVideoFrame();
+        video.currentTime = time;
+      }
+      function watchVideoFrame() {
+        if (videoFrame !== undefined || stopped) return;
+        const generation = videoGeneration;
+        videoFrame = video.requestVideoFrameCallback((now, metadata) => {
+          if (generation !== videoGeneration || !videoEnabled || stopped) return;
+          videoFrame = undefined;
+          // A queued frame from before seek completion must not select robot state.
+          const pending = requestedVideoTime !== null;
+          if (video.seeking || (pending && Math.abs(metadata.mediaTime-requestedVideoTime) > 1/30+1e-6)) {
+            watchVideoFrame();
+            return;
+          }
+          requestedVideoTime = null;
+          presentedVideoTime = metadata.mediaTime;
+          if (playing && presentedVideoTime >= loopEnd) {
+            seekVideo(0);
+            return;
+          }
+          const index = nearestFrame(presentedVideoTime);
+          if (index !== currentFrame) showFrame(index);
+          if (playing) watchVideoFrame();
+        });
       }
       function useOfflineClock() {
-        clockTime = samples[currentFrame].time;
+        if (stopped) return;
+        clockTime = requestedVideoTime ?? samples[currentFrame].time;
         clockStart = performance.now();
         videoEnabled = false;
+        requestedVideoTime = null;
+        cancelVideoFrame();
         video.pause();
+        video.hidden = true;
+        const index = nearestFrame(clockTime);
+        if (index !== currentFrame) showFrame(index);
+        cancelAnimationFrame(animation);
+        if (playing) animation = requestAnimationFrame(tick);
       }
       function stop() {
         assetRequests.abort();
         pause();
+        stopped = true;
+        cancelVideoFrame();
         disconnectObserver.disconnect();
       }
       function vector(urdfNode, attribute, fallback) {
@@ -345,12 +397,23 @@ export const EpisodeReplay = {
         observedPath.hidden = commandedPath.hidden = !pathButton.pressed;
       });
       video.addEventListener('canplay', () => {
+        if (stopped) return;
+        if (typeof video.requestVideoFrameCallback !== 'function') {
+          useOfflineClock();
+          return;
+        }
         const time = currentTime();
         videoEnabled = true;
-        video.currentTime = Math.min(time, samples.at(-1).time);
+        cancelAnimationFrame(animation);
+        seekVideo(Math.min(time, samples.at(-1).time));
         video.playbackRate = speed;
         if (playing) playVideo();
       }, { once: true });
+      video.addEventListener('ended', () => {
+        if (!videoEnabled || !playing || stopped) return;
+        seekVideo(0);
+        playVideo();
+      });
       video.addEventListener('error', useOfflineClock);
       scene.ready.catch(() => showDiagnostic(' · WebGPU unavailable'));
       scene.addEventListener('nve-scene-error', event => showDiagnostic(' · Scene diagnostic: ' + event.detail.code));

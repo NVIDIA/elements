@@ -62,12 +62,13 @@ describe('GeometryRenderer', () => {
     await vi.waitFor(() => expect(renderer?.readyFor([item])).toBe(true));
     for (const offset of [-1_000_000, -999_999]) {
       vi.mocked(gpu.device.queue.writeBuffer).mockClear();
-      renderer.prepare([{ ...item, frameMatrix: composePreciseMat4([offset, 0, 0], [0, 0, 0, 1]) }], projection);
+      renderer.prepare([{ ...item, frameMatrix: composePreciseMat4([offset, 0, 0], [1, 0, 0, 0]) }], projection);
       const uploads = vi.mocked(gpu.device.queue.writeBuffer).mock.calls;
       const uniforms = uploads.find(([, , data]) => data instanceof Float32Array && data.length === 40)?.[2];
       expect(uniforms).toBeInstanceOf(Float32Array);
       if (!(uniforms instanceof Float32Array)) throw new Error('Marker matrix uniforms were not uploaded.');
       expect(uniforms[12]).toBe(Math.fround(projection[12]! + offset));
+      expect(Array.from(uniforms.slice(16, 32))).toEqual([1, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1]);
     }
     projection[0] = Number.MAX_VALUE;
     expect(() => renderer?.prepare([item], projection)).toThrow('finite Float32');

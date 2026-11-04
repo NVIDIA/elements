@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { publishSceneFeatureIds } from '../interaction/feature-ids.js';
+import type { FlagPrefixIndex } from '../structures/flag-prefix-index.js';
 import {
   getPackedRecordState,
   resolvePublishOptions,
@@ -48,8 +49,52 @@ export function resolvePackedSourcePublication(options: {
     geometryChanged,
     resolved,
     sourceVersion: sourceState.version,
-    visualChanged: currentActiveCount !== resolved.activeCount || (geometryChanged && resolved.count > 0)
+    visualChanged: currentActiveCount !== resolved.activeCount || (geometryChanged && resolved.ranges.length > 0)
   };
+}
+
+/** Checks changed source records and retained validity before committing any bytes. */
+export function packedPublicationIsValid(options: {
+  readonly capacity: number;
+  readonly invalidFlag: number;
+  readonly publication: PackedSourcePublication;
+  readonly recordIsValid: (records: DataView, offset: number) => boolean;
+  readonly source: Uint8Array;
+  readonly stride: number;
+  readonly summary: FlagPrefixIndex;
+}): boolean {
+  const { capacity, invalidFlag, publication, recordIsValid, source, stride, summary } = options;
+  const { activeCount, ranges } = publication.resolved;
+  try {
+    if (source.byteLength !== capacity * stride || activeCount > capacity) return false;
+    const records = new DataView(source.buffer, source.byteOffset, source.byteLength);
+    let retainedStart = 0;
+    for (const range of publication.geometryChanged ? ranges : []) {
+      const start = Math.min(range.start, activeCount);
+      const end = Math.min(range.start + range.count, activeCount);
+      if (summary.hasInRange(invalidFlag, retainedStart, start - retainedStart)) return false;
+      if (!sourceRangeIsValid({ records, start, end, stride, recordIsValid })) return false;
+      retainedStart = end;
+    }
+    return !summary.hasInRange(invalidFlag, retainedStart, activeCount - retainedStart);
+  } catch {
+    // Detached producer storage rejects the candidate while preserving the capture.
+    return false;
+  }
+}
+
+function sourceRangeIsValid(options: {
+  readonly records: DataView;
+  readonly start: number;
+  readonly end: number;
+  readonly stride: number;
+  readonly recordIsValid: (records: DataView, offset: number) => boolean;
+}): boolean {
+  const { records, start, end, stride, recordIsValid } = options;
+  for (let index = start; index < end; index += 1) {
+    if (!recordIsValid(records, index * stride)) return false;
+  }
+  return true;
 }
 
 /** Publishes source identities and returns the matching packed geometry version. */

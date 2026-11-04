@@ -270,6 +270,25 @@ export class FlagPrefixIndex {
     return false;
   }
 
+  /** Queries a contiguous interval using the existing prefix counts. */
+  hasInRange(mask: number, start: number, count: number): boolean {
+    const end = Math.min(Math.max(0, start + count), this.#flags.length);
+    const first = Math.min(Math.max(0, start), end);
+    if (end === first) return false;
+    const channel = maskToIndex(mask, this.#bitCount) * 2;
+    if (this.#dirtyCount !== 0) this.#flushUpdates();
+    return this.#countPrefix(channel, mask, end) > this.#countPrefix(channel, mask, first);
+  }
+
+  #countPrefix(channel: number, mask: number, count: number): number {
+    const fullBlocks = Math.floor(count / BLOCK_SIZE);
+    let sum = this.#prefixSum(channel, fullBlocks);
+    for (let index = fullBlocks * BLOCK_SIZE; index < count; index += 1) {
+      if (((this.#flags[index] ?? 0) & mask) !== 0) sum += 1;
+    }
+    return sum;
+  }
+
   #adjustChannel(channel: number, block: number, delta: number): void {
     const stride = this.#blockCount + 1;
     const treeOffset = channel * stride;

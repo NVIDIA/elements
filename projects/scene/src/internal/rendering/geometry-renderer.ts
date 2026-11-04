@@ -34,6 +34,7 @@ import {
   type MarkerCompactionResources
 } from '../layers/markers/compaction.js';
 import { PICK_UNIFORM_OFFSETS } from './picking/uniform-offsets.js';
+import { writeFrameNormalTransform } from './lighting.js';
 import type { PickPipelines } from './picking/pipelines.js';
 import type { PrimitiveKind } from '../math/primitive-geometry.js';
 import type { Matrix4 } from '../math/types.js';
@@ -355,8 +356,10 @@ export class GeometryRenderer {
     uniforms.fill(0);
     writeMat4ToFloat32(uniforms, multiplyMat4Into(frame.projection, item.frameMatrix, this.#matrixScratch));
     uniforms.set(IDENTITY_MAT4, 16);
-    if (isMarkerRenderItem(item)) writeMarkerCompactionUniforms(uniforms, item.data.kind);
-    else if (!isMeshRenderItem(item) && !isLabelRenderItem(item)) {
+    if (isMarkerRenderItem(item)) {
+      writeFrameNormalTransform(uniforms, item.frameMatrix);
+      writeMarkerCompactionUniforms(uniforms, item.data.kind);
+    } else if (!isMeshRenderItem(item) && !isLabelRenderItem(item)) {
       this.#writeStreamUniforms(uniforms, item, frame.pixelRatio);
     }
     return uniforms;

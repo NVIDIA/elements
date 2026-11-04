@@ -7,6 +7,7 @@ import {
   clearFrameTransform,
   FrameEvaluation,
   getFramePose,
+  getFrameReference,
   getFrameWorldMatrix,
   getFrameWorldMatrixPrecise,
   getNamedSceneFrame,
@@ -19,6 +20,65 @@ import {
   setFrameReference,
   setFrameTransform
 } from './state.js';
+import { registerSceneRenderNotifications } from '../scene/notifications.js';
+
+describe('frame reference state', () => {
+  it('notifies only when the authored reference changes, including detachment', () => {
+    const scene = document.createElement('nve-scene');
+    const element = document.createElement('div');
+    scene.append(element);
+    const changes: (string | null)[] = [];
+    const dispose = registerSceneRenderNotifications(scene, (source, kind) => {
+      if (kind === 'composition') changes.push(getFrameReference(source));
+    });
+    try {
+      for (const value of [null, null, 'tool', 'tool', 'base', 'base', null, null]) {
+        setFrameReference(element, value);
+        expect(getFrameReference(element)).toBe(value);
+      }
+      expect(changes).toEqual([null, 'tool', 'base', null]);
+    } finally {
+      dispose();
+    }
+  });
+
+  it.each([null, 'tool'])('captures the first authored %s reference even when it matches the attribute', value => {
+    const scene = document.createElement('nve-scene');
+    const element = document.createElement('div');
+    if (value !== null) element.setAttribute('frame', value);
+    scene.append(element);
+    const changes: (string | null)[] = [];
+    const dispose = registerSceneRenderNotifications(scene, source => changes.push(getFrameReference(source)));
+    try {
+      expect(getFrameReference(element)).toBe(value);
+      setFrameReference(element, value);
+      element.setAttribute('frame', 'other');
+      expect(getFrameReference(element)).toBe(value);
+      setFrameReference(element, value);
+      expect(changes).toEqual([value]);
+    } finally {
+      dispose();
+    }
+  });
+
+  it('preserves raw references and rejects invalid values without changing state', () => {
+    const scene = document.createElement('nve-scene');
+    const element = document.createElement('div');
+    scene.append(element);
+    const changes: (string | null)[] = [];
+    const dispose = registerSceneRenderNotifications(scene, source => changes.push(getFrameReference(source)));
+    try {
+      for (const value of ['tool', ' tool ', '', null]) setFrameReference(element, value);
+      for (const value of [undefined, 0, {}, ['tool']]) {
+        expect(() => Reflect.apply(setFrameReference, undefined, [element, value])).toThrow(TypeError);
+      }
+      expect(getFrameReference(element)).toBeNull();
+      expect(changes).toEqual(['tool', ' tool ', '', null]);
+    } finally {
+      dispose();
+    }
+  });
+});
 
 describe('frame transform state', () => {
   it('captures poses, composes ancestor rotation, and returns independently owned matrices', () => {
