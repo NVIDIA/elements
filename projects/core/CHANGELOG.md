@@ -1,3 +1,9 @@
+## [2.22.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.0...@nvidia-elements/core-v2.22.1) (2026-11-04)
+
+### Bug Fixes
+
+* **core:** drop obsolete checkbox clip-path fallback ([8cddf24](https://github.com/NVIDIA/elements/commit/8cddf24eab9f15f444ddc25152277ebd864116bd))
+
 ## [2.22.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.21.1...@nvidia-elements/core-v2.22.0) (2026-11-04)
 
 ### Features
