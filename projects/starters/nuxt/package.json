@@ -20,7 +20,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "nuxt": "4.6.3",
+    "nuxt": "4.6.4",
     "vue": "3.5.44",
     "vue-router": "5.3.1"
   },
