@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { customElement } from 'lit/decorators/custom-element.js';
 import type { PreferencesInputValue } from '@nvidia-elements/core/preferences-input';
 import '@nvidia-elements/core/select/define.js';
