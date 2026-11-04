@@ -1,3 +1,9 @@
+## [2.21.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.21.0...@nvidia-elements/core-v2.21.1) (2026-11-04)
+
+### Bug Fixes
+
+* **core:** re-render bugfixes ([48e5ac4](https://github.com/NVIDIA/elements/commit/48e5ac4e5c66e0c9659e47095698fe33bfc68629))
+
 ## [2.21.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.20.3...@nvidia-elements/core-v2.21.0) (2026-11-03)
 
 ### Features
