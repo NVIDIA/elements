@@ -53,12 +53,12 @@ fn checkerColor(input: Output) -> vec4f {
 }
 @fragment fn fragmentMain(input: Output) -> @location(0) vec4f {
   let value = checkerColor(input);
-  if (value.a < 1.0) { discard; }
+  if (!nve_alpha_is_opaque(value.a)) { discard; }
   return value;
 }
 @fragment fn fragmentOit(input: Output) -> NveOitOutput {
   let value = checkerColor(input);
-  if (value.a <= 0.0 || value.a >= 1.0) { discard; }
+  if (value.a <= 0.0 || nve_alpha_is_opaque(value.a)) { discard; }
   return nve_oit(value, input.position.z);
 }
 `;

@@ -57,9 +57,9 @@ export function createMeshShader(options: { readonly pass: 'color' | 'pick' }): 
   const pick = options.pass === 'pick';
   const fragment = pick
     ? '@fragment fn fragmentMain(input: VertexOutput) -> NvePickOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); if (input.color.a * texel.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
-    : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a < 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return vec4f(color.rgb * lighting * color.a, color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a <= 0.0 || color.a >= 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return nve_oit(vec4f(color.rgb * lighting * color.a, color.a), input.position.z); } @fragment fn fragmentUnlit(input: VertexOutput) -> @location(0) vec4f { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a < 1.0) { discard; } return vec4f(color.rgb * color.a, color.a); } @fragment fn fragmentUnlitOit(input: VertexOutput) -> NveOitOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a <= 0.0 || color.a >= 1.0) { discard; } return nve_oit(vec4f(color.rgb * color.a, color.a), input.position.z); }';
+    : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (!nve_alpha_is_opaque(color.a)) { discard; } let lighting = nve_default_lighting(input.normal); return vec4f(color.rgb * lighting * color.a, color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a <= 0.0 || nve_alpha_is_opaque(color.a)) { discard; } let lighting = nve_default_lighting(input.normal); return nve_oit(vec4f(color.rgb * lighting * color.a, color.a), input.position.z); } @fragment fn fragmentUnlit(input: VertexOutput) -> @location(0) vec4f { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (!nve_alpha_is_opaque(color.a)) { discard; } return vec4f(color.rgb * color.a, color.a); } @fragment fn fragmentUnlitOit(input: VertexOutput) -> NveOitOutput { let texel = textureSample(baseTexture, textureSampler, input.uv); let color = vec4f(input.color.rgb * texel.rgb, input.color.a * texel.a); if (color.a <= 0.0 || nve_alpha_is_opaque(color.a)) { discard; } return nve_oit(vec4f(color.rgb * color.a, color.a), input.position.z); }';
   return /* wgsl */ `
-struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, baseColor: vec4f, ${pick ? 'pickId: u32,' : ''} }
+struct SceneUniforms { viewProjection: mat4x4f, frameNormalTransform: mat4x4f, baseColor: vec4f, ${pick ? 'pickId: u32,' : ''} }
 @group(0) @binding(0) var<uniform> scene: SceneUniforms;
 ${MARKER_WGSL}
 ${DEFAULT_LIGHTING_WGSL}
@@ -77,8 +77,8 @@ fn safeScale(value: f32) -> f32 { if (abs(value) < 0.000001) { return 0.000001; 
   var output: VertexOutput;
   let localPosition = rotateByQuaternion(marker.orientation, input.position * marker.scale) + marker.position;
   let localNormal = rotateByQuaternion(marker.orientation, input.normal / vec3f(safeScale(marker.scale.x), safeScale(marker.scale.y), safeScale(marker.scale.z)));
-  output.position = scene.viewProjection * scene.frame * vec4f(localPosition, 1.0);
-  output.normal = normalize((scene.frame * vec4f(localNormal, 0.0)).xyz);
+  output.position = scene.viewProjection * vec4f(localPosition, 1.0);
+  output.normal = normalize((scene.frameNormalTransform * vec4f(localNormal, 0.0)).xyz);
   output.color = vec4f(srgbToLinear(input.color.rgb) * srgbToLinear(scene.baseColor.rgb) * srgbToLinear(marker.color.rgb), input.color.a * scene.baseColor.a * marker.color.a);
   output.uv = input.uv;
   ${pick ? 'output.id = scene.pickId + input.instanceIndex;' : ''}

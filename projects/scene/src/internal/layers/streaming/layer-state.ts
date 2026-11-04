@@ -140,7 +140,7 @@ export function publishStreamingLayer(layer: HTMLElement, options?: ScenePublish
     source,
     unavailableStateMessage: 'Packed vertex source state is unavailable.'
   });
-  const candidateReady = streamingPublicationIsValid(state, source, publication.resolved.activeCount);
+  const candidateReady = streamingPublicationIsValid(state, source, publication);
   const lineCountValid = state.kind !== 'line' || lineCountIsValid(publication.resolved.activeCount, state.topology);
   state.publicationError = !candidateReady || !lineCountValid;
   if (!state.publicationError) {
@@ -164,10 +164,10 @@ function applySuccessfulStreamingPublication(options: {
 function streamingPublicationIsValid(
   state: StreamingLayerState,
   source: StreamingLayerSource,
-  activeCount: number
+  publication: PackedSourcePublication
 ): boolean {
   try {
-    return state.buffer.sourceRecordsAreValid(getPackedRecordBytes(source), activeCount);
+    return state.buffer.publicationIsValid(getPackedRecordBytes(source), publication);
   } catch {
     return false;
   }
@@ -178,7 +178,9 @@ function applyStreamingPublication(
   resolved: PackedSourcePublication['resolved'],
   geometryChanged: boolean
 ): void {
-  if (geometryChanged) state.buffer.commit(resolved.start, resolved.count);
+  if (geometryChanged) {
+    for (const range of resolved.ranges) state.buffer.commit(range.start, range.count);
+  }
   state.streamedCount = resolved.activeCount;
   state.buffer.setSourceCount(resolved.activeCount);
 }

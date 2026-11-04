@@ -33,6 +33,98 @@ describe('packed source publication', () => {
   afterEach(() => vi.restoreAllMocks());
 
   it.each(['marker', 'point', 'label'] as const)(
+    'publishes only selected %s records and rejects invalid candidates atomically',
+    kind => {
+      const { source, publish, take } = publicationLayer(kind, 3);
+      const stride = source.mutableBytes.byteLength / source.capacity;
+      const view = new DataView(source.mutableBytes.buffer);
+      take();
+      view.setFloat32(0, 10, true);
+      view.setFloat32(stride, NaN, true);
+      publish({ start: 0, count: 1 });
+      const selected = take();
+      expect(selected).toMatchObject({ ready: true, count: 3 });
+      expect(selected.uploadRanges).toEqual([{ offset: 0, size: stride }]);
+      const accepted = selected.bytes?.slice();
+      expect(accepted).toBeDefined();
+      expect(new DataView(accepted!.buffer).getFloat32(stride, true)).toBe(1);
+
+      view.setFloat32(0, 20, true);
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      publish({ start: 0, count: 2 });
+      expect(take()).toMatchObject({ ready: false, count: 0, uploadRanges: [] });
+      // An empty publication recovers the accepted snapshot without reading producer edits.
+      publish({ count: 0 });
+      const recovered = take();
+      expect(recovered).toMatchObject({ ready: true, count: 3, uploadRanges: [] });
+      expect(recovered.bytes).toEqual(accepted);
+    }
+  );
+
+  it.each(['marker', 'point', 'label'] as const)(
+    'captures newly activated %s records without capturing the gap after a dirty range',
+    kind => {
+      const { source, publish, take } = publicationLayer(kind, 4, 3);
+      const stride = source.mutableBytes.byteLength / source.capacity;
+      const view = new DataView(source.mutableBytes.buffer);
+      take();
+      view.setFloat32(0, 10, true);
+      view.setFloat32(stride, NaN, true);
+      source.add();
+      view.setFloat32(stride * 3, 30, true);
+      publish({ start: 0, count: 1 });
+      const grown = take();
+      expect(grown).toMatchObject({ ready: true, count: 4 });
+      expect(grown.uploadRanges).toEqual([
+        { offset: 0, size: stride },
+        { offset: stride * 3, size: stride }
+      ]);
+      expect(new DataView(grown.bytes!.buffer).getFloat32(stride, true)).toBe(1);
+      expect(new DataView(grown.bytes!.buffer).getFloat32(stride * 3, true)).toBe(30);
+      publish({ activeCount: 1, count: 0 });
+      expect(take()).toMatchObject({ ready: true, count: 1, uploadRanges: [] });
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      publish({ activeCount: 4, count: 0 });
+      expect(take()).toMatchObject({ ready: false, count: 0, uploadRanges: [] });
+    }
+  );
+
+  it.each(['marker', 'point', 'label'] as const)('keeps %s validation work bounded by the published range', kind => {
+    const { source, publish, take } = publicationLayer(kind, 10_000);
+    take();
+    const reads = vi.spyOn(DataView.prototype, 'getFloat32');
+    publish({ count: 0 });
+    expect(reads.mock.calls.length).toBe(0);
+    source.at(1).position.x = 10;
+    reads.mockClear();
+    publish({ start: 1, count: 1 });
+    expect(reads.mock.calls.length).toBeGreaterThan(0);
+    expect(reads.mock.calls.length).toBeLessThan(20);
+  });
+
+  it.each(['marker', 'point', 'label'] as const)(
+    'requires every retained %s record to be valid before accepting a repair',
+    kind => {
+      const { source, publish, take, replace } = publicationLayer(kind, 3);
+      const stride = source.mutableBytes.byteLength / source.capacity;
+      const view = new DataView(source.mutableBytes.buffer);
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      view.setFloat32(stride, NaN, true);
+      replace();
+      expect(take()).toMatchObject({ ready: false, count: 0 });
+      view.setFloat32(stride, 11, true);
+      view.setFloat32(0, 10, true);
+      publish({ start: 0, count: 1 });
+      expect(take()).toMatchObject({ ready: false, count: 0 });
+      publish({ start: 1, count: 1 });
+      const repaired = take();
+      expect(repaired).toMatchObject({ ready: true, count: 3 });
+      expect(new DataView(repaired.bytes!.buffer).getFloat32(0, true)).toBe(0);
+      expect(new DataView(repaired.bytes!.buffer).getFloat32(stride, true)).toBe(11);
+    }
+  );
+
+  it.each(['marker', 'point', 'label'] as const)(
     'classifies %s validity transitions and identity-only updates',
     kind => {
       const { source, layer, publish, take } = publicationLayer(kind);
@@ -133,36 +225,44 @@ describe('packed source publication', () => {
   });
 });
 
-function publicationLayer(kind: 'marker' | 'point' | 'label') {
+function publicationLayer(kind: 'marker' | 'point' | 'label', capacity = 1, count = capacity) {
   const layer = document.createElement('div');
+  const records = Array.from({ length: count }, (_, index) => ({
+    featureId: index + 1,
+    position: [index, 0, 0] as const,
+    text: 'label'
+  }));
   if (kind === 'marker') {
-    const source = new MarkerBuffer({ records: [{ featureId: 1 }] });
+    const source = new MarkerBuffer({ capacity, records });
     registerMarkerLayer(layer, 'cube');
     setLayerInstances(layer, source);
     return {
       source,
       layer,
+      replace: () => setLayerInstances(layer, source),
       publish: (options?: ScenePublishOptions) => publishLayerInstances(layer, options),
       take: () => takeMarkerLayerRenderData(layer)
     };
   }
   if (kind === 'point') {
-    const source = new PointBuffer({ records: [{ featureId: 1 }] });
+    const source = new PointBuffer({ capacity, records });
     registerStreamingLayer(layer, { kind: 'point', layout: POINT });
     setStreamingLayerSource(layer, source);
     return {
       source,
       layer,
+      replace: () => setStreamingLayerSource(layer, source),
       publish: (options?: ScenePublishOptions) => publishStreamingLayer(layer, options),
       take: () => takeStreamingLayerRenderData(layer)
     };
   }
-  const source = new LabelBuffer({ records: [{ featureId: 1, text: 'label' }] });
+  const source = new LabelBuffer({ capacity, records });
   registerLabelLayer(layer);
   setLabelLayerSource(layer, source);
   return {
     source,
     layer,
+    replace: () => setLabelLayerSource(layer, source),
     publish: (options?: ScenePublishOptions) => publishLabelLayer(layer, options),
     take: () => takeLabelLayerRenderData(layer)
   };

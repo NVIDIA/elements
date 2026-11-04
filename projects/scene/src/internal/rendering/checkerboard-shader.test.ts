@@ -18,8 +18,8 @@ describe('checkerboard shader', () => {
   });
 
   it('keeps opaque and translucent fragments in separate passes', () => {
-    expect(CHECKERBOARD_SHADER).toContain('if (value.a < 1.0) { discard; }');
-    expect(CHECKERBOARD_SHADER).toContain('if (value.a <= 0.0 || value.a >= 1.0) { discard; }');
+    expect(CHECKERBOARD_SHADER).toContain('if (!nve_alpha_is_opaque(value.a)) { discard; }');
+    expect(CHECKERBOARD_SHADER).toContain('if (value.a <= 0.0 || nve_alpha_is_opaque(value.a)) { discard; }');
     expect(CHECKERBOARD_SHADER).toContain('nve_oit(value, input.position.z)');
   });
 });

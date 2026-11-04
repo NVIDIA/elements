@@ -3,7 +3,8 @@
 
 import type { Matrix4 } from '../../math/types.js';
 import { hasVersionedRangeCoverage } from '../../structures/versioned-range-journal.js';
-import { identityMat4, multiplyMat4Into, writeMat4ToFloat32 } from '../../math/mat4.js';
+import { multiplyMat4Into, writeMat4ToFloat32 } from '../../math/mat4.js';
+import { writeFrameNormalTransform } from '../../rendering/lighting.js';
 import { supportsSceneGPUCompute, type SceneGPUCommandEncoder } from '../../gpu/platform.js';
 import { compileHeightfield, prepareHeightfield } from '../heightfield/compile.js';
 import {
@@ -845,7 +846,7 @@ export class MeshRenderer {
     const uniforms = this.#uniformScratch;
     uniforms.fill(0);
     writeMat4ToFloat32(uniforms, multiplyMat4Into(projection, item.frameMatrix, this.#matrixScratch));
-    uniforms.set(identityMat4(), 16);
+    writeFrameNormalTransform(uniforms, item.frameMatrix);
     uniforms.set(item.data.color, 32);
     for (const partition of resources.partitions) {
       if (hasSameUniformValues(partition.uniformValues, uniforms)) continue;

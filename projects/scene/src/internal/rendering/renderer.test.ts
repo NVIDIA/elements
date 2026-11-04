@@ -117,7 +117,8 @@ describe(SceneRenderer.name, () => {
 
     expect(renderer.render([item])).toBe(false);
     await vi.waitFor(() => expect(renderer.consumeRenderRequest()).toBe(true));
-    expect(renderer.render([item])).toBe(true);
+    // Geometry and the font atlas can request separate wakes while loading independently.
+    await vi.waitFor(() => expect(renderer.render([item])).toBe(true));
     expect(gpu.createSampler).toHaveBeenCalledOnce();
     expect(gpu.draws.some(draw => draw.vertexCount === 60)).toBe(true);
     const labelUniform = gpu.writes.find(

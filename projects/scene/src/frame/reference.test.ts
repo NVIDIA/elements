@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { html } from 'lit';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { SceneContent } from '../internal/composition/scene/content.js';
-import { isFrameChainValid } from '../internal/composition/frame/state.js';
+import { getFrameWorldMatrixPrecise, isFrameChainValid } from '../internal/composition/frame/state.js';
 import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import type { SceneFrame } from './frame.js';
@@ -50,6 +50,43 @@ describe('coordinate frame references', () => {
     resetSceneTesting();
     vi.restoreAllMocks();
   });
+
+  it.each(['nve-scene-frame', 'nve-scene-body', 'nve-scene-points'] as const)(
+    'skips unchanged public references on %s and resolves actual changes synchronously',
+    async tag => {
+      configureSceneTesting({ requestAdapter: async () => null });
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+      const attached = document.createElement(tag);
+      attached.frame = 'base';
+      fixture = await createFixture(html`
+        <nve-scene aria-label="Synchronous reference edits">
+          <nve-scene-frame name="base" .position=${[3, 0, 0]}></nve-scene-frame>
+          <nve-scene-frame name="tool" .position=${[7, 0, 0]}></nve-scene-frame>
+          <nve-scene-frame .position=${[0, 1, 0]}>${attached}</nve-scene-frame>
+        </nve-scene>
+      `);
+      await Promise.all([...fixture.querySelectorAll<HTMLElement>('*')].map(element => elementIsStable(element)));
+      expect([...getFrameWorldMatrixPrecise(attached).slice(12, 15)]).toEqual([3, 0, 0]);
+      const resolveReferences = vi.spyOn(SceneContent.prototype, 'resolveReferences');
+      for (let index = 0; index < 100; index += 1) attached.frame = 'base';
+      expect(resolveReferences).not.toHaveBeenCalled();
+      attached.frame = 'tool';
+      expect(resolveReferences).toHaveBeenCalledTimes(1);
+      expect([...getFrameWorldMatrixPrecise(attached).slice(12, 15)]).toEqual([7, 0, 0]);
+      attached.frame = null;
+      expect(resolveReferences).toHaveBeenCalledTimes(2);
+      expect([...getFrameWorldMatrixPrecise(attached).slice(12, 15)]).toEqual([0, 1, 0]);
+      attached.frame = null;
+      expect(resolveReferences).toHaveBeenCalledTimes(2);
+      attached.setAttribute('frame', 'base');
+      expect([...getFrameWorldMatrixPrecise(attached).slice(12, 15)]).toEqual([3, 0, 0]);
+      attached.setAttribute('frame', 'tool');
+      expect([...getFrameWorldMatrixPrecise(attached).slice(12, 15)]).toEqual([7, 0, 0]);
+      attached.removeAttribute('frame');
+      expect([...getFrameWorldMatrixPrecise(attached).slice(12, 15)]).toEqual([0, 1, 0]);
+      expect(resolveReferences).toHaveBeenCalledTimes(5);
+    }
+  );
 
   it('resolves late targets, reassigns references, and fails closed when a target leaves', () => {
     const { scene, body, content, errors, resolve } = composition();

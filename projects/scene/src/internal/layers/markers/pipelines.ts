@@ -103,9 +103,9 @@ export function createMarkerShader(options: { readonly compact?: boolean; readon
   const fragment =
     options.pass === 'pick'
       ? '@fragment fn fragmentMain(input: VertexOutput) -> NvePickOutput { if (input.color.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
-      : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { if (input.color.a < 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return vec4f(input.color.rgb * lighting * input.color.a, input.color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { if (input.color.a <= 0.0 || input.color.a >= 1.0) { discard; } let lighting = nve_default_lighting(input.normal); return nve_oit(vec4f(input.color.rgb * lighting * input.color.a, input.color.a), input.position.z); }';
+      : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { if (!nve_alpha_is_opaque(input.color.a)) { discard; } let lighting = nve_default_lighting(input.normal); return vec4f(input.color.rgb * lighting * input.color.a, input.color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { if (input.color.a <= 0.0 || nve_alpha_is_opaque(input.color.a)) { discard; } let lighting = nve_default_lighting(input.normal); return nve_oit(vec4f(input.color.rgb * lighting * input.color.a, input.color.a), input.position.z); }';
   return /* wgsl */ `
-struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, ${pickFields}}
+struct SceneUniforms { viewProjection: mat4x4f, frameNormalTransform: mat4x4f, ${pickFields}}
 @group(0) @binding(0) var<uniform> scene: SceneUniforms;
 ${compactBinding}
 ${MARKER_WGSL}
@@ -121,10 +121,9 @@ fn safeScale(value: f32) -> f32 { if (abs(value) < 0.000001) { return 0.000001; 
   let marker = nve_load_marker(${markerIndex});
   let localPosition = rotateByQuaternion(marker.orientation, input.position * marker.scale) + marker.position;
   let localNormal = rotateByQuaternion(marker.orientation, input.normal / vec3f(safeScale(marker.scale.x), safeScale(marker.scale.y), safeScale(marker.scale.z)));
-  let worldPosition = scene.frame * vec4f(localPosition, 1.0);
-  let worldNormal = normalize((scene.frame * vec4f(localNormal, 0.0)).xyz);
+  let worldNormal = normalize((scene.frameNormalTransform * vec4f(localNormal, 0.0)).xyz);
   var output: VertexOutput;
-  output.position = scene.viewProjection * worldPosition;
+  output.position = scene.viewProjection * vec4f(localPosition, 1.0);
   output.normal = worldNormal;
   output.color = vec4f(srgbToLinear(marker.color.rgb), marker.color.a);
   ${options.pass === 'pick' ? `output.id = scene.pickId + ${markerIndex};` : ''}
@@ -142,9 +141,9 @@ export function createOutlineShader(options: { readonly pass: ShaderPass }): str
   const fragment =
     options.pass === 'pick'
       ? '@fragment fn fragmentMain(input: VertexOutput) -> NvePickOutput { if (input.color.a <= 0.0) { discard; } return nve_pick_output(input.id, input.position.z); }'
-      : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { if (input.color.a < 1.0) { discard; } return vec4f(input.color.rgb * input.color.a, input.color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { if (input.color.a <= 0.0 || input.color.a >= 1.0) { discard; } return nve_oit(vec4f(input.color.rgb * input.color.a, input.color.a), input.position.z); }';
+      : '@fragment fn fragmentMain(input: VertexOutput) -> @location(0) vec4f { if (!nve_alpha_is_opaque(input.color.a)) { discard; } return vec4f(input.color.rgb * input.color.a, input.color.a); } @fragment fn fragmentOit(input: VertexOutput) -> NveOitOutput { if (input.color.a <= 0.0 || nve_alpha_is_opaque(input.color.a)) { discard; } return nve_oit(vec4f(input.color.rgb * input.color.a, input.color.a), input.position.z); }';
   return /* wgsl */ `
-struct SceneUniforms { viewProjection: mat4x4f, frame: mat4x4f, ${pickFields}}
+struct SceneUniforms { viewProjection: mat4x4f, frameNormalTransform: mat4x4f, ${pickFields}}
 @group(0) @binding(0) var<uniform> scene: SceneUniforms;
 ${MARKER_WGSL}
 ${OIT_WGSL}
@@ -157,7 +156,7 @@ ${ROTATE_BY_QUATERNION_WGSL}
   let marker = nve_load_marker(input.instanceIndex);
   let localPosition = rotateByQuaternion(marker.orientation, input.position * marker.scale) + marker.position;
   var output: VertexOutput;
-  output.position = scene.viewProjection * scene.frame * vec4f(localPosition, 1.0);
+  output.position = scene.viewProjection * vec4f(localPosition, 1.0);
   output.color = vec4f(srgbToLinear(marker.outlineColor.rgb), marker.outlineColor.a);
   ${options.pass === 'pick' ? 'output.id = scene.pickId + input.instanceIndex;' : ''}
   return output;

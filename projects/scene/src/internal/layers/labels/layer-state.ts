@@ -111,7 +111,7 @@ export function publishLabelLayer(layer: HTMLElement, options?: ScenePublishOpti
     unavailableStateMessage: 'Packed label source state is unavailable.'
   });
   const sourceBytes = getPackedRecordBytes(source);
-  const candidateReady = state.buffer.sourceRecordsAreValid(sourceBytes, publication.resolved.activeCount);
+  const candidateReady = state.buffer.publicationIsValid(sourceBytes, publication);
   state.publicationError = !candidateReady;
   const textChanged = !state.publicationError && applySuccessfulLabelPublication({ publication, source, state });
   const visualChanged = packedPublicationNeedsRender(publication, state, previousPublicationError) || textChanged;
@@ -126,10 +126,13 @@ function applySuccessfulLabelPublication(options: {
 }): boolean {
   const { publication, source, state } = options;
   const { geometryChanged, resolved } = publication;
-  if (geometryChanged) state.buffer.commit(resolved.start, resolved.count);
-  const textChanged = geometryChanged
-    ? copyPublishedTexts({ count: resolved.count, source, start: resolved.start, state })
-    : false;
+  let textChanged = false;
+  if (geometryChanged) {
+    for (const range of resolved.ranges) {
+      state.buffer.commit(range.start, range.count);
+      textChanged = copyPublishedTexts({ ...range, source, state }) || textChanged;
+    }
+  }
   state.sourceCount = resolved.activeCount;
   state.buffer.setSourceCount(resolved.activeCount);
   if (textChanged) state.textVersion += 1;
