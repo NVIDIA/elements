@@ -23,7 +23,8 @@ describe('lighthouse report', () => {
   });
 
   test('typography.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['typography.css']!.kb).toBeLessThan(1.7);
+    // Includes the theme-aware text shimmer gradient, animation, and motion fallbacks.
+    expect(report.payload.css.requests['typography.css']!.kb).toBeLessThan(2.1);
   });
 
   test('view-transitions.css should remain within compressed bundle limits', async () => {
@@ -50,6 +51,7 @@ describe('lighthouse bundle report', () => {
   });
 
   test('bundles/index.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.1);
+    // Includes the typography shimmer utility.
+    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.5);
   });
 });
