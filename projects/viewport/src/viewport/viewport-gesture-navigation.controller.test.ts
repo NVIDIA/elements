@@ -3,7 +3,7 @@
 
 import { html, type ReactiveController } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { attachInternals } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 import { createFixture, removeFixture } from '@internals/testing';
 import { ViewportGestureNavigationController } from './viewport-gesture-navigation.controller.js';
 import type { ViewportPanBehavior, ViewportTransform } from './viewport.types.js';
