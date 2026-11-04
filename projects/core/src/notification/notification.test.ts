@@ -227,7 +227,7 @@ describe(`${Notification.metadata.tag} - inline group`, () => {
   });
 
   it('should not duplicate close timeout when inline notification updates while visible', async () => {
-    const notification = document.createElement('nve-notification') as Notification;
+    const notification = document.createElement('nve-notification');
     let closeCount = 0;
 
     notification.addEventListener('close', () => closeCount++);
