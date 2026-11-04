@@ -1,3 +1,9 @@
+## [2.22.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.21.1...@nvidia-elements/core-v2.22.0) (2026-11-04)
+
+### Features
+
+* **core:** add configurable tabs indicator animation duration ([0cc3093](https://github.com/NVIDIA/elements/commit/0cc3093056d6a6e24d9e8876fb444d3ccc0ba3b6))
+
 ## [2.21.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.21.0...@nvidia-elements/core-v2.21.1) (2026-11-04)
 
 ### Bug Fixes
