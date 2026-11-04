@@ -1,4 +1,5 @@
-import { readdirSync } from 'fs';
+import { existsSync, readdirSync } from 'fs';
+import { join } from 'path';
 import { archiveStarter } from '@internals/tools/project';
 import { cwd } from 'process';
 
@@ -8,9 +9,16 @@ import { cwd } from 'process';
  * - inline wireit scripts
  * - zip compress for easy download
  */
-const dirs = readdirSync(cwd(), { withFileTypes: true });
+const root = cwd();
+const dirs = readdirSync(root, { withFileTypes: true });
 for (const dir of dirs) {
-  if (dir.isDirectory() && dir.name !== 'dist' && dir.name !== 'node_modules' && dir.name !== '.wireit') {
+  if (
+    dir.isDirectory() &&
+    dir.name !== 'dist' &&
+    dir.name !== 'node_modules' &&
+    dir.name !== '.wireit' &&
+    existsSync(join(root, dir.name, 'package.json'))
+  ) {
     await archiveStarter(dir.name, 'dist');
   }
 }
