@@ -108,6 +108,7 @@
         "../../core/dist/custom-elements.json",
         "../../styles/package.json",
         "../../styles/dist/custom-elements.json",
+        "../../styles/dist/data.html.json",
         "../../themes/package.json",
         "../../themes/dist/custom-elements.json",
         "../../forms/package.json",
