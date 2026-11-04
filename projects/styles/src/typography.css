@@ -351,7 +351,7 @@ ul[nve-text~='nav'] {
 }
 
 [nve-text~='code'] {
-  background: var(--nve-sys-interaction-field-background) !important;
+  background-color: var(--nve-sys-interaction-field-background) !important;
   border-radius: var(--nve-ref-border-radius-xs) !important;
   padding: var(--nve-ref-size-50) var(--nve-ref-size-100) !important;
   color: var(--nve-sys-text-color) !important;
@@ -360,7 +360,7 @@ ul[nve-text~='nav'] {
   box-decoration-break: clone;
 
   &[nve-text~='flat'] {
-    background: transparent !important;
+    background-color: transparent !important;
   }
 }
 
@@ -371,4 +371,46 @@ ul[nve-text~='nav'] {
 [nve-text~='grow'] {
   text-fit: grow;
   width: 100%;
+}
+
+[nve-text~='shimmer'] {
+  --_shimmer-highlight: light-dark(
+    color-mix(in oklch, currentColor, transparent 80%),
+    color-mix(in oklch, currentColor, white 65%)
+  );
+  --_shimmer-edge: color-mix(in oklch, var(--_shimmer-highlight), currentColor 85%);
+  --_shimmer-middle: color-mix(in oklch, var(--_shimmer-highlight), currentColor 20%);
+  text-box: none !important;
+  /* eslint-disable-next-line @nvidia-elements/lint/no-custom-background-gradients -- Paint the moving text highlight. */
+  background-image: linear-gradient(
+    105deg,
+    currentColor 40%,
+    var(--_shimmer-edge) 43%,
+    var(--_shimmer-middle) 47%,
+    var(--_shimmer-highlight) 50%,
+    var(--_shimmer-middle) 53%,
+    var(--_shimmer-edge) 57%,
+    currentColor 60%
+  ) !important;
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: nve-text-shimmer calc(var(--nve-ref-animation-duration-400) * 2.5) linear infinite;
+
+  @media (prefers-reduced-motion: reduce), (forced-colors: active) {
+    background-image: none !important;
+    -webkit-text-fill-color: currentColor !important;
+    animation: none !important;
+  }
+
+  @media (forced-colors: active) {
+    -webkit-text-fill-color: CanvasText !important;
+  }
+}
+
+@keyframes nve-text-shimmer {
+  to {
+    background-position: 0 0;
+  }
 }

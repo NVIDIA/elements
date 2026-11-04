@@ -78,6 +78,18 @@ export const Grow = {
 }
 
 /**
+ * @summary Use shimmer text to indicate ongoing work, such as generating a response. The effect preserves text color and stops for reduced motion or forced colors.
+ */
+export const Shimmer = {
+  render: () => html`
+<div nve-layout="column gap:md" >
+  <p nve-text="body shimmer muted">Generating a response…</p>
+  <p nve-text="body shimmer">Generating a response…</p>
+</div>
+  `
+}
+
+/**
  * @summary Color variations for text to convey importance levels and ensure proper contrast in light and dark themes.
  * @tags test-case
  */
