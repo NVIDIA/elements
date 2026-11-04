@@ -12,7 +12,7 @@ export interface ScenePublishOptions {
   readonly start?: number;
 }
 
-export interface RecordPublicationRange {
+interface RecordPublicationRange {
   readonly count: number;
   readonly start: number;
 }
