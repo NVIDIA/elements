@@ -7,6 +7,7 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { state } from 'lit/decorators/state.js';
 import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/iframe/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
@@ -33,6 +34,7 @@ export class CanvasEditable extends LitElement {
   @property({ type: Boolean, attribute: 'horizontal-layout' }) horizontalLayout: boolean = false;
   @property({ type: String }) tag: string = '';
 
+  @state() private theme = '';
   @state() private showSource = false;
   @state() private editableSource: string = '';
   @state() private previewWidth: number = 500;
@@ -61,6 +63,7 @@ export class CanvasEditable extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.editableSource = this.source;
+    this.#handleThemeChange();
     void this.#loadPackageVersions();
     globalThis.document.addEventListener('nve-theme-change', this.#handleThemeChange);
   }
@@ -163,39 +166,25 @@ export class CanvasEditable extends LitElement {
   }
 
   #renderSandboxedPreview() {
-    const srcdoc = this.editableSource ?? '';
     const { elements, themes, styles: stylesUrl } = this.#bundleUrls;
+    const head = `
+      <style>
+        :root { color-scheme: light dark; }
+        html, body { margin: 0; min-height: 100%; overflow: auto; }
+        body { transition: opacity 120ms ease-out; opacity: 1; }
+        body:has(:not(:defined)) { opacity: 0; }
+        body:has([nve-popover]) { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
+      </style>
+      <script async type="module" src="${elements}"></script>
+      <link rel="stylesheet" href="${themes}" />
+      <link rel="stylesheet" href="${stylesUrl}" />
+      ${this.theme.includes('classic') ? `<link id="classic-theme-stylesheet" rel="stylesheet" href="${new URL('static/themes/classic.css', globalThis.document.baseURI).href}" />` : ''}
+    `;
     return html`
-      <iframe
-        sandbox=${'allow-scripts allow-modals allow-forms allow-popups allow-same-origin' as unknown as 'allow-scripts'}
-        .srcdoc=${`
-          <!DOCTYPE html>
-          <html nve-theme="${globalThis.document.documentElement.getAttribute('nve-theme')}" nve-transition="auto">
-            <head>
-              <style>
-                :root { color-scheme: light dark; }
-                html, body { margin: 0; min-height: 100%; }
-                body {
-                  transition: opacity 120ms ease-out;
-                  opacity: 1;
-                }
-                body:has(:not(:defined)) {
-                  opacity: 0;
-                }
-                body:has([nve-popover]) { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
-              </style>
-
-              <script async type="module" src="${elements}"></script>
-              <link rel="stylesheet" type="text/css" href="${themes}" />
-              <link rel="stylesheet" type="text/css" href="${stylesUrl}" />
-              ${globalThis.document.querySelector('#classic-theme-stylesheet') ? `<link id="classic-theme-stylesheet" rel="stylesheet" href="${new URL('static/themes/classic.css', globalThis.document.baseURI).href}" />` : ''}
-            </head>
-            <body>
-              ${srcdoc}
-            </body>
-          </html>
-        `}
-      ></iframe>
+      <nve-iframe sandbox=${`allow-scripts allow-modals allow-forms allow-popups${globalThis.location?.hostname === 'localhost' ? ' allow-same-origin' : ''}`} aria-label="Example preview" nve-theme=${this.theme}>
+        <template slot="head" .innerHTML=${head}></template>
+        <template .innerHTML=${this.editableSource}></template>
+      </nve-iframe>
     `;
   }
 
@@ -231,23 +220,8 @@ export class CanvasEditable extends LitElement {
       return html`<div class="error">Error rendering preview</div>`;
     }
   }
-  #handleThemeChange = (e: Event) => {
-    const theme = (e as CustomEvent).detail.theme;
-    const iframe = this.shadowRoot?.querySelector('iframe');
-    const iframeDocument = iframe?.contentDocument;
-    iframeDocument?.documentElement.setAttribute('nve-theme', theme);
-    if (!iframeDocument) return;
-
-    const classicStylesheet = iframeDocument.querySelector('#classic-theme-stylesheet');
-    if (theme.includes('classic') && !classicStylesheet) {
-      const link = iframeDocument.createElement('link');
-      link.id = 'classic-theme-stylesheet';
-      link.rel = 'stylesheet';
-      link.href = new URL('static/themes/classic.css', globalThis.document.baseURI).href;
-      iframeDocument.head.append(link);
-    } else if (!theme.includes('classic')) {
-      classicStylesheet?.remove();
-    }
+  #handleThemeChange = () => {
+    this.theme = globalThis.document.documentElement.getAttribute('nve-theme') ?? '';
   };
 
   #handleSourceClick() {

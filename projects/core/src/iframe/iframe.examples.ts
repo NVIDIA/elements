@@ -112,11 +112,11 @@ export const DynamicallyUpdatedContent = {
 };
 
 /**
- * @summary Allows scripts and same-origin access for trusted previews that need parent-origin resources. Use explicit sandbox permissions to enable only the capabilities your content needs.
+ * @summary Use explicit sandbox permissions to enable only the capabilities your content needs.
  */
 export const Sandbox = {
   render: () => html`
-<nve-iframe sandbox="allow-scripts allow-same-origin" aria-label="Trusted preview" style="--width: 256px; --height: 128px">
+<nve-iframe sandbox="allow-scripts" aria-label="Trusted preview" style="--width: 256px; --height: 128px">
   <template><p nve-text="body">Trusted preview with explicit sandbox permissions.</p></template>
 </nve-iframe>
   `
