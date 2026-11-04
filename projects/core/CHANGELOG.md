@@ -1,3 +1,9 @@
+## [2.22.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.2...@nvidia-elements/core-v2.22.3) (2026-11-04)
+
+### Bug Fixes
+
+* **core:** drop obsolete formdata polyfill ([7831582](https://github.com/NVIDIA/elements/commit/78315824a2a9bfb81a615986a181d695b5bf6acc))
+
 ## [2.22.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.1...@nvidia-elements/core-v2.22.2) (2026-11-04)
 
 ### Bug Fixes
