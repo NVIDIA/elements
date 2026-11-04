@@ -3,7 +3,7 @@
 
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import {
   isMediaCommand,
   mediaCommands,
