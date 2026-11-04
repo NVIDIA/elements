@@ -39,11 +39,6 @@
       "count": 4
     }
   },
-  "src/pagination/pagination.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/progress-bar/progress-bar.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 3

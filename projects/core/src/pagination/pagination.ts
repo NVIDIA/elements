@@ -244,7 +244,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
     const select = this.shadowRoot!.querySelector('select');
     if (label && select) {
       this.#resizeObserver = new ResizeObserver(
-        entries => (select!.style.minWidth = `${entries[0]!.contentRect.width + 36}px`)
+        entries => (select.style.minWidth = `${entries[0]!.contentRect.width + 36}px`)
       );
       this.#resizeObserver.observe(label);
     }
