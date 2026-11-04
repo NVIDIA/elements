@@ -40,7 +40,7 @@ Choose the appropriate base class:
 ```typescript
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './component-name.css?inline';
 
 /**

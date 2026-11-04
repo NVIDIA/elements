@@ -4,7 +4,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { state } from 'lit/decorators/state.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/divider/define.js';
