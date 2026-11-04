@@ -6,7 +6,7 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './markdown.css?inline';
 
 // Type definitions for the lazy-loaded MarkdownIt module
