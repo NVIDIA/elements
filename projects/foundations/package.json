@@ -71,6 +71,14 @@
       "types": "./dist/internal/define/index.d.ts",
       "default": "./dist/internal/define/index.js"
     },
+    "./internal/decorators": {
+      "types": "./dist/internal/decorators/index.d.ts",
+      "default": "./dist/internal/decorators/index.js"
+    },
+    "./internal/decorators/index.js": {
+      "types": "./dist/internal/decorators/index.d.ts",
+      "default": "./dist/internal/decorators/index.js"
+    },
     "./internal/styles": {
       "types": "./dist/internal/styles/index.d.ts",
       "default": "./dist/internal/styles/index.js"

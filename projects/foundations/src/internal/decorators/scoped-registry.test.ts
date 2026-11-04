@@ -1,0 +1,140 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+import { LitElement } from 'lit';
+import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, removeFixture } from '@internals/testing';
+import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
+import type { ElementDefinition } from '@nvidia-elements/foundations/internal/define';
+import { supportsScopedRegistry } from '@nvidia-elements/foundations/internal/define';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+
+const uid = Math.random().toString(36).slice(2, 8);
+let counter = 0;
+
+function createMockElement(overrides?: Pick<Partial<ElementDefinition>, 'shadowRootOptions'>): ElementDefinition {
+  const tag = `nve-test-scoped-${uid}-${counter++}`;
+  const el = class extends HTMLElement {
+    static metadata = { version: '0.0.0', tag };
+  };
+  if (overrides?.shadowRootOptions) {
+    Object.defineProperty(el, 'shadowRootOptions', {
+      configurable: true,
+      value: overrides.shadowRootOptions
+    });
+  }
+  return el;
+}
+
+describe('scopedRegistry', () => {
+  let savedScopedRegistry: { [key: string]: CustomElementRegistry };
+
+  beforeEach(() => {
+    savedScopedRegistry = GlobalStateService.state.scopedRegistry;
+  });
+
+  afterEach(() => {
+    GlobalStateService.state.scopedRegistry = savedScopedRegistry;
+  });
+
+  it('should initialize scopedRegistry to an empty object if undefined', () => {
+    GlobalStateService.state.scopedRegistry = undefined!;
+
+    const element = createMockElement();
+    scopedRegistry()(element as unknown as Function);
+
+    expect(GlobalStateService.state.scopedRegistry).toBeDefined();
+    expect(typeof GlobalStateService.state.scopedRegistry).toBe('object');
+  });
+
+  it('should not overwrite an existing scopedRegistry', () => {
+    const element = createMockElement();
+    scopedRegistry()(element as unknown as Function);
+
+    expect(GlobalStateService.state.scopedRegistry).toBe(savedScopedRegistry);
+  });
+
+  it.skipIf(!supportsScopedRegistry)(
+    'should create a registry for a package with a different version from foundations',
+    () => {
+      class VersionedElement extends HTMLElement {
+        static readonly metadata = { tag: `nve-test-versioned-${uid}-${counter++}`, version: '9.8.7' };
+      }
+
+      scopedRegistry()(VersionedElement);
+
+      const registry = GlobalStateService.state.scopedRegistry['9.8.7'];
+      expect(registry).toBeDefined();
+      expect(registry?.get(VersionedElement.metadata.tag)).toBe(VersionedElement);
+      expect(VersionedElement).toHaveProperty('shadowRootOptions.customElementRegistry', registry);
+    }
+  );
+
+  it('should register element in its version registry', () => {
+    const element = createMockElement();
+    const registry = GlobalStateService.state.scopedRegistry['0.0.0'];
+
+    scopedRegistry()(element as unknown as Function);
+
+    expect(registry?.get(element.metadata.tag)).toBe(element);
+  });
+
+  it.skipIf(!supportsScopedRegistry)('should set shadowRootOptions with customElementRegistry', () => {
+    const element = createMockElement();
+
+    scopedRegistry()(element as unknown as Function);
+
+    expect(element.shadowRootOptions).toBeDefined();
+    expect(element.shadowRootOptions!.customElementRegistry).toBe(GlobalStateService.state.scopedRegistry['0.0.0']);
+  });
+
+  it.skipIf(!supportsScopedRegistry)('should default to mode open when no existing shadowRootOptions', () => {
+    const element = createMockElement();
+
+    scopedRegistry()(element as unknown as Function);
+
+    expect((element.shadowRootOptions as ShadowRootInit).mode).toBe('open');
+  });
+
+  it.skipIf(!supportsScopedRegistry)('should preserve existing shadowRootOptions', () => {
+    const existing = { mode: 'closed' as const, customElementRegistry: null };
+    const element = createMockElement({ shadowRootOptions: existing });
+
+    scopedRegistry()(element as unknown as Function);
+
+    expect((element.shadowRootOptions as ShadowRootInit).mode).toBe('closed');
+  });
+
+  it.skipIf(!supportsScopedRegistry)('should use the scoped shadow root as the Lit creation scope', async () => {
+    const child = createMockElement();
+    const childTag = unsafeStatic(child.metadata.tag);
+    const hostTag = `nve-test-scoped-host-${uid}-${counter++}`;
+    const host = unsafeStatic(hostTag);
+
+    class HostElement extends LitElement {
+      static metadata = { version: '0.0.0', tag: hostTag };
+      static elementDefinitions = { [child.metadata.tag]: child };
+
+      render() {
+        return staticHtml`<${childTag}></${childTag}>`;
+      }
+    }
+
+    scopedRegistry()(HostElement as unknown as Function);
+    customElements.define(hostTag, HostElement);
+
+    const fixture = await createFixture(staticHtml`<${host}></${host}>`);
+    const element = fixture.querySelector<LitElement>(hostTag)!;
+
+    try {
+      await element.updateComplete;
+
+      expect(typeof element.renderOptions.creationScope?.importNode).toBe('function');
+      expect(element.shadowRoot!.querySelector(child.metadata.tag)).toBeInstanceOf(child);
+    } finally {
+      removeFixture(fixture);
+    }
+  });
+});
