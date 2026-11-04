@@ -103,6 +103,7 @@ export class TabsItem extends ButtonFormControlMixin(LitElement) {
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for tab-item
  * @cssprop --gap
+ * @cssprop --indicator-animation-duration - Duration of selection indicator movement.
  * @cssprop --indicator-background
  * @cssprop --indicator-border-radius
  * @cssprop --indicator-height

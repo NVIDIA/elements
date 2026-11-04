@@ -7,6 +7,7 @@ import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
 import { getAnchorNames } from '@nvidia-elements/core/internal';
+import reducedMotionStyles from '@nvidia-elements/themes/reduced-motion.css?inline';
 import '@nvidia-elements/core/tabs/define.js';
 
 describe(Tabs.metadata.tag, () => {
@@ -53,6 +54,41 @@ describe(Tabs.metadata.tag, () => {
     expect(parentElement.vertical).toBe(false);
     expect(parentElement.borderless).toBe(false);
     expect(parentElement.behaviorSelect).toBe(false);
+  });
+
+  it.each([
+    [false, 'left'],
+    [true, 'top']
+  ] as const)('should configure indicator movement with vertical=%s', async (vertical, transitionProperty) => {
+    parentElement.vertical = vertical;
+    await elementIsStable(parentElement);
+
+    expect(getComputedStyle(parentElement, '::after').transitionProperty).toBe(transitionProperty);
+
+    fixture.style.setProperty('--nve-ref-animation-duration-150', '250ms');
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0.25s');
+
+    parentElement.style.setProperty('--indicator-animation-duration', '75ms');
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0.075s');
+  });
+
+  it.each([false, true])('should allow immediate indicator movement with vertical=%s', async vertical => {
+    parentElement.vertical = vertical;
+    await elementIsStable(parentElement);
+
+    parentElement.style.setProperty('--indicator-animation-duration', '0ms');
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0s');
+  });
+
+  it.each([false, true])('should preserve reduced-motion timing with vertical=%s', async vertical => {
+    const themeStyles = document.createElement('style');
+    themeStyles.textContent = reducedMotionStyles;
+    fixture.append(themeStyles);
+    fixture.setAttribute('nve-theme', 'reduced-motion');
+    parentElement.vertical = vertical;
+    await elementIsStable(parentElement);
+
+    expect(getComputedStyle(parentElement, '::after').transitionDuration).toBe('0s');
   });
 
   it('should handle behaviorSelect via clicking', async () => {
