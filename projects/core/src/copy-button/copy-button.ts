@@ -4,7 +4,8 @@
 import { html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { useStyles, scopedRegistry } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Button } from '@nvidia-elements/core/button';
 import { Icon } from '@nvidia-elements/core/icon';

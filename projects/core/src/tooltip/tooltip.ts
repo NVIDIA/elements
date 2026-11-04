@@ -6,13 +6,13 @@ import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
 import {
-  attachInternals,
   audit,
   excessiveInstanceLimit,
   popoverStyles,
-  TypeNativePopoverController,
-  useStyles
+  TypeNativePopoverController
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './tooltip.css?inline';
 
 /**

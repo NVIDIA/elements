@@ -6,13 +6,9 @@ import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
 import type { Color, Container, Prominence, SupportStatus } from '@nvidia-elements/core/internal';
-import {
-  attachInternals,
-  useStyles,
-  supportStateStyles,
-  audit,
-  colorStateStyles
-} from '@nvidia-elements/core/internal';
+import { supportStateStyles, audit, colorStateStyles } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 

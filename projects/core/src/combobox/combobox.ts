@@ -12,10 +12,10 @@ import {
   focusElementTimeout,
   getDisplayValue,
   getElementUpdate,
-  getPropertyChanges,
-  scopedRegistry,
-  useStyles
+  getPropertyChanges
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';

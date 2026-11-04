@@ -3,7 +3,8 @@
 
 import { html, isServer, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { state } from 'lit/decorators/state.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';

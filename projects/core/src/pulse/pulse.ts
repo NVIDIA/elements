@@ -4,7 +4,8 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size } from '@nvidia-elements/core/internal';
-import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './pulse.css?inline';
 

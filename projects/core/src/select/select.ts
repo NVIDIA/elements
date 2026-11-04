@@ -8,12 +8,12 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   focusElementTimeout,
   onListboxActivate,
-  useStyles,
   onChildListMutation,
   getElementUpdate,
-  scopedRegistry,
   appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { i18n, I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';

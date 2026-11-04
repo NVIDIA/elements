@@ -5,7 +5,8 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { Icon } from '@nvidia-elements/core/icon';
-import { useStyles, scopedRegistry } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './sort-button.css?inline';
 

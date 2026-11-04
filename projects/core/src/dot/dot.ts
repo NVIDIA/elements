@@ -4,7 +4,9 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size, SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, statusStateStyles, supportStateStyles, useStyles } from '@nvidia-elements/core/internal';
+import { statusStateStyles, supportStateStyles } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './dot.css?inline';
 
 /**

@@ -8,7 +8,8 @@ import { state } from 'lit/decorators/state.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { useStyles, shiftLeft } from '@nvidia-elements/core/internal';
+import { shiftLeft } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './codeblock.css?inline';
 
 import hljs from 'highlight.js/lib/core';

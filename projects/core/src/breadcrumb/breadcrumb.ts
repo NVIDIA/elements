@@ -4,15 +4,10 @@
 import { html, LitElement, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import {
-  useStyles,
-  keyNavigationList,
-  attachInternals,
-  generateId,
-  isFocusable,
-  typeSSR,
-  scopedRegistry
-} from '@nvidia-elements/core/internal';
+import { keyNavigationList, generateId, isFocusable, typeSSR } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@nvidia-elements/core/icon';
 import type { Button } from '@nvidia-elements/core/button';

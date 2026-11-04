@@ -4,7 +4,9 @@
 import { html } from 'lit';
 import type { PropertyValues } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { useStyles, getElementUpdate, scopedRegistry } from '@nvidia-elements/core/internal';
+import { getElementUpdate } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './star-rating.css?inline';

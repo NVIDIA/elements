@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { CSSResult } from 'lit';
-import { audit, typeSSR, useStyles } from '@nvidia-elements/core/internal';
+import { audit, typeSSR } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { ControlGroup } from '@nvidia-elements/core/forms';
 import styles from './radio-group.css?inline';
 

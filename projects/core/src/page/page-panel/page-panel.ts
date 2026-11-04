@@ -4,12 +4,9 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size } from '@nvidia-elements/core/internal';
-import {
-  appendRootNodeStyle,
-  attachInternals,
-  TypeExpandableController,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle, TypeExpandableController } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './page-panel.css?inline';
 import globalStyles from './page-panel.global.css?inline';
 

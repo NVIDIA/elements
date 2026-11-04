@@ -3,7 +3,8 @@
 
 import { html, LitElement, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { audit, useStyles } from '@nvidia-elements/core/internal';
+import { audit } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './tabs-item-group.css?inline';
 
 /**

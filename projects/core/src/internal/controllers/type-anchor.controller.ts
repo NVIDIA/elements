@@ -4,7 +4,7 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { removeEmptyTextNode } from '../utils/dom.js';
-import { attachInternals } from '../utils/a11y.js';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 
 /**
  * Adds anchor/link support for interactive custom elements.

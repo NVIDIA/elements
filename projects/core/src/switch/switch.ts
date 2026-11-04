@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { CSSResult } from 'lit';
-import { audit, hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { audit, hostAttr } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './switch.css?inline';
 
