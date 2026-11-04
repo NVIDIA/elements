@@ -18,7 +18,15 @@ describe(Iframe.metadata.tag, () => {
 
     expect(result.includes('shadowroot="open"')).toBe(true);
     expect(result.includes('nve-iframe')).toBe(true);
-    expect(result.includes('sandbox="allow-scripts"')).toBe(true);
+    expect(result.includes('sandbox=""')).toBe(true);
     expect(result.includes('allow-same-origin')).toBe(false);
   });
+
+  it.each(['', 'allow-scripts'])(
+    'should render sandbox permissions %s',
+    async sandbox => {
+      const result = await ssrRunner.render(html`<nve-iframe sandbox=${sandbox}></nve-iframe>`);
+      expect(result).toContain(`sandbox="${sandbox}"`);
+    }
+  );
 });

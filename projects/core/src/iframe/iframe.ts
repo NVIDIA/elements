@@ -3,6 +3,7 @@
 
 import { LitElement, html, type PropertyValues } from 'lit';
 import { useStyles } from '@nvidia-elements/foundations/internal/styles';
+import { property } from 'lit/decorators/property.js';
 import styles from './iframe.css?inline';
 
 type ResizeMessage = {
@@ -103,12 +104,28 @@ const iframeScript = (documentId: number) => /* html */ `
  * @beta
  */
 export class Iframe extends LitElement {
+  /**
+   * Space-separated native iframe sandbox permissions. The empty default applies all restrictions.
+   * Removing the attribute restores the empty default. Changes reload the iframe document.
+   * Include `allow-scripts` for automatic sizing and live theme synchronization.
+   * Combining `allow-scripts` and `allow-same-origin` permits access to the parent origin.
+   */
+  @property({ type: String, converter: { fromAttribute: (value: string | null) => value ?? '' } })
+  sandbox = '';
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
     tag: 'nve-iframe',
     version: '0.0.0'
   };
+
+  /**
+   * Complete HTML document rendered without the template wrapper, theme synchronization,
+   * or automatic sizing. Set explicit dimensions with --width and --height.
+   * Unset this property to restore the head and body templates. An empty string renders a blank document.
+   */
+  @property({ type: String }) srcdoc?: string;
 
   static get observedAttributes() {
     return [...super.observedAttributes, 'aria-label'];
@@ -139,8 +156,9 @@ export class Iframe extends LitElement {
   render() {
     return html`<iframe
       internal-host
+      class=${typeof this.srcdoc === 'string' ? 'document' : ''}
       title=${this.ariaLabel ?? ''}
-      sandbox="allow-scripts"
+      sandbox=${this.sandbox}
       @load=${this.#handleLoad}
     ></iframe>`;
   }
@@ -170,7 +188,13 @@ export class Iframe extends LitElement {
     this.#setupTemplateHeadUpdates();
     this.#setupLightDomUpdates();
     this.#setupThemeUpdates();
-    this.#updateSource();
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    if (props.has('sandbox') || props.has('srcdoc')) {
+      this.#updateSource();
+    }
   }
 
   disconnectedCallback() {
@@ -193,13 +217,20 @@ export class Iframe extends LitElement {
       return;
     }
 
-    // Start each document with the initial height rather than the previous resize result.
     this.#documentId++;
-    this.style.setProperty('--_height', '0px');
-    if (CSS.supports('frame-sizing', 'content-height')) {
-      // Keep the initial viewport until the new document finishes loading.
-      iframe.style.height = getComputedStyle(iframe).height;
+    if (typeof this.srcdoc === 'string') {
+      this.#resetHeight('');
+      iframe.style.removeProperty('height');
+      iframe.srcdoc = this.srcdoc;
+      return;
     }
+    this.#updateTemplateSource(iframe);
+  }
+
+  #updateTemplateSource(iframe: HTMLIFrameElement) {
+    const scriptsAllowed = this.sandbox.toLowerCase().split(/\s+/).includes('allow-scripts');
+    // Without resize scripts, leave the height to CSS.
+    this.#resetHeight(scriptsAllowed ? '0px' : '');
     const theme = this.#themeHost?.getAttribute('nve-theme') ?? '';
     iframe.srcdoc = `
       <!DOCTYPE html>
@@ -216,17 +247,28 @@ export class Iframe extends LitElement {
       </head>
       <body nve-text="body">
         ${this.#template?.innerHTML ?? ''}
-        ${iframeScript(this.#documentId)}
+        ${scriptsAllowed ? iframeScript(this.#documentId) : ''}
       </body>
       </html>
     `;
+  }
+
+  #resetHeight(height: string) {
+    this.style.setProperty('--_height', height);
+    const iframe = this.#iframe;
+    if (iframe && CSS.supports('frame-sizing', 'content-height')) {
+      // Keep the initial viewport until the new document finishes loading.
+      iframe.style.height = getComputedStyle(iframe).height;
+    }
   }
 
   #setupTemplateUpdates() {
     this.#templateObserver?.disconnect();
     const template = this.#template;
     if (template) {
-      this.#templateObserver = new MutationObserver(() => this.#updateSource());
+      this.#templateObserver = new MutationObserver(() => {
+        if (typeof this.srcdoc !== 'string') this.#updateSource();
+      });
       this.#templateObserver.observe(template.content, {
         childList: true,
         subtree: true,
@@ -242,7 +284,9 @@ export class Iframe extends LitElement {
     this.#headTemplateObserver?.disconnect();
     const headTemplate = this.#headTemplate;
     if (headTemplate) {
-      this.#headTemplateObserver = new MutationObserver(() => this.#updateSource());
+      this.#headTemplateObserver = new MutationObserver(() => {
+        if (typeof this.srcdoc !== 'string') this.#updateSource();
+      });
       this.#headTemplateObserver.observe(headTemplate.content, {
         childList: true,
         subtree: true,
@@ -259,7 +303,7 @@ export class Iframe extends LitElement {
       this.#lightDomObserver = new MutationObserver(() => {
         this.#setupTemplateUpdates();
         this.#setupTemplateHeadUpdates();
-        this.#updateSource();
+        if (typeof this.srcdoc !== 'string') this.#updateSource();
       });
       this.#lightDomObserver.observe(this, { childList: true });
     }
@@ -285,6 +329,7 @@ export class Iframe extends LitElement {
   };
 
   #syncTheme = () => {
+    if (typeof this.srcdoc === 'string') return;
     const theme = this.#themeHost?.getAttribute('nve-theme');
     const contentWindow = this.#iframe?.contentWindow;
     if (theme === null || theme === undefined || contentWindow === null || contentWindow === undefined) {
@@ -292,11 +337,12 @@ export class Iframe extends LitElement {
     }
 
     const message: ThemeMessage = { theme };
-    // Sandboxed srcdoc documents have opaque origins, so authenticate messages by their window reference.
+    // The sandbox can give srcdoc documents opaque origins; authenticate messages by their window reference.
     contentWindow.postMessage(JSON.stringify(message), '*');
   };
 
   #handleResizeMessage = (event: MessageEvent<unknown>) => {
+    if (typeof this.srcdoc === 'string') return;
     const iframe = this.#iframe;
     if (iframe === null || event.source !== iframe.contentWindow || typeof event.data !== 'string') {
       return;
