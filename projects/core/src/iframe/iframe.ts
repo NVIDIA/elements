@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { LitElement, html, type PropertyValues } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './iframe.css?inline';
 
 type ResizeMessage = {

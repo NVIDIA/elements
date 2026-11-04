@@ -8,9 +8,9 @@ import {
   appendRootNodeStyle,
   getFlattenedFocusableItems,
   getActiveElement,
-  useStyles,
   audit
 } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import type { Dropdown } from '@nvidia-elements/core/dropdown';
 import globalStyles from './dropdown-group.global.css?inline';
 

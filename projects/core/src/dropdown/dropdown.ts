@@ -10,10 +10,10 @@ import {
   audit,
   excessiveInstanceLimit,
   popoverStyles,
-  scopedRegistry,
-  TypeNativePopoverController,
-  useStyles
+  TypeNativePopoverController
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './dropdown.css?inline';
 

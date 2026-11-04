@@ -5,14 +5,9 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import {
-  appendRootNodeStyle,
-  attachInternals,
-  audit,
-  keyNavigationList,
-  onChildListMutation,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle, audit, keyNavigationList, onChildListMutation } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { updateNodeSelection } from './utils.js';
 import { TreeNode } from './tree-node.js';
 import styles from './tree.css?inline';

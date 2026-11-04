@@ -7,7 +7,8 @@ import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@internals/testing';
 import type { PopoverAlign, PopoverPosition } from '@nvidia-elements/core/internal';
-import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
+import { popoverStyles, TypeNativePopoverController } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 

@@ -7,15 +7,15 @@ import { property } from 'lit/decorators/property.js';
 import { Icon } from '@nvidia-elements/core/icon';
 import type { TaskStatus, SupportStatus, Color, Prominence } from '@nvidia-elements/core/internal';
 import {
-  useStyles,
   statusIcons,
   statusStateStyles,
   supportStateStyles,
   colorStateStyles,
-  attachInternals,
-  typeSSR,
-  scopedRegistry
+  typeSSR
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './badge.css?inline';
 
 /**

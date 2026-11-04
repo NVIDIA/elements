@@ -3,12 +3,6 @@
 
 import { generateId } from './dom.js';
 
-export function attachInternals(element: HTMLElement & { _internals?: ElementInternals }) {
-  if (element._internals === undefined) {
-    element._internals = element.attachInternals();
-  }
-}
-
 export function associateLabel(label: HTMLLabelElement, input: HTMLInputElement) {
   if (label && input) {
     input.id = input.id ? input.id : generateId();

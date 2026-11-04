@@ -5,7 +5,8 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 
-import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 
 import type { WorkspaceHeaderConfiguration } from '../utils/presentation/header-configuration.utils.js';
 

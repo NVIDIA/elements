@@ -8,15 +8,15 @@ import { Icon } from '@nvidia-elements/core/icon';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import type { SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
 import {
-  attachInternals,
   statusIcons,
   TypeClosableController,
-  useStyles,
   statusStateStyles,
   supportStateStyles,
-  appendRootNodeStyle,
-  scopedRegistry
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import globalStyles from './alert.global.css?inline';
 import styles from './alert.css?inline';

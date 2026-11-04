@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { CSSResult } from 'lit';
-import { useStyles, appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { ControlGroup } from '@nvidia-elements/core/forms';
 import globalStyles from './input-group.global.css?inline';
 import styles from './input-group.css?inline';

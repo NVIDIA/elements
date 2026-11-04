@@ -3,7 +3,7 @@
 
 import { html, LitElement } from 'lit';
 
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 
 import styles from './panel-content.css?inline';
 

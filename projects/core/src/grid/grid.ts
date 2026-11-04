@@ -8,12 +8,12 @@ import {
   keyNavigationGrid,
   stateScroll,
   type StateScrollConfig,
-  useStyles,
-  attachInternals,
   appendRootNodeStyle,
   generateId,
   audit
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { GridPlaceholder } from './placeholder/placeholder.js';
 import { GridHeader } from './header/header.js';
 import { GridColumn } from './column/column.js';

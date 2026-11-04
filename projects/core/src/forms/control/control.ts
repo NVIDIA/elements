@@ -5,8 +5,6 @@ import type { TemplateResult } from 'lit';
 import { LitElement, html, nothing, isServer } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
-  attachInternals,
-  useStyles,
   associateLabel,
   associateAriaDescribedBy,
   associateDataList,
@@ -15,6 +13,8 @@ import {
   hostAttr,
   typeSSR
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import type { ControlMessage } from '../control-message/control-message.js';
 import {

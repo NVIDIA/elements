@@ -5,7 +5,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Color } from '@nvidia-elements/core/internal';
 import { colorStateStyles, appendRootNodeStyle } from '@nvidia-elements/core/internal';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './chat-message.css?inline';
 import globalStyles from './chat-message.global.css?inline';
 

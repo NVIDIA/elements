@@ -6,14 +6,9 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { state } from 'lit/decorators/state.js';
-import {
-  attachInternals,
-  audit,
-  generateId,
-  sameOrderedStringArray,
-  uniqueNonEmptyStrings,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { audit, generateId, sameOrderedStringArray, uniqueNonEmptyStrings } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Tabs, type TabsItem } from './tabs.js';
 import styles from './tabs-group.css?inline';
 import { getTabItems } from './utils.js';

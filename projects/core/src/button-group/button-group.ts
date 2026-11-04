@@ -6,13 +6,9 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { KeynavListConfig, Interaction, Size } from '@nvidia-elements/core/internal';
-import {
-  attachInternals,
-  keyNavigationList,
-  useStyles,
-  audit,
-  appendRootNodeStyle
-} from '@nvidia-elements/core/internal';
+import { keyNavigationList, audit, appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
 import type { Button } from '@nvidia-elements/core/button';
 import type { Divider } from '@nvidia-elements/core/divider';

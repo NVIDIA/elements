@@ -3,7 +3,7 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, generateId } from '../utils/dom.js';
-import { attachInternals } from '../utils/a11y.js';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 import { focusElement } from '../utils/focus.js';
 import { getHostAnchor, getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
 import type { InterestEvent, PopoverType } from '../types/index.js';
