@@ -1035,7 +1035,6 @@
   "optionalDependencies": {
     "@lit-labs/scoped-registry-mixin": "catalog:publish",
     "@webcomponents/scoped-custom-element-registry": "catalog:publish",
-    "construct-style-sheets-polyfill": "catalog:publish",
     "element-internals-polyfill": "catalog:publish"
   },
   "devDependencies": {

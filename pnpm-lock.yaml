@@ -333,9 +333,6 @@ catalogs:
     '@webcomponents/scoped-custom-element-registry':
       specifier: ^0.0.10
       version: 0.0.10
-    construct-style-sheets-polyfill:
-      specifier: ^3.1.0
-      version: 3.1.0
     element-internals-polyfill:
       specifier: ^3.0.2
       version: 3.0.2
@@ -726,9 +723,6 @@ importers:
       '@webcomponents/scoped-custom-element-registry':
         specifier: catalog:publish
         version: 0.0.10
-      construct-style-sheets-polyfill:
-        specifier: catalog:publish
-        version: 3.1.0
       element-internals-polyfill:
         specifier: catalog:publish
         version: 3.0.2
@@ -8366,9 +8360,6 @@ packages:
   consola@3.4.2:
     resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
     engines: {node: ^14.18.0 || >=16.10.0}
-
-  construct-style-sheets-polyfill@3.1.0:
-    resolution: {integrity: sha512-HBLKP0chz8BAY6rBdzda11c3wAZeCZ+kIG4weVC2NM3AXzxx09nhe8t0SQNdloAvg5GLuHwq/0SPOOSPvtCcKw==}
 
   content-disposition@1.1.0:
     resolution: {integrity: sha512-5jRCH9Z/+DRP7rkvY83B+yGIGX96OYdJmzngqnw2SBSxqCFPd0w2km3s5iawpGX8krnwSGmF0FW5Nhr0Hfai3g==}
@@ -20187,9 +20178,6 @@ snapshots:
   connect-history-api-fallback@2.0.0: {}
 
   consola@3.4.2: {}
-
-  construct-style-sheets-polyfill@3.1.0:
-    optional: true
 
   content-disposition@1.1.0: {}
 
