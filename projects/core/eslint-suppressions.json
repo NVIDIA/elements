@@ -44,11 +44,6 @@
       "count": 3
     }
   },
-  "src/progress-ring/progress-ring.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/select/select.test.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
