@@ -765,7 +765,7 @@ describe(`${Select.metadata.tag}: size`, () => {
     await elementIsStable(element);
 
     const input = element.shadowRoot.querySelector<HTMLElement>('[input]') as HTMLElement;
-    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag) as NodeListOf<MenuItem>;
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     const inputBottom =
       input.getBoundingClientRect().bottom - Number.parseFloat(getComputedStyle(input).borderBottomWidth);
     const lastItemBottom = items[items.length - 1].getBoundingClientRect().bottom;
