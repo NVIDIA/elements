@@ -8,19 +8,19 @@ describe('lighthouse report', () => {
   test('@nvidia-elements/code JS Bundles should remain within compressed bundle limits', async () => {
     const report = await lighthouseRunner.getReport('bundles', /* html */`
       <script type="module">
-      import('@nvidia-elements/code/codeblock/languages/bash.js');
-      import('@nvidia-elements/code/codeblock/languages/css.js');
-      import('@nvidia-elements/code/codeblock/languages/go.js');
-      import('@nvidia-elements/code/codeblock/languages/html.js');
-      import('@nvidia-elements/code/codeblock/languages/javascript.js');
-      import('@nvidia-elements/code/codeblock/languages/json.js');
-      import('@nvidia-elements/code/codeblock/languages/markdown.js');
-      import('@nvidia-elements/code/codeblock/languages/python.js');
-      import('@nvidia-elements/code/codeblock/languages/toml.js');
-      import('@nvidia-elements/code/codeblock/languages/typescript.js');
-      import('@nvidia-elements/code/codeblock/languages/xml.js');
-      import('@nvidia-elements/code/codeblock/languages/yaml.js');
-      import('@nvidia-elements/code/codeblock/define.js');
+      import('@nvidia-elements/code/code-block/languages/bash.js');
+      import('@nvidia-elements/code/code-block/languages/css.js');
+      import('@nvidia-elements/code/code-block/languages/go.js');
+      import('@nvidia-elements/code/code-block/languages/html.js');
+      import('@nvidia-elements/code/code-block/languages/javascript.js');
+      import('@nvidia-elements/code/code-block/languages/json.js');
+      import('@nvidia-elements/code/code-block/languages/markdown.js');
+      import('@nvidia-elements/code/code-block/languages/python.js');
+      import('@nvidia-elements/code/code-block/languages/toml.js');
+      import('@nvidia-elements/code/code-block/languages/typescript.js');
+      import('@nvidia-elements/code/code-block/languages/xml.js');
+      import('@nvidia-elements/code/code-block/languages/yaml.js');
+      import('@nvidia-elements/code/code-block/define.js');
       </script>
     `);
 

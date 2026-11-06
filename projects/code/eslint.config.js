@@ -9,7 +9,7 @@ export default [
   ...litConfig,
   ...jsonConfig,
   {
-    files: ['src/codeblock/languages/**/*.ts'],
+    files: ['src/code-block/languages/**/*.ts'],
     rules: {
       'local-typescript/require-unit-test': 'off'
     }

@@ -4,7 +4,7 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import type { CodeBlock } from '@nvidia-elements/code/codeblock';
+import type { CodeBlock } from '@nvidia-elements/code/code-block';
 // eslint-disable-next-line no-restricted-imports -- Verify the emitted bundle rather than the source entrypoint.
 import '../dist/bundles/index.js';
 
@@ -13,8 +13,8 @@ describe('cdn bundle', () => {
   let element: CodeBlock;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<nve-codeblock></nve-codeblock>`);
-    element = fixture.querySelector('nve-codeblock') as CodeBlock;
+    fixture = await createFixture(html`<nve-code-block></nve-code-block>`);
+    element = fixture.querySelector('nve-code-block') as CodeBlock;
     await elementIsStable(element);
   });
 
@@ -23,7 +23,9 @@ describe('cdn bundle', () => {
   });
 
   it('should register bundled custom elements', () => {
-    expect(customElements.get('nve-codeblock')).toBeDefined();
+    for (const tag of ['nve-code-block', 'nve-codeblock', 'nve-code-block-header', 'nve-code-block-footer']) {
+      expect(customElements.get(tag)).toBeDefined();
+    }
   });
 
   it('should register bundled languages', async () => {

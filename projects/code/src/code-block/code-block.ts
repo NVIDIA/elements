@@ -10,7 +10,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import { shiftLeft } from '@nvidia-elements/core/internal';
 import { useStyles } from '@nvidia-elements/foundations/internal/styles';
-import styles from './codeblock.css?inline';
+import styles from './code-block.css?inline';
 
 import hljs from 'highlight.js/lib/core';
 import shell from 'highlight.js/lib/languages/shell';
@@ -18,13 +18,15 @@ import shell from 'highlight.js/lib/languages/shell';
 hljs.registerLanguage('shell', shell);
 
 /**
- * @element nve-codeblock
- * @description A container for content representing programming languages.
- * @documentation https://nvidia.github.io/elements/docs/code/codeblock/
+ * @element nve-code-block
+ * @description A container for source code with optional header and footer companions that remain visible while code scrolls.
+ * @documentation https://nvidia.github.io/elements/docs/code/code-block/
  * @since 0.1.0
- * @entrypoint \@nvidia-elements/code/codeblock
+ * @entrypoint \@nvidia-elements/code/code-block
  * @slot - source code as text, a `<template>`, or a `<pre><code>` block
- * @slot actions - slot for action bar
+ * @slot header - Optional `nve-code-block-header` above the source scroller.
+ * @slot footer - Optional `nve-code-block-footer` below the source scroller.
+ * @slot actions - Action controls overlaid at the start of the code area.
  * @cssprop --background
  * @cssprop --padding
  * @cssprop --border-radius
@@ -36,7 +38,7 @@ hljs.registerLanguage('shell', shell);
  */
 export class CodeBlock extends LitElement implements ContainerElement {
   static readonly metadata = {
-    tag: 'nve-codeblock',
+    tag: 'nve-code-block',
     version: '0.0.0'
   };
 
@@ -87,7 +89,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
 
   get #source(): string | undefined {
     const textContent = this.shadowRoot
-      ?.querySelector('slot')
+      ?.querySelector<HTMLSlotElement>('slot:not([name])')
       ?.assignedNodes()
       .reduce((p: string[], n) => {
         let template = '';
@@ -112,8 +114,14 @@ export class CodeBlock extends LitElement implements ContainerElement {
   render() {
     return html`
       <div internal-host role="none">
+        <slot name="header"></slot>
+        <div class="body">
+          <div class="source">
         <pre class="hljs" role="none"><code class=${this.language ?? ''}><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
-        <slot name="actions"></slot>
+          </div>
+          <slot name="actions"></slot>
+        </div>
+        <slot name="footer"></slot>
       </div>
     `;
   }
@@ -182,4 +190,16 @@ export class CodeBlock extends LitElement implements ContainerElement {
 
     return range;
   }
+}
+
+/**
+ * @element nve-codeblock
+ * @description The former `nve-codeblock` tag is a compatibility alias, with the same source, header, footer, and actions APIs.
+ * @documentation https://nvidia.github.io/elements/docs/code/code-block/
+ * @since 0.1.0
+ * @entrypoint \@nvidia-elements/code/code-block
+ * @deprecated Use `nve-code-block` instead.
+ */
+export class CodeBlockAlias extends CodeBlock {
+  static readonly metadata = { tag: 'nve-codeblock', version: '0.0.0' };
 }
