@@ -1034,8 +1034,7 @@
   },
   "optionalDependencies": {
     "@lit-labs/scoped-registry-mixin": "catalog:publish",
-    "@webcomponents/scoped-custom-element-registry": "catalog:publish",
-    "element-internals-polyfill": "catalog:publish"
+    "@webcomponents/scoped-custom-element-registry": "catalog:publish"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

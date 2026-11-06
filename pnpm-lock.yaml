@@ -333,9 +333,6 @@ catalogs:
     '@webcomponents/scoped-custom-element-registry':
       specifier: ^0.0.10
       version: 0.0.10
-    element-internals-polyfill:
-      specifier: ^3.0.2
-      version: 3.0.2
     highlight.js:
       specifier: ^11.12.0
       version: 11.12.0
@@ -723,9 +720,6 @@ importers:
       '@webcomponents/scoped-custom-element-registry':
         specifier: catalog:publish
         version: 0.0.10
-      element-internals-polyfill:
-        specifier: catalog:publish
-        version: 3.0.2
 
   projects/create:
     devDependencies:
@@ -8910,9 +8904,6 @@ packages:
 
   electron-to-chromium@1.5.463:
     resolution: {integrity: sha512-nVWNU6ltFjopvOdD44J4zoBkgO0M+WZiFKKFV7EjebOH9z0KNphk6bCEjplXtJofL21ARIuuwWOCsFkBVklm6w==}
-
-  element-internals-polyfill@3.0.2:
-    resolution: {integrity: sha512-uB0/Qube3lkwh8SmkTnGIyUgJ9YdqVSzIoHMRCEQjAbD4Y5UzsVbch1tIxjTgUe5k3gy1U0ZMKMJ90A81lqwig==}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -20784,9 +20775,6 @@ snapshots:
       jake: 10.9.4
 
   electron-to-chromium@1.5.463: {}
-
-  element-internals-polyfill@3.0.2:
-    optional: true
 
   emoji-regex@10.6.0: {}
 

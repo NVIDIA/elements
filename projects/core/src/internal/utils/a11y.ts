@@ -5,7 +5,7 @@ import { generateId } from './dom.js';
 
 export function attachInternals(element: HTMLElement & { _internals?: ElementInternals }) {
   if (element._internals === undefined) {
-    element._internals = element.attachInternals() as unknown as ElementInternals;
+    element._internals = element.attachInternals();
   }
 }
 

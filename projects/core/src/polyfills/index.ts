@@ -2,40 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /**
- * - Vitest (happy-dom/js-dom)
- * - Safari
+ * Optional polyfill entry for `@nvidia-elements/core/polyfills`.
  *
- * Used for Custom Elements Form/A11y APIs
- * https://github.com/whatwg/html/pull/8467
- * https://bugs.webkit.org/show_bug.cgi?id=215911
- * https://bugzilla.mozilla.org/show_bug.cgi?id=1588763
+ * Supported browsers provide ElementInternals, CustomStateSet, and
+ * `toggleAttribute`, so this entry does not patch the platform.
  */
-import 'element-internals-polyfill';
-
-/**
- * https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute
- * - Vitest (happy-dom/js-dom)
- * - Safari
- *
- * Used in element-internals-polyfill
- */
-if (!Element.prototype.toggleAttribute) {
-  Element.prototype.toggleAttribute = function (name, force) {
-    const forceBool = force !== void 0 ? force : undefined;
-
-    if (this.hasAttribute(name)) {
-      if (forceBool) {
-        return true;
-      }
-
-      this.removeAttribute(name);
-      return false;
-    }
-    if (forceBool === false) {
-      return false;
-    }
-
-    this.setAttribute(name, '');
-    return true;
-  };
-}
+export {};
