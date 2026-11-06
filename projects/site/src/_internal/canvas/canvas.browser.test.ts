@@ -26,14 +26,14 @@ describe('nvd-canvas', () => {
     expect(code.textContent).toBe(initialSource);
     globalThis.document.body.append(element);
 
-    await expect.poll(() => element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: initialSource });
+    await expect.poll(() => element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: initialSource });
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: initialSource });
     expect(element.source).toBeUndefined();
   });
 
   it('updates displayed and copied source when the slotted fallback is replaced', async () => {
     globalThis.document.body.append(element);
-    await expect.poll(() => element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: initialSource });
+    await expect.poll(() => element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: initialSource });
     expect(element.source).toBeUndefined();
 
     const slot = element.shadowRoot?.querySelector('slot');
@@ -48,7 +48,7 @@ describe('nvd-canvas', () => {
     await element.updateComplete;
 
     expect(element.source).toBeUndefined();
-    expect(element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: updatedSource });
+    expect(element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: updatedSource });
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: updatedSource });
   });
 
@@ -58,7 +58,7 @@ describe('nvd-canvas', () => {
     element.source = updatedSource;
     await element.updateComplete;
 
-    expect(element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: updatedSource });
+    expect(element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: updatedSource });
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: updatedSource });
     expect(code.textContent).toBe(initialSource);
 
@@ -70,7 +70,7 @@ describe('nvd-canvas', () => {
     await element.updateComplete;
 
     expect(element.source).toBe(updatedSource);
-    expect(element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: updatedSource });
+    expect(element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: updatedSource });
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: updatedSource });
   });
 
@@ -78,7 +78,7 @@ describe('nvd-canvas', () => {
     element.source = updatedSource;
     globalThis.document.body.append(element);
 
-    await expect.poll(() => element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: updatedSource });
+    await expect.poll(() => element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: updatedSource });
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: updatedSource });
     expect(code.textContent).toBe(initialSource);
   });
@@ -89,13 +89,13 @@ describe('nvd-canvas', () => {
     await element.updateComplete;
 
     expect(element.formattedSource).toBe('');
-    expect(element.shadowRoot?.querySelector('nve-codeblock')).toBeNull();
+    expect(element.shadowRoot?.querySelector('nve-code-block')).toBeNull();
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: '' });
 
     element.source = undefined;
     await element.updateComplete;
 
-    expect(element.shadowRoot?.querySelector('nve-codeblock')).toMatchObject({ code: initialSource });
+    expect(element.shadowRoot?.querySelector('nve-code-block')).toMatchObject({ code: initialSource });
     expect(element.shadowRoot?.querySelector('nve-copy-button')).toMatchObject({ value: initialSource });
   });
 });

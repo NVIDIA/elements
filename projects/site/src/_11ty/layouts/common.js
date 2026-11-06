@@ -206,7 +206,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'selected' : ''}><a href="/docs/elements/card/">Card</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/chat-message/') ? 'selected' : ''}><a href="/docs/elements/chat-message/">Chat Message</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'selected' : ''}><a href="/docs/elements/checkbox/">Checkbox</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/code/code-block/') ? 'selected' : ''}><a href="/docs/code/code-block/">Code Block</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'selected' : ''}><a href="/docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'selected' : ''}><a href="/docs/elements/combobox/">Combobox</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'selected' : ''}><a href="/docs/elements/copy-button/">Copy Button</a></nve-tree-node>
