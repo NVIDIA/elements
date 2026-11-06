@@ -16,7 +16,7 @@ import {
   useStyles
 } from '@nvidia-elements/core/internal';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
-import { Icon, type IconName } from '@nvidia-elements/core/icon';
+import { Icon } from '@nvidia-elements/core/icon';
 import styles from './toast.css?inline';
 
 const i18nDefaults = {
@@ -136,7 +136,7 @@ export class Toast extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix"><nve-icon part="prefix-icon" .name=${statusIcons[this.status] as IconName} .ariaLabel=${(this.i18n as Record<string, string>)[this.status] ?? this.i18n.information}></nve-icon></slot>
+        <slot name="prefix"><nve-icon part="prefix-icon" .name=${statusIcons[this.status]} .ariaLabel=${(this.i18n as Record<string, string>)[this.status] ?? this.i18n.information}></nve-icon></slot>
         ${this.closable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${this.hidePopover} icon-name="cancel" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : nothing}
         <slot></slot>
       </div>
