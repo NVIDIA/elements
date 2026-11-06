@@ -159,183 +159,183 @@ export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">
   <nve-tree-node ${data.page.url === '/' || data.page.url.includes('/docs/integrations/installation/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/skills/') || data.page.url.includes('/docs/lint/') || data.page.url.includes('/docs/whats-new/') ? 'expanded' : ''}>
     <a href="/">Getting Started</a>
-    <nve-tree-node ${data.page.url === '/' ? 'highlighted selected' : ''}><a href="/">Overview</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="/docs/integrations/installation/">Installation</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted selected' : ''}><a href="/docs/cli/">CLI</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="/docs/mcp/">MCP</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/skills/') ? 'highlighted selected' : ''}><a href="/docs/skills/">Skills</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="/docs/lint/">Lint</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/whats-new/') ? 'highlighted selected' : ''}><a href="/docs/whats-new/">What’s New</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/' ? 'selected' : ''}><a href="/">Overview</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'selected' : ''}><a href="/docs/integrations/installation/">Installation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'selected' : ''}><a href="/docs/cli/">CLI</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'selected' : ''}><a href="/docs/mcp/">MCP</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/skills/') ? 'selected' : ''}><a href="/docs/skills/">Skills</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'selected' : ''}><a href="/docs/lint/">Lint</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/whats-new/') ? 'selected' : ''}><a href="/docs/whats-new/">What’s New</a></nve-tree-node>
     <nve-tree-node><a href="https://github.com/NVIDIA/elements" target="_blank">GitHub</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''}>
     <a href="/docs/patterns/">Patterns</a>
-    <nve-tree-node ${data.page.url === '/docs/patterns/' ? 'highlighted selected' : ''}><a href="/docs/patterns/">Overview</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/agent/') ? 'highlighted selected' : ''}><a href="/docs/patterns/agent/">Agent</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/authentication/') ? 'highlighted selected' : ''}><a href="/docs/patterns/authentication/">Authentication</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted selected' : ''}><a href="/docs/patterns/browse/">Browse</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/chat/') ? 'highlighted selected' : ''}><a href="/docs/patterns/chat/">Chat</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/code/') ? 'highlighted selected' : ''}><a href="/docs/patterns/code/">Code</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/dashboard/') ? 'highlighted selected' : ''}><a href="/docs/patterns/dashboard/">Dashboard</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted selected' : ''}><a href="/docs/patterns/editor/">Editor</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/empty-states/') ? 'highlighted selected' : ''}><a href="/docs/patterns/empty-states/">Empty States</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/heatmap/') ? 'highlighted selected' : ''}><a href="/docs/patterns/heatmap/">Heatmap</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/keyboard-shortcut/') ? 'highlighted selected' : ''}><a href="/docs/patterns/keyboard-shortcut/">Keyboard Shortcut</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/logging/') ? 'highlighted selected' : ''}><a href="/docs/patterns/logging/">Logging</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/media/') ? 'highlighted selected' : ''}><a href="/docs/patterns/media/">Media</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/navigation/') ? 'highlighted selected' : ''}><a href="/docs/patterns/navigation/">Navigation</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/onboarding/') ? 'highlighted selected' : ''}><a href="/docs/patterns/onboarding/">Onboarding</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/panel/') ? 'highlighted selected' : ''}><a href="/docs/patterns/panel/">Panel</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/responsive/') ? 'highlighted selected' : ''}><a href="/docs/patterns/responsive/">Responsive</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/search/') ? 'highlighted selected' : ''}><a href="/docs/patterns/search/">Search</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'highlighted selected' : ''}><a href="/docs/patterns/subheader/">Subheader</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted selected' : ''}><a href="/docs/patterns/trend/">Trend</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/patterns/' ? 'selected' : ''}><a href="/docs/patterns/">Overview</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/agent/') ? 'selected' : ''}><a href="/docs/patterns/agent/">Agent</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/authentication/') ? 'selected' : ''}><a href="/docs/patterns/authentication/">Authentication</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'selected' : ''}><a href="/docs/patterns/browse/">Browse</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/chat/') ? 'selected' : ''}><a href="/docs/patterns/chat/">Chat</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/code/') ? 'selected' : ''}><a href="/docs/patterns/code/">Code</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/dashboard/') ? 'selected' : ''}><a href="/docs/patterns/dashboard/">Dashboard</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'selected' : ''}><a href="/docs/patterns/editor/">Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/empty-states/') ? 'selected' : ''}><a href="/docs/patterns/empty-states/">Empty States</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/heatmap/') ? 'selected' : ''}><a href="/docs/patterns/heatmap/">Heatmap</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/keyboard-shortcut/') ? 'selected' : ''}><a href="/docs/patterns/keyboard-shortcut/">Keyboard Shortcut</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/logging/') ? 'selected' : ''}><a href="/docs/patterns/logging/">Logging</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/media/') ? 'selected' : ''}><a href="/docs/patterns/media/">Media</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/navigation/') ? 'selected' : ''}><a href="/docs/patterns/navigation/">Navigation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/onboarding/') ? 'selected' : ''}><a href="/docs/patterns/onboarding/">Onboarding</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/panel/') ? 'selected' : ''}><a href="/docs/patterns/panel/">Panel</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/responsive/') ? 'selected' : ''}><a href="/docs/patterns/responsive/">Responsive</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/search/') ? 'selected' : ''}><a href="/docs/patterns/search/">Search</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'selected' : ''}><a href="/docs/patterns/subheader/">Subheader</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'selected' : ''}><a href="/docs/patterns/trend/">Trend</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/foundations/scroll-box/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') || data.page.url.includes('/docs/viewport/') ? 'expanded' : ''}>
     <a href="/docs/elements/">Elements</a>
-    <nve-tree-node ${data.page.url === '/docs/elements/' ? 'highlighted selected' : ''}><a href="/docs/elements/">Overview</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/alert/') ? 'highlighted selected' : ''}><a href="/docs/elements/alert/">Alert</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/avatar/') ? 'highlighted selected' : ''}><a href="/docs/elements/avatar/">Avatar</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/badge/') ? 'highlighted selected' : ''}><a href="/docs/elements/badge/">Badge</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/breadcrumb/') ? 'highlighted selected' : ''}><a href="/docs/elements/breadcrumb/">Breadcrumb</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/button/') ? 'highlighted selected' : ''}><a href="/docs/elements/button/">Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/button-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/button-group/">Button Group</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'highlighted selected' : ''}><a href="/docs/elements/card/">Card</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/chat-message/') ? 'highlighted selected' : ''}><a href="/docs/elements/chat-message/">Chat Message</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'highlighted selected' : ''}><a href="/docs/elements/checkbox/">Checkbox</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted selected' : ''}><a href="/docs/elements/color/">Color</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted selected' : ''}><a href="/docs/elements/combobox/">Combobox</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'highlighted selected' : ''}><a href="/docs/elements/copy-button/">Copy Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/elements/' ? 'selected' : ''}><a href="/docs/elements/">Overview</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/alert/') ? 'selected' : ''}><a href="/docs/elements/alert/">Alert</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/avatar/') ? 'selected' : ''}><a href="/docs/elements/avatar/">Avatar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/badge/') ? 'selected' : ''}><a href="/docs/elements/badge/">Badge</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/breadcrumb/') ? 'selected' : ''}><a href="/docs/elements/breadcrumb/">Breadcrumb</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/button/') ? 'selected' : ''}><a href="/docs/elements/button/">Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/button-group/') ? 'selected' : ''}><a href="/docs/elements/button-group/">Button Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'selected' : ''}><a href="/docs/elements/card/">Card</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/chat-message/') ? 'selected' : ''}><a href="/docs/elements/chat-message/">Chat Message</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'selected' : ''}><a href="/docs/elements/checkbox/">Checkbox</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'selected' : ''}><a href="/docs/code/codeblock/">Codeblock</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'selected' : ''}><a href="/docs/elements/color/">Color</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'selected' : ''}><a href="/docs/elements/combobox/">Combobox</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'selected' : ''}><a href="/docs/elements/copy-button/">Copy Button</a></nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/elements/data-grid/') ? 'expanded' : ''}>
       <a href="/docs/elements/data-grid/">Datagrid</a>
-      <nve-tree-node ${data.page.url === '/docs/elements/data-grid/' ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/">Getting Started</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/integrations/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/integrations/">Integrations</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-action/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/column-action/">Column Action</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-alignment/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/column-alignment/">Column Alignment</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-fixed/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/column-fixed/">Column Fixed</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-width/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/column-width/">Column width</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/container/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/container/">Container</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/card/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/card/">Card</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/display-settings/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/display-settings/">Display Settings</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/footer/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/footer/">Footer</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/heatmap/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/heatmap/">Heatmap</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/keynav/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/keynav/">Keynav</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/multi-select/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/multi-select/">Multi Select</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/pagination/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/pagination/">Pagination</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-detail/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/panel-detail/">Panel Detail</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-grid/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/panel-grid/">Panel Grid</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/performance/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/performance/">Performance</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/placeholder/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/placeholder/">Placeholder</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-action/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/row-action/">Row Action</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-groups/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/row-groups/">Row Groups</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-sort/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/row-sort/">Row Sort</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/scroll-height/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/scroll-height/">Scroll Height</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/single-select/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/single-select/">Single Select</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/stripe/') ? 'highlighted selected' : ''}><a href="/docs/elements/data-grid/stripe/">Stripe</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/elements/data-grid/' ? 'selected' : ''}><a href="/docs/elements/data-grid/">Getting Started</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/integrations/') ? 'selected' : ''}><a href="/docs/elements/data-grid/integrations/">Integrations</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-action/') ? 'selected' : ''}><a href="/docs/elements/data-grid/column-action/">Column Action</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-alignment/') ? 'selected' : ''}><a href="/docs/elements/data-grid/column-alignment/">Column Alignment</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-fixed/') ? 'selected' : ''}><a href="/docs/elements/data-grid/column-fixed/">Column Fixed</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-width/') ? 'selected' : ''}><a href="/docs/elements/data-grid/column-width/">Column width</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/container/') ? 'selected' : ''}><a href="/docs/elements/data-grid/container/">Container</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/card/') ? 'selected' : ''}><a href="/docs/elements/data-grid/card/">Card</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/display-settings/') ? 'selected' : ''}><a href="/docs/elements/data-grid/display-settings/">Display Settings</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/footer/') ? 'selected' : ''}><a href="/docs/elements/data-grid/footer/">Footer</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/heatmap/') ? 'selected' : ''}><a href="/docs/elements/data-grid/heatmap/">Heatmap</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/keynav/') ? 'selected' : ''}><a href="/docs/elements/data-grid/keynav/">Keynav</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/multi-select/') ? 'selected' : ''}><a href="/docs/elements/data-grid/multi-select/">Multi Select</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/pagination/') ? 'selected' : ''}><a href="/docs/elements/data-grid/pagination/">Pagination</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-detail/') ? 'selected' : ''}><a href="/docs/elements/data-grid/panel-detail/">Panel Detail</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-grid/') ? 'selected' : ''}><a href="/docs/elements/data-grid/panel-grid/">Panel Grid</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/performance/') ? 'selected' : ''}><a href="/docs/elements/data-grid/performance/">Performance</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/placeholder/') ? 'selected' : ''}><a href="/docs/elements/data-grid/placeholder/">Placeholder</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-action/') ? 'selected' : ''}><a href="/docs/elements/data-grid/row-action/">Row Action</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-groups/') ? 'selected' : ''}><a href="/docs/elements/data-grid/row-groups/">Row Groups</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-sort/') ? 'selected' : ''}><a href="/docs/elements/data-grid/row-sort/">Row Sort</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/scroll-height/') ? 'selected' : ''}><a href="/docs/elements/data-grid/scroll-height/">Scroll Height</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/single-select/') ? 'selected' : ''}><a href="/docs/elements/data-grid/single-select/">Single Select</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/stripe/') ? 'selected' : ''}><a href="/docs/elements/data-grid/stripe/">Stripe</a></nve-tree-node>
     </nve-tree-node>  
-    <nve-tree-node ${data.page.url.includes('/docs/elements/date/') ? 'highlighted selected' : ''}><a href="/docs/elements/date/">Date</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/datetime/') ? 'highlighted selected' : ''}><a href="/docs/elements/datetime/">Datetime</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dialog/') ? 'highlighted selected' : ''}><a href="/docs/elements/dialog/">Dialog</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/divider/') ? 'highlighted selected' : ''}><a href="/docs/elements/divider/">Divider</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted selected' : ''}><a href="/docs/elements/dot/">Dot</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/drag-handle/') ? 'highlighted selected' : ''}><a href="/docs/elements/drag-handle/">Drag Handle</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/drawer/') ? 'highlighted selected' : ''}><a href="/docs/elements/drawer/">Drawer</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropdown/">Dropdown</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dropzone/') ? 'highlighted selected' : ''}><a href="/docs/elements/dropzone/">Dropzone</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'highlighted selected' : ''}><a href="/docs/elements/file/">File</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/date/') ? 'selected' : ''}><a href="/docs/elements/date/">Date</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/datetime/') ? 'selected' : ''}><a href="/docs/elements/datetime/">Datetime</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dialog/') ? 'selected' : ''}><a href="/docs/elements/dialog/">Dialog</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/divider/') ? 'selected' : ''}><a href="/docs/elements/divider/">Divider</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'selected' : ''}><a href="/docs/elements/dot/">Dot</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/drag-handle/') ? 'selected' : ''}><a href="/docs/elements/drag-handle/">Drag Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/drawer/') ? 'selected' : ''}><a href="/docs/elements/drawer/">Drawer</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown/') ? 'selected' : ''}><a href="/docs/elements/dropdown/">Dropdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'selected' : ''}><a href="/docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dropzone/') ? 'selected' : ''}><a href="/docs/elements/dropzone/">Dropzone</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'selected' : ''}><a href="/docs/elements/file/">File</a></nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/elements/format-') ? 'expanded' : ''}>
       <a href="/docs/elements/format-bytes/">Format</a>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/format-bytes/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-bytes/">Bytes</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/format-datetime/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-datetime/">Datetime</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/format-number/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-number/">Number</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/format-relative-time/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-relative-time/">Relative Time</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/format-truncate/') ? 'highlighted selected' : ''}><a href="/docs/elements/format-truncate/">Truncate</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/format-bytes/') ? 'selected' : ''}><a href="/docs/elements/format-bytes/">Bytes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/format-datetime/') ? 'selected' : ''}><a href="/docs/elements/format-datetime/">Datetime</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/format-number/') ? 'selected' : ''}><a href="/docs/elements/format-number/">Number</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/format-relative-time/') ? 'selected' : ''}><a href="/docs/elements/format-relative-time/">Relative Time</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/format-truncate/') ? 'selected' : ''}><a href="/docs/elements/format-truncate/">Truncate</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/elements/forms/') || data.page.url.startsWith('/docs/elements/control/') ? 'expanded' : ''}>
       <a href="/docs/elements/forms/">Forms</a>
-      <nve-tree-node ${data.page.url === '/docs/elements/forms/' ? 'highlighted selected' : ''}><a href="/docs/elements/forms/">Getting Started</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/forms/validation/') ? 'highlighted selected' : ''}><a href="/docs/elements/forms/validation/">Validation</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/forms/actions/') ? 'highlighted selected' : ''}><a href="/docs/elements/forms/actions/">Actions</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/control/') ? 'highlighted selected' : ''}><a href="/docs/elements/control/">Control</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/elements/forms/' ? 'selected' : ''}><a href="/docs/elements/forms/">Getting Started</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/forms/validation/') ? 'selected' : ''}><a href="/docs/elements/forms/validation/">Validation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/forms/actions/') ? 'selected' : ''}><a href="/docs/elements/forms/actions/">Actions</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/control/') ? 'selected' : ''}><a href="/docs/elements/control/">Control</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/gauge/') ? 'highlighted selected' : ''}><a href="/docs/elements/gauge/">Gauge</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/ghost/') ? 'highlighted selected' : ''}><a href="/docs/elements/ghost/">Ghost</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/icon/') ? 'highlighted selected' : ''}><a href="/docs/elements/icon/">Icon</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/icon-button/') ? 'highlighted selected' : ''}><a href="/docs/elements/icon-button/">Icon Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/iframe/') ? 'highlighted selected' : ''}><a href="/docs/elements/iframe/">Iframe</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'highlighted selected' : ''}><a href="/docs/elements/input/">Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/input-group/') ? 'highlighted selected' : ''}><a href="/docs/elements/input-group/">Input Group</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/joystick/') ? 'highlighted selected' : ''}><a href="/docs/elements/joystick/">Joystick</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'highlighted selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/gauge/') ? 'selected' : ''}><a href="/docs/elements/gauge/">Gauge</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/ghost/') ? 'selected' : ''}><a href="/docs/elements/ghost/">Ghost</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/icon/') ? 'selected' : ''}><a href="/docs/elements/icon/">Icon</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/icon-button/') ? 'selected' : ''}><a href="/docs/elements/icon-button/">Icon Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/iframe/') ? 'selected' : ''}><a href="/docs/elements/iframe/">Iframe</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'selected' : ''}><a href="/docs/elements/input/">Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/input-group/') ? 'selected' : ''}><a href="/docs/elements/input-group/">Input Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/joystick/') ? 'selected' : ''}><a href="/docs/elements/joystick/">Joystick</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'selected' : ''}><a href="/docs/elements/logo/">Logo</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'selected' : ''}><a href="/docs/markdown/">Markdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'selected' : ''}><a href="/docs/markdown/styles/">Markdown CSS</a></nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/media/') ? 'expanded' : ''}>
       <a href="/docs/media/controller/">Media</a>
-      <nve-tree-node ${data.page.url.includes('/docs/media/controller/') ? 'highlighted selected' : ''}><a href="/docs/media/controller/">Controller</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/pause-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pause-button/">Pause Button</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'highlighted selected' : ''}><a href="/docs/media/playback-rate-select/">Playback Rate Select</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/loop-button/') ? 'highlighted selected' : ''}><a href="/docs/media/loop-button/">Loop Button</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'highlighted selected' : ''}><a href="/docs/media/mute-button/">Mute Button</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/pip-button/') ? 'highlighted selected' : ''}><a href="/docs/media/pip-button/">Media PiP Button</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'highlighted selected' : ''}><a href="/docs/media/seek-button/">Seek Button</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'highlighted selected' : ''}><a href="/docs/media/time-range/">Time Range</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'highlighted selected' : ''}><a href="/docs/media/volume-range/">Volume Range</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'highlighted selected' : ''}><a href="/docs/media/fullscreen-button/">Full-screen Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/controller/') ? 'selected' : ''}><a href="/docs/media/controller/">Controller</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/pause-button/') ? 'selected' : ''}><a href="/docs/media/pause-button/">Pause Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/playback-rate-select/') ? 'selected' : ''}><a href="/docs/media/playback-rate-select/">Playback Rate Select</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/loop-button/') ? 'selected' : ''}><a href="/docs/media/loop-button/">Loop Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/mute-button/') ? 'selected' : ''}><a href="/docs/media/mute-button/">Mute Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/pip-button/') ? 'selected' : ''}><a href="/docs/media/pip-button/">Media PiP Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/seek-button/') ? 'selected' : ''}><a href="/docs/media/seek-button/">Seek Button</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/time-range/') ? 'selected' : ''}><a href="/docs/media/time-range/">Time Range</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/volume-range/') ? 'selected' : ''}><a href="/docs/media/volume-range/">Volume Range</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'selected' : ''}><a href="/docs/media/fullscreen-button/">Full-screen Button</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'highlighted selected' : ''}><a href="/docs/elements/menu/">Menu</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'highlighted selected' : ''}><a href="/docs/elements/month/">Month</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'selected' : ''}><a href="/docs/elements/menu/">Menu</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'selected' : ''}><a href="/docs/elements/month/">Month</a></nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/monaco/') ? 'expanded' : ''}>
       <a href="/docs/monaco/input/">Monaco</a>
-      <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/input/">Input</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-input/">Diff Input</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/editor/">Monaco Editor</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted selected' : ''}><a href="/docs/monaco/diff-editor/">Diff Editor</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted selected' : ''}><a href="/docs/monaco/problems/">Problems</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'selected' : ''}><a href="/docs/monaco/input/">Input</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'selected' : ''}><a href="/docs/monaco/diff-input/">Diff Input</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'selected' : ''}><a href="/docs/monaco/editor/">Monaco Editor</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'selected' : ''}><a href="/docs/monaco/diff-editor/">Diff Editor</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'selected' : ''}><a href="/docs/monaco/problems/">Problems</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/notification/') ? 'highlighted selected' : ''}><a href="/docs/elements/notification/">Notification</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/page/') ? 'highlighted selected' : ''}><a href="/docs/elements/page/">Page</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted selected' : ''}><a href="/docs/elements/page-header/">Page Header</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/page-loader/') ? 'highlighted selected' : ''}><a href="/docs/elements/page-loader/">Page Loader</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/pagination/') ? 'highlighted selected' : ''}><a href="/docs/elements/pagination/">Pagination</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/progressive-filter-chip/') ? 'highlighted selected' : ''}><a href="/docs/elements/progressive-filter-chip/">Progressive Filter Chip</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-bar/') ? 'highlighted selected' : ''}><a href="/docs/elements/progress-bar/">Progress Bar</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-dot/') ? 'highlighted selected' : ''}><a href="/docs/elements/progress-dot/">Progress Dot</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-ring/') ? 'highlighted selected' : ''}><a href="/docs/elements/progress-ring/">Progress Ring</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/password/') ? 'highlighted selected' : ''}><a href="/docs/elements/password/">Password</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/preferences-input/') ? 'highlighted selected' : ''}><a href="/docs/elements/preferences-input/">Preferences Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/pulse/') ? 'highlighted selected' : ''}><a href="/docs/elements/pulse/">Pulse</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/radio/') ? 'highlighted selected' : ''}><a href="/docs/elements/radio/">Radio</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/range/') ? 'highlighted selected' : ''}><a href="/docs/elements/range/">Range</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'highlighted selected' : ''}><a href="/docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/scroll-box/') ? 'highlighted selected' : ''}><a href="/docs/foundations/scroll-box/">Scroll Box</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'highlighted selected' : ''}><a href="/docs/elements/search/">Search</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted selected' : ''}><a href="/docs/elements/select/">Select</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'highlighted selected' : ''}><a href="/docs/elements/skeleton/">Skeleton</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/sort-button/') ? 'highlighted selected' : ''}><a href="/docs/elements/sort-button/">Sort Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/sparkline/') ? 'highlighted selected' : ''}><a href="/docs/elements/sparkline/">Sparkline</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/star-rating/') ? 'highlighted selected' : ''}><a href="/docs/elements/star-rating/">Star Rating</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/steps/') ? 'highlighted selected' : ''}><a href="/docs/elements/steps/">Steps</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/switch/') ? 'highlighted selected' : ''}><a href="/docs/elements/switch/">Switch</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/tabs/') ? 'highlighted selected' : ''}><a href="/docs/elements/tabs/">Tabs</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/tag/') ? 'highlighted selected' : ''}><a href="/docs/elements/tag/">Tag</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/textarea/') ? 'highlighted selected' : ''}><a href="/docs/elements/textarea/">Textarea</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/time/') ? 'highlighted selected' : ''}><a href="/docs/elements/time/">Time</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/toast/') ? 'highlighted selected' : ''}><a href="/docs/elements/toast/">Toast</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/toggletip/') ? 'highlighted selected' : ''}><a href="/docs/elements/toggletip/">Toggletip</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/toolbar/') ? 'highlighted selected' : ''}><a href="/docs/elements/toolbar/">Toolbar</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/tooltip/') ? 'highlighted selected' : ''}><a href="/docs/elements/tooltip/">Tooltip</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/tree/') ? 'highlighted selected' : ''}><a href="/docs/elements/tree/">Tree</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/notification/') ? 'selected' : ''}><a href="/docs/elements/notification/">Notification</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page/') ? 'selected' : ''}><a href="/docs/elements/page/">Page</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'selected' : ''}><a href="/docs/elements/page-header/">Page Header</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page-loader/') ? 'selected' : ''}><a href="/docs/elements/page-loader/">Page Loader</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/pagination/') ? 'selected' : ''}><a href="/docs/elements/pagination/">Pagination</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progressive-filter-chip/') ? 'selected' : ''}><a href="/docs/elements/progressive-filter-chip/">Progressive Filter Chip</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-bar/') ? 'selected' : ''}><a href="/docs/elements/progress-bar/">Progress Bar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-dot/') ? 'selected' : ''}><a href="/docs/elements/progress-dot/">Progress Dot</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-ring/') ? 'selected' : ''}><a href="/docs/elements/progress-ring/">Progress Ring</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/password/') ? 'selected' : ''}><a href="/docs/elements/password/">Password</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/preferences-input/') ? 'selected' : ''}><a href="/docs/elements/preferences-input/">Preferences Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/pulse/') ? 'selected' : ''}><a href="/docs/elements/pulse/">Pulse</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/radio/') ? 'selected' : ''}><a href="/docs/elements/radio/">Radio</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/range/') ? 'selected' : ''}><a href="/docs/elements/range/">Range</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'selected' : ''}><a href="/docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/scroll-box/') ? 'selected' : ''}><a href="/docs/foundations/scroll-box/">Scroll Box</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'selected' : ''}><a href="/docs/elements/search/">Search</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'selected' : ''}><a href="/docs/elements/select/">Select</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'selected' : ''}><a href="/docs/elements/skeleton/">Skeleton</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/sort-button/') ? 'selected' : ''}><a href="/docs/elements/sort-button/">Sort Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/sparkline/') ? 'selected' : ''}><a href="/docs/elements/sparkline/">Sparkline</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/star-rating/') ? 'selected' : ''}><a href="/docs/elements/star-rating/">Star Rating</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/steps/') ? 'selected' : ''}><a href="/docs/elements/steps/">Steps</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/switch/') ? 'selected' : ''}><a href="/docs/elements/switch/">Switch</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tabs/') ? 'selected' : ''}><a href="/docs/elements/tabs/">Tabs</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tag/') ? 'selected' : ''}><a href="/docs/elements/tag/">Tag</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/textarea/') ? 'selected' : ''}><a href="/docs/elements/textarea/">Textarea</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/time/') ? 'selected' : ''}><a href="/docs/elements/time/">Time</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/toast/') ? 'selected' : ''}><a href="/docs/elements/toast/">Toast</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/toggletip/') ? 'selected' : ''}><a href="/docs/elements/toggletip/">Toggletip</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/toolbar/') ? 'selected' : ''}><a href="/docs/elements/toolbar/">Toolbar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tooltip/') ? 'selected' : ''}><a href="/docs/elements/tooltip/">Tooltip</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tree/') ? 'selected' : ''}><a href="/docs/elements/tree/">Tree</a></nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/viewport/') ? 'expanded' : ''}>
       <a href="/docs/viewport/">Viewport</a>
-      <nve-tree-node ${['/docs/viewport/', '/docs/viewport/api/', '/docs/viewport/examples/'].includes(data.page.url) ? 'highlighted selected' : ''}><a href="/docs/viewport/">Viewport</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/viewport/gridlines/') ? 'highlighted selected' : ''}><a href="/docs/viewport/gridlines/">Gridlines</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/viewport/minimap/') ? 'highlighted selected' : ''}><a href="/docs/viewport/minimap/">Minimap</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/viewport/zoom-range/') ? 'highlighted selected' : ''}><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>
+      <nve-tree-node ${['/docs/viewport/', '/docs/viewport/api/', '/docs/viewport/examples/'].includes(data.page.url) ? 'selected' : ''}><a href="/docs/viewport/">Viewport</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/viewport/gridlines/') ? 'selected' : ''}><a href="/docs/viewport/gridlines/">Gridlines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/viewport/minimap/') ? 'selected' : ''}><a href="/docs/viewport/minimap/">Minimap</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/viewport/zoom-range/') ? 'selected' : ''}><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted selected' : ''}><a href="/docs/elements/week/">Week</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/workspace/') ? 'highlighted selected' : ''}><a href="/docs/elements/workspace/">Workspace</a></nve-tree-node>
@@ -343,122 +343,122 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') || data.page.url.includes('/docs/design-md/') ? 'expanded' : ''}>
     <a href="/docs/foundations/">Foundations</a>
-    <nve-tree-node ${data.page.url.endsWith('/docs/foundations/') ? 'highlighted selected' : ''}><a href="/docs/foundations/">Overview</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted selected' : ''}><a href="/docs/foundations/typography/">Typography</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted selected' : ''}><a href="/docs/foundations/iconography/">Iconography</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.endsWith('/docs/foundations/') ? 'selected' : ''}><a href="/docs/foundations/">Overview</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'selected' : ''}><a href="/docs/foundations/typography/">Typography</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'selected' : ''}><a href="/docs/foundations/iconography/">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
       <a href="/docs/foundations/themes/">Themes</a>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/tokens/">Design Tokens</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/size/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/size/">Size & Space</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/objects/') ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/objects/">Objects</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/interactions/') ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/interactions/">Interactions</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/support/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/support/">Support</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/status/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/status/">Status</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/color/">Color</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/animation/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/animation/">Animation</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/fonts/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/fonts/">Fonts</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/layers/') ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/layers/">Layers</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/custom/' ? 'highlighted selected' : ''}><a href="/docs/foundations/themes/custom/">Custom</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'selected' : ''}><a href="/docs/foundations/themes/tokens/">Design Tokens</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/size/' ? 'selected' : ''}><a href="/docs/foundations/themes/size/">Size & Space</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/objects/') ? 'selected' : ''}><a href="/docs/foundations/themes/objects/">Objects</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/interactions/') ? 'selected' : ''}><a href="/docs/foundations/themes/interactions/">Interactions</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/support/' ? 'selected' : ''}><a href="/docs/foundations/themes/support/">Support</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/status/' ? 'selected' : ''}><a href="/docs/foundations/themes/status/">Status</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'selected' : ''}><a href="/docs/foundations/themes/color/">Color</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/animation/' ? 'selected' : ''}><a href="/docs/foundations/themes/animation/">Animation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/fonts/' ? 'selected' : ''}><a href="/docs/foundations/themes/fonts/">Fonts</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/layers/') ? 'selected' : ''}><a href="/docs/foundations/themes/layers/">Layers</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/custom/' ? 'selected' : ''}><a href="/docs/foundations/themes/custom/">Custom</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/layout/' ? 'highlighted' : ''}>
       <a href="/docs/foundations/layout/">Layout</a>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/horizontal/') ? 'highlighted selected' : ''}><a href="/docs/foundations/layout/horizontal/">Horizontal</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/vertical/') ? 'highlighted selected' : ''}><a href="/docs/foundations/layout/vertical/">Vertical</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/grid/') ? 'highlighted selected' : ''}><a href="/docs/foundations/layout/grid/">Grid</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/horizontal/') ? 'selected' : ''}><a href="/docs/foundations/layout/horizontal/">Horizontal</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/vertical/') ? 'selected' : ''}><a href="/docs/foundations/layout/vertical/">Vertical</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/grid/') ? 'selected' : ''}><a href="/docs/foundations/layout/grid/">Grid</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/foundations/popovers/' ? 'highlighted selected' : ''}><a href="/docs/foundations/popovers/">Popovers</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'highlighted selected' : ''}><a href="/docs/foundations/i18n/">i18n</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/foundations/visualization/' ? 'highlighted selected' : ''}><a href="/docs/foundations/visualization/">Visualization</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/foundations/view-transitions/' ? 'highlighted selected' : ''}><a href="/docs/foundations/view-transitions/">View Transitions</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/design-md/') ? 'highlighted selected' : ''}><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/popovers/' ? 'selected' : ''}><a href="/docs/foundations/popovers/">Popovers</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'selected' : ''}><a href="/docs/foundations/i18n/">i18n</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/visualization/' ? 'selected' : ''}><a href="/docs/foundations/visualization/">Visualization</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/view-transitions/' ? 'selected' : ''}><a href="/docs/foundations/view-transitions/">View Transitions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/design-md/') ? 'selected' : ''}><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
     <a href="/docs/integrations/">Integrations</a>
-    <nve-tree-node ${data.page.url.endsWith('/docs/integrations/') ? 'highlighted selected' : ''}><a href="/docs/integrations/">Getting Started</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="/docs/integrations/angular/">Angular</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="/docs/integrations/bundles/">Bundles</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/cdn/') ? 'highlighted selected' : ''}><a href="/docs/integrations/cdn/">CDN</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/custom-elements/') ? 'highlighted selected' : ''}><a href="/docs/integrations/custom-elements/">Custom Elements</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/eleventy/') ? 'highlighted selected' : ''}><a href="/docs/integrations/eleventy/">Eleventy</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="/docs/integrations/go/">Golang</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/go-htmx/') ? 'highlighted selected' : ''}><a href="/docs/integrations/go-htmx/">HTMX + Go</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted selected' : ''}><a href="/docs/integrations/hugo/">Hugo</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted selected' : ''}><a href="/docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted selected' : ''}><a href="/docs/integrations/lit/">Lit</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/lit-library/') ? 'highlighted selected' : ''}><a href="/docs/integrations/lit-library/">Lit Library</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/mcp-apps/') ? 'highlighted selected' : ''}><a href="/docs/integrations/mcp-apps/">MCP Apps</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted selected' : ''}><a href="/docs/integrations/nextjs/">NextJS</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/nuxt/') ? 'highlighted selected' : ''}><a href="/docs/integrations/nuxt/">Nuxt</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/pi/') ? 'highlighted selected' : ''}><a href="/docs/integrations/pi/">Pi</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted selected' : ''}><a href="/docs/integrations/preact/">Preact</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/react/') ? 'highlighted selected' : ''}><a href="/docs/integrations/react/">React</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/solidjs/') ? 'highlighted selected' : ''}><a href="/docs/integrations/solidjs/">SolidJS</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/sphinx/') ? 'highlighted selected' : ''}><a href="/docs/integrations/sphinx/">Sphinx</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/svelte/') ? 'highlighted selected' : ''}><a href="/docs/integrations/svelte/">Svelte</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'highlighted selected' : ''}><a href="/docs/integrations/typescript/">TypeScript</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted selected' : ''}><a href="/docs/integrations/vue/">Vue</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.endsWith('/docs/integrations/') ? 'selected' : ''}><a href="/docs/integrations/">Getting Started</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'selected' : ''}><a href="/docs/integrations/angular/">Angular</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'selected' : ''}><a href="/docs/integrations/bundles/">Bundles</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/cdn/') ? 'selected' : ''}><a href="/docs/integrations/cdn/">CDN</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/custom-elements/') ? 'selected' : ''}><a href="/docs/integrations/custom-elements/">Custom Elements</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/eleventy/') ? 'selected' : ''}><a href="/docs/integrations/eleventy/">Eleventy</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'selected' : ''}><a href="/docs/integrations/go/">Golang</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/go-htmx/') ? 'selected' : ''}><a href="/docs/integrations/go-htmx/">HTMX + Go</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'selected' : ''}><a href="/docs/integrations/hugo/">Hugo</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'selected' : ''}><a href="/docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'selected' : ''}><a href="/docs/integrations/lit/">Lit</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/lit-library/') ? 'selected' : ''}><a href="/docs/integrations/lit-library/">Lit Library</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/mcp-apps/') ? 'selected' : ''}><a href="/docs/integrations/mcp-apps/">MCP Apps</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'selected' : ''}><a href="/docs/integrations/nextjs/">NextJS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/nuxt/') ? 'selected' : ''}><a href="/docs/integrations/nuxt/">Nuxt</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/pi/') ? 'selected' : ''}><a href="/docs/integrations/pi/">Pi</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'selected' : ''}><a href="/docs/integrations/preact/">Preact</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/react/') ? 'selected' : ''}><a href="/docs/integrations/react/">React</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/solidjs/') ? 'selected' : ''}><a href="/docs/integrations/solidjs/">SolidJS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/sphinx/') ? 'selected' : ''}><a href="/docs/integrations/sphinx/">Sphinx</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/svelte/') ? 'selected' : ''}><a href="/docs/integrations/svelte/">Svelte</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'selected' : ''}><a href="/docs/integrations/typescript/">TypeScript</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'selected' : ''}><a href="/docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/sitemap/' ? 'expanded' : ''}>
     <a href="/docs/changelog/">About</a>
-    <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="/docs/changelog/">Changelog</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="/docs/metrics/">Metrics</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="/docs/about/support/">Support</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'highlighted selected' : ''}><a href="/docs/about/accessibility/">Accessibility</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="/docs/about/contributions/">Contributions</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="/docs/about/requests/">Requests</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="/docs/about/migration/">Migration</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/sitemap/' ? 'highlighted selected' : ''}><a href="/sitemap/">Sitemap</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'selected' : ''}><a href="/docs/changelog/">Changelog</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'selected' : ''}><a href="/docs/metrics/">Metrics</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'selected' : ''}><a href="/docs/about/support/">Support</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'selected' : ''}><a href="/docs/about/accessibility/">Accessibility</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'selected' : ''}><a href="/docs/about/contributions/">Contributions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'selected' : ''}><a href="/docs/about/requests/">Requests</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'selected' : ''}><a href="/docs/about/migration/">Migration</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/sitemap/' ? 'selected' : ''}><a href="/sitemap/">Sitemap</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''} style="--color: var(--nve-sys-text-muted-color)">
     <a href="/docs/labs/">Labs</a>
     <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/layout/responsive/' ? 'highlighted' : ''}>
       <a href="/docs/labs/layout/responsive/" nve-layout="row align:vertical-center gap:xs">Responsive Layout <nve-icon name="beaker" size="sm"></nve-icon></a>
-      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/viewport/') ? 'highlighted selected' : ''}><a href="/docs/labs/layout/responsive/viewport/">Viewport</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/container/') ? 'highlighted selected' : ''}><a href="/docs/labs/layout/responsive/container/">Container</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'highlighted selected' : ''}><a href="/docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/viewport/') ? 'selected' : ''}><a href="/docs/labs/layout/responsive/viewport/">Viewport</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/container/') ? 'selected' : ''}><a href="/docs/labs/layout/responsive/container/">Container</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'selected' : ''}><a href="/docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted selected' : ''}><a href="/docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'selected' : ''}><a href="/docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') || data.page.url.includes('/docs/internal/guidelines') || data.page.url === '/examples/' ? 'expanded' : ''} style="--color: var(--nve-sys-text-muted-color)">
     <a href="/docs/api-design/">Internal</a>
     <nve-tree-node expanded>
       <a href="/docs/api-design/">API Design</a>
-      <nve-tree-node ${data.page.url === '/docs/api-design/' ? 'highlighted selected' : ''}><a href="/docs/api-design/">Guidelines</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/properties-attributes/') ? 'highlighted selected' : ''}><a href="/docs/api-design/properties-attributes/">Properties & Attributes</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/slots/') ? 'highlighted selected' : ''}><a href="/docs/api-design/slots/">Slots</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/registration/') ? 'highlighted selected' : ''}><a href="/docs/api-design/registration/">Registration</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/custom-events/') ? 'highlighted selected' : ''}><a href="/docs/api-design/custom-events/">CustomEvents</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/stateless/') ? 'highlighted selected' : ''}><a href="/docs/api-design/stateless/">Stateless</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/composition/') ? 'highlighted selected' : ''}><a href="/docs/api-design/composition/">Composition</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/styles/') ? 'highlighted selected' : ''}><a href="/docs/api-design/styles/">Styles</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'highlighted selected' : ''}><a href="/docs/api-design/packaging/">Packaging</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted selected' : ''}><a href="/docs/api-design/glossary/">Glossary</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted selected' : ''}><a href="/docs/api-design/logs/">Logs</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/api-design/' ? 'selected' : ''}><a href="/docs/api-design/">Guidelines</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/properties-attributes/') ? 'selected' : ''}><a href="/docs/api-design/properties-attributes/">Properties & Attributes</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/slots/') ? 'selected' : ''}><a href="/docs/api-design/slots/">Slots</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/registration/') ? 'selected' : ''}><a href="/docs/api-design/registration/">Registration</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/custom-events/') ? 'selected' : ''}><a href="/docs/api-design/custom-events/">CustomEvents</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/stateless/') ? 'selected' : ''}><a href="/docs/api-design/stateless/">Stateless</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/composition/') ? 'selected' : ''}><a href="/docs/api-design/composition/">Composition</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/styles/') ? 'selected' : ''}><a href="/docs/api-design/styles/">Styles</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'selected' : ''}><a href="/docs/api-design/packaging/">Packaging</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'selected' : ''}><a href="/docs/api-design/glossary/">Glossary</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'selected' : ''}><a href="/docs/api-design/logs/">Logs</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node expanded>
       <a href="/docs/internal/guidelines/agent-harness/">Guidelines</a>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-harness/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/agent-harness/">Agent Harness</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-tooling/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/agent-tooling/">Agent Tooling</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-ownership/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/agent-ownership/">Agent Ownership</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/internal/guidelines/testing/' ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/testing/">Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-unit/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/testing-unit/">Unit Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-accessibility/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/testing-accessibility/">Accessibility Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/troubleshooting/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/troubleshooting/">Troubleshooting</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/component-creation/') ? 'highlighted selected' : ''}><a href="/docs/internal/guidelines/component-creation/">Component Creation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-harness/') ? 'selected' : ''}><a href="/docs/internal/guidelines/agent-harness/">Agent Harness</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-tooling/') ? 'selected' : ''}><a href="/docs/internal/guidelines/agent-tooling/">Agent Tooling</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-ownership/') ? 'selected' : ''}><a href="/docs/internal/guidelines/agent-ownership/">Agent Ownership</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'selected' : ''}><a href="/docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'selected' : ''}><a href="/docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'selected' : ''}><a href="/docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/internal/guidelines/testing/' ? 'selected' : ''}><a href="/docs/internal/guidelines/testing/">Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-unit/') ? 'selected' : ''}><a href="/docs/internal/guidelines/testing-unit/">Unit Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-accessibility/') ? 'selected' : ''}><a href="/docs/internal/guidelines/testing-accessibility/">Accessibility Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'selected' : ''}><a href="/docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'selected' : ''}><a href="/docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'selected' : ''}><a href="/docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/troubleshooting/') ? 'selected' : ''}><a href="/docs/internal/guidelines/troubleshooting/">Troubleshooting</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/component-creation/') ? 'selected' : ''}><a href="/docs/internal/guidelines/component-creation/">Component Creation</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url === '/examples/' ? 'highlighted' : ''} expanded>
       <a href="/examples/">Examples</a>
-      <nve-tree-node ${data.page.url === '/examples/' ? 'highlighted selected' : ''}><a href="/examples/">All Examples</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/examples/' ? 'selected' : ''}><a href="/examples/">All Examples</a></nve-tree-node>
     </nve-tree-node>
   </nve-tree-node>
 </nve-tree>
@@ -471,28 +471,42 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
     : /* html */ `
 <script>
   (() => {
-    const SB_GLOBALS = { theme: 'dark', font: '', layer: '', scale: '', debug: '', animation: '', sourceType: 'html', showAdvancedApi: '', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
-    const colorScheme = SB_GLOBALS.theme === 'auto'
-      ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
-        ? 'light'
-        : 'dark'
-      : SB_GLOBALS.theme;
-    const themes = [
-      colorScheme,
-      SB_GLOBALS.classic === 'classic' && colorScheme !== 'high-contrast' ? (colorScheme === 'dark' ? 'classic-dark' : 'classic') : '',
-      SB_GLOBALS.font,
-      SB_GLOBALS.scale,
-      SB_GLOBALS.debug,
-      SB_GLOBALS.animation,
-      SB_GLOBALS.experimental,
-      SB_GLOBALS.systemOptions
-    ]
-      .filter(i => i !== '')
-      .join(' ')
-      .trim();
-      globalThis.document.documentElement.setAttribute('nve-theme', themes);\
+    const getGlobals = () => ({ theme: 'auto', font: '', layer: '', scale: '', debug: '', animation: '', sourceType: 'html', showAdvancedApi: '', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) });
+    const systemColorScheme = globalThis.matchMedia('(prefers-color-scheme: dark)');
+    const applyTheme = SB_GLOBALS => {
+      const colorScheme = SB_GLOBALS.theme === 'auto'
+        ? systemColorScheme.matches
+          ? 'dark'
+          : 'light'
+        : SB_GLOBALS.theme;
+      const themes = [
+        colorScheme,
+        SB_GLOBALS.classic === 'classic' && colorScheme !== 'high-contrast' ? (colorScheme === 'dark' ? 'classic-dark' : 'classic') : '',
+        SB_GLOBALS.font,
+        SB_GLOBALS.scale,
+        SB_GLOBALS.debug,
+        SB_GLOBALS.animation,
+        SB_GLOBALS.experimental,
+        SB_GLOBALS.systemOptions
+      ]
+        .filter(i => i !== '')
+        .join(' ')
+        .trim();
+      globalThis.document.documentElement.setAttribute('nve-theme', themes);
       globalThis.document.documentElement.setAttribute('nve-layer', SB_GLOBALS.layer);
       globalThis.document.documentElement.setAttribute('show-advanced-api', SB_GLOBALS.showAdvancedApi);
+      globalThis.document.dispatchEvent(new CustomEvent('nve-theme-change', { detail: { theme: themes } }));
+      globalThis.document.querySelectorAll('iframe').forEach(iframe => {
+        iframe.contentDocument?.documentElement.setAttribute('nve-theme', themes);
+        iframe.contentDocument?.documentElement.setAttribute('nve-layer', SB_GLOBALS.layer);
+        iframe.contentDocument?.documentElement.setAttribute('show-advanced-api', SB_GLOBALS.showAdvancedApi);
+      });
+    };
+    applyTheme(getGlobals());
+    systemColorScheme.addEventListener('change', () => {
+      const SB_GLOBALS = getGlobals();
+      if (SB_GLOBALS.theme === 'auto') applyTheme(SB_GLOBALS);
+    });
   })();
 </script>
   `;
@@ -510,7 +524,7 @@ export function renderBasePageHeader(data) {
 
   return /* html */ `
 <nve-page-header slot="header">
-  <nve-logo slot="prefix" color="brand-green" size="sm" aria-label="NVIDIA Elements Design System">NV</nve-logo>
+  <a slot="prefix" class="docs-ascii-logo" href="/" aria-label="NVIDIA Elements homepage"><pre aria-hidden="true" inert></pre></a>
   <a slot="prefix" href="/">NVIDIA Elements</a>
   <nve-button container="flat" ${data.page.url.includes('/docs/patterns/') ? 'selected' : ''} class="header-btn"><a href="/docs/patterns/">Patterns</a></nve-button>
   <nve-button container="flat" ${isCatalogPage ? 'selected' : ''} class="header-btn"><a href="/docs/elements/">Elements</a></nve-button>

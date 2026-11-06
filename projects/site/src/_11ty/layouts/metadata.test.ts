@@ -552,9 +552,9 @@ describe('renderDocsNav', () => {
     const buttonNode = html.match(/<nve-tree-node([^>]*)><a href="\/docs\/elements\/button\/">Button<\/a>/);
 
     expect(internalNode?.[1].includes('expanded')).toBe(internal);
-    expect(allExamplesNode?.[1].includes('highlighted')).toBe(allExamples);
+    expect(allExamplesNode?.[1].includes('highlighted')).toBe(false);
     expect(allExamplesNode?.[1].includes('selected')).toBe(allExamples);
-    expect(buttonNode?.[1].includes('highlighted selected')).toBe(button);
+    expect(buttonNode?.[1].includes('selected')).toBe(button);
   });
 
   it.each(
@@ -573,26 +573,22 @@ describe('renderDocsNav', () => {
       const html = renderDocsNav({ page: { url: `/docs/viewport/zoom-range/${tab}` } });
 
       expect(html).toContain(
-        '<nve-tree-node highlighted selected><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>'
+        '<nve-tree-node selected><a href="/docs/viewport/zoom-range/">Zoom Range</a></nve-tree-node>'
       );
     }
   });
 
-  it('should expose DESIGN.md in getting started navigation', () => {
+  it('should expose DESIGN.md in foundations navigation', () => {
     const html = renderDocsNav({ page: { url: '/docs/design-md/' } });
 
-    expect(html).toContain(
-      '<nve-tree-node highlighted selected><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>'
-    );
+    expect(html).toContain('<nve-tree-node selected><a href="/docs/design-md/">DESIGN.md</a></nve-tree-node>');
   });
 
   it('should link the elements section label to the component catalog', () => {
     const html = renderDocsNav({ page: { url: '/docs/elements/' } });
 
     expect(html).toMatch(/<nve-tree-node expanded\s*>\s*<a href="\/docs\/elements\/">Elements<\/a>/);
-    expect(html).toContain(
-      '<nve-tree-node highlighted selected><a href="/docs/elements/">Overview</a></nve-tree-node>'
-    );
+    expect(html).toContain('<nve-tree-node selected><a href="/docs/elements/">Overview</a></nve-tree-node>');
     expect(html).not.toContain('<a href="/docs/elements/accordion/">Elements</a>');
   });
 });

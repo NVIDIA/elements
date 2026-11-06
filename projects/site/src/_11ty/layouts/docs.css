@@ -99,10 +99,14 @@ section[slot='subheader'] {
 }
 
 /* Navigation Tree Styles */
-#docs-nav nve-tree-node:not([expanded]) > a {
-  &::after {
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-    inset: 0 0 0 -24px !important;
+#docs-nav {
+  nve-tree-node {
+    --nve-sys-accent-secondary-background: transparent;
+
+    &:not([expanded]) > a::after {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      inset: 0 0 0 -24px !important;
+    }
   }
 }
 
@@ -470,5 +474,41 @@ blockquote {
 @media (width >= 980px) {
   .docs-badge-section {
     display: block;
+  }
+}
+
+.docs-ascii-logo {
+  position: relative;
+  display: block;
+  flex: none;
+  min-width: var(--nve-ref-size-900);
+  width: var(--nve-ref-size-900);
+  aspect-ratio: 1.25;
+  overflow: hidden;
+  color: var(--nve-ref-color-brand-green-1000);
+
+  /* Reinforce opacity after scaling without expanding or recoloring the glyphs. */
+  filter: drop-shadow(0 0 0 var(--nve-ref-color-brand-green-1000))
+    drop-shadow(0 0 0 var(--nve-ref-color-brand-green-1000));
+
+  pre {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: max-content;
+    transform-origin: top left;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--nve-ref-color-brand-green-1000);
+    font-family: var(--nve-ref-font-family-roboto-mono);
+    font-size: var(--nve-ref-font-size-300);
+    font-weight: var(--nve-ref-font-weight-bold);
+    text-shadow: 0 0 var(--nve-ref-size-50) currentColor;
+    line-height: 1.2;
+    letter-spacing: 0;
+    white-space: pre;
+    pointer-events: none;
+    user-select: none;
   }
 }
