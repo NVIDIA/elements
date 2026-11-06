@@ -559,6 +559,7 @@ function getWhereCommandPath(env: NodeJS.ProcessEnv): string {
   return result.status === 0 ? result.stdout.trim().replaceAll(/\r?\n/g, ', ') : '';
 }
 
+/** @internal exposes installer helpers for platform-specific tests. */
 export const installInternals = {
   createWindowsCommandShim,
   findExecutableOnPath,
