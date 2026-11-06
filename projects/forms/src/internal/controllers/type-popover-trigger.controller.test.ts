@@ -266,7 +266,7 @@ describe('PopoverTriggerController', () => {
       interestSource = (event as Event & { source: HTMLElement }).source;
     });
     popover.addEventListener('beforetoggle', event => {
-      popoverSource = (event as ToggleEvent).source;
+      popoverSource = event.source;
     });
 
     Object.defineProperty(popover, 'anchor', { configurable: true, value: 'anchor' });

@@ -9,11 +9,6 @@
       "count": 2
     }
   },
-  "src/internal/controllers/type-popover-trigger.controller.test.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/internal/controllers/type-popover-trigger.controller.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
