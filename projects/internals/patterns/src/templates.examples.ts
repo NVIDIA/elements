@@ -33,9 +33,9 @@ import '@nvidia-elements/viewport/gridlines/define.js';
 import '@nvidia-elements/viewport/minimap/define.js';
 import '@nvidia-elements/viewport/viewport/define.js';
 import '@nvidia-elements/viewport/zoom-range/define.js';
-import '@nvidia-elements/code/codeblock/define.js';
-import '@nvidia-elements/code/codeblock/languages/python.js';
-import '@nvidia-elements/code/codeblock/languages/yaml.js';
+import '@nvidia-elements/code/code-block/define.js';
+import '@nvidia-elements/code/code-block/languages/python.js';
+import '@nvidia-elements/code/code-block/languages/yaml.js';
 
 /**
  * Templates are page-level starting points for Agents building new views.
@@ -1156,9 +1156,9 @@ export const Docs = {
     <p nve-text="body">
       The pipeline ships as part of the <code nve-text="code">perception</code> package. Install it alongside the runtime to get the GPU-accelerated kernels and the pretrained model registry.
     </p>
-    <nve-codeblock>
+    <nve-code-block>
 pip install perception==2.4.0
-    </nve-codeblock>
+    </nve-code-block>
 
     <h2 nve-text="heading lg">Usage</h2>
     <p nve-text="body">
@@ -1166,7 +1166,7 @@ pip install perception==2.4.0
       detections in your control loop. The pipeline manages preprocessing, batched inference, and non-maximum
       suppression so your control code stays focused on policy decisions.
     </p>
-    <nve-codeblock>
+    <nve-code-block>
 from isaac.perception import DetectionPipeline, CameraSource
 
 pipeline = DetectionPipeline(
@@ -1180,7 +1180,7 @@ for frame in camera.stream():
     detections = pipeline.run(frame)
     for det in detections:
         print(det.label, det.bbox, det.score)
-    </nve-codeblock>
+    </nve-code-block>
 
     <nve-alert status="warning">
       Inference latency above 30 ms can break real-time control loops on mobile robots; profile end-to-end before deploying.

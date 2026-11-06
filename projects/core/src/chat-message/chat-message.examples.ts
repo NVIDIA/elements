@@ -70,9 +70,9 @@ export const PrefixSuffix = {
   <nve-chat-message style="max-width: 70%">
     <nve-avatar slot="prefix" color="gray-denim">AI</nve-avatar>
     <p nve-text="body">To use the <code nve-text="code">nve-chat-message</code> first import the element.</p>
-    <nve-codeblock language="typescript">
-      import '@nvidia-elements/code/codeblock/define.js';
-    </nve-codeblock>
+    <nve-code-block language="typescript">
+      import '@nvidia-elements/code/code-block/define.js';
+    </nve-code-block>
   </nve-chat-message>
 </section>
 `};
@@ -88,10 +88,10 @@ export const Codeblock = {
   </nve-chat-message>
   <nve-chat-message container="flat">
     Here's the steps you need to do follow to use the chat message component
-    <nve-codeblock language="typescript">
+    <nve-code-block language="typescript">
     import '@nvidia-elements/core/chat-message/define.js';
     <code nve-text="code"><nve-chat-message></nve-chat-message></code>
-    </nve-codeblock>
+    </nve-code-block>
   </nve-chat-message>
 </section>
   `

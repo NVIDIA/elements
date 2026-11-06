@@ -426,7 +426,8 @@
     font-weight: var(--nve-ref-font-weight-bold);
   }
 
-  nve-codeblock {
+  nve-code-block,
+nve-codeblock {
     --border-radius: var(--nve-ref-border-radius-sm);
   }
 

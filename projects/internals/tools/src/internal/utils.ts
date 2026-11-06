@@ -39,16 +39,17 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
       })
   ];
 
-  const ELEMENTS_CODE_IMPORTS = elementTags.has('nve-codeblock')
-    ? [
-        `import '@nvidia-elements/code/codeblock/languages/html.js';`,
-        `import '@nvidia-elements/code/codeblock/languages/css.js';`,
-        `import '@nvidia-elements/code/codeblock/languages/json.js';`,
-        `import '@nvidia-elements/code/codeblock/languages/javascript.js';`,
-        `import '@nvidia-elements/code/codeblock/languages/typescript.js';`,
-        `import '@nvidia-elements/code/codeblock/define.js';`
-      ]
-    : [];
+  const ELEMENTS_CODE_IMPORTS =
+    elementTags.has('nve-code-block') || elementTags.has('nve-codeblock')
+      ? [
+          `import '@nvidia-elements/code/code-block/languages/html.js';`,
+          `import '@nvidia-elements/code/code-block/languages/css.js';`,
+          `import '@nvidia-elements/code/code-block/languages/json.js';`,
+          `import '@nvidia-elements/code/code-block/languages/javascript.js';`,
+          `import '@nvidia-elements/code/code-block/languages/typescript.js';`,
+          `import '@nvidia-elements/code/code-block/define.js';`
+        ]
+      : [];
 
   return Array.from(new Set([...IMPORTS, ...ELEMENTS_CODE_IMPORTS]));
 }

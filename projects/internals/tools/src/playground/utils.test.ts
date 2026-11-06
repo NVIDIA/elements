@@ -57,7 +57,7 @@ describe('createPlaygroundURL', () => {
     {
       name: 'nve-code',
       markdown: ' ### Import ',
-      manifest: { metadata: { entrypoint: '@nvidia-elements/code/codeblock' } }
+      manifest: { metadata: { entrypoint: '@nvidia-elements/code/code-block' } }
     },
     {
       name: 'nve-markdown',

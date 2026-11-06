@@ -36,15 +36,15 @@ describe('getElementImports', () => {
     expect(imports[0]).toBe(`import '@nvidia-elements/monaco/input/define.js';`);
   });
 
-  it('should get codeblock imports', () => {
-    const html = '<nve-codeblock></nve-codeblock>';
+  it.each(['nve-code-block', 'nve-codeblock'])('should get imports for %s', tag => {
+    const html = `<${tag}></${tag}>`;
     const imports = getElementImports(html, elements);
-    expect(imports[0]).toBe(`import '@nvidia-elements/code/codeblock/languages/html.js';`);
-    expect(imports[1]).toBe(`import '@nvidia-elements/code/codeblock/languages/css.js';`);
-    expect(imports[2]).toBe(`import '@nvidia-elements/code/codeblock/languages/json.js';`);
-    expect(imports[3]).toBe(`import '@nvidia-elements/code/codeblock/languages/javascript.js';`);
-    expect(imports[4]).toBe(`import '@nvidia-elements/code/codeblock/languages/typescript.js';`);
-    expect(imports[5]).toBe(`import '@nvidia-elements/code/codeblock/define.js';`);
+    expect(imports[0]).toBe(`import '@nvidia-elements/code/code-block/languages/html.js';`);
+    expect(imports[1]).toBe(`import '@nvidia-elements/code/code-block/languages/css.js';`);
+    expect(imports[2]).toBe(`import '@nvidia-elements/code/code-block/languages/json.js';`);
+    expect(imports[3]).toBe(`import '@nvidia-elements/code/code-block/languages/javascript.js';`);
+    expect(imports[4]).toBe(`import '@nvidia-elements/code/code-block/languages/typescript.js';`);
+    expect(imports[5]).toBe(`import '@nvidia-elements/code/code-block/define.js';`);
   });
 
   it('should get lazy element imports', () => {

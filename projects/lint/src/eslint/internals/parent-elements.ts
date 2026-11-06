@@ -6,6 +6,8 @@ export const PARENT_ELEMENT_CONTRACTS: Readonly<Record<string, readonly string[]
   'nve-card-content': ['nve-card'],
   'nve-card-footer': ['nve-card'],
   'nve-card-header': ['nve-card'],
+  'nve-code-block-header': ['nve-code-block', 'nve-codeblock'],
+  'nve-code-block-footer': ['nve-code-block', 'nve-codeblock'],
   'nve-dialog-footer': ['nve-dialog'],
   'nve-dialog-header': ['nve-dialog'],
   'nve-drawer-content': ['nve-drawer'],

@@ -230,7 +230,7 @@ pre {
   anchor-scope: --codeblock;
   width: 100%;
 
-  nve-codeblock {
+  nve-code-block {
     --padding: var(--nve-ref-space-lg);
     anchor-name: --codeblock;
     line-height: 1;
@@ -238,7 +238,7 @@ pre {
   }
 }
 
-.markdown-codeblock nve-codeblock:not(:defined) {
+.markdown-codeblock nve-code-block:not(:defined) {
   pre {
     padding: var(--nve-ref-space-lg);
     background: var(--nve-sys-layer-container-background);
@@ -277,7 +277,7 @@ nvd-canvas > pre {
   transition: opacity 0.15s ease-in-out;
 }
 
-.markdown-codeblock:has(nve-codeblock:hover) .markdown-copy-button,
+.markdown-codeblock:has(nve-code-block:hover) .markdown-copy-button,
 .markdown-copy-button:hover {
   opacity: 1;
 }
