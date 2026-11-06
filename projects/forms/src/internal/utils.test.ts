@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
 
 import {
@@ -13,7 +13,6 @@ import {
   hasAttributeValue,
   isFormElement,
   isObjectLiteral,
-  onKeys,
   removeEmptyTextNode,
   setAttributeValue,
   toggleState
@@ -186,15 +185,6 @@ describe('event and value utilities', () => {
     expect(getStringValue('')).toBe('');
     expect(getStringValue(1)).toBe(null);
     expect(getStringValue(null)).toBe(null);
-  });
-
-  it('should call a callback when the keyboard event matches', () => {
-    const callback = vi.fn();
-
-    onKeys(['Enter', 'Space'], new KeyboardEvent('keyup', { code: 'Enter' }), callback);
-    onKeys(['Enter', 'Space'], new KeyboardEvent('keyup', { code: 'KeyA' }), callback);
-
-    expect(callback).toHaveBeenCalledTimes(1);
   });
 });
 

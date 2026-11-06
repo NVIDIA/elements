@@ -95,8 +95,6 @@ export interface FormControl {
   localName?: string;
 }
 
-export type ChangeEvent = Event & { type: 'change' };
-
 export interface ValidatorResult {
   validity: Partial<ValidityState>;
   message?: string;
