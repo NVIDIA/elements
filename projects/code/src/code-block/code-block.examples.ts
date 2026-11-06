@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import '@nvidia-elements/code/codeblock/languages/typescript.js'
-import '@nvidia-elements/code/codeblock/define.js';
+import '@nvidia-elements/code/code-block/languages/typescript.js'
+import '@nvidia-elements/code/code-block/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Labs/Code/Codeblock',
-  component: 'nve-codeblock'
+  component: 'nve-code-block'
 };
 
 /**
@@ -16,11 +16,11 @@ export default {
  */
 export const Default = {
   render: () => html`
-<nve-codeblock language="typescript">
+<nve-code-block language="typescript">
   function getTime(): number {
     return new Date().getTime();
   }
-</nve-codeblock>
+</nve-code-block>
 `
 };
 
@@ -29,11 +29,11 @@ export const Default = {
  */
 export const Flat = {
   render: () => html`
-<nve-codeblock container="flat" language="typescript">
+<nve-code-block container="flat" language="typescript">
   function getTime(): number {
     return new Date().getTime();
   }
-</nve-codeblock>
+</nve-code-block>
 `
 };
 
@@ -42,17 +42,17 @@ export const Flat = {
  */
 export const Theme = {
   render: () => html`
-<nve-codeblock nve-theme="light" language="typescript">
+<nve-code-block nve-theme="light" language="typescript">
   function getTime(): number {
     return new Date().getTime();
   }
-</nve-codeblock>
+</nve-code-block>
 <br />
-<nve-codeblock nve-theme="dark" language="typescript">
+<nve-code-block nve-theme="dark" language="typescript">
   function getTime(): number {
     return new Date().getTime();
   }
-</nve-codeblock>
+</nve-code-block>
 `
 };
 
@@ -61,12 +61,12 @@ export const Theme = {
  */
 export const Copy = {
   render: () => html`
-<nve-codeblock language="typescript">
+<nve-code-block language="typescript">
   <nve-icon-button slot="actions" icon-name="copy" container="flat"></nve-icon-button>
   function getTime(): number {
     return new Date().getTime();
   }
-</nve-codeblock>
+</nve-code-block>
 `
 };
 
@@ -75,11 +75,11 @@ export const Copy = {
  */
 export const Code = {
   render: () => html`
-<nve-codeblock language="typescript" id="code-property"></nve-codeblock>
+<nve-code-block language="typescript" id="code-property"></nve-code-block>
 <script type="module">
-  import '@nvidia-elements/code/codeblock/define.js';
-  import '@nvidia-elements/code/codeblock/languages/typescript.js';
-  const codeblock = document.querySelector('nve-codeblock#code-property');
+  import '@nvidia-elements/code/code-block/define.js';
+  import '@nvidia-elements/code/code-block/languages/typescript.js';
+  const codeblock = document.querySelector('nve-code-block#code-property');
   codeblock.code = 'console.log("hello, world!")';
 </script>
 `
@@ -90,11 +90,11 @@ export const Code = {
  */
 export const LineNumbers = {
   render: () => html`
-<nve-codeblock language="typescript" line-numbers>
+<nve-code-block language="typescript" line-numbers>
 function getTime(): number {
   return new Date().getTime();
 }
-</nve-codeblock>
+</nve-code-block>
 `
 }
 
@@ -103,11 +103,11 @@ function getTime(): number {
  */
 export const Highlight = {
   render: () => html`
-<nve-codeblock language="typescript" line-numbers highlight="2">
+<nve-code-block language="typescript" line-numbers highlight="2">
 function getTime(): number {
   return new Date().getTime();
 }
-</nve-codeblock>
+</nve-code-block>
 `
 }
 
@@ -117,14 +117,14 @@ function getTime(): number {
  */
 export const Overflow = {
   render: () => html`
-<nve-codeblock language="typescript" line-numbers highlight="2" style="height: 100px;">
+<nve-code-block language="typescript" line-numbers highlight="2" style="height: 100px;">
   import{LitElement as t,html as e}from"lit";import{property as s}from"lit/decorators/property.js";import{state as o}from"lit/decorators/state.js";
   import{unsafeHTML as i}from"lit/directives/unsafe-html.js";
   import{useStyles as r,shiftLeft as n}from"@nvidia-elements/core/internal";
-  import l from"./codeblock.css.js";
+  import l from"./code-block.css.js";
   import a from"highlight.js/lib/core";
   import h from"highlight.js/lib/languages/shell";
-</nve-codeblock>
+</nve-code-block>
 `
 };
 
@@ -135,23 +135,117 @@ export const Overflow = {
 export const LineWrap = {
   render: () => html`
 <div nve-layout="column gap:md">
-  <nve-codeblock language="json" style="--white-space: pre-wrap; width: 400px;">
+  <nve-code-block language="json" style="--white-space: pre-wrap; width: 400px;">
 <template>
 [
   {"id":"h100","name":"H100 SXM5","series":"H100 Series","architecture":"Hopper","process_node":"4nm","cuda_cores":16896,"rt_cores":0,"tensor_cores":528,"base_clock":1410,"boost_clock":1980,"memory":{"size":"80GB","type":"HBM3","bandwidth":"3350 GB/s","bus_width":5120},"ai_performance":{"fp32_tflops":67,"tensor_tflops":1979,"transformer_engine":true,"fp8_support":true,"nvlink_bandwidth":"900 GB/s"},"power_consumption":700,"msrp":25000,"release_date":"2022-03-22","ai_workloads":["large_language_models","training","inference","hpc"]},
   {"id":"a100","name":"A100 SXM4","series":"A100 Series","architecture":"Ampere","process_node":"7nm","cuda_cores":6912,"rt_cores":0,"tensor_cores":432,"base_clock":765,"boost_clock":1410,"memory":{"size":"80GB","type":"HBM2e","bandwidth":"2039 GB/s","bus_width":5120},"ai_performance":{"fp32_tflops":19.5,"tensor_tflops":624,"sparsity_support":true,"multi_instance_gpu":7,"nvlink_bandwidth":"600 GB/s"},"power_consumption":400,"msrp":15000,"release_date":"2020-05-14","ai_workloads":["training","inference","data_analytics","hpc"]}
 ]
 </template>
-  </nve-codeblock>
+  </nve-code-block>
 
-  <nve-codeblock language="json"  style="width: 400px;">
+  <nve-code-block language="json"  style="width: 400px;">
 <template>
 [
   {"id":"h100","name":"H100 SXM5","series":"H100 Series","architecture":"Hopper","process_node":"4nm","cuda_cores":16896,"rt_cores":0,"tensor_cores":528,"base_clock":1410,"boost_clock":1980,"memory":{"size":"80GB","type":"HBM3","bandwidth":"3350 GB/s","bus_width":5120},"ai_performance":{"fp32_tflops":67,"tensor_tflops":1979,"transformer_engine":true,"fp8_support":true,"nvlink_bandwidth":"900 GB/s"},"power_consumption":700,"msrp":25000,"release_date":"2022-03-22","ai_workloads":["large_language_models","training","inference","hpc"]},
   {"id":"a100","name":"A100 SXM4","series":"A100 Series","architecture":"Ampere","process_node":"7nm","cuda_cores":6912,"rt_cores":0,"tensor_cores":432,"base_clock":765,"boost_clock":1410,"memory":{"size":"80GB","type":"HBM2e","bandwidth":"2039 GB/s","bus_width":5120},"ai_performance":{"fp32_tflops":19.5,"tensor_tflops":624,"sparsity_support":true,"multi_instance_gpu":7,"nvlink_bandwidth":"600 GB/s"},"power_consumption":400,"msrp":15000,"release_date":"2020-05-14","ai_workloads":["training","inference","data_analytics","hpc"]}
 ]
 </template>
-  </nve-codeblock>
+  </nve-code-block>
 </div>
 `
 }
+
+/**
+ * @summary Keep a source label and supporting information visible while reviewing code.
+ */
+export const HeaderFooter = {
+  render: () => html`
+<nve-code-block language="shell">
+  <nve-code-block-header>
+    <span slot="prefix" nve-text="body">Shell</span>
+    <span nve-text="body">Setup</span>
+    <nve-icon-button slot="suffix" icon-name="copy" aria-label="Copy setup commands" container="inline"></nve-icon-button>
+  </nve-code-block-header>
+  <template>
+# install CLI
+curl -fsSL https://nvidia.github.io/elements/install.sh | bash
+
+# create a new project
+nve project.create
+
+# configure dependencies and MCP tools
+nve project.setup
+  </template>
+  <nve-code-block-footer>
+    <span slot="prefix" nve-text="body">Shell</span>
+    <span nve-text="body">Run from the project directory.</span>
+    <span slot="suffix" nve-text="body">Ready</span>
+  </nve-code-block-footer>
+</nve-code-block>
+  `
+};
+
+
+/**
+ * @summary Codeblock with container styling for different visual contexts.
+ * @tags test-case
+ */
+export const ContainerHeaderFooter = {
+  render: () => html`
+<div nve-layout="column gap:md">
+<nve-code-block language="shell" container="inline">
+  <nve-code-block-header>
+    <span nve-text="body">Setup</span>
+    <nve-icon-button slot="suffix" icon-name="copy" aria-label="Copy setup commands" container="inline"></nve-icon-button>
+  </nve-code-block-header>
+  <template>
+# install CLI
+curl -fsSL https://nvidia.github.io/elements/install.sh | bash
+
+# create a new project
+nve project.create
+
+# configure dependencies and MCP tools
+nve project.setup
+  </template>
+  <nve-code-block-footer><span nve-text="body">Shell commands</span></nve-code-block-footer>
+</nve-code-block>
+
+<nve-code-block language="shell" container="flat">
+  <nve-code-block-header>
+    <span nve-text="body">Setup</span>
+    <nve-icon-button slot="suffix" icon-name="copy" aria-label="Copy setup commands" container="inline"></nve-icon-button>
+  </nve-code-block-header>
+  <template>
+# install CLI
+curl -fsSL https://nvidia.github.io/elements/install.sh | bash
+
+# create a new project
+nve project.create
+
+# configure dependencies and MCP tools
+nve project.setup
+  </template>
+  <nve-code-block-footer><span nve-text="body">Shell commands</span></nve-code-block-footer>
+</nve-code-block>
+<nve-code-block language="shell">
+  <nve-code-block-header>
+    <span nve-text="body">Setup</span>
+    <nve-icon-button slot="suffix" icon-name="copy" aria-label="Copy setup commands" container="inline"></nve-icon-button>
+  </nve-code-block-header>
+  <template>
+# install CLI
+curl -fsSL https://nvidia.github.io/elements/install.sh | bash
+
+# create a new project
+nve project.create
+
+# configure dependencies and MCP tools
+nve project.setup
+  </template>
+  <nve-code-block-footer><span nve-text="body">Shell commands</span></nve-code-block-footer>
+</nve-code-block>
+</div>
+  `
+};
