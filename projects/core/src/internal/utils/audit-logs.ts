@@ -24,7 +24,3 @@ export function getIdMatchNotFoundWarning(id: string) {
 export function getSSRMismatchWarning(localName: string) {
   return `${localName} rendered on the client with mismatched SSR content. ${DOCS_LOG_URL}#ssr-mismatch`;
 }
-
-export function getCrossShadowRootAnchorWarning(localName: string) {
-  return `(deprecated) ${localName} provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`;
-}

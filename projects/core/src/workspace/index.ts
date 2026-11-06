@@ -5,8 +5,10 @@ export * from './workspace.js';
 
 export * from './panel/panel.js';
 
+/** @public */
 export type { WorkspaceLayout, WorkspaceNode, WorkspaceGroup, WorkspaceSplit } from './utils/model/layout.utils.js';
 
+/** @public */
 export type {
   WorkspacePlacement,
   WorkspaceSide,
@@ -18,4 +20,5 @@ export * from './panel-header/panel-header.js';
 export * from './panel-content/panel-content.js';
 export * from './panel-footer/panel-footer.js';
 
+/** @public */
 export type { WorkspaceAnimationOptions } from './workspace.types.js';

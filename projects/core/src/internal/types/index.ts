@@ -5,6 +5,7 @@ import type { TemplateResult } from 'lit';
 import type { IconName } from './icons.js';
 import type { I18nStrings } from '@nvidia-elements/foundations/internal/i18n';
 
+/** @public */
 export type Color =
   | 'red-cardinal'
   | 'gray-slate'
@@ -33,6 +34,7 @@ export type Color =
  * - `sm` - Compact size for dense layouts or secondary elements with less visual prominence.
  * - `md` - Standard size that works well in most contexts and provides balanced visibility.
  * - `lg` - Larger size for emphasizing important elements or improving touch targets in spacious layouts.
+ * @public
  */
 export type Size = 'sm' | 'md' | 'lg';
 
@@ -42,12 +44,14 @@ export type Size = 'sm' | 'md' | 'lg';
  * - `md` - Standard size that works well in most contexts and provides balanced visibility.
  * - `lg` - Larger size for emphasizing important elements or improving touch targets in spacious layouts.
  * - `xl` - Extra large size for emphasizing elements or sparse layouts.
+ * @public
  */
 export type SizeExpanded = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /** Controls the visual prominence to establish hierarchy and guide user attention.
  * - `emphasis` - Increases visual weight to draw attention and highlight important elements.
  * - `muted` - Reduces visual weight for supporting content that should remain subtle and unobtrusive.
+ * @public
  */
 export type Prominence = 'emphasis' | 'muted';
 
@@ -57,12 +61,14 @@ export type Prominence = 'emphasis' | 'muted';
  * - `inline` Element container reduces to fit within inline content such as a block of text.
  * - `inset` Element container optimizes for embedding or inset placement inside another containing element.
  * - `full` Element container optimizes for filling its container bounds.
+ * @public
  */
 export type Container = 'inline' | 'flat' | 'inset' | 'full';
 
 /** Controls the visual density of an element to match its context and available space.
  * - `compact` - Reduces visual weight and spacing for dense layouts or secondary elements with less visual prominence.
  * - `default` - Standard size that works well in most contexts and provides balanced visibility.
+ * @public
  */
 export type Density = 'compact' | 'default';
 
@@ -71,6 +77,7 @@ export type Density = 'compact' | 'default';
  * - `warning` - Indicates cautionary actions that require careful consideration before proceeding.
  * - `success` - Represents positive outcomes, confirmations, or constructive actions.
  * - `danger` - Signals destructive or irreversible actions that need extra attention and confirmation.
+ * @public
  */
 export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
 
@@ -78,10 +85,13 @@ export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
  * - `linear` - Connects points with straight line segments.
  * - `smooth` - Connects points with smooth bezier curves.
  * - `step` - Connects points with horizontal and vertical step segments.
+ * @public
  */
 export type Interpolation = 'linear' | 'smooth' | 'step';
 
-/** Determines the orientation of an element. */
+/** Determines the orientation of an element.
+ * @public
+ */
 export type Orientation = 'vertical' | 'horizontal';
 
 /** Communicates the current state of a task or process to keep users informed of progress and outcomes.
@@ -96,6 +106,7 @@ export type Orientation = 'vertical' | 'horizontal';
  * - `failed` - Task encountered an error and did not complete as intended.
  * - `unknown` - Task status remains unknown or unavailable.
  * - `ignored` - Task was intentionally skipped or excluded from execution.
+ * @public
  */
 export type TaskStatus =
   | 'scheduled'
@@ -115,9 +126,11 @@ export type TaskStatus =
  * - `auto` light dismiss, focus on open, return to trigger
  * - `manual` no light dismiss, no auto focus
  * - `hint` no light dismiss, no auto focus, open/close on hover/focus
+ * @public
  */
 export type PopoverType = 'auto' | 'manual' | 'hint' | 'inline';
 
+/** @public */
 export type InterestEvent = Event & {
   source: HTMLElement;
 };
@@ -126,6 +139,7 @@ export type InterestEvent = Event & {
  * - `start` - Aligns the popover to the beginning edge of the anchor for left or top alignment.
  * - `end` - Aligns the popover to the ending edge of the anchor for right or bottom alignment.
  * - `center` - Centers the popover along the anchor's edge for balanced positioning.
+ * @public
  */
 export type PopoverAlign = 'start' | 'end' | 'center';
 
@@ -134,6 +148,7 @@ export type PopoverAlign = 'start' | 'end' | 'center';
  * - `bottom` - Positions the popover below the anchor element.
  * - `left` - Positions the popover to the left side of the anchor element.
  * - `right` - Positions the popover to the right side of the anchor element.
+ * @public
  */
 export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
 
@@ -143,10 +158,13 @@ export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
  * - `bottom` - Positions the popover below the anchor element.
  * - `left` - Positions the popover to the left side of the anchor element.
  * - `right` - Positions the popover to the right side of the anchor element.
+ * @public
  */
 export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 
-/** Determines the position of an element relative to its anchor */
+/** Determines the position of an element relative to its anchor
+ * @public
+ */
 export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
 
 /** Controls the directional arrangement and spacing behavior of the element's content.
@@ -154,12 +172,14 @@ export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
  * - `vertical-inline` - Arranges content vertically with compact inline spacing for dense layouts.
  * - `horizontal` - Arranges content in a horizontal row with block-level spacing.
  * - `horizontal-inline` - Arranges content horizontally with compact inline spacing.
+ * @public
  */
 export type ControlLayout = 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
 /** Indicates the element that represents the user's current location or position within a set. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
  * - `page` - Marks the current page within a set of navigation links.
  * - `step` - Marks the current step within a multi-step process or workflow.
+ * @public
  */
 export type Current = 'page' | 'step';
 
@@ -169,9 +189,11 @@ export type Current = 'page' | 'step';
  * - `gradient` - Renders a line with gradient color treatment to communicate value intensity across the series.
  * - `column` - Renders data as vertical columns for easy comparison of discrete values.
  * - `winloss` - Renders outcomes as binary or ternary bars to highlight wins, losses, and optional ties.
+ * @public
  */
 export type SparklineMark = 'line' | 'area' | 'gradient' | 'column' | 'winloss';
 
+/** @public */
 export interface NveElement {
   /**
    * This Boolean attribute prevents the user from interacting with the element: it cannot receive press or focus events. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled)
@@ -385,24 +407,30 @@ export interface NveElement {
  * - `footer` - Content that appears at the bottom of the element, used for supplementary information or actions.
  * - `actions` - Content area specifically for interactive controls like buttons or links.
  * - `icon` - Content area for displaying an icon that represents the element's purpose or state.
+ * @public
  */
 export type SlotName = 'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon';
 
 /** The Interaction type provides a way to show the intent of an interactive element. This can help users quickly understand what each interaction does and reduce the potential for confusion or errors.
  * - `emphasis` Shows the interaction targets emphasis or highlighting primary actions.
  * - `destructive` Shows the interaction targets destructive actions such as deleting or removing.
+ * @public
  */
 export type Interaction = 'emphasis' | 'destructive';
 
+/** @public */
 export interface ContainerElement {
   container?: Partial<Container>;
 }
 
-/** An element that renders complex data structures (e.g., arrays, series, matrices) rather than composable UI content and values expressible with primitive attributes. */
+/** An element that renders complex data structures (e.g., arrays, series, matrices) rather than composable UI content and values expressible with primitive attributes.
+ * @public
+ */
 export interface DataElement<T extends unknown[] | Record<string, unknown>> {
   data?: T;
 }
 
+/** @public */
 export const statusIcons: { [key: string]: IconName } = {
   '': 'information-circle',
   undefined: 'information-circle',
@@ -440,29 +468,35 @@ declare global {
   };
 }
 
+/** @public */
 export interface Point {
   x: number;
   y: number;
 }
 
+/** @public */
 export interface OffsetPoint {
   offsetX: number;
   offsetY: number;
 }
 
+/** @public */
 export interface Dimensions {
   width: number;
   height: number;
 }
 
+/** @public */
 export type Rect = Point & Dimensions;
 
+/** @public */
 export interface Scale {
   min: number;
   max: number;
 }
 
 /** https://github.com/tc39/proposal-decorators */
+/** @public */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export type LegacyDecoratorTarget = Function & {
   addInitializer?: (initializer: (instance: any) => void) => void; // eslint-disable-line @typescript-eslint/no-explicit-any

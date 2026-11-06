@@ -43,7 +43,3 @@ export function getControlLayout(width: number, initalLayout: ControlLayouts) {
 
   return layout;
 }
-
-export function isInlineInputType(input: HTMLInputElement) {
-  return input.type === 'radio' || input.type === 'checkbox';
-}

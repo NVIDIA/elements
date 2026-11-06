@@ -5,8 +5,6 @@ import type { ReactiveController, ReactiveControllerHost } from 'lit';
 
 type SpatialKeyHost = ReactiveControllerHost & HTMLElement;
 
-export type SpatialKeyHandling = 'handled' | 'ignored';
-
 export interface KeyNavigationSpatialControllerOptions {
   readonly isEnabled?: () => boolean;
 }

@@ -11,7 +11,6 @@ import {
   updateControlStatusState,
   setupControlStates,
   setupControlValidationStates,
-  showNonValidationMessages,
   hideAllValidationMessages,
   showActiveValidationMessages,
   hideInactiveValidationMessages
@@ -344,25 +343,6 @@ describe('setupControlStates', () => {
     expect(control._internals.states.has('dirty')).toBe(true);
   });
 });
-
-describe('showNonValidationMessages', () => {
-  it('should show all messages that do not have a validation requirement', async () => {
-    const messages = [
-      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
-      document.createElement(ControlMessage.metadata.tag) as ControlMessage
-    ];
-
-    messages[0].setAttribute('error', 'valueMissing');
-    messages[0].hidden = true;
-    messages[1].hidden = true;
-
-    showNonValidationMessages(messages);
-
-    expect(messages[0].hidden).toBe(true);
-    expect(messages[1].hidden).toBe(false);
-  });
-});
-
 describe('hideAllValidationMessages', () => {
   it('should hide all messages with a validation requirement', async () => {
     const messages = [

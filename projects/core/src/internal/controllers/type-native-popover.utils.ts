@@ -3,17 +3,7 @@
 
 import { LogService } from '../services/log.service.js';
 import { getIdMatchNotFoundWarning } from '../utils/audit-logs.js';
-import { generateId, getFlattenedDOMTree, getAnchorNames, appendAnchorName } from '../utils/dom.js';
-
-export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
-  const anchorNames = getAnchorNames(anchor);
-  let anchorId = anchorNames.find(name => name.startsWith('--_'));
-  if (!anchorId) {
-    anchorId = `--${anchor.id && !anchor.id.includes(':') ? `_${anchor.id}` : generateId()}`;
-    appendAnchorName(anchor, anchorId);
-  }
-  host.style.positionAnchor = anchorId;
-}
+import { getFlattenedDOMTree } from '../utils/dom.js';
 
 export function getHostTrigger(element: HTMLElement, trigger: HTMLElement | string) {
   if (typeof trigger === 'string') {
