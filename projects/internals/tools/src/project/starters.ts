@@ -451,14 +451,6 @@ export function createGitInitProcess(extractedDir: string) {
   return execFile('git', ['init', extractedDir]);
 }
 
-export function getDependencyInstallFailureMessage(extractedDir: string, npmClient: NPMClient | null) {
-  if (npmClient) {
-    return `⚠️ Error installing dependencies, in the "${extractedDir}" directory run "${npmClient} install"`;
-  }
-
-  return `⚠️ Error installing dependencies, install npm or pnpm, then run a package-manager install in the "${extractedDir}" directory`;
-}
-
 /* istanbul ignore next -- @preserve */
 function isGitRepository(directoryPath: string) {
   // Check if .git directory exists directly in the given path

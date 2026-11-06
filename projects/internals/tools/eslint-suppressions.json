@@ -24,11 +24,6 @@
       "count": 1
     }
   },
-  "src/packages/utils.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/playground/utils.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1

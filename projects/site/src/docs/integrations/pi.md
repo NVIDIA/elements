@@ -8,7 +8,7 @@
 
 # {{ title }}
 
-[`@nvidia-elements/pi`](https://www.npmjs.com/package/@nvidia-elements/pi) gives [Pi](https://pi.dev) agents native access to Elements API documentation, examples, design tokens, icons, package information, project checks, and template validation. Pi can also use our <a href="/docs/skills/">Skills</a> and <a href="/docs/cli/">CLI</a> directly without requiring the extension.
+[`@nvidia-elements/pi`](https://pi.dev/packages/@nvidia-elements/pi) gives [Pi](https://pi.dev) agents native access to Elements API documentation, examples, design tokens, icons, package information, project checks, and template validation. Pi can also use our <a href="/docs/skills/">Skills</a> and <a href="/docs/cli/">CLI</a> directly without requiring the extension.
 
 ## Install
 

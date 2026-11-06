@@ -3,7 +3,7 @@
 
 import { existsSync, readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { type LighthouseScores, generateLighthouseReport, getLighthouseReport } from './lighthouse.utils.js';
+import { type LighthouseScores, generateLighthouseReport } from './lighthouse.utils.js';
 
 /**
  * While we don't generate the lighthouse reports, we can still test the output lighthouse returns
@@ -13,7 +13,7 @@ describe('Lighthouse Metadata', () => {
   let summary: LighthouseScores;
 
   beforeEach(async () => {
-    summary = await getLighthouseReport();
+    summary = JSON.parse(readFileSync('./static/lighthouse.json', 'utf8'));
   });
 
   it('should return the metadata json', async () => {

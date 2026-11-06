@@ -1,25 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { ApiService, ProjectsService as PackageService, type Attribute, type Element } from '@internals/metadata';
+import { ProjectsService as PackageService } from '@internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions, getPublishedProjects } from '../api/utils.js';
-
-const PLACEHOLDER_CHANGELOG_PATTERN = /^##\s+0\.0\.0\s*\n+\s*Initial release\.?\s*$/;
-
-export function hasChangelogEntries(changelog: string | undefined): boolean {
-  const trimmed = changelog?.trim() ?? '';
-  if (!trimmed) return false;
-  return !PLACEHOLDER_CHANGELOG_PATTERN.test(trimmed);
-}
-
-export async function findPublicAPIChangelog(name: string): Promise<string | undefined> {
-  const data = await ApiService.search(name);
-  const result = data.find((r: Element | Attribute) => r.name === name) as
-    | Element
-    | (Attribute & { changelog: string })
-    | undefined;
-  return result?.changelog ?? JSON.stringify(result, null, 2);
-}
 
 export function scopeOrder(name: string) {
   return name.startsWith('@nvidia-elements/') ? -1 : 0;

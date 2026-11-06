@@ -12,8 +12,8 @@ const BUNDLE_ENTRIES = ['src/bundle.ts'];
 const VITE_CONFIGS = ['vite*.ts'];
 const VITEST_CONFIGS = ['vitest*.ts'];
 
-/** @type {import('knip').KnipConfig} */
-export default {
+/** @type {(production: boolean) => import('knip').KnipConfig} */
+const createConfig = production => ({
   exclude: ['catalog'],
   ignoreBinaries: ['vale'],
   ignoreDependencies: [
@@ -124,12 +124,23 @@ export default {
       ],
       project: [...PROJECT_FILES, ...SOURCE_FILES]
     },
+    'projects/internals/design': {
+      entry: production ? ['scripts/write-design-md.js'] : [],
+      project: ['src/**/*.js', 'scripts/**/*.js']
+    },
     'projects/internals/eslint': {
       entry: [...SOURCE_INDEX],
       project: [...SOURCE_FILES]
     },
     'projects/internals/metadata': {
-      entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...TEST_ENTRIES, ...VITE_CONFIGS, ...VITEST_CONFIGS],
+      entry: [
+        ...PACKAGE_FILES,
+        ...SOURCE_INDEX,
+        ...TEST_ENTRIES,
+        ...VITE_CONFIGS,
+        ...VITEST_CONFIGS,
+        ...(production ? ['src/tasks/!(*.utils).ts'] : [])
+      ],
       project: [...PROJECT_FILES, ...SOURCE_FILES]
     },
     'projects/internals/patterns': {
@@ -197,7 +208,14 @@ export default {
       project: [...PROJECT_FILES]
     },
     'projects/pi': {
-      entry: [...PACKAGE_FILES, ...SOURCE_INDEX, ...TEST_ENTRIES, ...VITE_CONFIGS, ...VITEST_CONFIGS],
+      entry: [
+        ...PACKAGE_FILES,
+        ...SOURCE_INDEX,
+        ...TEST_ENTRIES,
+        ...VITE_CONFIGS,
+        ...VITEST_CONFIGS,
+        ...(production ? ['src/scripts/write-resources.ts'] : [])
+      ],
       project: [...PROJECT_FILES, ...SOURCE_FILES],
       ignoreDependencies: [
         '@nvidia-elements/themes', // Required by the externalized @nvidia-elements/lint runtime.
@@ -300,4 +318,42 @@ export default {
       project: [...PROJECT_FILES, ...BUILD_FILES, ...SOURCE_FILES]
     }
   }
-};
+});
+
+/**
+ * Tests remain roots in the normal pass. Production analysis keeps documentation and
+ * examples. Private package barrels also have their exports checked for real usage.
+ * @param {{ production?: boolean }} options
+ * @returns {import('knip').KnipConfig}
+ */
+export default function ({ production = false }) {
+  const config = createConfig(production);
+  if (!production) return config;
+
+  const testFiles = ['**/*.test.{js,ts,tsx}', '**/*.test.*.{js,ts,tsx}', 'vitest*.ts'];
+  return {
+    ...config,
+    ignoreExportsUsedInFile: true,
+    workspaces: Object.fromEntries(
+      Object.entries(config.workspaces).map(([name, workspace]) => [
+        name,
+        {
+          ...workspace,
+          includeEntryExports: ['projects/core', 'projects/forms', 'projects/foundations'].includes(name),
+          // Examples and Vite configurations export framework entry points.
+          ignoreIssues: { 'src/**/*.examples.ts': ['exports', 'types'], 'vite*.ts': ['exports'] },
+          entry: [
+            ...workspace.entry
+              // Knip discovers package exports and binaries through tsconfig.lib.json.
+              .filter(
+                pattern => pattern !== SOURCE_INDEX[0] && !pattern.includes('.test.') && !pattern.startsWith('vitest')
+              )
+              .map(pattern => `${pattern}!`),
+            ...testFiles.map(pattern => `!${pattern}!`)
+          ],
+          project: [...workspace.project.map(pattern => `${pattern}!`), ...testFiles.map(pattern => `!${pattern}!`)]
+        }
+      ])
+    )
+  };
+}

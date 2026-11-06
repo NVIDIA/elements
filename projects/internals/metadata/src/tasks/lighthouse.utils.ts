@@ -64,7 +64,3 @@ export async function generateLighthouseReport(): Promise<LighthouseScores> {
     '@nvidia-elements/viewport': await loadLighthouseReport('../../../../viewport')
   };
 }
-
-export async function getLighthouseReport(): Promise<LighthouseScores> {
-  return JSON.parse(readFileSync('./static/lighthouse.json', 'utf8'));
-}
