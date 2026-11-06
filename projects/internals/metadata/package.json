@@ -315,6 +315,10 @@
           "cascade": false
         },
         {
+          "script": "../../code:test:visual",
+          "cascade": false
+        },
+        {
           "script": "../../forms:test:coverage",
           "cascade": false
         },

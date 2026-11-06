@@ -8,6 +8,7 @@
 | `pnpm run test`            | Run unit tests                            |
 | `pnpm run test:watch`      | Run unit tests in watch mode              |
 | `pnpm run test:axe`        | Run accessibility tests                   |
+| `pnpm run test:visual`     | Run visual regression tests               |
 | `pnpm run test:ssr`        | Run server-side rendering tests           |
 | `pnpm run test:coverage`   | Run unit tests with coverage              |
 | `pnpm run test:types`      | Type-check source, tests, and examples    |

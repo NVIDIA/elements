@@ -6,12 +6,14 @@ import { lighthouseRunner } from '@internals/vite';
 
 describe('codeblock lighthouse report', () => {
   test('codeblock should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-codeblock', /* html */`
-      <nve-codeblock language="shell">
-        pnpm install
-      </nve-codeblock>
+    const report = await lighthouseRunner.getReport('nve-code-block', /* html */`
+      <nve-code-block language="shell">
+        <nve-code-block-header>Install</nve-code-block-header>
+        <template>pnpm install</template>
+        <nve-code-block-footer>Shell command</nve-code-block-footer>
+      </nve-code-block>
       <script type="module">
-        import '@nvidia-elements/code/codeblock/define.js';
+        import '@nvidia-elements/code/code-block/define.js';
       </script>
     `);
 
