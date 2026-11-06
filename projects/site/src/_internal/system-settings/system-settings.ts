@@ -17,7 +17,7 @@ import styles from './system-settings.css?inline';
 export class SystemSettings extends LitElement {
   get #globals() {
     return {
-      theme: 'dark',
+      theme: 'auto',
       font: '',
       scale: '',
       debug: '',

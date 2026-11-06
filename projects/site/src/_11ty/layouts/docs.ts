@@ -6,6 +6,7 @@ import type { PagePanelContent } from '@nvidia-elements/core/page';
 import type { Tree } from '@nvidia-elements/core/tree';
 import { FILTER_VALUES, type DocsSearch } from '../../_internal/search/search.js';
 import '../../_internal/canvas/canvas.js';
+import '../../_internal/header-ascii.js';
 
 void import('../../_internal/search/search.js');
 
