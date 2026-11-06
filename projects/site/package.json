@@ -331,7 +331,7 @@
     }
   },
   "dependencies": {
-    "3d-force-graph": "1.80.1",
+    "3d-force-graph": "1.80.2",
     "chart.js": "4.5.1",
     "lit": "catalog:"
   },
