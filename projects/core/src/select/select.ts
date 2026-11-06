@@ -165,7 +165,7 @@ export class Select extends Control {
     return this.#select?.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
-      <nve-dropdown part="dropdown" @close=${this.#closeDropdown} @open=${this.#openDropdown} hidden .anchor=${this.#input as HTMLElement} position="bottom">
+      <nve-dropdown part="dropdown" @close=${this.#closeDropdown} @open=${this.#openDropdown} hidden .anchor=${this.#input} position="bottom">
         ${this.#menu}
       </nve-dropdown>`
       : this.#menu;
