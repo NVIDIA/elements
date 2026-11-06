@@ -48,10 +48,5 @@
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 2
     }
-  },
-  "src/toast/toast.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
   }
 }
