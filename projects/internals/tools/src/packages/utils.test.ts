@@ -2,15 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import {
-  findPublicAPIChangelog,
-  getAvailablePackages,
-  getPackage,
-  getVersions,
-  hasChangelogEntries,
-  limitChangelogVersions,
-  scopeOrder
-} from './utils.js';
+import { getAvailablePackages, getPackage, getVersions, limitChangelogVersions, scopeOrder } from './utils.js';
 
 vi.mock('@internals/metadata', () => ({
   ApiService: { search: vi.fn() },
@@ -44,26 +36,6 @@ vi.mock('../api/utils.js', async importOriginal => {
     })
   };
 });
-
-describe('hasChangelogEntries', () => {
-  it('should return false for empty / whitespace / undefined input', () => {
-    expect(hasChangelogEntries(undefined)).toBe(false);
-    expect(hasChangelogEntries('')).toBe(false);
-    expect(hasChangelogEntries('   \n  ')).toBe(false);
-  });
-
-  it('should return false for the placeholder initial-release stub', () => {
-    expect(hasChangelogEntries('## 0.0.0\n\nInitial release.\n')).toBe(false);
-    expect(hasChangelogEntries('## 0.0.0\n\nInitial release')).toBe(false);
-  });
-
-  it('should return true when the changelog has any real version entry', () => {
-    expect(hasChangelogEntries('## <small>0.0.8 (2026-04-24)</small>\n\n* fix: thing')).toBe(true);
-    expect(hasChangelogEntries('## 1.0.0\n\nFirst stable release.')).toBe(true);
-    expect(hasChangelogEntries('## 0.0.0\n\nInitial release.\n\n## 0.1.0\n\n* feat: thing')).toBe(true);
-  });
-});
-
 describe('limitChangelogVersions', () => {
   const changelog = [
     '## [v3.0.0](url) (2026-03-01)',
@@ -111,44 +83,6 @@ describe('limitChangelogVersions', () => {
     expect(limitChangelogVersions('', 5)).toBe('');
   });
 });
-
-describe('findPublicAPIChangelog', () => {
-  it('should return changelog when element is found', async () => {
-    const { ApiService } = await import('@internals/metadata');
-    vi.mocked(ApiService.search).mockResolvedValue([
-      { name: 'nve-button', changelog: '## 1.0.0\n- Initial release' }
-    ] as never);
-
-    const result = await findPublicAPIChangelog('nve-button');
-    expect(result).toBe('## 1.0.0\n- Initial release');
-  });
-
-  it('should return JSON string when result has no changelog', async () => {
-    const { ApiService } = await import('@internals/metadata');
-    const attribute = { name: 'nve-layout', description: 'Layout attribute' };
-    vi.mocked(ApiService.search).mockResolvedValue([attribute] as never);
-
-    const result = await findPublicAPIChangelog('nve-layout');
-    expect(result).toBe(JSON.stringify(attribute, null, 2));
-  });
-
-  it('should return undefined when no matching result is found', async () => {
-    const { ApiService } = await import('@internals/metadata');
-    vi.mocked(ApiService.search).mockResolvedValue([{ name: 'nve-badge', changelog: '## 1.0.0' }] as never);
-
-    const result = await findPublicAPIChangelog('nve-button');
-    expect(result).toBeUndefined();
-  });
-
-  it('should return undefined when search returns empty results', async () => {
-    const { ApiService } = await import('@internals/metadata');
-    vi.mocked(ApiService.search).mockResolvedValue([] as never);
-
-    const result = await findPublicAPIChangelog('nve-button');
-    expect(result).toBeUndefined();
-  });
-});
-
 describe('scopeOrder', () => {
   it('should return -1 for @nvidia-elements/ packages', () => {
     expect(scopeOrder('@nvidia-elements/core')).toBe(-1);

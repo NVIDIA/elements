@@ -31,7 +31,8 @@
     "commitlint": "commitlint --edit",
     "lint:knip": "wireit",
     "lint:vale": "wireit",
-    "lint:vale:sync": "vale sync"
+    "lint:vale:sync": "vale sync",
+    "lint:knip:production": "wireit"
   },
   "devDependencies": {
     "@commitlint/cli": "21.2.4",
@@ -76,6 +77,7 @@
         "format",
         "lint:vale",
         "lint:knip",
+        "lint:knip:production",
         "ci:validate",
         "./projects/code:ci",
         "./projects/cli:ci",
@@ -361,7 +363,7 @@
       "output": []
     },
     "lint:knip": {
-      "command": "knip --cache --config knip.config.js",
+      "command": "knip --cache --cache-location node_modules/.cache/knip/default --config knip.config.js",
       "dependencies": [
         {
           "script": "./projects/internals/metadata:build",
@@ -407,7 +409,7 @@
         "!projects/**/.screencast/.auth/*"
       ],
       "output": [
-        "node_modules/.cache/knip/**"
+        "node_modules/.cache/knip/default/**"
       ]
     },
     "notice": {
@@ -430,6 +432,56 @@
     },
     "prepare": {
       "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs ; vale sync)"
+    },
+    "lint:knip:production": {
+      "command": "knip --production --tsConfig tsconfig.lib.json --include files,exports,types --cache --cache-location node_modules/.cache/knip/production --config knip.config.js",
+      "dependencies": [
+        {
+          "script": "./projects/internals/metadata:build",
+          "cascade": false
+        },
+        {
+          "script": "./projects/internals/tools:build",
+          "cascade": false
+        }
+      ],
+      "files": [
+        "./knip.config.js",
+        "./package.json",
+        "./pnpm-lock.yaml",
+        "./pnpm-workspace.yaml",
+        "./.github/**/*.{yml,yaml}",
+        "./.husky/**/*",
+        "./config/**/*",
+        "./projects/**/*.{js,ts,tsx,json,mjs,cjs,vue,svelte}",
+        "!**/node_modules/**",
+        "!**/dist/**",
+        "!**/.visual/**",
+        "!**/.axe/**",
+        "!**/.ssr/**",
+        "!**/.lighthouse/**",
+        "!**/.render/**",
+        "!**/.11ty-vite/**",
+        "!**/.eslintcache/**",
+        "!**/.wireit/**",
+        "!**/.next/**",
+        "!**/.output/**",
+        "!**/.webgpu/**",
+        "!**/.vitest/**",
+        "!**/.vitest-attachments/**",
+        "!**/vite.*.ts.timestamp*",
+        "!**/__screenshots__/**",
+        "!**/coverage/**",
+        "!projects/starters/**",
+        "!projects/core/src/icon/{icons,server}.ts",
+        "!projects/internals/metadata/static/**",
+        "!projects/monaco/src/themes/generated/**",
+        "!projects/**/src/vendor/**/*",
+        "!projects/**/.screencast/.auth/*"
+      ],
+      "output": [
+        "node_modules/.cache/knip/production/**"
+      ]
     }
   }
 }
