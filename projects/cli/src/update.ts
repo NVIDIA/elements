@@ -8,11 +8,6 @@ declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
 const MANIFEST_URL = `${__ELEMENTS_PAGES_BASE_URL__}/cli/manifest.json`;
 
-export function clearUpdateConfig(): void {
-  const config = readNveConfig();
-  saveNveConfig({ ...config, update: { lastCheck: 0, latestSha: '' } });
-}
-
 export async function fetchLatestSha(): Promise<string> {
   try {
     const res = await fetch(MANIFEST_URL, {

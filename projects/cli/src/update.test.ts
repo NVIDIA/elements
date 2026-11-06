@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { clearUpdateConfig, fetchLatestSha, isUpdateAvailable, notifyIfUpdateAvailable } from './update.js';
+import { fetchLatestSha, isUpdateAvailable, notifyIfUpdateAvailable } from './update.js';
 
 const defaultConfig = {
   update: { lastCheck: 0, latestSha: '' }
@@ -270,21 +270,6 @@ describe('update-check', () => {
       vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('test')));
       await notifyIfUpdateAvailable('abc123');
       expect(console.log).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('clearUpdateConfig', () => {
-    it('should reset update section to empty state', async () => {
-      const { readNveConfig, saveNveConfig } = await import('@internals/tools');
-      vi.mocked(readNveConfig).mockReturnValue({
-        update: { lastCheck: 100, latestSha: 'abc' }
-      });
-
-      clearUpdateConfig();
-
-      expect(saveNveConfig).toHaveBeenCalledWith({
-        update: { lastCheck: 0, latestSha: '' }
-      });
     });
   });
 });
