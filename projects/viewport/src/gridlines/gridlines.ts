@@ -4,7 +4,8 @@
 import { html, LitElement, nothing, svg, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { finiteOr, hostAttr, positiveFiniteOr, useStyles } from '@nvidia-elements/core/internal';
+import { finiteOr, hostAttr, positiveFiniteOr } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './gridlines.css?inline';
 import { createGridlineCoverage, gridlineCoverageNeedsUpdate, selectGridlineInterval } from './gridlines.utils.js';
 import { ViewportAccessoryMixin } from '../internal/mixins/viewport-accessory.js';

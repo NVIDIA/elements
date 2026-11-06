@@ -4,7 +4,9 @@
 import type { TemplateResult } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { attachInternals, useStyles, typeSSR } from '@nvidia-elements/core/internal';
+import { typeSSR } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { normalizeTruncateString, normalizeTruncateText, truncateText } from './utils.js';
 import styles from './format-truncate.css?inline';
 

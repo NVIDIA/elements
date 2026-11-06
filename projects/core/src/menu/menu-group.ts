@@ -3,13 +3,10 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import {
-  attachInternals,
-  audit,
-  scopedRegistry,
-  TypeExpandableController,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { audit, TypeExpandableController } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './menu-group.css?inline';
 

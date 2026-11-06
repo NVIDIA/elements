@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { CSSResult } from 'lit';
-import { typeSSR, useStyles, audit } from '@nvidia-elements/core/internal';
+import { typeSSR, audit } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { ControlGroup } from '@nvidia-elements/core/forms';
 import styles from './checkbox-group.css?inline';
 

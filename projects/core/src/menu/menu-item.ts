@@ -4,7 +4,8 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
-import { useStyles, audit } from '@nvidia-elements/core/internal';
+import { audit } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './menu-item.css?inline';
 
 /**

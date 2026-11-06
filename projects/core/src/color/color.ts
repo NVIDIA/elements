@@ -3,7 +3,9 @@
 
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { appendRootNodeStyle, openEyeDropper, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle, openEyeDropper } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { IconButton } from '@nvidia-elements/core/icon-button';

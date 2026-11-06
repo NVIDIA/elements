@@ -4,7 +4,8 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
-import { audit, popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
+import { audit, popoverStyles, TypeNativePopoverController } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './notification-group.css?inline';
 
 /**

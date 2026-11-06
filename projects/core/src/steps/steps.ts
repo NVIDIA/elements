@@ -9,14 +9,10 @@ import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import {
-  stateSelected,
-  useStyles,
-  keyNavigationList,
-  attachInternals,
-  audit,
-  scopedRegistry
-} from '@nvidia-elements/core/internal';
+import { stateSelected, keyNavigationList, audit } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import stepsItemStyleSheet from './steps-item.css?inline';
 import stepsStyleSheet from './steps.css?inline';
 import { IconButton } from '@nvidia-elements/core/icon-button';

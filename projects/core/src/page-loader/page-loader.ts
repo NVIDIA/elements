@@ -4,7 +4,9 @@
 import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import type { PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
-import { popoverStyles, scopedRegistry, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
+import { popoverStyles, TypeNativePopoverController } from '@nvidia-elements/core/internal';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import styles from './page-loader.css?inline';
 

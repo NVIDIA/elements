@@ -2,7 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { useStyles, attachInternals, appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './page-header.css?inline';
 import globalStyles from './page-header.global.css?inline';
 

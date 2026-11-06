@@ -268,12 +268,7 @@ export default {
     'projects/site': {
       entry: [...PACKAGE_FILES, 'src/**/*.{js,ts}', ...VITEST_CONFIGS],
       project: [...PACKAGE_FILES, 'src/**/*.{js,ts}', ...VITEST_CONFIGS],
-      ignoreDependencies: [
-        '@nvidia-elements/foundations',
-        '@nvidia-elements/plot',
-        '@nvidia-elements/scene',
-        '@nvidia-elements/viewport'
-      ]
+      ignoreDependencies: ['@nvidia-elements/plot', '@nvidia-elements/scene', '@nvidia-elements/viewport']
     },
     'projects/styles': {
       entry: [

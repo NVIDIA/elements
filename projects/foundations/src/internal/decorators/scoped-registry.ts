@@ -3,7 +3,6 @@
 
 import type { RenderOptions } from 'lit';
 import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
-import type { LegacyDecoratorTarget } from '../types/index.js';
 import type { ElementDefinition } from '@nvidia-elements/foundations/internal/define';
 import { defineElement, supportsScopedRegistry } from '@nvidia-elements/foundations/internal/define';
 
@@ -48,7 +47,7 @@ function attachLitCreationScope(element: ElementDefinition, customElementRegistr
 
 /** decorator which registers element dependencies with the scoped custom element registry when available */
 export function scopedRegistry(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => {
+  return target => {
     const element = target as unknown as ElementDefinition;
     const customElementRegistry = GlobalStateService.getScopedRegistry(element.metadata.version);
     if (supportsScopedRegistry) {

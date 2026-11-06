@@ -7,11 +7,11 @@ import { property } from 'lit/decorators/property.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import {
   GestureController,
-  useStyles,
   type Gesture,
   type GestureInput,
   type PointerMovementGesture
 } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import styles from './resize-handle.css?inline';
 

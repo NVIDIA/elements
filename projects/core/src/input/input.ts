@@ -4,7 +4,7 @@
 import type { CSSResult } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './input.css?inline';
 

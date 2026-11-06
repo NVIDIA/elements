@@ -7,13 +7,13 @@ import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import {
-  useStyles,
   statusStateStyles,
   supportStateStyles,
-  attachInternals,
   applySlotContentStates,
   hasHorizontalScrollBar
 } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './toolbar.css?inline';
 
 /**

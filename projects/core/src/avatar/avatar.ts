@@ -5,7 +5,7 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size, Color } from '@nvidia-elements/core/internal';
 import { colorStateStyles } from '@nvidia-elements/core/internal';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './avatar.css?inline';
 
 /**

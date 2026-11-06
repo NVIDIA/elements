@@ -3,7 +3,8 @@
 
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { attachInternals, endOfScrollBox } from '@nvidia-elements/core/internal';
+import { endOfScrollBox } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 
 /**
  * Adds active scroll state detection

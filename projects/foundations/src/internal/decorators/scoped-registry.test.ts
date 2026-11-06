@@ -9,7 +9,7 @@ import { createFixture, removeFixture } from '@internals/testing';
 import { GlobalStateService } from '@nvidia-elements/foundations/internal/state';
 import type { ElementDefinition } from '@nvidia-elements/foundations/internal/define';
 import { supportsScopedRegistry } from '@nvidia-elements/foundations/internal/define';
-import { scopedRegistry } from './scoped-registry.js';
+import { scopedRegistry } from '@nvidia-elements/foundations/internal/decorators';
 
 const uid = Math.random().toString(36).slice(2, 8);
 let counter = 0;
@@ -67,7 +67,7 @@ describe('scopedRegistry', () => {
 
       const registry = GlobalStateService.state.scopedRegistry['9.8.7'];
       expect(registry).toBeDefined();
-      expect(registry.get(VersionedElement.metadata.tag)).toBe(VersionedElement);
+      expect(registry?.get(VersionedElement.metadata.tag)).toBe(VersionedElement);
       expect(VersionedElement).toHaveProperty('shadowRootOptions.customElementRegistry', registry);
     }
   );
@@ -78,7 +78,7 @@ describe('scopedRegistry', () => {
 
     scopedRegistry()(element as unknown as Function);
 
-    expect(registry.get(element.metadata.tag)).toBe(element);
+    expect(registry?.get(element.metadata.tag)).toBe(element);
   });
 
   it.skipIf(!supportsScopedRegistry)('should set shadowRootOptions with customElementRegistry', () => {

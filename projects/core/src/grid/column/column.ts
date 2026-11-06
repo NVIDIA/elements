@@ -4,7 +4,9 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
+import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import type { Grid } from '@nvidia-elements/core/grid';
 import styles from './column.css?inline';
 
