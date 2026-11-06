@@ -18,12 +18,14 @@ import type { FormControl, FormControlInstance, ValidatorResult } from '../inter
  *   - Object
  *   - Array
  *   - Enum
+ * @public
  */
 export function valueSchemaValidator(value: unknown, element: FormControlInstance): ValidatorResult {
   const metadata = (element.constructor as FormControl).metadata;
   return validateSchema(metadata.valueSchema, value);
 }
 
+/** @public */
 export function requiredValidator(value: unknown, element: FormControlInstance): ValidatorResult {
   if (element.required && (value === undefined || value === null || value === '')) {
     return { validity: { valueMissing: true, valid: false }, message: 'This field is required' };

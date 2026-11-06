@@ -29,6 +29,7 @@ import type {
   CurrentState,
   PopoverTargetAction
 } from '../internal/types/button.js';
+/** @public */
 export type {
   ButtonFormControlMixinInstance,
   ButtonType,
@@ -73,6 +74,9 @@ type ElementTargetProperty = (typeof ELEMENT_TARGET_PROPERTIES)[ElementTargetAtt
 type ButtonFormControlConstructor<TBase extends Constructor> = new (
   ...args: ConstructorParameters<TBase>
 ) => InstanceType<TBase> & ButtonFormControlMixinInstance;
+/** @public
+ * @public
+ */
 export type ButtonFormControlMixinReturn<TBase extends Constructor> = ButtonFormControlConstructor<TBase> & {
   formAssociated: boolean;
   observedAttributes: string[];
@@ -81,7 +85,9 @@ export type ButtonFormControlMixinReturn<TBase extends Constructor> = ButtonForm
 /**
  * @description A mixin that adds native button-style form, command, popover, and interaction behavior.
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
+ * @public
  */
+/** @public */
 export function ButtonFormControlMixin<TBase extends Constructor>(
   SuperClass: TBase
 ): ButtonFormControlMixinReturn<TBase> {

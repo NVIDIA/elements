@@ -75,12 +75,6 @@ export function isFormElement(value: unknown): value is HTMLFormElement {
   return typeof HTMLFormElement !== 'undefined' && value instanceof HTMLFormElement;
 }
 
-export function onKeys(events: string[], event: KeyboardEvent, callback: () => void) {
-  if (events.includes(event.code)) {
-    callback();
-  }
-}
-
 export function removeEmptyTextNode(node: Node) {
   if ((node as Text)?.wholeText?.trim() === '') {
     node.parentNode?.removeChild(node);
