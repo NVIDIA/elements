@@ -2,6 +2,7 @@ nve-page:not(:defined) {
   visibility: hidden;
 }
 
+nve-code-block,
 nve-codeblock {
   width: 100%;
 }

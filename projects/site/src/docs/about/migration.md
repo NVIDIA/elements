@@ -316,7 +316,7 @@ The alert banner component no longer exists. Use `nve-alert-group` with the `pro
 
 ### Maglev - JSON Viewer <nve-badge status="danger">removed</nve-badge>
 
-The JSON viewer element is an internal API. You can access this API via the public exports but should avoid using it. Use `nve-codeblock` or `nve-monaco-input` for JSON content rendering.
+The JSON viewer element is an internal API. You can access this API via the public exports but should avoid using it. Use `nve-code-block` or `nve-monaco-input` for JSON content rendering.
 
 ### Maglev - Icon Names <nve-badge status="danger">removed</nve-badge>
 
