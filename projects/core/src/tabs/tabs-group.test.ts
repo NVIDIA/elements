@@ -326,7 +326,7 @@ describe(TabsGroup.metadata.tag, () => {
   });
 
   it('should resync when a new tab and panel are added', async () => {
-    const newTab = document.createElement('nve-tabs-item') as TabsItem;
+    const newTab = document.createElement('nve-tabs-item');
     newTab.value = 'logs';
     newTab.setAttribute('command', '--toggle');
     newTab.setAttribute('commandfor', 'tab-group');
