@@ -1,3 +1,9 @@
+## [2.22.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.3...@nvidia-elements/core-v2.22.4) (2026-11-06)
+
+### Bug Fixes
+
+* **core:** drop obsolete constructed stylesheet polyfill ([30b0684](https://github.com/NVIDIA/elements/commit/30b068411d1bd067e60935eb8ab60d8b6ad85268))
+
 ## [2.22.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.2...@nvidia-elements/core-v2.22.3) (2026-11-04)
 
 ### Bug Fixes
