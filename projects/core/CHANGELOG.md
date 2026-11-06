@@ -1,3 +1,10 @@
+## [2.22.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.4...@nvidia-elements/core-v2.22.5) (2026-11-06)
+
+### Bug Fixes
+
+* **core:** drop obsolete element internals polyfill ([bb0649c](https://github.com/NVIDIA/elements/commit/bb0649ced505ef4cfc0f050302046794a935441a))
+* **docs:** update 3d-force-graph to 1.80.2 ([86a69e9](https://github.com/NVIDIA/elements/commit/86a69e92a607dc254ca7df2e3e4428ae0d6126e5))
+
 ## [2.22.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.3...@nvidia-elements/core-v2.22.4) (2026-11-06)
 
 ### Bug Fixes
