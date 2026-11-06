@@ -1739,8 +1739,8 @@ importers:
   projects/site:
     dependencies:
       3d-force-graph:
-        specifier: 1.80.1
-        version: 1.80.1
+        specifier: 1.80.2
+        version: 1.80.2
       chart.js:
         specifier: 4.5.1
         version: 4.5.1
@@ -2932,8 +2932,8 @@ importers:
 
 packages:
 
-  3d-force-graph@1.80.1:
-    resolution: {integrity: sha512-8+JcH/K1MkVncxthCVg1vdNY49PSUY7gPMlFzBHJD91AmofqqxZNnVo5RfY61BShwZk6koqyYK7f5hp+NT6utQ==}
+  3d-force-graph@1.80.2:
+    resolution: {integrity: sha512-hStm8c4s2yLt0kj9JBLWLgLsJlS+G08AXTNeEw6YBD1kzCu4s1szwAZL9Z1tcPhVOlDkWliUzTuraBF86TmNCQ==}
     engines: {node: '>=12'}
 
   '@11ty/chokidar-with-glob-support@1.1.0':
@@ -14295,7 +14295,7 @@ packages:
 
 snapshots:
 
-  3d-force-graph@1.80.1:
+  3d-force-graph@1.80.2:
     dependencies:
       accessor-fn: 1.5.3
       kapsule: 1.16.3
