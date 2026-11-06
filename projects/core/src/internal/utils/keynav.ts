@@ -4,12 +4,6 @@
 import { clickOutsideElementBounds } from './dom.js';
 import { focusElementTimeout } from './focus.js';
 
-export function onKeys(events: string[], event: KeyboardEvent, fn: () => void) {
-  if (events.includes(event.code)) {
-    fn();
-  }
-}
-
 export function createLightDismiss(
   options: { element: HTMLElement; focusElement?: HTMLElement; signal?: AbortSignal },
   fn: () => void

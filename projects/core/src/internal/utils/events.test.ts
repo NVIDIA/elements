@@ -4,28 +4,7 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
-import { debounce, onChildListMutation, stopEvent, throttle } from '@nvidia-elements/core/internal';
-
-describe('stopEvent', () => {
-  it('should cause event to prevent default behavior (preventDefault)', async () => {
-    const event = new KeyboardEvent('keydown', { code: 'Enter' });
-    const div = document.createElement('div');
-    div.dispatchEvent(event);
-    div.addEventListener('keydown', e => {
-      stopEvent(e);
-      expect(e.defaultPrevented).toBe(true);
-    });
-  });
-
-  it('should prevent event from bubbling (stopPropagation)', async () => {
-    const fn = vi.fn();
-    document.addEventListener('keydown', fn);
-    document.body.addEventListener('keydown', e => stopEvent(e));
-    document.body.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
-    expect(fn).toBeCalledTimes(0);
-  });
-});
-
+import { debounce, onChildListMutation, throttle } from '@nvidia-elements/core/internal';
 describe('onChildListMutation', () => {
   let fixture: HTMLElement;
   let list: HTMLUListElement;

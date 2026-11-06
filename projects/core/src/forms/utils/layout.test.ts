@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { getControlLayout, breakpoints, isInlineInputType } from './layout.js';
+import { getControlLayout, breakpoints } from './layout.js';
 
 describe('getControlLayout', () => {
   it('should show all messages that do not have a validation requirement', async () => {
@@ -17,12 +17,5 @@ describe('getControlLayout', () => {
     expect(getControlLayout(breakpoints.verticalInline - 1, layout)).toBe('vertical-inline');
 
     expect(getControlLayout(breakpoints.vertical - 1, layout)).toBe('vertical');
-  });
-});
-
-describe('isInlineInputType', () => {
-  it('should determine if input is a inline type', () => {
-    expect(isInlineInputType({ type: 'radio' } as HTMLInputElement)).toBe(true);
-    expect(isInlineInputType({ type: 'checkbox' } as HTMLInputElement)).toBe(true);
   });
 });

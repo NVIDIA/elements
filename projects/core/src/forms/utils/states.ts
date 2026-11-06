@@ -233,10 +233,6 @@ export function updateControlStatusState(control: Control | ControlGroup, messag
   }
 }
 
-export function showNonValidationMessages(messages: ControlMessage[]) {
-  messages.filter(m => !m.hasAttribute('error')).forEach(m => m.removeAttribute('hidden'));
-}
-
 export function hideAllValidationMessages(messages: ControlMessage[]) {
   messages.filter(m => m.hasAttribute('error')).forEach(m => m.setAttribute('hidden', ''));
 }

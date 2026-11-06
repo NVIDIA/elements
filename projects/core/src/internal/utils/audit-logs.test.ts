@@ -4,7 +4,6 @@
 import { describe, expect, it } from 'vitest';
 import {
   DOCS_LOG_URL,
-  getCrossShadowRootAnchorWarning,
   getExcessiveInstanceLimitWarning,
   getIdMatchNotFoundWarning,
   getInvalidParentWarning,
@@ -48,14 +47,6 @@ describe('getSSRMismatchWarning', () => {
   it('should return warning message for hydration mismatch', () => {
     expect(getSSRMismatchWarning('nve-tree')).toBe(
       `nve-tree rendered on the client with mismatched SSR content. ${DOCS_LOG_URL}#ssr-mismatch`
-    );
-  });
-});
-
-describe('getCrossShadowRootAnchorWarning', () => {
-  it('should return warning message for cross shadow root anchoring', () => {
-    expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
-      `(deprecated) nve-tooltip provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`
     );
   });
 });

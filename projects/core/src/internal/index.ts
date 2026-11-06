@@ -37,4 +37,3 @@ export * from './utils/strings.js';
 export * from './utils/focus.js';
 export * from './utils/keynav.js';
 export * from './utils/numeric.js';
-export * from './utils/supports.js';
