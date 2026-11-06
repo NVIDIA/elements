@@ -130,7 +130,7 @@ const componentGroups = [
   {
     title: 'Code and text',
     tags: [
-      'nve-codeblock',
+      'nve-code-block',
       'nve-markdown',
       'nve-monaco-diff-editor',
       'nve-monaco-diff-input',

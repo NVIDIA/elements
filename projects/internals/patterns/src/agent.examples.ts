@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import '@nvidia-elements/code/codeblock/define.js';
-import '@nvidia-elements/code/codeblock/languages/json.js';
+import '@nvidia-elements/code/code-block/define.js';
+import '@nvidia-elements/code/code-block/languages/json.js';
 import '@nvidia-elements/core/accordion/define.js';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
@@ -519,7 +519,7 @@ export const Tools = {
     <nve-accordion-content>
       <div nve-layout="column gap:sm align:horizontal-stretch">
         <h3 nve-text="body sm semibold">Parameters</h3>
-        <nve-codeblock language="json">
+        <nve-code-block language="json">
 <template>
 {
   "robot_id": "AMR-07",
@@ -527,7 +527,7 @@ export const Tools = {
   "profile": "warehouse"
 }
 </template>
-        </nve-codeblock>
+        </nve-code-block>
         <h3 nve-text="body sm semibold">Approval</h3>
         <nve-alert status="warning"><p nve-text="body sm">Operator approval is required before applying the calibration.</p></nve-alert>
       </div>
@@ -542,7 +542,7 @@ export const Tools = {
     <nve-accordion-content>
       <div nve-layout="column gap:sm align:horizontal-stretch">
         <h3 nve-text="body sm semibold">Parameters</h3>
-        <nve-codeblock language="json">
+        <nve-code-block language="json">
 <template>
 {
   "robot_id": "AMR-07",
@@ -550,7 +550,7 @@ export const Tools = {
   "mode": "simulation"
 }
 </template>
-        </nve-codeblock>
+        </nve-code-block>
         <p nve-text="body sm muted">The simulation replay is checking obstacle avoidance.</p>
       </div>
     </nve-accordion-content>
@@ -564,15 +564,15 @@ export const Tools = {
     <nve-accordion-content>
       <div nve-layout="column gap:sm align:horizontal-stretch">
         <h3 nve-text="body sm semibold">Parameters</h3>
-        <nve-codeblock language="json">
+        <nve-code-block language="json">
 <template>
 {
   "robot_id": "AMR-07"
 }
 </template>
-        </nve-codeblock>
+        </nve-code-block>
         <h3 nve-text="body sm semibold">Result</h3>
-        <nve-codeblock language="json">
+        <nve-code-block language="json">
 <template>
 {
   "robot_id": "AMR-07",
@@ -581,7 +581,7 @@ export const Tools = {
   "mode": "idle"
 }
 </template>
-        </nve-codeblock>
+        </nve-code-block>
       </div>
     </nve-accordion-content>
   </nve-accordion>
@@ -594,14 +594,14 @@ export const Tools = {
     <nve-accordion-content>
       <div nve-layout="column gap:sm align:horizontal-stretch">
         <h3 nve-text="body sm semibold">Parameters</h3>
-        <nve-codeblock language="json">
+        <nve-code-block language="json">
 <template>
 {
   "robot_id": "AMR-07",
   "mission_id": "aisle-3"
 }
 </template>
-        </nve-codeblock>
+        </nve-code-block>
         <h3 nve-text="body sm semibold">Error</h3>
         <nve-alert status="danger"><p nve-text="body sm">The log service timed out. No mission logs were returned.</p></nve-alert>
       </div>
@@ -616,14 +616,14 @@ export const Tools = {
     <nve-accordion-content>
       <div nve-layout="column gap:sm align:horizontal-stretch">
         <h3 nve-text="body sm semibold">Parameters</h3>
-        <nve-codeblock language="json">
+        <nve-code-block language="json">
 <template>
 {
   "robot_id": "AMR-07",
   "reason": "sensor recovery"
 }
 </template>
-        </nve-codeblock>
+        </nve-code-block>
         <p nve-text="body sm muted">The operator denied the restart. The tool did not run.</p>
       </div>
     </nve-accordion-content>

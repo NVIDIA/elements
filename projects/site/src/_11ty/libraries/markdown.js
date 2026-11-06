@@ -34,7 +34,7 @@ const markdown = markdownIt({
     return /* html */ `
     <div class="markdown-codeblock">
       <script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
-      <nve-codeblock language="${codeblockLanguage}"><pre aria-hidden="true"><code>${markdown.utils.escapeHtml(str).trim()}</code></pre></nve-codeblock>
+      <nve-code-block language="${codeblockLanguage}"><pre aria-hidden="true"><code>${markdown.utils.escapeHtml(str).trim()}</code></pre></nve-code-block>
       <nve-copy-button class="markdown-copy-button" role="button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
     </div>
     <script type="module">
