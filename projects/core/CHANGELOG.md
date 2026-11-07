@@ -1,3 +1,9 @@
+## [2.23.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.5...@nvidia-elements/core-v2.23.0) (2026-11-07)
+
+### Features
+
+* **core:** add ghost and workspace ([c2bdec9](https://github.com/NVIDIA/elements/commit/c2bdec9701628add8dc364786023a6019660aee3))
+
 ## [2.22.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.4...@nvidia-elements/core-v2.22.5) (2026-11-06)
 
 ### Bug Fixes
