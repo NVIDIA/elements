@@ -27,14 +27,36 @@
   scrollbar-width: var(--nve-sys-scrollbar-width);
   background: var(--background);
   border-radius: var(--border-radius);
-  font-family: var(--font-family);
   border: var(--border);
   position: relative;
-  overflow: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   height: 100%;
 }
 
+slot[name='header'],
+slot[name='footer'] {
+  display: block;
+  min-width: 0;
+}
+
+.body {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.source {
+  overflow: auto;
+  min-height: 0;
+  min-width: 0;
+}
+
 pre {
+  font-family: var(--font-family);
   padding: var(--padding);
   margin: 0;
   min-height: fit-content;
@@ -47,9 +69,9 @@ code {
 
 [name='actions'] {
   display: block;
-  position: fixed;
-  top: var(--nve-ref-size-100);
-  right: var(--nve-ref-size-100);
+  position: absolute;
+  inset-block-start: var(--nve-ref-size-100);
+  inset-inline-end: var(--nve-ref-size-100);
 }
 
 :host([container='flat']) {

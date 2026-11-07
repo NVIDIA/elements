@@ -52,7 +52,7 @@ test('preserves template source and adjacent textarea values while formatting th
     const id = path.join(directory, 'src/template.examples.ts');
     await writeFile(
       id,
-      `import { html } from 'lit';\nconst Default = html\`${input.replaceAll('`', '\\`')}\`;\nexport default { component: 'nve-codeblock', Default };`
+      `import { html } from 'lit';\nconst Default = html\`${input.replaceAll('`', '\\`')}\`;\nexport default { component: 'nve-code-block', Default };`
     );
     assert.ok(await examplesToJSON({ name: '@nvidia-elements/test' }).transform('', id));
     const json = JSON.parse(await readFile(path.join(directory, 'dist/template.examples.json'), 'utf8'));

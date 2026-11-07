@@ -3,7 +3,7 @@
 
 import { svg } from 'lit';
 
-import type { CodeBlock } from '@nvidia-elements/code/codeblock';
+import type { CodeBlock } from '@nvidia-elements/code/code-block';
 
 export const FRAMEWORKS = [
   {

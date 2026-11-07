@@ -37,13 +37,13 @@ The classic theme stylesheet is a starting point for product-specific themes. Vi
   <input id="classic-theme-toggle" type="checkbox" value="classic" />
 </nve-switch>
 
-<nve-codeblock id="classic-theme-source" language="css" style="block-size: 400px">
+<nve-code-block id="classic-theme-source" language="css" style="block-size: 400px">
   <nve-copy-button id="classic-theme-copy" slot="actions" aria-label="Copy classic theme CSS" behavior-copy container="flat" disabled></nve-copy-button>
-</nve-codeblock>
+</nve-code-block>
 
 <script type="module">
-  import '@nvidia-elements/code/codeblock/languages/css.js';
-  import '@nvidia-elements/code/codeblock/define.js';
+  import '@nvidia-elements/code/code-block/languages/css.js';
+  import '@nvidia-elements/code/code-block/define.js';
   import '@nvidia-elements/core/copy-button/define.js';
   import '@nvidia-elements/core/switch/define.js';
 

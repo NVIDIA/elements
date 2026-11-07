@@ -2,7 +2,8 @@
 {
   title: 'Codeblock',
   layout: 'docs.11ty.js',
-  tag: 'nve-codeblock'
+  tag: 'nve-code-block',
+  associatedElements: ['nve-code-block-header', 'nve-code-block-footer']
 }
 ---
 
@@ -12,65 +13,69 @@ Note: import the language before the codeblock
 
 ```typescript
 // only import languages that you need
-import '@nvidia-elements/code/codeblock/languages/bash.js';
-import '@nvidia-elements/code/codeblock/languages/css.js';
-import '@nvidia-elements/code/codeblock/languages/go.js';
-import '@nvidia-elements/code/codeblock/languages/html.js';
-import '@nvidia-elements/code/codeblock/languages/javascript.js';
-import '@nvidia-elements/code/codeblock/languages/json.js';
-import '@nvidia-elements/code/codeblock/languages/markdown.js';
-import '@nvidia-elements/code/codeblock/languages/python.js';
-import '@nvidia-elements/code/codeblock/languages/toml.js';
-import '@nvidia-elements/code/codeblock/languages/typescript.js';
-import '@nvidia-elements/code/codeblock/languages/xml.js';
-import '@nvidia-elements/code/codeblock/languages/yaml.js';
+import '@nvidia-elements/code/code-block/languages/bash.js';
+import '@nvidia-elements/code/code-block/languages/css.js';
+import '@nvidia-elements/code/code-block/languages/go.js';
+import '@nvidia-elements/code/code-block/languages/html.js';
+import '@nvidia-elements/code/code-block/languages/javascript.js';
+import '@nvidia-elements/code/code-block/languages/json.js';
+import '@nvidia-elements/code/code-block/languages/markdown.js';
+import '@nvidia-elements/code/code-block/languages/python.js';
+import '@nvidia-elements/code/code-block/languages/toml.js';
+import '@nvidia-elements/code/code-block/languages/typescript.js';
+import '@nvidia-elements/code/code-block/languages/xml.js';
+import '@nvidia-elements/code/code-block/languages/yaml.js';
 
 // import component
-import '@nvidia-elements/code/codeblock/define.js';
+import '@nvidia-elements/code/code-block/define.js';
 ```
 
 ```html
-<nve-codeblock language="typescript">
+<nve-code-block language="typescript">
 function getTime(): number {
   return new Date().getTime();
 }
-</nve-codeblock>
+</nve-code-block>
 ```
 
 ## Code
 
-{% api 'nve-codeblock', 'property', 'code' %}
+{% api 'nve-code-block', 'property', 'code' %}
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Code' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'Code' %}
 
 ## Container
 
-{% api 'nve-codeblock', 'property', 'container' %}
+{% api 'nve-code-block', 'property', 'container' %}
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Flat' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'Flat' %}
 
 ## Theme
 
 You can set a Theme independent of the global theme using the `nve-theme` attribute.
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Theme' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'Theme' %}
 
 ## Line Numbers
 
-{% api 'nve-codeblock', 'property', 'lineNumbers' %}
+{% api 'nve-code-block', 'property', 'lineNumbers' %}
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'LineNumbers' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'LineNumbers' %}
 
 ## Highlight
 
-{% api 'nve-codeblock', 'property', 'highlight' %}
+{% api 'nve-code-block', 'property', 'highlight' %}
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Highlight' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'Highlight' %}
 
 ## Overflow
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Overflow' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'Overflow' %}
 
 ## Line Wrap
 
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'LineWrap' %}
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'LineWrap' %}
+
+## Header and Footer
+
+{% example '@nvidia-elements/code/code-block/code-block.examples.json', 'HeaderFooter' %}

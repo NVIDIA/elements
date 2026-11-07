@@ -28,7 +28,7 @@
   }
 }
 
-nve-codeblock {
+nve-code-block {
   --padding: var(--nve-ref-space-lg);
   --border-radius: 0;
   font-size: var(--nve-ref-font-size-200);
