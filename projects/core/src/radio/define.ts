@@ -1,15 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import '@nvidia-elements/core/forms/define.js';
 import { define } from '@nvidia-elements/foundations/internal/define';
 import { Radio, RadioGroup } from '@nvidia-elements/core/radio';
-import { Control, ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
 
 define(Radio);
 define(RadioGroup);
-define(Control);
-define(ControlGroup);
-define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {

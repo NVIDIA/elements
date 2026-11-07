@@ -37,3 +37,6 @@ config/vale/styles/Google
 config/vale/styles/write-good
 .husky/_/
 DEPENDENCIES.json
+
+projects/core/src/icon/icons/*.ts
+projects/core/src/icon/names.ts

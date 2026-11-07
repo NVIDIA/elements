@@ -33,6 +33,7 @@ export default mergeConfig(libraryTestConfig, {
         '**/src/index.ts',
         '**/src/icon/icons/**',
         '**/src/icon/icons.ts',
+        '**/src/icon/names.ts',
         '**/src/icon/server.ts',
         '**/src/internal/controllers/type-ssr.controller.ts',
         '**/internal/docs.ts'

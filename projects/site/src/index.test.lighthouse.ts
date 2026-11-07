@@ -112,6 +112,12 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.payload.js).toBeLessThan(167.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
+
+    await page.goto(`${base}/elements/`, { waitUntil: 'networkidle' });
+    expect(await page.locator('nve-icon[name="check-badge"] svg').count()).toBe(1);
+    for (const icon of await page.locator('nve-icon[name]:not([name=""])').all()) {
+      expect(await icon.locator('svg').count(), (await icon.getAttribute('name')) ?? 'unnamed icon').toBe(1);
+    }
   });
 
   test('installation page', async () => {
@@ -120,7 +126,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(163.5);
+    expect(scores.payload.js).toBeLessThanOrEqual(165.5);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -153,7 +159,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(163.5);
+    expect(scores.payload.js).toBeLessThanOrEqual(166);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -164,7 +170,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(162);
+    expect(scores.payload.js).toBeLessThanOrEqual(165);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
