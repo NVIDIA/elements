@@ -77,7 +77,7 @@ export class TypePopoverTriggerController<T extends PopoverTriggerHost> implemen
 
   #getPopoverSource(popoverTargetElement: HTMLElement) {
     if ((popoverTargetElement as PopoverAnchorElement).anchor) {
-      return getHostAnchor(popoverTargetElement as PopoverAnchorElement);
+      return getHostAnchor(popoverTargetElement);
     }
 
     return this.host as HTMLElement;
