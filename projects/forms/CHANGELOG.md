@@ -1,3 +1,24 @@
+## [2.0.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.12...@nvidia-elements/forms-v2.0.13) (2026-11-07)
+
+### Features
+
+* **core:** add configurable tabs indicator animation duration ([0cc3093](https://github.com/NVIDIA/elements/commit/0cc3093056d6a6e24d9e8876fb444d3ccc0ba3b6))
+* **core:** add ghost and workspace ([c2bdec9](https://github.com/NVIDIA/elements/commit/c2bdec9701628add8dc364786023a6019660aee3))
+
+### Bug Fixes
+
+* **cli:** drop unused utilities ([71dcf96](https://github.com/NVIDIA/elements/commit/71dcf96ff531cd4ef69db6e55f08fbeecb005015))
+* **core:** drop obsolete checkbox clip-path fallback ([8cddf24](https://github.com/NVIDIA/elements/commit/8cddf24eab9f15f444ddc25152277ebd864116bd))
+* **core:** drop obsolete constructed stylesheet polyfill ([30b0684](https://github.com/NVIDIA/elements/commit/30b068411d1bd067e60935eb8ab60d8b6ad85268))
+* **core:** drop obsolete element internals polyfill ([bb0649c](https://github.com/NVIDIA/elements/commit/bb0649ced505ef4cfc0f050302046794a935441a))
+* **core:** drop obsolete formdata polyfill ([7831582](https://github.com/NVIDIA/elements/commit/78315824a2a9bfb81a615986a181d695b5bf6acc))
+* **core:** drop obsolete logo color-mix fallback ([93ea57f](https://github.com/NVIDIA/elements/commit/93ea57f6ed300fce24952f5b44a4f5dc5b7b87b1))
+* **core:** drop unused utilities ([9e4b1bc](https://github.com/NVIDIA/elements/commit/9e4b1bc6b942de163d33ed71ae676041dd8fb4e6))
+* **core:** re-render bugfixes ([48e5ac4](https://github.com/NVIDIA/elements/commit/48e5ac4e5c66e0c9659e47095698fe33bfc68629))
+* **docs:** update 3d-force-graph to 1.80.2 ([86a69e9](https://github.com/NVIDIA/elements/commit/86a69e92a607dc254ca7df2e3e4428ae0d6126e5))
+* **forms:** drop unused utilities ([c538a47](https://github.com/NVIDIA/elements/commit/c538a47e79366919f43fb8f35950c52159f40d6c))
+* **themes:** correct rounding issue ([3c22eef](https://github.com/NVIDIA/elements/commit/3c22eef05362992c8a50ebc82664e6d0a76a4692))
+
 ## [2.0.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.11...@nvidia-elements/forms-v2.0.12) (2026-11-03)
 
 ### Features
