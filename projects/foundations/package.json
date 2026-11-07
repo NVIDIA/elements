@@ -51,6 +51,15 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./bundles/*": {
+      "default": "./dist/bundles/*"
+    },
+    "./custom-elements-jsx": {
+      "types": "./dist/custom-elements-jsx.d.ts"
+    },
+    "./custom-elements-vue": {
+      "types": "./dist/custom-elements-vue.d.ts"
+    },
     "./scroll-box": {
       "types": "./dist/scroll-box/index.d.ts",
       "default": "./dist/scroll-box/index.js"
@@ -110,9 +119,22 @@
     "./i18n/index.js": {
       "types": "./dist/i18n/index.d.ts",
       "default": "./dist/i18n/index.js"
+    },
+    "./virtual-list": {
+      "types": "./dist/virtual-list/index.d.ts",
+      "default": "./dist/virtual-list/index.js"
+    },
+    "./virtual-list/index.js": {
+      "types": "./dist/virtual-list/index.d.ts",
+      "default": "./dist/virtual-list/index.js"
+    },
+    "./virtual-list/define.js": {
+      "types": "./dist/virtual-list/define.d.ts",
+      "default": "./dist/virtual-list/define.js"
     }
   },
   "sideEffects": [
+    "./dist/bundles/*.js",
     "./src/**/define.ts",
     "./**/define.js"
   ],
@@ -154,7 +176,8 @@
     "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "@lit-labs/ssr-client": "catalog:"
   },
   "wireit": {
     "dev": {
@@ -201,7 +224,8 @@
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "vite.bundle.ts"
       ],
       "output": [
         "dist/**"

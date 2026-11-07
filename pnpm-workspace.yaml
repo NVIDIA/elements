@@ -99,7 +99,6 @@ catalog:
   '@lit-labs/ssr': 4.1.0
   '@lit-labs/ssr-client': 1.1.8
   '@lit-labs/ssr-react': 0.3.4
-  '@lit-labs/virtualizer': 2.1.1
   '@lit/reactive-element': 2.1.2
   '@modelcontextprotocol/ext-apps': 2.0.4
   '@modelcontextprotocol/sdk': 1.32.2

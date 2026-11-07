@@ -209,9 +209,6 @@ catalogs:
     '@lit-labs/ssr-react':
       specifier: 0.3.4
       version: 0.3.4
-    '@lit-labs/virtualizer':
-      specifier: 2.1.1
-      version: 2.1.1
     '@lit/reactive-element':
       specifier: 2.1.2
       version: 2.1.2
@@ -656,9 +653,6 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
-      '@lit-labs/virtualizer':
-        specifier: 'catalog:'
-        version: 2.1.1
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
@@ -820,6 +814,9 @@ importers:
       '@internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
+      '@lit-labs/ssr-client':
+        specifier: 'catalog:'
+        version: 1.1.8
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
@@ -4532,9 +4529,6 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
-
-  '@lit-labs/virtualizer@2.1.1':
-    resolution: {integrity: sha512-JWxMwnlouLdwpw8spLTuax53WMnSP3xt0dCyxAS7GJr5Otda9MGgR/ghAdfwhSY75TmjbE1T2TqChwoGCw3ggw==}
 
   '@lit/reactive-element@2.1.2':
     resolution: {integrity: sha512-pbCDiVMnne1lYUIaYNN5wrwQXDtHaYtg7YEFPeW+hws6U47WeFvISGUWekPGKWOP1ygrs0ef0o1VJMk1exos5A==}
@@ -16348,11 +16342,6 @@ snapshots:
       parse5: 7.1.2
     optionalDependencies:
       '@types/node': 26.6.6
-
-  '@lit-labs/virtualizer@2.1.1':
-    dependencies:
-      lit: 3.3.3
-      tslib: 2.8.1
 
   '@lit/reactive-element@2.1.2':
     dependencies:

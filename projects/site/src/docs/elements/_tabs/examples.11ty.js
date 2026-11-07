@@ -35,6 +35,7 @@ export const data = {
     const filePath = data.component.filePathStem;
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
+    else if (filePath.includes('/foundations/')) dir = 'foundations';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
     else if (filePath.includes('/media/')) dir = 'media';
     else if (filePath.includes('/markdown/')) dir = '';

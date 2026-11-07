@@ -19,7 +19,7 @@ export const SLOTTED_ELEMENT_CONTRACTS = {
   'nve-checkbox': ['label', 'input', 'nve-control-message'],
   'nve-checkbox-group': ['label', 'nve-control-message', 'nve-checkbox'],
   'nve-dropdown-group': ['nve-dropdown'],
-  'nve-grid': ['nve-grid-row', 'nve-grid-header', 'nve-grid-footer', 'nve-grid-placeholder'],
+  'nve-grid': ['nve-virtual-list', 'nve-grid-row', 'nve-grid-header', 'nve-grid-footer', 'nve-grid-placeholder'],
   'nve-grid-header': ['nve-grid-column'],
   'nve-grid-row': ['nve-grid-cell'],
   'nve-menu': ['nve-menu-item', 'nve-divider'],

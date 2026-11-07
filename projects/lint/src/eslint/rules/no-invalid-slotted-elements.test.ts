@@ -98,7 +98,7 @@ describe('noInvalidSlottedElements', () => {
             {
               messageId: 'invalid-slotted-element',
               data: {
-                allowed: 'nve-grid-row, nve-grid-header, nve-grid-footer, nve-grid-placeholder',
+                allowed: 'nve-virtual-list, nve-grid-row, nve-grid-header, nve-grid-footer, nve-grid-placeholder',
                 child: 'table',
                 parent: 'nve-grid'
               }
@@ -156,7 +156,7 @@ describe('noInvalidSlottedElements', () => {
             {
               messageId: 'invalid-slotted-element',
               data: {
-                allowed: 'nve-grid-row, nve-grid-header, nve-grid-footer, nve-grid-placeholder',
+                allowed: 'nve-virtual-list, nve-grid-row, nve-grid-header, nve-grid-footer, nve-grid-placeholder',
                 child: 'div',
                 parent: 'nve-grid'
               }
@@ -169,7 +169,7 @@ describe('noInvalidSlottedElements', () => {
             {
               messageId: 'invalid-slotted-element',
               data: {
-                allowed: 'nve-grid-row, nve-grid-header, nve-grid-footer, nve-grid-placeholder',
+                allowed: 'nve-virtual-list, nve-grid-row, nve-grid-header, nve-grid-footer, nve-grid-placeholder',
                 child: 'div',
                 parent: 'nve-grid'
               }
