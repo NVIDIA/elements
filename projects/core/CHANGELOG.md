@@ -1,3 +1,12 @@
+## [2.23.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.0...@nvidia-elements/core-v2.23.1) (2026-11-07)
+
+### Bug Fixes
+
+* **cli:** drop unused utilities ([71dcf96](https://github.com/NVIDIA/elements/commit/71dcf96ff531cd4ef69db6e55f08fbeecb005015))
+* **core:** drop unused utilities ([9e4b1bc](https://github.com/NVIDIA/elements/commit/9e4b1bc6b942de163d33ed71ae676041dd8fb4e6))
+* **forms:** drop unused utilities ([c538a47](https://github.com/NVIDIA/elements/commit/c538a47e79366919f43fb8f35950c52159f40d6c))
+* **themes:** correct rounding issue ([3c22eef](https://github.com/NVIDIA/elements/commit/3c22eef05362992c8a50ebc82664e6d0a76a4692))
+
 ## [2.23.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.22.5...@nvidia-elements/core-v2.23.0) (2026-11-07)
 
 ### Features
