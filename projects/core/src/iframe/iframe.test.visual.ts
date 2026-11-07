@@ -33,15 +33,15 @@ function template(theme: '' | 'dark' = '') {
       document.documentElement.setAttribute('nve-theme', '${theme}');
     </script>
     <div nve-layout="row gap:sm">
-      <nve-iframe aria-label="Intrinsic size iframe">
+      <nve-iframe sandbox="allow-scripts" aria-label="Intrinsic size iframe">
         ${head}
         <template><p nve-text="body">•︎•︎•︎</p></template>
       </nve-iframe>
-      <nve-iframe aria-label="Fixed size iframe" style="--width: 192px; --height: 128px">
+      <nve-iframe sandbox="allow-scripts" aria-label="Fixed size iframe" style="--width: 192px; --height: 128px">
         ${head}
         <template><p nve-text="body">•︎•︎•︎</p></template>
       </nve-iframe>
-      <nve-iframe aria-label="Clipped content iframe" style="--width: 64px; --height: 40px">
+      <nve-iframe sandbox="allow-scripts" aria-label="Clipped content iframe" style="--width: 64px; --height: 40px">
         ${head}
         <template><p nve-text="body">•︎•︎•︎</p></template>
       </nve-iframe>

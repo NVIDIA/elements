@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { LitElement, html, type PropertyValues } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './iframe.css?inline';
 
@@ -103,6 +104,15 @@ const iframeScript = (documentId: number) => /* html */ `
  * @beta
  */
 export class Iframe extends LitElement {
+  /**
+   * Space-separated native iframe sandbox permissions. The empty default applies all restrictions.
+   * Removing the attribute restores the empty default. Changes reload the iframe document.
+   * Include `allow-scripts` for automatic sizing and live theme synchronization.
+   * Combining `allow-scripts` and `allow-same-origin` permits access to the parent origin.
+   */
+  @property({ type: String, converter: { fromAttribute: (value: string | null) => value ?? '' } })
+  sandbox = '';
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -140,7 +150,7 @@ export class Iframe extends LitElement {
     return html`<iframe
       internal-host
       title=${this.ariaLabel ?? ''}
-      sandbox="allow-scripts"
+      sandbox=${this.sandbox}
       @load=${this.#handleLoad}
     ></iframe>`;
   }
@@ -170,7 +180,13 @@ export class Iframe extends LitElement {
     this.#setupTemplateHeadUpdates();
     this.#setupLightDomUpdates();
     this.#setupThemeUpdates();
-    this.#updateSource();
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    if (props.has('sandbox')) {
+      this.#updateSource();
+    }
   }
 
   disconnectedCallback() {
@@ -193,13 +209,10 @@ export class Iframe extends LitElement {
       return;
     }
 
-    // Start each document with the initial height rather than the previous resize result.
+    const scriptsAllowed = this.sandbox.toLowerCase().split(/\s+/).includes('allow-scripts');
+    // Without resize scripts, leave the height to CSS.
     this.#documentId++;
-    this.style.setProperty('--_height', '0px');
-    if (CSS.supports('frame-sizing', 'content-height')) {
-      // Keep the initial viewport until the new document finishes loading.
-      iframe.style.height = getComputedStyle(iframe).height;
-    }
+    this.#resetHeight(scriptsAllowed ? '0px' : '');
     const theme = this.#themeHost?.getAttribute('nve-theme') ?? '';
     iframe.srcdoc = `
       <!DOCTYPE html>
@@ -216,10 +229,19 @@ export class Iframe extends LitElement {
       </head>
       <body nve-text="body">
         ${this.#template?.innerHTML ?? ''}
-        ${iframeScript(this.#documentId)}
+        ${scriptsAllowed ? iframeScript(this.#documentId) : ''}
       </body>
       </html>
     `;
+  }
+
+  #resetHeight(height: string) {
+    this.style.setProperty('--_height', height);
+    const iframe = this.#iframe;
+    if (iframe && CSS.supports('frame-sizing', 'content-height')) {
+      // Keep the initial viewport until the new document finishes loading.
+      iframe.style.height = getComputedStyle(iframe).height;
+    }
   }
 
   #setupTemplateUpdates() {
@@ -292,7 +314,7 @@ export class Iframe extends LitElement {
     }
 
     const message: ThemeMessage = { theme };
-    // Sandboxed srcdoc documents have opaque origins, so authenticate messages by their window reference.
+    // The sandbox can give srcdoc documents opaque origins; authenticate messages by their window reference.
     contentWindow.postMessage(JSON.stringify(message), '*');
   };
 

@@ -1,8 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { existsSync, mkdirSync, unlinkSync, writeFileSync } from 'node:fs';
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import type * as Fs from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   generateTestSummary,
   getCoverageResults,
@@ -12,6 +13,15 @@ import {
 } from './tests.utils.js';
 import type { CoverageResult } from '../types.js';
 import type { ProjectsTestSummary } from '../utils/reports.js';
+
+vi.mock('node:fs', async importOriginal => {
+  const original = await importOriginal<typeof Fs>();
+  return {
+    ...original,
+    existsSync: vi.fn(original.existsSync),
+    readFileSync: vi.fn(original.readFileSync)
+  };
+});
 
 const completeCoverage: CoverageResult = {
   lines: { total: 1, covered: 1, skipped: 0, pct: 100 },
@@ -276,23 +286,37 @@ describe('getCoverageTotal', () => {
 
 describe('generateTestSummary', () => {
   let summary: ProjectsTestSummary;
-  const ssrSummaryPath = new URL('../../coverage/ssr/summary.json', import.meta.url);
-  let removeSsrSummary = false;
-
   beforeAll(async () => {
-    if (!existsSync(ssrSummaryPath)) {
-      mkdirSync(new URL('.', ssrSummaryPath), { recursive: true });
-      writeFileSync(ssrSummaryPath, JSON.stringify({ testResults: [] }));
-      removeSsrSummary = true;
-    }
+    const testReport = {
+      numTotalTestSuites: 1,
+      numPassedTestSuites: 1,
+      numFailedTestSuites: 0,
+      numPendingTestSuites: 0,
+      numTotalTests: 1,
+      numPassedTests: 1,
+      numFailedTests: 0,
+      numPendingTests: 0,
+      numTodoTests: 0,
+      startTime: 1,
+      success: true,
+      coverageMap: {},
+      testResults: [{ name: '/workspace/projects/core/src/iframe/iframe.test.ts', assertionResults: [] }]
+    };
+    const reports = new Map([
+      [new URL('../../coverage/unit/summary.json', import.meta.url).href, JSON.stringify(testReport)],
+      [new URL('../../coverage/ssr/summary.json', import.meta.url).href, JSON.stringify(testReport)],
+      [new URL('../../../../themes/coverage/visual/summary.json', import.meta.url).href, JSON.stringify(testReport)]
+    ]);
+    vi.mocked(existsSync).mockImplementation(path => path instanceof URL && reports.has(path.href));
+    vi.mocked(readFileSync).mockImplementation(path => {
+      const report = path instanceof URL ? reports.get(path.href) : undefined;
+      if (report === undefined) throw new Error(`Unexpected report read: ${String(path)}`);
+      return report;
+    });
     summary = await generateTestSummary();
   });
 
-  afterAll(() => {
-    if (removeSsrSummary) {
-      unlinkSync(ssrSummaryPath);
-    }
-  });
+  afterAll(() => vi.resetAllMocks());
 
   it('should return the metadata json', () => {
     expect(summary).toBeDefined();
@@ -381,12 +405,19 @@ describe('generateTestSummary', () => {
   it('should have normalized paths in test results', () => {
     const project = summary.projects['@internals/metadata'];
 
-    if (project.unit.testResults && project.unit.testResults.length > 0) {
-      const testResult = project.unit.testResults[0];
-      if ('name' in testResult && typeof testResult.name === 'string') {
-        expect(testResult.name).toMatch(/^\/projects\//);
-      }
-    }
+    expect(project?.unit.testResults).toHaveLength(1);
+    expect(project?.unit.testResults[0]).toMatchObject({ name: '/projects/core/src/iframe/iframe.test.ts' });
+  });
+
+  it('should read and normalize the visual report fixture', () => {
+    expect(summary.projects['@nvidia-elements/themes']?.visual.testResults).toEqual([
+      { name: '/projects/core/src/iframe/iframe.test.ts', assertionResults: [] }
+    ]);
+  });
+
+  it('should use empty summaries for missing reports', () => {
+    expect(summary.projects['@nvidia-elements/styles']?.visual.testResults).toEqual([]);
+    expect(summary.projects['@nvidia-elements/styles']?.visual.numTotalTests).toBe(0);
   });
 
   it('should have coverageMap set to undefined in unit test results', () => {

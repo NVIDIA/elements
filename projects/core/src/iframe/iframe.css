@@ -18,11 +18,6 @@ iframe {
 }
 
 @supports (frame-sizing: content-height) {
-  :host {
-    /* Native sizing locks the initial viewport height as its minimum. */
-    --height: var(--_height, 0px);
-  }
-
   iframe {
     frame-sizing: content-height;
   }
