@@ -1057,8 +1057,7 @@
     "@nvidia-elements/themes": "workspace:^"
   },
   "optionalDependencies": {
-    "@lit-labs/scoped-registry-mixin": "catalog:publish",
-    "@webcomponents/scoped-custom-element-registry": "catalog:publish"
+    "@lit-labs/scoped-registry-mixin": "catalog:publish"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
