@@ -330,9 +330,6 @@ catalogs:
     '@lit-labs/scoped-registry-mixin':
       specifier: ^1.0.4
       version: 1.0.4
-    '@webcomponents/scoped-custom-element-registry':
-      specifier: ^0.0.10
-      version: 0.0.10
     highlight.js:
       specifier: ^11.12.0
       version: 11.12.0
@@ -717,9 +714,6 @@ importers:
       '@lit-labs/scoped-registry-mixin':
         specifier: catalog:publish
         version: 1.0.4
-      '@webcomponents/scoped-custom-element-registry':
-        specifier: catalog:publish
-        version: 0.0.10
 
   projects/create:
     devDependencies:
@@ -7517,9 +7511,6 @@ packages:
 
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
-
-  '@webcomponents/scoped-custom-element-registry@0.0.10':
-    resolution: {integrity: sha512-wP4LF28aysE2Pq3NQRNQxko7Q0vOOwcoOSMg8FFI4S6z76UuXkYIc5ndC31dJMwso1/vSteL75LW2CEKedAJbA==}
 
   '@webcomponents/template-shadowroot@0.2.1':
     resolution: {integrity: sha512-fXL/vIUakyZL62hyvUh+EMwbVoTc0hksublmRz6ai6et8znHkJa6gtqMUZo1oc7dIz46exHSIImml9QTdknMHg==}
@@ -19368,9 +19359,6 @@ snapshots:
     dependencies:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
-
-  '@webcomponents/scoped-custom-element-registry@0.0.10':
-    optional: true
 
   '@webcomponents/template-shadowroot@0.2.1': {}
 
