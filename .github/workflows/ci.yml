@@ -5,13 +5,29 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  merge_group:
+    types: [checks_requested]
+    branches: [main]
   schedule:
     - cron: '7 23 * * *' # 11:07 PM America/Chicago
       timezone: America/Chicago
   workflow_dispatch:
+    inputs:
+      release:
+        description: 'Publish pending releases from current main'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
+
+# Automatic and manual releases share a lock; keep pending requests so an old rerun
+# cannot replace the current main revision's pending release.
+# PR and queue runs use separate groups and can validate in parallel.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'workflow_dispatch' && inputs.release && 'push' || github.event_name }}-${{ github.ref }}
+  queue: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release)) && 'max' || 'single' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
 
 jobs:
   ci:
@@ -25,10 +41,16 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          # Test the integration revision for both PRs and merge queue candidates.
+          ref: ${{ github.sha }}
           # The CLI build runs semantic-release dry-run to bake the next binary version.
           # On main, checkout credentials must match the release token used by that dry-run.
           token: ${{ github.ref == 'refs/heads/main' && secrets.RELEASE_TOKEN || github.token }}
+      - name: Validate release branch
+        if: github.event_name == 'workflow_dispatch' && inputs.release && github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Select the main branch when requesting a release."
+          exit 1
       - uses: ./.github/actions/setup-ci
       - name: Run CI checks
         env:
@@ -51,7 +73,9 @@ jobs:
         if: always()
         run: node ./projects/internals/ci/ci-summary.js >> "$GITHUB_STEP_SUMMARY"
       - name: Upload build artifacts
-        if: github.event_name == 'push'
+        if: >-
+          github.ref == 'refs/heads/main' &&
+          (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release))
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: build-artifacts
@@ -91,7 +115,7 @@ jobs:
             projects/viewport/dist
             projects/viewport/package.json
       - name: Prepare IndexNow artifacts
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         env:
           ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
           INDEXNOW_KEY: ${{secrets.INDEXNOW_KEY}}
@@ -100,13 +124,13 @@ jobs:
           --site-dir projects/pages/dist
           --site-url "$ELEMENTS_PAGES_BASE_URL"
       - name: Upload pages artifact
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: projects/pages/dist
           include-hidden-files: true
       - name: Upload IndexNow state
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: indexnow-state
@@ -121,6 +145,7 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+          ref: ${{ github.sha }}
       - uses: ./.github/actions/setup-ci
       - name: Run Lighthouse tests
         run: >-
@@ -132,9 +157,13 @@ jobs:
         run: node ./projects/internals/ci/lighthouse-summary.js >> "$GITHUB_STEP_SUMMARY"
 
   release:
-    needs: ci
-    if: github.event_name == 'push'
+    needs: [ci, lighthouse]
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release))
     runs-on: ubuntu-latest
+    outputs:
+      current: ${{ steps.source.outputs.current }}
     permissions:
       issues: write
       deployments: write
@@ -146,7 +175,8 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-          ref: main
+          # Match the source revision used to produce this run's artifacts.
+          ref: ${{ github.sha }}
           # Use RELEASE_TOKEN so the persisted git credentials match the token
           # semantic-release pushes with — otherwise the default GITHUB_TOKEN's
           # http.extraheader overrides @semantic-release/git's push auth.
@@ -159,7 +189,21 @@ jobs:
         with:
           name: build-artifacts
           path: projects
+      - name: Check release source
+        id: source
+        shell: bash
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          remote=$(git ls-remote --exit-code origin refs/heads/main)
+          current=false
+          if [[ "${remote%%$'\t'*}" == "$GITHUB_SHA" ]]; then
+            current=true
+          else
+            echo "Release deferred: main advanced; the latest main run will release pending changes." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "current=$current" >> "$GITHUB_OUTPUT"
       - name: Release
+        if: steps.source.outputs.current == 'true'
         env:
           # RELEASE_TOKEN must be a PAT or GitHub App token with contents:write and
           # bypass permission for main's branch protection rules. The default
@@ -168,6 +212,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: WIREIT_PARALLEL=1 WIREIT_LOGGER=metrics pnpm run release
       - name: Upload MCP server manifest
+        if: steps.source.outputs.current == 'true'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: mcp-server
@@ -176,6 +221,7 @@ jobs:
 
   publish-mcp:
     needs: release
+    if: needs.release.outputs.current == 'true'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -214,8 +260,8 @@ jobs:
           ./mcp-publisher publish projects/cli/server.json
 
   deploy-pages:
-    needs: ci
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: [ci, lighthouse]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -266,7 +312,7 @@ jobs:
 
   notify-indexnow:
     needs: deploy-pages
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     permissions:
       actions: read

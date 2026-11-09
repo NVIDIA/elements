@@ -12,8 +12,7 @@ The local CI job is the same CI job run in GitHub Actions, this ensures that if 
 
 ## GitHub Features and Integrations
 
-The Elements repo uses standard GitHub tooling to run its CI/CD pipeline.
-The [`.github/workflows/ci.yml`](https://github.com/NVIDIA/elements/blob/main/.github/workflows/ci.yml) contains the configuration for the entire pipeline.
+The Elements repo uses standard GitHub tooling to run its CI/CD pipeline. The [`.github/workflows/ci.yml`](https://github.com/NVIDIA/elements/blob/main/.github/workflows/ci.yml) contains the configuration for the entire pipeline.
 
 - [GitHub Pages Hosting](https://docs.github.com/en/pages)
 
@@ -209,6 +208,32 @@ The following GitHub settings optimize code quality and stability within the rep
 - [IndexNow](https://www.indexnow.org/)
 
 The Pages deployment workflow notifies IndexNow after it publishes documentation updates. Before merging changes that enable this workflow, add an `INDEXNOW_KEY` repository Actions secret containing 8 to 128 letters, numbers, or dashes. The workflow publishes the verification file under the Pages project path, submits only changed sitemap URLs, and retains each notification payload for 30 days so maintainers can rerun a failed notification job.
+
+## Merge queue
+
+The `ci` and `lighthouse` jobs run on pull requests and `merge_group.checks_requested` events. Both jobs check out `github.sha`, so they test the same integration revision, including the latest `main` and earlier entries in the queue. Keep these check names when editing the workflow because the main ruleset requires them. Queue runs validate changes without publishing packages or Pages.
+
+### Enable the queue
+
+Merge the workflow changes before requiring the queue in GitHub. In the ruleset for `main`:
+
+1. Keep the required approval, linear history, rebase-only merge method, and the `ci` and `lighthouse` checks from GitHub Actions.
+2. Enable **Require merge queue** and select **Rebase** as the queue merge method.
+3. Start with build concurrency **1**, minimum and maximum merge limits **1**, **Only merge non-failing pull requests** enabled, and a **45-minute** check timeout.
+4. Check for overlapping classic branch protections. GitHub cannot enable a queue on a classic rule whose branch pattern contains `*`.
+5. Keep routine merges in the queue. Limit bypass access to the identities needed for release commits and emergency recovery.
+
+Review a PR, then select **Merge when ready**. GitHub waits for the requirements, validates the queue candidate, and lands its individual commits with rebase merging. The original PR branch does not need to be rewritten for queue validation. GitHub creates new SHAs when rebase merging.
+
+### Verify the rollout
+
+Use a test repository to check two individually passing PRs whose combined changes fail. The second candidate must fail before reaching `main`. Also verify that an update to `main` or a queued PR causes fresh candidate validation, missing checks block merging, conflicts remove entries, and queue runs never publish packages or Pages. Include a run that produces release commits: the next candidate must include those changes. Check the resulting history for merge commits and dry-run the scope-based releases before increasing concurrency.
+
+Retry an unchanged candidate only for a transient failure. Re-running an old workflow retains its original revision; it does not validate against a newer `main`. If the base changes, let the queue create a new candidate and run CI again.
+
+For rollback, stop enqueueing and remove pending entries. Enable **Require branches to be up to date before merging** before disabling the queue. Keep approvals, required checks, and rebase-only history.
+
+See [GitHub merge queue configuration](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue) and [release concurrency](./RELEASE.md#concurrent-merges).
 
 ## Release
 
