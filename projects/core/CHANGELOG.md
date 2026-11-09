@@ -1,3 +1,10 @@
+## [2.23.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.1...@nvidia-elements/core-v2.23.2) (2026-11-09)
+
+### Bug Fixes
+
+* **core:** improve icon registry bundling performance ([64db7b9](https://github.com/NVIDIA/elements/commit/64db7b972645a624e11dd97249c49a6b0b2d60f7))
+* **media:** update icon imports ([7d95c48](https://github.com/NVIDIA/elements/commit/7d95c485bfbdaa180d858fc1ecf51941342e2cdf))
+
 ## [2.23.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.0...@nvidia-elements/core-v2.23.1) (2026-11-07)
 
 ### Bug Fixes
