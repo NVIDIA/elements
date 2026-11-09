@@ -1,3 +1,41 @@
+## [1.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.2...@nvidia-elements/media-v1.2.3) (2026-11-09)
+
+### Features
+
+* **core:** add configurable tabs indicator animation duration ([0cc3093](https://github.com/NVIDIA/elements/commit/0cc3093056d6a6e24d9e8876fb444d3ccc0ba3b6))
+* **core:** add ghost and workspace ([c2bdec9](https://github.com/NVIDIA/elements/commit/c2bdec9701628add8dc364786023a6019660aee3))
+* **core:** joystick ([a4461e1](https://github.com/NVIDIA/elements/commit/a4461e10930ec198bc43b846f7b090f5db70c371))
+* **core:** scroll box invoker command support ([4b41419](https://github.com/NVIDIA/elements/commit/4b414197911ba0c5b3fd942f9f51a89b0768c419))
+
+### Bug Fixes
+
+* **cli:** drop unused utilities ([71dcf96](https://github.com/NVIDIA/elements/commit/71dcf96ff531cd4ef69db6e55f08fbeecb005015))
+* **cli:** update @inquirer/prompts to 8.7.5 ([8bfbeb0](https://github.com/NVIDIA/elements/commit/8bfbeb0953fae54aae4fdce15b455e2fed94a60b))
+* **cli:** update marked-terminal to 7.3.1 ([d11932c](https://github.com/NVIDIA/elements/commit/d11932c791ae22a0847c00f20e5bd433d7b66444))
+* **cli:** update notice ([21a6510](https://github.com/NVIDIA/elements/commit/21a6510164469615358937cdf833edc05bfa9cb8))
+* **core:** correct dropdown group navigation and popover rendering ([5bf985f](https://github.com/NVIDIA/elements/commit/5bf985f1b0e434e8b5d08f1b29b18accbfd65c14))
+* **core:** correct gesture termination handling ([0aab542](https://github.com/NVIDIA/elements/commit/0aab542b206b25933d921416a62f8a70c44b2723))
+* **core:** drop obsolete checkbox clip-path fallback ([8cddf24](https://github.com/NVIDIA/elements/commit/8cddf24eab9f15f444ddc25152277ebd864116bd))
+* **core:** drop obsolete constructed stylesheet polyfill ([30b0684](https://github.com/NVIDIA/elements/commit/30b068411d1bd067e60935eb8ab60d8b6ad85268))
+* **core:** drop obsolete element internals polyfill ([bb0649c](https://github.com/NVIDIA/elements/commit/bb0649ced505ef4cfc0f050302046794a935441a))
+* **core:** drop obsolete formdata polyfill ([7831582](https://github.com/NVIDIA/elements/commit/78315824a2a9bfb81a615986a181d695b5bf6acc))
+* **core:** drop obsolete logo color-mix fallback ([93ea57f](https://github.com/NVIDIA/elements/commit/93ea57f6ed300fce24952f5b44a4f5dc5b7b87b1))
+* **core:** drop unused utilities ([9e4b1bc](https://github.com/NVIDIA/elements/commit/9e4b1bc6b942de163d33ed71ae676041dd8fb4e6))
+* **core:** iframe separate theme script and resize handling ([9391e0b](https://github.com/NVIDIA/elements/commit/9391e0beffe1751d80c2cb8da981e20906fb48a9))
+* **core:** improve icon registry bundling performance ([64db7b9](https://github.com/NVIDIA/elements/commit/64db7b972645a624e11dd97249c49a6b0b2d60f7))
+* **core:** re-render bugfixes ([48e5ac4](https://github.com/NVIDIA/elements/commit/48e5ac4e5c66e0c9659e47095698fe33bfc68629))
+* **core:** refresh menu tab order when items change ([024ff58](https://github.com/NVIDIA/elements/commit/024ff582b0d01ec8f63c629922bbf77d8e72c989))
+* **core:** remove obsolete inset-area popover fallback ([8a1d913](https://github.com/NVIDIA/elements/commit/8a1d9131f75c6c9879bef3413688e7a22a7d2306))
+* **core:** remove unused polyfill ([427b3ef](https://github.com/NVIDIA/elements/commit/427b3ef8bf1fb4d70a86ede95b719e7aea1bd58e))
+* **docs:** update 3d-force-graph to 1.80.2 ([86a69e9](https://github.com/NVIDIA/elements/commit/86a69e92a607dc254ca7df2e3e4428ae0d6126e5))
+* **forms:** drop unused utilities ([c538a47](https://github.com/NVIDIA/elements/commit/c538a47e79366919f43fb8f35950c52159f40d6c))
+* **forms:** preserve managed tabindex across button state changes ([ee959b4](https://github.com/NVIDIA/elements/commit/ee959b407ad08ef158ffd3f422b57b2b895b40ba))
+* **forms:** remove obsolete popover trigger fallback ([0973027](https://github.com/NVIDIA/elements/commit/09730270e6d81c8d9139cfb56aef9d9c5a2344f6))
+* **markdown:** update notice ([1315538](https://github.com/NVIDIA/elements/commit/1315538849bc452a321c3043411fd5e555025e75))
+* **media:** update icon imports ([7d95c48](https://github.com/NVIDIA/elements/commit/7d95c485bfbdaa180d858fc1ecf51941342e2cdf))
+* **pi:** update notice ([561c535](https://github.com/NVIDIA/elements/commit/561c535744d599f26fb2692f00b089ed8eac74ef))
+* **themes:** correct rounding issue ([3c22eef](https://github.com/NVIDIA/elements/commit/3c22eef05362992c8a50ebc82664e6d0a76a4692))
+
 ## [1.2.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.1...@nvidia-elements/media-v1.2.2) (2026-10-29)
 
 ### Features
