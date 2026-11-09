@@ -177,6 +177,20 @@ describe(Dialog.metadata.tag, () => {
     element.hidePopover();
   });
 
+  it('should limit dialog height to the dynamic viewport', async () => {
+    expect(CSS.supports('height', '100dvh')).toBe(true);
+
+    const probe = document.createElement('div');
+    probe.style.height = '100dvh';
+    document.body.append(probe);
+
+    element.showPopover();
+    await elementIsStable(element);
+
+    expect(getComputedStyle(element).maxHeight).toBe(getComputedStyle(probe).height);
+    probe.remove();
+  });
+
   it('should emit close event when close button clicked', async () => {
     element.closable = true;
     await elementIsStable(element);

@@ -18,7 +18,7 @@
   --width: 100vw;
   width: var(--width);
   max-width: var(--max-width);
-  height: calc(100vh - var(--top));
+  height: calc(100dvh - var(--top));
   margin: initial !important;
   margin-block-start: var(--top) !important;
   position-area: unset !important; /* drawer uses its own fixed positioning with translation */
