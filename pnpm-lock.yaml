@@ -306,8 +306,8 @@ catalogs:
       specifier: 28.0.0
       version: 28.0.0
     typebox:
-      specifier: 1.4.3
-      version: 1.4.3
+      specifier: 1.4.6
+      version: 1.4.6
     typescript:
       specifier: 6.0.3
       version: 6.0.3
@@ -1576,7 +1576,7 @@ importers:
         version: 5.1.0(vitest@5.1.0)
       typebox:
         specifier: 'catalog:'
-        version: 1.4.3
+        version: 1.4.6
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -6742,7 +6742,9 @@ packages:
   '@smithy/core@3.34.1':
     resolution: {integrity: sha512-dLcOUxz8YCv1RZUMKq6GbyUf95pLbrqh34bPvpCZ1+CByFF31BEAFewZjsGCnVsZTKdThNENfGyAgk2TJqVwSw==}
     engines: {node: '>=18.0.0'}
-    deprecated: Deprecated due to a bug in custom logger data redaction. See https://github.com/aws/aws-sdk-js-v3/issues/8393.
+    deprecated: |-
+      Deprecated due to a bug in custom logger data redaction. Upgrade to the latest version. If you used a custom logger with this
+        version, review your logs and rotate any credentials or other secrets. See https://github.com/aws/aws-sdk-js-v3/issues/8393.
 
   '@smithy/credential-provider-imds@4.5.2':
     resolution: {integrity: sha512-A9uSdn72ozbRUSit0eib0TW7nXuNPlaeM0zcGkJ+nE6tFcSDbnmtwoxbTCFBukVQcszDAyvsd7+rTduPTXpygg==}
@@ -13265,8 +13267,8 @@ packages:
   typebox@1.3.27:
     resolution: {integrity: sha512-zu+jc1pcy4UiNThxikUr36f0Rybk9PEeCg/NE6adeWr/SKsdNO4EzZHYRDlv2YCVAfj3Odq3dESSo/jNyoBXzA==}
 
-  typebox@1.4.3:
-    resolution: {integrity: sha512-u3nyf7ZciAv1GOijVpI0TDt9At5wmEi7lSHSlRrnjuThv1DcB7fgGBqqrz+fGZ54jAfTpOOX0JXwxSIg3pnxQA==}
+  typebox@1.4.6:
+    resolution: {integrity: sha512-Yh8Mi4hzD7gqcuv9ZIk6HK1KVJKubTlfxaNxkrYK35HCvxoCjCuWVr8cBjQ/ChfA7yliPteJEBWHGFVGWDuF5Q==}
 
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
@@ -26306,7 +26308,7 @@ snapshots:
 
   typebox@1.3.27: {}
 
-  typebox@1.4.3: {}
+  typebox@1.4.6: {}
 
   typed-array-buffer@1.0.3:
     dependencies:
