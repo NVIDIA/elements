@@ -150,6 +150,33 @@ describe(Drawer.metadata.tag, () => {
     expect(element.getBoundingClientRect()[edge]).toBe(viewportEdge);
   });
 
+  it('should size a side drawer to the dynamic viewport', async () => {
+    expect(CSS.supports('height', '100dvh')).toBe(true);
+
+    const viewport = document.createElement('div');
+    viewport.style.height = '100dvh';
+    const offset = document.createElement('div');
+    offset.style.height = 'calc(100dvh - 20px)';
+    document.body.append(viewport, offset);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    await elementIsStable(element);
+
+    expect(getComputedStyle(element).height).toBe(getComputedStyle(viewport).height);
+
+    element.style.setProperty('--top', '20px');
+    expect(getComputedStyle(element).height).toBe(getComputedStyle(offset).height);
+
+    element.position = 'top';
+    await elementIsStable(element);
+    expect(getComputedStyle(element).height).not.toBe(getComputedStyle(viewport).height);
+
+    viewport.remove();
+    offset.remove();
+  });
+
   it('should reflect modal attribute to DOM', async () => {
     expect(element.hasAttribute('modal')).toBe(false);
     element.modal = true;
