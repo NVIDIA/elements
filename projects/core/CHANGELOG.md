@@ -1,3 +1,9 @@
+## [2.23.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.2...@nvidia-elements/core-v2.23.3) (2026-11-09)
+
+### Bug Fixes
+
+* **core:** drop obsolete scoped registry polyfill ([520e03b](https://github.com/NVIDIA/elements/commit/520e03b0244592f100edcfedc45ea2871d1cecc5))
+
 ## [2.23.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.1...@nvidia-elements/core-v2.23.2) (2026-11-09)
 
 ### Bug Fixes
