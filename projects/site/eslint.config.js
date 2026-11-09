@@ -12,6 +12,12 @@ export default [
   ...appConfig,
   ...jsonConfig,
   {
+    files: ['src/**/*.ts'],
+    rules: {
+      'local-typescript/require-unit-test': 'off'
+    }
+  },
+  {
     // These examples intentionally demonstrate incomplete and hypothetical component APIs.
     files: ['src/docs/api-design/**/*.md', 'src/docs/internal/guidelines/**/*.md'],
     rules: {

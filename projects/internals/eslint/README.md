@@ -75,9 +75,12 @@ Applied to `src/**/*.ts`, `src/**/*.tsx`, test files, and `*.examples.ts`.
 
 **Tests**
 
+- **`require-unit-test`**. TypeScript implementation files must have a sibling `.test.ts` file, such as `utils.test.ts` for `utils.ts`. Both TypeScript configs enable this as an error. The rule skips declaration files, tests (including specialized test suites), test helper directories (`test`, `tests`, `__tests__`), files under `src/scripts/`, examples, `define.ts`, and `bundle.ts`. Empty modules and modules containing only imports, re-exports, type declarations, or static data also pass. Static data includes literal constants, nested arrays and objects, and default exports, with support for type annotations, `as const`, and `satisfies`. Built-in `Set` and `Map` constructors with literal array contents also pass, including array spreads of named or default imports. The rule treats those imported lists as data without inspecting their source modules. Calls, custom or shadowed constructors, callbacks, `get` properties, and other references or spreads still require tests. An `index.ts` with implementation code still requires a test. Specialized suites such as `.test.visual.ts` do not replace the unit test. This checks file existence, so it does not establish test coverage or test quality.
 - **`require-fixture-cleanup`**. When a `describe` block's `beforeEach` calls `createFixture`, a sibling or ancestor `afterEach` must call `removeFixture`. Prevents DOM pollution across test suites.
 - **`require-element-stable`**. `expect(...)` assertions on component state must follow `elementIsStable(...)` so Lit renders settle before reads.
 - **`require-test-completeness`**. Every component source file must have its five sibling test files: `.test.ts`, `.test.axe.ts`, `.test.visual.ts`, `.test.ssr.ts`, `.test.lighthouse.ts`.
+
+Use normal ESLint file overrides for project-specific exceptions. After adding or removing a test file, run ESLint without `--cache` so it checks the sibling file again.
 
 **Source hygiene**
 

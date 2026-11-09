@@ -17,8 +17,6 @@ export default {
   component: 'nve-dropdown'
 };
 
-/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
-
 /**
  * @summary Basic dropdown implementation using popovertarget attribute to connect trigger and dropdown. Useful for simple dropdown menus.
  */

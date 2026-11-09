@@ -9,6 +9,12 @@ export default [
   ...litConfig,
   ...jsonConfig,
   {
+    files: ['src/workers/**/*.ts'],
+    rules: {
+      'local-typescript/require-unit-test': 'off'
+    }
+  },
+  {
     files: ['src/internal/base/editor.ts', 'src/internal/base/input.ts', 'src/internal/formats/problems-format.ts'],
     rules: {
       'local-typescript/no-internal-external-imports': 'off'

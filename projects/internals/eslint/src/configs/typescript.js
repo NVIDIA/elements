@@ -17,6 +17,7 @@ import requireListenerCleanup from '../local/require-listener-cleanup.js';
 import requireObserverCleanup from '../local/require-observer-cleanup.js';
 import requireTimerCleanup from '../local/require-timer-cleanup.js';
 import requireSpdxHeader from '../local/require-spdx-header.js';
+import requireUnitTest from '../local/require-unit-test.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -68,7 +69,8 @@ const config = {
         'require-listener-cleanup': requireListenerCleanup,
         'require-observer-cleanup': requireObserverCleanup,
         'require-timer-cleanup': requireTimerCleanup,
-        'require-spdx-header': requireSpdxHeader
+        'require-spdx-header': requireSpdxHeader,
+        'require-unit-test': requireUnitTest
       }
     }
   },
@@ -124,6 +126,7 @@ const config = {
     'local-typescript/require-observer-cleanup': 'error',
     'local-typescript/require-timer-cleanup': 'error',
     'local-typescript/no-internal-external-imports': 'error',
+    'local-typescript/require-unit-test': 'error',
 
     // todo: enable these rules incrementally as the codebase is cleaned up
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',

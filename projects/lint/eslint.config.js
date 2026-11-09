@@ -6,6 +6,12 @@ export default [
   ...libraryConfig,
   ...jsonConfig,
   {
+    files: ['src/eslint/configs/**/*.ts'],
+    rules: {
+      'local-typescript/require-unit-test': 'off'
+    }
+  },
+  {
     files: ['src/eslint/rules/**/*.ts', 'src/eslint/internals/**/*.ts'],
     rules: {
       // ESLint rule `create` methods and visitor handlers

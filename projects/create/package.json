@@ -34,7 +34,8 @@
     "lint": "wireit",
     "create-nve:install": "pnpm run build && pnpm link --global",
     "create-nve:uninstall": "pnpm uninstall --global @nvidia-elements/create",
-    "create-nve": "node dist/index.js"
+    "create-nve": "node dist/index.js",
+    "test": "wireit"
   },
   "devDependencies": {
     "@internals/eslint": "workspace:*",
@@ -50,7 +51,8 @@
       "dependencies": [
         "lint",
         "build",
-        "publint"
+        "publint",
+        "test"
       ]
     },
     "publint": {
@@ -104,6 +106,14 @@
       "dependencies": [
         "../internals/eslint:ci"
       ]
+    },
+    "test": {
+      "command": "node --experimental-test-module-mocks --test 'src/**/*.test.ts'",
+      "files": [
+        "src/**/*.ts",
+        "package.json"
+      ],
+      "output": []
     }
   },
   "publishConfig": {

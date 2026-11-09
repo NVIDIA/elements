@@ -18,6 +18,12 @@ export default [
   ...cssConfig,
   ...jsonConfig,
   {
+    files: ['src/icon/icons/*.ts', 'src/icon/icons.ts', 'src/icon/names.ts', 'src/icon/server.ts'],
+    rules: {
+      'local-typescript/require-unit-test': 'off'
+    }
+  },
+  {
     files: ['src/bundle.ts'],
     rules: {
       'local/no-missing-bundle-registration': ['error'],
