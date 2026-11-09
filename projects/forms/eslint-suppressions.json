@@ -14,11 +14,6 @@
       "count": 2
     }
   },
-  "src/internal/utils.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/mixins/control.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 3
