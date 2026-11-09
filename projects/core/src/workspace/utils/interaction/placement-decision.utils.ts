@@ -15,10 +15,10 @@ import {
 import { getPanelIds, getSplitSide } from '../model/layout.utils.js';
 import { getTabInsertionIndex, preservesGroupMembership } from '../model/membership.utils.js';
 import { findGroup, projectLayout } from '../model/operations.utils.js';
-import { createContextRectResolver } from '../placement/context.utils.js';
-import { describePlacementSlot } from '../placement/group-insertion.utils.js';
-import { planWorkspacePlacement } from '../placement/planner.utils.js';
+import { getGroupInsertion } from '../placement/group-insertion.utils.js';
+import { resolvePlacementPlan } from '../placement/planner.utils.js';
 import { findWorkspaceRegion } from '../placement/region.utils.js';
+import { createScopeRectResolver } from '../placement/scope.utils.js';
 
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceDragPreview, WorkspaceDropIntent, WorkspacePlacementAcquisition } from './drag-preview.utils.js';
@@ -26,18 +26,20 @@ import type { WorkspaceInsertionOffer } from './insertion-offers.utils.js';
 import type { WorkspaceLayout, WorkspaceNode, WorkspaceSplit } from '../model/layout.utils.js';
 import type { WorkspaceDestination } from '../model/operations.utils.js';
 import type { WorkspaceLayoutProjector } from '../model/projection.utils.js';
-import type { WorkspaceContextRectResolver } from '../placement/context.utils.js';
 import type { WorkspacePlacementPlanner } from '../placement/planner.utils.js';
+import type { WorkspaceScopeRectResolver } from '../placement/scope.utils.js';
+import type { WorkspacePlacementSession } from '../placement/session.utils.js';
 import type { WorkspaceTarget } from '../presentation/groups.utils.js';
 import type { WorkspacePlacementCatalog } from '../evaluation.utils.js';
 
 interface WorkspacePlacementQuery {
+  resolveScopeRect?: WorkspaceScopeRectResolver;
   gap: number;
   source: string[];
   point: Point;
   regions: WorkspacePlacedRegion[];
   orderingRegions?: WorkspacePlacedRegion[];
-  sourceSlot?: Rect;
+  sourceReservation?: Rect;
   headers?: Rect[];
   preview?: WorkspaceDragPreview;
   local?: WorkspaceDropIntent;
@@ -50,9 +52,10 @@ type DecisionInput = WorkspacePlacementQuery & {
   available: string[];
   projectLayout?: WorkspaceLayoutProjector;
   planPlacement?: WorkspacePlacementPlanner;
+  placementSession?: WorkspacePlacementSession;
 };
 
-type OfferInput = DecisionInput & { contextRect: WorkspaceContextRectResolver };
+type OfferInput = DecisionInput & { resolveScopeRect: WorkspaceScopeRectResolver };
 
 export interface WorkspacePlacementDecision {
   intent: WorkspaceDropIntent | undefined;
@@ -71,6 +74,7 @@ interface PointerPlacementInput {
   available: string[];
   projectLayout?: WorkspaceLayoutProjector;
   planPlacement?: WorkspacePlacementPlanner;
+  placementSession?: WorkspacePlacementSession;
 }
 
 const inside = (rect: Rect, point: Point) =>
@@ -93,20 +97,18 @@ export function decidePointerPlacement(input: PointerPlacementInput): WorkspaceP
     gap: input.gap,
     available: input.available,
     projectLayout: input.projectLayout,
-    planPlacement: input.planPlacement
+    planPlacement: input.planPlacement,
+    placementSession: input.placementSession
   });
 }
 
 /** Chooses input and availability together from the two operation-specific computed projections. */
 export function decidePlacement(input: DecisionInput) {
-  const boundary = placementOffers({ ...input, contextRect: createContextRectResolver() });
-  const selectedKey = selectedScopeKey(boundary.offers, input);
-  const sourceSlot = reservedSourceSlot(input);
-  const hints = boundary.offers.filter(offer => eligiblePlacementHint(offer, sourceSlot, input.bounds));
-  const nearest = hints
-    .filter(offer => offer.scope.key !== selectedKey)
-    .map(offer => ({ offer, distance: distance(offer, input.point) }))
-    .sort((a, b) => a.distance - b.distance)[0];
+  const boundary = placementOffers({ ...input, resolveScopeRect: input.resolveScopeRect ?? createScopeRectResolver() });
+  const selectedKey = selectedInsertionKey(boundary.offers, input);
+  const sourceReservation = getActiveSourceReservation(input);
+  const hints = boundary.offers.filter(offer => eligiblePlacementHint(offer, sourceReservation, input.bounds));
+  const nearest = nearestPlacementHint(hints, selectedKey, input.point);
   const candidate = inside(input.bounds, input.point)
     ? boundary.offers.find(
         offer => inside(offer.hitRect ?? offer.rect, input.point) && (!input.header || placementOwnsChrome(offer))
@@ -123,6 +125,20 @@ export function decidePlacement(input: DecisionInput) {
       nearest
     })
   };
+}
+
+function nearestPlacementHint(hints: WorkspaceInsertionOffer[], selectedKey: string | undefined, point: Point) {
+  let nearestOffer: WorkspaceInsertionOffer | undefined;
+  let nearestDistance = Infinity;
+  for (const offer of hints) {
+    if (offer.insertion.key === selectedKey) continue;
+    const offerDistance = distance(offer, point);
+    if (!nearestOffer || offerDistance < nearestDistance) {
+      nearestOffer = offer;
+      nearestDistance = offerDistance;
+    }
+  }
+  return nearestOffer && { offer: nearestOffer, distance: nearestDistance };
 }
 
 function localPlacementIntent(input: PointerPlacementInput, target: WorkspaceTarget | undefined, header: boolean) {
@@ -157,10 +173,10 @@ function headerPlacementIntent(input: PointerPlacementInput, target: WorkspaceTa
   return allowed ? intent : undefined;
 }
 
-function reservedSourceSlot(input: WorkspacePlacementQuery) {
+function getActiveSourceReservation(input: WorkspacePlacementQuery) {
   const preview = input.preview;
   if (
-    !input.sourceSlot ||
+    !input.sourceReservation ||
     preview?.phase !== 'detached' ||
     preview.blocked ||
     preview.allocation !== 'reserved' ||
@@ -168,11 +184,11 @@ function reservedSourceSlot(input: WorkspacePlacementQuery) {
   ) {
     return undefined;
   }
-  return clipCue(input.sourceSlot, input.bounds);
+  return clipCue(input.sourceReservation, input.bounds);
 }
 
-function eligiblePlacementHint(offer: WorkspaceInsertionOffer, sourceSlot: Rect | undefined, bounds: Rect) {
-  if (!sourceSlot) return true;
+function eligiblePlacementHint(offer: WorkspaceInsertionOffer, sourceReservation: Rect | undefined, bounds: Rect) {
+  if (!sourceReservation) return true;
   const rect = clipCue(offer.rect, bounds);
   const vertical = offer.destination.position === 'left' || offer.destination.position === 'right';
   const normal = vertical ? 'x' : 'y';
@@ -180,12 +196,13 @@ function eligiblePlacementHint(offer: WorkspaceInsertionOffer, sourceSlot: Rect 
   const tangent = vertical ? 'y' : 'x';
   const tangentSize = vertical ? 'height' : 'width';
   const normalInsideSource =
-    rect[normal] > sourceSlot[normal] && rect[normal] + rect[normalSize] < sourceSlot[normal] + sourceSlot[normalSize];
+    rect[normal] > sourceReservation[normal] &&
+    rect[normal] + rect[normalSize] < sourceReservation[normal] + sourceReservation[normalSize];
   if (!normalInsideSource) return true;
 
   const tangentCoveredBySource =
-    rect[tangent] >= sourceSlot[tangent] &&
-    rect[tangent] + rect[tangentSize] <= sourceSlot[tangent] + sourceSlot[tangentSize];
+    rect[tangent] >= sourceReservation[tangent] &&
+    rect[tangent] + rect[tangentSize] <= sourceReservation[tangent] + sourceReservation[tangentSize];
   return !tangentCoveredBySource;
 }
 
@@ -200,7 +217,7 @@ function placementHint({
   boundary?: WorkspaceInsertionOffer;
   nearest?: { offer: WorkspaceInsertionOffer; distance: number };
 }) {
-  if (hit && hit.scope.key !== selectedKey) return hit;
+  if (hit && hit.insertion.key !== selectedKey) return hit;
   if (!boundary && nearest && nearest.distance <= 24) return nearest.offer;
   return undefined;
 }
@@ -221,28 +238,31 @@ function placementOffers(input: OfferInput) {
     point: input.point,
     current: input.preview?.intent,
     headers: input.headers ?? [],
-    geometry: { regions, source: input.source, gap: input.gap, contextRect: input.contextRect }
+    geometry: { regions, source: input.source, gap: input.gap, resolveScopeRect: input.resolveScopeRect }
   });
 }
 
 function acquiredIntent(input: WorkspacePlacementQuery, hit: WorkspaceInsertionOffer | undefined) {
   if (hit) return getPlacementOfferIntent(hit);
   if (!inside(input.bounds, input.point)) return undefined;
-  if (input.sourceSlot && inside(input.sourceSlot, input.point)) return input.preview?.intent ?? input.local;
+  if (input.sourceReservation && inside(input.sourceReservation, input.point))
+    return input.preview?.intent ?? input.local;
   return input.local;
 }
 
-function selectedScopeKey(offers: WorkspaceInsertionOffer[], input: DecisionInput) {
+function selectedInsertionKey(offers: WorkspaceInsertionOffer[], input: DecisionInput) {
   const preview = input.preview;
   if (!preview || preview.phase !== 'detached') return undefined;
   if ('layout' in preview)
-    return describePlacementSlot({
+    return getGroupInsertion({
       plan: preview,
       source: input.source,
       available: input.available,
-      projectLayout: input.projectLayout
+      projectLayout: input.projectLayout,
+      placementSession: input.placementSession,
+      planPlacement: input.planPlacement
     })?.key;
-  return offers.find(offer => matchesPlacementIntent(getPlacementOfferIntent(offer), preview.intent))?.scope.key;
+  return offers.find(offer => matchesPlacementIntent(getPlacementOfferIntent(offer), preview.intent))?.insertion.key;
 }
 
 function distance(offer: WorkspaceInsertionOffer, point: Point) {
@@ -275,7 +295,11 @@ function orderOwner(input: OfferInput & { root: WorkspaceNode | null }): OrderOw
   if (owner?.type !== 'split' || !wholeSource(group, source)) return undefined;
   const ownerRect = (regions: WorkspacePlacedRegion[]) =>
     regions.find(region => region.key === key)?.rect ??
-    input.contextRect({ members: getPanelIds(owner).filter(id => !source.includes(id)), allocation: regions, source });
+    input.resolveScopeRect({
+      members: getPanelIds(owner).filter(id => !source.includes(id)),
+      allocation: regions,
+      source
+    });
   const rect = ownerRect(input.regions);
   const adjacencyRect = ownerRect(input.orderingRegions ?? input.regions);
   if (!rect || !adjacencyRect) return undefined;
@@ -298,18 +322,18 @@ function orderOffers(input: OfferInput & { root: WorkspaceNode | null }): Worksp
   if (last) {
     entries.push({ ...last, after: true });
   }
-  return entries.flatMap((entry, slot) => orderOffer({ input, owner, entry, slot }));
+  return entries.flatMap((entry, insertionIndex) => orderOffer({ input, owner, entry, insertionIndex }));
 }
 
 interface OrderOfferInput {
   input: OfferInput;
   owner: OrderOwner;
   entry: { node: WorkspaceNode; index: number; after: boolean };
-  slot: number;
+  insertionIndex: number;
 }
 
-function orderOffer({ input, owner, entry, slot }: OrderOfferInput): WorkspaceInsertionOffer[] {
-  const neighbors = orderNeighbors({ input, owner, entry, slot });
+function orderOffer({ input, owner, entry, insertionIndex }: OrderOfferInput): WorkspaceInsertionOffer[] {
+  const neighbors = orderNeighbors({ input, owner, entry, insertionIndex });
   if (!neighbors) return [];
   const { region, before } = neighbors;
   const destination = {
@@ -317,22 +341,17 @@ function orderOffer({ input, owner, entry, slot }: OrderOfferInput): WorkspaceIn
     region: region.key,
     position: getSplitSide(owner.owner.axis, entry.after ? 'after' : 'before')
   };
-  const plan = (input.planPlacement ?? planWorkspacePlacement)({
-    layout: input.currentLayout,
-    source: input.source,
-    destination,
-    available: input.available,
-    projectLayout: input.projectLayout,
-    operation: 'order'
-  });
+  const plan = resolvePlacementPlan(input, destination, 'order');
   if (plan?.kind !== 'reorder') return [];
-  const descriptor = describePlacementSlot({
+  const insertion = getGroupInsertion({
     plan,
     source: input.source,
     available: input.available,
-    projectLayout: input.projectLayout
+    projectLayout: input.projectLayout,
+    placementSession: input.placementSession,
+    planPlacement: input.planPlacement
   });
-  const boundary = orderBoundary(entry, slot);
+  const boundary = orderBoundary(entry, insertionIndex);
   const ownerRect = boundary ? owner.rect : owner.adjacencyRect;
   const area = getOrderHintRect({
     owner: ownerRect,
@@ -340,10 +359,10 @@ function orderOffer({ input, owner, entry, slot }: OrderOfferInput): WorkspaceIn
     previous: before?.rect,
     axis: owner.owner.axis,
     after: entry.after,
-    sourceSlot: input.sourceSlot,
+    sourceReservation: input.sourceReservation,
     boundary
   });
-  if (!area || !descriptor) return [];
+  if (!area || !insertion) return [];
   return [
     {
       destination,
@@ -351,16 +370,16 @@ function orderOffer({ input, owner, entry, slot }: OrderOfferInput): WorkspaceIn
       boundary,
       rect: area,
       scopeRect: ownerRect,
-      scope: descriptor,
+      insertion,
       plan,
       kind: 'order'
     }
   ];
 }
 
-function orderBoundary(entry: OrderOfferInput['entry'], slot: number): WorkspaceInsertionOffer['boundary'] {
+function orderBoundary(entry: OrderOfferInput['entry'], insertionIndex: number): WorkspaceInsertionOffer['boundary'] {
   if (entry.after) return 'end';
-  if (slot === 0) return 'start';
+  if (insertionIndex === 0) return 'start';
   return undefined;
 }
 
@@ -368,12 +387,12 @@ function wholeSource(group: ReturnType<typeof findGroup>, source: string[]) {
   return !!group && group.panels.length === source.length && group.panels.every(id => source.includes(id));
 }
 
-function orderNeighbors({ input, owner, entry, slot }: Parameters<typeof orderOffer>[0]) {
+function orderNeighbors({ input, owner, entry, insertionIndex }: Parameters<typeof orderOffer>[0]) {
   const regions = input.orderingRegions ?? input.regions;
   const region = regions.find(candidate => candidate.key === `${owner.key}.${entry.index}`);
-  const previous = owner.peers[slot - 1];
+  const previous = owner.peers[insertionIndex - 1];
   const before = previous && regions.find(candidate => candidate.key === `${owner.key}.${previous.index}`);
-  return !region || (slot > 0 && !entry.after && !before) ? undefined : { region, before };
+  return !region || (insertionIndex > 0 && !entry.after && !before) ? undefined : { region, before };
 }
 
 function contentDirection(

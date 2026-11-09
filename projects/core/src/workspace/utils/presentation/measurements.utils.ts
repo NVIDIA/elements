@@ -24,23 +24,25 @@ export interface WorkspaceMeasurementChange {
   readonly spaceChanged: boolean;
 }
 
-const measurementProperties = [
-  'gap',
-  'headerHeight',
-  'gripWidth',
-  'actionWidth',
-  'groupActionWidth',
-  'tabWidth',
-  'tabMinWidth',
-  'width',
-  'height'
-] as const;
-
 export function sameWorkspaceMeasurements(previous: WorkspaceMeasurements | undefined, current: WorkspaceMeasurements) {
   return (
     previous !== undefined &&
-    measurementProperties.every(property => previous[property] === current[property]) &&
+    sameWorkspaceMeasurementScalars(previous, current) &&
     samePanelMeasurements(previous.panels, current.panels)
+  );
+}
+
+export function sameWorkspaceMeasurementScalars(previous: WorkspaceMeasurements, current: WorkspaceMeasurements) {
+  return (
+    previous.gap === current.gap &&
+    previous.headerHeight === current.headerHeight &&
+    previous.gripWidth === current.gripWidth &&
+    previous.actionWidth === current.actionWidth &&
+    previous.groupActionWidth === current.groupActionWidth &&
+    previous.tabWidth === current.tabWidth &&
+    previous.tabMinWidth === current.tabMinWidth &&
+    previous.width === current.width &&
+    previous.height === current.height
   );
 }
 

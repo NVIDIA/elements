@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import {
   closePanel,
   createDetachedLayout,
+  findGroup,
   getFullscreenWorkspaceLayout,
   openPanel,
   placePanels,
@@ -14,7 +15,7 @@ import {
   selectPanel
 } from './operations.utils.js';
 
-import type { WorkspaceGroup, WorkspaceLayout } from './layout.utils.js';
+import type { WorkspaceGroup, WorkspaceLayout, WorkspaceNode, WorkspaceSplit } from './layout.utils.js';
 
 function group(...panels: string[]): WorkspaceGroup {
   return { type: 'group', panels, active: panels[0] ?? '' };
@@ -35,6 +36,23 @@ function split(): WorkspaceLayout {
     },
     closed: []
   };
+}
+
+const modelSplit = (axis: WorkspaceSplit['axis'], children: WorkspaceNode[], weights: number[]): WorkspaceSplit => ({
+  type: 'split',
+  axis,
+  children,
+  weights
+});
+
+function freezeLayoutNode(node: WorkspaceNode) {
+  if (node.type === 'group') Object.freeze(node.panels);
+  else {
+    node.children.forEach(freezeLayoutNode);
+    Object.freeze(node.children);
+    Object.freeze(node.weights);
+  }
+  Object.freeze(node);
 }
 
 describe('workspace operations', () => {
@@ -286,6 +304,48 @@ describe('workspace operations', () => {
     for (const result of [reconciled, projected]) {
       expect(result.closed).not.toBe(saved.closed);
     }
+  });
+  it('isolates projected and selected groups from frozen authored panel arrays', () => {
+    const root = modelSplit('horizontal', [group('a', 'companion'), group('b'), group('dormant')], [2, 3, 5]);
+    const saved: WorkspaceLayout = { version: 1, root, closed: ['dormant'] };
+    freezeLayoutNode(root);
+    Object.freeze(saved.closed);
+    Object.freeze(saved);
+    const before = JSON.stringify(saved);
+    const projected = projectLayout(saved, ['a', 'companion', 'b', 'dormant']);
+    const selected = selectPanel(saved, 'companion');
+    expect(selected).toBeDefined();
+    findGroup(projected.root, 'b')!.panels.push('projected-only');
+    findGroup(selected!.root, 'b')!.panels.push('selected-only');
+    expect(JSON.stringify(saved)).toBe(before);
+    expect(findGroup(selected!.root, 'a')!.active).toBe('companion');
+    expect(selected!.closed).toEqual(['dormant']);
+  });
+
+  it('keeps placed layouts independent while preserving dormant groups', () => {
+    const root = modelSplit(
+      'horizontal',
+      [group('a', 'companion'), modelSplit('vertical', [group('b'), group('dormant')], [3, 7]), group('c')],
+      [2, 3, 5]
+    );
+    const saved: WorkspaceLayout = { version: 1, root, closed: ['dormant'] };
+    freezeLayoutNode(root);
+    Object.freeze(saved.closed);
+    Object.freeze(saved);
+    const before = JSON.stringify(saved);
+    const placed = placePanels({
+      layout: saved,
+      source: ['companion'],
+      destination: { target: 'b', position: 'left' }
+    });
+    expect(placed).toBeDefined();
+    expect(placed).not.toBe(saved);
+    const untouched = findGroup(placed!.root, 'c')!;
+    expect(untouched).not.toBe(findGroup(root, 'c'));
+    untouched.panels.push('placed-only');
+    expect(findGroup(placed!.root, 'dormant')).toBeDefined();
+    expect(placed!.closed).toEqual(['dormant']);
+    expect(JSON.stringify(saved)).toBe(before);
   });
 });
 

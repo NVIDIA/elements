@@ -52,7 +52,7 @@ describe('workspace reserved destination emphasis', () => {
     expect(shouldEmphasizeReservedDestination({ ...preview, allocation: 'overlay' })).toBe(false);
   });
 
-  it('does not emphasize split overlays or reserved tab slots', () => {
+  it('does not emphasize split overlays or tab reservations', () => {
     expect(
       shouldEmphasizeReservedDestination({
         ...preview,

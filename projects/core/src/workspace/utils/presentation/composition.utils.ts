@@ -7,16 +7,16 @@ import { getActiveElement, isFocusable, matchesElementName } from '@nvidia-eleme
 
 import { WorkspacePanel } from '../../panel/panel.js';
 
-export function getPanelLabel(panels: WorkspacePanel[], id: string) {
-  const panel = panels.find(item => item.id === id);
-  const header = panel?.querySelector(':scope > nve-workspace-panel-header');
-  return (
-    [...(header?.childNodes ?? [])]
-      .filter(node => !(node instanceof Element) || !node.hasAttribute('slot'))
-      .map(node => node.textContent)
-      .join(' ')
-      .trim() || id
-  );
+export function getPanelLabel(panel: WorkspacePanel) {
+  const header = panel.querySelector(':scope > nve-workspace-panel-header');
+  let label = '';
+  let separator = '';
+  for (let node = header?.firstChild; node; node = node.nextSibling) {
+    if (node.nodeType === Node.COMMENT_NODE || (node instanceof Element && node.hasAttribute('slot'))) continue;
+    label += separator + (node.textContent ?? '');
+    separator = ' ';
+  }
+  return label.trim() || panel.id;
 }
 
 /** Recognizes authored chrome mutations while excluding nested workspace content. */

@@ -13,7 +13,7 @@ import { decidePlacement, decidePointerPlacement } from '../interaction/placemen
 import { getPanelIds } from '../model/layout.utils.js';
 import { createDetachedLayout, projectLayout } from '../model/operations.utils.js';
 import { parseWorkspaceValue } from '../model/value.utils.js';
-import { describePlacementSlot } from './group-insertion.utils.js';
+import { getGroupInsertion } from './group-insertion.utils.js';
 import { planWorkspacePlacement } from './planner.utils.js';
 import { evaluatePlacementOffer } from './preparation.utils.js';
 import { WorkspaceEvaluation } from '../evaluation.utils.js';
@@ -104,9 +104,9 @@ describe('workspace insertion seam acquisition', () => {
         root: currentLayout.root,
         existing: []
       });
-      const hint = hints.find(offer => offer.scope.previous?.includes('b') && offer.scope.next?.includes('c'));
+      const hint = hints.find(offer => offer.insertion.previous?.includes('b') && offer.insertion.next?.includes('c'));
       expect(hint?.kind).toBe('insert');
-      expect(hint?.scope.axis).toBe(axis);
+      expect(hint?.insertion.axis).toBe(axis);
       const previous = regions.find(region => region.node.type === 'group' && region.node.panels.includes('b'))!.rect;
       const next = regions.find(region => region.node.type === 'group' && region.node.panels.includes('c'))!.rect;
       const normal = axis === 'horizontal' ? 'x' : 'y';
@@ -164,7 +164,7 @@ describe('workspace insertion seam acquisition', () => {
     })!;
     const reserved = allocate(plan.layout);
     const catalog = createCatalog(currentLayout, { source, bounds: frame, minimum: { width: 64, height: 48 } });
-    const sourceSlot = reserved.groups.find(item => item.group.panels.includes('companion'))!.rect;
+    const sourceReservation = reserved.groups.find(item => item.group.panels.includes('companion'))!.rect;
     const preview: WorkspaceDragPreview = {
       phase: 'detached',
       source,
@@ -172,7 +172,7 @@ describe('workspace insertion seam acquisition', () => {
       allocation: 'reserved',
       layout: plan.layout,
       intent: { kind: 'insert', destination },
-      cue: { kind: 'group', rect: sourceSlot }
+      cue: { kind: 'group', rect: sourceReservation }
     };
     const first = reserved.groups.find(item => item.group.panels.includes('b'))!.rect;
     const next = reserved.groups.find(item => item.group.panels.includes('c'))!.rect;
@@ -184,7 +184,7 @@ describe('workspace insertion seam acquisition', () => {
       available,
       bounds: frame,
       preview,
-      sourceSlot,
+      sourceReservation,
       regions: catalog(createDetachedLayout(currentLayout, source)),
       orderingRegions: catalog(plan.layout),
       header: false,
@@ -192,7 +192,7 @@ describe('workspace insertion seam acquisition', () => {
       point: { x: next.x + next.width / 2, y: seam }
     });
     expect(result.hint!.rect.y + result.hint!.rect.height / 2).toBe(seam);
-    const acquired = describePlacementSlot({ plan: result.acquisition!.plan, source, available });
+    const acquired = getGroupInsertion({ plan: result.acquisition!.plan, source, available });
     expect(acquired?.previous).toEqual(['b']);
     expect(acquired?.next).toEqual(['c']);
   });
@@ -203,9 +203,9 @@ describe('workspace insertion seam acquisition', () => {
     const previous = input.regions.find(r => r.node.type === 'group' && r.node.panels.includes('a'))!.rect;
     const hint = createInsertionOffers(input).find(o => o.destination.position === 'left' && o.owner === 'root.1')!;
     expect(hint.owner).toBe('root.1');
-    expect(hint.scope.index).toBe(1);
-    expect(hint.scope.previous).toEqual(['a', 'companion']);
-    expect(hint.scope.next).toEqual(['c']);
+    expect(hint.insertion.index).toBe(1);
+    expect(hint.insertion.previous).toEqual(['a', 'companion']);
+    expect(hint.insertion.next).toEqual(['c']);
     const result = getBoundaryPlacementOffers({
       offers: [hint],
       bounds: bounds,

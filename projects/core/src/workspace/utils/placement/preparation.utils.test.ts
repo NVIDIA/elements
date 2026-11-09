@@ -2,13 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, removeFixture } from '@internals/testing';
 
 import { getPanelIds } from '../model/layout.utils.js';
 import { planWorkspacePlacement } from './planner.utils.js';
 import { evaluatePlacementOffer, getAdmissiblePlacementLayout } from './preparation.utils.js';
+import { WorkspacePlacementSession } from './session.utils.js';
 import { WorkspaceEvaluation } from '../evaluation.utils.js';
 
 import type { WorkspacePlacementIntent } from '../interaction/command.utils.js';
@@ -153,7 +154,10 @@ describe('workspace placement admission', () => {
 describe('workspace placement offers', () => {
   let fixture: HTMLElement;
 
-  afterEach(() => removeFixture(fixture));
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   async function setup(minimumHeight = 40) {
     fixture = await createFixture(html`
@@ -217,5 +221,77 @@ describe('workspace placement offers', () => {
       context: { acquisition: { plan, rect: { x: 400, y: 0, width: 80, height: 30 }, point: { x: 440, y: 15 } } }
     });
     expect(offer).toMatchObject({ feasible: true, allocation: 'reserved', layout: plan.layout, cue: { kind: 'tab' } });
+  });
+  it('reinvokes supplied planners and returns independent offer presentation', async () => {
+    const current = await setup();
+    const planner = vi.fn(planWorkspacePlacement);
+    const input = {
+      ...current,
+      planner,
+      placementSession: new WorkspacePlacementSession(),
+      intent: { kind: 'split' as const, destination: { target: 'b', position: 'left' as const } }
+    };
+    const first = evaluatePlacementOffer(input)!;
+    const expected = structuredClone(first);
+    first.cue.rect.x = -1234;
+    const next = evaluatePlacementOffer(input);
+    expect(planner).toHaveBeenCalledTimes(2);
+    expect(next).not.toBe(first);
+    expect(next).toEqual(expected);
+  });
+
+  it('reuses stable split preparation and rebuilds it for a different destination', async () => {
+    const current = await setup();
+    const placementSession = new WorkspacePlacementSession();
+    const input = {
+      ...current,
+      placementSession,
+      intent: { kind: 'split' as const, destination: { target: 'b', position: 'left' as const } }
+    };
+    const first = evaluatePlacementOffer(input);
+    expect(first).toBeDefined();
+    expect(evaluatePlacementOffer(input)).toBe(first);
+
+    const changed = {
+      ...input,
+      intent: { kind: 'split' as const, destination: { target: 'b', position: 'right' as const } }
+    };
+    const next = evaluatePlacementOffer(changed);
+    expect(next).toBeDefined();
+    expect(next).not.toBe(first);
+    expect(next!.cue.rect.x).not.toBe(first!.cue.rect.x);
+    expect(evaluatePlacementOffer(changed)).toBe(next);
+  });
+
+  it('rechecks feasibility when panel constraints change between evaluations', async () => {
+    const current = await setup();
+    const host = fixture.querySelector<HTMLElement>('#viewport')!;
+    const placementSession = new WorkspacePlacementSession();
+    const intent: WorkspacePlacementIntent = { kind: 'split', destination: { target: 'b', position: 'top' } };
+    const first = evaluatePlacementOffer({ ...current, placementSession, intent });
+    expect(first?.feasible).toBe(true);
+
+    const next = evaluatePlacementOffer({ ...createInput(layout, host, 300), placementSession, intent });
+    expect(next).not.toBe(first);
+    expect(next?.feasible).toBe(false);
+  });
+
+  it('refreshes client-space cues when the native viewport moves between evaluations', async () => {
+    const current = await setup();
+    const host = fixture.querySelector<HTMLElement>('#viewport')!;
+    const canvas = document.createElement('div');
+    canvas.className = 'canvas';
+    canvas.style.cssText = 'width:800px;height:500px';
+    host.attachShadow({ mode: 'open' }).append(canvas);
+    const placementSession = new WorkspacePlacementSession();
+    const intent: WorkspacePlacementIntent = { kind: 'split', destination: { target: 'b', position: 'left' } };
+    const first = evaluatePlacementOffer({ ...current, placementSession, intent });
+    expect(first).toBeDefined();
+
+    host.style.left = '40px';
+    const next = evaluatePlacementOffer({ ...createInput(layout, host), placementSession, intent });
+    expect(next).toBeDefined();
+    expect(next).not.toBe(first);
+    expect(next!.cue.rect.x).toBeCloseTo(first!.cue.rect.x + 40);
   });
 });

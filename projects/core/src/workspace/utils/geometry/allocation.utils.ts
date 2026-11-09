@@ -40,6 +40,7 @@ interface PlacementInput {
 }
 
 /** Allocates geometry without configuring or moving application panels. */
+// eslint-disable-next-line max-lines-per-function -- Keep recursive placement and its output collections together.
 export function allocateWorkspace(input: PlacementInput) {
   const groups: WorkspacePlacedGroup[] = [];
   const regions: WorkspacePlacedRegion[] = [];
@@ -57,6 +58,8 @@ export function allocateWorkspace(input: PlacementInput) {
       minima,
       (horizontal ? rect.width : rect.height) - input.gap * (node.children.length - 1)
     );
+    const total = sizes.reduce((sum, size) => sum + size, 0);
+    let prefix = 0;
     let offset = 0;
     node.children.forEach((child, index) => {
       const size = sizes[index]!;
@@ -67,8 +70,21 @@ export function allocateWorkspace(input: PlacementInput) {
       );
       offset += size;
       if (index < node.children.length - 1) {
+        prefix += size;
         boundaries.push(
-          boundary({ node, rect, path, index, offset, sizes, minima, policy: input.policy, gap: input.gap })
+          boundary({
+            node,
+            rect,
+            path,
+            index,
+            offset,
+            prefix,
+            total,
+            sizes,
+            minima,
+            policy: input.policy,
+            gap: input.gap
+          })
         );
         offset += input.gap;
       }
@@ -86,17 +102,17 @@ function boundary(input: {
   path: string;
   index: number;
   offset: number;
+  prefix: number;
+  total: number;
   sizes: number[];
   minima: number[];
   policy: PlacementInput['policy'];
   gap: number;
 }): WorkspaceBoundary {
-  const { node, rect, path, index, offset, sizes, minima, policy } = input;
+  const { node, rect, path, index, offset, prefix, total, sizes, minima, policy } = input;
   const horizontal = node.axis === 'horizontal';
   const after = policy === 'stop' ? [index + 1] : sizes.map((_, i) => i).slice(index + 1);
   const before = policy === 'stop' ? [index] : sizes.map((_, i) => i).slice(0, index + 1);
-  const prefix = sizes.slice(0, index + 1).reduce((a, b) => a + b, 0);
-  const total = sizes.reduce((a, b) => a + b, 0);
   const negative = before.reduce((sum, i) => sum + sizes[i]! - minima[i]!, 0);
   const positive = after.reduce((sum, i) => sum + sizes[i]! - minima[i]!, 0);
   return {

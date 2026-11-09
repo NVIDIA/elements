@@ -43,7 +43,7 @@ export function getBoundaryPlacementOffers(input: BoundaryInput) {
     });
   return {
     offers: [...painted, ...local],
-    hit: hit ? painted.find(offer => offer.scope.key === hit.scope.key) : undefined
+    hit: hit ? painted.find(offer => offer.insertion.key === hit.insertion.key) : undefined
   };
 }
 
@@ -67,7 +67,7 @@ function localGeometry({
   roots: WorkspaceInsertionOffer[];
   offer: WorkspaceInsertionOffer;
 }) {
-  const paint = input.offers.find(original => original.scope.key === offer.scope.key)!;
+  const paint = input.offers.find(original => original.insertion.key === offer.insertion.key)!;
   const paintRect = input.geometry ? (getCurrentInsertionSeam(paint, input.geometry) ?? paint.rect) : paint.rect;
   const position = offer.destination.position;
   const vertical = position === 'left' || position === 'right';

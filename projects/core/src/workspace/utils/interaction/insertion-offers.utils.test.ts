@@ -27,7 +27,7 @@ import '../../define.js';
 const offer: WorkspaceInsertionOffer = {
   kind: 'insert',
   owner: 'root',
-  scope: { key: 'between-b-c', axis: 'horizontal', index: 1, members: ['b', 'c'], previous: ['b'], next: ['c'] },
+  insertion: { key: 'between-b-c', axis: 'horizontal', index: 1, members: ['b', 'c'], previous: ['b'], next: ['c'] },
   plan: {
     kind: 'insert',
     layout: { version: 1, closed: [], root: { type: 'group', panels: ['a', 'b'], active: 'a' } }
@@ -49,12 +49,12 @@ describe('workspace insertion offer ownership', () => {
     });
   });
 
-  it('gives chrome priority to peer lanes, receiving endcaps, and interior child slots', () => {
+  it('gives chrome priority to peer lanes, receiving endcaps, and interior insertion positions', () => {
     expect(placementOwnsChrome({ ...offer, kind: 'order' })).toBe(true);
     expect(placementOwnsChrome({ ...offer, boundary: 'start' })).toBe(true);
     expect(placementOwnsChrome(offer)).toBe(true);
     expect(placementOwnsChrome({ ...offer, destination: { ...offer.destination, region: 'root.1.1' } })).toBe(false);
-    expect(placementOwnsChrome({ ...offer, scope: { ...offer.scope, previous: undefined } })).toBe(false);
+    expect(placementOwnsChrome({ ...offer, insertion: { ...offer.insertion, previous: undefined } })).toBe(false);
   });
 
   it('finds the enclosing peer owner only for a complete source group', () => {
@@ -107,27 +107,27 @@ describe('workspace ordering hint geometry', () => {
   ] as const)(
     'uses the current $axis peer gaps for allocated sizes $expected',
     ({ axis, owner, first, last, expected }) => {
-      const descriptors = [
+      const hintRects = [
         { recipient: first, after: false },
         { recipient: last, previous: first, after: false },
         { recipient: last, after: true }
-      ].map(slot => getOrderHintRect({ ...slot, owner, axis })!);
+      ].map(position => getOrderHintRect({ ...position, owner, axis })!);
 
-      expect(descriptors.map(rect => (axis === 'horizontal' ? rect.x : rect.y))).toEqual(expected);
-      expect(descriptors[1]![axis === 'horizontal' ? 'width' : 'height']).toBe(12);
+      expect(hintRects.map(rect => (axis === 'horizontal' ? rect.x : rect.y))).toEqual(expected);
+      expect(hintRects[1]![axis === 'horizontal' ? 'width' : 'height']).toBe(12);
     }
   );
 
-  it('anchors a retained source slot between its current neighbors', () => {
+  it('anchors a retained source reservation between its current neighbors', () => {
     const owner = { x: 0, y: 0, width: 900, height: 300 };
     const first = { x: 0, y: 0, width: 200, height: 300 };
-    const slot = { x: 300, y: 0, width: 200, height: 300 };
+    const sourceReservation = { x: 300, y: 0, width: 200, height: 300 };
     const last = { x: 600, y: 0, width: 300, height: 300 };
 
     expect(
-      getOrderHintRect({ owner, recipient: last, previous: first, sourceSlot: slot, axis: 'horizontal', after: false })
+      getOrderHintRect({ owner, recipient: last, previous: first, sourceReservation, axis: 'horizontal', after: false })
     ).toEqual({ x: 244, y: 0, width: 12, height: 300 });
-    expect(getOrderHintRect({ owner, recipient: first, sourceSlot: slot, axis: 'horizontal', after: true })).toEqual({
+    expect(getOrderHintRect({ owner, recipient: first, sourceReservation, axis: 'horizontal', after: true })).toEqual({
       x: 244,
       y: 0,
       width: 12,
@@ -201,7 +201,7 @@ describe('workspace insertion offer discovery', () => {
   it.each([0, 12])('locates interior insertion seams with a %ipx group gap', gap => {
     const input = setup(true, ['companion'], gap);
     const hint = createInsertionOffers(input).find(
-      candidate => candidate.scope.previous?.includes('b') && candidate.scope.next?.includes('c')
+      candidate => candidate.insertion.previous?.includes('b') && candidate.insertion.next?.includes('c')
     );
     expect(hint).toBeDefined();
     expect(getCurrentInsertionSeam(hint!, input)).toBeDefined();
@@ -216,11 +216,11 @@ describe('workspace insertion offer discovery', () => {
     const local = createInsertionOffers({ ...input, regions, explorationRegions: input.regions }).find(
       hint => hint.owner === 'root.1' && hint.destination.position === 'bottom'
     )!;
-    const original = initial.find(hint => hint.scope.key === local.scope.key)!;
+    const original = initial.find(hint => hint.insertion.key === local.insertion.key)!;
     expect(local.rect).toEqual(original.rect);
     expect(local.scopeRect).toEqual(original.scopeRect);
     expect(local.scopeRect.y + local.scopeRect.height).toBe(bounds.height);
-    expect(local.scope.members).toEqual(['b', 'c']);
+    expect(local.insertion.members).toEqual(['b', 'c']);
   });
 
   it.each(['top', 'bottom', 'left', 'right'] as const)('exposes a real %s root insertion for a partial tab', side => {
@@ -240,7 +240,7 @@ describe('workspace insertion offer discovery', () => {
       h => h.destination.position === 'top' && h.boundary
     );
     expect(top.map(h => h.rect.y)).toEqual([0, 12]);
-    expect(new Set(top.map(h => h.scope.key)).size).toBe(2);
+    expect(new Set(top.map(h => h.insertion.key)).size).toBe(2);
   });
 
   it('normalizes a collapsed whole-source root to three peers without a phantom half-size lane', () => {

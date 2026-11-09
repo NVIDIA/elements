@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { getPanelIds, normalizeLayout, normalizeOwnedLayout } from './layout.utils.js';
-import { sameSerializedWorkspaceLayout } from './value.utils.js';
+import { getPanelIds, normalizeLayout, normalizeLayoutWithSharing } from './layout.utils.js';
+import { sameWorkspaceLayout } from './value.utils.js';
 
 import type { WorkspaceGroup, WorkspaceLayout, WorkspaceNode } from './layout.utils.js';
 
@@ -12,6 +12,15 @@ export interface WorkspaceDestination {
   region?: string;
   position: 'tab' | 'left' | 'right' | 'top' | 'bottom';
   index?: number;
+}
+
+export function sameDestination(left: WorkspaceDestination, right: WorkspaceDestination) {
+  return (
+    left.target === right.target &&
+    left.position === right.position &&
+    left.region === right.region &&
+    left.index === right.index
+  );
 }
 
 interface TargetGroupContext {
@@ -56,7 +65,7 @@ function mapGroups(
   });
   if (!children.length) return null;
   if (children.length === 1) return children[0] ?? null;
-  return normalizeOwnedLayout({ type: 'split', axis: node.axis, children, weights });
+  return normalizeLayoutWithSharing({ type: 'split', axis: node.axis, children, weights });
 }
 
 function filterGroup(group: WorkspaceGroup, keep: (id: string) => boolean): WorkspaceGroup | null {
@@ -145,18 +154,19 @@ function splitTargetGroup(
   { moving, destination, splitWeights }: TargetGroupContext
 ): WorkspaceNode {
   const before = destination.position === 'left' || destination.position === 'top';
+  // Preserve serialized field order when normalization retains this split wrapper.
   return {
     type: 'split',
     axis: destination.position === 'left' || destination.position === 'right' ? 'horizontal' : 'vertical',
-    weights: before ? [...splitWeights] : [...splitWeights].reverse(),
-    children: before ? [moving, group] : [group, moving]
+    children: before ? [moving, group] : [group, moving],
+    weights: before ? [...splitWeights] : [...splitWeights].reverse()
   };
 }
 
 function placedLayout(layout: WorkspaceLayout, root: WorkspaceNode | null): WorkspaceLayout {
   const result: WorkspaceLayout = { version: 1, root: root ? normalizeLayout(root) : null, closed: [...layout.closed] };
   const normalized = { ...layout, root: layout.root ? normalizeLayout(layout.root) : null };
-  return sameSerializedWorkspaceLayout(result, normalized) ? layout : result;
+  return sameWorkspaceLayout(result, normalized) ? layout : result;
 }
 
 function moveSource(layout: WorkspaceLayout, source: string[], destination: WorkspaceDestination) {
@@ -203,10 +213,12 @@ export function projectLayout(layout: WorkspaceLayout, available: string[]): Wor
 }
 
 export function selectPanel(layout: WorkspaceLayout, id: string): WorkspaceLayout | undefined {
-  if (layout.closed.includes(id) || !findGroup(layout.root, id)) return undefined;
+  if (layout.closed.includes(id)) return undefined;
+  const selected = findGroup(layout.root, id);
+  if (!selected || selected.active === id) return undefined;
   const root = mapGroups(layout.root, group => (group.panels.includes(id) ? { ...group, active: id } : group));
   const next = { ...layout, root };
-  return sameSerializedWorkspaceLayout(next, layout) ? undefined : next;
+  return sameWorkspaceLayout(next, layout) ? undefined : next;
 }
 
 export function getFullscreenWorkspaceLayout(layout: WorkspaceLayout, anchor: string | undefined) {

@@ -5,8 +5,8 @@ import type { Point, Rect } from '@nvidia-elements/core/internal';
 
 import type { WorkspaceLayout } from '../model/layout.utils.js';
 import type { WorkspaceDestination } from '../model/operations.utils.js';
-import type { WorkspacePlacementContext } from '../placement/context.utils.js';
 import type { WorkspacePlacementPlan } from '../placement/planner.utils.js';
+import type { WorkspacePlacementScope } from '../placement/scope.utils.js';
 import type { WorkspaceSeamPreview } from '../presentation/offers.utils.js';
 
 type TabDestination = Omit<WorkspaceDestination, 'position'> & { position: 'tab' };
@@ -28,7 +28,7 @@ export interface WorkspaceDragCue {
 
 interface PreviewPresentation {
   seams?: WorkspaceSeamPreview;
-  context?: WorkspacePlacementContext;
+  scope?: WorkspacePlacementScope;
   source: string[];
   point?: Point;
   cue: WorkspaceDragCue;
@@ -48,7 +48,7 @@ export type WorkspaceDragOffer = {
   cue: WorkspaceDragCue;
   feasible: boolean;
   seams?: WorkspaceSeamPreview;
-  context?: WorkspacePlacementContext;
+  scope?: WorkspacePlacementScope;
 } & WorkspaceDragAllocation;
 
 type DetachedPreview = PreviewPresentation &

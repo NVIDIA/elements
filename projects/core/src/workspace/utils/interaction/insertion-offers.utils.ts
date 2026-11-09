@@ -4,23 +4,25 @@
 import type { Rect } from '@nvidia-elements/core/internal';
 
 import { getPanelIds } from '../model/layout.utils.js';
-import { getAllocatedContextRect } from '../placement/context.utils.js';
-import { describePlacementSlot } from '../placement/group-insertion.utils.js';
-import { planWorkspacePlacement } from '../placement/planner.utils.js';
+import { getGroupInsertion } from '../placement/group-insertion.utils.js';
+import { resolvePlacementPlan } from '../placement/planner.utils.js';
+import { getAllocatedScopeRect } from '../placement/scope.utils.js';
 
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceDropIntent } from './drag-preview.utils.js';
 import type { WorkspaceLayout, WorkspaceNode } from '../model/layout.utils.js';
 import type { WorkspaceDestination } from '../model/operations.utils.js';
 import type { WorkspaceLayoutProjector } from '../model/projection.utils.js';
-import type { WorkspaceContextRectResolver } from '../placement/context.utils.js';
+import type { GroupInsertion } from '../placement/group-insertion.utils.js';
 import type { WorkspacePlacementPlan, WorkspacePlacementPlanner } from '../placement/planner.utils.js';
+import type { WorkspaceScopeRectResolver } from '../placement/scope.utils.js';
+import type { WorkspacePlacementSession } from '../placement/session.utils.js';
 
 export interface WorkspaceInsertionOffer {
   kind: 'order' | 'insert';
   owner: string;
   boundary?: 'start' | 'end';
-  scope: NonNullable<ReturnType<typeof describePlacementSlot>>;
+  insertion: GroupInsertion;
   plan: WorkspacePlacementPlan;
   rect: Rect;
   hitRect?: Rect;
@@ -30,8 +32,13 @@ export interface WorkspaceInsertionOffer {
 
 /** Gives only an explicit peer lane or structural receiving endcap priority over chrome. */
 export function placementOwnsChrome(offer: WorkspaceInsertionOffer) {
-  const childSlot = offer.destination.region?.slice(0, offer.destination.region.lastIndexOf('.')) === offer.owner;
-  return offer.kind === 'order' || !!offer.boundary || (childSlot && !!offer.scope.previous && !!offer.scope.next);
+  const targetsDirectChild =
+    offer.destination.region?.slice(0, offer.destination.region.lastIndexOf('.')) === offer.owner;
+  return (
+    offer.kind === 'order' ||
+    !!offer.boundary ||
+    (targetsDirectChild && !!offer.insertion.previous && !!offer.insertion.next)
+  );
 }
 
 const directions = ['left', 'right', 'top', 'bottom'] as const;
@@ -50,7 +57,7 @@ export function findSourcePeerRegionKey(
   return undefined;
 }
 
-/** Aliases of the same planned insertion share one descriptor. */
+/** Aliases of the same planned insertion share one offer. */
 export function createInsertionOffers(input: {
   currentLayout: WorkspaceLayout;
   root: WorkspaceNode | null;
@@ -58,7 +65,8 @@ export function createInsertionOffers(input: {
   available: string[];
   projectLayout?: WorkspaceLayoutProjector;
   planPlacement?: WorkspacePlacementPlanner;
-  contextRect?: WorkspaceContextRectResolver;
+  placementSession?: WorkspacePlacementSession;
+  resolveScopeRect?: WorkspaceScopeRectResolver;
   regions: WorkspacePlacedRegion[];
   explorationRegions?: WorkspacePlacedRegion[];
   existing: WorkspaceInsertionOffer[];
@@ -67,15 +75,15 @@ export function createInsertionOffers(input: {
   const offers: WorkspaceInsertionOffer[] = [];
   const seen = new Set<string>();
   for (const offer of input.existing) {
-    seen.add(offer.scope.key);
+    seen.add(offer.insertion.key);
     offers.push(offer);
   }
   const candidates = splitGroups(input.root)
     .flatMap(group => groupInsertions(input, group))
     .sort((a, b) => Number(a.interior) - Number(b.interior));
   for (const { offer } of candidates) {
-    if (seen.has(offer.scope.key)) continue;
-    seen.add(offer.scope.key);
+    if (seen.has(offer.insertion.key)) continue;
+    seen.add(offer.insertion.key);
     offers.push(offer);
   }
   return offers;
@@ -86,18 +94,18 @@ function groupInsertions(
   group: { node: WorkspaceNode; key: string }
 ): { offer: WorkspaceInsertionOffer; interior: boolean }[] {
   const members = getPanelIds(group.node).filter(id => !input.source.includes(id));
-  const rect = (input.contextRect ?? getAllocatedContextRect)({
+  const rect = (input.resolveScopeRect ?? getAllocatedScopeRect)({
     members,
     allocation: input.regions,
     source: input.source
   });
   if (!rect) return [];
-  const explorationRect = (input.contextRect ?? getAllocatedContextRect)({
+  const explorationRect = (input.resolveScopeRect ?? getAllocatedScopeRect)({
     members,
     allocation: input.explorationRegions ?? input.regions,
     source: input.source
   });
-  const context = { input, group, rect, planPlacement: input.planPlacement ?? planWorkspacePlacement };
+  const context = { input, group, rect };
   const explorationContext = explorationRect ? { ...context, rect: explorationRect } : undefined;
   return insertionDestinations(group).flatMap(destination => {
     // Receiving edges cannot depend on their own reservation; peer seams follow allocated neighbors.
@@ -110,13 +118,11 @@ function createInsertionOffer(
   {
     input,
     group,
-    rect,
-    planPlacement
+    rect
   }: {
     input: Parameters<typeof createInsertionOffers>[0];
     group: { node: WorkspaceNode; key: string };
     rect: Rect;
-    planPlacement: WorkspacePlacementPlanner;
   },
   { target, key, direction, interior }: ReturnType<typeof insertionDestinations>[number]
 ): { offer: WorkspaceInsertionOffer; interior: boolean }[] {
@@ -125,29 +131,24 @@ function createInsertionOffer(
     region: key,
     position: direction
   };
-  const plan = planPlacement({
-    layout: input.currentLayout,
-    source: input.source,
-    destination,
-    available: input.available,
-    projectLayout: input.projectLayout,
-    operation: 'insert'
-  });
+  const plan = resolvePlacementPlan(input, destination, 'insert');
   if (!plan) return [];
-  const slot = describePlacementSlot({
+  const insertion = getGroupInsertion({
     plan,
     source: input.source,
     available: input.available,
-    projectLayout: input.projectLayout
+    projectLayout: input.projectLayout,
+    placementSession: input.placementSession,
+    planPlacement: input.planPlacement
   });
-  if (!slot) return [];
-  const domain = insertionEndcap(input, slot) ?? rect;
+  if (!insertion) return [];
+  const domain = insertionEndcap(input, insertion) ?? rect;
   const rectArea = edgeArea(domain, direction);
   if (!rectArea) return [];
   const offer: WorkspaceInsertionOffer = {
-    scope: slot,
+    insertion,
     owner: group.key,
-    boundary: !slot.previous ? 'start' : !slot.next ? 'end' : undefined,
+    boundary: !insertion.previous ? 'start' : !insertion.next ? 'end' : undefined,
     plan,
     scopeRect: domain,
     rect: rectArea,
@@ -186,13 +187,10 @@ function interiorInsertion(
   return seam ? [{ ...offer, rect: seam }] : [];
 }
 
-function insertionEndcap(
-  input: Parameters<typeof createInsertionOffers>[0],
-  slot: NonNullable<ReturnType<typeof describePlacementSlot>>
-) {
-  if (!!slot.previous === !!slot.next) return undefined;
-  return (input.contextRect ?? getAllocatedContextRect)({
-    members: slot.members,
+function insertionEndcap(input: Parameters<typeof createInsertionOffers>[0], insertion: GroupInsertion) {
+  if (!!insertion.previous === !!insertion.next) return undefined;
+  return (input.resolveScopeRect ?? getAllocatedScopeRect)({
+    members: insertion.members,
     allocation: input.explorationRegions ?? input.regions,
     source: input.source
   });
@@ -224,7 +222,7 @@ function edgeArea(rect: Rect, direction: (typeof directions)[number]): Rect | un
     : undefined;
 }
 
-/** Shares the painted descriptor's exact operation with input resolution. */
+/** Shares the painted offer's exact operation with input resolution. */
 export function getPlacementOfferIntent(offer: WorkspaceInsertionOffer): WorkspaceDropIntent {
   if (offer.destination.position === 'tab') return { kind: 'invalid' };
   const destination = { ...offer.destination, position: offer.destination.position };
@@ -238,7 +236,7 @@ export function getOrderHintRect(input: {
   previous?: Rect;
   axis: 'horizontal' | 'vertical';
   after: boolean;
-  sourceSlot?: Rect;
+  sourceReservation?: Rect;
   boundary?: 'start' | 'end';
 }): Rect | undefined {
   const horizontal = input.axis === 'horizontal';
@@ -258,19 +256,21 @@ function orderAnchor(
   if (input.boundary === 'start') return input.owner[start];
   const end = input.owner[start] + input.owner[extent] - 12;
   if (input.boundary === 'end') return end;
-  const slot = input.sourceSlot;
+  const sourceReservation = input.sourceReservation;
   if (input.after)
-    return slot && slot[start] >= input.recipient[start] + input.recipient[extent]
-      ? (input.recipient[start] + input.recipient[extent] + slot[start]) / 2 - 6
+    return sourceReservation && sourceReservation[start] >= input.recipient[start] + input.recipient[extent]
+      ? (input.recipient[start] + input.recipient[extent] + sourceReservation[start]) / 2 - 6
       : end;
   if (!input.previous) return input.owner[start];
   const previousEnd = input.previous[start] + input.previous[extent];
   const nextStart =
-    slot && slot[start] >= previousEnd && slot[start] < input.recipient[start] ? slot[start] : input.recipient[start];
+    sourceReservation && sourceReservation[start] >= previousEnd && sourceReservation[start] < input.recipient[start]
+      ? sourceReservation[start]
+      : input.recipient[start];
   return (previousEnd + nextStart) / 2 - 6;
 }
 
-/** Orders overlapping scope offers into lanes from outermost to innermost. */
+/** Orders overlapping insertion offers into lanes from outermost to innermost. */
 export function partitionPlacementOffers(offers: WorkspaceInsertionOffer[]): WorkspaceInsertionOffer[] {
   const sorted = [...offers].sort((a, b) => tangentExtent(b) - tangentExtent(a));
   const placed: WorkspaceInsertionOffer[] = [];
@@ -325,29 +325,29 @@ export function getCurrentInsertionSeam(
     regions: WorkspacePlacedRegion[];
     source: string[];
     gap: number;
-    contextRect?: WorkspaceContextRectResolver;
+    resolveScopeRect?: WorkspaceScopeRectResolver;
   }
 ): Rect | undefined {
-  if (offer.kind !== 'insert' || !offer.scope.previous || !offer.scope.next) return undefined;
-  const previous = (geometry.contextRect ?? getAllocatedContextRect)({
-    members: offer.scope.previous,
+  if (offer.kind !== 'insert' || !offer.insertion.previous || !offer.insertion.next) return undefined;
+  const previous = (geometry.resolveScopeRect ?? getAllocatedScopeRect)({
+    members: offer.insertion.previous,
     allocation: geometry.regions,
     source: geometry.source
   });
-  const next = (geometry.contextRect ?? getAllocatedContextRect)({
-    members: offer.scope.next,
+  const next = (geometry.resolveScopeRect ?? getAllocatedScopeRect)({
+    members: offer.insertion.next,
     allocation: geometry.regions,
     source: geometry.source
   });
   if (!previous || !next) return undefined;
-  const { normal, normalExtent, tangent, tangentSize } = axisDimensions(offer.scope.axis);
+  const { normal, normalExtent, tangent, tangentSize } = axisDimensions(offer.insertion.axis);
   const gap = next[normal] - previous[normal] - previous[normalExtent];
   if (Math.abs(gap - geometry.gap) > 1) return undefined;
   const from = Math.max(previous[tangent], next[tangent]);
   const to = Math.min(previous[tangent] + previous[tangentSize], next[tangent] + next[tangentSize]);
   if (to <= from) return undefined;
   const owner = { ...offer.scopeRect, [tangent]: from, [tangentSize]: to - from };
-  return getOrderHintRect({ owner, recipient: next, previous, axis: offer.scope.axis, after: false });
+  return getOrderHintRect({ owner, recipient: next, previous, axis: offer.insertion.axis, after: false });
 }
 
 function axisDimensions(axis: 'horizontal' | 'vertical') {

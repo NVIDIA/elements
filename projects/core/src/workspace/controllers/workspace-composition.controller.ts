@@ -3,18 +3,23 @@
 
 import type { ReactiveControllerHost } from 'lit';
 
-import { getActiveElement } from '@nvidia-elements/core/internal';
+import { getActiveElement, matchesElementName } from '@nvidia-elements/core/internal';
 
-import { focusWorkspacePanel, getPanelLabel } from '../utils/presentation/composition.utils.js';
-import { getAllocatedTabWidth, getTabStripIdentity } from '../utils/presentation/groups.utils.js';
+import {
+  focusWorkspacePanel,
+  getPanelLabel,
+  isWorkspaceCompositionMutation
+} from '../utils/presentation/composition.utils.js';
+import { createTabStripIdentityResolver, getAllocatedTabWidth } from '../utils/presentation/groups.utils.js';
+
+import { WorkspacePanel } from '../panel/panel.js';
 
 import type { WorkspaceDragPreview } from '../utils/interaction/drag-preview.utils.js';
-import type { WorkspaceLayout } from '../utils/model/layout.utils.js';
+import type { WorkspaceLayout, WorkspaceNode } from '../utils/model/layout.utils.js';
 import type { WorkspacePresentedGroup } from '../utils/presentation/groups.utils.js';
 import type { WorkspaceMeasurements } from '../utils/presentation/measurements.utils.js';
 
 import type { WorkspacePanelHeader } from '../panel-header/panel-header.js';
-import type { WorkspacePanel } from '../panel/panel.js';
 
 export interface WorkspacePanelTransitionTargets {
   element: WorkspacePanel;
@@ -33,6 +38,7 @@ interface WorkspaceCompositionDelegate {
   readonly getLayout: () => WorkspaceLayout | undefined;
   readonly getPreview: () => WorkspaceDragPreview | undefined;
   readonly scrollChanged: () => void;
+  readonly contentChanged: (kind: 'panels' | 'chrome') => void;
 }
 
 interface WorkspaceCompositionPresentation {
@@ -58,6 +64,11 @@ export class WorkspaceCompositionController {
   readonly #host: HTMLElement & ReactiveControllerHost;
   readonly #delegate: WorkspaceCompositionDelegate;
   #headerFocus?: HeaderFocus;
+  #tabStripIdentities?: {
+    root: WorkspaceNode | null;
+    resolve: ReturnType<typeof createTabStripIdentityResolver>;
+  };
+  #contentObserver?: MutationObserver;
 
   constructor(host: HTMLElement & ReactiveControllerHost, delegate: WorkspaceCompositionDelegate) {
     this.#host = host;
@@ -67,6 +78,39 @@ export class WorkspaceCompositionController {
 
   hostDisconnected() {
     this.#headerFocus = undefined;
+    this.#tabStripIdentities = undefined;
+  }
+
+  startObserving() {
+    this.#contentObserver = new MutationObserver(records => this.#observeContent(records));
+    this.#contentObserver.observe(this.#host, {
+      childList: true,
+      characterData: true,
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['id', 'min-width', 'min-height', 'slot']
+    });
+  }
+
+  stopObserving() {
+    this.#contentObserver?.disconnect();
+    this.#contentObserver = undefined;
+  }
+
+  #observeContent(records: MutationRecord[]) {
+    const panels = records.some(
+      record =>
+        (record.type === 'childList' && record.target === this.#host) ||
+        (record.type === 'attributes' &&
+          matchesElementName(record.target as Element, WorkspacePanel) &&
+          record.target.parentElement === this.#host)
+    );
+    const chrome = records.some(
+      record =>
+        (record.type === 'attributes' && record.target === this.#host) ||
+        isWorkspaceCompositionMutation(this.#host, record)
+    );
+    if (panels || chrome) this.#delegate.contentChanged(panels ? 'panels' : 'chrome');
   }
 
   captureFocus() {
@@ -85,6 +129,9 @@ export class WorkspaceCompositionController {
   }
 
   sync() {
+    if (this.#tabStripIdentities?.root !== (this.#delegate.getLayout()?.root ?? null)) {
+      this.#tabStripIdentities = undefined;
+    }
     const panels = this.#delegate.getPanels();
     const groups = this.#delegate.getGroups();
     const preview = this.#delegate.getPreview();
@@ -116,8 +163,11 @@ export class WorkspaceCompositionController {
   }
 
   getGroupIdentity(group: WorkspacePresentedGroup) {
-    return getTabStripIdentity(
-      this.#delegate.getLayout()?.root ?? null,
+    const root = this.#delegate.getLayout()?.root ?? null;
+    if (!this.#tabStripIdentities || this.#tabStripIdentities.root !== root) {
+      this.#tabStripIdentities = { root, resolve: createTabStripIdentityResolver(root) };
+    }
+    return this.#tabStripIdentities.resolve(
       group.panels.map(panel => panel.id),
       this.#delegate.getPreview()?.source ?? []
     );
@@ -225,7 +275,7 @@ function configureSemantics(
     group.panels.forEach(panel => {
       if (options.carried(panel.id)) return;
       const title = host.shadowRoot?.querySelector<HTMLElement>(`[data-panel="${CSS.escape(panel.id)}"]`);
-      const name = getPanelLabel(options.panels, panel.id);
+      const name = getPanelLabel(panel);
       panel.setAttribute('aria-label', name);
       if (group.tabbed && title?.localName === 'nve-tabs-item') {
         title.ariaControlsElements = [panel];

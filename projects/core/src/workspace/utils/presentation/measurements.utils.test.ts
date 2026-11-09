@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { sameWorkspaceMeasurements } from './measurements.utils.js';
+import { sameWorkspaceMeasurements, sameWorkspaceMeasurementScalars } from './measurements.utils.js';
 
 import type { WorkspaceMeasurements } from './measurements.utils.js';
 
@@ -27,6 +27,13 @@ describe('workspace measurement equality', () => {
     expect(
       sameWorkspaceMeasurements({ ...measurements, panels: undefined }, { ...measurements, panels: undefined })
     ).toBe(true);
+  });
+
+  it('compares scalar measurements separately from panel measurements', () => {
+    const current = { ...measurements, panels: { editor: { suffixWidth: 50, footerHeight: 60 } } };
+    expect(sameWorkspaceMeasurementScalars(measurements, current)).toBe(true);
+    expect(sameWorkspaceMeasurements(measurements, current)).toBe(false);
+    expect(sameWorkspaceMeasurementScalars(measurements, { ...current, headerHeight: 50 })).toBe(false);
   });
 
   it('accepts independently captured equal panel measurements', () => {

@@ -5,7 +5,7 @@ import type { Rect } from '@nvidia-elements/core/internal';
 
 import { admitsWorkspaceMove } from '../geometry/sizing.utils.js';
 import { preservesGroupMembership } from '../model/membership.utils.js';
-import { sameSerializedWorkspaceLayout } from '../model/value.utils.js';
+import { sameWorkspaceLayout } from '../model/value.utils.js';
 import { resolveSelectedPlacementPlan } from './acquisition-sizing.utils.js';
 import { planWorkspacePlacement } from './planner.utils.js';
 import { sizePreferredSplit } from './split-sizing.utils.js';
@@ -17,6 +17,7 @@ import type { WorkspacePlacementIntent } from '../interaction/command.utils.js';
 import type { WorkspaceDragOffer, WorkspaceOfferContext } from '../interaction/drag-preview.utils.js';
 import type { WorkspaceLayout } from '../model/layout.utils.js';
 import type { WorkspacePlacementPlan, WorkspacePlacementPlanner } from './planner.utils.js';
+import type { WorkspacePlacementSession } from './session.utils.js';
 import type { WorkspaceMeasurements } from '../presentation/measurements.utils.js';
 import type { WorkspaceEvaluation } from '../evaluation.utils.js';
 
@@ -30,9 +31,10 @@ interface CandidateInput extends PreparationInput {
   source: string[];
   intent: WorkspacePlacementIntent;
   planner?: WorkspacePlacementPlanner;
+  placementSession?: WorkspacePlacementSession;
 }
 
-interface OfferInput extends CandidateInput {
+export interface WorkspacePlacementOfferInputs extends CandidateInput {
   context?: WorkspaceOfferContext;
   groupable: boolean;
   currentRegions(): WorkspacePlacedRegion[];
@@ -46,7 +48,7 @@ export function getAdmissiblePlacementLayout(
     return undefined;
   }
   const candidate = input.candidate ?? placementCandidate(input)?.layout;
-  if (!candidate || sameSerializedWorkspaceLayout(candidate, layout)) {
+  if (!candidate || sameWorkspaceLayout(candidate, layout)) {
     return undefined;
   }
   if (!placementFits({ ...input, candidate: evaluation.project(candidate) })) {
@@ -55,16 +57,23 @@ export function getAdmissiblePlacementLayout(
   return candidate;
 }
 
+export function evaluatePlacementOffer(input: WorkspacePlacementOfferInputs): WorkspaceDragOffer | undefined {
+  return input.placementSession && !input.planner
+    ? input.placementSession.prepareOffer(input)
+    : computePlacementOffer(input);
+}
+
 function placementCandidate(input: CandidateInput): WorkspacePlacementPlan | undefined {
   const { evaluation, layout, source, intent, planner = planWorkspacePlacement } = input;
-  const plan = planner({
+  const planning = {
     layout,
     source,
     destination: intent.destination,
     operation: intent.kind,
     available: evaluation.available,
     projectLayout: evaluation.projectLayout
-  });
+  };
+  const plan = input.placementSession && !input.planner ? input.placementSession.plan(planning) : planner(planning);
   return plan ? preferredPlacement(input, plan) : undefined;
 }
 
@@ -78,7 +87,7 @@ function placementFits(input: PreparationInput & { candidate: WorkspaceLayout })
 }
 
 // Keep discovery structural; fit the acquired candidate before admission and preview.
-export function evaluatePlacementOffer(input: OfferInput): WorkspaceDragOffer | undefined {
+export function computePlacementOffer(input: WorkspacePlacementOfferInputs): WorkspaceDragOffer | undefined {
   const { evaluation, source, intent, context } = input;
   const acquisition = context?.acquisition;
   const plan = acquisition ? preferredPlacement(input, acquisition.plan) : placementCandidate(input);
@@ -94,7 +103,8 @@ export function evaluatePlacementOffer(input: OfferInput): WorkspaceDragOffer | 
     current: input.currentRegions(),
     rect: { x: 0, y: 0, width, height },
     clientOrigin: evaluation.client({ x: 0, y: 0, width: 0, height: 0 }),
-    requirements: evaluation.requirements
+    requirements: evaluation.requirements,
+    placementSession: input.planner ? undefined : input.placementSession
   });
   return placementOffer(input, fit ?? plan, !!fit);
 }
@@ -110,13 +120,13 @@ function preferredPlacement(input: CandidateInput, plan: WorkspacePlacementPlan)
     preference: {
       allocation: evaluation.detached(source).regions,
       requirements: evaluation.requirements,
-      contextRect: evaluation.contextRect
+      resolveScopeRect: evaluation.resolveScopeRect
     }
   });
 }
 
 function placementOffer(
-  input: OfferInput,
+  input: WorkspacePlacementOfferInputs,
   plan: WorkspacePlacementPlan,
   fitted: boolean
 ): WorkspaceDragOffer | undefined {

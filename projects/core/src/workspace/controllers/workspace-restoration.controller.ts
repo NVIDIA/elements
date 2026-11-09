@@ -6,7 +6,7 @@ import type { ReactiveControllerHost } from 'lit';
 import { matchesElementName } from '@nvidia-elements/core/internal';
 
 import { isResizeKey } from '../utils/interaction/resize-input.utils.js';
-import { sameSerializedWorkspaceLayout } from '../utils/model/value.utils.js';
+import { sameWorkspaceLayout } from '../utils/model/value.utils.js';
 
 import { WorkspacePanel } from '../panel/panel.js';
 
@@ -23,7 +23,13 @@ import type { WorkspaceAnimationOptions } from '../workspace.types.js';
 interface Box {
   element: HTMLElement;
   rect: DOMRect;
-  frame: Keyframe;
+  frame: {
+    left: string;
+    top: string;
+    width: string;
+    height: string;
+    transform?: string;
+  };
 }
 
 interface GroupBox extends Box {
@@ -83,10 +89,10 @@ export class WorkspaceRestorationController {
 
   animateTo(layout: WorkspaceLayout | undefined, options: WorkspaceAnimationOptions) {
     const target = this.#restoration?.target;
-    if (target && sameSerializedWorkspaceLayout(layout, target.layout)) {
+    if (target && sameWorkspaceLayout(layout, target.layout)) {
       return;
     }
-    if (!this.active && sameSerializedWorkspaceLayout(layout, this.#delegate.getLayout())) {
+    if (!this.active && sameWorkspaceLayout(layout, this.#delegate.getLayout())) {
       this.#delegate.applyLayout(layout);
       return;
     }
@@ -249,8 +255,15 @@ function animateWorkspacePresentation(input: {
   easing: string;
 }): Animation[] {
   const animations: Animation[] = [];
-  const animate = (from: Keyframe, to: Box) => {
-    if (JSON.stringify(from) === JSON.stringify(to.frame)) return;
+  const animate = (from: Box['frame'], to: Box) => {
+    if (
+      from.left === to.frame.left &&
+      from.top === to.frame.top &&
+      from.width === to.frame.width &&
+      from.height === to.frame.height &&
+      from.transform === to.frame.transform
+    )
+      return;
     animations.push(to.element.animate([from, to.frame], { duration: input.duration, easing: input.easing }));
   };
   input.after.panels.forEach((panel, id) => {

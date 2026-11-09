@@ -16,8 +16,8 @@ import { decidePlacement, decidePointerPlacement } from '../utils/interaction/pl
 import { getWorkspacePanelSource } from '../utils/model/membership.utils.js';
 import { findGroup } from '../utils/model/operations.utils.js';
 import { createInitialReservation } from '../utils/placement/origin.utils.js';
-import { createWorkspacePlacementPlanner } from '../utils/placement/planner.utils.js';
 import { evaluatePlacementOffer } from '../utils/placement/preparation.utils.js';
+import { WorkspacePlacementSession } from '../utils/placement/session.utils.js';
 import { captureTabScroll, captureWorkspaceFocus } from '../utils/presentation/composition.utils.js';
 import { getAllocatedTabWidth, getInitialDragCue } from '../utils/presentation/groups.utils.js';
 
@@ -30,7 +30,6 @@ import type {
   WorkspaceOfferContext
 } from '../utils/interaction/drag-preview.utils.js';
 import type { WorkspaceLayout } from '../utils/model/layout.utils.js';
-import type { WorkspacePlacementPlanner } from '../utils/placement/planner.utils.js';
 import type { WorkspaceMeasurementChange, WorkspaceMeasurements } from '../utils/presentation/measurements.utils.js';
 import type { WorkspaceEvaluation } from '../utils/evaluation.utils.js';
 
@@ -106,7 +105,7 @@ export class WorkspaceRearrangeController {
 
   #session?: WorkspaceRearrangeControllerSession;
 
-  #planner?: WorkspacePlacementPlanner;
+  #placementSession?: WorkspacePlacementSession;
 
   #document?: Document;
 
@@ -171,7 +170,7 @@ export class WorkspaceRearrangeController {
       currentLayout: this.#delegate.getLayout() ?? { version: 1, root: null, closed: [] },
       available: evaluation.available,
       projectLayout: evaluation.projectLayout,
-      planPlacement: this.#planner
+      placementSession: this.#placementSession
     }).hint;
   }
 
@@ -224,7 +223,7 @@ export class WorkspaceRearrangeController {
       this.#cancelFrame(this.#session);
     }
     this.#session = undefined;
-    this.#planner = undefined;
+    this.#placementSession = undefined;
     this.#delegate.applyPreview(undefined);
   }
 
@@ -232,12 +231,12 @@ export class WorkspaceRearrangeController {
     const refresh = (preview: DetachedPreview): DetachedPreview => {
       const offer = this.#getPlacementOffer(session.source, preview.intent, { selected: preview });
       if (!offer) return preview;
-      const { feasible, context, seams, ...presentation } = offer;
+      const { feasible, scope, seams, ...presentation } = offer;
       return {
         ...preview,
         ...presentation,
         seams,
-        context: context,
+        scope,
         blocked: !feasible
       };
     };
@@ -369,7 +368,7 @@ export class WorkspaceRearrangeController {
     const initialCue = this.#createInitialCue(source, control.hasAttribute('data-drag-group'));
     const layout = this.#delegate.getLayout();
     if (layout) {
-      this.#planner = createWorkspacePlacementPlanner();
+      this.#placementSession = new WorkspacePlacementSession();
     }
     this.#session = {
       source,
@@ -426,7 +425,7 @@ export class WorkspaceRearrangeController {
         source,
         intent,
         context,
-        planner: this.#planner,
+        placementSession: this.#placementSession,
         groupable: this.#session?.capabilities.groupable ?? this.#host.groupable,
         currentRegions: () => evaluation.presentationGeometry().regions
       });
@@ -480,7 +479,7 @@ export class WorkspaceRearrangeController {
       cue: this.#createInitialCue(session.source, session.group),
       blocked: false
     };
-    this.#planner = undefined;
+    this.#placementSession = undefined;
     this.#delegate.applyPreview(preview);
     return this.#settlePreviewReturn(session);
   }
@@ -589,7 +588,7 @@ export class WorkspaceRearrangeController {
       ...attached.preview,
       ...initial,
       intent: attached.initialPlacement?.intent ?? attached.preview.intent,
-      context: initial.context,
+      scope: initial.scope,
       blocked: !feasible,
       phase: 'detached'
     };
@@ -667,7 +666,7 @@ export class WorkspaceRearrangeController {
       gap: this.#delegate.getMeasurements().gap,
       available: evaluation.available,
       projectLayout: evaluation.projectLayout,
-      planPlacement: this.#planner
+      placementSession: this.#placementSession
     });
     if (!intent) {
       this.#showLastFeasible(session, point);
@@ -682,9 +681,9 @@ export class WorkspaceRearrangeController {
       this.#delegate.applyPreview(session.preview);
       return;
     }
-    const { feasible, context, ...presentation } = offer;
+    const { feasible, scope, ...presentation } = offer;
     session.preview = {
-      context: context,
+      scope,
       ...presentation,
       source: session.source,
 

@@ -3,7 +3,13 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { admitsWorkspaceMove, getMinimumWorkspaceDimensions, getWorkspaceRequirements } from './sizing.utils.js';
+import {
+  admitsWorkspaceMove,
+  getMinimumWorkspaceDimensions,
+  getWorkspaceRequirements,
+  sameWorkspaceRequirements,
+  snapshotWorkspaceRequirements
+} from './sizing.utils.js';
 import { placePanels } from '../model/operations.utils.js';
 
 import type { WorkspaceRequirements } from './sizing.utils.js';
@@ -21,6 +27,29 @@ const requirements: WorkspaceRequirements = {
   chrome: { width: 80, height: 36 },
   panels: new Map(['a', 'b', 'c', 'd'].map(id => [id, { width: 100, height: 110 }]))
 };
+
+describe('workspace requirement values', () => {
+  it('compares requirement values independently of map insertion order', () => {
+    const reversed = { ...requirements, panels: new Map([...requirements.panels].reverse()) };
+    expect(sameWorkspaceRequirements(requirements, reversed)).toBe(true);
+    expect(sameWorkspaceRequirements(requirements, { ...reversed, gap: 12 })).toBe(false);
+    const changedPanel = new Map(reversed.panels);
+    changedPanel.set('a', { width: 200, height: 110 });
+    expect(sameWorkspaceRequirements(requirements, { ...reversed, panels: changedPanel })).toBe(false);
+  });
+
+  it('captures requirement dimensions independently of later changes', () => {
+    const panels = new Map([['a', { width: 100, height: 110 }]]);
+    const current = { gap: 6, chrome: { width: 80, height: 36 }, panels };
+    const snapshot = snapshotWorkspaceRequirements(current);
+    expect(sameWorkspaceRequirements(snapshot, current)).toBe(true);
+    panels.get('a')!.width = 200;
+    current.chrome.height = 50;
+    expect(snapshot.panels.get('a')!.width).toBe(100);
+    expect(snapshot.chrome.height).toBe(36);
+    expect(sameWorkspaceRequirements(snapshot, current)).toBe(false);
+  });
+});
 
 describe('workspace size admission', () => {
   it('reserves one measured group action alongside the title and application suffix', () => {

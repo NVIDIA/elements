@@ -74,7 +74,7 @@ describe('workspace placement planning', () => {
     expect(planWorkspacePlacement({ ...input, operation: 'split' })?.kind).toBe('split');
   });
 
-  it('retains the original peer slot as an unchanged reservation with its rail context', () => {
+  it('retains the original peer position as an unchanged reservation with its rail scope', () => {
     const saved = createLayout(split('horizontal', [2, 5, 3], group('a'), group('b'), group('c')));
     const original = structuredClone(saved);
     expect(
@@ -88,7 +88,7 @@ describe('workspace placement planning', () => {
     ).toEqual({
       kind: 'reorder',
       layout: original,
-      context: { kind: 'rail', members: ['a', 'b', 'c'] }
+      scope: { kind: 'rail', members: ['a', 'b', 'c'] }
     });
     expect(saved).toEqual(original);
   });
@@ -109,7 +109,7 @@ describe('workspace placement planning', () => {
     expect(plan(saved, ['b'], { target: 'c' })).toEqual(saved);
   });
 
-  it('round-trips dormant saved slots and preferences through projected peer moves', () => {
+  it('round-trips dormant saved positions and preferences through projected peer moves', () => {
     const saved = createLayout(
       split('horizontal', [2, 1, 3], group('a'), split('vertical', [2, 3], group('b'), group('c')), group('d')),
       ['c']
@@ -240,7 +240,7 @@ describe('workspace placement planning', () => {
       expect(root.weights[1]).toBeCloseTo(0.6, 10);
     });
 
-    it('preserves traveling weights for a whole existing peer instead of assigning a new slot', () => {
+    it('preserves preferred weights when reordering a whole peer', () => {
       const result = insert('root.1', { source: ['a', 'companion'] })!;
       expect(result.kind).toBe('reorder');
       const root = visible(result.layout);
@@ -327,7 +327,7 @@ describe('workspace placement planning', () => {
       const input = { layout, source: ['a'], operation: 'tab' as const, available };
       expect(
         planWorkspacePlacement({ ...input, destination: { target: 'companion', position: 'tab', index: 0 } })
-      ).toEqual({ kind: 'tab', layout, context: { kind: 'recipient', members: ['companion'] } });
+      ).toEqual({ kind: 'tab', layout, scope: { kind: 'recipient', members: ['companion'] } });
       const reordered = planWorkspacePlacement({
         ...input,
         destination: { target: 'companion', position: 'tab', index: 2 }
@@ -342,7 +342,7 @@ describe('workspace placement planning', () => {
       const layout = createLayout(
         split('horizontal', [2, 5, 3], group('a'), split('vertical', [1, 1], group('b'), group('c')), group('d'))
       );
-      expect(place(layout, ['d'], { region: 'root.0', position: 'left', operation: 'order' })?.context).toEqual({
+      expect(place(layout, ['d'], { region: 'root.0', position: 'left', operation: 'order' })?.scope).toEqual({
         kind: 'rail',
         members: ['a', 'b', 'c', 'd']
       });

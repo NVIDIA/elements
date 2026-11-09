@@ -8,18 +8,22 @@ import { fitSizes } from '../geometry/partition.utils.js';
 import { getMinimumWorkspaceDimensions } from '../geometry/sizing.utils.js';
 import { matchesPlacementIntent } from '../interaction/drag-preview.utils.js';
 import { getPanelIds } from '../model/layout.utils.js';
+import { samePanelMembership } from '../model/membership.utils.js';
 import { projectLayout } from '../model/operations.utils.js';
 import { rebaseProjectedSplit } from '../model/projection.utils.js';
-import { getAllocatedContextRect, getContextKey } from './context.utils.js';
-import { describePlacementSlot } from './group-insertion.utils.js';
+import { getGroupInsertion } from './group-insertion.utils.js';
+import { getAllocatedScopeRect } from './scope.utils.js';
 
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceRequirements } from '../geometry/sizing.utils.js';
 import type { WorkspaceDragPreview, WorkspaceDropIntent } from '../interaction/drag-preview.utils.js';
 import type { WorkspaceLayout, WorkspaceSplit } from '../model/layout.utils.js';
+import type { GroupInsertion } from './group-insertion.utils.js';
 import type { WorkspacePlacementPlan } from './planner.utils.js';
+import type { WorkspacePlacementSession } from './session.utils.js';
 
 interface AcquisitionInput {
+  placementSession?: WorkspacePlacementSession;
   plan: WorkspacePlacementPlan;
   previous: WorkspaceLayout;
   source: string[];
@@ -41,8 +45,8 @@ interface Fit {
 
 /** Fits a cross-scope interior reservation to its acquired allocation without retaining a hidden target. */
 export function fitAcquiredPlacement(input: AcquisitionInput): WorkspacePlacementPlan | undefined {
-  const next = describePlacementSlot(input);
-  const prior = describePlacementSlot({ ...input, plan: { layout: input.previous } });
+  const next = getGroupInsertion(input);
+  const prior = getGroupInsertion({ ...input, plan: { layout: input.previous } });
   if (!crossScopeInterior(next, prior)) return input.plan;
   const fit = acquisitionFit(input, next.axis);
   const moving = fit
@@ -57,14 +61,14 @@ export function fitAcquiredPlacement(input: AcquisitionInput): WorkspacePlacemen
 }
 
 function crossScopeInterior(
-  next: ReturnType<typeof describePlacementSlot>,
-  prior: ReturnType<typeof describePlacementSlot>
+  next: GroupInsertion | undefined,
+  prior: GroupInsertion | undefined
 ): next is NonNullable<typeof next> {
   return (
     !!next?.previous &&
     !!next.next &&
     !!prior &&
-    (next.axis !== prior.axis || getContextKey(next.members) !== getContextKey(prior.members))
+    (next.axis !== prior.axis || !samePanelMembership(next.members, prior.members))
   );
 }
 
@@ -79,20 +83,25 @@ function acquisitionFit(input: AcquisitionInput, direction: WorkspaceSplit['axis
     dimension === axis
       ? { start: input.acquisition.rect[axis], end: input.acquisition.rect[axis] + input.acquisition.rect[extent] }
       : { start: input.acquisition.point[dimension], end: input.acquisition.point[dimension] };
+  let lastAllocation: { layout: WorkspaceLayout; allocation: ReturnType<typeof allocateWorkspace> } | undefined;
   return {
     input,
     axis,
     extent,
     range,
     covers: (rect, dimension) => coversRange(rect, dimension, range(dimension)),
-    allocate: layout =>
-      allocateWorkspace({
+    allocate: layout => {
+      if (lastAllocation?.layout === layout) return lastAllocation.allocation;
+      const allocation = allocateWorkspace({
         root: projectLayout(layout, input.available).root,
         rect: input.rect,
         minimum: node => getMinimumWorkspaceDimensions(node, input.requirements),
         policy: 'stop',
         gap: input.requirements.gap
-      })
+      });
+      lastAllocation = { layout, allocation };
+      return allocation;
+    }
   };
 }
 
@@ -136,10 +145,10 @@ function fitAncestor({
   const size = parent.node.axis === 'horizontal' ? 'width' : 'height';
   const minima = parent.node.children.map(child => getMinimumWorkspaceDimensions(child, fit.input.requirements)[size]);
   const budget = parent.rect[size] - fit.input.requirements.gap * (minima.length - 1);
-  const extents = parent.node.children.map((child, slot) =>
-    slot === index
+  const extents = parent.node.children.map((child, childIndex) =>
+    childIndex === index
       ? 0
-      : getAllocatedContextRect({
+      : getAllocatedScopeRect({
           members: getPanelIds(child),
           allocation: fit.input.current,
           source: fit.input.source
@@ -214,8 +223,8 @@ export function resolveSelectedPlacementPlan(
   const prior = input.previous;
   if (blockedSelection(prior, input.intent) && !input.acquisition) return undefined;
   if (!selectedReservation(prior, input.source) || !spatialReservation(prior, input.plan)) return input.plan;
-  const current = describePlacementSlot({ ...input, plan: prior });
-  const next = describePlacementSlot(input);
+  const current = getGroupInsertion({ ...input, plan: prior });
+  const next = getGroupInsertion(input);
   if (current && current.key === next?.key) return { ...input.plan, layout: prior.layout };
   if (!input.acquisition) return input.plan;
   const { rect, point } = input.acquisition;
@@ -241,7 +250,7 @@ function selectedReservation(
     preview?.phase === 'detached' &&
     !preview.blocked &&
     preview.allocation === 'reserved' &&
-    getContextKey(preview.source) === getContextKey(source)
+    samePanelMembership(preview.source, source)
   );
 }
 

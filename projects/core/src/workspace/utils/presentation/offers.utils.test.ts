@@ -73,7 +73,7 @@ describe('workspace split intent presentation', () => {
             children: [makeGroup('b'), makeGroup('a'), makeGroup('c')]
           }
         },
-        context: { kind: 'recipient', members: ['b'] }
+        scope: { kind: 'recipient', members: ['b'] }
       };
       const before = structuredClone(candidate);
       const result = getOfferPresentation({
@@ -94,10 +94,10 @@ describe('workspace split intent presentation', () => {
         }
       });
 
-      expect(result.context).toEqual({ kind, members });
+      expect(result.scope).toEqual({ kind, members });
       expect(result.cue.width).toBe(223.5);
       expect(result.seams?.kind).toBe('split');
-      expect(candidate.context).toEqual({ kind: 'recipient', members: ['b'] });
+      expect(candidate.scope).toEqual({ kind: 'recipient', members: ['b'] });
       expect(candidate).toEqual(before);
     }
   );
@@ -112,7 +112,7 @@ describe('workspace split intent presentation', () => {
     const result = getOfferPresentation({ ...input, destination: { target: 'b', position } });
     expect(result.cue).toEqual(cue);
     expect(result.seams).toEqual({ kind: 'split', edges: [{ side, offset: 0, fraction: 0.5 }] });
-    expect(result.context).toEqual({ kind: 'recipient', members: ['b'] });
+    expect(result.scope).toEqual({ kind: 'recipient', members: ['b'] });
     expect(input.sourceRect.width).toBe(191);
     expect(input.plan).toBe(plan);
     expect(plan).toEqual(before);
@@ -219,7 +219,7 @@ describe('workspace evaluated placement seams', () => {
     expect(result.edges).toEqual([{ side: 'bottom', offset: expect.closeTo(3, 8), fraction: 0.5 }]);
   });
 
-  it('keeps real adjacency annotations when returning to the unchanged first or interior slot', () => {
+  it('keeps real adjacency annotations when returning to the unchanged first or interior position', () => {
     const current = layout('horizontal');
     const first = setup(current, ['a'], { target: 'b', position: 'left' });
     const middle = setup(current, ['b'], { target: 'c', position: 'left' });

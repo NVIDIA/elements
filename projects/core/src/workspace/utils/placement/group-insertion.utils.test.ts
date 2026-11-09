@@ -1,11 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { projectLayout } from '../model/operations.utils.js';
 import { parseWorkspaceValue } from '../model/value.utils.js';
-import { describePlacementSlot, planGroupInsertion } from './group-insertion.utils.js';
+import { getGroupInsertion, planGroupInsertion } from './group-insertion.utils.js';
+import { WorkspacePlacementSession } from './session.utils.js';
 
 import type { WorkspaceNode } from '../model/layout.utils.js';
 
@@ -37,7 +38,7 @@ function insert(
   });
 }
 
-describe('workspace owner-slot insertion', () => {
+describe('workspace group insertion', () => {
   it.each(['horizontal', 'vertical'] as const)('inserts a whole tabbed group between %s receiving peers', axis => {
     const layout = saved(
       split(
@@ -76,10 +77,10 @@ describe('workspace owner-slot insertion', () => {
     ]);
     const expected = [4 / 15, 2 / 5, 1 / 3];
     result.weights.forEach((weight, index) => expect(weight).toBeCloseTo(expected[index]!, 10));
-    expect(branch.context).toEqual({ kind: 'rail', members: ['a', 'companion', 'b', 'c'] });
+    expect(branch.scope).toEqual({ kind: 'rail', members: ['a', 'companion', 'b', 'c'] });
   });
 
-  it('normalizes two arrangement approaches to one interior slot', () => {
+  it('normalizes two arrangement approaches to one insertion position', () => {
     const layout = saved(
       split(
         'horizontal',
@@ -133,7 +134,7 @@ describe('workspace owner-slot insertion', () => {
     expect(root.children.at(-1)).toEqual(group('companion'));
   });
 
-  it('introduces a perpendicular outer owner as two slots without splitting an internal group', () => {
+  it('introduces a perpendicular outer split with two children without splitting an internal group', () => {
     const layout = arrangement();
     const result = planGroupInsertion({
       layout,
@@ -148,20 +149,109 @@ describe('workspace owner-slot insertion', () => {
     expect(root.children[1]?.type).toBe('split');
   });
 
-  it('keeps slot identity independent of preferred proportions', () => {
+  it('keeps insertion identity independent of preferred proportions', () => {
     const plan = { layout: saved(split('horizontal', [2, 3, 5], group('a'), group('companion'), group('b', 'c'))) };
     const copy = structuredClone(plan);
     if (copy.layout.root?.type !== 'split') throw new Error('Expected a split');
     copy.layout.root.weights = [5, 2, 3];
     const input = { source: ['companion'], available: ['a', 'companion', 'b', 'c'] };
-    const slot = describePlacementSlot({ ...input, plan });
-    expect(slot).toMatchObject({
+    const insertion = getGroupInsertion({ ...input, plan });
+    expect(insertion).toMatchObject({
       axis: 'horizontal',
       index: 1,
       previous: ['a'],
       next: ['b', 'c'],
       members: ['a', 'b', 'c']
     });
-    expect(describePlacementSlot({ ...input, plan: copy })?.key).toBe(slot?.key);
+    expect(getGroupInsertion({ ...input, plan: copy })?.key).toBe(insertion?.key);
+  });
+});
+
+describe('workspace group insertion reuse', () => {
+  const createInput = () => ({
+    plan: { layout: saved(split('horizontal', [2, 3, 5], group('a'), group('companion'), group('b', 'c'))) },
+    source: ['companion'],
+    available: ['a', 'companion', 'b', 'c']
+  });
+
+  it('reuses insertions within a session while keeping custom projectors observable', () => {
+    const input = createInput();
+    const placementSession = new WorkspacePlacementSession();
+    const plan = placementSession.plan({
+      layout: input.plan.layout,
+      source: input.source,
+      available: input.available,
+      operation: 'order',
+      destination: { target: 'a', position: 'right' }
+    });
+    if (!plan) throw new Error('Expected a reusable placement plan');
+    const sessionInput = { ...input, plan, placementSession };
+    const reusable = getGroupInsertion(sessionInput);
+    expect(reusable).toBeDefined();
+    expect(getGroupInsertion(sessionInput)).toBe(reusable);
+
+    const project = vi.fn(projectLayout);
+    const first = getGroupInsertion({ ...sessionInput, projectLayout: project })!;
+    first.members.push('caller-modified');
+    const calls = project.mock.calls.length;
+    const next = getGroupInsertion({ ...sessionInput, projectLayout: project })!;
+    expect(next).not.toBe(first);
+    expect(next.members).toEqual(['a', 'b', 'c']);
+    expect(project.mock.calls.length).toBeGreaterThan(calls);
+  });
+
+  it.each(['ordinary', 'session'] as const)('keeps caller-owned layouts independent through the %s route', route => {
+    const input = {
+      ...createInput(),
+      placementSession: route === 'session' ? new WorkspacePlacementSession() : undefined
+    };
+    const first = getGroupInsertion(input)!;
+    first.members.push('caller-modified');
+    const next = getGroupInsertion(input)!;
+    expect(next).not.toBe(first);
+    expect(next.members).toEqual(['a', 'b', 'c']);
+  });
+
+  it('does not admit another gesture session’s produced layout for reuse', () => {
+    const input = createInput();
+    const originalSession = new WorkspacePlacementSession();
+    const plan = originalSession.plan({
+      layout: input.plan.layout,
+      source: input.source,
+      available: input.available,
+      operation: 'order',
+      destination: { target: 'a', position: 'right' }
+    });
+    if (!plan) throw new Error('Expected a placement plan');
+    const placementSession = new WorkspacePlacementSession();
+    const query = { ...input, plan, placementSession };
+    const first = getGroupInsertion(query)!;
+    first.members.push('caller-modified');
+    const next = getGroupInsertion(query)!;
+    expect(next).not.toBe(first);
+    expect(next.members).toEqual(['a', 'b', 'c']);
+  });
+
+  it('does not memoize supplied projectors or admit their output through a placement session', () => {
+    const input = createInput();
+    const placementSession = new WorkspacePlacementSession();
+    const projectLayoutForCandidate = vi.fn(projectLayout);
+    const planning = {
+      layout: input.plan.layout,
+      source: input.source,
+      available: input.available,
+      operation: 'order' as const,
+      destination: { target: 'a', position: 'right' as const },
+      projectLayout: projectLayoutForCandidate
+    };
+    const plan = placementSession.plan(planning);
+    if (!plan) throw new Error('Expected a placement plan');
+    const calls = projectLayoutForCandidate.mock.calls.length;
+    expect(placementSession.plan(planning)).toBeDefined();
+    expect(projectLayoutForCandidate.mock.calls.length).toBeGreaterThan(calls);
+    const query = { ...input, plan, placementSession };
+    const first = getGroupInsertion(query)!;
+    first.members.push('caller-modified');
+    expect(getGroupInsertion(query)!.members).toEqual(['a', 'b', 'c']);
   });
 });

@@ -14,7 +14,7 @@ import type { Workspace } from './workspace.js';
 
 import './define.js';
 
-const arrangement = (weights: number[]) =>
+const arrangement = (weights: number[], active = 'a') =>
   JSON.stringify({
     version: 1,
     closed: [],
@@ -23,7 +23,7 @@ const arrangement = (weights: number[]) =>
       axis: 'horizontal',
       weights,
       children: [
-        { type: 'group', panels: ['a', 'companion'], active: 'a' },
+        { type: 'group', panels: ['a', 'companion'], active },
         { type: 'group', panels: ['b'], active: 'b' }
       ]
     }
@@ -225,6 +225,34 @@ describe('workspace animated restoration', () => {
         for (const animation of element.getAnimations()) animation.currentTime = 250;
       expect(label.getBoundingClientRect().x).toBeCloseTo(wrapper.getBoundingClientRect().x, 1);
       expect(workspace.querySelector('#companion nve-workspace-panel-header')).toBe(header);
+    });
+
+    it('animates a header label track when only its transform changes', async () => {
+      const workspace = await setup();
+      const header = workspace.querySelector('#b nve-workspace-panel-header')!;
+      const track = header.shadowRoot!.querySelector<HTMLElement>('.label-track')!;
+      track.style.transform = 'translateX(-40px)';
+      const frame = () => {
+        const style = getComputedStyle(track);
+        return { left: style.left, top: style.top, width: style.width, height: style.height };
+      };
+      const before = frame();
+      const fromTransform = getComputedStyle(track).transform;
+      const animate = vi.spyOn(track, 'animate');
+      const target = arrangement([1, 1], 'companion');
+      workspace.animateTo(target, { duration: 500 });
+      track.style.transform = 'translateX(0px)';
+      const toTransform = getComputedStyle(track).transform;
+      expect(fromTransform).not.toBe(toTransform);
+      await vi.waitFor(() => expect(animate).toHaveBeenCalled());
+      expect(animate).toHaveBeenCalledWith(
+        [
+          expect.objectContaining({ ...before, transform: fromTransform }),
+          expect.objectContaining({ ...before, transform: toTransform })
+        ],
+        { duration: 500, easing: expect.any(String) }
+      );
+      expect(frame()).toEqual(before);
     });
 
     it('animates the allocated divider wrapper together with its adjacent groups', async () => {

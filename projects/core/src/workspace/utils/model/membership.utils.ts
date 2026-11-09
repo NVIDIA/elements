@@ -6,6 +6,21 @@ import { findGroup } from './operations.utils.js';
 import type { WorkspacePlacementIntent } from '../interaction/command.utils.js';
 import type { WorkspaceLayout, WorkspaceNode } from './layout.utils.js';
 
+/** Identifies panel membership independently of its order. */
+export function getPanelMembershipKey(members: readonly string[]): string {
+  return JSON.stringify([...members].sort());
+}
+
+/** Compares unique panel IDs independently of their order. */
+export function samePanelMembership(left: readonly string[], right: readonly string[]): boolean {
+  if (left === right) return true;
+  if (left.length !== right.length) return false;
+  for (const id of left) {
+    if (!right.includes(id)) return false;
+  }
+  return true;
+}
+
 export function preservesGroupMembership(input: {
   root: WorkspaceNode | null;
   source: string[];

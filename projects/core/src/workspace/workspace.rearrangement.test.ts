@@ -612,6 +612,32 @@ describe('workspace attached and detached dragging', () => {
       expect(workspace.shadowRoot!.activeElement).toBeNull();
     });
 
+    it('retains edited content through a cancelled drag and another drag interrupted by reconnection', async () => {
+      const workspace = await setupGrouped();
+      const savedValue = workspace.value;
+      const input = workspace.querySelector('input')!;
+      input.value = 'edited';
+      const change = vi.fn();
+      workspace.addEventListener('change', change);
+      const move = press(workspace, '[data-panel="companion"]');
+      move('pointermove', 0, 60);
+      await vi.waitFor(() => expect(phase(workspace)).toBe('detached'));
+      workspace.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+      move('pointerup', 0, 60);
+      await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
+      const next = press(workspace, '[data-panel="companion"]');
+      next('pointermove', 0, 60);
+      await vi.waitFor(() => expect(phase(workspace)).toBe('detached'));
+      workspace.remove();
+      fixture.append(workspace);
+      await elementIsStable(workspace);
+      await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
+      expect(workspace.value).toBe(savedValue);
+      expect(workspace.querySelector('input')).toBe(input);
+      expect(input.value).toBe('edited');
+      expect(change).not.toHaveBeenCalled();
+    });
+
     it('restores the saved strip offset when a scrolled group reorder is cancelled', async () => {
       const workspace = await setupGrouped();
       workspace.style.setProperty('--tab-min-width', '240px');

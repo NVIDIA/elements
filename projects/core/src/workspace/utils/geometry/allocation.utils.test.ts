@@ -107,6 +107,22 @@ describe('workspace geometry allocation', () => {
     expect(boundaries[0]!.rect.height).toBe(gap);
   });
 
+  it.each(['stop', 'propagate'] as const)('keeps fractional divider values independent of gaps for %s', policy => {
+    const { boundaries } = allocateWorkspace({
+      root: {
+        type: 'split',
+        axis: 'horizontal',
+        weights: [1, 2, 3, 4, 5],
+        children: ['a', 'b', 'c', 'd', 'e'].map(group)
+      },
+      rect: { x: 0, y: 0, width: 1, height: 1 },
+      minimum: () => ({ width: 0, height: 0 }),
+      policy,
+      gap: 0.1
+    });
+    expect(boundaries.map(boundary => boundary.value)).toEqual([0.04, 0.12, 0.24, 0.4]);
+  });
+
   it.each([
     {
       axis: 'horizontal',

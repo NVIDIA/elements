@@ -80,6 +80,10 @@ export class WorkspacePanel extends LitElement {
 
   /** @internal */
   _present(presented: boolean) {
+    if (this._internals.states.has('workspace-presented') === presented) {
+      return;
+    }
+
     if (presented) this._internals.states.add('workspace-presented');
     else this._internals.states.delete('workspace-presented');
   }

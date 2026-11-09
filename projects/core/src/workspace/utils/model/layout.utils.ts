@@ -40,36 +40,45 @@ export function normalizeLayout(node: WorkspaceNode): WorkspaceNode {
   return normalizeNode(node, 'copy');
 }
 
-export function normalizeOwnedLayout(node: WorkspaceNode): WorkspaceNode {
-  return normalizeNode(node, 'owned');
+/** Reuses unchanged nodes in canonical split graphs produced by mapGroups. */
+export function normalizeLayoutWithSharing(node: WorkspaceNode): WorkspaceNode {
+  return normalizeNode(node, 'share-nodes');
 }
 
-function normalizeNode(node: WorkspaceNode, ownership: 'copy' | 'owned'): WorkspaceNode {
-  if (node.type === 'group') return ownership === 'copy' ? { ...node, panels: [...node.panels] } : node;
+function normalizeNode(node: WorkspaceNode, mode: 'copy' | 'share-nodes'): WorkspaceNode {
+  if (node.type === 'group')
+    return mode === 'copy' ? { type: 'group', panels: [...node.panels], active: node.active } : node;
   const total = node.weights.reduce((a, b) => a + b, 0);
-  const children: WorkspaceNode[] = [];
-  let weights: number[] | undefined = ownership === 'copy' ? [] : undefined;
+  let children: WorkspaceNode[] | undefined = mode === 'copy' ? [] : undefined;
+  let weights: number[] | undefined = mode === 'copy' ? [] : undefined;
   node.children.forEach((child, index) => {
-    const normalized = normalizeNode(child, ownership);
+    const normalized = normalizeNode(child, mode);
     const share = node.weights[index]! / total;
     if (!(share > 0)) throw new TypeError('Split proportions exceed the supported range');
     if (normalized.type === 'split' && normalized.axis === node.axis) {
       const shares = (weights ??= node.weights.slice(0, index));
       const sum = normalized.weights.reduce((a, b) => a + b, 0);
       normalized.children.forEach((nested, i) => {
-        children.push(nested);
+        (children ??= node.children.slice(0, index)).push(nested);
         shares.push((share * normalized.weights[i]!) / sum);
       });
     } else {
       if (!weights && share !== node.weights[index]) {
         weights = node.weights.slice(0, index);
       }
-      children.push(normalized);
+      if (children) {
+        children.push(normalized);
+      } else if (normalized !== child) {
+        children = node.children.slice(0, index);
+        children.push(normalized);
+      }
       weights?.push(share);
     }
   });
   const normalizedWeights = weights ?? node.weights;
   if (!normalizedWeights.every(weight => Number.isFinite(weight) && weight > 0))
     throw new TypeError('Split proportions exceed the supported range');
-  return { type: 'split', axis: node.axis, children, weights: normalizedWeights };
+  const normalizedChildren = children ?? node.children;
+  if (normalizedChildren === node.children && normalizedWeights === node.weights) return node;
+  return { type: 'split', axis: node.axis, children: normalizedChildren, weights: normalizedWeights };
 }

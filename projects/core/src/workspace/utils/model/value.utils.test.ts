@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { parseWorkspaceValue, sameSerializedWorkspaceLayout, serializeWorkspaceValue } from './value.utils.js';
+import { parseWorkspaceValue, sameWorkspaceLayout, serializeWorkspaceValue } from './value.utils.js';
 
 import type { WorkspaceGroup, WorkspaceLayout, WorkspaceNode } from './layout.utils.js';
 
@@ -64,6 +64,16 @@ describe('workspace values', () => {
     expect(() => parseWorkspaceValue('{"version":2,"root":null,"closed":[]}')).toThrow(TypeError);
   });
 
+  it('normalizes supplied groups to the owned value schema', () => {
+    const parsed = parseWorkspaceValue(
+      '{"version":1,"root":{"active":"a","panels":["a"],"extra":{"items":[1,null]},"type":"group"},"closed":[]}'
+    );
+    const expected: WorkspaceLayout = { version: 1, root: group('a'), closed: [] };
+    expect(parsed).toEqual(expected);
+    expect(serializeWorkspaceValue(parsed)).toBe(serializeWorkspaceValue(expected));
+    expect(sameWorkspaceLayout(parsed, structuredClone(expected))).toBe(true);
+  });
+
   it('serializes retained preferences without normalizing or mutating them', () => {
     const layout: WorkspaceLayout = {
       version: 1,
@@ -78,19 +88,19 @@ describe('workspace values', () => {
     expect(layout).toEqual(before);
   });
 
-  describe('serialized layout equality', () => {
+  describe('layout equality', () => {
     it('distinguishes an absent layout from an empty arrangement', () => {
       const empty: WorkspaceLayout = { version: 1, root: null, closed: [] };
-      expect(sameSerializedWorkspaceLayout(undefined, undefined)).toBe(true);
-      expect(sameSerializedWorkspaceLayout(undefined, empty)).toBe(false);
-      expect(sameSerializedWorkspaceLayout(empty, undefined)).toBe(false);
+      expect(sameWorkspaceLayout(undefined, undefined)).toBe(true);
+      expect(sameWorkspaceLayout(undefined, empty)).toBe(false);
+      expect(sameWorkspaceLayout(empty, undefined)).toBe(false);
     });
 
     it('compares identical and copied layouts without changing their preferences', () => {
       const layout: WorkspaceLayout = { version: 1, root: group('a'), closed: [] };
       const copy = structuredClone(layout);
-      expect(sameSerializedWorkspaceLayout(layout, layout)).toBe(true);
-      expect(sameSerializedWorkspaceLayout(layout, copy)).toBe(true);
+      expect(sameWorkspaceLayout(layout, layout)).toBe(true);
+      expect(sameWorkspaceLayout(layout, copy)).toBe(true);
       expect(layout).toEqual(copy);
     });
 
@@ -103,7 +113,7 @@ describe('workspace values', () => {
       };
       const layout: WorkspaceLayout = { version: 1, root, closed: [] };
       const changed = { ...layout, root: { ...root, weights: [0.5 + 1e-14, 0.5] } };
-      expect(sameSerializedWorkspaceLayout(layout, changed)).toBe(false);
+      expect(sameWorkspaceLayout(layout, changed)).toBe(false);
     });
 
     it.each<[string, WorkspaceNode, WorkspaceNode]>([
@@ -128,44 +138,22 @@ describe('workspace values', () => {
         { type: 'split', axis: 'vertical', children: [group('a'), group('b')], weights: [0.5, 0.5] }
       ]
     ])('distinguishes changes to %s', (_, left, right) => {
-      expect(
-        sameSerializedWorkspaceLayout({ version: 1, root: left, closed: [] }, { version: 1, root: right, closed: [] })
-      ).toBe(false);
+      expect(sameWorkspaceLayout({ version: 1, root: left, closed: [] }, { version: 1, root: right, closed: [] })).toBe(
+        false
+      );
     });
 
     it('distinguishes the order of closed panels', () => {
       const root: WorkspaceNode = { type: 'group', panels: ['a', 'b', 'c'], active: 'a' };
       expect(
-        sameSerializedWorkspaceLayout(
-          { version: 1, root, closed: ['b', 'c'] },
-          { version: 1, root, closed: ['c', 'b'] }
-        )
+        sameWorkspaceLayout({ version: 1, root, closed: ['b', 'c'] }, { version: 1, root, closed: ['c', 'b'] })
       ).toBe(false);
     });
 
-    it('distinguishes the property order of supplied groups', () => {
-      const left = parseWorkspaceValue('{"version":1,"root":{"type":"group","panels":["a"],"active":"a"},"closed":[]}');
-      const right = parseWorkspaceValue(
-        '{"version":1,"root":{"active":"a","panels":["a"],"type":"group"},"closed":[]}'
-      );
-      expect(sameSerializedWorkspaceLayout(left, right)).toBe(false);
-    });
-
-    it('compares copied group extensions without discarding them', () => {
-      const layout = parseWorkspaceValue(
-        '{"version":1,"root":{"type":"group","panels":["a"],"active":"a","extra":{"items":[1,null]}},"closed":[]}'
-      );
-      expect(sameSerializedWorkspaceLayout(layout, structuredClone(layout))).toBe(true);
-    });
-
-    it('distinguishes changes to supplied group extensions', () => {
-      const left = parseWorkspaceValue(
-        '{"version":1,"root":{"type":"group","panels":["a"],"active":"a","extra":{"items":[1,null]}},"closed":[]}'
-      );
-      const right = parseWorkspaceValue(
-        '{"version":1,"root":{"type":"group","panels":["a"],"active":"a","extra":{"items":[2,null]}},"closed":[]}'
-      );
-      expect(sameSerializedWorkspaceLayout(left, right)).toBe(false);
+    it('compares owned layout fields independently of property order', () => {
+      const left: WorkspaceLayout = { version: 1, root: group('a'), closed: [] };
+      const right: WorkspaceLayout = { closed: [], root: { active: 'a', panels: ['a'], type: 'group' }, version: 1 };
+      expect(sameWorkspaceLayout(left, right)).toBe(true);
     });
   });
 });

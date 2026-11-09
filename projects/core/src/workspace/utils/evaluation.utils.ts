@@ -4,16 +4,19 @@
 import type { Dimensions, Point, Rect } from '@nvidia-elements/core/internal';
 
 import { allocateWorkspace } from './geometry/allocation.utils.js';
-import { getMinimumWorkspaceDimensions, getWorkspaceRequirements } from './geometry/sizing.utils.js';
+import {
+  getMinimumWorkspaceDimensions,
+  getWorkspaceRequirements,
+  sameWorkspaceRequirements,
+  snapshotWorkspaceRequirements
+} from './geometry/sizing.utils.js';
 import { clipCue } from './interaction/drag-preview.utils.js';
 import { getPanelIds } from './model/layout.utils.js';
+import { getPanelMembershipKey } from './model/membership.utils.js';
 import { createDetachedLayout, getFullscreenWorkspaceLayout, projectLayout } from './model/operations.utils.js';
-import {
-  createWorkspaceLayoutProjector,
-  findDeepestProjectionCarrier,
-  getProjectionSignature
-} from './model/projection.utils.js';
-import { allocateContextProxies, createContextRectResolver, getContextKey } from './placement/context.utils.js';
+import { createWorkspaceLayoutProjector, findDeepestProjectionCarrier } from './model/projection.utils.js';
+import { sameWorkspaceNode } from './model/value.utils.js';
+import { createScopeRectResolver, getAllocatedScopes } from './placement/scope.utils.js';
 import {
   createPresentedGroups,
   findTabHeaderTarget,
@@ -21,10 +24,14 @@ import {
   preserveRecipientSelection,
   projectTabMembership
 } from './presentation/groups.utils.js';
+import { sameWorkspaceMeasurementScalars } from './presentation/measurements.utils.js';
+import { sameArrayItems, sameRect } from './comparison.utils.js';
 
 import type { WorkspaceBoundary, WorkspacePlacedRegion } from './geometry/allocation.utils.js';
+import type { WorkspaceRequirements } from './geometry/sizing.utils.js';
 import type { WorkspaceDragPreview } from './interaction/drag-preview.utils.js';
 import type { WorkspaceLayout, WorkspaceNode } from './model/layout.utils.js';
+import type { WorkspaceScopeRectResolver } from './placement/scope.utils.js';
 import type { WorkspacePresentedGroup, WorkspaceTarget } from './presentation/groups.utils.js';
 import type { WorkspaceMeasurements } from './presentation/measurements.utils.js';
 
@@ -57,10 +64,11 @@ export interface WorkspaceEvaluationDelegate {
 }
 
 export interface WorkspacePlacementCatalog {
+  resolveScopeRect?: WorkspaceScopeRectResolver;
   targets: WorkspaceTarget[];
   regions: WorkspacePlacedRegion[];
   orderingRegions?: WorkspacePlacedRegion[];
-  sourceSlot?: Rect;
+  sourceReservation?: Rect;
   headers?: Rect[];
   preview?: WorkspaceDragPreview;
   bounds: Rect;
@@ -75,10 +83,96 @@ interface RegionCatalogInput {
   allocation: WorkspacePlacedRegion[];
   source: string[];
   bounds: Rect;
-  getRemainingLayoutSignature(node: WorkspaceNode): string;
+  getRemainingRootKey(node: WorkspaceNode): number;
 }
 
 type DetachedPreview = Extract<WorkspaceDragPreview, { phase: 'detached' }>;
+
+interface GeometryInputSnapshot {
+  layout: WorkspaceLayout;
+  closed: string[];
+  source: string[];
+  available: string[];
+  panels: WorkspacePanel[];
+  measurementIdentity: WorkspaceMeasurements;
+  measurements: WorkspaceMeasurements;
+  requirements: WorkspaceRequirements;
+  policy: WorkspaceEvaluationInputs['policy'];
+}
+interface CachedWorkspaceGeometry {
+  inputs: GeometryInputSnapshot;
+  projected?: WorkspaceLayout;
+  base?: WorkspaceGeometry;
+  detached?: WorkspaceGeometry;
+}
+
+type PlacementCatalogInputs = Parameters<typeof workspaceInputCatalog>[0] & {
+  measurements: WorkspaceMeasurements;
+  requirements: WorkspaceRequirements;
+};
+
+type StructuralPlacementCatalog = Omit<WorkspacePlacementCatalog, 'preview' | 'headerTarget' | 'reservationHit'> & {
+  gap: number;
+};
+interface PresentedGroupSnapshot {
+  rect: Rect;
+  panels: string[];
+}
+interface CatalogInputSnapshot {
+  layout: WorkspaceLayout;
+  closed: string[];
+  source: string[];
+  available: string[];
+  measurementIdentity: WorkspaceMeasurements;
+  measurements: WorkspaceMeasurements;
+  requirements: WorkspaceRequirements;
+  bounds: Rect;
+  origin: Rect;
+  catalog: WorkspacePlacedRegion[];
+  allocation: WorkspacePlacedRegion[];
+  reservation?: WorkspacePlacedRegion[];
+  groups?: PresentedGroupSnapshot[];
+}
+interface CachedPlacementCatalog {
+  inputs: CatalogInputSnapshot;
+  catalog: StructuralPlacementCatalog;
+}
+
+/** Owns retained geometry and catalog data and the current synchronous evaluation for one Workspace. */
+export class WorkspaceEvaluationCache {
+  readonly #host: HTMLElement;
+  #current?: WorkspaceEvaluation;
+  geometry?: CachedWorkspaceGeometry;
+  catalog?: CachedPlacementCatalog;
+
+  constructor(host: HTMLElement) {
+    this.#host = host;
+  }
+
+  get current() {
+    return this.#current;
+  }
+
+  run<T>(
+    inputs: WorkspaceEvaluationInputs,
+    delegate: WorkspaceEvaluationDelegate | undefined,
+    work: (evaluation: WorkspaceEvaluation) => T
+  ): T {
+    if (this.#current) return work(this.#current);
+    const evaluation = new WorkspaceEvaluation(this.#host, inputs, delegate, this);
+    this.#current = evaluation;
+    try {
+      return work(evaluation);
+    } finally {
+      this.#current = undefined;
+    }
+  }
+
+  clear() {
+    this.geometry = undefined;
+    this.catalog = undefined;
+  }
+}
 
 /** Shares layout inputs and browser reads within one synchronous evaluation. */
 export class WorkspaceEvaluation {
@@ -86,29 +180,40 @@ export class WorkspaceEvaluation {
   readonly available: string[];
   readonly requirements;
   readonly projectLayout = createWorkspaceLayoutProjector();
-  readonly contextRect = createContextRectResolver();
+  readonly resolveScopeRect = createScopeRectResolver();
 
   readonly #host: HTMLElement;
   readonly #inputs: WorkspaceEvaluationInputs;
   readonly #delegate?: WorkspaceEvaluationDelegate;
+  readonly #cacheOwner?: WorkspaceEvaluationCache;
   readonly #scroll = new WeakMap<HTMLElement, number>();
   readonly #allocations = new Map<WorkspaceNode | null, Map<WorkspaceNode | null, WorkspaceGeometry>>();
   readonly #minima = new Map<WorkspaceNode | null, Dimensions>();
   readonly #detached = new WeakMap<string[], WorkspaceGeometry>();
 
+  #validatedGeometry?: CachedWorkspaceGeometry;
   #origin?: Rect;
   #bounds?: Rect;
 
-  constructor(host: HTMLElement, inputs: WorkspaceEvaluationInputs, delegate?: WorkspaceEvaluationDelegate) {
+  // eslint-disable-next-line max-params -- Keep the optional cache owner explicit without allocating constructor options.
+  constructor(
+    host: HTMLElement,
+    inputs: WorkspaceEvaluationInputs,
+    delegate?: WorkspaceEvaluationDelegate,
+    cacheOwner?: WorkspaceEvaluationCache
+  ) {
     this.#host = host;
     this.#inputs = inputs;
     this.#delegate = delegate;
+    this.#cacheOwner = cacheOwner;
     this.panels = inputs.panels;
     this.available = inputs.panels.map(panel => panel.id);
     this.requirements = getWorkspaceRequirements(inputs);
   }
 
   minimum(node: WorkspaceNode | null) {
+    const retained = this.#retainedMinimum(node);
+    if (retained) return retained;
     let minimum = this.#minima.get(node);
     if (!minimum) {
       minimum = getMinimumWorkspaceDimensions(node, this.requirements);
@@ -118,10 +223,34 @@ export class WorkspaceEvaluation {
   }
 
   project(layout: WorkspaceLayout) {
+    if (layout === this.#inputs.layout) {
+      const entry = this.#getGeometryCache();
+      if (entry) {
+        if (entry.projected) {
+          return entry.projected;
+        }
+
+        return (entry.projected = this.projectLayout(layout, this.available));
+      }
+    }
     return this.projectLayout(layout, this.available);
   }
 
   geometry(layout: WorkspaceLayout, extent = layout) {
+    if (extent === layout) {
+      const entry = this.#getGeometryCache();
+      if (entry && entry.projected === layout) {
+        if (entry.base) {
+          return entry.base;
+        }
+
+        return (entry.base = allocateGeometry(
+          { ...this.#inputs, minimum: node => this.minimum(node) },
+          layout,
+          extent
+        ));
+      }
+    }
     let allocations = this.#allocations.get(layout.root);
     if (!allocations) {
       allocations = new Map();
@@ -136,6 +265,17 @@ export class WorkspaceEvaluation {
   }
 
   detached(source: string[]) {
+    const entry = this.#getGeometryCache(source);
+    if (entry) {
+      if (entry.detached) {
+        return entry.detached;
+      }
+
+      return (entry.detached = this.geometry(
+        this.project(createDetachedLayout(this.#inputs.layout, source)),
+        this.project(this.#inputs.layout)
+      ));
+    }
     let geometry = this.#detached.get(source);
     if (!geometry) {
       geometry = this.geometry(
@@ -162,19 +302,40 @@ export class WorkspaceEvaluation {
 
   targetCatalog(source: string[], allocation = this.nonOrderGeometry(source)) {
     const currentLayout = this.#currentLayout;
-    return workspaceInputCatalog({
-      gap: this.#currentMeasurements.gap,
+    const measurements = this.#currentMeasurements;
+    const preview = this.#delegate?.getCurrentPreview();
+    const input = {
+      gap: measurements.gap,
+      measurements,
+      requirements: this.requirements,
       currentLayout,
       catalog: this.geometry(this.project(currentLayout)).regions,
       allocation,
       reservation: this.presentationGeometry(),
-      preview: this.#delegate?.getCurrentPreview(),
+      preview,
       source,
       available: this.available,
       bounds: this.bounds(),
-      client: rect => this.client(rect),
-      headerHeight: this.#currentMeasurements.headerHeight
-    });
+      client: (rect: Rect) => this.client(rect),
+      headerHeight: measurements.headerHeight
+    };
+    if (!this.#cacheOwner || !this.#canReuseCatalog(preview)) {
+      this.#cacheOwner?.clear();
+      return workspaceInputCatalog(input);
+    }
+    const origin = this.client({ x: 0, y: 0, width: 0, height: 0 });
+    const previous = this.#cacheOwner.catalog;
+    if (previous && sameCatalogInputs(previous.inputs, input, origin)) {
+      return placementCatalogView(previous.catalog, preview);
+    }
+
+    this.#cacheOwner.catalog = undefined;
+    const value = structuralPlacementCatalog(workspaceInputCatalog(input));
+    this.#cacheOwner.catalog = {
+      inputs: snapshotCatalogInputs(input, origin),
+      catalog: value
+    };
+    return placementCatalogView(value, preview);
   }
 
   getPlacementCatalog(source: string[], point: Point): WorkspacePlacementCatalog {
@@ -218,6 +379,76 @@ export class WorkspaceEvaluation {
       return this.geometry(fullscreen);
     }
     return this.#getArrangementGeometry();
+  }
+
+  #retainedMinimum(node: WorkspaceNode | null) {
+    if (this.#cacheOwner?.geometry?.projected?.root !== node) return undefined;
+    const entry = this.#getGeometryCache();
+    return entry?.projected?.root === node ? (entry.base ?? entry.detached)?.minimum : undefined;
+  }
+
+  #canReuseGeometry(source?: string[]) {
+    const preview = this.#delegate?.getCurrentPreview();
+    return (
+      this.#canReuseCurrentInputs() &&
+      preview?.phase === 'detached' &&
+      sameArrayItems(this.#inputs.source, preview.source) &&
+      (!source || sameArrayItems(source, preview.source))
+    );
+  }
+
+  #canReuseCatalog(preview: WorkspaceDragPreview | undefined): preview is DetachedPreview {
+    return this.#cacheOwner?.current === this && preview?.phase === 'detached' && this.#host.isConnected;
+  }
+
+  #canReuseCurrentInputs() {
+    return (
+      this.#cacheOwner?.current === this &&
+      this.#host.isConnected &&
+      this.#inputs.layout === this.#currentLayout &&
+      this.#inputs.measurements === this.#currentMeasurements &&
+      this.#delegate?.getFullscreenTarget() === undefined &&
+      this.#delegate?.getResizePreview() === undefined
+    );
+  }
+
+  #invalidateGeometry() {
+    this.#validatedGeometry = undefined;
+    if (this.#cacheOwner) this.#cacheOwner.geometry = undefined;
+    return undefined;
+  }
+
+  #hasCurrentPanelIds() {
+    return (
+      this.panels.length === this.available.length &&
+      this.panels.every((panel, index) => panel.id === this.available[index])
+    );
+  }
+
+  #matchesGeometry(snapshot: GeometryInputSnapshot) {
+    return (
+      sameGeometryInputs(snapshot, this.#inputs, this.available) &&
+      sameWorkspaceRequirements(snapshot.requirements, this.requirements)
+    );
+  }
+
+  // Check the binding once per synchronous private evaluation; keep native reads in that scope.
+  #getGeometryCache(source?: string[]) {
+    const owner = this.#cacheOwner;
+    if (!owner || !this.#canReuseGeometry(source)) return this.#invalidateGeometry();
+    const previous = owner.geometry;
+    if (
+      previous &&
+      previous === this.#validatedGeometry &&
+      previous.inputs.policy === this.#inputs.policy &&
+      sameArrayItems(previous.inputs.source, this.#inputs.source)
+    )
+      return previous;
+    if (!this.#hasCurrentPanelIds()) return this.#invalidateGeometry();
+    if (previous && this.#matchesGeometry(previous.inputs)) return (this.#validatedGeometry = previous);
+    const entry: CachedWorkspaceGeometry = { inputs: snapshotGeometryInputs(this.#inputs, this) };
+    owner.geometry = entry;
+    return (this.#validatedGeometry = entry);
   }
 
   get #currentLayout() {
@@ -300,7 +531,7 @@ function workspaceInputCatalog(input: {
     allocation: allocation.regions,
     source,
     bounds,
-    getRemainingLayoutSignature: createRemainingLayoutSignatureResolver({ currentLayout, source, available })
+    getRemainingRootKey: createRemainingRootKeyResolver({ currentLayout, source, available })
   };
   const clientCatalog = catalog.map(region => ({ ...region, rect: input.client(region.rect) }));
   const regions = computedRegionCatalog({
@@ -311,6 +542,7 @@ function workspaceInputCatalog(input: {
 
   return {
     gap: input.gap,
+    resolveScopeRect: createScopeRectResolver(),
     regions,
     orderingRegions: input.reservation
       ? computedRegionCatalog({
@@ -319,7 +551,9 @@ function workspaceInputCatalog(input: {
           allocation: input.reservation.regions.map(region => ({ ...region, rect: input.client(region.rect) }))
         })
       : regions,
-    sourceSlot: input.reservation ? computedSourceSlot({ ...input, groups: input.reservation.groups }) : undefined,
+    sourceReservation: input.reservation
+      ? getSourceReservation({ ...input, groups: input.reservation.groups })
+      : undefined,
     preview: input.preview,
     headers: computedChromeRects(input),
     targets: groupTargets(regions, source, input.headerHeight),
@@ -329,8 +563,8 @@ function workspaceInputCatalog(input: {
 
 /** Maps region paths onto the computed acquisition allocation without reading animated nodes. */
 function computedRegionCatalog(input: RegionCatalogInput): WorkspacePlacedRegion[] {
-  const proxies = allocateContextProxies(input);
-  return regionCatalog(input, key => proxies.find(proxy => proxy.key === key)?.rect);
+  const scopes = getAllocatedScopes(input);
+  return regionCatalog(input, key => scopes.find(scope => scope.key === key)?.rect);
 }
 
 function regionCatalog(input: RegionCatalogInput, read: (key: string) => Rect | undefined): WorkspacePlacedRegion[] {
@@ -338,23 +572,24 @@ function regionCatalog(input: RegionCatalogInput, read: (key: string) => Rect | 
   const vacant = allocation.some(
     region => region.node.type === 'group' && getPanelIds(region.node).every(id => source.includes(id))
   );
-  const owners = new Set(
-    allocation.filter(region => region.node.type === 'split').map(region => getContextKey(getPanelIds(region.node)))
-  );
+  const owners = vacant
+    ? new Set(
+        allocation
+          .filter(region => region.node.type === 'split')
+          .map(region => getPanelMembershipKey(getPanelIds(region.node)))
+      )
+    : undefined;
   const seen = new Set<string>();
   return [...catalog]
     .reverse()
     .flatMap(region => {
-      const members = getPanelIds(region.node);
-      const remaining = members.filter(id => !source.includes(id));
-      if (!remaining.length) return [];
-      const full = getContextKey(members);
-      const key = vacant && region.node.type === 'split' && owners.has(full) ? full : getContextKey(remaining);
+      const key = getCatalogMembershipKey(region, source, owners);
+      if (!key) return [];
       const presented = read(key);
       if (!presented) return [];
       const rect = clipCue(presented, bounds);
       if (rect.width <= 0 || rect.height <= 0) return [];
-      const identity = `${key}:${input.getRemainingLayoutSignature(region.node)}`;
+      const identity = `${key}:${input.getRemainingRootKey(region.node)}`;
       if (seen.has(identity)) return [];
       seen.add(identity);
       return [
@@ -367,14 +602,31 @@ function regionCatalog(input: RegionCatalogInput, read: (key: string) => Rect | 
     .reverse();
 }
 
-function createRemainingLayoutSignatureResolver(input: {
+function getCatalogMembershipKey(
+  region: WorkspacePlacedRegion,
+  source: string[],
+  owners: ReadonlySet<string> | undefined
+) {
+  const members = getPanelIds(region.node);
+  const remaining = members.filter(id => !source.includes(id));
+  if (!remaining.length) return undefined;
+  if (remaining.length === members.length) return getPanelMembershipKey(members);
+  if (owners && region.node.type === 'split') {
+    const full = getPanelMembershipKey(members);
+    if (owners.has(full)) return full;
+  }
+  return getPanelMembershipKey(remaining);
+}
+
+function createRemainingRootKeyResolver(input: {
   currentLayout: WorkspaceLayout;
   source: string[];
   available: string[];
 }) {
   const visible = input.available.filter(id => !input.currentLayout.closed.includes(id));
   const projections = new Map<WorkspaceNode, WorkspaceNode | null>();
-  const signatures = new Map<WorkspaceNode, string>();
+  const identities = new Map<WorkspaceNode, number>();
+  const roots: (WorkspaceNode | null)[] = [];
 
   const getProjectedNode = (candidate: WorkspaceNode) => {
     if (!projections.has(candidate)) {
@@ -384,18 +636,18 @@ function createRemainingLayoutSignatureResolver(input: {
   };
 
   return (node: WorkspaceNode) => {
-    let signature = signatures.get(node);
-    if (signature === undefined) {
-      const carrier = findDeepestProjectionCarrier(
-        input.currentLayout.root,
-        getProjectionSignature(node),
-        getProjectedNode
-      );
+    let identity = identities.get(node);
+    if (identity === undefined) {
+      const carrier = findDeepestProjectionCarrier(input.currentLayout.root, node, getProjectedNode);
       const remainingLayout = createDetachedLayout({ version: 1, root: carrier ?? node, closed: [] }, input.source);
-      signature = JSON.stringify(remainingLayout.root);
-      signatures.set(node, signature);
+      identity = roots.findIndex(root => sameWorkspaceNode(root, remainingLayout.root));
+      if (identity < 0) {
+        identity = roots.length;
+        roots.push(remainingLayout.root);
+      }
+      identities.set(node, identity);
     }
-    return signature;
+    return identity;
   };
 }
 
@@ -420,14 +672,14 @@ function computedChromeRects(input: Parameters<typeof workspaceInputCatalog>[0])
 
 /** Source occupancy is an ordinary target in the currently allocated reservation projection. */
 function computedReservationHit(input: Parameters<typeof findTabHeaderTarget>[0]) {
-  const group = computedSourceSlot(input);
+  const group = getSourceReservation(input);
   if (!group) return getTabReservationHit(input);
   if (contains(group, input.point)) return 'group' as const;
   return undefined;
 }
 
 /** Finds only genuine allocated whole-source occupancy, never an overlapping split indicator. */
-function computedSourceSlot(
+function getSourceReservation(
   input: Pick<Parameters<typeof findTabHeaderTarget>[0], 'groups' | 'source' | 'client' | 'bounds'>
 ): Rect | undefined {
   const group = input.groups.find(
@@ -483,4 +735,178 @@ function isOverlayDetachedPreview(
     preview.allocation === 'overlay' &&
     (preview.phase === 'detached' || preview.phase === 'returning-detached')
   );
+}
+
+function placementCatalogView(
+  value: StructuralPlacementCatalog,
+  preview: WorkspaceDragPreview
+): WorkspacePlacementCatalog & { gap: number } {
+  return {
+    gap: value.gap,
+    resolveScopeRect: value.resolveScopeRect,
+    regions: value.regions,
+    orderingRegions: value.orderingRegions,
+    sourceReservation: value.sourceReservation,
+    preview,
+    headers: value.headers,
+    targets: value.targets,
+    bounds: value.bounds
+  };
+}
+
+function snapshotRect(rect: Rect): Rect {
+  return { x: rect.x, y: rect.y, width: rect.width, height: rect.height };
+}
+
+function sameRegions(left: WorkspacePlacedRegion[], right: WorkspacePlacedRegion[]) {
+  if (left.length !== right.length) return false;
+  for (let index = 0; index < left.length; index++) {
+    const a = left[index]!,
+      b = right[index]!;
+    if (a.key !== b.key || !sameRect(a.rect, b.rect) || !sameWorkspaceNode(a.node, b.node)) return false;
+  }
+  return true;
+}
+
+function sameGroups(left: PresentedGroupSnapshot[] | undefined, right: WorkspacePresentedGroup[] | undefined) {
+  if (!left || !right) return left === undefined && right === undefined;
+  if (left.length !== right.length) return false;
+  for (let index = 0; index < left.length; index++) {
+    const a = left[index]!,
+      b = right[index]!;
+    if (!sameRect(a.rect, b.rect) || a.panels.length !== b.panels.length) return false;
+    for (let panel = 0; panel < a.panels.length; panel++) if (a.panels[panel] !== b.panels[panel]!.id) return false;
+  }
+  return true;
+}
+
+function sameCatalogInputs(snapshot: CatalogInputSnapshot, input: PlacementCatalogInputs, origin: Rect) {
+  return (
+    sameCatalogBinding(snapshot, input) &&
+    sameCatalogMeasurements(snapshot, input, origin) &&
+    sameCatalogRegions(snapshot, input)
+  );
+}
+
+function sameCatalogBinding(snapshot: CatalogInputSnapshot, input: PlacementCatalogInputs) {
+  return (
+    snapshot.layout === input.currentLayout &&
+    snapshot.measurementIdentity === input.measurements &&
+    sameArrayItems(snapshot.closed, input.currentLayout.closed) &&
+    sameArrayItems(snapshot.source, input.source) &&
+    sameArrayItems(snapshot.available, input.available)
+  );
+}
+
+function sameCatalogMeasurements(snapshot: CatalogInputSnapshot, input: PlacementCatalogInputs, origin: Rect) {
+  if (!sameWorkspaceMeasurementScalars(snapshot.measurements, input.measurements)) return false;
+  return (
+    sameRect(snapshot.bounds, input.bounds) &&
+    sameRect(snapshot.origin, origin) &&
+    sameWorkspaceRequirements(snapshot.requirements, input.requirements)
+  );
+}
+
+function sameCatalogRegions(snapshot: CatalogInputSnapshot, input: PlacementCatalogInputs) {
+  if (!sameRegions(snapshot.catalog, input.catalog) || !sameRegions(snapshot.allocation, input.allocation.regions))
+    return false;
+  if (!!snapshot.reservation !== !!input.reservation) return false;
+  if (snapshot.reservation && input.reservation && !sameRegions(snapshot.reservation, input.reservation.regions))
+    return false;
+  return sameGroups(snapshot.groups, input.reservation?.groups);
+}
+
+function structuralPlacementCatalog(generated: ReturnType<typeof workspaceInputCatalog>): StructuralPlacementCatalog {
+  return {
+    gap: generated.gap,
+    resolveScopeRect: generated.resolveScopeRect,
+    regions: generated.regions,
+    orderingRegions: generated.orderingRegions,
+    sourceReservation: generated.sourceReservation,
+    headers: generated.headers,
+    targets: generated.targets,
+    bounds: generated.bounds
+  };
+}
+
+function snapshotCatalogInputs(input: PlacementCatalogInputs, origin: Rect): CatalogInputSnapshot {
+  const { measurements, requirements } = input;
+  const nodes = new Map<WorkspaceNode, WorkspaceNode>();
+  function copyNode(node: WorkspaceNode): WorkspaceNode {
+    let copy = nodes.get(node);
+    if (!copy) {
+      copy =
+        node.type === 'group'
+          ? { type: 'group', panels: [...node.panels], active: node.active }
+          : { type: 'split', axis: node.axis, weights: [...node.weights], children: node.children.map(copyNode) };
+      nodes.set(node, copy);
+    }
+    return copy;
+  }
+  const copyRegions = (regions: WorkspacePlacedRegion[]) =>
+    regions.map(region => ({ key: region.key, node: copyNode(region.node), rect: snapshotRect(region.rect) }));
+  return {
+    layout: input.currentLayout,
+    closed: [...input.currentLayout.closed],
+    source: [...input.source],
+    available: [...input.available],
+    measurementIdentity: measurements,
+    measurements: { ...measurements, panels: undefined },
+    requirements: snapshotWorkspaceRequirements(requirements),
+    bounds: snapshotRect(input.bounds),
+    origin: snapshotRect(origin),
+    catalog: copyRegions(input.catalog),
+    allocation: copyRegions(input.allocation.regions),
+    reservation: input.reservation ? copyRegions(input.reservation.regions) : undefined,
+    groups: input.reservation?.groups.map(group => ({
+      rect: snapshotRect(group.rect),
+      panels: group.panels.map(panel => panel.id)
+    }))
+  };
+}
+
+function sameGeometryInputs(snapshot: GeometryInputSnapshot, input: WorkspaceEvaluationInputs, available: string[]) {
+  return (
+    sameGeometryIdentity(snapshot, input) &&
+    sameGeometryMembers(snapshot, input, available) &&
+    sameWorkspaceMeasurementScalars(snapshot.measurements, input.measurements)
+  );
+}
+
+function sameGeometryIdentity(snapshot: GeometryInputSnapshot, input: WorkspaceEvaluationInputs) {
+  return (
+    snapshot.layout === input.layout &&
+    snapshot.measurementIdentity === input.measurements &&
+    snapshot.policy === input.policy &&
+    snapshot.panels.length === input.panels.length
+  );
+}
+
+function sameGeometryMembers(snapshot: GeometryInputSnapshot, input: WorkspaceEvaluationInputs, available: string[]) {
+  return (
+    sameArrayItems(snapshot.closed, input.layout.closed) &&
+    sameArrayItems(snapshot.source, input.source) &&
+    sameArrayItems(snapshot.available, available) &&
+    snapshot.panels.every(
+      (panel, index) => panel === input.panels[index] && input.panels[index].id === available[index]
+    )
+  );
+}
+
+function snapshotGeometryInputs(
+  input: WorkspaceEvaluationInputs,
+  evaluation: WorkspaceEvaluation
+): GeometryInputSnapshot {
+  const { available, requirements } = evaluation;
+  return {
+    layout: input.layout,
+    closed: [...input.layout.closed],
+    source: [...input.source],
+    available: [...available],
+    panels: [...input.panels],
+    measurementIdentity: input.measurements,
+    measurements: { ...input.measurements, panels: undefined },
+    policy: input.policy,
+    requirements: snapshotWorkspaceRequirements(requirements)
+  };
 }

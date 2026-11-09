@@ -94,11 +94,11 @@ describe('workspace region topology', () => {
     const layout = saved(
       split('horizontal', [2, 5, 3], group('a'), split('vertical', [1, 1], group('b'), group('c')), group('d'))
     );
-    expect(place(layout, ['d'], { region: 'root.1', position: 'top' })?.context).toEqual({
+    expect(place(layout, ['d'], { region: 'root.1', position: 'top' })?.scope).toEqual({
       kind: 'recipient',
       members: ['b', 'c']
     });
-    expect(place(layout, ['d'], { region: 'root', position: 'top' })?.context).toEqual({
+    expect(place(layout, ['d'], { region: 'root', position: 'top' })?.scope).toEqual({
       kind: 'recipient',
       members: ['a', 'b', 'c']
     });
@@ -114,11 +114,11 @@ describe('workspace region topology', () => {
       ),
       ['f']
     );
-    expect(place(layout, ['companion'], { region: 'root', position: 'top' })?.context).toEqual({
+    expect(place(layout, ['companion'], { region: 'root', position: 'top' })?.scope).toEqual({
       kind: 'recipient',
       members: ['a', 'b', 'c']
     });
-    expect(place(layout, ['a', 'companion'], { region: 'root', position: 'top' })?.context).toEqual({
+    expect(place(layout, ['a', 'companion'], { region: 'root', position: 'top' })?.scope).toEqual({
       kind: 'recipient',
       members: ['b', 'c']
     });

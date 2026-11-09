@@ -3,17 +3,14 @@
 
 import { getPanelIds, getSplitSide } from '../model/layout.utils.js';
 import { createDetachedLayout, projectLayout } from '../model/operations.utils.js';
-import {
-  findDeepestProjectionCarrier,
-  getProjectionSignature,
-  rebaseProjectedSplit
-} from '../model/projection.utils.js';
+import { findDeepestProjectionCarrier, rebaseProjectedSplit, sameProjectionShape } from '../model/projection.utils.js';
 import { findWorkspaceRegion, placeRegion } from './region.utils.js';
 
 import type { WorkspaceLayout, WorkspaceNode, WorkspaceSplit } from '../model/layout.utils.js';
 import type { WorkspaceDestination } from '../model/operations.utils.js';
 import type { WorkspaceLayoutProjector } from '../model/projection.utils.js';
-import type { WorkspacePlacementPlan } from './planner.utils.js';
+import type { WorkspacePlacementPlan, WorkspacePlacementPlanner } from './planner.utils.js';
+import type { WorkspacePlacementSession } from './session.utils.js';
 
 interface InsertionInput {
   layout: WorkspaceLayout;
@@ -21,6 +18,30 @@ interface InsertionInput {
   destination: WorkspaceDestination;
   available: string[];
   projectLayout?: WorkspaceLayoutProjector;
+}
+
+export interface GroupInsertionInputs {
+  readonly plan: Pick<WorkspacePlacementPlan, 'layout'>;
+  readonly source: string[];
+  readonly available: string[];
+  readonly projectLayout?: WorkspaceLayoutProjector;
+  readonly placementSession?: WorkspacePlacementSession;
+  readonly planPlacement?: WorkspacePlacementPlanner;
+}
+
+export interface GroupInsertion {
+  axis: WorkspaceSplit['axis'];
+  index: number;
+  members: string[];
+  previous?: string[];
+  next?: string[];
+  key: string;
+}
+
+export function getGroupInsertion(input: GroupInsertionInputs): GroupInsertion | undefined {
+  return input.placementSession && !input.planPlacement
+    ? input.placementSession.getInsertion(input)
+    : computeGroupInsertion(input);
 }
 
 export function planGroupInsertion(input: InsertionInput): WorkspacePlacementPlan | undefined {
@@ -31,17 +52,17 @@ export function planGroupInsertion(input: InsertionInput): WorkspacePlacementPla
 }
 
 function insertionTopology(input: InsertionInput, context: NonNullable<ReturnType<typeof insertionContext>>) {
-  const { peers, slot, visible, root, axis } = context;
-  const donorIndex = Math.min(slot, peers.length - 1);
+  const { peers, insertionIndex, visible, root, axis } = context;
+  const donorIndex = Math.min(insertionIndex, peers.length - 1);
   const donor = peers[donorIndex]!;
   const projectLayoutForCandidate = input.projectLayout ?? projectLayout;
-  const carrier = findDeepestProjectionCarrier(root, getProjectionSignature(donor.node), node => {
+  const carrier = findDeepestProjectionCarrier(root, donor.node, node => {
     const residualLayout = createDetachedLayout({ version: 1, root: node, closed: [] }, input.source);
     return projectLayoutForCandidate(residualLayout, visible).root;
   });
   const key = carrier && nodeKey(root, carrier);
   if (!key || !carrier) return undefined;
-  const before = slot < peers.length;
+  const before = insertionIndex < peers.length;
   const destination: WorkspaceDestination = {
     target: getPanelIds(carrier)[0]!,
     region: key,
@@ -76,7 +97,7 @@ function sizeInsertion({
   return {
     kind: 'insert',
     layout,
-    context: { kind: 'rail', members: [...new Set([...getPanelIds(owner), ...moving])] }
+    scope: { kind: 'rail', members: [...new Set([...getPanelIds(owner), ...moving])] }
   };
 }
 
@@ -123,7 +144,7 @@ function insertionContext(input: InsertionInput) {
   const matches = peers.flatMap((peer, index) => (getPanelIds(peer.node).every(id => selected.has(id)) ? [index] : []));
   if (!matches.length) return undefined;
   const before = input.destination.position === 'left' || input.destination.position === 'top';
-  return { ...basis, peers, slot: before ? matches[0]! : matches.at(-1)! + 1 };
+  return { ...basis, peers, insertionIndex: before ? matches[0]! : matches.at(-1)! + 1 };
 }
 
 function insertionPeers(residual: WorkspaceNode, axis: WorkspaceSplit['axis']) {
@@ -139,7 +160,7 @@ function insertedWeights(input: {
   const incoming = input.peers.reduce((sum, peer) => sum + peer.weight, 0) / input.peers.length;
   const weights = input.branch.children.map(child => {
     if (isMovingGroup(child, input.moving)) return incoming;
-    const index = input.peers.findIndex(peer => getProjectionSignature(peer.node) === getProjectionSignature(child));
+    const index = input.peers.findIndex(peer => sameProjectionShape(peer.node, child));
     if (index < 0) return undefined;
     const weight = input.peers[index]!.weight;
     return weight;
@@ -186,12 +207,7 @@ function insertionWeights(input: {
     : undefined;
 }
 
-export function describePlacementSlot(input: {
-  plan: Pick<WorkspacePlacementPlan, 'layout'>;
-  source: string[];
-  available: string[];
-  projectLayout?: WorkspaceLayoutProjector;
-}) {
+export function computeGroupInsertion(input: GroupInsertionInputs): GroupInsertion | undefined {
   const visible = input.available.filter(id => !input.plan.layout.closed.includes(id));
   const moving = input.source.filter(id => visible.includes(id));
   const owner = movingOwner((input.projectLayout ?? projectLayout)(input.plan.layout, visible).root, moving);
