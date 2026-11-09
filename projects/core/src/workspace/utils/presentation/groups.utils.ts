@@ -4,6 +4,7 @@
 import type { Point, Rect } from '@nvidia-elements/core/internal';
 
 import { clipCue } from '../interaction/drag-preview.utils.js';
+import { getPanelMembershipKey } from '../model/membership.utils.js';
 import { findGroup } from '../model/operations.utils.js';
 
 import type { WorkspacePlacedGroup } from '../geometry/allocation.utils.js';
@@ -86,9 +87,19 @@ export function getAllocatedTabWidth(group: WorkspacePresentedGroup, measurement
   );
 }
 
-/** Keeps a recipient strip stable while carried members enter or leave its preview. */
-export function getTabStripIdentity(root: WorkspaceNode | null, members: string[], source: string[]): string {
-  return JSON.stringify([...committedTabMembers(root, members, source)].sort());
+/** Indexes strip ownership for one committed root. */
+export function createTabStripIdentityResolver(root: WorkspaceNode | null) {
+  const identities = new Map<string, string>();
+  return (members: string[], source: string[]) => {
+    const anchor = members.find(id => !source.includes(id)) ?? members[0];
+    const previous = anchor && identities.get(anchor);
+    if (previous) return previous;
+    const group = anchor ? findGroup(root, anchor) : undefined;
+    if (!group) return getPanelMembershipKey(members);
+    const identity = getPanelMembershipKey(group.panels);
+    for (const id of group.panels) identities.set(id, identity);
+    return identity;
+  };
 }
 
 /** Resolves native-scrolled tab controls from computed positions, never animated client rectangles. */
@@ -164,7 +175,7 @@ export function getInitialDragCue(input: {
   };
 }
 
-/** The computed carried tab slot owns exactly the same visible rectangle as its landing cue. */
+/** The computed carried tab reservation owns exactly the same visible rectangle as its landing cue. */
 export function getTabReservationHit(input: Parameters<typeof findTabHeaderTarget>[0]) {
   return input.groups.some(group => {
     if (!group.panels.some(panel => input.source.includes(panel.id))) return false;

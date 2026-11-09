@@ -6,19 +6,19 @@ import { getMinimumWorkspaceDimensions } from '../geometry/sizing.utils.js';
 import { getPanelIds } from '../model/layout.utils.js';
 import { projectLayout } from '../model/operations.utils.js';
 import { rebaseProjectedSplit } from '../model/projection.utils.js';
-import { getAllocatedContextRect } from './context.utils.js';
+import { getAllocatedScopeRect } from './scope.utils.js';
 
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceRequirements } from '../geometry/sizing.utils.js';
 import type { WorkspaceNode, WorkspaceSplit } from '../model/layout.utils.js';
 import type { WorkspaceLayoutProjector } from '../model/projection.utils.js';
-import type { WorkspaceContextRectResolver } from './context.utils.js';
 import type { WorkspacePlacementPlan } from './planner.utils.js';
+import type { WorkspaceScopeRectResolver } from './scope.utils.js';
 
 export interface WorkspaceSplitPreference {
   allocation: WorkspacePlacedRegion[];
   requirements: WorkspaceRequirements;
-  contextRect?: WorkspaceContextRectResolver;
+  resolveScopeRect?: WorkspaceScopeRectResolver;
 }
 
 /** Fits placements to the final normalized branch budget, including every separator. */
@@ -30,11 +30,11 @@ export function sizePreferredSplit(input: {
   projectLayout?: WorkspaceLayoutProjector;
 }): WorkspacePlacementPlan {
   const { plan, preference, source, available } = input;
-  if (!preference || !plan.context || plan.kind !== 'split') return plan;
+  if (!preference || !plan.scope || plan.kind !== 'split') return plan;
   const visible = (input.projectLayout ?? projectLayout)(plan.layout, available).root;
   const branch = sourceBranch(visible, source);
   if (!branch) return plan;
-  const sizing = splitSizingInput({ branch, preference, source, recipients: plan.context.members });
+  const sizing = splitSizingInput({ branch, preference, source, recipients: plan.scope.members });
   if (!sizing) return plan;
   const sizes = preferredSizes(sizing);
   if (!sizes) return plan;
@@ -50,7 +50,7 @@ function splitSizingInput(input: {
 }) {
   const { branch, preference, source, recipients } = input;
   const axis = branch.axis === 'horizontal' ? 'width' : 'height';
-  const extent = (preference.contextRect ?? getAllocatedContextRect)({
+  const extent = (preference.resolveScopeRect ?? getAllocatedScopeRect)({
     members: getPanelIds(branch).filter(id => !source.includes(id)),
     allocation: preference.allocation,
     source
@@ -71,7 +71,7 @@ function recipientPreference(input: {
   source: string[];
   axis: 'width' | 'height';
 }) {
-  const rect = (input.preference.contextRect ?? getAllocatedContextRect)({
+  const rect = (input.preference.resolveScopeRect ?? getAllocatedScopeRect)({
     members: input.members,
     allocation: input.preference.allocation,
     source: input.source
@@ -94,7 +94,7 @@ function splitEntries(input: {
     const mixed = !donor && members.some(id => recipients.includes(id));
     const rect = moving
       ? undefined
-      : (preference.contextRect ?? getAllocatedContextRect)({ members, allocation: preference.allocation, source });
+      : (preference.resolveScopeRect ?? getAllocatedScopeRect)({ members, allocation: preference.allocation, source });
     return {
       moving,
       donor,

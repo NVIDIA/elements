@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { getPanelIds, normalizeLayout } from './layout.utils.js';
+import { getPanelIds, normalizeLayout, normalizeLayoutWithSharing } from './layout.utils.js';
 
 import type { WorkspaceGroup, WorkspaceNode } from './layout.utils.js';
 
@@ -56,5 +56,55 @@ describe('workspace layout', () => {
       weights: [1 / 3, 1 / 3, 1 / 3],
       children: [group('a'), group('b'), group('c')]
     });
+  });
+  it('reuses unchanged canonical nodes and arrays while normalizing a shared layout', () => {
+    const root: WorkspaceNode = {
+      type: 'split',
+      axis: 'horizontal',
+      children: [group('a'), group('b')],
+      weights: [0.5, 0.5]
+    };
+    Object.freeze(root.children);
+    Object.freeze(root.weights);
+    Object.freeze(root);
+    const normalized = normalizeLayoutWithSharing(root);
+    expect(normalized).toBe(root);
+    if (normalized.type !== 'split') throw new Error('Expected split');
+    expect(normalized.children).toBe(root.children);
+    expect(normalized.weights).toBe(root.weights);
+  });
+
+  it('rebuilds a flattened shared split without changing its input or copying unchanged groups', () => {
+    const a = group('a');
+    const b = group('b');
+    const c = group('c');
+    const nested: WorkspaceNode = {
+      type: 'split',
+      axis: 'horizontal',
+      children: [b, c],
+      weights: [0.5, 0.5]
+    };
+    const root: WorkspaceNode = {
+      type: 'split',
+      axis: 'horizontal',
+      children: [a, nested],
+      weights: [0.5, 0.5]
+    };
+    Object.freeze(nested.children);
+    Object.freeze(nested.weights);
+    Object.freeze(nested);
+    Object.freeze(root.children);
+    Object.freeze(root.weights);
+    Object.freeze(root);
+    const normalized = normalizeLayoutWithSharing(root);
+    if (normalized.type !== 'split') throw new Error('Expected split');
+    expect(normalized).not.toBe(root);
+    expect(normalized.children).toEqual([a, b, c]);
+    expect(normalized.children[0]).toBe(a);
+    expect(normalized.children[1]).toBe(b);
+    expect(normalized.children[2]).toBe(c);
+    expect(normalized.weights).toEqual([0.5, 0.25, 0.25]);
+    expect(root.children).toEqual([a, nested]);
+    expect(root.weights).toEqual([0.5, 0.5]);
   });
 });

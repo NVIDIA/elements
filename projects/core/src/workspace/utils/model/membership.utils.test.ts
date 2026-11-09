@@ -3,7 +3,13 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { getTabInsertionIndex, getWorkspacePanelSource, preservesGroupMembership } from './membership.utils.js';
+import {
+  getPanelMembershipKey,
+  getTabInsertionIndex,
+  getWorkspacePanelSource,
+  preservesGroupMembership,
+  samePanelMembership
+} from './membership.utils.js';
 
 import type { WorkspaceNode } from './layout.utils.js';
 
@@ -17,6 +23,28 @@ describe('workspace group membership', () => {
       { type: 'group', panels: ['b'], active: 'b' }
     ]
   };
+
+  it('keeps membership keys independent of order and unambiguous for arbitrary ID contents', () => {
+    const ids = ['a:b', '"', '\\', '\u0000', '🧪'];
+    const original = [...ids];
+    expect(getPanelMembershipKey(ids)).toBe(getPanelMembershipKey([...ids].reverse()));
+    expect(ids).toEqual(original);
+    expect(getPanelMembershipKey(['a:b', 'c'])).not.toBe(getPanelMembershipKey(['a', 'b:c']));
+    expect(getPanelMembershipKey([])).not.toBe(getPanelMembershipKey(['']));
+  });
+
+  it('compares unique panel membership without depending on order or encoding ID contents', () => {
+    expect(samePanelMembership([], [])).toBe(true);
+    expect(samePanelMembership(['a', 'b'], ['b', 'a'])).toBe(true);
+    expect(samePanelMembership(['a', 'b'], ['a'])).toBe(false);
+    expect(samePanelMembership(['a', 'b'], ['a', 'c'])).toBe(false);
+    expect(samePanelMembership(['a:b', 'c'], ['a', 'b:c'])).toBe(false);
+    const ids = ['a', 'b'];
+    expect(samePanelMembership(ids, ids)).toBe(true);
+    ids[0] = 'c';
+    expect(samePanelMembership(ids, ids)).toBe(true);
+    expect(samePanelMembership(ids, ['a', 'b'])).toBe(false);
+  });
 
   it('allows ordering inside the original group but rejects joining another group', () => {
     expect(

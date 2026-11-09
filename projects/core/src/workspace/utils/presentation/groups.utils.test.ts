@@ -9,10 +9,10 @@ import type { Rect } from '@nvidia-elements/core/internal';
 
 import {
   createPresentedGroups,
+  createTabStripIdentityResolver,
   findTabHeaderTarget,
   getAllocatedTabWidth,
   getTabReservationHit,
-  getTabStripIdentity,
   preserveRecipientSelection,
   projectTabMembership
 } from './groups.utils.js';
@@ -81,10 +81,32 @@ describe('workspace group presentation', () => {
     expect(carried.gripWidth).toBe(28);
   });
 
-  it('keeps recipient identity through carried insertion and original source extraction', () => {
-    expect(getTabStripIdentity(root, ['b', 'b2', 'a'], ['a'])).toBe(getTabStripIdentity(root, ['b', 'b2'], []));
-    expect(getTabStripIdentity(root, ['companion'], ['a'])).toBe(getTabStripIdentity(root, ['a', 'companion'], []));
-    expect(getTabStripIdentity(root, ['a'], ['a'])).toBe(getTabStripIdentity(root, ['a', 'companion'], []));
+  it('keeps committed strip ownership through carried insertion, extraction and dormant members', () => {
+    const identity = createTabStripIdentityResolver(root);
+    expect(identity(['b', 'b2', 'a'], ['a'])).toBe(identity(['b', 'b2'], []));
+    expect(identity(['b'], [])).toBe(identity(['b', 'closed', 'b2'], []));
+    expect(identity(['companion'], ['a'])).toBe(identity(['a', 'companion'], []));
+    expect(identity(['a'], ['a'])).toBe(identity(['a', 'companion'], []));
+  });
+
+  it('uses presented membership when the chosen anchor has no committed owner', () => {
+    const identity = createTabStripIdentityResolver(root);
+    const fallback = createTabStripIdentityResolver(null);
+    expect(identity(['outside', 'b'], [])).toBe(fallback(['outside', 'b'], []));
+    expect(identity(['outside'], ['outside'])).toBe(fallback(['outside'], []));
+    expect(identity([], [])).toBe(fallback([], []));
+    expect(fallback(['a:b', 'c'], [])).not.toBe(fallback(['a', 'b:c'], []));
+  });
+
+  it('preserves equal strip keys across root replacements while distinguishing changed group membership', () => {
+    const identity = createTabStripIdentityResolver(root);
+    const replaced = structuredClone(root);
+    if (replaced.type !== 'split' || replaced.children[0]?.type !== 'group') throw new Error('Expected a group');
+    replaced.children[0].panels.reverse();
+    replaced.children[0].active = 'companion';
+    expect(createTabStripIdentityResolver(replaced)(['a'], [])).toBe(identity(['a'], []));
+    replaced.children[0].panels.push('new');
+    expect(createTabStripIdentityResolver(replaced)(['a'], [])).not.toBe(identity(['a'], []));
   });
 
   it('preserves the recipient original nonfirst active body while carried content remains absent', () => {
@@ -198,14 +220,14 @@ describe('workspace computed acquisition headers', () => {
     expect(findTabHeaderTarget({ ...input, point: { x: 99, y: 110 } })).toBeUndefined();
   });
 
-  it('holds only the visible computed carried tab slot with a supplied scroll offset', async () => {
+  it('holds only the visible computed carried tab reservation with a supplied scroll offset', async () => {
     const input = { ...(await setup()), source: ['c'] };
     expect(getTabReservationHit(input)).toBe('tab');
     expect(getTabReservationHit({ ...input, scroll: () => 0 })).toBeUndefined();
     expect(getTabReservationHit({ ...input, point: { x: 310, y: 110 } })).toBeUndefined();
   });
 
-  it('uses the same zero-grip width for prospective headers and their reserved tab slot', async () => {
+  it('uses the same zero-grip width for prospective headers and their tab reservation', async () => {
     const input = await setup();
     const group = { ...input.groups[0]!, panels: input.groups[0]!.panels.slice(0, 2), gripWidth: 0 };
     const frame = { ...input, groups: [group], source: ['b'], scroll: () => 0, point: { x: 101, y: 110 } };

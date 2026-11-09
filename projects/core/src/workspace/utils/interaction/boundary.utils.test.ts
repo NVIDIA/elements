@@ -22,7 +22,7 @@ function offer(position: 'left' | 'right' | 'top' | 'bottom'): WorkspaceInsertio
     kind: 'insert',
     owner: 'root',
     boundary: end ? 'end' : 'start',
-    scope: {
+    insertion: {
       key: position,
       axis: vertical ? 'horizontal' : 'vertical',
       index: end ? 1 : 0,
@@ -69,7 +69,7 @@ describe('workspace outer boundary targeting', () => {
     const local = {
       ...offer('top'),
       owner: 'root.1',
-      scope: { ...offer('top').scope, key: 'local' },
+      insertion: { ...offer('top').insertion, key: 'local' },
       scopeRect: { x: 240, y: 0, width: 360, height: 300 },
       rect: { x: 240, y: 0, width: 360, height: 12 }
     };
@@ -89,7 +89,7 @@ describe('workspace outer boundary targeting', () => {
       ...offer('top'),
       kind: 'order',
       owner: 'root.1',
-      scope: { ...offer('top').scope, key: 'local' },
+      insertion: { ...offer('top').insertion, key: 'local' },
       scopeRect: { x: 240, y: 0, width: 360, height: 300 },
       rect: { x: 240, y: 0, width: 360, height: 12 }
     };
@@ -110,7 +110,7 @@ describe('workspace outer boundary targeting', () => {
       ...offer('right'),
       owner: 'root.1',
       boundary: undefined,
-      scope: { ...offer('right').scope, previous: ['b'], next: ['c'] }
+      insertion: { ...offer('right').insertion, previous: ['b'], next: ['c'] }
     };
     const result = getBoundaryPlacementOffers({
       offers: [local],

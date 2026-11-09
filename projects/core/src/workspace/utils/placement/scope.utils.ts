@@ -4,49 +4,45 @@
 import type { Rect } from '@nvidia-elements/core/internal';
 
 import { getPanelIds } from '../model/layout.utils.js';
+import { getPanelMembershipKey } from '../model/membership.utils.js';
 
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceNode } from '../model/layout.utils.js';
 
-export interface WorkspacePlacementContext {
+export interface WorkspacePlacementScope {
   kind: 'rail' | 'recipient';
   members: string[];
 }
 
-export interface WorkspaceContextProxy {
+export interface WorkspaceScopeBounds {
   key: string;
   rect: Rect;
 }
 
-interface ContextRectInput {
+interface ScopeRectInput {
   members: string[];
   allocation: WorkspacePlacedRegion[];
   source: string[];
 }
 
-export type WorkspaceContextRectResolver = (input: ContextRectInput) => Rect | undefined;
+export type WorkspaceScopeRectResolver = (input: ScopeRectInput) => Rect | undefined;
 
-/** Identifies an operating region independently of path changes or sibling order. */
-export function getContextKey(members: string[]): string {
-  return JSON.stringify([...members].sort());
-}
-
-export function createPlacementContext(
-  kind: WorkspacePlacementContext['kind'],
+export function createPlacementScope(
+  kind: WorkspacePlacementScope['kind'],
   node: WorkspaceNode | null,
   source: string[]
-): WorkspacePlacementContext {
+): WorkspacePlacementScope {
   const carried = new Set(source);
   return { kind, members: getPanelIds(node).filter(id => kind === 'rail' || !carried.has(id)) };
 }
 
 /** Includes surviving peers whose computed allocation changes under split constraints. */
-export function getAffectedSplitContext(input: {
+export function getAffectedSplitScope(input: {
   baseline: WorkspacePlacedRegion[];
   achieved: WorkspacePlacedRegion[];
   source: string[];
   recipient: string[];
-}): WorkspacePlacementContext {
+}): WorkspacePlacementScope {
   const achieved = new Map(
     input.achieved.flatMap(region =>
       region.node.type === 'group' ? region.node.panels.map(id => [id, region.rect] as const) : []
@@ -58,7 +54,7 @@ export function getAffectedSplitContext(input: {
     for (const id of region.node.panels) {
       if (input.source.includes(id)) continue;
       const after = achieved.get(id);
-      if (after && changedRect(region.rect, after)) {
+      if (after && hasRectChanged(region.rect, after)) {
         affected.add(id);
       }
     }
@@ -74,85 +70,96 @@ export function getAffectedSplitContext(input: {
     : { kind: 'recipient', members: input.recipient };
 }
 
-function changedRect(before: Rect, after: Rect) {
+function hasRectChanged(before: Rect, after: Rect) {
   return (['x', 'y', 'width', 'height'] as const).some(key => Math.abs(before[key] - after[key]) > 0.000001);
 }
 
-/** Seeds operating-region proxies before their selection can change during animation. */
-export function allocateContextProxies(input: {
+/** Seeds scope bounds before animation can change selection. */
+export function getAllocatedScopes(input: {
   catalog: WorkspacePlacedRegion[];
   allocation: WorkspacePlacedRegion[];
   source: string[];
-}): WorkspaceContextProxy[] {
+}): WorkspaceScopeBounds[] {
   const carried = new Set(input.source);
   const memberships = new Map<string, string[]>();
   for (const region of input.catalog) {
     const full = getPanelIds(region.node);
     const remaining = full.filter(id => !carried.has(id));
     if (!remaining.length) continue;
-    for (const members of [full, remaining]) {
-      memberships.set(getContextKey(members), members);
-    }
+    memberships.set(getPanelMembershipKey(full), full);
+    if (remaining.length !== full.length) memberships.set(getPanelMembershipKey(remaining), remaining);
   }
-  const geometry = allocationIndex(input.allocation);
+  const geometry = createAllocationIndex(input.allocation);
   return [...memberships].flatMap(([key, members]) => {
-    const rect = resolveContextRegion({ members, geometry, carried });
+    const rect = getScopeRect({ members, geometry, carried });
     return rect ? [{ key, rect }] : [];
   });
 }
 
-export function getAllocatedContextRect(input: ContextRectInput): Rect | undefined {
-  return resolveContextRegion({
+export function getAllocatedScopeRect(input: ScopeRectInput): Rect | undefined {
+  return getScopeRect({
     members: input.members,
-    geometry: allocationIndex(input.allocation),
+    geometry: createAllocationIndex(input.allocation),
     carried: new Set(input.source)
   });
 }
 
-export function createContextRectResolver(): WorkspaceContextRectResolver {
-  const indices = new WeakMap<WorkspacePlacedRegion[], ReturnType<typeof allocationIndex>>();
+export function createScopeRectResolver(): WorkspaceScopeRectResolver {
+  const indices = new WeakMap<WorkspacePlacedRegion[], ReturnType<typeof createAllocationIndex>>();
   return input => {
     let geometry = indices.get(input.allocation);
     if (!geometry) {
-      geometry = allocationIndex(input.allocation);
+      geometry = createAllocationIndex(input.allocation);
       indices.set(input.allocation, geometry);
     }
-    return resolveContextRegion({ members: input.members, geometry, carried: new Set(input.source) });
+    return getScopeRect({ members: input.members, geometry, carried: new Set(input.source) });
   };
 }
 
-function allocationIndex(regions: WorkspacePlacedRegion[]) {
+function createAllocationIndex(regions: WorkspacePlacedRegion[]) {
   const leaves = regions.filter(region => region.node.type === 'group');
-  const byKey = new Map(regions.map(region => [region.key, region]));
+  const byKey = new Map(regions.map((region, order) => [region.key, { ...region, order, leafCount: 0 }]));
   const groupByMember = new Map<string, string>();
   for (const leaf of leaves) {
     getPanelIds(leaf.node).forEach(id => groupByMember.set(id, leaf.key));
   }
-  const exact = new Map<string, Rect>();
-  for (const region of regions) {
-    const keys = leaves.filter(leaf => descendant(leaf.key, region.key)).map(leaf => leaf.key);
-    exact.set(getContextKey(keys), region.rect);
+  for (const leaf of leaves) {
+    for (let key = leaf.key; key; key = getParentRegionKey(key)) {
+      const scope = byKey.get(key);
+      if (scope) scope.leafCount++;
+    }
   }
-  return { leaves, byKey, groupByMember, exact };
+  return { leaves, byKey, groupByMember };
 }
 
-function resolveContextRegion(input: {
+function getSelectedRegionKeys(members: string[], groupByMember: ReadonlyMap<string, string>) {
+  const selected = new Set<string>();
+  for (const id of members) {
+    const key = groupByMember.get(id);
+    if (key !== undefined) selected.add(key);
+  }
+  return selected;
+}
+
+// eslint-disable-next-line max-statements -- Resolve exact scopes before the contiguous-range fallback.
+function getScopeRect(input: {
   members: string[];
-  geometry: ReturnType<typeof allocationIndex>;
+  geometry: ReturnType<typeof createAllocationIndex>;
   carried: Set<string>;
 }): Rect | undefined {
   const { members, geometry, carried } = input;
-  const selected = new Set(members.flatMap(id => geometry.groupByMember.get(id) ?? []));
+  const selected = getSelectedRegionKeys(members, geometry.groupByMember);
   if (!selected.size) return undefined;
-  const exact = geometry.exact.get(getContextKey([...selected]));
+  const keys = [...selected];
+  const prefix = getCommonRegionKey(keys);
+  const exact = findExactScopeRect(geometry, prefix, selected.size);
   if (exact) return exact;
-  const prefix = commonRegion([...selected]);
   const parent = geometry.byKey.get(prefix);
   if (parent?.node.type !== 'split') return undefined;
-  const { depth, first, last } = childRange([...selected], prefix);
+  const { depth, first, last } = getChildRange(keys, prefix);
   const covered = geometry.leaves.filter(leaf => {
     const index = Number(leaf.key.split('.')[depth]);
-    return descendant(leaf.key, prefix) && index >= first && index <= last;
+    return isWithinRegion(leaf.key, prefix) && index >= first && index <= last;
   });
   if (covered.some(leaf => !selected.has(leaf.key) && !getPanelIds(leaf.node).every(id => carried.has(id))))
     return undefined;
@@ -174,19 +181,38 @@ function resolveContextRegion(input: {
       };
 }
 
-function commonRegion(keys: string[]): string {
-  const parts = keys[0]!.split('.');
-  while (!keys.every(key => descendant(key, parts.join('.')))) {
-    parts.pop();
+function findExactScopeRect(geometry: ReturnType<typeof createAllocationIndex>, prefix: string, leafCount: number) {
+  let rect: Rect | undefined;
+  let order = -1;
+  for (let key = prefix; key; key = getParentRegionKey(key)) {
+    const scope = geometry.byKey.get(key);
+    // Scopes with the same leaves use the last supplied region, including filtered catalogs.
+    if (scope?.leafCount === leafCount && scope.order > order) {
+      rect = scope.rect;
+      order = scope.order;
+    }
   }
-  return parts.join('.');
+  return rect;
 }
 
-function descendant(key: string, parent: string): boolean {
+function getParentRegionKey(key: string) {
+  const separator = key.lastIndexOf('.');
+  return separator < 0 ? '' : key.slice(0, separator);
+}
+
+function getCommonRegionKey(keys: string[]): string {
+  let prefix = keys[0]!;
+  for (const key of keys) {
+    while (!isWithinRegion(key, prefix)) prefix = getParentRegionKey(prefix);
+  }
+  return prefix;
+}
+
+function isWithinRegion(key: string, parent: string): boolean {
   return key === parent || key.startsWith(`${parent}.`);
 }
 
-function childRange(keys: string[], parent: string) {
+function getChildRange(keys: string[], parent: string) {
   const depth = parent.split('.').length;
   const indices = keys.map(key => Number(key.split('.')[depth]));
   return { depth, first: Math.min(...indices), last: Math.max(...indices) };

@@ -3,8 +3,8 @@
 
 import { normalizeLayout } from '../model/layout.utils.js';
 import { findGroup, projectLayout } from '../model/operations.utils.js';
-import { findDeepestProjectionCarrier, getProjectionSignature } from '../model/projection.utils.js';
-import { createPlacementContext } from './context.utils.js';
+import { findDeepestProjectionCarrier } from '../model/projection.utils.js';
+import { createPlacementScope } from './scope.utils.js';
 
 import type { WorkspaceGroup, WorkspaceLayout, WorkspaceNode, WorkspaceSplit } from '../model/layout.utils.js';
 import type { WorkspaceDestination } from '../model/operations.utils.js';
@@ -45,7 +45,7 @@ export function placeRegion(input: WorkspaceRegionPlacementInput): WorkspacePlac
     projectLayout: project,
     root: canonicalRoot
   } = context;
-  const contextRegion = createPlacementContext('recipient', region, source);
+  const scope = createPlacementScope('recipient', region, source);
   const removed = new Set(source);
   const moving: WorkspaceGroup = {
     type: 'group',
@@ -54,7 +54,7 @@ export function placeRegion(input: WorkspaceRegionPlacementInput): WorkspacePlac
   };
   const residual = stripRegion(carrier, removed);
   if (!residual || !project({ version: 1, root: residual, closed: [] }, visible).root)
-    return { kind: 'reorder', layout, context: contextRegion };
+    return { kind: 'reorder', layout, scope };
   const before = position === 'left' || position === 'top';
   const replacement: WorkspaceSplit = {
     type: 'split',
@@ -63,9 +63,7 @@ export function placeRegion(input: WorkspaceRegionPlacementInput): WorkspacePlac
     weights: [0.5, 0.5]
   };
   const root = editRegion(canonicalRoot, { carrier, replacement, removed });
-  return root
-    ? { kind: 'split', layout: { ...layout, root: normalizeLayout(root) }, context: contextRegion }
-    : undefined;
+  return root ? { kind: 'split', layout: { ...layout, root: normalizeLayout(root) }, scope } : undefined;
 }
 
 function rebuild(node: WorkspaceSplit, mapped: (WorkspaceNode | null)[]): WorkspaceNode | null {
@@ -93,7 +91,7 @@ function regionCarrier(input: WorkspaceRegionPlacementInput, visible: string[]) 
   if (!region) return undefined;
   const carrier = findDeepestProjectionCarrier(
     layout.root,
-    getProjectionSignature(region),
+    region,
     node => (input.projectLayout ?? projectLayout)({ version: 1, root: node, closed: [] }, visible).root
   );
   return carrier ? { carrier, region } : undefined;

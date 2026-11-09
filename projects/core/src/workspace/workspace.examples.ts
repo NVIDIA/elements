@@ -462,10 +462,10 @@ export const Container = {
 };
 
 /**
- * @summary Customize header spacing, control sizes, and panel corners for a compact workspace.
+ * @summary Customize spacing, controls, headers, and footers for a compact workspace.
  * @tags theme
  */
-export const CustomHeaders = {
+export const CompactStyling = {
   render: () => html`
     <div id="compact-example" nve-layout="column gap:md">
       <nve-button>Reset layout</nve-button>
@@ -476,6 +476,9 @@ export const CustomHeaders = {
         #condensed-workspace nve-workspace-panel-header {
           --min-height: var(--nve-ref-size-800);
           --padding: var(--nve-ref-size-100) var(--nve-ref-size-100) var(--nve-ref-size-100) var(--nve-ref-size-250);
+        }
+        #condensed-workspace nve-workspace-panel-footer {
+          --padding: var(--nve-ref-size-200) var(--nve-ref-size-250);
         }
       </style>
       <nve-workspace
@@ -492,6 +495,9 @@ export const CustomHeaders = {
           <nve-workspace-panel-content>
             <nve-textarea><textarea aria-label="Editor">Editor content</textarea></nve-textarea>
           </nve-workspace-panel-content>
+          <nve-workspace-panel-footer>
+            <span nve-text="body sm trim:none">Ready</span>
+          </nve-workspace-panel-footer>
         </nve-workspace-panel>
         <nve-workspace-panel id="condensed-notes">
           <nve-workspace-panel-header>Notes</nve-workspace-panel-header>

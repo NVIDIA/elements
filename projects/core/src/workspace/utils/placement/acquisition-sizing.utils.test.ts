@@ -174,6 +174,15 @@ describe('workspace acquired cross-scope allocation', () => {
     ).toBeUndefined();
   });
 
+  it('reads changed requirements in a later fit of the same candidate layout', () => {
+    const fixture = setup();
+    const candidate = fixture.input.plan.layout;
+    expect(fitAcquiredPlacement(fixture.input)).toBeDefined();
+    fixture.input.requirements.panels = new Map([['c', { width: 0, height: 110 }]]);
+    expect(fixture.input.plan.layout).toBe(candidate);
+    expect(fitAcquiredPlacement(fixture.input)).toBeUndefined();
+  });
+
   it('reuses each immutable selected layout on refresh independently of another blocked preview', () => {
     const fixture = setup();
     const adapted = fitAcquiredPlacement(fixture.input)!;

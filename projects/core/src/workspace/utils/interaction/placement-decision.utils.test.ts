@@ -65,7 +65,9 @@ function createCatalog(layout: WorkspaceLayout, options: { source: string[]; bou
 
 function input(source: string, reserved: boolean) {
   const catalog = allocate(currentLayout);
-  const sourceSlot = reserved ? catalog.groups.find(group => group.group.panels.includes(source))!.rect : undefined;
+  const sourceReservation = reserved
+    ? catalog.groups.find(group => group.group.panels.includes(source))!.rect
+    : undefined;
   const preview: WorkspaceDragPreview = reserved
     ? {
         source: [source],
@@ -77,7 +79,7 @@ function input(source: string, reserved: boolean) {
           kind: 'order',
           destination: { target: source === 'c' ? 'b' : 'c', position: source === 'c' ? 'right' : 'left' }
         },
-        cue: { kind: 'group', rect: sourceSlot! }
+        cue: { kind: 'group', rect: sourceReservation! }
       }
     : {
         source: [source],
@@ -98,7 +100,7 @@ function input(source: string, reserved: boolean) {
     available,
     regions,
     orderingRegions,
-    sourceSlot,
+    sourceReservation,
     preview,
     bounds,
 
@@ -207,7 +209,7 @@ describe('pointer placement decisions', () => {
     expect(decision({ targets: [target], reservationHit: 'group' }).intent).toBe(heldIntent);
   });
 
-  it('retains a tab intent over its reserved header slot', () => {
+  it('retains a tab intent over its reserved header position', () => {
     const held: WorkspaceDropIntent = { kind: 'tab', destination: { target: 'c', position: 'tab', index: 2 } };
     expect(decision({ headerTarget: target, reservationHit: 'tab' }, true, held).intent).toBe(held);
   });
@@ -300,7 +302,7 @@ describe('workspace unified placement decisions', () => {
     expect(decidePlacement({ ...evaluation, point: { x: 450, y: 150 } }).intent?.kind).toBe('order');
   });
 
-  it('keeps the selected visible source slot stable, then allows prospective split exit', () => {
+  it('keeps the selected visible source reservation stable, then allows prospective split exit', () => {
     const evaluation = input('b', true);
     expect(
       decidePlacement({
@@ -340,7 +342,7 @@ describe('workspace reserved group hints', () => {
       intent: { kind: 'order', destination: { target: 'a', position: 'left' } },
       cue: { kind: 'group', rect: { x: 430, y: 0, width: 40, height: 300 } }
     };
-    return { ...base, preview, sourceSlot: preview.cue.rect, point: { x: 432, y: 150 } };
+    return { ...base, preview, sourceReservation: preview.cue.rect, point: { x: 432, y: 150 } };
   }
 
   it.each([false, true])(
@@ -393,7 +395,7 @@ describe('workspace reserved group hints', () => {
         });
       const reserved = allocation(plan.layout);
       const catalog = createCatalog(layout, { source, bounds: frame });
-      const sourceSlot = reserved.groups.find(item => item.group.panels.includes('preview'))!.rect;
+      const sourceReservation = reserved.groups.find(item => item.group.panels.includes('preview'))!.rect;
       const preview: WorkspaceDragPreview = {
         phase: 'detached',
         source,
@@ -401,7 +403,7 @@ describe('workspace reserved group hints', () => {
         allocation: 'reserved',
         layout: plan.layout,
         intent: { kind: 'insert', destination },
-        cue: { kind: 'group', rect: sourceSlot }
+        cue: { kind: 'group', rect: sourceReservation }
       };
       const base = {
         gap: 6,
@@ -411,7 +413,7 @@ describe('workspace reserved group hints', () => {
         bounds: frame,
         regions: catalog(createDetachedLayout(layout, source)),
         orderingRegions: catalog(plan.layout),
-        sourceSlot,
+        sourceReservation,
         local: preview.intent,
         header: false,
         point: transpose ? { x: 20, y: 190 } : { x: 190, y: 20 }
@@ -440,22 +442,22 @@ describe('workspace reserved group hints', () => {
   });
 
   it.each([
-    { name: 'normal leading edge', slot: { x: 444, y: 0, width: 30, height: 300 } },
-    { name: 'normal trailing edge', slot: { x: 430, y: 0, width: 26, height: 300 } },
-    { name: 'crossing cue', slot: { x: 448, y: 0, width: 30, height: 300 } },
-    { name: 'partially overlapping cue', slot: { x: 430, y: 0, width: 20, height: 300 } },
-    { name: 'tangential overflow', slot: { x: 430, y: 5, width: 40, height: 290 } }
-  ])('retains a cue at the $name of occupied space', ({ slot }) => {
-    const result = decidePlacement({ ...createInputs(), sourceSlot: slot });
+    { name: 'normal leading edge', sourceReservation: { x: 444, y: 0, width: 30, height: 300 } },
+    { name: 'normal trailing edge', sourceReservation: { x: 430, y: 0, width: 26, height: 300 } },
+    { name: 'crossing cue', sourceReservation: { x: 448, y: 0, width: 30, height: 300 } },
+    { name: 'partially overlapping cue', sourceReservation: { x: 430, y: 0, width: 20, height: 300 } },
+    { name: 'tangential overflow', sourceReservation: { x: 430, y: 5, width: 40, height: 290 } }
+  ])('retains a cue at the $name of occupied space', ({ sourceReservation }) => {
+    const result = decidePlacement({ ...createInputs(), sourceReservation });
     expect(result.hint?.rect).toMatchObject({ y: 0, width: 12, height: 300 });
   });
 
   it('uses exact fractional interior containment without a tolerance', () => {
     expect(
-      decidePlacement({ ...createInputs(), sourceSlot: { x: 443.875, y: 0, width: 12.25, height: 300 } }).hint
+      decidePlacement({ ...createInputs(), sourceReservation: { x: 443.875, y: 0, width: 12.25, height: 300 } }).hint
     ).toBeUndefined();
     expect(
-      decidePlacement({ ...createInputs(), sourceSlot: { x: 444, y: 0, width: 12.125, height: 300 } }).hint
+      decidePlacement({ ...createInputs(), sourceReservation: { x: 444, y: 0, width: 12.125, height: 300 } }).hint
     ).toBeDefined();
   });
 
@@ -466,7 +468,7 @@ describe('workspace reserved group hints', () => {
       ...base,
       bounds: { x: 101.25, y: 27.5, width: 900, height: 200 },
       point: { x: base.point.x + 101.25, y: base.point.y - 77.5 },
-      sourceSlot: shift(base.sourceSlot),
+      sourceReservation: shift(base.sourceReservation),
       regions: base.regions.map(region => ({ ...region, rect: shift(region.rect) })),
       orderingRegions: base.orderingRegions.map(region => ({ ...region, rect: shift(region.rect) }))
     });
@@ -483,7 +485,7 @@ describe('workspace reserved group hints', () => {
     };
     const joined: WorkspaceDragPreview = {
       ...base.preview,
-      cue: { kind: 'tab', rect: base.sourceSlot },
+      cue: { kind: 'tab', rect: base.sourceReservation },
       intent: { kind: 'tab', destination: { target: 'a', position: 'tab' } }
     };
     expect(decidePlacement({ ...base, preview: overlay }).hint).toBeDefined();
@@ -528,7 +530,7 @@ describe('workspace identified scoped offers', () => {
     const currentAllocation = allocation(layout);
     const catalog = createCatalog(layout, { source: [source], bounds: frame });
     const intent = { kind: 'order' as const, destination: { target, position: side } };
-    const sourceSlot = currentAllocation.groups.find(group => group.group.panels.includes(source))!.rect;
+    const sourceReservation = currentAllocation.groups.find(group => group.group.panels.includes(source))!.rect;
     const preview: WorkspaceDragPreview = {
       phase: 'detached',
       source: [source],
@@ -536,7 +538,7 @@ describe('workspace identified scoped offers', () => {
       allocation: 'reserved',
       layout,
       intent,
-      cue: { kind: 'group', rect: sourceSlot }
+      cue: { kind: 'group', rect: sourceReservation }
     };
     const decision = decidePlacement({
       gap: 6,
@@ -546,7 +548,7 @@ describe('workspace identified scoped offers', () => {
       bounds: frame,
       regions: catalog(createDetachedLayout(layout, [source])),
       orderingRegions: catalog(layout),
-      sourceSlot,
+      sourceReservation,
       preview,
       local: intent,
       header: side === 'top',
@@ -631,16 +633,37 @@ describe('workspace identified scoped offers', () => {
       const outer = decidePlacement({ ...base, gap: 6, point: outerPoint });
       expect(local.intent?.kind).toBe('order');
       expect(outer.intent?.kind).toBe('insert');
-      expect(local.hint!.scope.key).not.toBe(outer.hint!.scope.key);
+      expect(local.hint!.insertion.key).not.toBe(outer.hint!.insertion.key);
       expect(local.hint!.plan.kind).toBe('reorder');
       expect(outer.hint!.plan.kind).toBe('insert');
-      expect(local.hint!.scope.members).toEqual(['c']);
-      expect(outer.hint!.scope.members).toEqual(['a', 'companion', 'c']);
-      expect(local.hint!.scope.index).toBe(1);
-      expect(outer.hint!.scope.index).toBe(1);
+      expect(local.hint!.insertion.members).toEqual(['c']);
+      expect(outer.hint!.insertion.members).toEqual(['a', 'companion', 'c']);
+      expect(local.hint!.insertion.index).toBe(1);
+      expect(outer.hint!.insertion.index).toBe(1);
       const tangent = transpose ? 'height' : 'width';
       expect(outer.hint!.rect[tangent]).toBe(frame[tangent]);
       expect(local.hint!.rect[tangent]).toBeLessThan(frame[tangent]);
+    });
+
+    it('preserves offer priority for equally near insertion hints', () => {
+      const { base } = createInputs();
+      const receiving = base.regions.find(region => region.node.type === 'group' && region.node.panels.includes('c'))!;
+      const point = transpose
+        ? { x: receiving.rect.x + 23, y: receiving.rect.y + 17 }
+        : { x: receiving.rect.x + 17, y: receiving.rect.y + 23 };
+      const tied = decidePlacement({ ...base, gap: 6, point });
+      expect(tied.acquisition).toBeUndefined();
+      expect(tied.hint?.destination).toEqual({
+        target: 'c',
+        region: transpose ? 'root.1' : 'root.1.1',
+        position: 'top'
+      });
+      const nearerLeft = decidePlacement({ ...base, gap: 6, point: { ...point, y: point.y + 0.5 } });
+      expect(nearerLeft.hint?.destination).toEqual({
+        target: 'c',
+        region: transpose ? 'root.1.1' : 'root.1',
+        position: 'left'
+      });
     });
 
     it('keeps the local scope reachable after either scope reserves space', () => {
@@ -650,14 +673,14 @@ describe('workspace identified scoped offers', () => {
       [outer.hint!, local.hint!].forEach(offer => {
         const reserved = allocation(offer.plan.layout);
         const orderingRegions = catalog(offer.plan.layout);
-        const sourceSlot = reserved.groups.find(group => group.group.panels.includes('b'))!.rect;
+        const sourceReservation = reserved.groups.find(group => group.group.panels.includes('b'))!.rect;
         for (const offset of [-1, 0, 1]) {
           const point = transpose
             ? { ...localPoint, x: localPoint.x + offset }
             : { ...localPoint, y: localPoint.y + offset };
-          const acquired = decidePlacement({ ...base, gap: 6, orderingRegions, sourceSlot, point });
+          const acquired = decidePlacement({ ...base, gap: 6, orderingRegions, sourceReservation, point });
           expect(acquired.intent).toEqual(local.intent);
-          expect(acquired.hint?.scope.key).toBe(local.hint!.scope.key);
+          expect(acquired.hint?.insertion.key).toBe(local.hint!.insertion.key);
         }
       });
     });
@@ -667,9 +690,9 @@ describe('workspace identified scoped offers', () => {
       const local = decidePlacement({ ...base, gap: 6, point: localPoint });
       const outer = decidePlacement({ ...base, gap: 6, point: outerPoint });
       const preview = reservedPreview(local, frame);
-      const override = decidePlacement({ ...base, gap: 6, preview, sourceSlot: frame, point: outerPoint });
+      const override = decidePlacement({ ...base, gap: 6, preview, sourceReservation: frame, point: outerPoint });
       expect(override.intent?.kind).toBe('insert');
-      expect(override.hint!.scope.key).toBe(outer.hint!.scope.key);
+      expect(override.hint!.insertion.key).toBe(outer.hint!.insertion.key);
     });
 
     it('suppresses the hint for an already selected outer insertion', () => {
@@ -681,7 +704,7 @@ describe('workspace identified scoped offers', () => {
         gap: 6,
         ...base,
         preview: { ...preview, layout: outer.hint!.plan.layout, intent: outer.intent! },
-        sourceSlot: frame,
+        sourceReservation: frame,
         point: outerPoint
       });
       expect(selected.hint).toBeUndefined();

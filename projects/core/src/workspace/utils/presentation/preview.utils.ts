@@ -3,8 +3,31 @@
 
 import type { Rect } from '@nvidia-elements/core/internal';
 
+import { getAllocatedScopes } from '../placement/scope.utils.js';
+
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceDragPreview } from '../interaction/drag-preview.utils.js';
+
+export interface PreviewBoundary {
+  key: string;
+  rect: Rect;
+  style: string;
+}
+
+export function preparePreviewBoundaries(
+  catalogRegions: WorkspacePlacedRegion[],
+  placedRegions: WorkspacePlacedRegion[],
+  sourcePanelIds: string[]
+): PreviewBoundary[] {
+  return getAllocatedScopes({
+    catalog: catalogRegions,
+    allocation: placedRegions,
+    source: sourcePanelIds
+  }).map(scope => ({
+    ...scope,
+    style: `left:${scope.rect.x}px;top:${scope.rect.y}px;width:${scope.rect.width}px;height:${scope.rect.height}px;${getRegionCornerStyle(scope.rect, placedRegions)}`
+  }));
+}
 
 export function shouldEmphasizeReservedDestination(preview: WorkspaceDragPreview) {
   return (

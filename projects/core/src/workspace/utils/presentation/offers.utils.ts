@@ -4,7 +4,7 @@
 import type { Point, Rect } from '@nvidia-elements/core/internal';
 
 import { clipCue } from '../interaction/drag-preview.utils.js';
-import { getAffectedSplitContext } from '../placement/context.utils.js';
+import { getAffectedSplitScope } from '../placement/scope.utils.js';
 
 import type { WorkspacePlacedRegion } from '../geometry/allocation.utils.js';
 import type { WorkspaceDragAllocation } from '../interaction/drag-preview.utils.js';
@@ -56,15 +56,15 @@ export function getOfferPresentation(input: {
   return {
     cue,
     seams: offerSeams(input, intent, cue),
-    context:
+    scope:
       recipient && input.split
-        ? getAffectedSplitContext({
+        ? getAffectedSplitScope({
             baseline: input.split.regions,
             achieved: input.regions,
             source: input.split.source,
             recipient: recipient.panels.map(panel => panel.id)
           })
-        : input.plan.context
+        : input.plan.scope
   };
 }
 

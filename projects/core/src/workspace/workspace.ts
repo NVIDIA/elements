@@ -26,6 +26,7 @@ import { WorkspaceMeasurementController } from './controllers/workspace-measurem
 import { WorkspaceRearrangeController } from './controllers/workspace-rearrange.controller.js';
 import { WorkspaceResizeController } from './controllers/workspace-resize.controller.js';
 import { WorkspaceRestorationController } from './controllers/workspace-restoration.controller.js';
+import { getPanelMembershipKey } from './utils/model/membership.utils.js';
 import {
   closePanel,
   findGroup,
@@ -34,22 +35,20 @@ import {
   reconcilePanels,
   selectPanel
 } from './utils/model/operations.utils.js';
-import {
-  parseWorkspaceValue,
-  sameSerializedWorkspaceLayout,
-  serializeWorkspaceValue
-} from './utils/model/value.utils.js';
-import { allocateContextProxies, getContextKey } from './utils/placement/context.utils.js';
+import { parseWorkspaceValue, sameWorkspaceLayout, serializeWorkspaceValue } from './utils/model/value.utils.js';
 import { getAdmissiblePlacementLayout } from './utils/placement/preparation.utils.js';
 import {
   focusWorkspacePanel,
   getPanelLabel,
-  isWorkspaceCompositionMutation,
   shouldFocusAfterWorkspaceClose
 } from './utils/presentation/composition.utils.js';
 import { getAllocatedTabWidth, preserveRecipientSelection } from './utils/presentation/groups.utils.js';
-import { getRegionCornerStyle, shouldEmphasizeReservedDestination } from './utils/presentation/preview.utils.js';
-import { WorkspaceEvaluation } from './utils/evaluation.utils.js';
+import {
+  getRegionCornerStyle,
+  preparePreviewBoundaries,
+  shouldEmphasizeReservedDestination
+} from './utils/presentation/preview.utils.js';
+import { WorkspaceEvaluationCache } from './utils/evaluation.utils.js';
 
 import { WorkspacePanel } from './panel/panel.js';
 
@@ -61,11 +60,19 @@ import type { WorkspaceInsertionOffer } from './utils/interaction/insertion-offe
 import type { WorkspaceLayout } from './utils/model/layout.utils.js';
 import type { WorkspacePresentedGroup } from './utils/presentation/groups.utils.js';
 import type { WorkspaceMeasurementChange, WorkspaceMeasurements } from './utils/presentation/measurements.utils.js';
-import type { WorkspaceEvaluationDelegate } from './utils/evaluation.utils.js';
+import type { PreviewBoundary } from './utils/presentation/preview.utils.js';
+import type { WorkspaceEvaluation, WorkspaceEvaluationDelegate } from './utils/evaluation.utils.js';
 
 import type { WorkspaceAnimationOptions } from './workspace.types.js';
 
 import styles from './workspace.css?inline';
+
+interface CachedPreviewBoundaries {
+  catalogRegions: WorkspacePlacedRegion[];
+  placedRegions: WorkspacePlacedRegion[];
+  sourcePanelIds: string[];
+  boundaries: PreviewBoundary[];
+}
 
 const i18nDefaults = {
   close: 'close',
@@ -183,6 +190,8 @@ export class Workspace extends LitElement {
   #value = '';
   #restoring = false;
   #dragPreview?: WorkspaceDragPreview;
+  #cachedPreviewBoundaries?: CachedPreviewBoundaries;
+  readonly #evaluationCache = new WorkspaceEvaluationCache(this);
 
   readonly #restoration = new WorkspaceRestorationController(this, {
     getLayout: () => this.#layout,
@@ -229,6 +238,10 @@ export class Workspace extends LitElement {
     getAvailablePanels: () => this.#available,
     activateSource: (source, group) => this.#activateSource(source, group),
     applyPreview: preview => {
+      if (preview?.phase !== 'detached') {
+        this.#evaluationCache.clear();
+        this.#cachedPreviewBoundaries = undefined;
+      }
       this.#dragPreview = preview;
       this.requestUpdate();
     },
@@ -279,11 +292,18 @@ export class Workspace extends LitElement {
     getGroups: () => this.#presentedGroups,
     getLayout: () => this.#layout,
     getPreview: () => this.#dragPreview,
-    scrollChanged: () => this.#rearrange.refresh()
+    scrollChanged: () => this.#rearrange.refresh(),
+    contentChanged: kind => {
+      if (kind === 'panels') {
+        this.#restoration.finish();
+        this.#commands.invalidateAvailability();
+        this.#resize.cancel();
+        this.#rearrange.cancel();
+      }
+      this.#measurementController.invalidate();
+      this.requestUpdate();
+    }
   });
-
-  #contentObserver?: MutationObserver;
-  #evaluation?: WorkspaceEvaluation;
 
   readonly #evaluationDelegate: WorkspaceEvaluationDelegate = {
     getCurrentLayout: () => this.#currentLayout,
@@ -295,19 +315,14 @@ export class Workspace extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.#contentObserver = new MutationObserver(records => this.#observeContent(records));
-    this.#contentObserver.observe(this, {
-      childList: true,
-      characterData: true,
-      attributes: true,
-      subtree: true,
-      attributeFilter: ['id', 'min-width', 'min-height', 'slot']
-    });
+    this.#composition.startObserving();
   }
 
   disconnectedCallback() {
+    this.#evaluationCache.clear();
+    this.#cachedPreviewBoundaries = undefined;
     this.#rearrange.cancel();
-    this.#contentObserver?.disconnect();
+    this.#composition.stopObserving();
     super.disconnectedCallback();
   }
 
@@ -351,14 +366,15 @@ export class Workspace extends LitElement {
   }
 
   get #panels(): WorkspacePanel[] {
-    if (this.#evaluation) return this.#evaluation.panels;
+    const evaluation = this.#evaluationCache.current;
+    if (evaluation) return evaluation.panels;
     return isServer
       ? []
       : [...this.children].filter((child): child is WorkspacePanel => matchesElementName(child, WorkspacePanel));
   }
 
   get #available() {
-    return this.#evaluation?.available ?? this.#panels.map(panel => panel.id);
+    return this.#evaluationCache.current?.available ?? this.#panels.map(panel => panel.id);
   }
 
   get #measurements(): WorkspaceMeasurements {
@@ -381,28 +397,6 @@ export class Workspace extends LitElement {
     return this.#canResize || this.#resize.retainingHandles;
   }
 
-  #observeContent(records: MutationRecord[]) {
-    const catalogue = records.some(
-      record =>
-        record.target === this ||
-        (record.type === 'attributes' &&
-          matchesElementName(record.target as Element, WorkspacePanel) &&
-          record.target.parentElement === this)
-    );
-    const labels = records.some(record => isWorkspaceCompositionMutation(this, record));
-
-    if (catalogue) {
-      this.#restoration.finish();
-      this.#commands.invalidateAvailability();
-      this.#resize.cancel();
-      this.#rearrange.cancel();
-    }
-    if (catalogue || labels) {
-      this.#measurementController.invalidate();
-      this.requestUpdate();
-    }
-  }
-
   #reconcile() {
     const ids = this.#available;
     if (!ids.every(Boolean) || new Set(ids).size !== ids.length) return;
@@ -415,9 +409,7 @@ export class Workspace extends LitElement {
     const next = reconcilePanels(this.#layout, ids);
     if (next === this.#layout) return;
     this.#setLayout(next);
-    if (!this.#restoring) {
-      this.#commit();
-    }
+    if (!this.#restoring) this.#commit();
   }
 
   #applyMeasurements(change: WorkspaceMeasurementChange) {
@@ -430,9 +422,7 @@ export class Workspace extends LitElement {
   }
 
   #setLayout(layout: WorkspaceLayout | undefined) {
-    if (layout === this.#layout) {
-      return;
-    }
+    if (layout === this.#layout) return;
     const value = serializeWorkspaceValue(layout);
     this.#layout = layout;
     this.#value = value;
@@ -453,7 +443,7 @@ export class Workspace extends LitElement {
   }
 
   #commitResize(layout: WorkspaceLayout) {
-    const changed = !sameSerializedWorkspaceLayout(this.#layout, layout);
+    const changed = !sameWorkspaceLayout(this.#layout, layout);
     if (changed) {
       this.#setLayout(layout);
       this.#commit();
@@ -493,9 +483,7 @@ export class Workspace extends LitElement {
   }
 
   #selectTab(id: string) {
-    if (!this.#rearrange.suppressSelection) {
-      this.#activatePanel(id, 'select');
-    }
+    if (!this.#rearrange.suppressSelection) this.#activatePanel(id, 'select');
   }
 
   #move(
@@ -504,17 +492,13 @@ export class Workspace extends LitElement {
     options: { layout?: WorkspaceLayout; capabilities?: WorkspaceRearrangeCapabilities; focus?: boolean } = {}
   ) {
     const capabilities = options.capabilities ?? { rearrangeable: this.rearrangeable, groupable: this.groupable };
-    if (!capabilities.rearrangeable || this.#fullscreen.active) {
-      return false;
-    }
+    if (!capabilities.rearrangeable || this.#fullscreen.active) return false;
 
     const next = this.#getPlacementLayout(source, intent, {
       candidate: options.layout,
       groupable: capabilities.groupable
     });
-    if (!next) {
-      return false;
-    }
+    if (!next) return false;
 
     this.#restoration.finish();
     this.#rearrange.cancel();
@@ -553,29 +537,21 @@ export class Workspace extends LitElement {
   }
 
   #withEvaluation<T>(work: (evaluation: WorkspaceEvaluation) => T): T {
-    if (this.#evaluation) return work(this.#evaluation);
-    this.#evaluation = new WorkspaceEvaluation(
-      this,
-      {
-        panels: this.#panels,
-        layout: this.#currentLayout,
-        source: this.#dragPreview?.source ?? [],
-        measurements: this.#measurements,
-        policy: this.#resize.policy,
-        strip: group => this.#composition.findTabStrip(group)
-      },
-      this.#evaluationDelegate
-    );
-    try {
-      return work(this.#evaluation);
-    } finally {
-      this.#evaluation = undefined;
-    }
+    const current = this.#evaluationCache.current;
+    if (current) return work(current);
+    const inputs = {
+      panels: this.#panels,
+      layout: this.#currentLayout,
+      source: this.#dragPreview?.source ?? [],
+      measurements: this.#measurements,
+      policy: this.#resize.policy,
+      strip: (group: WorkspacePresentedGroup) => this.#composition.findTabStrip(group)
+    };
+    return this.#evaluationCache.run(inputs, this.#evaluationDelegate, work);
   }
 
   #getProjectedLayout(layout: WorkspaceLayout) {
-    if (this.#evaluation) return this.#evaluation.project(layout);
-    return projectLayout(layout, this.#available);
+    return this.#evaluationCache.current?.project(layout) ?? projectLayout(layout, this.#available);
   }
 
   #getPlacementLayout(
@@ -583,9 +559,7 @@ export class Workspace extends LitElement {
     intent: WorkspacePlacementIntent,
     options: { candidate?: WorkspaceLayout; groupable?: boolean } = {}
   ) {
-    if (!this.#layout) {
-      return undefined;
-    }
+    if (!this.#layout) return undefined;
     return this.#withEvaluation(evaluation =>
       getAdmissiblePlacementLayout({
         evaluation,
@@ -600,12 +574,12 @@ export class Workspace extends LitElement {
   }
 
   #getCarriedPreviewContent(source: string[]) {
-    const carried = source.filter(
-      id => !this.#layout?.closed.includes(id) && this.#panels.some(panel => panel.id === id)
-    );
+    const panels = this.#panels;
+    const carried = source.filter(id => !this.#layout?.closed.includes(id) && panels.some(panel => panel.id === id));
     const active = findGroup(this.#layout?.root ?? null, carried[0])?.active;
     const front = active && carried.includes(active) ? active : carried[0];
-    return { title: front ? getPanelLabel(this.#panels, front) : '', layers: Math.min(carried.length, 3) };
+    const frontPanel = front ? panels.find(panel => panel.id === front) : undefined;
+    return { title: frontPanel ? getPanelLabel(frontPanel) : (front ?? ''), layers: Math.min(carried.length, 3) };
   }
 
   #isCarried(id: string) {
@@ -641,8 +615,7 @@ export class Workspace extends LitElement {
       scroll: group => evaluation.scroll(group)
     });
     return html`
-      <div
-        internal-host
+      <div internal-host
         ?data-resizing=${this.#resize.resizing}
         ?data-fullscreen=${this.#fullscreen.active}
         ?data-rearranging=${!!drag}
@@ -665,40 +638,71 @@ export class Workspace extends LitElement {
     `;
   }
 
-  #renderDragPreview(allocation: WorkspacePlacedRegion[], evaluation: WorkspaceEvaluation) {
+  #getPreviewBoundaries(
+    catalogRegions: WorkspacePlacedRegion[],
+    placedRegions: WorkspacePlacedRegion[],
+    sourcePanelIds: string[]
+  ): PreviewBoundary[] {
+    const eligible = this.isConnected && this.#dragPreview?.phase === 'detached';
+    const previous = this.#cachedPreviewBoundaries;
+    if (
+      eligible &&
+      previous &&
+      previous.catalogRegions === catalogRegions &&
+      previous.placedRegions === placedRegions &&
+      previous.sourcePanelIds.length === sourcePanelIds.length &&
+      previous.sourcePanelIds.every((id, index) => id === sourcePanelIds[index])
+    )
+      return previous.boundaries;
+    this.#cachedPreviewBoundaries = undefined;
+    const boundaries = preparePreviewBoundaries(catalogRegions, placedRegions, sourcePanelIds);
+    if (eligible) {
+      this.#cachedPreviewBoundaries = {
+        catalogRegions,
+        placedRegions,
+        sourcePanelIds: sourcePanelIds.slice(),
+        boundaries
+      };
+    }
+    return boundaries;
+  }
+
+  #renderPreviewBoundaries(boundaries: PreviewBoundary[], preview: WorkspaceDragPreview) {
+    const activeKey = preview.scope && getPanelMembershipKey(preview.scope.members);
+    return repeat(
+      boundaries,
+      boundary => boundary.key,
+      boundary => html`
+      <div class="scope-boundary"
+        data-scope-boundary=${boundary.key}
+        ?data-active=${boundary.key === activeKey}
+        inert aria-hidden="true"
+        style=${boundary.style}></div>
+    `
+    );
+  }
+
+  #renderDragPreview(placedRegions: WorkspacePlacedRegion[], evaluation: WorkspaceEvaluation) {
     const preview = this.#dragPreview;
     if (!preview) return null;
     const { x, y } = evaluation.client({ x: 0, y: 0, width: 0, height: 0 });
     const { title, layers } = this.#getCarriedPreviewContent(preview.source);
-    const currentLayout = this.#layout ?? { version: 1 as const, root: null, closed: [] };
-    const catalog = evaluation.geometry(evaluation.project(currentLayout)).regions;
-    const contexts = allocateContextProxies({ catalog, allocation, source: preview.source });
+    const catalogRegions = evaluation.geometry(evaluation.project(this.#currentLayout)).regions;
+    const boundaries = this.#getPreviewBoundaries(catalogRegions, placedRegions, preview.source);
     const bounds = evaluation.bounds();
     const hint = this.#rearrange.getPreviewHint(preview, evaluation);
     const { rect, kind } = preview.cue;
     const destination = { ...rect, x: rect.x - x, y: rect.y - y };
     const point = preview.point;
     return html`
-      ${this.#renderPlacementHint(hint, x, y)}${repeat(
-        contexts,
-        context => context.key,
-        context => html`
-          <div
-            class="context-boundary"
-            data-context-boundary=${context.key}
-            ?data-active=${preview.context && context.key === getContextKey(preview.context.members)}
-            inert aria-hidden="true"
-            style=${`left:${context.rect.x}px;top:${context.rect.y}px;width:${context.rect.width}px;height:${context.rect.height}px;${getRegionCornerStyle(context.rect, allocation)}`}></div>
-        `
-      )}
-      <nve-ghost
-        class="destination" part="ghost destination-ghost" data-destination-ghost
+      ${this.#renderPlacementHint(hint, x, y)}${this.#renderPreviewBoundaries(boundaries, preview)}
+      <nve-ghost class="destination" part="ghost destination-ghost" data-destination-ghost
         ?data-cue-clipped=${rect.width <= 0 || rect.height <= 0}
         data-drag-phase=${preview.phase}
         ?data-drop-blocked=${preview.blocked}
         data-destination-kind=${kind}
         ?data-reserved-placement=${shouldEmphasizeReservedDestination(preview)}
-        style=${`transform:translate(${rect.x - x}px,${rect.y - y}px);width:${rect.width}px;height:${rect.height}px;${getRegionCornerStyle(destination, allocation)}`}>
+        style=${`transform:translate(${rect.x - x}px,${rect.y - y}px);width:${rect.width}px;height:${rect.height}px;${getRegionCornerStyle(destination, placedRegions)}`}>
         ${
           preview.blocked
             ? html`
@@ -715,9 +719,8 @@ export class Workspace extends LitElement {
     if (!hint) return null;
 
     return html`
-      <div
-        class="order-overlay"
-        data-order-slot=${hint.scope.index}
+      <div class="order-overlay"
+        data-insertion-index=${hint.insertion.index}
         data-placement-hint=${hint.kind}
         inert aria-hidden="true"
         style=${`left:${hint.rect.x - x}px;top:${hint.rect.y - y}px;width:${hint.rect.width}px;height:${hint.rect.height}px`}></div>
@@ -737,8 +740,7 @@ export class Workspace extends LitElement {
           : `left:${edge.fraction * 100}%;top:${normal}`;
         const rotation = { right: 0, bottom: 90, left: 180, top: 270 }[edge.side];
         return html`
-          <div
-            class="seam-badge"
+          <div class="seam-badge"
             data-seam-badge=${kind}
             data-seam-side=${edge.side}
             inert aria-hidden="true"
@@ -784,11 +786,9 @@ export class Workspace extends LitElement {
     const fullscreen = (this.#resize.presentation?.fullscreenable ?? this.fullscreenable) || fullscreenSelected;
     const actionWidth = fullscreen ? (measurements.groupActionWidth ?? 0) : 0;
     return html`
-      <div
-        class="group-chrome"
+      <div class="group-chrome"
         style=${`left:${group.rect.x}px;top:${group.rect.y}px;width:${group.rect.width}px;height:${group.rect.height}px`}>
-        <div
-          class="tabs"
+        <div class="tabs"
           ?data-carried-reservation=${carried}
           ?inert=${carried}
           aria-hidden=${ifDefined(carried ? 'true' : undefined)}
@@ -806,8 +806,7 @@ export class Workspace extends LitElement {
       !this.#fullscreen.active;
     return rearrangeable && group.gripWidth > 0
       ? html`
-          <nve-drag-handle
-            part="drag-handle"
+          <nve-drag-handle part="drag-handle"
             data-drag-group=${group.panels[0]?.id ?? ''}
             draggable="false"
             aria-label=${ifDefined(this.i18n.move)}
@@ -820,8 +819,7 @@ export class Workspace extends LitElement {
     const width = getAllocatedTabWidth(group, this.#measurements);
     const suffixWidth = this.#measurements.panels?.[group.active]?.suffixWidth ?? 0;
     return html`
-      <div
-        class="tablist"
+      <div class="tablist"
         ?data-scrollable=${group.panels.length > 1}
         style=${`width:${Math.max(0, group.rect.width - group.gripWidth - suffixWidth - actionWidth)}px;margin-right:${suffixWidth}px`}
         data-group=${this.#composition.getGroupIdentity(group)}
@@ -839,8 +837,7 @@ export class Workspace extends LitElement {
     );
     return group.tabbed
       ? html`
-          <nve-tabs
-            part="tabs" class="tab-track"
+          <nve-tabs part="tabs" class="tab-track"
             @nve-key-change=${(event: CustomEvent<{ activeItem: HTMLElement }>) => {
               const id = event.detail.activeItem.dataset.panel;
               if (id) {
@@ -872,19 +869,17 @@ export class Workspace extends LitElement {
             slot=${ifDefined(group.tabbed ? 'suffix' : undefined)}
             part="icon-button close-button" icon-name="cancel" container="flat" size="sm"
             data-close=${panel.id}
-            aria-label=${`${this.i18n.close} ${getPanelLabel(this.#panels, panel.id)}`}
+            aria-label=${`${this.i18n.close} ${getPanelLabel(panel)}`}
             @click=${() => this.#close(panel.id)}></nve-icon-button>
         `
       : null;
     return group.tabbed
       ? html`
-          <nve-tabs-item-group
-            part="tabs-item-group" class="tab-entry"
+          <nve-tabs-item-group part="tabs-item-group" class="tab-entry"
             ?data-carried-tab=${carried} ?inert=${carried}
             aria-hidden=${ifDefined(carried ? 'true' : undefined)}
             style=${style}>
-            <nve-tabs-item
-              part="tabs-item tab"
+            <nve-tabs-item part="tabs-item tab"
               data-panel=${panel.id}
               ?selected=${group.active === panel.id}
               aria-label=${panel.id}
@@ -895,8 +890,7 @@ export class Workspace extends LitElement {
           </nve-tabs-item-group>
         `
       : html`
-          <div
-            class="tab-entry panel-entry"
+          <div class="tab-entry panel-entry"
             ?data-carried-tab=${carried} ?inert=${carried}
             aria-hidden=${ifDefined(carried ? 'true' : undefined)}
             style=${style}>
@@ -911,8 +905,7 @@ export class Workspace extends LitElement {
     const disabled = !this.isCommandAvailable('--toggle-fullscreen', { value: group.active });
     return html`
       <div class="group-actions" ?data-authored-suffix=${suffixWidth > 0}>
-        <nve-icon-button
-          part="icon-button fullscreen-button"
+        <nve-icon-button part="icon-button fullscreen-button"
           icon-name=${selected ? 'minimize' : 'maximize'}
           container="flat" size="sm" command="--toggle-fullscreen"
           .commandForElement=${group.panels.find(panel => panel.id === group.active) ?? null}
@@ -934,8 +927,7 @@ export class Workspace extends LitElement {
 
   #renderHandle(item: WorkspaceBoundary) {
     return html`
-      <div
-        class="gutter"
+      <div class="gutter"
         style=${`left:${item.rect.x}px;top:${item.rect.y}px;width:${item.rect.width}px;height:${item.rect.height}px`}>
         <nve-resize-handle
           data-boundary=${item.key}

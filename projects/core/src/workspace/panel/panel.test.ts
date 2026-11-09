@@ -90,11 +90,34 @@ describe(WorkspacePanel.metadata.tag, () => {
     expect(() => element._configure(configuration)).not.toThrow();
   });
 
-  it('should toggle the presentation state', () => {
-    element._present(true);
-    expect(element._internals.states.has('workspace-presented')).toBe(true);
+  it('mutates presentation membership only when the current native state needs changing', () => {
+    const panel = element;
+    const states = panel._internals.states;
+    const add = vi.spyOn(states, 'add');
+    const remove = vi.spyOn(states, 'delete');
 
-    element._present(false);
-    expect(element._internals.states.has('workspace-presented')).toBe(false);
+    panel._present(false);
+    panel._present(true);
+    panel._present(true);
+    expect(states.has('workspace-presented')).toBe(true);
+    expect(add).toHaveBeenCalledExactlyOnceWith('workspace-presented');
+    expect(remove).not.toHaveBeenCalled();
+
+    panel._present(false);
+    panel._present(false);
+    expect(states.has('workspace-presented')).toBe(false);
+    expect(remove).toHaveBeenCalledExactlyOnceWith('workspace-presented');
+  });
+  it('corrects native presentation membership changed outside the component', () => {
+    const panel = element;
+    panel._present(true);
+    panel._internals.states.delete('workspace-presented');
+    panel._present(true);
+    expect(panel._internals.states.has('workspace-presented')).toBe(true);
+
+    panel._present(false);
+    panel._internals.states.add('workspace-presented');
+    panel._present(false);
+    expect(panel._internals.states.has('workspace-presented')).toBe(false);
   });
 });

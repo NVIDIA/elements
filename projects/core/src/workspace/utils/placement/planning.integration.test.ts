@@ -90,9 +90,9 @@ describe('workspace structural plan consumers', () => {
     Object.freeze(root);
     Object.freeze(base.layout.closed);
     Object.freeze(base.layout);
-    if (base.context) {
-      Object.freeze(base.context.members);
-      Object.freeze(base.context);
+    if (base.scope) {
+      Object.freeze(base.scope.members);
+      Object.freeze(base.scope);
     }
     Object.freeze(base);
     const requirements = {

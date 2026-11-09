@@ -273,7 +273,7 @@ nve-resize-handle:hover:not(:state(active))::part(_line) {
   --border: var(--nve-ref-border-width-sm) solid var(--nve-sys-accent-secondary-background);
 }
 
-.context-boundary {
+.scope-boundary {
   position: absolute;
   box-sizing: border-box;
   pointer-events: none;
@@ -282,7 +282,7 @@ nve-resize-handle:hover:not(:state(active))::part(_line) {
   z-index: 4;
 }
 
-.context-boundary[data-active] {
+.scope-boundary[data-active] {
   opacity: 1;
 }
 
@@ -317,7 +317,7 @@ nve-resize-handle:hover:not(:state(active))::part(_line) {
   pointer-events: none;
 }
 
-[internal-host][data-rearranging] .context-boundary,
+[internal-host][data-rearranging] .scope-boundary,
 [internal-host][data-rearranging] .group-chrome,
 [internal-host][data-rearranging] ::slotted(nve-workspace-panel) {
   transition:

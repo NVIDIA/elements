@@ -70,9 +70,9 @@ describe('workspace composition', () => {
         </nve-workspace-panel-header>
       </nve-workspace-panel>
     `;
-    const panels = [...host.querySelectorAll<WorkspacePanel>('nve-workspace-panel')];
+    const panel = host.querySelector<WorkspacePanel>('#editor')!;
 
-    expect(getPanelLabel(panels, 'editor')).toBe('Editor notes');
+    expect(getPanelLabel(panel)).toBe('Editor notes');
   });
 
   it('falls back to the panel ID when an authored title is unavailable', () => {
@@ -82,12 +82,40 @@ describe('workspace composition', () => {
         <nve-workspace-panel-header> </nve-workspace-panel-header>
       </nve-workspace-panel>
       <nve-workspace-panel id="unlabeled"></nve-workspace-panel>
+      <nve-workspace-panel id="comment-only">
+        <nve-workspace-panel-header><!-- Template marker --></nve-workspace-panel-header>
+      </nve-workspace-panel>
     `;
-    const panels = [...host.querySelectorAll<WorkspacePanel>('nve-workspace-panel')];
+    expect(getPanelLabel(host.querySelector<WorkspacePanel>('#empty')!)).toBe('empty');
+    expect(getPanelLabel(host.querySelector<WorkspacePanel>('#unlabeled')!)).toBe('unlabeled');
+    expect(getPanelLabel(host.querySelector<WorkspacePanel>('#comment-only')!)).toBe('comment-only');
+  });
 
-    expect(getPanelLabel(panels, 'empty')).toBe('empty');
-    expect(getPanelLabel(panels, 'unlabeled')).toBe('unlabeled');
-    expect(getPanelLabel(panels, 'missing')).toBe('missing');
+  it('preserves empty title separators while excluding comments and directly slotted controls', () => {
+    const panel = document.createElement('nve-workspace-panel');
+    panel.innerHTML = '<nve-workspace-panel-header></nve-workspace-panel-header>';
+    const header = panel.firstElementChild!;
+    const title = document.createElement('span');
+    title.innerHTML = 'Beta<span slot="suffix"> nested</span>';
+    const control = document.createElement('button');
+    control.slot = '';
+    control.textContent = 'Actions';
+    header.append('Alpha', document.createTextNode(''), document.createComment('note'), control, title);
+
+    expect(getPanelLabel(panel)).toBe('Alpha  Beta nested');
+  });
+
+  it('reads current authored title content and falls back after header removal', () => {
+    const panel = document.createElement('nve-workspace-panel');
+    panel.id = 'editor';
+    panel.innerHTML = '<nve-workspace-panel-header>Editor</nve-workspace-panel-header>';
+    const header = panel.firstElementChild!;
+
+    expect(getPanelLabel(panel)).toBe('Editor');
+    header.textContent = 'Notes';
+    expect(getPanelLabel(panel)).toBe('Notes');
+    header.remove();
+    expect(getPanelLabel(panel)).toBe('editor');
   });
 
   it.each(['nve-workspace-panel-header', 'nve-workspace-panel-footer'])(
@@ -140,7 +168,7 @@ describe('workspace composition', () => {
 
   it('excludes application content and nested workspace header mutations', () => {
     const host = document.createElement('div');
-    // This tests selector relationships in a disconnected tree; custom elements are constructed but never connected or rendered.
+    // The disconnected tree tests selector relationships without connecting or rendering custom elements.
     host.innerHTML = `
       <nve-workspace-panel>
         <div>Application content</div>

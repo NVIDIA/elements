@@ -427,6 +427,57 @@ describe('workspace tab overflow and scrolling', () => {
     expect(track.getAnimations()).toHaveLength(0);
   });
 
+  it('keeps header scrolling current when native overflow changes during detached dragging', async () => {
+    const workspace = await setup();
+    workspace.groupable = true;
+    workspace.rearrangeable = true;
+    await elementIsStable(workspace);
+    vi.spyOn(workspace, 'setPointerCapture').mockImplementation(() => {});
+    const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="b"]')!;
+    const rect = tab.getBoundingClientRect();
+    const pointer = (type: string, x: number, y: number) =>
+      new PointerEvent(type, {
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+        pointerId: 1,
+        pointerType: 'mouse',
+        isPrimary: true,
+        button: 0,
+        buttons: type === 'pointerup' ? 0 : 1,
+        clientX: x,
+        clientY: y
+      });
+    tab.dispatchEvent(pointer('pointerdown', rect.x + rect.width / 2, rect.y + rect.height / 2));
+    const bounds = workspace.getBoundingClientRect();
+    workspace.dispatchEvent(pointer('pointermove', bounds.x + 100, bounds.y + 150));
+    const phase = () =>
+      workspace.shadowRoot!.querySelector('[data-destination-ghost]')?.getAttribute('data-drag-phase');
+    await vi.waitFor(() => expect(phase()).toBe('detached'));
+    const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
+    const label = header.shadowRoot!.querySelector<HTMLElement>('.label')!;
+    const style = document.createElement('style');
+    style.textContent = 'nve-workspace::part(tabs) { min-width: 1400px; }';
+    fixture.append(style);
+    workspace.dispatchEvent(pointer('pointermove', bounds.x + 101, bounds.y + 150));
+    await elementIsStable(workspace);
+    const strip = workspace.shadowRoot!.querySelector<HTMLElement>('.tablist')!;
+    await vi.waitFor(() => expect(strip.scrollWidth).toBeGreaterThan(strip.clientWidth));
+    const beforeScroll = { labelX: label.getBoundingClientRect().x, offset: strip.scrollLeft };
+    strip.scrollLeft = strip.scrollWidth;
+    await vi.waitFor(() => {
+      expect(strip.scrollLeft).toBeGreaterThan(0);
+      expect(beforeScroll.labelX - label.getBoundingClientRect().x).toBeCloseTo(
+        strip.scrollLeft - beforeScroll.offset,
+        1
+      );
+    });
+    expect(phase()).toBe('detached');
+    workspace.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+    workspace.dispatchEvent(pointer('pointerup', bounds.x + 101, bounds.y + 150));
+    await vi.waitFor(() => expect(phase()).toBeUndefined());
+  });
+
   it('reveals keyboard selection in the native strip after allocating the selected header', async () => {
     const workspace = await setup();
     workspace.closable = true;
@@ -736,7 +787,7 @@ describe('workspace reserved tab presentation', () => {
     expect(workspace.value).toBe(saved);
   });
 
-  it('holds the accepted slot across refresh and small real pointer movements, then silently returns an inactive tab', async () => {
+  it('holds the accepted insertion position across refresh and small real pointer movements, then silently returns an inactive tab', async () => {
     const workspace = await setup();
     const saved = workspace.value,
       change = vi.fn();
@@ -759,8 +810,8 @@ describe('workspace reserved tab presentation', () => {
       expect(entry(workspace, 'a').getAnimations()).toHaveLength(0);
       expect(entry(workspace, 'companion').getAnimations()).toHaveLength(0);
     });
-    const slot = entry(workspace, 'companion').getBoundingClientRect();
-    expect(slot.left).toBeCloseTo(entry(workspace, 'a').getBoundingClientRect().right, 1);
+    const reservationRect = entry(workspace, 'companion').getBoundingClientRect();
+    expect(reservationRect.left).toBeCloseTo(entry(workspace, 'a').getBoundingClientRect().right, 1);
     const destination = entry(workspace, 'companion').getAttribute('style');
     const strip = button(workspace, 'a').closest('.tablist')!;
     strip.dispatchEvent(new Event('scroll'));
@@ -768,12 +819,18 @@ describe('workspace reserved tab presentation', () => {
     await elementIsStable(workspace);
     expect(entry(workspace, 'companion').getAttribute('style')).toBe(destination);
     for (const dx of [-1, 1]) {
-      move(workspace, 'pointermove', { x: slot.x + slot.width / 2 + dx, y: slot.y + slot.height / 2 });
+      move(workspace, 'pointermove', {
+        x: reservationRect.x + reservationRect.width / 2 + dx,
+        y: reservationRect.y + reservationRect.height / 2
+      });
       await nextFrame();
       await elementIsStable(workspace);
       expect(entry(workspace, 'companion').getAttribute('style')).toBe(destination);
     }
-    move(workspace, 'pointerup', { x: slot.x + slot.width / 2, y: slot.y + slot.height / 2 });
+    move(workspace, 'pointerup', {
+      x: reservationRect.x + reservationRect.width / 2,
+      y: reservationRect.y + reservationRect.height / 2
+    });
     await elementIsStable(workspace);
     expect(workspace.value).toBe(saved);
     expect(change).not.toHaveBeenCalled();

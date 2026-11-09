@@ -2,24 +2,28 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { normalizeLayout } from '../model/layout.utils.js';
-import { findGroup, isValidInsertionIndex, placePanels, projectLayout } from '../model/operations.utils.js';
 import {
-  findDeepestProjectionCarrier,
-  getProjectionSignature,
-  rebaseProjectedSplit
-} from '../model/projection.utils.js';
-import { createPlacementContext } from './context.utils.js';
+  findGroup,
+  isValidInsertionIndex,
+  placePanels,
+  projectLayout,
+  sameDestination
+} from '../model/operations.utils.js';
+import { findDeepestProjectionCarrier, rebaseProjectedSplit, sameProjectionShape } from '../model/projection.utils.js';
 import { planGroupInsertion } from './group-insertion.utils.js';
 import { findWorkspaceRegion, placeRegion } from './region.utils.js';
+import { createPlacementScope } from './scope.utils.js';
+import { sameArrayItems } from '../comparison.utils.js';
 
 import type { WorkspaceLayout, WorkspaceNode, WorkspaceSplit } from '../model/layout.utils.js';
 import type { WorkspaceDestination } from '../model/operations.utils.js';
 import type { WorkspaceLayoutProjector } from '../model/projection.utils.js';
-import type { WorkspacePlacementContext } from './context.utils.js';
+import type { WorkspacePlacementScope } from './scope.utils.js';
+import type { WorkspacePlacementSession } from './session.utils.js';
 
 export interface WorkspacePlacementPlan {
   kind: 'reorder' | 'split' | 'tab' | 'insert';
-  context?: WorkspacePlacementContext;
+  scope?: WorkspacePlacementScope;
   layout: WorkspaceLayout;
 }
 
@@ -70,6 +74,33 @@ export function createWorkspacePlacementPlanner(): WorkspacePlacementPlanner {
   };
 }
 
+interface WorkspacePlanningContext {
+  currentLayout: WorkspaceLayout;
+  source: string[];
+  available: string[];
+  projectLayout?: WorkspaceLayoutProjector;
+  planPlacement?: WorkspacePlacementPlanner;
+  placementSession?: WorkspacePlacementSession;
+}
+
+/** Supplied planners keep their ordinary path; component gestures use their explicit session. */
+export function resolvePlacementPlan(
+  context: WorkspacePlanningContext,
+  destination: WorkspaceDestination,
+  operation: PlacementInput['operation']
+): WorkspacePlacementPlan | undefined {
+  const input = {
+    layout: context.currentLayout,
+    source: context.source,
+    destination,
+    available: context.available,
+    projectLayout: context.projectLayout,
+    operation
+  };
+  if (context.planPlacement) return context.planPlacement(input);
+  return context.placementSession ? context.placementSession.plan(input) : planWorkspacePlacement(input);
+}
+
 export function planWorkspacePlacement(input: PlacementInput): WorkspacePlacementPlan | undefined {
   return planBasePlacement(input);
 }
@@ -77,21 +108,8 @@ export function planWorkspacePlacement(input: PlacementInput): WorkspacePlacemen
 function samePlanningBinding(binding: PlanningBinding, input: PlacementInput) {
   return (
     binding.layout === input.layout &&
-    sameIds(binding.source, input.source) &&
-    sameIds(binding.available, input.available)
-  );
-}
-
-function sameIds(left: string[], right: string[]) {
-  return left.length === right.length && left.every((id, index) => id === right[index]);
-}
-
-function sameDestination(left: WorkspaceDestination, right: WorkspaceDestination) {
-  return (
-    left.target === right.target &&
-    left.position === right.position &&
-    left.region === right.region &&
-    left.index === right.index
+    sameArrayItems(binding.source, input.source) &&
+    sameArrayItems(binding.available, input.available)
   );
 }
 
@@ -172,12 +190,10 @@ function permuteCarriers(input: {
     }
     return projections.get(node) ?? null;
   };
-  const carriers = children.map(child =>
-    findDeepestProjectionCarrier(layout.root, getProjectionSignature(child), project)
-  );
+  const carriers = children.map(child => findDeepestProjectionCarrier(layout.root, child, project));
   if (carriers.some(carrier => !carrier)) return undefined;
   const replacements = new Map<WorkspaceNode, WorkspaceNode>();
-  carriers.forEach((slot, index) => replacements.set(slot!, carriers[children.indexOf(reordered[index]!)]!));
+  carriers.forEach((carrier, index) => replacements.set(carrier!, carriers[children.indexOf(reordered[index]!)]!));
   const root = normalizeLayout(replaceCarriers(layout.root!, replacements));
   return root ? { ...layout, root } : undefined;
 }
@@ -228,12 +244,12 @@ function reorderedEntries(input: {
   const entries = branch.children.map((child, index) => ({ child, weight: branch.weights[index]! }));
   const moving = entries.splice(from, 1)[0]!;
   const after = destination.position === 'right' || destination.position === 'bottom';
-  const target = entries.findIndex(entry => getProjectionSignature(entry.child) === getProjectionSignature(targetNode));
+  const target = entries.findIndex(entry => sameProjectionShape(entry.child, targetNode));
   let index: number;
   if (targetNode === branch) {
     index = after ? entries.length : 0;
   } else {
-    if (target < 0) return branch.children.map((child, slot) => ({ child, weight: branch.weights[slot]! }));
+    if (target < 0) return branch.children.map((child, childIndex) => ({ child, weight: branch.weights[childIndex]! }));
     const offset = after ? 1 : 0;
     index = target + offset;
   }
@@ -249,8 +265,7 @@ function matchesPeers(
     node.axis === input.axis &&
     node.children.length > 1 &&
     node.children.some(child => child.type === 'group' && child.panels.includes(input.source ?? '')) &&
-    (getProjectionSignature(node) === getProjectionSignature(input.target) ||
-      node.children.some(child => getProjectionSignature(child) === getProjectionSignature(input.target)))
+    (sameProjectionShape(node, input.target) || node.children.some(child => sameProjectionShape(child, input.target)))
   );
 }
 
@@ -267,13 +282,13 @@ function localPlacement(input: PlacementInput): WorkspacePlacementPlan | undefin
     (input.projectLayout ?? projectLayout)(input.layout, input.available).root,
     input.destination.target
   );
-  return { ...plan, context: createPlacementContext('recipient', recipient ?? null, input.source) };
+  return { ...plan, scope: createPlacementScope('recipient', recipient ?? null, input.source) };
 }
 
 function peerPlacement(layout: WorkspaceLayout, input: PlacementInput, branch: WorkspaceSplit): WorkspacePlacementPlan {
   return {
     kind: 'reorder',
     layout,
-    context: createPlacementContext('rail', branch, input.source)
+    scope: createPlacementScope('rail', branch, input.source)
   };
 }

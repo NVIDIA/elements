@@ -6,6 +6,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
+import { WorkspaceCompositionController } from './controllers/workspace-composition.controller.js';
+
 import type { WorkspacePanelHeader } from './panel-header/panel-header.js';
 import type { WorkspacePanel } from './panel/panel.js';
 import type { Workspace } from './workspace.js';
@@ -46,6 +48,31 @@ describe('workspace panel composition', () => {
     await elementIsStable(workspace);
     return workspace;
   }
+
+  it('observes content after controller connection and stops before controller disconnection', async () => {
+    const order: string[] = [];
+    const start = WorkspaceCompositionController.prototype.startObserving;
+    const stop = WorkspaceCompositionController.prototype.stopObserving;
+    vi.spyOn(WorkspaceCompositionController.prototype, 'startObserving').mockImplementation(function () {
+      order.push('observe');
+      start.call(this);
+    });
+    vi.spyOn(WorkspaceCompositionController.prototype, 'stopObserving').mockImplementation(function () {
+      order.push('stop');
+      stop.call(this);
+    });
+    const workspace = await setup();
+    workspace.addController({
+      hostConnected: () => order.push('connect'),
+      hostDisconnected: () => order.push('disconnect')
+    });
+    // Lit connects controllers added to an already connected host immediately.
+    order.length = 0;
+    workspace.remove();
+    fixture.append(workspace);
+    await elementIsStable(workspace);
+    expect(order).toEqual(['stop', 'disconnect', 'connect', 'observe']);
+  });
 
   describe('group framing', () => {
     it('frames the complete selected group and clips chrome against the same configurable radius', async () => {

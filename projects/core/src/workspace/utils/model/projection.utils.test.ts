@@ -7,8 +7,8 @@ import { projectLayout } from './operations.utils.js';
 import {
   createWorkspaceLayoutProjector,
   findDeepestProjectionCarrier,
-  getProjectionSignature,
-  rebaseProjectedSplit
+  rebaseProjectedSplit,
+  sameProjectionShape
 } from './projection.utils.js';
 import { parseWorkspaceValue } from './value.utils.js';
 
@@ -77,14 +77,17 @@ describe('workspace projection', () => {
 describe('workspace projection identity', () => {
   it('distinguishes topology and panel order while ignoring weights and active selection', () => {
     const root = split('horizontal', [1, 2], group('a', 'b'), group('c'));
-    const signature = getProjectionSignature(root);
-    expect(getProjectionSignature(split('horizontal', [3, 1], { ...group('a', 'b'), active: 'b' }, group('c')))).toBe(
-      signature
-    );
-    expect(getProjectionSignature(split('vertical', [1, 2], group('a', 'b'), group('c')))).not.toBe(signature);
-    expect(getProjectionSignature(split('horizontal', [1, 2], group('b', 'a'), group('c')))).not.toBe(signature);
-    expect(getProjectionSignature(group('a', 'b', 'c'))).not.toBe(signature);
-    expect(getProjectionSignature(null)).not.toBe(signature);
+    expect(
+      sameProjectionShape(root, split('horizontal', [3, 1], { ...group('a', 'b'), active: 'b' }, group('c')))
+    ).toBe(true);
+    expect(sameProjectionShape(root, split('vertical', [1, 2], group('a', 'b'), group('c')))).toBe(false);
+    expect(sameProjectionShape(root, split('horizontal', [1, 2], group('b', 'a'), group('c')))).toBe(false);
+    expect(sameProjectionShape(root, split('horizontal', [1, 2], group('c'), group('a', 'b')))).toBe(false);
+    expect(sameProjectionShape(root, group('a', 'b', 'c'))).toBe(false);
+    expect(sameProjectionShape(root, null)).toBe(false);
+    expect(sameProjectionShape(null, root)).toBe(false);
+    expect(sameProjectionShape(null, null)).toBe(true);
+    expect(sameProjectionShape(root, root)).toBe(true);
   });
 
   it('selects the deepest saved carrier when unavailable siblings collapse enclosing scopes', () => {
@@ -93,9 +96,9 @@ describe('workspace projection identity', () => {
     const root = split('horizontal', [1, 1], inner, group('also-missing'));
     const project = (node: WorkspaceNode) => projectLayout(createLayout(node), ['a', 'b']).root;
 
-    expect(findDeepestProjectionCarrier(root, getProjectionSignature(leaf), project)).toBe(leaf);
-    expect(findDeepestProjectionCarrier(root, getProjectionSignature(group('unknown')), project)).toBeUndefined();
-    expect(findDeepestProjectionCarrier(null, getProjectionSignature(leaf), project)).toBeUndefined();
+    expect(findDeepestProjectionCarrier(root, leaf, project)).toBe(leaf);
+    expect(findDeepestProjectionCarrier(root, group('unknown'), project)).toBeUndefined();
+    expect(findDeepestProjectionCarrier(null, leaf, project)).toBeUndefined();
   });
 });
 
@@ -192,6 +195,29 @@ describe('workspace resize projection', () => {
     expect(result?.root).toEqual(split('horizontal', [0.8, 0.2], group('a'), nested));
     if (result?.root?.type !== 'split') throw new Error('Expected a saved split');
     expect(result.root.children[1]).toBe(nested);
+  });
+
+  it('preserves every saved child while resizing a wide split with unavailable leading tabs', () => {
+    const children = Array.from({ length: 18 }, (_, index) =>
+      split('vertical', [0.4, 0.6], group(`missing-${index}`, `a-${index}`), group(`b-${index}`))
+    );
+    const saved = createLayout(
+      split(
+        'horizontal',
+        children.map(() => 1 / children.length),
+        ...children
+      )
+    );
+    const available = children.flatMap((_, index) => [`a-${index}`, `b-${index}`]);
+    const sizes = children.map((_, index) => index + 1);
+    const total = sizes.reduce((sum, size) => sum + size, 0);
+    const result = rebaseProjectedSplit(saved, projectedSplit(saved, available), sizes, available);
+    if (result?.root?.type !== 'split') throw new Error('Expected a rebased split');
+    for (const [index, child] of result.root.children.entries()) {
+      expect(child).toBe(children[index]);
+      expect(result.root.weights[index]).toBeCloseTo(sizes[index]! / total, 10);
+    }
+    expect(saved.root?.type === 'split' && saved.root.weights).toEqual(children.map(() => 1 / children.length));
   });
 
   it('matches a nested branch using panel identities instead of its rendered path', () => {

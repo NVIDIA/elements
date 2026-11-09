@@ -44,6 +44,6 @@
 
 {% example '@nvidia-elements/core/workspace/workspace.examples.json' 'Container' %}
 
-## Custom Headers
+## Compact Styling
 
-{% example '@nvidia-elements/core/workspace/workspace.examples.json' 'CustomHeaders' %}
+{% example '@nvidia-elements/core/workspace/workspace.examples.json' 'CompactStyling' %}
