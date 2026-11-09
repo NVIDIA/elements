@@ -9,6 +9,12 @@ export default [
   ...litConfig,
   ...jsonConfig,
   {
+    files: ['src/codeblock/languages/**/*.ts'],
+    rules: {
+      'local-typescript/require-unit-test': 'off'
+    }
+  },
+  {
     files: ['src/bundle.ts'],
     rules: {
       'local/no-missing-bundle-registration': ['error']

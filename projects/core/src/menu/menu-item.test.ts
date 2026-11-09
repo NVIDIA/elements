@@ -13,7 +13,9 @@ describe(MenuItem.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-menu-item>item 1</nve-menu-item>
+      <nve-menu>
+        <nve-menu-item>item 1</nve-menu-item>
+      </nve-menu>
     `);
     element = fixture.querySelector(MenuItem.metadata.tag);
     await elementIsStable(element);

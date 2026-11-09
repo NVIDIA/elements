@@ -5,6 +5,12 @@ export default [
   ...nodeTypescriptConfig,
   ...jsonConfig,
   {
+    files: ['src/**/*.ts', 'src/**/*.tsx'],
+    rules: {
+      'local-typescript/require-unit-test': 'off'
+    }
+  },
+  {
     files: ['src/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.test.*.ts', '**/*.examples.ts'],
     rules: {
