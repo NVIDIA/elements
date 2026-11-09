@@ -125,7 +125,7 @@ catalog:
   markdown-it: 15.0.3
   markdown-it-link-attributes: 4.0.1
   minisearch: 7.2.0
-  playwright: 1.64.1
+  playwright: 1.65.0
   postcss: 8.5.32
   publint: 0.3.25
   react: 19.3.1
