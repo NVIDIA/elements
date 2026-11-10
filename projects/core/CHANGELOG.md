@@ -1,3 +1,9 @@
+## [2.23.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.5...@nvidia-elements/core-v2.23.6) (2026-11-10)
+
+### Bug Fixes
+
+* **core:** improve workspace performance ([3a580b8](https://github.com/NVIDIA/elements/commit/3a580b889927a3df365f149b19a4de07bd69bc10))
+
 ## [2.23.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.4...@nvidia-elements/core-v2.23.5) (2026-11-10)
 
 ### Bug Fixes
