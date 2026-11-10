@@ -1,3 +1,9 @@
+## [2.23.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.3...@nvidia-elements/core-v2.23.4) (2026-11-10)
+
+### Bug Fixes
+
+* **core:** size overlays with the dynamic viewport ([3458d95](https://github.com/NVIDIA/elements/commit/3458d9566cbf6740ced6cdf9650296e0cadfe336))
+
 ## [2.23.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.2...@nvidia-elements/core-v2.23.3) (2026-11-09)
 
 ### Bug Fixes
