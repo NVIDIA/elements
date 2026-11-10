@@ -11,8 +11,7 @@ import {
   type GestureInput,
   type PointerDownInput,
   type WheelGestureInput,
-  type SpatialKeyCommand,
-  type SpatialKeyHandling
+  type SpatialKeyCommand
 } from '@nvidia-elements/core/internal';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import { resolveCameraState, type CameraContribution, type CameraField } from './state.js';
@@ -502,7 +501,7 @@ export class CameraController implements ReactiveController {
     if (this.#handleSpatialKey(event.detail) === 'handled') event.detail.event.preventDefault();
   };
 
-  #handleSpatialKey(command: SpatialKeyCommand): SpatialKeyHandling {
+  #handleSpatialKey(command: SpatialKeyCommand): 'handled' | 'ignored' {
     this.resolve();
     const top = this.#getInteractiveTop();
     const orbit = this.#getInteractiveOrbit();
