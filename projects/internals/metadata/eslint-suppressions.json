@@ -1,7 +1,1 @@
-{
-  "src/tasks/tests.utils.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  }
-}
+{}

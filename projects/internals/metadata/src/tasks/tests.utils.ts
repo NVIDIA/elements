@@ -47,7 +47,7 @@ export function normalizeTestResults<T extends Record<string, unknown>>(testResu
             normalizedMeta.failScreenshotPath = normalizePath(meta.failScreenshotPath);
           }
 
-          normalizedAssertion.meta = normalizedMeta as Record<string, string>;
+          normalizedAssertion.meta = normalizedMeta;
         }
 
         return normalizedAssertion;
