@@ -1,3 +1,13 @@
+## [2.23.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.4...@nvidia-elements/core-v2.23.5) (2026-11-10)
+
+### Bug Fixes
+
+* **core:** refactor to use foundations internals ([6405764](https://github.com/NVIDIA/elements/commit/6405764abcd16224406fdc57a811cd745ec54971))
+* **foundations:** add shared decorator ([fa642a4](https://github.com/NVIDIA/elements/commit/fa642a4c81c7e0ec2f00d646452bcd7d595b1e34))
+* **markdown:** update to use foundations internals ([33f1490](https://github.com/NVIDIA/elements/commit/33f149046c791aad70e35b439869fd4d05efe6ed))
+* **media:** update to use foundations internals ([24d2296](https://github.com/NVIDIA/elements/commit/24d2296596c18955cfe8723f0e1c67ccc53cbfeb))
+* **viewport:** update to use foundations internals ([a5510ec](https://github.com/NVIDIA/elements/commit/a5510ec63d0933d0d8b245c6160e0b3bf2e1f1bc))
+
 ## [2.23.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.3...@nvidia-elements/core-v2.23.4) (2026-11-10)
 
 ### Bug Fixes
