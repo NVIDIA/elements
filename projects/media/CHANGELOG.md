@@ -1,3 +1,15 @@
+## [1.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.3...@nvidia-elements/media-v1.2.4) (2026-11-10)
+
+### Bug Fixes
+
+* **core:** drop obsolete scoped registry polyfill ([520e03b](https://github.com/NVIDIA/elements/commit/520e03b0244592f100edcfedc45ea2871d1cecc5))
+* **core:** refactor to use foundations internals ([6405764](https://github.com/NVIDIA/elements/commit/6405764abcd16224406fdc57a811cd745ec54971))
+* **core:** size overlays with the dynamic viewport ([3458d95](https://github.com/NVIDIA/elements/commit/3458d9566cbf6740ced6cdf9650296e0cadfe336))
+* **foundations:** add shared decorator ([fa642a4](https://github.com/NVIDIA/elements/commit/fa642a4c81c7e0ec2f00d646452bcd7d595b1e34))
+* **markdown:** update to use foundations internals ([33f1490](https://github.com/NVIDIA/elements/commit/33f149046c791aad70e35b439869fd4d05efe6ed))
+* **media:** update to use foundations internals ([24d2296](https://github.com/NVIDIA/elements/commit/24d2296596c18955cfe8723f0e1c67ccc53cbfeb))
+* **viewport:** update to use foundations internals ([a5510ec](https://github.com/NVIDIA/elements/commit/a5510ec63d0933d0d8b245c6160e0b3bf2e1f1bc))
+
 ## [1.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/media-v1.2.2...@nvidia-elements/media-v1.2.3) (2026-11-09)
 
 ### Features
