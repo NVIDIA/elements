@@ -261,6 +261,18 @@
       "types": "./dist/copy-button/define.d.ts",
       "default": "./dist/copy-button/define.js"
     },
+    "./dashboard": {
+      "types": "./dist/dashboard/index.d.ts",
+      "default": "./dist/dashboard/index.js"
+    },
+    "./dashboard/index.js": {
+      "types": "./dist/dashboard/index.d.ts",
+      "default": "./dist/dashboard/index.js"
+    },
+    "./dashboard/define.js": {
+      "types": "./dist/dashboard/define.d.ts",
+      "default": "./dist/dashboard/define.js"
+    },
     "./date": {
       "types": "./dist/date/index.d.ts",
       "default": "./dist/date/index.js"

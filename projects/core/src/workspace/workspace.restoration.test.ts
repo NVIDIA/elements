@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -31,6 +31,19 @@ const arrangement = (weights: number[], active = 'a') =>
 
 describe('workspace animated restoration', () => {
   let fixture: HTMLElement | undefined;
+  let workspace: Workspace;
+
+  beforeEach(async () => {
+    fixture =
+      await createFixture(html`<nve-workspace rearrangeable groupable resizable closable .value=${arrangement([1, 1])} style="width:800px;height:320px">
+      <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained"></nve-workspace-panel>
+      <nve-workspace-panel id="companion"><nve-workspace-panel-header>Companion</nve-workspace-panel-header>Companion content</nve-workspace-panel>
+      <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Beta content</nve-workspace-panel>
+    </nve-workspace>`);
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    await elementIsStable(workspace);
+    await vi.waitFor(() => expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeGreaterThan(300));
+  });
 
   afterEach(() => {
     if (fixture) removeFixture(fixture);
@@ -38,20 +51,7 @@ describe('workspace animated restoration', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup() {
-    fixture =
-      await createFixture(html`<nve-workspace rearrangeable groupable resizable closable .value=${arrangement([1, 1])} style="width:800px;height:320px">
-      <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained"></nve-workspace-panel>
-      <nve-workspace-panel id="companion"><nve-workspace-panel-header>Companion</nve-workspace-panel-header>Companion content</nve-workspace-panel>
-      <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Beta content</nve-workspace-panel>
-    </nve-workspace>`);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
-    await elementIsStable(workspace);
-    await vi.waitFor(() => expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeGreaterThan(300));
-    return workspace;
-  }
-
-  async function motion(workspace: Workspace) {
+  async function motion() {
     const panel = workspace.querySelector('#a')!;
     await vi.waitFor(() => expect(panel.getAnimations().length).toBeGreaterThan(0));
     const animation = panel.getAnimations()[0]!;
@@ -59,7 +59,7 @@ describe('workspace animated restoration', () => {
     return animation;
   }
 
-  async function resize(workspace: Workspace, movement = 60) {
+  async function resize(movement = 60) {
     const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
     vi.spyOn(handle, 'setPointerCapture').mockImplementation(() => {});
     handle.dispatchEvent(pointer('pointerdown', 0));
@@ -74,7 +74,6 @@ describe('workspace animated restoration', () => {
 
   describe('animated restoration', () => {
     it('commits the target silently while retaining content and animating geometry', async () => {
-      const workspace = await setup();
       const input = workspace.querySelector('input')!;
       input.value = 'edited';
       const changed = vi.fn();
@@ -83,7 +82,7 @@ describe('workspace animated restoration', () => {
       const target = arrangement([1, 3]);
       workspace.animateTo(target, { duration: 500 });
       expect(workspace.value).toBe(JSON.stringify(parseWorkspaceValue(target)));
-      const animation = await motion(workspace);
+      const animation = await motion();
       animation.currentTime = 0;
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(oldWidth, 1);
       animation.finish();
@@ -94,30 +93,27 @@ describe('workspace animated restoration', () => {
     });
 
     it('samples the CSS duration and falls back from invalid duration options', async () => {
-      const workspace = await setup();
       workspace.style.setProperty('--animation-duration', 'calc(0.2s + 50ms)');
       workspace.animateTo(arrangement([1, 3]), { duration: Number.NaN });
-      const animation = await motion(workspace);
+      const animation = await motion();
       expect(animation.effect!.getTiming().duration).toBe(250);
     });
 
     it('uses the configured easing for restoration', async () => {
-      const workspace = await setup();
       workspace.style.setProperty('--animation-easing', 'linear');
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      const animation = await motion(workspace);
+      const animation = await motion();
       expect(animation.effect!.getTiming().easing).toBe('linear');
     });
 
     it('retargets from displayed geometry for a full new duration and ignores repeated targets', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 400 });
-      const first = await motion(workspace);
+      const first = await motion();
       first.currentTime = 200;
       const width = workspace.querySelector('#a')!.getBoundingClientRect().width;
       const target = arrangement([3, 1]);
       workspace.animateTo(target, { duration: 600 });
-      const next = await motion(workspace);
+      const next = await motion();
       expect(next).not.toBe(first);
       next.currentTime = 0;
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(width, 1);
@@ -130,9 +126,8 @@ describe('workspace animated restoration', () => {
 
   describe('immediate and invalid restoration', () => {
     it('rejects invalid restoration before interrupting existing motion', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      const animation = await motion(workspace);
+      const animation = await motion();
       const value = workspace.value;
       expect(() => workspace.animateTo('{')).toThrow();
       expect(workspace.value).toBe(value);
@@ -140,16 +135,14 @@ describe('workspace animated restoration', () => {
     });
 
     it('settles animation immediately on ordinary value assignment', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      await motion(workspace);
+      await motion();
       workspace.value = arrangement([3, 1]);
       await elementIsStable(workspace);
       expect(workspace.querySelector('#a')!.getAnimations()).toHaveLength(0);
     });
 
     it('restores immediately when duration is zero', async () => {
-      const workspace = await setup();
       const capture = vi.spyOn(workspace.querySelector('#a')!, 'getBoundingClientRect');
       workspace.animateTo(arrangement([1, 3]), { duration: 0 });
       expect(capture).not.toHaveBeenCalled();
@@ -158,7 +151,6 @@ describe('workspace animated restoration', () => {
     });
 
     it('restores immediately for reduced motion', async () => {
-      const workspace = await setup();
       const original = window.matchMedia.bind(window);
       vi.spyOn(window, 'matchMedia').mockImplementation(query => {
         const result = original(query);
@@ -173,7 +165,7 @@ describe('workspace animated restoration', () => {
     });
 
     it('restores disconnected workspaces without starting motion', async () => {
-      const detached = await setup();
+      const detached = workspace;
       detached.remove();
       const capture = vi.spyOn(detached.querySelector('#a')!, 'getBoundingClientRect');
       detached.animateTo(arrangement([3, 1]));
@@ -192,7 +184,6 @@ describe('workspace animated restoration', () => {
 
   describe('coordinated presentation', () => {
     it('aligns retained header labels and tab controls when extracting into a new group', async () => {
-      const workspace = await setup();
       const target = JSON.stringify({
         version: 1,
         closed: [],
@@ -209,7 +200,7 @@ describe('workspace animated restoration', () => {
       const header = workspace.querySelector('#companion nve-workspace-panel-header')!;
       const oldLabel = header.shadowRoot!.querySelector('.label')!.getBoundingClientRect();
       workspace.animateTo(target, { duration: 500 });
-      await motion(workspace);
+      await motion();
       const panel = workspace.querySelector('#companion')!;
       const wrapper = workspace.shadowRoot!.querySelector('[data-panel="companion"]')!.parentElement!;
       const group = wrapper.closest('.group-chrome')!;
@@ -228,7 +219,6 @@ describe('workspace animated restoration', () => {
     });
 
     it('animates a header label track when only its transform changes', async () => {
-      const workspace = await setup();
       const header = workspace.querySelector('#b nve-workspace-panel-header')!;
       const track = header.shadowRoot!.querySelector<HTMLElement>('.label-track')!;
       track.style.transform = 'translateX(-40px)';
@@ -256,10 +246,9 @@ describe('workspace animated restoration', () => {
     });
 
     it('animates the allocated divider wrapper together with its adjacent groups', async () => {
-      const workspace = await setup();
       const old = workspace.shadowRoot!.querySelector('.gutter')!.getBoundingClientRect();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      await motion(workspace);
+      await motion();
       const gutter = workspace.shadowRoot!.querySelector('.gutter')!;
       const animation = gutter.getAnimations()[0]!;
       expect(animation).toBeDefined();
@@ -271,9 +260,8 @@ describe('workspace animated restoration', () => {
 
   describe('input and lifecycle interruption', () => {
     it('settles motion before selection and ignores new owned resize and drag presses', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      await motion(workspace);
+      await motion();
       const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
       const press = new PointerEvent('pointerdown', {
         bubbles: true,
@@ -301,9 +289,8 @@ describe('workspace animated restoration', () => {
     });
 
     it('allows tab navigation keys during restoration', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      await motion(workspace);
+      await motion();
       const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
       const keydown = vi.fn();
       tab.addEventListener('keydown', keydown, { once: true });
@@ -320,9 +307,8 @@ describe('workspace animated restoration', () => {
     });
 
     it('releases the start guard after completion without disabling command availability', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      await motion(workspace);
+      await motion();
       expect(workspace.isCommandAvailable('--close', { value: 'a' })).toBe(true);
       const roots = [
         document,
@@ -346,9 +332,8 @@ describe('workspace animated restoration', () => {
     });
 
     it('settles restoration when the allocated viewport changes', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      const animation = await motion(workspace);
+      const animation = await motion();
       const target = workspace.value;
       workspace.style.width = '900px';
       await vi.waitFor(() => expect(animation.playState).toBe('idle'));
@@ -356,9 +341,8 @@ describe('workspace animated restoration', () => {
     });
 
     it('settles restoration before reconciling newly supplied panels', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      const animation = await motion(workspace);
+      const animation = await motion();
       const panel = document.createElement('nve-workspace-panel');
       panel.id = 'added';
       workspace.append(panel);
@@ -367,9 +351,8 @@ describe('workspace animated restoration', () => {
     });
 
     it('releases all motion on disconnection', async () => {
-      const workspace = await setup();
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
-      const animation = await motion(workspace);
+      const animation = await motion();
       workspace.remove();
       expect(animation.playState).toBe('idle');
     });
@@ -377,18 +360,17 @@ describe('workspace animated restoration', () => {
 
   describe('resize cancellation', () => {
     it('animates displayed geometry back without changing value or announcing a change', async () => {
-      const workspace = await setup();
       const panel = workspace.querySelector('#a')!;
       const width = panel.getBoundingClientRect().width;
       const value = workspace.value;
       const changed = vi.fn();
       workspace.addEventListener('change', changed);
-      const handle = await resize(workspace);
+      const handle = await resize();
       const preview = panel.getBoundingClientRect().width;
       expect(preview).toBeCloseTo(width + 60);
       escape();
       expect(workspace.value).toBe(value);
-      const animation = await motion(workspace);
+      const animation = await motion();
       expect(animation.effect!.getTiming().duration).toBe(150);
       animation.currentTime = 0;
       expect(panel.getBoundingClientRect().width).toBeCloseTo(preview, 1);
@@ -416,12 +398,11 @@ describe('workspace animated restoration', () => {
     });
 
     it('lets immediate value restoration interrupt the return and ignore late pointer release', async () => {
-      const workspace = await setup();
       const changed = vi.fn();
       workspace.addEventListener('change', changed);
-      const handle = await resize(workspace);
+      const handle = await resize();
       escape();
-      const animation = await motion(workspace);
+      const animation = await motion();
       const target = arrangement([3, 1]);
       workspace.value = target;
       await elementIsStable(workspace);
@@ -434,18 +415,17 @@ describe('workspace animated restoration', () => {
     });
 
     it('retargets a return through animateTo even when its target equals the saved value', async () => {
-      const workspace = await setup();
       const panel = workspace.querySelector('#a')!;
       const value = workspace.value;
       const changed = vi.fn();
       workspace.addEventListener('change', changed);
-      const handle = await resize(workspace);
+      const handle = await resize();
       escape();
-      const first = await motion(workspace);
+      const first = await motion();
       first.currentTime = 50;
       const displayed = panel.getBoundingClientRect().width;
       workspace.animateTo(value, { duration: 400 });
-      const next = await motion(workspace);
+      const next = await motion();
       expect(next).not.toBe(first);
       expect(first.playState).toBe('idle');
       next.currentTime = 0;
@@ -459,12 +439,11 @@ describe('workspace animated restoration', () => {
     });
 
     it('returns immediately for reduced motion without changing saved state', async () => {
-      const workspace = await setup();
       const value = workspace.value;
       const width = workspace.querySelector('#a')!.getBoundingClientRect().width;
       const changed = vi.fn();
       workspace.addEventListener('change', changed);
-      const handle = await resize(workspace);
+      const handle = await resize();
       const original = window.matchMedia.bind(window);
       vi.spyOn(window, 'matchMedia').mockImplementation(query => {
         const result = original(query);
@@ -482,9 +461,8 @@ describe('workspace animated restoration', () => {
     });
 
     it('does not create return animations without resize movement', async () => {
-      const workspace = await setup();
       const value = workspace.value;
-      const handle = await resize(workspace, 0);
+      const handle = await resize(0);
       escape();
       await elementIsStable(workspace);
       expect(workspace.querySelector('#a')!.getAnimations()).toHaveLength(0);
@@ -494,14 +472,13 @@ describe('workspace animated restoration', () => {
     });
 
     it('releases return motion on disconnect and permits a fresh resize after reconnecting', async () => {
-      const workspace = await setup();
       const parent = workspace.parentElement!;
       const value = workspace.value;
       const changed = vi.fn();
       workspace.addEventListener('change', changed);
-      const handle = await resize(workspace);
+      const handle = await resize();
       escape();
-      const animation = await motion(workspace);
+      const animation = await motion();
       workspace.remove();
       expect(animation.playState).toBe('idle');
       handle.dispatchEvent(pointer('pointerup', 60));

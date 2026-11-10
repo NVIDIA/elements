@@ -159,7 +159,7 @@ describe('workspace placement offers', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(minimumHeight = 40) {
+  async function createPlacementInput(minimumHeight = 40) {
     fixture = await createFixture(html`
       <div id="viewport" style="position:fixed;left:0;top:0;width:800px;height:500px"></div>
     `);
@@ -167,7 +167,7 @@ describe('workspace placement offers', () => {
   }
 
   it('leaves unavailable destinations without an offer', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     expect(
       evaluatePlacementOffer({
         ...current,
@@ -177,7 +177,7 @@ describe('workspace placement offers', () => {
   });
 
   it('distinguishes a reserved tab destination from a split overlay', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     const tab = evaluatePlacementOffer({
       ...current,
       intent: { kind: 'tab', destination: { target: 'b', position: 'tab' } }
@@ -191,7 +191,7 @@ describe('workspace placement offers', () => {
   });
 
   it('keeps a minimum-infeasible proposal visible without reserving its layout', async () => {
-    const current = await setup(300);
+    const current = await createPlacementInput(300);
     const offer = evaluatePlacementOffer({
       ...current,
       intent: { kind: 'split', destination: { target: 'b', position: 'top' } }
@@ -203,7 +203,7 @@ describe('workspace placement offers', () => {
   });
 
   it('uses an acquired plan without rediscovering a different candidate', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     const intent: WorkspacePlacementIntent = { kind: 'tab', destination: { target: 'b', position: 'tab' } };
     const plan = planWorkspacePlacement({
       layout,
@@ -223,7 +223,7 @@ describe('workspace placement offers', () => {
     expect(offer).toMatchObject({ feasible: true, allocation: 'reserved', layout: plan.layout, cue: { kind: 'tab' } });
   });
   it('reinvokes supplied planners and returns independent offer presentation', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     const planner = vi.fn(planWorkspacePlacement);
     const input = {
       ...current,
@@ -241,7 +241,7 @@ describe('workspace placement offers', () => {
   });
 
   it('reuses stable split preparation and rebuilds it for a different destination', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     const placementSession = new WorkspacePlacementSession();
     const input = {
       ...current,
@@ -264,7 +264,7 @@ describe('workspace placement offers', () => {
   });
 
   it('rechecks feasibility when panel constraints change between evaluations', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     const host = fixture.querySelector<HTMLElement>('#viewport')!;
     const placementSession = new WorkspacePlacementSession();
     const intent: WorkspacePlacementIntent = { kind: 'split', destination: { target: 'b', position: 'top' } };
@@ -277,7 +277,7 @@ describe('workspace placement offers', () => {
   });
 
   it('refreshes client-space cues when the native viewport moves between evaluations', async () => {
-    const current = await setup();
+    const current = await createPlacementInput();
     const host = fixture.querySelector<HTMLElement>('#viewport')!;
     const canvas = document.createElement('div');
     canvas.className = 'canvas';

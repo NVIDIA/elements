@@ -204,7 +204,7 @@ describe('workspace evaluation reuse scope', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup() {
+  async function createEvaluationContext() {
     fixture = await createFixture(html`<div></div>`);
     const host = fixture.querySelector('div')!;
     const viewport = document.createElement('div');
@@ -244,7 +244,7 @@ describe('workspace evaluation reuse scope', () => {
   }
 
   it('reuses geometry across scoped evaluations and refreshes changed measurement values', async () => {
-    const { cache, inputs, delegate, currentLayout, currentMeasurements } = await setup();
+    const { cache, inputs, delegate, currentLayout, currentMeasurements } = await createEvaluationContext();
     const readGeometry = () =>
       cache.run(inputs, delegate, evaluation => evaluation.geometry(evaluation.project(currentLayout)));
     const first = readGeometry();
@@ -259,7 +259,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('reuses the same geometry for omitted and explicitly equal extents', async () => {
-    const { cache, inputs, delegate, currentLayout } = await setup();
+    const { cache, inputs, delegate, currentLayout } = await createEvaluationContext();
     const first = cache.run(inputs, delegate, evaluation => evaluation.geometry(evaluation.project(currentLayout)));
     const explicit = cache.run(inputs, delegate, evaluation => {
       const projected = evaluation.project(currentLayout);
@@ -269,7 +269,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('keeps a distinct extent out of retained current-layout geometry', async () => {
-    const { cache, inputs, delegate, currentLayout } = await setup();
+    const { cache, inputs, delegate, currentLayout } = await createEvaluationContext();
     const result = cache.run(inputs, delegate, evaluation => {
       const projected = evaluation.project(currentLayout);
       const base = evaluation.geometry(projected);
@@ -286,7 +286,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('reuses catalog structure across scoped evaluations while returning fresh hit views', async () => {
-    const { cache, inputs, delegate, currentMeasurements } = await setup();
+    const { cache, inputs, delegate, currentMeasurements } = await createEvaluationContext();
     const readCatalog = (): WorkspacePlacementCatalog =>
       cache.run(inputs, delegate, evaluation => evaluation.targetCatalog(['a']));
     const first = readCatalog();
@@ -306,7 +306,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('keeps scope rectangles fresh across retained views and native or constraint changes', async () => {
-    const { cache, inputs, delegate, host, currentMeasurements } = await setup();
+    const { cache, inputs, delegate, host, currentMeasurements } = await createEvaluationContext();
     const canvas = document.createElement('div');
     host.shadowRoot!.append(canvas);
     canvas.className = 'canvas';
@@ -335,7 +335,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('snapshots native DOMRect bounds on the host fallback path', async () => {
-    const { cache, inputs, delegate, host } = await setup();
+    const { cache, inputs, delegate, host } = await createEvaluationContext();
     host.shadowRoot!.querySelector('.viewport')!.remove();
     let bounds = new DOMRect(0, 0, 300, 300);
     vi.spyOn(host, 'getBoundingClientRect').mockImplementation(() => bounds);
@@ -351,7 +351,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('does not retain caller-mutated catalogs outside a reuse scope', async () => {
-    const { createEvaluation } = await setup();
+    const { createEvaluation } = await createEvaluationContext();
     const evaluation = createEvaluation();
     const first = evaluation.targetCatalog(['a']);
     const expected = structuredClone({ ...first, resolveScopeRect: undefined });
@@ -367,7 +367,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('keeps ordinary evaluations separate from the component owner', async () => {
-    const { cache, inputs, delegate, currentLayout, createEvaluation } = await setup();
+    const { cache, inputs, delegate, currentLayout, createEvaluation } = await createEvaluationContext();
     const readGeometry = () =>
       cache.run(inputs, delegate, evaluation => evaluation.geometry(evaluation.project(currentLayout)));
     const retained = readGeometry();
@@ -380,7 +380,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('preserves the current evaluation while nested and revokes it when the outer scope exits', async () => {
-    const { cache, inputs, delegate, currentLayout } = await setup();
+    const { cache, inputs, delegate, currentLayout } = await createEvaluationContext();
     const first = cache.run(inputs, delegate, evaluation => {
       const geometry = evaluation.geometry(evaluation.project(currentLayout));
       cache.run(inputs, delegate, nested => {
@@ -398,7 +398,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('clears retained results without ending the active evaluation', async () => {
-    const { cache, inputs, delegate, currentLayout } = await setup();
+    const { cache, inputs, delegate, currentLayout } = await createEvaluationContext();
     cache.run(inputs, delegate, evaluation => {
       const first = evaluation.geometry(evaluation.project(currentLayout));
       cache.clear();
@@ -409,7 +409,7 @@ describe('workspace evaluation reuse scope', () => {
   });
 
   it('revokes reuse admission when a synchronous evaluation throws', async () => {
-    const { cache, inputs, delegate, currentLayout } = await setup();
+    const { cache, inputs, delegate, currentLayout } = await createEvaluationContext();
     let interrupted:
       | { evaluation: WorkspaceEvaluation; geometry: ReturnType<WorkspaceEvaluation['geometry']> }
       | undefined;
@@ -445,7 +445,7 @@ describe('workspace presented target geometry', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(
+  async function createTargetGeometry(
     currentLayout: WorkspaceLayout,
     current: WorkspaceNode,
     options: { source?: string[]; clip?: Rect } = {}
@@ -491,7 +491,10 @@ describe('workspace presented target geometry', () => {
       closed: [],
       root: split('horizontal', makeGroup('a'), branch, makeGroup('e'))
     };
-    const result = await setup(currentLayout, split('horizontal', branch, makeGroup('a'), makeGroup('e')));
+    const result = await createTargetGeometry(
+      currentLayout,
+      split('horizontal', branch, makeGroup('a'), makeGroup('e'))
+    );
     const moved = result.regions.find(region => region.key === 'root.1')!;
     expect(moved.rect.x).toBe(0);
     expect(moved.node).toEqual(result.input.catalog.find(region => region.key === 'root.1')!.node);
@@ -507,9 +510,15 @@ describe('workspace presented target geometry', () => {
       closed: [],
       root: split('horizontal', makeGroup('a'), branch, makeGroup('e'))
     };
-    const result = await setup(currentLayout, split('horizontal', branch, makeGroup('a'), makeGroup('e')));
+    const result = await createTargetGeometry(
+      currentLayout,
+      split('horizontal', branch, makeGroup('a'), makeGroup('e'))
+    );
     expect(result.regions.find(region => region.key === 'root')!.rect).toEqual(bounds);
-    const outer = await setup(currentLayout, split('horizontal', branch, makeGroup('e'), makeGroup('a')));
+    const outer = await createTargetGeometry(
+      currentLayout,
+      split('horizontal', branch, makeGroup('e'), makeGroup('a'))
+    );
     expect(outer.regions.find(region => region.key === 'root')!.rect).toEqual(bounds);
     expect(
       outer.regions.some(region => region.node.type === 'group' && region.node.panels.every(id => id === 'a'))
@@ -522,7 +531,10 @@ describe('workspace presented target geometry', () => {
       closed: [],
       root: split('horizontal', makeGroup('a', 'companion'), makeGroup('b'))
     };
-    const result = await setup(currentLayout, split('horizontal', makeGroup('companion'), makeGroup('b', 'a')));
+    const result = await createTargetGeometry(
+      currentLayout,
+      split('horizontal', makeGroup('companion'), makeGroup('b', 'a'))
+    );
     const origin = result.regions.find(region => region.key === 'root.0')!;
     expect(origin.rect.width).toBeCloseTo(
       result.input.allocation.find(region => region.key === 'root.0')!.rect.width,
@@ -537,7 +549,7 @@ describe('workspace presented target geometry', () => {
       closed: [],
       root: { type: 'split', axis: 'horizontal', children: [makeGroup('a'), makeGroup('b')], weights: [1, 4] }
     };
-    const result = await setup(currentLayout, makeGroup('b'));
+    const result = await createTargetGeometry(currentLayout, makeGroup('b'));
     expect(result.regions.map(region => region.key)).toEqual(['root.1']);
   });
 
@@ -547,7 +559,7 @@ describe('workspace presented target geometry', () => {
       closed: ['closed'],
       root: split('horizontal', makeGroup('a'), split('vertical', makeGroup('b'), makeGroup('closed')))
     };
-    const result = await setup(currentLayout, makeGroup('b'));
+    const result = await createTargetGeometry(currentLayout, makeGroup('b'));
     expect(result.regions.map(region => region.key)).toEqual(['root', 'root.1']);
   });
 
@@ -557,7 +569,9 @@ describe('workspace presented target geometry', () => {
       closed: [],
       root: split('horizontal', makeGroup('a'), makeGroup('b'), makeGroup('e'))
     };
-    const clipped = (await setup(currentLayout, currentLayout.root!, { clip: { ...bounds, width: 380 } })).regions;
+    const clipped = (
+      await createTargetGeometry(currentLayout, currentLayout.root!, { clip: { ...bounds, width: 380 } })
+    ).regions;
     expect(clipped.find(region => region.key === 'root')!.rect.width).toBe(800);
     expect(clipped.some(region => region.rect.x + region.rect.width > 380)).toBe(true);
     expect(clipped.some(region => region.node.type === 'group' && region.node.panels.includes('e'))).toBe(false);
@@ -569,11 +583,13 @@ describe('workspace presented target geometry', () => {
       closed: [],
       root: split('horizontal', makeGroup('a'), makeGroup('b'))
     };
-    const partial = (await setup(currentLayout, makeGroup('b'), { clip: { x: 0, y: 20, width: 800, height: 580 } }))
-      .regions;
+    const partial = (
+      await createTargetGeometry(currentLayout, makeGroup('b'), { clip: { x: 0, y: 20, width: 800, height: 580 } })
+    ).regions;
     expect(partial[0]!.rect.y).toBe(0);
-    const content = (await setup(currentLayout, makeGroup('b'), { clip: { x: 0, y: 80, width: 800, height: 520 } }))
-      .regions;
+    const content = (
+      await createTargetGeometry(currentLayout, makeGroup('b'), { clip: { x: 0, y: 80, width: 800, height: 520 } })
+    ).regions;
     expect(content[0]!.rect.y).toBe(0);
     expect(content[0]!.rect.height).toBe(600);
   });

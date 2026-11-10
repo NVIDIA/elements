@@ -38,7 +38,7 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-async function setup(content: TemplateResult | typeof nothing) {
+async function createCompositionHost(content: TemplateResult | typeof nothing) {
   fixture = await createFixture(html`
     <workspace-composition-test-host></workspace-composition-test-host>
     <button id="outside">Outside</button>
@@ -210,7 +210,7 @@ describe('workspace tab scroll restoration', () => {
 
   it('restores captured offsets by group identity after rendered strips are replaced and reordered', async () => {
     const ids = ['["a","b"]', '["c","d"]'];
-    const host = await setup(strips(ids));
+    const host = await createCompositionHost(strips(ids));
     const original = [...host.shadowRoot!.querySelectorAll<HTMLElement>('.tablist')];
     original[0]!.scrollLeft = 40;
     original[1]!.scrollLeft = 80;
@@ -228,7 +228,7 @@ describe('workspace tab scroll restoration', () => {
   });
 
   it('ignores removed groups and leaves newly introduced strip positions alone', async () => {
-    const host = await setup(strips(['a']));
+    const host = await createCompositionHost(strips(['a']));
     host.shadowRoot!.querySelector<HTMLElement>('.tablist')!.scrollLeft = 40;
     const restore = captureTabScroll(host);
     host.content = strips(['new']);
@@ -246,7 +246,7 @@ describe('workspace tab scroll restoration', () => {
 
 describe('workspace captured focus', () => {
   it('restores surviving content after focus is lost', async () => {
-    const host = await setup(html`<button data-panel="a">Alpha</button>`);
+    const host = await createCompositionHost(html`<button data-panel="a">Alpha</button>`);
     const control = host.shadowRoot!.querySelector<HTMLButtonElement>('button')!;
     control.focus();
     const restore = captureWorkspaceFocus(host)!;
@@ -256,7 +256,7 @@ describe('workspace captured focus', () => {
   });
 
   it('does not refocus a control that retained focus', async () => {
-    const host = await setup(html`<button data-panel="a">Alpha</button>`);
+    const host = await createCompositionHost(html`<button data-panel="a">Alpha</button>`);
     const control = host.shadowRoot!.querySelector<HTMLButtonElement>('button')!;
     control.focus();
     const restore = captureWorkspaceFocus(host)!;
@@ -267,7 +267,7 @@ describe('workspace captured focus', () => {
   });
 
   it.each(['data-panel', 'data-drag-group'])('recovers a replaced control by its %s identity', async attribute => {
-    const host = await setup(html`<button>Alpha</button>`);
+    const host = await createCompositionHost(html`<button>Alpha</button>`);
     const original = host.shadowRoot!.querySelector<HTMLButtonElement>('button')!;
     original.setAttribute(attribute, 'a"b');
     original.focus();
@@ -280,7 +280,7 @@ describe('workspace captured focus', () => {
   });
 
   it('preserves newly established meaningful focus instead of restoring an earlier control', async () => {
-    const host = await setup(html`<button>Alpha</button>`);
+    const host = await createCompositionHost(html`<button>Alpha</button>`);
     const original = host.shadowRoot!.querySelector<HTMLButtonElement>('button')!;
     original.focus();
     const restore = captureWorkspaceFocus(host)!;
@@ -291,7 +291,7 @@ describe('workspace captured focus', () => {
   });
 
   it('does not capture focus on the document body or the host itself', async () => {
-    const host = await setup(nothing);
+    const host = await createCompositionHost(nothing);
     const outside = fixture.querySelector<HTMLButtonElement>('#outside')!;
     outside.focus();
     outside.blur();
@@ -302,7 +302,7 @@ describe('workspace captured focus', () => {
   });
 
   it.each(['hidden', 'disabled'] as const)('does not focus a replacement that is %s', async state => {
-    const host = await setup(html`<button data-panel="a">Alpha</button>`);
+    const host = await createCompositionHost(html`<button data-panel="a">Alpha</button>`);
     const original = host.shadowRoot!.querySelector<HTMLButtonElement>('button')!;
     original.focus();
     const restore = captureWorkspaceFocus(host)!;
@@ -315,7 +315,7 @@ describe('workspace captured focus', () => {
   });
 
   it('does not restore connected external focus after the host disconnects', async () => {
-    const host = await setup(nothing);
+    const host = await createCompositionHost(nothing);
     const outside = fixture.querySelector<HTMLButtonElement>('#outside')!;
     outside.focus();
     expect(getActiveElement()).toBe(outside);
@@ -332,7 +332,7 @@ describe('workspace captured focus', () => {
   });
 
   it('does not restore original-document focus after a connected host is adopted', async () => {
-    const host = await setup(nothing);
+    const host = await createCompositionHost(nothing);
     const outside = fixture.querySelector<HTMLButtonElement>('#outside')!;
     outside.focus();
     expect(getActiveElement()).toBe(outside);
@@ -355,7 +355,7 @@ describe('workspace captured focus', () => {
 
 describe('workspace panel focus', () => {
   it('waits for rendered selection before focusing and revealing its tab', async () => {
-    const host = await setup(nothing);
+    const host = await createCompositionHost(nothing);
     host.content = html`
       <div style="width:100px;overflow:auto">
         <div style="width:500px;display:flex">
@@ -374,7 +374,7 @@ describe('workspace panel focus', () => {
   });
 
   it('focuses an explicit tab without changing the existing scroll position', async () => {
-    const host = await setup(html`
+    const host = await createCompositionHost(html`
       <div style="width:100px;overflow:auto">
         <div style="width:500px;display:flex">
           <div style="width:300px;flex:none"></div>
@@ -393,7 +393,7 @@ describe('workspace panel focus', () => {
   });
 
   it('prefers the group grip when group focus is requested', async () => {
-    const host = await setup(html`
+    const host = await createCompositionHost(html`
       <button data-drag-group="a">Move group</button>
       <nve-tabs><nve-tabs-item data-panel="a" selected>Alpha</nve-tabs-item></nve-tabs>
     `);
@@ -402,7 +402,7 @@ describe('workspace panel focus', () => {
   });
 
   it('falls back to the visible singleton body instead of focusing its passive title', async () => {
-    const host = await setup(html`<span class="panel-title" data-panel="a">Alpha</span>`);
+    const host = await createCompositionHost(html`<span class="panel-title" data-panel="a">Alpha</span>`);
     const panel = document.createElement('nve-workspace-panel');
     panel.id = 'a';
     panel.style.cssText = 'width:200px;height:80px';
@@ -424,7 +424,7 @@ describe('workspace panel focus', () => {
   });
 
   it('leaves existing focus alone when no selected or requested target exists', async () => {
-    const host = await setup(nothing);
+    const host = await createCompositionHost(nothing);
     const outside = fixture.querySelector<HTMLButtonElement>('#outside')!;
     outside.focus();
     await focusWorkspacePanel(host);
@@ -443,7 +443,7 @@ describe('workspace close focus policy', () => {
     { target: 'outside', id: 'a', expected: false },
     { target: 'none', id: 'a', expected: true }
   ])('decides recovery for $id when focus is on $target', async ({ target, id, expected }) => {
-    const host = await setup(html`
+    const host = await createCompositionHost(html`
       <button id="tab" data-panel="a">Alpha</button>
       <button id="close" data-close="a">Close Alpha</button>
     `);

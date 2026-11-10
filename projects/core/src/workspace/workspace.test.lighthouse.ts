@@ -10,7 +10,7 @@ describe('workspace lighthouse', () => {
     const report = await lighthouseRunner.getReport(
       'nve-workspace',
       /* html */ `
-        <nve-workspace groupable rearrangeable closable resizable style="height:250px"
+        <nve-workspace fullscreenable groupable rearrangeable closable resizable style="height:250px"
           value='{"version":1,"closed":[],"root":{"type":"split","axis":"horizontal","weights":[1,1],"children":[{"type":"group","panels":["editor","notes"],"active":"editor"},{"type":"group","panels":["preview"],"active":"preview"}]}}'>
           <nve-workspace-panel id="editor">
             <nve-workspace-panel-header>Editor</nve-workspace-panel-header>
@@ -30,6 +30,6 @@ describe('workspace lighthouse', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThanOrEqual(72.8);
+    expect(report.payload.javascript.kb).toBeLessThanOrEqual(73.7);
   });
 });

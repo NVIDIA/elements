@@ -54,7 +54,7 @@ describe('workspace reparented group sizing', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(axis: WorkspaceSplit['axis'] = 'horizontal') {
+  async function createWorkspace(axis: WorkspaceSplit['axis'] = 'horizontal') {
     fixture = await createFixture(html`
       <nve-workspace groupable rearrangeable resizable .value=${JSON.stringify(arrangement(axis))}
         style="width:1000px;height:800px;--animation-duration:0ms">
@@ -119,7 +119,7 @@ describe('workspace reparented group sizing', () => {
   it.each(['horizontal', 'vertical'] as const)(
     'uses destination shares through repeated %s command round trips',
     async axis => {
-      const workspace = await setup(axis);
+      const workspace = await createWorkspace(axis);
       const size = axis === 'horizontal' ? 'width' : 'height';
       const input = workspace.querySelector<HTMLInputElement>('#outline input')!;
       input.value = 'edited application content';
@@ -156,7 +156,7 @@ describe('workspace reparented group sizing', () => {
   it.each(['horizontal', 'vertical'] as const)(
     'halves the recipient when moving Editor across its %s sibling axis',
     async axis => {
-      const workspace = await setup(axis);
+      const workspace = await createWorkspace(axis);
       const crossSize = axis === 'horizontal' ? 'height' : 'width';
       const original = panelRect(workspace, 'preview')[crossSize];
       await place(
@@ -176,7 +176,7 @@ describe('workspace reparented group sizing', () => {
   );
 
   it('does not carry an explicit divider size into a different parent', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const before = panelRect(workspace).width;
     const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('[data-boundary="root:0"]')!;
     handle.valueAsNumber += 60;
@@ -193,7 +193,7 @@ describe('workspace reparented group sizing', () => {
 
   describe('placement stages', () => {
     it('fits the selected split without refitting hints and commits balanced recipient sizes', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       vi.spyOn(workspace, 'setPointerCapture').mockImplementation(() => {});
       const control = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="outline"]')!;
       const title = control.getBoundingClientRect();
@@ -220,7 +220,7 @@ describe('workspace reparented group sizing', () => {
     });
 
     it('discovers preview hints without fitting speculative candidates', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       await inward(workspace);
       vi.spyOn(workspace, 'setPointerCapture').mockImplementation(() => {});
       const destination = await reserveOuter(workspace);
@@ -239,7 +239,7 @@ describe('workspace reparented group sizing', () => {
     });
 
     it('commits destination-based insertion preview geometry and cancels silently', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       await inward(workspace);
       const saved = workspace.value;
       const changed = vi.fn();

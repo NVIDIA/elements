@@ -172,7 +172,7 @@ describe('workspace computed acquisition headers', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup() {
+  async function createHeaderTargetInput() {
     fixture = await createFixture(html`
       <div>
         <nve-workspace-panel id="a"> </nve-workspace-panel>
@@ -208,7 +208,7 @@ describe('workspace computed acquisition headers', () => {
   }
 
   it('keeps scrolled recipient identity and tab order independent of animated group rectangles', async () => {
-    const input = await setup();
+    const input = await createHeaderTargetInput();
     const before = findTabHeaderTarget(input);
     expect(before?.panels).toEqual(['a', 'b', 'c']);
     expect(before?.tabs.find(tab => tab.id === 'c')?.rect.x).toBe(205);
@@ -221,14 +221,14 @@ describe('workspace computed acquisition headers', () => {
   });
 
   it('holds only the visible computed carried tab reservation with a supplied scroll offset', async () => {
-    const input = { ...(await setup()), source: ['c'] };
+    const input = { ...(await createHeaderTargetInput()), source: ['c'] };
     expect(getTabReservationHit(input)).toBe('tab');
     expect(getTabReservationHit({ ...input, scroll: () => 0 })).toBeUndefined();
     expect(getTabReservationHit({ ...input, point: { x: 310, y: 110 } })).toBeUndefined();
   });
 
   it('uses the same zero-grip width for prospective headers and their tab reservation', async () => {
-    const input = await setup();
+    const input = await createHeaderTargetInput();
     const group = { ...input.groups[0]!, panels: input.groups[0]!.panels.slice(0, 2), gripWidth: 0 };
     const frame = { ...input, groups: [group], source: ['b'], scroll: () => 0, point: { x: 101, y: 110 } };
     const header = findTabHeaderTarget(frame)!;
@@ -239,7 +239,7 @@ describe('workspace computed acquisition headers', () => {
   });
 
   it('excludes the measured group action from acquisition and carried reservations', async () => {
-    const input = await setup();
+    const input = await createHeaderTargetInput();
     const frame = { ...input, measurements: { ...input.measurements, groupActionWidth: 40 }, source: ['c'] };
     expect(findTabHeaderTarget(frame)?.rect.width).toBe(150);
     expect(getTabReservationHit({ ...frame, point: { x: 260, y: 110 } })).toBe('tab');
@@ -249,7 +249,7 @@ describe('workspace computed acquisition headers', () => {
   });
 
   it('uses the rendered tab width and excludes the selected header suffix from acquisition', async () => {
-    const input = await setup();
+    const input = await createHeaderTargetInput();
     const group = {
       ...input.groups[0]!,
       panels: input.groups[0]!.panels.slice(0, 2),

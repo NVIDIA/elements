@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -47,7 +47,7 @@ describe('workspace resizing', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup() {
+  async function createWorkspace() {
     fixture = await createFixture(html`
       <nve-workspace style="width:912px;height:250px" resizable .value=${arrangement}>
         <nve-workspace-panel id="a" min-width="120"
@@ -63,8 +63,8 @@ describe('workspace resizing', () => {
     return workspace;
   }
 
-  async function setupTabbedResize() {
-    const workspace = await setup();
+  async function createTabbedResizeWorkspace() {
+    const workspace = await createWorkspace();
     workspace.value = JSON.stringify({
       version: 1,
       closed: [],
@@ -86,7 +86,7 @@ describe('workspace resizing', () => {
 
   describe('resizing and interruption', () => {
     it('should keep a resize gesture without movement silent', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const change = vi.fn();
       workspace.addEventListener('change', change);
@@ -100,7 +100,7 @@ describe('workspace resizing', () => {
     });
 
     it.each(['stop', 'propagate'] as const)('should preserve a fractional resize with the %s policy', async policy => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.resizePolicy = policy;
       await elementIsStable(workspace);
       const value = workspace.value;
@@ -126,7 +126,7 @@ describe('workspace resizing', () => {
     it.each(['stop', 'propagate'] as const)(
       'should keep returning to the resize origin silent with the %s policy',
       async policy => {
-        const workspace = await setup();
+        const workspace = await createWorkspace();
         workspace.resizePolicy = policy;
         await elementIsStable(workspace);
         const value = workspace.value;
@@ -149,7 +149,7 @@ describe('workspace resizing', () => {
     it.each(['resizable', 'rearrangeable', 'groupable', 'closable'] as const)(
       'should retain the admitted handle and geometry when %s changes before movement',
       async capability => {
-        const { workspace, handle } = await setupTabbedResize();
+        const { workspace, handle } = await createTabbedResizeWorkspace();
         workspace.rearrangeable = true;
         workspace.groupable = true;
         workspace.closable = true;
@@ -190,7 +190,7 @@ describe('workspace resizing', () => {
     );
 
     it('should capture resize policy at admission and use the latest policy for the next gesture', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
       vi.spyOn(handle, 'setPointerCapture').mockImplementation(() => {});
       handle.dispatchEvent(pointer('pointerdown', 0));
@@ -211,7 +211,7 @@ describe('workspace resizing', () => {
     });
 
     it('should preserve a visible resize preview across capability-driven chrome changes', async () => {
-      const { workspace, handle } = await setupTabbedResize();
+      const { workspace, handle } = await createTabbedResizeWorkspace();
       workspace.closable = true;
       workspace.rearrangeable = true;
       await elementIsStable(workspace);
@@ -237,7 +237,7 @@ describe('workspace resizing', () => {
     });
 
     it('should suppress indicator animation through pointer resizing and restore selection timing after commit', async () => {
-      const { workspace, handle, tabs } = await setupTabbedResize();
+      const { workspace, handle, tabs } = await createTabbedResizeWorkspace();
       const value = workspace.value;
       expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0.15s');
       vi.spyOn(handle, 'setPointerCapture').mockImplementation(() => {});
@@ -257,7 +257,7 @@ describe('workspace resizing', () => {
     });
 
     it('should suppress indicator animation for keyboard resizing', async () => {
-      const { workspace, handle, tabs } = await setupTabbedResize();
+      const { workspace, handle, tabs } = await createTabbedResizeWorkspace();
       const value = workspace.value;
       handle.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, composed: true }));
       handle.valueAsNumber += 10;
@@ -270,7 +270,7 @@ describe('workspace resizing', () => {
     });
 
     it('should release committed presentation when a change listener restores another arrangement', async () => {
-      const { workspace, handle } = await setupTabbedResize();
+      const { workspace, handle } = await createTabbedResizeWorkspace();
       const restored = JSON.stringify({
         version: 1,
         closed: [],
@@ -294,7 +294,7 @@ describe('workspace resizing', () => {
     });
 
     it('should suppress indicator animation while restoring cancelled resize geometry', async () => {
-      const { workspace, handle, tabs } = await setupTabbedResize();
+      const { workspace, handle, tabs } = await createTabbedResizeWorkspace();
       const value = workspace.value;
       vi.spyOn(handle, 'setPointerCapture').mockImplementation(() => {});
       handle.dispatchEvent(pointer('pointerdown', 0));
@@ -309,7 +309,7 @@ describe('workspace resizing', () => {
     });
 
     it('should accumulate resize movement across rendered frames then discard Escape and the remaining pointer sequence', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const change = vi.fn();
       workspace.addEventListener('change', change);
@@ -332,7 +332,7 @@ describe('workspace resizing', () => {
     });
 
     it('should cancel an active resize when Escape is pressed outside the workspace', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const change = vi.fn();
       workspace.addEventListener('change', change);
@@ -355,7 +355,7 @@ describe('workspace resizing', () => {
     });
 
     it('should leave consumed Escape to a nested control and release ownership after cancellation', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
       const control = workspace.querySelector('input')!;
       const consume = (event: KeyboardEvent) => event.preventDefault();
@@ -396,7 +396,7 @@ describe('workspace resizing', () => {
     });
 
     it('should reject resize keys while a cancelled pointer is still awaiting release', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
       vi.spyOn(handle, 'setPointerCapture').mockImplementation(() => {});
@@ -414,7 +414,7 @@ describe('workspace resizing', () => {
     });
 
     it.each(['width', 'gap'] as const)('should cancel resizing when the actual %s changes', async metric => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
       vi.spyOn(handle, 'setPointerCapture').mockImplementation(() => {});
@@ -431,7 +431,7 @@ describe('workspace resizing', () => {
     });
 
     it('should roll back an interrupted pointer resize without announcing a commit', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const change = vi.fn();
       workspace.addEventListener('change', change);
@@ -449,7 +449,7 @@ describe('workspace resizing', () => {
     });
 
     it('should preserve external restoration during an active pointer resize and ignore the remaining gesture', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const change = vi.fn();
       workspace.addEventListener('change', change);
       const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
@@ -485,7 +485,7 @@ describe('workspace resizing', () => {
     });
 
     it('should discard a disconnected resize session and allow a fresh resize after reconnection', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const parent = workspace.parentElement!;
       const value = workspace.value;
       const change = vi.fn();
@@ -518,13 +518,9 @@ describe('workspace resizing', () => {
 
 describe('workspace resize handle composition', () => {
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    removeFixture(fixture);
-    vi.restoreAllMocks();
-  });
-
-  async function setup() {
+  beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-workspace closable groupable rearrangeable style="height:220px;width:600px">
         <nve-workspace-panel id="a">
@@ -536,15 +532,18 @@ describe('workspace resize handle composition', () => {
         >
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   it.each(['horizontal', 'vertical'])(
     'centers default resize handles in %s gutters independently of gap and framing',
     async axis => {
-      const workspace = await setup();
       workspace.resizable = true;
       workspace.value = JSON.stringify({
         version: 1,
@@ -587,7 +586,6 @@ describe('workspace resize handle composition', () => {
   );
 
   it('allows consumers to configure resize line and target sizes without a workspace update', async () => {
-    const workspace = await setup();
     workspace.resizable = true;
     workspace.value = JSON.stringify({
       version: 1,

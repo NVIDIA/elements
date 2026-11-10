@@ -40,7 +40,7 @@ describe('workspace invoker commands', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(layout = nested()) {
+  async function createWorkspace(layout = nested()) {
     fixture = await createFixture(html`
       <div>
         <nve-button id="invoker">Invoke</nve-button>
@@ -87,7 +87,7 @@ describe('workspace invoker commands', () => {
 
   describe('command targeting', () => {
     it('captures native nonbubbling direct-panel commands and leaves focus on the invoker', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       button.focus();
       await invoke(workspace, button, { command: '--select' });
 
@@ -101,7 +101,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('supports workspace-target unary commands using only the invoker panel value', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       button.command = '--select';
       button.commandForElement = workspace;
       button.value = 'a';
@@ -114,7 +114,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('ignores commands targeted at nested application controls', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       const child = workspace.querySelector<HTMLInputElement>('#a input')!;
       button.commandForElement = child;
       button.command = '--close';
@@ -128,7 +128,7 @@ describe('workspace invoker commands', () => {
 
   describe('capability gates', () => {
     it('honors independent capability gates while open activates and select never reopens', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       const original = workspace.value;
       await invoke(workspace, button, { command: '--close' });
       await invoke(workspace, button, {
@@ -158,7 +158,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('accepts a native HTML invoker and respects capability changes', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       const native: HTMLButtonElement & WorkspaceCommandSource = document.createElement('button');
       native.command = '--select';
       native.commandForElement = workspace.querySelector('#a');
@@ -180,7 +180,7 @@ describe('workspace invoker commands', () => {
 
   describe('command availability', () => {
     it('reads current capability flags without mutating the arrangement or emitting arrangement changes', async () => {
-      const { workspace, changed } = await setup();
+      const { workspace, changed } = await createWorkspace();
       const initial = workspace.value;
       const context = { value: 'a' };
       expect(workspace.isCommandAvailable('--close', context)).toBe(false);
@@ -193,7 +193,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('uses the same placement admission as execution and rechecks changed capabilities', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       const placement: WorkspacePlacement = { operation: 'split', target: 'b', position: 'left' };
       const context = { value: 'a', placement };
       expect(workspace.isCommandAvailable('--place', context)).toBe(false);
@@ -210,7 +210,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('applies groupability changes to placement queries and execution', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       workspace.groupable = false;
       const placement: WorkspacePlacement = { operation: 'split', target: 'b', position: 'left' };
@@ -227,7 +227,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('rejects a minimum-infeasible placement without committing a change', async () => {
-      const { workspace, button, changed } = await setup(peers());
+      const { workspace, button, changed } = await createWorkspace(peers());
       workspace.rearrangeable = true;
       workspace.querySelector('nve-workspace-panel')!.setAttribute('min-height', '480');
       await elementIsStable(workspace);
@@ -242,7 +242,7 @@ describe('workspace invoker commands', () => {
 
   describe('placement operations', () => {
     it('honors a self-target tab index and keeps repeated placement silent without changing active preference', async () => {
-      const { workspace, button, changed } = await setup(saved(group('a', 'companion', 'b', 'c')));
+      const { workspace, button, changed } = await createWorkspace(saved(group('a', 'companion', 'b', 'c')));
       workspace.rearrangeable = true;
       await elementIsStable(workspace);
       const request = { command: '--place', placement: { operation: 'join' as const, target: 'a', index: 4 } };
@@ -254,7 +254,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('distinguishes same-axis splitting from peer ordering with the same durable source and target', async () => {
-      const { workspace, button, changed } = await setup(peers());
+      const { workspace, button, changed } = await createWorkspace(peers());
       workspace.rearrangeable = true;
       await elementIsStable(workspace);
       await invoke(workspace, button, {
@@ -284,7 +284,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('inserts a tab beside its target arrangement with recipient-share weights', async () => {
-      const { workspace, button, changed } = await setup(nested());
+      const { workspace, button, changed } = await createWorkspace(nested());
       workspace.rearrangeable = true;
       await invoke(workspace, button, {
         command: '--place',
@@ -311,7 +311,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('preserves the whole tabbed group and traveling weights when ordering beside a peer arrangement', async () => {
-      const { workspace, button } = await setup();
+      const { workspace, button } = await createWorkspace();
       workspace.rearrangeable = true;
       await invoke(workspace, button, {
         command: '--place',
@@ -330,7 +330,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('inserts at workspace scope and joins at an explicit tab index', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       await invoke(workspace, button, {
         command: '--place',
@@ -362,7 +362,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('keeps a valid original peer-order no-op and invalid cross-owner ordering silent', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       const initial = workspace.value;
       await invoke(workspace, button, {
@@ -383,7 +383,7 @@ describe('workspace invoker commands', () => {
   describe('invalid placement requests', () => {
     it('rejects a malformed placement without mutation', async () => {
       const placement = { operation: 'unknown', target: 'b' };
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       button.command = '--place';
       button.commandForElement = workspace.querySelector('#a');
@@ -397,7 +397,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('rejects an unavailable target without mutation', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       const initial = workspace.value;
       await invoke(workspace, button, {
@@ -410,7 +410,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('rejects a closed target without mutation', async () => {
-      const { workspace, button, changed } = await setup({ ...nested(), closed: ['b'] });
+      const { workspace, button, changed } = await createWorkspace({ ...nested(), closed: ['b'] });
       workspace.rearrangeable = true;
       const initial = workspace.value;
       await invoke(workspace, button, {
@@ -425,7 +425,7 @@ describe('workspace invoker commands', () => {
 
   describe('command availability notifications', () => {
     it('batches capability changes into one payload-free notification', async () => {
-      const { workspace, changed } = await setup();
+      const { workspace, changed } = await createWorkspace();
       const available = vi.fn();
       workspace.addEventListener('commandavailabilitychange', available);
       workspace.closable = true;
@@ -443,7 +443,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('announces groupability changes without changing the saved arrangement', async () => {
-      const { workspace, changed } = await setup();
+      const { workspace, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       await elementIsStable(workspace);
       const initial = workspace.value;
@@ -457,7 +457,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('announces restoration without emitting an arrangement change', async () => {
-      const { workspace, changed } = await setup();
+      const { workspace, changed } = await createWorkspace();
       const answers: boolean[] = [];
       workspace.addEventListener('commandavailabilitychange', () => {
         answers.push(workspace.isCommandAvailable('--open', { value: 'a' }));
@@ -472,7 +472,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('keeps unchanged assignments, queries, and unrelated updates quiet', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createWorkspace();
       const available = vi.fn();
       workspace.addEventListener('commandavailabilitychange', available);
       workspace.value = workspace.value;
@@ -483,7 +483,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('allows a notification listener to schedule a subsequent capability change', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createWorkspace();
       const answers: boolean[] = [];
       workspace.addEventListener('commandavailabilitychange', () => {
         answers.push(workspace.isCommandAvailable('--close', { value: 'a' }));
@@ -495,7 +495,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('announces command commits', async () => {
-      const { workspace, button } = await setup();
+      const { workspace, button } = await createWorkspace();
       workspace.closable = true;
       await elementIsStable(workspace);
       const available = vi.fn();
@@ -506,7 +506,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('announces supplied panel additions and removals after reconciliation', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createWorkspace();
       const answers: boolean[] = [];
       workspace.addEventListener('commandavailabilitychange', () => {
         answers.push(workspace.isCommandAvailable('--open', { value: 'added' }));
@@ -523,7 +523,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('announces panel constraint changes', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createWorkspace();
       const available = vi.fn();
       workspace.addEventListener('commandavailabilitychange', available);
       workspace.querySelector('#b')!.setAttribute('min-height', '480');
@@ -532,7 +532,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('announces changed viewport measurements', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createWorkspace();
       const available = vi.fn();
       workspace.addEventListener('commandavailabilitychange', available);
       workspace.style.width = '600px';
@@ -547,7 +547,7 @@ describe('workspace invoker commands', () => {
 
   describe('restoration interruption', () => {
     it('keeps restoration active when a placement command is unavailable', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       workspace.animateTo(JSON.stringify(peers()), { duration: 10000 });
       const panel = workspace.querySelector('#a')!;
@@ -565,7 +565,7 @@ describe('workspace invoker commands', () => {
     });
 
     it('finishes restoration when a placement command commits', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       workspace.animateTo(JSON.stringify(peers()), { duration: 10000 });
       const panel = workspace.querySelector('#a')!;
@@ -583,7 +583,7 @@ describe('workspace invoker commands', () => {
 
   describe('gesture interruption', () => {
     it('cancels an active carry before a real command mutation and retains application content', async () => {
-      const { workspace, button, changed } = await setup();
+      const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
       workspace.closable = true;
       await elementIsStable(workspace);
@@ -645,7 +645,7 @@ describe('workspace placement preserves supplied content', () => {
     fixture = undefined;
   });
 
-  async function setup(value = arrangement) {
+  async function createWorkspace(value = arrangement) {
     fixture = await createFixture(html`
       <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${value}>
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained" /></nve-workspace-panel>
@@ -688,7 +688,7 @@ describe('workspace placement preserves supplied content', () => {
   }
 
   it('should split a tab from its own group and retain supplied content and labels', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const panel = workspace.querySelector('#a')!;
     const input = panel.querySelector('input')!;
     const label = panel.querySelector('nve-workspace-panel-header')!;
@@ -715,7 +715,7 @@ describe('workspace placement preserves supplied content', () => {
   });
 
   it('should join a whole group in its original order and focus its first tab', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     await move(workspace, 'a', { target: 'c', group: true });
     expect(snapshot(workspace).root).toEqual({ type: 'group', panels: ['c', 'd', 'a', 'b'], active: 'a' });
     expect(workspace.shadowRoot!.activeElement).toBe(control(workspace, '[data-panel="a"]'));
@@ -727,7 +727,7 @@ describe('workspace placement preserves supplied content', () => {
     if (initial.root?.type !== 'split' || initial.root.children[0]?.type !== 'group')
       throw new Error('Invalid fixture');
     initial.root.children[0].panels.push('missing');
-    const workspace = await setup(JSON.stringify(initial));
+    const workspace = await createWorkspace(JSON.stringify(initial));
     await move(workspace, 'a', { target: 'c', group: true });
     expect(snapshot(workspace).root).toEqual({ type: 'group', panels: ['c', 'd', 'a', 'b', 'missing'], active: 'a' });
   });

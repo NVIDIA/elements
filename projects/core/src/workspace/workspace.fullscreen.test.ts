@@ -35,13 +35,18 @@ describe('workspace group fullscreen', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(fullscreenable = true) {
+  async function createFullscreenWorkspace(fullscreenable = true) {
     fixture = await createFixture(
       html`<nve-workspace ?fullscreenable=${fullscreenable} groupable rearrangeable resizable closable style="width:700px;height:300px" .value=${initial}>${['a', 'companion', 'b'].map(id => html`<nve-workspace-panel id=${id}><nve-workspace-panel-header>${id}</nve-workspace-panel-header><input .value=${id}></nve-workspace-panel>`)}</nve-workspace>`
     );
     const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
     native = null;
+    const matches = workspace.matches;
+
+    vi.spyOn(workspace, 'matches').mockImplementation(selector =>
+      selector === ':fullscreen' ? native === workspace : matches.call(workspace, selector)
+    );
     vi.spyOn(document, 'fullscreenElement', 'get').mockImplementation(() => native);
     const request = vi.spyOn(workspace, 'requestFullscreen').mockImplementation(async () => {
       native = workspace;
@@ -62,9 +67,28 @@ describe('workspace group fullscreen', () => {
     await elementIsStable(workspace);
   }
 
+  for (const fullscreenable of [false, true]) {
+    it(`preserves application-owned native fullscreen with capability ${fullscreenable}`, async () => {
+      const { workspace, request, exit, saved, changed } = await createFullscreenWorkspace(fullscreenable);
+      await workspace.requestFullscreen();
+      await elementIsStable(workspace);
+      expect(request).toHaveBeenCalledOnce();
+      expect(native).toBe(workspace);
+      expect(exit).not.toHaveBeenCalled();
+      expect(workspace.value).toBe(saved);
+      expect(changed).not.toHaveBeenCalled();
+      expect(workspace.shadowRoot!.querySelector('[part~="fullscreen-button"]')?.getAttribute('aria-label')).not.toBe(
+        'exit full screen'
+      );
+      native = null;
+      document.dispatchEvent(new Event('fullscreenchange'));
+      await elementIsStable(workspace);
+    });
+  }
+
   describe('capability and availability', () => {
     it('requires the reflected capability for new entry and leaves availability queries pure', async () => {
-      const { workspace, request, exit, saved, changed } = await setup(false);
+      const { workspace, request, exit, saved, changed } = await createFullscreenWorkspace(false);
       const availability = vi.fn();
       workspace.addEventListener('commandavailabilitychange', availability);
       expect(workspace.fullscreenable).toBe(false);
@@ -82,7 +106,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('ignores unknown commands while fullscreen is available or active', async () => {
-      const { workspace, request, exit, saved, changed } = await setup();
+      const { workspace, request, exit, saved, changed } = await createFullscreenWorkspace();
       for (const active of [false, true]) {
         if (active) {
           await invoke(workspace, '--enter-fullscreen');
@@ -97,7 +121,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('queries fullscreen availability only when a group control is shown', async () => {
-      const { workspace } = await setup(false);
+      const { workspace } = await createFullscreenWorkspace(false);
       const available = vi.spyOn(workspace, 'isCommandAvailable');
       workspace.requestUpdate();
       await elementIsStable(workspace);
@@ -111,7 +135,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('reports fullscreen availability without requesting browser admission', async () => {
-      const { workspace, request, changed } = await setup();
+      const { workspace, request, changed } = await createFullscreenWorkspace();
       expect(workspace.isCommandAvailable('--enter-fullscreen', { value: 'a' })).toBe(true);
       expect(workspace.isCommandAvailable('--toggle-fullscreen', { value: 'a' })).toBe(true);
       expect(workspace.isCommandAvailable('--exit-fullscreen', { value: 'a' })).toBe(false);
@@ -125,7 +149,7 @@ describe('workspace group fullscreen', () => {
 
   describe('group controls', () => {
     it('keeps one command control across tab switches and supports singleton groups', async () => {
-      const { workspace, request, exit } = await setup();
+      const { workspace, request, exit } = await createFullscreenWorkspace();
       const buttons = [
         ...workspace.shadowRoot!.querySelectorAll<HTMLElement>('.group-chrome [part~="fullscreen-button"]')
       ];
@@ -155,7 +179,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('reserves measured group controls beside authored suffixes when tabs overflow', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createFullscreenWorkspace();
       const header = workspace.querySelector<HTMLElement>('#a nve-workspace-panel-header')!;
       const suffix = document.createElement('span');
       suffix.slot = 'suffix';
@@ -220,7 +244,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('reallocates tab space when shared header control sizing changes', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createFullscreenWorkspace();
       const group = workspace.shadowRoot!.querySelector<HTMLElement>('.group-chrome')!;
       const strip = group.querySelector<HTMLElement>('.tablist')!;
       const grip = group.querySelector<HTMLElement>('nve-drag-handle')!;
@@ -246,7 +270,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('reserves customized divider widths across groups and container styles', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createFullscreenWorkspace();
       const header = workspace.querySelector<HTMLElement>('#a nve-workspace-panel-header')!;
       const suffix = document.createElement('span');
       suffix.slot = 'suffix';
@@ -297,7 +321,7 @@ describe('workspace group fullscreen', () => {
 
   describe('browser admission and group switching', () => {
     it('projects the admitted group without altering its arrangement and restores the current layout on browser exit', async () => {
-      const { workspace, request, changed, saved } = await setup();
+      const { workspace, request, changed, saved } = await createFullscreenWorkspace();
       const input = workspace.querySelector('#a input');
       await invoke(workspace, '--enter-fullscreen');
       expect(request).toHaveBeenCalledOnce();
@@ -324,7 +348,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('switches pending groups without another request and keeps cancellation after disabling entry', async () => {
-      const { workspace, request, exit } = await setup();
+      const { workspace, request, exit } = await createFullscreenWorkspace();
       const admission = Promise.withResolvers<undefined>();
       request.mockReturnValueOnce(admission.promise);
       await invoke(workspace, '--enter-fullscreen');
@@ -348,7 +372,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('admits an accepted pending entry after disabling entry and removing its target', async () => {
-      const { workspace, request, exit } = await setup();
+      const { workspace, request, exit } = await createFullscreenWorkspace();
       const admission = Promise.withResolvers<undefined>();
       request.mockReturnValueOnce(admission.promise);
       await invoke(workspace, '--enter-fullscreen');
@@ -367,7 +391,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('projects browser admission before its request promise settles', async () => {
-      const { workspace, request } = await setup();
+      const { workspace, request } = await createFullscreenWorkspace();
       const admission = Promise.withResolvers<undefined>();
       request.mockReturnValueOnce(admission.promise);
       await invoke(workspace, '--enter-fullscreen');
@@ -381,7 +405,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('leaves the normal arrangement visible after failed admission', async () => {
-      const { workspace, request, changed, saved } = await setup();
+      const { workspace, request, changed, saved } = await createFullscreenWorkspace();
       request.mockRejectedValueOnce(new Error('Denied'));
       await invoke(workspace, '--toggle-fullscreen');
       expect(workspace.shadowRoot!.querySelectorAll('[data-panel]')).toHaveLength(3);
@@ -390,7 +414,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('exits an admission that arrives after a pending request was cancelled', async () => {
-      const { workspace, request, exit, changed, saved } = await setup();
+      const { workspace, request, exit, changed, saved } = await createFullscreenWorkspace();
       let admit: (() => void) | undefined;
       request.mockImplementationOnce(
         () =>
@@ -416,7 +440,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('ignores rejection of an older request while a newer admission is pending', async () => {
-      const { workspace, request, changed, saved } = await setup();
+      const { workspace, request, changed, saved } = await createFullscreenWorkspace();
       const older = Promise.withResolvers<undefined>();
       const newer = Promise.withResolvers<undefined>();
       request.mockReturnValueOnce(older.promise).mockReturnValueOnce(newer.promise);
@@ -439,7 +463,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('keeps a newer fullscreen group when an older cancelled request succeeds', async () => {
-      const { workspace, request, exit, changed, saved } = await setup();
+      const { workspace, request, exit, changed, saved } = await createFullscreenWorkspace();
       const older = Promise.withResolvers<undefined>();
       request.mockReturnValueOnce(older.promise);
       await invoke(workspace, '--enter-fullscreen');
@@ -458,7 +482,7 @@ describe('workspace group fullscreen', () => {
 
   describe('availability notifications', () => {
     it('announces pending fullscreen admission and rejection independently of the arrangement', async () => {
-      const { workspace, request, changed } = await setup();
+      const { workspace, request, changed } = await createFullscreenWorkspace();
       let reject: (() => void) | undefined;
       request.mockImplementationOnce(
         () =>
@@ -480,7 +504,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('announces logical group switches without another native fullscreen request', async () => {
-      const { workspace, request, changed } = await setup();
+      const { workspace, request, changed } = await createFullscreenWorkspace();
       await invoke(workspace, '--enter-fullscreen');
       const availability = vi.fn();
       workspace.addEventListener('commandavailabilitychange', availability);
@@ -498,7 +522,7 @@ describe('workspace group fullscreen', () => {
 
   describe('focus and supplied panel reconciliation', () => {
     it('preserves focus in panel content when the browser exits fullscreen', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createFullscreenWorkspace();
       await invoke(workspace, '--enter-fullscreen');
       const input = workspace.querySelector<HTMLInputElement>('#a input')!;
       input.focus();
@@ -512,7 +536,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('preserves focus inside shadow content when the browser exits fullscreen', async () => {
-      const { workspace } = await setup();
+      const { workspace } = await createFullscreenWorkspace();
       const content = document.createElement('div');
       const shadow = content.attachShadow({ mode: 'open' });
       const input = document.createElement('input');
@@ -532,7 +556,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('keeps surviving companions when the target panel is removed', async () => {
-      const { workspace, exit } = await setup();
+      const { workspace, exit } = await createFullscreenWorkspace();
       await invoke(workspace, '--enter-fullscreen');
       const presentOtherGroup = vi.spyOn(workspace.querySelector<WorkspacePanel>('#b')!, '_present');
       workspace.querySelector('#a')!.remove();
@@ -543,7 +567,7 @@ describe('workspace group fullscreen', () => {
     });
 
     it('keeps a surviving companion fullscreen then exits when its last panel closes', async () => {
-      const { workspace, exit } = await setup();
+      const { workspace, exit } = await createFullscreenWorkspace();
       await invoke(workspace, '--enter-fullscreen');
       await invoke(workspace, '--close');
       expect(exit).not.toHaveBeenCalled();
