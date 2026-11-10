@@ -6,7 +6,6 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { LAYER_CHILD } from '../internal/diagnostics/errors.js';
 import { takeStreamingLayerRenderData } from '../internal/layers/streaming/layer-state.js';
-import { readLineVertex } from '../internal/records/layouts/codecs.js';
 import { SceneContent } from '../internal/composition/scene/content.js';
 import { createSceneLayerRenderItem, resolveSceneLayer } from '../internal/composition/scene/layer-record.js';
 import { MAX_GRID_COUNT } from './utils.js';
@@ -15,6 +14,7 @@ import type { SceneErrorDetail } from '../scene/scene.js';
 import { SceneGridlines } from './gridlines.js';
 import './define.js';
 import '../frame/define.js';
+import { readLineVertex } from '../../test/records.js';
 
 describe(SceneGridlines.metadata.tag, () => {
   let fixture: HTMLElement | undefined;

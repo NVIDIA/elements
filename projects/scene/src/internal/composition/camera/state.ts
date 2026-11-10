@@ -43,11 +43,6 @@ export function resolveCameraState(inputs: CameraResolutionInputs = {}): OrbitCa
   return state;
 }
 
-export function applyCameraPatch(state: OrbitCameraState, patch: CameraStatePatch | undefined): void {
-  applyPatch(state, patch);
-  assertOrbitCameraState(state);
-}
-
 function applyPatch(state: OrbitCameraState, patch: CameraStatePatch | undefined): void {
   if (!patch) return;
   if (patch.target) {

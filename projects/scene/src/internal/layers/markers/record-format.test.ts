@@ -3,7 +3,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { initializeMarkerRecords, MarkerQuaternionView, writeMarkerQuaternion } from './record-format.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
-import { readMarker } from '../../records/layouts/codecs.js';
+import { readMarker } from '../../../../test/records.js';
 
 describe('marker record format', () => {
   it('initializes every record with identity rotation, unit scale, and opaque white', () => {

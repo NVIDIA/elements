@@ -3,8 +3,8 @@
 
 import { describe, expect, it } from 'vitest';
 import { LINE_VERTEX } from '../internal/records/layouts/built-ins.js';
-import { readLineVertex } from '../internal/records/layouts/codecs.js';
 import { createGridVertices, gridVertexCount, MAX_GRID_COUNT } from './utils.js';
+import { readLineVertex } from '../../test/records.js';
 
 describe('createGridVertices', () => {
   it('writes the exact X-then-Y segments for count two and half-meter spacing', () => {

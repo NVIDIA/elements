@@ -10,7 +10,6 @@ import { getLayerCount, getLayerInstances } from '../markers/layer-state.js';
 import { createConstructedMeshRenderData, type MeshRenderData } from '../mesh/render-data.js';
 import type { RGBA } from '../../color/types.js';
 import { compilePolygon, type CompiledPolygon } from './compile.js';
-import type { PolygonGeometry } from './types.js';
 
 interface PolygonState {
   color: RGBA;
@@ -66,19 +65,6 @@ export function setPolygonLayerColor(layer: HTMLElement, color: RGBA): void {
   state.color = color;
   state.version += 1;
   notifyOwningScene(layer);
-}
-
-export function getPolygonLayerVersion(layer: HTMLElement): number {
-  return getState(layer).version;
-}
-
-export function getPolygonLayerTopologyVersion(layer: HTMLElement): number {
-  return getState(layer).topologyVersion;
-}
-
-export function getPolygonLayerGeometry(layer: HTMLElement): PolygonGeometry | null {
-  const compiled = getState(layer).compiled;
-  return compiled ? { outer: compiled.outer, holes: compiled.holes } : null;
 }
 
 export function isPolygonLayerRegistered(layer: HTMLElement): boolean {

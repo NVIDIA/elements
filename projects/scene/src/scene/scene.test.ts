@@ -5,18 +5,18 @@ import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
 import type { SceneMesh } from '../mesh/mesh.js';
-import { scenePlatform } from '../internal/gpu/platform.js';
+import {
+  scenePlatform,
+  type SceneGPUCanvasContext,
+  type SceneGPUDevice,
+  type SceneGPUDeviceLostInfo,
+  type ScenePlatform
+} from '../internal/gpu/platform.js';
 import type { SceneCamera } from '../camera/camera.js';
 import { sceneCameraController } from '../internal/composition/camera/behavior.js';
 import type { SceneFrame } from '../frame/frame.js';
 import { LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from '../internal/records/layouts/built-ins.js';
-import {
-  readMarker,
-  writeLineVertex,
-  writeMarker,
-  writePoint,
-  writeTriangleVertex
-} from '../internal/records/layouts/codecs.js';
+import { writeLineVertex, writeMarker, writePoint, writeTriangleVertex } from '../internal/records/layouts/codecs.js';
 import { CubeBuffer, type SceneCubes } from '../cubes/index.js';
 import { takeHeightfieldLayerRenderData } from '../internal/layers/heightfield/layer-state.js';
 import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
@@ -27,21 +27,7 @@ import type { Vec3 } from '../internal/math/types.js';
 import { SceneRenderer, type SceneRenderItem } from '../internal/rendering/renderer.js';
 import { SceneBody } from '../body/body.js';
 import { SceneShape } from '../body/shape.js';
-import {
-  createLineVertexSource,
-  createMarkerSource,
-  createPointSource,
-  createTriangleVertexSource
-} from '../internal/layers/sources/external-record-sources.js';
-import {
-  configureSceneTesting,
-  getNamedSceneFrameForTesting,
-  resetSceneTesting,
-  type SceneGPUCanvasContext,
-  type SceneGPUDevice,
-  type SceneGPUDeviceLostInfo,
-  type ScenePlatform
-} from '../internal/testing/scene.js';
+import { createLineVertexSource } from '../internal/layers/sources/external-record-sources.js';
 import { Scene, type SceneErrorDetail } from './scene.js';
 import '../cubes/define.js';
 import '../camera/define.js';
@@ -55,6 +41,9 @@ import '../points/define.js';
 import '../polygon/define.js';
 import '../triangles/define.js';
 import './define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
+import { createExternalRecordFixture, readMarker } from '../../test/records.js';
+import { getNamedSceneFrame } from '../internal/composition/frame/state.js';
 
 const meshTriangle = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
 
@@ -1587,8 +1576,8 @@ describe(Scene.metadata.tag, () => {
     ]);
 
     expect(queries).not.toHaveBeenCalled();
-    await vi.waitFor(() => expect(getNamedSceneFrameForTesting(element, 'rover')).toBe(frame));
-    expect(getNamedSceneFrameForTesting(element, 'robot')).toBeUndefined();
+    await vi.waitFor(() => expect(getNamedSceneFrame(element, 'rover')).toBe(frame));
+    expect(getNamedSceneFrame(element, 'robot')).toBeUndefined();
   });
 
   it('should use full syncs for structural mutations and keep nested-scene ownership isolated', async () => {
@@ -1616,7 +1605,7 @@ describe(Scene.metadata.tag, () => {
     outer.append(outerFrame);
     notifyMutation(outerMutations, [createChildListMutation(outer, [outerFrame])]);
 
-    await vi.waitFor(() => expect(getNamedSceneFrameForTesting(outer, 'outer-added')).toBe(outerFrame));
+    await vi.waitFor(() => expect(getNamedSceneFrame(outer, 'outer-added')).toBe(outerFrame));
     expect(outerQueries).toHaveBeenCalled();
 
     outerQueries.mockClear();
@@ -1627,9 +1616,9 @@ describe(Scene.metadata.tag, () => {
     expect(outerQueries).not.toHaveBeenCalled();
 
     notifyMutation(innerMutations, [createChildListMutation(inner, [innerFrame])]);
-    await vi.waitFor(() => expect(getNamedSceneFrameForTesting(inner, 'inner-added')).toBe(innerFrame));
+    await vi.waitFor(() => expect(getNamedSceneFrame(inner, 'inner-added')).toBe(innerFrame));
     expect(innerQueries).toHaveBeenCalled();
-    expect(getNamedSceneFrameForTesting(outer, 'inner-added')).toBeUndefined();
+    expect(getNamedSceneFrame(outer, 'inner-added')).toBeUndefined();
   });
 
   it('should ignore frame-shaped descendants until scene frame state is registered', async () => {
@@ -2470,7 +2459,7 @@ function createBody(id: string, type: SceneShape['type']): SceneBody {
 function setMarkerBytes(layer: HTMLElement): void {
   const bytes = new Uint8Array(MARKER.stride);
   writeMarker(bytes, 0, { position: [0, 0, 0] });
-  const source = createMarkerSource({ bytes, count: 1 });
+  const source = createExternalRecordFixture('marker', { bytes, count: 1 });
   Reflect.set(layer, 'source', source);
 }
 
@@ -2487,10 +2476,10 @@ function setStreamBytes(layer: HTMLElement, count: number): void {
   }
   const source =
     layer.localName === 'nve-scene-triangles'
-      ? createTriangleVertexSource({ bytes, count })
+      ? createExternalRecordFixture('triangle-vertex', { bytes, count })
       : layer.localName === 'nve-scene-lines'
         ? createLineVertexSource({ bytes, count })
-        : createPointSource({ bytes, count });
+        : createExternalRecordFixture('point', { bytes, count });
   Reflect.set(layer, 'source', source);
 }
 

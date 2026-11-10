@@ -3,9 +3,6 @@
 import { describe, expect, it } from 'vitest';
 import { registerMarkerLayer } from '../markers/layer-state.js';
 import {
-  getPolygonLayerGeometry,
-  getPolygonLayerTopologyVersion,
-  getPolygonLayerVersion,
   isPolygonLayerRegistered,
   registerPolygonLayer,
   setPolygonLayerColor,
@@ -32,15 +29,15 @@ describe('polygon layer state', () => {
     setPolygonLayerGeometry(element, geometry);
     expect(isPolygonLayerRegistered(element)).toBe(true);
     const before = takePolygonLayerRenderData(element);
-    const topology = getPolygonLayerTopologyVersion(element);
+    const topology = takePolygonLayerRenderData(element).topologyVersion;
     outer[0]![0] = 10;
-    expect(getPolygonLayerGeometry(element)?.outer[0]).toEqual([0, 0]);
+    expect(takePolygonLayerRenderData(element).positions?.slice(0, 3)).toEqual(new Float32Array([0, 0, 0]));
     setPolygonLayerColor(element, [1, 0, 0, 1]);
     expect(takePolygonLayerRenderData(element).positions).toBe(before.positions);
-    expect(getPolygonLayerTopologyVersion(element)).toBe(topology);
-    const version = getPolygonLayerVersion(element);
+    expect(takePolygonLayerRenderData(element).topologyVersion).toBe(topology);
+    const version = takePolygonLayerRenderData(element).version;
     setPolygonLayerColor(element, [1, 0, 0, 1]);
-    expect(getPolygonLayerVersion(element)).toBe(version);
+    expect(takePolygonLayerRenderData(element).version).toBe(version);
   });
 
   it('becomes inert for invalid polygons and recovers after replacement or clearing', () => {
@@ -65,8 +62,8 @@ describe('polygon layer state', () => {
       identityInstance: true
     });
     setPolygonLayerGeometry(element, null);
-    expect(getPolygonLayerGeometry(element)).toBeNull();
+    expect(takePolygonLayerRenderData(element).positions).toBeNull();
     expect(takePolygonLayerRenderData(element).geometryError).toBe(false);
-    expect(() => getPolygonLayerVersion(document.createElement('div'))).toThrow(TypeError);
+    expect(() => takePolygonLayerRenderData(document.createElement('div')).version).toThrow(TypeError);
   });
 });

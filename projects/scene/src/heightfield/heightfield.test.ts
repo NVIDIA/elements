@@ -5,11 +5,7 @@ import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../internal/diagnostics/errors.js';
-import {
-  getHeightfieldLayerTopologyVersion,
-  getHeightfieldLayerVersion,
-  takeHeightfieldLayerRenderData
-} from '../internal/layers/heightfield/layer-state.js';
+import { takeHeightfieldLayerRenderData } from '../internal/layers/heightfield/layer-state.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { SceneHeightfield } from './heightfield.js';
 import './define.js';
@@ -98,24 +94,24 @@ describe(SceneHeightfield.metadata.tag, () => {
     const heightfield = new SceneHeightfield();
     const grid = validGrid();
     heightfield.grid = grid;
-    const topologyVersion = getHeightfieldLayerTopologyVersion(heightfield);
-    const version = getHeightfieldLayerVersion(heightfield);
+    const topologyVersion = takeHeightfieldLayerRenderData(heightfield).topologyVersion;
+    const version = takeHeightfieldLayerRenderData(heightfield).version;
     grid.heights[0] = 7;
     expect(heightfield.heightAt(0, 0)).toBe(0);
     heightfield.grid = grid;
     expect(heightfield.heightAt(0, 0)).toBe(7);
-    expect(getHeightfieldLayerTopologyVersion(heightfield)).toBe(topologyVersion);
-    expect(getHeightfieldLayerVersion(heightfield)).toBeGreaterThan(version);
+    expect(takeHeightfieldLayerRenderData(heightfield).topologyVersion).toBe(topologyVersion);
+    expect(takeHeightfieldLayerRenderData(heightfield).version).toBeGreaterThan(version);
     heightfield.grid = validGrid({ spacing: 2 });
-    expect(getHeightfieldLayerTopologyVersion(heightfield)).toBeGreaterThan(topologyVersion);
+    expect(takeHeightfieldLayerRenderData(heightfield).topologyVersion).toBeGreaterThan(topologyVersion);
   });
 
   it('multiplies parsed base color with samples and treats alpha as transparent', () => {
     const heightfield = new SceneHeightfield();
     heightfield.color = '#123456';
-    const version = getHeightfieldLayerVersion(heightfield);
+    const version = takeHeightfieldLayerRenderData(heightfield).version;
     heightfield.color = '#123456';
-    expect(getHeightfieldLayerVersion(heightfield)).toBe(version);
+    expect(takeHeightfieldLayerRenderData(heightfield).version).toBe(version);
     heightfield.grid = validGrid({
       colors: new Uint8Array([255, 255, 255, 128, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255])
     });

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { configureSceneTesting, resetSceneTesting } from '../testing/scene.js';
-import { getSrgbCanvasViewFormat, restoreScenePlatform, scenePlatform, type SceneGPUDevice } from './platform.js';
+import { getSrgbCanvasViewFormat, scenePlatform, type SceneGPUDevice } from './platform.js';
+import { configureSceneTesting, resetSceneTesting, restoreScenePlatform } from '../../../test/platform.js';
 
 describe(getSrgbCanvasViewFormat.name, () => {
   it('should return the compatible sRGB view for each preferred canvas format', () => {

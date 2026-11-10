@@ -132,8 +132,6 @@ fn safeScale(value: f32) -> f32 { if (abs(value) < 0.000001) { return 0.000001; 
 ${fragment}`;
 }
 
-export const MARKER_SHADER = createMarkerShader({ pass: 'color' });
-
 /** Composes the marker-outline color and ID/depth passes from shared vertex work. */
 export function createOutlineShader(options: { readonly pass: ShaderPass }): string {
   const pickFields = options.pass === 'pick' ? 'count: f32, pickId: u32, ' : '';

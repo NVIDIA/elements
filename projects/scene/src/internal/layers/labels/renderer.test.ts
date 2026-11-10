@@ -7,12 +7,11 @@ import { LabelRenderer, supportsLabelRenderer } from './renderer.js';
 import { LabelBuffer } from './buffer.js';
 import { LABEL_GLYPH_STRIDE } from './glyph-run.js';
 import { publishLabelLayer, setLabelLayerCount, setLabelLayerSource, takeLabelLayerRenderData } from './layer-state.js';
-import { configureSceneTesting, resetSceneTesting } from '../../testing/scene.js';
 import type { LabelRenderItem } from '../../rendering/render-items.js';
-
 import { MAX_LABEL_TEXT_UNITS } from './limits.js';
 import { LABEL_TEXT_LIMIT } from '../../diagnostics/errors.js';
 import { LABEL } from '../../records/layouts/built-ins.js';
+import { configureSceneTesting, resetSceneTesting } from '../../../../test/platform.js';
 
 const frame = { pixelRatio: 1, viewportHeight: 100, viewportWidth: 200 };
 

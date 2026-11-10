@@ -1,14 +1,11 @@
 import type { TemplateResult } from 'lit';
 import { html } from 'lit';
-import * as fs from 'node:fs/promises';
+import fs from 'node:fs/promises';
+import { syncBuiltinESMExports } from 'node:module';
 import { basename, resolve } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderRunner } from '@internals/vite';
 import { VitePlaywrightRunner } from '@internals/vite/runners/playwright.js';
-
-vi.mock(import('node:fs/promises'), async importOriginal => ({
-  ...(await importOriginal())
-}));
 
 describe('render measurement runner', () => {
   // Each getReport call owns a fresh page and closes its browser/CDP/server in finally.
@@ -20,6 +17,7 @@ describe('render measurement runner', () => {
 
   afterEach(() => {
     vi.restoreAllMocks();
+    syncBuiltinESMExports();
   });
 
   it('preserves literal dollar sequences in fixture text and scripts', async () => {
@@ -141,14 +139,20 @@ describe('render measurement runner', () => {
   });
 
   it('persists fixture removal diagnostics without replacing the interaction error', async () => {
+    const originalRemove = fs.rm;
     const remove = vi.spyOn(fs, 'rm');
+    syncBuiltinESMExports();
     const report = await renderRunner
       .getReport({
         name: 'fixture-cleanup-remove-error',
         workload: 'fixture removal diagnostic after interaction failure',
         content,
-        interact: async () => {
-          remove.mockRejectedValueOnce(new Error('fixture removal failure'));
+        interact: async page => {
+          const builtFixtureDir = resolve('.render/dist', basename(new URL(page.url()).pathname));
+          remove.mockImplementation(async (path, options) => {
+            if (path === builtFixtureDir) throw new Error('fixture removal failure');
+            await originalRemove(path, options);
+          });
           throw new Error('primary interaction failure');
         }
       })
@@ -164,6 +168,7 @@ describe('render measurement runner', () => {
       expect(persisted.error).toContain('primary interaction failure');
     } finally {
       remove.mockRestore();
+      syncBuiltinESMExports();
       await fs.rm(fixtureDir, { recursive: true, force: true });
     }
   });

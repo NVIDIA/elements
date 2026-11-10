@@ -6,7 +6,6 @@ import {
   LINE_TOPOLOGY_CODE,
   lineCountIsValid,
   lineJoinCount,
-  lineJoinVertex,
   lineSegmentCount,
   lineSegmentEnd,
   lineSegmentStart,
@@ -67,7 +66,6 @@ describe('line topology', () => {
       expect(
         edges.map((_, segment) => [lineSegmentStart(segment, topology), lineSegmentEnd(segment, count, topology)])
       ).toEqual(edges);
-      expect(joins.map((_, join) => lineJoinVertex(join, topology))).toEqual(joins);
     }
   });
 
@@ -83,7 +81,6 @@ describe('line topology', () => {
     expect(lineCountIsValid(count - 1, 'segments')).toBe(true);
     expect(lineSegmentStart(pairs - 1, 'segments')).toBe(count - 3);
     expect(lineSegmentEnd(pairs - 1, count - 1, 'segments')).toBe(count - 2);
-    expect(lineJoinVertex(lineJoinCount(count, 'strip') - 1, 'strip')).toBe(count - 2);
   });
 
   it('retains the topology uniform encoding', () => {

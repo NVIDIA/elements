@@ -134,18 +134,6 @@ export function setHeightfieldLayerColor(layer: HTMLElement, color: RGBA): void 
   notifyOwningScene(layer);
 }
 
-export function getHeightfieldLayerVersion(layer: HTMLElement): number {
-  return getState(layer).version;
-}
-
-export function getHeightfieldLayerTopologyVersion(layer: HTMLElement): number {
-  return getState(layer).topologyVersion;
-}
-
-export function getHeightfieldLayerGrid(layer: HTMLElement): HeightfieldGrid | null {
-  return getState(layer).grid;
-}
-
 export function getHeightfieldLayerSampler(layer: HTMLElement): PreparedGridSampler | null {
   return getState(layer).sampler;
 }

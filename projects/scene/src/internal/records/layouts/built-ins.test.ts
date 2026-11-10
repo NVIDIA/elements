@@ -3,7 +3,8 @@
 import { describe, expect, it } from 'vitest';
 import * as layouts from './built-ins.js';
 import { FIELD_BYTE_WIDTHS } from './define-layout.js';
-import { readMarker, writeMarker } from './codecs.js';
+import { writeMarker } from './codecs.js';
+import { readMarker } from '../../../../test/records.js';
 
 describe('built-in packed layouts', () => {
   it('defines distinct immutable protocols with aligned fields that fit one record', () => {

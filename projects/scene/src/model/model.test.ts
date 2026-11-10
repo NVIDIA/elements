@@ -11,13 +11,13 @@ import { getNamedSceneFrame, isFrameChainValid } from '../internal/composition/f
 import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 import { PreparedRGBAModulation } from '../internal/color/modulation.js';
 import { resolveSceneColor } from '../internal/color/color.js';
-import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import type { SceneErrorDetail } from '../index.js';
 import './define.js';
 import '../joint/define.js';
 import '../body/define.js';
 import '../camera/define.js';
 import '../points/define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
 
 function composition() {
   const scene = document.createElement('nve-scene');

@@ -25,15 +25,7 @@ import {
 import type { PickRenderer } from './picking/renderer.js';
 import type { LinearColor, OitResources, RenderTargets } from './render-targets.js';
 
-export type {
-  LineRenderItem,
-  LabelRenderItem,
-  MarkerRenderItem,
-  MeshRenderItem,
-  PointRenderItem,
-  SceneRenderItem,
-  TriangleRenderItem
-} from './render-items.js';
+export type { SceneRenderItem } from './render-items.js';
 interface PreparedFrame {
   readonly colorView: SceneGPUTextureView;
   readonly depthView: SceneGPUTextureView | null;

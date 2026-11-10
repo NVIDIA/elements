@@ -3,7 +3,6 @@
 
 import { describe, expect, it } from 'vitest';
 import {
-  IDENTITY_QUATERNION,
   multiplyQuaternions,
   normalizeQuaternion,
   normalizeQuaternionInto,
@@ -34,7 +33,7 @@ describe('quaternion math', () => {
     expect(Math.hypot(...rotated)).toBeCloseTo(Math.hypot(...vector), 12);
     expect(vector).toEqual([3, 4, 5]);
     expect(quarterTurn).toEqual([0, 0, Math.SQRT1_2, Math.SQRT1_2]);
-    expect(rotateVectorByQuaternion(vector, IDENTITY_QUATERNION)).toEqual(vector);
+    expect(rotateVectorByQuaternion(vector, [0, 0, 0, 1])).toEqual(vector);
     expect(rotateVectorByQuaternion([0, 0, 0], quarterTurn)).toEqual([0, 0, 0]);
   });
 
@@ -53,8 +52,6 @@ describe('quaternion math', () => {
     const length = Math.sqrt(30);
 
     expect(result).toEqual([1 / length, 2 / length, 3 / length, 4 / length]);
-    expect(IDENTITY_QUATERNION).toEqual([0, 0, 0, 1]);
-    expect(Object.isFrozen(IDENTITY_QUATERNION)).toBe(true);
   });
 
   it('should compose two fixed 90-degree orientations', () => {

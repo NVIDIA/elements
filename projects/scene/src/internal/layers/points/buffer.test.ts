@@ -3,8 +3,8 @@
 
 import { describe, expect, it } from 'vitest';
 import { POINT } from '../../records/layouts/built-ins.js';
-import { readPoint } from '../../records/layouts/codecs.js';
 import { PointBuffer } from './buffer.js';
+import { readPoint } from '../../../../test/records.js';
 
 describe('point buffer', () => {
   it('seeds records equivalently to incremental writes', () => {

@@ -168,18 +168,11 @@ function createMeshRenderData(mesh: HTMLElement, consumeUploads: boolean): MeshR
     version: state.version
   });
 }
-
-export function getMeshLayerVersion(mesh: HTMLElement): number {
-  return getState(mesh).version;
-}
 export function isMeshLayerRegistered(mesh: HTMLElement): boolean {
   return states.has(mesh);
 }
 export function takeMeshLayerRenderData(mesh: HTMLElement): MeshRenderData {
   return createMeshRenderData(mesh, true);
-}
-export function getMeshTopologyVersion(mesh: HTMLElement): number {
-  return getState(mesh).topologyVersion;
 }
 
 /** Captured geometry for body compilation; null while empty or invalid. */

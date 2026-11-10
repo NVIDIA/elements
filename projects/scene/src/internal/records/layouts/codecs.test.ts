@@ -2,16 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import {
-  readLineVertex,
-  readMarker,
-  readPoint,
-  readTriangleVertex,
-  writeLineVertex,
-  writeMarker,
-  writePoint,
-  writeTriangleVertex
-} from './codecs.js';
+import { writeLineVertex, writeMarker, writePoint, writeTriangleVertex } from './codecs.js';
+import { readLineVertex, readMarker, readPoint, readTriangleVertex } from '../../../../test/records.js';
 
 describe('marker layout helpers', () => {
   it('should write a complete marker record using the normative byte table', () => {
@@ -92,7 +84,7 @@ describe('marker layout helpers', () => {
   });
 
   it('should reject insufficient bytes', () => {
-    expect(() => readMarker(new Uint8Array(47), 0)).toThrow(RangeError);
+    expect(() => writeMarker(new Uint8Array(47), 0, { position: [0, 0, 0] })).toThrow(RangeError);
   });
 
   it('should reject nonfinite numeric values and zero quaternions', () => {
@@ -103,16 +95,6 @@ describe('marker layout helpers', () => {
     expect(() => writeMarker(new Uint8Array(48), 0, { position: [0, 0, 0], orientation: [0, 0, 0, 0] })).toThrow(
       RangeError
     );
-  });
-
-  it('should reject invalid float and quaternion bytes when reading', () => {
-    const bytes = new Uint8Array(48);
-    const view = new DataView(bytes.buffer);
-    view.setFloat32(0, Number.NaN, true);
-    expect(() => readMarker(bytes, 0)).toThrow(RangeError);
-
-    view.setFloat32(0, 0, true);
-    expect(() => readMarker(bytes, 0)).toThrow(RangeError);
   });
 });
 

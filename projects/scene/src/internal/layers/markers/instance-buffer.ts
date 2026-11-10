@@ -533,17 +533,6 @@ function markerRecordFieldsAreValid(values: DataView, offset: number): boolean {
   return Number.isFinite(fieldSum) && orientationLengthSquared !== 0;
 }
 
-/** Validates a borrowed marker prefix without allocating staging storage or indexes. */
-export function markerSourceRecordsAreValid(source: Uint8Array, activeCount: number): boolean {
-  if (!Number.isInteger(activeCount) || activeCount < 0 || source.byteLength % MARKER.stride !== 0) return false;
-  if (activeCount > source.byteLength / MARKER.stride) return false;
-  const records = new DataView(source.buffer, source.byteOffset, activeCount * MARKER.stride);
-  for (let index = 0; index < activeCount; index += 1) {
-    if (!markerRecordFieldsAreValid(records, index * MARKER.stride)) return false;
-  }
-  return true;
-}
-
 // eslint-disable-next-line max-params -- @hotpath This bulk-validation loop passes scalars to avoid allocating one tuple per marker record.
 function includeRecordBounds(
   bounds: MarkerBoundsIndex | undefined,

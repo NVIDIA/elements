@@ -4,10 +4,10 @@
 import { describe, expect, it } from 'vitest';
 import { MutableVector3View } from '../../records/packed-record-buffer.js';
 import { resolveSceneColor } from '../../color/color.js';
-import { MarkerInstanceBuffer, markerSourceRecordsAreValid } from './instance-buffer.js';
-import { readMarker } from '../../records/layouts/codecs.js';
+import { MarkerInstanceBuffer } from './instance-buffer.js';
 import { MarkerBuffer } from './buffer.js';
 import { ArrowBuffer, ConeBuffer, CubeBuffer, CylinderBuffer, PyramidBuffer, SphereBuffer } from './semantic-buffer.js';
+import { readMarker } from '../../../../test/records.js';
 
 describe('semantic marker buffers', () => {
   it('shares marker defaults and normalizes retained orientations before notifying a mutation', () => {
@@ -92,14 +92,6 @@ describe('semantic marker buffers', () => {
     const vector = new MutableVector3View(new DataView(new ArrayBuffer(12)), 0);
     vector.set(1, 2, 3);
     expect(vector.toArray()).toEqual([1, 2, 3]);
-  });
-
-  it('validates borrowed marker prefixes without staging them', () => {
-    const source = new CubeBuffer({ records: [{}] });
-    expect(markerSourceRecordsAreValid(source.mutableBytes, -1)).toBe(false);
-    expect(markerSourceRecordsAreValid(source.mutableBytes, 2)).toBe(false);
-    source.mutableBytes.fill(0, 12, 28);
-    expect(markerSourceRecordsAreValid(source.mutableBytes, 1)).toBe(false);
   });
 
   it('tracks inactive counts, opaque outlines, and invalid bounds', () => {

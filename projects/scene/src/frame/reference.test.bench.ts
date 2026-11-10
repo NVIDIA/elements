@@ -5,10 +5,10 @@ import { html } from 'lit';
 import { describe, test, type BenchRunOptions } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import type { SceneFrame } from './frame.js';
-import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import './define.js';
 import '../cubes/define.js';
 import '../model/define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
 
 const options = { iterations: 10, throws: true, time: 750, warmupTime: 200 } satisfies BenchRunOptions;
 

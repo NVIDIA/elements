@@ -39,8 +39,6 @@ import { getElementFeatureId, updateElementFeatureIdInactive } from '../../inter
 import { getGridlinesCheckerboard } from '../../layers/gridlines.js';
 import type { SceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
 
-export type { SceneLayerKind } from '../../layers/registry.js';
-
 type PendingLayerRecord = { readonly kind: SceneLayerKind; readonly layer: HTMLElement; readonly status: 'pending' };
 type MarkerLayerRecord = {
   readonly kind: 'marker';

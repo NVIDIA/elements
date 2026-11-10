@@ -28,7 +28,6 @@ import {
 import { parseCSSColor, resolveSceneColor } from '../../color/color.js';
 import { EMPTY_ALPHA_SUMMARY, summarizeRGBAAlpha, type AlphaSummary } from '../../color/alpha.js';
 import type { SceneColor, RGBA } from '../../color/types.js';
-
 import { createPreparationContext, runPreparation, type PreparationContext } from '../../rendering/preparation.js';
 
 interface BodyLayerState {
@@ -223,10 +222,6 @@ export function refreshBodyLayerTint(layer: HTMLElement): void {
   state.tint = composeModelTint(layer, state.ownTint);
   state.version += 1;
   notifyOwningScene(layer);
-}
-
-export function getBodyLayerTopologyVersion(layer: HTMLElement): number {
-  return getState(layer).topologyVersion;
 }
 
 export function isBodyLayerRegistered(layer: HTMLElement): boolean {

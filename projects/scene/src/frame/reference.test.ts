@@ -6,13 +6,13 @@ import { html } from 'lit';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { SceneContent } from '../internal/composition/scene/content.js';
 import { getFrameWorldMatrixPrecise, isFrameChainValid } from '../internal/composition/frame/state.js';
-import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import type { SceneFrame } from './frame.js';
 import type { Vec3 } from '../internal/math/types.js';
 import './define.js';
 import '../body/define.js';
 import '../points/define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
 
 function frame(name: string, position: Vec3 = [0, 0, 0]): SceneFrame {
   const element = document.createElement('nve-scene-frame');

@@ -9,7 +9,6 @@ import {
   connectBodyLayer,
   disconnectBodyLayer,
   getBodyLayerGeometry,
-  getBodyLayerTopologyVersion,
   isBodyLayerRegistered,
   registerBodyLayer,
   setBodyLayerGeometry,
@@ -54,7 +53,7 @@ describe('body layer state', () => {
     expect(isBodyLayerRegistered(body)).toBe(true);
     expect(getBodyLayerGeometry(body)).toBe(nodes);
     const before = takeBodyLayerRenderData(body);
-    const topology = getBodyLayerTopologyVersion(body);
+    const topology = takeBodyLayerRenderData(body).topologyVersion;
     positions.fill(9);
     setBodyLayerTint(body, '#ff0000');
     const after = takeBodyLayerRenderData(body);
@@ -62,7 +61,7 @@ describe('body layer state', () => {
     expect(after.positions?.[0]).toBe(0);
     expect(after.color).toEqual([1, 0, 0, 1]);
     expect(after.version).toBeGreaterThan(before.version);
-    expect(getBodyLayerTopologyVersion(body)).toBe(topology);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(topology);
     setLayerInstances(body, new MarkerBuffer({ records: [{}] }));
     expect(takeBodyLayerRenderData(body).identityInstance).toBe(false);
   });

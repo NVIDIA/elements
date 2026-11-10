@@ -5,11 +5,11 @@ import { html } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { LAYER_CHILD } from '../internal/diagnostics/errors.js';
-import { readLineVertex } from '../internal/records/layouts/codecs.js';
 import { takeStreamingLayerRenderData } from '../internal/layers/streaming/layer-state.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { SceneAxes } from './axes.js';
 import './define.js';
+import { readLineVertex } from '../../test/records.js';
 
 describe(SceneAxes.metadata.tag, () => {
   let fixture: HTMLElement | undefined;

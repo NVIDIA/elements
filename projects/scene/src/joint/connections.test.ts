@@ -6,11 +6,11 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { SceneContent } from '../internal/composition/scene/content.js';
 import { getNamedSceneFrame, isFrameChainValid } from '../internal/composition/frame/state.js';
-import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import type { SceneBody } from '../body/body.js';
 import type { SceneErrorDetail } from '../index.js';
 import './define.js';
 import '../model/define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
 
 function graph() {
   const scene = document.createElement('nve-scene');

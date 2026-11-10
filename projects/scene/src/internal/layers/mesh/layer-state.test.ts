@@ -1,14 +1,13 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { scenePlatform, restoreScenePlatform } from '../../gpu/platform.js';
+import { scenePlatform } from '../../gpu/platform.js';
 import { captureTestMeshGeometry } from '../../../../test/rendering.js';
 import { PREPARATION_CHUNK_SIZE } from '../../rendering/preparation.js';
 import { registerMarkerLayer } from '../markers/layer-state.js';
 import {
-  getMeshRenderData,
   getMeshPartGeometry,
-  getMeshTopologyVersion,
+  getMeshRenderData,
   isMeshLayerRegistered,
   publishMeshGeometry,
   registerMeshLayer,
@@ -17,6 +16,7 @@ import {
   setMeshGeometryProperty,
   takeMeshLayerRenderData
 } from './layer-state.js';
+import { restoreScenePlatform } from '../../../../test/platform.js';
 
 function layer(): HTMLElement {
   const element = document.createElement('div');
@@ -380,7 +380,7 @@ describe('mesh layer state', () => {
     const positions = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
     replaceMeshGeometry(mesh, { positions });
     expect(isMeshLayerRegistered(mesh)).toBe(true);
-    const topology = getMeshTopologyVersion(mesh);
+    const topology = getMeshRenderData(mesh).topologyVersion;
     takeMeshLayerRenderData(mesh);
     positions[0] = 8;
     positions[3] = 2;
@@ -388,7 +388,7 @@ describe('mesh layer state', () => {
     publishMeshGeometry(mesh, { attribute: 'positions', source: positions, start: 1, count: 1 });
     expect(getMeshRenderData(mesh).positions?.[0]).toBe(0);
     expect(getMeshRenderData(mesh).positions?.[3]).toBe(2);
-    expect(getMeshTopologyVersion(mesh)).toBe(topology);
+    expect(getMeshRenderData(mesh).topologyVersion).toBe(topology);
     expect(getMeshRenderData(mesh).geometryUploadRanges).toEqual([{ attribute: 'positions', offset: 12, size: 12 }]);
     expect(takeMeshLayerRenderData(mesh).geometryUploadRanges).toHaveLength(1);
     expect(takeMeshLayerRenderData(mesh).geometryUploadRanges).toEqual([]);

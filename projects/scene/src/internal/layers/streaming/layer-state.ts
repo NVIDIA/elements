@@ -210,11 +210,6 @@ export function getStreamingLayerKind(layer: HTMLElement): StreamingLayerKind {
   return getState(layer).kind;
 }
 
-/** Returns the mutation version without consuming pending upload ranges. */
-export function getStreamingLayerVersion(layer: HTMLElement): number {
-  return getState(layer).buffer.getVersion();
-}
-
 export function takeStreamingLayerRenderData(layer: HTMLElement): StreamingLayerRenderData {
   return createStreamingLayerRenderData(layer, { consumeUploadRanges: true });
 }

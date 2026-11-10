@@ -249,7 +249,7 @@ function depthTemplate(): string {
       import { SceneCamera } from '../../src/camera/camera.ts';
       import { SceneGridlines } from '../../src/gridlines/gridlines.ts';
       import { SceneTriangles } from '../../src/triangles/triangles.ts';
-      import { createTriangleVertexSource } from '../../src/internal/layers/sources/external-record-sources.ts';
+      import { createExternalRecordFixture } from '../../test/records.ts';
       import { TRIANGLE_VERTEX } from '../../src/internal/records/layouts/built-ins.ts';
       import { writeTriangleVertex } from '../../src/internal/records/layouts/codecs.ts';
       define(Scene); define(SceneCamera); define(SceneGridlines); define(SceneTriangles);
@@ -259,7 +259,7 @@ function depthTemplate(): string {
         const color = [1, 0, 1, 1];
         const vertices = [[-2, -2, height], [0, -2, height], [0, 2, height], [-2, -2, height], [0, 2, height], [-2, 2, height]];
         vertices.forEach((position, index) => writeTriangleVertex(bytes, index, { position, color }));
-        const source = createTriangleVertexSource({ bytes, count: vertices.length });
+        const source = createExternalRecordFixture('triangle-vertex', { bytes, count: vertices.length });
         layer.source = source;
       }
     </script>
@@ -307,7 +307,7 @@ function checkerboardTemplate(theme: string): string {
       import { SceneFrame } from '../../src/frame/frame.ts';
       import { SceneGridlines } from '../../src/gridlines/gridlines.ts';
       import { SceneTriangles } from '../../src/triangles/triangles.ts';
-      import { createTriangleVertexSource } from '../../src/internal/layers/sources/external-record-sources.ts';
+      import { createExternalRecordFixture } from '../../test/records.ts';
       import { TRIANGLE_VERTEX } from '../../src/internal/records/layouts/built-ins.ts';
       import { writeTriangleVertex } from '../../src/internal/records/layouts/codecs.ts';
       define(Scene); define(SceneCamera); define(SceneFrame); define(SceneGridlines); define(SceneTriangles);
@@ -315,7 +315,7 @@ function checkerboardTemplate(theme: string): string {
       const positions = [[0,0,0], [1,0,0], [1,1,0], [0,0,0], [1,1,0], [0,1,0]];
       const bytes = new Uint8Array(TRIANGLE_VERTEX.stride * positions.length);
       positions.forEach((position, index) => writeTriangleVertex(bytes, index, { position, color: [1,0,1,1] }));
-      document.querySelector('nve-scene-triangles').source = createTriangleVertexSource({ bytes, count: positions.length });
+      document.querySelector('nve-scene-triangles').source = createExternalRecordFixture('triangle-vertex', { bytes, count: positions.length });
     </script>
   `;
 }

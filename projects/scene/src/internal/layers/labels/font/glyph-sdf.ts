@@ -113,20 +113,6 @@ export class GlyphSDFRasterizer {
   }
 }
 
-/** Creates an SDF from one byte of alpha coverage per pixel. */
-export function createSignedDistanceField(
-  alpha: Uint8ClampedArray,
-  options: SignedDistanceFieldOptions
-): Uint8ClampedArray {
-  const data = alpha.slice();
-  encodeSignedDistanceField({
-    ...options,
-    alpha: data,
-    workspace: createWorkspace(Math.max(options.width, options.height))
-  });
-  return data;
-}
-
 function createRasterContext(size: number): CanvasRenderingContext2D {
   /* istanbul ignore if -- SSR imports the module, but only the browser renderer instantiates it. */
   if (typeof globalThis.document === 'undefined') {

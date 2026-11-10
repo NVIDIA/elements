@@ -23,12 +23,8 @@ import {
 } from '../../interaction/feature-ids.js';
 import { PointBuffer } from '../../layers/points/buffer.js';
 import { TriangleVertexBuffer } from '../../layers/triangles/buffer.js';
-import {
-  createSceneLayerRenderItem,
-  isTechnicallyPickableLayer,
-  resolveSceneLayer,
-  type SceneLayerKind
-} from './layer-record.js';
+import { createSceneLayerRenderItem, isTechnicallyPickableLayer, resolveSceneLayer } from './layer-record.js';
+import type { SceneLayerKind } from '../../layers/registry.js';
 
 describe('resolveSceneLayer', () => {
   it.each([
