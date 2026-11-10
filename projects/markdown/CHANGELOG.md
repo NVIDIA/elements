@@ -1,3 +1,38 @@
+## [2.0.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v2.0.5...@nvidia-elements/markdown-v2.0.6) (2026-11-10)
+
+### Features
+
+* **core:** add configurable tabs indicator animation duration ([0cc3093](https://github.com/NVIDIA/elements/commit/0cc3093056d6a6e24d9e8876fb444d3ccc0ba3b6))
+* **core:** add ghost and workspace ([c2bdec9](https://github.com/NVIDIA/elements/commit/c2bdec9701628add8dc364786023a6019660aee3))
+* **core:** scroll box invoker command support ([4b41419](https://github.com/NVIDIA/elements/commit/4b414197911ba0c5b3fd942f9f51a89b0768c419))
+
+### Bug Fixes
+
+* **cli:** drop unused utilities ([71dcf96](https://github.com/NVIDIA/elements/commit/71dcf96ff531cd4ef69db6e55f08fbeecb005015))
+* **core:** correct dropdown group navigation and popover rendering ([5bf985f](https://github.com/NVIDIA/elements/commit/5bf985f1b0e434e8b5d08f1b29b18accbfd65c14))
+* **core:** drop obsolete checkbox clip-path fallback ([8cddf24](https://github.com/NVIDIA/elements/commit/8cddf24eab9f15f444ddc25152277ebd864116bd))
+* **core:** drop obsolete constructed stylesheet polyfill ([30b0684](https://github.com/NVIDIA/elements/commit/30b068411d1bd067e60935eb8ab60d8b6ad85268))
+* **core:** drop obsolete element internals polyfill ([bb0649c](https://github.com/NVIDIA/elements/commit/bb0649ced505ef4cfc0f050302046794a935441a))
+* **core:** drop obsolete formdata polyfill ([7831582](https://github.com/NVIDIA/elements/commit/78315824a2a9bfb81a615986a181d695b5bf6acc))
+* **core:** drop obsolete logo color-mix fallback ([93ea57f](https://github.com/NVIDIA/elements/commit/93ea57f6ed300fce24952f5b44a4f5dc5b7b87b1))
+* **core:** drop obsolete scoped registry polyfill ([520e03b](https://github.com/NVIDIA/elements/commit/520e03b0244592f100edcfedc45ea2871d1cecc5))
+* **core:** drop unused utilities ([9e4b1bc](https://github.com/NVIDIA/elements/commit/9e4b1bc6b942de163d33ed71ae676041dd8fb4e6))
+* **core:** improve icon registry bundling performance ([64db7b9](https://github.com/NVIDIA/elements/commit/64db7b972645a624e11dd97249c49a6b0b2d60f7))
+* **core:** re-render bugfixes ([48e5ac4](https://github.com/NVIDIA/elements/commit/48e5ac4e5c66e0c9659e47095698fe33bfc68629))
+* **core:** refactor to use foundations internals ([6405764](https://github.com/NVIDIA/elements/commit/6405764abcd16224406fdc57a811cd745ec54971))
+* **core:** refresh menu tab order when items change ([024ff58](https://github.com/NVIDIA/elements/commit/024ff582b0d01ec8f63c629922bbf77d8e72c989))
+* **core:** remove obsolete inset-area popover fallback ([8a1d913](https://github.com/NVIDIA/elements/commit/8a1d9131f75c6c9879bef3413688e7a22a7d2306))
+* **core:** size overlays with the dynamic viewport ([3458d95](https://github.com/NVIDIA/elements/commit/3458d9566cbf6740ced6cdf9650296e0cadfe336))
+* **docs:** update 3d-force-graph to 1.80.2 ([86a69e9](https://github.com/NVIDIA/elements/commit/86a69e92a607dc254ca7df2e3e4428ae0d6126e5))
+* **forms:** drop unused utilities ([c538a47](https://github.com/NVIDIA/elements/commit/c538a47e79366919f43fb8f35950c52159f40d6c))
+* **forms:** remove obsolete popover trigger fallback ([0973027](https://github.com/NVIDIA/elements/commit/09730270e6d81c8d9139cfb56aef9d9c5a2344f6))
+* **foundations:** add shared decorator ([fa642a4](https://github.com/NVIDIA/elements/commit/fa642a4c81c7e0ec2f00d646452bcd7d595b1e34))
+* **markdown:** update to use foundations internals ([33f1490](https://github.com/NVIDIA/elements/commit/33f149046c791aad70e35b439869fd4d05efe6ed))
+* **media:** update icon imports ([7d95c48](https://github.com/NVIDIA/elements/commit/7d95c485bfbdaa180d858fc1ecf51941342e2cdf))
+* **media:** update to use foundations internals ([24d2296](https://github.com/NVIDIA/elements/commit/24d2296596c18955cfe8723f0e1c67ccc53cbfeb))
+* **themes:** correct rounding issue ([3c22eef](https://github.com/NVIDIA/elements/commit/3c22eef05362992c8a50ebc82664e6d0a76a4692))
+* **viewport:** update to use foundations internals ([a5510ec](https://github.com/NVIDIA/elements/commit/a5510ec63d0933d0d8b245c6160e0b3bf2e1f1bc))
+
 ## [2.0.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v2.0.4...@nvidia-elements/markdown-v2.0.5) (2026-11-02)
 
 ### Features
