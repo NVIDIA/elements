@@ -2,14 +2,21 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import {
-  partitionSequence,
-  assertSequencePartitionOptions,
-  mapSequenceSourceRanges,
-  type SequenceSourceRange,
-  type SequencePartition,
-  type SequencePartitionOptions
-} from './sequence-partitioning.js';
+import { mapSequenceSourceRanges, partitionSequence, type SequencePartitionOptions } from './sequence-partitioning.js';
+
+interface SequenceSourceRange {
+  readonly sourceOffset: number;
+  readonly targetOffset: number;
+  readonly count: number;
+}
+
+interface SequencePartition {
+  readonly offset: number;
+  readonly count: number;
+  readonly windowOffset: number;
+  readonly windowCount: number;
+  readonly sourceOffset: number;
+}
 
 describe(partitionSequence.name, () => {
   it('partitions a contiguous sequence and an empty sequence without context', () => {
@@ -98,37 +105,6 @@ describe(partitionSequence.name, () => {
     ]);
   });
 
-  it.each([
-    { count: -1 },
-    { count: 1.5 },
-    { count: Number.NaN },
-    { count: Number.MAX_SAFE_INTEGER + 1 },
-    { sourceCount: 4 },
-    { sourceCount: Infinity },
-    { capacity: 0 },
-    { capacity: -1 },
-    { capacity: 1.5 },
-    { before: -1 },
-    { before: 6 },
-    { before: 3, after: 1 },
-    { after: 6 },
-    { after: Number.NaN },
-    {
-      before: Number.MAX_SAFE_INTEGER,
-      after: Number.MAX_SAFE_INTEGER,
-      sourceCount: Number.MAX_SAFE_INTEGER,
-      capacity: Number.MAX_SAFE_INTEGER
-    }
-  ])('rejects invalid positions or insufficient capacity %o', changes => {
-    expect(() => assertSequencePartitionOptions({ count: 5, capacity: 4, ...changes })).toThrow(RangeError);
-  });
-
-  it('rejects an invalid boundary rule before visiting a partition', () => {
-    expect(() =>
-      Reflect.apply(assertSequencePartitionOptions, undefined, [{ count: 5, capacity: 4, boundary: 'repeat' }])
-    ).toThrow(RangeError);
-  });
-
   it('matches enumeration of maximal windows across asymmetric context and boundary rules', () => {
     for (const options of sequenceFixtures()) {
       const actual = collectPartitions(options);
@@ -205,7 +181,6 @@ interface CollectedPartition extends SequencePartition {
 }
 
 function collectPartitions(options: SequencePartitionOptions): CollectedPartition[] {
-  assertSequencePartitionOptions(options);
   const result: CollectedPartition[] = [];
   const sourceCount = options.sourceCount ?? options.count;
   partitionSequence(options, (...[offset, count, windowOffset, windowCount, sourceOffset]) => {

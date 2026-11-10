@@ -6,16 +6,16 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { BODY_DUAL_SOURCE, SHAPE_TYPE } from '../internal/diagnostics/errors.js';
 import { takeMarkerLayerRenderData } from '../internal/layers/markers/layer-state.js';
-import { getBodyLayerTopologyVersion, takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
+import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 import type { Quaternion, Vec3 } from '../internal/math/types.js';
 import type { RGBA } from '../internal/color/types.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import { compileShapes, type BodyShape } from '../internal/layers/body/compile.js';
 import { MarkerBuffer } from '../internal/layers/markers/buffer.js';
-import { configureSceneTesting, resetSceneTesting } from '../internal/testing/scene.js';
 import { SceneBody } from './body.js';
 import { SceneShape } from './shape.js';
 import './define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
 
 describe(SceneBody.metadata.tag, () => {
   let fixture: HTMLElement | undefined;
@@ -108,23 +108,23 @@ describe(SceneBody.metadata.tag, () => {
     fixture = await createFixture(html`<nve-scene-body><nve-scene-shape></nve-scene-shape></nve-scene-body>`);
     const body = fixture.querySelector(SceneBody.metadata.tag) as SceneBody;
     await elementIsStable(body);
-    const first = getBodyLayerTopologyVersion(body);
+    const first = takeBodyLayerRenderData(body).topologyVersion;
     expect(takeBodyLayerRenderData(body)).toMatchObject({ identityInstance: true, ready: true });
     const shape = body.querySelector(SceneShape.metadata.tag) as SceneShape;
     shape.setAttribute('position', '[1,0,0]');
     shape.setAttribute('scale', '[2,2,2]');
     shape.setAttribute('color', 'rgb(0 255 0)');
-    expect(getBodyLayerTopologyVersion(body)).toBe(first + 3);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(first + 3);
     await elementIsStable(body);
-    expect(getBodyLayerTopologyVersion(body)).toBe(first + 3);
-    const second = getBodyLayerTopologyVersion(body);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(first + 3);
+    const second = takeBodyLayerRenderData(body).topologyVersion;
     shape.scale = [2, 2, 2];
     await elementIsStable(body);
-    expect(getBodyLayerTopologyVersion(body)).toBe(second);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(second);
     shape.orientation = [0, 0, 1, 0];
-    expect(getBodyLayerTopologyVersion(body)).toBe(second + 1);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(second + 1);
     await elementIsStable(body);
-    expect(getBodyLayerTopologyVersion(body)).toBe(second + 1);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(second + 1);
   });
 
   it('exposes the complete compiled declarative planar geometry', async () => {

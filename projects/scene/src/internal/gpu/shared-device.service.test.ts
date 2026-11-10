@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { configureSceneTesting, resetSceneTesting } from '../testing/scene.js';
 import type { SceneGPUAdapter, SceneGPUDevice, SceneGPUDeviceLostInfo } from './platform.js';
 import { sharedDeviceService, type SharedDeviceListener } from './shared-device.service.js';
+import { configureSceneTesting, resetSceneTesting } from '../../../test/platform.js';
 
 describe('sharedDeviceService', () => {
   afterEach(() => {

@@ -7,13 +7,7 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import { LAYER_CHILD, POLYGON_GEOMETRY } from '../internal/diagnostics/errors.js';
 import { MarkerBuffer } from '../internal/layers/markers/buffer.js';
 import { takeMarkerLayerRenderData } from '../internal/layers/markers/layer-state.js';
-import {
-  getPolygonLayerGeometry,
-  getPolygonLayerTopologyVersion,
-  getPolygonLayerVersion,
-  isPolygonLayerRegistered,
-  takePolygonLayerRenderData
-} from '../internal/layers/polygon/layer-state.js';
+import { isPolygonLayerRegistered, takePolygonLayerRenderData } from '../internal/layers/polygon/layer-state.js';
 import type { PolygonGeometry } from '../internal/layers/polygon/types.js';
 import { ScenePolygon } from './polygon.js';
 import './define.js';
@@ -55,13 +49,13 @@ describe(ScenePolygon.metadata.tag, () => {
       ]
     } as PolygonGeometry;
     polygon.geometry = geometry;
-    const snapshot = getPolygonLayerGeometry(polygon);
-    const version = getPolygonLayerVersion(polygon);
+    const snapshot = takePolygonLayerRenderData(polygon).positions?.slice();
+    const version = takePolygonLayerRenderData(polygon).version;
     (geometry.outer[1] as [number, number])[0] = 3;
-    expect(getPolygonLayerGeometry(polygon)).toEqual(snapshot);
+    expect(takePolygonLayerRenderData(polygon).positions).toEqual(snapshot);
     polygon.geometry = geometry;
-    expect(getPolygonLayerGeometry(polygon)?.outer[1]).toEqual([3, 0]);
-    expect(getPolygonLayerVersion(polygon)).toBeGreaterThan(version);
+    expect(takePolygonLayerRenderData(polygon).positions?.slice(3, 6)).toEqual(new Float32Array([3, 0, 0]));
+    expect(takePolygonLayerRenderData(polygon).version).toBeGreaterThan(version);
   });
 
   it('should compile indexed local xy geometry with positive z normals and unlit identity rendering', () => {
@@ -77,7 +71,7 @@ describe(ScenePolygon.metadata.tag, () => {
   it('should preserve topology for coordinate-only recompiles and replace changed topology', () => {
     const polygon = new ScenePolygon();
     polygon.geometry = square;
-    const initial = getPolygonLayerTopologyVersion(polygon);
+    const initial = takePolygonLayerRenderData(polygon).topologyVersion;
     polygon.geometry = {
       outer: [
         [-3, -3],
@@ -86,7 +80,7 @@ describe(ScenePolygon.metadata.tag, () => {
         [-3, 3]
       ]
     };
-    expect(getPolygonLayerTopologyVersion(polygon)).toBe(initial);
+    expect(takePolygonLayerRenderData(polygon).topologyVersion).toBe(initial);
     polygon.geometry = {
       outer: [
         [-3, -3],
@@ -96,7 +90,7 @@ describe(ScenePolygon.metadata.tag, () => {
         [-3, 3]
       ]
     };
-    expect(getPolygonLayerTopologyVersion(polygon)).toBeGreaterThan(initial);
+    expect(takePolygonLayerRenderData(polygon).topologyVersion).toBeGreaterThan(initial);
   });
 
   it('should propagate base and marker alpha while supporting buffers, counts, and publication', () => {

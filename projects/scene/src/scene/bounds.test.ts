@@ -16,14 +16,12 @@ import { SceneTriangles } from '../triangles/triangles.js';
 import { SceneLabels } from '../labels/labels.js';
 import { SceneMesh } from '../mesh/mesh.js';
 import { SceneBody } from '../body/body.js';
-import '../body/define.js';
 import { ScenePolygon } from '../polygon/polygon.js';
 import { SceneHeightfield } from '../heightfield/heightfield.js';
 import { getMarkerLayerRenderData, takeMarkerLayerRenderData } from '../internal/layers/markers/layer-state.js';
 import { takeStreamingLayerRenderData } from '../internal/layers/streaming/layer-state.js';
 import { takeLabelLayerRenderData } from '../internal/layers/labels/layer-state.js';
 import { takeMeshLayerRenderData } from '../internal/layers/mesh/layer-state.js';
-import { createPointSource } from '../internal/layers/sources/external-record-sources.js';
 import { writePoint } from '../internal/records/layouts/codecs.js';
 import { POINT } from '../internal/records/layouts/built-ins.js';
 import { PointBuffer } from '../internal/layers/points/buffer.js';
@@ -45,8 +43,10 @@ import '../triangles/define.js';
 import '../labels/define.js';
 import '../mesh/define.js';
 import '../body/define.js';
+import '../body/define.js';
 import '../polygon/define.js';
 import '../heightfield/define.js';
+import { createExternalRecordFixture } from '../../test/records.js';
 
 describe('published scene bounds', () => {
   it('accepts documented zero-capacity sources without inventing geometry', () => {
@@ -104,7 +104,7 @@ describe('published scene bounds', () => {
     const points = new ScenePoints();
     const bytes = new Uint8Array(POINT.stride);
     writePoint(bytes, 0, { position: [1, 2, 3], color: [1, 1, 1, 1] });
-    points.source = createPointSource({ bytes, count: 1 });
+    points.source = createExternalRecordFixture('point', { bytes, count: 1 });
     scene.append(points);
     const query = () => scene.getBounds({ content: [points] });
     new DataView(bytes.buffer).setFloat32(0, 9, true);

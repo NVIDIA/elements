@@ -7,13 +7,14 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import { MESH_PART, MESH_PROPERTY_INACTIVE } from '../internal/diagnostics/errors.js';
 import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 import { resolveSceneLayer } from '../internal/composition/scene/layer-record.js';
-import { scenePlatform, restoreScenePlatform } from '../internal/gpu/platform.js';
+import { scenePlatform } from '../internal/gpu/platform.js';
 import { PREPARATION_CHUNK_SIZE } from '../internal/rendering/preparation.js';
 import type { SceneErrorDetail } from '../scene/scene.js';
 import type { SceneMesh } from '../mesh/mesh.js';
 import { SceneBody } from './body.js';
 import './define.js';
 import '../mesh/define.js';
+import { restoreScenePlatform } from '../../test/platform.js';
 
 const ASCII_STL =
   'solid triangle\nfacet normal 0 0 1\nouter loop\nvertex 0 0 0\nvertex 2 0 0\nvertex 0 3 0\nendloop\nendfacet\nendsolid triangle\n';

@@ -203,7 +203,7 @@ function template(): string {
       import { compileShapes } from '../../src/internal/layers/body/compile.ts';
       import { MARKER } from '../../src/internal/records/layouts/built-ins.ts';
       import { writeMarker } from '../../src/internal/records/layouts/codecs.ts';
-      import { createMarkerSource } from '../../src/internal/layers/sources/external-record-sources.ts';
+      import { createExternalRecordFixture } from '../../test/records.ts';
 
       define(Scene); define(SceneCamera); define(SceneMesh); define(SceneShape); define(SceneBody);
       const shapes = () => [
@@ -232,7 +232,7 @@ function template(): string {
       writeMarker(records, 0, { position: [-3.5, 0, 0], color: [1, 0.25, 0.25, 1] });
       writeMarker(records, 1, { position: [0, 0, 0], color: [0.25, 1, 0.25, 1] });
       writeMarker(records, 2, { position: [3.5, 0, 0], color: [0.25, 0.25, 1, 1] });
-      const source = createMarkerSource({ bytes: records, count: 3 });
+      const source = createExternalRecordFixture('marker', { bytes: records, count: 3 });
       instanceBody.source = source;
     </script>
   `;

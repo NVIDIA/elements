@@ -3,13 +3,10 @@
 
 import { describe, expect, it } from 'vitest';
 import {
-  composeMat4,
   composeMat4Into,
   composePreciseMat4,
   identityMat4,
-  invertMat4,
   invertPreciseMat4,
-  multiplyMat4,
   multiplyMat4Into,
   multiplyPreciseMat4,
   transformPointMat4,
@@ -26,7 +23,7 @@ describe('mat4 math', () => {
   });
 
   it('should compose fixed translation, orientation, and scale values', () => {
-    const matrix = composeMat4([1, 2, 3], [0, 0, Math.SQRT1_2, Math.SQRT1_2], [2, 3, 4]);
+    const matrix = composeMat4Into([1, 2, 3], [0, 0, Math.SQRT1_2, Math.SQRT1_2], [2, 3, 4], new Float32Array(16));
 
     expectArrayCloseTo([...matrix], [0, 2, 0, 0, -3, 0, 0, 0, 0, 0, 4, 0, 1, 2, 3, 1]);
   });
@@ -55,16 +52,17 @@ describe('mat4 math', () => {
     for (const [position, orientation, scale] of inputs) {
       expect(composeMat4Into(position, orientation, scale, precise)).toBe(precise);
       expect(precise).toEqual(composePreciseMat4(position, orientation, scale));
-      expect(composeMat4Into(position, orientation, scale, single)).toEqual(composeMat4(position, orientation, scale));
+      expect(composeMat4Into(position, orientation, scale, single)).toBe(single);
+      expect(single).toEqual(new Float32Array(precise));
     }
     expect(() => composeMat4Into([0, 0, 0], [0, 0, 0, 1], [1, 1, 1], new Float64Array(15))).toThrow(RangeError);
     expect(() => composeMat4Into([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], precise)).toThrow(RangeError);
   });
 
   it('should multiply parent and child transforms in column-major order', () => {
-    const parent = composeMat4([1, 0, 0], [0, 0, 0, 1]);
-    const child = composeMat4([0, 2, 0], [0, 0, 0, 1]);
-    const world = multiplyMat4(parent, child);
+    const parent = composeMat4Into([1, 0, 0], [0, 0, 0, 1], [1, 1, 1], new Float32Array(16));
+    const child = composeMat4Into([0, 2, 0], [0, 0, 0, 1], [1, 1, 1], new Float32Array(16));
+    const world = multiplyMat4Into(parent, child, new Float32Array(16));
 
     expect([...world]).toEqual([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 2, 0, 1]);
     expect(transformPointMat4(world, [1, 1, 1])).toEqual([2, 3, 1]);
@@ -92,7 +90,7 @@ describe('mat4 math', () => {
     expect(() => writeMat4ToFloat32(new Float32Array(16), identity, Number.NaN)).toThrow(RangeError);
     expect(() => writeMat4ToFloat32(new Float32Array(16), identity, -1)).toThrow(RangeError);
     expect(() => writeMat4ToFloat32(new Float32Array(16), identity, 1)).toThrow(RangeError);
-    expect(invertMat4(new Float32Array(16))).toBeNull();
+    expect(invertPreciseMat4(new Float32Array(16))).toBeNull();
     expect(invertPreciseMat4(new Float64Array(15))).toBeNull();
   });
 
@@ -100,7 +98,7 @@ describe('mat4 math', () => {
     const left = Float32Array.from({ length: 16 }, (_, index) => index + 1);
     const right = Float32Array.from({ length: 16 }, (_, index) => index + 17);
 
-    expect([...multiplyMat4(left, right)]).toEqual([
+    expect([...multiplyMat4Into(left, right, new Float32Array(16))]).toEqual([
       538, 612, 686, 760, 650, 740, 830, 920, 762, 868, 974, 1080, 874, 996, 1118, 1240
     ]);
   });
@@ -201,12 +199,12 @@ describe('mat4 math', () => {
     expect(invertPreciseMat4(matrix)![0]).toBeCloseTo(1 / denominator, 12);
   });
 
-  it('uses partial pivoting for Float32 results too', () => {
+  it('accepts Float32 inputs and preserves precision in the inverse', () => {
     const matrix = new Float32Array([1e-15, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
     const original = matrix.slice();
-    const inverse = invertMat4(matrix);
+    const inverse = invertPreciseMat4(matrix);
 
-    expect(inverse).toBeInstanceOf(Float32Array);
+    expect(inverse).toBeInstanceOf(Float64Array);
     expectInverseProducts(matrix, inverse!, 6);
     expect(matrix).toEqual(original);
   });
@@ -238,11 +236,11 @@ describe('mat4 math', () => {
       const invalid = new Float64Array(identityMat4());
       invalid[0] = value;
       expect(invertPreciseMat4(invalid)).toBeNull();
-      expect(invertMat4(new Float32Array(invalid))).toBeNull();
+      expect(invertPreciseMat4(new Float32Array(invalid))).toBeNull();
     }
     const tiny = identityMat4();
     tiny[0] = 1e-40;
-    expect(invertMat4(tiny)).toBeNull();
+    expect(() => writeMat4ToFloat32(new Float32Array(16), invertPreciseMat4(tiny)!)).toThrow(RangeError);
     expectInverseProducts(tiny, invertPreciseMat4(tiny)!);
     const subnormal = new Float64Array(identityMat4());
     subnormal[0] = Number.MIN_VALUE;
@@ -259,10 +257,12 @@ describe('mat4 math', () => {
   });
 
   it('should reject invalid vectors, quaternions, and matrices', () => {
-    expect(() => composeMat4([Number.NaN, 0, 0], [0, 0, 0, 1])).toThrow(RangeError);
-    expect(() => composeMat4([0, 0, 0], [0, 0, 0, 1], [1, Infinity, 1])).toThrow(RangeError);
-    expect(() => composeMat4([0, 0, 0], [0, 0, 0, 0])).toThrow(RangeError);
-    expect(() => multiplyMat4(new Float32Array(15), identityMat4())).toThrow(RangeError);
+    expect(() => composeMat4Into([Number.NaN, 0, 0], [0, 0, 0, 1], [1, 1, 1], new Float32Array(16))).toThrow(
+      RangeError
+    );
+    expect(() => composeMat4Into([0, 0, 0], [0, 0, 0, 1], [1, Infinity, 1], new Float32Array(16))).toThrow(RangeError);
+    expect(() => composeMat4Into([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], new Float32Array(16))).toThrow(RangeError);
+    expect(() => multiplyMat4Into(new Float32Array(15), identityMat4(), new Float32Array(16))).toThrow(RangeError);
 
     const invalid = identityMat4();
     invalid[0] = Number.NaN;
@@ -271,17 +271,11 @@ describe('mat4 math', () => {
   });
 
   it('should reject short and long vectors at the JavaScript boundary', () => {
+    expect(() => callWithUnknownArgs(composeMat4Into, [[0, 0], [0, 0, 0, 1], [1, 1, 1], new Float32Array(16)])).toThrow(
+      RangeError
+    );
     expect(() =>
-      callWithUnknownArgs(composeMat4, [
-        [0, 0],
-        [0, 0, 0, 1]
-      ])
-    ).toThrow(RangeError);
-    expect(() =>
-      callWithUnknownArgs(composeMat4, [
-        [0, 0, 0, 1],
-        [0, 0, 0, 1]
-      ])
+      callWithUnknownArgs(composeMat4Into, [[0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1], new Float32Array(16)])
     ).toThrow(RangeError);
     expect(() => callWithUnknownArgs(transformPointMat4, [identityMat4(), [0, 0, 0, 1]])).toThrow(RangeError);
   });

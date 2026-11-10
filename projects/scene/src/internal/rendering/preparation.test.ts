@@ -9,8 +9,8 @@ import {
   runPreparation,
   runPreparationSync
 } from './preparation.js';
-import { configureSceneTesting, resetSceneTesting } from '../testing/scene.js';
 import { GenerationTasks } from '../structures/generation-tasks.js';
+import { configureSceneTesting, resetSceneTesting } from '../../../test/platform.js';
 
 afterEach(resetSceneTesting);
 describe('preparation scheduling', () => {

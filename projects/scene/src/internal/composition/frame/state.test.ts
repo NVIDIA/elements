@@ -13,7 +13,6 @@ import {
   getNamedSceneFrame,
   invalidateFrameTransform,
   isFrameChainValid,
-  isFrameChainVisible,
   isFrameStateRegistered,
   registerFrameState,
   resolveSceneFrameReferences,
@@ -270,7 +269,7 @@ describe(FrameEvaluation.name, () => {
     outside.hidden = true;
     outside.append(scene);
     expect(new FrameEvaluation().isVisible(first)).toBe(false);
-    expect(isFrameChainVisible(second)).toBe(false);
+    expect(new FrameEvaluation().isVisible(second)).toBe(false);
   });
 
   it('fails closed for a detached reference target before the next registry refresh', () => {

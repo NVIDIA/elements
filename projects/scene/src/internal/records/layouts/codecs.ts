@@ -10,7 +10,7 @@ import {
 } from '../../layers/lines/style.js';
 import type { Quaternion, Vec3 } from '../../math/types.js';
 import type { RGBA } from '../../color/types.js';
-import { encodeUnorm8, readRGBA8 } from '../../color/rgba8.js';
+import { encodeUnorm8 } from '../../color/rgba8.js';
 import { LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from './built-ins.js';
 import { getFieldOffset, type LayoutDescriptor } from './define-layout.js';
 
@@ -66,26 +66,8 @@ export function writeMarker(view: ArrayBufferView, index: number, fields: Marker
   writeColor(records, offset + MARKER_OUTLINE_COLOR_OFFSET, fields.outlineColor ?? DEFAULT_OUTLINE_COLOR);
 }
 
-export function readMarker(view: ArrayBufferView, index: number): Required<MarkerFields> {
-  const record = getRecordView(view, index, MARKER);
-  const orientation = readFloat4(record, getFieldOffset(MARKER, 'orientation'));
-  assertNonzeroQuaternion(orientation);
-
-  return {
-    position: readFloat3(record, getFieldOffset(MARKER, 'position')),
-    orientation,
-    scale: readFloat3(record, getFieldOffset(MARKER, 'scale')),
-    color: readRGBA8(record, getFieldOffset(MARKER, 'color')),
-    outlineColor: readRGBA8(record, getFieldOffset(MARKER, 'outline-color'))
-  };
-}
-
 export function writePoint(view: ArrayBufferView, index: number, fields: PointFields): void {
   writePointRecord(view, index, { fields, layout: POINT });
-}
-
-export function readPoint(view: ArrayBufferView, index: number): Required<PointFields> {
-  return readPointRecord(view, index, POINT);
 }
 
 export function writeLineVertex(view: ArrayBufferView, index: number, fields: LineVertexFields): void {
@@ -103,26 +85,8 @@ export function writeLineVertex(view: ArrayBufferView, index: number, fields: Li
   record.setFloat32(getFieldOffset(LINE_VERTEX, 'gap'), gap, true);
 }
 
-export function readLineVertex(view: ArrayBufferView, index: number): Required<LineVertexFields> {
-  const record = getRecordView(view, index, LINE_VERTEX);
-  const fields = {
-    position: readFloat3(record, getFieldOffset(LINE_VERTEX, 'position')),
-    color: readRGBA8(record, getFieldOffset(LINE_VERTEX, 'color')),
-    normal: readFloat3(record, getFieldOffset(LINE_VERTEX, 'normal')),
-    width: readFiniteFloat(record, getFieldOffset(LINE_VERTEX, 'width')),
-    dash: readFiniteFloat(record, getFieldOffset(LINE_VERTEX, 'dash')),
-    gap: readFiniteFloat(record, getFieldOffset(LINE_VERTEX, 'gap'))
-  };
-  assertLineStyle(fields);
-  return fields;
-}
-
 export function writeTriangleVertex(view: ArrayBufferView, index: number, fields: TriangleVertexFields): void {
   writePointRecord(view, index, { fields, layout: TRIANGLE_VERTEX });
-}
-
-export function readTriangleVertex(view: ArrayBufferView, index: number): Required<TriangleVertexFields> {
-  return readPointRecord(view, index, TRIANGLE_VERTEX);
 }
 
 function writePointRecord(
@@ -134,14 +98,6 @@ function writePointRecord(
   const record = getRecordView(view, index, layout);
   writeFloatTuple(record, getFieldOffset(layout, 'position'), fields.position);
   writeColor(record, getFieldOffset(layout, 'color'), fields.color ?? DEFAULT_COLOR);
-}
-
-function readPointRecord(view: ArrayBufferView, index: number, layout: LayoutDescriptor): Required<PointFields> {
-  const record = getRecordView(view, index, layout);
-  return {
-    position: readFloat3(record, getFieldOffset(layout, 'position')),
-    color: readRGBA8(record, getFieldOffset(layout, 'color'))
-  };
 }
 
 function getRecordView(view: ArrayBufferView, index: number, layout: LayoutDescriptor): DataView {
@@ -227,25 +183,6 @@ function writeIdentityQuaternion(record: DataView, offset: number): void {
   record.setFloat32(offset + 12, 1, true);
 }
 
-function readFloat3(record: DataView, offset: number): Vec3 {
-  return [readFiniteFloat(record, offset), readFiniteFloat(record, offset + 4), readFiniteFloat(record, offset + 8)];
-}
-
-function readFloat4(record: DataView, offset: number): Quaternion {
-  return [
-    readFiniteFloat(record, offset),
-    readFiniteFloat(record, offset + 4),
-    readFiniteFloat(record, offset + 8),
-    readFiniteFloat(record, offset + 12)
-  ];
-}
-
-function readFiniteFloat(record: DataView, offset: number): number {
-  const value = record.getFloat32(offset, true);
-  assertFinite(value);
-  return value;
-}
-
 function writeColor(record: DataView, offset: number, color: readonly number[]): void {
   for (let channel = 0; channel < 4; channel += 1) {
     const value = color[channel];
@@ -257,12 +194,6 @@ function writeColor(record: DataView, offset: number, color: readonly number[]):
 function assertFinite(value: unknown): asserts value is number {
   if (typeof value !== 'number' || !Number.isFinite(value)) {
     throw new RangeError('Numeric layout values must be finite.');
-  }
-}
-
-function assertNonzeroQuaternion(orientation: Quaternion): void {
-  if (Math.hypot(...orientation) === 0) {
-    throw new RangeError('Quaternion length must be greater than zero.');
   }
 }
 

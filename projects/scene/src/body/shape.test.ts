@@ -6,7 +6,7 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import type { SceneShape } from './shape.js';
 import type { SceneBody } from './body.js';
 import './define.js';
-import { getBodyLayerTopologyVersion } from '../internal/layers/body/layer-state.js';
+import { takeBodyLayerRenderData } from '../internal/layers/body/layer-state.js';
 
 let fixture: HTMLElement;
 afterEach(() => {
@@ -21,9 +21,9 @@ describe('scene shape declarations', () => {
     const body = fixture.querySelector<SceneBody>('nve-scene-body')!;
     await elementIsStable(shape);
     await elementIsStable(body);
-    const topology = getBodyLayerTopologyVersion(body);
+    const topology = takeBodyLayerRenderData(body).topologyVersion;
     shape.position = [1, 2, 3];
-    expect(getBodyLayerTopologyVersion(body)).toBe(topology);
+    expect(takeBodyLayerRenderData(body).topologyVersion).toBe(topology);
     shape.position = [4, 5, 6];
     expect(body.geometry?.[0]?.position).toEqual([4, 5, 6]);
     shape.removeAttribute('position');

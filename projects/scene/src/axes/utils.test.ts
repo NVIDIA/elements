@@ -3,8 +3,8 @@
 
 import { describe, expect, it } from 'vitest';
 import { LINE_VERTEX } from '../internal/records/layouts/built-ins.js';
-import { readLineVertex } from '../internal/records/layouts/codecs.js';
 import { AXES_VERTEX_COUNT, createAxesVertices } from './utils.js';
+import { readLineVertex } from '../../test/records.js';
 
 describe('createAxesVertices', () => {
   it.each([

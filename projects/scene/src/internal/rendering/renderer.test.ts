@@ -6,25 +6,20 @@ import { LABEL, LINE_VERTEX, MARKER, POINT, TRIANGLE_VERTEX } from '../records/l
 import { writeLineVertex, writeMarker, writePoint, writeTriangleVertex } from '../records/layouts/codecs.js';
 import { identityMat4 } from '../math/mat4.js';
 import type { MarkerBounds } from '../layers/markers/bounds.js';
-import {
-  configureSceneTesting,
-  resetSceneTesting,
-  type SceneGPUDevice,
-  type SceneGPUDeviceLostInfo
-} from '../testing/scene.js';
 import type { VertexStreamIssue } from '../layers/streaming/vertex-stream.js';
 import type { SceneFeatureIdSnapshot } from '../interaction/feature-ids.js';
 import { createPickTargetDecoder } from './picking/renderer.js';
-import {
-  SceneRenderer,
-  parseComputedBackgroundColor,
-  type LineRenderItem,
-  type LabelRenderItem,
-  type MarkerRenderItem,
-  type MeshRenderItem,
-  type PointRenderItem,
-  type TriangleRenderItem
-} from './renderer.js';
+import { SceneRenderer, parseComputedBackgroundColor } from './renderer.js';
+import { configureSceneTesting, resetSceneTesting } from '../../../test/platform.js';
+import { type SceneGPUDevice, type SceneGPUDeviceLostInfo } from '../gpu/platform.js';
+import type {
+  LabelRenderItem,
+  LineRenderItem,
+  MarkerRenderItem,
+  MeshRenderItem,
+  PointRenderItem,
+  TriangleRenderItem
+} from './render-items.js';
 
 describe(parseComputedBackgroundColor.name, () => {
   it('should convert computed sRGB channels to linear values while preserving alpha', () => {

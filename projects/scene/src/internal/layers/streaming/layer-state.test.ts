@@ -7,27 +7,24 @@ import { writeLineVertex, writePoint } from '../../records/layouts/codecs.js';
 import { LineVertexBuffer } from '../lines/buffer.js';
 import { PointBuffer } from '../points/buffer.js';
 import { TriangleVertexBuffer } from '../triangles/buffer.js';
-import {
-  createLineVertexSource,
-  createPointSource,
-  createTriangleVertexSource
-} from '../sources/external-record-sources.js';
+import { createLineVertexSource } from '../sources/external-record-sources.js';
 import type {
   ExternalLineVertexSource,
   ExternalPointSource,
   ExternalTriangleVertexSource
 } from '../../records/packed-record-source.js';
 import {
-  getStreamingLayerVersion,
+  getStreamingLayerRenderData,
   publishStreamingLayer,
   reconcileStreamingLayerChildren,
   registerStreamingLayer,
   setStreamingLayerCount,
-  setStreamingLineTopology,
   setStreamingLayerSource,
+  setStreamingLineTopology,
   takeStreamingLayerRenderData
 } from './layer-state.js';
 import { resolveSceneFeatureId, takeSceneFeatureIdSnapshot } from '../../interaction/feature-ids.js';
+import { createExternalRecordFixture } from '../../../../test/records.js';
 
 describe('streaming layer state', () => {
   const layers: HTMLElement[] = [];
@@ -44,7 +41,7 @@ describe('streaming layer state', () => {
 
     const source = new Uint8Array(POINT.stride);
     setStreamingLayerSource(layer, asPointSource(source));
-    expect(getStreamingLayerVersion(layer)).toBeGreaterThan(0);
+    expect(getStreamingLayerRenderData(layer).version).toBeGreaterThan(0);
     expect(takeStreamingLayerRenderData(layer).uploadRanges).toEqual([{ offset: 0, size: POINT.stride }]);
 
     const invalidChild = document.createElement('span');
@@ -193,7 +190,7 @@ describe('streaming layer state', () => {
     expect(() => setStreamingLayerSource(lineLayer, new TriangleVertexBuffer({ capacity: 3 }))).toThrow(TypeError);
     expect(() => setStreamingLayerSource(triangleLayer, new PointBuffer({ capacity: 3 }))).toThrow(TypeError);
 
-    const source = createPointSource({ bytes: new Uint8Array(POINT.stride), count: 0 });
+    const source = createExternalRecordFixture('point', { bytes: new Uint8Array(POINT.stride), count: 0 });
     expect(source).not.toBeNull();
     expect(() => setStreamingLayerSource(lineLayer, source as never)).toThrow(TypeError);
   });
@@ -262,7 +259,7 @@ describe('streaming layer state', () => {
     layers.push(layer);
     registerStreamingLayer(layer, { kind: 'point', layout: POINT });
     const bytes = new Uint8Array(POINT.stride);
-    const source = createPointSource({ bytes, count: 1 });
+    const source = createExternalRecordFixture('point', { bytes, count: 1 });
     setStreamingLayerSource(layer, source);
     structuredClone(bytes.buffer, { transfer: [bytes.buffer] });
 
@@ -318,7 +315,7 @@ describe('streaming layer state', () => {
 });
 
 function asPointSource(bytes: Uint8Array): ExternalPointSource {
-  const source = createPointSource({ bytes, count: bytes.byteLength / POINT.stride });
+  const source = createExternalRecordFixture('point', { bytes, count: bytes.byteLength / POINT.stride });
   return source;
 }
 
@@ -328,7 +325,10 @@ function asLineSource(bytes: Uint8Array): ExternalLineVertexSource {
 }
 
 function asTriangleSource(bytes: Uint8Array): ExternalTriangleVertexSource {
-  const source = createTriangleVertexSource({ bytes, count: bytes.byteLength / TRIANGLE_VERTEX.stride });
+  const source = createExternalRecordFixture('triangle-vertex', {
+    bytes,
+    count: bytes.byteLength / TRIANGLE_VERTEX.stride
+  });
   return source;
 }
 

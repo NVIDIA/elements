@@ -4,7 +4,6 @@
 import { describe, expect, it } from 'vitest';
 import { PointBuffer } from '../points/buffer.js';
 import { MarkerBuffer } from './buffer.js';
-import { readMarker } from '../../records/layouts/codecs.js';
 import {
   getLayerCount,
   publishLayerInstances,
@@ -13,6 +12,7 @@ import {
   setLayerInstances,
   takeMarkerLayerRenderData
 } from './layer-state.js';
+import { readMarker } from '../../../../test/records.js';
 
 describe('marker layer state', () => {
   it('keeps shared source captures isolated through empty publications and regrowth', () => {

@@ -363,7 +363,7 @@ export interface ScenePlatform {
   yieldForPreparation(): Promise<void>;
 }
 
-const defaultScenePlatform: ScenePlatform = {
+export const scenePlatform: ScenePlatform = {
   requestAdapter: requestPlatformAdapter,
   getPreferredCanvasFormat: getPlatformCanvasFormat,
   getCanvasContext: getPlatformCanvasContext,
@@ -378,14 +378,8 @@ const defaultScenePlatform: ScenePlatform = {
   yieldForPreparation
 };
 
-export const scenePlatform: ScenePlatform = { ...defaultScenePlatform };
-
 let preparationChannel: MessageChannel | undefined;
 const preparationYields: Array<() => void> = [];
-
-export function restoreScenePlatform(): void {
-  Object.assign(scenePlatform, defaultScenePlatform);
-}
 
 function yieldForPreparation(): Promise<void> {
   const scheduler = Reflect.get(globalThis, 'scheduler');

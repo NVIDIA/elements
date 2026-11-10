@@ -3,8 +3,6 @@
 
 import type { Quaternion, Vec3 } from './types.js';
 
-export const IDENTITY_QUATERNION: Readonly<Quaternion> = Object.freeze([0, 0, 0, 1]);
-
 /**
  * Converts URDF fixed-axis roll, pitch, and yaw radians, applied about parent X, then Y, then Z,
  * to the XYZW quaternion that Scene orientation properties accept. Throws a TypeError unless the

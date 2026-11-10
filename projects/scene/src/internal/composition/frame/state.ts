@@ -181,11 +181,6 @@ export function isFrameChainValid(element: HTMLElement): boolean {
   return new FrameEvaluation().isValid(element);
 }
 
-/** Visibility follows both the authored DOM and resolved transform parents. */
-export function isFrameChainVisible(element: HTMLElement): boolean {
-  return new FrameEvaluation().isVisible(element);
-}
-
 function resolvedFrameParent(
   element: HTMLElement,
   parents: ReadonlyMap<HTMLElement, HTMLElement | null>,

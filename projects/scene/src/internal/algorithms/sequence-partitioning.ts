@@ -14,22 +14,6 @@ export interface SequencePartitionOptions {
   readonly boundary?: 'clamp' | 'wrap';
 }
 
-export interface SequenceSourceRange {
-  readonly sourceOffset: number;
-  readonly targetOffset: number;
-  readonly count: number;
-}
-
-export interface SequencePartition {
-  /** Assigned source positions [offset, offset + count), without overlap between partitions. */
-  readonly offset: number;
-  readonly count: number;
-  /** Offset of the assigned positions within their window, after leading context. */
-  readonly windowOffset: number;
-  readonly windowCount: number;
-  readonly sourceOffset: number;
-}
-
 type SequencePartitionVisitor = (
   ...partition: [offset: number, count: number, windowOffset: number, windowCount: number, sourceOffset: number]
 ) => void;
@@ -60,27 +44,6 @@ export function partitionSequence(options: SequencePartitionOptions, visit: Sequ
     visit(offset, assigned, windowOffset, windowCount, first);
     offset += assigned;
   }
-}
-
-/** Checks sequence bounds and capacity at the caller's input boundary, before entering the numeric traversal. */
-export function assertSequencePartitionOptions(options: SequencePartitionOptions): void {
-  const { count, sourceCount = count, capacity, before = 0, after = 0, boundary = 'clamp' } = options;
-  const resolved = { count, sourceCount, capacity, before, after, boundary };
-  validateOptions(resolved);
-}
-
-function validateOptions(options: Required<SequencePartitionOptions>): void {
-  const { count, sourceCount, capacity, before, after, boundary } = options;
-  if (
-    ![count, sourceCount, capacity, before, after].every(value => Number.isSafeInteger(value) && value >= 0) ||
-    sourceCount < count
-  ) {
-    throw new RangeError('Sequence positions and context counts must be nonnegative safe integers.');
-  }
-  if (before > sourceCount || after > sourceCount || capacity < 1 || before >= capacity - after) {
-    throw new RangeError('Sequence capacity must hold context and one position; context must fit within the source.');
-  }
-  if (boundary !== 'clamp' && boundary !== 'wrap') throw new RangeError('Sequence boundary must clamp or wrap.');
 }
 
 /** Maps a checked partition's wrapped source span directly into caller-owned range values in target order. */

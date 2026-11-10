@@ -3,8 +3,8 @@
 
 import { describe, expect, it } from 'vitest';
 import { LINE_VERTEX } from '../../records/layouts/built-ins.js';
-import { readLineVertex } from '../../records/layouts/codecs.js';
 import { LineVertexBuffer } from './buffer.js';
+import { readLineVertex } from '../../../../test/records.js';
 
 describe('line vertex buffer', () => {
   it('seeds records equivalently to incremental writes', () => {

@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_ORBIT_CAMERA_STATE, copyOrbitCameraState } from './math.js';
-import { applyCameraPatch, resolveCameraState } from './state.js';
+import { resolveCameraState } from './state.js';
 
 describe('camera state resolution', () => {
   it('applies behavior contributions over prior state', () => {
@@ -33,21 +33,37 @@ describe('camera state resolution', () => {
   });
 
   it('resolves defaults and applies partial patches without changing omitted fields', () => {
-    const resolved = resolveCameraState();
-    expect(resolved).toEqual(DEFAULT_ORBIT_CAMERA_STATE);
-    applyCameraPatch(resolved, {
-      target: { position: [1, 2, 3], heading: 0.25 },
-      offset: { distance: 6, polarAngle: 0.75, azimuth: 0.5 },
-      projection: { mode: 'orthographic', frustumHeight: 20, near: 0.1, far: 200 }
+    const prior = resolveCameraState();
+    expect(prior).toEqual(DEFAULT_ORBIT_CAMERA_STATE);
+    const resolved = resolveCameraState({
+      prior,
+      contributions: [
+        {
+          fields: [
+            'target.position',
+            'target.heading',
+            'offset.distance',
+            'offset.polarAngle',
+            'offset.azimuth',
+            'projection'
+          ],
+          patch: {
+            target: { position: [1, 2, 3], heading: 0.25 },
+            offset: { distance: 6, polarAngle: 0.75, azimuth: 0.5 },
+            projection: { mode: 'orthographic', frustumHeight: 20, near: 0.1, far: 200 }
+          }
+        }
+      ]
     });
     expect(resolved).toEqual({
       target: { position: [1, 2, 3], heading: 0.25 },
       offset: { distance: 6, polarAngle: 0.75, azimuth: 0.5 },
       projection: { mode: 'orthographic', frustumHeight: 20, near: 0.1, far: 200 }
     });
-    applyCameraPatch(resolved, undefined);
-    applyCameraPatch(resolved, { target: {}, offset: {} });
-    expect(resolved.target.position).toEqual([1, 2, 3]);
+    expect(resolveCameraState({ prior: resolved })).toEqual(resolved);
+    expect(
+      resolveCameraState({ prior: resolved, contributions: [{ fields: [], patch: { target: {}, offset: {} } }] })
+    ).toEqual(resolved);
   });
 
   it('applies multiple contribution patches in order', () => {

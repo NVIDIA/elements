@@ -13,8 +13,9 @@ import type { SceneErrorDetail } from '../scene/scene.js';
 import { registerGeometryDecoder, decodeGeometry, loadGeometry } from '../index.js';
 import type { SceneBodyGeometry } from '../body/index.js';
 import { SceneMesh } from './mesh.js';
-import { scenePlatform, restoreScenePlatform } from '../internal/gpu/platform.js';
+import { scenePlatform } from '../internal/gpu/platform.js';
 import './define.js';
+import { restoreScenePlatform } from '../../test/platform.js';
 
 const ASCII_STL =
   'solid triangle\nfacet normal 0 0 1\nouter loop\nvertex 0 0 0\nvertex 2 0 0\nvertex 0 3 0\nendloop\nendfacet\nendsolid triangle\n';

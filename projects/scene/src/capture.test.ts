@@ -4,15 +4,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { SceneMesh } from './mesh/mesh.js';
 import { SceneHeightfield } from './heightfield/heightfield.js';
-import { getMeshRenderData, getMeshLayerVersion } from './internal/layers/mesh/layer-state.js';
-import {
-  getHeightfieldLayerGrid,
-  getHeightfieldLayerVersion,
-  takeHeightfieldLayerRenderData
-} from './internal/layers/heightfield/layer-state.js';
-import { configureSceneTesting, resetSceneTesting } from './internal/testing/scene.js';
+import { getMeshRenderData } from './internal/layers/mesh/layer-state.js';
+import { takeHeightfieldLayerRenderData } from './internal/layers/heightfield/layer-state.js';
 import './mesh/define.js';
 import './heightfield/define.js';
+import { configureSceneTesting, resetSceneTesting } from '../test/platform.js';
 
 const triangle = { positions: new Float32Array(9) };
 const smallGrid = { rows: 2, columns: 2, spacing: 1, heights: new Float32Array(4) };
@@ -40,29 +36,29 @@ describe('owned geometry capture', () => {
     configureSceneTesting({ yieldForPreparation: () => new Promise<void>(resolve => releases.push(resolve)) });
     const mesh = new SceneMesh();
     mesh.geometry = triangle;
-    const version = getMeshLayerVersion(mesh);
+    const version = getMeshRenderData(mesh).version;
     mesh.geometry = largeMesh();
     const pending = mesh.loadComplete;
     expect(mesh.geometry?.positions).toBe(triangle.positions);
-    expect(getMeshLayerVersion(mesh)).toBe(version);
+    expect(getMeshRenderData(mesh).version).toBe(version);
     expect(getMeshRenderData(mesh).ready).toBe(true);
     expect(() => mesh.publishGeometry({ attribute: 'positions', source: new Float32Array(36_000) })).toThrow(
       /assign geometry/
     );
-    expect(getMeshLayerVersion(mesh)).toBe(version);
+    expect(getMeshRenderData(mesh).version).toBe(version);
 
     const terrain = new SceneHeightfield();
     terrain.grid = smallGrid;
-    const gridVersion = getHeightfieldLayerVersion(terrain);
+    const gridVersion = takeHeightfieldLayerRenderData(terrain).version;
     terrain.grid = largeGrid();
     const gridPending = terrain.loadComplete;
     expect(terrain.grid).toBe(smallGrid);
-    expect(getHeightfieldLayerVersion(terrain)).toBe(gridVersion);
+    expect(takeHeightfieldLayerRenderData(terrain).version).toBe(gridVersion);
     expect(terrain.heightAt(0, 0)).toBe(0);
     configureSceneTesting({ yieldForPreparation: async () => undefined });
     releases.forEach(resolve => resolve());
     await Promise.all([pending, gridPending]);
-    expect(getMeshLayerVersion(mesh)).toBeGreaterThan(version);
+    expect(getMeshRenderData(mesh).version).toBeGreaterThan(version);
     expect(terrain.heightAt(0, 0)).toBe(2);
   });
 
@@ -124,7 +120,7 @@ describe('owned geometry capture', () => {
     source.heights.fill(99);
     source.colors.fill(0);
     expect(terrain.heightAt(0, 0)).toBe(2);
-    expect(getHeightfieldLayerGrid(terrain)?.colors?.[7]).toBe(255);
+    expect(takeHeightfieldLayerRenderData(terrain).heightfield?.colors?.[7]).toBe(255);
   });
 
   it('reports invalid shapes before scheduling capture', async () => {

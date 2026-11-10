@@ -5,10 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { HEIGHTFIELD_GRID, LAYER_CHILD } from '../../diagnostics/errors.js';
 import {
   connectHeightfieldLayer,
-  getHeightfieldLayerGrid,
   getHeightfieldLayerSampler,
-  getHeightfieldLayerTopologyVersion,
-  getHeightfieldLayerVersion,
   registerHeightfieldLayer,
   setHeightfieldLayerColor,
   setHeightfieldLayerGrid,
@@ -87,14 +84,14 @@ describe('heightfield layer state', () => {
     setHeightfieldLayerColor(layer, [0.5, 0.5, 0.5, 1]);
     const first = grid();
     setHeightfieldLayerGrid(layer, first);
-    const topologyVersion = getHeightfieldLayerTopologyVersion(layer);
-    const version = getHeightfieldLayerVersion(layer);
+    const topologyVersion = takeHeightfieldLayerRenderData(layer).topologyVersion;
+    const version = takeHeightfieldLayerRenderData(layer).version;
     first.heights[0] = 99;
-    expect(getHeightfieldLayerGrid(layer)?.heights[0]).toBe(0);
+    expect(takeHeightfieldLayerRenderData(layer).heightfield?.heights[0]).toBe(0);
     setHeightfieldLayerGrid(layer, first);
-    expect(getHeightfieldLayerGrid(layer)?.heights[0]).toBe(99);
-    expect(getHeightfieldLayerTopologyVersion(layer)).toBe(topologyVersion);
-    expect(getHeightfieldLayerVersion(layer)).toBeGreaterThan(version);
+    expect(takeHeightfieldLayerRenderData(layer).heightfield?.heights[0]).toBe(99);
+    expect(takeHeightfieldLayerRenderData(layer).topologyVersion).toBe(topologyVersion);
+    expect(takeHeightfieldLayerRenderData(layer).version).toBeGreaterThan(version);
     expect(takeHeightfieldLayerRenderData(layer)).toMatchObject({ identityInstance: true, ready: true });
     setHeightfieldLayerColor(layer, [1, 1, 1, 0.5]);
     expect(takeHeightfieldLayerRenderData(layer).transparent).toBe(true);
@@ -102,7 +99,7 @@ describe('heightfield layer state', () => {
 
   it('rejects unregistered layers and non-object grid values', () => {
     const layer = document.createElement('div');
-    expect(() => getHeightfieldLayerGrid(layer)).toThrow(TypeError);
+    expect(() => takeHeightfieldLayerRenderData(layer).heightfield).toThrow(TypeError);
 
     const registered = document.createElement('div');
     registerHeightfieldLayer(registered, [0.5, 0.5, 0.5, 1]);

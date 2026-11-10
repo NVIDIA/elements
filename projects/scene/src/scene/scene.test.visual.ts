@@ -348,7 +348,7 @@ function bootstrapTemplate(): string {
   return /* html */ `
     <script type="module">
       import { Scene } from '../../src/scene/scene.ts';
-      import { configureSceneTesting } from '../../src/internal/testing/scene.ts';
+      import { configureSceneTesting } from '../../test/platform.ts';
 
       const requestAdapter = navigator.gpu.requestAdapter.bind(navigator.gpu);
       let requestDeviceCount = 0;

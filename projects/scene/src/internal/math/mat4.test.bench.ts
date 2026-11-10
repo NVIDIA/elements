@@ -4,7 +4,13 @@
 import type { BenchRunOptions } from 'vitest';
 import { describe, test } from 'vitest';
 import type { Quaternion, Vec3 } from './types.js';
-import { composeMat4, multiplyMat4, multiplyMat4Into, transformPointMat4, writeMat4ToFloat32 } from './mat4.js';
+import {
+  composeMat4Into,
+  composePreciseMat4,
+  multiplyMat4Into,
+  transformPointMat4,
+  writeMat4ToFloat32
+} from './mat4.js';
 
 const BATCH_SIZE = 10_000;
 const runOptions = {
@@ -26,10 +32,10 @@ const scales = Array.from(
   (_, index): Vec3 => [1 + (index % 5) * 0.1, 1 + (index % 7) * 0.1, 1 + (index % 3) * 0.1]
 );
 const leftMatrices = positions.map((position, index) =>
-  composeMat4(position, orientations[index] ?? [0, 0, 0, 1], scales[index])
+  composePreciseMat4(position, orientations[index] ?? [0, 0, 0, 1], scales[index])
 );
 const rightMatrices = positions.map((position, index) =>
-  composeMat4(
+  composePreciseMat4(
     [position[2], position[0], position[1]],
     orientations[BATCH_SIZE - index - 1] ?? [0, 0, 0, 1],
     scales[BATCH_SIZE - index - 1]
@@ -39,10 +45,16 @@ const points = positions.map(([x, y, z]): Vec3 => [z, x, y]);
 
 describe('mat4 math', () => {
   test('composes 10,000 affine matrices', async ({ bench }) => {
+    const destination = new Float64Array(16);
     await bench('composes 10,000 affine matrices', () => {
       let checksum = 0;
       for (let index = 0; index < BATCH_SIZE; index += 1) {
-        const matrix = composeMat4(positions[index] ?? [0, 0, 0], orientations[index] ?? [0, 0, 0, 1], scales[index]);
+        const matrix = composeMat4Into(
+          positions[index] ?? [0, 0, 0],
+          orientations[index] ?? [0, 0, 0, 1],
+          scales[index] ?? [1, 1, 1],
+          destination
+        );
         checksum += matrix[0] ?? 0;
       }
       return checksum;
@@ -50,10 +62,11 @@ describe('mat4 math', () => {
   });
 
   test('multiplies 10,000 matrices', async ({ bench }) => {
+    const destination = new Float64Array(16);
     await bench('multiplies 10,000 matrices', () => {
       let checksum = 0;
       for (const [index, leftMatrix] of leftMatrices.entries()) {
-        const matrix = multiplyMat4(leftMatrix, rightMatrices[index] ?? leftMatrix);
+        const matrix = multiplyMat4Into(leftMatrix, rightMatrices[index] ?? leftMatrix, destination);
         checksum += matrix[0] ?? 0;
       }
       return checksum;

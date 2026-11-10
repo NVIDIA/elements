@@ -3,10 +3,11 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createGpu, createMeshItem } from '../../../../test/rendering.js';
-import { restoreScenePlatform, scenePlatform } from '../../gpu/platform.js';
+import { scenePlatform } from '../../gpu/platform.js';
 import { identityMat4 } from '../../math/mat4.js';
 import type { MeshRenderItem } from '../../rendering/render-items.js';
 import { MeshRenderer } from './renderer.js';
+import { restoreScenePlatform } from '../../../../test/platform.js';
 
 type PreparationMode = 'mesh' | 'heightfield topology' | 'heightfield fallback';
 const modes: readonly PreparationMode[] = ['mesh', 'heightfield topology', 'heightfield fallback'];

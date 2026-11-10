@@ -14,14 +14,6 @@ export function identityPreciseMat4(): PreciseMat4 {
   return new Float64Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 }
 
-export function composeMat4(
-  position: Readonly<Vec3>,
-  orientation: Readonly<Quaternion>,
-  scale: Readonly<Vec3> = [1, 1, 1]
-): Mat4 {
-  return composeMat4Into(position, orientation, scale, new Float32Array(16));
-}
-
 export function composePreciseMat4(
   position: Readonly<Vec3>,
   orientation: Readonly<Quaternion>,
@@ -78,10 +70,6 @@ export function composeMat4Into<T extends Matrix4>(
   result[14] = position[2];
   result[15] = 1;
   return result;
-}
-
-export function multiplyMat4(left: Mat4, right: Mat4): Mat4 {
-  return multiplyMat4ValuesInto(left, right, new Float32Array(16));
 }
 
 export function multiplyPreciseMat4(left: Matrix4, right: Matrix4): PreciseMat4 {
@@ -177,16 +165,7 @@ export function writeMat4ToFloat32(target: Float32Array, matrix: Matrix4, offset
   }
 }
 
-/**
- * Inverts a column-major 4x4 matrix using Gauss-Jordan elimination with partial pivoting.
- * Returns null for invalid input, a zero pivot, nonfinite arithmetic, or output outside the finite Float32 range.
- * Accepts small nonzero pivots without estimating the matrix condition number.
- */
-export function invertMat4(matrix: Mat4): Mat4 | null {
-  return invertMat4Into(matrix, new Float32Array(16));
-}
-
-/** Uses the same inversion algorithm with a finite Float64 result. */
+/** Inverts a column-major matrix with partial pivoting and returns a finite Float64 result. */
 export function invertPreciseMat4(matrix: Matrix4): PreciseMat4 | null {
   return invertMat4Into(matrix, new Float64Array(16));
 }

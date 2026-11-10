@@ -4,18 +4,14 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, required } from '@internals/testing';
-import {
-  configureSceneTesting,
-  getNamedSceneFrameForTesting,
-  resetSceneTesting,
-  type SceneGPUCanvasContext,
-  type SceneGPUDevice
-} from '../internal/testing/scene.js';
 import { transformPointMat4 } from '../internal/math/mat4.js';
 import type { Vec3 } from '../internal/math/types.js';
 import { Scene } from '../scene/scene.js';
 import { SceneFrame } from './frame.js';
 import './define.js';
+import { configureSceneTesting, resetSceneTesting } from '../../test/platform.js';
+import { getNamedSceneFrame } from '../internal/composition/frame/state.js';
+import { type SceneGPUCanvasContext, type SceneGPUDevice } from '../internal/gpu/platform.js';
 
 describe(SceneFrame.metadata.tag, () => {
   const fixtures: HTMLElement[] = [];
@@ -251,14 +247,14 @@ describe(SceneFrame.metadata.tag, () => {
       await elementIsStable(parent);
       expect(() => parent.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
       expect(() => child.getWorldMatrix()).toThrow(expect.objectContaining({ name: 'InvalidStateError' }));
-      await vi.waitFor(() => expect(getNamedSceneFrameForTesting(scene, 'parent')).toBeUndefined());
-      expect(getNamedSceneFrameForTesting(scene, 'child')).toBeUndefined();
+      await vi.waitFor(() => expect(getNamedSceneFrame(scene, 'parent')).toBeUndefined());
+      expect(getNamedSceneFrame(scene, 'child')).toBeUndefined();
 
       parent.position = [3, 0, 0];
       await elementIsStable(parent);
       expect(transformPointMat4(child.getWorldMatrix(), [0, 0, 0])).toEqual([5, 0, 0]);
-      await vi.waitFor(() => expect(getNamedSceneFrameForTesting(scene, 'parent')).toBe(parent));
-      expect(getNamedSceneFrameForTesting(scene, 'child')).toBe(child);
+      await vi.waitFor(() => expect(getNamedSceneFrame(scene, 'parent')).toBe(parent));
+      expect(getNamedSceneFrame(scene, 'child')).toBe(child);
     });
 
     it('should exclude duplicate names from lookup and recover each warning episode', async () => {
@@ -282,19 +278,19 @@ describe(SceneFrame.metadata.tag, () => {
         expect.objectContaining({ code: 'frame-name-duplicate', element: second, severity: 'warning' })
       ]);
       expect(errors[0]).toMatchObject({ bubbles: true, composed: true, cancelable: false });
-      expect(getNamedSceneFrameForTesting(scene, 'target')).toBeUndefined();
+      expect(getNamedSceneFrame(scene, 'target')).toBeUndefined();
       expect(transformPointMat4(first.getWorldMatrix(), [0, 0, 0])).toEqual([1, 0, 0]);
       expect(transformPointMat4(second.getWorldMatrix(), [0, 0, 0])).toEqual([2, 0, 0]);
 
       second.name = 'other';
       await elementIsStable(second);
-      await vi.waitFor(() => expect(getNamedSceneFrameForTesting(scene, 'target')).toBe(first));
+      await vi.waitFor(() => expect(getNamedSceneFrame(scene, 'target')).toBe(first));
 
       second.name = 'target';
       await elementIsStable(second);
       await vi.waitFor(() => expect(errors).toHaveLength(4));
       second.remove();
-      await vi.waitFor(() => expect(getNamedSceneFrameForTesting(scene, 'target')).toBe(first));
+      await vi.waitFor(() => expect(getNamedSceneFrame(scene, 'target')).toBe(first));
       expect(consoleWarn).toHaveBeenCalledTimes(4);
     });
 
@@ -312,14 +308,14 @@ describe(SceneFrame.metadata.tag, () => {
       gpu.resolveNextDevice();
       await scene.ready;
 
-      expect(getNamedSceneFrameForTesting(scene, 'robot')).toBe(trimmed);
-      expect(getNamedSceneFrameForTesting(scene, ' robot ')).toBe(trimmed);
+      expect(getNamedSceneFrame(scene, 'robot')).toBe(trimmed);
+      expect(getNamedSceneFrame(scene, ' robot ')).toBe(trimmed);
 
       const duplicate = document.createElement(SceneFrame.metadata.tag) as SceneFrame;
       duplicate.name = 'robot';
       scene.append(duplicate);
       await elementIsStable(duplicate);
-      await vi.waitFor(() => expect(getNamedSceneFrameForTesting(scene, 'robot')).toBeUndefined());
+      await vi.waitFor(() => expect(getNamedSceneFrame(scene, 'robot')).toBeUndefined());
       expect(errors.map(event => event.detail)).toEqual([
         expect.objectContaining({ code: 'frame-name-duplicate', element: trimmed, severity: 'warning' }),
         expect.objectContaining({ code: 'frame-name-duplicate', element: duplicate, severity: 'warning' })
@@ -344,8 +340,8 @@ describe(SceneFrame.metadata.tag, () => {
       gpu.resolveNextDevice();
       await Promise.all([outer.ready, inner.ready]);
 
-      expect(getNamedSceneFrameForTesting(outer, 'shared')).toBe(outerFrame);
-      expect(getNamedSceneFrameForTesting(inner, 'shared')).toBe(innerFrame);
+      expect(getNamedSceneFrame(outer, 'shared')).toBe(outerFrame);
+      expect(getNamedSceneFrame(inner, 'shared')).toBe(innerFrame);
       expect(transformPointMat4(innerFrame.getWorldMatrix(), [0, 0, 0])).toEqual([2, 0, 0]);
     });
   });

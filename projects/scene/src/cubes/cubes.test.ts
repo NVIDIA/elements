@@ -7,10 +7,10 @@ import { createFixture, elementIsStable, removeFixture, required } from '@intern
 import { MARKER } from '@nvidia-elements/scene';
 import { CubeBuffer, SceneCubes } from './cubes.js';
 import { MarkerBuffer } from '../internal/layers/markers/buffer.js';
-import { createMarkerSource } from '../internal/layers/sources/external-record-sources.js';
 import { SphereBuffer } from '../internal/layers/markers/semantic-buffer.js';
 import { MarkerLayerElement } from '../internal/layers/markers/layer-element.js';
 import './define.js';
+import { createExternalRecordFixture } from '../../test/records.js';
 
 class ThrowingMarkerLayer extends MarkerLayerElement<CubeBuffer, object> {
   constructor() {
@@ -66,7 +66,7 @@ describe(SceneCubes.metadata.tag, () => {
     fixture = await createFixture(html`<nve-scene-cubes></nve-scene-cubes>`);
     const layer = required(fixture.querySelector<SceneCubes>(SceneCubes.metadata.tag), 'Expected cubes fixture.');
     const generic = new MarkerBuffer({ records: [{}] });
-    const external = createMarkerSource({ bytes: generic.mutableBytes, count: generic.count });
+    const external = createExternalRecordFixture('marker', { bytes: generic.mutableBytes, count: generic.count });
 
     expect(() => Reflect.set(layer, 'source', [])).toThrow(TypeError);
     expect(() => Reflect.set(layer, 'source', generic)).toThrow(TypeError);

@@ -4,12 +4,13 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createGpu, createMeshItem } from '../../../../test/rendering.js';
 import type { SceneGPUCommandEncoder } from '../../gpu/platform.js';
-import { restoreScenePlatform, scenePlatform } from '../../gpu/platform.js';
+import { scenePlatform } from '../../gpu/platform.js';
 import { identityMat4 } from '../../math/mat4.js';
 import { MeshGPUCompiler, meshGPUIsEligible, sameMeshGPUTopology } from './gpu.js';
 import { MeshRenderer } from './renderer.js';
 import { destroyMeshGeometryResources } from './resources.js';
 import type { MeshRenderData } from './render-data.js';
+import { restoreScenePlatform } from '../../../../test/platform.js';
 
 function createCompiler() {
   const gpu = createGpu();

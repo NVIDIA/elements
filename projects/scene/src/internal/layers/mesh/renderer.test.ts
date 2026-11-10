@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { captureTestMeshGeometry, createGpu, createMeshItem } from '../../../../test/rendering.js';
-import { restoreScenePlatform, scenePlatform } from '../../gpu/platform.js';
+import { scenePlatform } from '../../gpu/platform.js';
 import { composePreciseMat4, identityMat4 } from '../../math/mat4.js';
 import { createPickPipelines } from '../../rendering/picking/pipelines.js';
 import { PICK_UNIFORM_OFFSETS } from '../../rendering/picking/uniform-offsets.js';
@@ -14,6 +14,7 @@ import {
   setMeshGeometryProperty,
   takeMeshLayerRenderData
 } from './layer-state.js';
+import { restoreScenePlatform } from '../../../../test/platform.js';
 
 let renderer: MeshRenderer | undefined;
 afterEach(() => {

@@ -19,7 +19,6 @@ import {
   LINE_TOPOLOGY_CODE,
   LINE_TOPOLOGY_WGSL,
   lineJoinCount,
-  lineJoinVertex,
   lineSegmentCount,
   lineSegmentEnd,
   lineSegmentStart,
@@ -86,7 +85,7 @@ ${LINE_TOPOLOGY_WGSL}
       fixtures.flatMap(({ count, topology, segment, join, segments, joins }) => [
         segments > 0 ? lineSegmentStart(segment, topology) : -1,
         segments > 0 ? lineSegmentEnd(segment, count, topology) : -1,
-        joins > 0 ? lineJoinVertex(join, topology) : -1
+        joins > 0 ? (topology === 'strip' ? join + 1 : join) : -1
       ])
     );
     expect(session.errors).toEqual([]);

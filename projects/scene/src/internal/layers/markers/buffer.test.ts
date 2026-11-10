@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { readMarker } from '../../records/layouts/codecs.js';
 import { MARKER } from '../../records/layouts/built-ins.js';
 import { MarkerBuffer } from './buffer.js';
+import { readMarker } from '../../../../test/records.js';
 
 describe('marker buffer', () => {
   it('seeds records with inferred or spare capacity', () => {

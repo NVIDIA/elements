@@ -3,8 +3,8 @@
 
 import { describe, expect, it } from 'vitest';
 import { TRIANGLE_VERTEX } from '../../records/layouts/built-ins.js';
-import { readTriangleVertex } from '../../records/layouts/codecs.js';
 import { TriangleVertexBuffer } from './buffer.js';
+import { readTriangleVertex } from '../../../../test/records.js';
 
 describe('triangle vertex buffer', () => {
   it('seeds records equivalently to incremental writes', () => {

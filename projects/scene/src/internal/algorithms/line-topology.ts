@@ -39,11 +39,6 @@ export function lineSegmentEnd(segment: number, count: number, topology: LineTop
   return topology === 'loop' && next === count ? 0 : next;
 }
 
-/** Maps a valid join ordinal to its middle vertex. Counts and index mappings take constant time and space. */
-export function lineJoinVertex(join: number, topology: LineTopology): number {
-  return topology === 'strip' ? join + 1 : join;
-}
-
 /** Shader equivalents for checked u32 segment and join ordinals, independent of uniforms and record storage. */
 export const LINE_TOPOLOGY_WGSL = /* wgsl */ `
 const NVE_LINE_STRIP = ${LINE_TOPOLOGY_CODE.strip}u;

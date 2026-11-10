@@ -12,9 +12,7 @@ import {
   MESH_TEXTURE_WITHOUT_UVS
 } from '../internal/diagnostics/errors.js';
 import {
-  getMeshLayerVersion,
   getMeshRenderData,
-  getMeshTopologyVersion,
   isMeshLayerRegistered,
   takeMeshLayerRenderData
 } from '../internal/layers/mesh/layer-state.js';
@@ -22,9 +20,10 @@ import { takeMarkerLayerRenderData } from '../internal/layers/markers/layer-stat
 import { MarkerBuffer } from '../internal/layers/markers/buffer.js';
 import { SceneMesh } from './mesh.js';
 import '@nvidia-elements/scene/mesh/define.js';
-import { restoreScenePlatform, scenePlatform } from '../internal/gpu/platform.js';
+import { scenePlatform } from '../internal/gpu/platform.js';
 import { createSceneLayerRenderItem, resolveSceneLayer } from '../internal/composition/scene/layer-record.js';
 import { resolveSceneFeatureId } from '../internal/interaction/feature-ids.js';
+import { restoreScenePlatform } from '../../test/platform.js';
 
 const triangle = new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]);
 
@@ -230,13 +229,13 @@ describe(SceneMesh.metadata.tag, () => {
     const normals = new Float32Array(12);
     const indices = new Uint32Array([0, 1, 2]);
     mesh.geometry = { indices, normals, positions };
-    const topology = getMeshTopologyVersion(mesh);
+    const topology = getMeshRenderData(mesh).topologyVersion;
     indices[1] = 2;
     indices[2] = 1;
 
     mesh.publishGeometry({ attribute: 'indices' });
 
-    expect(getMeshTopologyVersion(mesh)).toBeGreaterThan(topology);
+    expect(getMeshRenderData(mesh).topologyVersion).toBeGreaterThan(topology);
     expect(getMeshRenderData(mesh).indices).toEqual(indices);
   });
 
@@ -277,14 +276,14 @@ describe(SceneMesh.metadata.tag, () => {
       new SceneMesh().publishGeometry({ attribute: 'indices', source: new Float32Array() } as never);
     }).toThrow(TypeError);
     expect(() => getMeshRenderData(document.createElement('div'))).toThrow(TypeError);
-    expect(() => getMeshLayerVersion(document.createElement('div'))).toThrow(TypeError);
+    expect(() => getMeshRenderData(document.createElement('div')).version).toThrow(TypeError);
   });
 
   it('exposes registration, versions, and render snapshots for a mesh', () => {
     const mesh = new SceneMesh();
     expect(isMeshLayerRegistered(mesh)).toBe(true);
-    expect(getMeshLayerVersion(mesh)).toBe(0);
-    expect(getMeshTopologyVersion(mesh)).toBe(0);
+    expect(getMeshRenderData(mesh).version).toBe(0);
+    expect(getMeshRenderData(mesh).topologyVersion).toBe(0);
     expect(takeMeshLayerRenderData(mesh)).toMatchObject({
       ready: false,
       geometryError: false,
@@ -450,18 +449,18 @@ describe(SceneMesh.metadata.tag, () => {
   it('tracks topology changes from UV and index sources and ignores repeated assignments', () => {
     const mesh = new SceneMesh();
     mesh.publishGeometry({ attribute: 'positions', source: triangle });
-    const initial = getMeshTopologyVersion(mesh);
+    const initial = getMeshRenderData(mesh).topologyVersion;
     mesh.publishGeometry({ attribute: 'positions', source: triangle });
-    expect(getMeshTopologyVersion(mesh)).toBe(initial);
+    expect(getMeshRenderData(mesh).topologyVersion).toBe(initial);
     mesh.publishGeometry({ attribute: 'uvs', source: new Float32Array(6) });
-    const withUvs = getMeshTopologyVersion(mesh);
+    const withUvs = getMeshRenderData(mesh).topologyVersion;
     expect(withUvs).toBeGreaterThan(initial);
     mesh.publishGeometry({ attribute: 'uvs', source: new Float32Array(6) });
-    expect(getMeshTopologyVersion(mesh)).toBe(withUvs);
+    expect(getMeshRenderData(mesh).topologyVersion).toBe(withUvs);
     mesh.publishGeometry({ attribute: 'indices', source: new Uint32Array([0, 1, 2]) });
-    expect(getMeshTopologyVersion(mesh)).toBeGreaterThan(withUvs);
+    expect(getMeshRenderData(mesh).topologyVersion).toBeGreaterThan(withUvs);
     mesh.publishGeometry({ attribute: 'indices', source: null });
-    expect(getMeshTopologyVersion(mesh)).toBeGreaterThan(withUvs);
+    expect(getMeshRenderData(mesh).topologyVersion).toBeGreaterThan(withUvs);
   });
 
   it('invalidates topology when replacing indices with different same-length values', () => {
@@ -469,32 +468,32 @@ describe(SceneMesh.metadata.tag, () => {
     mesh.publishGeometry({ attribute: 'positions', source: triangle });
     mesh.publishGeometry({ attribute: 'normals', source: new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1]) });
     mesh.publishGeometry({ attribute: 'indices', source: new Uint32Array([0, 1, 2]) });
-    const indexed = getMeshTopologyVersion(mesh);
+    const indexed = getMeshRenderData(mesh).topologyVersion;
 
     const reordered = new Uint32Array([0, 2, 1]);
     mesh.publishGeometry({ attribute: 'indices', source: reordered });
-    const replaced = getMeshTopologyVersion(mesh);
+    const replaced = getMeshRenderData(mesh).topologyVersion;
     expect(replaced).toBeGreaterThan(indexed);
 
     reordered[1] = 1;
     reordered[2] = 2;
     mesh.publishGeometry({ attribute: 'indices', source: reordered });
 
-    expect(getMeshTopologyVersion(mesh)).toBeGreaterThan(replaced);
+    expect(getMeshRenderData(mesh).topologyVersion).toBeGreaterThan(replaced);
   });
 
   it('invalidates indexed topology when normals switch between supplied and generated modes', () => {
     const mesh = new SceneMesh();
     mesh.publishGeometry({ attribute: 'positions', source: triangle });
     mesh.publishGeometry({ attribute: 'indices', source: new Uint32Array([0, 1, 2]) });
-    const generated = getMeshTopologyVersion(mesh);
+    const generated = getMeshRenderData(mesh).topologyVersion;
 
     mesh.publishGeometry({ attribute: 'normals', source: new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1]) });
-    const supplied = getMeshTopologyVersion(mesh);
+    const supplied = getMeshRenderData(mesh).topologyVersion;
     expect(supplied).toBeGreaterThan(generated);
 
     mesh.publishGeometry({ attribute: 'normals', source: null });
-    expect(getMeshTopologyVersion(mesh)).toBeGreaterThan(supplied);
+    expect(getMeshRenderData(mesh).topologyVersion).toBeGreaterThan(supplied);
   });
 
   it('warns and ignores textures without UVs, then clears the warning', async () => {
@@ -524,12 +523,12 @@ describe(SceneMesh.metadata.tag, () => {
     await elementIsStable(connected);
     expect(getMeshRenderData(connected).transparent).toBe(true);
     expect(connected.getAttribute('color')).toBe('var(--missing-color)');
-    const colorVersion = getMeshLayerVersion(connected);
+    const colorVersion = getMeshRenderData(connected).version;
     connected.geometry = { positions: triangle };
-    const geometryVersion = getMeshLayerVersion(connected);
+    const geometryVersion = getMeshRenderData(connected).version;
     expect(geometryVersion).toBeGreaterThan(colorVersion);
     await elementIsStable(connected);
-    expect(getMeshLayerVersion(connected)).toBe(geometryVersion);
+    expect(getMeshRenderData(connected).version).toBe(geometryVersion);
   });
 
   it('captures owned textures with newest-request-wins cleanup', async () => {

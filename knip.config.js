@@ -254,6 +254,7 @@ const createConfig = production => ({
         ...TEST_ENTRIES,
         ...TEST_VARIANT_ENTRIES,
         ...TYPECHECK_ENTRIES,
+        ...BUNDLE_ENTRIES,
         ...VITE_CONFIGS,
         ...VITEST_CONFIGS
       ],
