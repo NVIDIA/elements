@@ -27,7 +27,7 @@ describe('workspace application menus', () => {
 
   afterEach(() => removeFixture(fixture));
 
-  async function setup() {
+  async function createWorkspaceMenu() {
     fixture = await createFixture(html`
       <nve-workspace id="menu-workspace" groupable rearrangeable closable style="width:800px;height:350px"
         value='{"version":1,"closed":[],"root":{"type":"split","axis":"horizontal","weights":[1,1],"children":[{"type":"group","panels":["a"],"active":"a"},{"type":"group","panels":["b"],"active":"b"}]}}'>
@@ -95,7 +95,7 @@ describe('workspace application menus', () => {
   });
 
   it('shares one authored menu composition without changing panel ownership or arrangement', async () => {
-    const { workspace, group, buttons } = await setup();
+    const { workspace, group, buttons } = await createWorkspaceMenu();
     const initial = workspace.value;
     await emulateClick(buttons[0]!);
     expect(group.parentElement).toBe(workspace);
@@ -106,7 +106,7 @@ describe('workspace application menus', () => {
   });
 
   it('prepares the first displayed menu for each invoking panel with explicit command targets', async () => {
-    const { workspace, dropdown, group, buttons, items } = await setup();
+    const { workspace, dropdown, group, buttons, items } = await createWorkspaceMenu();
     await emulateClick(buttons[0]!);
     expect(dropdown.matches(':popover-open')).toBe(true);
     expect(items[0]!.value).toBe('a');
@@ -128,7 +128,7 @@ describe('workspace application menus', () => {
   });
 
   it('refreshes open menu actions when capabilities change programmatically', async () => {
-    const { workspace, dropdown, buttons, items } = await setup();
+    const { workspace, dropdown, buttons, items } = await createWorkspaceMenu();
     await emulateClick(buttons[0]!);
     expect(items[0]!.disabled).toBe(false);
     workspace.closable = false;
@@ -142,7 +142,7 @@ describe('workspace application menus', () => {
   });
 
   it('opens submenus through native invokers and returns focus to the invoking header', async () => {
-    const { dropdown, group, buttons } = await setup();
+    const { dropdown, group, buttons } = await createWorkspaceMenu();
     const opened = untilEvent(dropdown, 'open');
     await emulateClick(buttons[0]!);
     await opened;
@@ -162,7 +162,7 @@ describe('workspace application menus', () => {
   });
 
   it('ignores a prepared command after its invoking panel has been removed', async () => {
-    const { workspace, buttons, items } = await setup();
+    const { workspace, buttons, items } = await createWorkspaceMenu();
     await emulateClick(buttons[0]!);
     workspace.querySelector('#a')!.remove();
     await elementIsStable(workspace);

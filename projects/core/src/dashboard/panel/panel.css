@@ -1,0 +1,390 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  --background: var(--nve-sys-layer-container-background);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  --border-radius: var(--nve-ref-border-radius-lg);
+  --box-shadow: var(--nve-ref-shadow-100);
+  --control-width: calc(var(--nve-ref-size-700) + 2 * var(--nve-ref-size-100));
+  --control-height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
+  --resize-target-size: var(--nve-ref-border-width-lg);
+  --_geometry-animation-duration: var(--animation-duration);
+  --_control-width: var(--control-width);
+  --_control-height: var(--control-height);
+  --_focus-width: var(--nve-ref-border-width-md);
+  --_focus-color: Highlight;
+  --_separator: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  display: block;
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  contain: none;
+  z-index: 0;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition:
+    left var(--_geometry-animation-duration) var(--animation-easing),
+    right var(--_geometry-animation-duration) var(--animation-easing),
+    top var(--_geometry-animation-duration) var(--animation-easing),
+    width var(--_geometry-animation-duration) var(--animation-easing),
+    height var(--_geometry-animation-duration) var(--animation-easing);
+}
+
+:host(:state(carried)) {
+  transition: none;
+}
+
+:host(:focus-within) {
+  z-index: 1;
+}
+
+:host(:state(lifted)) {
+  z-index: 2;
+  box-shadow: var(--nve-ref-shadow-400);
+  border-radius: var(--border-radius);
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background: var(--background);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: var(--_control-height);
+  border-bottom: var(--_separator);
+}
+
+slot[name='header'] {
+  display: contents;
+}
+
+::slotted(nve-dashboard-panel-header) {
+  align-self: stretch;
+  flex: 1;
+  min-width: 0;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+}
+
+slot[name='footer'] {
+  display: contents;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 0;
+  border-top: var(--_separator);
+  transition:
+    border-top-width var(--animation-duration) var(--animation-easing),
+    opacity var(--animation-duration) var(--animation-easing);
+
+  &[inert] {
+    border-top-width: 0;
+    opacity: 0;
+  }
+}
+
+::slotted(nve-dashboard-panel-footer) {
+  align-self: stretch;
+  flex: 1;
+  min-width: 0;
+}
+
+.grip {
+  display: flex;
+  flex: none;
+  width: var(--_control-width);
+  height: var(--_control-height);
+  overflow: clip;
+  transition:
+    width var(--animation-duration) var(--animation-easing),
+    height var(--animation-duration) var(--animation-easing),
+    opacity var(--animation-duration) var(--animation-easing);
+
+  &[inert] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+}
+
+.move-grip {
+  align-self: flex-start;
+}
+
+.resize-grip {
+  align-self: flex-end;
+}
+
+.grip > :focus {
+  --color: var(--nve-sys-interaction-selected-color);
+  --background-image: linear-gradient(
+    color-mix(
+        in oklab,
+        var(--nve-sys-interaction-state-base) 100%,
+        var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio-selected)
+      )
+      0 0
+  );
+}
+
+.grip:has(> :focus-visible:not([data-pointer-focus])) {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  &::before {
+    inset: var(--_focus-width);
+    border: var(--_focus-width) solid var(--_focus-color);
+    border-radius: var(--border-radius);
+  }
+
+  &::after {
+    width: calc(var(--_control-width) - 2 * var(--_focus-width));
+    height: calc(var(--_control-height) - 2 * var(--_focus-width));
+  }
+}
+
+.move-grip:has(> :focus-visible:not([data-pointer-focus]))::before {
+  clip-path: inset(
+    0 calc(100% - var(--_control-width) + 2 * var(--_focus-width))
+      calc(100% - var(--_control-height) + 2 * var(--_focus-width)) 0
+  );
+}
+
+.move-grip:has(> :focus-visible:not([data-pointer-focus]))::after {
+  top: var(--_focus-width);
+  inset-inline-start: var(--_focus-width);
+  border-inline-end: var(--_focus-width) solid var(--_focus-color);
+  border-bottom: var(--_focus-width) solid var(--_focus-color);
+}
+
+.resize-grip:has(> :focus-visible:not([data-pointer-focus]))::before {
+  clip-path: inset(
+    calc(100% - var(--_control-height) + 2 * var(--_focus-width)) 0 0
+      calc(100% - var(--_control-width) + 2 * var(--_focus-width))
+  );
+}
+
+.resize-grip:has(> :focus-visible:not([data-pointer-focus]))::after {
+  bottom: var(--_focus-width);
+  inset-inline-end: var(--_focus-width);
+  border-inline-start: var(--_focus-width) solid var(--_focus-color);
+  border-top: var(--_focus-width) solid var(--_focus-color);
+}
+
+:host(:dir(rtl)) .move-grip:has(> :focus-visible:not([data-pointer-focus]))::before {
+  clip-path: inset(
+    0 0 calc(100% - var(--_control-height) + 2 * var(--_focus-width))
+      calc(100% - var(--_control-width) + 2 * var(--_focus-width))
+  );
+}
+
+:host(:dir(rtl)) .resize-grip:has(> :focus-visible:not([data-pointer-focus]))::before {
+  clip-path: inset(
+    calc(100% - var(--_control-height) + 2 * var(--_focus-width))
+      calc(100% - var(--_control-width) + 2 * var(--_focus-width)) 0 0
+  );
+}
+
+.resize,
+nve-drag-handle {
+  --width: var(--_control-width);
+  --height: var(--_control-height);
+  --padding: 0;
+  --border-radius: var(--nve-ref-border-radius-none);
+  flex: 0 0 auto;
+  align-self: flex-start;
+  padding: 0;
+  margin: 0;
+  touch-action: none;
+}
+
+.resize {
+  --cursor: nwse-resize;
+}
+
+.resize::part(icon) {
+  --width: var(--nve-ref-size-400);
+  --height: var(--nve-ref-size-400);
+  transform: rotate(-45deg);
+}
+
+:host(:dir(rtl)) .resize {
+  --cursor: nesw-resize;
+}
+
+:host(:dir(rtl)) .resize::part(icon) {
+  transform: rotate(45deg);
+}
+
+.control-divider {
+  align-self: stretch;
+  flex: none;
+  width: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity var(--animation-duration) var(--animation-easing);
+
+  &[inert] {
+    opacity: 0;
+  }
+}
+
+.move-divider {
+  border-inline-start: var(--_separator);
+  margin-inline-start: calc(-1 * var(--nve-ref-border-width-sm));
+}
+
+.resize-divider {
+  border-inline-start: var(--_separator);
+  margin-inline-end: calc(-1 * var(--nve-ref-border-width-sm));
+}
+
+[internal-host]:has(.grip > :focus) {
+  border-color: var(--nve-sys-accent-secondary-background);
+}
+
+:host([container='flat']) {
+  --background: transparent;
+}
+
+:host([container='flat']),
+:host([container='full']) {
+  --border-radius: var(--nve-ref-border-radius-none);
+  --box-shadow: none;
+}
+
+.resize-edge {
+  display: none;
+}
+
+@media (any-pointer: fine) {
+  .resize-edge {
+    --_edge-inset: max(0px, var(--resize-target-size));
+    --_edge-outset: min(var(--_edge-inset), calc(var(--gap) / 2));
+    display: block;
+    position: absolute;
+    z-index: 2;
+    touch-action: none;
+  }
+
+  .resize-edge.left,
+  .resize-edge.right {
+    top: var(--nve-ref-size-200);
+    bottom: var(--nve-ref-size-200);
+    width: calc(var(--nve-ref-border-width-sm) + var(--_edge-inset) + var(--_edge-outset));
+    cursor: ew-resize;
+  }
+
+  .resize-edge.left {
+    left: calc(-1 * var(--_edge-outset));
+  }
+
+  .resize-edge.right {
+    right: calc(-1 * var(--_edge-outset));
+    bottom: var(--_control-height);
+  }
+
+  :host(:dir(rtl)) .resize-edge.left {
+    bottom: var(--_control-height);
+  }
+
+  :host(:dir(rtl)) .resize-edge.right {
+    bottom: var(--nve-ref-size-200);
+  }
+
+  .resize-edge.top,
+  .resize-edge.bottom {
+    left: var(--nve-ref-size-200);
+    right: var(--nve-ref-size-200);
+    height: calc(var(--nve-ref-border-width-sm) + var(--_edge-inset) + var(--_edge-outset));
+    cursor: ns-resize;
+  }
+
+  .resize-edge.top {
+    top: calc(-1 * var(--_edge-outset));
+  }
+
+  .resize-edge.bottom {
+    bottom: calc(-1 * var(--_edge-outset));
+    inset-inline-end: var(--_control-width);
+  }
+}
+
+:host(:state(fullscreen-excluded)) {
+  display: none;
+}
+
+:host(:state(fullscreen)) {
+  border-radius: var(--nve-ref-border-radius-none);
+  box-shadow: none;
+}
+
+:host(:state(fullscreen)) [internal-host] {
+  border-radius: var(--nve-ref-border-radius-none);
+}
+
+.fullscreen-action {
+  display: flex;
+  flex: none;
+  align-self: stretch;
+  align-items: center;
+  padding-inline: var(--nve-ref-size-100);
+  border-inline-start: var(--_separator);
+}
+
+[internal-host][hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host,
+  .grip,
+  .control-divider,
+  .footer {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .grip:has(> :focus) {
+    --_focus-color: HighlightText;
+    background-color: Highlight;
+  }
+
+  .grip > :focus {
+    --color: HighlightText;
+  }
+}

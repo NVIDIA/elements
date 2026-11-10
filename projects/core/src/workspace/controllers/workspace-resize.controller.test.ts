@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html, LitElement } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -83,19 +83,19 @@ if (!customElements.get(tag)) customElements.define(tag, ResizeTestHost);
 
 describe('workspace resize input batching', () => {
   let fixture: HTMLElement;
+  let host: ResizeTestHost;
+  let handle: ResizeHandle;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`<workspace-resize-test-host></workspace-resize-test-host>`);
+    host = fixture.querySelector<ResizeTestHost>(tag)!;
+    await elementIsStable(host);
+    handle = host.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
+  });
 
   afterEach(() => removeFixture(fixture));
 
-  async function setup() {
-    fixture = await createFixture(html`<workspace-resize-test-host></workspace-resize-test-host>`);
-    const host = fixture.querySelector<ResizeTestHost>(tag)!;
-    await elementIsStable(host);
-    const handle = host.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
-    return { host, handle };
-  }
-
   it('uses the latest resize input before rendering an unrelated update', async () => {
-    const { host, handle } = await setup();
     const origin = handle.valueAsNumber;
     for (let delta = 1; delta <= 40; delta++) {
       handle.valueAsNumber = origin + delta;
@@ -110,7 +110,6 @@ describe('workspace resize input batching', () => {
   });
 
   it('reuses the current resize preview for identical input and final change', async () => {
-    const { host, handle } = await setup();
     handle.valueAsNumber += 20;
     handle.dispatchEvent(new Event('input', { bubbles: true }));
     await host.updateComplete;
@@ -127,7 +126,6 @@ describe('workspace resize input batching', () => {
   });
 
   it.each(['escape', 'restore', 'disconnect'] as const)('discards pending resize input on %s', async action => {
-    const { host, handle } = await setup();
     const layout = structuredClone(host.layout);
     const origin = handle.valueAsNumber;
     handle.valueAsNumber += 20;

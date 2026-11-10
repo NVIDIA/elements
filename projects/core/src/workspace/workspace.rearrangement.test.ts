@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { getActiveElement } from '@nvidia-elements/core/internal';
@@ -36,7 +36,7 @@ describe('workspace attached and detached dragging', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup() {
+  async function createWorkspace() {
     fixture = await createFixture(html`
       <nve-workspace groupable rearrangeable .value=${value} style="width:600px;height:220px">
         <nve-workspace-panel id="a">
@@ -52,8 +52,8 @@ describe('workspace attached and detached dragging', () => {
     return workspace;
   }
 
-  async function setupGrouped() {
-    const workspace = await setup();
+  async function createGroupedWorkspace() {
+    const workspace = await createWorkspace();
     const companion = document.createElement('nve-workspace-panel');
     companion.id = 'companion';
     companion.textContent = 'Companion';
@@ -89,7 +89,7 @@ describe('workspace attached and detached dragging', () => {
 
   describe('threshold and attachment', () => {
     it('keeps sibling close controls outside drag ownership', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.closable = true;
       await elementIsStable(workspace);
       const saved = workspace.value;
@@ -104,7 +104,7 @@ describe('workspace attached and detached dragging', () => {
     it.each(['data-panel', 'data-drag-group'])(
       'leaves application controls with %s outside drag ownership',
       async attribute => {
-        const workspace = await setup();
+        const workspace = await createWorkspace();
         const saved = workspace.value;
         const button = document.createElement('button');
         button.setAttribute(attribute, 'a');
@@ -124,7 +124,7 @@ describe('workspace attached and detached dragging', () => {
     );
 
     it('captures the threshold at press and latches detachment after radial crossing', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const saved = workspace.value;
       expect(workspace.detachThreshold).toBe(48);
       workspace.setAttribute('detach-threshold', '80');
@@ -146,7 +146,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('limits placement hint preparation to detached dragging', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const catalog = vi.spyOn(WorkspaceEvaluation.prototype, 'targetCatalog');
       const move = press(workspace);
       move('pointermove', 20);
@@ -168,7 +168,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('captures grouping and rearrangement permission at press through drop', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.detachThreshold = 0;
       const initial = workspace.value;
       const move = press(workspace);
@@ -194,7 +194,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('leaves tab dragging unclaimed while preserving selection without grouping permission', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.groupable = false;
       workspace.detachThreshold = 0;
       await elementIsStable(workspace);
@@ -222,7 +222,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('retains a feasible group placement over an unavailable join header using captured permission', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.groupable = false;
       workspace.detachThreshold = 0;
       await elementIsStable(workspace);
@@ -257,7 +257,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('marks an infeasible split as blocked when panel minimums cannot fit', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.detachThreshold = 0;
       workspace.querySelector('#a')!.setAttribute('min-height', '150');
       workspace.querySelector('#b')!.setAttribute('min-height', '150');
@@ -282,7 +282,7 @@ describe('workspace attached and detached dragging', () => {
     it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY])(
       'keeps click tolerance and validates the captured threshold for %s',
       async threshold => {
-        const workspace = await setup();
+        const workspace = await createWorkspace();
         const saved = workspace.value;
         workspace.detachThreshold = threshold;
         await elementIsStable(workspace);
@@ -303,7 +303,7 @@ describe('workspace attached and detached dragging', () => {
       'retains original geometry and releases silently while attached through %s',
       async selector => {
         const grouped = selector.includes('drag-group');
-        const workspace = grouped ? await setupGrouped() : await setup();
+        const workspace = grouped ? await createGroupedWorkspace() : await createWorkspace();
         const saved = workspace.value;
         const before = [...workspace.querySelectorAll('nve-workspace-panel')].map(panel => panel.getAttribute('style'));
         const input = workspace.querySelector('input')!;
@@ -338,7 +338,7 @@ describe('workspace attached and detached dragging', () => {
     ])(
       'presents surviving content across detachment with active $active and group $group',
       async ({ active, group }) => {
-        const workspace = await setupGrouped();
+        const workspace = await createGroupedWorkspace();
         workspace.shadowRoot!.querySelector<HTMLElement>(`[data-panel="${active}"]`)!.click();
         await elementIsStable(workspace);
         const saved = workspace.value;
@@ -390,7 +390,7 @@ describe('workspace attached and detached dragging', () => {
     it.each(['a', 'b', 'c'])(
       'keeps the genuine initial %s group reservation and silent original drop',
       async source => {
-        const workspace = await setup();
+        const workspace = await createWorkspace();
         const third = document.createElement('nve-workspace-panel');
         third.id = 'c';
         third.textContent = 'Gamma';
@@ -428,7 +428,7 @@ describe('workspace attached and detached dragging', () => {
     );
 
     it('moves the only visible panel with its closed and unavailable group members', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.groupable = false;
       const restored = JSON.parse(workspace.value);
       restored.closed = ['a'];
@@ -499,7 +499,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('preserves the content inset and normal label across computed-target detachment', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector<HTMLElement>('#b')!;
       const content = panel.shadowRoot!.querySelector<HTMLElement>('.content')!;
       const label = panel
@@ -529,7 +529,7 @@ describe('workspace attached and detached dragging', () => {
       { source: 'singleton', selector: '[data-panel="b"]' },
       { source: 'tab', selector: '[data-panel="companion"]' }
     ])('does not invent content focus after dropping a $source into a new position', async ({ selector }) => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const active = getActiveElement();
       if (active instanceof HTMLElement) active.blur();
       const saved = workspace.value;
@@ -552,7 +552,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('recovers the actual companion focus after joining its whole group rather than the first tab', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="companion"]')!.focus();
       const saved = workspace.value;
       const move = press(workspace, '[data-drag-group="a"]');
@@ -575,7 +575,7 @@ describe('workspace attached and detached dragging', () => {
 
   describe('cancellation', () => {
     it('honors nested Escape ownership and consumes an unhandled cancellation once', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const input = workspace.querySelector('input')!;
       const consume = (event: KeyboardEvent) => event.preventDefault();
       input.addEventListener('keydown', consume);
@@ -596,7 +596,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('preserves existing application focus when a group drag returns', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const outside = document.createElement('button');
       fixture.append(outside);
       outside.focus();
@@ -613,7 +613,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('retains edited content through a cancelled drag and another drag interrupted by reconnection', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const savedValue = workspace.value;
       const input = workspace.querySelector('input')!;
       input.value = 'edited';
@@ -639,7 +639,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('restores the saved strip offset when a scrolled group reorder is cancelled', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.style.setProperty('--tab-min-width', '240px');
       const original = workspace.shadowRoot!.querySelector<HTMLElement>('.tablist[data-scrollable]')!;
       await vi.waitFor(() => expect(original.scrollWidth).toBeGreaterThan(original.clientWidth));
@@ -677,7 +677,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('does not invent focus after a group drag that began without a focused control', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const active = getActiveElement();
       if (active instanceof HTMLElement) active.blur();
       const move = press(workspace, '[data-drag-group="a"]');
@@ -691,7 +691,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('recovers the focused companion rather than the first member after a whole-group return', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="companion"]')!.focus();
       const move = press(workspace, '[data-drag-group="a"]');
       move('pointermove', 0, 60);
@@ -703,7 +703,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('preserves supplied content focus without refocusing it on a no-op return', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const input = workspace.querySelector('input')!;
       input.focus();
       const focus = vi.spyOn(input, 'focus');
@@ -717,7 +717,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('leaves focus untouched when Escape cancels a press without movement', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="companion"]')!;
       tab.focus();
       const focus = vi.spyOn(tab, 'focus');
@@ -732,7 +732,7 @@ describe('workspace attached and detached dragging', () => {
       { source: 'tab', selector: '[data-panel="companion"]' },
       { source: 'group grip', selector: '[data-drag-group="a"]' }
     ])('restores focus to the $source when its drag returns', async ({ selector }) => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.shadowRoot!.querySelector<HTMLElement>(selector)!.focus();
       const move = press(workspace, selector);
       move('pointermove', 0, 60);
@@ -744,7 +744,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('cancels the computed-target candidate when the viewport changes', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const saved = workspace.value;
       const move = press(workspace);
       move('pointermove', 80, 80);
@@ -757,7 +757,7 @@ describe('workspace attached and detached dragging', () => {
     it.each(['pointer', 'keyboard'])(
       'lets fresh %s input supersede cosmetic cancellation without restoring old focus',
       async input => {
-        const workspace = await setup();
+        const workspace = await createWorkspace();
         const saved = workspace.value;
         const changed = vi.fn();
         workspace.addEventListener('change', changed);
@@ -797,7 +797,7 @@ describe('workspace attached and detached dragging', () => {
 
   describe('group grips', () => {
     it('omits a singleton grip while retaining a multi-panel group grip', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const tabs = (id: string) =>
         workspace.shadowRoot!.querySelector<HTMLElement>(`[data-panel="${id}"]`)!.closest('.tabs')!;
       const singleton = tabs('b');
@@ -809,7 +809,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('removes the grip and its space when a companion closes and restores them when it reopens', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.value = JSON.stringify({ ...JSON.parse(workspace.value), closed: ['companion'] });
       await elementIsStable(workspace);
       const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
@@ -824,7 +824,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('omits the grip while a companion is unavailable and restores it when the panel returns', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const companion = workspace.querySelector('#companion')!;
       companion.remove();
       await elementIsStable(workspace);
@@ -839,7 +839,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('carries a group as a stack labeled with its active panel', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.querySelector('#companion')!.innerHTML =
         '<nve-workspace-panel-header>Companion</nve-workspace-panel-header>';
       const layout = JSON.parse(workspace.value);
@@ -864,7 +864,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('preserves committed group grips while previewing a tab join', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       const source = workspace.shadowRoot!.querySelector('[data-panel="companion"]')!.getBoundingClientRect();
       const target = workspace.shadowRoot!.querySelector('[data-panel="b"]')!.getBoundingClientRect();
       const move = press(workspace, '[data-panel="companion"]');
@@ -886,7 +886,7 @@ describe('workspace attached and detached dragging', () => {
 
   describe('animation', () => {
     it('animates tab controls only during rearrangement, leaving direct layout changes immediate', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const control = workspace.shadowRoot!.querySelector<HTMLElement>('.tablist .tab-entry')!;
       expect(getComputedStyle(control).transitionDuration).toBe('0s');
       const width = control.closest('.tabs')!.getBoundingClientRect().width;
@@ -905,7 +905,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('lets the indicator follow animated tab positions without another transition during rearrangement', async () => {
-      const workspace = await setupGrouped();
+      const workspace = await createGroupedWorkspace();
       workspace.style.setProperty('--animation-duration', '400ms');
       const tabs = workspace.shadowRoot!.querySelector('nve-tabs.tab-track')!;
       expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0.15s');
@@ -931,7 +931,7 @@ describe('workspace attached and detached dragging', () => {
     });
 
     it('coordinates a workspace duration override through projected labels without changing saved state', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const changed = vi.fn();
       workspace.addEventListener('change', changed);
       const initial = workspace.value;
@@ -993,35 +993,34 @@ describe('workspace grip admission', () => {
   });
 
   let fixture: HTMLElement | undefined;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    if (fixture) removeFixture(fixture);
-  });
-
-  async function setup(value = arrangement) {
+  beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${value}>
+      <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${arrangement}>
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained" /></nve-workspace-panel>
         <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Content B</nve-workspace-panel>
         <nve-workspace-panel id="c"><nve-workspace-panel-header>Gamma</nve-workspace-panel-header>Content C</nve-workspace-panel>
         <nve-workspace-panel id="d"><nve-workspace-panel-header>Delta</nve-workspace-panel-header>Content D</nve-workspace-panel>
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
 
-  function control<T extends HTMLElement = HTMLElement>(workspace: Workspace, selector: string): T {
+  afterEach(() => {
+    if (fixture) removeFixture(fixture);
+  });
+
+  function control<T extends HTMLElement = HTMLElement>(selector: string): T {
     const element = workspace.shadowRoot!.querySelector<T>(selector);
     expect(element, selector).not.toBeNull();
     return element!;
   }
 
   it('should keep group grips drag-only on click', async () => {
-    const workspace = await setup();
     const value = workspace.value;
-    const grip = control<DragHandle>(workspace, '[data-drag-group="a"]');
+    const grip = control<DragHandle>('[data-drag-group="a"]');
     grip.click();
     await elementIsStable(workspace);
     expect(grip.pressed).toBe(false);
@@ -1029,7 +1028,6 @@ describe('workspace grip admission', () => {
   });
 
   it('should disable dragging independently of close and resize controls', async () => {
-    const workspace = await setup();
     const value = workspace.value;
     workspace.rearrangeable = false;
     await elementIsStable(workspace);
@@ -1042,13 +1040,9 @@ describe('workspace grip admission', () => {
 
 describe('workspace preview viewport isolation', () => {
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    removeFixture(fixture);
-    vi.restoreAllMocks();
-  });
-
-  async function setup() {
+  beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-workspace closable groupable rearrangeable style="height:220px;width:600px">
         <nve-workspace-panel id="a">
@@ -1060,13 +1054,16 @@ describe('workspace preview viewport isolation', () => {
         >
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   it('isolates overshooting preview geometry from viewport scroll extents and allocation', async () => {
-    const workspace = await setup();
     const viewport = workspace.shadowRoot!.querySelector<HTMLElement>('.viewport')!;
     const canvas = workspace.shadowRoot!.querySelector<HTMLElement>('.canvas')!;
     const extents = () => [viewport.clientWidth, viewport.clientHeight, viewport.scrollWidth, viewport.scrollHeight];

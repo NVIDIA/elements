@@ -17,7 +17,7 @@ describe('workspace composition controller', () => {
     controller?.stopObserving();
   });
 
-  function setup(getLayout: () => WorkspaceLayout | undefined = () => undefined) {
+  function createCompositionController(getLayout: () => WorkspaceLayout | undefined = () => undefined) {
     // Observation and ownership relationships do not require a connected or rendered workspace.
     const host = Object.assign(document.createElement('div'), {
       addController: vi.fn(),
@@ -43,7 +43,7 @@ describe('workspace composition controller', () => {
       root: { type: 'group', panels: ['a', 'b'], active: 'a' },
       closed: []
     };
-    const { panel } = setup(() => layout);
+    const { panel } = createCompositionController(() => layout);
     const group: WorkspacePresentedGroup = {
       key: 'root',
       panels: [panel],
@@ -67,7 +67,7 @@ describe('workspace composition controller', () => {
   it.each(['id', 'min-width', 'min-height', 'slot'])(
     'reports directly owned panel %s changes as panel inputs',
     async attribute => {
-      const { panel, contentChanged } = setup();
+      const { panel, contentChanged } = createCompositionController();
       controller.startObserving();
       panel.setAttribute(attribute, 'changed');
       await Promise.resolve();
@@ -76,7 +76,7 @@ describe('workspace composition controller', () => {
   );
 
   it.each(['id', 'min-width', 'min-height', 'slot'])('reports host %s changes as chrome inputs', async attribute => {
-    const { host, contentChanged } = setup();
+    const { host, contentChanged } = createCompositionController();
     controller.startObserving();
     host.setAttribute(attribute, 'changed');
     await Promise.resolve();
@@ -84,7 +84,7 @@ describe('workspace composition controller', () => {
   });
 
   it('reports supplied panel additions and removals', async () => {
-    const { host, panel, contentChanged } = setup();
+    const { host, panel, contentChanged } = createCompositionController();
     controller.startObserving();
     panel.remove();
     await Promise.resolve();
@@ -94,7 +94,7 @@ describe('workspace composition controller', () => {
   });
 
   it('reports header text and authored accessory changes as chrome', async () => {
-    const { panel, contentChanged } = setup();
+    const { panel, contentChanged } = createCompositionController();
     controller.startObserving();
     panel.querySelector('nve-workspace-panel-header')!.firstChild!.textContent = 'Notes';
     await Promise.resolve();
@@ -104,7 +104,7 @@ describe('workspace composition controller', () => {
   });
 
   it('reports one panel-input change for a batch containing panel and chrome changes', async () => {
-    const { panel, contentChanged } = setup();
+    const { panel, contentChanged } = createCompositionController();
     controller.startObserving();
     panel.setAttribute('min-width', '300');
     panel.querySelector('nve-workspace-panel-header')!.textContent = 'Notes';
@@ -113,7 +113,7 @@ describe('workspace composition controller', () => {
   });
 
   it('ignores application content, nested workspace headers and unobserved attributes', async () => {
-    const { panel, contentChanged } = setup();
+    const { panel, contentChanged } = createCompositionController();
     const nested = document.createElement('nve-workspace');
     nested.innerHTML = `<nve-workspace-panel id="nested"><nve-workspace-panel-header>Nested</nve-workspace-panel-header></nve-workspace-panel>`;
     panel.querySelector('p')!.append(nested);
@@ -126,7 +126,7 @@ describe('workspace composition controller', () => {
   });
 
   it('discards pending changes on stop and starts a fresh observation period', async () => {
-    const { panel, contentChanged } = setup();
+    const { panel, contentChanged } = createCompositionController();
     panel.id = 'before-start';
     controller.startObserving();
     panel.id = 'pending';

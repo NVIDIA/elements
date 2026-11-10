@@ -59,7 +59,7 @@ describe('workspace previews', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(singleGroup = false) {
+  async function createWorkspace(singleGroup = false) {
     fixture = await createFixture(html`
       <nve-workspace groupable rearrangeable .value=${JSON.stringify(arrangement(singleGroup))} style="width:900px;height:300px">
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header></nve-workspace-panel>
@@ -114,7 +114,7 @@ describe('workspace previews', () => {
   }
 
   it('refreshes close labels and the carried title after authored text changes', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.closable = true;
     await elementIsStable(workspace);
     const header = workspace.querySelector('#a2 > nve-workspace-panel-header')!;
@@ -135,7 +135,7 @@ describe('workspace previews', () => {
   });
 
   it.each(['id', 'slot'])('keeps a detached drag active when the workspace %s changes', async attribute => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const saved = workspace.value;
     await detach(workspace);
 
@@ -149,7 +149,7 @@ describe('workspace previews', () => {
   });
 
   it('uses the visible source ID when its title and saved active panel are unavailable', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const layout = JSON.parse(workspace.value);
     layout.root.children[0].panels.push('unavailable');
     layout.root.children[0].active = 'unavailable';
@@ -168,7 +168,7 @@ describe('workspace previews', () => {
     { result: 'populated', empty: false },
     { result: 'empty', empty: true }
   ])('reuses $result boundaries across stable detached rerenders', async ({ empty }) => {
-    const workspace = await setup(empty);
+    const workspace = await createWorkspace(empty);
     await detach(workspace, empty ? '[data-drag-group="a"]' : '[data-panel="a2"]');
     const prepared = boundaryPreparations();
     const initial = boundaries(workspace);
@@ -183,7 +183,7 @@ describe('workspace previews', () => {
   });
 
   it('marks only the selected recipient boundary active across rerenders and target changes', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     await detach(workspace);
     const activeBoundaries = () =>
       [...workspace.shadowRoot!.querySelectorAll('[data-scope-boundary][data-active]')].map(boundary =>
@@ -205,7 +205,7 @@ describe('workspace previews', () => {
   });
 
   it('rebuilds boundaries when authored chrome changes and restores their original geometry', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     await detach(workspace);
     const initial = boundaries(workspace);
     const prepared = boundaryPreparations();
@@ -231,7 +231,7 @@ describe('workspace previews', () => {
   });
 
   it('rebuilds source-excluded boundaries for a different carried tab', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     await detach(workspace);
     expect(boundaries(workspace).map(boundary => boundary.key)).toContain(getPanelMembershipKey(['a']));
     await cancel(workspace);
@@ -244,7 +244,7 @@ describe('workspace previews', () => {
   });
 
   it('prepares boundaries again after cancellation and disconnection', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     await detach(workspace);
     const initial = boundaries(workspace);
     await cancel(workspace);

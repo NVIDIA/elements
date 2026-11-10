@@ -96,7 +96,11 @@ export function typesMatch(entry, baseProperty) {
 
 /** APIs whose local or inherited descriptions intentionally specialize the broad NveElement contract. */
 const standardDescriptionExclusions = {
-  value: declaration => declaration.tagName === 'nve-copy-button' || declaration.tagName === 'nve-preferences-input',
+  value: declaration =>
+    declaration.tagName === 'nve-copy-button' ||
+    declaration.tagName === 'nve-preferences-input' ||
+    declaration.tagName === 'nve-dashboard' ||
+    declaration.tagName === 'nve-workspace',
   readOnly: (_declaration, entry) => entry.inheritedFrom?.name === 'ButtonFormControlMixin'
 };
 

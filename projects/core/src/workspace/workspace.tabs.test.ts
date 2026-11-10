@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -34,23 +34,22 @@ describe('workspace header semantics', () => {
   };
 
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => removeFixture(fixture));
-
-  async function setup() {
+  beforeEach(async () => {
     fixture =
       await createFixture(html`<nve-workspace closable style="width:600px;height:250px" .value=${JSON.stringify(arrangement)}>
       <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha<button slot="suffix">Alpha action</button></nve-workspace-panel-header><input value="retained"></nve-workspace-panel>
       <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Beta content</nve-workspace-panel>
       <nve-workspace-panel id="c"><nve-workspace-panel-header>Gamma</nve-workspace-panel-header>Gamma content</nve-workspace-panel>
     </nve-workspace>`);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
+
+  afterEach(() => removeFixture(fixture));
 
   it('presents a singleton as a named group with a passive title and independent close control', async () => {
-    const workspace = await setup();
     const title = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="c"]')!;
     const panel = workspace.querySelector('#c')!;
     expect(title.localName).toBe('div');
@@ -72,7 +71,6 @@ describe('workspace header semantics', () => {
   });
 
   it('keeps pointer clicks on singleton titles passive', async () => {
-    const workspace = await setup();
     workspace.rearrangeable = true;
     await elementIsStable(workspace);
     const value = workspace.value;
@@ -86,7 +84,6 @@ describe('workspace header semantics', () => {
   });
 
   it('retains real tab relationships for existing groups without grouping or rearrangement permission', async () => {
-    const workspace = await setup();
     const tab = workspace.shadowRoot!.querySelector<HTMLElement>('nve-tabs-item[data-panel="a"]')!;
     const panel = workspace.querySelector('#a')!;
     expect(workspace.groupable).toBe(false);
@@ -98,7 +95,6 @@ describe('workspace header semantics', () => {
   });
 
   it('lets Tabs initialize restored selection and its close-control tab order', async () => {
-    const workspace = await setup();
     workspace.value = JSON.stringify({
       ...arrangement,
       root: { type: 'group', panels: ['b', 'a', 'c'], active: 'b' }
@@ -117,7 +113,6 @@ describe('workspace header semantics', () => {
   });
 
   it('keeps roving focus and its close control independent of programmatic selection', async () => {
-    const workspace = await setup();
     const first = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
     const second = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="b"]')!;
     first.focus();
@@ -143,7 +138,6 @@ describe('workspace header semantics', () => {
   });
 
   it('moves focus from a surviving tab to its body when an inactive companion closes', async () => {
-    const workspace = await setup();
     const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
     tab.focus();
     workspace.querySelector('#b')!.dispatchEvent(new CommandEvent('command', { command: '--close' }));
@@ -156,7 +150,6 @@ describe('workspace header semantics', () => {
   });
 
   it('recovers focused tab semantics after silent value restoration leaves one open member', async () => {
-    const workspace = await setup();
     const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
     tab.focus();
     const changed = vi.fn();
@@ -171,7 +164,6 @@ describe('workspace header semantics', () => {
   });
 
   it('recovers the same panel when a focused group is split into differently ordered singletons', async () => {
-    const workspace = await setup();
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!.focus();
     workspace.value = JSON.stringify({
       version: 1,
@@ -190,7 +182,6 @@ describe('workspace header semantics', () => {
   });
 
   it('retains close-control focus when its panel changes from tabbed to singleton', async () => {
-    const workspace = await setup();
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="a"]')!.focus();
     workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
     await elementIsStable(workspace);
@@ -198,7 +189,6 @@ describe('workspace header semantics', () => {
   });
 
   it('recovers to surviving content when restoration removes the focused close control', async () => {
-    const workspace = await setup();
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="b"]')!.focus();
     workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
     await elementIsStable(workspace);
@@ -208,7 +198,6 @@ describe('workspace header semantics', () => {
   });
 
   it('preserves focused application content when closing a companion and restoring its group', async () => {
-    const workspace = await setup();
     const input = workspace.querySelector<HTMLInputElement>('#a input')!;
     input.focus();
     workspace.querySelector('#b')!.dispatchEvent(new CommandEvent('command', { command: '--close' }));
@@ -221,7 +210,6 @@ describe('workspace header semantics', () => {
   });
 
   it('preserves focused suffix controls while silently changing group presentation', async () => {
-    const workspace = await setup();
     const action = workspace.querySelector<HTMLButtonElement>('#a button')!;
     action.focus();
     workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
@@ -233,7 +221,6 @@ describe('workspace header semantics', () => {
   });
 
   it('preserves an external invoker focus when closing an inactive companion', async () => {
-    const workspace = await setup();
     const invoker = document.createElement('button');
     invoker.textContent = 'Close Beta';
     fixture.append(invoker);
@@ -268,7 +255,7 @@ describe('workspace tab overflow and scrolling', () => {
     vi.unstubAllGlobals();
   });
 
-  async function setup() {
+  async function createWorkspace() {
     fixture = await createFixture(html`<nve-workspace style="width:700px;height:300px" .value=${arrangement}>
       <nve-workspace-panel id="a"><nve-workspace-panel-header><span slot="prefix">★</span>Alpha<button slot="suffix">Alpha action</button></nve-workspace-panel-header><nve-workspace-panel-content><input value="retained"></nve-workspace-panel-content><nve-workspace-panel-footer>Alpha status</nve-workspace-panel-footer></nve-workspace-panel>
       <nve-workspace-panel id="companion"><nve-workspace-panel-header>Companion<button slot="suffix">Companion action</button></nve-workspace-panel-header><nve-workspace-panel-footer>Companion status</nve-workspace-panel-footer></nve-workspace-panel>
@@ -280,7 +267,7 @@ describe('workspace tab overflow and scrolling', () => {
   }
 
   it('uses scoped Tabs with one selected keyboard stop for each tabbed group', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const groups = [...workspace.shadowRoot!.querySelectorAll('nve-tabs.tab-track')];
     expect(groups).toHaveLength(1);
     for (const tabs of groups) {
@@ -289,7 +276,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('keeps readable tab minimums independent of the group minimum width', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.querySelectorAll('[slot="suffix"]').forEach(element => element.remove());
     workspace.style.width = '140px';
     workspace.closable = true;
@@ -313,7 +300,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('ellipsizes long titles while preserving prefix decoration and header height', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
     const text = document.createElement('span');
     text.textContent = 'A long application title that cannot fit within one tab';
@@ -329,7 +316,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('ellipsizes identifier titles when no authored header is supplied', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const id = 'a-long-identifier-for-a-panel-without-an-authored-header';
     workspace.querySelector('#b')!.id = id;
     workspace.value = JSON.stringify({
@@ -345,7 +332,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('scrolls titles and close controls with their tabs without waiting for scroll handlers', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.closable = true;
     workspace.style.width = '240px';
     await vi.waitFor(() =>
@@ -382,7 +369,7 @@ describe('workspace tab overflow and scrolling', () => {
 
   it('reads one scroll offset before updating all fallback titles', async () => {
     vi.stubGlobal('ScrollTimeline', undefined);
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.style.width = '240px';
     await vi.waitFor(() =>
       expect(workspace.shadowRoot!.querySelector('.group-chrome')!.getBoundingClientRect().width).toBeLessThan(240)
@@ -405,7 +392,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('updates the scroll binding when the strip changes size and releases it when the group closes', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.style.width = '240px';
     await elementIsStable(workspace);
     const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
@@ -428,7 +415,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('keeps header scrolling current when native overflow changes during detached dragging', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.groupable = true;
     workspace.rearrangeable = true;
     await elementIsStable(workspace);
@@ -479,7 +466,7 @@ describe('workspace tab overflow and scrolling', () => {
   });
 
   it('reveals keyboard selection in the native strip after allocating the selected header', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.closable = true;
     workspace.style.width = '180px';
     workspace.value = JSON.stringify({
@@ -509,13 +496,9 @@ describe('workspace tab overflow and scrolling', () => {
 
 describe('workspace singleton tab presentation', () => {
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    removeFixture(fixture);
-    vi.restoreAllMocks();
-  });
-
-  async function setup() {
+  beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-workspace closable groupable rearrangeable style="height:220px;width:600px">
         <nve-workspace-panel id="a">
@@ -527,13 +510,16 @@ describe('workspace singleton tab presentation', () => {
         >
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   it('renders tab selection only while a group has multiple open panels', async () => {
-    const workspace = await setup();
     const tabs = workspace.shadowRoot!.querySelector('nve-tabs')!;
     expect(getComputedStyle(tabs, '::after').display).not.toBe('none');
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="b"]')!.click();
@@ -548,7 +534,6 @@ describe('workspace singleton tab presentation', () => {
   });
 
   it('clips singleton header overflow without reading or binding a scrolling strip', async () => {
-    const workspace = await setup();
     workspace.style.width = '180px';
     const strip = workspace.shadowRoot!.querySelector<HTMLElement>('.tablist')!;
     await vi.waitFor(() => expect(strip.scrollWidth).toBeGreaterThan(strip.clientWidth));
@@ -592,39 +577,38 @@ describe('workspace tab close and focus', () => {
   });
 
   let fixture: HTMLElement | undefined;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    if (fixture) removeFixture(fixture);
-  });
-
-  async function setup(value = arrangement) {
+  beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${value}>
+      <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${arrangement}>
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained" /></nve-workspace-panel>
         <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Content B</nve-workspace-panel>
         <nve-workspace-panel id="c"><nve-workspace-panel-header>Gamma</nve-workspace-panel-header>Content C</nve-workspace-panel>
         <nve-workspace-panel id="d"><nve-workspace-panel-header>Delta</nve-workspace-panel-header>Content D</nve-workspace-panel>
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
 
-  function control<T extends HTMLElement = HTMLElement>(workspace: Workspace, selector: string): T {
+  afterEach(() => {
+    if (fixture) removeFixture(fixture);
+  });
+
+  function control<T extends HTMLElement = HTMLElement>(selector: string): T {
     const element = workspace.shadowRoot!.querySelector<T>(selector);
     expect(element, selector).not.toBeNull();
     return element!;
   }
 
-  function snapshot(workspace: Workspace): WorkspaceLayout {
+  function snapshot(): WorkspaceLayout {
     return JSON.parse(workspace.value);
   }
 
   it.each(['Enter', 'Space'])('should close an inactive tab with %s without activating it', async key => {
-    const workspace = await setup();
-    const tab = control(workspace, '[data-panel="b"]');
-    const close = control(workspace, '[data-close="b"]');
+    const tab = control('[data-panel="b"]');
+    const close = control('[data-close="b"]');
     const click = vi.fn();
     const change = vi.fn();
     tab.addEventListener('click', click);
@@ -638,7 +622,7 @@ describe('workspace tab close and focus', () => {
 
     expect(click).not.toHaveBeenCalled();
     expect(change).toHaveBeenCalledOnce();
-    expect(snapshot(workspace).closed).toEqual(['b']);
+    expect(snapshot().closed).toEqual(['b']);
     expect(workspace.querySelector('#a')!.getAttribute('aria-hidden')).toBe('false');
     expect(workspace.querySelector('#a')!.shadowRoot!.activeElement).toBe(
       workspace.querySelector('#a')!.shadowRoot!.querySelector('.body')
@@ -646,7 +630,6 @@ describe('workspace tab close and focus', () => {
   });
 
   it('should recover focus on close and retain input through application snapshot restoration', async () => {
-    const workspace = await setup();
     const panel = workspace.querySelector<HTMLElement>('#a')!;
     const input = panel.querySelector('input')!;
     const saved = workspace.value;
@@ -654,7 +637,7 @@ describe('workspace tab close and focus', () => {
     workspace.addEventListener('change', change);
     input.value = 'edited';
     input.focus();
-    control(workspace, '[data-close="a"]').click();
+    control('[data-close="a"]').click();
     await elementIsStable(workspace);
     expect(panel.isConnected).toBe(true);
     expect(panel.hidden).toBe(false);
@@ -663,10 +646,10 @@ describe('workspace tab close and focus', () => {
     expect(workspace.querySelector('#b')!.shadowRoot!.activeElement).toBe(
       workspace.querySelector('#b')!.shadowRoot!.querySelector('.body')
     );
-    expect(snapshot(workspace).closed).toEqual(['a']);
+    expect(snapshot().closed).toEqual(['a']);
     expect(change).toHaveBeenCalledOnce();
-    expect(snapshot(workspace).root).toEqual(JSON.parse(saved).root);
-    workspace.value = JSON.stringify({ ...snapshot(workspace), closed: [] });
+    expect(snapshot().root).toEqual(JSON.parse(saved).root);
+    workspace.value = JSON.stringify({ ...snapshot(), closed: [] });
     await elementIsStable(workspace);
     expect(panel.hidden).toBe(false);
     expect(panel.matches(':state(workspace-presented)')).toBe(true);
@@ -696,13 +679,9 @@ describe('workspace reserved tab presentation', () => {
   }
 
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    removeFixture(fixture);
-    vi.restoreAllMocks();
-  });
-
-  async function setup() {
+  beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-workspace groupable rearrangeable closable style="width:720px;height:240px">
         ${['a', 'companion', 'b', 'b2'].map(
@@ -715,7 +694,7 @@ describe('workspace reserved tab presentation', () => {
         )}
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     workspace.value = JSON.stringify({
       version: 1,
       closed: [],
@@ -731,54 +710,57 @@ describe('workspace reserved tab presentation', () => {
     });
     await elementIsStable(workspace);
     vi.spyOn(workspace, 'setPointerCapture').mockImplementation(() => {});
-    return workspace;
-  }
+  });
 
-  function button(workspace: Workspace, id: string) {
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
+
+  function button(id: string) {
     return workspace.shadowRoot!.querySelector<HTMLElement>(`[data-panel="${id}"]`)!;
   }
 
-  function entry(workspace: Workspace, id: string) {
-    return button(workspace, id).closest<HTMLElement>('nve-tabs-item-group')!;
+  function entry(id: string) {
+    return button(id).closest<HTMLElement>('nve-tabs-item-group')!;
   }
 
-  function move(workspace: Workspace, type: string, point: Point) {
+  function move(type: string, point: Point) {
     workspace.dispatchEvent(pointer(type, point.x, point.y));
   }
 
-  function begin(workspace: Workspace, id: string) {
-    const control = button(workspace, id),
+  function begin(id: string) {
+    const control = button(id),
       rect = control.getBoundingClientRect();
     control.dispatchEvent(pointer('pointerdown', rect.x + rect.width / 2, rect.y + rect.height / 2));
   }
 
   it('reserves an empty inert tab, slides existing headers, and retains the original nonfirst recipient body', async () => {
-    const workspace = await setup(),
-      saved = workspace.value,
+    const saved = workspace.value,
       input = workspace.querySelector('#a input');
     const change = vi.fn();
     workspace.addEventListener('change', change);
-    const original = button(workspace, 'b'),
+    const original = button('b'),
       strip = original.closest('.tablist');
     const target = original.getBoundingClientRect();
-    begin(workspace, 'companion');
-    move(workspace, 'pointermove', { x: target.x + 8, y: target.y + target.height / 2 });
+    begin('companion');
+    move('pointermove', { x: target.x + 8, y: target.y + target.height / 2 });
     await vi.waitFor(() =>
       expect(
         workspace.shadowRoot!.querySelector('[data-preview-allocation]')?.getAttribute('data-preview-allocation')
       ).toBe('reserved')
     );
     await elementIsStable(workspace);
-    const carried = entry(workspace, 'companion');
+    const carried = entry('companion');
     expect(carried.inert).toBe(true);
     expect(getComputedStyle(carried).visibility).toBe('hidden');
     expect(carried.getAttribute('aria-hidden')).toBe('true');
     expect(original.closest('.tablist')).toBe(strip);
-    expect(button(workspace, 'b')).toBe(original);
-    expect(button(workspace, 'b2').hasAttribute('selected')).toBe(true);
+    expect(button('b')).toBe(original);
+    expect(button('b2').hasAttribute('selected')).toBe(true);
     expect(workspace.querySelector('#b2')!.shadowRoot!.querySelector<HTMLElement>('.content')!.hidden).toBe(false);
     expect(workspace.querySelector('#companion')!.matches(':state(workspace-presented)')).toBe(false);
-    expect(getComputedStyle(entry(workspace, 'b')).transitionProperty).toContain('left');
+    expect(getComputedStyle(entry('b')).transitionProperty).toContain('left');
     expect(workspace.value).toBe(saved);
     expect(change).not.toHaveBeenCalled();
     expect(workspace.querySelector('#a input')).toBe(input);
@@ -788,57 +770,55 @@ describe('workspace reserved tab presentation', () => {
   });
 
   it('holds the accepted insertion position across refresh and small real pointer movements, then silently returns an inactive tab', async () => {
-    const workspace = await setup();
     const saved = workspace.value,
       change = vi.fn();
     workspace.addEventListener('change', change);
-    const target = button(workspace, 'b').getBoundingClientRect();
-    begin(workspace, 'companion');
-    move(workspace, 'pointermove', { x: target.x + 8, y: target.y + target.height / 2 });
+    const target = button('b').getBoundingClientRect();
+    begin('companion');
+    move('pointermove', { x: target.x + 8, y: target.y + target.height / 2 });
     await vi.waitFor(() =>
       expect(
         workspace.shadowRoot!.querySelector('[data-destination-ghost]')?.getAttribute('data-destination-kind')
       ).toBe('tab')
     );
     await elementIsStable(workspace);
-    await vi.waitFor(() => expect(entry(workspace, 'a').getAnimations()).toHaveLength(0));
-    const original = entry(workspace, 'a').getBoundingClientRect();
-    move(workspace, 'pointermove', { x: original.x + original.width * 0.75, y: original.y + original.height / 2 });
+    await vi.waitFor(() => expect(entry('a').getAnimations()).toHaveLength(0));
+    const original = entry('a').getBoundingClientRect();
+    move('pointermove', { x: original.x + original.width * 0.75, y: original.y + original.height / 2 });
     await nextFrame();
     await elementIsStable(workspace);
     await vi.waitFor(() => {
-      expect(entry(workspace, 'a').getAnimations()).toHaveLength(0);
-      expect(entry(workspace, 'companion').getAnimations()).toHaveLength(0);
+      expect(entry('a').getAnimations()).toHaveLength(0);
+      expect(entry('companion').getAnimations()).toHaveLength(0);
     });
-    const reservationRect = entry(workspace, 'companion').getBoundingClientRect();
-    expect(reservationRect.left).toBeCloseTo(entry(workspace, 'a').getBoundingClientRect().right, 1);
-    const destination = entry(workspace, 'companion').getAttribute('style');
-    const strip = button(workspace, 'a').closest('.tablist')!;
+    const reservationRect = entry('companion').getBoundingClientRect();
+    expect(reservationRect.left).toBeCloseTo(entry('a').getBoundingClientRect().right, 1);
+    const destination = entry('companion').getAttribute('style');
+    const strip = button('a').closest('.tablist')!;
     strip.dispatchEvent(new Event('scroll'));
     await nextFrame();
     await elementIsStable(workspace);
-    expect(entry(workspace, 'companion').getAttribute('style')).toBe(destination);
+    expect(entry('companion').getAttribute('style')).toBe(destination);
     for (const dx of [-1, 1]) {
-      move(workspace, 'pointermove', {
+      move('pointermove', {
         x: reservationRect.x + reservationRect.width / 2 + dx,
         y: reservationRect.y + reservationRect.height / 2
       });
       await nextFrame();
       await elementIsStable(workspace);
-      expect(entry(workspace, 'companion').getAttribute('style')).toBe(destination);
+      expect(entry('companion').getAttribute('style')).toBe(destination);
     }
-    move(workspace, 'pointerup', {
+    move('pointerup', {
       x: reservationRect.x + reservationRect.width / 2,
       y: reservationRect.y + reservationRect.height / 2
     });
     await elementIsStable(workspace);
     expect(workspace.value).toBe(saved);
     expect(change).not.toHaveBeenCalled();
-    expect(button(workspace, 'a').hasAttribute('selected')).toBe(true);
+    expect(button('a').hasAttribute('selected')).toBe(true);
   });
 
   it('updates a held reservation clipping independently of placement feasibility during native scroll', async () => {
-    const workspace = await setup();
     const extra = Array.from({ length: 12 }, (_, index) => `extra-${index}`);
     for (const id of extra) {
       const panel = document.createElement('nve-workspace-panel');
@@ -859,15 +839,15 @@ describe('workspace reserved tab presentation', () => {
       }
     });
     await elementIsStable(workspace);
-    const target = button(workspace, 'b').getBoundingClientRect();
-    begin(workspace, 'companion');
-    move(workspace, 'pointermove', { x: target.x + 8, y: target.y + target.height / 2 });
+    const target = button('b').getBoundingClientRect();
+    begin('companion');
+    move('pointermove', { x: target.x + 8, y: target.y + target.height / 2 });
     await vi.waitFor(() =>
       expect(
         workspace.shadowRoot!.querySelector('[data-preview-allocation]')?.getAttribute('data-preview-allocation')
       ).toBe('reserved')
     );
-    const strip = button(workspace, 'b').closest<HTMLElement>('.tablist')!;
+    const strip = button('b').closest<HTMLElement>('.tablist')!;
     const saved = workspace.value;
     strip.scrollLeft = strip.scrollWidth;
     strip.dispatchEvent(new Event('scroll'));

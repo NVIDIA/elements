@@ -1,0 +1,72 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --suffix-padding: var(--nve-ref-size-100);
+  --gap: var(--nve-ref-space-xs);
+  --min-height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
+  display: block;
+  min-width: 0;
+  contain: none;
+}
+
+[internal-host] {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: var(--min-height);
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: var(--gap);
+  padding: var(--padding);
+  box-sizing: border-box;
+}
+
+slot[name='prefix'] {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: var(--gap);
+}
+
+.suffix[data-empty],
+slot[data-empty] {
+  display: none;
+}
+
+.suffix {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: var(--suffix-padding);
+  box-sizing: border-box;
+  border-inline-start: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+slot[name='suffix'] {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  align-items: center;
+  gap: var(--gap);
+}
+
+slot[name='suffix']::slotted(*) {
+  flex: none;
+}

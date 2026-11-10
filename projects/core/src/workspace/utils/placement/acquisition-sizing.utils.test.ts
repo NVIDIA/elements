@@ -16,7 +16,7 @@ import type { WorkspaceDestination } from '../model/operations.utils.js';
 
 const makeGroup = (...panels: string[]): WorkspaceNode => ({ type: 'group', panels, active: panels.at(-1)! });
 
-function setup({
+function createAcquisitionScenario({
   transposed = false,
   transverse = false,
   dormant
@@ -91,7 +91,10 @@ const intent: WorkspaceDropIntent = {
   destination: { target: 'd', region: 'root.1.2', position: 'top' }
 };
 
-function selection(fixture: ReturnType<typeof setup>, layout: WorkspaceLayout): WorkspaceDragPreview {
+function selection(
+  fixture: ReturnType<typeof createAcquisitionScenario>,
+  layout: WorkspaceLayout
+): WorkspaceDragPreview {
   return {
     phase: 'detached',
     allocation: 'reserved',
@@ -103,13 +106,13 @@ function selection(fixture: ReturnType<typeof setup>, layout: WorkspaceLayout): 
   };
 }
 
-function moving(fixture: ReturnType<typeof setup>, layout: WorkspaceLayout) {
+function moving(fixture: ReturnType<typeof createAcquisitionScenario>, layout: WorkspaceLayout) {
   return fixture.allocate(layout).groups.find(group => group.group.panels.includes('b'))!.rect;
 }
 
 describe('workspace acquired cross-scope allocation', () => {
   it.each([false, true])('covers the acquired normal band with a real reservation, transposed=%s', transposed => {
-    const fixture = setup({ transposed });
+    const fixture = createAcquisitionScenario({ transposed });
     const original = JSON.stringify(fixture.input.plan);
     const result = fitAcquiredPlacement(fixture.input)!;
     const box = moving(fixture, result.layout);
@@ -126,7 +129,7 @@ describe('workspace acquired cross-scope allocation', () => {
   it.each([false, true])(
     'repairs only an excluding ancestor and covers the tangent point, transposed=%s',
     transposed => {
-      const fixture = setup({ transposed, transverse: true });
+      const fixture = createAcquisitionScenario({ transposed, transverse: true });
       const result = fitAcquiredPlacement(fixture.input)!;
       const box = moving(fixture, result.layout);
       const tangent = transposed ? 'y' : 'x',
@@ -141,7 +144,7 @@ describe('workspace acquired cross-scope allocation', () => {
   );
 
   it('preserves closed and unavailable retained group members while fitting visible geometry', () => {
-    const fixture = setup({ dormant: true });
+    const fixture = createAcquisitionScenario({ dormant: true });
     const result = fitAcquiredPlacement(fixture.input)!;
     expect(result.layout.closed).toEqual(['closed']);
     expect(findGroup(result.layout.root, 'b')).toEqual({
@@ -153,7 +156,7 @@ describe('workspace acquired cross-scope allocation', () => {
   });
 
   it('does not alter an ordinary same-owner reorder or an endcap', () => {
-    const fixture = setup();
+    const fixture = createAcquisitionScenario();
     expect(fitAcquiredPlacement({ ...fixture.input, previous: fixture.saved })).toBe(fixture.input.plan);
     const end = planWorkspacePlacement({
       ...fixture.input,
@@ -165,7 +168,7 @@ describe('workspace acquired cross-scope allocation', () => {
   });
 
   it('blocks an interior whose minimum-feasible reservation cannot cover acquisition', () => {
-    const fixture = setup();
+    const fixture = createAcquisitionScenario();
     expect(
       fitAcquiredPlacement({
         ...fixture.input,
@@ -175,7 +178,7 @@ describe('workspace acquired cross-scope allocation', () => {
   });
 
   it('reads changed requirements in a later fit of the same candidate layout', () => {
-    const fixture = setup();
+    const fixture = createAcquisitionScenario();
     const candidate = fixture.input.plan.layout;
     expect(fitAcquiredPlacement(fixture.input)).toBeDefined();
     fixture.input.requirements.panels = new Map([['c', { width: 0, height: 110 }]]);
@@ -184,7 +187,7 @@ describe('workspace acquired cross-scope allocation', () => {
   });
 
   it('reuses each immutable selected layout on refresh independently of another blocked preview', () => {
-    const fixture = setup();
+    const fixture = createAcquisitionScenario();
     const adapted = fitAcquiredPlacement(fixture.input)!;
     const selected = selection(fixture, adapted.layout);
     const base = { ...fixture.input, intent, clientOrigin: { x: 0, y: 0, width: 0, height: 0 } };
@@ -207,7 +210,7 @@ describe('workspace acquired cross-scope allocation', () => {
   });
 
   it('does not create a cross-scope fit merely after an overlapping split preview', () => {
-    const fixture = setup();
+    const fixture = createAcquisitionScenario();
     const previous: WorkspaceDragPreview = {
       phase: 'detached',
       allocation: 'overlay',

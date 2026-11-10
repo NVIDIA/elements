@@ -6,6 +6,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderRunner } from '@internals/vite';
 import { VitePlaywrightRunner } from '@internals/vite/runners/playwright.js';
 
+// Render suites share modules. Reload the runner so earlier suites cannot bypass this filesystem mock.
+vi.hoisted(() => vi.resetModules());
+
 vi.mock(import('node:fs/promises'), async importOriginal => ({
   ...(await importOriginal())
 }));

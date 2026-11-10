@@ -67,7 +67,7 @@ describe('workspace insertion seam acquisition', () => {
     return (layout: WorkspaceLayout) => evaluation.targetCatalog(source, evaluation.geometry(layout)).regions;
   }
 
-  function setup(source: string[], gap = 6) {
+  function createInsertionInput(source: string[], gap = 6) {
     const currentLayout: WorkspaceLayout = { version: 1, root: root(), closed: [] };
     const available = ['a', 'companion', 'b', 'c'];
     const catalog = createCatalog(currentLayout, { source, gap });
@@ -198,7 +198,7 @@ describe('workspace insertion seam acquisition', () => {
   });
 
   it('resolves promoted group-left to the current A/C gutter while preserving its acquisition lane', () => {
-    const input = setup(['b']);
+    const input = createInsertionInput(['b']);
     const recipient = input.regions.find(r => r.node.type === 'group' && r.node.panels.includes('c'))!.rect;
     const previous = input.regions.find(r => r.node.type === 'group' && r.node.panels.includes('a'))!.rect;
     const hint = createInsertionOffers(input).find(o => o.destination.position === 'left' && o.owner === 'root.1')!;

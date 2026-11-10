@@ -553,6 +553,16 @@ test('rejects standard property types with different values', () => {
 test('excludes semantically overloaded properties from standard descriptions', () => {
   assert.equal(shouldUseStandardDescription({ tagName: 'nve-copy-button' }, { name: 'value' }), false);
   assert.equal(shouldUseStandardDescription({ tagName: 'nve-preferences-input' }, { name: 'value' }), false);
+  assert.equal(shouldUseStandardDescription({ tagName: 'nve-dashboard' }, { name: 'value' }), false);
+  assert.equal(
+    shouldUseStandardDescription({ tagName: 'nve-dashboard' }, { name: 'value', fieldName: 'value' }),
+    false
+  );
+  assert.equal(shouldUseStandardDescription({ tagName: 'nve-workspace' }, { name: 'value' }), false);
+  assert.equal(
+    shouldUseStandardDescription({ tagName: 'nve-workspace' }, { name: 'value', fieldName: 'value' }),
+    false
+  );
   assert.equal(
     shouldUseStandardDescription(
       { tagName: 'nve-button' },

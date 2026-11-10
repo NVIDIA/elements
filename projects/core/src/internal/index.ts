@@ -10,6 +10,7 @@ export * from './controllers/key-state.controller.js';
 export * from './controllers/keynav-grid.controller.js';
 export * from './controllers/keynav-list.controller.js';
 export * from './controllers/keynav-spatial.controller.js';
+export * from './controllers/native-fullscreen.controller.js';
 export * from './controllers/state-expanded.controller.js';
 export * from './controllers/state-highlighted.controller.js';
 export * from './controllers/state-scroll.controller.js';

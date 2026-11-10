@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -38,7 +38,7 @@ describe('workspace panel composition', () => {
     vi.unstubAllGlobals();
   });
 
-  async function setup() {
+  async function createWorkspace() {
     fixture = await createFixture(html`<nve-workspace style="width:700px;height:300px" .value=${arrangement}>
       <nve-workspace-panel id="a"><nve-workspace-panel-header><span slot="prefix">★</span>Alpha<button slot="suffix">Alpha action</button></nve-workspace-panel-header><nve-workspace-panel-content><input value="retained"></nve-workspace-panel-content><nve-workspace-panel-footer>Alpha status</nve-workspace-panel-footer></nve-workspace-panel>
       <nve-workspace-panel id="companion"><nve-workspace-panel-header>Companion<button slot="suffix">Companion action</button></nve-workspace-panel-header><nve-workspace-panel-footer>Companion status</nve-workspace-panel-footer></nve-workspace-panel>
@@ -61,7 +61,7 @@ describe('workspace panel composition', () => {
       order.push('stop');
       stop.call(this);
     });
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.addController({
       hostConnected: () => order.push('connect'),
       hostDisconnected: () => order.push('disconnect')
@@ -76,7 +76,7 @@ describe('workspace panel composition', () => {
 
   describe('group framing', () => {
     it('frames the complete selected group and clips chrome against the same configurable radius', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector<HTMLElement>('#a')!;
       const inactive = workspace.querySelector('#companion')!;
       const frame = panel.shadowRoot!.querySelector<HTMLElement>('.frame')!;
@@ -104,7 +104,7 @@ describe('workspace panel composition', () => {
     });
 
     it('paints configurable shadows only on the selected panel of each group', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector<HTMLElement>('#a')!;
       const companion = workspace.querySelector<HTMLElement>('#companion')!;
       expect(getComputedStyle(panel).boxShadow).not.toBe('none');
@@ -122,7 +122,7 @@ describe('workspace panel composition', () => {
     });
 
     it('defaults flat and full panels to no shadow while allowing explicit overrides', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector<HTMLElement>('#a')!;
       const shadow = getComputedStyle(panel).boxShadow;
       for (const container of ['flat', 'full'] as const) {
@@ -136,7 +136,7 @@ describe('workspace panel composition', () => {
     });
 
     it('keeps flat and full group frames bordered and square despite a configured contained radius', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.style.setProperty('--border-radius', '40px');
       const panel = workspace.querySelector('#a')!;
       const frame = panel.shadowRoot!.querySelector<HTMLElement>('.frame')!;
@@ -150,7 +150,7 @@ describe('workspace panel composition', () => {
     });
 
     it('draws shared frame edges once at zero gap and restores separated borders', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const extra = document.createElement('nve-workspace-panel');
       extra.id = 'c';
       workspace.append(extra);
@@ -202,7 +202,7 @@ describe('workspace panel composition', () => {
 
   describe('header content and controls', () => {
     it('uses the panel ID as a fallback title and propagates container framing', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const bare = workspace.querySelector('#b')!;
       expect(workspace.shadowRoot!.querySelector('[data-panel="b"]')!.textContent).toBe('b');
       workspace.container = 'flat';
@@ -211,7 +211,7 @@ describe('workspace panel composition', () => {
     });
 
     it('projects selected actions separately from title decoration without relocating content', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const alpha = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const companion = workspace.querySelector<WorkspacePanelHeader>('#companion nve-workspace-panel-header')!;
       const action = alpha.querySelector('button')!;
@@ -237,7 +237,7 @@ describe('workspace panel composition', () => {
     });
 
     it('configures one divider before populated header suffixes', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const alpha = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const suffix = alpha.shadowRoot!.querySelector<HTMLElement>('.suffix')!;
       const divider = () => getComputedStyle(suffix, '::before');
@@ -259,7 +259,7 @@ describe('workspace panel composition', () => {
     });
 
     it('configures dividers between tabs and after the grip without adding outside borders', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const entries = [...workspace.shadowRoot!.querySelector('.tablist')!.querySelectorAll('.tab-entry')];
       expect(entries).toHaveLength(2);
       expect(getComputedStyle(entries[0]).borderInlineStartWidth).toBe('0px');
@@ -282,7 +282,7 @@ describe('workspace panel composition', () => {
     });
 
     it('configures a trailing border only for populated title prefixes', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const prefix = header.shadowRoot!.querySelector('slot[name="prefix"]')!;
       expect(getComputedStyle(prefix).borderInlineEndWidth).toBe('0px');
@@ -297,7 +297,7 @@ describe('workspace panel composition', () => {
     });
 
     it('configures prefix and suffix padding independently of the title', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const suffix = header.shadowRoot!.querySelector('.suffix-content')!;
       const prefix = header.shadowRoot!.querySelector('slot[name="prefix"]')!;
@@ -318,7 +318,7 @@ describe('workspace panel composition', () => {
     });
 
     it('composes flat close controls as suffix accessories beside their tabs', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const close = workspace.shadowRoot!.querySelector('[data-close]');
       expect(close).toBeNull();
       workspace.closable = true;
@@ -333,7 +333,7 @@ describe('workspace panel composition', () => {
     });
 
     it('configures close-control size and trailing insets in grouped and singleton headers', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.id = 'compact-actions';
       workspace.closable = true;
       workspace.style.setProperty('--close-button-inset', '4px');
@@ -361,7 +361,7 @@ describe('workspace panel composition', () => {
     });
 
     it('places title prefixes after the group drag handle without moving supplied content', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.rearrangeable = true;
       await elementIsStable(workspace);
       await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector('[data-drag-group="a"]')).not.toBeNull());
@@ -382,7 +382,7 @@ describe('workspace panel composition', () => {
 
   describe('header sizing', () => {
     it('shares title typography with the actual tab and resolves header minimum height independently', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const item = workspace.shadowRoot!.querySelector('[data-panel="a"]')!;
       const label = header.shadowRoot!.querySelector<HTMLElement>('.label-content')!;
@@ -403,7 +403,7 @@ describe('workspace panel composition', () => {
     });
 
     it('propagates compact header sizing through tabs, controls, content, and growing requirements', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const bareHeader = document.createElement('nve-workspace-panel-header');
       bareHeader.textContent = 'Beta';
       workspace.querySelector('#b')!.append(bareHeader);
@@ -436,7 +436,7 @@ describe('workspace panel composition', () => {
     });
 
     it('measures suffix controls and their padding intrinsically in both directions', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const control = header.querySelector('button')!;
       const row = workspace.shadowRoot!.querySelector('.tabs')!;
@@ -452,7 +452,7 @@ describe('workspace panel composition', () => {
     });
 
     it('retains the default height for a presented panel without an authored header', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const headers = [...workspace.querySelectorAll<WorkspacePanelHeader>('nve-workspace-panel-header')];
       for (const header of headers) {
         header.style.setProperty('--min-height', '32px');
@@ -466,7 +466,7 @@ describe('workspace panel composition', () => {
     });
 
     it('measures newly supplied footer requirements without changing the arrangement', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.style.height = '100px';
       await elementIsStable(workspace);
       const panel = workspace.querySelector('#b')!;
@@ -485,7 +485,7 @@ describe('workspace panel composition', () => {
 
   describe('measurement updates', () => {
     it('updates only the chrome affected by an allocation change', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector<WorkspacePanel>('#a')!;
       const header = panel.querySelector<WorkspacePanelHeader>('nve-workspace-panel-header')!;
       const panelRender = vi.spyOn(panel, 'render');
@@ -501,7 +501,7 @@ describe('workspace panel composition', () => {
     });
 
     it('retains intrinsic measurements through allocation-only updates', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.closable = true;
       await elementIsStable(workspace);
       const viewport = workspace.shadowRoot!.querySelector<HTMLElement>('.viewport')!;
@@ -529,7 +529,7 @@ describe('workspace panel composition', () => {
     });
 
     it('publishes suffix height changes only when they affect the shared header height', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const header = workspace.querySelector<WorkspacePanelHeader>('#a nve-workspace-panel-header')!;
       const control = header.querySelector('button')!;
       const row = workspace.shadowRoot!.querySelector('.tabs')!;
@@ -560,7 +560,7 @@ describe('workspace panel composition', () => {
     });
 
     it('ignores footer width-only observations when intrinsic heights remain unchanged', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const footer = workspace.querySelector<HTMLElement>('#a nve-workspace-panel-footer')!;
       const row = workspace.shadowRoot!.querySelector('.tabs')!;
       const canvas = workspace.shadowRoot!.querySelector<HTMLElement>('.canvas')!;
@@ -584,7 +584,7 @@ describe('workspace panel composition', () => {
     });
 
     it('configures a replacement header when its panel presentation is unchanged', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector<WorkspacePanel>('#a')!;
       const replacement = document.createElement('nve-workspace-panel-header');
       replacement.textContent = 'Alpha';
@@ -603,13 +603,9 @@ describe('workspace panel composition', () => {
 
 describe('workspace live header labels', () => {
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    removeFixture(fixture);
-    vi.restoreAllMocks();
-  });
-
-  async function setup() {
+  beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-workspace closable groupable rearrangeable style="height:220px;width:600px">
         <nve-workspace-panel id="a">
@@ -621,13 +617,16 @@ describe('workspace live header labels', () => {
         >
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   it('updates localized close controls and live authored labels without changing the saved arrangement', async () => {
-    const workspace = await setup();
     const saved = workspace.value;
     expect(workspace.i18n).toMatchObject({ close: 'close', move: 'move' });
     expect(workspace.shadowRoot!.querySelector('[data-drag-group]')!.getAttribute('aria-label')).toBe('move');
@@ -662,7 +661,7 @@ describe('workspace measured sizing', () => {
     vi.restoreAllMocks();
   });
 
-  async function setup(value = '') {
+  async function createWorkspace(value = '') {
     fixture = await createFixture(html`
       <nve-workspace groupable rearrangeable closable .value=${value} style="width:260px;height:180px">
         <nve-workspace-panel id="a">
@@ -678,7 +677,7 @@ describe('workspace measured sizing', () => {
   }
 
   it('fills a start-aligned column while honoring an explicit width', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     fixture.style.cssText = 'display:flex;flex-direction:column;align-items:start;width:600px';
     workspace.style.removeProperty('width');
     await vi.waitFor(() => expect(workspace.offsetWidth).toBe(600));
@@ -690,7 +689,7 @@ describe('workspace measured sizing', () => {
   });
 
   it('responds to direct requirement changes without changing saved state or application nodes', async () => {
-    const workspace = await setup(rows);
+    const workspace = await createWorkspace(rows);
     const a = workspace.querySelector<WorkspacePanel>('#a')!;
     const b = workspace.querySelector<WorkspacePanel>('#b')!;
     expect(a.minWidth).toBe(0);
@@ -711,7 +710,7 @@ describe('workspace measured sizing', () => {
   });
 
   it('settles fractional container sizing without scrollbar-driven updates', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     const viewport = workspace.shadowRoot!.querySelector<HTMLElement>('.viewport')!;
     const canvas = workspace.shadowRoot!.querySelector<HTMLElement>('.canvas')!;
     const scrollbars = document.createElement('style');
@@ -745,7 +744,7 @@ describe('workspace measured sizing', () => {
   });
 
   it('admits a repairing join and rejects another vertical split while constrained', async () => {
-    const workspace = await setup(rows);
+    const workspace = await createWorkspace(rows);
     for (const panel of workspace.querySelectorAll<WorkspacePanel>('nve-workspace-panel')) panel.minHeight = 110;
     await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector<HTMLElement>('.canvas')!.offsetHeight).toBe(226));
     const changed = vi.fn();

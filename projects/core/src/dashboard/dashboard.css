@@ -1,0 +1,178 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+:host {
+  --column-size: 160px;
+  --row-size: 120px;
+  --gap: var(--nve-ref-space-sm);
+  --_geometry-border-width: 0px;
+  --_authored-gap: max(0px, var(--gap));
+  --_geometry-overlap: calc(var(--_geometry-border-width) * (1 - sign(var(--_authored-gap))));
+  --_geometry-spacing: calc(var(--_authored-gap) - var(--_geometry-overlap));
+  --guide-color: var(--nve-ref-border-color-muted);
+  --guide-size: var(--nve-ref-size-200);
+  --height: 400px;
+  --animation-duration: var(--nve-ref-animation-duration-150);
+  --animation-easing: var(--nve-ref-animation-easing-100);
+  display: block;
+  width: 100%;
+  width: stretch;
+  height: var(--height);
+  min-width: 0;
+  min-height: 0;
+  contain: none;
+}
+
+[internal-host] {
+  height: 100%;
+  position: relative;
+}
+
+.viewport {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+}
+
+.viewport[data-sizing='fit'][data-flow='vertical'] {
+  overflow: hidden scroll;
+}
+
+.viewport[data-sizing='fit'][data-flow='horizontal'] {
+  overflow: scroll hidden;
+}
+
+.canvas {
+  --_pitch-x: calc(var(--column-size) + var(--_geometry-spacing));
+  --_pitch-y: calc(var(--row-size) + var(--_geometry-spacing));
+  --_guide-center-x: calc((100% - var(--_geometry-spacing)) / 2);
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.canvas > slot {
+  display: block;
+  reading-flow: source-order;
+}
+
+::slotted(nve-dashboard-panel:not(:state(placed))) {
+  display: none;
+}
+
+::slotted(nve-dashboard-panel) {
+  left: var(--_dashboard-inline-start);
+  right: auto;
+  reading-order: var(--_reading-order, 0);
+}
+
+:host(:dir(rtl)) ::slotted(nve-dashboard-panel) {
+  left: auto;
+  right: var(--_dashboard-inline-start);
+}
+
+.viewport[data-sizing='fit'][data-flow='vertical'] .canvas {
+  --_pitch-x: calc((100% + var(--_geometry-spacing)) / var(--_tracks));
+}
+
+.viewport[data-sizing='fit'][data-flow='horizontal'] .canvas {
+  --_pitch-y: calc((100% + var(--_geometry-spacing)) / var(--_tracks));
+}
+
+:host(:not([guides='hidden' i])) .canvas[data-arranging],
+:host([guides='visible' i]) .canvas {
+  background-image: radial-gradient(
+    circle at var(--_guide-center-x) calc((100% - var(--_geometry-spacing)) / 2),
+    var(--guide-color) calc(var(--guide-size) / 2),
+    transparent calc(var(--guide-size) / 2)
+  );
+  background-size: var(--_pitch-x) var(--_pitch-y);
+}
+
+:host(:dir(rtl)) .canvas {
+  --_guide-center-x: calc((100% + var(--_geometry-spacing)) / 2);
+  background-position: right top;
+}
+
+.metric,
+.gap-metric {
+  position: absolute;
+  pointer-events: none;
+  visibility: hidden;
+  contain: strict;
+  top: 0;
+  left: 0;
+}
+
+.metric {
+  width: var(--column-size);
+  height: var(--row-size);
+}
+
+.gap-metric {
+  width: var(--_authored-gap);
+  height: var(--_geometry-overlap);
+}
+
+nve-ghost {
+  position: absolute;
+  left: var(--_dashboard-inline-start);
+  right: auto;
+  pointer-events: none;
+  z-index: 1;
+  transition-property: left, right, top, width, height;
+  transition-duration: var(--animation-duration);
+  transition-timing-function: var(--animation-easing);
+}
+
+:host(:dir(rtl)) nve-ghost {
+  left: auto;
+  right: var(--_dashboard-inline-start);
+}
+
+.announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  nve-ghost {
+    transition-duration: 0s;
+  }
+}
+
+.start-cue {
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--nve-ref-size-200);
+  pointer-events: none;
+  z-index: 7;
+  background-color: color-mix(in srgb, var(--nve-sys-accent-secondary-background) 16%, transparent);
+}
+
+.viewport[data-flow='horizontal'] .start-cue {
+  inset: 0 auto;
+  inset-inline-start: 0;
+  width: var(--nve-ref-size-200);
+  height: auto;
+}
+
+:host(:fullscreen) {
+  width: 100%;
+  height: 100%;
+  background: var(--nve-sys-layer-container-background);
+}
+
+.viewport[data-fullscreen][data-sizing] {
+  overflow: hidden;
+}
+
+.viewport[data-fullscreen] .canvas {
+  background-image: none;
+}

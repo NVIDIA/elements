@@ -3,33 +3,35 @@
 
 import type { ReactiveControllerHost } from 'lit';
 
+import { NativeFullscreenController } from '@nvidia-elements/core/internal';
+
 interface WorkspaceFullscreenHost extends HTMLElement, ReactiveControllerHost {
   readonly fullscreenable: boolean;
 }
 
 interface WorkspaceFullscreenDelegate {
-  readonly getGroup: (targetPanelId: string) => string[];
+  readonly getGroup: (targetPanelId: string) => readonly string[];
   readonly cancelInteractions: () => void;
   readonly invalidateCommandAvailability: () => void;
 }
 
-/** Projects one durable group while the browser owns fullscreen admission and lifetime. */
+/** Selects the fullscreen group and preserves surviving companions when its anchor disappears. */
 export class WorkspaceFullscreenController {
   readonly #host: WorkspaceFullscreenHost;
   readonly #delegate: WorkspaceFullscreenDelegate;
-  #listeningDocument?: Document;
+  readonly #native: NativeFullscreenController;
   #targetPanelId?: string;
-  #groupPanelIds: string[] = [];
-  #pendingRequest?: Promise<void>;
+  #groupPanelIds: readonly string[] = [];
 
   constructor(host: WorkspaceFullscreenHost, delegate: WorkspaceFullscreenDelegate) {
     this.#host = host;
     this.#delegate = delegate;
+    this.#native = new NativeFullscreenController(host, this.#nativeChanged);
     host.addController(this);
   }
 
   get active() {
-    return this.#targetPanelId !== undefined && this.#isNativeFullscreen();
+    return this.#targetPanelId !== undefined && this.#native.active;
   }
 
   get targetPanelId() {
@@ -37,37 +39,22 @@ export class WorkspaceFullscreenController {
   }
 
   get canExit() {
-    return this.#targetPanelId !== undefined;
-  }
-
-  hostConnected() {
-    this.#listeningDocument = this.#host.ownerDocument;
-    this.#listeningDocument.addEventListener('fullscreenchange', this.#sync);
-  }
-
-  hostDisconnected() {
-    this.#listeningDocument?.removeEventListener('fullscreenchange', this.#sync);
-    this.#listeningDocument = undefined;
-    this.exit();
+    return this.#targetPanelId !== undefined && this.#native.canExit;
   }
 
   hostUpdate() {
     if (!this.#targetPanelId) return;
-
     const groupPanelIds = this.#delegate.getGroup(this.#targetPanelId);
     if (groupPanelIds.length) {
       this.#groupPanelIds = groupPanelIds;
       return;
     }
-
     const fallback = this.#groupPanelIds.find(id => this.#delegate.getGroup(id).length);
     if (fallback) {
       this.#targetPanelId = fallback;
       this.#groupPanelIds = this.#delegate.getGroup(fallback);
-      this.#delegate.invalidateCommandAvailability();
-    } else {
-      this.exit();
-    }
+      this.#invalidate();
+    } else this.exit();
   }
 
   isSelectedGroup(targetPanelId: string) {
@@ -75,103 +62,41 @@ export class WorkspaceFullscreenController {
   }
 
   canEnter(targetPanelId: string) {
-    if (this.isSelectedGroup(targetPanelId)) {
+    if (
+      this.isSelectedGroup(targetPanelId) ||
+      !this.#host.fullscreenable ||
+      !this.#delegate.getGroup(targetPanelId).length
+    )
       return false;
-    }
-    if (!this.#host.fullscreenable || !this.#delegate.getGroup(targetPanelId).length) {
-      return false;
-    }
-    return (
-      this.canExit || (typeof this.#host.requestFullscreen === 'function' && this.#host.ownerDocument.fullscreenEnabled)
-    );
+    return this.#native.canEnter;
   }
 
   enter(targetPanelId: string) {
+    if (!this.canEnter(targetPanelId)) return;
+
     const groupPanelIds = this.#delegate.getGroup(targetPanelId);
-    if (!groupPanelIds.length) return;
-
     const switching = this.#targetPanelId !== undefined;
-
     this.#delegate.cancelInteractions();
     this.#targetPanelId = targetPanelId;
     this.#groupPanelIds = groupPanelIds;
-    this.#delegate.invalidateCommandAvailability();
-    if (!switching) {
-      void this.#requestFullscreen();
-    }
+    if (switching) this.#invalidate();
+    else this.#native.enter();
   }
 
   exit() {
-    this.#pendingRequest = undefined;
-
-    if (this.#isNativeFullscreen()) {
-      void this.#exitFullscreen();
-    } else {
-      this.#reset();
-    }
+    this.#native.exit();
   }
 
-  async #requestFullscreen() {
-    const request = this.#host.requestFullscreen();
-    this.#pendingRequest = request;
-
-    try {
-      await request;
-
-      if (this.#pendingRequest === request) {
-        this.#sync();
-      } else if (!this.#targetPanelId && this.#isNativeFullscreen()) {
-        this.exit();
-      }
-    } catch {
-      if (this.#pendingRequest === request) {
-        this.#reset();
-      }
-    } finally {
-      if (this.#pendingRequest === request) {
-        this.#pendingRequest = undefined;
-      }
+  #nativeChanged = () => {
+    if (!this.#native.canExit) {
+      this.#targetPanelId = undefined;
+      this.#groupPanelIds = [];
     }
-  }
-
-  async #exitFullscreen() {
-    try {
-      await this.#host.ownerDocument.exitFullscreen();
-    } catch {
-      this.#sync();
-    }
-  }
-
-  #isNativeFullscreen() {
-    const root = this.#host.getRootNode();
-
-    return (
-      (root instanceof ShadowRoot ? root.fullscreenElement : this.#host.ownerDocument.fullscreenElement) === this.#host
-    );
-  }
-
-  #sync = () => {
-    if (this.#isNativeFullscreen() && this.#targetPanelId) {
-      this.#delegate.invalidateCommandAvailability();
-      this.#host.requestUpdate();
-    } else if (this.#isNativeFullscreen()) {
-      this.exit();
-    } else {
-      this.#reset();
-    }
+    this.#invalidate();
   };
 
-  #reset() {
-    const shouldInvalidateAvailability = this.#targetPanelId !== undefined;
-
-    this.#pendingRequest = undefined;
-    this.#targetPanelId = undefined;
-    this.#groupPanelIds = [];
-
-    if (shouldInvalidateAvailability) {
-      this.#delegate.invalidateCommandAvailability();
-    }
-
+  #invalidate() {
+    this.#delegate.invalidateCommandAvailability();
     this.#host.requestUpdate();
   }
 }

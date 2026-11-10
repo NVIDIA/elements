@@ -190,7 +190,7 @@ describe('workspace insertion offer discovery', () => {
     return (layout: WorkspaceLayout) => evaluation.targetCatalog(source, evaluation.geometry(layout)).regions;
   }
 
-  function setup(grouped = true, source = grouped ? ['companion'] : ['a'], gap = 6) {
+  function createInsertionInput(grouped = true, source = grouped ? ['companion'] : ['a'], gap = 6) {
     const currentLayout: WorkspaceLayout = { version: 1, root: root(grouped), closed: [] };
     const available = grouped ? ['a', 'companion', 'b', 'c'] : ['a', 'b', 'c'];
     const catalog = createCatalog(currentLayout, { source, gap });
@@ -199,7 +199,7 @@ describe('workspace insertion offer discovery', () => {
   }
 
   it.each([0, 12])('locates interior insertion seams with a %ipx group gap', gap => {
-    const input = setup(true, ['companion'], gap);
+    const input = createInsertionInput(true, ['companion'], gap);
     const hint = createInsertionOffers(input).find(
       candidate => candidate.insertion.previous?.includes('b') && candidate.insertion.next?.includes('c')
     );
@@ -208,7 +208,7 @@ describe('workspace insertion offer discovery', () => {
   });
 
   it('keeps a partial-tab receiving endcap on its structural owner after a root reservation', () => {
-    const input = setup();
+    const input = createInsertionInput();
     const initial = createInsertionOffers(input);
     const outer = initial.find(hint => hint.owner === 'root' && hint.destination.position === 'bottom')!;
     const catalog = createCatalog(input.currentLayout, { source: input.source });
@@ -224,7 +224,7 @@ describe('workspace insertion offer discovery', () => {
   });
 
   it.each(['top', 'bottom', 'left', 'right'] as const)('exposes a real %s root insertion for a partial tab', side => {
-    const input = setup();
+    const input = createInsertionInput();
     const hints = createInsertionOffers(input);
     const hint = hints.find(h => h.destination.region === 'root' && h.destination.position === side)!;
     expect(hint).toBeDefined();
@@ -233,7 +233,7 @@ describe('workspace insertion offer discovery', () => {
   });
 
   it('deduplicates BC-right/root-right while keeping distinct root-top and BC-top lanes', () => {
-    const input = setup();
+    const input = createInsertionInput();
     const right = createInsertionOffers(input);
     expect(right.filter(h => h.destination.position === 'right')).toHaveLength(1);
     const top = partitionPlacementOffers(createInsertionOffers(input)).filter(
@@ -244,7 +244,7 @@ describe('workspace insertion offer discovery', () => {
   });
 
   it('normalizes a collapsed whole-source root to three peers without a phantom half-size lane', () => {
-    const input = setup(false);
+    const input = createInsertionInput(false);
     const hints = createInsertionOffers(input).filter(h => h.destination.position === 'top' && h.boundary);
     expect(hints).toHaveLength(1);
     const intent = getPlacementOfferIntent(hints[0]!);

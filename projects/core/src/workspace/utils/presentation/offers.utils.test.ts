@@ -143,7 +143,7 @@ describe('workspace evaluated placement seams', () => {
   });
   const bounds = { x: 0, y: 0, width: 600, height: 300 };
 
-  function setup(
+  function createOfferPresentationInput(
     current: WorkspaceLayout,
     source: string[],
     destination: {
@@ -184,19 +184,22 @@ describe('workspace evaluated placement seams', () => {
   }
 
   it('describes both real neighbors at an interior peer insertion and one at an end', () => {
-    const middle = getOfferPresentation(setup(layout('horizontal'), ['c'], { target: 'b', position: 'left' })).seams!;
+    const middle = getOfferPresentation(
+      createOfferPresentationInput(layout('horizontal'), ['c'], { target: 'b', position: 'left' })
+    ).seams!;
     expect(middle.kind).toBe('insert');
     expect(middle.edges).toEqual([
       { side: 'left', offset: expect.closeTo(3, 8), fraction: 0.5 },
       { side: 'right', offset: expect.closeTo(3, 8), fraction: 0.5 }
     ]);
     expect(
-      getOfferPresentation(setup(layout('horizontal'), ['c'], { target: 'a', position: 'left' })).seams!.edges
+      getOfferPresentation(createOfferPresentationInput(layout('horizontal'), ['c'], { target: 'a', position: 'left' }))
+        .seams!.edges
     ).toEqual([{ side: 'right', offset: expect.closeTo(3, 8), fraction: 0.5 }]);
   });
 
   it('uses the actual vertical owner and measured gap', () => {
-    const placement = setup(layout('vertical'), ['c'], { target: 'b', position: 'top' });
+    const placement = createOfferPresentationInput(layout('vertical'), ['c'], { target: 'b', position: 'top' });
     const neighbor = placement.regions.find(region => region.key === 'root.2')!;
     neighbor.rect.y += 2;
     const result = getOfferPresentation(placement).seams!;
@@ -213,7 +216,7 @@ describe('workspace evaluated placement seams', () => {
       root: { type: 'split', axis: 'horizontal', children: [group('a', 'companion'), group('b')], weights: [1, 1] }
     };
     const result = getOfferPresentation(
-      setup(current, ['companion'], { target: 'b', position: 'top', operation: 'split' })
+      createOfferPresentationInput(current, ['companion'], { target: 'b', position: 'top', operation: 'split' })
     ).seams!;
     expect(result.kind).toBe('split');
     expect(result.edges).toEqual([{ side: 'bottom', offset: expect.closeTo(3, 8), fraction: 0.5 }]);
@@ -221,8 +224,8 @@ describe('workspace evaluated placement seams', () => {
 
   it('keeps real adjacency annotations when returning to the unchanged first or interior position', () => {
     const current = layout('horizontal');
-    const first = setup(current, ['a'], { target: 'b', position: 'left' });
-    const middle = setup(current, ['b'], { target: 'c', position: 'left' });
+    const first = createOfferPresentationInput(current, ['a'], { target: 'b', position: 'left' });
+    const middle = createOfferPresentationInput(current, ['b'], { target: 'c', position: 'left' });
     expect(first.plan.layout).toEqual(current);
     expect(middle.plan.layout).toEqual(current);
     expect(getOfferPresentation(first).seams?.edges.map(edge => edge.side)).toEqual(['right']);
@@ -231,12 +234,14 @@ describe('workspace evaluated placement seams', () => {
 
   it('does not invent group seams for a tab join', () => {
     expect(
-      getOfferPresentation(setup(layout('horizontal'), ['c'], { target: 'b', position: 'tab', operation: 'tab' })).seams
+      getOfferPresentation(
+        createOfferPresentationInput(layout('horizontal'), ['c'], { target: 'b', position: 'tab', operation: 'tab' })
+      ).seams
     ).toBeUndefined();
   });
 
   it('does not turn a clipped viewport boundary into an adjoining seam', () => {
-    const placement = setup(layout('horizontal'), ['c'], { target: 'b', position: 'left' });
+    const placement = createOfferPresentationInput(layout('horizontal'), ['c'], { target: 'b', position: 'left' });
     const visible = { ...bounds, width: placement.sourceRect.x + placement.sourceRect.width / 2 };
     const result = getOfferPresentation({ ...placement, cue: clipCue(placement.cue, visible), bounds: visible }).seams!;
     expect(result.edges.map(edge => edge.side)).toEqual(['left']);

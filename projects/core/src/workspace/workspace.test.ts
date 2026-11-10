@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
-import { WorkspaceFullscreenController } from './controllers/workspace-fullscreen.controller.js';
+import { NativeFullscreenController } from '../internal/controllers/native-fullscreen.controller.js';
 import { WorkspaceRearrangeController } from './controllers/workspace-rearrange.controller.js';
 import { WorkspaceResizeController } from './controllers/workspace-resize.controller.js';
 import { parseWorkspaceValue } from './utils/model/value.utils.js';
@@ -40,7 +40,7 @@ describe(Workspace.metadata.tag, () => {
     vi.restoreAllMocks();
   });
 
-  async function setup() {
+  async function createWorkspace() {
     fixture = await createFixture(html`
       <nve-workspace style="width:912px;height:250px" .value=${arrangement}>
         <nve-workspace-panel id="a" min-width="120"
@@ -71,7 +71,7 @@ describe(Workspace.metadata.tag, () => {
   });
 
   it('keeps grouping opt-in and reflects explicit changes', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     expect(workspace.groupable).toBe(false);
     expect(workspace.hasAttribute('groupable')).toBe(false);
     workspace.groupable = true;
@@ -83,7 +83,7 @@ describe(Workspace.metadata.tag, () => {
   });
 
   it('announces committed values without intercepting changes from application content', async () => {
-    const workspace = await setup();
+    const workspace = await createWorkspace();
     workspace.closable = true;
     await elementIsStable(workspace);
     const before = workspace.value;
@@ -113,7 +113,7 @@ describe(Workspace.metadata.tag, () => {
 
   describe('layout restoration and container sizing', () => {
     it('should reject invalid restoration without replacing a valid arrangement', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       expect(() => {
         workspace.value = '{"version":2}';
@@ -122,7 +122,7 @@ describe(Workspace.metadata.tag, () => {
     });
 
     it('publishes restored and cleared values synchronously without announcing a change', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const change = vi.fn();
       workspace.addEventListener('change', change);
       const target = JSON.stringify({
@@ -141,7 +141,7 @@ describe(Workspace.metadata.tag, () => {
     });
 
     it('reuses the serialized value for repeated reads', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const stringify = vi.spyOn(JSON, 'stringify');
       expect(workspace.value).toBe(value);
@@ -150,7 +150,7 @@ describe(Workspace.metadata.tag, () => {
     });
 
     it('should preserve the saved preference and focused supplied input through constrained container sizing', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const value = workspace.value;
       const change = vi.fn();
       workspace.addEventListener('change', change);
@@ -171,7 +171,7 @@ describe(Workspace.metadata.tag, () => {
 
   describe('selection and supplied content', () => {
     it('should keep authored label and content nodes through regrouping and keyboard selection', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       const panel = workspace.querySelector('#a')!;
       const label = panel.querySelector('nve-workspace-panel-header')!;
       const input = panel.querySelector('input')!;
@@ -198,7 +198,7 @@ describe(Workspace.metadata.tag, () => {
     });
 
     it('should announce changed selection once and keep selected clicks and Home silent', async () => {
-      const workspace = await setup();
+      const workspace = await createWorkspace();
       workspace.value = JSON.stringify({
         version: 1,
         closed: [],
@@ -231,10 +231,10 @@ describe(Workspace.metadata.tag, () => {
       .filter(
         (
           controller
-        ): controller is WorkspaceRearrangeController | WorkspaceResizeController | WorkspaceFullscreenController =>
+        ): controller is WorkspaceRearrangeController | WorkspaceResizeController | NativeFullscreenController =>
           controller instanceof WorkspaceRearrangeController ||
           controller instanceof WorkspaceResizeController ||
-          controller instanceof WorkspaceFullscreenController
+          controller instanceof NativeFullscreenController
       );
     try {
       expect(controllers).toHaveLength(3);
@@ -277,37 +277,36 @@ describe('workspace supplied panel reconciliation', () => {
   });
 
   let fixture: HTMLElement | undefined;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    if (fixture) removeFixture(fixture);
-  });
-
-  async function setup(value = arrangement) {
+  beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${value}>
+      <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${arrangement}>
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained" /></nve-workspace-panel>
         <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Content B</nve-workspace-panel>
         <nve-workspace-panel id="c"><nve-workspace-panel-header>Gamma</nve-workspace-panel-header>Content C</nve-workspace-panel>
         <nve-workspace-panel id="d"><nve-workspace-panel-header>Delta</nve-workspace-panel-header>Content D</nve-workspace-panel>
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
 
-  function control<T extends HTMLElement = HTMLElement>(workspace: Workspace, selector: string): T {
+  afterEach(() => {
+    if (fixture) removeFixture(fixture);
+  });
+
+  function control<T extends HTMLElement = HTMLElement>(selector: string): T {
     const element = workspace.shadowRoot!.querySelector<T>(selector);
     expect(element, selector).not.toBeNull();
     return element!;
   }
 
-  function snapshot(workspace: Workspace): WorkspaceLayout {
+  function snapshot(): WorkspaceLayout {
     return JSON.parse(workspace.value);
   }
 
   it('should retain missing identities and selected preference while a panel is removed and restored', async () => {
-    const workspace = await setup();
     const before = workspace.value;
     const panel = workspace.querySelector('#a')!;
     const change = vi.fn();
@@ -318,14 +317,13 @@ describe('workspace supplied panel reconciliation', () => {
     expect(workspace.querySelector('#b')!.getAttribute('role')).toBe('group');
     expect(workspace.value).toBe(before);
     workspace.append(panel);
-    await vi.waitFor(() => expect(control(workspace, '[data-panel="a"]').hasAttribute('selected')).toBe(true));
+    await vi.waitFor(() => expect(control('[data-panel="a"]').hasAttribute('selected')).toBe(true));
     expect(workspace.value).toBe(before);
     expect(change).not.toHaveBeenCalled();
   });
 
   it('should announce a newly appended panel once while closed identities remain closed', async () => {
-    const workspace = await setup();
-    control(workspace, '[data-close="a"]').click();
+    control('[data-close="a"]').click();
     await elementIsStable(workspace);
     const change = vi.fn();
     workspace.addEventListener('change', change);
@@ -335,9 +333,9 @@ describe('workspace supplied panel reconciliation', () => {
     workspace.append(panel);
     await vi.waitFor(() => expect(change).toHaveBeenCalledOnce());
     await elementIsStable(workspace);
-    expect(snapshot(workspace).closed).toEqual(['a']);
+    expect(snapshot().closed).toEqual(['a']);
     expect(workspace.shadowRoot!.querySelector('[data-panel="a"]')).toBeNull();
-    expect(control(workspace, '[data-panel="new-panel"]')).toBeDefined();
+    expect(control('[data-panel="new-panel"]')).toBeDefined();
     panel.remove();
     await elementIsStable(workspace);
     workspace.append(panel);
@@ -346,7 +344,6 @@ describe('workspace supplied panel reconciliation', () => {
   });
 
   it('should keep delayed closed panels closed when restoring an all-closed layout', async () => {
-    const workspace = await setup();
     const change = vi.fn();
     workspace.addEventListener('change', change);
     workspace.value = JSON.stringify({
@@ -359,7 +356,7 @@ describe('workspace supplied panel reconciliation', () => {
     panel.id = 'later';
     workspace.append(panel);
     await elementIsStable(workspace);
-    expect(snapshot(workspace).closed).toContain('later');
+    expect(snapshot().closed).toContain('later');
     expect(panel.hidden).toBe(false);
     expect(panel.matches(':state(workspace-presented)')).toBe(false);
     expect(getComputedStyle(panel).display).toBe('none');
@@ -370,13 +367,9 @@ describe('workspace supplied panel reconciliation', () => {
 
 describe('workspace supplied content visibility', () => {
   let fixture: HTMLElement;
+  let workspace: Workspace;
 
-  afterEach(() => {
-    removeFixture(fixture);
-    vi.restoreAllMocks();
-  });
-
-  async function setup() {
+  beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-workspace closable groupable rearrangeable style="height:220px;width:600px">
         <nve-workspace-panel id="a">
@@ -388,13 +381,16 @@ describe('workspace supplied content visibility', () => {
         >
       </nve-workspace>
     `);
-    const workspace = fixture.querySelector<Workspace>('nve-workspace')!;
+    workspace = fixture.querySelector<Workspace>('nve-workspace')!;
     await elementIsStable(workspace);
-    return workspace;
-  }
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    vi.restoreAllMocks();
+  });
 
   it('suppresses closed flat-tree content without changing native hidden or light-DOM ownership', async () => {
-    const workspace = await setup();
     const panel = workspace.querySelector<WorkspacePanel>('#a')!;
     const input = panel.querySelector('input')!;
     const setter = vi.spyOn(panel, 'hidden', 'set');
@@ -421,7 +417,6 @@ describe('workspace supplied content visibility', () => {
   });
 
   it('retains application-native hidden without importing it into the saved closed state', async () => {
-    const workspace = await setup();
     const panel = workspace.querySelector<WorkspacePanel>('#b')!;
     const setter = vi.spyOn(panel, 'hidden', 'set');
     expect(panel.hidden).toBe(true);
