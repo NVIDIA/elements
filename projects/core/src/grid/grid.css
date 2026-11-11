@@ -17,7 +17,7 @@
   --grid-auto-flow: column;
   display: grid;
   contain: none;
-  width: 100%; /* fallback safari */
+  width: 100%; /* fallback for firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1789477 */
   width: stretch;
 }
 

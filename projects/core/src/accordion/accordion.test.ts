@@ -55,6 +55,31 @@ describe(Accordion.metadata.tag, () => {
     expect(customElements.get(Accordion.metadata.tag)).toBeDefined();
   });
 
+  it('should stretch to the available width after horizontal margins', async () => {
+    expect(CSS.supports('width', 'stretch')).toBe(true);
+
+    const stretchFixture = await createFixture(html`
+      <div style="width: 300px">
+        <nve-accordion-group style="margin-inline: 20px">
+          <nve-accordion style="margin-inline: 20px"></nve-accordion>
+        </nve-accordion-group>
+      </div>
+    `);
+
+    try {
+      const box = stretchFixture.querySelector('div')!;
+      const group = stretchFixture.querySelector<AccordionGroup>(AccordionGroup.metadata.tag)!;
+      const accordion = stretchFixture.querySelector<Accordion>(Accordion.metadata.tag)!;
+      await elementIsStable(group);
+      await elementIsStable(accordion);
+      expect(box.clientWidth).toBe(300);
+      expect(group.offsetWidth).toBe(box.clientWidth - 40);
+      expect(accordion.offsetWidth).toBe(group.clientWidth - 40);
+    } finally {
+      removeFixture(stretchFixture);
+    }
+  });
+
   it('should role group for accordion group', async () => {
     expect(parentElement._internals.role).toBe('group');
   });

@@ -56,6 +56,20 @@ describe(Workspace.metadata.tag, () => {
     return workspace;
   }
 
+  it('should stretch to the available width after horizontal margins', async () => {
+    expect(CSS.supports('width', 'stretch')).toBe(true);
+    fixture = await createFixture(html`
+      <div style="width: 300px">
+        <nve-workspace style="margin-inline: 20px"></nve-workspace>
+      </div>
+    `);
+    const box = fixture.querySelector('div')!;
+    const workspace = fixture.querySelector<Workspace>(Workspace.metadata.tag)!;
+    await elementIsStable(workspace);
+    expect(box.clientWidth).toBe(300);
+    expect(workspace.offsetWidth).toBe(box.clientWidth - 40);
+  });
+
   it('keeps grouping opt-in and reflects explicit changes', async () => {
     const workspace = await setup();
     expect(workspace.groupable).toBe(false);
