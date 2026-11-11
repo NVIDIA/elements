@@ -230,7 +230,7 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
       {}
     ) as ElementVersions;
   }
-  return versions!;
+  return versions;
 }
 
 export function getPublishedProjects(projects: Project[]): Project[] {
