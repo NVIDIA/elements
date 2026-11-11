@@ -4,11 +4,6 @@
       "count": 2
     }
   },
-  "src/api/utils.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/examples/service.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1
