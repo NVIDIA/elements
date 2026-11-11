@@ -3,7 +3,7 @@
 
 :host {
   --padding: var(--nve-ref-size-400) var(--nve-ref-size-500) var(--nve-ref-size-500);
-  width: 100%; /* fallback safari */
+  width: 100%; /* fallback for firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1789477 */
   width: stretch;
 }
 

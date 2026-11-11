@@ -48,6 +48,15 @@ describe(Grid.metadata.tag, () => {
     expect(customElements.get(Grid.metadata.tag)).toBeDefined();
   });
 
+  it('should stretch to the available width after horizontal margins', async () => {
+    expect(CSS.supports('width', 'stretch')).toBe(true);
+    fixture.style.width = '300px';
+    element.style.marginInline = '20px';
+    await elementIsStable(element);
+    expect(fixture.clientWidth).toBe(300);
+    expect(element.offsetWidth).toBe(fixture.clientWidth - 40);
+  });
+
   it('should set to have the grid role of grid', () => {
     expect(element._internals.role).toBe('grid');
   });
