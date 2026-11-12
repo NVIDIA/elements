@@ -61,6 +61,8 @@ export interface I18nStrings {
   seekToStart: string;
   unmuteMedia: string;
   volume: string;
+  placementUnavailable: string;
+  gridPlacement: string;
   joystickPosition: string;
   joystickNoPosition: string;
   joystickInstructions: string;
