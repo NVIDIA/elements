@@ -9,7 +9,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+    - uses: jdx/mise-action@v4.2.0
       with:
         version: 2026.6.14
         install: true
@@ -19,7 +19,7 @@ runs:
       shell: bash
       run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
     - name: Cache pnpm store
-      uses: actions/cache@v5
+      uses: actions/cache@v5.1.0
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
         key: ${{ runner.os }}-${{ runner.arch }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}-v1
@@ -29,7 +29,7 @@ runs:
       run: pnpm install --frozen-lockfile
     - name: Cache Vale styles
       id: cache-vale
-      uses: actions/cache@v5
+      uses: actions/cache@v5.1.0
       with:
         path: |
           config/vale/styles/Google
@@ -47,7 +47,7 @@ runs:
     - name: Cache Playwright browsers
       if: inputs.install-playwright == 'true'
       id: cache-playwright
-      uses: actions/cache@v5
+      uses: actions/cache@v5.1.0
       with:
         path: ~/.cache/ms-playwright
         key: ${{ runner.os }}-${{ runner.arch }}-playwright-chromium-shell-${{ steps.playwright-version.outputs.version }}-v1
