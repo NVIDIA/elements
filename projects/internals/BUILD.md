@@ -209,6 +209,26 @@ The following GitHub settings optimize code quality and stability within the rep
 
 The Pages deployment workflow notifies IndexNow after it publishes documentation updates. Before merging changes that enable this workflow, add an `INDEXNOW_KEY` repository Actions secret containing 8 to 128 letters, numbers, or dashes. The workflow publishes the verification file under the Pages project path, submits only changed sitemap URLs, and retains each notification payload for 30 days so maintainers can rerun a failed notification job.
 
+## Workflow dependency lockfile
+
+All workflows use [GitHub Actions dependency locking](https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles). The generated `.github/workflows/actions.lock` records the commits and repository identities for direct and transitive action dependencies. Workflow files use readable version tags. The shared setup action uses `$/` so it runs from the workflow's commit and the generator can lock its dependencies.
+
+Install the GitHub CLI extension with an authenticated `gh`, then regenerate the lockfile whenever you add a workflow or change an action reference:
+
+```shell
+mise exec -- gh extension install github/gh-actions-lock --pin v0.4.1
+mise exec -- gh actions-lock
+mise exec -- gh actions-lock --verify
+```
+
+Commit the workflow, composite action, and generated lockfile changes together. Never edit `actions.lock` by hand. The required `ci` job runs `--verify` to check dependency coverage and upstream provenance. For a local coverage check without network access, use `mise exec -- gh actions-lock --verify-local`.
+
+`Dependabot` updates the lockfile with action version updates for workflows already in the lockfile. To advance an existing floating reference, review the upstream changes before running `mise exec -- gh actions-lock --relock`. Review changed commits and investigate any changed `owner_id` or `repo_id` before merging.
+
+GitHub checks allowed action policies against the locked commit. The repository allows GitHub-authored actions; the organization also allows `slackapi/slack-github-action@*` and explicitly approves the locked `jdx/mise-action` commit. Check organization approval before updating mise. A policy entry that allows only a tag does not allow its locked commit.
+
+After this migration merges, administrators can enable **Require lockfile** under the repository's Actions settings to enforce coverage for future workflows. Keep the existing `ci` required check.
+
 ## Merge queue
 
 The `ci` and `lighthouse` jobs run on pull requests and `merge_group.checks_requested` events. Both jobs check out `github.sha`, so they test the same integration revision, including the latest `main` and earlier entries in the queue. Keep these check names when editing the workflow because the main ruleset requires them. Queue runs validate changes without publishing packages or Pages.
