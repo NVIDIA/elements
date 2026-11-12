@@ -75,7 +75,7 @@ Check that the component uses theme tokens rather than hardcoded colors:
 Grep pattern="rgb|#[0-9a-fA-F]|hsl" path="projects/core/src/<component>/<component>.css"
 ```
 
-Flag any hardcoded color values. Verify CSS custom properties map to theme tokens that meet WCAG 2.1 AA contrast ratios (4.5:1 for normal text, 3:1 for large text).
+Flag any hardcoded color values. Verify CSS custom properties map to theme tokens that meet WCAG 2.2 AA contrast ratios (4.5:1 for normal text, 3:1 for large text).
 
 ## Output
 
