@@ -21,6 +21,8 @@ on:
 permissions:
   contents: read
 
+cache-mode: none
+
 # Automatic and manual releases share a lock; keep pending requests so an old rerun
 # cannot replace the current main revision's pending release.
 # PR and queue runs use separate groups and can validate in parallel.
@@ -32,6 +34,7 @@ concurrency:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    cache-mode: write
     permissions:
       contents: read
       pull-requests: read
@@ -146,6 +149,7 @@ jobs:
 
   lighthouse:
     runs-on: ubuntu-latest
+    cache-mode: write
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -168,6 +172,7 @@ jobs:
       github.ref == 'refs/heads/main' &&
       (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release))
     runs-on: ubuntu-latest
+    cache-mode: read
     outputs:
       current: ${{ steps.source.outputs.current }}
     permissions:
@@ -269,6 +274,7 @@ jobs:
     needs: [ci, lighthouse]
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
+    cache-mode: read
     permissions:
       actions: read
       contents: read
@@ -320,6 +326,7 @@ jobs:
     needs: deploy-pages
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
+    cache-mode: read
     permissions:
       actions: read
       contents: read

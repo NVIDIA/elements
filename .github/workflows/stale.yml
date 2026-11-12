@@ -5,6 +5,8 @@ on:
     - cron: '0 7 * * *'
   workflow_dispatch:
 
+cache-mode: none
+
 concurrency:
   group: stale-workflow
   cancel-in-progress: true
