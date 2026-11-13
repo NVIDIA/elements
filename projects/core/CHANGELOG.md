@@ -1,3 +1,9 @@
+## [2.25.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.24.0...@nvidia-elements/core-v2.25.0) (2026-11-13)
+
+### Features
+
+* **core:** iframe sandbox options ([849eb85](https://github.com/NVIDIA/elements/commit/849eb854b9f96692d2607f2db4aee62b7487b05f))
+
 ## [2.24.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.23.6...@nvidia-elements/core-v2.24.0) (2026-11-13)
 
 ### Features
