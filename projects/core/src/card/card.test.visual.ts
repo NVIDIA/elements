@@ -20,6 +20,7 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/card/define.js';
+    import '@nvidia-elements/core/tabs/define.js';
     import '@nvidia-elements/core/button/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
@@ -49,6 +50,20 @@ function template(theme: '' | 'dark' = '') {
         <nve-button style="margin-left: auto">•︎•︎•︎</nve-button>
       </nve-card-footer>
     </nve-card>
+
+      <nve-card style="width:400px; height:200px">
+        <nve-card-header>
+          <h2 nve-text="heading sm bold">•︎•︎•︎</h2>
+          <nve-tabs>
+            <nve-tabs-item selected>•︎•︎•︎</nve-tabs-item>
+            <nve-tabs-item>•︎•︎•︎</nve-tabs-item>
+            <nve-tabs-item>•︎•︎•︎</nve-tabs-item>
+          </nve-tabs>
+        </nve-card-header>
+        <nve-card-content>
+          <p nve-text="body">•︎•︎•︎</p>
+        </nve-card-content>
+      </nve-card>
   </div>
   `;
 }
