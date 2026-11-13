@@ -1,3 +1,11 @@
+## [1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/foundations-v1.2.0...@nvidia-elements/foundations-v1.3.0) (2026-11-13)
+
+### Features
+
+* **core:** iframe sandbox options ([849eb85](https://github.com/NVIDIA/elements/commit/849eb854b9f96692d2607f2db4aee62b7487b05f))
+* **core:** support for grid virtual-list ([32fd01e](https://github.com/NVIDIA/elements/commit/32fd01e61b004bb07c0a54ce7cb6c747b09eaa55))
+* **foundations:** virtual-list ([aa4ef9e](https://github.com/NVIDIA/elements/commit/aa4ef9e20dd0ec9e4ce8a4be69c6678f11c86b12))
+
 ## [1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/foundations-v1.1.1...@nvidia-elements/foundations-v1.2.0) (2026-11-13)
 
 ### Features
