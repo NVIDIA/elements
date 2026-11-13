@@ -1,3 +1,17 @@
+## [1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/foundations-v1.1.1...@nvidia-elements/foundations-v1.2.0) (2026-11-13)
+
+### Features
+
+* **core:** add dashboard ([83e5ced](https://github.com/NVIDIA/elements/commit/83e5ced893821ab74cad106473c92ecb04443949))
+* **foundations:** add placement translation keys ([a3d4d53](https://github.com/NVIDIA/elements/commit/a3d4d5386df3c71e3d273c1175b140fab04efc9d))
+* **styles:** add text shimmer support ([c96b621](https://github.com/NVIDIA/elements/commit/c96b6215099331152632805a18d9638230cb3da6))
+
+### Bug Fixes
+
+* **core:** improve workspace performance ([3a580b8](https://github.com/NVIDIA/elements/commit/3a580b889927a3df365f149b19a4de07bd69bc10))
+* **lint:** add new nve-text values ([80c106e](https://github.com/NVIDIA/elements/commit/80c106e33b4d057d2f5907882b490b4a46890742))
+* **pi:** update typebox to 1.4.6 ([e2635d1](https://github.com/NVIDIA/elements/commit/e2635d17980a706b044d9a3d814334de489aa72a))
+
 ## [1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/foundations-v1.1.0...@nvidia-elements/foundations-v1.1.1) (2026-11-10)
 
 ### Features
