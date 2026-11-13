@@ -49,4 +49,39 @@ describe('diagnostic', () => {
     expect(console.warn).not.toHaveBeenCalled();
     expect(document.dispatchEvent).not.toHaveBeenCalled();
   });
+
+  it('suppresses warnings and events away from localhost', async () => {
+    const iframe = document.createElement('iframe');
+    const loaded = new Promise<void>(resolve => {
+      iframe.onload = () => resolve();
+    });
+    document.body.appendChild(iframe);
+    await loaded;
+    const frame = iframe.contentWindow;
+    if (!frame) {
+      iframe.remove();
+      throw new Error('missing diagnostic frame');
+    }
+
+    // Location cannot be replaced on the test page. about:blank is a non-localhost realm.
+    // Share the coverage store before that module initializes so its counters are collected.
+    const coverageStore = '__VITEST_COVERAGE__';
+    if (coverageStore in globalThis) {
+      Reflect.set(frame, coverageStore, Reflect.get(globalThis, coverageStore));
+    }
+
+    try {
+      const url = new URL('./diagnostic.js', import.meta.url).href;
+      const imported: { diagnostic: typeof diagnostic } = await frame.eval(`import(${JSON.stringify(url)})`);
+      const warn = vi.spyOn(frame.console, 'warn').mockImplementation(() => {});
+      const dispatch = vi.spyOn(frame.document, 'dispatchEvent');
+      imported.diagnostic('invalid configuration');
+
+      expect(frame.location.hostname).not.toBe('localhost');
+      expect(warn).not.toHaveBeenCalled();
+      expect(dispatch).not.toHaveBeenCalled();
+    } finally {
+      iframe.remove();
+    }
+  });
 });
