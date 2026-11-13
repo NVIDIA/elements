@@ -2713,8 +2713,8 @@ importers:
         specifier: workspace:*
         version: link:../../lint
       '@tsconfig/node20':
-        specifier: 20.1.10
-        version: 20.1.10
+        specifier: 20.1.11
+        version: 20.1.11
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6
@@ -6865,8 +6865,8 @@ packages:
   '@ts-morph/common@0.29.0':
     resolution: {integrity: sha512-35oUmphHbJvQ/+UTwFNme/t2p3FoKiGJ5auTjjpNTop2dyREspirjMy82PLSC1pnDJ8ah1GU98hwpVt64YXQsg==}
 
-  '@tsconfig/node20@20.1.10':
-    resolution: {integrity: sha512-5OZgdnxbFuvwm05iVwPXMU5/7iPuVDDZzAnxPDLj+kjN7fwQZSSVgHQhKTNkBPOO6Qef2D5MxPAoPLCGqE2VuQ==}
+  '@tsconfig/node20@20.1.11':
+    resolution: {integrity: sha512-QVKMhWQl38o/z1+O6xAFjpYhmUi6a/WLuCDiwKOmRSw8MaI/RrV7LwQAjl87cX0GUdu3c0kzmIsOaycXko+iHQ==}
 
   '@tsconfig/svelte@5.0.8':
     resolution: {integrity: sha512-UkNnw1/oFEfecR8ypyHIQuWYdkPvHiwcQ78sh+ymIiYoF+uc5H1UBetbjyqT+vgGJ3qQN6nhucJviX6HesWtKQ==}
@@ -18439,7 +18439,7 @@ snapshots:
       path-browserify: 1.0.1
       tinyglobby: 0.2.17
 
-  '@tsconfig/node20@20.1.10': {}
+  '@tsconfig/node20@20.1.11': {}
 
   '@tsconfig/svelte@5.0.8': {}
 
