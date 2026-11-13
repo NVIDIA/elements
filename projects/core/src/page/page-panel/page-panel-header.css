@@ -2,13 +2,15 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 :host {
-  --padding: var(--nve-ref-size-300);
+  --min-height: var(--nve-sys-layer-container-min-height);
+  --padding: var(--nve-sys-layer-container-padding);
   display: block;
   width: 100%;
 }
 
 [internal-host] {
   background: var(--background);
+  min-height: var(--min-height);
   padding: var(--padding);
   color: var(--color);
   display: flex;

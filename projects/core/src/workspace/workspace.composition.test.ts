@@ -307,7 +307,7 @@ describe('workspace panel composition', () => {
       expect(getComputedStyle(prefix).paddingInlineStart).toBe('0px');
       expect(getComputedStyle(suffix).paddingInlineStart).toBe('4px');
       expect(getComputedStyle(suffix).paddingInlineEnd).toBe('4px');
-      expect(getComputedStyle(label).paddingInlineStart).toBe('16px');
+      expect(getComputedStyle(label).paddingInlineStart).toBe('12px');
 
       header.style.setProperty('--prefix-padding', '4px');
       header.style.setProperty('--suffix-padding', '12px 4px');
@@ -316,7 +316,7 @@ describe('workspace panel composition', () => {
       expect(getComputedStyle(suffix).paddingInlineEnd).toBe('4px');
       expect(getComputedStyle(suffix).paddingBlockStart).toBe('12px');
       expect(getComputedStyle(suffix).paddingBlockEnd).toBe('12px');
-      expect(getComputedStyle(label).paddingInlineStart).toBe('16px');
+      expect(getComputedStyle(label).paddingInlineStart).toBe('12px');
     });
 
     it('composes flat close controls as suffix accessories beside their tabs', async () => {
