@@ -6,6 +6,7 @@ workflows:
     '.github/workflows/ci.yml':
         - 'actions/cache@v5.1.0'
         - 'actions/checkout@v7.0.1'
+        - 'actions/dependency-review-action@v5.0.0'
         - 'actions/deploy-pages@v5.0.0'
         - 'actions/download-artifact@v8.0.1'
         - 'actions/upload-artifact@v7.0.1'
@@ -29,6 +30,11 @@ dependencies:
         commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
         owner_id: 44036562
         repo_id: 197814629
+    'actions/dependency-review-action@v5.0.0':
+        ref: 'v5.0.0'
+        commit: 'sha1-a1d282b36b6f3519aa1f3fc636f609c47dddb294'
+        owner_id: 44036562
+        repo_id: 476372928
     'actions/deploy-pages@v5.0.0':
         ref: 'v5.0.0'
         commit: 'sha1-cd2ce8fcbc39b97be8ca5fce6e763baed58fa128'
