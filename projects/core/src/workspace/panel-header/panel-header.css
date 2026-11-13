@@ -2,8 +2,8 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 :host {
-  --min-height: calc(var(--nve-ref-size-1000) + var(--nve-ref-size-200));
-  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --min-height: var(--nve-sys-layer-container-min-height);
+  --padding: var(--nve-sys-layer-container-padding);
   --prefix-padding: 0;
   --prefix-border: none;
   --suffix-padding: initial;

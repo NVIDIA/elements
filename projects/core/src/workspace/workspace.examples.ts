@@ -478,6 +478,7 @@ export const CompactStyling = {
           --padding: var(--nve-ref-size-100) var(--nve-ref-size-100) var(--nve-ref-size-100) var(--nve-ref-size-250);
         }
         #condensed-workspace nve-workspace-panel-footer {
+          --min-height: var(--nve-ref-size-800);
           --padding: var(--nve-ref-size-200) var(--nve-ref-size-250);
         }
       </style>

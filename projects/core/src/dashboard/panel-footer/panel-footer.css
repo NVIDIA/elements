@@ -1,7 +1,9 @@
 /* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
 /* SPDX-License-Identifier: Apache-2.0 */
+
 :host {
-  --padding: var(--nve-ref-space-sm);
+  --padding: var(--nve-sys-layer-container-padding);
+  --min-height: var(--nve-sys-layer-container-min-height);
   --suffix-padding: var(--nve-ref-size-100);
   --gap: var(--nve-ref-space-xs);
   display: block;
@@ -12,6 +14,7 @@
   display: flex;
   align-items: stretch;
   height: 100%;
+  min-height: var(--min-height);
 }
 
 .content {
