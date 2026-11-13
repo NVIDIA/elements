@@ -162,4 +162,23 @@ describe('workspace recipient split sizing', () => {
       expect(achieved.groups.find(group => group.group.panels.includes('c'))!.rect.width).toBe(neighborWidth);
     }
   );
+
+  it('leaves the structural split unchanged when the source is hidden from the visible projection', () => {
+    const saved = layout(split('horizontal', [makeGroup('a'), makeGroup('b'), makeGroup('c')]));
+    const detached = geometry(createDetachedLayout(saved, ['a']));
+    const structural = planWorkspacePlacement({
+      layout: saved,
+      source: ['a'],
+      destination: { target: 'b', position: 'right' },
+      operation: 'split',
+      available: ['a', 'b', 'c']
+    })!;
+    const plan = sizePreferredSplit({
+      plan: structural,
+      source: ['a'],
+      available: ['b', 'c'],
+      preference: { allocation: detached.regions, requirements }
+    });
+    expect(plan).toBe(structural);
+  });
 });
