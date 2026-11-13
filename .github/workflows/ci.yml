@@ -55,6 +55,17 @@ jobs:
         run: |
           gh extension install github/gh-actions-lock --pin v0.4.1
           gh actions-lock --verify
+      - name: Review dependency changes
+        if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
+        uses: actions/dependency-review-action@v5.0.0
+        with:
+          base-ref: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+          head-ref: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
+          fail-on-severity: high
+          fail-on-scopes: runtime, development, unknown
+          license-check: false
+          comment-summary-in-pr: never
+          retry-on-snapshot-warnings: true
       - name: Validate release branch
         if: github.event_name == 'workflow_dispatch' && inputs.release && github.ref != 'refs/heads/main'
         run: |
@@ -81,7 +92,18 @@ jobs:
       - name: Write CI job summary
         if: always()
         run: node ./projects/internals/ci/ci-summary.js >> "$GITHUB_STEP_SUMMARY"
+      - name: Prepare IndexNow artifacts
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        env:
+          ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
+          INDEXNOW_KEY: ${{secrets.INDEXNOW_KEY}}
+        run: >-
+          node ./projects/internals/ci/indexnow.js prepare
+          --site-dir projects/pages/dist
+          --site-url "$ELEMENTS_PAGES_BASE_URL"
+      # Finish all file generation before starting concurrent uploads.
       - name: Upload build artifacts
+        background: true
         if: >-
           github.ref == 'refs/heads/main' &&
           (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.release))
@@ -123,29 +145,26 @@ jobs:
             projects/scene/package.json
             projects/viewport/dist
             projects/viewport/package.json
-      - name: Prepare IndexNow artifacts
-        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-        env:
-          ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
-          INDEXNOW_KEY: ${{secrets.INDEXNOW_KEY}}
-        run: >-
-          node ./projects/internals/ci/indexnow.js prepare
-          --site-dir projects/pages/dist
-          --site-url "$ELEMENTS_PAGES_BASE_URL"
       - name: Upload pages artifact
+        background: true
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: projects/pages/dist
           include-hidden-files: true
       - name: Upload IndexNow state
+        background: true
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: indexnow-state
+          name: indexnow-manifest.json
+          archive: false
+          if-no-files-found: error
           retention-days: 1
           path: projects/pages/dist/indexnow-manifest.json
           overwrite: true
+      - name: Wait for artifact uploads
+        wait-all:
 
   lighthouse:
     runs-on: ubuntu-latest
@@ -226,7 +245,9 @@ jobs:
         if: steps.source.outputs.current == 'true'
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: mcp-server
+          name: server.json
+          archive: false
+          if-no-files-found: error
           retention-days: 1
           path: projects/cli/server.json
 
@@ -241,7 +262,7 @@ jobs:
       - name: Download MCP server manifest
         uses: actions/download-artifact@v8.0.1
         with:
-          name: mcp-server
+          name: server.json
           path: projects/cli
       - name: Check MCP Registry
         id: registry
@@ -301,7 +322,7 @@ jobs:
       - name: Download IndexNow state
         uses: actions/download-artifact@v8.0.1
         with:
-          name: indexnow-state
+          name: indexnow-manifest.json
           path: indexnow/current
       - name: Determine changed URLs
         env:
@@ -314,7 +335,9 @@ jobs:
       - name: Upload IndexNow payload
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: indexnow-payload
+          name: payload.json
+          archive: false
+          if-no-files-found: error
           retention-days: 30
           path: indexnow/payload.json
           overwrite: true
@@ -347,7 +370,7 @@ jobs:
       - name: Download IndexNow payload
         uses: actions/download-artifact@v8.0.1
         with:
-          name: indexnow-payload
+          name: payload.json
           path: indexnow
       - name: Notify IndexNow
         env:

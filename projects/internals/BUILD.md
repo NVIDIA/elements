@@ -229,6 +229,40 @@ GitHub checks allowed action policies against the locked commit. The repository 
 
 After this migration merges, administrators can enable **Require lockfile** under the repository's Actions settings to enforce coverage for future workflows. Keep the existing `ci` required check.
 
+## Dependency review
+
+The required `ci` job runs [dependency review](https://github.com/actions/dependency-review-action) before dependency installation on pull requests and merge queue candidates. It blocks changes that introduce dependencies with known high or critical vulnerabilities in runtime, development, or unknown dependency scopes.
+
+For pull requests, the action compares the base and head commit hashes. For `merge_group` events, it compares the queue candidate's `base_sha` and `head_sha`. These explicit references ensure the queue check reviews the combined dependency changes in the integration revision. Pushes, scheduled runs, and manual runs skip this step.
+
+The action uses the job's read-only repository access, retries dependency snapshot warnings, and writes findings to the job logs and summary. It does not post PR comments or check licenses. A review failure fails the existing `ci` check, so no additional required check needs configuration in GitHub. Update or replace a flagged dependency before merging; retry a run when a temporary snapshot or API failure caused the failure.
+
+When updating the dependency review action, regenerate and verify the [workflow dependency lockfile](#workflow-dependency-lockfile) with the workflow change.
+
+## Artifact uploads
+
+The `ci` job finishes IndexNow preparation before starting artifact uploads so each upload reads complete files. Build artifacts, the Pages artifact, and the IndexNow manifest then upload concurrently with `background: true`. The final **Wait for artifact uploads** step uses `wait-all:` to collect their results. An upload failure fails `ci` and blocks dependent release and Pages deployment jobs.
+
+Build artifacts upload for pushes to `main` and manual publication requests on `main`. Pages and IndexNow artifacts also upload for manual runs on `main` without a package release. Pull request, merge queue, and scheduled runs skip these uploads. The release job downloads `build-artifacts` from the same workflow run into `projects`; Pages deployment consumes the Pages artifact.
+
+### Single-file JSON artifacts
+
+The workflow uploads these files with `actions/upload-artifact` using `archive: false`:
+
+| Artifact name            | Producer       | Consumer and restored path                                | Retention |
+| ------------------------ | -------------- | --------------------------------------------------------- | --------- |
+| `indexnow-manifest.json` | `ci`           | `deploy-pages`: `indexnow/current/indexnow-manifest.json` | 1 day     |
+| `server.json`            | `release`      | `publish-mcp`: `projects/cli/server.json`                 | 1 day     |
+| `payload.json`           | `deploy-pages` | `notify-indexnow`: `indexnow/payload.json`                | 30 days   |
+
+Unzipped artifacts use the uploaded filename as their artifact name. Keep the `name` input for each upload and every matching download name equal to that filename. This also ensures `overwrite: true` targets the correct artifact for the IndexNow files. Each upload uses an exact file path and `if-no-files-found: error` so a missing file fails the producing job.
+
+Use `actions/download-artifact` v8 or later to restore these files into the paths in the table. The build artifact contains the package outputs in a ZIP archive, and the Pages upload action prepares the format GitHub Pages requires.
+
+### Verify artifact changes
+
+On a publication run from `main`, check that the three `ci` uploads overlap and that the wait step completes before the job succeeds. Confirm that release, Pages deployment, MCP publication, and IndexNow notification find their expected artifacts. Use a manual run on `main` without publication to verify the Pages and IndexNow path. Review upload durations across comparable runs before reporting a performance improvement.
+
 ## Merge queue
 
 The `ci` and `lighthouse` jobs run on pull requests and `merge_group.checks_requested` events. Both jobs check out `github.sha`, so they test the same integration revision, including the latest `main` and earlier entries in the queue. Keep these check names when editing the workflow because the main ruleset requires them. Queue runs validate changes without publishing packages or Pages.
