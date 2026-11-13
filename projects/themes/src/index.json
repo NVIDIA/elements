@@ -2182,6 +2182,16 @@
             "type": "color",
             "description": "Use for subtle accent backgrounds within containers"
           }
+        },
+        "min-height": {
+          "value": "{ref.size.600} * 2",
+          "type": "sizing",
+          "description": "Use for minimum height of container surfaces"
+        },
+        "padding": {
+          "value": "{ref.size.300} {ref.size.400}",
+          "type": "spacing",
+          "description": "Use for padding of container surfaces"
         }
       },
       "overlay": {
