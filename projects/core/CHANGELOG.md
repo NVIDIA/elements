@@ -1,3 +1,10 @@
+## [2.26.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.25.0...@nvidia-elements/core-v2.26.0) (2026-11-13)
+
+### Features
+
+* **core:** support for grid virtual-list ([32fd01e](https://github.com/NVIDIA/elements/commit/32fd01e61b004bb07c0a54ce7cb6c747b09eaa55))
+* **foundations:** virtual-list ([aa4ef9e](https://github.com/NVIDIA/elements/commit/aa4ef9e20dd0ec9e4ce8a4be69c6678f11c86b12))
+
 ## [2.25.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.24.0...@nvidia-elements/core-v2.25.0) (2026-11-13)
 
 ### Features
