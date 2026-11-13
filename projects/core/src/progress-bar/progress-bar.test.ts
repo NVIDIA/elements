@@ -71,4 +71,16 @@ describe(ProgressBar.metadata.tag, () => {
     const nativeProgress = element.shadowRoot.querySelector('progress') as HTMLProgressElement;
     expect(nativeProgress.classList.contains('indeterminate')).toBe(false);
   });
+
+  it('should suppress the native appearance and paint the track background', async () => {
+    element.style.setProperty('--background', 'rgb(220, 220, 220)');
+    element.value = 40;
+    await elementIsStable(element);
+
+    const nativeProgress = element.shadowRoot.querySelector('progress') as HTMLProgressElement;
+    const progressStyle = getComputedStyle(nativeProgress);
+
+    expect(progressStyle.appearance).toBe('none');
+    expect(progressStyle.backgroundColor).toBe('rgb(220, 220, 220)');
+  });
 });
