@@ -18,6 +18,20 @@ const accent = tokens.filter(t => t.includes('sys-accent'));
 const text = tokens.filter(t => t.includes('sys-text') && t.includes('color'));
 const interaction = tokens.filter(t => t.includes('sys-interaction'));
 const layer = tokens.filter(t => t.includes('sys-layer'));
+const layerTemplate = layer
+  .map(token => {
+    const property = token.endsWith('-min-height')
+      ? 'min-height'
+      : token.endsWith('-padding')
+        ? 'padding'
+        : token.endsWith('-color')
+          ? 'color'
+          : token.endsWith('-offset')
+            ? 'margin'
+            : 'background';
+    return `<div style="background: var(--nve-sys-layer-canvas-background); color: var(--nve-sys-layer-canvas-color); min-height: 24px; ${property}: var(${token});">•︎•︎•︎</div>`;
+  })
+  .join('\n');
 const fontSize = tokens.filter(t => t.includes('ref-font-size'));
 // const fontFamily = tokens.filter(t => t.includes('ref-font-family'));
 // const fontWeight = tokens.filter(t => t.includes('ref-font-weight'));
@@ -125,10 +139,7 @@ describe('theme visual', () => {
   });
 
   test('layer should match visual baseline', async () => {
-    const report = await visualRunner.render(
-      'theme.layer',
-      layer.map(token => `<div style="background: var(${token}); height: 24px;"></div>`).join('\n')
-    );
+    const report = await visualRunner.render('theme.layer', layerTemplate);
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
@@ -196,10 +207,7 @@ describe('dark theme visual', () => {
   });
 
   test('layer should match visual baseline', async () => {
-    const report = await visualRunner.render(
-      'dark.layer',
-      layer.map(token => `<div style="background: var(${token}); height: 24px;"></div>`).join('\n') + darkThemeScript
-    );
+    const report = await visualRunner.render('dark.layer', layerTemplate + darkThemeScript);
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 });
