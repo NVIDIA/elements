@@ -8,8 +8,7 @@
   --box-shadow: var(--nve-ref-shadow-300);
   --panel-button-border-radius: 0 var(--nve-ref-border-radius-full) var(--nve-ref-border-radius-full) 0;
   overflow: hidden;
-  -webkit-transition: width 240ms ease;
-  -webkit-transition: height 240ms ease;
+  transition: height 240ms ease;
   contain: none;
   position: relative;
 }
