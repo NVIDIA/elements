@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
@@ -57,13 +58,13 @@ describe('StateActiveController', () => {
     element.dispatchEvent(new MouseEvent('mouseup'));
     expect(element.matches(':state(active)')).toBe(false);
 
-    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Space' }));
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
     expect(element.matches(':state(active)')).toBe(true);
 
     element.dispatchEvent(new KeyboardEvent('keyup'));
     expect(element.matches(':state(active)')).toBe(false);
 
-    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Enter' }));
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter' }));
     expect(element.matches(':state(active)')).toBe(true);
 
     element.dispatchEvent(new FocusEvent('blur'));
@@ -76,19 +77,34 @@ describe('StateActiveController', () => {
     expect(element.matches(':state(active)')).toBe(false);
 
     element.disabled = false;
-    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'KeyA' }));
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyA' }));
     expect(element.matches(':state(active)')).toBe(false);
   });
 
-  it('should prevent default space keypress scrolling on the host', () => {
-    const space = new KeyboardEvent('keypress', { code: 'Space', cancelable: true });
-    const enter = new KeyboardEvent('keypress', { code: 'Enter', cancelable: true });
+  it('should prevent default space keydown scrolling on the host', () => {
+    const space = new KeyboardEvent('keydown', { code: 'Space', cancelable: true });
+    const enter = new KeyboardEvent('keydown', { code: 'Enter', cancelable: true });
 
     element.dispatchEvent(space);
     element.dispatchEvent(enter);
 
     expect(space.defaultPrevented).toBe(true);
     expect(enter.defaultPrevented).toBe(false);
+  });
+
+  it('should hold the active state for a real space or enter key', async () => {
+    element.tabIndex = 0;
+    element.focus();
+
+    await userEvent.keyboard('{Space>}');
+    expect(element.matches(':state(active)')).toBe(true);
+    await userEvent.keyboard('{/Space}');
+    expect(element.matches(':state(active)')).toBe(false);
+
+    await userEvent.keyboard('{Enter>}');
+    expect(element.matches(':state(active)')).toBe(true);
+    await userEvent.keyboard('{/Enter}');
+    expect(element.matches(':state(active)')).toBe(false);
   });
 
   it('should remove active listeners on disconnect', () => {

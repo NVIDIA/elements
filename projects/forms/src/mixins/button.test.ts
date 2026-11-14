@@ -91,24 +91,24 @@ describe('ButtonFormControlMixin', () => {
       button.dispatchEvent(new MouseEvent('mouseup'));
       expect(button.matches(':state(active)')).toBe(false);
 
-      button.dispatchEvent(new KeyboardEvent('keypress', { code: 'Space' }));
+      button.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
       expect(button.matches(':state(active)')).toBe(true);
     });
 
     it('should clear active state on blur and ignore non-activation keys', () => {
-      button.dispatchEvent(new KeyboardEvent('keypress', { code: 'KeyA' }));
+      button.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyA' }));
       expect(button.matches(':state(active)')).toBe(false);
 
-      button.dispatchEvent(new KeyboardEvent('keypress', { code: 'Enter' }));
+      button.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter' }));
       expect(button.matches(':state(active)')).toBe(true);
 
       button.dispatchEvent(new FocusEvent('blur'));
       expect(button.matches(':state(active)')).toBe(false);
     });
 
-    it('should prevent default on space keypress activation', () => {
-      const space = new KeyboardEvent('keypress', { code: 'Space', cancelable: true });
-      const enter = new KeyboardEvent('keypress', { code: 'Enter', cancelable: true });
+    it('should prevent default on space keydown activation', () => {
+      const space = new KeyboardEvent('keydown', { code: 'Space', cancelable: true });
+      const enter = new KeyboardEvent('keydown', { code: 'Enter', cancelable: true });
 
       button.dispatchEvent(space);
       button.dispatchEvent(enter);

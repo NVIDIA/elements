@@ -13,7 +13,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
 
   hostConnected() {
     attachInternals(this.host);
-    this.host.addEventListener('keypress', this.#onActive as EventListener);
+    this.host.addEventListener('keydown', this.#onActive as EventListener);
     this.host.addEventListener('mousedown', this.#onActive as EventListener);
     this.host.addEventListener('keyup', this.#onInactive);
     this.host.addEventListener('blur', this.#onInactive);
@@ -21,7 +21,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
   }
 
   hostDisconnected() {
-    this.host.removeEventListener('keypress', this.#onActive as EventListener);
+    this.host.removeEventListener('keydown', this.#onActive as EventListener);
     this.host.removeEventListener('mousedown', this.#onActive as EventListener);
     this.host.removeEventListener('keyup', this.#onInactive);
     this.host.removeEventListener('blur', this.#onInactive);
