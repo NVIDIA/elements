@@ -1,3 +1,9 @@
+## [2.26.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.1...@nvidia-elements/core-v2.26.2) (2026-11-14)
+
+### Bug Fixes
+
+* **core:** drop obsolete panel transition prefix ([dead5e0](https://github.com/NVIDIA/elements/commit/dead5e0cc7cb0202e83f64cd8242755e06ac91db))
+
 ## [2.26.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.0...@nvidia-elements/core-v2.26.1) (2026-11-14)
 
 ### Bug Fixes
