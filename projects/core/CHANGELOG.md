@@ -1,3 +1,10 @@
+## [2.26.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.0...@nvidia-elements/core-v2.26.1) (2026-11-14)
+
+### Bug Fixes
+
+* **core:** drop obsolete progress appearance prefixes ([2192b3c](https://github.com/NVIDIA/elements/commit/2192b3c42e09842685e90c2ce5440b2005c9f7bb))
+* **starters:** update [@angular](https://github.com/angular) packages to 22.2.6 ([39be6b3](https://github.com/NVIDIA/elements/commit/39be6b3fbef2498f8898210bdc58d94ba2eb42d7))
+
 ## [2.26.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.25.0...@nvidia-elements/core-v2.26.0) (2026-11-13)
 
 ### Features
