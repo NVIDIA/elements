@@ -287,6 +287,20 @@ describe(Iframe.metadata.tag, () => {
     });
   });
 
+  it('should leave sizing unchanged when a template updates with no frame', async () => {
+    iframe.remove();
+    element.style.setProperty('--_height', '64px');
+    const template = element.querySelector<HTMLTemplateElement>('template:not([slot])');
+    if (!template) {
+      throw new Error('Expected the body template.');
+    }
+
+    template.innerHTML = '<main>Deferred body</main>';
+    await Promise.resolve();
+    expect(element.shadowRoot?.querySelector('iframe')).toBeNull();
+    expect(element.style.getPropertyValue('--_height')).toBe('64px');
+  });
+
   it('should refresh srcdoc when head template content changes', async () => {
     const template = element.querySelector<HTMLTemplateElement>('template[slot="head"]') as HTMLTemplateElement;
     template.innerHTML = '<title>Updated iframe title</title>';
