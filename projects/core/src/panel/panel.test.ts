@@ -51,6 +51,14 @@ describe(Panel.metadata.tag, () => {
     expect(panel._internals.role).toBe('region');
   });
 
+  it('should transition height when the panel expands and collapses', async () => {
+    const style = getComputedStyle(panel);
+
+    expect(style.transitionProperty).toBe('height');
+    expect(style.transitionDuration).toBe('0.24s');
+    expect(style.transitionTimingFunction).toBe('ease');
+  });
+
   it('should reflect expanded attribute to DOM', async () => {
     expect(panel.hasAttribute('expanded')).toBe(true);
     panel.expanded = false;
