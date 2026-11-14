@@ -11,9 +11,9 @@ import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
-import '@nvidia-elements/code/codeblock/define.js';
-import '@nvidia-elements/code/codeblock/languages/html.js';
-import '@nvidia-elements/code/codeblock/languages/typescript.js';
+import '@nvidia-elements/code/code-block/define.js';
+import '@nvidia-elements/code/code-block/languages/html.js';
+import '@nvidia-elements/code/code-block/languages/typescript.js';
 import styles from './canvas.css?inline';
 
 function convertToJsxElement(source: string): string {
@@ -98,7 +98,7 @@ export class Canvas extends LitElement {
           </nve-resize-handle>
         </div>
         <div class="code" .hidden=${!this.showSource}>
-          ${source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
+          ${source ? html`<nve-code-block language="html" .code=${this.formattedSource}></nve-code-block>` : nothing}
           <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.formattedSource} aria-label="copy"></nve-copy-button>
         </div>
         <div class="toolbar">

@@ -23,10 +23,10 @@ vi.mock('../../index.11tydata.js', () => ({
         }
       },
       {
-        name: 'nve-codeblock',
+        name: 'nve-code-block',
         version: '1.2.3',
         manifest: {
-          tagName: 'nve-codeblock'
+          tagName: 'nve-code-block'
         }
       }
     ]
@@ -660,8 +660,8 @@ describe('renderJsonLd', () => {
   it('should emit SoftwareSourceCode for code example pages', () => {
     const graph = getGraph(
       createData({
-        tag: 'nve-codeblock',
-        content: '<nve-codeblock language="typescript"><template>const value = true;</template></nve-codeblock>'
+        tag: 'nve-code-block',
+        content: '<nve-code-block language="typescript"><template>const value = true;</template></nve-code-block>'
       }),
       createMeta('/docs/code/codeblock/')
     );

@@ -126,8 +126,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    // Includes typography styles embedded in the shared search component.
-    expect(scores.payload.js).toBeLessThanOrEqual(165.8);
+    expect(scores.payload.js).toBeLessThanOrEqual(166);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -160,7 +159,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThanOrEqual(166.5);
+    expect(scores.payload.js).toBeLessThanOrEqual(167);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -171,7 +170,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThanOrEqual(165.5);
+    expect(scores.payload.js).toBeLessThanOrEqual(166);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });

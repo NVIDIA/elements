@@ -7,7 +7,7 @@
   --background: var(--nve-sys-layer-container-background);
   --color: var(--nve-sys-layer-canvas-color);
   --border-radius: 0;
-  --header-padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --header-padding: var(--nve-sys-layer-container-padding);
   --cursor: pointer;
   --transition: height var(--nve-ref-animation-duration-200) ease-in-out;
   width: 100%; /* fallback for firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1789477 */
