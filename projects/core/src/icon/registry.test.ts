@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import { IconRegistry } from './registry.js';
+import type { IconSVG } from './icons.js';
+import { IconRegistry, iconRegistry, registerIcon } from './registry.js';
 
 describe('IconRegistry', () => {
   it('resolves eager strings, live readers and alias chains without importing the catalog', async () => {
@@ -78,5 +79,23 @@ describe('IconRegistry', () => {
     registry.add('example', { svg: () => 'new' }, 'new');
     finish('old');
     expect(await pending).toBe('new');
+  });
+
+  it('copies a string icon onto a legacy element that has no registry', () => {
+    class LegacyIcon extends HTMLElement {
+      static _icons: Record<string, IconSVG> = {};
+    }
+
+    const get = customElements.get.bind(customElements);
+    const spy = vi.spyOn(customElements, 'get').mockImplementation(tag => (tag === 'nve-icon' ? LegacyIcon : get(tag)));
+
+    try {
+      registerIcon('legacy-mark', '<svg id="legacy"></svg>');
+      expect(LegacyIcon._icons['legacy-mark']?.svg()).toBe('<svg id="legacy"></svg>');
+      expect(iconRegistry.sync('legacy-mark')).toBe('<svg id="legacy"></svg>');
+    } finally {
+      delete iconRegistry.icons['legacy-mark'];
+      spy.mockRestore();
+    }
   });
 });
