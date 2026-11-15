@@ -23,7 +23,7 @@ function hasInputSchema(
 }
 
 vi.mock('../api/utils.js', async importOriginal => {
-  const actual = (await importOriginal()) as Record<string, unknown>;
+  const actual = await importOriginal<Record<string, unknown>>();
   return {
     ...actual,
     getLatestPublishedVersions: vi.fn().mockResolvedValue({
