@@ -56,7 +56,7 @@ export class ExamplesService {
       return (results as Example[]).map(e => ({ id: e.id, summary: e.summary }));
     }
 
-    return results as string;
+    return results;
   }
 
   @tool({
