@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "ci": "wireit",
-    "dev": "npx @modelcontextprotocol/inspector@2.8.0 node ./dist/index.js",
+    "dev": "npx @modelcontextprotocol/inspector@2.13.0 node ./dist/index.js",
     "build": "wireit",
     "lint": "wireit",
     "lint:fix": "wireit"
@@ -29,7 +29,7 @@
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-singlefile": "2.3.3"
+    "vite-plugin-singlefile": "2.3.4"
   },
   "wireit": {
     "ci": {
