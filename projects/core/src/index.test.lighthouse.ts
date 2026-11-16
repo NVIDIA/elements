@@ -18,7 +18,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThanOrEqual(182.5);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThanOrEqual(183.2);
 
     // if sudden drop in size, check vite bundle config and bundle demo to ensure side effects are properly preserved
     expect(report.payload.javascript.requests['index.js'].kb).toBeGreaterThan(100);
@@ -70,6 +70,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/joystick/define.js';
         import '@nvidia-elements/core/logo/define.js';
         import '@nvidia-elements/core/menu/define.js';
+        import '@nvidia-elements/core/meter/define.js';
         import '@nvidia-elements/core/month/define.js';
         import '@nvidia-elements/core/notification/define.js';
         import '@nvidia-elements/core/page/define.js';

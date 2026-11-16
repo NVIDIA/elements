@@ -605,6 +605,18 @@
       "types": "./dist/menu/define.d.ts",
       "default": "./dist/menu/define.js"
     },
+    "./meter": {
+      "types": "./dist/meter/index.d.ts",
+      "default": "./dist/meter/index.js"
+    },
+    "./meter/index.js": {
+      "types": "./dist/meter/index.d.ts",
+      "default": "./dist/meter/index.js"
+    },
+    "./meter/define.js": {
+      "types": "./dist/meter/define.d.ts",
+      "default": "./dist/meter/define.js"
+    },
     "./month": {
       "types": "./dist/month/index.d.ts",
       "default": "./dist/month/index.js"
@@ -1066,8 +1078,8 @@
     }
   },
   "dependencies": {
-    "@nvidia-elements/foundations": "workspace:^",
     "@nvidia-elements/forms": "workspace:^",
+    "@nvidia-elements/foundations": "workspace:^",
     "lit": "catalog:publish",
     "lit-html": "catalog:publish"
   },
@@ -1082,6 +1094,7 @@
     "@internals/eslint": "workspace:*",
     "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@lit-labs/ssr-client": "catalog:",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/styles": "workspace:^",
     "@typescript/lib-dom": "npm:@types/web@0.0.312",
