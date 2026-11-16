@@ -1,3 +1,33 @@
+## [2.0.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.13...@nvidia-elements/forms-v2.0.14) (2026-11-16)
+
+### Features
+
+* **core:** add dashboard ([83e5ced](https://github.com/NVIDIA/elements/commit/83e5ced893821ab74cad106473c92ecb04443949))
+* **core:** iframe sandbox options ([849eb85](https://github.com/NVIDIA/elements/commit/849eb854b9f96692d2607f2db4aee62b7487b05f))
+* **core:** support for grid virtual-list ([32fd01e](https://github.com/NVIDIA/elements/commit/32fd01e61b004bb07c0a54ce7cb6c747b09eaa55))
+* **foundations:** add placement translation keys ([a3d4d53](https://github.com/NVIDIA/elements/commit/a3d4d5386df3c71e3d273c1175b140fab04efc9d))
+* **foundations:** virtual-list ([aa4ef9e](https://github.com/NVIDIA/elements/commit/aa4ef9e20dd0ec9e4ce8a4be69c6678f11c86b12))
+* **styles:** add text shimmer support ([c96b621](https://github.com/NVIDIA/elements/commit/c96b6215099331152632805a18d9638230cb3da6))
+
+### Bug Fixes
+
+* **core:** drop obsolete panel transition prefix ([dead5e0](https://github.com/NVIDIA/elements/commit/dead5e0cc7cb0202e83f64cd8242755e06ac91db))
+* **core:** drop obsolete progress appearance prefixes ([2192b3c](https://github.com/NVIDIA/elements/commit/2192b3c42e09842685e90c2ce5440b2005c9f7bb))
+* **core:** drop obsolete scoped registry polyfill ([520e03b](https://github.com/NVIDIA/elements/commit/520e03b0244592f100edcfedc45ea2871d1cecc5))
+* **core:** improve icon registry bundling performance ([64db7b9](https://github.com/NVIDIA/elements/commit/64db7b972645a624e11dd97249c49a6b0b2d60f7))
+* **core:** improve workspace performance ([3a580b8](https://github.com/NVIDIA/elements/commit/3a580b889927a3df365f149b19a4de07bd69bc10))
+* **core:** refactor to use foundations internals ([6405764](https://github.com/NVIDIA/elements/commit/6405764abcd16224406fdc57a811cd745ec54971))
+* **core:** size overlays with the dynamic viewport ([3458d95](https://github.com/NVIDIA/elements/commit/3458d9566cbf6740ced6cdf9650296e0cadfe336))
+* **forms:** use keydown for button active state ([486875c](https://github.com/NVIDIA/elements/commit/486875c082a15f2bc7a72a091759a93cfa3f8a2b))
+* **foundations:** add shared decorator ([fa642a4](https://github.com/NVIDIA/elements/commit/fa642a4c81c7e0ec2f00d646452bcd7d595b1e34))
+* **lint:** add new nve-text values ([80c106e](https://github.com/NVIDIA/elements/commit/80c106e33b4d057d2f5907882b490b4a46890742))
+* **markdown:** update to use foundations internals ([33f1490](https://github.com/NVIDIA/elements/commit/33f149046c791aad70e35b439869fd4d05efe6ed))
+* **media:** update icon imports ([7d95c48](https://github.com/NVIDIA/elements/commit/7d95c485bfbdaa180d858fc1ecf51941342e2cdf))
+* **media:** update to use foundations internals ([24d2296](https://github.com/NVIDIA/elements/commit/24d2296596c18955cfe8723f0e1c67ccc53cbfeb))
+* **pi:** update typebox to 1.4.6 ([e2635d1](https://github.com/NVIDIA/elements/commit/e2635d17980a706b044d9a3d814334de489aa72a))
+* **starters:** update [@angular](https://github.com/angular) packages to 22.2.6 ([39be6b3](https://github.com/NVIDIA/elements/commit/39be6b3fbef2498f8898210bdc58d94ba2eb42d7))
+* **viewport:** update to use foundations internals ([a5510ec](https://github.com/NVIDIA/elements/commit/a5510ec63d0933d0d8b245c6160e0b3bf2e1f1bc))
+
 ## [2.0.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v2.0.12...@nvidia-elements/forms-v2.0.13) (2026-11-07)
 
 ### Features
