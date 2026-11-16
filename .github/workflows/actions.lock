@@ -7,12 +7,13 @@ workflows:
         - 'actions/cache@v5.1.0'
         - 'actions/checkout@v7.0.1'
         - 'actions/dependency-review-action@v5.0.0'
-        - 'actions/deploy-pages@v5.0.0'
-        - 'actions/download-artifact@v8.0.1'
-        - 'actions/upload-artifact@v7.0.1'
-        - 'actions/upload-code-coverage@v1.4.2'
+        - 'actions/deploy-pages@v5.0.1'
+        - 'actions/download-artifact@v8.0.2'
+        - 'actions/upload-artifact@v7.0.2'
+        - 'actions/upload-code-coverage@v1.4.4'
         - 'actions/upload-pages-artifact@v5.0.0'
         - 'jdx/mise-action@v4.2.0'
+        - 'jdx/mise-action@v5.2.8'
     '.github/workflows/label.yml':
         - 'actions/labeler@v7.0.0'
     '.github/workflows/slack.yml':
@@ -35,14 +36,14 @@ dependencies:
         commit: 'sha1-a1d282b36b6f3519aa1f3fc636f609c47dddb294'
         owner_id: 44036562
         repo_id: 476372928
-    'actions/deploy-pages@v5.0.0':
-        ref: 'v5.0.0'
-        commit: 'sha1-cd2ce8fcbc39b97be8ca5fce6e763baed58fa128'
+    'actions/deploy-pages@v5.0.1':
+        ref: 'v5.0.1'
+        commit: 'sha1-368f82528645a54fb793d4d04e342629a3f51346'
         owner_id: 44036562
         repo_id: 438112499
-    'actions/download-artifact@v8.0.1':
-        ref: 'v8.0.1'
-        commit: 'sha1-3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c'
+    'actions/download-artifact@v8.0.2':
+        ref: 'v8.0.2'
+        commit: 'sha1-9000827ccba6bdab643e8b6fd33ac0654aef8333'
         owner_id: 44036562
         repo_id: 192626254
     'actions/labeler@v7.0.0':
@@ -60,14 +61,14 @@ dependencies:
         commit: 'sha1-bbbca2ddaa5d8feaa63e36b76fdaad77386f024f'
         owner_id: 44036562
         repo_id: 192625955
-    'actions/upload-artifact@v7.0.1':
-        ref: 'v7.0.1'
-        commit: 'sha1-043fb46d1a93c77aae656e7c1c64a875d1fc6a0a'
+    'actions/upload-artifact@v7.0.2':
+        ref: 'v7.0.2'
+        commit: 'sha1-cf430e030ddbb5b0abf93d22962f4752f3646cd9'
         owner_id: 44036562
         repo_id: 192625955
-    'actions/upload-code-coverage@v1.4.2':
-        ref: 'v1.4.2'
-        commit: 'sha1-d8e329117199404bba6fc81efe8093dc7c015e34'
+    'actions/upload-code-coverage@v1.4.4':
+        ref: 'v1.4.4'
+        commit: 'sha1-2b21a77928be8d5168c2b9581a67f2adbebacc52'
         owner_id: 44036562
         repo_id: 1220171870
     'actions/upload-pages-artifact@v5.0.0':
@@ -80,6 +81,11 @@ dependencies:
     'jdx/mise-action@v4.2.0':
         ref: 'v4.2.0'
         commit: 'sha1-e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d'
+        owner_id: 216188
+        repo_id: 738284564
+    'jdx/mise-action@v5.2.8':
+        ref: 'v5.2.8'
+        commit: 'sha1-d5574b52816a478f9d4e6529a3f6ff17a8a36785'
         owner_id: 216188
         repo_id: 738284564
     'slackapi/slack-github-action@v4.0.0':
