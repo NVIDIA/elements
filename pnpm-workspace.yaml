@@ -48,9 +48,11 @@ packages:
   - projects/internals/tools
 
 overrides:
+  # Align the build-time linter's declared dependency; its bundle still embeds Zod 3.
+  '@google/design.md>zod': 'catalog:'
   '@lit-labs/ssr-dom-shim': 1.6.0
   '@modelcontextprotocol/sdk@<1.32.0': 'catalog:'
-  '@modelcontextprotocol/sdk>@hono/node-server': 2.1.3
+  '@modelcontextprotocol/sdk>@hono/node-server': 2.1.6
   'archiver>glob': 'catalog:'
   # semantic-release 25 / release-notes-generator 14 still ship writer@8.
   # commitlint pulls conventionalcommits@10, which only renders with writer@9.
@@ -62,6 +64,7 @@ overrides:
   'glob@>=9.0.0 <14.0.2': 'catalog:'
   'ip-address@<10.7.4': 10.7.4
   liquidjs: 10.30.1
+  'minimatch@>=7.0.0 <11.0.1': 11.0.4
   'piscina@>=5.0.0 <5.3.2': 5.3.2
   shell-quote: 1.12.0
   svgo: 4.1.0
@@ -83,7 +86,7 @@ catalogs:
 
 catalog:
   esbuild: 0.28.2
-  '@11ty/eleventy': 3.1.7
+  '@11ty/eleventy': 3.1.8
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 8.0.0
   '@custom-elements-manifest/analyzer': 0.11.0
@@ -112,9 +115,9 @@ catalog:
   '@vitest/istanbul-lib-report': 2.1.0
   'adm-zip': 0.6.1
   axe-core: 4.14.0
-  eslint: 10.14.0
+  eslint: 10.15.0
   fast-glob: 3.3.3
-  glob: 14.0.2
+  glob: 14.0.6
   highlight.js: 11.12.0
   lighthouse: 13.6.0
   lit: 3.3.3
@@ -136,7 +139,7 @@ catalog:
   typescript: 6.0.3
   typescript-7: npm:typescript@7.0.2
   typescript-eslint: 8.72.2
-  vite: 8.3.5
+  vite: 8.3.8
   vitest: 5.1.0
   zod: 4.6.7
 

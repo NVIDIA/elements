@@ -20,7 +20,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.5.44"
+    "vue": "3.5.45"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
@@ -31,7 +31,7 @@
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "3.3.11"
+    "vue-tsc": "3.3.14"
   },
   "wireit": {
     "ci": {

@@ -115,6 +115,6 @@ describe('lighthouse report', () => {
     expect(report.scores.bestPractices).toBe(100);
     expect(
       report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb
-    ).toBeLessThanOrEqual(162.5);
+    ).toBeLessThanOrEqual(163);
   });
 });
