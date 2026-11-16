@@ -43,6 +43,7 @@ type ControlInput = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement |
  * @entrypoint \@nvidia-elements/core/forms
  * @slot - Control input element
  * @slot label - Label element
+ * @slot messages - Messages element
  * @cssprop --cursor
  * @cssprop --accent-color
  * @cssprop --color

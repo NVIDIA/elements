@@ -22,6 +22,58 @@ describe('nvd-canvas', () => {
 
   afterEach(() => element.remove());
 
+  it.each([
+    { padding: '0px', height: '100%', contentHeight: 8, minimum: 80 },
+    { padding: '12px', height: '100%', contentHeight: 8, minimum: 80 },
+    { padding: '0px', height: '160px', contentHeight: 8, minimum: 160 },
+    { padding: '0px', height: '100%', contentHeight: 160, minimum: 160 }
+  ])(
+    'fills the preview background for $contentHeight px content with $padding padding and $height height',
+    async ({ padding, height, contentHeight, minimum }) => {
+      const content = globalThis.document.createElement('div');
+      content.style.height = `${contentHeight}px`;
+      element.replaceChildren(content);
+      element.style.setProperty('--padding', padding);
+      element.style.setProperty('--height', height);
+      element.layer = 'container';
+      globalThis.document.body.append(element);
+      await element.updateComplete;
+
+      const resizer = element.shadowRoot?.querySelector('.resizer');
+      const slot = element.shadowRoot?.querySelector('slot:not([name])');
+      if (!resizer || !slot) throw new Error('Expected a preview wrapper and slot');
+      const previewBounds = resizer.getBoundingClientRect();
+      const backgroundBounds = slot.getBoundingClientRect();
+
+      expect(previewBounds.height).toBeGreaterThanOrEqual(minimum);
+      expect(backgroundBounds.top).toBe(previewBounds.top);
+      expect(backgroundBounds.bottom).toBe(previewBounds.bottom);
+    }
+  );
+
+  it('keeps the background at full height when the preview width changes', async () => {
+    const content = globalThis.document.createElement('div');
+    content.style.height = '8px';
+    element.replaceChildren(content);
+    element.style.width = '640px';
+    element.style.setProperty('--padding', '12px');
+    globalThis.document.body.append(element);
+    await new Promise(requestAnimationFrame);
+    await element.updateComplete;
+
+    const handle = element.shadowRoot?.querySelector('nve-resize-handle');
+    const resizer = element.shadowRoot?.querySelector('.resizer');
+    const slot = element.shadowRoot?.querySelector('slot:not([name])');
+    if (!handle || !resizer || !slot) throw new Error('Expected preview and resize controls');
+    handle.value = 300;
+    handle.dispatchEvent(new Event('input', { bubbles: true }));
+    await element.updateComplete;
+
+    expect(slot.getBoundingClientRect().width).toBe(300);
+    expect(resizer.getBoundingClientRect().width).toBeGreaterThan(300);
+    expect(slot.getBoundingClientRect().height).toBe(resizer.getBoundingClientRect().height);
+  });
+
   it('uses server-provided source without assigning the source property', async () => {
     expect(code.textContent).toBe(initialSource);
     globalThis.document.body.append(element);

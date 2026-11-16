@@ -290,6 +290,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/media/fullscreen-button/') ? 'selected' : ''}><a href="/docs/media/fullscreen-button/">Full-screen Button</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'selected' : ''}><a href="/docs/elements/menu/">Menu</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/meter/') ? 'selected' : ''}><a href="/docs/elements/meter/">Meter</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'selected' : ''}><a href="/docs/elements/month/">Month</a></nve-tree-node>
     <nve-tree-node ${data.page.url.startsWith('/docs/monaco/') ? 'expanded' : ''}>
       <a href="/docs/monaco/input/">Monaco</a>
