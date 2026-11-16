@@ -92,8 +92,8 @@ catalog:
   '@eslint/css': 2.0.1
   '@eslint/js': 10.0.1
   '@eslint/json': 2.1.1
-  '@html-eslint/eslint-plugin': 0.67.0
-  '@html-eslint/parser': 0.67.0
+  '@html-eslint/eslint-plugin': 0.68.0
+  '@html-eslint/parser': 0.68.0
   '@lit-labs/eleventy-plugin-lit': 1.0.6
   '@lit-labs/ssr': 4.1.0
   '@lit-labs/ssr-client': 1.1.8
@@ -112,7 +112,7 @@ catalog:
   '@vitest/istanbul-lib-report': 2.1.0
   'adm-zip': 0.6.1
   axe-core: 4.14.0
-  eslint: 10.13.0
+  eslint: 10.14.0
   fast-glob: 3.3.3
   glob: 14.0.2
   highlight.js: 11.12.0
@@ -135,7 +135,7 @@ catalog:
   typebox: 1.4.6
   typescript: 6.0.3
   typescript-7: npm:typescript@7.0.2
-  typescript-eslint: 8.72.1
+  typescript-eslint: 8.72.2
   vite: 8.3.5
   vitest: 5.1.0
   zod: 4.6.7
