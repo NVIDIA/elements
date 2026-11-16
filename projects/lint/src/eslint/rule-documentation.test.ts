@@ -66,7 +66,7 @@ describe('rule documentation', () => {
   it('should document every registered rule', () => {
     const rules = getDocumentedRules();
 
-    expect(rules).toHaveLength(51);
+    expect(rules).toHaveLength(52);
     for (const { name, rule } of rules) {
       expect(rule.meta.docs).toMatchObject({
         name,
