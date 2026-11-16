@@ -97,7 +97,7 @@
   },
   "devDependencies": {
     "@angular/build": "22.1.7",
-    "@angular/cli": "22.1.7",
+    "@angular/cli": "22.2.7",
     "@angular/compiler-cli": "22.2.6",
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
