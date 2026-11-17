@@ -37,11 +37,11 @@
 }
 
 .viewport[data-sizing='fit'][data-flow='vertical'] {
-  overflow: hidden scroll;
+  overflow: hidden auto;
 }
 
 .viewport[data-sizing='fit'][data-flow='horizontal'] {
-  overflow: scroll hidden;
+  overflow: auto hidden;
 }
 
 .canvas {
