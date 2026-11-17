@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -41,7 +41,7 @@ describe('dashboard logical grid placement', () => {
     const value: DashboardLayout = { version: 1, grid: { flow, tracks: 6 }, items };
 
     fixture = await createFixture(html`<div dir="rtl">
-      <nve-dashboard rearrangeable sizing="fixed" .value=${JSON.stringify(value)} style="width:520px;height:320px;--column-size:80px;--row-size:64px;--gap:8px;--animation-duration:0ms">
+      <nve-dashboard rearrangeable sizing="fixed" .value=${value} style="width:520px;height:320px;--column-size:80px;--row-size:64px;--gap:8px;--animation-duration:0ms">
         ${items.map(item => html`<nve-dashboard-panel id=${item.id} min-column-span="1" max-column-span="4"><nve-dashboard-panel-header>${item.id}</nve-dashboard-panel-header><input aria-label=${item.id} value="Draft" /></nve-dashboard-panel>`)}
       </nve-dashboard>
     </div>`);
@@ -56,8 +56,11 @@ describe('dashboard logical grid placement', () => {
 
   const panel = (dashboard: Dashboard, id: string) => dashboard.querySelector<DashboardPanel>(`#${id}`)!;
 
-  const item = (dashboard: Dashboard, id: string): DashboardItem =>
-    JSON.parse(dashboard.value).items.find((record: DashboardItem) => record.id === id);
+  const item = (dashboard: Dashboard, id: string): DashboardItem => {
+    const found = dashboard.value?.items.find(record => record.id === id);
+    assert.isDefined(found);
+    return found;
+  };
 
   const handle = (dashboard: Dashboard, action = 'move') =>
     panel(dashboard, 'a').shadowRoot!.querySelector<HTMLElement>(`.grip > [data-dashboard-action="${action}"]`)!;
@@ -111,7 +114,7 @@ describe('dashboard logical grid placement', () => {
     fixture!.firstElementChild!.setAttribute('dir', 'ltr');
 
     expect(panel(dashboard, 'a').getBoundingClientRect().left).toBeCloseTo(canvas.getBoundingClientRect().left);
-    expect(dashboard.value).toBe(before);
+    expect(dashboard.value).toEqual(before);
     expect(panel(dashboard, 'a').querySelector('input')).toBe(input);
     expect(input.value).toBe('Draft');
   });
@@ -232,7 +235,7 @@ describe('dashboard logical grid placement', () => {
     dashboard.dispatchEvent(event('pointerup', start.x - 176, start.y));
     await stable(dashboard);
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
   });
 
@@ -307,6 +310,6 @@ describe('dashboard logical grid placement', () => {
     dashboard.dispatchEvent(event('pointerup', start.x - 88, start.y));
     await stable(dashboard);
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
   });
 });

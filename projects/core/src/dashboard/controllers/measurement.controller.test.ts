@@ -33,7 +33,7 @@ class ControlledResizeObserver implements ResizeObserver {
 }
 
 class MeasurementTestHost extends LitElement {
-  flow = 'vertical' as const;
+  flow: 'vertical' | 'horizontal' = 'vertical';
   sizing = 'fit' as const;
   tracks = 6;
   readonly previous: (DashboardMetrics | undefined)[] = [];
@@ -137,6 +137,31 @@ describe('dashboard measurement controller', () => {
     expect(host.previous).toEqual([previous]);
     expect(host.measurement.metrics).toMatchObject({ width: 480, height: 400, columnSize: 70, rowSize: 90, gap: 12 });
     expect(frames.pending.size).toBe(0);
+  });
+
+  it.each(['vertical', 'horizontal'] as const)('keeps %s scrollbar changes from invalidating the grid', flow => {
+    host.flow = flow;
+    host.measurement.measure();
+    host.pitchChanged.mockClear();
+
+    const dimension = flow === 'vertical' ? 'clientWidth' : 'clientHeight';
+    const size = viewport[dimension];
+    const clientSize = vi.spyOn(viewport, dimension, 'get').mockReturnValue(size - 12);
+
+    host.measurement.measure();
+
+    expect(host.measurement.metrics?.[flow === 'vertical' ? 'width' : 'height']).toBe(size - 12);
+    expect(host.pitchChanged).not.toHaveBeenCalled();
+
+    clientSize.mockRestore();
+    host.measurement.measure();
+
+    expect(host.pitchChanged).not.toHaveBeenCalled();
+
+    viewport.style[flow === 'vertical' ? 'width' : 'height'] = `${size - 40}px`;
+    host.measurement.measure();
+
+    expect(host.pitchChanged).toHaveBeenCalledOnce();
   });
 
   it('keeps unchanged measurements silent instead of scheduling a continuing frame loop', () => {

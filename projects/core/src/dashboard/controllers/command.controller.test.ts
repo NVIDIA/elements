@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
 import { DashboardCommandController } from './command.controller.js';
-import { serializeDashboardValue } from '../utils/layout.utils.js';
+import { sameDashboardLayout } from '../utils/comparison.utils.js';
 
 import type { DashboardArrangementRequest } from '../utils/intent.types.js';
 
@@ -25,7 +25,7 @@ const initial: DashboardLayout = {
 const proposed: DashboardLayout = { ...initial, items: [{ id: 'a', column: 0, row: 2, columnSpan: 2, rowSpan: 2 }] };
 
 class CommandTestHost extends LitElement {
-  value = serializeDashboardValue(initial);
+  value = initial;
   layout: DashboardLayout | undefined = initial;
   proposal: DashboardLayout | undefined = proposed;
   selected?: string;
@@ -54,11 +54,11 @@ class CommandTestHost extends LitElement {
     getPanels: () => [...this.querySelectorAll<DashboardPanel>('nve-dashboard-panel')],
     getLayout: () => this.layout,
     findLayoutProposal: (layout, id, request) => this.findLayoutProposal(layout, id, request),
-    canCommit: layout => this.commitAllowed && serializeDashboardValue(layout) !== this.value,
+    canCommit: layout => this.commitAllowed && !sameDashboardLayout(layout, this.value),
     cancel: () => this.order.push('cancel'),
     commit: next => {
       this.order.push('commit');
-      this.value = serializeDashboardValue(next);
+      this.value = next;
 
       return true;
     },
@@ -191,7 +191,7 @@ describe('dashboard command controller', () => {
 
     expect(host.commands.isCommandAvailable('--move-down', { value: 'a' })).toBe(true);
 
-    host.value = serializeDashboardValue(proposed);
+    host.value = proposed;
 
     expect(host.commands.isCommandAvailable('--move-down', { value: 'a' })).toBe(false);
     expect(host.commands.isCommandAvailable('--move-down')).toBe(false);

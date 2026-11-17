@@ -29,10 +29,8 @@ export function isDashboardGridPlacement(value: unknown): value is DashboardGrid
   );
 }
 
-export function parseDashboardValue(value: string): DashboardLayout | undefined {
-  if (!value) return undefined;
-
-  const data: unknown = JSON.parse(value);
+export function normalizeDashboardValue(data: unknown): DashboardLayout | undefined {
+  if (data === undefined) return undefined;
 
   if (!isNonNullObject(data) || data.version !== 1 || !Array.isArray(data.items)) {
     throwInvalidArrangement();
@@ -40,7 +38,7 @@ export function parseDashboardValue(value: string): DashboardLayout | undefined 
 
   const grid = parseGrid(data.grid);
   const ids = new Set<string>();
-  const items = data.items.map(item => parseItem(item, grid, ids));
+  const items = Array.from(data.items, item => parseItem(item, grid, ids));
 
   return { version: 1, grid, items };
 }
@@ -80,10 +78,6 @@ function parseItem(value: unknown, grid: DashboardLayout['grid'], ids: Set<strin
 
 function throwInvalidArrangement(): never {
   throw new TypeError('Invalid dashboard arrangement');
-}
-
-export function serializeDashboardValue(layout: DashboardLayout | undefined): string {
-  return layout ? JSON.stringify(layout) : '';
 }
 
 export function createDefaultDashboardLayout(): DashboardLayout {

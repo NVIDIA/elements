@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { doDashboardGridGeometriesOverlap, transposeDashboardGridGeometry } from './geometry.utils.js';
+import { sameDashboardGridPlacement, sameDashboardItems } from './comparison.utils.js';
 
 import type {
   DashboardAxis as Axis,
@@ -132,10 +133,6 @@ function getSnappedPlacement(
   };
 }
 
-function areGridGeometriesEqual(a: DashboardGridGeometry, b: DashboardGridGeometry): boolean {
-  return a.column === b.column && a.row === b.row && a.columnSpan === b.columnSpan && a.rowSpan === b.rowSpan;
-}
-
 function getDisplacedItems(
   candidate: PlacementCandidate,
   items: readonly DashboardItem[],
@@ -165,20 +162,16 @@ function createUnchangedCandidate(items: readonly DashboardItem[], source: Dashb
 }
 
 function getUniqueCandidates(candidates: readonly PlacementCandidate[]): PlacementCandidate[] {
-  const result = new Map<string, PlacementCandidate>();
-
+  const result: PlacementCandidate[] = [];
   for (const candidate of candidates) {
-    const key = JSON.stringify(
-      candidate.items.map(item => [item.id, item.column, item.row, item.columnSpan, item.rowSpan])
-    );
-    const previous = result.get(key);
-
-    if (!previous || candidate.priority < previous.priority) {
-      result.set(key, candidate);
+    const index = result.findIndex(previous => sameDashboardItems(previous.items, candidate.items));
+    if (index < 0) {
+      result.push(candidate);
+    } else if (candidate.priority < result[index]!.priority) {
+      result[index] = candidate;
     }
   }
-
-  return [...result.values()];
+  return result;
 }
 
 function getLocalCandidates(
@@ -231,7 +224,7 @@ function findBestCandidate(
     (a, b) =>
       a.distance - b.distance ||
       direction * (b.rankCoordinate - a.rankCoordinate) ||
-      (areGridGeometriesEqual(a.placedItem, b.placedItem) ? a.priority - b.priority : 0)
+      (sameDashboardGridPlacement(a.placedItem, b.placedItem) ? a.priority - b.priority : 0)
   );
 
   return eligible[0];
@@ -332,7 +325,7 @@ function findPointerPlacementPlan(
   query: Partial<Pick<DashboardPointerPlacementQuery, 'pointerPosition' | 'spacingFraction'>> = {}
 ): PlacementCandidate | undefined {
   const { items, source, tracks, autoSettle } = placement;
-  if (areGridGeometriesEqual(source, aimGeometry)) return createUnchangedCandidate(items, source);
+  if (sameDashboardGridPlacement(source, aimGeometry)) return createUnchangedCandidate(items, source);
 
   const owner = findItemAtPointerPosition(items, source, query);
   if (owner && owner.columnSpan === source.columnSpan && owner.rowSpan === source.rowSpan) {
@@ -386,7 +379,7 @@ function isPointerCandidateAdmissible(
   input: { literal: DashboardGridGeometry; contact?: DashboardItem; context: MovementAxes }
 ): boolean {
   const { literal, contact, context } = input;
-  if (areGridGeometriesEqual(candidate.placedItem, literal)) return true;
+  if (sameDashboardGridPlacement(candidate.placedItem, literal)) return true;
 
   return (
     getDisplacedItems(candidate, placement.items, placement.source).length > 0 &&
@@ -400,7 +393,7 @@ function resolveMovement(
 ): PlacementCandidate | undefined {
   const { items, source, autoSettle } = placement;
   const aimGeometry = intent.kind === 'pointer' ? intent.position.aimGeometry : intent.geometry;
-  if (intent.kind !== 'advance' && areGridGeometriesEqual(source, aimGeometry)) {
+  if (intent.kind !== 'advance' && sameDashboardGridPlacement(source, aimGeometry)) {
     return createUnchangedCandidate(items, source);
   }
   if (intent.kind !== 'advance') {

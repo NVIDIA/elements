@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, emulateClick, removeFixture } from '@internals/testing';
@@ -12,14 +12,14 @@ import type { Dashboard, DashboardLayout, DashboardPanel } from './index.js';
 import './define.js';
 import '@nvidia-elements/core/button/define.js';
 
-const initial = JSON.stringify({
+const initial = {
   version: 1,
   grid: { flow: 'vertical', tracks: 4 },
   items: [
     { id: 'a', column: 0, row: 0, columnSpan: 2, rowSpan: 2 },
     { id: 'b', column: 2, row: 0, columnSpan: 2, rowSpan: 2 }
   ]
-});
+} satisfies DashboardLayout;
 
 describe('dashboard panel fullscreen', () => {
   let fixture: HTMLElement | undefined;
@@ -126,7 +126,7 @@ describe('dashboard panel fullscreen', () => {
       expect(request).toHaveBeenCalledOnce();
       expect(native).toBe(dashboard);
       expect(exit).not.toHaveBeenCalled();
-      expect(dashboard.value).toBe(saved);
+      expect(dashboard.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
 
       for (const panel of dashboard.querySelectorAll('nve-dashboard-panel')) {
@@ -156,7 +156,7 @@ describe('dashboard panel fullscreen', () => {
     expect(control(dashboard)).toBeNull();
     expect(request).not.toHaveBeenCalled();
     expect(exit).not.toHaveBeenCalled();
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 
@@ -188,7 +188,7 @@ describe('dashboard panel fullscreen', () => {
 
     expect(exit).toHaveBeenCalledOnce();
     expect(control(dashboard)).toBeNull();
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 
@@ -218,7 +218,7 @@ describe('dashboard panel fullscreen', () => {
         hiddenPanels: []
       });
       expect(getComputedStyle(canvasElement).backgroundImage).toBe('none');
-      expect(dashboard.value).toBe(saved);
+      expect(dashboard.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
       expect([...dashboard.children]).toEqual(children);
       expect(dashboard.isCommandAvailable('--move-right', { value: 'a' })).toBe(false);
@@ -228,13 +228,14 @@ describe('dashboard panel fullscreen', () => {
       expect(source.shadowRoot!.querySelector('.resize-edge')).toBeNull();
       expect([...source.shadowRoot!.querySelectorAll<HTMLElement>('.grip')].every(grip => grip.inert)).toBe(true);
 
-      const savedLayout: DashboardLayout = JSON.parse(saved);
+      assert.isDefined(saved);
+      const savedLayout: DashboardLayout = saved;
       const restored: DashboardLayout = {
         ...savedLayout,
         items: savedLayout.items.map(item => (item.id === 'a' ? { ...item, row: 2 } : item))
       };
 
-      dashboard.value = JSON.stringify(restored);
+      dashboard.value = restored;
       await stable(dashboard);
 
       expect(getProjection(dashboard, 'a')).toEqual({
@@ -267,7 +268,7 @@ describe('dashboard panel fullscreen', () => {
       expect([input.selectionStart, input.selectionEnd]).toEqual([1, 4]);
       expect(source.querySelector('input')).toBe(input);
       expect(input.value).toBe('Keep fullscreen draft');
-      expect(dashboard.value).toBe(JSON.stringify(restored));
+      expect(dashboard.value).toEqual(restored);
       expect(changed).not.toHaveBeenCalled();
     });
   }
@@ -275,14 +276,14 @@ describe('dashboard panel fullscreen', () => {
   it('keeps the focused exit control visible after a scrolled fixed panel returns to the grid', async () => {
     const { dashboard, changed } = await createDashboardFixture({ sizing: 'fixed' });
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow: 'horizontal', tracks: 4 },
       items: [
         { id: 'a', column: 0, row: 0, columnSpan: 2, rowSpan: 2 },
         { id: 'b', column: 6, row: 2, columnSpan: 2, rowSpan: 2 }
       ]
-    });
+    };
     await stable(dashboard);
 
     const viewport = dashboard.shadowRoot!.querySelector<HTMLElement>('.viewport')!;
@@ -338,7 +339,7 @@ describe('dashboard panel fullscreen', () => {
     expect(target.querySelector('input')).toBe(input);
     expect(input.value).toBe('Retained far-panel draft');
     expect([input.selectionStart, input.selectionEnd]).toEqual([1, 4]);
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 
@@ -357,7 +358,7 @@ describe('dashboard panel fullscreen', () => {
       hiddenPanels: []
     });
     expect(request).toHaveBeenCalledOnce();
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect([...dashboard.children]).toEqual(children);
     expect(changed).not.toHaveBeenCalled();
   });
@@ -386,7 +387,7 @@ describe('dashboard panel fullscreen', () => {
 
     expect(request).toHaveBeenCalledOnce();
     expect(exit).toHaveBeenCalledOnce();
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 
@@ -417,7 +418,7 @@ describe('dashboard panel fullscreen', () => {
     expect(getComputedStyle(peer).display).not.toBe('none');
     peer.querySelector('input')!.focus();
     expect(document.activeElement).toBe(peer.querySelector('input'));
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 
@@ -462,7 +463,7 @@ describe('dashboard panel fullscreen', () => {
       [...dashboard.querySelectorAll('nve-dashboard-panel')].every(panel => getComputedStyle(panel).display !== 'none')
     ).toBe(true);
     expect(dashboard.isCommandAvailable('--exit-fullscreen', { value: 'a' })).toBe(false);
-    expect(dashboard.value).toBe(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 

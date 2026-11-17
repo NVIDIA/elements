@@ -22,47 +22,35 @@ export default { title: 'Elements/Dashboard', component: 'nve-dashboard' };
  */
 export const Default = {
   render: () => html`
-    <div id="default-dashboard-example" nve-layout="column gap:md">
-      <div nve-layout="row gap:md align:space-between align:wrap">
-        <nve-button id="reset-default-layout">Reset layout</nve-button>
-      </div>
-      <nve-dashboard id="default-dashboard" rearrangeable style="height:600px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"hero-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"hero-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"hero-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"hero-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"hero-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
-        <nve-dashboard-panel id="hero-baseline" min-column-span="2" min-row-span="2">
-          <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
-          <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
-          <nve-dashboard-panel-footer>Complete</nve-dashboard-panel-footer>
-        </nve-dashboard-panel>
-        <nve-dashboard-panel id="hero-candidate" min-column-span="2" min-row-span="2">
-          <nve-dashboard-panel-header>Candidate</nve-dashboard-panel-header>
-          <nve-dashboard-panel-content>Current run</nve-dashboard-panel-content>
-          <nve-dashboard-panel-footer>Complete</nve-dashboard-panel-footer>
-        </nve-dashboard-panel>
-        <nve-dashboard-panel id="hero-changes" min-column-span="2" min-row-span="2">
-          <nve-dashboard-panel-header>Changes</nve-dashboard-panel-header>
-          <nve-dashboard-panel-content>Comparison</nve-dashboard-panel-content>
-        </nve-dashboard-panel>
-        <nve-dashboard-panel id="hero-evidence" min-column-span="2" min-row-span="2">
-          <nve-dashboard-panel-header>Evidence</nve-dashboard-panel-header>
-          <nve-dashboard-panel-content>Test cases</nve-dashboard-panel-content>
-        </nve-dashboard-panel>
-        <nve-dashboard-panel id="hero-notes" min-column-span="2" min-row-span="2">
-          <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
-          <nve-dashboard-panel-content>
-            <nve-input>
-              <input aria-label="Notes" value="Review findings." />
-            </nve-input>
-          </nve-dashboard-panel-content>
-        </nve-dashboard-panel>
-      </nve-dashboard>
-      <script type="module">
-        const example = document.querySelector('#default-dashboard-example');
-        const dashboard = example.querySelector('nve-dashboard');
-        const reset = example.querySelector('#reset-default-layout');
-        const initialValue = dashboard.getAttribute('value');
-        reset.addEventListener('click', () => { dashboard.value = initialValue; });
-      </script>
-    </div>
+    <nve-dashboard id="default-dashboard" rearrangeable style="height:600px;--row-size:90px"
+      value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"hero-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"hero-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"hero-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"hero-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"hero-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard-panel id="hero-baseline" min-column-span="2" min-row-span="2">
+        <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
+        <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
+        <nve-dashboard-panel-footer>Complete</nve-dashboard-panel-footer>
+      </nve-dashboard-panel>
+      <nve-dashboard-panel id="hero-candidate" min-column-span="2" min-row-span="2">
+        <nve-dashboard-panel-header>Candidate</nve-dashboard-panel-header>
+        <nve-dashboard-panel-content>Current run</nve-dashboard-panel-content>
+        <nve-dashboard-panel-footer>Complete</nve-dashboard-panel-footer>
+      </nve-dashboard-panel>
+      <nve-dashboard-panel id="hero-changes" min-column-span="2" min-row-span="2">
+        <nve-dashboard-panel-header>Changes</nve-dashboard-panel-header>
+        <nve-dashboard-panel-content>Comparison</nve-dashboard-panel-content>
+      </nve-dashboard-panel>
+      <nve-dashboard-panel id="hero-evidence" min-column-span="2" min-row-span="2">
+        <nve-dashboard-panel-header>Evidence</nve-dashboard-panel-header>
+        <nve-dashboard-panel-content>Test cases</nve-dashboard-panel-content>
+      </nve-dashboard-panel>
+      <nve-dashboard-panel id="hero-notes" min-column-span="2" min-row-span="2">
+        <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
+        <nve-dashboard-panel-content>
+          <nve-input>
+            <input aria-label="Notes" value="Review findings." />
+          </nve-input>
+        </nve-dashboard-panel-content>
+      </nve-dashboard-panel>
+    </nve-dashboard>
   `
 };
 
@@ -79,8 +67,7 @@ export const Rearrangeable = {
           <input type="checkbox" checked />
         </nve-switch>
       </div>
-      <nve-dashboard id="rearrangeable-dashboard" rearrangeable style="height:600px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"rearrangeable-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"rearrangeable-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"rearrangeable-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"rearrangeable-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"rearrangeable-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="rearrangeable-dashboard" rearrangeable style="height:600px;--row-size:90px">
         <nve-dashboard-panel id="rearrangeable-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -112,12 +99,23 @@ export const Rearrangeable = {
         const example = document.querySelector('#rearrangeable-dashboard-example');
         const dashboard = example.querySelector('nve-dashboard');
         const toggle = example.querySelector('#toggle-rearrangeable input');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'rearrangeable-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'rearrangeable-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'rearrangeable-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'rearrangeable-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'rearrangeable-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         toggle.addEventListener('change', () => {
           dashboard.rearrangeable = toggle.checked;
         });
         example.querySelector('#reset-rearrangeable-layout').addEventListener('click', () => {
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -140,8 +138,7 @@ export const Flow = {
           </select>
         </nve-select>
       </div>
-      <nve-dashboard id="flow-dashboard" rearrangeable style="height:600px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"flow-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"flow-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"flow-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"flow-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"flow-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="flow-dashboard" rearrangeable style="height:600px;--row-size:90px">
         <nve-dashboard-panel id="flow-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -173,7 +170,18 @@ export const Flow = {
         const example = document.querySelector('#flow-example');
         const dashboard = example.querySelector('nve-dashboard');
         const select = example.querySelector('#flow-mode');
-        const initialLayout = JSON.parse(dashboard.getAttribute('value'));
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'flow-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'flow-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'flow-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'flow-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'flow-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         // Transpose the cells, keeping application content in the same panels.
         function transposeForFlow(layout, flow) {
           if (layout.grid.flow === flow) return layout;
@@ -190,11 +198,11 @@ export const Flow = {
           };
         }
         select.addEventListener('change', () => {
-          const layout = JSON.parse(dashboard.value);
-          dashboard.value = JSON.stringify(transposeForFlow(layout, select.value));
+          const layout = dashboard.value;
+          dashboard.animateTo(transposeForFlow(layout, select.value));
         });
         example.querySelector('#reset-flow-layout').addEventListener('click', () => {
-          dashboard.value = JSON.stringify(transposeForFlow(initialLayout, select.value));
+          dashboard.animateTo(transposeForFlow(initialValue, select.value));
         });
       </script>
     </div>
@@ -225,8 +233,7 @@ export const Sizing = {
         </div>
       </div>
       <div id="sizing-viewport" style="width:100%">
-        <nve-dashboard id="sizing-dashboard" rearrangeable style="height:600px;--row-size:90px;--column-size:140px"
-          value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"sizing-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"sizing-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"sizing-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"sizing-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"sizing-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+        <nve-dashboard id="sizing-dashboard" rearrangeable style="height:600px;--row-size:90px;--column-size:140px">
           <nve-dashboard-panel id="sizing-baseline" min-column-span="2" min-row-span="2">
             <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
             <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -262,7 +269,18 @@ export const Sizing = {
         const select = example.querySelector('#sizing-mode');
         const range = example.querySelector('#sizing-width');
         const output = example.querySelector('output');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'sizing-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'sizing-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'sizing-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'sizing-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'sizing-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         select.addEventListener('change', () => {
           dashboard.sizing = select.value;
         });
@@ -271,7 +289,7 @@ export const Sizing = {
           output.value = range.value;
         });
         example.querySelector('#reset-sizing-layout').addEventListener('click', () => {
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -295,8 +313,7 @@ export const Guides = {
           </select>
         </nve-select>
       </div>
-      <nve-dashboard id="guided-dashboard" guides="visible" rearrangeable style="height:702px;--row-size:90px;--guide-size:var(--nve-ref-size-200)"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"guided-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"guided-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"guided-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"guided-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"guided-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="guided-dashboard" guides="visible" rearrangeable style="height:702px;--row-size:90px;--guide-size:var(--nve-ref-size-200)">
         <nve-dashboard-panel id="guided-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -328,12 +345,23 @@ export const Guides = {
         const example = document.querySelector('#guides-example');
         const dashboard = example.querySelector('nve-dashboard');
         const select = example.querySelector('#guides-mode');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'guided-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'guided-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'guided-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'guided-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'guided-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         select.addEventListener('change', () => {
           dashboard.guides = select.value;
         });
         example.querySelector('#reset-guides-layout').addEventListener('click', () => {
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -353,8 +381,7 @@ export const AutoSettle = {
           <input type="checkbox" />
         </nve-switch>
       </div>
-      <nve-dashboard id="settle-dashboard" guides="visible" rearrangeable style="height:702px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"settle-baseline","column":0,"row":1,"columnSpan":3,"rowSpan":2},{"id":"settle-candidate","column":3,"row":1,"columnSpan":3,"rowSpan":2},{"id":"settle-changes","column":0,"row":3,"columnSpan":3,"rowSpan":2},{"id":"settle-evidence","column":3,"row":3,"columnSpan":3,"rowSpan":2},{"id":"settle-notes","column":0,"row":5,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="settle-dashboard" guides="visible" rearrangeable style="height:702px;--row-size:90px">
         <nve-dashboard-panel id="settle-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -386,14 +413,25 @@ export const AutoSettle = {
         const example = document.querySelector('#auto-settle-example');
         const dashboard = example.querySelector('nve-dashboard');
         const toggle = example.querySelector('#toggle-auto-settle input');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'settle-baseline', column: 0, row: 1, columnSpan: 3, rowSpan: 2 },
+            { id: 'settle-candidate', column: 3, row: 1, columnSpan: 3, rowSpan: 2 },
+            { id: 'settle-changes', column: 0, row: 3, columnSpan: 3, rowSpan: 2 },
+            { id: 'settle-evidence', column: 3, row: 3, columnSpan: 3, rowSpan: 2 },
+            { id: 'settle-notes', column: 0, row: 5, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         toggle.addEventListener('change', () => {
           dashboard.autoSettle = toggle.checked;
         });
         example.querySelector('#reset-settle-layout').addEventListener('click', () => {
           dashboard.autoSettle = false;
           toggle.checked = false;
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -413,8 +451,7 @@ export const Fullscreenable = {
           <input type="checkbox" checked />
         </nve-switch>
       </div>
-      <nve-dashboard id="fullscreen-dashboard" fullscreenable rearrangeable style="height:600px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"fullscreen-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"fullscreen-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"fullscreen-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"fullscreen-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"fullscreen-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="fullscreen-dashboard" fullscreenable rearrangeable style="height:600px;--row-size:90px">
         <nve-dashboard-panel id="fullscreen-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -446,12 +483,23 @@ export const Fullscreenable = {
         const example = document.querySelector('#fullscreen-dashboard-example');
         const dashboard = example.querySelector('nve-dashboard');
         const toggle = example.querySelector('#toggle-fullscreenable input');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'fullscreen-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'fullscreen-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'fullscreen-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'fullscreen-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'fullscreen-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         toggle.addEventListener('change', () => {
           dashboard.fullscreenable = toggle.checked;
         });
         example.querySelector('#reset-fullscreen-layout').addEventListener('click', () => {
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -588,8 +636,7 @@ export const DynamicPanels = {
           <nve-button id="remove-dynamic-notes" disabled>Remove Notes</nve-button>
         </div>
       </div>
-      <nve-dashboard id="dynamic-dashboard" rearrangeable style="height:400px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"dynamic-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"dynamic-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2}]}'>
+      <nve-dashboard id="dynamic-dashboard" rearrangeable style="height:400px;--row-size:90px">
         <nve-dashboard-panel id="dynamic-baseline" min-column-span="3" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -617,7 +664,15 @@ export const DynamicPanels = {
         const add = example.querySelector('#add-dynamic-notes');
         const remove = example.querySelector('#remove-dynamic-notes');
         const notes = example.querySelector('#dynamic-notes-template').content.firstElementChild;
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'dynamic-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'dynamic-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
 
         add.addEventListener('click', () => {
           dashboard.append(notes);
@@ -632,7 +687,7 @@ export const DynamicPanels = {
         });
 
         example.querySelector('#reset-dynamic-layout').addEventListener('click', () => {
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -652,7 +707,7 @@ export const SaveRestore = {
           <nve-button id="restore-layout">Restore layout</nve-button>
         </div>
       </div>
-      <nve-dashboard id="saved-layout" rearrangeable style="height:600px;--row-size:90px" value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"saved-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"saved-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"saved-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"saved-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"saved-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="saved-layout" rearrangeable style="height:600px;--row-size:90px">
         <nve-dashboard-panel id="saved-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -685,11 +740,22 @@ export const SaveRestore = {
         const save = document.querySelector('#save-layout');
         const restore = document.querySelector('#restore-layout');
         const reset = document.querySelector('#reset-layout');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'saved-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'saved-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'saved-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'saved-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'saved-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         let savedValue = initialValue;
         save.addEventListener('click', () => { savedValue = dashboard.value; });
-        restore.addEventListener('click', () => { dashboard.value = savedValue; });
-        reset.addEventListener('click', () => { dashboard.value = initialValue; });
+        restore.addEventListener('click', () => { dashboard.animateTo(savedValue); });
+        reset.addEventListener('click', () => { dashboard.animateTo(initialValue); });
       </script>
     </div>
   `
@@ -742,8 +808,7 @@ export const CompactStyling = {
           --padding: var(--nve-ref-size-100) var(--nve-ref-size-250);
         }
       </style>
-      <nve-dashboard id="condensed-dashboard" rearrangeable style="height:480px;--gap:0px;--row-size:80px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"condensed-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"condensed-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"condensed-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"condensed-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"condensed-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="condensed-dashboard" rearrangeable style="height:480px;--gap:0px;--row-size:80px">
         <nve-dashboard-panel id="condensed-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header><span nve-text="label sm semibold">Baseline</span></nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -774,9 +839,20 @@ export const CompactStyling = {
       <script type="module">
         const example = document.querySelector('#compact-dashboard-example');
         const dashboard = example.querySelector('nve-dashboard');
-        const initialValue = dashboard.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'condensed-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'condensed-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'condensed-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'condensed-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'condensed-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
         example.querySelector('nve-button').addEventListener('click', () => {
-          dashboard.value = initialValue;
+          dashboard.animateTo(initialValue);
         });
       </script>
     </div>
@@ -851,8 +927,7 @@ export const RightToLeft = {
       <div nve-layout="row gap:md align:space-between align:wrap">
         <nve-button id="reset-rtl-layout">Reset layout</nve-button>
       </div>
-      <nve-dashboard id="rtl-dashboard" dir="rtl" rearrangeable guides="visible" style="height:600px;--row-size:90px"
-        value='{"version":1,"grid":{"flow":"vertical","tracks":6},"items":[{"id":"rtl-baseline","column":0,"row":0,"columnSpan":3,"rowSpan":2},{"id":"rtl-candidate","column":3,"row":0,"columnSpan":3,"rowSpan":2},{"id":"rtl-changes","column":0,"row":2,"columnSpan":3,"rowSpan":2},{"id":"rtl-evidence","column":3,"row":2,"columnSpan":3,"rowSpan":2},{"id":"rtl-notes","column":0,"row":4,"columnSpan":6,"rowSpan":2}]}'>
+      <nve-dashboard id="rtl-dashboard" dir="rtl" rearrangeable guides="visible" style="height:600px;--row-size:90px">
         <nve-dashboard-panel id="rtl-baseline" min-column-span="2" min-row-span="2">
           <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>
           <nve-dashboard-panel-content>Reference run</nve-dashboard-panel-content>
@@ -884,8 +959,19 @@ export const RightToLeft = {
         const example = document.querySelector('#rtl-dashboard-example');
         const dashboard = example.querySelector('nve-dashboard');
         const reset = example.querySelector('#reset-rtl-layout');
-        const initialValue = dashboard.getAttribute('value');
-        reset.addEventListener('click', () => { dashboard.value = initialValue; });
+        const initialValue = {
+          version: 1,
+          grid: { flow: 'vertical', tracks: 6 },
+          items: [
+            { id: 'rtl-baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'rtl-candidate', column: 3, row: 0, columnSpan: 3, rowSpan: 2 },
+            { id: 'rtl-changes', column: 0, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'rtl-evidence', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
+            { id: 'rtl-notes', column: 0, row: 4, columnSpan: 6, rowSpan: 2 }
+          ]
+        };
+        dashboard.value = initialValue;
+        reset.addEventListener('click', () => { dashboard.animateTo(initialValue); });
       </script>
     </div>
   `

@@ -13,7 +13,7 @@ import {
 } from '@nvidia-elements/core/internal';
 
 import { getAnchoredResizeGeometry, getDashboardResizeCorner, isDashboardResizeEdge } from '../utils/geometry.utils.js';
-import { serializeDashboardValue } from '../utils/layout.utils.js';
+import { sameDashboardLayout } from '../utils/comparison.utils.js';
 
 import { DashboardPanel } from '../panel/panel.js';
 
@@ -52,7 +52,7 @@ interface PointerArrangementState {
   readonly initialLayout: DashboardLayout;
   readonly initialMetrics: DashboardMetrics;
   readonly control: HTMLElement;
-  readonly stateKey: string;
+  readonly isArrangementCurrent: () => boolean;
   readonly readingDirection: DashboardReadingDirection;
   intent?: DashboardPointerIntent;
   proposed?: DashboardLayout;
@@ -78,7 +78,7 @@ type PointerArrangementSession = PointerArrangementState & PointerArrangementAct
 
 interface DashboardInteractionDelegate {
   getLayout(): DashboardLayout | undefined;
-  getArrangementStateKey(): string;
+  createArrangementStateCheck(): () => boolean;
   getMetrics(): DashboardMetrics | undefined;
   getViewport(): HTMLElement | undefined;
   isActionAllowed(panel: DashboardPanel, action: DashboardAction): boolean;
@@ -189,7 +189,7 @@ export class DashboardInteractionController {
       initialLayout: layout,
       initialMetrics: metrics,
       control: control.element,
-      stateKey: this.#delegate.getArrangementStateKey(),
+      isArrangementCurrent: this.#delegate.createArrangementStateCheck(),
       readingDirection: this.#host.matches(':dir(rtl)') ? 'rtl' : 'ltr',
       proposed: layout
     };
@@ -230,7 +230,7 @@ export class DashboardInteractionController {
 
   #admit(session: PointerArrangementSession): DashboardLayout | undefined {
     if (
-      session.stateKey !== this.#delegate.getArrangementStateKey() ||
+      !session.isArrangementCurrent() ||
       !session.proposed ||
       !this.#owns({
         panel: session.panel,
@@ -244,9 +244,7 @@ export class DashboardInteractionController {
 
     const admitted = this.#propose(session);
 
-    return admitted && serializeDashboardValue(admitted) === serializeDashboardValue(session.proposed)
-      ? admitted
-      : undefined;
+    return admitted && sameDashboardLayout(admitted, session.proposed) ? admitted : undefined;
   }
 
   #propose(session: PointerArrangementSession) {
@@ -512,7 +510,7 @@ export class DashboardInteractionController {
       return;
     }
 
-    if (session.stateKey !== this.#delegate.getArrangementStateKey()) {
+    if (!session.isArrangementCurrent()) {
       this.cancel();
       return;
     }
@@ -574,7 +572,7 @@ export class DashboardInteractionController {
   #finishPointerMove() {
     if (
       !this.#session ||
-      this.#session.stateKey !== this.#delegate.getArrangementStateKey() ||
+      !this.#session.isArrangementCurrent() ||
       (this.#session.proposed && !this.#admit(this.#session))
     ) {
       this.cancel();

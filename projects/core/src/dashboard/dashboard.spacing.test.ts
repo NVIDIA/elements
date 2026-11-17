@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -58,7 +58,7 @@ describe('dashboard native border spacing', () => {
       { id: 'c', column: 0, row: 2, columnSpan: 4, rowSpan: 2 }
     ];
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow, tracks: 4 },
       items: cells.map(item =>
@@ -66,7 +66,7 @@ describe('dashboard native border spacing', () => {
           ? item
           : { id: item.id, column: item.row, row: item.column, columnSpan: item.rowSpan, rowSpan: item.columnSpan }
       )
-    });
+    };
     await elementIsStable(dashboard);
     await waitOverlap(dashboard, 1);
 
@@ -159,7 +159,7 @@ describe('dashboard native border spacing', () => {
     expect(a.bottom - b.top).toBeCloseTo(1, 2);
     expect(a.right).toBeCloseTo(canvas.getBoundingClientRect().right, 2);
     expect(c.left).toBeLessThan(a.left);
-    expect(JSON.parse(dashboard.value).items).toEqual([
+    expect(dashboard.value?.items).toEqual([
       { id: 'a', column: 0, row: 0, columnSpan: 2, rowSpan: 2 },
       { id: 'b', column: 0, row: 2, columnSpan: 2, rowSpan: 2 },
       { id: 'c', column: 2, row: 0, columnSpan: 2, rowSpan: 4 }
@@ -206,7 +206,7 @@ describe('dashboard native border spacing', () => {
     dashboard.style.setProperty('--gap', '0px');
     await waitOverlap(dashboard, 2);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(dashboard.querySelector('input')).toBe(input);
     expect(input.value).toBe('Retained draft');
   });
@@ -252,12 +252,13 @@ describe('dashboard native border spacing', () => {
     dashboard.remove();
     sheet(3);
 
-    const restored: DashboardLayout = JSON.parse(value);
+    assert.isDefined(value);
+    const restored: DashboardLayout = value;
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       ...restored,
       items: restored.items.map(item => (item.id === 'a' ? { ...item, row: 4 } : item))
-    });
+    };
     dashboard.requestUpdate();
     parent.appendChild(dashboard);
     await waitOverlap(dashboard, 3);

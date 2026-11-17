@@ -18,7 +18,7 @@ import {
   getRevealScrollDelta,
   haveSameGridPitch
 } from '../utils/geometry.utils.js';
-import { serializeDashboardValue } from '../utils/layout.utils.js';
+import { sameDashboardLayout } from '../utils/comparison.utils.js';
 import { isDashboardCatalogueMutation, isDashboardTitleMutation } from '../utils/mutation.utils.js';
 
 import { DashboardPanel } from '../panel/panel.js';
@@ -31,7 +31,6 @@ import type { DashboardAction } from '../utils/intent.types.js';
 import type { DashboardItem, DashboardLayout } from '../dashboard.types.js';
 
 interface DashboardCompositionHost extends HTMLElement, ReactiveControllerHost {
-  readonly value: string;
   readonly sizing: 'fit' | 'fixed';
   readonly container?: 'inset' | 'flat' | 'full';
   readonly fullscreenable: boolean;
@@ -39,6 +38,7 @@ interface DashboardCompositionHost extends HTMLElement, ReactiveControllerHost {
 }
 
 interface DashboardCompositionDelegate {
+  getCommittedLayout(): DashboardLayout | undefined;
   getLayout(): DashboardLayout | undefined;
   getCanonicalLayout(): DashboardLayout | undefined;
   getPreview(): DashboardLayout | undefined;
@@ -56,7 +56,7 @@ interface DashboardPresentationSnapshot {
   panels: WeakMap<DashboardPanel, DashboardItem>;
   fullscreenTargetId?: string;
   metrics?: DashboardMetrics;
-  value: string;
+  committedLayout: DashboardLayout | undefined;
   sizing: 'fit' | 'fixed';
   width: number;
   height: number;
@@ -67,8 +67,9 @@ export class DashboardCompositionController {
   readonly #host: DashboardCompositionHost;
   readonly #delegate: DashboardCompositionDelegate;
   #observer?: MutationObserver;
-  #readingOrderSource?: { value: string; panels: readonly DashboardPanel[] };
+  #readingOrderSource?: { committedLayout: DashboardLayout | undefined; panels: readonly DashboardPanel[] };
   #presentedGeometry?: DashboardPresentationSnapshot;
+  #geometryTransition: 'immediate' | 'animated' = 'animated';
   #ghostCorners: Record<string, string> = {};
 
   constructor(host: DashboardCompositionHost, delegate: DashboardCompositionDelegate) {
@@ -199,10 +200,16 @@ export class DashboardCompositionController {
     return this.#host.shadowRoot?.querySelector<HTMLElement>('.viewport') ?? undefined;
   }
 
+  setGeometryTransition(transition: 'immediate' | 'animated') {
+    this.#geometryTransition = transition;
+  }
+
   present() {
     if (this.catalogueReady && this.#delegate.getLayout()) {
       this.#updateReadingOrder(this.panels);
-      this.#presentSnapshot(this.#getPresentationSnapshot());
+      const snapshot = this.#getPresentationSnapshot();
+      this.#presentSnapshot(snapshot);
+      if (snapshot.metrics) this.#geometryTransition = 'animated';
       return;
     }
 
@@ -221,7 +228,7 @@ export class DashboardCompositionController {
   #presentSnapshot(context: DashboardPresentationSnapshot) {
     const previousFullscreen = this.#presentedGeometry?.fullscreenTargetId;
     const panels = this.panels;
-    const recalibrating = this.#requiresImmediateGeometry(context);
+    const recalibrating = this.#geometryTransition === 'immediate' || this.#requiresImmediateGeometry(context);
 
     if (recalibrating) {
       this.#setGeometryDuration(panels, '0ms');
@@ -271,7 +278,7 @@ export class DashboardCompositionController {
       layout,
       panels,
       metrics,
-      value: this.#host.value,
+      committedLayout: this.#delegate.getCommittedLayout(),
       sizing: this.#host.sizing,
       width,
       height,
@@ -287,7 +294,7 @@ export class DashboardCompositionController {
       !!previous &&
       (context.width !== previous.width || context.height !== previous.height) &&
       !haveSameGridPitch(context.metrics, previous.metrics) &&
-      context.value === previous.value &&
+      context.committedLayout === previous.committedLayout &&
       context.sizing === previous.sizing
     );
   }
@@ -353,14 +360,15 @@ export class DashboardCompositionController {
   #updateReadingOrder(panels: readonly DashboardPanel[]) {
     const previous = this.#readingOrderSource;
     if (
-      previous?.value === this.#host.value &&
+      previous &&
+      previous.committedLayout === this.#delegate.getCommittedLayout() &&
       previous.panels.length === panels.length &&
       panels.every((panel, index) => panel === previous.panels[index])
     ) {
       return;
     }
 
-    this.#readingOrderSource = { value: this.#host.value, panels };
+    this.#readingOrderSource = { committedLayout: this.#delegate.getCommittedLayout(), panels };
 
     const layout = this.#delegate.getLayout();
     if (!layout) return;
@@ -446,7 +454,7 @@ export class DashboardCompositionController {
     if (!this.#delegate.isActionAllowed(panel, action)) return;
 
     const current = this.#delegate.getCanonicalLayout();
-    if (!current || serializeDashboardValue(current) !== serializeDashboardValue(layout)) return;
+    if (!current || !sameDashboardLayout(current, layout)) return;
 
     this.#delegate.measure();
     this.#revealControl({ panel, control: element, action, layout: current });

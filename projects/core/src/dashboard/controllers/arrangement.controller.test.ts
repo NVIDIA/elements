@@ -7,7 +7,6 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
 
 import { DashboardArrangementController } from './arrangement.controller.js';
-import { serializeDashboardValue } from '../utils/layout.utils.js';
 
 import type { DashboardPanel } from '../panel/panel.js';
 
@@ -37,13 +36,18 @@ describe('dashboard arrangement controller', () => {
 
     let panels = [...fixture.querySelectorAll<DashboardPanel>('nve-dashboard-panel')];
     const first = panels[0]!;
-    const host = {
-      value: serializeDashboardValue(initial),
+    const host: {
+      value: DashboardLayout | undefined;
+      rearrangeable: boolean;
+      autoSettle: boolean;
+      matches: () => boolean;
+    } = {
+      value: initial,
       rearrangeable: true,
       autoSettle: false,
       matches: () => false
     };
-    let layout = initial;
+    let layout: DashboardLayout | undefined = initial;
     let ready = true;
     let fullscreen = false;
     const known = new Set(['a', 'b']);
@@ -51,11 +55,12 @@ describe('dashboard arrangement controller', () => {
     const commit = vi.fn((next: DashboardLayout) => {
       order.push('commit');
       layout = next;
-      host.value = serializeDashboardValue(next);
+      host.value = next;
 
       return true;
     });
     const controller = new DashboardArrangementController(host, {
+      getCommittedLayout: () => layout,
       getPanels: () => panels,
       getOwnedPanels: () => panels,
       isReady: () => ready,
@@ -68,6 +73,9 @@ describe('dashboard arrangement controller', () => {
 
     return {
       host,
+      clearLayout: () => {
+        layout = undefined;
+      },
       first,
       controller,
       commit,
@@ -80,6 +88,16 @@ describe('dashboard arrangement controller', () => {
       },
       removePeer: () => {
         panels = [first];
+      },
+      reversePanels: () => {
+        panels = [...panels].reverse();
+      },
+      replacePeer: () => {
+        const peer = panels[1]!;
+        const replacement = document.createElement('nve-dashboard-panel');
+        replacement.id = peer.id;
+        peer.replaceWith(replacement);
+        panels = [first, replacement];
       }
     };
   }
@@ -131,7 +149,7 @@ describe('dashboard arrangement controller', () => {
 
     expect(controller.place('a', destination)).toBe(true);
     expect(order).toEqual(['cancel', 'commit', 'cancel', 'commit']);
-    expect(JSON.parse(host.value).items[0]).toEqual({ id: 'a', ...destination });
+    expect(host.value?.items[0]).toEqual({ id: 'a', ...destination });
   });
 
   it('rejects unknown operations after valid membership and permission checks', async () => {
@@ -193,13 +211,13 @@ describe('dashboard arrangement controller', () => {
     expect(controller.findLayoutProposal(initial, 'a', request)).toBeUndefined();
   });
 
-  it('changes its arrangement state key for policy, constraints, and membership but not content', async () => {
-    const { host, first, controller, removePeer } = await createArrangementFixture();
-    let arrangementStateKey = controller.getArrangementStateKey();
+  it('invalidates captured arrangement state for policy, constraints, and membership but not content', async () => {
+    const { host, first, controller, removePeer, reversePanels, clearLayout } = await createArrangementFixture();
+    let isCurrent = controller.createArrangementStateCheck();
 
     first.append(document.createTextNode('Application content'));
 
-    expect(controller.getArrangementStateKey()).toBe(arrangementStateKey);
+    expect(isCurrent()).toBe(true);
 
     for (const change of [
       () => {
@@ -212,19 +230,43 @@ describe('dashboard arrangement controller', () => {
         first.minColumnSpan = 2;
       },
       () => {
+        first.minRowSpan = 2;
+      },
+      () => {
+        first.maxColumnSpan = 5;
+      },
+      () => {
+        first.maxRowSpan = 5;
+      },
+      () => {
+        first.moveDisabled = true;
+      },
+      () => {
         first.resizeDisabled = true;
       },
       () => {
-        host.value = '';
+        first.dir = 'rtl';
       },
+      () => {
+        host.matches = () => true;
+      },
+      clearLayout,
+      reversePanels,
       removePeer
     ]) {
       change();
 
-      expect(controller.getArrangementStateKey()).not.toBe(arrangementStateKey);
+      expect(isCurrent()).toBe(false);
 
-      arrangementStateKey = controller.getArrangementStateKey();
+      isCurrent = controller.createArrangementStateCheck();
     }
+  });
+
+  it('keeps captured state valid when a peer is replaced with the same ID and constraints', async () => {
+    const { controller, replacePeer } = await createArrangementFixture();
+    const isCurrent = controller.createArrangementStateCheck();
+    replacePeer();
+    expect(isCurrent()).toBe(true);
   });
 
   it('permits a bottom-left anchored placement while movement is disabled and still requires resizing permission', async () => {

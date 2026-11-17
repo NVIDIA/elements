@@ -55,7 +55,7 @@ describe('dashboard composition', () => {
         ?autosettle=${autoSettle}
         rearrangeable
         sizing=${sizing}
-        .value=${JSON.stringify(layout(flow))}
+        .value=${layout(flow)}
         style="width:620px;height:320px;--column-size:160px;--row-size:120px;--gap:8px">
         <nve-dashboard-panel id="notes">
           <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
@@ -167,7 +167,7 @@ describe('dashboard composition', () => {
 
     expect(authoredChange).toHaveBeenCalledWith(input);
     expect(arrangementChange).not.toHaveBeenCalled();
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(input.value).toContain('New notes');
     expect(bodyEnter).toHaveBeenCalledWith(false);
     expect(getComputedStyle(dashboard).touchAction).toBe('auto');
@@ -259,12 +259,12 @@ describe('dashboard composition', () => {
 
     expect(bounds.top).toBeGreaterThanOrEqual(visible.top - 1);
     expect(bounds.bottom).toBeLessThanOrEqual(visible.bottom + 1);
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
 
     await userEvent.keyboard('{Escape}');
     await settle(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
   });
 
   it('respects application focus chosen by the committed change handler', async () => {
@@ -307,7 +307,7 @@ describe('dashboard composition', () => {
     expect(document.activeElement).toBe(input);
     expect(panel.getBoundingClientRect().top).toBeGreaterThan(origin);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(change).toHaveBeenCalledOnce();
   });
 
@@ -344,7 +344,7 @@ describe('dashboard composition', () => {
           expect(document.activeElement).toBe(outside);
         }
 
-        expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').row).toBe(2);
+        expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.row).toBe(2);
         expect(change).toHaveBeenCalledOnce();
         expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
 
@@ -388,7 +388,7 @@ describe('dashboard composition', () => {
 
       expect(dashboard.querySelector('#notes')).not.toBe(panel);
       expect(document.activeElement).toBe(outside);
-      expect(dashboard.value).toBe(committed);
+      expect(dashboard.value).toEqual(committed);
       expect(change).toHaveBeenCalledOnce();
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
     });
@@ -418,7 +418,7 @@ describe('dashboard composition', () => {
 
       expect(change).toHaveBeenCalledTimes(2);
       expect(notes.shadowRoot!.activeElement).toBe(inner);
-      expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes')).toMatchObject({
+      expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')).toMatchObject({
         columnSpan: 2,
         rowSpan: 3
       });
@@ -446,7 +446,7 @@ describe('dashboard composition', () => {
         await settle(dashboard);
 
         expect(change).toHaveBeenCalledOnce();
-        expect(dashboard.value).not.toBe(value);
+        expect(dashboard.value).not.toEqual(value);
         expect(document.activeElement).toBe(panel.querySelector('input'));
       });
     }
@@ -464,7 +464,7 @@ describe('dashboard composition', () => {
       panel.querySelector('input')!.focus();
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
     });
 
@@ -482,7 +482,7 @@ describe('dashboard composition', () => {
         const next = cases.shadowRoot!.querySelector<HTMLElement>('[data-dashboard-action="move"]')!;
         const capture = vi.spyOn(dashboard, 'setPointerCapture').mockImplementation(() => {});
         const change = vi.fn();
-        const restored = JSON.stringify({
+        const restored: DashboardLayout = {
           ...layout(),
           grid: { flow: 'vertical', tracks: 6 },
           items: layout().items.map(item => {
@@ -491,7 +491,7 @@ describe('dashboard composition', () => {
 
             return item;
           })
-        });
+        };
 
         dashboard.addEventListener('change', event => {
           if (event.target !== dashboard) return;
@@ -525,9 +525,9 @@ describe('dashboard composition', () => {
         expect(capture).toHaveBeenCalledTimes(mutation === 'restore' ? 1 : 0);
 
         if (mutation === 'remove') {
-          expect(
-            JSON.parse(dashboard.value).items.map((item: DashboardLayout['items'][number]) => item.id)
-          ).not.toContain('cases');
+          expect(dashboard.value?.items.map((item: DashboardLayout['items'][number]) => item.id)).not.toContain(
+            'cases'
+          );
         }
 
         if (mutation === 'restore') {
@@ -548,7 +548,7 @@ describe('dashboard composition', () => {
         expect(change).toHaveBeenCalledTimes(changeCount);
 
         if (mutation === 'restore') {
-          expect(JSON.parse(dashboard.value).items).toEqual([
+          expect(dashboard.value?.items).toEqual([
             { id: 'notes', column: 0, row: 0, columnSpan: 2, rowSpan: 2 },
             { id: 'cases', column: 4, row: 0, columnSpan: 2, rowSpan: 2 },
             { id: 'baseline', column: 0, row: 2, columnSpan: 2, rowSpan: 2 }
@@ -582,7 +582,7 @@ describe('dashboard composition', () => {
         next.dispatchEvent(pointer('pointerdown', x, y));
         await rendered(dashboard);
 
-        expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').row).toBe(2);
+        expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.row).toBe(2);
         expect(change).toHaveBeenCalledOnce();
 
         dashboard.dispatchEvent(pointer('pointercancel', x, y));
@@ -609,7 +609,7 @@ describe('dashboard composition', () => {
     await settle(dashboard);
 
     expect(document.activeElement).toBe(input);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
   });
 
   it('cancels a pointer preview before silently restoring a new external value', async () => {
@@ -628,30 +628,30 @@ describe('dashboard composition', () => {
 
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).not.toBeNull();
 
-    const restored = JSON.stringify({
+    const restored = {
       ...layout(),
       items: [
         { id: 'notes', column: 0, row: 3, columnSpan: 2, rowSpan: 2 },
         { id: 'cases', column: 2, row: 0, columnSpan: 2, rowSpan: 2 },
         { id: 'baseline', column: 0, row: 6, columnSpan: 2, rowSpan: 2 }
       ]
-    });
-    const canonical = JSON.stringify({
+    };
+    const canonical = {
       ...layout(),
       items: layout().items.map(item => (item.id === 'baseline' ? { ...item, row: 2 } : item))
-    });
+    };
 
     dashboard.value = restored;
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(canonical);
+    expect(dashboard.value).toEqual(canonical);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
     expect(change).not.toHaveBeenCalled();
 
     dashboard.dispatchEvent(pointer('pointerup', x + 314, y));
     await userEvent.keyboard('{Enter}');
 
-    expect(dashboard.value).toBe(canonical);
+    expect(dashboard.value).toEqual(canonical);
     expect(change).not.toHaveBeenCalled();
   });
 
@@ -676,12 +676,12 @@ describe('dashboard composition', () => {
     await rendered(dashboard);
 
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).not.toBeNull();
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
 
     dashboard.dispatchEvent(pointer('pointerup', x + 314, y));
     await settle(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(panel.contains(liveContent)).toBe(true);
     expect(change).toHaveBeenCalledOnce();
   });
@@ -709,7 +709,7 @@ describe('dashboard composition', () => {
 
     expect(panelBounds.left).toBeGreaterThanOrEqual(bounds.left - 1);
     expect(panelBounds.right).toBeLessThanOrEqual(bounds.right + 1);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
   });
 
   for (const flow of ['vertical', 'horizontal'] as const) {
@@ -735,7 +735,7 @@ describe('dashboard composition', () => {
       dashboard.dispatchEvent(pointer('pointermove', x + target.left - source.left, y));
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(cases.getBoundingClientRect().left).toBeCloseTo(source.left);
       expect(cases.getBoundingClientRect().top).toBeCloseTo(source.top);
 
@@ -746,7 +746,7 @@ describe('dashboard composition', () => {
       expect(notes.getBoundingClientRect().top).toBeCloseTo(source.top);
       expect(cases.getBoundingClientRect().left).toBeCloseTo(target.left);
       expect(cases.getBoundingClientRect().top).toBeCloseTo(target.top);
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
     });
   }
@@ -776,7 +776,7 @@ describe('dashboard composition', () => {
       dashboard.dispatchEvent(pointer('pointerup', x, y + 128));
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
     });
   }
@@ -821,7 +821,7 @@ describe('dashboard composition', () => {
 
       dashboard.dispatchEvent(pointer('pointerup', x, y + 128));
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
 
       await settle(dashboard);
@@ -919,7 +919,7 @@ describe('dashboard composition', () => {
 
     expect(document.activeElement).not.toBe(column);
     expect(grid.contains(document.activeElement)).toBe(true);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(changed).not.toHaveBeenCalled();
   });
 });

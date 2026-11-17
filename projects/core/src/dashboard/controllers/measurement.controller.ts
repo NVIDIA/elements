@@ -4,6 +4,7 @@
 import { isServer, type ReactiveControllerHost } from 'lit';
 
 import { haveSameGridPitch, resolveDashboardMetrics } from '../utils/geometry.utils.js';
+import { sameDashboardMetrics } from '../utils/comparison.utils.js';
 
 import type { DashboardMetrics } from '../utils/geometry.utils.js';
 
@@ -26,6 +27,7 @@ export class DashboardMeasurementController {
   readonly #host: DashboardMeasurementHost;
   readonly #delegate: DashboardMeasurementDelegate;
   #metrics?: DashboardMetrics;
+  #pitch?: DashboardMetrics;
   #resizeObserver?: ResizeObserver;
   #resizeFrame?: number;
   #borderTargets = new Set<HTMLElement>();
@@ -129,7 +131,7 @@ export class DashboardMeasurementController {
     const spacing = gap.getBoundingClientRect();
     const grid = this.#delegate.getGrid();
 
-    return resolveDashboardMetrics({
+    const input = {
       ...grid,
       sizing: this.#delegate.getSizing(),
       width: viewport.clientWidth,
@@ -138,7 +140,14 @@ export class DashboardMeasurementController {
       rowSize: box.height,
       gap: spacing.width,
       overlap: spacing.height
-    });
+    };
+    const metrics = resolveDashboardMetrics(input);
+
+    // A preview's scrollbars must not invalidate its starting grid.
+    const pitch =
+      metrics && resolveDashboardMetrics({ ...input, width: viewport.offsetWidth, height: viewport.offsetHeight });
+
+    return { metrics, pitch };
   }
 
   #scheduleMeasure() {
@@ -156,12 +165,16 @@ export class DashboardMeasurementController {
   measure() {
     this.#updateBorderWidth();
 
-    const next = this.#readMetrics();
-    if (JSON.stringify(next) === JSON.stringify(this.#metrics)) return;
+    const measurement = this.#readMetrics();
+    const next = measurement?.metrics;
+    const pitch = measurement?.pitch;
 
-    if (!haveSameGridPitch(next, this.#metrics)) {
+    if (pitch !== this.#pitch && !haveSameGridPitch(pitch, this.#pitch)) {
       this.#delegate.pitchChanged();
     }
+
+    this.#pitch = pitch;
+    if (sameDashboardMetrics(next, this.#metrics)) return;
 
     this.#metrics = next;
     this.#host.requestUpdate();

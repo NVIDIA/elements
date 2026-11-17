@@ -8,6 +8,7 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 
 import { DashboardInteractionController } from './interaction.controller.js';
 import { resolveDashboardTarget } from '../utils/movement.utils.js';
+import { sameDashboardLayout } from '../utils/comparison.utils.js';
 
 import type { DashboardPointerPresentation } from './interaction.controller.js';
 
@@ -22,11 +23,11 @@ class InteractionTestHost extends LitElement {
     items: [{ id: 'notes', column: 0, row: 0, columnSpan: 2, rowSpan: 2 }]
   };
   presentation?: DashboardPointerPresentation;
-  arrangementStateKey = 'current arrangement';
+  arrangementRevision = 0;
   permitted = true;
   readonly metrics = { columnSize: 149, rowSize: 120, gap: 8, width: 620, height: 320 };
   readonly commit = vi.fn((next: DashboardLayout) => {
-    if (JSON.stringify(next) === this.value) return false;
+    if (sameDashboardLayout(next, this.value)) return false;
 
     this.layout = next;
 
@@ -49,7 +50,10 @@ class InteractionTestHost extends LitElement {
   readonly announce = vi.fn();
   readonly interaction = new DashboardInteractionController(this, {
     getLayout: () => this.layout,
-    getArrangementStateKey: () => this.arrangementStateKey,
+    createArrangementStateCheck: () => {
+      const revision = this.arrangementRevision;
+      return () => revision === this.arrangementRevision;
+    },
     getMetrics: () => this.metrics,
     getViewport: () => this.shadowRoot?.querySelector<HTMLElement>('.viewport') ?? undefined,
     isActionAllowed: () => this.permitted,
@@ -66,7 +70,7 @@ class InteractionTestHost extends LitElement {
   });
 
   get value() {
-    return JSON.stringify(this.layout);
+    return this.layout;
   }
 
   render() {
@@ -203,7 +207,7 @@ describe('DashboardInteractionController', () => {
 
           expect(host.value).not.toBe(value);
 
-          const placed = JSON.parse(host.value).items.find((item: { id: string }) => item.id === 'notes');
+          const placed = host.value.items.find((item: { id: string }) => item.id === 'notes');
 
           expect(placed).toEqual(expectedPlacement);
           expect(change).toHaveBeenCalledOnce();
@@ -415,7 +419,7 @@ describe('DashboardInteractionController', () => {
 
     expect(host.presentation?.preview).toBe(true);
 
-    host.arrangementStateKey = 'Changed arrangement permissions';
+    host.arrangementRevision++;
     host.dispatchEvent(pointer('pointerup', x + 314, y));
 
     expect(host.presentation).toBeUndefined();

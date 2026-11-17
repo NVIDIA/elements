@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -50,7 +50,7 @@ describe('dashboard live membership', () => {
 
   async function createDashboard() {
     fixture = await createFixture(html`
-      <nve-dashboard rearrangeable fullscreenable .value=${JSON.stringify(initial)} style="width:640px;height:360px;--row-size:64px;--animation-duration:0ms;--gap:8px">
+      <nve-dashboard rearrangeable fullscreenable .value=${initial} style="width:640px;height:360px;--row-size:64px;--animation-duration:0ms;--gap:8px">
         <nve-dashboard-panel id="a" min-column-span="2"><nve-dashboard-panel-header>First</nve-dashboard-panel-header><input aria-label="First draft" value="Retained draft" /></nve-dashboard-panel>
         <nve-dashboard-panel id="b" min-column-span="2"><nve-dashboard-panel-header>Second</nve-dashboard-panel-header>Second content</nve-dashboard-panel>
       </nve-dashboard>
@@ -78,7 +78,8 @@ describe('dashboard live membership', () => {
   }
 
   function findItem(dashboard: Dashboard, id: string) {
-    const layout: DashboardLayout = JSON.parse(dashboard.value);
+    assert.isDefined(dashboard.value);
+    const layout: DashboardLayout = dashboard.value;
     return layout.items.find(candidate => candidate.id === id);
   }
 
@@ -166,10 +167,10 @@ describe('dashboard live membership', () => {
     const third = createPanel('c');
 
     dashboard.append(third);
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       ...initial,
       items: [...initial.items, { id: 'c', column: 0, row: 4, columnSpan: 4, rowSpan: 2 }]
-    });
+    };
     dashboard.autoSettle = true;
     await stable(dashboard);
 
@@ -245,10 +246,10 @@ describe('dashboard live membership', () => {
 
       dashboard.addEventListener('change', change);
       dashboard.prepend(newcomer);
-      dashboard.value = JSON.stringify(deferred);
+      dashboard.value = deferred;
       await stable(dashboard);
 
-      expect(JSON.parse(dashboard.value)).toEqual(deferred);
+      expect(dashboard.value).toEqual(deferred);
       expect(getBounds(first)).toEqual(previous);
       expect(newcomer.getBoundingClientRect().width).toBe(0);
       expect(newcomer.hidden).toBe(false);
@@ -260,7 +261,7 @@ describe('dashboard live membership', () => {
       newcomer.id = 'fresh';
       await stable(dashboard);
 
-      expect(JSON.parse(dashboard.value)).toEqual(deferred);
+      expect(dashboard.value).toEqual(deferred);
       expect(newcomer.getBoundingClientRect().width).toBeGreaterThan(0);
       expect(first.querySelector('input')!.value).toBe('Retained draft');
       expect(input.value).toBe('Application draft');
@@ -286,11 +287,11 @@ describe('dashboard live membership', () => {
 
     dashboard.addEventListener('change', change);
     dashboard.append(newcomer);
-    dashboard.value = JSON.stringify(requested);
+    dashboard.value = requested;
     newcomer.id = 'fresh';
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value)).toEqual(requested);
+    expect(dashboard.value).toEqual(requested);
     expect(getBounds(first)).toEqual(previous);
     expect(newcomer.getBoundingClientRect().width).toBe(0);
     expect(change).not.toHaveBeenCalled();
@@ -310,14 +311,15 @@ describe('dashboard live membership', () => {
     const value = dashboard.value;
 
     expect(() => {
-      dashboard.value = JSON.stringify({ ...initial, items: [{ column: 0, row: 0, columnSpan: 2, rowSpan: 2 }] });
+      // @ts-expect-error -- Missing identity deliberately exercises runtime validation.
+      dashboard.value = { ...initial, items: [{ column: 0, row: 0, columnSpan: 2, rowSpan: 2 }] };
     }).toThrow(TypeError);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
 
     expect(() => {
-      dashboard.value = JSON.stringify({ ...initial, grid: { flow: 'vertical', tracks: 1 }, items: [] });
+      dashboard.value = { ...initial, grid: { flow: 'vertical', tracks: 1 }, items: [] };
     }).toThrow(RangeError);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
   });
 
   it('releases an empty presentation and places a later catalog without old DOM ownership', async () => {
@@ -327,7 +329,7 @@ describe('dashboard live membership', () => {
     dashboard.replaceChildren();
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value).items).toEqual([]);
+    expect(dashboard.value?.items).toEqual([]);
 
     const newcomer = createPanel('fresh');
     const placement = { column: 2, row: 6, columnSpan: 2, rowSpan: 2 };
@@ -349,7 +351,7 @@ describe('dashboard live membership', () => {
     dashboard.querySelector('#b')!.remove();
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value).items).toEqual([initial.items[0]]);
+    expect(dashboard.value?.items).toEqual([initial.items[0]]);
     expect(change).toHaveBeenCalledOnce();
   });
 
@@ -384,7 +386,7 @@ describe('dashboard live membership', () => {
     dashboard.append(createPanel('b'));
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value)).toEqual(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(change).not.toHaveBeenCalled();
   });
 
@@ -392,13 +394,13 @@ describe('dashboard live membership', () => {
     fixture = await createFixture(html`<div></div>`);
     const dashboard = document.createElement('nve-dashboard');
 
-    dashboard.value = JSON.stringify(initial);
-    expect(JSON.parse(dashboard.value)).toEqual(initial);
+    dashboard.value = initial;
+    expect(dashboard.value).toEqual(initial);
 
     fixture.append(dashboard);
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value)).toEqual({ ...initial, items: [] });
+    expect(dashboard.value).toEqual({ ...initial, items: [] });
 
     dashboard.append(createPanel('b'));
     await stable(dashboard);
@@ -411,16 +413,16 @@ describe('dashboard live membership', () => {
 
     dashboard.remove();
     dashboard.replaceChildren();
-    dashboard.value = JSON.stringify(initial);
+    dashboard.value = initial;
     await dashboard.updateComplete;
 
-    expect(JSON.parse(dashboard.value)).toEqual(initial);
+    expect(dashboard.value).toEqual(initial);
 
     dashboard.append(createPanel('a'), createPanel('b'));
     fixture!.append(dashboard);
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value)).toEqual(initial);
+    expect(dashboard.value).toEqual(initial);
   });
 
   it('keeps hidden ownership without allowing constraints or placement to obstruct visible panels', async () => {
@@ -463,10 +465,10 @@ describe('dashboard live membership', () => {
 
     hidden.hidden = true;
     dashboard.append(hidden);
-    dashboard.value = JSON.stringify(initial);
+    dashboard.value = initial;
     await stable(dashboard);
 
-    expect(JSON.parse(dashboard.value)).toEqual(initial);
+    expect(dashboard.value).toEqual(initial);
 
     hidden.id = 'hidden';
     await stable(dashboard);
@@ -521,7 +523,7 @@ describe('dashboard live membership', () => {
     dashboard.dispatchEvent(pointer('pointerup', end.x, end.y));
     await stable(dashboard);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(getBounds(second)).toEqual(previous);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
     expect(change).not.toHaveBeenCalled();
@@ -539,7 +541,7 @@ describe('dashboard live membership', () => {
     dashboard.dispatchEvent(pointer('pointerup', end.x, end.y));
     await stable(dashboard);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
     expect(change).not.toHaveBeenCalled();
   });
@@ -564,7 +566,7 @@ describe('dashboard live membership', () => {
     dashboard.dispatchEvent(pointer('pointerup', end.x, end.y));
     await stable(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(change).toHaveBeenCalledOnce();
   });
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -31,7 +31,10 @@ describe('dashboard spatial application behavior', () => {
     vi.restoreAllMocks();
   });
 
-  const value = (dashboard: Dashboard): DashboardLayout => JSON.parse(dashboard.value);
+  function value(dashboard: Dashboard): DashboardLayout {
+    assert.isDefined(dashboard.value);
+    return dashboard.value;
+  }
 
   const panel = (dashboard: Dashboard, id: string) => dashboard.querySelector<DashboardPanel>(`#${id}`)!;
 
@@ -64,7 +67,7 @@ describe('dashboard spatial application behavior', () => {
     };
 
     fixture =
-      await createFixture(html`<nve-dashboard id="spatial-dashboard" rearrangeable sizing="fixed" ?autosettle=${options.autoSettle} .value=${JSON.stringify(initial)} style="width:720px;height:560px;--column-size:72px;--row-size:56px;--gap:8px;--animation-duration:0ms">
+      await createFixture(html`<nve-dashboard id="spatial-dashboard" rearrangeable sizing="fixed" ?autosettle=${options.autoSettle} .value=${initial} style="width:720px;height:560px;--column-size:72px;--row-size:56px;--gap:8px;--animation-duration:0ms">
       ${items.map(item => html`<nve-dashboard-panel id=${item.id}><nve-dashboard-panel-header>${item.id}<button slot="suffix">Action</button></nve-dashboard-panel-header><input aria-label=${item.id} value="Draft" /></nve-dashboard-panel>`)}</nve-dashboard>`);
 
     const dashboard = fixture.querySelector<Dashboard>('nve-dashboard')!;
@@ -197,7 +200,7 @@ describe('dashboard spatial application behavior', () => {
               : { column: 2, row: coordinate, columnSpan: 2, rowSpan: 3 };
 
           expect(ghost(dashboard)).toEqual(expected);
-          expect(dashboard.value).toBe(initial);
+          expect(dashboard.value).toEqual(initial);
           expect(change).not.toHaveBeenCalled();
 
           dashboard.dispatchEvent(sample('pointerup', point));
@@ -375,14 +378,14 @@ describe('dashboard spatial application behavior', () => {
           ? item
           : { id: item.id, column: item.row, row: item.column, columnSpan: item.rowSpan, rowSpan: item.columnSpan };
 
-      dashboard.value = JSON.stringify({
+      dashboard.value = {
         version: 1,
         grid: { flow, tracks: 6 },
         items: [
           { id: 'source', column: 3, row: 2, columnSpan: 3, rowSpan: 2 },
           { id: 'peer', column: 3, row: 0, columnSpan: 3, rowSpan: 2 }
         ].map(transpose)
-      });
+      };
       await stable(dashboard);
 
       change.mockClear();
@@ -395,7 +398,7 @@ describe('dashboard spatial application behavior', () => {
       await userEvent.keyboard(`{Shift>}{${key}}{/Shift}`);
       await stable(dashboard);
 
-      expect(dashboard.value).toBe(before);
+      expect(dashboard.value).toEqual(before);
       expect(change).not.toHaveBeenCalled();
 
       await userEvent.keyboard('{Home}');
@@ -410,7 +413,7 @@ describe('dashboard spatial application behavior', () => {
       await userEvent.keyboard(`{Shift>}{${key}}{/Shift}`);
       await stable(dashboard);
 
-      expect(dashboard.value).toBe(committed);
+      expect(dashboard.value).toEqual(committed);
       expect(change).toHaveBeenCalledOnce();
     });
   }
@@ -452,7 +455,7 @@ describe('dashboard spatial application behavior', () => {
       await stable(dashboard);
 
       expect(dashboard.shadowRoot!.querySelector('.start-cue')).toBeNull();
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect([viewport.clientWidth, viewport.clientHeight]).toEqual(before);
     }
   );
@@ -493,7 +496,7 @@ describe('dashboard spatial application behavior', () => {
     expect(value(dashboard)).toEqual(expected);
     expect(change).toHaveBeenCalledTimes(2);
 
-    dashboard.value = JSON.stringify(afterChanges);
+    dashboard.value = afterChanges;
     await stable(dashboard);
     await invoke(dashboard, '--move-to-start', { value: 'evidence' });
 
@@ -533,7 +536,7 @@ describe('dashboard spatial application behavior', () => {
     dashboard.dispatchEvent(sample('pointerup', end));
     await stable(dashboard);
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(change).not.toHaveBeenCalled();
 
     const next = press(dashboard, 'lower');
@@ -543,7 +546,7 @@ describe('dashboard spatial application behavior', () => {
     dashboard.dispatchEvent(sample('pointercancel', next.start));
     await stable(dashboard);
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(peers()).toEqual(originalPeers);
     expect(change).not.toHaveBeenCalled();
   });
@@ -560,7 +563,7 @@ describe('dashboard spatial application behavior', () => {
     await invoke(dashboard, '--move-down', { value: source.id });
     await invoke(dashboard, '--increase-height', { value: source.id });
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(change).not.toHaveBeenCalled();
 
     dashboard.rearrangeable = true;
@@ -676,7 +679,7 @@ describe('dashboard spatial application behavior', () => {
 
       await invoke(dashboard, '--move-to-start', { value: 'source', placement });
 
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(change).not.toHaveBeenCalled();
 
       await invoke(dashboard, '--move-to-start', { value: 'source' });

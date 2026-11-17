@@ -52,7 +52,7 @@ describe('dashboard value', () => {
         ?autosettle=${autoSettle}
         rearrangeable
         sizing=${sizing}
-        .value=${JSON.stringify(layout(flow))}
+        .value=${layout(flow)}
         style="width:620px;height:320px;--column-size:160px;--row-size:120px;--gap:8px">
         <nve-dashboard-panel id="notes">
           <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
@@ -130,6 +130,39 @@ describe('dashboard value', () => {
     });
   }
 
+  it.each(['immediate', 'animated'] as const)('restores %s geometry silently', async transition => {
+    const dashboard = await createDashboard();
+    const change = vi.fn();
+    const target = layout();
+    target.items[0]!.column = 2;
+    target.items[1]!.column = 0;
+    target.items[2]!.row = 2;
+    dashboard.style.setProperty('--animation-duration', '10s');
+    dashboard.addEventListener('change', change);
+
+    if (transition === 'animated') dashboard.animateTo(target);
+    else dashboard.value = target;
+    await rendered(dashboard);
+
+    const animations = [...dashboard.querySelectorAll('nve-dashboard-panel')].flatMap(panel =>
+      panel
+        .getAnimations()
+        .filter(animation => animation instanceof CSSTransition && animation.transitionProperty === 'left')
+    );
+    expect(animations.length > 0).toBe(transition === 'animated');
+    expect(dashboard.value).toEqual(target);
+    expect(change).not.toHaveBeenCalled();
+
+    // Immediate assignment also finishes geometry that is already transitioning.
+    dashboard.value = layout();
+    await rendered(dashboard);
+    expect(
+      [...dashboard.querySelectorAll('nve-dashboard-panel')]
+        .flatMap(panel => panel.getAnimations())
+        .filter(animation => animation instanceof CSSTransition && animation.transitionProperty === 'left')
+    ).toHaveLength(0);
+  });
+
   it('rejects invalid restoration atomically and keeps no-op and rejected placement silent', async () => {
     const dashboard = await createDashboard();
     const value = dashboard.value;
@@ -139,9 +172,9 @@ describe('dashboard value', () => {
     dashboard.addEventListener('change', change);
 
     expect(() => {
-      dashboard.value = '{invalid';
+      Reflect.set(dashboard, 'value', { version: 2 });
     }).toThrow();
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(dashboard.querySelector('input')).toBe(input);
 
     dashboard.place('notes', { column: 0, row: 0, columnSpan: 2, rowSpan: 2 });
@@ -149,7 +182,7 @@ describe('dashboard value', () => {
     expect(dashboard.place('notes', { column: 4, row: 0, columnSpan: 2, rowSpan: 2 })).toBe(false);
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(change).not.toHaveBeenCalled();
   });
 
@@ -213,7 +246,7 @@ describe('dashboard value', () => {
   it('applies a reentrant arrow to canonical restored geometry before the next host update', async () => {
     const dashboard = await createDashboard();
     const initial = dashboard.value;
-    const saved = JSON.stringify({
+    const saved = {
       version: 1,
       grid: { flow: 'vertical', tracks: 4 },
       items: [
@@ -221,7 +254,7 @@ describe('dashboard value', () => {
         { id: 'cases', column: 2, row: 0, columnSpan: 2, rowSpan: 3 },
         { id: 'baseline', column: 0, row: 1000, columnSpan: 4, rowSpan: 2 }
       ]
-    });
+    } satisfies DashboardLayout;
     const control = dashboard
       .querySelector('#notes')!
       .shadowRoot!.querySelector<HTMLElement>('[data-dashboard-action="move"]')!;
@@ -262,14 +295,14 @@ describe('dashboard value', () => {
     expect(dashboard.place('cases', { column: 0, row: 0, columnSpan: 2, rowSpan: 2 })).toBe(true);
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(expectedValue);
+    expect(dashboard.value).toEqual(expectedValue);
     expect(state()).toEqual(expected);
     expect(change).toHaveBeenCalledTimes(2);
 
     await userEvent.keyboard('{Escape}');
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(expectedValue);
+    expect(dashboard.value).toEqual(expectedValue);
   });
 
   it('normalizes current saved records silently while discarding absent IDs and keeping edited input', async () => {
@@ -287,26 +320,26 @@ describe('dashboard value', () => {
         { id: 'absent', column: 0, row: 999998, columnSpan: 4, rowSpan: 2 }
       ]
     };
-    const serialized = JSON.stringify(saved);
+    const expectedSaved = structuredClone(saved);
     const change = vi.fn();
 
     dashboard.addEventListener('change', change);
-    dashboard.value = serialized;
+    dashboard.value = saved;
     await settle(dashboard);
 
-    expect(JSON.parse(dashboard.value).items).toEqual([
+    expect(dashboard.value?.items).toEqual([
       { id: 'notes', column: 0, row: 0, columnSpan: 2, rowSpan: 2 },
       { id: 'cases', column: 2, row: 0, columnSpan: 2, rowSpan: 2 },
       { id: 'baseline', column: 0, row: 2, columnSpan: 2, rowSpan: 2 }
     ]);
-    expect(JSON.stringify(saved)).toBe(serialized);
+    expect(saved).toEqual(expectedSaved);
 
     const canonical = dashboard.value;
 
     dashboard.value = canonical;
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(canonical);
+    expect(dashboard.value).toEqual(canonical);
     expect(dashboard.querySelector('input')).toBe(input);
     expect(input.value).toBe('Unsaved application finding');
     expect(change).not.toHaveBeenCalled();
@@ -316,7 +349,7 @@ describe('dashboard value', () => {
     const dashboard = await createDashboard('vertical', 'fit', false);
 
     expect(dashboard.hasAttribute('autosettle')).toBe(false);
-    expect(JSON.parse(dashboard.value)).toEqual(layout());
+    expect(dashboard.value).toEqual(layout());
 
     const change = vi.fn();
 
@@ -328,13 +361,13 @@ describe('dashboard value', () => {
       items: base.items.map((item, index) => (index === 2 ? { ...item, row: 100000 } : item))
     };
 
-    dashboard.value = JSON.stringify(saved);
+    dashboard.value = saved;
 
-    expect(JSON.parse(dashboard.value)).toEqual(saved);
+    expect(dashboard.value).toEqual(saved);
 
     await settle(dashboard);
 
-    expect(JSON.parse(dashboard.value)).toEqual(saved);
+    expect(dashboard.value).toEqual(saved);
     expect(change).not.toHaveBeenCalled();
   });
 
@@ -360,7 +393,7 @@ describe('dashboard value', () => {
         change();
 
         if (change.mock.calls.length === 1) {
-          dashboard.value = JSON.stringify(saved);
+          dashboard.value = saved;
         }
       });
 
@@ -376,7 +409,7 @@ describe('dashboard value', () => {
 
       await settle(dashboard);
 
-      expect(JSON.parse(dashboard.value)).toEqual(saved);
+      expect(dashboard.value).toEqual(saved);
       expect(dashboard.shadowRoot!.querySelector<HTMLElement>('.canvas')!.hidden).toBe(false);
       expect(change).toHaveBeenCalledOnce();
       expect(dashboard.querySelector('input')).toBe(input);
@@ -386,7 +419,7 @@ describe('dashboard value', () => {
 
       await rendered(dashboard);
 
-      expect(dashboard.value).toBe(read);
+      expect(dashboard.value).toEqual(read);
       expect(change).toHaveBeenCalledOnce();
     });
   }
@@ -401,7 +434,7 @@ describe('dashboard value', () => {
       change();
 
       if (change.mock.calls.length === 1) {
-        dashboard.value = '';
+        dashboard.value = undefined;
       }
     });
 
@@ -413,17 +446,18 @@ describe('dashboard value', () => {
 
     expect(change).toHaveBeenCalledOnce();
     expect(dashboard.shadowRoot!.querySelector<HTMLElement>('.canvas')!.hidden).toBe(false);
-    expect(
-      JSON.parse(dashboard.value)
-        .items.map((item: { id: string }) => item.id)
-        .sort()
-    ).toEqual(['added', 'baseline', 'cases', 'notes']);
+    expect(dashboard.value?.items.map((item: { id: string }) => item.id).sort()).toEqual([
+      'added',
+      'baseline',
+      'cases',
+      'notes'
+    ]);
 
     const canonical = dashboard.value;
 
     await rendered(dashboard);
 
-    expect(dashboard.value).toBe(canonical);
+    expect(dashboard.value).toEqual(canonical);
     expect(change).toHaveBeenCalledOnce();
   });
 
@@ -440,7 +474,7 @@ describe('dashboard value', () => {
       dashboard.autoSettle = true;
     }).toThrow(RangeError);
     expect(dashboard.autoSettle).toBe(false);
-    expect(dashboard.value).toBe(before);
+    expect(dashboard.value).toEqual(before);
 
     panel.minColumnSpan = 1;
     await settle(dashboard);
@@ -473,12 +507,12 @@ describe('dashboard value', () => {
 
       dashboard.dispatchEvent(pointer('pointerup', x, y + 384));
 
-      expect(dashboard.value).toBe(canonical);
+      expect(dashboard.value).toEqual(canonical);
 
       if (!enabled) {
-        expect(canonical).toBe(before);
+        expect(canonical).toEqual(before);
       } else {
-        expect(JSON.parse(canonical).items.find((item: { id: string }) => item.id === 'baseline').row).toBe(2);
+        expect(canonical?.items.find(item => item.id === 'baseline')?.row).toBe(2);
       }
 
       await settle(dashboard);
