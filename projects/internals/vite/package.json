@@ -29,6 +29,7 @@
     "custom-element-vs-code-integration": "1.5.0",
     "custom-element-vuejs-integration": "1.4.0",
     "dts-bundle-generator": "9.5.1",
+    "esbuild": "catalog:",
     "glob": "catalog:",
     "lighthouse": "catalog:",
     "lit": "catalog:",

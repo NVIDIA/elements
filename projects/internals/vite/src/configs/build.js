@@ -4,10 +4,10 @@ import { resolve } from 'path';
 import { globSync } from 'glob';
 import minifyHTML from 'rollup-plugin-html-literals';
 
-import { cem } from '../plugins/cem.js';
+import { generateCustomElementsManifest } from '../plugins/cem.js';
 import { snippets } from '../plugins/snippets.js';
 import { dts } from '../plugins/dts.js';
-import { bundle } from '../plugins/bundle.js';
+import { buildBundle } from '../plugins/bundle.js';
 import { initial } from '../plugins/initial.js';
 import { examplesToJSON } from '../plugins/examples.js';
 import { writeIfChanged } from '../plugins/write-if-changed.js';
@@ -19,13 +19,32 @@ const prod = process.env.NODE_ENV === 'production';
 const packageFilePath = fs.readFileSync(resolve(process.cwd(), './package.json'));
 const packageFile = JSON.parse(packageFilePath);
 
+/** @type {import('vite').Plugin} */
+const libraryArtifacts = {
+  name: 'library-artifacts',
+  apply: 'build',
+  async buildEnd(error) {
+    if (error || !process.env.VITE_INITIAL_BUILD) {
+      return;
+    }
+
+    // Rolldown runs separate buildEnd hooks in order. Start both tasks in this hook so they can overlap.
+    const results = await Promise.allSettled([buildBundle(), generateCustomElementsManifest()]);
+    for (const result of results) {
+      if (result.status === 'rejected') {
+        throw result.reason;
+      }
+    }
+  }
+};
+
 /**
  * - https://vitejs.dev/config/
  * - https://lit.dev/docs/tools/production/
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), dts(), bundle(), examplesToJSON(packageFile), cem(), snippets()],
+  plugins: [initial(), dts(), examplesToJSON(packageFile), libraryArtifacts, snippets()],
   define: getElementsEnv(),
   build: {
     reportCompressedSize: false,

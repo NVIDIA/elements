@@ -1,8 +1,8 @@
 // @ts-check
 
+import { fileURLToPath } from 'node:url';
 import { EleventyRenderPlugin, HtmlBasePlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
-import { transpileDecorators } from '@internals/vite/plugins/decorators.js';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
 
 import { BASE_URL } from './src/_11ty/layouts/metadata.js';
@@ -136,6 +136,8 @@ export default function (eleventyConfig) {
   // Configure Vite plugin for modern JavaScript bundling
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
+      // Eleventy gives Vite a generated directory outside the site tsconfig's include paths.
+      tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
       define: {
         __ELEMENTS_CDN_BASE_URL__: JSON.stringify(ELEMENTS_CDN_BASE_URL || ''),
         __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(ELEMENTS_ESM_CDN_BASE_URL || ''),
@@ -186,7 +188,6 @@ export default function (eleventyConfig) {
             }
           }
         },
-        transpileDecorators({ experimentalDecorators: true }),
         {
           name: 'remove-sourcemaps',
           transform(code) {

@@ -1151,6 +1151,9 @@ importers:
       dts-bundle-generator:
         specifier: 9.5.1
         version: 9.5.1
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.28.2
       glob:
         specifier: 'catalog:'
         version: 14.0.6

@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { UserConfig, defineConfig, mergeConfig } from 'vite';
-import { libraryBundleConfig } from '@internals/vite';
+import { libraryBundleConfig } from '@internals/vite/configs/build.bundle.js';
 
 export default defineConfig(() => {
   const config: UserConfig = {
