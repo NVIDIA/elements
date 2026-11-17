@@ -17,6 +17,7 @@ import cemConfig, {
   elementMetadataToMarkdown,
   getAttributeFacingTypeText,
   getDocumentedTypeValues,
+  getStandaloneMemberTypeText,
   isEntrypointExported,
   omitVueBooleanAttributeAliases,
   projectFrameworkPropertyBindings,
@@ -814,4 +815,36 @@ test('sorts generated Markdown API rows by name', () => {
   assert.deepEqual(rowNames('Invoker Commands'), ['--pan-left', '--zoom-in']);
   assert.deepEqual(rowNames('Methods'), ['pan', 'zoom']);
   assert.deepEqual(rowNames('CSS Properties'), ['--a-color', '--z-color']);
+});
+
+test('preserves recursive object properties through their published component types', () => {
+  const declaration = { name: 'Workspace', metadata: { entrypoint: '@nvidia-elements/core/workspace' } };
+  const interfaces = new Map([
+    ['WorkspaceLayout', '{ readonly root: WorkspaceNode | null }'],
+    ['WorkspaceNode', undefined]
+  ]);
+  const member = { kind: 'field', name: 'value', type: { text: 'WorkspaceLayout | undefined' } };
+  assert.equal(
+    getStandaloneMemberTypeText(member, declaration, interfaces),
+    'import("@nvidia-elements/core/workspace").Workspace["value"]'
+  );
+  assert.equal(
+    getStandaloneMemberTypeText({ ...member, kind: undefined }, declaration, interfaces),
+    'WorkspaceLayout | undefined'
+  );
+  assert.equal(getStandaloneMemberTypeText({ ...member, type: { text: 'string' } }, declaration, interfaces), 'string');
+});
+
+test('keeps simple interfaces inline and falls back for recursive interfaces', () => {
+  const declaration = { name: 'Example', metadata: { entrypoint: './example.js' } };
+  const item = { kind: 'field', name: 'value', type: { text: 'Simple | undefined' } };
+  const types = new Map([
+    ['Simple', '{ enabled?: boolean }'],
+    ['Tree', '{ children: readonly Tree[] }']
+  ]);
+  assert.equal(getStandaloneMemberTypeText(item, declaration, types), '{ enabled?: boolean } | undefined');
+  assert.equal(
+    getStandaloneMemberTypeText({ ...item, type: { text: 'Tree' } }, declaration, types),
+    'import("./example.js").Example["value"]'
+  );
 });
