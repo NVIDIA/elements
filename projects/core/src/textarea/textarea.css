@@ -49,7 +49,6 @@ slot[name='suffix'] {
   }
 
   :scope:has(textarea:focus-visible) [input] {
-    outline: 5px auto -webkit-focus-ring-color !important;
     outline: Highlight solid 2px !important;
   }
 }

@@ -390,7 +390,6 @@ export const Interactions = {
       .menu-item:focus,
       .menu-item[focused] {
         outline-offset: -3px;
-        outline: 5px auto -webkit-focus-ring-color;
         outline: Highlight solid 2px;
       }
     </style>

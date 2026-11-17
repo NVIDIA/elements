@@ -50,6 +50,16 @@ describe(Tabs.metadata.tag, () => {
     expect(childElement.type).toBe('button');
   });
 
+  it('should paint the focused state with the highlight outline', async () => {
+    childElement._internals.states.add('focused');
+    await elementIsStable(childElement);
+    const host = childElement.shadowRoot?.querySelector('[internal-host]');
+    if (!(host instanceof HTMLElement)) throw new Error('Missing tab host.');
+    const outline = getComputedStyle(host);
+    expect(outline.outlineStyle).toBe('solid');
+    expect(outline.outlineWidth).toBe('2px');
+  });
+
   it('should have proper defaults on parent', () => {
     expect(parentElement.vertical).toBe(false);
     expect(parentElement.borderless).toBe(false);
