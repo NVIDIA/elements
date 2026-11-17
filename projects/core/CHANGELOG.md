@@ -1,3 +1,12 @@
+## [2.26.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.2...@nvidia-elements/core-v2.26.3) (2026-11-17)
+
+### Bug Fixes
+
+* **core:** drop overridden webkit focus ring fallback ([0697e24](https://github.com/NVIDIA/elements/commit/0697e245b9019de3749322e7cacca500ae41f248))
+* **core:** remove forced dashboard scrollbars and header text truncation ([b61ba9b](https://github.com/NVIDIA/elements/commit/b61ba9b3ccf044916a2dcad3fb85933cb4981bcc))
+* **forms:** use keydown for button active state ([486875c](https://github.com/NVIDIA/elements/commit/486875c082a15f2bc7a72a091759a93cfa3f8a2b))
+* **pi:** update typebox to 1.4.7 ([10ebae6](https://github.com/NVIDIA/elements/commit/10ebae6d20abd93c7f196a98ea681a4f0464818c))
+
 ## [2.26.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.1...@nvidia-elements/core-v2.26.2) (2026-11-14)
 
 ### Bug Fixes
