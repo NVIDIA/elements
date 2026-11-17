@@ -8,3 +8,13 @@ nve-toggletip:not(:has([slot='footer'])):has([slot='header'])::part(_content) {
 nve-toggletip:not(:has([slot='header'])):has([slot='footer'])::part(_content) {
   margin-block-start: calc(var(--padding) * 0.5);
 }
+
+nve-toggletip:has(> nve-toggletip-header > nve-alert-group[prominence='emphasis']:not([color]))::part(icon-button) {
+  --color: var(--nve-sys-text-white-color);
+}
+
+nve-toggletip:has(> nve-toggletip-header > nve-alert-group[prominence='emphasis'][status='warning']:not([color]))::part(
+    icon-button
+  ) {
+  --color: var(--nve-sys-text-black-color);
+}
