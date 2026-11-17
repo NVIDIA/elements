@@ -1,3 +1,23 @@
+## [1.0.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.5...@nvidia-elements/pi-v1.0.6) (2026-11-17)
+
+### Features
+
+* **core:** add dashboard ([83e5ced](https://github.com/NVIDIA/elements/commit/83e5ced893821ab74cad106473c92ecb04443949))
+* **core:** iframe sandbox options ([849eb85](https://github.com/NVIDIA/elements/commit/849eb854b9f96692d2607f2db4aee62b7487b05f))
+* **core:** support for grid virtual-list ([32fd01e](https://github.com/NVIDIA/elements/commit/32fd01e61b004bb07c0a54ce7cb6c747b09eaa55))
+* **foundations:** add placement translation keys ([a3d4d53](https://github.com/NVIDIA/elements/commit/a3d4d5386df3c71e3d273c1175b140fab04efc9d))
+* **foundations:** virtual-list ([aa4ef9e](https://github.com/NVIDIA/elements/commit/aa4ef9e20dd0ec9e4ce8a4be69c6678f11c86b12))
+
+### Bug Fixes
+
+* **core:** drop obsolete panel transition prefix ([dead5e0](https://github.com/NVIDIA/elements/commit/dead5e0cc7cb0202e83f64cd8242755e06ac91db))
+* **core:** drop obsolete progress appearance prefixes ([2192b3c](https://github.com/NVIDIA/elements/commit/2192b3c42e09842685e90c2ce5440b2005c9f7bb))
+* **core:** drop overridden webkit focus ring fallback ([0697e24](https://github.com/NVIDIA/elements/commit/0697e245b9019de3749322e7cacca500ae41f248))
+* **core:** remove forced dashboard scrollbars and header text truncation ([b61ba9b](https://github.com/NVIDIA/elements/commit/b61ba9b3ccf044916a2dcad3fb85933cb4981bcc))
+* **forms:** use keydown for button active state ([486875c](https://github.com/NVIDIA/elements/commit/486875c082a15f2bc7a72a091759a93cfa3f8a2b))
+* **pi:** update typebox to 1.4.7 ([10ebae6](https://github.com/NVIDIA/elements/commit/10ebae6d20abd93c7f196a98ea681a4f0464818c))
+* **starters:** update [@angular](https://github.com/angular) packages to 22.2.6 ([39be6b3](https://github.com/NVIDIA/elements/commit/39be6b3fbef2498f8898210bdc58d94ba2eb42d7))
+
 ## [1.0.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/pi-v1.0.4...@nvidia-elements/pi-v1.0.5) (2026-11-12)
 
 ### Features
