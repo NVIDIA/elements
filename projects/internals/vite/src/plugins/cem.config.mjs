@@ -897,35 +897,40 @@ function getPublishedFrameworkTypeTexts(customElementsManifest) {
     .filter(Boolean);
 }
 
-function collectReachableStandaloneInterfaceTypes(customElementsManifest) {
-  const sourceInterfaceTypes = new Map();
+function collectReachableStandaloneTypes(customElementsManifest) {
+  const sourceTypes = new Map();
   const sourceRoot = resolve('src');
   runtimeEnvironment.program
     ?.getSourceFiles()
     .filter(sourceFile => sourceFile.fileName.startsWith(sourceRoot))
     .forEach(sourceFile => {
-      sourceFile.statements
-        .filter(statement => runtimeEnvironment.ts.isInterfaceDeclaration(statement))
-        .forEach(statement => sourceInterfaceTypes.set(statement.name.text, getInlineInterfaceTypeText(statement)));
+      sourceFile.statements.forEach(statement => {
+        if (runtimeEnvironment.ts.isInterfaceDeclaration(statement)) {
+          sourceTypes.set(statement.name.text, getInlineInterfaceTypeText(statement));
+        } else if (runtimeEnvironment.ts.isTypeAliasDeclaration(statement)) {
+          // Local aliases are not expanded by the interface inliner.
+          sourceTypes.set(statement.name.text, undefined);
+        }
+      });
     });
 
-  const standaloneInterfaceTypes = new Map();
+  const standaloneTypes = new Map();
   const pendingTypeTexts = getPublishedFrameworkTypeTexts(customElementsManifest);
 
   for (let index = 0; index < pendingTypeTexts.length; index += 1) {
     const typeText = pendingTypeTexts[index];
 
-    sourceInterfaceTypes.forEach((interfaceType, name) => {
-      if (standaloneInterfaceTypes.has(name) || !typeTextReferencesName(typeText, name)) {
+    sourceTypes.forEach((interfaceType, name) => {
+      if (standaloneTypes.has(name) || !typeTextReferencesName(typeText, name)) {
         return;
       }
 
-      standaloneInterfaceTypes.set(name, interfaceType);
-      pendingTypeTexts.push(interfaceType);
+      standaloneTypes.set(name, interfaceType);
+      if (interfaceType !== undefined) pendingTypeTexts.push(interfaceType);
     });
   }
 
-  return standaloneInterfaceTypes;
+  return standaloneTypes;
 }
 
 function getInlineInterfaceTypeText(declaration) {
@@ -945,28 +950,26 @@ function getInlineInterfaceTypeText(declaration) {
       propertyType = propertyType.replace(/ \| undefined$/, '');
     }
 
-    return `${name}${isOptional ? '?' : ''}: ${propertyType}`;
+    const isReadonly = property.declarations?.some(member =>
+      member.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ReadonlyKeyword)
+    );
+    return `${isReadonly ? 'readonly ' : ''}${name}${isOptional ? '?' : ''}: ${propertyType}`;
   });
 
   return `{ ${properties.join('; ')} }`;
 }
 
-function expandStandaloneTypeText(type, standaloneInterfaceTypes, resolvingInterfaceNames = new Set()) {
-  let standaloneType = type ?? 'string';
+function expandStandaloneTypeText(type, standaloneTypes, resolvingNames = new Set()) {
+  let result = type ?? 'string';
+  for (const [name, interfaceType] of standaloneTypes) {
+    if (!typeTextReferencesName(result, name)) continue;
+    if (interfaceType === undefined || resolvingNames.has(name)) return undefined;
 
-  standaloneInterfaceTypes.forEach((interfaceType, name) => {
-    if (!typeTextReferencesName(standaloneType, name)) {
-      return;
-    }
-
-    const expandedInterfaceType = resolvingInterfaceNames.has(name)
-      ? 'unknown'
-      : expandStandaloneTypeText(interfaceType, standaloneInterfaceTypes, new Set(resolvingInterfaceNames).add(name));
-
-    standaloneType = replaceTypeName(standaloneType, name, expandedInterfaceType);
-  });
-
-  return standaloneType;
+    const expanded = expandStandaloneTypeText(interfaceType, standaloneTypes, new Set(resolvingNames).add(name));
+    if (expanded === undefined) return undefined;
+    result = replaceTypeName(result, name, expanded);
+  }
+  return result;
 }
 
 // Framework generators normally replace an attributed property with its attribute alias. Preserve differently named
@@ -1003,6 +1006,18 @@ export function omitVueBooleanAttributeAliases(declaration) {
   );
 }
 
+// Keep simple interfaces inline; use the published property when recursion or local aliases prevent expansion.
+export function getStandaloneMemberTypeText(item, declaration, standaloneTypes) {
+  const inlineType = expandStandaloneTypeText(item.type?.text, standaloneTypes);
+  if (inlineType !== undefined) return inlineType;
+
+  const entrypoint = declaration.metadata?.entrypoint;
+  if (item.kind === 'field' && entrypoint) {
+    return `import(${JSON.stringify(entrypoint)}).${declaration.name}[${JSON.stringify(item.name)}]`;
+  }
+  return item.type?.text ?? 'string';
+}
+
 // Preserve the shared CEM types and select standalone types only for framework declaration generators.
 export function createStandaloneTypesManifest(customElementsManifest) {
   const standaloneTypesManifest = structuredClone(customElementsManifest);
@@ -1013,7 +1028,7 @@ export function createStandaloneTypesManifest(customElementsManifest) {
     .forEach(declaration => {
       declaration.members = declaration.members?.filter(member => member.kind !== 'field' || !member.readonly);
     });
-  const standaloneInterfaceTypes = collectReachableStandaloneInterfaceTypes(standaloneTypesManifest);
+  const standaloneTypes = collectReachableStandaloneTypes(standaloneTypesManifest);
 
   standaloneTypesManifest.modules
     .flatMap(module => module.declarations ?? [])
@@ -1022,7 +1037,7 @@ export function createStandaloneTypesManifest(customElementsManifest) {
       projectFrameworkPropertyBindings(declaration);
 
       [...(declaration.attributes ?? []), ...(declaration.members ?? [])].forEach(item => {
-        item.standaloneType = { text: expandStandaloneTypeText(item.type?.text, standaloneInterfaceTypes) };
+        item.standaloneType = { text: getStandaloneMemberTypeText(item, declaration, standaloneTypes) };
       });
     });
 
