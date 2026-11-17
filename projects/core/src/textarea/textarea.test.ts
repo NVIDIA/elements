@@ -35,4 +35,18 @@ describe(Textarea.metadata.tag, () => {
     const textarea = fixture.querySelector('textarea');
     expect(element.input).toBe(textarea);
   });
+
+  it('should paint the focus-visible field with the highlight outline', async () => {
+    const field = fixture.querySelector('textarea');
+    const input = element.shadowRoot?.querySelector('[input]');
+    if (!(field instanceof HTMLTextAreaElement) || !(input instanceof HTMLElement)) {
+      throw new Error('Missing textarea field.');
+    }
+
+    field.focus({ focusVisible: true });
+    await elementIsStable(element);
+    const outline = getComputedStyle(input);
+    expect(outline.outlineStyle).toBe('solid');
+    expect(outline.outlineWidth).toBe('2px');
+  });
 });
