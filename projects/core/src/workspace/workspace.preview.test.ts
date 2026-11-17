@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
@@ -61,7 +61,7 @@ describe('workspace previews', () => {
 
   async function createWorkspace(singleGroup = false) {
     fixture = await createFixture(html`
-      <nve-workspace groupable rearrangeable .value=${JSON.stringify(arrangement(singleGroup))} style="width:900px;height:300px">
+      <nve-workspace groupable rearrangeable .value=${arrangement(singleGroup)} style="width:900px;height:300px">
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header></nve-workspace-panel>
         <nve-workspace-panel id="a2"><nve-workspace-panel-header>Second alpha</nve-workspace-panel-header><input value="retained" /></nve-workspace-panel>
         <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header></nve-workspace-panel>
@@ -145,15 +145,18 @@ describe('workspace previews', () => {
     expect(phase(workspace)).toBe('detached');
 
     await cancel(workspace);
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 
   it('uses the visible source ID when its title and saved active panel are unavailable', async () => {
     const workspace = await createWorkspace();
-    const layout = JSON.parse(workspace.value);
-    layout.root.children[0].panels.push('unavailable');
-    layout.root.children[0].active = 'unavailable';
-    workspace.value = JSON.stringify(layout);
+    const layout = workspace.value;
+    assert(layout?.root?.type === 'split');
+    const first = layout.root.children[0];
+    assert(first?.type === 'group');
+    first.panels.push('unavailable');
+    first.active = 'unavailable';
+    workspace.value = layout;
     workspace.querySelector('#a > nve-workspace-panel-header')!.remove();
     await elementIsStable(workspace);
     const saved = workspace.value;
@@ -161,7 +164,7 @@ describe('workspace previews', () => {
     await detach(workspace, '[data-drag-group="a"]');
     expect(workspace.shadowRoot!.querySelector('[data-carried-ghost]')!.textContent).toBe('a');
     await cancel(workspace);
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 
   it.each([

@@ -2,15 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
 import { NativeFullscreenController } from '../internal/controllers/native-fullscreen.controller.js';
 import { WorkspaceRearrangeController } from './controllers/workspace-rearrange.controller.js';
 import { WorkspaceResizeController } from './controllers/workspace-resize.controller.js';
-import { parseWorkspaceValue } from './utils/model/value.utils.js';
-
 import { Workspace } from './workspace.js';
 
 import type { WorkspaceLayout } from './utils/model/layout.utils.js';
@@ -21,7 +19,7 @@ import './define.js';
 import '@nvidia-elements/core/ghost/define.js';
 
 describe(Workspace.metadata.tag, () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -30,7 +28,7 @@ describe(Workspace.metadata.tag, () => {
       weights: [1, 1, 1],
       children: ['a', 'b', 'c'].map(id => ({ type: 'group', panels: [id], active: id }))
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement | undefined;
 
@@ -102,7 +100,7 @@ describe(Workspace.metadata.tag, () => {
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="a"]')!.click();
     await elementIsStable(workspace);
     expect(committed).toHaveBeenCalledExactlyOnceWith(workspace.value);
-    expect(workspace.value).not.toBe(before);
+    expect(workspace.value).not.toEqual(before);
     const event = observed.mock.calls[1]![0];
     expect(event.target).toBe(workspace);
     expect(event.bubbles).toBe(true);
@@ -116,37 +114,47 @@ describe(Workspace.metadata.tag, () => {
       const workspace = await createWorkspace();
       const value = workspace.value;
       expect(() => {
-        workspace.value = '{"version":2}';
+        Reflect.set(workspace, 'value', { version: 2 });
       }).toThrow();
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
     });
 
     it('publishes restored and cleared values synchronously without announcing a change', async () => {
       const workspace = await createWorkspace();
       const change = vi.fn();
       workspace.addEventListener('change', change);
-      const target = JSON.stringify({
+      const target = {
         version: 1,
         root: { type: 'group', panels: ['a', 'b', 'c'], active: 'b' },
         closed: []
-      });
+      } satisfies WorkspaceLayout;
       workspace.value = target;
-      expect(workspace.value).toBe(target);
+      expect(workspace.value).toEqual(target);
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(target);
+      expect(workspace.value).toEqual(target);
       expect(change).not.toHaveBeenCalled();
-      workspace.value = '';
-      expect(workspace.value).toBe('');
+      workspace.value = undefined;
+      expect(workspace.value).toBeUndefined();
       expect(change).not.toHaveBeenCalled();
     });
 
-    it('reuses the serialized value for repeated reads', async () => {
+    it('applies edits to the returned value only after reassignment', async () => {
       const workspace = await createWorkspace();
       const value = workspace.value;
-      const stringify = vi.spyOn(JSON, 'stringify');
-      expect(workspace.value).toBe(value);
-      expect(workspace.value).toBe(value);
-      expect(stringify).not.toHaveBeenCalled();
+      assert.isDefined(value);
+      const panel = workspace.querySelector('#a')!;
+      value.closed.push('a');
+      workspace.requestUpdate();
+      await elementIsStable(workspace);
+      expect(panel.getBoundingClientRect().width).toBeGreaterThan(0);
+      expect(workspace.isCommandAvailable('--open', { value: 'a' })).toBe(false);
+
+      workspace.value = value;
+      await elementIsStable(workspace);
+      expect(panel.getBoundingClientRect().width).toBe(0);
+      expect(workspace.isCommandAvailable('--open', { value: 'a' })).toBe(true);
+      value.closed.push('b');
+      expect(workspace.value?.closed).toEqual(['a']);
     });
 
     it('should preserve the saved preference and focused supplied input through constrained container sizing', async () => {
@@ -162,7 +170,7 @@ describe(Workspace.metadata.tag, () => {
       expect(document.activeElement).toBe(input);
       expect(input.parentElement).toBe(workspace.querySelector('#a'));
       expect(input.value).toBe('edited');
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       workspace.style.width = '912px';
       await vi.waitFor(() => expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(300));
       expect(change).not.toHaveBeenCalled();
@@ -176,11 +184,11 @@ describe(Workspace.metadata.tag, () => {
       const label = panel.querySelector('nve-workspace-panel-header')!;
       const input = panel.querySelector('input')!;
       input.value = 'edited';
-      workspace.value = JSON.stringify({
+      workspace.value = {
         version: 1,
         closed: [],
         root: { type: 'group', panels: ['a', 'b', 'c'], active: 'a' }
-      });
+      };
       await elementIsStable(workspace);
       const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
       tab.focus();
@@ -199,11 +207,11 @@ describe(Workspace.metadata.tag, () => {
 
     it('should announce changed selection once and keep selected clicks and Home silent', async () => {
       const workspace = await createWorkspace();
-      workspace.value = JSON.stringify({
+      workspace.value = {
         version: 1,
         closed: [],
         root: { type: 'group', panels: ['a', 'b', 'c'], active: 'a' }
-      });
+      };
       await elementIsStable(workspace);
       const change = vi.fn();
       workspace.addEventListener('change', change);
@@ -262,7 +270,7 @@ describe(Workspace.metadata.tag, () => {
 });
 
 describe('workspace supplied panel reconciliation', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -274,7 +282,7 @@ describe('workspace supplied panel reconciliation', () => {
         { type: 'group', panels: ['c', 'd'], active: 'c' }
       ]
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement | undefined;
   let workspace: Workspace;
@@ -303,7 +311,8 @@ describe('workspace supplied panel reconciliation', () => {
   }
 
   function snapshot(): WorkspaceLayout {
-    return JSON.parse(workspace.value);
+    assert.isDefined(workspace.value);
+    return workspace.value;
   }
 
   it('should retain missing identities and selected preference while a panel is removed and restored', async () => {
@@ -315,10 +324,10 @@ describe('workspace supplied panel reconciliation', () => {
     await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector('[data-panel="a"]')).toBeNull());
     expect(workspace.querySelector('#b')!.getAttribute('aria-hidden')).toBe('false');
     expect(workspace.querySelector('#b')!.getAttribute('role')).toBe('group');
-    expect(workspace.value).toBe(before);
+    expect(workspace.value).toEqual(before);
     workspace.append(panel);
     await vi.waitFor(() => expect(control('[data-panel="a"]').hasAttribute('selected')).toBe(true));
-    expect(workspace.value).toBe(before);
+    expect(workspace.value).toEqual(before);
     expect(change).not.toHaveBeenCalled();
   });
 
@@ -346,11 +355,11 @@ describe('workspace supplied panel reconciliation', () => {
   it('should keep delayed closed panels closed when restoring an all-closed layout', async () => {
     const change = vi.fn();
     workspace.addEventListener('change', change);
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       root: { type: 'group', panels: ['a', 'b', 'c', 'd', 'later'], active: 'later' },
       closed: ['a', 'b', 'c', 'd', 'later']
-    });
+    };
     await elementIsStable(workspace);
     const panel = document.createElement('nve-workspace-panel');
     panel.id = 'later';
@@ -406,9 +415,9 @@ describe('workspace supplied content visibility', () => {
     expect(panel.assignedSlot).toBe(slot);
     expect(panel.querySelector('input')).toBe(input);
     expect(panel.hasAttribute('hidden')).toBe(false);
-    const snapshot = parseWorkspaceValue(workspace.value);
+    const snapshot = workspace.value;
     if (!snapshot) throw new Error('Expected a workspace layout');
-    workspace.value = JSON.stringify({ ...snapshot, closed: [] });
+    workspace.value = { ...snapshot, closed: [] };
     await elementIsStable(workspace);
     expect(setter).toHaveBeenCalledOnce();
     expect(panel.matches(':state(workspace-presented)')).toBe(true);
@@ -429,7 +438,7 @@ describe('workspace supplied content visibility', () => {
     await elementIsStable(workspace);
     expect(setter).not.toHaveBeenCalled();
     expect(panel.hidden).toBe(true);
-    expect(parseWorkspaceValue(workspace.value)?.closed).toEqual([]);
+    expect(workspace.value?.closed).toEqual([]);
     expect(getComputedStyle(panel).display).toBe('none');
   });
 });

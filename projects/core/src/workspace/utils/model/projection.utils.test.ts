@@ -10,7 +10,7 @@ import {
   rebaseProjectedSplit,
   sameProjectionShape
 } from './projection.utils.js';
-import { parseWorkspaceValue } from './value.utils.js';
+import { normalizeWorkspaceValue } from './value.utils.js';
 
 import type { WorkspaceGroup, WorkspaceLayout, WorkspaceNode, WorkspaceSplit } from './layout.utils.js';
 
@@ -143,7 +143,7 @@ describe('workspace resize projection', () => {
     expect(result.root.weights[0]).toBe(0.2);
     expect(result.root.weights[1]).toBeCloseTo(0.32);
     expect(result.root.weights[2]).toBeCloseTo(0.48);
-    expect(parseWorkspaceValue(JSON.stringify(result))).toEqual(result);
+    expect(normalizeWorkspaceValue(result)).toEqual(result);
     expect(saved.root?.type === 'split' && saved.root.weights).toEqual([0.2, 0.3, 0.5]);
   });
 

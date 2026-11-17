@@ -123,8 +123,7 @@ export const Groupable = {
         rearrangeable
         groupable
         resizable
-        style="height:420px"
-        value='{"version":1,"closed":[],"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["group-editor","group-notes"],"active":"group-editor"},{"type":"group","panels":["group-preview"],"active":"group-preview"}]}}'>
+        style="height:420px">
         <nve-workspace-panel id="group-editor">
           <nve-workspace-panel-header>Editor</nve-workspace-panel-header>
           <nve-workspace-panel-content>
@@ -143,7 +142,20 @@ export const Groupable = {
       <script type="module">
         const example = document.querySelector('#regroup-example');
         const workspace = example.querySelector('nve-workspace');
-        const initialValue = workspace.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          closed: [],
+          root: {
+            type: 'split',
+            axis: 'horizontal',
+            weights: [2, 1],
+            children: [
+              { type: 'group', panels: ['group-editor', 'group-notes'], active: 'group-editor' },
+              { type: 'group', panels: ['group-preview'], active: 'group-preview' }
+            ]
+          }
+        };
+        workspace.value = initialValue;
         example.querySelector('nve-button').addEventListener('click', () => {
           workspace.value = initialValue;
         });
@@ -170,8 +182,7 @@ export const Closable = {
         groupable
         rearrangeable
         resizable
-        style="height:420px"
-        value='{"version":1,"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["retained-editor","retained-notes"],"active":"retained-editor"},{"type":"group","panels":["restorable-preview"],"active":"restorable-preview"}]},"closed":[]}'>
+        style="height:420px">
         <nve-workspace-panel id="retained-editor">
           <nve-workspace-panel-header>Editor</nve-workspace-panel-header>
           <nve-workspace-panel-content>
@@ -190,7 +201,20 @@ export const Closable = {
       <script type="module">
         const example = document.querySelector('#open-close-example');
         const workspace = example.querySelector('nve-workspace');
-        const initialValue = workspace.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          root: {
+            type: 'split',
+            axis: 'horizontal',
+            weights: [2, 1],
+            children: [
+              { type: 'group', panels: ['retained-editor', 'retained-notes'], active: 'retained-editor' },
+              { type: 'group', panels: ['restorable-preview'], active: 'restorable-preview' }
+            ]
+          },
+          closed: []
+        };
+        workspace.value = initialValue;
         example.querySelector('#reset-open-close').addEventListener('click', () => {
           workspace.value = initialValue;
         });
@@ -212,8 +236,7 @@ export const Fullscreenable = {
         rearrangeable
         groupable
         resizable
-        style="height:420px"
-        value='{"version":1,"closed":[],"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["fullscreen-editor","fullscreen-notes"],"active":"fullscreen-editor"},{"type":"group","panels":["fullscreen-preview"],"active":"fullscreen-preview"}]}}'>
+        style="height:420px">
         <nve-workspace-panel id="fullscreen-editor">
           <nve-workspace-panel-header>Editor</nve-workspace-panel-header>
           <nve-workspace-panel-content>
@@ -232,7 +255,24 @@ export const Fullscreenable = {
       <script type="module">
         const example = document.querySelector('#fullscreen-example');
         const workspace = example.querySelector('nve-workspace');
-        const initialValue = workspace.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          closed: [],
+          root: {
+            type: 'split',
+            axis: 'horizontal',
+            weights: [2, 1],
+            children: [
+              {
+                type: 'group',
+                panels: ['fullscreen-editor', 'fullscreen-notes'],
+                active: 'fullscreen-editor'
+              },
+              { type: 'group', panels: ['fullscreen-preview'], active: 'fullscreen-preview' }
+            ]
+          }
+        };
+        workspace.value = initialValue;
         example.querySelector('nve-button').addEventListener('click', () => {
           workspace.value = initialValue;
         });
@@ -256,8 +296,7 @@ export const CustomPanelActions = {
         rearrangeable
         closable
         resizable
-        style="height:420px"
-        value='{"version":1,"closed":[],"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["a-editor","a-notes"],"active":"a-editor"},{"type":"group","panels":["a-preview"],"active":"a-preview"}]}}'>
+        style="height:420px">
         <nve-workspace-panel id="a-editor">
           <nve-workspace-panel-header>
             Editor
@@ -325,12 +364,26 @@ export const CustomPanelActions = {
       </nve-workspace>
       <script type="module">
         const workspace = document.querySelector('#a-demo');
+        const initialValue = {
+          version: 1,
+          closed: [],
+          root: {
+            type: 'split',
+            axis: 'horizontal',
+            weights: [2, 1],
+            children: [
+              { type: 'group', panels: ['a-editor', 'a-notes'], active: 'a-editor' },
+              { type: 'group', panels: ['a-preview'], active: 'a-preview' }
+            ]
+          }
+        };
+        workspace.value = initialValue;
         const dropdownGroup = workspace.querySelector('nve-dropdown-group');
         const reopen = document.querySelector('#a-reopen');
         let panelId;
 
         function refresh() {
-          const { root, closed } = JSON.parse(workspace.value);
+          const { root, closed } = workspace.value;
           const labels = new Map(
             [...workspace.querySelectorAll(':scope > nve-workspace-panel')].map(panel => [
               panel.id,
@@ -488,8 +541,7 @@ export const CompactStyling = {
         closable
         resizable
         fullscreenable
-        style="--gap:0;--border-radius:0;--header-control-size:var(--nve-ref-size-600);--close-button-inset:var(--nve-ref-size-100);height:300px"
-        value='{"version":1,"closed":[],"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["condensed-editor","condensed-notes"],"active":"condensed-editor"},{"type":"group","panels":["condensed-preview"],"active":"condensed-preview"}]}}'>
+        style="--gap:0;--border-radius:0;--header-control-size:var(--nve-ref-size-600);--close-button-inset:var(--nve-ref-size-100);height:300px">
         <nve-workspace-panel id="condensed-editor">
           <nve-workspace-panel-header>Editor</nve-workspace-panel-header>
           <nve-workspace-panel-content>
@@ -511,7 +563,24 @@ export const CompactStyling = {
       <script type="module">
         const example = document.querySelector('#compact-example');
         const workspace = example.querySelector('nve-workspace');
-        const initialValue = workspace.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          closed: [],
+          root: {
+            type: 'split',
+            axis: 'horizontal',
+            weights: [2, 1],
+            children: [
+              {
+                type: 'group',
+                panels: ['condensed-editor', 'condensed-notes'],
+                active: 'condensed-editor'
+              },
+              { type: 'group', panels: ['condensed-preview'], active: 'condensed-preview' }
+            ]
+          }
+        };
+        workspace.value = initialValue;
         example.querySelector('nve-button').addEventListener('click', () => {
           workspace.value = initialValue;
         });
@@ -539,8 +608,7 @@ export const SaveRestore = {
         rearrangeable
         closable
         resizable
-        style="height:420px"
-        value='{"version":1,"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["saved-editor","saved-notes"],"active":"saved-editor"},{"type":"group","panels":["saved-preview"],"active":"saved-preview"}]},"closed":[]}'>
+        style="height:420px">
         <nve-workspace-panel id="saved-editor">
           <nve-workspace-panel-header>Editor</nve-workspace-panel-header>
           <nve-workspace-panel-content>
@@ -561,7 +629,20 @@ export const SaveRestore = {
         const save = document.querySelector('#save-arrangement');
         const restore = document.querySelector('#restore-arrangement');
         const reset = document.querySelector('#reset-arrangement');
-        const initialValue = workspace.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          root: {
+            type: 'split',
+            axis: 'horizontal',
+            weights: [2, 1],
+            children: [
+              { type: 'group', panels: ['saved-editor', 'saved-notes'], active: 'saved-editor' },
+              { type: 'group', panels: ['saved-preview'], active: 'saved-preview' }
+            ]
+          },
+          closed: []
+        };
+        workspace.value = initialValue;
         let savedValue = initialValue;
         save.addEventListener('click', () => {
           savedValue = workspace.value;
@@ -597,8 +678,7 @@ export const ConstrainedSpace = {
         groupable
         rearrangeable
         resizable
-        style="height:180px"
-        value='{"version":1,"root":{"type":"split","axis":"vertical","weights":[1,1],"children":[{"type":"group","panels":["top"],"active":"top"},{"type":"group","panels":["bottom"],"active":"bottom"}]},"closed":[]}'>
+        style="height:180px">
         <nve-workspace-panel id="top" min-height="110">
           <nve-workspace-panel-header>Top</nve-workspace-panel-header>
           <nve-workspace-panel-content>Top content</nve-workspace-panel-content>
@@ -613,7 +693,20 @@ export const ConstrainedSpace = {
         const workspace = example.querySelector('nve-workspace');
         const range = example.querySelector('input');
         const output = example.querySelector('output');
-        const initialValue = workspace.getAttribute('value');
+        const initialValue = {
+          version: 1,
+          root: {
+            type: 'split',
+            axis: 'vertical',
+            weights: [1, 1],
+            children: [
+              { type: 'group', panels: ['top'], active: 'top' },
+              { type: 'group', panels: ['bottom'], active: 'bottom' }
+            ]
+          },
+          closed: []
+        };
+        workspace.value = initialValue;
         const updateHeight = () => {
           workspace.style.height = range.value + 'px';
           output.value = range.value;

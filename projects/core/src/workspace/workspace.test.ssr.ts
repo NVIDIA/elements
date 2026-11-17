@@ -37,11 +37,11 @@ describe('workspace SSR', () => {
   });
 
   it('keeps automatic projection slots and application-native hidden in declarative markup', async () => {
-    const value = JSON.stringify({
+    const value = {
       version: 1,
       root: { type: 'group', panels: ['a', 'b'], active: 'a' },
       closed: ['a']
-    });
+    };
     const result = await ssrRunner.render(html`
       <nve-workspace .value=${value}>
         <nve-workspace-panel id="a">Closed retained content</nve-workspace-panel>

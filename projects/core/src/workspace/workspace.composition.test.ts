@@ -10,13 +10,15 @@ import { WorkspaceCompositionController } from './controllers/workspace-composit
 
 import type { WorkspacePanelHeader } from './panel-header/panel-header.js';
 import type { WorkspacePanel } from './panel/panel.js';
+import type { WorkspaceLayout } from './utils/model/layout.utils.js';
+
 import type { Workspace } from './workspace.js';
 
 import './define.js';
 import '@nvidia-elements/core/ghost/define.js';
 
 describe('workspace panel composition', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -28,7 +30,7 @@ describe('workspace panel composition', () => {
         { type: 'group', panels: ['b'], active: 'b' }
       ]
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement;
 
@@ -100,7 +102,7 @@ describe('workspace panel composition', () => {
       expect(getComputedStyle(frame).borderLeftWidth).toBe('3px');
       expect(getComputedStyle(content).borderLeftWidth).toBe('3px');
       expect(panel.querySelector('input')).toBe(input);
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it('paints configurable shadows only on the selected panel of each group', async () => {
@@ -154,7 +156,7 @@ describe('workspace panel composition', () => {
       const extra = document.createElement('nve-workspace-panel');
       extra.id = 'c';
       workspace.append(extra);
-      workspace.value = JSON.stringify({
+      workspace.value = {
         version: 1,
         closed: [],
         root: {
@@ -174,7 +176,7 @@ describe('workspace panel composition', () => {
             }
           ]
         }
-      });
+      };
       await elementIsStable(workspace);
       const left = workspace.querySelector('#a')!.shadowRoot!.querySelector('.frame')!;
       const upper = workspace.querySelector('#b')!.shadowRoot!.querySelector('.frame')!;
@@ -196,7 +198,7 @@ describe('workspace panel composition', () => {
       workspace.style.setProperty('--gap', '6px');
       await vi.waitFor(() => expect(getComputedStyle(left).borderRightWidth).toBe('1px'));
       for (const frame of [left, upper, lower]) expect(getComputedStyle(frame).borderWidth).toBe('1px');
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
   });
 
@@ -399,7 +401,7 @@ describe('workspace panel composition', () => {
       );
       expect(header.shadowRoot!.querySelector<HTMLElement>('.suffix')!.getBoundingClientRect().height).toBe(72);
       expect(header.shadowRoot!.querySelector<HTMLElement>('.suffix-content')!.getBoundingClientRect().height).toBe(72);
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it('propagates compact header sizing through tabs, controls, content, and growing requirements', async () => {
@@ -432,7 +434,7 @@ describe('workspace panel composition', () => {
       expect(natural.getBoundingClientRect().height).toBe(32);
       headers.at(-1)!.style.setProperty('--min-height', '32px');
       await vi.waitFor(() => expect(suffix.getBoundingClientRect().height).toBe(32));
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it('measures suffix controls and their padding intrinsically in both directions', async () => {
@@ -479,7 +481,7 @@ describe('workspace panel composition', () => {
       await vi.waitFor(() =>
         expect(workspace.shadowRoot!.querySelector<HTMLElement>('.canvas')!.offsetHeight).toBeGreaterThan(200)
       );
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
   });
 
@@ -638,12 +640,12 @@ describe('workspace live header labels', () => {
     expect(workspace.shadowRoot!.querySelector('[data-close="a"]')!.getAttribute('aria-label')).toBe(
       'Fermer Live Alpha'
     );
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 });
 
 describe('workspace measured sizing', () => {
-  const rows = JSON.stringify({
+  const rows = {
     version: 1,
     closed: [],
     root: {
@@ -652,7 +654,7 @@ describe('workspace measured sizing', () => {
       weights: [1, 1],
       children: ['a', 'b'].map(id => ({ type: 'group', panels: [id], active: id }))
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement;
 
@@ -661,7 +663,7 @@ describe('workspace measured sizing', () => {
     vi.restoreAllMocks();
   });
 
-  async function createWorkspace(value = '') {
+  async function createWorkspace(value?: WorkspaceLayout) {
     fixture = await createFixture(html`
       <nve-workspace groupable rearrangeable closable .value=${value} style="width:260px;height:180px">
         <nve-workspace-panel id="a">
@@ -704,7 +706,7 @@ describe('workspace measured sizing', () => {
     expect(a.getAttribute('min-height')).toBe('110');
     workspace.style.height = '300px';
     await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector<HTMLElement>('.canvas')!.offsetHeight).toBe(300));
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
     expect(change).not.toHaveBeenCalled();
     expect(a.querySelector('input')).toBe(input);
   });
@@ -724,11 +726,11 @@ describe('workspace measured sizing', () => {
       return requestUpdate(...args);
     });
     workspace.style.width = '260.625px';
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: ['b'],
       root: { type: 'group', panels: ['a', 'b'], active: 'b' }
-    });
+    };
     const saved = workspace.value;
     const changed = vi.fn();
     workspace.addEventListener('change', changed);
@@ -739,7 +741,7 @@ describe('workspace measured sizing', () => {
     expect(canvas.offsetHeight).toBe(viewport.clientHeight);
     expect(viewport.scrollWidth).toBe(viewport.clientWidth);
     expect(viewport.scrollHeight).toBe(viewport.clientHeight);
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
     expect(changed).not.toHaveBeenCalled();
   });
 
@@ -759,7 +761,7 @@ describe('workspace measured sizing', () => {
     Object.assign(source, { placement: { operation: 'split', target: 'b', position: 'top' } });
     workspace.querySelector('#a')!.dispatchEvent(new CommandEvent('command', { command: '--place', source }));
     await elementIsStable(workspace);
-    expect(workspace.value).toBe(joined);
+    expect(workspace.value).toEqual(joined);
     expect(changed).toHaveBeenCalledOnce();
   });
 });

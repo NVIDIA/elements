@@ -35,7 +35,7 @@ import {
   reconcilePanels,
   selectPanel
 } from './utils/model/operations.utils.js';
-import { parseWorkspaceValue, sameWorkspaceLayout, serializeWorkspaceValue } from './utils/model/value.utils.js';
+import { normalizeWorkspaceValue, sameWorkspaceLayout } from './utils/model/value.utils.js';
 import { getAdmissiblePlacementLayout } from './utils/placement/preparation.utils.js';
 import {
   focusWorkspacePanel,
@@ -83,6 +83,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-workspace
+ * @attribute {string} value - JSON serialization of WorkspaceLayout. An absent, empty, or invalid JSON attribute selects automatic layout.
  * @description A workspace provides a malleable arrangement of application panels in a restorable layout.
  * @documentation https://nvidia.github.io/elements/docs/elements/workspace/
  * @since 0.0.0
@@ -174,20 +175,22 @@ export class Workspace extends LitElement {
   /** Selects panel content framing. */
   @property({ reflect: true }) container?: 'inset' | 'flat' | 'full';
 
-  /** Versioned JSON arrangement. Assignment restores without emitting change. */
-  @property({ type: String })
-  get value(): string {
+  /**
+   * Current layout. Assigning a layout does not emit a `change` event.
+   */
+  @property({ type: Object })
+  get value(): WorkspaceLayout | undefined {
     return this.#value;
   }
 
-  set value(value: string) {
-    const next = parseWorkspaceValue(value);
+  set value(value: WorkspaceLayout | null | undefined) {
+    const next = normalizeWorkspaceValue(value ?? undefined);
     this.#restoration.finish();
     this.#restore(next);
   }
 
   #layout?: WorkspaceLayout;
-  #value = '';
+  #value?: WorkspaceLayout;
   #restoring = false;
   #dragPreview?: WorkspaceDragPreview;
   #cachedPreviewBoundaries?: CachedPreviewBoundaries;
@@ -330,11 +333,7 @@ export class Workspace extends LitElement {
     super.willUpdate(changed);
     this.#composition.captureFocus();
 
-    if (
-      ['value', 'fullscreenable', 'closable', 'rearrangeable', 'groupable', 'resizePolicy'].some(key =>
-        changed.has(key)
-      )
-    ) {
+    if (['fullscreenable', 'closable', 'rearrangeable', 'groupable', 'resizePolicy'].some(key => changed.has(key))) {
       this.#commands.invalidateAvailability();
     }
     if (['fullscreenable', 'closable', 'rearrangeable', 'groupable'].some(key => changed.has(key))) {
@@ -351,8 +350,8 @@ export class Workspace extends LitElement {
   }
 
   /** Restores an arrangement with animated geometry while retaining application content. */
-  animateTo(value: string, options: WorkspaceAnimationOptions = {}): void {
-    const next = parseWorkspaceValue(value);
+  animateTo(value: WorkspaceLayout | null | undefined, options: WorkspaceAnimationOptions = {}): void {
+    const next = normalizeWorkspaceValue(value ?? undefined);
     this.#restoration.animateTo(next, options);
   }
 
@@ -422,17 +421,18 @@ export class Workspace extends LitElement {
   }
 
   #setLayout(layout: WorkspaceLayout | undefined) {
-    if (layout === this.#layout) return;
-    const value = serializeWorkspaceValue(layout);
+    if (sameWorkspaceLayout(this.#layout, layout)) return false;
     this.#layout = layout;
-    this.#value = value;
+    this.#value = structuredClone(layout);
+    this.#commands.invalidateAvailability();
+    return true;
   }
 
   #restore(next: WorkspaceLayout | undefined) {
     this.#rearrange.cancel();
     const old = this.value;
     this.#resize.resetForRestore();
-    this.#setLayout(next);
+    if (!this.#setLayout(next)) this.#value = structuredClone(next);
     this.#restoring = true;
     this.requestUpdate('value', old);
   }

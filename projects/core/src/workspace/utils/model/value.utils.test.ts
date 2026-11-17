@@ -3,7 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { parseWorkspaceValue, sameWorkspaceLayout, serializeWorkspaceValue } from './value.utils.js';
+import { normalizeWorkspaceValue, sameWorkspaceLayout } from './value.utils.js';
 
 import type { WorkspaceGroup, WorkspaceLayout, WorkspaceNode } from './layout.utils.js';
 
@@ -11,81 +11,79 @@ const group = (id: string): WorkspaceGroup => ({ type: 'group', panels: [id], ac
 
 describe('workspace values', () => {
   it('distinguishes an absent value from an empty arrangement', () => {
-    expect(parseWorkspaceValue('')).toBeUndefined();
-    expect(serializeWorkspaceValue(undefined)).toBe('');
+    expect(normalizeWorkspaceValue(undefined)).toBeUndefined();
     const empty: WorkspaceLayout = { version: 1, root: null, closed: [] };
-    const value = serializeWorkspaceValue(empty);
-    expect(value).toBe('{"version":1,"root":null,"closed":[]}');
-    expect(parseWorkspaceValue(value)).toEqual(empty);
+    expect(normalizeWorkspaceValue(empty)).toEqual(empty);
   });
 
   it('accepts group snapshots and rejects unsupported node types', () => {
     const root = group('a');
-    expect(parseWorkspaceValue(JSON.stringify({ version: 1, root, closed: [] }))?.root).toEqual(root);
+    expect(normalizeWorkspaceValue({ version: 1 as const, root, closed: [] })?.root).toEqual(root);
     expect(() =>
-      parseWorkspaceValue(JSON.stringify({ version: 1, root: { ...root, type: 'unsupported' }, closed: [] }))
+      normalizeWorkspaceValue({ version: 1 as const, root: { ...root, type: 'unsupported' }, closed: [] })
     ).toThrow();
   });
 
   it('rejects invalid identities and overflowing weights', () => {
     expect(() =>
-      parseWorkspaceValue(
-        JSON.stringify({
-          version: 1,
-          root: { type: 'split', axis: 'horizontal', weights: [1e308, 1e308], children: [group('a'), group('b')] },
-          closed: []
-        })
-      )
+      normalizeWorkspaceValue({
+        version: 1,
+        root: { type: 'split', axis: 'horizontal', weights: [1e308, 1e308], children: [group('a'), group('b')] },
+        closed: []
+      })
     ).toThrow();
     expect(() =>
-      parseWorkspaceValue(
-        JSON.stringify({ version: 1, root: { type: 'group', panels: ['a', 'a'], active: 'a' }, closed: [] })
-      )
+      normalizeWorkspaceValue({
+        version: 1 as const,
+        root: { type: 'group' as const, panels: ['a', 'a'], active: 'a' },
+        closed: []
+      })
     ).toThrow();
   });
 
   it('requires unique closed references within the layout and an explicit closed list', () => {
     const root = { type: 'group', panels: ['a', 'missing'], active: 'missing' };
-    expect(parseWorkspaceValue(JSON.stringify({ version: 1, root, closed: ['a', 'missing'] }))).toEqual({
+    expect(normalizeWorkspaceValue({ version: 1 as const, root, closed: ['a', 'missing'] })).toEqual({
       version: 1,
       root,
       closed: ['a', 'missing']
     });
     for (const closed of [['unknown'], ['a', 'a']]) {
-      expect(() => parseWorkspaceValue(JSON.stringify({ version: 1, root, closed }))).toThrow();
+      expect(() => normalizeWorkspaceValue({ version: 1 as const, root, closed })).toThrow();
     }
-    expect(() => parseWorkspaceValue(JSON.stringify({ version: 1, root: null, closed: ['a'] }))).toThrow();
-    expect(() => parseWorkspaceValue(JSON.stringify({ version: 1, root }))).toThrow();
-    expect(parseWorkspaceValue(JSON.stringify({ version: 1, root: null, closed: [] }))?.root).toBeNull();
+    expect(() => normalizeWorkspaceValue({ version: 1 as const, root: null, closed: ['a'] })).toThrow();
+    expect(() => normalizeWorkspaceValue({ version: 1 as const, root })).toThrow();
+    expect(normalizeWorkspaceValue({ version: 1 as const, root: null, closed: [] })?.root).toBeNull();
   });
 
-  it('rejects malformed JSON and unsupported versions', () => {
-    expect(() => parseWorkspaceValue('{')).toThrow(SyntaxError);
-    expect(() => parseWorkspaceValue('{"version":2,"root":null,"closed":[]}')).toThrow(TypeError);
+  it('rejects strings and unsupported versions', () => {
+    expect(() => normalizeWorkspaceValue('{')).toThrow(TypeError);
+    expect(() => normalizeWorkspaceValue({ version: 2, root: null, closed: [] })).toThrow(TypeError);
   });
 
   it('normalizes supplied groups to the owned value schema', () => {
-    const parsed = parseWorkspaceValue(
-      '{"version":1,"root":{"active":"a","panels":["a"],"extra":{"items":[1,null]},"type":"group"},"closed":[]}'
-    );
+    const parsed = normalizeWorkspaceValue({
+      version: 1,
+      root: { active: 'a', panels: ['a'], extra: { items: [1, null] }, type: 'group' },
+      closed: []
+    });
     const expected: WorkspaceLayout = { version: 1, root: group('a'), closed: [] };
     expect(parsed).toEqual(expected);
-    expect(serializeWorkspaceValue(parsed)).toBe(serializeWorkspaceValue(expected));
     expect(sameWorkspaceLayout(parsed, structuredClone(expected))).toBe(true);
   });
 
-  it('serializes retained preferences without normalizing or mutating them', () => {
-    const layout: WorkspaceLayout = {
-      version: 1,
-      root: { type: 'split', axis: 'horizontal', weights: [2, 1], children: [group('a'), group('b')] },
-      closed: ['a']
-    };
-    const before = structuredClone(layout);
-    const value = serializeWorkspaceValue(layout);
-    expect(value).toBe(
-      '{"version":1,"root":{"type":"split","axis":"horizontal","weights":[2,1],"children":[{"type":"group","panels":["a"],"active":"a"},{"type":"group","panels":["b"],"active":"b"}]},"closed":["a"]}'
-    );
-    expect(layout).toEqual(before);
+  it('rejects cycles, sparse arrays, and coercible axes in object values', () => {
+    const cycle = { type: 'split', axis: 'horizontal', weights: [1, 1], children: [] as unknown[] };
+    cycle.children.push(cycle, group('a'));
+    expect(() => normalizeWorkspaceValue({ version: 1, root: cycle, closed: [] })).toThrow(TypeError);
+    const root = { type: 'split', axis: ['horizontal'], weights: [1, 1], children: [group('a'), group('b')] };
+    expect(() => normalizeWorkspaceValue({ version: 1, root, closed: [] })).toThrow(TypeError);
+    expect(() =>
+      normalizeWorkspaceValue({ version: 1, root: { ...root, axis: 'horizontal', weights: [1, ,] }, closed: [] })
+    ).toThrow(TypeError);
+    expect(() =>
+      normalizeWorkspaceValue({ version: 1, root: { type: 'group', panels: ['a', ,], active: 'a' }, closed: [] })
+    ).toThrow(TypeError);
   });
 
   describe('layout equality', () => {

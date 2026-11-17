@@ -1,8 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { WorkspaceLayout } from './utils/model/layout.utils.js';
+
 import { html } from 'lit';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { getActiveElement } from '@nvidia-elements/core/internal';
@@ -18,7 +20,7 @@ import './define.js';
 import '@nvidia-elements/core/ghost/define.js';
 
 describe('workspace attached and detached dragging', () => {
-  const value = JSON.stringify({
+  const value = {
     version: 1,
     closed: [],
     root: {
@@ -27,7 +29,7 @@ describe('workspace attached and detached dragging', () => {
       weights: [1, 1],
       children: ['a', 'b'].map(id => ({ type: 'group', panels: [id], active: id }))
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement;
 
@@ -58,7 +60,7 @@ describe('workspace attached and detached dragging', () => {
     companion.id = 'companion';
     companion.textContent = 'Companion';
     workspace.append(companion);
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: {
@@ -70,7 +72,7 @@ describe('workspace attached and detached dragging', () => {
           { type: 'group', panels: ['b'], active: 'b' }
         ]
       }
-    });
+    };
     await elementIsStable(workspace);
     return workspace;
   }
@@ -98,7 +100,7 @@ describe('workspace attached and detached dragging', () => {
       await elementIsStable(workspace);
       expect(phase(workspace)).toBeUndefined();
       move('pointerup', 100, 100);
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it.each(['data-panel', 'data-drag-group'])(
@@ -119,7 +121,7 @@ describe('workspace attached and detached dragging', () => {
         await elementIsStable(workspace);
         expect(click.defaultPrevented).toBe(false);
         expect(phase(workspace)).toBeUndefined();
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
       }
     );
 
@@ -142,7 +144,7 @@ describe('workspace attached and detached dragging', () => {
       expect(phase(workspace)).toBe('detached');
       workspace.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it('limits placement hint preparation to detached dragging', async () => {
@@ -183,7 +185,7 @@ describe('workspace attached and detached dragging', () => {
       await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
       move('pointerup', target.x - origin.x, target.y - origin.y);
       await elementIsStable(workspace);
-      expect(workspace.value).not.toBe(initial);
+      expect(workspace.value).not.toEqual(initial);
       expect(
         workspace.isCommandAvailable('--place', { value: 'a', placement: { operation: 'join', target: 'b' } })
       ).toBe(false);
@@ -215,10 +217,14 @@ describe('workspace attached and detached dragging', () => {
       expect(move.defaultPrevented).toBe(false);
       expect(getComputedStyle(tab).cursor).not.toBe('grab');
       expect(phase(workspace)).toBeUndefined();
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       tab.click();
       await elementIsStable(workspace);
-      expect(JSON.parse(workspace.value).root.children[0].active).toBe('companion');
+      const root = workspace.value?.root;
+      assert(root?.type === 'split');
+      const first = root.children[0];
+      assert(first?.type === 'group');
+      expect(first.active).toBe('companion');
     });
 
     it('retains a feasible group placement over an unavailable join header using captured permission', async () => {
@@ -248,12 +254,17 @@ describe('workspace attached and detached dragging', () => {
       expect(workspace.style.cursor).toBe('grabbing');
       workspace.dispatchEvent(pointer('pointerup', x, y));
       await elementIsStable(workspace);
-      const result = JSON.parse(workspace.value);
+      const result = workspace.value;
+      assert(result?.root?.type === 'split');
       expect(result.root.type).toBe('split');
-      expect(result.root.children.map((child: { panels: string[] }) => child.panels).sort()).toEqual([
-        ['a', 'companion'],
-        ['b']
-      ]);
+      expect(
+        result.root.children
+          .map(child => {
+            assert(child.type === 'group');
+            return child.panels;
+          })
+          .sort()
+      ).toEqual([['a', 'companion'], ['b']]);
     });
 
     it('marks an infeasible split as blocked when panel minimums cannot fit', async () => {
@@ -276,7 +287,7 @@ describe('workspace attached and detached dragging', () => {
       expect(workspace.style.cursor).toBe('no-drop');
       workspace.dispatchEvent(pointer('pointerup', x, y));
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
     });
 
     it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY])(
@@ -295,7 +306,7 @@ describe('workspace attached and detached dragging', () => {
         expect(phase(workspace)).toBe(threshold === 0 ? 'detached' : 'attached');
         move('pointercancel', 10);
         await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
       }
     );
 
@@ -321,7 +332,7 @@ describe('workspace attached and detached dragging', () => {
         move('pointerup', 33, 33);
         await elementIsStable(workspace);
         expect(phase(workspace)).toBeUndefined();
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
         expect(change).not.toHaveBeenCalled();
         expect(workspace.querySelector('input')).toBe(input);
         expect(getComputedStyle(workspace.querySelector('#a')!).display).not.toBe('none');
@@ -360,7 +371,7 @@ describe('workspace attached and detached dragging', () => {
             expect(workspace.shadowRoot!.querySelector('[data-panel="a"]')!.hasAttribute('selected')).toBe(true);
           }
           expect(getComputedStyle(companion).display).toBe('none');
-          expect(workspace.value).toBe(saved);
+          expect(workspace.value).toEqual(saved);
           expect(change).not.toHaveBeenCalled();
           expect(workspace.querySelector('input')).toBe(input);
           expect(a.parentElement).toBe(workspace);
@@ -379,7 +390,7 @@ describe('workspace attached and detached dragging', () => {
         expectPresentation();
         workspace.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
         expect(change).not.toHaveBeenCalled();
         expect(a.shadowRoot!.querySelector<HTMLElement>('.content')!.hidden).toBe(active !== 'a');
         expect(companion.shadowRoot!.querySelector<HTMLElement>('.content')!.hidden).toBe(active !== 'companion');
@@ -395,7 +406,7 @@ describe('workspace attached and detached dragging', () => {
         third.id = 'c';
         third.textContent = 'Gamma';
         workspace.append(third);
-        workspace.value = JSON.stringify({
+        workspace.value = {
           version: 1,
           closed: [],
           root: {
@@ -404,7 +415,7 @@ describe('workspace attached and detached dragging', () => {
             weights: [1, 1, 1],
             children: ['a', 'b', 'c'].map(id => ({ type: 'group', panels: [id], active: id }))
           }
-        });
+        };
         await elementIsStable(workspace);
         const saved = workspace.value;
         const change = vi.fn();
@@ -422,7 +433,7 @@ describe('workspace attached and detached dragging', () => {
         );
         move('pointerup', 0, 60);
         await elementIsStable(workspace);
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
         expect(change).not.toHaveBeenCalled();
       }
     );
@@ -430,11 +441,14 @@ describe('workspace attached and detached dragging', () => {
     it('moves the only visible panel with its closed and unavailable group members', async () => {
       const workspace = await createGroupedWorkspace();
       workspace.groupable = false;
-      const restored = JSON.parse(workspace.value);
+      const restored = workspace.value;
+      assert(restored?.root?.type === 'split');
+      const first = restored.root.children[0];
+      assert(first?.type === 'group');
       restored.closed = ['a'];
-      restored.root.children[0].panels.push('unavailable');
-      restored.root.children[0].active = 'companion';
-      workspace.value = JSON.stringify(restored);
+      first.panels.push('unavailable');
+      first.active = 'companion';
+      workspace.value = restored;
       workspace.detachThreshold = 0;
       await elementIsStable(workspace);
       const source = workspace
@@ -450,16 +464,19 @@ describe('workspace attached and detached dragging', () => {
       await elementIsStable(workspace);
       move('pointerup', x, 80);
       await elementIsStable(workspace);
-      const result = JSON.parse(workspace.value);
-      expect(result.root.children.map((child: { panels: string[] }) => child.panels)).toEqual([
-        ['b'],
-        ['a', 'companion', 'unavailable']
-      ]);
+      const result = workspace.value;
+      assert(result?.root?.type === 'split');
+      expect(
+        result.root.children.map(child => {
+          assert(child.type === 'group');
+          return child.panels;
+        })
+      ).toEqual([['b'], ['a', 'companion', 'unavailable']]);
       expect(result.closed).toEqual(['a']);
     });
 
     it('refreshes a carry when its newly active recipient reveals supplied header actions', async () => {
-      const initial = JSON.stringify({
+      const initial = {
         version: 1,
         closed: [],
         root: {
@@ -471,7 +488,7 @@ describe('workspace attached and detached dragging', () => {
             { type: 'group', panels: ['b'], active: 'b' }
           ]
         }
-      });
+      } satisfies WorkspaceLayout;
       fixture =
         await createFixture(html`<nve-workspace groupable rearrangeable .value=${initial} style="width:600px;height:220px">
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha<button slot="suffix" style="width:140px">Alpha actions</button></nve-workspace-panel-header><input value="retained"></nve-workspace-panel>
@@ -495,7 +512,7 @@ describe('workspace attached and detached dragging', () => {
       expect(phase(workspace)).toBe('detached');
       move('pointercancel', 90, 110);
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it('preserves the content inset and normal label across computed-target detachment', async () => {
@@ -520,7 +537,7 @@ describe('workspace attached and detached dragging', () => {
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
       expect(label.hidden).toBe(false);
       expect(getComputedStyle(content).top).toBe(inset);
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
   });
 
@@ -543,7 +560,7 @@ describe('workspace attached and detached dragging', () => {
       await elementIsStable(workspace);
       workspace.dispatchEvent(pointer('pointerup', bounds.x - 2, bounds.y + bounds.height / 2));
       await elementIsStable(workspace);
-      expect(workspace.value).not.toBe(saved);
+      expect(workspace.value).not.toEqual(saved);
       expect(changed).toHaveBeenCalledOnce();
       expect(getActiveElement()).toBe(document.body);
       expect(workspace.shadowRoot!.activeElement).toBeNull();
@@ -567,8 +584,8 @@ describe('workspace attached and detached dragging', () => {
       await elementIsStable(workspace);
       workspace.dispatchEvent(pointer('pointerup', x, y));
       await elementIsStable(workspace);
-      expect(workspace.value).not.toBe(saved);
-      expect(JSON.parse(workspace.value).root.type).toBe('group');
+      expect(workspace.value).not.toEqual(saved);
+      expect(workspace.value?.root?.type).toBe('group');
       expect(workspace.shadowRoot!.activeElement).toBe(workspace.shadowRoot!.querySelector('[data-panel="companion"]'));
     });
   });
@@ -632,7 +649,7 @@ describe('workspace attached and detached dragging', () => {
       fixture.append(workspace);
       await elementIsStable(workspace);
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-      expect(workspace.value).toBe(savedValue);
+      expect(workspace.value).toEqual(savedValue);
       expect(workspace.querySelector('input')).toBe(input);
       expect(input.value).toBe('edited');
       expect(change).not.toHaveBeenCalled();
@@ -672,7 +689,7 @@ describe('workspace attached and detached dragging', () => {
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
       await elementIsStable(workspace);
       await vi.waitFor(() => expect(strip()!.scrollLeft).toBe(offset));
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -751,7 +768,7 @@ describe('workspace attached and detached dragging', () => {
       await vi.waitFor(() => expect(phase(workspace)).toBe('detached'));
       workspace.style.width = '500px';
       await vi.waitFor(() => expect(phase(workspace)).toBeUndefined());
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     });
 
     it.each(['pointer', 'keyboard'])(
@@ -789,7 +806,7 @@ describe('workspace attached and detached dragging', () => {
           expect(phase(workspace)).toBeUndefined();
           expect(panel.shadowRoot!.activeElement).toBe(other);
         }
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
         expect(changed).not.toHaveBeenCalled();
       }
     );
@@ -810,13 +827,17 @@ describe('workspace attached and detached dragging', () => {
 
     it('removes the grip and its space when a companion closes and restores them when it reopens', async () => {
       const workspace = await createGroupedWorkspace();
-      workspace.value = JSON.stringify({ ...JSON.parse(workspace.value), closed: ['companion'] });
+      assert.isDefined(workspace.value);
+      workspace.value = { ...workspace.value, closed: ['companion'] };
       await elementIsStable(workspace);
       const tab = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!;
       expect(tab.closest('.tabs')!.querySelector('[data-drag-group]')).toBeNull();
       expect(tab.getBoundingClientRect().left).toBe(workspace.querySelector('#a')!.getBoundingClientRect().left);
-      expect(JSON.parse(workspace.value).root.children[0].panels).toEqual(['a', 'companion']);
-      workspace.value = JSON.stringify({ ...JSON.parse(workspace.value), closed: [] });
+      assert(workspace.value?.root?.type === 'split');
+      const first = workspace.value.root.children[0];
+      assert(first?.type === 'group');
+      expect(first.panels).toEqual(['a', 'companion']);
+      workspace.value = { ...workspace.value, closed: [] };
       await elementIsStable(workspace);
       expect(
         workspace.shadowRoot!.querySelector('[data-panel="a"]')!.closest('.tabs')!.querySelector('[data-drag-group]')
@@ -842,9 +863,12 @@ describe('workspace attached and detached dragging', () => {
       const workspace = await createGroupedWorkspace();
       workspace.querySelector('#companion')!.innerHTML =
         '<nve-workspace-panel-header>Companion</nve-workspace-panel-header>';
-      const layout = JSON.parse(workspace.value);
-      layout.root.children[0].active = 'companion';
-      workspace.value = JSON.stringify(layout);
+      const layout = workspace.value;
+      assert(layout?.root?.type === 'split');
+      const first = layout.root.children[0];
+      assert(first?.type === 'group');
+      first.active = 'companion';
+      workspace.value = layout;
       await elementIsStable(workspace);
       const move = press(workspace, '[data-drag-group="a"]');
       move('pointermove', 80, 80);
@@ -957,7 +981,7 @@ describe('workspace attached and detached dragging', () => {
       }
       move('pointerup', 0);
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
   });
@@ -978,7 +1002,7 @@ function pointer(type: string, clientX: number, clientY: number) {
 }
 
 describe('workspace grip admission', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -990,7 +1014,7 @@ describe('workspace grip admission', () => {
         { type: 'group', panels: ['c', 'd'], active: 'c' }
       ]
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement | undefined;
   let workspace: Workspace;
@@ -1024,7 +1048,7 @@ describe('workspace grip admission', () => {
     grip.click();
     await elementIsStable(workspace);
     expect(grip.pressed).toBe(false);
-    expect(workspace.value).toBe(value);
+    expect(workspace.value).toEqual(value);
   });
 
   it('should disable dragging independently of close and resize controls', async () => {
@@ -1034,7 +1058,7 @@ describe('workspace grip admission', () => {
     expect(workspace.shadowRoot!.querySelector('[data-drag-group]')).toBeNull();
     expect(workspace.shadowRoot!.querySelector('[data-close]')).not.toBeNull();
     expect(workspace.shadowRoot!.querySelector('nve-resize-handle')).not.toBeNull();
-    expect(workspace.value).toBe(value);
+    expect(workspace.value).toEqual(value);
   });
 });
 
@@ -1081,6 +1105,6 @@ describe('workspace preview viewport isolation', () => {
     await elementIsStable(workspace);
     expect(extents()).toEqual(before);
     expect([canvas.style.width, canvas.style.height]).toEqual(allocation);
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 });

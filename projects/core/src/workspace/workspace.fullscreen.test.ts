@@ -11,7 +11,7 @@ import type { Workspace } from './workspace.js';
 
 import './define.js';
 
-const initial = JSON.stringify({
+const initial = {
   version: 1,
   closed: [],
   root: {
@@ -23,7 +23,7 @@ const initial = JSON.stringify({
       { type: 'group', panels: ['b'], active: 'b' }
     ]
   }
-});
+};
 
 describe('workspace group fullscreen', () => {
   let fixture: HTMLElement;
@@ -75,7 +75,7 @@ describe('workspace group fullscreen', () => {
       expect(request).toHaveBeenCalledOnce();
       expect(native).toBe(workspace);
       expect(exit).not.toHaveBeenCalled();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
       expect(workspace.shadowRoot!.querySelector('[part~="fullscreen-button"]')?.getAttribute('aria-label')).not.toBe(
         'exit full screen'
@@ -101,7 +101,7 @@ describe('workspace group fullscreen', () => {
       expect(request).not.toHaveBeenCalled();
       expect(exit).not.toHaveBeenCalled();
       expect(availability).not.toHaveBeenCalled();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -115,7 +115,7 @@ describe('workspace group fullscreen', () => {
         await invoke(workspace, '--unknown');
         expect(request).toHaveBeenCalledTimes(active ? 1 : 0);
         expect(exit).not.toHaveBeenCalled();
-        expect(workspace.value).toBe(saved);
+        expect(workspace.value).toEqual(saved);
         expect(changed).not.toHaveBeenCalled();
       }
     });
@@ -336,14 +336,14 @@ describe('workspace group fullscreen', () => {
       ).toBe(false);
       expect(workspace.shadowRoot!.querySelectorAll('[data-panel]')).toHaveLength(2);
       expect(workspace.shadowRoot!.querySelector('nve-resize-handle')).toBeNull();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
       native = null;
       document.dispatchEvent(new Event('fullscreenchange'));
       await elementIsStable(workspace);
       expect(workspace.shadowRoot!.querySelectorAll('[data-panel]')).toHaveLength(3);
       expect(workspace.querySelector('#a input')).toBe(input);
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -409,7 +409,7 @@ describe('workspace group fullscreen', () => {
       request.mockRejectedValueOnce(new Error('Denied'));
       await invoke(workspace, '--toggle-fullscreen');
       expect(workspace.shadowRoot!.querySelectorAll('[data-panel]')).toHaveLength(3);
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -435,7 +435,7 @@ describe('workspace group fullscreen', () => {
       admit?.();
       await elementIsStable(workspace);
       expect(exit).toHaveBeenCalledOnce();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -458,7 +458,7 @@ describe('workspace group fullscreen', () => {
       await elementIsStable(workspace);
       expect(workspace.shadowRoot!.querySelector('[data-panel="b"]')).not.toBeNull();
       expect(workspace.shadowRoot!.querySelector('[data-panel="a"]')).toBeNull();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -475,7 +475,7 @@ describe('workspace group fullscreen', () => {
       expect(exit).not.toHaveBeenCalled();
       expect(workspace.shadowRoot!.querySelector('[data-panel="b"]')).not.toBeNull();
       expect(workspace.shadowRoot!.querySelector('[data-panel="a"]')).toBeNull();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
     });
   });

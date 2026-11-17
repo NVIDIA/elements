@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { allocateWorkspace } from '../geometry/allocation.utils.js';
 import { getPanelMembershipKey } from '../model/membership.utils.js';
 import { createDetachedLayout, projectLayout } from '../model/operations.utils.js';
-import { parseWorkspaceValue } from '../model/value.utils.js';
+import { normalizeWorkspaceValue } from '../model/value.utils.js';
 import {
   createScopeRectResolver,
   getAffectedSplitScope,
@@ -26,7 +26,7 @@ const split = (axis: 'horizontal' | 'vertical', ...children: WorkspaceNode[]): W
   weights: children.map(() => 1)
 });
 const saved = (root: WorkspaceNode): WorkspaceLayout => {
-  const value = parseWorkspaceValue(JSON.stringify({ version: 1, root, closed: [] }));
+  const value = normalizeWorkspaceValue({ version: 1 as const, root, closed: [] });
   if (!value) throw new Error('Expected a workspace layout');
   return value;
 };

@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { projectLayout } from '../model/operations.utils.js';
-import { parseWorkspaceValue } from '../model/value.utils.js';
+import { normalizeWorkspaceValue } from '../model/value.utils.js';
 import { findWorkspaceRegion, placeRegion } from './region.utils.js';
 
 import type { WorkspaceLayout, WorkspaceNode } from '../model/layout.utils.js';
@@ -17,7 +17,7 @@ const split = (axis: 'horizontal' | 'vertical', weights: number[], ...children: 
   children
 });
 const saved = (root: WorkspaceNode, closed: string[] = []) => {
-  const value = parseWorkspaceValue(JSON.stringify({ version: 1, root, closed }));
+  const value = normalizeWorkspaceValue({ version: 1 as const, root, closed });
   if (!value) throw new Error('Expected a workspace layout');
   return value;
 };
