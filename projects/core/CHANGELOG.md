@@ -1,3 +1,15 @@
+## [2.27.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.3...@nvidia-elements/core-v2.27.0) (2026-11-17)
+
+### Features
+
+* **core:** expose dashboard layouts as objects ([f508745](https://github.com/NVIDIA/elements/commit/f508745ad6291d3839efafa76a8d9601e4f5f6e1))
+* **core:** expose workspace layouts as objects ([2d16a58](https://github.com/NVIDIA/elements/commit/2d16a58250234b05f98d6c54e524f6e8b3d39935))
+
+### Bug Fixes
+
+* **ci:** preserve complex types in framework declarations ([c33a319](https://github.com/NVIDIA/elements/commit/c33a3191c4287695daace5edec8a971fe115f564))
+* **monaco:** keep css asset imports out of public declarations ([38dd1cf](https://github.com/NVIDIA/elements/commit/38dd1cf5c011eaea82e59e3bf0b79601b38944c5))
+
 ## [2.26.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.2...@nvidia-elements/core-v2.26.3) (2026-11-17)
 
 ### Bug Fixes
