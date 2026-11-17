@@ -61,6 +61,7 @@ const componentGroups = [
     tags: [
       'nve-accordion',
       'nve-card',
+      'nve-dashboard',
       'nve-divider',
       'nve-iframe',
       'nve-page',
@@ -279,6 +280,41 @@ const previewOverrides = {
       <p nve-text="heading">Text styles</p>
       <p nve-text="body">Body text for readable content.</p>
       <p nve-text="label sm muted">Labels and supporting text</p>
+    </div>`,
+  // Keep layout previews compact enough to show their structure without clipping panel chrome.
+  'nve-dashboard': /* html */ `
+    <div class="preview-dashboard">
+      <div class="preview-layout-panel preview-dashboard-main" nve-layout="column gap:sm">
+        <span nve-text="label sm medium">Training</span>
+        <span nve-text="heading lg">78%</span>
+        <div class="preview-mock-lines"><span></span><span></span><span></span></div>
+      </div>
+      <div class="preview-layout-panel" nve-layout="column gap:sm">
+        <span nve-text="label sm medium">GPUs</span>
+        <span nve-text="body sm muted">8 active</span>
+      </div>
+      <div class="preview-layout-panel" nve-layout="column gap:sm">
+        <span nve-text="label sm medium">Jobs</span>
+        <span nve-text="body sm muted">3 running</span>
+      </div>
+    </div>`,
+  'nve-workspace': /* html */ `
+    <div class="preview-workspace">
+      <div class="preview-layout-panel preview-workspace-files" nve-layout="column gap:sm">
+        <span nve-text="label sm medium">Files</span>
+        <div class="preview-mock-lines"><span></span><span></span><span></span></div>
+      </div>
+      <div class="preview-layout-panel preview-workspace-editor">
+        <div class="preview-workspace-tabs">
+          <span class="preview-workspace-tab-active" nve-text="label sm medium">Editor</span>
+          <span nve-text="label sm muted">Preview</span>
+        </div>
+        <div class="preview-workspace-content preview-mock-lines"><span></span><span></span></div>
+      </div>
+      <div class="preview-layout-panel preview-workspace-terminal" nve-layout="column gap:sm">
+        <span nve-text="label sm medium">Terminal</span>
+        <span nve-text="code muted">&gt; ready</span>
+      </div>
     </div>`,
   'nve-dialog': renderPopoverMock({
     title: 'Deploy model?',
@@ -648,6 +684,74 @@ export function render(data) {
     height: 180px;
     padding: var(--nve-ref-space-md);
     border-radius: 0;
+  }
+
+  .preview-dashboard,
+  .preview-workspace {
+    display: grid;
+    width: calc(100% - var(--nve-ref-space-md));
+    max-width: 360px;
+    height: 180px;
+    gap: var(--nve-ref-space-sm);
+  }
+
+  .preview-dashboard {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .preview-layout-panel {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: var(--nve-ref-space-sm);
+    border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+    border-radius: var(--nve-ref-border-radius-md);
+    background: var(--nve-sys-layer-container-background);
+    color: var(--nve-sys-layer-container-color);
+  }
+
+  .preview-dashboard-main,
+  .preview-workspace-files {
+    grid-row: 1 / -1;
+  }
+
+  .preview-workspace {
+    grid-template-columns: minmax(44px, 1fr) minmax(0, 3fr);
+    grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--nve-ref-space-xs);
+  }
+
+  .preview-workspace-editor {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 0;
+  }
+
+  .preview-workspace-terminal {
+    grid-column: 2;
+  }
+
+  .preview-workspace-tabs {
+    display: flex;
+    border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+
+    > span {
+      padding: var(--nve-ref-space-sm) var(--nve-ref-space-xs);
+    }
+  }
+
+  :is(.preview-dashboard, .preview-workspace) .preview-mock-lines {
+    width: 100%;
+  }
+
+  .preview-workspace-tab-active {
+    box-shadow: inset 0 calc(-1 * var(--nve-ref-border-width-md)) var(--nve-sys-support-accent-color);
+  }
+
+  .preview-workspace-content {
+    align-content: start;
+    padding: var(--nve-ref-space-sm);
   }
 
   .preview-page {
