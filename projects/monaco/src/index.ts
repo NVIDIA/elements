@@ -1,10 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-// Ensure original CSS files are individually exported for optional use.
-import './editor.global.css';
-import './editor.main.css';
-
 import * as monaco from './vendor/monaco-editor/editor/editor.main.js';
 
 import { createMonacoEnvironment } from './environment.js';

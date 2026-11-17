@@ -19,6 +19,8 @@ export default defineConfig(() => {
       minify: prod,
       lib: {
         entry: {
+          // Emit standalone CSS assets independently of the public module entry point.
+          styles: resolve(import.meta.dirname, './src/styles.ts'),
           // monaco-editor environment entry point
           environment: resolve(import.meta.dirname, './src/environment.ts'),
           // synchronous monaco-editor main entry point

@@ -8,6 +8,7 @@ import { createFixture, elementIsStable, removeFixture, untilEvent } from '@inte
 
 import type * as monaco from '@nvidia-elements/monaco';
 import { MonacoEditor } from '@nvidia-elements/monaco/editor';
+import { loadEditorStyles } from '@nvidia-elements/monaco/monaco.js';
 
 import { MonacoProblems, ProblemSeverity } from '@nvidia-elements/monaco/problems';
 import type { Problem, ProblemCode } from '@nvidia-elements/monaco/problems';
@@ -677,22 +678,31 @@ describe('nve-monaco-problems', () => {
     await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
 
     // create an unrelated editor and ensure the hover provider early-exits when the model doesn't match
+    const host = document.createElement('div');
+    fixture.appendChild(host);
+    const root = host.attachShadow({ mode: 'open' });
+    root.adoptedStyleSheets = [await loadEditorStyles()];
     const container = document.createElement('div');
     container.style.height = '300px';
-    fixture.appendChild(container);
+    root.appendChild(container);
     const { monaco } = editorEl;
     const unrelatedEditor = monaco.editor.create(container, {
       value: 'Hello world!',
       language: 'plaintext'
     });
-    await expect.poll(() => unrelatedEditor.getDomNode().querySelectorAll('.view-line').length).toBe(1);
+    try {
+      await expect.poll(() => unrelatedEditor.getDomNode().querySelectorAll('.view-line').length).toBe(1);
 
-    const lineEl = getEditorLineElement(unrelatedEditor, 1);
-    const spanEl = lineEl.querySelector<HTMLElement>('.view-line span');
+      const lineEl = getEditorLineElement(unrelatedEditor, 1);
+      const spanEl = lineEl.querySelector<HTMLElement>('.view-line span');
 
-    expect(() => emulateMouseMove(lineEl, getOffsetRelativeTo(spanEl, lineEl))).not.toThrow();
-    await delay(400);
-    await expect(getEditorSelector(unrelatedEditor, '.hover-row')).toBeNull();
+      expect(() => emulateMouseMove(lineEl, getOffsetRelativeTo(spanEl, lineEl))).not.toThrow();
+      await delay(400);
+      await expect(getEditorSelector(unrelatedEditor, '.hover-row')).toBeNull();
+    } finally {
+      unrelatedEditor.getModel()?.dispose();
+      unrelatedEditor.dispose();
+    }
   });
 
   it('should show tooltips for hovered problem code links', async () => {
