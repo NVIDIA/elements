@@ -3,7 +3,8 @@
 
 import { planDashboardAction } from '../utils/action.utils.js';
 import { getDashboardResizeCorner } from '../utils/geometry.utils.js';
-import { reconcileDashboard, serializeDashboardValue } from '../utils/layout.utils.js';
+import { reconcileDashboard } from '../utils/layout.utils.js';
+import { sameDashboardLayout } from '../utils/comparison.utils.js';
 
 import type { DashboardAction, DashboardArrangementRequest } from '../utils/intent.types.js';
 
@@ -12,13 +13,13 @@ import type { DashboardPanel } from '../panel/panel.js';
 import type { DashboardGridPlacement, DashboardLayout } from '../dashboard.types.js';
 
 interface DashboardArrangementHost {
-  readonly value: string;
   readonly rearrangeable: boolean;
   readonly autoSettle: boolean;
   matches(selectors: string): boolean;
 }
 
 interface DashboardArrangementDelegate {
+  getCommittedLayout(): DashboardLayout | undefined;
   getPanels(): DashboardPanel[];
   getOwnedPanels(): DashboardPanel[];
   isReady(): boolean;
@@ -50,19 +51,40 @@ export class DashboardArrangementController {
     return next ? this.#delegate.commit(next) : false;
   }
 
-  getArrangementStateKey(): string {
-    return JSON.stringify({
-      value: this.#host.value,
-      settle: this.#host.autoSettle,
-      rearrangeable: this.#host.rearrangeable,
-      readingDirection: this.#host.matches(':dir(rtl)') ? 'rtl' : 'ltr',
-      panels: this.#delegate.getPanels().map(panel => ({
-        ...panel._getSpanConstraints(),
-        moveDisabled: panel.moveDisabled,
-        resizeDisabled: panel.resizeDisabled,
-        resizeCorner: getDashboardResizeCorner(panel)
-      }))
-    });
+  createArrangementStateCheck(): () => boolean {
+    const { autoSettle, rearrangeable } = this.#host;
+    const layout = this.#delegate.getCommittedLayout();
+    const rtl = this.#host.matches(':dir(rtl)');
+    const initialPanels = this.#delegate.getPanels().map(panel => ({
+      ...panel._getSpanConstraints(),
+      moveDisabled: panel.moveDisabled,
+      resizeDisabled: panel.resizeDisabled,
+      resizeCorner: getDashboardResizeCorner(panel)
+    }));
+    return () => {
+      const panels = this.#delegate.getPanels();
+      return (
+        layout === this.#delegate.getCommittedLayout() &&
+        autoSettle === this.#host.autoSettle &&
+        rearrangeable === this.#host.rearrangeable &&
+        rtl === this.#host.matches(':dir(rtl)') &&
+        initialPanels.length === panels.length &&
+        panels.every((panel, index) => {
+          const previous = initialPanels[index]!;
+          const current = panel._getSpanConstraints();
+          return (
+            previous.id === current.id &&
+            previous.minColumnSpan === current.minColumnSpan &&
+            previous.minRowSpan === current.minRowSpan &&
+            previous.maxColumnSpan === current.maxColumnSpan &&
+            previous.maxRowSpan === current.maxRowSpan &&
+            previous.moveDisabled === panel.moveDisabled &&
+            previous.resizeDisabled === panel.resizeDisabled &&
+            previous.resizeCorner === getDashboardResizeCorner(panel)
+          );
+        })
+      );
+    };
   }
 
   findLayoutProposal(layout: DashboardLayout, id: string, request: DashboardArrangementRequest) {
@@ -93,7 +115,7 @@ export class DashboardArrangementController {
   }
 
   canCommit(layout: DashboardLayout): boolean {
-    return this.#isProposalValid(layout) && serializeDashboardValue(layout) !== this.#host.value;
+    return this.#isProposalValid(layout) && !sameDashboardLayout(layout, this.#delegate.getCommittedLayout());
   }
 
   #isProposalValid(layout: DashboardLayout): boolean {
@@ -110,6 +132,6 @@ export class DashboardArrangementController {
       }
     );
 
-    return !!reconciled && serializeDashboardValue(reconciled) === serializeDashboardValue(layout);
+    return !!reconciled && sameDashboardLayout(reconciled, layout);
   }
 }

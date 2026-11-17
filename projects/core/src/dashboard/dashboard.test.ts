@@ -1,13 +1,15 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { DashboardLayout } from './dashboard.types.js';
+
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
-import { parseDashboardValue } from './utils/layout.utils.js';
+import { normalizeDashboardValue } from './utils/layout.utils.js';
 
 import { Dashboard } from './dashboard.js';
 
@@ -16,14 +18,14 @@ import type { DashboardPanel } from './panel/panel.js';
 import './define.js';
 import '@nvidia-elements/core/button/define.js';
 
-const initial = JSON.stringify({
+const initial = {
   version: 1,
   grid: { flow: 'vertical', tracks: 4 },
   items: [
     { id: 'a', column: 0, row: 0, columnSpan: 2, rowSpan: 2 },
     { id: 'b', column: 2, row: 0, columnSpan: 2, rowSpan: 2 }
   ]
-});
+} satisfies DashboardLayout;
 
 describe(Dashboard.metadata.tag, () => {
   let fixture: HTMLElement | undefined;
@@ -117,7 +119,7 @@ describe(Dashboard.metadata.tag, () => {
     expect(input.value).toBe('unsaved while locked');
     expect(inputChanged).toHaveBeenCalledOnce();
     expect(panel.querySelector('input')).toBe(input);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(changed).not.toHaveBeenCalled();
 
     dashboard.rearrangeable = true;
@@ -128,7 +130,7 @@ describe(Dashboard.metadata.tag, () => {
     expect(control(panel, 'resize')).not.toBeNull();
     expect(dashboard.isCommandAvailable('--move-right', { value: 'a' })).toBe(true);
     expect(dashboard.isCommandAvailable('--increase-height', { value: 'a' })).toBe(true);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(panel.querySelector('input')).toBe(input);
     expect(changed).not.toHaveBeenCalled();
   });
@@ -156,7 +158,7 @@ describe(Dashboard.metadata.tag, () => {
     await Promise.all(panels.map(panel => panel.updateComplete));
 
     expect(available).toEqual([true]);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(change).not.toHaveBeenCalled();
 
     dashboard.requestUpdate();
@@ -190,7 +192,7 @@ describe(Dashboard.metadata.tag, () => {
     panels[0]!.dispatchEvent(new CommandEvent('command', { command: '--move-right' }));
     await elementIsStable(dashboard);
 
-    expect(parseDashboardValue(dashboard.value)?.items).toEqual([
+    expect(normalizeDashboardValue(dashboard.value)?.items).toEqual([
       { id: 'a', column: 2, row: 0, columnSpan: 2, rowSpan: 2 },
       { id: 'b', column: 0, row: 0, columnSpan: 2, rowSpan: 2 }
     ]);
@@ -233,7 +235,7 @@ describe(Dashboard.metadata.tag, () => {
     expect(panel.resizeDisabled).toBe(true);
     expect(control(panel, 'move')).not.toBeNull();
     expect(control(panel, 'resize').closest<HTMLElement>('.grip')!.inert).toBe(true);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
   });
 
   it('restores silently and preserves the supplied content identity', async () => {
@@ -245,9 +247,19 @@ describe(Dashboard.metadata.tag, () => {
     const listener = vi.fn();
 
     dashboard.addEventListener('change', listener);
-    dashboard.value = initial;
+    const layout = dashboard.value;
+    assert.isDefined(layout);
+    layout.grid.tracks = 6;
+    expect(dashboard.tracks).toBe(4);
+    expect(dashboard.isCommandAvailable('--place', { value: 'a', placement: initial.items[0]! })).toBe(false);
+    dashboard.autoSettle = false;
+    expect(dashboard.tracks).toBe(4);
+    dashboard.value = layout;
     await elementIsStable(dashboard);
 
+    expect(dashboard.tracks).toBe(6);
+    layout.grid.tracks = 8;
+    expect(dashboard.tracks).toBe(6);
     expect(dashboard.querySelector('input')).toBe(input);
     expect(input.value).toBe('edited');
     expect(listener).not.toHaveBeenCalled();
@@ -257,14 +269,14 @@ describe(Dashboard.metadata.tag, () => {
     'preserves a synchronous application restore after %s changes',
     async action => {
       const dashboard = await createDashboard();
-      const optimized = JSON.stringify({
+      const optimized = {
         version: 1,
         grid: { flow: 'vertical', tracks: 4 },
         items: [
           { id: 'a', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
           { id: 'b', column: 1, row: 2, columnSpan: 2, rowSpan: 2 }
         ]
-      });
+      } satisfies DashboardLayout;
       const changes = vi.fn(() => {
         dashboard.value = optimized;
       });
@@ -280,7 +292,7 @@ describe(Dashboard.metadata.tag, () => {
       await vi.waitFor(() => expect(changes).toHaveBeenCalledOnce());
       await elementIsStable(dashboard);
 
-      expect(dashboard.value).toBe(optimized);
+      expect(dashboard.value).toEqual(optimized);
       expect(dashboard.shadowRoot!.querySelector('.canvas')!.hasAttribute('hidden')).toBe(false);
       expect(dashboard.querySelector<HTMLElement>('#a')!.style.height).toBe('248px');
     }
@@ -289,7 +301,7 @@ describe(Dashboard.metadata.tag, () => {
   it('finishes an application reset requested synchronously by membership reconciliation', async () => {
     const dashboard = await createDashboard();
     const changes = vi.fn(() => {
-      dashboard.value = '';
+      dashboard.value = undefined;
     });
 
     dashboard.addEventListener('change', changes);
@@ -297,7 +309,7 @@ describe(Dashboard.metadata.tag, () => {
     await vi.waitFor(() => expect(changes).toHaveBeenCalledOnce());
     await elementIsStable(dashboard);
 
-    expect(parseDashboardValue(dashboard.value)?.items).toEqual([
+    expect(normalizeDashboardValue(dashboard.value)?.items).toEqual([
       { id: 'a', column: 0, row: 0, columnSpan: 3, rowSpan: 1 },
       { id: 'b', column: 3, row: 0, columnSpan: 1, rowSpan: 1 }
     ]);
@@ -314,31 +326,31 @@ describe(Dashboard.metadata.tag, () => {
 
     expect(dashboard.hasAttribute('autosettle')).toBe(false);
 
-    const sparse = JSON.stringify({
+    const sparse = {
       version: 1,
       grid: { flow: 'vertical', tracks: 4 },
       items: [
         { id: 'a', column: 0, row: 3, columnSpan: 2, rowSpan: 2 },
         { id: 'b', column: 2, row: 0, columnSpan: 2, rowSpan: 2 }
       ]
-    });
+    } satisfies DashboardLayout;
 
     dashboard.value = sparse;
     await elementIsStable(dashboard);
 
-    expect(dashboard.value).toBe(sparse);
+    expect(dashboard.value).toEqual(sparse);
 
     dashboard.setAttribute('autosettle', '');
 
     expect(dashboard.autoSettle).toBe(true);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
 
     await elementIsStable(dashboard);
 
     dashboard.removeAttribute('autosettle');
 
     expect(dashboard.autoSettle).toBe(false);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
 
     dashboard.autoSettle = true;
     await elementIsStable(dashboard);
@@ -351,14 +363,14 @@ describe(Dashboard.metadata.tag, () => {
     const dashboard = await createDashboard();
 
     dashboard.autoSettle = false;
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow: 'vertical', tracks: 4 },
       items: [
         { id: 'a', column: 1, row: 1, columnSpan: 2, rowSpan: 2 },
         { id: 'b', column: 3, row: 0, columnSpan: 1, rowSpan: 2 }
       ]
-    });
+    };
     await elementIsStable(dashboard);
 
     const panel = dashboard.querySelector<DashboardPanel>('#a')!;
@@ -398,7 +410,7 @@ describe(Dashboard.metadata.tag, () => {
         ? { column: 0, row: 1, columnSpan: 3, rowSpan: 2 }
         : { column: 1, row: 0, columnSpan: 2, rowSpan: 3 };
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]).toEqual({ id: 'a', ...expected });
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]).toEqual({ id: 'a', ...expected });
     expect(changes).toHaveBeenCalledOnce();
     expect(panel.shadowRoot!.activeElement).toBe(control(panel, 'resize'));
 
@@ -428,7 +440,7 @@ describe(Dashboard.metadata.tag, () => {
 
     await elementIsStable(dashboard);
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(dashboard.rearrangeable).toBe(true);
     expect(changes).not.toHaveBeenCalled();
   });
@@ -630,7 +642,7 @@ describe(Dashboard.metadata.tag, () => {
 
     expect(dashboard.isCommandAvailable('--place', { value: 'a', placement })).toBe(false);
     expect(dashboard.place('a', placement)).toBe(false);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(changes).not.toHaveBeenCalled();
   });
 
@@ -669,7 +681,7 @@ describe(Dashboard.metadata.tag, () => {
       expect(panel.getAttribute('container')).toBe(container);
       expect(getComputedStyle(panel).borderTopLeftRadius).toBe(container === 'inset' ? radius : '0px');
       expect(getComputedStyle(panel).boxShadow === 'none').toBe(container !== 'inset');
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
 
       dashboard.container = undefined;
@@ -690,7 +702,7 @@ describe(Dashboard.metadata.tag, () => {
       new KeyboardEvent('keydown', { key: 'ArrowDown', repeat: true, bubbles: true, composed: true, cancelable: true })
     );
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.rowSpan).toBe(4);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.rowSpan).toBe(4);
     expect(changed).toHaveBeenCalledTimes(2);
 
     key(handle, 'Enter');
@@ -712,7 +724,7 @@ describe(Dashboard.metadata.tag, () => {
     key(handle, 'Enter');
     await elementIsStable(dashboard);
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.column).toBe(2);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.column).toBe(2);
   });
 
   it('reflects property restrictions without reverting an accepted keyboard placement', async () => {
@@ -728,7 +740,7 @@ describe(Dashboard.metadata.tag, () => {
     await elementIsStable(panel);
     await elementIsStable(dashboard);
 
-    expect(dashboard.value).toBe(accepted);
+    expect(dashboard.value).toEqual(accepted);
     expect(control(panel, 'move').closest<HTMLElement>('.grip')!.inert).toBe(true);
   });
 
@@ -789,14 +801,14 @@ describe(Dashboard.metadata.tag, () => {
     expect(panel._internals.ariaLabel).toBe('First');
     expect(canvas.hasAttribute('data-arranging')).toBe(true);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).not.toBeNull();
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(changes).not.toHaveBeenCalled();
 
     key(handle, 'Escape');
     await elementIsStable(dashboard);
 
     expect(canvas.hasAttribute('data-arranging')).toBe(false);
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
   });
 
   it('resumes names, measurement and one command commit after repeated reconnection', async () => {
@@ -839,14 +851,14 @@ describe(Dashboard.metadata.tag, () => {
       await vi.waitFor(() => expect(panel._internals.ariaLabel).toBe(`Reconnected ${index}`));
       await vi.waitFor(() => expect(panel.getBoundingClientRect().width).toBeLessThan(previousWidth - 10));
 
-      expect(dashboard.value).toBe(saved);
+      expect(dashboard.value).toEqual(saved);
       expect(dashboard.isCommandAvailable(command, { value: 'a' })).toBe(true);
 
       invoker.setAttribute('command', command);
       await userEvent.click(invoker);
       await elementIsStable(dashboard);
 
-      expect(parseDashboardValue(dashboard.value)?.items.find(item => item.id === 'a')?.column).toBe(
+      expect(normalizeDashboardValue(dashboard.value)?.items.find(item => item.id === 'a')?.column).toBe(
         index === 0 ? 2 : 0
       );
       expect(changed).toHaveBeenCalledTimes(index + 1);
@@ -858,11 +870,11 @@ describe(Dashboard.metadata.tag, () => {
   it('keeps a horizontal canvas no wider than its viewport when one panel fits', async () => {
     const dashboard = await createDashboard();
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow: 'horizontal', tracks: 4 },
       items: [{ id: 'a', column: 0, row: 0, columnSpan: 1, rowSpan: 1 }]
-    });
+    };
     dashboard.querySelector('#b')!.remove();
     await elementIsStable(dashboard);
 
@@ -879,14 +891,14 @@ describe(Dashboard.metadata.tag, () => {
 
     const panel = dashboard.querySelector('nve-dashboard-panel')!;
     const handle = control(panel, 'move');
-    const restored = JSON.stringify({
+    const restored = {
       version: 1,
       grid: { flow: 'vertical', tracks: 4 },
       items: [
         { id: 'a', column: 0, row: 3, columnSpan: 2, rowSpan: 2 },
         { id: 'b', column: 2, row: 0, columnSpan: 2, rowSpan: 2 }
       ]
-    });
+    } satisfies DashboardLayout;
 
     const change = vi.fn();
 
@@ -905,7 +917,7 @@ describe(Dashboard.metadata.tag, () => {
     dashboard.dispatchEvent(pointer('pointerup', 50, 190));
     await elementIsStable(dashboard);
 
-    expect(dashboard.value).toBe(restored);
+    expect(dashboard.value).toEqual(restored);
     expect(change).not.toHaveBeenCalled();
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
   });
@@ -920,7 +932,7 @@ describe(Dashboard.metadata.tag, () => {
     dashboard.dispatchEvent(pointer('pointermove', 190, 50));
     dashboard.dispatchEvent(pointer('pointerup', 360, 50));
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.column).toBe(2);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.column).toBe(2);
   });
 
   it('keeps clicks idle after a canceled pointer gesture', async () => {
@@ -937,7 +949,7 @@ describe(Dashboard.metadata.tag, () => {
     await elementIsStable(panel);
 
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
   });
 
   it('places a re-added panel in free cells without moving existing occupants', async () => {
@@ -951,8 +963,8 @@ describe(Dashboard.metadata.tag, () => {
     dashboard.prepend(first);
     await elementIsStable(dashboard);
 
-    expect(parseDashboardValue(dashboard.value)?.items.find(item => item.id === 'b')?.column).toBe(0);
-    expect(parseDashboardValue(dashboard.value)?.items.find(item => item.id === 'a')?.column).toBe(2);
+    expect(normalizeDashboardValue(dashboard.value)?.items.find(item => item.id === 'b')?.column).toBe(0);
+    expect(normalizeDashboardValue(dashboard.value)?.items.find(item => item.id === 'a')?.column).toBe(2);
   });
 
   it('rejects incompatible track changes without mutating a committed placement', async () => {
@@ -972,11 +984,11 @@ describe(Dashboard.metadata.tag, () => {
     expect(() => {
       dashboard.tracks = 1;
     }).toThrow(RangeError);
-    expect(dashboard.value).toBe(before);
+    expect(dashboard.value).toEqual(before);
 
     key(handle, 'Enter');
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.column).toBe(2);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.column).toBe(2);
   });
 
   it('rejects a flow change that cannot fit current minimum row spans', async () => {
@@ -991,7 +1003,7 @@ describe(Dashboard.metadata.tag, () => {
     expect(() => {
       dashboard.flow = 'horizontal';
     }).toThrow(RangeError);
-    expect(dashboard.value).toBe(before);
+    expect(dashboard.value).toEqual(before);
     expect(dashboard.flow).toBe('vertical');
   });
 
@@ -1057,7 +1069,7 @@ describe(Dashboard.metadata.tag, () => {
     await elementIsStable(dashboard);
     await vi.waitFor(() => expect(changed).toHaveBeenCalledOnce());
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.columnSpan).toBe(3);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.columnSpan).toBe(3);
 
     await elementIsStable(dashboard);
 
@@ -1150,12 +1162,12 @@ describe(Dashboard.metadata.tag, () => {
     dashboard.addEventListener('commandavailabilitychange', availability);
     dashboard.addEventListener('change', changed);
 
-    const restored = parseDashboardValue(initial)!;
+    const restored = normalizeDashboardValue(initial)!;
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       ...restored,
       items: restored.items.map(item => ({ ...item, column: item.id === 'a' ? 2 : 0 }))
-    });
+    };
     await elementIsStable(dashboard);
 
     expect(dashboard.isCommandAvailable('--place', context)).toBe(true);
@@ -1186,7 +1198,7 @@ describe(Dashboard.metadata.tag, () => {
     await elementIsStable(dashboard);
     await elementIsStable(panel);
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(changed).not.toHaveBeenCalled();
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
     expect(dashboard.shadowRoot!.querySelector('.canvas')!.hasAttribute('data-arranging')).toBe(false);
@@ -1207,13 +1219,13 @@ describe(Dashboard.metadata.tag, () => {
     other.minColumnSpan = 3;
     dashboard.dispatchEvent(pointer('pointerup', 50, 190));
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.row).toBe(0);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.row).toBe(0);
 
     await elementIsStable(other);
     await elementIsStable(dashboard);
 
-    expect(parseDashboardValue(dashboard.value)?.items[0]?.row).toBe(0);
-    expect(parseDashboardValue(dashboard.value)?.items[1]?.columnSpan).toBe(3);
+    expect(normalizeDashboardValue(dashboard.value)?.items[0]?.row).toBe(0);
+    expect(normalizeDashboardValue(dashboard.value)?.items[1]?.columnSpan).toBe(3);
   });
 
   it('does not commit fresh geometry that differs from the displayed preview after a membership change', async () => {
@@ -1230,6 +1242,6 @@ describe(Dashboard.metadata.tag, () => {
     other.hidden = true;
     dashboard.dispatchEvent(pointer('pointerup', 360, 50));
 
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
   });
 });

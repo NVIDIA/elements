@@ -38,6 +38,7 @@ class CompositionTestHost extends LitElement {
     invalidateCommandAvailability: () => {}
   });
   readonly composition = new DashboardCompositionController(this, {
+    getCommittedLayout: () => this.layout,
     getLayout: () => this.layout,
     getCanonicalLayout: () => this.layout,
     getPreview: () => this.preview,
@@ -49,10 +50,6 @@ class CompositionTestHost extends LitElement {
     measure: this.measure,
     changed: this.changed
   });
-
-  get value() {
-    return JSON.stringify(this.layout);
-  }
 
   render() {
     return html`<div class="viewport" style="width:100%;height:260px;overflow:auto;position:relative"><div class="canvas" style="width:400px;height:600px;position:relative"><slot></slot></div></div>`;

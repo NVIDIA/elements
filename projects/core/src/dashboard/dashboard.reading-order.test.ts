@@ -49,7 +49,7 @@ describe('dashboard native spatial reading order', () => {
 
     fixture = await createFixture(html`<div id="reading-parent" dir=${options.direction ?? 'ltr'}>
       <button id="before">Before dashboard</button>
-      <nve-dashboard rearrangeable sizing="fixed" .value=${JSON.stringify(value)} style="width:560px;height:360px;--column-size:72px;--row-size:56px;--gap:8px;--animation-duration:0ms">
+      <nve-dashboard rearrangeable sizing="fixed" .value=${value} style="width:560px;height:360px;--column-size:72px;--row-size:56px;--gap:8px;--animation-duration:0ms">
         ${records.map(
           record => html`<nve-dashboard-panel id=${record.id}>
           <nve-dashboard-panel-header>${record.id}<button id=${`${record.id}-header`} slot="suffix">Header</button></nve-dashboard-panel-header>
@@ -194,7 +194,7 @@ describe('dashboard native spatial reading order', () => {
 
     expect(await traverse()).toEqual([...expected(['c', 'b', 'a']), 'after']);
 
-    dashboard.value = JSON.stringify({ version: 1, grid: { flow: 'vertical', tracks: 6 }, items });
+    dashboard.value = { version: 1 as const, grid: { flow: 'vertical', tracks: 6 }, items };
     await stable(dashboard);
 
     expect(await traverse()).toEqual([...expected(['c', 'a', 'b']), 'after']);
@@ -240,7 +240,7 @@ describe('dashboard native spatial reading order', () => {
     await stable(dashboard);
 
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).not.toBeNull();
-    expect(dashboard.value).toBe(initial);
+    expect(dashboard.value).toEqual(initial);
     expect(ranks()).toEqual(before);
 
     dashboard.dispatchEvent(sample('pointerup', start.y + 192));

@@ -19,13 +19,9 @@ import { DashboardFullscreenController } from './controllers/fullscreen.controll
 import { DashboardInteractionController } from './controllers/interaction.controller.js';
 import { DashboardMeasurementController } from './controllers/measurement.controller.js';
 import { getDashboardCanvasSize, getDashboardPixelPlacement } from './utils/geometry.utils.js';
-import {
-  createDefaultDashboardLayout,
-  parseDashboardValue,
-  reconcileDashboard,
-  serializeDashboardValue
-} from './utils/layout.utils.js';
+import { createDefaultDashboardLayout, normalizeDashboardValue, reconcileDashboard } from './utils/layout.utils.js';
 import { resolveDashboardTarget } from './utils/movement.utils.js';
+import { sameDashboardLayout } from './utils/comparison.utils.js';
 
 import type { DashboardPointerPresentation } from './controllers/interaction.controller.js';
 import type { DashboardPixelPlacement } from './utils/geometry.utils.js';
@@ -45,6 +41,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-dashboard
+ * @attribute {string} value - JSON serialization of DashboardLayout. An absent, empty, or invalid JSON attribute selects automatic layout.
  * @description A dashboard arranges application panels on a resizable grid with a restorable layout.
  * @documentation https://nvidia.github.io/elements/docs/elements/dashboard/
  * @since 0.0.0
@@ -72,7 +69,7 @@ const i18nDefaults = {
  * @cssprop --guide-color - Color of the circular cell-center guides. Defaults to the muted border color.
  * @cssprop --guide-size - Nonnegative CSS length for the guide circle diameter. Defaults to 8px. Include units, including 0px to hide the circles.
  * @cssprop --height - Default viewport height. Defaults to 400px; horizontal fit needs a definite height.
- * @cssprop --animation-duration - Duration of panel geometry, destination ghost geometry, and arrangement control transitions. Defaults to 150ms; reduced motion uses 0ms. Panel geometry follows external container resizing immediately; explicit arrangement and sizing changes use transitions. Animation never delays logical placement commits.
+ * @cssprop --animation-duration - Duration of panel geometry, destination ghost geometry, and arrangement control transitions. Defaults to 150ms; reduced motion uses 0ms. Panel geometry follows external container resizing immediately; interactive arrangement, animateTo(), and sizing changes use transitions. Animation never delays logical placement commits.
  * @cssprop --animation-easing - Easing of panel and destination ghost geometry transitions.
  * @csspart ghost - Inert placement preview shown during pointer arrangement.
  */
@@ -130,37 +127,21 @@ export class Dashboard extends LitElement {
 
     this.#interaction.cancel();
     this.#autoSettle = value;
-    this.value = this.#value;
+    this.animateTo(this.#layout);
     this.#commands.invalidate();
     this.requestUpdate('autoSettle', previous);
   }
 
-  /** Version 1 JSON with grid {flow, tracks} and items {id, column, row, columnSpan, rowSpan}. Positions are zero-based cells from inline start and top; column zero is at the right in RTL. Spans count columns and rows. Defaults to an empty string, which seeds one-cell panels in DOM order. Assignment validates the saved model immediately and normalizes panels once their upgrades and unique nonempty IDs are ready; restoration is silent. Intentional gaps remain when autoSettle is false. After successful reconciliation, only direct default-slot panel children remain in the value, including hidden children. Removed panels lose their placement. Applications own content data, persistence, and any saved placement history. */
-  @property({ type: String })
-  get value(): string {
+  /**
+   * Current layout. Assigning a layout applies it immediately without emitting a `change` event.
+   */
+  @property({ type: Object })
+  get value(): DashboardLayout | undefined {
     return this.#value;
   }
 
-  set value(value: string) {
-    const parsed = parseDashboardValue(value);
-    const layout =
-      parsed && !isServer && this.isConnected && this.#composition.catalogueReady
-        ? reconcileDashboard(
-            parsed,
-            this.#composition.ownedPanels.map(panel => panel._getSpanConstraints()),
-            { autoSettle: this.autoSettle, hidden: this.#composition.hiddenPanelIds }
-          )
-        : parsed;
-    if (parsed && !layout) throw new RangeError('Dashboard arrangement conflicts with panel constraints');
-
-    this.#interaction.cancel();
-
-    const old = this.#value;
-
-    this.#setLayout(layout);
-    this.#reconciliation = 'pending';
-    this.#restoring = true;
-    this.requestUpdate('value', old);
+  set value(value: DashboardLayout | null | undefined) {
+    this.#restore(value, 'immediate');
   }
 
   /** Growth direction, defaulting to vertical with bounded columns. Horizontal flow bounds rows. Changing flow does not transpose panel coordinates or spans. Assignment updates the arrangement silently; changes that conflict with panel constraints throw before changing the arrangement. */
@@ -196,7 +177,7 @@ export class Dashboard extends LitElement {
   #labels: Readonly<Record<string, string>> = {};
   #labelsSource?: typeof this.i18n;
   #layout?: DashboardLayout;
-  #value = '';
+  #value?: DashboardLayout;
   #autoSettle = false;
   #reconciliation: 'pending' | 'unchanged' | 'changed' = 'pending';
   #restoring = true;
@@ -216,6 +197,7 @@ export class Dashboard extends LitElement {
   });
 
   readonly #composition: DashboardCompositionController = new DashboardCompositionController(this, {
+    getCommittedLayout: () => this.#layout,
     getLayout: () => (this.#reconciliation === 'pending' ? undefined : this.#layout),
     getCanonicalLayout: () => this.#canonicalLayout,
     getPreview: () => this.#preview,
@@ -242,6 +224,7 @@ export class Dashboard extends LitElement {
     pitchChanged: () => this.#interaction.cancel()
   });
   readonly #arrangement: DashboardArrangementController = new DashboardArrangementController(this, {
+    getCommittedLayout: () => this.#layout,
     getPanels: () => this.#composition.panels,
     getOwnedPanels: () => this.#composition.ownedPanels,
     isReady: () => this.#composition.catalogueReady,
@@ -263,7 +246,7 @@ export class Dashboard extends LitElement {
 
   readonly #interaction: DashboardInteractionController = new DashboardInteractionController(this, {
     getLayout: () => this.#canonicalLayout,
-    getArrangementStateKey: () => this.#arrangement.getArrangementStateKey(),
+    createArrangementStateCheck: () => this.#arrangement.createArrangementStateCheck(),
     getMetrics: () => {
       this.#measurement.measure();
       return this.#measurement.metrics;
@@ -331,10 +314,10 @@ export class Dashboard extends LitElement {
     });
     if (!next) return;
 
-    const previous = this.#value;
+    const previous = this.#layout;
 
     this.#setLayout(next);
-    this.#reconciliation = !this.#restoring && previous !== this.#value ? 'changed' : 'unchanged';
+    this.#reconciliation = !this.#restoring && previous !== this.#layout ? 'changed' : 'unchanged';
     this.#known = new Set(panels.map(panel => panel.id));
     this.#restoring = false;
   }
@@ -359,6 +342,11 @@ export class Dashboard extends LitElement {
     this.#commands.flush();
   }
 
+  /** Restores an arrangement with animated geometry while retaining application content. */
+  animateTo(value: DashboardLayout | null | undefined): void {
+    this.#restore(value, 'animated');
+  }
+
   /** Requests an integer placement without gesture target snapping. Anchored span changes use resizing permission, including left and top edges that change the origin; other position changes require movement. Directional collisions and optional growth-axis settling determine the final arrangement. Returns false for unavailable, invalid, or unchanged normalized placement. Successful placement emits one change. */
   place(id: string, placement: DashboardGridPlacement): boolean {
     return this.#arrangement.place(id, placement);
@@ -381,6 +369,29 @@ export class Dashboard extends LitElement {
 
   get #current() {
     return this.#layout ?? createDefaultDashboardLayout();
+  }
+
+  #restore(value: DashboardLayout | null | undefined, transition: 'immediate' | 'animated') {
+    const parsed = normalizeDashboardValue(value ?? undefined);
+    const layout =
+      parsed && !isServer && this.isConnected && this.#composition.catalogueReady
+        ? reconcileDashboard(
+            parsed,
+            this.#composition.ownedPanels.map(panel => panel._getSpanConstraints()),
+            { autoSettle: this.autoSettle, hidden: this.#composition.hiddenPanelIds }
+          )
+        : parsed;
+    if (parsed && !layout) throw new RangeError('Dashboard arrangement conflicts with panel constraints');
+
+    this.#interaction.cancel();
+
+    const old = this.#value;
+
+    if (!this.#setLayout(layout)) this.#value = structuredClone(layout);
+    this.#composition.setGeometryTransition(transition);
+    this.#reconciliation = 'pending';
+    this.#restoring = true;
+    this.requestUpdate('value', old);
   }
 
   #configureGrid(grid: DashboardLayout['grid']) {
@@ -412,14 +423,11 @@ export class Dashboard extends LitElement {
   }
 
   #setLayout(layout: DashboardLayout | undefined) {
-    const value = serializeDashboardValue(layout);
-
-    if (value !== this.#value) {
-      this.#commands.invalidate();
-    }
-
+    if (sameDashboardLayout(layout, this.#layout)) return false;
+    this.#commands.invalidate();
     this.#layout = layout;
-    this.#value = value;
+    this.#value = structuredClone(layout);
+    return true;
   }
 
   #commit(layout: DashboardLayout): boolean {

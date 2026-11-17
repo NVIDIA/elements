@@ -11,11 +11,11 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 describe('dashboard SSR', () => {
   it('renders a horizontal fixed grid with supplied header, body, footer, and actions', async () => {
-    const value = JSON.stringify({
+    const value = {
       version: 1,
       grid: { flow: 'horizontal', tracks: 4 },
       items: [{ id: 'notes', column: 0, row: 0, columnSpan: 2, rowSpan: 2 }]
-    });
+    };
     const result = await ssrRunner.render(html`
         <nve-dashboard .value=${value} rearrangeable fullscreenable sizing="fixed">
           <nve-dashboard-panel id="notes">

@@ -424,14 +424,14 @@ describe('dashboard panel control transitions', () => {
     dashboard.dir = options.direction;
     dashboard.rearrangeable = options.rearrangeable;
     dashboard.style.cssText = 'width:620px;height:400px;--row-size:90px;--animation-duration:1000ms';
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow: 'vertical', tracks: 6 },
       items: [
         { id: 'baseline', column: 0, row: 0, columnSpan: 3, rowSpan: 2 },
         { id: 'notes', column: 3, row: 0, columnSpan: 3, rowSpan: 2 }
       ]
-    });
+    };
     dashboard.innerHTML = `
       <nve-dashboard-panel id="baseline">
         <nve-dashboard-panel-header>Baseline</nve-dashboard-panel-header>

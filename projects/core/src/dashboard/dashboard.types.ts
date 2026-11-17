@@ -3,24 +3,24 @@
 
 /** Zero-based grid placement. Columns count from inline start (right in RTL); rows count from the top. Spans are positive cell counts. */
 export interface DashboardGridPlacement {
-  readonly column: number;
-  readonly row: number;
-  readonly columnSpan: number;
-  readonly rowSpan: number;
+  column: number;
+  row: number;
+  columnSpan: number;
+  rowSpan: number;
 }
 
 export interface DashboardItem extends DashboardGridPlacement {
-  readonly id: string;
+  id: string;
 }
 
 /** Grid and placements of the currently owned panels. */
 export interface DashboardLayout {
-  readonly version: 1;
-  readonly grid: {
-    readonly flow: 'vertical' | 'horizontal';
-    readonly tracks: number;
+  version: 1;
+  grid: {
+    flow: 'vertical' | 'horizontal';
+    tracks: number;
   };
-  readonly items: readonly DashboardItem[];
+  items: DashboardItem[];
 }
 
 /** Allowed panel spans in columns and rows, independent of pixel sizing. */

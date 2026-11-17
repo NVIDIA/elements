@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -52,7 +52,7 @@ describe('dashboard rearrangement', () => {
         ?autosettle=${autoSettle}
         rearrangeable
         sizing=${sizing}
-        .value=${JSON.stringify(layout(flow))}
+        .value=${layout(flow)}
         style="width:620px;height:320px;--column-size:160px;--row-size:120px;--gap:8px">
         <nve-dashboard-panel id="notes">
           <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
@@ -153,7 +153,7 @@ describe('dashboard rearrangement', () => {
     await userEvent.click(invoker);
     await settle(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(change).toHaveBeenCalledOnce();
 
     const committed = dashboard.value;
@@ -161,7 +161,7 @@ describe('dashboard rearrangement', () => {
     await userEvent.click(invoker);
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(committed);
+    expect(dashboard.value).toEqual(committed);
     expect(change).toHaveBeenCalledOnce();
   });
 
@@ -184,7 +184,7 @@ describe('dashboard rearrangement', () => {
         expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
         expect(dashboard.shadowRoot!.querySelector('.canvas')!.hasAttribute('data-arranging')).toBe(false);
         expect(control.matches(':state(pressed)')).toBe(false);
-        expect(dashboard.value).toBe(value);
+        expect(dashboard.value).toEqual(value);
         expect(change).not.toHaveBeenCalled();
       }
     });
@@ -202,7 +202,7 @@ describe('dashboard rearrangement', () => {
       await settle(dashboard);
 
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
-      expect(dashboard.value).not.toBe(value);
+      expect(dashboard.value).not.toEqual(value);
       expect(change).toHaveBeenCalledOnce();
 
       await userEvent.keyboard('{Enter}');
@@ -216,7 +216,7 @@ describe('dashboard rearrangement', () => {
       await userEvent.keyboard('{Enter} ');
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(committed);
+      expect(dashboard.value).toEqual(committed);
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
       expect(control.matches(':state(pressed)')).toBe(false);
 
@@ -245,13 +245,13 @@ describe('dashboard rearrangement', () => {
     await userEvent.keyboard('{Escape}{Enter}');
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(committed);
+    expect(dashboard.value).toEqual(committed);
     expect(change).toHaveBeenCalledOnce();
 
     await userEvent.keyboard('{ArrowLeft}');
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(change).toHaveBeenCalledTimes(2);
   });
 
@@ -271,13 +271,13 @@ describe('dashboard rearrangement', () => {
     await userEvent.keyboard('{ArrowDown}');
     await settle(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(targets).toEqual([dashboard]);
 
     await userEvent.keyboard('{Enter}');
     await settle(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(targets).toEqual([dashboard]);
   });
 
@@ -292,7 +292,7 @@ describe('dashboard rearrangement', () => {
 
           const ids = ['notes', 'cases', 'baseline'];
 
-          dashboard.value = JSON.stringify({
+          dashboard.value = {
             version: 1,
             grid: { flow, tracks: 6 },
             items: ids.map((id, index) => ({
@@ -302,7 +302,7 @@ describe('dashboard rearrangement', () => {
               columnSpan: 2,
               rowSpan: 2
             }))
-          });
+          };
           await settle(dashboard);
 
           const panels = ids.map(id => dashboard.querySelector<HTMLElement>(`#${id}`)!);
@@ -341,7 +341,8 @@ describe('dashboard rearrangement', () => {
           expect(panels[1].getBoundingClientRect()[coordinate]).toBeCloseTo(origin[coordinate]);
           expect(panels[0].getBoundingClientRect()[coordinate]).toBeCloseTo(last[coordinate]);
 
-          const keyboardLayout: DashboardLayout = JSON.parse(dashboard.value);
+          assert.isDefined(dashboard.value);
+          const keyboardLayout: DashboardLayout = dashboard.value;
 
           expect(keyboardLayout.items.map(item => (axis === 'row' ? item.column : item.row))).toEqual([4, 0, 2]);
           expect(change).toHaveBeenCalledTimes(2);
@@ -383,7 +384,7 @@ describe('dashboard rearrangement', () => {
           await settle(dashboard);
 
           expect(acceptedTargets()).toEqual([destinationTarget, intermediateTarget, sourceTarget]);
-          expect(dashboard.value).toBe(value);
+          expect(dashboard.value).toEqual(value);
           expect(change).not.toHaveBeenCalled();
 
           dashboard.dispatchEvent(
@@ -394,7 +395,7 @@ describe('dashboard rearrangement', () => {
           expect(change).toHaveBeenCalledOnce();
           expect(ids.map(id => dashboard.querySelector(`#${id}`))).toEqual(panels);
 
-          const committed = JSON.parse(dashboard.value).items;
+          const committed = dashboard.value?.items;
           const positions = committed.map((item: { column: number; row: number }) =>
             axis === 'row' ? item.column : item.row
           );
@@ -412,11 +413,11 @@ describe('dashboard rearrangement', () => {
 
     const initial = layout();
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       ...initial,
       grid: { flow: 'vertical', tracks: 10 },
       items: initial.items.map(item => (item.id === 'cases' ? { ...item, column: 4 } : item))
-    });
+    };
     await settle(dashboard);
 
     dashboard.querySelector<HTMLElement>('#baseline')!.hidden = true;
@@ -461,7 +462,7 @@ describe('dashboard rearrangement', () => {
     await userEvent.keyboard('{Escape}');
     await settle(dashboard);
 
-    expect(dashboard.value).toBe(committed);
+    expect(dashboard.value).toEqual(committed);
     expect(change).toHaveBeenCalledTimes(steps.length);
   });
 
@@ -474,7 +475,7 @@ describe('dashboard rearrangement', () => {
           dashboard.dir = direction;
 
           const ids = ['notes', 'cases', 'baseline'];
-          const initial = JSON.stringify({
+          const initial = {
             version: 1,
             grid: { flow, tracks: 6 },
             items: ids.map((id, index) => ({
@@ -484,7 +485,7 @@ describe('dashboard rearrangement', () => {
               columnSpan: 2,
               rowSpan: 2
             }))
-          });
+          } satisfies DashboardLayout;
           const keys =
             flow === 'vertical'
               ? {
@@ -515,7 +516,7 @@ describe('dashboard rearrangement', () => {
             await userEvent.keyboard(`{${keys.growth}}`);
             await settle(dashboard);
 
-            expect(dashboard.value).toBe(initial);
+            expect(dashboard.value).toEqual(initial);
             expect(change).not.toHaveBeenCalled();
 
             await userEvent.keyboard(`{${id === 'baseline' ? keys.negative : keys.positive}}`);
@@ -529,7 +530,7 @@ describe('dashboard rearrangement', () => {
             await userEvent.keyboard(`{${keys.growth}}{Enter}{Escape}`);
             await settle(dashboard);
 
-            expect(dashboard.value).toBe(reordered);
+            expect(dashboard.value).toEqual(reordered);
             expect(change).toHaveBeenCalledOnce();
             expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
           }
@@ -553,11 +554,11 @@ describe('dashboard rearrangement', () => {
             { id: 'baseline', column: 0, row: 2, columnSpan: 2, rowSpan: 2 },
             { id: 'lower-cases', column: 2, row: 2, columnSpan: 2, rowSpan: 2 }
           ];
-          const initial = JSON.stringify({
+          const initial = {
             version: 1,
             grid: { flow, tracks: 4 },
             items: flow === 'vertical' ? items : items.map(item => ({ ...item, column: item.row, row: item.column }))
-          });
+          } satisfies DashboardLayout;
           const keys =
             flow === 'vertical'
               ? ['ArrowDown', 'ArrowUp']
@@ -583,9 +584,7 @@ describe('dashboard rearrangement', () => {
             await userEvent.keyboard(`{${keys[0]}}`);
             await settle(dashboard);
 
-            expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === id)[coordinate]).toBe(
-              2
-            );
+            expect(dashboard.value?.items.find((item: { id: string }) => item.id === id)?.[coordinate]).toBe(2);
 
             const committed = dashboard.value;
 
@@ -594,13 +593,13 @@ describe('dashboard rearrangement', () => {
             await userEvent.keyboard(`{${keys[0]}}`);
             await settle(dashboard);
 
-            expect(dashboard.value).toBe(committed);
+            expect(dashboard.value).toEqual(committed);
             expect(change).toHaveBeenCalledOnce();
 
             await userEvent.keyboard(`{${keys[1]}}{Enter}{Escape}`);
             await settle(dashboard);
 
-            expect(dashboard.value).toBe(initial);
+            expect(dashboard.value).toEqual(initial);
             expect(change).toHaveBeenCalledTimes(2);
             expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
           }
@@ -646,7 +645,7 @@ describe('dashboard rearrangement', () => {
           { id: 'baseline', column: 0, row: 2, columnSpan: 6, rowSpan: 2 }
         ];
 
-        dashboard.value = JSON.stringify({
+        dashboard.value = {
           version: 1,
           grid: { flow, tracks: 6 },
           items:
@@ -659,7 +658,7 @@ describe('dashboard rearrangement', () => {
                   columnSpan: item.rowSpan,
                   rowSpan: item.columnSpan
                 }))
-        });
+        };
         await settle(dashboard);
 
         const panel = dashboard.querySelector<HTMLElement>('#baseline')!;
@@ -692,7 +691,7 @@ describe('dashboard rearrangement', () => {
         dashboard.dispatchEvent(pointer('pointerup', x + dx, y + dy));
         await settle(dashboard);
 
-        expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'baseline')).toEqual({
+        expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'baseline')).toEqual({
           id: 'baseline',
           column: 0,
           row: 0,
@@ -728,7 +727,7 @@ describe('dashboard rearrangement', () => {
   it('steps from settled mixed-height positions and keeps each commit at a directional boundary', async () => {
     const dashboard = await createDashboard();
 
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow: 'vertical', tracks: 6 },
       items: [
@@ -736,7 +735,7 @@ describe('dashboard rearrangement', () => {
         { id: 'cases', column: 0, row: 2, columnSpan: 6, rowSpan: 6 },
         { id: 'baseline', column: 0, row: 8, columnSpan: 6, rowSpan: 1 }
       ]
-    });
+    };
     dashboard.i18n = {
       gridPlacement: 'row={row}, column={column}, spans={columnSpan}/{rowSpan}',
       placementUnavailable: 'Cannot place'
@@ -762,7 +761,7 @@ describe('dashboard rearrangement', () => {
       await settle(dashboard);
 
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
-      expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').row).toBe(row);
+      expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.row).toBe(row);
       expect(dashboard.shadowRoot!.querySelector('[role="status"]')!.textContent).toContain(
         valid ? `row=${row + 1}, column=1, spans=6/2` : 'Cannot place'
       );
@@ -777,7 +776,7 @@ describe('dashboard rearrangement', () => {
     await userEvent.keyboard('{Enter}{Tab}');
     await settle(dashboard);
 
-    expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').row).toBe(6);
+    expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.row).toBe(6);
     expect(change).toHaveBeenCalledTimes(3);
     expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
   });
@@ -861,7 +860,7 @@ describe('dashboard rearrangement', () => {
       control.focus();
       await userEvent.keyboard(`{${test.key}}`);
 
-      expect(JSON.parse(dashboard.value)).toEqual(expected);
+      expect(dashboard.value).toEqual(expected);
       expect(changed).toHaveBeenCalledOnce();
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
 
@@ -883,7 +882,7 @@ describe('dashboard rearrangement', () => {
 
       await userEvent.click(invoker);
 
-      expect(JSON.parse(dashboard.value)).toEqual(expected);
+      expect(dashboard.value).toEqual(expected);
       expect(changed).toHaveBeenCalledOnce();
       expect(document.activeElement).toBe(invoker);
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();

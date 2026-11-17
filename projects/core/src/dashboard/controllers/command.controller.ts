@@ -11,7 +11,7 @@ import type { DashboardPanel } from '../panel/panel.js';
 import type { DashboardCommandContext, DashboardLayout } from '../dashboard.types.js';
 
 interface DashboardCommandHost extends HTMLElement, ReactiveControllerHost {
-  readonly value: string;
+  readonly value: DashboardLayout | undefined;
 }
 
 interface DashboardCommandDelegate {

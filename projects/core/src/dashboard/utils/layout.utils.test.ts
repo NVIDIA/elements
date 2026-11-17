@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { doDashboardGridGeometriesOverlap, transposeDashboardGridGeometry } from './geometry.utils.js';
-import { findFirstDashboardFit, parseDashboardValue, placeDashboard, reconcileDashboard } from './layout.utils.js';
+import { findFirstDashboardFit, normalizeDashboardValue, placeDashboard, reconcileDashboard } from './layout.utils.js';
 
 import type { DashboardIntent } from './intent.types.js';
 
@@ -75,11 +75,15 @@ describe('dashboard layout utilities', () => {
     ).toEqual(settled.items[0]);
   });
 
+  it('rejects sparse item arrays in object values', () => {
+    expect(() => normalizeDashboardValue({ ...layout(), items: new Array(1) })).toThrow(TypeError);
+  });
+
   it('parses canonical fields without preserving unknown data', () => {
     const input = { ...layout(), extra: 'application data' };
 
-    expect(parseDashboardValue(JSON.stringify(input))).toEqual(layout());
-    expect(parseDashboardValue('')).toBeUndefined();
+    expect(normalizeDashboardValue(input)).toEqual(layout());
+    expect(normalizeDashboardValue(undefined)).toBeUndefined();
   });
 
   it.each([
@@ -89,13 +93,11 @@ describe('dashboard layout utilities', () => {
     { name: 'unrecognized', flow: 'sideways' }
   ])('rejects $name flow values before checking bounds', ({ flow }) => {
     expect(() =>
-      parseDashboardValue(
-        JSON.stringify({
-          version: 1,
-          grid: { flow, tracks: 1 },
-          items: [{ id: 'a', column: 10, row: 0, columnSpan: 1, rowSpan: 1 }]
-        })
-      )
+      normalizeDashboardValue({
+        version: 1,
+        grid: { flow, tracks: 1 },
+        items: [{ id: 'a', column: 10, row: 0, columnSpan: 1, rowSpan: 1 }]
+      })
     ).toThrow(TypeError);
   });
 
@@ -110,7 +112,7 @@ describe('dashboard layout utilities', () => {
     { name: 'zero column spans', items: [{ id: 'a', column: 0, row: 0, columnSpan: 0, rowSpan: 1 }] },
     { name: 'row extent overflow', items: [{ id: 'a', column: 0, row: 999999, columnSpan: 1, rowSpan: 2 }] }
   ])('rejects $name', ({ items }) => {
-    expect(() => parseDashboardValue(JSON.stringify({ ...layout(), items }))).toThrow(TypeError);
+    expect(() => normalizeDashboardValue({ ...layout(), items })).toThrow(TypeError);
   });
 
   it('circulates the contacted peer without moving an unrelated panel or mutating the snapshot', () => {

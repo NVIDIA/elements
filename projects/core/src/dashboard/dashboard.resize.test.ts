@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -52,7 +52,7 @@ describe('dashboard resize', () => {
         ?autosettle=${autoSettle}
         rearrangeable
         sizing=${sizing}
-        .value=${JSON.stringify(layout(flow))}
+        .value=${layout(flow)}
         style="width:620px;height:320px;--column-size:160px;--row-size:120px;--gap:8px">
         <nve-dashboard-panel id="notes">
           <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
@@ -135,7 +135,7 @@ describe('dashboard resize', () => {
         { id: 'baseline', column: 4, row: 0, columnSpan: 2, rowSpan: 1 }
       ];
 
-      dashboard.value = JSON.stringify({
+      dashboard.value = {
         version: 1,
         grid: { flow, tracks: 6 },
         items:
@@ -148,15 +148,15 @@ describe('dashboard resize', () => {
                 columnSpan: item.rowSpan,
                 rowSpan: item.columnSpan
               }))
-      });
+      };
       await settle(dashboard);
 
       return dashboard;
     }
 
     function edgeRecord(dashboard: Dashboard) {
-      const value: DashboardLayout = JSON.parse(dashboard.value);
-      return value.items.find(item => item.id === 'notes')!;
+      assert.isDefined(dashboard.value);
+      return dashboard.value.items.find(item => item.id === 'notes')!;
     }
 
     function edgeSample(
@@ -266,7 +266,7 @@ describe('dashboard resize', () => {
               panel.style.height
             ]);
 
-            expect(dashboard.value).toBe(initial);
+            expect(dashboard.value).toEqual(initial);
 
             dashboard.dispatchEvent(edgeSample('pointerup', target));
 
@@ -415,7 +415,7 @@ describe('dashboard resize', () => {
         dashboard.dispatchEvent(edgeSample('pointerup', target));
         await settle(dashboard);
 
-        expect(dashboard.value).toBe(value);
+        expect(dashboard.value).toEqual(value);
         expect(change).not.toHaveBeenCalled();
         expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
         expect(input.value).toBe('Keep application input');
@@ -426,7 +426,7 @@ describe('dashboard resize', () => {
       const dashboard = await edgeSetup();
 
       dashboard.style.cssText = 'width:240px;height:180px;--column-size:100px;--row-size:80px;--gap:8px';
-      dashboard.value = JSON.stringify({
+      dashboard.value = {
         version: 1,
         grid: { flow: 'vertical', tracks: 6 },
         items: [
@@ -434,7 +434,7 @@ describe('dashboard resize', () => {
           { id: 'cases', column: 4, row: 0, columnSpan: 2, rowSpan: 1 },
           { id: 'baseline', column: 4, row: 2, columnSpan: 2, rowSpan: 1 }
         ]
-      });
+      };
       await settle(dashboard);
 
       const panel = dashboard.querySelector<DashboardPanel>('#notes')!;
@@ -477,14 +477,14 @@ describe('dashboard resize', () => {
         await settle(dashboard);
 
         expect([scrollport.scrollLeft, scrollport.scrollTop]).toEqual([0, 0]);
-        expect(dashboard.value).toBe(initial);
+        expect(dashboard.value).toEqual(initial);
         expect(change).not.toHaveBeenCalled();
       }
 
       await userEvent.keyboard('{ArrowLeft}');
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(change).not.toHaveBeenCalled();
       expect(grip.getBoundingClientRect().right).toBeLessThanOrEqual(scrollport.getBoundingClientRect().right + 1);
       expect(grip.getBoundingClientRect().bottom).toBeLessThanOrEqual(scrollport.getBoundingClientRect().bottom + 1);
@@ -618,7 +618,7 @@ describe('dashboard resize', () => {
       dashboard.dispatchEvent(edgeSample('pointerup', target));
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(committed);
+      expect(dashboard.value).toEqual(committed);
       expect(change).not.toHaveBeenCalled();
     });
 
@@ -641,7 +641,7 @@ describe('dashboard resize', () => {
       dashboard.dispatchEvent(edgeSample('pointermove', target, 'pen'));
       await rendered(dashboard);
 
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).not.toBeNull();
 
       dashboard.dispatchEvent(edgeSample('pointerup', target, 'pen'));
@@ -683,7 +683,7 @@ describe('dashboard resize', () => {
       dashboard.dispatchEvent(edgeSample('pointerup', { x: point.x - 58, y: point.y }, 'touch'));
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
     });
 
@@ -706,7 +706,7 @@ describe('dashboard resize', () => {
 
       dashboard.dispatchEvent(edgeSample('pointerup', { x: active.point.x + 58, y: active.point.y }));
 
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(change).not.toHaveBeenCalled();
 
       for (const gap of [0, 20]) {

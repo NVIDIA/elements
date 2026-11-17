@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -54,7 +54,7 @@ describe('dashboard presentation', () => {
         ?autosettle=${autoSettle}
         rearrangeable
         sizing=${sizing}
-        .value=${JSON.stringify(layout(flow))}
+        .value=${layout(flow)}
         style="width:620px;height:320px;--column-size:160px;--row-size:120px;--gap:8px">
         <nve-dashboard-panel id="notes">
           <nve-dashboard-panel-header>Notes</nve-dashboard-panel-header>
@@ -168,14 +168,15 @@ describe('dashboard presentation', () => {
           expect(panel.getAnimations().filter(animation => animation instanceof CSSTransition)).toEqual([]);
         }
 
-        expect(dashboard.value).toBe(value);
+        expect(dashboard.value).toEqual(value);
         expect(change).not.toHaveBeenCalled();
         expect([...dashboard.children]).toEqual(content);
         expect(notes.querySelector('input')).toBe(input);
         expect(input.value).toBe('Retain this calibration draft');
         expect(document.activeElement).toBe(input);
 
-        const currentLayout: DashboardLayout = JSON.parse(dashboard.value);
+        assert.isDefined(dashboard.value);
+        const currentLayout: DashboardLayout = dashboard.value;
         const source = currentLayout.items.find(item => item.id === 'notes')!;
         const destination =
           flow === 'vertical' ? { ...source, row: source.row + 2 } : { ...source, column: source.column + 2 };
@@ -223,12 +224,12 @@ describe('dashboard presentation', () => {
         expect(Number(getComputedStyle(grip).opacity)).toBeGreaterThan(0);
         expect(Number(getComputedStyle(grip).opacity)).toBeLessThan(1);
         expect(grip.inert).toBe(true);
-        expect(dashboard.value).toBe(committed);
+        expect(dashboard.value).toEqual(committed);
         expect(change).toHaveBeenCalledOnce();
       });
     }
 
-    it('animates explicit value, flow, sizing and gap changes instead of classifying them as external resize', async () => {
+    it('animates explicit restoration, flow, sizing and gap changes instead of classifying them as external resize', async () => {
       const dashboard = await createDashboard('vertical', 'fit', false);
       const notes = dashboard.querySelector<HTMLElement>('#notes')!;
       const input = notes.querySelector('input')!;
@@ -252,11 +253,12 @@ describe('dashboard presentation', () => {
         await rendered(dashboard);
       }
 
-      const initial: DashboardLayout = JSON.parse(dashboard.value);
+      assert.isDefined(dashboard.value);
+      const initial: DashboardLayout = dashboard.value;
 
       dashboard.style.width = '520px';
       dashboard.style.height = '260px';
-      dashboard.value = JSON.stringify({
+      dashboard.animateTo({
         ...initial,
         items: initial.items.map(item => (item.id === 'notes' ? { ...item, row: 2 } : item))
       });
@@ -270,9 +272,10 @@ describe('dashboard presentation', () => {
 
       await finishPanelTransitions();
 
-      const vertical: DashboardLayout = JSON.parse(dashboard.value);
+      assert.isDefined(dashboard.value);
+      const vertical: DashboardLayout = dashboard.value;
 
-      dashboard.value = JSON.stringify({
+      dashboard.animateTo({
         ...vertical,
         grid: { ...vertical.grid, flow: 'horizontal' },
         items: vertical.items.map(item => ({
@@ -318,7 +321,7 @@ describe('dashboard presentation', () => {
 
       await finishPanelTransitions();
 
-      expect(dashboard.value).toBe(fixed);
+      expect(dashboard.value).toEqual(fixed);
       expect(change).not.toHaveBeenCalled();
       expect(notes.querySelector('input')).toBe(input);
       expect(input.value).toBe('Explicit settings keep this draft');
@@ -338,7 +341,7 @@ describe('dashboard presentation', () => {
       };
 
       fixture =
-        await createFixture(html`<nve-dashboard rearrangeable .value=${JSON.stringify(initial)} style="width:720px;height:550px;--row-size:70px;--gap:12px;--animation-duration:1000ms">
+        await createFixture(html`<nve-dashboard rearrangeable .value=${initial} style="width:720px;height:550px;--row-size:70px;--gap:12px;--animation-duration:1000ms">
       ${initial.items.map(item => html`<nve-dashboard-panel id=${item.id}><nve-dashboard-panel-header>${item.id}</nve-dashboard-panel-header><nve-dashboard-panel-content>Application content</nve-dashboard-panel-content></nve-dashboard-panel>`)}
     </nve-dashboard>`);
 
@@ -383,14 +386,15 @@ describe('dashboard presentation', () => {
         expect(dashboard.getBoundingClientRect().width).toBe(host.width);
         expect(dashboard.getBoundingClientRect().height).toBe(host.height);
         expect(panel.matches(':state(carried)')).toBe(true);
-        expect(dashboard.value).toBe(value);
+        expect(dashboard.value).toEqual(value);
       } finally {
         await userEvent.pointer('[/MouseLeft]');
       }
 
       await rendered(dashboard);
 
-      const committed: DashboardLayout = JSON.parse(dashboard.value);
+      assert.isDefined(dashboard.value);
+      const committed: DashboardLayout = dashboard.value;
 
       expect(committed.items.find(item => item.id === 'candidate')!.row).toBe(6);
       expect(change).toHaveBeenCalledOnce();
@@ -456,7 +460,7 @@ describe('dashboard presentation', () => {
       expect(scrollport.scrollWidth).toBeLessThanOrEqual(scrollport.clientWidth + 1);
     });
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(changed).not.toHaveBeenCalled();
     expect([...dashboard.querySelectorAll('#notes input, #notes select')]).toEqual(content);
     expect(notes.querySelector('input')).toBe(input);
@@ -495,7 +499,7 @@ describe('dashboard presentation', () => {
       scrollport.scrollTo(80, 80);
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
     });
 
@@ -519,7 +523,7 @@ describe('dashboard presentation', () => {
 
       expect(notes.getBoundingClientRect().width).toBeCloseTo(before.width);
       expect(notes.getBoundingClientRect().height).toBeCloseTo(before.height);
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
     });
   }
 
@@ -570,7 +574,7 @@ describe('dashboard presentation', () => {
 
     await userEvent.keyboard('{ArrowDown}{Escape}');
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
   });
 
   for (const action of ['move', 'resize'] as const) {
@@ -617,7 +621,7 @@ describe('dashboard presentation', () => {
       expect(panel.parentNode).toBe(parent);
       expect(panel.querySelector('input')).toBe(input);
       expect(input.value).toBe('Unsaved investigation');
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
 
       dashboard.dispatchEvent(pointer('pointercancel', x + 13, y + 13));
@@ -626,7 +630,7 @@ describe('dashboard presentation', () => {
       expect(panel.getBoundingClientRect().left).toBeCloseTo(origin.left);
       expect(panel.getBoundingClientRect().top).toBeCloseTo(origin.top);
       expect(panel.getBoundingClientRect().width).toBeCloseTo(origin.width);
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
     });
 
@@ -661,7 +665,7 @@ describe('dashboard presentation', () => {
       dashboard.dispatchEvent(pointer('pointercancel', x, y));
       await settle(dashboard);
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
     });
   }
 
@@ -676,7 +680,7 @@ describe('dashboard presentation', () => {
 
     expect(dashboard.place('notes', { column: 0, row: 0, columnSpan: 3, rowSpan: 2 })).toBe(true);
     expect(change).toHaveBeenCalledOnce();
-    expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').columnSpan).toBe(3);
+    expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.columnSpan).toBe(3);
 
     await rendered(dashboard);
 
@@ -752,14 +756,14 @@ describe('dashboard presentation', () => {
 
     dashboard.style.height = '400px';
 
-    const value = JSON.stringify({
+    const value = {
       ...layout(),
       items: [
         { id: 'notes', column: 0, row: 0, columnSpan: 2, rowSpan: 12 },
         { id: 'cases', column: 2, row: 0, columnSpan: 2, rowSpan: 2 },
         { id: 'baseline', column: 2, row: 2, columnSpan: 2, rowSpan: 2 }
       ]
-    });
+    };
 
     dashboard.value = value;
     await settle(dashboard);
@@ -789,7 +793,7 @@ describe('dashboard presentation', () => {
 
     expect(Number.parseFloat(ghost.style.height)).toBe(11 * 128 - 8);
     expect(scrollport.scrollTop).toBe(initialScroll);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
 
     const edge = scrollport.getBoundingClientRect().bottom + 140;
 
@@ -817,7 +821,7 @@ describe('dashboard presentation', () => {
 
     expect(ghost.style.height).toBe(accepted);
     expect(scrollport.scrollTop).toBe(scroll);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
 
     dashboard.dispatchEvent(pointer('pointercancel', x, retreat));
     await settle(dashboard);
@@ -930,7 +934,7 @@ describe('dashboard presentation', () => {
       expect(getComputedStyle(wrapper, '::before').content).toBe('none');
       expect(control.hasAttribute('selected')).toBe(false);
       expect(control.matches(':state(selected), :state(pressed)')).toBe(false);
-      expect(dashboard.value).toBe(initial);
+      expect(dashboard.value).toEqual(initial);
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
 
       await userEvent.keyboard('{ArrowDown}');
@@ -1101,7 +1105,7 @@ describe('dashboard presentation', () => {
 
         expect(getComputedStyle(canvas).backgroundImage === 'none').toBe(attribute === 'hidden');
         expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBe(ghost);
-        expect(dashboard.value).toBe(initial);
+        expect(dashboard.value).toEqual(initial);
         expect(changes).not.toHaveBeenCalled();
       }
 
@@ -1114,13 +1118,13 @@ describe('dashboard presentation', () => {
       expect(getComputedStyle(canvas).backgroundImage).toBe('none');
       expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBe(ghost);
 
-      const destination = JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes');
+      const destination = dashboard.value?.items.find((item: { id: string }) => item.id === 'notes');
 
-      expect(destination.row).toBe(0);
+      expect(destination?.row).toBe(0);
 
       dashboard.dispatchEvent(pointer('pointerup', point.x, point.y + 256));
 
-      expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').row).toBe(2);
+      expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.row).toBe(2);
       expect(changes).toHaveBeenCalledOnce();
 
       await settle(dashboard);
@@ -1171,7 +1175,7 @@ describe('dashboard presentation', () => {
         expect(painted.backgroundSize).not.toBe(before);
         expect(painted.backgroundSize).toBe(flow === 'vertical' ? 'calc(25% + 5px) 140px' : '180px 140px');
         expect(render).not.toHaveBeenCalled();
-        expect(dashboard.value).toBe(initial);
+        expect(dashboard.value).toEqual(initial);
         expect(changes).not.toHaveBeenCalled();
         expect(dashboard.shadowRoot!.querySelector('nve-ghost')).toBeNull();
         expect(dashboard.querySelector('input')!.value).toBe('Original notes');
@@ -1193,7 +1197,7 @@ describe('dashboard presentation', () => {
     dashboard.style.width = '480px';
     await vi.waitFor(() => expect(notes.getBoundingClientRect().width).toBeLessThan(initialWidth - 20));
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
   });
 
   it('commits fixed-size resizing when the preview introduces its first dashboard scrollbar', async () => {
@@ -1201,11 +1205,11 @@ describe('dashboard presentation', () => {
 
     dashboard.querySelector<HTMLElement>('#cases')!.hidden = true;
     dashboard.querySelector<HTMLElement>('#baseline')!.hidden = true;
-    dashboard.value = JSON.stringify({
+    dashboard.value = {
       version: 1,
       grid: { flow: 'vertical', tracks: 2 },
       items: [{ id: 'notes', column: 0, row: 0, columnSpan: 2, rowSpan: 2 }]
-    });
+    };
     await settle(dashboard);
 
     const panel = dashboard.querySelector<HTMLElement>('#notes')!;
@@ -1228,12 +1232,12 @@ describe('dashboard presentation', () => {
     await settle(dashboard);
 
     expect(panel.getBoundingClientRect().height).toBeGreaterThan(before + 120);
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
 
     dashboard.dispatchEvent(pointer('pointerup', x, y + 256));
     await settle(dashboard);
 
-    expect(dashboard.value).not.toBe(value);
+    expect(dashboard.value).not.toEqual(value);
     expect(change).toHaveBeenCalledOnce();
   });
 
@@ -1286,7 +1290,7 @@ describe('dashboard presentation', () => {
     expect(painted).toBeGreaterThan(initial);
     expect(painted).toBeLessThan(initial + 384);
     expect(panel.getBoundingClientRect().top).toBeCloseTo(initial + 384);
-    expect(dashboard.value).toBe(before);
+    expect(dashboard.value).toEqual(before);
 
     dashboard.dispatchEvent(pointer('pointermove', x, y + 256));
     await dashboard.updateComplete;
@@ -1300,7 +1304,7 @@ describe('dashboard presentation', () => {
 
     dashboard.dispatchEvent(pointer('pointerup', x, y + 256));
 
-    expect(JSON.parse(dashboard.value).items.find((item: { id: string }) => item.id === 'notes').row).toBe(2);
+    expect(dashboard.value?.items.find((item: { id: string }) => item.id === 'notes')?.row).toBe(2);
     expect(change).toHaveBeenCalledOnce();
 
     await settle(dashboard);

@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { DashboardLayout } from './dashboard.types.js';
+
 import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -10,11 +12,11 @@ import { Dashboard, DashboardPanel, DashboardPanelHeader } from './index.js';
 
 import './define.js';
 
-const value = JSON.stringify({
+const value = {
   version: 1,
   grid: { flow: 'horizontal', tracks: 2 },
   items: [{ id: 'late', column: 0, row: 0, columnSpan: 3, rowSpan: 2 }]
-});
+} satisfies DashboardLayout;
 
 describe('dashboard child upgrade ordering', () => {
   let fixture: HTMLElement | undefined;
@@ -47,14 +49,14 @@ describe('dashboard child upgrade ordering', () => {
     const changes = vi.fn();
 
     dashboard.addEventListener('change', changes);
-    dashboard.setAttribute('value', value);
+    dashboard.setAttribute('value', JSON.stringify(value));
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
 
     fixture.append(dashboard);
     await elementIsStable(dashboard);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(dashboard.querySelector('input')).toBe(input);
     expect(dashboard.querySelector('nve-dashboard-panel')).toBe(panel);
     expect(changes).not.toHaveBeenCalled();
@@ -65,7 +67,7 @@ describe('dashboard child upgrade ordering', () => {
 
     const template = document.createElement('template');
 
-    template.innerHTML = `<nve-dashboard style="width:640px;height:360px" value='${value}'><nve-dashboard-panel id="late"><nve-dashboard-panel-header>Late panel</nve-dashboard-panel-header><input value="kept"></nve-dashboard-panel></nve-dashboard>`;
+    template.innerHTML = `<nve-dashboard style="width:640px;height:360px" value='${JSON.stringify(value)}'><nve-dashboard-panel id="late"><nve-dashboard-panel-header>Late panel</nve-dashboard-panel-header><input value="kept"></nve-dashboard-panel></nve-dashboard>`;
 
     const dashboard = template.content.querySelector('nve-dashboard')!;
     const panel = dashboard.querySelector('nve-dashboard-panel');
@@ -76,7 +78,7 @@ describe('dashboard child upgrade ordering', () => {
     fixture.append(template.content);
     await elementIsStable(dashboard);
 
-    expect(dashboard.value).toBe(value);
+    expect(dashboard.value).toEqual(value);
     expect(dashboard.flow).toBe('horizontal');
     expect(dashboard.tracks).toBe(2);
     expect(dashboard.querySelector('nve-dashboard-panel')).toBe(panel);
@@ -102,17 +104,17 @@ describe('dashboard child upgrade ordering', () => {
       const changes = vi.fn();
 
       dashboard.addEventListener('change', changes);
-      dashboard.setAttribute('value', value);
+      dashboard.setAttribute('value', JSON.stringify(value));
       await dashboard.updateComplete;
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
 
       registry.define('nve-dashboard-panel-header', class extends DashboardPanelHeader {});
       registry.define('nve-dashboard-panel', class extends DashboardPanel {});
       await vi.waitFor(() => expect(panel.style.width).not.toBe(''));
       await elementIsStable(dashboard);
 
-      expect(dashboard.value).toBe(value);
+      expect(dashboard.value).toEqual(value);
       expect(dashboard.firstElementChild).toBe(panel);
       expect(changes).not.toHaveBeenCalled();
     }
@@ -134,11 +136,11 @@ describe('dashboard child upgrade ordering', () => {
 
       const dashboard = root.querySelector<Dashboard>('nve-dashboard')!;
       const panel = dashboard.querySelector('nve-dashboard-panel')!;
-      const pending = JSON.stringify({
+      const pending = {
         version: 1,
         grid: { flow: 'vertical', tracks: 2 },
         items: [{ id: 'late', column: 0, row: 0, columnSpan: 1, rowSpan: 2 }]
-      });
+      } satisfies DashboardLayout;
       const changes = vi.fn();
 
       dashboard.addEventListener('change', changes);
@@ -147,7 +149,7 @@ describe('dashboard child upgrade ordering', () => {
       registry.define('nve-dashboard-panel', class extends DashboardPanel {});
       await elementIsStable(dashboard);
 
-      expect(dashboard.value).toBe(pending);
+      expect(dashboard.value).toEqual(pending);
       expect(dashboard.shadowRoot!.querySelector<HTMLElement>('.canvas')!.hidden).toBe(true);
       expect(panel.style.width).toBe('');
 
@@ -156,7 +158,7 @@ describe('dashboard child upgrade ordering', () => {
       await vi.waitFor(() => expect(dashboard.shadowRoot!.querySelector<HTMLElement>('.canvas')!.hidden).toBe(false));
 
       expect(panel.style.width).not.toBe('');
-      expect(dashboard.value).toBe(pending);
+      expect(dashboard.value).toEqual(pending);
       expect(changes).not.toHaveBeenCalled();
 
       panel.minColumnSpan = 3;
@@ -164,7 +166,7 @@ describe('dashboard child upgrade ordering', () => {
       expect(() => {
         dashboard.value = pending;
       }).toThrow(RangeError);
-      expect(dashboard.value).toBe(pending);
+      expect(dashboard.value).toEqual(pending);
     }
   );
 });
