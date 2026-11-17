@@ -6,28 +6,29 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 
-import { parseWorkspaceValue } from './utils/model/value.utils.js';
+import { normalizeWorkspaceValue } from './utils/model/value.utils.js';
 
 import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
+
+import type { WorkspaceLayout } from './utils/model/layout.utils.js';
 
 import type { Workspace } from './workspace.js';
 
 import './define.js';
 
-const arrangement = (weights: number[], active = 'a') =>
-  JSON.stringify({
-    version: 1,
-    closed: [],
-    root: {
-      type: 'split',
-      axis: 'horizontal',
-      weights,
-      children: [
-        { type: 'group', panels: ['a', 'companion'], active },
-        { type: 'group', panels: ['b'], active: 'b' }
-      ]
-    }
-  });
+const arrangement = (weights: number[], active = 'a'): WorkspaceLayout => ({
+  version: 1,
+  closed: [],
+  root: {
+    type: 'split',
+    axis: 'horizontal',
+    weights,
+    children: [
+      { type: 'group', panels: ['a', 'companion'], active },
+      { type: 'group', panels: ['b'], active: 'b' }
+    ]
+  }
+});
 
 describe('workspace animated restoration', () => {
   let fixture: HTMLElement | undefined;
@@ -81,7 +82,7 @@ describe('workspace animated restoration', () => {
       const oldWidth = workspace.querySelector('#a')!.getBoundingClientRect().width;
       const target = arrangement([1, 3]);
       workspace.animateTo(target, { duration: 500 });
-      expect(workspace.value).toBe(JSON.stringify(parseWorkspaceValue(target)));
+      expect(workspace.value).toEqual(normalizeWorkspaceValue(target));
       const animation = await motion();
       animation.currentTime = 0;
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(oldWidth, 1);
@@ -129,8 +130,8 @@ describe('workspace animated restoration', () => {
       workspace.animateTo(arrangement([1, 3]), { duration: 500 });
       const animation = await motion();
       const value = workspace.value;
-      expect(() => workspace.animateTo('{')).toThrow();
-      expect(workspace.value).toBe(value);
+      expect(() => workspace.animateTo(JSON.parse('{"version":2}'))).toThrow();
+      expect(workspace.value).toEqual(value);
       expect(workspace.querySelector('#a')!.getAnimations()[0]).toBe(animation);
     });
 
@@ -170,21 +171,21 @@ describe('workspace animated restoration', () => {
       const capture = vi.spyOn(detached.querySelector('#a')!, 'getBoundingClientRect');
       detached.animateTo(arrangement([3, 1]));
       expect(capture).not.toHaveBeenCalled();
-      expect(detached.value).toBe(JSON.stringify(parseWorkspaceValue(arrangement([3, 1]))));
+      expect(detached.value).toEqual(normalizeWorkspaceValue(arrangement([3, 1])));
       expect(detached.getAnimations()).toHaveLength(0);
     });
 
     it('accepts restoration before the first render without starting motion', () => {
       const detached = document.createElement('nve-workspace');
       detached.animateTo(arrangement([3, 1]));
-      expect(detached.value).toBe(JSON.stringify(parseWorkspaceValue(arrangement([3, 1]))));
+      expect(detached.value).toEqual(normalizeWorkspaceValue(arrangement([3, 1])));
       expect(detached.getAnimations()).toHaveLength(0);
     });
   });
 
   describe('coordinated presentation', () => {
     it('aligns retained header labels and tab controls when extracting into a new group', async () => {
-      const target = JSON.stringify({
+      const target = {
         version: 1,
         closed: [],
         root: {
@@ -193,7 +194,7 @@ describe('workspace animated restoration', () => {
           weights: [1, 1, 1],
           children: ['a', 'companion', 'b'].map(id => ({ type: 'group', panels: [id], active: id }))
         }
-      });
+      } satisfies WorkspaceLayout;
       const oldTab = workspace
         .shadowRoot!.querySelector('[data-panel="companion"]')!
         .parentElement!.getBoundingClientRect();
@@ -285,7 +286,7 @@ describe('workspace animated restoration', () => {
       workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="companion"]')!.click();
       await elementIsStable(workspace);
       expect(workspace.querySelector('#a')!.getAnimations()).toHaveLength(0);
-      expect(workspace.value).toContain('"active":"companion"');
+      expect(workspace.value?.root).toMatchObject({ children: [{ active: 'companion' }, {}] });
     });
 
     it('allows tab navigation keys during restoration', async () => {
@@ -337,7 +338,7 @@ describe('workspace animated restoration', () => {
       const target = workspace.value;
       workspace.style.width = '900px';
       await vi.waitFor(() => expect(animation.playState).toBe('idle'));
-      expect(workspace.value).toBe(target);
+      expect(workspace.value).toEqual(target);
     });
 
     it('settles restoration before reconciling newly supplied panels', async () => {
@@ -347,7 +348,7 @@ describe('workspace animated restoration', () => {
       panel.id = 'added';
       workspace.append(panel);
       await vi.waitFor(() => expect(animation.playState).toBe('idle'));
-      expect(workspace.value).toContain('added');
+      expect(JSON.stringify(workspace.value)).toContain('added');
     });
 
     it('releases all motion on disconnection', async () => {
@@ -369,7 +370,7 @@ describe('workspace animated restoration', () => {
       const preview = panel.getBoundingClientRect().width;
       expect(preview).toBeCloseTo(width + 60);
       escape();
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       const animation = await motion();
       expect(animation.effect!.getTiming().duration).toBe(150);
       animation.currentTime = 0;
@@ -377,10 +378,10 @@ describe('workspace animated restoration', () => {
       animation.currentTime = 75;
       expect(panel.getBoundingClientRect().width).toBeGreaterThan(width);
       expect(panel.getBoundingClientRect().width).toBeLessThan(preview);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
       handle.dispatchEvent(pointer('pointerup', 60));
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
       const blocked = pointer('pointerdown', 0);
       handle.dispatchEvent(blocked);
@@ -388,12 +389,12 @@ describe('workspace animated restoration', () => {
       animation.finish();
       await vi.waitFor(() => expect(panel.getAnimations()).toHaveLength(0));
       expect(panel.getBoundingClientRect().width).toBeCloseTo(width, 1);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
       handle.dispatchEvent(pointer('pointermove', 90));
       handle.dispatchEvent(pointer('pointerup', 90));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -409,7 +410,7 @@ describe('workspace animated restoration', () => {
       expect(animation.playState).toBe('idle');
       handle.dispatchEvent(pointer('pointerup', 90));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(JSON.stringify(parseWorkspaceValue(target)));
+      expect(workspace.value).toEqual(normalizeWorkspaceValue(target));
       expect(workspace.querySelector('#a')!.getAnimations()).toHaveLength(0);
       expect(changed).not.toHaveBeenCalled();
     });
@@ -434,7 +435,7 @@ describe('workspace animated restoration', () => {
       handle.dispatchEvent(pointer('pointerup', 60));
       await elementIsStable(workspace);
       expect(next.playState).toBe('paused');
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -456,7 +457,7 @@ describe('workspace animated restoration', () => {
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(width, 1);
       handle.dispatchEvent(pointer('pointerup', 60));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -468,7 +469,7 @@ describe('workspace animated restoration', () => {
       expect(workspace.querySelector('#a')!.getAnimations()).toHaveLength(0);
       handle.dispatchEvent(pointer('pointerup', 0));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
     });
 
     it('releases return motion on disconnect and permits a fresh resize after reconnecting', async () => {
@@ -484,14 +485,14 @@ describe('workspace animated restoration', () => {
       handle.dispatchEvent(pointer('pointerup', 60));
       parent.append(workspace);
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(changed).not.toHaveBeenCalled();
       const next = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
       next.dispatchEvent(pointer('pointerdown', 0));
       next.dispatchEvent(pointer('pointermove', 20));
       next.dispatchEvent(pointer('pointerup', 20));
       await elementIsStable(workspace);
-      expect(workspace.value).not.toBe(value);
+      expect(workspace.value).not.toEqual(value);
       expect(changed).toHaveBeenCalledOnce();
     });
   });

@@ -101,7 +101,7 @@ describe('workspace application menus', () => {
     expect(group.parentElement).toBe(workspace);
     expect(buttons[0]!.getRootNode()).toBe(group.getRootNode());
     expect(workspace.querySelectorAll('nve-dropdown')).toHaveLength(2);
-    expect(workspace.value).toBe(initial);
+    expect(workspace.value).toEqual(initial);
     expect([...workspace.children].filter(child => child.localName === 'nve-workspace-panel')).toHaveLength(2);
   });
 
@@ -123,7 +123,7 @@ describe('workspace application menus', () => {
     await elementIsStable(items[0]);
     await emulateClick(items[0]!);
     await elementIsStable(workspace);
-    expect(JSON.parse(workspace.value).closed).toEqual(['b']);
+    expect(workspace.value?.closed).toEqual(['b']);
     expect(dropdown.matches(':popover-open')).toBe(false);
   });
 
@@ -170,6 +170,6 @@ describe('workspace application menus', () => {
     expect(workspace.isCommandAvailable('--close', { value: items[0]!.value })).toBe(false);
     await emulateClick(items[0]!);
     await elementIsStable(workspace);
-    expect(workspace.value).toBe(initial);
+    expect(workspace.value).toEqual(initial);
   });
 });

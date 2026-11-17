@@ -4,7 +4,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { allocateWorkspace } from '../geometry/allocation.utils.js';
-import { parseWorkspaceValue } from '../model/value.utils.js';
+import { normalizeWorkspaceValue } from '../model/value.utils.js';
 import { createWorkspacePlacementPlanner, planWorkspacePlacement } from './planner.utils.js';
 import { sizePreferredSplit } from './split-sizing.utils.js';
 import { WorkspaceEvaluation } from '../evaluation.utils.js';
@@ -24,7 +24,7 @@ describe('workspace structural plan consumers', () => {
     children
   });
   const createLayout = (root: WorkspaceNode): WorkspaceLayout => {
-    const value = parseWorkspaceValue(JSON.stringify({ version: 1, root, closed: [] }));
+    const value = normalizeWorkspaceValue({ version: 1 as const, root, closed: [] });
     if (!value) throw new Error('Expected a workspace layout');
     return value;
   };

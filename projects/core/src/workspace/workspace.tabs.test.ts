@@ -2,13 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import type { Point } from '@nvidia-elements/core/internal';
-
-import { parseWorkspaceValue } from './utils/model/value.utils.js';
 
 import type { WorkspaceLayout } from './utils/model/layout.utils.js';
 
@@ -31,14 +29,13 @@ describe('workspace header semantics', () => {
         { type: 'group', panels: ['c'], active: 'c' }
       ]
     }
-  };
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement;
   let workspace: Workspace;
 
   beforeEach(async () => {
-    fixture =
-      await createFixture(html`<nve-workspace closable style="width:600px;height:250px" .value=${JSON.stringify(arrangement)}>
+    fixture = await createFixture(html`<nve-workspace closable style="width:600px;height:250px" .value=${arrangement}>
       <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha<button slot="suffix">Alpha action</button></nve-workspace-panel-header><input value="retained"></nve-workspace-panel>
       <nve-workspace-panel id="b"><nve-workspace-panel-header>Beta</nve-workspace-panel-header>Beta content</nve-workspace-panel>
       <nve-workspace-panel id="c"><nve-workspace-panel-header>Gamma</nve-workspace-panel-header>Gamma content</nve-workspace-panel>
@@ -79,7 +76,7 @@ describe('workspace header semantics', () => {
     await userEvent.click(workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="c"]')!);
     await elementIsStable(workspace);
     expect(workspace.querySelector('#c')!.shadowRoot!.activeElement).toBeNull();
-    expect(workspace.value).toBe(value);
+    expect(workspace.value).toEqual(value);
     expect(change).not.toHaveBeenCalled();
   });
 
@@ -95,10 +92,10 @@ describe('workspace header semantics', () => {
   });
 
   it('lets Tabs initialize restored selection and its close-control tab order', async () => {
-    workspace.value = JSON.stringify({
+    workspace.value = {
       ...arrangement,
       root: { type: 'group', panels: ['b', 'a', 'c'], active: 'b' }
-    });
+    };
     await elementIsStable(workspace);
     const selected = workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="b"]')!;
     await vi.waitFor(() => {
@@ -154,7 +151,7 @@ describe('workspace header semantics', () => {
     tab.focus();
     const changed = vi.fn();
     workspace.addEventListener('change', changed);
-    workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
+    workspace.value = { ...arrangement, closed: ['b'] };
     await elementIsStable(workspace);
     const panel = workspace.querySelector('#a')!;
     await vi.waitFor(() => expect(panel.shadowRoot!.activeElement).toBe(panel.shadowRoot!.querySelector('.body')));
@@ -165,7 +162,7 @@ describe('workspace header semantics', () => {
 
   it('recovers the same panel when a focused group is split into differently ordered singletons', async () => {
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-panel="a"]')!.focus();
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: {
@@ -174,7 +171,7 @@ describe('workspace header semantics', () => {
         weights: [1, 1, 1],
         children: ['b', 'a', 'c'].map(id => ({ type: 'group', panels: [id], active: id }))
       }
-    });
+    };
     await elementIsStable(workspace);
     const panel = workspace.querySelector('#a')!;
     await vi.waitFor(() => expect(panel.shadowRoot!.activeElement).toBe(panel.shadowRoot!.querySelector('.body')));
@@ -183,14 +180,14 @@ describe('workspace header semantics', () => {
 
   it('retains close-control focus when its panel changes from tabbed to singleton', async () => {
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="a"]')!.focus();
-    workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
+    workspace.value = { ...arrangement, closed: ['b'] };
     await elementIsStable(workspace);
     expect(workspace.shadowRoot!.activeElement).toBe(workspace.shadowRoot!.querySelector('[data-close="a"]'));
   });
 
   it('recovers to surviving content when restoration removes the focused close control', async () => {
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="b"]')!.focus();
-    workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
+    workspace.value = { ...arrangement, closed: ['b'] };
     await elementIsStable(workspace);
     const panel = workspace.querySelector('#a')!;
     await vi.waitFor(() => expect(panel.shadowRoot!.activeElement).toBe(panel.shadowRoot!.querySelector('.body')));
@@ -203,7 +200,7 @@ describe('workspace header semantics', () => {
     workspace.querySelector('#b')!.dispatchEvent(new CommandEvent('command', { command: '--close' }));
     await elementIsStable(workspace);
     expect(document.activeElement).toBe(input);
-    workspace.value = JSON.stringify(arrangement);
+    workspace.value = arrangement;
     await elementIsStable(workspace);
     expect(document.activeElement).toBe(input);
     expect(workspace.querySelector('#a')!.getAttribute('role')).toBe('tabpanel');
@@ -212,10 +209,10 @@ describe('workspace header semantics', () => {
   it('preserves focused suffix controls while silently changing group presentation', async () => {
     const action = workspace.querySelector<HTMLButtonElement>('#a button')!;
     action.focus();
-    workspace.value = JSON.stringify({ ...arrangement, closed: ['b'] });
+    workspace.value = { ...arrangement, closed: ['b'] };
     await elementIsStable(workspace);
     expect(document.activeElement).toBe(action);
-    workspace.value = JSON.stringify(arrangement);
+    workspace.value = arrangement;
     await elementIsStable(workspace);
     expect(document.activeElement).toBe(action);
   });
@@ -233,7 +230,7 @@ describe('workspace header semantics', () => {
 });
 
 describe('workspace tab overflow and scrolling', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -245,7 +242,7 @@ describe('workspace tab overflow and scrolling', () => {
         { type: 'group', panels: ['b'], active: 'b' }
       ]
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement;
 
@@ -280,11 +277,11 @@ describe('workspace tab overflow and scrolling', () => {
     workspace.querySelectorAll('[slot="suffix"]').forEach(element => element.remove());
     workspace.style.width = '140px';
     workspace.closable = true;
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: { type: 'group', panels: ['a', 'companion', 'b'], active: 'a' }
-    });
+    };
     await elementIsStable(workspace);
     const entry = workspace.shadowRoot!.querySelector<HTMLElement>('.tablist .tab-entry')!;
     const strip = entry.closest<HTMLElement>('.tablist')!;
@@ -296,7 +293,7 @@ describe('workspace tab overflow and scrolling', () => {
     workspace.style.setProperty('--tab-min-width', 'calc(2 * 100px)');
     await vi.waitFor(() => expect(entry.getBoundingClientRect().width).toBe(200));
     expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBe(140);
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 
   it('ellipsizes long titles while preserving prefix decoration and header height', async () => {
@@ -319,11 +316,11 @@ describe('workspace tab overflow and scrolling', () => {
     const workspace = await createWorkspace();
     const id = 'a-long-identifier-for-a-panel-without-an-authored-header';
     workspace.querySelector('#b')!.id = id;
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: { type: 'group', panels: ['a', 'companion', id], active: id }
-    });
+    };
     await elementIsStable(workspace);
     const title = workspace.shadowRoot!.querySelector<HTMLElement>(`[data-panel="${id}"] .fallback-title`)!;
     expect(getComputedStyle(title).textOverflow).toBe('ellipsis');
@@ -409,7 +406,7 @@ describe('workspace tab overflow and scrolling', () => {
     await vi.waitFor(() =>
       expect(label.getBoundingClientRect().x).toBeCloseTo(strip.getBoundingClientRect().x - strip.scrollLeft, 1)
     );
-    workspace.value = JSON.stringify({ ...JSON.parse(arrangement), closed: ['a', 'companion'] });
+    workspace.value = { ...arrangement, closed: ['a', 'companion'] };
     await elementIsStable(workspace);
     expect(track.getAnimations()).toHaveLength(0);
   });
@@ -469,11 +466,11 @@ describe('workspace tab overflow and scrolling', () => {
     const workspace = await createWorkspace();
     workspace.closable = true;
     workspace.style.width = '180px';
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: { type: 'group', panels: ['a', 'b', 'companion'], active: 'a' }
-    });
+    };
     await elementIsStable(workspace);
     const strip = workspace.shadowRoot!.querySelector<HTMLElement>('.tablist')!;
     await vi.waitFor(() => expect(strip.scrollWidth).toBeGreaterThan(strip.clientWidth));
@@ -525,9 +522,9 @@ describe('workspace singleton tab presentation', () => {
     workspace.shadowRoot!.querySelector<HTMLElement>('[data-close="b"]')!.click();
     await elementIsStable(workspace);
     expect(workspace.shadowRoot!.querySelector('nve-tabs.tab-track')).toBeNull();
-    const snapshot = parseWorkspaceValue(workspace.value);
+    const snapshot = workspace.value;
     if (!snapshot) throw new Error('Expected a workspace layout');
-    workspace.value = JSON.stringify({ ...snapshot, closed: [] });
+    workspace.value = { ...snapshot, closed: [] };
     await elementIsStable(workspace);
     const restored = workspace.shadowRoot!.querySelector('nve-tabs.tab-track')!;
     expect(getComputedStyle(restored, '::after').display).not.toBe('none');
@@ -562,7 +559,7 @@ describe('workspace singleton tab presentation', () => {
 });
 
 describe('workspace tab close and focus', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -574,7 +571,7 @@ describe('workspace tab close and focus', () => {
         { type: 'group', panels: ['c', 'd'], active: 'c' }
       ]
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement | undefined;
   let workspace: Workspace;
@@ -603,7 +600,8 @@ describe('workspace tab close and focus', () => {
   }
 
   function snapshot(): WorkspaceLayout {
-    return JSON.parse(workspace.value);
+    assert.isDefined(workspace.value);
+    return workspace.value;
   }
 
   it.each(['Enter', 'Space'])('should close an inactive tab with %s without activating it', async key => {
@@ -648,8 +646,8 @@ describe('workspace tab close and focus', () => {
     );
     expect(snapshot().closed).toEqual(['a']);
     expect(change).toHaveBeenCalledOnce();
-    expect(snapshot().root).toEqual(JSON.parse(saved).root);
-    workspace.value = JSON.stringify({ ...snapshot(), closed: [] });
+    expect(snapshot().root).toEqual(saved?.root);
+    workspace.value = { ...snapshot(), closed: [] };
     await elementIsStable(workspace);
     expect(panel.hidden).toBe(false);
     expect(panel.matches(':state(workspace-presented)')).toBe(true);
@@ -695,7 +693,7 @@ describe('workspace reserved tab presentation', () => {
       </nve-workspace>
     `);
     workspace = fixture.querySelector<Workspace>('nve-workspace')!;
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: {
@@ -707,7 +705,7 @@ describe('workspace reserved tab presentation', () => {
           { type: 'group', panels: ['b', 'b2'], active: 'b2' }
         ]
       }
-    });
+    };
     await elementIsStable(workspace);
     vi.spyOn(workspace, 'setPointerCapture').mockImplementation(() => {});
   });
@@ -761,12 +759,12 @@ describe('workspace reserved tab presentation', () => {
     expect(workspace.querySelector('#b2')!.shadowRoot!.querySelector<HTMLElement>('.content')!.hidden).toBe(false);
     expect(workspace.querySelector('#companion')!.matches(':state(workspace-presented)')).toBe(false);
     expect(getComputedStyle(entry('b')).transitionProperty).toContain('left');
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
     expect(change).not.toHaveBeenCalled();
     expect(workspace.querySelector('#a input')).toBe(input);
     workspace.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector('[data-destination-ghost]')).toBeNull());
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 
   it('holds the accepted insertion position across refresh and small real pointer movements, then silently returns an inactive tab', async () => {
@@ -813,7 +811,7 @@ describe('workspace reserved tab presentation', () => {
       y: reservationRect.y + reservationRect.height / 2
     });
     await elementIsStable(workspace);
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
     expect(change).not.toHaveBeenCalled();
     expect(button('a').hasAttribute('selected')).toBe(true);
   });
@@ -825,7 +823,7 @@ describe('workspace reserved tab presentation', () => {
       panel.id = id;
       workspace.append(panel);
     }
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: {
@@ -837,7 +835,7 @@ describe('workspace reserved tab presentation', () => {
           { type: 'group', panels: ['b', 'b2', ...extra], active: 'b2' }
         ]
       }
-    });
+    };
     await elementIsStable(workspace);
     const target = button('b').getBoundingClientRect();
     begin('companion');
@@ -857,7 +855,7 @@ describe('workspace reserved tab presentation', () => {
     const ghost = workspace.shadowRoot!.querySelector<HTMLElement>('[data-destination-ghost]')!;
     expect(ghost.hasAttribute('data-cue-clipped')).toBe(true);
     expect(getComputedStyle(ghost).visibility).toBe('hidden');
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
     strip.scrollLeft = 0;
     strip.dispatchEvent(new Event('scroll'));
     await nextFrame();

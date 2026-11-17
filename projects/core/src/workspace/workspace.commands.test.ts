@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { assert, afterEach, describe, expect, it, vi } from 'vitest';
 
 import { createFixture, elementIsStable, emulateClick, removeFixture } from '@internals/testing';
 
@@ -44,7 +44,7 @@ describe('workspace invoker commands', () => {
     fixture = await createFixture(html`
       <div>
         <nve-button id="invoker">Invoke</nve-button>
-        <nve-workspace id="workspace" groupable .value=${JSON.stringify(layout)} style="width:900px;height:500px">
+        <nve-workspace id="workspace" groupable .value=${layout} style="width:900px;height:500px">
           ${['a', 'companion', 'b', 'c'].map(
             id => html`
               <nve-workspace-panel id=${id}>
@@ -79,7 +79,10 @@ describe('workspace invoker commands', () => {
     await elementIsStable(workspace);
   }
 
-  const value = (workspace: Workspace): WorkspaceLayout => JSON.parse(workspace.value);
+  function value(workspace: Workspace): WorkspaceLayout {
+    assert.isDefined(workspace.value);
+    return workspace.value;
+  }
 
   function control<T extends HTMLElement = HTMLElement>(workspace: Workspace, selector: string) {
     return workspace.shadowRoot!.querySelector<T>(selector)!;
@@ -136,7 +139,7 @@ describe('workspace invoker commands', () => {
         anchor: 'a',
         placement: { operation: 'split', target: 'b', position: 'left' }
       });
-      expect(workspace.value).toBe(original);
+      expect(workspace.value).toEqual(original);
       expect(changed).not.toHaveBeenCalled();
       workspace.closable = true;
       await elementIsStable(workspace);
@@ -173,7 +176,7 @@ describe('workspace invoker commands', () => {
         anchor: 'a',
         placement: { operation: 'insert', scope: 'workspace', position: 'bottom' }
       });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).toHaveBeenCalledOnce();
     });
   });
@@ -188,7 +191,7 @@ describe('workspace invoker commands', () => {
       expect(workspace.isCommandAvailable('--close', context)).toBe(true);
       workspace.closable = false;
       expect(workspace.isCommandAvailable('--close', context)).toBe(false);
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -202,7 +205,7 @@ describe('workspace invoker commands', () => {
       workspace.rearrangeable = false;
       const initial = workspace.value;
       await invoke(workspace, button, { command: '--place', placement });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
       workspace.rearrangeable = true;
       await invoke(workspace, button, { command: '--place', placement });
@@ -218,7 +221,7 @@ describe('workspace invoker commands', () => {
       const initial = workspace.value;
       expect(workspace.isCommandAvailable('--place', context)).toBe(false);
       await invoke(workspace, button, { command: '--place', placement });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
       workspace.groupable = true;
       expect(workspace.isCommandAvailable('--place', context)).toBe(true);
@@ -235,7 +238,7 @@ describe('workspace invoker commands', () => {
       const placement: WorkspacePlacement = { operation: 'split', target: 'a', position: 'top' };
       expect(workspace.isCommandAvailable('--place', { value: 'b', placement })).toBe(false);
       await invoke(workspace, button, { command: '--place', anchor: 'b', placement });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
   });
@@ -270,7 +273,7 @@ describe('workspace invoker commands', () => {
         expect(divided.weights[index]).toBeCloseTo(weight, 10)
       );
       expect(changed).toHaveBeenCalledOnce();
-      workspace.value = JSON.stringify(peers());
+      workspace.value = peers();
       await elementIsStable(workspace);
       await invoke(workspace, button, {
         command: '--place',
@@ -344,7 +347,7 @@ describe('workspace invoker commands', () => {
       const root = value(workspace).root;
       expect(root?.type === 'split' && root.axis).toBe('vertical');
       expect(root?.type === 'split' && root.children[0]).toEqual(group('companion'));
-      workspace.value = JSON.stringify(nested());
+      workspace.value = nested();
       await elementIsStable(workspace);
       await invoke(workspace, button, {
         command: '--place',
@@ -375,7 +378,7 @@ describe('workspace invoker commands', () => {
         anchor: 'b',
         placement: { operation: 'reorder', target: 'a', position: 'before' }
       });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
   });
@@ -392,7 +395,7 @@ describe('workspace invoker commands', () => {
       expect(workspace.isCommandAvailable('--place', { value: 'a', placement: button.placement })).toBe(false);
       await emulateClick(button);
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -405,7 +408,7 @@ describe('workspace invoker commands', () => {
         anchor: 'a',
         placement: { operation: 'split', target: 'missing', position: 'left' }
       });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -418,7 +421,7 @@ describe('workspace invoker commands', () => {
         anchor: 'a',
         placement: { operation: 'join', target: 'b' }
       });
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
   });
@@ -452,7 +455,7 @@ describe('workspace invoker commands', () => {
       workspace.groupable = false;
       await elementIsStable(workspace);
       expect(available).toHaveBeenCalledOnce();
-      expect(workspace.value).toBe(initial);
+      expect(workspace.value).toEqual(initial);
       expect(changed).not.toHaveBeenCalled();
     });
 
@@ -464,7 +467,7 @@ describe('workspace invoker commands', () => {
       });
       const restored = value(workspace);
       restored.closed = ['a'];
-      workspace.value = JSON.stringify(restored);
+      workspace.value = restored;
       await elementIsStable(workspace);
       expect(answers.length).toBeGreaterThan(0);
       expect(answers.every(Boolean)).toBe(true);
@@ -549,7 +552,7 @@ describe('workspace invoker commands', () => {
     it('keeps restoration active when a placement command is unavailable', async () => {
       const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
-      workspace.animateTo(JSON.stringify(peers()), { duration: 10000 });
+      workspace.animateTo(peers(), { duration: 10000 });
       const panel = workspace.querySelector('#a')!;
       await vi.waitFor(() => expect(panel.getAnimations().length).toBeGreaterThan(0));
       const animation = panel.getAnimations()[0]!;
@@ -560,14 +563,14 @@ describe('workspace invoker commands', () => {
         placement: { operation: 'split', target: 'missing', position: 'left' }
       });
       expect(animation.playState).toBe('paused');
-      expect(workspace.value).toBe(original);
+      expect(workspace.value).toEqual(original);
       expect(changed).not.toHaveBeenCalled();
     });
 
     it('finishes restoration when a placement command commits', async () => {
       const { workspace, button, changed } = await createWorkspace();
       workspace.rearrangeable = true;
-      workspace.animateTo(JSON.stringify(peers()), { duration: 10000 });
+      workspace.animateTo(peers(), { duration: 10000 });
       const panel = workspace.querySelector('#a')!;
       await vi.waitFor(() => expect(panel.getAnimations().length).toBeGreaterThan(0));
       const animation = panel.getAnimations()[0]!;
@@ -624,7 +627,7 @@ describe('workspace invoker commands', () => {
 });
 
 describe('workspace placement preserves supplied content', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -636,7 +639,7 @@ describe('workspace placement preserves supplied content', () => {
         { type: 'group', panels: ['c', 'd'], active: 'c' }
       ]
     }
-  });
+  } satisfies WorkspaceLayout;
 
   let fixture: HTMLElement | undefined;
 
@@ -645,7 +648,7 @@ describe('workspace placement preserves supplied content', () => {
     fixture = undefined;
   });
 
-  async function createWorkspace(value = arrangement) {
+  async function createWorkspace(value: WorkspaceLayout = arrangement) {
     fixture = await createFixture(html`
       <nve-workspace style="width:806px;height:320px" groupable rearrangeable closable resizable .value=${value}>
         <nve-workspace-panel id="a"><nve-workspace-panel-header>Alpha</nve-workspace-panel-header><input value="retained" /></nve-workspace-panel>
@@ -666,7 +669,8 @@ describe('workspace placement preserves supplied content', () => {
   }
 
   function snapshot(workspace: Workspace): WorkspaceLayout {
-    return JSON.parse(workspace.value);
+    assert.isDefined(workspace.value);
+    return workspace.value;
   }
 
   async function move(
@@ -723,11 +727,11 @@ describe('workspace placement preserves supplied content', () => {
   });
 
   it('should move a whole group including its saved delayed panel identities', async () => {
-    const initial: WorkspaceLayout = JSON.parse(arrangement);
+    const initial: WorkspaceLayout = structuredClone(arrangement);
     if (initial.root?.type !== 'split' || initial.root.children[0]?.type !== 'group')
       throw new Error('Invalid fixture');
     initial.root.children[0].panels.push('missing');
-    const workspace = await createWorkspace(JSON.stringify(initial));
+    const workspace = await createWorkspace(initial);
     await move(workspace, 'a', { target: 'c', group: true });
     expect(snapshot(workspace).root).toEqual({ type: 'group', panels: ['c', 'd', 'a', 'b', 'missing'], active: 'a' });
   });

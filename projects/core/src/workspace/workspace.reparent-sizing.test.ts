@@ -56,7 +56,7 @@ describe('workspace reparented group sizing', () => {
 
   async function createWorkspace(axis: WorkspaceSplit['axis'] = 'horizontal') {
     fixture = await createFixture(html`
-      <nve-workspace groupable rearrangeable resizable .value=${JSON.stringify(arrangement(axis))}
+      <nve-workspace groupable rearrangeable resizable .value=${arrangement(axis)}
         style="width:1000px;height:800px;--animation-duration:0ms">
         ${['outline', 'editor', 'preview', 'notes'].map(
           id => html`
@@ -233,7 +233,7 @@ describe('workspace reparented group sizing', () => {
 
       expect(decidePlacement).toHaveBeenCalled();
       expect(sizePreferredSplit).not.toHaveBeenCalled();
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       workspace.dispatchEvent(pointer('pointercancel', destination.x, destination.y));
       await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector('[data-destination-ghost]')).toBeNull());
     });
@@ -249,7 +249,7 @@ describe('workspace reparented group sizing', () => {
       const canceled = await reserveOuter(workspace);
       workspace.dispatchEvent(pointer('pointercancel', canceled.x, canceled.y));
       await vi.waitFor(() => expect(workspace.shadowRoot!.querySelector('[data-destination-ghost]')).toBeNull());
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
       expect(changed).not.toHaveBeenCalled();
 
       vi.mocked(sizePreferredSplit).mockClear();

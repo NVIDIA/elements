@@ -12,7 +12,7 @@ import { createInsertionOffers, getCurrentInsertionSeam } from '../interaction/i
 import { decidePlacement, decidePointerPlacement } from '../interaction/placement-decision.utils.js';
 import { getPanelIds } from '../model/layout.utils.js';
 import { createDetachedLayout, projectLayout } from '../model/operations.utils.js';
-import { parseWorkspaceValue } from '../model/value.utils.js';
+import { normalizeWorkspaceValue } from '../model/value.utils.js';
 import { getGroupInsertion } from './group-insertion.utils.js';
 import { planWorkspacePlacement } from './planner.utils.js';
 import { evaluatePlacementOffer } from './preparation.utils.js';
@@ -238,29 +238,27 @@ describe('workspace placement stability', () => {
     const main = transpose ? 'vertical' : 'horizontal';
     const cross = transpose ? 'horizontal' : 'vertical';
     const group = (...panels: string[]) => ({ type: 'group', panels, active: panels[0] });
-    const currentLayout = parseWorkspaceValue(
-      JSON.stringify({
-        version: 1,
-        closed: [],
-        root: {
-          type: 'split',
-          axis: main,
-          weights: rootWeights,
-          children: [
-            group('outline'),
-            {
-              type: 'split',
-              axis: cross,
-              weights: [3, 2],
-              children: [
-                { type: 'split', axis: main, weights: [3, 2], children: [group('editor'), group('preview')] },
-                group('notes', 'activity', 'tasks')
-              ]
-            }
-          ]
-        }
-      })
-    );
+    const currentLayout = normalizeWorkspaceValue({
+      version: 1,
+      closed: [],
+      root: {
+        type: 'split',
+        axis: main,
+        weights: rootWeights,
+        children: [
+          group('outline'),
+          {
+            type: 'split',
+            axis: cross,
+            weights: [3, 2],
+            children: [
+              { type: 'split', axis: main, weights: [3, 2], children: [group('editor'), group('preview')] },
+              group('notes', 'activity', 'tasks')
+            ]
+          }
+        ]
+      }
+    });
     if (!currentLayout) throw new Error('Expected a workspace layout');
     const source = ['preview'];
     const available = ['outline', 'editor', 'preview', 'notes', 'activity', 'tasks'];

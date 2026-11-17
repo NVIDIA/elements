@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import type { WorkspaceLayout } from './utils/model/layout.utils.js';
+
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -14,7 +16,7 @@ import './define.js';
 import '@nvidia-elements/core/ghost/define.js';
 
 describe('workspace resizing', () => {
-  const arrangement = JSON.stringify({
+  const arrangement = {
     version: 1,
     closed: [],
     root: {
@@ -23,7 +25,7 @@ describe('workspace resizing', () => {
       weights: [1, 1, 1],
       children: ['a', 'b', 'c'].map(id => ({ type: 'group', panels: [id], active: id }))
     }
-  });
+  } satisfies WorkspaceLayout;
 
   function pointer(type: string, clientX: number) {
     return new PointerEvent(type, {
@@ -65,7 +67,7 @@ describe('workspace resizing', () => {
 
   async function createTabbedResizeWorkspace() {
     const workspace = await createWorkspace();
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: {
@@ -77,7 +79,7 @@ describe('workspace resizing', () => {
           { type: 'group', panels: ['c'], active: 'c' }
         ]
       }
-    });
+    };
     await elementIsStable(workspace);
     const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
     const tabs = workspace.shadowRoot!.querySelector<HTMLElement>('nve-tabs.tab-track')!;
@@ -95,7 +97,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointerdown', 0));
       handle.dispatchEvent(pointer('pointerup', 0));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
     });
 
@@ -109,17 +111,17 @@ describe('workspace resizing', () => {
       const handle = workspace.shadowRoot!.querySelector<ResizeHandle>('nve-resize-handle')!;
       handle.valueAsNumber += 0.0005;
       handle.dispatchEvent(new Event('input', { bubbles: true }));
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(change).not.toHaveBeenCalled();
       const observed = vi.fn((event: Event) => {
         expect(event.target).toBe(workspace);
-        expect(workspace.value).not.toBe(value);
+        expect(workspace.value).not.toEqual(value);
       });
       workspace.addEventListener('change', observed);
       handle.dispatchEvent(new Event('change', { bubbles: true }));
       expect(observed).toHaveBeenCalledOnce();
       await elementIsStable(workspace);
-      expect(workspace.value).not.toBe(value);
+      expect(workspace.value).not.toEqual(value);
       expect(change).toHaveBeenCalledOnce();
     });
 
@@ -141,7 +143,7 @@ describe('workspace resizing', () => {
         handle.dispatchEvent(new Event('input', { bubbles: true }));
         handle.dispatchEvent(new Event('change', { bubbles: true }));
         await elementIsStable(workspace);
-        expect(workspace.value).toBe(value);
+        expect(workspace.value).toEqual(value);
         expect(change).not.toHaveBeenCalled();
       }
     );
@@ -183,7 +185,7 @@ describe('workspace resizing', () => {
         expect(workspace.querySelector('#b')!.getBoundingClientRect().width).toBeCloseTo(before.width + 30);
         handle.dispatchEvent(pointer('pointerup', 50));
         await elementIsStable(workspace);
-        expect(workspace.value).not.toBe(value);
+        expect(workspace.value).not.toEqual(value);
         expect(change).toHaveBeenCalledOnce();
         if (capability === 'resizable') expect(workspace.shadowRoot!.querySelector('nve-resize-handle')).toBeNull();
       }
@@ -248,7 +250,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointerup', 60));
       await workspace.updateComplete;
       expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0s');
-      expect(workspace.value).not.toBe(value);
+      expect(workspace.value).not.toEqual(value);
       await vi.waitFor(() => expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0.15s'));
       workspace.querySelector('#a')!.dispatchEvent(new CommandEvent('command', { command: '--select' }));
       await elementIsStable(workspace);
@@ -265,17 +267,17 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(new Event('change', { bubbles: true }));
       await workspace.updateComplete;
       expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0s');
-      expect(workspace.value).not.toBe(value);
+      expect(workspace.value).not.toEqual(value);
       await vi.waitFor(() => expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0.15s'));
     });
 
     it('should release committed presentation when a change listener restores another arrangement', async () => {
       const { workspace, handle } = await createTabbedResizeWorkspace();
-      const restored = JSON.stringify({
+      const restored = {
         version: 1,
         closed: [],
         root: { type: 'group', panels: ['a', 'b', 'c'], active: 'a' }
-      });
+      } satisfies WorkspaceLayout;
       workspace.addEventListener(
         'change',
         () => {
@@ -288,7 +290,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointermove', 30));
       handle.dispatchEvent(pointer('pointerup', 30));
       await elementIsStable(workspace);
-      expect(JSON.parse(workspace.value)).toEqual(JSON.parse(restored));
+      expect(workspace.value).toEqual(restored);
       expect(workspace.shadowRoot!.querySelector('nve-resize-handle')).toBeNull();
       expect(workspace.shadowRoot!.querySelectorAll('nve-tabs-item[data-panel]')).toHaveLength(3);
     });
@@ -303,7 +305,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true }));
       await workspace.updateComplete;
       expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0s');
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       handle.dispatchEvent(pointer('pointerup', 40));
       await vi.waitFor(() => expect(getComputedStyle(tabs, '::after').transitionDuration).toBe('0.15s'));
     });
@@ -326,7 +328,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointermove', 60));
       handle.dispatchEvent(pointer('pointerup', 60));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       await vi.waitFor(() => expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(300));
       expect(change).not.toHaveBeenCalled();
     });
@@ -349,7 +351,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointerup', 50));
       await elementIsStable(workspace);
       expect(escape.defaultPrevented).toBe(true);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       await vi.waitFor(() => expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(300));
       expect(change).not.toHaveBeenCalled();
     });
@@ -410,7 +412,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointermove', 60));
       handle.dispatchEvent(pointer('pointerup', 60));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
     });
 
     it.each(['width', 'gap'] as const)('should cancel resizing when the actual %s changes', async metric => {
@@ -427,7 +429,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointermove', 50));
       handle.dispatchEvent(pointer('pointerup', 50));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
     });
 
     it('should roll back an interrupted pointer resize without announcing a commit', async () => {
@@ -443,7 +445,7 @@ describe('workspace resizing', () => {
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(330);
       handle.dispatchEvent(pointer('pointercancel', 30));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(300);
       expect(change).not.toHaveBeenCalled();
     });
@@ -458,7 +460,7 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointermove', 30));
       await elementIsStable(workspace);
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(330);
-      workspace.value = arrangement.replace('[1,1,1]', '[2,1,1]');
+      workspace.value = { ...arrangement, root: { ...arrangement.root, weights: [2, 1, 1] } };
       const restored = workspace.value;
       await elementIsStable(workspace);
       const restoredWidth = workspace.querySelector('#a')!.getBoundingClientRect().width;
@@ -466,13 +468,13 @@ describe('workspace resizing', () => {
       handle.dispatchEvent(pointer('pointermove', 50));
       handle.dispatchEvent(pointer('pointerup', 50));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(restored);
+      expect(workspace.value).toEqual(restored);
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(restoredWidth);
       expect(change).not.toHaveBeenCalled();
       handle.dispatchEvent(pointer('pointerdown', 0));
       handle.dispatchEvent(pointer('pointerup', 0));
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(restored);
+      expect(workspace.value).toEqual(restored);
       expect(change).not.toHaveBeenCalled();
       handle.dispatchEvent(pointer('pointerdown', 0));
       handle.dispatchEvent(pointer('pointermove', -10));
@@ -500,7 +502,7 @@ describe('workspace resizing', () => {
       workspace.remove();
       parent.append(workspace);
       await elementIsStable(workspace);
-      expect(workspace.value).toBe(value);
+      expect(workspace.value).toEqual(value);
       expect(workspace.querySelector('#a')!.getBoundingClientRect().width).toBeCloseTo(300);
       expect(change).not.toHaveBeenCalled();
 
@@ -541,11 +543,11 @@ describe('workspace resize handle composition', () => {
     vi.restoreAllMocks();
   });
 
-  it.each(['horizontal', 'vertical'])(
+  it.each(['horizontal', 'vertical'] as const)(
     'centers default resize handles in %s gutters independently of gap and framing',
     async axis => {
       workspace.resizable = true;
-      workspace.value = JSON.stringify({
+      workspace.value = {
         version: 1,
         closed: [],
         root: {
@@ -554,7 +556,7 @@ describe('workspace resize handle composition', () => {
           weights: [1, 1],
           children: ['a', 'b'].map(id => ({ type: 'group', panels: [id], active: id }))
         }
-      });
+      };
       await elementIsStable(workspace);
       const handle = workspace.shadowRoot!.querySelector<HTMLElement>('nve-resize-handle')!;
       const gutter = handle.parentElement!;
@@ -581,13 +583,13 @@ describe('workspace resize handle composition', () => {
         const line = handle.getBoundingClientRect();
         expect(axis === 'horizontal' ? line.width : line.height).toBe(1);
       }
-      expect(workspace.value).toBe(saved);
+      expect(workspace.value).toEqual(saved);
     }
   );
 
   it('allows consumers to configure resize line and target sizes without a workspace update', async () => {
     workspace.resizable = true;
-    workspace.value = JSON.stringify({
+    workspace.value = {
       version: 1,
       closed: [],
       root: {
@@ -596,7 +598,7 @@ describe('workspace resize handle composition', () => {
         weights: [1, 1],
         children: ['a', 'b'].map(id => ({ type: 'group', panels: [id], active: id }))
       }
-    });
+    };
     await elementIsStable(workspace);
     const handle = workspace.shadowRoot!.querySelector<HTMLElement>('nve-resize-handle')!;
     const target = handle.shadowRoot!.querySelector('[internal-host]')!;
@@ -609,6 +611,6 @@ describe('workspace resize handle composition', () => {
     expect(handle.getBoundingClientRect().width).toBe(3);
     expect(parseFloat(getComputedStyle(target, '::before').width)).toBe(12);
     expect(requestUpdate).not.toHaveBeenCalled();
-    expect(workspace.value).toBe(saved);
+    expect(workspace.value).toEqual(saved);
   });
 });
