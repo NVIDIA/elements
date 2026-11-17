@@ -120,4 +120,34 @@ describe('WorkspaceRestorationController', () => {
       animation.finish();
     }
   });
+
+  it('leaves pointer input alone when it misses workspace controls during a transition', () => {
+    const host = createHost();
+    const panel = document.createElement('div');
+    host.append(panel);
+    fixture.append(host);
+    const animation = new WorkspaceRestorationController(host, {
+      getLayout: () => undefined,
+      applyLayout: () => {},
+      getTransitionTargets: () => ({
+        panels: new Map([['a', { element: panel, header: undefined }]]),
+        groups: [],
+        gutters: new Map()
+      })
+    });
+    try {
+      animation.hostConnected();
+      animation.transition(() => {}, { duration: 1000 });
+      expect(animation.active).toBe(true);
+      const seen = vi.fn();
+      host.addEventListener('pointerdown', seen);
+      const event = new PointerEvent('pointerdown', { bubbles: true, cancelable: true });
+      host.dispatchEvent(event);
+      expect(seen).toHaveBeenCalledOnce();
+      expect(event.defaultPrevented).toBe(false);
+      expect(animation.active).toBe(true);
+    } finally {
+      animation.hostDisconnected();
+    }
+  });
 });
