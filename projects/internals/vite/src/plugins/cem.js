@@ -89,52 +89,40 @@ function generateVsCodeCustomElementDataReference(manifestMetadataName, manifest
   return name && url ? { name, url } : null;
 }
 
-/**
- * Generates a Custom Elements Manifest on initial build
- */
-export function cem() {
-  return {
-    name: 'cem',
-    apply: 'build',
-    async buildEnd() {
-      if (process.env.VITE_INITIAL_BUILD) {
-        const hasConfig = fs.existsSync(resolve('./custom-elements-manifest.config.mjs'));
-        const configPath = hasConfig
-          ? resolve('./custom-elements-manifest.config.mjs')
-          : new URL('cem.config.mjs', import.meta.url).toString().replace('file://', '');
+export async function generateCustomElementsManifest() {
+  const hasConfig = fs.existsSync(resolve('./custom-elements-manifest.config.mjs'));
+  const configPath = hasConfig
+    ? resolve('./custom-elements-manifest.config.mjs')
+    : new URL('cem.config.mjs', import.meta.url).toString().replace('file://', '');
 
-        const manifest = await cli({ argv: ['analyze', '--config', configPath, '--outdir', './dist'] });
-        const packageJson = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf8'));
-        const customDataOutputs = getCustomDataOutputs(packageJson, manifest, process.cwd());
+  const manifest = await cli({ argv: ['analyze', '--config', configPath, '--outdir', './dist'] });
+  const packageJson = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf8'));
+  const customDataOutputs = getCustomDataOutputs(packageJson, manifest, process.cwd());
 
-        if (customDataOutputs.length > 0) {
-          // deep clone
-          const vsCodeManifest = structuredClone(manifest);
-          vsCodeManifest.modules.forEach(module => {
-            module.declarations
-              .filter(declaration => declaration.tagName)
-              .forEach(declaration => {
-                declaration.attributes = (declaration.attributes ?? []).filter(attr => !attr.deprecated);
-              });
-          });
+  if (customDataOutputs.length === 0) {
+    return;
+  }
 
-          customDataOutputs.forEach(output => {
-            generateVsCodeCustomElementData(vsCodeManifest, {
-              ...output,
-              cssFileName: null,
-              referencesTemplate: (_name, tag) => {
-                const declaration = vsCodeManifest.modules
-                  .flatMap(module => module.declarations)
-                  .find(d => d.tagName === tag);
-                return Object.entries(declaration?.metadata ?? {}).flatMap(([name, value]) => {
-                  const reference = generateVsCodeCustomElementDataReference(name, value);
-                  return reference ? [reference] : [];
-                });
-              }
-            });
-          });
-        }
+  const vsCodeManifest = structuredClone(manifest);
+  vsCodeManifest.modules.forEach(module => {
+    module.declarations
+      .filter(declaration => declaration.tagName)
+      .forEach(declaration => {
+        declaration.attributes = (declaration.attributes ?? []).filter(attr => !attr.deprecated);
+      });
+  });
+
+  customDataOutputs.forEach(output => {
+    generateVsCodeCustomElementData(vsCodeManifest, {
+      ...output,
+      cssFileName: null,
+      referencesTemplate: (_name, tag) => {
+        const declaration = vsCodeManifest.modules.flatMap(module => module.declarations).find(d => d.tagName === tag);
+        return Object.entries(declaration?.metadata ?? {}).flatMap(([name, value]) => {
+          const reference = generateVsCodeCustomElementDataReference(name, value);
+          return reference ? [reference] : [];
+        });
       }
-    }
-  };
+    });
+  });
 }
