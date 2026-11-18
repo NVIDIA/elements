@@ -33,7 +33,8 @@ const i18nDefaults = {
  * @cssprop --ring-width
  * @cssprop --width
  * @cssprop --height
- * @cssprop --animation-duration
+ * @cssprop --animation-duration - The duration of the indeterminate animation.
+ * @cssprop --transition - The transition of the progress ring when the value changes.
  * @cssprop --color
  * @csspart icon - The icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
