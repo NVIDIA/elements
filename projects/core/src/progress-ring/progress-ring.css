@@ -9,6 +9,7 @@
   --width: var(--nve-ref-size-800);
   --height: var(--nve-ref-size-800);
   --animation-duration: calc(var(--nve-ref-animation-duration-400) * 2.5);
+  --transition: all var(--nve-ref-animation-duration-200) ease-in-out 0s;
 
   width: var(--width);
   height: var(--height);
@@ -72,7 +73,7 @@ circle.progress-ring-circle {
   stroke-linecap: round;
   transform-origin: 50% 50%;
   transform: rotate(-90deg);
-  transition: all 0.2s ease-in-out 0s;
+  transition: var(--transition);
 }
 
 :host([status='success']) {
