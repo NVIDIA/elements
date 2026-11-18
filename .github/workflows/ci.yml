@@ -343,7 +343,7 @@ jobs:
           overwrite: true
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5.0.0
+        uses: actions/deploy-pages@v5.0.1
 
   notify-indexnow:
     needs: deploy-pages
