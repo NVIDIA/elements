@@ -9,6 +9,7 @@ import { createFixture, elementIsStable, removeFixture } from '@internals/testin
 import { WorkspaceResizeController } from './workspace-resize.controller.js';
 import { allocateWorkspace } from '../utils/geometry/allocation.utils.js';
 
+import type { GestureInput } from '@nvidia-elements/core/internal';
 import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
 
 import type { WorkspaceLayout } from '../utils/model/layout.utils.js';
@@ -81,6 +82,10 @@ class ResizeTestHost extends LitElement {
 const tag = 'workspace-resize-test-host';
 if (!customElements.get(tag)) customElements.define(tag, ResizeTestHost);
 
+function gestureInput(detail: GestureInput) {
+  return new CustomEvent<GestureInput>('nve-gesture-input', { detail });
+}
+
 describe('workspace resize input batching', () => {
   let fixture: HTMLElement;
   let host: ResizeTestHost;
@@ -146,5 +151,49 @@ describe('workspace resize input batching', () => {
     expect(Number(host.shadowRoot!.querySelector('output')!.textContent)).toBe(origin);
     expect(host.layout).toEqual(layout);
     expect(host.commit).not.toHaveBeenCalled();
+  });
+
+  it('releases a committed pointer resize when the pointer ends', () => {
+    const pointerId = 4;
+    handle.addEventListener('nve-gesture-input', event => {
+      if (event instanceof CustomEvent) host.resize.gesture(event);
+    });
+    handle.dispatchEvent(
+      gestureInput({
+        claim: () => false,
+        event: new PointerEvent('pointerdown', { button: 0, buttons: 1, isPrimary: true, pointerId }),
+        kind: 'pointerdown'
+      })
+    );
+    const presentation = host.resize.presentation;
+    expect(host.resize.retainingHandles).toBe(true);
+    expect(presentation).toBeDefined();
+
+    handle.valueAsNumber += 20;
+    handle.dispatchEvent(new Event('change', { bubbles: true }));
+    expect(host.commit).toHaveBeenCalledOnce();
+    expect(host.resize.preview).toBeUndefined();
+    expect(host.resize.presentation).toBe(presentation);
+    expect(host.resize.retainingHandles).toBe(true);
+
+    handle.dispatchEvent(
+      gestureInput({
+        clientX: 0,
+        clientY: 0,
+        event: new PointerEvent('pointerup', { button: 0, buttons: 0, isPrimary: true, pointerId }),
+        interrupted: false,
+        kind: 'pointerend',
+        movementX: 0,
+        movementY: 0,
+        reason: 'up',
+        startClientX: 0,
+        startClientY: 0,
+        totalDisplacementX: 0,
+        totalDisplacementY: 0
+      })
+    );
+    expect(host.resize.presentation).toBeUndefined();
+    expect(host.resize.retainingHandles).toBe(false);
+    expect(host.commit).toHaveBeenCalledOnce();
   });
 });
