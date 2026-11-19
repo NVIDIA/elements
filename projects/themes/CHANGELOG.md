@@ -1,3 +1,46 @@
+## [2.0.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v2.0.2...@nvidia-elements/themes-v2.0.3) (2026-11-19)
+
+### Features
+
+* **code:** add code block header and footer support ([d0893df](https://github.com/NVIDIA/elements/commit/d0893df36cebcf70e8cb6f80d1736bb5dd5458c0))
+* **core:** add dashboard ([83e5ced](https://github.com/NVIDIA/elements/commit/83e5ced893821ab74cad106473c92ecb04443949))
+* **core:** expose dashboard layouts as objects ([f508745](https://github.com/NVIDIA/elements/commit/f508745ad6291d3839efafa76a8d9601e4f5f6e1))
+* **core:** expose workspace layouts as objects ([2d16a58](https://github.com/NVIDIA/elements/commit/2d16a58250234b05f98d6c54e524f6e8b3d39935))
+* **core:** iframe sandbox options ([849eb85](https://github.com/NVIDIA/elements/commit/849eb854b9f96692d2607f2db4aee62b7487b05f))
+* **core:** support for grid virtual-list ([32fd01e](https://github.com/NVIDIA/elements/commit/32fd01e61b004bb07c0a54ce7cb6c747b09eaa55))
+* **foundations:** add placement translation keys ([a3d4d53](https://github.com/NVIDIA/elements/commit/a3d4d5386df3c71e3d273c1175b140fab04efc9d))
+* **foundations:** virtual-list ([aa4ef9e](https://github.com/NVIDIA/elements/commit/aa4ef9e20dd0ec9e4ce8a4be69c6678f11c86b12))
+* **styles:** add text shimmer support ([c96b621](https://github.com/NVIDIA/elements/commit/c96b6215099331152632805a18d9638230cb3da6))
+
+### Bug Fixes
+
+* **ci:** preserve complex types in framework declarations ([c33a319](https://github.com/NVIDIA/elements/commit/c33a3191c4287695daace5edec8a971fe115f564))
+* **cli:** drop unused utilities ([71dcf96](https://github.com/NVIDIA/elements/commit/71dcf96ff531cd4ef69db6e55f08fbeecb005015))
+* **core:** drop obsolete panel transition prefix ([dead5e0](https://github.com/NVIDIA/elements/commit/dead5e0cc7cb0202e83f64cd8242755e06ac91db))
+* **core:** drop obsolete progress appearance prefixes ([2192b3c](https://github.com/NVIDIA/elements/commit/2192b3c42e09842685e90c2ce5440b2005c9f7bb))
+* **core:** drop obsolete scoped registry polyfill ([520e03b](https://github.com/NVIDIA/elements/commit/520e03b0244592f100edcfedc45ea2871d1cecc5))
+* **core:** drop overridden webkit focus ring fallback ([0697e24](https://github.com/NVIDIA/elements/commit/0697e245b9019de3749322e7cacca500ae41f248))
+* **core:** drop unused utilities ([9e4b1bc](https://github.com/NVIDIA/elements/commit/9e4b1bc6b942de163d33ed71ae676041dd8fb4e6))
+* **core:** improve icon registry bundling performance ([64db7b9](https://github.com/NVIDIA/elements/commit/64db7b972645a624e11dd97249c49a6b0b2d60f7))
+* **core:** improve workspace performance ([3a580b8](https://github.com/NVIDIA/elements/commit/3a580b889927a3df365f149b19a4de07bd69bc10))
+* **core:** refactor to use foundations internals ([6405764](https://github.com/NVIDIA/elements/commit/6405764abcd16224406fdc57a811cd745ec54971))
+* **core:** remove forced dashboard scrollbars and header text truncation ([b61ba9b](https://github.com/NVIDIA/elements/commit/b61ba9b3ccf044916a2dcad3fb85933cb4981bcc))
+* **core:** size overlays with the dynamic viewport ([3458d95](https://github.com/NVIDIA/elements/commit/3458d9566cbf6740ced6cdf9650296e0cadfe336))
+* **core:** update container values ([d00ce2d](https://github.com/NVIDIA/elements/commit/d00ce2d361795d9eb0b05f0c61ae54b04714a214))
+* **forms:** drop unused utilities ([c538a47](https://github.com/NVIDIA/elements/commit/c538a47e79366919f43fb8f35950c52159f40d6c))
+* **forms:** use keydown for button active state ([486875c](https://github.com/NVIDIA/elements/commit/486875c082a15f2bc7a72a091759a93cfa3f8a2b))
+* **foundations:** add shared decorator ([fa642a4](https://github.com/NVIDIA/elements/commit/fa642a4c81c7e0ec2f00d646452bcd7d595b1e34))
+* **lint:** add new nve-text values ([80c106e](https://github.com/NVIDIA/elements/commit/80c106e33b4d057d2f5907882b490b4a46890742))
+* **markdown:** update to use foundations internals ([33f1490](https://github.com/NVIDIA/elements/commit/33f149046c791aad70e35b439869fd4d05efe6ed))
+* **media:** update icon imports ([7d95c48](https://github.com/NVIDIA/elements/commit/7d95c485bfbdaa180d858fc1ecf51941342e2cdf))
+* **media:** update to use foundations internals ([24d2296](https://github.com/NVIDIA/elements/commit/24d2296596c18955cfe8723f0e1c67ccc53cbfeb))
+* **monaco:** keep css asset imports out of public declarations ([38dd1cf](https://github.com/NVIDIA/elements/commit/38dd1cf5c011eaea82e59e3bf0b79601b38944c5))
+* **pi:** update typebox to 1.4.6 ([e2635d1](https://github.com/NVIDIA/elements/commit/e2635d17980a706b044d9a3d814334de489aa72a))
+* **pi:** update typebox to 1.4.7 ([10ebae6](https://github.com/NVIDIA/elements/commit/10ebae6d20abd93c7f196a98ea681a4f0464818c))
+* **starters:** update [@angular](https://github.com/angular) packages to 22.2.6 ([39be6b3](https://github.com/NVIDIA/elements/commit/39be6b3fbef2498f8898210bdc58d94ba2eb42d7))
+* **themes:** layer container values and missing tests ([327981f](https://github.com/NVIDIA/elements/commit/327981ff5b80483bb31a1b091f31ffaf0696796b))
+* **viewport:** update to use foundations internals ([a5510ec](https://github.com/NVIDIA/elements/commit/a5510ec63d0933d0d8b245c6160e0b3bf2e1f1bc))
+
 ## [2.0.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v2.0.1...@nvidia-elements/themes-v2.0.2) (2026-11-07)
 
 ### Features
