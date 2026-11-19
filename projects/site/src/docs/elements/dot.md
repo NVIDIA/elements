@@ -20,6 +20,18 @@
 
 {% example '@nvidia-elements/core/dot/dot.examples.json' 'SupportStatus' %}
 
+## Color
+
+{% api 'nve-dot', 'property' 'color' %}
+
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Color' %}
+
+## Shape
+
+{% api 'nve-dot', 'property' 'shape' %}
+
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Shape' %}
+
 ## Number
 
 {% example '@nvidia-elements/core/dot/dot.examples.json' 'Number' %}
