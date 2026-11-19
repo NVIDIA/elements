@@ -18,9 +18,13 @@
 
 {% example '@nvidia-elements/core/meter/meter.examples.json' 'PartialCapacity' %}
 
-## Labels and Legends
+## Legends
 
 {% example '@nvidia-elements/core/meter/meter.examples.json' 'Legend' %}
+
+## Labels
+
+{% example '@nvidia-elements/core/meter/meter.examples.json' 'Labeled' %}
 
 ## Measurement and Bounds
 
