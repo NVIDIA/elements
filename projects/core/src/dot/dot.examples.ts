@@ -87,3 +87,49 @@ export const Status = {
 </div>
   `
 }
+
+/**
+ * @summary Dots in each palette color for category indicators. Use distinct colors to help users identify related content.
+ * @tags test-case
+ */
+export const Color = {
+  render: () => html`
+<div nve-layout="row gap:md align:wrap">
+  <nve-dot color="red-cardinal" aria-label="red-cardinal"></nve-dot>
+  <nve-dot color="gray-slate" aria-label="gray-slate"></nve-dot>
+  <nve-dot color="gray-denim" aria-label="gray-denim"></nve-dot>
+  <nve-dot color="blue-indigo" aria-label="blue-indigo"></nve-dot>
+  <nve-dot color="blue-cobalt" aria-label="blue-cobalt"></nve-dot>
+  <nve-dot color="blue-sky" aria-label="blue-sky"></nve-dot>
+  <nve-dot color="teal-cyan" aria-label="teal-cyan"></nve-dot>
+  <nve-dot color="green-mint" aria-label="green-mint"></nve-dot>
+  <nve-dot color="teal-seafoam" aria-label="teal-seafoam"></nve-dot>
+  <nve-dot color="green-grass" aria-label="green-grass"></nve-dot>
+  <nve-dot color="yellow-amber" aria-label="yellow-amber"></nve-dot>
+  <nve-dot color="orange-pumpkin" aria-label="orange-pumpkin"></nve-dot>
+  <nve-dot color="red-tomato" aria-label="red-tomato"></nve-dot>
+  <nve-dot color="pink-magenta" aria-label="pink-magenta"></nve-dot>
+  <nve-dot color="purple-plum" aria-label="purple-plum"></nve-dot>
+  <nve-dot color="purple-violet" aria-label="purple-violet"></nve-dot>
+  <nve-dot color="purple-lavender" aria-label="purple-lavender"></nve-dot>
+  <nve-dot color="pink-rose" aria-label="pink-rose"></nve-dot>
+  <nve-dot color="green-jade" aria-label="green-jade"></nve-dot>
+  <nve-dot color="lime-pear" aria-label="lime-pear"></nve-dot>
+  <nve-dot color="yellow-nova" aria-label="yellow-nova"></nve-dot>
+  <nve-dot color="brand-green" aria-label="brand-green"></nve-dot>
+</div>
+  `
+};
+
+/**
+ * @summary Circle and square indicators for distinct categories. Use shape alongside color to help users distinguish related content.
+ * @tags test-case
+ */
+export const Shape = {
+  render: () => html`
+<div nve-layout="row gap:md">
+  <nve-dot shape="circle" aria-label="Circle"></nve-dot>
+  <nve-dot shape="square" aria-label="Square"></nve-dot>
+</div>
+  `
+};

@@ -3,8 +3,8 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import type { Size, SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
-import { statusStateStyles, supportStateStyles } from '@nvidia-elements/core/internal';
+import type { Color, Size, SupportStatus, TaskStatus } from '@nvidia-elements/core/internal';
+import { colorStateStyles, statusStateStyles, supportStateStyles } from '@nvidia-elements/core/internal';
 import { attachInternals } from '@nvidia-elements/foundations/internal/a11y';
 import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './dot.css?inline';
@@ -35,7 +35,13 @@ export class Dot extends LitElement {
   /** Determines size of dot relative to provided text. */
   @property({ type: String, reflect: true }) size: Size;
 
-  static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
+  /** Palette variant for the dot. Takes precedence over status. */
+  @property({ type: String, reflect: true }) color?: Color;
+
+  /** Determines the dot shape. Defaults to circle. */
+  @property({ type: String, reflect: true }) shape: 'circle' | 'square' = 'circle';
+
+  static styles = useStyles([styles, statusStateStyles, supportStateStyles, colorStateStyles]);
 
   static readonly metadata = {
     tag: 'nve-dot',
