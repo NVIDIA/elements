@@ -1,3 +1,9 @@
+## [2.27.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.1...@nvidia-elements/core-v2.27.2) (2026-11-19)
+
+### Bug Fixes
+
+* **core:** animation duration support for fixed value progress ring ([47e6309](https://github.com/NVIDIA/elements/commit/47e63097e888e81da735d16a0721c4f6ba201c54))
+
 ## [2.27.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.0...@nvidia-elements/core-v2.27.1) (2026-11-19)
 
 ### Features
