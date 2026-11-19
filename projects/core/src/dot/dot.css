@@ -33,6 +33,10 @@
   place-content: center;
 }
 
+:host([shape='square']) {
+  --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
+}
+
 :host([size='sm']) {
   --height: var(--nve-ref-size-200);
   --width: var(--nve-ref-size-200);
@@ -57,4 +61,9 @@
 
 :host([status='warning']) {
   --color: var(--nve-sys-text-black-color);
+}
+
+:host([color]) {
+  --background: var(--state-color-base);
+  --color: var(--nve-sys-text-white-color);
 }
