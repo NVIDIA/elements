@@ -1,3 +1,14 @@
+## [2.27.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.0...@nvidia-elements/core-v2.27.1) (2026-11-19)
+
+### Features
+
+* **code:** add code block header and footer support ([d0893df](https://github.com/NVIDIA/elements/commit/d0893df36cebcf70e8cb6f80d1736bb5dd5458c0))
+
+### Bug Fixes
+
+* **core:** update container values ([d00ce2d](https://github.com/NVIDIA/elements/commit/d00ce2d361795d9eb0b05f0c61ae54b04714a214))
+* **themes:** layer container values and missing tests ([327981f](https://github.com/NVIDIA/elements/commit/327981ff5b80483bb31a1b091f31ffaf0696796b))
+
 ## [2.27.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.26.3...@nvidia-elements/core-v2.27.0) (2026-11-17)
 
 ### Features
