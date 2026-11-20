@@ -4,16 +4,12 @@
 import type { Rule } from 'eslint';
 import { defineRuleDocumentation } from '../rule-documentation.js';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
-import { getElementAttribute, getRecommendedValue } from '../internals/element-attributes.js';
+import { getElementAttribute, getRecommendedValue, isAllowedAttributeValue } from '../internals/element-attributes.js';
 import { isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 import { attributeValueIsDeprecatedForTag } from './no-deprecated-attributes.js';
 
 const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
-
-function isExternalIconSource(tagName: string, attributeName: string, value: string) {
-  return tagName === 'nve-icon' && attributeName === 'name' && value.endsWith('.svg');
-}
 
 const rule = {
   meta: {
@@ -53,8 +49,7 @@ const rule = {
             attr =>
               attr.type === 'Attribute' &&
               attr.key?.value &&
-              !VALUE_BINDINGS.some(binding => attr.value?.value?.includes(binding)) &&
-              !isExternalIconSource(tagName, attr.key.value, attr.value?.value ?? '')
+              !VALUE_BINDINGS.some(binding => attr.value?.value?.includes(binding))
           )
           .forEach((attr: HtmlAttribute) => {
             const attributeName = attr.key!.value;
@@ -65,7 +60,7 @@ const rule = {
               attrInfo?.isEnum &&
               !attrInfo.deprecated &&
               !attributeValueIsDeprecatedForTag(tagName, attributeName, value) &&
-              !attrInfo.values.includes(value)
+              !isAllowedAttributeValue(attrInfo, value)
             ) {
               const validValues = [...attrInfo.values].sort((a, b) => a.localeCompare(b));
               const alternative = getRecommendedValue(value, validValues);
