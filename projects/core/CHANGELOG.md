@@ -1,3 +1,11 @@
+## [2.28.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.3...@nvidia-elements/core-v2.28.0) (2026-11-20)
+
+### Features
+
+* **core:** dot shapes and color support ([4d0622f](https://github.com/NVIDIA/elements/commit/4d0622f072ad4d5dfe73dbfa7736ed565119c13e))
+* **core:** meter ([1628b4b](https://github.com/NVIDIA/elements/commit/1628b4b6d9a3c07de945907cb6319be496021c37))
+* **lint:** meter ([0905529](https://github.com/NVIDIA/elements/commit/090552971692fcefd2fddc2954fbf27bed02ec74))
+
 ## [2.27.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.2...@nvidia-elements/core-v2.27.3) (2026-11-20)
 
 ### Bug Fixes
