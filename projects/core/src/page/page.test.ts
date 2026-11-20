@@ -112,6 +112,8 @@ describe(Page.metadata.tag, () => {
       </nve-page>
     `);
     element = fixture.querySelector('nve-page');
+    // Keep content beneath both borders so the test measures their paint order.
+    element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').style.scrollbarGutter = 'auto';
     await elementIsStable(element);
 
     const surface = fixture.querySelector('#surface');

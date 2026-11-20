@@ -1261,6 +1261,8 @@
       "command": "node ./node_modules/typescript-7/bin/tsc --project tsconfig.types.json",
       "files": [
         ".stub/vue.d.ts",
+        "dist/icon/**/*.d.ts",
+        "dist/icon-button/**/*.d.ts",
         "dist/custom-elements-jsx.d.ts",
         "dist/custom-elements-vue.d.ts",
         "tsconfig.types.json"

@@ -34,9 +34,9 @@ import styles from './icon-button.css?inline';
 @scopedRegistry()
 export class IconButton extends Button {
   /**
-   * Sets the icon name, which determines which icon to display.
+   * A built-in icon name, a name registered with `Icon.add()` in `namespace:name` form, or a URL ending in `.svg`.
    */
-  @property({ type: String, attribute: 'icon-name' }) iconName: IconName;
+  @property({ type: String, attribute: 'icon-name' }) iconName: IconName | `${string}:${string}` | `${string}.svg`;
 
   /**
    * Sets the direction of the icon.
