@@ -12,7 +12,6 @@ import {
   setupControlStates,
   setupControlValidationStates,
   hideAllValidationMessages,
-  showActiveValidationMessages,
   hideInactiveValidationMessages
 } from './states.js';
 import '@nvidia-elements/core/forms/define.js';
@@ -358,27 +357,6 @@ describe('hideAllValidationMessages', () => {
     expect(messages[1].hidden).toBe(false);
     expect(messages[0].hasAttribute('hidden')).toBe(true);
     expect(messages[1].hasAttribute('hidden')).toBe(false);
-  });
-});
-
-describe('showActiveValidationMessages', () => {
-  it('should only messages wich have active validation rules', async () => {
-    const controlMock = { input: { validity: { valueMissing: true } } } as Control;
-    const messages = [
-      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
-      document.createElement(ControlMessage.metadata.tag) as ControlMessage
-    ];
-
-    messages[0].error = 'valueMissing';
-    messages[0].hidden = true;
-    messages[1].hidden = true;
-
-    showActiveValidationMessages(controlMock, messages);
-
-    expect(messages[0].hidden).toBe(false);
-    expect(messages[1].hidden).toBe(true);
-    expect(messages[0].hasAttribute('hidden')).toBe(false);
-    expect(messages[1].hasAttribute('hidden')).toBe(true);
   });
 });
 
