@@ -17,8 +17,6 @@ export default {
   component: 'nve-icon'
 };
 
-/* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
-
 /**
  * @summary Basic icon component with standard appearance and usage for visual communication and interface navigation.
  */
@@ -96,17 +94,74 @@ export const Themes = {
 }
 
 /**
- * @summary Register SVG paths and make them accessible to the `<nve-icon>` element. Define icons via a string or async function returning the resulting string.
+ * @summary Register a custom SVG by name so you can reuse it in icons and icon buttons.
+ * @description Pass SVG markup directly for server rendering, or use an `svg` callback to load it on demand in the browser.
  * @tags test-case
  */
 export const Registration = {
   render: () => html`
-    <nve-icon name="smile" style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name="demo:smile" style="--width: 75px; --height: 75px;"></nve-icon>
 
     <script type="module">
-      customElements.get('nve-icon').add({
-        'smile': {
-          svg: () => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="3"/><circle cx="18" cy="20" r="2" fill="currentColor"/><circle cx="30" cy="20" r="2" fill="currentColor"/><path d="M17 29c1.5 2.5 4.2 4 7 4s5.5-1.5 7-4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>'
+      await customElements.whenDefined('nve-icon');
+      await customElements.get('nve-icon').add({
+        'demo:smile':
+          '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48">' +
+          '<circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="3"/>' +
+          '<circle cx="18" cy="20" r="2" fill="currentColor"/>' +
+          '<circle cx="30" cy="20" r="2" fill="currentColor"/>' +
+          '<path d="M17 29c1.5 2.5 4.2 4 7 4s5.5-1.5 7-4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+          '</svg>'
+      });
+    </script>
+  `
+}
+
+/**
+ * @summary Register NVIDIA GUI Icons from local SVG imports and a CDN URL.
+ * @description The SVG artwork is available under the [NVIDIA GUI Icons license](https://github.com/NVIDIA/icons/blob/main/packages/gui-icons/LICENSE).
+ */
+export const NvidiaIcons = {
+  render: () => html`
+    <div nve-layout="row gap:lg align:wrap align:vertical-center">
+      <div nve-layout="row gap:sm align:center">
+        <nve-icon name="nvidia-gui:gpu-card-multi" size="lg"></nve-icon>
+        <span nve-text="body sm">Multi-GPU</span>
+      </div>
+      <div nve-layout="row gap:sm align:center">
+        <nve-icon name="nvidia-gui:neural-network" size="lg"></nve-icon>
+        <span nve-text="body sm">Neural network</span>
+      </div>
+      <div nve-layout="row gap:sm align:center">
+        <nve-icon name="nvidia-gui:robot-arm" size="lg"></nve-icon>
+        <span nve-text="body sm">Robot arm</span>
+      </div>
+      <div nve-layout="row gap:sm align:center">
+        <nve-icon name="nvidia-gui:nvidia-shield" size="lg"></nve-icon>
+        <span nve-text="body sm">Shield</span>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Icon } from '@nvidia-elements/core/icon';
+      import '@nvidia-elements/core/icon/define.js';
+
+      // import via local package import + Vite
+      import multiGpu from '@nvidia/gui-icons/assets/line/gpu-card-multi.svg?raw';
+      import neuralNetwork from '@nvidia/gui-icons/assets/line/neural-network.svg?raw';
+
+      await Icon.add({
+        'nvidia-gui:gpu-card-multi': multiGpu,
+        'nvidia-gui:neural-network': neuralNetwork
+      });
+
+      // Load SVG markup from CDN URLs on demand.
+      await Icon.add({
+        'nvidia-gui:nvidia-shield': {
+          svg: async () => (await fetch('https://cdn.jsdelivr.net/npm/@nvidia/gui-icons@1.0.0/assets/line/nvidia-shield.svg')).text()
+        },
+        'nvidia-gui:robot-arm': {
+          svg: async () => (await fetch('https://cdn.jsdelivr.net/npm/@nvidia/gui-icons@1.0.0/assets/line/robot-arm.svg')).text()
         }
       });
     </script>
@@ -122,20 +177,10 @@ export const Alias = {
     <script type="module">
       await customElements.whenDefined('nve-icon');
       customElements.get('nve-icon').alias({
-        attached: 'paper-clip'
+        'custom:attached': 'paper-clip'
       });
     </script>
     <nve-icon name="paper-clip"></nve-icon>
-    <nve-icon name="attached"></nve-icon>
-  `
-}
-
-/**
- * @summary Provide direct SVG paths for rendering.
- * @tags test-case
- */
-export const Source = {
-  render: () => html`
-    <nve-icon name="/static/images/test-image-1.svg" style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name="custom:attached"></nve-icon>
   `
 }

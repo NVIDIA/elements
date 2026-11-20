@@ -18,4 +18,17 @@ describe(Icon.metadata.tag, () => {
     expect(result.includes('nve-icon')).toBe(true);
     expect(result.includes('lucide-user')).toBe(true);
   });
+
+  it('should server render eagerly registered outline and solid SVGs', async () => {
+    await Icon.add({
+      'test:accelerator': '<svg class="accelerator-outline" viewBox="0 0 16 16"></svg>',
+      'test:accelerator-solid': '<svg class="accelerator-solid" viewBox="0 0 16 16"></svg>'
+    });
+
+    const outline = await ssrRunner.render(html`<nve-icon name="test:accelerator"></nve-icon>`);
+    const solid = await ssrRunner.render(html`<nve-icon name="test:accelerator" appearance="solid"></nve-icon>`);
+
+    expect(outline).toContain('class="accelerator-outline"');
+    expect(solid).toContain('class="accelerator-solid"');
+  });
 });
