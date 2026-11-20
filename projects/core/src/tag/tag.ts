@@ -19,7 +19,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-tag
- * @description A interactive element that represents a category or group of content. Typically used to filter or organize content for one to many relations.
+ * @description An interactive element that represents a category or group of content. Use a tag to filter or organize related items.
  * @documentation https://nvidia.github.io/elements/docs/elements/tag/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/tag

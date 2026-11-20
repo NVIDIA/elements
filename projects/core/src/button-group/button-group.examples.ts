@@ -37,7 +37,7 @@ export const SingleSelect = {
 };
 
 /**
- * @summary Button group with multi-selection behavior for toggling many options simultaneously like text formatting.
+ * @summary Button group with multi-selection behavior for toggling independent options such as text formatting.
  */
 export const MultiSelect = {
   render: () => html`

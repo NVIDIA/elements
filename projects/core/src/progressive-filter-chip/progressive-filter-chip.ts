@@ -22,7 +22,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-progressive-filter-chip
- * @description A filter chip is a control that enables users to select many options from a set of choices.
+ * @description A filter chip is a control that lets users choose filter values from a list.
  * @documentation https://nvidia.github.io/elements/docs/elements/progressive-filter-chip/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/progressive-filter-chip

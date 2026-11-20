@@ -64,7 +64,7 @@ export const Status = {
 }
 
 /**
- * @summary Alert group for visually organizing related messages with shared styling. Use alert groups to present many related messages as a cohesive unit, improving scannability and visual hierarchy.
+ * @summary Alert group for visually organizing related messages with shared styling. Use alert groups to present related messages as a unit, improving scannability and visual hierarchy.
  */
 export const GroupDefault = {
   render: () => html`
@@ -75,7 +75,7 @@ export const GroupDefault = {
 };
 
 /**
- * @summary Alert groups with inherited status styling for all children. Applying status at the group level ensures visual consistency across related messages, perfect for form validation where many fields share the same error context.
+ * @summary Alert groups with inherited status styling for all children. Applying status at the group level ensures visual consistency across related messages, perfect for form validation where fields share the same error context.
  */
 export const GroupStatus = {
   render: () => html`

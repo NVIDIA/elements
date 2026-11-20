@@ -94,7 +94,7 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Elements components use Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code nve-text="code">nve-card</code> components have built-in layout for <code nve-text="code">nve-card-header</code>, <code nve-text="code">nve-card-content</code>, and <code nve-text="code">nve-card-footer</code>. Applying <code nve-text="code">nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
+      Elements components use Web Components with Shadow DOM encapsulation. Some components manage their own layout. For example, <code nve-text="code">nve-card</code> provides layout for <code nve-text="code">nve-card-header</code>, <code nve-text="code">nve-card-content</code>, and <code nve-text="code">nve-card-footer</code>. Applying <code nve-text="code">nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -342,12 +342,12 @@ You can compose layout attributes to create sophisticated designs:
 
 ## Best Practices
 
-1. **Apply to native HTML**: Use `nve-layout` on HTML elements, not Elements components
-2. **Start with semantic HTML**: Use appropriate elements (`<nav>`, `<main>`, `<aside>`) with layout attributes
-3. **Mobile-first approach**: Design for narrow screens first, then enhance for larger displays
-4. **Consistent spacing**: Use the t-shirt sizing system rather than custom values
-5. **Combine thoughtfully**: Layer layout attributes to achieve complex designs
-6. **Test responsively**: Ensure layouts work across all device sizes
+1. **Apply to native HTML** - Use `nve-layout` on HTML elements, not Elements components
+2. **Start with semantic HTML** - Use appropriate elements (`<nav>`, `<main>`, `<aside>`) with layout attributes
+3. **Mobile-first approach** - Design for narrow screens first, then enhance for larger displays
+4. **Consistent spacing** - Use the t-shirt sizing system rather than custom values
+5. **Combine thoughtfully** - Layer layout attributes to achieve complex designs
+6. **Test responsively** - Ensure layouts work across all device sizes
 
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">

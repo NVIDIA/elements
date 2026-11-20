@@ -44,13 +44,13 @@ Vertical flexbox layouts stack content with control over spacing, alignment, and
 
 Choose vertical layout (`column`) for:
 
-- **Forms**: Labels above inputs, sections stacked vertically
-- **Card content**: Header, body, and footer stacked naturally
-- **Sidebars**: Navigation items or widgets stacked vertically
-- **Hero sections**: Centered content with title, description, CTA
-- **Mobile layouts**: Natural stacking for responsive design
-- **Article content**: Paragraphs, images, and headings in sequence
-- **Modal dialogs**: Header, content, and actions stacked
+- **Forms** - Labels above inputs, sections stacked vertically
+- **Card content** - Header, body, and footer stacked naturally
+- **Sidebars** - Navigation items or widgets stacked vertically
+- **Hero sections** - Centered content with title, description, CTA
+- **Mobile layouts** - Natural stacking for responsive design
+- **Article content** - Paragraphs, images, and headings in sequence
+- **Modal dialogs** - Header, content, and actions stacked
 
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
@@ -117,7 +117,7 @@ Vertical layouts support alignment along both axes:
 
 - `align:center` - Center both horizontally and vertically
 - `align:stretch` - Stretch in both dimensions
-- You can combine many values: `align:horizontal-center align:bottom`
+- You can combine values such as `align:horizontal-center align:bottom`
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
@@ -231,11 +231,11 @@ Use alignment to control vertical rhythm:
 
 ## Best Practices
 
-1. **Embrace natural flow**: Vertical layouts match reading patterns
-2. **Use consistent spacing**: Apply gap values systematically
-3. **Consider viewport height**: Use `full` or `vh` units for full-screen layouts
-4. **Plan for growth**: Use `flex: 1` to create expandable regions
-5. **Test with varied content**: Ensure layouts work with different content lengths
+1. **Embrace natural flow** - Vertical layouts match reading patterns
+2. **Use consistent spacing** - Apply gap values systematically
+3. **Consider viewport height** - Use `full` or `vh` units for full-screen layouts
+4. **Plan for growth** - Use `flex: 1` to create expandable regions
+5. **Test with varied content** - Ensure layouts work with different content lengths
 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">

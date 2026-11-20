@@ -235,12 +235,12 @@ if (ownershipRoot) {
 
 Owning an agent-assisted change means you can defend the implementation from first principles.
 
-- **Intent:** You know why the change exists and which user, API, or system behavior it serves.
-- **Design:** You chose the public API, boundaries, state model, and failure behavior deliberately.
-- **Correctness:** You tested happy paths, invalid states, edge cases, and integration behavior that can regress.
-- **Maintainability:** You removed incidental complexity, dead code, speculative abstraction, and unexplained patterns.
-- **Review:** You kept the diff small enough for another engineer to reason about the risk.
-- **Automation:** You strengthened the harness when the same failure can recur.
+- **Intent** - You know why the change exists and which user, API, or system behavior it serves.
+- **Design** - You chose the public API, boundaries, state model, and failure behavior deliberately.
+- **Correctness** - You tested happy paths, invalid states, edge cases, and integration behavior that can regress.
+- **Maintainability** - You removed incidental complexity, dead code, speculative abstraction, and unexplained patterns.
+- **Review** - You kept the diff small enough for another engineer to reason about the risk.
+- **Automation** - You strengthened the harness when the same failure can recur.
 
 The prompt is not evidence. Passing tests are not evidence if the tests do not assert the risk. Review approval is not evidence if nobody can explain the behavior. The evidence is the code, the tests, the static gates, and the engineer's command of the system.
 

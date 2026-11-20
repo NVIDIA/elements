@@ -122,7 +122,7 @@ Assign each finding a priority:
 - **P2:** worthwhile, but larger, riskier, or waiting on a user decision.
 - **P3:** minor payoff; worth doing alongside related work.
 
-Return a few high-confidence findings rather than an exhaustive list of weak possibilities.
+Focus the report on the findings with the strongest evidence.
 
 ## Report
 

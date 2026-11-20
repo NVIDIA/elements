@@ -35,13 +35,13 @@ Instructions for migrating a project from deprecated Elements APIs to the latest
 
 ## CLI Command Reference
 
-- `nve project.validate`: Check setup, configuration, dependencies, and project health.
-- `nve project.setup`: Set up or update a project to use latest Elements packages.
-- `nve packages.list`: List current and latest package versions.
-- `nve packages.changelogs.get`: Read migration-relevant package changelogs.
-- `nve api.validate`: Check HTML and JSON files against current Elements rules.
-- `nve api.list`: List available Elements APIs.
-- `nve api.get`: Get documentation for a specific component API.
+- `nve project.validate` - Check setup, configuration, dependencies, and project health.
+- `nve project.setup` - Set up or update a project to use latest Elements packages.
+- `nve packages.list` - List current and latest package versions.
+- `nve packages.changelogs.get` - Read migration-relevant package changelogs.
+- `nve api.validate` - Check HTML and JSON files against current Elements rules.
+- `nve api.list` - List available Elements APIs.
+- `nve api.get` - Get documentation for a specific component API.
 
 ## ESLint Setup
 

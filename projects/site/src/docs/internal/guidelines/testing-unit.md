@@ -51,11 +51,11 @@ describe(Badge.metadata.tag, () => {
 
 Core testing utilities for DOM manipulation and element stability:
 
-- `createFixture`: Creates test fixture DOM element
-- `removeFixture`: Removes test fixture DOM
-- `elementIsStable`: Waits for Lit element to be stable
-- `emulateClick`: Triggers native click events
-- `untilEvent`: Creates promise for event results
+- `createFixture` - Creates test fixture DOM element
+- `removeFixture` - Removes test fixture DOM
+- `elementIsStable` - Waits for Lit element to be stable
+- `emulateClick` - Triggers native click events
+- `untilEvent` - Creates promise for event results
 
 ## Running Tests
 

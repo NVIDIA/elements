@@ -229,7 +229,7 @@ export const Horizontal = {
 };
 
 /**
- * @summary Many-selection mode allowing users to select many options simultaneously.
+ * @summary Multi-select mode lets users choose more than one option.
  */
 export const Multiple = {
   render: () => html`
@@ -315,7 +315,7 @@ export const Size = {
 };
 
 /**
- * @summary Custom scroll height for dropdown with many options to control vertical space usage.
+ * @summary Set a scroll height to limit how much space a long options list takes.
  * @tags test-case
  */
 export const Height = {

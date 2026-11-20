@@ -71,7 +71,7 @@ export const States = {
 };
 
 /**
- * @summary Switch groups with vertical layout for many related toggles stacked in a column with validation states.
+ * @summary Switch groups with vertical layout for related toggles stacked in a column with validation states.
  */
 export const VerticalGroup = {
   render: () => html`
@@ -242,7 +242,7 @@ export const VerticalInlineGroup = {
 };
 
 /**
- * @summary Switch groups with horizontal layout for many toggles arranged in a row, ideal for limited options.
+ * @summary Switch groups with horizontal layout for toggles arranged in a row, ideal for limited options.
  * @tags test-case
  */
 export const HorizontalGroup = {

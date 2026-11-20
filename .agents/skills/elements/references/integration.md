@@ -40,7 +40,7 @@ If installing to an existing project, install the core dependencies:
 npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 ```
 
-Elements ships as many small packages. This allows you to choose what
+Elements ships in small packages. This allows you to choose what
 tools your application needs and omit anything unnecessary, improving
 application performance.
 

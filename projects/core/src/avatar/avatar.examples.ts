@@ -57,7 +57,7 @@ export const Size = {
 `};
 
 /**
- * @summary Avatar group component for displaying many users with overflow indicator, ideal for team displays and collaboration interfaces.
+ * @summary Avatar group component for displaying users with an overflow indicator, ideal for team displays and collaboration interfaces.
  */
 export const Group = {
   render: () => html`

@@ -226,7 +226,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
 /**
  * @element nve-accordion-group
- * @description Organizes many accordions into a cohesive group, enabling coordinated expand/collapse behavior such as single-item expansion.
+ * @description Groups accordions to coordinate expansion and collapse, such as keeping one item open at a time.
  * @documentation https://nvidia.github.io/elements/docs/elements/accordion/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion

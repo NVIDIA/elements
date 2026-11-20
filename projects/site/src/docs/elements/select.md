@@ -10,15 +10,15 @@
 
 {% install 'nve-select' %}
 
-## Many
+## Multi-select
 
-The many option behavior preserves the native select value behavior. The `value` on the select
+In multi-select mode, the component follows the native select behavior. The `value` on the select
 only reflects the first selected value. To get all selected options check the `selected` property
 on each `<option>` element or the select property `selectedOptions`.
 
 {% example '@nvidia-elements/core/select/select.examples.json' 'Multiple' %}
 
-If the many tags overflow the parent container a simple text label appears instead.
+When the selected tags overflow their container, a text label replaces them.
 
 {% example '@nvidia-elements/core/select/select.examples.json' 'MultipleOverflow' %}
 

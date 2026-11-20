@@ -52,7 +52,7 @@ Look for work multiplied by object, layer, or frame count:
 - typed-array or `DataView` construction, `subarray` views, array literals, closures, iterator objects, and temporary matrices;
 - repeated data normalization, geometry validation, transparency classification, bounds computation, serialization, or coordinate conversion;
 - replacing buffers that have sufficient capacity, copying identical source data across layers, or preparing the same source more than once;
-- scanning a full data set for a small update, emitting many disjoint dirty ranges, or uploading inside loops;
+- scanning a full data set for a small update, emitting disjoint dirty ranges, or uploading inside loops;
 - repeated bind-group, pipeline, attachment, texture-view, or resource creation;
 - DOM queries, layout reads, style changes, Lit updates, and event work interleaved with animation-frame preparation;
 - promise chaining, readback, or query polling that delays the next frame.
@@ -84,7 +84,7 @@ Discover benchmark support in the affected package rather than routing every inv
 - Add the benchmark beside the code under test or to the package's established benchmark entry point.
 - Keep expensive fixture creation outside the callback unless initialization is the target.
 
-Choose experiment axes that match the code path. Useful comparisons include small-to-large inputs, incremental-to-full updates, cold creation-to-steady reuse, one-to-many consumers, ordinary-to-worst-case data, and ergonomic-to-direct encoding. Add browser-side evidence for queue uploads, render passes, shaders, rasterization, presentation, or interaction.
+Choose experiment axes that match the code path. Useful comparisons include small-to-large inputs, incremental-to-full updates, cold creation-to-steady reuse, one consumer compared with a group of consumers, ordinary-to-worst-case data, and ergonomic-to-direct encoding. Add browser-side evidence for queue uploads, render passes, shaders, rasterization, presentation, or interaction.
 
 ## Design a credible comparison
 

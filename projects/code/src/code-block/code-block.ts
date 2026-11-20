@@ -77,7 +77,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
 
   /**
    * Adds styling to highlight the provided code lines.
-   * For many lines: use Comma seperated values, ex: (1,5,7).
+   * Use comma-separated line numbers such as `1,5,7`.
    * For range of lines, use hyphen seperated values, ex: (1-5).
    * You can combine both such as: ex: (1,5,10-15,20).
    */

@@ -10,7 +10,7 @@
 
 This guide facilitates and streamlines your contribution process and helps ensure that every contribution adheres to the high standards of code and design quality. In this system, unit testing is highly valued to maintain a reliable, robust design system.
 
-The team may not accept all contributions or may need more time before implementation. Take into account that a design system component or pattern requires a significant amount of time. Each use case, many apps, frameworks, API design, and guidelines applicable to all must be carefully considered.
+The team may not accept all contributions or may need more time before implementation. Take into account that a design system component or pattern requires a significant amount of time. Consider the use case, supported applications and frameworks, API design, and shared guidelines.
 The main focus is to enable you to deliver value to your users.
 
 <img src="/static/images/contributions.drawio.svg" alt="Flowchart for evaluating a potential Elements contribution against existing features, similar patterns, and whether to use, request, or build custom functionality." style="padding: 12px 0 0 0" />
@@ -41,28 +41,28 @@ The main focus is to enable you to deliver value to your users.
 
 ## Feature Requests
 
-1. **Proposing a Feature**: If you believe a new feature would benefit the design system, create an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=feature).
+1. **Proposing a Feature** - If you believe a new feature would benefit the design system, create an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=feature).
 
 ## Bug Fixes
 
 1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=default), providing as much detail as you can about the problem and how to reproduce it.
 
-2. **Resolve the Bug**: Once you have a solution for the bug, please ensure that your code is clear, concise, and adheres to the coding guidelines.
+2. **Resolve the Bug** - Once you have a solution for the bug, please ensure that your code is clear, concise, and adheres to the coding guidelines.
 
-3. **Code and Design Quality**: Quality is paramount. Any bug fixes should keep, or preferably enhance, the existing code and design quality.
+3. **Code and Design Quality** - Quality is paramount. Preserve or improve the quality of the existing code and design when fixing bugs.
 
-4. **Unit Testing**: Each bug fix should include an appropriate unit test. This confirms that the fix works as intended and helps prevent regressions in the future.
+4. **Unit Testing** - Each bug fix should include an appropriate unit test. This confirms that the fix works as intended and helps prevent regressions in the future.
 
 ## New Components / Feature
 
-1. **Proposing a New Component**: For a new component you would like to contribute, please create a new issue.
+1. **Proposing a New Component** - For a new component you would like to contribute, please create a new issue.
 
-2. **Design Review**: The initial MVP design passes review and is ready for implementation.
+2. **Design Review** - The initial MVP design passes review and is ready for implementation.
 
-3. **Implementation**: Provide a API proposal spec on the component adhering to the [coding and API guidelines](/docs/api-design/)
+3. **Implementation** - Provide a API proposal spec on the component adhering to the [coding and API guidelines](/docs/api-design/)
 
-4. **Code and Design Quality**: New components should maintain a high standard of code quality and adhere to the [coding and API guidelines](/docs/api-design/)
+4. **Code and Design Quality** - New components should maintain a high standard of code quality and adhere to the [coding and API guidelines](/docs/api-design/)
 
-5. **Unit Testing**: As with other contributions, all new components should have appropriate unit tests to verify their functionality and performance.
+5. **Unit Testing** - As with other contributions, all new components should have appropriate unit tests to verify their functionality and performance.
 
 File an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/issues/new?template=feature).

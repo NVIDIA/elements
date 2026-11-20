@@ -50,7 +50,7 @@ export const FilterToolbar = {
 };
 
 /**
- * @summary Use for toolbars with many filter chips and date inputs where horizontal scrolling helps when content overflows.
+ * @summary Use for toolbars with filter chips and date inputs where horizontal scrolling helps when content overflows.
  * @tags pattern test-case
  */
 export const FilterToolbarScroll = {

@@ -34,7 +34,7 @@ export default {
 };
 
 /**
- * @summary Basic data grid for tabular data display with columns and rows. Use grids for presenting structured datasets where users need to scan, compare, and analyze information across many columns, such as dashboards, reports, or data management interfaces.
+ * @summary Basic data grid for tabular data display with columns and rows. Use grids for presenting structured datasets where users need to scan, compare, and analyze information across columns, such as dashboards, reports, or data management interfaces.
  */
 export const Default = {
   render: () => html`
@@ -155,7 +155,7 @@ export const Keynav = {
 };
 
 /**
- * @summary Multi-select rows with checkboxes for bulk operations. Use multi-select when users need to perform actions on many items at once (like delete, export, or bulk edit), placing checkboxes as the first column and setting the selected attribute for proper accessibility.
+ * @summary Multi-select rows with checkboxes for bulk operations. Use multi-select when users need to delete, export, or edit rows in bulk, placing checkboxes as the first column and setting the selected attribute for proper accessibility.
  */
 export const MultiSelect = {
   render: () => html`
@@ -183,7 +183,7 @@ export const MultiSelect = {
 };
 
 /**
- * @summary Use bulk actions for operations on many items. Display only
+ * @summary Use bulk actions to process the selected rows together. Display only
  * when rows have a selection. Closing bulk actions deselects all selected rows.
  */
 export const BulkActions = {
@@ -397,7 +397,7 @@ export const Pagination = {
 };
 
 /**
- * @summary Fixed-height scrollable grid with persistent header and footer. Use scrollable grids when displaying large datasets where users need to maintain context of column headers and footer controls (like pagination) while scrolling through many rows, improving navigation without losing orientation.
+ * @summary Fixed-height scrollable grid with persistent header and footer. Use scrollable grids when displaying large datasets where users need to maintain context of column headers and footer controls (like pagination) while scrolling through rows, improving navigation without losing orientation.
  * @tags test-case
  */
 export const Scroll = {
@@ -559,8 +559,7 @@ export const ColumnFixed = {
 };
 
 /**
- * @summary Fix many columns to any given side, but keep fixed columns from
- * spanning past the half way point of the grid.
+ * @summary Fix columns to either edge and keep them within half the grid width.
  */
 export const ColumnMultiFixed = {
   render: () => html`
@@ -578,8 +577,7 @@ export const ColumnMultiFixed = {
 };
 
 /**
- * @summary Stack and fix many columns to any given side, but keep fixed
- * columns from spanning past the half way point of the grid.
+ * @summary Stack fixed columns at either edge and keep them within half the grid width.
  */
 export const ColumnStackFixed = {
   render: () => html`
@@ -1004,7 +1002,7 @@ export const PerformanceVirtualScroll = {
 };
 
 /**
- * @summary Alternating row background colors for improved scanability. Use striped rows in dense grids or when users frequently scan horizontally across many columns, as the alternating backgrounds help maintain visual alignment and reduce reading errors in wide tables.
+ * @summary Alternating row background colors for improved scanability. Use striped rows in dense grids or when users frequently scan across columns, as the alternating backgrounds help keep rows aligned in wide tables.
  * @tags test-case
  */
 export const Stripe = {
@@ -1049,7 +1047,7 @@ export const Card = {
 };
 
 /**
- * @summary Grid integrated with tabs for organized data presentation, enabling many data views within a single interface for comprehensive information display.
+ * @summary Grid integrated with tabs for organized data presentation, enabling users to switch between data views in one interface for comprehensive information display.
  * @tags test-case
  */
 export const CardTabs = {

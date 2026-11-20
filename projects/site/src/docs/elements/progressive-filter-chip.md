@@ -14,7 +14,7 @@
 
 {% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'TextInput' %}
 
-## Many
+## Multi-select
 
 {% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Multiple' %}
 

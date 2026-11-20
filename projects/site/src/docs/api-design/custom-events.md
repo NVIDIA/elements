@@ -21,7 +21,7 @@ Events communicate user intent to the host application. Examples include `close`
 
 ## Compatibility
 
-Events should not include verb/action style prefixing such as on or trigger. Many frameworks de-sugar event handlers to prefix with keywords like on. Example React `onClose={this.close}`
+Events should not include verb/action style prefixing such as on or trigger. Frameworks may add a prefix such as `on` to event handlers. React uses `onClose={this.close}`, for example.
 
 <nve-alert status="warning">Warning: use lowercase kebab events as some frameworks do not treat custom events as case sensitive. &nbsp;<a href="https://custom-elements-everywhere.com/">(read more)</a></nve-alert>
 

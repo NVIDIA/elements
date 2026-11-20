@@ -14,9 +14,9 @@ This guide covers common issues and solutions for test failures, build errors, p
 
 ### Unit Test Timing Issues
 
-- **Symptom:** Tests fail intermittently or when accessing element properties
-- **Cause:** Component not fully rendered or updated before assertions
-- **Solution:** Always wait for `elementIsStable()` before assertions
+- **Symptom** - Tests fail intermittently or when accessing element properties
+- **Cause** - Component not fully rendered or updated before assertions
+- **Solution** - Always wait for `elementIsStable()` before assertions
 
 ```typescript
 // ❌ Bad: No stability check
@@ -35,9 +35,9 @@ it('should update property', async () => {
 
 ### Missing Fixture Cleanup
 
-- **Symptom:** Tests pass individually but fail when run together
+- **Symptom** - Tests pass individually but fail when run together
 - **Cause:** DOM pollution from previous tests
-- **Solution:** Always use `removeFixture()` in `afterEach()`
+- **Solution** - Always use `removeFixture()` in `afterEach()`
 
 ```typescript
 // ✅ Proper cleanup pattern
@@ -59,9 +59,9 @@ describe('Component', () => {
 
 ### Event Timing Problems
 
-- **Symptom:** Event listeners don't trigger or receive wrong values
-- **Cause:** Events fire before listeners attached or before element stable
-- **Solution:** Use `untilEvent()` helper and ensure stability
+- **Symptom** - Event listeners don't trigger or receive wrong values
+- **Cause** - Events fire before listeners attached or before element stable
+- **Solution** - Use `untilEvent()` helper and ensure stability
 
 ```typescript
 // ✅ Proper event testing
@@ -79,9 +79,9 @@ it('should emit custom event', async () => {
 
 ### Theme Attribute Mismatch
 
-- **Symptom:** Visual test fails with theme-related differences
-- **Cause:** Theme attribute not set correctly in template
-- **Solution:** Ensure `nve-theme` attribute matches test name
+- **Symptom** - Visual test fails with theme-related differences
+- **Cause** - Theme attribute not set correctly in template
+- **Solution** - Ensure `nve-theme` attribute matches test name
 
 ```typescript
 // ✅ Correct theme setup
@@ -103,9 +103,9 @@ test('should match visual baseline dark theme', async () => {
 
 ### Viewport Size Issues
 
-- **Symptom:** Screenshots show different dimensions than expected
-- **Cause:** Content overflows or viewport not consistent
-- **Solution:** Use explicit containers or adjust viewport in test config
+- **Symptom** - Screenshots show different dimensions than expected
+- **Cause** - Content overflows or viewport not consistent
+- **Solution** - Use explicit containers or adjust viewport in test config
 
 ```typescript
 // Add container with explicit sizing
@@ -156,7 +156,7 @@ expect(report.payload.javascript.kb).toBeLessThan(25);
   - Simple components: < 12 KB
   - Interactive components: < 18 KB
   - Complex components: < 25 KB
-  - Rich editors/specialized: Document in test
+  - Rich editors/specialized - Document in test
 
 ### Accessibility Score Below 100
 
@@ -167,7 +167,7 @@ expect(report.payload.javascript.kb).toBeLessThan(25);
   - Missing focus indicators
   - Invalid ARIA attributes
 
-- **Solution:** Run accessibility tests and fix violations
+- **Solution** - Run accessibility tests and fix violations
 
 ```shell
 pnpm run test:axe
@@ -184,15 +184,15 @@ See [accessibility testing guide](testing-accessibility.md) for details.
   - Missing error handling
   - Inefficient patterns
 
-- **Solution:** Review Lighthouse report details and fix issues
+- **Solution** - Review Lighthouse report details and fix issues
 
 ## Build Failures
 
 ### Wireit Cache Issues
 
-- **Symptom:** Build fails with outdated errors or missing dependencies
-- **Cause:** Stale Wireit cache
-- **Solution:** Reset CI environment
+- **Symptom** - Build fails with outdated errors or missing dependencies
+- **Cause** - Stale Wireit cache
+- **Solution** - Reset CI environment
 
 ```shell
 pnpm run ci:reset
@@ -202,8 +202,8 @@ This clears all caches and reinstalls dependencies.
 
 ### TypeScript Compilation Errors
 
-- **Symptom:** Type errors in CI but not locally
-- **Cause:** Different TypeScript version or stale build cache
+- **Symptom** - Type errors in CI but not locally
+- **Cause** - Different TypeScript version or stale build cache
 - **Solutions:**
 
 ```shell
@@ -221,9 +221,9 @@ pnpm run build
 
 ### Missing Visual Test Baselines
 
-- **Symptom:** Visual tests fail with "baseline not found"
-- **Cause:** Git LFS files not pulled
-- **Solution:** Pull LFS files
+- **Symptom** - Visual tests fail with "baseline not found"
+- **Cause** - Git LFS files not pulled
+- **Solution** - Pull LFS files
 
 ```shell
 git lfs install --skip-repo
@@ -234,9 +234,9 @@ git lfs pull
 
 ### Node Version Mismatch
 
-- **Symptom:** Build or tests fail with Node compatibility errors
-- **Cause:** Wrong Node.js version
-- **Solution:** Install the repository toolchain with mise
+- **Symptom** - Build or tests fail with Node compatibility errors
+- **Cause** - Wrong Node.js version
+- **Solution** - Install the repository toolchain with mise
 
 ```shell
 # Install tool versions from mise.toml
@@ -248,9 +248,9 @@ mise exec -- node --version  # version as defined in .nvmrc and mise.toml
 
 ### pnpm Version Issues
 
-- **Symptom:** Install fails or lockfile changes unexpectedly
-- **Cause:** Wrong pnpm version
-- **Solution:** Install the repository toolchain with mise
+- **Symptom** - Install fails or lockfile changes unexpectedly
+- **Cause** - Wrong pnpm version
+- **Solution** - Install the repository toolchain with mise
 
 ```shell
 # Install tool versions from mise.toml
@@ -263,7 +263,7 @@ mise exec -- pnpm --version
 ### Port Conflicts in Dev Mode
 
 - **Symptom:** Dev server fails to start with "port already in use"
-- **Cause:** Another process using the port
+- **Cause** - Another process using the port
 - **Solution:**
 
 ```shell
@@ -281,20 +281,26 @@ PORT=3001 pnpm run dev
 
 ### Test Suite Running Slowly
 
-- **Symptom:** Tests take much longer than before
+- **Symptom** - Tests take much longer than before
 - **Causes & Solutions:**
 
-1. **Too many fixture creations**
+1. **Recreating fixtures in every test**
+
+For sequential tests, create a shared fixture in `beforeAll` and remove it in `afterAll`. Restore any state that tests change in `beforeEach`. This example resets the form controls to their defaults. Use a fresh fixture per test when a full reset is impractical.
 
 ```typescript
-// ❌ Creating fixture in each test
-it('test 1', async () => {
-  const fixture = await createFixture(...);
+let fixture: HTMLElement;
+
+beforeAll(async () => {
+  fixture = await createFixture(html`<form><input name="query" value="initial" /></form>`);
 });
 
-// ✅ Reuse fixture in beforeEach
-beforeEach(async () => {
-  fixture = await createFixture(...);
+beforeEach(() => {
+  required(fixture.querySelector('form'), 'Missing form fixture').reset();
+});
+
+afterAll(() => {
+  removeFixture(fixture);
 });
 ```
 
@@ -345,9 +351,9 @@ expect(element.value).toBe('test');
 
 ### Pipeline Timeout
 
-- **Symptom:** CI job exceeds time limit
-- **Cause:** Hung tests or infinite loops
-- **Solution:** Add timeouts to tests
+- **Symptom** - CI job exceeds time limit
+- **Cause** - Hung tests or infinite loops
+- **Solution** - Add timeouts to tests
 
 ```typescript
 describe('Component', { timeout: 30000 }, () => {

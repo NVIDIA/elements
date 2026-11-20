@@ -24,7 +24,7 @@ You MUST review these files before proceeding:
 
 ## Workflow
 
-### Phase 1: Locate Template
+### Phase 1 - Locate Template
 
 Find the validated HTML template to persist. Look for it in the conversation context:
 
@@ -32,7 +32,7 @@ Find the validated HTML template to persist. Look for it in the conversation con
 2. Check for HTML the user has pasted or referenced
 3. If no template exists, ask the user to provide the HTML they want to save
 
-### Phase 2: Check Validity
+### Phase 2 - Check Validity
 
 Ensure the template is valid before proceeding.
 
@@ -41,7 +41,7 @@ Ensure the template is valid before proceeding.
 3. Re-validate until `ok` is true and `summary.errors` is 0
 4. Do NOT proceed to Phase 3 until validation passes
 
-### Phase 3: Generate Imports
+### Phase 3 - Generate Imports
 
 Use the MCP tool to derive correct ESM import statements.
 
@@ -49,7 +49,7 @@ Use the MCP tool to derive correct ESM import statements.
 2. The tool returns the required `@nvidia-elements/core/*/define.js` imports
 3. Always prepend `import { html } from 'lit';` as the first import -- the tool does not include it
 
-### Phase 4: Determine Metadata
+### Phase 4 - Determine Metadata
 
 Analyze the template and determine where and how to file it.
 
@@ -89,7 +89,7 @@ Analyze the template and determine where and how to file it.
 - Only create a new file when no existing category fits
 - Present the decision to the user for confirmation
 
-### Phase 5: Write @summary
+### Phase 5 - Write @summary
 
 Compose a UX-focused JSDoc `@summary` for the pattern.
 
@@ -115,7 +115,7 @@ Compose a UX-focused JSDoc `@summary` for the pattern.
 - Restating what is obvious from the code (`@summary A card with a button`)
 - Vague descriptions (`@summary Example pattern`)
 
-### Phase 6: Assemble
+### Phase 6 - Assemble
 
 Build the TypeScript file content.
 
@@ -177,7 +177,7 @@ export const ExportName = {
 3. Append the new named export at the end of the file
 4. Do NOT change existing exports or the default export
 
-### Phase 7: Write and Verify
+### Phase 7 - Write and Verify
 
 1. Write the file to `projects/internals/patterns/src/<file-name>.examples.ts`
 2. Confirm to the user with:

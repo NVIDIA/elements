@@ -42,11 +42,11 @@ element.source = '# Updated Content\n\nNew markdown content here.';
 
 ## Features
 
-- **Markdown Parsing**: Full markdown support with syntax highlighting, links, lists, and more
-- **HTML Templates**: Support for raw HTML content via template elements
-- **Two Input Modes**: Clear separation between markdown (source) and HTML (template)
-- **Performance Optimized**: Lazy-loaded markdown parser for better initial load times
-- **Design System Integration**: Styled with NVE design tokens and CSS custom properties
+- **Markdown Parsing** - Full markdown support with syntax highlighting, links, lists, and more
+- **HTML Templates** - Support for raw HTML content via template elements
+- **Two Input Modes** - Clear separation between markdown (source) and HTML (template)
+- **Performance Optimized** - Lazy-loaded markdown parser for better initial load times
+- **Design System Integration** - Styled with NVE design tokens and CSS custom properties
 
 ## NVIDIA Elements Skill
 

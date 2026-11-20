@@ -10,7 +10,7 @@
 
 ## Terminology
 
-**Prompt Engineering** - is the craft of writing instructions that steer a model toward a desired output within a single inference call. It focuses only on wording, structure, and few-shot examples inside the prompt itself. A well-written prompt compensates for what the model cannot infer on its own, while a poorly written one wastes the surrounding context no matter how well curated.
+**Prompt Engineering** - is the craft of writing instructions that steer a model toward a desired output within a single inference call. It focuses only on wording, structure, and in-context examples inside the prompt itself. A well-written prompt compensates for what the model cannot infer on its own, while a poorly written one wastes the surrounding context no matter how well curated.
 
 **Context Engineering** - is the practice of curating what the model sees at inference time to produce better results. It spans both the project and domain layers - deciding what goes in `AGENTS.md`, which MCPs to enable, how to structure skills, and what to keep out of context to avoid noise. Good context engineering is additive and incremental. Start minimal. Add constraints when the agent fails, not preemptively.
 
@@ -62,7 +62,7 @@ An **agent harness** is the complete system that wraps a raw LLM model and makes
 
 ## Where Elements Fits
 
-Elements lives entirely in the <strong style="color: var(--nve-ref-color-blue-cobalt-1000)">Project Harness</strong> as horizontal infrastructure that serves many domains - AV, Infra, Robotics, Research - without coupling to any of them. Each domain team layers their own domain specific harness on top. The CLI and MCP expose the same API - one for humans, one for agents.
+Elements lives entirely in the <strong style="color: var(--nve-ref-color-blue-cobalt-1000)">Project Harness</strong> as horizontal infrastructure that serves AV, infrastructure, robotics, and research without coupling to any of those domains. Each domain team layers their own domain specific harness on top. The CLI and MCP expose the same API - one for humans, one for agents.
 
 <div nve-layout="grid gap:xl span-items:4 align:vertical-stretch">
   <div nve-layout="column gap:sm">

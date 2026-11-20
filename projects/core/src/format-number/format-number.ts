@@ -115,17 +115,17 @@ export class FormatNumber extends LitElement {
   useGrouping?: 'auto' | 'always' | 'min2' | 'true' | 'false' | boolean;
 
   /**
-   * Pad fraction output to at least this many digits (0-100).
+   * Pads the fractional part to at least the given digit count (0-100).
    */
   @property({ type: Number, attribute: 'minimum-fraction-digits' }) minimumFractionDigits?: number;
 
   /**
-   * Round fraction output to at most this many digits (0-100).
+   * Rounds the fractional part to at most the given digit count (0-100).
    */
   @property({ type: Number, attribute: 'maximum-fraction-digits' }) maximumFractionDigits?: number;
 
   /**
-   * Pad integer output to at least this many digits (1-21).
+   * Pads the integer part to at least the given digit count (1-21).
    */
   @property({ type: Number, attribute: 'minimum-integer-digits' }) minimumIntegerDigits?: number;
 

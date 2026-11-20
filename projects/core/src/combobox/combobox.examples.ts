@@ -213,8 +213,7 @@ export const Select = () => {
 };
 
 /**
- * @summary Multi select allows users to select many options from a
- * predefined list. The select `value` will only reflect the first selected value.
+ * @summary Multi-select lets users choose more than one option from a predefined list. The select `value` will only reflect the first selected value.
  * To get all selected options check the `selected` property on each `<option>`
  * or the select property `selectedOptions`.
  * On focus all options will show until the user starts typing. Select is the
@@ -339,7 +338,7 @@ export const LabelMultiSelect = () => {
 };
 
 /**
- * @summary Overflow behavior where many tags collapse into a simple text label when the parent container is too narrow.
+ * @summary Overflow behavior where selected tags collapse into a text label when the parent container is too narrow.
  * @tags test-case
  */
 export const Overflow = () => {

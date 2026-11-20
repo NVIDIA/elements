@@ -43,7 +43,7 @@ Place the `nve-control` attribute on the element that is the custom input.
 
 ## Form Associated Elements
 
-Many of the form controls wrap the native HTML form element or `<input>` element with the corresponding `type` attribute set.
+Form controls can wrap a native HTML form element or an `<input>` element with the corresponding `type` attribute.
 
 ```html
 <nve-input>

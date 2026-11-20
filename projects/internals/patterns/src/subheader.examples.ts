@@ -449,7 +449,7 @@ export const StandardHeaderDetailPage = {
 }
 
 /**
- * @summary Detail page subheader with back navigation and tabbed content sections. Ideal for entity detail views with many data categories.
+ * @summary Detail page subheader with back navigation and tabbed content sections. Ideal for entity detail views organized by data category.
  * @tags pattern test-case
  */
 export const TabsHeaderDetailPage = {
@@ -724,7 +724,7 @@ export const InlineKitchenSinkHeaderDetailPage = {
 }
 
 /**
- * @summary Use for comprehensive detail page subheaders with stacked metadata row and tabs. Ideal for better vertical organization when metadata items are many.
+ * @summary Use for comprehensive detail page subheaders with stacked metadata row and tabs. Stack the metadata when it needs its own row.
  * @tags pattern test-case
  */
 export const StackedKitchenSinkHeaderDetailPage = {

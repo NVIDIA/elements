@@ -8,7 +8,7 @@
 
 # {{ title }}
 
-[`@nvidia-elements/pi`](https://pi.dev/packages/@nvidia-elements/pi) gives [Pi](https://pi.dev) agents native access to Elements API documentation, examples, design tokens, icons, package information, project checks, and template validation. Pi can also use our <a href="/docs/skills/">Skills</a> and <a href="/docs/cli/">CLI</a> directly without requiring the extension.
+[`@nvidia-elements/pi`](https://pi.dev/packages/@nvidia-elements/pi) gives [Pi](https://pi.dev) agents native access to Elements API documentation, examples, design tokens, icons, package information, project checks, and template validation. Pi can also use the Elements <a href="/docs/skills/">skills</a> and <a href="/docs/cli/">CLI</a> directly without the extension.
 
 ## Install
 
@@ -44,10 +44,10 @@ You do not need MCP configuration or a separate CLI process. Use the [Elements C
 
 The package provides these prompt-template commands:
 
-- `/elements-artifact`: Create a standalone Elements HTML artifact.
-- `/elements-doctor`: Check an Elements development setup.
-- `/elements-create-project`: Create an Elements starter project.
-- `/elements-migrate`: Migrate deprecated Elements packages and APIs.
+- `/elements-artifact` - Create a standalone Elements HTML artifact.
+- `/elements-doctor` - Check an Elements development setup.
+- `/elements-create-project` - Create an Elements starter project.
+- `/elements-migrate` - Migrate deprecated Elements packages and APIs.
 
 Add an optional request after a command, such as `/elements-artifact create a settings page`.
 

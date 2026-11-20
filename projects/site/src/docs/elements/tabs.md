@@ -11,7 +11,7 @@
 
 {% install 'nve-tabs' %}
 
-The Tabs component consists of a `<nve-tabs>` parent element and many `<nve-tabs-item>` elements slotted as children. The `selected` attribute when applied to an item by the host application gives the selected tab the proper selected styles.
+The Tabs component consists of a `<nve-tabs>` parent element and slotted `<nve-tabs-item>` children. The `selected` attribute when applied to an item by the host application gives the selected tab the proper selected styles.
 
 Apply the `disabled` attribute to an item to get the proper visual cues and prevent interaction. The elements handle all default interaction, hover, and active states.
 

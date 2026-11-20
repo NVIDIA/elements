@@ -18,11 +18,11 @@ You MUST review @projects/site/src/docs/internal/guidelines/documentation.md bef
 
 ## Key Principles
 
-1. **Frontmatter Required**: All documentation files must include proper frontmatter with title and layout
-2. **Source-Owned API Documentation**: Write component guidance in source JSDoc and render it with Eleventy shortcodes so the site, CLI, and MCP share the same documentation.
-3. **Clear Structure**: Use proper heading hierarchy and table of contents for long documents
-4. **Code Examples**: Include working code examples with proper syntax highlighting
-5. **Cross-References**: Link to related documentation and guidelines using proper paths
+1. **Frontmatter Required** - All documentation files must include proper frontmatter with title and layout
+2. **Source-Owned API Documentation** - Write component guidance in source JSDoc and render it with Eleventy shortcodes so the site, CLI, and MCP share the same documentation.
+3. **Clear Structure** - Use proper heading hierarchy and table of contents for long documents
+4. **Code Examples** - Include working code examples with proper syntax highlighting
+5. **Cross-References** - Link to related documentation and guidelines using proper paths
 
 ## Single Source of Truth for Component Documentation
 

@@ -33,7 +33,7 @@ Use repository search and small, targeted inspections first. AST, dependency-gra
 
 Report an opportunity when two or more concrete signals point to one of these shapes:
 
-- **Co-location:** pieces of one responsibility or lifecycle live across feature directories, forcing coordinated changes or obscuring ownership.
+- **Co-location:** pieces of one responsibility or lifecycle live across feature directories. This can force coordinated changes or obscure ownership.
 - **Shared implementation:** separate paths encode the same stable policy, transformation, state machine, data layout, resource management, or error behavior.
 - **Canonical owner:** competing representations or helpers can converge on one existing source of truth.
 - **Dead-path removal:** a newer shared path makes an older adapter, compatibility layer, or parallel implementation unnecessary.
@@ -70,7 +70,7 @@ Assign each finding a priority:
 - **P2:** worthwhile, but larger, riskier, or waiting on a user decision.
 - **P3:** minor payoff; worth doing alongside related work.
 
-Return a few actionable findings rather than an exhaustive list of weak similarities. Omit speculative ideas or list them briefly under **Keep** with the evidence that would change the verdict.
+Return the actionable findings with the strongest evidence. Omit speculative ideas or list them briefly under **Keep** with the evidence that would change the verdict.
 
 ## Report
 

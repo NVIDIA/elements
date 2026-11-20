@@ -12,7 +12,7 @@ This document describes runtime logs and static usage checks from the Element li
 
 ## Duplicate Package Version
 
-This warning appears when the application bundles or imports many versions of Elements or its dependencies within the same runtime. This can create unexpected compatibility issues and bug at runtime. To resolve, ensure dependencies are up to date and list their dependencies or peer dependencies if they internally depend on Elements.
+This warning appears when the application bundles or imports more than one version of Elements or one of its dependencies in the same runtime. This can create unexpected compatibility issues and bug at runtime. To resolve, ensure dependencies are up to date and list their dependencies or peer dependencies if they internally depend on Elements.
 
 <nve-alert status="accent">Read more about [library packaging best practices](/docs/api-design/packaging/).</nve-alert>
 
