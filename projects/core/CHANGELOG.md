@@ -1,3 +1,9 @@
+## [2.27.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.2...@nvidia-elements/core-v2.27.3) (2026-11-20)
+
+### Bug Fixes
+
+* **core:** drop obsolete css.escape feature probe ([7813a28](https://github.com/NVIDIA/elements/commit/7813a28dd012e8e126daeac0a7dbe79961156bc4))
+
 ## [2.27.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v2.27.1...@nvidia-elements/core-v2.27.2) (2026-11-19)
 
 ### Bug Fixes
