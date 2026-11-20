@@ -43,7 +43,7 @@ export async function apiShortcode(tag, type, name = null, value = null) {
   }
   if (!content) return '';
 
-  return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`.replaceAll('\n', '');
+  return `<div class="api-shortcode" nve-layout="column gap:sm">${content}</div>`.replaceAll('\n', ' ');
 }
 
 /**
