@@ -30,17 +30,12 @@ export interface NativePopover extends ReactiveElement {
 export class TypeNativePopoverController<T extends NativePopover> implements ReactiveController {
   get #nativeTriggers(): HTMLElement[] {
     const root = this.host.getRootNode() as HTMLElement;
-    const popoverTargetTriggers = Array.from(
-      root.querySelectorAll(`[popovertarget="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`)
-    ) as HTMLElement[];
+    const id = CSS.escape(this.host.id);
+    const popoverTargetTriggers = Array.from(root.querySelectorAll(`[popovertarget="${id}"]`)) as HTMLElement[];
 
-    const commandForTriggers = Array.from(
-      root.querySelectorAll(`[commandfor="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`)
-    ) as HTMLElement[];
+    const commandForTriggers = Array.from(root.querySelectorAll(`[commandfor="${id}"]`)) as HTMLElement[];
 
-    const interestForTriggers = Array.from(
-      root.querySelectorAll(`[interestfor="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`)
-    ) as HTMLElement[];
+    const interestForTriggers = Array.from(root.querySelectorAll(`[interestfor="${id}"]`)) as HTMLElement[];
 
     return [...popoverTargetTriggers, ...commandForTriggers, ...interestForTriggers];
   }
