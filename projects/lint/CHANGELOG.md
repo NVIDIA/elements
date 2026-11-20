@@ -1,3 +1,36 @@
+## [2.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.9.2...@nvidia-elements/lint-v2.10.0) (2026-11-20)
+
+### Features
+
+* **code:** add code block header and footer support ([d0893df](https://github.com/NVIDIA/elements/commit/d0893df36cebcf70e8cb6f80d1736bb5dd5458c0))
+* **core:** add dashboard ([83e5ced](https://github.com/NVIDIA/elements/commit/83e5ced893821ab74cad106473c92ecb04443949))
+* **core:** dot shapes and color support ([4d0622f](https://github.com/NVIDIA/elements/commit/4d0622f072ad4d5dfe73dbfa7736ed565119c13e))
+* **core:** expose dashboard layouts as objects ([f508745](https://github.com/NVIDIA/elements/commit/f508745ad6291d3839efafa76a8d9601e4f5f6e1))
+* **core:** expose workspace layouts as objects ([2d16a58](https://github.com/NVIDIA/elements/commit/2d16a58250234b05f98d6c54e524f6e8b3d39935))
+* **core:** iframe sandbox options ([849eb85](https://github.com/NVIDIA/elements/commit/849eb854b9f96692d2607f2db4aee62b7487b05f))
+* **core:** meter ([1628b4b](https://github.com/NVIDIA/elements/commit/1628b4b6d9a3c07de945907cb6319be496021c37))
+* **core:** support for grid virtual-list ([32fd01e](https://github.com/NVIDIA/elements/commit/32fd01e61b004bb07c0a54ce7cb6c747b09eaa55))
+* **foundations:** add placement translation keys ([a3d4d53](https://github.com/NVIDIA/elements/commit/a3d4d5386df3c71e3d273c1175b140fab04efc9d))
+* **foundations:** virtual-list ([aa4ef9e](https://github.com/NVIDIA/elements/commit/aa4ef9e20dd0ec9e4ce8a4be69c6678f11c86b12))
+* **lint:** meter ([0905529](https://github.com/NVIDIA/elements/commit/090552971692fcefd2fddc2954fbf27bed02ec74))
+
+### Bug Fixes
+
+* **ci:** preserve complex types in framework declarations ([c33a319](https://github.com/NVIDIA/elements/commit/c33a3191c4287695daace5edec8a971fe115f564))
+* **core:** animation duration support for fixed value progress ring ([47e6309](https://github.com/NVIDIA/elements/commit/47e63097e888e81da735d16a0721c4f6ba201c54))
+* **core:** drop obsolete css.escape feature probe ([7813a28](https://github.com/NVIDIA/elements/commit/7813a28dd012e8e126daeac0a7dbe79961156bc4))
+* **core:** drop obsolete panel transition prefix ([dead5e0](https://github.com/NVIDIA/elements/commit/dead5e0cc7cb0202e83f64cd8242755e06ac91db))
+* **core:** drop obsolete progress appearance prefixes ([2192b3c](https://github.com/NVIDIA/elements/commit/2192b3c42e09842685e90c2ce5440b2005c9f7bb))
+* **core:** drop overridden webkit focus ring fallback ([0697e24](https://github.com/NVIDIA/elements/commit/0697e245b9019de3749322e7cacca500ae41f248))
+* **core:** remove forced dashboard scrollbars and header text truncation ([b61ba9b](https://github.com/NVIDIA/elements/commit/b61ba9b3ccf044916a2dcad3fb85933cb4981bcc))
+* **core:** update container values ([d00ce2d](https://github.com/NVIDIA/elements/commit/d00ce2d361795d9eb0b05f0c61ae54b04714a214))
+* **forms:** use keydown for button active state ([486875c](https://github.com/NVIDIA/elements/commit/486875c082a15f2bc7a72a091759a93cfa3f8a2b))
+* **monaco:** keep css asset imports out of public declarations ([38dd1cf](https://github.com/NVIDIA/elements/commit/38dd1cf5c011eaea82e59e3bf0b79601b38944c5))
+* **pi:** update typebox to 1.4.6 ([e2635d1](https://github.com/NVIDIA/elements/commit/e2635d17980a706b044d9a3d814334de489aa72a))
+* **pi:** update typebox to 1.4.7 ([10ebae6](https://github.com/NVIDIA/elements/commit/10ebae6d20abd93c7f196a98ea681a4f0464818c))
+* **starters:** update [@angular](https://github.com/angular) packages to 22.2.6 ([39be6b3](https://github.com/NVIDIA/elements/commit/39be6b3fbef2498f8898210bdc58d94ba2eb42d7))
+* **themes:** layer container values and missing tests ([327981f](https://github.com/NVIDIA/elements/commit/327981ff5b80483bb31a1b091f31ffaf0696796b))
+
 ## [2.9.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v2.9.1...@nvidia-elements/lint-v2.9.2) (2026-11-11)
 
 ### Features
