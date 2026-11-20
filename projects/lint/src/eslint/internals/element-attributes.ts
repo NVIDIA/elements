@@ -61,7 +61,7 @@ export function getRecommendedValue(value: string, validValues: string[]): strin
 
   // Check for partial match (value is substring of valid value or vice versa)
   const partialMatch = validValues.find(
-    v => v.toLowerCase().includes(lowerValue) || lowerValue.includes(v.toLowerCase())
+    v => v.length > 0 && (v.toLowerCase().includes(lowerValue) || lowerValue.includes(v.toLowerCase()))
   );
   if (partialMatch) return partialMatch;
 
@@ -71,9 +71,9 @@ export function getRecommendedValue(value: string, validValues: string[]): strin
 function extractLiteralUnionValues(typeText: string): string[] {
   if (!typeText) return [];
 
-  const values = [...typeText.matchAll(/['"]([^'"]+)['"]/g)]
-    .map(([, value]) => value?.trim())
-    .filter((value): value is string => Boolean(value));
+  const values = [...typeText.matchAll(/(['"])([^'"]*)\1/g)]
+    .filter(([, , value]) => value === '' || value?.trim())
+    .map(([, , value]) => value?.trim() ?? '');
 
   return [...new Set(values)];
 }
