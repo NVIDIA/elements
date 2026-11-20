@@ -4,15 +4,15 @@
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "NVIDIA Elements code authoring related components such as syntax-highlighted code blocks.",
+  "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
   "keywords": [
     "nvidia",
     "web-components",
     "custom-elements",
     "code-blocks",
     "syntax-highlighting",
-    "highlight.js",
-    "lit"
+    "lit",
+    "css-highlights"
   ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
@@ -62,113 +62,157 @@
     "./bundles/*": {
       "default": "./dist/bundles/*"
     },
+    "./languages/css.js": {
+      "types": "./dist/languages/css.d.ts",
+      "default": "./dist/languages/css.js"
+    },
+    "./languages/go.js": {
+      "types": "./dist/languages/go.d.ts",
+      "default": "./dist/languages/go.js"
+    },
+    "./languages/html.js": {
+      "types": "./dist/languages/html.d.ts",
+      "default": "./dist/languages/html.js"
+    },
+    "./languages/javascript.js": {
+      "types": "./dist/languages/javascript.d.ts",
+      "default": "./dist/languages/javascript.js"
+    },
+    "./languages/json.js": {
+      "types": "./dist/languages/json.d.ts",
+      "default": "./dist/languages/json.js"
+    },
+    "./languages/markdown.js": {
+      "types": "./dist/languages/markdown.d.ts",
+      "default": "./dist/languages/markdown.js"
+    },
+    "./languages/python.js": {
+      "types": "./dist/languages/python.d.ts",
+      "default": "./dist/languages/python.js"
+    },
+    "./languages/tsx.js": {
+      "types": "./dist/languages/tsx.d.ts",
+      "default": "./dist/languages/tsx.js"
+    },
+    "./languages/typescript.js": {
+      "types": "./dist/languages/typescript.d.ts",
+      "default": "./dist/languages/typescript.js"
+    },
+    "./languages/xml.js": {
+      "types": "./dist/languages/xml.d.ts",
+      "default": "./dist/languages/xml.js"
+    },
+    "./languages/yaml.js": {
+      "types": "./dist/languages/yaml.d.ts",
+      "default": "./dist/languages/yaml.js"
+    },
     "./codeblock": {
-      "types": "./dist/codeblock/index.d.ts",
-      "default": "./dist/codeblock/index.js"
+      "types": "./dist/code-block/index.d.ts",
+      "default": "./dist/code-block/index.js"
     },
     "./codeblock/index.js": {
-      "types": "./dist/codeblock/index.d.ts",
-      "default": "./dist/codeblock/index.js"
+      "types": "./dist/code-block/index.d.ts",
+      "default": "./dist/code-block/index.js"
     },
     "./codeblock/define.js": {
-      "types": "./dist/codeblock/define.d.ts",
-      "default": "./dist/codeblock/define.js"
+      "types": "./dist/code-block/define.d.ts",
+      "default": "./dist/code-block/define.js"
     },
     "./codeblock/languages/bash": {
-      "types": "./dist/codeblock/languages/bash.d.ts",
-      "default": "./dist/codeblock/languages/bash.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
     },
     "./codeblock/languages/bash.js": {
-      "types": "./dist/codeblock/languages/bash.d.ts",
-      "default": "./dist/codeblock/languages/bash.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
     },
     "./codeblock/languages/css": {
-      "types": "./dist/codeblock/languages/css.d.ts",
-      "default": "./dist/codeblock/languages/css.js"
+      "types": "./dist/languages/css.d.ts",
+      "default": "./dist/languages/css.js"
     },
     "./codeblock/languages/css.js": {
-      "types": "./dist/codeblock/languages/css.d.ts",
-      "default": "./dist/codeblock/languages/css.js"
+      "types": "./dist/languages/css.d.ts",
+      "default": "./dist/languages/css.js"
     },
     "./codeblock/languages/go": {
-      "types": "./dist/codeblock/languages/go.d.ts",
-      "default": "./dist/codeblock/languages/go.js"
+      "types": "./dist/languages/go.d.ts",
+      "default": "./dist/languages/go.js"
     },
     "./codeblock/languages/go.js": {
-      "types": "./dist/codeblock/languages/go.d.ts",
-      "default": "./dist/codeblock/languages/go.js"
+      "types": "./dist/languages/go.d.ts",
+      "default": "./dist/languages/go.js"
     },
     "./codeblock/languages/html": {
-      "types": "./dist/codeblock/languages/html.d.ts",
-      "default": "./dist/codeblock/languages/html.js"
+      "types": "./dist/languages/html.d.ts",
+      "default": "./dist/languages/html.js"
     },
     "./codeblock/languages/html.js": {
-      "types": "./dist/codeblock/languages/html.d.ts",
-      "default": "./dist/codeblock/languages/html.js"
+      "types": "./dist/languages/html.d.ts",
+      "default": "./dist/languages/html.js"
     },
     "./codeblock/languages/javascript": {
-      "types": "./dist/codeblock/languages/javascript.d.ts",
-      "default": "./dist/codeblock/languages/javascript.js"
+      "types": "./dist/languages/javascript.d.ts",
+      "default": "./dist/languages/javascript.js"
     },
     "./codeblock/languages/javascript.js": {
-      "types": "./dist/codeblock/languages/javascript.d.ts",
-      "default": "./dist/codeblock/languages/javascript.js"
+      "types": "./dist/languages/javascript.d.ts",
+      "default": "./dist/languages/javascript.js"
     },
     "./codeblock/languages/json": {
-      "types": "./dist/codeblock/languages/json.d.ts",
-      "default": "./dist/codeblock/languages/json.js"
+      "types": "./dist/languages/json.d.ts",
+      "default": "./dist/languages/json.js"
     },
     "./codeblock/languages/json.js": {
-      "types": "./dist/codeblock/languages/json.d.ts",
-      "default": "./dist/codeblock/languages/json.js"
+      "types": "./dist/languages/json.d.ts",
+      "default": "./dist/languages/json.js"
     },
     "./codeblock/languages/markdown": {
-      "types": "./dist/codeblock/languages/markdown.d.ts",
-      "default": "./dist/codeblock/languages/markdown.js"
+      "types": "./dist/languages/markdown.d.ts",
+      "default": "./dist/languages/markdown.js"
     },
     "./codeblock/languages/markdown.js": {
-      "types": "./dist/codeblock/languages/markdown.d.ts",
-      "default": "./dist/codeblock/languages/markdown.js"
+      "types": "./dist/languages/markdown.d.ts",
+      "default": "./dist/languages/markdown.js"
     },
     "./codeblock/languages/python": {
-      "types": "./dist/codeblock/languages/python.d.ts",
-      "default": "./dist/codeblock/languages/python.js"
+      "types": "./dist/languages/python.d.ts",
+      "default": "./dist/languages/python.js"
     },
     "./codeblock/languages/python.js": {
-      "types": "./dist/codeblock/languages/python.d.ts",
-      "default": "./dist/codeblock/languages/python.js"
-    },
-    "./codeblock/languages/typescript": {
-      "types": "./dist/codeblock/languages/typescript.d.ts",
-      "default": "./dist/codeblock/languages/typescript.js"
-    },
-    "./codeblock/languages/typescript.js": {
-      "types": "./dist/codeblock/languages/typescript.d.ts",
-      "default": "./dist/codeblock/languages/typescript.js"
+      "types": "./dist/languages/python.d.ts",
+      "default": "./dist/languages/python.js"
     },
     "./codeblock/languages/toml": {
-      "types": "./dist/codeblock/languages/toml.d.ts",
-      "default": "./dist/codeblock/languages/toml.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
     },
     "./codeblock/languages/toml.js": {
-      "types": "./dist/codeblock/languages/toml.d.ts",
-      "default": "./dist/codeblock/languages/toml.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
+    },
+    "./codeblock/languages/typescript": {
+      "types": "./dist/languages/typescript.d.ts",
+      "default": "./dist/languages/typescript.js"
+    },
+    "./codeblock/languages/typescript.js": {
+      "types": "./dist/languages/typescript.d.ts",
+      "default": "./dist/languages/typescript.js"
     },
     "./codeblock/languages/xml": {
-      "types": "./dist/codeblock/languages/xml.d.ts",
-      "default": "./dist/codeblock/languages/xml.js"
+      "types": "./dist/languages/xml.d.ts",
+      "default": "./dist/languages/xml.js"
     },
     "./codeblock/languages/xml.js": {
-      "types": "./dist/codeblock/languages/xml.d.ts",
-      "default": "./dist/codeblock/languages/xml.js"
+      "types": "./dist/languages/xml.d.ts",
+      "default": "./dist/languages/xml.js"
     },
     "./codeblock/languages/yaml": {
-      "types": "./dist/codeblock/languages/yaml.d.ts",
-      "default": "./dist/codeblock/languages/yaml.js"
+      "types": "./dist/languages/yaml.d.ts",
+      "default": "./dist/languages/yaml.js"
     },
     "./codeblock/languages/yaml.js": {
-      "types": "./dist/codeblock/languages/yaml.d.ts",
-      "default": "./dist/codeblock/languages/yaml.js"
+      "types": "./dist/languages/yaml.d.ts",
+      "default": "./dist/languages/yaml.js"
     },
     "./code-block": {
       "types": "./dist/code-block/index.d.ts",
@@ -183,111 +227,137 @@
       "default": "./dist/code-block/define.js"
     },
     "./code-block/languages/bash": {
-      "types": "./dist/code-block/languages/bash.d.ts",
-      "default": "./dist/code-block/languages/bash.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
     },
     "./code-block/languages/bash.js": {
-      "types": "./dist/code-block/languages/bash.d.ts",
-      "default": "./dist/code-block/languages/bash.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
     },
     "./code-block/languages/css": {
-      "types": "./dist/code-block/languages/css.d.ts",
-      "default": "./dist/code-block/languages/css.js"
+      "types": "./dist/languages/css.d.ts",
+      "default": "./dist/languages/css.js"
     },
     "./code-block/languages/css.js": {
-      "types": "./dist/code-block/languages/css.d.ts",
-      "default": "./dist/code-block/languages/css.js"
+      "types": "./dist/languages/css.d.ts",
+      "default": "./dist/languages/css.js"
     },
     "./code-block/languages/go": {
-      "types": "./dist/code-block/languages/go.d.ts",
-      "default": "./dist/code-block/languages/go.js"
+      "types": "./dist/languages/go.d.ts",
+      "default": "./dist/languages/go.js"
     },
     "./code-block/languages/go.js": {
-      "types": "./dist/code-block/languages/go.d.ts",
-      "default": "./dist/code-block/languages/go.js"
+      "types": "./dist/languages/go.d.ts",
+      "default": "./dist/languages/go.js"
     },
     "./code-block/languages/html": {
-      "types": "./dist/code-block/languages/html.d.ts",
-      "default": "./dist/code-block/languages/html.js"
+      "types": "./dist/languages/html.d.ts",
+      "default": "./dist/languages/html.js"
     },
     "./code-block/languages/html.js": {
-      "types": "./dist/code-block/languages/html.d.ts",
-      "default": "./dist/code-block/languages/html.js"
+      "types": "./dist/languages/html.d.ts",
+      "default": "./dist/languages/html.js"
     },
     "./code-block/languages/javascript": {
-      "types": "./dist/code-block/languages/javascript.d.ts",
-      "default": "./dist/code-block/languages/javascript.js"
+      "types": "./dist/languages/javascript.d.ts",
+      "default": "./dist/languages/javascript.js"
     },
     "./code-block/languages/javascript.js": {
-      "types": "./dist/code-block/languages/javascript.d.ts",
-      "default": "./dist/code-block/languages/javascript.js"
+      "types": "./dist/languages/javascript.d.ts",
+      "default": "./dist/languages/javascript.js"
     },
     "./code-block/languages/json": {
-      "types": "./dist/code-block/languages/json.d.ts",
-      "default": "./dist/code-block/languages/json.js"
+      "types": "./dist/languages/json.d.ts",
+      "default": "./dist/languages/json.js"
     },
     "./code-block/languages/json.js": {
-      "types": "./dist/code-block/languages/json.d.ts",
-      "default": "./dist/code-block/languages/json.js"
+      "types": "./dist/languages/json.d.ts",
+      "default": "./dist/languages/json.js"
     },
     "./code-block/languages/markdown": {
-      "types": "./dist/code-block/languages/markdown.d.ts",
-      "default": "./dist/code-block/languages/markdown.js"
+      "types": "./dist/languages/markdown.d.ts",
+      "default": "./dist/languages/markdown.js"
     },
     "./code-block/languages/markdown.js": {
-      "types": "./dist/code-block/languages/markdown.d.ts",
-      "default": "./dist/code-block/languages/markdown.js"
+      "types": "./dist/languages/markdown.d.ts",
+      "default": "./dist/languages/markdown.js"
     },
     "./code-block/languages/python": {
-      "types": "./dist/code-block/languages/python.d.ts",
-      "default": "./dist/code-block/languages/python.js"
+      "types": "./dist/languages/python.d.ts",
+      "default": "./dist/languages/python.js"
     },
     "./code-block/languages/python.js": {
-      "types": "./dist/code-block/languages/python.d.ts",
-      "default": "./dist/code-block/languages/python.js"
-    },
-    "./code-block/languages/typescript": {
-      "types": "./dist/code-block/languages/typescript.d.ts",
-      "default": "./dist/code-block/languages/typescript.js"
-    },
-    "./code-block/languages/typescript.js": {
-      "types": "./dist/code-block/languages/typescript.d.ts",
-      "default": "./dist/code-block/languages/typescript.js"
+      "types": "./dist/languages/python.d.ts",
+      "default": "./dist/languages/python.js"
     },
     "./code-block/languages/toml": {
-      "types": "./dist/code-block/languages/toml.d.ts",
-      "default": "./dist/code-block/languages/toml.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
     },
     "./code-block/languages/toml.js": {
-      "types": "./dist/code-block/languages/toml.d.ts",
-      "default": "./dist/code-block/languages/toml.js"
+      "types": "./dist/languages/plain-text-compat.d.ts",
+      "default": "./dist/languages/plain-text-compat.js"
+    },
+    "./code-block/languages/typescript": {
+      "types": "./dist/languages/typescript.d.ts",
+      "default": "./dist/languages/typescript.js"
+    },
+    "./code-block/languages/typescript.js": {
+      "types": "./dist/languages/typescript.d.ts",
+      "default": "./dist/languages/typescript.js"
     },
     "./code-block/languages/xml": {
-      "types": "./dist/code-block/languages/xml.d.ts",
-      "default": "./dist/code-block/languages/xml.js"
+      "types": "./dist/languages/xml.d.ts",
+      "default": "./dist/languages/xml.js"
     },
     "./code-block/languages/xml.js": {
-      "types": "./dist/code-block/languages/xml.d.ts",
-      "default": "./dist/code-block/languages/xml.js"
+      "types": "./dist/languages/xml.d.ts",
+      "default": "./dist/languages/xml.js"
     },
     "./code-block/languages/yaml": {
-      "types": "./dist/code-block/languages/yaml.d.ts",
-      "default": "./dist/code-block/languages/yaml.js"
+      "types": "./dist/languages/yaml.d.ts",
+      "default": "./dist/languages/yaml.js"
     },
     "./code-block/languages/yaml.js": {
-      "types": "./dist/code-block/languages/yaml.d.ts",
-      "default": "./dist/code-block/languages/yaml.js"
+      "types": "./dist/languages/yaml.d.ts",
+      "default": "./dist/languages/yaml.js"
     },
-    "./codeblock/codeblock.examples.json": "./dist/code-block/code-block.examples.json"
+    "./codeblock/codeblock.examples.json": "./dist/code-block/code-block.examples.json",
+    "./codeblock/languages/tsx": {
+      "types": "./dist/languages/tsx.d.ts",
+      "default": "./dist/languages/tsx.js"
+    },
+    "./code-block/languages/tsx": {
+      "types": "./dist/languages/tsx.d.ts",
+      "default": "./dist/languages/tsx.js"
+    },
+    "./codeblock/languages/tsx.js": {
+      "types": "./dist/languages/tsx.d.ts",
+      "default": "./dist/languages/tsx.js"
+    },
+    "./code-block/languages/tsx.js": {
+      "types": "./dist/languages/tsx.d.ts",
+      "default": "./dist/languages/tsx.js"
+    },
+    "./code-textarea": {
+      "types": "./dist/code-textarea/index.d.ts",
+      "default": "./dist/code-textarea/index.js"
+    },
+    "./code-textarea/index.js": {
+      "types": "./dist/code-textarea/index.d.ts",
+      "default": "./dist/code-textarea/index.js"
+    },
+    "./code-textarea/define.js": {
+      "types": "./dist/code-textarea/define.d.ts",
+      "default": "./dist/code-textarea/define.js"
+    }
   },
   "sideEffects": [
-    "./src/**/define.ts",
-    "./src/codeblock/languages/*.ts",
     "./**/define.js",
     "./dist/bundles/*.js",
-    "./dist/codeblock/languages/*.js",
-    "./src/code-block/languages/*.ts",
-    "./dist/code-block/languages/*.js"
+    "./dist/languages/*.js",
+    "./src/**/define.ts",
+    "./src/languages/*.ts"
   ],
   "scripts": {
     "ci": "wireit",
@@ -302,11 +372,22 @@
     "test:types": "wireit",
     "test:watch": "wireit",
     "test:lighthouse": "wireit",
-    "test:visual": "wireit"
+    "test:visual": "wireit",
+    "test:bench": "wireit"
   },
   "dependencies": {
+    "@lezer/common": "catalog:publish",
+    "@lezer/css": "catalog:publish",
+    "@lezer/go": "catalog:publish",
+    "@lezer/highlight": "catalog:publish",
+    "@lezer/html": "catalog:publish",
+    "@lezer/javascript": "catalog:publish",
+    "@lezer/json": "catalog:publish",
+    "@lezer/markdown": "catalog:publish",
+    "@lezer/python": "catalog:publish",
+    "@lezer/xml": "catalog:publish",
+    "@lezer/yaml": "catalog:publish",
     "@nvidia-elements/foundations": "workspace:^",
-    "highlight.js": "catalog:publish",
     "lit": "catalog:publish",
     "lit-html": "catalog:publish"
   },
@@ -316,17 +397,18 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/styles": "workspace:*",
-    "@internals/testing": "workspace:*",
     "@internals/eslint": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
     "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
+    "esbuild": "catalog:",
     "eslint": "catalog:",
-    "highlight.js": "catalog:",
     "lit": "catalog:",
     "lit-html": "catalog:",
     "publint": "catalog:",
@@ -372,8 +454,8 @@
       "files": [
         "../foundations/dist/**/*.js",
         "!../foundations/dist/**/*.examples.js",
-        "../../core/dist/**/*.js",
-        "!../../core/dist/**/*.examples.js",
+        "../core/dist/**/*.js",
+        "!../core/dist/**/*.examples.js",
         "src/**",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -385,7 +467,8 @@
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts",
-        "vite.bundle.ts"
+        "vite.bundle.ts",
+        "!src/**/*.test.bench.ts"
       ],
       "output": [
         "dist/**"
@@ -603,6 +686,23 @@
           "cascade": false
         }
       ]
+    },
+    "test:bench": {
+      "command": "vitest bench --run --config=vitest.bench.ts",
+      "files": [
+        "src/**",
+        "vitest.bench.ts",
+        "package.json"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../internals/testing:build",
+        "../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
     }
   },
   "publishConfig": {

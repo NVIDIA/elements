@@ -1,0 +1,51 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+pre.decorated {
+  position: relative;
+  isolation: isolate;
+}
+
+pre.decorated code {
+  display: block;
+}
+
+pre.numbered {
+  padding-inline-start: calc(
+    var(--padding, 0em) + max(var(--nve-ref-size-600, 0em), var(--_gutter-width)) + var(--nve-ref-space-lg, 1ch)
+  );
+}
+
+[data-lines] {
+  display: block;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  user-select: none;
+  white-space: normal;
+  z-index: -1;
+}
+
+[data-line],
+[data-gutter] {
+  display: block;
+  position: absolute;
+  inset-inline-start: 0;
+  inline-size: 100%;
+}
+
+.selected-line {
+  background-color: color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 80%);
+  box-shadow: inset 2px 0 0 color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 20%); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
+}
+
+.line-number {
+  color: var(--nve-ref-color-gray-slate-1100);
+  padding-inline: var(--padding, 0)
+    calc(100% - var(--padding, 0em) - max(var(--nve-ref-size-600, 0em), var(--_gutter-width)));
+  text-align: end;
+  white-space: pre;
+}

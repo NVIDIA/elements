@@ -13,4 +13,5 @@
 | `pnpm run test:coverage`   | Run unit tests with coverage              |
 | `pnpm run test:types`      | Type-check source, tests, and examples    |
 | `pnpm run test:lighthouse` | Run Lighthouse performance tests          |
+| `pnpm run test:bench`      | Run browser benchmarks                    |
 | `pnpm run ci`              | Run the full CI pipeline                  |

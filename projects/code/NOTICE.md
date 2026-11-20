@@ -5,8 +5,38 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- highlight.js v11.12.0 [BSD-3-Clause]
-  Copyright: Josh Goebel <hello@joshgoebel.com>
+- @lezer/common v1.5.5 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/css v1.3.9 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/go v1.0.1 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/highlight v1.2.5 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/html v1.3.13 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/javascript v1.5.6 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/json v1.0.3 [MIT]
+  Copyright: Arun Srinivasan <rulfzid@gmail.com>
+
+- @lezer/markdown v1.8.1 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/python v1.1.19 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/xml v1.0.6 [MIT]
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/yaml v1.0.4 [MIT]
+  Copyright: Marijn Haverbeke <marijnh@gmail.com>
 
 - lit v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
@@ -20,7 +50,6 @@ BSD-3-Clause
 
 The following bundled components are provided under the BSD-3-Clause license:
 
-highlight.js v11.12.0 - Copyright Josh Goebel <hello@joshgoebel.com>
 lit v3.3.3 - Copyright Google LLC
 lit-html v3.3.3 - Copyright Google LLC
 
@@ -49,4 +78,40 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-For license details, see: BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause
+==============================================================================
+MIT
+==============================================================================
+
+The following bundled components are provided under the MIT license:
+
+@lezer/common v1.5.5 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/css v1.3.9 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/go v1.0.1 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/highlight v1.2.5 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/html v1.3.13 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/javascript v1.5.6 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/json v1.0.3 - Copyright Arun Srinivasan <rulfzid@gmail.com>
+@lezer/markdown v1.8.1 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/python v1.1.19 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/xml v1.0.6 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/yaml v1.0.4 - Copyright Marijn Haverbeke <marijnh@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+For license details, see: BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause, MIT: https://opensource.org/licenses/MIT

@@ -324,12 +324,42 @@ catalogs:
       specifier: 4.6.7
       version: 4.6.7
   publish:
+    '@lezer/common':
+      specifier: ^1.5.2
+      version: 1.5.5
+    '@lezer/css':
+      specifier: ^1.3.3
+      version: 1.3.9
+    '@lezer/go':
+      specifier: ^1.0.1
+      version: 1.0.1
+    '@lezer/highlight':
+      specifier: ^1.2.3
+      version: 1.2.5
+    '@lezer/html':
+      specifier: ^1.3.13
+      version: 1.3.13
+    '@lezer/javascript':
+      specifier: ^1.5.4
+      version: 1.5.6
+    '@lezer/json':
+      specifier: ^1.0.3
+      version: 1.0.3
+    '@lezer/markdown':
+      specifier: ^1.8.1
+      version: 1.8.1
+    '@lezer/python':
+      specifier: ^1.1.19
+      version: 1.1.19
+    '@lezer/xml':
+      specifier: ^1.0.6
+      version: 1.0.6
+    '@lezer/yaml':
+      specifier: ^1.0.4
+      version: 1.0.4
     '@lit-labs/scoped-registry-mixin':
       specifier: ^1.0.4
       version: 1.0.4
-    highlight.js:
-      specifier: ^11.12.0
-      version: 11.12.0
     lit:
       specifier: ^3.3.3
       version: 3.3.3
@@ -551,15 +581,45 @@ importers:
 
   projects/code:
     dependencies:
+      '@lezer/common':
+        specifier: catalog:publish
+        version: 1.5.5
+      '@lezer/css':
+        specifier: catalog:publish
+        version: 1.3.9
+      '@lezer/go':
+        specifier: catalog:publish
+        version: 1.0.1
+      '@lezer/highlight':
+        specifier: catalog:publish
+        version: 1.2.5
+      '@lezer/html':
+        specifier: catalog:publish
+        version: 1.3.13
+      '@lezer/javascript':
+        specifier: catalog:publish
+        version: 1.5.6
+      '@lezer/json':
+        specifier: catalog:publish
+        version: 1.0.3
+      '@lezer/markdown':
+        specifier: catalog:publish
+        version: 1.8.1
+      '@lezer/python':
+        specifier: catalog:publish
+        version: 1.1.19
+      '@lezer/xml':
+        specifier: catalog:publish
+        version: 1.0.6
+      '@lezer/yaml':
+        specifier: catalog:publish
+        version: 1.0.4
       '@nvidia-elements/foundations':
         specifier: workspace:^
         version: link:../foundations
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
-      highlight.js:
-        specifier: catalog:publish
-        version: 11.12.0
       lit:
         specifier: catalog:publish
         version: 3.3.3
@@ -591,12 +651,18 @@ importers:
       '@vitest/browser':
         specifier: 'catalog:'
         version: 5.1.1(vite@8.3.8(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.104.1)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.32))(terser@5.48.0)(yaml@2.9.0))(vitest@5.1.1)
+      '@vitest/browser-playwright':
+        specifier: 'catalog:'
+        version: 5.1.1(playwright@1.64.1)(vite@8.3.8(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.104.1)(sass@1.101.0)(sugarss@5.0.1(postcss@8.5.32))(terser@5.48.0)(yaml@2.9.0))(vitest@5.1.1)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
         version: 5.1.1(vitest@5.1.1)
       axe-core:
         specifier: 'catalog:'
         version: 4.14.0
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.28.2
       eslint:
         specifier: 10.15.0
         version: 10.15.0(jiti@2.7.0)(supports-color@10.2.2)
@@ -4574,6 +4640,42 @@ packages:
 
   '@kurkle/color@0.3.4':
     resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
+
+  '@lezer/common@1.5.5':
+    resolution: {integrity: sha512-Pw7PVCndruF1pb3ebCxpSVpkMHSDjwRCLcTRw+RizUKco5QbWylwq2g4lnG/RYN7yTTQDXE9F77MwtkAyphrjg==}
+
+  '@lezer/css@1.3.9':
+    resolution: {integrity: sha512-ZmzgvTOBdJWGIsY/ItAfN7UW8DV802oZG+jeG6E508SwEzz5YhuAajptpWPICvIyqYAD2+VjMdOS40GgGkyEOQ==}
+
+  '@lezer/go@1.0.1':
+    resolution: {integrity: sha512-xToRsYxwsgJNHTgNdStpcvmbVuKxTapV0dM0wey1geMMRc9aggoVyKgzYp41D2/vVOx+Ii4hmE206kvxIXBVXQ==}
+
+  '@lezer/highlight@1.2.5':
+    resolution: {integrity: sha512-O1GMVKgtf5YspFaRzpmqkVgMtIk2HG9uMAbH6wdAIdNh3TVzCsch/+cRi+6l2//UGDKe6NB9BW3cvuR5ezMQ0w==}
+
+  '@lezer/html@1.3.13':
+    resolution: {integrity: sha512-oI7n6NJml729m7pjm9lvLvmXbdoMoi2f+1pwSDJkl9d68zGr7a9Btz8NdHTGQZtW2DA25ybeuv/SyDb9D5tseg==}
+
+  '@lezer/javascript@1.5.6':
+    resolution: {integrity: sha512-sEvOqpl4vJQca0NugSQK02vQPbc5KrvoojnYGoqqFgFO0MtcYhwGiHKVEB+LuXYJnfyXo4QPA8ztbrEa4Fw5NA==}
+
+  '@lezer/json@1.0.3':
+    resolution: {integrity: sha512-BP9KzdF9Y35PDpv04r0VeSTKDeox5vVr3efE7eBbx3r4s3oNLfunchejZhjArmeieBH+nVOpgIiBJpEAv8ilqQ==}
+
+  '@lezer/lr@1.4.12':
+    resolution: {integrity: sha512-On9HU4oMMiHPMkQDgoTnGahjgG5n/MkN38CgG77sMraKLL+3JBbeQNi1FcCXV9QRqwF9/BUXP3caHyJC1fBOTQ==}
+
+  '@lezer/markdown@1.8.1':
+    resolution: {integrity: sha512-M5YmEcKWO4mJ45Y1hECwqyu8cLv25EiXOK554PVOvDOWOP0olwelHHQUWr9sjF+d1bENVhy0nfJ8E57XZUTiXg==}
+
+  '@lezer/python@1.1.19':
+    resolution: {integrity: sha512-MhQIURHRytsNzP/YXnqpYKW6la6voAH3kyplTOOiCdjyFY6cWWGFVmYVdHIPrElqSDf4iCDktQCockB9FxuhzQ==}
+
+  '@lezer/xml@1.0.6':
+    resolution: {integrity: sha512-CdDwirL0OEaStFue/66ZmFSeppuL6Dwjlk8qk153mSQwiSH/Dlri4GNymrNWnUmPl2Um7QfV1FO9KFUyX3Twww==}
+
+  '@lezer/yaml@1.0.4':
+    resolution: {integrity: sha512-2lrrHqxalACEbxIbsjhqGpSW8kWpUKuY6RHgnSAFZa6qK62wvnPxA8hGOwOoDbwHcOFs5M4o27mjGu+P7TvBmw==}
 
   '@listr2/prompt-adapter-inquirer@4.2.7':
     resolution: {integrity: sha512-k180vxSv2KqmnDxoato6pCqEJsov4U5C0EVmldZkAdNeVBxY48A/LM6TCNPGIzDK/iZSfsZP0Mw+gbWc5hXLyA==}
@@ -9927,10 +10029,6 @@ packages:
 
   highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
-
-  highlight.js@11.12.0:
-    resolution: {integrity: sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg==}
-    engines: {node: '>=12.0.0'}
 
   hono@4.13.16:
     resolution: {integrity: sha512-AOLOEhvrV+iH92xXCnFr/5+3KjPKcI3xP63XJtX5spAnkznPdHijlIsUTpi7/9EhWqrTCekw5c5zh1K+YsVw7A==}
@@ -16869,6 +16967,69 @@ snapshots:
 
   '@kurkle/color@0.3.4': {}
 
+  '@lezer/common@1.5.5': {}
+
+  '@lezer/css@1.3.9':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/go@1.0.1':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/highlight@1.2.5':
+    dependencies:
+      '@lezer/common': 1.5.5
+
+  '@lezer/html@1.3.13':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/javascript@1.5.6':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/json@1.0.3':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/lr@1.4.12':
+    dependencies:
+      '@lezer/common': 1.5.5
+
+  '@lezer/markdown@1.8.1':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+
+  '@lezer/python@1.1.19':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/xml@1.0.6':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
+  '@lezer/yaml@1.0.4':
+    dependencies:
+      '@lezer/common': 1.5.5
+      '@lezer/highlight': 1.2.5
+      '@lezer/lr': 1.4.12
+
   '@listr2/prompt-adapter-inquirer@4.2.7(@inquirer/prompts@8.7.2(@types/node@26.5.0))(@types/node@26.5.0)(listr2@11.1.0)':
     dependencies:
       '@inquirer/prompts': 8.7.2(@types/node@26.5.0)
@@ -22437,8 +22598,6 @@ snapshots:
   he@1.2.0: {}
 
   highlight.js@10.7.3: {}
-
-  highlight.js@11.12.0: {}
 
   hono@4.13.16:
     optional: true

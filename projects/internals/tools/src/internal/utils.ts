@@ -41,17 +41,30 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
 
   const ELEMENTS_CODE_IMPORTS =
     elementTags.has('nve-code-block') || elementTags.has('nve-codeblock')
-      ? [
-          `import '@nvidia-elements/code/code-block/languages/html.js';`,
-          `import '@nvidia-elements/code/code-block/languages/css.js';`,
-          `import '@nvidia-elements/code/code-block/languages/json.js';`,
-          `import '@nvidia-elements/code/code-block/languages/javascript.js';`,
-          `import '@nvidia-elements/code/code-block/languages/typescript.js';`,
-          `import '@nvidia-elements/code/code-block/define.js';`
-        ]
+      ? [`import '@nvidia-elements/code/code-block/define.js';`]
       : [];
 
-  return Array.from(new Set([...IMPORTS, ...ELEMENTS_CODE_IMPORTS]));
+  return Array.from(new Set([...getCodeLanguageImports(html), ...IMPORTS, ...ELEMENTS_CODE_IMPORTS]));
+}
+
+function getCodeLanguageImports(html: string) {
+  const imports = new Set<string>();
+  const codeTags = /<nve-(?:code-?block|code-textarea)(?=[\s/>])((?:[^<>"']|"[^"]*"|'[^']*')*)>/g;
+  for (const [, attributes = ''] of html.matchAll(codeTags)) {
+    const language = findCodeLanguageAttribute(attributes)?.toLowerCase();
+    if (/^(?:css|go|html|javascript|json|markdown|python|tsx|typescript|xml|yaml)$/.test(language ?? '')) {
+      imports.add(`import '@nvidia-elements/code/languages/${language}.js';`);
+    }
+  }
+  return [...imports];
+}
+
+function findCodeLanguageAttribute(attributes: string) {
+  const attribute = /(?:^|\s)([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
+  for (const [, name, doubleQuoted, singleQuoted, unquoted] of attributes.matchAll(attribute)) {
+    if (name?.toLowerCase() === 'language') return doubleQuoted ?? singleQuoted ?? unquoted;
+  }
+  return undefined;
 }
 
 export function wrapText(text = '', width = 80) {

@@ -24,13 +24,25 @@ const LANGUAGE_NAMES = {
   zsh: 'Shell'
 };
 
+const codeLanguageAliases = new Map([
+  ['bash', 'text'],
+  ['js', 'javascript'],
+  ['md', 'markdown'],
+  ['py', 'python'],
+  ['shell', 'text'],
+  ['toml', 'text'],
+  ['ts', 'typescript'],
+  ['yml', 'yaml']
+]);
+
 const markdown = markdownIt({
   html: true,
   breaks: false,
   linkify: true,
   highlight: function (str, lang) {
     const structuredData = getCodeStructuredData(str, lang);
-    const codeblockLanguage = markdown.utils.escapeHtml(lang === 'javascript' ? 'typescript' : lang); // alias javascript to typescript
+    const language = lang.toLowerCase();
+    const codeblockLanguage = markdown.utils.escapeHtml(codeLanguageAliases.get(language) ?? language);
     return /* html */ `
     <div class="markdown-codeblock">
       <script type="application/ld+json">${jsonLdEncode(structuredData)}</script>
