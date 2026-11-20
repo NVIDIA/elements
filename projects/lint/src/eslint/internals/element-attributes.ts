@@ -7,36 +7,35 @@ interface AttributeInfo {
   name: string;
   deprecated: boolean;
   isEnum: boolean;
+  typeText: string;
   values: string[];
 }
 
 const ARBITRARY_TYPES = ['boolean', 'string', 'number'];
 
-export function getElementAttribute(tagName: string, attributeName: string): AttributeInfo | null {
-  const element = elements.find(e => e.name === tagName);
-  if (!element?.manifest?.attributes) return null;
+export function isAllowedAttributeValue(attribute: AttributeInfo, value: string): boolean {
+  return (
+    attribute.values.includes(value) ||
+    attribute.typeText.split('|').some(type => {
+      if (type.trim() === '`${string}:${string}`') return value.includes(':');
+      if (type.trim() === '`${string}.svg`') return value.endsWith('.svg');
+      return false;
+    })
+  );
+}
 
-  const attr = element.manifest.attributes.find(a => a.name === attributeName);
+export function getElementAttribute(tagName: string, attributeName: string): AttributeInfo | null {
+  const attr = elements.find(e => e.name === tagName)?.manifest?.attributes?.find(a => a.name === attributeName);
   if (!attr) return null;
 
-  // If type.text contains arbitrary types (string, boolean, number, IconName),
-  // treat as non-enum regardless of type.values
-  if (hasArbitraryTypeInText(attr.type?.text ?? '')) {
-    return {
-      name: attr.name,
-      deprecated: attr.deprecated,
-      isEnum: false,
-      values: []
-    };
-  }
-
-  const values = extractLiteralUnionValues(attr.type?.text ?? '');
-  const isEnum = values.length > 0;
+  const typeText = attr.type?.text ?? '';
+  const values = hasArbitraryTypeInText(typeText) ? [] : extractLiteralUnionValues(typeText);
 
   return {
     name: attr.name,
     deprecated: attr.deprecated,
-    isEnum,
+    isEnum: values.length > 0,
+    typeText,
     values
   };
 }

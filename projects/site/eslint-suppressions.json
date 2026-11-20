@@ -9,11 +9,6 @@
       "count": 1
     }
   },
-  "src/_internal/stories/icon/icon-demo.ts": {
-    "@typescript-eslint/no-unnecessary-type-assertion": {
-      "count": 1
-    }
-  },
   "src/_internal/stories/theme/theme-generator.ts": {
     "@typescript-eslint/no-unnecessary-type-assertion": {
       "count": 1

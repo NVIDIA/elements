@@ -4,7 +4,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
-import type { IconName } from '@nvidia-elements/core/icon';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon/define.js';
 
@@ -173,23 +172,22 @@ describe(Icon.metadata.tag, () => {
     expect(await Icon._registry.resolve('chevron-up')).toBe(await Icon._registry.resolve('chevron'));
   });
 
-  it('should allow icons to be registered', async () => {
-    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
-      'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
-    });
+  it('should render an eagerly registered SVG', async () => {
+    await Icon.add({ 'test:svg': '<svg id="test-svg"><path d=""/></svg>' });
+    element.name = 'test:svg';
+    await elementIsStable(element);
 
-    expect((customElements.get(Icon.metadata.tag) as typeof Icon)._icons['test-svg']).toBeDefined();
+    expect(element.shadowRoot.querySelector('svg')?.id).toBe('test-svg');
   });
 
   it('should render the solid icon appearance when available', async () => {
     await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
-      'test-appearance': { svg: () => '<svg id="test-appearance"><path d=""/></svg>' },
-      'test-appearance-solid': { svg: () => '<svg id="test-appearance-solid"><path d=""/></svg>' }
+      'test:appearance': { svg: () => '<svg id="test-appearance"><path d=""/></svg>' },
+      'test:appearance-solid': { svg: () => '<svg id="test-appearance-solid"><path d=""/></svg>' }
     });
 
     removeFixture(fixture);
-    // eslint-disable-next-line @nvidia-elements/lint/no-unexpected-attribute-value
-    fixture = await createFixture(html`<nve-icon name="test-appearance" appearance="solid"></nve-icon>`);
+    fixture = await createFixture(html`<nve-icon name="test:appearance" appearance="solid"></nve-icon>`);
     const el = fixture.querySelector<Icon>(Icon.metadata.tag);
     await elementIsStable(el);
 
@@ -199,12 +197,11 @@ describe(Icon.metadata.tag, () => {
 
   it('should fall back to the outline icon when a solid appearance is unavailable', async () => {
     await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
-      'test-outline-only': { svg: () => '<svg id="test-outline-only"><path d=""/></svg>' }
+      'test:outline-only': { svg: () => '<svg id="test-outline-only"><path d=""/></svg>' }
     });
 
     removeFixture(fixture);
-    // eslint-disable-next-line @nvidia-elements/lint/no-unexpected-attribute-value
-    fixture = await createFixture(html`<nve-icon name="test-outline-only" appearance="solid"></nve-icon>`);
+    fixture = await createFixture(html`<nve-icon name="test:outline-only" appearance="solid"></nve-icon>`);
     const el = fixture.querySelector<Icon>(Icon.metadata.tag);
     await elementIsStable(el);
 
@@ -224,44 +221,82 @@ describe(Icon.metadata.tag, () => {
 
   it('should requestUpdate when new icon is registered', async () => {
     const spy = vi.spyOn(element, 'requestUpdate');
-    element.name = 'test-svg-request-update' as IconName;
+    element.name = 'test:request-update';
     await elementIsStable(element);
 
-    const event = untilEvent(document, 'nve-icon-test-svg-request-update');
+    const event = untilEvent(document, 'nve-icon-test:request-update');
 
     await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
-      'test-svg-request-update': { svg: () => '<svg id="test-svg-request-update"><path d=""/></svg>' }
+      'test:request-update': { svg: () => '<svg id="test-svg-request-update"><path d=""/></svg>' }
     });
 
     expect(await event).toBeDefined();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should fetch icon if using an svg extension', async () => {
-    const original = window.fetch;
-    window.fetch = vi
-      .fn()
-      .mockImplementation(() => new Promise(r => r({ text: () => '<svg id="test.svg"><path d=""/></svg>' })));
+  it.each(['/icons/test.svg', 'https://example.com/icon.svg'] as const)(
+    'should fetch an SVG URL from name: %s',
+    async url => {
+      const fetchSpy = vi
+        .spyOn(window, 'fetch')
+        .mockImplementation(() => Promise.resolve(new Response('<svg id="test-svg-url"/>')));
 
-    element.name = 'test.svg' as IconName;
+      element.name = url;
+      await elementIsStable(element);
+
+      expect(fetchSpy).toHaveBeenCalledWith(url);
+      await expect.poll(() => element.shadowRoot.querySelector('svg')?.id).toBe('test-svg-url');
+    }
+  );
+
+  it('should keep SVG URLs unchanged for solid appearance', async () => {
+    const url = '/icons/appearance.svg';
+    const fetchSpy = vi
+      .spyOn(window, 'fetch')
+      .mockImplementation(() => Promise.resolve(new Response('<svg id="url-appearance"/>')));
+    await Icon.add({ [`${url}-solid`]: '<svg id="registered-solid"/>' });
+
+    element.name = url;
+    element.appearance = 'solid';
     await elementIsStable(element);
-    expect(window.fetch).toHaveBeenCalled();
-    window.fetch = original;
+
+    expect(fetchSpy).toHaveBeenCalledWith(url);
+    await expect.poll(() => element.shadowRoot.querySelector('svg')?.id).toBe('url-appearance');
+  });
+
+  it('should clear the SVG when URL loading fails', async () => {
+    element.name = 'person';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('svg')).not.toBeNull();
+    vi.spyOn(window, 'fetch').mockRejectedValue(new Error('Network error'));
+
+    element.name = '/icons/unavailable.svg';
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelector('svg')).toBeNull();
+  });
+
+  it('should treat registered strings as SVG markup', async () => {
+    const fetchSpy = vi.spyOn(window, 'fetch');
+    await Icon.add({ 'test:svg-url': 'https://example.com/icon.svg' });
+    element.name = 'test:svg-url';
+    await elementIsStable(element);
+
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(element.shadowRoot.querySelector('svg')).toBeNull();
   });
 
   it('should ignore stale SVG loads after the icon name changes', async () => {
     const first = Promise.withResolvers<string>();
     const second = Promise.withResolvers<string>();
-    const original = window.fetch;
-    window.fetch = vi
-      .fn()
-      .mockImplementation((name: string) =>
-        Promise.resolve({ text: () => (name === 'first.svg' ? first.promise : second.promise) })
-      );
+    await Icon.add({
+      'test:first': { svg: () => first.promise },
+      'test:second': { svg: () => second.promise }
+    });
 
-    element.name = 'first.svg' as IconName;
+    element.name = 'test:first';
     await element.updateComplete;
-    element.name = 'second.svg' as IconName;
+    element.name = 'test:second';
     await element.updateComplete;
 
     second.resolve('<svg id="second"><path d=""/></svg>');
@@ -272,7 +307,6 @@ describe(Icon.metadata.tag, () => {
 
     expect(element.shadowRoot.innerHTML).toContain('id="second"');
     expect(element.shadowRoot.innerHTML).not.toContain('id="first"');
-    window.fetch = original;
   });
 
   it('should dispatch event with icons detail when adding icons', async () => {
@@ -297,7 +331,7 @@ describe(Icon.metadata.tag, () => {
 
   it('should only requestUpdate when event detail contains the icon name', async () => {
     const spy = vi.spyOn(element, 'requestUpdate');
-    element.name = 'test-svg-specific-icon' as IconName;
+    element.name = 'test:specific-icon';
     await elementIsStable(element);
     spy.mockClear();
 
@@ -316,7 +350,7 @@ describe(Icon.metadata.tag, () => {
   });
 
   it('should requestUpdate only when matching icon is added', async () => {
-    const iconName = 'test-svg-matching' as IconName;
+    const iconName = 'test-svg-matching';
     // Create a new fixture with the name already set so the event listener is registered correctly
     removeFixture(fixture);
     fixture = await createFixture(html`<nve-icon name=${iconName}></nve-icon>`);
@@ -334,7 +368,7 @@ describe(Icon.metadata.tag, () => {
   });
 
   it('should ignore matching icon events after disconnect', async () => {
-    const iconName = 'test-svg-disconnected' as IconName;
+    const iconName = 'test-svg-disconnected';
     removeFixture(fixture);
     fixture = await createFixture(html`<nve-icon name=${iconName}></nve-icon>`);
     const el = fixture.querySelector<Icon>(Icon.metadata.tag);

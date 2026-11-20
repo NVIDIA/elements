@@ -30,7 +30,19 @@ const elements: ProjectElement[] = [
     name: 'nve-icon',
     manifest: {
       metadata: { entrypoint: '@nvidia-elements/core/icon' },
-      attributes: [{ name: 'name', type: { text: `IconName | default` } }]
+      attributes: [{ name: 'name', type: { text: "'add' | 'person' | `${string}:${string}` | `${string}.svg`" } }]
+    } as ProjectElement['manifest']
+  },
+  {
+    name: 'nve-icon-button',
+    manifest: {
+      metadata: { entrypoint: '@nvidia-elements/core/icon-button' },
+      attributes: [
+        {
+          name: 'icon-name',
+          type: { text: "'add' | 'person' | `${string}:${string}` | `${string}.svg`" }
+        }
+      ]
     } as ProjectElement['manifest']
   },
   {
@@ -50,6 +62,24 @@ const elements: ProjectElement[] = [
 ];
 
 describe('validateTemplate', () => {
+  it.each([
+    { tag: 'nve-icon', attribute: 'name' },
+    { tag: 'nve-icon-button', attribute: 'icon-name' }
+  ])('should preserve built-in names, namespaced names, and SVG URLs on $tag', ({ tag, attribute }) => {
+    for (const name of ['add', 'person', 'nvidia-gui:gpu', '/icons/gpu.svg', 'https://example.com/gpu.svg']) {
+      const template = `<${tag} ${attribute}="${name}"></${tag}>`;
+      expect(validateTemplate(template, elements)).toBe(template);
+    }
+  });
+
+  it.each([
+    { tag: 'nve-icon', attribute: 'name' },
+    { tag: 'nve-icon-button', attribute: 'icon-name' }
+  ])('should remove unknown unnamespaced names on $tag', ({ tag, attribute }) => {
+    const template = `<${tag} ${attribute}="custom:gpu"></${tag}><${tag} ${attribute}="persno"></${tag}>`;
+    expect(validateTemplate(template, elements)).toBe(`<${tag} ${attribute}="custom:gpu"></${tag}><${tag}></${tag}>`);
+  });
+
   it('should validate a template', () => {
     const template =
       '<div nve-invalid="test" nve-layout="column gap:md" nve-text="body"><b>test</b><nve-invalid></nve-invalid><nve-badge status="success">test</nve-badge><nve-badge>test</nve-badge><nve-badge style="--color: red">test</nve-badge><script>alert("!")</script></div>';
@@ -113,10 +143,10 @@ describe('validateTemplate', () => {
     expect(result).toBe('<nve-badge status>hello there</nve-badge>');
   });
 
-  it('should allow icon name attribute with arbitrary values', () => {
-    const template = '<nve-icon name="test">hello there</nve-icon>';
+  it('should preserve namespaced icons with content', () => {
+    const template = '<nve-icon name="custom:test">hello there</nve-icon>';
     const result = validateTemplate(template, elements);
-    expect(result).toBe('<nve-icon name="test">hello there</nve-icon>');
+    expect(result).toBe('<nve-icon name="custom:test">hello there</nve-icon>');
   });
 
   it('should allow number type attribute with arbitrary values', () => {
