@@ -4,20 +4,19 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./declarations.d.ts" />
 
-import '@nvidia-elements/code/code-block/languages/bash.js';
-import '@nvidia-elements/code/code-block/languages/css.js';
-import '@nvidia-elements/code/code-block/languages/go.js';
-import '@nvidia-elements/code/code-block/languages/html.js';
-import '@nvidia-elements/code/code-block/languages/javascript.js';
-import '@nvidia-elements/code/code-block/languages/json.js';
-import '@nvidia-elements/code/code-block/languages/markdown.js';
-import '@nvidia-elements/code/code-block/languages/python.js';
-import '@nvidia-elements/code/code-block/languages/toml.js';
-import '@nvidia-elements/code/code-block/languages/typescript.js';
-import '@nvidia-elements/code/code-block/languages/xml.js';
-import '@nvidia-elements/code/code-block/languages/yaml.js';
+import '@nvidia-elements/code/languages/css.js';
+import '@nvidia-elements/code/languages/go.js';
+import '@nvidia-elements/code/languages/html.js';
+import '@nvidia-elements/code/languages/javascript.js';
+import '@nvidia-elements/code/languages/json.js';
+import '@nvidia-elements/code/languages/markdown.js';
+import '@nvidia-elements/code/languages/python.js';
+import '@nvidia-elements/code/languages/tsx.js';
+import '@nvidia-elements/code/languages/typescript.js';
+import '@nvidia-elements/code/languages/xml.js';
+import '@nvidia-elements/code/languages/yaml.js';
 import '@nvidia-elements/code/code-block/define.js';
-import '@nvidia-elements/code/codeblock/define.js';
+import '@nvidia-elements/code/code-textarea/define.js';
 
 export * from '@nvidia-elements/code/code-block';
-export * from '@nvidia-elements/code/codeblock';
+export * from '@nvidia-elements/code/code-textarea';

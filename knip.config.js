@@ -36,7 +36,6 @@ const createConfig = production => ({
     'archiver',
     'axe-core',
     'glob',
-    'highlight.js',
     'lit',
     'lit-html',
     'lint-staged',
@@ -338,6 +337,8 @@ export default function ({ production = false }) {
         {
           ...workspace,
           includeEntryExports: ['projects/core', 'projects/forms', 'projects/foundations'].includes(name),
+          // Knip treats Vite library entries as dev-only, so discover Code's languages via package exports.
+          ...(name === 'projects/code' ? { vite: { config: [] } } : {}),
           // Examples and Vite configurations export framework entry points.
           ignoreIssues: { 'src/**/*.examples.ts': ['exports', 'types'], 'vite*.ts': ['exports'] },
           entry: [

@@ -3,7 +3,7 @@
 
 import { html } from 'lit';
 import '@nvidia-elements/code/code-block/define.js';
-import '@nvidia-elements/code/code-block/languages/json.js';
+import '@nvidia-elements/code/languages/json.js';
 import '@nvidia-elements/core/accordion/define.js';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';

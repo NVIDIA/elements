@@ -25,6 +25,39 @@ This product includes the following bundled third-party software:
 - @inquirer/prompts v8.7.5 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
+- @lezer/common v1.5.5 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/css v1.3.9 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/go v1.0.1 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/highlight v1.2.5 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/html v1.3.13 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/javascript v1.5.6 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/json v1.0.3 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Arun Srinivasan <rulfzid@gmail.com>
+
+- @lezer/markdown v1.8.1 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/python v1.1.19 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/xml v1.0.6 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijn@haverbeke.berlin>
+
+- @lezer/yaml v1.0.4 [MIT] (used by: @nvidia-elements/code)
+  Copyright: Marijn Haverbeke <marijnh@gmail.com>
+
 - @modelcontextprotocol/ext-apps v2.0.4 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Olivier Chafik
 
@@ -57,9 +90,6 @@ This product includes the following bundled third-party software:
 
 - fflate v0.8.3 [MIT] (used by: @nvidia-elements/pi)
   Copyright: Arjun Barrett <arjunbarrett@gmail.com>
-
-- highlight.js v11.12.0 [BSD-3-Clause] (used by: @nvidia-elements/code)
-  Copyright: Josh Goebel <hello@joshgoebel.com>
 
 - html-format v1.1.7 [MIT] (used by: @nvidia-elements/pi)
   Copyright: Mohamed Akram
@@ -308,7 +338,6 @@ BSD-3-Clause
 
 The following bundled components are provided under the BSD-3-Clause license:
 
-highlight.js v11.12.0 - Copyright Josh Goebel <hello@joshgoebel.com>
 lit v3.3.3 - Copyright Google LLC
 lit-html v3.3.3 - Copyright Google LLC
 
@@ -347,6 +376,17 @@ The following bundled components are provided under the MIT license:
 @html-eslint/eslint-plugin v0.68.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.68.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @inquirer/prompts v8.7.5 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@lezer/common v1.5.5 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/css v1.3.9 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/go v1.0.1 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/highlight v1.2.5 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/html v1.3.13 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/javascript v1.5.6 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/json v1.0.3 - Copyright Arun Srinivasan <rulfzid@gmail.com>
+@lezer/markdown v1.8.1 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/python v1.1.19 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/xml v1.0.6 - Copyright Marijn Haverbeke <marijn@haverbeke.berlin>
+@lezer/yaml v1.0.4 - Copyright Marijn Haverbeke <marijnh@gmail.com>
 @modelcontextprotocol/ext-apps v2.0.4 - Copyright Olivier Chafik
 @pnpm/catalogs.config v0.1.0 - Copyright Unknown
 @pnpm/exportable-manifest v7.0.3 - Copyright Unknown

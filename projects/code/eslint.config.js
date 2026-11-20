@@ -1,5 +1,5 @@
 import { elementsRecommended } from '@nvidia-elements/lint/eslint';
-import { browserTypescriptConfig, libraryConfig, litConfig, jsonConfig } from '@internals/eslint';
+import { browserTypescriptConfig, libraryConfig, litConfig, jsonConfig, performanceConfig } from '@internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -8,8 +8,9 @@ export default [
   ...libraryConfig,
   ...litConfig,
   ...jsonConfig,
+  ...performanceConfig,
   {
-    files: ['src/code-block/languages/**/*.ts'],
+    files: ['src/languages/**/*.ts'],
     rules: {
       'local-typescript/require-unit-test': 'off'
     }
