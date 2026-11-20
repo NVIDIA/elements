@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { createRequire } from 'module';
-import { Project, SyntaxKind } from 'ts-morph';
+import { Project, SyntaxKind, ts } from 'ts-morph';
 import { customElementJsxPlugin } from 'custom-element-jsx-integration';
 import { customElementVuejsPlugin } from 'custom-element-vuejs-integration';
 
@@ -1265,10 +1265,12 @@ function formatMethodSignature(method) {
   const parameters = (method.parameters ?? [])
     .map(parameter => {
       const optional = parameter.optional || parameter.default !== undefined ? '?' : '';
-      return `${parameter.name}${optional}: ${parameter.type?.text ?? 'unknown'}`;
+      const type = formatMarkdownTableType(parameter.type?.text ?? 'unknown');
+      return `${parameter.name}${optional}: ${type}`;
     })
     .join(', ');
-  return `${method.name}(${parameters}): ${method.return?.type?.text ?? 'unknown'}`;
+  const returnType = formatMarkdownTableType(method.return?.type?.text ?? 'unknown');
+  return `${method.name}(${parameters}): ${returnType}`;
 }
 
 function groupMethods(methods) {
@@ -1322,8 +1324,36 @@ function isPublicMember(member) {
   return member.privacy == null || member.privacy === 'public';
 }
 
-function escapeMarkdownTableType(type) {
-  return type.replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
+function flattenTypeLines(type) {
+  return type
+    .replace(/[ \t]*[\r\n]\s*/g, ' ')
+    .trim()
+    .replace(/^\|\s*/, '');
+}
+
+function printMultilineType(type, flattened) {
+  const source = ts.createSourceFile('type.ts', `type Value = ${type};`, ts.ScriptTarget.Latest);
+  const [declaration] = source.statements;
+  if (source.parseDiagnostics.length || !declaration || !ts.isTypeAliasDeclaration(declaration)) {
+    return flattened;
+  }
+
+  const printer = ts.createPrinter({ removeComments: true });
+  return flattenTypeLines(printer.printNode(ts.EmitHint.Unspecified, declaration.type, source));
+}
+
+function formatMarkdownTableType(type) {
+  if (!/[\r\n]/.test(type)) return type;
+  const flattened = flattenTypeLines(type);
+  if (type.includes('//')) return printMultilineType(type, flattened);
+  if (!type.includes('{')) return flattened;
+
+  const inline = ts.createSourceFile('type.ts', `type Value = ${flattened};`, ts.ScriptTarget.Latest);
+  return inline.parseDiagnostics.length ? printMultilineType(type, flattened) : flattened;
+}
+
+function escapeMarkdownTableText(text) {
+  return text.replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
 }
 
 export function elementMetadataToMarkdown(manifest) {
@@ -1366,8 +1396,8 @@ ${properties
   .map(i => {
     const propertyType = i.type?.text;
     const attributeType = getMemberAttribute(manifest, i)?.type?.text;
-    const formattedPropertyType = propertyType ? escapeMarkdownTableType(propertyType) : '';
-    const formattedAttributeType = attributeType ? escapeMarkdownTableType(attributeType) : '';
+    const formattedPropertyType = propertyType ? escapeMarkdownTableText(formatMarkdownTableType(propertyType)) : '';
+    const formattedAttributeType = attributeType ? escapeMarkdownTableText(formatMarkdownTableType(attributeType)) : '';
     let type = formattedPropertyType ? `\`${formattedPropertyType}\`` : '';
 
     if (propertyType && attributeType && propertyType !== attributeType) {
@@ -1415,7 +1445,7 @@ ${
 ${methods
   .map(
     method =>
-      `| ${method.name} | ${method.signatures.map(signature => `\`${escapeMarkdownTableType(signature)}\``).join('<br>')} | ${formatDescription(method.description)} |`
+      `| ${method.name} | ${method.signatures.map(signature => `\`${escapeMarkdownTableText(signature)}\``).join('<br>')} | ${formatDescription(method.description)} |`
   )
   .join('\n')}\n`
     : ''
