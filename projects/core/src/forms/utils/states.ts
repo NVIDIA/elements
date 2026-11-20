@@ -16,6 +16,55 @@ export interface ControlStateCleanup {
   disconnect: () => void;
 }
 
+interface InputValidationBinding {
+  input?: HTMLInputElement;
+  nativeMessage?: ControlMessage;
+}
+
+const validationBindings = new WeakMap<Control, InputValidationBinding>();
+
+function getInputValidationBinding(control: Control) {
+  let binding = validationBindings.get(control);
+  if (!binding) {
+    binding = { input: control.input };
+    validationBindings.set(control, binding);
+  }
+  return binding;
+}
+
+export function releaseInputValidation(control: Control, messages: ControlMessage[]) {
+  const binding = validationBindings.get(control);
+  if (!binding?.input) return;
+
+  if (binding.nativeMessage && messages.includes(binding.nativeMessage)) {
+    binding.nativeMessage.hidden = true;
+  }
+  binding.nativeMessage = undefined;
+  binding.input = undefined;
+  clearValidityState(control);
+}
+
+function clearValidityState(control: Control) {
+  control._internals.states.delete('valid');
+  control._internals.states.delete('invalid');
+}
+
+function setValidityState(control: Control, state: 'valid' | 'invalid') {
+  const states = control._internals.states;
+  states.delete(state === 'valid' ? 'invalid' : 'valid');
+  states.add(state);
+}
+
+function syncValidityFromMessages(control: Control, messages: ControlMessage[]) {
+  const hasError = messages.some(message => !message.hidden && (message.status === 'error' || message.error));
+  setValidityState(control, hasError ? 'invalid' : 'valid');
+}
+
+function syncSlottedMessageValidity(control: Control) {
+  const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
+  syncValidityFromMessages(control, messages);
+}
+
 /**
  * Adds validation states to custom element
  * :state(valid) form control is in a valid state
@@ -24,6 +73,7 @@ export interface ControlStateCleanup {
 // eslint-disable-next-line max-lines-per-function
 export function setupControlValidationStates(control: Control, messages: ControlMessage[]) {
   const cleanups: ControlStateCleanup[] = [];
+  const binding = getInputValidationBinding(control);
 
   if (
     !control.input.form?.noValidate &&
@@ -37,8 +87,8 @@ export function setupControlValidationStates(control: Control, messages: Control
      */
     const updateValidityState = () => {
       if (control.input.validity?.valid) {
-        control._internals.states.delete('invalid');
-        control._internals.states.add('valid');
+        binding.nativeMessage = undefined;
+        setValidityState(control, 'valid');
         control.status = null!;
       }
 
@@ -46,35 +96,30 @@ export function setupControlValidationStates(control: Control, messages: Control
     };
 
     const resetValidityState = () => {
+      binding.nativeMessage = undefined;
       control.status = null!;
-      control._internals.states.delete('valid');
-      control._internals.states.delete('invalid');
+      clearValidityState(control);
       hideAllValidationMessages(messages);
-    };
-
-    const onBlur = () => {
-      control.input.checkValidity();
-      updateValidityState();
-    };
-
-    const onInput = () => {
-      updateValidityState();
     };
 
     const onInvalid = () => {
       if (messages.find(m => m.error)) {
         hideAllValidationMessages(messages);
-        showActiveValidationMessages(control, messages);
+        const message = messages.find(({ error }) => error && control.input.validity[error]);
+        binding.nativeMessage = message;
+        message?.removeAttribute('hidden');
       }
 
       control.status = 'error';
-      control._internals.states.delete('valid');
-      control._internals.states.add('invalid');
+      setValidityState(control, 'invalid');
     };
 
     cleanups.push(
-      addCleanupListener(control.input, 'blur', onBlur),
-      addCleanupListener(control.input, 'input', onInput),
+      addCleanupListener(control.input, 'blur', () => {
+        control.input.checkValidity();
+        updateValidityState();
+      }),
+      addCleanupListener(control.input, 'input', updateValidityState),
       addCleanupListener(control.input, 'invalid', onInvalid),
       addCleanupListener(control, 'reset', resetValidityState)
     );
@@ -84,18 +129,11 @@ export function setupControlValidationStates(control: Control, messages: Control
     }
   }
 
-  const onSlotChange = () => {
-    const current = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
-    control._internals.states.delete('valid');
-    control._internals.states.delete('invalid');
-    if (current.find(m => !m.hidden && (m.status === 'error' || m.error))) {
-      control._internals.states.add('invalid');
-    } else {
-      control._internals.states.add('valid');
-    }
-  };
-  cleanups.push(addCleanupListener(control.shadowRoot!, 'slotchange', onSlotChange));
-
+  if (binding.input !== control.input) {
+    binding.input = control.input;
+    syncValidityFromMessages(control, messages);
+  }
+  cleanups.push(addCleanupListener(control.shadowRoot!, 'slotchange', () => syncSlottedMessageValidity(control)));
   return cleanups;
 }
 
@@ -235,10 +273,6 @@ export function updateControlStatusState(control: Control | ControlGroup, messag
 
 export function hideAllValidationMessages(messages: ControlMessage[]) {
   messages.filter(m => m.hasAttribute('error')).forEach(m => m.setAttribute('hidden', ''));
-}
-
-export function showActiveValidationMessages(control: Control, messages: ControlMessage[]) {
-  messages.find(m => m.error && control.input.validity[m.error])?.removeAttribute('hidden');
 }
 
 export function hideInactiveValidationMessages(control: Control, messages: ControlMessage[]) {
