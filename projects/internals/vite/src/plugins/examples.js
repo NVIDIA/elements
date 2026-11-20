@@ -212,7 +212,7 @@ function findVerbatimContentRanges(template) {
       if (location?.startTag && location?.endTag) {
         const start = location.startTag.endOffset;
         const end = location.endTag.startOffset;
-        ranges.push({ tag: node.tagName, start, end });
+        ranges.push({ tag: node.tagName, start, end, endTagEnd: location.endTag.endOffset });
       }
       return;
     }
@@ -236,8 +236,9 @@ function restoreVerbatimContents(formatted, verbatimContents) {
 
   // NOTE: Replace ranges in reverse order so each edit only shifts previously processed content.
   for (let index = ranges.length - 1; index >= 0; index--) {
-    const { start, end } = ranges[index];
-    formatted = formatted.slice(0, start) + verbatimContents[index].content + formatted.slice(end);
+    const { tag, start, end, endTagEnd } = ranges[index];
+    const closingTag = tag === 'textarea' ? '</textarea>' : formatted.slice(end, endTagEnd);
+    formatted = formatted.slice(0, start) + verbatimContents[index].content + closingTag + formatted.slice(endTagEnd);
   }
   return formatted;
 }

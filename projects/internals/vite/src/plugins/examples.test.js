@@ -21,7 +21,8 @@ test('preserves authored textarea contents in generated and cached metadata whil
     for (let attempt = 0; attempt < 2; attempt++) {
       assert.ok(await plugin.transform('', id));
       const json = JSON.parse(await readFile(path.join(directory, 'dist/textarea.examples.json'), 'utf8'));
-      const generatedValue = json.items[0].template.match(/<textarea[^>]*>([\s\S]*?)<\/textarea\s*>/i)?.[1];
+      assert.equal((json.items[0].template.match(/<\/textarea>/g) ?? []).length, 3);
+      const generatedValue = json.items[0].template.match(/<textarea[^>]*>([\s\S]*?)<\/textarea>/i)?.[1];
       assert.equal(generatedValue, textarea.match(/<textarea[^>]*>([\s\S]*?)<\/textarea>/i)?.[1]);
       assert.match(json.items[0].template, /<div data-kind="ordinary">/);
       assert.match(json.items[1].template, /<div data-kind="ordinary">/);
