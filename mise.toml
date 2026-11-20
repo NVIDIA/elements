@@ -5,7 +5,7 @@ npm.package_manager = "pnpm"
 [tools]
 node = "26.8.2"
 pnpm = "12.4.2"
-vale = "3.15.1"
+vale = "3.28.1"
 go = "1.26.4"
 git-lfs = "3.7.1"
 hugo = "0.152.2"

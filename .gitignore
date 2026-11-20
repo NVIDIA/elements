@@ -35,6 +35,7 @@ port
 config/vale/bin
 config/vale/styles/Google
 config/vale/styles/write-good
+config/vale/styles/config/grammars/
 .husky/_/
 DEPENDENCIES.json
 
