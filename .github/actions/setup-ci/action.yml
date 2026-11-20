@@ -27,15 +27,16 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
-    - name: Cache Vale styles
+    - name: Cache Vale styles and grammars
       id: cache-vale
       uses: actions/cache@v5.1.0
       with:
         path: |
           config/vale/styles/Google
           config/vale/styles/write-good
-        key: ${{ runner.os }}-${{ runner.arch }}-vale-styles-${{ hashFiles('.vale.ini') }}-v1
-    - name: Sync Vale styles
+          config/vale/styles/config/grammars
+        key: ${{ runner.os }}-${{ runner.arch }}-vale-styles-${{ hashFiles('.vale.ini', 'mise.toml') }}-v1
+    - name: Sync Vale styles and grammars
       if: steps.cache-vale.outputs.cache-hit != 'true'
       shell: bash
       run: vale sync

@@ -351,6 +351,7 @@
       "command": "vale --config .vale.ini .agents projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/icon/icons.ts,**/icon/server.ts,**/icon/names.ts,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'",
       "files": [
         "./.vale.ini",
+        "./mise.toml",
         "./config/vale/**/*",
         "./.agents/**/*.{md,ts}",
         "./projects/*/src/**/*.{md,ts}",
