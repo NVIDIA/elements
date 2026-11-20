@@ -176,7 +176,13 @@ function buildCustomElementsAllowedAttributes(elements: Element[]): AllowedAttri
     const customAttrs =
       element.manifest?.attributes?.map(attribute => {
         const typeText = attribute.type?.text ?? '';
-        if (typeText === 'boolean' || typeText === 'string' || typeText === 'number' || typeText.includes('IconName')) {
+        if (
+          typeText.split('|').some(type => ['`${string}:${string}`', '`${string}.svg`'].includes(type.trim())) ||
+          typeText === 'boolean' ||
+          typeText === 'string' ||
+          typeText === 'number' ||
+          typeText.includes('IconName')
+        ) {
           return attribute.name;
         }
         const values = [...typeText.matchAll(/['"]([^'"]+)['"]/g)].map(([, v]) => v!.trim());
@@ -224,6 +230,14 @@ function buildAllowedAttributes(elements: Element[], config: TemplateConfig): Al
   };
 }
 
+function matchesAttributeValuePattern(typeText: string, value: string): boolean {
+  return typeText.split('|').some(type => {
+    if (type.trim() === '`${string}:${string}`') return value.includes(':');
+    if (type.trim() === '`${string}.svg`') return value.endsWith('.svg');
+    return false;
+  });
+}
+
 export function validateTemplate(
   source: string,
   elements: Element[],
@@ -237,6 +251,14 @@ export function validateTemplate(
   };
 
   const allowedAttributes = buildAllowedAttributes(elements, mergedConfig);
+  const patternedAttributes = new Map(
+    elements.map(element => [
+      element.name,
+      element.manifest?.attributes?.filter(attribute =>
+        attribute.type?.text.split('|').some(type => ['`${string}:${string}`', '`${string}.svg`'].includes(type.trim()))
+      ) ?? []
+    ])
+  );
   const customElementsNonBooleanAttributes = Object.values(allowedAttributes)
     .filter(i => typeof i !== 'string')
     .flatMap(i => (Array.isArray(i?.values) ? i.values : []));
@@ -247,7 +269,21 @@ export function validateTemplate(
     allowedAttributes,
     allowVulnerableTags: mergedConfig.allowVulnerableTags || mergedConfig.allowStyles,
     nonBooleanAttributes: [...nonBooleanAttributes, ...customElementsNonBooleanAttributes],
-    parser: { lowerCaseTags: false, lowerCaseAttributeNames: false }
+    parser: { lowerCaseTags: false, lowerCaseAttributeNames: false },
+    transformTags: {
+      '*': (tagName: string, attribs: Record<string, string>) => {
+        for (const attribute of patternedAttributes.get(tagName) ?? []) {
+          const value = attribs[attribute.name];
+          const values = [...attribute.type.text.matchAll(/['"]([^'"]+)['"]/g)].map(([, literal]) => literal);
+          if (value === undefined) continue;
+          const matchesPattern = matchesAttributeValuePattern(attribute.type.text, value);
+          if (!matchesPattern && !values.includes(value)) {
+            Reflect.deleteProperty(attribs, attribute.name);
+          }
+        }
+        return { tagName, attribs };
+      }
+    }
   });
 }
 

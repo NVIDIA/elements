@@ -16,6 +16,10 @@ function isOmittedTypeBranch(type) {
   return value === '' || value === 'undefined';
 }
 
+function isTemplateLiteralPattern(type) {
+  return type.startsWith('`') && type.endsWith('`') && type.includes('${');
+}
+
 export function getDocumentedTypeValues(type) {
   if (typeof type !== 'string') {
     return [];
@@ -24,7 +28,9 @@ export function getDocumentedTypeValues(type) {
   return type
     .split('|')
     .map(value => value.trim())
-    .filter(value => !isOmittedTypeBranch(value) && value !== "''" && value !== '""')
+    .filter(
+      value => !isOmittedTypeBranch(value) && !isTemplateLiteralPattern(value) && value !== "''" && value !== '""'
+    )
     .map(value => value.replace(/^(['"])(.*)\1$/, '$2'));
 }
 
@@ -1532,7 +1538,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
     // Check if this is a string literal union (contains quoted strings)
     const isStringLiteralUnion =
       rawTypes.some(type => /^['"].*['"]$/.test(type)) &&
-      rawTypes.every(type => /^['"].*['"]$/.test(type) || isOmittedTypeBranch(type));
+      rawTypes.every(type => /^['"].*['"]$/.test(type) || isOmittedTypeBranch(type) || isTemplateLiteralPattern(type));
 
     // Initialize values array if it doesn't exist
     if (!entry.type.values) {

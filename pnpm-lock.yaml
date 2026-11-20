@@ -1731,6 +1731,9 @@ importers:
       3d-force-graph:
         specifier: 1.80.2
         version: 1.80.2
+      '@nvidia/gui-icons':
+        specifier: 1.0.0
+        version: 1.0.0
       chart.js:
         specifier: 4.5.1
         version: 4.5.1
@@ -5131,6 +5134,10 @@ packages:
     peerDependencies:
       nuxt: ^4.6.4
       vite: ^8.3.5
+
+  '@nvidia/gui-icons@1.0.0':
+    resolution: {integrity: sha512-7dt5xYzabvv5EjiyIhNIadcxRguEZVCT55I8+FF4qvwYcPtifBoeCQbkFQEptHYxKNpmjUEymwt9cpci5izwcg==}
+    engines: {node: '>=22'}
 
   '@octokit/auth-token@6.0.0':
     resolution: {integrity: sha512-P4YJBPdPSpWTQ1NU4XYdvHvXJJDxM6YwpS0FZHRgP7YFkdVxsWcpWGy/NVqlAA7PcPCnMacXlRm1y2PFZRWL/w==}
@@ -17834,6 +17841,8 @@ snapshots:
       - oxc-parser
       - rolldown
       - unplugin
+
+  '@nvidia/gui-icons@1.0.0': {}
 
   '@octokit/auth-token@6.0.0': {}
 

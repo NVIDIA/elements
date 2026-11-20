@@ -178,6 +178,22 @@ test('documents declared default literals without documenting optionality', () =
   assert.deepEqual(getDocumentedTypeValues(`'default' | 'compact' | '' | undefined`), ['default', 'compact']);
 });
 
+test('keeps icon suggestions when a type also accepts custom names', () => {
+  const entry = { name: 'name', type: { text: "'add' | 'person' | `${string}:${string}` | `${string}.svg`" } };
+  const plugin = cemConfig.plugins.find(plugin => plugin.name === 'rewrite-exported-string-literal-type-aliases');
+  assert.ok(plugin);
+
+  plugin.packageLinkPhase({
+    customElementsManifest: { modules: [{ declarations: [{ kind: 'class', attributes: [entry] }] }] }
+  });
+
+  assert.equal(entry.type.text, "'add' | 'person' | `${string}:${string}` | `${string}.svg`");
+  assert.deepEqual(
+    entry.type.values.map(({ value }) => value),
+    ['add', 'person']
+  );
+});
+
 test('adds inherited descriptions to existing projected members', () => {
   const existingMember = { kind: 'field', name: 'value', type: { text: 'number' } };
   const declaration = { members: [existingMember] };
