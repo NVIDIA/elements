@@ -18,6 +18,7 @@ import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import { I18nController, type I18nDefaults } from '@nvidia-elements/foundations/internal/i18n';
 import type { ControlMessage } from '../control-message/control-message.js';
 import {
+  releaseInputValidation,
   setupControlValidationStates,
   setupControlStates,
   setupControlStatusStates,
@@ -105,17 +106,21 @@ export class Control extends LitElement {
   /** @private */
   get input(): HTMLInputElement {
     if (!isServer && !this.#input) {
-      const slotted =
-        this.querySelector('slot')
-          ?.assignedElements()
-          ?.find(i => i.matches(inputQuery)) ??
-        Array.from(this.shadowRoot!.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
-          i.matches(inputQuery)
-        );
-      this.#input = (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
+      this.#input = this.#findInput();
     }
 
     return this.#input;
+  }
+
+  #findInput(): HTMLInputElement {
+    const slotted =
+      this.querySelector('slot')
+        ?.assignedElements()
+        ?.find(i => i.matches(inputQuery)) ??
+      Array.from(this.shadowRoot!.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
+        i.matches(inputQuery)
+      );
+    return (slotted ?? this.querySelector(inputQuery)) as HTMLInputElement;
   }
 
   /** @private */
@@ -133,7 +138,8 @@ export class Control extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #observers: (MutationObserver | ResizeObserver | ControlStateCleanup)[] = [];
+  #layoutObserver?: ResizeObserver;
+  #observers: (MutationObserver | ControlStateCleanup)[] = [];
 
   protected _associateDatalist = true;
 
@@ -170,24 +176,39 @@ export class Control extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
-    this.shadowRoot!.addEventListener('slotchange', this.#onRootSlotchange);
+    this.shadowRoot!.addEventListener('slotchange', this.#syncInput);
+    this.#layoutObserver?.observe(this);
+    if (this.hasUpdated) this.#syncInput();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.shadowRoot!.removeEventListener('slotchange', this.#onRootSlotchange);
-    this.shadowRoot!.removeEventListener('slotchange', this.#onInputSlotchange);
+    this.shadowRoot!.removeEventListener('slotchange', this.#syncInput);
+    this.#layoutObserver?.disconnect();
+    this.#disconnectInputObservers();
+  }
+
+  #syncInput = () => {
+    const previous = this.#input;
+    this.#input = this.#findInput();
+    const inputChanged = previous !== this.#input;
+    if (inputChanged) {
+      this.#disconnectInputObservers();
+      releaseInputValidation(this, this.#messages);
+    }
+
+    this.#updateStyleStates();
+    if (!this.#input) return;
+
+    this.#layoutObserver ??= setupControlLayoutStates(this);
+    if (this.#observers.length === 0) this.#setupInput();
+    this.#updateAssociations();
+  };
+
+  #disconnectInputObservers() {
     this.#observers.forEach(observer => observer.disconnect());
     this.#observers.length = 0;
   }
-
-  #onRootSlotchange = () => {
-    this.#updateStyleStates();
-
-    if (this.input && this.#observers.length === 0) {
-      this.#setupInput();
-    }
-  };
 
   /** Resets control value to initial attribute value and clears any active validation rules. */
   reset() {
@@ -229,31 +250,17 @@ export class Control extends LitElement {
       ...setupControlValidationStates(this, this.#messages),
       ...setupControlStates(this),
       ...setupControlStatusStates(this, this.#messages),
-      setupControlLayoutStates(this),
       getAttributeListChanges(this, ['hidden', 'status'], () => this.#updateStyleStates())
     );
 
-    this.#polyfillShowPicker();
-    this.#updateAssociations();
-    this.shadowRoot!.addEventListener('slotchange', this.#onInputSlotchange);
-  }
-
-  #onInputSlotchange = () => {
-    this.#updateStyleStates();
-    this.#updateAssociations();
-  };
-
-  #polyfillShowPicker() {
-    if (!this.input.showPicker) {
-      this.input.showPicker = () => this.input.focus();
-    }
+    const input = this.input;
+    input.showPicker ??= () => input.focus();
   }
 
   #updateStyleStates() {
-    if (this.input) {
-      this.toggleAttribute('multiple', this.input?.multiple);
-      this.input?.hasAttribute('size') ? this.setAttribute('size', '') : this.removeAttribute('size');
-    }
+    const input = this.input;
+    this.toggleAttribute('multiple', input?.multiple ?? false);
+    this.toggleAttribute('size', input?.hasAttribute('size') ?? false);
   }
 
   #updateAssociations() {
