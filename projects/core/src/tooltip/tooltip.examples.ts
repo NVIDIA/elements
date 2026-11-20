@@ -119,7 +119,7 @@ export const Content = {
 };
 
 /**
- * @summary Single tooltip shared across many triggers with dynamic content updates. Use to reduce DOM nodes and improve performance when many similar elements need contextual help, updating tooltip content based on which trigger activated it.
+ * @summary Share one tooltip across triggers and update its content from the active trigger. Use this pattern to reduce DOM nodes when related elements need contextual help.
  */
 export const DynamicTrigger = {
   render: () => html`
@@ -363,7 +363,7 @@ export const LegacyBehaviorTrigger = {
 
 /**
  * @deprecated
- * @summary Legacy implementation combining behavior-trigger with open-delay for many tooltips. Older pattern for delayed tooltip appearance; prefer modern popovertarget with open-delay attribute.
+ * @summary Legacy implementation combining behavior-trigger with open-delay for a group of tooltips. Older pattern for delayed tooltip appearance; prefer modern popovertarget with open-delay attribute.
  * @deprecated
  * @tags test-case
  */
@@ -381,7 +381,7 @@ export const LegacyOpenDelay = {
 };
 
 /**
- * @summary Tooltip functionality within modal dialogs with many triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper stacking order and interaction behavior within modal overlays.
+ * @summary Tooltip functionality when a modal dialog contains a group of triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper stacking order and interaction behavior within modal overlays.
  * @tags test-case
  */
 export const NestedDynamic = {

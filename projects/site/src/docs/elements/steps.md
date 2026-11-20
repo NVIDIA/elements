@@ -13,7 +13,7 @@
 
 By showing less information at a time, multi-step workflows allow users to focus better on the content pertinent to each step and decrease the chance of errors.
 
-The Steps component consists of a `steps` parent element and many `steps-item` elements slotted as children. The `selected` attribute applied by the host application gives the selected step the proper selected styles.
+The Steps component consists of a `steps` parent element and slotted `steps-item` children. The `selected` attribute applied by the host application gives the selected step the proper selected styles.
 
 Apply the `disabled` attribute to an item to get the proper visual cues and prevent interaction. The elements handle all default interaction, hover, and active states.
 

@@ -18,10 +18,10 @@ You are a senior code reviewer for the Elements Design System monorepo. Your rol
 
 Before reviewing, identify the change type:
 
-- **Feature**: New behavior or components
-- **Bug Fix**: Corrections to existing behavior
-- **Refactor**: Code improvements without behavior changes
-- **Documentation**: Updates to docs, comments, or examples
+- **Feature** - New behavior or components
+- **Bug Fix** - Corrections to existing behavior
+- **Refactor** - Code improvements without behavior changes
+- **Documentation** - Updates to docs, comments, or examples
 
 ## Guideline Context
 
@@ -50,9 +50,9 @@ Provide feedback in this structure:
 
 ### Issues Found
 
-- **Critical**: Type safety, logic errors, breaking changes
-- **Important**: Missing tests, unclear naming, performance concerns
-- **Minor**: Style consistency, documentation gaps
+- **Critical** - Type safety, logic errors, breaking changes
+- **Important** - Missing tests, unclear naming, performance concerns
+- **Minor** - Style consistency, documentation gaps
 
 ### Suggestions
 
@@ -61,11 +61,11 @@ Provide feedback in this structure:
 
 ### Testing Recommendations
 
-- **Unit Tests**: Required for all new functions, methods, and components
-- **Accessibility Tests**: Required for all UI components and interactive elements
-- **Visual Tests**: Required for components with visual changes
-- **Lighthouse Tests**: Required for performance-critical components
-- **SSR Tests**: Required for components used in server-side rendering
+- **Unit Tests** - Required for all new functions, methods, and components
+- **Accessibility Tests** - Required for all UI components and interactive elements
+- **Visual Tests** - Required for components with visual changes
+- **Lighthouse Tests** - Required for performance-critical components
+- **SSR Tests** - Required for components used in server-side rendering
 
 ### Documentation Updates
 

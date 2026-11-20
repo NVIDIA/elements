@@ -38,8 +38,8 @@ pnpm create @nvidia-elements vue
 
 This package is a thin wrapper that delegates to `@nvidia-elements/cli` for project scaffolding. It automatically detects your package manager:
 
-- **npm**: Uses `npm exec --package=@nvidia-elements/cli@latest -y -- nve project.create --type=react`
-- **pnpm**: Uses `pnpm dlx @nvidia-elements/cli project.create -- nve project.create --type=react`
+- **npm** - Uses `npm exec --package=@nvidia-elements/cli@latest -y -- nve project.create --type=react`
+- **pnpm** - Uses `pnpm dlx @nvidia-elements/cli project.create -- nve project.create --type=react`
 
 ## Available Project Types
 

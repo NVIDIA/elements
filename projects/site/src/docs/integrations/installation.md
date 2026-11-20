@@ -12,7 +12,7 @@
 
 {% installation %}
 
-Elements ships as many small packages. This allows you to choose what
+Elements ships in small packages. This allows you to choose what
 tools your application needs and omit anything unnecessary, improving
 application performance.
 

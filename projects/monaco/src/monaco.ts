@@ -20,7 +20,7 @@ export async function injectMonacoGlobalStyles(): Promise<CSSStyleSheet> {
 let lazyLoadedMonaco: Promise<Monaco> | undefined;
 
 export async function loadMonaco(): Promise<Monaco> {
-  // NOTE: Guards against many evaluations of await import() from different import paths. (Encountered in Vitest.)
+  // NOTE: Guards against repeated evaluations of await import() from different import paths. (Encountered in Vitest.)
   lazyLoadedMonaco ??= (async () => {
     await injectMonacoGlobalStyles();
     const monaco = (await import('@nvidia-elements/monaco')) as Monaco;

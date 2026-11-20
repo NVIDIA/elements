@@ -17,7 +17,7 @@ The rest of this guide focuses on Elements integration and best practices.
 
 ## Scoped Registry
 
-By default Web Components, specifically the custom elements spec, defines elements on a global registry. This can introduce tag name collisions if the browser loads many versions of the same library. To avoid this, use a [scoped registry](https://developer.chrome.com/blog/scoped-registries). This allows you to define your own registry and ensure the Elements you depend on are only registered to the scope of your component and not the global registry.
+By default Web Components, specifically the custom elements spec, defines elements on a global registry. This can introduce tag name collisions if the browser loads more than one version of the same library. To avoid this, use a [scoped registry](https://developer.chrome.com/blog/scoped-registries). This allows you to define your own registry and ensure the Elements you depend on are only registered to the scope of your component and not the global registry.
 
 ```typescript
 import { html, LitElement } from 'lit';

@@ -96,7 +96,7 @@ export const SlottedIcon = {
 `};
 
 /**
- * @summary Progress rings in many sizes from extra-extra-small to extra-large for different UI contexts.
+ * @summary Progress rings from extra-extra-small to extra-large for different UI contexts.
  * @tags test-case
  */
 export const Sizing = {

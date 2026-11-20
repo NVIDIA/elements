@@ -78,7 +78,7 @@ export class Combobox extends Control implements ContainerElement {
    */
   @property({ type: String, reflect: true }) container: 'flat';
 
-  /** Manage inline tag rendering for many-item select */
+  /** Controls inline tags in multi-select mode. */
   @property({ type: String, reflect: true, attribute: 'tag-layout' }) tagLayout: 'hidden' | 'wrap';
 
   /** Enable creation of new options when the input value doesn't match any existing option. Dispatches a `create` event with `{ value }` detail. */

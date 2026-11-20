@@ -46,12 +46,12 @@ The shared configuration is `@internals/vite/configs/bench.js`. The Core referen
 
 State the performance question before writing benchmark syntax. A useful benchmark has:
 
-1. **A product-relevant operation:** Filtering options, traversing a grid, synchronizing tree state, generating a path, or updating rendered icons.
-2. **A representative scale:** Prefer enough data to expose algorithmic and allocation costs. A leaf rendering benchmark without scalable work does not justify its maintenance cost.
-3. **A stable input:** Use fixed deterministic data. Avoid randomness, clocks, network requests, and machine-specific files.
-4. **Consistent iterations:** Every sample must perform the same class of work. Alternate values to force updates without allowing state to grow indefinitely.
-5. **An observable completion point:** Return computed values. For Lit updates, await `elementIsStable()` and any follow-up asynchronous update triggered by the component.
-6. **A narrow boundary:** Exclude fixture creation, selectors, and data generation unless those operations are explicitly under test.
+1. **A product-relevant operation** - Filtering options, traversing a grid, synchronizing tree state, generating a path, or updating rendered icons.
+2. **A representative scale** - Prefer enough data to expose algorithmic and allocation costs. A leaf rendering benchmark without scalable work does not justify its maintenance cost.
+3. **A stable input** - Use fixed deterministic data. Avoid randomness, clocks, network requests, and machine-specific files.
+4. **Consistent iterations** - Every sample must perform the same class of work. Alternate values to force updates without allowing state to grow indefinitely.
+5. **An observable completion point** - Return computed values. For Lit updates, await `elementIsStable()` and any follow-up asynchronous update triggered by the component.
+6. **A narrow boundary** - Exclude fixture creation, selectors, and data generation unless those operations are explicitly under test.
 
 Use at least two sizes when the scaling behavior is the question. If comparing a single operation with a batch, normalize the batch mean per item before drawing conclusions.
 

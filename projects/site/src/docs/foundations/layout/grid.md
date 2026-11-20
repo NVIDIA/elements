@@ -45,11 +45,11 @@ The Elements grid system uses a **12-column layout**, a standard approach that p
 
 Choose grid layout when you need:
 
-- **Multi-column layouts**: Dashboards, card galleries, product listings
-- **Precise alignment**: Forms with labels and inputs, data tables
-- **Complex page structures**: Magazine layouts, image galleries with captions
-- **Responsive design**: Layouts that reflow based on available space
-- **Overlapping elements**: Layered designs with precise positioning
+- **Multi-column layouts** - Dashboards, card galleries, product listings
+- **Precise alignment** - Forms with labels and inputs, data tables
+- **Complex page structures** - Magazine layouts, image galleries with captions
+- **Responsive design** - Layouts that reflow based on available space
+- **Overlapping elements** - Layered designs with precise positioning
 
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
@@ -137,11 +137,11 @@ The Elements grid system offers two approaches for controlling column spans, eac
 
 Use `span-items` on the grid container when:
 
-- **Uniform layouts**: All items should have the same width
-- **Gallery grids**: Photo galleries, card grids, or product listings
-- **Predictable patterns**: Dashboard widgets, metric cards, or feature boxes
-- **Simplified markup**: You want cleaner HTML without span attributes on each child
-- **Dynamic content**: When the system generates items dynamically and they should maintain consistent sizing
+- **Uniform layouts** - All items should have the same width
+- **Gallery grids** - Photo galleries, card grids, or product listings
+- **Predictable patterns** - Dashboard widgets, metric cards, or feature boxes
+- **Simplified markup** - You want cleaner HTML without span attributes on each child
+- **Dynamic content** - When the system generates items dynamically and they should maintain consistent sizing
 
 ```html
 <!-- All children automatically span 4 columns (3 per row) -->
@@ -157,11 +157,11 @@ Use `span-items` on the grid container when:
 
 Use individual `span` attributes on grid items when:
 
-- **Mixed layouts**: Different items need different widths
-- **Editorial designs**: Magazine-style layouts with varied content sizes
-- **Form layouts**: Labels, inputs, and buttons of different widths
-- **Asymmetric designs**: Sidebars, main content areas, and feature blocks
-- **Precise control**: Each element needs specific column spanning
+- **Mixed layouts** - Different items need different widths
+- **Editorial designs** - Magazine-style layouts with varied content sizes
+- **Form layouts** - Labels, inputs, and buttons of different widths
+- **Asymmetric designs** - Sidebars, main content areas, and feature blocks
+- **Precise control** - Each element needs specific column spanning
 
 ```html
 <!-- Each child controls its own width -->
@@ -190,9 +190,9 @@ You can mix both approaches for the most flexibility. Items with explicit `span`
 
 ### Performance Considerations
 
-- **Parent-controlled** (`span-items`): More efficient for large grids with uniform items
-- **Child-controlled** (`span`): Better for complex layouts with specific requirements
-- **Mixed approach**: Use sparingly to maintain code clarity
+- **Parent-controlled** (`span-items`) - More efficient for large grids with uniform items
+- **Child-controlled** (`span`) - Better for complex layouts with specific requirements
+- **Mixed approach** - Use sparingly to maintain code clarity
 
 ### Child-controlled Spans Example
 
@@ -321,11 +321,11 @@ You can mix both approaches for the most flexibility. Items with explicit `span`
 
 ## Best Practices
 
-1. **Start with 12 columns**: This provides flexibility for responsive design patterns
-2. **Use semantic HTML**: Apply grid to meaningful containers like `<main>`, `<section>`, `<nav>`
-3. **Consistent gaps**: Use standard gap spacing throughout your layout
-4. **Plan for responsiveness**: Consider how your grid adapts on smaller screens
-5. **Combine with flexbox**: Use grid for layout structure, flexbox for component details
+1. **Start with 12 columns** - This provides flexibility for responsive design patterns
+2. **Use semantic HTML** - Apply grid to meaningful containers like `<main>`, `<section>`, `<nav>`
+3. **Consistent gaps** - Use standard gap spacing throughout your layout
+4. **Plan for responsiveness** - Consider how your grid adapts on smaller screens
+5. **Combine with flexbox** - Use grid for layout structure, flexbox for component details
 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">

@@ -16,10 +16,10 @@ You MUST review @projects/site/src/docs/internal/guidelines/examples.md before m
 
 ## Key Principles
 
-1. **PascalCase Naming**: Use PascalCase for example names (for example, `Default`, `StatusFlat`, `FormSubmit`)
-2. **Concise Names**: Keep example names to 1-3 words maximum, describing **what** the example shows
-3. **Required @summary**: Every example must include a `@summary` JSDoc comment explaining what, why, when, and how
-4. **Stateless Templates**: Examples should be stateless HTML templates demonstrating UI patterns
+1. **PascalCase Naming** - Use PascalCase for example names (for example, `Default`, `StatusFlat`, `FormSubmit`)
+2. **Concise Names** - Keep example names to 1-3 words maximum, describing **what** the example shows
+3. **Required @summary** - Every example must include a `@summary` JSDoc comment explaining what, why, when, and how
+4. **Stateless Templates** - Examples should be stateless HTML templates demonstrating UI patterns
 
 ## Naming Patterns
 

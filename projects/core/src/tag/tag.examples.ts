@@ -61,7 +61,7 @@ export const Readonly = {
 };
 
 /**
- * @summary Tag group layout with overflow handling and add functionality, ideal for managing many categories with space constraints.
+ * @summary Tag group layout with overflow handling and add functionality, ideal for managing categories in limited space.
  */
 export const Group = {
   render: () => html`
@@ -186,7 +186,7 @@ export const OverflowSingle = {
 
 
 /**
- * @summary Many tags with max width constraints, showing how content adapts to space limitations and maintains visual consistency.
+ * @summary Limit tag width so long labels fit the available space.
  * @tags test-case
  */
 export const OverflowMaxWidth= {

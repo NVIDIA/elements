@@ -41,13 +41,13 @@ The `nve-markdown` component renders markdown content with Elements styling. It 
 
 ## Features
 
-- **Markdown Processing**: The markdown parser processes all content
-- **HTML Support**: The renderer preserves and renders HTML tags within markdown
+- **Markdown Processing** - The markdown parser processes all content
+- **HTML Support** - The renderer preserves and renders HTML tags within markdown
 - **Two Input Methods**:
   - `source` property for programmatic content
   - `<template>` slot for declarative content
-- **Elements Styling**: Comprehensive CSS styling that matches the Elements design system
-- **Lazy Loading**: Markdown parser is only loaded when needed for optimal performance
+- **Elements Styling** - Comprehensive CSS styling that matches the Elements design system
+- **Lazy Loading** - Markdown parser is only loaded when needed for optimal performance
 
 <!-- The below tests direct use of component rather than markdown.examples.ts processing  -->
 <!--

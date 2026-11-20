@@ -214,7 +214,7 @@ export const Single = {
 };
 
 /**
- * @summary Brings together many accordion components for embedded multi-section content organization.
+ * @summary Groups accordions to organize embedded content into sections.
  * @tags test-case
  */
 export const Multiple = {

@@ -7,7 +7,7 @@ The default configs are standard Vite configuration objects. The objects can be 
 - `configs/`: base vite configs for vite builds and tests
 - `playwright/`: playwright specific scripts
 - `plugins/`: vite plugins for build pipelines such as TS and minification
-- `runners/`: test runners for run time evaluation steps, lighthouse or visual
+- `runners/`: test runners for runtime evaluations such as Lighthouse or visual tests
 - `setup/`: initialize files for setup/teardown work with specific test runners
 
 ## Documentation
@@ -480,12 +480,12 @@ Initial calibration on Chromium `153.0.8010.12` used three uncached executions p
 
 | Scenario            | Layout counts | Style counts | Count budgets (layout/style) |
 | ------------------- | ------------- | ------------ | ---------------------------- |
-| Batched 16 writes   | 1, 1, 1       | 1, 1, 1      | 2 / 2                        |
-| Batched 64 writes   | 1, 1, 1       | 1, 1, 1      | 2 / 2                        |
-| Thrashing 16 writes | 16, 16, 16    | 16, 16, 16   | 2 / 2; expected rejection    |
-| Thrashing 64 writes | 64, 64, 64    | 64, 64, 64   | 2 / 2; expected rejection    |
-| Grid 500 cells      | 1, 1, 1       | 1, 1, 1      | 4 / 4                        |
-| Grid 2,000 cells    | 2, 2, 2       | 2, 2, 2      | 4 / 4                        |
+| Batched 16 writes   | `1, 1, 1`       | `1, 1, 1`      | 2 / 2                        |
+| Batched 64 writes   | `1, 1, 1`       | `1, 1, 1`      | 2 / 2                        |
+| Thrashing 16 writes | `16, 16, 16`    | `16, 16, 16`   | 2 / 2; expected rejection    |
+| Thrashing 64 writes | `64, 64, 64`    | `64, 64, 64`   | 2 / 2; expected rejection    |
+| Grid 500 cells      | `1, 1, 1`       | `1, 1, 1`      | 4 / 4                        |
+| Grid 2,000 cells    | `2, 2, 2`       | `2, 2, 2`      | 4 / 4                        |
 
 The synthetic control performs every width change but reads geometry before the writes. The thrashing workload changes width before each observable geometry read in the same task. Its expected rejection is a passing detector test. The grid budget permits initial batched rendering and follow-up observer work with a small scheduling allowance. It rejects per-cell layout at either scale. Other interactions can require legitimate layouts.
 

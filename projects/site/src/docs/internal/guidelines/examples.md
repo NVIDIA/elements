@@ -55,10 +55,10 @@ Use compound PascalCase for combinations or specific features and patterns:
 
 #### What to Avoid
 
-- ❌ **Component names in titles**: Use `Status` not `BadgeStatus`
-- ❌ **Implementation details**: Use `ScrollContent` not `OverflowAutoScrollContent`
-- ❌ **Vague names**: Use `DynamicTrigger` not `Example1`
-- ❌ **Overly long names**: Keep to 3 words max
+- ❌ **Component names in titles** - Use `Status` not `BadgeStatus`
+- ❌ **Implementation details** - Use `ScrollContent` not `OverflowAutoScrollContent`
+- ❌ **Vague names** - Use `DynamicTrigger` not `Example1`
+- ❌ **Overly long names** - Keep to 3 words max
 
 #### Examples
 
@@ -242,10 +242,10 @@ export const ComplexPattern = {
 
 ### Summary Structure
 
-1. **Opening**: What the example demonstrates
-2. **Context**: When/why to use this pattern
-3. **Benefits**: How it improves UX or solves problems
-4. **Technical notes**: Any important implementation details
+1. **Opening** - What the example demonstrates
+2. **Context** - When/why to use this pattern
+3. **Benefits** - How it improves UX or solves problems
+4. **Technical notes** - Any important implementation details
 
 ### Examples of Well-Written Summaries
 

@@ -157,7 +157,7 @@ Adopting a rule holds all **new** code to it immediately. Apply every mechanical
 
 ### Mode B: burn down
 
-The rule is already `'error'` and has entries in a suppressions file. The script names the rule, the target file, the suppressions file it came from, and how many suppressions remain repo-wide.
+The rule is already `'error'` and has entries in a suppressions file. The script names the rule, the target file, the suppressions file it came from, and the remaining suppression count across the repository.
 
 1. Fix the violations in that one file. Do not add inline disables.
 2. Prune, from the `workingDirectory` the script reported:

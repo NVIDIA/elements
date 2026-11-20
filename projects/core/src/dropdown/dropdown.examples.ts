@@ -177,7 +177,7 @@ export const Layout = {
 };
 
 /**
- * @summary Dropdown with many triggers, showing how to use the popovertarget attribute to connect many triggers to the same dropdown.
+ * @summary Use the `popovertarget` attribute to connect more than one trigger to the same dropdown.
  * @tags test-case
  */
 export const MultipleTriggers = {

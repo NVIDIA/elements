@@ -389,7 +389,7 @@ export interface NveElement {
   /**
    * Sets the delay in milliseconds before the element emits an `open` event.
    * - `0` - Keyboard focus interactions (always immediate for accessibility).
-   * - `500` - Dense interfaces with many tooltips to reduce visual noise and prevent accidental triggers.
+   * - `500` - Dense interfaces with frequent tooltip triggers to reduce visual noise and prevent accidental triggers.
    */
   openDelay?: number;
 

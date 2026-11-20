@@ -13,7 +13,7 @@ NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Aut
 npm install --registry=https://registry.npmjs.org/ @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 ```
 
-Elements ships as many small packages. This allows you to choose what tools your application needs and omit anything unnecessary, improving application performance.
+Elements ships in small packages. This allows you to choose what tools your application needs and omit anything unnecessary, improving application performance.
 
 The core package provides framework-agnostic Web Components that you can use in [React](https://NVIDIA.github.io/elements/docs/integrations/react/), [Vue](https://NVIDIA.github.io/elements/docs/integrations/vue/), and [Angular](https://NVIDIA.github.io/elements/docs/integrations/angular/) applications.
 

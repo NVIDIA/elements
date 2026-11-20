@@ -17,9 +17,9 @@ The World Wide Web Consortium (W3C) provides guidelines for making web content m
 accessible to people with disabilities. The following are the guidelines that the
 system aims to follow:
 
-- [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/): This is the latest set of guidelines, which builds upon the previous versions and provides more recommendations for improving accessibility.
-- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/): This guide describes how to apply accessibility semantics to common design patterns and widgets. It provides design patterns and functional examples complemented by in-depth guidance for fundamental practices.
-- [WCAG Legal Guidance](https://wcag.com/legal/): Conformance with WCAG is a best practice for legal compliance. WCAG is the universally accepted set of technical standards that, when followed, make digital experiences more accessible. As the global standard, many laws, including the Americans with Disabilities Act and the Accessibility for Ontarians with Disabilities Act, reference conformance with WCAG.
+- [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/) - This is the latest set of guidelines, which builds upon the previous versions and provides more recommendations for improving accessibility.
+- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) - This guide describes how to apply accessibility semantics to common design patterns and widgets. It provides design patterns and functional examples complemented by in-depth guidance for fundamental practices.
+- [WCAG Legal Guidance](https://wcag.com/legal/) - Conformance with WCAG is a best practice for legal compliance. WCAG is the universally accepted set of technical standards that, when followed, make digital experiences more accessible. The Americans with Disabilities Act and the Accessibility for Ontarians with Disabilities Act are examples of laws that reference WCAG conformance.
 
 ## Automated Testing
 

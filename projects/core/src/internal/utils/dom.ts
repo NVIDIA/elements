@@ -122,7 +122,7 @@ export function getPropertyChanges(element: HTMLElement, key: string, callback: 
   };
 }
 
-/* used for cases of needing to know a property update outside of lit, example a native input value prop change */
+/* Observe property changes outside Lit, such as changes to a native input's value. */
 export function getElementUpdate(element: HTMLElement, key: string, callback: (value: unknown) => void) {
   if (element.hasAttribute(key)) {
     callback(element.getAttribute(key));

@@ -8,7 +8,7 @@
 
 # {{ title }}
 
-The Elements library uses a comprehensive testing strategy with many test types to ensure quality, accessibility, and performance. All tests follow consistent patterns and use shared utilities from `@internals/testing` and `@internals/vite`.
+The Elements library uses unit, accessibility, visual, SSR, and performance tests to verify component behavior. All tests follow consistent patterns and use shared utilities from `@internals/testing` and `@internals/vite`.
 
 ## Running Tests
 
@@ -44,12 +44,12 @@ pnpm run test:ssr
 
 ### Unit Tests (`.test.ts`)
 
-- [Unit Tests (`.test.ts`)](/docs/internal/guidelines/testing-unit/): Standard behavior tests.
+- [Unit Tests (`.test.ts`)](/docs/internal/guidelines/testing-unit/) - Standard behavior tests.
 - [Accessibility Tests (`.test.axe.ts`)](/docs/internal/guidelines/testing-accessibility/): best practices tests using axe-core.
 - [Lighthouse Performance Tests (`.test.lighthouse.ts`)](/docs/internal/guidelines/testing-lighthouse/): performance audits and best practices via Lighthouse
-- [Visual Regression Tests (`.test.visual.ts`)](/docs/internal/guidelines/testing-visual/): Visual regression tests using Playwright screenshots.
-- [SSR Tests (`.test.ssr.ts`)](/docs/internal/guidelines/testing-ssr/): Server-side rendering compatibility tests.
-- **WebGPU rendering tests (`.test.webgpu.ts`)**: External rendering, resource, timing, diagnostic, and lifecycle tests
+- [Visual Regression Tests (`.test.visual.ts`)](/docs/internal/guidelines/testing-visual/) - Visual regression tests using Playwright screenshots.
+- [SSR Tests (`.test.ssr.ts`)](/docs/internal/guidelines/testing-ssr/) - Server-side rendering compatibility tests.
+- **WebGPU rendering tests (`.test.webgpu.ts`)** - External rendering, resource, timing, diagnostic, and lifecycle tests
   orchestrated by Vitest against a clean Playwright page.
 
 ### Render regression tests (`.test.render.ts`)
@@ -88,8 +88,8 @@ Lighthouse, Render, and Visual tests require HTML templates:
 
 Core testing utilities for DOM manipulation and element stability:
 
-- `createFixture`: Creates test fixture DOM element
-- `removeFixture`: Removes test fixture DOM
-- `elementIsStable`: Waits for Lit element to be stable
-- `emulateClick`: Triggers native click events
-- `untilEvent`: Creates promise for event results
+- `createFixture` - Creates test fixture DOM element
+- `removeFixture` - Removes test fixture DOM
+- `elementIsStable` - Waits for Lit element to be stable
+- `emulateClick` - Triggers native click events
+- `untilEvent` - Creates promise for event results

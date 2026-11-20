@@ -123,7 +123,7 @@ Render the metadata tags of a given Example template.
 
 ## Example Group Shortcode
 
-The `example-group` shortcode visualizes many related examples in a single layout. Each example renders its summary/description alongside its example.
+The `example-group` shortcode renders related examples together in one layout. Each example renders its summary/description alongside its example.
 
 | Parameter    | Description                                                     | Type     |
 | ------------ | --------------------------------------------------------------- | -------- |

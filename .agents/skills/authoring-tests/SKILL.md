@@ -19,19 +19,19 @@ You MUST review @projects/site/src/docs/internal/guidelines/testing.md before ma
 
 Read the specific guideline based on the test type you're working with:
 
-- **Unit Tests (`.test.ts`)**: Read [testing-unit.md](/projects/site/src/docs/internal/guidelines/testing-unit.md) - covers `createFixture`, `elementIsStable`, event testing
-- **Accessibility Tests (`.test.axe.ts`)**: Read [testing-accessibility.md](/projects/site/src/docs/internal/guidelines/testing-accessibility.md) - covers axe-core usage, WCAG compliance
-- **Visual Tests (`.test.visual.ts`)**: Read [testing-visual.md](/projects/site/src/docs/internal/guidelines/testing-visual.md) - covers Playwright screenshots, theme testing
-- **SSR Tests (`.test.ssr.ts`)**: Read [testing-ssr.md](/projects/site/src/docs/internal/guidelines/testing-ssr.md) - covers server-side rendering compatibility
-- **Lighthouse Tests (`.test.lighthouse.ts`)**: Read [testing-lighthouse.md](/projects/site/src/docs/internal/guidelines/testing-lighthouse.md) - covers performance, accessibility scores
+- **Unit Tests (`.test.ts`)** - Read [testing-unit.md](/projects/site/src/docs/internal/guidelines/testing-unit.md) - covers `createFixture`, `elementIsStable`, event testing
+- **Accessibility Tests (`.test.axe.ts`)** - Read [testing-accessibility.md](/projects/site/src/docs/internal/guidelines/testing-accessibility.md) - covers axe-core usage, WCAG compliance
+- **Visual Tests (`.test.visual.ts`)** - Read [testing-visual.md](/projects/site/src/docs/internal/guidelines/testing-visual.md) - covers Playwright screenshots, theme testing
+- **SSR Tests (`.test.ssr.ts`)** - Read [testing-ssr.md](/projects/site/src/docs/internal/guidelines/testing-ssr.md) - covers server-side rendering compatibility
+- **Lighthouse Tests (`.test.lighthouse.ts`)** - Read [testing-lighthouse.md](/projects/site/src/docs/internal/guidelines/testing-lighthouse.md) - covers performance, accessibility scores
 
 ## Key Principles
 
-1. **Test Isolation**: Each test should be independent with proper setup/teardown using `createFixture` and `removeFixture`
-2. **Wait for Stability**: Always use `elementIsStable()` before making assertions on Lit components
-3. **Comprehensive Coverage**: All new components require unit, accessibility, and visual tests at minimum
-4. **Real User Events**: Use `emulateClick` and `untilEvent` for realistic event testing
-5. **Theme Testing**: Visual tests should cover both light and dark themes
+1. **Test Isolation** - Each test should be independent with proper setup/teardown using `createFixture` and `removeFixture`
+2. **Wait for Stability** - Always use `elementIsStable()` before making assertions on Lit components
+3. **Comprehensive Coverage** - All new components require unit, accessibility, and visual tests at minimum
+4. **Real User Events** - Use `emulateClick` and `untilEvent` for realistic event testing
+5. **Theme Testing** - Visual tests should cover both light and dark themes
 
 ## References
 

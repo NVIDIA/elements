@@ -2,7 +2,7 @@
 
 NVIDIA Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
 
-Syntax-highlighted code block components supporting many programming languages.
+Code block components with syntax highlighting for supported programming languages.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/code/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)

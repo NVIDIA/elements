@@ -35,22 +35,22 @@ When a canonical path exists, call it directly, for example `$HOME/.nve/bin/nve 
 
 ### CLI Commands
 
-- `nve`: About and help
-- `nve api.list [format]`: Get list of all available Elements (nve-) APIs and components.
-- `nve api.get [--format] <names..>`: Get documentation known components or attributes by name (nve-).
-- `nve api.validate [paths..]`: Check HTML and JSON files or supplied content with Elements lint rules.
-- `nve api.imports.get <template>`: Get esm imports for a given HTML template using Elements APIs (nve-).
-- `nve api.tokens.list [format] [query]`: Get available semantic CSS custom properties / design tokens for theming.
-- `nve api.icons.list [format]`: Get list of all available icon names for nve-icon and nve-icon-button.
-- `nve examples.list [format]`: Get list of available Elements (nve-) starter templates, patterns and examples.
-- `nve examples.get <id> [format]`: Get the full template of a known example or pattern by id.
-- `nve project.create <type> [cwd] [start]`: Create a new starter project.
-- `nve project.setup [cwd]`: Setup or update a project to use Elements.
-- `nve project.validate <type> [cwd]`: Check project configuration and dependencies.
-- `nve packages.list`: Get latest published versions of all Elements packages.
-- `nve packages.get <name>`: Get details for a specific Elements package.
-- `nve packages.changelogs.get <name> [format] [limit]`: Retrieve changelog details by package name.
-- `nve skills.install [--global]`: Install the Elements agent skill in the current project or for the current user.
+- `nve` - About and help
+- `nve api.list [format]` - Get list of all available Elements (nve-) APIs and components.
+- `nve api.get [--format] <names..>` - Get documentation known components or attributes by name (nve-).
+- `nve api.validate [paths..]` - Check HTML and JSON files or supplied content with Elements lint rules.
+- `nve api.imports.get <template>` - Get esm imports for a given HTML template using Elements APIs (nve-).
+- `nve api.tokens.list [format] [query]` - Get available semantic CSS custom properties / design tokens for theming.
+- `nve api.icons.list [format]` - Get list of all available icon names for nve-icon and nve-icon-button.
+- `nve examples.list [format]` - List available Elements (nve-) starter templates, patterns, and examples.
+- `nve examples.get <id> [format]` - Get the full template of a known example or pattern by id.
+- `nve project.create <type> [cwd] [start]` - Create a new starter project.
+- `nve project.setup [cwd]` - Setup or update a project to use Elements.
+- `nve project.validate <type> [cwd]` - Check project configuration and dependencies.
+- `nve packages.list` - Get latest published versions of all Elements packages.
+- `nve packages.get <name>` - Get details for a specific Elements package.
+- `nve packages.changelogs.get <name> [format] [limit]` - Retrieve changelog details by package name.
+- `nve skills.install [--global]` - Install the Elements agent skill in the current project or for the current user.
 
 Use `nve --help` to see the available commands.
 
@@ -125,7 +125,7 @@ Best practices and guidelines for creating UI with NVIDIA Elements.
 Read only the references that match the current task. Routine UI composition in a project that already has Elements configured does not require any of them; use the API and example lookup workflow above instead.
 
 - Read [Creating an Artifact](./references/artifact.md) before producing a standalone, directly viewable UI deliverable such as a single-file HTML prototype, Claude Artifact, Codex or GPT Sites page, temporary dashboard, demo, or visual exploration. It provides the required CDN-based HTML shell and artifact-specific constraints. Do not use it for a maintained application or package-based project.
-- Read [Integration](./references/integration.md) before creating an Elements starter project, adding Elements to an existing project, installing its packages, adding theme or style imports, configuring component registration, or running `nve project.create` or `nve project.setup`. It covers initial adoption and current setup, not conversion of legacy Elements or Maglev code.
+- Read [Integration](./references/integration.md) before creating an Elements starter project, adding Elements to an existing project, installing its packages, adding theme or style imports, configuring component registration, or running `nve project.create` or `nve project.setup`. It covers initial adoption and current setup. Follow the migration guidance for legacy Elements or Maglev code.
 - Read [Doctor](./references/doctor.md) when the user asks to check or repair an Elements installation, `nve project.validate` reports configuration problems, Elements CLI or MCP tools are unavailable or configured incorrectly, or the user needs an Elements MCP configuration for Cursor, Claude Code, or Codex. For a new installation, read Integration first; add Doctor only if validation, troubleshooting, or MCP configuration is part of the task.
 - Read [Migration](./references/migration.md) before upgrading legacy Elements or Maglev code, replacing deprecated or removed APIs, converting `@nve/*`, `@nve-labs/*`, or `@maglev/*` packages to `@nvidia-elements/*`, updating old tags, utility attributes, tokens, components, or icon names, or configuring migration linting. Use it instead of Integration when the main task is legacy conversion; also read Doctor only when the migrated project's setup or MCP configuration is failing.
 

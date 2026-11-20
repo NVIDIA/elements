@@ -69,7 +69,7 @@ export const Layer = {
 }
 
 /**
- * @summary Progressive filter chip with multi-select dropdown for filtering by many values simultaneously.
+ * @summary Progressive filter chip with multi-select dropdown for filtering by more than one value at a time.
  */
 export const Multiple = {
 render: () => html`

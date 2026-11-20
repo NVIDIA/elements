@@ -11,7 +11,7 @@ export default {
 };
 
 /**
- * @summary Basic radio button group for mutually exclusive single-choice selection from many options.
+ * @summary Basic radio button group for choosing exactly one option.
  */
 export const Default = {
   render: () => html`

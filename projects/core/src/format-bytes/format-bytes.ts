@@ -98,12 +98,12 @@ export class FormatBytes extends LitElement {
   @property({ type: String }) locale?: string;
 
   /**
-   * Pad fraction output to at least this many digits.
+   * Pads the fractional part to at least the given digit count.
    */
   @property({ type: Number, attribute: 'minimum-fraction-digits' }) minimumFractionDigits?: number;
 
   /**
-   * Round fraction output to at most this many digits. Defaults to two effective digits after the decimal point.
+   * Rounds the fractional part to at most the given digit count. Defaults to two effective digits after the decimal point.
    */
   @property({ type: Number, attribute: 'maximum-fraction-digits' }) maximumFractionDigits?: number;
 

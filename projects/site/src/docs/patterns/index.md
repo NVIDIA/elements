@@ -55,7 +55,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium emphasis">Browse</h2>
-          <p nve-text="body sm muted">Browse collections or lists of content</p>
+          <p nve-text="body sm muted">Explore collections or lists of content</p>
         </div>
       </div>
     </nve-card>
@@ -68,7 +68,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium emphasis">Chat</h2>
-          <p nve-text="body sm muted">Chat and AI conversation patterns</p>
+          <p nve-text="body sm muted">Messaging and AI conversation patterns</p>
         </div>
       </div>
     </nve-card>
@@ -133,7 +133,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium emphasis">Heatmap</h2>
-          <p nve-text="body sm muted">Heatmap patterns and implementation examples</p>
+          <p nve-text="body sm muted">Patterns and examples for visualizing data density</p>
         </div>
       </div>
     </nve-card>
@@ -172,7 +172,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium emphasis">Media</h2>
-          <p nve-text="body sm muted">Media content patterns and layouts</p>
+          <p nve-text="body sm muted">Layouts and controls for video and audio</p>
         </div>
       </div>
     </nve-card>
@@ -237,7 +237,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium emphasis">Search</h2>
-          <p nve-text="body sm muted">Search and progressive filtering</p>
+          <p nve-text="body sm muted">Find content and refine results with filters</p>
         </div>
       </div>
     </nve-card>

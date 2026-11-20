@@ -101,7 +101,7 @@ The classic theme stylesheet is a starting point for product-specific themes. Vi
 
 ## Theme Generator
 
-The demo below demonstrates how only a few tokens adjusted can drastically change the look and feel of the system.
+The demo shows how changing a subset of tokens can change the theme.
 
 <theme-generator-demo></theme-generator-demo>
 

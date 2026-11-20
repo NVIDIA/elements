@@ -14,7 +14,7 @@ This document outlines the API best practices and guidelines for creating highly
 
 ## What this document is not
 
-This document is not intended to define the best practices and API design of higher level UI components used at the micro-frontend/plugin/application level. While some of the recommendations and best practices outlined in this document are applicable, not all apply outside of the reusable UI element library use case.
+This document is not intended to define the best practices and API design of higher level UI components used at the micro-frontend/plugin/application level. Some recommendations may also apply to those higher-level components.
 
 ## Legend
 
@@ -102,5 +102,5 @@ Consistent element APIs provide consistent developer experience. The recommendat
 ```
 
 <nve-alert status="accent">
-  See an example of how many <a href="{{ELEMENTS_PAGES_BASE_URL}}/starters/">frameworks</a> can use a Web Component based design system.
+  See how the starter projects use a Web Component based design system across <a href="{{ELEMENTS_PAGES_BASE_URL}}/starters/">frameworks</a>.
 </nve-alert>

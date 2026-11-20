@@ -345,7 +345,7 @@ You can more safely expose elements that are part of the library's public API si
 
 ### Part Name Conventions
 
-When naming a part use the name of the custom element without the `nve-` prefix for API consistency. If a component has many internal part references of the same type use both the generalize element name as well as a semantic name. This allows generalized selectors for theming as well as precise selections when needed.
+When naming a part use the name of the custom element without the `nve-` prefix for API consistency. When internal parts share a type, use both the general element name and a semantic name. This allows generalized selectors for theming as well as precise selections when needed.
 
 ```html
 <nve-icon-button part="icon-button previous-icon-button" icon-name="placeholder"></nve-icon-button>

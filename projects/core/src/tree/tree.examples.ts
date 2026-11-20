@@ -148,7 +148,7 @@ export const Selectable = {
 };
 
 /**
- * @summary Multi-selection tree for choosing many items from hierarchical options, enabling bulk operations and comprehensive content management.
+ * @summary Multi-selection tree for choosing items from a hierarchy, enabling bulk operations and comprehensive content management.
  */
 export const SelectableMultiple = {
   render: () => html`

@@ -203,8 +203,7 @@ export const InvokerCommand = {
 };
 
 /**
- * @summary Custom events like many standard DOM events bubble. When listening
- * to larger DOM trees, check which element dispatched the source event.
+ * @summary Dialog `open` and `close` events bubble through the DOM. In a parent listener, check which element dispatched the event.
  */
 export const EventBubbling = {
   render: () => html`
@@ -227,8 +226,7 @@ export const EventBubbling = {
       const dialog = document.querySelector('#event-example-dialog');
       const eventLabel = document.querySelector('#event-example');
 
-      // Custom events like many standard DOM events bubble. By listening to
-      // larger DOM trees check which element dispatched the source event
+      // Check the event target to distinguish the dialog from a descendant.
       dialog.addEventListener('open', e => {
         eventLabel.innerText = 'open: ' + e.target.localName;
       });

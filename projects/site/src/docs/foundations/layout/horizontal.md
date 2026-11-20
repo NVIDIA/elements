@@ -44,13 +44,13 @@ Horizontal flexbox layouts distribute space along a single axis while maintainin
 
 Choose horizontal layout (`row`) for:
 
-- **Navigation bars**: Logo left, menu items right
-- **Button groups**: Actions that belong together
-- **Toolbars**: Icon buttons with consistent spacing
-- **Form controls**: Label and input on the same line
-- **Card layouts**: Side-by-side content cards
-- **Media objects**: Image with text alongside
-- **Split layouts**: Content on one side, actions on the other
+- **Navigation bars** - Logo left, menu items right
+- **Button groups** - Actions that belong together
+- **Toolbars** - Icon buttons with consistent spacing
+- **Form controls** - Label and input on the same line
+- **Card layouts** - Side-by-side content cards
+- **Media objects** - Image with text alongside
+- **Split layouts** - Content on one side, actions on the other
 
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
@@ -109,11 +109,11 @@ Horizontal layouts support alignment along both axes:
 
 - `align:center` - Center both horizontally and vertically
 - `align:stretch` - Stretch in both dimensions
-- You can combine many values: `align:vertical-center align:right`
+- You can combine values such as `align:vertical-center align:right`
 
 ### Special Options
 
-- `align:wrap` - Allow items to wrap to many lines when needed
+- `align:wrap` - Allow items to wrap to new lines when needed
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
@@ -195,11 +195,11 @@ Horizontal layouts support alignment along both axes:
 
 ## Best Practices
 
-1. **Use semantic HTML**: Apply layouts to meaningful elements (`<nav>`, `<header>`, `<section>`)
-2. **Let flexbox do the work**: Avoid fixed widths unless necessary
-3. **Consider mobile**: Horizontal layouts may need to stack vertically on small screens
-4. **Use gap for spacing**: More maintainable than margins on individual items
-5. **Combine alignments thoughtfully**: Test how items behave with different content lengths
+1. **Use semantic HTML** - Apply layouts to meaningful elements (`<nav>`, `<header>`, `<section>`)
+2. **Let flexbox do the work** - Avoid fixed widths unless necessary
+3. **Consider mobile** - Horizontal layouts may need to stack vertically on small screens
+4. **Use gap for spacing** - More maintainable than margins on individual items
+5. **Combine alignments thoughtfully** - Test how items behave with different content lengths
 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">

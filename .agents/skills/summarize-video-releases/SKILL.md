@@ -16,7 +16,7 @@ The scripts own everything that must be exact; you own the story and the markup.
 - `scripts/read-post.js` parses the post into a JSON outline and resolves the input and output paths.
 - You write a storyboard JSON: scene order, copy, durations, and `nve-*` demo markup. See [references/storyboard.md](references/storyboard.md).
 - `scripts/compose-video.js` turns the storyboard into one static HTML page from `assets/video-shell.html`. It computes all timing, escapes code, and rejects videos outside 24–60 seconds.
-- `scripts/render-video.js` serves the page with Elements CDN URLs mapped to this repository’s built packages, captures frames on a virtual clock, and encodes VP9 with the browser’s built-in WebCodecs encoder. `scripts/webm.js` writes the WebM file. The video workflow uses no external encoder: VP9 and its encoder are royalty-free and BSD-licensed. The renderer uses the pinned Sharp dependency to convert PNG screenshots to lossless WebP posters and stills. Output is deterministic: the same storyboard renders the same video.
+- `scripts/render-video.js` serves the page with Elements CDN URLs mapped to this repository’s built packages, captures frames on a virtual clock, and encodes VP9 with the browser’s built-in WebCodecs encoder. `scripts/webm.js` writes the WebM file. The video workflow uses the browser’s BSD-licensed encoder for royalty-free VP9. The renderer uses the pinned Sharp dependency to convert PNG screenshots to lossless WebP posters and stills. Output is deterministic: the same storyboard renders the same video.
 
 ## Prerequisites
 
@@ -60,7 +60,7 @@ Make a short plan before writing JSON:
 2. Add an additional feature slide from the remaining new capabilities. Consider a material bug fix only when there are too few features. Give it a distinct user benefit and a real demo or command result, using the existing `feature`, `terminal`, or `fix` scene types. Plan its post snapshot with the other featured scenes. Skip the extra slide when the post has no further material change to show; do not fill the time with minor fixes.
 3. Put the remaining user-facing changes in one `list` scene. Mention breaking changes there only if the post covers them, and keep the wording neutral.
 4. Assign each highlight a scene type and layout, and write its headline (six words or fewer) and optional opening line.
-5. Add up durations. Stay within 24–60 seconds, allowing the additional slide and completed demos time to read. Use the composer's scene defaults as starting points and allow at least 4.8 seconds for a feature. Extend scenes when their content needs it; keep shorter videos when the story is complete. Keep entrance animations and cue offsets at their normal speed.
+5. Add up durations. Stay within 24–60 seconds and give viewers time to read the additional slide and completed demos. Use the composer's scene defaults as starting points and allow at least 4.8 seconds for a feature. Extend scenes when their content needs it; keep shorter videos when the story is complete. Keep entrance animations and cue offsets at their normal speed.
 
 Apply the same feature-first selection to the published pictures: each snapshot comes from a selected scene, and bug fixes get pictures only when they qualify for a dedicated scene. Map each `feature`, `terminal`, or `fix` scene to the heading and paragraph that explain it in the post, and plan one snapshot for each. Keep the smaller updates in the video's `list` scene, typically titled “Also in …”, and in the post's Markdown text. Do not publish snapshots of list scenes, title cards, hooks, or end cards; their text adds no visual benefit to the post.
 
@@ -123,7 +123,7 @@ mise exec -- node .agents/skills/summarize-video-releases/scripts/render-video.j
   --html "$VIDEO_DIR/video.html" --month <month>
 ```
 
-Add `--channel chrome` when a scene includes a `<video>` element without a poster frame. Rendering takes a few minutes. The script writes `output.video` (VP9 in WebM, 1920×1080, 30 fps) and `output.poster` (lossless WebP, 1920×1080, named `<month>.webp`), then prints the duration, frame count, encoding mode, and file size. Use lossless WebP for every published poster and feature snapshot. A custom `--poster` path must end in `.webp`.
+Add `--channel chrome` when a scene includes a `<video>` element without a poster frame. Allow time for the browser to render the frames and encode the video. The script writes `output.video` (VP9 in WebM, 1920×1080, 30 fps) and `output.poster` (lossless WebP, 1920×1080, named `<month>.webp`), then prints the duration, frame count, encoding mode, and file size. Use lossless WebP for every published poster and feature snapshot. A custom `--poster` path must end in `.webp`.
 
 Confirm that:
 

@@ -70,17 +70,17 @@ Container queries respond to the **width of the parent container**, making them 
 
 **Pros:**
 
-- **Component-aware**: Elements respond to their actual available space
-- **Reusable**: Same component works in different contexts (sidebar, main content, etc.)
-- **Future-proof**: Modern CSS approach for intrinsic web design
-- **Broad support**: Works in all modern browsers as of summer 2025
-- **Flexible**: More granular breakpoints (xs: 160px to xxl: 960px)
+- **Component-aware** - Elements respond to their actual available space
+- **Reusable** - Same component works in different contexts (sidebar, main content, etc.)
+- **Future-proof** - Modern CSS approach for intrinsic web design
+- **Broad support** - Works in all modern browsers as of summer 2025
+- **Flexible** - More granular breakpoints (xs: 160px to xxl: 960px)
 
 **Cons:**
 
-- **Requires wrapper**: Parent element needs `container-type` (automatically applied)
-- **Newer technology**: Limited support in older browsers
-- **Learning curve**: Different mental model than traditional responsive design
+- **Requires wrapper** - Parent element needs `container-type` (automatically applied)
+- **Newer technology** - Limited support in older browsers
+- **Learning curve** - Different mental model than traditional responsive design
 
 [Learn more about the Container Query based system →](/docs/labs/layout/responsive/container/)
 
@@ -106,16 +106,16 @@ Viewport queries respond to the **browser window width**, providing traditional 
 
 **Pros:**
 
-- **Familiar**: Traditional responsive design approach developers know
-- **Global consistency**: All elements respond to the same viewport breakpoints
-- **Broad support**: Works in all modern browsers
-- **Page-level control**: Ideal for page layout decisions
+- **Familiar** - Traditional responsive design approach developers know
+- **Global consistency** - All elements respond to the same viewport breakpoints
+- **Broad support** - Works in all modern browsers
+- **Page-level control** - Ideal for page layout decisions
 
 **Cons:**
 
-- **Less flexible**: Elements can't adapt to their actual container size
-- **Context-blind**: Same breakpoint triggers regardless of element placement
-- **Fewer breakpoints**: Standard breakpoints (sm: 576px to xxl: 1440px)
+- **Less flexible** - Elements can't adapt to their actual container size
+- **Context-blind** - Same breakpoint triggers regardless of element placement
+- **Fewer breakpoints** - Standard breakpoints (sm: 576px to xxl: 1440px)
 
 [Learn more about Viewport Query based system →](/docs/labs/layout/responsive/viewport/)
 
@@ -188,12 +188,12 @@ You can use both systems together for the most flexibility:
 
 Both responsive layout systems support conditional styling across defined pixel width breakpoints. Available features include:
 
-- **Gap spacing**: Responsive spacing between elements
-- **Padding**: Responsive internal spacing
-- **Flex direction**: Switch between `row` and `column` layouts
+- **Gap spacing** - Responsive spacing between elements
+- **Padding** - Responsive internal spacing
+- **Flex direction** - Switch between `row` and `column` layouts
 - **Direction reversal**: `row-reverse` and `column-reverse` options
-- **Grid structure**: Varying grid column spans and layouts
-- **Visibility control**: Hide/show elements based on breakpoints
+- **Grid structure** - Varying grid column spans and layouts
+- **Visibility control** - Hide/show elements based on breakpoints
 
 ### Important Note on Visibility Control
 
@@ -217,7 +217,7 @@ Hiding and showing elements uses the `nve-display` attribute instead of `nve-lay
 
 The responsive system uses two distinct attributes:
 
-- **`nve-layout`**: Controls layout properties that affect how the parent arranges children (gap, padding, flex direction, grid structure)
-- **`nve-display`**: Controls visibility of individual elements (hide/show)
+- **`nve-layout`** - Controls layout properties that affect how the parent arranges children (gap, padding, flex direction, grid structure)
+- **`nve-display`** - Controls visibility of individual elements (hide/show)
 
 This separation exists because hiding an element only affects its own display, not the layout of its children. By using `nve-display` for visibility control, the system maintains a clear distinction between layout utilities that affect child arrangement and display utilities that affect element visibility.
