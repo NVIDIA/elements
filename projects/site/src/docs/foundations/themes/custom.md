@@ -103,6 +103,6 @@ The classic theme stylesheet is a starting point for product-specific themes. Vi
 
 The demo shows how changing a subset of tokens can change the theme.
 
-<theme-generator-demo></theme-generator-demo>
+<nvd-theme-generator></nvd-theme-generator>
 
-<script type="module" src="/_internal/stories/theme/theme-generator.js"></script>
+<script type="module" src="/docs/foundations/themes/custom.ts"></script>

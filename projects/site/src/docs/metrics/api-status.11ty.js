@@ -74,6 +74,7 @@ export function render() {
         .map(
           ([name, column]) => /* html */ `<nve-grid-column
         id="${name}"
+        title="${column.description}"
         width="${column.width ? column.width : '160px'}">
         ${name
           .replace(/([A-Z]+)/g, ' $1')
@@ -112,30 +113,27 @@ export function render() {
       <p nve-text="body muted sm">Report Created on ${reportDate}</p>
     </nve-grid-footer>
   </nve-grid>
-  ${Object.entries(columns)
-    .map(([name, column]) => /* html */ `<nve-tooltip id="tooltip-${name}" hidden>${column.tooltip}</nve-tooltip>`)
-    .join('')}
 </div >
     `,
     'md'
   );
 }
 
-/** @type {Record<string, {width?: string, tooltip: string}>} */
+/** @type {Record<string, {width?: string, description: string}>} */
 const columns = {
-  element: { width: '200px', tooltip: 'Custom Element API' },
-  status: { width: '130px', tooltip: 'Element Stability Status' },
-  coverage: { width: '130px', tooltip: 'Unit Test Coverage' },
-  bundle: { width: '130px', tooltip: 'Standalone total JavaScript bundle size in kb' },
-  performance: { width: '130px', tooltip: 'Chrome Lighthouse Performance Score' },
-  accessibility: { width: '130px', tooltip: 'Chrome Lighthouse Accessibility Score' },
-  bestPractices: { width: '130px', tooltip: 'Chrome Lighthouse Best Practices Score' },
-  ssr: { width: '130px', tooltip: 'Support Basic Server Side Rendering (SSR)' },
-  axe: { width: '170px', tooltip: 'Accessibility status from Axe Core API' },
-  spec: { tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '170px' },
-  released: { tooltip: 'Version Element was first released', width: '170px' },
-  themes: { width: '170px', tooltip: 'Supports base light and dark theme' },
-  responsive: { tooltip: 'Provides basic minimal resposive layouts' }
+  element: { width: '200px', description: 'Custom Element API' },
+  status: { width: '130px', description: 'Element Stability Status' },
+  coverage: { width: '130px', description: 'Unit Test Coverage' },
+  bundle: { width: '130px', description: 'Standalone total JavaScript bundle size in kb' },
+  performance: { width: '130px', description: 'Chrome Lighthouse Performance Score' },
+  accessibility: { width: '130px', description: 'Chrome Lighthouse Accessibility Score' },
+  bestPractices: { width: '130px', description: 'Chrome Lighthouse Best Practices Score' },
+  ssr: { width: '130px', description: 'Support Basic Server Side Rendering (SSR)' },
+  axe: { width: '170px', description: 'Accessibility status from Axe Core API' },
+  spec: { width: '170px', description: 'Behavior category from W3C and WAI-ARIA Specification' },
+  released: { width: '170px', description: 'Version Element was first released' },
+  themes: { width: '170px', description: 'Supports base light and dark theme' },
+  responsive: { description: 'Provides basic minimal responsive layouts' }
 };
 
 /** @param {string} category */

@@ -1,16 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import { state } from 'lit/decorators/state.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-
-/* eslint-disable no-inline-css/no-restricted-imports */
-import layout from '@nvidia-elements/styles/layout.css?inline';
-import typography from '@nvidia-elements/styles/typography.css?inline';
 
 import type { IconName } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/alert/define.js';
@@ -77,27 +73,70 @@ const FILTER_OPTIONS = [
 
 @customElement('nvd-search')
 export class DocsSearch extends LitElement {
-  static styles = [
-    unsafeCSS(layout),
-    unsafeCSS(typography),
-    css`
+  static styles = css`
+    .search,
+    .result-text {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .search,
+    .result {
+      inline-size: 100%;
+      gap: var(--nve-ref-space-sm);
+    }
+
     nve-search:has(input:placeholder-shown) nve-icon-button {
       display: none;
     }
 
-    nve-tag, nve-tag nve-dot {
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      place-items: center;
+      place-content: center;
+      gap: var(--nve-ref-space-xs);
+    }
+
+    nve-tag,
+    nve-tag nve-dot {
       cursor: pointer;
     }
 
-    a {
+    .result {
+      display: flex;
+      align-items: start;
       text-decoration: none;
 
       &:hover {
         text-decoration: underline;
       }
     }
-    `
-  ];
+
+    .result-text {
+      gap: var(--nve-ref-space-xs);
+    }
+
+    .result-title,
+    .result-subtitle {
+      margin: 0;
+      font-family: var(--nve-ref-font-family);
+      font-size: var(--nve-ref-font-size-100);
+      font-weight: var(--nve-ref-font-weight-regular);
+      line-height: var(--nve-ref-font-line-height-moderate);
+      text-box: trim-both cap alphabetic;
+      white-space: normal;
+    }
+
+    .result-title {
+      color: var(--nve-sys-text-color);
+    }
+
+    .result-subtitle {
+      color: var(--nve-sys-text-muted-color);
+    }
+  `;
 
   /** Max number of search results to display */
   static readonly MAX_RESULTS = 20;
@@ -270,7 +309,7 @@ export class DocsSearch extends LitElement {
 
   render() {
     return html`
-    <div nve-layout="column gap:sm">
+    <div class="search">
       <nve-search>
         <input id="search-input" type="search" aria-label="search" placeholder="search" @input=${this.#handleChange} @focus=${this.#handleFocus} />
         ${
@@ -286,7 +325,7 @@ export class DocsSearch extends LitElement {
       ${
         this.results.length > 0
           ? html`
-      <div role="group" aria-label="Filter by section" nve-layout="row gap:xs align:center align:wrap">
+      <div class="filters" role="group" aria-label="Filter by section">
         ${FILTER_OPTIONS.map(({ value, label, countKey }) => {
           const active = value === this.activeFilter;
           return html`
@@ -298,11 +337,11 @@ export class DocsSearch extends LitElement {
           : nothing
       }
       ${this.#filteredResults.map(
-        result => html`<a href="${this.baseUrl}${result.url}" nve-layout="row gap:sm">
+        result => html`<a class="result" href="${this.baseUrl}${result.url}">
         <nve-icon name="${result.icon}" size="md" style="${result.style}"></nve-icon>
-        <div nve-layout="column gap:xs">
-          <p nve-text="body sm">${result.title}</p>
-          <p nve-text="body muted sm">${result.subtitle}</p>
+        <div class="result-text">
+          <p class="result-title">${result.title}</p>
+          <p class="result-subtitle">${result.subtitle}</p>
         </div>
       </a>`
       )}

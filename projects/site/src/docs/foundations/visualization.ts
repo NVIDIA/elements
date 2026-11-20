@@ -1,16 +1,12 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { getThemeTokens } from '@nvidia-elements/core';
 import Chart from 'chart.js/auto';
 import type { ChartTypeRegistry } from 'chart.js';
-
-/* eslint-disable no-inline-css/no-restricted-imports */
-import layout from '@nvidia-elements/styles/layout.css?inline';
-import typography from '@nvidia-elements/styles/typography.css?inline';
 
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/select/define.js';
@@ -26,9 +22,46 @@ interface ChartInstance {
   destroy: () => void;
 }
 
-@customElement('visualization-demo')
+@customElement('nvd-visualization-demo')
 export class VisualizationDemo extends LitElement {
-  static styles = [unsafeCSS(layout), unsafeCSS(typography)];
+  static styles = css`
+    .chart-title,
+    .chart-description {
+      margin: 0;
+      font-family: var(--nve-ref-font-family);
+      line-height: var(--nve-ref-font-line-height-moderate);
+      text-box: trim-both cap alphabetic;
+    }
+
+    .chart-title {
+      color: var(--nve-sys-text-color);
+      font-size: var(--nve-ref-font-size-300);
+      font-weight: var(--nve-ref-font-weight-medium);
+    }
+
+    .chart-description {
+      color: var(--nve-sys-text-muted-color);
+      font-size: var(--nve-ref-font-size-100);
+      font-weight: var(--nve-ref-font-weight-regular);
+    }
+
+    .chart-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--nve-ref-space-md);
+      inline-size: 100%;
+    }
+
+    .chart {
+      block-size: 400px;
+    }
+
+    canvas {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  `;
 
   @state() private chartType = 'line';
   #chart: ChartInstance | null = null;
@@ -184,11 +217,11 @@ export class VisualizationDemo extends LitElement {
     return html`
       <nve-card>
         <nve-card-header>
-          <h2 nve-text="heading sm medium">Design Tokens + HTML Canvas</h2>
-          <h3 nve-text="body sm muted">Demo of ChartJS consuming design tokens</h3>
+          <h2 class="chart-title">Design Tokens + HTML Canvas</h2>
+          <h3 class="chart-description">Demo of ChartJS consuming design tokens</h3>
         </nve-card-header>
         <nve-card-content>
-          <div nve-layout="column gap:md align:stretch">
+          <div class="chart-content">
             <nve-select>
               <select id="chart-type" @change=${this.#handleChartTypeChange} .value=${this.chartType} aria-label="chart type">
                 <option value="line">line</option>
@@ -199,8 +232,8 @@ export class VisualizationDemo extends LitElement {
                 <option value="radar">radar</option>
               </select>
             </nve-select>
-            <div style="width: 100%; height: 400px;">
-              <canvas style="display: block; width: 100%; height: 100%;"></canvas>
+            <div class="chart">
+              <canvas></canvas>
             </div>
           </div>
         </nve-card-content>
