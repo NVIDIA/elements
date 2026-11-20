@@ -24,8 +24,20 @@ describe(CodeBlock.metadata.tag, () => {
     expect(result).toContain('slot="footer"');
     expect(result).toContain('<span slot="prefix">Shell</span>');
     expect(result).toContain('<button slot="suffix">Run</button>');
-    expect(result).toContain('class="hljs"');
+    expect(result).toContain('class="source"');
     expect(result).toContain('<pre><code nve-text="code">echo hello</code></pre>');
     expect(result).toContain('<button slot="actions">Copy code</button>');
+  });
+
+  it('should render escaped source in separate text chunks', async () => {
+    const commentStart = `/* ${'a'.repeat(4_096)} `;
+    const tail = 'comment ends here */\nconst tail = 42;';
+    const source = `${commentStart}<tag>&\n${tail}`;
+    const result = await ssrRunner.render(html`<nve-code-block .code=${source}></nve-code-block>`);
+
+    const renderedCode = result.match(/<code\b[^>]*>([\s\S]*?)<\/code>/)?.[1];
+    const chunks = renderedCode?.split(/<!--[\s\S]*?-->/).filter(Boolean);
+    expect(chunks).toEqual([`${commentStart}&lt;tag&gt;&amp;\n`, tail]);
+    expect(result).not.toContain('data-line=');
   });
 });

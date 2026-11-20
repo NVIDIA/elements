@@ -3,12 +3,14 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ProjectElement } from '@internals/metadata';
-import { getElementImports, getAvailableElementTags, isDebug, wrapText } from './utils.js';
+import { getAvailableElementTags, getElementImports, isDebug, wrapText } from './utils.js';
 
 describe('getElementImports', () => {
   const elements: ProjectElement[] = [
     { name: 'nve-button', manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } } },
     { name: 'nve-badge', manifest: { metadata: { entrypoint: '@nvidia-elements/core/badge' } } },
+    { name: 'nve-code-block', manifest: { metadata: { entrypoint: '@nvidia-elements/code/code-block' } } },
+    { name: 'nve-code-textarea', manifest: { metadata: { entrypoint: '@nvidia-elements/code/code-textarea' } } },
     { name: 'nve-monaco-input', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/input' } } },
     {
       name: 'nve-deprecated',
@@ -36,16 +38,38 @@ describe('getElementImports', () => {
     expect(imports[0]).toBe(`import '@nvidia-elements/monaco/input/define.js';`);
   });
 
-  it.each(['nve-code-block', 'nve-codeblock'])('should get imports for %s', tag => {
+  it.each(['nve-code-block', 'nve-codeblock'])('should get the definition for %s without metadata', tag => {
     const html = `<${tag}></${tag}>`;
-    const imports = getElementImports(html, elements);
-    expect(imports[0]).toBe(`import '@nvidia-elements/code/code-block/languages/html.js';`);
-    expect(imports[1]).toBe(`import '@nvidia-elements/code/code-block/languages/css.js';`);
-    expect(imports[2]).toBe(`import '@nvidia-elements/code/code-block/languages/json.js';`);
-    expect(imports[3]).toBe(`import '@nvidia-elements/code/code-block/languages/javascript.js';`);
-    expect(imports[4]).toBe(`import '@nvidia-elements/code/code-block/languages/typescript.js';`);
-    expect(imports[5]).toBe(`import '@nvidia-elements/code/code-block/define.js';`);
+    expect(getElementImports(html, [])).toEqual([`import '@nvidia-elements/code/code-block/define.js';`]);
   });
+
+  it('should import each requested supported language once before defining code elements', () => {
+    const html = `
+      <nve-code-block LANGUAGE="MARKDOWN"></nve-code-block>
+      <nve-code-textarea language="markdown"></nve-code-textarea>
+      <nve-code-textarea language="tsx"></nve-code-textarea>
+      <nve-code-block language="unsupported"></nve-code-block>
+    `;
+
+    expect(getElementImports(html, elements)).toEqual([
+      `import '@nvidia-elements/code/languages/markdown.js';`,
+      `import '@nvidia-elements/code/languages/tsx.js';`,
+      `import '@nvidia-elements/code/code-block/define.js';`,
+      `import '@nvidia-elements/code/code-textarea/define.js';`
+    ]);
+  });
+
+  it.each(['title="a > b"', `title="example language='css'"`])(
+    'should read the language after an attribute with %s',
+    attribute => {
+      const html = `<nve-code-block ${attribute} language="json"></nve-code-block>`;
+
+      expect(getElementImports(html, elements)).toEqual([
+        `import '@nvidia-elements/code/languages/json.js';`,
+        `import '@nvidia-elements/code/code-block/define.js';`
+      ]);
+    }
+  );
 
   it('should get lazy element imports', () => {
     const html = '<nve-button></nve-button>';

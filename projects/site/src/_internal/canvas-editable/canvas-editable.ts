@@ -14,7 +14,7 @@ import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
 import '@nvidia-elements/monaco/input/define.js';
-import '@nvidia-elements/code/code-block/languages/html.js';
+import '@nvidia-elements/code/languages/html.js';
 import '@nvidia-elements/code/code-block/define.js';
 import { PlaygroundService } from '@internals/tools/playground';
 import { PackagesService } from '@internals/tools/packages';

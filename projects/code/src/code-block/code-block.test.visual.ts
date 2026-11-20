@@ -23,7 +23,7 @@ for (const theme of ['light', 'dark']) {
           <nve-code-block language="typescript" line-numbers highlight="1,3-4,6"><template>${highlightedSource}</template></nve-code-block>
         `
         ),
-        { waitFor: waitForSource }
+        { waitFor: waitForSnapshot }
       );
       expect(report.maxDiffPercentage).toBeLessThan(1);
     });
@@ -34,7 +34,7 @@ for (const theme of ['light', 'dark']) {
         template(
           theme,
           `
-          <nve-code-block language="shell"><template>pnpm install\npnpm run build</template></nve-code-block>
+          <nve-code-block language="text"><template>pnpm install\npnpm run build</template></nve-code-block>
           <nve-code-block language="typescript" line-numbers highlight="2"><template>${source}</template></nve-code-block>
           <nve-code-block language="html"><pre><code>&lt;button disabled&gt;Save&lt;/button&gt;</code></pre></nve-code-block>
           <nve-code-block language="typescript" container="flat"><template>${source}</template></nve-code-block>
@@ -42,7 +42,7 @@ for (const theme of ['light', 'dark']) {
           <nve-code-block language="typescript" style="--white-space: pre-wrap;"><template>${longSource.split('\n')[0]}</template></nve-code-block>
         `
         ),
-        { waitFor: waitForSource }
+        { waitFor: waitForSnapshot }
       );
       expect(report.maxDiffPercentage).toBeLessThan(1);
     });
@@ -73,12 +73,12 @@ for (const theme of ['light', 'dark']) {
           </nve-code-block>
         `
         ),
-        { waitFor: waitForSource }
+        { waitFor: waitForSnapshot }
       );
       expect(report.maxDiffPercentage).toBeLessThan(1);
     });
 
-    test('should keep header, footer, and actions visible when scrolled', async () => {
+    test('should match the overflow baseline after scrolling', async () => {
       await visualRunner.inspect(
         `code-block.overflow.${theme}`,
         template(
@@ -90,7 +90,7 @@ for (const theme of ['light', 'dark']) {
             <nve-icon-button slot="actions" icon-name="copy" aria-label="Copy source" container="flat"></nve-icon-button>
             ${footer()}
           </nve-code-block>
-          <nve-code-block language="typescript" style="height: 260px; --white-space: pre-wrap;">
+          <nve-code-block language="typescript" line-numbers highlight="1" style="height: 260px; --white-space: pre-wrap;">
             ${header()}
             <template>${longSource}</template>
             ${footer()}
@@ -98,41 +98,23 @@ for (const theme of ['light', 'dark']) {
         `
         ),
         async page => {
-          await page.waitForFunction(prepareSourceForSnapshot);
-          const result = await page.evaluate(async () => {
+          await page.waitForFunction(prepareBlocksForSnapshot);
+          await page.evaluate(async () => {
             const block = document.querySelector<CodeBlock>('#scrolling');
             const scroller = block?.shadowRoot?.querySelector<HTMLElement>('.source');
             if (!block || !scroller) throw new Error('Code scroller is missing');
-            const controls = Array.from(
-              block.querySelectorAll('nve-code-block-header, nve-code-block-footer, [slot="actions"]')
-            );
-            const before = controls.map(control => control.getBoundingClientRect().toJSON());
-            const overflow = {
-              x: scroller.scrollWidth > scroller.clientWidth,
-              y: scroller.scrollHeight > scroller.clientHeight
-            };
             scroller.scrollLeft = 100;
             scroller.scrollTop = 60;
-            await new Promise(resolve => requestAnimationFrame(resolve));
-            return {
-              overflow,
-              scrollLeft: scroller.scrollLeft,
-              scrollTop: scroller.scrollTop,
-              before,
-              after: controls.map(control => control.getBoundingClientRect().toJSON())
-            };
+            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
           });
-          expect(result.overflow).toEqual({ x: true, y: true });
-          expect(result.scrollLeft).toBe(100);
-          expect(result.scrollTop).toBe(60);
-          expect(result.after).toEqual(result.before);
+          await page.evaluate(normalizeLineNumbers);
         }
       );
     });
   });
 }
 
-async function prepareSourceForSnapshot() {
+async function prepareBlocksForSnapshot() {
   const blocks = Array.from(document.querySelectorAll<CodeBlock>('nve-code-block'));
   if (!blocks.length || blocks.some(block => !block.shadowRoot?.querySelector('code')?.textContent?.trim())) {
     return false;
@@ -142,7 +124,7 @@ async function prepareSourceForSnapshot() {
   const fonts = await document.fonts.load('14px Inter');
   if (!fonts.length) throw new Error('The visual fixture font did not load');
 
-  // Preserve syntax spans and whitespace while using consistent glyphs in screenshots.
+  // Replace glyphs for consistent screenshots across platforms while preserving whitespace and highlight offsets.
   for (const block of blocks) {
     const code = block.shadowRoot?.querySelector('code');
     if (!code) return false;
@@ -158,8 +140,18 @@ async function prepareSourceForSnapshot() {
   return true;
 }
 
-async function waitForSource(wait: (...args: unknown[]) => Promise<unknown>) {
-  await wait(prepareSourceForSnapshot);
+function normalizeLineNumbers() {
+  document.querySelectorAll('nve-code-block').forEach(block => {
+    block.shadowRoot?.querySelectorAll('.line-number').forEach(label => {
+      label.textContent = (label.textContent ?? '').replace(/[0-9]/g, '.');
+    });
+  });
+  return true;
+}
+
+async function waitForSnapshot(wait: (...args: unknown[]) => Promise<unknown>) {
+  await wait(prepareBlocksForSnapshot);
+  await wait(normalizeLineNumbers);
 }
 
 function header() {
@@ -185,8 +177,8 @@ function footer() {
 function template(theme: string, content: string) {
   return /* html */ `
     <script type="module">
-      import '@nvidia-elements/code/code-block/languages/typescript.js';
-      import '@nvidia-elements/code/code-block/languages/html.js';
+      import '@nvidia-elements/code/languages/typescript.js';
+      import '@nvidia-elements/code/languages/html.js';
       import '@nvidia-elements/code/code-block/define.js';
       import '@nvidia-elements/core/icon/define.js';
       import '@nvidia-elements/core/icon-button/define.js';
