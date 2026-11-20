@@ -633,6 +633,58 @@ test('escapes type backslashes before Markdown table separators', () => {
   );
 });
 
+test('renders multiline unions on a single Markdown table row', () => {
+  const markdown = elementMetadataToMarkdown({
+    tagName: 'nve-example',
+    metadata: { entrypoint: '@nvidia-elements/example' },
+    members: [
+      {
+        kind: 'field',
+        name: 'status',
+        attribute: 'status',
+        type: { text: "\n  | 'ready'\n  | 'busy'\n  | undefined" }
+      }
+    ],
+    attributes: [{ name: 'status', fieldName: 'status', type: { text: "'ready'\n  | 'busy'" } }]
+  });
+
+  assert.ok(
+    markdown.includes("| status | property: `'ready' \\| 'busy' \\| undefined`; attribute: `'ready' \\| 'busy'` |  |")
+  );
+});
+
+test('removes line comments from multiline unions without changing string literals', () => {
+  const markdown = elementMetadataToMarkdown({
+    tagName: 'nve-example',
+    metadata: { entrypoint: '@nvidia-elements/example' },
+    members: [
+      {
+        kind: 'field',
+        name: 'endpoint',
+        type: { text: '"https://example.com" // Default endpoint\n  | undefined' }
+      }
+    ]
+  });
+
+  assert.ok(markdown.includes('| endpoint | `"https://example.com" \\| undefined` |  |'));
+});
+
+test('preserves member separators in multiline object types on a Markdown table row', () => {
+  const markdown = elementMetadataToMarkdown({
+    tagName: 'nve-example',
+    metadata: { entrypoint: '@nvidia-elements/example' },
+    members: [
+      {
+        kind: 'field',
+        name: 'options',
+        type: { text: '{\n  label: string\n  detail: {\n    count: number\n    visible: boolean\n  }\n}' }
+      }
+    ]
+  });
+
+  assert.ok(markdown.includes('| options | `{ label: string; detail: { count: number; visible: boolean; }; }` |  |'));
+});
+
 test('includes only public members in generated Markdown', () => {
   const markdown = elementMetadataToMarkdown({
     tagName: 'nve-example',
@@ -787,6 +839,27 @@ test('renders fields and method overloads in separate Markdown sections', () => 
   );
   assert.equal((methods.match(/\| scrollTo \|/g) ?? []).length, 1);
   assert.doesNotMatch(methods, /targetScale/);
+});
+
+test('preserves separators in multiline method parameter and return types', () => {
+  const markdown = elementMetadataToMarkdown({
+    tagName: 'nve-example',
+    metadata: { entrypoint: '@nvidia-elements/example' },
+    members: [
+      {
+        kind: 'method',
+        name: 'configure',
+        parameters: [{ name: 'options', type: { text: '{\n  label: string\n  visible: boolean\n}' } }],
+        return: { type: { text: '{\n  applied: boolean\n  count: number\n}' } }
+      }
+    ]
+  });
+
+  assert.ok(
+    markdown.includes(
+      '| configure | `configure(options: { label: string; visible: boolean; }): { applied: boolean; count: number; }` |  |'
+    )
+  );
 });
 
 test('sorts generated Markdown API rows by name', () => {
