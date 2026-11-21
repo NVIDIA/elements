@@ -19,7 +19,7 @@ vi.mock('../../index.11tydata.js', () => ({
             {
               kind: 'field',
               name: 'property',
-              description: 'Property description.',
+              description: 'Property description.\nMore details.',
               type: { values: [{ value: 'value' }] }
             }
           ]
@@ -43,6 +43,12 @@ describe('apiShortcode', () => {
 
   it('should still render all properties when no name is requested', async () => {
     expect(await apiShortcode('nve-viewport', 'property')).toContain('Automatically fit content.');
+  });
+
+  it('should preserve spacing between lines in a property description', async () => {
+    expect(await apiShortcode('nve-test-component', 'property', 'property')).toContain(
+      'Property description. More details.'
+    );
   });
 
   it('should return no content for a requested value without a description', async () => {

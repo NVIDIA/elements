@@ -1,21 +1,46 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html, LitElement } from 'lit';
-import type { PropertyValues } from 'lit';
+import { html, LitElement, nothing, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { shiftLeft } from '@nvidia-elements/core/internal';
 import { useStyles } from '@nvidia-elements/foundations/internal/styles';
+
+import palette from '../internal/highlight/highlights.css?inline';
+import {
+  bracketRanges,
+  getBracketPairColoring,
+  parseCode,
+  type BracketPairColoring
+} from '../internal/highlight/syntax.js';
 import styles from './code-block.css?inline';
+import lines from './line-decorations.css?inline';
+import { decorateLines } from './line-decorations.js';
+import { registerHighlights } from './source-highlights.js';
 
-import hljs from 'highlight.js/lib/core';
-import shell from 'highlight.js/lib/languages/shell';
+const supportsHighlights = () => typeof CSS !== 'undefined' && !!CSS.highlights && typeof Highlight !== 'undefined';
+const textChunkLength = 4_096;
 
-hljs.registerLanguage('shell', shell);
+function getSourceText(source: string) {
+  const text = source.replace(/^(?:[ \t]*\r?\n)+/, '');
+  const indent = text.match(/^[ \t]+/)?.[0].length ?? 0;
+  return (indent ? text.replace(/^[ \t]+/gm, spaces => spaces.slice(indent)) : text).trim();
+}
+
+function getSourceChunks(text: string): string | string[] {
+  if (text.length <= textChunkLength) return text;
+  // Split large source at newline boundaries to reduce Chromium's highlight processing cost.
+  const chunks: string[] = [];
+  let start = 0;
+  while (start < text.length) {
+    const newline = text.indexOf('\n', start + textChunkLength);
+    const end = newline < 0 ? text.length : newline + 1;
+    chunks.push(text.slice(start, end));
+    start = end;
+  }
+  return chunks.length > 1 ? chunks : text;
+}
 
 /**
  * @element nve-code-block
@@ -35,6 +60,7 @@ hljs.registerLanguage('shell', shell);
  * @cssprop --white-space
  * @aria https://www.w3.org/WAI/ARIA/apg/practices/structural-roles/
  * @beta
+ * @attribute {'' | 'shared' | 'independent'} bracket-pair-coloring - A bare attribute selects shared depth. Omitting the attribute turns coloring off.
  */
 export class CodeBlock extends LitElement implements ContainerElement {
   static readonly metadata = {
@@ -48,10 +74,10 @@ export class CodeBlock extends LitElement implements ContainerElement {
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   /**
-   * Programming language that processes the codeblock.
+   * Programming language for syntax highlighting.
+   * The deprecated values `bash`, `shell`, and `toml` render as plain text. Use `text` instead.
    */
   @property({ type: String }) language:
-    | 'bash'
     | 'css'
     | 'go'
     | 'html'
@@ -59,11 +85,14 @@ export class CodeBlock extends LitElement implements ContainerElement {
     | 'json'
     | 'markdown'
     | 'python'
-    | 'shell'
-    | 'toml'
+    | 'text'
+    | 'tsx'
     | 'typescript'
     | 'xml'
-    | 'yaml' = 'shell';
+    | 'yaml'
+    | 'bash'
+    | 'shell'
+    | 'toml' = 'text';
 
   /**
    * Text code to be process into a codeblock.
@@ -75,6 +104,10 @@ export class CodeBlock extends LitElement implements ContainerElement {
    */
   @property({ attribute: 'line-numbers', type: Boolean }) lineNumbers?: boolean;
 
+  /** Colors bracket pairs by shared or per-type depth. Set to null to disable coloring. */
+  @property({ attribute: 'bracket-pair-coloring', converter: getBracketPairColoring })
+  bracketPairColoring: BracketPairColoring = null;
+
   /**
    * Adds styling to highlight the provided code lines.
    * Use comma-separated line numbers such as `1,5,7`.
@@ -83,112 +116,139 @@ export class CodeBlock extends LitElement implements ContainerElement {
    */
   @property({ type: String }) highlight?: string;
 
-  @state() private formattedCode?: string;
+  static styles = useStyles([styles, palette, lines]);
 
-  static styles = useStyles([styles]);
+  #text = '';
+  #slottedText = '';
+  #language?: CodeBlock['language'];
+  #removeHighlights?: () => void;
+  #lineCount = 0;
+  #observer?: ResizeObserver;
+  #lineFrame = 0;
+  #refreshLines = () => {
+    if (!this.isConnected || this.#lineFrame) return;
+    this.#lineFrame = requestAnimationFrame(() => {
+      this.#lineFrame = 0;
+      if (this.isConnected) this.#decorate();
+    });
+  };
 
-  get #source(): string | undefined {
-    const textContent = this.shadowRoot
-      ?.querySelector<HTMLSlotElement>('slot:not([name])')
-      ?.assignedNodes()
-      .reduce((p: string[], n) => {
-        let template = '';
-        if (n instanceof HTMLTemplateElement) {
-          template = n.content.textContent ?? '';
-        } else if (n instanceof HTMLPreElement) {
-          const code = n.querySelector('code');
-          template = code ? (code.textContent ?? '') : n.innerHTML;
-        } else if (n instanceof HTMLElement) {
-          template = n.innerHTML;
-        } else {
-          template = n.textContent ?? '';
-        }
-
-        return [...p, template];
-      }, [] as string[])
-      .join('');
-
-    return shiftLeft(this.code ?? (textContent as string));
-  }
-
-  render() {
-    return html`
-      <div internal-host role="none">
-        <slot name="header"></slot>
-        <div class="body">
-          <div class="source">
-        <pre class="hljs" role="none"><code class=${this.language ?? ''}><slot @slotchange=${this.#updateCode} hidden></slot>${unsafeHTML(this.formattedCode)}</code></pre>
-          </div>
-          <slot name="actions"></slot>
-        </div>
-        <slot name="footer"></slot>
-      </div>
-    `;
-  }
-
-  update(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('code')) {
-      this.#updateCode();
-    }
-
-    super.update(changedProperties);
-  }
-
-  #updateCode(): void {
-    const code = this.#source?.trim();
-    if (!code) {
-      return;
-    }
-
-    // apply highlightjs
-    this.formattedCode = hljs.highlight(code, { language: this.language }).value;
-
-    // apply line-numbers
-    if (this.lineNumbers) {
-      const lines = this.formattedCode.split('\n').map((line, index) => {
-        return `<span class="hljs-linenumber">${index + 1}</span>${line}`;
-      });
-      this.formattedCode = lines.join('\n');
-    }
-
-    // apply line highlights
-    if (this.highlight) {
-      const linesToHighlight = this.#getLinesToHighlight();
-      const lines = this.formattedCode.split('\n').map((line, index) => {
-        let span = line;
-        if (linesToHighlight.includes(index + 1)) {
-          let wrapped = line;
-          // fix for highlightjs multi-line comments
-          if (line.includes('hljs-comment') && !line.endsWith('</span>')) {
-            wrapped = `${line}</span>`;
-          }
-          span = `<span class="hljs-highlight">${wrapped}</span>`;
-        }
-        return span;
-      });
-      this.formattedCode = lines.join('\n');
-    }
-
+  connectedCallback() {
+    super.connectedCallback();
     this.requestUpdate();
   }
 
-  #getLinesToHighlight() {
-    const range: number[] = [];
-    const lines = this.highlight!.split(',');
-    for (const line of lines) {
-      const [startStr, endStr] = line.split('-');
-      const start = parseInt(startStr!);
-      let end = parseInt(endStr!);
-      if (!end) {
-        end = start;
-      }
+  disconnectedCallback() {
+    this.#removeHighlights?.();
+    this.#removeHighlights = undefined;
+    this.#stopLines();
+    super.disconnectedCallback();
+  }
 
-      for (let i = start; i <= end; i++) {
-        range.push(i);
-      }
+  #getSlottedText() {
+    const source =
+      this.shadowRoot
+        ?.querySelector<HTMLSlotElement>('slot:not([name])')
+        ?.assignedNodes()
+        .map(node => {
+          if (node instanceof HTMLTemplateElement) return node.content.textContent ?? '';
+          if (node instanceof HTMLPreElement) return node.querySelector('code')?.textContent ?? node.innerHTML;
+          if (node instanceof HTMLElement) return node.innerHTML;
+          return node.textContent ?? '';
+        })
+        .join('') ?? '';
+    return getSourceText(source);
+  }
+
+  #readSlot = () => {
+    if (!this.hasUpdated) return;
+    const text = this.#getSlottedText();
+    if (text === this.#slottedText) return;
+    this.#slottedText = text;
+    this.requestUpdate();
+  };
+
+  firstUpdated() {
+    // Read the initial slot assignment here because the slot handler skips reads before Lit's first update.
+    this.#readSlot();
+  }
+
+  #getFallbackText(changes: PropertyValues<this>) {
+    if (this.hasUpdated && changes.has('code')) {
+      this.#slottedText = this.#getSlottedText();
     }
+    return this.#slottedText;
+  }
 
-    return range;
+  willUpdate(changes: PropertyValues<this>) {
+    const text = getSourceText(this.code ?? this.#getFallbackText(changes));
+    if (text === this.#text && this.language === this.#language && !changes.has('bracketPairColoring')) return;
+    this.#removeHighlights?.();
+    this.#removeHighlights = undefined;
+    this.#text = text;
+    this.#lineCount = text ? 1 : 0;
+    for (let offset = text.indexOf('\n'); offset !== -1; offset = text.indexOf('\n', offset + 1)) {
+      this.#lineCount++;
+    }
+    this.#language = this.language;
+  }
+
+  updated() {
+    if (!this.isConnected) return;
+    const code = this.shadowRoot?.querySelector('code');
+    this.#updateLines(code);
+    if (!code || !this.#text || this.#removeHighlights) return;
+
+    if (!supportsHighlights()) return;
+
+    const { tree, ranges } = parseCode(this.language, this.#text);
+    const brackets = tree ? bracketRanges(tree, this.bracketPairColoring) : [];
+    this.#removeHighlights = registerHighlights(code, ranges.concat(brackets));
+  }
+
+  #updateLines(code?: HTMLElement | null) {
+    if (code && (this.lineNumbers || this.highlight)) {
+      if (!this.#observer) {
+        this.#observer = new ResizeObserver(this.#refreshLines);
+        this.#observer.observe(code);
+        this.ownerDocument.fonts.addEventListener('loadingdone', this.#refreshLines);
+      }
+      this.#decorate();
+    } else {
+      this.#stopLines();
+    }
+  }
+
+  #decorate() {
+    const pre = this.shadowRoot?.querySelector('pre');
+    if (pre) decorateLines(pre, this.#text, { numbers: this.lineNumbers, selection: this.highlight });
+  }
+
+  #stopLines() {
+    this.#observer?.disconnect();
+    this.#observer = undefined;
+    this.ownerDocument.fonts?.removeEventListener('loadingdone', this.#refreshLines);
+    if (this.#lineFrame) cancelAnimationFrame(this.#lineFrame);
+    this.#lineFrame = 0;
+  }
+
+  render() {
+    const decorated = this.lineNumbers || this.highlight;
+    const classes = `code${decorated ? ' decorated' : ''}${this.lineNumbers ? ' numbered' : ''}`;
+    const gutterWidth = Math.max(3, String(this.#lineCount).length);
+    const source = this.#text ? getSourceChunks(this.#text) : nothing;
+
+    return html`<div internal-host role="none">
+      <slot name="header"></slot>
+      <div class="body">
+        <div class="source">
+          <slot hidden @slotchange=${this.#readSlot}></slot>
+          <pre class=${classes} style=${`--_gutter-width:${gutterWidth}ch`} role="none"><code class=${this.language}>${source}</code>${decorated ? html`<span data-lines aria-hidden="true" inert></span>` : nothing}</pre>
+        </div>
+        <slot name="actions"></slot>
+      </div>
+      <slot name="footer"></slot>
+    </div>`;
   }
 }
 

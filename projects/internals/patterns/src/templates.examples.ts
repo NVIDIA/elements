@@ -34,8 +34,8 @@ import '@nvidia-elements/viewport/minimap/define.js';
 import '@nvidia-elements/viewport/viewport/define.js';
 import '@nvidia-elements/viewport/zoom-range/define.js';
 import '@nvidia-elements/code/code-block/define.js';
-import '@nvidia-elements/code/code-block/languages/python.js';
-import '@nvidia-elements/code/code-block/languages/yaml.js';
+import '@nvidia-elements/code/languages/python.js';
+import '@nvidia-elements/code/languages/yaml.js';
 
 /**
  * Templates are page-level starting points for Agents building new views.

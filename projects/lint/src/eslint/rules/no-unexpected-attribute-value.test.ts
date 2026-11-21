@@ -59,6 +59,22 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
+  it('should allow an empty enum value only when the attribute declares it', () => {
+    tester.run('empty enum values', rule, {
+      valid: ['<nve-grid-column position></nve-grid-column>', '<nve-grid-column position=""></nve-grid-column>'],
+      invalid: [
+        {
+          code: '<nve-grid-column position="invalid"></nve-grid-column>',
+          errors: [{ messageId: 'no-unexpected-attribute-value' }]
+        },
+        {
+          code: '<nve-badge status>Badge</nve-badge>',
+          errors: [{ messageId: 'unexpected-attribute-value-alternative', suggestions: 1 }]
+        }
+      ]
+    });
+  });
+
   it('should defer deprecated enum values to the deprecation rule', () => {
     tester.run('should defer deprecated enum values to the deprecation rule', rule, {
       valid: [

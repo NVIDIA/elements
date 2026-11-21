@@ -44,6 +44,52 @@ describe(Control.metadata.tag, () => {
     expect(customElements.get(Control.metadata.tag)).toBeDefined();
   });
 
+  it('should update associations and listeners when the native input changes', async () => {
+    const replacement = document.createElement('input');
+    replacement.required = true;
+    input.replaceWith(replacement);
+    await elementIsStable(element);
+    expect(element.input).toBe(replacement);
+    expect(label.htmlFor).toBe(replacement.id);
+    replacement.dispatchEvent(new Event('blur'));
+    expect(element.matches(':state(invalid)')).toBe(true);
+    input.value = 'detached';
+    input.dispatchEvent(new Event('input'));
+    expect(element.matches(':state(dirty)')).toBe(false);
+
+    replacement.dispatchEvent(new Event('input'));
+    expect(element.matches(':state(dirty)')).toBe(true);
+  });
+
+  it('should restore horizontal layout after replacing the native input while narrow', async () => {
+    const control = document.createElement(Control.metadata.tag);
+    const original = document.createElement('input');
+    control.layout = 'horizontal';
+    control.style.width = '250px';
+    control.append(original);
+    fixture.append(control);
+    await expect.poll(() => control.getAttribute('layout')).toBe('vertical');
+
+    const replacement = document.createElement('input');
+    original.replaceWith(replacement);
+    await expect.poll(() => control.input).toBe(replacement);
+
+    control.style.width = '700px';
+    await expect.poll(() => control.getAttribute('layout')).toBe('horizontal');
+  });
+
+  it('should associate the datalist with a new input after the old input is removed', async () => {
+    input.remove();
+    await elementIsStable(element);
+
+    const replacement = document.createElement('input');
+    element.append(replacement);
+    await elementIsStable(element);
+
+    expect(label.htmlFor).toBe(replacement.id);
+    expect(replacement.getAttribute('list')).toBe(datalist.id);
+  });
+
   it('should assign nve-control attribute identifier', async () => {
     expect(element.hasAttribute('nve-control')).toBe(true);
   });
@@ -168,7 +214,38 @@ describe(Control.metadata.tag, () => {
     expect(validationMessage.hidden).toBe(true);
   });
 
-  it('should not duplicate form reset listeners after reconnect', async () => {
+  it.each(['a direct replacement', 'a replacement with formnovalidate', 'removal before insertion'])(
+    'clears the previous input’s validation for %s',
+    async scenario => {
+      expect(input.checkValidity()).toBe(false);
+      await elementIsStable(element);
+      expect(element.matches(':state(invalid)')).toBe(true);
+      expect(validationMessage.hidden).toBe(false);
+
+      const replacement = document.createElement('input');
+      replacement.defaultValue = 'default';
+      replacement.value = 'edited';
+      replacement.formNoValidate = scenario === 'a replacement with formnovalidate';
+      if (scenario === 'removal before insertion') {
+        input.remove();
+        await expect.poll(() => element.input).toBeFalsy();
+        expect(element.matches(':state(invalid)')).toBe(false);
+        expect(validationMessage.hidden).toBe(true);
+        element.append(replacement);
+      } else {
+        input.replaceWith(replacement);
+      }
+      await expect.poll(() => element.input).toBe(replacement);
+      await elementIsStable(element);
+
+      expect(element.matches(':state(invalid)')).toBe(false);
+      expect(validationMessage.hidden).toBe(true);
+      expect(getComputedStyle(message).display).toBe('block');
+      expect(replacement.value).toBe('edited');
+    }
+  );
+
+  it('should restore validation and form reset listeners after reconnect', async () => {
     removeFixture(fixture);
     fixture = await createFixture(html`
       <form>
@@ -181,17 +258,19 @@ describe(Control.metadata.tag, () => {
     `);
     const form = fixture.querySelector('form');
     element = fixture.querySelector(Control.metadata.tag);
+    input = fixture.querySelector('input');
     await elementIsStable(element);
 
     element.remove();
     form.appendChild(element);
     await elementIsStable(element);
-    element.shadowRoot!.dispatchEvent(new Event('slotchange'));
-    await elementIsStable(element);
+    input.dispatchEvent(new Event('blur'));
+    expect(element.matches(':state(invalid)')).toBe(true);
 
     const requestUpdate = vi.spyOn(element, 'requestUpdate');
-    form.dispatchEvent(new Event('reset'));
+    form.reset();
 
+    expect(element.matches(':state(invalid)')).toBe(false);
     expect(requestUpdate).toHaveBeenCalledTimes(2);
   });
 });

@@ -429,3 +429,5 @@ resizable
 groupable
 fullscreen
 fullscreenable
+
+textareas

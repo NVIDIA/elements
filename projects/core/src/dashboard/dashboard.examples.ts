@@ -763,6 +763,7 @@ export const SaveRestore = {
 
 /**
  * @summary Match the surrounding layout with inset, flat, or full container framing.
+ * @tags test-case
  */
 export const Container = {
   render: () => html`

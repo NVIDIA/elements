@@ -42,7 +42,7 @@ The classic theme stylesheet is a starting point for product-specific themes. Vi
 </nve-code-block>
 
 <script type="module">
-  import '@nvidia-elements/code/code-block/languages/css.js';
+  import '@nvidia-elements/code/languages/css.js';
   import '@nvidia-elements/code/code-block/define.js';
   import '@nvidia-elements/core/copy-button/define.js';
   import '@nvidia-elements/core/switch/define.js';

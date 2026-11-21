@@ -12,8 +12,8 @@ import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
 import '@nvidia-elements/code/code-block/define.js';
-import '@nvidia-elements/code/code-block/languages/html.js';
-import '@nvidia-elements/code/code-block/languages/typescript.js';
+import '@nvidia-elements/code/languages/html.js';
+import '@nvidia-elements/code/languages/typescript.js';
 import styles from './canvas.css?inline';
 
 function convertToJsxElement(source: string): string {

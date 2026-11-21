@@ -109,7 +109,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(96);
     expect(scores.seo).toBeGreaterThanOrEqual(100);
-    expect(scores.payload.js).toBeLessThan(167.5);
+    expect(scores.payload.js).toBeLessThan(217);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
 
@@ -126,7 +126,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThanOrEqual(166);
+    expect(scores.payload.js).toBeLessThanOrEqual(219);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -148,7 +148,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(95);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(176);
+    expect(scores.payload.js).toBeLessThan(222);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -159,7 +159,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThanOrEqual(167);
+    expect(scores.payload.js).toBeLessThanOrEqual(227);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });
@@ -170,7 +170,7 @@ describe('lighthouse', { concurrent: false }, () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThanOrEqual(166);
+    expect(scores.payload.js).toBeLessThanOrEqual(218);
     expect(scores.payload.js).toBeGreaterThanOrEqual(1);
     expect(scores.payload.css).toBe(0);
   });

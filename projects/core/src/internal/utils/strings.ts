@@ -18,7 +18,11 @@ export function formatFileSize(size: number): string {
   return `0`;
 }
 
-/** removes leading white space for a multiline string */
+// Kept for Code 2.3.0 and earlier.
+/**
+ * Removes leading whitespace from a multiline string.
+ * @internal
+ */
 export function shiftLeft(value: string) {
   const shift = value.replace(/^\n|\n$/g, '').search(/\S|$/);
   return value

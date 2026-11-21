@@ -33,12 +33,24 @@ const DEPRECATED_BUTTON_INTERACTION_VALUES = {
   'flat-emphasize': 'container="flat" interaction="emphasis"'
 } as const;
 
+const DEPRECATED_CODE_BLOCK_LANGUAGES = {
+  bash: 'language="text"',
+  shell: 'language="text"',
+  toml: 'language="text"'
+} as const;
+
 const DEPRECATED_ATTRIBUTES: Record<string, Record<string, DeprecatedAttributeConfig>> = {
   'nve-badge': {
     status: { values: ['trend-up', 'trend-down', 'trend-neutral'] }
   },
   'nve-button': {
     interaction: { values: DEPRECATED_BUTTON_INTERACTION_VALUES }
+  },
+  'nve-code-block': {
+    language: { values: DEPRECATED_CODE_BLOCK_LANGUAGES }
+  },
+  'nve-codeblock': {
+    language: { values: DEPRECATED_CODE_BLOCK_LANGUAGES }
   },
   'nve-combobox': {
     notags: { replacement: 'tag-layout="hidden"' }
