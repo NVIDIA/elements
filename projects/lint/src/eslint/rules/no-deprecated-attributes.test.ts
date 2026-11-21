@@ -181,4 +181,20 @@ describe('noDeprecatedAttributes', () => {
       ]
     });
   });
+
+  it.each(['nve-code-block', 'nve-codeblock'])('replaces deprecated language values on %s', tag => {
+    tester.run('deprecated code block languages', rule, {
+      valid: [`<${tag} language="text"></${tag}>`, `<${tag} language="json"></${tag}>`],
+      invalid: ['bash', 'shell', 'toml'].map(value => ({
+        code: `<${tag} language="${value}"></${tag}>`,
+        output: `<${tag} language="text"></${tag}>`,
+        errors: [
+          {
+            messageId: 'unexpected-deprecated-attribute-value-replacement',
+            data: { attribute: 'language', value, replacement: 'language="text"' }
+          }
+        ]
+      }))
+    });
+  });
 });
