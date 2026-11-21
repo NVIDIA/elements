@@ -107,7 +107,7 @@ export class SceneFrame extends LitElement {
   #position: Vec3 | null = null;
 
   /**
-   * Parent-from-local XYZW quaternion; null defaults to [0, 0, 0, 1]. Assignment applies
+   * Parent-from-local XYZW quaternion. Null uses the identity rotation. Assignment applies
    * synchronously and normalizes finite, nonzero values. Invalid input reports
    * frame-transform and suppresses this chain until a valid assignment.
    */

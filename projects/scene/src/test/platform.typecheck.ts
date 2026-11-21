@@ -8,8 +8,8 @@ import type {
   SceneGPURenderPassDescriptor,
   SceneGPUShaderModule,
   SceneGPUTextureView
-} from './platform.js';
-import type { ScenePickDriver, ScenePickResult } from '../interaction/picking/routing.js';
+} from '../internal/gpu/platform.js';
+import type { ScenePickDriver, ScenePickResult } from '../internal/interaction/picking/routing.js';
 
 declare const device: SceneGPUDevice;
 declare const shader: SceneGPUShaderModule;

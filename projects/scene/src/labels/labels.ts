@@ -99,7 +99,7 @@ export class SceneLabels extends LitElement implements SceneInteractionTarget {
     setLabelLayerSource(this, value);
   }
 
-  /** Limits how many records render; undefined renders the complete source. */
+  /** Record count limit. Set to undefined to render the complete source. */
   get countLimit(): number | undefined {
     return getLabelLayerCount(this);
   }

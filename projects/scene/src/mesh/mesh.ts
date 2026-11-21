@@ -67,8 +67,8 @@ export type MeshInstanceSource = MarkerSource;
 /**
  * @element nve-scene-mesh
  * @description Triangle mesh from assigned arrays or a geometry file, either as its own layer or as part of a body.
- * Standalone, geometry without a source uses one identity placement. Assign a MarkerBuffer for many
- * placements, or a JSON source attribute for modest static instance sets.
+ * Standalone geometry without a source uses one identity placement. Assign a MarkerBuffer for large
+ * instance sets or a JSON source attribute for small, static sets.
  * Use for persistent lit, textured, or instanced assets; frequently changing overlays that need
  * range-proportional updates or per-triangle picking belong in nve-scene-triangles.
  * @since 0.0.0

@@ -17,6 +17,8 @@ README.md
 pnpm-lock.yaml
 vite.*.ts.timestamp*
 tsconfig.*.tsbuildinfo
+# pnpm directory write probes
+_tmp_[0-9]*_[0-9a-f]*
 projects/code/index.html
 projects/core/src/css/*.css
 projects/core/src/icon/server.ts

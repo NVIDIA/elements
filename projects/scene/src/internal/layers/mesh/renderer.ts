@@ -105,7 +105,7 @@ interface LayerPartitionResources {
   readonly uniformValues: Float32Array;
 }
 
-// Bound API calls when one source vertex fans out to many separated triangle corners.
+// Cap upload calls when a source vertex maps to scattered triangle corners.
 const MAX_INDEXED_FLAT_UPLOAD_RANGES = 64;
 
 interface ReplaceGeometryResourcesOptions {
