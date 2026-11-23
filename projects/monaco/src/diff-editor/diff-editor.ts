@@ -26,7 +26,7 @@ export class MonacoDiffEditor extends BaseMonacoEditor<monaco.editor.IStandalone
   protected _createEditor(container: HTMLElement, monaco: Monaco): monaco.editor.IStandaloneDiffEditor {
     return monaco.editor.createDiffEditor(container, {
       automaticLayout: true,
-      fontLigatures: '', // Workaround: https://github.com/microsoft/monaco-editor/issues/3217
+      fontLigatures: false,
       originalAriaLabel: 'Diff Editor Original Content',
       modifiedAriaLabel: 'Diff Editor Modified Content'
     });

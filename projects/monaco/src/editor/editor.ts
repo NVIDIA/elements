@@ -26,7 +26,7 @@ export class MonacoEditor extends BaseMonacoEditor<monaco.editor.IStandaloneCode
   protected _createEditor(container: HTMLElement, monaco: Monaco): monaco.editor.IStandaloneCodeEditor {
     return monaco.editor.create(container, {
       automaticLayout: true,
-      fontLigatures: '' // Workaround: https://github.com/microsoft/monaco-editor/issues/3217
+      fontLigatures: false
     });
   }
 
