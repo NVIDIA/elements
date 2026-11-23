@@ -1,3 +1,23 @@
+## [2.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v2.3.0...@nvidia-elements/code-v2.4.0) (2026-11-23)
+
+### Features
+
+* **code:** add code textarea and migrate syntax highlighting to lezer ([b53f94e](https://github.com/NVIDIA/elements/commit/b53f94ec61805082fb2c9cb6b08196570ff3cf44))
+* **core:** dot shapes and color support ([4d0622f](https://github.com/NVIDIA/elements/commit/4d0622f072ad4d5dfe73dbfa7736ed565119c13e))
+* **core:** meter ([1628b4b](https://github.com/NVIDIA/elements/commit/1628b4b6d9a3c07de945907cb6319be496021c37))
+* **lint:** meter ([0905529](https://github.com/NVIDIA/elements/commit/090552971692fcefd2fddc2954fbf27bed02ec74))
+
+### Bug Fixes
+
+* **ci:** keep multiline types on one api table row ([d3a8650](https://github.com/NVIDIA/elements/commit/d3a86504de2553ef06ba18e40670589355b81132))
+* **ci:** preserve textarea closing tags in example metadata ([ee4ede2](https://github.com/NVIDIA/elements/commit/ee4ede22f4623972ba4a9609ce5e441e9ec35415))
+* **core:** animation duration support for fixed value progress ring ([47e6309](https://github.com/NVIDIA/elements/commit/47e63097e888e81da735d16a0721c4f6ba201c54))
+* **core:** drop obsolete css.escape feature probe ([7813a28](https://github.com/NVIDIA/elements/commit/7813a28dd012e8e126daeac0a7dbe79961156bc4))
+* **core:** refresh control associations when the native input changes ([ad4a091](https://github.com/NVIDIA/elements/commit/ad4a091467260bd926f88f20529590ba4464e847))
+* **docs:** preserve spacing in api descriptions ([86e466b](https://github.com/NVIDIA/elements/commit/86e466bfd358e49098f3228b32878664a11c887c))
+* **lint:** accept empty values for attributes that declare them ([63811bf](https://github.com/NVIDIA/elements/commit/63811bf2a655c6d9d5fc6bed385f24cb4a450bb6))
+* **lint:** flag deprecated code block language values ([5db13cf](https://github.com/NVIDIA/elements/commit/5db13cf366b99689a0600d3d38412a955be1b84c))
+
 ## [2.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v2.2.1...@nvidia-elements/code-v2.3.0) (2026-11-19)
 
 ### Features
