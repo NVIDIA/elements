@@ -39,7 +39,7 @@ Themes can be applied dynamically based on user preferences.
    document.body.setAttribute('nve-theme', 'dark');
  }
 
- if (window.matchMedia('(-ms-high-contrast: active)').matches || window.matchMedia('(forced-colors: active)').matches) {
+ if (window.matchMedia('(forced-colors: active)').matches) {
    document.body.setAttribute('nve-theme', 'high-contrast');
  }
 
