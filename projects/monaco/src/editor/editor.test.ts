@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { html } from 'lit';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 
@@ -65,5 +65,14 @@ describe('nve-monaco-editor', () => {
   it('should render editor', async () => {
     expect(element.shadowRoot.querySelector('#editor')).toBeDefined();
     expect(element.shadowRoot.querySelector('.monaco-editor')).toBeDefined();
+  });
+
+  it('should disable font ligatures for rendered lines within shadow DOM', async () => {
+    await vi.waitFor(() => {
+      const line = element.shadowRoot.querySelector('.view-line') as HTMLElement;
+      expect(line).not.toBeNull();
+      expect(getComputedStyle(line).fontFeatureSettings).toContain('"liga" 0');
+      expect(getComputedStyle(line).fontFeatureSettings).toContain('"calt" 0');
+    });
   });
 });
