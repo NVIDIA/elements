@@ -1007,6 +1007,63 @@ describe(Dashboard.metadata.tag, () => {
     expect(dashboard.flow).toBe('vertical');
   });
 
+  it('rejects invalid grid settings without changing the arrangement', async () => {
+    const dashboard = await createDashboard();
+    const before = dashboard.value;
+
+    expect(() => {
+      dashboard.flow = 'diagonal' as unknown as 'vertical';
+    }).toThrow(TypeError);
+
+    for (const tracks of [0, 1.5, 1_000_001]) {
+      expect(() => {
+        dashboard.tracks = tracks;
+      }).toThrow(TypeError);
+    }
+
+    expect(dashboard.value).toEqual(before);
+  });
+
+  it('keeps repeated grid and autoSettle assignments silent', async () => {
+    const dashboard = await createDashboard();
+    const before = dashboard.value;
+    const changed = vi.fn();
+
+    dashboard.addEventListener('change', changed);
+    dashboard.flow = 'vertical';
+    dashboard.tracks = 4;
+    dashboard.autoSettle = true;
+    await elementIsStable(dashboard);
+
+    expect(dashboard.value).toEqual(before);
+    expect(changed).not.toHaveBeenCalled();
+  });
+
+  it('falls back to default labels and placement announcements for omitted translations', async () => {
+    const dashboard = await createDashboard();
+    const panel = dashboard.querySelector('nve-dashboard-panel')!;
+
+    dashboard.i18n = {};
+    await elementIsStable(dashboard);
+
+    expect(control(panel, 'move').getAttribute('aria-label')).toBe('move');
+    expect(control(panel, 'resize').getAttribute('aria-label')).toBe('resize');
+
+    control(panel, 'move').focus();
+    await userEvent.keyboard('{ArrowRight}');
+    await elementIsStable(dashboard);
+
+    expect(dashboard.shadowRoot!.querySelector('.announcement')!.textContent.trim()).toBe(
+      'First: column 3, row 1, column span 2, row span 2'
+    );
+  });
+
+  it('reports commands unavailable when no target context is supplied', async () => {
+    const dashboard = await createDashboard();
+
+    expect(dashboard.isCommandAvailable('--move-right')).toBe(false);
+  });
+
   it('allocates resize chrome outside authored footer and body hit targets', async () => {
     const dashboard = await createDashboard();
     const panel = dashboard.querySelector('nve-dashboard-panel')!;
