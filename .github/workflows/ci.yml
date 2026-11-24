@@ -289,7 +289,17 @@ jobs:
             | tar xz mcp-publisher
           ./mcp-publisher validate projects/cli/server.json
           ./mcp-publisher login github-oidc
-          ./mcp-publisher publish projects/cli/server.json
+          set -o pipefail
+          for attempt in 1 2 3 4 5 6; do
+            if ./mcp-publisher publish projects/cli/server.json 2>&1 | tee "$RUNNER_TEMP/mcp-publish.log"; then
+              break
+            fi
+            if [ "$attempt" -eq 6 ] || ! grep -q "A newly published release can take a moment to appear" "$RUNNER_TEMP/mcp-publish.log"; then
+              exit 1
+            fi
+            echo "NPM package is not visible to the MCP Registry yet; retrying in 30 seconds (attempt $attempt of 6)"
+            sleep 30
+          done
 
   deploy-pages:
     needs: [ci, lighthouse]
