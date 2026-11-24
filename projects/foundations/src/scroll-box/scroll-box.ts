@@ -9,9 +9,9 @@ import styles from './scroll-box.css?inline';
 
 /**
  * @element nve-scroll-box
- * @description A scrollable container for arbitrary content with optional edge shadows and native scrolling APIs.
+ * @description Provides native scrolling for arbitrary content and can show shadows at the scroll edges. Arrange the content in the light DOM and give the container a bounded size.
  * @documentation https://nvidia.github.io/elements/docs/foundations/scroll-box/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/foundations/scroll-box
  * @slot - Content to scroll. Use light DOM elements to arrange the content.
  * @cssprop --scrollbar-color - Native scrollbar thumb and track colors.
