@@ -32,20 +32,24 @@ Themes can be independently loaded as needed to reduce the size of the initial b
 
 ## Autodetect Preferences
 
-Themes can be applied dynamically based on user preferences.
+On page load, detect user preferences and set the matching \`nve-theme\` values on the root element. Separate multiple values with spaces.
 
 \`\`\`javascript
- if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-   document.body.setAttribute('nve-theme', 'dark');
- }
+const themes = [];
 
- if (window.matchMedia('(forced-colors: active)').matches) {
-   document.body.setAttribute('nve-theme', 'high-contrast');
- }
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  themes.push('dark');
+}
 
- if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-   document.body.setAttribute('nve-theme', 'reduced-motion');
- }
+if (window.matchMedia('(forced-colors: active)').matches) {
+  themes.push('high-contrast');
+}
+
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  themes.push('reduced-motion');
+}
+
+document.documentElement.setAttribute('nve-theme', themes.join(' '));
 \`\`\`
 
 ## Dark

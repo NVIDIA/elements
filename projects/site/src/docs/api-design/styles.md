@@ -150,15 +150,15 @@ By scoping the background and color to the internal-host element, only the publi
 
 ## State Properties
 
-Leverage host selectors to customize the element visual state. This avoids expanding the public API of the element and enabling a single CSS representation of the component. Each visual variant is solely responsible for modifying the public API to reflect the appropriate state.
+Use host selectors to customize an element's visual state. In this component stylesheet, each state updates the same custom properties.
 
 <nve-badge status="success">Do:</nve-badge>
 
 ```css
 :host {
-  --background: var(--nve-interaction-background);
-  --border: var(--nve-object-border-100) solid var(--nve-object-border-color-100);
-  --color: var(--nve-interaction-color);
+  --background: var(--nve-sys-interaction-background);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  --color: var(--nve-sys-interaction-color);
 }
 
 [internal-host] {
@@ -168,23 +168,23 @@ Leverage host selectors to customize the element visual state. This avoids expan
 }
 
 :host(:hover) {
-  --background: var(--nve-interaction-hover-background);
-  --color: var(--nve-interaction-hover-color);
+  --background: var(--nve-sys-interaction-hover-background);
+  --color: var(--nve-sys-interaction-hover-color);
 }
 
 :host([disabled]) {
-  --background: var(--nve-interaction-disabled-background);
-  --color: var(--nve-interaction-disabled-color);
+  --background: var(--nve-sys-interaction-disabled-background);
+  --color: var(--nve-sys-interaction-disabled-color);
 }
 
 :host([status='success']) {
-  --background: var(--nve-status-success-100);
-  --border: var(--nve-object-border-100) solid var(--nve-status-success-200);
+  --background: var(--nve-sys-support-success-muted-color);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host([status='danger']) {
-  --background: var(--nve-status-danger-100);
-  --border: var(--nve-object-border-100) solid var(--nve-status-danger-200);
+  --background: var(--nve-sys-support-danger-muted-color);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-sys-support-danger-emphasis-color);
 }
 ```
 
@@ -193,9 +193,9 @@ By modifying only a single set of Custom Properties the CSS specificity stays lo
 With custom elements, the element tag is the scope for the design tokens. Element-specific design tokens are unnecessary and increase the surface area of the API and number of tokens to maintain.
 
 ```css
-nve-alert.product-custom:hover {
-  --background: var(--nve-color-green-600);
-  --border: var(--nve-object-border-100) solid var(--nve-color-green-700);
+nve-card.product-custom:hover {
+  --background: var(--nve-sys-layer-container-accent-background);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-emphasis);
 }
 ```
 
@@ -205,29 +205,29 @@ Visual customizations and theming are now fully compatible throughout the public
 
 ```css
 :host {
-  background: var(--nve-interaction-background);
-  border: var(--nve-object-border-100) solid var(--nve-object-border-color-100);
-  color: var(--nve-interaction-color);
+  background: var(--nve-sys-interaction-background);
+  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+  color: var(--nve-sys-interaction-color);
 }
 
 :host(:hover) {
-  background: var(--nve-interaction-hover-background);
-  color: var(--nve-interaction-hover-color);
+  background: var(--nve-sys-interaction-hover-background);
+  color: var(--nve-sys-interaction-hover-color);
 }
 
 :host([disabled]) {
-  background: var(--nve-interaction-disabled-background);
-  color: var(--nve-interaction-disabled-color);
+  background: var(--nve-sys-interaction-disabled-background);
+  color: var(--nve-sys-interaction-disabled-color);
 }
 
 :host([status='success']) {
-  background: var(--nve-status-success-100);
-  border: var(--nve-object-border-100) solid var(--nve-status-success-200);
+  background: var(--nve-sys-support-success-muted-color);
+  border: var(--nve-ref-border-width-sm) solid var(--nve-sys-support-success-emphasis-color);
 }
 
 :host([status='danger']) {
-  background: var(--nve-status-danger-100);
-  border: var(--nve-object-border-100) solid var(--nve-status-danger-200);
+  background: var(--nve-sys-support-danger-muted-color);
+  border: var(--nve-ref-border-width-sm) solid var(--nve-sys-support-danger-emphasis-color);
 }
 ```
 
@@ -265,33 +265,26 @@ CSS Custom Properties defined on the host should use Design Tokens that appropri
 
 ## Element Style APIs
 
-For custom states and behaviors, styles can hook into the public API of a reflected or set attribute, examples include:
+Style components using their supported attributes and custom states. Use `status="error"` for field validation, such as on `nve-input` or `nve-control-message`. Use `status="danger"` on `nve-alert` for critical messages.
 
-- types status: `error` | `success` | `warning`
-- states `expanded` | `selected` | `disabled`
-- behaviors `closable` | `draggable`
-
-<!-- eslint-disable @nvidia-elements/lint/no-unknown-css-variable, @nvidia-elements/lint/no-unstyled-typography -->
+`nve-accordion` exposes the `expanded` state for selectors such as `nve-accordion:state(expanded)`. Add the `expanded` attribute to start open and `behavior-expand` to let users toggle the accordion.
 
 ```html
-<nve-accordion-panel expanded>
-  <p>hello there!</p>
-</nve-accordion-panel>
+<nve-accordion behavior-expand expanded>
+  <nve-accordion-header>
+    <h2 nve-text="heading xs medium">Workspace settings</h2>
+  </nve-accordion-header>
+  <nve-accordion-content>
+    <p nve-text="body">Manage your workspace preferences.</p>
+  </nve-accordion-content>
+</nve-accordion>
 
 <style>
-/* element internal styles */
-:host([expanded]) {
-  --background: var(--nve-interaction-selected-background);
-}
-
-/* consumers can hook into state for custom style overrides */
-nve-accordion-panel[expanded] {
-  --background: blue;
-}
+  nve-accordion:state(expanded) {
+    --background: var(--nve-sys-layer-container-accent-background);
+  }
 </style>
 ```
-
-<!-- eslint-enable @nvidia-elements/lint/no-unknown-css-variable, @nvidia-elements/lint/no-unstyled-typography -->
 
 ## Margins & Whitespace
 
@@ -311,18 +304,12 @@ when the user preferences in the browser reverse the reading order.
 
 ## CSS Parts
 
-CSS Parts enable elements to expose DOM elements to consumers that the Shadow DOM would typically encapsulate.
+CSS Parts let consumers style specific elements inside a component's shadow DOM. For example, `nve-dialog` exposes the `close-button` part when the dialog has the `closable` attribute.
 
-```html
-<!-- nve-dialog internal template -->
-<button part="close-button">close</button>
-
-<!-- consumer css -->
-<style>
-  nve-dialog::part(close-button) {
-    color: purple;
-  }
-</style>
+```css
+nve-dialog::part(close-button) {
+  --color: var(--nve-sys-support-accent-emphasis-color);
+}
 ```
 
 <nve-alert status="warning">Warning: avoid using CSS Parts as they can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-alert>
@@ -333,12 +320,12 @@ You can more safely expose elements that are part of the library's public API si
 
 ```html
 <!-- nve-dialog internal template -->
-<nve-icon-button part="icon-button" icon-name="placeholder"></nve-icon-button>
+<nve-icon-button part="close-button icon-button" icon-name="cancel" aria-label="Close dialog"></nve-icon-button>
 
 <!-- consumer css -->
 <style>
   nve-dialog::part(icon-button) {
-    --color: purple;
+    --color: var(--nve-sys-support-accent-emphasis-color);
   }
 </style>
 ```
@@ -348,21 +335,21 @@ You can more safely expose elements that are part of the library's public API si
 When naming a part use the name of the custom element without the `nve-` prefix for API consistency. When internal parts share a type, use both the general element name and a semantic name. This allows generalized selectors for theming as well as precise selections when needed.
 
 ```html
-<nve-icon-button part="icon-button previous-icon-button" icon-name="placeholder"></nve-icon-button>
-<nve-icon-button part="icon-button next-icon-button" icon-name="placeholder"></nve-icon-button>
+<nve-icon-button part="icon-button previous-icon-button" icon-name="chevron" direction="left" aria-label="Previous page"></nve-icon-button>
+<nve-icon-button part="icon-button next-icon-button" icon-name="chevron" direction="right" aria-label="Next page"></nve-icon-button>
 ```
 
 ```css
 nve-pagination::part(icon-button) {
-  --color: red;
+  --color: var(--nve-sys-text-color);
 }
 
 nve-pagination::part(previous-icon-button) {
-  --color: blue;
+  --color: var(--nve-sys-text-muted-color);
 }
 
 nve-pagination::part(next-icon-button) {
-  --color: green;
+  --color: var(--nve-sys-text-link-emphasis-color);
 }
 ```
 
@@ -370,40 +357,26 @@ nve-pagination::part(next-icon-button) {
 
 <nve-alert status="warning">Due to higher maintenance complexity, use this API on a per-case basis.</nve-alert>
 
-If an element exposes a nve-_ element which is also a `nve-_` element, then you can apply an [exportparts attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/exportparts) to expose deeply nested CSS parts.
+Use the [`exportparts` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/exportparts) to expose parts across nested shadow roots. The `nve-week` component exposes its calendar button as the `icon-button` part.
 
-Example use case, the `nve-week` component uses a `nve-icon-button` internally. You can access this via a CSS part.
-
-```css
+```html
 <style>
   nve-week::part(icon-button) {
-    --background: red;
+    --background: var(--nve-sys-interaction-highlighted-background);
   }
 </style>
 <nve-week>
-  <label>label</label>
+  <label>Reporting week</label>
   <input type="week" />
 </nve-week>
 ```
 
-The `nve-icon-button` internal to `nve-week` has its own internal `nve-icon` which it exposes as a part. To access this as a consumer, explicitly add a `exportparts` to the `nve-icon-button` and expose its inner `nve-icon` to the public API surface of `nve-week.
+The calendar button exposes an `icon` part. In its internal template, `nve-week` uses `exportparts="icon:icon-button-icon"` on the icon button. Consumers can then select the icon by its exported name.
 
 ```css
-<style>
-  /* nve-week > nve-icon-button */
-  nve-week::part(icon-button) {
-    --background: red;
-  }
-
-  /* nve-week > nve-icon-button > nve-icon */
-  nve-week::part(icon-button-icon) {
-    --color: blue;
-  }
-</style>
-<nve-week>
-  <label>label</label>
-  <input type="week" />
-</nve-week>
+nve-week::part(icon-button-icon) {
+  --color: var(--nve-sys-text-link-emphasis-color);
+}
 ```
 
 {% example '@nvidia-elements/core/week/week.examples.json' 'ExportParts' %}
@@ -417,14 +390,12 @@ Elements should be responsive to support a wide variety of use cases. While not 
 You can extract and import component specific styles from a separate CSS file.
 
 ```typescript
+import { LitElement } from 'lit';
 import { useStyles } from '@nvidia-elements/foundations/internal/styles';
 import styles from './badge.css?inline';
 
 export class Badge extends LitElement {
-
   static styles = useStyles([styles]);
-
-  ...
 }
 ```
 
