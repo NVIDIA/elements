@@ -10,7 +10,7 @@ import styles from './footer.css?inline';
  * @element nve-code-block-footer
  * @description Content and controls below the source code. Assigns its own slot and remains visible while code scrolls. Provide headings and accessible labels in the content as needed.
  * @documentation https://nvidia.github.io/elements/docs/code/code-block/
- * @since 0.0.0
+ * @since 2.3.0
  * @entrypoint \@nvidia-elements/code/code-block
  * @slot - Labels, supporting text, and action controls. Fills the space between the prefix and suffix.
  * @slot prefix - Content displayed at the start of the row.
