@@ -26,9 +26,9 @@ interface ProjectionSyncOptions {
 
 /**
  * @element nve-viewport-gridlines
- * @description Renders origin-stable, zoom-adaptive gridline patterns behind viewport content.
+ * @description Draws gridlines, dots, or crosses behind viewport content. The pattern stays anchored to the configured origin and adapts its spacing as the viewport zooms.
  * @documentation https://nvidia.github.io/elements/docs/viewport/gridlines/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/viewport/gridlines
  * @cssprop --color - Sets the gridline pattern color.
  * @cssprop --line-width - Sets the approximate stroke width in CSS pixels.
