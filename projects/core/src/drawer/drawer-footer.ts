@@ -7,7 +7,7 @@ import styles from './drawer-footer.css?inline';
 
 /**
  * @element nve-drawer-footer
- * @description Provides a fixed action area at the bottom of a drawer for primary actions such as save or cancel.
+ * @description Provides a fixed action area at the bottom of a drawer. Place actions such as Save and Cancel here so users can reach them while the body scrolls.
  * @documentation https://nvidia.github.io/elements/docs/elements/drawer/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer

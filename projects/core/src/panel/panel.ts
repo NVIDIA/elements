@@ -24,7 +24,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-panel-header
- * @description Displays the title, subtitle, and optional action controls at the top of a panel.
+ * @description Displays a title, subtitle, and optional controls at the top of a panel. Use named slots to keep headings and actions in their designated positions.
  * @documentation https://nvidia.github.io/elements/docs/elements/panel/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
@@ -93,7 +93,7 @@ export class PanelContent extends LitElement {
 
 /**
  * @element nve-panel-footer
- * @description Provides a designated area at the bottom of a panel for actions or supplementary controls.
+ * @description Provides a region below the body of an inline panel. Use it for actions or supporting controls that apply to the panel's content.
  * @documentation https://nvidia.github.io/elements/docs/elements/panel/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel

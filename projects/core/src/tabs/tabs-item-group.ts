@@ -9,9 +9,9 @@ import styles from './tabs-item-group.css?inline';
 
 /**
  * @element nve-tabs-item-group
- * @description Groups a tab item with application-owned accessory controls.
+ * @description Groups a single tab item with application controls. Use the prefix and suffix slots to place those controls before or after the tab item.
  * @documentation https://nvidia.github.io/elements/docs/elements/tabs/
- * @since 0.0.0
+ * @since 2.18.0
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - A single nve-tabs-item.
  * @slot prefix - Controls before the tab item.

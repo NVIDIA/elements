@@ -11,7 +11,7 @@ import styles from './dot.css?inline';
 
 /**
  * @element nve-dot
- * @description A visual indicator that communicates a status or notification of an associated component.
+ * @description Signals a status or notification next to another component. Use it alone as a visual marker or add a short label of up to two characters.
  * @documentation https://nvidia.github.io/elements/docs/elements/dot/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/dot

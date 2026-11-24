@@ -10,7 +10,7 @@ import styles from './ghost.css?inline';
  * @element nve-ghost
  * @description An inert visual preview of content or its prospective placement. Applications control its geometry, movement, and accessible feedback.
  * @documentation https://nvidia.github.io/elements/docs/elements/ghost/
- * @since 0.0.0
+ * @since 2.23.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/ghost
  * @slot - Presentation content for the preview.

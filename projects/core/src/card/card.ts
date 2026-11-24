@@ -13,7 +13,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
 
 /**
  * @element nve-card
- * @description A container for content representing a single entity.
+ * @description Groups content about a single entity. Compose a card with a header, body, and footer to keep its summary, details, and actions together.
  * @documentation https://nvidia.github.io/elements/docs/elements/card/
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card

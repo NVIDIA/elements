@@ -9,7 +9,7 @@ import styles from './switch-group.css?inline';
 
 /**
  * @element nve-switch-group
- * @description A switch group is a container for a group of switches.
+ * @description Arranges related switches as one visual group. Use it for settings that belong together and let users toggle each switch independently.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/switch
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/switch/

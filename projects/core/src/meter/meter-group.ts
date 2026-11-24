@@ -13,7 +13,7 @@ import styles from './meter-group.css?inline';
  * @element nve-meter-group
  * @description A meter group arranges direct `nve-meter` children into a shared segmented track in DOM order. Children must have matching effective bounds. The `no-invalid-meter-group` lint rule checks static bounds and capacity.
  * @documentation https://nvidia.github.io/elements/docs/elements/meter/
- * @since 0.0.0
+ * @since 2.28.0
  * @entrypoint \@nvidia-elements/core/meter
  * @slot - Direct meter children that own their values, bounds, colors, statuses, and accessible names.
  * @cssprop --background - Shared track background.

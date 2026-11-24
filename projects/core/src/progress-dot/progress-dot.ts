@@ -17,7 +17,7 @@ const i18nDefaults = {
  * @element nve-progress-dot
  * @description An inline visual indicator that shows the progress of an ongoing task with an unknown completion percentage.
  * @documentation https://nvidia.github.io/elements/docs/elements/progress-dot/
- * @since 0.0.0
+ * @since 2.16.0
  * @entrypoint \@nvidia-elements/core/progress-dot
  * @cssprop --color - Dot color. Defaults to the inherited text color.
  * @cssprop --width - Indicator width.

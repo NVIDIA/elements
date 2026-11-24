@@ -49,7 +49,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-gauge
- * @description Use a gauge to show system resource usage.
+ * @description Shows a numeric value relative to a maximum, such as current system resource usage. Choose a full or half gauge and a fill, dot, or needle indicator.
  * @documentation https://nvidia.github.io/elements/docs/elements/gauge/
  * @since 2.0.4
  * @entrypoint \@nvidia-elements/core/gauge

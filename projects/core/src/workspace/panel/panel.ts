@@ -16,9 +16,9 @@ import styles from './panel.css?inline';
 
 /**
  * @element nve-workspace-panel
- * @description Stable application content and its workspace chrome.
+ * @description Hosts application content and its header and footer in a restorable workspace. Use a durable panel ID to identify it across layout changes.
  * @documentation https://nvidia.github.io/elements/docs/elements/workspace/
- * @since 0.0.0
+ * @since 2.23.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/workspace
  * @command --enter-fullscreen - Present this panel's group in native fullscreen.

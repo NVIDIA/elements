@@ -18,7 +18,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-month
- * @description A month picker is a control that enables users to choose a month value.
+ * @description Lets users enter or pick a month and year through a native month input. Use it for month-level values such as billing or reporting periods.
  * @documentation https://nvidia.github.io/elements/docs/elements/month/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/month

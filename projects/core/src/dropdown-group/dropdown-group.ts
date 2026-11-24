@@ -16,7 +16,7 @@ import globalStyles from './dropdown-group.global.css?inline';
 
 /**
  * @element nve-dropdown-group
- * @description A dropdown group coordinates linked dropdowns and cascading submenus.
+ * @description Coordinates related dropdowns and cascading submenus. The group reports when a member opens or closes so applications can respond to menu activity.
  * @documentation https://nvidia.github.io/elements/docs/elements/dropdown-group/
  * @since 1.30.1
  * @entrypoint \@nvidia-elements/core/dropdown-group

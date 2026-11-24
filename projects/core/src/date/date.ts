@@ -18,7 +18,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-date
- * @description A date picker is a control that enables users to choose a date value.
+ * @description Lets users enter or pick a calendar date through a native date input. Use it in forms that collect a day without a time of day.
  * @documentation https://nvidia.github.io/elements/docs/elements/date/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/date

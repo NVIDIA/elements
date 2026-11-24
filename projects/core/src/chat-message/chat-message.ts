@@ -11,7 +11,7 @@ import globalStyles from './chat-message.global.css?inline';
 
 /**
  * @element nve-chat-message
- * @description A chat message component displays a text message within a conversation, sent between users or bots
+ * @description Displays a message in a conversation between users or bots. Place the message body in the default slot and sender context in the prefix or suffix.
  * @documentation https://nvidia.github.io/elements/docs/elements/chat-message/
  * @since 1.25.0
  * @entrypoint \@nvidia-elements/core/chat-message

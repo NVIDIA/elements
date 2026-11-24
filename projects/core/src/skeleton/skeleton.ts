@@ -9,7 +9,7 @@ import styles from './skeleton.css?inline';
 
 /**
  * @element nve-skeleton
- * @description A loading placeholder component that displays animated placeholder shapes while content loads.
+ * @description Displays animated placeholder shapes while content loads. Place the loaded content in the same region to replace the placeholder.
  * @documentation https://nvidia.github.io/elements/docs/elements/skeleton/
  * @since 1.44.0
  * @entrypoint \@nvidia-elements/core/skeleton

@@ -10,7 +10,7 @@ import styles from './input-group.css?inline';
 
 /**
  * @element nve-input-group
- * @description Visually combines related input controls into a unified composite field with shared styling.
+ * @description Visually joins related inputs or actions into one composite field. Use it when adjacent controls work together as part of the same task.
  * @documentation https://nvidia.github.io/elements/docs/elements/input-group/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/input

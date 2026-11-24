@@ -15,7 +15,7 @@ import styles from './meter.css?inline';
  * @element nve-meter
  * @description A meter displays a named scalar measurement within a known range. Compose direct meter children inside `nve-meter-group` for a segmented track.
  * @documentation https://nvidia.github.io/elements/docs/elements/meter/
- * @since 0.0.0
+ * @since 2.28.0
  * @entrypoint \@nvidia-elements/core/meter
  * @cssprop --accent-color - Fill override, taking precedence over color and status.
  * @cssprop --background - Track background.

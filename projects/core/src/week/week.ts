@@ -18,7 +18,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-week
- * @description A week picker is a control that enables users to choose a week value.
+ * @description Lets users enter or pick a calendar week and year through a native week input. Use it for scheduling or reporting at week granularity.
  * @documentation https://nvidia.github.io/elements/docs/elements/week/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/week

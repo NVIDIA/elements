@@ -11,7 +11,7 @@ import type { PropertyValues } from 'lit';
 import { html, nothing, isServer } from 'lit';
 /**
  * @element nve-range
- * @description A range slider is a control that enables users to choose a value from a continuous range of values.
+ * @description Lets users choose a numeric value within a bounded range. Set the minimum, maximum, and step on the native input and choose a horizontal or vertical layout.
  * @documentation https://nvidia.github.io/elements/docs/elements/range/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/range

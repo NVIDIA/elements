@@ -20,7 +20,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-color
- * @description A color picker is a control that enables users to choose a color value.
+ * @description Lets users choose a color with a native color input. Use it in a form to collect a color value, or sample a color from the screen in supported browsers.
  * @documentation https://nvidia.github.io/elements/docs/elements/color/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/color

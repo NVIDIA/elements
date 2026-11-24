@@ -12,9 +12,9 @@ import styles from './menu-group.css?inline';
 
 /**
  * @element nve-menu-group
- * @description Organizes related menu items under a disclosure header that can show or hide one child menu.
+ * @description Organizes related menu items under a disclosure header. Put one child menu in the group and use the header to reveal or hide its items.
  * @documentation https://nvidia.github.io/elements/docs/elements/menu/
- * @since 0.0.0
+ * @since 2.11.0
  * @entrypoint \@nvidia-elements/core/menu
  * @command --open - Opens the menu group.
  * @command --close - Closes the menu group.

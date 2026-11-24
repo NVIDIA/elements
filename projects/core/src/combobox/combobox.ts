@@ -34,7 +34,7 @@ const comboboxI18nDefaults = {
 
 /**
  * @element nve-combobox
- * @description An editable combobox with autocomplete behavior and selection support.
+ * @description Combines an editable input with an autocomplete dropdown. Pair the input with a datalist or select to supply options.
  * @documentation https://nvidia.github.io/elements/docs/elements/combobox/
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/combobox

@@ -7,7 +7,7 @@ import styles from './toggletip-footer.css?inline';
 
 /**
  * @element nve-toggletip-footer
- * @description Provides a designated area at the bottom of a toggletip for actions or supplementary information.
+ * @description Provides a region below the main content of a toggletip. Use it for supporting actions or information associated with the toggletip.
  * @documentation https://nvidia.github.io/elements/docs/elements/toggletip/
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip

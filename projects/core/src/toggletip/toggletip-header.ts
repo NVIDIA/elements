@@ -7,7 +7,7 @@ import styles from './toggletip-header.css?inline';
 
 /**
  * @element nve-toggletip-header
- * @description Displays a title or contextual label at the top of a toggletip to categorize its contents.
+ * @description Displays a title or contextual label above the body of a toggletip. Use the header to identify the help or information shown below it.
  * @documentation https://nvidia.github.io/elements/docs/elements/toggletip/
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip

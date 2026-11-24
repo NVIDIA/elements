@@ -53,9 +53,9 @@ function isUnitDisplay(value: unknown): value is FormatBytesUnitDisplay {
 
 /**
  * @element nve-format-bytes
- * @description Formats a byte count as localized, human-readable decimal or binary units.
+ * @description Formats a byte count as localized decimal or binary units. Let the formatter choose the unit from the byte count or specify one for consistent display.
  * @documentation https://nvidia.github.io/elements/docs/elements/format-bytes/
- * @since 0.0.0
+ * @since 2.3.0
  * @entrypoint \@nvidia-elements/core/format-bytes
  * @slot - Numeric byte count to format (such as 1048576). Serves as fallback before hydration.
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/data

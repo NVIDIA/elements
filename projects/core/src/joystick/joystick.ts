@@ -59,19 +59,9 @@ const directions: Record<string, JoystickValue> = {
 /* eslint-disable jsdoc/no-types -- The metadata analyzer needs the inherited generic value type. */
 /**
  * @element nve-joystick
- * @description A joystick selects a normalized two-axis vector with pointer or keyboard input.
- * Applications own physical units, coordinate frames, input shaping, publishing cadence, recording clocks,
- * command-outcome feedback, and alternative controls when needed.
- *
- * Give each joystick an accessible name with a label, aria-label, or aria-labelledby.
- * Editable controls use the application role to receive two-axis keyboard input.
- * The default accessible description includes both normalized coordinates, keyboard instructions, and release behavior.
- * A locked axis stays at zero; an absent value reads "No position." Disabled and read-only controls omit instructions.
- * Coordinates use up to six decimal places and the document language for number formatting.
- * An explicit aria-description or aria-describedby replaces the default focus description through standard ARIA precedence;
- * it does not disable live announcements.
+ * @description Selects a normalized two-axis vector with pointer or keyboard input. Applications handle physical units, coordinate frames, input shaping, command timing, recording, outcome feedback, and alternative controls.
  * @documentation https://nvidia.github.io/elements/docs/elements/joystick/
- * @since 0.0.0
+ * @since 2.20.0
  * @entrypoint \@nvidia-elements/core/joystick
  * @property {JoystickValue | undefined} value - The normalized vector: positive x points right and positive y points down, independent of text direction. Assign a complete finite object within the selected constraint. Invalid vectors throw TypeError without replacing the previous value. Programmatic writes do not dispatch input or change events. Use undefined for an absent sample and a zero vector for recorded neutral input. Set readOnly before assigning replay ownership. User input can replace external writes during an interaction.
  * @attribute {string} value - A JSON object containing normalized x and y coordinates.
@@ -140,13 +130,23 @@ export class Joystick extends FormControlMixin<typeof LitElement, JoystickValue>
    * A quick tap in center mode reports the input coordinates and the return to center.
    * Escape announces the resulting coordinates without a separate cancellation message.
    * Programmatic writes and read-only playback update the description without live announcements.
-   * Set off when the application supplies spoken output, the position description on focus remains available.
+   * Set `off` when the application supplies spoken output. The focus description remains available.
+   *
+   * Give each joystick an accessible name using a label, `aria-label`, or `aria-labelledby`.
+   * Editable controls use the application role to receive two-axis keyboard input.
+   * An explicit `aria-description` or `aria-describedby` overrides the default focus description through standard
+   * ARIA precedence. Live announcements follow the `announce` setting.
    */
   @property({ type: String }) announce: 'polite' | 'off' = 'polite';
 
   readonly #i18nController: I18nController<this> = new I18nController(this, i18nDefaults);
 
-  /** Enables updating internal string values for internationalization. */
+  /**
+   * Localizes the position description and keyboard instructions. The default description includes both normalized
+   * coordinates, keyboard instructions, and release behavior. Disabled and read-only controls omit instructions.
+   * A locked axis stays at zero. An absent value reads "No position."
+   * Coordinates use the document language for number formatting and display up to six decimal places.
+   */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   #announcement = '';

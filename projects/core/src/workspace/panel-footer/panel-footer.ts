@@ -10,9 +10,9 @@ import styles from './panel-footer.css?inline';
 
 /**
  * @element nve-workspace-panel-footer
- * @description Provides workspace panel status and actions outside the scrolling body.
+ * @description Provides a dedicated region below workspace panel content for status and actions. It stays separate from the panel's main application surface.
  * @documentation https://nvidia.github.io/elements/docs/elements/workspace/
- * @since 0.0.0
+ * @since 2.23.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/workspace
  * @slot - Status and actions.

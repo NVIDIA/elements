@@ -10,9 +10,9 @@ import styles from './panel-header.css?inline';
 
 /**
  * @element nve-dashboard-panel-header
- * @description Supplies the required dashboard panel title and application controls.
+ * @description Supplies the dashboard panel's title and application controls. The title provides the panel's default accessible name.
  * @documentation https://nvidia.github.io/elements/docs/elements/dashboard/
- * @since 0.0.0
+ * @since 2.24.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/dashboard
  * @slot - Noninteractive title used as the default accessible panel name. Heading semantics remain application owned.

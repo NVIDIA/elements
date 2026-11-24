@@ -12,7 +12,7 @@ export const inputStyles = styles;
 
 /**
  * @element nve-input
- * @description An input is a control that enables users to enter text.
+ * @description Wraps a native input for single-line text entry. Provide a label and use the input's native attributes to configure the field.
  * @documentation https://nvidia.github.io/elements/docs/elements/input/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/input
