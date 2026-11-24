@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
@@ -90,6 +91,96 @@ describe('type-submit.controller', () => {
     element.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyA' }));
 
     expect(click).toHaveBeenCalledTimes(4);
+  });
+
+  it.each(['Enter', 'Space'])('should match native %s submission timing and repeat behavior', async key => {
+    fixture = await createFixture(html`
+      <button type="button">Move focus</button>
+      <form>
+        <forms-type-submit-controller-test-element tabindex="0"></forms-type-submit-controller-test-element>
+      </form>
+    `);
+    const trigger = fixture.querySelector('button')!;
+    const form = fixture.querySelector('form')!;
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
+    )!;
+    const submit = vi.fn((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener('submit', submit);
+    element.sync();
+
+    trigger.focus();
+    expect(document.activeElement).toBe(trigger);
+    await userEvent.keyboard(`{${key}>}`);
+    element.focus();
+    await userEvent.keyboard(`{/${key}}`);
+    expect(submit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard(`{${key}>2}`);
+    expect(submit).toHaveBeenCalledTimes(key === 'Enter' ? 2 : 0);
+    await userEvent.keyboard(`{/${key}}`);
+    expect(submit).toHaveBeenCalledTimes(key === 'Enter' ? 2 : 1);
+
+    submit.mockClear();
+    trigger.focus();
+    trigger.addEventListener(key === 'Enter' ? 'click' : 'keydown', () => element.focus(), { once: true });
+    await userEvent.keyboard(`{${key}>2}`);
+    expect(submit).toHaveBeenCalledTimes(key === 'Enter' ? 1 : 0);
+    await userEvent.keyboard(`{/${key}}`);
+    expect(submit).toHaveBeenCalledTimes(1);
+  });
+
+  it('should move focus on Enter without submitting the newly focused form', async () => {
+    fixture = await createFixture(html`
+      <forms-type-submit-controller-test-element tabindex="0"></forms-type-submit-controller-test-element>
+      <form><input><button type="submit">Submit</button></form>
+    `);
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
+    )!;
+    const form = fixture.querySelector('form')!;
+    const input = fixture.querySelector('input')!;
+    const submit = vi.fn((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener('submit', submit);
+    element.addEventListener('click', () => input.focus());
+    element.sync();
+
+    element.focus();
+    await userEvent.keyboard('{Enter}');
+
+    expect(document.activeElement).toBe(input);
+    expect(submit).not.toHaveBeenCalled();
+  });
+
+  it.each(['after', 'during'])('should cancel Space activation when focus moves %s keydown', async timing => {
+    fixture = await createFixture(html`
+      <forms-type-submit-controller-test-element tabindex="0"></forms-type-submit-controller-test-element>
+      <button type="button">Move focus</button>
+    `);
+    const element = fixture.querySelector<TypeSubmitControllerTestElement>(
+      'forms-type-submit-controller-test-element'
+    )!;
+    const other = fixture.querySelector('button')!;
+    const shadow = fixture.attachShadow({ mode: 'open' });
+    shadow.append(element, other);
+    const click = vi.spyOn(element, 'click');
+    element.sync();
+
+    if (timing === 'during') {
+      element.addEventListener('keydown', () => other.focus(), { capture: true, once: true });
+    }
+
+    element.focus();
+    expect(shadow.activeElement).toBe(element);
+    await userEvent.keyboard('{Space>}');
+    if (timing === 'after') other.focus();
+    expect(shadow.activeElement).toBe(other);
+    element.focus();
+    await userEvent.keyboard('{/Space}');
+    expect(click).not.toHaveBeenCalled();
+
+    await userEvent.keyboard('{Space}');
+    expect(click).toHaveBeenCalledOnce();
   });
 
   it('should submit with hidden native submitter data', async () => {

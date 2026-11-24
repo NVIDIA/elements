@@ -14,10 +14,15 @@ type SubmitHost = ReactiveElement & {
   value?: string;
 };
 
+function isActivationKey(event: KeyboardEvent) {
+  return event.key === ' ' || event.key === 'Enter' || event.code === 'Space' || event.code === 'Enter';
+}
+
 export class TypeSubmitController<T extends SubmitHost> implements ReactiveController {
   #defaultType: ButtonType | undefined;
   #submitter: HTMLButtonElement | undefined;
   #submitterForm: HTMLFormElement | undefined;
+  #spacePressed = false;
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -32,13 +37,19 @@ export class TypeSubmitController<T extends SubmitHost> implements ReactiveContr
     this.#removeSubmitBehavior();
     if (!this.host.readOnly && !this.host.disabled) {
       this.host.addEventListener('click', this.#onSubmitClick);
+      this.host.addEventListener('keydown', this.#onSubmitKeydown);
+      this.host.addEventListener('keypress', this.#onSubmitKeypress);
       this.host.addEventListener('keyup', this.#onSubmitKeyup);
+      this.host.addEventListener('blur', this.#clearSpacePress);
+    } else {
+      this.#clearSpacePress();
     }
   }
 
   hostDisconnected() {
     this.#removeSubmitBehavior();
     this.#removeSubmitter();
+    this.#clearSpacePress();
   }
 
   #setButtonType() {
@@ -49,13 +60,41 @@ export class TypeSubmitController<T extends SubmitHost> implements ReactiveContr
 
   #removeSubmitBehavior() {
     this.host.removeEventListener('click', this.#onSubmitClick);
+    this.host.removeEventListener('keydown', this.#onSubmitKeydown);
+    this.host.removeEventListener('keypress', this.#onSubmitKeypress);
     this.host.removeEventListener('keyup', this.#onSubmitKeyup);
+    this.host.removeEventListener('blur', this.#clearSpacePress);
   }
 
-  #onSubmitKeyup = (event: KeyboardEvent) => {
-    if (event.key === ' ' || event.key === 'Enter' || event.code === 'Space' || event.code === 'Enter') {
+  #clearSpacePress = () => {
+    this.#spacePressed = false;
+  };
+
+  #onSubmitKeydown = (event: KeyboardEvent) => {
+    if (event.isTrusted && event.target === this.host && event.key === ' ') {
+      this.#spacePressed = this.host.matches(':focus');
+    }
+  };
+
+  #onSubmitKeypress = (event: KeyboardEvent) => {
+    // Chromium activates Enter on keypress. Clicking on keydown can redirect keypress to a newly focused control.
+    if (event.isTrusted && event.target === this.host && event.key === 'Enter' && !event.defaultPrevented) {
       this.host.click();
     }
+  };
+
+  #onSubmitKeyup = (event: KeyboardEvent) => {
+    if (!event.isTrusted) {
+      // Keep the existing keyboard event behavior for programmatic callers.
+      if (isActivationKey(event)) this.host.click();
+      return;
+    }
+    if (event.key !== ' ' || event.target !== this.host) return;
+
+    // Focus can move here while Space is still held on another control.
+    const pressedHere = this.#spacePressed;
+    this.#clearSpacePress();
+    if (pressedHere && !event.defaultPrevented) this.host.click();
   };
 
   #onSubmitClick = (event: Event) => {
