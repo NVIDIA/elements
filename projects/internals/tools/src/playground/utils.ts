@@ -101,7 +101,7 @@ export function createPlaygroundURL(source: string, elements: Element[], opts: P
   const result = options.trustedContent ? source : validateTemplate(source, elements);
   const formattedSource = formatTemplate(result);
 
-  const config = frameworkConfigs[options.type!];
+  const config = frameworkConfigs[options.type];
   if (config) {
     return createURL(serialize(config.createFiles(formattedSource, elements, options)), {
       ...options,
