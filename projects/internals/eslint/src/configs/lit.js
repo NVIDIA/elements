@@ -11,6 +11,7 @@ import statelessProperty from '../local/stateless-property.js';
 import requiredCssParts from '../local/required-css-parts.js';
 import noInvalidCssParts from '../local/no-invalid-css-parts.js';
 import requireComponentMetadata from '../local/require-component-metadata.js';
+import elementDescriptionLength from '../local/element-description-length.js';
 import requireInternalHost from '../local/require-internal-host.js';
 import requireElementDefinitions from '../local/require-element-definitions.js';
 import requireTestCompleteness from '../local/require-test-completeness.js';
@@ -67,6 +68,7 @@ export const litConfig = [
           'required-css-parts': requiredCssParts,
           'no-invalid-css-parts': noInvalidCssParts,
           'require-component-metadata': requireComponentMetadata,
+          'element-description-length': elementDescriptionLength,
           'require-internal-host': requireInternalHost,
           'require-element-definitions': requireElementDefinitions,
           'require-test-completeness': requireTestCompleteness,
@@ -141,6 +143,7 @@ export const litConfig = [
       'local/required-css-parts': ['error'],
       'local/no-invalid-css-parts': ['error'],
       'local/require-component-metadata': ['error'],
+      'local/element-description-length': ['error'],
       'local/require-internal-host': ['error'],
       'local/require-element-definitions': ['error'],
       'local/require-composed-events': ['error'],

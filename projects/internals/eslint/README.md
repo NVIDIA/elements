@@ -59,6 +59,7 @@ Applied to `src/**/*.ts`, `src/**/*.tsx`, test files, and `*.examples.ts`.
 **Component API shape**
 
 - **`require-component-metadata`**. Every component class must declare `static readonly metadata = { tag: 'nve-*', version }`. Flags missing metadata, missing fields, or tags that do not start with `nve-`.
+- **`local/element-description-length`**. The Lit config requires a custom element's `@description` to contain 100–250 characters. Line breaks and runs of whitespace count as one space.
 - **`require-element-definitions`**. `nve-*` elements referenced in a component's template must appear in that component's `static elementDefinitions` so scoped registration works.
 - **`require-internal-host`**. Each component's render root must carry the `internal-host` attribute so CSS parts and internal styling resolve correctly.
 - **`require-composed-events`**. Any `CustomEvent` dispatched with `bubbles: true` must also set `composed: true`. Shadow DOM boundary crossing stays opt-in.

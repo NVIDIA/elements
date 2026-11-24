@@ -4,8 +4,17 @@
 import { readFileSync, readdirSync, statSync, type Stats } from 'fs';
 import { join, relative, resolve, dirname } from 'path';
 
-const rootDir = resolve(import.meta.dirname, '../../../../../');
-const wireitScripts = new Map(); // key: "package-path:script-name", value: script config
+const repositoryRoot = resolve(import.meta.dirname, '../../../../../');
+
+type WireitScriptConfig = { dependencies?: unknown[] };
+
+type WireitScript = {
+  packagePath: string;
+  packageName: string;
+  scriptName: string;
+  config: WireitScriptConfig;
+  dependencies: string[];
+};
 
 function findPackageJsonFiles(dir: string, results: string[] = []): string[] {
   try {
@@ -80,10 +89,12 @@ function findPackageJsonInDir(dir: string): string | null {
   return null;
 }
 
-function extractWireitScripts(packageJsonPath: string) {
+function extractWireitScripts(packageJsonPath: string, rootDir: string, wireitScripts: Map<string, WireitScript>) {
   try {
-    const content = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
-    const wireit = content.wireit || {};
+    const content: { name?: string; wireit?: Record<string, WireitScriptConfig> } = JSON.parse(
+      readFileSync(packageJsonPath, 'utf-8')
+    );
+    const wireit = content.wireit ?? {};
     const packageName = content.name || relative(rootDir, dirname(packageJsonPath));
 
     for (const [scriptName, config] of Object.entries(wireit)) {
@@ -112,7 +123,7 @@ function addDependency(dep: unknown, script: { packagePath: string; dependencies
   }
 }
 
-function buildDependencyGraph() {
+function buildDependencyGraph(wireitScripts: Map<string, WireitScript>) {
   for (const [key, script] of wireitScripts.entries()) {
     const deps = script.config.dependencies || [];
 
@@ -130,9 +141,11 @@ function createLabel(packageName: string, scriptName: string) {
   return `${shortName}:${scriptName}`;
 }
 
-export function generateGraphData() {
-  findPackageJsonFiles(rootDir).forEach(file => extractWireitScripts(file));
-  buildDependencyGraph();
+export function generateGraphData(rootDir = repositoryRoot) {
+  const absoluteRoot = resolve(rootDir);
+  const wireitScripts = new Map<string, WireitScript>();
+  findPackageJsonFiles(absoluteRoot).forEach(file => extractWireitScripts(file, absoluteRoot, wireitScripts));
+  buildDependencyGraph(wireitScripts);
 
   const nodes = [];
   const links = [];
@@ -160,7 +173,7 @@ export function generateGraphData() {
     else if (script.packageName.includes('styles')) category = 'styles';
 
     nodes.push({
-      id: key.replace(rootDir, ''),
+      id: key.replace(absoluteRoot, ''),
       label,
       packageName: script.packageName,
       scriptName: script.scriptName,
@@ -174,8 +187,8 @@ export function generateGraphData() {
     for (const depKey of script.dependencies) {
       if (wireitScripts.has(depKey)) {
         links.push({
-          source: key.replace(rootDir, ''),
-          target: depKey.replace(rootDir, '')
+          source: key.replace(absoluteRoot, ''),
+          target: depKey.replace(absoluteRoot, '')
         });
       }
     }

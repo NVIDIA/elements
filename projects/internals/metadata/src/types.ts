@@ -31,6 +31,7 @@ export interface Element {
   manifest?: CustomElementManifest;
   markdown?: string;
   package?: string;
+  packageUnpublished?: boolean;
   version?: string;
 }
 

@@ -8,7 +8,7 @@ import styles from './plot.css?inline';
 
 /**
  * @element nve-plot
- * @description A visual plot component.
+ * @description Provides a block-level host reserved for data visualization. Its current implementation renders an empty plot surface.
  * @documentation https://nvidia.github.io/elements/docs/elements/plot/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/plot/plot

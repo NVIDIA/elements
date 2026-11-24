@@ -94,6 +94,7 @@ function getTokens(): Token[] {
 
 function getProjectElements(basePath: string): Element[] {
   const packageFile = getPackageFile(basePath);
+  const packageUnpublished = packageFile.private === true || packageFile.version === '0.0.0';
   const changelogFile = getChangelog(basePath);
   const customElementsManifest = getCustomElementsManifest(basePath);
   const elementDeclarations = customElementsManifest ? getManifestDeclarations(customElementsManifest) : [];
@@ -107,6 +108,7 @@ function getProjectElements(basePath: string): Element[] {
       const metadata: Element = {
         name,
         package: packageFile.name,
+        packageUnpublished: packageUnpublished || undefined,
         version: packageFile.version,
         markdown,
         changelog,

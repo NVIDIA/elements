@@ -11,7 +11,7 @@ export interface PartialAPIResult {
 
 export function distillElements(elements: Element[]): PartialAPIResult[] {
   return elements
-    .filter(e => !e.manifest?.deprecated && e.manifest?.description)
+    .filter(e => !e.packageUnpublished && !e.manifest?.deprecated && e.manifest?.description)
     .map(e => ({ name: e.name, description: e.manifest!.description, behavior: e.manifest!.metadata?.behavior ?? '' }));
 }
 
