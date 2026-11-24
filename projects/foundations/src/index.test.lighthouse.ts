@@ -18,7 +18,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(12);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(16.3);
   });
 
   test('JS imports should remain within compressed bundle limits', async () => {
@@ -26,6 +26,7 @@ describe('lighthouse report', () => {
       'js-modules',
       /* html */ `
       <script type="module">
+        import '@nvidia-elements/foundations/draggable-list/define.js';
         import '@nvidia-elements/foundations/scroll-box/define.js';
         import '@nvidia-elements/foundations/virtual-list/define.js';
       </script>
@@ -35,6 +36,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(12.5);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(16.9);
   });
 });

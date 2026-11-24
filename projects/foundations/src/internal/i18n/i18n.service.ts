@@ -5,6 +5,10 @@ import { GlobalStateService } from '../state/index.js';
 import type { ElementsGlobal } from '../state/index.js';
 
 export interface I18nStrings {
+  dragPickedUp: string;
+  dragPosition: string;
+  dragDropped: string;
+  dragCanceled: string;
   close: string;
   copy: string;
   copied: string;
