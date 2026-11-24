@@ -7,6 +7,7 @@ import { getItems, grid } from '../test/demo.js';
 import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/foundations/virtual-list/define.js';
 import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/core/drag-handle/define.js';
 import '@nvidia-elements/core/badge/define.js'
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/card/define.js';
@@ -1415,4 +1416,176 @@ export const SortVisibility = {
     <nve-grid-cell>cell 1-4</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>`
+};
+
+/**
+ * @summary Move jobs within a queue using labeled row handles. Apply each requested placement in the application to keep rendering and order under its control.
+ */
+export const DraggableRows = {
+  render: () => html`
+    <nve-grid id="row-order" draggable-rows aria-label="Reorder training jobs">
+      <nve-grid-header>
+        <nve-grid-column width="max-content" position="fixed" aria-label="Reorder rows"></nve-grid-column>
+        <nve-grid-column>Job</nve-grid-column>
+        <nve-grid-column>Status</nve-grid-column>
+      </nve-grid-header>
+      ${['Prepare data', 'Train model', 'Evaluate model'].map(label => html`
+        <nve-grid-row>
+          <nve-grid-cell>
+            <nve-drag-handle aria-label=${'Move ' + label}></nve-drag-handle>
+          </nve-grid-cell>
+          <nve-grid-cell>${label}</nve-grid-cell>
+          <nve-grid-cell>Queued</nve-grid-cell>
+        </nve-grid-row>
+      `)}
+    </nve-grid>
+    <script type="module">
+      import '@nvidia-elements/core/grid/define.js';
+      import '@nvidia-elements/core/drag-handle/define.js';
+      document.querySelector('#row-order').addEventListener('draggable-drop', event => {
+        const { source, target, placement } = event.detail;
+        target.insertAdjacentElement(placement === 'after' ? 'afterend' : 'beforebegin', source);
+      });
+    </script>
+  `
+};
+
+/**
+ * @summary Move column headers and their cells together so the grid keeps its data aligned. Use a shared column order when rendering each row in a framework.
+ */
+export const DraggableColumns = {
+  render: () => html`
+    <nve-grid id="column-order" draggable-columns aria-label="Reorder job columns">
+      <nve-grid-header>
+        <nve-grid-column>Job<nve-drag-handle aria-label="Move job column" style="margin-inline-start: auto"></nve-drag-handle></nve-grid-column>
+        <nve-grid-column>Status<nve-drag-handle aria-label="Move status column" style="margin-inline-start: auto"></nve-drag-handle></nve-grid-column>
+        <nve-grid-column>GPUs<nve-drag-handle aria-label="Move GPU column" style="margin-inline-start: auto"></nve-drag-handle></nve-grid-column>
+        <nve-grid-column>Priority<nve-drag-handle aria-label="Move priority column" style="margin-inline-start: auto"></nve-drag-handle></nve-grid-column>
+      </nve-grid-header>
+      <nve-grid-row><nve-grid-cell>Training</nve-grid-cell><nve-grid-cell>Running</nve-grid-cell><nve-grid-cell>8</nve-grid-cell><nve-grid-cell>High</nve-grid-cell></nve-grid-row>
+      <nve-grid-row><nve-grid-cell>Evaluation</nve-grid-cell><nve-grid-cell>Queued</nve-grid-cell><nve-grid-cell>4</nve-grid-cell><nve-grid-cell>Normal</nve-grid-cell></nve-grid-row>
+    </nve-grid>
+    <script type="module">
+      import '@nvidia-elements/core/grid/define.js';
+      import '@nvidia-elements/core/drag-handle/define.js';
+      const grid = document.querySelector('#column-order');
+      grid.addEventListener('draggable-drop', event => {
+        const { sourceIndex, targetIndex } = event.detail;
+        for (const row of grid.querySelectorAll('nve-grid-header, nve-grid-row')) {
+          const cells = Array.from(row.children);
+          const [moved] = cells.splice(sourceIndex, 1);
+          cells.splice(targetIndex, 0, moved);
+          row.append(...cells);
+        }
+      });
+    </script>
+  `
+};
+
+/**
+ * @summary Transfer job rows between grids using drag handles, keyboard placement, or click placement. Drop on the placeholder below the rows to append a job anywhere in the remaining space.
+ */
+export const RowTransfers = {
+  render: () => html`
+    <section id="grid-queues" nve-layout="grid gap:lg span-items:6">
+      <section nve-layout="column gap:sm">
+        <h3 nve-text="heading">Pending jobs</h3>
+        <nve-grid draggable-rows aria-label="Pending jobs" style="--scroll-height: 220px">
+          <nve-grid-header>
+            <nve-grid-column width="max-content" position="fixed" aria-label="Reorder rows"></nve-grid-column>
+            <nve-grid-column>Job</nve-grid-column>
+            <nve-grid-column>Status</nve-grid-column>
+          </nve-grid-header>
+          <nve-grid-row>
+            <nve-grid-cell><nve-drag-handle aria-label="Move training"></nve-drag-handle></nve-grid-cell>
+            <nve-grid-cell>Training</nve-grid-cell>
+            <nve-grid-cell>Ready</nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><nve-drag-handle aria-label="Move evaluation"></nve-drag-handle></nve-grid-cell>
+            <nve-grid-cell>Evaluation</nve-grid-cell>
+            <nve-grid-cell>Ready</nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-placeholder tabindex="0">Move a job here</nve-grid-placeholder>
+        </nve-grid>
+      </section>
+      <section nve-layout="column gap:sm">
+        <h3 nve-text="heading">Scheduled jobs</h3>
+        <nve-grid draggable-rows aria-label="Scheduled jobs" style="--scroll-height: 220px">
+          <nve-grid-header>
+            <nve-grid-column width="max-content" position="fixed" aria-label="Reorder rows"></nve-grid-column>
+            <nve-grid-column>Job</nve-grid-column>
+            <nve-grid-column>Status</nve-grid-column>
+          </nve-grid-header>
+          <nve-grid-row>
+            <nve-grid-cell><nve-drag-handle aria-label="Move inference"></nve-drag-handle></nve-grid-cell>
+            <nve-grid-cell>Inference</nve-grid-cell>
+            <nve-grid-cell>Scheduled</nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-row>
+            <nve-grid-cell><nve-drag-handle aria-label="Move export"></nve-drag-handle></nve-grid-cell>
+            <nve-grid-cell>Export</nve-grid-cell>
+            <nve-grid-cell>Scheduled</nve-grid-cell>
+          </nve-grid-row>
+          <nve-grid-placeholder tabindex="0">Move a job here</nve-grid-placeholder>
+        </nve-grid>
+      </section>
+    </section>
+    <script type="module">
+      import '@nvidia-elements/core/grid/define.js';
+      import '@nvidia-elements/core/drag-handle/define.js';
+      const queues = document.querySelector('#grid-queues');
+      queues.addEventListener('draggable-drop', event => {
+        const { source, target, placement } = event.detail;
+        target.insertAdjacentElement(placement === 'after' ? 'afterend' : 'beforebegin', source);
+      });
+    </script>
+  `
+};
+
+/**
+ * @summary Reorder rendered jobs in a large virtual queue by stable identity. Update the dataset and redraw its current window; movement beyond rendered rows stays application-owned.
+ */
+export const VirtualReorder = {
+  render: () => html`
+    <nve-grid id="virtual-order" draggable-rows aria-label="Reorder visible jobs" aria-rowcount="10001">
+      <nve-grid-header>
+        <nve-grid-column width="max-content" position="fixed" aria-label="Reorder rows"></nve-grid-column>
+        <nve-grid-column>Job</nve-grid-column>
+        <nve-grid-column>Status</nve-grid-column>
+      </nve-grid-header>
+      <nve-virtual-list tabindex="-1" item-count="10000" item-height="44" style="--scroll-height: 300px"></nve-virtual-list>
+    </nve-grid>
+    <script type="module">
+      import '@nvidia-elements/core/grid/define.js';
+      import '@nvidia-elements/core/drag-handle/define.js';
+      import '@nvidia-elements/foundations/virtual-list/define.js';
+      const grid = document.querySelector('#virtual-order');
+      const viewport = grid.querySelector('nve-virtual-list');
+      const jobs = Array.from({length: 10000}, (_, id) => ({id, label: 'Job ' + id}));
+      function draw(range) {
+        if (!range) return;
+        viewport.innerHTML = jobs.slice(range.start, range.end).map((job, offset) =>
+          '<nve-grid-row data-job-id="' + job.id + '" aria-rowindex="' + (range.start + offset + 2) + '">' +
+          '<nve-grid-cell><nve-drag-handle aria-label="Move ' + job.label + '"></nve-drag-handle></nve-grid-cell>' +
+          '<nve-grid-cell>' + job.label + '</nve-grid-cell>' +
+          '<nve-grid-cell>Queued</nve-grid-cell></nve-grid-row>'
+        ).join('');
+      }
+      grid.addEventListener('draggable-drop', event => {
+        const {source, target, placement, interaction} = event.detail;
+        const from = jobs.findIndex(job => String(job.id) === source.dataset.jobId);
+        const [moved] = jobs.splice(from, 1);
+        const to = jobs.findIndex(job => String(job.id) === target.dataset.jobId);
+        jobs.splice(to + (placement === 'after' ? 1 : 0), 0, moved);
+        draw(viewport.range);
+        if (interaction === 'keyboard') requestAnimationFrame(() => {
+          grid.querySelector('[data-job-id="' + moved.id + '"] nve-drag-handle')?.focus();
+        });
+      });
+      viewport.addEventListener('virtual-change', event => draw(event.detail));
+      await viewport.updateComplete;
+      draw(viewport.range);
+    </script>
+  `
 };

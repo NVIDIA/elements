@@ -3,6 +3,7 @@
 
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import {
   keyNavigationGrid,
@@ -20,6 +21,7 @@ import { GridColumn } from './column/column.js';
 import { GridFooter } from './footer/footer.js';
 import { GridRow } from './row/row.js';
 import { GridCell } from './cell/cell.js';
+import type { DraggableGridRowController, DraggableGridColumnController } from './draggable.controller.js';
 import styles from './grid.css?inline';
 import globalStyles from './grid.global.css?inline';
 
@@ -38,13 +40,45 @@ import globalStyles from './grid.global.css?inline';
  * @cssprop --font-size
  * @cssprop --row-height - fixed height of each row
  * @cssprop --scroll-height - height of the scrollable area
-
+ * @event draggable-start - Pickup intent with Foundations DraggableSourceDetail. The application owns row and column order.
+ * @event draggable-drag - Native movement with Foundations DraggableSourceDetail.
+ * @event draggable-enter - A proposed row or column placement changed, with Foundations DraggableDropDetail.
+ * @event draggable-over - Native movement over a valid placement with Foundations DraggableDropDetail.
+ * @event draggable-leave - A proposed placement cleared, with Foundations DraggableDropDetail.
+ * @event draggable-drop - Reorder request with Foundations DraggableDropDetail: source, target, sourceContainer, targetContainer, sourceIndex, targetIndex, placement, and interaction. Indices describe rendered rows or headers, excluding placeholders; targetIndex is the destination insertion index after source removal. The destination grid emits the event without moving DOM. For columns, reorder headers and every row's cells together. For virtual rows, map element identities to logical data; replacing the rendered window cancels pickup. Native dragging, keyboard pickup with arrows and Enter/Space, and click/tap placement share this contract.
+ * @event draggable-end - Pickup ended with Foundations DraggableEndDetail; dropped indicates a request fired, not application acceptance.
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
 @audit()
 @stateScroll<Grid>()
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements ContainerElement {
+  /** Enable handle-based row movement and transfers between row-enabled grids. Place a visible grid placeholder after the rows to accept append drops. In grids without a virtual list, the placeholder fills the remaining scroll area. Applications apply or ignore draggable-drop requests. */
+  @property({ type: Boolean, attribute: 'draggable-rows', reflect: true }) draggableRows = false;
+
+  /** Enable handle-based column reordering within this grid. Update the column data and all row cells in the draggable-drop handler. */
+  @property({ type: Boolean, attribute: 'draggable-columns' }) draggableColumns = false;
+
+  @state() private announcement = '';
+  #announce = (message: string) => {
+    this.announcement = message;
+  };
+
+  #draggableRows?: DraggableGridRowController;
+  #draggableColumns?: DraggableGridColumnController;
+
+  protected override scheduleUpdate() {
+    const needsRows = this.draggableRows && !this.#draggableRows;
+    const needsColumns = this.draggableColumns && !this.#draggableColumns;
+    if (!needsRows && !needsColumns) return super.scheduleUpdate();
+
+    return import('./draggable.controller.js').then(({ DraggableGridRowController, DraggableGridColumnController }) => {
+      if (this.draggableRows) this.#draggableRows ??= new DraggableGridRowController(this, this.#announce);
+      if (this.draggableColumns) this.#draggableColumns ??= new DraggableGridColumnController(this, this.#announce);
+      return super.scheduleUpdate();
+    });
+  }
+
   /**
    * Determines the container styles of component. Flat nests the grid within other containers. Full spans the full edge-to-edge viewport width.
    */
@@ -123,6 +157,7 @@ export class Grid extends LitElement implements ContainerElement {
           <slot part="_content" @slotchange=${() => this.requestUpdate()}></slot>
         </div>
         <slot name="footer"></slot>
+        <span class="announcement" role="status" aria-live="polite" aria-atomic="true">${this.announcement}</span>
       </div>
     `;
   }

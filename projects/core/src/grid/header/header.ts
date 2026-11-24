@@ -100,6 +100,7 @@ export class GridHeader extends LitElement {
     if (!this.isConnected || !this.parentElement) return;
     const widths = this.columns.map(c => (c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
     widths.forEach((w, i) => this.#grid.style.setProperty(`--c${i}`, w));
+    this.columns.forEach(column => column.refreshLayout());
   }
 
   #validateColumns() {

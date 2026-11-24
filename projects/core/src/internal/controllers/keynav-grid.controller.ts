@@ -155,6 +155,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   };
 
   #onKeyDown = (e: KeyboardEvent) => {
+    if (e.defaultPrevented) return;
     if (!validKeyNavigationCode(e) || !this.#ownsEvent(e)) return;
     this.#flushCellUpdates();
     const rows = Array.from(this.#hostRows);
@@ -199,6 +200,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   }
 
   #onKeyUp = (e: KeyboardEvent) => {
+    if (e.defaultPrevented) return;
     if (!this.#ownsEvent(e)) return;
     if (e.code !== 'Enter' && e.code !== 'Escape') return;
     this.#flushCellUpdates();

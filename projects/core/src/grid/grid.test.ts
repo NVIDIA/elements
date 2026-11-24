@@ -248,6 +248,37 @@ describe(Grid.metadata.tag, () => {
   it('should provide a footer slot', async () => {
     expect(element.shadowRoot.querySelector('slot[name="footer"]')).toBeTruthy();
   });
+
+  it('keeps a fixed column pinned during a resize while horizontally scrolled', async () => {
+    element.style.display = 'block';
+    element.style.width = '320px';
+    element.style.setProperty('--scroll-height', '200px');
+    const header = element.querySelector('nve-grid-header')!;
+    const columns = Array.from(header.querySelectorAll('nve-grid-column'));
+    const first = columns[0];
+    columns.forEach(column => (column.width = '240px'));
+    element.querySelectorAll('nve-grid-row').forEach(row => (row.style.minWidth = '960px'));
+    first.position = 'fixed';
+    await elementIsStable(first);
+    await vi.waitFor(() => {
+      expect(element.style.getPropertyValue('--c3')).toBe('240px');
+      expect(first.hasAttribute('left')).toBe(true);
+    });
+
+    const scrollbox = element.shadowRoot.querySelector('[part="_scrollbox"]')!;
+    expect(scrollbox.scrollWidth - scrollbox.clientWidth).toBeGreaterThanOrEqual(480);
+    scrollbox.scrollLeft = 480;
+    expect(scrollbox.scrollLeft).toBe(480);
+    const refreshLayout = vi.spyOn(first, 'refreshLayout');
+    element.style.width = '340px';
+    await vi.waitFor(() => expect(refreshLayout).toHaveBeenCalled());
+
+    expect(first.hasAttribute('left')).toBe(true);
+    const gridLeft = element.getBoundingClientRect().left;
+    const firstCell = element.querySelector('nve-grid-cell')!;
+    expect(first.getBoundingClientRect().left).toBeCloseTo(gridLeft);
+    expect(firstCell.getBoundingClientRect().left).toBeCloseTo(gridLeft);
+  });
 });
 
 describe(`${Grid.metadata.tag}: id check`, () => {
