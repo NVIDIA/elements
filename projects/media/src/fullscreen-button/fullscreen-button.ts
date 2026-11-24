@@ -23,7 +23,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-fullscreen-button
- * @description Requests controller full-screen changes without adding form submission state.
+ * @description Requests full-screen changes for the media controller's region and reflects its current full-screen state. The button adds no form submission state.
  * @documentation https://nvidia.github.io/elements/docs/media/fullscreen-button/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/fullscreen-button

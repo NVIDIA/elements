@@ -21,7 +21,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-volume-range
- * @description Sets native media volume and submits the current volume as a numeric form value.
+ * @description Sets the controlled media's volume on its native scale from 0 to 1. Use the slider to submit the current volume as a numeric form value.
  * @documentation https://nvidia.github.io/elements/docs/media/volume-range/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/volume-range

@@ -23,9 +23,9 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-loop-button
- * @description Requests continuous looping changes for the controlled media.
+ * @description Requests continuous looping for the controlled audio or video. The button reflects the media element's current loop setting.
  * @documentation https://nvidia.github.io/elements/docs/media/loop-button/
- * @since 0.0.0
+ * @since 1.1.0
  * @entrypoint \@nvidia-elements/media/loop-button
  * @slot - Optional custom icon content.
  * @cssprop --background

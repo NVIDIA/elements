@@ -34,7 +34,7 @@ const mediaEventTypes = [
 
 /**
  * @element nve-media-controller
- * @description Wraps consumer-owned audio or video and applies media commands from external controls.
+ * @description Wraps an application-owned audio or video element. Connect external media controls to send commands and observe the controller's shared playback state.
  * @documentation https://nvidia.github.io/elements/docs/media/controller/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/controller

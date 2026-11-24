@@ -23,7 +23,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-seek-button
- * @description Sends absolute or relative seek commands without adding form submission state.
+ * @description Sends absolute or relative seek commands to the media controller. Use separate buttons for start, end, or a fixed skip interval without adding a form value.
  * @documentation https://nvidia.github.io/elements/docs/media/seek-button/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/seek-button
