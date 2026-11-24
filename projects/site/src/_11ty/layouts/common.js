@@ -193,7 +193,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'selected' : ''}><a href="/docs/patterns/trend/">Trend</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/foundations/scroll-box/') || data.page.url.includes('/docs/foundations/virtual-list/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') || data.page.url.includes('/docs/viewport/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/elements/') || data.page.url.includes('/docs/foundations/scroll-box/') || data.page.url.includes('/docs/foundations/virtual-list/') || data.page.url.includes('/docs/foundations/draggable-list/') || data.page.url.includes('/docs/media/') || data.page.url.includes('/docs/monaco/') || data.page.url.includes('/docs/markdown/') || data.page.url.includes('/docs/code/') || data.page.url.includes('/docs/viewport/') ? 'expanded' : ''}>
     <a href="/docs/elements/">Elements</a>
     <nve-tree-node ${data.page.url === '/docs/elements/' ? 'selected' : ''}><a href="/docs/elements/">Overview</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'selected' : ''}><a href="/docs/elements/accordion/">Accordion</a></nve-tree-node>
@@ -226,6 +226,8 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/container/') ? 'selected' : ''}><a href="/docs/elements/data-grid/container/">Container</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/card/') ? 'selected' : ''}><a href="/docs/elements/data-grid/card/">Card</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/display-settings/') ? 'selected' : ''}><a href="/docs/elements/data-grid/display-settings/">Display Settings</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/draggable-columns/') ? 'selected' : ''}><a href="/docs/elements/data-grid/draggable-columns/">Draggable Columns</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/draggable-rows/') ? 'selected' : ''}><a href="/docs/elements/data-grid/draggable-rows/">Draggable Rows</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/footer/') ? 'selected' : ''}><a href="/docs/elements/data-grid/footer/">Footer</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/heatmap/') ? 'selected' : ''}><a href="/docs/elements/data-grid/heatmap/">Heatmap</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/keynav/') ? 'selected' : ''}><a href="/docs/elements/data-grid/keynav/">Keynav</a></nve-tree-node>
@@ -248,6 +250,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/divider/') ? 'selected' : ''}><a href="/docs/elements/divider/">Divider</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'selected' : ''}><a href="/docs/elements/dot/">Dot</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/drag-handle/') ? 'selected' : ''}><a href="/docs/elements/drag-handle/">Drag Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/draggable-list/') ? 'selected' : ''}><a href="/docs/foundations/draggable-list/">Draggable List</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/drawer/') ? 'selected' : ''}><a href="/docs/elements/drawer/">Drawer</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown/') ? 'selected' : ''}><a href="/docs/elements/dropdown/">Dropdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'selected' : ''}><a href="/docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>

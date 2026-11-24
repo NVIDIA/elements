@@ -38,3 +38,7 @@ import '@nvidia-elements/core/grid/define.js';
 {% example '@nvidia-elements/core/grid/grid.examples.json', 'ValidColumnCount' %}
 {% example '@nvidia-elements/core/grid/grid.examples.json', 'InvalidColumnCount' %}
 {% enddodont %}
+
+## Reordering
+
+See [draggable rows](/docs/elements/data-grid/draggable-rows/) for row movement and transfers between grids, or [draggable columns](/docs/elements/data-grid/draggable-columns/) for column reordering.
