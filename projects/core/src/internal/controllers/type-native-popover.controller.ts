@@ -226,17 +226,6 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     trigger.setAttribute('popovertarget', this.host.id);
   }
 
-  #toggleFocus(open: boolean, target: HTMLElement) {
-    if (open) {
-      // only focus popover if not the active element and not containing the active element already
-      if ((this.host.getRootNode() as Document).activeElement !== this.host && !this.host.shadowRoot!.activeElement) {
-        focusElement(this.host);
-      }
-    } else {
-      focusElement(target);
-    }
-  }
-
   #clearLegacyTrigger(trigger: HTMLButtonElement) {
     trigger.popoverTargetElement = null;
     trigger.removeAttribute('popovertarget');
@@ -255,6 +244,14 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #onBeforeToggle = (e: ToggleEvent) => {
     if (e.newState === 'open') {
       this.host._internals!.states.add('transition-start');
+
+      if (this.host.modal && this.host.inert) {
+        // Native popover autofocus runs synchronously after beforetoggle.
+        this.host.inert = false;
+        setTimeout(() => {
+          if (!this.host.matches(':popover-open')) this.host.inert = true;
+        });
+      }
     }
   };
 
@@ -274,8 +271,8 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
     this.host.inert = this.host.matches(':not(:popover-open)');
 
-    if (this.host.modal) {
-      this.#toggleFocus(e.newState === 'open', e.target as HTMLElement);
+    if (this.host.modal && e.newState === 'open' && !this.host.matches(':focus-within')) {
+      focusElement(this.host);
     }
 
     this.host.dispatchEvent(

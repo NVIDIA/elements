@@ -293,6 +293,54 @@ describe('type-popover.controller', () => {
     expect(getComputedStyle(element, ':before').getPropertyValue('content')).toBe('" "');
   });
 
+  it('should honor native autofocus in a modal popover and restore focus to the trigger on close', async () => {
+    element.modal = true;
+    element.style.setProperty('--nve-ref-animation-duration-200', '0s');
+    await elementIsStable(element);
+    expect(element.inert).toBe(true);
+
+    button.focus();
+    const input = document.createElement('input');
+    input.autofocus = true;
+    element.appendChild(input);
+
+    const open = untilEvent(element, 'open');
+    emulateClick(button);
+    expect(document.activeElement).toBe(input);
+    await open;
+    expect(document.activeElement).toBe(input);
+
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    await close;
+    expect(element.inert).toBe(true);
+    expect(document.activeElement).toBe(button);
+  });
+
+  it('should focus the modal popover when no descendant receives autofocus', async () => {
+    element.modal = true;
+    await elementIsStable(element);
+    button.focus();
+
+    const open = untilEvent(element, 'open');
+    emulateClick(button);
+    await open;
+
+    expect(document.activeElement).toBe(element);
+  });
+
+  it('should restore inertness when opening a modal popover is canceled', async () => {
+    element.modal = true;
+    await elementIsStable(element);
+    expect(element.inert).toBe(true);
+
+    element.addEventListener('beforetoggle', event => event.preventDefault(), { once: true });
+    element.showPopover();
+
+    expect(element.matches(':popover-open')).toBe(false);
+    await expect.poll(() => element.inert).toBe(true);
+  });
+
   it('should close popover if inert modal is rendered and clicked outside of popover bounds', async () => {
     element.modal = true;
     await elementIsStable(element);
@@ -537,8 +585,7 @@ describe('type-popover.controller explicit trigger', () => {
     element.setAttribute('hidden', '');
     expect((await close).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(false);
-    await Promise.all(element.getAnimations().map(animation => animation.finished));
-    expect(element.getClientRects()).toHaveLength(0);
+    await expect.poll(() => element.getClientRects().length).toBe(0);
   });
 });
 
@@ -682,8 +729,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     expect((await close).target).toBe(element);
     await elementIsStable(element);
     expect(element.hidden).toBe(true);
-    await Promise.all(element.getAnimations().map(animation => animation.finished));
-    expect(element.getClientRects()).toHaveLength(0);
+    await expect.poll(() => element.getClientRects().length).toBe(0);
   });
 
   it('should NOT trigger close if a close event fires from a slotted child element', async () => {

@@ -321,14 +321,40 @@ export const InvalidLinkButton = {
 }
 
 /**
- * @summary Use a progress ring within a button to communicate that an action is processing and prevent repeated submissions. Limit this pattern to short, indeterminate actions (about five seconds or less); for longer or determinate tasks, use a progress bar or ring outside the button.
+ * @summary Disable the submit button to prevent duplicate submissions while work is pending, and show a progress ring for short, indeterminate work. Hide the ring and re-enable the button when the work finishes.
  */
 export const ProgressDisclosure = {
   render: () => html`
-    <nve-button>
-      <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
-      Submitting
-    </nve-button>
+    <form id="progress-disclosure-form">
+      <nve-button type="submit">
+        <nve-progress-ring status="neutral" size="xxs" hidden aria-hidden="true"></nve-progress-ring>
+        <span>Submit</span>
+      </nve-button>
+    </form>
+    <script type="module">
+      const form = document.getElementById('progress-disclosure-form');
+      const button = form.querySelector('nve-button');
+      const progress = button.querySelector('nve-progress-ring');
+      const label = button.querySelector('span');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (button.disabled) return;
+
+        button.disabled = true;
+        progress.hidden = false;
+        label.textContent = 'Submitting';
+
+        try {
+          // Simulate a short request locally.
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        } finally {
+          progress.hidden = true;
+          label.textContent = 'Submit';
+          button.disabled = false;
+        }
+      });
+    </script>
   `
 };
 

@@ -334,19 +334,24 @@ describe(`${Button.metadata.tag} - button semantics`, () => {
     expect(submitButtonInForm.type).toBe('submit');
   });
 
-  it('should add or remove button event listeners when readOnly updates', async () => {
+  it('should suppress click and keyboard submission while read-only', async () => {
     await elementIsStable(submitButtonInForm);
     expect(submitButtonInForm.readOnly).toBe(false);
+    const submit = vi.fn();
+    form.addEventListener('submit', submit);
 
-    vi.spyOn(submitButtonInForm, 'removeEventListener');
     submitButtonInForm.readOnly = true;
     await elementIsStable(submitButtonInForm);
-    expect(submitButtonInForm.removeEventListener).toBeCalledTimes(3); // 2x button controller, 1x command controller
+    emulateClick(submitButtonInForm);
+    submitButtonInForm.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+    expect(submit).not.toHaveBeenCalled();
 
-    vi.spyOn(submitButtonInForm, 'addEventListener');
     submitButtonInForm.readOnly = false;
     await elementIsStable(submitButtonInForm);
-    expect(submitButtonInForm.addEventListener).toBeCalledTimes(3); // 2x button controller, 1x command controller
+    emulateClick(submitButtonInForm);
+    expect(submit).toHaveBeenCalledTimes(1);
+    submitButtonInForm.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+    expect(submit).toHaveBeenCalledTimes(2);
   });
 
   it('should trigger submit event when host exists within a form element', async () => {
