@@ -10,7 +10,7 @@ import globalStyles from './file.global.css?inline';
 
 /**
  * @element nve-file
- * @description A file picker is a control that enables users to choose a file value.
+ * @description Lets users choose files from their device through a native file picker. Use a file input with this control to collect files in a form.
  * @documentation https://nvidia.github.io/elements/docs/elements/file/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/file

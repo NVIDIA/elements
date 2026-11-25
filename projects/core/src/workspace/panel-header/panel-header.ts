@@ -16,9 +16,9 @@ import styles from './panel-header.css?inline';
 
 /**
  * @element nve-workspace-panel-header
- * @description Supplies a workspace panel title, decoration, and application controls.
+ * @description Supplies a workspace panel's title, decoration, and application controls. Use the suffix slot for controls of the selected panel.
  * @documentation https://nvidia.github.io/elements/docs/elements/workspace/
- * @since 0.0.0
+ * @since 2.23.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/workspace
  * @slot - Noninteractive panel title.

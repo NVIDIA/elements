@@ -31,10 +31,9 @@ const THRESHOLDS: { unit: TimeUnitOption; max: number }[] = [
 
 /**
  * @element nve-format-relative-time
- * @description Formats a date/time value as localized relative text using the Intl.RelativeTimeFormat API. Renders inside a semantic time element.
- * Options mirror the Intl.RelativeTimeFormat API. When unit is 'auto', the component selects the best unit based on the time difference.
+ * @description Formats a date and time relative to now in a semantic time element using Intl.RelativeTimeFormat. Choose a unit or let the formatter select it from the time difference.
  * @documentation https://nvidia.github.io/elements/docs/elements/format-relative-time/
- * @since 0.0.0
+ * @since 1.71.0
  * @entrypoint \@nvidia-elements/core/format-relative-time
  * @slot - Date string to format (such as 2023-07-28T04:20:17.434Z). Serves as fallback before hydration.
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time

@@ -26,7 +26,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-dropzone
- * @description A dropzone form control that enables users to drag and drop files onto it.
+ * @description Accepts files dropped onto the control or selected through a file picker. Use it in upload forms and configure the accepted file types and size limit.
  * @documentation https://nvidia.github.io/elements/docs/elements/dropzone/
  * @since 1.29.0
  * @entrypoint \@nvidia-elements/core/dropzone

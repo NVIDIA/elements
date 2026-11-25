@@ -7,7 +7,7 @@ import styles from './drawer-content.css?inline';
 
 /**
  * @element nve-drawer-content
- * @description Contains the scrollable main body content within a drawer panel.
+ * @description Contains the scrollable main body of a drawer. Place long forms, settings, or details here so the drawer's header and footer stay separate.
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
  * @slot - default slot for the drawer content

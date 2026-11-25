@@ -42,9 +42,9 @@ const i18nDefaults = {
 /**
  * @element nve-dashboard
  * @attribute {string} value - JSON serialization of DashboardLayout. An absent, empty, or invalid JSON attribute selects automatic layout.
- * @description A dashboard arranges application panels on a resizable grid with a restorable layout.
+ * @description Arranges application panels on a resizable grid with a restorable layout. Give panels durable IDs to preserve their identities across layout changes.
  * @documentation https://nvidia.github.io/elements/docs/elements/dashboard/
- * @since 0.0.0
+ * @since 2.24.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/dashboard
  * @command --enter-fullscreen - Present the invoking panel in native fullscreen.

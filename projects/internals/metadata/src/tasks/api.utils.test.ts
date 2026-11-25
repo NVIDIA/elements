@@ -1,7 +1,9 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import type { Package } from '../types.js';
 import { getApi } from './api.utils.js';
 
 type Api = Awaited<ReturnType<typeof getApi>>;
@@ -24,10 +26,22 @@ describe('ApiUtils', () => {
     expect(getApi).toBeDefined();
   });
 
+  it.each(['plot', 'scene'])('records whether the %s package is unpublished', async project => {
+    const packageFile: Package = JSON.parse(
+      readFileSync(new URL(`../../../../${project}/package.json`, import.meta.url), 'utf8')
+    );
+    const element = getElement(await getApi(), `nve-${project}`);
+
+    expect(element).toBeDefined();
+    const unpublished = packageFile.private === true || packageFile.version === '0.0.0';
+    expect(element?.packageUnpublished).toBe(unpublished || undefined);
+  });
+
   it('should include attribute names for inherited button members', async () => {
     const api = await getApi();
     const button = getElement(api, 'nve-button');
 
+    expect(button?.packageUnpublished).toBeUndefined();
     expect(getField(button, 'pressed')?.attribute).toBe('pressed');
     expect(getField(button, 'readOnly')?.attribute).toBe('readonly');
     expect(getField(button, 'commandForElement')?.attribute).toBe('commandfor');

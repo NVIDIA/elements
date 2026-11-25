@@ -28,7 +28,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-pagination
- * @description Pagination is a control that enables users to navigate through pages of content.
+ * @description Lets users move between pages of content. Provide page-size options to let users control the number of results per page.
  * @documentation https://nvidia.github.io/elements/docs/elements/pagination/
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/pagination

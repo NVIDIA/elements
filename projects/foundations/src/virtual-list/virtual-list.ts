@@ -24,14 +24,14 @@ const maximumExtent = 16_000_000;
 
 /**
  * @element nve-virtual-list
- * @description Fixed-height virtualization with native vertical host scrolling. Consumers own data, templates, and selection: render each `virtual-change` request by replacing or reordering items in the default slot. Native slot changes position the rendered window automatically. Consumers own item navigation and can override `tabindex`. For horizontal scrolling, size the list to its content width and wrap it in a horizontal scroll container.
- * Missing, empty, or invalid required geometry hides content and exposes an empty range. Development diagnostics identify invalid configurations; valid values restore rendering. Variable heights, row groups, detail panels, segmented scrolling, and column virtualization aren't supported.
+ * @description Renders a window of fixed-height items with native vertical scrolling. Applications own the data, templates, and selection, and render each range requested through the virtual-change event.
  * @documentation https://nvidia.github.io/elements/docs/foundations/virtual-list/
- * @since 0.0.0
+ * @since 1.3.0
  * @entrypoint \@nvidia-elements/foundations/virtual-list
  * @slot - Elements for the requested `[start, end)` range. Replace or reorder assigned elements for a new window; reusing the same elements with only content or property updates cannot signal a new window. Content stays hidden while a different window awaits changed assignments. Asynchronous consumers must discard obsolete work before changing DOM. In grids, render direct `nve-grid-row` children and supply logical `aria-rowindex` values and total `aria-rowcount`. The wrapper adds no list or region role, and the spacer stays outside the accessibility tree.
+ * Native slot changes position the rendered window automatically. Applications handle item navigation and can override `tabindex`.
  * @cssprop --scroll-height - Viewport height; default `auto`. Supply a bounded height for virtualization. A zero-height viewport requests `[0, 0)` and recovers when measurable.
- * @cssprop --width - Container width. Defaults to 100%.
+ * @cssprop --width - Container width. Defaults to 100%. For horizontal scrolling, size the list to its content width and wrap it in a horizontal scroll container.
  * @cssprop --item-height - Output containing valid `itemHeight` in pixels. Slotted items use this fixed height automatically; custom item templates can also use it for their internal layout.
  * @event virtual-change - Requests `[start, end)` through immutable `detail: { start, end, count }`. `count` is the total dataset size. Range properties update before dispatch. Fires initially for valid geometry, including an empty dataset, then only when `(start, end, count)` changes. Slot changes don't request another range. Bubbles across shadow boundaries.
  * @event virtual-scroll - Reports `detail: { scrollTop, direction }` when vertical position changes. Direction is `up` or `down` relative to the previous notification. Coalesces updates per animation frame, including programmatic scrolling; unchanged positions emit no event. Bubbles across shadow boundaries. Native `scroll` and `scrollend` remain available on the host.
@@ -44,6 +44,7 @@ export class VirtualList extends LitElement {
 
   /**
    * Required total number of items: a nonnegative safe integer. Total height (`itemCount * itemHeight`) cannot exceed 16,000,000 CSS pixels.
+   * Missing or invalid geometry hides content and exposes an empty range. Development diagnostics identify invalid configurations. Valid geometry restores rendering.
    * Supports property assignments before the first update. For deliberate imperative configuration without attributes, narrowly suppress `@nvidia-elements/lint/no-invalid-virtual-list` and explain the assignments; don't use invalid placeholder attributes.
    */
   @property({ type: Number, attribute: 'item-count' }) itemCount: number;
@@ -51,6 +52,7 @@ export class VirtualList extends LitElement {
   /**
    * Required finite item height greater than zero, in CSS pixels. The viewport sizes slotted items to exactly this height, including borders, and clips overflow.
    * Keep custom item internals within this height and avoid gaps between items.
+   * Virtualization covers one vertical window of fixed-height items. Variable heights, row groups, detail panels, segmented scrolling, and column virtualization require a separate implementation.
    */
   @property({ type: Number, attribute: 'item-height' }) itemHeight: number;
 

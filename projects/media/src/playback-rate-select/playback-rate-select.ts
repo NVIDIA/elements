@@ -23,7 +23,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-playback-rate-select
- * @description Selects native media playback rate and submits the selected rate as a string form value.
+ * @description Changes the playback speed of the controlled media. Provide the available rates and use the select to submit the chosen rate as a string form value.
  * @documentation https://nvidia.github.io/elements/docs/media/playback-rate-select/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/playback-rate-select

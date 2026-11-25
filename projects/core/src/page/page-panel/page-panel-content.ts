@@ -7,7 +7,7 @@ import styles from './page-panel-content.css?inline';
 
 /**
  * @element nve-page-panel-content
- * @description Contains the scrollable main body content within a page panel region.
+ * @description Contains the scrollable main body of a page panel. Use it for page-level details or tools, with the panel's heading and actions in separate regions.
  * @documentation https://nvidia.github.io/elements/docs/elements/page/
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0

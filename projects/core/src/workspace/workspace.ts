@@ -84,9 +84,9 @@ const i18nDefaults = {
 /**
  * @element nve-workspace
  * @attribute {string} value - JSON serialization of WorkspaceLayout. An absent, empty, or invalid JSON attribute selects automatic layout.
- * @description A workspace provides a malleable arrangement of application panels in a restorable layout.
+ * @description Arranges application panels in a configurable, restorable workspace. Use durable panel IDs so saved layouts can reconnect to the same application surfaces.
  * @documentation https://nvidia.github.io/elements/docs/elements/workspace/
- * @since 0.0.0
+ * @since 2.23.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/workspace
  * @command --enter-fullscreen - Present the invoking panel's group in native fullscreen.

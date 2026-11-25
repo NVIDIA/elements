@@ -10,7 +10,7 @@ import styles from './page.css?inline';
 
 /**
  * @element nve-page
- * @description Provide a consistent page structure across the applications, ensuring a seamless user experience.
+ * @description Organizes an application page into named regions for navigation, main content, side panels, and supporting tools. Use the slots that fit the page structure.
  * @documentation https://nvidia.github.io/elements/docs/elements/page/
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0

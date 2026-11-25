@@ -18,9 +18,9 @@ const i18nDefaults = {
 
 /**
  * @element nve-viewport-zoom-range
- * @description Controls viewport zoom with a range slider.
+ * @description Controls a connected viewport's zoom with a range slider. The slider derives its available range from the target viewport's zoom limits.
  * @documentation https://nvidia.github.io/elements/docs/viewport/zoom-range/
- * @since 0.0.0
+ * @since 1.1.0
  * @entrypoint \@nvidia-elements/viewport/zoom-range
  * @cssprop --background - Active track fill. Defaults to transparent.
  * @cssprop --track-background

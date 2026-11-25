@@ -10,7 +10,7 @@ import styles from './placeholder.css?inline';
  * @element nve-grid-placeholder
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
- * @description Placeholder displays a message while data loads for the grid or shows empty states for datasets.
+ * @description Displays a message in place of grid rows while data loads or when a dataset is empty. Supply the message through the default slot.
  * @slot - Loading or empty-state message displayed in place of grid rows.
  * @cssprop --color
  * @cssprop --padding

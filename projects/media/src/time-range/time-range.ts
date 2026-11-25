@@ -22,7 +22,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-time-range
- * @description Scrubs finite media time and submits the current time as a numeric form value.
+ * @description Lets users scrub media with a finite duration and displays buffered spans when available. It submits the current playback time in seconds as a numeric form value.
  * @documentation https://nvidia.github.io/elements/docs/media/time-range/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/time-range

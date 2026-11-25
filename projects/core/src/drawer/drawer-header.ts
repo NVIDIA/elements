@@ -7,7 +7,7 @@ import styles from './drawer-header.css?inline';
 
 /**
  * @element nve-drawer-header
- * @description Displays the title and optional close control at the top of a drawer to identify its purpose.
+ * @description Displays a drawer's title and optional close control. Use the header to identify the drawer before users reach the scrollable body.
  * @documentation https://nvidia.github.io/elements/docs/elements/drawer/
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer

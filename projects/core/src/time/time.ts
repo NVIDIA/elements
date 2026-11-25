@@ -18,7 +18,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-time
- * @description A time picker is a control that enables users to choose a time value.
+ * @description Lets users enter or pick a time of day through a native time input. Use it in forms that collect a time independently of a calendar date.
  * @documentation https://nvidia.github.io/elements/docs/elements/time/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/time

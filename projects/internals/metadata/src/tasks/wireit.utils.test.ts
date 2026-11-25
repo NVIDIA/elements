@@ -1,19 +1,17 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { mkdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { afterAll, describe, expect, it, vi } from 'vitest';
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, relative, resolve } from 'node:path';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { generateGraphData } from './wireit.utils.js';
 import type { WireitGraph } from '../types.js';
 
-const fixtureRoot = join(import.meta.dirname, '__wireit-graph-fixtures__');
-const fixturePackageDir = join(fixtureRoot, 'labs-pkg');
 const missingPackageDep = '../../../../../../../../upkeep-missing-wireit-pkg:build';
 
-function installFixtures() {
-  rmSync(fixtureRoot, { recursive: true, force: true });
-  mkdirSync(fixtureRoot, { recursive: true });
+function installFixtures(fixtureRoot: string) {
+  const fixturePackageDir = join(fixtureRoot, 'labs-pkg');
   if (process.platform !== 'win32') {
     symlinkSync('missing-entry-target', join(fixtureRoot, '000-missing-entry'));
   }
@@ -33,17 +31,17 @@ function installFixtures() {
   );
 }
 
-const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-installFixtures();
-
 describe('generateGraphData', () => {
-  afterAll(() => {
-    consoleErrorSpy.mockRestore();
-    rmSync(fixtureRoot, { recursive: true, force: true });
+  let result: WireitGraph;
+  beforeAll(() => {
+    result = generateGraphData();
   });
 
-  const result: WireitGraph = generateGraphData();
-  const errorMessages = consoleErrorSpy.mock.calls.map(([message]) => String(message));
+  it('should generate the same graph when the repository root is relative', () => {
+    const rootDir = relative(process.cwd(), resolve(import.meta.dirname, '../../../../../')) || '.';
+
+    expect(generateGraphData(rootDir)).toEqual(result);
+  });
 
   it('should return an object with nodes and links arrays', () => {
     expect(result).toBeDefined();
@@ -387,10 +385,29 @@ describe('generateGraphData', () => {
       }
     }
   });
+});
+
+describe('generateGraphData with fixture packages', () => {
+  let result: WireitGraph;
+  let errorMessages: string[];
+
+  beforeAll(() => {
+    const fixtureRoot = mkdtempSync(join(tmpdir(), 'elements-wireit-graph-'));
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    try {
+      installFixtures(fixtureRoot);
+      result = generateGraphData(fixtureRoot);
+      errorMessages = consoleErrorSpy.mock.calls.map(([message]) => String(message));
+    } finally {
+      consoleErrorSpy.mockRestore();
+      rmSync(fixtureRoot, { recursive: true, force: true });
+    }
+  });
 
   it('should find and categorize packages after an unreadable directory entry', () => {
     const fixtureNode = result.nodes.find(n => n.packageName === 'labs/upkeep-wireit-fixture');
 
+    expect(result.nodes).toHaveLength(1);
     expect(fixtureNode).toBeDefined();
     expect(fixtureNode?.category).toBe('labs');
     expect(fixtureNode?.label).toBe('labs/upkeep-wireit-fixture:build');

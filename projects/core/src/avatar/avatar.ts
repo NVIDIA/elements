@@ -10,7 +10,7 @@ import styles from './avatar.css?inline';
 
 /**
  * @element nve-avatar
- * @description Avatar represents a user/bot within a UI. Typically with text or image content.
+ * @description Represents a user or bot with initials, an image, or other identifying content. Use it beside a name or message to show who it belongs to.
  * @documentation https://nvidia.github.io/elements/docs/elements/avatar/
  * @since 1.20.0
  * @entrypoint \@nvidia-elements/core/avatar

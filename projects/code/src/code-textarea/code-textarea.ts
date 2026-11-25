@@ -61,7 +61,7 @@ function getVisibleRanges(
  * @element nve-code-textarea
  * @description Enhances a native textarea with syntax highlighting while preserving native editing and form behavior.
  * @documentation https://nvidia.github.io/elements/docs/code/code-textarea/
- * @since 0.0.0
+ * @since 2.4.0
  * @entrypoint \@nvidia-elements/code/code-textarea
  * @slot - Native textarea, label, and control messages.
  * @slot prefix - Content before the textarea.

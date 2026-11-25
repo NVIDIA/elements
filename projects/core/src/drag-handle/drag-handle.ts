@@ -12,7 +12,7 @@ import styles from './drag-handle.css?inline';
  * @element nve-drag-handle
  * @description A draggable grip button with a native drag preview. Activation toggles the pressed state; the application controls movement.
  * @documentation https://nvidia.github.io/elements/docs/elements/drag-handle/
- * @since 0.0.0
+ * @since 2.15.0
  * @entrypoint \@nvidia-elements/core/drag-handle
  * @cssprop --cursor - The cursor over the handle.
  * @cssprop --color - The grip color.

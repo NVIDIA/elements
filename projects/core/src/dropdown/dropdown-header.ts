@@ -7,7 +7,7 @@ import styles from './dropdown-header.css?inline';
 
 /**
  * @element nve-dropdown-header
- * @description Displays a title or contextual label at the top of a dropdown menu to categorize its contents.
+ * @description Displays a title or contextual label above a dropdown's options. Use the header to identify the set of choices before users browse it.
  * @documentation https://nvidia.github.io/elements/docs/elements/dropdown/
  * @since 0.36.0
  * @entrypoint \@nvidia-elements/core/dropdown

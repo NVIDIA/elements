@@ -8,7 +8,7 @@ import styles from './scene.css?inline';
 
 /**
  * @element nve-scene
- * @description A visual scene component.
+ * @description Provides a block-level host reserved for scene visualization. Its current implementation renders an empty scene surface.
  * @documentation https://nvidia.github.io/elements/docs/elements/scene/
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/scene/scene

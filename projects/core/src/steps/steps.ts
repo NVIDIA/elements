@@ -99,7 +99,7 @@ export class StepsItem extends ButtonFormControlMixin(LitElement) {
 
 /**
  * @element nve-steps
- * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence.
+ * @description Groups ordered steps in a workflow. Use individual step items to show each phase, indicate its status, and let users navigate between available steps.
  * @documentation https://nvidia.github.io/elements/docs/elements/steps/
  * @since 0.30.0
  * @entrypoint \@nvidia-elements/core/steps

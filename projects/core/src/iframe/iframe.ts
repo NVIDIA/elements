@@ -93,7 +93,7 @@ const iframeScript = (documentId: number) => /* html */ `
 /**
  * @element nve-iframe
  * @description An iframe component that syncs with the parent document's theme and template content. Use when needing to render dynamically generated or isolated content.
- * @since 0.0.0
+ * @since 2.16.0
  * @entrypoint \@nvidia-elements/core/iframe
  * @documentation https://nvidia.github.io/elements/docs/elements/iframe/
  * @slot - A template containing the iframe body content.

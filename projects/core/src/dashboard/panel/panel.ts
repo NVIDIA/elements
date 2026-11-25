@@ -30,9 +30,9 @@ interface DashboardPanelPresentation {
 
 /**
  * @element nve-dashboard-panel
- * @description A stable application surface identified by a durable panel ID.
+ * @description Hosts application content on the dashboard grid. A durable ID identifies the panel in saved layouts, and a required header supplies its title.
  * @documentation https://nvidia.github.io/elements/docs/elements/dashboard/
- * @since 0.0.0
+ * @since 2.24.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/dashboard
  * @command --enter-fullscreen - Present this panel in native fullscreen.

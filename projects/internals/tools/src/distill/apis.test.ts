@@ -14,6 +14,16 @@ import {
 } from './apis.js';
 
 describe('distillElements', () => {
+  it('excludes elements from unpublished packages', () => {
+    const manifest = { description: 'Component description' };
+    const elements = [
+      { name: 'nve-public', manifest },
+      { name: 'nve-private', packageUnpublished: true, manifest }
+    ] as Element[];
+
+    expect(distillElements(elements).map(element => element.name)).toEqual(['nve-public']);
+  });
+
   it('should filter out deprecated elements', () => {
     const elements = [
       { name: 'nve-button', manifest: { description: 'button description', metadata: { behavior: 'button' } } },

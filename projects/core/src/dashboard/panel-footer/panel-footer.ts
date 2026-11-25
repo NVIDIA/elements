@@ -10,9 +10,9 @@ import styles from './panel-footer.css?inline';
 
 /**
  * @element nve-dashboard-panel-footer
- * @description Provides dashboard panel status and actions outside the scrolling body.
+ * @description Places dashboard panel status and supporting actions below the scrolling body. Use the suffix slot for actions near the panel's resize control.
  * @documentation https://nvidia.github.io/elements/docs/elements/dashboard/
- * @since 0.0.0
+ * @since 2.24.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/dashboard
  * @slot - Status and supporting content in a bounded scrolling area.

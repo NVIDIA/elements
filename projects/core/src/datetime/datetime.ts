@@ -18,7 +18,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-datetime
- * @description A datetime picker is a control that enables users to choose a datetime value.
+ * @description Lets users enter or pick a local date and time through a native input. Use it for schedules that collect a date and time together.
  * @documentation https://nvidia.github.io/elements/docs/elements/datetime/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/datetime

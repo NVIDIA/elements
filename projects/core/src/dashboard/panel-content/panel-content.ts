@@ -9,9 +9,9 @@ import styles from './panel-content.css?inline';
 
 /**
  * @element nve-dashboard-panel-content
- * @description Provides padding for dashboard panel content.
+ * @description Wraps application content in the dashboard panel body and provides its padding. Place headers and footers in the panel's dedicated slots.
  * @documentation https://nvidia.github.io/elements/docs/elements/dashboard/
- * @since 0.0.0
+ * @since 2.24.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/dashboard
  * @slot - Application content.

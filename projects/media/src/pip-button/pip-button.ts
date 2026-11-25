@@ -23,9 +23,9 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-pip-button
- * @description Requests picture-in-picture changes for the controlled video.
+ * @description Requests picture-in-picture changes for the controlled video. Use it to let users view video in a separate floating window where the browser supports it.
  * @documentation https://nvidia.github.io/elements/docs/media/pip-button/
- * @since 0.0.0
+ * @since 1.2.0
  * @entrypoint \@nvidia-elements/media/pip-button
  * @slot - Optional custom icon content.
  * @cssprop --background

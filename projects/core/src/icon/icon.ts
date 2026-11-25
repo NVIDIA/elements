@@ -25,10 +25,7 @@ declare global {
  * @element nve-icon
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/icon
- * @description An icon is a graphic symbol designed to visually show the purpose of an interface element.
- * Import `@nvidia-elements/core/icon/icons/person.js` to register one SVG before rendering.
- * Import `person-solid.js` separately for solid appearance. Missing names load the built-in catalog on demand.
- * Explicit imports reduce initial loading in application builds; the full browser bundle remains a single file.
+ * @description Renders a named SVG from the Elements icon catalog or custom SVG content. Import individual icons to reduce initial loading. The built-in catalog loads on demand for unregistered names.
  * @documentation https://nvidia.github.io/elements/docs/elements/icon/
  * @cssprop --color
  * @cssprop --width
@@ -60,6 +57,9 @@ export class Icon extends LitElement {
 
   /**
    * The name of the icon SVG sprite to render.
+   * Import `@nvidia-elements/core/icon/icons/person.js` to register one SVG before rendering.
+   * Import `person-solid.js` separately for the solid appearance.
+   * Explicit imports let application builds defer loading the built-in catalog. The full browser bundle is a single file.
    */
   @property({ type: String, reflect: true }) name?: IconName;
 

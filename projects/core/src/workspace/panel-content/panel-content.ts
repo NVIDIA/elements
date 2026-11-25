@@ -9,9 +9,9 @@ import styles from './panel-content.css?inline';
 
 /**
  * @element nve-workspace-panel-content
- * @description Provides padding for workspace panel content.
+ * @description Wraps application content in the workspace panel body and provides its padding. Place the panel's title and actions in its header or footer.
  * @documentation https://nvidia.github.io/elements/docs/elements/workspace/
- * @since 0.0.0
+ * @since 2.23.0
  * @stable false
  * @entrypoint \@nvidia-elements/core/workspace
  * @slot - Application content.

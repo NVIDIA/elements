@@ -13,7 +13,7 @@ import styles from './search.css?inline';
 
 /**
  * @element nve-search
- * @description A search is a control that enables users to enter text to search.
+ * @description Wraps a native search input for entering a query. Use it to collect search text alongside the application logic that filters or retrieves results.
  * @documentation https://nvidia.github.io/elements/docs/elements/search/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/search

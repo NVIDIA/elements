@@ -14,9 +14,9 @@ import type { SuggestedLanguages } from '../internal/base/input.js';
 
 /**
  * @element nve-monaco-diff-input
- * @description An input control for editing diffs for JSON, YAML and code with syntax highlighting and validation.
+ * @description Compares original and modified JSON, YAML, or code in Monaco. Users can edit only the modified side, with syntax highlighting, validation, and an optional side-by-side view.
  * @documentation https://nvidia.github.io/elements/docs/monaco/diff-input/
- * @since 0.0.0
+ * @since 1.1.0
  * @entrypoint \@nvidia-elements/monaco/diff-input
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
  * @stable false

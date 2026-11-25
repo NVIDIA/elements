@@ -14,7 +14,7 @@ import styles from './format-truncate.css?inline';
  * @element nve-format-truncate
  * @description Truncates text at its start, center, or end while preserving the full text for assistive technology.
  * @documentation https://nvidia.github.io/elements/docs/elements/format-truncate/
- * @since 0.0.0
+ * @since 2.5.0
  * @entrypoint \@nvidia-elements/core/format-truncate
  * @slot - Text to truncate. The component flattens, trims, and normalizes mixed text and element nodes.
  * @beta

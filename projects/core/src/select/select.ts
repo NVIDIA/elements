@@ -30,7 +30,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-select
- * @description A select is a control that enables users to select an option from a list of options.
+ * @description Wraps a native select for choosing from a predefined set of options. Supply the select and its options in the default slot.
  * @documentation https://nvidia.github.io/elements/docs/elements/select/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/select

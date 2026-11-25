@@ -14,7 +14,7 @@ import styles from './icon-button.css?inline';
 
 /**
  * @element nve-icon-button
- * @description An icon button is a button that displays only an icon without a visual label.
+ * @description Uses an icon as the visible button label. Provide an accessible name that describes the action and choose a named icon or supply custom icon content.
  * @documentation https://nvidia.github.io/elements/docs/elements/icon-button/
  * @since 0.2.1
  * @entrypoint \@nvidia-elements/core/icon-button

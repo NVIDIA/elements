@@ -22,7 +22,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-pause-button
- * @description Requests playback changes and submits paused media as a checkbox-style value.
+ * @description Requests play or pause for controlled media and reflects its current playback state. Paused media submits a checkbox-style value in a form.
  * @documentation https://nvidia.github.io/elements/docs/media/pause-button/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/pause-button

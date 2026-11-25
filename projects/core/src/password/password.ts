@@ -20,7 +20,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-password
- * @description A password is a control that enables users to enter password text.
+ * @description Wraps a native password input for masked text entry. A visibility control lets users reveal or hide what they entered.
  * @documentation https://nvidia.github.io/elements/docs/elements/password/
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/password

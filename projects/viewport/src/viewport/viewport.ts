@@ -48,9 +48,9 @@ const BEHAVIOR_PAN_CONVERTER = {
 
 /**
  * @element nve-viewport
- * @description A viewport provides a spatial surface for arbitrary content, with optional pan and zoom navigation.
+ * @description Provides a spatial surface for content with optional pan and zoom. Use the background and overlay slots for content outside the transformed plane.
  * @documentation https://nvidia.github.io/elements/docs/viewport/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/viewport/viewport
  * @slot - Content positioned in the viewport's infinite content space.
  * @slot background - Custom content rendered behind viewport content and excluded from content fitting

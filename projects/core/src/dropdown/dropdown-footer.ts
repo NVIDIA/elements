@@ -7,7 +7,7 @@ import styles from './dropdown-footer.css?inline';
 
 /**
  * @element nve-dropdown-footer
- * @description Provides a fixed area at the bottom of a dropdown menu for extra actions or supplementary controls.
+ * @description Provides a fixed area at the bottom of a dropdown. Use it for secondary actions or supporting information outside the main list of options.
  * @documentation https://nvidia.github.io/elements/docs/elements/dropdown/
  * @since 0.36.0
  * @entrypoint \@nvidia-elements/core/dropdown

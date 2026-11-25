@@ -10,7 +10,7 @@ import styles from './divider.css?inline';
 
 /**
  * @element nve-divider
- * @description Divider is a component that separates and distinguishes sections of content or groups of menuitems.
+ * @description Separates related groups within a layout or menu. Choose horizontal or vertical orientation to match the direction of the surrounding content.
  * @documentation https://nvidia.github.io/elements/docs/elements/divider/
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/divider

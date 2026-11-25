@@ -23,7 +23,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-media-mute-button
- * @description Requests muted changes and submits a checkbox-style value for muted media.
+ * @description Requests mute or unmute for controlled media and reflects its current muted state. It submits a checkbox-style value in a form.
  * @documentation https://nvidia.github.io/elements/docs/media/mute-button/
  * @since 1.0.0
  * @entrypoint \@nvidia-elements/media/mute-button

@@ -20,7 +20,7 @@ const i18nDefaults = {
 
 /**
  * @element nve-copy-button
- * @description A copy button is a button that easily enables the copy to clipboard pattern.
+ * @description Copies a supplied text value to the clipboard when you set `behavior-copy`. Use the default slot to label the action and the icon slot to customize its icon.
  * @documentation https://nvidia.github.io/elements/docs/elements/copy-button/
  * @since 1.1.4
  * @entrypoint \@nvidia-elements/core/copy-button

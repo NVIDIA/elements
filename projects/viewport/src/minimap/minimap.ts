@@ -50,9 +50,9 @@ interface AutomaticPreviewItem extends ViewportRect {
 
 /**
  * @element nve-viewport-minimap
- * @description Provides a simplified overview and direct navigation for a viewport command target.
+ * @description Shows an overview of viewport content and lets users navigate the viewport directly. Supply a simplified preview or use the default outline of content bounds.
  * @documentation https://nvidia.github.io/elements/docs/viewport/minimap/
- * @since 0.0.0
+ * @since 1.0.0
  * @entrypoint \@nvidia-elements/viewport/minimap
  * @cssprop --background - Color of the surface behind preview geometry.
  * @cssprop --color - Color of automatically drawn root rectangles.
