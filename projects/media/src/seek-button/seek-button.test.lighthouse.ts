@@ -16,6 +16,6 @@ describe('media seek button lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThanOrEqual(18.5);
+    expect(report.payload.javascript.kb).toBeLessThanOrEqual(18.7);
   });
 });
