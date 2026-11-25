@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { html } from 'lit';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFixture, removeFixture } from '@internals/testing';
 import { registerHighlights } from './source-highlights.js';
 
@@ -75,5 +75,40 @@ describe('codeblock highlight ranges', () => {
     expect(group.priority).toBe(7);
     expect(Array.from(group)).toEqual([external]);
     expect(first.childElementCount + second.childElementCount).toBe(0);
+  });
+
+  it('throws when the CSS Custom Highlight API is unavailable', () => {
+    const code = fixture.querySelector('code');
+    if (!code) throw new Error('Missing code fixture');
+    vi.stubGlobal('Highlight', undefined);
+    try {
+      expect(() => registerHighlights(code, [[0, 1, 'keyword']])).toThrow('CSS Custom Highlight API is required');
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('skips spans without a category or with an empty range', () => {
+    const code = fixture.querySelector('code');
+    if (!code) throw new Error('Missing code fixture');
+    code.textContent = 'abc';
+    const before = CSS.highlights.get('nve-code-probe')?.size ?? 0;
+    cleanups.push(
+      registerHighlights(code, [
+        [0, 1, ''],
+        [1, 1, 'probe'],
+        [2, 1, 'probe'],
+        [0, 1, 'probe']
+      ])
+    );
+    expect(CSS.highlights.has('nve-code-')).toBe(false);
+    expect(CSS.highlights.get('nve-code-probe')?.size).toBe(before + 1);
+  });
+
+  it('throws when a span ends beyond the source text', () => {
+    const code = fixture.querySelector('code');
+    if (!code) throw new Error('Missing code fixture');
+    code.textContent = 'abc';
+    expect(() => registerHighlights(code, [[0, 4, 'keyword']])).toThrow(RangeError);
   });
 });
