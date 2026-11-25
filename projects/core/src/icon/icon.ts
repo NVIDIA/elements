@@ -29,6 +29,7 @@ declare global {
  * Import `@nvidia-elements/core/icon/icons/person.js` to register one SVG before rendering.
  * Import `person-solid.js` separately for solid appearance. Missing names load the built-in catalog on demand.
  * Explicit imports reduce initial loading in application builds; the full browser bundle remains a single file.
+ * Register custom names with `Icon.add()`. Provide trusted SVG markup or a callback that returns it.
  * @documentation https://nvidia.github.io/elements/docs/elements/icon/
  * @cssprop --color
  * @cssprop --width
@@ -59,9 +60,10 @@ export class Icon extends LitElement {
   @property({ type: String }) appearance?: 'outline' | 'solid';
 
   /**
-   * The name of the icon SVG sprite to render.
+   * A built-in icon name, a registered name in `namespace:name` form, or a URL ending in `.svg`.
+   * SVG URLs load directly in the browser. Use `Icon.add()` to register SVG markup by name.
    */
-  @property({ type: String, reflect: true }) name?: IconName;
+  @property({ type: String, reflect: true }) name?: IconName | `${string}:${string}` | `${string}.svg`;
 
   @state() private svg: string;
 
@@ -136,10 +138,19 @@ export class Icon extends LitElement {
     this.#renderRequest++;
   }
 
-  static async add(icons: { [key: string]: IconSVG }) {
+  /**
+   * Registers trusted SVGs by name. Pass SVG markup to make the SVG available during server rendering.
+   * Pass an object with an `svg` callback to load artwork on demand in the browser.
+   * Register an optional `-solid` entry to use with `appearance="solid"`.
+   */
+  static async add(icons: Record<string, string | IconSVG>): Promise<void> {
     if (globalThis.customElements?.whenDefined) {
       await globalThis.customElements.whenDefined(Icon.metadata.tag);
-      for (const [name, icon] of Object.entries(icons)) getIconRegistry().add(name, icon);
+    }
+    const registry = getIconRegistry();
+    for (const [name, icon] of Object.entries(icons)) {
+      if (typeof icon === 'string') registry.add(name, { svg: () => icon }, icon);
+      else registry.add(name, icon);
     }
   }
 

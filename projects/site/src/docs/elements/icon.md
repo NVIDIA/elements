@@ -14,9 +14,11 @@
 
 The Iconography system exposes an SVG based icon library to the `nve-icon` element.
 
-See the searchable [Interactive Icon Catalog](/docs/foundations/iconography/)
+<div nve-layout="row align:center full">
+  <nve-button><a href="/docs/foundations/iconography/">View Full Icon Catalog</a></nve-button>
+</div>
 
-<all-icons></all-icons>
+<nvd-all-icons></nvd-all-icons>
 
 ## Status
 
@@ -57,12 +59,28 @@ import '@nvidia-elements/core/icon/define.js';
 
 Each icon import registers one SVG. Import the solid variant separately when needed. Names without an explicit registration load from the built-in catalog on demand. Application builds can defer that catalog; the full browser bundle remains a single file.
 
+## SVG URLs
+
+{% api 'nve-icon', 'property', 'name' %}
+
 ## Registration
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Registration' %}
+
+## NVIDIA Icons
+
+Install [NVIDIA GUI Icons](https://github.com/NVIDIA/icons/tree/main/packages/gui-icons) to use the SVG assets with `nve-icon`.
+
+```shell
+npm install @nvidia/gui-icons
+```
+
+Register custom names in `namespace:name` form, such as `nvidia-gui:gpu-card-multi`. TypeScript accepts this form and checks unqualified names against the built-in catalog.
+
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'NvidiaIcons' '{ "height": "120px" }' %}
 
 ## Alias
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Alias' %}
 
-<script type="module" src="/_internal/stories/icon/all-icons.js"></script>
+<script type="module" src="/docs/elements/icon.ts"></script>

@@ -32,7 +32,7 @@ const tokens = getThemeTokens();
 
 Below is a simple demo of a visualization library (ChartJS) consuming the tokens and rendering the visualization to a HTML canvas.
 
-<visualization-demo></visualization-demo>
+<nvd-visualization-demo></nvd-visualization-demo>
 
 ```typescript
 import { getThemeTokens } from '@nvidia-elements/core';
@@ -80,4 +80,4 @@ The diverging tokens apply to visualizations that represent two opposing values 
 
 {% tokens 'sys-visualization-trend' %}
 
-<script type="module" src="/_internal/stories/visualization/visualization-demo.js"></script>
+<script type="module" src="/docs/foundations/visualization.ts"></script>

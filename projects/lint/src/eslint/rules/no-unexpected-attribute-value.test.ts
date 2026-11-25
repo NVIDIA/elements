@@ -141,14 +141,43 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
-  it('should allow external SVG sources for icons', () => {
-    tester.run('should allow external SVG sources for icons', rule, {
+  it('should allow registered icon names', () => {
+    tester.run('should allow registered icon names', rule, {
       valid: [
-        `<nve-icon name="my-image.svg"></nve-icon>`,
-        `<nve-icon name="./my-image.svg"></nve-icon>`,
-        `<nve-icon name="/static/images/my-image.svg"></nve-icon>`
+        '<nve-icon name="/icons/gpu.svg"></nve-icon>',
+        '<nve-icon name="https://example.com/gpu.svg"></nve-icon>',
+        '<nve-icon-button icon-name="/icons/gpu.svg" aria-label="GPU settings"></nve-icon-button>',
+        '<nve-icon name="nvidia-gui:gpu" appearance="solid"></nve-icon>',
+        '<nve-icon-button icon-name="nvidia-gui:gpu" aria-label="GPU settings"></nve-icon-button>'
       ],
       invalid: []
+    });
+  });
+
+  it.each([
+    { tag: 'nve-icon', attribute: 'name' },
+    { tag: 'nve-icon-button', attribute: 'icon-name' }
+  ])('should reject unnamespaced icon typos on $tag', ({ tag, attribute }) => {
+    tester.run(`invalid ${tag} icon name`, rule, {
+      valid: [`<${tag} ${attribute}="person"></${tag}>`],
+      invalid: [
+        {
+          code: `<${tag} ${attribute}="perso"></${tag}>`,
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value-alternative',
+              data: { tagName: tag, attribute, value: 'perso', alternative: 'person' },
+              suggestions: [
+                {
+                  messageId: 'suggest-replace-attribute-value',
+                  data: { value: 'perso', alternative: 'person' },
+                  output: `<${tag} ${attribute}="person"></${tag}>`
+                }
+              ]
+            }
+          ]
+        }
+      ]
     });
   });
 

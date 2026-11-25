@@ -83,5 +83,3 @@ Example in lit-html:
 ## Overflow
 
 {% example '@nvidia-elements/core/tree/tree.examples.json' 'Overflow' %}
-
-<script type="module" src="/_internal/stories/tree/dynamic-tree.js"></script>
