@@ -1337,6 +1337,8 @@
       "command": "vitest run --config=vitest.visual.ts",
       "clean": false,
       "files": [
+        "../foundations/dist/**/*.js",
+        "../foundations/dist/draggable-list/draggable-list.examples.json",
         "dist/**/*.js",
         "src/index.test.visual.ts",
         "src/**/*.test.visual.ts",

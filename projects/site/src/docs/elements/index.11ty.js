@@ -63,6 +63,7 @@ const componentGroups = [
       'nve-card',
       'nve-dashboard',
       'nve-divider',
+      'nve-draggable-list',
       'nve-iframe',
       'nve-page',
       'nve-page-header',
@@ -70,6 +71,7 @@ const componentGroups = [
       'nve-resize-handle',
       'nve-scroll-box',
       'nve-toolbar',
+      'nve-virtual-list',
       'nve-workspace'
     ]
   },
@@ -114,6 +116,7 @@ const componentGroups = [
       'nve-grid',
       'nve-icon',
       'nve-logo',
+      'nve-meter',
       'nve-sparkline',
       'nve-tag'
     ]
@@ -132,6 +135,7 @@ const componentGroups = [
     title: 'Code and text',
     tags: [
       'nve-code-block',
+      'nve-code-textarea',
       'nve-markdown',
       'nve-monaco-diff-editor',
       'nve-monaco-diff-input',

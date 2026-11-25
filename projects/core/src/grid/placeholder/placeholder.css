@@ -4,6 +4,7 @@
 :host {
   --color: var(--nve-sys-layer-canvas-color);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  display: grid;
   position: absolute;
   inset: var(--nve-ref-size-700) 0 0;
 }
@@ -20,5 +21,4 @@
   display: flex;
   place-items: center;
   place-content: center;
-  height: 100%;
 }

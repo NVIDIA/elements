@@ -1,0 +1,71 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
+:host {
+  display: block;
+  --gap: 0;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+:host([orientation='horizontal']) [internal-host] {
+  flex-direction: row;
+}
+
+.announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+::slotted([nve-draggable~='active']) {
+  opacity: var(--nve-ref-opacity-600);
+}
+
+:host([nve-draggable~='append']:not(:focus-visible)) {
+  outline: var(--nve-ref-border-width-sm) dashed var(--nve-sys-accent-secondary-background);
+  outline-offset: calc(-1 * var(--nve-ref-border-width-sm));
+}
+
+:host([nve-draggable~='append']:focus-visible) {
+  box-shadow: inset 0 0 0 var(--nve-ref-border-width-sm) var(--nve-sys-accent-secondary-background);
+}
+
+::slotted([nve-draggable~='before']) {
+  box-shadow: inset 0 var(--nve-ref-border-width-sm) var(--nve-sys-accent-secondary-background);
+}
+
+::slotted([nve-draggable~='after']),
+::slotted([nve-draggable~='append']) {
+  box-shadow: inset 0 calc(-1 * var(--nve-ref-border-width-sm)) var(--nve-sys-accent-secondary-background);
+}
+
+:host([orientation='horizontal']:dir(rtl)) {
+  --_inline-start: -1;
+}
+
+:host([orientation='horizontal']) ::slotted([nve-draggable~='ltr']) {
+  --_inline-start: 1;
+}
+
+:host([orientation='horizontal']) ::slotted([nve-draggable~='rtl']) {
+  --_inline-start: -1;
+}
+
+:host([orientation='horizontal']) ::slotted([nve-draggable~='before']) {
+  box-shadow: inset calc(var(--_inline-start, 1) * var(--nve-ref-border-width-sm)) 0
+    var(--nve-sys-accent-secondary-background);
+}
+
+:host([orientation='horizontal']) ::slotted([nve-draggable~='after']),
+:host([orientation='horizontal']) ::slotted([nve-draggable~='append']) {
+  box-shadow: inset calc(-1 * var(--_inline-start, 1) * var(--nve-ref-border-width-sm)) 0
+    var(--nve-sys-accent-secondary-background);
+}

@@ -60,6 +60,18 @@
     "./custom-elements-vue": {
       "types": "./dist/custom-elements-vue.d.ts"
     },
+    "./draggable-list": {
+      "types": "./dist/draggable-list/index.d.ts",
+      "default": "./dist/draggable-list/index.js"
+    },
+    "./draggable-list/index.js": {
+      "types": "./dist/draggable-list/index.d.ts",
+      "default": "./dist/draggable-list/index.js"
+    },
+    "./draggable-list/define.js": {
+      "types": "./dist/draggable-list/define.d.ts",
+      "default": "./dist/draggable-list/define.js"
+    },
     "./scroll-box": {
       "types": "./dist/scroll-box/index.d.ts",
       "default": "./dist/scroll-box/index.js"

@@ -26,6 +26,7 @@ Utility components have separate entrypoints for application and library use. Th
 
 | Component | Tag | Description |
 | --------- | --- | ----------- |
+| [Draggable List](https://NVIDIA.github.io/elements/docs/foundations/draggable-list/) | `nve-draggable-list` | Native dragging and keyboard placement with application-owned order. |
 | [Scroll Box](https://NVIDIA.github.io/elements/docs/elements/scroll-box/) | `nve-scroll-box` | A scrollable container with optional edge shadows and automatic scrolling. |
 
 ## Getting Started

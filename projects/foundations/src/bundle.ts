@@ -4,8 +4,10 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./declarations.d.ts" />
 
+import '@nvidia-elements/foundations/draggable-list/define.js';
 import '@nvidia-elements/foundations/scroll-box/define.js';
 import '@nvidia-elements/foundations/virtual-list/define.js';
 
+export * from '@nvidia-elements/foundations/draggable-list';
 export * from '@nvidia-elements/foundations/scroll-box';
 export * from '@nvidia-elements/foundations/virtual-list';

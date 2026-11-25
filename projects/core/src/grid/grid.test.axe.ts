@@ -8,6 +8,7 @@ import { runAxe } from '@internals/testing/axe';
 import { Grid } from '@nvidia-elements/core/grid';
 import type { VirtualList } from '@nvidia-elements/foundations/virtual-list';
 import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/core/drag-handle/define.js';
 import '@nvidia-elements/foundations/virtual-list/define.js';
 
 describe(Grid.metadata.tag, () => {
@@ -15,6 +16,29 @@ describe(Grid.metadata.tag, () => {
 
   afterEach(() => {
     removeFixture(fixture);
+  });
+
+  it.each([false, true])('preserves draggable grid semantics with pickup %s', async picked => {
+    fixture = await createFixture(html`
+      <nve-grid draggable-rows draggable-columns aria-label="Job order">
+        <nve-grid-header><nve-grid-column>Job<nve-drag-handle aria-label="Move job column"></nve-drag-handle></nve-grid-column><nve-grid-column>Status</nve-grid-column></nve-grid-header>
+        <nve-grid-row><nve-grid-cell><nve-drag-handle aria-label="Move training job"></nve-drag-handle>Training</nve-grid-cell><nve-grid-cell>Queued</nve-grid-cell></nve-grid-row>
+        <nve-grid-row><nve-grid-cell><nve-drag-handle aria-label="Move evaluation job"></nve-drag-handle>Evaluation</nve-grid-cell><nve-grid-cell>Queued</nve-grid-cell></nve-grid-row>
+      </nve-grid>
+    `);
+    const grid = fixture.querySelector('nve-grid')!;
+    await elementIsStable(grid);
+    if (picked) grid.querySelector<HTMLElement>('nve-grid-row nve-drag-handle')!.click();
+    await elementIsStable(grid);
+    const results = await runAxe(['nve-grid'], {
+      rules: {
+        // axe cannot resolve ElementInternals roles yet: https://github.com/dequelabs/axe-core/issues/4259
+        'aria-required-parent': { enabled: false },
+        'aria-required-children': { enabled: false },
+        'aria-allowed-attr': { enabled: false }
+      }
+    });
+    expect(results.violations).toHaveLength(0);
   });
 
   it('should pass axe check', async () => {

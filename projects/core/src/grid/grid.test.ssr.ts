@@ -6,9 +6,22 @@ import { describe, expect, it } from 'vitest';
 import { ssrRunner } from '@internals/vite';
 import { Grid } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
+import '@nvidia-elements/core/drag-handle/define.js';
 import '@nvidia-elements/foundations/virtual-list/define.js';
 
 describe(Grid.metadata.tag, () => {
+  it('renders draggable opt-ins and handles without starting browser controllers', async () => {
+    const result = await ssrRunner.render(html`
+      <nve-grid draggable-rows draggable-columns aria-label="Job order">
+        <nve-grid-header><nve-grid-column>Job<nve-drag-handle aria-label="Move job column"></nve-drag-handle></nve-grid-column></nve-grid-header>
+        <nve-grid-row><nve-grid-cell><nve-drag-handle aria-label="Move job"></nve-drag-handle>Training</nve-grid-cell></nve-grid-row>
+      </nve-grid>
+    `);
+    expect(result).toContain('draggable-rows');
+    expect(result).toContain('draggable-columns');
+    expect(result).toContain('aria-live="polite"');
+    expect(result).not.toContain('nve-draggable="active"');
+  });
   it('should pass baseline ssr check', async () => {
     const result = await ssrRunner.render(html`
       <nve-grid>

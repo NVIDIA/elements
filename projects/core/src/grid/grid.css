@@ -62,6 +62,15 @@
   scrollbar-width: var(--nve-sys-scrollbar-width);
 }
 
+.announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 :host([container*='full']) {
   --border-radius: 0;
   --box-shadow: none;

@@ -82,11 +82,21 @@ export class GridColumn extends LitElement {
     attachInternals(this);
     this._internals.role = 'columnheader';
     this.addEventListener('sort', this.#onSort);
+    const root = this.getRootNode();
+    if (root instanceof Document || root instanceof ShadowRoot) this.#styleRoot = root;
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('sort', this.#onSort);
+    if (this.#styleRoot) {
+      this.#styleRoot.adoptedStyleSheets = this.#styleRoot.adoptedStyleSheets.filter(
+        sheet => sheet !== this.#positionStylesheet && sheet !== this.#alignmentStylesheet
+      );
+    }
+    this.#positionStylesheet = undefined;
+    this.#alignmentStylesheet = undefined;
+    this.#styleRoot = undefined;
   }
 
   #onSort = (e: Event) => {
@@ -120,9 +130,18 @@ export class GridColumn extends LitElement {
     }
   }
 
-  #positionStylesheet: CSSStyleSheet;
+  #positionStylesheet?: CSSStyleSheet;
+  #styleRoot?: Document | ShadowRoot;
+  #alignmentStylesheet?: CSSStyleSheet;
+
+  /** @private Refresh column-owned rules after the header settles its current order and widths. */
+  refreshLayout() {
+    this.#computeColumnAlignment();
+    this.#computeColumnPositions();
+  }
 
   #computeColumnPositions() {
+    if (!this.isConnected || !this.#grid || !this.ariaColIndex) return;
     if (this.position !== 'fixed') {
       this.removeAttribute('left');
       this.removeAttribute('right');
@@ -140,16 +159,30 @@ export class GridColumn extends LitElement {
     }
 
     this.setAttribute(side, '');
+    this.removeAttribute(side === 'left' ? 'right' : 'left');
   }
 
   #buildFixedStyles() {
-    const columns = Array.from(this.parentElement!.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
-    const rightColumns = columns.slice(columns.indexOf(this) + 1, columns.length);
-    const position = this.getBoundingClientRect();
-    const gridPosition = this.#grid.getBoundingClientRect();
-    const side = this.offsetLeft < gridPosition.width / 2 ? 'left' : 'right';
-    const leftStyle = position.left - gridPosition.left;
-    const rightStyle = rightColumns.reduce((width, c) => width + c.getBoundingClientRect().width, 0);
+    const header = this.parentElement!;
+    const layout = this.assignedSlot?.parentElement ?? header;
+    const { direction, paddingLeft, paddingRight } = getComputedStyle(layout);
+    const columns = Array.from(header.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
+    const rtl = direction === 'rtl';
+    if (rtl) columns.reverse();
+    const index = columns.indexOf(this);
+    const rightStyle = columns
+      .slice(index + 1)
+      .reduce((width, column) => width + column.getBoundingClientRect().width, 0);
+    // Track widths stay stable when sticky positioning shifts a column during scrolling.
+    const leftStyle = rtl
+      ? layout.getBoundingClientRect().width -
+        parseFloat(paddingRight) -
+        rightStyle -
+        this.getBoundingClientRect().width
+      : columns
+          .slice(0, index)
+          .reduce((width, column) => width + column.getBoundingClientRect().width, parseFloat(paddingLeft));
+    const side = leftStyle < this.#grid.getBoundingClientRect().width / 2 ? 'left' : 'right';
     const selector = `[id='${this.#grid.id}'] nve-grid-column:nth-of-type(${this.ariaColIndex}),
         [id='${this.#grid.id}'] nve-grid-cell:nth-of-type(${this.ariaColIndex})`;
 
@@ -161,36 +194,35 @@ export class GridColumn extends LitElement {
         }
       `;
 
-    const borderStyle = this.#buildBorderStyle(selector, side);
+    const neighbor = columns[index + (side === 'left' ? 1 : -1)];
+    const borderStyle = this.#buildBorderStyle(selector, side, neighbor);
     return { side, positionStyle, borderStyle };
   }
 
-  #buildBorderStyle(selector: string, side: 'left' | 'right') {
-    const isLastLeft = side === 'left' && (this.nextElementSibling as GridColumn)?.position !== this.position;
-    const isLastRight = side === 'right' && (this.previousElementSibling as GridColumn)?.position !== this.position;
-
-    if (!isLastLeft && !isLastRight) {
+  #buildBorderStyle(selector: string, side: 'left' | 'right', neighbor?: GridColumn) {
+    if (neighbor?.position === this.position) {
       return '';
     }
 
     return `
         ${selector} {
           box-shadow: var(--scroll-shadow);
-          clip-path: inset(0px ${isLastLeft ? '-4px' : '0'} 0px ${isLastRight ? '-4px' : '0'});
+          clip-path: inset(0px ${side === 'left' ? '-4px' : '0'} 0px ${side === 'right' ? '-4px' : '0'});
           --border-${side === 'right' ? 'left' : 'right'}: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
         }
       `;
   }
 
   #computeColumnAlignment() {
-    if (this.columnAlign !== undefined) {
-      appendRootNodeStyle(
-        this.#grid,
-        `[id='${this.#grid.id}'] nve-grid-column:nth-of-type(${this.ariaColIndex}),
+    if (!this.isConnected || !this.#grid || !this.ariaColIndex) return;
+    const rule =
+      this.columnAlign === undefined
+        ? ''
+        : `[id='${this.#grid.id}'] nve-grid-column:nth-of-type(${this.ariaColIndex}),
         [id='${this.#grid.id}'] nve-grid-cell:nth-of-type(${this.ariaColIndex}) {
           --justify-content: ${this.columnAlign}
-        }`
-      );
-    }
+        }`;
+    if (this.#alignmentStylesheet) this.#alignmentStylesheet.replaceSync(rule);
+    else if (rule) this.#alignmentStylesheet = appendRootNodeStyle(this.#grid, rule);
   }
 }
