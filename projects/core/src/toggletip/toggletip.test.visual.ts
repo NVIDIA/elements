@@ -23,7 +23,71 @@ describe('toggletip visual', () => {
     const report = await visualRunner.render('toggletip.rtl.dark', template('dark', 'rtl'));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('toggletip alert group should match visual baseline', async () => {
+    const report = await visualRunner.render('toggletip.alert-group', alertGroupTemplate(''), {
+      waitFor: waitForAlertGroupIcons
+    });
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('toggletip alert group should match visual baseline dark theme', async () => {
+    const report = await visualRunner.render('toggletip.alert-group.dark', alertGroupTemplate('dark'), {
+      waitFor: waitForAlertGroupIcons
+    });
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
+
+async function waitForAlertGroupIcons(waitForFunction: (...args: unknown[]) => Promise<unknown>) {
+  await waitForFunction(() =>
+    Array.from(document.querySelectorAll('nve-toggletip')).every(toggletip => {
+      const button = toggletip.shadowRoot?.querySelector('nve-icon-button');
+      const icon = button?.shadowRoot?.querySelector('nve-icon');
+      return toggletip.matches(':popover-open') && icon?.shadowRoot?.querySelector('svg');
+    })
+  );
+  await waitForFunction(() =>
+    Array.from(document.querySelectorAll('nve-alert')).every(alert => {
+      const icon = alert.shadowRoot?.querySelector('nve-icon');
+      return icon?.shadowRoot?.querySelector('svg');
+    })
+  );
+}
+
+function alertGroupTemplate(theme: '' | 'dark') {
+  return /* html */ `
+  <script type="module">
+    import '@nvidia-elements/core/alert/define.js';
+    import '@nvidia-elements/core/button/define.js';
+    import '@nvidia-elements/core/toggletip/define.js';
+    document.documentElement.setAttribute('nve-theme', '${theme}');
+  </script>
+  <style>
+    body { flex-direction: row; gap: 16px; margin: 0; padding: 16px; }
+  </style>
+  ${['accent', 'success', 'danger', 'warning']
+    .map(
+      status => /* html */ `
+    <div nve-layout="row align:horizontal-center align:bottom" style="width: 260px; height: 240px">
+      <nve-toggletip anchor="alert-group-${status}" closable style="--width: 260px">
+        <nve-toggletip-header>
+          <nve-alert-group status="${status}" prominence="emphasis">
+            <nve-alert>•︎•︎•︎•︎•︎•︎</nve-alert>
+          </nve-alert-group>
+        </nve-toggletip-header>
+        <p nve-text="body">•︎•︎•︎•︎•︎•︎</p>
+        <nve-toggletip-footer>
+          <nve-button style="width: 100%">•︎•︎•︎•︎•︎•︎</nve-button>
+        </nve-toggletip-footer>
+      </nve-toggletip>
+      <nve-button id="alert-group-${status}">•︎•︎•︎•︎•︎•︎</nve-button>
+    </div>
+  `
+    )
+    .join('')}
+  `;
+}
 
 function template(theme: '' | 'dark' = '', direction: 'ltr' | 'rtl' = 'ltr') {
   return /* html */ `
