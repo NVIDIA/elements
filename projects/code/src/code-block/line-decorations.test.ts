@@ -60,6 +60,119 @@ describe('Code Block line decoration integration', () => {
   });
 });
 
+describe('decorateLines line layout', () => {
+  let mounted: HTMLElement[] = [];
+  afterEach(() => {
+    vi.restoreAllMocks();
+    for (const element of mounted) element.remove();
+    mounted = [];
+  });
+
+  function mountPre({ texts, hidden = false }: { texts: string[]; hidden?: boolean }) {
+    const container = document.createElement('div');
+    container.style.cssText = hidden ? 'display:none' : 'width:300px;font:14px/20px monospace;';
+    const pre = document.createElement('pre');
+    pre.style.margin = '0';
+    const layer = document.createElement('span');
+    layer.dataset.lines = '';
+    const code = document.createElement('code');
+    code.style.cssText = 'display:block;white-space:pre;';
+    code.append(...texts);
+    pre.append(layer, code);
+    container.append(pre);
+    document.body.append(container);
+    mounted.push(container);
+    return { pre, layer, code, text: texts.join('') };
+  }
+
+  function lineLabels(layer: HTMLElement) {
+    return Array.from(layer.querySelectorAll('[data-line]')).map(row => row.textContent);
+  }
+
+  it('does nothing when the pre has no decoration layer', () => {
+    const pre = document.createElement('pre');
+    pre.append(document.createElement('code'));
+    expect(() => decorateLines(pre, 'const a = 1;', { numbers: true })).not.toThrow();
+    expect(pre.querySelector('[data-line], [data-gutter]')).toBeNull();
+  });
+
+  it('clears existing decorations when the text is empty', () => {
+    const { pre, layer, text } = mountPre({ texts: ['a\nb'] });
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.querySelector('[data-gutter]')?.textContent).toBe('1\n2');
+    decorateLines(pre, '', { numbers: true });
+    expect(layer.children.length).toBe(0);
+  });
+
+  it('clears existing decorations when the code element is missing', () => {
+    const { pre, layer, code, text } = mountPre({ texts: ['a\nb'] });
+    decorateLines(pre, text, { numbers: true });
+    code.remove();
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.children.length).toBe(0);
+  });
+
+  it('clears existing decorations when the code has no text nodes', () => {
+    const { pre, layer, code, text } = mountPre({ texts: ['a\nb'] });
+    decorateLines(pre, text, { numbers: true });
+    code.replaceChildren(document.createElement('b'));
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.children.length).toBe(0);
+  });
+
+  it('clears existing decorations when neither numbers nor selection are requested', () => {
+    const { pre, layer, text } = mountPre({ texts: ['a\nb'] });
+    decorateLines(pre, text, { numbers: true });
+    decorateLines(pre, text, { numbers: false });
+    expect(layer.children.length).toBe(0);
+  });
+
+  it('batches line tops across multiple text nodes', () => {
+    const { pre, layer, text } = mountPre({ texts: ['const a = 1;\n', 'const b = 2;'] });
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.querySelector('[data-gutter]')?.textContent).toBe('1\n2');
+    expect(layer.querySelectorAll('[data-line]').length).toBe(0);
+  });
+
+  it('derives a single gutter for a single-line block', () => {
+    const { pre, layer, text } = mountPre({ texts: ['const a = 1;'] });
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.querySelector('[data-gutter]')?.textContent).toBe('1');
+  });
+
+  it('reuses the existing gutter when decorations are updated', () => {
+    const { pre, layer, text } = mountPre({ texts: ['const a = 1;\nconst b = 2;'] });
+    decorateLines(pre, text, { numbers: true });
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.querySelectorAll('[data-gutter]').length).toBe(1);
+    expect(layer.querySelector('[data-gutter]')?.textContent).toBe('1\n2');
+  });
+
+  it('falls back to per-line rows when batched line tops are unevenly spaced', () => {
+    const { pre, layer, text } = mountPre({ texts: ['a\nb\nc\nd'] });
+    const native = Range.prototype.getClientRects;
+    vi.spyOn(Range.prototype, 'getClientRects').mockImplementation(function (this: Range) {
+      const rects = native.call(this);
+      if (this.startOffset !== 0 || this.endOffset !== text.length) return rects;
+      const [, , thirdLineTop] = new Set(Array.from(rects, rect => rect.top));
+      const shifted = Array.from(rects, rect =>
+        rect.top === thirdLineTop ? new DOMRect(rect.x, rect.y + 3, rect.width, rect.height) : rect
+      );
+      return Object.assign(shifted, { item: (index: number) => shifted[index] ?? null });
+    });
+    decorateLines(pre, text, { numbers: true });
+    expect(layer.querySelector('[data-gutter]')).toBeNull();
+    expect(lineLabels(layer)).toEqual(['1', '2', '3', '4']);
+  });
+
+  it('decorates lines without layout geometry', () => {
+    const { pre, layer, text } = mountPre({ texts: ['a\nb'], hidden: true });
+    expect(() => decorateLines(pre, text, { numbers: true })).not.toThrow();
+    expect(layer.querySelector('[data-gutter]')).toBeNull();
+    expect(lineLabels(layer)).toEqual(['1', '2']);
+  });
+});
+
 function codeParts(element: CodeBlock) {
   const pre = element.shadowRoot?.querySelector('pre');
   const code = pre?.querySelector('code');
