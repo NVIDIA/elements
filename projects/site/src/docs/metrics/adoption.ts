@@ -448,14 +448,10 @@ const githubInterestChartConfiguration: ChartConfiguration<'line'> = {
 
 const githubInterestCanvas = globalThis.document.getElementById('adoption-github-interest-chart');
 if (githubInterestCanvas instanceof HTMLCanvasElement) {
-  if ('IntersectionObserver' in globalThis) {
-    const observer = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      observer.disconnect();
-      new Chart(githubInterestCanvas, githubInterestChartConfiguration);
-    });
-    observer.observe(githubInterestCanvas);
-  } else {
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    observer.disconnect();
     new Chart(githubInterestCanvas, githubInterestChartConfiguration);
-  }
+  });
+  observer.observe(githubInterestCanvas);
 }

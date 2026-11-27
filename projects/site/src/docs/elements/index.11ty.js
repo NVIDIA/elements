@@ -533,22 +533,18 @@ const renderPreviewScript = () => /* html */ `
 
   const previews = document.querySelectorAll('[data-component-preview]');
 
-  if ('IntersectionObserver' in globalThis) {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          observer.unobserve(entry.target);
-          void loadPreview(entry.target);
-        });
-      },
-      { rootMargin: '300px 0px' }
-    );
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        void loadPreview(entry.target);
+      });
+    },
+    { rootMargin: '300px 0px' }
+  );
 
-    previews.forEach(preview => observer.observe(preview));
-  } else {
-    previews.forEach(preview => void loadPreview(preview));
-  }
+  previews.forEach(preview => observer.observe(preview));
 </script>`;
 
 export function render(data) {
